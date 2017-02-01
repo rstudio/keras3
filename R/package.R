@@ -14,14 +14,7 @@ NULL
 .load_error_message <- NULL
 
 .onLoad <- function(libname, pkgname) {
-  
-  # attempt to load keras
-  kr  <<- tryCatch(import("keras"), error = function(e) e)
-  if (inherits(kr , "error")) {
-    .load_error_message <<- kr$message
-    kr  <<- NULL
-  }
-  
+  init_modules()
 }
 
 .onAttach <- function(libname, pkgname) {
