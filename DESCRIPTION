@@ -5,8 +5,10 @@ Version: 1.0
 Date: 2017-02-01
 Author: Your Name
 Maintainer: Your Name <your@email.com>
-Description: One paragraph description of what the package does as one or more full
-          sentences.
+Description: One paragraph description of what the package does as one or more
+    full sentences.
 License: GPL (>= 2)
-Imports: Rcpp (>= 0.12.8)
-LinkingTo: Rcpp
+Imports:
+    tensorflow
+Remotes: rstudio/tensorflow
+RoxygenNote: 5.0.1
