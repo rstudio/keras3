@@ -10,26 +10,23 @@
 NULL
 
 
-# private keras object which we bind do in onLoad
-.keras <- NULL
-
 # load error message
 .load_error_message <- NULL
 
 .onLoad <- function(libname, pkgname) {
   
   # attempt to load keras
-  .keras  <<- tryCatch(import("keras"), error = function(e) e)
-  if (inherits(.keras , "error")) {
-    .load_error_message <<- .keras$message
-    .keras  <<- NULL
+  kr  <<- tryCatch(import("keras"), error = function(e) e)
+  if (inherits(kr , "error")) {
+    .load_error_message <<- kr$message
+    kr  <<- NULL
   }
   
 }
 
 .onAttach <- function(libname, pkgname) {
   
-  if (is.null(.keras)) {
+  if (is.null(kr)) {
     packageStartupMessage("\n", .load_error_message)
     packageStartupMessage("\nIf you have not yet installed Keras, see https://keras.io\n")
     packageStartupMessage("You should ensure that the version of python where ",
