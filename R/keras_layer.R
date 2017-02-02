@@ -3,12 +3,12 @@
 
 #' @export
 layer_input <- function(shape) {
-  kr$layers$Input(tuple(shape))
+  keras$layers$Input(tuple(shape))
 }
 
 #' @export
 layer_dense <- function(x, output_dim, input_dim = NULL, activation = NULL) {
-  layer <- kr$layers$Dense(
+  layer <- keras$layers$Dense(
     output_dim = as.integer(output_dim),
     input_dim = as.integer(input_dim),
     activation = activation
@@ -18,7 +18,7 @@ layer_dense <- function(x, output_dim, input_dim = NULL, activation = NULL) {
 
 #' @export
 layer_activation <- function(x, activation) {
-  layer <- kr$layers$Activation(
+  layer <- keras$layers$Activation(
     activation = activation
   )
   compose_layer(x, layer)

@@ -9,17 +9,27 @@
 #' @import tensorflow
 NULL
 
+# Main Keras module
+keras <- NULL
 
 # load error message
 .load_error_message <- NULL
 
 .onLoad <- function(libname, pkgname) {
-  init_modules()
+  
+  # attempt to load keras
+  keras  <<- tryCatch(import("keras"), error = function(e) e)
+  if (inherits(keras , "error")) {
+    .load_error_message <<- keras$message
+    keras  <<- NULL
+    return()
+  }
+  
 }
 
 .onAttach <- function(libname, pkgname) {
   
-  if (is.null(kr)) {
+  if (is.null(keras)) {
     packageStartupMessage("\n", .load_error_message)
     packageStartupMessage("\nIf you have not yet installed Keras, see https://keras.io\n")
     packageStartupMessage("You should ensure that the version of python where ",

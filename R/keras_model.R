@@ -3,12 +3,12 @@
 
 #' @export
 model <- function(input, output) {
-  kr$models$Model(input = input, output = output)
+  keras$models$Model(input = input, output = output)
 }
 
 #' @export
 sequential_model <- function(layers = NULL, name = NULL) {
-  kr$models$Sequential(layers = layers, name = name)
+  keras$models$Sequential(layers = layers, name = name)
 }
 
 
@@ -64,7 +64,7 @@ summary.keras.engine.training.Model <- function(x, ...) {
 # this likely just a bug that will be resolved later)
 clone_model_if_possible <- function(model) {
   if (length(model$layers) > 0)
-    kr$models$model_from_json(model$to_json())
+    keras$models$model_from_json(model$to_json())
   else if (inherits(model, "keras.models.Sequential"))
     sequential_model(name = model$name)
   else
