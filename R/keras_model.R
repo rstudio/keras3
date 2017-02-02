@@ -15,6 +15,7 @@ sequential_model <- function(layers = NULL, name = NULL) {
 #' @export
 compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
                     sample_weight_mode = NULL) {
+  model <- clone_model_if_possible(model)
   model$compile(
     optimizer = optimizer, 
     loss = loss,
@@ -40,10 +41,26 @@ fit <- function(model, data, labels, batch_size = 32, nb_epoch = 10) {
 #' @importFrom stats predict
 #' @export
 predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0) {
-  object$predict(
+  model <- object
+  model$predict(
     x, 
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose)
   )
 }
+
+
+# helper function which attempts to clone a model (we can only clone models that
+# can save/read their config, which excludes models which have no layers --
+# this likely just a bug that will be resolved later)
+clone_model_if_possible <- function(model) {
+  if (length(model$layers) > 0)
+    kr$models$model_from_json(model$to_json())
+  else if (inherits(model, "keras.models.Sequential"))
+    sequential_model(name = model$name)
+  else
+    model
+}
+
+
 
