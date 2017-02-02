@@ -49,6 +49,15 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbos
   )
 }
 
+#' @export
+summary.keras.engine.training.Model <- function(x, ...) {
+  if (is_null_xptr(x))
+    cat("<pointer: 0x0>\n")
+  else
+    x$summary()
+}
+
+
 
 # helper function which attempts to clone a model (we can only clone models that
 # can save/read their config, which excludes models which have no layers --
