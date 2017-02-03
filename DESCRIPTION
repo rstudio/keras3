@@ -11,4 +11,5 @@ License: GPL (>= 2)
 Imports:
     tensorflow, magrittr, methods
 Remotes: rstudio/tensorflow
-RoxygenNote: 5.0.1
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.0

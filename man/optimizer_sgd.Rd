@@ -26,6 +26,6 @@ this value.}
 Optimizer for use with \code{\link{model_compile}}.
 }
 \description{
-Stochastic gradient descent optimizer with support for momentum, learning 
+Stochastic gradient descent optimizer with support for momentum, learning
 rate decay, and Nesterov momentum.
 }

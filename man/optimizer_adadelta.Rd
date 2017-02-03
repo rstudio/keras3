@@ -28,6 +28,6 @@ Adadelta optimizer as described in
 Method}.
 }
 \note{
-It is recommended to leave the parameters of this optimizer at their 
-  default values.
+It is recommended to leave the parameters of this optimizer at their
+default values.
 }

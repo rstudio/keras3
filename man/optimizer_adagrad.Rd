@@ -22,10 +22,10 @@ this value.}
 }
 \description{
 Adagrad optimizer as described in
-\href{http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf}{Adaptive 
+\href{http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf}{Adaptive
 Subgradient Methods for Online Learning and Stochastic Optimization}.
 }
 \note{
-It is recommended to leave the parameters of this optimizer at their 
-  default values.
+It is recommended to leave the parameters of this optimizer at their
+default values.
 }

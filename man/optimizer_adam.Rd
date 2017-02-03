@@ -26,7 +26,9 @@ this value.}
 }
 \description{
 Adam optimizer as described in \href{https://arxiv.org/abs/1412.6980v8}{Adam
-- A Method for Stochastic Optimization}.
+\itemize{
+\item A Method for Stochastic Optimization}.
+}
 }
 \note{
 Default parameters follow those provided in the original paper.
