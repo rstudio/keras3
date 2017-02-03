@@ -15,7 +15,7 @@ input <- matrix(rexp(10*784), nrow = 10, ncol = 784)
 # Sequential API ----------------------------------------------------------
 
 # define and train the model
-model <- sequential_model() %>% 
+model <- model_sequential() %>% 
   layer_dense(32, input_dim = 784) %>% 
   layer_activation('relu') %>% 
   layer_dense(10) %>% 

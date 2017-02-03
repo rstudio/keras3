@@ -7,7 +7,7 @@ model <- function(input, output) {
 }
 
 #' @export
-sequential_model <- function(layers = NULL, name = NULL) {
+model_sequential <- function(layers = NULL, name = NULL) {
   keras$models$Sequential(layers = layers, name = name)
 }
 
@@ -78,7 +78,7 @@ clone_model_if_possible <- function(model) {
   if (length(model$layers) > 0)
     keras$models$model_from_json(model$to_json())
   else if (inherits(model, "keras.models.Sequential"))
-    sequential_model(name = model$name)
+    model_sequential(name = model$name)
   else
     model
 }
