@@ -31,4 +31,3 @@ It is a variant of Adam based on the infinity norm.
 \seealso{
 \code{\link{optimizer_adam}}
 }
-

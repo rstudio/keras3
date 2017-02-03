@@ -40,4 +40,3 @@ Default parameters follow those provided in the paper. It is
 \href{http://www.cs.toronto.edu/~fritz/absps/momentum.pdf}{On the
   importance of initialization and momentum in deep learning}.
 }
-

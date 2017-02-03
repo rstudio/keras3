@@ -29,4 +29,3 @@ Optimizer for use with \code{\link{model_compile}}.
 Stochastic gradient descent optimizer with support for momentum, learning 
 rate decay, and Nesterov momentum.
 }
-

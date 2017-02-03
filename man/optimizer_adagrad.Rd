@@ -29,4 +29,3 @@ Subgradient Methods for Online Learning and Stochastic Optimization}.
 It is recommended to leave the parameters of this optimizer at their 
   default values.
 }
-

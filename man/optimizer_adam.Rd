@@ -34,4 +34,3 @@ Default parameters follow those provided in the original paper.
 \seealso{
 \code{\link{optimizer_adamax}}
 }
-

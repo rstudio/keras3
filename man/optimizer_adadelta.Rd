@@ -31,4 +31,3 @@ Method}.
 It is recommended to leave the parameters of this optimizer at their 
   default values.
 }
-

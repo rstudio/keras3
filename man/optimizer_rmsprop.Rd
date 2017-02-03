@@ -31,4 +31,3 @@ default values (except the learning rate, which can be freely tuned).
 
 This optimizer is usually a good choice for recurrent neural networks.
 }
-
