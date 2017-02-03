@@ -21,7 +21,7 @@ model <- sequential_model() %>%
   layer_dense(10) %>% 
   layer_activation('softmax') %>% 
   compile(loss='binary_crossentropy',
-          optimizer='rmsprop',
+          optimizer = optimizer_sgd(),
           metrics='accuracy') %>%
   fit(data, labels)
 
@@ -45,7 +45,7 @@ predictions <- inputs %>%
 # define and train the model
 model <- model(input = inputs, output = predictions) %>% 
   compile(loss='binary_crossentropy',
-          optimizer='rmsprop',
+          optimizer = optimizer_rmsprop(),
           metrics='accuracy') %>% 
   fit(data, labels)
 
