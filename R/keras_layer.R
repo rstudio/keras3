@@ -39,7 +39,7 @@ compose_layer <- function(x, layer) {
   # if a layer is passed then wrap the layer
   } else if (inherits(x, "tensorflow.python.framework.ops.Tensor")) {
     
-    call_object(layer, list(x))
+    py_call_object(layer, list(x))
     
   # otherwie it's an unexpected type
   } else {
