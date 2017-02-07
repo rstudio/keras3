@@ -35,7 +35,7 @@ keras <- NULL
     packageStartupMessage("You should ensure that the version of python where ",
                           "Keras is installed is either the default python ",
                           "on the system PATH or is specified explicitly via the ",
-                          "TENSORFLOW_PYTHON environment variable.\n")
+                          "RETICULATE_PYTHON environment variable.\n")
   }
 }
 

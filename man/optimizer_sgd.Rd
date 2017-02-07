@@ -23,7 +23,7 @@ value.}
 this value.}
 }
 \value{
-Optimizer for use with \code{\link{model_compile}}.
+Optimizer for use with \code{\link{compile}}.
 }
 \description{
 Stochastic gradient descent optimizer with support for momentum, learning

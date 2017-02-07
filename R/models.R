@@ -11,7 +11,21 @@ model_sequential <- function(layers = NULL, name = NULL) {
   keras$models$Sequential(layers = layers, name = name)
 }
 
-
+#' Configure a model for training
+#' 
+#' @param optimizer: Name of optimizer or optimizer object.
+#' @param loss Name of objective function or objective function. If the model 
+#'   has multiple outputs, you can use a different loss on each output by 
+#'   passing a dictionary or a list of objectives.
+#' @param metrics List of metrics to be evaluated by the model during training 
+#'   and testing. Typically you will use `metrics='accuracy'`. To specify 
+#'   different metrics for different outputs of a multi-output model, you could 
+#'   also pass a named list such as `metrics=list(output_a = 'accuracy')`.
+#' @param sample_weight_mode If you need to do timestep-wise sample weighting 
+#'   (2D weights), set this to "temporal". `NULL` defaults to sample-wise
+#'   weights (1D). If the model has multiple outputs, you can use a different 
+#'   `sample_weight_mode` on each output by passing a list of modes.
+#'   
 #' @export
 compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
                     sample_weight_mode = NULL) {

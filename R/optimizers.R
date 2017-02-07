@@ -14,7 +14,7 @@
 #' @param clipvalue Gradients will be clipped when their absolute value exceeds
 #'   this value.
 #' 
-#' @return Optimizer for use with \code{\link{model_compile}}.
+#' @return Optimizer for use with \code{\link{compile}}.
 #' 
 #' @export
 optimizer_sgd <- function(lr = 0.01, momentum = 0.0, decay = 0.0, nesterov = FALSE,

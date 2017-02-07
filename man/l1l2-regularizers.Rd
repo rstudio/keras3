@@ -8,7 +8,7 @@
 \alias{activity_regularizer_l1}
 \alias{activity_regularizer_l2}
 \alias{activity_regularizer_l1l2}
-\title{Regulizer for L1 and L2 regularization}
+\title{Regularizer for L1 and L2 regularization}
 \usage{
 regularizer_l1(l = 0.01)
 
@@ -30,5 +30,5 @@ activity_regularizer_l1l2(l1 = 0.01, l2 = 0.01)
 \item{l2}{L2 regularization factor.}
 }
 \description{
-Regulizer for L1 and L2 regularization
+Regularizer for L1 and L2 regularization
 }

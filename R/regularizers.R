@@ -1,7 +1,7 @@
 
 
 
-#' Regulizer for L1 and L2 regularization
+#' Regularizer for L1 and L2 regularization
 #' 
 #' @param l Regularization factor.
 #' @param l1 L1 regularization factor.
