@@ -40,7 +40,7 @@ fit <- function(model, data, labels, batch_size = 32, nb_epoch = 10) {
 
 #' @importFrom stats predict
 #' @export
-predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0) {
+predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0, ...) {
   model <- object
   model$predict(
     x, 
@@ -50,19 +50,20 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbos
 }
 
 #' @export
-summary.keras.engine.training.Model <- function(x, ...) {
-  if (is_null_xptr(x))
+summary.keras.engine.training.Model <- function(object, ...) {
+  if (is_null_xptr(object))
     cat("<pointer: 0x0>\n")
   else
-    x$summary()
+    object$summary()
 }
 
+#' @importFrom utils str
 #' @export
-str.keras.engine.training.Model <- function(x, ...) {
-  if (is_null_xptr(x))
+str.keras.engine.training.Model <- function(object, ...) {
+  if (is_null_xptr(object))
     cat("<pointer: 0x0>\n")
   else
-    cat("Model\n", py_capture_stdout(x$summary()), sep="")
+    cat("Model\n", py_capture_stdout(object$summary()), sep="")
 }
 
 #' @export
