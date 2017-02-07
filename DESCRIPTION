@@ -9,7 +9,7 @@ Description: One paragraph description of what the package does as one or more
     full sentences.
 License: GPL (>= 2)
 Imports:
-    tensorflow, magrittr, methods
-Remotes: rstudio/tensorflow
+    reticulate, magrittr, methods
+Remotes: rstudio/reticulate
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.0
