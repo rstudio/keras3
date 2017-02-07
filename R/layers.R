@@ -41,7 +41,15 @@ layer_dense <- function(x, output_dim, init = 'glorot_uniform', activation = NUL
   layer <- keras$layers$Dense(
     output_dim = as.integer(output_dim),
     input_dim = as.integer(input_dim),
-    activation = activation
+    activation = activation,
+    weights = weights,
+    W_regularizer = W_regularizer,
+    b_regularizer = b_regularizer,
+    activity_regularizer = activity_regularizer,
+    W_constraint = W_constraint,
+    b_constraint = b_constraint, 
+    bias = bias,
+    input_dim = input_dim
   )
   compose_layer(x, layer)
 }
