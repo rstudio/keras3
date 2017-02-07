@@ -95,7 +95,7 @@ load_model <- function(filepath, custom_objects = NULL) {
 
 
 
-#' Model Predictions
+#' Predict Method for Keras Models
 #' 
 #' Generates output predictions for the input samples, processing the samples in
 #' a batched way.
