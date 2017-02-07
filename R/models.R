@@ -42,10 +42,10 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
 
 
 #' @export
-fit <- function(model, data, labels, batch_size = 32, nb_epoch = 10) {
+fit <- function(model, x, y, batch_size = 32, nb_epoch = 10) {
   model$fit(
-    data,
-    labels,
+    x = x,
+    y = y,
     nb_epoch = as.integer(nb_epoch),
     batch_size = as.integer(batch_size)
   )
