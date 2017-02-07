@@ -35,7 +35,9 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
 }
 
 #' @export
-layer_dense <- function(x, output_dim, input_dim = NULL, activation = NULL) {
+layer_dense <- function(x, output_dim, init = 'glorot_uniform', activation = NULL, weights = NULL, 
+                           W_regularizer = NULL, b_regularizer = NULL, activity_regularizer = NULL, 
+                           W_constraint = NULL, b_constraint = NULL, bias = TRUE, input_dim = NULL) {
   layer <- keras$layers$Dense(
     output_dim = as.integer(output_dim),
     input_dim = as.integer(input_dim),
