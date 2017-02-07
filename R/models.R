@@ -52,6 +52,49 @@ fit <- function(model, data, labels, batch_size = 32, nb_epoch = 10) {
   model
 }
 
+
+#' Save a model into a single HDF5 file
+#' 
+#' @param model Model to save
+#' @param filepath File path to save to
+#' @param overwrite Overwrite existing file if necessary
+#' 
+#' @details The following components of the model are saved: 
+#' 
+#'   - The model architecture, allowing to re-instantiate the model. 
+#'   - The model weights. 
+#'   - The state of the optimizer, allowing to resume training exactly where you
+#'     left off.
+#' This allows you to save the entirety of the state of a model
+#' in a single file.
+#' 
+#' Saved models can be reinstantiated via [load_model()]. The model returned by
+#' `load_model` is a compiled model ready to be used (unless the saved model
+#' was never compiled in the first place).
+#' 
+#' @seealso [load_model()]
+#' 
+#' @export
+save_model <- function(model, filepath, overwrite = TRUE) {
+ keras$models$save_model(model = model, filepath = filepath, overwrite = overwrite) 
+}
+
+
+#' Load a model from an HDF5 file
+#' 
+#' @param filepath File path to load file from
+#' @param custom_objects Napping class names (or function names) of custom 
+#'   (non-Keras) objects to class/functions
+#'   
+#' @seealso [save_model()]   
+#'   
+#' @export
+load_model <- function(filepath, custom_objects = NULL) {
+  keras$models$load_model(filepath = filepath, custom_objects = custom_objects)
+}
+
+
+
 #' @importFrom stats predict
 #' @export
 predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0, ...) {
