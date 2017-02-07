@@ -95,6 +95,11 @@ load_model <- function(filepath, custom_objects = NULL) {
 
 
 
+#' Model Predictions
+#' 
+#' Generates output predictions for the input samples, processing the samples in
+#' a batched way.
+#' 
 #' @importFrom stats predict
 #' @export
 predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0, ...) {
