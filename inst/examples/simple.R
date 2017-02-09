@@ -2,6 +2,10 @@
 
 library(keras)
 
+use_condaenv("tensorflow")
+use_virtualenv("~/tensorflow")
+
+
 # Training and input data -------------------------------------------
 
 # generate dummy training data
