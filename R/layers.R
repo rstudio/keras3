@@ -67,6 +67,9 @@ layer_activation <- function(x, activation) {
 # Helper function to compose a layer with an object of type Model or Layer
 compose_layer <- function(x, layer) {
   
+  # ensure availablity 
+  py_available("keras")
+  
   # if a sequential is passed then add it to the model
   if (inherits(x, "keras.models.Sequential")) {
     
