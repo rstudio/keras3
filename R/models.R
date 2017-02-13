@@ -119,19 +119,12 @@ summary.keras.engine.training.Model <- function(object, ...) {
     object$summary()
 }
 
-#' @importFrom utils str
+#' @importFrom reticulate py_str
 #' @export
-str.keras.engine.training.Model <- function(object, ...) {
-  if (is_null_xptr(object) || !py_available())
-    cat("<pointer: 0x0>\n")
-  else
-    cat("Model\n", py_capture_output(object$summary(), type = "stdout"), sep="")
+py_str.keras.engine.training.Model <- function(object, ...) {
+  cat("Model\n", py_capture_output(object$summary(), type = "stdout"), sep="")
 }
 
-#' @export
-print.keras.engine.training.Model <- function(x, ...) {
-  str(x, ...)
-}
 
 
 # helper function which attempts to clone a model (we can only clone models that
