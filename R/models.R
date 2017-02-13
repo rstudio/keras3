@@ -122,7 +122,7 @@ summary.keras.engine.training.Model <- function(object, ...) {
 #' @importFrom utils str
 #' @export
 str.keras.engine.training.Model <- function(object, ...) {
-  if (is_null_xptr(object))
+  if (is_null_xptr(object) || !py_available())
     cat("<pointer: 0x0>\n")
   else
     cat("Model\n", py_capture_output(object$summary(), type = "stdout"), sep="")
