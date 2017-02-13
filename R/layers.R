@@ -78,7 +78,7 @@ compose_layer <- function(x, layer) {
   } else if (inherits(x, "tensorflow.python.framework.ops.Tensor") ||
              inherits(x, "keras.engine.topology.Layer")) {
     
-    py_call(layer, list(x))
+    py_call(layer, x)
     
   # otherwie it's an unexpected type
   } else {
