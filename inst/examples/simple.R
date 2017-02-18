@@ -18,7 +18,7 @@ input <- matrix(rexp(10*784), nrow = 10, ncol = 784)
 
 # Sequential API ----------------------------------------------------------
 
-# define and train the model
+# define the model
 model <- model_sequential() %>% 
   layer_dense(32, input_dim = 784) %>% 
   layer_activation('relu') %>% 
@@ -26,8 +26,10 @@ model <- model_sequential() %>%
   layer_activation('softmax') %>% 
   compile(loss='binary_crossentropy',
           optimizer = optimizer_sgd(),
-          metrics='accuracy') %>%
-  fit(data, labels)
+          metrics='accuracy')
+
+# train the model
+model %>% fit(data, labels)
 
 # save the model
 model %>% save_model("model.hdf5")
@@ -36,8 +38,7 @@ model %>% save_model("model.hdf5")
 model <- load_model("model.hdf5")
 
 # make some predictions
-model %>% 
-  predict(input)
+model %>% predict(input)
 
 
 # Functional API ----------------------------------------------------------
@@ -51,14 +52,15 @@ predictions <- inputs %>%
   layer_dense(64, activation = 'relu') %>% 
   layer_dense(10, activation = 'softmax')
 
-# define and train the model
+# define the model
 model <- model(input = inputs, output = predictions) %>% 
   compile(loss='binary_crossentropy',
           optimizer = optimizer_rmsprop(),
-          metrics='accuracy') %>% 
-  fit(data, labels)
+          metrics='accuracy')
+  
+# train the model
+model %>% fit(data, labels)
 
 # make some predictions
-model %>% 
-  predict(input)
+model %>% predict(input)
   

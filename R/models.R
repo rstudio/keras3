@@ -1,11 +1,31 @@
 
 
 
+#' Keras Model
+#' 
+#' A model is a directed acyclic graph of layers.
+#' 
+#' @param input Input layer
+#' @param output Output layer
+#'
 #' @export
 model <- function(input, output) {
   keras$models$Model(input = input, output = output)
 }
 
+
+#' Keras Model composed of a linear stack of layers
+#' 
+#' @param layers List of layers to add to the model
+#' @param name Name of model
+#'   
+#' @note
+#' 
+#' The first layer passed to a Sequential model should have a defined input
+#' shape. What that means is that it should have received an `input_shape` or
+#' `batch_input_shape` argument, or for some type of layers (recurrent,
+#' Dense...) an `input_dim` argument.
+#' 
 #' @export
 model_sequential <- function(layers = NULL, name = NULL) {
   keras$models$Sequential(layers = layers, name = name)
@@ -13,6 +33,7 @@ model_sequential <- function(layers = NULL, name = NULL) {
 
 #' Configure a model for training
 #' 
+#' @param model Model to compile.
 #' @param optimizer Name of optimizer or optimizer object.
 #' @param loss Name of objective function or objective function. If the model 
 #'   has multiple outputs, you can use a different loss on each output by 
@@ -45,7 +66,8 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
 #' Train a model
 #' 
 #' Trains the model for a fixed number of epochs (iterations on a dataset).
-
+#'
+#' @param model Model to train.
 #' @param x Vector, matrix, or array of training data (or list if the model has 
 #'   multiple inputs). If all inputs in the model are named, you can also pass a
 #'   list mapping input names to data.
@@ -79,8 +101,7 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
 #' @param initial_epoch epoch at which to start training (useful for resuming a
 #'   previous training run).
 #' 
-#' @return Model object with "history" attribute that provides details on
-#'  the training.
+#' @return Training history 
 #' 
 #' @export
 fit <- function(model, x, y, batch_size=32, nb_epoch=10, verbose=1, callbacks=NULL,
@@ -117,11 +138,28 @@ fit <- function(model, x, y, batch_size=32, nb_epoch=10, verbose=1, callbacks=NU
     initial_epoch = as.integer(initial_epoch)
   )
   
-  # return the model with history attached
-  attr(model, "history") <- history
-  model
+  # return the training history
+  invisible(history)
 }
 
+
+#' Evaluate a model
+
+#' @inheritParams fit
+#'   
+#' @return Scalar test loss (if the model has a single output and no metrics) or
+#'   list of scalars (if the model has multiple outputs and/or metrics).
+#'   
+#' @export
+evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NULL) {
+  model$evaluate(
+    x = x,
+    y = y,
+    batch_size = as.integer(batch_size),
+    verbose = as.integer(verbose),
+    sample_weight = sample_weight
+  )
+}
 
 #' Save a model into a single HDF5 file
 #' 

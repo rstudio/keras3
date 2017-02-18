@@ -34,13 +34,48 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
   )
 }
 
+#' Add a densely-connected NN layer to an output
+#' 
+#' @param x Model or layer
+#' @param output_dim Output dimension
+#' @param init Name of initialization function for the weights of the layer or 
+#'   alternatively, function to use for weights initialization. This parameter 
+#'   is only relevant if you don't pass a `weights` argument.
+#' @param activation Name of activation function to use, or alternatively, 
+#'   elementwise function. If you don't specify anything, no activation is 
+#'   applied (ie. "linear" activation: a(x) = x).
+#' @param weights List of vectors, matrixes, or arrays to set as initial 
+#'   weights. The list should have 2 elements, of shape `(input_dim, 
+#'   output_dim)` and (output_dim,) for weights and biases respectively.
+#' @param W_regularizer Weight regularizer applied to the main weights matrix.
+#' @param b_regularizer: Weight regularizer applied to the bias.
+#' @param  activity_regularizer: Activity regularizer applied to the network
+#'   output.
+#' @param W_constraint Constraint applied to the main weights matrix.
+#' @param b_constraint Constraint applied to the bias.
+#' @param bias Whether to include a bias (i.e. make the layer affine rather than
+#'   linear).
+#' @param input_dim Dimensionality of the input (integer). This argument (or
+#'   alternatively, the keyword argument `input_shape`) is required when using
+#'   this layer as the first layer in a model.
+#'   
+#'   
+#' @section Input and Output Shapes:
+#'   
+#'   Input shape: nD tensor with shape: `(nb_samples, ..., input_dim)`. The most
+#'   common situation would be a 2D input with shape `(nb_samples, input_dim)`.
+#'   
+#'   Output shape: nD tensor with shape: `(nb_samples, ..., output_dim)`. For 
+#'   instance, for a 2D input with shape `(nb_samples, input_dim)`, the output 
+#'   would have shape `(nb_samples, output_dim)`.
+#'   
 #' @export
 layer_dense <- function(x, output_dim, init = 'glorot_uniform', activation = NULL, weights = NULL, 
                            W_regularizer = NULL, b_regularizer = NULL, activity_regularizer = NULL, 
                            W_constraint = NULL, b_constraint = NULL, bias = TRUE, input_dim = NULL) {
   layer <- keras$layers$Dense(
     output_dim = as.integer(output_dim),
-    input_dim = as.integer(input_dim),
+    init = init,
     activation = activation,
     weights = weights,
     W_regularizer = W_regularizer,
@@ -49,11 +84,16 @@ layer_dense <- function(x, output_dim, init = 'glorot_uniform', activation = NUL
     W_constraint = W_constraint,
     b_constraint = b_constraint, 
     bias = bias,
-    input_dim = input_dim
+    input_dim = as.integer(input_dim)
   )
   compose_layer(x, layer)
 }
 
+#' Apply an activation function to an output.
+#'
+#' @inheritParams layer_dense
+#' 
+#'   
 #' @export
 layer_activation <- function(x, activation) {
   layer <- keras$layers$Activation(

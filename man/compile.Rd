@@ -8,6 +8,8 @@ compile(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
   sample_weight_mode = NULL)
 }
 \arguments{
+\item{model}{Model to compile.}
+
 \item{optimizer}{Name of optimizer or optimizer object.}
 
 \item{loss}{Name of objective function or objective function. If the model

@@ -10,6 +10,8 @@ fit(model, x, y, batch_size = 32, nb_epoch = 10, verbose = 1,
   initial_epoch = 0)
 }
 \arguments{
+\item{model}{Model to train.}
+
 \item{x}{Vector, matrix, or array of training data (or list if the model has
 multiple inputs). If all inputs in the model are named, you can also pass a
 list mapping input names to data.}
@@ -55,8 +57,7 @@ sample_weight_mode="temporal" in \code{\link[=compile]{compile()}}.}
 previous training run).}
 }
 \value{
-Model object with "history" attribute that provides details on
-the training.
+Training history
 }
 \description{
 Trains the model for a fixed number of epochs (iterations on a dataset).
