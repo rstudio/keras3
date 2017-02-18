@@ -90,14 +90,18 @@ layer_dense <- function(x, output_dim, init = 'glorot_uniform', activation = NUL
 }
 
 #' Apply an activation function to an output.
-#'
-#' @inheritParams layer_dense
 #' 
+#' @inheritParams layer_dense
+#'   
+#' @param ... Additional keyword arguments to generic to all layers, including
+#'   `input_shape` (list of integers, does not include the samples axis) which
+#'   is required when using this layer as the first layer in a model.
 #'   
 #' @export
-layer_activation <- function(x, activation) {
+layer_activation <- function(x, activation, ...) {
   layer <- keras$layers$Activation(
-    activation = activation
+    activation = activation,
+    ...
   )
   compose_layer(x, layer)
 }
