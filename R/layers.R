@@ -93,16 +93,22 @@ layer_dense <- function(x, output_dim, init = 'glorot_uniform', activation = NUL
 #' 
 #' @inheritParams layer_dense
 #'   
-#' @param ... Additional keyword arguments to generic to all layers, including
-#'   `input_shape` (list of integers, does not include the samples axis) which
-#'   is required when using this layer as the first layer in a model.
+#' @param input_shape Input shape (list of integers, does not include the
+#'   samples axis) which is required when using this layer as the first layer in
+#'   a model.
 #'   
 #' @export
-layer_activation <- function(x, activation, ...) {
-  layer <- keras$layers$Activation(
-    activation = activation,
-    ...
-  )
+layer_activation <- function(x, activation, input_shape = NULL) {
+  
+  # build args
+  args <- list(activation = activation)
+  if (!is.null(input_shape))
+    args$input_shape <- as.integer(input_shape)
+  
+  # call function
+  layer <- do.call(keras$layers$Activation, args)
+  
+  # compose
   compose_layer(x, layer)
 }
 
@@ -116,11 +122,17 @@ layer_activation <- function(x, activation, ...) {
 #' @note The output shape will be `(batch_size,) + target_shape`.  
 #'   
 #' @export
-layer_reshape <- function(x, target_shape, ...) {
-  layer <- keras$layers$Reshape(
-    target_shape = as.integer(target_shape),
-    ...
-  )
+layer_reshape <- function(x, target_shape, input_shape = NULL) {
+  
+  # build args
+  args <- list(target_shape = target_shape)
+  if (!is.null(input_shape))
+    args$input_shape <- as.integer(input_shape)
+  
+  # call function
+  layer <- do.call(keras$layers$Reshape, args)
+  
+  # compose
   compose_layer(x, layer)
 }
 
