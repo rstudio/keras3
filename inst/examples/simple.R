@@ -1,8 +1,6 @@
 
 
 library(keras)
-
-use_condaenv("tensorflow")
 use_virtualenv("~/tensorflow")
 
 
@@ -18,7 +16,8 @@ input <- matrix(rexp(10*784), nrow = 10, ncol = 784)
 
 # Sequential API ----------------------------------------------------------
 
-# define the model
+# define and compile the model (these methods copy the model prior to
+# returning it so do not mutate the model)
 model <- model_sequential() %>% 
   layer_dense(32, input_dim = 784) %>% 
   layer_activation('relu') %>% 
@@ -28,17 +27,16 @@ model <- model_sequential() %>%
           optimizer = optimizer_sgd(),
           metrics='accuracy')
 
-# train the model
-model %>% fit(data, labels)
-
-# save the model
+# save the model and load it back in
 model %>% save_model("model.hdf5")
-
-# load it back in
 model <- load_model("model.hdf5")
 
-# make some predictions
-model %>% predict(input)
+# train the model (this definitely mutates the model object)
+fit(model, data, labels)
+
+# make some predictions (this could in theory mutate the model
+# object however it probably doesn't)
+predict(model, input)
 
 
 # Functional API ----------------------------------------------------------
