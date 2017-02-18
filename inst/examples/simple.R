@@ -1,10 +1,6 @@
 
-
 library(keras)
 use_virtualenv("~/tensorflow")
-
-
-# Training and input data -------------------------------------------
 
 # generate dummy training data
 data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)
@@ -12,9 +8,6 @@ labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10
 
 # genereate dummy input data
 input <- matrix(rexp(10*784), nrow = 10, ncol = 784)
-
-
-# Sequential API ----------------------------------------------------------
 
 # define and compile the model (these methods copy the model prior to
 # returning it so do not mutate the model)
@@ -39,26 +32,3 @@ fit(model, data, labels)
 predict(model, input)
 
 
-# Functional API ----------------------------------------------------------
-
-# define input tensor
-inputs <- layer_input(784) 
-
-# define prediction layers
-predictions <- inputs %>% 
-  layer_dense(64, activation = 'relu') %>% 
-  layer_dense(64, activation = 'relu') %>% 
-  layer_dense(10, activation = 'softmax')
-
-# define the model
-model <- model(input = inputs, output = predictions) %>% 
-  compile(loss='binary_crossentropy',
-          optimizer = optimizer_rmsprop(),
-          metrics='accuracy')
-  
-# train the model
-model %>% fit(data, labels)
-
-# make some predictions
-model %>% predict(input)
-  
