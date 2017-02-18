@@ -137,6 +137,56 @@ layer_reshape <- function(x, target_shape, input_shape = NULL) {
 }
 
 
+#' Permute the dimensions of an input according to a given pattern
+#' 
+#' @param dims List of integers. Permutation pattern, does not include the 
+#'   samples dimension. Indexing starts at 1. For instance, `(2, 1)` permutes
+#'   the first and second dimension of the input.
+#'   
+#' @inheritParams layer_activation
+#'   
+#' @note Useful for e.g. connecting RNNs and convnets together.
+#'   
+#' @export
+layer_permute <- function(x, dims, input_shape = NULL) {
+  
+  # build args
+  args <- list(dims = dims)
+  if (!is.null(input_shape))
+    args$input_shape <- as.integer(input_shape)
+  
+  # call function
+  layer <- do.call(keras$layers$Permute, args)
+  
+  # compose
+  compose_layer(x, layer)
+}
+
+
+#' Flattens an input
+#' 
+#' Flatten a given input, does not affect the batch size.
+#' 
+#' @inheritParams layer_activation
+#' 
+#' @export
+layer_flatten <- function(x, input_shape = NULL) {
+  
+  # build args
+  args <- list()
+  if (!is.null(input_shape))
+    args$input_shape <- as.integer(input_shape)
+  
+  # call function
+  layer <- do.call(keras$layers$Flatten, args)
+  
+  # compose
+  compose_layer(x, layer)
+}
+
+
+
+
 # Helper function to compose a layer with an object of type Model or Layer
 compose_layer <- function(x, layer) {
   

@@ -4,7 +4,7 @@
 \alias{layer_activation}
 \title{Apply an activation function to an output.}
 \usage{
-layer_activation(x, activation, ...)
+layer_activation(x, activation, input_shape = NULL)
 }
 \arguments{
 \item{x}{Model or layer}
@@ -13,9 +13,9 @@ layer_activation(x, activation, ...)
 elementwise function. If you don't specify anything, no activation is
 applied (ie. "linear" activation: a(x) = x).}
 
-\item{...}{Additional keyword arguments to generic to all layers, including
-\code{input_shape} (list of integers, does not include the samples axis) which
-is required when using this layer as the first layer in a model.}
+\item{input_shape}{Input shape (list of integers, does not include the
+samples axis) which is required when using this layer as the first layer in
+a model.}
 }
 \description{
 Apply an activation function to an output.

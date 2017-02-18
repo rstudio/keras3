@@ -4,7 +4,7 @@
 \alias{layer_reshape}
 \title{Reshapes an output to a certain shape.}
 \usage{
-layer_reshape(x, target_shape, ...)
+layer_reshape(x, target_shape, input_shape = NULL)
 }
 \arguments{
 \item{x}{Model or layer}
@@ -12,9 +12,9 @@ layer_reshape(x, target_shape, ...)
 \item{target_shape}{List of integers, does not include the
 samples dimension (batch size).}
 
-\item{...}{Additional keyword arguments to generic to all layers, including
-\code{input_shape} (list of integers, does not include the samples axis) which
-is required when using this layer as the first layer in a model.}
+\item{input_shape}{Input shape (list of integers, does not include the
+samples axis) which is required when using this layer as the first layer in
+a model.}
 }
 \description{
 Reshapes an output to a certain shape.
