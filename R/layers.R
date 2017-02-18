@@ -106,6 +106,23 @@ layer_activation <- function(x, activation, ...) {
   compose_layer(x, layer)
 }
 
+#' Reshapes an output to a certain shape.
+#' 
+#' @inheritParams layer_activation
+#'   
+#' @param target_shape List of integers, does not include the
+#'   samples dimension (batch size).
+#'   
+#' @note The output shape will be `(batch_size,) + target_shape`.  
+#'   
+#' @export
+layer_reshape <- function(x, target_shape, ...) {
+  layer <- keras$layers$Reshape(
+    target_shape = as.integer(target_shape),
+    ...
+  )
+  compose_layer(x, layer)
+}
 
 
 # Helper function to compose a layer with an object of type Model or Layer
