@@ -99,10 +99,23 @@ load_model <- function(filepath, custom_objects = NULL) {
 #' 
 #' Generates output predictions for the input samples, processing the samples in
 #' a batched way.
+#'
+#' @param x Input data (vector, matrix, or array)
+#' @param batch_size Integer
+#' @param verbose Verbosity mode, 0 or 1.
+#' @param ... Unused
+#' 
+#' @return vector, matrix, or array of predictions
 #' 
 #' @importFrom stats predict
 #' @export
 predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0, ...) {
+  
+  # force input to be a numpy array
+  if (!is.array(x))
+    x <- np$array(x)
+  
+  # call predict
   model <- object
   model$predict(
     x, 

@@ -14,7 +14,8 @@ keras <- NULL
 
 .onLoad <- function(libname, pkgname) {
   
-  # delay load keras
+  # delay load numpy and keras
+  np <<- import("numpy", convert = FALSE, delay_load = TRUE)
   keras <<- import("keras", delay_load = TRUE)
   
 }

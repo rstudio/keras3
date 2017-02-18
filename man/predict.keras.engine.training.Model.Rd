@@ -7,6 +7,18 @@
 \method{predict}{keras.engine.training.Model}(object, x, batch_size = 32,
   verbose = 0, ...)
 }
+\arguments{
+\item{x}{Input data (vector, matrix, or array)}
+
+\item{batch_size}{Integer}
+
+\item{verbose}{Verbosity mode, 0 or 1.}
+
+\item{...}{Unused}
+}
+\value{
+vector, matrix, or array of predictions
+}
 \description{
 Generates output predictions for the input samples, processing the samples in
 a batched way.
