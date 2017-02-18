@@ -197,7 +197,7 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbos
 
 #' @export
 summary.keras.engine.training.Model <- function(object, ...) {
-  if (is_null_xptr(object))
+  if (py_is_null_xptr(object))
     cat("<pointer: 0x0>\n")
   else
     object$summary()
