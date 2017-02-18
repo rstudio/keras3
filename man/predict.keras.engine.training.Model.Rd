@@ -8,6 +8,8 @@
   verbose = 0, ...)
 }
 \arguments{
+\item{object}{Keras model}
+
 \item{x}{Input data (vector, matrix, or array)}
 
 \item{batch_size}{Integer}
