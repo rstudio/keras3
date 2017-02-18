@@ -27,6 +27,11 @@ weights. The list should have 2 elements, of shape \code{(input_dim, output_dim)
 
 \item{W_regularizer}{Weight regularizer applied to the main weights matrix.}
 
+\item{b_regularizer}{Weight regularizer applied to the bias.}
+
+\item{activity_regularizer}{Activity regularizer applied to the network
+output.}
+
 \item{W_constraint}{Constraint applied to the main weights matrix.}
 
 \item{b_constraint}{Constraint applied to the bias.}
@@ -37,11 +42,6 @@ linear).}
 \item{input_dim}{Dimensionality of the input (integer). This argument (or
 alternatively, the keyword argument \code{input_shape}) is required when using
 this layer as the first layer in a model.}
-
-\item{b_regularizer:}{Weight regularizer applied to the bias.}
-
-\item{activity_regularizer:}{Activity regularizer applied to the network
-output.}
 }
 \description{
 Add a densely-connected NN layer to an output

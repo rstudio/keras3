@@ -48,8 +48,8 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
 #'   weights. The list should have 2 elements, of shape `(input_dim, 
 #'   output_dim)` and (output_dim,) for weights and biases respectively.
 #' @param W_regularizer Weight regularizer applied to the main weights matrix.
-#' @param b_regularizer: Weight regularizer applied to the bias.
-#' @param  activity_regularizer: Activity regularizer applied to the network
+#' @param b_regularizer Weight regularizer applied to the bias.
+#' @param activity_regularizer Activity regularizer applied to the network
 #'   output.
 #' @param W_constraint Constraint applied to the main weights matrix.
 #' @param b_constraint Constraint applied to the bias.
