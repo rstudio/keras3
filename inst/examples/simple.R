@@ -21,14 +21,15 @@ model <- model_sequential() %>%
           metrics='accuracy')
 
 # save the model and load it back in
-model %>% save_model("model.hdf5")
+save_model(model, "model.hdf5")
 model <- load_model("model.hdf5")
 
-# train the model (this definitely mutates the model object)
-fit(model, data, labels)
+# train the model (this definitely mutates the model object). note we 
+# might be able to make this functional by using save_model / load_model
+training_history <- fit(model, data, labels)
 
 # make some predictions (this could in theory mutate the model
 # object however it probably doesn't)
-predict(model, input)
+predictions <- predict(model, input)
 
 
