@@ -131,8 +131,9 @@ fit <- function(model, x, y, batch_size=32, nb_epoch=10, verbose=1, callbacks=NU
     initial_epoch = as.integer(initial_epoch)
   )
   
-  # return the training history
-  invisible(history)
+  # return the training history as an attribute
+  attr(model, "history") <- history
+  model
 }
 
 
