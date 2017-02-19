@@ -20,13 +20,14 @@ model <- model_sequential() %>%
           metrics='accuracy')
 
 # save the model and load it back in
-model %>% save_model("model.hdf5")
-model <- load_model("model.hdf5")
+model %>% save_hdf5("model.hdf5")
+model <- load_hdf5("model.hdf5")
 
 # train the model 
 model %>% fit(data, labels)
 
 # make some predictions
 predictions <- model %>% predict(input)
+predictions
 
 
