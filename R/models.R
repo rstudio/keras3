@@ -210,6 +210,8 @@ load_model <- function(filepath, custom_objects = NULL) {
 #' 
 #' @return vector, matrix, or array of predictions
 #' 
+#' @name predict
+#' 
 #' @importFrom stats predict
 #' @export
 predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0, ...) {
