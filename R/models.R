@@ -108,12 +108,6 @@ fit <- function(model, x, y, batch_size=32, nb_epoch=10, verbose=1, callbacks=NU
                 validation_split=0.0, validation_data=NULL, shuffle=TRUE,
                 class_weight=NULL, sample_weight=NULL, initial_epoch=0) {
   
-  # force inputs to be numpy arrays
-  if (!is.array(x))
-    x <- np$array(x)
-  if (!is.array(y))
-    y <- np$array(y)
-  
   # convert class weights to python dict
   if (!is.null(class_weight)) {
     if (is.list(class_weight))
@@ -124,8 +118,8 @@ fit <- function(model, x, y, batch_size=32, nb_epoch=10, verbose=1, callbacks=NU
   
   # fit the model
   history <- model$fit(
-    x = x,
-    y = y,
+    x = as.array(x),
+    y = as.array(y),
     batch_size = as.integer(batch_size),
     nb_epoch = as.integer(nb_epoch),
     verbose = as.integer(verbose),
@@ -220,14 +214,10 @@ load_model <- function(filepath, custom_objects = NULL) {
 #' @export
 predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0, ...) {
   
-  # force input to be a numpy array
-  if (!is.array(x))
-    x <- np$array(x)
-  
   # call predict
   model <- object
   model$predict(
-    x, 
+    as.array(x), 
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose)
   )
