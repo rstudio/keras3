@@ -51,7 +51,6 @@ model_sequential <- function(layers = NULL, name = NULL) {
 #' @export
 compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
                     sample_weight_mode = NULL) {
-  model <- clone_model_if_possible(model)
   model$compile(
     optimizer = optimizer, 
     loss = loss,
@@ -239,17 +238,6 @@ py_str.keras.engine.training.Model <- function(object, ...) {
 
 
 
-# helper function which attempts to clone a model (we can only clone models that
-# can save/read their config, which excludes models which have no layers --
-# this likely just a bug that will be resolved later)
-clone_model_if_possible <- function(model) {
-  if (length(model$layers) > 0)
-    keras$models$model_from_json(model$to_json())
-  else if (inherits(model, "keras.models.Sequential"))
-    model_sequential(name = model$name)
-  else
-    model
-}
 
 
 
