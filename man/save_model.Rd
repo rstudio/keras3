@@ -2,7 +2,7 @@
 % Please edit documentation in R/models.R
 \name{save_model}
 \alias{save_model}
-\title{Save a model into a single HDF5 file}
+\title{Save a Keras model into a single HDF5 file}
 \usage{
 save_model(model, filepath, overwrite = TRUE)
 }
@@ -14,7 +14,7 @@ save_model(model, filepath, overwrite = TRUE)
 \item{overwrite}{Overwrite existing file if necessary}
 }
 \description{
-Save a model into a single HDF5 file
+Save a Keras model into a single HDF5 file
 }
 \details{
 The following components of the model are saved:
@@ -32,5 +32,5 @@ Saved models can be reinstantiated via \code{\link[=load_model]{load_model()}}. 
 was never compiled in the first place).
 }
 \seealso{
-\code{\link[=load_model]{load_model()}}
+\link{load_model}
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/models.R
 \name{load_model}
 \alias{load_model}
-\title{Load a model from an HDF5 file}
+\title{Load a Keras model from an HDF5 file}
 \usage{
 load_model(filepath, custom_objects = NULL)
 }
@@ -13,8 +13,8 @@ load_model(filepath, custom_objects = NULL)
 (non-Keras) objects to class/functions}
 }
 \description{
-Load a model from an HDF5 file
+Load a Keras model from an HDF5 file
 }
 \seealso{
-\code{\link[=save_model]{save_model()}}
+\link{save_model}
 }

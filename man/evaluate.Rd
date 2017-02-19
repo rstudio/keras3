@@ -2,7 +2,7 @@
 % Please edit documentation in R/models.R
 \name{evaluate}
 \alias{evaluate}
-\title{Evaluate a model}
+\title{Evaluate a Keras model}
 \usage{
 evaluate(model, x, y, batch_size = 32, verbose = 1, sample_weight = NULL)
 }
@@ -34,5 +34,8 @@ Scalar test loss (if the model has a single output and no metrics) or
 list of scalars (if the model has multiple outputs and/or metrics).
 }
 \description{
-Evaluate a model
+Evaluate a Keras model
+}
+\seealso{
+\link{compile}, \link{fit}, \link{predict}
 }

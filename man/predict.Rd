@@ -26,3 +26,6 @@ vector, matrix, or array of predictions
 Generates output predictions for the input samples, processing the samples in
 a batched way.
 }
+\seealso{
+\link{compile}, \link{fit}, \link{evaluate}
+}

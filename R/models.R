@@ -31,7 +31,7 @@ model_sequential <- function(layers = NULL, name = NULL) {
   keras$models$Sequential(layers = layers, name = name)
 }
 
-#' Configure a model for training
+#' Configure a Keras model for training
 #' 
 #' @param model Model to compile.
 #' @param optimizer Name of optimizer or optimizer object.
@@ -48,6 +48,8 @@ model_sequential <- function(layers = NULL, name = NULL) {
 #'   weights (1D). If the model has multiple outputs, you can use a different 
 #'   `sample_weight_mode` on each output by passing a list of modes.
 #'   
+#' @seealso [fit], [evaluate], [predict]
+#'   
 #' @export
 compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
                     sample_weight_mode = NULL) {
@@ -62,7 +64,7 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
 }
 
 
-#' Train a model
+#' Train a Keras model
 #' 
 #' Trains the model for a fixed number of epochs (iterations on a dataset).
 #'
@@ -100,7 +102,7 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
 #' @param initial_epoch epoch at which to start training (useful for resuming a
 #'   previous training run).
 #' 
-#' @return Training history 
+#' @seealso [compile], [evaluate], [predict]
 #' 
 #' @export
 fit <- function(model, x, y, batch_size=32, nb_epoch=10, verbose=1, callbacks=NULL,
@@ -137,12 +139,14 @@ fit <- function(model, x, y, batch_size=32, nb_epoch=10, verbose=1, callbacks=NU
 }
 
 
-#' Evaluate a model
+#' Evaluate a Keras model
 
 #' @inheritParams fit
 #'   
 #' @return Scalar test loss (if the model has a single output and no metrics) or
 #'   list of scalars (if the model has multiple outputs and/or metrics).
+#'   
+#' @seealso [compile], [fit], [predict]
 #'   
 #' @export
 evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NULL) {
@@ -155,7 +159,7 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
   )
 }
 
-#' Save a model into a single HDF5 file
+#' Save a Keras model into a single HDF5 file
 #' 
 #' @param model Model to save
 #' @param filepath File path to save to
@@ -174,7 +178,7 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
 #' `load_model` is a compiled model ready to be used (unless the saved model
 #' was never compiled in the first place).
 #' 
-#' @seealso [load_model()]
+#' @seealso [load_model]
 #' 
 #' @export
 save_model <- function(model, filepath, overwrite = TRUE) {
@@ -182,13 +186,13 @@ save_model <- function(model, filepath, overwrite = TRUE) {
 }
 
 
-#' Load a model from an HDF5 file
+#' Load a Keras model from an HDF5 file
 #' 
 #' @param filepath File path to load file from
 #' @param custom_objects Napping class names (or function names) of custom 
 #'   (non-Keras) objects to class/functions
 #'   
-#' @seealso [save_model()]   
+#' @seealso [save_model]   
 #'   
 #' @export
 load_model <- function(filepath, custom_objects = NULL) {
@@ -211,6 +215,8 @@ load_model <- function(filepath, custom_objects = NULL) {
 #' @return vector, matrix, or array of predictions
 #' 
 #' @name predict
+#' 
+#' @seealso [compile], [fit], [evaluate]   
 #' 
 #' @importFrom stats predict
 #' @export

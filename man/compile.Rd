@@ -2,7 +2,7 @@
 % Please edit documentation in R/models.R
 \name{compile}
 \alias{compile}
-\title{Configure a model for training}
+\title{Configure a Keras model for training}
 \usage{
 compile(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
   sample_weight_mode = NULL)
@@ -29,5 +29,8 @@ weights (1D). If the model has multiple outputs, you can use a different
 \code{sample_weight_mode} on each output by passing a list of modes.}
 }
 \description{
-Configure a model for training
+Configure a Keras model for training
+}
+\seealso{
+\link{fit}, \link{evaluate}, \link{predict}
 }

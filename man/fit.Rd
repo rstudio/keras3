@@ -2,7 +2,7 @@
 % Please edit documentation in R/models.R
 \name{fit}
 \alias{fit}
-\title{Train a model}
+\title{Train a Keras model}
 \usage{
 fit(model, x, y, batch_size = 32, nb_epoch = 10, verbose = 1,
   callbacks = NULL, validation_split = 0, validation_data = NULL,
@@ -56,9 +56,9 @@ sample_weight_mode="temporal" in \code{\link[=compile]{compile()}}.}
 \item{initial_epoch}{epoch at which to start training (useful for resuming a
 previous training run).}
 }
-\value{
-Training history
-}
 \description{
 Trains the model for a fixed number of epochs (iterations on a dataset).
+}
+\seealso{
+\link{compile}, \link{evaluate}, \link{predict}
 }
