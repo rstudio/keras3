@@ -22,7 +22,7 @@ model <- model_sequential() %>%
   )
 
 # train the model 
-fit(model, data, labels)
+model <- fit(model, data, labels)
 
 # make some predictions
 predict(model, input)

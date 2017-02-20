@@ -108,6 +108,13 @@ fit <- function(model, x, y, batch_size=32, nb_epoch=10, verbose=1, callbacks=NU
                 validation_split=0.0, validation_data=NULL, shuffle=TRUE,
                 class_weight=NULL, sample_weight=NULL, initial_epoch=0) {
   
+  # clone the model if we can
+  if (have_h5py()) {
+    tmp <- tempfile(fileext = ".hdf5")
+    write_model(model, tmp)
+    model <- read_model(tmp)
+  }
+  
   # convert class weights to python dict
   if (!is.null(class_weight)) {
     if (is.list(class_weight))
@@ -132,8 +139,9 @@ fit <- function(model, x, y, batch_size=32, nb_epoch=10, verbose=1, callbacks=NU
     initial_epoch = as.integer(initial_epoch)
   )
   
-  # return the training history
-  invisible(history)
+  # return the history as an attribute
+  attr(model, "history") <- history
+  model
 }
 
 
@@ -255,6 +263,10 @@ clone_model_if_possible <- function(model) {
     model_sequential(name = model$name)
   else
     model
+}
+
+have_h5py <- function() {
+  tryCatch({ import("h5py"); TRUE; }, error = function(e) FALSE)
 }
 
 
