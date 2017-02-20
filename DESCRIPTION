@@ -3,7 +3,10 @@ Type: Package
 Title: What the Package Does in One 'Title Case' Line
 Version: 1.0
 Date: 2017-02-01
-Author: Your Name
+Authors@R: c(
+  person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
+  person(family = "RStudio", role = "cph")
+)
 Maintainer: Your Name <your@email.com>
 Description: One paragraph description of what the package does as one or more
     full sentences.
