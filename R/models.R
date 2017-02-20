@@ -183,7 +183,6 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
 #' @export
 write_model <- function(model, filepath, overwrite = TRUE) {
   keras$models$save_model(model = model, filepath = filepath, overwrite = overwrite)
-  model
 }
 
 
