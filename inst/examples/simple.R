@@ -9,19 +9,17 @@ labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10
 # genereate dummy input data
 input <- matrix(rexp(10*784), nrow = 10, ncol = 784)
 
-# define the model
+# define and compile the model
 model <- model_sequential() %>% 
   layer_dense(32, input_dim = 784) %>% 
   layer_activation('relu') %>% 
   layer_dense(10) %>% 
-  layer_activation('softmax')
-
-# compile the model
-compile(model, 
-  loss='binary_crossentropy', 
-  optimizer = optimizer_sgd(),
-  metrics='accuracy'
-)
+  layer_activation('softmax') %>% 
+  compile( 
+    loss='binary_crossentropy', 
+    optimizer = optimizer_sgd(),
+    metrics='accuracy'
+  )
 
 # train the model 
 fit(model, data, labels)
