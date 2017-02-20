@@ -178,10 +178,10 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
 #' `load_model` is a compiled model ready to be used (unless the saved model
 #' was never compiled in the first place).
 #' 
-#' @seealso [load_hd5]
+#' @seealso [read_model]
 #' 
 #' @export
-save_hdf5 <- function(model, filepath, overwrite = TRUE) {
+write_model <- function(model, filepath, overwrite = TRUE) {
   keras$models$save_model(model = model, filepath = filepath, overwrite = overwrite)
   model
 }
@@ -193,10 +193,10 @@ save_hdf5 <- function(model, filepath, overwrite = TRUE) {
 #' @param custom_objects Napping class names (or function names) of custom 
 #'   (non-Keras) objects to class/functions
 #'   
-#' @seealso [save_hdf5]   
+#' @seealso [write_model]   
 #'   
 #' @export
-load_hdf5 <- function(filepath, custom_objects = NULL) {
+read_model <- function(filepath, custom_objects = NULL) {
   keras$models$load_model(filepath = filepath, custom_objects = custom_objects)
 }
 
