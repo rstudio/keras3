@@ -1,6 +1,4 @@
 
-
-
 #' Keras Model
 #' 
 #' A model is a directed acyclic graph of layers.
@@ -60,7 +58,6 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
     loss_weights = loss_weights,
     sample_weight_mode = sample_weight_mode
   )
-  model
 }
 
 
@@ -133,9 +130,8 @@ fit <- function(model, x, y, batch_size=32, nb_epoch=10, verbose=1, callbacks=NU
     initial_epoch = as.integer(initial_epoch)
   )
   
-  # return the training history as an attribute
-  attr(model, "history") <- history
-  model
+  # return the training history
+  invisible(history)
 }
 
 
