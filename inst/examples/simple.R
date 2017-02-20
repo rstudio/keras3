@@ -14,7 +14,7 @@ model <- model_sequential() %>%
   layer_dense(32, input_dim = 784) %>% 
   layer_activation('relu') %>% 
   layer_dense(10) %>% 
-  layer_activation('softmax') %>% 
+  layer_activation('softmax')
 
 # compile the model
 compile(model, 
