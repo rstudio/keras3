@@ -4,17 +4,18 @@
 \alias{layer_dense}
 \title{Add a densely-connected NN layer to an output}
 \usage{
-layer_dense(x, output_dim, init = "glorot_uniform", activation = NULL,
-  weights = NULL, W_regularizer = NULL, b_regularizer = NULL,
-  activity_regularizer = NULL, W_constraint = NULL, b_constraint = NULL,
-  bias = TRUE, input_dim = NULL)
+layer_dense(x, units, kernel_initializer = "glorot_uniform",
+  activation = NULL, weights = NULL, kernel_regularizer = NULL,
+  bias_regularizer = NULL, activity_regularizer = NULL,
+  kernel_constraint = NULL, bias_constraint = NULL, use_bias = TRUE,
+  input_dim = NULL)
 }
 \arguments{
 \item{x}{Model or layer}
 
-\item{output_dim}{Output dimension}
+\item{units}{Output dimension}
 
-\item{init}{Name of initialization function for the weights of the layer or
+\item{kernel_initializer}{Name of initialization function for the weights of the layer or
 alternatively, function to use for weights initialization. This parameter
 is only relevant if you don't pass a \code{weights} argument.}
 
@@ -25,18 +26,18 @@ applied (ie. "linear" activation: a(x) = x).}
 \item{weights}{List of vectors, matrixes, or arrays to set as initial
 weights. The list should have 2 elements, of shape \code{(input_dim, output_dim)} and (output_dim,) for weights and biases respectively.}
 
-\item{W_regularizer}{Weight regularizer applied to the main weights matrix.}
+\item{kernel_regularizer}{Weight regularizer applied to the main weights matrix.}
 
-\item{b_regularizer}{Weight regularizer applied to the bias.}
+\item{bias_regularizer}{Weight regularizer applied to the bias.}
 
 \item{activity_regularizer}{Activity regularizer applied to the network
 output.}
 
-\item{W_constraint}{Constraint applied to the main weights matrix.}
+\item{kernel_constraint}{Constraint applied to the main weights matrix.}
 
-\item{b_constraint}{Constraint applied to the bias.}
+\item{bias_constraint}{Constraint applied to the bias.}
 
-\item{bias}{Whether to include a bias (i.e. make the layer affine rather than
+\item{use_bias}{Whether to include a bias (i.e. make the layer affine rather than
 linear).}
 
 \item{input_dim}{Dimensionality of the input (integer). This argument (or

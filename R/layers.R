@@ -37,8 +37,8 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
 #' Add a densely-connected NN layer to an output
 #' 
 #' @param x Model or layer
-#' @param output_dim Output dimension
-#' @param init Name of initialization function for the weights of the layer or 
+#' @param units Output dimension
+#' @param kernel_initializer Name of initialization function for the weights of the layer or 
 #'   alternatively, function to use for weights initialization. This parameter 
 #'   is only relevant if you don't pass a `weights` argument.
 #' @param activation Name of activation function to use, or alternatively, 
@@ -47,13 +47,13 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
 #' @param weights List of vectors, matrixes, or arrays to set as initial 
 #'   weights. The list should have 2 elements, of shape `(input_dim, 
 #'   output_dim)` and (output_dim,) for weights and biases respectively.
-#' @param W_regularizer Weight regularizer applied to the main weights matrix.
-#' @param b_regularizer Weight regularizer applied to the bias.
+#' @param kernel_regularizer Weight regularizer applied to the main weights matrix.
+#' @param bias_regularizer Weight regularizer applied to the bias.
 #' @param activity_regularizer Activity regularizer applied to the network
 #'   output.
-#' @param W_constraint Constraint applied to the main weights matrix.
-#' @param b_constraint Constraint applied to the bias.
-#' @param bias Whether to include a bias (i.e. make the layer affine rather than
+#' @param kernel_constraint Constraint applied to the main weights matrix.
+#' @param bias_constraint Constraint applied to the bias.
+#' @param use_bias Whether to include a bias (i.e. make the layer affine rather than
 #'   linear).
 #' @param input_dim Dimensionality of the input (integer). This argument (or
 #'   alternatively, the keyword argument `input_shape`) is required when using
@@ -70,20 +70,20 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
 #'   would have shape `(nb_samples, output_dim)`.
 #'   
 #' @export
-layer_dense <- function(x, output_dim, init = 'glorot_uniform', activation = NULL, weights = NULL, 
-                           W_regularizer = NULL, b_regularizer = NULL, activity_regularizer = NULL, 
-                           W_constraint = NULL, b_constraint = NULL, bias = TRUE, input_dim = NULL) {
+layer_dense <- function(x, units, kernel_initializer = 'glorot_uniform', activation = NULL, weights = NULL, 
+                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
+                           kernel_constraint = NULL, bias_constraint = NULL, use_bias = TRUE, input_dim = NULL) {
   layer <- keras$layers$Dense(
-    output_dim = as.integer(output_dim),
-    init = init,
+    units = as.integer(units),
+    kernel_initializer = kernel_initializer,
     activation = activation,
     weights = weights,
-    W_regularizer = W_regularizer,
-    b_regularizer = b_regularizer,
+    kernel_regularizer = kernel_regularizer,
+    bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
-    W_constraint = W_constraint,
-    b_constraint = b_constraint, 
-    bias = bias,
+    kernel_constraint = kernel_constraint,
+    bias_constraint = bias_constraint, 
+    use_bias = use_bias,
     input_dim = as.integer(input_dim)
   )
   compose_layer(x, layer)
