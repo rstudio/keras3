@@ -7,4 +7,6 @@ src/*.so
 src/*.dll
 .Renviron
 *.hdf5
+resources/
+
 
