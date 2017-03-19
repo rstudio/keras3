@@ -151,7 +151,7 @@ layer_reshape <- function(x, target_shape, input_shape = NULL) {
 layer_permute <- function(x, dims, input_shape = NULL) {
   
   # build args
-  args <- list(dims = dims)
+  args <- list(dims = list(as.integer(dims)))
   if (!is.null(input_shape))
     args$input_shape <- as.integer(input_shape)
   

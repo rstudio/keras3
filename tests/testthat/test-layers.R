@@ -31,4 +31,13 @@ test_call("layer_reshape", {
     layer_reshape(target_shape = c(2,16))
 })
  
+test_call("layer_permute", {
+  model_sequential() %>% 
+    layer_dense(32, input_dim = 784) %>% 
+    layer_permute(dims = 1)
+})
+
+
+
+
 
