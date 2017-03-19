@@ -125,7 +125,7 @@ layer_activation <- function(x, activation, input_shape = NULL) {
 layer_reshape <- function(x, target_shape, input_shape = NULL) {
   
   # build args
-  args <- list(target_shape = target_shape)
+  args <- list(target_shape = as.integer(target_shape))
   if (!is.null(input_shape))
     args$input_shape <- as.integer(input_shape)
   
