@@ -12,6 +12,7 @@ Description: One paragraph description of what the package does as one or more
 License: GPL (>= 2)
 Imports:
     reticulate, magrittr, methods
-Remotes: rstudio/reticulate
+Suggets: 
+    testtthat
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1

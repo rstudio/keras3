@@ -8,5 +8,4 @@ src/*.dll
 .Renviron
 *.hdf5
 resources/
-
-
+.DS_Store
