@@ -9,8 +9,8 @@ layer_reshape(x, target_shape, input_shape = NULL)
 \arguments{
 \item{x}{Model or layer}
 
-\item{target_shape}{List of integers, does not include the
-samples dimension (batch size).}
+\item{target_shape}{List of integers, does not include the samples dimension
+(batch size).}
 
 \item{input_shape}{Input shape (list of integers, does not include the
 samples axis) which is required when using this layer as the first layer in
@@ -19,6 +19,12 @@ a model.}
 \description{
 Reshapes an output to a certain shape.
 }
-\note{
-The output shape will be \code{(batch_size,) + target_shape}.
+\section{Input and Output Shapes}{
+
+
+Input shape: Arbitrary, although all dimensions in the input shaped must be
+fixed.
+
+Output shape: \code{(batch_size,) + target_shape}.
 }
+

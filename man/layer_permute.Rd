@@ -23,3 +23,12 @@ Permute the dimensions of an input according to a given pattern
 \note{
 Useful for e.g. connecting RNNs and convnets together.
 }
+\section{Input and Output Shapes}{
+
+
+Input shape: Arbitrary
+
+Output shape: Same as the input shape, but with the dimensions re-ordered
+according to the specified pattern.
+}
+

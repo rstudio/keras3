@@ -37,6 +37,13 @@ test_call("layer_permute", {
     layer_permute(dims = 1)
 })
 
+test_call("layer_flatten", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = shape(784)) %>% 
+    layer_reshape(target_shape = shape(2,16)) %>% 
+    layer_flatten()
+})
+
 
 
 
