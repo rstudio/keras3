@@ -37,8 +37,9 @@ matrix.}
 
 \item{bias_constraint}{Constraint function applied to the bias vector.}
 
-\item{input_shape}{Dimensionality of the input (integer). This argument is
-required when using this layer as the first layer in a model.}
+\item{input_shape}{Dimensionality of the input (integer) not including the
+samples axis. This argument is required when using this layer as the first
+layer in a model.}
 }
 \description{
 Implements the operation: \code{output = activation(dot(input, kernel) + bias)}

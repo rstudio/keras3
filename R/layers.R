@@ -60,11 +60,12 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
 #' @param bias_regularizer Regularizer function applied to the bias vector.
 #' @param activity_regularizer Regularizer function applied to the output of the
 #'   layer (its "activation")..
-#' @param kernel_constraint Constraint function applied to the `kernel` weights
+#' @param kernel_constraint Constraint function applied to the `kernel` weights 
 #'   matrix.
 #' @param bias_constraint  Constraint function applied to the bias vector.
-#' @param input_shape Dimensionality of the input (integer). This argument is
-#'   required when using this layer as the first layer in a model.
+#' @param input_shape Dimensionality of the input (integer) not including the
+#'   samples axis. This argument is required when using this layer as the first
+#'   layer in a model.
 #'   
 #'   
 #' @section Input and Output Shapes:
@@ -112,7 +113,7 @@ layer_activation <- function(x, activation, input_shape = NULL) {
   # build args
   args <- list(activation = activation)
   if (!is.null(input_shape))
-    args$input_shape <- as.integer(input_shape)
+    args$input_shape <- shape(input_shape)
   
   # call function
   layer <- do.call(keras$layers$Activation, args)
