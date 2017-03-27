@@ -19,7 +19,7 @@ regularizer_l2 <- function(l = 0.01) {
 
 #' @rdname l1l2-regularizers
 #' @export
-regularizer_l1l2 <- function(l1 = 0.01, l2 = 0.01) {
+regularizer_l1_l2 <- function(l1 = 0.01, l2 = 0.01) {
   keras$regularizers$l1_l2(l1 = l1, l2 = l2)
 }
 

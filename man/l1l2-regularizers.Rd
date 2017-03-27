@@ -4,14 +4,14 @@
 \alias{l1l2-regularizers}
 \alias{regularizer_l1}
 \alias{regularizer_l2}
-\alias{regularizer_l1l2}
+\alias{regularizer_l1_l2}
 \title{Regularizer for L1 and L2 regularization}
 \usage{
 regularizer_l1(l = 0.01)
 
 regularizer_l2(l = 0.01)
 
-regularizer_l1l2(l1 = 0.01, l2 = 0.01)
+regularizer_l1_l2(l1 = 0.01, l2 = 0.01)
 }
 \arguments{
 \item{l}{Regularization factor.}
