@@ -15,7 +15,7 @@ keras <- NULL
 .onLoad <- function(libname, pkgname) {
   
   # delay load keras
-  keras <<- import("keras", delay_load = TRUE)
+  keras <<- import("tensorflow.contrib.keras", delay_load = TRUE)
   
 }
 

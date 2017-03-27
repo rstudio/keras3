@@ -191,7 +191,7 @@ layer_flatten <- function(x, input_shape = NULL) {
 compose_layer <- function(x, layer) {
   
   # if a sequential is passed then add it to the model
-  if (inherits(x, "keras.models.Sequential")) {
+  if (inherits(x, "tensorflow.contrib.keras.python.keras.models.Sequential")) {
     
     x <- clone_model_if_possible(x)
     x$add(layer)
@@ -199,7 +199,7 @@ compose_layer <- function(x, layer) {
     
   # if a layer is passed then wrap the layer
   } else if (inherits(x, "tensorflow.python.framework.ops.Tensor") ||
-             inherits(x, "keras.engine.topology.Layer")) {
+             inherits(x, "tensorflow.contrib.keras.python.keras.engine.topology.Layer")) {
     
     py_call(layer, x)
     

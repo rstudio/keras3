@@ -4,7 +4,7 @@
 \alias{fit}
 \title{Train a Keras model}
 \usage{
-fit(model, x, y, batch_size = 32, nb_epoch = 10, verbose = 1,
+fit(model, x, y, batch_size = 32, epochs = 10, verbose = 1,
   callbacks = NULL, validation_split = 0, validation_data = NULL,
   shuffle = TRUE, class_weight = NULL, sample_weight = NULL,
   initial_epoch = 0)
@@ -22,7 +22,7 @@ a list mapping output names to data.}
 
 \item{batch_size}{Number of samples per gradient update.}
 
-\item{nb_epoch}{Number of times to iterate over the training data arrays.}
+\item{epochs}{Number of times to iterate over the training data arrays.}
 
 \item{verbose}{Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
 epoch).}

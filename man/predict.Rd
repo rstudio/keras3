@@ -2,11 +2,12 @@
 % Please edit documentation in R/models.R
 \name{predict}
 \alias{predict}
-\alias{predict.keras.engine.training.Model}
+\alias{predict.tensorflow.contrib.keras.python.keras.engine.training.Model}
 \title{Predict Method for Keras Models}
 \usage{
-\method{predict}{keras.engine.training.Model}(object, x, batch_size = 32,
-  verbose = 0, ...)
+
+  \method{predict}{tensorflow.contrib.keras.python.keras.engine.training.Model}(object,
+  x, batch_size = 32, verbose = 0, ...)
 }
 \arguments{
 \item{object}{Keras model}

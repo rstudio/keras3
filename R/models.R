@@ -75,7 +75,7 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
 #'   multiple outputs). If all outputs in the model are named, you can also pass
 #'   a list mapping output names to data.
 #' @param batch_size Number of samples per gradient update.
-#' @param nb_epoch Number of times to iterate over the training data arrays.
+#' @param epochs Number of times to iterate over the training data arrays.
 #' @param verbose  Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
 #'   epoch).
 #' @param callbacks List of callbacks to be called during training.
@@ -104,7 +104,7 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
 #' @seealso [compile], [evaluate], [predict]
 #' 
 #' @export
-fit <- function(model, x, y, batch_size=32, nb_epoch=10, verbose=1, callbacks=NULL,
+fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL,
                 validation_split=0.0, validation_data=NULL, shuffle=TRUE,
                 class_weight=NULL, sample_weight=NULL, initial_epoch=0) {
   
@@ -128,7 +128,7 @@ fit <- function(model, x, y, batch_size=32, nb_epoch=10, verbose=1, callbacks=NU
     x = as.array(x),
     y = as.array(y),
     batch_size = as.integer(batch_size),
-    nb_epoch = as.integer(nb_epoch),
+    epochs = as.integer(epochs),
     verbose = as.integer(verbose),
     callbacks = callbacks,
     validation_split = validation_split,
@@ -226,7 +226,7 @@ read_model <- function(filepath, custom_objects = NULL) {
 #' 
 #' @importFrom stats predict
 #' @export
-predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0, ...) {
+predict.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0, ...) {
   
   # call predict
   model <- object
@@ -238,7 +238,7 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbos
 }
 
 #' @export
-summary.keras.engine.training.Model <- function(object, ...) {
+summary.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object, ...) {
   if (py_is_null_xptr(object))
     cat("<pointer: 0x0>\n")
   else
@@ -247,7 +247,7 @@ summary.keras.engine.training.Model <- function(object, ...) {
 
 #' @importFrom reticulate py_str
 #' @export
-py_str.keras.engine.training.Model <- function(object, ...) {
+py_str.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object, ...) {
   cat("Model\n", py_capture_output(object$summary(), type = "stdout"), sep="")
 }
 
@@ -259,7 +259,7 @@ py_str.keras.engine.training.Model <- function(object, ...) {
 clone_model_if_possible <- function(model) {
   if (length(model$layers) > 0)
     keras$models$model_from_json(model$to_json())
-  else if (inherits(model, "keras.models.Sequential"))
+  else if (inherits(model, "tensorflow.contrib.keras.python.keras.models.Sequential"))
     model_sequential(name = model$name)
   else
     model
