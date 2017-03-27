@@ -3,3 +3,4 @@
 ^man-roxygen/
 ^resources/
 ^.*\.hdf5$
+^README.R?md$

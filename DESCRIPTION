@@ -14,8 +14,8 @@ Description: Interface to 'Keras', a high-level neural networks API which
 License: GPL (>= 2)
 Imports:
     reticulate (>= 0.7), tensorflow (>= 0.7), magrittr, methods
-Suggets: 
-    testtthat
+Suggests: 
+    testthat
 SystemRequirements: TensorFlow >= 1.0.1 (https://www.tensorflow.org/)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1

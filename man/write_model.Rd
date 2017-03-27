@@ -27,8 +27,8 @@ This allows you to save the entirety of the state of a model
 in a single file.
 }
 
-Saved models can be reinstantiated via \code{\link[=load_model]{load_model()}}. The model returned by
-\code{load_model} is a compiled model ready to be used (unless the saved model
+Saved models can be reinstantiated via \code{\link[=read_model]{read_model()}}. The model returned by
+\code{read_model} is a compiled model ready to be used (unless the saved model
 was never compiled in the first place).
 }
 \seealso{

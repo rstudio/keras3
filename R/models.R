@@ -180,8 +180,8 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
 #' This allows you to save the entirety of the state of a model
 #' in a single file.
 #' 
-#' Saved models can be reinstantiated via [load_model()]. The model returned by
-#' `load_model` is a compiled model ready to be used (unless the saved model
+#' Saved models can be reinstantiated via [read_model()]. The model returned by
+#' `read_model` is a compiled model ready to be used (unless the saved model
 #' was never compiled in the first place).
 #' 
 #' @seealso [read_model]
