@@ -10,6 +10,8 @@
 \alias{use_condaenv}
 \alias{reexports}
 \alias{py_config}
+\alias{reexports}
+\alias{shape}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -18,5 +20,7 @@ below to see their documentation.
 
 \describe{
   \item{reticulate}{\code{\link[reticulate]{use_python}}, \code{\link[reticulate]{use_virtualenv}}, \code{\link[reticulate]{use_condaenv}}, \code{\link[reticulate]{py_config}}}
+
+  \item{tensorflow}{\code{\link[tensorflow]{shape}}}
 }}
 

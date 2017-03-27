@@ -7,6 +7,7 @@
 #' @docType package
 #' @name keras
 #' @import reticulate
+#' @import tensorflow
 NULL
 
 # Main Keras module

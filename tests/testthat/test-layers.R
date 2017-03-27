@@ -12,7 +12,7 @@ test_call <- function(layer_name, expr) {
 }
 
 test_call("layer_input", {
-  layer_input(shape = c(32))
+  layer_input(shape = shape(32))
 })
 
 test_call("layer_dense", {
