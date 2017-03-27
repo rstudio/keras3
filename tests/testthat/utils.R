@@ -9,7 +9,6 @@ skip_if_no_keras <- function() {
 test_call_succeeds <- function(call_name, expr) {
   test_that(paste(call_name, "call succeeds"), {
     skip_if_no_keras()
-    force(expr)
-    expect_equal(TRUE, TRUE)
+    expect_error(force(expr), NA)
   })
 }
