@@ -3,7 +3,7 @@
 #' Constrains the weights incident to each hidden unit to have a norm less than
 #' or equal to a desired value.
 #' 
-#' @param m The maximum norm for the incoming weights.
+#' @param max_value The maximum norm for the incoming weights.
 #' @param axis The axis along which to calculate weight norms. For instance, in
 #'   a dense layer the weight matrix has shape `input_dim, output_dim`, 
 #'   set `axis` to `0` to constrain each weight vector of length `input_dim,`.
@@ -15,8 +15,8 @@
 #' @seealso [Dropout: A Simple Way to Prevent Neural Networks from Overfitting Srivastava, Hinton, et al. 2014](http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf)
 #'   
 #' @export
-constraint_maxnorm <- function(m = 2, axis = 0) {
-  keras$constraints$MaxNorm(m = as.integer(m), axis = as.integer(axis))
+constraint_maxnorm <- function(max_value = 2, axis = 0) {
+  keras$constraints$MaxNorm(max_value = as.integer(max_value), axis = as.integer(axis))
 }
 
 
@@ -47,8 +47,8 @@ constraint_unitnorm <- function(axis = 0) {
 #' a lower bound and an upper bound.
 #' 
 #' @inheritParams constraint_maxnorm
-#' @param low The minimum norm for the incoming weights.
-#' @param high The maximum norm for the incoming weights.
+#' @param min_value The minimum norm for the incoming weights.
+#' @param max_value The maximum norm for the incoming weights.
 #' @param rate The rate for enforcing the constraint: weights will be rescaled to
 #'   yield (1 - rate) * norm + rate * norm.clip(low, high). Effectively, this
 #'   means that rate=1.0 stands for strict enforcement of the constraint, while
@@ -56,9 +56,9 @@ constraint_unitnorm <- function(axis = 0) {
 #'   towards a value inside the desired interval.
 #'   
 #' @export
-constraint_minmaxnorm <- function(low = 0.0, high = 1.0, rate = 1.0, axis = 0) {
+constraint_minmaxnorm <- function(min_value = 0.0, max_value = 1.0, rate = 1.0, axis = 0) {
   if (py_has_attr(keras$constraints, "MinMaxNorm"))
-    keras$constraints$MinMaxNorm(low = low, high = high, rate = rate, axis = as.integer(axis))
+    keras$constraints$MinMaxNorm(min_value = min_value, max_value = max_value, rate = rate, axis = as.integer(axis))
   else
     stop("constraint_minmaxnorm not supported in this version of TensorFlow")
 }

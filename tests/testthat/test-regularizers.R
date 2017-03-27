@@ -10,7 +10,6 @@ test_regularizer <- function(name) {
                   kernel_regularizer = regularizer_fn(),
                   activity_regularizer = regularizer_fn())
   }) 
- 
 }
 
 test_regularizer("regularizer_l1")
