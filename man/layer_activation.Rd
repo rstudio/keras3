@@ -9,9 +9,8 @@ layer_activation(x, activation, input_shape = NULL)
 \arguments{
 \item{x}{Model or layer}
 
-\item{activation}{Name of activation function to use, or alternatively,
-elementwise function. If you don't specify anything, no activation is
-applied (ie. "linear" activation: a(x) = x).}
+\item{activation}{Name of activation function to use. If you don't specify
+anything, no activation is applied (ie. "linear" activation: a(x) = x).}
 
 \item{input_shape}{Input shape (list of integers, does not include the
 samples axis) which is required when using this layer as the first layer in

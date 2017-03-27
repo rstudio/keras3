@@ -41,55 +41,59 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
 
 #' Add a densely-connected NN layer to an output
 #' 
+#' Implements the operation: `output = activation(dot(input, kernel) + bias)` 
+#' where `activation` is the element-wise activation function passed as the 
+#' `activation` argument, `kernel` is a weights matrix created by the layer, and
+#' `bias` is a bias vector created by the layer (only applicable if `use_bias` 
+#' is `TRUE`). Note: if the input to the layer has a rank greater than 2, then 
+#' it is flattened prior to the initial dot product with `kernel`.
+#' 
 #' @param x Model or layer
-#' @param units Output dimension
-#' @param kernel_initializer Name of initialization function for the weights of the layer or 
-#'   alternatively, function to use for weights initialization. This parameter 
-#'   is only relevant if you don't pass a `weights` argument.
-#' @param activation Name of activation function to use, or alternatively, 
-#'   elementwise function. If you don't specify anything, no activation is 
-#'   applied (ie. "linear" activation: a(x) = x).
-#' @param weights List of vectors, matrixes, or arrays to set as initial 
-#'   weights. The list should have 2 elements, of shape `(input_dim, 
-#'   output_dim)` and (output_dim,) for weights and biases respectively.
-#' @param kernel_regularizer Weight regularizer applied to the main weights matrix.
-#' @param bias_regularizer Weight regularizer applied to the bias.
-#' @param activity_regularizer Activity regularizer applied to the network
-#'   output.
-#' @param kernel_constraint Constraint applied to the main weights matrix.
-#' @param bias_constraint Constraint applied to the bias.
-#' @param use_bias Whether to include a bias (i.e. make the layer affine rather than
-#'   linear).
-#' @param input_dim Dimensionality of the input (integer). This argument (or
-#'   alternatively, the keyword argument `input_shape`) is required when using
-#'   this layer as the first layer in a model.
+#' @param units Positive integer, dimensionality of the output space.
+#' @param activation Name of activation function to use. If you don't specify 
+#'   anything, no activation is applied (ie. "linear" activation: a(x) = x).
+#' @param use_bias Whether the layer uses a bias vector.
+#' @param kernel_initializer Initializer for the `kernel` weights matrix.
+#' @param bias_initializer Initializer for the bias vector.
+#' @param kernel_regularizer Regularizer function applied to the `kernel` 
+#'   weights matrix.
+#' @param bias_regularizer Regularizer function applied to the bias vector.
+#' @param activity_regularizer Regularizer function applied to the output of the
+#'   layer (its "activation")..
+#' @param kernel_constraint Constraint function applied to the `kernel` weights
+#'   matrix.
+#' @param bias_constraint  Constraint function applied to the bias vector.
+#' @param input_shape Dimensionality of the input (integer). This argument is
+#'   required when using this layer as the first layer in a model.
 #'   
 #'   
 #' @section Input and Output Shapes:
 #'   
-#'   Input shape: nD tensor with shape: `(nb_samples, ..., input_dim)`. The most
-#'   common situation would be a 2D input with shape `(nb_samples, input_dim)`.
+#'   Input shape: nD tensor with shape: `(batch_size, ..., input_dim)`. The most
+#'   common situation would be a 2D input with shape `(batch_size, input_dim)`.
 #'   
-#'   Output shape: nD tensor with shape: `(nb_samples, ..., output_dim)`. For 
-#'   instance, for a 2D input with shape `(nb_samples, input_dim)`, the output 
-#'   would have shape `(nb_samples, output_dim)`.
+#'   Output shape: nD tensor with shape: `(batch_size, ..., units)`. For 
+#'   instance, for a 2D input with shape `(batch_size, input_dim)`, the output 
+#'   would have shape `(batch_size, unit)`.
 #'   
 #' @export
-layer_dense <- function(x, units, kernel_initializer = 'glorot_uniform', activation = NULL, weights = NULL, 
-                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                           kernel_constraint = NULL, bias_constraint = NULL, use_bias = TRUE, input_dim = NULL) {
+layer_dense <- function(x, units, activation = NULL, use_bias = TRUE, 
+                        kernel_initializer = 'glorot_uniform', bias_initializer = 'zeros', 
+                        kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
+                        kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL
+                        ) {
   layer <- keras$layers$Dense(
     units = as.integer(units),
-    kernel_initializer = kernel_initializer,
     activation = activation,
-    weights = weights,
+    use_bias = use_bias,
+    kernel_initializer = kernel_initializer,
+    bias_initializer = bias_initializer,
     kernel_regularizer = kernel_regularizer,
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
     bias_constraint = bias_constraint, 
-    use_bias = use_bias,
-    input_dim = as.integer(input_dim)
+    input_shape = shape(input_shape)
   )
   compose_layer(x, layer)
 }

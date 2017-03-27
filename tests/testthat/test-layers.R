@@ -16,24 +16,24 @@ test_call("layer_input", {
 })
 
 test_call("layer_dense", {
-  layer_dense(model_sequential(), 32, input_dim = 784)
+  layer_dense(model_sequential(), 32, input_shape = shape(784))
 })
 
 test_call("layer_activation", {
   model_sequential() %>% 
-    layer_dense(32, input_dim = 784) %>% 
+    layer_dense(32, input_shape = shape(784)) %>% 
     layer_activation('relu')
 })
 
 test_call("layer_reshape", {
   model_sequential() %>% 
-    layer_dense(32, input_dim = 784) %>% 
-    layer_reshape(target_shape = c(2,16))
+    layer_dense(32, input_shape = shape(784)) %>% 
+    layer_reshape(target_shape = shape(2,16))
 })
  
 test_call("layer_permute", {
   model_sequential() %>% 
-    layer_dense(32, input_dim = 784) %>% 
+    layer_dense(32, input_shape = shape(784)) %>% 
     layer_permute(dims = 1)
 })
 
