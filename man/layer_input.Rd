@@ -9,12 +9,12 @@ layer_input(shape = NULL, batch_shape = NULL, name = NULL, dtype = NULL,
 }
 \arguments{
 \item{shape}{Shape, not including the batch size. For instance,
-\code{shape=shape(32)} indicates that the expected input will be batches
+\code{shape=c(32)} indicates that the expected input will be batches
 of 32-dimensional vectors.}
 
 \item{batch_shape}{Shapes, including the batch size. For instance,
-\code{batch_shape=shape(10, 32)} indicates that the expected input will be
-batches of 10 32-dimensional vectors. \code{batch_shape=shape(NULL, 32)}
+\code{batch_shape=c(10, 32)} indicates that the expected input will be
+batches of 10 32-dimensional vectors. \code{batch_shape=list(NULL, 32)}
 indicates batches of an arbitrary number of 32-dimensional vectors.}
 
 \item{name}{An optional name string for the layer. Should be unique in a
