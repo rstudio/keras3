@@ -8,13 +8,13 @@ optimizer_rmsprop(lr = 0.001, rho = 0.9, epsilon = 1e-08, decay = 0,
   clipnorm = NULL, clipvalue = NULL)
 }
 \arguments{
-\item{lr}{Learning rate.}
+\item{lr}{float >= 0. Learning rate.}
 
-\item{rho}{rho Decay factor.}
+\item{rho}{float >= 0. Decay factor.}
 
-\item{epsilon}{Fuzz factor.}
+\item{epsilon}{float >= 0. Fuzz factor.}
 
-\item{decay}{Learning rate decay over each update.}
+\item{decay}{float >= 0. Learning rate decay over each update.}
 
 \item{clipnorm}{Gradients will be clipped when their L2 norm exceeds this
 value.}

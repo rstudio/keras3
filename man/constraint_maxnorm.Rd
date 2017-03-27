@@ -4,10 +4,10 @@
 \alias{constraint_maxnorm}
 \title{MaxNorm weight constraint}
 \usage{
-constraint_maxnorm(m = 2, axis = 0)
+constraint_maxnorm(max_value = 2, axis = 0)
 }
 \arguments{
-\item{m}{The maximum norm for the incoming weights.}
+\item{max_value}{The maximum norm for the incoming weights.}
 
 \item{axis}{The axis along which to calculate weight norms. For instance, in
 a dense layer the weight matrix has shape \code{input_dim, output_dim},

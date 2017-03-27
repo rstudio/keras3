@@ -5,10 +5,10 @@
 #' Stochastic gradient descent optimizer with support for momentum, learning 
 #' rate decay, and Nesterov momentum.
 #' 
-#' @param lr Learning rate.
-#' @param momentum Parameter updates momentum.
-#' @param decay Learning rate decay over each update.
-#' @param nesterov Whether to apply Nesterov momentum.
+#' @param lr float >= 0. Learning rate.
+#' @param momentum float >= 0. Parameter updates momentum.
+#' @param decay float >= 0. Learning rate decay over each update.
+#' @param nesterov boolean. Whether to apply Nesterov momentum.
 #' @param clipnorm Gradients will be clipped when their L2 norm exceeds this
 #'   value.
 #' @param clipvalue Gradients will be clipped when their absolute value exceeds
@@ -24,16 +24,16 @@ optimizer_sgd <- function(lr = 0.01, momentum = 0.0, decay = 0.0, nesterov = FAL
     momentum = momentum,
     decay = decay,
     nesterov = nesterov,
-    clipnorm = normalize_clip(clipnorm),
-    clipvalue = normalize_clip(clipvalue)
+    clipnorm = clipnorm,
+    clipvalue = clipvalue
   )
 }
 
 #' RMSProp optimizer
 #' 
 #' @inheritParams optimizer_sgd
-#' @param rho rho Decay factor.
-#' @param epsilon Fuzz factor. 
+#' @param rho float >= 0. Decay factor.
+#' @param epsilon float >= 0. Fuzz factor. 
 #' 
 #' @note It is recommended to leave the parameters of this optimizer at their
 #' default values (except the learning rate, which can be freely tuned).
@@ -48,8 +48,8 @@ optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = 1e-08, decay = 0.
     rho = rho,
     epsilon = epsilon,
     decay = decay,
-    clipnorm = normalize_clip(clipnorm),
-    clipvalue = normalize_clip(clipvalue)
+    clipnorm = clipnorm,
+    clipvalue = clipvalue
   )
 }
 
@@ -72,8 +72,8 @@ optimizer_adagrad <- function(lr = 0.01, epsilon = 1e-08, decay = 0.0,
     lr = lr,
     epsilon = epsilon,
     decay = decay,
-    clipnorm = normalize_clip(clipnorm),
-    clipvalue = normalize_clip(clipvalue)
+    clipnorm = clipnorm,
+    clipvalue = clipvalue
   )
 }
 
@@ -103,17 +103,19 @@ optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = 1e-08, decay = 0.
 
 #' Adam optimizer
 #' 
-#' Adam optimizer as described in \href{https://arxiv.org/abs/1412.6980v8}{Adam
+#' Adam optimizer as described in \href{https://arxiv.org/abs/1412.6980v8}{Adam 
 #' - A Method for Stochastic Optimization}.
 #' 
 #' @inheritParams optimizer_rmsprop
-#' @param beta_1 The exponential decay rate for the 1st moment estimates.
-#' @param beta_2 The exponential decay rate for the 2nd moment estimates.
-#' 
+#' @param beta_1 The exponential decay rate for the 1st moment estimates. float,
+#'   0 < beta < 1. Generally close to 1.
+#' @param beta_2 The exponential decay rate for the 2nd moment estimates. float,
+#'   0 < beta < 1. Generally close to 1.
+#'   
 #' @note Default parameters follow those provided in the original paper.
-#' 
+#'   
 #' @seealso \code{\link{optimizer_adamax}}
-#' 
+#'   
 #' @export
 optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, decay = 0.0,
                            clipnorm = NULL, clipvalue = NULL) {

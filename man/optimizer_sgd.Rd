@@ -8,13 +8,13 @@ optimizer_sgd(lr = 0.01, momentum = 0, decay = 0, nesterov = FALSE,
   clipnorm = NULL, clipvalue = NULL)
 }
 \arguments{
-\item{lr}{Learning rate.}
+\item{lr}{float >= 0. Learning rate.}
 
-\item{momentum}{Parameter updates momentum.}
+\item{momentum}{float >= 0. Parameter updates momentum.}
 
-\item{decay}{Learning rate decay over each update.}
+\item{decay}{float >= 0. Learning rate decay over each update.}
 
-\item{nesterov}{Whether to apply Nesterov momentum.}
+\item{nesterov}{boolean. Whether to apply Nesterov momentum.}
 
 \item{clipnorm}{Gradients will be clipped when their L2 norm exceeds this
 value.}

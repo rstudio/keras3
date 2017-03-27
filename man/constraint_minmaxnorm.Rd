@@ -4,12 +4,12 @@
 \alias{constraint_minmaxnorm}
 \title{MinMaxNorm weight constraint}
 \usage{
-constraint_minmaxnorm(low = 0, high = 1, rate = 1, axis = 0)
+constraint_minmaxnorm(min_value = 0, max_value = 1, rate = 1, axis = 0)
 }
 \arguments{
-\item{low}{The minimum norm for the incoming weights.}
+\item{min_value}{The minimum norm for the incoming weights.}
 
-\item{high}{The maximum norm for the incoming weights.}
+\item{max_value}{The maximum norm for the incoming weights.}
 
 \item{rate}{The rate for enforcing the constraint: weights will be rescaled to
 yield (1 - rate) * norm + rate * norm.clip(low, high). Effectively, this
