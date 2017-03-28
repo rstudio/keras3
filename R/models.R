@@ -51,7 +51,6 @@ model_sequential <- function(layers = NULL, name = NULL) {
 #' @export
 compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
                     sample_weight_mode = NULL) {
-  model <- clone_model_if_possible(model)
   if (!is.null(metrics)) {
     if (is.character(metrics))
       metrics <- as.list(metrics)
@@ -113,13 +112,6 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
 fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL,
                 validation_split=0.0, validation_data=NULL, shuffle=TRUE,
                 class_weight=NULL, sample_weight=NULL, initial_epoch=0) {
-  
-  # clone the model if we can
-  if (have_h5py()) {
-    tmp <- tempfile(fileext = ".hdf5")
-    save_model(model, tmp)
-    model <- load_model(tmp)
-  }
   
   # convert class weights to python dict
   if (!is.null(class_weight)) {
@@ -259,20 +251,6 @@ summary.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
 #' @export
 py_str.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object, ...) {
   cat("Model\n", py_capture_output(object$summary(), type = "stdout"), sep="")
-}
-
-
-
-# helper function which attempts to clone a model (we can only clone models that
-# can save/read their config, which excludes models which have no layers --
-# this likely just a bug that will be resolved later)
-clone_model_if_possible <- function(model) {
-  if (length(model$layers) > 0)
-    keras$models$model_from_json(model$to_json())
-  else if (inherits(model, "tensorflow.contrib.keras.python.keras.models.Sequential"))
-    model_sequential(name = model$name)
-  else
-    model
 }
 
 have_h5py <- function() {
