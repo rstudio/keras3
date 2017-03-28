@@ -28,8 +28,8 @@ model <- fit(model, data, labels)
 predict(model, input)
 
 # save the model and load it back in
-write_model(model, "model.hdf5")
-model <- read_model("model.hdf5")
+save_model(model, "model.hdf5")
+model <- load_model("model.hdf5")
 
 
 

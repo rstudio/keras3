@@ -117,8 +117,8 @@ fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL
   # clone the model if we can
   if (have_h5py()) {
     tmp <- tempfile(fileext = ".hdf5")
-    write_model(model, tmp)
-    model <- read_model(tmp)
+    save_model(model, tmp)
+    model <- load_model(tmp)
   }
   
   # convert class weights to python dict
@@ -186,14 +186,16 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
 #' This allows you to save the entirety of the state of a model
 #' in a single file.
 #' 
-#' Saved models can be reinstantiated via [read_model()]. The model returned by
-#' `read_model` is a compiled model ready to be used (unless the saved model
+#' Saved models can be reinstantiated via [load_model()]. The model returned by
+#' `load_model` is a compiled model ready to be used (unless the saved model
 #' was never compiled in the first place).
 #' 
-#' @seealso [read_model]
+#' @seealso [load_model]
 #' 
 #' @export
-write_model <- function(model, filepath, overwrite = TRUE) {
+save_model <- function(model, filepath, overwrite = TRUE) {
+  if (!have_h5py())
+    stop("The h5py Python package is required to save and load models")
   keras$models$save_model(model = model, filepath = filepath, overwrite = overwrite)
 }
 
@@ -201,13 +203,15 @@ write_model <- function(model, filepath, overwrite = TRUE) {
 #' Load a Keras model from an HDF5 file
 #' 
 #' @param filepath File path to load file from
-#' @param custom_objects Napping class names (or function names) of custom 
+#' @param custom_objects Mapping class names (or function names) of custom 
 #'   (non-Keras) objects to class/functions
 #'   
-#' @seealso [write_model]   
+#' @seealso [save_model]   
 #'   
 #' @export
-read_model <- function(filepath, custom_objects = NULL) {
+load_model <- function(filepath, custom_objects = NULL) {
+  if (!have_h5py())
+    stop("The h5py Python package is required to save and load models")
   keras$models$load_model(filepath = filepath, custom_objects = custom_objects)
 }
 

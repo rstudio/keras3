@@ -34,7 +34,7 @@ test_succeeds("model can be saved and loaded", {
   
   model <- define_and_compile_model()
   tmp <- tempfile("model", fileext = ".hdf5")
-  write_model(model, tmp)
-  model <- read_model(tmp)
+  save_model(model, tmp)
+  model <- load_model(tmp)
 })
 
