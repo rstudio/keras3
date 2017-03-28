@@ -52,10 +52,16 @@ model_sequential <- function(layers = NULL, name = NULL) {
 compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
                     sample_weight_mode = NULL) {
   model <- clone_model_if_possible(model)
+  if (!is.null(metrics)) {
+    if (is.character(metrics))
+      metrics <- as.list(metrics)
+    else if (is.function(metrics))
+      metrics <- list(metrics)
+  }
   model$compile(
     optimizer = optimizer, 
     loss = loss,
-    metrics = ifelse(is.null(metrics), NULL, as.list(metrics)),
+    metrics = metrics,
     loss_weights = loss_weights,
     sample_weight_mode = sample_weight_mode
   )

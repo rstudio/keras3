@@ -17,3 +17,20 @@ test_succeeds <- function(desc, expr) {
 test_call_succeeds <- function(call_name, expr) {
   test_succeeds(paste(call_name, "call succeeds"), expr)
 }
+
+define_model <- function() {
+  model_sequential() %>%
+    layer_dense(32, input_shape = 784) %>%
+    layer_activation('relu') %>%
+    layer_dense(10) %>%
+    layer_activation('softmax')
+}
+
+define_and_compile_model <- function() {
+  define_model() %>% 
+    compile(
+      loss='binary_crossentropy',
+      optimizer = optimizer_sgd(),
+      metrics='accuracy'
+    )
+}

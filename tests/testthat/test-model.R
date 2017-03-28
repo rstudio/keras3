@@ -10,24 +10,6 @@ labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10
 # genereate dummy input data
 input <- matrix(rexp(10*784), nrow = 10, ncol = 784)
 
-define_model <- function() {
-  model_sequential() %>%
-    layer_dense(32, input_shape = 784) %>%
-    layer_activation('relu') %>%
-    layer_dense(10) %>%
-    layer_activation('softmax')
-}
-
-define_and_compile_model <- function() {
-  define_model() %>% 
-    compile(
-      loss='binary_crossentropy',
-      optimizer = optimizer_sgd(),
-      metrics='accuracy'
-    )
-}
-
-
 test_succeeds("sequential models can be defined", {
   define_model()
 })
