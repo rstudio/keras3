@@ -16,6 +16,30 @@ test_call_succeeds("layer_activation", {
     layer_activation('relu')
 })
 
+test_call_succeeds("layer_activation_leaky_relu", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = shape(784)) %>% 
+    layer_activation_leaky_relu()
+})
+
+test_call_succeeds("layer_activation_parametric_relu", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = shape(784)) %>% 
+    layer_activation_parametric_relu()
+})
+
+test_call_succeeds("layer_activation_thresholded_relu", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = shape(784)) %>% 
+    layer_activation_thresholded_relu()
+})
+
+test_call_succeeds("layer_activation_elu", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = shape(784)) %>% 
+    layer_activation_elu()
+})
+
 test_call_succeeds("layer_reshape", {
   model_sequential() %>% 
     layer_dense(32, input_shape = shape(784)) %>% 
