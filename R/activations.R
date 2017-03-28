@@ -4,84 +4,62 @@
 #' 
 #' Activations functions can either be used through [layer_activation()], or
 #' through the activation argument supported by all forward layers.
-#' 
-#' @param x Input
-#' @param alpha Alpha
-#' @param max_value Maximum value
-#'   
+#'
+#' @name activation-functions
+NULL
+
 #' @rdname activation-functions
 #' @export
-activation_relu <- function(x, alpha = 0.0, max_value = NULL) {
-  keras$activations$relu(
-    x = x,
-    alpha = alpha,
-    max_value = max_value
-  )
+activation_relu <- function() {
+  keras$activations$relu
 }
 
 #' @rdname activation-functions
 #' @export
-activation_elu <- function(x, alpha = 1.0) {
-  keras$activations$elu(
-    x = x,
-    alpha = alpha
-  )
+activation_elu <- function() {
+  keras$activations$elu
 }
 
 #' @rdname activation-functions
 #' @export
-activation_hard_sigmoid <- function(x) {
-  keras$activations$hard_sigmoid(
-    x = x
-  )
+activation_hard_sigmoid <- function() {
+  keras$activations$hard_sigmoid
 }
 
 #' @rdname activation-functions
 #' @export
-activation_linear <- function(x) {
-  keras$activations$linear(
-    x = x
-  )
+activation_linear <- function() {
+  keras$activations$linear
 }
 
 #' @rdname activation-functions
 #' @export
-activation_sigmoid <- function(x) {
-  keras$activations$sigmoid(
-    x = x
-  )
+activation_sigmoid <- function() {
+  keras$activations$sigmoid
 }
 
 #' @rdname activation-functions
 #' @export
-activation_softmax <- function(x) {
-  keras$activations$softmax(
-    x = x
-  )
+activation_softmax <- function() {
+  keras$activations$softmax
 }
 
 #' @rdname activation-functions
 #' @export
-activation_softplus <- function(x) {
-  keras$activations$softplus(
-    x = x
-  )
+activation_softplus <- function() {
+  keras$activations$softplus
 }
 
 #' @rdname activation-functions
 #' @export
-activation_softsign <- function(x) {
-  keras$activations$softsign(
-    x = x
-  )
+activation_softsign <- function() {
+  keras$activations$softsign
 }
 
 #' @rdname activation-functions
 #' @export
-activation_tanh <- function(x) {
-  keras$activations$tanh(
-    x = x
-  )
+activation_tanh <- function() {
+  keras$activations$tanh
 }
 
 

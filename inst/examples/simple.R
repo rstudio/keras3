@@ -12,13 +12,13 @@ input <- matrix(rexp(10*784), nrow = 10, ncol = 784)
 # define and compile the model
 model <- model_sequential() %>% 
   layer_dense(32, input_shape = 784) %>% 
-  layer_activation('relu') %>% 
+  layer_activation(activation_relu) %>% 
   layer_dense(10) %>% 
   layer_activation('softmax') %>% 
   compile( 
-    loss='binary_crossentropy', 
+    loss= 'binary_crossentropy', 
     optimizer = optimizer_sgd(),
-    metrics='accuracy'
+    metrics = metric_binary_accuracy()
   )
 
 # train the model 

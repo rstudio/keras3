@@ -85,7 +85,7 @@ layer_dense <- function(x, units, activation = NULL, use_bias = TRUE,
                         ) {
   layer <- keras$layers$Dense(
     units = as.integer(units),
-    activation = activation,
+    activation = resolve_keras_function(activation),
     use_bias = use_bias,
     kernel_initializer = kernel_initializer,
     bias_initializer = bias_initializer,
@@ -111,7 +111,7 @@ layer_dense <- function(x, units, activation = NULL, use_bias = TRUE,
 layer_activation <- function(x, activation, input_shape = NULL) {
   
   # build args
-  args <- list(activation = activation)
+  args <- list(activation = resolve_keras_function(activation))
   if (!is.null(input_shape))
     args$input_shape <- normalize_shape(input_shape)
   

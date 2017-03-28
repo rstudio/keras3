@@ -51,12 +51,18 @@ model_sequential <- function(layers = NULL, name = NULL) {
 #' @export
 compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
                     sample_weight_mode = NULL) {
+  
+  # resolve metrics (if they are functions in our namespace then call them 
+  # so we end up passing the underlying python function not the R function)
   if (!is.null(metrics)) {
-    if (is.character(metrics))
-      metrics <- as.list(metrics)
-    else if (is.function(metrics))
+    # ensure we are dealing with a list
+    if (is.function(metrics))
       metrics <- list(metrics)
+    # resolve functions as necessary
+    metrics <- lapply(metrics, resolve_keras_function)
   }
+  
+  # compile model
   model$compile(
     optimizer = optimizer, 
     loss = loss,

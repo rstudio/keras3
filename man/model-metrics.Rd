@@ -17,61 +17,44 @@
 \alias{metric_sparse_categorical_crossentropy}
 \alias{metric_squared_hinge}
 \alias{metric_top_k_categorical_accuracy}
-\title{Metrics used for judging the performance of models}
+\title{Metrics used for judging the performance of models
+
+Metric functions are to be supplied in the \code{metrics} parameter of the
+\code{\link[=compile]{compile()}} function.}
 \usage{
-metric_binary_accuracy(y_true, y_pred)
+metric_binary_accuracy()
 
-metric_binary_crossentropy(y_true, y_pred)
+metric_binary_crossentropy()
 
-metric_categorical_accuracy(y_true, y_pred)
+metric_categorical_accuracy()
 
-metric_categorical_crossentropy(y_true, y_pred)
+metric_categorical_crossentropy()
 
-metric_cosine_proximity(y_true, y_pred)
+metric_cosine_proximity()
 
-metric_hinge(y_true, y_pred)
+metric_hinge()
 
-metric_kullback_leibler_divergence(y_true, y_pred)
+metric_kullback_leibler_divergence()
 
-metric_mean_absolute_error(y_true, y_pred)
+metric_mean_absolute_error()
 
-metric_mean_absolute_percentage_error(y_true, y_pred)
+metric_mean_absolute_percentage_error()
 
-metric_mean_squared_error(y_true, y_pred)
+metric_mean_squared_error()
 
-metric_mean_squared_logarithmic_error(y_true, y_pred)
+metric_mean_squared_logarithmic_error()
 
-metric_poisson(y_true, y_pred)
+metric_poisson()
 
-metric_sparse_categorical_crossentropy(y_true, y_pred)
+metric_sparse_categorical_crossentropy()
 
-metric_squared_hinge(y_true, y_pred)
+metric_squared_hinge()
 
-metric_top_k_categorical_accuracy(y_true, y_pred, k = 5)
-}
-\arguments{
-\item{y_true}{True labels (tensor)}
-
-\item{y_pred}{Predictions (tensor of the same shape as \code{y_true})}
-
-\item{k}{Top-k}
-}
-\value{
-Single tensor value representing the mean of the output array across
-all datapoints.
+metric_top_k_categorical_accuracy()
 }
 \description{
 Metrics used for judging the performance of models
-}
-\note{
+
 Metric functions are to be supplied in the \code{metrics} parameter of the
 \code{\link[=compile]{compile()}} function.
 }
-\section{Custom Metrics}{
-
-
-Custom metrics can be passed at the compilation step. The function would
-need to take \code{(y_true, y_pred)} as arguments and return a single tensor
-value.
-}
-
