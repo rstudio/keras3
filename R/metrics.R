@@ -5,13 +5,16 @@
 #' @param y_pred Predictions (tensor of the same shape as `y_true`)
 #' @param k Top-k
 #'   
+#' @return Single tensor value representing the mean of the output array across
+#'   all datapoints.
+#'   
 #' @note Metric functions are to be supplied in the `metrics` parameter of the 
-#'   `[compile()]` function.
+#'   [compile()] function.
 #'   
 #' @section Custom Metrics:
 #'   
-#'   Custom metrics can be passed at the compilation step. The function would
-#'   need to take `(y_true, y_pred)`` as arguments and return a single tensor
+#'   Custom metrics can be passed at the compilation step. The function would 
+#'   need to take `(y_true, y_pred)` as arguments and return a single tensor 
 #'   value.
 #'   
 #' @name model-metrics
