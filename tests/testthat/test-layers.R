@@ -59,38 +59,61 @@ test_call_succeeds("layer_flatten", {
     layer_flatten()
 })
 
-test_call_succeeds("layer_conv1d", {
+test_call_succeeds("layer_conv_1d", {
   model_sequential() %>% 
     layer_dense(32, input_shape = shape(784)) %>% 
     layer_reshape(target_shape = shape(2,16)) %>% 
-    layer_conv1d(filters = 3, kernel_size = 2)
+    layer_conv_1d(filters = 3, kernel_size = 2)
 })
 
-test_call_succeeds("layer_conv2d", {
+test_call_succeeds("layer_conv_2d", {
   model_sequential() %>% 
     layer_dense(32, input_shape = shape(784)) %>% 
     layer_reshape(target_shape = shape(2,4,4)) %>% 
-    layer_conv2d(filters = 3, kernel_size = c(2, 2))
+    layer_conv_2d(filters = 3, kernel_size = c(2, 2))
 })
 
-test_call_succeeds("layer_conv3d", {
+test_call_succeeds("layer_conv_3d", {
   model_sequential() %>% 
     layer_dense(32, input_shape = shape(784)) %>% 
     layer_reshape(target_shape = shape(2,2,2,4)) %>% 
-    layer_conv3d(filters = 3, kernel_size = c(2, 2, 2))
+    layer_conv_3d(filters = 3, kernel_size = c(2, 2, 2))
 })
 
-test_call_succeeds("layer_conv2d_transpose", {
+test_call_succeeds("layer_conv_2d_transpose", {
   model_sequential() %>% 
     layer_dense(32, input_shape = shape(784)) %>% 
     layer_reshape(target_shape = shape(2,4,4)) %>% 
-    layer_conv2d_transpose(filters = 3, kernel_size = c(2, 2))
+    layer_conv_2d_transpose(filters = 3, kernel_size = c(2, 2))
 })
 
-test_call_succeeds("layer_separable_conv2d", {
+test_call_succeeds("layer_separable_conv_2d", {
   model_sequential() %>% 
     layer_dense(32, input_shape = shape(784)) %>% 
     layer_reshape(target_shape = shape(2,4,4)) %>% 
-    layer_separable_conv2d(filters = 4, kernel_size = c(2,2))
+    layer_separable_conv_2d(filters = 4, kernel_size = c(2,2))
 })
+
+test_call_succeeds("layer_upsampling_1d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = shape(784)) %>% 
+    layer_reshape(target_shape = shape(2,16)) %>% 
+    layer_upsampling_1d()
+})
+
+test_call_succeeds("layer_upsampling_2d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = shape(784)) %>% 
+    layer_reshape(target_shape = shape(2,4,16)) %>% 
+    layer_upsampling_2d()
+})
+
+test_call_succeeds("layer_upsampling_3d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = shape(784)) %>% 
+    layer_reshape(target_shape = shape(2,4,4,4)) %>% 
+    layer_upsampling_3d()
+})
+
+
 

@@ -49,11 +49,11 @@
 #'   filters)` `steps` value might have changed due to padding or strides.
 #'   
 #' @export
-layer_conv1d <- function(x, filters, kernel_size, strides = 1L, padding = "valid", 
-                         dilation_rate = 1L, activation = NULL, use_bias = TRUE, 
-                         kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
-                         kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                         kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+layer_conv_1d <- function(x, filters, kernel_size, strides = 1L, padding = "valid", 
+                          dilation_rate = 1L, activation = NULL, use_bias = TRUE, 
+                          kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
+                          kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
+                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
   call_layer(tf$contrib$keras$layers$Conv1D, x, list(
     filters = as.integer(filters),
@@ -86,7 +86,7 @@ layer_conv1d <- function(x, filters, kernel_size, strides = 1L, padding = "valid
 #' does not include the sample axis), e.g. `input_shape=c(128, 128, 3)` for
 #' 128x128 RGB pictures in `data_format="channels_last"`.
 #' 
-#' @inheritParams layer_conv1d  
+#' @inheritParams layer_conv_1d  
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
 #'   number output of filters in the convolution).
@@ -133,11 +133,11 @@ layer_conv1d <- function(x, filters, kernel_size, strides = 1L, padding = "valid
 #'   `rows` and `cols` values might have changed due to padding.
 #'   
 #' @export
-layer_conv2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL,
-                         dilation_rate = c(1L, 1L), activation = NULL, use_bias = TRUE, 
-                         kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
-                         kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                         kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+layer_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL,
+                          dilation_rate = c(1L, 1L), activation = NULL, use_bias = TRUE, 
+                          kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
+                          kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
+                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
   call_layer(tf$contrib$keras$layers$Conv2D, x, list(
     filters = as.integer(filters),
@@ -171,7 +171,7 @@ layer_conv2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding =
 #' for 128x128x128 volumes with a single channel, in
 #' `data_format="channels_last"`.
 #' 
-#' @inheritParams layer_conv1d  
+#' @inheritParams layer_conv_1d  
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
 #'   number output of filters in the convolution).
@@ -222,11 +222,11 @@ layer_conv2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding =
 #'   `new_conv_dim3` values might have changed due to padding.
 #'   
 #' @export
-layer_conv3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padding = "valid",
-                         data_format = NULL, dilation_rate = c(1L, 1L, 1L), activation = NULL, use_bias = TRUE, 
-                         kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
-                         kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                         kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+layer_conv_3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padding = "valid",
+                          data_format = NULL, dilation_rate = c(1L, 1L, 1L), activation = NULL, use_bias = TRUE, 
+                          kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
+                          kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
+                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
   call_layer(tf$contrib$keras$layers$Conv3D, x, list(
     filters = as.integer(filters),
@@ -260,7 +260,7 @@ layer_conv3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), paddi
 #' of integers, does not include the sample axis), e.g. `input_shape=c(128L,
 #' 128L, 3L)` for 128x128 RGB pictures in `data_format="channels_last"`.
 #' 
-#' @inheritParams layer_conv1d
+#' @inheritParams layer_conv_1d
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
 #'   number output of filters in the convolution).
@@ -306,11 +306,11 @@ layer_conv3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), paddi
 #'   - [Deconvolutional Networks](http://www.matthewzeiler.com/pubs/cvpr2010/cvpr2010.pdf)
 #'   
 #' @export
-layer_conv2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", 
-                                   data_format = "channels_last", activation = NULL, use_bias = TRUE, 
-                                   kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
-                                   kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                                   kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+layer_conv_2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", 
+                                    data_format = "channels_last", activation = NULL, use_bias = TRUE, 
+                                    kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
+                                    kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
+                                    kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
   call_layer(tf$contrib$keras$layers$Conv2DTranspose, x, list(
     filters = as.integer(filters),
@@ -342,7 +342,7 @@ layer_conv2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L),
 #' can be understood as a way to factorize a convolution kernel into two smaller
 #' kernels, or as an extreme version of an Inception block.
 #' 
-#' @inheritParams layer_conv2d
+#' @inheritParams layer_conv_2d
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
 #'   number output of filters in the convolution).
@@ -393,11 +393,11 @@ layer_conv2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L),
 #'   `rows` and `cols` values might have changed due to padding.
 #'   
 #' @export
-layer_separable_conv2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL, 
-                                   depth_multiplier = 1L, activation = NULL, use_bias = TRUE, 
-                                   depthwise_initializer = "glorot_uniform", pointwise_initializer = "glorot_uniform", bias_initializer = "zeros", 
-                                   depthwise_regularizer = NULL, pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                                   depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+layer_separable_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL, 
+                                    depth_multiplier = 1L, activation = NULL, use_bias = TRUE, 
+                                    depthwise_initializer = "glorot_uniform", pointwise_initializer = "glorot_uniform", bias_initializer = "zeros", 
+                                    depthwise_regularizer = NULL, pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
+                                    depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
   call_layer(tf$contrib$keras$layers$SeparableConv2D, x, list(
     filters = as.integer(filters),
@@ -424,9 +424,103 @@ layer_separable_conv2d <- function(x, filters, kernel_size, strides = c(1L, 1L),
 }
 
 
+#' Upsampling layer for 1D inputs.
+#' 
+#' Repeats each temporal step `size` times along the time axis.
+#' 
+#' @inheritParams layer_dense
+#' 
+#' @param size integer. Upsampling factor.
+#'   
+#' @section Input shape: 3D tensor with shape: `(batch, steps, features)`.
+#'   
+#' @section Output shape: 3D tensor with shape: `(batch, upsampled_steps,
+#'   features)`.
+#'   
+#' @export
+layer_upsampling_1d <- function(x, size = 2L) {
+  
+  call_layer(tf$contrib$keras$layers$UpSampling1D, x, list(
+    size = as.integer(size)
+  ))
+  
+}
 
 
+#' Upsampling layer for 2D inputs.
+#' 
+#' Repeats the rows and columns of the data by `size[[0]]` and `size[[1]]` respectively.
+#' 
+#' @inheritParams layer_upsampling_1d
+#' 
+#' @param size int, or list of 2 integers. The upsampling factors for rows and
+#'   columns.
+#' @param data_format A string, one of `channels_last` (default) or
+#'   `channels_first`. The ordering of the dimensions in the inputs.
+#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
+#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
+#'   channels, width, height)`. It defaults to the `image_data_format` value
+#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
+#'   it, then it will be "channels_last".
+#'   
+#' @section Input shape: 
+#' 4D tensor with shape: 
+#' - If `data_format` is `"channels_last"`: `(batch, rows, cols, channels)` 
+#' - If `data_format` is `"channels_first"`: `(batch, channels, rows, cols)`
+#'   
+#' @section Output shape: 
+#' 4D tensor with shape: 
+#' - If `data_format` is `"channels_last"`: `(batch, upsampled_rows, upsampled_cols, channels)` 
+#' - If `data_format` is `"channels_first"`: `(batch, channels, upsampled_rows, upsampled_cols)`
+#'   
+#' @export
+layer_upsampling_2d <- function(x, size = c(2L, 2L), data_format = NULL) {
+  
+  call_layer(tf$contrib$keras$layers$UpSampling2D, x, list(
+    size = as.integer(size),
+    data_format = data_format
+  ))
+  
+}
 
+
+#' Upsampling layer for 3D inputs.
+#' 
+#' Repeats the 1st, 2nd and 3rd dimensions of the data by `size[[0]]`, `size[[1]]` and
+#' `size[[2]]` respectively.
+#' 
+#' @inheritParams layer_upsampling_1d
+#'   
+#' @param size int, or list of 3 integers. The upsampling factors for dim1, dim2
+#'   and dim3.
+#' @param data_format A string, one of `channels_last` (default) or
+#'   `channels_first`. The ordering of the dimensions in the inputs.
+#'   `channels_last` corresponds to inputs with shape `(batch, spatial_dim1,
+#'   spatial_dim2, spatial_dim3, channels)` while `channels_first` corresponds
+#'   to inputs with shape `(batch, channels, spatial_dim1, spatial_dim2,
+#'   spatial_dim3)`. It defaults to the `image_data_format` value found in your
+#'   Keras config file at `~/.keras/keras.json`. If you never set it, then it
+#'   will be "channels_last".
+#'   
+#' @section Input shape: 
+#' 5D tensor with shape: 
+#' - If `data_format` is `"channels_last"`: `(batch, dim1, dim2, dim3, channels)` 
+#' - If `data_format` is `"channels_first"`: `(batch, channels, dim1, dim2, dim3)`
+#'   
+#' @section Output shape: 
+#' 5D tensor with shape: 
+#' - If `data_format` is `"channels_last"`: `(batch, upsampled_dim1, upsampled_dim2, upsampled_dim3, channels)` 
+#' - If `data_format` is `"channels_first"`: `(batch, channels, upsampled_dim1, upsampled_dim2, upsampled_dim3)`
+#'   
+#' @export
+layer_upsampling_3d <- function(x, size= c(2L, 2L, 2L), data_format = NULL) {
+  
+  call_layer(tf$contrib$keras$layers$UpSampling3D, x, list(
+    size = as.integer(size),
+    data_format = data_format
+  ))
+  
+}
 
 
 
