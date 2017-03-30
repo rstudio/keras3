@@ -180,6 +180,13 @@ layer_flatten <- function(x, input_shape = NULL) {
   compose_layer(x, layer)
 }
 
+as_integer_tuple <- function(x) {
+  if (is.null(x))
+    x
+  else
+    tuple(as.integer(x))
+}
+
 # Helper function to coerce shape arguments to tuple
 normalize_shape <- function(shape) {
   

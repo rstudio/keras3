@@ -59,6 +59,13 @@ test_call_succeeds("layer_flatten", {
     layer_flatten()
 })
 
+test_call_succeeds("layer_conv1d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = shape(784)) %>% 
+    layer_reshape(target_shape = shape(2,16)) %>% 
+    layer_conv1d(filters = 3, kernel_size = 2)
+})
+
 
 
 
