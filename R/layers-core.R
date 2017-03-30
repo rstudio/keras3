@@ -207,6 +207,22 @@ normalize_shape <- function(shape) {
   tuple(shape)
 }
 
+
+# Helper function to call a layer
+call_layer <- function(layer_function, x, args) {
+  
+  # remove input_shape if it's NULL (needs to be missing to signal it's not in use)
+  args$input_shape <- args$input_shape
+  
+  # call function
+  layer <- do.call(layer_function, args)
+  
+  # compose
+  compose_layer(x, layer)
+}
+
+
+
 # Helper function to compose a layer with an object of type Model or Layer
 compose_layer <- function(x, layer) {
   

@@ -55,9 +55,7 @@ layer_conv1d <- function(x, filters, kernel_size, strides = 1L, padding = "valid
                          kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
-  
-  # build args
-  args <- list(
+  call_layer(tf$contrib$keras$layers$Conv1D, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -71,15 +69,10 @@ layer_conv1d <- function(x, filters, kernel_size, strides = 1L, padding = "valid
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint
-  )
-  args$input_shape <- normalize_shape(input_shape)
+    bias_constraint = bias_constraint,
+    input_shape = normalize_shape(input_shape)
+  ))
   
-  # call function
-  layer <- do.call(tf$contrib$keras$layers$Conv1D, args)
-  
-  # compose
-  compose_layer(x, layer)
 }
 
 
@@ -145,8 +138,8 @@ layer_conv2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding =
                          kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                          kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
-  # build args
-  args <- list(
+  
+  call_layer(tf$contrib$keras$layers$Conv2D, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -161,15 +154,10 @@ layer_conv2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding =
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint
-  )
-  args$input_shape <- normalize_shape(input_shape)
+    bias_constraint = bias_constraint,
+    input_shape = normalize_shape(input_shape)
+  ))
   
-  # call function
-  layer <- do.call(tf$contrib$keras$layers$Conv2D, args)
-  
-  # compose
-  compose_layer(x, layer)
 }
 
 #' 3D convolution layer (e.g. spatial convolution over volumes).
@@ -239,8 +227,8 @@ layer_conv3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), paddi
                          kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                          kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
-  # build args
-  args <- list(
+  
+  call_layer(tf$contrib$keras$layers$Conv3D, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -255,15 +243,10 @@ layer_conv3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), paddi
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint
-  )
-  args$input_shape <- normalize_shape(input_shape)
+    bias_constraint = bias_constraint,
+    input_shape = normalize_shape(input_shape)
+  ))
   
-  # call function
-  layer <- do.call(tf$contrib$keras$layers$Conv3D, args)
-  
-  # compose
-  compose_layer(x, layer)
 }
 
 #' Transposed convolution layer (sometimes called Deconvolution).
@@ -329,8 +312,7 @@ layer_conv2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L),
                                    kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                                    kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
-  # build args
-  args <- list(
+  call_layer(tf$contrib$keras$layers$Conv2DTranspose, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -344,15 +326,10 @@ layer_conv2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L),
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint
-  )
-  args$input_shape <- input_shape
+    bias_constraint = bias_constraint,
+    input_shape = normalize_shape(input_shape)
+  ))
   
-  # call function
-  layer <- do.call(keras$layers$Conv2DTranspose, args)
-  
-  # compose
-  compose_layer(x, layer)
 }
 
 
