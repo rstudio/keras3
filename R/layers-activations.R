@@ -10,15 +10,11 @@
 #' @export
 layer_activation <- function(x, activation, input_shape = NULL) {
   
-  # build args
-  args <- list(activation = resolve_keras_function(activation))
-  args$input_shape <- normalize_shape(input_shape)
+  call_layer(keras$layers$Activation, x, list(
+    activation = resolve_keras_function(activation),
+    input_shape = normalize_shape(input_shape)
+  ))
   
-  # call function
-  layer <- do.call(keras$layers$Activation, args)
-  
-  # compose
-  compose_layer(x, layer)
 }
 
 #' Leaky version of a Rectified Linear Unit.
@@ -36,15 +32,11 @@ layer_activation <- function(x, activation, input_shape = NULL) {
 #' @export
 layer_activation_leaky_relu <- function(x, alpha = 0.3, input_shape = NULL) {
   
-  # build args
-  args <- list(alpha = alpha)
-  args$input_shape <- normalize_shape(input_shape)
+  call_layer(keras$layers$LeakyReLU, x, list(
+    alpha = alpha,
+    input_shape = normalize_shape(input_shape)
+  ))
   
-  # call function
-  layer <- do.call(keras$layers$LeakyReLU, args)
-  
-  # compose
-  compose_layer(x, layer)
 }
 
 #' Parametric Rectified Linear Unit.
@@ -69,6 +61,7 @@ layer_activation_leaky_relu <- function(x, alpha = 0.3, input_shape = NULL) {
 layer_activation_parametric_relu <- function(x, alpha_initializer = "zeros", alpha_regularizer = NULL, 
                                              alpha_constraint = NULL, shared_axes = NULL, 
                                              input_shape = NULL) {
+  
   # build args
   args <- list(
     alpha_initializer = alpha_initializer,
@@ -79,11 +72,8 @@ layer_activation_parametric_relu <- function(x, alpha_initializer = "zeros", alp
     args$shared_axes <- as.list(as.integer(shared_axes))
   args$input_shape <- normalize_shape(input_shape)
   
-  # call function
-  layer <- do.call(keras$layers$PReLU, args)
-  
-  # compose
-  compose_layer(x, layer)
+  # call layer
+  call_layer(keras$layers$PReLU, x, args)
 }
 
 
@@ -100,17 +90,11 @@ layer_activation_parametric_relu <- function(x, alpha_initializer = "zeros", alp
 #' @export
 layer_activation_thresholded_relu <- function(x, theta = 1.0, input_shape = NULL) {
   
-  # build args
-  args <- list(
-    theta = theta
-  )
-  args$input_shape <- normalize_shape(input_shape)
+  call_layer(keras$layers$ThresholdedReLU, x, list(
+    theta = theta,
+    input_shape = normalize_shape(input_shape)
+  ))
   
-  # call function
-  layer <- do.call(keras$layers$ThresholdedReLU, args)
-  
-  # compose
-  compose_layer(x, layer)
 }
 
 
@@ -128,14 +112,10 @@ layer_activation_thresholded_relu <- function(x, theta = 1.0, input_shape = NULL
 #' @export
 layer_activation_elu <- function(x, alpha = 1.0, input_shape = NULL) {
   
-  # build args
-  args <- list(alpha = alpha)
-  args$input_shape <- normalize_shape(input_shape)
+  call_layer(keras$layers$ELU, x, list(
+    alpha = alpha,
+    input_shape = normalize_shape(input_shape)
+  ))
   
-  # call function
-  layer <- do.call(keras$layers$ELU, args)
-  
-  # compose
-  compose_layer(x, layer)
 }
 

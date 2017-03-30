@@ -83,7 +83,8 @@ layer_dense <- function(x, units, activation = NULL, use_bias = TRUE,
                         kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
                         kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL
                         ) {
-  layer <- keras$layers$Dense(
+  
+  call_layer(keras$layers$Dense, x, list(
     units = as.integer(units),
     activation = resolve_keras_function(activation),
     use_bias = use_bias,
@@ -95,8 +96,8 @@ layer_dense <- function(x, units, activation = NULL, use_bias = TRUE,
     kernel_constraint = kernel_constraint,
     bias_constraint = bias_constraint, 
     input_shape = normalize_shape(input_shape)
-  )
-  compose_layer(x, layer)
+  ))
+  
 }
 
 #' Reshapes an output to a certain shape.
@@ -116,15 +117,11 @@ layer_dense <- function(x, units, activation = NULL, use_bias = TRUE,
 #' @export
 layer_reshape <- function(x, target_shape, input_shape = NULL) {
   
-  # build args
-  args <- list(target_shape = normalize_shape(target_shape))
-  args$input_shape <- normalize_shape(input_shape)
+  call_layer(keras$layers$Reshape, x, list(
+    target_shape = normalize_shape(target_shape),
+    input_shape = normalize_shape(input_shape)
+  ))
   
-  # call function
-  layer <- do.call(keras$layers$Reshape, args)
-  
-  # compose
-  compose_layer(x, layer)
 }
 
 
@@ -148,15 +145,11 @@ layer_reshape <- function(x, target_shape, input_shape = NULL) {
 #' @export
 layer_permute <- function(x, dims, input_shape = NULL) {
   
-  # build args
-  args <- list(dims = list(as.integer(dims)))
-  args$input_shape <- normalize_shape(input_shape)
+  call_layer(keras$layers$Permute, x, list(
+    dims = list(as.integer(dims)),
+    input_shape = normalize_shape(input_shape)       
+  ))
   
-  # call function
-  layer <- do.call(keras$layers$Permute, args)
-  
-  # compose
-  compose_layer(x, layer)
 }
 
 
@@ -169,15 +162,10 @@ layer_permute <- function(x, dims, input_shape = NULL) {
 #' @export
 layer_flatten <- function(x, input_shape = NULL) {
   
-  # build args
-  args <- list()
-  args$input_shape <- normalize_shape(input_shape)
+  call_layer(keras$layers$Flatten, x, list(
+    input_shape = normalize_shape(input_shape)
+  ))
   
-  # call function
-  layer <- do.call(keras$layers$Flatten, args)
-  
-  # compose
-  compose_layer(x, layer)
 }
 
 as_integer_tuple <- function(x) {
