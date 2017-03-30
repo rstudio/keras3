@@ -266,6 +266,96 @@ layer_conv3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), paddi
   compose_layer(x, layer)
 }
 
+#' Transposed convolution layer (sometimes called Deconvolution).
+#' 
+#' The need for transposed convolutions generally arises from the desire to use
+#' a transformation going in the opposite direction of a normal convolution,
+#' i.e., from something that has the shape of the output of some convolution to
+#' something that has the shape of its input while maintaining a connectivity
+#' pattern that is compatible with said convolution. When using this layer as
+#' the first layer in a model, provide the keyword argument `input_shape` (list
+#' of integers, does not include the sample axis), e.g. `input_shape=c(128L,
+#' 128L, 3L)` for 128x128 RGB pictures in `data_format="channels_last"`.
+#' 
+#' @inheritParams layer_conv1d
+#' 
+#' @param filters Integer, the dimensionality of the output space (i.e. the
+#'   number output of filters in the convolution).
+#' @param kernel_size An integer or list of 2 integers, specifying the width and
+#'   height of the 2D convolution window. Can be a single integer to specify the
+#'   same value for all spatial dimensions.
+#' @param strides An integer or list of 2 integers, specifying the strides of
+#'   the convolution along the width and height. Can be a single integer to
+#'   specify the same value for all spatial dimensions. Specifying any stride
+#'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
+#' @param padding one of `"valid"` or `"same"` (case-insensitive).
+#' @param data_format A string, one of `channels_last` (default) or
+#'   `channels_first`. The ordering of the dimensions in the inputs.
+#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
+#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
+#'   channels, width, height)`. It defaults to the `image_data_format` value
+#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
+#'   it, then it will be "channels_last".
+#' @param activation Activation function to use. If you don't specify anything,
+#'   no activation is applied (ie. "linear" activation: `a(x) = x`).
+#' @param use_bias Boolean, whether the layer uses a bias vector.
+#' @param kernel_initializer Initializer for the `kernel` weights matrix.
+#' @param bias_initializer Initializer for the bias vector.
+#' @param kernel_regularizer Regularizer function applied to the `kernel`
+#'   weights matrix.
+#' @param bias_regularizer Regularizer function applied to the bias vector.
+#' @param activity_regularizer Regularizer function applied to the output of the
+#'   layer (its "activation")..
+#' @param kernel_constraint Constraint function applied to the kernel matrix.
+#' @param bias_constraint Constraint function applied to the bias vector.
+#'   
+#' @section Input shape: 4D tensor with shape: `(batch, channels, rows, cols)`
+#'   if data_format='channels_first' or 4D tensor with shape: `(batch, rows,
+#'   cols, channels)` if data_format='channels_last'.
+#'   
+#' @section Output shape: 4D tensor with shape: `(batch, filters, new_rows,
+#'   new_cols)` if data_format='channels_first' or 4D tensor with shape:
+#'   `(batch, new_rows, new_cols, filters)` if data_format='channels_last'.
+#'   `rows` and `cols` values might have changed due to padding.
+#'   
+#' @section References: 
+#'   - [A guide to convolution arithmetic for deep learning](https://arxiv.org/abs/1603.07285v1) 
+#'   - [Deconvolutional Networks](http://www.matthewzeiler.com/pubs/cvpr2010/cvpr2010.pdf)
+#'   
+#' @export
+layer_conv2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", 
+                                   data_format = "channels_last", activation = NULL, use_bias = TRUE, 
+                                   kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
+                                   kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
+                                   kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+  
+  # build args
+  args <- list(
+    filters = as.integer(filters),
+    kernel_size = as_integer_tuple(kernel_size),
+    strides = as_integer_tuple(strides),
+    padding = padding,
+    data_format = data_format,
+    activation = activation,
+    use_bias = use_bias,
+    kernel_initializer = kernel_initializer,
+    bias_initializer = bias_initializer,
+    kernel_regularizer = kernel_regularizer,
+    bias_regularizer = bias_regularizer,
+    activity_regularizer = activity_regularizer,
+    kernel_constraint = kernel_constraint,
+    bias_constraint = bias_constraint
+  )
+  args$input_shape <- input_shape
+  
+  # call function
+  layer <- do.call(keras$layers$Conv2DTranspose, args)
+  
+  # compose
+  compose_layer(x, layer)
+}
+
+
 
 
 
