@@ -332,7 +332,96 @@ layer_conv2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L),
   
 }
 
-
+#' Depthwise separable 2D convolution.
+#' 
+#' Separable convolutions consist in first performing a depthwise spatial
+#' convolution (which acts on each input channel separately) followed by a
+#' pointwise convolution which mixes together the resulting output channels. The
+#' `depth_multiplier` argument controls how many output channels are generated
+#' per input channel in the depthwise step. Intuitively, separable convolutions
+#' can be understood as a way to factorize a convolution kernel into two smaller
+#' kernels, or as an extreme version of an Inception block.
+#' 
+#' @inheritParams layer_conv2d
+#' 
+#' @param filters Integer, the dimensionality of the output space (i.e. the
+#'   number output of filters in the convolution).
+#' @param kernel_size An integer or list of 2 integers, specifying the width and
+#'   height of the 2D convolution window. Can be a single integer to specify the
+#'   same value for all spatial dimensions.
+#' @param strides An integer or list of 2 integers, specifying the strides of
+#'   the convolution along the width and height. Can be a single integer to
+#'   specify the same value for all spatial dimensions. Specifying any stride
+#'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
+#' @param padding one of `"valid"` or `"same"` (case-insensitive).
+#' @param data_format A string, one of `channels_last` (default) or
+#'   `channels_first`. The ordering of the dimensions in the inputs.
+#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
+#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
+#'   channels, width, height)`. It defaults to the `image_data_format` value
+#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
+#'   it, then it will be "channels_last".
+#' @param depth_multiplier The number of depthwise convolution output channels
+#'   for each input channel. The total number of depthwise convolution output
+#'   channels will be equal to `filterss_in * depth_multiplier`.
+#' @param activation Activation function to use. If you don't specify anything,
+#'   no activation is applied (ie. "linear" activation: `a(x) = x`).
+#' @param use_bias Boolean, whether the layer uses a bias vector.
+#' @param depthwise_initializer Initializer for the depthwise kernel matrix.
+#' @param pointwise_initializer Initializer for the pointwise kernel matrix.
+#' @param bias_initializer Initializer for the bias vector.
+#' @param depthwise_regularizer Regularizer function applied to the depthwise
+#'   kernel matrix.
+#' @param pointwise_regularizer Regularizer function applied to the depthwise
+#'   kernel matrix.
+#' @param bias_regularizer Regularizer function applied to the bias vector.
+#' @param activity_regularizer Regularizer function applied to the output of the
+#'   layer (its "activation")..
+#' @param depthwise_constraint Constraint function applied to the depthwise
+#'   kernel matrix.
+#' @param pointwise_constraint Constraint function applied to the pointwise
+#'   kernel matrix.
+#' @param bias_constraint Constraint function applied to the bias vector.
+#'   
+#' @section Input shape: 4D tensor with shape: `(batch, channels, rows, cols)`
+#'   if data_format='channels_first' or 4D tensor with shape: `(batch, rows,
+#'   cols, channels)` if data_format='channels_last'.
+#'   
+#' @section Output shape: 4D tensor with shape: `(batch, filters, new_rows,
+#'   new_cols)` if data_format='channels_first' or 4D tensor with shape:
+#'   `(batch, new_rows, new_cols, filters)` if data_format='channels_last'.
+#'   `rows` and `cols` values might have changed due to padding.
+#'   
+#' @export
+layer_separable_conv2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL, 
+                                   depth_multiplier = 1L, activation = NULL, use_bias = TRUE, 
+                                   depthwise_initializer = "glorot_uniform", pointwise_initializer = "glorot_uniform", bias_initializer = "zeros", 
+                                   depthwise_regularizer = NULL, pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
+                                   depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+  
+  call_layer(tf$contrib$keras$layers$SeparableConv2D, x, list(
+    filters = as.integer(filters),
+    kernel_size = as_integer_tuple(kernel_size),
+    strides = as_integer_tuple(strides),
+    padding = padding,
+    data_format = data_format,
+    depth_multiplier = as.integer(depth_multiplier),
+    activation = activation,
+    use_bias = use_bias,
+    depthwise_initializer = depthwise_initializer,
+    pointwise_initializer = pointwise_initializer,
+    bias_initializer = bias_initializer,
+    depthwise_regularizer = depthwise_regularizer,
+    pointwise_regularizer = pointwise_regularizer,
+    bias_regularizer = bias_regularizer,
+    activity_regularizer = activity_regularizer,
+    depthwise_constraint = depthwise_constraint,
+    pointwise_constraint = pointwise_constraint,
+    bias_constraint = bias_constraint,
+    input_shape = normalize_shape(input_shape)
+  ))
+  
+}
 
 
 

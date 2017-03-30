@@ -87,3 +87,10 @@ test_call_succeeds("layer_conv2d_transpose", {
     layer_conv2d_transpose(filters = 3, kernel_size = c(2, 2))
 })
 
+test_call_succeeds("layer_separable_conv2d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = shape(784)) %>% 
+    layer_reshape(target_shape = shape(2,4,4)) %>% 
+    layer_separable_conv2d(filters = 4, kernel_size = c(2,2))
+})
+
