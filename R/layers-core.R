@@ -184,7 +184,7 @@ as_integer_tuple <- function(x) {
   if (is.null(x))
     x
   else
-    tuple(as.integer(x))
+    tuple(as.list(as.integer(x)))
 }
 
 # Helper function to coerce shape arguments to tuple
