@@ -55,7 +55,7 @@ layer_conv_1d <- function(x, filters, kernel_size, strides = 1L, padding = "vali
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                           kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
-  call_layer(tf$contrib$keras$layers$Conv1D, x, list(
+  call_layer(keras$layers$Conv1D, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -139,7 +139,7 @@ layer_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding 
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                           kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
-  call_layer(tf$contrib$keras$layers$Conv2D, x, list(
+  call_layer(keras$layers$Conv2D, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -228,7 +228,7 @@ layer_conv_3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padd
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                           kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
-  call_layer(tf$contrib$keras$layers$Conv3D, x, list(
+  call_layer(keras$layers$Conv3D, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -312,7 +312,7 @@ layer_conv_2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L)
                                     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                                     kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
-  call_layer(tf$contrib$keras$layers$Conv2DTranspose, x, list(
+  call_layer(keras$layers$Conv2DTranspose, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -399,7 +399,7 @@ layer_separable_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L)
                                     depthwise_regularizer = NULL, pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                                     depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
-  call_layer(tf$contrib$keras$layers$SeparableConv2D, x, list(
+  call_layer(keras$layers$SeparableConv2D, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -440,7 +440,7 @@ layer_separable_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L)
 #' @export
 layer_upsampling_1d <- function(x, size = 2L) {
   
-  call_layer(tf$contrib$keras$layers$UpSampling1D, x, list(
+  call_layer(keras$layers$UpSampling1D, x, list(
     size = as.integer(size)
   ))
   
@@ -476,7 +476,7 @@ layer_upsampling_1d <- function(x, size = 2L) {
 #' @export
 layer_upsampling_2d <- function(x, size = c(2L, 2L), data_format = NULL) {
   
-  call_layer(tf$contrib$keras$layers$UpSampling2D, x, list(
+  call_layer(keras$layers$UpSampling2D, x, list(
     size = as.integer(size),
     data_format = data_format
   ))
@@ -515,7 +515,7 @@ layer_upsampling_2d <- function(x, size = c(2L, 2L), data_format = NULL) {
 #' @export
 layer_upsampling_3d <- function(x, size= c(2L, 2L, 2L), data_format = NULL) {
   
-  call_layer(tf$contrib$keras$layers$UpSampling3D, x, list(
+  call_layer(keras$layers$UpSampling3D, x, list(
     size = as.integer(size),
     data_format = data_format
   ))
@@ -526,7 +526,7 @@ layer_upsampling_3d <- function(x, size= c(2L, 2L, 2L), data_format = NULL) {
 #'
 #' @inheritParams layer_dense
 #'  
-#' @param padding int, or list of int (length 2), or dictionary. 
+#' @param padding int, or list of int (length 2)
 #' - If int: How many zeros to add at the beginning and end of the padding dimension (axis 1). 
 #' - If list of int (length 2): How many zeros to add at the beginning and at the end of the padding dimension (`(left_pad, right_pad)`).
 #'
@@ -538,7 +538,7 @@ layer_upsampling_3d <- function(x, size= c(2L, 2L, 2L), data_format = NULL) {
 #' 
 #' @export
 layer_zero_padding_1d <- function(x, padding = 1L) {
-  call_layer(tf$contrib$keras$layers$ZeroPadding1D, x, list(
+  call_layer(keras$layers$ZeroPadding1D, x, list(
     padding = as.integer(padding)
   ))
 }
@@ -576,7 +576,7 @@ layer_zero_padding_1d <- function(x, padding = 1L) {
 #' @export
 layer_zero_padding_2d <- function(x, padding = c(1L, 1L), data_format = NULL) {
 
-  call_layer(tf$contrib$keras$layers$ZeroPadding2D, x, list(
+  call_layer(keras$layers$ZeroPadding2D, x, list(
     padding = normalize_padding(padding, 2L),
     data_format = data_format
   ))
@@ -616,7 +616,7 @@ layer_zero_padding_2d <- function(x, padding = c(1L, 1L), data_format = NULL) {
 #' @export
 layer_zero_padding_3d <- function(x,  padding = c(1L, 1L, 1L), data_format = NULL) {
   
-  call_layer(tf$contrib$keras$layers$ZeroPadding3D, x, list(
+  call_layer(keras$layers$ZeroPadding3D, x, list(
     padding = normalize_padding(padding, 3L),
     data_format = data_format
   ))
@@ -624,29 +624,138 @@ layer_zero_padding_3d <- function(x,  padding = c(1L, 1L, 1L), data_format = NUL
 }
 
 
-normalize_padding <- function(padding, dims) {
+#' Cropping layer for 1D input (e.g. temporal sequence).
+#' 
+#' It crops along the time dimension (axis 1).
+#' 
+#' @inheritParams layer_dense
+#' 
+#' @param cropping int or list of int (length 2) How many units should be
+#'   trimmed off at the beginning and end of the cropping dimension (axis 1). If
+#'   a single int is provided, the same value will be used for both.
+#'   
+#' @section Input shape: 3D tensor with shape `(batch, axis_to_crop, features)`
+#'   
+#' @section Output shape: 3D tensor with shape `(batch, cropped_axis, features)`
+#'   
+#' @export
+layer_cropping_1d <- function(x, cropping = c(1L, 1L)) {
+  call_layer(keras$layers$Cropping1D, x, list(
+    cropping = as.integer(cropping)
+  ))
+}
+
+
+#' Cropping layer for 2D input (e.g. picture).
+#' 
+#' It crops along spatial dimensions, i.e. width and height.
+#' 
+#' @inheritParams layer_cropping_1d
+#' 
+#' @param cropping int, or list of 2 ints, or list of 2 lists of 2 ints. 
+#'   - If int: the same symmetric cropping is applied to width and height. 
+#'   - If list of 2 ints: interpreted as two different symmetric cropping values for
+#'   height and width: `(symmetric_height_crop, symmetrc_width_crop)`. 
+#'   - If list of 2 lists of 2 ints: interpreted as `((top_crop, bottom_crop), (left_crop,
+#'   right_crop))`
+#' @param data_format A string, one of `channels_last` (default) or
+#'   `channels_first`. The ordering of the dimensions in the inputs.
+#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
+#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
+#'   channels, width, height)`. It defaults to the `image_data_format` value
+#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
+#'   it, then it will be "channels_last".
+#'   
+#' @section Input shape: 4D tensor with shape: 
+#' - If `data_format` is `"channels_last"`: `(batch, rows, cols, channels)` 
+#' - If `data_format` is `"channels_first"`: `(batch, channels, rows, cols)`
+#'   
+#' @section Output shape: 4D tensor with shape: 
+#' - If `data_format` is `"channels_last"`: `(batch, cropped_rows, cropped_cols, channels)` 
+#' - If `data_format` is `"channels_first"`: `(batch, channels, cropped_rows, cropped_cols)`
+#'   
+#' @export
+layer_cropping_2d <- function(x, cropping = list(c(0L, 0L), c(0L, 0L)), data_format = NULL) {
   
-  # validate and marshall padding argument
-  throw_invalid_padding <- function() {
-    stop("padding must be a list of ", dims, " integers or list of ", dims,  " lists of 2 integers", 
+  call_layer(tf$contrib$keras$layers$Cropping2D, x, list(
+    cropping = normalize_cropping(cropping, 2L),
+    data_format = data_format
+  ))
+  
+}
+
+
+#' Cropping layer for 3D data (e.g. spatial or spatio-temporal).
+#' 
+#' @inheritParams layer_cropping_1d
+#'  
+#' @param cropping int, or list of 3 ints, or list of 3 lists of 2 ints. 
+#' - If int: the same symmetric cropping is applied to width and height. 
+#' - If list of 3 ints: interpreted as two different symmetric cropping values for
+#'   height and width: `(symmetric_dim1_crop, symmetric_dim2_crop,
+#'   symmetric_dim3_crop)`. 
+#' - If list of 3 lists of 2 ints: interpreted as
+#'   `((left_dim1_crop, right_dim1_crop), (left_dim2_crop, right_dim2_crop),
+#'   (left_dim3_crop, right_dim3_crop))`
+#' @param data_format A string, one of `channels_last` (default) or
+#'   `channels_first`. The ordering of the dimensions in the inputs.
+#'   `channels_last` corresponds to inputs with shape `(batch, spatial_dim1,
+#'   spatial_dim2, spatial_dim3, channels)` while `channels_first` corresponds
+#'   to inputs with shape `(batch, channels, spatial_dim1, spatial_dim2,
+#'   spatial_dim3)`. It defaults to the `image_data_format` value found in your
+#'   Keras config file at `~/.keras/keras.json`. If you never set it, then it
+#'   will be "channels_last".
+#'   
+#' @section Input shape: 5D tensor with shape: 
+#' - If `data_format` is `"channels_last"`: `(batch, first_axis_to_crop, second_axis_to_crop,
+#'   third_axis_to_crop, depth)` 
+#' - If `data_format` is `"channels_first"`:
+#'   `(batch, depth, first_axis_to_crop, second_axis_to_crop,
+#'   third_axis_to_crop)`
+#'   
+#' @section Output shape: 5D tensor with shape: 
+#' - If `data_format` is `"channels_last"`: `(batch, first_cropped_axis, second_cropped_axis,
+#'   third_cropped_axis, depth)` 
+#' - If `data_format` is `"channels_first"`: `(batch, depth, first_cropped_axis, second_cropped_axis,
+#'   third_cropped_axis)`
+#'   
+#' @export
+layer_cropping_3d <- function(x, cropping = list(c(1L, 1L), c(1L, 1L), c(1L, 1L)), data_format = NULL) {
+  call_layer(tf$contrib$keras$layers$Cropping3D, x, list(
+    cropping = normalize_cropping(cropping, 3L),
+    data_format = data_format
+  ))
+}
+
+
+
+normalize_padding <- function(padding, dims) {
+  normalize_scale("padding", padding, dims)
+}
+
+normalize_cropping <- function(cropping, dims) {
+  normalize_scale("cropping", cropping, dims)
+}
+
+normalize_scale <- function(name, scale, dims) {
+  
+  # validate and marshall scale argument
+  throw_invalid_scale <- function() {
+    stop(name, " must be a list of ", dims, " integers or list of ", dims,  " lists of 2 integers", 
          call. = FALSE)
   }
   
-  # check for appropriate length
-  if (length(padding) != dims)
-    throw_invalid_padding()
-  
   # if all of the individual items are numeric then cast to integer vector
-  if (all(sapply(padding, is.numeric))) {
-    as.integer(padding)
-  } else if (all(sapply(padding, is.list))) {
-    lapply(padding, function(x) {
+  if (all(sapply(scale, function(x) length(x) == 1 && is.numeric(x)))) {
+    as.integer(scale)
+  } else if (is.list(scale)) {
+    lapply(scale, function(x) {
       if (length(x) != 2)
-        throw_invalid_padding()
+        throw_invalid_scale()
       as.integer(x)
     })
   } else {
-    throw_invalid_padding()
+    throw_invalid_scale()
   }
 }
 

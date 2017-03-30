@@ -9,7 +9,7 @@ layer_zero_padding_1d(x, padding = 1L)
 \arguments{
 \item{x}{Model or layer}
 
-\item{padding}{int, or list of int (length 2), or dictionary.
+\item{padding}{int, or list of int (length 2)
 \itemize{
 \item If int: How many zeros to add at the beginning and end of the padding dimension (axis 1).
 \item If list of int (length 2): How many zeros to add at the beginning and at the end of the padding dimension (\code{(left_pad, right_pad)}).
