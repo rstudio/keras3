@@ -73,6 +73,12 @@ test_call_succeeds("layer_conv2d", {
     layer_conv2d(filters = 3, kernel_size = c(2, 2))
 })
 
+test_call_succeeds("layer_conv3d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = shape(784)) %>% 
+    layer_reshape(target_shape = shape(2,2,2,4)) %>% 
+    layer_conv3d(filters = 3, kernel_size = c(2, 2, 2))
+})
 
 
 

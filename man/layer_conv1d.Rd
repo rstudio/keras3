@@ -12,6 +12,8 @@ layer_conv1d(x, filters, kernel_size, strides = 1L, padding = "valid",
   bias_constraint = NULL, input_shape = NULL)
 }
 \arguments{
+\item{x}{Model or layer}
+
 \item{filters}{Integer, the dimensionality of the output space (i.e. the
 number output of filters in the convolution).}
 
@@ -23,8 +25,8 @@ stride length of the convolution. Specifying any stride value != 1 is
 incompatible with specifying any \code{dilation_rate} value != 1.}
 
 \item{padding}{One of \code{"valid"}, \code{"causal"} or \code{"same"} (case-insensitive).
-\code{"causal"} results in causal (dilated) convolutions, e.g. output\link{t} depends
-solely on input\link{:t-1}. Useful when modeling temporal data where the model
+\code{"causal"} results in causal (dilated) convolutions, e.g. \code{output[t]} depends
+solely on \code{input[:t-1]}. Useful when modeling temporal data where the model
 should not violate the temporal order. See \href{https://arxiv.org/abs/1609.03499}{WaveNet: A Generative Model forRaw Audio, section 2.1}.}
 
 \item{dilation_rate}{an integer or list of a single integer, specifying
