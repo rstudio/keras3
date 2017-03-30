@@ -522,6 +522,133 @@ layer_upsampling_3d <- function(x, size= c(2L, 2L, 2L), data_format = NULL) {
   
 }
 
+#' Zero-padding layer for 1D input (e.g. temporal sequence).
+#'
+#' @inheritParams layer_dense
+#'  
+#' @param padding int, or list of int (length 2), or dictionary. 
+#' - If int: How many zeros to add at the beginning and end of the padding dimension (axis 1). 
+#' - If list of int (length 2): How many zeros to add at the beginning and at the end of the padding dimension (`(left_pad, right_pad)`).
+#'
+#' @section Input shape:
+#' 3D tensor with shape `(batch, axis_to_pad, features)`
+#' 
+#' @section Output shape:
+#' 3D tensor with shape `(batch, padded_axis, features)`
+#' 
+#' @export
+layer_zero_padding_1d <- function(x, padding = 1L) {
+  call_layer(tf$contrib$keras$layers$ZeroPadding1D, x, list(
+    padding = as.integer(padding)
+  ))
+}
+
+
+#' Zero-padding layer for 2D input (e.g. picture).
+#' 
+#' This layer can add rows and columns or zeros at the top, bottom, left and
+#' right side of an image tensor.
+#' 
+#' @inheritParams layer_zero_padding_1d
+#' 
+#' @param padding int, or list of 2 ints, or list of 2 lists of 2 ints. 
+#' - If int: the same symmetric padding is applied to width and height. 
+#' - If list of 2 ints: interpreted as two different symmetric padding values for height
+#'   and width: `(symmetric_height_pad, symmetrc_width_pad)`. 
+#' - If list of 2 lists of 2 ints: interpreted as `((top_pad, bottom_pad), (left_pad,
+#'   right_pad))`
+#' @param data_format A string, one of `channels_last` (default) or
+#'   `channels_first`. The ordering of the dimensions in the inputs.
+#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
+#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
+#'   channels, width, height)`. It defaults to the `image_data_format` value
+#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
+#'   it, then it will be "channels_last".
+#'   
+#' @section Input shape: 4D tensor with shape: 
+#' - If `data_format` is `"channels_last"`: `(batch, rows, cols, channels)` 
+#' - If `data_format` is `"channels_first"`: `(batch, channels, rows, cols)`
+#'   
+#' @section Output shape: 4D tensor with shape: 
+#' - If `data_format` is `"channels_last"`: `(batch, padded_rows, padded_cols, channels)` 
+#' - If `data_format` is `"channels_first"`: `(batch, channels, padded_rows, padded_cols)`
+#'   
+#' @export
+layer_zero_padding_2d <- function(x, padding = c(1L, 1L), data_format = NULL) {
+
+  call_layer(tf$contrib$keras$layers$ZeroPadding2D, x, list(
+    padding = normalize_padding(padding, 2L),
+    data_format = data_format
+  ))
+  
+}
+
+#' Zero-padding layer for 3D data (spatial or spatio-temporal).
+#' 
+#' @inheritParams layer_zero_padding_1d
+#' 
+#' @param padding int, or list of 3 ints, or list of 3 lists of 2 ints. 
+#' - If int: the same symmetric padding is applied to width and height. 
+#' - If list of 3 ints: interpreted as three different symmetric padding values: 
+#'   `(symmetric_dim1_pad, symmetric_dim2_pad, symmetric_dim3_pad)`.
+#' - If list of 3 lists of 2 ints: interpreted as `((left_dim1_pad,
+#'   right_dim1_pad), (left_dim2_pad, right_dim2_pad), (left_dim3_pad,
+#'   right_dim3_pad))`
+#' @param data_format A string, one of `channels_last` (default) or
+#'   `channels_first`. The ordering of the dimensions in the inputs.
+#'   `channels_last` corresponds to inputs with shape `(batch, spatial_dim1,
+#'   spatial_dim2, spatial_dim3, channels)` while `channels_first` corresponds
+#'   to inputs with shape `(batch, channels, spatial_dim1, spatial_dim2,
+#'   spatial_dim3)`. It defaults to the `image_data_format` value found in your
+#'   Keras config file at `~/.keras/keras.json`. If you never set it, then it
+#'   will be "channels_last".
+#'   
+#' @section Input shape: 5D tensor with shape: 
+#' - If `data_format` is `"channels_last"`: `(batch, first_axis_to_pad, second_axis_to_pad,
+#'   third_axis_to_pad, depth)` 
+#' - If `data_format` is `"channels_first"`: `(batch, depth, first_axis_to_pad, second_axis_to_pad, third_axis_to_pad)`
+#'   
+#' @section Output shape: 5D tensor with shape: 
+#' - If `data_format` is `"channels_last"`: `(batch, first_padded_axis, second_padded_axis,
+#'   third_axis_to_pad, depth)` 
+#' - If `data_format` is `"channels_first"`: `(batch, depth, first_padded_axis, second_padded_axis, third_axis_to_pad)`
+#'   
+#' @export
+layer_zero_padding_3d <- function(x,  padding = c(1L, 1L, 1L), data_format = NULL) {
+  
+  call_layer(tf$contrib$keras$layers$ZeroPadding3D, x, list(
+    padding = normalize_padding(padding, 3L),
+    data_format = data_format
+  ))
+  
+}
+
+
+normalize_padding <- function(padding, dims) {
+  
+  # validate and marshall padding argument
+  throw_invalid_padding <- function() {
+    stop("padding must be a list of ", dims, " integers or list of ", dims,  " lists of 2 integers", 
+         call. = FALSE)
+  }
+  
+  # check for appropriate length
+  if (length(padding) != dims)
+    throw_invalid_padding()
+  
+  # if all of the individual items are numeric then cast to integer vector
+  if (all(sapply(padding, is.numeric))) {
+    as.integer(padding)
+  } else if (all(sapply(padding, is.list))) {
+    lapply(padding, function(x) {
+      if (length(x) != 2)
+        throw_invalid_padding()
+      as.integer(x)
+    })
+  } else {
+    throw_invalid_padding()
+  }
+}
 
 
 

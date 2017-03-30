@@ -116,4 +116,27 @@ test_call_succeeds("layer_upsampling_3d", {
 })
 
 
+test_call_succeeds("layer_zero_padding_1d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = shape(784)) %>% 
+    layer_reshape(target_shape = shape(2,16)) %>% 
+    layer_zero_padding_1d()
+})
+
+test_call_succeeds("layer_zero_padding_2d", {
+  model_sequential() %>%
+    layer_dense(32, input_shape = shape(784)) %>%
+    layer_reshape(target_shape = shape(2,4,16)) %>%
+    layer_zero_padding_2d()
+})
+
+
+test_call_succeeds("layer_zero_padding_3d", {
+  model_sequential() %>%
+    layer_dense(32, input_shape = shape(784)) %>%
+    layer_reshape(target_shape = shape(2,4,4,4)) %>%
+    layer_zero_padding_3d()
+})
+
+
 
