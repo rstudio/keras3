@@ -345,3 +345,10 @@ test_call_succeeds("layer_lstm", {
     layer_lstm(units = 2)
 })
 
+test_call_succeeds("layer_embedding", {
+  model_sequential() %>% 
+    layer_embedding(1000, 64, input_length = 10)
+})
+
+
+
