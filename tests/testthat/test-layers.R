@@ -222,6 +222,26 @@ test_call_succeeds("layer_cropping_3d", {
     layer_cropping_3d()
 })
 
+test_call_succeeds("layer_max_pooling_1d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,16)) %>% 
+    layer_max_pooling_1d()
+})
 
+test_call_succeeds("layer_max_pooling_2d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,4,4)) %>% 
+    layer_max_pooling_2d()
+})
+
+
+test_call_succeeds("layer_max_pooling_3d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,2,2,4)) %>% 
+    layer_max_pooling_3d()
+})
 
 
