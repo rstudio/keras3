@@ -4,12 +4,12 @@
 \alias{model}
 \title{Keras Model}
 \usage{
-model(input, output)
+model(inputs, outputs)
 }
 \arguments{
-\item{input}{Input layer}
+\item{inputs}{Input layer}
 
-\item{output}{Output layer}
+\item{outputs}{Output layer}
 }
 \description{
 A model is a directed acyclic graph of layers.

@@ -3,12 +3,12 @@
 #' 
 #' A model is a directed acyclic graph of layers.
 #' 
-#' @param input Input layer
-#' @param output Output layer
+#' @param inputs Input layer
+#' @param outputs Output layer
 #'
 #' @export
-model <- function(input, output) {
-  keras$models$Model(input = input, output = output)
+model <- function(inputs, outputs) {
+  keras$models$Model(inputs = inputs, outputs = outputs)
 }
 
 

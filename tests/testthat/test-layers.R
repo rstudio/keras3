@@ -350,5 +350,38 @@ test_call_succeeds("layer_embedding", {
     layer_embedding(1000, 64, input_length = 10)
 })
 
+merge_inputs <- c(
+  layer_input(shape = c(4, 5)),
+  layer_input(shape = c(4, 5)),
+  layer_input(shape = c(4, 5))
+)
+
+
+test_call_succeeds("layer_add", {
+  output <- layer_add(merge_inputs)
+  model(merge_inputs, output)
+})
+
+test_call_succeeds("layer_multiply", {
+  output <- layer_multiply(merge_inputs)
+  model(merge_inputs, output)
+})
+
+test_call_succeeds("layer_maximum", {
+  output <- layer_maximum(merge_inputs)
+  model(merge_inputs, output)
+})
+
+test_call_succeeds("layer_average", {
+  output <- layer_average(merge_inputs)
+  model(merge_inputs, output)
+})
+
+test_call_succeeds("layer_concatenate", {
+  output <- layer_concatenate(merge_inputs)
+  model(merge_inputs, output)
+})
+
+
 
 
