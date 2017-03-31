@@ -324,5 +324,24 @@ test_call_succeeds("layer_locally_connected_2d", {
     layer_locally_connected_2d(filters = 3, kernel_size = c(2, 2))
 })
 
+test_call_succeeds("layer_simple_rnn", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,16)) %>% 
+    layer_simple_rnn(units = 2)
+})
 
+test_call_succeeds("layer_gru", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,16)) %>% 
+    layer_gru(units = 2)
+})
+
+test_call_succeeds("layer_lstm", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,16)) %>% 
+    layer_lstm(units = 2)
+})
 
