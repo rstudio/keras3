@@ -109,7 +109,7 @@ layer_locally_connected_1d <- function(x, filters, kernel_size, strides = 1L, pa
 #'   `rows` and `cols` values might have changed due to padding.
 #'   
 #' @export
-layer_locally_connected_2d <- function(x, filters, kernel_size, strides = list(1L, 1L), padding = "valid", data_format = NULL, 
+layer_locally_connected_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL, 
                                        activation = NULL, use_bias = TRUE, kernel_initializer = "glorot_uniform", 
                                        bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL, 
                                        activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL, 

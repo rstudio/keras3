@@ -4,7 +4,7 @@
 \alias{layer_locally_connected_2d}
 \title{Locally-connected layer for 2D inputs.}
 \usage{
-layer_locally_connected_2d(x, filters, kernel_size, strides = list(1L, 1L),
+layer_locally_connected_2d(x, filters, kernel_size, strides = c(1L, 1L),
   padding = "valid", data_format = NULL, activation = NULL,
   use_bias = TRUE, kernel_initializer = "glorot_uniform",
   bias_initializer = "zeros", kernel_regularizer = NULL,
