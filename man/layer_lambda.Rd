@@ -9,6 +9,9 @@ layer_lambda(x, f, mask = NULL, arguments = NULL, input_shape = NULL)
 \arguments{
 \item{x}{Model or layer}
 
+\item{f}{The function to be evaluated. Takes input tensor as first
+argument.}
+
 \item{mask}{mask}
 
 \item{arguments}{optional named list of keyword arguments to be passed to the
@@ -17,9 +20,6 @@ function.}
 \item{input_shape}{Dimensionality of the input (integer) not including the
 samples axis. This argument is required when using this layer as the first
 layer in a model.}
-
-\item{function}{The function to be evaluated. Takes input tensor as first
-argument.}
 }
 \description{
 Wraps arbitrary expression as a layer

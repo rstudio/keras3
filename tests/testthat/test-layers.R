@@ -52,6 +52,28 @@ test_call_succeeds("layer_dropout", {
     layer_dropout(rate = 0.5, noise_shape = c(1))
 })
 
+test_call_succeeds("layer_spatial_dropout_1d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,16)) %>% 
+    layer_spatial_dropout_1d(rate = 0.5)
+})
+
+test_call_succeeds("layer_spatial_dropout_2d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,4,4)) %>% 
+    layer_spatial_dropout_2d(rate = 0.5)
+})
+
+test_call_succeeds("layer_spatial_dropout_3d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,2,2,4)) %>% 
+    layer_spatial_dropout_3d(rate = 0.5)
+})
+
+
 test_call_succeeds("layer_lambda", {
   model_sequential() %>% 
     layer_dense(32, input_shape = c(784)) %>% 
