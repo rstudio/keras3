@@ -15,6 +15,8 @@ layer_lstm(x, units, activation = "tanh",
   recurrent_dropout = 0, input_shape = NULL)
 }
 \arguments{
+\item{x}{Model or layer}
+
 \item{units}{Positive integer, dimensionality of the output space.}
 
 \item{activation}{Activation function to use. If you don't specify anything,
@@ -61,6 +63,10 @@ linear transformation of the inputs.}
 
 \item{recurrent_dropout}{Float between 0 and 1. Fraction of the units to drop
 for the linear transformation of the recurrent state.}
+
+\item{input_shape}{Dimensionality of the input (integer) not including the
+samples axis. This argument is required when using this layer as the first
+layer in a model.}
 }
 \description{
 For a step-by-step description of the algorithm, see \href{http://deeplearning.net/tutorial/lstm.html}{thistutorial}.

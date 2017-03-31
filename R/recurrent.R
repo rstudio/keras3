@@ -135,6 +135,8 @@ layer_gru <- function(x, units, activation = "tanh", recurrent_activation = "har
 #' For a step-by-step description of the algorithm, see [this
 #' tutorial](http://deeplearning.net/tutorial/lstm.html).
 #' 
+#' @inheritParams layer_dense
+#' 
 #' @param units Positive integer, dimensionality of the output space.
 #' @param activation Activation function to use. If you don't specify anything,
 #'   no activation is applied (ie. "linear" activation: `a(x) = x`).

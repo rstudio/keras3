@@ -389,4 +389,24 @@ test_call_succeeds("layer_batch_normalization", {
     layer_batch_normalization()
 })
 
+test_call_succeeds("layer_gaussian_noise", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,16)) %>% 
+    layer_gaussian_noise(stddev = 0.5)
+})
+
+
+test_call_succeeds("layer_gaussian_dropout", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,16)) %>% 
+    layer_gaussian_dropout(rate = 0.5)
+})
+
+
+
+
+
+
 
