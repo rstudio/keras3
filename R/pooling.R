@@ -15,13 +15,12 @@
 #'   features)`.
 #'   
 #' @export
-layer_max_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "valid", input_shape = NULL) {
+layer_max_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "valid") {
   
   call_layer(tf$contrib$keras$layers$MaxPooling1D, x, list(
     pool_size = as.integer(pool_size),
-    strides = as_strides(strides),
-    padding = padding,
-    input_shape = normalize_shape(input_shape)
+    strides = as_nullable_integer(strides),
+    padding = padding
   ))
 }
 
@@ -55,14 +54,13 @@ layer_max_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "v
 #' - If `data_format='channels_first'`: 4D tensor with shape: `(batch_size, channels, pooled_rows, pooled_cols)`
 #'   
 #' @export
-layer_max_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, padding = "valid", data_format = NULL, input_shape = NULL) {
+layer_max_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, padding = "valid", data_format = NULL) {
   
   call_layer(tf$contrib$keras$layers$MaxPooling2D, x, list(
     pool_size = as.integer(pool_size),
-    strides = as_strides(strides),
+    strides = as_nullable_integer(strides),
     padding = padding,
-    data_format = data_format,
-    input_shape = normalize_shape(input_shape)
+    data_format = data_format
   ))
   
 }
@@ -95,14 +93,13 @@ layer_max_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, paddi
 #' - If `data_format='channels_first'`: 5D tensor with shape: `(batch_size, channels, pooled_dim1, pooled_dim2, pooled_dim3)`
 #'   
 #' @export
-layer_max_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NULL, padding = "valid", data_format = NULL, input_shape = NULL) {
+layer_max_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NULL, padding = "valid", data_format = NULL) {
   
   call_layer(tf$contrib$keras$layers$MaxPooling3D, x, list(
     pool_size = as.integer(pool_size),
-    strides = as_strides(strides),
+    strides = as_nullable_integer(strides),
     padding = padding,
-    data_format = data_format,
-    input_shape = normalize_shape(input_shape)
+    data_format = data_format
   ))
   
 }
@@ -123,13 +120,12 @@ layer_max_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NULL, p
 #'   features)`.
 #'   
 #' @export
-layer_average_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "valid", input_shape = NULL) {
+layer_average_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "valid") {
   
   call_layer(tf$contrib$keras$layers$AveragePooling1D, x, list(
     pool_size = as.integer(pool_size),
-    strides = as_strides(strides),
-    padding = padding,
-    input_shape = normalize_shape(input_shape)
+    strides = as_nullable_integer(strides),
+    padding = padding
   ))
   
 }
@@ -162,14 +158,13 @@ layer_average_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding 
 #' - If `data_format='channels_first'`: 4D tensor with shape: `(batch_size, channels, pooled_rows, pooled_cols)`
 #'   
 #' @export
-layer_average_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, padding = "valid", data_format = NULL, input_shape = NULL) {
+layer_average_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, padding = "valid", data_format = NULL) {
   
   call_layer(tf$contrib$keras$layers$AveragePooling2D, x, list(
     pool_size = as.integer(pool_size),
-    strides = as_strides(strides),
+    strides = as_nullable_integer(strides),
     padding = padding,
-    data_format = data_format,
-    input_shape = normalize_shape(input_shape)
+    data_format = data_format
   ))
   
 }
@@ -201,14 +196,12 @@ layer_average_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, p
 #' - If `data_format='channels_first'`: 5D tensor with shape: `(batch_size, channels, pooled_dim1, pooled_dim2, pooled_dim3)`
 #'   
 #' @export
-layer_average_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NULL, padding = "valid", data_format = NULL, input_shape = NULL) {
-  
+layer_average_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NULL, padding = "valid", data_format = NULL) {
   call_layer(tf$contrib$keras$layers$AveragePooling3D, x, list(
     pool_size = as.integer(pool_size),
-    strides = as_strides(strides),
+    strides = as_nullable_integer(strides),
     padding = padding,
-    data_format = data_format,
-    input_shape = normalize_shape(input_shape)
+    data_format = data_format
   ))
   
 }
@@ -349,11 +342,3 @@ layer_global_average_pooling_3d <- function(x, data_format = NULL) {
 }
 
 
-
-
-as_strides <- function(strides) {
-  if (is.null(strides))
-    NULL
-  else
-    as.integer(strides)
-}

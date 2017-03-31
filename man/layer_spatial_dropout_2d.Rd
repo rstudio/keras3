@@ -4,7 +4,7 @@
 \alias{layer_spatial_dropout_2d}
 \title{Spatial 2D version of Dropout.}
 \usage{
-layer_spatial_dropout_2d(x, rate, data_format = NULL, input_shape = NULL)
+layer_spatial_dropout_2d(x, rate, data_format = NULL)
 }
 \arguments{
 \item{x}{Model or layer}
@@ -16,10 +16,6 @@ mode, the channels dimension (the depth) is at index 1, in 'channels_last'
 mode is it at index 3. It defaults to the \code{image_data_format} value found
 in your Keras config file at \code{~/.keras/keras.json}. If you never set it,
 then it will be "channels_last".}
-
-\item{input_shape}{Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.}
 }
 \description{
 This version performs the same function as Dropout, however it drops entire

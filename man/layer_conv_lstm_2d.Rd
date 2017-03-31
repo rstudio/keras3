@@ -14,7 +14,7 @@ layer_conv_lstm_2d(x, filters, kernel_size, strides = c(1L, 1L),
   activity_regularizer = NULL, kernel_constraint = NULL,
   recurrent_constraint = NULL, bias_constraint = NULL,
   return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE,
-  dropout = 0, recurrent_dropout = 0, input_shape = NULL)
+  dropout = 0, recurrent_dropout = 0)
 }
 \arguments{
 \item{x}{Model or layer}
@@ -96,10 +96,6 @@ linear transformation of the inputs.}
 
 \item{recurrent_dropout}{Float between 0 and 1. Fraction of the units to drop
 for the linear transformation of the recurrent state.}
-
-\item{input_shape}{Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.}
 }
 \description{
 It is similar to an LSTM layer, but the input transformations and recurrent

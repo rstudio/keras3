@@ -39,9 +39,6 @@
 #'   layer (its "activation")..
 #' @param kernel_constraint Constraint function applied to the kernel matrix.
 #' @param bias_constraint Constraint function applied to the bias vector.
-#' @param input_shape Dimensionality of the input (integer) not including the 
-#'   samples axis. This argument is required when using this layer as the first 
-#'   layer in a model.
 #'   
 #' @section Input shape: 3D tensor with shape: `(batch_size, steps, input_dim)`
 #'   
@@ -53,7 +50,7 @@ layer_conv_1d <- function(x, filters, kernel_size, strides = 1L, padding = "vali
                           dilation_rate = 1L, activation = NULL, use_bias = TRUE, 
                           kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+                          kernel_constraint = NULL, bias_constraint = NULL) {
   
   call_layer(keras$layers$Conv1D, x, list(
     filters = as.integer(filters),
@@ -69,8 +66,7 @@ layer_conv_1d <- function(x, filters, kernel_size, strides = 1L, padding = "vali
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape)
+    bias_constraint = bias_constraint
   ))
   
 }
@@ -137,7 +133,7 @@ layer_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding 
                           dilation_rate = c(1L, 1L), activation = NULL, use_bias = TRUE, 
                           kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+                          kernel_constraint = NULL, bias_constraint = NULL) {
   
   call_layer(keras$layers$Conv2D, x, list(
     filters = as.integer(filters),
@@ -154,8 +150,7 @@ layer_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding 
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape)
+    bias_constraint = bias_constraint
   ))
   
 }
@@ -226,7 +221,7 @@ layer_conv_3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padd
                           data_format = NULL, dilation_rate = c(1L, 1L, 1L), activation = NULL, use_bias = TRUE, 
                           kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+                          kernel_constraint = NULL, bias_constraint = NULL) {
   
   call_layer(keras$layers$Conv3D, x, list(
     filters = as.integer(filters),
@@ -243,8 +238,7 @@ layer_conv_3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padd
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape)
+    bias_constraint = bias_constraint
   ))
   
 }
@@ -310,7 +304,7 @@ layer_conv_2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L)
                                     data_format = "channels_last", activation = NULL, use_bias = TRUE, 
                                     kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                                     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                                    kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+                                    kernel_constraint = NULL, bias_constraint = NULL) {
   
   call_layer(keras$layers$Conv2DTranspose, x, list(
     filters = as.integer(filters),
@@ -326,8 +320,7 @@ layer_conv_2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L)
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape)
+    bias_constraint = bias_constraint
   ))
   
 }
@@ -397,7 +390,7 @@ layer_separable_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L)
                                     depth_multiplier = 1L, activation = NULL, use_bias = TRUE, 
                                     depthwise_initializer = "glorot_uniform", pointwise_initializer = "glorot_uniform", bias_initializer = "zeros", 
                                     depthwise_regularizer = NULL, pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                                    depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+                                    depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL) {
   
   call_layer(keras$layers$SeparableConv2D, x, list(
     filters = as.integer(filters),
@@ -417,8 +410,7 @@ layer_separable_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L)
     activity_regularizer = activity_regularizer,
     depthwise_constraint = depthwise_constraint,
     pointwise_constraint = pointwise_constraint,
-    bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape)
+    bias_constraint = bias_constraint
   ))
   
 }
@@ -809,8 +801,7 @@ layer_conv_lstm_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), pad
                                kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
                                unit_forget_bias = TRUE, kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, 
                                activity_regularizer = NULL, kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
-                               return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, dropout = 0.0, recurrent_dropout = 0.0, 
-                               input_shape = NULL) {
+                               return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, dropout = 0.0, recurrent_dropout = 0.0) {
   
   call_layer(tf$contrib$keras$layers$ConvLSTM2D, x, list(
     filters = as.integer(filters),
@@ -836,8 +827,7 @@ layer_conv_lstm_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), pad
     go_backwards = go_backwards,
     stateful = stateful,
     dropout = dropout,
-    recurrent_dropout = recurrent_dropout,
-    input_shape = normalize_shape(input_shape)
+    recurrent_dropout = recurrent_dropout
   ))
   
 }

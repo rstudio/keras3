@@ -4,16 +4,12 @@
 \alias{layer_spatial_dropout_1d}
 \title{Spatial 1D version of Dropout.}
 \usage{
-layer_spatial_dropout_1d(x, rate, input_shape = NULL)
+layer_spatial_dropout_1d(x, rate)
 }
 \arguments{
 \item{x}{Model or layer}
 
 \item{rate}{float between 0 and 1. Fraction of the input units to drop.}
-
-\item{input_shape}{Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.}
 }
 \description{
 This version performs the same function as Dropout, however it drops entire

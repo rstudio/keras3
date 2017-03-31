@@ -5,7 +5,7 @@
 \title{Average pooling operation for 3D data (spatial or spatio-temporal).}
 \usage{
 layer_average_pooling_3d(x, pool_size = c(2L, 2L, 2L), strides = NULL,
-  padding = "valid", data_format = NULL, input_shape = NULL)
+  padding = "valid", data_format = NULL)
 }
 \arguments{
 \item{x}{Model or layer}
@@ -24,10 +24,6 @@ dimension.}
 to inputs with shape \code{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}. It defaults to the \code{image_data_format} value found in your
 Keras config file at \code{~/.keras/keras.json}. If you never set it, then it
 will be "channels_last".}
-
-\item{input_shape}{Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.}
 }
 \description{
 Average pooling operation for 3D data (spatial or spatio-temporal).

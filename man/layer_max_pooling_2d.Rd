@@ -5,7 +5,7 @@
 \title{Max pooling operation for spatial data.}
 \usage{
 layer_max_pooling_2d(x, pool_size = c(2L, 2L), strides = NULL,
-  padding = "valid", data_format = NULL, input_shape = NULL)
+  padding = "valid", data_format = NULL)
 }
 \arguments{
 \item{x}{Model or layer}
@@ -25,10 +25,6 @@ it will default to \code{pool_size}.}
 \code{channels_last} corresponds to inputs with shape \code{(batch, width, height, channels)} while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, width, height)}. It defaults to the \code{image_data_format} value
 found in your Keras config file at \code{~/.keras/keras.json}. If you never set
 it, then it will be "channels_last".}
-
-\item{input_shape}{Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.}
 }
 \description{
 Max pooling operation for spatial data.

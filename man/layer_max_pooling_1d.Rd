@@ -4,8 +4,7 @@
 \alias{layer_max_pooling_1d}
 \title{Max pooling operation for temporal data.}
 \usage{
-layer_max_pooling_1d(x, pool_size = 2L, strides = NULL, padding = "valid",
-  input_shape = NULL)
+layer_max_pooling_1d(x, pool_size = 2L, strides = NULL, padding = "valid")
 }
 \arguments{
 \item{x}{Model or layer}
@@ -16,10 +15,6 @@ layer_max_pooling_1d(x, pool_size = 2L, strides = NULL, padding = "valid",
 halve the input. If NULL, it will default to \code{pool_size}.}
 
 \item{padding}{One of \code{"valid"} or \code{"same"} (case-insensitive).}
-
-\item{input_shape}{Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.}
 }
 \description{
 Max pooling operation for temporal data.

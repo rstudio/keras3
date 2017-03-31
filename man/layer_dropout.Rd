@@ -4,8 +4,7 @@
 \alias{layer_dropout}
 \title{Applies Dropout to the input.}
 \usage{
-layer_dropout(x, rate, noise_shape = NULL, seed = NULL,
-  input_shape = NULL)
+layer_dropout(x, rate, noise_shape = NULL, seed = NULL)
 }
 \arguments{
 \item{x}{Model or layer}
@@ -19,10 +18,6 @@ dropout mask to be the same for all timesteps, you can use
 \code{noise_shape=c(batch_size, 1, features)}.}
 
 \item{seed}{A Python integer to use as random seed.}
-
-\item{input_shape}{Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.}
 }
 \description{
 Dropout consists in randomly setting a fraction \code{p} of input units to 0 at

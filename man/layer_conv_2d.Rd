@@ -10,7 +10,7 @@ layer_conv_2d(x, filters, kernel_size, strides = c(1L, 1L),
   kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
   kernel_regularizer = NULL, bias_regularizer = NULL,
   activity_regularizer = NULL, kernel_constraint = NULL,
-  bias_constraint = NULL, input_shape = NULL)
+  bias_constraint = NULL)
 }
 \arguments{
 \item{x}{Model or layer}
@@ -61,10 +61,6 @@ layer (its "activation")..}
 \item{kernel_constraint}{Constraint function applied to the kernel matrix.}
 
 \item{bias_constraint}{Constraint function applied to the bias vector.}
-
-\item{input_shape}{Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.}
 }
 \description{
 This layer creates a convolution kernel that is convolved with the layer

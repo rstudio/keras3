@@ -263,13 +263,12 @@ layer_masking <- function(x, mask_value = 0.0, input_shape = NULL) {
 #' @param seed A Python integer to use as random seed.
 #'   
 #' @export
-layer_dropout <- function(x, rate, noise_shape = NULL, seed = NULL, input_shape = NULL) {
+layer_dropout <- function(x, rate, noise_shape = NULL, seed = NULL) {
   
   call_layer(tf$contrib$keras$layers$Dropout, x, list(
     rate = rate,
     noise_shape = normalize_shape(noise_shape),
-    seed = seed,
-    input_shape = normalize_shape(input_shape)
+    seed = seed
   ))
   
 }
@@ -294,11 +293,10 @@ layer_dropout <- function(x, rate, noise_shape = NULL, seed = NULL, input_shape 
 #'   Networks](https://arxiv.org/abs/1411.4280)
 #'   
 #' @export
-layer_spatial_dropout_1d <- function(x, rate, input_shape = NULL) {
+layer_spatial_dropout_1d <- function(x, rate) {
   
   call_layer(tf$contrib$keras$layers$SpatialDropout1D, x, list(
-    rate = rate,
-    input_shape = normalize_shape(input_shape)
+    rate = rate
   ))
   
 }
@@ -332,12 +330,11 @@ layer_spatial_dropout_1d <- function(x, rate, input_shape = NULL) {
 #'   Networks](https://arxiv.org/abs/1411.4280)
 #'   
 #' @export
-layer_spatial_dropout_2d <- function(x, rate, data_format = NULL, input_shape = NULL) {
+layer_spatial_dropout_2d <- function(x, rate, data_format = NULL) {
   
   call_layer(tf$contrib$keras$layers$SpatialDropout2D, x, list(
     rate = rate,
-    data_format = data_format,
-    input_shape = normalize_shape(input_shape)
+    data_format = data_format
   ))
   
 }
@@ -372,12 +369,11 @@ layer_spatial_dropout_2d <- function(x, rate, data_format = NULL, input_shape = 
 #'   Networks](https://arxiv.org/abs/1411.4280)
 #'   
 #' @export
-layer_spatial_dropout_3d <- function(x, rate, data_format = NULL, input_shape = NULL) {
+layer_spatial_dropout_3d <- function(x, rate, data_format = NULL) {
   
   call_layer(tf$contrib$keras$layers$SpatialDropout3D, x, list(
     rate = rate,
-    data_format = data_format,
-    input_shape = normalize_shape(input_shape)
+    data_format = data_format
   ))
   
 }
@@ -390,11 +386,9 @@ layer_spatial_dropout_3d <- function(x, rate, data_format = NULL, input_shape = 
 #' @inheritParams layer_activation
 #' 
 #' @export
-layer_flatten <- function(x, input_shape = NULL) {
+layer_flatten <- function(x) {
   
-  call_layer(keras$layers$Flatten, x, list(
-    input_shape = normalize_shape(input_shape)
-  ))
+  call_layer(keras$layers$Flatten, x, list())
   
 }
 

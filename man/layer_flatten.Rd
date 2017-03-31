@@ -4,14 +4,10 @@
 \alias{layer_flatten}
 \title{Flattens an input}
 \usage{
-layer_flatten(x, input_shape = NULL)
+layer_flatten(x)
 }
 \arguments{
 \item{x}{Model or layer}
-
-\item{input_shape}{Input shape (list of integers, does not include the
-samples axis) which is required when using this layer as the first layer in
-a model.}
 }
 \description{
 Flatten a given input, does not affect the batch size.
