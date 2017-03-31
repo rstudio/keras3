@@ -405,6 +405,18 @@ test_call_succeeds("layer_gaussian_dropout", {
 })
 
 
+test_call_succeeds("time_distributed", {
+  model_sequential() %>% 
+    time_distributed(layer_dense(units = 8), input_shape = c(10, 16))
+})
+
+test_call_succeeds("bidirectional", {
+  model_sequential() %>% 
+    bidirectional(layer_lstm(units = 10, return_sequences = TRUE), input_shape = c(5, 10)) %>% 
+    bidirectional(layer_lstm(units = 10)) %>% 
+    layer_dense(units = 5) %>% 
+    layer_activation(activation = "softmax")
+})
 
 
 

@@ -6,6 +6,8 @@
 \usage{
 layer_lstm(x, units, activation = "tanh",
   recurrent_activation = "hard_sigmoid", use_bias = TRUE,
+  return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE,
+  unroll = FALSE, implementation = 0L,
   kernel_initializer = "glorot_uniform",
   recurrent_initializer = "orthogonal", bias_initializer = "zeros",
   unit_forget_bias = TRUE, kernel_regularizer = NULL,
@@ -26,6 +28,29 @@ no activation is applied (ie. "linear" activation: \code{a(x) = x}).}
 step.}
 
 \item{use_bias}{Boolean, whether the layer uses a bias vector.}
+
+\item{return_sequences}{Boolean. Whether to return the last output in the
+output sequence, or the full sequence.}
+
+\item{go_backwards}{Boolean (default FALSE). If TRUE, process the input
+sequence backwards.}
+
+\item{stateful}{Boolean (default FALSE). If TRUE, the last state for each
+sample at index i in a batch will be used as initial state for the sample
+of index i in the following batch.}
+
+\item{unroll}{Boolean (default FALSE). If TRUE, the network will be unrolled,
+else a symbolic loop will be used. Unrolling can speed-up a RNN, although
+it tends to be more memory-intensive. Unrolling is only suitable for short
+sequences.}
+
+\item{implementation}{one of {0, 1, or 2}. If set to 0, the RNN will use an
+implementation that uses fewer, larger matrix products, thus running faster
+on CPU but consuming more memory. If set to 1, the RNN will use more matrix
+products, but smaller ones, thus running slower (may actually be faster on
+GPU) while consuming less memory. If set to 2 (LSTM/GRU only), the RNN will
+combine the input gate, the forget gate and the output gate into a single
+matrix, enabling more time-efficient parallelization on the GPU.}
 
 \item{kernel_initializer}{Initializer for the \code{kernel} weights matrix, used
 for the linear transformation of the inputs..}

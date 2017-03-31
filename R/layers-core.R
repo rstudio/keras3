@@ -405,6 +405,14 @@ as_integer_tuple <- function(x) {
     tuple(as.list(as.integer(x)))
 }
 
+as_nullable_integer <- function(x) {
+  if (is.null(x))
+    x
+  else
+    as.integer(x)
+}
+
+
 # Helper function to coerce shape arguments to tuple
 normalize_shape <- function(shape) {
   
@@ -435,8 +443,11 @@ call_layer <- function(layer_function, x, args) {
   # call function
   layer <- do.call(layer_function, args)
   
-  # compose
-  compose_layer(x, layer)
+  # compose if we have an x
+  if (missing(x) || is.null(x))
+    layer
+  else
+    compose_layer(x, layer)
 }
 
 
@@ -445,14 +456,13 @@ call_layer <- function(layer_function, x, args) {
 compose_layer <- function(x, layer) {
   
   # if a sequential is passed then add it to the model
-  if (inherits(x, "tensorflow.contrib.keras.python.keras.models.Sequential")) {
+  if (is_sequential_model(x)) {
     
     x$add(layer)
     x
     
   # if a layer is passed then wrap the layer
-  } else if (inherits(x, "tensorflow.python.framework.ops.Tensor") ||
-             inherits(x, "tensorflow.contrib.keras.python.keras.engine.topology.Layer")) {
+  } else if (is_layer(x)) {
     
     py_call(layer, x)
     
@@ -464,5 +474,13 @@ compose_layer <- function(x, layer) {
   }
 }
 
+is_sequential_model <- function(x) {
+  inherits(x, "tensorflow.contrib.keras.python.keras.models.Sequential")
+}
+
+is_layer <- function(x) {
+  inherits(x, "tensorflow.python.framework.ops.Tensor") ||
+  inherits(x, "tensorflow.contrib.keras.python.keras.engine.topology.Layer")
+}
 
 

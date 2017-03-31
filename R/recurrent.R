@@ -2,47 +2,70 @@
 #' Fully-connected RNN where the output is to be fed back to input.
 #' 
 #' @inheritParams layer_dense
-#' 
+#'   
 #' @param units Positive integer, dimensionality of the output space.
-#' @param activation Activation function to use. If you don't specify anything,
+#' @param activation Activation function to use. If you don't specify anything, 
 #'   no activation is applied (ie. "linear" activation: `a(x) = x`).
 #' @param use_bias Boolean, whether the layer uses a bias vector.
-#' @param kernel_initializer Initializer for the `kernel` weights matrix, used
+#' @param return_sequences Boolean. Whether to return the last output in the 
+#'   output sequence, or the full sequence.
+#' @param go_backwards Boolean (default FALSE). If TRUE, process the input 
+#'   sequence backwards.
+#' @param stateful Boolean (default FALSE). If TRUE, the last state for each 
+#'   sample at index i in a batch will be used as initial state for the sample 
+#'   of index i in the following batch.
+#' @param unroll Boolean (default FALSE). If TRUE, the network will be unrolled,
+#'   else a symbolic loop will be used. Unrolling can speed-up a RNN, although 
+#'   it tends to be more memory-intensive. Unrolling is only suitable for short 
+#'   sequences.
+#' @param implementation one of {0, 1, or 2}. If set to 0, the RNN will use an 
+#'   implementation that uses fewer, larger matrix products, thus running faster
+#'   on CPU but consuming more memory. If set to 1, the RNN will use more matrix
+#'   products, but smaller ones, thus running slower (may actually be faster on 
+#'   GPU) while consuming less memory. If set to 2 (LSTM/GRU only), the RNN will
+#'   combine the input gate, the forget gate and the output gate into a single 
+#'   matrix, enabling more time-efficient parallelization on the GPU.
+#' @param kernel_initializer Initializer for the `kernel` weights matrix, used 
 #'   for the linear transformation of the inputs..
-#' @param recurrent_initializer Initializer for the `recurrent_kernel` weights
+#' @param recurrent_initializer Initializer for the `recurrent_kernel` weights 
 #'   matrix, used for the linear transformation of the recurrent state..
 #' @param bias_initializer Initializer for the bias vector.
-#' @param kernel_regularizer Regularizer function applied to the `kernel`
+#' @param kernel_regularizer Regularizer function applied to the `kernel` 
 #'   weights matrix.
-#' @param recurrent_regularizer Regularizer function applied to the
+#' @param recurrent_regularizer Regularizer function applied to the 
 #'   `recurrent_kernel` weights matrix.
 #' @param bias_regularizer Regularizer function applied to the bias vector.
 #' @param activity_regularizer Regularizer function applied to the output of the
 #'   layer (its "activation")..
-#' @param kernel_constraint Constraint function applied to the `kernel` weights
+#' @param kernel_constraint Constraint function applied to the `kernel` weights 
 #'   matrix.
-#' @param recurrent_constraint Constraint function applied to the
+#' @param recurrent_constraint Constraint function applied to the 
 #'   `recurrent_kernel` weights matrix.
 #' @param bias_constraint Constraint function applied to the bias vector.
-#' @param dropout Float between 0 and 1. Fraction of the units to drop for the
+#' @param dropout Float between 0 and 1. Fraction of the units to drop for the 
 #'   linear transformation of the inputs.
 #' @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
 #'   for the linear transformation of the recurrent state.
 #'   
-#' @section References: 
-#' - [A Theoretically Grounded Application of Dropout in
+#' @section References: - [A Theoretically Grounded Application of Dropout in
 #'   Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
 #'   
 #' @export
-layer_simple_rnn <- function(x, units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glorot_uniform", 
-                             recurrent_initializer = "orthogonal", bias_initializer = "zeros", kernel_regularizer = NULL, 
-                             recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
+layer_simple_rnn <- function(x, units, activation = "tanh", use_bias = TRUE, 
+                             return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,
+                             kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
+                             kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                              kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
                              dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL) {
   call_layer(tf$contrib$keras$layers$SimpleRNN, x, list(
     units = as.integer(units),
     activation = activation,
     use_bias = use_bias,
+    return_sequences = return_sequences,
+    go_backwards = go_backwards,
+    stateful = stateful,
+    unroll = unroll,
+    implementation = as.integer(implementation),
     kernel_initializer = kernel_initializer,
     recurrent_initializer = recurrent_initializer,
     bias_initializer = bias_initializer,
@@ -62,7 +85,7 @@ layer_simple_rnn <- function(x, units, activation = "tanh", use_bias = TRUE, ker
 
 #' Gated Recurrent Unit - Cho et al.
 #' 
-#' @inheritParams layer_dense
+#' @inheritParams layer_simple_rnn
 #' 
 #' @param units Positive integer, dimensionality of the output space.
 #' @param activation Activation function to use. If you don't specify anything,
@@ -104,6 +127,7 @@ layer_simple_rnn <- function(x, units, activation = "tanh", use_bias = TRUE, ker
 #'   
 #' @export
 layer_gru <- function(x, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 
+                      return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,
                       kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
                       kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                       kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
@@ -113,6 +137,11 @@ layer_gru <- function(x, units, activation = "tanh", recurrent_activation = "har
     activation = activation,
     recurrent_activation = recurrent_activation,
     use_bias = use_bias,
+    return_sequences = return_sequences,
+    go_backwards = go_backwards,
+    stateful = stateful,
+    unroll = unroll,
+    implementation = as.integer(implementation),
     kernel_initializer = kernel_initializer,
     recurrent_initializer = recurrent_initializer,
     bias_initializer = bias_initializer,
@@ -135,7 +164,7 @@ layer_gru <- function(x, units, activation = "tanh", recurrent_activation = "har
 #' For a step-by-step description of the algorithm, see [this
 #' tutorial](http://deeplearning.net/tutorial/lstm.html).
 #' 
-#' @inheritParams layer_dense
+#' @inheritParams layer_simple_rnn
 #' 
 #' @param units Positive integer, dimensionality of the output space.
 #' @param activation Activation function to use. If you don't specify anything,
@@ -176,6 +205,7 @@ layer_gru <- function(x, units, activation = "tanh", recurrent_activation = "har
 #'   
 #' @export
 layer_lstm <- function(x, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 
+                       return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,
                        kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
                        unit_forget_bias = TRUE, kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, 
                        activity_regularizer = NULL, kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
@@ -185,6 +215,11 @@ layer_lstm <- function(x, units, activation = "tanh", recurrent_activation = "ha
     activation = activation,
     recurrent_activation = recurrent_activation,
     use_bias = use_bias,
+    return_sequences = return_sequences,
+    go_backwards = go_backwards,
+    stateful = stateful,
+    unroll = unroll,
+    implementation = as.integer(implementation),
     kernel_initializer = kernel_initializer,
     recurrent_initializer = recurrent_initializer,
     bias_initializer = bias_initializer,
