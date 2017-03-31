@@ -728,6 +728,124 @@ layer_cropping_3d <- function(x, cropping = list(c(1L, 1L), c(1L, 1L), c(1L, 1L)
 }
 
 
+#' Convolutional LSTM.
+#' 
+#' It is similar to an LSTM layer, but the input transformations and recurrent
+#' transformations are both convolutional.
+#' 
+#' @inheritParams layer_conv_2d
+#' 
+#' @param filters Integer, the dimensionality of the output space (i.e. the
+#'   number output of filters in the convolution).
+#' @param kernel_size An integer or list of n integers, specifying the
+#'   dimensions of the convolution window.
+#' @param strides An integer or list of n integers, specifying the strides of
+#'   the convolution. Specifying any stride value != 1 is incompatible with
+#'   specifying any `dilation_rate` value != 1.
+#' @param padding One of `"valid"` or `"same"` (case-insensitive).
+#' @param data_format A string, one of `channels_last` (default) or
+#'   `channels_first`. The ordering of the dimensions in the inputs.
+#'   `channels_last` corresponds to inputs with shape `(batch, time, ...,
+#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
+#'   time, channels, ...)`. It defaults to the `image_data_format` value found
+#'   in your Keras config file at `~/.keras/keras.json`. If you never set it,
+#'   then it will be "channels_last".
+#' @param dilation_rate An integer or list of n integers, specifying the
+#'   dilation rate to use for dilated convolution. Currently, specifying any
+#'   `dilation_rate` value != 1 is incompatible with specifying any `strides`
+#'   value != 1.
+#' @param activation Activation function to use. If you don't specify anything,
+#'   no activation is applied (ie. "linear" activation: `a(x) = x`).
+#' @param recurrent_activation Activation function to use for the recurrent
+#'   step.
+#' @param use_bias Boolean, whether the layer uses a bias vector.
+#' @param kernel_initializer Initializer for the `kernel` weights matrix, used
+#'   for the linear transformation of the inputs..
+#' @param recurrent_initializer Initializer for the `recurrent_kernel` weights
+#'   matrix, used for the linear transformation of the recurrent state..
+#' @param bias_initializer Initializer for the bias vector.
+#' @param unit_forget_bias Boolean. If TRUE, add 1 to the bias of the forget
+#'   gate at initialization. Use in combination with `bias_initializer="zeros"`.
+#'   This is recommended in [Jozefowicz et
+#'   al.](http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
+#' @param kernel_regularizer Regularizer function applied to the `kernel`
+#'   weights matrix.
+#' @param recurrent_regularizer Regularizer function applied to the
+#'   `recurrent_kernel` weights matrix.
+#' @param bias_regularizer Regularizer function applied to the bias vector.
+#' @param activity_regularizer Regularizer function applied to the output of the
+#'   layer (its "activation")..
+#' @param kernel_constraint Constraint function applied to the `kernel` weights
+#'   matrix.
+#' @param recurrent_constraint Constraint function applied to the
+#'   `recurrent_kernel` weights matrix.
+#' @param bias_constraint Constraint function applied to the bias vector.
+#' @param return_sequences Boolean. Whether to return the last output in the
+#'   output sequence, or the full sequence.
+#' @param go_backwards Boolean (default FALSE). If TRUE, rocess the input
+#'   sequence backwards.
+#' @param stateful Boolean (default FALSE). If TRUE, the last state for each
+#'   sample at index i in a batch will be used as initial state for the sample
+#'   of index i in the following batch.
+#' @param dropout Float between 0 and 1. Fraction of the units to drop for the
+#'   linear transformation of the inputs.
+#' @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
+#'   for the linear transformation of the recurrent state.
+#'   
+#' @section Input shape: 
+#' - if data_format='channels_first' 5D tensor with shape:
+#'   `(samples,time, channels, rows, cols)` 
+#'   - if data_format='channels_last' 5D
+#'   tensor with shape: `(samples,time, rows, cols, channels)`
+#'   
+#' @section References: 
+#' - [Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting](http://arxiv.org/abs/1506.04214v1)
+#'   The current implementation does not include the feedback loop on the cells
+#'   output
+#'   
+#' @export
+layer_conv_lstm_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL, 
+                               dilation_rate = c(1L, 1L), activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 
+                               kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
+                               unit_forget_bias = TRUE, kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, 
+                               activity_regularizer = NULL, kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
+                               return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, dropout = 0.0, recurrent_dropout = 0.0, 
+                               input_shape = NULL) {
+  
+  call_layer(tf$contrib$keras$layers$ConvLSTM2D, x, list(
+    filters = as.integer(filters),
+    kernel_size = as_integer_tuple(kernel_size),
+    strides = as_integer_tuple(strides),
+    data_format = data_format,
+    dilation_rate = as.integer(dilation_rate),
+    activation = activation,
+    recurrent_activation = recurrent_activation,
+    use_bias = use_bias,
+    kernel_initializer = kernel_initializer,
+    recurrent_initializer = recurrent_initializer,
+    bias_initializer = bias_initializer,
+    unit_forget_bias = unit_forget_bias,
+    kernel_regularizer = kernel_regularizer,
+    recurrent_regularizer = recurrent_regularizer,
+    bias_regularizer = bias_regularizer,
+    activity_regularizer = activity_regularizer,
+    kernel_constraint = kernel_constraint,
+    recurrent_constraint = recurrent_constraint,
+    bias_constraint = bias_constraint,
+    return_sequences = return_sequences,
+    go_backwards = go_backwards,
+    stateful = stateful,
+    dropout = dropout,
+    recurrent_dropout = recurrent_dropout,
+    input_shape = normalize_shape(input_shape)
+  ))
+  
+}
+
+
+
+
+
 
 normalize_padding <- function(padding, dims) {
   normalize_scale("padding", padding, dims)
