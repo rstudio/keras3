@@ -40,6 +40,37 @@ test_call_succeeds("layer_activation_elu", {
     layer_activation_elu()
 })
 
+test_call_succeeds("layer_activity_regularization", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_activity_regularization()
+})
+
+test_call_succeeds("layer_dropout", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_dropout(rate = 0.5, noise_shape = c(1))
+})
+
+test_call_succeeds("layer_lambda", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_lambda(function(t) t)
+})
+
+test_call_succeeds("layer_masking", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_masking(mask_value = 0.5)
+})
+
+test_call_succeeds("layer_repeat_vector", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_repeat_vector(3)
+})
+
+
 test_call_succeeds("layer_reshape", {
   model_sequential() %>% 
     layer_dense(32, input_shape = c(784)) %>% 

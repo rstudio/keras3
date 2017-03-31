@@ -152,6 +152,128 @@ layer_permute <- function(x, dims, input_shape = NULL) {
   
 }
 
+#' Repeats the input n times.
+#' 
+#' @inheritParams layer_dense
+#' 
+#' @param n integer, repetition factor.
+#'   
+#' @section Input shape: 2D tensor of shape `(num_samples, features)`.
+#'   
+#' @section Output shape: 3D tensor of shape `(num_samples, n, features)`.
+#'   
+#' @export
+layer_repeat_vector <- function(x, n) {
+  
+  call_layer(tf$contrib$keras$layers$RepeatVector, x, list(
+    n = as.integer(n)
+  ))
+  
+}
+
+#' Wraps arbitrary expression as a layer
+#' 
+#' @inheritParams layer_dense
+#' 
+#' @param function The function to be evaluated. Takes input tensor as first
+#'   argument.
+#' @param mask mask
+#' @param arguments optional named list of keyword arguments to be passed to the
+#'   function.
+#'   
+#' @section Input shape: Arbitrary. Use the keyword argument input_shape (list
+#'   of integers, does not include the samples axis) when using this layer as
+#'   the first layer in a model.
+#'   
+#' @section Output shape: Arbitrary (based on tensor returned from the function)
+#'   
+#' @export
+layer_lambda <- function(x, f, mask = NULL, arguments = NULL, input_shape = NULL) {
+  
+  call_layer(tf$contrib$keras$layers$Lambda, x, list(
+    `function` = f,
+    mask = mask,
+    arguments = arguments,
+    input_shape = normalize_shape(input_shape)
+  ))
+  
+}
+
+
+#' Layer that applies an update to the cost function based input activity.
+#' 
+#' @inheritParams layer_dense
+#' 
+#' @param l1 L1 regularization factor (positive float).
+#' @param l2 L2 regularization factor (positive float).
+#'   
+#' @section Input shape: Arbitrary. Use the keyword argument `input_shape` (list
+#'   of integers, does not include the samples axis) when using this layer as
+#'   the first layer in a model.
+#'   
+#' @section Output shape: Same shape as input.
+#'   
+#' @export
+layer_activity_regularization <- function(x, l1 = 0.0, l2 = 0.0, input_shape = NULL) {
+  
+  call_layer(tf$contrib$keras$layers$ActivityRegularization, x, list(
+    l1 = l1,
+    l2 = l2,
+    input_shape = normalize_shape(input_shape)
+  ))
+  
+}
+
+#' Masks a sequence by using a mask value to skip timesteps.
+#' 
+#' For each timestep in the input tensor (dimension #1 in the tensor), if all
+#' values in the input tensor at that timestep are equal to `mask_value`, then
+#' the timestep will be masked (skipped) in all downstream layers (as long as
+#' they support masking). If any downstream layer does not support masking yet
+#' receives such an input mask, an exception will be raised.
+#' 
+#' @inheritParams layer_dense
+#' 
+#' @param mask_value float, mask value
+#'   
+#' @export
+layer_masking <- function(x, mask_value = 0.0, input_shape = NULL) {
+  
+  call_layer(tf$contrib$keras$layers$Masking, x, list(
+    mask_value = mask_value,
+    input_shape = normalize_shape(input_shape)
+  ))
+  
+}
+
+
+#' Applies Dropout to the input.
+#' 
+#' Dropout consists in randomly setting a fraction `p` of input units to 0 at
+#' each update during training time, which helps prevent overfitting.
+#' 
+#' @inheritParams layer_dense
+#' 
+#' @param rate float between 0 and 1. Fraction of the input units to drop.
+#' @param noise_shape 1D integer tensor representing the shape of the binary
+#'   dropout mask that will be multiplied with the input. For instance, if your
+#'   inputs have shape `(batch_size, timesteps, features)` and you want the
+#'   dropout mask to be the same for all timesteps, you can use
+#'   `noise_shape=c(batch_size, 1, features)`.
+#' @param seed A Python integer to use as random seed.
+#'   
+#' @export
+layer_dropout <- function(x, rate, noise_shape = NULL, seed = NULL, input_shape = NULL) {
+  
+  call_layer(tf$contrib$keras$layers$Dropout, x, list(
+    rate = rate,
+    noise_shape = normalize_shape(noise_shape),
+    seed = seed,
+    input_shape = normalize_shape(input_shape)
+  ))
+  
+}
+
 
 #' Flattens an input
 #' 
