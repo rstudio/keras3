@@ -64,15 +64,6 @@ layer in a model.}
 that weights are unshared, that is, a different set of filters is applied at
 each different patch of the input.
 }
-\section{Examples}{
- ```python # apply a 3x3 unshared weights convolution with
-64 output filters on a 32x32 image # with \code{data_format="channels_last"}:
-model = Sequential() model.add(LocallyConnected2D(64, (3, 3),
-input_shape=(32, 32, 3))) # now model.output_shape == (NULL, 30, 30, 64) #
-notice that this layer will consume (30\emph{30)}(3\emph{3}3\emph{64) + (30}30)*64
-parameters
-}
-
 \section{Input shape}{
  4D tensor with shape: \code{(samples, channels, rows, cols)}
 if data_format='channels_first' or 4D tensor with shape: \code{(samples, rows, cols, channels)} if data_format='channels_last'.
