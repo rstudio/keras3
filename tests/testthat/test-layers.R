@@ -310,3 +310,19 @@ test_call_succeeds("layer_global_max_pooling_3d", {
     layer_global_max_pooling_3d()
 })
 
+test_call_succeeds("layer_locally_connected_1d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,16)) %>% 
+    layer_locally_connected_1d(filters = 3, kernel_size = 2)
+})
+
+test_call_succeeds("layer_locally_connected_2d", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,4,4)) %>% 
+    layer_locally_connected_2d(filters = 3, kernel_size = c(2, 2))
+})
+
+
+
