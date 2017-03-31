@@ -382,6 +382,11 @@ test_call_succeeds("layer_concatenate", {
   model(merge_inputs, output)
 })
 
-
+test_call_succeeds("layer_batch_normalization", {
+  model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,16)) %>% 
+    layer_batch_normalization()
+})
 
 

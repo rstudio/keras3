@@ -12,7 +12,7 @@
 #' @family merge layers
 #'   
 #' @export
-layer_add <- function(x, inputs) {
+layer_add <- function(inputs) {
   tf$contrib$keras$layers$add(inputs = inputs)
 }
 
