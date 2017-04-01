@@ -19,3 +19,6 @@ outputs will not be combined, they will be returned as a list.}
 \description{
 Bidirectional wrapper for RNNs.
 }
+\seealso{
+Other layer wrappers: \code{\link{time_distributed}}
+}

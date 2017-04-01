@@ -13,6 +13,8 @@
 #' @inheritParams layer_dense
 #' 
 #' @param layer A layer instance.
+#' 
+#' @family layer wrappers
 #'   
 #' @export
 time_distributed <- function(x, layer, input_shape = NULL) {
@@ -36,6 +38,8 @@ time_distributed <- function(x, layer, input_shape = NULL) {
 #'   be combined. One of 'sum', 'mul', 'concat', 'ave', NULL. If NULL, the
 #'   outputs will not be combined, they will be returned as a list.
 #' @param weights weights
+#'   
+#' @family layer wrappers
 #'   
 #' @export
 bidirectional <- function(x, layer, merge_mode = "concat", weights = NULL, input_shape = NULL) {

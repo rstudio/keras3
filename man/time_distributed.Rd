@@ -26,3 +26,6 @@ including the samples dimension, is \code{(10, 16)}. You can then use
 \code{time_distributed} to apply a \code{layer_dense} to each of the 10 timesteps,
 independently.
 }
+\seealso{
+Other layer wrappers: \code{\link{bidirectional}}
+}
