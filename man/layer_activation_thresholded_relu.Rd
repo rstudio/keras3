@@ -21,4 +21,9 @@ It follows: \code{f(x) = x} for \code{x > theta}, \code{f(x) = 0} otherwise.
 \seealso{
 \href{https://arxiv.org/abs/1402.3337}{Zero-bias autoencoders and
 the benefits of co-adapting features}
+
+Other activation layers: \code{\link{layer_activation_elu}},
+  \code{\link{layer_activation_leaky_relu}},
+  \code{\link{layer_activation_parametric_relu}},
+  \code{\link{layer_activation}}
 }

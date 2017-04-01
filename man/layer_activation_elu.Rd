@@ -23,4 +23,9 @@ It follows: \code{f(x) = alpha * (exp(x) - 1.0)} for \code{x < 0}, \code{f(x) = 
 \seealso{
 \href{https://arxiv.org/abs/1511.07289v1}{Fast and Accurate Deep
 Network Learning by Exponential Linear Units (ELUs)}.
+
+Other activation layers: \code{\link{layer_activation_leaky_relu}},
+  \code{\link{layer_activation_parametric_relu}},
+  \code{\link{layer_activation_thresholded_relu}},
+  \code{\link{layer_activation}}
 }

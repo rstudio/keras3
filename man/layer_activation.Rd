@@ -19,3 +19,9 @@ a model.}
 \description{
 Apply an activation function to an output.
 }
+\seealso{
+Other activation layers: \code{\link{layer_activation_elu}},
+  \code{\link{layer_activation_leaky_relu}},
+  \code{\link{layer_activation_parametric_relu}},
+  \code{\link{layer_activation_thresholded_relu}}
+}

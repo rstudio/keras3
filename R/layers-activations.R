@@ -7,6 +7,8 @@
 #'   samples axis) which is required when using this layer as the first layer in
 #'   a model.
 #'   
+#' @family activation layers    
+#'   
 #' @export
 layer_activation <- function(x, activation, input_shape = NULL) {
   
@@ -28,6 +30,8 @@ layer_activation <- function(x, activation, input_shape = NULL) {
 #' @seealso 
 #' \href{https://web.stanford.edu/~awni/papers/relu_hybrid_icml2013_final.pdf}{Rectifier
 #' Nonlinearities Improve Neural Network Acoustic Models}.
+#' 
+#' @family activation layers 
 #' 
 #' @export
 layer_activation_leaky_relu <- function(x, alpha = 0.3, input_shape = NULL) {
@@ -56,6 +60,8 @@ layer_activation_leaky_relu <- function(x, alpha = 0.3, input_shape = NULL) {
 #'   
 #' @seealso \href{https://arxiv.org/abs/1502.01852}{Delving Deep into
 #'   Rectifiers: Surpassing Human-Level Performance on ImageNet Classification}
+#'   
+#' @family activation layers  
 #'   
 #' @export
 layer_activation_parametric_relu <- function(x, alpha_initializer = "zeros", alpha_regularizer = NULL, 
@@ -87,6 +93,8 @@ layer_activation_parametric_relu <- function(x, alpha_initializer = "zeros", alp
 #' @seealso \href{https://arxiv.org/abs/1402.3337}{Zero-bias autoencoders and
 #'   the benefits of co-adapting features}
 #'   
+#' @family activation layers  
+#'   
 #' @export
 layer_activation_thresholded_relu <- function(x, theta = 1.0, input_shape = NULL) {
   
@@ -108,6 +116,8 @@ layer_activation_thresholded_relu <- function(x, theta = 1.0, input_shape = NULL
 #'   
 #' @seealso \href{https://arxiv.org/abs/1511.07289v1}{Fast and Accurate Deep
 #' Network Learning by Exponential Linear Units (ELUs)}.
+#' 
+#' @family activation layers  
 #' 
 #' @export
 layer_activation_elu <- function(x, alpha = 1.0, input_shape = NULL) {
