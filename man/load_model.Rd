@@ -16,5 +16,8 @@ load_model(filepath, custom_objects = NULL)
 Load a Keras model from an HDF5 file
 }
 \seealso{
-\link{save_model}
+Other model functions: \code{\link{compile}},
+  \code{\link{evaluate}}, \code{\link{fit}},
+  \code{\link{model_sequential}}, \code{\link{model}},
+  \code{\link{predict}}, \code{\link{save_model}}
 }

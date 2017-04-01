@@ -28,5 +28,8 @@ Generates output predictions for the input samples, processing the samples in
 a batched way.
 }
 \seealso{
-\link{compile}, \link{fit}, \link{evaluate}
+Other model functions: \code{\link{compile}},
+  \code{\link{evaluate}}, \code{\link{fit}},
+  \code{\link{load_model}}, \code{\link{model_sequential}},
+  \code{\link{model}}, \code{\link{save_model}}
 }

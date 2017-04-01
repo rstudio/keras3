@@ -37,5 +37,8 @@ list of scalars (if the model has multiple outputs and/or metrics).
 Evaluate a Keras model
 }
 \seealso{
-\link{compile}, \link{fit}, \link{predict}
+Other model functions: \code{\link{compile}},
+  \code{\link{fit}}, \code{\link{load_model}},
+  \code{\link{model_sequential}}, \code{\link{model}},
+  \code{\link{predict}}, \code{\link{save_model}}
 }

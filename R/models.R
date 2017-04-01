@@ -6,6 +6,8 @@
 #' @param inputs Input layer
 #' @param outputs Output layer
 #'
+#' @family model functions
+#'
 #' @export
 model <- function(inputs, outputs) {
   keras$models$Model(inputs = inputs, outputs = outputs)
@@ -23,6 +25,8 @@ model <- function(inputs, outputs) {
 #' shape. What that means is that it should have received an `input_shape` or
 #' `batch_input_shape` argument, or for some type of layers (recurrent,
 #' Dense...) an `input_dim` argument.
+#' 
+#' @family model functions
 #' 
 #' @export
 model_sequential <- function(layers = NULL, name = NULL) {
@@ -46,7 +50,7 @@ model_sequential <- function(layers = NULL, name = NULL) {
 #'   weights (1D). If the model has multiple outputs, you can use a different 
 #'   `sample_weight_mode` on each output by passing a list of modes.
 #'   
-#' @seealso [fit], [evaluate], [predict]
+#' @family model functions
 #'   
 #' @export
 compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
@@ -115,7 +119,7 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
 #' @param initial_epoch epoch at which to start training (useful for resuming a
 #'   previous training run).
 #' 
-#' @seealso [compile], [evaluate], [predict]
+#' @family model functions
 #' 
 #' @export
 fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL,
@@ -162,7 +166,7 @@ fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL
 #' @return Scalar test loss (if the model has a single output and no metrics) or
 #'   list of scalars (if the model has multiple outputs and/or metrics).
 #'   
-#' @seealso [compile], [fit], [predict]
+#' @family model functions
 #'   
 #' @export
 evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NULL) {
@@ -194,7 +198,7 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
 #' `load_model` is a compiled model ready to be used (unless the saved model
 #' was never compiled in the first place).
 #' 
-#' @seealso [load_model]
+#' @family model functions
 #' 
 #' @export
 save_model <- function(model, filepath, overwrite = TRUE) {
@@ -210,7 +214,7 @@ save_model <- function(model, filepath, overwrite = TRUE) {
 #' @param custom_objects Mapping class names (or function names) of custom 
 #'   (non-Keras) objects to class/functions
 #'   
-#' @seealso [save_model]   
+#' @family model functions   
 #'   
 #' @export
 load_model <- function(filepath, custom_objects = NULL) {
@@ -236,7 +240,7 @@ load_model <- function(filepath, custom_objects = NULL) {
 #' 
 #' @name predict
 #' 
-#' @seealso [compile], [fit], [evaluate]   
+#' @family model functions
 #' 
 #' @importFrom stats predict
 #' @export

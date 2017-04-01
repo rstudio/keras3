@@ -20,3 +20,9 @@ shape. What that means is that it should have received an \code{input_shape} or
 \code{batch_input_shape} argument, or for some type of layers (recurrent,
 Dense...) an \code{input_dim} argument.
 }
+\seealso{
+Other model functions: \code{\link{compile}},
+  \code{\link{evaluate}}, \code{\link{fit}},
+  \code{\link{load_model}}, \code{\link{model}},
+  \code{\link{predict}}, \code{\link{save_model}}
+}
