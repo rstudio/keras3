@@ -60,3 +60,12 @@ instance, for a 2D input with shape \code{(batch_size, input_dim)}, the output
 would have shape \code{(batch_size, unit)}.
 }
 
+\seealso{
+Other core layers: \code{\link{layer_activation}},
+  \code{\link{layer_activity_regularization}},
+  \code{\link{layer_dropout}}, \code{\link{layer_flatten}},
+  \code{\link{layer_input}}, \code{\link{layer_lambda}},
+  \code{\link{layer_masking}}, \code{\link{layer_permute}},
+  \code{\link{layer_repeat_vector}},
+  \code{\link{layer_reshape}}
+}

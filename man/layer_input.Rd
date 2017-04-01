@@ -40,3 +40,12 @@ It can either wrap an existing tensor (pass an \code{input_tensor}
 argument) or create its a placeholder tensor (pass arguments \code{input_shape}
 or \code{batch_input_shape} as well as \code{input_dtype}).
 }
+\seealso{
+Other core layers: \code{\link{layer_activation}},
+  \code{\link{layer_activity_regularization}},
+  \code{\link{layer_dense}}, \code{\link{layer_dropout}},
+  \code{\link{layer_flatten}}, \code{\link{layer_lambda}},
+  \code{\link{layer_masking}}, \code{\link{layer_permute}},
+  \code{\link{layer_repeat_vector}},
+  \code{\link{layer_reshape}}
+}

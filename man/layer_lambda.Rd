@@ -34,3 +34,12 @@ the first layer in a model.
  Arbitrary (based on tensor returned from the function)
 }
 
+\seealso{
+Other core layers: \code{\link{layer_activation}},
+  \code{\link{layer_activity_regularization}},
+  \code{\link{layer_dense}}, \code{\link{layer_dropout}},
+  \code{\link{layer_flatten}}, \code{\link{layer_input}},
+  \code{\link{layer_masking}}, \code{\link{layer_permute}},
+  \code{\link{layer_repeat_vector}},
+  \code{\link{layer_reshape}}
+}

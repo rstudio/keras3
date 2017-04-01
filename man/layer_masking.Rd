@@ -22,3 +22,12 @@ the timestep will be masked (skipped) in all downstream layers (as long as
 they support masking). If any downstream layer does not support masking yet
 receives such an input mask, an exception will be raised.
 }
+\seealso{
+Other core layers: \code{\link{layer_activation}},
+  \code{\link{layer_activity_regularization}},
+  \code{\link{layer_dense}}, \code{\link{layer_dropout}},
+  \code{\link{layer_flatten}}, \code{\link{layer_input}},
+  \code{\link{layer_lambda}}, \code{\link{layer_permute}},
+  \code{\link{layer_repeat_vector}},
+  \code{\link{layer_reshape}}
+}

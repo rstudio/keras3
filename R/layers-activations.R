@@ -7,6 +7,7 @@
 #'   samples axis) which is required when using this layer as the first layer in
 #'   a model.
 #'   
+#' @family core layers
 #' @family activation layers    
 #'   
 #' @export
