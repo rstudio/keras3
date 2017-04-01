@@ -31,3 +31,11 @@ default values (except the learning rate, which can be freely tuned).
 
 This optimizer is usually a good choice for recurrent neural networks.
 }
+\seealso{
+Other optimizers: \code{\link{optimizer_adadelta}},
+  \code{\link{optimizer_adagrad}},
+  \code{\link{optimizer_adamax}},
+  \code{\link{optimizer_adam}},
+  \code{\link{optimizer_nadam}},
+  \code{\link{optimizer_sgd}}
+}

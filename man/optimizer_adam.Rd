@@ -36,5 +36,10 @@ Adam optimizer as described in \href{https://arxiv.org/abs/1412.6980v8}{Adam
 Default parameters follow those provided in the original paper.
 }
 \seealso{
-\code{\link{optimizer_adamax}}
+Other optimizers: \code{\link{optimizer_adadelta}},
+  \code{\link{optimizer_adagrad}},
+  \code{\link{optimizer_adamax}},
+  \code{\link{optimizer_nadam}},
+  \code{\link{optimizer_rmsprop}},
+  \code{\link{optimizer_sgd}}
 }

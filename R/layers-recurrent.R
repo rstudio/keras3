@@ -50,6 +50,8 @@
 #' @section References: - [A Theoretically Grounded Application of Dropout in
 #'   Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
 #'   
+#' @family recurrent layers   
+#'   
 #' @export
 layer_simple_rnn <- function(x, units, activation = "tanh", use_bias = TRUE, 
                              return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,
@@ -124,7 +126,9 @@ layer_simple_rnn <- function(x, units, activation = "tanh", use_bias = TRUE,
 #' - [A Theoretically Grounded
 #'   Application of Dropout in Recurrent Neural
 #'   Networks](http://arxiv.org/abs/1512.05287)
-#'   
+#'  
+#' @family recurrent layers  
+#'     
 #' @export
 layer_gru <- function(x, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 
                       return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,
@@ -202,7 +206,9 @@ layer_gru <- function(x, units, activation = "tanh", recurrent_activation = "har
 #' - [Long short-term memory](http://deeplearning.cs.cmu.edu/pdfs/Hochreiter97_lstm.pdf) (original 1997 paper) 
 #' - [Supervised sequence labeling with recurrent neural networks](http://www.cs.toronto.edu/~graves/preprint.pdf) 
 #' - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
-#'   
+#'  
+#' @family recurrent layers  
+#'     
 #' @export
 layer_lstm <- function(x, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 
                        return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,

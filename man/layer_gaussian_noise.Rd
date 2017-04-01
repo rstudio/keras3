@@ -31,3 +31,6 @@ the first layer in a model.
  Same shape as input.
 }
 
+\seealso{
+Other noise layers: \code{\link{layer_gaussian_dropout}}
+}

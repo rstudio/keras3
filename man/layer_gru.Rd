@@ -101,3 +101,7 @@ Gated Recurrent Unit - Cho et al.
 }
 }
 
+\seealso{
+Other recurrent layers: \code{\link{layer_lstm}},
+  \code{\link{layer_simple_rnn}}
+}

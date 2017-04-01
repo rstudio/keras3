@@ -13,7 +13,9 @@
 #'   
 #' @section Output shape: 3D tensor with shape: `(batch_size, downsampled_steps,
 #'   features)`.
-#'   
+#'  
+#' @family pooling layers
+#'     
 #' @export
 layer_max_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "valid") {
   
@@ -52,7 +54,9 @@ layer_max_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "v
 #' @section Output shape: 
 #' - If `data_format='channels_last'`: 4D tensor with shape: `(batch_size, pooled_rows, pooled_cols, channels)` 
 #' - If `data_format='channels_first'`: 4D tensor with shape: `(batch_size, channels, pooled_rows, pooled_cols)`
-#'   
+#' 
+#' @family pooling layers
+#'       
 #' @export
 layer_max_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, padding = "valid", data_format = NULL) {
   
@@ -92,6 +96,8 @@ layer_max_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, paddi
 #' - If `data_format='channels_last'`: 5D tensor with shape: `(batch_size, pooled_dim1, pooled_dim2, pooled_dim3, channels)` 
 #' - If `data_format='channels_first'`: 5D tensor with shape: `(batch_size, channels, pooled_dim1, pooled_dim2, pooled_dim3)`
 #'   
+#' @family pooling layers
+#'   
 #' @export
 layer_max_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NULL, padding = "valid", data_format = NULL) {
   
@@ -118,7 +124,9 @@ layer_max_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NULL, p
 #'   
 #' @section Output shape: 3D tensor with shape: `(batch_size, downsampled_steps,
 #'   features)`.
-#'   
+#'  
+#' @family pooling layers
+#'     
 #' @export
 layer_average_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "valid") {
   
@@ -156,6 +164,8 @@ layer_average_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding 
 #' @section Output shape: 
 #' - If `data_format='channels_last'`: 4D tensor with shape: `(batch_size, pooled_rows, pooled_cols, channels)` 
 #' - If `data_format='channels_first'`: 4D tensor with shape: `(batch_size, channels, pooled_rows, pooled_cols)`
+#'  
+#' @family pooling layers 
 #'   
 #' @export
 layer_average_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, padding = "valid", data_format = NULL) {
@@ -194,7 +204,9 @@ layer_average_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, p
 #' @section Output shape: 
 #' - If `data_format='channels_last'`: 5D tensor with shape: `(batch_size, pooled_dim1, pooled_dim2, pooled_dim3, channels)` 
 #' - If `data_format='channels_first'`: 5D tensor with shape: `(batch_size, channels, pooled_dim1, pooled_dim2, pooled_dim3)`
-#'   
+#' 
+#' @family pooling layers
+#'       
 #' @export
 layer_average_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NULL, padding = "valid", data_format = NULL) {
   call_layer(tf$contrib$keras$layers$AveragePooling3D, x, list(
@@ -217,6 +229,8 @@ layer_average_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NUL
 #' @section Output shape:
 #' 2D tensor with shape: `(batch_size, channels)`
 #' 
+#' @family pooling layers
+#' 
 #' @export
 layer_global_max_pooling_1d <- function(x) {
   call_layer(tf$contrib$keras$layers$GlobalMaxPooling1D, x, list())
@@ -231,6 +245,8 @@ layer_global_max_pooling_1d <- function(x) {
 #' 
 #' @section Output shape:
 #' 2D tensor with shape: `(batch_size, channels)`
+#' 
+#' @family pooling layers
 #' 
 #' @export
 layer_global_average_pooling_1d <- function(x) {
@@ -255,7 +271,9 @@ layer_global_average_pooling_1d <- function(x) {
 #' - If `data_format='channels_first'`: 4D tensor with shape: `(batch_size, channels, rows, cols)`
 #'   
 #' @section Output shape: 2D tensor with shape: `(batch_size, channels)`
-#'   
+#'  
+#' @family pooling layers
+#'     
 #' @export
 layer_global_max_pooling_2d <- function(x, data_format = NULL) {
   call_layer(tf$contrib$keras$layers$GlobalMaxPooling2D, x, list(
@@ -280,7 +298,9 @@ layer_global_max_pooling_2d <- function(x, data_format = NULL) {
 #' - If `data_format='channels_first'`: 4D tensor with shape: `(batch_size, channels, rows, cols)`
 #'   
 #' @section Output shape: 2D tensor with shape: `(batch_size, channels)`
-#'   
+#'  
+#' @family pooling layers
+#'     
 #' @export
 layer_global_average_pooling_2d <- function(x, data_format = NULL) {
   call_layer(tf$contrib$keras$layers$GlobalAveragePooling2D, x, list(
@@ -307,7 +327,9 @@ layer_global_average_pooling_2d <- function(x, data_format = NULL) {
 #' - If `data_format='channels_first'`: 5D tensor with shape: `(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)`
 #'   
 #' @section Output shape: 2D tensor with shape: `(batch_size, channels)`
-#'   
+#'
+#' @family pooling layers
+#'         
 #' @export
 layer_global_max_pooling_3d <- function(x, data_format = NULL) {
   call_layer(tf$contrib$keras$layers$GlobalMaxPooling3D, x, list(
@@ -333,7 +355,9 @@ layer_global_max_pooling_3d <- function(x, data_format = NULL) {
 #' - If `data_format='channels_first'`: 5D tensor with shape: `(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)`
 #'   
 #' @section Output shape: 2D tensor with shape: `(batch_size, channels)`
-#'   
+#' 
+#' @family pooling layers
+#'       
 #' @export
 layer_global_average_pooling_3d <- function(x, data_format = NULL) {
   call_layer(tf$contrib$keras$layers$GlobalAveragePooling3D, x, list(

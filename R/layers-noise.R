@@ -17,6 +17,8 @@
 #'   
 #' @section Output shape: Same shape as input.
 #'   
+#' @family noise layers   
+#'   
 #' @export
 layer_gaussian_noise <- function(x, stddev, input_shape = NULL) {
   call_layer(tf$contrib$keras$layers$GaussianNoise, x, list(
@@ -42,6 +44,8 @@ layer_gaussian_noise <- function(x, stddev, input_shape = NULL) {
 #'   
 #' @section References: 
 #' - [Dropout: A Simple Way to Prevent Neural Networks from Overfitting Srivastava, Hinton, et al. 2014](http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf)
+#'   
+#' @family noise layers   
 #'   
 #' @export
 layer_gaussian_dropout <- function(x, rate, input_shape = NULL) {

@@ -44,3 +44,16 @@ Average pooling operation for 3D data (spatial or spatio-temporal).
 }
 }
 
+\seealso{
+Other pooling layers: \code{\link{layer_average_pooling_1d}},
+  \code{\link{layer_average_pooling_2d}},
+  \code{\link{layer_global_average_pooling_1d}},
+  \code{\link{layer_global_average_pooling_2d}},
+  \code{\link{layer_global_average_pooling_3d}},
+  \code{\link{layer_global_max_pooling_1d}},
+  \code{\link{layer_global_max_pooling_2d}},
+  \code{\link{layer_global_max_pooling_3d}},
+  \code{\link{layer_max_pooling_1d}},
+  \code{\link{layer_max_pooling_2d}},
+  \code{\link{layer_max_pooling_3d}}
+}

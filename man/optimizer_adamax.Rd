@@ -31,5 +31,10 @@ Adamax optimizer from Section 7 of the \href{https://arxiv.org/abs/1412.6980v8}{
 It is a variant of Adam based on the infinity norm.
 }
 \seealso{
-\code{\link{optimizer_adam}}
+Other optimizers: \code{\link{optimizer_adadelta}},
+  \code{\link{optimizer_adagrad}},
+  \code{\link{optimizer_adam}},
+  \code{\link{optimizer_nadam}},
+  \code{\link{optimizer_rmsprop}},
+  \code{\link{optimizer_sgd}}
 }

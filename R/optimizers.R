@@ -16,6 +16,8 @@
 #' 
 #' @return Optimizer for use with \code{\link{compile}}.
 #' 
+#' @family optimizers  
+#' 
 #' @export
 optimizer_sgd <- function(lr = 0.01, momentum = 0.0, decay = 0.0, nesterov = FALSE,
                           clipnorm = NULL, clipvalue = NULL) {
@@ -39,6 +41,8 @@ optimizer_sgd <- function(lr = 0.01, momentum = 0.0, decay = 0.0, nesterov = FAL
 #' default values (except the learning rate, which can be freely tuned).
 #' 
 #' This optimizer is usually a good choice for recurrent neural networks.
+#' 
+#' @family optimizers  
 #' 
 #' @export
 optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = 1e-08, decay = 0.0,
@@ -65,6 +69,8 @@ optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = 1e-08, decay = 0.
 #' @note It is recommended to leave the parameters of this optimizer at their 
 #'   default values.
 #' 
+#' @family optimizers  
+#' 
 #' @export
 optimizer_adagrad <- function(lr = 0.01, epsilon = 1e-08, decay = 0.0,
                               clipnorm = NULL, clipvalue = NULL) {
@@ -87,7 +93,9 @@ optimizer_adagrad <- function(lr = 0.01, epsilon = 1e-08, decay = 0.0,
 #'   
 #' @note It is recommended to leave the parameters of this optimizer at their 
 #'   default values.
-#'   
+#'
+#' @family optimizers  
+#'         
 #' @export
 optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = 1e-08, decay = 0.0,
                                clipnorm = NULL, clipvalue = NULL) {
@@ -114,7 +122,7 @@ optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = 1e-08, decay = 0.
 #'   
 #' @note Default parameters follow those provided in the original paper.
 #'   
-#' @seealso \code{\link{optimizer_adamax}}
+#' @family optimizers  
 #'   
 #' @export
 optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, decay = 0.0,
@@ -137,7 +145,7 @@ optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1
 #' 
 #' @inheritParams optimizer_adam
 #' 
-#' @seealso \code{\link{optimizer_adam}}
+#' @family optimizers  
 #' 
 #' @export
 optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, decay = 0.0,
@@ -169,6 +177,8 @@ optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon =
 #'   
 #' @seealso \href{http://www.cs.toronto.edu/~fritz/absps/momentum.pdf}{On the
 #'   importance of initialization and momentum in deep learning}.
+#'   
+#' @family optimizers  
 #'   
 #' @export
 optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, 

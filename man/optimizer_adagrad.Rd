@@ -29,3 +29,11 @@ Subgradient Methods for Online Learning and Stochastic Optimization}.
 It is recommended to leave the parameters of this optimizer at their
 default values.
 }
+\seealso{
+Other optimizers: \code{\link{optimizer_adadelta}},
+  \code{\link{optimizer_adamax}},
+  \code{\link{optimizer_adam}},
+  \code{\link{optimizer_nadam}},
+  \code{\link{optimizer_rmsprop}},
+  \code{\link{optimizer_sgd}}
+}

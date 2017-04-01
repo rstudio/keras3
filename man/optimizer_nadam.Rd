@@ -41,4 +41,11 @@ values.
 \seealso{
 \href{http://www.cs.toronto.edu/~fritz/absps/momentum.pdf}{On the
 importance of initialization and momentum in deep learning}.
+
+Other optimizers: \code{\link{optimizer_adadelta}},
+  \code{\link{optimizer_adagrad}},
+  \code{\link{optimizer_adamax}},
+  \code{\link{optimizer_adam}},
+  \code{\link{optimizer_rmsprop}},
+  \code{\link{optimizer_sgd}}
 }

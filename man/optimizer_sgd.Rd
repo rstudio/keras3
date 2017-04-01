@@ -29,3 +29,11 @@ Optimizer for use with \code{\link{compile}}.
 Stochastic gradient descent optimizer with support for momentum, learning
 rate decay, and Nesterov momentum.
 }
+\seealso{
+Other optimizers: \code{\link{optimizer_adadelta}},
+  \code{\link{optimizer_adagrad}},
+  \code{\link{optimizer_adamax}},
+  \code{\link{optimizer_adam}},
+  \code{\link{optimizer_nadam}},
+  \code{\link{optimizer_rmsprop}}
+}

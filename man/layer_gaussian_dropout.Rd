@@ -36,3 +36,6 @@ the first layer in a model.
 }
 }
 
+\seealso{
+Other noise layers: \code{\link{layer_gaussian_noise}}
+}

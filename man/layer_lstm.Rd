@@ -105,3 +105,7 @@ For a step-by-step description of the algorithm, see \href{http://deeplearning.n
 }
 }
 
+\seealso{
+Other recurrent layers: \code{\link{layer_gru}},
+  \code{\link{layer_simple_rnn}}
+}

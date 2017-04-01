@@ -92,3 +92,7 @@ Fully-connected RNN where the output is to be fed back to input.
  - \href{http://arxiv.org/abs/1512.05287}{A Theoretically Grounded Application of Dropout inRecurrent Neural Networks}
 }
 
+\seealso{
+Other recurrent layers: \code{\link{layer_gru}},
+  \code{\link{layer_lstm}}
+}
