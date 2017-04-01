@@ -62,3 +62,6 @@ each different patch of the input.
  3D tensor with shape: \code{(batch_size, new_steps, filters)} \code{steps} value might have changed due to padding or strides.
 }
 
+\seealso{
+Other locally connected layers: \code{\link{layer_locally_connected_2d}}
+}

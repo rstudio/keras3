@@ -26,7 +26,7 @@ the convolution along the width and height. Can be a single integer to
 specify the same value for all spatial dimensions. Specifying any stride
 value != 1 is incompatible with specifying any \code{dilation_rate} value != 1.}
 
-\item{padding}{one of \code{"valid"} or \code{"same"} (case-insensitive).}
+\item{padding}{One of \code{"valid"} or \code{"same"} (case-insensitive).}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
@@ -71,3 +71,6 @@ if data_format='channels_first' or 4D tensor with shape: \code{(samples, rows, c
 \code{rows} and \code{cols} values might have changed due to padding.
 }
 
+\seealso{
+Other locally connected layers: \code{\link{layer_locally_connected_1d}}
+}
