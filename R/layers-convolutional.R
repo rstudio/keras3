@@ -106,18 +106,6 @@ layer_conv_1d <- function(x, filters, kernel_size, strides = 1L, padding = "vali
 #'   specify the same value for all spatial dimensions. Currently, specifying
 #'   any `dilation_rate` value != 1 is incompatible with specifying any stride
 #'   value != 1.
-#' @param activation Activation function to use. If you don't specify anything,
-#'   no activation is applied (ie. "linear" activation: `a(x) = x`).
-#' @param use_bias Boolean, whether the layer uses a bias vector.
-#' @param kernel_initializer Initializer for the `kernel` weights matrix.
-#' @param bias_initializer Initializer for the bias vector.
-#' @param kernel_regularizer Regularizer function applied to the `kernel`
-#'   weights matrix.
-#' @param bias_regularizer Regularizer function applied to the bias vector.
-#' @param activity_regularizer Regularizer function applied to the output of the
-#'   layer (its "activation")..
-#' @param kernel_constraint Constraint function applied to the kernel matrix.
-#' @param bias_constraint Constraint function applied to the bias vector.
 #'   
 #' @section Input shape: 4D tensor with shape: `(samples, channels, rows, cols)`
 #'   if data_format='channels_first' or 4D tensor with shape: `(samples, rows,
@@ -191,18 +179,6 @@ layer_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding 
 #'   specify the same value for all spatial dimensions. Currently, specifying
 #'   any `dilation_rate` value != 1 is incompatible with specifying any stride
 #'   value != 1.
-#' @param activation Activation function to use. If you don't specify anything,
-#'   no activation is applied (ie. "linear" activation: `a(x) = x`).
-#' @param use_bias Boolean, whether the layer uses a bias vector.
-#' @param kernel_initializer Initializer for the `kernel` weights matrix.
-#' @param bias_initializer Initializer for the bias vector.
-#' @param kernel_regularizer Regularizer function applied to the `kernel`
-#'   weights matrix.
-#' @param bias_regularizer Regularizer function applied to the bias vector.
-#' @param activity_regularizer Regularizer function applied to the output of the
-#'   layer (its "activation")..
-#' @param kernel_constraint Constraint function applied to the kernel matrix.
-#' @param bias_constraint Constraint function applied to the bias vector.
 #'   
 #' @section Input shape: 5D tensor with shape: `(samples, channels, conv_dim1,
 #'   conv_dim2, conv_dim3)` if data_format='channels_first' or 5D tensor with
@@ -273,18 +249,6 @@ layer_conv_3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padd
 #'   channels, width, height)`. It defaults to the `image_data_format` value
 #'   found in your Keras config file at `~/.keras/keras.json`. If you never set
 #'   it, then it will be "channels_last".
-#' @param activation Activation function to use. If you don't specify anything,
-#'   no activation is applied (ie. "linear" activation: `a(x) = x`).
-#' @param use_bias Boolean, whether the layer uses a bias vector.
-#' @param kernel_initializer Initializer for the `kernel` weights matrix.
-#' @param bias_initializer Initializer for the bias vector.
-#' @param kernel_regularizer Regularizer function applied to the `kernel`
-#'   weights matrix.
-#' @param bias_regularizer Regularizer function applied to the bias vector.
-#' @param activity_regularizer Regularizer function applied to the output of the
-#'   layer (its "activation")..
-#' @param kernel_constraint Constraint function applied to the kernel matrix.
-#' @param bias_constraint Constraint function applied to the bias vector.
 #'   
 #' @section Input shape: 4D tensor with shape: `(batch, channels, rows, cols)`
 #'   if data_format='channels_first' or 4D tensor with shape: `(batch, rows,
@@ -357,24 +321,16 @@ layer_conv_2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L)
 #' @param depth_multiplier The number of depthwise convolution output channels
 #'   for each input channel. The total number of depthwise convolution output
 #'   channels will be equal to `filterss_in * depth_multiplier`.
-#' @param activation Activation function to use. If you don't specify anything,
-#'   no activation is applied (ie. "linear" activation: `a(x) = x`).
-#' @param use_bias Boolean, whether the layer uses a bias vector.
 #' @param depthwise_initializer Initializer for the depthwise kernel matrix.
 #' @param pointwise_initializer Initializer for the pointwise kernel matrix.
-#' @param bias_initializer Initializer for the bias vector.
 #' @param depthwise_regularizer Regularizer function applied to the depthwise
 #'   kernel matrix.
 #' @param pointwise_regularizer Regularizer function applied to the depthwise
 #'   kernel matrix.
-#' @param bias_regularizer Regularizer function applied to the bias vector.
-#' @param activity_regularizer Regularizer function applied to the output of the
-#'   layer (its "activation")..
 #' @param depthwise_constraint Constraint function applied to the depthwise
 #'   kernel matrix.
 #' @param pointwise_constraint Constraint function applied to the pointwise
 #'   kernel matrix.
-#' @param bias_constraint Constraint function applied to the bias vector.
 #'   
 #' @section Input shape: 4D tensor with shape: `(batch, channels, rows, cols)`
 #'   if data_format='channels_first' or 4D tensor with shape: `(batch, rows,
