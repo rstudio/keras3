@@ -22,4 +22,8 @@ or equal to a desired value.
 }
 \seealso{
 \href{http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf}{Dropout: A Simple Way to Prevent Neural Networks from Overfitting Srivastava, Hinton, et al. 2014}
+
+Other constraints: \code{\link{constraint_minmaxnorm}},
+  \code{\link{constraint_nonneg}},
+  \code{\link{constraint_unitnorm}}
 }

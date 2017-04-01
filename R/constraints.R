@@ -14,6 +14,8 @@
 #'   
 #' @seealso [Dropout: A Simple Way to Prevent Neural Networks from Overfitting Srivastava, Hinton, et al. 2014](http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf)
 #'   
+#' @family constraints   
+#'   
 #' @export
 constraint_maxnorm <- function(max_value = 2, axis = 0) {
   keras$constraints$MaxNorm(max_value = as.integer(max_value), axis = as.integer(axis))
@@ -23,6 +25,8 @@ constraint_maxnorm <- function(max_value = 2, axis = 0) {
 #' NonNeg weight constraint
 #' 
 #' Constrains the weights to be non-negative.
+#'
+#' @family constraints  
 #'
 #' @export
 constraint_nonneg <- function() {
@@ -35,6 +39,8 @@ constraint_nonneg <- function() {
 #' Constrains the weights incident to each hidden unit to have unit norm.
 #'
 #' @inheritParams constraint_maxnorm
+#'   
+#' @family constraints  
 #'   
 #' @export
 constraint_unitnorm <- function(axis = 0) {
@@ -54,7 +60,9 @@ constraint_unitnorm <- function(axis = 0) {
 #'   means that rate=1.0 stands for strict enforcement of the constraint, while
 #'   rate<1.0 means that weights will be rescaled at each step to slowly move
 #'   towards a value inside the desired interval.
-#'   
+#' 
+#' @family constraints  
+#'       
 #' @export
 constraint_minmaxnorm <- function(min_value = 0.0, max_value = 1.0, rate = 1.0, axis = 0) {
   if (py_has_attr(keras$constraints, "MinMaxNorm"))

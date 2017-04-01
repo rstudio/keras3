@@ -28,3 +28,8 @@ to constrain the weights of each filter tensor of size \code{rows, cols, input_d
 Constrains the weights incident to each hidden unit to have the norm between
 a lower bound and an upper bound.
 }
+\seealso{
+Other constraints: \code{\link{constraint_maxnorm}},
+  \code{\link{constraint_nonneg}},
+  \code{\link{constraint_unitnorm}}
+}

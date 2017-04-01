@@ -9,3 +9,8 @@ constraint_nonneg()
 \description{
 Constrains the weights to be non-negative.
 }
+\seealso{
+Other constraints: \code{\link{constraint_maxnorm}},
+  \code{\link{constraint_minmaxnorm}},
+  \code{\link{constraint_unitnorm}}
+}

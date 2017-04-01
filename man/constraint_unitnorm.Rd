@@ -17,3 +17,8 @@ to constrain the weights of each filter tensor of size \code{rows, cols, input_d
 \description{
 Constrains the weights incident to each hidden unit to have unit norm.
 }
+\seealso{
+Other constraints: \code{\link{constraint_maxnorm}},
+  \code{\link{constraint_minmaxnorm}},
+  \code{\link{constraint_nonneg}}
+}
