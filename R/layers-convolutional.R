@@ -44,7 +44,9 @@
 #'   
 #' @section Output shape: 3D tensor with shape: `(batch_size, new_steps,
 #'   filters)` `steps` value might have changed due to padding or strides.
-#'   
+#'
+#' @family convolutional layers   
+#'         
 #' @export
 layer_conv_1d <- function(x, filters, kernel_size, strides = 1L, padding = "valid", 
                           dilation_rate = 1L, activation = NULL, use_bias = TRUE, 
@@ -116,6 +118,8 @@ layer_conv_1d <- function(x, filters, kernel_size, strides = 1L, padding = "vali
 #'   `(samples, new_rows, new_cols, filters)` if data_format='channels_last'.
 #'   `rows` and `cols` values might have changed due to padding.
 #'   
+#' @family convolutional layers 
+#'    
 #' @export
 layer_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL,
                           dilation_rate = c(1L, 1L), activation = NULL, use_bias = TRUE, 
@@ -191,6 +195,8 @@ layer_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding 
 #'   new_conv_dim1, new_conv_dim2, new_conv_dim3, filters)` if
 #'   data_format='channels_last'. `new_conv_dim1`, `new_conv_dim2` and
 #'   `new_conv_dim3` values might have changed due to padding.
+#' 
+#' @family convolutional layers 
 #'   
 #' @export
 layer_conv_3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padding = "valid",
@@ -262,6 +268,8 @@ layer_conv_3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padd
 #' @section References: 
 #'   - [A guide to convolution arithmetic for deep learning](https://arxiv.org/abs/1603.07285v1) 
 #'   - [Deconvolutional Networks](http://www.matthewzeiler.com/pubs/cvpr2010/cvpr2010.pdf)
+#'   
+#' @family convolutional layers    
 #'   
 #' @export
 layer_conv_2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", 
@@ -341,6 +349,8 @@ layer_conv_2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L)
 #'   `(batch, new_rows, new_cols, filters)` if data_format='channels_last'.
 #'   `rows` and `cols` values might have changed due to padding.
 #'   
+#' @family convolutional layers 
+#'   
 #' @export
 layer_separable_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL, 
                                     depth_multiplier = 1L, activation = NULL, use_bias = TRUE, 
@@ -384,7 +394,9 @@ layer_separable_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L)
 #'   
 #' @section Output shape: 3D tensor with shape: `(batch, upsampled_steps,
 #'   features)`.
-#'   
+#' 
+#' @family convolutional layers 
+#'         
 #' @export
 layer_upsampling_1d <- function(x, size = 2L) {
   
@@ -420,6 +432,8 @@ layer_upsampling_1d <- function(x, size = 2L) {
 #' 4D tensor with shape: 
 #' - If `data_format` is `"channels_last"`: `(batch, upsampled_rows, upsampled_cols, channels)` 
 #' - If `data_format` is `"channels_first"`: `(batch, channels, upsampled_rows, upsampled_cols)`
+#'   
+#' @family convolutional layers 
 #'   
 #' @export
 layer_upsampling_2d <- function(x, size = c(2L, 2L), data_format = NULL) {
@@ -459,7 +473,9 @@ layer_upsampling_2d <- function(x, size = c(2L, 2L), data_format = NULL) {
 #' 5D tensor with shape: 
 #' - If `data_format` is `"channels_last"`: `(batch, upsampled_dim1, upsampled_dim2, upsampled_dim3, channels)` 
 #' - If `data_format` is `"channels_first"`: `(batch, channels, upsampled_dim1, upsampled_dim2, upsampled_dim3)`
-#'   
+#'
+#' @family convolutional layers 
+#'         
 #' @export
 layer_upsampling_3d <- function(x, size= c(2L, 2L, 2L), data_format = NULL) {
   
@@ -483,7 +499,9 @@ layer_upsampling_3d <- function(x, size= c(2L, 2L, 2L), data_format = NULL) {
 #' 
 #' @section Output shape:
 #' 3D tensor with shape `(batch, padded_axis, features)`
-#' 
+#'
+#' @family convolutional layers 
+#'
 #' @export
 layer_zero_padding_1d <- function(x, padding = 1L) {
   call_layer(keras$layers$ZeroPadding1D, x, list(
@@ -520,7 +538,9 @@ layer_zero_padding_1d <- function(x, padding = 1L) {
 #' @section Output shape: 4D tensor with shape: 
 #' - If `data_format` is `"channels_last"`: `(batch, padded_rows, padded_cols, channels)` 
 #' - If `data_format` is `"channels_first"`: `(batch, channels, padded_rows, padded_cols)`
-#'   
+#' 
+#' @family convolutional layers 
+#'       
 #' @export
 layer_zero_padding_2d <- function(x, padding = c(1L, 1L), data_format = NULL) {
 
@@ -560,7 +580,9 @@ layer_zero_padding_2d <- function(x, padding = c(1L, 1L), data_format = NULL) {
 #' - If `data_format` is `"channels_last"`: `(batch, first_padded_axis, second_padded_axis,
 #'   third_axis_to_pad, depth)` 
 #' - If `data_format` is `"channels_first"`: `(batch, depth, first_padded_axis, second_padded_axis, third_axis_to_pad)`
-#'   
+#'
+#' @family convolutional layers 
+#'         
 #' @export
 layer_zero_padding_3d <- function(x,  padding = c(1L, 1L, 1L), data_format = NULL) {
   
@@ -585,7 +607,9 @@ layer_zero_padding_3d <- function(x,  padding = c(1L, 1L, 1L), data_format = NUL
 #' @section Input shape: 3D tensor with shape `(batch, axis_to_crop, features)`
 #'   
 #' @section Output shape: 3D tensor with shape `(batch, cropped_axis, features)`
-#'   
+#' 
+#' @family convolutional layers    
+#'  
 #' @export
 layer_cropping_1d <- function(x, cropping = c(1L, 1L)) {
   call_layer(keras$layers$Cropping1D, x, list(
@@ -621,6 +645,8 @@ layer_cropping_1d <- function(x, cropping = c(1L, 1L)) {
 #' @section Output shape: 4D tensor with shape: 
 #' - If `data_format` is `"channels_last"`: `(batch, cropped_rows, cropped_cols, channels)` 
 #' - If `data_format` is `"channels_first"`: `(batch, channels, cropped_rows, cropped_cols)`
+#'
+#' @family convolutional layers    
 #'   
 #' @export
 layer_cropping_2d <- function(x, cropping = list(c(0L, 0L), c(0L, 0L)), data_format = NULL) {
@@ -666,7 +692,9 @@ layer_cropping_2d <- function(x, cropping = list(c(0L, 0L), c(0L, 0L)), data_for
 #'   third_cropped_axis, depth)` 
 #' - If `data_format` is `"channels_first"`: `(batch, depth, first_cropped_axis, second_cropped_axis,
 #'   third_cropped_axis)`
-#'   
+#' 
+#' @family convolutional layers 
+#'       
 #' @export
 layer_cropping_3d <- function(x, cropping = list(c(1L, 1L), c(1L, 1L), c(1L, 1L)), data_format = NULL) {
   call_layer(tf$contrib$keras$layers$Cropping3D, x, list(
@@ -750,7 +778,9 @@ layer_cropping_3d <- function(x, cropping = list(c(1L, 1L), c(1L, 1L), c(1L, 1L)
 #' - [Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting](http://arxiv.org/abs/1506.04214v1)
 #'   The current implementation does not include the feedback loop on the cells
 #'   output
-#'   
+#' 
+#' @family convolutional layers 
+#'       
 #' @export
 layer_conv_lstm_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL, 
                                dilation_rate = c(1L, 1L), activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 

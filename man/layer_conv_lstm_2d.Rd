@@ -122,3 +122,18 @@ output
 }
 }
 
+\seealso{
+Other convolutional layers: \code{\link{layer_conv_1d}},
+  \code{\link{layer_conv_2d_transpose}},
+  \code{\link{layer_conv_2d}}, \code{\link{layer_conv_3d}},
+  \code{\link{layer_cropping_1d}},
+  \code{\link{layer_cropping_2d}},
+  \code{\link{layer_cropping_3d}},
+  \code{\link{layer_separable_conv_2d}},
+  \code{\link{layer_upsampling_1d}},
+  \code{\link{layer_upsampling_2d}},
+  \code{\link{layer_upsampling_3d}},
+  \code{\link{layer_zero_padding_1d}},
+  \code{\link{layer_zero_padding_2d}},
+  \code{\link{layer_zero_padding_3d}}
+}
