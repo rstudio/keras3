@@ -33,6 +33,8 @@ time_distributed <- function(x, layer, input_shape = NULL) {
 
 #' Bidirectional wrapper for RNNs.
 #' 
+#' @inheritParams layer_dense
+#' 
 #' @param layer Recurrent instance.
 #' @param merge_mode Mode by which outputs of the forward and backward RNNs will
 #'   be combined. One of 'sum', 'mul', 'concat', 'ave', NULL. If NULL, the

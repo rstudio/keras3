@@ -8,6 +8,8 @@ bidirectional(x, layer, merge_mode = "concat", weights = NULL,
   input_shape = NULL)
 }
 \arguments{
+\item{x}{Model or layer}
+
 \item{layer}{Recurrent instance.}
 
 \item{merge_mode}{Mode by which outputs of the forward and backward RNNs will
@@ -15,6 +17,10 @@ be combined. One of 'sum', 'mul', 'concat', 'ave', NULL. If NULL, the
 outputs will not be combined, they will be returned as a list.}
 
 \item{weights}{weights}
+
+\item{input_shape}{Dimensionality of the input (integer) not including the
+samples axis. This argument is required when using this layer as the first
+layer in a model.}
 }
 \description{
 Bidirectional wrapper for RNNs.
