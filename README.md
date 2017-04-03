@@ -1,8 +1,8 @@
 keras for R
 ================
 
-Keras: Deep Learning library for TensorFlow
--------------------------------------------
+R interface to Keras
+--------------------
 
 [![Build Status](https://travis-ci.org/rstudio/keras.svg?branch=master)](https://travis-ci.org/rstudio/keras) [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/rstudio/keras/blob/master/LICENSE)
 

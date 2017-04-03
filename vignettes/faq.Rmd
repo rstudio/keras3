@@ -1,0 +1,11 @@
+---
+title: "Frequently Asked Questions"
+author: "JJ Allaire"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: |
+  %\VignetteIndexEntry{Guide to the Sequential Model} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+---
+
+
+

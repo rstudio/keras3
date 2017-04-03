@@ -14,7 +14,9 @@ navbar:
         - text: Guide to the Sequential Model
           href: articles/sequential_model.html
         - text: Guide to the Functional API
-          href: articles/functional_api.html   
+          href: articles/functional_api.html
+        - text: Frequently Asked Questions
+          href: faq.html  
     - text: "Reference"
       href: reference/index.html
   right:
