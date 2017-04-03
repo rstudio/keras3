@@ -10,10 +10,11 @@ navbar:
       href: index.html
     - text: "Articles"
       menu:
-        - text: Sequential API
-        - href: articles/sequential_api.html
-        - text: Functional API
-        - href: articles/functional_api.html   
+        - text: Getting Started
+        - text: Guide to the Sequential Model
+          href: articles/sequential_model.html
+        - text: Guide to the Functional API
+          href: articles/functional_api.html   
     - text: "Reference"
       href: reference/index.html
   right:
