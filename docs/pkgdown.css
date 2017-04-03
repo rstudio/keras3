@@ -135,3 +135,9 @@ pre img {
   background-color: #fff;
   display: block;
 }
+
+h4.date,
+h4.author {
+  display: none;
+}
+
