@@ -1,0 +1,3 @@
+html_document:
+  includes:
+    after_body: common.html

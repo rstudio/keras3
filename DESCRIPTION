@@ -24,8 +24,9 @@ Imports:
     magrittr, 
     methods
 Suggests: 
-    testthat
-SystemRequirements: TensorFlow >= 1.0.1 (https://www.tensorflow.org/)
+    testthat, 
+    knitr
 SystemRequirements: TensorFlow >= 1.1 (https://www.tensorflow.org/)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr
