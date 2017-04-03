@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>L1 and L2 regularization — l1l2-regularizers • keras</title>
+<title>Metrics used for judging the performance of models — metric_binary_accuracy • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -76,43 +76,56 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>L1 and L2 regularization</h1>
+    <h1>Metrics used for judging the performance of models</h1>
     </div>
 
     
-    <p>L1 and L2 regularization</p>
+    <p>Metrics used for judging the performance of models</p>
     
 
-    <pre><span class='fu'>regularizer_l1</span>(<span class='kw'>l</span> <span class='kw'>=</span> <span class='fl'>0.01</span>)
+    <pre><span class='fu'>metric_binary_accuracy</span>()
 
-<span class='fu'>regularizer_l2</span>(<span class='kw'>l</span> <span class='kw'>=</span> <span class='fl'>0.01</span>)
+<span class='fu'>metric_binary_crossentropy</span>()
 
-<span class='fu'>regularizer_l1_l2</span>(<span class='kw'>l1</span> <span class='kw'>=</span> <span class='fl'>0.01</span>, <span class='kw'>l2</span> <span class='kw'>=</span> <span class='fl'>0.01</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>l</th>
-      <td><p>Regularization factor.</p></td>
-    </tr>
-    <tr>
-      <th>l1</th>
-      <td><p>L1 regularization factor.</p></td>
-    </tr>
-    <tr>
-      <th>l2</th>
-      <td><p>L2 regularization factor.</p></td>
-    </tr>
-    </table>
+<span class='fu'>metric_categorical_accuracy</span>()
+
+<span class='fu'>metric_categorical_crossentropy</span>()
+
+<span class='fu'>metric_cosine_proximity</span>()
+
+<span class='fu'>metric_hinge</span>()
+
+<span class='fu'>metric_kullback_leibler_divergence</span>()
+
+<span class='fu'>metric_mean_absolute_error</span>()
+
+<span class='fu'>metric_mean_absolute_percentage_error</span>()
+
+<span class='fu'>metric_mean_squared_error</span>()
+
+<span class='fu'>metric_mean_squared_logarithmic_error</span>()
+
+<span class='fu'>metric_poisson</span>()
+
+<span class='fu'>metric_sparse_categorical_crossentropy</span>()
+
+<span class='fu'>metric_squared_hinge</span>()
+
+<span class='fu'>metric_top_k_categorical_accuracy</span>()</pre>
+        
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Metric functions are to be supplied in the <code>metrics</code> parameter of the
+<code><a href='compile.html'>compile()</a></code> function.</p>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#note">Note</a></li>
+          </ul>
 
   </div>
 </div>

@@ -16,8 +16,6 @@ navbar:
 
 reference:
   - title: "Keras Models"
-    desc: >
-      Creating, training, and evaluating models
     contents:
       - model
       - model_sequential
@@ -27,9 +25,8 @@ reference:
       - predict
       - save_model
       - load_model
+      
   - title: "Core Layers"
-    desc: >
-      Core model layers
     contents:
       - layer_input
       - layer_dense
@@ -42,9 +39,8 @@ reference:
       - layer_activity_regularization
       - layer_masking
       - layer_flatten
+      
   - title: "Convolutional Layers"
-    desc: >
-      Convolutional model layers
     contents:
       - starts_with("layer_conv_")
       - layer_separable_conv_2d
@@ -52,4 +48,101 @@ reference:
       - starts_with("layer_zero_padding_")
       - starts_with("layer_cropping_")
 
+  - title: "Pooling Layers"
+    contents:
+      - starts_with("layer_max_pooling_")
+      - starts_with("layer_average_pooling_")
+      - layer_global_max_pooling_1d
+      - layer_global_average_pooling_1d
+      - layer_global_max_pooling_2d
+      - layer_global_average_pooling_2d
+      - layer_global_max_pooling_3d
+      - layer_global_average_pooling_3d
  
+  - title: "Activation Layers"
+    contents:
+      - layer_activation
+      - layer_activation_leaky_relu
+      - layer_activation_parametric_relu
+      - layer_activation_thresholded_relu
+      - layer_activation_elu
+      
+  - title: "Dropout Layers"
+    contents:
+      - layer_dropout
+      - starts_with("layer_spatial_dropout_")
+
+  - title: "Locally-connected Layers"
+    contents:
+      - layer_locally_connected_1d
+      - layer_locally_connected_2d
+
+  - title: "Recurrent Layers"
+    contents:
+      - layer_simple_rnn
+      - layer_gru
+      - layer_lstm
+       
+
+  - title: "Embedding Layers"
+    contents:
+      - layer_embedding
+       
+  - title: "Normalization Layers"
+    contents:
+      - layer_batch_normalization
+   
+
+  - title: "Noise Layers"
+    contents:
+      - layer_gaussian_noise
+      - layer_gaussian_dropout
+
+  - title: "Merge Layers"
+    contents:
+      - layer_add
+      - layer_multiply
+      - layer_average
+      - layer_maximum
+      - layer_concatenate
+      - layer_dot
+
+  - title: "Layer Wrappers"
+    contents:
+      - time_distributed
+      - bidirectional
+ 
+ 
+  - title: "Optimizers"
+    contents:
+      - optimizer_sgd
+      - optimizer_rmsprop
+      - optimizer_adagrad
+      - optimizer_adadelta
+      - optimizer_adam
+      - optimizer_adamax
+      - optimizer_nadam
+   
+  - title: "Constraints"
+    contents:
+      - constraint_maxnorm
+      - constraint_nonneg
+      - constraint_unitnorm
+      - constraint_minmaxnorm
+      
+
+  - title: "Regularizers"
+    contents:
+      - regularizer_l1
+      
+      
+  - title: "Activations" 
+    contents:
+      - activation_relu
+      
+  - title: Metrics
+    contents:
+      - metric_binary_accuracy
+   
+
+

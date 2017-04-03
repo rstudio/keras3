@@ -92,7 +92,7 @@
         <tr>
           <th colspan="2">
             <h2 id="section-keras-models" class="hasAnchor"><a href="#section-keras-models" class="anchor"></a>Keras Models</h2>
-            <p class="section-desc"><p>Creating, training, and evaluating models</p></p>
+            <p class="section-desc"></p>
           </th>
         </tr>
         <tr>
@@ -148,7 +148,7 @@
         <tr>
           <th colspan="2">
             <h2 id="section-core-layers" class="hasAnchor"><a href="#section-core-layers" class="anchor"></a>Core Layers</h2>
-            <p class="section-desc"><p>Core model layers</p></p>
+            <p class="section-desc"></p>
           </th>
         </tr>
         <tr>
@@ -222,7 +222,7 @@
         <tr>
           <th colspan="2">
             <h2 id="section-convolutional-layers" class="hasAnchor"><a href="#section-convolutional-layers" class="anchor"></a>Convolutional Layers</h2>
-            <p class="section-desc"><p>Convolutional model layers</p></p>
+            <p class="section-desc"></p>
           </th>
         </tr>
         <tr>
@@ -316,6 +316,438 @@
           </td>
           <td><p>Cropping layer for 3D data (e.g. spatial or spatio-temporal).</p></td>
         </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-pooling-layers" class="hasAnchor"><a href="#section-pooling-layers" class="anchor"></a>Pooling Layers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_max_pooling_1d.html">layer_max_pooling_1d</a></code> </p>
+          </td>
+          <td><p>Max pooling operation for temporal data.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_max_pooling_2d.html">layer_max_pooling_2d</a></code> </p>
+          </td>
+          <td><p>Max pooling operation for spatial data.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_max_pooling_3d.html">layer_max_pooling_3d</a></code> </p>
+          </td>
+          <td><p>Max pooling operation for 3D data (spatial or spatio-temporal).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_average_pooling_1d.html">layer_average_pooling_1d</a></code> </p>
+          </td>
+          <td><p>Average pooling for temporal data.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_average_pooling_2d.html">layer_average_pooling_2d</a></code> </p>
+          </td>
+          <td><p>Average pooling operation for spatial data.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_average_pooling_3d.html">layer_average_pooling_3d</a></code> </p>
+          </td>
+          <td><p>Average pooling operation for 3D data (spatial or spatio-temporal).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_global_max_pooling_1d.html">layer_global_max_pooling_1d</a></code> </p>
+          </td>
+          <td><p>Global max pooling operation for temporal data.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_global_average_pooling_1d.html">layer_global_average_pooling_1d</a></code> </p>
+          </td>
+          <td><p>Global average pooling operation for temporal data.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_global_max_pooling_2d.html">layer_global_max_pooling_2d</a></code> </p>
+          </td>
+          <td><p>Global max pooling operation for spatial data.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_global_average_pooling_2d.html">layer_global_average_pooling_2d</a></code> </p>
+          </td>
+          <td><p>Global average pooling operation for spatial data.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_global_max_pooling_3d.html">layer_global_max_pooling_3d</a></code> </p>
+          </td>
+          <td><p>Global Max pooling operation for 3D data.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_global_average_pooling_3d.html">layer_global_average_pooling_3d</a></code> </p>
+          </td>
+          <td><p>Global Average pooling operation for 3D data.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-activation-layers" class="hasAnchor"><a href="#section-activation-layers" class="anchor"></a>Activation Layers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_activation.html">layer_activation</a></code> </p>
+          </td>
+          <td><p>Apply an activation function to an output.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></code> </p>
+          </td>
+          <td><p>Leaky version of a Rectified Linear Unit.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_activation_parametric_relu.html">layer_activation_parametric_relu</a></code> </p>
+          </td>
+          <td><p>Parametric Rectified Linear Unit.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_activation_thresholded_relu.html">layer_activation_thresholded_relu</a></code> </p>
+          </td>
+          <td><p>Thresholded Rectified Linear Unit.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_activation_elu.html">layer_activation_elu</a></code> </p>
+          </td>
+          <td><p>Exponential Linear Unit.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-dropout-layers" class="hasAnchor"><a href="#section-dropout-layers" class="anchor"></a>Dropout Layers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_dropout.html">layer_dropout</a></code> </p>
+          </td>
+          <td><p>Applies Dropout to the input.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_spatial_dropout_1d.html">layer_spatial_dropout_1d</a></code> </p>
+          </td>
+          <td><p>Spatial 1D version of Dropout.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_spatial_dropout_2d.html">layer_spatial_dropout_2d</a></code> </p>
+          </td>
+          <td><p>Spatial 2D version of Dropout.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_spatial_dropout_3d.html">layer_spatial_dropout_3d</a></code> </p>
+          </td>
+          <td><p>Spatial 3D version of Dropout.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-locally-connected-layers" class="hasAnchor"><a href="#section-locally-connected-layers" class="anchor"></a>Locally-connected Layers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_locally_connected_1d.html">layer_locally_connected_1d</a></code> </p>
+          </td>
+          <td><p>Locally-connected layer for 1D inputs.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_locally_connected_2d.html">layer_locally_connected_2d</a></code> </p>
+          </td>
+          <td><p>Locally-connected layer for 2D inputs.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-recurrent-layers" class="hasAnchor"><a href="#section-recurrent-layers" class="anchor"></a>Recurrent Layers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_simple_rnn.html">layer_simple_rnn</a></code> </p>
+          </td>
+          <td><p>Fully-connected RNN where the output is to be fed back to input.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_gru.html">layer_gru</a></code> </p>
+          </td>
+          <td><p>Gated Recurrent Unit - Cho et al.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_lstm.html">layer_lstm</a></code> </p>
+          </td>
+          <td><p>Long-Short Term Memory unit - Hochreiter 1997.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-embedding-layers" class="hasAnchor"><a href="#section-embedding-layers" class="anchor"></a>Embedding Layers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_embedding.html">layer_embedding</a></code> </p>
+          </td>
+          <td><p>Turns positive integers (indexes) into dense vectors of fixed size.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-normalization-layers" class="hasAnchor"><a href="#section-normalization-layers" class="anchor"></a>Normalization Layers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_batch_normalization.html">layer_batch_normalization</a></code> </p>
+          </td>
+          <td><p>Batch normalization layer (Ioffe and Szegedy, 2014).</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-noise-layers" class="hasAnchor"><a href="#section-noise-layers" class="anchor"></a>Noise Layers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_gaussian_noise.html">layer_gaussian_noise</a></code> </p>
+          </td>
+          <td><p>Apply additive zero-centered Gaussian noise.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_gaussian_dropout.html">layer_gaussian_dropout</a></code> </p>
+          </td>
+          <td><p>Apply multiplicative 1-centered Gaussian noise.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-merge-layers" class="hasAnchor"><a href="#section-merge-layers" class="anchor"></a>Merge Layers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_add.html">layer_add</a></code> </p>
+          </td>
+          <td><p>Layer that adds a list of inputs.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_multiply.html">layer_multiply</a></code> </p>
+          </td>
+          <td><p>Layer that multiplies (element-wise) a list of inputs.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_average.html">layer_average</a></code> </p>
+          </td>
+          <td><p>Layer that averages a list of inputs.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_maximum.html">layer_maximum</a></code> </p>
+          </td>
+          <td><p>Layer that computes the maximum (element-wise) a list of inputs.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_concatenate.html">layer_concatenate</a></code> </p>
+          </td>
+          <td><p>Layer that concatenates a list of inputs.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_dot.html">layer_dot</a></code> </p>
+          </td>
+          <td><p>Layer that computes a dot product between samples in two tensors.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-layer-wrappers" class="hasAnchor"><a href="#section-layer-wrappers" class="anchor"></a>Layer Wrappers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="time_distributed.html">time_distributed</a></code> </p>
+          </td>
+          <td><p>Apply a layer to every temporal slice of an input.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="bidirectional.html">bidirectional</a></code> </p>
+          </td>
+          <td><p>Bidirectional wrapper for RNNs.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-optimizers" class="hasAnchor"><a href="#section-optimizers" class="anchor"></a>Optimizers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="optimizer_sgd.html">optimizer_sgd</a></code> </p>
+          </td>
+          <td><p>Stochastic gradient descent optimizer</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="optimizer_rmsprop.html">optimizer_rmsprop</a></code> </p>
+          </td>
+          <td><p>RMSProp optimizer</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="optimizer_adagrad.html">optimizer_adagrad</a></code> </p>
+          </td>
+          <td><p>Adagrad optimizer.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="optimizer_adadelta.html">optimizer_adadelta</a></code> </p>
+          </td>
+          <td><p>Adadelta optimizer.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="optimizer_adam.html">optimizer_adam</a></code> </p>
+          </td>
+          <td><p>Adam optimizer</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="optimizer_adamax.html">optimizer_adamax</a></code> </p>
+          </td>
+          <td><p>Adamax optimizer</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="optimizer_nadam.html">optimizer_nadam</a></code> </p>
+          </td>
+          <td><p>Nesterov Adam optimizer</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-constraints" class="hasAnchor"><a href="#section-constraints" class="anchor"></a>Constraints</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="constraint_maxnorm.html">constraint_maxnorm</a></code> </p>
+          </td>
+          <td><p>MaxNorm weight constraint</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="constraint_nonneg.html">constraint_nonneg</a></code> </p>
+          </td>
+          <td><p>NonNeg weight constraint</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="constraint_unitnorm.html">constraint_unitnorm</a></code> </p>
+          </td>
+          <td><p>UnitNorm weight constraint</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="constraint_minmaxnorm.html">constraint_minmaxnorm</a></code> </p>
+          </td>
+          <td><p>MinMaxNorm weight constraint</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-regularizers" class="hasAnchor"><a href="#section-regularizers" class="anchor"></a>Regularizers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="regularizer_l1.html">regularizer_l1</a></code> <code><a href="regularizer_l1.html">regularizer_l2</a></code> <code><a href="regularizer_l1.html">regularizer_l1_l2</a></code> </p>
+          </td>
+          <td><p>L1 and L2 regularization</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-activations" class="hasAnchor"><a href="#section-activations" class="anchor"></a>Activations</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="activation_relu.html">activation_relu</a></code> <code><a href="activation_relu.html">activation_elu</a></code> <code><a href="activation_relu.html">activation_hard_sigmoid</a></code> <code><a href="activation_relu.html">activation_linear</a></code> <code><a href="activation_relu.html">activation_sigmoid</a></code> <code><a href="activation_relu.html">activation_softmax</a></code> <code><a href="activation_relu.html">activation_softplus</a></code> <code><a href="activation_relu.html">activation_softsign</a></code> <code><a href="activation_relu.html">activation_tanh</a></code> </p>
+          </td>
+          <td><p>Activation functions</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-metrics" class="hasAnchor"><a href="#section-metrics" class="anchor"></a>Metrics</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="metric_binary_accuracy.html">metric_binary_accuracy</a></code> <code><a href="metric_binary_accuracy.html">metric_binary_crossentropy</a></code> <code><a href="metric_binary_accuracy.html">metric_categorical_accuracy</a></code> <code><a href="metric_binary_accuracy.html">metric_categorical_crossentropy</a></code> <code><a href="metric_binary_accuracy.html">metric_cosine_proximity</a></code> <code><a href="metric_binary_accuracy.html">metric_hinge</a></code> <code><a href="metric_binary_accuracy.html">metric_kullback_leibler_divergence</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_absolute_error</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_absolute_percentage_error</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_squared_error</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_squared_logarithmic_error</a></code> <code><a href="metric_binary_accuracy.html">metric_poisson</a></code> <code><a href="metric_binary_accuracy.html">metric_sparse_categorical_crossentropy</a></code> <code><a href="metric_binary_accuracy.html">metric_squared_hinge</a></code> <code><a href="metric_binary_accuracy.html">metric_top_k_categorical_accuracy</a></code> </p>
+          </td>
+          <td><p>Metrics used for judging the performance of models</p></td>
+        </tr>
       </tbody>
       </table>
     </div>
@@ -327,6 +759,21 @@
       <li><a href="#section-keras-models">Keras Models</a></li>
       <li><a href="#section-core-layers">Core Layers</a></li>
       <li><a href="#section-convolutional-layers">Convolutional Layers</a></li>
+      <li><a href="#section-pooling-layers">Pooling Layers</a></li>
+      <li><a href="#section-activation-layers">Activation Layers</a></li>
+      <li><a href="#section-dropout-layers">Dropout Layers</a></li>
+      <li><a href="#section-locally-connected-layers">Locally-connected Layers</a></li>
+      <li><a href="#section-recurrent-layers">Recurrent Layers</a></li>
+      <li><a href="#section-embedding-layers">Embedding Layers</a></li>
+      <li><a href="#section-normalization-layers">Normalization Layers</a></li>
+      <li><a href="#section-noise-layers">Noise Layers</a></li>
+      <li><a href="#section-merge-layers">Merge Layers</a></li>
+      <li><a href="#section-layer-wrappers">Layer Wrappers</a></li>
+      <li><a href="#section-optimizers">Optimizers</a></li>
+      <li><a href="#section-constraints">Constraints</a></li>
+      <li><a href="#section-regularizers">Regularizers</a></li>
+      <li><a href="#section-activations">Activations</a></li>
+      <li><a href="#section-metrics">Metrics</a></li>
     </ul>
   </div>
 </div>
