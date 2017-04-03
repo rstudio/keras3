@@ -1,0 +1,9 @@
+---
+title: "Keras Example: Simple Model"
+output: rmarkdown::html_document
+---
+
+
+```{r chunk, code=readLines("simple.R"), eval=FALSE}
+```
+

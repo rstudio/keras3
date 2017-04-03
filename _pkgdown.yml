@@ -17,6 +17,10 @@ navbar:
           href: articles/functional_api.html
         - text: Frequently Asked Questions
           href: faq.html  
+    - text: Examples
+      menu:
+        - text: Simple
+          href: articles/examples/simple.html
     - text: "Reference"
       href: reference/index.html
   right:
