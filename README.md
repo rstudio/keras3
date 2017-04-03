@@ -1,6 +1,19 @@
 keras for R
 ================
 
+Keras: Deep Learning library for TensorFlow
+-------------------------------------------
+
+[![Build Status](https://travis-ci.org/rstudio/keras.svg?branch=master)](https://travis-ci.org/rstudio/keras) [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/rstudio/keras/blob/master/LICENSE)
+
+Keras is a high-level neural networks API which runs on top of TensorFlow. Keras was developed with a focus on enabling fast experimentation. *Being able to go from idea to result with the least possible delay is key to doing good research.*
+
+Use Keras if you need a deep learning library that:
+
+-   Allows for easy and fast prototyping (through user friendliness, modularity, and extensibility).
+-   Supports both convolutional networks and recurrent networks, as well as combinations of the two.
+-   Runs seamlessly on CPU and GPU.
+
 Getting started: 30 seconds to Keras
 ------------------------------------
 
