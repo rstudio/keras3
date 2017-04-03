@@ -1,0 +1,55 @@
+template:
+  params:
+    bootswatch: cosmo
+
+navbar:
+  title: "keras for R"
+  type: inverse
+  left:
+    - text: "Introduction"
+      href: articles/introduction.html
+    - text: "Reference"
+      href: "reference/index.html"
+  right:
+   - icon: fa-github
+     href: https://github.com/rstudio/keras
+
+reference:
+  - title: "Keras Models"
+    desc: >
+      Creating, training, and evaluating models
+    contents:
+      - model
+      - model_sequential
+      - compile
+      - fit
+      - evaluate
+      - predict
+      - save_model
+      - load_model
+  - title: "Core Layers"
+    desc: >
+      Core model layers
+    contents:
+      - layer_input
+      - layer_dense
+      - layer_activation
+      - layer_dropout
+      - layer_reshape
+      - layer_permute
+      - layer_repeat_vector
+      - layer_lambda
+      - layer_activity_regularization
+      - layer_masking
+      - layer_flatten
+  - title: "Convolutional Layers"
+    desc: >
+      Convolutional model layers
+    contents:
+      - starts_with("layer_conv_")
+      - layer_separable_conv_2d
+      - starts_with("layer_upsampling_")
+      - starts_with("layer_zero_padding_")
+      - starts_with("layer_cropping_")
+
+ 

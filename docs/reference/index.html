@@ -11,8 +11,8 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -38,7 +38,7 @@
   <body>
     <div class="container template-reference-index">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -46,22 +46,22 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">keras</a>
+      <a class="navbar-brand" href="../index.html">keras for R</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/introduction.html">Introduction</a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
@@ -91,22 +91,22 @@
       <tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
+            <h2 id="section-keras-models" class="hasAnchor"><a href="#section-keras-models" class="anchor"></a>Keras Models</h2>
+            <p class="section-desc"><p>Creating, training, and evaluating models</p></p>
           </th>
         </tr>
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="activation-functions.html">activation-functions</a></code> <code><a href="activation-functions.html">activation_relu</a></code> <code><a href="activation-functions.html">activation_elu</a></code> <code><a href="activation-functions.html">activation_hard_sigmoid</a></code> <code><a href="activation-functions.html">activation_linear</a></code> <code><a href="activation-functions.html">activation_sigmoid</a></code> <code><a href="activation-functions.html">activation_softmax</a></code> <code><a href="activation-functions.html">activation_softplus</a></code> <code><a href="activation-functions.html">activation_softsign</a></code> <code><a href="activation-functions.html">activation_tanh</a></code> </p>
+            <p><code><a href="model.html">model</a></code> </p>
           </td>
-          <td><p>Activation functions</p></td>
+          <td><p>Keras Model</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="bidirectional.html">bidirectional</a></code> </p>
+            <p><code><a href="model_sequential.html">model_sequential</a></code> </p>
           </td>
-          <td><p>Bidirectional wrapper for RNNs.</p></td>
+          <td><p>Keras Model composed of a linear stack of layers</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -116,27 +116,9 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="constraint_maxnorm.html">constraint_maxnorm</a></code> </p>
+            <p><code><a href="fit.html">fit</a></code> </p>
           </td>
-          <td><p>MaxNorm weight constraint</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="constraint_minmaxnorm.html">constraint_minmaxnorm</a></code> </p>
-          </td>
-          <td><p>MinMaxNorm weight constraint</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="constraint_nonneg.html">constraint_nonneg</a></code> </p>
-          </td>
-          <td><p>NonNeg weight constraint</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="constraint_unitnorm.html">constraint_unitnorm</a></code> </p>
-          </td>
-          <td><p>UnitNorm weight constraint</p></td>
+          <td><p>Train a Keras model</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -146,45 +128,41 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="fit.html">fit</a></code> </p>
+            <p><code><a href="predict.html">predict</a></code> <code><a href="predict.html">predict.tensorflow.contrib.keras.python.keras.engine.training.Model</a></code> </p>
           </td>
-          <td><p>Train a Keras model</p></td>
+          <td><p>Predict Method for Keras Models</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="keras.html">keras</a></code> <code><a href="keras.html">keras-package</a></code> </p>
+            <p><code><a href="save_model.html">save_model</a></code> </p>
           </td>
-          <td><p>keras for R</p></td>
+          <td><p>Save a Keras model into a single HDF5 file</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="l1l2-regularizers.html">l1l2-regularizers</a></code> <code><a href="l1l2-regularizers.html">regularizer_l1</a></code> <code><a href="l1l2-regularizers.html">regularizer_l2</a></code> <code><a href="l1l2-regularizers.html">regularizer_l1_l2</a></code> </p>
+            <p><code><a href="load_model.html">load_model</a></code> </p>
           </td>
-          <td><p>Regularizer for L1 and L2 regularization</p></td>
+          <td><p>Load a Keras model from an HDF5 file</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-core-layers" class="hasAnchor"><a href="#section-core-layers" class="anchor"></a>Core Layers</h2>
+            <p class="section-desc"><p>Core model layers</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_input.html">layer_input</a></code> </p>
+          </td>
+          <td><p>Input layer</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="layer_activation_elu.html">layer_activation_elu</a></code> </p>
+            <p><code><a href="layer_dense.html">layer_dense</a></code> </p>
           </td>
-          <td><p>Exponential Linear Unit.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></code> </p>
-          </td>
-          <td><p>Leaky version of a Rectified Linear Unit.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_activation_parametric_relu.html">layer_activation_parametric_relu</a></code> </p>
-          </td>
-          <td><p>Parametric Rectified Linear Unit.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_activation_thresholded_relu.html">layer_activation_thresholded_relu</a></code> </p>
-          </td>
-          <td><p>Thresholded Rectified Linear Unit.</p></td>
+          <td><p>Add a densely-connected NN layer to an output</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -194,52 +172,60 @@
         </tr><tr>
           <!--  -->
           <td>
+            <p><code><a href="layer_dropout.html">layer_dropout</a></code> </p>
+          </td>
+          <td><p>Applies Dropout to the input.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_reshape.html">layer_reshape</a></code> </p>
+          </td>
+          <td><p>Reshapes an output to a certain shape.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_permute.html">layer_permute</a></code> </p>
+          </td>
+          <td><p>Permute the dimensions of an input according to a given pattern</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_repeat_vector.html">layer_repeat_vector</a></code> </p>
+          </td>
+          <td><p>Repeats the input n times.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_lambda.html">layer_lambda</a></code> </p>
+          </td>
+          <td><p>Wraps arbitrary expression as a layer</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
             <p><code><a href="layer_activity_regularization.html">layer_activity_regularization</a></code> </p>
           </td>
           <td><p>Layer that applies an update to the cost function based input activity.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="layer_add.html">layer_add</a></code> </p>
+            <p><code><a href="layer_masking.html">layer_masking</a></code> </p>
           </td>
-          <td><p>Layer that adds a list of inputs.</p></td>
+          <td><p>Masks a sequence by using a mask value to skip timesteps.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="layer_average_pooling_1d.html">layer_average_pooling_1d</a></code> </p>
+            <p><code><a href="layer_flatten.html">layer_flatten</a></code> </p>
           </td>
-          <td><p>Average pooling for temporal data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_average_pooling_2d.html">layer_average_pooling_2d</a></code> </p>
-          </td>
-          <td><p>Average pooling operation for spatial data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_average_pooling_3d.html">layer_average_pooling_3d</a></code> </p>
-          </td>
-          <td><p>Average pooling operation for 3D data (spatial or spatio-temporal).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_average.html">layer_average</a></code> </p>
-          </td>
-          <td><p>Layer that averages a list of inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_batch_normalization.html">layer_batch_normalization</a></code> </p>
-          </td>
-          <td><p>Batch normalization layer (Ioffe and Szegedy, 2014).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_concatenate.html">layer_concatenate</a></code> </p>
-          </td>
-          <td><p>Layer that concatenates a list of inputs.</p></td>
-        </tr><tr>
+          <td><p>Flattens an input</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-convolutional-layers" class="hasAnchor"><a href="#section-convolutional-layers" class="anchor"></a>Convolutional Layers</h2>
+            <p class="section-desc"><p>Convolutional model layers</p></p>
+          </th>
+        </tr>
+        <tr>
           <!--  -->
           <td>
             <p><code><a href="layer_conv_1d.html">layer_conv_1d</a></code> </p>
@@ -272,219 +258,9 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="layer_cropping_1d.html">layer_cropping_1d</a></code> </p>
-          </td>
-          <td><p>Cropping layer for 1D input (e.g. temporal sequence).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_cropping_2d.html">layer_cropping_2d</a></code> </p>
-          </td>
-          <td><p>Cropping layer for 2D input (e.g. picture).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_cropping_3d.html">layer_cropping_3d</a></code> </p>
-          </td>
-          <td><p>Cropping layer for 3D data (e.g. spatial or spatio-temporal).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_dense.html">layer_dense</a></code> </p>
-          </td>
-          <td><p>Add a densely-connected NN layer to an output</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_dot.html">layer_dot</a></code> </p>
-          </td>
-          <td><p>Layer that computes a dot product between samples in two tensors.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_dropout.html">layer_dropout</a></code> </p>
-          </td>
-          <td><p>Applies Dropout to the input.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_embedding.html">layer_embedding</a></code> </p>
-          </td>
-          <td><p>Turns positive integers (indexes) into dense vectors of fixed size.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_flatten.html">layer_flatten</a></code> </p>
-          </td>
-          <td><p>Flattens an input</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_gaussian_dropout.html">layer_gaussian_dropout</a></code> </p>
-          </td>
-          <td><p>Apply multiplicative 1-centered Gaussian noise.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_gaussian_noise.html">layer_gaussian_noise</a></code> </p>
-          </td>
-          <td><p>Apply additive zero-centered Gaussian noise.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_global_average_pooling_1d.html">layer_global_average_pooling_1d</a></code> </p>
-          </td>
-          <td><p>Global average pooling operation for temporal data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_global_average_pooling_2d.html">layer_global_average_pooling_2d</a></code> </p>
-          </td>
-          <td><p>Global average pooling operation for spatial data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_global_average_pooling_3d.html">layer_global_average_pooling_3d</a></code> </p>
-          </td>
-          <td><p>Global Average pooling operation for 3D data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_global_max_pooling_1d.html">layer_global_max_pooling_1d</a></code> </p>
-          </td>
-          <td><p>Global max pooling operation for temporal data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_global_max_pooling_2d.html">layer_global_max_pooling_2d</a></code> </p>
-          </td>
-          <td><p>Global max pooling operation for spatial data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_global_max_pooling_3d.html">layer_global_max_pooling_3d</a></code> </p>
-          </td>
-          <td><p>Global Max pooling operation for 3D data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_gru.html">layer_gru</a></code> </p>
-          </td>
-          <td><p>Gated Recurrent Unit - Cho et al.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_input.html">layer_input</a></code> </p>
-          </td>
-          <td><p>Input layer</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_lambda.html">layer_lambda</a></code> </p>
-          </td>
-          <td><p>Wraps arbitrary expression as a layer</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_locally_connected_1d.html">layer_locally_connected_1d</a></code> </p>
-          </td>
-          <td><p>Locally-connected layer for 1D inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_locally_connected_2d.html">layer_locally_connected_2d</a></code> </p>
-          </td>
-          <td><p>Locally-connected layer for 2D inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_lstm.html">layer_lstm</a></code> </p>
-          </td>
-          <td><p>Long-Short Term Memory unit - Hochreiter 1997.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_masking.html">layer_masking</a></code> </p>
-          </td>
-          <td><p>Masks a sequence by using a mask value to skip timesteps.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_max_pooling_1d.html">layer_max_pooling_1d</a></code> </p>
-          </td>
-          <td><p>Max pooling operation for temporal data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_max_pooling_2d.html">layer_max_pooling_2d</a></code> </p>
-          </td>
-          <td><p>Max pooling operation for spatial data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_max_pooling_3d.html">layer_max_pooling_3d</a></code> </p>
-          </td>
-          <td><p>Max pooling operation for 3D data (spatial or spatio-temporal).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_maximum.html">layer_maximum</a></code> </p>
-          </td>
-          <td><p>Layer that computes the maximum (element-wise) a list of inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_multiply.html">layer_multiply</a></code> </p>
-          </td>
-          <td><p>Layer that multiplies (element-wise) a list of inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_permute.html">layer_permute</a></code> </p>
-          </td>
-          <td><p>Permute the dimensions of an input according to a given pattern</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_repeat_vector.html">layer_repeat_vector</a></code> </p>
-          </td>
-          <td><p>Repeats the input n times.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_reshape.html">layer_reshape</a></code> </p>
-          </td>
-          <td><p>Reshapes an output to a certain shape.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="layer_separable_conv_2d.html">layer_separable_conv_2d</a></code> </p>
           </td>
           <td><p>Depthwise separable 2D convolution.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_simple_rnn.html">layer_simple_rnn</a></code> </p>
-          </td>
-          <td><p>Fully-connected RNN where the output is to be fed back to input.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_spatial_dropout_1d.html">layer_spatial_dropout_1d</a></code> </p>
-          </td>
-          <td><p>Spatial 1D version of Dropout.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_spatial_dropout_2d.html">layer_spatial_dropout_2d</a></code> </p>
-          </td>
-          <td><p>Spatial 2D version of Dropout.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_spatial_dropout_3d.html">layer_spatial_dropout_3d</a></code> </p>
-          </td>
-          <td><p>Spatial 3D version of Dropout.</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -524,90 +300,21 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="load_model.html">load_model</a></code> </p>
+            <p><code><a href="layer_cropping_1d.html">layer_cropping_1d</a></code> </p>
           </td>
-          <td><p>Load a Keras model from an HDF5 file</p></td>
+          <td><p>Cropping layer for 1D input (e.g. temporal sequence).</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="model_sequential.html">model_sequential</a></code> </p>
+            <p><code><a href="layer_cropping_2d.html">layer_cropping_2d</a></code> </p>
           </td>
-          <td><p>Keras Model composed of a linear stack of layers</p></td>
+          <td><p>Cropping layer for 2D input (e.g. picture).</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="model-metrics.html">model-metrics</a></code> <code><a href="model-metrics.html">metric_binary_accuracy</a></code> <code><a href="model-metrics.html">metric_binary_crossentropy</a></code> <code><a href="model-metrics.html">metric_categorical_accuracy</a></code> <code><a href="model-metrics.html">metric_categorical_crossentropy</a></code> <code><a href="model-metrics.html">metric_cosine_proximity</a></code> <code><a href="model-metrics.html">metric_hinge</a></code> <code><a href="model-metrics.html">metric_kullback_leibler_divergence</a></code> <code><a href="model-metrics.html">metric_mean_absolute_error</a></code> <code><a href="model-metrics.html">metric_mean_absolute_percentage_error</a></code> <code><a href="model-metrics.html">metric_mean_squared_error</a></code> <code><a href="model-metrics.html">metric_mean_squared_logarithmic_error</a></code> <code><a href="model-metrics.html">metric_poisson</a></code> <code><a href="model-metrics.html">metric_sparse_categorical_crossentropy</a></code> <code><a href="model-metrics.html">metric_squared_hinge</a></code> <code><a href="model-metrics.html">metric_top_k_categorical_accuracy</a></code> </p>
+            <p><code><a href="layer_cropping_3d.html">layer_cropping_3d</a></code> </p>
           </td>
-          <td><p>Metrics used for judging the performance of models
-
-Metric functions are to be supplied in the <code>metrics</code> parameter of the
-<code>compile()</code> function.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="model.html">model</a></code> </p>
-          </td>
-          <td><p>Keras Model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="optimizer_adadelta.html">optimizer_adadelta</a></code> </p>
-          </td>
-          <td><p>Adadelta optimizer.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="optimizer_adagrad.html">optimizer_adagrad</a></code> </p>
-          </td>
-          <td><p>Adagrad optimizer.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="optimizer_adam.html">optimizer_adam</a></code> </p>
-          </td>
-          <td><p>Adam optimizer</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="optimizer_adamax.html">optimizer_adamax</a></code> </p>
-          </td>
-          <td><p>Adamax optimizer</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="optimizer_nadam.html">optimizer_nadam</a></code> </p>
-          </td>
-          <td><p>Nesterov Adam optimizer</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="optimizer_rmsprop.html">optimizer_rmsprop</a></code> </p>
-          </td>
-          <td><p>RMSProp optimizer</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="optimizer_sgd.html">optimizer_sgd</a></code> </p>
-          </td>
-          <td><p>Stochastic gradient descent optimizer</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="predict.html">predict</a></code> <code><a href="predict.html">predict.tensorflow.contrib.keras.python.keras.engine.training.Model</a></code> </p>
-          </td>
-          <td><p>Predict Method for Keras Models</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="save_model.html">save_model</a></code> </p>
-          </td>
-          <td><p>Save a Keras model into a single HDF5 file</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="time_distributed.html">time_distributed</a></code> </p>
-          </td>
-          <td><p>Apply a layer to every temporal slice of an input.</p></td>
+          <td><p>Cropping layer for 3D data (e.g. spatial or spatio-temporal).</p></td>
         </tr>
       </tbody>
       </table>
@@ -617,7 +324,9 @@ Metric functions are to be supplied in the <code>metrics</code> parameter of the
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-keras-models">Keras Models</a></li>
+      <li><a href="#section-core-layers">Core Layers</a></li>
+      <li><a href="#section-convolutional-layers">Convolutional Layers</a></li>
     </ul>
   </div>
 </div>
