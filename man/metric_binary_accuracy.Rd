@@ -16,7 +16,7 @@
 \alias{metric_sparse_categorical_crossentropy}
 \alias{metric_squared_hinge}
 \alias{metric_top_k_categorical_accuracy}
-\title{Metrics used for judging the performance of models}
+\title{Model performance metrics}
 \usage{
 metric_binary_accuracy()
 
@@ -49,7 +49,7 @@ metric_squared_hinge()
 metric_top_k_categorical_accuracy()
 }
 \description{
-Metrics used for judging the performance of models
+Model performance metrics
 }
 \note{
 Metric functions are to be supplied in the \code{metrics} parameter of the

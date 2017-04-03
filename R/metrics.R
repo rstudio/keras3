@@ -1,6 +1,5 @@
 
-#' Metrics used for judging the performance of models
-#'   
+#' Model performance metrics
 #'   
 #' @note   
 #' Metric functions are to be supplied in the `metrics` parameter of the 

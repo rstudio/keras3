@@ -141,3 +141,11 @@ h4.author {
   display: none;
 }
 
+h2.hasAnchor {
+  font-weight: 350;
+}
+
+.ref-index tbody {
+  margin-bottom: 60px;
+}
+
