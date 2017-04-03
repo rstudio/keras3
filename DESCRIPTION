@@ -4,18 +4,28 @@ Title: R Interface to Keras
 Version: 0.3
 Authors@R: c(
   person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
-  person(family = "RStudio", role = "cph")
+  person(family = "RStudio", role = "cph"),
+  person(family = "Google", role = c("ctb", "cph")),
+  person("François", "Chollet", role = c("aut", "cph")),
+  person("Yuan", "Tang", role = c("ctb", "cph"))
   )
 Description: Interface to 'Keras', a high-level neural networks API which 
   runs on top of TensorFlow. 'Keras' was developed with a focus on enabling
   fast experimentation, supports both convolutional networks and recurrent
   networks (as well as combinations of the two), and seamlessly on both CPUs
   and GPUs.
-License: GPL (>= 2)
+Encoding: UTF-8
+License: MIT + file LICENSE
+URL: https://github.com/rstudio/keras
+BugReports: https://github.com/rstudio/keras/issues
 Imports:
-    reticulate (>= 0.7), tensorflow (>= 0.7), magrittr, methods
+    reticulate (>= 0.7), 
+    tensorflow (>= 0.7), 
+    magrittr, 
+    methods
 Suggests: 
     testthat
 SystemRequirements: TensorFlow >= 1.0.1 (https://www.tensorflow.org/)
+SystemRequirements: TensorFlow >= 1.1 (https://www.tensorflow.org/)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
