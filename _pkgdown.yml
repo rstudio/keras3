@@ -6,10 +6,16 @@ navbar:
   title: "keras for R"
   type: inverse
   left:
-    - text: "Introduction"
-      href: articles/introduction.html
+    - text: "Home"
+      href: index.html
+    - text: "Articles"
+      menu:
+        - text: Sequential API
+        - href: articles/sequential_api.html
+        - text: Functional API
+        - href: articles/functional_api.html   
     - text: "Reference"
-      href: "reference/index.html"
+      href: reference/index.html
   right:
    - icon: fa-github
      href: https://github.com/rstudio/keras

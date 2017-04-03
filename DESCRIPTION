@@ -3,10 +3,10 @@ Type: Package
 Title: R Interface to Keras
 Version: 0.3
 Authors@R: c(
+  person("François", "Chollet", role = c("aut", "cph")),
   person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
   person(family = "RStudio", role = "cph"),
   person(family = "Google", role = c("ctb", "cph")),
-  person("François", "Chollet", role = c("aut", "cph")),
   person("Yuan", "Tang", role = c("ctb", "cph"))
   )
 Description: Interface to 'Keras', a high-level neural networks API which 

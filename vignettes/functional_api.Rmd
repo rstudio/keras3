@@ -1,0 +1,10 @@
+---
+title: "Using the Keras Functional API"
+author: "JJ Allaire"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: |
+  %\VignetteIndexEntry{Using the Functional API} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+---
+
+

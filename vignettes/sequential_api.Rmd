@@ -1,0 +1,10 @@
+---
+title: "Using the Keras Sequential API"
+author: "JJ Allaire"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: |
+  %\VignetteIndexEntry{Using the Sequential API} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+---
+
+

@@ -29,7 +29,24 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="articles/introduction.html">Introduction</a>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li class="dropdown-header">Sequential API</li>
+    <li>
+      <a href="articles/sequential_api.html"></a>
+    </li>
+    <li class="dropdown-header">Functional API</li>
+    <li>
+      <a href="articles/functional_api.html"></a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
@@ -58,7 +75,40 @@
     
     
 <div class="contents">
-<p>Keras for R</p>
+<div id="getting-started-30-seconds-to-keras" class="section level2">
+<h2 class="hasAnchor">
+<a href="#getting-started-30-seconds-to-keras" class="anchor"></a>Getting started: 30 seconds to Keras</h2>
+<p>The core data structure of Keras is a model, a way to organize layers. The simplest type of model is the Sequential model, a linear stack of layers. For more complex architectures, you should use the Keras functional API, which allows to build arbitrary graphs of layers.</p>
+<p>Here is the Sequential model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+model &lt;-<span class="st"> </span><span class="kw"><a href="reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">input_shape =</span> <span class="dv">100</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'softmax'</span>)</code></pre></div>
+<p>Once your model looks good, configure its learning process with <code><a href="reference/compile.html">compile()</a></code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/compile.html">compile</a></span>(<span class="dt">loss=</span><span class="st">'categorical_crossentropy'</span>,
+          <span class="dt">optimizer=</span><span class="st">'sgd'</span>,
+          <span class="dt">metrics=</span><span class="kw">c</span>(<span class="st">'accuracy'</span>))</code></pre></div>
+<p>If you need to, you can further configure your optimizer. A core principle of Keras is to make things reasonably simple, while allowing the user to be fully in control when they need to (the ultimate control being the easy extensibility of the source code).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/compile.html">compile</a></span>(<span class="dt">loss=</span><span class="st">'categorical_crossentropy'</span>,
+          <span class="dt">optimizer=</span><span class="kw"><a href="reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="dt">lr=</span><span class="fl">0.01</span>, <span class="dt">momentum=</span><span class="fl">0.9</span>, <span class="dt">nesterov=</span><span class="ot">TRUE</span>),
+          <span class="dt">metrics=</span><span class="kw">c</span>(<span class="st">'accuracy'</span>))</code></pre></div>
+<p>You can now iterate on your training data in batches:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># x_train and y_train are R matrices</span>
+model &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">epochs=</span><span class="dv">5</span>, <span class="dt">batch_size=</span><span class="dv">32</span>)</code></pre></div>
+<p>Evaluate your performance in one line:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loss_and_metrics &lt;-<span class="st"> </span>model %&gt;%<span class="st">  </span>
+<span class="st">  </span><span class="kw"><a href="reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size=</span><span class="dv">128</span>)</code></pre></div>
+<p>Or generate predictions on new data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classes &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/predict.html">predict</a></span>(x_test, <span class="dt">batch_size=</span><span class="dv">128</span>)</code></pre></div>
+<p>Building a question answering system, an image classification model, a Neural Turing Machine, or any other model is just as fast. The ideas behind deep learning are simple, so why should their implementation be painful?</p>
+</div>
 </div>
   </div>
 
@@ -74,8 +124,8 @@
 <p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE">LICENSE</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>JJ Allaire <br><small class="roles"> Author, maintainer </small> </li>
 <li>François Chollet <br><small class="roles"> Author, copyright holder </small> </li>
+<li>JJ Allaire <br><small class="roles"> Author, maintainer </small> </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
@@ -84,7 +134,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by JJ Allaire, François Chollet.</p>
+  <p>Developed by François Chollet, JJ Allaire.</p>
 </div>
 
 <div class="pkgdown">
