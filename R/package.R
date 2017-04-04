@@ -1,3 +1,4 @@
+
 #' @import reticulate
 #' @import tensorflow
 NULL
@@ -8,7 +9,9 @@ keras <- NULL
 .onLoad <- function(libname, pkgname) {
   
   # delay load keras
-  keras <<- import("tensorflow.contrib.keras", delay_load = TRUE)
+  keras <<- import("tensorflow.contrib.keras", delay_load = function() {
+    
+  })
   
 }
 

@@ -23,7 +23,5 @@ reticulate::use_condaenv
 #' @export
 reticulate::py_config
 
-#' @export
-tensorflow::shape
 
 
