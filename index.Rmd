@@ -1,6 +1,5 @@
 ---
 title: "R interface to Keras"
-output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -16,35 +15,17 @@ y_test <- matrix(round(runif(10*10, min = 0, max = 9)), nrow = 10, ncol = 10)
 ```
 
 
-[![Build Status](https://travis-ci.org/rstudio/keras.svg?branch=master)](https://travis-ci.org/rstudio/keras)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/rstudio/keras/blob/master/LICENSE)
+# R interface to Keras
 
-Keras is a high-level neural networks API developed with a focus on enabling fast experimentation. The R interface to Keras uses [TensorFlow](https://rstudio.github.io/tensorflow/) as it's underlying computation engine.
-
-*Being able to go from idea to result with the least possible delay is key to doing good research.* Use Keras if you need a deep learning library that:
+[Keras](https://keras.io/) is a high-level neural networks API developed with a focus on enabling fast experimentation. *Being able to go from idea to result with the least possible delay is key to doing good research.* Use Keras if you need a deep learning library that:
 
 - Allows for easy and fast prototyping (through user friendliness, modularity, and extensibility).
 - Supports both convolutional networks and recurrent networks, as well as combinations of the two.
 - Runs seamlessly on CPU and GPU.
 
-Visit the home page for the Keras project at <https://keras.io/>
-
-Read the documentation for the R package at <https://rstudio.github.io/keras>
-
-## Guiding principles
-
-- **User friendliness**. Keras is an API designed for human beings, not machines. It puts user experience front and center. Keras follows best practices for reducing cognitive load: it offers consistent & simple APIs, it minimizes the number of user actions required for common use cases, and it provides clear and actionable feedback upon user error.
-
-- **Modularity**. A model is understood as a sequence or a graph of standalone, fully-configurable modules that can be plugged together with as little restrictions as possible. In particular, neural layers, cost functions, optimizers, initialization schemes, activation functions, regularization schemes are all standalone modules that you can combine to create new models.
-
-- **Easy extensibility**. New modules are simple to add (as new  functions), and existing modules provide ample examples. To be able to easily create new modules allows for total expressiveness, making Keras suitable for advanced research.
-
-- **Work with R**. No separate model configuration files in a declarative format. Models are described in R code, which is compact, easier to debug, and allows for ease of extensibility.
-
-
 ## Getting started: 30 seconds to Keras
 
-The core data structure of Keras is a *model*, a way to organize layers. The simplest type of model is the Sequential model, a linear stack of layers. For more complex architectures, you should use the Keras functional API, which allows to build arbitrary graphs of layers.
+The core data structure of Keras is a **model**, a way to organize layers. The simplest type of model is the Sequential model, a linear stack of layers. For more complex architectures, you should use the Keras functional API, which allows to build arbitrary graphs of layers.
 
 Here is the Sequential model:
 
@@ -94,7 +75,7 @@ Within the [examples](articles/examples) you will find more advanced models: que
 
 ## Installation
 
-In order to use Keras you should first install TensorFlow (version 1.1 or higher). Instructions for installing TensorFlow are here: <https://www.tensorflow.org/install/>.
+The R interface to Keras uses [TensorFlow](https://rstudio.github.io/tensorflow/) as it's underlying computation engine. Therefore, you need to install TensorFlow (version 1.1 or higher) before using the package. Instructions for installing TensorFlow are here: <https://www.tensorflow.org/install/>.
 
 Then, install the Keras R package from GitHub:
 

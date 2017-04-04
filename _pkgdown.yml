@@ -3,7 +3,7 @@ template:
     bootswatch: cosmo
 
 navbar:
-  title: "keras for R"
+  title: "Keras for R"
   type: inverse
   left:
     - text: "Home"

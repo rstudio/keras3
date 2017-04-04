@@ -24,7 +24,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">keras for R</a>
+      <a class="navbar-brand" href="index.html">Keras for R</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -92,9 +92,7 @@
 <div id="r-interface-to-keras" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#r-interface-to-keras" class="anchor"></a>R interface to Keras</h1></div>
-
-<p>Keras is a high-level neural networks API which runs on top of TensorFlow. Keras was developed with a focus on enabling fast experimentation. <em>Being able to go from idea to result with the least possible delay is key to doing good research.</em></p>
-<p>Use Keras if you need a deep learning library that:</p>
+<p><a href="https://keras.io/">Keras</a> is a high-level neural networks API developed with a focus on enabling fast experimentation. <em>Being able to go from idea to result with the least possible delay is key to doing good research.</em> Use Keras if you need a deep learning library that:</p>
 <ul>
 <li>Allows for easy and fast prototyping (through user friendliness, modularity, and extensibility).</li>
 <li>Supports both convolutional networks and recurrent networks, as well as combinations of the two.</li>
@@ -103,7 +101,7 @@
 <div id="getting-started-30-seconds-to-keras" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-started-30-seconds-to-keras" class="anchor"></a>Getting started: 30 seconds to Keras</h2>
-<p>The core data structure of Keras is a model, a way to organize layers. The simplest type of model is the Sequential model, a linear stack of layers. For more complex architectures, you should use the Keras functional API, which allows to build arbitrary graphs of layers.</p>
+<p>The core data structure of Keras is a <strong>model</strong>, a way to organize layers. The simplest type of model is the Sequential model, a linear stack of layers. For more complex architectures, you should use the Keras functional API, which allows to build arbitrary graphs of layers.</p>
 <p>Here is the Sequential model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
@@ -111,28 +109,41 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="reference/model_se
 <span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">input_shape =</span> <span class="dv">100</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'softmax'</span>)</code></pre></div>
-<p>Once your model looks good, configure its learning process with <code><a href="reference/compile.html">compile()</a></code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/compile.html">compile</a></span>(<span class="dt">loss=</span><span class="st">'categorical_crossentropy'</span>,
-          <span class="dt">optimizer=</span><span class="st">'sgd'</span>,
-          <span class="dt">metrics=</span><span class="kw">c</span>(<span class="st">'accuracy'</span>))</code></pre></div>
-<p>If you need to, you can further configure your optimizer. A core principle of Keras is to make things reasonably simple, while allowing the user to be fully in control when they need to (the ultimate control being the easy extensibility of the source code).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/compile.html">compile</a></span>(<span class="dt">loss=</span><span class="st">'categorical_crossentropy'</span>,
-          <span class="dt">optimizer=</span><span class="kw"><a href="reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="dt">lr=</span><span class="fl">0.01</span>, <span class="dt">momentum=</span><span class="fl">0.9</span>, <span class="dt">nesterov=</span><span class="ot">TRUE</span>),
-          <span class="dt">metrics=</span><span class="kw">c</span>(<span class="st">'accuracy'</span>))</code></pre></div>
-<p>You can now iterate on your training data in batches:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># x_train and y_train are R matrices</span>
-model &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">epochs=</span><span class="dv">5</span>, <span class="dt">batch_size=</span><span class="dv">32</span>)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'softmax'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/compile.html">compile</a></span>(
+    <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
+    <span class="dt">optimizer =</span> <span class="kw"><a href="reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="dt">lr =</span> <span class="fl">0.02</span>),
+    <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+  )</code></pre></div>
+<p>You can now iterate on your training data in batches (<code>x_train</code> and <code>y_train</code> are R matrices):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/fit.html">fit</a></span>(model, x_train, y_train, <span class="dt">epochs =</span> <span class="dv">5</span>, <span class="dt">batch_size =</span> <span class="dv">32</span>)</code></pre></div>
 <p>Evaluate your performance in one line:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loss_and_metrics &lt;-<span class="st"> </span>model %&gt;%<span class="st">  </span>
-<span class="st">  </span><span class="kw"><a href="reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size=</span><span class="dv">128</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loss_and_metrics &lt;-<span class="st"> </span><span class="kw"><a href="reference/evaluate.html">evaluate</a></span>(model, x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
 <p>Or generate predictions on new data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classes &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/predict.html">predict</a></span>(x_test, <span class="dt">batch_size=</span><span class="dv">128</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classes &lt;-<span class="st"> </span><span class="kw"><a href="reference/predict.html">predict</a></span>(model, x_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
 <p>Building a question answering system, an image classification model, a Neural Turing Machine, or any other model is just as fast. The ideas behind deep learning are simple, so why should their implementation be painful?</p>
+<p>For a more in-depth tutorial about Keras, you can check out:</p>
+<ul>
+<li><p><a href="articles/sequential_model.html">Getting started with the Sequential model</a></p></li>
+<li><p><a href="articles/functional_api.html">Getting started with the functional API</a></p></li>
+</ul>
+<p>Within the <a href="articles/examples">examples</a> you will find more advanced models: question-answering with memory networks, text generation with stacked LSTMs, etc.</p>
+</div>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>The R interface to Keras uses <a href="https://rstudio.github.io/tensorflow/">TensorFlow</a> as it’s underlying computation engine. Therefore, you need to install TensorFlow (version 1.1 or higher) before using the package. Instructions for installing TensorFlow are here: <a href="https://www.tensorflow.org/install/" class="uri">https://www.tensorflow.org/install/</a>.</p>
+<p>Then, install the Keras R package from GitHub:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"rstudio/keras"</span>)</code></pre></div>
+</div>
+<div id="why-this-name-keras" class="section level2">
+<h2 class="hasAnchor">
+<a href="#why-this-name-keras" class="anchor"></a>Why this name, Keras?</h2>
+<p>Keras (κέρας) means horn in Greek. It is a reference to a literary image from ancient Greek and Latin literature, first found in the Odyssey, where dream spirits (Oneiroi, singular Oneiros) are divided between those who deceive men with false visions, who arrive to Earth through a gate of ivory, and those who announce a future that will come to pass, who arrive through a gate of horn. It’s a play on the words κέρας (horn) / κραίνω (fulfill), and ἐλέφας (ivory) / ἐλεφαίρομαι (deceive).</p>
+<p>Keras was initially developed as part of the research effort of project ONEIROS (Open-ended Neuro-Electronic Intelligent Robot Operating System).</p>
+<blockquote>
+<p>“Oneiroi are beyond our unravelling –who can be sure what tale they tell? Not all that men look for comes to pass. Two gates there are that give passage to fleeting Oneiroi; one is made of horn, one of ivory. The Oneiroi that pass through sawn ivory are deceitful, bearing a message that will not be fulfilled; those that come out through polished horn have truth behind them, to be accomplished for men who see them.” Homer, Odyssey 19. 562 ff (Shewring translation).</p>
+</blockquote>
 </div>
 </div>
 </div>
@@ -154,13 +165,6 @@ model &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span>
 <li>JJ Allaire <br><small class="roles"> Author, maintainer </small> </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
-<div>
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://travis-ci.org/rstudio/keras"><img src="https://travis-ci.org/rstudio/keras.svg?branch=master" alt="Build Status"></a></li>
-<li><a href="https://github.com/rstudio/keras/blob/master/LICENSE"><img src="https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000" alt="license"></a></li>
-</ul>
-</div>
 </div>
 
 </div>
