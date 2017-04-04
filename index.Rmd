@@ -64,13 +64,17 @@ classes <- predict(model, x_test, batch_size = 128)
 
 Building a question answering system, an image classification model, a Neural Turing Machine, or any other model is just as fast. The ideas behind deep learning are simple, so why should their implementation be painful?
 
-For a more in-depth tutorial about Keras, you can check out:
+To learn more about Keras, you can check out these articles:
 
-- [Getting started with the Sequential model](articles/sequential_model.html)
+- [Guide to the Sequential Model](articles/sequential_model.html)
 
-- [Getting started with the functional API](articles/functional_api.html)
+- [Guide to the Functional API](articles/functional_api.html)
 
-Within the [examples](articles/examples) you will find more advanced models: question-answering with memory networks, text generation with stacked LSTMs, etc.
+- [Frequently Asked Questions](articles/faq.html)
+
+The [examples](articles/examples) demonstrate more advanced models including transfer learning, variational auto-encoding, question-answering with memory networks, text generation with stacked LSTMs, etc.
+
+The [function reference](reference/index.html) includes detailed information on all of the functions available in the package.
 
 
 ## Installation

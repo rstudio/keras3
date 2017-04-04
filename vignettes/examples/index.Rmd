@@ -1,0 +1,12 @@
+---
+title: "Keras Examples"
+---
+
+| Example  | Description   |
+|----------------------|------------------------------------|
+| [mnist_transfer_cnn.R](mnist_transfer_cnn.html)  |  Transfer learning toy example. |
+|   |   |
+
+
+
+
