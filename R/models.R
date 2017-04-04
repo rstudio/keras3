@@ -153,9 +153,8 @@ fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL
     initial_epoch = as.integer(initial_epoch)
   )
   
-  # return the history as an attribute
-  attr(model, "history") <- history
-  model
+  # return the history invisibly
+  invisible(history)
 }
 
 
