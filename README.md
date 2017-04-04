@@ -11,9 +11,9 @@ Keras is a high-level neural networks API developed with a focus on enabling fas
 -   Supports both convolutional networks and recurrent networks, as well as combinations of the two.
 -   Runs seamlessly on CPU and GPU.
 
-Visit the home page for the Keras project at <https://keras.io/>.
+Visit the home page for the Keras project at <https://keras.io/>
 
-Read the documentation for the R package at <https://rstudio.github.io/keras>.
+Read the documentation for the R package at <https://rstudio.github.io/keras>
 
 Guiding principles
 ------------------
