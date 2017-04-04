@@ -56,9 +56,6 @@ model_sequential <- function(layers = NULL, name = NULL) {
 compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
                     sample_weight_mode = NULL) {
   
-  # clone model if possible
-  model <- clone_model_if_possible(model)
-  
   # resolve metrics (if they are functions in our namespace then call them 
   # so we end up passing the underlying python function not the R function)
   if (!is.null(metrics)) {
@@ -125,9 +122,6 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
 fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL,
                 validation_split=0.0, validation_data=NULL, shuffle=TRUE,
                 class_weight=NULL, sample_weight=NULL, initial_epoch=0) {
-  
-  # clone the model if we can
-  model <- clone_model_if_possible(model, method = "h5py")
   
   # convert class weights to python dict
   if (!is.null(class_weight)) {
@@ -266,37 +260,6 @@ summary.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
 #' @export
 py_str.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object, ...) {
   cat("Model\n", py_capture_output(object$summary(), type = "stdout"), sep="")
-}
-
-# helper function which attempts to clone a model (we can only clone models that
-# can save/read their config, which excludes models which have no layers --
-# this likely just a bug that will be resolved later)
-clone_model_if_possible <- function(model, method = "json") {
-  
-  # NOTE: we currently aren't cloning but we have left the code here 
-  # in case we want to revisit
-  return(model)
-  
-  # if we have layers then clone using either json or h5py
-  if (length(model$layers) > 0) {
-    if (method == "json") {
-      model <- keras$models$model_from_json(model$to_json())
-    }
-    else if (method == "h5py") {
-      if (have_h5py()) {
-        tmp <- tempfile(fileext = ".hdf5")
-        save_model(model, tmp)
-        model <- load_model(tmp)
-      }
-    }
-  }
-  # otherwise just create a new empty sequential model with the same name
-  else if (is_sequential_model(model)) {
-    model <- model_sequential(name = model$name)
-  }
-  
-  # return model
-  model
 }
 
 
