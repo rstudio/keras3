@@ -74,7 +74,9 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
     loss_weights = loss_weights,
     sample_weight_mode = sample_weight_mode
   )
-  model
+  
+  # return it invisibly
+  invisible(model)
 }
 
 
