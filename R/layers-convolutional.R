@@ -52,7 +52,7 @@ layer_conv_1d <- function(x, filters, kernel_size, strides = 1L, padding = "vali
                           dilation_rate = 1L, activation = NULL, use_bias = TRUE, 
                           kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                          kernel_constraint = NULL, bias_constraint = NULL) {
+                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
   call_layer(keras$layers$Conv1D, x, list(
     filters = as.integer(filters),
@@ -68,7 +68,8 @@ layer_conv_1d <- function(x, filters, kernel_size, strides = 1L, padding = "vali
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint
+    bias_constraint = bias_constraint,
+    input_shape = normalize_shape(input_shape)
   ))
   
 }
@@ -125,7 +126,7 @@ layer_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding 
                           dilation_rate = c(1L, 1L), activation = NULL, use_bias = TRUE, 
                           kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                          kernel_constraint = NULL, bias_constraint = NULL) {
+                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
   call_layer(keras$layers$Conv2D, x, list(
     filters = as.integer(filters),
@@ -142,7 +143,8 @@ layer_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding 
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint
+    bias_constraint = bias_constraint,
+    input_shape = normalize_shape(input_shape)
   ))
   
 }
@@ -203,7 +205,7 @@ layer_conv_3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padd
                           data_format = NULL, dilation_rate = c(1L, 1L, 1L), activation = NULL, use_bias = TRUE, 
                           kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                          kernel_constraint = NULL, bias_constraint = NULL) {
+                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
   call_layer(keras$layers$Conv3D, x, list(
     filters = as.integer(filters),
@@ -220,7 +222,8 @@ layer_conv_3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padd
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint
+    bias_constraint = bias_constraint,
+    input_shape = normalize_shape(input_shape)
   ))
   
 }
@@ -276,7 +279,7 @@ layer_conv_2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L)
                                     data_format = "channels_last", activation = NULL, use_bias = TRUE, 
                                     kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                                     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                                    kernel_constraint = NULL, bias_constraint = NULL) {
+                                    kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
   
   call_layer(keras$layers$Conv2DTranspose, x, list(
     filters = as.integer(filters),
@@ -292,7 +295,8 @@ layer_conv_2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L)
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint
+    bias_constraint = bias_constraint,
+    input_shape = normalize_shape(input_shape)
   ))
   
 }
