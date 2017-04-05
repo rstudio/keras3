@@ -110,9 +110,9 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model
 <a href="#compilation" class="anchor"></a>Compilation</h2>
 <p>Before training a model, you need to configure the learning process, which is done via the <code><a href="../reference/compile.html">compile()</a></code> function. It receives three arguments:</p>
 <ul>
-<li><p>An optimizer. This could be the string identifier of an existing optimizer (such as <code>rmsprop</code> or <code>adagrad</code>) or an optimizer function (e.g. <code><a href="../reference/optimizer_sgd.html">optimizer_sgd()</a></code>).</p></li>
-<li><p>A loss function. This is the objective that the model will try to minimize. It can be the string identifier of an existing loss function (such as <code>categorical_crossentropy</code> or <code>mse</code>) or a loss function.</p></li>
-<li><p>A list of metrics. For any classification problem you will want to set this to <code>metrics = c('accuracy')</code>. A metric could be the string identifier of an existing metric or a metric function (e.g. <code><a href="../reference/metric_binary_accuracy.html">metric_binary_crossentropy()</a></code>).</p></li>
+<li><p>An optimizer. This could be the string identifier of an existing optimizer (e.g. as “rmsprop” or “adagrad”) or a call to an optimizer function (e.g. <code><a href="../reference/optimizer_sgd.html">optimizer_sgd()</a></code>).</p></li>
+<li><p>A loss function. This is the objective that the model will try to minimize. It can be the string identifier of an existing loss function (e.g. “categorical_crossentropy” or “mse”) or a call to a loss function (e.g. <code><a href="../reference/loss_mean_squared_error.html">loss_mean_squared_error()</a></code>).</p></li>
+<li><p>A list of metrics. For any classification problem you will want to set this to <code>metrics = c('accuracy')</code>. A metric could be the string identifier of an existing metric or a call to metric function (e.g. <code><a href="../reference/metric_binary_accuracy.html">metric_binary_crossentropy()</a></code>).</p></li>
 </ul>
 <p>You can chain your model compilation into the definition of the model or call the <code><a href="../reference/compile.html">compile()</a></code> method separately (both techniques are illustrated below):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># For a multi-class classification problem</span>
@@ -127,17 +127,17 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model
     <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
   )
 
-<span class="co"># For a binary classification problem</span>
-<span class="kw"><a href="../reference/compile.html">compile</a></span>(model, 
-  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
-  <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
-  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
-)
-
 <span class="co"># For a mean squared error regression problem</span>
 <span class="kw"><a href="../reference/compile.html">compile</a></span>(model,
   <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="dt">lr =</span> <span class="fl">0.002</span>),
   <span class="dt">loss =</span> <span class="st">'mse'</span>
+)
+
+<span class="co"># For a binary classification problem</span>
+<span class="kw"><a href="../reference/compile.html">compile</a></span>(model, 
+  <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(),
+  <span class="dt">loss =</span> <span class="kw"><a href="../reference/loss_mean_squared_error.html">loss_binary_crossentropy</a></span>(),
+  <span class="dt">metrics =</span> <span class="kw"><a href="../reference/metric_binary_accuracy.html">metric_binary_accuracy</a></span>()
 )</code></pre></div>
 </div>
 </div>

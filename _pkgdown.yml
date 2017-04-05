@@ -169,6 +169,10 @@ reference:
       - constraint_unitnorm
       - constraint_minmaxnorm
       
+  - title: "Utils"
+    contents:
+      - to_categorical
+      
   - title: "Losses"
     contents:
       - loss_mean_squared_error

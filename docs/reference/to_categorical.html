@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Model loss functions — loss_mean_squared_error • keras</title>
+<title>Converts a class vector (integers) to binary class matrix. — to_categorical • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -98,78 +98,40 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Model loss functions</h1>
+    <h1>Converts a class vector (integers) to binary class matrix.</h1>
     </div>
 
     
-    <p>Model loss functions</p>
+    <p>E.g. for use with <code><a href='loss_mean_squared_error.html'>loss_categorical_crossentropy()</a></code>.</p>
     
 
-    <pre><span class='fu'>loss_mean_squared_error</span>()
-
-<span class='fu'>loss_mean_absolute_error</span>()
-
-<span class='fu'>loss_mean_absolute_percentage_error</span>()
-
-<span class='fu'>loss_mean_squared_logarithmic_error</span>()
-
-<span class='fu'>loss_squared_hinge</span>()
-
-<span class='fu'>loss_hinge</span>()
-
-<span class='fu'>loss_categorical_crossentropy</span>()
-
-<span class='fu'>loss_sparse_categorical_crossentropy</span>()
-
-<span class='fu'>loss_binary_crossentropy</span>()
-
-<span class='fu'>loss_kullback_leibler_divergence</span>()
-
-<span class='fu'>loss_poisson</span>()
-
-<span class='fu'>loss_cosine_proximity</span>()</pre>
-        
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Loss functions are to be supplied in the <code>loss</code> parameter of the
-<code><a href='compile.html'>compile()</a></code> function.</p>
-<p>Loss functions can be specified either using the name of a built in loss
-function (e.g. 'loss = binary_crossentropy'), a reference to a built in loss
-function (e.g. 'loss = loss_binary_crossentropy()') or by passing an
-artitrary function that returns a scalar for each data-point and takes the
-following two arguments:</p><ul>
-<li><p><code>y_true</code> True labels (TensorFlow tensor)</p></li>
-<li><p><code>y_pred</code> Predictions (TensorFlow tensor of the same shape as <code>y_true</code>)</p></li>
-</ul>
-    <p>The actual optimized objective is the mean of the output array across all
-datapoints.</p>
+    <pre><span class='fu'>to_categorical</span>(<span class='no'>y</span>, <span class='kw'>num_classes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="categorical-crossentropy"><a class="anchor" href="#categorical-crossentropy"></a>Categorical Crossentropy</h2>
-
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>y</th>
+      <td><p>Class vector to be converted into a matrix (integers from 0 to num_classes).</p></td>
+    </tr>
+    <tr>
+      <th>num_classes</th>
+      <td><p>Total number of classes.</p></td>
+    </tr>
+    </table>
     
-    <p>When using the categorical_crossentropy loss, your targets should be in
-categorical format (e.g. if you have 10 classes, the target for each sample
-should be a 10-dimensional vector that is all-zeros expect for a 1 at the
-index corresponding to the class of the sample). In order to convert
-integer targets into categorical targets, you can use the Keras utility
-function <code><a href='to_categorical.html'>to_categorical()</a></code>:
-    <code>categorical_labels &lt;- to_categorical(int_labels, num_classes = NULL)</code></p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code><a href='compile.html'>compile()</a></code></p>
+    <p>A binary matrix representation of the input.</p>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#categorical-crossentropy">Categorical Crossentropy</a></li>
-
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#value">Value</a></li>
           </ul>
 
   </div>
