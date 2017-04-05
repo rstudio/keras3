@@ -216,7 +216,8 @@ layer_lstm <- function(x, units, activation = "tanh", recurrent_activation = "ha
                        unit_forget_bias = TRUE, kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, 
                        activity_regularizer = NULL, kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
                        dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL) {
-  tf$contrib$keras$layers$LSTM(
+  
+  call_layer(tf$contrib$keras$layers$LSTM, x, list(
     units = as.integer(units),
     activation = activation,
     recurrent_activation = recurrent_activation,
@@ -240,7 +241,8 @@ layer_lstm <- function(x, units, activation = "tanh", recurrent_activation = "ha
     dropout = dropout,
     recurrent_dropout = recurrent_dropout,
     input_shape = normalize_shape(input_shape)
-  )
+  ))
+  
 }
 
 
