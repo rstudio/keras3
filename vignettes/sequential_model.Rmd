@@ -12,7 +12,7 @@ library(keras)
 ```
 
 
-https://raw.githubusercontent.com/fchollet/keras/master/docs/templates/getting-started/sequential-model-guide.md
+## Defining a Model
 
 The sequential model is a linear stack of layers.
 
@@ -28,13 +28,54 @@ model <- model_sequential() %>%
   layer_activation('softmax')
 ```
 
-## Specifying the input shape
+### Input Shapes
 
-The model needs to know what input shape it should expect. For this reason, the first layer in a sequential model (and only the first, because following layers can do automatic shape inference) needs to receive information about its input shape. There are several possible ways to do this:
+The model needs to know what input shape it should expect. For this reason, the first layer in a sequential model (and only the first, because following layers can do automatic shape inference) needs to receive information about its input shape. 
 
-- Pass an `input_shape` argument to the first layer. This is a list of integers or `NULL` entries, where `NULL` indicates that any positive integer may be expected). In `input_shape`, the batch dimension is not included.
-- Some 2D layers, such as `layer_dense()`, support the specification of their input shape via the argument `input_shape`.
-- If you ever need to specify a fixed batch size for your inputs (this is useful for stateful recurrent networks), you can pass a `batch_size` argument to a layer. If you pass both `batch_size=32` and `input_shape=c(6, 8)` to a layer, it will then expect every batch of inputs to have the batch shape `(32, 6, 8)`.
+As illustrated in the example above, this is done by passing an `input_shape` argument to the first layer. This is a list of integers or `NULL` entries, where `NULL` indicates that any positive integer may be expected. In `input_shape`, the batch dimension is not included.
+
+If you ever need to specify a fixed batch size for your inputs (this is useful for stateful recurrent networks), you can pass a `batch_size` argument to a layer. If you pass both `batch_size=32` and `input_shape=c(6, 8)` to a layer, it will then expect every batch of inputs to have the batch shape `(32, 6, 8)`.
+
+
+## Compilation
+
+Before training a model, you need to configure the learning process, which is done via the `compile()` function. It receives three arguments:
+
+- An optimizer. This could be the string identifier of an existing optimizer (such as `rmsprop` or `adagrad`) or an optimizer function (e.g. `optimizer_sgd()`).
+
+- A loss function. This is the objective that the model will try to minimize. It can be the string identifier of an existing loss function (such as `categorical_crossentropy` or `mse`) or a loss function.
+
+- A list of metrics. For any classification problem you will want to set this to `metrics = c('accuracy')`. A metric could be the string identifier of an existing metric or a metric function (e.g. `metric_binary_crossentropy()`).
+
+You can chain your model compilation into the definition of the model or call the `compile()` method separately (both techniques are illustrated below):
+
+```{r}
+# For a multi-class classification problem
+model <- model_sequential() %>% 
+  layer_dense(units = 32, input_shape = c(784)) %>% 
+  layer_activation('relu') %>% 
+  layer_dense(units = 10) %>% 
+  layer_activation('softmax') %>% 
+  compile(
+    optimizer = 'rmsprop',
+    loss = 'categorical_crossentropy',
+    metrics = c('accuracy')
+  )
+
+# For a binary classification problem
+compile(model, 
+  optimizer = 'rmsprop',
+  loss = 'binary_crossentropy',
+  metrics = c('accuracy')
+)
+
+# For a mean squared error regression problem
+compile(model,
+  optimizer = optimizer_rmsprop(lr = 0.002),
+  loss = 'mse'
+)
+```
+
 
 
 

@@ -85,7 +85,9 @@
     
     
 <div class="contents">
-<p><a href="https://raw.githubusercontent.com/fchollet/keras/master/docs/templates/getting-started/sequential-model-guide.md" class="uri">https://raw.githubusercontent.com/fchollet/keras/master/docs/templates/getting-started/sequential-model-guide.md</a></p>
+<div id="defining-a-model" class="section level2">
+<h2 class="hasAnchor">
+<a href="#defining-a-model" class="anchor"></a>Defining a Model</h2>
 <p>The sequential model is a linear stack of layers.</p>
 <p>You create a sequential model by calling the <code><a href="../reference/model_sequential.html">model_sequential()</a></code> function then a series of <code>layer</code> functions:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
@@ -95,15 +97,48 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model
 <span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'softmax'</span>)</code></pre></div>
-<div id="specifying-the-input-shape" class="section level2">
+<div id="input-shapes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#input-shapes" class="anchor"></a>Input Shapes</h3>
+<p>The model needs to know what input shape it should expect. For this reason, the first layer in a sequential model (and only the first, because following layers can do automatic shape inference) needs to receive information about its input shape.</p>
+<p>As illustrated in the example above, this is done by passing an <code>input_shape</code> argument to the first layer. This is a list of integers or <code>NULL</code> entries, where <code>NULL</code> indicates that any positive integer may be expected. In <code>input_shape</code>, the batch dimension is not included.</p>
+<p>If you ever need to specify a fixed batch size for your inputs (this is useful for stateful recurrent networks), you can pass a <code>batch_size</code> argument to a layer. If you pass both <code>batch_size=32</code> and <code>input_shape=c(6, 8)</code> to a layer, it will then expect every batch of inputs to have the batch shape <code>(32, 6, 8)</code>.</p>
+</div>
+</div>
+<div id="compilation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#specifying-the-input-shape" class="anchor"></a>Specifying the input shape</h2>
-<p>The model needs to know what input shape it should expect. For this reason, the first layer in a sequential model (and only the first, because following layers can do automatic shape inference) needs to receive information about its input shape. There are several possible ways to do this:</p>
+<a href="#compilation" class="anchor"></a>Compilation</h2>
+<p>Before training a model, you need to configure the learning process, which is done via the <code><a href="../reference/compile.html">compile()</a></code> function It receives three arguments:</p>
 <ul>
-<li>Pass an <code>input_shape</code> argument to the first layer. This is a list of integers or <code>NULL</code> entries, where <code>NULL</code> indicates that any positive integer may be expected). In <code>input_shape</code>, the batch dimension is not included.</li>
-<li>Some 2D layers, such as <code><a href="../reference/layer_dense.html">layer_dense()</a></code>, support the specification of their input shape via the argument <code>input_shape</code>.</li>
-<li>If you ever need to specify a fixed batch size for your inputs (this is useful for stateful recurrent networks), you can pass a <code>batch_size</code> argument to a layer. If you pass both <code>batch_size=32</code> and <code>input_shape=c(6, 8)</code> to a layer, it will then expect every batch of inputs to have the batch shape <code>(32, 6, 8)</code>.</li>
+<li><p>An optimizer. This could be the string identifier of an existing optimizer (such as <code>rmsprop</code> or <code>adagrad</code>) or an optimizer function (e.g. <code><a href="../reference/optimizer_sgd.html">optimizer_sgd()</a></code>).</p></li>
+<li><p>A loss function. This is the objective that the model will try to minimize. It can be the string identifier of an existing loss function (such as <code>categorical_crossentropy</code> or <code>mse</code>) or a loss function.</p></li>
+<li><p>A list of metrics. For any classification problem you will want to set this to <code>metrics=['accuracy']</code>. A metric could be the string identifier of an existing metric or a custom metric function.</p></li>
 </ul>
+<p>You can chain your model compilation into the definition of the model or call the <code><a href="../reference/compile.html">compile()</a></code> method separately (both techniques are illustrated below):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># For a multi-class classification problem</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'softmax'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+    <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+    <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
+    <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+  )
+
+<span class="co"># For a binary classification problem</span>
+<span class="kw"><a href="../reference/compile.html">compile</a></span>(model, 
+  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+  <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
+  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+)
+
+<span class="co"># For a mean squared error regression problem</span>
+<span class="kw"><a href="../reference/compile.html">compile</a></span>(model,
+  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+  <span class="dt">loss =</span> <span class="st">'mse'</span>
+)</code></pre></div>
 </div>
 </div>
   </div>
@@ -112,7 +147,8 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model
         <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#specifying-the-input-shape">Specifying the input shape</a></li>
+<li><a href="#defining-a-model">Defining a Model</a></li>
+      <li><a href="#compilation">Compilation</a></li>
       </ul>
 </div>
       </div>
