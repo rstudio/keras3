@@ -143,6 +143,24 @@ reference:
       - dataset_reuters_word_index
       - dataset_mnist
       - dataset_boston_housing
+      
+  - title: "Initializers"
+    contents:
+      - initializer_zeros
+      - initializer_ones
+      - initializer_constant
+      - initializer_random_normal
+      - initializer_random_uniform
+      - initializer_truncated_normal
+      - initializer_variance_scaling
+      - initializer_orthogonal
+      - initializer_identity
+      - initializer_glorot_normal
+      - initializer_glorot_uniform
+      - initializer_he_normal
+      - initializer_he_uniform
+      - initializer_lecun_uniform
+
    
   - title: "Constraints"
     contents:
