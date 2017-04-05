@@ -298,16 +298,17 @@ normalize_shape <- function(shape) {
   
   # reflect NULL back
   if (is.null(shape))
-    shape
+    return(shape)
   
   # if it's a list or a numeric vector then convert to integer
-  else if (is.list(shape) || is.numeric(shape))
+  if (is.list(shape) || is.numeric(shape)) {
     shape <- lapply(shape, function(value) {
       if (!is.null(value))
         as.integer(value)
       else
         NULL
     })
+  }
   
   # coerce to tuple so it's iterable    
   tuple(shape)
