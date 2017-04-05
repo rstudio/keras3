@@ -7,4 +7,6 @@
 ^docs$
 ^vignettes/examples/$
 ^_pkgdown.yml$
+^index.Rmd$
+^index.html$
  
