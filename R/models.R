@@ -9,7 +9,7 @@
 #' @family model functions
 #'
 #' @export
-model <- function(inputs, outputs) {
+model <- function(inputs, outputs = NULL) {
   keras$models$Model(inputs = inputs, outputs = outputs)
 }
 
