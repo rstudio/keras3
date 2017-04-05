@@ -19,10 +19,6 @@
 #' @export
 time_distributed <- function(x, layer, input_shape = NULL) {
 
-  # if layer is missing 
-  if (is_sequential_model(x))
-    
-  
   call_layer(tf$contrib$keras$python$keras$layers$TimeDistributed, x, list(
     layer = layer,
     input_shape = normalize_shape(input_shape)
