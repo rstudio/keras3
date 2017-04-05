@@ -2,16 +2,24 @@
 % Please edit documentation in R/datasets.R
 \name{dataset_mnist}
 \alias{dataset_mnist}
-\title{Loads the MNIST dataset.}
+\title{MNIST database of handwritten digits}
 \usage{
 dataset_mnist(path = "mnist.npz")
 }
 \arguments{
-\item{path}{path where to cache the dataset locally (relative to ~/.keras/datasets).}
+\item{path}{Path where to cache the dataset locally (relative to ~/.keras/datasets).}
 }
 \value{
-Lists of training and test data \code{train$x, train$y, test$x, test$y}.
+Lists of training and test data: \code{train$x, train$y, test$x, test$y}, where
+\code{x} is an array of grayscale image data with shape (num_samples, 28, 28) and \code{y}
+is an array of digit labels (integers in range 0-9) with shape (num_samples).
 }
 \description{
-Loads the MNIST dataset.
+Dataset of 60,000 28x28 grayscale images of the 10 digits, along with a test set of 10,000 images.
+}
+\seealso{
+Other datasets: \code{\link{dataset_boston_housing}},
+  \code{\link{dataset_cifar100}},
+  \code{\link{dataset_cifar10}},
+  \code{\link{dataset_imdb}}, \code{\link{dataset_reuters}}
 }

@@ -4,7 +4,7 @@
 \alias{model}
 \title{Keras Model}
 \usage{
-model(inputs, outputs)
+model(inputs, outputs = NULL)
 }
 \arguments{
 \item{inputs}{Input layer}

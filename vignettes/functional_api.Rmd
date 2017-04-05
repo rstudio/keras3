@@ -53,7 +53,6 @@ With the functional API, it is easy to re-use trained models: you can treat any 
 This can allow you to for instance quickly create models that can process sequences of inputs. You could turn an image classification model into a video classification model, in just one line:
 
 ```{r}
-
 # Input tensor for sequences of 20 timesteps,
 # each containing a 784-dimensional vector
 input_sequences <- layer_input(shape = c(20, 784))
