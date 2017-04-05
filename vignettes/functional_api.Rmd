@@ -7,7 +7,68 @@ vignette: |
   %\VignetteIndexEntry{Guide to the Functional API} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
 ---
 
-## Introduction
+```{r setup, include = FALSE}
+library(keras)
+```
 
-Introduction to the Keras Functional API
+
+The Keras functional API is the way to go for defining complex models, such as multi-output models, directed acyclic graphs, or models with shared layers.
+
+This guide assumes that you are already familiar with the [Sequential](sequential_model.html) model.
+
+Let's start with something simple.
+
+## First example: a densely-connected network
+
+The [Sequential](sequential_model.html) model is probably a better choice to implement such a network, but it helps to start with something really simple.
+
+To use the functional API, build your input and output layers and then pass them to the `model()` function. This model can be trained just like Keras sequential models.
+
+
+```{r}
+library(keras)
+
+# input layer
+inputs <- layer_input(shape = c(784))
+ 
+# outputs compose input + dense layers
+predictions <- inputs %>%
+  layer_dense(units = 64, activation = 'relu') %>% 
+  layer_dense(units = 64, activation = 'relu') %>% 
+  layer_dense(units = 10, activation = 'softmax')
+
+# create and compile model
+model <- model(inputs = inputs, outputs = predictions) %>%
+  compile(
+    optimizer = 'rmsprop',
+    loss = 'categorical_crossentropy',
+    metrics = c('accuracy')
+  )
+```
+
+## Models can be treated like layers
+
+With the functional API, it is easy to re-use trained models: you can treat any model as if it were a layer. Note that you aren't just re-using the architecture of the model, you are also re-using its weights.
+
+This can allow you to for instance quickly create models that can process sequences of inputs. You could turn an image classification model into a video classification model, in just one line:
+
+```{r}
+
+# Input tensor for sequences of 20 timesteps,
+# each containing a 784-dimensional vector
+input_sequences <- layer_input(shape = c(20, 784))
+
+# This applies our previous model to every timestep in the input sequences.
+# the output of the previous model was a 10-way softmax,
+# so the output of the layer below will be a sequence of 20 vectors of size 10.
+processed_sequences <- input_sequences %>% 
+    time_distributed(model) 
+```
+
+
+
+
+
+
+
 
