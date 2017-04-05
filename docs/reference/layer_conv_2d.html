@@ -117,7 +117,7 @@ does not include the sample axis), e.g. <code>input_shape=c(128, 128, 3)</code> 
   <span class='kw'>kernel_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>, <span class='kw'>bias_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
   <span class='kw'>kernel_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bias_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>activity_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>kernel_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bias_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>bias_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -202,6 +202,12 @@ layer (its "activation")..</p></td>
     <tr>
       <th>bias_constraint</th>
       <td><p>Constraint function applied to the bias vector.</p></td>
+    </tr>
+    <tr>
+      <th>input_shape</th>
+      <td><p>Dimensionality of the input (integer) not including the
+samples axis. This argument is required when using this layer as the first
+layer in a model.</p></td>
     </tr>
     </table>
     

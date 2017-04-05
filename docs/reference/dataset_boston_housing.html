@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Keras Model — model • keras</title>
+<title>Boston housing price regression dataset — dataset_boston_housing • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -98,34 +98,49 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Keras Model</h1>
+    <h1>Boston housing price regression dataset</h1>
     </div>
 
     
-    <p>A model is a directed acyclic graph of layers.</p>
+    <p>Dataset taken from the StatLib library which is maintained at Carnegie Mellon
+University.</p>
     
 
-    <pre><span class='fu'>model</span>(<span class='no'>inputs</span>, <span class='kw'>outputs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre><span class='fu'>dataset_boston_housing</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"boston_housing.npz"</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>113L</span>,
+  <span class='kw'>test_split</span> <span class='kw'>=</span> <span class='fl'>0.2</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>inputs</th>
-      <td><p>Input layer</p></td>
+      <th>path</th>
+      <td><p>Path where to cache the dataset locally (relative to
+~/.keras/datasets).</p></td>
     </tr>
     <tr>
-      <th>outputs</th>
-      <td><p>Output layer</p></td>
+      <th>seed</th>
+      <td><p>Random seed for shuffling the data before computing the test
+split.</p></td>
+    </tr>
+    <tr>
+      <th>test_split</th>
+      <td><p>fraction of the data to reserve as test set.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Lists of training and test data: <code>train$x, train$y, test$x, test$y</code>.</p>
+<p>Samples contain 13 attributes of houses at different locations around
+the Boston suburbs in the late 1970s. Targets are the median values of the
+houses at a location (in k$).</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
-  <code><a href='evaluate.html'>evaluate</a></code>, <code><a href='fit.html'>fit</a></code>,
-  <code><a href='load_model.html'>load_model</a></code>, <code><a href='model_sequential.html'>model_sequential</a></code>,
-  <code><a href='predict.html'>predict</a></code>, <code><a href='save_model.html'>save_model</a></code></p>
+    <p>Other datasets: <code><a href='dataset_cifar100.html'>dataset_cifar100</a></code>,
+  <code><a href='dataset_cifar10.html'>dataset_cifar10</a></code>,
+  <code><a href='dataset_imdb.html'>dataset_imdb</a></code>, <code><a href='dataset_mnist.html'>dataset_mnist</a></code>,
+  <code><a href='dataset_reuters.html'>dataset_reuters</a></code></p>
     
 
   </div>
@@ -134,6 +149,8 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 

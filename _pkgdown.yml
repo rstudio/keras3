@@ -134,6 +134,16 @@ reference:
       - optimizer_adamax
       - optimizer_nadam
    
+  - title: "Datasets"
+    contents:
+      - dataset_cifar10
+      - dataset_cifar100
+      - dataset_imdb
+      - dataset_reuters
+      - dataset_reuters_word_index
+      - dataset_mnist
+      - dataset_boston_housing
+   
   - title: "Constraints"
     contents:
       - constraint_maxnorm

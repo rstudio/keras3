@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Keras Model — model • keras</title>
+<title>Reuters newswire topics classification — dataset_reuters • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -98,34 +98,81 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Keras Model</h1>
+    <h1>Reuters newswire topics classification</h1>
     </div>
 
     
-    <p>A model is a directed acyclic graph of layers.</p>
+    <p>Dataset of 11,228 newswires from Reuters, labeled over 46 topics. As with
+<code><a href='dataset_imdb.html'>dataset_imdb()</a></code> , each wire is encoded as a sequence of word indexes (same
+conventions).</p>
     
 
-    <pre><span class='fu'>model</span>(<span class='no'>inputs</span>, <span class='kw'>outputs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre><span class='fu'>dataset_reuters</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"reuters.npz"</span>, <span class='kw'>num_words</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>skip_top</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
+  <span class='kw'>maxlen</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_split</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>113L</span>, <span class='kw'>start_char</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
+  <span class='kw'>oov_char</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>index_from</span> <span class='kw'>=</span> <span class='fl'>3L</span>)
+
+<span class='fu'>dataset_reuters_word_index</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"reuters_word_index.pkl"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>inputs</th>
-      <td><p>Input layer</p></td>
+      <th>path</th>
+      <td><p>Where to cache the data (relative to <code>~/.keras/dataset</code>).</p></td>
     </tr>
     <tr>
-      <th>outputs</th>
-      <td><p>Output layer</p></td>
+      <th>num_words</th>
+      <td><p>Max number of words to include. Words are ranked by how
+often they occur (in the training set) and only the most frequent words are
+kept</p></td>
+    </tr>
+    <tr>
+      <th>skip_top</th>
+      <td><p>Skip the top N most frequently occuring words (which may not
+be informative).</p></td>
+    </tr>
+    <tr>
+      <th>maxlen</th>
+      <td><p>Truncate sequences after this length.</p></td>
+    </tr>
+    <tr>
+      <th>test_split</th>
+      <td><p>Fraction of the dataset to be used as test data.</p></td>
+    </tr>
+    <tr>
+      <th>seed</th>
+      <td><p>Random seed for sample shuffling.</p></td>
+    </tr>
+    <tr>
+      <th>start_char</th>
+      <td><p>The start of a sequence will be marked with this character.
+Set to 1 because 0 is usually the padding character.</p></td>
+    </tr>
+    <tr>
+      <th>oov_char</th>
+      <td><p>words that were cut out because of the <code>num_words</code> or
+<code>skip_top</code> limit will be replaced with this character.</p></td>
+    </tr>
+    <tr>
+      <th>index_from</th>
+      <td><p>index actual words with this index and higher.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Lists of training and test data: <code>train$x, train$y, test$x, test$y</code>
+with same format as <code><a href='dataset_imdb.html'>dataset_imdb()</a></code>. The <code>dataset_reuters_word_index()</code>
+function returns a list where the names are words and the values are
+integer. e.g. <code>word_index[["giraffe"]]</code> might return <code>1234</code>.</p>
+<p>[["giraffe"]: R:[<!-- %22giraffe%22 --></p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
-  <code><a href='evaluate.html'>evaluate</a></code>, <code><a href='fit.html'>fit</a></code>,
-  <code><a href='load_model.html'>load_model</a></code>, <code><a href='model_sequential.html'>model_sequential</a></code>,
-  <code><a href='predict.html'>predict</a></code>, <code><a href='save_model.html'>save_model</a></code></p>
+    <p>Other datasets: <code><a href='dataset_boston_housing.html'>dataset_boston_housing</a></code>,
+  <code><a href='dataset_cifar100.html'>dataset_cifar100</a></code>,
+  <code><a href='dataset_cifar10.html'>dataset_cifar10</a></code>,
+  <code><a href='dataset_imdb.html'>dataset_imdb</a></code>, <code><a href='dataset_mnist.html'>dataset_mnist</a></code></p>
     
 
   </div>
@@ -134,6 +181,8 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 

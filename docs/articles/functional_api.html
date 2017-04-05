@@ -79,16 +79,53 @@
       <h1>Guide to the Functional API</h1>
                         <h4 class="author">JJ Allaire</h4>
             
-            <h4 class="date">2017-04-04</h4>
+            <h4 class="date">2017-04-05</h4>
           </div>
 
     
     
 <div class="contents">
-<div id="introduction" class="section level2">
+<p>The Keras functional API is the way to go for defining complex models, such as multi-output models, directed acyclic graphs, or models with shared layers.</p>
+<p>This guide assumes that you are already familiar with the <a href="sequential_model.html">Sequential</a> model.</p>
+<p>Let’s start with something simple.</p>
+<div id="first-example-a-densely-connected-network" class="section level2">
 <h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>Introduction to the Keras Functional API</p>
+<a href="#first-example-a-densely-connected-network" class="anchor"></a>First example: a densely-connected network</h2>
+<p>The <a href="sequential_model.html">Sequential</a> model is probably a better choice to implement such a network, but it helps to start with something really simple.</p>
+<p>To use the functional API, build your input and output layers and then pass them to the <code><a href="../reference/model.html">model()</a></code> function. This model can be trained just like Keras sequential models.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+<span class="co"># input layer</span>
+inputs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">784</span>))
+ 
+<span class="co"># outputs compose input + dense layers</span>
+predictions &lt;-<span class="st"> </span>inputs %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>)
+
+<span class="co"># create and compile model</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model.html">model</a></span>(<span class="dt">inputs =</span> inputs, <span class="dt">outputs =</span> predictions) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+    <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+    <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
+    <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+  )</code></pre></div>
+</div>
+<div id="models-can-be-treated-like-layers" class="section level2">
+<h2 class="hasAnchor">
+<a href="#models-can-be-treated-like-layers" class="anchor"></a>Models can be treated like layers</h2>
+<p>With the functional API, it is easy to re-use trained models: you can treat any model as if it were a layer. Note that you aren’t just re-using the architecture of the model, you are also re-using its weights.</p>
+<p>This can allow you to for instance quickly create models that can process sequences of inputs. You could turn an image classification model into a video classification model, in just one line:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Input tensor for sequences of 20 timesteps,</span>
+<span class="co"># each containing a 784-dimensional vector</span>
+input_sequences &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">784</span>))
+
+<span class="co"># This applies our previous model to every timestep in the input sequences.</span>
+<span class="co"># the output of the previous model was a 10-way softmax,</span>
+<span class="co"># so the output of the layer below will be a sequence of 20 vectors of size 10.</span>
+processed_sequences &lt;-<span class="st"> </span>input_sequences %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="../reference/time_distributed.html">time_distributed</a></span>(model) </code></pre></div>
 </div>
 </div>
   </div>
@@ -97,7 +134,8 @@
         <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#introduction">Introduction</a></li>
+<li><a href="#first-example-a-densely-connected-network">First example: a densely-connected network</a></li>
+      <li><a href="#models-can-be-treated-like-layers">Models can be treated like layers</a></li>
       </ul>
 </div>
       </div>
