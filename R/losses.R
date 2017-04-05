@@ -1,19 +1,31 @@
 
 #' Model loss functions
-#'   
-#' @note 
-#'   Loss functions are to be supplied in the `loss` parameter of the 
-#'   [compile()] function. 
 #' 
-#'   Loss functions can be specified either using the name of a built 
-#'   in loss function (e.g. 'loss = binary_crossentropy'), a reference to
-#'   a built in loss function (e.g. 'loss = loss_binary_crossentropy()') or 
-#'   by passing an artitrary function that returns a scalar for each data-point
-#'   and takes the following two arguments:
-#'   - `y_true` True labels (TensorFlow tensor)
-#'   - `y_pred` Predictions (TensorFlow tensor of the same shape as `y_true`)
-#'
-#'   The actual optimized objective is the mean of the output array across all datapoints.
+#' @details Loss functions are to be supplied in the `loss` parameter of the 
+#' [compile()] function.
+#' 
+#' Loss functions can be specified either using the name of a built in loss
+#' function (e.g. 'loss = binary_crossentropy'), a reference to a built in loss
+#' function (e.g. 'loss = loss_binary_crossentropy()') or by passing an
+#' artitrary function that returns a scalar for each data-point and takes the
+#' following two arguments: 
+#' 
+#' - `y_true` True labels (TensorFlow tensor) 
+#' - `y_pred` Predictions (TensorFlow tensor of the same shape as `y_true`)
+#' 
+#' The actual optimized objective is the mean of the output array across all
+#' datapoints.
+#' 
+#' @section Categorical Crossentropy:
+#'   
+#'   When using the categorical_crossentropy loss, your targets should be in
+#'   categorical format (e.g. if you have 10 classes, the target for each sample
+#'   should be a 10-dimensional vector that is all-zeros expect for a 1 at the
+#'   index corresponding to the class of the sample). In order to convert
+#'   integer targets into categorical targets, you can use the Keras utility
+#'   function [to_categorical()]:
+#'   
+#'   `categorical_labels <- to_categorical(int_labels, num_classes = NULL)`
 #'   
 #' @seealso [compile()]   
 #'   

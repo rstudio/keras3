@@ -41,11 +41,11 @@ If you ever need to specify a fixed batch size for your inputs (this is useful f
 
 Before training a model, you need to configure the learning process, which is done via the `compile()` function. It receives three arguments:
 
-- An optimizer. This could be the string identifier of an existing optimizer (such as `rmsprop` or `adagrad`) or an optimizer function (e.g. `optimizer_sgd()`).
+- An optimizer. This could be the string identifier of an existing optimizer (e.g. as "rmsprop" or "adagrad") or a call to an optimizer function (e.g. `optimizer_sgd()`).
 
-- A loss function. This is the objective that the model will try to minimize. It can be the string identifier of an existing loss function (such as `categorical_crossentropy` or `mse`) or a loss function.
+- A loss function. This is the objective that the model will try to minimize. It can be the string identifier of an existing loss function (e.g. "categorical_crossentropy" or "mse") or a call to a loss function (e.g. `loss_mean_squared_error()`).
 
-- A list of metrics. For any classification problem you will want to set this to `metrics = c('accuracy')`. A metric could be the string identifier of an existing metric or a metric function (e.g. `metric_binary_crossentropy()`).
+- A list of metrics. For any classification problem you will want to set this to `metrics = c('accuracy')`. A metric could be the string identifier of an existing metric or a call to metric function (e.g. `metric_binary_crossentropy()`).
 
 You can chain your model compilation into the definition of the model or call the `compile()` method separately (both techniques are illustrated below):
 
@@ -62,17 +62,17 @@ model <- model_sequential() %>%
     metrics = c('accuracy')
   )
 
-# For a binary classification problem
-compile(model, 
-  optimizer = 'rmsprop',
-  loss = 'binary_crossentropy',
-  metrics = c('accuracy')
-)
-
 # For a mean squared error regression problem
 compile(model,
   optimizer = optimizer_rmsprop(lr = 0.002),
   loss = 'mse'
+)
+
+# For a binary classification problem
+compile(model, 
+  optimizer = optimizer_rmsprop(),
+  loss = loss_binary_crossentropy(),
+  metrics = metric_binary_accuracy()
 )
 ```
 

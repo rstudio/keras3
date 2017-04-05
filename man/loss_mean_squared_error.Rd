@@ -42,22 +42,36 @@ loss_cosine_proximity()
 \description{
 Model loss functions
 }
-\note{
+\details{
 Loss functions are to be supplied in the \code{loss} parameter of the
 \code{\link[=compile]{compile()}} function.
 
-Loss functions can be specified either using the name of a built
-in loss function (e.g. 'loss = binary_crossentropy'), a reference to
-a built in loss function (e.g. 'loss = loss_binary_crossentropy()') or
-by passing an artitrary function that returns a scalar for each data-point
-and takes the following two arguments:
+Loss functions can be specified either using the name of a built in loss
+function (e.g. 'loss = binary_crossentropy'), a reference to a built in loss
+function (e.g. 'loss = loss_binary_crossentropy()') or by passing an
+artitrary function that returns a scalar for each data-point and takes the
+following two arguments:
 \itemize{
 \item \code{y_true} True labels (TensorFlow tensor)
 \item \code{y_pred} Predictions (TensorFlow tensor of the same shape as \code{y_true})
 }
 
-The actual optimized objective is the mean of the output array across all datapoints.
+The actual optimized objective is the mean of the output array across all
+datapoints.
 }
+\section{Categorical Crossentropy}{
+
+
+When using the categorical_crossentropy loss, your targets should be in
+categorical format (e.g. if you have 10 classes, the target for each sample
+should be a 10-dimensional vector that is all-zeros expect for a 1 at the
+index corresponding to the class of the sample). In order to convert
+integer targets into categorical targets, you can use the Keras utility
+function \code{\link[=to_categorical]{to_categorical()}}:
+
+\code{categorical_labels <- to_categorical(int_labels, num_classes = NULL)}
+}
+
 \seealso{
 \code{\link[=compile]{compile()}}
 }
