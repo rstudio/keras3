@@ -29,7 +29,7 @@ layer_locally_connected_1d <- function(x, filters, kernel_size, strides = 1L, pa
                                        activation = NULL, use_bias = TRUE, kernel_initializer = "glorot_uniform", 
                                        bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL, 
                                        activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL) {
-  call_layer(tf$contrib$keras$layers$LocallyConnected1D, x, list(
+  call_layer(keras$layers$LocallyConnected1D, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -90,7 +90,7 @@ layer_locally_connected_2d <- function(x, filters, kernel_size, strides = c(1L, 
                                        activation = NULL, use_bias = TRUE, kernel_initializer = "glorot_uniform", 
                                        bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL, 
                                        activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL) {
-  call_layer(tf$contrib$keras$layers$LocallyConnected2D, x, list(
+  call_layer(keras$layers$LocallyConnected2D, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),

@@ -174,7 +174,7 @@ layer_permute <- function(x, dims, input_shape = NULL) {
 #' @export
 layer_repeat_vector <- function(x, n) {
   
-  call_layer(tf$contrib$keras$layers$RepeatVector, x, list(
+  call_layer(keras$layers$RepeatVector, x, list(
     n = as.integer(n)
   ))
   
@@ -201,7 +201,7 @@ layer_repeat_vector <- function(x, n) {
 #' @export
 layer_lambda <- function(x, f, mask = NULL, arguments = NULL, input_shape = NULL) {
   
-  call_layer(tf$contrib$keras$layers$Lambda, x, list(
+  call_layer(keras$layers$Lambda, x, list(
     `function` = f,
     mask = mask,
     arguments = arguments,
@@ -229,7 +229,7 @@ layer_lambda <- function(x, f, mask = NULL, arguments = NULL, input_shape = NULL
 #' @export
 layer_activity_regularization <- function(x, l1 = 0.0, l2 = 0.0, input_shape = NULL) {
   
-  call_layer(tf$contrib$keras$layers$ActivityRegularization, x, list(
+  call_layer(keras$layers$ActivityRegularization, x, list(
     l1 = l1,
     l2 = l2,
     input_shape = normalize_shape(input_shape)
@@ -254,7 +254,7 @@ layer_activity_regularization <- function(x, l1 = 0.0, l2 = 0.0, input_shape = N
 #' @export
 layer_masking <- function(x, mask_value = 0.0, input_shape = NULL) {
   
-  call_layer(tf$contrib$keras$layers$Masking, x, list(
+  call_layer(keras$layers$Masking, x, list(
     mask_value = mask_value,
     input_shape = normalize_shape(input_shape)
   ))

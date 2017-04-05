@@ -19,7 +19,7 @@
 #' @export
 layer_max_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "valid") {
   
-  call_layer(tf$contrib$keras$layers$MaxPooling1D, x, list(
+  call_layer(keras$layers$MaxPooling1D, x, list(
     pool_size = as.integer(pool_size),
     strides = as_nullable_integer(strides),
     padding = padding
@@ -60,7 +60,7 @@ layer_max_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "v
 #' @export
 layer_max_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, padding = "valid", data_format = NULL) {
   
-  call_layer(tf$contrib$keras$layers$MaxPooling2D, x, list(
+  call_layer(keras$layers$MaxPooling2D, x, list(
     pool_size = as.integer(pool_size),
     strides = as_nullable_integer(strides),
     padding = padding,
@@ -101,7 +101,7 @@ layer_max_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, paddi
 #' @export
 layer_max_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NULL, padding = "valid", data_format = NULL) {
   
-  call_layer(tf$contrib$keras$layers$MaxPooling3D, x, list(
+  call_layer(keras$layers$MaxPooling3D, x, list(
     pool_size = as.integer(pool_size),
     strides = as_nullable_integer(strides),
     padding = padding,
@@ -130,7 +130,7 @@ layer_max_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NULL, p
 #' @export
 layer_average_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "valid") {
   
-  call_layer(tf$contrib$keras$layers$AveragePooling1D, x, list(
+  call_layer(keras$layers$AveragePooling1D, x, list(
     pool_size = as.integer(pool_size),
     strides = as_nullable_integer(strides),
     padding = padding
@@ -170,7 +170,7 @@ layer_average_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding 
 #' @export
 layer_average_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, padding = "valid", data_format = NULL) {
   
-  call_layer(tf$contrib$keras$layers$AveragePooling2D, x, list(
+  call_layer(keras$layers$AveragePooling2D, x, list(
     pool_size = as.integer(pool_size),
     strides = as_nullable_integer(strides),
     padding = padding,
@@ -209,7 +209,7 @@ layer_average_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, p
 #'       
 #' @export
 layer_average_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NULL, padding = "valid", data_format = NULL) {
-  call_layer(tf$contrib$keras$layers$AveragePooling3D, x, list(
+  call_layer(keras$layers$AveragePooling3D, x, list(
     pool_size = as.integer(pool_size),
     strides = as_nullable_integer(strides),
     padding = padding,
@@ -233,7 +233,7 @@ layer_average_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NUL
 #' 
 #' @export
 layer_global_max_pooling_1d <- function(x) {
-  call_layer(tf$contrib$keras$layers$GlobalMaxPooling1D, x, list())
+  call_layer(keras$layers$GlobalMaxPooling1D, x, list())
 }
 
 #' Global average pooling operation for temporal data.
@@ -250,7 +250,7 @@ layer_global_max_pooling_1d <- function(x) {
 #' 
 #' @export
 layer_global_average_pooling_1d <- function(x) {
-  call_layer(tf$contrib$keras$layers$GlobalAveragePooling1D, x, list())
+  call_layer(keras$layers$GlobalAveragePooling1D, x, list())
 }
 
 
@@ -276,7 +276,7 @@ layer_global_average_pooling_1d <- function(x) {
 #'     
 #' @export
 layer_global_max_pooling_2d <- function(x, data_format = NULL) {
-  call_layer(tf$contrib$keras$layers$GlobalMaxPooling2D, x, list(
+  call_layer(keras$layers$GlobalMaxPooling2D, x, list(
     data_format = data_format
   ))
 }
@@ -303,7 +303,7 @@ layer_global_max_pooling_2d <- function(x, data_format = NULL) {
 #'     
 #' @export
 layer_global_average_pooling_2d <- function(x, data_format = NULL) {
-  call_layer(tf$contrib$keras$layers$GlobalAveragePooling2D, x, list(
+  call_layer(keras$layers$GlobalAveragePooling2D, x, list(
     data_format = data_format
   ))
 }
@@ -332,7 +332,7 @@ layer_global_average_pooling_2d <- function(x, data_format = NULL) {
 #'         
 #' @export
 layer_global_max_pooling_3d <- function(x, data_format = NULL) {
-  call_layer(tf$contrib$keras$layers$GlobalMaxPooling3D, x, list(
+  call_layer(keras$layers$GlobalMaxPooling3D, x, list(
     data_format = data_format
   ))
 }
@@ -360,7 +360,7 @@ layer_global_max_pooling_3d <- function(x, data_format = NULL) {
 #'       
 #' @export
 layer_global_average_pooling_3d <- function(x, data_format = NULL) {
-  call_layer(tf$contrib$keras$layers$GlobalAveragePooling3D, x, list(
+  call_layer(keras$layers$GlobalAveragePooling3D, x, list(
     data_format = data_format
   ))
 }

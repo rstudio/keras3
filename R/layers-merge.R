@@ -13,7 +13,7 @@
 #'   
 #' @export
 layer_add <- function(inputs) {
-  tf$contrib$keras$layers$add(inputs = inputs)
+  keras$layers$add(inputs = inputs)
 }
 
 #' Layer that multiplies (element-wise) a list of inputs.
@@ -29,7 +29,7 @@ layer_add <- function(inputs) {
 #' 
 #' @export
 layer_multiply <- function(inputs) {
-  tf$contrib$keras$layers$multiply(inputs = inputs)
+  keras$layers$multiply(inputs = inputs)
 }
 
 
@@ -46,7 +46,7 @@ layer_multiply <- function(inputs) {
 #'   
 #' @export
 layer_average <- function(inputs) {
-  tf$contrib$keras$layers$average(inputs = inputs)
+  keras$layers$average(inputs = inputs)
 }
 
 #' Layer that computes the maximum (element-wise) a list of inputs.
@@ -62,7 +62,7 @@ layer_average <- function(inputs) {
 #'     
 #' @export
 layer_maximum <- function(inputs) {
-  tf$contrib$keras$layers$maximum(inputs = inputs)
+  keras$layers$maximum(inputs = inputs)
 }
 
 
@@ -82,7 +82,7 @@ layer_maximum <- function(inputs) {
 #'   
 #' @export
 layer_concatenate <- function(inputs, axis = -1L) {
-  tf$contrib$keras$layers$concatenate(
+  keras$layers$concatenate(
     inputs = inputs,
     axis = as.integer(axis)
   )
@@ -100,7 +100,7 @@ layer_concatenate <- function(inputs, axis = -1L) {
 #' 
 #' @export
 layer_dot <- function(inputs, axes, normalize = FALSE) {
-  tf$contrib$keras$layers$dot(
+  keras$layers$dot(
     inputs = inputs,
     axes = as.integer(axes),
     normalize = normalize

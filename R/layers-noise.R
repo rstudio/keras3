@@ -21,7 +21,7 @@
 #'   
 #' @export
 layer_gaussian_noise <- function(x, stddev, input_shape = NULL) {
-  call_layer(tf$contrib$keras$layers$GaussianNoise, x, list(
+  call_layer(keras$layers$GaussianNoise, x, list(
     stddev = stddev,
     input_shape = normalize_shape(input_shape)
   ))
@@ -49,7 +49,7 @@ layer_gaussian_noise <- function(x, stddev, input_shape = NULL) {
 #'   
 #' @export
 layer_gaussian_dropout <- function(x, rate, input_shape = NULL) {
-  call_layer(tf$contrib$keras$layers$GaussianDropout, x, list(
+  call_layer(keras$layers$GaussianDropout, x, list(
     rate = rate,
     input_shape = normalize_shape(input_shape)
   ))

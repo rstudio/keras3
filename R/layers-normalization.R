@@ -42,7 +42,7 @@ layer_batch_normalization <- function(x, axis = -1L, momentum = 0.99, epsilon = 
                                       beta_regularizer = NULL, gamma_regularizer = NULL, 
                                       beta_constraint = NULL, gamma_constraint = NULL, 
                                       input_shape = NULL) {
-  call_layer(tf$contrib$keras$layers$BatchNormalization, x, list(
+  call_layer(keras$layers$BatchNormalization, x, list(
     axis = as.integer(axis),
     momentum = momentum,
     epsilon = epsilon,

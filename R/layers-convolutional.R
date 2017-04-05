@@ -655,7 +655,7 @@ layer_cropping_1d <- function(x, cropping = c(1L, 1L)) {
 #' @export
 layer_cropping_2d <- function(x, cropping = list(c(0L, 0L), c(0L, 0L)), data_format = NULL) {
   
-  call_layer(tf$contrib$keras$layers$Cropping2D, x, list(
+  call_layer(keras$layers$Cropping2D, x, list(
     cropping = normalize_cropping(cropping, 2L),
     data_format = data_format
   ))
@@ -701,7 +701,7 @@ layer_cropping_2d <- function(x, cropping = list(c(0L, 0L), c(0L, 0L)), data_for
 #'       
 #' @export
 layer_cropping_3d <- function(x, cropping = list(c(1L, 1L), c(1L, 1L), c(1L, 1L)), data_format = NULL) {
-  call_layer(tf$contrib$keras$layers$Cropping3D, x, list(
+  call_layer(keras$layers$Cropping3D, x, list(
     cropping = normalize_cropping(cropping, 3L),
     data_format = data_format
   ))
@@ -793,7 +793,7 @@ layer_conv_lstm_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), pad
                                activity_regularizer = NULL, kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
                                return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, dropout = 0.0, recurrent_dropout = 0.0) {
   
-  call_layer(tf$contrib$keras$layers$ConvLSTM2D, x, list(
+  call_layer(keras$layers$ConvLSTM2D, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),

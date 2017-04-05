@@ -38,7 +38,7 @@
 #' @export
 layer_embedding <- function(x, input_dim, output_dim, embeddings_initializer = "uniform", embeddings_regularizer = NULL, 
                             activity_regularizer = NULL, embeddings_constraint = NULL, mask_zero = FALSE, input_length = NULL) {
-  call_layer(tf$contrib$keras$layers$Embedding, x, list(
+  call_layer(keras$layers$Embedding, x, list(
     input_dim = as.integer(input_dim),
     output_dim = as.integer(output_dim),
     embeddings_initializer = embeddings_initializer,

@@ -197,7 +197,7 @@ dataset_mnist <- function(path = "mnist.npz") {
 #'   
 #' @export
 dataset_boston_housing <- function(path = "boston_housing.npz", seed = 113L, test_split = 0.2) {
-  dataset <- tf$contrib$keras$datasets$boston_housing$load_data(
+  dataset <- keras$datasets$boston_housing$load_data(
     path = path,
     seed = as.integer(seed),
     test_split = test_split

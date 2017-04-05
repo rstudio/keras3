@@ -20,7 +20,7 @@
 #' @export
 layer_dropout <- function(x, rate, noise_shape = NULL, seed = NULL) {
   
-  call_layer(tf$contrib$keras$layers$Dropout, x, list(
+  call_layer(keras$layers$Dropout, x, list(
     rate = rate,
     noise_shape = normalize_shape(noise_shape),
     seed = seed
@@ -52,7 +52,7 @@ layer_dropout <- function(x, rate, noise_shape = NULL, seed = NULL) {
 #' @export
 layer_spatial_dropout_1d <- function(x, rate) {
   
-  call_layer(tf$contrib$keras$layers$SpatialDropout1D, x, list(
+  call_layer(keras$layers$SpatialDropout1D, x, list(
     rate = rate
   ))
   
@@ -91,7 +91,7 @@ layer_spatial_dropout_1d <- function(x, rate) {
 #' @export
 layer_spatial_dropout_2d <- function(x, rate, data_format = NULL) {
   
-  call_layer(tf$contrib$keras$layers$SpatialDropout2D, x, list(
+  call_layer(keras$layers$SpatialDropout2D, x, list(
     rate = rate,
     data_format = data_format
   ))
@@ -132,7 +132,7 @@ layer_spatial_dropout_2d <- function(x, rate, data_format = NULL) {
 #' @export
 layer_spatial_dropout_3d <- function(x, rate, data_format = NULL) {
   
-  call_layer(tf$contrib$keras$layers$SpatialDropout3D, x, list(
+  call_layer(keras$layers$SpatialDropout3D, x, list(
     rate = rate,
     data_format = data_format
   ))

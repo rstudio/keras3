@@ -59,7 +59,7 @@ layer_simple_rnn <- function(x, units, activation = "tanh", use_bias = TRUE,
                              kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                              kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
                              dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL) {
-  call_layer(tf$contrib$keras$layers$SimpleRNN, x, list(
+  call_layer(keras$layers$SimpleRNN, x, list(
     units = as.integer(units),
     activation = activation,
     use_bias = use_bias,
@@ -136,7 +136,7 @@ layer_gru <- function(x, units, activation = "tanh", recurrent_activation = "har
                       kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                       kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
                       dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL) {
-  call_layer(tf$contrib$keras$layers$GRU, x, list(
+  call_layer(keras$layers$GRU, x, list(
     units = as.integer(units),
     activation = activation,
     recurrent_activation = recurrent_activation,
@@ -217,7 +217,7 @@ layer_lstm <- function(x, units, activation = "tanh", recurrent_activation = "ha
                        activity_regularizer = NULL, kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
                        dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL) {
   
-  call_layer(tf$contrib$keras$layers$LSTM, x, list(
+  call_layer(keras$layers$LSTM, x, list(
     units = as.integer(units),
     activation = activation,
     recurrent_activation = recurrent_activation,

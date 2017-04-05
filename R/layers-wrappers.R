@@ -19,7 +19,7 @@
 #' @export
 time_distributed <- function(x, layer, input_shape = NULL) {
 
-  call_layer(tf$contrib$keras$python$keras$layers$TimeDistributed, x, list(
+  call_layer(keras$python$keras$layers$TimeDistributed, x, list(
     layer = layer,
     input_shape = normalize_shape(input_shape)
   ))
@@ -42,7 +42,7 @@ time_distributed <- function(x, layer, input_shape = NULL) {
 #' @export
 bidirectional <- function(x, layer, merge_mode = "concat", weights = NULL, input_shape = NULL) {
   
-  call_layer(tf$contrib$keras$python$keras$layers$Bidirectional, x, list(
+  call_layer(keras$python$keras$layers$Bidirectional, x, list(
     layer = layer,
     merge_mode = merge_mode,
     weights = weights,
