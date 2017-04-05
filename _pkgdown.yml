@@ -169,6 +169,13 @@ reference:
       - constraint_unitnorm
       - constraint_minmaxnorm
       
+  - title: "Losses"
+    contents:
+      - loss_mean_squared_error
+  
+  - title: "Metrics"
+    contents:
+      - metric_binary_accuracy
 
   - title: "Regularizers"
     contents:
@@ -178,10 +185,6 @@ reference:
   - title: "Activations" 
     contents:
       - activation_relu
-      
-  - title: Metrics
-    contents:
-      - metric_binary_accuracy
    
 
 

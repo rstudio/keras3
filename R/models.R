@@ -56,6 +56,10 @@ model_sequential <- function(layers = NULL, name = NULL) {
 compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
                     sample_weight_mode = NULL) {
   
+  
+  # resolve loss
+  loss <- resolve_keras_function(loss)
+  
   # resolve metrics (if they are functions in our namespace then call them 
   # so we end up passing the underlying python function not the R function)
   if (!is.null(metrics)) {
