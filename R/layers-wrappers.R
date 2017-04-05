@@ -17,11 +17,19 @@
 #' @family layer wrappers
 #'   
 #' @export
-time_distributed <- function(x, layer, input_shape = NULL) {
+time_distributed <- function(x, layer, input_shape = NULL,
+                             batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                             name = NULL, trainable = NULL, weights = NULL) {
 
   call_layer(keras$python$keras$layers$TimeDistributed, x, list(
     layer = layer,
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -35,18 +43,24 @@ time_distributed <- function(x, layer, input_shape = NULL) {
 #' @param merge_mode Mode by which outputs of the forward and backward RNNs will
 #'   be combined. One of 'sum', 'mul', 'concat', 'ave', NULL. If NULL, the
 #'   outputs will not be combined, they will be returned as a list.
-#' @param weights weights
 #'   
 #' @family layer wrappers
 #'   
 #' @export
-bidirectional <- function(x, layer, merge_mode = "concat", weights = NULL, input_shape = NULL) {
+bidirectional <- function(x, layer, merge_mode = "concat", input_shape = NULL,
+                          batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                          name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$python$keras$layers$Bidirectional, x, list(
     layer = layer,
     merge_mode = merge_mode,
-    weights = weights,
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }

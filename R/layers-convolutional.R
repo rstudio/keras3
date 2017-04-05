@@ -52,7 +52,9 @@ layer_conv_1d <- function(x, filters, kernel_size, strides = 1L, padding = "vali
                           dilation_rate = 1L, activation = NULL, use_bias = TRUE, 
                           kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
+                          batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                          name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$Conv1D, x, list(
     filters = as.integer(filters),
@@ -69,7 +71,13 @@ layer_conv_1d <- function(x, filters, kernel_size, strides = 1L, padding = "vali
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
     bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -126,7 +134,9 @@ layer_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding 
                           dilation_rate = c(1L, 1L), activation = NULL, use_bias = TRUE, 
                           kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
+                          batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                          name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$Conv2D, x, list(
     filters = as.integer(filters),
@@ -144,7 +154,13 @@ layer_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding 
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
     bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -205,7 +221,9 @@ layer_conv_3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padd
                           data_format = NULL, dilation_rate = c(1L, 1L, 1L), activation = NULL, use_bias = TRUE, 
                           kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
+                          batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                          name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$Conv3D, x, list(
     filters = as.integer(filters),
@@ -223,7 +241,13 @@ layer_conv_3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padd
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
     bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -279,7 +303,9 @@ layer_conv_2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L)
                                     data_format = "channels_last", activation = NULL, use_bias = TRUE, 
                                     kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                                     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                                    kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL) {
+                                    kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
+                                    batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                                    name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$Conv2DTranspose, x, list(
     filters = as.integer(filters),
@@ -296,7 +322,13 @@ layer_conv_2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L)
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
     bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -360,7 +392,8 @@ layer_separable_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L)
                                     depth_multiplier = 1L, activation = NULL, use_bias = TRUE, 
                                     depthwise_initializer = "glorot_uniform", pointwise_initializer = "glorot_uniform", bias_initializer = "zeros", 
                                     depthwise_regularizer = NULL, pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                                    depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL) {
+                                    depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL,
+                                    batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$SeparableConv2D, x, list(
     filters = as.integer(filters),
@@ -380,7 +413,11 @@ layer_separable_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L)
     activity_regularizer = activity_regularizer,
     depthwise_constraint = depthwise_constraint,
     pointwise_constraint = pointwise_constraint,
-    bias_constraint = bias_constraint
+    bias_constraint = bias_constraint,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -402,10 +439,15 @@ layer_separable_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L)
 #' @family convolutional layers 
 #'         
 #' @export
-layer_upsampling_1d <- function(x, size = 2L) {
+layer_upsampling_1d <- function(x, size = 2L,
+                                batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$UpSampling1D, x, list(
-    size = as.integer(size)
+    size = as.integer(size),
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -440,11 +482,16 @@ layer_upsampling_1d <- function(x, size = 2L) {
 #' @family convolutional layers 
 #'   
 #' @export
-layer_upsampling_2d <- function(x, size = c(2L, 2L), data_format = NULL) {
+layer_upsampling_2d <- function(x, size = c(2L, 2L), data_format = NULL,
+                                batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$UpSampling2D, x, list(
     size = as.integer(size),
-    data_format = data_format
+    data_format = data_format,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -481,11 +528,16 @@ layer_upsampling_2d <- function(x, size = c(2L, 2L), data_format = NULL) {
 #' @family convolutional layers 
 #'         
 #' @export
-layer_upsampling_3d <- function(x, size= c(2L, 2L, 2L), data_format = NULL) {
+layer_upsampling_3d <- function(x, size= c(2L, 2L, 2L), data_format = NULL,
+                                batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$UpSampling3D, x, list(
     size = as.integer(size),
-    data_format = data_format
+    data_format = data_format,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -507,9 +559,14 @@ layer_upsampling_3d <- function(x, size= c(2L, 2L, 2L), data_format = NULL) {
 #' @family convolutional layers 
 #'
 #' @export
-layer_zero_padding_1d <- function(x, padding = 1L) {
+layer_zero_padding_1d <- function(x, padding = 1L,
+                                  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   call_layer(keras$layers$ZeroPadding1D, x, list(
-    padding = as.integer(padding)
+    padding = as.integer(padding),
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
 }
 
@@ -546,11 +603,16 @@ layer_zero_padding_1d <- function(x, padding = 1L) {
 #' @family convolutional layers 
 #'       
 #' @export
-layer_zero_padding_2d <- function(x, padding = c(1L, 1L), data_format = NULL) {
+layer_zero_padding_2d <- function(x, padding = c(1L, 1L), data_format = NULL,
+                                  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
 
   call_layer(keras$layers$ZeroPadding2D, x, list(
     padding = normalize_padding(padding, 2L),
-    data_format = data_format
+    data_format = data_format,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -588,11 +650,16 @@ layer_zero_padding_2d <- function(x, padding = c(1L, 1L), data_format = NULL) {
 #' @family convolutional layers 
 #'         
 #' @export
-layer_zero_padding_3d <- function(x,  padding = c(1L, 1L, 1L), data_format = NULL) {
+layer_zero_padding_3d <- function(x,  padding = c(1L, 1L, 1L), data_format = NULL,
+                                  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$ZeroPadding3D, x, list(
     padding = normalize_padding(padding, 3L),
-    data_format = data_format
+    data_format = data_format,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -615,9 +682,14 @@ layer_zero_padding_3d <- function(x,  padding = c(1L, 1L, 1L), data_format = NUL
 #' @family convolutional layers    
 #'  
 #' @export
-layer_cropping_1d <- function(x, cropping = c(1L, 1L)) {
+layer_cropping_1d <- function(x, cropping = c(1L, 1L),
+                              batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   call_layer(keras$layers$Cropping1D, x, list(
-    cropping = as.integer(cropping)
+    cropping = as.integer(cropping),
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
 }
 
@@ -653,11 +725,16 @@ layer_cropping_1d <- function(x, cropping = c(1L, 1L)) {
 #' @family convolutional layers    
 #'   
 #' @export
-layer_cropping_2d <- function(x, cropping = list(c(0L, 0L), c(0L, 0L)), data_format = NULL) {
+layer_cropping_2d <- function(x, cropping = list(c(0L, 0L), c(0L, 0L)), data_format = NULL,
+                              batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$Cropping2D, x, list(
     cropping = normalize_cropping(cropping, 2L),
-    data_format = data_format
+    data_format = data_format,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -700,10 +777,15 @@ layer_cropping_2d <- function(x, cropping = list(c(0L, 0L), c(0L, 0L)), data_for
 #' @family convolutional layers 
 #'       
 #' @export
-layer_cropping_3d <- function(x, cropping = list(c(1L, 1L), c(1L, 1L), c(1L, 1L)), data_format = NULL) {
+layer_cropping_3d <- function(x, cropping = list(c(1L, 1L), c(1L, 1L), c(1L, 1L)), data_format = NULL,
+                              batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   call_layer(keras$layers$Cropping3D, x, list(
     cropping = normalize_cropping(cropping, 3L),
-    data_format = data_format
+    data_format = data_format,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
 }
 
@@ -791,7 +873,8 @@ layer_conv_lstm_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), pad
                                kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
                                unit_forget_bias = TRUE, kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, 
                                activity_regularizer = NULL, kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
-                               return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, dropout = 0.0, recurrent_dropout = 0.0) {
+                               return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, dropout = 0.0, recurrent_dropout = 0.0,
+                               batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$ConvLSTM2D, x, list(
     filters = as.integer(filters),
@@ -817,7 +900,11 @@ layer_conv_lstm_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), pad
     go_backwards = go_backwards,
     stateful = stateful,
     dropout = dropout,
-    recurrent_dropout = recurrent_dropout
+    recurrent_dropout = recurrent_dropout,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }

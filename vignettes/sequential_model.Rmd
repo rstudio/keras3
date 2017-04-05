@@ -7,8 +7,34 @@ vignette: |
   %\VignetteIndexEntry{Guide to the Sequential Model} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
 ---
 
-## Introduction
+```{r setup, include=FALSE}
+library(keras)
+```
 
-Introduction to the Keras Sequential API
+
+https://raw.githubusercontent.com/fchollet/keras/master/docs/templates/getting-started/sequential-model-guide.md
+
+The sequential model is a linear stack of layers.
+
+You create a sequential model by calling the `model_sequential()` function then a series of `layer` functions:
+
+```{r}
+library(keras)
+
+model <- model_sequential() %>% 
+  layer_dense(units = 32, input_shape = c(784)) %>% 
+  layer_activation('relu') %>% 
+  layer_dense(units = 10) %>% 
+  layer_activation('softmax')
+```
+
+## Specifying the input shape
+
+The model needs to know what input shape it should expect. For this reason, the first layer in a sequential model (and only the first, because following layers can do automatic shape inference) needs to receive information about its input shape. There are several possible ways to do this:
+
+- Pass an `input_shape` argument to the first layer. This is a list of integers or `NULL` entries, where `NULL` indicates that any positive integer may be expected). In `input_shape`, the batch dimension is not included.
+- Some 2D layers, such as `layer_dense()`, support the specification of their input shape via the argument `input_shape`.
+- If you ever need to specify a fixed batch size for your inputs (this is useful for stateful recurrent networks), you can pass a `batch_size` argument to a layer. If you pass both `batch_size=32` and `input_shape=c(6, 8)` to a layer, it will then expect every batch of inputs to have the batch shape `(32, 6, 8)`.
+
 
 

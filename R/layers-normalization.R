@@ -41,7 +41,8 @@ layer_batch_normalization <- function(x, axis = -1L, momentum = 0.99, epsilon = 
                                       moving_mean_initializer = "zeros", moving_variance_initializer = "ones", 
                                       beta_regularizer = NULL, gamma_regularizer = NULL, 
                                       beta_constraint = NULL, gamma_constraint = NULL, 
-                                      input_shape = NULL) {
+                                      input_shape = NULL,  batch_input_shape = NULL, batch_size = NULL, 
+                                      dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
   call_layer(keras$layers$BatchNormalization, x, list(
     axis = as.integer(axis),
     momentum = momentum,
@@ -56,6 +57,12 @@ layer_batch_normalization <- function(x, axis = -1L, momentum = 0.99, epsilon = 
     gamma_regularizer = gamma_regularizer,
     beta_constraint = beta_constraint,
     gamma_constraint = gamma_constraint,
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
 }

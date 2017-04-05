@@ -18,12 +18,17 @@
 #' @family dropout layers   
 #'         
 #' @export
-layer_dropout <- function(x, rate, noise_shape = NULL, seed = NULL) {
+layer_dropout <- function(x, rate, noise_shape = NULL, seed = NULL, 
+                          batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$Dropout, x, list(
     rate = rate,
     noise_shape = normalize_shape(noise_shape),
-    seed = seed
+    seed = seed,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -50,10 +55,15 @@ layer_dropout <- function(x, rate, noise_shape = NULL, seed = NULL) {
 #' @family dropout layers
 #'       
 #' @export
-layer_spatial_dropout_1d <- function(x, rate) {
+layer_spatial_dropout_1d <- function(x, rate, 
+                                     batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$SpatialDropout1D, x, list(
-    rate = rate
+    rate = rate,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -89,11 +99,16 @@ layer_spatial_dropout_1d <- function(x, rate) {
 #' @family dropout layers 
 #'   
 #' @export
-layer_spatial_dropout_2d <- function(x, rate, data_format = NULL) {
+layer_spatial_dropout_2d <- function(x, rate, data_format = NULL, 
+                                     batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$SpatialDropout2D, x, list(
     rate = rate,
-    data_format = data_format
+    data_format = data_format,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -130,11 +145,16 @@ layer_spatial_dropout_2d <- function(x, rate, data_format = NULL) {
 #' @family dropout layers
 #'       
 #' @export
-layer_spatial_dropout_3d <- function(x, rate, data_format = NULL) {
+layer_spatial_dropout_3d <- function(x, rate, data_format = NULL, 
+                                     batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$SpatialDropout3D, x, list(
     rate = rate,
-    data_format = data_format
+    data_format = data_format,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }

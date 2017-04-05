@@ -50,6 +50,8 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
 #' is `TRUE`). Note: if the input to the layer has a rank greater than 2, then 
 #' it is flattened prior to the initial dot product with `kernel`.
 #' 
+#' @inheritParams layer_input
+#' 
 #' @param x Model or layer
 #' @param units Positive integer, dimensionality of the output space.
 #' @param activation Name of activation function to use. If you don't specify 
@@ -68,6 +70,13 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
 #' @param input_shape Dimensionality of the input (integer) not including the
 #'   samples axis. This argument is required when using this layer as the first
 #'   layer in a model.
+#' @param batch_input_shape Shapes, including the batch size. For instance, 
+#'   `batch_input_shape=c(10, 32)` indicates that the expected input will be
+#'   batches of 10 32-dimensional vectors. `batch_input_shape=list(NULL, 32)`
+#'   indicates batches of an arbitrary number of 32-dimensional vectors.
+#' @param batch_size Fixed batch size for layer
+#' @param trainable  Whether the layer weights will be updated during training.
+#' @param weights Initial weights for layer.
 #'   
 #' @section Input and Output Shapes:
 #'   
@@ -84,7 +93,9 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
 layer_dense <- function(x, units, activation = NULL, use_bias = TRUE, 
                         kernel_initializer = 'glorot_uniform', bias_initializer = 'zeros', 
                         kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-                        kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL
+                        kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
+                        batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                        name = NULL, trainable = NULL, weights = NULL
                         ) {
   
   call_layer(keras$layers$Dense, x, list(
@@ -98,7 +109,13 @@ layer_dense <- function(x, units, activation = NULL, use_bias = TRUE,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
     bias_constraint = bias_constraint, 
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -120,11 +137,19 @@ layer_dense <- function(x, units, activation = NULL, use_bias = TRUE,
 #' @family core layers   
 #'   
 #' @export
-layer_reshape <- function(x, target_shape, input_shape = NULL) {
+layer_reshape <- function(x, target_shape, input_shape = NULL,
+                          batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                          name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$Reshape, x, list(
     target_shape = normalize_shape(target_shape),
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -150,11 +175,19 @@ layer_reshape <- function(x, target_shape, input_shape = NULL) {
 #' @family core layers   
 #'   
 #' @export
-layer_permute <- function(x, dims, input_shape = NULL) {
+layer_permute <- function(x, dims, input_shape = NULL,
+                          batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                          name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$Permute, x, list(
     dims = list(as.integer(dims)),
-    input_shape = normalize_shape(input_shape)       
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -172,10 +205,15 @@ layer_permute <- function(x, dims, input_shape = NULL) {
 #' @family core layers   
 #'   
 #' @export
-layer_repeat_vector <- function(x, n) {
+layer_repeat_vector <- function(x, n, 
+                                batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$RepeatVector, x, list(
-    n = as.integer(n)
+    n = as.integer(n),
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -199,13 +237,21 @@ layer_repeat_vector <- function(x, n) {
 #' @family core layers   
 #'     
 #' @export
-layer_lambda <- function(x, f, mask = NULL, arguments = NULL, input_shape = NULL) {
+layer_lambda <- function(x, f, mask = NULL, arguments = NULL, input_shape = NULL,
+                         batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                         name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$Lambda, x, list(
     `function` = f,
     mask = mask,
     arguments = arguments,
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -227,12 +273,21 @@ layer_lambda <- function(x, f, mask = NULL, arguments = NULL, input_shape = NULL
 #' @family core layers   
 #'       
 #' @export
-layer_activity_regularization <- function(x, l1 = 0.0, l2 = 0.0, input_shape = NULL) {
+layer_activity_regularization <- function(x, l1 = 0.0, l2 = 0.0, input_shape = NULL,
+                                          batch_input_shape = NULL, batch_size = NULL, 
+                                          dtype = NULL, name = NULL, trainable = NULL, 
+                                          weights = NULL) {
   
   call_layer(keras$layers$ActivityRegularization, x, list(
     l1 = l1,
     l2 = l2,
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -252,11 +307,19 @@ layer_activity_regularization <- function(x, l1 = 0.0, l2 = 0.0, input_shape = N
 #' @family core layers   
 #'   
 #' @export
-layer_masking <- function(x, mask_value = 0.0, input_shape = NULL) {
+layer_masking <- function(x, mask_value = 0.0, input_shape = NULL,
+                          batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                          name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$Masking, x, list(
     mask_value = mask_value,
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }
@@ -272,7 +335,8 @@ layer_masking <- function(x, mask_value = 0.0, input_shape = NULL) {
 #' @family core layers
 #' 
 #' @export
-layer_flatten <- function(x) {
+layer_flatten <- function(x, 
+                          batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$Flatten, x, list())
   
@@ -318,8 +382,14 @@ normalize_shape <- function(shape) {
 # Helper function to call a layer
 call_layer <- function(layer_function, x, args) {
   
-  # remove input_shape if it's NULL (needs to be missing to signal it's not in use)
+  # remove kwargs that are null
   args$input_shape <- args$input_shape
+  args$batch_input_shape = args$batch_input_shape
+  args$batch_size <- args$batch_size
+  args$dtype <- args$dtype
+  args$name <- args$name
+  args$trainable <- args$trainable
+  args$weights <- args$weights
   
   # call function
   layer <- do.call(layer_function, args)

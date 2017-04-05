@@ -37,7 +37,8 @@
 #'   
 #' @export
 layer_embedding <- function(x, input_dim, output_dim, embeddings_initializer = "uniform", embeddings_regularizer = NULL, 
-                            activity_regularizer = NULL, embeddings_constraint = NULL, mask_zero = FALSE, input_length = NULL) {
+                            activity_regularizer = NULL, embeddings_constraint = NULL, mask_zero = FALSE, input_length = NULL, 
+                            batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   call_layer(keras$layers$Embedding, x, list(
     input_dim = as.integer(input_dim),
     output_dim = as.integer(output_dim),
@@ -46,6 +47,10 @@ layer_embedding <- function(x, input_dim, output_dim, embeddings_initializer = "
     activity_regularizer = activity_regularizer,
     embeddings_constraint = embeddings_constraint,
     mask_zero = mask_zero,
-    input_length = if (!is.null(input_length)) as.integer(input_length) else NULL
+    input_length = if (!is.null(input_length)) as.integer(input_length) else NULL,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
 }

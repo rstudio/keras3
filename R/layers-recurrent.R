@@ -58,7 +58,8 @@ layer_simple_rnn <- function(x, units, activation = "tanh", use_bias = TRUE,
                              kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
                              kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                              kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
-                             dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL) {
+                             dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
+                             dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
   call_layer(keras$layers$SimpleRNN, x, list(
     units = as.integer(units),
     activation = activation,
@@ -80,7 +81,13 @@ layer_simple_rnn <- function(x, units, activation = "tanh", use_bias = TRUE,
     bias_constraint = bias_constraint,
     dropout = dropout,
     recurrent_dropout = recurrent_dropout,
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
 }
 
@@ -135,7 +142,8 @@ layer_gru <- function(x, units, activation = "tanh", recurrent_activation = "har
                       kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
                       kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                       kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
-                      dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL) {
+                      dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
+                      dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
   call_layer(keras$layers$GRU, x, list(
     units = as.integer(units),
     activation = activation,
@@ -158,7 +166,13 @@ layer_gru <- function(x, units, activation = "tanh", recurrent_activation = "har
     bias_constraint = bias_constraint,
     dropout = dropout,
     recurrent_dropout = recurrent_dropout,
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
 }
 
@@ -215,7 +229,8 @@ layer_lstm <- function(x, units, activation = "tanh", recurrent_activation = "ha
                        kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
                        unit_forget_bias = TRUE, kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, 
                        activity_regularizer = NULL, kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
-                       dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL) {
+                       dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
+                       dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$LSTM, x, list(
     units = as.integer(units),
@@ -240,7 +255,13 @@ layer_lstm <- function(x, units, activation = "tanh", recurrent_activation = "ha
     bias_constraint = bias_constraint,
     dropout = dropout,
     recurrent_dropout = recurrent_dropout,
-    input_shape = normalize_shape(input_shape)
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
   
 }

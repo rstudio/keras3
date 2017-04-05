@@ -28,7 +28,8 @@
 layer_locally_connected_1d <- function(x, filters, kernel_size, strides = 1L, padding = "valid", data_format = NULL, 
                                        activation = NULL, use_bias = TRUE, kernel_initializer = "glorot_uniform", 
                                        bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL, 
-                                       activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL) {
+                                       activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL, 
+                                       batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   call_layer(keras$layers$LocallyConnected1D, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
@@ -43,7 +44,11 @@ layer_locally_connected_1d <- function(x, filters, kernel_size, strides = 1L, pa
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint
+    bias_constraint = bias_constraint,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
 }
 
@@ -89,7 +94,8 @@ layer_locally_connected_1d <- function(x, filters, kernel_size, strides = 1L, pa
 layer_locally_connected_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL, 
                                        activation = NULL, use_bias = TRUE, kernel_initializer = "glorot_uniform", 
                                        bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL, 
-                                       activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL) {
+                                       activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL, 
+                                       batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   call_layer(keras$layers$LocallyConnected2D, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
@@ -104,7 +110,11 @@ layer_locally_connected_2d <- function(x, filters, kernel_size, strides = c(1L, 
     bias_regularizer = bias_regularizer,
     activity_regularizer = activity_regularizer,
     kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint
+    bias_constraint = bias_constraint,
+    batch_size = as_nullable_integer(batch_size),
+    name = name,
+    trainable = trainable,
+    weights = weights
   ))
 }
 
