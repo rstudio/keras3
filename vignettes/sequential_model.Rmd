@@ -148,108 +148,116 @@ library(keras)
 
 # generate dummy data
 x_train <- matrix(runif(1000*20), nrow = 1000, ncol = 20)
-y_train <- to_categorical(matrix(round(runif(1000, min = 0, max = 9)), 
-                                 nrow = 1000, ncol = 1), 
-                          num_classes = 10)
+y_train <- runif(1000, min = 0, max = 9) %>% 
+             round() %>%
+             matrix(nrow = 1000, ncol = 1) %>% 
+             to_categorical(num_classes = 10)
 x_test  <- matrix(runif(100*20), nrow = 100, ncol = 20)
-y_test  <- to_categorical(matrix(round(runif(100, min = 0, max = 9)), 
-                                 nrow = 100, ncol = 1),
-                          num_classes = 10)
+y_test <- runif(100, min = 0, max = 9) %>% 
+             round() %>%
+             matrix(nrow = 100, ncol = 1) %>% 
+             to_categorical(num_classes = 10)
 
-# define the model
+# define and compile the model
 model <- model_sequential() %>% 
   layer_dense(units = 64, activation = 'relu', input_shape = c(20)) %>% 
   layer_dropout(rate = 0.5) %>% 
   layer_dense(units = 64, activation = 'relu') %>% 
   layer_dropout(rate = 0.5) %>% 
-  layer_dense(units = 10, activation = 'softmax')
-  
-# compile using an SGD optimizer
-sgd <- optimizer_sgd(lr = 0.01, decay = 1e-6, momentum = 0.9, nesterov = TRUE)
-compile(model,
-  loss = 'categorical_crossentropy',
-  optimizer = sgd,
-  metrics = c('accuracy')     
-)
+  layer_dense(units = 10, activation = 'softmax') %>% 
+  compile(
+    loss = 'categorical_crossentropy',
+    optimizer = optimizer_sgd(lr = 0.01, decay = 1e-6, momentum = 0.9, nesterov = TRUE),
+    metrics = c('accuracy')     
+  )
 
-# train and evaluate
+# train
 fit(model, x_train, y_train, epochs = 20, batch_size = 128)
+
+# evaluate
 score <- evaluate(model, x_test, y_test, batch_size = 128)
 ```
 
 
 
-### MLP for binary classification:
+### MLP for binary classification
 
-```python
-import numpy as np
-from keras.models import Sequential
-from keras.layers import Dense, Dropout
+```{r}
+library(keras)
 
-# Generate dummy data
-x_train = np.random.random((1000, 20))
-y_train = np.random.randint(2, size=(1000, 1))
-x_test = np.random.random((100, 20))
-y_test = np.random.randint(2, size=(100, 1))
+# generate dummy data
+x_train <- matrix(runif(1000*20), nrow = 1000, ncol = 20)
+y_train <- matrix(round(runif(1000, min = 0, max = 1)), nrow = 1000, ncol = 1)
+x_test <- matrix(runif(100*20), nrow = 100, ncol = 20)
+y_test <- matrix(round(runif(100, min = 0, max = 1)), nrow = 100, ncol = 1)
 
-model = Sequential()
-model.add(Dense(64, input_dim=20, activation='relu'))
-model.add(Dropout(0.5))
-model.add(Dense(64, activation='relu'))
-model.add(Dropout(0.5))
-model.add(Dense(1, activation='sigmoid'))
+# define and compile the model
+model <- model_sequential() %>% 
+  layer_dense(units = 64, activation = 'relu', input_shape = c(20)) %>% 
+  layer_dropout(rate = 0.5) %>% 
+  layer_dense(units = 64, activation = 'relu') %>% 
+  layer_dropout(rate = 0.5) %>% 
+  layer_dense(units = 1, activation = 'sigmoid') %>% 
+  compile(
+    loss = 'binary_crossentropy',
+    optimizer = 'rmsprop',
+    metrics = c('accuracy')
+  )
 
-model.compile(loss='binary_crossentropy',
-              optimizer='rmsprop',
-              metrics=['accuracy'])
+# train 
+fit(model, x_train, y_train, epochs = 20, batch_size = 128)
 
-model.fit(x_train, y_train,
-          epochs=20,
-          batch_size=128)
-score = model.evaluate(x_test, y_test, batch_size=128)
+# evaluate
+score = evaluate(model, x_test, y_test, batch_size=128)
 ```
 
 
-### VGG-like convnet:
+### VGG-like convnet
 
-```python
-import numpy as np
-import keras
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Conv2D, MaxPooling2D
-from keras.optimizers import SGD
+```{r}
+library(keras)
 
-# Generate dummy data
-x_train = np.random.random((100, 100, 100, 3))
-y_train = keras.utils.to_categorical(np.random.randint(10, size=(100, 1)), num_classes=10)
-x_test = np.random.random((20, 100, 100, 3))
-y_test = keras.utils.to_categorical(np.random.randint(10, size=(20, 1)), num_classes=10)
+# generate dummy data
+x_train <- array(runif(100 * 100 * 100 * 3), dim = c(100, 100, 100, 3))
+y_train <- runif(100, min = 0, max = 9) %>% 
+             round() %>%
+             matrix(nrow = 100, ncol = 1) %>% 
+             to_categorical(num_classes = 10)
+x_test <- array(runif(20 * 100 * 100 * 3), dim = c(20, 100, 100, 3))
+y_test <- runif(20, min = 0, max = 9) %>% 
+             round() %>%
+             matrix(nrow = 20, ncol = 1) %>% 
+             to_categorical(num_classes = 10)
 
-model = Sequential()
+# define and compile model
 # input: 100x100 images with 3 channels -> (100, 100, 3) tensors.
 # this applies 32 convolution filters of size 3x3 each.
-model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(100, 100, 3)))
-model.add(Conv2D(32, (3, 3), activation='relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.25))
+model <- model_sequential() %>% 
+  layer_conv_2d(filters = 32, kernel_size = c(3,3), activation = 'relu', 
+                input_shape = c(100,100,3)) %>% 
+  layer_conv_2d(filters = 32, kernel_size = c(3,3), activation = 'relu') %>% 
+  layer_max_pooling_2d(pool_size = c(2,2)) %>% 
+  layer_dropout(rate = 0.25) %>% 
+  layer_conv_2d(filters = 64, kernel_size = c(3,3), activation = 'relu') %>% 
+  layer_conv_2d(filters = 64, kernel_size = c(3,3), activation = 'relu') %>% 
+  layer_max_pooling_2d(pool_size = c(2,2)) %>% 
+  layer_dropout(rate = 0.25) %>% 
+  layer_flatten() %>% 
+  layer_dense(units = 256, activation = 'relu') %>% 
+  layer_dropout(rate = 0.25) %>% 
+  layer_dense(units = 10, activation = 'softmax') %>% 
+  compile(
+    loss = 'categorical_crossentropy', 
+    optimizer = optimizer_sgd(lr = 0.01, decay = 1e-6, momentum = 0.9, nesterov = TRUE)
+  )
+  
+# train
+fit(model, x_train, y_train, batch_size = 32, epochs = 10)
 
-model.add(Conv2D(64, (3, 3), activation='relu'))
-model.add(Conv2D(64, (3, 3), activation='relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.25))
-
-model.add(Flatten())
-model.add(Dense(256, activation='relu'))
-model.add(Dropout(0.5))
-model.add(Dense(10, activation='softmax'))
-
-sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer=sgd)
-
-model.fit(x_train, y_train, batch_size=32, epochs=10)
-score = model.evaluate(x_test, y_test, batch_size=32)
+# evaluate
+score < evaluate(model, x_test, y_test, batch_size = 32)
 ```
+
 
 
 ### Sequence classification with LSTM:
