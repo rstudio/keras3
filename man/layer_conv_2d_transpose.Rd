@@ -5,7 +5,7 @@
 \title{Transposed convolution layer (sometimes called Deconvolution).}
 \usage{
 layer_conv_2d_transpose(x, filters, kernel_size, strides = c(1L, 1L),
-  padding = "valid", data_format = "channels_last", activation = NULL,
+  padding = "valid", data_format = NULL, activation = NULL,
   use_bias = TRUE, kernel_initializer = "glorot_uniform",
   bias_initializer = "zeros", kernel_regularizer = NULL,
   bias_regularizer = NULL, activity_regularizer = NULL,
@@ -17,7 +17,7 @@ layer_conv_2d_transpose(x, filters, kernel_size, strides = c(1L, 1L),
 \item{x}{Model or layer}
 
 \item{filters}{Integer, the dimensionality of the output space (i.e. the
-number output of filters in the convolution).}
+number of output filters in the convolution).}
 
 \item{kernel_size}{An integer or list of 2 integers, specifying the width and
 height of the 2D convolution window. Can be a single integer to specify the
@@ -32,7 +32,7 @@ value != 1 is incompatible with specifying any \code{dilation_rate} value != 1.}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \code{(batch, width, height, channels)} while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, width, height)}. It defaults to the \code{image_data_format} value
+\code{channels_last} corresponds to inputs with shape \code{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
 found in your Keras config file at \code{~/.keras/keras.json}. If you never set
 it, then it will be "channels_last".}
 

@@ -35,6 +35,7 @@ layer_max_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "v
 
 #' Max pooling operation for spatial data.
 #' 
+#' @inheritParams layer_conv_2d
 #' @inheritParams layer_max_pooling_1d
 #'   
 #' @param pool_size integer or list of 2 integers, factors by which to downscale
@@ -44,13 +45,6 @@ layer_max_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "v
 #' @param strides Integer, list of 2 integers, or NULL. Strides values. If NULL,
 #'   it will default to `pool_size`.
 #' @param padding One of `"valid"` or `"same"` (case-insensitive).
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
-#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
-#'   channels, width, height)`. It defaults to the `image_data_format` value
-#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
-#'   it, then it will be "channels_last".
 #'   
 #' @section Input shape: 
 #' - If `data_format='channels_last'`: 4D tensor with shape: `(batch_size, rows, cols, channels)` 
@@ -160,6 +154,7 @@ layer_average_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding 
 
 #' Average pooling operation for spatial data.
 #' 
+#' @inheritParams layer_conv_2d
 #' @inheritParams layer_average_pooling_1d
 #'   
 #' @param pool_size integer or list of 2 integers, factors by which to downscale
@@ -169,13 +164,6 @@ layer_average_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding 
 #' @param strides Integer, list of 2 integers, or NULL. Strides values. If NULL,
 #'   it will default to `pool_size`.
 #' @param padding One of `"valid"` or `"same"` (case-insensitive).
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
-#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
-#'   channels, width, height)`. It defaults to the `image_data_format` value
-#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
-#'   it, then it will be "channels_last".
 #'   
 #' @section Input shape: 
 #' - If `data_format='channels_last'`: 4D tensor with shape: `(batch_size, rows, cols, channels)` 
@@ -298,15 +286,8 @@ layer_global_average_pooling_1d <- function(x,
 
 #' Global max pooling operation for spatial data.
 #' 
+#' @inheritParams layer_conv_2d
 #' @inheritParams layer_global_max_pooling_1d
-#' 
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
-#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
-#'   channels, width, height)`. It defaults to the `image_data_format` value
-#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
-#'   it, then it will be "channels_last".
 #'   
 #' @section Input shape: 
 #' - If `data_format='channels_last'`: 4D tensor with shape: `(batch_size, rows, cols, channels)` 
@@ -330,15 +311,8 @@ layer_global_max_pooling_2d <- function(x, data_format = NULL,
 
 #' Global average pooling operation for spatial data.
 #' 
+#' @inheritParams layer_conv_2d
 #' @inheritParams layer_global_average_pooling_1d
-#' 
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
-#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
-#'   channels, width, height)`. It defaults to the `image_data_format` value
-#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
-#'   it, then it will be "channels_last".
 #'   
 #' @section Input shape: 
 #' - If `data_format='channels_last'`: 4D tensor with shape: `(batch_size, rows, cols, channels)` 

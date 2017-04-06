@@ -31,7 +31,7 @@ isn't provided.}
 \item{weights}{Initial weights for layer.}
 }
 \description{
-Dropout consists in randomly setting a fraction \code{p} of input units to 0 at
+Dropout consists in randomly setting a fraction \code{rate} of input units to 0 at
 each update during training time, which helps prevent overfitting.
 }
 \seealso{

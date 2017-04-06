@@ -4,13 +4,13 @@
 #' @inheritParams layer_dense
 #'   
 #' @param units Positive integer, dimensionality of the output space.
-#' @param activation Activation function to use. If you don't specify anything, 
-#'   no activation is applied (ie. "linear" activation: `a(x) = x`).
+#' @param activation Activation function to use. If you pass `NULL`, no
+#'   activation is applied (ie. "linear" activation: `a(x) = x`).
 #' @param use_bias Boolean, whether the layer uses a bias vector.
 #' @param return_sequences Boolean. Whether to return the last output in the 
 #'   output sequence, or the full sequence.
 #' @param go_backwards Boolean (default FALSE). If TRUE, process the input 
-#'   sequence backwards.
+#'   sequence backwards and return the reversed sequence.
 #' @param stateful Boolean (default FALSE). If TRUE, the last state for each 
 #'   sample at index i in a batch will be used as initial state for the sample 
 #'   of index i in the following batch.
@@ -47,10 +47,10 @@
 #' @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
 #'   for the linear transformation of the recurrent state.
 #'   
-#' @section References: - [A Theoretically Grounded Application of Dropout in
-#'   Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
+#' @section References: 
+#' - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
 #'   
-#' @family recurrent layers   
+#' @family recurrent layers
 #'   
 #' @export
 layer_simple_rnn <- function(x, units, activation = "tanh", use_bias = TRUE, 
@@ -96,33 +96,8 @@ layer_simple_rnn <- function(x, units, activation = "tanh", use_bias = TRUE,
 #' 
 #' @inheritParams layer_simple_rnn
 #' 
-#' @param units Positive integer, dimensionality of the output space.
-#' @param activation Activation function to use. If you don't specify anything,
-#'   no activation is applied (ie. "linear" activation: `a(x) = x`).
 #' @param recurrent_activation Activation function to use for the recurrent
 #'   step.
-#' @param use_bias Boolean, whether the layer uses a bias vector.
-#' @param kernel_initializer Initializer for the `kernel` weights matrix, used
-#'   for the linear transformation of the inputs..
-#' @param recurrent_initializer Initializer for the `recurrent_kernel` weights
-#'   matrix, used for the linear transformation of the recurrent state..
-#' @param bias_initializer Initializer for the bias vector.
-#' @param kernel_regularizer Regularizer function applied to the `kernel`
-#'   weights matrix.
-#' @param recurrent_regularizer Regularizer function applied to the
-#'   `recurrent_kernel` weights matrix.
-#' @param bias_regularizer Regularizer function applied to the bias vector.
-#' @param activity_regularizer Regularizer function applied to the output of the
-#'   layer (its "activation")..
-#' @param kernel_constraint Constraint function applied to the `kernel` weights
-#'   matrix.
-#' @param recurrent_constraint Constraint function applied to the
-#'   `recurrent_kernel` weights matrix.
-#' @param bias_constraint Constraint function applied to the bias vector.
-#' @param dropout Float between 0 and 1. Fraction of the units to drop for the
-#'   linear transformation of the inputs.
-#' @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
-#'   for the linear transformation of the recurrent state.
 #'   
 #' @section References: 
 #' - [On the Properties of Neural Machine Translation:
@@ -182,39 +157,12 @@ layer_gru <- function(x, units, activation = "tanh", recurrent_activation = "har
 #' For a step-by-step description of the algorithm, see [this
 #' tutorial](http://deeplearning.net/tutorial/lstm.html).
 #' 
-#' @inheritParams layer_simple_rnn
+#' @inheritParams layer_gru
 #' 
-#' @param units Positive integer, dimensionality of the output space.
-#' @param activation Activation function to use. If you don't specify anything,
-#'   no activation is applied (ie. "linear" activation: `a(x) = x`).
-#' @param recurrent_activation Activation function to use for the recurrent
-#'   step.
-#' @param use_bias Boolean, whether the layer uses a bias vector.
-#' @param kernel_initializer Initializer for the `kernel` weights matrix, used
-#'   for the linear transformation of the inputs..
-#' @param recurrent_initializer Initializer for the `recurrent_kernel` weights
-#'   matrix, used for the linear transformation of the recurrent state..
-#' @param bias_initializer Initializer for the bias vector.
 #' @param unit_forget_bias Boolean. If TRUE, add 1 to the bias of the forget
 #'   gate at initialization. Setting it to true will also force
 #'   `bias_initializer="zeros"`. This is recommended in [Jozefowicz et
 #'   al.](http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
-#' @param kernel_regularizer Regularizer function applied to the `kernel`
-#'   weights matrix.
-#' @param recurrent_regularizer Regularizer function applied to the
-#'   `recurrent_kernel` weights matrix.
-#' @param bias_regularizer Regularizer function applied to the bias vector.
-#' @param activity_regularizer Regularizer function applied to the output of the
-#'   layer (its "activation")..
-#' @param kernel_constraint Constraint function applied to the `kernel` weights
-#'   matrix.
-#' @param recurrent_constraint Constraint function applied to the
-#'   `recurrent_kernel` weights matrix.
-#' @param bias_constraint Constraint function applied to the bias vector.
-#' @param dropout Float between 0 and 1. Fraction of the units to drop for the
-#'   linear transformation of the inputs.
-#' @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
-#'   for the linear transformation of the recurrent state.
 #'   
 #' @section References: 
 #' - [Long short-term memory](http://deeplearning.cs.cmu.edu/pdfs/Hochreiter97_lstm.pdf) (original 1997 paper) 

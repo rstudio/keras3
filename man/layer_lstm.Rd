@@ -23,8 +23,8 @@ layer_lstm(x, units, activation = "tanh",
 
 \item{units}{Positive integer, dimensionality of the output space.}
 
-\item{activation}{Activation function to use. If you don't specify anything,
-no activation is applied (ie. "linear" activation: \code{a(x) = x}).}
+\item{activation}{Activation function to use. If you pass \code{NULL}, no
+activation is applied (ie. "linear" activation: \code{a(x) = x}).}
 
 \item{recurrent_activation}{Activation function to use for the recurrent
 step.}
@@ -35,7 +35,7 @@ step.}
 output sequence, or the full sequence.}
 
 \item{go_backwards}{Boolean (default FALSE). If TRUE, process the input
-sequence backwards.}
+sequence backwards and return the reversed sequence.}
 
 \item{stateful}{Boolean (default FALSE). If TRUE, the last state for each
 sample at index i in a batch will be used as initial state for the sample

@@ -19,20 +19,20 @@ layer_conv_1d(x, filters, kernel_size, strides = 1L, padding = "valid",
 \item{filters}{Integer, the dimensionality of the output space (i.e. the
 number output of filters in the convolution).}
 
-\item{kernel_size}{An integer or list of a single integer, specifying
-the length of the 1D convolution window.}
+\item{kernel_size}{An integer or list of a single integer, specifying the
+length of the 1D convolution window.}
 
-\item{strides}{An integer or list of a single integer, specifying the
-stride length of the convolution. Specifying any stride value != 1 is
-incompatible with specifying any \code{dilation_rate} value != 1.}
+\item{strides}{An integer or list of a single integer, specifying the stride
+length of the convolution. Specifying any stride value != 1 is incompatible
+with specifying any \code{dilation_rate} value != 1.}
 
 \item{padding}{One of \code{"valid"}, \code{"causal"} or \code{"same"} (case-insensitive).
-\code{"causal"} results in causal (dilated) convolutions, e.g. \code{output[t]} depends
-solely on \code{input[:t-1]}. Useful when modeling temporal data where the model
-should not violate the temporal order. See \href{https://arxiv.org/abs/1609.03499}{WaveNet: A Generative Model forRaw Audio, section 2.1}.}
+\code{"causal"} results in causal (dilated) convolutions, e.g. \code{output[t]} does
+not depend on \code{input[t+1:]}. Useful when modeling temporal data where the
+model should not violate the temporal order. See \href{https://arxiv.org/abs/1609.03499}{WaveNet: A GenerativeModel for Raw Audio, section 2.1}.}
 
-\item{dilation_rate}{an integer or list of a single integer, specifying
-the dilation rate to use for dilated convolution. Currently, specifying any
+\item{dilation_rate}{an integer or list of a single integer, specifying the
+dilation rate to use for dilated convolution. Currently, specifying any
 \code{dilation_rate} value != 1 is incompatible with specifying any \code{strides}
 value != 1.}
 

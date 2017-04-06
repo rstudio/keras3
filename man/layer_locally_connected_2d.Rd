@@ -27,7 +27,8 @@ the convolution along the width and height. Can be a single integer to
 specify the same value for all spatial dimensions. Specifying any stride
 value != 1 is incompatible with specifying any \code{dilation_rate} value != 1.}
 
-\item{padding}{One of \code{"valid"} or \code{"same"} (case-insensitive).}
+\item{padding}{Currently only supports \code{"valid"} (case-insensitive). \code{"same"}
+may be supported in the future.}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.

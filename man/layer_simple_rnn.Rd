@@ -21,8 +21,8 @@ layer_simple_rnn(x, units, activation = "tanh", use_bias = TRUE,
 
 \item{units}{Positive integer, dimensionality of the output space.}
 
-\item{activation}{Activation function to use. If you don't specify anything,
-no activation is applied (ie. "linear" activation: \code{a(x) = x}).}
+\item{activation}{Activation function to use. If you pass \code{NULL}, no
+activation is applied (ie. "linear" activation: \code{a(x) = x}).}
 
 \item{use_bias}{Boolean, whether the layer uses a bias vector.}
 
@@ -30,7 +30,7 @@ no activation is applied (ie. "linear" activation: \code{a(x) = x}).}
 output sequence, or the full sequence.}
 
 \item{go_backwards}{Boolean (default FALSE). If TRUE, process the input
-sequence backwards.}
+sequence backwards and return the reversed sequence.}
 
 \item{stateful}{Boolean (default FALSE). If TRUE, the last state for each
 sample at index i in a batch will be used as initial state for the sample
@@ -108,7 +108,10 @@ isn't provided.}
 Fully-connected RNN where the output is to be fed back to input.
 }
 \section{References}{
- - \href{http://arxiv.org/abs/1512.05287}{A Theoretically Grounded Application of Dropout inRecurrent Neural Networks}
+
+\itemize{
+\item \href{http://arxiv.org/abs/1512.05287}{A Theoretically Grounded Application of Dropout in Recurrent Neural Networks}
+}
 }
 
 \seealso{

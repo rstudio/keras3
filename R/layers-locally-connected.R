@@ -1,28 +1,28 @@
 
 #' Locally-connected layer for 1D inputs.
 #' 
-#' `layer_locally_connected_1d()` works similarly to [layer_conv_1d()] , except
-#' that weights are unshared, that is, a different set of filters is applied at
-#' each different patch of the input. 
+#' `layer_locally_connected_1d()` works similarly to [layer_conv_1d()] , except 
+#' that weights are unshared, that is, a different set of filters is applied at 
+#' each different patch of the input.
 #' 
-#' @inheritParams layer_conv_1d
-#' 
-#' @param filters Integer, the dimensionality of the output space (i.e. the
+#' @inheritParams layer_conv_2d
+#'   
+#' @param filters Integer, the dimensionality of the output space (i.e. the 
 #'   number output of filters in the convolution).
-#' @param kernel_size An integer or list of a single integer, specifying the
+#' @param kernel_size An integer or list of a single integer, specifying the 
 #'   length of the 1D convolution window.
-#' @param strides An integer or list of a single integer, specifying the stride
+#' @param strides An integer or list of a single integer, specifying the stride 
 #'   length of the convolution. Specifying any stride value != 1 is incompatible
 #'   with specifying any `dilation_rate` value != 1.
-#' @param padding One of `"valid"` or `"same"` (case-insensitive).
-#' @param data_format data_format
+#' @param padding Currently only supports `"valid"` (case-insensitive). `"same"`
+#'   may be supported in the future.
 #'   
 #' @section Input shape: 3D tensor with shape: `(batch_size, steps, input_dim)`
 #'   
-#' @section Output shape: 3D tensor with shape: `(batch_size, new_steps,
+#' @section Output shape: 3D tensor with shape: `(batch_size, new_steps, 
 #'   filters)` `steps` value might have changed due to padding or strides.
 #'   
-#' @family locally connected layers 
+#' @family locally connected layers
 #'   
 #' @export
 layer_locally_connected_1d <- function(x, filters, kernel_size, strides = 1L, padding = "valid", data_format = NULL, 

@@ -10,21 +10,21 @@
 #' variable-length sequences of 128-dimensional vectors.
 #' 
 #' @inheritParams layer_dense
-#' 
+#'   
 #' @param filters Integer, the dimensionality of the output space (i.e. the 
 #'   number output of filters in the convolution).
-#' @param kernel_size An integer or list of a single integer, specifying 
-#'   the length of the 1D convolution window.
-#' @param strides An integer or list of a single integer, specifying the 
-#'   stride length of the convolution. Specifying any stride value != 1 is 
-#'   incompatible with specifying any `dilation_rate` value != 1.
+#' @param kernel_size An integer or list of a single integer, specifying the
+#'   length of the 1D convolution window.
+#' @param strides An integer or list of a single integer, specifying the stride
+#'   length of the convolution. Specifying any stride value != 1 is incompatible
+#'   with specifying any `dilation_rate` value != 1.
 #' @param padding One of `"valid"`, `"causal"` or `"same"` (case-insensitive). 
-#'   `"causal"` results in causal (dilated) convolutions, e.g. `output[t]` depends
-#'   solely on `input[:t-1]`. Useful when modeling temporal data where the model 
-#'   should not violate the temporal order. See [WaveNet: A Generative Model for
-#'   Raw Audio, section 2.1](https://arxiv.org/abs/1609.03499).
-#' @param dilation_rate an integer or list of a single integer, specifying 
-#'   the dilation rate to use for dilated convolution. Currently, specifying any
+#'   `"causal"` results in causal (dilated) convolutions, e.g. `output[t]` does
+#'   not depend on `input[t+1:]`. Useful when modeling temporal data where the
+#'   model should not violate the temporal order. See [WaveNet: A Generative
+#'   Model for Raw Audio, section 2.1](https://arxiv.org/abs/1609.03499).
+#' @param dilation_rate an integer or list of a single integer, specifying the
+#'   dilation rate to use for dilated convolution. Currently, specifying any 
 #'   `dilation_rate` value != 1 is incompatible with specifying any `strides` 
 #'   value != 1.
 #' @param activation Activation function to use. If you don't specify anything, 
@@ -42,11 +42,11 @@
 #'   
 #' @section Input shape: 3D tensor with shape: `(batch_size, steps, input_dim)`
 #'   
-#' @section Output shape: 3D tensor with shape: `(batch_size, new_steps,
+#' @section Output shape: 3D tensor with shape: `(batch_size, new_steps, 
 #'   filters)` `steps` value might have changed due to padding or strides.
-#'
-#' @family convolutional layers   
-#'         
+#'   
+#' @family convolutional layers
+#'   
 #' @export
 layer_conv_1d <- function(x, filters, kernel_size, strides = 1L, padding = "valid", 
                           dilation_rate = 1L, activation = NULL, use_bias = TRUE, 
@@ -107,9 +107,9 @@ layer_conv_1d <- function(x, filters, kernel_size, strides = 1L, padding = "vali
 #' @param padding one of `"valid"` or `"same"` (case-insensitive).
 #' @param data_format A string, one of `channels_last` (default) or
 #'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
+#'   `channels_last` corresponds to inputs with shape `(batch, height, width,
 #'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
-#'   channels, width, height)`. It defaults to the `image_data_format` value
+#'   channels, height, width)`. It defaults to the `image_data_format` value
 #'   found in your Keras config file at `~/.keras/keras.json`. If you never set
 #'   it, then it will be "channels_last".
 #' @param dilation_rate an integer or list of 2 integers, specifying the
@@ -176,7 +176,7 @@ layer_conv_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), padding 
 #' for 128x128x128 volumes with a single channel, in
 #' `data_format="channels_last"`.
 #' 
-#' @inheritParams layer_conv_1d  
+#' @inheritParams layer_conv_2d  
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
 #'   number output of filters in the convolution).
@@ -263,10 +263,10 @@ layer_conv_3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padd
 #' of integers, does not include the sample axis), e.g. `input_shape=c(128L,
 #' 128L, 3L)` for 128x128 RGB pictures in `data_format="channels_last"`.
 #' 
-#' @inheritParams layer_conv_1d
+#' @inheritParams layer_conv_2d
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number output of filters in the convolution).
+#'   number of output filters in the convolution).
 #' @param kernel_size An integer or list of 2 integers, specifying the width and
 #'   height of the 2D convolution window. Can be a single integer to specify the
 #'   same value for all spatial dimensions.
@@ -275,13 +275,6 @@ layer_conv_3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padd
 #'   specify the same value for all spatial dimensions. Specifying any stride
 #'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
 #' @param padding one of `"valid"` or `"same"` (case-insensitive).
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
-#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
-#'   channels, width, height)`. It defaults to the `image_data_format` value
-#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
-#'   it, then it will be "channels_last".
 #'   
 #' @section Input shape: 4D tensor with shape: `(batch, channels, rows, cols)`
 #'   if data_format='channels_first' or 4D tensor with shape: `(batch, rows,
@@ -300,7 +293,7 @@ layer_conv_3d <- function(x, filters, kernel_size, strides = c(1L, 1L, 1L), padd
 #'   
 #' @export
 layer_conv_2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L), padding = "valid", 
-                                    data_format = "channels_last", activation = NULL, use_bias = TRUE, 
+                                    data_format = NULL, activation = NULL, use_bias = TRUE, 
                                     kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                                     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                                     kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
@@ -355,13 +348,6 @@ layer_conv_2d_transpose <- function(x, filters, kernel_size, strides = c(1L, 1L)
 #'   specify the same value for all spatial dimensions. Specifying any stride
 #'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
 #' @param padding one of `"valid"` or `"same"` (case-insensitive).
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
-#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
-#'   channels, width, height)`. It defaults to the `image_data_format` value
-#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
-#'   it, then it will be "channels_last".
 #' @param depth_multiplier The number of depthwise convolution output channels
 #'   for each input channel. The total number of depthwise convolution output
 #'   channels will be equal to `filterss_in * depth_multiplier`.
@@ -457,17 +443,10 @@ layer_upsampling_1d <- function(x, size = 2L,
 #' 
 #' Repeats the rows and columns of the data by `size[[0]]` and `size[[1]]` respectively.
 #' 
-#' @inheritParams layer_upsampling_1d
+#' @inheritParams layer_conv_2d
 #' 
 #' @param size int, or list of 2 integers. The upsampling factors for rows and
 #'   columns.
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
-#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
-#'   channels, width, height)`. It defaults to the `image_data_format` value
-#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
-#'   it, then it will be "channels_last".
 #'   
 #' @section Input shape: 
 #' 4D tensor with shape: 
@@ -544,7 +523,7 @@ layer_upsampling_3d <- function(x, size= c(2L, 2L, 2L), data_format = NULL,
 
 #' Zero-padding layer for 1D input (e.g. temporal sequence).
 #'
-#' @inheritParams layer_dense
+#' @inheritParams layer_conv_2d
 #'  
 #' @param padding int, or list of int (length 2)
 #' - If int: How many zeros to add at the beginning and end of the padding dimension (axis 1). 
@@ -576,21 +555,15 @@ layer_zero_padding_1d <- function(x, padding = 1L,
 #' This layer can add rows and columns or zeros at the top, bottom, left and
 #' right side of an image tensor.
 #' 
+#' @inheritParams layer_conv_2d
 #' @inheritParams layer_zero_padding_1d
 #' 
 #' @param padding int, or list of 2 ints, or list of 2 lists of 2 ints. 
 #' - If int: the same symmetric padding is applied to width and height. 
 #' - If list of 2 ints: interpreted as two different symmetric padding values for height
-#'   and width: `(symmetric_height_pad, symmetrc_width_pad)`. 
+#'   and width: `(symmetric_height_pad, symmetric_width_pad)`. 
 #' - If list of 2 lists of 2 ints: interpreted as `((top_pad, bottom_pad), (left_pad,
 #'   right_pad))`
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
-#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
-#'   channels, width, height)`. It defaults to the `image_data_format` value
-#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
-#'   it, then it will be "channels_last".
 #'   
 #' @section Input shape: 4D tensor with shape: 
 #' - If `data_format` is `"channels_last"`: `(batch, rows, cols, channels)` 
@@ -698,21 +671,15 @@ layer_cropping_1d <- function(x, cropping = c(1L, 1L),
 #' 
 #' It crops along spatial dimensions, i.e. width and height.
 #' 
+#' @inheritParams layer_conv_2d
 #' @inheritParams layer_cropping_1d
 #' 
 #' @param cropping int, or list of 2 ints, or list of 2 lists of 2 ints. 
 #'   - If int: the same symmetric cropping is applied to width and height. 
 #'   - If list of 2 ints: interpreted as two different symmetric cropping values for
-#'   height and width: `(symmetric_height_crop, symmetrc_width_crop)`. 
+#'   height and width: `(symmetric_height_crop, symmetric_width_crop)`. 
 #'   - If list of 2 lists of 2 ints: interpreted as `((top_crop, bottom_crop), (left_crop,
 #'   right_crop))`
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, width, height,
-#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
-#'   channels, width, height)`. It defaults to the `image_data_format` value
-#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
-#'   it, then it will be "channels_last".
 #'   
 #' @section Input shape: 4D tensor with shape: 
 #' - If `data_format` is `"channels_last"`: `(batch, rows, cols, channels)` 

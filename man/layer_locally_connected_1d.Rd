@@ -25,9 +25,14 @@ length of the 1D convolution window.}
 length of the convolution. Specifying any stride value != 1 is incompatible
 with specifying any \code{dilation_rate} value != 1.}
 
-\item{padding}{One of \code{"valid"} or \code{"same"} (case-insensitive).}
+\item{padding}{Currently only supports \code{"valid"} (case-insensitive). \code{"same"}
+may be supported in the future.}
 
-\item{data_format}{data_format}
+\item{data_format}{A string, one of \code{channels_last} (default) or
+\code{channels_first}. The ordering of the dimensions in the inputs.
+\code{channels_last} corresponds to inputs with shape \code{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
+found in your Keras config file at \code{~/.keras/keras.json}. If you never set
+it, then it will be "channels_last".}
 
 \item{activation}{Activation function to use. If you don't specify anything,
 no activation is applied (ie. "linear" activation: \code{a(x) = x}).}

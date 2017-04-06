@@ -15,13 +15,13 @@ layer_cropping_2d(x, cropping = list(c(0L, 0L), c(0L, 0L)),
 \itemize{
 \item If int: the same symmetric cropping is applied to width and height.
 \item If list of 2 ints: interpreted as two different symmetric cropping values for
-height and width: \code{(symmetric_height_crop, symmetrc_width_crop)}.
+height and width: \code{(symmetric_height_crop, symmetric_width_crop)}.
 \item If list of 2 lists of 2 ints: interpreted as \code{((top_crop, bottom_crop), (left_crop, right_crop))}
 }}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \code{(batch, width, height, channels)} while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, width, height)}. It defaults to the \code{image_data_format} value
+\code{channels_last} corresponds to inputs with shape \code{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
 found in your Keras config file at \code{~/.keras/keras.json}. If you never set
 it, then it will be "channels_last".}
 
