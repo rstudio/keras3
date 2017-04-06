@@ -45,6 +45,9 @@ set_weights <- function(layer, weights) {
 #  @family layer methods
 #  
 #  @export
+
+# Note: get_config/from_config probably want to be S3 methods for models
+
 get_config <- function(layer) {
   layer$get_config()
 }
