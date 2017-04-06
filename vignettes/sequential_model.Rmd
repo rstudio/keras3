@@ -258,54 +258,45 @@ fit(model, x_train, y_train, batch_size = 32, epochs = 10)
 score < evaluate(model, x_test, y_test, batch_size = 32)
 ```
 
+### Sequence classification with LSTM
 
+```{r, eval = FALSE}
+model <- model_sequential() %>% 
+  layer_embedding(input_dim = max_features, output_dim - 256) %>% 
+  layer_lstm(units = 128) %>% 
+  layer_dropout(rate = 0.5) %>% 
+  layer_dense(units = 1, activation = 'sigmoid') %>% 
+  compile(
+    loss = 'binary_crossentropy',
+    optimizer = 'rmsprop',
+    metrics = c('accuracy')
+  )
 
-### Sequence classification with LSTM:
-
-```python
-from keras.models import Sequential
-from keras.layers import Dense, Dropout
-from keras.layers import Embedding
-from keras.layers import LSTM
-
-model = Sequential()
-model.add(Embedding(max_features, output_dim=256))
-model.add(LSTM(128))
-model.add(Dropout(0.5))
-model.add(Dense(1, activation='sigmoid'))
-
-model.compile(loss='binary_crossentropy',
-              optimizer='rmsprop',
-              metrics=['accuracy'])
-
-model.fit(x_train, y_train, batch_size=16, epochs=10)
-score = model.evaluate(x_test, y_test, batch_size=16)
+fit(model, x_train, y_train, batch_size = 16, epochs = 10)
+score <- evaluate(model, x_test, y_test, batch_size = 16)
 ```
 
 ### Sequence classification with 1D convolutions:
 
-```python
-from keras.models import Sequential
-from keras.layers import Dense, Dropout
-from keras.layers import Embedding
-from keras.layers import Conv1D, GlobalAveragePooling1D, MaxPooling1D
+```{r, eval=FALSE}
+model <- model_sequential() %>% 
+  layer_conv_1d(filters = 64, kernel_size = 3, activation = 'relu',
+                input_shape = c(seq_length, 100)) %>% 
+  layer_conv_1d(filters = 64, kernel_size = 3, activation = 'relu') %>% 
+  layer_max_pooling_1d(pool_size = 3) %>% 
+  layer_conv_1d(filters = 128, kernel_size = 3, activation = 'relu') %>% 
+  layer_conv_1d(filters = 128, kernel_size = 3, activation = 'relu') %>% 
+  layer_global_average_pooling_1d() %>% 
+  layer_dropout(rate = 0.5) %>% 
+  layer_dense(units = 1, activation = 'sigmoid') %>% 
+  compile(
+    loss = 'binary_crossentropy',
+    optimizer = 'rmsprop',
+    metrics = c'accuracy'
+  )
 
-model = Sequential()
-model.add(Conv1D(64, 3, activation='relu', input_shape=(seq_length, 100)))
-model.add(Conv1D(64, 3, activation='relu'))
-model.add(MaxPooling1D(3))
-model.add(Conv1D(128, 3, activation='relu'))
-model.add(Conv1D(128, 3, activation='relu'))
-model.add(GlobalAveragePooling1D())
-model.add(Dropout(0.5))
-model.add(Dense(1, activation='sigmoid'))
-
-model.compile(loss='binary_crossentropy',
-              optimizer='rmsprop',
-              metrics=['accuracy'])
-
-model.fit(x_train, y_train, batch_size=16, epochs=10)
-score = model.evaluate(x_test, y_test, batch_size=16)
+fit(model, x_train, y_train, batch_size = 16, epochs = 10)
+score <- evaluate(evaluate, x_test, y_test, batch_size = 16)
 ```
 
 ### Stacked LSTM for sequence classification
@@ -319,83 +310,93 @@ the last step in its output sequence, thus dropping the temporal dimension
 
 <img src="https://keras.io/img/regular_stacked_lstm.png" alt="stacked LSTM" style="width: 300px;"/>
 
-```python
-from keras.models import Sequential
-from keras.layers import LSTM, Dense
-import numpy as np
 
-data_dim = 16
-timesteps = 8
-num_classes = 10
+```{r}
+library(keras)
 
+# constants
+data_dim <- 16
+timesteps <- 8
+num_classes <- 10
+
+# define and compile model
 # expected input data shape: (batch_size, timesteps, data_dim)
-model = Sequential()
-model.add(LSTM(32, return_sequences=True,
-               input_shape=(timesteps, data_dim)))  # returns a sequence of vectors of dimension 32
-model.add(LSTM(32, return_sequences=True))  # returns a sequence of vectors of dimension 32
-model.add(LSTM(32))  # return a single vector of dimension 32
-model.add(Dense(10, activation='softmax'))
+model <- model_sequential() %>% 
+  layer_lstm(units = 32, return_sequences = TRUE, input_shape = c(timesteps, data_dim)) %>% 
+  layer_lstm(units = 32, return_sequences = TRUE) %>% 
+  layer_lstm(units = 32) %>% # return a single vector dimension 32
+  layer_dense(units = 10, activation = 'softmax') %>% 
+  compile(
+    loss = 'categorical_crossentropy',
+    optimizer = 'rmsprop',
+    metrics = c('accuracy')
+  )
+  
+# generate dummy training data
+x_train <- array(runif(1000 * timesteps * data_dim), dim = c(1000, timesteps, data_dim))
+y_train <- matrix(runif(1000 * num_classes), nrow = 1000, ncol = num_classes)
 
-model.compile(loss='categorical_crossentropy',
-              optimizer='rmsprop',
-              metrics=['accuracy'])
+# generate dummy validation data
+x_val <- array(runif(100 * timesteps * data_dim), dim = c(100, timesteps, data_dim))
+y_val <- matrix(runif(100 * num_classes), nrow = 100, ncol = num_classes)
 
-# Generate dummy training data
-x_train = np.random.random((1000, timesteps, data_dim))
-y_train = np.random.random((1000, num_classes))
-
-# Generate dummy validation data
-x_val = np.random.random((100, timesteps, data_dim))
-y_val = np.random.random((100, num_classes))
-
-model.fit(x_train, y_train,
-          batch_size=64, epochs=5,
-          validation_data=(x_val, y_val))
+# train
+fit(model, 
+  x_train, y_train, batch_size = 64, epochs = 5, validation_data = list(x_val, y_val)
+)
 ```
-
 
 ### Same stacked LSTM model, rendered "stateful"
 
-A stateful recurrent model is one for which the internal states (memories) obtained after processing a batch
-of samples are reused as initial states for the samples of the next batch. This allows to process longer sequences
-while keeping computational complexity manageable.
+A stateful recurrent model is one for which the internal states (memories) obtained after processing a batch of samples are reused as initial states for the samples of the next batch. This allows to process longer sequences while keeping computational complexity manageable.
 
 [You can read more about stateful RNNs in the FAQ.](/faq/#how-can-i-use-stateful-rnns)
 
-```python
-from keras.models import Sequential
-from keras.layers import LSTM, Dense
-import numpy as np
+```{r}
+library(keras)
 
-data_dim = 16
-timesteps = 8
-num_classes = 10
-batch_size = 32
+# constants
+data_dim <- 16
+timesteps <- 8
+num_classes <- 10
+batch_size <- 32
 
+# define and compile model
 # Expected input batch shape: (batch_size, timesteps, data_dim)
 # Note that we have to provide the full batch_input_shape since the network is stateful.
 # the sample of index i in batch k is the follow-up for the sample i in batch k-1.
-model = Sequential()
-model.add(LSTM(32, return_sequences=True, stateful=True,
-               batch_input_shape=(batch_size, timesteps, data_dim)))
-model.add(LSTM(32, return_sequences=True, stateful=True))
-model.add(LSTM(32, stateful=True))
-model.add(Dense(10, activation='softmax'))
+model <- model_sequential() %>% 
+  layer_lstm(units = 32, return_sequences = TRUE, stateful = TRUE,
+             batch_input_shape = c(batch_size, timesteps, data_dim)) %>% 
+  layer_lstm(units = 32, return_sequences = TRUE, stateful = TRUE) %>% 
+  layer_lstm(units = 32, stateful = TRUE) %>% 
+  layer_dense(units = 10, activation = 'softmax') %>% 
+  compile(
+    loss = 'categorical_crossentropy',
+    optimizer = 'rmsprop',
+    metrics = c('accuracy')
+  )
+  
+# generate dummy training data
+x_train <- array(runif( (batch_size * 10) * timesteps * data_dim), 
+                 dim = c(batch_size * 10, timesteps, data_dim))
+y_train <- matrix(runif( (batch_size * 10) * num_classes), 
+                  nrow = batch_size * 10, ncol = num_classes)
 
-model.compile(loss='categorical_crossentropy',
-              optimizer='rmsprop',
-              metrics=['accuracy'])
+# generate dummy validation data
+x_val <- array(runif( (batch_size * 3) * timesteps * data_dim), 
+               dim = c(batch_size * 3, timesteps, data_dim))
+y_val <- matrix(runif( (batch_size * 3) * num_classes), 
+                nrow = batch_size * 3, ncol = num_classes)
 
-# Generate dummy training data
-x_train = np.random.random((batch_size * 10, timesteps, data_dim))
-y_train = np.random.random((batch_size * 10, num_classes))
-
-# Generate dummy validation data
-x_val = np.random.random((batch_size * 3, timesteps, data_dim))
-y_val = np.random.random((batch_size * 3, num_classes))
-
-model.fit(x_train, y_train,
-          batch_size=batch_size, epochs=5, shuffle=False,
-          validation_data=(x_val, y_val))
+# train
+fit(model, 
+  x_train, 
+  y_train, 
+  batch_size = batch_size, 
+  epochs = 5, 
+  shuffle = FALSE,
+  validation_data = list(x_val, y_val)
+)
 ```
 
