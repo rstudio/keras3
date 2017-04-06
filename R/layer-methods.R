@@ -63,8 +63,11 @@ get_config <- function(layer) {
 #  @family layer methods
 #     
 #  @export 
-from_config <- function(config) {
-  keras$layers$Layer$from_config(config)
+from_config <- function(config, custom_objects = NULL) {
+  keras$layers$Layer$from_config(
+    config = config,
+    custom_objects = custom_objects
+  )
 }
 
 #  Count the total number of scalars composing the weights.
