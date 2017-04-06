@@ -21,12 +21,14 @@ BugReports: https://github.com/rstudio/keras/issues
 Depends:
     tensorflow (>= 0.7)
 Imports:
-    reticulate (>= 0.7), 
+    reticulate (>= 0.7.0.9001), 
     magrittr, 
     methods
 Suggests: 
     testthat, 
     knitr
+Remotes:
+    rstudio/reticulate
 SystemRequirements: TensorFlow >= 1.1 (https://www.tensorflow.org/)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1

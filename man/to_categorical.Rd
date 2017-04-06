@@ -15,5 +15,8 @@ to_categorical(y, num_classes = NULL)
 A binary matrix representation of the input.
 }
 \description{
+Converts a class vector (integers) to binary class matrix.
+}
+\details{
 E.g. for use with \code{\link[=loss_categorical_crossentropy]{loss_categorical_crossentropy()}}.
 }

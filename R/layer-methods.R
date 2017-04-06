@@ -64,9 +64,7 @@ get_config <- function(layer) {
 #     
 #  @export 
 from_config <- function(config) {
-  layer <- py_get_attr(keras$layers, "Layer")
-  from_config <- py_get_attr(layer, "from_config")
-  py_call(from_config, config)
+  keras$layers$Layer$from_config(config)
 }
 
 #  Count the total number of scalars composing the weights.
