@@ -95,7 +95,7 @@ model <- model_sequential() %>%
   )
 
 # Generate dummy data
-data <- matrix(rexp(1000*100), nrow = 1000, ncol = 100)
+data <- matrix(runif(1000*100), nrow = 1000, ncol = 100)
 labels <- matrix(round(runif(1000, min = 0, max = 1)), nrow = 1000, ncol = 1)
 
 # Train the model, iterating on the data in batches of 32 samples
@@ -116,7 +116,7 @@ model <- model_sequential() %>%
   )
 
 # Generate dummy data
-data <- matrix(rexp(1000*100), nrow = 1000, ncol = 100)
+data <- matrix(runif(1000*100), nrow = 1000, ncol = 100)
 labels <- matrix(round(runif(1000, min = 0, max = 9)), nrow = 1000, ncol = 1)
 
 # Convert labels to categorical one-hot encoding
@@ -147,11 +147,11 @@ On the [examples](examples/index.html) page you will also find example models fo
 library(keras)
 
 # generate dummy data
-x_train <- matrix(rexp(1000*20), nrow = 1000, ncol = 20)
+x_train <- matrix(runif(1000*20), nrow = 1000, ncol = 20)
 y_train <- to_categorical(matrix(round(runif(1000, min = 0, max = 9)), 
                                  nrow = 1000, ncol = 1), 
                           num_classes = 10)
-x_test  <- matrix(rexp(100*20), nrow = 100, ncol = 20)
+x_test  <- matrix(runif(100*20), nrow = 100, ncol = 20)
 y_test  <- to_categorical(matrix(round(runif(100, min = 0, max = 9)), 
                                  nrow = 100, ncol = 1),
                           num_classes = 10)
