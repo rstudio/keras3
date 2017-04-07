@@ -271,16 +271,14 @@ summary.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
   if (py_is_null_xptr(object))
     cat("<pointer: 0x0>\n")
   else {
-    cat(py_capture_output(type = "stdout",
-      object$summary(line_length = line_length, positions = positions)
-    ), collapse = "\n")
+    cat(py_str(object, line_length = line_length, positions = positions), "\n")
   }
 }
 
 #' @importFrom reticulate py_str
 #' @export
-py_str.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object, ...) {
-  cat("Model\n", py_capture_output(object$summary(), type = "stdout"), sep="")
+py_str.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object,  line_length = NULL, positions = NULL, ...) {
+  paste0("Model\n", py_capture_output(object$summary(line_length = line_length, positions = positions), type = "stdout"))
 }
 
 
