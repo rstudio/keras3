@@ -131,8 +131,8 @@
     </tr>
     <tr>
       <th>activation</th>
-      <td><p>Activation function to use. If you don't specify anything,
-no activation is applied (ie. "linear" activation: <code>a(x) = x</code>).</p></td>
+      <td><p>Activation function to use. If you pass <code>NULL</code>, no
+activation is applied (ie. "linear" activation: <code>a(x) = x</code>).</p></td>
     </tr>
     <tr>
       <th>recurrent_activation</th>
@@ -151,7 +151,7 @@ output sequence, or the full sequence.</p></td>
     <tr>
       <th>go_backwards</th>
       <td><p>Boolean (default FALSE). If TRUE, process the input
-sequence backwards.</p></td>
+sequence backwards and return the reversed sequence.</p></td>
     </tr>
     <tr>
       <th>stateful</th>

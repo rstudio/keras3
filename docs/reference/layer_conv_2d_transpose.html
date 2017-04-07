@@ -112,7 +112,7 @@ of integers, does not include the sample axis), e.g. <code>input_shape=c(128L, 1
     
 
     <pre><span class='fu'>layer_conv_2d_transpose</span>(<span class='no'>x</span>, <span class='no'>filters</span>, <span class='no'>kernel_size</span>, <span class='kw'>strides</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1L</span>, <span class='fl'>1L</span>),
-  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"valid"</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='st'>"channels_last"</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"valid"</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>kernel_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>,
   <span class='kw'>bias_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>, <span class='kw'>kernel_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>bias_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>activity_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -130,7 +130,7 @@ of integers, does not include the sample axis), e.g. <code>input_shape=c(128L, 1
     <tr>
       <th>filters</th>
       <td><p>Integer, the dimensionality of the output space (i.e. the
-number output of filters in the convolution).</p></td>
+number of output filters in the convolution).</p></td>
     </tr>
     <tr>
       <th>kernel_size</th>
@@ -153,7 +153,7 @@ value != 1 is incompatible with specifying any <code>dilation_rate</code> value 
       <th>data_format</th>
       <td><p>A string, one of <code>channels_last</code> (default) or
 <code>channels_first</code>. The ordering of the dimensions in the inputs.
-<code>channels_last</code> corresponds to inputs with shape <code>(batch, width, height, channels)</code> while <code>channels_first</code> corresponds to inputs with shape <code>(batch, channels, width, height)</code>. It defaults to the <code>image_data_format</code> value
+<code>channels_last</code> corresponds to inputs with shape <code>(batch, height, width, channels)</code> while <code>channels_first</code> corresponds to inputs with shape <code>(batch, channels, height, width)</code>. It defaults to the <code>image_data_format</code> value
 found in your Keras config file at <code>~/.keras/keras.json</code>. If you never set
 it, then it will be "channels_last".</p></td>
     </tr>

@@ -79,7 +79,7 @@
       <h1>Guide to the Sequential Model</h1>
                         <h4 class="author">JJ Allaire</h4>
             
-            <h4 class="date">2017-04-05</h4>
+            <h4 class="date">2017-04-06</h4>
           </div>
 
     
@@ -140,6 +140,302 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model
   <span class="dt">metrics =</span> <span class="kw"><a href="../reference/metric_binary_accuracy.html">metric_binary_accuracy</a></span>()
 )</code></pre></div>
 </div>
+<div id="training" class="section level2">
+<h2 class="hasAnchor">
+<a href="#training" class="anchor"></a>Training</h2>
+<p>Keras models are trained on R matrixes or higher dimensional arrays of input data and labels. For training a model, you will typically use the <code><a href="../reference/fit.html">fit()</a></code> function.</p>
+<p>Here’s a single-input model with 2 classes (binary classification):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define and compile the model</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">100</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+    <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+    <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
+    <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+  )
+
+<span class="co"># Generate dummy data</span>
+data &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">1000</span>*<span class="dv">100</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">100</span>)
+labels &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)
+
+<span class="co"># Train the model, iterating on the data in batches of 32 samples</span>
+<span class="kw"><a href="../reference/fit.html">fit</a></span>(model, data, labels, <span class="dt">epochs=</span><span class="dv">10</span>, <span class="dt">batch_size=</span><span class="dv">32</span>)</code></pre></div>
+<p>Here’s a single-input model with 10 classes (categorical classification):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define and compile the model</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">100</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+    <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+    <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
+    <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+  )
+
+<span class="co"># Generate dummy data</span>
+data &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">1000</span>*<span class="dv">100</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">100</span>)
+labels &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>)), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)
+
+<span class="co"># Convert labels to categorical one-hot encoding</span>
+one_hot_labels =<span class="st"> </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(labels, <span class="dt">num_classes =</span> <span class="dv">10</span>)
+
+<span class="co"># Train the model, iterating on the data in batches of 32 samples</span>
+<span class="kw"><a href="../reference/fit.html">fit</a></span>(model, data, one_hot_labels, <span class="dt">epochs=</span><span class="dv">10</span>, <span class="dt">batch_size=</span><span class="dv">32</span>)</code></pre></div>
+</div>
+<div id="examples" class="section level2">
+<h2 class="hasAnchor">
+<a href="#examples" class="anchor"></a>Examples</h2>
+<p>Here are a few examples to get you started!</p>
+<p>On the <a href="examples/index.html">examples</a> page you will also find example models for real datasets:</p>
+<ul>
+<li>CIFAR10 small images classification: CNN with realtime data augmentation</li>
+<li>IMDB movie review sentiment classification: LSTM over sequences of words</li>
+<li>Reuters newswires topic classification: Multilayer Perceptron (MLP)</li>
+<li>MNIST handwritten digits classification: MLP &amp; CNN</li>
+<li>Character-level text generation with LSTM</li>
+</ul>
+<p>…and more.</p>
+<div id="multilayer-perceptron-mlp-for-multi-class-softmax-classification" class="section level3">
+<h3 class="hasAnchor">
+<a href="#multilayer-perceptron-mlp-for-multi-class-softmax-classification" class="anchor"></a>Multilayer Perceptron (MLP) for multi-class softmax classification</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+<span class="co"># generate dummy data</span>
+x_train &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">1000</span>*<span class="dv">20</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">20</span>)
+y_train &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>) %&gt;%<span class="st"> </span>
+<span class="st">             </span><span class="kw">round</span>() %&gt;%
+<span class="st">             </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) %&gt;%<span class="st"> </span>
+<span class="st">             </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="dt">num_classes =</span> <span class="dv">10</span>)
+x_test  &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">100</span>*<span class="dv">20</span>), <span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> <span class="dv">20</span>)
+y_test &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>) %&gt;%<span class="st"> </span>
+<span class="st">             </span><span class="kw">round</span>() %&gt;%
+<span class="st">             </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) %&gt;%<span class="st"> </span>
+<span class="st">             </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="dt">num_classes =</span> <span class="dv">10</span>)
+
+<span class="co"># define and compile the model</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">20</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+    <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
+    <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="dt">lr =</span> <span class="fl">0.01</span>, <span class="dt">decay =</span> <span class="fl">1e-6</span>, <span class="dt">momentum =</span> <span class="fl">0.9</span>, <span class="dt">nesterov =</span> <span class="ot">TRUE</span>),
+    <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)     
+  )
+
+<span class="co"># train</span>
+<span class="kw"><a href="../reference/fit.html">fit</a></span>(model, x_train, y_train, <span class="dt">epochs =</span> <span class="dv">20</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>)
+
+<span class="co"># evaluate</span>
+score &lt;-<span class="st"> </span><span class="kw"><a href="../reference/evaluate.html">evaluate</a></span>(model, x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
+</div>
+<div id="mlp-for-binary-classification" class="section level3">
+<h3 class="hasAnchor">
+<a href="#mlp-for-binary-classification" class="anchor"></a>MLP for binary classification</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+<span class="co"># generate dummy data</span>
+x_train &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">1000</span>*<span class="dv">20</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">20</span>)
+y_train &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)
+x_test &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">100</span>*<span class="dv">20</span>), <span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> <span class="dv">20</span>)
+y_test &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">100</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)), <span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)
+
+<span class="co"># define and compile the model</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">20</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+    <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
+    <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+    <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+  )
+
+<span class="co"># train </span>
+<span class="kw"><a href="../reference/fit.html">fit</a></span>(model, x_train, y_train, <span class="dt">epochs =</span> <span class="dv">20</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>)
+
+<span class="co"># evaluate</span>
+score =<span class="st"> </span><span class="kw"><a href="../reference/evaluate.html">evaluate</a></span>(model, x_test, y_test, <span class="dt">batch_size=</span><span class="dv">128</span>)</code></pre></div>
+</div>
+<div id="vgg-like-convnet" class="section level3">
+<h3 class="hasAnchor">
+<a href="#vgg-like-convnet" class="anchor"></a>VGG-like convnet</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+<span class="co"># generate dummy data</span>
+x_train &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">runif</span>(<span class="dv">100</span> *<span class="st"> </span><span class="dv">100</span> *<span class="st"> </span><span class="dv">100</span> *<span class="st"> </span><span class="dv">3</span>), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">3</span>))
+y_train &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>) %&gt;%<span class="st"> </span>
+<span class="st">             </span><span class="kw">round</span>() %&gt;%
+<span class="st">             </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) %&gt;%<span class="st"> </span>
+<span class="st">             </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="dt">num_classes =</span> <span class="dv">10</span>)
+x_test &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">runif</span>(<span class="dv">20</span> *<span class="st"> </span><span class="dv">100</span> *<span class="st"> </span><span class="dv">100</span> *<span class="st"> </span><span class="dv">3</span>), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">3</span>))
+y_test &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">20</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>) %&gt;%<span class="st"> </span>
+<span class="st">             </span><span class="kw">round</span>() %&gt;%
+<span class="st">             </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">20</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) %&gt;%<span class="st"> </span>
+<span class="st">             </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="dt">num_classes =</span> <span class="dv">10</span>)
+
+<span class="co"># define and compile model</span>
+<span class="co"># input: 100x100 images with 3 channels -&gt; (100, 100, 3) tensors.</span>
+<span class="co"># this applies 32 convolution filters of size 3x3 each.</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>, 
+                <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">3</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.25</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.25</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_flatten.html">layer_flatten</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">256</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.25</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+    <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>, 
+    <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="dt">lr =</span> <span class="fl">0.01</span>, <span class="dt">decay =</span> <span class="fl">1e-6</span>, <span class="dt">momentum =</span> <span class="fl">0.9</span>, <span class="dt">nesterov =</span> <span class="ot">TRUE</span>)
+  )
+  
+<span class="co"># train</span>
+<span class="kw"><a href="../reference/fit.html">fit</a></span>(model, x_train, y_train, <span class="dt">batch_size =</span> <span class="dv">32</span>, <span class="dt">epochs =</span> <span class="dv">10</span>)
+
+<span class="co"># evaluate</span>
+score &lt;<span class="st"> </span><span class="kw"><a href="../reference/evaluate.html">evaluate</a></span>(model, x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">32</span>)</code></pre></div>
+</div>
+<div id="sequence-classification-with-lstm" class="section level3">
+<h3 class="hasAnchor">
+<a href="#sequence-classification-with-lstm" class="anchor"></a>Sequence classification with LSTM</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_embedding.html">layer_embedding</a></span>(<span class="dt">input_dim =</span> max_features, output_dim -<span class="st"> </span><span class="dv">256</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">128</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+    <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
+    <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+    <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+  )
+
+<span class="kw"><a href="../reference/fit.html">fit</a></span>(model, x_train, y_train, <span class="dt">batch_size =</span> <span class="dv">16</span>, <span class="dt">epochs =</span> <span class="dv">10</span>)
+score &lt;-<span class="st"> </span><span class="kw"><a href="../reference/evaluate.html">evaluate</a></span>(model, x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">16</span>)</code></pre></div>
+</div>
+<div id="sequence-classification-with-1d-convolutions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#sequence-classification-with-1d-convolutions" class="anchor"></a>Sequence classification with 1D convolutions:</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="dv">3</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>,
+                <span class="dt">input_shape =</span> <span class="kw">c</span>(seq_length, <span class="dv">100</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="dv">3</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_max_pooling_1d.html">layer_max_pooling_1d</a></span>(<span class="dt">pool_size =</span> <span class="dv">3</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span>(<span class="dt">filters =</span> <span class="dv">128</span>, <span class="dt">kernel_size =</span> <span class="dv">3</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span>(<span class="dt">filters =</span> <span class="dv">128</span>, <span class="dt">kernel_size =</span> <span class="dv">3</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_global_average_pooling_1d.html">layer_global_average_pooling_1d</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+    <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
+    <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+    <span class="dt">metrics =</span> c<span class="st">'accuracy'</span>
+  )
+
+<span class="kw"><a href="../reference/fit.html">fit</a></span>(model, x_train, y_train, <span class="dt">batch_size =</span> <span class="dv">16</span>, <span class="dt">epochs =</span> <span class="dv">10</span>)
+score &lt;-<span class="st"> </span><span class="kw"><a href="../reference/evaluate.html">evaluate</a></span>(evaluate, x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">16</span>)</code></pre></div>
+</div>
+<div id="stacked-lstm-for-sequence-classification" class="section level3">
+<h3 class="hasAnchor">
+<a href="#stacked-lstm-for-sequence-classification" class="anchor"></a>Stacked LSTM for sequence classification</h3>
+<p>In this model, we stack 3 LSTM layers on top of each other, making the model capable of learning higher-level temporal representations.</p>
+<p>The first two LSTMs return their full output sequences, but the last one only returns the last step in its output sequence, thus dropping the temporal dimension (i.e. converting the input sequence into a single vector).</p>
+<p><img src="https://keras.io/img/regular_stacked_lstm.png" alt="stacked LSTM" style="width: 300px;"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+<span class="co"># constants</span>
+data_dim &lt;-<span class="st"> </span><span class="dv">16</span>
+timesteps &lt;-<span class="st"> </span><span class="dv">8</span>
+num_classes &lt;-<span class="st"> </span><span class="dv">10</span>
+
+<span class="co"># define and compile model</span>
+<span class="co"># expected input data shape: (batch_size, timesteps, data_dim)</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(timesteps, data_dim)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>) %&gt;%<span class="st"> </span><span class="co"># return a single vector dimension 32</span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+    <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
+    <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+    <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+  )
+  
+<span class="co"># generate dummy training data</span>
+x_train &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">runif</span>(<span class="dv">1000</span> *<span class="st"> </span>timesteps *<span class="st"> </span>data_dim), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">1000</span>, timesteps, data_dim))
+y_train &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">1000</span> *<span class="st"> </span>num_classes), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> num_classes)
+
+<span class="co"># generate dummy validation data</span>
+x_val &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">runif</span>(<span class="dv">100</span> *<span class="st"> </span>timesteps *<span class="st"> </span>data_dim), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">100</span>, timesteps, data_dim))
+y_val &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">100</span> *<span class="st"> </span>num_classes), <span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> num_classes)
+
+<span class="co"># train</span>
+<span class="kw"><a href="../reference/fit.html">fit</a></span>(model, 
+  x_train, y_train, <span class="dt">batch_size =</span> <span class="dv">64</span>, <span class="dt">epochs =</span> <span class="dv">5</span>, <span class="dt">validation_data =</span> <span class="kw">list</span>(x_val, y_val)
+)</code></pre></div>
+</div>
+<div id="same-stacked-lstm-model-rendered-stateful" class="section level3">
+<h3 class="hasAnchor">
+<a href="#same-stacked-lstm-model-rendered-stateful" class="anchor"></a>Same stacked LSTM model, rendered “stateful”</h3>
+<p>A stateful recurrent model is one for which the internal states (memories) obtained after processing a batch of samples are reused as initial states for the samples of the next batch. This allows to process longer sequences while keeping computational complexity manageable.</p>
+<p><a href="/faq/#how-can-i-use-stateful-rnns">You can read more about stateful RNNs in the FAQ.</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+<span class="co"># constants</span>
+data_dim &lt;-<span class="st"> </span><span class="dv">16</span>
+timesteps &lt;-<span class="st"> </span><span class="dv">8</span>
+num_classes &lt;-<span class="st"> </span><span class="dv">10</span>
+batch_size &lt;-<span class="st"> </span><span class="dv">32</span>
+
+<span class="co"># define and compile model</span>
+<span class="co"># Expected input batch shape: (batch_size, timesteps, data_dim)</span>
+<span class="co"># Note that we have to provide the full batch_input_shape since the network is stateful.</span>
+<span class="co"># the sample of index i in batch k is the follow-up for the sample i in batch k-1.</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>, <span class="dt">stateful =</span> <span class="ot">TRUE</span>,
+             <span class="dt">batch_input_shape =</span> <span class="kw">c</span>(batch_size, timesteps, data_dim)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>, <span class="dt">stateful =</span> <span class="ot">TRUE</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">stateful =</span> <span class="ot">TRUE</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+    <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
+    <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+    <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+  )
+  
+<span class="co"># generate dummy training data</span>
+x_train &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">runif</span>( (batch_size *<span class="st"> </span><span class="dv">10</span>) *<span class="st"> </span>timesteps *<span class="st"> </span>data_dim), 
+                 <span class="dt">dim =</span> <span class="kw">c</span>(batch_size *<span class="st"> </span><span class="dv">10</span>, timesteps, data_dim))
+y_train &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>( (batch_size *<span class="st"> </span><span class="dv">10</span>) *<span class="st"> </span>num_classes), 
+                  <span class="dt">nrow =</span> batch_size *<span class="st"> </span><span class="dv">10</span>, <span class="dt">ncol =</span> num_classes)
+
+<span class="co"># generate dummy validation data</span>
+x_val &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">runif</span>( (batch_size *<span class="st"> </span><span class="dv">3</span>) *<span class="st"> </span>timesteps *<span class="st"> </span>data_dim), 
+               <span class="dt">dim =</span> <span class="kw">c</span>(batch_size *<span class="st"> </span><span class="dv">3</span>, timesteps, data_dim))
+y_val &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>( (batch_size *<span class="st"> </span><span class="dv">3</span>) *<span class="st"> </span>num_classes), 
+                <span class="dt">nrow =</span> batch_size *<span class="st"> </span><span class="dv">3</span>, <span class="dt">ncol =</span> num_classes)
+
+<span class="co"># train</span>
+<span class="kw"><a href="../reference/fit.html">fit</a></span>(model, 
+  x_train, 
+  y_train, 
+  <span class="dt">batch_size =</span> batch_size, 
+  <span class="dt">epochs =</span> <span class="dv">5</span>, 
+  <span class="dt">shuffle =</span> <span class="ot">FALSE</span>,
+  <span class="dt">validation_data =</span> <span class="kw">list</span>(x_val, y_val)
+)</code></pre></div>
+</div>
+</div>
 </div>
   </div>
 
@@ -149,6 +445,8 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#defining-a-model">Defining a Model</a></li>
       <li><a href="#compilation">Compilation</a></li>
+      <li><a href="#training">Training</a></li>
+      <li><a href="#examples">Examples</a></li>
       </ul>
 </div>
       </div>
