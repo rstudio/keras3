@@ -31,5 +31,6 @@ a batched way.
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate}}, \code{\link{fit}},
   \code{\link{load_model}}, \code{\link{model_sequential}},
-  \code{\link{model}}, \code{\link{save_model}}
+  \code{\link{model}}, \code{\link{save_model}},
+  \code{\link{summary}}
 }

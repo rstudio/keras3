@@ -63,5 +63,6 @@ Trains the model for a fixed number of epochs (iterations on a dataset).
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate}}, \code{\link{load_model}},
   \code{\link{model_sequential}}, \code{\link{model}},
-  \code{\link{predict}}, \code{\link{save_model}}
+  \code{\link{predict}}, \code{\link{save_model}},
+  \code{\link{summary}}
 }

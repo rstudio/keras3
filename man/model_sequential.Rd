@@ -24,5 +24,6 @@ Dense...) an \code{input_dim} argument.
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate}}, \code{\link{fit}},
   \code{\link{load_model}}, \code{\link{model}},
-  \code{\link{predict}}, \code{\link{save_model}}
+  \code{\link{predict}}, \code{\link{save_model}},
+  \code{\link{summary}}
 }

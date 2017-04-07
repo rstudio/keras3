@@ -34,6 +34,7 @@ reference:
       - fit
       - evaluate
       - predict
+      - summary
       - save_model
       - load_model
       

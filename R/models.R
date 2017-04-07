@@ -254,12 +254,24 @@ predict.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
   )
 }
 
+#' Print a summary of a model
+#' 
+#' @param object Keras model instance
+#' @param line_length Total length of printed lines
+#' @param positions Relative or absolute positions of log elements in each line.
+#'   If not provided, defaults to `c(0.33, 0.55, 0.67, 1.0)`.
+#' @param ... Unused
+#' 
+#' @name summary
+#' 
+#' @family model functions
+#' 
 #' @export
-summary.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object, ...) {
+summary.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object, line_length = NULL, positions = NULL, ...) {
   if (py_is_null_xptr(object))
     cat("<pointer: 0x0>\n")
   else
-    object$summary()
+    object$summary(line_length = line_length, positions = positions)
 }
 
 #' @importFrom reticulate py_str
