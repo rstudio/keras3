@@ -9,6 +9,7 @@ vignette: |
 
 ```{r setup, include = FALSE}
 library(keras)
+knitr::opts_chunk$set(comment = NA)
 ```
 
 
@@ -61,8 +62,119 @@ input_sequences <- layer_input(shape = c(20, 784))
 # the output of the previous model was a 10-way softmax,
 # so the output of the layer below will be a sequence of 20 vectors of size 10.
 processed_sequences <- input_sequences %>% 
-    time_distributed(model) 
+  time_distributed(model)
 ```
+
+## Multi-input and multi-output models
+
+Here's a good use case for the functional API: models with multiple inputs and outputs. The functional API makes it easy to manipulate a large number of intertwined datastreams.
+
+Let's consider the following model. We seek to predict how many retweets and likes a news headline will receive on Twitter. The main input to the model will be the headline itself, as a sequence of words, but to spice things up, our model will also have an auxiliary input, receiving extra data such as the time of day when the headline was posted, etc.
+
+The model will also be supervised via two loss functions. Using the main loss function earlier in a model is a good regularization mechanism for deep models.
+
+Here's what our model looks like:
+
+<img src="https://s3.amazonaws.com/keras.io/img/multi-input-multi-output-graph.png" alt="multi-input-multi-output-graph" style="width: 400px;"/>
+
+Let's implement it with the functional API.
+
+The main input will receive the headline, as a sequence of integers (each integer encodes a word).
+The integers will be between 1 and 10,000 (a vocabulary of 10,000 words) and the sequences will be 100 words long.
+
+We'll include an 
+
+
+```{r}
+library(keras)
+
+main_input <- layer_input(shape = c(100), dtype = 'int32', name = 'main_input')
+
+lstm_out <- main_input %>% 
+  layer_embedding(input_dim = 10000, output_dim = 512, input_length = 100) %>% 
+  layer_lstm(units = 32)
+```
+
+
+Here we insert the auxiliary loss, allowing the LSTM and Embedding layer to be trained smoothly even though the main loss will be much higher in the model:
+
+```{r}
+auxiliary_output <- lstm_out %>% 
+  layer_dense(units = 1, activation = 'sigmoid', name = 'aux_output')
+```
+
+At this point, we feed into the model our auxiliary input data by concatenating it with the LSTM output, stacking a deep densely-connected network on top and adding the main logistic regression layer
+
+```{r}
+auxiliary_input <- layer_input(shape = c(5), name = 'aux_input')
+
+main_output <- layer_concatenate(c(lstm_out, auxiliary_input)) %>%  
+  layer_dense(units = 64, activation = 'relu') %>% 
+  layer_dense(units = 64, activation = 'relu') %>% 
+  layer_dense(units = 64, activation = 'relu') %>% 
+  layer_dense(units = 1, activation = 'sigmoid', name = 'main_output')
+```
+
+This defines a model with two inputs and two outputs:
+
+```{r}
+model <- model(
+  inputs = c(main_input, auxiliary_input), 
+  outputs = c(main_output, auxiliary_output)
+)
+```
+
+```{r}
+summary(model)
+```
+
+
+
+We compile the model and assign a weight of 0.2 to the auxiliary loss.
+To specify different `loss_weights` or `loss` for each different output, you can use a list or a dictionary.
+Here we pass a single loss as the `loss` argument, so the same loss will be used on all outputs.
+
+```{r}
+compile(model,
+  optimizer = 'rmsprop',
+  loss = 'binary_crossentropy',
+  loss_weights = c(1.0, 0.2)
+)
+```
+
+
+We can train the model by passing it lists of input arrays and target arrays:
+
+```{r, eval = FALSE}
+fit(model,
+  x = c(headline_data, additional_data),
+  y = c(labels, labels),
+  epochs = 50,
+  batch_size = 32
+)
+```
+
+Since our inputs and outputs are named (we passed them a "name" argument),
+We could also have compiled the model via:
+
+```{r, eval = FALSE}
+compile(model,
+  optimizer = 'rmsprop',
+  loss = list(main_output = 'binary_crossentropy', aux_output = 'binary_crossentropy'),
+  loss_weights = list(main_output = 1.0, aux_output = 0.2)
+)
+
+# And trained it via:
+fit(model,
+  x = list(main_input = headline_data, aux_input = additional_data),
+  y = list(main_output = labels, aux_output = labels),
+  epochs = 50,
+  batch_size = 32
+)
+```
+
+
+
 
 
 
