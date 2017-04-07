@@ -270,8 +270,11 @@ predict.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
 summary.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object, line_length = NULL, positions = NULL, ...) {
   if (py_is_null_xptr(object))
     cat("<pointer: 0x0>\n")
-  else
-    object$summary(line_length = line_length, positions = positions)
+  else {
+    cat(py_capture_output(type = "stdout",
+      object$summary(line_length = line_length, positions = positions)
+    ), collapse = "\n")
+  }
 }
 
 #' @importFrom reticulate py_str

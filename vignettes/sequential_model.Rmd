@@ -29,6 +29,30 @@ model <- model_sequential() %>%
   layer_activation('softmax')
 ```
 
+Print a summary of the model's structure using the `summary()` function:
+
+```{r}
+summary(model)
+```
+
+```
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_1 (Dense)              (None, 32)                25120     
+_________________________________________________________________
+activation_1 (Activation)    (None, 32)                0         
+_________________________________________________________________
+dense_2 (Dense)              (None, 10)                330       
+_________________________________________________________________
+activation_2 (Activation)    (None, 10)                0         
+=================================================================
+Total params: 25,450
+Trainable params: 25,450
+Non-trainable params: 0
+_________________________________________________________________
+```
+
 ### Input Shapes
 
 The model needs to know what input shape it should expect. For this reason, the first layer in a sequential model (and only the first, because following layers can do automatic shape inference) needs to receive information about its input shape. 
