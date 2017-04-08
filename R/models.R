@@ -33,6 +33,27 @@ model_sequential <- function(layers = NULL, name = NULL) {
   keras$models$Sequential(layers = layers, name = name)
 }
 
+
+#' Convert a model to a layer function
+#' 
+#' The function can be included alongside other layers within model definitions
+#' 
+#' @inheritParams layer_dense
+#' 
+#' @param model Model created using [model()] or [sequential_model()]
+#' 
+#' @family model functions
+#' 
+#' @export
+as_layer <- function(x, model) {
+  # compose if we have an x
+  if (missing(x) || is.null(x))
+    model
+  else
+    compose_layer(x, model)
+}
+
+
 #' Configure a Keras model for training
 #' 
 #' @param model Model to compile.

@@ -23,9 +23,9 @@ If not provided, defaults to \code{c(0.33, 0.55, 0.67, 1.0)}.}
 Print a summary of a model
 }
 \seealso{
-Other model functions: \code{\link{compile}},
-  \code{\link{evaluate}}, \code{\link{fit}},
-  \code{\link{load_model}}, \code{\link{model_sequential}},
-  \code{\link{model}}, \code{\link{predict}},
-  \code{\link{save_model}}
+Other model functions: \code{\link{as_layer}},
+  \code{\link{compile}}, \code{\link{evaluate}},
+  \code{\link{fit}}, \code{\link{load_model}},
+  \code{\link{model_sequential}}, \code{\link{model}},
+  \code{\link{predict}}, \code{\link{save_model}}
 }

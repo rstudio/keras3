@@ -188,7 +188,7 @@ fit(model,
 
 With the functional API, it is easy to re-use trained models: you can treat any model as if it were a layer. Note that you aren't just re-using the architecture of the model, you are also re-using its weights.
 
-To re-use a model as a layer within another stack of layers, use the `as_layer()` function. When including a call to `as_layer()` inline be sure to surround it with parentheses so that the pipe operator (`%>%`) resolves it correctly:
+To re-use a model as a layer within another stack of layers, use the `as_layer()` function:
 
 ```{r}
 # Input tensor for sequences of 20 timesteps,
@@ -197,7 +197,7 @@ input_sequences <- layer_input(shape = c(20, 784))
 
 # This applies our previous model to the input sequence
 processed_sequences <- input_sequences %>% 
-  (as_layer(model))
+  as_layer(model)
 ```
 
 
