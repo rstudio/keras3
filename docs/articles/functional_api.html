@@ -125,7 +125,98 @@ input_sequences &lt;-<span class="st"> </span><span class="kw"><a href="../refer
 <span class="co"># the output of the previous model was a 10-way softmax,</span>
 <span class="co"># so the output of the layer below will be a sequence of 20 vectors of size 10.</span>
 processed_sequences &lt;-<span class="st"> </span>input_sequences %&gt;%<span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="../reference/time_distributed.html">time_distributed</a></span>(model) </code></pre></div>
+<span class="st">  </span><span class="kw"><a href="../reference/time_distributed.html">time_distributed</a></span>(model)</code></pre></div>
+</div>
+<div id="multi-input-and-multi-output-models" class="section level2">
+<h2 class="hasAnchor">
+<a href="#multi-input-and-multi-output-models" class="anchor"></a>Multi-input and multi-output models</h2>
+<p>Here’s a good use case for the functional API: models with multiple inputs and outputs. The functional API makes it easy to manipulate a large number of intertwined datastreams.</p>
+<p>Let’s consider the following model. We seek to predict how many retweets and likes a news headline will receive on Twitter. The main input to the model will be the headline itself, as a sequence of words, but to spice things up, our model will also have an auxiliary input, receiving extra data such as the time of day when the headline was posted, etc.</p>
+<p>The model will also be supervised via two loss functions. Using the main loss function earlier in a model is a good regularization mechanism for deep models.</p>
+<p>Here’s what our model looks like:</p>
+<p><img src="https://s3.amazonaws.com/keras.io/img/multi-input-multi-output-graph.png" alt="multi-input-multi-output-graph" style="width: 400px;"></p>
+<p>Let’s implement it with the functional API.</p>
+<p>The main input will receive the headline, as a sequence of integers (each integer encodes a word). The integers will be between 1 and 10,000 (a vocabulary of 10,000 words) and the sequences will be 100 words long.</p>
+<p>We’ll include an</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+main_input &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">100</span>), <span class="dt">dtype =</span> <span class="st">'int32'</span>, <span class="dt">name =</span> <span class="st">'main_input'</span>)
+
+lstm_out &lt;-<span class="st"> </span>main_input %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_embedding.html">layer_embedding</a></span>(<span class="dt">input_dim =</span> <span class="dv">10000</span>, <span class="dt">output_dim =</span> <span class="dv">512</span>, <span class="dt">input_length =</span> <span class="dv">100</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>)</code></pre></div>
+<p>Here we insert the auxiliary loss, allowing the LSTM and Embedding layer to be trained smoothly even though the main loss will be much higher in the model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">auxiliary_output &lt;-<span class="st"> </span>lstm_out %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>, <span class="dt">name =</span> <span class="st">'aux_output'</span>)</code></pre></div>
+<p>At this point, we feed into the model our auxiliary input data by concatenating it with the LSTM output, stacking a deep densely-connected network on top and adding the main logistic regression layer</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">auxiliary_input &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">5</span>), <span class="dt">name =</span> <span class="st">'aux_input'</span>)
+
+main_output &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(lstm_out, auxiliary_input)) %&gt;%<span class="st">  </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>, <span class="dt">name =</span> <span class="st">'main_output'</span>)</code></pre></div>
+<p>This defines a model with two inputs and two outputs:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model.html">model</a></span>(
+  <span class="dt">inputs =</span> <span class="kw">c</span>(main_input, auxiliary_input), 
+  <span class="dt">outputs =</span> <span class="kw">c</span>(main_output, auxiliary_output)
+)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/summary.html">summary</a></span>(model)</code></pre></div>
+<pre><code>Model
+____________________________________________________________________________________________________
+Layer (type)                     Output Shape          Param #     Connected to                     
+====================================================================================================
+main_input (InputLayer)          (None, 100)           0                                            
+____________________________________________________________________________________________________
+embedding_1 (Embedding)          (None, 100, 512)      5120000                                      
+____________________________________________________________________________________________________
+lstm_1 (LSTM)                    (None, 32)            69760                                        
+____________________________________________________________________________________________________
+aux_input (InputLayer)           (None, 5)             0                                            
+____________________________________________________________________________________________________
+concatenate_1 (Concatenate)      (None, 37)            0                                            
+____________________________________________________________________________________________________
+dense_1 (Dense)                  (None, 64)            2432                                         
+____________________________________________________________________________________________________
+dense_2 (Dense)                  (None, 64)            4160                                         
+____________________________________________________________________________________________________
+dense_3 (Dense)                  (None, 64)            4160                                         
+____________________________________________________________________________________________________
+main_output (Dense)              (None, 1)             65                                           
+____________________________________________________________________________________________________
+aux_output (Dense)               (None, 1)             33                                           
+====================================================================================================
+Total params: 5,200,610
+Trainable params: 5,200,610
+Non-trainable params: 0
+____________________________________________________________________________________________________</code></pre>
+<p>We compile the model and assign a weight of 0.2 to the auxiliary loss. To specify different <code>loss_weights</code> or <code>loss</code> for each different output, you can use a list or a dictionary. Here we pass a single loss as the <code>loss</code> argument, so the same loss will be used on all outputs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/compile.html">compile</a></span>(model,
+  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+  <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
+  <span class="dt">loss_weights =</span> <span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.2</span>)
+)</code></pre></div>
+<p>We can train the model by passing it lists of input arrays and target arrays:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/fit.html">fit</a></span>(model,
+  <span class="dt">x =</span> <span class="kw">c</span>(headline_data, additional_data),
+  <span class="dt">y =</span> <span class="kw">c</span>(labels, labels),
+  <span class="dt">epochs =</span> <span class="dv">50</span>,
+  <span class="dt">batch_size =</span> <span class="dv">32</span>
+)</code></pre></div>
+<p>Since our inputs and outputs are named (we passed them a “name” argument), We could also have compiled the model via:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/compile.html">compile</a></span>(model,
+  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+  <span class="dt">loss =</span> <span class="kw">list</span>(<span class="dt">main_output =</span> <span class="st">'binary_crossentropy'</span>, <span class="dt">aux_output =</span> <span class="st">'binary_crossentropy'</span>),
+  <span class="dt">loss_weights =</span> <span class="kw">list</span>(<span class="dt">main_output =</span> <span class="fl">1.0</span>, <span class="dt">aux_output =</span> <span class="fl">0.2</span>)
+)
+
+<span class="co"># And trained it via:</span>
+<span class="kw"><a href="../reference/fit.html">fit</a></span>(model,
+  <span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">main_input =</span> headline_data, <span class="dt">aux_input =</span> additional_data),
+  <span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">main_output =</span> labels, <span class="dt">aux_output =</span> labels),
+  <span class="dt">epochs =</span> <span class="dv">50</span>,
+  <span class="dt">batch_size =</span> <span class="dv">32</span>
+)</code></pre></div>
 </div>
 </div>
   </div>
@@ -136,6 +227,7 @@ processed_sequences &lt;-<span class="st"> </span>input_sequences %&gt;%<span cl
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#first-example-a-densely-connected-network">First example: a densely-connected network</a></li>
       <li><a href="#models-can-be-treated-like-layers">Models can be treated like layers</a></li>
+      <li><a href="#multi-input-and-multi-output-models">Multi-input and multi-output models</a></li>
       </ul>
 </div>
       </div>
