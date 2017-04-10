@@ -35,6 +35,7 @@ Configure a Keras model for training
 Other model functions: \code{\link{evaluate}},
   \code{\link{fit}}, \code{\link{keras_model_sequential}},
   \code{\link{keras_model}}, \code{\link{load_model}},
-  \code{\link{predict}}, \code{\link{save_model}},
+  \code{\link{load_weights}}, \code{\link{predict}},
+  \code{\link{save_model}}, \code{\link{save_weights}},
   \code{\link{summary}}
 }

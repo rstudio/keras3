@@ -19,6 +19,7 @@ Load a Keras model from an HDF5 file
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate}}, \code{\link{fit}},
   \code{\link{keras_model_sequential}},
-  \code{\link{keras_model}}, \code{\link{predict}},
-  \code{\link{save_model}}, \code{\link{summary}}
+  \code{\link{keras_model}}, \code{\link{load_weights}},
+  \code{\link{predict}}, \code{\link{save_model}},
+  \code{\link{save_weights}}, \code{\link{summary}}
 }

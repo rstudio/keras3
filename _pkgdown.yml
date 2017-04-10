@@ -37,6 +37,8 @@ reference:
       - summary
       - save_model
       - load_model
+      - save_weights
+      - load_weights
       
   - title: "Core Layers"
     contents:

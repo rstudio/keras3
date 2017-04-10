@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Train a Keras model — fit • keras</title>
+<title>Dumps all layer weights to a HDF5 file. — save_weights • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -98,104 +98,52 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Train a Keras model</h1>
+    <h1>Dumps all layer weights to a HDF5 file.</h1>
     </div>
 
     
-    <p>Trains the model for a fixed number of epochs (iterations on a dataset).</p>
+    <p>Dumps all layer weights to a HDF5 file.</p>
     
 
-    <pre><span class='fu'>fit</span>(<span class='no'>model</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_split</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre><span class='fu'>save_weights</span>(<span class='no'>model</span>, <span class='no'>filepath</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>Model to train.</p></td>
+      <td><p>Model to save weights for</p></td>
     </tr>
     <tr>
-      <th>x</th>
-      <td><p>Vector, matrix, or array of training data (or list if the model has
-multiple inputs). If all inputs in the model are named, you can also pass a
-list mapping input names to data.</p></td>
+      <th>filepath</th>
+      <td><p>Path to the file to save the weights to</p></td>
     </tr>
     <tr>
-      <th>y</th>
-      <td><p>Vector, matrix, or array of target data (or list if the model has
-multiple outputs). If all outputs in the model are named, you can also pass
-a list mapping output names to data.</p></td>
-    </tr>
-    <tr>
-      <th>batch_size</th>
-      <td><p>Number of samples per gradient update.</p></td>
-    </tr>
-    <tr>
-      <th>epochs</th>
-      <td><p>Number of times to iterate over the training data arrays.</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
-epoch).</p></td>
-    </tr>
-    <tr>
-      <th>callbacks</th>
-      <td><p>List of callbacks to be called during training.</p></td>
-    </tr>
-    <tr>
-      <th>validation_split</th>
-      <td><p>Float between 0 and 1: fraction of the training data
-to be used as validation data. The model will set apart this fraction of
-the training data, will not train on it, and will evaluate the loss and any
-model metrics on this data at the end of each epoch.</p></td>
-    </tr>
-    <tr>
-      <th>validation_data</th>
-      <td><p>Data on which to evaluate the loss and any model
-metrics at the end of each epoch. The model will not be trained on this
-data. This could be a list (x_val, y_val) or a list (x_val, y_val,
-val_sample_weights).</p></td>
-    </tr>
-    <tr>
-      <th>shuffle</th>
-      <td><p><code>TRUE</code> to shuffle the training data before each epoch.</p></td>
-    </tr>
-    <tr>
-      <th>class_weight</th>
-      <td><p>Optional named list mapping indices (integers) to a
-weight (float) to apply to the model's loss for the samples from this class
-during training. This can be useful to tell the model to "pay more
-attention" to samples from an under-represented class.</p></td>
-    </tr>
-    <tr>
-      <th>sample_weight</th>
-      <td><p>Optional array of the same length as x, containing
-weights to apply to the model's loss for each sample. In the case of
-temporal data, you can pass a 2D array with shape (samples,
-sequence_length), to apply a different weight to every timestep of every
-sample. In this case you should make sure to specify
-sample_weight_mode="temporal" in <code><a href='compile.html'>compile()</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>initial_epoch</th>
-      <td><p>epoch at which to start training (useful for resuming a
-previous training run).</p></td>
+      <th>overwrite</th>
+      <td><p>Whether to silently overwrite any existing
+file at the target location</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The weight file has:</p><ul>
+<li><p><code>layer_names</code> (attribute), a list of strings (ordered names of model layers).</p></li>
+<li><p>For every layer, a <code>group</code> named <code>layer.name</code></p></li>
+<li><p>For every such layer group, a group attribute <code>weight_names</code>, a list of strings
+(ordered names of weights tensor of the layer).</p></li>
+<li><p>For every weight in the layer, a dataset storing the weight value, named after
+the weight tensor.</p></li>
+</ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
-  <code><a href='evaluate.html'>evaluate</a></code>,
+  <code><a href='evaluate.html'>evaluate</a></code>, <code><a href='fit.html'>fit</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
   <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='load_model.html'>load_model</a></code>,
   <code><a href='load_weights.html'>load_weights</a></code>, <code><a href='predict.html'>predict</a></code>,
-  <code><a href='save_model.html'>save_model</a></code>, <code><a href='save_weights.html'>save_weights</a></code>,
-  <code><a href='summary.html'>summary</a></code></p>
+  <code><a href='save_model.html'>save_model</a></code>, <code><a href='summary.html'>summary</a></code></p>
     
 
   </div>
@@ -204,6 +152,8 @@ previous training run).</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#details">Details</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 

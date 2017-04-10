@@ -202,9 +202,16 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
 #' 
 #' @export
 save_model <- function(model, filepath, overwrite = TRUE) {
+  
   if (!have_h5py())
     stop("The h5py Python package is required to save and load models")
-  keras$models$save_model(model = model, filepath = filepath, overwrite = overwrite)
+  
+  if (confirm_overwrite(filepath, overwrite)) {
+    keras$models$save_model(model = model, filepath = filepath, overwrite = overwrite)
+    invisible(TRUE) 
+  } else {
+    invisible(FALSE)
+  }
 }
 
 
@@ -221,6 +228,63 @@ load_model <- function(filepath, custom_objects = NULL) {
   if (!have_h5py())
     stop("The h5py Python package is required to save and load models")
   keras$models$load_model(filepath = filepath, custom_objects = custom_objects)
+}
+
+
+#' Dumps all layer weights to a HDF5 file.
+#' 
+#' @param model Model to save weights for
+#' @param filepath Path to the file to save the weights to
+#' @param overwrite Whether to silently overwrite any existing
+#'   file at the target location
+#' 
+#' @details The weight file has:
+#'   - `layer_names` (attribute), a list of strings (ordered names of model layers).
+#'   - For every layer, a `group` named `layer.name`
+#'   - For every such layer group, a group attribute `weight_names`, a list of strings
+#'     (ordered names of weights tensor of the layer).
+#'  - For every weight in the layer, a dataset storing the weight value, named after 
+#'    the weight tensor.
+#' 
+#' @family model functions
+#' 
+#' @export
+save_weights <- function(model, filepath, overwrite = TRUE) {
+  
+  if (!have_h5py())
+    stop("The h5py Python package is required to save and load model weights")
+  
+  if (confirm_overwrite(filepath, overwrite)) {
+    model$save_weights(filepath = filepath, overwrite = overwrite)
+    invisible(TRUE)
+  } else {
+    invisible(FALSE)
+  }
+}
+
+#' Loads all layer weights from a HDF5 save file.
+#' 
+#' @param model Model to load weights into
+#' @param filepath Path to the weights file to load.
+#' @param by_name Whether to load weights by name or by topological order.
+#'   
+#' @details If `by_name` is `FALSE` (default) weights are loaded based on the 
+#'   network's topology, meaning the architecture should be the same as when the
+#'   weights were saved. Note that layers that don't have weights are not taken 
+#'   into account in the topological ordering, so adding or removing layers is 
+#'   fine as long as they don't have weights.
+#'   
+#'   If `by_name` is `TRUE``, weights are loaded into layers only if they share
+#'   the same name. This is useful for fine-tuning or transfer-learning models
+#'   where some of the layers have changed.
+#'   
+#' @family model functions
+#'   
+#' @export
+load_weights <- function(model, filepath, by_name = FALSE) {
+  if (!have_h5py())
+    stop("The h5py Python package is required to save and load model weights")
+  invisible(model$load_weights(filepath = filepath, by_name = by_name))
 }
 
 
@@ -286,6 +350,24 @@ py_str.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(o
 have_h5py <- function() {
   tryCatch({ import("h5py"); TRUE; }, error = function(e) FALSE)
 }
+
+confirm_overwrite <- function(filepath, overwrite) {
+  if (overwrite)
+    TRUE 
+  else {
+    if (file.exists(filepath)) {
+      if (interactive()) {
+        prompt <- readline(sprintf("[WARNING] %s already exists - overwrite? [y/n] ", filepath))
+        tolower(prompt) == 'y'
+      } else {
+        stop("File '", filepath, "' already exists (pass overwrite = TRUE to force save).", 
+             call. = FALSE)
+      }
+    } else {
+      TRUE
+    }
+  }
+} 
 
 
 

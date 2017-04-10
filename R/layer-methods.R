@@ -1,8 +1,46 @@
 
 
+# Article named "About Keras Models and Layers# which documents these methods + the multi-input stuff
+
+# or article named:
+
+# "Model and Layer Objects"
+
+
 # see: https://keras.io/models/about-keras-models/
 
 # see: https://keras.io/layers/about-keras-layers/
+
+# properties (https://github.com/fchollet/keras/blob/master/keras/engine/topology.py#L182-L214)
+
+# name
+# input_spec
+# trainable
+# uses_learning_phase
+# input_shape
+# output_shape
+# inbound_nodes
+# input
+# output
+# input_mask
+# output_mask
+# trainable_weights
+# non_trainable_weights
+# weights
+# constraints
+
+# methods (https://github.com/fchollet/keras/blob/master/keras/engine/topology.py#L216-L236)
+
+# set_weights(weights)
+# get_config()
+# from_config(config)
+# count_params()
+# get_input_at(node_index)
+# get_output_at(node_index)
+# get_input_shape_at(node_index)
+# get_output_shape_at(node_index)
+# get_input_mask_at(node_index)
+# get_output_mask_at(node_index)
 
 
 #  Current weights of a layer

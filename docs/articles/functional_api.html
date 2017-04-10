@@ -254,50 +254,6 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras
 )
 
 <span class="kw"><a href="../reference/fit.html">fit</a></span>(model, <span class="kw">c</span>(data_a, data_b), labels, <span class="dt">epochs =</span> <span class="dv">10</span>)</code></pre></div>
-<p>Let’s pause to take a look at how to read the shared layer’s output or output shape.</p>
-</div>
-<div id="the-concept-of-layer-node" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-concept-of-layer-node" class="anchor"></a>The concept of layer “node”</h2>
-<p>Whenever you are calling a layer on some input, you are creating a new tensor (the output of the layer), and you are adding a “node” to the layer, linking the input tensor to the output tensor. When you are calling the same layer multiple times, that layer owns multiple nodes indexed as 0, 1, 2…</p>
-<p>In previous versions of Keras, you could obtain the output tensor of a layer instance via <code>layer.get_output()</code>, or its output shape via <code>layer.output_shape</code>. You still can (except <code>get_output()</code> has been replaced by the property <code>output</code>). But what if a layer is connected to multiple inputs?</p>
-<p>As long as a layer is only connected to one input, there is no confusion, and <code>.output</code> will return the one output of the layer:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">140</span>, <span class="dv">256</span>))
-
-lstm <span class="op">=</span> LSTM(<span class="dv">32</span>)
-encoded_a <span class="op">=</span> lstm(a)
-
-<span class="cf">assert</span> lstm.output <span class="op">==</span> encoded_a</code></pre></div>
-<p>Not so if the layer has multiple inputs:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">140</span>, <span class="dv">256</span>))
-b <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">140</span>, <span class="dv">256</span>))
-
-lstm <span class="op">=</span> LSTM(<span class="dv">32</span>)
-encoded_a <span class="op">=</span> lstm(a)
-encoded_b <span class="op">=</span> lstm(b)
-
-lstm.output</code></pre></div>
-<pre><code>&gt;&gt; AssertionError: Layer lstm_1 has multiple inbound nodes,
-hence the notion of "layer output" is ill-defined.
-Use `get_output_at(node_index)` instead.</code></pre>
-<p>Okay then. The following works:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">assert</span> lstm.get_output_at(<span class="dv">0</span>) <span class="op">==</span> encoded_a
-<span class="cf">assert</span> lstm.get_output_at(<span class="dv">1</span>) <span class="op">==</span> encoded_b</code></pre></div>
-<p>Simple enough, right?</p>
-<p>The same is true for the properties <code>input_shape</code> and <code>output_shape</code>: as long as the layer has only one node, or as long as all nodes have the same input/output shape, then the notion of “layer output/input shape” is well defined, and that one shape will be returned by <code>layer.output_shape</code>/<code>layer.input_shape</code>. But if, for instance, you apply a same <code>Conv2D</code> layer to an input of shape <code>(3, 32, 32)</code>, and then to an input of shape <code>(3, 64, 64)</code>, the layer will have multiple input/output shapes, and you will have to fetch them by specifying the index of the node they belong to:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">32</span>, <span class="dv">32</span>))
-b <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">64</span>, <span class="dv">64</span>))
-
-conv <span class="op">=</span> Conv2D(<span class="dv">16</span>, (<span class="dv">3</span>, <span class="dv">3</span>), padding<span class="op">=</span><span class="st">'same'</span>)
-conved_a <span class="op">=</span> conv(a)
-
-<span class="co"># Only one input so far, the following will work:</span>
-<span class="cf">assert</span> conv.input_shape <span class="op">==</span> (<span class="va">None</span>, <span class="dv">3</span>, <span class="dv">32</span>, <span class="dv">32</span>)
-
-conved_b <span class="op">=</span> conv(b)
-<span class="co"># now the `.input_shape` property wouldn't work, but this does:</span>
-<span class="cf">assert</span> conv.get_input_shape_at(<span class="dv">0</span>) <span class="op">==</span> (<span class="va">None</span>, <span class="dv">3</span>, <span class="dv">32</span>, <span class="dv">32</span>)
-<span class="cf">assert</span> conv.get_input_shape_at(<span class="dv">1</span>) <span class="op">==</span> (<span class="va">None</span>, <span class="dv">3</span>, <span class="dv">64</span>, <span class="dv">64</span>)</code></pre></div>
 </div>
 <div id="more-examples" class="section level2">
 <h2 class="hasAnchor">
@@ -440,7 +396,6 @@ video_qa_model &lt;-<span class="st"> </span><span class="kw"><a href="../refere
       <li><a href="#all-models-are-callable-just-like-layers">All models are callable, just like layers</a></li>
       <li><a href="#multi-input-and-multi-output-models">Multi-input and multi-output models</a></li>
       <li><a href="#shared-layers">Shared layers</a></li>
-      <li><a href="#the-concept-of-layer-node">The concept of layer “node”</a></li>
       <li><a href="#more-examples">More examples</a></li>
       </ul>
 </div>

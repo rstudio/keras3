@@ -38,3 +38,14 @@ test_succeeds("model can be saved and loaded", {
   model <- load_model(tmp)
 })
 
+test_succeeds("model weights can be saved and loaded", {
+  
+  if (!keras:::have_h5py())
+    skip("h5py not available for testing")
+  
+  model <- define_and_compile_model()
+  tmp <- tempfile("model", fileext = ".hdf5")
+  save_weights(model, tmp)
+  load_weights(model, tmp)
+})
+
