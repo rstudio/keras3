@@ -95,7 +95,7 @@ compose_layer <- function(x, layer) {
     # if a layer is passed then wrap the layer
   } else if (is_layer(x)) {
     
-    layer$`__call__`(x)
+    layer(x)
     
     # otherwie it's an unexpected type
   } else {
