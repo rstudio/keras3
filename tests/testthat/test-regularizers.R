@@ -5,7 +5,7 @@ source("utils.R")
 test_regularizer <- function(name) {
   regularizer_fn <- eval(parse(text = name))
   test_call_succeeds(name, {
-    model_sequential() %>% 
+    keras_model_sequential() %>% 
       layer_dense(32, input_shape = shape(784), 
                   kernel_regularizer = regularizer_fn(),
                   activity_regularizer = regularizer_fn())

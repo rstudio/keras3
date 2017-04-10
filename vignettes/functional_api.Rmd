@@ -38,13 +38,36 @@ predictions <- inputs %>%
   layer_dense(units = 10, activation = 'softmax')
 
 # create and compile model
-model <- model(inputs = inputs, outputs = predictions) %>%
+model <- keras_model(inputs = inputs, outputs = predictions) %>%
   compile(
     optimizer = 'rmsprop',
     loss = 'categorical_crossentropy',
     metrics = c('accuracy')
   )
 ```
+
+## All models are callable, just like layers
+
+With the functional API, it is easy to re-use trained models: you can treat any model as if it were a layer. Note that you aren't just re-using the architecture of the model, you are also re-using its weights.
+
+```{r}
+x <- layer_input(shape = c(784))
+# This works, and returns the 10-way softmax we defined above.
+y <- x %>% model
+```
+
+This can allow, for instance, to quickly create models that can process sequences of inputs. You could turn an image classification model into a video classification model, in just one line:
+
+```{r}
+# Input tensor for sequences of 20 timesteps,
+# each containing a 784-dimensional vector
+input_sequences <- layer_input(shape = c(20, 784))
+
+# This applies our previous model to the input sequence
+processed_sequences <- input_sequences %>%
+  time_distributed(model)
+```
+
 
 ## Multi-input and multi-output models
 
@@ -99,7 +122,7 @@ main_output <- layer_concatenate(c(lstm_out, auxiliary_input)) %>%
 This defines a model with two inputs and two outputs:
 
 ```{r}
-model <- model(
+model <- keras_model(
   inputs = c(main_input, auxiliary_input), 
   outputs = c(main_output, auxiliary_output)
 )
@@ -111,33 +134,33 @@ summary(model)
 
 ```
 Model
-____________________________________________________________________________________________________
-Layer (type)                     Output Shape          Param #     Connected to                     
-====================================================================================================
-main_input (InputLayer)          (None, 100)           0                                            
-____________________________________________________________________________________________________
-embedding_1 (Embedding)          (None, 100, 512)      5120000                                      
-____________________________________________________________________________________________________
-lstm_1 (LSTM)                    (None, 32)            69760                                        
-____________________________________________________________________________________________________
-aux_input (InputLayer)           (None, 5)             0                                            
-____________________________________________________________________________________________________
-concatenate_1 (Concatenate)      (None, 37)            0                                            
-____________________________________________________________________________________________________
-dense_1 (Dense)                  (None, 64)            2432                                         
-____________________________________________________________________________________________________
-dense_2 (Dense)                  (None, 64)            4160                                         
-____________________________________________________________________________________________________
-dense_3 (Dense)                  (None, 64)            4160                                         
-____________________________________________________________________________________________________
-main_output (Dense)              (None, 1)             65                                           
-____________________________________________________________________________________________________
-aux_output (Dense)               (None, 1)             33                                           
-====================================================================================================
+__________________________________________________________________________________________
+Layer (type)                 Output Shape        Param #    Connected to                  
+==========================================================================================
+main_input (InputLayer)      (None, 100)         0                                        
+__________________________________________________________________________________________
+embedding_1 (Embedding)      (None, 100, 512)    5120000                                  
+__________________________________________________________________________________________
+lstm_1 (LSTM)                (None, 32)          69760                                    
+__________________________________________________________________________________________
+aux_input (InputLayer)       (None, 5)           0                                        
+__________________________________________________________________________________________
+concatenate_1 (Concatenate)  (None, 37)          0                                        
+__________________________________________________________________________________________
+dense_1 (Dense)              (None, 64)          2432                                     
+__________________________________________________________________________________________
+dense_2 (Dense)              (None, 64)          4160                                     
+__________________________________________________________________________________________
+dense_3 (Dense)              (None, 64)          4160                                     
+__________________________________________________________________________________________
+main_output (Dense)          (None, 1)           65                                       
+__________________________________________________________________________________________
+aux_output (Dense)           (None, 1)           33                                       
+==========================================================================================
 Total params: 5,200,610
 Trainable params: 5,200,610
 Non-trainable params: 0
-____________________________________________________________________________________________________
+__________________________________________________________________________________________
 ```
 
 We compile the model and assign a weight of 0.2 to the auxiliary loss.
@@ -184,23 +207,6 @@ fit(model,
 ```
 
 
-## Models can be treated like layers
-
-With the functional API, it is easy to re-use trained models: you can treat any model as if it were a layer. Note that you aren't just re-using the architecture of the model, you are also re-using its weights.
-
-To re-use a model as a layer within another stack of layers, use the `as_layer()` function:
-
-```{r}
-# Input tensor for sequences of 20 timesteps,
-# each containing a 784-dimensional vector
-input_sequences <- layer_input(shape = c(20, 784))
-
-# This applies our previous model to the input sequence
-processed_sequences <- input_sequences %>% 
-  as_layer(model)
-```
-
-
 ## Shared layers
 
 Another good use for the functional API are models that use shared layers. Let's take a look at shared layers.
@@ -221,59 +227,36 @@ tweet_a <- layer_input(shape = c(140, 256))
 tweet_b <- layer_input(shape = c(140, 256))
 ```
 
-
 To share a layer across different inputs, simply instantiate the layer once, then call it on as many inputs as you want:
 
-```{r}
+```{r eval=FALSE}
 # This layer can take as input a matrix and will return a vector of size 64
 shared_lstm <- layer_lstm(units = 64)
 
-# When we reuse the same layer instance multiple times, the weights of the layer are also being reused
-# (it is effectively *the same* layer)
+# When we reuse the same layer instance multiple times, the weights of the layer are also
+# being reused (it is effectively *the same* layer)
 encoded_a <- tweet_a %>% shared_lstm
 encoded_b <- tweet_b %>% shared_lstm
 
-# We can then concatenate the two vectors:
-merged_vector <- layer_concatenate(c(encoded_a, encoded_b), axis=-1)
+# We can then concatenate the two vectors and add a logistic regression on top
+predictions <- layer_concatenate(c(encoded_a, encoded_b), axis=-1) %>% 
+  layer_dense(units = 1, activation = 'sigmoid')
 
-```
+# We define a trainable model linking the tweet inputs to the predictions
+model <- keras_model(inputs = c(tweet_a, tweet_b), outputs = predictions)
 
-The problem is that callable Python objects don't manifest as R functions. We can beat this to some extent by returning an R function with a "py_object" embedded. This works okay but every S3 method needs to be implemented for py_callable to delegate to the py_object. Even with this in place the obfuscating of the type info makes it hard to write other S3 methods or call inherits.
+compile(model,
+  optimizer = 'rmsprop',
+  loss = 'binary_crossentropy',
+  metrics = c('accuracy')
+)
 
+fit(model, c(data_a, data_b), labels, epochs = 10)
 
-
-
-```python
-# This layer can take as input a matrix
-# and will return a vector of size 64
-shared_lstm = LSTM(64)
-
-# When we reuse the same layer instance
-# multiple times, the weights of the layer
-# are also being reused
-# (it is effectively *the same* layer)
-encoded_a = shared_lstm(tweet_a)
-encoded_b = shared_lstm(tweet_b)
-
-# We can then concatenate the two vectors:
-merged_vector = keras.layers.concatenate([encoded_a, encoded_b], axis=-1)
-
-# And add a logistic regression on top
-predictions = Dense(1, activation='sigmoid')(merged_vector)
-
-# We define a trainable model linking the
-# tweet inputs to the predictions
-model = Model(inputs=[tweet_a, tweet_b], outputs=predictions)
-
-model.compile(optimizer='rmsprop',
-              loss='binary_crossentropy',
-              metrics=['accuracy'])
-model.fit([data_a, data_b], labels, epochs=10)
 ```
 
 Let's pause to take a look at how to read the shared layer's output or output shape.
 
------
 
 ## The concept of layer "node"
 

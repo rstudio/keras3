@@ -32,7 +32,7 @@ Here is the Sequential model:
 ```{r}
 library(keras)
 
-model <- model_sequential() %>% 
+model <- keras_model_sequential() %>% 
   layer_dense(units = 64, input_shape = 100) %>% 
   layer_activation(activation = 'relu') %>% 
   layer_dense(units = 10) %>% 

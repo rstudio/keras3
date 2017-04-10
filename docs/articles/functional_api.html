@@ -79,7 +79,7 @@
       <h1>Guide to the Functional API</h1>
                         <h4 class="author">JJ Allaire</h4>
             
-            <h4 class="date">2017-04-07</h4>
+            <h4 class="date">2017-04-10</h4>
           </div>
 
     
@@ -92,7 +92,7 @@
 <h2 class="hasAnchor">
 <a href="#first-example-a-densely-connected-network" class="anchor"></a>First example: a densely-connected network</h2>
 <p>The <a href="sequential_model.html">Sequential</a> model is probably a better choice to implement such a network, but it helps to start with something really simple.</p>
-<p>To use the functional API, build your input and output layers and then pass them to the <code><a href="../reference/model.html">model()</a></code> function. This model can be trained just like Keras sequential models.</p>
+<p>To use the functional API, build your input and output layers and then pass them to the <code>model()</code> function. This model can be trained just like Keras sequential models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
 <span class="co"># input layer</span>
@@ -105,26 +105,27 @@ predictions &lt;-<span class="st"> </span>inputs %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>)
 
 <span class="co"># create and compile model</span>
-model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model.html">model</a></span>(<span class="dt">inputs =</span> inputs, <span class="dt">outputs =</span> predictions) %&gt;%
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> inputs, <span class="dt">outputs =</span> predictions) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
     <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
     <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
     <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
   )</code></pre></div>
 </div>
-<div id="models-can-be-treated-like-layers" class="section level2">
+<div id="all-models-are-callable-just-like-layers" class="section level2">
 <h2 class="hasAnchor">
-<a href="#models-can-be-treated-like-layers" class="anchor"></a>Models can be treated like layers</h2>
+<a href="#all-models-are-callable-just-like-layers" class="anchor"></a>All models are callable, just like layers</h2>
 <p>With the functional API, it is easy to re-use trained models: you can treat any model as if it were a layer. Note that you aren’t just re-using the architecture of the model, you are also re-using its weights.</p>
-<p>This can allow you to for instance quickly create models that can process sequences of inputs. You could turn an image classification model into a video classification model, in just one line:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">784</span>))
+<span class="co"># This works, and returns the 10-way softmax we defined above.</span>
+y &lt;-<span class="st"> </span>x %&gt;%<span class="st"> </span>model</code></pre></div>
+<p>This can allow, for instance, to quickly create models that can process sequences of inputs. You could turn an image classification model into a video classification model, in just one line:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Input tensor for sequences of 20 timesteps,</span>
 <span class="co"># each containing a 784-dimensional vector</span>
 input_sequences &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">784</span>))
 
-<span class="co"># This applies our previous model to every timestep in the input sequences.</span>
-<span class="co"># the output of the previous model was a 10-way softmax,</span>
-<span class="co"># so the output of the layer below will be a sequence of 20 vectors of size 10.</span>
-processed_sequences &lt;-<span class="st"> </span>input_sequences %&gt;%<span class="st"> </span>
+<span class="co"># This applies our previous model to the input sequence</span>
+processed_sequences &lt;-<span class="st"> </span>input_sequences %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/time_distributed.html">time_distributed</a></span>(model)</code></pre></div>
 </div>
 <div id="multi-input-and-multi-output-models" class="section level2">
@@ -157,39 +158,39 @@ main_output &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>, <span class="dt">name =</span> <span class="st">'main_output'</span>)</code></pre></div>
 <p>This defines a model with two inputs and two outputs:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model.html">model</a></span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(
   <span class="dt">inputs =</span> <span class="kw">c</span>(main_input, auxiliary_input), 
   <span class="dt">outputs =</span> <span class="kw">c</span>(main_output, auxiliary_output)
 )</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/summary.html">summary</a></span>(model)</code></pre></div>
 <pre><code>Model
-____________________________________________________________________________________________________
-Layer (type)                     Output Shape          Param #     Connected to                     
-====================================================================================================
-main_input (InputLayer)          (None, 100)           0                                            
-____________________________________________________________________________________________________
-embedding_1 (Embedding)          (None, 100, 512)      5120000                                      
-____________________________________________________________________________________________________
-lstm_1 (LSTM)                    (None, 32)            69760                                        
-____________________________________________________________________________________________________
-aux_input (InputLayer)           (None, 5)             0                                            
-____________________________________________________________________________________________________
-concatenate_1 (Concatenate)      (None, 37)            0                                            
-____________________________________________________________________________________________________
-dense_1 (Dense)                  (None, 64)            2432                                         
-____________________________________________________________________________________________________
-dense_2 (Dense)                  (None, 64)            4160                                         
-____________________________________________________________________________________________________
-dense_3 (Dense)                  (None, 64)            4160                                         
-____________________________________________________________________________________________________
-main_output (Dense)              (None, 1)             65                                           
-____________________________________________________________________________________________________
-aux_output (Dense)               (None, 1)             33                                           
-====================================================================================================
+__________________________________________________________________________________________
+Layer (type)                 Output Shape        Param #    Connected to                  
+==========================================================================================
+main_input (InputLayer)      (None, 100)         0                                        
+__________________________________________________________________________________________
+embedding_1 (Embedding)      (None, 100, 512)    5120000                                  
+__________________________________________________________________________________________
+lstm_1 (LSTM)                (None, 32)          69760                                    
+__________________________________________________________________________________________
+aux_input (InputLayer)       (None, 5)           0                                        
+__________________________________________________________________________________________
+concatenate_1 (Concatenate)  (None, 37)          0                                        
+__________________________________________________________________________________________
+dense_1 (Dense)              (None, 64)          2432                                     
+__________________________________________________________________________________________
+dense_2 (Dense)              (None, 64)          4160                                     
+__________________________________________________________________________________________
+dense_3 (Dense)              (None, 64)          4160                                     
+__________________________________________________________________________________________
+main_output (Dense)          (None, 1)           65                                       
+__________________________________________________________________________________________
+aux_output (Dense)           (None, 1)           33                                       
+==========================================================================================
 Total params: 5,200,610
 Trainable params: 5,200,610
 Non-trainable params: 0
-____________________________________________________________________________________________________</code></pre>
+__________________________________________________________________________________________</code></pre>
 <p>We compile the model and assign a weight of 0.2 to the auxiliary loss. To specify different <code>loss_weights</code> or <code>loss</code> for each different output, you can use a list or a dictionary. Here we pass a single loss as the <code>loss</code> argument, so the same loss will be used on all outputs.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/compile.html">compile</a></span>(model,
   <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
@@ -218,6 +219,222 @@ ________________________________________________________________________________
   <span class="dt">batch_size =</span> <span class="dv">32</span>
 )</code></pre></div>
 </div>
+<div id="shared-layers" class="section level2">
+<h2 class="hasAnchor">
+<a href="#shared-layers" class="anchor"></a>Shared layers</h2>
+<p>Another good use for the functional API are models that use shared layers. Let’s take a look at shared layers.</p>
+<p>Let’s consider a dataset of tweets. We want to build a model that can tell whether two tweets are from the same person or not (this can allow us to compare users by the similarity of their tweets, for instance).</p>
+<p>One way to achieve this is to build a model that encodes two tweets into two vectors, concatenates the vectors and adds a logistic regression of top, outputting a probability that the two tweets share the same author. The model would then be trained on positive tweet pairs and negative tweet pairs.</p>
+<p>Because the problem is symmetric, the mechanism that encodes the first tweet should be reused (weights and all) to encode the second tweet. Here we use a shared LSTM layer to encode the tweets.</p>
+<p>Let’s build this with the functional API. We will take as input for a tweet a binary matrix of shape <code>(140, 256)</code>, i.e. a sequence of 140 vectors of size 256, where each dimension in the 256-dimensional vector encodes the presence/absence of a character (out of an alphabet of 256 frequent characters).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+tweet_a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))
+tweet_b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))</code></pre></div>
+<p>To share a layer across different inputs, simply instantiate the layer once, then call it on as many inputs as you want:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This layer can take as input a matrix and will return a vector of size 64</span>
+shared_lstm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">64</span>)
+
+<span class="co"># When we reuse the same layer instance multiple times, the weights of the layer are also</span>
+<span class="co"># being reused (it is effectively *the same* layer)</span>
+encoded_a &lt;-<span class="st"> </span>tweet_a %&gt;%<span class="st"> </span>shared_lstm
+encoded_b &lt;-<span class="st"> </span>tweet_b %&gt;%<span class="st"> </span>shared_lstm
+
+<span class="co"># We can then concatenate the two vectors and add a logistic regression on top</span>
+predictions &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(encoded_a, encoded_b), <span class="dt">axis=</span>-<span class="dv">1</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>)
+
+<span class="co"># We define a trainable model linking the tweet inputs to the predictions</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> <span class="kw">c</span>(tweet_a, tweet_b), <span class="dt">outputs =</span> predictions)
+
+<span class="kw"><a href="../reference/compile.html">compile</a></span>(model,
+  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+  <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
+  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+)
+
+<span class="kw"><a href="../reference/fit.html">fit</a></span>(model, <span class="kw">c</span>(data_a, data_b), labels, <span class="dt">epochs =</span> <span class="dv">10</span>)</code></pre></div>
+<p>Let’s pause to take a look at how to read the shared layer’s output or output shape.</p>
+</div>
+<div id="the-concept-of-layer-node" class="section level2">
+<h2 class="hasAnchor">
+<a href="#the-concept-of-layer-node" class="anchor"></a>The concept of layer “node”</h2>
+<p>Whenever you are calling a layer on some input, you are creating a new tensor (the output of the layer), and you are adding a “node” to the layer, linking the input tensor to the output tensor. When you are calling the same layer multiple times, that layer owns multiple nodes indexed as 0, 1, 2…</p>
+<p>In previous versions of Keras, you could obtain the output tensor of a layer instance via <code>layer.get_output()</code>, or its output shape via <code>layer.output_shape</code>. You still can (except <code>get_output()</code> has been replaced by the property <code>output</code>). But what if a layer is connected to multiple inputs?</p>
+<p>As long as a layer is only connected to one input, there is no confusion, and <code>.output</code> will return the one output of the layer:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">140</span>, <span class="dv">256</span>))
+
+lstm <span class="op">=</span> LSTM(<span class="dv">32</span>)
+encoded_a <span class="op">=</span> lstm(a)
+
+<span class="cf">assert</span> lstm.output <span class="op">==</span> encoded_a</code></pre></div>
+<p>Not so if the layer has multiple inputs:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">140</span>, <span class="dv">256</span>))
+b <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">140</span>, <span class="dv">256</span>))
+
+lstm <span class="op">=</span> LSTM(<span class="dv">32</span>)
+encoded_a <span class="op">=</span> lstm(a)
+encoded_b <span class="op">=</span> lstm(b)
+
+lstm.output</code></pre></div>
+<pre><code>&gt;&gt; AssertionError: Layer lstm_1 has multiple inbound nodes,
+hence the notion of "layer output" is ill-defined.
+Use `get_output_at(node_index)` instead.</code></pre>
+<p>Okay then. The following works:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">assert</span> lstm.get_output_at(<span class="dv">0</span>) <span class="op">==</span> encoded_a
+<span class="cf">assert</span> lstm.get_output_at(<span class="dv">1</span>) <span class="op">==</span> encoded_b</code></pre></div>
+<p>Simple enough, right?</p>
+<p>The same is true for the properties <code>input_shape</code> and <code>output_shape</code>: as long as the layer has only one node, or as long as all nodes have the same input/output shape, then the notion of “layer output/input shape” is well defined, and that one shape will be returned by <code>layer.output_shape</code>/<code>layer.input_shape</code>. But if, for instance, you apply a same <code>Conv2D</code> layer to an input of shape <code>(3, 32, 32)</code>, and then to an input of shape <code>(3, 64, 64)</code>, the layer will have multiple input/output shapes, and you will have to fetch them by specifying the index of the node they belong to:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">32</span>, <span class="dv">32</span>))
+b <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">64</span>, <span class="dv">64</span>))
+
+conv <span class="op">=</span> Conv2D(<span class="dv">16</span>, (<span class="dv">3</span>, <span class="dv">3</span>), padding<span class="op">=</span><span class="st">'same'</span>)
+conved_a <span class="op">=</span> conv(a)
+
+<span class="co"># Only one input so far, the following will work:</span>
+<span class="cf">assert</span> conv.input_shape <span class="op">==</span> (<span class="va">None</span>, <span class="dv">3</span>, <span class="dv">32</span>, <span class="dv">32</span>)
+
+conved_b <span class="op">=</span> conv(b)
+<span class="co"># now the `.input_shape` property wouldn't work, but this does:</span>
+<span class="cf">assert</span> conv.get_input_shape_at(<span class="dv">0</span>) <span class="op">==</span> (<span class="va">None</span>, <span class="dv">3</span>, <span class="dv">32</span>, <span class="dv">32</span>)
+<span class="cf">assert</span> conv.get_input_shape_at(<span class="dv">1</span>) <span class="op">==</span> (<span class="va">None</span>, <span class="dv">3</span>, <span class="dv">64</span>, <span class="dv">64</span>)</code></pre></div>
+<hr>
+</div>
+<div id="more-examples" class="section level2">
+<h2 class="hasAnchor">
+<a href="#more-examples" class="anchor"></a>More examples</h2>
+<p>Code examples are still the best way to get started, so here are a few more.</p>
+<div id="inception-module" class="section level3">
+<h3 class="hasAnchor">
+<a href="#inception-module" class="anchor"></a>Inception module</h3>
+<p>For more information about the Inception architecture, see <a href="http://arxiv.org/abs/1409.4842">Going Deeper with Convolutions</a>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> keras.layers <span class="im">import</span> Conv2D, MaxPooling2D, Input
+
+input_img <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">256</span>, <span class="dv">256</span>))
+
+tower_1 <span class="op">=</span> Conv2D(<span class="dv">64</span>, (<span class="dv">1</span>, <span class="dv">1</span>), padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(input_img)
+tower_1 <span class="op">=</span> Conv2D(<span class="dv">64</span>, (<span class="dv">3</span>, <span class="dv">3</span>), padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(tower_1)
+
+tower_2 <span class="op">=</span> Conv2D(<span class="dv">64</span>, (<span class="dv">1</span>, <span class="dv">1</span>), padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(input_img)
+tower_2 <span class="op">=</span> Conv2D(<span class="dv">64</span>, (<span class="dv">5</span>, <span class="dv">5</span>), padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(tower_2)
+
+tower_3 <span class="op">=</span> MaxPooling2D((<span class="dv">3</span>, <span class="dv">3</span>), strides<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">1</span>), padding<span class="op">=</span><span class="st">'same'</span>)(input_img)
+tower_3 <span class="op">=</span> Conv2D(<span class="dv">64</span>, (<span class="dv">1</span>, <span class="dv">1</span>), padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(tower_3)
+
+output <span class="op">=</span> keras.layers.concatenate([tower_1, tower_2, tower_3], axis<span class="op">=</span><span class="dv">1</span>)</code></pre></div>
+</div>
+<div id="residual-connection-on-a-convolution-layer" class="section level3">
+<h3 class="hasAnchor">
+<a href="#residual-connection-on-a-convolution-layer" class="anchor"></a>Residual connection on a convolution layer</h3>
+<p>For more information about residual networks, see <a href="http://arxiv.org/abs/1512.03385">Deep Residual Learning for Image Recognition</a>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> keras.layers <span class="im">import</span> Conv2D, Input
+
+<span class="co"># input tensor for a 3-channel 256x256 image</span>
+x <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">256</span>, <span class="dv">256</span>))
+<span class="co"># 3x3 conv with 3 output channels (same as input channels)</span>
+y <span class="op">=</span> Conv2D(<span class="dv">3</span>, (<span class="dv">3</span>, <span class="dv">3</span>), padding<span class="op">=</span><span class="st">'same'</span>)(x)
+<span class="co"># this returns x + y.</span>
+z <span class="op">=</span> keras.layers.add([x, y])</code></pre></div>
+</div>
+<div id="shared-vision-model" class="section level3">
+<h3 class="hasAnchor">
+<a href="#shared-vision-model" class="anchor"></a>Shared vision model</h3>
+<p>This model re-uses the same image-processing module on two inputs, to classify whether two MNIST digits are the same digit or different digits.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> keras.layers <span class="im">import</span> Conv2D, MaxPooling2D, Input, Dense, Flatten
+<span class="im">from</span> keras.models <span class="im">import</span> Model
+
+<span class="co"># First, define the vision modules</span>
+digit_input <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">27</span>, <span class="dv">27</span>))
+x <span class="op">=</span> Conv2D(<span class="dv">64</span>, (<span class="dv">3</span>, <span class="dv">3</span>))(digit_input)
+x <span class="op">=</span> Conv2D(<span class="dv">64</span>, (<span class="dv">3</span>, <span class="dv">3</span>))(x)
+x <span class="op">=</span> MaxPooling2D((<span class="dv">2</span>, <span class="dv">2</span>))(x)
+out <span class="op">=</span> Flatten()(x)
+
+vision_model <span class="op">=</span> Model(digit_input, out)
+
+<span class="co"># Then define the tell-digits-apart model</span>
+digit_a <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">27</span>, <span class="dv">27</span>))
+digit_b <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">27</span>, <span class="dv">27</span>))
+
+<span class="co"># The vision model will be shared, weights and all</span>
+out_a <span class="op">=</span> vision_model(digit_a)
+out_b <span class="op">=</span> vision_model(digit_b)
+
+concatenated <span class="op">=</span> keras.layers.concatenate([out_a, out_b])
+out <span class="op">=</span> Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">'sigmoid'</span>)(concatenated)
+
+classification_model <span class="op">=</span> Model([digit_a, digit_b], out)</code></pre></div>
+</div>
+<div id="visual-question-answering-model" class="section level3">
+<h3 class="hasAnchor">
+<a href="#visual-question-answering-model" class="anchor"></a>Visual question answering model</h3>
+<p>This model can select the correct one-word answer when asked a natural-language question about a picture.</p>
+<p>It works by encoding the question into a vector, encoding the image into a vector, concatenating the two, and training on top a logistic regression over some vocabulary of potential answers.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> keras.layers <span class="im">import</span> Conv2D, MaxPooling2D, Flatten
+<span class="im">from</span> keras.layers <span class="im">import</span> Input, LSTM, Embedding, Dense
+<span class="im">from</span> keras.models <span class="im">import</span> Model, Sequential
+
+<span class="co"># First, let's define a vision model using a Sequential model.</span>
+<span class="co"># This model will encode an image into a vector.</span>
+vision_model <span class="op">=</span> Sequential()
+vision_model.add(Conv2D(<span class="dv">64</span>, (<span class="dv">3</span>, <span class="dv">3</span>) activation<span class="op">=</span><span class="st">'relu'</span>, padding<span class="op">=</span><span class="st">'same'</span>, input_shape<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">224</span>, <span class="dv">224</span>)))
+vision_model.add(Conv2D(<span class="dv">64</span>, (<span class="dv">3</span>, <span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>))
+vision_model.add(MaxPooling2D((<span class="dv">2</span>, <span class="dv">2</span>)))
+vision_model.add(Conv2D(<span class="dv">128</span>, (<span class="dv">3</span>, <span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>, padding<span class="op">=</span><span class="st">'same'</span>))
+vision_model.add(Conv2D(<span class="dv">128</span>, (<span class="dv">3</span>, <span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>))
+vision_model.add(MaxPooling2D((<span class="dv">2</span>, <span class="dv">2</span>)))
+vision_model.add(Conv2D(<span class="dv">256</span>, (<span class="dv">3</span>, <span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>, padding<span class="op">=</span><span class="st">'same'</span>))
+vision_model.add(Conv2D(<span class="dv">256</span>, (<span class="dv">3</span>, <span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>))
+vision_model.add(Conv2D(<span class="dv">256</span>, (<span class="dv">3</span>, <span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>))
+vision_model.add(MaxPooling2D((<span class="dv">2</span>, <span class="dv">2</span>)))
+vision_model.add(Flatten())
+
+<span class="co"># Now let's get a tensor with the output of our vision model:</span>
+image_input <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">224</span>, <span class="dv">224</span>))
+encoded_image <span class="op">=</span> vision_model(image_input)
+
+<span class="co"># Next, let's define a language model to encode the question into a vector.</span>
+<span class="co"># Each question will be at most 100 word long,</span>
+<span class="co"># and we will index words as integers from 1 to 9999.</span>
+question_input <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">100</span>,), dtype<span class="op">=</span><span class="st">'int32'</span>)
+embedded_question <span class="op">=</span> Embedding(input_dim<span class="op">=</span><span class="dv">10000</span>, output_dim<span class="op">=</span><span class="dv">256</span>, input_length<span class="op">=</span><span class="dv">100</span>)(question_input)
+encoded_question <span class="op">=</span> LSTM(<span class="dv">256</span>)(embedded_question)
+
+<span class="co"># Let's concatenate the question vector and the image vector:</span>
+merged <span class="op">=</span> keras.layers.concatenate([encoded_question, encoded_image])
+
+<span class="co"># And let's train a logistic regression over 1000 words on top:</span>
+output <span class="op">=</span> Dense(<span class="dv">1000</span>, activation<span class="op">=</span><span class="st">'softmax'</span>)(merged)
+
+<span class="co"># This is our final model:</span>
+vqa_model <span class="op">=</span> Model(inputs<span class="op">=</span>[image_input, question_input], outputs<span class="op">=</span>output)
+
+<span class="co"># The next stage would be training this model on actual data.</span></code></pre></div>
+</div>
+<div id="video-question-answering-model" class="section level3">
+<h3 class="hasAnchor">
+<a href="#video-question-answering-model" class="anchor"></a>Video question answering model</h3>
+<p>Now that we have trained our image QA model, we can quickly turn it into a video QA model. With appropriate training, you will be able to show it a short video (e.g. 100-frame human action) and ask a natural language question about the video (e.g. “what sport is the boy playing?” -&gt; “football”).</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> keras.layers <span class="im">import</span> TimeDistributed
+
+video_input <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">100</span>, <span class="dv">3</span>, <span class="dv">224</span>, <span class="dv">224</span>))
+<span class="co"># This is our video encoded via the previously trained vision_model (weights are reused)</span>
+encoded_frame_sequence <span class="op">=</span> TimeDistributed(vision_model)(video_input)  <span class="co"># the output will be a sequence of vectors</span>
+encoded_video <span class="op">=</span> LSTM(<span class="dv">256</span>)(encoded_frame_sequence)  <span class="co"># the output will be a vector</span>
+
+<span class="co"># This is a model-level representation of the question encoder, reusing the same weights as before:</span>
+question_encoder <span class="op">=</span> Model(inputs<span class="op">=</span>question_input, outputs<span class="op">=</span>encoded_question)
+
+<span class="co"># Let's use it to encode the question:</span>
+video_question_input <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">100</span>,), dtype<span class="op">=</span><span class="st">'int32'</span>)
+encoded_video_question <span class="op">=</span> question_encoder(video_question_input)
+
+<span class="co"># And this is our video question answering model:</span>
+merged <span class="op">=</span> keras.layers.concatenate([encoded_video, encoded_video_question])
+output <span class="op">=</span> Dense(<span class="dv">1000</span>, activation<span class="op">=</span><span class="st">'softmax'</span>)(merged)
+video_qa_model <span class="op">=</span> Model(inputs<span class="op">=</span>[video_input, video_question_input], outputs<span class="op">=</span>output)</code></pre></div>
+</div>
+</div>
 </div>
   </div>
 
@@ -226,8 +443,11 @@ ________________________________________________________________________________
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#first-example-a-densely-connected-network">First example: a densely-connected network</a></li>
-      <li><a href="#models-can-be-treated-like-layers">Models can be treated like layers</a></li>
+      <li><a href="#all-models-are-callable-just-like-layers">All models are callable, just like layers</a></li>
       <li><a href="#multi-input-and-multi-output-models">Multi-input and multi-output models</a></li>
+      <li><a href="#shared-layers">Shared layers</a></li>
+      <li><a href="#the-concept-of-layer-node">The concept of layer “node”</a></li>
+      <li><a href="#more-examples">More examples</a></li>
       </ul>
 </div>
       </div>

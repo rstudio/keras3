@@ -28,8 +28,8 @@ navbar:
 reference:
   - title: "Keras Models"
     contents:
-      - model
-      - model_sequential
+      - keras_model
+      - keras_model_sequential
       - compile
       - fit
       - evaluate

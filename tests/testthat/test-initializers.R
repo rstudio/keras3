@@ -5,7 +5,7 @@ source("utils.R")
 test_initializer <- function(name) {
   initializer_fn <- eval(parse(text = paste0("initializer_", name)))
   test_call_succeeds(name, {
-    model_sequential() %>% 
+    keras_model_sequential() %>% 
       layer_dense(32, input_shape = c(32,32), kernel_initializer = initializer_fn()) %>% 
       compile( 
         optimizer = 'sgd',

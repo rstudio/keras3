@@ -12,17 +12,16 @@ library(keras)
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-
 ## Defining a Model
 
 The sequential model is a linear stack of layers.
 
-You create a sequential model by calling the `model_sequential()` function then a series of `layer` functions:
+You create a sequential model by calling the `keras_model_sequential()` function then a series of `layer` functions:
 
 ```{r}
 library(keras)
 
-model <- model_sequential() %>% 
+model <- keras_model_sequential() %>% 
   layer_dense(units = 32, input_shape = c(784)) %>% 
   layer_activation('relu') %>% 
   layer_dense(units = 10) %>% 
@@ -36,21 +35,22 @@ summary(model)
 ```
 
 ```
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-dense_1 (Dense)              (None, 32)                25120     
-_________________________________________________________________
-activation_1 (Activation)    (None, 32)                0         
-_________________________________________________________________
-dense_2 (Dense)              (None, 10)                330       
-_________________________________________________________________
-activation_2 (Activation)    (None, 10)                0         
-=================================================================
+Model
+__________________________________________________________________________________________
+Layer (type)                            Output Shape                        Param #       
+==========================================================================================
+dense_4 (Dense)                         (None, 32)                          25120         
+__________________________________________________________________________________________
+activation_1 (Activation)               (None, 32)                          0             
+__________________________________________________________________________________________
+dense_5 (Dense)                         (None, 10)                          330           
+__________________________________________________________________________________________
+activation_2 (Activation)               (None, 10)                          0             
+==========================================================================================
 Total params: 25,450
 Trainable params: 25,450
 Non-trainable params: 0
-_________________________________________________________________
+__________________________________________________________________________________________
 ```
 
 ### Input Shapes
@@ -76,7 +76,7 @@ You can chain your model compilation into the definition of the model or call th
 
 ```{r}
 # For a multi-class classification problem
-model <- model_sequential() %>% 
+model <- keras_model_sequential() %>% 
   layer_dense(units = 32, input_shape = c(784)) %>% 
   layer_activation('relu') %>% 
   layer_dense(units = 10) %>% 
@@ -109,7 +109,7 @@ Here's a single-input model with 2 classes (binary classification):
 
 ```{r}
 # define and compile the model
-model <- model_sequential() %>% 
+model <- keras_model_sequential() %>% 
   layer_dense(units = 32, activation = 'relu', input_shape = c(100)) %>% 
   layer_dense(units = 1, activation = 'sigmoid') %>% 
   compile(
@@ -130,7 +130,7 @@ Here's a single-input model with 10 classes (categorical classification):
 
 ```{r}
 # define and compile the model
-model <- model_sequential() %>% 
+model <- keras_model_sequential() %>% 
   layer_dense(units = 32, activation = 'relu', input_shape = c(100)) %>% 
   layer_dense(units = 10, activation = 'softmax') %>% 
   compile(
@@ -183,7 +183,7 @@ y_test <- runif(100, min = 0, max = 9) %>%
              to_categorical(num_classes = 10)
 
 # define and compile the model
-model <- model_sequential() %>% 
+model <- keras_model_sequential() %>% 
   layer_dense(units = 64, activation = 'relu', input_shape = c(20)) %>% 
   layer_dropout(rate = 0.5) %>% 
   layer_dense(units = 64, activation = 'relu') %>% 
@@ -216,7 +216,7 @@ x_test <- matrix(runif(100*20), nrow = 100, ncol = 20)
 y_test <- matrix(round(runif(100, min = 0, max = 1)), nrow = 100, ncol = 1)
 
 # define and compile the model
-model <- model_sequential() %>% 
+model <- keras_model_sequential() %>% 
   layer_dense(units = 64, activation = 'relu', input_shape = c(20)) %>% 
   layer_dropout(rate = 0.5) %>% 
   layer_dense(units = 64, activation = 'relu') %>% 
@@ -256,7 +256,7 @@ y_test <- runif(20, min = 0, max = 9) %>%
 # define and compile model
 # input: 100x100 images with 3 channels -> (100, 100, 3) tensors.
 # this applies 32 convolution filters of size 3x3 each.
-model <- model_sequential() %>% 
+model <- keras_model_sequential() %>% 
   layer_conv_2d(filters = 32, kernel_size = c(3,3), activation = 'relu', 
                 input_shape = c(100,100,3)) %>% 
   layer_conv_2d(filters = 32, kernel_size = c(3,3), activation = 'relu') %>% 
@@ -285,7 +285,7 @@ score < evaluate(model, x_test, y_test, batch_size = 32)
 ### Sequence classification with LSTM
 
 ```{r, eval = FALSE}
-model <- model_sequential() %>% 
+model <- keras_model_sequential() %>% 
   layer_embedding(input_dim = max_features, output_dim - 256) %>% 
   layer_lstm(units = 128) %>% 
   layer_dropout(rate = 0.5) %>% 
@@ -303,7 +303,7 @@ score <- evaluate(model, x_test, y_test, batch_size = 16)
 ### Sequence classification with 1D convolutions:
 
 ```{r, eval=FALSE}
-model <- model_sequential() %>% 
+model <- keras_model_sequential() %>% 
   layer_conv_1d(filters = 64, kernel_size = 3, activation = 'relu',
                 input_shape = c(seq_length, 100)) %>% 
   layer_conv_1d(filters = 64, kernel_size = 3, activation = 'relu') %>% 
@@ -345,7 +345,7 @@ num_classes <- 10
 
 # define and compile model
 # expected input data shape: (batch_size, timesteps, data_dim)
-model <- model_sequential() %>% 
+model <- keras_model_sequential() %>% 
   layer_lstm(units = 32, return_sequences = TRUE, input_shape = c(timesteps, data_dim)) %>% 
   layer_lstm(units = 32, return_sequences = TRUE) %>% 
   layer_lstm(units = 32) %>% # return a single vector dimension 32
@@ -389,7 +389,7 @@ batch_size <- 32
 # Expected input batch shape: (batch_size, timesteps, data_dim)
 # Note that we have to provide the full batch_input_shape since the network is stateful.
 # the sample of index i in batch k is the follow-up for the sample i in batch k-1.
-model <- model_sequential() %>% 
+model <- keras_model_sequential() %>% 
   layer_lstm(units = 32, return_sequences = TRUE, stateful = TRUE,
              batch_input_shape = c(batch_size, timesteps, data_dim)) %>% 
   layer_lstm(units = 32, return_sequences = TRUE, stateful = TRUE) %>% 

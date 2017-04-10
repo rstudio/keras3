@@ -5,7 +5,7 @@ source("utils.R")
 test_loss <- function(name) {
   loss_fn <- eval(parse(text = paste0("loss_", name)))
   test_call_succeeds(name, {
-    model_sequential() %>% 
+    keras_model_sequential() %>% 
       layer_dense(32, input_shape = shape(784)) %>% 
       compile( 
         optimizer = optimizer_sgd(),

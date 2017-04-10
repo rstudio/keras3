@@ -7,7 +7,7 @@
 \usage{
 
   \method{summary}{tensorflow.contrib.keras.python.keras.engine.training.Model}(object,
-  line_length = NULL, positions = NULL, ...)
+  line_length = getOption("width"), positions = NULL, ...)
 }
 \arguments{
 \item{object}{Keras model instance}
@@ -25,7 +25,7 @@ Print a summary of a model
 \seealso{
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate}}, \code{\link{fit}},
-  \code{\link{load_model}}, \code{\link{model_sequential}},
-  \code{\link{model}}, \code{\link{predict}},
-  \code{\link{save_model}}
+  \code{\link{keras_model_sequential}},
+  \code{\link{keras_model}}, \code{\link{load_model}},
+  \code{\link{predict}}, \code{\link{save_model}}
 }

@@ -5,7 +5,7 @@ source("utils.R")
 test_activation <- function(name) {
   activation_fn <- eval(parse(text = name))
   test_call_succeeds(name, {
-    model_sequential() %>% 
+    keras_model_sequential() %>% 
       layer_dense(32, input_shape = 784) %>% 
       layer_activation(activation = activation_fn)
   }) 

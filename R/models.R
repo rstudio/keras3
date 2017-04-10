@@ -9,7 +9,7 @@
 #' @family model functions
 #'
 #' @export
-model <- function(inputs, outputs = NULL) {
+keras_model <- function(inputs, outputs = NULL) {
   keras$models$Model(inputs = inputs, outputs = outputs)
 }
 
@@ -29,7 +29,7 @@ model <- function(inputs, outputs = NULL) {
 #' @family model functions
 #' 
 #' @export
-model_sequential <- function(layers = NULL, name = NULL) {
+keras_model_sequential <- function(layers = NULL, name = NULL) {
   keras$models$Sequential(layers = layers, name = name)
 }
 
@@ -268,7 +268,7 @@ predict.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
 #' @family model functions
 #' 
 #' @export
-summary.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object, line_length = NULL, positions = NULL, ...) {
+summary.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object, line_length = getOption("width"), positions = NULL, ...) {
   if (py_is_null_xptr(object))
     cat("<pointer: 0x0>\n")
   else {
@@ -278,7 +278,7 @@ summary.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
 
 #' @importFrom reticulate py_str
 #' @export
-py_str.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object,  line_length = NULL, positions = NULL, ...) {
+py_str.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object,  line_length = getOption("width"), positions = NULL, ...) {
   paste0("Model\n", py_capture_output(object$summary(line_length = line_length, positions = positions), type = "stdout"))
 }
 

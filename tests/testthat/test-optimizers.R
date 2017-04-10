@@ -5,7 +5,7 @@ source("utils.R")
 test_optimizer <- function(name) {
   optimizer_fn <- eval(parse(text = name))
   test_call_succeeds(name, {
-    model_sequential() %>% 
+    keras_model_sequential() %>% 
       layer_dense(32, input_shape = shape(784)) %>% 
       compile( 
         optimizer = optimizer_fn(),

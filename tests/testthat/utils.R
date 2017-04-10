@@ -19,7 +19,7 @@ test_call_succeeds <- function(call_name, expr) {
 }
 
 define_model <- function() {
-  model_sequential() %>%
+  keras_model_sequential() %>%
     layer_dense(32, input_shape = 784, kernel_initializer = initializer_ones()) %>%
     layer_activation('relu') %>%
     layer_dense(10) %>%

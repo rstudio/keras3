@@ -79,7 +79,7 @@
       <h1>Guide to the Sequential Model</h1>
                         <h4 class="author">JJ Allaire</h4>
             
-            <h4 class="date">2017-04-07</h4>
+            <h4 class="date">2017-04-10</h4>
           </div>
 
     
@@ -89,31 +89,32 @@
 <h2 class="hasAnchor">
 <a href="#defining-a-model" class="anchor"></a>Defining a Model</h2>
 <p>The sequential model is a linear stack of layers.</p>
-<p>You create a sequential model by calling the <code><a href="../reference/model_sequential.html">model_sequential()</a></code> function then a series of <code>layer</code> functions:</p>
+<p>You create a sequential model by calling the <code><a href="../reference/keras_model_sequential.html">keras_model_sequential()</a></code> function then a series of <code>layer</code> functions:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
-model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'softmax'</span>)</code></pre></div>
 <p>Print a summary of the model’s structure using the <code><a href="../reference/summary.html">summary()</a></code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/summary.html">summary</a></span>(model)</code></pre></div>
-<pre><code>_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-dense_1 (Dense)              (None, 32)                25120     
-_________________________________________________________________
-activation_1 (Activation)    (None, 32)                0         
-_________________________________________________________________
-dense_2 (Dense)              (None, 10)                330       
-_________________________________________________________________
-activation_2 (Activation)    (None, 10)                0         
-=================================================================
+<pre><code>Model
+__________________________________________________________________________________________
+Layer (type)                            Output Shape                        Param #       
+==========================================================================================
+dense_4 (Dense)                         (None, 32)                          25120         
+__________________________________________________________________________________________
+activation_1 (Activation)               (None, 32)                          0             
+__________________________________________________________________________________________
+dense_5 (Dense)                         (None, 10)                          330           
+__________________________________________________________________________________________
+activation_2 (Activation)               (None, 10)                          0             
+==========================================================================================
 Total params: 25,450
 Trainable params: 25,450
 Non-trainable params: 0
-_________________________________________________________________</code></pre>
+__________________________________________________________________________________________</code></pre>
 <div id="input-shapes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#input-shapes" class="anchor"></a>Input Shapes</h3>
@@ -133,7 +134,7 @@ _________________________________________________________________</code></pre>
 </ul>
 <p>You can chain your model compilation into the definition of the model or call the <code><a href="../reference/compile.html">compile()</a></code> method separately (both techniques are illustrated below):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># For a multi-class classification problem</span>
-model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) %&gt;%<span class="st"> </span>
@@ -163,7 +164,7 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model
 <p>Keras models are trained on R matrixes or higher dimensional arrays of input data and labels. For training a model, you will typically use the <code><a href="../reference/fit.html">fit()</a></code> function.</p>
 <p>Here’s a single-input model with 2 classes (binary classification):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define and compile the model</span>
-model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">100</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
@@ -180,7 +181,7 @@ labels &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class=
 <span class="kw"><a href="../reference/fit.html">fit</a></span>(model, data, labels, <span class="dt">epochs=</span><span class="dv">10</span>, <span class="dt">batch_size=</span><span class="dv">32</span>)</code></pre></div>
 <p>Here’s a single-input model with 10 classes (categorical classification):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define and compile the model</span>
-model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">100</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
@@ -230,7 +231,7 @@ y_test &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="
 <span class="st">             </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="dt">num_classes =</span> <span class="dv">10</span>)
 
 <span class="co"># define and compile the model</span>
-model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">20</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
@@ -260,7 +261,7 @@ x_test &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class=
 y_test &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">100</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)), <span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)
 
 <span class="co"># define and compile the model</span>
-model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">20</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
@@ -298,7 +299,7 @@ y_test &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="
 <span class="co"># define and compile model</span>
 <span class="co"># input: 100x100 images with 3 channels -&gt; (100, 100, 3) tensors.</span>
 <span class="co"># this applies 32 convolution filters of size 3x3 each.</span>
-model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>, 
                 <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">3</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
@@ -326,7 +327,7 @@ score &lt;<span class="st"> </span><span class="kw"><a href="../reference/evalua
 <div id="sequence-classification-with-lstm" class="section level3">
 <h3 class="hasAnchor">
 <a href="#sequence-classification-with-lstm" class="anchor"></a>Sequence classification with LSTM</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_embedding.html">layer_embedding</a></span>(<span class="dt">input_dim =</span> max_features, output_dim -<span class="st"> </span><span class="dv">256</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">128</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) %&gt;%<span class="st"> </span>
@@ -343,7 +344,7 @@ score &lt;-<span class="st"> </span><span class="kw"><a href="../reference/evalu
 <div id="sequence-classification-with-1d-convolutions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#sequence-classification-with-1d-convolutions" class="anchor"></a>Sequence classification with 1D convolutions:</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="dv">3</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>,
                 <span class="dt">input_shape =</span> <span class="kw">c</span>(seq_length, <span class="dv">100</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="dv">3</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
@@ -377,7 +378,7 @@ num_classes &lt;-<span class="st"> </span><span class="dv">10</span>
 
 <span class="co"># define and compile model</span>
 <span class="co"># expected input data shape: (batch_size, timesteps, data_dim)</span>
-model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(timesteps, data_dim)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>) %&gt;%<span class="st"> </span><span class="co"># return a single vector dimension 32</span>
@@ -418,7 +419,7 @@ batch_size &lt;-<span class="st"> </span><span class="dv">32</span>
 <span class="co"># Expected input batch shape: (batch_size, timesteps, data_dim)</span>
 <span class="co"># Note that we have to provide the full batch_input_shape since the network is stateful.</span>
 <span class="co"># the sample of index i in batch k is the follow-up for the sample i in batch k-1.</span>
-model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_sequential.html">model_sequential</a></span>() %&gt;%<span class="st"> </span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>, <span class="dt">stateful =</span> <span class="ot">TRUE</span>,
              <span class="dt">batch_input_shape =</span> <span class="kw">c</span>(batch_size, timesteps, data_dim)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>, <span class="dt">stateful =</span> <span class="ot">TRUE</span>) %&gt;%<span class="st"> </span>
