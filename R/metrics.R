@@ -102,7 +102,7 @@ metric_mean_squared_logarithmic_error <- function(y_true, y_pred) {
   if (missing(y_true) && missing(y_pred))
     keras$metrics$mean_squared_logarithmic_error
   else
-    keras$metrics$mean_squared_logarithmic_error(y_trye, y_pred)
+    keras$metrics$mean_squared_logarithmic_error(y_true, y_pred)
 }
 
 
