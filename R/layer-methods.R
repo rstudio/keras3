@@ -1,5 +1,9 @@
 
 
+# see: https://keras.io/models/about-keras-models/
+
+# see: https://keras.io/layers/about-keras-layers/
+
 
 #  Current weights of a layer
 #  
