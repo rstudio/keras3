@@ -2,19 +2,25 @@
 % Please edit documentation in R/models.R
 \name{save_model}
 \alias{save_model}
-\title{Save a Keras model into a single HDF5 file}
+\alias{load_model}
+\title{Save/Load models using HDF5 files}
 \usage{
 save_model(model, filepath, overwrite = TRUE)
+
+load_model(filepath, custom_objects = NULL)
 }
 \arguments{
 \item{model}{Model to save}
 
-\item{filepath}{File path to save to}
+\item{filepath}{File path}
 
 \item{overwrite}{Overwrite existing file if necessary}
+
+\item{custom_objects}{Mapping class names (or function names) of custom
+(non-Keras) objects to class/functions}
 }
 \description{
-Save a Keras model into a single HDF5 file
+Save/Load models using HDF5 files
 }
 \details{
 The following components of the model are saved:
@@ -27,15 +33,14 @@ This allows you to save the entirety of the state of a model
 in a single file.
 }
 
-Saved models can be reinstantiated via \code{\link[=load_model]{load_model()}}. The model returned by
-\code{load_model} is a compiled model ready to be used (unless the saved model
+Saved models can be reinstantiated via \code{load_model()}. The model returned by
+\code{load_model()} is a compiled model ready to be used (unless the saved model
 was never compiled in the first place).
 }
 \seealso{
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate}}, \code{\link{fit}},
   \code{\link{keras_model_sequential}},
-  \code{\link{keras_model}}, \code{\link{load_model}},
-  \code{\link{load_weights}}, \code{\link{predict}},
-  \code{\link{save_weights}}, \code{\link{summary}}
+  \code{\link{keras_model}}, \code{\link{predict}},
+  \code{\link{save_model_weights}}, \code{\link{summary}}
 }

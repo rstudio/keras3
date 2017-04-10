@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Save/Load models using HDF5 files — save_model • keras</title>
+<title>Get/set model weights as R arrays — model_weights • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -98,60 +98,29 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Save/Load models using HDF5 files</h1>
+    <h1>Get/set model weights as R arrays</h1>
     </div>
 
     
-    <p>Save/Load models using HDF5 files</p>
+    <p>Get/set model weights as R arrays</p>
     
 
-    <pre><span class='fu'>save_model</span>(<span class='no'>model</span>, <span class='no'>filepath</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre><span class='fu'>model_weights</span>(<span class='no'>model</span>)
 
-<span class='fu'>load_model</span>(<span class='no'>filepath</span>, <span class='kw'>custom_objects</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>set_model_weights</span>(<span class='no'>model</span>, <span class='no'>weights</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>Model to save</p></td>
+      <td><p>Model</p></td>
     </tr>
     <tr>
-      <th>filepath</th>
-      <td><p>File path</p></td>
-    </tr>
-    <tr>
-      <th>overwrite</th>
-      <td><p>Overwrite existing file if necessary</p></td>
-    </tr>
-    <tr>
-      <th>custom_objects</th>
-      <td><p>Mapping class names (or function names) of custom
-(non-Keras) objects to class/functions</p></td>
+      <th>weights</th>
+      <td><p>Weights as R array</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The following components of the model are saved:</p><ul>
-<li><p>The model architecture, allowing to re-instantiate the model.</p></li>
-<li><p>The model weights.</p></li>
-<li><p>The state of the optimizer, allowing to resume training exactly where you
-left off.
-This allows you to save the entirety of the state of a model
-in a single file.</p></li>
-</ul>
-    <p>Saved models can be reinstantiated via <code>load_model()</code>. The model returned by
-<code>load_model()</code> is a compiled model ready to be used (unless the saved model
-was never compiled in the first place).</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
-  <code><a href='evaluate.html'>evaluate</a></code>, <code><a href='fit.html'>fit</a></code>,
-  <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
-  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='predict.html'>predict</a></code>,
-  <code><a href='save_model_weights.html'>save_model_weights</a></code>, <code><a href='summary.html'>summary</a></code></p>
     
 
   </div>
@@ -159,11 +128,7 @@ was never compiled in the first place).</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

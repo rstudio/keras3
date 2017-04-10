@@ -45,7 +45,31 @@ test_succeeds("model weights can be saved and loaded", {
   
   model <- define_and_compile_model()
   tmp <- tempfile("model", fileext = ".hdf5")
-  save_weights(model, tmp)
-  load_weights(model, tmp)
+  save_model_weights(model, tmp)
+  load_model_weights(model, tmp)
 })
+
+# test_succeeds("model can be saved and loaded from config", {
+#   
+#   inputs <- layer_input(shape = c(784))
+#   predictions <- inputs %>%
+#     layer_dense(units = 64, activation = 'relu') %>% 
+#     layer_dense(units = 64, activation = 'relu') %>% 
+#     layer_dense(units = 10, activation = 'softmax')
+#   model <- keras_model(inputs = inputs, outputs = predictions)
+#   
+#   config <- model_config(model)
+#   model_from <- model_from_config(config)
+#   expect_equal(config, model_config(model_from))
+# })
+
+test_succeeds("model can be saved and loaded from json", {
+  model <- define_model()
+  json <- model_to_json(model)
+  model_from <- model_from_json(json)
+  expect_equal(json, model_to_json(model_from))
+})
+
+
+
 

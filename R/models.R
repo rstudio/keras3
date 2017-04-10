@@ -179,11 +179,13 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
   )
 }
 
-#' Save a Keras model into a single HDF5 file
+#' Save/Load models using HDF5 files
 #' 
 #' @param model Model to save
-#' @param filepath File path to save to
+#' @param filepath File path 
 #' @param overwrite Overwrite existing file if necessary
+#' @param custom_objects Mapping class names (or function names) of custom 
+#'   (non-Keras) objects to class/functions
 #' 
 #' @details The following components of the model are saved: 
 #' 
@@ -194,8 +196,8 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
 #' This allows you to save the entirety of the state of a model
 #' in a single file.
 #' 
-#' Saved models can be reinstantiated via [load_model()]. The model returned by
-#' `load_model` is a compiled model ready to be used (unless the saved model
+#' Saved models can be reinstantiated via `load_model()`. The model returned by
+#' `load_model()` is a compiled model ready to be used (unless the saved model
 #' was never compiled in the first place).
 #' 
 #' @family model functions
@@ -214,15 +216,7 @@ save_model <- function(model, filepath, overwrite = TRUE) {
   }
 }
 
-
-#' Load a Keras model from an HDF5 file
-#' 
-#' @param filepath File path to load file from
-#' @param custom_objects Mapping class names (or function names) of custom 
-#'   (non-Keras) objects to class/functions
-#'   
-#' @family model functions   
-#'   
+#' @rdname save_model
 #' @export
 load_model <- function(filepath, custom_objects = NULL) {
   if (!have_h5py())
@@ -231,12 +225,13 @@ load_model <- function(filepath, custom_objects = NULL) {
 }
 
 
-#' Dumps all layer weights to a HDF5 file.
+#' Save/Load model weights using HDF5 files
 #' 
-#' @param model Model to save weights for
-#' @param filepath Path to the file to save the weights to
+#' @param model Model to save/load
+#' @param filepath Path to the file 
 #' @param overwrite Whether to silently overwrite any existing
 #'   file at the target location
+#' @param by_name Whether to load weights by name or by topological order.
 #' 
 #' @details The weight file has:
 #'   - `layer_names` (attribute), a list of strings (ordered names of model layers).
@@ -245,11 +240,22 @@ load_model <- function(filepath, custom_objects = NULL) {
 #'     (ordered names of weights tensor of the layer).
 #'  - For every weight in the layer, a dataset storing the weight value, named after 
 #'    the weight tensor.
-#' 
+#'    
+#'   For `load_model_weights()`, if `by_name` is `FALSE` (default) weights are 
+#'   loaded based on the network's topology, meaning the architecture should be 
+#'   the same as when the weights were saved. Note that layers that don't have 
+#'   weights are not taken into account in the topological ordering, so adding
+#'   or removing layers is fine as long as they don't have weights.
+#'   
+#'   If `by_name` is `TRUE`, weights are loaded into layers only if they share
+#'   the same name. This is useful for fine-tuning or transfer-learning models
+#'   where some of the layers have changed.
+#'   
+
 #' @family model functions
 #' 
 #' @export
-save_weights <- function(model, filepath, overwrite = TRUE) {
+save_model_weights <- function(model, filepath, overwrite = TRUE) {
   
   if (!have_h5py())
     stop("The h5py Python package is required to save and load model weights")
@@ -262,29 +268,78 @@ save_weights <- function(model, filepath, overwrite = TRUE) {
   }
 }
 
-#' Loads all layer weights from a HDF5 save file.
-#' 
-#' @param model Model to load weights into
-#' @param filepath Path to the weights file to load.
-#' @param by_name Whether to load weights by name or by topological order.
-#'   
-#' @details If `by_name` is `FALSE` (default) weights are loaded based on the 
-#'   network's topology, meaning the architecture should be the same as when the
-#'   weights were saved. Note that layers that don't have weights are not taken 
-#'   into account in the topological ordering, so adding or removing layers is 
-#'   fine as long as they don't have weights.
-#'   
-#'   If `by_name` is `TRUE``, weights are loaded into layers only if they share
-#'   the same name. This is useful for fine-tuning or transfer-learning models
-#'   where some of the layers have changed.
-#'   
-#' @family model functions
-#'   
+
+#' @rdname save_model_weights
 #' @export
-load_weights <- function(model, filepath, by_name = FALSE) {
+load_model_weights <- function(model, filepath, by_name = FALSE) {
   if (!have_h5py())
     stop("The h5py Python package is required to save and load model weights")
   invisible(model$load_weights(filepath = filepath, by_name = by_name))
+}
+
+
+#' Model configuration as List, JSON, or YAML
+#' 
+#' @param model Model to save
+#' @param config List with model configuration
+#' @param custom_objects Optional named list mapping names to custom classes or
+#'   functions to be considered during deserialization.
+#' @param json JSON with model configuration
+#' @param yaml YAML with model configuration
+#'  
+#' @export
+model_config <- function(model) {
+  model$get_config()
+}
+
+
+#' @rdname model_config
+#' @export
+model_from_config <- function(config, custom_objects = NULL) {
+  keras$models$model_from_config(config, custom_objects)
+}
+
+
+#' @rdname model_config
+#' @export
+model_to_json <- function(model) {
+  model$to_json()
+}
+
+
+#' @rdname model_config
+#' @export
+model_from_json <- function(json, custom_objects = NULL) {
+  keras$models$model_from_json(json, custom_objects)
+}
+
+
+#' @rdname model_config
+#' @export
+model_to_yaml <- function(model) {
+  model$to_yaml()  
+}
+
+#' @rdname model_config
+#' @export
+model_from_yaml <- function(yaml, custom_objects = NULL) {
+  keras$models$model_from_yaml(yaml, custom_objects)
+}
+
+#' Get/set model weights as R arrays
+#' 
+#' @param model Model
+#' @param weights Weights as R array
+#' 
+#' @export
+model_weights <- function(model) {
+  model$get_weights()
+}
+
+#' @rdname model_weights
+#' @export
+set_model_weights <- function(model, weights) {
+  model$set_weights(weights)
 }
 
 
