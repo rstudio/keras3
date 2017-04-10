@@ -15,29 +15,34 @@
 \alias{loss_cosine_proximity}
 \title{Model loss functions}
 \usage{
-loss_mean_squared_error()
+loss_mean_squared_error(y_true, y_pred)
 
-loss_mean_absolute_error()
+loss_mean_absolute_error(y_true, y_pred)
 
-loss_mean_absolute_percentage_error()
+loss_mean_absolute_percentage_error(y_true, y_pred)
 
-loss_mean_squared_logarithmic_error()
+loss_mean_squared_logarithmic_error(y_true, y_pred)
 
-loss_squared_hinge()
+loss_squared_hinge(y_true, y_pred)
 
-loss_hinge()
+loss_hinge(y_true, y_pred)
 
-loss_categorical_crossentropy()
+loss_categorical_crossentropy(y_true, y_pred)
 
-loss_sparse_categorical_crossentropy()
+loss_sparse_categorical_crossentropy(y_true, y_pred)
 
-loss_binary_crossentropy()
+loss_binary_crossentropy(y_true, y_pred)
 
-loss_kullback_leibler_divergence()
+loss_kullback_leibler_divergence(y_true, y_pred)
 
-loss_poisson()
+loss_poisson(y_true, y_pred)
 
-loss_cosine_proximity()
+loss_cosine_proximity(y_true, y_pred)
+}
+\arguments{
+\item{y_true}{True labels (TensorFlow tensor)}
+
+\item{y_pred}{Predictions (TensorFlow tensor of the same shape as \code{y_true})}
 }
 \description{
 Model loss functions

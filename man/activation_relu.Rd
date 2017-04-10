@@ -12,23 +12,32 @@
 \alias{activation_tanh}
 \title{Activation functions}
 \usage{
-activation_relu()
+activation_relu(x, alpha = 0, max_value = NULL)
 
-activation_elu()
+activation_elu(x, alpha = 1)
 
-activation_hard_sigmoid()
+activation_hard_sigmoid(x)
 
-activation_linear()
+activation_linear(x)
 
-activation_sigmoid()
+activation_sigmoid(x)
 
-activation_softmax()
+activation_softmax(x, axis = -1)
 
-activation_softplus()
+activation_softplus(x)
 
-activation_softsign()
+activation_softsign(x)
 
-activation_tanh()
+activation_tanh(x)
+}
+\arguments{
+\item{x}{Tensor}
+
+\item{alpha}{Alpha value}
+
+\item{max_value}{Max value}
+
+\item{axis}{Integer, axis along which the softmax normalization is applied}
 }
 \description{
 Activations functions can either be used through \code{\link[=layer_activation]{layer_activation()}}, or
