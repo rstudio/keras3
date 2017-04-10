@@ -28,7 +28,7 @@ test_succeeds("metrics can be referred to by executing the method function", {
     )
 })
 
-test_succeeds("metrics can called directly", {
+test_succeeds("metrics be can called directly", {
   tf <- tensorflow::tf
   y_true <- tf$constant(matrix(runif(100), nrow = 10, ncol = 10))
   y_pred <- tf$constant(matrix(runif(100), nrow = 10, ncol = 10))
