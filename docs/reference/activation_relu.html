@@ -106,29 +106,51 @@
 through the activation argument supported by all forward layers.</p>
     
 
-    <pre><span class='fu'>activation_relu</span>()
+    <pre><span class='fu'>activation_relu</span>(<span class='no'>x</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>max_value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>activation_elu</span>()
+<span class='fu'>activation_elu</span>(<span class='no'>x</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 
-<span class='fu'>activation_hard_sigmoid</span>()
+<span class='fu'>activation_hard_sigmoid</span>(<span class='no'>x</span>)
 
-<span class='fu'>activation_linear</span>()
+<span class='fu'>activation_linear</span>(<span class='no'>x</span>)
 
-<span class='fu'>activation_sigmoid</span>()
+<span class='fu'>activation_sigmoid</span>(<span class='no'>x</span>)
 
-<span class='fu'>activation_softmax</span>()
+<span class='fu'>activation_softmax</span>(<span class='no'>x</span>, <span class='kw'>axis</span> <span class='kw'>=</span> -<span class='fl'>1</span>)
 
-<span class='fu'>activation_softplus</span>()
+<span class='fu'>activation_softplus</span>(<span class='no'>x</span>)
 
-<span class='fu'>activation_softsign</span>()
+<span class='fu'>activation_softsign</span>(<span class='no'>x</span>)
 
-<span class='fu'>activation_tanh</span>()</pre>
-        
+<span class='fu'>activation_tanh</span>(<span class='no'>x</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Tensor</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>Alpha value</p></td>
+    </tr>
+    <tr>
+      <th>max_value</th>
+      <td><p>Max value</p></td>
+    </tr>
+    <tr>
+      <th>axis</th>
+      <td><p>Integer, axis along which the softmax normalization is applied</p></td>
+    </tr>
+    </table>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
                 </ul>
 
   </div>

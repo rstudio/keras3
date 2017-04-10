@@ -105,36 +105,49 @@
     <p>Model performance metrics</p>
     
 
-    <pre><span class='fu'>metric_binary_accuracy</span>()
+    <pre><span class='fu'>metric_binary_accuracy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_binary_crossentropy</span>()
+<span class='fu'>metric_binary_crossentropy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_categorical_accuracy</span>()
+<span class='fu'>metric_categorical_accuracy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_categorical_crossentropy</span>()
+<span class='fu'>metric_categorical_crossentropy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_cosine_proximity</span>()
+<span class='fu'>metric_cosine_proximity</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_hinge</span>()
+<span class='fu'>metric_hinge</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_kullback_leibler_divergence</span>()
+<span class='fu'>metric_kullback_leibler_divergence</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_mean_absolute_error</span>()
+<span class='fu'>metric_mean_absolute_error</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_mean_absolute_percentage_error</span>()
+<span class='fu'>metric_mean_absolute_percentage_error</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_mean_squared_error</span>()
+<span class='fu'>metric_mean_squared_error</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_mean_squared_logarithmic_error</span>()
+<span class='fu'>metric_mean_squared_logarithmic_error</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_poisson</span>()
+<span class='fu'>metric_poisson</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_sparse_categorical_crossentropy</span>()
+<span class='fu'>metric_sparse_categorical_crossentropy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_squared_hinge</span>()
+<span class='fu'>metric_squared_hinge</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_top_k_categorical_accuracy</span>()</pre>
-        
+<span class='fu'>metric_top_k_categorical_accuracy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>y_true</th>
+      <td><p>True labels (tensor)</p></td>
+    </tr>
+    <tr>
+      <th>y_pred</th>
+      <td><p>Predictions (tensor of the same shape as y_true).</p></td>
+    </tr>
+    </table>
+    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>Metric functions are to be supplied in the <code>metrics</code> parameter of the
@@ -145,6 +158,7 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#note">Note</a></li>
           </ul>

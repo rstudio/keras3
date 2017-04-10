@@ -105,30 +105,43 @@
     <p>Model loss functions</p>
     
 
-    <pre><span class='fu'>loss_mean_squared_error</span>()
+    <pre><span class='fu'>loss_mean_squared_error</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>loss_mean_absolute_error</span>()
+<span class='fu'>loss_mean_absolute_error</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>loss_mean_absolute_percentage_error</span>()
+<span class='fu'>loss_mean_absolute_percentage_error</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>loss_mean_squared_logarithmic_error</span>()
+<span class='fu'>loss_mean_squared_logarithmic_error</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>loss_squared_hinge</span>()
+<span class='fu'>loss_squared_hinge</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>loss_hinge</span>()
+<span class='fu'>loss_hinge</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>loss_categorical_crossentropy</span>()
+<span class='fu'>loss_categorical_crossentropy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>loss_sparse_categorical_crossentropy</span>()
+<span class='fu'>loss_sparse_categorical_crossentropy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>loss_binary_crossentropy</span>()
+<span class='fu'>loss_binary_crossentropy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>loss_kullback_leibler_divergence</span>()
+<span class='fu'>loss_kullback_leibler_divergence</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>loss_poisson</span>()
+<span class='fu'>loss_poisson</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>loss_cosine_proximity</span>()</pre>
-        
+<span class='fu'>loss_cosine_proximity</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>y_true</th>
+      <td><p>True labels (TensorFlow tensor)</p></td>
+    </tr>
+    <tr>
+      <th>y_pred</th>
+      <td><p>Predictions (TensorFlow tensor of the same shape as <code>y_true</code>)</p></td>
+    </tr>
+    </table>
+    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Loss functions are to be supplied in the <code>loss</code> parameter of the
@@ -164,6 +177,7 @@ function <code><a href='to_categorical.html'>to_categorical()</a></code>:
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#details">Details</a></li>
 
