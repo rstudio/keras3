@@ -7,7 +7,7 @@
 \alias{model_from_json}
 \alias{model_to_yaml}
 \alias{model_from_yaml}
-\title{Model configuration as List, JSON, or YAML}
+\title{Model configuration as object, JSON, or YAML}
 \usage{
 model_config(model)
 
@@ -34,5 +34,13 @@ functions to be considered during deserialization.}
 \item{yaml}{YAML with model configuration}
 }
 \description{
-Model configuration as List, JSON, or YAML
+Model configuration as object, JSON, or YAML
+}
+\details{
+The \code{model_config()} function returns an object. You can reconstruct
+the model using the \code{model_from_config()} function. This object is however
+not serializable. If you want to save and restore a model across sessions,
+you can use the \code{model_to_json()} or \code{model_to_yaml()} functions (for model
+configuration only, not weights) or the \code{save_model()} function to save the
+model configuration and weights to a file.
 }

@@ -49,19 +49,31 @@ test_succeeds("model weights can be saved and loaded", {
   load_model_weights(model, tmp)
 })
 
-# test_succeeds("model can be saved and loaded from config", {
-#   
-#   inputs <- layer_input(shape = c(784))
-#   predictions <- inputs %>%
-#     layer_dense(units = 64, activation = 'relu') %>% 
-#     layer_dense(units = 64, activation = 'relu') %>% 
-#     layer_dense(units = 10, activation = 'softmax')
-#   model <- keras_model(inputs = inputs, outputs = predictions)
-#   
-#   config <- model_config(model)
-#   model_from <- model_from_config(config)
-#   expect_equal(config, model_config(model_from))
-# })
+test_succeeds("model weights as R array can be read and written", {
+
+  model <- define_and_compile_model()
+  weights <- model_weights(model)
+  set_model_weights(model, weights)
+})
+
+test_succeeds("model can be saved and loaded from config", {
+
+  inputs <- layer_input(shape = c(784))
+  predictions <- inputs %>%
+    layer_dense(units = 64, activation = 'relu') %>%
+    layer_dense(units = 64, activation = 'relu') %>%
+    layer_dense(units = 10, activation = 'softmax')
+  model <- keras_model(inputs = inputs, outputs = predictions)
+
+  config <- model_config(model)
+  model_from <- model_from_config(config)
+})
+
+test_succeeds("sequential model can be saved and loaded from config", {
+  model <- define_model()
+  config <- model_config(model)
+  model_from <- model_from_config(config)
+})
 
 test_succeeds("model can be saved and loaded from json", {
   model <- define_model()

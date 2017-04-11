@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Model configuration as List, JSON, or YAML — model_config • keras</title>
+<title>Model configuration as object, JSON, or YAML — model_config • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -98,11 +98,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Model configuration as List, JSON, or YAML</h1>
+    <h1>Model configuration as object, JSON, or YAML</h1>
     </div>
 
     
-    <p>Model configuration as List, JSON, or YAML</p>
+    <p>Model configuration as object, JSON, or YAML</p>
     
 
     <pre><span class='fu'>model_config</span>(<span class='no'>model</span>)
@@ -143,13 +143,24 @@ functions to be considered during deserialization.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The <code>model_config()</code> function returns an object. You can reconstruct
+the model using the <code>model_from_config()</code> function. This object is however
+not serializable. If you want to save and restore a model across sessions,
+you can use the <code>model_to_json()</code> or <code>model_to_yaml()</code> functions (for model
+configuration only, not weights) or the <code>save_model()</code> function to save the
+model configuration and weights to a file.</p>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#details">Details</a></li>
+          </ul>
 
   </div>
 </div>

@@ -278,25 +278,43 @@ load_model_weights <- function(model, filepath, by_name = FALSE) {
 }
 
 
-#' Model configuration as List, JSON, or YAML
+#' Model configuration as object, JSON, or YAML
 #' 
 #' @param model Model to save
 #' @param config List with model configuration
-#' @param custom_objects Optional named list mapping names to custom classes or
+#' @param custom_objects Optional named list mapping names to custom classes or 
 #'   functions to be considered during deserialization.
 #' @param json JSON with model configuration
 #' @param yaml YAML with model configuration
-#'  
+#'   
+#' @details The `model_config()` function returns an object. You can reconstruct
+#' the model using the `model_from_config()` function. This object is however 
+#' not serializable. If you want to save and restore a model across sessions, 
+#' you can use the `model_to_json()` or `model_to_yaml()` functions (for model 
+#' configuration only, not weights) or the `save_model()` function to save the
+#' model configuration and weights to a file.
+#' 
 #' @export
 model_config <- function(model) {
-  model$get_config()
+  
+  # call using lower level reticulate functions to prevent converstion to list
+  # (the object will remain a python dictionary for full fidelity)
+  get_fn <- py_get_attr(model, "get_config")
+  config <- py_call(get_fn)
+  
+  # set attribute indicating whether this is sequentijal
+  attr(config, "sequential") <- is_sequential_model(model)
+  config
 }
 
 
 #' @rdname model_config
 #' @export
 model_from_config <- function(config, custom_objects = NULL) {
-  keras$models$model_from_config(config, custom_objects)
+  if (isTRUE(attr(config, "sequential")))
+    keras$models$Sequential$from_config(config)
+  else
+    keras$models$Model$from_config(config)
 }
 
 
