@@ -152,6 +152,42 @@ one_hot_labels = to_categorical(labels, num_classes = 10)
 fit(model, data, one_hot_labels, epochs=10, batch_size=32)
 ```
 
+## Properites
+
+You can inspect the various layers as well as the input and output tensors of a model using the `layers`, `inputs`, and `outputs` properites. For example:
+
+```{r}
+model$layers
+```
+
+```
+[[1]]
+Dense
+
+[[2]]
+Dense
+```
+
+```{r}
+model$inputs
+```
+
+```
+[[1]]
+Tensor("dense_1_input:0", shape=(?, 100), dtype=float32)
+```
+
+
+```{r}
+model$outputs
+```
+
+```
+[[1]]
+Tensor("dense_2/Softmax:0", shape=(?, 10), dtype=float32)
+```
+
+
 ## Examples
 
 Here are a few examples to get you started!

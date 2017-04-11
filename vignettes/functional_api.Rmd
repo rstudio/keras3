@@ -257,6 +257,41 @@ fit(model, c(data_a, data_b), labels, epochs = 10)
 
 ```
 
+## Properites
+
+You can inspect the various layers as well as the input and output tensors of a model using the `layers`, `inputs`, and `outputs` properites. For example:
+
+```{r}
+model$layers
+```
+
+```
+[[1]]
+Dense
+
+[[2]]
+Dense
+```
+
+```{r}
+model$inputs
+```
+
+```
+[[1]]
+Tensor("dense_1_input:0", shape=(?, 100), dtype=float32)
+```
+
+```{r}
+model$outputs
+```
+
+```
+[[1]]
+Tensor("dense_2/Softmax:0", shape=(?, 10), dtype=float32)
+```
+
+
 ## More examples
 
 Code examples are still the best way to get started, so here are a few more.
