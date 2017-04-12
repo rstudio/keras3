@@ -302,8 +302,8 @@ model_config <- function(model) {
   get_fn <- py_get_attr(model, "get_config")
   config <- py_call(get_fn)
   
-  # set attribute indicating whether this is sequentijal
-  attr(config, "sequential") <- is_sequential_model(model)
+  # set attribute indicating class 
+  attr(config, "config_class") <- model$`__class__`
   config
 }
 
@@ -311,10 +311,8 @@ model_config <- function(model) {
 #' @rdname model_config
 #' @export
 model_from_config <- function(config, custom_objects = NULL) {
-  if (isTRUE(attr(config, "sequential")))
-    keras$models$Sequential$from_config(config)
-  else
-    keras$models$Model$from_config(config)
+  class <- attr(config, "config_class")
+  class$from_config(config)
 }
 
 
