@@ -124,11 +124,16 @@ reference:
       - time_distributed
       - bidirectional
  
+  - title: "Layer Methods"
+    contents:
+      - get_config
+      - get_weights
+ 
   - title: "Model Persistence"
     contents:
       - save_model
       - save_model_weights
-      - get_model_weights
+      - get_weights
       - get_config
       - model_to_json
       - model_to_yaml

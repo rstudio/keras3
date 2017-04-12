@@ -44,7 +44,7 @@ the same name. This is useful for fine-tuning or transfer-learning models
 where some of the layers have changed.
 }
 \seealso{
-Other model persistence: \code{\link{get_model_weights}},
+Other model persistence: \code{\link{get_weights}},
   \code{\link{model_to_json}}, \code{\link{model_to_yaml}},
   \code{\link{save_model}}
 }

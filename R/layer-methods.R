@@ -71,7 +71,7 @@ set_weights <- function(layer, weights) {
 }
 
 
-#' Layer/Model Configuration
+#' Layer/Model configuration
 #' 
 #' A layer config is an object returned from `get_config()` that contains the 
 #' configuration of a layer or model. The same layer or model can be 
@@ -114,6 +114,26 @@ from_config <- function(config) {
   class <- attr(config, "config_class")
   class$from_config(config)
 }
+
+#' Layer/Model weights as R arrays
+#' 
+#' @param layer Layer or model
+#' @param weights Weights as R array
+#' 
+#' @family model persistence
+#' @family layer methods
+#' 
+#' @export
+get_weights <- function(layer) {
+  layer$get_weights()
+}
+
+#' @rdname get_weights
+#' @export
+set_weights <- function(layer, weights) {
+  layer$set_weights(weights)
+}
+
 
 
 

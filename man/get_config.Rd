@@ -3,7 +3,7 @@
 \name{get_config}
 \alias{get_config}
 \alias{from_config}
-\title{Layer/Model Configuration}
+\title{Layer/Model configuration}
 \usage{
 get_config(layer)
 
@@ -38,4 +38,6 @@ Other model functions: \code{\link{compile}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}}, \code{\link{predict}},
   \code{\link{summary}}
+
+Other layer methods: \code{\link{get_weights}}
 }

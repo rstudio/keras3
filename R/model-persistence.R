@@ -145,22 +145,5 @@ model_from_yaml <- function(yaml, custom_objects = NULL) {
   keras$models$model_from_yaml(yaml, custom_objects)
 }
 
-#' Get/set model weights as R arrays
-#' 
-#' @param model Model
-#' @param weights Weights as R array
-#' 
-#' @family model persistence
-#' 
-#' @export
-get_model_weights <- function(model) {
-  model$get_weights()
-}
-
-#' @rdname get_model_weights
-#' @export
-set_model_weights <- function(model, weights) {
-  model$set_weights(weights)
-}
 
 

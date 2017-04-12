@@ -34,3 +34,7 @@ define_and_compile_model <- function() {
       metrics='accuracy'
     )
 }
+
+
+
+

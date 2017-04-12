@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Layer/Model configuration — get_config • keras</title>
+<title>Layer/Model weights as R arrays — get_weights • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -98,20 +98,16 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Layer/Model configuration</h1>
+    <h1>Layer/Model weights as R arrays</h1>
     </div>
 
     
-    <p>A layer config is an object returned from <code>get_config()</code> that contains the
-configuration of a layer or model. The same layer or model can be
-reinstantiated later (without its trained weights) from this configuration
-using <code>from_config()</code>. The config does not include connectivity information,
-nor the class name (those are handled externally).</p>
+    <p>Layer/Model weights as R arrays</p>
     
 
-    <pre><span class='fu'>get_config</span>(<span class='no'>layer</span>)
+    <pre><span class='fu'>get_weights</span>(<span class='no'>layer</span>)
 
-<span class='fu'>from_config</span>(<span class='no'>config</span>)</pre>
+<span class='fu'>set_weights</span>(<span class='no'>layer</span>, <span class='no'>weights</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -121,32 +117,18 @@ nor the class name (those are handled externally).</p>
       <td><p>Layer or model</p></td>
     </tr>
     <tr>
-      <th>config</th>
-      <td><p>Object with layer or model configuration</p></td>
+      <th>weights</th>
+      <td><p>Weights as R array</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p><code>get_config()</code> returns an object with the configuration,
-<code>from_config()</code> returns a re-instantation of hte object.</p>
-    
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>Objects returned from <code>get_config()</code> are not serializable. Therefore,
-if you want to save and restore a model across sessions, you can use the
-<code>model_to_json()</code> or <code>model_to_yaml()</code> functions (for model configuration
-only, not weights) or the <code>save_model()</code> function to save the model
-configuration and weights to a file.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
-  <code><a href='evaluate.html'>evaluate</a></code>, <code><a href='fit.html'>fit</a></code>,
-  <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
-  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='predict.html'>predict</a></code>,
-  <code><a href='summary.html'>summary</a></code></p>
-<p>Other layer methods: <code><a href='get_weights.html'>get_weights</a></code></p>
+    <p>Other model persistence: <code><a href='model_to_json.html'>model_to_json</a></code>,
+  <code><a href='model_to_yaml.html'>model_to_yaml</a></code>,
+  <code><a href='save_model_weights.html'>save_model_weights</a></code>,
+  <code><a href='save_model.html'>save_model</a></code></p>
+<p>Other layer methods: <code><a href='get_config.html'>get_config</a></code></p>
     
 
   </div>
@@ -155,10 +137,6 @@ configuration and weights to a file.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#note">Note</a></li>
-
       <li><a href="#see-also">See also</a></li>
           </ul>
 
