@@ -1,0 +1,11 @@
+---
+title: "About Keras Layers"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{About Keras Layers}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+

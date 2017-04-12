@@ -1,0 +1,10 @@
+---
+title: "About Keras Models"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{About Keras Models}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+

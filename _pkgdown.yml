@@ -10,13 +10,19 @@ navbar:
       href: index.html
     - text: "Articles"
       menu:
-        - text: Getting Started
-        - text: Guide to the Sequential Model
+        - text: "Getting Started"
+        - text: "Guide to the Sequential Model"
           href: articles/sequential_model.html
-        - text: Guide to the Functional API
+        - text: "Guide to the Functional API"
           href: articles/functional_api.html
-        - text: Frequently Asked Questions
-          href: faq.html  
+        - text: "Frequently Asked Questions"
+          href: faq.html
+        - text: "--------------------------"
+        - text: "Using Keras"
+        - text: "About Keras Models"
+          href: articles/about_keras_models.html
+        - text: "About Keras Layers"
+          href: articles/about_keras_layers.html
     - text: Examples
       href: articles/examples/index.html
     - text: "Reference"
