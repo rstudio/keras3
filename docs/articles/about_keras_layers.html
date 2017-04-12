@@ -91,11 +91,103 @@
     
     
 <div class="contents">
-
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>Keras layers are the fundamental building block of keras models. Layers are created using a wide variety of <code>layer_</code> functions and are typically composed together by stacking calls to them using the pipe <code>%&gt;%</code> operator. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'softmax'</span>)</code></pre></div>
+<p>See the <a href="https://rstudio.github.io/reference/">API Reference</a> for documentation on all of the available layer types.</p>
+</div>
+<div id="properties" class="section level2">
+<h2 class="hasAnchor">
+<a href="#properties" class="anchor"></a>Properties</h2>
+<p>All layers share the following properties:</p>
+<ul>
+<li><p><code>layer$name</code> — String, must be unique within a model.</p></li>
+<li><p><code>layer$input_spec</code> — List of input specifications. Each entry describes one required input: (ndim, dtype). A layer with <code>n</code> input tensors must have an <code>input_spec</code> of length <code>n</code>.</p></li>
+<li><p><code>layer$trainable</code> — Boolean, whether the layer weights will be updated during training.</p></li>
+<li><p><code>layer$uses_learning_phase</code> – Whether any operation of the layer uses <code>K.in_training_phase()</code> or <code>K.in_test_phase()</code>.</p></li>
+<li><p><code>layer$input_shape</code> — Input shape. Provided for convenience, but note that there may be cases in which this attribute is ill-defined (e.g. a shared layer with multiple input shapes), in which case requesting <code>input_shape</code> will result in an error. Prefer using <code><a href="../reference/get_input_at.html">get_input_shape_at(layer, node_index)</a></code>.</p></li>
+<li><p><code>layer$output_shape</code> — Output shape. See above.</p></li>
+<li><p><code>layer$inbound_nodes</code> — List of nodes.</p></li>
+<li><p><code>layer$outbound_nodes</code> — List of nodes.</p></li>
+<li><p><code>layer$input</code>, <code>layer$output</code> — Input/output tensor(s). Note that if the layer is used more than once (shared layer), this is ill-defined and will result in an error. In such cases, use <code><a href="../reference/get_input_at.html">get_input_at(layer, node_index)</a></code>.</p></li>
+<li><p><code>layer$input_mask</code>, <code>layer$output_mask</code> — Same as above, for masks.</p></li>
+<li><p><code>layer$trainable_weights</code> — List of variables.</p></li>
+<li><p><code>layer$non_trainable_weights</code> — List of variables.</p></li>
+<li><p><code>layer$weights</code> — The concatenation of the lists trainable_weights and non_trainable_weights (in this order).</p></li>
+<li><p><code>layer$constraints</code> — Mapping of weights to constraints.</p></li>
+</ul>
+</div>
+<div id="functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#functions" class="anchor"></a>Functions</h2>
+<p>The following functions are available for interacting with layers:</p>
+<table class="table">
+<colgroup>
+<col class="alias">
+<col class="title">
+</colgroup>
+<tbody>
+<tr>
+<!--  --><td>
+<code><a href="../reference/get_config.html">get_config()</a></code> <code><a href="../reference/get_config.html">from_config()</a></code>
+</td>
+<td>
+<p>
+Layer/Model configuration
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/get_weights.html">get_weights()</a></code> <code><a href="../reference/get_weights.html">set_weights()</a></code>
+</td>
+<td>
+<p>
+Layer/Model weights as R arrays
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/count_params.html">count_params()</a></code>
+</td>
+<td>
+<p>
+Count the total number of scalars composing the weights.
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/get_input_at.html">get_input_at()</a></code> <code><a href="../reference/get_input_at.html">get_output_at()</a></code> <code><a href="../reference/get_input_at.html">get_input_shape_at()</a></code> <code><a href="../reference/get_input_at.html">get_output_shape_at()</a></code> <code><a href="../reference/get_input_at.html">get_input_mask_at()</a></code> <code><a href="../reference/get_input_at.html">get_output_mask_at()</a></code>
+</td>
+<td>
+<p>
+Retrieve tensors for layers with multiple nodes
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#overview">Overview</a></li>
+      <li><a href="#properties">Properties</a></li>
+      <li><a href="#functions">Functions</a></li>
+      </ul>
+</div>
       </div>
 
 </div>

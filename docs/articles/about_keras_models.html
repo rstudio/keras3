@@ -91,11 +91,210 @@
     
     
 <div class="contents">
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>There are two types of models available in Keras: <a href="sequential_model.html">sequential models</a> and models created with the <a href="functional_api.html">functional API</a>.</p>
+<div id="sequential" class="section level3">
+<h3 class="hasAnchor">
+<a href="#sequential" class="anchor"></a>Sequential</h3>
+<p>Sequential models are created using the <code>keras_sequential_model()</code> function and are composed of a set of linear layers:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'softmax'</span>)</code></pre></div>
+<p>Learn more by reading the <a href="sequential_model.html">Guide to the Sequential Model</a>.</p>
+</div>
+<div id="functional" class="section level3">
+<h3 class="hasAnchor">
+<a href="#functional" class="anchor"></a>Functional</h3>
+<p>The functional API enables you to define more complex models, such as multi-output models, directed acyclic graphs, or models with shared layers. To create a model with the functional API compose a set of input and output layers then pass them to the <code><a href="../reference/keras_model.html">keras_model()</a></code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tweet_a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))
+tweet_b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))
 
+<span class="co"># This layer can take as input a matrix and will return a vector of size 64</span>
+shared_lstm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">64</span>)
+
+<span class="co"># When we reuse the same layer instance multiple times, the weights of the layer are also</span>
+<span class="co"># being reused (it is effectively *the same* layer)</span>
+encoded_a &lt;-<span class="st"> </span>tweet_a %&gt;%<span class="st"> </span>shared_lstm
+encoded_b &lt;-<span class="st"> </span>tweet_b %&gt;%<span class="st"> </span>shared_lstm
+
+<span class="co"># We can then concatenate the two vectors and add a logistic regression on top</span>
+predictions &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(encoded_a, encoded_b), <span class="dt">axis=</span>-<span class="dv">1</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>)
+
+<span class="co"># We define a trainable model linking the tweet inputs to the predictions</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> <span class="kw">c</span>(tweet_a, tweet_b), <span class="dt">outputs =</span> predictions)</code></pre></div>
+<p>Learn more by reading the <a href="unctional_api.html">Guide to the Functional API</a>.</p>
+</div>
+</div>
+<div id="properites" class="section level2">
+<h2 class="hasAnchor">
+<a href="#properites" class="anchor"></a>Properites</h2>
+<p>All models share the following properties:</p>
+<ul>
+<li><p><code>model$layers</code> — A flattened list of the layers comprising the model graph.</p></li>
+<li><p><code>model$inputs</code> — List of input tensors.</p></li>
+<li><p><code>model$outputs</code> — List of output tensors.</p></li>
+</ul>
+</div>
+<div id="functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#functions" class="anchor"></a>Functions</h2>
+<p>These functions enable you to create, train, evaluate, persist, and generate predictions with models:</p>
+<table class="table">
+<colgroup>
+<col class="alias">
+<col class="title">
+</colgroup>
+<tbody>
+<tr>
+<!--  --><td>
+<code><a href="../reference/keras_model.html">keras_model()</a></code>
+</td>
+<td>
+<p>
+Keras Model
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/keras_model_sequential.html">keras_model_sequential()</a></code>
+</td>
+<td>
+<p>
+Keras Model composed of a linear stack of layers
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/compile.html">compile()</a></code>
+</td>
+<td>
+<p>
+Configure a Keras model for training
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/fit.html">fit()</a></code>
+</td>
+<td>
+<p>
+Train a Keras model
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/evaluate.html">evaluate()</a></code>
+</td>
+<td>
+<p>
+Evaluate a Keras model
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/predict.html">predict()</a></code>
+</td>
+<td>
+<p>
+Predict Method for Keras Models
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/summary.html">summary()</a></code>
+</td>
+<td>
+<p>
+Print a summary of a model
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/save_model.html">save_model()</a></code> <code><a href="../reference/save_model.html">load_model()</a></code>
+</td>
+<td>
+<p>
+Save/Load models using HDF5 files
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/save_model_weights.html">save_model_weights()</a></code> <code><a href="../reference/save_model_weights.html">load_model_weights()</a></code>
+</td>
+<td>
+<p>
+Save/Load model weights using HDF5 files
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/get_weights.html">get_weights()</a></code> <code><a href="../reference/get_weights.html">set_weights()</a></code>
+</td>
+<td>
+<p>
+Layer/Model weights as R arrays
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/get_config.html">get_config()</a></code> <code><a href="../reference/get_config.html">from_config()</a></code>
+</td>
+<td>
+<p>
+Layer/Model configuration
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/model_to_json.html">model_to_json()</a></code> <code><a href="../reference/model_to_json.html">model_from_json()</a></code>
+</td>
+<td>
+<p>
+Model configuration as JSON
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/model_to_yaml.html">model_to_yaml()</a></code> <code><a href="../reference/model_to_yaml.html">model_from_yaml()</a></code>
+</td>
+<td>
+<p>
+Model configuration as YAML
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#overview">Overview</a></li>
+      <li><a href="#properites">Properites</a></li>
+      <li><a href="#functions">Functions</a></li>
+      </ul>
+</div>
       </div>
 
 </div>
