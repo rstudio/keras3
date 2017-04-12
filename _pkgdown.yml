@@ -37,10 +37,7 @@ reference:
       - summary
       - save_model
       - load_model
-      - model_config
-      - model_weights
-      - save_model_weights
-      
+ 
   - title: "Core Layers"
     contents:
       - layer_input
@@ -127,6 +124,14 @@ reference:
       - time_distributed
       - bidirectional
  
+  - title: "Model Persistence"
+    contents:
+      - save_model
+      - save_model_weights
+      - get_model_weights
+      - get_config
+      - model_to_json
+      - model_to_yaml
  
   - title: "Optimizers"
     contents:

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Save/Load model weights using HDF5 files — save_model_weights • keras</title>
+<title>Model configuration as YAML — model_to_yaml • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -98,62 +98,41 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Save/Load model weights using HDF5 files</h1>
+    <h1>Model configuration as YAML</h1>
     </div>
 
     
-    <p>Save/Load model weights using HDF5 files</p>
+    <p>Save and re-load models configurations as YAML Note that the representation
+does not include the weights, only the architecture.</p>
     
 
-    <pre><span class='fu'>save_model_weights</span>(<span class='no'>model</span>, <span class='no'>filepath</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre><span class='fu'>model_to_yaml</span>(<span class='no'>model</span>)
 
-<span class='fu'>load_model_weights</span>(<span class='no'>model</span>, <span class='no'>filepath</span>, <span class='kw'>by_name</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>model_from_yaml</span>(<span class='no'>yaml</span>, <span class='kw'>custom_objects</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>Model to save/load</p></td>
+      <td><p>Model to save</p></td>
     </tr>
     <tr>
-      <th>filepath</th>
-      <td><p>Path to the file</p></td>
+      <th>yaml</th>
+      <td><p>YAML with model configuration</p></td>
     </tr>
     <tr>
-      <th>overwrite</th>
-      <td><p>Whether to silently overwrite any existing
-file at the target location</p></td>
-    </tr>
-    <tr>
-      <th>by_name</th>
-      <td><p>Whether to load weights by name or by topological order.</p></td>
+      <th>custom_objects</th>
+      <td><p>Optional named list mapping names to custom classes or
+functions to be considered during deserialization.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The weight file has:</p><ul>
-<li><p><code>layer_names</code> (attribute), a list of strings (ordered names of model layers).</p></li>
-<li><p>For every layer, a <code>group</code> named <code>layer.name</code></p></li>
-<li><p>For every such layer group, a group attribute <code>weight_names</code>, a list of strings
-(ordered names of weights tensor of the layer).</p></li>
-<li><p>For every weight in the layer, a dataset storing the weight value, named after
-the weight tensor.</p></li>
-</ul>
-    <p>For <code>load_model_weights()</code>, if <code>by_name</code> is <code>FALSE</code> (default) weights are
-loaded based on the network's topology, meaning the architecture should be
-the same as when the weights were saved. Note that layers that don't have
-weights are not taken into account in the topological ordering, so adding
-or removing layers is fine as long as they don't have weights.</p>
-<p>If <code>by_name</code> is <code>TRUE</code>, weights are loaded into layers only if they share
-the same name. This is useful for fine-tuning or transfer-learning models
-where some of the layers have changed.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other model persistence: <code><a href='get_model_weights.html'>get_model_weights</a></code>,
-  <code><a href='model_to_json.html'>model_to_json</a></code>, <code><a href='model_to_yaml.html'>model_to_yaml</a></code>,
+  <code><a href='model_to_json.html'>model_to_json</a></code>,
+  <code><a href='save_model_weights.html'>save_model_weights</a></code>,
   <code><a href='save_model.html'>save_model</a></code></p>
     
 
@@ -163,8 +142,6 @@ where some of the layers have changed.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
           </ul>
 

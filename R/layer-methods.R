@@ -71,49 +71,51 @@ set_weights <- function(layer, weights) {
 }
 
 
-#  Configuraiton of a layer
-#  
-#  A layer config is a named list containing the configuration of a layer. The
-#  same layer can be reinstantiated later (without its trained weights) from
-#  this configuration. The config of a layer does not include connectivity
-#  information, nor the layer class name (those are handled externally)
-#  
-#  @inheritParams get_weights
-#  
-#  @return Named list with layer configuration
-#  
-#  @seealso [from_config()]
-#  
-#  @family layer methods
-#  
-#  @export
-
-# Note: get_config/from_config probably want to be S3 methods for models
-
+#' Layer/Model Configuration
+#' 
+#' A layer config is an object returned from `get_config()` that contains the 
+#' configuration of a layer or model. The same layer or model can be 
+#' reinstantiated later (without its trained weights) from this configuration 
+#' using `from_config()`. The config does not include connectivity information, 
+#' nor the class name (those are handled externally).
+#' 
+#' @param layer Layer or model
+#' @param config Object with layer or model configuration
+#' 
+#' @return `get_config()` returns an object with the configuration, 
+#'   `from_config()` returns a re-instantation of hte object.
+#'   
+#' @note Objects returned from `get_config()` are not serializable. Therefore, 
+#'   if you want to save and restore a model across sessions, you can use the
+#'   `model_to_json()` or `model_to_yaml()` functions (for model configuration
+#'   only, not weights) or the `save_model()` function to save the model
+#'   configuration and weights to a file.
+#'   
+#' @family model functions
+#' @family layer methods
+#'   
+#' @export
 get_config <- function(layer) {
-  layer$get_config()
+  
+  # call using lower level reticulate functions to prevent converstion to list
+  # (the object will remain a python dictionary for full fidelity)
+  get_fn <- py_get_attr(layer, "get_config")
+  config <- py_call(get_fn)
+  
+  # set attribute indicating class 
+  attr(config, "config_class") <- layer$`__class__`
+  config
 }
 
 
-#  Create a layer from its config
-#  
-#  This method is the reverse of [get_config()], capable of instantiating the
-#  same layer from the config dictionary. It does not handle layer connectivity 
-#  (handled by Container), nor weights (handled by [set_weights()]).
-#    
-#  @param config Named list, typically the output of [get_config()]
-#     
-#  @seealso [get_config()]
-#  
-#  @family layer methods
-#     
-#  @export 
-from_config <- function(config, custom_objects = NULL) {
-  keras$layers$Layer$from_config(
-    config = config,
-    custom_objects = custom_objects
-  )
+#' @rdname get_config
+#' @export
+from_config <- function(config) {
+  class <- attr(config, "config_class")
+  class$from_config(config)
 }
+
+
 
 #  Count the total number of scalars composing the weights.
 #  
