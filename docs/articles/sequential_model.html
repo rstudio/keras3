@@ -206,23 +206,6 @@ one_hot_labels =<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="co"># Train the model, iterating on the data in batches of 32 samples</span>
 <span class="kw"><a href="../reference/fit.html">fit</a></span>(model, data, one_hot_labels, <span class="dt">epochs=</span><span class="dv">10</span>, <span class="dt">batch_size=</span><span class="dv">32</span>)</code></pre></div>
 </div>
-<div id="properites" class="section level2">
-<h2 class="hasAnchor">
-<a href="#properites" class="anchor"></a>Properites</h2>
-<p>You can inspect the various layers as well as the input and output tensors of a model using the <code>layers</code>, <code>inputs</code>, and <code>outputs</code> properites. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model$layers</code></pre></div>
-<pre><code>[[1]]
-Dense
-
-[[2]]
-Dense</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model$inputs</code></pre></div>
-<pre><code>[[1]]
-Tensor("dense_1_input:0", shape=(?, 100), dtype=float32)</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model$outputs</code></pre></div>
-<pre><code>[[1]]
-Tensor("dense_2/Softmax:0", shape=(?, 10), dtype=float32)</code></pre>
-</div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
@@ -487,7 +470,6 @@ y_val &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="
 <li><a href="#defining-a-model">Defining a Model</a></li>
       <li><a href="#compilation">Compilation</a></li>
       <li><a href="#training">Training</a></li>
-      <li><a href="#properites">Properites</a></li>
       <li><a href="#examples">Examples</a></li>
       </ul>
 </div>

@@ -255,38 +255,69 @@ fit(model, c(data_a, data_b), labels, epochs = 10)
 
 ```
 
-## Properites
 
-You can inspect the various layers as well as the input and output tensors of a model using the `layers`, `inputs`, and `outputs` properites. For example:
+## The concept of layer "node"
 
-```{r}
-model$layers
-```
+Whenever you are calling a layer on some input, you are creating a new tensor (the output of the layer), and you are adding a "node" to the layer, linking the input tensor to the output tensor. When you are calling the same layer multiple times, that layer owns multiple nodes indexed as 1, 2, 2...
 
-```
-[[1]]
-Dense
+You can obtain the output tensor of a layer via `layer$output`, or its output shape via `layer$output_shape`. But what if a layer is connected to multiple inputs?
 
-[[2]]
-Dense
-```
+As long as a layer is only connected to one input, there is no confusion, and `$output` will return the one output of the layer:
 
 ```{r}
-model$inputs
+a <- layer_input(shape = c(140, 256))
+
+lstm <- layer_lstm(units = 32)
+
+encoded_a <- a %>% lstm
+
+lstm$output
 ```
 
-```
-[[1]]
-Tensor("dense_1_input:0", shape=(?, 100), dtype=float32)
-```
+Not so if the layer has multiple inputs:
 
 ```{r}
-model$outputs
+a <- layer_input(shape = c(140, 256))
+b <- layer_input(shape = c(140, 256))
+
+lstm <- layer_lstm(units = 32)
+
+encoded_a <- a %>% lstm
+encoded_b <- b %>% lstm
+
+lstm$output
 ```
 
 ```
-[[1]]
-Tensor("dense_2/Softmax:0", shape=(?, 10), dtype=float32)
+AttributeError: Layer lstm_4 has multiple inbound nodes, hence the notion of "layer output" is ill-defined. Use `get_output_at(node_index)` instead.
+```
+
+Okay then. The following works:
+
+```{r}
+get_output_at(lstm, 1)
+get_output_at(lstm, 2)
+```
+
+Simple enough, right?
+
+The same is true for the properties `input_shape` and `output_shape`: as long as the layer has only one node, or as long as all nodes have the same input/output shape, then the notion of "layer output/input shape" is well defined, and that one shape will be returned by `layer$output_shape`/`layer$input_shape`. But if, for instance, you apply the same `layer_conv_2d()` layer to an input of shape `(32, 32, 3)`, and then to an input of shape `(64, 64, 3)`, the layer will have multiple input/output shapes, and you will have to fetch them by specifying the index of the node they belong to:
+
+```{r}
+a <- layer_input(shape = c(32, 32, 3))
+b <- layer_input(shape = c(64, 64, 3))
+
+conv <- layer_conv_2d(filters = 16, kernel_size = c(3,3), padding = 'same')
+
+conved_a <- a %>% conv
+
+# only one input so far, the following will work
+conv$input_shape
+
+conved_b <- b %>% conv
+# now the `$input_shape` property wouldn't work, but this does:
+get_input_shape_at(conv, 1)
+get_input_shape_at(conv, 2) 
 ```
 
 

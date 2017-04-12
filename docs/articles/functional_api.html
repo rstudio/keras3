@@ -261,22 +261,49 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras
 
 <span class="kw"><a href="../reference/fit.html">fit</a></span>(model, <span class="kw">c</span>(data_a, data_b), labels, <span class="dt">epochs =</span> <span class="dv">10</span>)</code></pre></div>
 </div>
-<div id="properites" class="section level2">
+<div id="the-concept-of-layer-node" class="section level2">
 <h2 class="hasAnchor">
-<a href="#properites" class="anchor"></a>Properites</h2>
-<p>You can inspect the various layers as well as the input and output tensors of a model using the <code>layers</code>, <code>inputs</code>, and <code>outputs</code> properites. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model$layers</code></pre></div>
-<pre><code>[[1]]
-Dense
+<a href="#the-concept-of-layer-node" class="anchor"></a>The concept of layer “node”</h2>
+<p>Whenever you are calling a layer on some input, you are creating a new tensor (the output of the layer), and you are adding a “node” to the layer, linking the input tensor to the output tensor. When you are calling the same layer multiple times, that layer owns multiple nodes indexed as 1, 2, 2…</p>
+<p>You can obtain the output tensor of a layer via <code>layer$output</code>, or its output shape via <code>layer$output_shape</code>. But what if a layer is connected to multiple inputs?</p>
+<p>As long as a layer is only connected to one input, there is no confusion, and <code>$output</code> will return the one output of the layer:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))
 
-[[2]]
-Dense</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model$inputs</code></pre></div>
-<pre><code>[[1]]
-Tensor("dense_1_input:0", shape=(?, 100), dtype=float32)</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model$outputs</code></pre></div>
-<pre><code>[[1]]
-Tensor("dense_2/Softmax:0", shape=(?, 10), dtype=float32)</code></pre>
+lstm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>)
+
+encoded_a &lt;-<span class="st"> </span>a %&gt;%<span class="st"> </span>lstm
+
+lstm$output</code></pre></div>
+<p>Not so if the layer has multiple inputs:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))
+b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))
+
+lstm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>)
+
+encoded_a &lt;-<span class="st"> </span>a %&gt;%<span class="st"> </span>lstm
+encoded_b &lt;-<span class="st"> </span>b %&gt;%<span class="st"> </span>lstm
+
+lstm$output</code></pre></div>
+<pre><code>AttributeError: Layer lstm_4 has multiple inbound nodes, hence the notion of "layer output" is ill-defined. Use `get_output_at(node_index)` instead.</code></pre>
+<p>Okay then. The following works:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_input_at.html">get_output_at</a></span>(lstm, <span class="dv">1</span>)
+<span class="kw"><a href="../reference/get_input_at.html">get_output_at</a></span>(lstm, <span class="dv">2</span>)</code></pre></div>
+<p>Simple enough, right?</p>
+<p>The same is true for the properties <code>input_shape</code> and <code>output_shape</code>: as long as the layer has only one node, or as long as all nodes have the same input/output shape, then the notion of “layer output/input shape” is well defined, and that one shape will be returned by <code>layer$output_shape</code>/<code>layer$input_shape</code>. But if, for instance, you apply the same <code><a href="../reference/layer_conv_2d.html">layer_conv_2d()</a></code> layer to an input of shape <code>(32, 32, 3)</code>, and then to an input of shape <code>(64, 64, 3)</code>, the layer will have multiple input/output shapes, and you will have to fetch them by specifying the index of the node they belong to:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">32</span>, <span class="dv">32</span>, <span class="dv">3</span>))
+b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">64</span>, <span class="dv">64</span>, <span class="dv">3</span>))
+
+conv &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">16</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>), <span class="dt">padding =</span> <span class="st">'same'</span>)
+
+conved_a &lt;-<span class="st"> </span>a %&gt;%<span class="st"> </span>conv
+
+<span class="co"># only one input so far, the following will work</span>
+conv$input_shape
+
+conved_b &lt;-<span class="st"> </span>b %&gt;%<span class="st"> </span>conv
+<span class="co"># now the `$input_shape` property wouldn't work, but this does:</span>
+<span class="kw"><a href="../reference/get_input_at.html">get_input_shape_at</a></span>(conv, <span class="dv">1</span>)
+<span class="kw"><a href="../reference/get_input_at.html">get_input_shape_at</a></span>(conv, <span class="dv">2</span>) </code></pre></div>
 </div>
 <div id="more-examples" class="section level2">
 <h2 class="hasAnchor">
@@ -419,7 +446,7 @@ video_qa_model &lt;-<span class="st"> </span><span class="kw"><a href="../refere
       <li><a href="#all-models-are-callable-just-like-layers">All models are callable, just like layers</a></li>
       <li><a href="#multi-input-and-multi-output-models">Multi-input and multi-output models</a></li>
       <li><a href="#shared-layers">Shared layers</a></li>
-      <li><a href="#properites">Properites</a></li>
+      <li><a href="#the-concept-of-layer-node">The concept of layer “node”</a></li>
       <li><a href="#more-examples">More examples</a></li>
       </ul>
 </div>
