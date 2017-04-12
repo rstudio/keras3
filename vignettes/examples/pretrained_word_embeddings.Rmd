@@ -1,0 +1,7 @@
+---
+title: pretrained_word_embeddings.R
+---
+
+```{r chunk, code=readLines("pretrained_word_embeddings.R"), eval=FALSE}
+```
+

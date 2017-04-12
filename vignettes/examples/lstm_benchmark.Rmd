@@ -1,0 +1,7 @@
+---
+title: lstm_benchmark.R
+---
+
+```{r chunk, code=readLines("lstm_benchmark.R"), eval=FALSE}
+```
+

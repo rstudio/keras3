@@ -1,0 +1,7 @@
+---
+title: mnist_acgan.R
+---
+
+```{r chunk, code=readLines("mnist_acgan.R"), eval=FALSE}
+```
+

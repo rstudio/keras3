@@ -1,0 +1,7 @@
+---
+title: cifar10_cnn.R
+---
+
+```{r chunk, code=readLines("cifar10_cnn.R"), eval=FALSE}
+```
+

@@ -1,0 +1,7 @@
+---
+title: mnist_net2net.R
+---
+
+```{r chunk, code=readLines("mnist_net2net.R"), eval=FALSE}
+```
+

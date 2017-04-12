@@ -1,0 +1,7 @@
+---
+title: mnist_swwae.R
+---
+
+```{r chunk, code=readLines("mnist_swwae.R"), eval=FALSE}
+```
+

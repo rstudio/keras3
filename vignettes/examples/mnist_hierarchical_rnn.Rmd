@@ -1,0 +1,7 @@
+---
+title: mnist_hierarchical_rnn.R
+---
+
+```{r chunk, code=readLines("mnist_hierarchical_rnn.R"), eval=FALSE}
+```
+

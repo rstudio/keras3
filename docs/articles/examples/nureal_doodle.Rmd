@@ -1,0 +1,7 @@
+---
+title: "[nureal_doodle.R](https://github.com/rstudio/keras/blob/master/vignettes/examples/nureal_doodle.R)"
+---
+
+```{r chunk, code=readLines("nureal_doodle.R"), eval=FALSE}
+```
+

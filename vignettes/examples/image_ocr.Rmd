@@ -1,0 +1,7 @@
+---
+title: image_ocr.R
+---
+
+```{r chunk, code=readLines("image_ocr.R"), eval=FALSE}
+```
+

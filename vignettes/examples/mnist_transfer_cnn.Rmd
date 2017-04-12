@@ -1,9 +1,6 @@
 ---
-title: "Example: Transfer Learning"
-output: rmarkdown::html_document
+title: mnist_transfer_cnn.R
 ---
-
-**[mnist_transfer_cnn.R](https://github.com/rstudio/keras/vignettes/examples/mnist_transfer_cnn.R)**
 
 ```{r chunk, code=readLines("mnist_transfer_cnn.R"), eval=FALSE}
 ```

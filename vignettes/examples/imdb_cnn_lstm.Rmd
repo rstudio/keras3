@@ -1,0 +1,7 @@
+---
+title: imdb_cnn_lstm.R
+---
+
+```{r chunk, code=readLines("imdb_cnn_lstm.R"), eval=FALSE}
+```
+

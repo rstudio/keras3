@@ -1,0 +1,7 @@
+---
+title: lstm_text_generation.R
+---
+
+```{r chunk, code=readLines("lstm_text_generation.R"), eval=FALSE}
+```
+

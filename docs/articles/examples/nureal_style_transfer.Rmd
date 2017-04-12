@@ -1,0 +1,7 @@
+---
+title: "[nureal_style_transfer.R](https://github.com/rstudio/keras/blob/master/vignettes/examples/nureal_style_transfer.R)"
+---
+
+```{r chunk, code=readLines("nureal_style_transfer.R"), eval=FALSE}
+```
+

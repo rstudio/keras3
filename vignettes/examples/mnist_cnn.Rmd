@@ -1,0 +1,7 @@
+---
+title: mnist_cnn.R
+---
+
+```{r chunk, code=readLines("mnist_cnn.R"), eval=FALSE}
+```
+
