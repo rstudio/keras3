@@ -15,3 +15,14 @@ test_call_succeeds("get_file", {
            origin = "https://www.irs.gov/pub/irs-soi/2010zipcode.zip", 
            cache_subdir = "tests")
 })
+
+
+test_call_succeeds("hdf5_matrix", {
+  
+  if (!keras:::have_h5py())
+    skip("h5py not available for testing")
+  
+  X_train = hdf5_matrix('test.h5', 'my_data', start=0, end=150)
+  y_train = hdf5_matrix('test.h5', 'my_labels', start=0, end=150)
+})
+

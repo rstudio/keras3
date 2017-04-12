@@ -195,6 +195,7 @@ reference:
     contents:
       - to_categorical
       - get_file
+      - hdf5_matrix
       
   - title: "Losses"
     contents:

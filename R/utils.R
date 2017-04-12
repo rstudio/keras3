@@ -1,6 +1,3 @@
-
-
-
 #' Converts a class vector (integers) to binary class matrix.
 #' 
 #' @details 
@@ -43,3 +40,42 @@ get_file <- function(fname, origin, untar = FALSE, md5_hash = NULL, cache_subdir
     cache_subdir = cache_subdir
   )
 }
+
+
+#' Representation of HDF5 dataset to be used instead of an R array
+#' 
+#' @param datapath string, path to a HDF5 file
+#' @param dataset string, name of the HDF5 dataset in the file specified in datapath
+#' @param start int, start of desired slice of the specified dataset
+#' @param end int, end of desired slice of the specified dataset
+#' @param normalizer function to be called on data when retrieved
+#' 
+#' @return An array-like HDF5 dataset.
+#' 
+#' @details 
+#' Providing `start` and `end` allows use of a slice of the dataset.
+#' 
+#' Optionally, a normalizer function (or lambda) can be given. This will
+#' be called on every slice of data retrieved.
+#' 
+#' @export
+hdf5_matrix <- function(datapath, dataset, start = 0, end = NULL, normalizer = NULL) {
+  
+  if (!have_h5py())
+    stop("The h5py Python package is required to read h5 files")
+  
+  keras$utils$HDF5Matrix(
+    datapath = datapath, 
+    dataset = dataset,
+    start = as.integer(start),
+    end = as_nullable_integer(end),
+    normalizer = normalizer
+  )  
+}
+
+
+
+
+
+
+
