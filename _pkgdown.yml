@@ -194,6 +194,7 @@ reference:
   - title: "Utils"
     contents:
       - to_categorical
+      - get_file
       
   - title: "Losses"
     contents:

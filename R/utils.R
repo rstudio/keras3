@@ -20,3 +20,26 @@ to_categorical <- function(y, num_classes = NULL) {
 }
 
  
+#' Downloads a file from a URL if it not already in the cache.
+#' 
+#' Passing the MD5 hash will verify the file after download
+#' as well as if it is already present in the cache.
+#' 
+#' @param fname name of the file
+#' @param origin original URL of the file
+#' @param untar boolean, whether the file should be decompressed
+#' @param md5_hash MD5 hash of the file for verification
+#' @param cache_subdir directory being used as the cache
+#' 
+#' @return Path to the downloaded file
+#' 
+#' @export
+get_file <- function(fname, origin, untar = FALSE, md5_hash = NULL, cache_subdir = "datasets") {
+  keras$utils$get_file(
+    fname = fname,
+    origin = origin,
+    untar = untar,
+    md5_hash = md5_hash,
+    cache_subdir = cache_subdir
+  )
+}

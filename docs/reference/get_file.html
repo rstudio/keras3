@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve tensors for layers with multiple nodes — get_input_at • keras</title>
+<title>Downloads a file from a URL if it not already in the cache. — get_file • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -106,48 +106,45 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve tensors for layers with multiple nodes</h1>
+    <h1>Downloads a file from a URL if it not already in the cache.</h1>
     </div>
 
     
-    <p>Whenever you are calling a layer on some input, you are creating a new tensor
-(the output of the layer), and you are adding a "node" to the layer, linking
-the input tensor to the output tensor. When you are calling the same layer
-multiple times, that layer owns multiple nodes indexed as 1, 2, 3. These
-functions enable you to retreive various tensor properties of layers with
-multiple nodes.</p>
+    <p>Passing the MD5 hash will verify the file after download
+as well as if it is already present in the cache.</p>
     
 
-    <pre><span class='fu'>get_input_at</span>(<span class='no'>layer</span>, <span class='no'>node_index</span>)
-
-<span class='fu'>get_output_at</span>(<span class='no'>layer</span>, <span class='no'>node_index</span>)
-
-<span class='fu'>get_input_shape_at</span>(<span class='no'>layer</span>, <span class='no'>node_index</span>)
-
-<span class='fu'>get_output_shape_at</span>(<span class='no'>layer</span>, <span class='no'>node_index</span>)
-
-<span class='fu'>get_input_mask_at</span>(<span class='no'>layer</span>, <span class='no'>node_index</span>)
-
-<span class='fu'>get_output_mask_at</span>(<span class='no'>layer</span>, <span class='no'>node_index</span>)</pre>
+    <pre><span class='fu'>get_file</span>(<span class='no'>fname</span>, <span class='no'>origin</span>, <span class='kw'>untar</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>md5_hash</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>cache_subdir</span> <span class='kw'>=</span> <span class='st'>"datasets"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>layer</th>
-      <td><p>Layer</p></td>
+      <th>fname</th>
+      <td><p>name of the file</p></td>
     </tr>
     <tr>
-      <th>node_index</th>
-      <td><p>Integer, index of the node from which to retrieve the
-attribute. E.g. <code>node_index = 1</code> will correspond to the first time the
-layer was called.</p></td>
+      <th>origin</th>
+      <td><p>original URL of the file</p></td>
+    </tr>
+    <tr>
+      <th>untar</th>
+      <td><p>boolean, whether the file should be decompressed</p></td>
+    </tr>
+    <tr>
+      <th>md5_hash</th>
+      <td><p>MD5 hash of the file for verification</p></td>
+    </tr>
+    <tr>
+      <th>cache_subdir</th>
+      <td><p>directory being used as the cache</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tensor (or list of tensors if the layer has multiple inputs/outputs).</p>
+    <p>Path to the downloaded file</p>
     
 
   </div>

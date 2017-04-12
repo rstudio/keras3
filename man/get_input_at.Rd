@@ -25,7 +25,7 @@ get_output_mask_at(layer, node_index)
 \item{layer}{Layer}
 
 \item{node_index}{Integer, index of the node from which to retrieve the
-attribute. E.g. \code{node_index = 0} will correspond to the first time the
+attribute. E.g. \code{node_index = 1} will correspond to the first time the
 layer was called.}
 }
 \value{
@@ -35,11 +35,7 @@ A tensor (or list of tensors if the layer has multiple inputs/outputs).
 Whenever you are calling a layer on some input, you are creating a new tensor
 (the output of the layer), and you are adding a "node" to the layer, linking
 the input tensor to the output tensor. When you are calling the same layer
-multiple times, that layer owns multiple nodes indexed as 0, 1, 2. These
+multiple times, that layer owns multiple nodes indexed as 1, 2, 3. These
 functions enable you to retreive various tensor properties of layers with
 multiple nodes.
-}
-\note{
-Node indexes are 0-based. E.g. \code{node_index = 0} will correspond to the
-first time the layer was called.
 }
