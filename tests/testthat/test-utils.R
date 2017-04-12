@@ -26,3 +26,8 @@ test_call_succeeds("hdf5_matrix", {
   y_train = hdf5_matrix('test.h5', 'my_labels', start=0, end=150)
 })
 
+
+test_call_succeeds("normalize", {
+  data <- runif(1000, min = 0, max = 9) %>%  round() %>% matrix(nrow = 1000, ncol = 1)
+  normalize(data)
+})

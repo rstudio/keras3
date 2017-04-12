@@ -194,8 +194,9 @@ reference:
   - title: "Utils"
     contents:
       - to_categorical
-      - get_file
+      - normalize
       - hdf5_matrix
+      - get_file
       
   - title: "Losses"
     contents:

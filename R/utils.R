@@ -73,6 +73,22 @@ hdf5_matrix <- function(datapath, dataset, start = 0, end = NULL, normalizer = N
   )  
 }
 
+#' Normalize a matrix or nd-array
+#' 
+#' @param x Matrix or array to normalize
+#' @param axis Axis along which to normalize
+#' @param order Normalization order (e.g. 2 for L2 norm) 
+#' 
+#' @return A normalized copy of the array.
+#' 
+#' @export
+normalize <- function(x, axis = -1, order = 2) {
+  keras$utils$normalize(
+    x = x,
+    axis = as.integer(axis),
+    order = as.integer(order)
+  )
+}
 
 
 
