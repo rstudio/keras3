@@ -15,3 +15,7 @@ h2.hasAnchor {
 pre:not([class]) {
   background-color: white;
 }
+
+blockquote {
+  font-size: inherit;
+}
