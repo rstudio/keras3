@@ -149,6 +149,63 @@ count_params <- function(layer) {
 }
 
 
+#' Retrieve tensors for layers with multiple nodes
+#' 
+#' Whenever you are calling a layer on some input, you are creating a new tensor
+#' (the output of the layer), and you are adding a "node" to the layer, linking 
+#' the input tensor to the output tensor. When you are calling the same layer 
+#' multiple times, that layer owns multiple nodes indexed as 1, 2, 3. These 
+#' functions enable you to retreive various tensor properties of layers with 
+#' multiple nodes.
+#' 
+#' @param layer Layer
+#' 
+#' @param node_index Integer, index of the node from which to retrieve the 
+#'   attribute. E.g. `node_index = 1` will correspond to the first time the 
+#'   layer was called.
+#'   
+#' @return A tensor (or list of tensors if the layer has multiple inputs/outputs).
+#'   
+#' @export
+get_input_at <- function(layer, node_index) {
+  layer$get_input_at(as_node_index(node_index))
+}
+
+#' @rdname get_input_at
+#' @export
+get_output_at <- function(layer, node_index) {
+  layer$get_output_at(as_node_index(node_index))
+}
+
+#' @rdname get_input_at
+#' @export
+get_input_shape_at <- function(layer, node_index) {
+  layer$get_input_shape_at(as_node_index(node_index))
+}
+
+#' @rdname get_input_at
+#' @export
+get_output_shape_at <- function(layer, node_index) {
+  layer$get_output_shape_at(as_node_index(node_index))
+}
+
+
+#' @rdname get_input_at
+#' @export
+get_input_mask_at <- function(layer, node_index) {
+  layer$get_input_mask_at(as_node_index(node_index))
+}
+
+#' @rdname get_input_at
+#' @export
+get_output_mask_at <- function(layer, node_index) {
+  layer$get_output_mask_at(as_node_index(node_index))
+}
+
+as_node_index <- function(node_index) {
+  as.integer(node_index-1)
+}
+
 
 
 

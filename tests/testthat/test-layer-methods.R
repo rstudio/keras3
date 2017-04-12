@@ -65,3 +65,17 @@ test_succeeds("layer parameters can be counted", {
   layer <- model$layers[[1]]
   count_params(layer)
 })
+
+
+test_succeeds("layer node functions are accessible", {
+  model <- define_model()
+  layer <- model$layers[[2]]
+  get_input_at(layer, 1)
+  get_output_at(layer, 1)
+  get_input_shape_at(layer, 1)
+  get_output_shape_at(layer, 1)
+  get_input_mask_at(layer, 1)
+  get_output_mask_at(layer, 1)
+})
+
+
