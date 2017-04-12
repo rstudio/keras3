@@ -39,5 +39,6 @@ Other model functions: \code{\link{compile}},
   \code{\link{keras_model}}, \code{\link{predict}},
   \code{\link{summary}}
 
-Other layer methods: \code{\link{get_weights}}
+Other layer methods: \code{\link{count_params}},
+  \code{\link{get_weights}}
 }

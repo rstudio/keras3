@@ -128,6 +128,7 @@ reference:
     contents:
       - get_config
       - get_weights
+      - count_params
  
   - title: "Model Persistence"
     contents:

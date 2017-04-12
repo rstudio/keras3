@@ -135,21 +135,19 @@ set_weights <- function(layer, weights) {
 }
 
 
-
-
-#  Count the total number of scalars composing the weights.
-#  
-#  @inheritParams get_weights
-#  
-#  @return An integer count
-#  
-#  
-#  @family layer methods
-#  
-#  @export
+#' Count the total number of scalars composing the weights.
+#' 
+#' @param layer Layer or model
+#'  
+#' @return An integer count
+#'  
+#' @family layer methods
+#'  
+#' @export
 count_params <- function(layer) {
   layer$count_params()
 }
+
 
 
 

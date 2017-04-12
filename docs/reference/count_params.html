@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Layer/Model weights as R arrays — get_weights • keras</title>
+<title>Count the total number of scalars composing the weights. — count_params • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -98,16 +98,14 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Layer/Model weights as R arrays</h1>
+    <h1>Count the total number of scalars composing the weights.</h1>
     </div>
 
     
-    <p>Layer/Model weights as R arrays</p>
+    <p>Count the total number of scalars composing the weights.</p>
     
 
-    <pre><span class='fu'>get_weights</span>(<span class='no'>layer</span>)
-
-<span class='fu'>set_weights</span>(<span class='no'>layer</span>, <span class='no'>weights</span>)</pre>
+    <pre><span class='fu'>count_params</span>(<span class='no'>layer</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -116,20 +114,16 @@
       <th>layer</th>
       <td><p>Layer or model</p></td>
     </tr>
-    <tr>
-      <th>weights</th>
-      <td><p>Weights as R array</p></td>
-    </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An integer count</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other model persistence: <code><a href='model_to_json.html'>model_to_json</a></code>,
-  <code><a href='model_to_yaml.html'>model_to_yaml</a></code>,
-  <code><a href='save_model_weights.html'>save_model_weights</a></code>,
-  <code><a href='save_model.html'>save_model</a></code></p>
-<p>Other layer methods: <code><a href='count_params.html'>count_params</a></code>,
-  <code><a href='get_config.html'>get_config</a></code></p>
+    <p>Other layer methods: <code><a href='get_config.html'>get_config</a></code>,
+  <code><a href='get_weights.html'>get_weights</a></code></p>
     
 
   </div>
@@ -138,6 +132,8 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 

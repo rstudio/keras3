@@ -23,5 +23,6 @@ Other model persistence: \code{\link{model_to_json}},
   \code{\link{save_model_weights}},
   \code{\link{save_model}}
 
-Other layer methods: \code{\link{get_config}}
+Other layer methods: \code{\link{count_params}},
+  \code{\link{get_config}}
 }

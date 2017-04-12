@@ -55,4 +55,13 @@ test_succeeds("layer weights as R array can be read and written", {
   set_weights(layer, weights)
 })
 
+test_succeeds("model parameters can be counted", {
+  model <- define_and_compile_model()
+  count_params(model)
+})
 
+test_succeeds("layer parameters can be counted", {
+  model <- define_and_compile_model()
+  layer <- model$layers[[1]]
+  count_params(layer)
+})
