@@ -26,4 +26,21 @@ $(document).ready(function() {
     a.attr('href', "https://github.com/rstudio/keras/blob/master/vignettes/examples/" + script);
     header.empty().append(a);
   }
+  
+  // manage active state of menu based on current page
+  var nav = $('ul.navbar-nav').children();
+  var menuAnchor = null;
+  var path = window.location.pathname;
+  if (path.match('/reference/') !== null)
+    menuAnchor = nav.eq(3);
+  else if (path.match('/articles/examples/') !== null)
+    menuAnchor = nav.eq(2);
+  else if (path.match('/articles/') !== null)
+    menuAnchor = nav.eq(1);
+  else
+    menuAnchor = nav.eq(0);
+  
+  // add active classes
+  if (menuAnchor !== null)
+    menuAnchor.addClass('active');
 });
