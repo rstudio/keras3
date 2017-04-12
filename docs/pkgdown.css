@@ -156,3 +156,8 @@ pre:not([class]) {
 blockquote {
   font-size: inherit;
 }
+
+.examples .page-header {
+  border-bottom: none;
+}
+
