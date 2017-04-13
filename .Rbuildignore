@@ -3,6 +3,7 @@
 ^man-roxygen/
 ^resources/
 ^.*\.hdf5$
+^.*\.h5$
 ^README.R?md$
 ^docs$
 ^vignettes/examples/$
