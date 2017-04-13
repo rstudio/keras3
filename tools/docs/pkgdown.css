@@ -16,6 +16,10 @@ pre:not([class]) {
   background-color: white;
 }
 
+.contents a {
+  text-decoration: none;
+}
+
 blockquote {
   font-size: inherit;
 }
