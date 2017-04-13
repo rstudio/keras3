@@ -116,7 +116,8 @@ histograms for the different layers in your model.</p>
     
 
     <pre class="usage"><span class='fu'>callback_tensorboard</span>(<span class='kw'>log_dir</span> <span class='kw'>=</span> <span class='st'>"./logs"</span>, <span class='kw'>histogram_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>write_graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>write_images</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>write_graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>write_images</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>embeddings_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>embeddings_layer_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>embeddings_metadata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -141,6 +142,24 @@ file can become quite large when write_graph is set to <code>TRUE</code></p></td
       <th>write_images</th>
       <td><p>whether to write model weights to visualize as image in
 Tensorboard.</p></td>
+    </tr>
+    <tr>
+      <th>embeddings_freq</th>
+      <td><p>frequency (in epochs) at which selected embedding
+layers will be saved.</p></td>
+    </tr>
+    <tr>
+      <th>embeddings_layer_names</th>
+      <td><p>a list of names of layers to keep eye on. If
+<code>NULL</code> or empty list all the embedding layers will be watched.</p></td>
+    </tr>
+    <tr>
+      <th>embeddings_metadata</th>
+      <td><p>a named list which maps layer name to a file name in
+which metadata for this embedding layer is saved. See the
+<a href = 'https://www.tensorflow.org/how_tos/embedding_viz/#metadata_optional'>details</a>
+about the metadata file format. In case if the same metadata file is used
+for all embedding layers, string can be passed.</p></td>
     </tr>
     </table>
     

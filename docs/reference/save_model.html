@@ -113,7 +113,7 @@
     <p>Save/Load models using HDF5 files</p>
     
 
-    <pre class="usage"><span class='fu'>save_model</span>(<span class='no'>model</span>, <span class='no'>filepath</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>save_model</span>(<span class='no'>model</span>, <span class='no'>filepath</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>include_optimizer</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>load_model</span>(<span class='no'>filepath</span>, <span class='kw'>custom_objects</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
@@ -133,9 +133,8 @@
       <td><p>Overwrite existing file if necessary</p></td>
     </tr>
     <tr>
-      <th>custom_objects</th>
-      <td><p>Mapping class names (or function names) of custom
-(non-Keras) objects to class/functions</p></td>
+      <th>include_optimizer</th>
+      <td><p>If <code>TRUE</code>, save optimizer's state.</p></td>
     </tr>
     </table>
     

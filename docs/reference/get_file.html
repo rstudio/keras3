@@ -110,35 +110,58 @@
     </div>
 
     
-    <p>Passing the MD5 hash will verify the file after download
-as well as if it is already present in the cache.</p>
+    <p>Passing the MD5 hash will verify the file after download as well as if it is
+already present in the cache.</p>
     
 
-    <pre class="usage"><span class='fu'>get_file</span>(<span class='no'>fname</span>, <span class='no'>origin</span>, <span class='kw'>untar</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>md5_hash</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>cache_subdir</span> <span class='kw'>=</span> <span class='st'>"datasets"</span>)</pre>
+    <pre class="usage"><span class='fu'>get_file</span>(<span class='no'>fname</span>, <span class='no'>origin</span>, <span class='kw'>file_hash</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cache_subdir</span> <span class='kw'>=</span> <span class='st'>"datasets"</span>,
+  <span class='kw'>hash_algorithm</span> <span class='kw'>=</span> <span class='st'>"auto"</span>, <span class='kw'>extract</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>archive_format</span> <span class='kw'>=</span> <span class='st'>"auto"</span>,
+  <span class='kw'>cache_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fname</th>
-      <td><p>name of the file</p></td>
+      <td><p>Name of the file. If an absolute path <code>/path/to/file.txt</code> is
+specified the file will be saved at that location.</p></td>
     </tr>
     <tr>
       <th>origin</th>
-      <td><p>original URL of the file</p></td>
+      <td><p>Original URL of the file.</p></td>
     </tr>
     <tr>
-      <th>untar</th>
-      <td><p>boolean, whether the file should be decompressed</p></td>
-    </tr>
-    <tr>
-      <th>md5_hash</th>
-      <td><p>MD5 hash of the file for verification</p></td>
+      <th>file_hash</th>
+      <td><p>The expected hash string of the file after download. The
+sha256 and md5 hash algorithms are both supported.</p></td>
     </tr>
     <tr>
       <th>cache_subdir</th>
-      <td><p>directory being used as the cache</p></td>
+      <td><p>Subdirectory under the Keras cache dir where the file is
+saved. If an absolute path <code>/path/to/folder</code> is specified the file will be
+saved at that location.</p></td>
+    </tr>
+    <tr>
+      <th>hash_algorithm</th>
+      <td><p>Select the hash algorithm to verify the file. options
+are 'md5', 'sha256', and 'auto'. The default 'auto' detects the hash
+algorithm in use.</p></td>
+    </tr>
+    <tr>
+      <th>extract</th>
+      <td><p>True tries extracting the file as an Archive, like tar or zip.</p></td>
+    </tr>
+    <tr>
+      <th>archive_format</th>
+      <td><p>Archive format to try for extracting the file. Options
+are 'auto', 'tar', 'zip', and None. 'tar' includes tar, tar.gz, and tar.bz
+files. The default 'auto' is 'tar', 'zip'. None or an empty list will
+return no matches found.</p></td>
+    </tr>
+    <tr>
+      <th>cache_dir:</th>
+      <td><p>Location to store cached files, when <code>NULL</code> it defaults to
+the Keras configuration directory.</p></td>
     </tr>
     </table>
     
