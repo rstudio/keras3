@@ -238,12 +238,20 @@ py_str.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(o
 }
 
 
+have_module <- function(module) {
+  tryCatch({ import(module); TRUE; }, error = function(e) FALSE)
+}
+
 have_h5py <- function() {
-  tryCatch({ import("h5py"); TRUE; }, error = function(e) FALSE)
+  have_module("h5py")
 }
 
 have_pyyaml <- function() {
-  tryCatch({ import("yaml"); TRUE; }, error = function(e) FALSE)
+  have_module("yaml")
+}
+
+have_requests <- function() {
+  have_module("requests")
 }
 
 confirm_overwrite <- function(filepath, overwrite) {

@@ -165,6 +165,18 @@ reference:
       - dataset_reuters_word_index
       - dataset_mnist
       - dataset_boston_housing
+   
+  - title: "Callbacks"
+    contents:
+      - callback_progbar_logger
+      - callback_model_checkpoint
+      - callback_early_stopping
+      - callback_remote_monitor
+      - callback_learning_rate_scheduler
+      - callback_tensorboard
+      - callback_reduce_lr_on_plateau
+      - callback_csv_logger
+      - callback_lambda
       
   - title: "Initializers"
     contents:
