@@ -139,7 +139,7 @@ fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL
   }
   
   # if callbacks isn't a list then make it one
-  if (!is.list(callbacks))
+  if (!is.null(callbacks) && !is.list(callbacks))
     callbacks = list(callbacks)
   
   # fit the model
