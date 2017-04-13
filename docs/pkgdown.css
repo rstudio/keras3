@@ -34,10 +34,6 @@ img.icon {
   float: right;
 }
 
-.contents a {
-  text-decoration: underline;
-}
-
 /* Section anchors ---------------------------------*/
 
 a.anchor {
@@ -142,15 +138,15 @@ pre img {
   display: block;
 }
 
-code a {
-  color: #375f84; /* to match keyword */
+code a, pre a {
+  color: #375f84;
 }
 
-.fl        {color: #1514b5;}
-.fu        {color: #264D66;}
-.ch,.st    {color: #036a07;} /* string */
-.kw, .kw a {color: #375f84;} /* keyword */
-.co        {color: #888888;} /* comment */
+.fl      {color: #1514b5;}
+.fu      {color: #000000;} /* function */
+.ch,.st  {color: #036a07;} /* string */
+.kw      {color: #264D66;} /* keyword */
+.co      {color: #888888;} /* comment */
 
 .message { color: black;   font-weight: bolder;}
 .error   { color: orange;  font-weight: bolder;}
