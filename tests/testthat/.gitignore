@@ -1,3 +1,4 @@
 MNIST-data
 checkpoint.h5
 training.csv
+tb_logs
