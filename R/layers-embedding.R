@@ -7,8 +7,8 @@
 #' 
 #' @inheritParams layer_dense
 #' 
-#' @param input_dim int > 0. Size of the vocabulary, ie. 1 + maximum integer 
-#'   index occurring in the input data.
+#' @param input_dim int > 0. Size of the vocabulary, i.e. maximum integer 
+#'   index + 1.
 #' @param output_dim int >= 0. Dimension of the dense embedding.
 #' @param embeddings_initializer Initializer for the `embeddings` matrix.
 #' @param embeddings_regularizer Regularizer function applied to the 
@@ -21,7 +21,7 @@
 #'   layers, which may take variable length inputs. If this is `TRUE` then all 
 #'   subsequent layers in the model need to support masking or an exception will
 #'   be raised. If mask_zero is set to TRUE, as a consequence, index 0 cannot be
-#'   used in the vocabulary (input_dim should equal `|vocabulary| + 2`).
+#'   used in the vocabulary (input_dim should equal size of vocabulary + 1).
 #' @param input_length Length of input sequences, when it is constant. This 
 #'   argument is required if you are going to connect `Flatten` then `Dense` 
 #'   layers upstream (without it, the shape of the dense outputs cannot be 

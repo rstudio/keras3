@@ -5,7 +5,7 @@
 \alias{load_model}
 \title{Save/Load models using HDF5 files}
 \usage{
-save_model(model, filepath, overwrite = TRUE)
+save_model(model, filepath, overwrite = TRUE, include_optimizer = TRUE)
 
 load_model(filepath, custom_objects = NULL)
 }
@@ -16,8 +16,7 @@ load_model(filepath, custom_objects = NULL)
 
 \item{overwrite}{Overwrite existing file if necessary}
 
-\item{custom_objects}{Mapping class names (or function names) of custom
-(non-Keras) objects to class/functions}
+\item{include_optimizer}{If \code{TRUE}, save optimizer's state.}
 }
 \description{
 Save/Load models using HDF5 files

@@ -153,7 +153,16 @@ callback_learning_rate_scheduler <- function(schedule) {
 #'   file can become quite large when write_graph is set to `TRUE`
 #' @param write_images whether to write model weights to visualize as image in
 #'   Tensorboard.
-#' 
+#' @param embeddings_freq frequency (in epochs) at which selected embedding 
+#'   layers will be saved.
+#' @param embeddings_layer_names a list of names of layers to keep eye on. If 
+#'   `NULL` or empty list all the embedding layers will be watched.
+#' @param  embeddings_metadata a named list which maps layer name to a file name in
+#'   which metadata for this embedding layer is saved. See the 
+#'   [details](https://www.tensorflow.org/how_tos/embedding_viz/#metadata_optional)
+#'    about the metadata file format. In case if the same metadata file is used
+#'   for all embedding layers, string can be passed.
+
 #' @details TensorBoard is a visualization tool provided with TensorFlow.
 #'   
 #'   If you have installed TensorFlow with pip, you should be able to launch 
@@ -169,12 +178,17 @@ callback_learning_rate_scheduler <- function(schedule) {
 #'    
 #' @export
 callback_tensorboard <- function(log_dir = "./logs", histogram_freq = 0, 
-                                 write_graph = TRUE, write_images = FALSE) {
+                                 write_graph = TRUE, write_images = FALSE,
+                                 embeddings_freq = 0, embeddings_layer_names = NULL,
+                                 embeddings_metadata = NULL) {
   keras$callbacks$TensorBoard(
     log_dir = log_dir,
     histogram_freq = as.integer(histogram_freq),
     write_graph = write_graph,
-    write_images = write_images
+    write_images = write_images,
+    embeddings_freq = as.integer(embeddings_freq),
+    embeddings_layer_names = embeddings_layer_names,
+    embeddings_metadata = embeddings_metadata
   )
 }
 
@@ -198,7 +212,7 @@ callback_tensorboard <- function(log_dir = "./logs", histogram_freq = 0,
 #'   quantity.
 #' @param epsilon threshold for measuring the new optimum, to only focus on 
 #'   significant changes.
-#' @param cooldown number of epochs to wait before resuming normal operation
+#' @param cooldown number of epochs to wait before resuming normal operation 
 #'   after lr has been reduced.
 #' @param min_lr lower bound on the learning rate.
 #' 

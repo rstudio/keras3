@@ -5,7 +5,8 @@
 \title{TensorBoard basic visualizations}
 \usage{
 callback_tensorboard(log_dir = "./logs", histogram_freq = 0,
-  write_graph = TRUE, write_images = FALSE)
+  write_graph = TRUE, write_images = FALSE, embeddings_freq = 0,
+  embeddings_layer_names = NULL, embeddings_metadata = NULL)
 }
 \arguments{
 \item{log_dir}{the path of the directory where to save the log files to be
@@ -20,6 +21,18 @@ file can become quite large when write_graph is set to \code{TRUE}}
 
 \item{write_images}{whether to write model weights to visualize as image in
 Tensorboard.}
+
+\item{embeddings_freq}{frequency (in epochs) at which selected embedding
+layers will be saved.}
+
+\item{embeddings_layer_names}{a list of names of layers to keep eye on. If
+\code{NULL} or empty list all the embedding layers will be watched.}
+
+\item{embeddings_metadata}{a named list which maps layer name to a file name in
+which metadata for this embedding layer is saved. See the
+\href{https://www.tensorflow.org/how_tos/embedding_viz/#metadata_optional}{details}
+about the metadata file format. In case if the same metadata file is used
+for all embedding layers, string can be passed.}
 }
 \description{
 This callback writes a log for TensorBoard, which allows you to visualize

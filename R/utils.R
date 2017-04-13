@@ -19,25 +19,43 @@ to_categorical <- function(y, num_classes = NULL) {
  
 #' Downloads a file from a URL if it not already in the cache.
 #' 
-#' Passing the MD5 hash will verify the file after download
-#' as well as if it is already present in the cache.
+#' Passing the MD5 hash will verify the file after download as well as if it is
+#' already present in the cache.
 #' 
-#' @param fname name of the file
-#' @param origin original URL of the file
-#' @param untar boolean, whether the file should be decompressed
-#' @param md5_hash MD5 hash of the file for verification
-#' @param cache_subdir directory being used as the cache
-#' 
+#' @param fname Name of the file. If an absolute path `/path/to/file.txt` is 
+#'   specified the file will be saved at that location.
+#' @param origin Original URL of the file.
+#' @param file_hash The expected hash string of the file after download. The
+#'   sha256 and md5 hash algorithms are both supported.
+#' @param cache_subdir Subdirectory under the Keras cache dir where the file is 
+#'   saved. If an absolute path `/path/to/folder` is specified the file will be
+#'   saved at that location.
+#' @param hash_algorithm Select the hash algorithm to verify the file. options
+#'   are 'md5', 'sha256', and 'auto'. The default 'auto' detects the hash
+#'   algorithm in use.
+#' @param extract True tries extracting the file as an Archive, like tar or zip.
+#' @param archive_format Archive format to try for extracting the file. Options
+#'   are 'auto', 'tar', 'zip', and None. 'tar' includes tar, tar.gz, and tar.bz
+#'   files. The default 'auto' is ['tar', 'zip']. None or an empty list will
+#'   return no matches found.
+#' @param cache_dir: Location to store cached files, when `NULL` it defaults to
+#'   the Keras configuration directory.
+#'   
 #' @return Path to the downloaded file
-#' 
+#'   
 #' @export
-get_file <- function(fname, origin, untar = FALSE, md5_hash = NULL, cache_subdir = "datasets") {
+get_file <- function(fname, origin, file_hash = NULL, cache_subdir = "datasets", 
+                     hash_algorithm = "auto", extract = FALSE,
+                     archive_format = "auto", cache_dir = NULL) {
   keras$utils$get_file(
     fname = fname,
     origin = origin,
-    untar = untar,
-    md5_hash = md5_hash,
-    cache_subdir = cache_subdir
+    file_hash = file_hash,
+    cache_subdir = cache_subdir,
+    hash_algorithm = hash_algorithm,
+    extract = extract,
+    archive_format = archive_format,
+    cache_dir = cache_dir
   )
 }
 

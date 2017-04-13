@@ -4,24 +4,41 @@
 \alias{get_file}
 \title{Downloads a file from a URL if it not already in the cache.}
 \usage{
-get_file(fname, origin, untar = FALSE, md5_hash = NULL,
-  cache_subdir = "datasets")
+get_file(fname, origin, file_hash = NULL, cache_subdir = "datasets",
+  hash_algorithm = "auto", extract = FALSE, archive_format = "auto",
+  cache_dir = NULL)
 }
 \arguments{
-\item{fname}{name of the file}
+\item{fname}{Name of the file. If an absolute path \code{/path/to/file.txt} is
+specified the file will be saved at that location.}
 
-\item{origin}{original URL of the file}
+\item{origin}{Original URL of the file.}
 
-\item{untar}{boolean, whether the file should be decompressed}
+\item{file_hash}{The expected hash string of the file after download. The
+sha256 and md5 hash algorithms are both supported.}
 
-\item{md5_hash}{MD5 hash of the file for verification}
+\item{cache_subdir}{Subdirectory under the Keras cache dir where the file is
+saved. If an absolute path \code{/path/to/folder} is specified the file will be
+saved at that location.}
 
-\item{cache_subdir}{directory being used as the cache}
+\item{hash_algorithm}{Select the hash algorithm to verify the file. options
+are 'md5', 'sha256', and 'auto'. The default 'auto' detects the hash
+algorithm in use.}
+
+\item{extract}{True tries extracting the file as an Archive, like tar or zip.}
+
+\item{archive_format}{Archive format to try for extracting the file. Options
+are 'auto', 'tar', 'zip', and None. 'tar' includes tar, tar.gz, and tar.bz
+files. The default 'auto' is \link{'tar', 'zip'}. None or an empty list will
+return no matches found.}
+
+\item{cache_dir:}{Location to store cached files, when \code{NULL} it defaults to
+the Keras configuration directory.}
 }
 \value{
 Path to the downloaded file
 }
 \description{
-Passing the MD5 hash will verify the file after download
-as well as if it is already present in the cache.
+Passing the MD5 hash will verify the file after download as well as if it is
+already present in the cache.
 }

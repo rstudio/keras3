@@ -4,8 +4,7 @@
 #' @param model Model to save
 #' @param filepath File path 
 #' @param overwrite Overwrite existing file if necessary
-#' @param custom_objects Mapping class names (or function names) of custom 
-#'   (non-Keras) objects to class/functions
+#' @param include_optimizer If `TRUE`, save optimizer's state.
 #' 
 #' @details The following components of the model are saved: 
 #' 
@@ -23,13 +22,16 @@
 #' @family model persistence
 #' 
 #' @export
-save_model <- function(model, filepath, overwrite = TRUE) {
+save_model <- function(model, filepath, overwrite = TRUE, include_optimizer = TRUE) {
   
   if (!have_h5py())
     stop("The h5py Python package is required to save and load models")
   
   if (confirm_overwrite(filepath, overwrite)) {
-    keras$models$save_model(model = model, filepath = filepath, overwrite = overwrite)
+    keras$models$save_model(model = model, 
+                            filepath = filepath, 
+                            overwrite = overwrite,
+                            include_optimizer = include_optimizer)
     invisible(TRUE) 
   } else {
     invisible(FALSE)
