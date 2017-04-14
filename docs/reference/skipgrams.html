@@ -168,8 +168,15 @@ encodes the probabibily to sample a word of rank i.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>list of <code>couples</code>, <code>labels</code> where <code>couples</code> are int pairs and <code>labels</code> are
-either 0 or 1.</p>
+    <p>List of <code>couples</code>, <code>labels</code> where:</p><ul>
+<li><p><code>couples</code> is a list of 2-element integer vectors: <code>[word_index, other_word_index]</code>.</p></li>
+<li><p><code>labels</code> is an integer vector of 0 and 1, where 1 indicates that <code>other_word_index</code>
+was found in the same window as <code>word_index</code>, and 0 indicates that <code>other_word_index</code>
+was random.</p></li>
+<li><p>if <code>categorical</code> is set to <code>TRUE</code>, the labels are categorical, ie. 1 becomes <code>[0,1]</code>,
+and 0 becomes <code>[1, 0]</code>.</p></li>
+</ul>
+
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

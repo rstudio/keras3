@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Text tokenization utility — text_tokenizer • keras</title>
+<title>Converts a PIL Image instance to a 3d-array. — image_to_array • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -109,79 +109,35 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Text tokenization utility</h1>
+    <h1>Converts a PIL Image instance to a 3d-array.</h1>
     </div>
 
     
-    <p>Vectorize a text corpus, by turning each text into either a sequence of
-integers (each integer being the index of a token in a dictionary) or into a
-vector where the coefficient for each token could be binary, based on word
-count, based on tf-idf...</p>
+    <p>Converts a PIL Image instance to a 3d-array.</p>
     
 
-    <pre class="usage"><span class='fu'>text_tokenizer</span>(<span class='kw'>num_words</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>filters</span> <span class='kw'>=</span> <span class='st'>"!\"#$%&amp;()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~\t\n"</span>, <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>" "</span>, <span class='kw'>char_level</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>image_to_array</span>(<span class='no'>img</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"channels_last"</span>, <span class='st'>"channels_first"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>num_words</th>
-      <td><p>the maximum number of words to keep, based on word
-frequency. Only the most common <code>num_words</code> words will be kept.</p></td>
+      <th>img</th>
+      <td><p>PIL Image instance.</p></td>
     </tr>
     <tr>
-      <th>filters</th>
-      <td><p>a string where each element is a character that will be
-filtered from the texts. The default is all punctuation, plus tabs and line
-breaks, minus the ' character.</p></td>
-    </tr>
-    <tr>
-      <th>lower</th>
-      <td><p>boolean. Whether to convert the texts to lowercase.</p></td>
-    </tr>
-    <tr>
-      <th>split</th>
-      <td><p>character or string to use for token splitting.</p></td>
-    </tr>
-    <tr>
-      <th>char_level</th>
-      <td><p>if True, every character will be treated as a word.</p></td>
+      <th>data_format</th>
+      <td><p>Image data format ("channels_last" or "channels_first")</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>By default, all punctuation is removed, turning the texts into
-space-separated sequences of words (words maybe include the ' character).
-These sequences are then split into lists of tokens. They will then be
-indexed or vectorized. <code>0</code> is a reserved index that won't be assigned to any
-word.</p>
-    
-    <h2 class="hasAnchor" id="attributes"><a class="anchor" href="#attributes"></a>Attributes</h2>
-
-    
-    <p>The tokenizer object has the following attributes:</p><ul>
-<li><p><code>word_counts</code> --- named list mapping words to the number of times they appeared
-on during fit. Only set after <code>fit_on_texts()</code> is called.</p></li>
-<li><p><code>word_docs</code> --- named list mapping words to the number of documents/texts they
-appeared on during fit. Only set after <code>fit_on_texts()</code> is called.</p></li>
-<li><p><code>word_index</code> --- named list mapping words to their rank/index (int). Only set
-after <code>fit_on_texts()</code> is called.</p></li>
-<li><p><code>document_count</code> --- int. Number of documents (texts/sequences) the tokenizer
-was trained on. Only set after <code>fit_on_texts()</code> or <code>fit_on_sequences()</code> is
-called.</p></li>
-</ul>
+    <p>A 3D array.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other text tokenization: <code><a href='fit_on_sequences.html'>fit_on_sequences</a></code>,
-  <code><a href='fit_on_texts.html'>fit_on_texts</a></code>,
-  <code><a href='sequences_to_matrix.html'>sequences_to_matrix</a></code>,
-  <code><a href='texts_to_matrix.html'>texts_to_matrix</a></code>,
-  <code><a href='texts_to_sequences_generator.html'>texts_to_sequences_generator</a></code>,
-  <code><a href='texts_to_sequences.html'>texts_to_sequences</a></code></p>
+    <p>Other image preprocessing: <code><a href='image_load.html'>image_load</a></code></p>
     
 
   </div>
@@ -190,9 +146,7 @@ called.</p></li>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#attributes">Attributes</a></li>
+      <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

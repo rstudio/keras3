@@ -307,4 +307,55 @@ sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count"
 }
 
 
+#' Loads an image into PIL format.
+#' 
+#' @param path Path to image file
+#' @param grayscale Boolean, whether to load the image as grayscale.
+#' @param target_size Either `NULL` (default to original size) or integer vector `(img_height, img_width)`.
+#' 
+#' @return A PIL Image instance.
+#' 
+#' @family image preprocessing
+#' 
+#' @export
+image_load <- function(path, grayscale = FALSE, target_size = NULL) {
+
+  if (!have_Pillow())
+    stop("The Pillow Python package is required to load images")
+  
+  # normalize target_size
+  if (!is.null(target_size)) {
+    if (length(target_size) != 2)
+      stop("target_size must be 2 element integer vector")
+    target_size <- as.integer(target_size)
+    target_size <- tuple(target_size[[1]], target_size[[2]])
+  }
+  
+  keras$preprocessing$image$load_img(
+    path = path.expand(path),
+    grayscale = grayscale,
+    target_size = target_size
+  )
+}
+
+#' Converts a PIL Image instance to a 3d-array.
+#' 
+#' @param img PIL Image instance.
+#' @param data_format Image data format ("channels_last" or "channels_first")
+#' 
+#' @return A 3D array.
+#' 
+#' @family image preprocessing
+#' 
+#' @export
+image_to_array <- function(img, data_format = c("channels_last", "channels_first")) {
+  keras$preprocessing$image$img_to_array(
+    img = img,
+    data_format = match.arg(data_format)
+  )
+}
+
+
+
+
 

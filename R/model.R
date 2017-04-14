@@ -254,6 +254,10 @@ have_requests <- function() {
   have_module("requests")
 }
 
+have_Pillow <- function() {
+  have_module("PIL") # aka Pillow
+}
+
 confirm_overwrite <- function(filepath, overwrite) {
   if (overwrite)
     TRUE 

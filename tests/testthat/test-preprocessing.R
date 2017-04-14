@@ -37,3 +37,8 @@ test_succeeds("use of text tokenizer", {
   for (mode in c('binary', 'count', 'tfidf', 'freq'))
     texts_to_matrix(tokenizer, texts, mode)
 })
+
+test_succeeds("loading an image for preprocessing", {
+  img <- image_load("digit.jpeg")
+  img_arr <- image_to_array(img)
+})
