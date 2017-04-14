@@ -29,10 +29,10 @@ algorithm in use.}
 
 \item{archive_format}{Archive format to try for extracting the file. Options
 are 'auto', 'tar', 'zip', and None. 'tar' includes tar, tar.gz, and tar.bz
-files. The default 'auto' is \link{'tar', 'zip'}. None or an empty list will
+files. The default 'auto' is ('tar', 'zip'). None or an empty list will
 return no matches found.}
 
-\item{cache_dir:}{Location to store cached files, when \code{NULL} it defaults to
+\item{cache_dir}{Location to store cached files, when \code{NULL} it defaults to
 the Keras configuration directory.}
 }
 \value{

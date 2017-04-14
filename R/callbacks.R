@@ -289,7 +289,8 @@ callback_lambda <- function(on_epoch_begin = NULL, on_epoch_end = NULL,
 }
 
 
-#' @title Base R6 class for Keras callbacks
+#' Base R6 class for Keras callbacks
+#' 
 #' @docType class
 #' 
 #' @format An [R6Class] generator object

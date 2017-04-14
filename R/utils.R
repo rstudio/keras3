@@ -36,9 +36,9 @@ to_categorical <- function(y, num_classes = NULL) {
 #' @param extract True tries extracting the file as an Archive, like tar or zip.
 #' @param archive_format Archive format to try for extracting the file. Options
 #'   are 'auto', 'tar', 'zip', and None. 'tar' includes tar, tar.gz, and tar.bz
-#'   files. The default 'auto' is ['tar', 'zip']. None or an empty list will
+#'   files. The default 'auto' is ('tar', 'zip'). None or an empty list will
 #'   return no matches found.
-#' @param cache_dir: Location to store cached files, when `NULL` it defaults to
+#' @param cache_dir Location to store cached files, when `NULL` it defaults to
 #'   the Keras configuration directory.
 #'   
 #' @return Path to the downloaded file

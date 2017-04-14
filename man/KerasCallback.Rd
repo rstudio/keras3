@@ -11,6 +11,9 @@ KerasCallback
 \value{
 \link{KerasCallback}.
 }
+\description{
+Base R6 class for Keras callbacks
+}
 \details{
 The \code{logs} named list that callback methods take as argument will
 contain keys for quantities relevant to the current batch or epoch.
