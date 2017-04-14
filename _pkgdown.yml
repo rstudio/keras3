@@ -25,8 +25,6 @@ navbar:
           href: articles/about_keras_layers.html
         - text: "Training Callbacks"
           href: articles/training_callbacks.html
-        - text: "Visualization with TensorBoard"
-          href: articles/visualization_with_tensorboard.html
     - text: Examples
       href: articles/examples/index.html
     - text: "Reference"
