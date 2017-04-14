@@ -35,6 +35,22 @@ These sequences are then split into lists of tokens. They will then be
 indexed or vectorized. \code{0} is a reserved index that won't be assigned to any
 word.
 }
+\section{Attributes}{
+
+The tokenizer object has the following attributes:
+\itemize{
+\item \code{word_counts} --- named list mapping words to the number of times they appeared
+on during fit. Only set after \code{fit_on_texts()} is called.
+\item \code{word_docs} --- named list mapping words to the number of documents/texts they
+appeared on during fit. Only set after \code{fit_on_texts()} is called.
+\item \code{word_index} --- named list mapping words to their rank/index (int). Only set
+after \code{fit_on_texts()} is called.
+\item \code{document_count} --- int. Number of documents (texts/sequences) the tokenizer
+was trained on. Only set after \code{fit_on_texts()} or \code{fit_on_sequences()} is
+called.
+}
+}
+
 \seealso{
 Other text tokenization: \code{\link{fit_on_sequences}},
   \code{\link{fit_on_texts}},

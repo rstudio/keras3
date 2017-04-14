@@ -179,6 +179,18 @@ text_one_hot <- function(text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\
 #' @param split character or string to use for token splitting.
 #' @param char_level if True, every character will be treated as a word.
 #'   
+#' @section Attributes:
+#' The tokenizer object has the following attributes:
+#' - `word_counts` --- named list mapping words to the number of times they appeared
+#'   on during fit. Only set after `fit_on_texts()` is called.
+#' - `word_docs` --- named list mapping words to the number of documents/texts they
+#'    appeared on during fit. Only set after `fit_on_texts()` is called.
+#' - `word_index` --- named list mapping words to their rank/index (int). Only set 
+#'    after `fit_on_texts()` is called.
+#' -  `document_count` --- int. Number of documents (texts/sequences) the tokenizer 
+#'    was trained on. Only set after `fit_on_texts()` or `fit_on_sequences()` is
+#'    called.
+#'   
 #' @family text tokenization
 #'   
 #' @export
@@ -293,4 +305,6 @@ sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count"
     mode = mode
   )
 }
+
+
 
