@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Save/Load models using HDF5 files — save_model • keras</title>
+<title>Pads each sequence to the same length (length of the longest sequence). — pad_sequences • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -109,62 +109,60 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Save/Load models using HDF5 files</h1>
+    <h1>Pads each sequence to the same length (length of the longest sequence).</h1>
     </div>
 
     
-    <p>Save/Load models using HDF5 files</p>
+    <p>Pads each sequence to the same length (length of the longest sequence).</p>
     
 
-    <pre class="usage"><span class='fu'>save_model</span>(<span class='no'>model</span>, <span class='no'>filepath</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>include_optimizer</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>load_model</span>(<span class='no'>filepath</span>, <span class='kw'>custom_objects</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>pad_sequences</span>(<span class='no'>sequences</span>, <span class='kw'>maxlen</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='st'>"int32"</span>, <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"pre"</span>,
+  <span class='kw'>truncating</span> <span class='kw'>=</span> <span class='st'>"pre"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
-      <td><p>Model to save</p></td>
+      <th>sequences</th>
+      <td><p>List of lists where each element is a sequence</p></td>
     </tr>
     <tr>
-      <th>filepath</th>
-      <td><p>File path</p></td>
+      <th>maxlen</th>
+      <td><p>int, maximum length</p></td>
     </tr>
     <tr>
-      <th>overwrite</th>
-      <td><p>Overwrite existing file if necessary</p></td>
+      <th>dtype</th>
+      <td><p>type to cast the resulting sequence.</p></td>
     </tr>
     <tr>
-      <th>include_optimizer</th>
-      <td><p>If <code>TRUE</code>, save optimizer's state.</p></td>
+      <th>padding</th>
+      <td><p>'pre' or 'post', pad either before or after each sequence.</p></td>
     </tr>
     <tr>
-      <th>custom_objects</th>
-      <td><p>Mapping class names (or function names) of custom
-(non-Keras) objects to class/functions</p></td>
+      <th>truncating</th>
+      <td><p>'pre' or 'post', remove values from sequences larger than maxlen either in the beginning or in the end of the sequence</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>float, value to pad the sequences to the desired value.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Array with dimensions (number_of_sequences, maxlen)</p>
+    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The following components of the model are saved:</p><ul>
-<li><p>The model architecture, allowing to re-instantiate the model.</p></li>
-<li><p>The model weights.</p></li>
-<li><p>The state of the optimizer, allowing to resume training exactly where you
-left off.
-This allows you to save the entirety of the state of a model
-in a single file.</p></li>
-</ul>
-    <p>Saved models can be reinstantiated via <code>load_model()</code>. The model returned by
-<code>load_model()</code> is a compiled model ready to be used (unless the saved model
-was never compiled in the first place).</p>
+    <p>If maxlen is provided, any sequence longer than maxlen is truncated to maxlen.
+Truncation happens off either the beginning (default) or
+the end of the sequence. Supports post-padding and pre-padding (default).</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other model persistence: <code><a href='get_weights.html'>get_weights</a></code>,
-  <code><a href='model_to_json.html'>model_to_json</a></code>, <code><a href='model_to_yaml.html'>model_to_yaml</a></code>,
-  <code><a href='save_model_weights.html'>save_model_weights</a></code></p>
+    <p>Other text preprocessing: <code><a href='make_sampling_table.html'>make_sampling_table</a></code>,
+  <code><a href='skipgrams.html'>skipgrams</a></code>, <code><a href='text_one_hot.html'>text_one_hot</a></code>,
+  <code><a href='text_to_word_sequence.html'>text_to_word_sequence</a></code></p>
     
 
   </div>
@@ -173,6 +171,8 @@ was never compiled in the first place).</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>

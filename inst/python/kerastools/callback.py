@@ -1,5 +1,6 @@
 
 from tensorflow.contrib.keras.python.keras.callbacks import Callback
+import tensorflow.contrib.keras as keras
 
 class RCallback(Callback):
   
@@ -37,4 +38,8 @@ class RCallback(Callback):
  
   def on_train_end(self, logs=None):
     self.r_on_train_end(logs)
+ 
+ 
+print(keras.preprocessing.text.text_to_word_sequence("the quick brown fox jumped over the lazy dog"))
+   
  

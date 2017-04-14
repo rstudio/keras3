@@ -148,6 +148,22 @@ reference:
       - model_to_json
       - model_to_yaml
  
+  - title: "Sequence Preprocessing"
+    contents: 
+       - pad_sequences
+       - skipgrams
+       - make_sampling_table
+       
+  - title: "Text Preprocessing"
+    contents:
+       - text_tokenizer
+       - fit_on_texts
+       - texts_to_sequences
+       - texts_to_sequences_generator
+       - texts_to_matrix
+       - fit_on_sequences
+       - sequences_to_matrix
+ 
   - title: "Optimizers"
     contents:
       - optimizer_sgd

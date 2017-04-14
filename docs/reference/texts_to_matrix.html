@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Save/Load models using HDF5 files — save_model • keras</title>
+<title>Convert a list of texts to a matrix. — texts_to_matrix • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -109,62 +109,45 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Save/Load models using HDF5 files</h1>
+    <h1>Convert a list of texts to a matrix.</h1>
     </div>
 
     
-    <p>Save/Load models using HDF5 files</p>
+    <p>Convert a list of texts to a matrix.</p>
     
 
-    <pre class="usage"><span class='fu'>save_model</span>(<span class='no'>model</span>, <span class='no'>filepath</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>include_optimizer</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>load_model</span>(<span class='no'>filepath</span>, <span class='kw'>custom_objects</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>texts_to_matrix</span>(<span class='no'>tokenizer</span>, <span class='no'>texts</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"binary"</span>, <span class='st'>"count"</span>, <span class='st'>"tfidf"</span>,
+  <span class='st'>"freq"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
-      <td><p>Model to save</p></td>
+      <th>tokenizer</th>
+      <td><p>Tokenizer</p></td>
     </tr>
     <tr>
-      <th>filepath</th>
-      <td><p>File path</p></td>
+      <th>texts</th>
+      <td><p>Vector/list of texts (strings).</p></td>
     </tr>
     <tr>
-      <th>overwrite</th>
-      <td><p>Overwrite existing file if necessary</p></td>
-    </tr>
-    <tr>
-      <th>include_optimizer</th>
-      <td><p>If <code>TRUE</code>, save optimizer's state.</p></td>
-    </tr>
-    <tr>
-      <th>custom_objects</th>
-      <td><p>Mapping class names (or function names) of custom
-(non-Keras) objects to class/functions</p></td>
+      <th>mode</th>
+      <td><p>one of "binary", "count", "tfidf", "freq".</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The following components of the model are saved:</p><ul>
-<li><p>The model architecture, allowing to re-instantiate the model.</p></li>
-<li><p>The model weights.</p></li>
-<li><p>The state of the optimizer, allowing to resume training exactly where you
-left off.
-This allows you to save the entirety of the state of a model
-in a single file.</p></li>
-</ul>
-    <p>Saved models can be reinstantiated via <code>load_model()</code>. The model returned by
-<code>load_model()</code> is a compiled model ready to be used (unless the saved model
-was never compiled in the first place).</p>
+    <p>A matrix</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other model persistence: <code><a href='get_weights.html'>get_weights</a></code>,
-  <code><a href='model_to_json.html'>model_to_json</a></code>, <code><a href='model_to_yaml.html'>model_to_yaml</a></code>,
-  <code><a href='save_model_weights.html'>save_model_weights</a></code></p>
+    <p>Other text tokenization: <code><a href='fit_on_sequences.html'>fit_on_sequences</a></code>,
+  <code><a href='fit_on_texts.html'>fit_on_texts</a></code>,
+  <code><a href='sequences_to_matrix.html'>sequences_to_matrix</a></code>,
+  <code><a href='text_tokenizer.html'>text_tokenizer</a></code>,
+  <code><a href='texts_to_sequences_generator.html'>texts_to_sequences_generator</a></code>,
+  <code><a href='texts_to_sequences.html'>texts_to_sequences</a></code></p>
     
 
   </div>
@@ -173,7 +156,7 @@ was never compiled in the first place).</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
+      <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

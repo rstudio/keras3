@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Save/Load models using HDF5 files — save_model • keras</title>
+<title>Generates skipgram word pairs. — skipgrams • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -109,62 +109,73 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Save/Load models using HDF5 files</h1>
+    <h1>Generates skipgram word pairs.</h1>
     </div>
 
     
-    <p>Save/Load models using HDF5 files</p>
+    <p>Takes a sequence (list of indexes of words), returns list of <code>couples</code> (word_index,
+other_word index) and <code>labels</code> (1s or 0s), where label = 1 if 'other_word'
+belongs to the context of 'word', and label=0 if 'other_word' is randomly
+sampled</p>
     
 
-    <pre class="usage"><span class='fu'>save_model</span>(<span class='no'>model</span>, <span class='no'>filepath</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>include_optimizer</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>load_model</span>(<span class='no'>filepath</span>, <span class='kw'>custom_objects</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>skipgrams</span>(<span class='no'>sequence</span>, <span class='no'>vocabulary_size</span>, <span class='kw'>window_size</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>negative_samples</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>categorical</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sampling_table</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
-      <td><p>Model to save</p></td>
+      <th>sequence</th>
+      <td><p>a word sequence (sentence), encoded as a list of word indices
+(integers). If using a <code>sampling_table</code>, word indices are expected to match
+the rank of the words in a reference dataset (e.g. 10 would encode the
+10-th most frequently occuring token). Note that index 0 is expected to be
+a non-word and will be skipped.</p></td>
     </tr>
     <tr>
-      <th>filepath</th>
-      <td><p>File path</p></td>
+      <th>vocabulary_size</th>
+      <td><p>int. maximum possible word index + 1</p></td>
     </tr>
     <tr>
-      <th>overwrite</th>
-      <td><p>Overwrite existing file if necessary</p></td>
+      <th>window_size</th>
+      <td><p>int. actually half-window. The window of a word wi will be
+<code>[i-window_size, i+window_size+1]</code></p></td>
     </tr>
     <tr>
-      <th>include_optimizer</th>
-      <td><p>If <code>TRUE</code>, save optimizer's state.</p></td>
+      <th>negative_samples</th>
+      <td><p>float &gt;= 0. 0 for no negative (=random) samples. 1
+for same number as positive samples. etc.</p></td>
     </tr>
     <tr>
-      <th>custom_objects</th>
-      <td><p>Mapping class names (or function names) of custom
-(non-Keras) objects to class/functions</p></td>
+      <th>shuffle</th>
+      <td><p>whether to shuffle the word couples before returning them.</p></td>
+    </tr>
+    <tr>
+      <th>categorical</th>
+      <td><p>bool. if FALSE, labels will be integers (eg. <code>[0, 1, 1 .. ]</code>),
+if TRUE labels will be categorical eg. <code>[[1,0],[0,1],[0,1] .. ]</code></p>
+<p>[[1,0]: R:[1,0
+[0,1]: R:0,1
+[0,1]: R:0,1</p></td>
+    </tr>
+    <tr>
+      <th>sampling_table</th>
+      <td><p>1D array of size <code>vocabulary_size</code> where the entry i
+encodes the probabibily to sample a word of rank i.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The following components of the model are saved:</p><ul>
-<li><p>The model architecture, allowing to re-instantiate the model.</p></li>
-<li><p>The model weights.</p></li>
-<li><p>The state of the optimizer, allowing to resume training exactly where you
-left off.
-This allows you to save the entirety of the state of a model
-in a single file.</p></li>
-</ul>
-    <p>Saved models can be reinstantiated via <code>load_model()</code>. The model returned by
-<code>load_model()</code> is a compiled model ready to be used (unless the saved model
-was never compiled in the first place).</p>
+    <p>list of <code>couples</code>, <code>labels</code> where <code>couples</code> are int pairs and <code>labels</code> are
+either 0 or 1.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other model persistence: <code><a href='get_weights.html'>get_weights</a></code>,
-  <code><a href='model_to_json.html'>model_to_json</a></code>, <code><a href='model_to_yaml.html'>model_to_yaml</a></code>,
-  <code><a href='save_model_weights.html'>save_model_weights</a></code></p>
+    <p>Other text preprocessing: <code><a href='make_sampling_table.html'>make_sampling_table</a></code>,
+  <code><a href='pad_sequences.html'>pad_sequences</a></code>, <code><a href='text_one_hot.html'>text_one_hot</a></code>,
+  <code><a href='text_to_word_sequence.html'>text_to_word_sequence</a></code></p>
     
 
   </div>
@@ -173,7 +184,7 @@ was never compiled in the first place).</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
+      <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>
