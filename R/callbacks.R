@@ -289,6 +289,119 @@ callback_lambda <- function(on_epoch_begin = NULL, on_epoch_end = NULL,
 }
 
 
+#' @title Base R6 class for Keras callbacks
+#' @docType class
+#' 
+#' @format An [R6Class] generator object
+#' 
+#' @field params Named list with training parameters (eg. verbosity, batch size, number of epochs...).
+#' @field model Reference to the Keras model being trained.
+#' 
+#' @section Methods:
+#' \describe{
+#'  \item{\code{on_epoch_begin(epoch, logs)}}{Called at the beginning of each epoch.}
+#'  \item{\code{on_epoch_end(epoch, logs)}}{Called at the end of each epoch.}
+#'  \item{\code{on_batch_begin(batch, logs)}}{Called at the beginning of each batch.}
+#'  \item{\code{on_batch_end(batch, logs)}}{Called at the end of each batch.}
+#'  \item{\code{on_train_begin(logs)}}{Called at the beginning of training.}
+#'  \item{\code{on_train_end(logs)}}{Called at the end of training.}
+#' }
+#' 
+#' @details  The `logs` named list that callback methods take as argument will 
+#' contain keys for quantities relevant to the current batch or epoch.
+#' 
+#' Currently, the `fit()` method for sequential models will include the following quantities in the `logs` that
+#' it passes to its callbacks:
+#'
+#' - `on_epoch_end`: logs include `acc` and `loss`, and optionally include `val_loss` (if validation is enabled in `fit`), and `val_acc` (if validation and accuracy monitoring are enabled).
+#' - `on_batch_begin`: logs include `size`, the number of samples in the current batch.
+#' - `on_batch_end`: logs include `loss`, and optionally `acc` (if accuracy monitoring is enabled).
+#' 
+#' @return [KerasCallback].
+#' 
+#' @examples 
+#' library(keras)
+#' 
+#' LossHistory <- R6::R6Class("LossHistory",
+#'   inherit = KerasCallback,
+#'   
+#'   public = list(
+#'   
+#'     losses = NULL,
+#' 
+#'     on_batch_end = function(batch, logs = list()) {
+#'       self$losses <- c(self$losses, logs[["loss"]])
+#'     }
+#'   )
+#' )
+#' 
+#' @export
+KerasCallback <- R6Class("KerasCallback",
+                         
+  public = list(
+    
+    params = NULL,
+    model = NULL,
+    
+    set_context = function(params = NULL, model = NULL) {
+      self$params <- params
+      self$model <- model
+    },
+    
+    on_epoch_begin = function(epoch, logs = NULL) {
+      
+    },
+    
+    on_epoch_end = function(epoch, logs = NULL) {
+      
+    },
+    
+    on_batch_begin = function(batch, logs = NULL) {
+      
+    },
+    
+    on_batch_end = function(batch, logs = NULL) {
+      
+    },
+    
+    on_train_begin = function(logs = NULL) {
+      
+    },
+    
+    on_train_end = function(logs = NULL) {
+      
+    }
+  )
+)
+
+normalize_callbacks <- function(callbacks) {
+  
+  # if callbacks isn't a list then make it one
+  if (!is.null(callbacks) && !is.list(callbacks))
+    callbacks <- list(callbacks)
+  
+  # import callback utility module
+  python_path <- system.file("python", package = "keras")
+  tools <- import_from_path("kerastools", path = python_path)
+  
+  lapply(callbacks, function(callback) {
+    if (inherits(callback, "KerasCallback")) {
+      # create a python callback to map to our R callback
+      tools$callback$RCallback(
+        r_set_context = callback$set_context,
+        r_on_epoch_begin = callback$on_epoch_begin,
+        r_on_epoch_end = callback$on_epoch_end,
+        r_on_batch_begin = callback$on_batch_begin,
+        r_on_batch_end = callback$on_batch_end,
+        r_on_train_begin = callback$on_train_begin,
+        r_on_train_end = callback$on_train_end
+      )
+    } else {
+      callback
+    }
+  })
+}
+
 
 
 

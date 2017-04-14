@@ -138,10 +138,6 @@ fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL
       stop("class_weight must be a named list of weights")
   }
   
-  # if callbacks isn't a list then make it one
-  if (!is.null(callbacks) && !is.list(callbacks))
-    callbacks = list(callbacks)
-  
   # fit the model
   history <- model$fit(
     x = as.array(x),
@@ -149,7 +145,7 @@ fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL
     batch_size = as.integer(batch_size),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
-    callbacks = callbacks,
+    callbacks = normalize_callbacks(callbacks),
     validation_split = validation_split,
     validation_data = validation_data,
     shuffle = shuffle,

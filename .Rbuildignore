@@ -9,4 +9,5 @@
 ^_pkgdown.yml$
 ^index.Rmd$
 ^index.html$
+^.*\.pyc$
  

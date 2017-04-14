@@ -44,5 +44,40 @@ test_callback("lambd", callback_lambda(
 ))
 
 
+test_succeeds("custom callbacks", {
+  
+  CustomCallback <- R6::R6Class("CustomCallback",
+    inherit = KerasCallback,
+    public = list(
+      on_train_begin = function(logs) {
+        cat("TRAIN BEGIN\n")
+      },
+      on_train_end = function(logs) {
+        cat("TRAIN END\n")
+      }
+    )
+  )
+  
+  LossHistory <- R6::R6Class("LossHistory",
+    inherit = KerasCallback,
+    public = list(
+      losses = NULL,
+     
+      on_batch_end = function(batch, logs = list()) {
+        self$losses <- c(self$losses, logs[["loss"]])
+      }
+    ))
+  
+  cc <- CustomCallback$new()
+  lh <- LossHistory$new()
+
+  define_compile_and_fit(callbacks = list(cc, lh))
+  
+  expect_is(lh$losses, "numeric")
+  
+})
+
+
+
 
 

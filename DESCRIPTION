@@ -21,9 +21,10 @@ BugReports: https://github.com/rstudio/keras/issues
 Depends:
     tensorflow (>= 0.7)
 Imports:
-    reticulate (>= 0.7.0.9002), 
+    reticulate (>= 0.7.0.9004), 
     magrittr, 
-    methods
+    methods,
+    R6
 Suggests: 
     testthat, 
     knitr

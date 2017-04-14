@@ -59,9 +59,6 @@
     <li>
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
-    <li>
-      <a href="../articles/visualization_with_tensorboard.html">Visualization with TensorBoard</a>
-    </li>
   </ul>
 </li>
 <li>
@@ -97,11 +94,227 @@
     
     
 <div class="contents">
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>A callback is a set of functions to be applied at given stages of the training procedure. You can use callbacks to get a view on internal states and statistics of the model during training. You can pass a list of callbacks (as the keyword argument <code>callbacks</code>) to the <code><a href="../reference/fit.html">fit()</a></code> function. The relevant methods of the callbacks will then be called at each stage of the training.</p>
+<p>For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
+<span class="co"># generate dummy training data</span>
+data &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rexp</span>(<span class="dv">1000</span>*<span class="dv">784</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">784</span>)
+labels &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1000</span>*<span class="dv">10</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>)), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">10</span>)
+
+<span class="co"># define model</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dv">32</span>, <span class="dt">input_shape =</span> <span class="dv">784</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dv">10</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'softmax'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+    <span class="dt">loss=</span><span class="st">'binary_crossentropy'</span>,
+    <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span>(),
+    <span class="dt">metrics=</span><span class="st">'accuracy'</span>
+  )
+  
+<span class="co"># fit with callbacks</span>
+<span class="kw"><a href="../reference/fit.html">fit</a></span>(model, data, labels, <span class="dt">callbacks =</span> <span class="kw">list</span>(
+  <span class="kw"><a href="../reference/callback_model_checkpoint.html">callback_model_checkpoint</a></span>(<span class="st">"checkpoints.h5"</span>),
+  <span class="kw"><a href="../reference/callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau</a></span>(<span class="dt">monitor =</span> <span class="st">"val_loss"</span>, <span class="dt">factor =</span> <span class="fl">0.1</span>)
+))</code></pre></div>
+</div>
+<div id="built-in-callbacks" class="section level2">
+<h2 class="hasAnchor">
+<a href="#built-in-callbacks" class="anchor"></a>Built in Callbacks</h2>
+<p>The following built-in callbacks are available as part of Keras:</p>
+<table class="table"><tbody>
+<tr>
+<!--  --><td>
+<code><a href="../reference/callback_progbar_logger.html">callback_progbar_logger()</a></code>
+</td>
+<td>
+<p>
+Callback that prints metrics to stdout.
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/callback_model_checkpoint.html">callback_model_checkpoint()</a></code>
+</td>
+<td>
+<p>
+Save the model after every epoch.
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/callback_early_stopping.html">callback_early_stopping()</a></code>
+</td>
+<td>
+<p>
+Stop training when a monitored quantity has stopped improving.
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/callback_remote_monitor.html">callback_remote_monitor()</a></code>
+</td>
+<td>
+<p>
+Callback used to stream events to a server.
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/callback_learning_rate_scheduler.html">callback_learning_rate_scheduler()</a></code>
+</td>
+<td>
+<p>
+Learning rate scheduler.
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code>
+</td>
+<td>
+<p>
+TensorBoard basic visualizations
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau()</a></code>
+</td>
+<td>
+<p>
+Reduce learning rate when a metric has stopped improving.
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/callback_csv_logger.html">callback_csv_logger()</a></code>
+</td>
+<td>
+<p>
+Callback that streams epoch results to a csv file
+</p>
+</td>
+</tr>
+<tr>
+<!--  --><td>
+<code><a href="../reference/callback_lambda.html">callback_lambda()</a></code>
+</td>
+<td>
+<p>
+Create a custom callback
+</p>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div id="custom-callbacks" class="section level2">
+<h2 class="hasAnchor">
+<a href="#custom-callbacks" class="anchor"></a>Custom Callbacks</h2>
+<p>You can create a custom callback by creating a new <a href="https://cran.r-project.org/web/packages/R6/vignettes/Introduction.html">R6 class</a> that inherits from the <code>KerasCallback</code> class.</p>
+<p>Here’s a simple example saving a list of losses over each batch during training:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+<span class="co"># define custom callback class</span>
+LossHistory &lt;-<span class="st"> </span>R6::<span class="kw">R6Class</span>(<span class="st">"LossHistory"</span>,
+  <span class="dt">inherit =</span> KerasCallback,
+  
+  <span class="dt">public =</span> <span class="kw">list</span>(
+    
+    <span class="dt">losses =</span> <span class="ot">NULL</span>,
+     
+    <span class="dt">on_batch_end =</span> function(batch, <span class="dt">logs =</span> <span class="kw">list</span>()) {
+      self$losses &lt;-<span class="st"> </span><span class="kw">c</span>(self$losses, logs[[<span class="st">"loss"</span>]])
+    }
+))
+
+<span class="co"># define model</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">input_dim =</span> <span class="kw">c</span>(<span class="dv">784</span>), <span class="dt">init =</span> <span class="st">'uniform'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'softmax'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+    <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>, 
+    <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>
+  )
+
+<span class="co"># create history callback object and use it during training</span>
+history &lt;-<span class="st"> </span>LossHistory$<span class="kw">new</span>()
+<span class="kw"><a href="../reference/fit.html">fit</a></span>(model, X_train, Y_train, <span class="dt">batch_size=</span><span class="dv">128</span>, <span class="dt">epochs=</span><span class="dv">20</span>, <span class="dt">verbose=</span><span class="dv">0</span>, <span class="dt">callbacks=</span> <span class="kw">list</span>(history))
+
+<span class="co"># print the accumulated losses</span>
+history$losses</code></pre></div>
+<pre><code>[1] 0.6604760 0.3547246 0.2595316 0.2590170 ...</code></pre>
+<div id="fields" class="section level3">
+<h3 class="hasAnchor">
+<a href="#fields" class="anchor"></a>Fields</h3>
+<p>Custom callback objects have access to the current model and it’s training parameters via the following fields:</p>
+<dl>
+<dt><code>self$params</code></dt>
+<dd>
+<p>Named list with training parameters (eg. verbosity, batch size, number of epochs…).</p>
+</dd>
+<dt><code>self$model</code></dt>
+<dd>
+<p>Reference to the Keras model being trained.</p>
+</dd>
+</dl>
+</div>
+<div id="methods" class="section level3">
+<h3 class="hasAnchor">
+<a href="#methods" class="anchor"></a>Methods</h3>
+<p>Custom callback objects can implement one or more of the following methods:</p>
+<dl>
+<dt><code>on_epoch_begin(epoch, logs)</code></dt>
+<dd>
+<p>Called at the beginning of each epoch.</p>
+</dd>
+<dt><code>on_epoch_end(epoch, logs)</code></dt>
+<dd>
+<p>Called at the end of each epoch.</p>
+</dd>
+<dt><code>on_batch_begin(batch, logs)</code></dt>
+<dd>
+<p>Called at the beginning of each batch.</p>
+</dd>
+<dt><code>on_batch_end(batch, logs)</code></dt>
+<dd>
+<p>Called at the end of each batch.</p>
+</dd>
+<dt><code>on_train_begin(logs)</code></dt>
+<dd>
+<p>Called at the beginning of training.</p>
+</dd>
+<dt><code>on_train_end(logs)</code></dt>
+<dd>
+<p>Called at the end of training.</p>
+</dd>
+</dl>
+</div>
+</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#overview">Overview</a></li>
+      <li><a href="#built-in-callbacks">Built in Callbacks</a></li>
+      <li><a href="#custom-callbacks">Custom Callbacks</a></li>
+      </ul>
+</div>
       </div>
 
 </div>

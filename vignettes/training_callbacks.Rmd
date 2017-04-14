@@ -12,4 +12,187 @@ library(keras)
 knitr::opts_chunk$set(comment = NA, eval = FALSE)
 ```
 
+## Overview
+
+A callback is a set of functions to be applied at given stages of the training procedure. You can use callbacks to get a view on internal states and statistics of the model during training. You can pass a list of callbacks (as the keyword argument `callbacks`) to the `fit()` function. The relevant methods of the callbacks will then be called at each stage of the training. 
+
+For example:
+
+```{r}
+library(keras)
+
+# generate dummy training data
+data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)
+labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
+
+# define model
+model <- keras_model_sequential() %>%
+  layer_dense(32, input_shape = 784) %>%
+  layer_activation('relu') %>%
+  layer_dense(10) %>%
+  layer_activation('softmax') %>% 
+  compile(
+    loss='binary_crossentropy',
+    optimizer = optimizer_sgd(),
+    metrics='accuracy'
+  )
+  
+# fit with callbacks
+fit(model, data, labels, callbacks = list(
+  callback_model_checkpoint("checkpoints.h5"),
+  callback_reduce_lr_on_plateau(monitor = "val_loss", factor = 0.1)
+))
+```
+
+## Built in Callbacks
+
+The following built-in callbacks are available as part of Keras:
+
+<table class="ref-index">
+
+<tbody>
+<tr>
+<!--  -->
+<td>
+`callback_progbar_logger()`
+</td>
+<td><p>Callback that prints metrics to stdout.</p></td>
+</tr><tr>
+<!--  -->
+<td>
+`callback_model_checkpoint()`
+</td>
+<td><p>Save the model after every epoch.</p></td>
+</tr><tr>
+<!--  -->
+<td>
+`callback_early_stopping()`
+</td>
+<td><p>Stop training when a monitored quantity has stopped improving.</p></td>
+</tr><tr>
+<!--  -->
+<td>
+`callback_remote_monitor()`
+</td>
+<td><p>Callback used to stream events to a server.</p></td>
+</tr><tr>
+<!--  -->
+<td>
+`callback_learning_rate_scheduler()`
+</td>
+<td><p>Learning rate scheduler.</p></td>
+</tr><tr>
+<!--  -->
+<td>
+`callback_tensorboard()`
+</td>
+<td><p>TensorBoard basic visualizations</p></td>
+</tr><tr>
+<!--  -->
+<td>
+`callback_reduce_lr_on_plateau()`
+</td>
+<td><p>Reduce learning rate when a metric has stopped improving.</p></td>
+</tr><tr>
+<!--  -->
+<td>
+`callback_csv_logger()`
+</td>
+<td><p>Callback that streams epoch results to a csv file</p></td>
+</tr><tr>
+<!--  -->
+<td>
+`callback_lambda()`
+</td>
+<td><p>Create a custom callback</p></td>
+</tr>
+</tbody>
+
+</table>
+
+
+## Custom Callbacks
+
+You can create a custom callback by creating a new [R6 class](https://cran.r-project.org/web/packages/R6/vignettes/Introduction.html) that inherits from the `KerasCallback` class. 
+
+Here's a simple example saving a list of losses over each batch during training:
+
+```{r}
+library(keras)
+
+# define custom callback class
+LossHistory <- R6::R6Class("LossHistory",
+  inherit = KerasCallback,
+  
+  public = list(
+    
+    losses = NULL,
+     
+    on_batch_end = function(batch, logs = list()) {
+      self$losses <- c(self$losses, logs[["loss"]])
+    }
+))
+
+# define model
+model <- keras_model_sequential() %>% 
+  layer_dense(units = 10, input_dim = c(784), init = 'uniform') %>% 
+  layer_activation(activation = 'softmax') %>% 
+  compile(
+    loss = 'categorical_crossentropy', 
+    optimizer = 'rmsprop'
+  )
+
+# create history callback object and use it during training
+history <- LossHistory$new()
+fit(model, X_train, Y_train, batch_size=128, epochs=20, verbose=0, callbacks= list(history))
+
+# print the accumulated losses
+history$losses
+```
+
+```
+[1] 0.6604760 0.3547246 0.2595316 0.2590170 ...
+```
+
+### Fields
+
+Custom callback objects have access to the current model and it's training parameters via the following fields:
+
+`self$params`
+
+:    Named list with training parameters (eg. verbosity, batch size, number of epochs...).
+
+`self$model`
+
+:    Reference to the Keras model being trained.
+
+### Methods
+
+Custom callback objects can implement one or more of the following methods:
+
+`on_epoch_begin(epoch, logs)`
+
+:    Called at the beginning of each epoch.
+
+`on_epoch_end(epoch, logs)`
+
+:    Called at the end of each epoch.
+
+`on_batch_begin(batch, logs)`
+
+:    Called at the beginning of each batch.
+
+`on_batch_end(batch, logs)`
+
+:    Called at the end of each batch.
+
+`on_train_begin(logs)`
+
+:    Called at the beginning of training.
+
+`on_train_end(logs)`
+
+:    Called at the end of training.
+
+
 

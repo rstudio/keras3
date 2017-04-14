@@ -1,6 +1,7 @@
 
 #' @import reticulate
 #' @import tensorflow
+#' @import R6
 NULL
 
 # Main Keras module

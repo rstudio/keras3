@@ -179,6 +179,7 @@ reference:
       - callback_reduce_lr_on_plateau
       - callback_csv_logger
       - callback_lambda
+      - KerasCallback
       
   - title: "Initializers"
     contents:
