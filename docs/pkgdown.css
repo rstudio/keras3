@@ -182,3 +182,7 @@ blockquote {
   border-bottom: none;
 }
 
+#sidebar .nav>li>a {
+  padding-top: 1px;
+  padding-bottom: 2px;
+}

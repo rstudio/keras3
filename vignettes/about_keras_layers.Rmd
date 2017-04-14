@@ -25,7 +25,32 @@ model <- keras_model_sequential() %>%
   layer_activation('softmax')
 ```
 
-See the [API Reference](https://rstudio.github.io/reference/) for documentation on all of the available layer types.
+A wide variety of layers are available, including:
+
+- [Core Layers](https://rstudio.github.io/keras/reference/index.html#section-core-layers)
+
+- [Convolutional Layers](https://rstudio.github.io/keras/reference/index.html#section-convolutional-layers)
+
+- [Pooling Layers](https://rstudio.github.io/keras/reference/index.html#section-pooling-layers)
+
+- [Activation Layers](https://rstudio.github.io/keras/reference/index.html#section-activation-layers)
+
+- [Dropout Layers](https://rstudio.github.io/keras/reference/index.html#section-dropout-layers)
+
+- [Locally-connected Layers](https://rstudio.github.io/keras/reference/index.html#section-locally-connected-layers)
+
+- [Recurrent Layers](https://rstudio.github.io/keras/reference/index.html#section-recurrent-layers)
+
+- [Embedding Layers](https://rstudio.github.io/keras/reference/index.html#section-embedding-layers)
+
+- [Normalization Layers](https://rstudio.github.io/keras/reference/index.html#section-normalization-layers)
+
+- [Noise Layers](https://rstudio.github.io/keras/reference/index.html#section-noise-layers)
+
+- [Merge Layers](https://rstudio.github.io/keras/reference/index.html#section-merge-layers)
+
+- [Layer Wrappers](https://rstudio.github.io/keras/reference/index.html#section-layer-wrappers)
+
 
 ## Properties
 
