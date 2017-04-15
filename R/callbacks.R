@@ -54,7 +54,7 @@ callback_model_checkpoint <- function(filepath, monitor = "val_loss", verbose = 
     stop("The h5py Python package is required to save model checkpoints")
   
   keras$callbacks$ModelCheckpoint(
-    filepath = filepath,
+    filepath = normalize_path(filepath),
     monitor = monitor,
     verbose = as.integer(verbose),
     save_best_only = save_best_only,
@@ -182,7 +182,7 @@ callback_tensorboard <- function(log_dir = "./logs", histogram_freq = 0,
                                  embeddings_freq = 0, embeddings_layer_names = NULL,
                                  embeddings_metadata = NULL) {
   keras$callbacks$TensorBoard(
-    log_dir = log_dir,
+    log_dir = normalize_path(log_dir),
     histogram_freq = as.integer(histogram_freq),
     write_graph = write_graph,
     write_images = write_images,
@@ -248,7 +248,7 @@ callback_reduce_lr_on_plateau <- function(monitor = "val_loss", factor = 0.1, pa
 #' @export
 callback_csv_logger <- function(filename, separator = ",", append = FALSE) {
   keras$callbacks$CSVLogger(
-    filename = filename,
+    filename = normalize_path(filename),
     separator = separator,
     append = append
   )

@@ -29,6 +29,7 @@ save_model <- function(model, filepath, overwrite = TRUE, include_optimizer = TR
   if (!have_h5py())
     stop("The h5py Python package is required to save and load models")
   
+  filepath <- normalize_path(filepath)
   if (confirm_overwrite(filepath, overwrite)) {
     keras$models$save_model(model = model, 
                             filepath = filepath, 
@@ -45,7 +46,7 @@ save_model <- function(model, filepath, overwrite = TRUE, include_optimizer = TR
 load_model <- function(filepath, custom_objects = NULL) {
   if (!have_h5py())
     stop("The h5py Python package is required to save and load models")
-  keras$models$load_model(filepath = filepath, custom_objects = custom_objects)
+  keras$models$load_model(filepath = normalize_path(filepath), custom_objects = custom_objects)
 }
 
 
@@ -83,7 +84,7 @@ save_model_weights <- function(model, filepath, overwrite = TRUE) {
   
   if (!have_h5py())
     stop("The h5py Python package is required to save and load model weights")
-  
+  filepath <- normalize_path(filepath)
   if (confirm_overwrite(filepath, overwrite)) {
     model$save_weights(filepath = filepath, overwrite = overwrite)
     invisible(TRUE)
@@ -98,7 +99,7 @@ save_model_weights <- function(model, filepath, overwrite = TRUE) {
 load_model_weights <- function(model, filepath, by_name = FALSE) {
   if (!have_h5py())
     stop("The h5py Python package is required to save and load model weights")
-  invisible(model$load_weights(filepath = filepath, by_name = by_name))
+  invisible(model$load_weights(filepath = normalize_path(filepath), by_name = by_name))
 }
 
 

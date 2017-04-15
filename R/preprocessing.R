@@ -332,7 +332,7 @@ image_load <- function(path, grayscale = FALSE, target_size = NULL) {
   }
   
   keras$preprocessing$image$load_img(
-    path = path.expand(path),
+    path = normalize_path(path),
     grayscale = grayscale,
     target_size = target_size
   )
@@ -480,7 +480,7 @@ image_data_flow <- function(generator, x, y = NULL, batch_size = 32, shuffle = T
     batch_size = as.integer(batch_size),
     shuffle = shuffle,
     seed = as_nullable_integer(seed),
-    save_to_dir = save_to_dir,
+    save_to_dir = normalize_path(save_to_dir),
     save_prefix = save_prefix,
     save_format = save_format
   )
@@ -526,7 +526,7 @@ image_data_flow_from_directory <- function(generator, directory, target_size = c
                                            save_to_dir = NULL, save_prefix = "", save_format = "jpeg",
                                            follow_links = FALSE) {
   generator$flow_from_directory(
-    directory = directory,
+    directory = normalize_path(directory),
     target_size = as.integer(target_size),
     color_mode = color_mode,
     classes = classes,
@@ -534,7 +534,7 @@ image_data_flow_from_directory <- function(generator, directory, target_size = c
     batch_size = as.integer(batch_size),
     shuffle = shuffle,
     seed = as_nullable_integer(seed),
-    save_to_dir = save_to_dir,
+    save_to_dir = normalize_path(save_to_dir),
     save_prefix = save_prefix,
     save_format = save_format,
     follow_links = follow_links

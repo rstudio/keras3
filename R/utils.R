@@ -48,14 +48,14 @@ get_file <- function(fname, origin, file_hash = NULL, cache_subdir = "datasets",
                      hash_algorithm = "auto", extract = FALSE,
                      archive_format = "auto", cache_dir = NULL) {
   keras$utils$get_file(
-    fname = fname,
+    fname = normalize_path(fname),
     origin = origin,
     file_hash = file_hash,
     cache_subdir = cache_subdir,
     hash_algorithm = hash_algorithm,
     extract = extract,
     archive_format = archive_format,
-    cache_dir = cache_dir
+    cache_dir = normalize_path(cache_dir)
   )
 }
 
@@ -83,7 +83,7 @@ hdf5_matrix <- function(datapath, dataset, start = 0, end = NULL, normalizer = N
     stop("The h5py Python package is required to read h5 files")
   
   keras$utils$HDF5Matrix(
-    datapath = datapath, 
+    datapath = normalize_path(datapath), 
     dataset = dataset,
     start = as.integer(start),
     end = as_nullable_integer(end),

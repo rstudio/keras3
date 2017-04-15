@@ -361,6 +361,14 @@ as_nullable_integer <- function(x) {
 }
 
 
+# Helper function to normalize paths
+normalize_path <- function(path) {
+  if (is.null(path))
+    NULL
+  else
+    path.expand(path)
+}
+
 # Helper function to coerce shape arguments to tuple
 normalize_shape <- function(shape) {
   
