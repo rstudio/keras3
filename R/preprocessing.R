@@ -356,6 +356,192 @@ image_to_array <- function(img, data_format = c("channels_last", "channels_first
 }
 
 
+#' Generate minibatches of image data with real-time data augmentation.
+#' 
+#' @param featurewise_center set input mean to 0 over the dataset.
+#' @param samplewise_center set each sample mean to 0.
+#' @param featurewise_std_normalization divide inputs by std of the dataset.
+#' @param samplewise_std_normalization divide each input by its std.
+#' @param zca_whitening apply ZCA whitening.
+#' @param rotation_range degrees (0 to 180).
+#' @param width_shift_range fraction of total width.
+#' @param height_shift_range fraction of total height.
+#' @param shear_range shear intensity (shear angle in radians).
+#' @param zoom_range amount of zoom. if scalar z, zoom will be randomly picked
+#'   in the range `[1-z, 1+z]`. A sequence of two can be passed instead to select
+#'   this range.
+#' @param channel_shift_range shift range for each channels.
+#' @param fill_mode points outside the boundaries are filled according to the
+#'   given mode ('constant', 'nearest', 'reflect' or 'wrap'). Default is
+#'   'nearest'.
+#' @param cval value used for points outside the boundaries when fill_mode is
+#'   'constant'. Default is 0.
+#' @param horizontal_flip whether to randomly flip images horizontally.
+#' @param vertical_flip whether to randomly flip images vertically.
+#' @param rescale rescaling factor. If NULL or 0, no rescaling is applied,
+#'   otherwise we multiply the data by the value provided (before applying any
+#'   other transformation).
+#' @param preprocessing_function function that will be implied on each input.
+#'   The function will run before any other modification on it. The function
+#'   should take one argument: one image (tensor with rank 3), and should
+#'   output a tensor with the same shape.
+#' @param data_format 'channels_first' or 'channels_last'. In 'channels_first'
+#'   mode, the channels dimension (the depth) is at index 1, in 'channels_last'
+#'   mode it is at index 3. It defaults to the `image_data_format` value found
+#'   in your Keras config file at `~/.keras/keras.json`. If you never set it,
+#'   then it will be "channels_last".
+#'   
+#' @export
+image_data_generator <- function(featurewise_center = FALSE, samplewise_center = FALSE, 
+                                 featurewise_std_normalization = FALSE, samplewise_std_normalization = FALSE, 
+                                 zca_whitening = FALSE, rotation_range = 0.0, width_shift_range = 0.0, 
+                                 height_shift_range = 0.0,  shear_range = 0.0, zoom_range = 0.0, channel_shift_range = 0.0, 
+                                 fill_mode = "nearest", cval = 0.0, horizontal_flip = FALSE, vertical_flip = FALSE, 
+                                 rescale = NULL, preprocessing_function = NULL, data_format = NULL) {
+  keras$preprocessing$image$ImageDataGenerator(
+    featurewise_center = featurewise_center,
+    samplewise_center = samplewise_center,
+    featurewise_std_normalization = featurewise_std_normalization,
+    samplewise_std_normalization = samplewise_std_normalization,
+    zca_whitening = zca_whitening,
+    rotation_range = rotation_range,
+    width_shift_range = width_shift_range,
+    height_shift_range = height_shift_range,
+    shear_range = shear_range,
+    zoom_range = zoom_range,
+    channel_shift_range = channel_shift_range,
+    fill_mode = fill_mode,
+    cval = cval,
+    horizontal_flip = horizontal_flip,
+    vertical_flip = vertical_flip,
+    rescale = rescale,
+    preprocessing_function = preprocessing_function,
+    data_format = data_format
+  )
+}
+
+
+#' Fit image data generator internal statistics to some sample data.
+#' 
+#' Required for `featurewise_center`, `featurewise_std_normalization`
+#' and `zca_whitening`.
+#' 
+#' @param generator [image_data_generator()]
+#' @param x  array, the data to fit on (should have rank 4). In case of grayscale data,
+#' the channels axis should have value 1, and in case of RGB data, it should have value 3.
+#' @param augment Whether to fit on randomly augmented samples
+#' @param rounds If `augment`, how many augmentation passes to do over the data
+#' @param seed random seed.
+#' 
+#' @family image preprocessing
+#' 
+#' @export
+image_data_generator_fit <- function(generator, x, augment = FALSE, rounds = 1, seed = NULL) {
+  generator$fit(
+    x = x,
+    augment = augment,
+    rounds = as.integer(rounds),
+    seed = seed
+  )
+  invisible(generator)
+}
+
+#' Generates batches of augmented/normalized data from image data and labels
+#' 
+#' @details Yields batches indefinitely, in an infinite loop.
+#'   
+#' @inheritParams image_data_generator_fit   
+#' 
+#' @param x data. Should have rank 4. In case of grayscale data, the channels
+#'   axis should have value 1, and in case of RGB data, it should have value 3.
+#' @param y labels.
+#' @param batch_size int (default: `32`).
+#' @param shuffle boolean (defaut: `TRUE`).
+#' @param seed int (default: `NULL`).
+#' @param save_to_dir `NULL` or str (default: `NULL`). This allows you to
+#'   optimally specify a directory to which to save the augmented pictures being
+#'   generated (useful for visualizing what you are doing).
+#' @param save_prefix str (default: ''). Prefix to use for filenames of saved
+#'   pictures (only relevant if `save_to_dir` is set).
+#' @param save_format one of "png", "jpeg" (only relevant if save_to_dir is
+#'   set). Default: "jpeg".
+#'   
+#' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a
+#'   array of corresponding labels. The generator loops indefinitely.
+#'   
+#' @family image preprocessing
+#'   
+#' @export
+image_data_flow <- function(generator, x, y = NULL, batch_size = 32, shuffle = TRUE, seed = NULL, 
+                            save_to_dir = NULL, save_prefix = "", save_format = 'jpeg') {
+  generator$flow(
+    x = x,
+    y = y,
+    batch_size = as.integer(batch_size),
+    shuffle = shuffle,
+    seed = as_nullable_integer(seed),
+    save_to_dir = save_to_dir,
+    save_prefix = save_prefix,
+    save_format = save_format
+  )
+}
+
+#' Generates batches of augmented/normalized data from images in a directory
+#' 
+#' @details Yields batches indefinitely, in an infinite loop.
+#'   
+#' @inheritParams image_data_flow
+#'   
+#' @param directory path to the target directory. It should contain one 
+#'   subdirectory per class. Any PNG, JPG or BMP images inside each of the 
+#'   subdirectories directory tree will be included in the generator. See [this 
+#'   script](https://gist.github.com/fchollet/0830affa1f7f19fd47b06d4cf89ed44d) 
+#'   for more details.
+#' @param target_size integer vectir, default: `c(256, 256)`. The dimensions to 
+#'   which all images found will be resized.
+#' @param color_mode one of "grayscale", "rbg". Default: "rgb". Whether the 
+#'   images will be converted to have 1 or 3 color channels.
+#' @param classes optional list of class subdirectories (e.g. `c('dogs', 
+#'   'cats')`). Default: `NULL`, If not provided, the list of classes will be 
+#'   automatically inferred (and the order of the classes, which will map to the
+#'   label indices, will be alphanumeric).
+#' @param class_mode one of "categorical", "binary", "sparse" or `NULL`. 
+#'   Default: "categorical". Determines the type of label arrays that are 
+#'   returned: "categorical" will be 2D one-hot encoded labels, "binary" will be
+#'   1D binary labels, "sparse" will be 1D integer labels. If `NULL`, no labels 
+#'   are returned (the generator will only yield batches of image data, which is
+#'   useful to use [predict_generator()], [evaluate_generator()], etc.).
+#' @param follow_links whether to follow symlinks inside class subdirectories
+#'   (default: `FALSE`).
+#'   
+#' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a 
+#'   array of corresponding labels. The generator loops indefinitely.
+#'   
+#' @family image preprocessing
+#'   
+#' @export
+image_data_flow_from_directory <- function(generator, directory, target_size = c(256, 256), color_mode = "rgb",
+                                           classes = NULL, class_mode = "categorical",
+                                           batch_size = 32, shuffle = TRUE, seed = NULL,
+                                           save_to_dir = NULL, save_prefix = "", save_format = "jpeg",
+                                           follow_links = FALSE) {
+  generator$flow_from_directory(
+    directory = directory,
+    target_size = as.integer(target_size),
+    color_mode = color_mode,
+    classes = classes,
+    class_mode = class_mode,
+    batch_size = as.integer(batch_size),
+    shuffle = shuffle,
+    seed = as_nullable_integer(seed),
+    save_to_dir = save_to_dir,
+    save_prefix = save_prefix,
+    save_format = save_format,
+    follow_links = follow_links
+  )
+}
+
+
 
 
 

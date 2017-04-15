@@ -170,6 +170,10 @@ reference:
     contents:
       - image_load
       - image_to_array
+      - image_data_generator
+      - image_data_generator_fit
+      - image_data_flow
+      - image_data_flow_from_directory
  
   - title: "Optimizers"
     contents:

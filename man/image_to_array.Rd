@@ -18,5 +18,8 @@ A 3D array.
 Converts a PIL Image instance to a 3d-array.
 }
 \seealso{
-Other image preprocessing: \code{\link{image_load}}
+Other image preprocessing: \code{\link{image_data_flow_from_directory}},
+  \code{\link{image_data_flow}},
+  \code{\link{image_data_generator_fit}},
+  \code{\link{image_load}}
 }
