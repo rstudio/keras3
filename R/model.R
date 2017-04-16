@@ -140,8 +140,8 @@ fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL
   
   # fit the model
   history <- model$fit(
-    x = as.array(x),
-    y = as.array(y),
+    x = normalize_x(x),
+    y = normalize_x(y),
     batch_size = as.integer(batch_size),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
@@ -186,6 +186,7 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
 #' a batched way.
 #'
 #' @param object Keras model
+#' @param model Keras model
 #' @param x Input data (vector, matrix, or array)
 #' @param batch_size Integer
 #' @param verbose Verbosity mode, 0 or 1.
@@ -204,11 +205,119 @@ predict.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
   # call predict
   model <- object
   model$predict(
-    as.array(x), 
+    normalize_x(x), 
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose)
   )
 }
+
+
+#' Generates probability or class probability predictions for the input samples.
+#' 
+#' @inheritParams predict
+#' 
+#' @details The input samples are processed batch by batch.
+#' 
+#' @export
+predict_proba <- function(model, x, batch_size = 32, verbose = 0) {
+  model$predict_proba(
+    x = normalize_x(x),
+    batch_size = as.integer(batch_size),
+    verbose = as.integer(verbose)
+  )
+}
+
+#' @rdname predict_proba
+#' @export
+predict_classes <- function(model, x, batch_size = 32, verbose = 0) {
+  model$predict_classes(
+    x = normalize_x(x),
+    batch_size = as.integer(batch_size),
+    verbose = as.integer(verbose)
+  )
+}
+
+
+#' Returns predictions for a single batch of samples.
+#' 
+#' @inheritParams predict
+#' 
+#' @return array of predictions.
+#' 
+#' @family model functions
+#' 
+#' @export
+predict_on_batch <- function(model, x) {
+  model$predict_on_batch(
+    x = normalize_x(x)
+  )
+}
+
+
+#' Single gradient update or model evaluation over one batch of samples.
+#' 
+#' @param model Keras model
+#' @param x input data, as an array or list of arrays (if the model has multiple
+#'   inputs).
+#' @param y labels, as an array.
+#' @param class_weight named list mapping classes to a weight value, used for
+#'   scaling the loss function (during training only).
+#' @param sample_weight sample weights, as an array.
+#'   
+#' @return Scalar training or test loss (if the model has no metrics) or list of scalars
+#' (if the model computes other metrics). The property `model$metrics_names`
+#' will give you the display labels for the scalar outputs.
+#' 
+#' @family model functions
+#'   
+#' @export
+train_on_batch <- function(model, x, y, class_weight = NULL, sample_weight = NULL) {
+  model$train_on_batch(
+    x = x,
+    y = y,
+    class_weight = class_weight,
+    sample_weight = sample_weight
+  )
+}
+
+#' @rdname train_on_batch 
+#' @export
+test_on_batch <- function(model, x, y, sample_weight = NULL) {
+  model$test_on_batch(
+    x = x,
+    y = y,
+    sample_weight = sample_weight
+  )
+}
+
+
+
+#' Fits the model on data yielded batch-by-batch by a generator.
+#' 
+#' The generator is run in parallel to the model, for efficiency.
+#' For instance, this allows you to do real-time data augmentation
+#' on images on CPU in parallel to training your model on GPU.
+#' 
+#' @inheritParams fit
+#' 
+#' @param generator Generator that yields training batches
+#' @param steps_per_epoch 
+#' 
+#' @return Training history object (invisibly)
+#' 
+#' 
+#' @export
+fit_generator <- function(model, generator, steps_per_epoch, epochs = 1, verbose = 1, 
+                          callbacks = NULL, validation_data = NULL, validation_steps = NULL, 
+                          class_weight = NULL, max_q_size = 10, workers = 1, 
+                          pickle_safe = FALSE, initial_epoch = 0) {
+}
+  
+# TODO: evaluate_generator
+# TODO: predict_generator
+
+# TODO: get_layer
+
 
 #' Print a summary of a model
 #' 
@@ -237,6 +346,13 @@ py_str.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(o
   paste0("Model\n", py_capture_output(object$summary(line_length = line_length, positions = positions), type = "stdout"))
 }
 
+
+normalize_x <- function(x) {
+  if (is.list(x))
+    lapply(x, as.array)
+  else
+    as.array(x)
+}
 
 have_module <- function(module) {
   tryCatch({ import(module); TRUE; }, error = function(e) FALSE)

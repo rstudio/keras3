@@ -24,5 +24,6 @@ Dense...) an \code{input_dim} argument.
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate}}, \code{\link{fit}},
   \code{\link{get_config}}, \code{\link{keras_model}},
-  \code{\link{predict}}, \code{\link{summary}}
+  \code{\link{predict_on_batch}}, \code{\link{predict}},
+  \code{\link{summary}}, \code{\link{train_on_batch}}
 }

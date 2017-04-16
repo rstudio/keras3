@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Print a summary of a model — summary • keras</title>
+<title>Generates probability or class probability predictions for the input samples. — predict_proba • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -109,48 +109,41 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Print a summary of a model</h1>
+    <h1>Generates probability or class probability predictions for the input samples.</h1>
     </div>
 
     
-    <p>Print a summary of a model</p>
+    <p>Generates probability or class probability predictions for the input samples.</p>
     
 
-    <pre class="usage"><span class='co'># S3 method for tensorflow.contrib.keras.python.keras.engine.training.Model</span>
-<span class='fu'>summary</span>(<span class='no'>object</span>,
-  <span class='kw'>line_length</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"width"</span>), <span class='kw'>positions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>predict_proba</span>(<span class='no'>model</span>, <span class='no'>x</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>predict_classes</span>(<span class='no'>model</span>, <span class='no'>x</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>Keras model instance</p></td>
+      <th>model</th>
+      <td><p>Keras model</p></td>
     </tr>
     <tr>
-      <th>line_length</th>
-      <td><p>Total length of printed lines</p></td>
+      <th>x</th>
+      <td><p>Input data (vector, matrix, or array)</p></td>
     </tr>
     <tr>
-      <th>positions</th>
-      <td><p>Relative or absolute positions of log elements in each line.
-If not provided, defaults to <code>c(0.33, 0.55, 0.67, 1.0)</code>.</p></td>
+      <th>batch_size</th>
+      <td><p>Integer</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Unused</p></td>
+      <th>verbose</th>
+      <td><p>Verbosity mode, 0 or 1.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
-  <code><a href='evaluate.html'>evaluate</a></code>, <code><a href='fit.html'>fit</a></code>,
-  <code><a href='get_config.html'>get_config</a></code>,
-  <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
-  <code><a href='keras_model.html'>keras_model</a></code>,
-  <code><a href='predict_on_batch.html'>predict_on_batch</a></code>, <code><a href='predict.html'>predict</a></code>,
-  <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
+    <p>The input samples are processed batch by batch.</p>
     
 
   </div>
@@ -159,7 +152,7 @@ If not provided, defaults to <code>c(0.33, 0.55, 0.67, 1.0)</code>.</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#details">Details</a></li>
           </ul>
 
   </div>

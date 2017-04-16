@@ -19,6 +19,8 @@
 \item{verbose}{Verbosity mode, 0 or 1.}
 
 \item{...}{Unused}
+
+\item{model}{Keras model}
 }
 \value{
 vector, matrix, or array of predictions
@@ -32,5 +34,7 @@ Other model functions: \code{\link{compile}},
   \code{\link{evaluate}}, \code{\link{fit}},
   \code{\link{get_config}},
   \code{\link{keras_model_sequential}},
-  \code{\link{keras_model}}, \code{\link{summary}}
+  \code{\link{keras_model}},
+  \code{\link{predict_on_batch}}, \code{\link{summary}},
+  \code{\link{train_on_batch}}
 }

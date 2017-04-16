@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Print a summary of a model — summary • keras</title>
+<title>Single gradient update or model evaluation over one batch of samples. — train_on_batch • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -109,38 +109,49 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Print a summary of a model</h1>
+    <h1>Single gradient update or model evaluation over one batch of samples.</h1>
     </div>
 
     
-    <p>Print a summary of a model</p>
+    <p>Single gradient update or model evaluation over one batch of samples.</p>
     
 
-    <pre class="usage"><span class='co'># S3 method for tensorflow.contrib.keras.python.keras.engine.training.Model</span>
-<span class='fu'>summary</span>(<span class='no'>object</span>,
-  <span class='kw'>line_length</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"width"</span>), <span class='kw'>positions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>train_on_batch</span>(<span class='no'>model</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>test_on_batch</span>(<span class='no'>model</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>Keras model instance</p></td>
+      <th>model</th>
+      <td><p>Keras model</p></td>
     </tr>
     <tr>
-      <th>line_length</th>
-      <td><p>Total length of printed lines</p></td>
+      <th>x</th>
+      <td><p>input data, as an array or list of arrays (if the model has multiple
+inputs).</p></td>
     </tr>
     <tr>
-      <th>positions</th>
-      <td><p>Relative or absolute positions of log elements in each line.
-If not provided, defaults to <code>c(0.33, 0.55, 0.67, 1.0)</code>.</p></td>
+      <th>y</th>
+      <td><p>labels, as an array.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Unused</p></td>
+      <th>class_weight</th>
+      <td><p>named list mapping classes to a weight value, used for
+scaling the loss function (during training only).</p></td>
+    </tr>
+    <tr>
+      <th>sample_weight</th>
+      <td><p>sample weights, as an array.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Scalar training or test loss (if the model has no metrics) or list of scalars
+(if the model computes other metrics). The property <code>model$metrics_names</code>
+will give you the display labels for the scalar outputs.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -150,7 +161,7 @@ If not provided, defaults to <code>c(0.33, 0.55, 0.67, 1.0)</code>.</p></td>
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
   <code><a href='keras_model.html'>keras_model</a></code>,
   <code><a href='predict_on_batch.html'>predict_on_batch</a></code>, <code><a href='predict.html'>predict</a></code>,
-  <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
+  <code><a href='summary.html'>summary</a></code></p>
     
 
   </div>
@@ -159,6 +170,8 @@ If not provided, defaults to <code>c(0.33, 0.55, 0.67, 1.0)</code>.</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 

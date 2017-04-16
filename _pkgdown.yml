@@ -38,11 +38,13 @@ reference:
     contents:
       - keras_model
       - keras_model_sequential
+      - summary
       - compile
       - fit
       - evaluate
       - predict
-      - summary
+      - predict_on_batch
+      - train_on_batch
       - save_model
       - load_model
  
