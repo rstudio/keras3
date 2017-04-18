@@ -26,6 +26,7 @@
 
 library(keras)
 library(stringi)
+library(magrittr)
 
 # Function Definitions ----------------------------------------------------
 
@@ -72,13 +73,13 @@ generate_data <- function(size, digits, invert = TRUE){
   # pad with spaces on the right
   questions <- paste0(left_side, "+", right_side)
   questions <- stri_pad(questions, width = 2*digits+1, 
-                       side = "right", pad = " ")
+                        side = "right", pad = " ")
   if(invert){
     questions <- stri_reverse(questions)
   }
   # pad with spaces on the left
   results <- stri_pad(results, width = digits + 1, 
-                     side = "left", pad = " ")
+                      side = "left", pad = " ")
   
   return(list(
     questions = questions,
@@ -150,38 +151,33 @@ BATCH_SIZE <- 128
 LAYERS <- 1
 
 # Initialize sequential model
-model <- keras_model_sequential() 
-
-# "Encode" the input sequence using an RNN, producing an output of HIDDEN_SIZE.
-# Note: In a situation where your input sequences have a variable length,
-# use input_shape=(None, num_feature).
-model <- model %>% RNN(HIDDEN_SIZE, input_shape=c(MAXLEN, length(char_table)))
-
-# As the decoder RNN's input, repeatedly provide with the last hidden state of
-# RNN for each time step. Repeat 'DIGITS + 1' times as that's the maximum
-# length of output, e.g., when DIGITS=3, max output is 999+999=1998.
-model <- model %>% layer_repeat_vector(DIGITS + 1)
-
+model <- keras_model_sequential() %>%
+  # "Encode" the input sequence using an RNN, producing an output of HIDDEN_SIZE.
+  # Note: In a situation where your input sequences have a variable length,
+  # use input_shape=(None, num_feature).
+  RNN(HIDDEN_SIZE, input_shape=c(MAXLEN, length(char_table))) %>%
+  # As the decoder RNN's input, repeatedly provide with the last hidden state of
+  # RNN for each time step. Repeat 'DIGITS + 1' times as that's the maximum
+  # length of output, e.g., when DIGITS=3, max output is 999+999=1998.
+  layer_repeat_vector(DIGITS + 1)
 # The decoder RNN could be multiple layers stacked or a single layer.
 for(i in 1:LAYERS){
   # By setting return_sequences to True, return not only the last output but
   # all the outputs so far in the form of (num_samples, timesteps,
   # output_dim). This is necessary as TimeDistributed in the below expects
   # the first dimension to be the timesteps.
-  model <- model %>% RNN(HIDDEN_SIZE, return_sequences=TRUE)
+  model %<>% RNN(HIDDEN_SIZE, return_sequences=TRUE)
 }  
-
 # Apply a dense layer to the every temporal slice of an input. For each of step
 # of the output sequence, decide which character should be chosen.
-model <- model %>% time_distributed(
-  layer_dense(units = length(char_table))
-  ) 
-
-model <- model %>% layer_activation("softmax")
-model <- compile(model, 
-                 loss = "categorical_crossentropy", 
-                 optimizer = "adam", 
-                 metrics = "accuracy")
+model <- model %>% 
+  time_distributed(layer_dense(units = length(char_table))) %>%
+  layer_activation("softmax") %>%
+  compile(
+    loss = "categorical_crossentropy", 
+    optimizer = "adam", 
+    metrics = "accuracy"
+  )
 
 # Get the model summary
 summary(model)
