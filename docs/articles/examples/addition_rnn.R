@@ -150,8 +150,6 @@ print(dim(y_val))
 
 # Training ----------------------------------------------------------------
 
-# Try replacing GRU, or SimpleRNN.
-RNN <- layer_lstm
 HIDDEN_SIZE <- 128
 BATCH_SIZE <- 128
 LAYERS <- 1
@@ -161,7 +159,7 @@ model <- keras_model_sequential() %>%
   # "Encode" the input sequence using an RNN, producing an output of HIDDEN_SIZE.
   # Note: In a situation where your input sequences have a variable length,
   # use input_shape=(None, num_feature).
-  RNN(HIDDEN_SIZE, input_shape=c(MAXLEN, length(char_table))) %>%
+  layer_lstm(HIDDEN_SIZE, input_shape=c(MAXLEN, length(char_table))) %>%
   # As the decoder RNN's input, repeatedly provide with the last hidden state of
   # RNN for each time step. Repeat 'DIGITS + 1' times as that's the maximum
   # length of output, e.g., when DIGITS=3, max output is 999+999=1998.
@@ -173,7 +171,7 @@ model <- keras_model_sequential() %>%
 # output_dim). This is necessary as TimeDistributed in the below expects
 # the first dimension to be the timesteps.
 for(i in 1:LAYERS)
-  RNN(model, HIDDEN_SIZE, return_sequences=TRUE)
+  layer_lstm(model, HIDDEN_SIZE, return_sequences=TRUE)
 
 model %>% 
   # Apply a dense layer to the every temporal slice of an input. For each of step
@@ -182,8 +180,7 @@ model %>%
   layer_activation("softmax")
 
 # Compiling the model
-compile(
-  model,
+compile(model,
   loss = "categorical_crossentropy", 
   optimizer = "adam", 
   metrics = "accuracy"
