@@ -10,3 +10,4 @@ src/*.dll
 resources/
 .DS_Store
 index.html
+external/

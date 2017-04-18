@@ -5,6 +5,7 @@
 ^.*\.hdf5$
 ^README.R?md$
 ^docs$
+^external$
 ^vignettes/examples/$
 ^_pkgdown.yml$
 ^index.Rmd$
