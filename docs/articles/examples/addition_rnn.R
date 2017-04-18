@@ -38,6 +38,13 @@ learn_encoding <- function(chars){
 
 # Encode to a character sequence to a one hot
 # integer representation. 
+# > encode("22+22", char_table)
+# [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]
+# 2    0    0    0    0    1    0    0    0    0     0     0     0
+# 2    0    0    0    0    1    0    0    0    0     0     0     0
+# +    0    1    0    0    0    0    0    0    0     0     0     0
+# 2    0    0    0    0    1    0    0    0    0     0     0     0
+# 2    0    0    0    0    1    0    0    0    0     0     0     0
 encode <- function(char, char_table){
   strsplit(char, "") %>%
     unlist() %>%
