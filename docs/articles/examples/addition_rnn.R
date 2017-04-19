@@ -55,7 +55,7 @@ encode <- function(char, char_table){
 
 # Decode the one hot representation/probabilities representation
 # to their character output.
-decode <- function(x, char_table, calc_argmax = FALSE){
+decode <- function(x, char_table){
   apply(x,1, function(y){
     char_table[which.max(y)]
   }) %>% paste0(collapse = "")
@@ -87,21 +87,21 @@ generate_data <- function(size, digits, invert = TRUE){
   results <- stri_pad(results, width = digits + 1, 
                       side = "left", pad = " ")
   
-  return(list(
+  list(
     questions = questions,
     results = results
-  ))
+  )
 }
 
 # Parameters --------------------------------------------------------------
 
 # Parameters for the model and dataset.
-TRAINING_SIZE = 5000
-DIGITS = 2
+TRAINING_SIZE <- 5000
+DIGITS <- 2
 
 # Maximum length of input is 'int + int' (e.g., '345+678'). Maximum length of
 # int is DIGITS.
-MAXLEN = DIGITS + 1 + DIGITS
+MAXLEN <- DIGITS + 1 + DIGITS
 
 # All the numbers, plus sign and space for padding.
 charset <- c(0:9, "+", " ")
@@ -155,7 +155,9 @@ BATCH_SIZE <- 128
 LAYERS <- 1
 
 # Initialize sequential model
-model <- keras_model_sequential() %>%
+model <- keras_model_sequential() 
+
+model %>%
   # "Encode" the input sequence using an RNN, producing an output of HIDDEN_SIZE.
   # Note: In a situation where your input sequences have a variable length,
   # use input_shape=(None, num_feature).
@@ -171,7 +173,7 @@ model <- keras_model_sequential() %>%
 # output_dim). This is necessary as TimeDistributed in the below expects
 # the first dimension to be the timesteps.
 for(i in 1:LAYERS)
-  layer_lstm(model, HIDDEN_SIZE, return_sequences=TRUE)
+  model %>% layer_lstm(HIDDEN_SIZE, return_sequences = TRUE)
 
 model %>% 
   # Apply a dense layer to the every temporal slice of an input. For each of step
@@ -180,7 +182,7 @@ model %>%
   layer_activation("softmax")
 
 # Compiling the model
-compile(model,
+model %>% compile(
   loss = "categorical_crossentropy", 
   optimizer = "adam", 
   metrics = "accuracy"
@@ -190,12 +192,12 @@ compile(model,
 summary(model)
 
 # Fitting loop
-fit(model, 
-    x = x_train, 
-    y = y_train, 
-    batch_size = BATCH_SIZE, 
-    epochs = 70,
-    validation_data = list(x_val, y_val)
+model %>% fit( 
+  x = x_train, 
+  y = y_train, 
+  batch_size = BATCH_SIZE, 
+  epochs = 70,
+  validation_data = list(x_val, y_val)
 )
 
 # Predict for a new obs
