@@ -114,12 +114,12 @@ predictions &lt;-<span class="st"> </span>inputs %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>)
 
 <span class="co"># create and compile model</span>
-model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> inputs, <span class="dt">outputs =</span> predictions) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
-    <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
-    <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
-    <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
-  )</code></pre></div>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> inputs, <span class="dt">outputs =</span> predictions)
+model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+  <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
+  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+)</code></pre></div>
 </div>
 <div id="all-models-are-callable-just-like-layers" class="section level2">
 <h2 class="hasAnchor">
@@ -201,27 +201,27 @@ Trainable params: 5,200,610
 Non-trainable params: 0
 __________________________________________________________________________________________</code></pre>
 <p>We compile the model and assign a weight of 0.2 to the auxiliary loss. To specify different <code>loss_weights</code> or <code>loss</code> for each different output, you can use a list or a dictionary. Here we pass a single loss as the <code>loss</code> argument, so the same loss will be used on all outputs.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/compile.html">compile</a></span>(model,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
   <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
   <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
   <span class="dt">loss_weights =</span> <span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.2</span>)
 )</code></pre></div>
 <p>We can train the model by passing it lists of input arrays and target arrays:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/fit.html">fit</a></span>(model,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
   <span class="dt">x =</span> <span class="kw">c</span>(headline_data, additional_data),
   <span class="dt">y =</span> <span class="kw">c</span>(labels, labels),
   <span class="dt">epochs =</span> <span class="dv">50</span>,
   <span class="dt">batch_size =</span> <span class="dv">32</span>
 )</code></pre></div>
 <p>Since our inputs and outputs are named (we passed them a “name” argument), We could also have compiled the model via:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/compile.html">compile</a></span>(model,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
   <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
   <span class="dt">loss =</span> <span class="kw">list</span>(<span class="dt">main_output =</span> <span class="st">'binary_crossentropy'</span>, <span class="dt">aux_output =</span> <span class="st">'binary_crossentropy'</span>),
   <span class="dt">loss_weights =</span> <span class="kw">list</span>(<span class="dt">main_output =</span> <span class="fl">1.0</span>, <span class="dt">aux_output =</span> <span class="fl">0.2</span>)
 )
 
 <span class="co"># And trained it via:</span>
-<span class="kw"><a href="../reference/fit.html">fit</a></span>(model,
+model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
   <span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">main_input =</span> headline_data, <span class="dt">aux_input =</span> additional_data),
   <span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">main_output =</span> labels, <span class="dt">aux_output =</span> labels),
   <span class="dt">epochs =</span> <span class="dv">50</span>,
@@ -256,13 +256,13 @@ predictions &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 <span class="co"># We define a trainable model linking the tweet inputs to the predictions</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> <span class="kw">c</span>(tweet_a, tweet_b), <span class="dt">outputs =</span> predictions)
 
-<span class="kw"><a href="../reference/compile.html">compile</a></span>(model,
+model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
   <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
   <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
   <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
 )
 
-<span class="kw"><a href="../reference/fit.html">fit</a></span>(model, <span class="kw">c</span>(data_a, data_b), labels, <span class="dt">epochs =</span> <span class="dv">10</span>)</code></pre></div>
+model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(<span class="kw">c</span>(data_a, data_b), labels, <span class="dt">epochs =</span> <span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="the-concept-of-layer-node" class="section level2">
 <h2 class="hasAnchor">
@@ -379,7 +379,8 @@ classification_model &lt;-<span class="st"> </span><span class="kw"><a href="../
 <p>It works by encoding the question into a vector, encoding the image into a vector, concatenating the two, and training on top a logistic regression over some vocabulary of potential answers.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, let's define a vision model using a Sequential model.</span>
 <span class="co"># This model will encode an image into a vector.</span>
-vision_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
+vision_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() 
+vision_model %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">padding =</span> <span class="st">'same'</span>,
                 <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">224</span>, <span class="dv">224</span>, <span class="dv">3</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
