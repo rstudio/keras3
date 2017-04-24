@@ -21,7 +21,8 @@ You create a sequential model by calling the `keras_model_sequential()` function
 ```{r}
 library(keras)
 
-model <- keras_model_sequential() %>% 
+model <- keras_model_sequential() 
+model %>% 
   layer_dense(units = 32, input_shape = c(784)) %>% 
   layer_activation('relu') %>% 
   layer_dense(units = 10) %>% 
@@ -76,7 +77,8 @@ You can chain your model compilation into the definition of the model or call th
 
 ```{r}
 # For a multi-class classification problem
-model <- keras_model_sequential() %>% 
+model <- keras_model_sequential() 
+model %>% 
   layer_dense(units = 32, input_shape = c(784)) %>% 
   layer_activation('relu') %>% 
   layer_dense(units = 10) %>% 
@@ -88,13 +90,13 @@ model <- keras_model_sequential() %>%
   )
 
 # For a mean squared error regression problem
-compile(model,
+model %>% compile(
   optimizer = optimizer_rmsprop(lr = 0.002),
   loss = 'mse'
 )
 
 # For a binary classification problem
-compile(model, 
+model %>% compile( 
   optimizer = optimizer_rmsprop(),
   loss = loss_binary_crossentropy(),
   metrics = metric_binary_accuracy()
@@ -108,8 +110,11 @@ Keras models are trained on R matrixes or higher dimensional arrays of input dat
 Here's a single-input model with 2 classes (binary classification):
 
 ```{r}
-# define and compile the model
-model <- keras_model_sequential() %>% 
+# create model
+model <- keras_model_sequential()
+
+# add layers and compile the model
+model %>% 
   layer_dense(units = 32, activation = 'relu', input_shape = c(100)) %>% 
   layer_dense(units = 1, activation = 'sigmoid') %>% 
   compile(
@@ -123,14 +128,17 @@ data <- matrix(runif(1000*100), nrow = 1000, ncol = 100)
 labels <- matrix(round(runif(1000, min = 0, max = 1)), nrow = 1000, ncol = 1)
 
 # Train the model, iterating on the data in batches of 32 samples
-fit(model, data, labels, epochs=10, batch_size=32)
+model %>% fit(data, labels, epochs=10, batch_size=32)
 ```
 
 Here's a single-input model with 10 classes (categorical classification):
 
 ```{r}
+# create model
+model <- keras_model_sequential()
+
 # define and compile the model
-model <- keras_model_sequential() %>% 
+model %>% 
   layer_dense(units = 32, activation = 'relu', input_shape = c(100)) %>% 
   layer_dense(units = 10, activation = 'softmax') %>% 
   compile(
@@ -147,7 +155,7 @@ labels <- matrix(round(runif(1000, min = 0, max = 9)), nrow = 1000, ncol = 1)
 one_hot_labels = to_categorical(labels, num_classes = 10)
 
 # Train the model, iterating on the data in batches of 32 samples
-fit(model, data, one_hot_labels, epochs=10, batch_size=32)
+model %>% fit(data, one_hot_labels, epochs=10, batch_size=32)
 ```
 
 ## Examples
@@ -182,8 +190,11 @@ y_test <- runif(100, min = 0, max = 9) %>%
              matrix(nrow = 100, ncol = 1) %>% 
              to_categorical(num_classes = 10)
 
+# create model
+model <- keras_model_sequential()
+
 # define and compile the model
-model <- keras_model_sequential() %>% 
+model %>% 
   layer_dense(units = 64, activation = 'relu', input_shape = c(20)) %>% 
   layer_dropout(rate = 0.5) %>% 
   layer_dense(units = 64, activation = 'relu') %>% 
@@ -196,10 +207,10 @@ model <- keras_model_sequential() %>%
   )
 
 # train
-fit(model, x_train, y_train, epochs = 20, batch_size = 128)
+model %>% fit(x_train, y_train, epochs = 20, batch_size = 128)
 
 # evaluate
-score <- evaluate(model, x_test, y_test, batch_size = 128)
+score <- model %>% evaluate(x_test, y_test, batch_size = 128)
 ```
 
 
@@ -215,8 +226,11 @@ y_train <- matrix(round(runif(1000, min = 0, max = 1)), nrow = 1000, ncol = 1)
 x_test <- matrix(runif(100*20), nrow = 100, ncol = 20)
 y_test <- matrix(round(runif(100, min = 0, max = 1)), nrow = 100, ncol = 1)
 
+# create model
+model <- keras_model_sequential()
+
 # define and compile the model
-model <- keras_model_sequential() %>% 
+model %>% 
   layer_dense(units = 64, activation = 'relu', input_shape = c(20)) %>% 
   layer_dropout(rate = 0.5) %>% 
   layer_dense(units = 64, activation = 'relu') %>% 
@@ -229,10 +243,10 @@ model <- keras_model_sequential() %>%
   )
 
 # train 
-fit(model, x_train, y_train, epochs = 20, batch_size = 128)
+model %>% fit(x_train, y_train, epochs = 20, batch_size = 128)
 
 # evaluate
-score = evaluate(model, x_test, y_test, batch_size=128)
+score = model %>% evaluate(x_test, y_test, batch_size=128)
 ```
 
 
@@ -253,10 +267,13 @@ y_test <- runif(20, min = 0, max = 9) %>%
              matrix(nrow = 20, ncol = 1) %>% 
              to_categorical(num_classes = 10)
 
+# create model
+model <- keras_model_sequential()
+
 # define and compile model
 # input: 100x100 images with 3 channels -> (100, 100, 3) tensors.
 # this applies 32 convolution filters of size 3x3 each.
-model <- keras_model_sequential() %>% 
+model %>% 
   layer_conv_2d(filters = 32, kernel_size = c(3,3), activation = 'relu', 
                 input_shape = c(100,100,3)) %>% 
   layer_conv_2d(filters = 32, kernel_size = c(3,3), activation = 'relu') %>% 
@@ -276,16 +293,17 @@ model <- keras_model_sequential() %>%
   )
   
 # train
-fit(model, x_train, y_train, batch_size = 32, epochs = 10)
+model %>% fit(x_train, y_train, batch_size = 32, epochs = 10)
 
 # evaluate
-score < evaluate(model, x_test, y_test, batch_size = 32)
+score <- model %>% evaluate(x_test, y_test, batch_size = 32)
 ```
 
 ### Sequence classification with LSTM
 
 ```{r, eval = FALSE}
-model <- keras_model_sequential() %>% 
+model <- keras_model_sequential() 
+model %>% 
   layer_embedding(input_dim = max_features, output_dim - 256) %>% 
   layer_lstm(units = 128) %>% 
   layer_dropout(rate = 0.5) %>% 
@@ -296,14 +314,15 @@ model <- keras_model_sequential() %>%
     metrics = c('accuracy')
   )
 
-fit(model, x_train, y_train, batch_size = 16, epochs = 10)
-score <- evaluate(model, x_test, y_test, batch_size = 16)
+model %>% fit(x_train, y_train, batch_size = 16, epochs = 10)
+score <- model %>% evaluate(x_test, y_test, batch_size = 16)
 ```
 
 ### Sequence classification with 1D convolutions:
 
 ```{r, eval=FALSE}
-model <- keras_model_sequential() %>% 
+model <- keras_model_sequential()
+model %>% 
   layer_conv_1d(filters = 64, kernel_size = 3, activation = 'relu',
                 input_shape = c(seq_length, 100)) %>% 
   layer_conv_1d(filters = 64, kernel_size = 3, activation = 'relu') %>% 
@@ -319,8 +338,8 @@ model <- keras_model_sequential() %>%
     metrics = c'accuracy'
   )
 
-fit(model, x_train, y_train, batch_size = 16, epochs = 10)
-score <- evaluate(evaluate, x_test, y_test, batch_size = 16)
+model %>% fit(x_train, y_train, batch_size = 16, epochs = 10)
+score <- model %>% evaluate(x_test, y_test, batch_size = 16)
 ```
 
 ### Stacked LSTM for sequence classification
@@ -345,7 +364,8 @@ num_classes <- 10
 
 # define and compile model
 # expected input data shape: (batch_size, timesteps, data_dim)
-model <- keras_model_sequential() %>% 
+model <- keras_model_sequential() 
+model %>% 
   layer_lstm(units = 32, return_sequences = TRUE, input_shape = c(timesteps, data_dim)) %>% 
   layer_lstm(units = 32, return_sequences = TRUE) %>% 
   layer_lstm(units = 32) %>% # return a single vector dimension 32
@@ -365,7 +385,7 @@ x_val <- array(runif(100 * timesteps * data_dim), dim = c(100, timesteps, data_d
 y_val <- matrix(runif(100 * num_classes), nrow = 100, ncol = num_classes)
 
 # train
-fit(model, 
+model %>% fit( 
   x_train, y_train, batch_size = 64, epochs = 5, validation_data = list(x_val, y_val)
 )
 ```
@@ -389,7 +409,8 @@ batch_size <- 32
 # Expected input batch shape: (batch_size, timesteps, data_dim)
 # Note that we have to provide the full batch_input_shape since the network is stateful.
 # the sample of index i in batch k is the follow-up for the sample i in batch k-1.
-model <- keras_model_sequential() %>% 
+model <- keras_model_sequential()
+model %>% 
   layer_lstm(units = 32, return_sequences = TRUE, stateful = TRUE,
              batch_input_shape = c(batch_size, timesteps, data_dim)) %>% 
   layer_lstm(units = 32, return_sequences = TRUE, stateful = TRUE) %>% 
@@ -414,7 +435,7 @@ y_val <- matrix(runif( (batch_size * 3) * num_classes),
                 nrow = batch_size * 3, ncol = num_classes)
 
 # train
-fit(model, 
+model %>% fit( 
   x_train, 
   y_train, 
   batch_size = batch_size, 

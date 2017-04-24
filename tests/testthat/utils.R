@@ -19,20 +19,24 @@ test_call_succeeds <- function(call_name, expr) {
 }
 
 define_model <- function() {
-  keras_model_sequential() %>%
+  model <- keras_model_sequential() 
+  model %>%
     layer_dense(32, input_shape = 784, kernel_initializer = initializer_ones()) %>%
     layer_activation('relu') %>%
     layer_dense(10) %>%
     layer_activation('softmax')
+  model
 }
 
 define_and_compile_model <- function() {
-  define_model() %>% 
+  model <- define_model()
+  model %>% 
     compile(
       loss='binary_crossentropy',
       optimizer = optimizer_sgd(),
       metrics='accuracy'
     )
+  model
 }
 
 
