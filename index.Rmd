@@ -32,7 +32,9 @@ Here is the Sequential model:
 ```{r}
 library(keras)
 
-model <- keras_model_sequential() %>% 
+model <- keras_model_sequential() 
+
+model %>% 
   layer_dense(units = 64, input_shape = 100) %>% 
   layer_activation(activation = 'relu') %>% 
   layer_dense(units = 10) %>% 
@@ -47,19 +49,19 @@ model <- keras_model_sequential() %>%
 You can now iterate on your training data in batches (`x_train` and `y_train` are R matrices):
 
 ```{r, results='hide'}
-fit(model, x_train, y_train, epochs = 5, batch_size = 32)
+model %>% fit(x_train, y_train, epochs = 5, batch_size = 32)
 ```
 
 Evaluate your performance in one line:
 
 ```{r, results = 'hide'}
-loss_and_metrics <- evaluate(model, x_test, y_test, batch_size = 128)
+loss_and_metrics <- model %>% evaluate(x_test, y_test, batch_size = 128)
 ```
 
 Or generate predictions on new data:
 
 ```{r, results = 'hide'}
-classes <- predict(model, x_test, batch_size = 128)
+classes <- model %>% predict(x_test, batch_size = 128)
 ```
 
 Building a question answering system, an image classification model, a Neural Turing Machine, or any other model is just as fast. The ideas behind deep learning are simple, so why should their implementation be painful?

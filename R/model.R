@@ -80,8 +80,8 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
     sample_weight_mode = sample_weight_mode
   )
   
-  # return NULL invisibly
-  invisible(NULL)
+  # return model invibibly (conventience for chaining)
+  invisible(model)
 }
 
 
