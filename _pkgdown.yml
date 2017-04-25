@@ -43,10 +43,12 @@ reference:
       - fit
       - fit_generator
       - evaluate
+      - evaluate_generator
       - predict
       - predict_proba
       - predict_classes
       - predict_on_batch
+      - predict_generator
       - train_on_batch
       - save_model
       - load_model

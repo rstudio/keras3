@@ -61,10 +61,11 @@ Trains the model for a fixed number of epochs (iterations on a dataset).
 }
 \seealso{
 Other model functions: \code{\link{compile}},
-  \code{\link{evaluate}}, \code{\link{fit_generator}},
-  \code{\link{get_config}},
+  \code{\link{evaluate_generator}}, \code{\link{evaluate}},
+  \code{\link{fit_generator}}, \code{\link{get_config}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}},
+  \code{\link{predict_generator}},
   \code{\link{predict_on_batch}},
   \code{\link{predict_proba}}, \code{\link{predict}},
   \code{\link{summary}}, \code{\link{train_on_batch}}

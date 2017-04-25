@@ -315,10 +315,80 @@ fit_generator <- function(model, generator, steps_per_epoch, epochs = 1, verbose
                           class_weight = NULL, max_q_size = 10, workers = 1, 
                           pickle_safe = FALSE, initial_epoch = 0) {
 }
-  
-# TODO: evaluate_generator
-# TODO: predict_generator
 
+#' Evaluates the model on a data generator.
+#' 
+#' The generator should return the same kind of data as accepted by
+#' `test_on_batch()`.
+#' 
+#' @param generator Generator yielding lists (inputs, targets) or (inputs,
+#'   targets, sample_weights)
+#' @param steps Total number of steps (batches of samples) to yield from
+#'   `generator` before stopping.
+#' @param max_q_size maximum size for the generator queue
+#' @param workers maximum number of processes to spin up when using process
+#'   based threading
+#' @param pickle_safe if `TRUE`, use process based threading. Note that because
+#'   this implementation relies on multiprocessing, you should not pass non
+#'   picklable arguments to the generator as they can't be passed easily to
+#'   children processes.
+#'   
+#' @return Scalar test loss (if the model has a single output and no metrics) or
+#'   list of scalars (if the model has multiple outputs and/or metrics). The
+#'   attribute `model$metrics_names` will give you the display labels for the
+#'   scalar outputs.
+#'  
+#' @family model functions   
+#'     
+#' @export
+evaluate_generator <- function(generator, steps, max_q_size = 10, workers = 1, pickle_safe = FALSE) {
+  keras$engine$training$Model$evaluate_generator(
+    generator = generator,
+    steps = as.integer(steps),
+    max_q_size = as.integer(max_q_size),
+    workers = as.integer(workers),
+    pickle_safe = pickle_safe
+  )
+}
+
+
+#' Generates predictions for the input samples from a data generator.
+#' 
+#' The generator should return the same kind of data as accepted by 
+#' `predict_on_batch()`.
+#' 
+#' @param generator Generator yielding batches of input samples.
+#' @param steps Total number of steps (batches of samples) to yield from
+#'   `generator` before stopping.
+#' @param max_q_size Maximum size for the generator queue.
+#' @param workers Maximum number of processes to spin up when using process
+#'   based threading
+#' @param pickle_safe If `TRUE`, use process based threading. Note that because
+#'   this implementation relies on multiprocessing, you should not pass non
+#'   picklable arguments to the generator as they can't be passed easily to
+#'   children processes.
+#' @param verbose verbosity mode, 0 or 1.
+#'   
+#' @return Numpy array(s) of predictions.
+#'   
+#' @section Raises: ValueError: In case the generator yields data in an invalid
+#'   format.
+#'  
+#' @family model functions   
+#'     
+#' @export
+predict_generator <- function(generator, steps, max_q_size = 10, workers = 1, pickle_safe = FALSE, verbose = 0) {
+  keras$engine$training$Model$predict_generator(
+    generator = generator,
+    steps = as.integer(steps),
+    max_q_size = as.integer(max_q_size),
+    workers = as.integer(workers),
+    pickle_safe = pickle_safe,
+    verbose = as.integer(verbose)
+  )
+}
+
+  
 # TODO: get_layer
 
 

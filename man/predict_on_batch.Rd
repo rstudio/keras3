@@ -19,10 +19,12 @@ Returns predictions for a single batch of samples.
 }
 \seealso{
 Other model functions: \code{\link{compile}},
-  \code{\link{evaluate}}, \code{\link{fit_generator}},
-  \code{\link{fit}}, \code{\link{get_config}},
+  \code{\link{evaluate_generator}}, \code{\link{evaluate}},
+  \code{\link{fit_generator}}, \code{\link{fit}},
+  \code{\link{get_config}},
   \code{\link{keras_model_sequential}},
-  \code{\link{keras_model}}, \code{\link{predict_proba}},
-  \code{\link{predict}}, \code{\link{summary}},
-  \code{\link{train_on_batch}}
+  \code{\link{keras_model}},
+  \code{\link{predict_generator}},
+  \code{\link{predict_proba}}, \code{\link{predict}},
+  \code{\link{summary}}, \code{\link{train_on_batch}}
 }
