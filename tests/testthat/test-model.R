@@ -29,5 +29,17 @@ test_succeeds("models can be fit, evaluated, and used for predictions", {
 })
 
 
+test_succeeds("models layers can be retrieved by name and index", {
+  model <- keras_model_sequential() 
+  model %>%
+    layer_dense(32, input_shape = 784, kernel_initializer = initializer_ones()) %>%
+    layer_activation('relu', name = 'first_activation') %>%
+    layer_dense(10) %>%
+    layer_activation('softmax')
+  
+  get_layer(model, name = 'first_activation')
+  get_layer(model, index = 1)
+})
+
 
 
