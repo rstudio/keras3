@@ -18,10 +18,11 @@ There are two types of models available in Keras: [sequential models](sequential
 
 ### Sequential
 
-Sequential models are created using the `keras_sequential_model()` function and are composed of a set of linear layers:
+Sequential models are created using the `keras_model_sequential()` function and are composed of a set of linear layers:
 
 ```{r}
-model <- keras_model_sequential() %>% 
+model <- keras_model_sequential() 
+model %>% 
   layer_dense(units = 32, input_shape = c(784)) %>% 
   layer_activation('relu') %>% 
   layer_dense(units = 10) %>% 

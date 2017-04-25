@@ -18,7 +18,8 @@ knitr::opts_chunk$set(comment = NA, eval = FALSE)
 Keras layers are the fundamental building block of keras models. Layers are created using a wide variety of `layer_` functions and are typically composed together by stacking calls to them using the pipe `%>%` operator. For example:
 
 ```{r}
-model <- keras_model_sequential() %>% 
+model <- keras_model_sequential() 
+model %>% 
   layer_dense(units = 32, input_shape = c(784)) %>% 
   layer_activation('relu') %>% 
   layer_dense(units = 10) %>% 

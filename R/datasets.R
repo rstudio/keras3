@@ -99,7 +99,9 @@ dataset_imdb <- function(path = "imdb.npz", num_words = NULL, skip_top = 0L, max
     oov_char = as.integer(oov_char),
     index_from = as.integer(index_from)
   )
-  as_dataset_list(dataset)
+  
+  as_sequences_dataset_list(dataset)
+ 
 }
 
 #' Reuters newswire topics classification
@@ -145,7 +147,7 @@ dataset_reuters <- function(path = "reuters.npz", num_words = NULL, skip_top = 0
     oov_char = as.integer(oov_char),
     index_from = as.integer(index_from)
   )
-  as_dataset_list(dataset)
+  as_sequences_dataset_list(dataset)
 }
 
 
@@ -220,3 +222,17 @@ as_dataset_list <- function(dataset) {
     )
   )
 }
+
+as_sequences_dataset_list <- function(dataset) {
+  list(
+    train = list(
+      x = lapply(dataset[[1]][[1]], identity),
+      y = lapply(dataset[[1]][[2]], identity)
+    ),
+    test = list(
+      x = lapply(dataset[[2]][[1]], identity),
+      y = lapply(dataset[[2]][[2]], identity)
+    )
+  )
+}
+

@@ -108,7 +108,9 @@
 <p>Here is the Sequential model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
-model &lt;-<span class="st"> </span><span class="kw"><a href="reference/keras_model_sequential.html">keras_model_sequential</a></span>() %&gt;%<span class="st"> </span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="reference/keras_model_sequential.html">keras_model_sequential</a></span>() 
+
+model %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">input_shape =</span> <span class="dv">100</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) %&gt;%<span class="st"> </span>
@@ -119,11 +121,11 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="reference/keras_mo
     <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
   )</code></pre></div>
 <p>You can now iterate on your training data in batches (<code>x_train</code> and <code>y_train</code> are R matrices):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/fit.html">fit</a></span>(model, x_train, y_train, <span class="dt">epochs =</span> <span class="dv">5</span>, <span class="dt">batch_size =</span> <span class="dv">32</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">epochs =</span> <span class="dv">5</span>, <span class="dt">batch_size =</span> <span class="dv">32</span>)</code></pre></div>
 <p>Evaluate your performance in one line:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loss_and_metrics &lt;-<span class="st"> </span><span class="kw"><a href="reference/evaluate.html">evaluate</a></span>(model, x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loss_and_metrics &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span><span class="kw"><a href="reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
 <p>Or generate predictions on new data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classes &lt;-<span class="st"> </span><span class="kw"><a href="reference/predict.html">predict</a></span>(model, x_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classes &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span><span class="kw"><a href="reference/predict.html">predict</a></span>(x_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
 <p>Building a question answering system, an image classification model, a Neural Turing Machine, or any other model is just as fast. The ideas behind deep learning are simple, so why should their implementation be painful?</p>
 <p>To learn more about Keras, you can check out these articles:</p>
 <ul>

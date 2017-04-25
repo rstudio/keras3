@@ -38,12 +38,12 @@ predictions <- inputs %>%
   layer_dense(units = 10, activation = 'softmax')
 
 # create and compile model
-model <- keras_model(inputs = inputs, outputs = predictions) %>%
-  compile(
-    optimizer = 'rmsprop',
-    loss = 'categorical_crossentropy',
-    metrics = c('accuracy')
-  )
+model <- keras_model(inputs = inputs, outputs = predictions)
+model %>% compile(
+  optimizer = 'rmsprop',
+  loss = 'categorical_crossentropy',
+  metrics = c('accuracy')
+)
 ```
 
 ## All models are callable, just like layers
@@ -168,7 +168,7 @@ To specify different `loss_weights` or `loss` for each different output, you can
 Here we pass a single loss as the `loss` argument, so the same loss will be used on all outputs.
 
 ```{r}
-compile(model,
+model %>% compile(
   optimizer = 'rmsprop',
   loss = 'binary_crossentropy',
   loss_weights = c(1.0, 0.2)
@@ -179,7 +179,7 @@ compile(model,
 We can train the model by passing it lists of input arrays and target arrays:
 
 ```{r, eval = FALSE}
-fit(model,
+model %>% fit(
   x = c(headline_data, additional_data),
   y = c(labels, labels),
   epochs = 50,
@@ -191,14 +191,14 @@ Since our inputs and outputs are named (we passed them a "name" argument),
 We could also have compiled the model via:
 
 ```{r, eval = FALSE}
-compile(model,
+model %>% compile(
   optimizer = 'rmsprop',
   loss = list(main_output = 'binary_crossentropy', aux_output = 'binary_crossentropy'),
   loss_weights = list(main_output = 1.0, aux_output = 0.2)
 )
 
 # And trained it via:
-fit(model,
+model %>% fit(
   x = list(main_input = headline_data, aux_input = additional_data),
   y = list(main_output = labels, aux_output = labels),
   epochs = 50,
@@ -245,13 +245,13 @@ predictions <- layer_concatenate(c(encoded_a, encoded_b), axis=-1) %>%
 # We define a trainable model linking the tweet inputs to the predictions
 model <- keras_model(inputs = c(tweet_a, tweet_b), outputs = predictions)
 
-compile(model,
+model %>% compile(
   optimizer = 'rmsprop',
   loss = 'binary_crossentropy',
   metrics = c('accuracy')
 )
 
-fit(model, c(data_a, data_b), labels, epochs = 10)
+model %>% fit(c(data_a, data_b), labels, epochs = 10)
 
 ```
 
@@ -402,7 +402,8 @@ It works by encoding the question into a vector, encoding the image into a vecto
 ```{r}
 # First, let's define a vision model using a Sequential model.
 # This model will encode an image into a vector.
-vision_model <- keras_model_sequential() %>% 
+vision_model <- keras_model_sequential() 
+vision_model %>% 
   layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = 'relu', padding = 'same',
                 input_shape = c(224, 224, 3)) %>% 
   layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = 'relu') %>% 
