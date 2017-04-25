@@ -113,9 +113,9 @@
     </div>
 
     
-    <p>The generator is run in parallel to the model, for efficiency.
-For instance, this allows you to do real-time data augmentation
-on images on CPU in parallel to training your model on GPU.</p>
+    <p>The generator is run in parallel to the model, for efficiency. For instance,
+this allows you to do real-time data augmentation on images on CPU in
+parallel to training your model on GPU.</p>
     
 
     <pre class="usage"><span class='fu'>fit_generator</span>(<span class='no'>model</span>, <span class='no'>generator</span>, <span class='no'>steps_per_epoch</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>,
@@ -132,43 +132,67 @@ on images on CPU in parallel to training your model on GPU.</p>
     </tr>
     <tr>
       <th>generator</th>
-      <td><p>Generator that yields training batches</p></td>
+      <td><p>a generator. The output of the generator must be either - a
+list (inputs, targets) - a list (inputs, targets, sample_weights). All
+arrays should contain the same number of samples. The generator is expected
+to loop over its data indefinitely. An epoch finishes when
+<code>steps_per_epoch</code> samples have been seen by the model.</p></td>
     </tr>
     <tr>
       <th>steps_per_epoch</th>
-      <td></td>
+      <td><p>Total number of steps (batches of samples) to yield
+from <code>generator</code> before declaring one epoch finished and starting the next
+epoch. It should typically be equal to the number of unique samples if your
+dataset divided by the batch size.</p></td>
     </tr>
     <tr>
       <th>epochs</th>
-      <td><p>Number of times to iterate over the training data arrays.</p></td>
+      <td><p>integer, total number of iterations on the data.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
-epoch).</p></td>
+      <td><p>verbosity mode, 0, 1, or 2.</p></td>
     </tr>
     <tr>
       <th>callbacks</th>
-      <td><p>List of callbacks to be called during training.</p></td>
+      <td><p>list of callbacks to be called during training.</p></td>
     </tr>
     <tr>
       <th>validation_data</th>
-      <td><p>Data on which to evaluate the loss and any model
-metrics at the end of each epoch. The model will not be trained on this
-data. This could be a list (x_val, y_val) or a list (x_val, y_val,
-val_sample_weights).</p></td>
+      <td><p>this can be either - a generator for the validation
+data - a list (inputs, targets) - a list (inputs, targets, sample_weights).</p></td>
+    </tr>
+    <tr>
+      <th>validation_steps</th>
+      <td><p>Only relevant if <code>validation_data</code> is a generator.
+Total number of steps (batches of samples) to yield from <code>generator</code> before
+stopping.</p></td>
     </tr>
     <tr>
       <th>class_weight</th>
-      <td><p>Optional named list mapping indices (integers) to a
-weight (float) to apply to the model's loss for the samples from this class
-during training. This can be useful to tell the model to "pay more
-attention" to samples from an under-represented class.</p></td>
+      <td><p>dictionary mapping class indices to a weight for the
+class.</p></td>
+    </tr>
+    <tr>
+      <th>max_q_size</th>
+      <td><p>maximum size for the generator queue</p></td>
+    </tr>
+    <tr>
+      <th>workers</th>
+      <td><p>maximum number of processes to spin up when using process
+based threading</p></td>
+    </tr>
+    <tr>
+      <th>pickle_safe</th>
+      <td><p>if TRUE, use process based threading. Note that because
+this implementation relies on multiprocessing, you should not pass non
+picklable arguments to the generator as they can't be passed easily to
+children processes.</p></td>
     </tr>
     <tr>
       <th>initial_epoch</th>
       <td><p>epoch at which to start training (useful for resuming a
-previous training run).</p></td>
+previous training run)</p></td>
     </tr>
     </table>
     
