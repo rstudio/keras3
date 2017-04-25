@@ -10,7 +10,7 @@ library(keras)
 
 batch_size <- 32
 epochs <- 200
-data_augmentation <- FALSE
+data_augmentation <- TRUE
 
 
 # Data Preparation --------------------------------------------------------
@@ -88,11 +88,11 @@ if(!data_augmentation){
     horizontal_flip = TRUE
   )
   
-  datagen %>% image_data_generator_fit(x_train)
+  datagen %>% fit(x_train)
   
   model %>% fit_generator(
-    image_data_flow(datagen, x_train, y_train, batch_size = 32),
-    steps_per_epoch = 50000, 
+    image_data_flow(datagen, x_train, y_train, batch_size = batch_size),
+    steps_per_epoch = as.integer(50000/batch_size), 
     epochs = epochs, 
     validation_data = list(x_test, y_test)
   )
