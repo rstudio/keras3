@@ -7,7 +7,7 @@
 evaluate(model, x, y, batch_size = 32, verbose = 1, sample_weight = NULL)
 }
 \arguments{
-\item{model}{Model to train.}
+\item{model}{Model to evaluate}
 
 \item{x}{Vector, matrix, or array of training data (or list if the model has
 multiple inputs). If all inputs in the model are named, you can also pass a
@@ -40,7 +40,7 @@ Evaluate a Keras model
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate_generator}},
   \code{\link{fit_generator}}, \code{\link{fit}},
-  \code{\link{get_config}},
+  \code{\link{get_config}}, \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}},
   \code{\link{predict_generator}},

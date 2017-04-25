@@ -36,6 +36,7 @@ configuration and weights to a file.
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate_generator}}, \code{\link{evaluate}},
   \code{\link{fit_generator}}, \code{\link{fit}},
+  \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}},
   \code{\link{predict_generator}},

@@ -163,6 +163,8 @@ fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL
 
 #' @inheritParams fit
 #'   
+#' @param model Model to evaluate
+#'   
 #' @return Scalar test loss (if the model has a single output and no metrics) or
 #'   list of scalars (if the model has multiple outputs and/or metrics).
 #'   
@@ -186,7 +188,6 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
 #' a batched way.
 #'
 #' @param object Keras model
-#' @param model Keras model
 #' @param x Input data (vector, matrix, or array)
 #' @param batch_size Integer
 #' @param verbose Verbosity mode, 0 or 1.
@@ -216,6 +217,8 @@ predict.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
 #' 
 #' @inheritParams predict
 #' 
+#' @param model Keras model
+#' 
 #' @details The input samples are processed batch by batch.
 #' 
 #' @family model functions
@@ -243,6 +246,8 @@ predict_classes <- function(model, x, batch_size = 32, verbose = 0) {
 #' Returns predictions for a single batch of samples.
 #' 
 #' @inheritParams predict
+#' 
+#' @param model Keras model
 #' 
 #' @return array of predictions.
 #' 
@@ -314,12 +319,15 @@ fit_generator <- function(model, generator, steps_per_epoch, epochs = 1, verbose
                           callbacks = NULL, validation_data = NULL, validation_steps = NULL, 
                           class_weight = NULL, max_q_size = 10, workers = 1, 
                           pickle_safe = FALSE, initial_epoch = 0) {
+  
 }
 
 #' Evaluates the model on a data generator.
 #' 
 #' The generator should return the same kind of data as accepted by
 #' `test_on_batch()`.
+#' 
+#' @inheritParams evaluate
 #' 
 #' @param generator Generator yielding lists (inputs, targets) or (inputs,
 #'   targets, sample_weights)
@@ -341,8 +349,8 @@ fit_generator <- function(model, generator, steps_per_epoch, epochs = 1, verbose
 #' @family model functions   
 #'     
 #' @export
-evaluate_generator <- function(generator, steps, max_q_size = 10, workers = 1, pickle_safe = FALSE) {
-  keras$engine$training$Model$evaluate_generator(
+evaluate_generator <- function(model, generator, steps, max_q_size = 10, workers = 1, pickle_safe = FALSE) {
+  model$evaluate_generator(
     generator = generator,
     steps = as.integer(steps),
     max_q_size = as.integer(max_q_size),
@@ -357,6 +365,9 @@ evaluate_generator <- function(generator, steps, max_q_size = 10, workers = 1, p
 #' The generator should return the same kind of data as accepted by 
 #' `predict_on_batch()`.
 #' 
+#' @inheritParams predict
+#' 
+#' @param model Keras model
 #' @param generator Generator yielding batches of input samples.
 #' @param steps Total number of steps (batches of samples) to yield from
 #'   `generator` before stopping.
@@ -377,8 +388,8 @@ evaluate_generator <- function(generator, steps, max_q_size = 10, workers = 1, p
 #' @family model functions   
 #'     
 #' @export
-predict_generator <- function(generator, steps, max_q_size = 10, workers = 1, pickle_safe = FALSE, verbose = 0) {
-  keras$engine$training$Model$predict_generator(
+predict_generator <- function(model, generator, steps, max_q_size = 10, workers = 1, pickle_safe = FALSE, verbose = 0) {
+  model$predict_generator(
     generator = generator,
     steps = as.integer(steps),
     max_q_size = as.integer(max_q_size),
@@ -389,7 +400,27 @@ predict_generator <- function(generator, steps, max_q_size = 10, workers = 1, pi
 }
 
   
-# TODO: get_layer
+#' Retrieves a layer based on either its name (unique) or index.
+#' 
+#' Indices are based on order of horizontal graph traversal (bottom-up) and 
+#' are 0-based.
+#' 
+#' @param model Keras model
+#' @param name String, name of layer.
+#' @param index Integer, index of layer (0-based)
+#' 
+#' @return A layer instance.
+#' 
+#' @family model functions   
+#' 
+#' @export
+get_layer <- function(model, name = NULL, index = NULL) {
+  model$get_layer(
+    name = name,
+    index = as_nullable_integer(index)
+  )
+}
+
 
 
 #' Print a summary of a model

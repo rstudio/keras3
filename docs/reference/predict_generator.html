@@ -117,12 +117,16 @@
 <code>predict_on_batch()</code>.</p>
     
 
-    <pre class="usage"><span class='fu'>predict_generator</span>(<span class='no'>generator</span>, <span class='no'>steps</span>, <span class='kw'>max_q_size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>workers</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+    <pre class="usage"><span class='fu'>predict_generator</span>(<span class='no'>model</span>, <span class='no'>generator</span>, <span class='no'>steps</span>, <span class='kw'>max_q_size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>workers</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>pickle_safe</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>model</th>
+      <td><p>Keras model</p></td>
+    </tr>
     <tr>
       <th>generator</th>
       <td><p>Generator yielding batches of input samples.</p></td>
@@ -168,7 +172,7 @@ format.</p>
     <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
   <code><a href='evaluate_generator.html'>evaluate_generator</a></code>, <code><a href='evaluate.html'>evaluate</a></code>,
   <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='fit.html'>fit</a></code>,
-  <code><a href='get_config.html'>get_config</a></code>,
+  <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_layer.html'>get_layer</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
   <code><a href='keras_model.html'>keras_model</a></code>,
   <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,

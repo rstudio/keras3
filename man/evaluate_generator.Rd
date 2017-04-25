@@ -4,10 +4,12 @@
 \alias{evaluate_generator}
 \title{Evaluates the model on a data generator.}
 \usage{
-evaluate_generator(generator, steps, max_q_size = 10, workers = 1,
+evaluate_generator(model, generator, steps, max_q_size = 10, workers = 1,
   pickle_safe = FALSE)
 }
 \arguments{
+\item{model}{Model to evaluate}
+
 \item{generator}{Generator yielding lists (inputs, targets) or (inputs,
 targets, sample_weights)}
 
@@ -38,6 +40,7 @@ The generator should return the same kind of data as accepted by
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate}}, \code{\link{fit_generator}},
   \code{\link{fit}}, \code{\link{get_config}},
+  \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}},
   \code{\link{predict_generator}},

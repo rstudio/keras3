@@ -39,6 +39,7 @@ reference:
       - keras_model
       - keras_model_sequential
       - summary
+      - get_layer
       - compile
       - fit
       - fit_generator

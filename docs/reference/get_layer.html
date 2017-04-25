@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Single gradient update or model evaluation over one batch of samples. — train_on_batch • keras</title>
+<title>Retrieves a layer based on either its name (unique) or index. — get_layer • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -109,16 +109,15 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Single gradient update or model evaluation over one batch of samples.</h1>
+    <h1>Retrieves a layer based on either its name (unique) or index.</h1>
     </div>
 
     
-    <p>Single gradient update or model evaluation over one batch of samples.</p>
+    <p>Indices are based on order of horizontal graph traversal (bottom-up) and
+are 0-based.</p>
     
 
-    <pre class="usage"><span class='fu'>train_on_batch</span>(<span class='no'>model</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>test_on_batch</span>(<span class='no'>model</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_layer</span>(<span class='no'>model</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>index</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -128,43 +127,31 @@
       <td><p>Keras model</p></td>
     </tr>
     <tr>
-      <th>x</th>
-      <td><p>input data, as an array or list of arrays (if the model has multiple
-inputs).</p></td>
+      <th>name</th>
+      <td><p>String, name of layer.</p></td>
     </tr>
     <tr>
-      <th>y</th>
-      <td><p>labels, as an array.</p></td>
-    </tr>
-    <tr>
-      <th>class_weight</th>
-      <td><p>named list mapping classes to a weight value, used for
-scaling the loss function (during training only).</p></td>
-    </tr>
-    <tr>
-      <th>sample_weight</th>
-      <td><p>sample weights, as an array.</p></td>
+      <th>index</th>
+      <td><p>Integer, index of layer (0-based)</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Scalar training or test loss (if the model has no metrics) or list of scalars
-(if the model computes other metrics). The property <code>model$metrics_names</code>
-will give you the display labels for the scalar outputs.</p>
+    <p>A layer instance.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
   <code><a href='evaluate_generator.html'>evaluate_generator</a></code>, <code><a href='evaluate.html'>evaluate</a></code>,
   <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='fit.html'>fit</a></code>,
-  <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_layer.html'>get_layer</a></code>,
+  <code><a href='get_config.html'>get_config</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
   <code><a href='keras_model.html'>keras_model</a></code>,
   <code><a href='predict_generator.html'>predict_generator</a></code>,
   <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
   <code><a href='predict_proba.html'>predict_proba</a></code>, <code><a href='predict.html'>predict</a></code>,
-  <code><a href='summary.html'>summary</a></code></p>
+  <code><a href='summary.html'>summary</a></code>, <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
     
 
   </div>
