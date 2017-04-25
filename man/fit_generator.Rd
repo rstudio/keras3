@@ -44,3 +44,13 @@ The generator is run in parallel to the model, for efficiency.
 For instance, this allows you to do real-time data augmentation
 on images on CPU in parallel to training your model on GPU.
 }
+\seealso{
+Other model functions: \code{\link{compile}},
+  \code{\link{evaluate}}, \code{\link{fit}},
+  \code{\link{get_config}},
+  \code{\link{keras_model_sequential}},
+  \code{\link{keras_model}},
+  \code{\link{predict_on_batch}},
+  \code{\link{predict_proba}}, \code{\link{predict}},
+  \code{\link{summary}}, \code{\link{train_on_batch}}
+}

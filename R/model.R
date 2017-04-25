@@ -218,6 +218,8 @@ predict.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
 #' 
 #' @details The input samples are processed batch by batch.
 #' 
+#' @family model functions
+#' 
 #' @export
 predict_proba <- function(model, x, batch_size = 32, verbose = 0) {
   model$predict_proba(
@@ -305,6 +307,7 @@ test_on_batch <- function(model, x, y, sample_weight = NULL) {
 #' 
 #' @return Training history object (invisibly)
 #' 
+#' @family model functions
 #' 
 #' @export
 fit_generator <- function(model, generator, steps_per_epoch, epochs = 1, verbose = 1, 

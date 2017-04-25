@@ -34,10 +34,11 @@ configuration and weights to a file.
 }
 \seealso{
 Other model functions: \code{\link{compile}},
-  \code{\link{evaluate}}, \code{\link{fit}},
-  \code{\link{keras_model_sequential}},
+  \code{\link{evaluate}}, \code{\link{fit_generator}},
+  \code{\link{fit}}, \code{\link{keras_model_sequential}},
   \code{\link{keras_model}},
-  \code{\link{predict_on_batch}}, \code{\link{predict}},
+  \code{\link{predict_on_batch}},
+  \code{\link{predict_proba}}, \code{\link{predict}},
   \code{\link{summary}}, \code{\link{train_on_batch}}
 
 Other layer methods: \code{\link{count_params}},

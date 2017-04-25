@@ -41,8 +41,11 @@ reference:
       - summary
       - compile
       - fit
+      - fit_generator
       - evaluate
       - predict
+      - predict_proba
+      - predict_classes
       - predict_on_batch
       - train_on_batch
       - save_model
