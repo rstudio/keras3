@@ -164,20 +164,18 @@ word.</p>
     
     <p>The tokenizer object has the following attributes:</p><ul>
 <li><p><code>word_counts</code> --- named list mapping words to the number of times they appeared
-on during fit. Only set after <code>fit_on_texts()</code> is called.</p></li>
+on during fit. Only set after <code>fit()</code> is called on the tokenizer.</p></li>
 <li><p><code>word_docs</code> --- named list mapping words to the number of documents/texts they
-appeared on during fit. Only set after <code>fit_on_texts()</code> is called.</p></li>
+appeared on during fit. Only set after <code>fit()</code> is called on the tokenizer.</p></li>
 <li><p><code>word_index</code> --- named list mapping words to their rank/index (int). Only set
-after <code>fit_on_texts()</code> is called.</p></li>
+after <code>fit()</code> is called on the tokenizer.</p></li>
 <li><p><code>document_count</code> --- int. Number of documents (texts/sequences) the tokenizer
-was trained on. Only set after <code>fit_on_texts()</code> or <code>fit_on_sequences()</code> is
-called.</p></li>
+was trained on. Only set after <code>fit()</code> is called on the tokenizer.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other text tokenization: <code><a href='fit_on_sequences.html'>fit_on_sequences</a></code>,
-  <code><a href='fit_on_texts.html'>fit_on_texts</a></code>,
+    <p>Other text tokenization: <code><a href='fit-tokenizer.html'>fit-tokenizer</a></code>,
   <code><a href='sequences_to_matrix.html'>sequences_to_matrix</a></code>,
   <code><a href='texts_to_matrix.html'>texts_to_matrix</a></code>,
   <code><a href='texts_to_sequences_generator.html'>texts_to_sequences_generator</a></code>,

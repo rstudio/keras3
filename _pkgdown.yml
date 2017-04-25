@@ -165,11 +165,9 @@ reference:
   - title: "Text Preprocessing"
     contents:
       - text_tokenizer
-      - fit_on_texts
       - texts_to_sequences
       - texts_to_sequences_generator
       - texts_to_matrix
-      - fit_on_sequences
       - sequences_to_matrix
       - text_one_hot
       - text_to_word_sequence
@@ -179,7 +177,6 @@ reference:
       - image_load
       - image_to_array
       - image_data_generator
-      - image_data_generator_fit
       - image_data_flow
       - image_data_flow_from_directory
  

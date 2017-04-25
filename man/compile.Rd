@@ -33,8 +33,8 @@ Configure a Keras model for training
 }
 \seealso{
 Other model functions: \code{\link{evaluate_generator}},
-  \code{\link{evaluate}}, \code{\link{fit_generator}},
-  \code{\link{fit}}, \code{\link{get_config}},
+  \code{\link{evaluate}}, \code{\link{fit-model}},
+  \code{\link{fit_generator}}, \code{\link{get_config}},
   \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}},

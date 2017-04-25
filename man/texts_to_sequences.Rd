@@ -7,7 +7,7 @@
 texts_to_sequences(tokenizer, texts)
 }
 \arguments{
-\item{tokenizer}{Tokenizer returned by \code{\link[=text_tokenizer]{text_tokenizer()}}}
+\item{tokenizer}{Tokenizer}
 
 \item{texts}{Vector/list of texts (strings).}
 }
@@ -16,8 +16,7 @@ Only top "num_words" most frequent words will be taken into account.
 Only words known by the tokenizer will be taken into account.
 }
 \seealso{
-Other text tokenization: \code{\link{fit_on_sequences}},
-  \code{\link{fit_on_texts}},
+Other text tokenization: \code{\link{fit-tokenizer}},
   \code{\link{sequences_to_matrix}},
   \code{\link{text_tokenizer}},
   \code{\link{texts_to_matrix}},

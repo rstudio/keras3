@@ -9,7 +9,7 @@ image_data_flow(generator, x, y = NULL, batch_size = 32, shuffle = TRUE,
   save_format = "jpeg")
 }
 \arguments{
-\item{generator}{\code{\link[=image_data_generator]{image_data_generator()}}}
+\item{generator}{Image data generator}
 
 \item{x}{data. Should have rank 4. In case of grayscale data, the channels
 axis should have value 1, and in case of RGB data, it should have value 3.}
@@ -44,7 +44,7 @@ array of corresponding labels. The generator loops indefinitely.
 }
 
 \seealso{
-Other image preprocessing: \code{\link{image_data_flow_from_directory}},
-  \code{\link{image_data_generator_fit}},
+Other image preprocessing: \code{\link{fit-image-generator}},
+  \code{\link{image_data_flow_from_directory}},
   \code{\link{image_load}}, \code{\link{image_to_array}}
 }

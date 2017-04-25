@@ -40,20 +40,18 @@ word.
 The tokenizer object has the following attributes:
 \itemize{
 \item \code{word_counts} --- named list mapping words to the number of times they appeared
-on during fit. Only set after \code{fit_on_texts()} is called.
+on during fit. Only set after \code{fit()} is called on the tokenizer.
 \item \code{word_docs} --- named list mapping words to the number of documents/texts they
-appeared on during fit. Only set after \code{fit_on_texts()} is called.
+appeared on during fit. Only set after \code{fit()} is called on the tokenizer.
 \item \code{word_index} --- named list mapping words to their rank/index (int). Only set
-after \code{fit_on_texts()} is called.
+after \code{fit()} is called on the tokenizer.
 \item \code{document_count} --- int. Number of documents (texts/sequences) the tokenizer
-was trained on. Only set after \code{fit_on_texts()} or \code{fit_on_sequences()} is
-called.
+was trained on. Only set after \code{fit()} is called on the tokenizer.
 }
 }
 
 \seealso{
-Other text tokenization: \code{\link{fit_on_sequences}},
-  \code{\link{fit_on_texts}},
+Other text tokenization: \code{\link{fit-tokenizer}},
   \code{\link{sequences_to_matrix}},
   \code{\link{texts_to_matrix}},
   \code{\link{texts_to_sequences_generator}},
