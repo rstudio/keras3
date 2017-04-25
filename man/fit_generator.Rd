@@ -12,37 +12,53 @@ fit_generator(model, generator, steps_per_epoch, epochs = 1, verbose = 1,
 \arguments{
 \item{model}{Model to train.}
 
-\item{generator}{Generator that yields training batches}
+\item{generator}{a generator. The output of the generator must be either - a
+list (inputs, targets) - a list (inputs, targets, sample_weights). All
+arrays should contain the same number of samples. The generator is expected
+to loop over its data indefinitely. An epoch finishes when
+\code{steps_per_epoch} samples have been seen by the model.}
 
-\item{steps_per_epoch}{}
+\item{steps_per_epoch}{Total number of steps (batches of samples) to yield
+from \code{generator} before declaring one epoch finished and starting the next
+epoch. It should typically be equal to the number of unique samples if your
+dataset divided by the batch size.}
 
-\item{epochs}{Number of times to iterate over the training data arrays.}
+\item{epochs}{integer, total number of iterations on the data.}
 
-\item{verbose}{Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
-epoch).}
+\item{verbose}{verbosity mode, 0, 1, or 2.}
 
-\item{callbacks}{List of callbacks to be called during training.}
+\item{callbacks}{list of callbacks to be called during training.}
 
-\item{validation_data}{Data on which to evaluate the loss and any model
-metrics at the end of each epoch. The model will not be trained on this
-data. This could be a list (x_val, y_val) or a list (x_val, y_val,
-val_sample_weights).}
+\item{validation_data}{this can be either - a generator for the validation
+data - a list (inputs, targets) - a list (inputs, targets, sample_weights).}
 
-\item{class_weight}{Optional named list mapping indices (integers) to a
-weight (float) to apply to the model's loss for the samples from this class
-during training. This can be useful to tell the model to "pay more
-attention" to samples from an under-represented class.}
+\item{validation_steps}{Only relevant if \code{validation_data} is a generator.
+Total number of steps (batches of samples) to yield from \code{generator} before
+stopping.}
+
+\item{class_weight}{dictionary mapping class indices to a weight for the
+class.}
+
+\item{max_q_size}{maximum size for the generator queue}
+
+\item{workers}{maximum number of processes to spin up when using process
+based threading}
+
+\item{pickle_safe}{if TRUE, use process based threading. Note that because
+this implementation relies on multiprocessing, you should not pass non
+picklable arguments to the generator as they can't be passed easily to
+children processes.}
 
 \item{initial_epoch}{epoch at which to start training (useful for resuming a
-previous training run).}
+previous training run)}
 }
 \value{
 Training history object (invisibly)
 }
 \description{
-The generator is run in parallel to the model, for efficiency.
-For instance, this allows you to do real-time data augmentation
-on images on CPU in parallel to training your model on GPU.
+The generator is run in parallel to the model, for efficiency. For instance,
+this allows you to do real-time data augmentation on images on CPU in
+parallel to training your model on GPU.
 }
 \seealso{
 Other model functions: \code{\link{compile}},
