@@ -18,13 +18,6 @@ data_augmentation <- FALSE
 # see ?dataset_cifar10 for more info
 cifar10 <- dataset_cifar10()
 
-to_categorical <- function(y, num_classes){
-  sapply(y, function(x){
-    as.integer(x == (0:(num_classes-1)))
-  }) %>% 
-    t()
-}
-
 x_train <- cifar10$train$x/255
 x_test <- cifar10$test$x/255
 
@@ -85,5 +78,23 @@ if(!data_augmentation){
   )
   
 } else {
+  
+  datagen <- image_data_generator(
+    featurewise_center = TRUE,
+    featurewise_std_normalization = TRUE,
+    rotation_range = 20,
+    width_shift_range = 0.2,
+    height_shift_range = 0.2,
+    horizontal_flip = TRUE
+  )
+  
+  datagen %>% image_data_generator_fit(x_train)
+  
+  model %>% fit_generator(
+    image_data_flow(datagen, x_train, y_train, batch_size = 32),
+    steps_per_epoch = 50000, 
+    epochs = epochs, 
+    validation_data = list(x_test, y_test)
+  )
   
 }
