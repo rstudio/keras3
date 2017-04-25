@@ -89,7 +89,7 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
 #' 
 #' Trains the model for a fixed number of epochs (iterations on a dataset).
 #'
-#' @param model Model to train.
+#' @param object Model to train.
 #' @param x Vector, matrix, or array of training data (or list if the model has 
 #'   multiple inputs). If all inputs in the model are named, you can also pass a
 #'   list mapping input names to data.
@@ -122,23 +122,20 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
 #'   sample_weight_mode="temporal" in [compile()].
 #' @param initial_epoch epoch at which to start training (useful for resuming a
 #'   previous training run).
+#' @param ... Unused
 #' 
 #' @family model functions
 #' 
+#' @name fit-model
+#' 
 #' @export
-fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL,
+fit.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
+                object, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL,
                 validation_split=0.0, validation_data=NULL, shuffle=TRUE,
-                class_weight=NULL, sample_weight=NULL, initial_epoch=0) {
-  
-  # convert class weights to python dict
-  if (!is.null(class_weight)) {
-    if (is.list(class_weight))
-      class_weight <- dict(class_weight)
-    else
-      stop("class_weight must be a named list of weights")
-  }
+                class_weight=NULL, sample_weight=NULL, initial_epoch=0, ...) {
   
   # fit the model
+  model <- object
   history <- model$fit(
     x = normalize_x(x),
     y = normalize_x(y),
@@ -149,7 +146,7 @@ fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL
     validation_split = validation_split,
     validation_data = validation_data,
     shuffle = shuffle,
-    class_weight = class_weight,
+    class_weight = as_class_weight(class_weight),
     sample_weight = sample_weight,
     initial_epoch = as.integer(initial_epoch)
   )
@@ -161,7 +158,7 @@ fit <- function(model, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL
 
 #' Evaluate a Keras model
 
-#' @inheritParams fit
+#' @inheritParams fit-model
 #'   
 #' @param model Model to evaluate
 #'   
@@ -282,7 +279,7 @@ train_on_batch <- function(model, x, y, class_weight = NULL, sample_weight = NUL
   model$train_on_batch(
     x = x,
     y = y,
-    class_weight = class_weight,
+    class_weight = as_class_weight(class_weight),
     sample_weight = sample_weight
   )
 }
@@ -305,8 +302,7 @@ test_on_batch <- function(model, x, y, sample_weight = NULL) {
 #' this allows you to do real-time data augmentation on images on CPU in
 #' parallel to training your model on GPU.
 #' 
-#' @inheritParams fit
-#'   
+#' @param model Keras model
 #' @param generator a generator. The output of the generator must be either - a
 #'   list (inputs, targets) - a list (inputs, targets, sample_weights). All
 #'   arrays should contain the same number of samples. The generator is expected
@@ -354,7 +350,7 @@ fit_generator <- function(model, generator, steps_per_epoch, epochs = 1, verbose
     callbacks = normalize_callbacks(callbacks),
     validation_data = validation_data,
     validation_steps = as_nullable_integer(validation_steps),
-    class_weight = class_weight,
+    class_weight = as_class_weight(class_weight),
     max_q_size = as.integer(max_q_size),
     workers = as.integer(workers),
     pickle_safe = pickle_safe,
@@ -496,6 +492,16 @@ normalize_x <- function(x) {
     lapply(x, as.array)
   else
     as.array(x)
+}
+
+as_class_weight <- function(class_weight) {
+  # convert class weights to python dict
+  if (!is.null(class_weight)) {
+    if (is.list(class_weight))
+      class_weight <- dict(class_weight)
+    else
+      stop("class_weight must be a named list of weights")
+  }
 }
 
 have_module <- function(module) {

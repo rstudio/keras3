@@ -125,36 +125,6 @@
       <th>model</th>
       <td><p>Model to evaluate</p></td>
     </tr>
-    <tr>
-      <th>x</th>
-      <td><p>Vector, matrix, or array of training data (or list if the model has
-multiple inputs). If all inputs in the model are named, you can also pass a
-list mapping input names to data.</p></td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td><p>Vector, matrix, or array of target data (or list if the model has
-multiple outputs). If all outputs in the model are named, you can also pass
-a list mapping output names to data.</p></td>
-    </tr>
-    <tr>
-      <th>batch_size</th>
-      <td><p>Number of samples per gradient update.</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
-epoch).</p></td>
-    </tr>
-    <tr>
-      <th>sample_weight</th>
-      <td><p>Optional array of the same length as x, containing
-weights to apply to the model's loss for each sample. In the case of
-temporal data, you can pass a 2D array with shape (samples,
-sequence_length), to apply a different weight to every timestep of every
-sample. In this case you should make sure to specify
-sample_weight_mode="temporal" in <code><a href='compile.html'>compile()</a></code>.</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -166,7 +136,7 @@ list of scalars (if the model has multiple outputs and/or metrics).</p>
 
     <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
   <code><a href='evaluate_generator.html'>evaluate_generator</a></code>,
-  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='fit.html'>fit</a></code>,
+  <code><a href='fit-model.html'>fit-model</a></code>, <code><a href='fit_generator.html'>fit_generator</a></code>,
   <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_layer.html'>get_layer</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
   <code><a href='keras_model.html'>keras_model</a></code>,

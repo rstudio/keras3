@@ -10,7 +10,7 @@ fit_generator(model, generator, steps_per_epoch, epochs = 1, verbose = 1,
   pickle_safe = FALSE, initial_epoch = 0)
 }
 \arguments{
-\item{model}{Model to train.}
+\item{model}{Keras model}
 
 \item{generator}{a generator. The output of the generator must be either - a
 list (inputs, targets) - a list (inputs, targets, sample_weights). All
@@ -63,7 +63,7 @@ parallel to training your model on GPU.
 \seealso{
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate_generator}}, \code{\link{evaluate}},
-  \code{\link{fit}}, \code{\link{get_config}},
+  \code{\link{fit-model}}, \code{\link{get_config}},
   \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}},

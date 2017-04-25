@@ -8,7 +8,7 @@ sequences_to_matrix(tokenizer, sequences, mode = c("binary", "count", "tfidf",
   "freq"))
 }
 \arguments{
-\item{tokenizer}{Tokenizer returned by \code{\link[=text_tokenizer]{text_tokenizer()}}}
+\item{tokenizer}{Tokenizer}
 
 \item{sequences}{List of sequences (a sequence is a list of integer word indices).}
 
@@ -21,8 +21,8 @@ A matrix
 Convert a list of sequences into a matrix.
 }
 \seealso{
-Other text tokenization: \code{\link{fit_on_sequences}},
-  \code{\link{fit_on_texts}}, \code{\link{text_tokenizer}},
+Other text tokenization: \code{\link{fit-tokenizer}},
+  \code{\link{text_tokenizer}},
   \code{\link{texts_to_matrix}},
   \code{\link{texts_to_sequences_generator}},
   \code{\link{texts_to_sequences}}

@@ -10,7 +10,7 @@ image_data_flow_from_directory(generator, directory, target_size = c(256,
   save_prefix = "", save_format = "jpeg", follow_links = FALSE)
 }
 \arguments{
-\item{generator}{\code{\link[=image_data_generator]{image_data_generator()}}}
+\item{generator}{Image data generator}
 
 \item{directory}{path to the target directory. It should contain one
 subdirectory per class. Any PNG, JPG or BMP images inside each of the
@@ -65,7 +65,7 @@ array of corresponding labels. The generator loops indefinitely.
 }
 
 \seealso{
-Other image preprocessing: \code{\link{image_data_flow}},
-  \code{\link{image_data_generator_fit}},
-  \code{\link{image_load}}, \code{\link{image_to_array}}
+Other image preprocessing: \code{\link{fit-image-generator}},
+  \code{\link{image_data_flow}}, \code{\link{image_load}},
+  \code{\link{image_to_array}}
 }

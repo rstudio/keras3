@@ -182,14 +182,13 @@ text_one_hot <- function(text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\
 #' @section Attributes:
 #' The tokenizer object has the following attributes:
 #' - `word_counts` --- named list mapping words to the number of times they appeared
-#'   on during fit. Only set after `fit_on_texts()` is called.
+#'   on during fit. Only set after `fit()` is called on the tokenizer.
 #' - `word_docs` --- named list mapping words to the number of documents/texts they
-#'    appeared on during fit. Only set after `fit_on_texts()` is called.
+#'    appeared on during fit. Only set after `fit()` is called on the tokenizer.
 #' - `word_index` --- named list mapping words to their rank/index (int). Only set 
-#'    after `fit_on_texts()` is called.
+#'    after `fit()` is called on the tokenizer.
 #' -  `document_count` --- int. Number of documents (texts/sequences) the tokenizer 
-#'    was trained on. Only set after `fit_on_texts()` or `fit_on_sequences()` is
-#'    called.
+#'    was trained on. Only set after `fit()` is called on the tokenizer.
 #'   
 #' @family text tokenization
 #'   
@@ -205,35 +204,29 @@ text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\
   )
 }
 
-#' Update tokenizer internal vocabulary based on a list of texts.
+#' Update tokenizer internal vocabulary based on a list of texts or list of
+#' sequences.
 #' 
-#' @param tokenizer Tokenizer returned by [text_tokenizer()]
-#' @param texts Vector/list of strings, or a generator of strings (for memory-efficiency)
-#' 
-#' @note 
-#' Required before using [texts_to_sequences()] or [texts_to_matrix()].
-#' 
+#' @param object Tokenizer returned by [text_tokenizer()]
+#' @param x Vector/list of strings, or a generator of strings (for 
+#'   memory-efficiency); Alternatively a list of "sequence" (a sequence is a 
+#'   list of integer word indices).
+#' @param ... Unused
+#'
+#' @note Required before using [texts_to_sequences()], [texts_to_matrix()], or 
+#'   [sequences_to_matrix()].
+#'   
 #' @family text tokenization
 #'   
-#' @export
-fit_on_texts <- function(tokenizer, texts) {
-  tokenizer$fit_on_texts(texts)
-}
-
-#' Update tokenizer internal vocabulary based on a list of sequences.
-#' 
-#' @inheritParams fit_on_texts
-#' 
-#' @param sequences A list of sequence (a "sequence" is a list of integer word indices).
-#' 
-#' @note 
-#' Required before using [sequences_to_matrix()] (if [fit_on_texts()] was never called).
-#' 
-#' @family text tokenization
+#' @name fit-tokenizer
 #'   
 #' @export
-fit_on_sequences <- function(tokenizer, sequences) {
-  tokenizer$fit_on_sequences
+fit.tensorflow.contrib.keras.python.keras.preprocessing.text.Tokenizer <- function(object, x, ...) {
+  tokenizer <- object
+  if (is.list(x))
+    tokenizer$fit_on_sequences(x)
+  else
+    tokenizer$fit_on_texts(x)
 }
 
 #' Transform each text in texts in a sequence of integers.
@@ -241,8 +234,7 @@ fit_on_sequences <- function(tokenizer, sequences) {
 #' Only top "num_words" most frequent words will be taken into account.
 #' Only words known by the tokenizer will be taken into account.
 #' 
-#' @inheritParams fit_on_texts
-#' 
+#' @param tokenizer Tokenizer
 #' @param texts Vector/list of texts (strings).
 #' 
 #' @family text tokenization
@@ -426,17 +418,21 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
 #' Required for `featurewise_center`, `featurewise_std_normalization`
 #' and `zca_whitening`.
 #' 
-#' @param generator [image_data_generator()]
+#' @param object [image_data_generator()]
 #' @param x  array, the data to fit on (should have rank 4). In case of grayscale data,
 #' the channels axis should have value 1, and in case of RGB data, it should have value 3.
 #' @param augment Whether to fit on randomly augmented samples
 #' @param rounds If `augment`, how many augmentation passes to do over the data
 #' @param seed random seed.
+#' @param ... Unused
 #' 
 #' @family image preprocessing
 #' 
+#' @name fit-image-generator
+#' 
 #' @export
-image_data_generator_fit <- function(generator, x, augment = FALSE, rounds = 1, seed = NULL) {
+fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL, ...) {
+  generator <- object
   generator$fit(
     x = x,
     augment = augment,
@@ -449,9 +445,8 @@ image_data_generator_fit <- function(generator, x, augment = FALSE, rounds = 1, 
 #' Generates batches of augmented/normalized data from image data and labels
 #' 
 #' @details Yields batches indefinitely, in an infinite loop.
-#'   
-#' @inheritParams image_data_generator_fit   
 #' 
+#' @param generator Image data generator
 #' @param x data. Should have rank 4. In case of grayscale data, the channels
 #'   axis should have value 1, and in case of RGB data, it should have value 3.
 #' @param y labels.
@@ -492,6 +487,7 @@ image_data_flow <- function(generator, x, y = NULL, batch_size = 32, shuffle = T
 #'   
 #' @inheritParams image_data_flow
 #'   
+#' @param generator Image data generator
 #' @param directory path to the target directory. It should contain one 
 #'   subdirectory per class. Any PNG, JPG or BMP images inside each of the 
 #'   subdirectories directory tree will be included in the generator. See [this 

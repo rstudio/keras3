@@ -8,7 +8,7 @@ texts_to_matrix(tokenizer, texts, mode = c("binary", "count", "tfidf",
   "freq"))
 }
 \arguments{
-\item{tokenizer}{Tokenizer returned by \code{\link[=text_tokenizer]{text_tokenizer()}}}
+\item{tokenizer}{Tokenizer}
 
 \item{texts}{Vector/list of texts (strings).}
 
@@ -21,8 +21,7 @@ A matrix
 Convert a list of texts to a matrix.
 }
 \seealso{
-Other text tokenization: \code{\link{fit_on_sequences}},
-  \code{\link{fit_on_texts}},
+Other text tokenization: \code{\link{fit-tokenizer}},
   \code{\link{sequences_to_matrix}},
   \code{\link{text_tokenizer}},
   \code{\link{texts_to_sequences_generator}},

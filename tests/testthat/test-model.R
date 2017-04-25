@@ -26,6 +26,15 @@ test_succeeds("models can be fit, evaluated, and used for predictions", {
   fit(model, data, labels)
   evaluate(model, data, labels)
   predict(model, input)
+  predict_on_batch(model, input)
+  predict_proba(model, input)
+  predict_classes(model, input)
+})
+
+test_succeeds("models can be tested and trained on batches", {
+  model <- define_and_compile_model()
+  train_on_batch(model, data, labels)
+  test_on_batch(model, data, labels)
 })
 
 
@@ -40,6 +49,8 @@ test_succeeds("models layers can be retrieved by name and index", {
   get_layer(model, name = 'first_activation')
   get_layer(model, index = 1)
 })
+
+
 
 
 
