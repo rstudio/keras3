@@ -227,11 +227,11 @@ as_sequences_dataset_list <- function(dataset) {
   list(
     train = list(
       x = lapply(dataset[[1]][[1]], identity),
-      y = lapply(dataset[[1]][[2]], identity)
+      y = dataset[[1]][[2]]
     ),
     test = list(
       x = lapply(dataset[[2]][[1]], identity),
-      y = lapply(dataset[[2]][[2]], identity)
+      y = dataset[[2]][[2]]
     )
   )
 }

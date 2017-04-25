@@ -44,11 +44,9 @@ imdb <- dataset_imdb(num_words = max_features)
 # and each column a word on the sequence. 
 # we pad the sequences with 0 to the left.
 x_train <- imdb$train$x %>%
-  lapply(identity) %>%
   pad_sequences(maxlen = maxlen)
 
 x_test <- imdb$test$x %>%
-  lapply(identity) %>%
   pad_sequences(maxlen = maxlen)
 
 # Defining the model ------------------------------------------------------
