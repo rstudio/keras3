@@ -27,7 +27,7 @@ Required for \code{featurewise_center}, \code{featurewise_std_normalization}
 and \code{zca_whitening}.
 }
 \seealso{
-Other image preprocessing: \code{\link{image_data_flow_from_directory}},
-  \code{\link{image_data_flow}}, \code{\link{image_load}},
-  \code{\link{image_to_array}}
+Other image preprocessing: \code{\link{flow_data.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator}},
+  \code{\link{flow_data_from_directory.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator}},
+  \code{\link{image_load}}, \code{\link{image_to_array}}
 }

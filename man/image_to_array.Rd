@@ -19,6 +19,7 @@ Converts a PIL Image instance to a 3d-array.
 }
 \seealso{
 Other image preprocessing: \code{\link{fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator}},
-  \code{\link{image_data_flow_from_directory}},
-  \code{\link{image_data_flow}}, \code{\link{image_load}}
+  \code{\link{flow_data.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator}},
+  \code{\link{flow_data_from_directory.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator}},
+  \code{\link{image_load}}
 }

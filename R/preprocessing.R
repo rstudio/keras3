@@ -456,6 +456,7 @@ fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator
 #'   pictures (only relevant if `save_to_dir` is set).
 #' @param save_format one of "png", "jpeg" (only relevant if save_to_dir is
 #'   set). Default: "jpeg".
+#' @param ... Unused
 #'   
 #' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a
 #'   array of corresponding labels. The generator loops indefinitely.
@@ -463,8 +464,9 @@ fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator
 #' @family image preprocessing
 #'   
 #' @export
-image_data_flow <- function(generator, x, y = NULL, batch_size = 32, shuffle = TRUE, seed = NULL, 
-                            save_to_dir = NULL, save_prefix = "", save_format = 'jpeg') {
+flow_data.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator <- function(
+          generator, x, y = NULL, batch_size = 32, shuffle = TRUE, seed = NULL, 
+          save_to_dir = NULL, save_prefix = "", save_format = 'jpeg', ...) {
   generator$flow(
     x = x,
     y = y,
@@ -481,7 +483,7 @@ image_data_flow <- function(generator, x, y = NULL, batch_size = 32, shuffle = T
 #' 
 #' @details Yields batches indefinitely, in an infinite loop.
 #'   
-#' @inheritParams image_data_flow
+#' @inheritParams flow_data.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator
 #'   
 #' @param generator Image data generator
 #' @param directory path to the target directory. It should contain one 
@@ -505,6 +507,7 @@ image_data_flow <- function(generator, x, y = NULL, batch_size = 32, shuffle = T
 #'   useful to use [predict_generator()], [evaluate_generator()], etc.).
 #' @param follow_links whether to follow symlinks inside class subdirectories
 #'   (default: `FALSE`).
+#' @param ... Unused
 #'   
 #' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a 
 #'   array of corresponding labels. The generator loops indefinitely.
@@ -512,11 +515,12 @@ image_data_flow <- function(generator, x, y = NULL, batch_size = 32, shuffle = T
 #' @family image preprocessing
 #'   
 #' @export
-image_data_flow_from_directory <- function(generator, directory, target_size = c(256, 256), color_mode = "rgb",
-                                           classes = NULL, class_mode = "categorical",
-                                           batch_size = 32, shuffle = TRUE, seed = NULL,
-                                           save_to_dir = NULL, save_prefix = "", save_format = "jpeg",
-                                           follow_links = FALSE) {
+flow_data_from_directory.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator <- function(
+      generator, directory, target_size = c(256, 256), color_mode = "rgb",
+      classes = NULL, class_mode = "categorical",
+      batch_size = 32, shuffle = TRUE, seed = NULL,
+      save_to_dir = NULL, save_prefix = "", save_format = "jpeg",
+      follow_links = FALSE) {
   generator$flow_from_directory(
     directory = normalize_path(directory),
     target_size = as.integer(target_size),
