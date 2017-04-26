@@ -218,6 +218,8 @@ text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\
 #'   
 #' @family text tokenization
 #'   
+#' @name fit.Tokenizer   
+#'   
 #' @export
 fit.tensorflow.contrib.keras.python.keras.preprocessing.text.Tokenizer <- function(object, x, ...) {
   tokenizer <- object
@@ -426,6 +428,8 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
 #' 
 #' @family image preprocessing
 #' 
+#' @name fit.ImageDataGenerator
+#' 
 #' @export
 fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL, ...) {
   generator <- object
@@ -463,6 +467,8 @@ fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator
 #'   
 #' @family image preprocessing
 #'   
+#' @name flow_data.ImageDataGenerator   
+#'   
 #' @export
 flow_data.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator <- function(
           generator, x, y = NULL, batch_size = 32, shuffle = TRUE, seed = NULL, 
@@ -483,7 +489,7 @@ flow_data.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGen
 #' 
 #' @details Yields batches indefinitely, in an infinite loop.
 #'   
-#' @inheritParams flow_data.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator
+#' @inheritParams flow_data.ImageDataGenerator
 #'   
 #' @param generator Image data generator
 #' @param directory path to the target directory. It should contain one 
@@ -513,6 +519,8 @@ flow_data.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGen
 #'   array of corresponding labels. The generator loops indefinitely.
 #'   
 #' @family image preprocessing
+#'   
+#' @name flow_data_from_directory.ImageDataGenerator
 #'   
 #' @export
 flow_data_from_directory.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator <- function(

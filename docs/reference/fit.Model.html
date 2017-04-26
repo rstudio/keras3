@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generates probability or class probability predictions for the input samples. — predict_proba • keras</title>
+<title>Train a Keras model — fit.Model • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -109,53 +109,112 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generates probability or class probability predictions for the input samples.</h1>
+    <h1>Train a Keras model</h1>
     </div>
 
     
-    <p>Generates probability or class probability predictions for the input samples.</p>
+    <p>Trains the model for a fixed number of epochs (iterations on a dataset).</p>
     
 
-    <pre class="usage"><span class='fu'>predict_proba</span>(<span class='no'>model</span>, <span class='no'>x</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>0</span>)
-
-<span class='fu'>predict_classes</span>(<span class='no'>model</span>, <span class='no'>x</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for tensorflow.contrib.keras.python.keras.engine.training.Model</span>
+<span class='fu'><a href='fit.html'>fit</a></span>(<span class='no'>object</span>,
+  <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>validation_split</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
-      <td><p>Keras model</p></td>
+      <th>object</th>
+      <td><p>Model to train.</p></td>
     </tr>
     <tr>
       <th>x</th>
-      <td><p>Input data (vector, matrix, or array)</p></td>
+      <td><p>Vector, matrix, or array of training data (or list if the model has
+multiple inputs). If all inputs in the model are named, you can also pass a
+list mapping input names to data.</p></td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td><p>Vector, matrix, or array of target data (or list if the model has
+multiple outputs). If all outputs in the model are named, you can also pass
+a list mapping output names to data.</p></td>
     </tr>
     <tr>
       <th>batch_size</th>
-      <td><p>Integer</p></td>
+      <td><p>Number of samples per gradient update.</p></td>
+    </tr>
+    <tr>
+      <th>epochs</th>
+      <td><p>Number of times to iterate over the training data arrays.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>Verbosity mode, 0 or 1.</p></td>
+      <td><p>Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
+epoch).</p></td>
+    </tr>
+    <tr>
+      <th>callbacks</th>
+      <td><p>List of callbacks to be called during training.</p></td>
+    </tr>
+    <tr>
+      <th>validation_split</th>
+      <td><p>Float between 0 and 1: fraction of the training data
+to be used as validation data. The model will set apart this fraction of
+the training data, will not train on it, and will evaluate the loss and any
+model metrics on this data at the end of each epoch.</p></td>
+    </tr>
+    <tr>
+      <th>validation_data</th>
+      <td><p>Data on which to evaluate the loss and any model
+metrics at the end of each epoch. The model will not be trained on this
+data. This could be a list (x_val, y_val) or a list (x_val, y_val,
+val_sample_weights).</p></td>
+    </tr>
+    <tr>
+      <th>shuffle</th>
+      <td><p><code>TRUE</code> to shuffle the training data before each epoch.</p></td>
+    </tr>
+    <tr>
+      <th>class_weight</th>
+      <td><p>Optional named list mapping indices (integers) to a
+weight (float) to apply to the model's loss for the samples from this class
+during training. This can be useful to tell the model to "pay more
+attention" to samples from an under-represented class.</p></td>
+    </tr>
+    <tr>
+      <th>sample_weight</th>
+      <td><p>Optional array of the same length as x, containing
+weights to apply to the model's loss for each sample. In the case of
+temporal data, you can pass a 2D array with shape (samples,
+sequence_length), to apply a different weight to every timestep of every
+sample. In this case you should make sure to specify
+sample_weight_mode="temporal" in <code><a href='compile.html'>compile()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>initial_epoch</th>
+      <td><p>epoch at which to start training (useful for resuming a
+previous training run).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Unused</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The input samples are processed batch by batch.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
   <code><a href='evaluate_generator.html'>evaluate_generator</a></code>, <code><a href='evaluate.html'>evaluate</a></code>,
-  <code><a href='fit.Model.html'>fit.Model</a></code>, <code><a href='fit_generator.html'>fit_generator</a></code>,
-  <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_layer.html'>get_layer</a></code>,
+  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='get_config.html'>get_config</a></code>,
+  <code><a href='get_layer.html'>get_layer</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
   <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='predict.Model.html'>predict.Model</a></code>,
   <code><a href='predict_generator.html'>predict_generator</a></code>,
   <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
-  <code><a href='summary.Model.html'>summary.Model</a></code>, <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
+  <code><a href='predict_proba.html'>predict_proba</a></code>, <code><a href='summary.Model.html'>summary.Model</a></code>,
+  <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
     
 
   </div>
@@ -164,8 +223,6 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
           </ul>
 

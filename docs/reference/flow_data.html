@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Converts a PIL Image instance to a 3d-array. — image_to_array • keras</title>
+<title>Flow Input Data — flow_data • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -109,38 +109,28 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Converts a PIL Image instance to a 3d-array.</h1>
+    <h1>Flow Input Data</h1>
     </div>
 
     
-    <p>Converts a PIL Image instance to a 3d-array.</p>
+    <p>Generic function for flowing input data from a stream. The function invokes
+particular methods which depend on the class of the first argument.</p>
     
 
-    <pre class="usage"><span class='fu'>image_to_array</span>(<span class='no'>img</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"channels_last"</span>, <span class='st'>"channels_first"</span>))</pre>
+    <pre class="usage"><span class='fu'>flow_data</span>(<span class='no'>generator</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>img</th>
-      <td><p>PIL Image instance.</p></td>
+      <th>generator</th>
+      <td><p>A data generator (e.g. <code><a href='image_data_generator.html'>image_data_generator()</a></code>).</p></td>
     </tr>
     <tr>
-      <th>data_format</th>
-      <td><p>Image data format ("channels_last" or "channels_first")</p></td>
+      <th>...</th>
+      <td><p>Additional arguments</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A 3D array.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p>Other image preprocessing: <code><a href='fit.ImageDataGenerator.html'>fit.ImageDataGenerator</a></code>,
-  <code><a href='flow_data.ImageDataGenerator.html'>flow_data.ImageDataGenerator</a></code>,
-  <code><a href='flow_data_from_directory.ImageDataGenerator.html'>flow_data_from_directory.ImageDataGenerator</a></code>,
-  <code><a href='image_load.html'>image_load</a></code></p>
     
 
   </div>
@@ -148,11 +138,7 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

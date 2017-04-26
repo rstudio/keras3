@@ -20,8 +20,8 @@ A PIL Image instance.
 Loads an image into PIL format.
 }
 \seealso{
-Other image preprocessing: \code{\link{fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator}},
-  \code{\link{flow_data.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator}},
-  \code{\link{flow_data_from_directory.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator}},
+Other image preprocessing: \code{\link{fit.ImageDataGenerator}},
+  \code{\link{flow_data.ImageDataGenerator}},
+  \code{\link{flow_data_from_directory.ImageDataGenerator}},
   \code{\link{image_to_array}}
 }

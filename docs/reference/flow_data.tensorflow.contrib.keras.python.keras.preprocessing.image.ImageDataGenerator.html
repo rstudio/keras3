@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Converts a PIL Image instance to a 3d-array. — image_to_array • keras</title>
+<title>Generates batches of augmented/normalized data from image data and labels — flow_data.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -109,38 +109,82 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Converts a PIL Image instance to a 3d-array.</h1>
+    <h1>Generates batches of augmented/normalized data from image data and labels</h1>
     </div>
 
     
-    <p>Converts a PIL Image instance to a 3d-array.</p>
+    <p>Generates batches of augmented/normalized data from image data and labels</p>
     
 
-    <pre class="usage"><span class='fu'>image_to_array</span>(<span class='no'>img</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"channels_last"</span>, <span class='st'>"channels_first"</span>))</pre>
+    <pre class="usage"><span class='co'># S3 method for tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator</span>
+<span class='fu'><a href='flow_data.html'>flow_data</a></span>(<span class='no'>generator</span>,
+  <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>save_to_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>save_prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>save_format</span> <span class='kw'>=</span> <span class='st'>"jpeg"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>img</th>
-      <td><p>PIL Image instance.</p></td>
+      <th>generator</th>
+      <td><p>Image data generator</p></td>
     </tr>
     <tr>
-      <th>data_format</th>
-      <td><p>Image data format ("channels_last" or "channels_first")</p></td>
+      <th>x</th>
+      <td><p>data. Should have rank 4. In case of grayscale data, the channels
+axis should have value 1, and in case of RGB data, it should have value 3.</p></td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td><p>labels.</p></td>
+    </tr>
+    <tr>
+      <th>batch_size</th>
+      <td><p>int (default: <code>32</code>).</p></td>
+    </tr>
+    <tr>
+      <th>shuffle</th>
+      <td><p>boolean (defaut: <code>TRUE</code>).</p></td>
+    </tr>
+    <tr>
+      <th>seed</th>
+      <td><p>int (default: <code>NULL</code>).</p></td>
+    </tr>
+    <tr>
+      <th>save_to_dir</th>
+      <td><p><code>NULL</code> or str (default: <code>NULL</code>). This allows you to
+optimally specify a directory to which to save the augmented pictures being
+generated (useful for visualizing what you are doing).</p></td>
+    </tr>
+    <tr>
+      <th>save_prefix</th>
+      <td><p>str (default: ''). Prefix to use for filenames of saved
+pictures (only relevant if <code>save_to_dir</code> is set).</p></td>
+    </tr>
+    <tr>
+      <th>save_format</th>
+      <td><p>one of "png", "jpeg" (only relevant if save_to_dir is
+set). Default: "jpeg".</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Unused</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A 3D array.</p>
+    <p>Yields batches indefinitely, in an infinite loop.</p>
+    
+    <h2 class="hasAnchor" id="yields"><a class="anchor" href="#yields"></a>Yields</h2>
+
+    <p><code>(x, y)</code> where <code>x</code> is an array of image data and <code>y</code> is a
+array of corresponding labels. The generator loops indefinitely.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other image preprocessing: <code><a href='fit.ImageDataGenerator.html'>fit.ImageDataGenerator</a></code>,
-  <code><a href='flow_data.ImageDataGenerator.html'>flow_data.ImageDataGenerator</a></code>,
-  <code><a href='flow_data_from_directory.ImageDataGenerator.html'>flow_data_from_directory.ImageDataGenerator</a></code>,
-  <code><a href='image_load.html'>image_load</a></code></p>
+    <p>Other image preprocessing: <code><a href='fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator.html'>fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator</a></code>,
+  <code><a href='flow_data_from_directory.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator.html'>flow_data_from_directory.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator</a></code>,
+  <code><a href='image_load.html'>image_load</a></code>, <code><a href='image_to_array.html'>image_to_array</a></code></p>
     
 
   </div>
@@ -149,7 +193,9 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#yields">Yields</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

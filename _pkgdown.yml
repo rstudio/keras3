@@ -38,14 +38,14 @@ reference:
     contents:
       - keras_model
       - keras_model_sequential
-      - summary.tensorflow.contrib.keras.python.keras.engine.training.Model
+      - summary.Model
       - get_layer
       - compile
-      - fit.tensorflow.contrib.keras.python.keras.engine.training.Model
+      - fit.Model
       - fit_generator
       - evaluate
       - evaluate_generator
-      - predict.tensorflow.contrib.keras.python.keras.engine.training.Model
+      - predict.Model
       - predict_proba
       - predict_classes
       - predict_on_batch
@@ -165,7 +165,7 @@ reference:
   - title: "Text Preprocessing"
     contents:
       - text_tokenizer
-      - fit.tensorflow.contrib.keras.python.keras.preprocessing.text.Tokenizer
+      - fit.Tokenizer
       - texts_to_sequences
       - texts_to_sequences_generator
       - texts_to_matrix
@@ -178,9 +178,9 @@ reference:
       - image_load
       - image_to_array
       - image_data_generator
-      - fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator
-      - image_data_flow
-      - image_data_flow_from_directory
+      - fit.ImageDataGenerator
+      - flow_data.ImageDataGenerator
+      - flow_data_from_directory.ImageDataGenerator
  
   - title: "Optimizers"
     contents:

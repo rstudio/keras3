@@ -17,14 +17,12 @@ A model is a directed acyclic graph of layers.
 \seealso{
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate_generator}}, \code{\link{evaluate}},
-  \code{\link{fit.tensorflow.contrib.keras.python.keras.engine.training.Model}},
-  \code{\link{fit_generator}}, \code{\link{get_config}},
-  \code{\link{get_layer}},
+  \code{\link{fit.Model}}, \code{\link{fit_generator}},
+  \code{\link{get_config}}, \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
-  \code{\link{predict.tensorflow.contrib.keras.python.keras.engine.training.Model}},
+  \code{\link{predict.Model}},
   \code{\link{predict_generator}},
   \code{\link{predict_on_batch}},
-  \code{\link{predict_proba}},
-  \code{\link{summary.tensorflow.contrib.keras.python.keras.engine.training.Model}},
+  \code{\link{predict_proba}}, \code{\link{summary.Model}},
   \code{\link{train_on_batch}}
 }
