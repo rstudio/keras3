@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Initializer that generates a truncated normal distribution. — initializer_truncated_normal • keras</title>
+<title>Fit image data generator internal statistics to some sample data. — fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -109,50 +109,53 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Initializer that generates a truncated normal distribution.</h1>
+    <h1>Fit image data generator internal statistics to some sample data.</h1>
     </div>
 
     
-    <p>These values are similar to values from an <code><a href='initializer_random_normal.html'>initializer_random_normal()</a></code>
-except that values more than two standard deviations from the mean
-are discarded and re-drawn. This is the recommended initializer for
-neural network weights and filters.</p>
+    <p>Required for <code>featurewise_center</code>, <code>featurewise_std_normalization</code>
+and <code>zca_whitening</code>.</p>
     
 
-    <pre class="usage"><span class='fu'>initializer_truncated_normal</span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>stddev</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator</span>
+<span class='fu'><a href='fit.html'>fit</a></span>(<span class='no'>object</span>,
+  <span class='no'>x</span>, <span class='kw'>augment</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rounds</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>mean</th>
-      <td><p>Mean of the random values to generate.</p></td>
+      <th>object</th>
+      <td><p><code><a href='image_data_generator.html'>image_data_generator()</a></code></p></td>
     </tr>
     <tr>
-      <th>stddev</th>
-      <td><p>Standard deviation of the random values to generate.</p></td>
+      <th>x</th>
+      <td><p>array, the data to fit on (should have rank 4). In case of grayscale data,
+the channels axis should have value 1, and in case of RGB data, it should have value 3.</p></td>
+    </tr>
+    <tr>
+      <th>augment</th>
+      <td><p>Whether to fit on randomly augmented samples</p></td>
+    </tr>
+    <tr>
+      <th>rounds</th>
+      <td><p>If <code>augment</code>, how many augmentation passes to do over the data</p></td>
     </tr>
     <tr>
       <th>seed</th>
-      <td><p>Integer used to seed the random generator.</p></td>
+      <td><p>random seed.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Unused</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other initializers: <code><a href='initializer_constant.html'>initializer_constant</a></code>,
-  <code><a href='initializer_glorot_normal.html'>initializer_glorot_normal</a></code>,
-  <code><a href='initializer_glorot_uniform.html'>initializer_glorot_uniform</a></code>,
-  <code><a href='initializer_he_normal.html'>initializer_he_normal</a></code>,
-  <code><a href='initializer_he_uniform.html'>initializer_he_uniform</a></code>,
-  <code><a href='initializer_identity.html'>initializer_identity</a></code>,
-  <code><a href='initializer_lecun_uniform.html'>initializer_lecun_uniform</a></code>,
-  <code><a href='initializer_ones.html'>initializer_ones</a></code>,
-  <code><a href='initializer_orthogonal.html'>initializer_orthogonal</a></code>,
-  <code><a href='initializer_random_normal.html'>initializer_random_normal</a></code>,
-  <code><a href='initializer_random_uniform.html'>initializer_random_uniform</a></code>,
-  <code><a href='initializer_variance_scaling.html'>initializer_variance_scaling</a></code>,
-  <code><a href='initializer_zeros.html'>initializer_zeros</a></code></p>
+    <p>Other image preprocessing: <code><a href='image_data_flow_from_directory.html'>image_data_flow_from_directory</a></code>,
+  <code><a href='image_data_flow.html'>image_data_flow</a></code>, <code><a href='image_load.html'>image_load</a></code>,
+  <code><a href='image_to_array.html'>image_to_array</a></code></p>
     
 
   </div>

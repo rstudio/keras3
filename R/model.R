@@ -126,8 +126,6 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
 #' 
 #' @family model functions
 #' 
-#' @name fit-model
-#' 
 #' @export
 fit.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
                 object, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL,
@@ -158,7 +156,7 @@ fit.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
 
 #' Evaluate a Keras model
 
-#' @inheritParams fit-model
+#' @inheritParams fit.tensorflow.contrib.keras.python.keras.engine.training.Model
 #'   
 #' @param model Model to evaluate
 #'   
@@ -192,8 +190,6 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
 #' 
 #' @return vector, matrix, or array of predictions
 #' 
-#' @name predict
-#' 
 #' @family model functions
 #' 
 #' @importFrom stats predict
@@ -212,7 +208,7 @@ predict.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
 
 #' Generates probability or class probability predictions for the input samples.
 #' 
-#' @inheritParams predict
+#' @inheritParams predict.tensorflow.contrib.keras.python.keras.engine.training.Model
 #' 
 #' @param model Keras model
 #' 
@@ -242,7 +238,7 @@ predict_classes <- function(model, x, batch_size = 32, verbose = 0) {
 
 #' Returns predictions for a single batch of samples.
 #' 
-#' @inheritParams predict
+#' @inheritParams predict.tensorflow.contrib.keras.python.keras.engine.training.Model
 #' 
 #' @param model Keras model
 #' 
@@ -401,7 +397,7 @@ evaluate_generator <- function(model, generator, steps, max_q_size = 10, workers
 #' The generator should return the same kind of data as accepted by 
 #' `predict_on_batch()`.
 #' 
-#' @inheritParams predict
+#' @inheritParams predict.tensorflow.contrib.keras.python.keras.engine.training.Model
 #' 
 #' @param model Keras model
 #' @param generator Generator yielding batches of input samples.
@@ -458,7 +454,6 @@ get_layer <- function(model, name = NULL, index = NULL) {
 }
 
 
-
 #' Print a summary of a model
 #' 
 #' @param object Keras model instance
@@ -466,8 +461,6 @@ get_layer <- function(model, name = NULL, index = NULL) {
 #' @param positions Relative or absolute positions of log elements in each line.
 #'   If not provided, defaults to `c(0.33, 0.55, 0.67, 1.0)`.
 #' @param ... Unused
-#' 
-#' @name summary
 #' 
 #' @family model functions
 #' 

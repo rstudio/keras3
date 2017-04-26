@@ -25,7 +25,7 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -68,7 +68,18 @@
       <a href="../articles/functional_api.html">Guide to the Functional API</a>
     </li>
     <li>
-      <a href="../faq.html">Frequently Asked Questions</a>
+      <a href="../articles/faq.html">Frequently Asked Questions</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Using Keras</li>
+    <li>
+      <a href="../articles/about_keras_models.html">About Keras Models</a>
+    </li>
+    <li>
+      <a href="../articles/about_keras_layers.html">About Keras Layers</a>
+    </li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
   </ul>
 </li>
@@ -105,9 +116,9 @@
     <p>Print a summary of a model</p>
     
 
-    <pre><span class='co'># S3 method for tensorflow.contrib.keras.python.keras.engine.training.Model</span>
+    <pre class="usage"><span class='co'># S3 method for tensorflow.contrib.keras.python.keras.engine.training.Model</span>
 <span class='fu'>summary</span>(<span class='no'>object</span>,
-  <span class='kw'>line_length</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>positions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>line_length</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"width"</span>), <span class='kw'>positions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -131,20 +142,36 @@ If not provided, defaults to <code>c(0.33, 0.55, 0.67, 1.0)</code>.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
+  <code><a href='evaluate_generator.html'>evaluate_generator</a></code>, <code><a href='evaluate.html'>evaluate</a></code>,
+  <code><a href='fit.tensorflow.contrib.keras.python.keras.engine.training.Model.html'>fit.tensorflow.contrib.keras.python.keras.engine.training.Model</a></code>,
+  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='get_config.html'>get_config</a></code>,
+  <code><a href='get_layer.html'>get_layer</a></code>,
+  <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
+  <code><a href='keras_model.html'>keras_model</a></code>,
+  <code><a href='predict.tensorflow.contrib.keras.python.keras.engine.training.Model.html'>predict.tensorflow.contrib.keras.python.keras.engine.training.Model</a></code>,
+  <code><a href='predict_generator.html'>predict_generator</a></code>,
+  <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
+  <code><a href='predict_proba.html'>predict_proba</a></code>, <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire.</p>
+  <p>Developed by François Chollet, JJ Allaire,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">

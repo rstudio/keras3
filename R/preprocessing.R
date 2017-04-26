@@ -218,8 +218,6 @@ text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\
 #'   
 #' @family text tokenization
 #'   
-#' @name fit-tokenizer
-#'   
 #' @export
 fit.tensorflow.contrib.keras.python.keras.preprocessing.text.Tokenizer <- function(object, x, ...) {
   tokenizer <- object
@@ -428,18 +426,16 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
 #' 
 #' @family image preprocessing
 #' 
-#' @name fit-image-generator
-#' 
 #' @export
 fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL, ...) {
   generator <- object
-  generator$fit(
+  history <- generator$fit(
     x = x,
     augment = augment,
     rounds = as.integer(rounds),
     seed = seed
   )
-  invisible(generator)
+  invisible(history)
 }
 
 #' Generates batches of augmented/normalized data from image data and labels

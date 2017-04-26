@@ -65,7 +65,7 @@ array of corresponding labels. The generator loops indefinitely.
 }
 
 \seealso{
-Other image preprocessing: \code{\link{fit-image-generator}},
+Other image preprocessing: \code{\link{fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator}},
   \code{\link{image_data_flow}}, \code{\link{image_load}},
   \code{\link{image_to_array}}
 }

@@ -13,7 +13,7 @@ $(document).ready(function() {
   $('#functions').find('table').attr('class', 'ref-index');
   
   // remove full s3 class from methods
-  $(".ref-index a:contains('tensorflow.contrib.keras')").remove();
+  //$(".ref-index a:contains('tensorflow.contrib.keras')").remove();
   
   // are we in examples?
   var examples = window.location.href.match("/articles/examples/") !== null;

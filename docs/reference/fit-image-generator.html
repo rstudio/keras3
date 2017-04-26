@@ -68,7 +68,7 @@
       <a href="../articles/functional_api.html">Guide to the Functional API</a>
     </li>
     <li>
-      <a href="../faq.html">Frequently Asked Questions</a>
+      <a href="../articles/faq.html">Frequently Asked Questions</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Using Keras</li>
@@ -118,14 +118,14 @@ and <code>zca_whitening</code>.</p>
     
 
     <pre class="usage"><span class='co'># S3 method for tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator</span>
-<span class='fu'><a href='fit.html'>fit</a></span>(<span class='no'>generator</span>,
-  <span class='no'>x</span>, <span class='kw'>augment</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rounds</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'><a href='fit.html'>fit</a></span>(<span class='no'>object</span>,
+  <span class='no'>x</span>, <span class='kw'>augment</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rounds</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>generator</th>
+      <th>object</th>
       <td><p><code><a href='image_data_generator.html'>image_data_generator()</a></code></p></td>
     </tr>
     <tr>
@@ -144,6 +144,10 @@ the channels axis should have value 1, and in case of RGB data, it should have v
     <tr>
       <th>seed</th>
       <td><p>random seed.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Unused</p></td>
     </tr>
     </table>
     

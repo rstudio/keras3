@@ -46,7 +46,7 @@
       <a href="../articles/functional_api.html">Guide to the Functional API</a>
     </li>
     <li>
-      <a href="../faq.html">Frequently Asked Questions</a>
+      <a href="../articles/faq.html">Frequently Asked Questions</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
@@ -94,11 +94,313 @@
     
     
 <div class="contents">
+<div id="how-should-i-cite-keras" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-should-i-cite-keras" class="anchor"></a>How should I cite Keras?</h2>
+<p>Please cite Keras in your publications if it helps your research. Here is an example BibTeX entry:</p>
+<pre><code>@misc{chollet2015keras,
+  title={Keras},
+  author={Chollet, Fran\c{c}ois and others},
+  year={2015},
+  publisher={GitHub},
+  howpublished={\url{https://github.com/fchollet/keras}},
+}</code></pre>
+</div>
+<div id="what-does-sample-batch-epoch-mean" class="section level2">
+<h2 class="hasAnchor">
+<a href="#what-does-sample-batch-epoch-mean" class="anchor"></a>What does “sample”, “batch”, “epoch” mean?</h2>
+<p>Below are some common definitions that are necessary to know and understand to correctly utilize Keras:</p>
+<ul>
+<li>
+<strong>Sample</strong>: one element of a dataset.</li>
+<li>
+<em>Example:</em> one image is a <strong>sample</strong> in a convolutional network</li>
+<li>
+<em>Example:</em> one audio file is a <strong>sample</strong> for a speech recognition model</li>
+<li>
+<strong>Batch</strong>: a set of <em>N</em> samples. The samples in a <strong>batch</strong> are processed independently, in parallel. If training, a batch results in only one update to the model.</li>
+<li>A <strong>batch</strong> generally approximates the distribution of the input data better than a single input. The larger the batch, the better the approximation; however, it is also true that the batch will take longer to processes and will still result in only one update. For inference (evaluate/predict), it is recommended to pick a batch size that is as large as you can afford without going out of memory (since larger batches will usually result in faster evaluating/prediction).</li>
+<li>
+<strong>Epoch</strong>: an arbitrary cutoff, generally defined as “one pass over the entire dataset”, used to separate training into distinct phases, which is useful for logging and periodic evaluation.</li>
+<li>When using <code>evaluation_data</code> or <code>evaluation_split</code> with the <code>fit</code> method of Keras models, evaluation will be run at the end of every <strong>epoch</strong>.</li>
+<li>Within Keras, there is the ability to add <a href="training_callbacks.html">callbacks</a> specifically designed to be run at the end of an <strong>epoch</strong>. Examples of these are learning rate changes and model checkpointing (saving).</li>
+</ul>
+</div>
+<div id="how-can-i-save-a-keras-model" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-save-a-keras-model" class="anchor"></a>How can I save a Keras model?</h2>
+<p><em>It is not recommended to use pickle or cPickle to save a Keras model.</em></p>
+<p>You can use <code><a href="../reference/save_model.html">save_model()</a></code> to save a Keras model into a single HDF5 file which will contain:</p>
+<ul>
+<li>the architecture of the model, allowing to re-create the model</li>
+<li>the weights of the model</li>
+<li>the training configuration (loss, optimizer)</li>
+<li>the state of the optimizer, allowing to resume training exactly where you left off.</li>
+</ul>
+<p>You can then use <code><a href="../reference/save_model.html">load_model()</a></code> to reinstantiate your model. <code><a href="../reference/save_model.html">load_model()</a></code> will also take care of compiling the model using the saved training configuration (unless the model was never compiled in the first place).</p>
+<p>Example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/save_model.html">save_model</a></span>(model, <span class="st">'my_model.h5'</span>)
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/save_model.html">load_model</a></span>(<span class="st">'my_model.h5'</span>)</code></pre></div>
+<p>If you only need to save the <strong>architecture of a model</strong>, and not its weights or its training configuration, you can do:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">json_string &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_to_json.html">model_to_json</a></span>(model)
+yaml_string &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_to_yaml.html">model_to_yaml</a></span>(model)</code></pre></div>
+<p>The generated JSON / YAML files are human-readable and can be manually edited if needed.</p>
+<p>You can then build a fresh model from this data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_to_json.html">model_from_json</a></span>(json_string)
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_to_yaml.html">model_from_yaml</a></span>(yaml_string)</code></pre></div>
+<p>If you need to save the <strong>weights of a model</strong>, you can do so in HDF5 with the code below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/save_model_weights.html">save_model_weights</a></span>(<span class="st">'my_model_weights.h5'</span>)</code></pre></div>
+<p>Assuming you have code for instantiating your model, you can then load the weights you saved into a model with the <em>same</em> architecture:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/save_model_weights.html">load_model_weights</a></span>(<span class="st">'my_model_weights.h5'</span>)</code></pre></div>
+<p>If you need to load weights into a <em>different</em> architecture (with some layers in common), for instance for fine-tuning or transfer-learning, you can load weights by <em>layer name</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/save_model_weights.html">load_model_weights</a></span>(<span class="st">'my_model_weights.h5'</span>, <span class="dt">by_name =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># assuming the original model looks like this:</span>
+<span class="co">#   model &lt;- keras_model_sequential()</span>
+<span class="co">#   model %&gt;% </span>
+<span class="co">#     layer_dense(units = 2, input_dim = 3, name = "dense 1") %&gt;% </span>
+<span class="co">#     layer_dense(units = 3, name = "dense_3") %&gt;% </span>
+<span class="co">#     ...</span>
+<span class="co">#   save_model_weights(model, fname)</span>
 
+<span class="co"># new model</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
+model %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">2</span>, <span class="dt">input_dim =</span> <span class="dv">3</span>, <span class="dt">name =</span> <span class="st">"dense 1"</span>) %&gt;%<span class="st">  </span><span class="co"># will be loaded</span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">3</span>, <span class="dt">name =</span> <span class="st">"dense_3"</span>)                     <span class="co"># will not be loaded</span>
+
+<span class="co"># load weights from first model; will only affect the first layer, dense_1.</span>
+<span class="kw"><a href="../reference/save_model_weights.html">load_model_weights</a></span>(fname, <span class="dt">by_name =</span> <span class="ot">TRUE</span>)</code></pre></div>
+</div>
+<div id="why-is-the-training-loss-much-higher-than-the-testing-loss" class="section level2">
+<h2 class="hasAnchor">
+<a href="#why-is-the-training-loss-much-higher-than-the-testing-loss" class="anchor"></a>Why is the training loss much higher than the testing loss?</h2>
+<p>A Keras model has two modes: training and testing. Regularization mechanisms, such as Dropout and L1/L2 weight regularization, are turned off at testing time.</p>
+<p>Besides, the training loss is the average of the losses over each batch of training data. Because your model is changing over time, the loss over the first batches of an epoch is generally higher than over the last batches. On the other hand, the testing loss for an epoch is computed using the model as it is at the end of the epoch, resulting in a lower loss.</p>
+</div>
+<div id="how-can-i-obtain-the-output-of-an-intermediate-layer" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-obtain-the-output-of-an-intermediate-layer" class="anchor"></a>How can I obtain the output of an intermediate layer?</h2>
+<p>One simple way is to create a new <code>Model</code> that will output the layers that you are interested in:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span>...  <span class="co"># create the original model</span>
+
+layer_name &lt;-<span class="st"> 'my_layer'</span>
+intermediate_layer_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> model$input,
+                                        <span class="dt">outputs =</span> <span class="kw"><a href="../reference/get_layer.html">get_layer</a></span>(layer_name)$output)
+intermediate_output &lt;-<span class="st"> </span><span class="kw">predict</span>(intermediate_layer_model, data)</code></pre></div>
+</div>
+<div id="how-can-i-use-keras-with-datasets-that-dont-fit-in-memory" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-use-keras-with-datasets-that-dont-fit-in-memory" class="anchor"></a>How can I use Keras with datasets that don’t fit in memory?</h2>
+<p>You can do batch training using <code><a href="../reference/train_on_batch.html">train_on_batch()</a></code> and <code><a href="../reference/train_on_batch.html">test_on_batch()</a></code>. See the <a href="/models/sequential">models documentation</a>.</p>
+<p>Alternatively, you can write a generator that yields batches of training data and use the method <code>model.fit_generator(data_generator, steps_per_epoch, epochs)</code>.</p>
+<p>You can see batch training in action in our <a href="https://github.com/fchollet/keras/blob/master/examples/cifar10_cnn.py">CIFAR10 example</a>.</p>
+<hr>
+</div>
+<div id="how-can-i-interrupt-training-when-the-validation-loss-isnt-decreasing-anymore" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-interrupt-training-when-the-validation-loss-isnt-decreasing-anymore" class="anchor"></a>How can I interrupt training when the validation loss isn’t decreasing anymore?</h2>
+<p>You can use an <code>EarlyStopping</code> callback:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> keras.callbacks <span class="im">import</span> EarlyStopping
+early_stopping <span class="op">=</span> EarlyStopping(monitor<span class="op">=</span><span class="st">'val_loss'</span>, patience<span class="op">=</span><span class="dv">2</span>)
+model.fit(X, y, validation_split<span class="op">=</span><span class="fl">0.2</span>, callbacks<span class="op">=</span>[early_stopping])</code></pre></div>
+<p>Find out more in the <a href="/callbacks">callbacks documentation</a>.</p>
+<hr>
+</div>
+<div id="how-is-the-validation-split-computed" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-is-the-validation-split-computed" class="anchor"></a>How is the validation split computed?</h2>
+<p>If you set the <code>validation_split</code> argument in <code>model.fit</code> to e.g. 0.1, then the validation data used will be the <em>last 10%</em> of the data. If you set it to 0.25, it will be the last 25% of the data, etc. Note that the data isn’t shuffled before extracting the validation split, so the validation is literally just the <em>last</em> x% of samples in the input you passed.</p>
+<p>The same validation set is used for all epochs (within a same call to <code>fit</code>).</p>
+<hr>
+</div>
+<div id="is-the-data-shuffled-during-training" class="section level2">
+<h2 class="hasAnchor">
+<a href="#is-the-data-shuffled-during-training" class="anchor"></a>Is the data shuffled during training?</h2>
+<p>Yes, if the <code>shuffle</code> argument in <code>model.fit</code> is set to <code>True</code> (which is the default), the training data will be randomly shuffled at each epoch.</p>
+<p>Validation data is never shuffled.</p>
+<hr>
+</div>
+<div id="how-can-i-record-the-training-validation-loss-accuracy-at-each-epoch" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-record-the-training-validation-loss-accuracy-at-each-epoch" class="anchor"></a>How can I record the training / validation loss / accuracy at each epoch?</h2>
+<p>The <code>model.fit</code> method returns an <code>History</code> callback, which has a <code>history</code> attribute containing the lists of successive losses and other metrics.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">hist <span class="op">=</span> model.fit(X, y, validation_split<span class="op">=</span><span class="fl">0.2</span>)
+<span class="bu">print</span>(hist.history)</code></pre></div>
+<hr>
+</div>
+<div id="how-can-i-freeze-keras-layers" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-freeze-keras-layers" class="anchor"></a>How can I “freeze” Keras layers?</h2>
+<p>To “freeze” a layer means to exclude it from training, i.e. its weights will never be updated. This is useful in the context of fine-tuning a model, or using fixed embeddings for a text input.</p>
+<p>You can pass a <code>trainable</code> argument (boolean) to a layer constructor to set a layer to be non-trainable:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">frozen_layer <span class="op">=</span> Dense(<span class="dv">32</span>, trainable<span class="op">=</span><span class="va">False</span>)</code></pre></div>
+<p>Additionally, you can set the <code>trainable</code> property of a layer to <code>True</code> or <code>False</code> after instantiation. For this to take effect, you will need to call <code><a href="../reference/compile.html">compile()</a></code> on your model after modifying the <code>trainable</code> property. Here’s an example:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">32</span>,))
+layer <span class="op">=</span> Dense(<span class="dv">32</span>)
+layer.trainable <span class="op">=</span> <span class="va">False</span>
+y <span class="op">=</span> layer(x)
+
+frozen_model <span class="op">=</span> Model(x, y)
+<span class="co"># in the model below, the weights of `layer` will not be updated during training</span>
+frozen_model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'rmsprop'</span>, loss<span class="op">=</span><span class="st">'mse'</span>)
+
+layer.trainable <span class="op">=</span> <span class="va">True</span>
+trainable_model <span class="op">=</span> Model(x, y)
+<span class="co"># with this model the weights of the layer will be updated during training</span>
+<span class="co"># (which will also affect the above model since it uses the same layer instance)</span>
+trainable_model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'rmsprop'</span>, loss<span class="op">=</span><span class="st">'mse'</span>)
+
+frozen_model.fit(data, labels)  <span class="co"># this does NOT update the weights of `layer`</span>
+trainable_model.fit(data, labels)  <span class="co"># this updates the weights of `layer`</span></code></pre></div>
+<hr>
+</div>
+<div id="how-can-i-use-stateful-rnns" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-use-stateful-rnns" class="anchor"></a>How can I use stateful RNNs?</h2>
+<p>Making a RNN stateful means that the states for the samples of each batch will be reused as initial states for the samples in the next batch.</p>
+<p>When using stateful RNNs, it is therefore assumed that:</p>
+<ul>
+<li>all batches have the same number of samples</li>
+<li>If <code>X1</code> and <code>X2</code> are successive batches of samples, then <code>X2[i]</code> is the follow-up sequence to <code>X1[i]</code>, for every <code>i</code>.</li>
+</ul>
+<p>To use statefulness in RNNs, you need to:</p>
+<ul>
+<li>explicitly specify the batch size you are using, by passing a <code>batch_size</code> argument to the first layer in your model. E.g. <code>batch_size=32</code> for a 32-samples batch of sequences of 10 timesteps with 16 features per timestep.</li>
+<li>set <code>stateful=True</code> in your RNN layer(s).</li>
+<li>specify <code>shuffle=False</code> when calling fit().</li>
+</ul>
+<p>To reset the states accumulated:</p>
+<ul>
+<li>use <code>model.reset_states()</code> to reset the states of all layers in the model</li>
+<li>use <code>layer.reset_states()</code> to reset the states of a specific stateful RNN layer</li>
+</ul>
+<p>Example:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+X  <span class="co"># this is our input data, of shape (32, 21, 16)</span>
+<span class="co"># we will feed it to our model in sequences of length 10</span>
+
+model <span class="op">=</span> Sequential()
+model.add(LSTM(<span class="dv">32</span>, input_shape<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">16</span>), batch_size<span class="op">=</span><span class="dv">32</span>, stateful<span class="op">=</span><span class="va">True</span>))
+model.add(Dense(<span class="dv">16</span>, activation<span class="op">=</span><span class="st">'softmax'</span>))
+
+model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'rmsprop'</span>, loss<span class="op">=</span><span class="st">'categorical_crossentropy'</span>)
+
+<span class="co"># we train the network to predict the 11th timestep given the first 10:</span>
+model.train_on_batch(X[:, :<span class="dv">10</span>, :], np.reshape(X[:, <span class="dv">10</span>, :], (<span class="dv">32</span>, <span class="dv">16</span>)))
+
+<span class="co"># the state of the network has changed. We can feed the follow-up sequences:</span>
+model.train_on_batch(X[:, <span class="dv">10</span>:<span class="dv">20</span>, :], np.reshape(X[:, <span class="dv">20</span>, :], (<span class="dv">32</span>, <span class="dv">16</span>)))
+
+<span class="co"># let's reset the states of the LSTM layer:</span>
+model.reset_states()
+
+<span class="co"># another way to do it in this case:</span>
+model.layers[<span class="dv">0</span>].reset_states()</code></pre></div>
+<p>Notes that the methods <code>predict</code>, <code>fit</code>, <code>train_on_batch</code>, <code>predict_classes</code>, etc. will <em>all</em> update the states of the stateful layers in a model. This allows you to do not only stateful training, but also stateful prediction.</p>
+<hr>
+</div>
+<div id="how-can-i-remove-a-layer-from-a-sequential-model" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-remove-a-layer-from-a-sequential-model" class="anchor"></a>How can I remove a layer from a Sequential model?</h2>
+<p>You can remove the last added layer in a Sequential model by calling <code>.pop()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">model <span class="op">=</span> Sequential()
+model.add(Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">'relu'</span>, input_dim<span class="op">=</span><span class="dv">784</span>))
+model.add(Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">'relu'</span>))
+
+<span class="bu">print</span>(<span class="bu">len</span>(model.layers))  <span class="co"># "2"</span>
+
+model.pop()
+<span class="bu">print</span>(<span class="bu">len</span>(model.layers))  <span class="co"># "1"</span></code></pre></div>
+<hr>
+</div>
+<div id="how-can-i-use-pre-trained-models-in-keras" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-use-pre-trained-models-in-keras" class="anchor"></a>How can I use pre-trained models in Keras?</h2>
+<p>Code and pre-trained weights are available for the following image classification models:</p>
+<ul>
+<li>Xception</li>
+<li>VGG16</li>
+<li>VGG19</li>
+<li>ResNet50</li>
+<li>Inception v3</li>
+</ul>
+<p>They can be imported from the module <code>keras.applications</code>:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> keras.applications.xception <span class="im">import</span> Xception
+<span class="im">from</span> keras.applications.vgg16 <span class="im">import</span> VGG16
+<span class="im">from</span> keras.applications.vgg19 <span class="im">import</span> VGG19
+<span class="im">from</span> keras.applications.resnet50 <span class="im">import</span> ResNet50
+<span class="im">from</span> keras.applications.inception_v3 <span class="im">import</span> InceptionV3
+
+model <span class="op">=</span> VGG16(weights<span class="op">=</span><span class="st">'imagenet'</span>, include_top<span class="op">=</span><span class="va">True</span>)</code></pre></div>
+<p>For a few simple usage examples, see <a href="/applications">the documentation for the Applications module</a>.</p>
+<p>For a detailed example of how to use such a pre-trained model for feature extraction or for fine-tuning, see <a href="http://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html">this blog post</a>.</p>
+<p>The VGG16 model is also the basis for several Keras example scripts:</p>
+<ul>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/neural_style_transfer.py">Style transfer</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/conv_filter_visualization.py">Feature visualization</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/deep_dream.py">Deep dream</a></li>
+</ul>
+<hr>
+</div>
+<div id="how-can-i-use-hdf5-inputs-with-keras" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-use-hdf5-inputs-with-keras" class="anchor"></a>How can I use HDF5 inputs with Keras?</h2>
+<p>You can use the <code>HDF5Matrix</code> class from <code>keras.utils.io_utils</code>. See <a href="/utils/#hdf5matrix">the HDF5Matrix documentation</a> for details.</p>
+<p>You can also directly use a HDF5 dataset:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> h5py
+<span class="cf">with</span> h5py.File(<span class="st">'input/file.hdf5'</span>, <span class="st">'r'</span>) <span class="im">as</span> f:
+    X_data <span class="op">=</span> f[<span class="st">'X_data'</span>]
+    model.predict(X_data)</code></pre></div>
+<hr>
+</div>
+<div id="where-is-the-keras-configuration-filed-stored" class="section level2">
+<h2 class="hasAnchor">
+<a href="#where-is-the-keras-configuration-filed-stored" class="anchor"></a>Where is the Keras configuration filed stored?</h2>
+<p>The default directory where all Keras data is stored is:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">$HOME</span><span class="kw">/.keras/</span></code></pre></div>
+<p>Note that Windows users should replace <code>$HOME</code> with <code>%USERPROFILE%</code>. In case Keras cannot create the above directory (e.g. due to permission issues), <code>/tmp/.keras/</code> is used as a backup.</p>
+<p>The Keras configuration file is a JSON file stored at <code>$HOME/.keras/keras.json</code>. The default configuration file looks like this:</p>
+<pre><code>{
+    "image_data_format": "channels_last",
+    "epsilon": 1e-07,
+    "floatx": "float32",
+    "backend": "tensorflow"
+}</code></pre>
+<p>It contains the following fields:</p>
+<ul>
+<li>The image data format to be used as default by image processing layers and utilities (either <code>channels_last</code> or <code>channels_first</code>).</li>
+<li>The <code>epsilon</code> numerical fuzz factor to be used to prevent division by zero in some operations.</li>
+<li>The default float data type.</li>
+<li>The default backend. See the <a href="/backend">backend documentation</a>.</li>
+</ul>
+<p>Likewise, cached dataset files, such as those downloaded with <a href="/utils/#get_file"><code><a href="../reference/get_file.html">get_file()</a></code></a>, are stored by default in <code>$HOME/.keras/datasets/</code>.</p>
+</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#how-should-i-cite-keras">How should I cite Keras?</a></li>
+      <li><a href="#what-does-sample-batch-epoch-mean">What does “sample”, “batch”, “epoch” mean?</a></li>
+      <li><a href="#how-can-i-save-a-keras-model">How can I save a Keras model?</a></li>
+      <li><a href="#why-is-the-training-loss-much-higher-than-the-testing-loss">Why is the training loss much higher than the testing loss?</a></li>
+      <li><a href="#how-can-i-obtain-the-output-of-an-intermediate-layer">How can I obtain the output of an intermediate layer?</a></li>
+      <li><a href="#how-can-i-use-keras-with-datasets-that-dont-fit-in-memory">How can I use Keras with datasets that don’t fit in memory?</a></li>
+      <li><a href="#how-can-i-interrupt-training-when-the-validation-loss-isnt-decreasing-anymore">How can I interrupt training when the validation loss isn’t decreasing anymore?</a></li>
+      <li><a href="#how-is-the-validation-split-computed">How is the validation split computed?</a></li>
+      <li><a href="#is-the-data-shuffled-during-training">Is the data shuffled during training?</a></li>
+      <li><a href="#how-can-i-record-the-training-validation-loss-accuracy-at-each-epoch">How can I record the training / validation loss / accuracy at each epoch?</a></li>
+      <li><a href="#how-can-i-freeze-keras-layers">How can I “freeze” Keras layers?</a></li>
+      <li><a href="#how-can-i-use-stateful-rnns">How can I use stateful RNNs?</a></li>
+      <li><a href="#how-can-i-remove-a-layer-from-a-sequential-model">How can I remove a layer from a Sequential model?</a></li>
+      <li><a href="#how-can-i-use-pre-trained-models-in-keras">How can I use pre-trained models in Keras?</a></li>
+      <li><a href="#how-can-i-use-hdf5-inputs-with-keras">How can I use HDF5 inputs with Keras?</a></li>
+      <li><a href="#where-is-the-keras-configuration-filed-stored">Where is the Keras configuration filed stored?</a></li>
+      </ul>
+</div>
       </div>
 
 </div>

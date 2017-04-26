@@ -51,7 +51,7 @@ was trained on. Only set after \code{fit()} is called on the tokenizer.
 }
 
 \seealso{
-Other text tokenization: \code{\link{fit-tokenizer}},
+Other text tokenization: \code{\link{fit.tensorflow.contrib.keras.python.keras.preprocessing.text.Tokenizer}},
   \code{\link{sequences_to_matrix}},
   \code{\link{texts_to_matrix}},
   \code{\link{texts_to_sequences_generator}},

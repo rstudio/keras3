@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Initializer that generates a truncated normal distribution. — initializer_truncated_normal • keras</title>
+<title>Predict Method for Keras Models — predict.tensorflow.contrib.keras.python.keras.engine.training.Model • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -109,50 +109,61 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Initializer that generates a truncated normal distribution.</h1>
+    <h1>Predict Method for Keras Models</h1>
     </div>
 
     
-    <p>These values are similar to values from an <code><a href='initializer_random_normal.html'>initializer_random_normal()</a></code>
-except that values more than two standard deviations from the mean
-are discarded and re-drawn. This is the recommended initializer for
-neural network weights and filters.</p>
+    <p>Generates output predictions for the input samples, processing the samples in
+a batched way.</p>
     
 
-    <pre class="usage"><span class='fu'>initializer_truncated_normal</span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>stddev</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for tensorflow.contrib.keras.python.keras.engine.training.Model</span>
+<span class='fu'>predict</span>(<span class='no'>object</span>,
+  <span class='no'>x</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>mean</th>
-      <td><p>Mean of the random values to generate.</p></td>
+      <th>object</th>
+      <td><p>Keras model</p></td>
     </tr>
     <tr>
-      <th>stddev</th>
-      <td><p>Standard deviation of the random values to generate.</p></td>
+      <th>x</th>
+      <td><p>Input data (vector, matrix, or array)</p></td>
     </tr>
     <tr>
-      <th>seed</th>
-      <td><p>Integer used to seed the random generator.</p></td>
+      <th>batch_size</th>
+      <td><p>Integer</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Verbosity mode, 0 or 1.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Unused</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>vector, matrix, or array of predictions</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other initializers: <code><a href='initializer_constant.html'>initializer_constant</a></code>,
-  <code><a href='initializer_glorot_normal.html'>initializer_glorot_normal</a></code>,
-  <code><a href='initializer_glorot_uniform.html'>initializer_glorot_uniform</a></code>,
-  <code><a href='initializer_he_normal.html'>initializer_he_normal</a></code>,
-  <code><a href='initializer_he_uniform.html'>initializer_he_uniform</a></code>,
-  <code><a href='initializer_identity.html'>initializer_identity</a></code>,
-  <code><a href='initializer_lecun_uniform.html'>initializer_lecun_uniform</a></code>,
-  <code><a href='initializer_ones.html'>initializer_ones</a></code>,
-  <code><a href='initializer_orthogonal.html'>initializer_orthogonal</a></code>,
-  <code><a href='initializer_random_normal.html'>initializer_random_normal</a></code>,
-  <code><a href='initializer_random_uniform.html'>initializer_random_uniform</a></code>,
-  <code><a href='initializer_variance_scaling.html'>initializer_variance_scaling</a></code>,
-  <code><a href='initializer_zeros.html'>initializer_zeros</a></code></p>
+    <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
+  <code><a href='evaluate_generator.html'>evaluate_generator</a></code>, <code><a href='evaluate.html'>evaluate</a></code>,
+  <code><a href='fit.tensorflow.contrib.keras.python.keras.engine.training.Model.html'>fit.tensorflow.contrib.keras.python.keras.engine.training.Model</a></code>,
+  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='get_config.html'>get_config</a></code>,
+  <code><a href='get_layer.html'>get_layer</a></code>,
+  <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
+  <code><a href='keras_model.html'>keras_model</a></code>,
+  <code><a href='predict_generator.html'>predict_generator</a></code>,
+  <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
+  <code><a href='predict_proba.html'>predict_proba</a></code>,
+  <code><a href='summary.tensorflow.contrib.keras.python.keras.engine.training.Model.html'>summary.tensorflow.contrib.keras.python.keras.engine.training.Model</a></code>,
+  <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
     
 
   </div>
@@ -161,6 +172,8 @@ neural network weights and filters.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 

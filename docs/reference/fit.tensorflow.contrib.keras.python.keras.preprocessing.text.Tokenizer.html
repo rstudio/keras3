@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Initializer that generates a truncated normal distribution. — initializer_truncated_normal • keras</title>
+<title>Update tokenizer internal vocabulary based on a list of texts or list of
+sequences. — fit.tensorflow.contrib.keras.python.keras.preprocessing.text.Tokenizer • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -109,50 +110,50 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Initializer that generates a truncated normal distribution.</h1>
+    <h1>Update tokenizer internal vocabulary based on a list of texts or list of
+sequences.</h1>
     </div>
 
     
-    <p>These values are similar to values from an <code><a href='initializer_random_normal.html'>initializer_random_normal()</a></code>
-except that values more than two standard deviations from the mean
-are discarded and re-drawn. This is the recommended initializer for
-neural network weights and filters.</p>
+    <p>Update tokenizer internal vocabulary based on a list of texts or list of
+sequences.</p>
     
 
-    <pre class="usage"><span class='fu'>initializer_truncated_normal</span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>stddev</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for tensorflow.contrib.keras.python.keras.preprocessing.text.Tokenizer</span>
+<span class='fu'><a href='fit.html'>fit</a></span>(<span class='no'>object</span>,
+  <span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>mean</th>
-      <td><p>Mean of the random values to generate.</p></td>
+      <th>object</th>
+      <td><p>Tokenizer returned by <code><a href='text_tokenizer.html'>text_tokenizer()</a></code></p></td>
     </tr>
     <tr>
-      <th>stddev</th>
-      <td><p>Standard deviation of the random values to generate.</p></td>
+      <th>x</th>
+      <td><p>Vector/list of strings, or a generator of strings (for
+memory-efficiency); Alternatively a list of "sequence" (a sequence is a
+list of integer word indices).</p></td>
     </tr>
     <tr>
-      <th>seed</th>
-      <td><p>Integer used to seed the random generator.</p></td>
+      <th>...</th>
+      <td><p>Unused</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Required before using <code><a href='texts_to_sequences.html'>texts_to_sequences()</a></code>, <code><a href='texts_to_matrix.html'>texts_to_matrix()</a></code>, or
+<code><a href='sequences_to_matrix.html'>sequences_to_matrix()</a></code>.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other initializers: <code><a href='initializer_constant.html'>initializer_constant</a></code>,
-  <code><a href='initializer_glorot_normal.html'>initializer_glorot_normal</a></code>,
-  <code><a href='initializer_glorot_uniform.html'>initializer_glorot_uniform</a></code>,
-  <code><a href='initializer_he_normal.html'>initializer_he_normal</a></code>,
-  <code><a href='initializer_he_uniform.html'>initializer_he_uniform</a></code>,
-  <code><a href='initializer_identity.html'>initializer_identity</a></code>,
-  <code><a href='initializer_lecun_uniform.html'>initializer_lecun_uniform</a></code>,
-  <code><a href='initializer_ones.html'>initializer_ones</a></code>,
-  <code><a href='initializer_orthogonal.html'>initializer_orthogonal</a></code>,
-  <code><a href='initializer_random_normal.html'>initializer_random_normal</a></code>,
-  <code><a href='initializer_random_uniform.html'>initializer_random_uniform</a></code>,
-  <code><a href='initializer_variance_scaling.html'>initializer_variance_scaling</a></code>,
-  <code><a href='initializer_zeros.html'>initializer_zeros</a></code></p>
+    <p>Other text tokenization: <code><a href='sequences_to_matrix.html'>sequences_to_matrix</a></code>,
+  <code><a href='text_tokenizer.html'>text_tokenizer</a></code>,
+  <code><a href='texts_to_matrix.html'>texts_to_matrix</a></code>,
+  <code><a href='texts_to_sequences_generator.html'>texts_to_sequences_generator</a></code>,
+  <code><a href='texts_to_sequences.html'>texts_to_sequences</a></code></p>
     
 
   </div>
@@ -161,6 +162,8 @@ neural network weights and filters.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#note">Note</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 

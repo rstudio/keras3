@@ -16,7 +16,7 @@ navbar:
         - text: "Guide to the Functional API"
           href: articles/functional_api.html
         - text: "Frequently Asked Questions"
-          href: faq.html
+          href: articles/faq.html
         - text: "--------------------------"
         - text: "Using Keras"
         - text: "About Keras Models"
@@ -38,14 +38,14 @@ reference:
     contents:
       - keras_model
       - keras_model_sequential
-      - summary
+      - summary.tensorflow.contrib.keras.python.keras.engine.training.Model
       - get_layer
       - compile
-      - fit
+      - fit.tensorflow.contrib.keras.python.keras.engine.training.Model
       - fit_generator
       - evaluate
       - evaluate_generator
-      - predict
+      - predict.tensorflow.contrib.keras.python.keras.engine.training.Model
       - predict_proba
       - predict_classes
       - predict_on_batch
@@ -165,6 +165,7 @@ reference:
   - title: "Text Preprocessing"
     contents:
       - text_tokenizer
+      - fit.tensorflow.contrib.keras.python.keras.preprocessing.text.Tokenizer
       - texts_to_sequences
       - texts_to_sequences_generator
       - texts_to_matrix
@@ -177,6 +178,7 @@ reference:
       - image_load
       - image_to_array
       - image_data_generator
+      - fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator
       - image_data_flow
       - image_data_flow_from_directory
  

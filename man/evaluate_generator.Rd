@@ -38,13 +38,16 @@ The generator should return the same kind of data as accepted by
 }
 \seealso{
 Other model functions: \code{\link{compile}},
-  \code{\link{evaluate}}, \code{\link{fit-model}},
+  \code{\link{evaluate}},
+  \code{\link{fit.tensorflow.contrib.keras.python.keras.engine.training.Model}},
   \code{\link{fit_generator}}, \code{\link{get_config}},
   \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}},
+  \code{\link{predict.tensorflow.contrib.keras.python.keras.engine.training.Model}},
   \code{\link{predict_generator}},
   \code{\link{predict_on_batch}},
-  \code{\link{predict_proba}}, \code{\link{predict}},
-  \code{\link{summary}}, \code{\link{train_on_batch}}
+  \code{\link{predict_proba}},
+  \code{\link{summary.tensorflow.contrib.keras.python.keras.engine.training.Model}},
+  \code{\link{train_on_batch}}
 }

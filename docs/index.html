@@ -46,7 +46,7 @@
       <a href="articles/functional_api.html">Guide to the Functional API</a>
     </li>
     <li>
-      <a href="faq.html">Frequently Asked Questions</a>
+      <a href="articles/faq.html">Frequently Asked Questions</a>
     </li>
     <li class="divider">
     </li>
@@ -125,7 +125,7 @@ model %&gt;%<span class="st"> </span>
 <p>Evaluate your performance in one line:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loss_and_metrics &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span><span class="kw"><a href="reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
 <p>Or generate predictions on new data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classes &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span><span class="kw"><a href="reference/predict.html">predict</a></span>(x_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classes &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span><span class="kw">predict</span>(x_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
 <p>Building a question answering system, an image classification model, a Neural Turing Machine, or any other model is just as fast. The ideas behind deep learning are simple, so why should their implementation be painful?</p>
 <p>To learn more about Keras, you can check out these articles:</p>
 <ul>
