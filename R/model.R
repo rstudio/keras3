@@ -179,7 +179,7 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
 }
 
 
-#' Predict Method for Keras Models
+#' Generate predictions from a Keras model
 #' 
 #' Generates output predictions for the input samples, processing the samples in
 #' a batched way.
@@ -458,7 +458,7 @@ get_layer <- function(model, name = NULL, index = NULL) {
 }
 
 
-#' Print a summary of a model
+#' Print a summary of a Keras model
 #' 
 #' @param object Keras model instance
 #' @param line_length Total length of printed lines

@@ -3,7 +3,7 @@
 \name{predict.Model}
 \alias{predict.Model}
 \alias{predict.tensorflow.contrib.keras.python.keras.engine.training.Model}
-\title{Predict Method for Keras Models}
+\title{Generate predictions from a Keras model}
 \usage{
 
   \method{predict}{tensorflow.contrib.keras.python.keras.engine.training.Model}(object,

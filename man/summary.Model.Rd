@@ -3,7 +3,7 @@
 \name{summary.Model}
 \alias{summary.Model}
 \alias{summary.tensorflow.contrib.keras.python.keras.engine.training.Model}
-\title{Print a summary of a model}
+\title{Print a summary of a Keras model}
 \usage{
 
   \method{summary}{tensorflow.contrib.keras.python.keras.engine.training.Model}(object,
@@ -20,7 +20,7 @@ If not provided, defaults to \code{c(0.33, 0.55, 0.67, 1.0)}.}
 \item{...}{Unused}
 }
 \description{
-Print a summary of a model
+Print a summary of a Keras model
 }
 \seealso{
 Other model functions: \code{\link{compile}},
