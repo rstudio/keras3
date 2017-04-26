@@ -53,6 +53,8 @@ reference:
       - train_on_batch
       - save_model
       - load_model
+    exclude: 
+      - fit
  
   - title: "Core Layers"
     contents:
@@ -181,6 +183,9 @@ reference:
       - fit.ImageDataGenerator
       - flow_data.ImageDataGenerator
       - flow_data_from_directory.ImageDataGenerator
+    exclude:
+      - flow_data
+      - flow_data_from_directory
  
   - title: "Optimizers"
     contents:
@@ -263,6 +268,5 @@ reference:
   - title: "Activations" 
     contents:
       - activation_relu
-   
 
 
