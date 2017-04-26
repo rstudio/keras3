@@ -73,7 +73,7 @@ Before training a model, you need to configure the learning process, which is do
 
 - A list of metrics. For any classification problem you will want to set this to `metrics = c('accuracy')`. A metric could be the string identifier of an existing metric or a call to metric function (e.g. `metric_binary_crossentropy()`).
 
-You can chain your model compilation into the definition of the model or call the `compile()` method separately (both techniques are illustrated below):
+Here's the definition of a model along with the compilation step (the `compile()` function has arguments appropriate for a a multi-class classification problem):
 
 ```{r}
 # For a multi-class classification problem
@@ -82,20 +82,27 @@ model %>%
   layer_dense(units = 32, input_shape = c(784)) %>% 
   layer_activation('relu') %>% 
   layer_dense(units = 10) %>% 
-  layer_activation('softmax') %>% 
-  compile(
-    optimizer = 'rmsprop',
-    loss = 'categorical_crossentropy',
-    metrics = c('accuracy')
-  )
+  layer_activation('softmax')
 
-# For a mean squared error regression problem
+model %>% compile(
+  optimizer = 'rmsprop',
+  loss = 'categorical_crossentropy',
+  metrics = c('accuracy')
+)
+```
+
+Here's what compilation might look like for a mean squared error regression problem:
+
+```{r}
 model %>% compile(
   optimizer = optimizer_rmsprop(lr = 0.002),
   loss = 'mse'
 )
+```
 
-# For a binary classification problem
+Here's compilation for a binary classification problem:
+
+```{r}
 model %>% compile( 
   optimizer = optimizer_rmsprop(),
   loss = loss_binary_crossentropy(),
@@ -152,7 +159,7 @@ data <- matrix(runif(1000*100), nrow = 1000, ncol = 100)
 labels <- matrix(round(runif(1000, min = 0, max = 9)), nrow = 1000, ncol = 1)
 
 # Convert labels to categorical one-hot encoding
-one_hot_labels = to_categorical(labels, num_classes = 10)
+one_hot_labels <- to_categorical(labels, num_classes = 10)
 
 # Train the model, iterating on the data in batches of 32 samples
 model %>% fit(data, one_hot_labels, epochs=10, batch_size=32)
@@ -180,15 +187,18 @@ library(keras)
 
 # generate dummy data
 x_train <- matrix(runif(1000*20), nrow = 1000, ncol = 20)
+
 y_train <- runif(1000, min = 0, max = 9) %>% 
-             round() %>%
-             matrix(nrow = 1000, ncol = 1) %>% 
-             to_categorical(num_classes = 10)
+  round() %>%
+  matrix(nrow = 1000, ncol = 1) %>% 
+  to_categorical(num_classes = 10)
+
 x_test  <- matrix(runif(100*20), nrow = 100, ncol = 20)
+
 y_test <- runif(100, min = 0, max = 9) %>% 
-             round() %>%
-             matrix(nrow = 100, ncol = 1) %>% 
-             to_categorical(num_classes = 10)
+  round() %>%
+  matrix(nrow = 100, ncol = 1) %>% 
+  to_categorical(num_classes = 10)
 
 # create model
 model <- keras_model_sequential()
@@ -257,15 +267,18 @@ library(keras)
 
 # generate dummy data
 x_train <- array(runif(100 * 100 * 100 * 3), dim = c(100, 100, 100, 3))
+
 y_train <- runif(100, min = 0, max = 9) %>% 
-             round() %>%
-             matrix(nrow = 100, ncol = 1) %>% 
-             to_categorical(num_classes = 10)
+  round() %>%
+  matrix(nrow = 100, ncol = 1) %>% 
+  to_categorical(num_classes = 10)
+
 x_test <- array(runif(20 * 100 * 100 * 3), dim = c(20, 100, 100, 3))
+
 y_test <- runif(20, min = 0, max = 9) %>% 
-             round() %>%
-             matrix(nrow = 20, ncol = 1) %>% 
-             to_categorical(num_classes = 10)
+  round() %>%
+  matrix(nrow = 20, ncol = 1) %>% 
+  to_categorical(num_classes = 10)
 
 # create model
 model <- keras_model_sequential()
@@ -335,7 +348,7 @@ model %>%
   compile(
     loss = 'binary_crossentropy',
     optimizer = 'rmsprop',
-    metrics = c'accuracy'
+    metrics = c('accuracy')
   )
 
 model %>% fit(x_train, y_train, batch_size = 16, epochs = 10)

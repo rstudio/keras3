@@ -142,28 +142,27 @@ ________________________________________________________________________________
 <li><p>A loss function. This is the objective that the model will try to minimize. It can be the string identifier of an existing loss function (e.g. “categorical_crossentropy” or “mse”) or a call to a loss function (e.g. <code><a href="../reference/loss_mean_squared_error.html">loss_mean_squared_error()</a></code>).</p></li>
 <li><p>A list of metrics. For any classification problem you will want to set this to <code>metrics = c('accuracy')</code>. A metric could be the string identifier of an existing metric or a call to metric function (e.g. <code><a href="../reference/metric_binary_accuracy.html">metric_binary_crossentropy()</a></code>).</p></li>
 </ul>
-<p>You can chain your model compilation into the definition of the model or call the <code><a href="../reference/compile.html">compile()</a></code> method separately (both techniques are illustrated below):</p>
+<p>Here’s the definition of a model along with the compilation step (the <code><a href="../reference/compile.html">compile()</a></code> function has arguments appropriate for a a multi-class classification problem):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># For a multi-class classification problem</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() 
 model %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'softmax'</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
-    <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
-    <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
-    <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
-  )
+<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'softmax'</span>)
 
-<span class="co"># For a mean squared error regression problem</span>
 model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
+  <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
+  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+)</code></pre></div>
+<p>Here’s what compilation might look like for a mean squared error regression problem:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
   <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="dt">lr =</span> <span class="fl">0.002</span>),
   <span class="dt">loss =</span> <span class="st">'mse'</span>
-)
-
-<span class="co"># For a binary classification problem</span>
-model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>( 
+)</code></pre></div>
+<p>Here’s compilation for a binary classification problem:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>( 
   <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(),
   <span class="dt">loss =</span> <span class="kw"><a href="../reference/loss_mean_squared_error.html">loss_binary_crossentropy</a></span>(),
   <span class="dt">metrics =</span> <span class="kw"><a href="../reference/metric_binary_accuracy.html">metric_binary_accuracy</a></span>()
@@ -212,7 +211,7 @@ data &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="k
 labels &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>)), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)
 
 <span class="co"># Convert labels to categorical one-hot encoding</span>
-one_hot_labels =<span class="st"> </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(labels, <span class="dt">num_classes =</span> <span class="dv">10</span>)
+one_hot_labels &lt;-<span class="st"> </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(labels, <span class="dt">num_classes =</span> <span class="dv">10</span>)
 
 <span class="co"># Train the model, iterating on the data in batches of 32 samples</span>
 model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, one_hot_labels, <span class="dt">epochs=</span><span class="dv">10</span>, <span class="dt">batch_size=</span><span class="dv">32</span>)</code></pre></div>
@@ -237,15 +236,18 @@ model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.
 
 <span class="co"># generate dummy data</span>
 x_train &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">1000</span>*<span class="dv">20</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">20</span>)
+
 y_train &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>) %&gt;%<span class="st"> </span>
-<span class="st">             </span><span class="kw">round</span>() %&gt;%
-<span class="st">             </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) %&gt;%<span class="st"> </span>
-<span class="st">             </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="dt">num_classes =</span> <span class="dv">10</span>)
+<span class="st">  </span><span class="kw">round</span>() %&gt;%
+<span class="st">  </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="dt">num_classes =</span> <span class="dv">10</span>)
+
 x_test  &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">100</span>*<span class="dv">20</span>), <span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> <span class="dv">20</span>)
+
 y_test &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>) %&gt;%<span class="st"> </span>
-<span class="st">             </span><span class="kw">round</span>() %&gt;%
-<span class="st">             </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) %&gt;%<span class="st"> </span>
-<span class="st">             </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="dt">num_classes =</span> <span class="dv">10</span>)
+<span class="st">  </span><span class="kw">round</span>() %&gt;%
+<span class="st">  </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="dt">num_classes =</span> <span class="dv">10</span>)
 
 <span class="co"># create model</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
@@ -309,15 +311,18 @@ score =<span class="st"> </span>model %&gt;%<span class="st"> </span><span class
 
 <span class="co"># generate dummy data</span>
 x_train &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">runif</span>(<span class="dv">100</span> *<span class="st"> </span><span class="dv">100</span> *<span class="st"> </span><span class="dv">100</span> *<span class="st"> </span><span class="dv">3</span>), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">3</span>))
+
 y_train &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>) %&gt;%<span class="st"> </span>
-<span class="st">             </span><span class="kw">round</span>() %&gt;%
-<span class="st">             </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) %&gt;%<span class="st"> </span>
-<span class="st">             </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="dt">num_classes =</span> <span class="dv">10</span>)
+<span class="st">  </span><span class="kw">round</span>() %&gt;%
+<span class="st">  </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="dt">num_classes =</span> <span class="dv">10</span>)
+
 x_test &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">runif</span>(<span class="dv">20</span> *<span class="st"> </span><span class="dv">100</span> *<span class="st"> </span><span class="dv">100</span> *<span class="st"> </span><span class="dv">3</span>), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">3</span>))
+
 y_test &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">20</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>) %&gt;%<span class="st"> </span>
-<span class="st">             </span><span class="kw">round</span>() %&gt;%
-<span class="st">             </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">20</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) %&gt;%<span class="st"> </span>
-<span class="st">             </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="dt">num_classes =</span> <span class="dv">10</span>)
+<span class="st">  </span><span class="kw">round</span>() %&gt;%
+<span class="st">  </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">20</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="dt">num_classes =</span> <span class="dv">10</span>)
 
 <span class="co"># create model</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
@@ -385,7 +390,7 @@ model %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
     <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
     <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
-    <span class="dt">metrics =</span> c<span class="st">'accuracy'</span>
+    <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
   )
 
 model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">batch_size =</span> <span class="dv">16</span>, <span class="dt">epochs =</span> <span class="dv">10</span>)
