@@ -132,6 +132,14 @@ The following functions are available for interacting with layers:
 <td><p>Retrieve tensors for layers with multiple nodes</p></td>
 </tr>
 
+<tr>
+<!--  -->
+<td>
+  `freeze()` `unfreeze()`
+</td>
+<td><p>Set the trainable attribute of a layer to `TRUE` or `FALSE`</p></td>
+</tr>
+
 </tbody>
 </table>
 
