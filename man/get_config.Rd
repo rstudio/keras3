@@ -45,5 +45,6 @@ Other model functions: \code{\link{compile}},
   \code{\link{train_on_batch}}
 
 Other layer methods: \code{\link{count_params}},
+  \code{\link{freeze}}, \code{\link{get_input_at}},
   \code{\link{get_weights}}
 }

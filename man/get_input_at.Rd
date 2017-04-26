@@ -39,3 +39,8 @@ multiple times, that layer owns multiple nodes indexed as 1, 2, 3. These
 functions enable you to retreive various tensor properties of layers with
 multiple nodes.
 }
+\seealso{
+Other layer methods: \code{\link{count_params}},
+  \code{\link{freeze}}, \code{\link{get_config}},
+  \code{\link{get_weights}}
+}

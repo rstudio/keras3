@@ -166,6 +166,8 @@ count_params <- function(layer) {
 #'   
 #' @return A tensor (or list of tensors if the layer has multiple inputs/outputs).
 #'   
+#' @family layer methods
+#'   
 #' @export
 get_input_at <- function(layer, node_index) {
   layer$get_input_at(as_node_index(node_index))
@@ -207,6 +209,28 @@ as_node_index <- function(node_index) {
 }
 
 
+#' Freeze or Unfreeze a Layer
+#' 
+#' Set the `trainable` attribute of a layer to `TRUE` or `FALSE`
+#' 
+#' @param layer Layer to freeze or unfreeze
+#' 
+#' @note These functions are provided as a convenience wrapper 
+#' around e.g. `layer$trainable <- FALSE` for use within 
+#' functions like [lapply()].
+#' 
+#' @family layer methods
+#' 
+#' @export
+freeze <- function(layer) {
+  layer$trainable <- FALSE
+}
+
+#' @rdname freeze
+#' @export
+unfreeze <- function(layer) {
+  layer$trainable <- TRUE
+}
 
 
 

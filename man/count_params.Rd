@@ -16,6 +16,7 @@ An integer count
 Count the total number of scalars composing the weights.
 }
 \seealso{
-Other layer methods: \code{\link{get_config}},
+Other layer methods: \code{\link{freeze}},
+  \code{\link{get_config}}, \code{\link{get_input_at}},
   \code{\link{get_weights}}
 }
