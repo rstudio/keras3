@@ -148,27 +148,27 @@ epochs <- 40
 
 # Data Preparation --------------------------------------------------------
 
-download.file(
-  url = "https://s3.amazonaws.com/text-datasets/babi_tasks_1-20_v1-2.tar.gz", 
-  destfile = "babi-tasks-v1-2.tar.gz"
-  )
-
-untar("babi-tasks-v1-2.tar.gz")
+path <- get_file(
+  fname = "babi-tasks-v1-2.tar.gz",
+  origin = "https://s3.amazonaws.com/text-datasets/babi_tasks_1-20_v1-2.tar.gz"
+)
+untar(path, exdir = str_replace(path, fixed(".tar.gz"), "/"))
+path <- str_replace(path, fixed(".tar.gz"), "/")
 
 # Default QA1 with 1000 samples
-# challenge = 'tasks_1-20_v1-2/en/qa1_single-supporting-fact_{}.txt'
+# challenge = '%stasks_1-20_v1-2/en/qa1_single-supporting-fact_%s.txt'
 # QA1 with 10,000 samples
-# challenge = 'tasks_1-20_v1-2/en-10k/qa1_single-supporting-fact_{}.txt'
+# challenge = '%stasks_1-20_v1-2/en-10k/qa1_single-supporting-fact_%s.txt'
 # QA2 with 1000 samples
-challenge <- "tasks_1-20_v1-2/en/qa2_two-supporting-facts_%s.txt"
+challenge <- "%stasks_1-20_v1-2/en/qa2_two-supporting-facts_%s.txt"
 # QA2 with 10,000 samples
-# challenge = 'tasks_1-20_v1-2/en-10k/qa2_two-supporting-facts_{}.txt'
+# challenge = '%stasks_1-20_v1-2/en-10k/qa2_two-supporting-facts_%s.txt'
 
-train <- read_lines(sprintf(challenge, "train")) %>%
+train <- read_lines(sprintf(challenge, path, "train")) %>%
   parse_stories() %>%
   filter(map_int(story, ~length(.x)) <= max_length)
 
-test <- read_lines(sprintf(challenge, "test")) %>%
+test <- read_lines(sprintf(challenge, path, "test")) %>%
   parse_stories() %>%
   filter(map_int(story, ~length(.x)) <= max_length)
 
