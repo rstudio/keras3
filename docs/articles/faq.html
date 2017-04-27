@@ -192,49 +192,43 @@ intermediate_output &lt;-<span class="st"> </span><span class="kw">predict</span
 <div id="how-can-i-use-keras-with-datasets-that-dont-fit-in-memory" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-can-i-use-keras-with-datasets-that-dont-fit-in-memory" class="anchor"></a>How can I use Keras with datasets that don’t fit in memory?</h2>
-<p>You can do batch training using <code><a href="../reference/train_on_batch.html">train_on_batch()</a></code> and <code><a href="../reference/train_on_batch.html">test_on_batch()</a></code>. See the <a href="/models/sequential">models documentation</a>.</p>
-<p>Alternatively, you can write a generator that yields batches of training data and use the method <code>model.fit_generator(data_generator, steps_per_epoch, epochs)</code>.</p>
-<p>You can see batch training in action in our <a href="https://github.com/fchollet/keras/blob/master/examples/cifar10_cnn.py">CIFAR10 example</a>.</p>
-<hr>
+<p>You can do batch training using <code><a href="../reference/train_on_batch.html">train_on_batch()</a></code> and <code><a href="../reference/train_on_batch.html">test_on_batch()</a></code>.</p>
+<p>You can also use <code><a href="../reference/flow_images_from_directory.html">flow_images_from_directory()</a></code> along with <code><a href="../reference/fit_generator.html">fit_generator()</a></code> for training on sets of images stored on disk (with optional image augmentation/normalization via <code><a href="../reference/image_data_generator.html">image_data_generator()</a></code>).</p>
+<p>You can see batch image training in action in our <a href="examples/cifar10_cnn.html">CIFAR10 example</a>.</p>
 </div>
 <div id="how-can-i-interrupt-training-when-the-validation-loss-isnt-decreasing-anymore" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-can-i-interrupt-training-when-the-validation-loss-isnt-decreasing-anymore" class="anchor"></a>How can I interrupt training when the validation loss isn’t decreasing anymore?</h2>
-<p>You can use an <code>EarlyStopping</code> callback:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> keras.callbacks <span class="im">import</span> EarlyStopping
-early_stopping <span class="op">=</span> EarlyStopping(monitor<span class="op">=</span><span class="st">'val_loss'</span>, patience<span class="op">=</span><span class="dv">2</span>)
-model.fit(X, y, validation_split<span class="op">=</span><span class="fl">0.2</span>, callbacks<span class="op">=</span>[early_stopping])</code></pre></div>
-<p>Find out more in the <a href="/callbacks">callbacks documentation</a>.</p>
-<hr>
+<p>You can use an early stopping callback:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">early_stopping &lt;-<span class="st"> </span><span class="kw"><a href="../reference/callback_early_stopping.html">callback_early_stopping</a></span>(<span class="dt">monitor =</span> <span class="st">'val_loss'</span>, <span class="dt">patience =</span> <span class="dv">2</span>)
+model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(X, y, <span class="dt">validation_split =</span> <span class="fl">0.2</span>, <span class="dt">callbacks =</span> <span class="kw">c</span>(early_stopping))</code></pre></div>
+<p>Find out more in the <a href="training_callbacks.html">callbacks documentation</a>.</p>
 </div>
 <div id="how-is-the-validation-split-computed" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-is-the-validation-split-computed" class="anchor"></a>How is the validation split computed?</h2>
-<p>If you set the <code>validation_split</code> argument in <code>model.fit</code> to e.g. 0.1, then the validation data used will be the <em>last 10%</em> of the data. If you set it to 0.25, it will be the last 25% of the data, etc. Note that the data isn’t shuffled before extracting the validation split, so the validation is literally just the <em>last</em> x% of samples in the input you passed.</p>
+<p>If you set the <code>validation_split</code> argument in <code>fit</code> to e.g. 0.1, then the validation data used will be the <em>last 10%</em> of the data. If you set it to 0.25, it will be the last 25% of the data, etc. Note that the data isn’t shuffled before extracting the validation split, so the validation is literally just the <em>last</em> x% of samples in the input you passed.</p>
 <p>The same validation set is used for all epochs (within a same call to <code>fit</code>).</p>
-<hr>
 </div>
 <div id="is-the-data-shuffled-during-training" class="section level2">
 <h2 class="hasAnchor">
 <a href="#is-the-data-shuffled-during-training" class="anchor"></a>Is the data shuffled during training?</h2>
-<p>Yes, if the <code>shuffle</code> argument in <code>model.fit</code> is set to <code>True</code> (which is the default), the training data will be randomly shuffled at each epoch.</p>
+<p>Yes, if the <code>shuffle</code> argument in <code>fit</code> is set to <code>TRUE</code> (which is the default), the training data will be randomly shuffled at each epoch.</p>
 <p>Validation data is never shuffled.</p>
-<hr>
 </div>
 <div id="how-can-i-record-the-training-validation-loss-accuracy-at-each-epoch" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-can-i-record-the-training-validation-loss-accuracy-at-each-epoch" class="anchor"></a>How can I record the training / validation loss / accuracy at each epoch?</h2>
 <p>The <code>model.fit</code> method returns an <code>History</code> callback, which has a <code>history</code> attribute containing the lists of successive losses and other metrics.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">hist <span class="op">=</span> model.fit(X, y, validation_split<span class="op">=</span><span class="fl">0.2</span>)
-<span class="bu">print</span>(hist.history)</code></pre></div>
-<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hist &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(X, y, <span class="dt">validation_split=</span><span class="fl">0.2</span>)
+hist$history</code></pre></div>
 </div>
 <div id="how-can-i-freeze-keras-layers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-can-i-freeze-keras-layers" class="anchor"></a>How can I “freeze” Keras layers?</h2>
 <p>To “freeze” a layer means to exclude it from training, i.e. its weights will never be updated. This is useful in the context of fine-tuning a model, or using fixed embeddings for a text input.</p>
 <p>You can pass a <code>trainable</code> argument (boolean) to a layer constructor to set a layer to be non-trainable:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">frozen_layer <span class="op">=</span> Dense(<span class="dv">32</span>, trainable<span class="op">=</span><span class="va">False</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">frozen_layer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">trainable =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p>Additionally, you can set the <code>trainable</code> property of a layer to <code>True</code> or <code>False</code> after instantiation. For this to take effect, you will need to call <code><a href="../reference/compile.html">compile()</a></code> on your model after modifying the <code>trainable</code> property. Here’s an example:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">32</span>,))
 layer <span class="op">=</span> Dense(<span class="dv">32</span>)

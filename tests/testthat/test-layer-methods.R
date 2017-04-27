@@ -78,13 +78,5 @@ test_succeeds("layer node functions are accessible", {
   get_output_mask_at(layer, 1)
 })
 
-test_succeeds("layer freeze/unfreeze functions set the trainable attribute", {
-  model <- define_model()
-  layer <- model$layers[[2]]
-  freeze(layer)
-  expect_false(layer$trainable)
-  unfreeze(layer)
-  expect_true(layer$trainable)
-})
 
 

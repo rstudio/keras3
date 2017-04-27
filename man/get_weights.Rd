@@ -24,6 +24,5 @@ Other model persistence: \code{\link{model_to_json}},
   \code{\link{save_model}}
 
 Other layer methods: \code{\link{count_params}},
-  \code{\link{freeze}}, \code{\link{get_config}},
-  \code{\link{get_input_at}}
+  \code{\link{get_config}}, \code{\link{get_input_at}}
 }

@@ -148,7 +148,6 @@ reference:
       - get_weights
       - get_input_at
       - count_params
-      - freeze
  
   - title: "Model Persistence"
     contents:
