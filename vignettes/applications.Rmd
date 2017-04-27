@@ -1,0 +1,13 @@
+---
+title: "Using Pre-Trained Models"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using Pre-Trained Models} 
+  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+library(keras)
+knitr::opts_chunk$set(comment = NA, eval = FALSE)
+```

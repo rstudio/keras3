@@ -265,61 +265,41 @@ trainable_model %&gt;%<span class="st"> </span><span class="kw"><a href="../refe
 </ul>
 <p>To reset the states accumulated in either a singel layer or an entire model use the <code><a href="../reference/reset_states.html">reset_states()</a></code> function.</p>
 <p>Notes that the methods <code>predict()</code>, <code><a href="../reference/fit.html">fit()</a></code>, <code><a href="../reference/train_on_batch.html">train_on_batch()</a></code>, <code><a href="../reference/predict_proba.html">predict_classes()</a></code>, etc. will <em>all</em> update the states of the stateful layers in a model. This allows you to do not only stateful training, but also stateful prediction.</p>
-<hr>
 </div>
 <div id="how-can-i-remove-a-layer-from-a-sequential-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-can-i-remove-a-layer-from-a-sequential-model" class="anchor"></a>How can I remove a layer from a Sequential model?</h2>
-<p>You can remove the last added layer in a Sequential model by calling <code>.pop()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">model <span class="op">=</span> Sequential()
-model.add(Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">'relu'</span>, input_dim<span class="op">=</span><span class="dv">784</span>))
-model.add(Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">'relu'</span>))
+<p>You can remove the last added layer in a Sequential model by calling <code><a href="../reference/pop_layer.html">pop_layer()</a></code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
+model %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>)
 
-<span class="bu">print</span>(<span class="bu">len</span>(model.layers))  <span class="co"># "2"</span>
-
-model.pop()
-<span class="bu">print</span>(<span class="bu">len</span>(model.layers))  <span class="co"># "1"</span></code></pre></div>
-<hr>
+<span class="kw">length</span>(model$layers)     <span class="co"># "3"</span>
+model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/pop_layer.html">pop_layer</a></span>()
+<span class="kw">length</span>(model$layers)     <span class="co"># "2"</span></code></pre></div>
 </div>
 <div id="how-can-i-use-pre-trained-models-in-keras" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-can-i-use-pre-trained-models-in-keras" class="anchor"></a>How can I use pre-trained models in Keras?</h2>
 <p>Code and pre-trained weights are available for the following image classification models:</p>
 <ul>
-<li>Xception</li>
-<li>VGG16</li>
-<li>VGG19</li>
-<li>ResNet50</li>
-<li>Inception v3</li>
+<li><code>keras_model_xception()</code></li>
+<li><code>keras_model_vgg_16()</code></li>
+<li><code>keras_model_vgg_19()</code></li>
+<li><code>keras_model_resnet_50()</code></li>
+<li><code>keras_model_inception_v3()</code></li>
 </ul>
-<p>They can be imported from the module <code>keras.applications</code>:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> keras.applications.xception <span class="im">import</span> Xception
-<span class="im">from</span> keras.applications.vgg16 <span class="im">import</span> VGG16
-<span class="im">from</span> keras.applications.vgg19 <span class="im">import</span> VGG19
-<span class="im">from</span> keras.applications.resnet50 <span class="im">import</span> ResNet50
-<span class="im">from</span> keras.applications.inception_v3 <span class="im">import</span> InceptionV3
-
-model <span class="op">=</span> VGG16(weights<span class="op">=</span><span class="st">'imagenet'</span>, include_top<span class="op">=</span><span class="va">True</span>)</code></pre></div>
-<p>For a few simple usage examples, see <a href="/applications">the documentation for the Applications module</a>.</p>
-<p>For a detailed example of how to use such a pre-trained model for feature extraction or for fine-tuning, see <a href="http://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html">this blog post</a>.</p>
+<p>For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">keras_model_vgg_16</span>(<span class="dt">weights =</span> <span class="st">'imagenet'</span>, <span class="dt">include_top =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>For a few simple usage examples, see <a href="applications.html">the documentation for the Applications module</a>.</p>
 <p>The VGG16 model is also the basis for several Keras example scripts:</p>
 <ul>
-<li><a href="https://github.com/fchollet/keras/blob/master/examples/neural_style_transfer.py">Style transfer</a></li>
-<li><a href="https://github.com/fchollet/keras/blob/master/examples/conv_filter_visualization.py">Feature visualization</a></li>
-<li><a href="https://github.com/fchollet/keras/blob/master/examples/deep_dream.py">Deep dream</a></li>
+<li><a href="examples/neural_style_transfer.html">Style transfer</a></li>
+<li><a href="examples/conv_filter_visualization.html">Feature visualization</a></li>
+<li><a href="examples/deep_dream.html">Deep dream</a></li>
 </ul>
-<hr>
-</div>
-<div id="how-can-i-use-hdf5-inputs-with-keras" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-can-i-use-hdf5-inputs-with-keras" class="anchor"></a>How can I use HDF5 inputs with Keras?</h2>
-<p>You can use the <code>HDF5Matrix</code> class from <code>keras.utils.io_utils</code>. See <a href="/utils/#hdf5matrix">the HDF5Matrix documentation</a> for details.</p>
-<p>You can also directly use a HDF5 dataset:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> h5py
-<span class="cf">with</span> h5py.File(<span class="st">'input/file.hdf5'</span>, <span class="st">'r'</span>) <span class="im">as</span> f:
-    X_data <span class="op">=</span> f[<span class="st">'X_data'</span>]
-    model.predict(X_data)</code></pre></div>
-<hr>
 </div>
 <div id="where-is-the-keras-configuration-filed-stored" class="section level2">
 <h2 class="hasAnchor">
@@ -364,7 +344,6 @@ model <span class="op">=</span> VGG16(weights<span class="op">=</span><span clas
       <li><a href="#how-can-i-use-stateful-rnns">How can I use stateful RNNs?</a></li>
       <li><a href="#how-can-i-remove-a-layer-from-a-sequential-model">How can I remove a layer from a Sequential model?</a></li>
       <li><a href="#how-can-i-use-pre-trained-models-in-keras">How can I use pre-trained models in Keras?</a></li>
-      <li><a href="#how-can-i-use-hdf5-inputs-with-keras">How can I use HDF5 inputs with Keras?</a></li>
       <li><a href="#where-is-the-keras-configuration-filed-stored">Where is the Keras configuration filed stored?</a></li>
       </ul>
 </div>
