@@ -10,8 +10,10 @@
 #'       
 #' @export
 metric_binary_accuracy <- function(y_true, y_pred) {
-  
-  keras$metrics$binary_accuracy
+  if (missing(y_true) && missing(y_pred))
+    keras$metrics$binary_accuracy
+  else
+    keras$metrics$binary_accuracy(y_true, y_pred)
 }
 
 #' @rdname metric_binary_accuracy
