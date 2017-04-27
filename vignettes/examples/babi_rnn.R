@@ -216,7 +216,8 @@ model %>% compile(
   loss = "categorical_crossentropy",
   metrics = "accuracy"
 )
-model %>% summary()
+
+model
 
 # Training ----------------------------------------------------------------
 
