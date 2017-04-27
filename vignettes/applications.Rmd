@@ -156,3 +156,13 @@ model <- application_inception_V3(input_tensor = input_tensor,
                                   include_top = TRUE)
 ```
 
+
+### Additional examples
+
+The VGG16 model is the basis for several Keras example scripts:
+
+- [Style transfer](examples/neural_style_transfer.html)
+- [Feature visualization](examples/conv_filter_visualization.html)
+- [Deep dream](examples/deep_dream.html)
+
+
