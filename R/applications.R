@@ -41,9 +41,10 @@
 #' @return A Keras model instance.
 #'   
 #' @export
-keras_model_xception <- function(include_top = TRUE, weights = "imagenet", 
+application_xception <- function(include_top = TRUE, weights = "imagenet", 
                                  input_tensor = NULL, input_shape = NULL, 
                                  pooling = NULL, classes = 1000) {
+  verify_application_prerequistes()
   keras$applications$Xception(
     include_top = include_top,
     weights = weights,
@@ -55,7 +56,7 @@ keras_model_xception <- function(include_top = TRUE, weights = "imagenet",
 }
 
 
-#' @rdname keras_model_xception
+#' @rdname application_xception
 #' @export
 xception_preprocess_input <- function(x) {
   keras$applications$xception$preprocess_input(x)
@@ -68,7 +69,7 @@ xception_preprocess_input <- function(x) {
 #' 
 #' The `imagenet_preprocess_input()` function should be used for image preprocessing.
 #'   
-#' @inheritParams keras_model_xception
+#' @inheritParams application_xception
 #'   
 #' @param include_top whether to include the 3 fully-connected layers at the top
 #'   of the network.
@@ -82,11 +83,12 @@ xception_preprocess_input <- function(x) {
 #' @section Reference: - [Very Deep Convolutional Networks for Large-Scale Image
 #'   Recognition](https://arxiv.org/abs/1409.1556)
 #'   
-#' @name keras_model_vgg
+#' @name application_vgg
 #'   
 #' @export
-keras_model_vgg16 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
+application_vgg16 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
                               pooling = NULL, classes = 1000) {
+  verify_application_prerequistes()
   keras$applications$VGG16(
     include_top = include_top,
     weights = weights,
@@ -97,10 +99,11 @@ keras_model_vgg16 <- function(include_top = TRUE, weights = "imagenet", input_te
   )
 }
 
-#' @rdname keras_model_vgg   
+#' @rdname application_vgg   
 #' @export
-keras_model_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
+application_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
                               pooling = NULL, classes = 1000) {
+  verify_application_prerequistes()
   keras$applications$VGG19(
     include_top = include_top,
     weights = weights,
@@ -118,7 +121,7 @@ keras_model_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_te
 #' The `imagenet_preprocess_input()` function should be used for image 
 #' preprocessing.
 #'   
-#' @inheritParams keras_model_xception
+#' @inheritParams application_xception
 #'   
 #' @param input_shape optional shape list, only to be specified if `include_top`
 #'   is FALSE (otherwise the input shape has to be `(224, 224, 3)`. It should
@@ -131,8 +134,9 @@ keras_model_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_te
 #'   Recognition](https://arxiv.org/abs/1512.03385)
 #'   
 #' @export
-keras_model_resnet50 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
+application_resnet50 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
                                  pooling = NULL, classes = 1000) {
+  verify_application_prerequistes()
   keras$applications$ResNet50(
     include_top = include_top,
     weights = weights,
@@ -153,7 +157,7 @@ keras_model_resnet50 <- function(include_top = TRUE, weights = "imagenet", input
 #' The `inception_v3_preprocess_input()` function should be used for image 
 #' preprocessing.
 #' 
-#' @inheritParams keras_model_xception
+#' @inheritParams application_xception
 #' 
 #' @return A Keras model instance.
 #' 
@@ -161,8 +165,9 @@ keras_model_resnet50 <- function(include_top = TRUE, weights = "imagenet", input
 #'  - [Rethinking the Inception Architecture for Computer Vision](http://arxiv.org/abs/1512.00567)
 #' 
 #' @export
-keras_model_inception_v3 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL,
+application_inception_v3 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL,
                                      pooling = NULL, classes = 1000) {
+  verify_application_prerequistes()
   keras$applications$InceptionV3(
     include_top = include_top,
     weights = weights,
@@ -173,7 +178,7 @@ keras_model_inception_v3 <- function(include_top = TRUE, weights = "imagenet", i
   )
 }
 
-#' @rdname keras_model_inception_v3
+#' @rdname application_inception_v3
 #' @export
 inception_v3_preprocess_input <- function(x) {
   keras$applications$inception_v3$preprocess_input(x)
@@ -204,5 +209,11 @@ imagenet_decode_predictions <- function(preds, top = 5) {
 #' @export
 imagenet_preprocess_input <- function(x) {
   keras$applications$imagenet_utils$preprocess_input(x)
+}
+
+verify_application_prerequistes <- function() {
+  if (!have_h5py())
+    stop("The h5py Python package is required to use pre-built Keras models", call. = FALSE)
+  
 }
 

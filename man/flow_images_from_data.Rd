@@ -4,7 +4,7 @@
 \alias{flow_images_from_data}
 \title{Generates batches of augmented/normalized data from image data and labels}
 \usage{
-flow_images_from_data(x, y = NULL, generator = iamge_data_generator(),
+flow_images_from_data(x, y = NULL, generator = image_data_generator(),
   batch_size = 32, shuffle = TRUE, seed = NULL, save_to_dir = NULL,
   save_prefix = "", save_format = "jpeg")
 }
