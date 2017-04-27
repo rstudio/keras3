@@ -51,6 +51,21 @@ test_succeeds("models layers can be retrieved by name and index", {
 })
 
 
+test_succeeds("models layers can be popped", {
+  model <- keras_model_sequential() 
+  model %>%
+    layer_dense(32, input_shape = 784, kernel_initializer = initializer_ones()) %>%
+    layer_activation('relu', name = 'first_activation') %>%
+    layer_dense(10) %>%
+    layer_activation('softmax')
+  
+  expect_equal(length(model$layers), 4)
+  pop_layer(model)
+  expect_equal(length(model$layers), 3)
+  
+})
+
+
 
 
 

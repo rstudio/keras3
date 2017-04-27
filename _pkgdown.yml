@@ -39,7 +39,6 @@ reference:
       - keras_model
       - keras_model_sequential
       - summary.Model
-      - get_layer
       - compile
       - fit.Model
       - fit_generator
@@ -51,6 +50,8 @@ reference:
       - predict_on_batch
       - predict_generator
       - train_on_batch
+      - get_layer
+      - pop_layer
       - save_model
       - load_model
     exclude: 

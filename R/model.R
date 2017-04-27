@@ -458,6 +458,18 @@ get_layer <- function(model, name = NULL, index = NULL) {
 }
 
 
+#' Remove the last layer in a model
+#' 
+#' @param model Keras model
+#' 
+#' @family model functions
+#' 
+#' @export
+pop_layer <- function(model) {
+  model$pop()
+}
+
+
 #' Print a summary of a Keras model
 #' 
 #' @param object Keras model instance

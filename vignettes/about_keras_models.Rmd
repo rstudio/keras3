@@ -132,6 +132,18 @@ These functions enable you to create, train, evaluate, persist, and generate pre
 </tr><tr>
 <!--  -->
 <td>
+  `get_layer()` 
+</td>
+<td><p>Retrieves a layer based on either its name (unique) or index.</p></td>
+</tr><tr>
+<!--  -->
+<td>
+  `pop_layer()` 
+</td>
+<td><p>Remove the last layer in a model</p></td>
+</tr><tr>
+<!--  -->
+<td>
   `save_model_weights()` `load_model_weights()`
 </td>
 <td><p>Save/Load model weights using HDF5 files</p></td>
