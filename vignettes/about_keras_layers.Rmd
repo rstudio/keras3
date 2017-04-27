@@ -132,6 +132,14 @@ The following functions are available for interacting with layers:
 <td><p>Retrieve tensors for layers with multiple nodes</p></td>
 </tr>
 
+<tr>
+<!--  -->
+<td>
+  `reset_states()`
+</td>
+<td><p>Reset the states for a layer</p></td>
+</tr>
+
 </tbody>
 </table>
 

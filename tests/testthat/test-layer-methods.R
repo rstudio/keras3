@@ -79,4 +79,14 @@ test_succeeds("layer node functions are accessible", {
 })
 
 
+test_succeeds("layer state can be reset", {
+  model <- keras_model_sequential()
+  model %>% 
+    layer_lstm(units = 32, input_shape=c(10, 16), batch_size=32, stateful=TRUE) %>% 
+    layer_dense(units = 16, activation = 'softmax')
+  
+  layer <- model$layers[[1]]
+  reset_states(layer)
+})
+
 

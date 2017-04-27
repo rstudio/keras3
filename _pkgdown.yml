@@ -148,6 +148,7 @@ reference:
       - get_weights
       - get_input_at
       - count_params
+      - reset_states
  
   - title: "Model Persistence"
     contents:

@@ -17,5 +17,6 @@ Count the total number of scalars composing the weights.
 }
 \seealso{
 Other layer methods: \code{\link{get_config}},
-  \code{\link{get_input_at}}, \code{\link{get_weights}}
+  \code{\link{get_input_at}}, \code{\link{get_weights}},
+  \code{\link{reset_states}}
 }
