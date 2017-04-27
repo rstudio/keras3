@@ -445,34 +445,33 @@ fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator
 #' Generates batches of augmented/normalized data from image data and labels
 #' 
 #' @details Yields batches indefinitely, in an infinite loop.
-#' 
-#' @param generator Image data generator
-#' @param x data. Should have rank 4. In case of grayscale data, the channels
+#'   
+#' @param generator Image data generator to use for augmenting/normalizing image
+#'   data.
+#' @param x data. Should have rank 4. In case of grayscale data, the channels 
 #'   axis should have value 1, and in case of RGB data, it should have value 3.
-#' @param y labels.
+#' @param y labels (can be `NULL` if no labels are required)
 #' @param batch_size int (default: `32`).
 #' @param shuffle boolean (defaut: `TRUE`).
 #' @param seed int (default: `NULL`).
-#' @param save_to_dir `NULL` or str (default: `NULL`). This allows you to
+#' @param save_to_dir `NULL` or str (default: `NULL`). This allows you to 
 #'   optimally specify a directory to which to save the augmented pictures being
 #'   generated (useful for visualizing what you are doing).
-#' @param save_prefix str (default: ''). Prefix to use for filenames of saved
+#' @param save_prefix str (default: ''). Prefix to use for filenames of saved 
 #'   pictures (only relevant if `save_to_dir` is set).
-#' @param save_format one of "png", "jpeg" (only relevant if save_to_dir is
+#' @param save_format one of "png", "jpeg" (only relevant if save_to_dir is 
 #'   set). Default: "jpeg".
-#' @param ... Unused
 #'   
-#' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a
+#' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a 
 #'   array of corresponding labels. The generator loops indefinitely.
 #'   
 #' @family image preprocessing
 #'   
-#' @name flow_data.ImageDataGenerator   
-#'   
 #' @export
-flow_data.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator <- function(
-          generator, x, y = NULL, batch_size = 32, shuffle = TRUE, seed = NULL, 
-          save_to_dir = NULL, save_prefix = "", save_format = 'jpeg', ...) {
+flow_images_from_data <- function(
+          x, y = NULL, generator = iamge_data_generator(), batch_size = 32, 
+          shuffle = TRUE, seed = NULL, 
+          save_to_dir = NULL, save_prefix = "", save_format = 'jpeg') {
   generator$flow(
     x = x,
     y = y,
@@ -485,13 +484,15 @@ flow_data.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGen
   )
 }
 
-#' Generates batches of augmented/normalized data from images in a directory
+#' Generates batches of data from images in a directory (with optional 
+#' augmented/normalized data)
 #' 
 #' @details Yields batches indefinitely, in an infinite loop.
 #'   
-#' @inheritParams flow_data.ImageDataGenerator
+#' @inheritParams flow_images_from_data
 #'   
-#' @param generator Image data generator
+#' @param generator Image data generator (default generator does no data
+#'   augmentation/normalization transformations)
 #' @param directory path to the target directory. It should contain one 
 #'   subdirectory per class. Any PNG, JPG or BMP images inside each of the 
 #'   subdirectories directory tree will be included in the generator. See [this 
@@ -511,20 +512,17 @@ flow_data.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGen
 #'   1D binary labels, "sparse" will be 1D integer labels. If `NULL`, no labels 
 #'   are returned (the generator will only yield batches of image data, which is
 #'   useful to use [predict_generator()], [evaluate_generator()], etc.).
-#' @param follow_links whether to follow symlinks inside class subdirectories
-#'   (default: `FALSE`).
-#' @param ... Unused
+#' @param follow_links whether to follow symlinks inside class subdirectories 
+#'   (default: `FALSE`)
 #'   
 #' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a 
 #'   array of corresponding labels. The generator loops indefinitely.
 #'   
 #' @family image preprocessing
 #'   
-#' @name flow_data_from_directory.ImageDataGenerator
-#'   
 #' @export
-flow_data_from_directory.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator <- function(
-      generator, directory, target_size = c(256, 256), color_mode = "rgb",
+flow_images_from_directory <- function(
+      directory, generator = image_data_generator(), target_size = c(256, 256), color_mode = "rgb",
       classes = NULL, class_mode = "categorical",
       batch_size = 32, shuffle = TRUE, seed = NULL,
       save_to_dir = NULL, save_prefix = "", save_format = "jpeg",

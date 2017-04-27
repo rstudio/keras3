@@ -28,7 +28,7 @@ Required for \code{featurewise_center}, \code{featurewise_std_normalization}
 and \code{zca_whitening}.
 }
 \seealso{
-Other image preprocessing: \code{\link{flow_data.ImageDataGenerator}},
-  \code{\link{flow_data_from_directory.ImageDataGenerator}},
+Other image preprocessing: \code{\link{flow_images_from_data}},
+  \code{\link{flow_images_from_directory}},
   \code{\link{image_load}}, \code{\link{image_to_array}}
 }

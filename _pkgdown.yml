@@ -182,11 +182,8 @@ reference:
       - image_to_array
       - image_data_generator
       - fit.ImageDataGenerator
-      - flow_data.ImageDataGenerator
-      - flow_data_from_directory.ImageDataGenerator
-    exclude:
-      - flow_data
-      - flow_data_from_directory
+      - flow_images_from_data
+      - flow_images_from_directory
  
   - title: "Optimizers"
     contents:

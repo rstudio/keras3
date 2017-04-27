@@ -91,7 +91,7 @@ if(!data_augmentation){
   datagen %>% fit(x_train)
   
   model %>% fit_generator(
-    flow_data(datagen, x_train, y_train, batch_size = batch_size),
+    flow_images_from_data(x_train, y_train, datagen, batch_size = batch_size),
     steps_per_epoch = as.integer(50000/batch_size), 
     epochs = epochs, 
     validation_data = list(x_test, y_test)

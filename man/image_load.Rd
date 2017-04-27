@@ -21,7 +21,7 @@ Loads an image into PIL format.
 }
 \seealso{
 Other image preprocessing: \code{\link{fit.ImageDataGenerator}},
-  \code{\link{flow_data.ImageDataGenerator}},
-  \code{\link{flow_data_from_directory.ImageDataGenerator}},
+  \code{\link{flow_images_from_data}},
+  \code{\link{flow_images_from_directory}},
   \code{\link{image_to_array}}
 }

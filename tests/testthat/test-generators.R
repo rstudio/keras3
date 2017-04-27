@@ -46,18 +46,18 @@ test_succeeds("image data generator can be used for training", {
   
   # train using generator
   model %>%
-    fit_generator(flow_data(datagen, X_train, Y_train, batch_size = 32),
+    fit_generator(flow_images_from_data(X_train, Y_train, datagen, batch_size = 32),
                   steps_per_epoch = 32, epochs = 2)
   
   # evaluate using generator
   model %>%
-    evaluate_generator(flow_data(datagen, X_train, Y_train, batch_size = 32),
+    evaluate_generator(flow_images_from_data(X_train, Y_train, datagen, batch_size = 32),
                        steps = 5)
   
   # predict using generator
   model %>%
-    predict_generator(flow_data(datagen, X_train, Y_train, batch_size = 32),
-                       steps = 5)
+    predict_generator(flow_images_from_data(X_train, Y_train, datagen, batch_size = 32),
+                      steps = 5)
 })
 
 
