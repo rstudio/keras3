@@ -160,6 +160,25 @@ reference:
       - model_to_json
       - model_to_yaml
  
+  - title: "Datasets"
+    contents:
+      - dataset_cifar10
+      - dataset_cifar100
+      - dataset_imdb
+      - dataset_reuters
+      - dataset_reuters_word_index
+      - dataset_mnist
+      - dataset_boston_housing
+
+  - title: "Applications"
+    contents:
+      - keras_model_xception
+      - keras_model_inception_v3
+      - keras_model_vgg
+      - keras_model_resnet50
+      - imagenet_preprocess_input
+      - imagenet_decode_predictions
+
   - title: "Sequence Preprocessing"
     contents: 
       - pad_sequences
@@ -195,16 +214,6 @@ reference:
       - optimizer_adam
       - optimizer_adamax
       - optimizer_nadam
-   
-  - title: "Datasets"
-    contents:
-      - dataset_cifar10
-      - dataset_cifar100
-      - dataset_imdb
-      - dataset_reuters
-      - dataset_reuters_word_index
-      - dataset_mnist
-      - dataset_boston_housing
    
   - title: "Callbacks"
     contents:

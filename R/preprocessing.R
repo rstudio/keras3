@@ -469,7 +469,7 @@ fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator
 #'   
 #' @export
 flow_images_from_data <- function(
-          x, y = NULL, generator = iamge_data_generator(), batch_size = 32, 
+          x, y = NULL, generator = image_data_generator(), batch_size = 32, 
           shuffle = TRUE, seed = NULL, 
           save_to_dir = NULL, save_prefix = "", save_format = 'jpeg') {
   generator$flow(

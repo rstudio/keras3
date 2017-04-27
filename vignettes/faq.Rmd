@@ -249,16 +249,16 @@ length(model$layers)     # "2"
 
 Code and pre-trained weights are available for the following image classification models:
 
-- `keras_model_xception()`
-- `keras_model_vgg_16()`
-- `keras_model_vgg_19()`
-- `keras_model_resnet_50()`
-- `keras_model_inception_v3()`
+- [Xception](../reference/keras_model_xception.html)
+- [VGG16](../reference/keras_model_vgg.html)
+- [VGG19](../reference/keras_model_vgg.html)
+- [ResNet50](../reference/keras_model_resnet50.html)
+- [InceptionV3](../ reference/keras_model_inception_v3.html)
 
 For example:
 
 ```{r}
-model <- keras_model_vgg_16(weights = 'imagenet', include_top = TRUE)
+model <- keras_model_vgg16(weights = 'imagenet', include_top = TRUE)
 ```
 
 For a few simple usage examples, see [the documentation for the Applications module](applications.html).
