@@ -35,7 +35,7 @@
 #   
 #   - With default word, sentence, and query vector sizes, the GRU model achieves:
 #   - 100% test accuracy on QA1 in 20 epochs (2 seconds per epoch on CPU)
-# - 50% test accuracy on QA2 in 20 epochs (16 seconds per epoch on CPU)
+#   - 50% test accuracy on QA2 in 20 epochs (16 seconds per epoch on CPU)
 # In comparison, the Facebook paper achieves 50% and 20% for the LSTM baseline.
 # 
 # - The task does not traditionally parse the question separately. This likely
@@ -67,10 +67,11 @@ library(dplyr)
 # Function definition -----------------------------------------------------
 
 tokenize_words <- function(x){
-  x %>% 
+  x <- x %>% 
     str_replace_all('([[:punct:]]+)', ' \\1') %>% 
     str_split(' ') %>%
     unlist()
+  x[x != ""]
 }
 
 parse_stories <- function(lines, only_supporting = FALSE){
@@ -106,15 +107,44 @@ parse_stories <- function(lines, only_supporting = FALSE){
   questions %>%
     group_by(story_id, nid, question = q, answer = a) %>%
     summarise(story = paste(story, collapse = " ")) %>%
-    mutate(story = map(story, ~tokenize_words(.x))) %>%
-    ungroup() %>%
+    ungroup() %>% 
+    mutate(
+      question = map(question, ~tokenize_words(.x)),
+      story = map(story, ~tokenize_words(.x))
+    ) %>%
     mutate(id = row_number()) %>%
     select(id, question, answer, story)
+}
+
+vectorize_stories <- function(data, vocab, story_maxlen, query_maxlen){
+  
+  questions <- map(data$question, function(x){
+    map_int(x, ~which(.x == vocab))
+  })
+  
+  stories <- map(data$story, function(x){
+    map_int(x, ~which(.x == vocab))
+  })
+  
+  # "" represents padding
+  answers <- sapply(c("", vocab), function(x){
+    as.integer(x == data$answer)
+  })
+  
+
+  list(
+    questions = questions %>% pad_sequences(maxlen = query_maxlen),
+    stories   = stories %>% pad_sequences(maxlen = story_maxlen),
+    answers   = answers
+  )
 }
 
 # Parameters --------------------------------------------------------------
 
 max_length <- 99999
+embed_hidden_size <- 50
+batch_size <- 32
+epochs = 40
 
 # Data Preparation --------------------------------------------------------
 
@@ -141,3 +171,67 @@ train <- read_lines(sprintf(challenge, "train")) %>%
 test <- read_lines(sprintf(challenge, "test")) %>%
   parse_stories() %>%
   filter(map_int(story, ~length(.x)) <= max_length)
+
+# extract the vocabulary
+all_data <- bind_rows(train, test)
+vocab <- c(unlist(all_data$question), all_data$answer, unlist(all_data$story)) %>%
+  unique() %>%
+  sort()
+
+# Reserve 0 for masking via pad_sequences
+vocab_size <- length(vocab) + 1
+story_maxlen <- map_int(all_data$story, ~length(.x)) %>% max()
+query_maxlen <- map_int(all_data$question, ~length(.x)) %>% max()
+
+# vectorized versions of training and test sets
+train_vec <- vectorize_stories(train, vocab, story_maxlen, query_maxlen)
+test_vec <- vectorize_stories(test, vocab, story_maxlen, query_maxlen)
+
+# Defining the model ------------------------------------------------------
+
+sentence <- layer_input(shape = c(story_maxlen), dtype = "int32")
+encoded_sentence <- layer_embedding(
+  input_dim = vocab_size, 
+  output_dim = embed_hidden_size)(sentence)
+encoded_sentence <- layer_dropout(rate = 0.3)(encoded_sentence)
+
+question <- layer_input(shape = c(query_maxlen), dtype = "int32")
+encoded_question <- layer_embedding(
+  input_dim = vocab_size, 
+  output_dim = embed_hidden_size)(question)
+encoded_question <- layer_lstm(units = embed_hidden_size)(encoded_question)
+encoded_question <- layer_repeat_vector(n = story_maxlen)(encoded_question)
+
+merged <- layer_add(list(encoded_sentence, encoded_question))
+merged <- layer_lstm(units = embed_hidden_size)(merged)
+merged <- layer_dropout(rate = 0.3)(merged)
+
+preds <- layer_dense(units = vocab_size, activation = "softmax")(merged)
+
+model <- keras_model(inputs = list(sentence, question), outputs = preds)
+model %>% compile(
+  optimizer = "adam",
+  loss = "categorical_crossentropy",
+  metrics = "accuracy"
+)
+model %>% summary()
+
+
+# Training ----------------------------------------------------------------
+
+model %>% fit(
+  x = list(train_vec$stories, train_vec$questions),
+  y = train_vec$answers,
+  batch_size = batch_size,
+  epochs = epochs,
+  validation_split=0.05
+)
+
+evaluation <- model %>% evaluate(
+  x = list(test_vec$stories, test_vec$questions),
+  y = test_vec$answers,
+  batch_size = batch_size
+)
+
+evaluation
+
