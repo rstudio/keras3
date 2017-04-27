@@ -12,7 +12,8 @@ imagenet_decode_predictions(preds, top = 5)
 \item{top}{integer, how many top-guesses to return.}
 }
 \value{
-A list of lists of top class prediction lists \code{(class_name, class_description, score)}. One list of lists per sample in batch input.
+List of data frames with variables \code{class_name}, \code{class_description},
+and \code{score} (one data frame per sample in batch input).
 }
 \description{
 Decodes the prediction of an ImageNet model.

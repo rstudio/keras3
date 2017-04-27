@@ -59,7 +59,7 @@ application_xception <- function(include_top = TRUE, weights = "imagenet",
 #' @rdname application_xception
 #' @export
 xception_preprocess_input <- function(x) {
-  keras$applications$xception$preprocess_input(x)
+  preprocess_input(x, keras$applications$xception$preprocess_input)
 }
 
 
@@ -181,7 +181,7 @@ application_inception_v3 <- function(include_top = TRUE, weights = "imagenet", i
 #' @rdname application_inception_v3
 #' @export
 inception_v3_preprocess_input <- function(x) {
-  keras$applications$inception_v3$preprocess_input(x)
+  preprocess_input(x, keras$applications$inception_v3$preprocess_input)
 }
 
 #' Decodes the prediction of an ImageNet model.
@@ -189,16 +189,28 @@ inception_v3_preprocess_input <- function(x) {
 #' @param preds Tensor encoding a batch of predictions.
 #' @param top integer, how many top-guesses to return.
 #'   
-#' @return A list of lists of top class prediction lists `(class_name,
-#'   class_description, score)`. One list of lists per sample in batch input.
+#' @return List of data frames with variables `class_name`, `class_description`,
+#'   and `score` (one data frame per sample in batch input).
 #'   
 #' @export
 imagenet_decode_predictions <- function(preds, top = 5) {
-  keras$applications$imagenet_utils$decode_predictions(
+  
+  # decode predictions
+  decoded <- keras$applications$imagenet_utils$decode_predictions(
     preds = preds,
     top = as.integer(top)
   )
+  
+  # convert to a list of data frames
+  lapply(decoded, function(x) {
+    m <- t(sapply(1:length(x), function(n) x[[n]]))
+    data.frame(class_name = as.character(m[,1]),
+               class_description = as.character(m[,2]),
+               score = as.numeric(m[,3]),
+               stringsAsFactors = FALSE)
+  })
 }
+
 
 #' Preprocesses a tensor encoding a batch of images.
 #' 
@@ -208,8 +220,22 @@ imagenet_decode_predictions <- function(preds, top = 5) {
 #' 
 #' @export
 imagenet_preprocess_input <- function(x) {
-  keras$applications$imagenet_utils$preprocess_input(x)
+  preprocess_input(x, keras$applications$imagenet_utils$preprocess_input)
 }
+
+
+# the preprocesssing functions modify the ndarray in place
+# so we can't pass an R marshalled array (since it points to
+# R managed memory numpy won't allow writing to it). this 
+# function wraps preprocessing by making a copy of the R
+# array before passing it to numpy
+preprocess_input <- function(x, preprocessor) {
+  np <- import("numpy", convert = FALSE)
+  x_np <- np$copy(x)
+  preprocessor(x_np)
+  py_to_r(x_np)
+}
+
 
 verify_application_prerequistes <- function() {
   if (!have_h5py())

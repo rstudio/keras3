@@ -25,6 +25,8 @@ navbar:
           href: articles/about_keras_layers.html
         - text: "Training Callbacks"
           href: articles/training_callbacks.html
+        - text: "Pre-Trained Models"
+          href: articles/applications.html
     - text: Examples
       href: articles/examples/index.html
     - text: "Reference"

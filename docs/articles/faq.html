@@ -59,6 +59,9 @@
     <li>
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
+    <li>
+      <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -285,14 +288,14 @@ model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/pop_
 <a href="#how-can-i-use-pre-trained-models-in-keras" class="anchor"></a>How can I use pre-trained models in Keras?</h2>
 <p>Code and pre-trained weights are available for the following image classification models:</p>
 <ul>
-<li><a href="../reference/keras_model_xception.html">Xception</a></li>
-<li><a href="../reference/keras_model_vgg.html">VGG16</a></li>
-<li><a href="../reference/keras_model_vgg.html">VGG19</a></li>
-<li><a href="../reference/keras_model_resnet50.html">ResNet50</a></li>
-<li><a href="../%20reference/keras_model_inception_v3.html">InceptionV3</a></li>
+<li><a href="../reference/application_xception.html">Xception</a></li>
+<li><a href="../reference/application_vgg.html">VGG16</a></li>
+<li><a href="../reference/application_vgg.html">VGG19</a></li>
+<li><a href="../reference/application_resnet50.html">ResNet50</a></li>
+<li><a href="../%20reference/application_inception_v3.html">InceptionV3</a></li>
 </ul>
 <p>For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_vgg.html">keras_model_vgg16</a></span>(<span class="dt">weights =</span> <span class="st">'imagenet'</span>, <span class="dt">include_top =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/application_vgg.html">application_vgg16</a></span>(<span class="dt">weights =</span> <span class="st">'imagenet'</span>, <span class="dt">include_top =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>For a few simple usage examples, see <a href="applications.html">the documentation for the Applications module</a>.</p>
 <p>The VGG16 model is also the basis for several Keras example scripts:</p>
 <ul>

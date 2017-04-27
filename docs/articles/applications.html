@@ -59,6 +59,9 @@
     <li>
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
+    <li>
+      <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -94,11 +97,151 @@
     
     
 <div class="contents">
+<div id="applications" class="section level2">
+<h2 class="hasAnchor">
+<a href="#applications" class="anchor"></a>Applications</h2>
+<p>Keras Applications are deep learning models that are made available alongside pre-trained weights. These models can be used for prediction, feature extraction, and fine-tuning.</p>
+<p>Weights are downloaded automatically when instantiating a model. They are stored at <code>~/.keras/models/</code>.</p>
+<p>The following image classification models (with weights trained on ImageNet) are available:</p>
+<ul>
+<li><a href="../reference/application_xception.html">Xception</a></li>
+<li><a href="../reference/application_vgg.html">VGG16</a></li>
+<li><a href="../reference/application_vgg.html">VGG19</a></li>
+<li><a href="../reference/application_resnet50.html">ResNet50</a></li>
+<li><a href="../%20reference/application_inception_v3.html">InceptionV3</a></li>
+</ul>
+</div>
+<div id="usage-examples" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage-examples" class="anchor"></a>Usage Examples</h2>
+<div id="classify-imagenet-classes-with-resnet50" class="section level3">
+<h3 class="hasAnchor">
+<a href="#classify-imagenet-classes-with-resnet50" class="anchor"></a>Classify ImageNet classes with ResNet50</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># instantiate the model</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/application_resnet50.html">application_resnet50</a></span>(<span class="dt">weights =</span> <span class="st">'imagenet'</span>)
 
+<span class="co"># load the image</span>
+img_path &lt;-<span class="st"> "elephant.jpg"</span>
+img &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_load.html">image_load</a></span>(img_path, <span class="dt">target_size =</span> <span class="kw">c</span>(<span class="dv">224</span>,<span class="dv">224</span>))
+x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_to_array.html">image_to_array</a></span>(img)
+
+<span class="co"># ensure we have a 4d tensor with single element in the batch dimension,</span>
+<span class="co"># the preprocess the input for prediction using resnet50</span>
+x &lt;-<span class="st"> </span><span class="kw">array</span>(x, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x))) 
+x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>(x)
+
+<span class="co"># make predictions then decode and print them</span>
+preds &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span><span class="kw">predict</span>(x)
+<span class="kw"><a href="../reference/imagenet_decode_predictions.html">imagenet_decode_predictions</a></span>(preds, <span class="dt">top =</span> <span class="dv">3</span>)[[<span class="dv">1</span>]]</code></pre></div>
+<pre><code>  class_name class_description      score
+1  n02504013   Indian_elephant 0.90117526
+2  n01871265            tusker 0.08774310
+3  n02504458  African_elephant 0.01046011</code></pre>
+</div>
+<div id="extract-features-with-vgg16" class="section level3">
+<h3 class="hasAnchor">
+<a href="#extract-features-with-vgg16" class="anchor"></a>Extract features with VGG16</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/application_vgg.html">application_vgg16</a></span>(<span class="dt">weights =</span> <span class="st">'imagenet'</span>, <span class="dt">include_top =</span> <span class="ot">FALSE</span>)
+
+img_path &lt;-<span class="st"> "elephant.jpg"</span>
+img &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_load.html">image_load</a></span>(img_path, <span class="dt">target_size =</span> <span class="kw">c</span>(<span class="dv">224</span>,<span class="dv">224</span>))
+x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_to_array.html">image_to_array</a></span>(img)
+x &lt;-<span class="st"> </span><span class="kw">array</span>(x, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x))) 
+x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>(x)
+
+features &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span><span class="kw">predict</span>(x)</code></pre></div>
+</div>
+<div id="extract-features-from-an-arbitrary-intermediate-layer-with-vgg19" class="section level3">
+<h3 class="hasAnchor">
+<a href="#extract-features-from-an-arbitrary-intermediate-layer-with-vgg19" class="anchor"></a>Extract features from an arbitrary intermediate layer with VGG19</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/application_vgg.html">application_vgg19</a></span>(<span class="dt">weights =</span> <span class="st">'imagenet'</span>)
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> base_model$input, 
+                     <span class="dt">outputs =</span> <span class="kw"><a href="../reference/get_layer.html">get_layer</a></span>(base_model, <span class="st">'block4_pool'</span>)$output)
+
+img_path &lt;-<span class="st"> "elephant.jpg"</span>
+img &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_load.html">image_load</a></span>(img_path, <span class="dt">target_size =</span> <span class="kw">c</span>(<span class="dv">224</span>,<span class="dv">224</span>))
+x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_to_array.html">image_to_array</a></span>(img)
+x &lt;-<span class="st"> </span><span class="kw">array</span>(x, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x))) 
+x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>(x)
+
+block4_pool_features &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span><span class="kw">predict</span>(x)</code></pre></div>
+</div>
+<div id="fine-tune-inceptionv3-on-a-new-set-of-classes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#fine-tune-inceptionv3-on-a-new-set-of-classes" class="anchor"></a>Fine-tune InceptionV3 on a new set of classes</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create the base pre-trained model</span>
+base_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/application_inception_v3.html">application_inception_v3</a></span>(<span class="dt">weights =</span> <span class="st">'imagenet'</span>, <span class="dt">include_top =</span> <span class="ot">FALSE</span>)
+
+<span class="co"># add our custom layers</span>
+predictions &lt;-<span class="st"> </span>base_model$output %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_global_average_pooling_2d.html">layer_global_average_pooling_2d</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1024</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">200</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>)
+
+<span class="co"># this is the model we will train</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> base_model$input, <span class="dt">outputs =</span> predictions)
+
+<span class="co"># first: train only the top layers (which were randomly initialized)</span>
+<span class="co"># i.e. freeze all convolutional InceptionV3 layers</span>
+for (layer in base_model$layers)
+  layer$trainable &lt;-<span class="st"> </span><span class="ot">FALSE</span>
+
+<span class="co"># compile the model (should be done *after* setting layers to non-trainable)</span>
+model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>, <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>)
+
+<span class="co"># train the model on the new data for a few epochs</span>
+model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit_generator.html">fit_generator</a></span>(...)
+
+<span class="co"># at this point, the top layers are well trained and we can start fine-tuning</span>
+<span class="co"># convolutional layers from inception V3. We will freeze the bottom N layers</span>
+<span class="co"># and train the remaining top layers.</span>
+
+<span class="co"># let's visualize layer names and layer indices to see how many layers</span>
+<span class="co"># we should freeze:</span>
+layers &lt;-<span class="st"> </span>base_model$layers
+for (i in <span class="dv">1</span>:<span class="kw">length</span>(layers))
+  <span class="kw">cat</span>(i, layers[[i]]$name, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)
+
+<span class="co"># we chose to train the top 2 inception blocks, i.e. we will freeze</span>
+<span class="co"># the first 172 layers and unfreeze the rest:</span>
+for (i in <span class="dv">1</span>:<span class="dv">172</span>)
+  layers[[i]]$trainable &lt;-<span class="st"> </span><span class="ot">FALSE</span>
+for (i in <span class="dv">173</span>:<span class="kw">length</span>(layers))
+  layers[[i]]$trainable &lt;-<span class="st"> </span><span class="ot">TRUE</span>
+
+<span class="co"># we need to recompile the model for these modifications to take effect</span>
+<span class="co"># we use SGD with a low learning rate</span>
+model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+  <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="dt">lr =</span> <span class="fl">0.0001</span>, <span class="dt">momentum =</span> <span class="fl">0.9</span>), 
+  <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>
+)
+
+<span class="co"># we train our model again (this time fine-tuning the top 2 inception blocks</span>
+<span class="co"># alongside the top Dense layers</span>
+model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit_generator.html">fit_generator</a></span>(...)</code></pre></div>
+</div>
+<div id="build-inceptionv3-over-a-custom-input-tensor" class="section level3">
+<h3 class="hasAnchor">
+<a href="#build-inceptionv3-over-a-custom-input-tensor" class="anchor"></a>Build InceptionV3 over a custom input tensor</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this could also be the output a different Keras model or layer</span>
+input_tensor &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">224</span>, <span class="dv">224</span>, <span class="dv">3</span>))
+
+model &lt;-<span class="st"> </span><span class="kw">application_inception_V3</span>(<span class="dt">input_tensor =</span> input_tensor, 
+                                  <span class="dt">weights=</span><span class="st">'imagenet'</span>, 
+                                  <span class="dt">include_top =</span> <span class="ot">TRUE</span>)</code></pre></div>
+</div>
+</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#applications">Applications</a></li>
+      <li><a href="#usage-examples">Usage Examples</a></li>
+      </ul>
+</div>
       </div>
 
 </div>
