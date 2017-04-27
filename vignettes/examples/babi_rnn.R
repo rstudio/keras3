@@ -191,24 +191,24 @@ test_vec <- vectorize_stories(test, vocab, story_maxlen, query_maxlen)
 # Defining the model ------------------------------------------------------
 
 sentence <- layer_input(shape = c(story_maxlen), dtype = "int32")
-encoded_sentence <- layer_embedding(
-  input_dim = vocab_size, 
-  output_dim = embed_hidden_size)(sentence)
-encoded_sentence <- layer_dropout(rate = 0.3)(encoded_sentence)
+encoded_sentence <- sentence %>% 
+  layer_embedding(input_dim = vocab_size, output_dim = embed_hidden_size) %>%
+  layer_dropout(rate = 0.3)
 
 question <- layer_input(shape = c(query_maxlen), dtype = "int32")
-encoded_question <- layer_embedding(
-  input_dim = vocab_size, 
-  output_dim = embed_hidden_size)(question)
-encoded_question <- layers_dropout(rate = 0.3)(encoded_question)
-encoded_question <- layer_lstm(units = embed_hidden_size)(encoded_question)
-encoded_question <- layer_repeat_vector(n = story_maxlen)(encoded_question)
+encoded_question <- question %>%
+  layer_embedding(input_dim = vocab_size, output_dim = embed_hidden_size) %>%
+  layers_dropout(rate = 0.3) %>%
+  layer_lstm(units = embed_hidden_size) %>%
+  layer_repeat_vector(n = story_maxlen) %>%
 
-merged <- layer_add(list(encoded_sentence, encoded_question))
-merged <- layer_lstm(units = embed_hidden_size)(merged)
-merged <- layer_dropout(rate = 0.3)(merged)
+merged <- list(encoded_sentence, encoded_question) %>%
+  layer_add() %>%
+  layer_lstm(units = embed_hidden_size) %>%
+  layer_dropout(rate = 0.3)
 
-preds <- layer_dense(units = vocab_size, activation = "softmax")(merged)
+preds <- merged %>%
+  layer_dense(units = vocab_size, activation = "softmax")
 
 model <- keras_model(inputs = list(sentence, question), outputs = preds)
 model %>% compile(
@@ -217,7 +217,6 @@ model %>% compile(
   metrics = "accuracy"
 )
 model %>% summary()
-
 
 # Training ----------------------------------------------------------------
 
