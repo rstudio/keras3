@@ -144,7 +144,7 @@ vectorize_stories <- function(data, vocab, story_maxlen, query_maxlen){
 max_length <- 99999
 embed_hidden_size <- 50
 batch_size <- 32
-epochs = 40
+epochs <- 40
 
 # Data Preparation --------------------------------------------------------
 
@@ -174,7 +174,8 @@ test <- read_lines(sprintf(challenge, "test")) %>%
 
 # extract the vocabulary
 all_data <- bind_rows(train, test)
-vocab <- c(unlist(all_data$question), all_data$answer, unlist(all_data$story)) %>%
+vocab <- c(unlist(all_data$question), all_data$answer, 
+           unlist(all_data$story)) %>%
   unique() %>%
   sort()
 
