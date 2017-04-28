@@ -3,7 +3,8 @@ context("datasets")
 source("utils.R")
 
 # these tests take a long time to load so we skip them by default
-skip <- is.na(Sys.getenv("KERAS_TEST_DATASETS", unset = NA))
+skip <- is.na(Sys.getenv("KERAS_TEST_DATASETS", unset = NA)) && 
+        is.na(Sys.getenv("KERAS_TEST_ALL", unset = NA))
 
 test_dataset <- function(name) {
   if (skip)

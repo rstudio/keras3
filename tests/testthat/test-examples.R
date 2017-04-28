@@ -15,7 +15,8 @@ run_example <- function(example) {
   gc()
 }
 
-examples <- if (nzchar(Sys.getenv("KERAS_TEST_EXAMPLES"))) {
+examples <- if (nzchar(Sys.getenv("KERAS_TEST_EXAMPLES")) &&
+                nzchar(Sys.getenv("KERAS_TEST_ALL"))) {
   c("simple.R")
 }
 
