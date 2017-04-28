@@ -42,7 +42,7 @@ x <- image_to_array(img)
 
 # ensure we have a 4d tensor with single element in the batch dimension,
 # the preprocess the input for prediction using resnet50
-x <- array(x, dim = c(1, dim(x))) 
+dim(x) <- c(1, dim(x))
 x <- imagenet_preprocess_input(x)
 
 # make predictions then decode and print them
@@ -65,7 +65,7 @@ model <- application_vgg16(weights = 'imagenet', include_top = FALSE)
 img_path <- "elephant.jpg"
 img <- image_load(img_path, target_size = c(224,224))
 x <- image_to_array(img)
-x <- array(x, dim = c(1, dim(x))) 
+dim(x) <- c(1, dim(x))
 x <- imagenet_preprocess_input(x)
 
 features <- model %>% predict(x)
@@ -82,7 +82,7 @@ model <- keras_model(inputs = base_model$input,
 img_path <- "elephant.jpg"
 img <- image_load(img_path, target_size = c(224,224))
 x <- image_to_array(img)
-x <- array(x, dim = c(1, dim(x))) 
+dim(x) <- c(1, dim(x)) 
 x <- imagenet_preprocess_input(x)
 
 block4_pool_features <- model %>% predict(x)
