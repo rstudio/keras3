@@ -188,10 +188,9 @@ match <- list(sequence_encoded_m, question_encoded) %>%
   layer_activation("softmax")
 
 # add the match matrix with the second input vector sequence
-permute <- tf$contrib$keras$layers$Permute(c(2L,1L))
 response <- list(match, sequence_encoded_c) %>%
   layer_add() %>%
-  permute()
+  layer_permute(c(2,1))
 
 # concatenate the match matrix with the question vector sequence
 answer <- list(response, question_encoded) %>%
