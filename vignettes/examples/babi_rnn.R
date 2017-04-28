@@ -198,9 +198,9 @@ encoded_sentence <- sentence %>%
 question <- layer_input(shape = c(query_maxlen), dtype = "int32")
 encoded_question <- question %>%
   layer_embedding(input_dim = vocab_size, output_dim = embed_hidden_size) %>%
-  layers_dropout(rate = 0.3) %>%
+  layer_dropout(rate = 0.3) %>%
   layer_lstm(units = embed_hidden_size) %>%
-  layer_repeat_vector(n = story_maxlen) %>%
+  layer_repeat_vector(n = story_maxlen)
 
 merged <- list(encoded_sentence, encoded_question) %>%
   layer_add() %>%
