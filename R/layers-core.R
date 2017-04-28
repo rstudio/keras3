@@ -180,7 +180,7 @@ layer_permute <- function(x, dims, input_shape = NULL,
                           name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$Permute, x, list(
-    dims = list(as.integer(dims)),
+    dims = as.integer(dims),
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
     batch_size = as_nullable_integer(batch_size),
