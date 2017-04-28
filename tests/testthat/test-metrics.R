@@ -15,19 +15,6 @@ test_succeeds("metrics can be used when compiling models", {
     )
 })
 
-test_succeeds("metrics can be referred to by executing the method function", {
-  define_model() %>% 
-    compile(
-      loss='binary_crossentropy',
-      optimizer = optimizer_sgd(),
-      metrics=list(
-        metric_binary_accuracy(),
-        metric_binary_crossentropy(),
-        metric_hinge()
-      )
-    )
-})
-
 test_succeeds("metrics be can called directly", {
   tf <- tensorflow::tf
   y_true <- tf$constant(matrix(runif(100), nrow = 10, ncol = 10))

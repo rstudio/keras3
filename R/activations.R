@@ -12,83 +12,66 @@
 #' 
 #' @export
 activation_relu <- function(x, alpha = 0.0, max_value = NULL) {
-  if (missing(x))
-    keras$activations$relu
-  else
-    keras$activations$relu(x, alpha = alpha, max_value = max_value)
+  keras$activations$relu(x, alpha = alpha, max_value = max_value)
 }
+attr(activation_relu, "py_function_name") <- "relu"
+
 
 #' @rdname activation_relu
 #' @export
 activation_elu <- function(x, alpha = 1.0) {
-  if (missing(x))
-    keras$activations$elu
-  else
-    keras$activations$elu(x, alpha = alpha)
+  keras$activations$elu(x, alpha = alpha)
 }
+attr(activation_elu, "py_function_name") <- "elu"
 
 #' @rdname activation_relu
 #' @export
 activation_hard_sigmoid <- function(x) {
-  if (missing(x))
-    keras$activations$hard_sigmoid
-  else
-    keras$activations$hard_sigmoid(x)
+  keras$activations$hard_sigmoid(x)
 }
+attr(activation_hard_sigmoid, "py_function_name") <- "hard_sigmoid"
 
 #' @rdname activation_relu
 #' @export
 activation_linear <- function(x) {
-  if (missing(x))
-    keras$activations$linear
-  else
-    keras$activations$linear(x)
+  keras$activations$linear(x)
 }
+attr(activation_linear, "py_function_name") <- "linear"
 
 #' @rdname activation_relu
 #' @export
 activation_sigmoid <- function(x) {
-  if (missing(x))
-    keras$activations$sigmoid
-  else
-    keras$activations$softmax(x)
+  keras$activations$softmax(x)
 }
+attr(activation_sigmoid, "py_function_name") <- "sigmoid"
 
 #' @rdname activation_relu
 #' @export
 activation_softmax <- function(x, axis = -1) {
-  if (missing(x))
-    keras$activations$softmax
-  else
-    keras$activations$softmax(x, axis = as.integer(axis))
+  keras$activations$softmax(x, axis = as.integer(axis))
 }
+attr(activation_softmax, "py_function_name") <- "softmax"
 
 #' @rdname activation_relu
 #' @export
 activation_softplus <- function(x) {
-  if (missing(x))
-    keras$activations$softplus
-  else
-    keras$activations$softplus(x)
+  keras$activations$softplus(x)
 }
+attr(activation_softplus, "py_function_name") <- "softplus"
 
 #' @rdname activation_relu
 #' @export
 activation_softsign <- function(x) {
-  if (missing(x))
-    keras$activations$softsign
-  else
-    keras$activations$softsign(x)
+  keras$activations$softsign(x)
 }
+attr(activation_softsign, "py_function_name") <- "softsign"
 
 #' @rdname activation_relu
 #' @export
 activation_tanh <- function(x) {
-  if (missing(x))
-    keras$activations$tanh
-  else
-    keras$activations$tanh(x)
+  keras$activations$tanh(x)
 }
+attr(activation_tanh, "py_function_name") <- "tanh"
 
 
 

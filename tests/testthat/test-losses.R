@@ -10,13 +10,6 @@ test_loss <- function(name, test_direct_call = TRUE) {
       layer_dense(32, input_shape = shape(784)) %>% 
       compile( 
         optimizer = optimizer_sgd(),
-        loss = loss_fn(), 
-        metrics='accuracy'
-      )
-    keras_model_sequential() %>% 
-      layer_dense(32, input_shape = shape(784)) %>% 
-      compile( 
-        optimizer = optimizer_sgd(),
         loss = loss_fn, 
         metrics='accuracy'
       )

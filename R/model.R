@@ -58,18 +58,9 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
                     sample_weight_mode = NULL) {
   
   
-  # resolve loss
-  loss <- resolve_keras_function(loss)
-  
-  # resolve metrics (if they are functions in our namespace then call them 
-  # so we end up passing the underlying python function not the R function)
-  if (!is.null(metrics)) {
-    # ensure we are dealing with a list
-    if (is.function(metrics))
-      metrics <- list(metrics)
-    # resolve functions as necessary
-    metrics <- lapply(metrics, resolve_keras_function)
-  }
+  # ensure we are dealing with a list of metrics
+  if (length(metrics) == 1)
+    metrics <- list(metrics)
   
   # compile model
   model$compile(

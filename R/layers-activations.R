@@ -16,7 +16,7 @@ layer_activation <- function(x, activation, input_shape = NULL,
                              name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$Activation, x, list(
-    activation = resolve_keras_function(activation),
+    activation = activation,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
     batch_size = as_nullable_integer(batch_size),

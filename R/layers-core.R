@@ -100,7 +100,7 @@ layer_dense <- function(x, units, activation = NULL, use_bias = TRUE,
   
   call_layer(keras$layers$Dense, x, list(
     units = as.integer(units),
-    activation = resolve_keras_function(activation),
+    activation = activation,
     use_bias = use_bias,
     kernel_initializer = kernel_initializer,
     bias_initializer = bias_initializer,
@@ -451,10 +451,5 @@ is_keras_function <- function(f) {
   is.function(f) && identical(environment(f), getNamespace("keras"))
 }
 
-resolve_keras_function <- function(f) {
-  if (is_keras_function(f))
-    f()
-  else
-    f
-}
+
 

@@ -34,111 +34,87 @@
 #'   
 #' @export
 loss_mean_squared_error <- function(y_true, y_pred) {
-  if (missing(y_true) && missing(y_pred))
-    keras$losses$mean_squared_error
-  else
-    keras$losses$mean_squared_error(y_true, y_pred)
+  keras$losses$mean_squared_error(y_true, y_pred)
 }
+attr(loss_mean_squared_error, "py_function_name") <- "mean_squared_error"
 
 #' @rdname loss_mean_squared_error
 #' @export
 loss_mean_absolute_error <- function(y_true, y_pred) {
-  if (missing(y_true) && missing(y_pred))
-    keras$losses$mean_absolute_error
-  else
-    keras$losses$mean_absolute_error(y_true, y_pred)
+  keras$losses$mean_absolute_error(y_true, y_pred)
 }
+attr(loss_mean_absolute_error, "py_function_name") <- "mean_absolute_error"
 
 #' @rdname loss_mean_squared_error
 #' @export
 loss_mean_absolute_percentage_error <- function(y_true, y_pred) {
-  if (missing(y_true) && missing(y_pred))
-    keras$losses$mean_absolute_percentage_error
-  else
-    keras$losses$mean_absolute_percentage_error(y_true, y_pred)
+  keras$losses$mean_absolute_percentage_error(y_true, y_pred)
 }
+attr(loss_mean_absolute_percentage_error, "py_function_name") <- "mean_absolute_percentage_error"
 
 #' @rdname loss_mean_squared_error
 #' @export
 loss_mean_squared_logarithmic_error <- function(y_true, y_pred) {
-  if (missing(y_true) && missing(y_pred))
-    keras$losses$mean_squared_logarithmic_error
-  else
-    keras$losses$mean_squared_logarithmic_error(y_true, y_pred)
+  keras$losses$mean_squared_logarithmic_error(y_true, y_pred)
 }
+attr(loss_mean_squared_logarithmic_error, "py_function_name") <- "mean_squared_logarithmic_error"
 
 #' @rdname loss_mean_squared_error
 #' @export
 loss_squared_hinge <- function(y_true, y_pred) {
-  if (missing(y_true) && missing(y_pred))
-    keras$losses$squared_hinge
-  else
-    keras$losses$squared_hinge(y_true, y_pred)
+  keras$losses$squared_hinge(y_true, y_pred)
 }
+attr(loss_squared_hinge, "py_function_name") <- "squared_hinge"
 
 #' @rdname loss_mean_squared_error
 #' @export
 loss_hinge <- function(y_true, y_pred) {
-  if (missing(y_true) && missing(y_pred))
-    keras$losses$hinge
-  else
-    keras$losses$hinge(y_true, y_pred)
+  keras$losses$hinge(y_true, y_pred)
 }
+attr(loss_hinge, "py_function_name") <- "hinge"
 
 #' @rdname loss_mean_squared_error
 #' @export
 loss_categorical_crossentropy <- function(y_true, y_pred) {
-  if (missing(y_true) && missing(y_pred))
-    keras$losses$categorical_crossentropy
-  else
-    keras$losses$categorical_crossentropy(y_true, y_pred)
+  keras$losses$categorical_crossentropy(y_true, y_pred)
 }
+attr(loss_categorical_crossentropy, "py_function_name") <- "categorical_crossentropy"
 
 
 #' @rdname loss_mean_squared_error
 #' @export
 loss_sparse_categorical_crossentropy <- function(y_true, y_pred) {
-  if (missing(y_true) && missing(y_pred))
-    keras$losses$sparse_categorical_crossentropy
-  else
-    keras$losses$sparse_categorical_crossentropy(y_true, y_pred)
+  keras$losses$sparse_categorical_crossentropy(y_true, y_pred)
 }
+attr(loss_sparse_categorical_crossentropy, "py_function_name") <- "sparse_categorical_crossentropy"
 
 #' @rdname loss_mean_squared_error
 #' @export
 loss_binary_crossentropy <- function(y_true, y_pred) {
-  if (missing(y_true) && missing(y_pred))
-    keras$losses$binary_crossentropy
-  else
-    keras$losses$binary_crossentropy(y_true, y_pred)
+  keras$losses$binary_crossentropy(y_true, y_pred)
 }
+attr(loss_binary_crossentropy, "py_function_name") <- "binary_crossentropy"
 
 #' @rdname loss_mean_squared_error
 #' @export
 loss_kullback_leibler_divergence <- function(y_true, y_pred) {
-  if (missing(y_true) && missing(y_pred))
-    keras$losses$kullback_leibler_divergence
-  else
-    keras$losses$kullback_leibler_divergence(y_true, y_pred)
+  keras$losses$kullback_leibler_divergence(y_true, y_pred)
 }
+attr(loss_kullback_leibler_divergence, "py_function_name") <- "kullback_leibler_divergence"
 
 #' @rdname loss_mean_squared_error
 #' @export
 loss_poisson <- function(y_true, y_pred) {
-  if (missing(y_true) && missing(y_pred))
-    keras$losses$poisson
-  else
-    keras$losses$poisson(y_true, y_pred)
+  keras$losses$poisson(y_true, y_pred)
 }
+attr(loss_poisson, "py_function_name") <- "poisson"
 
 #' @rdname loss_mean_squared_error
 #' @export
 loss_cosine_proximity <- function(y_true, y_pred) {
-  if (missing(y_true) && missing(y_pred))
-    keras$losses$cosine_proximity
-  else
-    keras$losses$cosine_proximity(y_true, y_pred)
+  keras$losses$cosine_proximity(y_true, y_pred)
 }
+attr(loss_cosine_proximity, "py_function_name") <- "cosine_proximity"
 
 
 
