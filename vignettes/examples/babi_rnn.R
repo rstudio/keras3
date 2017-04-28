@@ -110,9 +110,9 @@ parse_stories <- function(lines, only_supporting = FALSE){
     ungroup() %>% 
     mutate(
       question = map(question, ~tokenize_words(.x)),
-      story = map(story, ~tokenize_words(.x))
+      story = map(story, ~tokenize_words(.x)),
+      id = row_number()
     ) %>%
-    mutate(id = row_number()) %>%
     select(id, question, answer, story)
 }
 
@@ -133,8 +133,8 @@ vectorize_stories <- function(data, vocab, story_maxlen, query_maxlen){
   
 
   list(
-    questions = questions %>% pad_sequences(maxlen = query_maxlen),
-    stories   = stories %>% pad_sequences(maxlen = story_maxlen),
+    questions = pad_sequences(questions, maxlen = query_maxlen),
+    stories   = pad_sequences(stories, maxlen = story_maxlen),
     answers   = answers
   )
 }
