@@ -238,10 +238,7 @@ preprocess_input <- function(x, preprocessor) {
 
 
 verify_application_prerequistes <- function() {
-  
-  # first force keras to load (so we don't get h5py from another installation of python)
-  ensure_keras()
-  
+
   if (!have_h5py())
     stop("The h5py Python package is required to use pre-built Keras models", call. = FALSE)
   

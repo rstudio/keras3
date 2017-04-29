@@ -17,8 +17,3 @@ keras <- NULL
   
 }
 
-# ensure that keras loads (this allows us to force binding to a version of python
-# that has keras available)
-ensure_keras <- function() {
-  keras$`__version__`
-}
