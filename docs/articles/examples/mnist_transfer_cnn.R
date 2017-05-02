@@ -1,8 +1,9 @@
-# Transfer learning toy example:
-# 
-# 1 - Train a simple convnet on the MNIST dataset the first 5 digits [0..4].
-# 2 - Freeze convolutional layers and fine-tune dense layers
-#     for the classification of digits [5..9].
+#' Transfer learning toy example:
+#' 
+#' 1) Train a simple convnet on the MNIST dataset the first 5 digits [0..4].
+#' 2) Freeze convolutional layers and fine-tune dense layers
+#'    for the classification of digits [5..9].
+#'
 
 library(keras)
 

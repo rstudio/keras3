@@ -2,6 +2,8 @@
 title: nueral_doodle.R
 ---
 
-```{r chunk, code=readLines("nueral_doodle.R"), eval=FALSE}
+```{r, echo = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+knitr::spin_child(rmarkdown::metadata$title)
 ```
 

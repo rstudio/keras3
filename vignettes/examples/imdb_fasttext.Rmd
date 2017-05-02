@@ -2,6 +2,8 @@
 title: imdb_fasttext.R
 ---
 
-```{r chunk, code=readLines("imdb_fasttext.R"), eval=FALSE}
+```{r, echo = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+knitr::spin_child(rmarkdown::metadata$title)
 ```
 

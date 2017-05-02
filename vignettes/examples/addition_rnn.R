@@ -1,28 +1,30 @@
-# An implementation of sequence to sequence learning for performing addition
-# Input: "535+61"
-# Output: "596"
-# Padding is handled by using a repeated sentinel character (space)
-# 
-# Input may optionally be inverted, shown to increase performance in many tasks in:
-# "Learning to Execute"
-# http://arxiv.org/abs/1410.4615
-# and
-# "Sequence to Sequence Learning with Neural Networks"
-# http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf
-# Theoretically it introduces shorter term dependencies between source and target.
-# 
-# Two digits inverted:
-# + One layer LSTM (128 HN), 5k training examples = 99% train/test accuracy in 55 epochs
-# 
-# Three digits inverted:
-# + One layer LSTM (128 HN), 50k training examples = 99% train/test accuracy in 100 epochs
-# 
-# Four digits inverted:
-# + One layer LSTM (128 HN), 400k training examples = 99% train/test accuracy in 20 epochs
-# 
-# Five digits inverted:
-# + One layer LSTM (128 HN), 550k training examples = 99% train/test accuracy in 30 epochs
-# 
+#' An implementation of sequence to sequence learning for performing addition
+#' 
+#' Input: "535+61"  
+#' Output: "596"  
+#' 
+#' Padding is handled by using a repeated sentinel character (space)
+#' 
+#' Input may optionally be inverted, shown to increase performance in many tasks in:
+#' "Learning to Execute"
+#' http://arxiv.org/abs/1410.4615
+#' and
+#' "Sequence to Sequence Learning with Neural Networks"
+#' http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf
+#' Theoretically it introduces shorter term dependencies between source and target.
+#' 
+#' Two digits inverted:
+#'  One layer LSTM (128 HN), 5k training examples = 99% train/test accuracy in 55 epochs
+#' 
+#' Three digits inverted:
+#'  One layer LSTM (128 HN), 50k training examples = 99% train/test accuracy in 100 epochs
+#' 
+#' Four digits inverted:
+#'  One layer LSTM (128 HN), 400k training examples = 99% train/test accuracy in 20 epochs
+#' 
+#' Five digits inverted:
+#'  One layer LSTM (128 HN), 550k training examples = 99% train/test accuracy in 30 epochs
+#' 
 
 library(keras)
 library(stringi)

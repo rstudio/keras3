@@ -2,6 +2,8 @@
 title: nueral_style_transfer.R
 ---
 
-```{r chunk, code=readLines("neural_style_transfer.R"), eval=FALSE}
+```{r, echo = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+knitr::spin_child(rmarkdown::metadata$title)
 ```
 

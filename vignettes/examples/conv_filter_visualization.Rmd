@@ -2,6 +2,8 @@
 title: conv_filter_visualization.R
 ---
 
-```{r chunk, code=readLines("conv_filter_visualization.R"), eval=FALSE}
+```{r, echo = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+knitr::spin_child(rmarkdown::metadata$title)
 ```
 

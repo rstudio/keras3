@@ -180,6 +180,12 @@ blockquote {
 
 .examples .page-header {
   border-bottom: none;
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.examples .sourceCode {
+  margin-top: 25px;
 }
 
 #sidebar .nav>li>a {
