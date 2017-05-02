@@ -410,7 +410,7 @@ call_layer <- function(layer_function, x, args) {
   if (missing(x) || is.null(x))
     layer
   else
-    compose_layer(x, layer)
+    invisible(compose_layer(x, layer))
 }
 
 
