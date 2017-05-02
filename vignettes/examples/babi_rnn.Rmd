@@ -1,0 +1,7 @@
+---
+title: babi_rnn.R
+---
+
+```{r chunk, code=readLines("babi_rnn.R"), eval=FALSE}
+```
+
