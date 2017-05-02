@@ -66,6 +66,8 @@ set_weights <- function(layer, weights) {
 }
 
 
+
+
 #' Count the total number of scalars composing the weights.
 #' 
 #' @param layer Layer or model
