@@ -18,21 +18,12 @@ library(keras)
 library(purrr)
 
 # Function Definitions ----------------------------------------------------
-vgg16_preprocess_input <- function(x){
-  # 'RGB'->'BGR'
-  x <- x[,,,c(3,2,1), drop = FALSE]
-  # Zero-center by mean pixel
-  x[,,,1] <- x[,,,1] - 103.939
-  x[,,,2] <- x[,,,2] - 116.779
-  x[,,,3] <- x[,,,3] - 123.68
-  x
-}
 
 preprocess_image <- function(image_path, height, width){
   image_load(image_path, target_size = c(height, width)) %>%
     image_to_array() %>%
     array(dim = c(1, dim(.))) %>%
-    vgg16_preprocess_input()
+    imagenet_preprocess_input()
 }
 
 deprocess_image <- function(x){
@@ -52,43 +43,16 @@ deprocess_image <- function(x){
 
 # calculates the total variation loss
 # https://en.wikipedia.org/wiki/Total_variation_denoising
-total_variation_loss <- function(x, w, h){
+total_variation_loss <- function(x, h, w){
   
-  w1 <- w - 1L
-  w2 <- w - 2L
-  h1 <- h - 1L
-  h2 <- h - 2L
-  
-  y_ij  <- x[,0:(h - 2L), 0:w2,]
-  y_i1j <- x[,1:(h - 1L), 0:w2,]
-  y_ij1 <- x[,0:(h - 2L), 1:w1,]
+  y_ij  <- x[,0:(h - 2L), 0:(w - 2L),]
+  y_i1j <- x[,1:(h - 1L), 0:(w - 2L),]
+  y_ij1 <- x[,0:(h - 2L), 1:(w - 1L),]
   
   a <- tf$square(y_ij - y_i1j)
   b <- tf$square(y_ij - y_ij1)
   tf$reduce_sum(tf$pow(a + b, 1.25))
 }
-
-# main <- reticulate::py_run_string("
-# img_height = 600
-# img_width = 600
-# from keras import backend as K
-# def continuity_loss(x):
-#   # continuity loss util function
-#   assert K.ndim(x) == 4
-#   if K.image_data_format() == 'channels_first':
-#     a = K.square(x[:, :, :img_height - 1, :img_width - 1] -
-#     x[:, :, 1:, :img_width - 1])
-#     b = K.square(x[:, :, :img_height - 1, :img_width - 1] -
-#     x[:, :, :img_height - 1, 1:])
-#   else:
-#     a = K.square(x[:, :img_height - 1, :img_width - 1, :] -
-#     x[:, 1:, :img_width - 1, :])
-#     b = K.square(x[:, :img_height - 1, :img_width - 1, :] -
-#     x[:, :img_height - 1, 1:, :])
-#   return K.sum(K.pow(a + b, 1.25))
-# ")
-# main$continuity_loss(tf$constant(img))
-# total_variation_loss(img, 600, 600)
 
 # Data Preparation --------------------------------------------------------
 
@@ -121,8 +85,8 @@ settings <- saved_settings$dreamy
 
 # Model definition --------------------------------------------------------
 
-img_height <- 600
-img_width <- 600
+img_height <- 128L
+img_width <- 170L
 img_size <- c(img_height, img_width, 3)
 
 # this will contain our generated image
@@ -130,10 +94,9 @@ dream <- layer_input(batch_shape = c(1, img_size))
 
 # build the VGG16 network with our placeholder
 # the model will be loaded with pre-trained ImageNet weights
-model <- tf$contrib$keras$applications$vgg16$VGG16(
-  input_tensor = dream,
-  weights = "imagenet",  
-  include_top=FALSE)
+model <- application_vgg16(input_tensor = dream, weights = "imagenet",
+                           include_top = FALSE)
+
 
 # get the symbolic outputs of each "key" layer (we gave them unique names).
 layer_dict <- model$layers
@@ -155,19 +118,34 @@ for(layer_name in names(settings$features)){
 
 # add continuity loss (gives image local coherence, can result in an artful blur)
 loss <- loss + settings$continuity*
-  total_variation_loss(x = dream, 600L, 600L)/
+  total_variation_loss(x = dream, image_height, image_width)/
   prod(img_size)
 # add image L2 norm to loss (prevents pixels from taking very high values, makes image darker)
 loss <- loss + settings$dream_l2*tf$reduce_sum(tf$square(dream))/prod(img_size)
 
+# feel free to further modify the loss as you see fit, to achieve new effects...
 
+# compute the gradients of the dream wrt the loss
+grads <- tf$gradients(loss, dream)
+
+outputs <- list(loss,grads) %>% unlist() %>% reticulate::r_to_py()
+f_outputs <- tf$contrib$keras$backend[["function"]](list(dream), outputs)
+
+eval_loss_and_grads <- function(image){
+  outs <- f_outputs(list(image))
+  list(
+    loss_value = outs[[1]],
+    grad_values = outs[[2]] 
+  )
+}
 
 # image_path <- "david-bowie.jpg"
 # height = 600
 # width = 600
 
-
-
+image <- image_load("vignettes/elephant.jpg") %>%
+  image_to_array()
+dim(image) <- c(1, dim(image))
 
 
 
