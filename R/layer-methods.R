@@ -1,33 +1,6 @@
 
 
 
-#  Current weights of a layer
-#  
-#  @param layer Layer 
-#  
-#  @return Weight values as a list of arrays
-#  
-#  @family layer methods
-#  
-#  @export
-get_weights <- function(layer) {
-  layer$get_weights()
-}
-
-
-#  Set the weights of a layer
-#  
-#  @inheritParams get_weights
-#    
-#  @param weights A list of arrays. The number of arrays and their shape must
-#    match the number of the dimensions of the weights of the layer (i.e. it
-#    should match the output of [get_weights()]).
-#    
-#  @export
-set_weights <- function(layer, weights) {
-  layer$set_weights(weights)
-}
-
 
 #' Layer/Model configuration
 #' 
