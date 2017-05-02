@@ -1,6 +1,5 @@
 
 #' @import reticulate
-#' @import tensorflow
 #' @import methods
 #' @import R6
 NULL

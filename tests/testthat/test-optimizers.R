@@ -6,7 +6,7 @@ test_optimizer <- function(name) {
   optimizer_fn <- eval(parse(text = name))
   test_call_succeeds(name, {
     keras_model_sequential() %>% 
-      layer_dense(32, input_shape = shape(784)) %>% 
+      layer_dense(32, input_shape = c(784)) %>% 
       compile( 
         optimizer = optimizer_fn(),
         loss='binary_crossentropy', 
