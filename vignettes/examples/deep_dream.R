@@ -16,14 +16,25 @@
 # '
 library(keras)
 library(purrr)
+library(R6)
 
 # Function Definitions ----------------------------------------------------
+
+vgg16_preprocess_input <- function(x){
+  # 'RGB'->'BGR'
+  x <- x[,,,c(3,2,1), drop = FALSE]
+  # Zero-center by mean pixel
+  x[,,,1] <- x[,,,1] - 103.939
+  x[,,,2] <- x[,,,2] - 116.779
+  x[,,,3] <- x[,,,3] - 123.68
+  x
+}
 
 preprocess_image <- function(image_path, height, width){
   image_load(image_path, target_size = c(height, width)) %>%
     image_to_array() %>%
     array(dim = c(1, dim(.))) %>%
-    imagenet_preprocess_input()
+    vgg16_preprocess_input()
 }
 
 deprocess_image <- function(x){
@@ -37,7 +48,7 @@ deprocess_image <- function(x){
   # clip to interval 0, 255
   x[x > 255] <- 255
   x[x < 0] <- 0
-  x[] <- as.integer(x)
+  x[] <- as.integer(x)/255
   x
 }
 
@@ -85,8 +96,8 @@ settings <- saved_settings$dreamy
 
 # Model definition --------------------------------------------------------
 
-img_height <- 128L
-img_width <- 170L
+img_height <- 600L
+img_width <- 600L
 img_size <- c(img_height, img_width, 3)
 
 # this will contain our generated image
@@ -118,7 +129,7 @@ for(layer_name in names(settings$features)){
 
 # add continuity loss (gives image local coherence, can result in an artful blur)
 loss <- loss + settings$continuity*
-  total_variation_loss(x = dream, image_height, image_width)/
+  total_variation_loss(x = dream, img_height, img_width)/
   prod(img_size)
 # add image L2 norm to loss (prevents pixels from taking very high values, makes image darker)
 loss <- loss + settings$dream_l2*tf$reduce_sum(tf$square(dream))/prod(img_size)
@@ -132,20 +143,78 @@ outputs <- list(loss,grads) %>% unlist() %>% reticulate::r_to_py()
 f_outputs <- tf$contrib$keras$backend[["function"]](list(dream), outputs)
 
 eval_loss_and_grads <- function(image){
+  dim(image) <- c(1, img_size)
   outs <- f_outputs(list(image))
   list(
     loss_value = outs[[1]],
-    grad_values = outs[[2]] 
+    grad_values = as.numeric(outs[[2]])
   )
 }
+
+
+Evaluator <- R6Class(
+  "Evaluator",
+  public = list(
+    
+    loss_value = NULL,
+    grad_values = NULL,
+    
+    initialize = function() {
+      self$loss_value <- NULL
+      self$grad_values <- NULL
+    },
+    
+    loss = function(x){
+      loss_and_grad <- eval_loss_and_grads(x)
+      self$loss_value <- loss_and_grad$loss_value
+      self$grad_values <- loss_and_grad$grad_values
+      self$loss_value
+    },
+    
+    grads = function(x){
+      grad_values <- self$grad_values
+      self$loss_value <- NULL
+      self$grad_values <- NULL
+      grad_values
+    }
+      
+  )
+)
+
+evaluator <- Evaluator$new()
+
 
 # image_path <- "david-bowie.jpg"
 # height = 600
 # width = 600
 
-image <- image_load("vignettes/elephant.jpg") %>%
-  image_to_array()
-dim(image) <- c(1, dim(image))
+image <- preprocess_image("img.jpg", img_height, img_width)
+
+for(i in 1:5){
+  
+  # add random jitter to initial image
+  
+  random_jitter <- settings$jitter*2*(runif(prod(img_size)) - 0.5) %>%
+    array(dim = c(1, img_size))
+  image <- image + random_jitter
+
+  opt <- optim(
+    as.numeric(image), fn = evaluator$loss, gr = evaluator$grads, 
+    method = "L-BFGS-B",
+    control = list(maxit = 7)
+    )
+  
+  print(opt$value)
+  
+  image <- opt$par
+  dim(image) <- c(1, img_size)
+  image <- image - random_jitter
+  
+  im <- deprocess_image(image)
+  
+  plot(as.raster(im))
+  
+}
 
 
 
