@@ -12,6 +12,7 @@ title: "Keras Examples"
 | [imdb_cnn_lstm.R](imdb_cnn_lstm.html) | Trains a convolutional stack followed by a recurrent stack network on the IMDB sentiment classification task. |
 | [mnist_cnn.R](mnist_cnn.html) | Trains a simple convnet on the MNIST dataset. |
 | [mnist_irnn.R](mnist_irnn.html) | Reproduction of the IRNN experiment with pixel-by-pixel sequential MNIST in "A Simple Way to Initialize Recurrent Networks of Rectified Linear Units" by Le et al. |
+| [mnist_mlp.R](mnist_mlp.html) | Trains a simple deep multi-layer perceptron on the MNIST dataset. |
 | [mnist_transfer_cnn.R](mnist_transfer_cnn.html) | Transfer learning toy example. |
 
 <!--
@@ -26,7 +27,6 @@ title: "Keras Examples"
 | [lstm_text_generation.R](lstm_text_generation.html) | Generates text from Nietzsche's writings. |
 | [mnist_acgan.R](mnist_acgan.html) | Implementation of AC-GAN ( Auxiliary Classifier GAN ) on the MNIST dataset |
 | [mnist_hierarchical_rnn.R](mnist_hierarchical_rnn.html) | Trains a Hierarchical RNN (HRNN) to classify MNIST digits. |
-| [mnist_mlp.R](mnist_mlp.html) | Trains a simple deep multi-layer perceptron on the MNIST dataset. |
 | [mnist_net2net.R](mnist_net2net.html) | Reproduction of the Net2Net experiment with MNIST in "Net2Net: Accelerating Learning via Knowledge Transfer". |
 | [mnist_siamese_graph.R](mnist_siamese_graph.html) | Trains a Siamese multi-layer perceptron on pairs of digits from the MNIST dataset. |
 | [mnist_swwae.R](mnist_swwae.html) | Trains a Stacked What-Where AutoEncoder built on residual blocks on the MNIST dataset. |
