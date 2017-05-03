@@ -20,21 +20,11 @@ library(R6)
 
 # Function Definitions ----------------------------------------------------
 
-vgg16_preprocess_input <- function(x){
-  # 'RGB'->'BGR'
-  x <- x[,,,c(3,2,1), drop = FALSE]
-  # Zero-center by mean pixel
-  x[,,,1] <- x[,,,1] - 103.939
-  x[,,,2] <- x[,,,2] - 116.779
-  x[,,,3] <- x[,,,3] - 123.68
-  x
-}
-
 preprocess_image <- function(image_path, height, width){
   image_load(image_path, target_size = c(height, width)) %>%
     image_to_array() %>%
     array(dim = c(1, dim(.))) %>%
-    vgg16_preprocess_input()
+    imagenet_preprocess_input()
 }
 
 deprocess_image <- function(x){
@@ -65,7 +55,8 @@ total_variation_loss <- function(x, h, w){
   tf$reduce_sum(tf$pow(a + b, 1.25))
 }
 
-# Data Preparation --------------------------------------------------------
+
+# Parameters --------------------------------------------------------
 
 # some settings we found interesting
 saved_settings = list(
@@ -91,14 +82,13 @@ saved_settings = list(
 )
 
 # the settings we will use in this experiment
-settings <- saved_settings$dreamy
-
-
-# Model definition --------------------------------------------------------
-
 img_height <- 600L
 img_width <- 600L
 img_size <- c(img_height, img_width, 3)
+settings <- saved_settings$dreamy
+image <- preprocess_image("img.jpg", img_height, img_width)
+
+# Model definition --------------------------------------------------------
 
 # this will contain our generated image
 dream <- layer_input(batch_shape = c(1, img_size))
@@ -122,7 +112,7 @@ for(layer_name in names(settings$features)){
   x <- layer_dict[[layer_name]]$output
   out_shape <- layer_dict[[layer_name]]$output_shape %>% unlist()
   # we avoid border artifacts by only involving non-border pixels in the loss
-  loss <- loss + coeff*tf$reduce_sum(
+  loss <- loss - coeff*tf$reduce_sum(
     tf$square(x[,3:(out_shape[2] - 1), 3:(out_shape[2] - 1),])
   )/prod(out_shape[-1])
 }
@@ -151,7 +141,14 @@ eval_loss_and_grads <- function(image){
   )
 }
 
-
+# Loss and gradients evaluator.
+# 
+# This Evaluator class makes it possible
+# to compute loss and gradients in one pass
+# while retrieving them via two separate functions,
+# "loss" and "grads". This is done because scipy.optimize
+# requires separate functions for loss and gradients,
+# but computing them separately would be inefficient.
 Evaluator <- R6Class(
   "Evaluator",
   public = list(
@@ -183,35 +180,32 @@ Evaluator <- R6Class(
 
 evaluator <- Evaluator$new()
 
-
-# image_path <- "david-bowie.jpg"
-# height = 600
-# width = 600
-
-image <- preprocess_image("img.jpg", img_height, img_width)
-
+# Run optimization (L-BFGS) over the pixels of the generated image
+# so as to minimize the loss
 for(i in 1:5){
   
   # add random jitter to initial image
-  
   random_jitter <- settings$jitter*2*(runif(prod(img_size)) - 0.5) %>%
     array(dim = c(1, img_size))
   image <- image + random_jitter
 
+  # Run L-BFGS for 7 steps
   opt <- optim(
     as.numeric(image), fn = evaluator$loss, gr = evaluator$grads, 
     method = "L-BFGS-B",
     control = list(maxit = 7)
     )
   
+  # Print loss value
   print(opt$value)
   
+  # decode the image
   image <- opt$par
   dim(image) <- c(1, img_size)
   image <- image - random_jitter
-  
+
+  # plot
   im <- deprocess_image(image)
-  
   plot(as.raster(im))
   
 }
