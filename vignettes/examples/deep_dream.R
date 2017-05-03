@@ -86,7 +86,7 @@ img_height <- 600L
 img_width <- 600L
 img_size <- c(img_height, img_width, 3)
 settings <- saved_settings$dreamy
-image <- preprocess_image("img.jpg", img_height, img_width)
+image <- preprocess_image("vignettes/examples/deep_dream.jpg", img_height, img_width)
 
 # Model definition --------------------------------------------------------
 
@@ -113,7 +113,7 @@ for(layer_name in names(settings$features)){
   out_shape <- layer_dict[[layer_name]]$output_shape %>% unlist()
   # we avoid border artifacts by only involving non-border pixels in the loss
   loss <- loss - coeff*tf$reduce_sum(
-    tf$square(x[,3:(out_shape[2] - 1), 3:(out_shape[2] - 1),])
+    tf$square(x[,3:(out_shape[2] - 2), 3:(out_shape[3] - 2),])
   )/prod(out_shape[-1])
 }
 
@@ -193,7 +193,7 @@ for(i in 1:5){
   opt <- optim(
     as.numeric(image), fn = evaluator$loss, gr = evaluator$grads, 
     method = "L-BFGS-B",
-    control = list(maxit = 7)
+    control = list(maxit = 2)
     )
   
   # Print loss value
