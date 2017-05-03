@@ -14,6 +14,7 @@ title: "Keras Examples"
 | [mnist_irnn.R](mnist_irnn.html) | Reproduction of the IRNN experiment with pixel-by-pixel sequential MNIST in "A Simple Way to Initialize Recurrent Networks of Rectified Linear Units" by Le et al. |
 | [mnist_mlp.R](mnist_mlp.html) | Trains a simple deep multi-layer perceptron on the MNIST dataset. |
 | [mnist_transfer_cnn.R](mnist_transfer_cnn.html) | Transfer learning toy example. |
+| [reuters_mlp.R](reuters_mlp.html) | Trains and evaluatea a simple MLP on the Reuters newswire topic classification task. |
 
 <!--
 | [conv_filter_visualization.R](conv_filter_visualization.html) | Visualization of the filters of VGG16, via gradient ascent in input space. |
@@ -33,7 +34,6 @@ title: "Keras Examples"
 | [neural_doodle.R](neural_doodle.html) | Neural doodle. |
 | [neural_style_transfer.R](neural_style_transfer.html) | Neural style transfer. |
 | [pretrained_word_embeddings.R](pretrained_word_embeddings.html) | Loads pre-trained word embeddings (GloVe embeddings) into a frozen Keras Embedding layer, and uses it to train a text classification model on the 20 Newsgroup dataset. |
-| [reuters_mlp.R](reuters_mlp.html) | Trains and evaluatea a simple MLP on the Reuters newswire topic classification task. |
 | [stateful_lstm.R](stateful_lstm.html) | Demonstrates how to use stateful RNNs to model long sequences efficiently. |
 | [variational_autoencoder.R](variational_autoencoder.html) | Demonstrates how to build a variational autoencoder. |
 | [variational_autoencoder_deconv.R](variational_autoencoder_deconv.html) | Demonstrates how to build a variational autoencoder with Keras using deconvolution layers. |
