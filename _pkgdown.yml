@@ -261,6 +261,7 @@ reference:
       - normalize
       - hdf5_matrix
       - get_file
+      - backend_engine
       
   - title: "Losses"
     contents:
