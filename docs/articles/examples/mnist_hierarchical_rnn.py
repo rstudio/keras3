@@ -26,11 +26,11 @@ After 5 epochs: train acc: 0.9858, val acc: 0.9864
 """
 from __future__ import print_function
 
-import keras
-from keras.datasets import mnist
-from keras.models import Model
-from keras.layers import Input, Dense, TimeDistributed
-from keras.layers import LSTM
+import tensorflow.contrib.keras.api.keras as keras
+from tensorflow.contrib.keras.api.keras.datasets import mnist
+from tensorflow.contrib.keras.api.keras.models import Model
+from tensorflow.contrib.keras.api.keras.layers import Input, Dense, TimeDistributed
+from tensorflow.contrib.keras.api.keras.layers import LSTM
 
 # Training parameters.
 batch_size = 32
