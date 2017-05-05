@@ -65,11 +65,11 @@ model %>% fit(
   verbose = 1,
   validation_data = list(x_test, y_test)
 )
-score <- model %>% evaluate(
+scores <- model %>% evaluate(
   x_test, y_test, verbose = 0
 )
 
-cat('Test loss:', score[[1]])
-cat('Test accuracy:', score[[2]])
+cat('Test loss:', scores[[1]])
+cat('Test accuracy:', scores[[2]])
 
 
