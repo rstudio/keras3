@@ -218,10 +218,8 @@ text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\
 #'   
 #' @family text tokenization
 #'   
-#' @name fit.Tokenizer   
-#'   
 #' @export
-fit.tensorflow.contrib.keras.python.keras.preprocessing.text.Tokenizer <- function(object, x, ...) {
+fit.tensorflow.keras.preprocessing.text.Tokenizer <- function(object, x, ...) {
   tokenizer <- object
   if (is.list(x))
     tokenizer$fit_on_sequences(x)
@@ -428,10 +426,8 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
 #' 
 #' @family image preprocessing
 #' 
-#' @name fit.ImageDataGenerator
-#' 
 #' @export
-fit.tensorflow.contrib.keras.python.keras.preprocessing.image.ImageDataGenerator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL, ...) {
+fit.tensorflow.keras.preprocessing.image.ImageDataGenerator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL, ...) {
   generator <- object
   history <- generator$fit(
     x = x,

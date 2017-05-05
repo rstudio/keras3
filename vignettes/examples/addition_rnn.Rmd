@@ -2,6 +2,7 @@
 title: addition_rnn.R
 ---
 
-```{r chunk, code=readLines("addition_rnn.R"), eval=FALSE}
+```{r, echo = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+knitr::spin_child(rmarkdown::metadata$title)
 ```
-

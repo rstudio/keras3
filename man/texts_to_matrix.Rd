@@ -21,7 +21,7 @@ A matrix
 Convert a list of texts to a matrix.
 }
 \seealso{
-Other text tokenization: \code{\link{fit.Tokenizer}},
+Other text tokenization: \code{\link{fit.tensorflow.keras.preprocessing.text.Tokenizer}},
   \code{\link{sequences_to_matrix}},
   \code{\link{text_tokenizer}},
   \code{\link{texts_to_sequences_generator}},

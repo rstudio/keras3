@@ -2,6 +2,9 @@
 title: mnist_cnn.R
 ---
 
-```{r chunk, code=readLines("mnist_cnn.R"), eval=FALSE}
+```{r, echo = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+knitr::spin_child(rmarkdown::metadata$title)
 ```
+
 

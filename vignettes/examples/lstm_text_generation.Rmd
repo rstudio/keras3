@@ -2,6 +2,8 @@
 title: lstm_text_generation.R
 ---
 
-```{r chunk, code=readLines("lstm_text_generation.R"), eval=FALSE}
+```{r, echo = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+knitr::spin_child(rmarkdown::metadata$title)
 ```
 

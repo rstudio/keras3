@@ -2,6 +2,7 @@
 title: deep_dream.R
 ---
 
-```{r chunk, code=readLines("deep_dream.R"), eval=FALSE}
+```{r, echo = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+knitr::spin_child(rmarkdown::metadata$title)
 ```
-

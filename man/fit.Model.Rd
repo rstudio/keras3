@@ -2,12 +2,11 @@
 % Please edit documentation in R/model.R
 \name{fit.Model}
 \alias{fit.Model}
-\alias{fit.tensorflow.contrib.keras.python.keras.engine.training.Model}
+\alias{fit.tensorflow.keras.engine.training.Model}
 \title{Train a Keras model}
 \usage{
-
-  \method{fit}{tensorflow.contrib.keras.python.keras.engine.training.Model}(object,
-  x, y, batch_size = 32, epochs = 10, verbose = 1, callbacks = NULL,
+\method{fit}{tensorflow.keras.engine.training.Model}(object, x, y,
+  batch_size = 32, epochs = 10, verbose = 1, callbacks = NULL,
   validation_split = 0, validation_data = NULL, shuffle = TRUE,
   class_weight = NULL, sample_weight = NULL, initial_epoch = 0, ...)
 }
@@ -70,9 +69,10 @@ Other model functions: \code{\link{compile}},
   \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}}, \code{\link{pop_layer}},
-  \code{\link{predict.Model}},
+  \code{\link{predict.tensorflow.keras.engine.training.Model}},
   \code{\link{predict_generator}},
   \code{\link{predict_on_batch}},
-  \code{\link{predict_proba}}, \code{\link{summary.Model}},
+  \code{\link{predict_proba}},
+  \code{\link{summary.tensorflow.keras.engine.training.Model}},
   \code{\link{train_on_batch}}
 }

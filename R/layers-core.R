@@ -410,7 +410,7 @@ call_layer <- function(layer_function, x, args) {
   if (missing(x) || is.null(x))
     layer
   else
-    compose_layer(x, layer)
+    invisible(compose_layer(x, layer))
 }
 
 
@@ -438,12 +438,12 @@ compose_layer <- function(x, layer) {
 }
 
 is_sequential_model <- function(x) {
-  inherits(x, "tensorflow.contrib.keras.python.keras.models.Sequential")
+  inherits(x, "tensorflow.keras.models.Sequential")
 }
 
 is_layer <- function(x) {
   inherits(x, "tensorflow.python.framework.ops.Tensor") ||
-    inherits(x, "tensorflow.contrib.keras.python.keras.engine.topology.Layer")
+    inherits(x, "tensorflow.keras.engine.topology.Layer")
 }
 
 
