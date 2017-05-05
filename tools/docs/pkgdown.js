@@ -14,9 +14,11 @@ $(document).ready(function() {
     var header = $(".page-header > h1");
     var script = header.text();
     var a = $("<a></a>");
-    a.text(script);
-    a.attr('href', "https://github.com/rstudio/keras/blob/master/vignettes/examples/" + script);
-    header.empty().append(a);
+    if (script != "Keras Examples") {
+      a.text(script);
+      a.attr('href', "https://github.com/rstudio/keras/blob/master/vignettes/examples/" + script);
+      header.empty().append(a);
+    }
   }
   
   // manage active state of menu based on current page
