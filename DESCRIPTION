@@ -20,7 +20,7 @@ License: MIT + file LICENSE
 URL: https://github.com/rstudio/keras
 BugReports: https://github.com/rstudio/keras/issues
 Imports:
-    reticulate (>= 0.7.0.9007), 
+    reticulate (>= 0.7.0.9008), 
     magrittr, 
     methods,
     R6

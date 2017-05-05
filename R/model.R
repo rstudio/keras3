@@ -120,7 +120,7 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
 #' @name fit.Model
 #' 
 #' @export
-fit.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
+fit.tensorflow.keras.engine.training.Model <- function(
                 object, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL,
                 validation_split=0.0, validation_data=NULL, shuffle=TRUE,
                 class_weight=NULL, sample_weight=NULL, initial_epoch=0, ...) {
@@ -185,11 +185,10 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
 #' 
 #' @family model functions
 #' 
-#' @name predict.Model
 #' 
 #' @importFrom stats predict
 #' @export
-predict.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0, ...) {
+predict.tensorflow.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0, ...) {
   
   # call predict
   model <- object
@@ -203,7 +202,7 @@ predict.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
 
 #' Generates probability or class probability predictions for the input samples.
 #' 
-#' @inheritParams predict.Model
+#' @inheritParams predict.tensorflow.keras.engine.training.Model
 #' 
 #' @param model Keras model
 #' 
@@ -233,7 +232,7 @@ predict_classes <- function(model, x, batch_size = 32, verbose = 0) {
 
 #' Returns predictions for a single batch of samples.
 #' 
-#' @inheritParams predict.Model
+#' @inheritParams predict.tensorflow.keras.engine.training.Model
 #' 
 #' @param model Keras model
 #' 
@@ -392,7 +391,7 @@ evaluate_generator <- function(model, generator, steps, max_q_size = 10, workers
 #' The generator should return the same kind of data as accepted by 
 #' `predict_on_batch()`.
 #' 
-#' @inheritParams predict.Model
+#' @inheritParams predict.tensorflow.keras.engine.training.Model
 #' 
 #' @param model Keras model
 #' @param generator Generator yielding batches of input samples.
@@ -471,10 +470,8 @@ pop_layer <- function(model) {
 #' 
 #' @family model functions
 #' 
-#' @name summary.Model
-#' 
 #' @export
-summary.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object, line_length = getOption("width"), positions = NULL, ...) {
+summary.tensorflow.keras.engine.training.Model <- function(object, line_length = getOption("width"), positions = NULL, ...) {
   if (py_is_null_xptr(object))
     cat("<pointer: 0x0>\n")
   else {
@@ -484,7 +481,7 @@ summary.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(
 
 #' @importFrom reticulate py_str
 #' @export
-py_str.tensorflow.contrib.keras.python.keras.engine.training.Model <- function(object,  line_length = getOption("width"), positions = NULL, ...) {
+py_str.tensorflow.keras.engine.training.Model <- function(object,  line_length = getOption("width"), positions = NULL, ...) {
   paste0("Model\n", py_capture_output(object$summary(line_length = line_length, positions = positions), type = "stdout"))
 }
 

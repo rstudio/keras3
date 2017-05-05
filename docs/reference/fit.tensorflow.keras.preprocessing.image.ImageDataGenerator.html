@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Layer/Model configuration — get_config • keras</title>
+<title>Fit image data generator internal statistics to some sample data. — fit.tensorflow.keras.preprocessing.image.ImageDataGenerator • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -112,64 +112,53 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Layer/Model configuration</h1>
+    <h1>Fit image data generator internal statistics to some sample data.</h1>
     </div>
 
     
-    <p>A layer config is an object returned from <code>get_config()</code> that contains the
-configuration of a layer or model. The same layer or model can be
-reinstantiated later (without its trained weights) from this configuration
-using <code>from_config()</code>. The config does not include connectivity information,
-nor the class name (those are handled externally).</p>
+    <p>Required for <code>featurewise_center</code>, <code>featurewise_std_normalization</code>
+and <code>zca_whitening</code>.</p>
     
 
-    <pre class="usage"><span class='fu'>get_config</span>(<span class='no'>layer</span>)
-
-<span class='fu'>from_config</span>(<span class='no'>config</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for tensorflow.keras.preprocessing.image.ImageDataGenerator</span>
+<span class='fu'><a href='fit.html'>fit</a></span>(<span class='no'>object</span>, <span class='no'>x</span>,
+  <span class='kw'>augment</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rounds</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>layer</th>
-      <td><p>Layer or model</p></td>
+      <th>object</th>
+      <td><p><code><a href='image_data_generator.html'>image_data_generator()</a></code></p></td>
     </tr>
     <tr>
-      <th>config</th>
-      <td><p>Object with layer or model configuration</p></td>
+      <th>x</th>
+      <td><p>array, the data to fit on (should have rank 4). In case of grayscale data,
+the channels axis should have value 1, and in case of RGB data, it should have value 3.</p></td>
+    </tr>
+    <tr>
+      <th>augment</th>
+      <td><p>Whether to fit on randomly augmented samples</p></td>
+    </tr>
+    <tr>
+      <th>rounds</th>
+      <td><p>If <code>augment</code>, how many augmentation passes to do over the data</p></td>
+    </tr>
+    <tr>
+      <th>seed</th>
+      <td><p>random seed.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Unused</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p><code>get_config()</code> returns an object with the configuration,
-<code>from_config()</code> returns a re-instantation of hte object.</p>
-    
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>Objects returned from <code>get_config()</code> are not serializable. Therefore,
-if you want to save and restore a model across sessions, you can use the
-<code>model_to_json()</code> or <code>model_to_yaml()</code> functions (for model configuration
-only, not weights) or the <code>save_model()</code> function to save the model
-configuration and weights to a file.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
-  <code><a href='evaluate_generator.html'>evaluate_generator</a></code>, <code><a href='evaluate.html'>evaluate</a></code>,
-  <code><a href='fit.Model.html'>fit.Model</a></code>, <code><a href='fit_generator.html'>fit_generator</a></code>,
-  <code><a href='get_layer.html'>get_layer</a></code>,
-  <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
-  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='pop_layer.html'>pop_layer</a></code>,
-  <code><a href='predict.tensorflow.keras.engine.training.Model.html'>predict.tensorflow.keras.engine.training.Model</a></code>,
-  <code><a href='predict_generator.html'>predict_generator</a></code>,
-  <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
-  <code><a href='predict_proba.html'>predict_proba</a></code>,
-  <code><a href='summary.tensorflow.keras.engine.training.Model.html'>summary.tensorflow.keras.engine.training.Model</a></code>,
-  <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
-<p>Other layer methods: <code><a href='count_params.html'>count_params</a></code>,
-  <code><a href='get_input_at.html'>get_input_at</a></code>, <code><a href='get_weights.html'>get_weights</a></code>,
-  <code><a href='reset_states.html'>reset_states</a></code></p>
+    <p>Other image preprocessing: <code><a href='flow_images_from_data.html'>flow_images_from_data</a></code>,
+  <code><a href='flow_images_from_directory.html'>flow_images_from_directory</a></code>,
+  <code><a href='image_load.html'>image_load</a></code>, <code><a href='image_to_array.html'>image_to_array</a></code></p>
     
 
   </div>
@@ -178,10 +167,6 @@ configuration and weights to a file.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#note">Note</a></li>
-
       <li><a href="#see-also">See also</a></li>
           </ul>
 

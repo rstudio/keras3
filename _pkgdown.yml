@@ -40,13 +40,13 @@ reference:
     contents:
       - keras_model
       - keras_model_sequential
-      - summary.Model
+      - summary.tensorflow.keras.engine.training.Model
       - compile
-      - fit.Model
+      - fit.tensorflow.keras.engine.training.Model
       - fit_generator
       - evaluate
       - evaluate_generator
-      - predict.Model
+      - predict.tensorflow.keras.engine.training.Model
       - predict_proba
       - predict_classes
       - predict_on_batch
@@ -190,7 +190,7 @@ reference:
   - title: "Text Preprocessing"
     contents:
       - text_tokenizer
-      - fit.Tokenizer
+      - fit.tensorflow.keras.preprocessing.text.Tokenizer
       - texts_to_sequences
       - texts_to_sequences_generator
       - texts_to_matrix
@@ -203,7 +203,7 @@ reference:
       - image_load
       - image_to_array
       - image_data_generator
-      - fit.ImageDataGenerator
+      - fit.tensorflow.keras.preprocessing.image.ImageDataGenerator
       - flow_images_from_data
       - flow_images_from_directory
  
