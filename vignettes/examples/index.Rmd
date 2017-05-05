@@ -8,6 +8,7 @@ title: "Keras Examples"
 | [babi_memnn.R](babi_memnn.html) | Trains a memory network on the bAbI dataset for reading comprehension. |
 | [babi_rnn.R](babi_rnn.html) | Trains a two-branch recurrent network on the bAbI dataset for reading comprehension. |
 | [cifar10_cnn.R](cifar10_cnn.html) | Trains a simple deep CNN on the CIFAR10 small images dataset. |
+| [imdb_bidirectional_lstm.R](imdb_bidirectional_lstm.html) | Trains a Bidirectional LSTM on the IMDB sentiment classification task. |
 | [imdb_cnn.R](imdb_cnn.html) | Demonstrates the use of Convolution1D for text classification. |
 | [imdb_cnn_lstm.R](imdb_cnn_lstm.html) | Trains a convolutional stack followed by a recurrent stack network on the IMDB sentiment classification task. |
 | [mnist_cnn.R](mnist_cnn.html) | Trains a simple convnet on the MNIST dataset. |
@@ -21,7 +22,6 @@ title: "Keras Examples"
 | [conv_lstm.R](conv_lstm.html) | Demonstrates the use of a convolutional LSTM network. |
 | [deep_dream.R](deep_dream.html) | Deep Dreams in Keras. |
 | [image_ocr.R](image_ocr.html) | Trains a convolutional stack followed by a recurrent stack and a CTC logloss function to perform optical character recognition (OCR). |
-| [imdb_bidirectional_lstm.R](imdb_bidirectional_lstm.html) | Trains a Bidirectional LSTM on the IMDB sentiment classification task. |
 | [imdb_fasttext.R](imdb_fasttext.html) | Trains a FastText model on the IMDB sentiment classification task. |
 | [imdb_lstm.R](imdb_lstm.html) | Trains a LSTM on the IMDB sentiment classification task. |
 | [lstm_benchmark.R](lstm_benchmark.html) | Compares different LSTM implementations on the IMDB sentiment classification task. |
