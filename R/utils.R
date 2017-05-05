@@ -121,7 +121,7 @@ normalize <- function(x, axis = -1, order = 2) {
 #' @return Reference to Keras backend python module.
 #'  
 #' @export   
-backend_engine <- function() {
+backend <- function() {
   keras$backend
 }
 
