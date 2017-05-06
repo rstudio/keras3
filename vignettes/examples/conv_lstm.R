@@ -80,6 +80,60 @@ generate_movies <- function(n_samples = 1200, n_frames = 15){
 }
 
 
+# Data Preparation --------------------------------------------------------
+
+# Artificial data generation:
+# Generate movies with 3 to 7 moving squares inside.
+# The squares are of shape 1x1 or 2x2 pixels,
+# which move linearly over time.
+# For convenience we first create movies with bigger width and height (80x80)
+# and at the end we select a 40x40 window.
+movies <- generate_movies(n_samples = 1200, n_frames = 15)
+
+
+# Model definition --------------------------------------------------------
+
+model <- keras_model_sequential()
+
+model %>%
+  layer_conv_lstm_2d(
+    input_shape = c(15,40,40,1), 
+    filters = 40, kernel_size = c(3,3),
+    padding = "same", 
+    return_sequences = TRUE
+    ) %>%
+  layer_batch_normalization() %>%
+  
+  layer_conv_lstm_2d(
+    filters = 40, kernel_size = c(3,3),
+    padding = "same", return_sequences = TRUE
+  ) %>%
+  layer_batch_normalization() %>%
+  
+  layer_conv_lstm_2d(
+    filters = 40, kernel_size = c(3,3),
+    padding = "same", return_sequences = TRUE
+  ) %>%
+  layer_batch_normalization() %>%
+  
+  layer_conv_lstm_2d(
+    filters = 40, kernel_size = c(3,3),
+    padding = "same", return_sequences = TRUE
+  ) %>%
+  layer_batch_normalization() %>%
+  
+  layer_conv_3d(
+    filters = 1, kernel_size = c(3,3,3),
+    activation = "sigmoid", 
+    padding = "same", data_format ="channels_last"
+  )
+
+model %>% compile(
+  loss = "binary_crossentropy", 
+  optimizer = "adadelta"
+)
+
+model
 
 
 

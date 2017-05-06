@@ -841,12 +841,13 @@ layer_conv_lstm_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), pad
                                unit_forget_bias = TRUE, kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, 
                                activity_regularizer = NULL, kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
                                return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, dropout = 0.0, recurrent_dropout = 0.0,
-                               batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
+                               batch_size = NULL, name = NULL, trainable = NULL, weights = NULL, input_shape = NULL) {
   
   call_layer(keras$layers$ConvLSTM2D, x, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
+    padding = padding,
     data_format = data_format,
     dilation_rate = as.integer(dilation_rate),
     activation = activation,
@@ -871,7 +872,8 @@ layer_conv_lstm_2d <- function(x, filters, kernel_size, strides = c(1L, 1L), pad
     batch_size = as_nullable_integer(batch_size),
     name = name,
     trainable = trainable,
-    weights = weights
+    weights = weights,
+    input_shape = normalize_shape(input_shape)
   ))
   
 }
