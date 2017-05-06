@@ -1,20 +1,12 @@
-# Deep Dreaming in Keras.
-# 
-# Run the script with:
-# ```
-# python deep_dream.py path_to_your_base_image.jpg prefix_for_results
-# ```
-# e.g.:
-# ```
-# python deep_dream.py img/mypic.jpg results/dream
-# ```
-# 
-# It is preferable to run this script on GPU, for speed.
-# If running on CPU, prefer the TensorFlow backend (much faster).
-# 
-# Example results: http://i.imgur.com/FX6ROg9.jpg
-# '
+#' Deep Dreaming in Keras.
+#' 
+#' It is preferable to run this script on GPU, for speed.
+#' 
+#' Example results: http://i.imgur.com/FX6ROg9.jpg
+#'
+
 library(keras)
+library(tensorflow)
 library(purrr)
 library(R6)
 K <- backend()
@@ -87,8 +79,7 @@ img_height <- 600L
 img_width <- 600L
 img_size <- c(img_height, img_width, 3)
 settings <- saved_settings$dreamy
-image <- preprocess_image("vignettes/examples/deep_dream.jpg", 
-                          img_height, img_width)
+image <- preprocess_image("deep_dream.jpg", img_height, img_width)
 
 # Model definition --------------------------------------------------------
 
