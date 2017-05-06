@@ -17,6 +17,7 @@
 library(keras)
 library(purrr)
 library(R6)
+K <- backend()
 
 # Function Definitions ----------------------------------------------------
 
@@ -50,9 +51,9 @@ total_variation_loss <- function(x, h, w){
   y_i1j <- x[,1:(h - 1L), 0:(w - 2L),]
   y_ij1 <- x[,0:(h - 2L), 1:(w - 1L),]
   
-  a <- tf$square(y_ij - y_i1j)
-  b <- tf$square(y_ij - y_ij1)
-  tf$reduce_sum(tf$pow(a + b, 1.25))
+  a <- K$square(y_ij - y_i1j)
+  b <- K$square(y_ij - y_ij1)
+  K$sum(K$pow(a + b, 1.25))
 }
 
 
@@ -86,7 +87,8 @@ img_height <- 600L
 img_width <- 600L
 img_size <- c(img_height, img_width, 3)
 settings <- saved_settings$dreamy
-image <- preprocess_image("vignettes/examples/deep_dream.jpg", img_height, img_width)
+image <- preprocess_image("vignettes/examples/deep_dream.jpg", 
+                          img_height, img_width)
 
 # Model definition --------------------------------------------------------
 
@@ -107,14 +109,13 @@ names(layer_dict) <- map_chr(layer_dict ,~.x$name)
 loss <- tf$Variable(0.0)
 for(layer_name in names(settings$features)){
   # add the L2 norm of the features of a layer to the loss
-  stopifnot(layer_name %in% names(layer_dict))
   coeff <- settings$features[[layer_name]]
   x <- layer_dict[[layer_name]]$output
   out_shape <- layer_dict[[layer_name]]$output_shape %>% unlist()
   # we avoid border artifacts by only involving non-border pixels in the loss
-  loss <- loss - coeff*tf$reduce_sum(
-    tf$square(x[,3:(out_shape[2] - 2), 3:(out_shape[3] - 2),])
-  )/prod(out_shape[-1])
+  loss <- loss - 
+    coeff*K$sum(K$square(x[,3:(out_shape[2] - 2), 3:(out_shape[3] - 2),])) / 
+    prod(out_shape[-1])
 }
 
 # add continuity loss (gives image local coherence, can result in an artful blur)
@@ -122,15 +123,14 @@ loss <- loss + settings$continuity*
   total_variation_loss(x = dream, img_height, img_width)/
   prod(img_size)
 # add image L2 norm to loss (prevents pixels from taking very high values, makes image darker)
-loss <- loss + settings$dream_l2*tf$reduce_sum(tf$square(dream))/prod(img_size)
+loss <- loss + settings$dream_l2*K$sum(K$square(dream))/prod(img_size)
 
 # feel free to further modify the loss as you see fit, to achieve new effects...
 
 # compute the gradients of the dream wrt the loss
-grads <- tf$gradients(loss, dream)
+grads <- K$gradients(loss, dream)[[1]] 
 
-outputs <- list(loss,grads) %>% unlist() %>% reticulate::r_to_py()
-f_outputs <- tf$contrib$keras$backend[["function"]](list(dream), outputs)
+f_outputs <- K$`function`(list(dream), list(loss,grads))
 
 eval_loss_and_grads <- function(image){
   dim(image) <- c(1, img_size)
@@ -189,7 +189,7 @@ for(i in 1:5){
     array(dim = c(1, img_size))
   image <- image + random_jitter
 
-  # Run L-BFGS for 7 steps
+  # Run L-BFGS
   opt <- optim(
     as.numeric(image), fn = evaluator$loss, gr = evaluator$grads, 
     method = "L-BFGS-B",
