@@ -72,6 +72,9 @@ generate_movies <- function(n_samples = 1200, n_frames = 15){
   noisy_movies[noisy_movies > 1] <- 1
   shifted_movies[shifted_movies > 1] <- 1
 
+  # add channel dimension
+  dim(noisy_movies) <- c(dim(noisy_movies), 1)
+  dim(shifted_movies) <- c(dim(shifted_movies), 1)
   
   list(
     noisy_movies = noisy_movies,
@@ -88,7 +91,8 @@ generate_movies <- function(n_samples = 1200, n_frames = 15){
 # which move linearly over time.
 # For convenience we first create movies with bigger width and height (80x80)
 # and at the end we select a 40x40 window.
-movies <- generate_movies(n_samples = 1200, n_frames = 15)
+movies <- generate_movies(n_samples = 1000, n_frames = 15)
+more_movies <- generate_movies(n_samples = 200, n_frames = 15)
 
 
 # Model definition --------------------------------------------------------
@@ -134,6 +138,17 @@ model %>% compile(
 )
 
 model
+
+
+# Training ----------------------------------------------------------------
+
+model %>% fit(
+  movies$noisy_movies,
+  movies$shifted_movies,
+  batch_size = 10,
+  epochs = 300, 
+  validation_split = 0.05
+)
 
 
 
