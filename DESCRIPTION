@@ -3,8 +3,8 @@ Type: Package
 Title: R Interface to Keras
 Version: 0.3
 Authors@R: c(
-  person("François", "Chollet", role = c("aut", "cph")),
   person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
+  person("François", "Chollet", role = c("aut", "cph")),
   person("RStudio", role = c("cph", "fnd")),
   person(family = "Google", role = c("ctb", "cph", "fnd")),
   person("Yuan", "Tang", role = c("ctb", "cph")),
