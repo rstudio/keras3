@@ -6,6 +6,7 @@
 #'
 
 library(keras)
+library(tensorflow)
 library(purrr)
 library(R6)
 K <- backend()
