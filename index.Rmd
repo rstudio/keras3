@@ -14,7 +14,6 @@ x_test <- matrix(rexp(10*100), nrow = 10, ncol = 100)
 y_test <- matrix(round(runif(10*10, min = 0, max = 9)), nrow = 10, ncol = 10)
 ```
 
-
 # R interface to Keras
 
 [Keras](https://keras.io/) is a high-level neural networks API developed with a focus on enabling fast experimentation. *Being able to go from idea to result with the least possible delay is key to doing good research.* Use Keras if you need a deep learning library that:
@@ -22,6 +21,20 @@ y_test <- matrix(round(runif(10*10, min = 0, max = 9)), nrow = 10, ncol = 10)
 - Allows for easy and fast prototyping (through user friendliness, modularity, and extensibility).
 - Supports both convolutional networks and recurrent networks, as well as combinations of the two.
 - Runs seamlessly on CPU and GPU.
+
+This website provides documentation for the R interface to Keras. See the main Keras  website at <https://keras.io> for additional information on the project.
+
+## Installation
+
+The R interface to Keras uses [TensorFlow](https://rstudio.github.io/tensorflow/) as it's underlying computation engine. Therefore, you need to install TensorFlow (version 1.1 or higher) before using the package. 
+
+Instructions for installing TensorFlow are here: <https://www.tensorflow.org/install/>.
+
+You can install the Keras R package from GitHub as follows:
+
+```r
+devtools::install_github("rstudio/keras", auth_token = "7536398b6aeebf87b8d128830d509b88a21a822c")
+```
 
 ## Getting started: 30 seconds to Keras
 
@@ -77,17 +90,6 @@ To learn more about Keras, you can check out these articles:
 The [examples](articles/examples) demonstrate more advanced models including transfer learning, variational auto-encoding, question-answering with memory networks, text generation with stacked LSTMs, etc.
 
 The [function reference](reference/index.html) includes detailed information on all of the functions available in the package.
-
-
-## Installation
-
-1. The R interface to Keras uses [TensorFlow](https://rstudio.github.io/tensorflow/) as it's underlying computation engine. Therefore, you need to install TensorFlow (version 1.1 or higher) before using the package. Instructions for installing TensorFlow are here: <https://www.tensorflow.org/install/>.
-
-2. Then, install the Keras R package from GitHub:
-
-    ```r
-    devtools::install_github("rstudio/keras")
-    ```
 
 ## Why this name, Keras?
 

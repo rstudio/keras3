@@ -192,3 +192,7 @@ blockquote {
   padding-top: 1px;
   padding-bottom: 2px;
 }
+
+#installation .sourceCode {
+  font-size: 13px;
+}
