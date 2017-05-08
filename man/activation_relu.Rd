@@ -22,7 +22,7 @@ activation_linear(x)
 
 activation_sigmoid(x)
 
-activation_softmax(x)
+activation_softmax(x, axis = -1)
 
 activation_softplus(x)
 
@@ -36,6 +36,8 @@ activation_tanh(x)
 \item{alpha}{Alpha value}
 
 \item{max_value}{Max value}
+
+\item{axis}{Integer, axis along which the softmax normalization is applied}
 }
 \description{
 Activations functions can either be used through \code{\link[=layer_activation]{layer_activation()}}, or
