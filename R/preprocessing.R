@@ -310,7 +310,7 @@ sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count"
 #' @export
 image_load <- function(path, grayscale = FALSE, target_size = NULL) {
 
-  if (!have_Pillow())
+  if (!have_pillow())
     stop("The Pillow Python package is required to load images")
   
   # normalize target_size

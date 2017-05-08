@@ -517,7 +517,7 @@ have_requests <- function() {
   have_module("requests")
 }
 
-have_Pillow <- function() {
+have_pillow <- function() {
   have_module("PIL") # aka Pillow
 }
 
