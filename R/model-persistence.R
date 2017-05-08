@@ -141,12 +141,20 @@ model_from_json <- function(json, custom_objects = NULL) {
 #' 
 #' @export
 model_to_yaml <- function(model) {
+  
+  if (!have_pyyaml())
+    stop("The pyyaml Python package is required to save and load models as YAML")
+  
   model$to_yaml()  
 }
 
 #' @rdname model_to_yaml
 #' @export
 model_from_yaml <- function(yaml, custom_objects = NULL) {
+  
+  if (!have_pyyaml())
+    stop("The pyyaml Python package is required to save and load models as YAML")
+  
   keras$models$model_from_yaml(yaml, custom_objects)
 }
 
