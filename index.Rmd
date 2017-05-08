@@ -24,18 +24,6 @@ y_test <- matrix(round(runif(10*10, min = 0, max = 9)), nrow = 10, ncol = 10)
 
 This website provides documentation for the R interface to Keras. See the main Keras  website at <https://keras.io> for additional information on the project.
 
-## Installation
-
-The R interface to Keras uses [TensorFlow](https://rstudio.github.io/tensorflow/) as it's underlying computation engine. Therefore, you need to install TensorFlow (version 1.1 or higher) before using the package. 
-
-Instructions for installing TensorFlow are here: <https://www.tensorflow.org/install/>.
-
-You can install the Keras R package from GitHub as follows:
-
-```r
-devtools::install_github("rstudio/keras", auth_token = "7536398b6aeebf87b8d128830d509b88a21a822c")
-```
-
 ## Getting started: 30 seconds to Keras
 
 The core data structure of Keras is a **model**, a way to organize layers. The simplest type of model is the Sequential model, a linear stack of layers. For more complex architectures, you should use the Keras functional API, which allows to build arbitrary graphs of layers.
@@ -78,6 +66,59 @@ classes <- model %>% predict(x_test, batch_size = 128)
 ```
 
 Building a question answering system, an image classification model, a Neural Turing Machine, or any other model is just as fast. The ideas behind deep learning are simple, so why should their implementation be painful?
+
+## Installation
+
+1. Install TensorFlow
+
+    The R interface to Keras uses [TensorFlow](https://rstudio.github.io/tensorflow/) as it's underlying computation engine. Therefore, you need to install TensorFlow (version 1.1 or higher) before using the package. Instructions on doing this for various platforms can be found here:
+    
+    - [Installing TensorFlow on Mac OS X](https://www.tensorflow.org/install/install_mac)
+    
+    - [Installing TensorFlow on Ubuntu](https://www.tensorflow.org/install/install_linux)
+    
+    - [Installing TensorFlow on Windows](https://www.tensorflow.org/install/install_windows)
+
+2. Install additional Keras dependencies:
+
+    The Keras library has a number of optional features that carry additional dependencies. To satisfy all of these dependencies you can execute the following:
+
+    ```bash
+    source ~/tensorflow/bin/activate  # (activate whatever environment you installed TF within)
+    pip install --upgrade scipy h5py pyyaml requests Pillow   # for Python 2.7
+    pip3 install --upgrade scipy h5py pyyaml requests Pillow  # for Python 3.n
+    ```
+    
+    Note that the first step will vary based on your environment and where you installed TensorFlow (e.g. whether you need to use a version of python/pip not on the PATH; whether you used a virtualenv or condaenv, etc.).
+
+3. Install the Keras R package:
+
+    You can install the Keras R package from GitHub as follows:
+
+    ```r
+    devtools::install_github("rstudio/keras", auth_token = "7536398b6aeebf87b8d128830d509b88a21a822c")
+    ```
+
+4. Test your installation:
+
+    Test to see whether Keras is working properly with:
+   
+    ```r
+    library(keras)
+    keras_model_sequential()
+    ```
+   
+    If you receive an error it's possible that the keras R package can't find the version of TensorFlow you installed. You can provide hints as to the location of TensorFlow using the [configuration functions](https://rstudio.github.io/reticulate/articles/versions.html) `use_python`, `use_virtualenv`, and `use_condaenv`. For example:
+   
+    ```r
+    library(keras)
+    use_python("/usr/local/bin/python")
+    use_virtualenv("~/path/to/my/virtualenv")
+    use_condaenv("envname")
+    ```
+
+
+## Learning More
 
 To learn more about Keras, you can check out these articles:
 

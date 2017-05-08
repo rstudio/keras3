@@ -105,14 +105,6 @@
 <li>Runs seamlessly on CPU and GPU.</li>
 </ul>
 <p>This website provides documentation for the R interface to Keras. See the main Keras website at <a href="https://keras.io" class="uri">https://keras.io</a> for additional information on the project.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>The R interface to Keras uses <a href="https://rstudio.github.io/tensorflow/">TensorFlow</a> as it’s underlying computation engine. Therefore, you need to install TensorFlow (version 1.1 or higher) before using the package.</p>
-<p>Instructions for installing TensorFlow are here: <a href="https://www.tensorflow.org/install/" class="uri">https://www.tensorflow.org/install/</a>.</p>
-<p>You can install the Keras R package from GitHub as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"rstudio/keras"</span>, <span class="dt">auth_token =</span> <span class="st">"7536398b6aeebf87b8d128830d509b88a21a822c"</span>)</code></pre></div>
-</div>
 <div id="getting-started-30-seconds-to-keras" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-started-30-seconds-to-keras" class="anchor"></a>Getting started: 30 seconds to Keras</h2>
@@ -139,6 +131,49 @@ model %&gt;%<span class="st"> </span>
 <p>Or generate predictions on new data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classes &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span><span class="kw">predict</span>(x_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
 <p>Building a question answering system, an image classification model, a Neural Turing Machine, or any other model is just as fast. The ideas behind deep learning are simple, so why should their implementation be painful?</p>
+</div>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<ol style="list-style-type: decimal">
+<li>
+<p>Install TensorFlow</p>
+<p>The R interface to Keras uses <a href="https://rstudio.github.io/tensorflow/">TensorFlow</a> as it’s underlying computation engine. Therefore, you need to install TensorFlow (version 1.1 or higher) before using the package. Instructions on doing this for various platforms can be found here:</p>
+<ul>
+<li><p><a href="https://www.tensorflow.org/install/install_mac">Installing TensorFlow on Mac OS X</a></p></li>
+<li><p><a href="https://www.tensorflow.org/install/install_linux">Installing TensorFlow on Ubuntu</a></p></li>
+<li><p><a href="https://www.tensorflow.org/install/install_windows">Installing TensorFlow on Windows</a></p></li>
+</ul>
+</li>
+<li>
+<p>Install additional Keras dependencies:</p>
+<p>The Keras library has a number of optional features that carry additional dependencies. To satisfy all of these dependencies you can execute the following:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">source</span> ~/tensorflow/bin/activate  <span class="co"># (activate whatever environment you installed TF within)</span>
+<span class="kw">pip</span> install --upgrade scipy h5py pyyaml requests Pillow   <span class="co"># for Python 2.7</span>
+<span class="kw">pip3</span> install --upgrade scipy h5py pyyaml requests Pillow  <span class="co"># for Python 3.n</span></code></pre></div>
+<p>Note that the first step will vary based on your environment and where you installed TensorFlow (e.g. whether you need to use a version of python/pip not on the PATH; whether you used a virtualenv or condaenv, etc.).</p>
+</li>
+<li>
+<p>Install the Keras R package:</p>
+<p>You can install the Keras R package from GitHub as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"rstudio/keras"</span>, <span class="dt">auth_token =</span> <span class="st">"7536398b6aeebf87b8d128830d509b88a21a822c"</span>)</code></pre></div>
+</li>
+<li>
+<p>Test your installation:</p>
+<p>Test to see whether Keras is working properly with:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+<span class="kw"><a href="reference/keras_model_sequential.html">keras_model_sequential</a></span>()</code></pre></div>
+<p>If you receive an error it’s possible that the keras R package can’t find the version of TensorFlow you installed. You can provide hints as to the location of TensorFlow using the <a href="https://rstudio.github.io/reticulate/articles/versions.html">configuration functions</a> <code>use_python</code>, <code>use_virtualenv</code>, and <code>use_condaenv</code>. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+<span class="kw"><a href="reference/reexports.html">use_python</a></span>(<span class="st">"/usr/local/bin/python"</span>)
+<span class="kw"><a href="reference/reexports.html">use_virtualenv</a></span>(<span class="st">"~/path/to/my/virtualenv"</span>)
+<span class="kw"><a href="reference/reexports.html">use_condaenv</a></span>(<span class="st">"envname"</span>)</code></pre></div>
+</li>
+</ol>
+</div>
+<div id="learning-more" class="section level2">
+<h2 class="hasAnchor">
+<a href="#learning-more" class="anchor"></a>Learning More</h2>
 <p>To learn more about Keras, you can check out these articles:</p>
 <ul>
 <li><p><a href="articles/sequential_model.html">Guide to the Sequential Model</a></p></li>
