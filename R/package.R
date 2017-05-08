@@ -15,7 +15,7 @@ keras <- NULL
   
     # confirm required tf version
     tf_version <- tensorflow_version()
-    required_tf_version <- "1.2"
+    required_tf_version <- "1.1"
     if (tf_version < required_tf_version) {
       message("Keras loaded from TensorFlow version ", tf_version, ", however version ",
               required_tf_version, " is required. Please update TensorFlow.")
