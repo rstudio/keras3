@@ -5,7 +5,7 @@
 \title{Generates predictions for the input samples from a data generator.}
 \usage{
 predict_generator(model, generator, steps, max_q_size = 10, workers = 1,
-  pickle_safe = FALSE, verbose = 0)
+  pickle_safe = FALSE)
 }
 \arguments{
 \item{model}{Keras model}
@@ -24,8 +24,6 @@ based threading}
 this implementation relies on multiprocessing, you should not pass non
 picklable arguments to the generator as they can't be passed easily to
 children processes.}
-
-\item{verbose}{verbosity mode, 0 or 1.}
 }
 \value{
 Numpy array(s) of predictions.
