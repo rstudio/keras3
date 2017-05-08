@@ -19,12 +19,8 @@ cifar10 <- dataset_cifar10()
 
 x_train <- cifar10$train$x/255
 x_test <- cifar10$test$x/255
-
-y_train <- cifar10$train$y %>%
-  to_categorical(num_classes = 10)
-
-y_test <- cifar10$test$y %>%
-  to_categorical(num_classes = 10)
+y_train <- to_categorical(cifar10$train$y, num_classes = 10)
+y_test <- to_categorical(cifar10$test$y, num_classes = 10)
 
 # Defining the model ------------------------------------------------------
 
