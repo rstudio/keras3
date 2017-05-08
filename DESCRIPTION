@@ -19,10 +19,9 @@ Encoding: UTF-8
 License: MIT + file LICENSE
 URL: https://github.com/rstudio/keras
 BugReports: https://github.com/rstudio/keras/issues
-Depends: 
-    tensorflow (>= 0.7)
 Imports:
     reticulate (>= 0.7.0.9008), 
+    tensorflow (>= 0.7.0.9002),
     magrittr, 
     methods,
     R6
@@ -31,6 +30,7 @@ Suggests:
     knitr
 Remotes:
     rstudio/reticulate
+    rstudio/tensorflow
 SystemRequirements: TensorFlow >= 1.1 (https://www.tensorflow.org/)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
