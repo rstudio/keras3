@@ -22,7 +22,7 @@ y_test <- matrix(round(runif(10*10, min = 0, max = 9)), nrow = 10, ncol = 10)
 - Supports both convolutional networks and recurrent networks, as well as combinations of the two.
 - Runs seamlessly on CPU and GPU.
 
-This website provides documentation for the R interface to Keras. See the main Keras  website at <https://keras.io> for additional information on the project.
+This website provides documentation for the R interface to Keras. See the main Keras website at <https://keras.io> for additional information on the project.
 
 ## Getting started: 30 seconds to Keras
 
@@ -47,8 +47,6 @@ model %>% compile(
   metrics = c('accuracy')
 )
 ```
-
-Note that Keras objects are [modified in place](faq.html#why-are-keras-objects-modified-in-place-in-the-r-api) which is why it's not necessary for `model` to be assigned back to after layers are added or after it is compiled.
 
 You can now iterate on your training data in batches (`x_train` and `y_train` are R matrices):
 
