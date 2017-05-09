@@ -39,9 +39,27 @@ Below are some common definitions that are necessary to know and understand to c
   - When using `evaluation_data` or `evaluation_split` with the `fit` method of Keras models, evaluation will be run at the end of every **epoch**.
   - Within Keras, there is the ability to add [callbacks](training_callbacks.html) specifically designed to be run at the end of an **epoch**. Examples of these are learning rate changes and model checkpointing (saving).
 
-## How can I save a Keras model?
+## Why are Keras objects modified in place?
 
-*It is not recommended to use pickle or cPickle to save a Keras model.*
+Unlike most R objects, Keras objects are "mutable". That means that when you modify an object you're modifying it "in place", and you don't need to assign the updated object back to the original name. For example, to add layers to a Keras model you might use this code:
+
+```{r}
+model %>% 
+  layer_dense(units = 32, activation = 'relu', input_shape = c(784)) %>% 
+  layer_dense(units = 10, activation = 'softmax')
+```
+
+Rather than this code:
+
+```{r}
+model <- model %>% 
+  layer_dense(units = 32, activation = 'relu', input_shape = c(784)) %>% 
+  layer_dense(units = 10, activation = 'softmax')
+```
+
+You need to be aware of this because it makes the Keras API a little different than most other pipelines you may have used, but it's necessary to match the data structures and behavior of the underlying Keras library.
+
+## How can I save a Keras model?
 
 You can use `save_model()` to save a Keras model into a single HDF5 file which will contain:
 

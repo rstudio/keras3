@@ -118,12 +118,13 @@ model %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">input_shape =</span> <span class="dv">100</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'softmax'</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/compile.html">compile</a></span>(
-    <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
-    <span class="dt">optimizer =</span> <span class="kw"><a href="reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="dt">lr =</span> <span class="fl">0.02</span>),
-    <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
-  )</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'softmax'</span>)
+
+model %&gt;%<span class="st"> </span><span class="kw"><a href="reference/compile.html">compile</a></span>(
+  <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
+  <span class="dt">optimizer =</span> <span class="kw"><a href="reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="dt">lr =</span> <span class="fl">0.02</span>),
+  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+)</code></pre></div>
 <p>You can now iterate on your training data in batches (<code>x_train</code> and <code>y_train</code> are R matrices):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">epochs =</span> <span class="dv">5</span>, <span class="dt">batch_size =</span> <span class="dv">32</span>)</code></pre></div>
 <p>Evaluate your performance in one line:</p>

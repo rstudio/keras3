@@ -46,6 +46,9 @@ model %>% compile(
 )
 ```
 
+Note that Keras objects are [modified in place](faq.html#why-are-keras-objects-modified-in-place) which is why it's not necessary for `model` to be assigned back to after it is compiled.
+
+
 ## All models are callable, just like layers
 
 With the functional API, it is easy to re-use trained models: you can treat any model as if it were a layer. Note that you aren't just re-using the architecture of the model, you are also re-using its weights.
