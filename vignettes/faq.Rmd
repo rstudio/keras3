@@ -12,6 +12,26 @@ library(keras)
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
+## Why are Keras objects modified in place in the R API?
+
+Unlike most R objects, Keras objects are "mutable". That means that when you modify an object you're modifying it "in place", and you don't need to assign the updated object back to the original name. For example, to add layers to a Keras model you might use this code:
+
+```{r}
+model %>% 
+  layer_dense(units = 32, activation = 'relu', input_shape = c(784)) %>% 
+  layer_dense(units = 10, activation = 'softmax')
+```
+
+Rather than this code:
+
+```{r}
+model <- model %>% 
+  layer_dense(units = 32, activation = 'relu', input_shape = c(784)) %>% 
+  layer_dense(units = 10, activation = 'softmax')
+```
+
+You need to be aware of this because it makes the Keras API a little different than most other pipelines you may have used, but it's necessary to match the data structures and behavior of the underlying Keras library.
+
 ## How should I cite Keras?
 
 Please cite Keras in your publications if it helps your research. Here is an example BibTeX entry:

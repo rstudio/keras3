@@ -39,15 +39,16 @@ model %>%
   layer_dense(units = 64, input_shape = 100) %>% 
   layer_activation(activation = 'relu') %>% 
   layer_dense(units = 10) %>% 
-  layer_activation(activation = 'softmax') %>% 
-  compile(
-    loss = 'categorical_crossentropy',
-    optimizer = optimizer_sgd(lr = 0.02),
-    metrics = c('accuracy')
-  )
+  layer_activation(activation = 'softmax')
+
+model %>% compile(
+  loss = 'categorical_crossentropy',
+  optimizer = optimizer_sgd(lr = 0.02),
+  metrics = c('accuracy')
+)
 ```
 
-Note that Keras models are mutable (i.e. they have reference rather than value semantics) which is why it's not necessary for `model` to be assigned back to after all the layers are added.
+Note that Keras objects are [modified in place](faq.html#why-are-keras-objects-modified-in-place-in-the-r-api) which is why it's not necessary for `model` to be assigned back to after layers are added or after it is compiled.
 
 You can now iterate on your training data in batches (`x_train` and `y_train` are R matrices):
 

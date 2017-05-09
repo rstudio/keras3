@@ -46,7 +46,8 @@ model %>% compile(
 )
 ```
 
-Note that Keras layers and models are mutable (i.e. they have reference rather than value semantics) which is why it's not necessary for `model` to be assigned back to after all the layers are added.
+Note that Keras objects are [modified in place](faq.html#why-are-keras-objects-modified-in-place-in-the-r-api) which is why it's not necessary for `model` to be assigned back to after it is compiled.
+
 
 ## All models are callable, just like layers
 
