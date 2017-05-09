@@ -29,6 +29,8 @@ model %>%
   layer_activation('softmax')
 ```
 
+Note that Keras models are mutable (i.e. they have reference rather than value semantics) which is why it's not necessary for `model` to be assigned back to after all the layers are added.
+
 Learn more by reading the [Guide to the Sequential Model](sequential_model.html).
 
 ### Functional

@@ -47,6 +47,8 @@ model %>%
   )
 ```
 
+Note that Keras models are mutable (i.e. they have reference rather than value semantics) which is why it's not necessary for `model` to be assigned back to after all the layers are added.
+
 You can now iterate on your training data in batches (`x_train` and `y_train` are R matrices):
 
 ```{r, results='hide'}

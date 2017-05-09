@@ -46,6 +46,8 @@ model %>% compile(
 )
 ```
 
+Note that Keras layers and models are mutable (i.e. they have reference rather than value semantics) which is why it's not necessary for `model` to be assigned back to after all the layers are added.
+
 ## All models are callable, just like layers
 
 With the functional API, it is easy to re-use trained models: you can treat any model as if it were a layer. Note that you aren't just re-using the architecture of the model, you are also re-using its weights.
