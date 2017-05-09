@@ -123,6 +123,7 @@ model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/comp
   <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
   <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
 )</code></pre></div>
+<p>Note that Keras objects are <a href="faq.html#why-are-keras-objects-modified-in-place">modified in place</a> which is why it’s not necessary for <code>model</code> to be assigned back to after it is compiled.</p>
 </div>
 <div id="all-models-are-callable-just-like-layers" class="section level2">
 <h2 class="hasAnchor">

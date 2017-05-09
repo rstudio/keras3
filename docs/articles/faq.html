@@ -129,10 +129,22 @@
 <li>Within Keras, there is the ability to add <a href="training_callbacks.html">callbacks</a> specifically designed to be run at the end of an <strong>epoch</strong>. Examples of these are learning rate changes and model checkpointing (saving).</li>
 </ul>
 </div>
+<div id="why-are-keras-objects-modified-in-place" class="section level2">
+<h2 class="hasAnchor">
+<a href="#why-are-keras-objects-modified-in-place" class="anchor"></a>Why are Keras objects modified in place?</h2>
+<p>Unlike most R objects, Keras objects are “mutable”. That means that when you modify an object you’re modifying it “in place”, and you don’t need to assign the updated object back to the original name. For example, to add layers to a Keras model you might use this code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>)</code></pre></div>
+<p>Rather than this code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>)</code></pre></div>
+<p>You need to be aware of this because it makes the Keras API a little different than most other pipelines you may have used, but it’s necessary to match the data structures and behavior of the underlying Keras library.</p>
+</div>
 <div id="how-can-i-save-a-keras-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-can-i-save-a-keras-model" class="anchor"></a>How can I save a Keras model?</h2>
-<p><em>It is not recommended to use pickle or cPickle to save a Keras model.</em></p>
 <p>You can use <code><a href="../reference/save_model.html">save_model()</a></code> to save a Keras model into a single HDF5 file which will contain:</p>
 <ul>
 <li>the architecture of the model, allowing to re-create the model</li>
@@ -335,6 +347,7 @@ model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/pop_
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#how-should-i-cite-keras">How should I cite Keras?</a></li>
       <li><a href="#what-does-sample-batch-epoch-mean">What does “sample”, “batch”, “epoch” mean?</a></li>
+      <li><a href="#why-are-keras-objects-modified-in-place">Why are Keras objects modified in place?</a></li>
       <li><a href="#how-can-i-save-a-keras-model">How can I save a Keras model?</a></li>
       <li><a href="#why-is-the-training-loss-much-higher-than-the-testing-loss">Why is the training loss much higher than the testing loss?</a></li>
       <li><a href="#how-can-i-obtain-the-output-of-an-intermediate-layer">How can I obtain the output of an intermediate layer?</a></li>

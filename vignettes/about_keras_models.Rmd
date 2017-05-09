@@ -29,7 +29,7 @@ model %>%
   layer_activation('softmax')
 ```
 
-Note that Keras objects are [modified in place](faq.html#why-are-keras-objects-modified-in-place-in-the-r-api) which is why it's not necessary for `model` to be assigned back to after the layers are added.
+Note that Keras objects are [modified in place](faq.html#why-are-keras-objects-modified-in-place) which is why it's not necessary for `model` to be assigned back to after the layers are added.
 
 Learn more by reading the [Guide to the Sequential Model](sequential_model.html).
 
