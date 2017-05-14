@@ -21,7 +21,11 @@ reticulate::use_virtualenv
 reticulate::use_condaenv
 
 #' @export
-reticulate::py_config
+tensorflow::install_tensorflow
+
+#' @export
+tensorflow::tf_config
+
 
 
 
