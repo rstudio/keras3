@@ -114,63 +114,35 @@
 
 model &lt;-<span class="st"> </span><span class="kw"><a href="reference/keras_model_sequential.html">keras_model_sequential</a></span>() 
 
-model %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">input_shape =</span> <span class="dv">100</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) %&gt;%<span class="st"> </span>
+model <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">input_shape =</span> <span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'softmax'</span>)
 
-model %&gt;%<span class="st"> </span><span class="kw"><a href="reference/compile.html">compile</a></span>(
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/compile.html">compile</a></span>(
   <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
   <span class="dt">optimizer =</span> <span class="kw"><a href="reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="dt">lr =</span> <span class="fl">0.02</span>),
   <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
 )</code></pre></div>
 <p>You can now iterate on your training data in batches (<code>x_train</code> and <code>y_train</code> are R matrices):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">epochs =</span> <span class="dv">5</span>, <span class="dt">batch_size =</span> <span class="dv">32</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">epochs =</span> <span class="dv">5</span>, <span class="dt">batch_size =</span> <span class="dv">32</span>)</code></pre></div>
 <p>Evaluate your performance in one line:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loss_and_metrics &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span><span class="kw"><a href="reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loss_and_metrics &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
 <p>Or generate predictions on new data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classes &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span><span class="kw">predict</span>(x_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classes &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">predict</span>(x_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
 <p>Building a question answering system, an image classification model, a Neural Turing Machine, or any other model is just as fast. The ideas behind deep learning are simple, so why should their implementation be painful?</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<ol style="list-style-type: decimal">
-<li>
-<p>Install TensorFlow</p>
-<p>The R interface to Keras uses <a href="https://rstudio.github.io/tensorflow/">TensorFlow</a> as it’s underlying computation engine. Therefore, you need to install TensorFlow (version 1.1 or higher) before using the package. Instructions on doing this for various platforms can be found here:</p>
-<ul>
-<li><p><a href="https://www.tensorflow.org/install/install_mac">Installing TensorFlow on Mac OS X</a></p></li>
-<li><p><a href="https://www.tensorflow.org/install/install_linux">Installing TensorFlow on Ubuntu</a></p></li>
-<li><p><a href="https://www.tensorflow.org/install/install_windows">Installing TensorFlow on Windows</a></p></li>
-</ul>
-</li>
-<li>
-<p>Install additional Keras dependencies:</p>
-<p>The Keras library has a number of optional features that carry additional dependencies. To satisfy all of these dependencies you can execute the following:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">source</span> ~/tensorflow/bin/activate  <span class="co"># (activate whatever environment you installed TF within)</span>
-<span class="kw">pip</span> install --upgrade scipy h5py pyyaml requests Pillow   <span class="co"># for Python 2.7</span>
-<span class="kw">pip3</span> install --upgrade scipy h5py pyyaml requests Pillow  <span class="co"># for Python 3.n</span></code></pre></div>
-<p>Note that the first step will vary based on your environment and where you installed TensorFlow (e.g. whether you need to use a version of python/pip not on the PATH; whether you used a virtualenv or condaenv, etc.).</p>
-</li>
-<li>
-<p>Install the Keras R package:</p>
-<p>You can install the Keras R package from GitHub as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"rstudio/keras"</span>, <span class="dt">auth_token =</span> <span class="st">"7536398b6aeebf87b8d128830d509b88a21a822c"</span>)</code></pre></div>
-</li>
-<li>
-<p>Test your installation:</p>
-<p>Test to see whether Keras is working properly with:</p>
+<p>The R interface to Keras uses <a href="https://rstudio.github.io/tensorflow/">TensorFlow</a> as it’s underlying computation engine. Therefore, you need to install both the keras R package as well as the the TensorFlow engine.</p>
+<p>First, install the keras R package from GitHub as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"rstudio/keras"</span>, <span class="dt">auth_token =</span> <span class="st">"7536398b6aeebf87b8d128830d509b88a21a822c"</span>)</code></pre></div>
+<p>Then, use the <code><a href="reference/reexports.html">install_tensorflow()</a></code> function to install TensorFlow:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
-<span class="kw"><a href="reference/keras_model_sequential.html">keras_model_sequential</a></span>()</code></pre></div>
-<p>If you receive an error it’s possible that the keras R package can’t find the version of TensorFlow you installed. You can provide hints as to the location of TensorFlow using the <a href="https://rstudio.github.io/reticulate/articles/versions.html">configuration functions</a> <code>use_python</code>, <code>use_virtualenv</code>, and <code>use_condaenv</code>. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
-<span class="kw"><a href="reference/reexports.html">use_python</a></span>(<span class="st">"/usr/local/bin/python"</span>)
-<span class="kw"><a href="reference/reexports.html">use_virtualenv</a></span>(<span class="st">"~/path/to/my/virtualenv"</span>)
-<span class="kw"><a href="reference/reexports.html">use_condaenv</a></span>(<span class="st">"envname"</span>)</code></pre></div>
-</li>
-</ol>
+<span class="kw"><a href="reference/reexports.html">install_tensorflow</a></span>()</code></pre></div>
+<p>This will provide you with a default installation of TensorFlow suitable for use with the keras R package. See the <a href="https://rstudio.github.io/tensorflow/installation.html">article on TensorFlow installation</a> to learn about more advanced options.</p>
 </div>
 <div id="learning-more" class="section level2">
 <h2 class="hasAnchor">

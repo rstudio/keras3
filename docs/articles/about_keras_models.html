@@ -106,10 +106,10 @@
 <a href="#sequential" class="anchor"></a>Sequential</h3>
 <p>Sequential models are created using the <code><a href="../reference/keras_model_sequential.html">keras_model_sequential()</a></code> function and are composed of a set of linear layers:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() 
-model %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) %&gt;%<span class="st"> </span>
+model <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'softmax'</span>)</code></pre></div>
 <p>Note that Keras objects are <a href="faq.html#why-are-keras-objects-modified-in-place">modified in place</a> which is why it’s not necessary for <code>model</code> to be assigned back to after the layers are added.</p>
 <p>Learn more by reading the <a href="sequential_model.html">Guide to the Sequential Model</a>.</p>
@@ -126,11 +126,11 @@ shared_lstm &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 
 <span class="co"># When we reuse the same layer instance multiple times, the weights of the layer are also</span>
 <span class="co"># being reused (it is effectively *the same* layer)</span>
-encoded_a &lt;-<span class="st"> </span>tweet_a %&gt;%<span class="st"> </span>shared_lstm
-encoded_b &lt;-<span class="st"> </span>tweet_b %&gt;%<span class="st"> </span>shared_lstm
+encoded_a &lt;-<span class="st"> </span>tweet_a <span class="op">%&gt;%</span><span class="st"> </span>shared_lstm
+encoded_b &lt;-<span class="st"> </span>tweet_b <span class="op">%&gt;%</span><span class="st"> </span>shared_lstm
 
 <span class="co"># We can then concatenate the two vectors and add a logistic regression on top</span>
-predictions &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(encoded_a, encoded_b), <span class="dt">axis=</span>-<span class="dv">1</span>) %&gt;%<span class="st"> </span>
+predictions &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(encoded_a, encoded_b), <span class="dt">axis=</span><span class="op">-</span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>)
 
 <span class="co"># We define a trainable model linking the tweet inputs to the predictions</span>
