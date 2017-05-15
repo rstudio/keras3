@@ -11,5 +11,8 @@
 ^_pkgdown.yml$
 ^index.Rmd$
 ^index.html$
+^tests/testthat/tb_logs$
+^tests/testthat/MNIST-data$
+^tests/testthat/checkpoint.h5
+^tests/testthat/training.csv
 ^.*\.pyc$
- 
