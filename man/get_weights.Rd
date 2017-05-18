@@ -20,8 +20,8 @@ Layer/Model weights as R arrays
 \seealso{
 Other model persistence: \code{\link{model_to_json}},
   \code{\link{model_to_yaml}},
-  \code{\link{save_model_weights}},
-  \code{\link{save_model}}
+  \code{\link{save_model_hdf5}},
+  \code{\link{save_model_weights_hdf5}}
 
 Other layer methods: \code{\link{count_params}},
   \code{\link{get_config}}, \code{\link{get_input_at}},
