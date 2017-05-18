@@ -29,7 +29,7 @@ nor the class name (those are handled externally).
 Objects returned from \code{get_config()} are not serializable. Therefore,
 if you want to save and restore a model across sessions, you can use the
 \code{model_to_json()} or \code{model_to_yaml()} functions (for model configuration
-only, not weights) or the \code{save_model()} function to save the model
+only, not weights) or the \code{save_model_hdf5()} function to save the model
 configuration and weights to a file.
 }
 \seealso{

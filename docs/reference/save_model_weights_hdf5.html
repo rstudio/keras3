@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Save the model after every epoch. — callback_model_checkpoint • keras</title>
+<title>Save/Load model weights using HDF5 files — save_model_weights_hdf5 • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -112,77 +112,63 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Save the model after every epoch.</h1>
+    <h1>Save/Load model weights using HDF5 files</h1>
     </div>
 
     
-    <p><code>filepath</code> can contain named formatting options, which will be filled the
-value of <code>epoch</code> and keys in <code>logs</code> (passed in <code>on_epoch_end</code>). For example:
-if <code>filepath</code> is <code>weights.{epoch:02d}-{val_loss:.2f}.hdf5</code>, then the model
-checkpoints will be saved with the epoch number and the validation loss in
-the filename.</p>
+    <p>Save/Load model weights using HDF5 files</p>
     
 
-    <pre class="usage"><span class='fu'>callback_model_checkpoint</span>(<span class='no'>filepath</span>, <span class='kw'>monitor</span> <span class='kw'>=</span> <span class='st'>"val_loss"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>save_best_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>save_weights_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"auto"</span>,
-  <span class='st'>"min"</span>, <span class='st'>"max"</span>), <span class='kw'>period</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>save_model_weights_hdf5</span>(<span class='no'>model</span>, <span class='no'>filepath</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>load_model_weights_hdf5</span>(<span class='no'>model</span>, <span class='no'>filepath</span>, <span class='kw'>by_name</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>model</th>
+      <td><p>Model to save/load</p></td>
+    </tr>
+    <tr>
       <th>filepath</th>
-      <td><p>string, path to save the model file.</p></td>
+      <td><p>Path to the file</p></td>
     </tr>
     <tr>
-      <th>monitor</th>
-      <td><p>quantity to monitor.</p></td>
+      <th>overwrite</th>
+      <td><p>Whether to silently overwrite any existing
+file at the target location</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p>verbosity mode, 0 or 1.</p></td>
-    </tr>
-    <tr>
-      <th>save_best_only</th>
-      <td><p>if <code>save_best_only=TRUE</code>, the latest best model
-according to the quantity monitored will not be overwritten.</p></td>
-    </tr>
-    <tr>
-      <th>save_weights_only</th>
-      <td><p>if <code>TRUE</code>, then only the model's weights will be
-saved (<code>save_model_weights_hdf5(filepath)</code>), else the full model is saved
-(<code>save_model_hdf5(filepath)</code>).</p></td>
-    </tr>
-    <tr>
-      <th>mode</th>
-      <td><p>one of "auto", "min", "max". If <code>save_best_only=TRUE</code>, the decision to
-overwrite the current save file is made based on either the maximization or
-the minimization of the monitored quantity. For val_acc, this should be
-max, for val_loss this should be min, etc. In auto mode, the direction is
-automatically inferred from the name of the monitored quantity.</p></td>
-    </tr>
-    <tr>
-      <th>period</th>
-      <td><p>Interval (number of epochs) between checkpoints.</p></td>
+      <th>by_name</th>
+      <td><p>Whether to load weights by name or by topological order.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="for-example"><a class="anchor" href="#for-example"></a>For example</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>if <code>filepath</code> is
-<code>weights.{epoch:02d}-{val_loss:.2f}.hdf5</code>,: then the model checkpoints will
-be saved with the epoch number and the validation loss in the filename.</p>
+    <p>The weight file has:</p><ul>
+<li><p><code>layer_names</code> (attribute), a list of strings (ordered names of model layers).</p></li>
+<li><p>For every layer, a <code>group</code> named <code>layer.name</code></p></li>
+<li><p>For every such layer group, a group attribute <code>weight_names</code>, a list of strings
+(ordered names of weights tensor of the layer).</p></li>
+<li><p>For every weight in the layer, a dataset storing the weight value, named after
+the weight tensor.</p></li>
+</ul>
+    <p>For <code>load_model_weights()</code>, if <code>by_name</code> is <code>FALSE</code> (default) weights are
+loaded based on the network's topology, meaning the architecture should be
+the same as when the weights were saved. Note that layers that don't have
+weights are not taken into account in the topological ordering, so adding
+or removing layers is fine as long as they don't have weights.</p>
+<p>If <code>by_name</code> is <code>TRUE</code>, weights are loaded into layers only if they share
+the same name. This is useful for fine-tuning or transfer-learning models
+where some of the layers have changed.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other callbacks: <code><a href='callback_csv_logger.html'>callback_csv_logger</a></code>,
-  <code><a href='callback_early_stopping.html'>callback_early_stopping</a></code>,
-  <code><a href='callback_lambda.html'>callback_lambda</a></code>,
-  <code><a href='callback_learning_rate_scheduler.html'>callback_learning_rate_scheduler</a></code>,
-  <code><a href='callback_progbar_logger.html'>callback_progbar_logger</a></code>,
-  <code><a href='callback_reduce_lr_on_plateau.html'>callback_reduce_lr_on_plateau</a></code>,
-  <code><a href='callback_remote_monitor.html'>callback_remote_monitor</a></code>,
-  <code><a href='callback_tensorboard.html'>callback_tensorboard</a></code></p>
+    <p>Other model persistence: <code><a href='get_weights.html'>get_weights</a></code>,
+  <code><a href='model_to_json.html'>model_to_json</a></code>, <code><a href='model_to_yaml.html'>model_to_yaml</a></code>,
+  <code><a href='save_model_hdf5.html'>save_model_hdf5</a></code></p>
     
 
   </div>
@@ -191,7 +177,7 @@ be saved with the epoch number and the validation loss in the filename.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#for-example">For example</a></li>
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

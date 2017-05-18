@@ -111,14 +111,14 @@
 inputs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">784</span>))
  
 <span class="co"># outputs compose input + dense layers</span>
-predictions &lt;-<span class="st"> </span>inputs <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+predictions &lt;-<span class="st"> </span>inputs %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>)
 
 <span class="co"># create and compile model</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> inputs, <span class="dt">outputs =</span> predictions)
-model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
   <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
   <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
   <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
@@ -131,14 +131,14 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 <p>With the functional API, it is easy to re-use trained models: you can treat any model as if it were a layer. Note that you aren’t just re-using the architecture of the model, you are also re-using its weights.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">784</span>))
 <span class="co"># This works, and returns the 10-way softmax we defined above.</span>
-y &lt;-<span class="st"> </span>x <span class="op">%&gt;%</span><span class="st"> </span>model</code></pre></div>
+y &lt;-<span class="st"> </span>x %&gt;%<span class="st"> </span>model</code></pre></div>
 <p>This can allow, for instance, to quickly create models that can process sequences of inputs. You could turn an image classification model into a video classification model, in just one line:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Input tensor for sequences of 20 timesteps,</span>
 <span class="co"># each containing a 784-dimensional vector</span>
 input_sequences &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">784</span>))
 
 <span class="co"># This applies our previous model to the input sequence</span>
-processed_sequences &lt;-<span class="st"> </span>input_sequences <span class="op">%&gt;%</span>
+processed_sequences &lt;-<span class="st"> </span>input_sequences %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/time_distributed.html">time_distributed</a></span>(model)</code></pre></div>
 </div>
 <div id="multi-input-and-multi-output-models" class="section level2">
@@ -156,19 +156,19 @@ processed_sequences &lt;-<span class="st"> </span>input_sequences <span class="o
 
 main_input &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">100</span>), <span class="dt">dtype =</span> <span class="st">'int32'</span>, <span class="dt">name =</span> <span class="st">'main_input'</span>)
 
-lstm_out &lt;-<span class="st"> </span>main_input <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_embedding.html">layer_embedding</a></span>(<span class="dt">input_dim =</span> <span class="dv">10000</span>, <span class="dt">output_dim =</span> <span class="dv">512</span>, <span class="dt">input_length =</span> <span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+lstm_out &lt;-<span class="st"> </span>main_input %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_embedding.html">layer_embedding</a></span>(<span class="dt">input_dim =</span> <span class="dv">10000</span>, <span class="dt">output_dim =</span> <span class="dv">512</span>, <span class="dt">input_length =</span> <span class="dv">100</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>)</code></pre></div>
 <p>Here we insert the auxiliary loss, allowing the LSTM and Embedding layer to be trained smoothly even though the main loss will be much higher in the model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">auxiliary_output &lt;-<span class="st"> </span>lstm_out <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">auxiliary_output &lt;-<span class="st"> </span>lstm_out %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>, <span class="dt">name =</span> <span class="st">'aux_output'</span>)</code></pre></div>
 <p>At this point, we feed into the model our auxiliary input data by concatenating it with the LSTM output, stacking a deep densely-connected network on top and adding the main logistic regression layer</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">auxiliary_input &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">5</span>), <span class="dt">name =</span> <span class="st">'aux_input'</span>)
 
-main_output &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(lstm_out, auxiliary_input)) <span class="op">%&gt;%</span><span class="st">  </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+main_output &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(lstm_out, auxiliary_input)) %&gt;%<span class="st">  </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>, <span class="dt">name =</span> <span class="st">'main_output'</span>)</code></pre></div>
 <p>This defines a model with two inputs and two outputs:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(
@@ -205,27 +205,27 @@ Trainable params: 5,200,610
 Non-trainable params: 0
 __________________________________________________________________________________________</code></pre>
 <p>We compile the model and assign a weight of 0.2 to the auxiliary loss. To specify different <code>loss_weights</code> or <code>loss</code> for each different output, you can use a list or a dictionary. Here we pass a single loss as the <code>loss</code> argument, so the same loss will be used on all outputs.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
   <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
   <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
   <span class="dt">loss_weights =</span> <span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.2</span>)
 )</code></pre></div>
 <p>We can train the model by passing it lists of input arrays and target arrays:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
   <span class="dt">x =</span> <span class="kw">c</span>(headline_data, additional_data),
   <span class="dt">y =</span> <span class="kw">c</span>(labels, labels),
   <span class="dt">epochs =</span> <span class="dv">50</span>,
   <span class="dt">batch_size =</span> <span class="dv">32</span>
 )</code></pre></div>
 <p>Since our inputs and outputs are named (we passed them a “name” argument), We could also have compiled the model via:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
   <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
   <span class="dt">loss =</span> <span class="kw">list</span>(<span class="dt">main_output =</span> <span class="st">'binary_crossentropy'</span>, <span class="dt">aux_output =</span> <span class="st">'binary_crossentropy'</span>),
   <span class="dt">loss_weights =</span> <span class="kw">list</span>(<span class="dt">main_output =</span> <span class="fl">1.0</span>, <span class="dt">aux_output =</span> <span class="fl">0.2</span>)
 )
 
 <span class="co"># And trained it via:</span>
-model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
+model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
   <span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">main_input =</span> headline_data, <span class="dt">aux_input =</span> additional_data),
   <span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">main_output =</span> labels, <span class="dt">aux_output =</span> labels),
   <span class="dt">epochs =</span> <span class="dv">50</span>,
@@ -250,23 +250,23 @@ shared_lstm &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 
 <span class="co"># When we reuse the same layer instance multiple times, the weights of the layer are also</span>
 <span class="co"># being reused (it is effectively *the same* layer)</span>
-encoded_a &lt;-<span class="st"> </span>tweet_a <span class="op">%&gt;%</span><span class="st"> </span>shared_lstm
-encoded_b &lt;-<span class="st"> </span>tweet_b <span class="op">%&gt;%</span><span class="st"> </span>shared_lstm
+encoded_a &lt;-<span class="st"> </span>tweet_a %&gt;%<span class="st"> </span>shared_lstm
+encoded_b &lt;-<span class="st"> </span>tweet_b %&gt;%<span class="st"> </span>shared_lstm
 
 <span class="co"># We can then concatenate the two vectors and add a logistic regression on top</span>
-predictions &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(encoded_a, encoded_b), <span class="dt">axis=</span><span class="op">-</span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+predictions &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(encoded_a, encoded_b), <span class="dt">axis=</span>-<span class="dv">1</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>)
 
 <span class="co"># We define a trainable model linking the tweet inputs to the predictions</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> <span class="kw">c</span>(tweet_a, tweet_b), <span class="dt">outputs =</span> predictions)
 
-model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
   <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
   <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
   <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
 )
 
-model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(<span class="kw">c</span>(data_a, data_b), labels, <span class="dt">epochs =</span> <span class="dv">10</span>)</code></pre></div>
+model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(<span class="kw">c</span>(data_a, data_b), labels, <span class="dt">epochs =</span> <span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="the-concept-of-layer-node" class="section level2">
 <h2 class="hasAnchor">
@@ -278,19 +278,19 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 
 lstm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>)
 
-encoded_a &lt;-<span class="st"> </span>a <span class="op">%&gt;%</span><span class="st"> </span>lstm
+encoded_a &lt;-<span class="st"> </span>a %&gt;%<span class="st"> </span>lstm
 
-lstm<span class="op">$</span>output</code></pre></div>
+lstm$output</code></pre></div>
 <p>Not so if the layer has multiple inputs:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))
 b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))
 
 lstm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">32</span>)
 
-encoded_a &lt;-<span class="st"> </span>a <span class="op">%&gt;%</span><span class="st"> </span>lstm
-encoded_b &lt;-<span class="st"> </span>b <span class="op">%&gt;%</span><span class="st"> </span>lstm
+encoded_a &lt;-<span class="st"> </span>a %&gt;%<span class="st"> </span>lstm
+encoded_b &lt;-<span class="st"> </span>b %&gt;%<span class="st"> </span>lstm
 
-lstm<span class="op">$</span>output</code></pre></div>
+lstm$output</code></pre></div>
 <pre><code>AttributeError: Layer lstm_4 has multiple inbound nodes, hence the notion of "layer output" is ill-defined. Use `get_output_at(node_index)` instead.</code></pre>
 <p>Okay then. The following works:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_input_at.html">get_output_at</a></span>(lstm, <span class="dv">1</span>)
@@ -302,12 +302,12 @@ b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_inp
 
 conv &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">16</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>), <span class="dt">padding =</span> <span class="st">'same'</span>)
 
-conved_a &lt;-<span class="st"> </span>a <span class="op">%&gt;%</span><span class="st"> </span>conv
+conved_a &lt;-<span class="st"> </span>a %&gt;%<span class="st"> </span>conv
 
 <span class="co"># only one input so far, the following will work</span>
-conv<span class="op">$</span>input_shape
+conv$input_shape
 
-conved_b &lt;-<span class="st"> </span>b <span class="op">%&gt;%</span><span class="st"> </span>conv
+conved_b &lt;-<span class="st"> </span>b %&gt;%<span class="st"> </span>conv
 <span class="co"># now the `$input_shape` property wouldn't work, but this does:</span>
 <span class="kw"><a href="../reference/get_input_at.html">get_input_shape_at</a></span>(conv, <span class="dv">1</span>)
 <span class="kw"><a href="../reference/get_input_at.html">get_input_shape_at</a></span>(conv, <span class="dv">2</span>) </code></pre></div>
@@ -324,19 +324,19 @@ conved_b &lt;-<span class="st"> </span>b <span class="op">%&gt;%</span><span cla
 
 input_img &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">256</span>, <span class="dv">256</span>, <span class="dv">3</span>))
 
-tower_<span class="dv">1</span> &lt;-<span class="st"> </span>input_img <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">padding=</span><span class="st">'same'</span>, <span class="dt">activation=</span><span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+tower_1 &lt;-<span class="st"> </span>input_img %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">padding=</span><span class="st">'same'</span>, <span class="dt">activation=</span><span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">padding=</span><span class="st">'same'</span>, <span class="dt">activation=</span><span class="st">'relu'</span>)
 
-tower_<span class="dv">2</span> &lt;-<span class="st"> </span>input_img <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">padding=</span><span class="st">'same'</span>, <span class="dt">activation=</span><span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+tower_2 &lt;-<span class="st"> </span>input_img %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">padding=</span><span class="st">'same'</span>, <span class="dt">activation=</span><span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>), <span class="dt">padding=</span><span class="st">'same'</span>, <span class="dt">activation=</span><span class="st">'relu'</span>)
 
-tower_<span class="dv">3</span> &lt;-<span class="st"> </span>input_img <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">strides =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">padding =</span> <span class="st">'same'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+tower_3 &lt;-<span class="st"> </span>input_img %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">strides =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">padding =</span> <span class="st">'same'</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">padding=</span><span class="st">'same'</span>, <span class="dt">activation=</span><span class="st">'relu'</span>)
 
-output &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(tower_<span class="dv">1</span>, tower_<span class="dv">2</span>, tower_<span class="dv">3</span>), <span class="dt">axis =</span> <span class="dv">1</span>)</code></pre></div>
+output &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(tower_1, tower_2, tower_3), <span class="dt">axis =</span> <span class="dv">1</span>)</code></pre></div>
 </div>
 <div id="residual-connection-on-a-convolution-layer" class="section level3">
 <h3 class="hasAnchor">
@@ -345,7 +345,7 @@ output &lt;-<span class="st"> </span><span class="kw"><a href="../reference/laye
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># input tensor for a 3-channel 256x256 image</span>
 x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">256</span>, <span class="dv">256</span>, <span class="dv">3</span>))
 <span class="co"># 3x3 conv with 3 output channels (same as input channels)</span>
-y &lt;-<span class="st"> </span>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">3</span>, <span class="dt">kernel_size =</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">padding =</span> <span class="st">'same'</span>)
+y &lt;-<span class="st"> </span>x %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">3</span>, <span class="dt">kernel_size =</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">padding =</span> <span class="st">'same'</span>)
 <span class="co"># this returns x + y.</span>
 z &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_add.html">layer_add</a></span>(<span class="kw">c</span>(x, y))</code></pre></div>
 </div>
@@ -355,10 +355,10 @@ z &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_add
 <p>This model re-uses the same image-processing module on two inputs, to classify whether two MNIST digits are the same digit or different digits.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, define the vision model</span>
 digit_input &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">1</span>))
-out &lt;-<span class="st"> </span>digit_input <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+out &lt;-<span class="st"> </span>digit_input %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_flatten.html">layer_flatten</a></span>()
 
 vision_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(digit_input, out)
@@ -368,10 +368,10 @@ digit_a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/lay
 digit_b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">1</span>))
 
 <span class="co"># The vision model will be shared, weights and all</span>
-out_a &lt;-<span class="st"> </span>digit_a <span class="op">%&gt;%</span><span class="st"> </span>vision_model
-out_b &lt;-<span class="st"> </span>digit_b <span class="op">%&gt;%</span><span class="st"> </span>vision_model
+out_a &lt;-<span class="st"> </span>digit_a %&gt;%<span class="st"> </span>vision_model
+out_b &lt;-<span class="st"> </span>digit_b %&gt;%<span class="st"> </span>vision_model
 
-out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(out_a, out_b)) <span class="op">%&gt;%</span><span class="st"> </span>
+out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(out_a, out_b)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>)
 
 classification_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> <span class="kw">c</span>(digit_a, digit_b), out)</code></pre></div>
@@ -384,35 +384,35 @@ classification_model &lt;-<span class="st"> </span><span class="kw"><a href="../
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, let's define a vision model using a Sequential model.</span>
 <span class="co"># This model will encode an image into a vector.</span>
 vision_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() 
-vision_model <span class="op">%&gt;%</span><span class="st"> </span>
+vision_model %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">padding =</span> <span class="st">'same'</span>,
-                <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">224</span>, <span class="dv">224</span>, <span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">128</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">padding =</span> <span class="st">'same'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">128</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">256</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">padding =</span> <span class="st">'same'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">256</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">256</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+                <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">224</span>, <span class="dv">224</span>, <span class="dv">3</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">128</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">padding =</span> <span class="st">'same'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">128</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">256</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">padding =</span> <span class="st">'same'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">256</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">256</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_flatten.html">layer_flatten</a></span>()
 
 <span class="co"># Now let's get a tensor with the output of our vision model:</span>
 image_input &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">224</span>, <span class="dv">224</span>, <span class="dv">3</span>))
-encoded_image &lt;-<span class="st"> </span>image_input <span class="op">%&gt;%</span><span class="st"> </span>vision_model
+encoded_image &lt;-<span class="st"> </span>image_input %&gt;%<span class="st"> </span>vision_model
 
 <span class="co"># Next, let's define a language model to encode the question into a vector.</span>
 <span class="co"># Each question will be at most 100 word long,</span>
 <span class="co"># and we will index words as integers from 1 to 9999.</span>
 question_input &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">100</span>), <span class="dt">dtype =</span> <span class="st">'int32'</span>)
-encoded_question &lt;-<span class="st"> </span>question_input <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_embedding.html">layer_embedding</a></span>(<span class="dt">input_dim =</span> <span class="dv">10000</span>, <span class="dt">output_dim =</span> <span class="dv">256</span>, <span class="dt">input_length =</span> <span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+encoded_question &lt;-<span class="st"> </span>question_input %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_embedding.html">layer_embedding</a></span>(<span class="dt">input_dim =</span> <span class="dv">10000</span>, <span class="dt">output_dim =</span> <span class="dv">256</span>, <span class="dt">input_length =</span> <span class="dv">100</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">256</span>)
 
 <span class="co"># Let's concatenate the question vector and the image vector then</span>
 <span class="co"># train a logistic regression over 1000 words on top</span>
-output &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(encoded_question, encoded_image)) <span class="op">%&gt;%</span><span class="st"> </span>
+output &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(encoded_question, encoded_image)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1000</span>, <span class="dt">activation=</span><span class="st">'softmax'</span>)
 
 <span class="co"># This is our final model:</span>
@@ -425,8 +425,8 @@ vqa_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/k
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">video_input &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">224</span>, <span class="dv">224</span>, <span class="dv">3</span>))
 
 <span class="co"># This is our video encoded via the previously trained vision_model (weights are reused)</span>
-encoded_video &lt;-<span class="st"> </span>video_input <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/time_distributed.html">time_distributed</a></span>(vision_model) <span class="op">%&gt;%</span><span class="st"> </span>
+encoded_video &lt;-<span class="st"> </span>video_input %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/time_distributed.html">time_distributed</a></span>(vision_model) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">256</span>)
 
 <span class="co"># This is a model-level representation of the question encoder, reusing the same weights as before:</span>
@@ -434,10 +434,10 @@ question_encoder &lt;-<span class="st"> </span><span class="kw"><a href="../refe
 
 <span class="co"># Let's use it to encode the question:</span>
 video_question_input &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">100</span>), <span class="dt">dtype =</span> <span class="st">'int32'</span>)
-encoded_video_question &lt;-<span class="st"> </span>video_question_input <span class="op">%&gt;%</span><span class="st"> </span>question_encoder
+encoded_video_question &lt;-<span class="st"> </span>video_question_input %&gt;%<span class="st"> </span>question_encoder
 
 <span class="co"># And this is our video question answering model:</span>
-output &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(encoded_video, encoded_video_question)) <span class="op">%&gt;%</span><span class="st"> </span>
+output &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">c</span>(encoded_video, encoded_video_question)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1000</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>)
 
 video_qa_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs=</span> <span class="kw">c</span>(video_input, video_question_input), <span class="dt">outputs =</span> output)</code></pre></div>

@@ -19,7 +19,7 @@
 #' @note Objects returned from `get_config()` are not serializable. Therefore, 
 #'   if you want to save and restore a model across sessions, you can use the
 #'   `model_to_json()` or `model_to_yaml()` functions (for model configuration
-#'   only, not weights) or the `save_model()` function to save the model
+#'   only, not weights) or the `save_model_hdf5()` function to save the model
 #'   configuration and weights to a file.
 #'   
 #' @family model functions
