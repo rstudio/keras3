@@ -77,18 +77,21 @@ for (name in list.files(TEXT_DATA_DIR)) {
   }
 }
 
-cat(sprintf('Found %s texts.', length(texts)))
+cat(sprintf('Found %s texts.\n', length(texts)))
 
 # finally, vectorize the text samples into a 2D integer tensor
 tokenizer <- text_tokenizer(num_words=MAX_NB_WORDS)
 tokenizer %>% fit(texts)
+
+
+
 sequences <- texts_to_sequences(tokenizer, texts)
 
 word_index <- tokenizer$word_index
 cat(sprintf('Found %s unique tokens.', length(word_index)))
 
 
-# data <- pad_sequences(sequences, maxlen=MAX_SEQUENCE_LENGTH)
+data <- pad_sequences(sequences, maxlen=MAX_SEQUENCE_LENGTH)
 # 
 # labels = to_categorical(np.asarray(labels))
 # print('Shape of data tensor:', data.shape)
