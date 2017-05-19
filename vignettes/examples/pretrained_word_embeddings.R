@@ -88,13 +88,27 @@ tokenizer %>% fit(texts)
 sequences <- texts_to_sequences(tokenizer, texts)
 
 word_index <- tokenizer$word_index
-cat(sprintf('Found %s unique tokens.', length(word_index)))
+cat(sprintf('Found %s unique tokens.\n', length(word_index)))
 
 
 data <- pad_sequences(sequences, maxlen=MAX_SEQUENCE_LENGTH)
-# 
-# labels = to_categorical(np.asarray(labels))
-# print('Shape of data tensor:', data.shape)
-# print('Shape of label tensor:', labels.shape)
+
+labels <- to_categorical(labels)
+
+cat('Shape of data tensor: ', dim(data), '\n')
+cat('Shape of label tensor: ', dim(labels), '\n')
+
+# split the data into a training set and a validation set
+indices <- 1:nrow(data)
+indices <- sample(indices)
+data <- data[indices,]
+labels <- labels[indices,]
+num_validation_samples <- as.integer(VALIDATION_SPLIT * nrow(data))
+
+x_train <- data[-(1:num_validation_samples),]
+y_train <- labels[-(1:num_validation_samples),]
+x_val <- data[1:num_validation_samples,]
+y_val <- labels[1:num_validation_samples,]
+
 
 
