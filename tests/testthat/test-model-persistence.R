@@ -10,8 +10,8 @@ test_succeeds("model can be saved and loaded", {
   
   model <- define_and_compile_model()
   tmp <- tempfile("model", fileext = ".hdf5")
-  save_model(model, tmp)
-  model <- load_model(tmp)
+  save_model_hdf5(model, tmp)
+  model <- load_model_hdf5(tmp)
 })
 
 test_succeeds("model weights can be saved and loaded", {
@@ -21,8 +21,8 @@ test_succeeds("model weights can be saved and loaded", {
   
   model <- define_and_compile_model()
   tmp <- tempfile("model", fileext = ".hdf5")
-  save_model_weights(model, tmp)
-  load_model_weights(model, tmp)
+  save_model_weights_hdf5(model, tmp)
+  load_model_weights_hdf5(model, tmp)
 })
 
 test_succeeds("model can be saved and loaded from json", {

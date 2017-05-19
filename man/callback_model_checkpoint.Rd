@@ -19,8 +19,8 @@ callback_model_checkpoint(filepath, monitor = "val_loss", verbose = 0,
 according to the quantity monitored will not be overwritten.}
 
 \item{save_weights_only}{if \code{TRUE}, then only the model's weights will be
-saved (\code{save_model_weights(filepath)}), else the full model is saved
-(\code{save_model(filepath)}).}
+saved (\code{save_model_weights_hdf5(filepath)}), else the full model is saved
+(\code{save_model_hdf5(filepath)}).}
 
 \item{mode}{one of "auto", "min", "max". If \code{save_best_only=TRUE}, the decision to
 overwrite the current save file is made based on either the maximization or

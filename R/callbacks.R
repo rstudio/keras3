@@ -30,8 +30,8 @@ callback_progbar_logger <- function(count_mode = "samples") {
 #' @param save_best_only if `save_best_only=TRUE`, the latest best model 
 #'   according to the quantity monitored will not be overwritten.
 #' @param save_weights_only  if `TRUE`, then only the model's weights will be 
-#'   saved (`save_model_weights(filepath)`), else the full model is saved 
-#'   (`save_model(filepath)`).
+#'   saved (`save_model_weights_hdf5(filepath)`), else the full model is saved 
+#'   (`save_model_hdf5(filepath)`).
 #' @param mode one of "auto", "min", "max". If `save_best_only=TRUE`, the decision to
 #'   overwrite the current save file is made based on either the maximization or
 #'   the minimization of the monitored quantity. For val_acc, this should be

@@ -8,6 +8,9 @@ NULL
 # Main Keras module
 keras <- NULL
 
+# startup messages
+.startupMessage <- NULL
+
 .onLoad <- function(libname, pkgname) {
   
   # delay load keras
@@ -19,8 +22,9 @@ keras <- NULL
       tf_ver <- tf_config()$version
       required_tf_ver <- "1.1"
       if (tf_ver < required_tf_ver) {
-        message("Keras loaded from TensorFlow version ", tf_ver, ", however version ",
-                required_tf_ver, " is required. Please update TensorFlow.")
+        .startupMessage <- paste0(
+          "Keras loaded from TensorFlow version ", tf_ver, ", however version ",
+          required_tf_ver, " is required. Please update TensorFlow.")
       }
     },
     
@@ -29,5 +33,10 @@ keras <- NULL
     }
      
   ))
+}
+
+.onAttach <- function(libname, pkgname) {
+  if (!is.null(.startupMessage))
+    packageStartupMessage(.startupMessage)
 }
 
