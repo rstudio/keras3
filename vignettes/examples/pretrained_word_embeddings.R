@@ -83,16 +83,12 @@ cat(sprintf('Found %s texts.\n', length(texts)))
 tokenizer <- text_tokenizer(num_words=MAX_NB_WORDS)
 tokenizer %>% fit(texts)
 
-
-
 sequences <- texts_to_sequences(tokenizer, texts)
 
 word_index <- tokenizer$word_index
 cat(sprintf('Found %s unique tokens.\n', length(word_index)))
 
-
 data <- pad_sequences(sequences, maxlen=MAX_SEQUENCE_LENGTH)
-
 labels <- to_categorical(labels)
 
 cat('Shape of data tensor: ', dim(data), '\n')
@@ -109,6 +105,71 @@ x_train <- data[-(1:num_validation_samples),]
 y_train <- labels[-(1:num_validation_samples),]
 x_val <- data[1:num_validation_samples,]
 y_val <- labels[1:num_validation_samples,]
+
+cat('Preparing embedding matrix.\n')
+
+# prepare embedding matrix
+num_words <- min(MAX_NB_WORDS, length(word_index))
+prepare_embedding_matrix <- function() {
+  embedding_matrix <- matrix(0L, nrow = num_words, ncol = EMBEDDING_DIM)
+  for (word in names(word_index)) {
+    index <- word_index[[word]]
+    if (index >= MAX_NB_WORDS)
+      next
+    embedding_vector <- embeddings_index[[word]]
+    if (!is.null(embedding_vector)) {
+      # words not found in embedding index will be all-zeros.
+      embedding_matrix[index,] <- embedding_vector
+    }
+  }
+  embedding_matrix
+}
+
+embedding_matrix <- prepare_embedding_matrix()
+
+# load pre-trained word embeddings into an Embedding layer
+# note that we set trainable = False so as to keep the embeddings fixed
+embedding_layer <- layer_embedding(
+  input_dim = num_words,
+  output_dim = EMBEDDING_DIM,
+  weights = list(embedding_matrix),
+  input_length = MAX_SEQUENCE_LENGTH,
+  trainable = FALSE
+)
+                           
+cat('Training model\n')
+
+# train a 1D convnet with global maxpooling
+sequence_input <- layer_input(shape = list(MAX_SEQUENCE_LENGTH), dtype='int32')
+
+preds <- sequence_input %>%
+  embedding_layer %>% 
+  layer_conv_1d(filters = 128, kernel_size = 5, activation = 'relu') %>% 
+  layer_max_pooling_1d(pool_size = 5) %>% 
+  layer_conv_1d(filters = 128, kernel_size = 5, activation = 'relu') %>% 
+  layer_max_pooling_1d(pool_size = 5) %>% 
+  layer_conv_1d(filters = 128, kernel_size = 5, activation = 'relu') %>% 
+  layer_max_pooling_1d(pool_size = 35) %>% 
+  layer_flatten() %>% 
+  layer_dense(units = 128, activation = 'relu') %>% 
+  layer_dense(units = length(labels_index), activation = 'softmax')
+
+
+model <- keras_model(sequence_input, preds)
+
+model %>% compile(
+  loss = 'categorical_crossentropy',
+  optimizer = 'rmsprop',
+  metrics = c('acc')  
+)
+
+model %>% fit(
+  x_train, y_train,
+  batch_size = 128,
+  epochs = 10,
+  validation_data = list(x_val, y_val)
+)
+
 
 
 
