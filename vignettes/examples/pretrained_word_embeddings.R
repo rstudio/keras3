@@ -53,9 +53,9 @@ cat(sprintf('Found %s word vectors.\n', length(embeddings_index)))
 # second, prepare text samples and their labels
 cat('Processing text dataset\n')
 
-texts <- character()  # list of text samples
+texts <- character()  # text samples
+labels <- integer() # label ids
 labels_index <- list()  # dictionary: label name to numeric id
-labels <- character() # list of label ids
 
 for (name in list.files(TEXT_DATA_DIR)) {
   path <- file.path(TEXT_DATA_DIR, name)
