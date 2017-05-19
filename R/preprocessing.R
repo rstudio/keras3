@@ -239,7 +239,10 @@ fit.tensorflow.keras.preprocessing.text.Tokenizer <- function(object, x, ...) {
 #'   
 #' @export
 texts_to_sequences <- function(tokenizer, texts) {
-  tokenizer$texts_to_sequences(texts)  
+  # return it as an opaque python object b/c pad_sequences expects
+  # a list of iterables and we lose the iterable part if we convert to R
+  tokenzier_noconvert <- r_to_py(tokenizer, convert = FALSE)
+  tokenzier_noconvert$texts_to_sequences(texts)  
 }
 
 #' Transforms each text in texts in a sequence of integers.
