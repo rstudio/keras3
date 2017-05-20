@@ -1,7 +1,7 @@
 Package: keras
 Type: Package
 Title: R Interface to Keras
-Version: 0.3
+Version: 0.3.1
 Authors@R: c(
   person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
   person("François", "Chollet", role = c("aut", "cph")),
@@ -20,8 +20,8 @@ License: MIT + file LICENSE
 URL: https://github.com/rstudio/keras
 BugReports: https://github.com/rstudio/keras/issues
 Imports:
-    reticulate (>= 0.7.0.9017), 
-    tensorflow (>= 0.7.0.9007),
+    reticulate (>= 0.8), 
+    tensorflow (>= 0.7.0.9008),
     magrittr, 
     methods,
     R6
