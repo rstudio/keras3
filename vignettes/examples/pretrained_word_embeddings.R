@@ -11,6 +11,16 @@
 #' http://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-20/www/data/news20.html
 #' 
 
+#'
+#' IMPORTANT NOTE: This example does yet work correctly. The code executes fine and
+#' appears to mimic the Python code upon which it is based however it achieves only
+#' half the training accuracy that the Python code does so there is clearly a 
+#' subtle difference.
+#' 
+#' We need to investigate this further before formally adding to the list of examples
+#'
+#'  
+
 library(keras)
 
 GLOVE_DIR <- 'glove.6B'
