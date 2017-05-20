@@ -26,6 +26,13 @@
 #' After 5 epochs: train acc: 0.9858, val acc: 0.9864
 #'
 
+#' 
+#' IMPORTANT NOTE: This example does net work correctly with the version of 
+#' Keras integrated with TensorFlow (the Python variation doesn't work 
+#' either). Therefore, we shouldn't yet add this to the list of published
+#' examples.
+#' 
+
 library(keras)
 
 # Training parameters.
