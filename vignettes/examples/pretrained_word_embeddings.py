@@ -16,15 +16,16 @@ from __future__ import print_function
 import os
 import sys
 import numpy as np
-from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
-from keras.utils import to_categorical
-from keras.layers import Dense, Input, Flatten
-from keras.layers import Conv1D, MaxPooling1D, Embedding
-from keras.models import Model
+import tensorflow.contrib.keras.api.keras as keras
+from tensorflow.contrib.keras.api.keras.preprocessing.text import Tokenizer
+from tensorflow.contrib.keras.api.keras.preprocessing.sequence import pad_sequences
+from tensorflow.contrib.keras.api.keras.utils import to_categorical
+from tensorflow.contrib.keras.api.keras.layers import Dense, Input, Flatten
+from tensorflow.contrib.keras.api.keras.layers import Conv1D, MaxPooling1D, Embedding
+from tensorflow.contrib.keras.api.keras.models import Model
 
 
-BASE_DIR = ''
+BASE_DIR = '.'
 GLOVE_DIR = BASE_DIR + '/glove.6B/'
 TEXT_DATA_DIR = BASE_DIR + '/20_newsgroup/'
 MAX_SEQUENCE_LENGTH = 1000
