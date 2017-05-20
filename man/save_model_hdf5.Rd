@@ -5,12 +5,13 @@
 \alias{load_model_hdf5}
 \title{Save/Load models using HDF5 files}
 \usage{
-save_model_hdf5(model, filepath, overwrite = TRUE, include_optimizer = TRUE)
+save_model_hdf5(object, filepath, overwrite = TRUE,
+  include_optimizer = TRUE)
 
 load_model_hdf5(filepath, custom_objects = NULL)
 }
 \arguments{
-\item{model}{Model to save}
+\item{object}{Model object to save}
 
 \item{filepath}{File path}
 

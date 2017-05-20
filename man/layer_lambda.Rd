@@ -4,12 +4,12 @@
 \alias{layer_lambda}
 \title{Wraps arbitrary expression as a layer}
 \usage{
-layer_lambda(x, f, mask = NULL, arguments = NULL, input_shape = NULL,
+layer_lambda(object, f, mask = NULL, arguments = NULL, input_shape = NULL,
   batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
   name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{f}{The function to be evaluated. Takes input tensor as first
 argument.}

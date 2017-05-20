@@ -4,12 +4,12 @@
 \alias{layer_reshape}
 \title{Reshapes an output to a certain shape.}
 \usage{
-layer_reshape(x, target_shape, input_shape = NULL, batch_input_shape = NULL,
-  batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
-  weights = NULL)
+layer_reshape(object, target_shape, input_shape = NULL,
+  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
+  name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{target_shape}{List of integers, does not include the samples dimension
 (batch size).}

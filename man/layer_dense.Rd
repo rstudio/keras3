@@ -4,7 +4,7 @@
 \alias{layer_dense}
 \title{Add a densely-connected NN layer to an output}
 \usage{
-layer_dense(x, units, activation = NULL, use_bias = TRUE,
+layer_dense(object, units, activation = NULL, use_bias = TRUE,
   kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
   kernel_regularizer = NULL, bias_regularizer = NULL,
   activity_regularizer = NULL, kernel_constraint = NULL,
@@ -13,7 +13,7 @@ layer_dense(x, units, activation = NULL, use_bias = TRUE,
   weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{units}{Positive integer, dimensionality of the output space.}
 

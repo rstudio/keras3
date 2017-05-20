@@ -4,10 +4,10 @@
 \alias{predict_on_batch}
 \title{Returns predictions for a single batch of samples.}
 \usage{
-predict_on_batch(model, x)
+predict_on_batch(object, x)
 }
 \arguments{
-\item{model}{Keras model}
+\item{object}{Keras model object}
 
 \item{x}{Input data (vector, matrix, or array)}
 }

@@ -5,12 +5,12 @@
 \alias{load_model_weights_hdf5}
 \title{Save/Load model weights using HDF5 files}
 \usage{
-save_model_weights_hdf5(model, filepath, overwrite = TRUE)
+save_model_weights_hdf5(object, filepath, overwrite = TRUE)
 
-load_model_weights_hdf5(model, filepath, by_name = FALSE)
+load_model_weights_hdf5(object, filepath, by_name = FALSE)
 }
 \arguments{
-\item{model}{Model to save/load}
+\item{object}{Model object to save/load}
 
 \item{filepath}{Path to the file}
 

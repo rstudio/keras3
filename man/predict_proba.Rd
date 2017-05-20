@@ -5,12 +5,12 @@
 \alias{predict_classes}
 \title{Generates probability or class probability predictions for the input samples.}
 \usage{
-predict_proba(model, x, batch_size = 32, verbose = 0)
+predict_proba(object, x, batch_size = 32, verbose = 0)
 
-predict_classes(model, x, batch_size = 32, verbose = 0)
+predict_classes(object, x, batch_size = 32, verbose = 0)
 }
 \arguments{
-\item{model}{Keras model}
+\item{object}{Keras model object}
 
 \item{x}{Input data (vector, matrix, or array)}
 

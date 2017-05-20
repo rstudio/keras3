@@ -4,7 +4,7 @@
 \alias{layer_simple_rnn}
 \title{Fully-connected RNN where the output is to be fed back to input.}
 \usage{
-layer_simple_rnn(x, units, activation = "tanh", use_bias = TRUE,
+layer_simple_rnn(object, units, activation = "tanh", use_bias = TRUE,
   return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE,
   unroll = FALSE, implementation = 0L,
   kernel_initializer = "glorot_uniform",
@@ -17,7 +17,7 @@ layer_simple_rnn(x, units, activation = "tanh", use_bias = TRUE,
   dtype = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{units}{Positive integer, dimensionality of the output space.}
 

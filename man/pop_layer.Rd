@@ -4,10 +4,10 @@
 \alias{pop_layer}
 \title{Remove the last layer in a model}
 \usage{
-pop_layer(model)
+pop_layer(object)
 }
 \arguments{
-\item{model}{Keras model}
+\item{object}{Keras model object}
 }
 \description{
 Remove the last layer in a model

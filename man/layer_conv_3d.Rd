@@ -4,7 +4,7 @@
 \alias{layer_conv_3d}
 \title{3D convolution layer (e.g. spatial convolution over volumes).}
 \usage{
-layer_conv_3d(x, filters, kernel_size, strides = c(1L, 1L, 1L),
+layer_conv_3d(object, filters, kernel_size, strides = c(1L, 1L, 1L),
   padding = "valid", data_format = NULL, dilation_rate = c(1L, 1L, 1L),
   activation = NULL, use_bias = TRUE,
   kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
@@ -15,7 +15,7 @@ layer_conv_3d(x, filters, kernel_size, strides = c(1L, 1L, 1L),
   weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{filters}{Integer, the dimensionality of the output space (i.e. the
 number output of filters in the convolution).}

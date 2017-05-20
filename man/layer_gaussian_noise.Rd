@@ -4,12 +4,12 @@
 \alias{layer_gaussian_noise}
 \title{Apply additive zero-centered Gaussian noise.}
 \usage{
-layer_gaussian_noise(x, stddev, input_shape = NULL,
+layer_gaussian_noise(object, stddev, input_shape = NULL,
   batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
   name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{stddev}{float, standard deviation of the noise distribution.}
 

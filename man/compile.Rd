@@ -4,11 +4,11 @@
 \alias{compile}
 \title{Configure a Keras model for training}
 \usage{
-compile(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
+compile(object, optimizer, loss, metrics = NULL, loss_weights = NULL,
   sample_weight_mode = NULL)
 }
 \arguments{
-\item{model}{Model to compile.}
+\item{object}{Model object to compile.}
 
 \item{optimizer}{Name of optimizer or optimizer object.}
 

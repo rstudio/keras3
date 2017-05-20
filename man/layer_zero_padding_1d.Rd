@@ -4,11 +4,11 @@
 \alias{layer_zero_padding_1d}
 \title{Zero-padding layer for 1D input (e.g. temporal sequence).}
 \usage{
-layer_zero_padding_1d(x, padding = 1L, batch_size = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+layer_zero_padding_1d(object, padding = 1L, batch_size = NULL,
+  name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{padding}{int, or list of int (length 2)
 \itemize{

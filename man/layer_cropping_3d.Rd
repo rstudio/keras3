@@ -4,12 +4,12 @@
 \alias{layer_cropping_3d}
 \title{Cropping layer for 3D data (e.g. spatial or spatio-temporal).}
 \usage{
-layer_cropping_3d(x, cropping = list(c(1L, 1L), c(1L, 1L), c(1L, 1L)),
+layer_cropping_3d(object, cropping = list(c(1L, 1L), c(1L, 1L), c(1L, 1L)),
   data_format = NULL, batch_size = NULL, name = NULL, trainable = NULL,
   weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{cropping}{int, or list of 3 ints, or list of 3 lists of 2 ints.
 \itemize{

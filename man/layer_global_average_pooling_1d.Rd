@@ -4,11 +4,11 @@
 \alias{layer_global_average_pooling_1d}
 \title{Global average pooling operation for temporal data.}
 \usage{
-layer_global_average_pooling_1d(x, batch_size = NULL, name = NULL,
+layer_global_average_pooling_1d(object, batch_size = NULL, name = NULL,
   trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{batch_size}{Fixed batch size for layer}
 

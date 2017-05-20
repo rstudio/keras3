@@ -4,7 +4,7 @@
 \alias{layer_conv_2d_transpose}
 \title{Transposed convolution layer (sometimes called Deconvolution).}
 \usage{
-layer_conv_2d_transpose(x, filters, kernel_size, strides = c(1L, 1L),
+layer_conv_2d_transpose(object, filters, kernel_size, strides = c(1L, 1L),
   padding = "valid", data_format = NULL, activation = NULL,
   use_bias = TRUE, kernel_initializer = "glorot_uniform",
   bias_initializer = "zeros", kernel_regularizer = NULL,
@@ -14,7 +14,7 @@ layer_conv_2d_transpose(x, filters, kernel_size, strides = c(1L, 1L),
   name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{filters}{Integer, the dimensionality of the output space (i.e. the
 number of output filters in the convolution).}

@@ -5,12 +5,12 @@
 \alias{test_on_batch}
 \title{Single gradient update or model evaluation over one batch of samples.}
 \usage{
-train_on_batch(model, x, y, class_weight = NULL, sample_weight = NULL)
+train_on_batch(object, x, y, class_weight = NULL, sample_weight = NULL)
 
-test_on_batch(model, x, y, sample_weight = NULL)
+test_on_batch(object, x, y, sample_weight = NULL)
 }
 \arguments{
-\item{model}{Keras model}
+\item{object}{Keras model object}
 
 \item{x}{input data, as an array or list of arrays (if the model has multiple
 inputs).}

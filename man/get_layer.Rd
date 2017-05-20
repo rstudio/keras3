@@ -4,10 +4,10 @@
 \alias{get_layer}
 \title{Retrieves a layer based on either its name (unique) or index.}
 \usage{
-get_layer(model, name = NULL, index = NULL)
+get_layer(object, name = NULL, index = NULL)
 }
 \arguments{
-\item{model}{Keras model}
+\item{object}{Keras model object}
 
 \item{name}{String, name of layer.}
 

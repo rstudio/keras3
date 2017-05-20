@@ -4,11 +4,11 @@
 \alias{layer_upsampling_2d}
 \title{Upsampling layer for 2D inputs.}
 \usage{
-layer_upsampling_2d(x, size = c(2L, 2L), data_format = NULL,
+layer_upsampling_2d(object, size = c(2L, 2L), data_format = NULL,
   batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{size}{int, or list of 2 integers. The upsampling factors for rows and
 columns.}

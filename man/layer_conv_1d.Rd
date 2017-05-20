@@ -4,7 +4,7 @@
 \alias{layer_conv_1d}
 \title{1D convolution layer (e.g. temporal convolution).}
 \usage{
-layer_conv_1d(x, filters, kernel_size, strides = 1L, padding = "valid",
+layer_conv_1d(object, filters, kernel_size, strides = 1L, padding = "valid",
   dilation_rate = 1L, activation = NULL, use_bias = TRUE,
   kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
   kernel_regularizer = NULL, bias_regularizer = NULL,
@@ -14,7 +14,7 @@ layer_conv_1d(x, filters, kernel_size, strides = 1L, padding = "valid",
   weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{filters}{Integer, the dimensionality of the output space (i.e. the
 number output of filters in the convolution).}

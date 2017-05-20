@@ -4,11 +4,11 @@
 \alias{evaluate_generator}
 \title{Evaluates the model on a data generator.}
 \usage{
-evaluate_generator(model, generator, steps, max_q_size = 10, workers = 1,
+evaluate_generator(object, generator, steps, max_q_size = 10, workers = 1,
   pickle_safe = FALSE)
 }
 \arguments{
-\item{model}{Model to evaluate}
+\item{object}{Model object to evaluate}
 
 \item{generator}{Generator yielding lists (inputs, targets) or (inputs,
 targets, sample_weights)}

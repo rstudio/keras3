@@ -4,11 +4,11 @@
 \alias{predict_generator}
 \title{Generates predictions for the input samples from a data generator.}
 \usage{
-predict_generator(model, generator, steps, max_q_size = 10, workers = 1,
+predict_generator(object, generator, steps, max_q_size = 10, workers = 1,
   pickle_safe = FALSE)
 }
 \arguments{
-\item{model}{Keras model}
+\item{object}{Keras model object}
 
 \item{generator}{Generator yielding batches of input samples.}
 

@@ -4,7 +4,7 @@
 \alias{layer_lstm}
 \title{Long-Short Term Memory unit - Hochreiter 1997.}
 \usage{
-layer_lstm(x, units, activation = "tanh",
+layer_lstm(object, units, activation = "tanh",
   recurrent_activation = "hard_sigmoid", use_bias = TRUE,
   return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE,
   unroll = FALSE, implementation = 0L,
@@ -19,7 +19,7 @@ layer_lstm(x, units, activation = "tanh",
   weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{units}{Positive integer, dimensionality of the output space.}
 

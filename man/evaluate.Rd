@@ -4,10 +4,10 @@
 \alias{evaluate}
 \title{Evaluate a Keras model}
 \usage{
-evaluate(model, x, y, batch_size = 32, verbose = 1, sample_weight = NULL)
+evaluate(object, x, y, batch_size = 32, verbose = 1, sample_weight = NULL)
 }
 \arguments{
-\item{model}{Model to evaluate}
+\item{object}{Model object to evaluate}
 
 \item{x}{Vector, matrix, or array of training data (or list if the model has
 multiple inputs). If all inputs in the model are named, you can also pass a

@@ -4,11 +4,11 @@
 \alias{layer_repeat_vector}
 \title{Repeats the input n times.}
 \usage{
-layer_repeat_vector(x, n, batch_size = NULL, name = NULL,
+layer_repeat_vector(object, n, batch_size = NULL, name = NULL,
   trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{n}{integer, repetition factor.}
 

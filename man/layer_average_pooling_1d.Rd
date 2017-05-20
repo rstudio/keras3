@@ -4,12 +4,12 @@
 \alias{layer_average_pooling_1d}
 \title{Average pooling for temporal data.}
 \usage{
-layer_average_pooling_1d(x, pool_size = 2L, strides = NULL,
+layer_average_pooling_1d(object, pool_size = 2L, strides = NULL,
   padding = "valid", batch_size = NULL, name = NULL, trainable = NULL,
   weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{pool_size}{Integer, size of the max pooling windows.}
 

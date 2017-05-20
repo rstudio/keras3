@@ -121,7 +121,7 @@ this allows you to do real-time data augmentation on images on CPU in
 parallel to training your model on GPU.</p>
     
 
-    <pre class="usage"><span class='fu'>fit_generator</span>(<span class='no'>model</span>, <span class='no'>generator</span>, <span class='no'>steps_per_epoch</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+    <pre class="usage"><span class='fu'>fit_generator</span>(<span class='no'>object</span>, <span class='no'>generator</span>, <span class='no'>steps_per_epoch</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max_q_size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>workers</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>pickle_safe</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
@@ -130,8 +130,8 @@ parallel to training your model on GPU.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
-      <td><p>Keras model</p></td>
+      <th>object</th>
+      <td><p>Keras model object</p></td>
     </tr>
     <tr>
       <th>generator</th>

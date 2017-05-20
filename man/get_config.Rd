@@ -5,12 +5,12 @@
 \alias{from_config}
 \title{Layer/Model configuration}
 \usage{
-get_config(layer)
+get_config(object)
 
 from_config(config)
 }
 \arguments{
-\item{layer}{Layer or model}
+\item{object}{Layer or model object}
 
 \item{config}{Object with layer or model configuration}
 }

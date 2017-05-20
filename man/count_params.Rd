@@ -4,10 +4,10 @@
 \alias{count_params}
 \title{Count the total number of scalars composing the weights.}
 \usage{
-count_params(layer)
+count_params(object)
 }
 \arguments{
-\item{layer}{Layer or model}
+\item{object}{Layer or model object}
 }
 \value{
 An integer count

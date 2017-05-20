@@ -5,12 +5,12 @@
 \alias{set_weights}
 \title{Layer/Model weights as R arrays}
 \usage{
-get_weights(layer)
+get_weights(object)
 
-set_weights(layer, weights)
+set_weights(object, weights)
 }
 \arguments{
-\item{layer}{Layer or model}
+\item{object}{Layer or model object}
 
 \item{weights}{Weights as R array}
 }

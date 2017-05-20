@@ -4,12 +4,12 @@
 \alias{bidirectional}
 \title{Bidirectional wrapper for RNNs.}
 \usage{
-bidirectional(x, layer, merge_mode = "concat", input_shape = NULL,
+bidirectional(object, layer, merge_mode = "concat", input_shape = NULL,
   batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
   name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{layer}{Recurrent instance.}
 

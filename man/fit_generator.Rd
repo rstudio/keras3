@@ -4,13 +4,13 @@
 \alias{fit_generator}
 \title{Fits the model on data yielded batch-by-batch by a generator.}
 \usage{
-fit_generator(model, generator, steps_per_epoch, epochs = 1, verbose = 1,
+fit_generator(object, generator, steps_per_epoch, epochs = 1, verbose = 1,
   callbacks = NULL, validation_data = NULL, validation_steps = NULL,
   class_weight = NULL, max_q_size = 10, workers = 1,
   pickle_safe = FALSE, initial_epoch = 0)
 }
 \arguments{
-\item{model}{Keras model}
+\item{object}{Keras model object}
 
 \item{generator}{a generator. The output of the generator must be either - a
 list (inputs, targets) - a list (inputs, targets, sample_weights). All

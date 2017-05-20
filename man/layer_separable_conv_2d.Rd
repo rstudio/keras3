@@ -4,7 +4,7 @@
 \alias{layer_separable_conv_2d}
 \title{Depthwise separable 2D convolution.}
 \usage{
-layer_separable_conv_2d(x, filters, kernel_size, strides = c(1L, 1L),
+layer_separable_conv_2d(object, filters, kernel_size, strides = c(1L, 1L),
   padding = "valid", data_format = NULL, depth_multiplier = 1L,
   activation = NULL, use_bias = TRUE,
   depthwise_initializer = "glorot_uniform",
@@ -16,7 +16,7 @@ layer_separable_conv_2d(x, filters, kernel_size, strides = c(1L, 1L),
   trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{filters}{Integer, the dimensionality of the output space (i.e. the
 number output of filters in the convolution).}

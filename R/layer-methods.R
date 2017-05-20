@@ -10,7 +10,7 @@
 #' using `from_config()`. The config does not include connectivity information, 
 #' nor the class name (those are handled externally).
 #' 
-#' @param layer Layer or model
+#' @param object Layer or model object
 #' @param config Object with layer or model configuration
 #' 
 #' @return `get_config()` returns an object with the configuration, 
@@ -26,15 +26,15 @@
 #' @family layer methods
 #'   
 #' @export
-get_config <- function(layer) {
+get_config <- function(object) {
   
   # call using lower level reticulate functions to prevent converstion to list
   # (the object will remain a python dictionary for full fidelity)
-  get_fn <- py_get_attr(layer, "get_config")
+  get_fn <- py_get_attr(object, "get_config")
   config <- py_call(get_fn)
   
   # set attribute indicating class 
-  attr(config, "config_class") <- layer$`__class__`
+  attr(config, "config_class") <- object$`__class__`
   config
 }
 
@@ -48,21 +48,21 @@ from_config <- function(config) {
 
 #' Layer/Model weights as R arrays
 #' 
-#' @param layer Layer or model
+#' @param object Layer or model object
 #' @param weights Weights as R array
 #' 
 #' @family model persistence
 #' @family layer methods
 #' 
 #' @export
-get_weights <- function(layer) {
-  layer$get_weights()
+get_weights <- function(object) {
+  object$get_weights()
 }
 
 #' @rdname get_weights
 #' @export
-set_weights <- function(layer, weights) {
-  layer$set_weights(weights)
+set_weights <- function(object, weights) {
+  object$set_weights(weights)
 }
 
 
@@ -70,15 +70,15 @@ set_weights <- function(layer, weights) {
 
 #' Count the total number of scalars composing the weights.
 #' 
-#' @param layer Layer or model
+#' @param object Layer or model object
 #'  
 #' @return An integer count
 #'  
 #' @family layer methods
 #'  
 #' @export
-count_params <- function(layer) {
-  layer$count_params()
+count_params <- function(object) {
+  object$count_params()
 }
 
 
@@ -91,7 +91,7 @@ count_params <- function(layer) {
 #' functions enable you to retreive various tensor properties of layers with 
 #' multiple nodes.
 #' 
-#' @param layer Layer
+#' @param object Layer or model object
 #' 
 #' @param node_index Integer, index of the node from which to retrieve the 
 #'   attribute. E.g. `node_index = 1` will correspond to the first time the 
@@ -102,51 +102,51 @@ count_params <- function(layer) {
 #' @family layer methods
 #'   
 #' @export
-get_input_at <- function(layer, node_index) {
-  layer$get_input_at(as_node_index(node_index))
+get_input_at <- function(object, node_index) {
+  object$get_input_at(as_node_index(node_index))
 }
 
 #' @rdname get_input_at
 #' @export
-get_output_at <- function(layer, node_index) {
-  layer$get_output_at(as_node_index(node_index))
+get_output_at <- function(object, node_index) {
+  object$get_output_at(as_node_index(node_index))
 }
 
 #' @rdname get_input_at
 #' @export
-get_input_shape_at <- function(layer, node_index) {
-  layer$get_input_shape_at(as_node_index(node_index))
+get_input_shape_at <- function(object, node_index) {
+  object$get_input_shape_at(as_node_index(node_index))
 }
 
 #' @rdname get_input_at
 #' @export
-get_output_shape_at <- function(layer, node_index) {
-  layer$get_output_shape_at(as_node_index(node_index))
+get_output_shape_at <- function(object, node_index) {
+  object$get_output_shape_at(as_node_index(node_index))
 }
 
 
 #' @rdname get_input_at
 #' @export
-get_input_mask_at <- function(layer, node_index) {
-  layer$get_input_mask_at(as_node_index(node_index))
+get_input_mask_at <- function(object, node_index) {
+  object$get_input_mask_at(as_node_index(node_index))
 }
 
 #' @rdname get_input_at
 #' @export
-get_output_mask_at <- function(layer, node_index) {
-  layer$get_output_mask_at(as_node_index(node_index))
+get_output_mask_at <- function(object, node_index) {
+  object$get_output_mask_at(as_node_index(node_index))
 }
 
 
 #' Reset the states for a layer
 #' 
-#' @param layer Model or layer
+#' @param object Model or layer object
 #' 
 #' @family layer methods
 #' 
 #' @export
-reset_states <- function(layer) {
-  layer$reset_states()
+reset_states <- function(object) {
+  object$reset_states()
 }
 
 

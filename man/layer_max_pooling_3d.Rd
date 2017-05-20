@@ -4,12 +4,12 @@
 \alias{layer_max_pooling_3d}
 \title{Max pooling operation for 3D data (spatial or spatio-temporal).}
 \usage{
-layer_max_pooling_3d(x, pool_size = c(2L, 2L, 2L), strides = NULL,
+layer_max_pooling_3d(object, pool_size = c(2L, 2L, 2L), strides = NULL,
   padding = "valid", data_format = NULL, batch_size = NULL, name = NULL,
   trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{pool_size}{list of 3 integers, factors by which to downscale (dim1,
 dim2, dim3). (2, 2, 2) will halve the size of the 3D input in each

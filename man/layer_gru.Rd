@@ -4,7 +4,7 @@
 \alias{layer_gru}
 \title{Gated Recurrent Unit - Cho et al.}
 \usage{
-layer_gru(x, units, activation = "tanh",
+layer_gru(object, units, activation = "tanh",
   recurrent_activation = "hard_sigmoid", use_bias = TRUE,
   return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE,
   unroll = FALSE, implementation = 0L,
@@ -18,7 +18,7 @@ layer_gru(x, units, activation = "tanh",
   dtype = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{units}{Positive integer, dimensionality of the output space.}
 

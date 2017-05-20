@@ -53,14 +53,14 @@
 #' @family recurrent layers
 #'   
 #' @export
-layer_simple_rnn <- function(x, units, activation = "tanh", use_bias = TRUE, 
+layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE, 
                              return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,
                              kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
                              kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                              kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
                              dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
                              dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$SimpleRNN, x, list(
+  call_layer(keras$layers$SimpleRNN, object, list(
     units = as.integer(units),
     activation = activation,
     use_bias = use_bias,
@@ -112,14 +112,14 @@ layer_simple_rnn <- function(x, units, activation = "tanh", use_bias = TRUE,
 #' @family recurrent layers  
 #'     
 #' @export
-layer_gru <- function(x, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 
+layer_gru <- function(object, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 
                       return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,
                       kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
                       kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                       kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
                       dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
                       dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$GRU, x, list(
+  call_layer(keras$layers$GRU, object, list(
     units = as.integer(units),
     activation = activation,
     recurrent_activation = recurrent_activation,
@@ -172,7 +172,7 @@ layer_gru <- function(x, units, activation = "tanh", recurrent_activation = "har
 #' @family recurrent layers  
 #'     
 #' @export
-layer_lstm <- function(x, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 
+layer_lstm <- function(object, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 
                        return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,
                        kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
                        unit_forget_bias = TRUE, kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, 
@@ -180,7 +180,7 @@ layer_lstm <- function(x, units, activation = "tanh", recurrent_activation = "ha
                        dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
                        dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$LSTM, x, list(
+  call_layer(keras$layers$LSTM, object, list(
     units = as.integer(units),
     activation = activation,
     recurrent_activation = recurrent_activation,

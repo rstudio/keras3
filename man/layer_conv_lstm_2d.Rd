@@ -4,7 +4,7 @@
 \alias{layer_conv_lstm_2d}
 \title{Convolutional LSTM.}
 \usage{
-layer_conv_lstm_2d(x, filters, kernel_size, strides = c(1L, 1L),
+layer_conv_lstm_2d(object, filters, kernel_size, strides = c(1L, 1L),
   padding = "valid", data_format = NULL, dilation_rate = c(1L, 1L),
   activation = "tanh", recurrent_activation = "hard_sigmoid",
   use_bias = TRUE, kernel_initializer = "glorot_uniform",
@@ -18,7 +18,7 @@ layer_conv_lstm_2d(x, filters, kernel_size, strides = c(1L, 1L),
   trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{filters}{Integer, the dimensionality of the output space (i.e. the
 number output of filters in the convolution).}

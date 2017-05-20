@@ -36,7 +36,7 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 
 #' Configure a Keras model for training
 #' 
-#' @param model Model to compile.
+#' @param object Model object to compile.
 #' @param optimizer Name of optimizer or optimizer object.
 #' @param loss Name of objective function or objective function. If the model 
 #'   has multiple outputs, you can use a different loss on each output by 
@@ -54,16 +54,15 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 #' @family model functions
 #'   
 #' @export
-compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
+compile <- function(object, optimizer, loss, metrics = NULL, loss_weights = NULL,
                     sample_weight_mode = NULL) {
-  
   
   # ensure we are dealing with a list of metrics
   if (length(metrics) == 1)
     metrics <- list(metrics)
   
   # compile model
-  model$compile(
+  object$compile(
     optimizer = optimizer, 
     loss = loss,
     metrics = metrics,
@@ -71,8 +70,8 @@ compile <- function(model, optimizer, loss, metrics = NULL, loss_weights = NULL,
     sample_weight_mode = sample_weight_mode
   )
   
-  # return model invibibly (conventience for chaining)
-  invisible(model)
+  # return model invisible (conventience for chaining)
+  invisible(object)
 }
 
 
@@ -126,8 +125,7 @@ fit.tensorflow.keras.engine.training.Model <- function(
                 class_weight=NULL, sample_weight=NULL, initial_epoch=0, ...) {
   
   # fit the model
-  model <- object
-  history <- model$fit(
+  history <- object$fit(
     x = normalize_x(x),
     y = normalize_x(y),
     batch_size = as.integer(batch_size),
@@ -151,7 +149,7 @@ fit.tensorflow.keras.engine.training.Model <- function(
 
 #' @inheritParams fit.Model
 #'   
-#' @param model Model to evaluate
+#' @param object Model object to evaluate
 #'   
 #' @return Scalar test loss (if the model has a single output and no metrics) or
 #'   list of scalars (if the model has multiple outputs and/or metrics).
@@ -159,8 +157,8 @@ fit.tensorflow.keras.engine.training.Model <- function(
 #' @family model functions
 #'   
 #' @export
-evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NULL) {
-  model$evaluate(
+evaluate <- function(object, x, y, batch_size = 32, verbose=1, sample_weight = NULL) {
+  object$evaluate(
     x = x,
     y = y,
     batch_size = as.integer(batch_size),
@@ -191,8 +189,7 @@ evaluate <- function(model, x, y, batch_size = 32, verbose=1, sample_weight = NU
 predict.tensorflow.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0, ...) {
   
   # call predict
-  model <- object
-  model$predict(
+  object$predict(
     normalize_x(x), 
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose)
@@ -204,15 +201,15 @@ predict.tensorflow.keras.engine.training.Model <- function(object, x, batch_size
 #' 
 #' @inheritParams predict.tensorflow.keras.engine.training.Model
 #' 
-#' @param model Keras model
+#' @param object Keras model object
 #' 
 #' @details The input samples are processed batch by batch.
 #' 
 #' @family model functions
 #' 
 #' @export
-predict_proba <- function(model, x, batch_size = 32, verbose = 0) {
-  model$predict_proba(
+predict_proba <- function(object, x, batch_size = 32, verbose = 0) {
+  object$predict_proba(
     x = normalize_x(x),
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose)
@@ -221,8 +218,8 @@ predict_proba <- function(model, x, batch_size = 32, verbose = 0) {
 
 #' @rdname predict_proba
 #' @export
-predict_classes <- function(model, x, batch_size = 32, verbose = 0) {
-  model$predict_classes(
+predict_classes <- function(object, x, batch_size = 32, verbose = 0) {
+  object$predict_classes(
     x = normalize_x(x),
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose)
@@ -234,15 +231,15 @@ predict_classes <- function(model, x, batch_size = 32, verbose = 0) {
 #' 
 #' @inheritParams predict.tensorflow.keras.engine.training.Model
 #' 
-#' @param model Keras model
+#' @param object Keras model object
 #' 
 #' @return array of predictions.
 #' 
 #' @family model functions
 #' 
 #' @export
-predict_on_batch <- function(model, x) {
-  model$predict_on_batch(
+predict_on_batch <- function(object, x) {
+  object$predict_on_batch(
     x = normalize_x(x)
   )
 }
@@ -250,7 +247,7 @@ predict_on_batch <- function(model, x) {
 
 #' Single gradient update or model evaluation over one batch of samples.
 #' 
-#' @param model Keras model
+#' @param object Keras model object
 #' @param x input data, as an array or list of arrays (if the model has multiple
 #'   inputs).
 #' @param y labels, as an array.
@@ -265,8 +262,8 @@ predict_on_batch <- function(model, x) {
 #' @family model functions
 #'   
 #' @export
-train_on_batch <- function(model, x, y, class_weight = NULL, sample_weight = NULL) {
-  model$train_on_batch(
+train_on_batch <- function(object, x, y, class_weight = NULL, sample_weight = NULL) {
+  object$train_on_batch(
     x = x,
     y = y,
     class_weight = as_class_weight(class_weight),
@@ -276,8 +273,8 @@ train_on_batch <- function(model, x, y, class_weight = NULL, sample_weight = NUL
 
 #' @rdname train_on_batch 
 #' @export
-test_on_batch <- function(model, x, y, sample_weight = NULL) {
-  model$test_on_batch(
+test_on_batch <- function(object, x, y, sample_weight = NULL) {
+  object$test_on_batch(
     x = x,
     y = y,
     sample_weight = sample_weight
@@ -292,7 +289,7 @@ test_on_batch <- function(model, x, y, sample_weight = NULL) {
 #' this allows you to do real-time data augmentation on images on CPU in
 #' parallel to training your model on GPU.
 #' 
-#' @param model Keras model
+#' @param object Keras model object
 #' @param generator a generator. The output of the generator must be either - a
 #'   list (inputs, targets) - a list (inputs, targets, sample_weights). All
 #'   arrays should contain the same number of samples. The generator is expected
@@ -328,11 +325,11 @@ test_on_batch <- function(model, x, y, sample_weight = NULL) {
 #' @family model functions
 #'   
 #' @export
-fit_generator <- function(model, generator, steps_per_epoch, epochs = 1, verbose = 1, 
+fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, verbose = 1, 
                           callbacks = NULL, validation_data = NULL, validation_steps = NULL, 
                           class_weight = NULL, max_q_size = 10, workers = 1, 
                           pickle_safe = FALSE, initial_epoch = 0) {
-  model$fit_generator(
+  object$fit_generator(
     generator = generator,
     steps_per_epoch = as.integer(steps_per_epoch),
     epochs = as.integer(epochs),
@@ -375,8 +372,8 @@ fit_generator <- function(model, generator, steps_per_epoch, epochs = 1, verbose
 #' @family model functions   
 #'     
 #' @export
-evaluate_generator <- function(model, generator, steps, max_q_size = 10, workers = 1, pickle_safe = FALSE) {
-  model$evaluate_generator(
+evaluate_generator <- function(object, generator, steps, max_q_size = 10, workers = 1, pickle_safe = FALSE) {
+  object$evaluate_generator(
     generator = generator,
     steps = as.integer(steps),
     max_q_size = as.integer(max_q_size),
@@ -393,7 +390,7 @@ evaluate_generator <- function(model, generator, steps, max_q_size = 10, workers
 #' 
 #' @inheritParams predict.tensorflow.keras.engine.training.Model
 #' 
-#' @param model Keras model
+#' @param object Keras model object
 #' @param generator Generator yielding batches of input samples.
 #' @param steps Total number of steps (batches of samples) to yield from
 #'   `generator` before stopping.
@@ -413,8 +410,8 @@ evaluate_generator <- function(model, generator, steps, max_q_size = 10, workers
 #' @family model functions   
 #'     
 #' @export
-predict_generator <- function(model, generator, steps, max_q_size = 10, workers = 1, pickle_safe = FALSE) {
-  model$predict_generator(
+predict_generator <- function(object, generator, steps, max_q_size = 10, workers = 1, pickle_safe = FALSE) {
+  object$predict_generator(
     generator = generator,
     steps = as.integer(steps),
     max_q_size = as.integer(max_q_size),
@@ -429,7 +426,7 @@ predict_generator <- function(model, generator, steps, max_q_size = 10, workers 
 #' Indices are based on order of horizontal graph traversal (bottom-up) and 
 #' are 0-based.
 #' 
-#' @param model Keras model
+#' @param object Keras model object
 #' @param name String, name of layer.
 #' @param index Integer, index of layer (0-based)
 #' 
@@ -438,8 +435,8 @@ predict_generator <- function(model, generator, steps, max_q_size = 10, workers 
 #' @family model functions   
 #' 
 #' @export
-get_layer <- function(model, name = NULL, index = NULL) {
-  model$get_layer(
+get_layer <- function(object, name = NULL, index = NULL) {
+  object$get_layer(
     name = name,
     index = as_nullable_integer(index)
   )
@@ -448,13 +445,13 @@ get_layer <- function(model, name = NULL, index = NULL) {
 
 #' Remove the last layer in a model
 #' 
-#' @param model Keras model
+#' @param object Keras model object
 #' 
 #' @family model functions
 #' 
 #' @export
-pop_layer <- function(model) {
-  model$pop()
+pop_layer <- function(object) {
+  object$pop()
 }
 
 

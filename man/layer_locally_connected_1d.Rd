@@ -4,7 +4,7 @@
 \alias{layer_locally_connected_1d}
 \title{Locally-connected layer for 1D inputs.}
 \usage{
-layer_locally_connected_1d(x, filters, kernel_size, strides = 1L,
+layer_locally_connected_1d(object, filters, kernel_size, strides = 1L,
   padding = "valid", data_format = NULL, activation = NULL,
   use_bias = TRUE, kernel_initializer = "glorot_uniform",
   bias_initializer = "zeros", kernel_regularizer = NULL,
@@ -13,7 +13,7 @@ layer_locally_connected_1d(x, filters, kernel_size, strides = 1L,
   name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{filters}{Integer, the dimensionality of the output space (i.e. the
 number output of filters in the convolution).}

@@ -4,11 +4,11 @@
 \alias{layer_global_average_pooling_2d}
 \title{Global average pooling operation for spatial data.}
 \usage{
-layer_global_average_pooling_2d(x, data_format = NULL, batch_size = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_global_average_pooling_2d(object, data_format = NULL,
+  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.

@@ -4,12 +4,12 @@
 \alias{layer_gaussian_dropout}
 \title{Apply multiplicative 1-centered Gaussian noise.}
 \usage{
-layer_gaussian_dropout(x, rate, input_shape = NULL,
+layer_gaussian_dropout(object, rate, input_shape = NULL,
   batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
   name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{rate}{float, drop probability (as with \code{Dropout}). The multiplicative
 noise will have standard deviation \code{sqrt(rate / (1 - rate))}.}
