@@ -61,7 +61,7 @@ x_test <- imdb$test$x %>%
 model <- keras_model_sequential()
 
 model %>%
-  layer_embedding(max_features, embedding_dims, input_length = maxlen) %>%
+  layer_embedding(max_features, embedding_size, input_length = maxlen) %>%
   layer_dropout(0.25) %>%
   layer_conv_1d(
     filters, 
