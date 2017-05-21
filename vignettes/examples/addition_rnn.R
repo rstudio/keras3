@@ -98,7 +98,7 @@ generate_data <- function(size, digits, invert = TRUE){
 # Parameters --------------------------------------------------------------
 
 # Parameters for the model and dataset.
-TRAINING_SIZE <- 5000
+TRAINING_SIZE <- 50000
 DIGITS <- 2
 
 # Maximum length of input is 'int + int' (e.g., '345+678'). Maximum length of
