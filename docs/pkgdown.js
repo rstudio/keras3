@@ -12,9 +12,6 @@ $(document).ready(function() {
   // turn functions section into ref-table
   $('#functions').find('table').attr('class', 'ref-index');
   
-  // remove full s3 class from methods
-  //$(".ref-index a:contains('tensorflow.contrib.keras')").remove();
-  
   // are we in examples?
   var examples = window.location.href.match("/articles/examples/") !== null;
   if (examples) {
@@ -27,6 +24,11 @@ $(document).ready(function() {
       a.attr('href', "https://github.com/rstudio/keras/blob/master/vignettes/examples/" + script);
       header.empty().append(a);
     }
+    
+    // remove right column
+    $(".col-md-9").removeClass("col-md-9").addClass('col-md-10');
+    $(".col-md-3").remove();
+    
   }
   
   // manage active state of menu based on current page
