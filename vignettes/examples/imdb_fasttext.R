@@ -1,17 +1,17 @@
-# This example demonstrates the use of fasttext for text classification
-# 
-# Based on Joulin et al's paper:
-#   
-# Bags of Tricks for Efficient Text Classification
-# https://arxiv.org/abs/1607.01759
-# 
-# Results on IMDB datasets with uni and bi-gram embeddings:
-# Uni-gram: 0.8813 test accuracy after 5 epochs. 8s/epoch on i7 cpu.
-# Bi-gram : 0.9056 test accuracy after 5 epochs. 2s/epoch on GTx 980M gpu.
-# 
+#' This example demonstrates the use of fasttext for text classification
+#' 
+#' Based on Joulin et al's paper:
+#'    
+#' Bags of Tricks for Efficient Text Classification
+#' https://arxiv.org/abs/1607.01759
+#' 
+#' Results on IMDB datasets with uni and bi-gram embeddings:
+#' Uni-gram: 0.8813 test accuracy after 5 epochs. 8s/epoch on i7 cpu.
+#' Bi-gram : 0.9056 test accuracy after 5 epochs. 2s/epoch on GTx 980M gpu.
+#' 
+
 library(keras)
 library(purrr)
-
 
 # Function definition -----------------------------------------------------
 
@@ -25,7 +25,7 @@ create_ngram_set <- function(input_list, ngram_value = 2){
 add_ngram <- function(sequences, token_indice, ngram_range = 2){
   ngrams <- map(
     sequences, 
-    create_ngram_set, ngram_value = ngram_range,
+    create_ngram_set, ngram_value = ngram_range
   )
   
   seqs <- map2(sequences, ngrams, function(x, y){
@@ -57,7 +57,7 @@ print(length(imdb_data$test$x)) # test sequences
 print(sprintf("Average train sequence length: %f", mean(map_int(imdb_data$train$x, length))))
 print(sprintf("Average test sequence length: %f", mean(map_int(imdb_data$test$x, length))))
 
-if(ngram_range > 1){
+if(ngram_range > 1) {
   
   # Create set of unique n-gram from the training set.
   ngrams <- imdb_data$train$x %>% 
@@ -113,5 +113,5 @@ model %>% fit(
   batch_size = batch_size,
   epochs = epochs,
   validation_data = list(imdb_data$test$x, imdb_data$test$y)
-  )
+)
 

@@ -39,15 +39,15 @@ input_shape <- c(img_rows, img_cols, 1)
 x_train <- x_train / 255
 x_test <- x_test / 255
 
-cat('x_train_shape:', dim(x_train))
-cat(dim(x_train)[[1]], 'train samples')
-cat(dim(x_test)[[1]], 'test samples')
+cat('x_train_shape:', dim(x_train), '\n')
+cat(dim(x_train)[[1]], 'train samples\n')
+cat(dim(x_test)[[1]], 'test samples\n')
 
 # convert class vectors to binary class matrices
 y_train <- to_categorical(y_train, num_classes)
 y_test <- to_categorical(y_test, num_classes)
 
-cat("Evaliate IRNN...")
+cat("Evaliate IRNN...\n")
 model <- keras_model_sequential()
 model %>% 
   layer_simple_rnn(units = hidden_units,

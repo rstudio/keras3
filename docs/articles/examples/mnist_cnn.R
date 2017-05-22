@@ -29,9 +29,9 @@ input_shape <- c(img_rows, img_cols, 1)
 x_train <- x_train / 255
 x_test <- x_test / 255
 
-cat('x_train_shape:', dim(x_train))
-cat(dim(x_train)[[1]], 'train samples')
-cat(dim(x_test)[[1]], 'test samples')
+cat('x_train_shape:', dim(x_train), '\n')
+cat(dim(x_train)[[1]], 'train samples\n')
+cat(dim(x_test)[[1]], 'test samples\n')
 
 # convert class vectors to binary class matrices
 y_train <- to_categorical(y_train, num_classes)
@@ -69,7 +69,7 @@ scores <- model %>% evaluate(
   x_test, y_test, verbose = 0
 )
 
-cat('Test loss:', scores[[1]])
-cat('Test accuracy:', scores[[2]])
+cat('Test loss:', scores[[1]], '\n')
+cat('Test accuracy:', scores[[2]], '\n')
 
 
