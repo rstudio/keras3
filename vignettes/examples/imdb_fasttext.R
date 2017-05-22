@@ -26,7 +26,6 @@ add_ngram <- function(sequences, token_indice, ngram_range = 2){
   ngrams <- map(
     sequences, 
     create_ngram_set, ngram_value = ngram_range,
-    .progress = "text"
   )
   
   seqs <- map2(sequences, ngrams, function(x, y){
@@ -62,7 +61,7 @@ if(ngram_range > 1){
   
   # Create set of unique n-gram from the training set.
   ngrams <- imdb_data$train$x %>% 
-    map(create_ngram_set, .progress = "text") %>%
+    map(create_ngram_set) %>%
     unlist() %>%
     unique()
 
@@ -79,13 +78,13 @@ if(ngram_range > 1){
   max_features <- max(token_indice$token) + 1
   
   # Augmenting x_train and x_test with n-grams features
-  x_train <- add_ngram(imdb_data$train$x, token_indice, ngram_range)
-  x_test <- add_ngram(imdb_data$test$x, token_indice, ngram_range)
+  imdb_data$train$x <- add_ngram(imdb_data$train$x, token_indice, ngram_range)
+  imdb_data$test$x <- add_ngram(imdb_data$test$x, token_indice, ngram_range)
 }
 
 # pad sequences
-x_train <- pad_sequences(x_train, maxlen = maxlen)
-x_test <- pad_sequences(x_test, maxlen = maxlen)
+imdb_data$train$x <- pad_sequences(imdb_data$train$x, maxlen = maxlen)
+imdb_data$test$x <- pad_sequences(imdb_data$test$x, maxlen = maxlen)
 
 
 # Model definition --------------------------------------------------------
@@ -110,9 +109,9 @@ model %>% compile(
 # Fitting -----------------------------------------------------------------
 
 model %>% fit(
-  x_train, imdb_data$train$y, 
+  imdb_data$train$x, imdb_data$train$y, 
   batch_size = batch_size,
   epochs = epochs,
-  validation_data = list(x_test, imdb_data$test$y)
+  validation_data = list(imdb_data$test$x, imdb_data$test$y)
   )
 
