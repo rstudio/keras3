@@ -54,6 +54,7 @@
 # (5) deeper_net2deeper:         0.032    0.031    0.029
 library(keras)
 library(abind)
+library(purrr)
 
 # Function definition -----------------------------------------------------
 
@@ -65,6 +66,10 @@ preprocess_input <- function(x){
 
 preprocess_output <- function(y, num_classes = 10){
   to_categorical(y, num_classes = num_classes)
+}
+
+bincount <- function(x){
+  map_int(1:max(x), ~sum(x == .x))
 }
 
 # Parameters --------------------------------------------------------------
@@ -118,16 +123,33 @@ wider2net_conv2d <- function(teacher_w1, teacher_b1,
     new_w2 <- rnorm(prod(shape_new_w2) , 0, 0.1) %>%
       array(dim = shape_new_w2)
     
+  } else if (init == "net2wider"){
+    
+    index <- sample(1:dim(teacher_w1)[4], size = n, replace = TRUE)
+    factors <- bincount(index)[index] + 1
+    dim(factors) <- c(1, 1, length(factors), 1)
+    
+    new_w1 <- teacher_w1[,,,index]
+    new_b1 <- teacher_b1[index]
+    new_w2 <- apply(teacher_w2[,,index,], c(1,2,4), function(x) x/factors) %>%
+      aperm(c(2,3,1,4))
+  
   }
+  
   
   student_w1 <- abind(teacher_w1, new_w1, along = 4)
   
   if(init == "random-pad"){
     student_w2 <- abind(teacher_w2, new_w2, along = 3)
+  } else if (init == "net2wider"){
+    
+    noise <- rnorm(prod(dim(new_w2)), 0, 5e-2*sd(new_w2)) %>%
+      array(dim = dim(new_w2))
+    student_w2 <- abind(teacher_w2, new_w2 + noise, axis = 3)
+    student_w2[,,index,] <- new_w2
   }
   
   student_b1 <- c(teacher_b1, new_b1) %>% array(., dim = c(length(.)))
-  
   
   list(
     student_w1 = student_w1, 
@@ -264,4 +286,4 @@ net2wider_experiment <- function(){
 }
 
 
-
+net2wider_experiment()
