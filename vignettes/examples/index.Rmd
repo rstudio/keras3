@@ -14,6 +14,7 @@ title: "Keras Examples"
 | [imdb_cnn_lstm.R](imdb_cnn_lstm.html) | Trains a convolutional stack followed by a recurrent stack network on the IMDB sentiment classification task. |
 | [imdb_fasttext.R](imdb_fasttext.html) | Trains a FastText model on the IMDB sentiment classification task. |
 | [imdb_lstm.R](imdb_lstm.html) | Trains a LSTM on the IMDB sentiment classification task. |
+| [lstm_text_generation.R](lstm_text_generation.html) | Generates text from Nietzsche's writings. |
 | [mnist_cnn.R](mnist_cnn.html) | Trains a simple convnet on the MNIST dataset. |
 | [mnist_irnn.R](mnist_irnn.html) | Reproduction of the IRNN experiment with pixel-by-pixel sequential MNIST in "A Simple Way to Initialize Recurrent Networks of Rectified Linear Units" by Le et al. |
 | [mnist_mlp.R](mnist_mlp.html) | Trains a simple deep multi-layer perceptron on the MNIST dataset. |
@@ -26,7 +27,6 @@ title: "Keras Examples"
 | [conv_lstm.R](conv_lstm.html) | Demonstrates the use of a convolutional LSTM network. |
 | [image_ocr.R](image_ocr.html) | Trains a convolutional stack followed by a recurrent stack and a CTC logloss function to perform optical character recognition (OCR). |
 | [lstm_benchmark.R](lstm_benchmark.html) | Compares different LSTM implementations on the IMDB sentiment classification task. |
-| [lstm_text_generation.R](lstm_text_generation.html) | Generates text from Nietzsche's writings. |
 | [mnist_acgan.R](mnist_acgan.html) | Implementation of AC-GAN ( Auxiliary Classifier GAN ) on the MNIST dataset |
 | [mnist_net2net.R](mnist_net2net.html) | Reproduction of the Net2Net experiment with MNIST in "Net2Net: Accelerating Learning via Knowledge Transfer". |
 | [mnist_siamese_graph.R](mnist_siamese_graph.html) | Trains a Siamese multi-layer perceptron on pairs of digits from the MNIST dataset. |
