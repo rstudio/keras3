@@ -38,8 +38,8 @@ The generator should return the same kind of data as accepted by
 }
 \seealso{
 Other model functions: \code{\link{compile}},
-  \code{\link{evaluate}}, \code{\link{fit.Model}},
-  \code{\link{fit_generator}}, \code{\link{get_config}},
+  \code{\link{evaluate}}, \code{\link{fit_generator}},
+  \code{\link{fit}}, \code{\link{get_config}},
   \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}}, \code{\link{pop_layer}},

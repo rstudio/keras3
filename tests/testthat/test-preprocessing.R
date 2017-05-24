@@ -29,10 +29,10 @@ test_succeeds("use of text tokenizer", {
     'Dogs and cats living together.'
   )
   tokenizer <- text_tokenizer(num_words = 10)
-  tokenizer %>% fit(texts)
+  tokenizer %>% fit_text_tokenizer(texts)
   
   sequences <- iterate(texts_to_sequences_generator(tokenizer, texts))
-  tokenizer %>% fit(sequences)
+  tokenizer %>% fit_text_tokenizer(sequences)
   
   for (mode in c('binary', 'count', 'tfidf', 'freq'))
     texts_to_matrix(tokenizer, texts, mode)

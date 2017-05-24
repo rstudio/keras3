@@ -83,7 +83,7 @@ if(!data_augmentation){
     horizontal_flip = TRUE
   )
   
-  datagen %>% fit(x_train)
+  datagen %>% fit_image_data_generator(x_train)
   
   model %>% fit_generator(
     flow_images_from_data(x_train, y_train, datagen, batch_size = batch_size),

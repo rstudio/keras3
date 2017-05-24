@@ -42,7 +42,7 @@ test_succeeds("image data generator can be used for training", {
     height_shift_range = 0.2,
     horizontal_flip = TRUE
   )
-  datagen %>% fit(X_train)
+  datagen %>% fit_image_data_generator(X_train)
   
   # train using generator
   model %>%

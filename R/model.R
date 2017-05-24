@@ -116,11 +116,8 @@ compile <- function(object, optimizer, loss, metrics = NULL, loss_weights = NULL
 #' 
 #' @family model functions
 #' 
-#' @name fit.Model
-#' 
 #' @export
-fit.tensorflow.keras.engine.training.Model <- function(
-                object, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL,
+fit <- function(object, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL,
                 validation_split=0.0, validation_data=NULL, shuffle=TRUE,
                 class_weight=NULL, sample_weight=NULL, initial_epoch=0, ...) {
   
@@ -147,7 +144,7 @@ fit.tensorflow.keras.engine.training.Model <- function(
 
 #' Evaluate a Keras model
 
-#' @inheritParams fit.Model
+#' @inheritParams fit
 #'   
 #' @param object Model object to evaluate
 #'   

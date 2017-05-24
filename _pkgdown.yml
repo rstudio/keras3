@@ -42,7 +42,7 @@ reference:
       - keras_model_sequential
       - summary.tensorflow.keras.engine.training.Model
       - compile
-      - fit.tensorflow.keras.engine.training.Model
+      - fit
       - fit_generator
       - evaluate
       - evaluate_generator
@@ -56,8 +56,6 @@ reference:
       - pop_layer
       - save_model_hdf5
       - load_model_hdf5
-    exclude: 
-      - fit
  
   - title: "Core Layers"
     contents:
@@ -190,7 +188,7 @@ reference:
   - title: "Text Preprocessing"
     contents:
       - text_tokenizer
-      - fit.tensorflow.keras.preprocessing.text.Tokenizer
+      - fit_text_tokenizer
       - texts_to_sequences
       - texts_to_sequences_generator
       - texts_to_matrix
@@ -203,7 +201,7 @@ reference:
       - image_load
       - image_to_array
       - image_data_generator
-      - fit.tensorflow.keras.preprocessing.image.ImageDataGenerator
+      - fit_image_data_generator
       - flow_images_from_data
       - flow_images_from_directory
  

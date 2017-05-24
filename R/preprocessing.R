@@ -182,13 +182,13 @@ text_one_hot <- function(text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\
 #' @section Attributes:
 #' The tokenizer object has the following attributes:
 #' - `word_counts` --- named list mapping words to the number of times they appeared
-#'   on during fit. Only set after `fit()` is called on the tokenizer.
+#'   on during fit. Only set after `fit_text_tokenizer()` is called on the tokenizer.
 #' - `word_docs` --- named list mapping words to the number of documents/texts they
-#'    appeared on during fit. Only set after `fit()` is called on the tokenizer.
+#'    appeared on during fit. Only set after `fit_text_tokenizer()` is called on the tokenizer.
 #' - `word_index` --- named list mapping words to their rank/index (int). Only set 
-#'    after `fit()` is called on the tokenizer.
+#'    after `fit_text_tokenizer()` is called on the tokenizer.
 #' -  `document_count` --- int. Number of documents (texts/sequences) the tokenizer 
-#'    was trained on. Only set after `fit()` is called on the tokenizer.
+#'    was trained on. Only set after `fit_text_tokenizer()` is called on the tokenizer.
 #'   
 #' @family text tokenization
 #'   
@@ -219,7 +219,7 @@ text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\
 #' @family text tokenization
 #'   
 #' @export
-fit.tensorflow.keras.preprocessing.text.Tokenizer <- function(object, x, ...) {
+fit_text_tokenizer <- function(object, x, ...) {
   tokenizer <- object
   if (is.list(x))
     tokenizer$fit_on_sequences(x)
@@ -430,7 +430,7 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
 #' @family image preprocessing
 #' 
 #' @export
-fit.tensorflow.keras.preprocessing.image.ImageDataGenerator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL, ...) {
+fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL, ...) {
   generator <- object
   history <- generator$fit(
     x = x,

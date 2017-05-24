@@ -91,7 +91,7 @@ cat(sprintf('Found %s texts.\n', length(texts)))
 
 # finally, vectorize the text samples into a 2D integer tensor
 tokenizer <- text_tokenizer(num_words=MAX_NB_WORDS)
-tokenizer %>% fit(texts)
+tokenizer %>% fit_text_tokenizer(texts)
 
 sequences <- texts_to_sequences(tokenizer, texts)
 
