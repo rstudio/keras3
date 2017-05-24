@@ -85,7 +85,7 @@ library(keras)
 install_tensorflow()
 ```
 
-This will provide you with a default installation of TensorFlow suitable for use with the keras R package. See the [article on TensorFlow installation](https://rstudio.github.io/tensorflow/installation.html) to learn about more advanced options.
+This will provide you with a default installation of TensorFlow suitable for use with the keras R package. See the [article on TensorFlow installation](https://rstudio.github.io/tensorflow/installation.html) to learn about more advanced options, including installing a version of TensorFlow that takes advantage of Nvidia GPUs if you have the correct CUDA libraries installed.
 
 ## Learning More
 
