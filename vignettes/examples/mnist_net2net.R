@@ -187,6 +187,43 @@ make_teacher_model <- function(train_data, validation_data, epochs=3){
   model
 }
 
+make_wider_model_scratch <- function(train_data, validation_data, epochs=3){
+  
+  new_conv1_width <- 128
+  new_fc1_width <- 128
+  
+  model <- keras_model_sequential()
+  
+  model %>%
+    # a wider conv1 compared to teacher_model
+    layer_conv_2d(
+      input_shape = input_shape, new_conv1_width, 
+      list(3, 3), padding = "same", name = "conv1"
+    ) %>%
+    layer_max_pooling_2d(2, name = "pool1") %>%
+    layer_conv_2d(64, list(3,3), padding = "same", name = "conv2") %>%
+    layer_max_pooling_2d(2, name = "pool2") %>%
+    layer_flatten(name = "flatten") %>%
+    # a wider fc1 compared to teacher model
+    layer_dense(new_fc1_width, activation = "relu", name = "fc1") %>%
+    layer_dense(num_class, activation = "softmax", name = "fc2")
+  
+  model %>% compile(
+    loss = "categorical_crossentropy",
+    optimizer = optimizer_sgd(lr = 0.01, momentum = 0.9),
+    metrics = "accuracy"
+  )
+  
+  history <- model %>% fit(
+    train_data$x, train_data$y,
+    epochs = epochs,
+    validation_data = list(validation_data$x, validation_data$y)
+  )
+  
+  model
+}
+
+
 
 # Train a wider student model based on teacher_model,
 # with either 'random-pad' (baseline) or 'net2wider'
@@ -258,7 +295,6 @@ make_wider_student_model <- function(teacher_model, train_data,
   model
 }
 
-
 # experiments setup
 
 # Benchmark performances of
@@ -268,10 +304,10 @@ make_wider_student_model <- function(teacher_model, train_data,
 net2wider_experiment <- function(){
   
   cat("\nExperiment of Net2WiderNet ...")
-  cat("\nbuilding teacher model ...")
+  cat("\nbuilding teacher model ...\n")
   
   teacher_model <- make_teacher_model(mnist$train, mnist$test, epochs = 3)
-  
+
   cat("\nbuilding wider student model by random padding ...")
   make_wider_student_model(teacher_model, mnist$train,
                            mnist$test, "random-pad",
@@ -283,7 +319,12 @@ net2wider_experiment <- function(){
                            mnist$test, "net2wider",
                            epochs=3)
   
+  cat("\nbuilding widedr model from scratch")
+  make_wider_model_scratch(mnist$train, mnist$test, epochs = 3)
+  
+  cat("\nFinished")
 }
 
 
 net2wider_experiment()
+ 
