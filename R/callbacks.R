@@ -377,7 +377,7 @@ KerasCallback <- R6Class("KerasCallback",
 
 normalize_callbacks <- function(callbacks) {
   
-  if(is.null(session_run_hooks)) return(NULL)
+  if(is.null(callbacks)) return(NULL)
   
   # if callbacks isn't a list then make it one
   if (!is.null(callbacks) && !is.list(callbacks))
