@@ -26,6 +26,15 @@ Please cite Keras in your publications if it helps your research. Here is an exa
 }
 ```
 
+## How can I run Keras on a GPU?
+
+If your system has an NVIDIA® GPU and you have the GPU version of TensorFlow installed then your Keras code will automatically run on the GPU.
+
+Note that installation of the GPU version of TensorFlow takes some time and effort. So if you are just getting started with Keras you may want to stick with the CPU version to start, then install the GPU version once your training becomes more computationally demanding.
+
+Additional details on GPU installation can be found here: <https://tensorflow.rstudio.com/installation_gpu.html>.
+
+
 ## What does "sample", "batch", "epoch" mean?
 
 Below are some common definitions that are necessary to know and understand to correctly utilize Keras:

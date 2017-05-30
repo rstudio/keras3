@@ -109,6 +109,13 @@
   howpublished={\url{https://github.com/fchollet/keras}},
 }</code></pre>
 </div>
+<div id="how-can-i-run-keras-on-a-gpu" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-run-keras-on-a-gpu" class="anchor"></a>How can I run Keras on a GPU?</h2>
+<p>If your system has an NVIDIA® GPU and you have the GPU version of TensorFlow installed then your Keras code will automatically run on the GPU.</p>
+<p>Note that installation of the GPU version of TensorFlow takes some time and effort. So if you are just getting started with Keras you may want to stick with the CPU version to start, then install the GPU version once your training becomes more computationally demanding.</p>
+<p>Additional details on GPU installation can be found here: <a href="https://tensorflow.rstudio.com/installation_gpu.html" class="uri">https://tensorflow.rstudio.com/installation_gpu.html</a>.</p>
+</div>
 <div id="what-does-sample-batch-epoch-mean" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-does-sample-batch-epoch-mean" class="anchor"></a>What does “sample”, “batch”, “epoch” mean?</h2>
@@ -346,6 +353,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#how-should-i-cite-keras">How should I cite Keras?</a></li>
+      <li><a href="#how-can-i-run-keras-on-a-gpu">How can I run Keras on a GPU?</a></li>
       <li><a href="#what-does-sample-batch-epoch-mean">What does “sample”, “batch”, “epoch” mean?</a></li>
       <li><a href="#why-are-keras-objects-modified-in-place">Why are Keras objects modified in place?</a></li>
       <li><a href="#how-can-i-save-a-keras-model">How can I save a Keras model?</a></li>
