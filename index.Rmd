@@ -75,7 +75,7 @@ The R interface to Keras uses [TensorFlow](https://rstudio.github.io/tensorflow/
 First, install the keras R package as follows:
 
 ```{r, eval=FALSE}
-install.packages("keras", type = "source", repos = c("https://cartographer-alba-50131.netlify.com/7536398b6aeebf87b8d128830d509b88a21a822c/repos", "https://cran.rstudio.com"))
+devtools::install_github("rstudio/keras")
 ```
 
 Then, use the `install_tensorflow()` function to install TensorFlow:
