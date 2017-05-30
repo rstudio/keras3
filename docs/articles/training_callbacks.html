@@ -105,18 +105,18 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
 <span class="co"># generate dummy training data</span>
-data &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rexp</span>(<span class="dv">1000</span>*<span class="dv">784</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">784</span>)
-labels &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1000</span>*<span class="dv">10</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>)), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">10</span>)
+data &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rexp</span>(<span class="dv">1000</span><span class="op">*</span><span class="dv">784</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">784</span>)
+labels &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1000</span><span class="op">*</span><span class="dv">10</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>)), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">10</span>)
 
 <span class="co"># create model</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() 
 
 <span class="co"># add layers and compile</span>
-model %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dv">32</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dv">10</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'softmax'</span>) %&gt;%<span class="st"> </span>
+model <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dv">32</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dv">10</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'softmax'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
     <span class="dt">loss=</span><span class="st">'binary_crossentropy'</span>,
     <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span>(),
@@ -124,7 +124,7 @@ model %&gt;%
   )
   
 <span class="co"># fit with callbacks</span>
-model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels, <span class="dt">callbacks =</span> <span class="kw">list</span>(
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels, <span class="dt">callbacks =</span> <span class="kw">list</span>(
   <span class="kw"><a href="../reference/callback_model_checkpoint.html">callback_model_checkpoint</a></span>(<span class="st">"checkpoints.h5"</span>),
   <span class="kw"><a href="../reference/callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau</a></span>(<span class="dt">monitor =</span> <span class="st">"val_loss"</span>, <span class="dt">factor =</span> <span class="fl">0.1</span>)
 ))</code></pre></div>
@@ -234,15 +234,15 @@ Create a custom callback
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
 <span class="co"># define custom callback class</span>
-LossHistory &lt;-<span class="st"> </span>R6::<span class="kw">R6Class</span>(<span class="st">"LossHistory"</span>,
+LossHistory &lt;-<span class="st"> </span>R6<span class="op">::</span><span class="kw">R6Class</span>(<span class="st">"LossHistory"</span>,
   <span class="dt">inherit =</span> KerasCallback,
   
   <span class="dt">public =</span> <span class="kw">list</span>(
     
     <span class="dt">losses =</span> <span class="ot">NULL</span>,
      
-    <span class="dt">on_batch_end =</span> function(batch, <span class="dt">logs =</span> <span class="kw">list</span>()) {
-      self$losses &lt;-<span class="st"> </span><span class="kw">c</span>(self$losses, logs[[<span class="st">"loss"</span>]])
+    <span class="dt">on_batch_end =</span> <span class="cf">function</span>(batch, <span class="dt">logs =</span> <span class="kw">list</span>()) {
+      self<span class="op">$</span>losses &lt;-<span class="st"> </span><span class="kw">c</span>(self<span class="op">$</span>losses, logs[[<span class="st">"loss"</span>]])
     }
 ))
 
@@ -250,24 +250,24 @@ LossHistory &lt;-<span class="st"> </span>R6::<span class="kw">R6Class</span>(<s
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() 
 
 <span class="co"># add layers and compile</span>
-model %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'softmax'</span>) %&gt;%<span class="st"> </span>
+model <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'softmax'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
     <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>, 
     <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>
   )
 
 <span class="co"># create history callback object and use it during training</span>
-history &lt;-<span class="st"> </span>LossHistory$<span class="kw">new</span>()
-model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
+history &lt;-<span class="st"> </span>LossHistory<span class="op">$</span><span class="kw">new</span>()
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
   X_train, Y_train,
   <span class="dt">batch_size=</span><span class="dv">128</span>, <span class="dt">epochs=</span><span class="dv">20</span>, <span class="dt">verbose=</span><span class="dv">0</span>,
   <span class="dt">callbacks=</span> <span class="kw">list</span>(history)
 )
 
 <span class="co"># print the accumulated losses</span>
-history$losses</code></pre></div>
+history<span class="op">$</span>losses</code></pre></div>
 <pre><code>[1] 0.6604760 0.3547246 0.2595316 0.2590170 ...</code></pre>
 <div id="fields" class="section level3">
 <h3 class="hasAnchor">
