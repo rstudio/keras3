@@ -10,5 +10,5 @@
 
 - Supports arbitrary network architectures: multi-input or multi-output models, layer sharing, model sharing, etc. This means that Keras is appropriate for building essentially any deep learning model, from a memory network to a neural Turing machine.
 
-See the package website at <https://tensorflow.rstudio.com/keras> for complete documentation.
+See the package website at <https://rstudio.github.io/keras> for complete documentation.
 

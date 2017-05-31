@@ -74,9 +74,9 @@ Building a question answering system, an image classification model, a Neural Tu
 
 ## Installation
 
-The R interface to Keras uses [TensorFlow](https://rstudio.github.io/tensorflow/) as it's underlying computation engine. Therefore, you need to install both the keras R package as well as the the TensorFlow engine.
+The R interface to Keras uses [TensorFlow™](https://www.tensorflow.org/) as it's underlying computation engine. Therefore, you need to install both the keras R package as well as the the TensorFlow engine.
 
-First, install the keras R package as follows:
+First, install the keras R package from GitHub as follows:
 
 ```{r, eval=FALSE}
 devtools::install_github("rstudio/keras")
@@ -89,7 +89,7 @@ library(keras)
 install_tensorflow()
 ```
 
-This will provide you with a default installation of TensorFlow suitable for use with the keras R package. See the [article on TensorFlow installation](https://rstudio.github.io/tensorflow/installation.html) to learn about more advanced options, including installing a version of TensorFlow that takes advantage of Nvidia GPUs if you have the correct CUDA libraries installed.
+This will provide you with a default installation of TensorFlow suitable for use with the keras R package. See the [article on TensorFlow installation](https://tensorflow.rstudio.com/installation.html) to learn about more advanced options, including installing a version of TensorFlow that takes advantage of Nvidia GPUs if you have the correct CUDA libraries installed.
 
 ## Learning More
 
