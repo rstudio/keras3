@@ -156,8 +156,8 @@ fit <- function(object, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NUL
 #' @export
 evaluate <- function(object, x, y, batch_size = 32, verbose=1, sample_weight = NULL) {
   object$evaluate(
-    x = x,
-    y = y,
+    x = normalize_x(x),
+    y = normalize_x(y),
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose),
     sample_weight = sample_weight
@@ -261,8 +261,8 @@ predict_on_batch <- function(object, x) {
 #' @export
 train_on_batch <- function(object, x, y, class_weight = NULL, sample_weight = NULL) {
   object$train_on_batch(
-    x = x,
-    y = y,
+    x = normalize_x(x),
+    y = normalize_x(y),
     class_weight = as_class_weight(class_weight),
     sample_weight = sample_weight
   )
@@ -272,8 +272,8 @@ train_on_batch <- function(object, x, y, class_weight = NULL, sample_weight = NU
 #' @export
 test_on_batch <- function(object, x, y, sample_weight = NULL) {
   object$test_on_batch(
-    x = x,
-    y = y,
+    x = normalize_x(x),
+    y = normalize_x(y),
     sample_weight = sample_weight
   )
 }
