@@ -1,0 +1,9 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: r
+sudo: false
+cache: packages
+
+before_install:
+  - pip install tensorflow h5py pyyaml requests Pillow scipy
+
