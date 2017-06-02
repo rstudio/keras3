@@ -478,11 +478,31 @@ py_str.tensorflow.keras.engine.training.Model <- function(object,  line_length =
 }
 
 
+#' Convert input data into a numpy array. This would be done 
+#' automatically by reticulate for arrays and matrices however we
+#' want to marshall arrays/matrices with C column ordering 
+#' rather than the default Fortrain column ordering, as this will
+#' make for more efficient copying of data to GPUs
 normalize_x <- function(x) {
+  
+  # recurse for lists
   if (is.list(x))
-    lapply(x, as.array)
-  else
-    as.array(x)
+    return(lapply(x, normalize_input))
+  
+  # convert to numpy
+  if (!inherits(x, "numpy.ndarray")) {
+    
+    # convert non-array to array
+    if (!is.array(x))
+      x <- as.array(x)
+    
+    # do the conversion (will result in Fortran column ordering)
+    x <- r_to_py(x)
+  }
+  
+  # ensure we use C column ordering (won't create a new array if the array
+  # is already using C ordering)
+  x$astype(dtype = x$dtype, order = 'C', copy = FALSE)
 }
 
 as_class_weight <- function(class_weight) {
