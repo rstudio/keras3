@@ -1,8 +1,17 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: r
+sudo: false
+cache: packages
+
+addons:
+  apt:
+    packages:
+      - python2.7
+      - python-pip
 
 before_install:
-  - sudo pip install --upgrade pip
-  - sudo pip install tensorflow h5py pyyaml requests Pillow scipy
+  - pip install tensorflow 
+  - pip install h5py pyyaml requests Pillow scipy
+
 
