@@ -5,5 +5,6 @@ sudo: false
 cache: packages
 
 before_install:
+  - pip install --upgrade pip
   - pip install tensorflow h5py pyyaml requests Pillow scipy
 
