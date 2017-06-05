@@ -478,11 +478,11 @@ py_str.tensorflow.keras.engine.training.Model <- function(object,  line_length =
 }
 
 
-#' Convert input data into a numpy array. This would be done 
-#' automatically by reticulate for arrays and matrices however we
-#' want to marshall arrays/matrices with C column ordering 
-#' rather than the default Fortrain column ordering, as this will
-#' make for more efficient copying of data to GPUs
+# Convert input data into a numpy array. This would be done 
+# automatically by reticulate for arrays and matrices however we
+# want to marshall arrays/matrices with C column ordering 
+# rather than the default Fortrain column ordering, as this will
+# make for more efficient copying of data to GPUs
 normalize_x <- function(x) {
   
   # recurse for lists
