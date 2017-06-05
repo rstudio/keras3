@@ -156,8 +156,8 @@ fit <- function(object, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NUL
 #' @export
 evaluate <- function(object, x, y, batch_size = 32, verbose=1, sample_weight = NULL) {
   object$evaluate(
-    x = x,
-    y = y,
+    x = normalize_x(x),
+    y = normalize_x(y),
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose),
     sample_weight = sample_weight
@@ -261,8 +261,8 @@ predict_on_batch <- function(object, x) {
 #' @export
 train_on_batch <- function(object, x, y, class_weight = NULL, sample_weight = NULL) {
   object$train_on_batch(
-    x = x,
-    y = y,
+    x = normalize_x(x),
+    y = normalize_x(y),
     class_weight = as_class_weight(class_weight),
     sample_weight = sample_weight
   )
@@ -272,8 +272,8 @@ train_on_batch <- function(object, x, y, class_weight = NULL, sample_weight = NU
 #' @export
 test_on_batch <- function(object, x, y, sample_weight = NULL) {
   object$test_on_batch(
-    x = x,
-    y = y,
+    x = normalize_x(x),
+    y = normalize_x(y),
     sample_weight = sample_weight
   )
 }
@@ -478,11 +478,31 @@ py_str.tensorflow.keras.engine.training.Model <- function(object,  line_length =
 }
 
 
+#' Convert input data into a numpy array. This would be done 
+#' automatically by reticulate for arrays and matrices however we
+#' want to marshall arrays/matrices with C column ordering 
+#' rather than the default Fortrain column ordering, as this will
+#' make for more efficient copying of data to GPUs
 normalize_x <- function(x) {
+  
+  # recurse for lists
   if (is.list(x))
-    lapply(x, as.array)
-  else
-    as.array(x)
+    return(lapply(x, normalize_input))
+  
+  # convert to numpy
+  if (!inherits(x, "numpy.ndarray")) {
+    
+    # convert non-array to array
+    if (!is.array(x))
+      x <- as.array(x)
+    
+    # do the conversion (will result in Fortran column ordering)
+    x <- r_to_py(x)
+  }
+  
+  # ensure we use C column ordering (won't create a new array if the array
+  # is already using C ordering)
+  x$astype(dtype = x$dtype, order = 'C', copy = FALSE)
 }
 
 as_class_weight <- function(class_weight) {
