@@ -10,11 +10,11 @@
 #   
 #   Hardware           | Backend | Time / Epoch
 # -------------------------------------------
-#   CPU               | TF      | 3 hrs
-# Titan X (maxwell) | TF      | 4 min
-# Titan X (maxwell) | TH      | 7 min
+#   CPU               | TF       | 3 hrs  
+#   Titan X (maxwell) | TF       | 4 min
+#   Titan X (maxwell) | TH       | 7 min
 # 
-# Consult https://github.com/lukedeo/keras-acgan for more information and
+# Consult     for more information and
 # example output
 
 library(keras)
@@ -127,13 +127,13 @@ build_discriminator <- function(){
 # Parameters --------------------------------------------------------------
 
 # batch and latent size taken from the paper
-epochs = 50
-batch_size = 100
-latent_size = 100
+epochs <- 50
+batch_size <- 100
+latent_size <- 100
 
 # Adam parameters suggested in https://arxiv.org/abs/1511.06434
-adam_lr = 0.0002
-adam_beta_1 = 0.5
+adam_lr <- 0.0002
+adam_beta_1 <- 0.5
 
 # Model definition --------------------------------------------------------
 
@@ -152,7 +152,7 @@ generator %>% compile(
 )
 
 latent <- layer_input(shape = list(latent_size))
-image_class <- layer_input(shape = list(1))
+image_class <- layer_input(shape = list(1), dtype = "int32")
 
 fake <- generator(list(latent, image_class))
 
@@ -170,6 +170,8 @@ combined %>% compile(
 
 # Data preparation --------------------------------------------------------
 
+# get our mnist data, and force it to be of shape (..., 1, 28, 28) with
+# range [-1, 1]
 mnist <- dataset_mnist()
 mnist$train$x <- (mnist$train$x - 127.5)/127.5
 mnist$test$x <- (mnist$test$x - 127.5)/127.5
@@ -181,13 +183,13 @@ num_test <- dim(mnist$test$x)[1]
 
 # Training ----------------------------------------------------------------
 
-for(epochs in 1:epochs){
+for(epoch in 1:epochs){
   
   num_batches <- trunc(num_train/batch_size)
   pb <- progress_bar$new(total = num_batches)
   
-  epoch_gen_loss <- list()
-  epoch_disc_loss <- list()
+  epoch_gen_loss <- NULL
+  epoch_disc_loss <- NULL
   
   possible_indexes <- 1:num_train
   
@@ -224,12 +226,126 @@ for(epochs in 1:epochs){
       y = list(y, aux_y)
     )
     
+    epoch_disc_loss <- rbind(epoch_disc_loss, unlist(disc_loss))
+    
+    # make new noise. we generate 2 * batch size here such that we have
+    # the generator optimize over an identical number of images as the
+    # discriminator
+    noise <- runif(2*batch_size*latent_size, min = -1, max = 1) %>%
+      matrix(nrow = 2*batch_size, ncol = latent_size)
+    sampled_labels <- sample(0:9, size = 2*batch_size, replace = TRUE) %>%
+      matrix(ncol = 1)
+    
+    # we want to train the generator to trick the discriminator
+    # For the generator, we want all the {fake, not-fake} labels to say
+    # not-fake
+    trick <- rep(1, 2*batch_size) %>% matrix(ncol = 1)
+    
+    combined_loss <- train_on_batch(
+      combined, 
+      list(noise, sampled_labels),
+      list(trick, sampled_labels)
+    )
+    
+    epoch_gen_loss <- rbind(epoch_gen_loss, unlist(combined_loss))
+    
   }
   
+  cat(sprintf("\nTesting for epoch %02d:", epoch))
+  
+  # evaluate the testing loss here
+  
+  # generate a new batch of noise
+  noise <- runif(num_test*latent_size, min = -1, max = 1) %>%
+    matrix(nrow = num_test, ncol = latent_size)
+  
+  # sample some labels from p_c and generate images from them
+  sampled_labels <- sample(0:9, size = num_test, replace = TRUE) %>%
+    matrix(ncol = 1)
+  generated_images <- predict(generator, list(noise, sampled_labels))
+  
+  X <- abind(mnist$test$x, generated_images, along = 1)
+  y <- c(rep(1, num_test), rep(0, num_test)) %>% matrix(ncol = 1)
+  aux_y <- c(mnist$test$y, sampled_labels) %>% matrix(ncol = 1)
+  
+  # see if the discriminator can figure itself out...
+  discriminator_test_loss <- evaluate(
+    discriminator, X, list(y, aux_y), 
+    verbose = FALSE
+  ) %>% unlist()
+  
+  discriminator_train_loss <- apply(epoch_disc_loss, 2, mean)
+  
+  # make new noise
+  noise <- runif(2*num_test*latent_size, min = -1, max = 1) %>%
+    matrix(nrow = 2*num_test, ncol = latent_size)
+  sampled_labels <- sample(0:9, size = 2*num_test, replace = TRUE) %>%
+    matrix(ncol = 1)
+  
+  trick <- rep(1, 2*num_test) %>% matrix(ncol = 1)
+  
+  generator_test_loss = combined %>% evaluate(
+    list(noise, sampled_labels),
+    list(trick, sampled_labels),
+    verbose = FALSE
+  )
+  
+  generator_train_loss <- apply(epoch_gen_loss, 2, mean)
+  
+  
+  # generate an epoch report on performance
+  row_fmt <- "\n%22s : loss %4.2f | %5.2f | %5.2f"
+  cat(sprintf(
+    row_fmt, 
+    "generator (train)",
+    generator_train_loss[1],
+    generator_train_loss[2],
+    generator_train_loss[3]
+  ))
+  cat(sprintf(
+    row_fmt, 
+    "generator (test)",
+    generator_test_loss[1],
+    generator_test_loss[2],
+    generator_test_loss[3]
+  ))
+  
+  cat(sprintf(
+    row_fmt, 
+    "discriminator (train)",
+    discriminator_train_loss[1],
+    discriminator_train_loss[2],
+    discriminator_train_loss[3]
+  ))
+  cat(sprintf(
+    row_fmt, 
+    "discriminator (test)",
+    discriminator_test_loss[1],
+    discriminator_test_loss[2],
+    discriminator_test_loss[3]
+  ))
+  
+  cat("\n")
+  
+  # generate some digits to display
+  noise <- runif(10*latent_size, min = -1, max = 1) %>%
+    matrix(nrow = 10, ncol = latent_size)
+  
+  sampled_labels <- 0:9 %>%
+    matrix(ncol = 1)
+  
+  # get a batch to display
+  generated_images <- predict(
+    generator,    
+    list(noise, sampled_labels)
+  )
+  
+  img <- NULL
+  for(i in 1:10){
+    img <- cbind(img, generated_images[i,,,])
+  }
+  
+  ((img*127.5 + 127.5)/256 + 0.000001) %>% as.raster() %>%
+    plot()
+  
 }
-
-
-
-
-
-
