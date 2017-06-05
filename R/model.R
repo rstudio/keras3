@@ -487,7 +487,7 @@ normalize_x <- function(x) {
   
   # recurse for lists
   if (is.list(x))
-    return(lapply(x, normalize_input))
+    return(lapply(x, normalize_x))
   
   # convert to numpy
   if (!inherits(x, "numpy.ndarray")) {
