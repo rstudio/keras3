@@ -139,8 +139,11 @@ fit <- function(object, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NUL
   
   # turn history into an R object so it can be persited and
   # and give it a class so we can write print/plot methods
+  params <- history$params
+  if (params$do_validation)
+    params$validation_samples <- dim(history$validation_data[[1]])[[1]]
   history <- structure(class = "keras_training_history", list(
-    params = history$params,
+    params = params,
     metrics = lapply(history$history, as.numeric)
   ))
   

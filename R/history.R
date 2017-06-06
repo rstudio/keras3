@@ -6,10 +6,15 @@ print.keras_training_history <- function(x, ...) {
   # training params
   params <- x$params
   params <- list(samples = params$samples, 
+                 validation_samples = params$validation_samples,
                  batch_size = params$batch_size, 
                  epochs = params$epochs)
   params <-  prettyNum(params, big.mark = ",")
-  str <- paste0("Trained on ", params[["samples"]], " samples (batch_size=", 
+  if (!is.null(params[["validation_samples"]]))
+    validate <- paste0(", validated on ", params[["validation_samples"]], " samples")
+  else 
+    validate <- ""
+  str <- paste0("Trained on ", params[["samples"]]," samples", validate, " (batch_size=", 
                 params[["batch_size"]], ", epochs=", params[["epochs"]], ")")
 
   # last epoch metrics
