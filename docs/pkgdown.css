@@ -196,3 +196,7 @@ blockquote {
 #installation .sourceCode {
   font-size: 13px;
 }
+
+.r-plot {
+  margin-bottom: 25px;
+}
