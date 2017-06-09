@@ -177,7 +177,7 @@ callback_learning_rate_scheduler <- function(schedule) {
 #' @family callbacks 
 #'    
 #' @export
-callback_tensorboard <- function(log_dir = "./logs", histogram_freq = 0, 
+callback_tensorboard <- function(log_dir = "logs", histogram_freq = 0, 
                                  write_graph = TRUE, write_images = FALSE,
                                  embeddings_freq = 0, embeddings_layer_names = NULL,
                                  embeddings_metadata = NULL) {
