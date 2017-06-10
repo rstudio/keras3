@@ -4,7 +4,7 @@
 \alias{callback_tensorboard}
 \title{TensorBoard basic visualizations}
 \usage{
-callback_tensorboard(log_dir = "./logs", histogram_freq = 0,
+callback_tensorboard(log_dir = "logs", histogram_freq = 0,
   write_graph = TRUE, write_images = FALSE, embeddings_freq = 0,
   embeddings_layer_names = NULL, embeddings_metadata = NULL)
 }
@@ -42,8 +42,8 @@ histograms for the different layers in your model.
 \details{
 TensorBoard is a visualization tool provided with TensorFlow.
 
-If you have installed TensorFlow with pip, you should be able to launch
-TensorBoard from the command line:\preformatted{--logdir=/full_path_to_your_logs 
+If you have installed TensorFlow with pip, you can launch TensorBoard
+using the \code{tensorboard()} function:\preformatted{tensorboard(log_dir = "/full_path_to_your_logs") 
 }
 
 You can find more information about TensorBoard

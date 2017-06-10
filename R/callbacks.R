@@ -165,10 +165,10 @@ callback_learning_rate_scheduler <- function(schedule) {
 
 #' @details TensorBoard is a visualization tool provided with TensorFlow.
 #'   
-#'   If you have installed TensorFlow with pip, you should be able to launch 
-#'   TensorBoard from the command line: 
-#'   ``` tensorboard
-#'   --logdir=/full_path_to_your_logs 
+#'   If you have installed TensorFlow with pip, you can launch TensorBoard
+#'   using the `tensorboard()` function:
+#'   ```
+#'   tensorboard(log_dir = "/full_path_to_your_logs") 
 #'   ``` 
 #'   
 #'   You can find more information about TensorBoard
