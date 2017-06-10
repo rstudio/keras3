@@ -146,6 +146,8 @@ To learn more about Keras, you can check out these articles:
 
 - [Frequently Asked Questions](articles/faq.html)
 
+- [TensorBoard Visualizations](articles/tensorboard.html)
+
 - [Using Pre-Trained Models](articles/applications.html)
 
 The [examples](articles/examples) demonstrate more advanced models including transfer learning, variational auto-encoding, question-answering with memory networks, text generation with stacked LSTMs, etc.
