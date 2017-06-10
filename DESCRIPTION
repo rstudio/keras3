@@ -20,7 +20,7 @@ License: MIT + file LICENSE
 URL: https://github.com/rstudio/keras
 BugReports: https://github.com/rstudio/keras/issues
 Imports:
-    reticulate (>= 0.8.0.9002), 
+    reticulate (>= 0.8.0.9003), 
     tensorflow (>= 0.8.3),
     magrittr, 
     methods,
