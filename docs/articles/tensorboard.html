@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TensorBoard: Visualizing Learning • keras</title>
+<title>TensorBoard Visualization • keras</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -57,7 +57,7 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/tensorboard.html">Using TensorBoard</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
@@ -98,7 +98,7 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>TensorBoard: Visualizing Learning</h1>
+      <h1>TensorBoard Visualization</h1>
             
           </div>
 
@@ -111,7 +111,7 @@
 <p>TensorBoard is a visualization tool included with TensorFlow that enables you to visualize dynamic graphs of your Keras training and test metrics, as well as activation histograms for the different layers in your model.</p>
 <p>For example, here’s a TensorBoard display for Keras accuracy and loss metrics:</p>
 <div class="figure">
-<img src="tensorboard.png" width="700" height="545">
+<img src="tensorboard.png" class="screenshot" width="700" height="545">
 </div>
 </div>
 <div id="recording-data" class="section level2">
@@ -126,24 +126,29 @@
   <span class="dt">callbacks =</span> <span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="st">"logs/run_a"</span>),
   <span class="dt">validation_split =</span> <span class="fl">0.2</span>
 )</code></pre></div>
-<p>See the documentation on the <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code> function for the various options available. The most important option is the <code>log_dir</code>, which determines which directory logs are written to for a given training run.</p>
+<p>See the documentation on the <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code> function for the various available options. The most important option is the <code>log_dir</code>, which determines which directory logs are written to for a given training run.</p>
 </div>
 <div id="viewing-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#viewing-data" class="anchor"></a>Viewing Data</h2>
-<p>To view TensorBoard data for a given set of runs you can use the <code><a href="../reference/reexports.html">tensorboard()</a></code> function, passing it the root <code>log_dir</code> where your runs are stored. For example:</p>
+<p>To view TensorBoard data for a given set of runs you use the <code><a href="../reference/reexports.html">tensorboard()</a></code> function. If your training logs are located within the current working directory then you can call <code><a href="../reference/reexports.html">tensorboard()</a></code> with no arguments:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/reexports.html">tensorboard</a></span>()</code></pre></div>
+<p>If you alternatively want to specify a specific directory as the root of all training logs then you can use the <code>log_dir</code> parameter, for example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/reexports.html">tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="st">"logs"</span>)</code></pre></div>
 <p>Note that you don’t need to change the <code>log_dir</code> for each training run (the default log directory if none is specified is “logs”). In the case of a <code>log_dir</code> used multiple times TensorBoard will simply visualize the metrics for the most recent training run.</p>
 </div>
-<div id="comparing-data" class="section level2">
+<div id="comparing-runs" class="section level2">
 <h2 class="hasAnchor">
-<a href="#comparing-data" class="anchor"></a>Comparing Data</h2>
-<p>TensorBoard will automatically include all runs logged within sub-directories of the specified <code>log_dir</code>, for example, if you logged another run using:</p>
+<a href="#comparing-runs" class="anchor"></a>Comparing Runs</h2>
+<p>TensorBoard will automatically include all runs logged within the sub-directories of the specified <code>log_dir</code>, for example, if you logged another run using:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="st">"logs/run_b"</span>)</code></pre></div>
 <p>Then the TensorBoard visualization would look like this:</p>
 <div class="figure">
-<img src="tensorboard_compare.png" width="700" height="540">
+<img src="tensorboard_compare.png" class="screenshot" width="700" height="540">
 </div>
+<p>You can use the <code>unique_log_dir</code> function if you want to record every training run in it’s own directory:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="kw"><a href="../reference/reexports.html">unique_log_dir</a></span>())</code></pre></div>
+<p>Once again note that it’s not required to record every training run in it’s own directory. Using the default “logs” directory will work just fine, you’ll just only be able to visualize the most recent run using TensorBoard.</p>
 </div>
 </div>
   </div>
@@ -155,7 +160,7 @@
 <li><a href="#overview">Overview</a></li>
       <li><a href="#recording-data">Recording Data</a></li>
       <li><a href="#viewing-data">Viewing Data</a></li>
-      <li><a href="#comparing-data">Comparing Data</a></li>
+      <li><a href="#comparing-runs">Comparing Runs</a></li>
       </ul>
 </div>
       </div>
