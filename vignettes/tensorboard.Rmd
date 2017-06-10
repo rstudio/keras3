@@ -1,0 +1,66 @@
+---
+title: "TensorBoard: Visualizing Learning"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using TensorBoard}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+library(keras)
+knitr::opts_chunk$set(comment = NA, eval = FALSE)
+```
+
+## Overview
+
+TensorBoard is a visualization tool included with TensorFlow that enables you to visualize dynamic graphs of your Keras training and test metrics, as well as activation histograms for the different layers in your model. 
+
+For example, here's a TensorBoard display for Keras accuracy and loss metrics:
+
+![](tensorboard.png){width=700 height=545}
+
+## Recording Data
+
+To record data that can be visualized with TensorBoard, you add a TensorBoard callback to the `fit()` function. For example:
+
+```{r}
+history <- model %>% fit(
+  x_train, y_train,
+  batch_size = batch_size,
+  epochs = epochs,
+  verbose = 1,
+  callbacks = callback_tensorboard(log_dir = "logs/run_a"),
+  validation_split = 0.2
+)
+```
+
+See the documentation on the `callback_tensorboard()` function for the various options available. The most important option is the `log_dir`, which determines which directory logs are written to for a given training run. 
+
+## Viewing Data
+
+To view TensorBoard data for a given set of runs you can use the `tensorboard()` function, passing it the root `log_dir` where your runs are stored. For example:
+
+```{r}
+tensorboard(log_dir = "logs")
+```
+
+Note that you don't need to change the `log_dir` for each training run (the default log directory if none is specified is "logs"). In the case of a `log_dir` used multiple times TensorBoard will simply visualize the metrics for the most recent training run.
+
+## Comparing Data
+
+TensorBoard will automatically include all runs logged within sub-directories of the specified `log_dir`, for example, if you logged another run using:
+
+```{r}
+callback_tensorboard(log_dir = "logs/run_b")
+```
+
+Then the TensorBoard visualization would look like this:
+
+![](tensorboard_compare.png){width=700 height=540}
+
+
+
+
+
+

@@ -9,7 +9,7 @@ library(keras)
 
 batch_size <- 128
 num_classes <- 10
-epochs <- 20
+epochs <- 30
 
 # the data, shuffled and split between train and test sets
 mnist <- dataset_mnist()
@@ -33,10 +33,10 @@ y_test <- to_categorical(y_test, num_classes)
 
 model <- keras_model_sequential()
 model %>% 
-  layer_dense(units = 512, activation = 'relu', input_shape = c(784)) %>% 
-  layer_dropout(rate = 0.2) %>% 
-  layer_dense(units = 512, activation = 'relu') %>%
-  layer_dropout(rate = 0.2) %>%
+  layer_dense(units = 256, activation = 'relu', input_shape = c(784)) %>% 
+  layer_dropout(rate = 0.4) %>% 
+  layer_dense(units = 128, activation = 'relu') %>%
+  layer_dropout(rate = 0.3) %>%
   layer_dense(units = 10, activation = 'softmax')
 
 summary(model)
@@ -52,7 +52,8 @@ history <- model %>% fit(
   batch_size = batch_size,
   epochs = epochs,
   verbose = 1,
-  validation_data = list(x_test, y_test)
+  callbacks = callback_tensorboard(log_dir = "logs/run_b"),
+  validation_split = 0.2
 )
   
 score <- model %>% evaluate(

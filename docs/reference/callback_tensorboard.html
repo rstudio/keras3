@@ -79,6 +79,9 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
+      <a href="../articles/tensorboard.html">Using TensorBoard</a>
+    </li>
+    <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
     </li>
     <li class="divider"></li>
@@ -126,7 +129,7 @@ dynamic graphs of your training and test metrics, as well as activation
 histograms for the different layers in your model.</p>
     
 
-    <pre class="usage"><span class='fu'>callback_tensorboard</span>(<span class='kw'>log_dir</span> <span class='kw'>=</span> <span class='st'>"./logs"</span>, <span class='kw'>histogram_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+    <pre class="usage"><span class='fu'>callback_tensorboard</span>(<span class='kw'>log_dir</span> <span class='kw'>=</span> <span class='st'>"logs"</span>, <span class='kw'>histogram_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>write_graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>write_images</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>embeddings_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>embeddings_layer_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>embeddings_metadata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
@@ -177,8 +180,8 @@ for all embedding layers, string can be passed.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>TensorBoard is a visualization tool provided with TensorFlow.</p>
-<p>If you have installed TensorFlow with pip, you should be able to launch
-TensorBoard from the command line:</p><pre>--logdir=/full_path_to_your_logs 
+<p>If you have installed TensorFlow with pip, you can launch TensorBoard
+using the <code>tensorboard()</code> function:</p><pre>tensorboard(log_dir = "/full_path_to_your_logs") 
 </pre>
     <p>You can find more information about TensorBoard
 <a href = 'https://www.tensorflow.org/get_started/summaries_and_tensorboard'>here</a>.</p>
