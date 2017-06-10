@@ -16,3 +16,5 @@
 ^tests/testthat/checkpoint.h5
 ^tests/testthat/training.csv
 ^.*\.pyc$
+^.*__pycache__$
+
