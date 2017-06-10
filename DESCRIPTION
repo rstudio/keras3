@@ -29,7 +29,7 @@ Suggests:
     testthat, 
     knitr
 Remotes:
-    rstudio/reticulate
+    rstudio/reticulate,
     rstudio/tensorflow
 SystemRequirements: TensorFlow >= 1.1 (https://www.tensorflow.org/)
 Roxygen: list(markdown = TRUE)
