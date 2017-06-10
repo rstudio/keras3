@@ -1,7 +1,7 @@
 Package: keras
 Type: Package
 Title: R Interface to Keras
-Version: 0.3.6
+Version: 0.3.7
 Authors@R: c(
   person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
   person("François", "Chollet", role = c("aut", "cph")),
@@ -20,8 +20,8 @@ License: MIT + file LICENSE
 URL: https://github.com/rstudio/keras
 BugReports: https://github.com/rstudio/keras/issues
 Imports:
-    reticulate (>= 0.8), 
-    tensorflow (>= 0.8.2),
+    reticulate (>= 0.8.0.9002), 
+    tensorflow (>= 0.8.3),
     magrittr, 
     methods,
     R6
@@ -29,7 +29,8 @@ Suggests:
     testthat, 
     knitr
 Remotes:
-    rstudio/tensorflow@v0.8.2
+    rstudio/reticulate
+    rstudio/tensorflow
 SystemRequirements: TensorFlow >= 1.1 (https://www.tensorflow.org/)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
