@@ -35,27 +35,32 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 
 
 #' Configure a Keras model for training
-#' 
+#'
 #' @param object Model object to compile.
 #' @param optimizer Name of optimizer or optimizer object.
-#' @param loss Name of objective function or objective function. If the model 
-#'   has multiple outputs, you can use a different loss on each output by 
-#'   passing a dictionary or a list of objectives.
-#' @param metrics List of metrics to be evaluated by the model during training 
-#'   and testing. Typically you will use `metrics='accuracy'`. To specify 
-#'   different metrics for different outputs of a multi-output model, you could 
+#' @param loss Name of objective function or objective function. If the model
+#'   has multiple outputs, you can use a different loss on each output by
+#'   passing a dictionary or a list of objectives. The loss value that will be
+#'   minimized by the model will then be the sum of all individual losses.
+#' @param metrics List of metrics to be evaluated by the model during training
+#'   and testing. Typically you will use `metrics='accuracy'`. To specify
+#'   different metrics for different outputs of a multi-output model, you could
 #'   also pass a named list such as `metrics=list(output_a = 'accuracy')`.
-#' @param loss_weights Loss weights
-#' @param sample_weight_mode If you need to do timestep-wise sample weighting 
+#' @param loss_weights Optional list specifying scalar coefficients to weight
+#'   the loss contributions of different model outputs. The loss value that will
+#'   be minimized by the model will then be the *weighted sum* of all indvidual
+#'   losses, weighted by the `loss_weights` coefficients.
+#' @param sample_weight_mode If you need to do timestep-wise sample weighting
 #'   (2D weights), set this to "temporal". `NULL` defaults to sample-wise
-#'   weights (1D). If the model has multiple outputs, you can use a different 
+#'   weights (1D). If the model has multiple outputs, you can use a different
 #'   `sample_weight_mode` on each output by passing a list of modes.
-#'   
+#' @param ... Additional named arguments passed to `tf$Session$run`.
+#'
 #' @family model functions
-#'   
+#'
 #' @export
 compile <- function(object, optimizer, loss, metrics = NULL, loss_weights = NULL,
-                    sample_weight_mode = NULL) {
+                    sample_weight_mode = NULL, ...) {
   
   # ensure we are dealing with a list of metrics
   if (length(metrics) == 1)
@@ -67,7 +72,8 @@ compile <- function(object, optimizer, loss, metrics = NULL, loss_weights = NULL
     loss = loss,
     metrics = metrics,
     loss_weights = loss_weights,
-    sample_weight_mode = sample_weight_mode
+    sample_weight_mode = sample_weight_mode,
+    ...
   )
   
   # return model invisible (conventience for chaining)
@@ -301,7 +307,7 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'   list (inputs, targets) - a list (inputs, targets, sample_weights). All
 #'   arrays should contain the same number of samples. The generator is expected
 #'   to loop over its data indefinitely. An epoch finishes when
-#'   `steps_per_epoch` samples have been seen by the model.
+#'   `steps_per_epoch` batches have been seen by the model.
 #' @param steps_per_epoch Total number of steps (batches of samples) to yield
 #'   from `generator` before declaring one epoch finished and starting the next
 #'   epoch. It should typically be equal to the number of unique samples if your

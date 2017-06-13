@@ -16,7 +16,7 @@ fit_generator(object, generator, steps_per_epoch, epochs = 1, verbose = 1,
 list (inputs, targets) - a list (inputs, targets, sample_weights). All
 arrays should contain the same number of samples. The generator is expected
 to loop over its data indefinitely. An epoch finishes when
-\code{steps_per_epoch} samples have been seen by the model.}
+\code{steps_per_epoch} batches have been seen by the model.}
 
 \item{steps_per_epoch}{Total number of steps (batches of samples) to yield
 from \code{generator} before declaring one epoch finished and starting the next

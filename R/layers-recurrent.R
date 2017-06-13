@@ -46,11 +46,12 @@
 #'   linear transformation of the inputs.
 #' @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
 #'   for the linear transformation of the recurrent state.
+#'
+#' @template roxlate-recurrent-layer  
 #'   
 #' @section References: 
 #' - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
 #'   
-#' @family recurrent layers
 #'   
 #' @export
 layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE, 
@@ -99,6 +100,8 @@ layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE
 #' @param recurrent_activation Activation function to use for the recurrent
 #'   step.
 #'   
+#' @template roxlate-recurrent-layer    
+#' 
 #' @section References: 
 #' - [On the Properties of Neural Machine Translation:
 #'   Encoder-Decoder Approaches](https://arxiv.org/abs/1409.1259) 
@@ -108,8 +111,6 @@ layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE
 #' - [A Theoretically Grounded
 #'   Application of Dropout in Recurrent Neural
 #'   Networks](http://arxiv.org/abs/1512.05287)
-#'  
-#' @family recurrent layers  
 #'     
 #' @export
 layer_gru <- function(object, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 
@@ -163,6 +164,8 @@ layer_gru <- function(object, units, activation = "tanh", recurrent_activation =
 #'   gate at initialization. Setting it to true will also force
 #'   `bias_initializer="zeros"`. This is recommended in [Jozefowicz et
 #'   al.](http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
+#'   
+#' @template roxlate-recurrent-layer    
 #'   
 #' @section References: 
 #' - [Long short-term memory](http://deeplearning.cs.cmu.edu/pdfs/Hochreiter97_lstm.pdf) (original 1997 paper) 

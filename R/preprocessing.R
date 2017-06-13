@@ -112,14 +112,14 @@ make_sampling_table <- function(size, sampling_factor = 1e-05) {
   )
 }
 
-#' Convert text to a sequence of word indices.
+#' Convert text to a sequence of words (or tokens).
 #' 
 #' @param text Input text (string).
 #' @param filters Sequence of characters to filter out.
 #' @param lower Whether to convert the input to lowercase.
 #' @param split Sentence split marker (string).
 #' 
-#' @return integer word indices.
+#' @return Words (or tokens)
 #' 
 #' @family text preprocessing
 #' 
@@ -177,7 +177,7 @@ text_one_hot <- function(text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\
 #'   breaks, minus the ' character.
 #' @param lower boolean. Whether to convert the texts to lowercase.
 #' @param split character or string to use for token splitting.
-#' @param char_level if True, every character will be treated as a word.
+#' @param char_level if `TRUE`, every character will be treated as a token
 #'   
 #' @section Attributes:
 #' The tokenizer object has the following attributes:
@@ -356,6 +356,7 @@ image_to_array <- function(img, data_format = c("channels_last", "channels_first
 #' @param featurewise_std_normalization divide inputs by std of the dataset.
 #' @param samplewise_std_normalization divide each input by its std.
 #' @param zca_whitening apply ZCA whitening.
+#' @param zca_epsilon Epsilon for ZCA whitening. Default is 1e-6.
 #' @param rotation_range degrees (0 to 180).
 #' @param width_shift_range fraction of total width.
 #' @param height_shift_range fraction of total height.
@@ -387,11 +388,11 @@ image_to_array <- function(img, data_format = c("channels_last", "channels_first
 #' @export
 image_data_generator <- function(featurewise_center = FALSE, samplewise_center = FALSE, 
                                  featurewise_std_normalization = FALSE, samplewise_std_normalization = FALSE, 
-                                 zca_whitening = FALSE, rotation_range = 0.0, width_shift_range = 0.0, 
+                                 zca_whitening = FALSE, zca_epsilon = 1e-6, rotation_range = 0.0, width_shift_range = 0.0, 
                                  height_shift_range = 0.0,  shear_range = 0.0, zoom_range = 0.0, channel_shift_range = 0.0, 
                                  fill_mode = "nearest", cval = 0.0, horizontal_flip = FALSE, vertical_flip = FALSE, 
                                  rescale = NULL, preprocessing_function = NULL, data_format = NULL) {
-  keras$preprocessing$image$ImageDataGenerator(
+  args <- list(
     featurewise_center = featurewise_center,
     samplewise_center = samplewise_center,
     featurewise_std_normalization = featurewise_std_normalization,
@@ -411,6 +412,11 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
     preprocessing_function = preprocessing_function,
     data_format = data_format
   )
+  if (tf_version() >= "1.2")
+    args$zca_epsilon <- zca_epsilon
+  
+  do.call(keras$preprocessing$image$ImageDataGenerator, args)
+  
 }
 
 
@@ -459,7 +465,7 @@ fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, see
 #' @param save_prefix str (default: ''). Prefix to use for filenames of saved 
 #'   pictures (only relevant if `save_to_dir` is set).
 #' @param save_format one of "png", "jpeg" (only relevant if save_to_dir is 
-#'   set). Default: "jpeg".
+#'   set). Default: "png".
 #'   
 #' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a 
 #'   array of corresponding labels. The generator loops indefinitely.
@@ -470,7 +476,7 @@ fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, see
 flow_images_from_data <- function(
           x, y = NULL, generator = image_data_generator(), batch_size = 32, 
           shuffle = TRUE, seed = NULL, 
-          save_to_dir = NULL, save_prefix = "", save_format = 'jpeg') {
+          save_to_dir = NULL, save_prefix = "", save_format = 'png') {
   generator$flow(
     x = x,
     y = y,
@@ -524,7 +530,7 @@ flow_images_from_directory <- function(
       directory, generator = image_data_generator(), target_size = c(256, 256), color_mode = "rgb",
       classes = NULL, class_mode = "categorical",
       batch_size = 32, shuffle = TRUE, seed = NULL,
-      save_to_dir = NULL, save_prefix = "", save_format = "jpeg",
+      save_to_dir = NULL, save_prefix = "", save_format = "png",
       follow_links = FALSE) {
   generator$flow_from_directory(
     directory = normalize_path(directory),

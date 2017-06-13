@@ -8,7 +8,7 @@
 save_model_hdf5(object, filepath, overwrite = TRUE,
   include_optimizer = TRUE)
 
-load_model_hdf5(filepath, custom_objects = NULL)
+load_model_hdf5(filepath, custom_objects = NULL, compile = TRUE)
 }
 \arguments{
 \item{object}{Model object to save}
@@ -21,6 +21,8 @@ load_model_hdf5(filepath, custom_objects = NULL)
 
 \item{custom_objects}{Mapping class names (or function names) of custom
 (non-Keras) objects to class/functions}
+
+\item{compile}{Whether to compile the model after loading.}
 }
 \description{
 Save/Load models using HDF5 files
@@ -38,7 +40,7 @@ in a single file.
 
 Saved models can be reinstantiated via \code{load_model()}. The model returned by
 \code{load_model()} is a compiled model ready to be used (unless the saved model
-was never compiled in the first place).
+was never compiled in the first place or \code{compile = FALSE} is specified.
 }
 \seealso{
 Other model persistence: \code{\link{get_weights}},

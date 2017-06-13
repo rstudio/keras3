@@ -7,6 +7,8 @@
 \alias{loss_mean_squared_logarithmic_error}
 \alias{loss_squared_hinge}
 \alias{loss_hinge}
+\alias{loss_categorical_hinge}
+\alias{loss_logcosh}
 \alias{loss_categorical_crossentropy}
 \alias{loss_sparse_categorical_crossentropy}
 \alias{loss_binary_crossentropy}
@@ -26,6 +28,10 @@ loss_mean_squared_logarithmic_error(y_true, y_pred)
 loss_squared_hinge(y_true, y_pred)
 
 loss_hinge(y_true, y_pred)
+
+loss_categorical_hinge(y_true, y_pred)
+
+loss_logcosh(y_true, y_pred)
 
 loss_categorical_crossentropy(y_true, y_pred)
 

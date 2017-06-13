@@ -107,6 +107,44 @@ isn't provided.}
 \description{
 Fully-connected RNN where the output is to be fed back to input.
 }
+\section{Statefulness in RNNs}{
+
+
+You can set RNN layers to be 'stateful', which means that the states
+computed for the samples in one batch will be reused as initial states
+for the samples in the next batch. This assumes a one-to-one mapping
+between samples in different successive batches.
+
+To enable statefulness:
+\itemize{
+\item Specify \code{stateful=TRUE} in the layer constructor.
+\item Specify a fixed batch size for your model. For sequential models,
+pass \code{batch_input_shape = c(...)} to the first layer in your model.
+For functional models with 1 or more Input layers, pass
+\code{batch_shape = c(...)} to all the first layers in your model.
+This is the expected shape of your inputs \emph{including the batch size}.
+It should be a vector of integers, e.g. \code{c(32, 10, 100)}.
+\item Specify \code{shuffle = FALSE} when calling fit().
+}
+
+To reset the states of your model, call \code{reset_states()} on either
+a specific layer, or on your entire model.
+}
+
+\section{Initial State of RNNs}{
+
+
+You can specify the initial state of RNN layers symbolically by calling
+them with the keyword argument \code{initial_state}. The value of
+\code{initial_state} should be a tensor or list of tensors representing
+the initial state of the RNN layer.
+
+You can specify the initial state of RNN layers numerically by
+calling \code{reset_states} with the keyword argument \code{states}. The value of
+\code{states} should be a numpy array or list of numpy arrays representing
+the initial state of the RNN layer.
+}
+
 \section{References}{
 
 \itemize{

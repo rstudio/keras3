@@ -3,6 +3,7 @@
 #' 
 #' @param object Model object to save
 #' @param filepath File path 
+#' @param compile Whether to compile the model after loading.
 #' @param overwrite Overwrite existing file if necessary
 #' @param include_optimizer If `TRUE`, save optimizer's state.
 #' @param custom_objects Mapping class names (or function names) of custom 
@@ -19,7 +20,7 @@
 #' 
 #' Saved models can be reinstantiated via `load_model()`. The model returned by
 #' `load_model()` is a compiled model ready to be used (unless the saved model
-#' was never compiled in the first place).
+#' was never compiled in the first place or `compile = FALSE` is specified.
 #' 
 #' @family model persistence
 #' 
@@ -43,10 +44,21 @@ save_model_hdf5 <- function(object, filepath, overwrite = TRUE, include_optimize
 
 #' @rdname save_model_hdf5
 #' @export
-load_model_hdf5 <- function(filepath, custom_objects = NULL) {
+load_model_hdf5 <- function(filepath, custom_objects = NULL, compile = TRUE) {
+  
   if (!have_h5py())
     stop("The h5py Python package is required to save and load models")
-  keras$models$load_model(filepath = normalize_path(filepath), custom_objects = custom_objects)
+  
+  # build args dynamically so we can only pass `compile` if it's specified
+  # (compile requires tensorflow v1.2)
+  args <- list(
+    filepath = normalize_path(filepath), 
+    custom_objects = custom_objects
+  )
+  if (tf_version() >= "1.2")
+    args$compile <- compile
+  
+  do.call(keras$models$load_model, args)
 }
 
 

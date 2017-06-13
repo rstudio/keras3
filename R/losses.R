@@ -75,6 +75,21 @@ attr(loss_hinge, "py_function_name") <- "hinge"
 
 #' @rdname loss_mean_squared_error
 #' @export
+loss_categorical_hinge <- function(y_true, y_pred) {
+  keras$losses$categorical_hinge(y_true, y_pred)
+}
+attr(loss_hinge, "py_function_name") <- "categorical_hinge"
+
+#' @rdname loss_mean_squared_error
+#' @export
+loss_logcosh <- function(y_true, y_pred) {
+  keras$losses$logcosh(y_true, y_pred)
+}
+attr(loss_hinge, "py_function_name") <- "logcosh"
+
+
+#' @rdname loss_mean_squared_error
+#' @export
 loss_categorical_crossentropy <- function(y_true, y_pred) {
   keras$losses$categorical_crossentropy(y_true, y_pred)
 }
