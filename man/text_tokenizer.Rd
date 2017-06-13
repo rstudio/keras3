@@ -20,7 +20,7 @@ breaks, minus the ' character.}
 
 \item{split}{character or string to use for token splitting.}
 
-\item{char_level}{if True, every character will be treated as a word.}
+\item{char_level}{if \code{TRUE}, every character will be treated as a token}
 }
 \description{
 Vectorize a text corpus, by turning each text into either a sequence of

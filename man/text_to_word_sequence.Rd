@@ -2,7 +2,7 @@
 % Please edit documentation in R/preprocessing.R
 \name{text_to_word_sequence}
 \alias{text_to_word_sequence}
-\title{Convert text to a sequence of word indices.}
+\title{Convert text to a sequence of words (or tokens).}
 \usage{
 text_to_word_sequence(text,
   filters = "!\\"#$\%&()*+,-./:;<=>?@[\\\\]^_`{|}~\\t\\n", lower = TRUE,
@@ -18,10 +18,10 @@ text_to_word_sequence(text,
 \item{split}{Sentence split marker (string).}
 }
 \value{
-integer word indices.
+Words (or tokens)
 }
 \description{
-Convert text to a sequence of word indices.
+Convert text to a sequence of words (or tokens).
 }
 \seealso{
 Other text preprocessing: \code{\link{make_sampling_table}},
