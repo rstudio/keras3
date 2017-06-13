@@ -128,7 +128,7 @@
     
 
     <pre class="usage"><span class='fu'>compile</span>(<span class='no'>object</span>, <span class='no'>optimizer</span>, <span class='no'>loss</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>loss_weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sample_weight_mode</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>sample_weight_mode</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -145,7 +145,8 @@
       <th>loss</th>
       <td><p>Name of objective function or objective function. If the model
 has multiple outputs, you can use a different loss on each output by
-passing a dictionary or a list of objectives.</p></td>
+passing a dictionary or a list of objectives. The loss value that will be
+minimized by the model will then be the sum of all individual losses.</p></td>
     </tr>
     <tr>
       <th>metrics</th>
@@ -156,7 +157,10 @@ also pass a named list such as <code>metrics=list(output_a = 'accuracy')</code>.
     </tr>
     <tr>
       <th>loss_weights</th>
-      <td><p>Loss weights</p></td>
+      <td><p>Optional list specifying scalar coefficients to weight
+the loss contributions of different model outputs. The loss value that will
+be minimized by the model will then be the <em>weighted sum</em> of all indvidual
+losses, weighted by the <code>loss_weights</code> coefficients.</p></td>
     </tr>
     <tr>
       <th>sample_weight_mode</th>
@@ -164,6 +168,10 @@ also pass a named list such as <code>metrics=list(output_a = 'accuracy')</code>.
 (2D weights), set this to "temporal". <code>NULL</code> defaults to sample-wise
 weights (1D). If the model has multiple outputs, you can use a different
 <code>sample_weight_mode</code> on each output by passing a list of modes.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional named arguments passed to <code>tf$Session$run</code>.</p></td>
     </tr>
     </table>
     

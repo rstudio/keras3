@@ -130,11 +130,11 @@
     <pre class="usage"><span class='fu'>image_data_generator</span>(<span class='kw'>featurewise_center</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>samplewise_center</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>featurewise_std_normalization</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>samplewise_std_normalization</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>zca_whitening</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>rotation_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>width_shift_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>height_shift_range</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>shear_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>zoom_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>channel_shift_range</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>fill_mode</span> <span class='kw'>=</span> <span class='st'>"nearest"</span>, <span class='kw'>cval</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>horizontal_flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>vertical_flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rescale</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>preprocessing_function</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>zca_epsilon</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>, <span class='kw'>rotation_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>width_shift_range</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>height_shift_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>shear_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>zoom_range</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>channel_shift_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>fill_mode</span> <span class='kw'>=</span> <span class='st'>"nearest"</span>, <span class='kw'>cval</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>horizontal_flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>vertical_flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rescale</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>preprocessing_function</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -158,6 +158,10 @@
     <tr>
       <th>zca_whitening</th>
       <td><p>apply ZCA whitening.</p></td>
+    </tr>
+    <tr>
+      <th>zca_epsilon</th>
+      <td><p>Epsilon for ZCA whitening. Default is 1e-6.</p></td>
     </tr>
     <tr>
       <th>rotation_range</th>

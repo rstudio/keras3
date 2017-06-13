@@ -130,7 +130,7 @@
     <pre class="usage"><span class='fu'>save_model_hdf5</span>(<span class='no'>object</span>, <span class='no'>filepath</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>include_optimizer</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>load_model_hdf5</span>(<span class='no'>filepath</span>, <span class='kw'>custom_objects</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>load_model_hdf5</span>(<span class='no'>filepath</span>, <span class='kw'>custom_objects</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>compile</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -156,6 +156,10 @@
       <td><p>Mapping class names (or function names) of custom
 (non-Keras) objects to class/functions</p></td>
     </tr>
+    <tr>
+      <th>compile</th>
+      <td><p>Whether to compile the model after loading.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -170,7 +174,7 @@ in a single file.</p></li>
 </ul>
     <p>Saved models can be reinstantiated via <code>load_model()</code>. The model returned by
 <code>load_model()</code> is a compiled model ready to be used (unless the saved model
-was never compiled in the first place).</p>
+was never compiled in the first place or <code>compile = FALSE</code> is specified.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
