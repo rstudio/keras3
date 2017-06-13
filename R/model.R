@@ -414,6 +414,7 @@ evaluate_generator <- function(object, generator, steps, max_q_size = 10, worker
 #'   this implementation relies on multiprocessing, you should not pass non
 #'   picklable arguments to the generator as they can't be passed easily to
 #'   children processes.
+#' @param verbose verbosity mode, 0 or 1.
 #'   
 #' @return Numpy array(s) of predictions.
 #'   
@@ -423,14 +424,18 @@ evaluate_generator <- function(object, generator, steps, max_q_size = 10, worker
 #' @family model functions   
 #'     
 #' @export
-predict_generator <- function(object, generator, steps, max_q_size = 10, workers = 1, pickle_safe = FALSE) {
-  object$predict_generator(
+predict_generator <- function(object, generator, steps, max_q_size = 10, workers = 1, pickle_safe = FALSE, verbose = 0) {
+  args <- list(
     generator = generator,
     steps = as.integer(steps),
     max_q_size = as.integer(max_q_size),
     workers = as.integer(workers),
     pickle_safe = pickle_safe
   )
+  if (tf_version() >= "1.2")
+    args$verbose <- as.integer(verbose)
+  
+  do.call(object$predict_generator, args)
 }
 
   

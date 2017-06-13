@@ -6,6 +6,7 @@
 #' through the activation argument supported by all forward layers.
 #' 
 #' @param x Tensor
+#' @param axis Integer, axis along which the softmax normalization is applied
 #' @param alpha Alpha value
 #' @param max_value Max value
 #' 
@@ -46,8 +47,11 @@ attr(activation_sigmoid, "py_function_name") <- "sigmoid"
 
 #' @rdname activation_relu
 #' @export
-activation_softmax <- function(x) {
-  keras$activations$softmax(x)
+activation_softmax <- function(x, axis = -1) {
+  args <- list(x = x)
+  if (tf_version() >= "1.2")
+    args$axis <- as.integer(axis)
+  do.call(keras$activations$softmax, args)
 }
 attr(activation_softmax, "py_function_name") <- "softmax"
 
