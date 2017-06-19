@@ -412,7 +412,7 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
     preprocessing_function = preprocessing_function,
     data_format = data_format
   )
-  if (tf_version() >= "1.2")
+  if (tf_version() >= "1.3")
     args$zca_epsilon <- zca_epsilon
   
   do.call(keras$preprocessing$image$ImageDataGenerator, args)
