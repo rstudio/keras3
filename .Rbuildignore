@@ -5,6 +5,7 @@
 ^.*\.hdf5$
 ^README.R?md$
 ^docs$
+^pkgdown$
 ^issues$
 ^external$
 ^vignettes/examples$
@@ -18,3 +19,4 @@
 ^.*\.pyc$
 ^.*__pycache__$
 
+^_pkgdown\.yml$
