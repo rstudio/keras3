@@ -356,7 +356,6 @@ image_to_array <- function(img, data_format = c("channels_last", "channels_first
 #' @param featurewise_std_normalization divide inputs by std of the dataset.
 #' @param samplewise_std_normalization divide each input by its std.
 #' @param zca_whitening apply ZCA whitening.
-#' @param zca_epsilon Epsilon for ZCA whitening. Default is 1e-6.
 #' @param rotation_range degrees (0 to 180).
 #' @param width_shift_range fraction of total width.
 #' @param height_shift_range fraction of total height.
@@ -388,7 +387,7 @@ image_to_array <- function(img, data_format = c("channels_last", "channels_first
 #' @export
 image_data_generator <- function(featurewise_center = FALSE, samplewise_center = FALSE, 
                                  featurewise_std_normalization = FALSE, samplewise_std_normalization = FALSE, 
-                                 zca_whitening = FALSE, zca_epsilon = 1e-6, rotation_range = 0.0, width_shift_range = 0.0, 
+                                 zca_whitening = FALSE, rotation_range = 0.0, width_shift_range = 0.0, 
                                  height_shift_range = 0.0,  shear_range = 0.0, zoom_range = 0.0, channel_shift_range = 0.0, 
                                  fill_mode = "nearest", cval = 0.0, horizontal_flip = FALSE, vertical_flip = FALSE, 
                                  rescale = NULL, preprocessing_function = NULL, data_format = NULL) {
@@ -412,9 +411,7 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
     preprocessing_function = preprocessing_function,
     data_format = data_format
   )
-  if (tf_version() >= "1.3")
-    args$zca_epsilon <- zca_epsilon
-  
+
   do.call(keras$preprocessing$image$ImageDataGenerator, args)
   
 }

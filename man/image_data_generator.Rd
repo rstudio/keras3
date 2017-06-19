@@ -7,11 +7,11 @@
 image_data_generator(featurewise_center = FALSE, samplewise_center = FALSE,
   featurewise_std_normalization = FALSE,
   samplewise_std_normalization = FALSE, zca_whitening = FALSE,
-  zca_epsilon = 1e-06, rotation_range = 0, width_shift_range = 0,
-  height_shift_range = 0, shear_range = 0, zoom_range = 0,
-  channel_shift_range = 0, fill_mode = "nearest", cval = 0,
-  horizontal_flip = FALSE, vertical_flip = FALSE, rescale = NULL,
-  preprocessing_function = NULL, data_format = NULL)
+  rotation_range = 0, width_shift_range = 0, height_shift_range = 0,
+  shear_range = 0, zoom_range = 0, channel_shift_range = 0,
+  fill_mode = "nearest", cval = 0, horizontal_flip = FALSE,
+  vertical_flip = FALSE, rescale = NULL, preprocessing_function = NULL,
+  data_format = NULL)
 }
 \arguments{
 \item{featurewise_center}{set input mean to 0 over the dataset.}
@@ -23,8 +23,6 @@ image_data_generator(featurewise_center = FALSE, samplewise_center = FALSE,
 \item{samplewise_std_normalization}{divide each input by its std.}
 
 \item{zca_whitening}{apply ZCA whitening.}
-
-\item{zca_epsilon}{Epsilon for ZCA whitening. Default is 1e-6.}
 
 \item{rotation_range}{degrees (0 to 180).}
 
