@@ -103,29 +103,14 @@ digit_size <- 28
 grid_x <- seq(-15, 15, length.out = n)
 grid_y <- seq(-15, 15, length.out = n)
 
+rows <- NULL
 for(i in 1:length(grid_x)){
+  column <- NULL
   for(j in 1:length(grid_y)){
-    
+    z_sample <- matrix(c(grid_x[i], grid_y[j]), ncol = 2)
+    column <- rbind(column, predict(generator, z_sample) %>% matrix(ncol = 28) )
   }
+  rows <- cbind(rows, column)
 }
-
-# figure = np.zeros((digit_size * n, digit_size * n))
-# # we will sample n points within [-15, 15] standard deviations
-# grid_x = np.linspace(-15, 15, n)
-# grid_y = np.linspace(-15, 15, n)
-# 
-# for i, yi in enumerate(grid_x):
-#   for j, xi in enumerate(grid_y):
-#   z_sample = np.array([[xi, yi]]) * epsilon_std
-# x_decoded = generator.predict(z_sample)
-# digit = x_decoded[0].reshape(digit_size, digit_size)
-# figure[i * digit_size: (i + 1) * digit_size,
-#        j * digit_size: (j + 1) * digit_size] = digit
-# 
-# plt.figure(figsize=(10, 10))
-# plt.imshow(figure)
-# plt.show()
-
+rows %>% as.raster() %>% plot()
   
-
-
