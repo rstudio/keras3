@@ -132,7 +132,7 @@ batch_size <- 100
 latent_size <- 100
 
 # Adam parameters suggested in https://arxiv.org/abs/1511.06434
-adam_lr <- 0.0002
+adam_lr <- 0.00005 
 adam_beta_1 <- 0.5
 
 # Model definition --------------------------------------------------------
@@ -186,7 +186,11 @@ num_test <- dim(mnist$test$x)[1]
 for(epoch in 1:epochs){
   
   num_batches <- trunc(num_train/batch_size)
-  pb <- progress_bar$new(total = num_batches)
+  pb <- progress_bar$new(
+    total = num_batches, 
+    format = sprintf("epoch %s/%s :elapsed [:bar] :percent :eta", epoch, epochs),
+    clear = FALSE
+  )
   
   epoch_gen_loss <- NULL
   epoch_disc_loss <- NULL
@@ -208,7 +212,8 @@ for(epoch in 1:epochs){
     label_batch <- mnist$train$y[batch]
     
     # sample some labels from p_c
-    sampled_labels <- sample(0:9, batch_size, replace = TRUE)
+    sampled_labels <- sample(0:9, batch_size, replace = TRUE) %>%
+      matrix(ncol = 1)
     
     # generate a batch of fake images, using the generated labels as a
     # conditioner. We reshape the sampled labels to be
@@ -345,7 +350,10 @@ for(epoch in 1:epochs){
     img <- cbind(img, generated_images[i,,,])
   }
   
-  ((img*127.5 + 127.5)/256 + 0.000001) %>% as.raster() %>%
+  ((img + 1)/2) %>% as.raster() %>%
     plot()
   
 }
+
+
+   
