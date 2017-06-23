@@ -1,28 +1,25 @@
-# Train an Auxiliary Classifier Generative Adversarial Network (ACGAN) on the
-# MNIST dataset. See https://arxiv.org/abs/1610.09585 for more details.
-# 
-# You should start to see reasonable images after ~5 epochs, and good images
-# by ~15 epochs. You should use a GPU, as the convolution-heavy operations are
-# very slow on the CPU. Prefer the TensorFlow backend if you plan on iterating,
-# as the compilation time can be a blocker using Theano.
-# 
-# Timings:
-#   
-#   Hardware           | Backend | Time / Epoch
-# -------------------------------------------
-#   CPU               | TF       | 3 hrs  
-#   Titan X (maxwell) | TF       | 4 min
-#   Titan X (maxwell) | TH       | 7 min
-# 
-# Consult     for more information and
-# example output
+#' Train an Auxiliary Classifier Generative Adversarial Network (ACGAN) on the
+#' MNIST dataset. See https://arxiv.org/abs/1610.09585 for more details.
+#'
+#' You should start to see reasonable images after ~5 epochs, and good images by
+#' ~15 epochs. You should use a GPU, as the convolution-heavy operations are
+#' very slow on the CPU. Prefer the TensorFlow backend if you plan on iterating,
+#' as the compilation time can be a blocker using Theano.
+#'
+#' Timings:
+#'   
+#'   Hardware           | Backend | Time / Epoch
+#' -------------------------------------------
+#'   CPU               | TF       | 3 hrs  
+#'   Titan X (maxwell) | TF       | 4 min
+#'   Titan X (maxwell) | TH       | 7 min
+#' 
 
 library(keras)
 library(progress)
 library(abind)
 K <- keras::backend()
 K$set_image_data_format('channels_first')
-
 
 # Functions ---------------------------------------------------------------
 
