@@ -132,10 +132,10 @@
 <div id="viewing-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#viewing-data" class="anchor"></a>Viewing Data</h2>
-<p>To view TensorBoard data for a given set of runs you use the <code><a href="../reference/reexports.html">tensorboard()</a></code> function. If your training logs are located within the current working directory then you can call <code><a href="../reference/reexports.html">tensorboard()</a></code> with no arguments:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/reexports.html">tensorboard</a></span>()</code></pre></div>
+<p>To view TensorBoard data for a given set of runs you use the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard()</a></code> function. If your training logs are located within the current working directory then you can call <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard()</a></code> with no arguments:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>()</code></pre></div>
 <p>If you alternatively want to specify a specific directory as the root of all training logs then you can use the <code>log_dir</code> parameter, for example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/reexports.html">tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="st">"logs"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="st">"logs"</span>)</code></pre></div>
 <p>Note that you don’t need to change the <code>log_dir</code> for each training run (the default log directory if none is specified is “logs”). In the case of a <code>log_dir</code> used multiple times TensorBoard will simply visualize the metrics for the most recent training run.</p>
 </div>
 <div id="comparing-runs" class="section level2">
@@ -148,7 +148,7 @@
 <img src="tensorboard_compare.png" class="screenshot" width="700" height="540">
 </div>
 <p>You can use the <code>unique_log_dir</code> function if you want to record every training run in it’s own directory:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="kw"><a href="../reference/reexports.html">unique_log_dir</a></span>())</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">unique_log_dir</a></span>())</code></pre></div>
 <p>Once again note that it’s not required to record every training run in it’s own directory. Using the default “logs” directory will work just fine, you’ll just only be able to visualize the most recent run using TensorBoard.</p>
 </div>
 <div id="customization" class="section level2">
