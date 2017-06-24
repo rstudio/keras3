@@ -4,15 +4,13 @@
 #' You should start to see reasonable images after ~5 epochs, and good images by
 #' ~15 epochs. You should use a GPU, as the convolution-heavy operations are
 #' very slow on the CPU. Prefer the TensorFlow backend if you plan on iterating,
-#' as the compilation time can be a blocker using Theano.
-#'
-#' Timings:
+#' as the compilation time can be a blocker using Theano.  
 #'   
-#'   Hardware           | Backend | Time / Epoch
-#' -------------------------------------------
-#'   CPU               | TF       | 3 hrs  
-#'   Titan X (maxwell) | TF       | 4 min
-#'   Titan X (maxwell) | TH       | 7 min
+#' Hardware           | Backend | Time / Epoch
+#' | -----------------| ------- | ------------------- |
+#' |   CPU               | TF       | 3 hrs | 
+#' |   Titan X (maxwell) | TF       | 4 min |
+#' |   Titan X (maxwell) | TH       | 7 min |
 #' 
 
 library(keras)
@@ -351,6 +349,3 @@ for(epoch in 1:epochs){
     plot()
   
 }
-
-
-   

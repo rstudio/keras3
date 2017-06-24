@@ -106,15 +106,32 @@
     
     
 <div class="contents">
-<pre><code>## Warning in readLines(input): incomplete final line found on 'mnist_acgan.R'</code></pre>
 <p>Train an Auxiliary Classifier Generative Adversarial Network (ACGAN) on the MNIST dataset. See <a href="https://arxiv.org/abs/1610.09585" class="uri">https://arxiv.org/abs/1610.09585</a> for more details.</p>
 <p>You should start to see reasonable images after ~5 epochs, and good images by ~15 epochs. You should use a GPU, as the convolution-heavy operations are very slow on the CPU. Prefer the TensorFlow backend if you plan on iterating, as the compilation time can be a blocker using Theano.</p>
-<p>Timings:</p>
-<div id="hardware-backend-time-epoch" class="section level2">
-<h2 class="hasAnchor">
-<a href="#hardware-backend-time-epoch" class="anchor"></a>Hardware | Backend | Time / Epoch</h2>
-<p>CPU | TF | 3 hrs<br>
-Titan X (maxwell) | TF | 4 min Titan X (maxwell) | TH | 7 min</p>
+<table class="table">
+<thead><tr class="header">
+<th>Hardware</th>
+<th>Backend</th>
+<th>Time / Epoch</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>CPU</td>
+<td>TF</td>
+<td>3 hrs</td>
+</tr>
+<tr class="even">
+<td>Titan X (maxwell)</td>
+<td>TF</td>
+<td>4 min</td>
+</tr>
+<tr class="odd">
+<td>Titan X (maxwell)</td>
+<td>TH</td>
+<td>7 min</td>
+</tr>
+</tbody>
+</table>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 <span class="kw">library</span>(progress)
 <span class="kw">library</span>(abind)
@@ -452,17 +469,9 @@ num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span cl
   
 }</code></pre></div>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#hardware-backend-time-epoch">Hardware | Backend | Time / Epoch</a></li>
-      </ul>
-</div>
       </div>
 
 </div>
