@@ -125,62 +125,62 @@
 
 tokenize_words &lt;-<span class="st"> </span><span class="cf">function</span>(x){
   x &lt;-<span class="st"> </span>x <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_replace">str_replace_all</a></span>(<span class="st">'([[:punct:]]+)'</span>, <span class="st">' </span><span class="ch">\\</span><span class="st">1'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_split">str_split</a></span>(<span class="st">' '</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">str_replace_all</span>(<span class="st">'([[:punct:]]+)'</span>, <span class="st">' </span><span class="ch">\\</span><span class="st">1'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">str_split</span>(<span class="st">' '</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">unlist</span>()
   x[x <span class="op">!=</span><span class="st"> ""</span>]
 }
 
 parse_stories &lt;-<span class="st"> </span><span class="cf">function</span>(lines, <span class="dt">only_supporting =</span> <span class="ot">FALSE</span>){
   lines &lt;-<span class="st"> </span>lines <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_split">str_split</a></span>(<span class="st">" "</span>, <span class="dt">n =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_df</a></span>(<span class="op">~</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tibble/topics/tibble">tibble</a></span>(<span class="dt">nid =</span> <span class="kw">as.integer</span>(.x[[<span class="dv">1</span>]]), <span class="dt">line =</span> .x[[<span class="dv">2</span>]]))
+<span class="st">    </span><span class="kw">str_split</span>(<span class="st">" "</span>, <span class="dt">n =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">map_df</span>(<span class="op">~</span><span class="kw">tibble</span>(<span class="dt">nid =</span> <span class="kw">as.integer</span>(.x[[<span class="dv">1</span>]]), <span class="dt">line =</span> .x[[<span class="dv">2</span>]]))
   
   lines &lt;-<span class="st"> </span>lines <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
-      <span class="dt">split =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(line, <span class="op">~</span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_split">str_split</a></span>(.x, <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)[[<span class="dv">1</span>]]),
-      <span class="dt">q =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_chr</a></span>(split, <span class="op">~</span>.x[<span class="dv">1</span>]),
-      <span class="dt">a =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_chr</a></span>(split, <span class="op">~</span>.x[<span class="dv">2</span>]),
-      <span class="dt">supporting =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(split, <span class="op">~</span>.x[<span class="dv">3</span>] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_split">str_split</a></span>(<span class="st">" "</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.integer</span>()),
+<span class="st">    </span><span class="kw">mutate</span>(
+      <span class="dt">split =</span> <span class="kw">map</span>(line, <span class="op">~</span><span class="kw">str_split</span>(.x, <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)[[<span class="dv">1</span>]]),
+      <span class="dt">q =</span> <span class="kw">map_chr</span>(split, <span class="op">~</span>.x[<span class="dv">1</span>]),
+      <span class="dt">a =</span> <span class="kw">map_chr</span>(split, <span class="op">~</span>.x[<span class="dv">2</span>]),
+      <span class="dt">supporting =</span> <span class="kw">map</span>(split, <span class="op">~</span>.x[<span class="dv">3</span>] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_split</span>(<span class="st">" "</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.integer</span>()),
       <span class="dt">story_id =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(nid[<span class="op">-</span><span class="kw">nrow</span>(.)] <span class="op">&gt;</span><span class="st"> </span>nid[<span class="op">-</span><span class="dv">1</span>]))
     ) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span>split)
+<span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>split)
   
   stories &lt;-<span class="st"> </span>lines <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw">is.na</span>(a)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="dt">nid_story =</span> nid, story_id, <span class="dt">story =</span> q)
+<span class="st">    </span><span class="kw">filter</span>(<span class="kw">is.na</span>(a)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(<span class="dt">nid_story =</span> nid, story_id, <span class="dt">story =</span> q)
   
   questions &lt;-<span class="st"> </span>lines <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="op">!</span><span class="kw">is.na</span>(a)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span>line) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(stories, <span class="dt">by =</span> <span class="st">"story_id"</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(nid_story <span class="op">&lt;</span><span class="st"> </span>nid)
+<span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(a)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>line) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">left_join</span>(stories, <span class="dt">by =</span> <span class="st">"story_id"</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(nid_story <span class="op">&lt;</span><span class="st"> </span>nid)
   
   <span class="cf">if</span>(only_supporting){
     questions &lt;-<span class="st"> </span>questions <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map2">map2_lgl</a></span>(nid_story, supporting, <span class="op">~</span>.x <span class="op">%in%</span><span class="st"> </span>.y))
+<span class="st">      </span><span class="kw">filter</span>(<span class="kw">map2_lgl</span>(nid_story, supporting, <span class="op">~</span>.x <span class="op">%in%</span><span class="st"> </span>.y))
   }
   
   questions <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(story_id, nid, <span class="dt">question =</span> q, <span class="dt">answer =</span> a) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">story =</span> <span class="kw">paste</span>(story, <span class="dt">collapse =</span> <span class="st">" "</span>)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
-      <span class="dt">question =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(question, <span class="op">~</span><span class="kw">tokenize_words</span>(.x)),
-      <span class="dt">story =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(story, <span class="op">~</span><span class="kw">tokenize_words</span>(.x)),
-      <span class="dt">id =</span> <span class="kw"><a href="http://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span>()
+<span class="st">    </span><span class="kw">group_by</span>(story_id, nid, <span class="dt">question =</span> q, <span class="dt">answer =</span> a) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">story =</span> <span class="kw">paste</span>(story, <span class="dt">collapse =</span> <span class="st">" "</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">mutate</span>(
+      <span class="dt">question =</span> <span class="kw">map</span>(question, <span class="op">~</span><span class="kw">tokenize_words</span>(.x)),
+      <span class="dt">story =</span> <span class="kw">map</span>(story, <span class="op">~</span><span class="kw">tokenize_words</span>(.x)),
+      <span class="dt">id =</span> <span class="kw">row_number</span>()
     ) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(id, question, answer, story)
+<span class="st">    </span><span class="kw">select</span>(id, question, answer, story)
 }
 
 vectorize_stories &lt;-<span class="st"> </span><span class="cf">function</span>(data, vocab, story_maxlen, query_maxlen){
   
-  questions &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(data<span class="op">$</span>question, <span class="cf">function</span>(x){
-    <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(x, <span class="op">~</span><span class="kw">which</span>(.x <span class="op">==</span><span class="st"> </span>vocab))
+  questions &lt;-<span class="st"> </span><span class="kw">map</span>(data<span class="op">$</span>question, <span class="cf">function</span>(x){
+    <span class="kw">map_int</span>(x, <span class="op">~</span><span class="kw">which</span>(.x <span class="op">==</span><span class="st"> </span>vocab))
   })
   
-  stories &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(data<span class="op">$</span>story, <span class="cf">function</span>(x){
-    <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(x, <span class="op">~</span><span class="kw">which</span>(.x <span class="op">==</span><span class="st"> </span>vocab))
+  stories &lt;-<span class="st"> </span><span class="kw">map</span>(data<span class="op">$</span>story, <span class="cf">function</span>(x){
+    <span class="kw">map_int</span>(x, <span class="op">~</span><span class="kw">which</span>(.x <span class="op">==</span><span class="st"> </span>vocab))
   })
   
   <span class="co"># "" represents padding</span>
@@ -217,20 +217,20 @@ path &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get
   <span class="dt">fname =</span> <span class="st">"babi-tasks-v1-2.tar.gz"</span>,
   <span class="dt">origin =</span> <span class="st">"https://s3.amazonaws.com/text-datasets/babi_tasks_1-20_v1-2.tar.gz"</span>
 )
-<span class="kw">untar</span>(path, <span class="dt">exdir =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_replace">str_replace</a></span>(path, <span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/modifiers">fixed</a></span>(<span class="st">".tar.gz"</span>), <span class="st">"/"</span>))
-path &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_replace">str_replace</a></span>(path, <span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/modifiers">fixed</a></span>(<span class="st">".tar.gz"</span>), <span class="st">"/"</span>)
+<span class="kw">untar</span>(path, <span class="dt">exdir =</span> <span class="kw">str_replace</span>(path, <span class="kw">fixed</span>(<span class="st">".tar.gz"</span>), <span class="st">"/"</span>))
+path &lt;-<span class="st"> </span><span class="kw">str_replace</span>(path, <span class="kw">fixed</span>(<span class="st">".tar.gz"</span>), <span class="st">"/"</span>)
 
 <span class="co"># Reading training and test data</span>
-train &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/readr/topics/read_lines">read_lines</a></span>(<span class="kw">sprintf</span>(challenge, path, <span class="st">"train"</span>)) <span class="op">%&gt;%</span>
+train &lt;-<span class="st"> </span><span class="kw">read_lines</span>(<span class="kw">sprintf</span>(challenge, path, <span class="st">"train"</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">parse_stories</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(story, <span class="op">~</span><span class="kw">length</span>(.x)) <span class="op">&lt;=</span><span class="st"> </span>max_length)
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">map_int</span>(story, <span class="op">~</span><span class="kw">length</span>(.x)) <span class="op">&lt;=</span><span class="st"> </span>max_length)
 
-test &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/readr/topics/read_lines">read_lines</a></span>(<span class="kw">sprintf</span>(challenge, path, <span class="st">"test"</span>)) <span class="op">%&gt;%</span>
+test &lt;-<span class="st"> </span><span class="kw">read_lines</span>(<span class="kw">sprintf</span>(challenge, path, <span class="st">"test"</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">parse_stories</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(story, <span class="op">~</span><span class="kw">length</span>(.x)) <span class="op">&lt;=</span><span class="st"> </span>max_length)
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">map_int</span>(story, <span class="op">~</span><span class="kw">length</span>(.x)) <span class="op">&lt;=</span><span class="st"> </span>max_length)
 
 <span class="co"># extract the vocabulary</span>
-all_data &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(train, test)
+all_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(train, test)
 vocab &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">unlist</span>(all_data<span class="op">$</span>question), all_data<span class="op">$</span>answer, 
            <span class="kw">unlist</span>(all_data<span class="op">$</span>story)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">unique</span>() <span class="op">%&gt;%</span>
@@ -238,8 +238,8 @@ vocab &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">u
 
 <span class="co"># Reserve 0 for masking via pad_sequences</span>
 vocab_size &lt;-<span class="st"> </span><span class="kw">length</span>(vocab) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
-story_maxlen &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(all_data<span class="op">$</span>story, <span class="op">~</span><span class="kw">length</span>(.x)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">max</span>()
-query_maxlen &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(all_data<span class="op">$</span>question, <span class="op">~</span><span class="kw">length</span>(.x)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">max</span>()
+story_maxlen &lt;-<span class="st"> </span><span class="kw">map_int</span>(all_data<span class="op">$</span>story, <span class="op">~</span><span class="kw">length</span>(.x)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">max</span>()
+query_maxlen &lt;-<span class="st"> </span><span class="kw">map_int</span>(all_data<span class="op">$</span>question, <span class="op">~</span><span class="kw">length</span>(.x)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">max</span>()
 
 <span class="co"># vectorized versions of training and test sets</span>
 train_vec &lt;-<span class="st"> </span><span class="kw">vectorize_stories</span>(train, vocab, story_maxlen, query_maxlen)

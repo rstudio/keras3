@@ -116,19 +116,19 @@
 <span class="co"># Function definition -----------------------------------------------------</span>
 
 create_ngram_set &lt;-<span class="st"> </span><span class="cf">function</span>(input_list, <span class="dt">ngram_value =</span> <span class="dv">2</span>){
-  indices &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(<span class="dv">0</span><span class="op">:</span>(<span class="kw">length</span>(input_list) <span class="op">-</span><span class="st"> </span>ngram_value), <span class="op">~</span><span class="dv">1</span><span class="op">:</span>ngram_value <span class="op">+</span><span class="st"> </span>.x)
+  indices &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="dv">0</span><span class="op">:</span>(<span class="kw">length</span>(input_list) <span class="op">-</span><span class="st"> </span>ngram_value), <span class="op">~</span><span class="dv">1</span><span class="op">:</span>ngram_value <span class="op">+</span><span class="st"> </span>.x)
   indices <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_chr</a></span>(<span class="op">~</span>input_list[.x] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">paste</span>(<span class="dt">collapse =</span> <span class="st">"|"</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">map_chr</span>(<span class="op">~</span>input_list[.x] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">paste</span>(<span class="dt">collapse =</span> <span class="st">"|"</span>)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">unique</span>()
 }
 
 add_ngram &lt;-<span class="st"> </span><span class="cf">function</span>(sequences, token_indice, <span class="dt">ngram_range =</span> <span class="dv">2</span>){
-  ngrams &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(
+  ngrams &lt;-<span class="st"> </span><span class="kw">map</span>(
     sequences, 
     create_ngram_set, <span class="dt">ngram_value =</span> ngram_range
   )
   
-  seqs &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map2">map2</a></span>(sequences, ngrams, <span class="cf">function</span>(x, y){
+  seqs &lt;-<span class="st"> </span><span class="kw">map2</span>(sequences, ngrams, <span class="cf">function</span>(x, y){
     tokens &lt;-<span class="st"> </span>token_indice<span class="op">$</span>token[token_indice<span class="op">$</span>ngrams <span class="op">%in%</span><span class="st"> </span>y]  
     <span class="kw">c</span>(x, tokens)
   })
@@ -154,14 +154,14 @@ imdb_data &lt;-<span class="st"> </span><span class="kw"><a href="../../referenc
 
 <span class="kw">print</span>(<span class="kw">length</span>(imdb_data<span class="op">$</span>train<span class="op">$</span>x)) <span class="co"># train sequences</span>
 <span class="kw">print</span>(<span class="kw">length</span>(imdb_data<span class="op">$</span>test<span class="op">$</span>x)) <span class="co"># test sequences</span>
-<span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"Average train sequence length: %f"</span>, <span class="kw">mean</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(imdb_data<span class="op">$</span>train<span class="op">$</span>x, length))))
-<span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"Average test sequence length: %f"</span>, <span class="kw">mean</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(imdb_data<span class="op">$</span>test<span class="op">$</span>x, length))))
+<span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"Average train sequence length: %f"</span>, <span class="kw">mean</span>(<span class="kw">map_int</span>(imdb_data<span class="op">$</span>train<span class="op">$</span>x, length))))
+<span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"Average test sequence length: %f"</span>, <span class="kw">mean</span>(<span class="kw">map_int</span>(imdb_data<span class="op">$</span>test<span class="op">$</span>x, length))))
 
 <span class="cf">if</span>(ngram_range <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) {
   
   <span class="co"># Create set of unique n-gram from the training set.</span>
   ngrams &lt;-<span class="st"> </span>imdb_data<span class="op">$</span>train<span class="op">$</span>x <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(create_ngram_set) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">map</span>(create_ngram_set) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">unique</span>()
 

@@ -198,7 +198,7 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/ap
 
 <span class="co"># get the symbolic outputs of each "key" layer (we gave them unique names).</span>
 layer_dict &lt;-<span class="st"> </span>model<span class="op">$</span>layers
-<span class="kw">names</span>(layer_dict) &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_chr</a></span>(layer_dict ,<span class="op">~</span>.x<span class="op">$</span>name)
+<span class="kw">names</span>(layer_dict) &lt;-<span class="st"> </span><span class="kw">map_chr</span>(layer_dict ,<span class="op">~</span>.x<span class="op">$</span>name)
 
 <span class="co"># define the loss</span>
 loss &lt;-<span class="st"> </span>tf<span class="op">$</span><span class="kw">Variable</span>(<span class="fl">0.0</span>)
@@ -244,7 +244,7 @@ eval_loss_and_grads &lt;-<span class="st"> </span><span class="cf">function</spa
 <span class="co"># "loss" and "grads". This is done because scipy.optimize</span>
 <span class="co"># requires separate functions for loss and gradients,</span>
 <span class="co"># but computing them separately would be inefficient.</span>
-Evaluator &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/R6/topics/R6Class">R6Class</a></span>(
+Evaluator &lt;-<span class="st"> </span><span class="kw">R6Class</span>(
   <span class="st">"Evaluator"</span>,
   <span class="dt">public =</span> <span class="kw">list</span>(
     

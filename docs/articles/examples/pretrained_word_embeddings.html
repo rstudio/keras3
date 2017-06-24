@@ -124,8 +124,8 @@ VALIDATION_SPLIT &lt;-<span class="st"> </span><span class="fl">0.2</span>
 download_data &lt;-<span class="st"> </span><span class="cf">function</span>(data_dir, url_path, data_file) {
   <span class="cf">if</span> (<span class="op">!</span><span class="kw">dir.exists</span>(data_dir)) {
     <span class="kw">download.file</span>(<span class="kw">paste0</span>(url_path, data_file), data_file, <span class="dt">mode =</span> <span class="st">"wb"</span>)
-    <span class="cf">if</span> (tools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tools/topics/fileutils">file_ext</a></span>(data_file) <span class="op">==</span><span class="st"> "zip"</span>)
-      <span class="kw">unzip</span>(data_file, <span class="dt">exdir =</span> tools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tools/topics/fileutils">file_path_sans_ext</a></span>(data_file))
+    <span class="cf">if</span> (tools<span class="op">::</span><span class="kw">file_ext</span>(data_file) <span class="op">==</span><span class="st"> "zip"</span>)
+      <span class="kw">unzip</span>(data_file, <span class="dt">exdir =</span> tools<span class="op">::</span><span class="kw">file_path_sans_ext</span>(data_file))
     <span class="cf">else</span>
       <span class="kw">untar</span>(data_file)
     <span class="kw">unlink</span>(data_file)
