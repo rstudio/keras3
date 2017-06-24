@@ -22,6 +22,7 @@ title: "Keras Examples"
 | [mnist_transfer_cnn.R](mnist_transfer_cnn.html) | Transfer learning toy example. |
 | [reuters_mlp.R](reuters_mlp.html) | Trains and evaluatea a simple MLP on the Reuters newswire topic classification task. |
 | [stateful_lstm.R](stateful_lstm.html) | Demonstrates how to use stateful RNNs to model long sequences efficiently. |
+| [variational_autoencoder.R](variational_autoencoder.html) | Demonstrates how to build a variational autoencoder. |
 
 <!--
 | [conv_filter_visualization.R](conv_filter_visualization.html) | Visualization of the filters of VGG16, via gradient ascent in input space. |
@@ -33,7 +34,6 @@ title: "Keras Examples"
 | [mnist_swwae.R](mnist_swwae.html) | Trains a Stacked What-Where AutoEncoder built on residual blocks on the MNIST dataset. |
 | [neural_doodle.R](neural_doodle.html) | Neural doodle. |
 | [neural_style_transfer.R](neural_style_transfer.html) | Neural style transfer. |
-| [variational_autoencoder.R](variational_autoencoder.html) | Demonstrates how to build a variational autoencoder. |
 | [variational_autoencoder_deconv.R](variational_autoencoder_deconv.html) | Demonstrates how to build a variational autoencoder with Keras using deconvolution layers. |
 -->
 

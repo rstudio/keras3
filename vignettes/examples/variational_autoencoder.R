@@ -1,5 +1,6 @@
-# This script demonstrates how to build a variational autoencoder with Keras.
-# Reference: "Auto-Encoding Variational Bayes" https://arxiv.org/abs/1312.6114
+#' This script demonstrates how to build a variational autoencoder with Keras.
+#' Reference: "Auto-Encoding Variational Bayes" https://arxiv.org/abs/1312.6114
+
 library(keras)
 K <- keras::backend()
 
@@ -113,4 +114,4 @@ for(i in 1:length(grid_x)){
   rows <- cbind(rows, column)
 }
 rows %>% as.raster() %>% plot()
-  
+
