@@ -77,7 +77,7 @@ test_call_succeeds("layer_spatial_dropout_3d", {
 test_call_succeeds("layer_lambda", {
   keras_model_sequential() %>% 
     layer_dense(32, input_shape = c(784)) %>% 
-    layer_lambda(function(t) t)
+    layer_lambda(function(t) t, output_shape = c(784))
 })
 
 test_call_succeeds("layer_masking", {
@@ -141,10 +141,12 @@ test_call_succeeds("layer_conv_2d_transpose", {
 })
 
 test_call_succeeds("layer_separable_conv_2d", {
-  keras_model_sequential() %>% 
-    layer_dense(32, input_shape = c(784)) %>% 
-    layer_reshape(target_shape = c(2,4,4)) %>% 
-    layer_separable_conv_2d(filters = 4, kernel_size = c(2,2))
+  if (is_tensorflow_implementation()) {
+    keras_model_sequential() %>% 
+      layer_dense(32, input_shape = c(784)) %>% 
+      layer_reshape(target_shape = c(2,4,4)) %>% 
+      layer_separable_conv_2d(filters = 4, kernel_size = c(2,2))
+  }
 })
 
 

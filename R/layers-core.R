@@ -224,6 +224,8 @@ layer_repeat_vector <- function(object, n,
 #' 
 #' @param f The function to be evaluated. Takes input tensor as first
 #'   argument.
+#' @param output_shape Expected output shape from the function (not required
+#'   when using TensorFlow back-end).
 #' @param mask mask
 #' @param arguments optional named list of keyword arguments to be passed to the
 #'   function.
@@ -237,12 +239,13 @@ layer_repeat_vector <- function(object, n,
 #' @family core layers   
 #'     
 #' @export
-layer_lambda <- function(object, f, mask = NULL, arguments = NULL, input_shape = NULL,
-                         batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+layer_lambda <- function(object, f, output_shape = NULL, mask = NULL, arguments = NULL, 
+                         input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                          name = NULL, trainable = NULL, weights = NULL) {
   
   call_layer(keras$layers$Lambda, object, list(
     `function` = f,
+    output_shape = as_integer_tuple(output_shape),
     mask = mask,
     arguments = arguments,
     input_shape = normalize_shape(input_shape),
@@ -439,5 +442,12 @@ compose_layer.tensorflow.python.framework.ops.Tensor <- function(object, layer) 
   layer(object)
 }
 
+compose_layer.keras.engine.topology.Layer <- function(object, layer) {
+  layer(object)
+}
+
+compose_layer.theano.tensor.var.TensorVariable <- function(object, layer) {
+  layer(object)
+}
 
 

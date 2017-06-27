@@ -433,7 +433,7 @@ predict_generator <- function(object, generator, steps, max_q_size = 10, workers
     pickle_safe = pickle_safe
   )
   
-  if (has_compatible_implementation(tf = "1.2"))
+  if (keras_version() >= "2.0.1")
     args$verbose <- as.integer(verbose)
   
   do.call(object$predict_generator, args)

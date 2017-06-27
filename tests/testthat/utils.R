@@ -16,6 +16,10 @@ test_call_succeeds <- function(call_name, expr) {
   test_succeeds(paste(call_name, "call succeeds"), expr)
 }
 
+is_implementation <- function(name) {
+  identical(name, getOption("keras.implementation", default = "tensorflow"))
+}
+
 define_model <- function() {
   model <- keras_model_sequential() 
   model %>%

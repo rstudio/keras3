@@ -14,9 +14,9 @@ test_loss <- function(name, test_direct_call = TRUE) {
         metrics='accuracy'
       )
     if (test_direct_call) {
-      tf <- tensorflow::tf
-      y_true <- tf$constant(matrix(runif(100), nrow = 10, ncol = 10))
-      y_pred <- tf$constant(matrix(runif(100), nrow = 10, ncol = 10))
+      K <- backend()
+      y_true <- K$constant(matrix(runif(100), nrow = 10, ncol = 10))
+      y_pred <- K$constant(matrix(runif(100), nrow = 10, ncol = 10))
       loss_fn(y_true, y_pred)
     }
   }) 

@@ -11,8 +11,15 @@ keras <- NULL
 
 .onLoad <- function(libname, pkgname) {
   
+  # determine implementation to use
+  implementation <- get_implementation()
+  if (identical(implementation, "tensorflow"))
+    implementation_module <- "tensorflow.contrib.keras.python.keras"
+  else
+    implementation_module <- implementation
+  
   # delay load keras
-  keras <<- import("tensorflow.contrib.keras.python.keras", as = "keras", delay_load = list(
+  keras <<- import(implementation_module, as = "keras", delay_load = list(
    
     on_load = function() {
       check_implementation_version()
@@ -25,15 +32,52 @@ keras <- NULL
   ))
 }
 
+get_implementation <- function() {
+  getOption("keras.implementation", default = "tensorflow")
+}
+
+is_tensorflow_implementation <- function(implementation = get_implementation()) {
+  identical(implementation, "tensorflow")
+}
+
+is_keras_implementation <- function(implementation = get_implementation()) {
+  identical(implementation, "keras")
+}
+
 check_implementation_version <- function() {
-  tf_ver <- tf_config()$version
-  required_tf_ver <- "1.1"
-  if (tf_ver < required_tf_ver) {
-    message("Keras loaded from TensorFlow version ", tf_ver, ", however version ",
-            required_tf_ver, " is required. Please update TensorFlow.")
+  
+  # get current implementation
+  implementation <- get_implementation()
+  
+  # version variables
+  ver <- NULL
+  required_ver <- NULL
+  
+  # define implemetation-specific version/required-version
+  if (is_tensorflow_implementation(implementation)) {
+    name <- "TensorFlow"
+    ver <- tf_version() 
+    required_ver <- "1.1"
+  } else if (is_keras_implementation(implementation)) {
+    name <- "Keras"
+    ver <- keras_version()
+    required_ver <- "2.0.0"
+  }
+  
+  # check version if we can
+  if (!is.null(required_ver)) {
+    if (ver < required_ver) {
+      message("Keras loaded from ", implementation, " Python module v", ver, ", however version ",
+              required_ver, " is required. Please update the ", implementation, " Python package.")
+    }
   }
 }
 
-has_compatible_implementation <- function(tf) {
-  tf_version() >= tf
+keras_version <- function() {
+  ver <- keras$`__version__`
+  ver <- regmatches(ver, regexec("^([0-9\\.]+).*$", ver))[[1]][[2]]
+  package_version(ver)
 }
+
+
+

@@ -49,7 +49,7 @@ attr(activation_sigmoid, "py_function_name") <- "sigmoid"
 #' @export
 activation_softmax <- function(x, axis = -1) {
   args <- list(x = x)
-  if (has_compatible_implementation(tf = "1.2"))
+  if (keras_version() >= "2.0.2")
     args$axis <- as.integer(axis)
   do.call(keras$activations$softmax, args)
 }

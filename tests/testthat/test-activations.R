@@ -9,7 +9,8 @@ test_activation <- function(name) {
       layer_dense(32, input_shape = 784) %>% 
       layer_activation(activation = activation_fn)
   }) 
-  tensor <- tensorflow::tf$constant(matrix(runif(100), nrow = 10, ncol = 10))
+  K <- backend()
+  tensor <- K$constant(matrix(runif(100), nrow = 10, ncol = 10))
   activation_fn(tensor)
 }
 
