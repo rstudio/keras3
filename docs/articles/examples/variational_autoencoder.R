@@ -100,9 +100,9 @@ x_test_encoded %>%
 n <- 15  # figure with 15x15 digits
 digit_size <- 28
 
-# we will sample n points within [-15, 15] standard deviations
-grid_x <- seq(-15, 15, length.out = n)
-grid_y <- seq(-15, 15, length.out = n)
+# we will sample n points within [-4, 4] standard deviations
+grid_x <- seq(-4, 4, length.out = n)
+grid_y <- seq(-4, 4, length.out = n)
 
 rows <- NULL
 for(i in 1:length(grid_x)){
