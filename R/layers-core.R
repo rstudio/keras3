@@ -243,9 +243,8 @@ layer_lambda <- function(object, f, output_shape = NULL, mask = NULL, arguments 
                          input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                          name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Lambda, object, list(
+  args <- list(
     `function` = f,
-    output_shape = as_integer_tuple(output_shape),
     mask = mask,
     arguments = arguments,
     input_shape = normalize_shape(input_shape),
@@ -255,7 +254,12 @@ layer_lambda <- function(object, f, output_shape = NULL, mask = NULL, arguments 
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
+  
+  if (is_backend("theano"))
+    args$output_shape = as_integer_tuple(output_shape)
+  
+  call_layer(keras$layers$Lambda, object, args)
   
 }
 
