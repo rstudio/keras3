@@ -10,7 +10,7 @@ test_activation <- function(name) {
       layer_activation(activation = activation_fn)
   }) 
   K <- backend()
-  tensor <- K$constant(matrix(runif(100), nrow = 10, ncol = 10))
+  tensor <- K$constant(matrix(runif(100), nrow = 10, ncol = 10), shape = c(10L, 10L))
   activation_fn(tensor)
 }
 
