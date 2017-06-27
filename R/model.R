@@ -432,7 +432,8 @@ predict_generator <- function(object, generator, steps, max_q_size = 10, workers
     workers = as.integer(workers),
     pickle_safe = pickle_safe
   )
-  if (tf_version() >= "1.2")
+  
+  if (has_compatible_implementation(tf = "1.2"))
     args$verbose <- as.integer(verbose)
   
   do.call(object$predict_generator, args)

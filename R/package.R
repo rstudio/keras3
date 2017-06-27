@@ -15,7 +15,7 @@ keras <- NULL
   keras <<- import("tensorflow.contrib.keras.python.keras", as = "tensorflow.keras", delay_load = list(
    
     on_load = function() {
-      check_tf_version()
+      check_implementation_version()
     },
     
     on_error = function(e) {
@@ -25,11 +25,15 @@ keras <- NULL
   ))
 }
 
-check_tf_version <- function() {
+check_implementation_version <- function() {
   tf_ver <- tf_config()$version
   required_tf_ver <- "1.1"
   if (tf_ver < required_tf_ver) {
     message("Keras loaded from TensorFlow version ", tf_ver, ", however version ",
             required_tf_ver, " is required. Please update TensorFlow.")
   }
+}
+
+has_compatible_implementation <- function(tf) {
+  tf_version() >= tf
 }
