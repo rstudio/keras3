@@ -169,13 +169,13 @@ generate_data &lt;-<span class="st"> </span><span class="cf">function</span>(siz
   
   <span class="co"># pad with spaces on the right</span>
   questions &lt;-<span class="st"> </span><span class="kw">paste0</span>(left_side, <span class="st">"+"</span>, right_side)
-  questions &lt;-<span class="st"> </span><span class="kw">stri_pad</span>(questions, <span class="dt">width =</span> <span class="dv">2</span><span class="op">*</span>digits<span class="op">+</span><span class="dv">1</span>, 
+  questions &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringi/topics/stri_pad">stri_pad</a></span>(questions, <span class="dt">width =</span> <span class="dv">2</span><span class="op">*</span>digits<span class="op">+</span><span class="dv">1</span>, 
                         <span class="dt">side =</span> <span class="st">"right"</span>, <span class="dt">pad =</span> <span class="st">" "</span>)
   <span class="cf">if</span>(invert){
-    questions &lt;-<span class="st"> </span><span class="kw">stri_reverse</span>(questions)
+    questions &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringi/topics/stri_reverse">stri_reverse</a></span>(questions)
   }
   <span class="co"># pad with spaces on the left</span>
-  results &lt;-<span class="st"> </span><span class="kw">stri_pad</span>(results, <span class="dt">width =</span> digits <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, 
+  results &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringi/topics/stri_pad">stri_pad</a></span>(results, <span class="dt">width =</span> digits <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, 
                       <span class="dt">side =</span> <span class="st">"left"</span>, <span class="dt">pad =</span> <span class="st">" "</span>)
   
   <span class="kw">list</span>(

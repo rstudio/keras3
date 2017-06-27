@@ -46,13 +46,13 @@ reference:
     contents:
       - keras_model
       - keras_model_sequential
-      - summary.tensorflow.keras.engine.training.Model
+      - summary.keras.engine.training.Model
       - compile
       - fit
       - fit_generator
       - evaluate
       - evaluate_generator
-      - predict.tensorflow.keras.engine.training.Model
+      - predict.keras.engine.training.Model
       - predict_proba
       - predict_classes
       - predict_on_batch

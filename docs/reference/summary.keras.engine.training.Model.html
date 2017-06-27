@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TensorBoard basic visualizations — callback_tensorboard • keras</title>
+<title>Print a summary of a Keras model — summary.keras.engine.training.Model • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -121,82 +121,51 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>TensorBoard basic visualizations</h1>
+    <h1>Print a summary of a Keras model</h1>
     </div>
 
     
-    <p>This callback writes a log for TensorBoard, which allows you to visualize
-dynamic graphs of your training and test metrics, as well as activation
-histograms for the different layers in your model.</p>
+    <p>Print a summary of a Keras model</p>
     
 
-    <pre class="usage"><span class='fu'>callback_tensorboard</span>(<span class='kw'>log_dir</span> <span class='kw'>=</span> <span class='st'>"logs"</span>, <span class='kw'>histogram_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>write_graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>write_images</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>embeddings_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>embeddings_layer_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>embeddings_metadata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for keras.engine.training.Model</span>
+<span class='fu'>summary</span>(<span class='no'>object</span>,
+  <span class='kw'>line_length</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"width"</span>), <span class='kw'>positions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>log_dir</th>
-      <td><p>the path of the directory where to save the log files to be
-parsed by Tensorboard.</p></td>
+      <th>object</th>
+      <td><p>Keras model instance</p></td>
     </tr>
     <tr>
-      <th>histogram_freq</th>
-      <td><p>frequency (in epochs) at which to compute activation
-histograms for the layers of the model. If set to 0, histograms won't be
-computed.</p></td>
+      <th>line_length</th>
+      <td><p>Total length of printed lines</p></td>
     </tr>
     <tr>
-      <th>write_graph</th>
-      <td><p>whether to visualize the graph in Tensorboard. The log
-file can become quite large when write_graph is set to <code>TRUE</code></p></td>
+      <th>positions</th>
+      <td><p>Relative or absolute positions of log elements in each line.
+If not provided, defaults to <code>c(0.33, 0.55, 0.67, 1.0)</code>.</p></td>
     </tr>
     <tr>
-      <th>write_images</th>
-      <td><p>whether to write model weights to visualize as image in
-Tensorboard.</p></td>
-    </tr>
-    <tr>
-      <th>embeddings_freq</th>
-      <td><p>frequency (in epochs) at which selected embedding
-layers will be saved.</p></td>
-    </tr>
-    <tr>
-      <th>embeddings_layer_names</th>
-      <td><p>a list of names of layers to keep eye on. If
-<code>NULL</code> or empty list all the embedding layers will be watched.</p></td>
-    </tr>
-    <tr>
-      <th>embeddings_metadata</th>
-      <td><p>a named list which maps layer name to a file name in
-which metadata for this embedding layer is saved. See the
-<a href='https://www.tensorflow.org/how_tos/embedding_viz/#metadata_optional'>details</a>
-about the metadata file format. In case if the same metadata file is used
-for all embedding layers, string can be passed.</p></td>
+      <th>...</th>
+      <td><p>Unused</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>TensorBoard is a visualization tool provided with TensorFlow.</p>
-<p>If you have installed TensorFlow with pip, you can launch TensorBoard
-using the <code><a href='http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard'>tensorboard()</a></code> function:</p><pre>tensorboard(log_dir = "/full_path_to_your_logs") 
-</pre>
-    <p>You can find more information about TensorBoard
-<a href='https://www.tensorflow.org/get_started/summaries_and_tensorboard'>here</a>.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other callbacks: <code><a href='callback_csv_logger.html'>callback_csv_logger</a></code>,
-  <code><a href='callback_early_stopping.html'>callback_early_stopping</a></code>,
-  <code><a href='callback_lambda.html'>callback_lambda</a></code>,
-  <code><a href='callback_learning_rate_scheduler.html'>callback_learning_rate_scheduler</a></code>,
-  <code><a href='callback_model_checkpoint.html'>callback_model_checkpoint</a></code>,
-  <code><a href='callback_progbar_logger.html'>callback_progbar_logger</a></code>,
-  <code><a href='callback_reduce_lr_on_plateau.html'>callback_reduce_lr_on_plateau</a></code>,
-  <code><a href='callback_remote_monitor.html'>callback_remote_monitor</a></code></p>
+    <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
+  <code><a href='evaluate_generator.html'>evaluate_generator</a></code>, <code><a href='evaluate.html'>evaluate</a></code>,
+  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='fit.html'>fit</a></code>,
+  <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_layer.html'>get_layer</a></code>,
+  <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
+  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='pop_layer.html'>pop_layer</a></code>,
+  <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
+  <code><a href='predict_generator.html'>predict_generator</a></code>,
+  <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
+  <code><a href='predict_proba.html'>predict_proba</a></code>, <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
     
 
   </div>
@@ -205,8 +174,6 @@ using the <code><a href='http://www.rdocumentation.org/packages/tensorflow/topic
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
           </ul>
 

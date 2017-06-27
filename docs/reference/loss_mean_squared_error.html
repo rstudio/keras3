@@ -161,11 +161,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>y_true</th>
-      <td><p>True labels (TensorFlow tensor)</p></td>
+      <td><p>True labels (Tensor)</p></td>
     </tr>
     <tr>
       <th>y_pred</th>
-      <td><p>Predictions (TensorFlow tensor of the same shape as <code>y_true</code>)</p></td>
+      <td><p>Predictions (Tensor of the same shape as <code>y_true</code>)</p></td>
     </tr>
     </table>
     
@@ -178,8 +178,8 @@ function (e.g. 'loss = binary_crossentropy'), a reference to a built in loss
 function (e.g. 'loss = loss_binary_crossentropy()') or by passing an
 artitrary function that returns a scalar for each data-point and takes the
 following two arguments:</p><ul>
-<li><p><code>y_true</code> True labels (TensorFlow tensor)</p></li>
-<li><p><code>y_pred</code> Predictions (TensorFlow tensor of the same shape as <code>y_true</code>)</p></li>
+<li><p><code>y_true</code> True labels (Tensor)</p></li>
+<li><p><code>y_pred</code> Predictions (Tensor of the same shape as <code>y_true</code>)</p></li>
 </ul>
     <p>The actual optimized objective is the mean of the output array across all
 datapoints.</p>

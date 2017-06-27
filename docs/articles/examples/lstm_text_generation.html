@@ -128,9 +128,9 @@ path &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get
   <span class="dt">origin=</span><span class="st">'https://s3.amazonaws.com/text-datasets/nietzsche.txt'</span>
   )
 
-text &lt;-<span class="st"> </span><span class="kw">read_lines</span>(path) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">str_to_lower</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) <span class="op">%&gt;%</span>
+text &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/readr/topics/read_lines">read_lines</a></span>(path) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/case">str_to_lower</a></span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_c">str_c</a></span>(<span class="dt">collapse =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">tokenize_characters</span>(<span class="dt">strip_non_alphanum =</span> <span class="ot">FALSE</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)
 
 <span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"corpus length: %d"</span>, <span class="kw">length</span>(text)))
@@ -142,12 +142,12 @@ chars &lt;-<span class="st"> </span>text <span class="op">%&gt;%</span>
 <span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"total chars: %d"</span>, <span class="kw">length</span>(chars)))  
 
 <span class="co"># cut the text in semi-redundant sequences of maxlen characters</span>
-dataset &lt;-<span class="st"> </span><span class="kw">map</span>(
+dataset &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(
   <span class="kw">seq</span>(<span class="dv">1</span>, <span class="kw">length</span>(text) <span class="op">-</span><span class="st"> </span>maxlen <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="dv">3</span>), 
   <span class="op">~</span><span class="kw">list</span>(<span class="dt">sentece =</span> text[.x<span class="op">:</span>(.x <span class="op">+</span><span class="st"> </span>maxlen <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)], <span class="dt">next_char =</span> text[.x <span class="op">+</span><span class="st"> </span>maxlen])
   )
 
-dataset &lt;-<span class="st"> </span><span class="kw">transpose</span>(dataset)
+dataset &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(dataset)
 
 <span class="co"># vectorization</span>
 X &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">length</span>(dataset<span class="op">$</span>sentece), maxlen, <span class="kw">length</span>(chars)))
@@ -221,7 +221,7 @@ sample_mod &lt;-<span class="st"> </span><span class="cf">function</span>(preds,
       next_index &lt;-<span class="st"> </span><span class="kw">sample_mod</span>(preds, diversity)
       next_char &lt;-<span class="st"> </span>chars[next_index]
       
-      generated &lt;-<span class="st"> </span><span class="kw">str_c</span>(generated, next_char, <span class="dt">collapse =</span> <span class="st">""</span>)
+      generated &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_c">str_c</a></span>(generated, next_char, <span class="dt">collapse =</span> <span class="st">""</span>)
       sentence &lt;-<span class="st"> </span><span class="kw">c</span>(sentence[<span class="op">-</span><span class="dv">1</span>], next_char)
       
     }
