@@ -199,7 +199,7 @@ evaluate <- function(object, x, y, batch_size = 32, verbose=1, sample_weight = N
 #' 
 #' @importFrom stats predict
 #' @export
-predict.tensorflow.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0, ...) {
+predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbose=0, ...) {
   
   # call predict
   object$predict(
@@ -212,7 +212,7 @@ predict.tensorflow.keras.engine.training.Model <- function(object, x, batch_size
 
 #' Generates probability or class probability predictions for the input samples.
 #' 
-#' @inheritParams predict.tensorflow.keras.engine.training.Model
+#' @inheritParams predict.keras.engine.training.Model
 #' 
 #' @param object Keras model object
 #' 
@@ -242,7 +242,7 @@ predict_classes <- function(object, x, batch_size = 32, verbose = 0) {
 
 #' Returns predictions for a single batch of samples.
 #' 
-#' @inheritParams predict.tensorflow.keras.engine.training.Model
+#' @inheritParams predict.keras.engine.training.Model
 #' 
 #' @param object Keras model object
 #' 
@@ -401,7 +401,7 @@ evaluate_generator <- function(object, generator, steps, max_q_size = 10, worker
 #' The generator should return the same kind of data as accepted by 
 #' `predict_on_batch()`.
 #' 
-#' @inheritParams predict.tensorflow.keras.engine.training.Model
+#' @inheritParams predict.keras.engine.training.Model
 #' 
 #' @param object Keras model object
 #' @param generator Generator yielding batches of input samples.
@@ -485,7 +485,7 @@ pop_layer <- function(object) {
 #' @family model functions
 #' 
 #' @export
-summary.tensorflow.keras.engine.training.Model <- function(object, line_length = getOption("width"), positions = NULL, ...) {
+summary.keras.engine.training.Model <- function(object, line_length = getOption("width"), positions = NULL, ...) {
   if (py_is_null_xptr(object))
     cat("<pointer: 0x0>\n")
   else {
@@ -495,7 +495,7 @@ summary.tensorflow.keras.engine.training.Model <- function(object, line_length =
 
 #' @importFrom reticulate py_str
 #' @export
-py_str.tensorflow.keras.engine.training.Model <- function(object,  line_length = getOption("width"), positions = NULL, ...) {
+py_str.keras.engine.training.Model <- function(object,  line_length = getOption("width"), positions = NULL, ...) {
   paste0("Model\n", py_capture_output(object$summary(line_length = line_length, positions = positions), type = "stdout"))
 }
 

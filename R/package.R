@@ -12,7 +12,7 @@ keras <- NULL
 .onLoad <- function(libname, pkgname) {
   
   # delay load keras
-  keras <<- import("tensorflow.contrib.keras.python.keras", as = "tensorflow.keras", delay_load = list(
+  keras <<- import("tensorflow.contrib.keras.python.keras", as = "keras", delay_load = list(
    
     on_load = function() {
       check_implementation_version()

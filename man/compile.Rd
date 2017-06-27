@@ -44,10 +44,10 @@ Other model functions: \code{\link{evaluate_generator}},
   \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}}, \code{\link{pop_layer}},
-  \code{\link{predict.tensorflow.keras.engine.training.Model}},
+  \code{\link{predict.keras.engine.training.Model}},
   \code{\link{predict_generator}},
   \code{\link{predict_on_batch}},
   \code{\link{predict_proba}},
-  \code{\link{summary.tensorflow.keras.engine.training.Model}},
+  \code{\link{summary.keras.engine.training.Model}},
   \code{\link{train_on_batch}}
 }

@@ -426,12 +426,12 @@ compose_layer.default <- function(object, layer) {
        call. = FALSE)
 }
 
-compose_layer.tensorflow.keras.models.Sequential <- function(object, layer) {
+compose_layer.keras.models.Sequential <- function(object, layer) {
   object$add(layer)
   object
 }
 
-compose_layer.tensorflow.keras.engine.topology.Layer <- function(object, layer) {
+compose_layer.keras.engine.topology.Layer <- function(object, layer) {
   layer(object)
 }
 
