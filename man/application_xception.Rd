@@ -58,6 +58,8 @@ the VGG16 and ResNet models (299x299 instead of 224x224).
 
 The \code{xception_preprocess_input()} function should be used for image
 preprocessing.
+
+This application is only available when using the TensorFlow back-end.
 }
 \section{Reference}{
 

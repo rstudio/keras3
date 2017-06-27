@@ -4,15 +4,19 @@
 \alias{layer_lambda}
 \title{Wraps arbitrary expression as a layer}
 \usage{
-layer_lambda(object, f, mask = NULL, arguments = NULL, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_lambda(object, f, output_shape = NULL, mask = NULL,
+  arguments = NULL, input_shape = NULL, batch_input_shape = NULL,
+  batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
+  weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
 
 \item{f}{The function to be evaluated. Takes input tensor as first
 argument.}
+
+\item{output_shape}{Expected output shape from the function (not required
+when using TensorFlow back-end).}
 
 \item{mask}{mask}
 
