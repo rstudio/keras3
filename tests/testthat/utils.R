@@ -20,6 +20,10 @@ is_implementation <- function(name) {
   identical(name, getOption("keras.implementation", default = "tensorflow"))
 }
 
+is_backend <- function(name) {
+  identical(backend()$backend(), name)
+}
+
 define_model <- function() {
   model <- keras_model_sequential() 
   model %>%
