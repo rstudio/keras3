@@ -429,8 +429,7 @@ compose_layer <- function(object, layer) {
 }
 
 compose_layer.default <- function(object, layer) {
-  stop("Invalid input to layer function (must be a model or a tensor)",
-       call. = FALSE)
+  stop_with_invalid_layer()
 }
 
 compose_layer.keras.models.Sequential <- function(object, layer) {
@@ -438,20 +437,15 @@ compose_layer.keras.models.Sequential <- function(object, layer) {
   object
 }
 
-compose_layer.keras.engine.topology.Layer <- function(object, layer) {
-  layer(object)
+compose_layer.python.builtin.object <- function(object, layer) {
+  if (is.function(layer))
+    layer(object)
+  else
+    stop_with_invalid_layer()
 }
 
-compose_layer.tensorflow.python.framework.ops.Tensor <- function(object, layer) {
-  layer(object)
+stop_with_invalid_layer <- function() {
+  stop("Invalid input to layer function (must be a model or a tensor)",
+       call. = FALSE)
 }
-
-compose_layer.keras.engine.topology.Layer <- function(object, layer) {
-  layer(object)
-}
-
-compose_layer.theano.tensor.var.TensorVariable <- function(object, layer) {
-  layer(object)
-}
-
 
