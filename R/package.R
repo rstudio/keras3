@@ -37,7 +37,7 @@ get_implementation <- function() {
 }
 
 is_tensorflow_implementation <- function(implementation = get_implementation()) {
-  identical(implementation, "tensorflow")
+  grepl("^tensorflow", implementation)
 }
 
 is_keras_implementation <- function(implementation = get_implementation()) {
