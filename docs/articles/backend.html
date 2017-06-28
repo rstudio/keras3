@@ -120,8 +120,8 @@
 <div id="selecting-a-backend" class="section level2">
 <h2 class="hasAnchor">
 <a href="#selecting-a-backend" class="anchor"></a>Selecting a Backend</h2>
-<p>To make use of a Keras backend you need to install it. For TensorFlow this can be done using the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow">install_tensorflow()</a></code> function. For other backends you should follow the <a href="https://keras.io/#installation">installation instructions</a> on the Keras website.</p>
-<p>To select an alternate backend, set the <code>KERAS_BACKEND</code> environment variable before loading the keras R package. For example:</p>
+<p>The TensorFlow backend is the recommended configuration for most users. If you intend to use Keras with TensorFlow then you should install it using the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow">install_tensorflow()</a></code> function. After a successful installation no further action or configuration is necessary since Keras will use TensorFlow by default.</p>
+<p>If you want to use another backend (e.g. “theano” or “cntk”) then you should follow the <a href="https://keras.io/#installation">installation instructions</a> on the Keras website for the Keras Python package and the requisite backend. Then, to select an alternate backend, set the <code>KERAS_BACKEND</code> environment variable before loading the keras R package. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.setenv</span>(<span class="dt">KERAS_BACKEND =</span> <span class="st">"theano"</span>)
 <span class="kw">library</span>(keras)</code></pre></div>
 <div id="environment-variables" class="section level3">
@@ -153,6 +153,7 @@
 </tr>
 </tbody>
 </table>
+<p>Note that if you want to use TensorFlow as the backend engine you wouldn’t need to set any of these variables, as it will be used automatically by default.</p>
 </div>
 </div>
 <div id="accessing-the-backend-in-code" class="section level2">

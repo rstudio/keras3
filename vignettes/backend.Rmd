@@ -27,9 +27,9 @@ The R interface to Keras uses TensorFlow™ as it's default tensor backend engin
 
 ## Selecting a Backend
 
-To make use of a Keras backend you need to install it. For TensorFlow this can be done using the `install_tensorflow()` function. For other backends you should follow the [installation instructions](https://keras.io/#installation) on the Keras website.
+The TensorFlow backend is the recommended configuration for most users. If you intend to use Keras with TensorFlow then you should install it using the `install_tensorflow()` function. After a successful installation no further action or configuration is necessary since Keras will use TensorFlow by default.
 
-To select an alternate backend, set the `KERAS_BACKEND` environment variable before loading the keras R package. For example:
+If you want to use another backend (e.g. "theano" or "cntk") then you should follow the [installation instructions](https://keras.io/#installation) on the Keras website for the Keras Python package and the requisite backend. Then, to select an alternate backend, set the `KERAS_BACKEND` environment variable before loading the keras R package. For example:
 
 ```{r}
 Sys.setenv(KERAS_BACKEND = "theano")
@@ -48,7 +48,7 @@ If you need to customize things further there are several environment variables 
 | `KERAS_BACKEND`        | The "tensorflow" implementation of Keras supports only TensorFlow as a backend engine However, the "keras" implementation supports the "tensorflow", "keras", and "cntk" backends. Note that if you specify a value for `KERAS_BACKEND` and do not specify one for `KERAS_IMPLEMENTATION` then the implementation will be automatically set to "keras".   |  
 | `KERAS_PYTHON`         | The Keras R package will automatically scan installed versions of Python (and virtual/conda environments) to find the one that includes the selected implementation of Keras. If this scanning doesn't find the right version or you want to override its behavior, you can set the `KERAS_PYTHON` environment variable to the location of the Python binary you want to use.  |
 
-
+Note that if you want to use TensorFlow as the backend engine you wouldn't need to set any of these variables, as it will be used automatically by default.
 
 ## Accessing the Backend in Code
 
