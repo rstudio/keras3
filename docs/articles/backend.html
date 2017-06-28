@@ -69,7 +69,7 @@
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
-      <a href="../articles/backend.html">Backend Functions</a>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -110,7 +110,55 @@
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
 <p>Keras is a model-level library, providing high-level building blocks for developing deep learning models. It does not handle itself low-level operations such as tensor products, convolutions and so on. Instead, it relies on a specialized, well-optimized tensor manipulation library to do so, serving as the “backend engine” of Keras.</p>
-<p>The R interface to Keras uses <a href="https://www.tensorflow.org/">TensorFlow™</a> as the underlying back-end. You can obtain a reference to the TensorFlow backend by calling the <code><a href="../reference/backend.html">backend()</a></code> function:</p>
+<p>The R interface to Keras uses TensorFlow™ as it’s default tensor backend engine, however it’s possible to use other backends if desired. At this time, Keras has three backend implementations available:</p>
+<ul>
+<li><p><a href="http://www.tensorflow.org/">TensorFlow</a> is an open-source symbolic tensor manipulation framework developed by Google, Inc.</p></li>
+<li><p><a href="http://deeplearning.net/software/theano/">Theano</a> is an open-source symbolic tensor manipulation framework developed by LISA/MILA Lab at Université de Montréal.</p></li>
+<li><p><a href="https://www.microsoft.com/en-us/cognitive-toolkit/">CNTK</a> is an open-source, commercial-grade toolkit for deep learning developed by Microsoft.</p></li>
+</ul>
+</div>
+<div id="selecting-a-backend" class="section level2">
+<h2 class="hasAnchor">
+<a href="#selecting-a-backend" class="anchor"></a>Selecting a Backend</h2>
+<p>To make use of a Keras backend you need to install it. For TensorFlow this can be done using the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow">install_tensorflow()</a></code> function. For other backends you should follow the <a href="https://keras.io/#installation">installation instructions</a> on the Keras website.</p>
+<p>To select an alternate backend, set the <code>KERAS_BACKEND</code> environment variable before loading the keras R package. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.setenv</span>(<span class="dt">KERAS_BACKEND =</span> <span class="st">"theano"</span>)
+<span class="kw">library</span>(keras)</code></pre></div>
+<div id="environment-variables" class="section level3">
+<h3 class="hasAnchor">
+<a href="#environment-variables" class="anchor"></a>Environment Variables</h3>
+<p>If you want to use a backend provided by the keras Python package you typically need only to install the package and the backend, then set the <code>KERAS_BACKEND</code> environment variable as described above.</p>
+<p>If you need to customize things further there are several environment variables that affect the version of Keras used:</p>
+<table class="table">
+<colgroup>
+<col width="15%">
+<col width="84%">
+</colgroup>
+<thead><tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>KERAS_IMPLEMENTATION</code></td>
+<td>Keras specifies an API that can be implemented by multiple providers. By default, the Keras R package uses the implementation embedded within TensorFlow (“tensorflow”). The Keras Python package (“keras”) provides another implementation. You can specify either of these values, or another Python package entirely as the implementation.</td>
+</tr>
+<tr class="even">
+<td><code>KERAS_BACKEND</code></td>
+<td>The “tensorflow” implementation of Keras supports only TensorFlow as a backend engine However, the “keras” implementation supports the “tensorflow”, “keras”, and “cntk” backends. Note that if you specify a value for <code>KERAS_BACKEND</code> and do not specify one for <code>KERAS_IMPLEMENTATION</code> then the implementation will be automatically set to “keras”.</td>
+</tr>
+<tr class="odd">
+<td><code>KERAS_PYTHON</code></td>
+<td>The Keras R package will automatically scan installed versions of Python (and virtual/conda environments) to find the one that includes the selected implementation of Keras. If this scanning doesn’t find the right version or you want to override its behavior, you can set the <code>KERAS_PYTHON</code> environment variable to the location of the Python binary you want to use.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="accessing-the-backend-in-code" class="section level2">
+<h2 class="hasAnchor">
+<a href="#accessing-the-backend-in-code" class="anchor"></a>Accessing the Backend in Code</h2>
+<p>If you want the Keras modules you write to be compatible with all available backends, you have to write them via the abstract Keras backend API. You can obtain a reference to the TensorFlow backend by calling the <code><a href="../reference/backend.html">backend()</a></code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 K &lt;-<span class="st"> </span><span class="kw"><a href="../reference/backend.html">backend</a></span>()</code></pre></div>
 <p>The code below instantiates an input placeholder. It’s equivalent to <code>tf$placeholder()</code>:</p>
@@ -722,6 +770,8 @@ var &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">one
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#overview">Overview</a></li>
+      <li><a href="#selecting-a-backend">Selecting a Backend</a></li>
+      <li><a href="#accessing-the-backend-in-code">Accessing the Backend in Code</a></li>
       <li><a href="#backend-functions">Backend Functions</a></li>
       </ul>
 </div>

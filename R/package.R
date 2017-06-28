@@ -78,22 +78,30 @@ get_keras_backend <- function(default = NULL) {
 }
 
 get_keras_python <- function(default = NULL) {
-  get_keras_option("keras.python", default = default)
+  get_keras_option("keras.python", default = default, as_lower = FALSE)
 }
 
-get_keras_option <- function(name, default = NULL) {
+get_keras_option <- function(name, default = NULL, as_lower = TRUE) {
+  
+  # case helper
+  uncase <- function(x) {
+    if (as_lower && !is.null(x) && !is.na(x))
+      tolower(x)
+    else
+      x
+  }
   
   # first check the option
   value <- getOption(name, default = NA)
   if (!is.na(value)) {
-    value
+    uncase(value)
   } else {
     env_var_name <- gsub(".", "_", toupper(name), fixed = TRUE)
     value <- Sys.getenv(env_var_name, unset = NA)
     if (!is.na(value))
-      value
+      uncase(value)
     else
-      default
+      uncase(default)
   }
 }
 

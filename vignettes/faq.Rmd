@@ -297,6 +297,12 @@ The VGG16 model is also the basis for several Keras example scripts:
 - [Deep dream](examples/deep_dream.html)
 
 
+## How can I use other Keras backends?
+
+By default the Keras Python and R packages use the TensorFlow backend. This is the backend used for development and testing of the R package and is therefore strongly recommended unless you have specific requirements better met by other backends. 
+
+To learn more about using alternatate backends (e.g. Theano or CNTK) see the [article on  Keras backends](backends.html).
+
 ## Where is the Keras configuration filed stored?
 
 The default directory where all Keras data is stored is:

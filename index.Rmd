@@ -32,7 +32,7 @@ This website provides documentation for the R interface to Keras. See the main K
 
 ## Installation
 
-The R interface to Keras uses [TensorFlow™](https://www.tensorflow.org/) as it's underlying computation engine. Therefore, you need to install both the keras R package as well as the the TensorFlow engine.
+The R interface to Keras uses [TensorFlow™](https://www.tensorflow.org/) as it's default tensor backend engine. To get started you should therefore install both the keras R package and the TensorFlow engine.
 
 First, install the keras R package from GitHub as follows:
 

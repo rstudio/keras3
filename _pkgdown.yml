@@ -31,7 +31,7 @@ navbar:
         - text: "Advanced"
         - text: "Training Callbacks"
           href: articles/training_callbacks.html
-        - text: "Backend Functions"
+        - text: "Keras Backend"
           href: articles/backend.html
     - text: Examples
       href: articles/examples/index.html
