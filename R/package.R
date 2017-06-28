@@ -54,7 +54,10 @@ keras <- NULL
     },
     
     on_error = function(e) {
-      stop(tf_config()$error_message, call. = FALSE)
+      if (is_tensorflow_implementation())
+        stop(tf_config()$error_message, call. = FALSE)
+      else
+        stop(e, call. = FALSE)
     }
      
   ))
