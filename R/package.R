@@ -12,15 +12,43 @@ keras <- NULL
 .onLoad <- function(libname, pkgname) {
   
   # determine implementation to use
-  implementation <- get_implementation()
+  implementation <- get_keras_implementation(default = NULL)
+  
+  # determine backend to use
+  backend <- get_keras_backend()
+  
+  # set KERAS_BACKEND environment variable 
+  if (!is.null(backend))
+    Sys.setenv(KERAS_BACKEND = backend)
+  
+  # fully resolve implementation if it's not yet provided
+  if (is.null(implementation)) {
+    # if there is a backend then this implies 'keras' implementation
+    if (!is.null(backend)) {
+      implementation <- "keras"
+      Sys.setenv(KERAS_IMPLEMENTATION = "keras")
+    # otherwise implementation is 'tensorflow'
+    } else {
+      implementation <- "tensorflow"
+    }
+  }
+  
+  # set the implementation module
   if (identical(implementation, "tensorflow"))
     implementation_module <- "tensorflow.contrib.keras.python.keras"
   else
     implementation_module <- implementation
   
+  # if KERAS_PYTHON is defined then forward it to RETICULATE_PYTHON
+  keras_python <- get_keras_python()
+  if (!is.null(keras_python))
+    Sys.setenv(RETICULATE_PYTHON = keras_python)
+  
   # delay load keras
   keras <<- import(implementation_module, as = "keras", delay_load = list(
-   
+  
+    priority = 10,
+     
     on_load = function() {
       check_implementation_version()
     },
@@ -30,24 +58,55 @@ keras <- NULL
     }
      
   ))
+  
+  # until we depend on a version of reticulate that implements the 'priority'
+  # field we manually overwrite the 'delay_load_module` so that we can 
+  # still find the right python when not using the tensorflow back-end
+  globals <- get(".globals", envir = getNamespace("reticulate"))
+  globals$delay_load_module <- implementation_module
 }
 
-get_implementation <- function() {
-  getOption("keras.implementation", default = "tensorflow")
+get_keras_implementation <- function(default = "tensorflow") {
+  get_keras_option("keras.implementation", default = default)
 }
 
-is_tensorflow_implementation <- function(implementation = get_implementation()) {
+get_keras_backend <- function(default = NULL) {
+  get_keras_option("keras.backend", default = default)
+}
+
+get_keras_python <- function(default = NULL) {
+  get_keras_option("keras.python", default = default)
+}
+
+get_keras_option <- function(name, default = NULL) {
+  
+  # first check the option
+  value <- getOption(name, default = NA)
+  if (!is.na(value)) {
+    value
+  } else {
+    env_var_name <- gsub(".", "_", toupper(name), fixed = TRUE)
+    value <- Sys.getenv(env_var_name, unset = NA)
+    if (!is.na(value))
+      value
+    else
+      default
+  }
+}
+
+
+is_tensorflow_implementation <- function(implementation = get_keras_implementation()) {
   grepl("^tensorflow", implementation)
 }
 
-is_keras_implementation <- function(implementation = get_implementation()) {
+is_keras_implementation <- function(implementation = get_keras_implementation()) {
   identical(implementation, "keras")
 }
 
 check_implementation_version <- function() {
   
   # get current implementation
-  implementation <- get_implementation()
+  implementation <- get_keras_implementation()
   
   # version variables
   ver <- NULL
