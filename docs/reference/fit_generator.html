@@ -144,11 +144,13 @@ parallel to training your model on GPU.</p>
     </tr>
     <tr>
       <th>generator</th>
-      <td><p>a generator. The output of the generator must be either - a
-list (inputs, targets) - a list (inputs, targets, sample_weights). All
+      <td><p>A generator (e.g. like the one provided by
+<code><a href='flow_images_from_directory.html'>flow_images_from_directory()</a></code>. The output of the generator must be either</p><ul>
+<li><p>a list (inputs, targets) - a list (inputs, targets, sample_weights). All
 arrays should contain the same number of samples. The generator is expected
 to loop over its data indefinitely. An epoch finishes when
-<code>steps_per_epoch</code> batches have been seen by the model.</p></td>
+<code>steps_per_epoch</code> batches have been seen by the model.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>steps_per_epoch</th>
@@ -212,6 +214,13 @@ previous training run)</p></td>
 
     <p>Training history object (invisibly)</p>
     
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Note that the <code>fit_generator()</code> function is included for use with
+built-in generators like <code><a href='flow_images_from_directory.html'>flow_images_from_directory()</a></code>. It's currently not
+possible to implement generators in R. If you want to stream training data
+within R you should use the <code><a href='train_on_batch.html'>train_on_batch()</a></code> function.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
@@ -235,6 +244,8 @@ previous training run)</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#note">Note</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

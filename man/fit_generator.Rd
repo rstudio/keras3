@@ -12,11 +12,14 @@ fit_generator(object, generator, steps_per_epoch, epochs = 1, verbose = 1,
 \arguments{
 \item{object}{Keras model object}
 
-\item{generator}{a generator. The output of the generator must be either - a
-list (inputs, targets) - a list (inputs, targets, sample_weights). All
+\item{generator}{A generator (e.g. like the one provided by
+\code{\link[=flow_images_from_directory]{flow_images_from_directory()}}. The output of the generator must be either
+\itemize{
+\item a list (inputs, targets) - a list (inputs, targets, sample_weights). All
 arrays should contain the same number of samples. The generator is expected
 to loop over its data indefinitely. An epoch finishes when
-\code{steps_per_epoch} batches have been seen by the model.}
+\code{steps_per_epoch} batches have been seen by the model.
+}}
 
 \item{steps_per_epoch}{Total number of steps (batches of samples) to yield
 from \code{generator} before declaring one epoch finished and starting the next
@@ -59,6 +62,12 @@ Training history object (invisibly)
 The generator is run in parallel to the model, for efficiency. For instance,
 this allows you to do real-time data augmentation on images on CPU in
 parallel to training your model on GPU.
+}
+\note{
+Note that the \code{fit_generator()} function is included for use with
+built-in generators like \code{\link[=flow_images_from_directory]{flow_images_from_directory()}}. It's currently not
+possible to implement generators in R. If you want to stream training data
+within R you should use the \code{\link[=train_on_batch]{train_on_batch()}} function.
 }
 \seealso{
 Other model functions: \code{\link{compile}},

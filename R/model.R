@@ -297,14 +297,15 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 
 
 #' Fits the model on data yielded batch-by-batch by a generator.
-#' 
+#'
 #' The generator is run in parallel to the model, for efficiency. For instance,
 #' this allows you to do real-time data augmentation on images on CPU in
 #' parallel to training your model on GPU.
-#' 
+#'
 #' @param object Keras model object
-#' @param generator a generator. The output of the generator must be either - a
-#'   list (inputs, targets) - a list (inputs, targets, sample_weights). All
+#' @param generator A generator (e.g. like the one provided by
+#'   [flow_images_from_directory()]. The output of the generator must be either
+#'   - a list (inputs, targets) - a list (inputs, targets, sample_weights). All
 #'   arrays should contain the same number of samples. The generator is expected
 #'   to loop over its data indefinitely. An epoch finishes when
 #'   `steps_per_epoch` batches have been seen by the model.
@@ -331,12 +332,16 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'   children processes.
 #' @param initial_epoch epoch at which to start training (useful for resuming a
 #'   previous training run)
-#'   
-#'   
+#'
+#' @note Note that the `fit_generator()` function is included for use with
+#'   built-in generators like [flow_images_from_directory()]. It's currently not
+#'   possible to implement generators in R. If you want to stream training data
+#'   within R you should use the [train_on_batch()] function.
+#'
 #' @return Training history object (invisibly)
-#'   
+#'
 #' @family model functions
-#'   
+#'
 #' @export
 fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, verbose = 1, 
                           callbacks = NULL, validation_data = NULL, validation_steps = NULL, 
