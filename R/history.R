@@ -67,7 +67,7 @@ plot.keras_training_history <- function(x, y, metrics = NULL, ...) {
     pch <- c(1)
     values <- x$metrics[[metric]]
     plot(epochs, values, xaxt = ifelse(bottom_plot, 's', 'n'),
-         xlab = "epoch", ylab = metric, pch = pch[[1]])
+         xlab = "epoch", ylab = metric, pch = pch[[1]], ...)
     
     # plot validation values if we have them
     val_metric <- paste0("val_", metric)
