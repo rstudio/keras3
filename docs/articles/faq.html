@@ -118,13 +118,6 @@
   howpublished={\url{https://github.com/fchollet/keras}},
 }</code></pre>
 </div>
-<div id="how-can-i-run-keras-on-a-gpu" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-can-i-run-keras-on-a-gpu" class="anchor"></a>How can I run Keras on a GPU?</h2>
-<p>If your system has an NVIDIA® GPU and you have the GPU version of TensorFlow installed then your Keras code will automatically run on the GPU.</p>
-<p>Note that installation of the GPU version of TensorFlow takes some time and effort. So if you are just getting started with Keras you may want to stick with the CPU version to start, then install the GPU version once your training becomes more computationally demanding.</p>
-<p>Additional details on GPU installation can be found here: <a href="https://tensorflow.rstudio.com/installation_gpu.html" class="uri">https://tensorflow.rstudio.com/installation_gpu.html</a>.</p>
-</div>
 <div id="what-does-sample-batch-epoch-mean" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-does-sample-batch-epoch-mean" class="anchor"></a>What does “sample”, “batch”, “epoch” mean?</h2>
@@ -335,8 +328,34 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 <div id="how-can-i-use-other-keras-backends" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-can-i-use-other-keras-backends" class="anchor"></a>How can I use other Keras backends?</h2>
-<p>By default the Keras Python and R packages use the TensorFlow backend. This is the backend used for development and testing of the R package and is therefore strongly recommended unless you have specific requirements better met by other backends.</p>
-<p>To learn more about using alternatate backends (e.g. Theano or CNTK) see the <a href="backends.html">article on Keras backends</a>.</p>
+<p>By default the Keras Python and R packages use the TensorFlow backend. Other available backends include Theano or CNTK. To learn more about using alternatate backends (e.g. Theano or CNTK) see the <a href="backends.html">article on Keras backends</a>.</p>
+</div>
+<div id="how-can-i-run-keras-on-a-gpu" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-run-keras-on-a-gpu" class="anchor"></a>How can I run Keras on a GPU?</h2>
+<p>Note that installation and configuration of the GPU-based backends can take considerably more time and effort. So if you are just getting started with Keras you may want to stick with the CPU version initially, then install the appropriate GPU version once your training becomes more computationally demanding.</p>
+<p>Below are instructions for installing and enabling GPU support for the various supported backends.</p>
+<div id="tensorflow" class="section level3">
+<h3 class="hasAnchor">
+<a href="#tensorflow" class="anchor"></a>TensorFlow</h3>
+<p>If your system has an NVIDIA® GPU and you have the GPU version of TensorFlow installed then your Keras code will automatically run on the GPU.</p>
+<p>Additional details on GPU installation can be found here: <a href="https://tensorflow.rstudio.com/installation_gpu.html" class="uri">https://tensorflow.rstudio.com/installation_gpu.html</a>.</p>
+</div>
+<div id="theano" class="section level3">
+<h3 class="hasAnchor">
+<a href="#theano" class="anchor"></a>Theano</h3>
+<p>If you are running on the Theano backend, you can set the <code>THEANO_FLAGS</code> environment variable to indicate you’d like to execute tensor operations on the GPU. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.setenv</span>(<span class="dt">KERAS_BACKEND =</span> <span class="st">"keras"</span>)
+<span class="kw">Sys.setenv</span>(<span class="dt">THEANO_FLAGS =</span> <span class="st">"device=gpu,floatX=float32"</span>)
+<span class="kw">library</span>(keras)</code></pre></div>
+<p>The name ‘gpu’ might have to be changed depending on your device’s identifier (e.g. <code>gpu0</code>, <code>gpu1</code>, etc).</p>
+</div>
+<div id="cntk" class="section level3">
+<h3 class="hasAnchor">
+<a href="#cntk" class="anchor"></a>CNTK</h3>
+<p>If you have the GPU version of CNTK installed then your Keras code will automatically run on the GPU.</p>
+<p>Additional information on installing the GPU version of CNTK can be found here: <a href="https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python" class="uri">https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python</a></p>
+</div>
 </div>
 <div id="where-is-the-keras-configuration-filed-stored" class="section level2">
 <h2 class="hasAnchor">
@@ -369,7 +388,6 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#how-should-i-cite-keras">How should I cite Keras?</a></li>
-      <li><a href="#how-can-i-run-keras-on-a-gpu">How can I run Keras on a GPU?</a></li>
       <li><a href="#what-does-sample-batch-epoch-mean">What does “sample”, “batch”, “epoch” mean?</a></li>
       <li><a href="#why-are-keras-objects-modified-in-place">Why are Keras objects modified in place?</a></li>
       <li><a href="#how-can-i-save-a-keras-model">How can I save a Keras model?</a></li>
@@ -385,6 +403,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
       <li><a href="#how-can-i-remove-a-layer-from-a-sequential-model">How can I remove a layer from a Sequential model?</a></li>
       <li><a href="#how-can-i-use-pre-trained-models-in-keras">How can I use pre-trained models in Keras?</a></li>
       <li><a href="#how-can-i-use-other-keras-backends">How can I use other Keras backends?</a></li>
+      <li><a href="#how-can-i-run-keras-on-a-gpu">How can I run Keras on a GPU?</a></li>
       <li><a href="#where-is-the-keras-configuration-filed-stored">Where is the Keras configuration filed stored?</a></li>
       </ul>
 </div>
