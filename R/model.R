@@ -62,9 +62,22 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 compile <- function(object, optimizer, loss, metrics = NULL, loss_weights = NULL,
                     sample_weight_mode = NULL, ...) {
   
-  # ensure we are dealing with a list of metrics
-  if (length(metrics) == 1)
-    metrics <- list(metrics)
+  # handle metrics
+  if (!is.null(metrics)) {
+    
+    # get metric names (if any)
+    metric_names <- names(metrics)
+    if (is.null(metric_names))
+      metric_names <- rep_len("", length(metrics))
+    
+    # convert metrics to a list (adding names to any custom functions)
+    metrics <- lapply(1:length(metrics), function(i) {
+      metric <- metrics[[i]]
+      if (is.function(metric) && nzchar(metric_names[[i]]))
+        attr(metric, "py_function_name") <- metric_names[[i]]
+      metric
+    })
+  }
   
   # compile model
   object$compile(

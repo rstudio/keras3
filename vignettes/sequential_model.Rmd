@@ -107,8 +107,25 @@ Here's compilation for a binary classification problem:
 ```{r}
 model %>% compile( 
   optimizer = optimizer_rmsprop(),
-  loss = loss_binary_crossentropy(),
-  metrics = metric_binary_accuracy()
+  loss = loss_binary_crossentropy,
+  metrics = metric_binary_accuracy
+)
+```
+
+Here's compilation with a custom metric:
+
+```{r}
+# create metric using backend tensor functions
+K <- backend()
+metric_mean_pred <- function(y_true, y_pred) {
+  K$mean(y_pred) 
+}
+
+model %>% compile( 
+  optimizer = optimizer_rmsprop(),
+  loss = loss_binary_crossentropy,
+  metrics = c('accuracy', 
+              'mean_pred' = metric_mean_pred)
 )
 ```
 

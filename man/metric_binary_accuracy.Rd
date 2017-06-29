@@ -60,3 +60,25 @@ Model performance metrics
 Metric functions are to be supplied in the \code{metrics} parameter of the
 \code{\link[=compile]{compile()}} function.
 }
+\section{Custom Metrics}{
+
+You can provide an arbitrary R function as a custom metric. Note that
+the \code{y_true} and \code{y_pred} parameters are tensors, so computations on
+them should use backend tensor functions. For example:\preformatted{# create metric using backend tensor functions
+K <- backend()
+metric_mean_pred <- function(y_true, y_pred) {
+  K$mean(y_pred) 
+}
+
+model %>% compile( 
+  optimizer = optimizer_rmsprop(),
+  loss = loss_binary_crossentropy,
+  metrics = c('accuracy', 
+              'mean_pred' = metric_mean_pred)
+)
+}
+
+Note that a name ('mean_pred') is provided for the custom metric
+function. This name is used within training progress output.
+}
+

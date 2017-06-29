@@ -8,6 +8,29 @@
 #' @param y_true True labels (tensor)
 #' @param y_pred Predictions (tensor of the same shape as y_true).
 #'       
+#' @section Custom Metrics:
+#' You can provide an arbitrary R function as a custom metric. Note that
+#' the `y_true` and `y_pred` parameters are tensors, so computations on 
+#' them should use backend tensor functions. For example:
+#' 
+#' ```r
+#' # create metric using backend tensor functions
+#' K <- backend()
+#' metric_mean_pred <- function(y_true, y_pred) {
+#'   K$mean(y_pred) 
+#' }
+#' 
+#' model %>% compile( 
+#'   optimizer = optimizer_rmsprop(),
+#'   loss = loss_binary_crossentropy,
+#'   metrics = c('accuracy', 
+#'               'mean_pred' = metric_mean_pred)
+#' )
+#' ```
+#' 
+#' Note that a name ('mean_pred') is provided for the custom metric
+#' function. This name is used within training progress output.
+#'       
 #' @export
 metric_binary_accuracy <- function(y_true, y_pred) {
   keras$metrics$binary_accuracy(y_true, y_pred)
