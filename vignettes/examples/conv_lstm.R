@@ -3,6 +3,7 @@
 # generated movie which contains moving squares.
 library(keras)
 library(abind)
+library(raster)
 
 # Function Definition -----------------------------------------------------
 
@@ -150,9 +151,6 @@ model %>% fit(
   validation_split = 0.05
 )
 
-save_model_weights_hdf5(model, 'Conv_LSTM_epochs30.h5', overwrite = TRUE)
-load_model_weights_hdf5(model,'Conv_LSTM_epochs30.h5')
-
 # Visualization  ----------------------------------------------------------------
 # Testing the network on one movie
 # feed it with the first 7 positions and then
@@ -176,7 +174,7 @@ if (k<8){
   par(mfrow=c(1,2),bg = 'white')
   (more_movies$noisy_movies[which,k,,,1])  %>% raster() %>% plot() %>% title (main=paste0('Ground_',k))
    
-  new_pos <- model %>% predict(track1)  #Make Prediction
+  new_pos <- model %>% predict(track)  #Make Prediction
   new_pos_loc <- new_pos[1,k,1:40,1:40,1]  #Slice the last row
   new_pos_loc  %>% raster() %>% plot() %>% title (main=paste0('Pred_',k))
   
@@ -185,3 +183,5 @@ if (k<8){
   dev.off()
 }
 }  
+# you can also create a gif by running
+system("convert -delay 40 *.png animation.gif")
