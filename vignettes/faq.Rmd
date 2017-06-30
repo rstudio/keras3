@@ -5,6 +5,14 @@ vignette: >
   %\VignetteIndexEntry{Guide to the Sequential Model} 
   %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
+type: docs
+menu:
+  main:
+    name: "Frequently Asked Questions"
+    identifier: "keras-faq"
+    url: "/keras/faq"
+    parent: "keras-using-keras"
+    weight: 60
 ---
 
 ```{r setup, include=FALSE}

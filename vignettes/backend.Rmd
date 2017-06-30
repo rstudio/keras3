@@ -5,6 +5,13 @@ vignette: >
   %\VignetteIndexEntry{Keras Backend}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+type: docs
+menu:
+  main:
+    name: "Keras Backend"
+    identifier: "keras-backend"
+    parent: "keras-advanced"
+    weight: 40
 ---
 
 ```{r setup, include = FALSE}

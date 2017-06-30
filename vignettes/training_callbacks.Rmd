@@ -5,6 +5,13 @@ vignette: >
   %\VignetteIndexEntry{Training Callbacks}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+type: docs
+menu:
+  main:
+    name: "Training Callbacks"
+    identifier: "keras-training-callbacks"
+    parent: "keras-advanced"
+    weight: 30
 ---
 
 ```{r setup, include = FALSE}

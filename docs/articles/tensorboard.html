@@ -112,7 +112,7 @@
 <p>TensorBoard is a visualization tool included with TensorFlow that enables you to visualize dynamic graphs of your Keras training and test metrics, as well as activation histograms for the different layers in your model.</p>
 <p>For example, here’s a TensorBoard display for Keras accuracy and loss metrics:</p>
 <div class="figure">
-<img src="tensorboard.png" class="screenshot" width="700" height="545">
+<img src="img/tensorboard.png" class="screenshot" width="700" height="545">
 </div>
 </div>
 <div id="recording-data" class="section level2">
@@ -145,7 +145,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="st">"logs/run_b"</span>)</code></pre></div>
 <p>Then the TensorBoard visualization would look like this:</p>
 <div class="figure">
-<img src="tensorboard_compare.png" class="screenshot" width="700" height="540">
+<img src="img/tensorboard_compare.png" class="screenshot" width="700" height="540">
 </div>
 <p>You can use the <code>unique_log_dir</code> function if you want to record every training run in it’s own directory:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">unique_log_dir</a></span>())</code></pre></div>

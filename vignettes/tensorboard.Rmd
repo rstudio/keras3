@@ -5,6 +5,13 @@ vignette: >
   %\VignetteIndexEntry{TensorBoard Visualization}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+type: docs
+menu:
+  main:
+    name: "TensorBoard Visualizations"
+    identifier: "keras-tensorboard-visualization"
+    parent: "keras-using-keras"
+    weight: 50
 ---
 
 ```{r setup, include = FALSE}
@@ -18,7 +25,7 @@ TensorBoard is a visualization tool included with TensorFlow that enables you to
 
 For example, here's a TensorBoard display for Keras accuracy and loss metrics:
 
-![](tensorboard.png){width=700 height=545 .screenshot}
+![](img/tensorboard.png){width=700 height=545 .screenshot}
 
 ## Recording Data
 
@@ -63,7 +70,7 @@ callback_tensorboard(log_dir = "logs/run_b")
 
 Then the TensorBoard visualization would look like this:
 
-![](tensorboard_compare.png){width=700 height=540 .screenshot}
+![](img/tensorboard_compare.png){width=700 height=540 .screenshot}
 
 You can use the `unique_log_dir` function if you want to record every training run in it's own directory:
 
