@@ -34,13 +34,26 @@ print.keras_training_history <- function(x, ...) {
   cat(str)
 }
 
+
+#' Plot training history
+#' 
+#' Plots metrics recorded during training. 
+#' 
+#' @param x Training history object returned from `fit()`
+#' @param y Unused
+#' @param metrics One or more metrics to plot (e.g. `c('loss', 'accuracy')`).
+#'   Defaults to plotting all captured metrics.
+#' @param method Method to use for plotting. The default "auto" will use 
+#'   \pkg{ggplot2} if available, and otherwise will use base graphics.
+#' @param ... Additional parameters to pass to the [plot()] method.
+#'
 #' @export
 plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto", "ggplot2", "base"), 
                                         ...) {
   # check which method we should use
   method <- match.arg(method)
   if (method == "auto") {
-    if (requireNamespace("ggplot2"))
+    if (requireNamespace("ggplot2", quietly = TRUE))
       method <- "ggplot2"
     else
       method <- "base"
