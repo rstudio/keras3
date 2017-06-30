@@ -8,7 +8,8 @@ Authors@R: c(
   person("RStudio", role = c("cph", "fnd")),
   person(family = "Google", role = c("ctb", "cph", "fnd")),
   person("Yuan", "Tang", role = c("ctb", "cph")),
-  person("Daniel", "Falbel", role = c("ctb", "cph"))
+  person("Daniel", "Falbel", role = c("ctb", "cph")),
+  person("Wouter", "Van Der Bijl", role = c("ctb", "cph"))
   )
 Description: Interface to 'Keras', a high-level neural networks API which 
   runs on top of TensorFlow. 'Keras' was developed with a focus on enabling
