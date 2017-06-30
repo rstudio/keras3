@@ -113,9 +113,9 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
         df2[df2$data == 'training', 'value'][1] > df2[df2$data == 'training', 'value'][x$params$epochs],
         "topright", "bottomright")
       if (x$params$do_validation)
-        legend(legend_location, legend = c(metric, paste0("val_", metric)), pch = c(1, 4))
+        graphics::legend(legend_location, legend = c(metric, paste0("val_", metric)), pch = c(1, 4))
       else
-        legend(legend_location, legend = metric, pch = 1)
+        graphics::legend(legend_location, legend = metric, pch = 1)
     }
   }
 }
