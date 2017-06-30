@@ -26,6 +26,7 @@ Imports:
     methods,
     R6
 Suggests: 
+    ggplot2,
     testthat, 
     knitr
 Remotes:
