@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,10 +80,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -179,11 +188,11 @@ specified.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Optionally loads weights pre-trained on ImageNet.</p>
-<p>The <code>imagenet_preprocess_input()</code> function should be used for image preprocessing.</p>
+<p>The <code><a href='imagenet_preprocess_input.html'>imagenet_preprocess_input()</a></code> function should be used for image preprocessing.</p>
     
     <h2 class="hasAnchor" id="reference"><a class="anchor" href="#reference"></a>Reference</h2>
 
-    <p>- <a href = 'https://arxiv.org/abs/1409.1556'>Very Deep Convolutional Networks for Large-Scale ImageRecognition</a></p>
+    <p>- <a href='https://arxiv.org/abs/1409.1556'>Very Deep Convolutional Networks for Large-Scale ImageRecognition</a></p>
     
 
   </div>
@@ -204,7 +213,7 @@ specified.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

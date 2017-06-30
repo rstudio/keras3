@@ -4,11 +4,11 @@
 \alias{layer_spatial_dropout_3d}
 \title{Spatial 3D version of Dropout.}
 \usage{
-layer_spatial_dropout_3d(x, rate, data_format = NULL, batch_size = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_spatial_dropout_3d(object, rate, data_format = NULL,
+  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{rate}{float between 0 and 1. Fraction of the input units to drop.}
 

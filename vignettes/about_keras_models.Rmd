@@ -29,6 +29,8 @@ model %>%
   layer_activation('softmax')
 ```
 
+Note that Keras objects are [modified in place](faq.html#why-are-keras-objects-modified-in-place) which is why it's not necessary for `model` to be assigned back to after the layers are added.
+
 Learn more by reading the [Guide to the Sequential Model](sequential_model.html).
 
 ### Functional
@@ -126,7 +128,7 @@ These functions enable you to create, train, evaluate, persist, and generate pre
 <tr>
 <!--  -->
 <td>
-  `save_model()` `load_model()`
+  `save_model_hdf5()` `load_model_hdf5()`
 </td>
 <td><p>Save/Load models using HDF5 files</p></td>
 </tr><tr>
@@ -144,7 +146,7 @@ These functions enable you to create, train, evaluate, persist, and generate pre
 </tr><tr>
 <!--  -->
 <td>
-  `save_model_weights()` `load_model_weights()`
+  `save_model_weights_hdf5()` `load_model_weights_hdf5()`
 </td>
 <td><p>Save/Load model weights using HDF5 files</p></td>
 </tr><tr>

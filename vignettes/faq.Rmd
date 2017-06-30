@@ -26,6 +26,7 @@ Please cite Keras in your publications if it helps your research. Here is an exa
 }
 ```
 
+
 ## What does "sample", "batch", "epoch" mean?
 
 Below are some common definitions that are necessary to know and understand to correctly utilize Keras:
@@ -39,26 +40,44 @@ Below are some common definitions that are necessary to know and understand to c
   - When using `evaluation_data` or `evaluation_split` with the `fit` method of Keras models, evaluation will be run at the end of every **epoch**.
   - Within Keras, there is the ability to add [callbacks](training_callbacks.html) specifically designed to be run at the end of an **epoch**. Examples of these are learning rate changes and model checkpointing (saving).
 
+## Why are Keras objects modified in place?
+
+Unlike most R objects, Keras objects are "mutable". That means that when you modify an object you're modifying it "in place", and you don't need to assign the updated object back to the original name. For example, to add layers to a Keras model you might use this code:
+
+```{r}
+model %>% 
+  layer_dense(units = 32, activation = 'relu', input_shape = c(784)) %>% 
+  layer_dense(units = 10, activation = 'softmax')
+```
+
+Rather than this code:
+
+```{r}
+model <- model %>% 
+  layer_dense(units = 32, activation = 'relu', input_shape = c(784)) %>% 
+  layer_dense(units = 10, activation = 'softmax')
+```
+
+You need to be aware of this because it makes the Keras API a little different than most other pipelines you may have used, but it's necessary to match the data structures and behavior of the underlying Keras library.
+
 ## How can I save a Keras model?
 
-*It is not recommended to use pickle or cPickle to save a Keras model.*
-
-You can use `save_model()` to save a Keras model into a single HDF5 file which will contain:
+You can use `save_model_hdf5()` to save a Keras model into a single HDF5 file which will contain:
 
 - the architecture of the model, allowing to re-create the model
 - the weights of the model
 - the training configuration (loss, optimizer)
 - the state of the optimizer, allowing to resume training exactly where you left off.
 
-You can then use `load_model()` to reinstantiate your model.
-`load_model()` will also take care of compiling the model using the saved training configuration
+You can then use `load_model_hdf5()` to reinstantiate your model.
+`load_model_hdf5()` will also take care of compiling the model using the saved training configuration
 (unless the model was never compiled in the first place).
 
 Example:
 
 ```{r}
-save_model(model, 'my_model.h5')
-model <- load_model('my_model.h5')
+save_model_hdf5(model, 'my_model.h5')
+model <- load_model_hdf5('my_model.h5')
 ```
 
 If you only need to save the **architecture of a model**, and not its weights or its training configuration, you can do:
@@ -80,19 +99,19 @@ model <- model_from_yaml(yaml_string)
 If you need to save the **weights of a model**, you can do so in HDF5 with the code below.
 
 ```{r}
-save_model_weights('my_model_weights.h5')
+save_model_weights_hdf5('my_model_weights.h5')
 ```
 
 Assuming you have code for instantiating your model, you can then load the weights you saved into a model with the *same* architecture:
 
 ```{r}
-model %>% load_model_weights('my_model_weights.h5')
+model %>% load_model_weights_hdf5('my_model_weights.h5')
 ```
 
 If you need to load weights into a *different* architecture (with some layers in common), for instance for fine-tuning or transfer-learning, you can load weights by *layer name*:
 
 ```{r}
-model %>% load_model_weights('my_model_weights.h5', by_name = TRUE)
+model %>% load_model_weights_hdf5('my_model_weights.h5', by_name = TRUE)
 ```
 
 For example:
@@ -268,6 +287,40 @@ The VGG16 model is also the basis for several Keras example scripts:
 - [Style transfer](examples/neural_style_transfer.html)
 - [Feature visualization](examples/conv_filter_visualization.html)
 - [Deep dream](examples/deep_dream.html)
+
+## How can I use other Keras backends?
+
+By default the Keras Python and R packages use the TensorFlow backend. Other available backends include Theano or CNTK. To learn more about using alternatate backends (e.g. Theano or CNTK) see the [article on  Keras backends](backends.html).
+
+## How can I run Keras on a GPU?
+
+Note that installation and configuration of the GPU-based backends can take considerably more time and effort. So if you are just getting started with Keras you may want to stick with the CPU version initially, then install the appropriate GPU version once your training becomes more computationally demanding.
+
+Below are instructions for installing and enabling GPU support for the various supported backends.
+
+### TensorFlow
+
+If your system has an NVIDIA® GPU and you have the GPU version of TensorFlow installed then your Keras code will automatically run on the GPU.
+
+Additional details on GPU installation can be found here: <https://tensorflow.rstudio.com/installation_gpu.html>.
+
+### Theano
+
+If you are running on the Theano backend, you can set the `THEANO_FLAGS` environment variable to indicate you'd like to execute tensor operations on the GPU. For example:
+
+```r
+Sys.setenv(KERAS_BACKEND = "keras")
+Sys.setenv(THEANO_FLAGS = "device=gpu,floatX=float32")
+library(keras)
+```
+
+The name 'gpu' might have to be changed depending on your device's identifier (e.g. `gpu0`, `gpu1`, etc).
+
+### CNTK
+
+If you have the GPU version of CNTK installed then your Keras code will automatically run on the GPU.
+
+Additional information on installing the GPU version of CNTK can be found here: https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python
 
 
 ## Where is the Keras configuration filed stored?

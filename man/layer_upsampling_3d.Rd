@@ -4,11 +4,11 @@
 \alias{layer_upsampling_3d}
 \title{Upsampling layer for 3D inputs.}
 \usage{
-layer_upsampling_3d(x, size = c(2L, 2L, 2L), data_format = NULL,
+layer_upsampling_3d(object, size = c(2L, 2L, 2L), data_format = NULL,
   batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{size}{int, or list of 3 integers. The upsampling factors for dim1, dim2
 and dim3.}

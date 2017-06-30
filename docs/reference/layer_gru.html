@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,10 +80,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -119,7 +128,7 @@
     <p>Gated Recurrent Unit - Cho et al.</p>
     
 
-    <pre class="usage"><span class='fu'>layer_gru</span>(<span class='no'>x</span>, <span class='no'>units</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='st'>"tanh"</span>,
+    <pre class="usage"><span class='fu'>layer_gru</span>(<span class='no'>object</span>, <span class='no'>units</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='st'>"tanh"</span>,
   <span class='kw'>recurrent_activation</span> <span class='kw'>=</span> <span class='st'>"hard_sigmoid"</span>, <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>return_sequences</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>go_backwards</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>stateful</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>unroll</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>implementation</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
@@ -136,8 +145,8 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Model or layer</p></td>
+      <th>object</th>
+      <td><p>Model or layer object</p></td>
     </tr>
     <tr>
       <th>units</th>
@@ -285,13 +294,45 @@ isn't provided.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="statefulness-in-rnns"><a class="anchor" href="#statefulness-in-rnns"></a>Statefulness in RNNs</h2>
+
+    
+    <p>You can set RNN layers to be 'stateful', which means that the states
+computed for the samples in one batch will be reused as initial states
+for the samples in the next batch. This assumes a one-to-one mapping
+between samples in different successive batches.</p>
+<p>To enable statefulness:</p><ul>
+<li><p>Specify <code>stateful=TRUE</code> in the layer constructor.</p></li>
+<li><p>Specify a fixed batch size for your model. For sequential models,
+pass <code>batch_input_shape = c(...)</code> to the first layer in your model.
+For functional models with 1 or more Input layers, pass
+<code>batch_shape = c(...)</code> to all the first layers in your model.
+This is the expected shape of your inputs <em>including the batch size</em>.
+It should be a vector of integers, e.g. <code>c(32, 10, 100)</code>.</p></li>
+<li><p>Specify <code>shuffle = FALSE</code> when calling fit().</p></li>
+</ul>
+    <p>To reset the states of your model, call <code><a href='reset_states.html'>reset_states()</a></code> on either
+a specific layer, or on your entire model.</p>
+    
+    <h2 class="hasAnchor" id="initial-state-of-rnns"><a class="anchor" href="#initial-state-of-rnns"></a>Initial State of RNNs</h2>
+
+    
+    <p>You can specify the initial state of RNN layers symbolically by calling
+them with the keyword argument <code>initial_state</code>. The value of
+<code>initial_state</code> should be a tensor or list of tensors representing
+the initial state of the RNN layer.</p>
+<p>You can specify the initial state of RNN layers numerically by
+calling <code>reset_states</code> with the keyword argument <code>states</code>. The value of
+<code>states</code> should be a numpy array or list of numpy arrays representing
+the initial state of the RNN layer.</p>
+    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
     <ul>
-<li><p><a href = 'https://arxiv.org/abs/1409.1259'>On the Properties of Neural Machine Translation:Encoder-Decoder Approaches</a></p></li>
-<li><p><a href = 'http://arxiv.org/abs/1412.3555v1'>EmpiricalEvaluation of Gated Recurrent Neural Networks on SequenceModeling</a></p></li>
-<li><p><a href = 'http://arxiv.org/abs/1512.05287'>A Theoretically GroundedApplication of Dropout in Recurrent NeuralNetworks</a></p></li>
+<li><p><a href='https://arxiv.org/abs/1409.1259'>On the Properties of Neural Machine Translation:Encoder-Decoder Approaches</a></p></li>
+<li><p><a href='http://arxiv.org/abs/1412.3555v1'>EmpiricalEvaluation of Gated Recurrent Neural Networks on SequenceModeling</a></p></li>
+<li><p><a href='http://arxiv.org/abs/1512.05287'>A Theoretically GroundedApplication of Dropout in Recurrent NeuralNetworks</a></p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -306,6 +347,10 @@ isn't provided.</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#statefulness-in-rnns">Statefulness in RNNs</a></li>
+
+      <li><a href="#initial-state-of-rnns">Initial State of RNNs</a></li>
+
       <li><a href="#references">References</a></li>
 
       <li><a href="#see-also">See also</a></li>
@@ -316,7 +361,7 @@ isn't provided.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

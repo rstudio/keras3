@@ -18,7 +18,7 @@ model <- keras_model_sequential() %>%
   compile( 
     loss= 'binary_crossentropy', 
     optimizer = optimizer_sgd(),
-    metrics = metric_binary_accuracy()
+    metrics = metric_binary_accuracy
   )
 
 # train the model 
@@ -28,8 +28,8 @@ model <- fit(model, data, labels)
 predict(model, input)
 
 # save the model and load it back in
-save_model(model, "model.hdf5")
-model <- load_model("model.hdf5")
+save_model_hdf5(model, "model.hdf5")
+model <- load_model_hdf5("model.hdf5")
 
 
 

@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,10 +80,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -119,16 +128,16 @@
     <p>Layer/Model weights as R arrays</p>
     
 
-    <pre class="usage"><span class='fu'>get_weights</span>(<span class='no'>layer</span>)
+    <pre class="usage"><span class='fu'>get_weights</span>(<span class='no'>object</span>)
 
-<span class='fu'>set_weights</span>(<span class='no'>layer</span>, <span class='no'>weights</span>)</pre>
+<span class='fu'>set_weights</span>(<span class='no'>object</span>, <span class='no'>weights</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>layer</th>
-      <td><p>Layer or model</p></td>
+      <th>object</th>
+      <td><p>Layer or model object</p></td>
     </tr>
     <tr>
       <th>weights</th>
@@ -140,8 +149,8 @@
 
     <p>Other model persistence: <code><a href='model_to_json.html'>model_to_json</a></code>,
   <code><a href='model_to_yaml.html'>model_to_yaml</a></code>,
-  <code><a href='save_model_weights.html'>save_model_weights</a></code>,
-  <code><a href='save_model.html'>save_model</a></code></p>
+  <code><a href='save_model_hdf5.html'>save_model_hdf5</a></code>,
+  <code><a href='save_model_weights_hdf5.html'>save_model_weights_hdf5</a></code></p>
 <p>Other layer methods: <code><a href='count_params.html'>count_params</a></code>,
   <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_input_at.html'>get_input_at</a></code>,
   <code><a href='reset_states.html'>reset_states</a></code></p>
@@ -161,7 +170,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

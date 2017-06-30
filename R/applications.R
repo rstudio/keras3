@@ -12,6 +12,8 @@
 #' The `xception_preprocess_input()` function should be used for image 
 #' preprocessing.
 #' 
+#' This application is only available when using the TensorFlow back-end.
+#' 
 #' @param x Input tensor for preprocessing
 #' @param include_top whether to include the fully-connected layer at the top of
 #'   the network.

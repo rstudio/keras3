@@ -4,11 +4,11 @@
 \alias{layer_flatten}
 \title{Flattens an input}
 \usage{
-layer_flatten(x, batch_size = NULL, name = NULL, trainable = NULL,
+layer_flatten(object, batch_size = NULL, name = NULL, trainable = NULL,
   weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{batch_size}{Fixed batch size for layer}
 

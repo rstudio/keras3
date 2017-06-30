@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,10 +80,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -119,7 +128,7 @@
     <p>Max pooling operation for spatial data.</p>
     
 
-    <pre class="usage"><span class='fu'>layer_max_pooling_2d</span>(<span class='no'>x</span>, <span class='kw'>pool_size</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>2L</span>, <span class='fl'>2L</span>), <span class='kw'>strides</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>layer_max_pooling_2d</span>(<span class='no'>object</span>, <span class='kw'>pool_size</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>2L</span>, <span class='fl'>2L</span>), <span class='kw'>strides</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"valid"</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
@@ -127,8 +136,8 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Model or layer</p></td>
+      <th>object</th>
+      <td><p>Model or layer object</p></td>
     </tr>
     <tr>
       <th>pool_size</th>
@@ -223,7 +232,7 @@ isn't provided.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

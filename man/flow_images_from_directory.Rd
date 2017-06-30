@@ -9,7 +9,7 @@ flow_images_from_directory(directory, generator = image_data_generator(),
   target_size = c(256, 256), color_mode = "rgb", classes = NULL,
   class_mode = "categorical", batch_size = 32, shuffle = TRUE,
   seed = NULL, save_to_dir = NULL, save_prefix = "",
-  save_format = "jpeg", follow_links = FALSE)
+  save_format = "png", follow_links = FALSE)
 }
 \arguments{
 \item{directory}{path to the target directory. It should contain one
@@ -51,7 +51,7 @@ generated (useful for visualizing what you are doing).}
 pictures (only relevant if \code{save_to_dir} is set).}
 
 \item{save_format}{one of "png", "jpeg" (only relevant if save_to_dir is
-set). Default: "jpeg".}
+set). Default: "png".}
 
 \item{follow_links}{whether to follow symlinks inside class subdirectories
 (default: \code{FALSE})}
@@ -69,7 +69,7 @@ array of corresponding labels. The generator loops indefinitely.
 }
 
 \seealso{
-Other image preprocessing: \code{\link{fit.tensorflow.keras.preprocessing.image.ImageDataGenerator}},
+Other image preprocessing: \code{\link{fit_image_data_generator}},
   \code{\link{flow_images_from_data}},
   \code{\link{image_load}}, \code{\link{image_to_array}}
 }

@@ -5,12 +5,12 @@
 \alias{predict_classes}
 \title{Generates probability or class probability predictions for the input samples.}
 \usage{
-predict_proba(model, x, batch_size = 32, verbose = 0)
+predict_proba(object, x, batch_size = 32, verbose = 0)
 
-predict_classes(model, x, batch_size = 32, verbose = 0)
+predict_classes(object, x, batch_size = 32, verbose = 0)
 }
 \arguments{
-\item{model}{Keras model}
+\item{object}{Keras model object}
 
 \item{x}{Input data (vector, matrix, or array)}
 
@@ -27,13 +27,13 @@ The input samples are processed batch by batch.
 \seealso{
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate_generator}}, \code{\link{evaluate}},
-  \code{\link{fit.Model}}, \code{\link{fit_generator}},
+  \code{\link{fit_generator}}, \code{\link{fit}},
   \code{\link{get_config}}, \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}}, \code{\link{pop_layer}},
-  \code{\link{predict.tensorflow.keras.engine.training.Model}},
+  \code{\link{predict.keras.engine.training.Model}},
   \code{\link{predict_generator}},
   \code{\link{predict_on_batch}},
-  \code{\link{summary.tensorflow.keras.engine.training.Model}},
+  \code{\link{summary.keras.engine.training.Model}},
   \code{\link{train_on_batch}}
 }

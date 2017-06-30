@@ -9,7 +9,8 @@
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
-<script src="../../jquery.sticky-kit.min.js"></script><script src="../../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<script src="../../jquery.sticky-kit.min.js"></script><script src="../../pkgdown.js"></script><link href="../../extra.css" rel="stylesheet">
+<script src="../../extra.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -57,10 +58,18 @@
       <a href="../../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -140,32 +149,48 @@
 <td>Trains a convolutional stack followed by a recurrent stack network on the IMDB sentiment classification task.</td>
 </tr>
 <tr class="odd">
+<td><a href="imdb_fasttext.html">imdb_fasttext.R</a></td>
+<td>Trains a FastText model on the IMDB sentiment classification task.</td>
+</tr>
+<tr class="even">
 <td><a href="imdb_lstm.html">imdb_lstm.R</a></td>
 <td>Trains a LSTM on the IMDB sentiment classification task.</td>
 </tr>
+<tr class="odd">
+<td><a href="lstm_text_generation.html">lstm_text_generation.R</a></td>
+<td>Generates text from Nietzsche’s writings.</td>
+</tr>
 <tr class="even">
+<td><a href="mnist_acgan.html">mnist_acgan.R</a></td>
+<td>Implementation of AC-GAN (Auxiliary Classifier GAN ) on the MNIST dataset</td>
+</tr>
+<tr class="odd">
 <td><a href="mnist_cnn.html">mnist_cnn.R</a></td>
 <td>Trains a simple convnet on the MNIST dataset.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="mnist_irnn.html">mnist_irnn.R</a></td>
 <td>Reproduction of the IRNN experiment with pixel-by-pixel sequential MNIST in “A Simple Way to Initialize Recurrent Networks of Rectified Linear Units” by Le et al.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="mnist_mlp.html">mnist_mlp.R</a></td>
 <td>Trains a simple deep multi-layer perceptron on the MNIST dataset.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="mnist_transfer_cnn.html">mnist_transfer_cnn.R</a></td>
 <td>Transfer learning toy example.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="reuters_mlp.html">reuters_mlp.R</a></td>
 <td>Trains and evaluatea a simple MLP on the Reuters newswire topic classification task.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="stateful_lstm.html">stateful_lstm.R</a></td>
 <td>Demonstrates how to use stateful RNNs to model long sequences efficiently.</td>
+</tr>
+<tr class="odd">
+<td><a href="variational_autoencoder.html">variational_autoencoder.R</a></td>
+<td>Demonstrates how to build a variational autoencoder.</td>
 </tr>
 </tbody>
 </table>
@@ -173,20 +198,21 @@
 | [conv_filter_visualization.R](conv_filter_visualization.html) | Visualization of the filters of VGG16, via gradient ascent in input space. |
 | [conv_lstm.R](conv_lstm.html) | Demonstrates the use of a convolutional LSTM network. |
 | [image_ocr.R](image_ocr.html) | Trains a convolutional stack followed by a recurrent stack and a CTC logloss function to perform optical character recognition (OCR). |
-| [imdb_fasttext.R](imdb_fasttext.html) | Trains a FastText model on the IMDB sentiment classification task. |
-
 | [lstm_benchmark.R](lstm_benchmark.html) | Compares different LSTM implementations on the IMDB sentiment classification task. |
-| [lstm_text_generation.R](lstm_text_generation.html) | Generates text from Nietzsche's writings. |
-| [mnist_acgan.R](mnist_acgan.html) | Implementation of AC-GAN ( Auxiliary Classifier GAN ) on the MNIST dataset |
-| [mnist_hierarchical_rnn.R](mnist_hierarchical_rnn.html) | Trains a Hierarchical RNN (HRNN) to classify MNIST digits. |
 | [mnist_net2net.R](mnist_net2net.html) | Reproduction of the Net2Net experiment with MNIST in "Net2Net: Accelerating Learning via Knowledge Transfer". |
 | [mnist_siamese_graph.R](mnist_siamese_graph.html) | Trains a Siamese multi-layer perceptron on pairs of digits from the MNIST dataset. |
 | [mnist_swwae.R](mnist_swwae.html) | Trains a Stacked What-Where AutoEncoder built on residual blocks on the MNIST dataset. |
 | [neural_doodle.R](neural_doodle.html) | Neural doodle. |
 | [neural_style_transfer.R](neural_style_transfer.html) | Neural style transfer. |
-| [pretrained_word_embeddings.R](pretrained_word_embeddings.html) | Loads pre-trained word embeddings (GloVe embeddings) into a frozen Keras Embedding layer, and uses it to train a text classification model on the 20 Newsgroup dataset. |
-| [variational_autoencoder.R](variational_autoencoder.html) | Demonstrates how to build a variational autoencoder. |
 | [variational_autoencoder_deconv.R](variational_autoencoder_deconv.html) | Demonstrates how to build a variational autoencoder with Keras using deconvolution layers. |
+--><!--
+
+These examples are complete however don't yet work properly (see inline comments in 
+scripts for details) so we aren't listing them.
+
+| [mnist_hierarchical_rnn.R](mnist_hierarchical_rnn.html) | Trains a Hierarchical RNN (HRNN) to classify MNIST digits. |
+| [pretrained_word_embeddings.R](pretrained_word_embeddings.html) | Loads pre-trained word embeddings (GloVe embeddings) into a frozen Keras Embedding layer, and uses it to train a text classification model on the 20 Newsgroup dataset. |
+
 -->
 </div>
   </div>
@@ -198,7 +224,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href="https://www.rstudio.com"><img src="http://tidyverse.org/rstudio-logo.svg" height="24"></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="http://tidyverse.org/rstudio-logo.svg" height="24"></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

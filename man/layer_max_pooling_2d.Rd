@@ -4,12 +4,12 @@
 \alias{layer_max_pooling_2d}
 \title{Max pooling operation for spatial data.}
 \usage{
-layer_max_pooling_2d(x, pool_size = c(2L, 2L), strides = NULL,
+layer_max_pooling_2d(object, pool_size = c(2L, 2L), strides = NULL,
   padding = "valid", data_format = NULL, batch_size = NULL, name = NULL,
   trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{pool_size}{integer or list of 2 integers, factors by which to downscale
 (vertical, horizontal). (2, 2) will halve the input in both spatial

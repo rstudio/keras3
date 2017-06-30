@@ -17,10 +17,10 @@
 #' @family pooling layers
 #'     
 #' @export
-layer_max_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "valid", 
+layer_max_pooling_1d <- function(object, pool_size = 2L, strides = NULL, padding = "valid", 
                                  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$MaxPooling1D, x, list(
+  call_layer(keras$layers$MaxPooling1D, object, list(
     pool_size = as.integer(pool_size),
     strides = as_nullable_integer(strides),
     padding = padding,
@@ -57,10 +57,10 @@ layer_max_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "v
 #' @family pooling layers
 #'       
 #' @export
-layer_max_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, padding = "valid", data_format = NULL, 
+layer_max_pooling_2d <- function(object, pool_size = c(2L, 2L), strides = NULL, padding = "valid", data_format = NULL, 
                                  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$MaxPooling2D, x, list(
+  call_layer(keras$layers$MaxPooling2D, object, list(
     pool_size = as.integer(pool_size),
     strides = as_nullable_integer(strides),
     padding = padding,
@@ -103,10 +103,10 @@ layer_max_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, paddi
 #' @family pooling layers
 #'   
 #' @export
-layer_max_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NULL, padding = "valid", data_format = NULL, 
+layer_max_pooling_3d <- function(object, pool_size = c(2L, 2L, 2L), strides = NULL, padding = "valid", data_format = NULL, 
                                  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$MaxPooling3D, x, list(
+  call_layer(keras$layers$MaxPooling3D, object, list(
     pool_size = as.integer(pool_size),
     strides = as_nullable_integer(strides),
     padding = padding,
@@ -137,10 +137,10 @@ layer_max_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NULL, p
 #' @family pooling layers
 #'     
 #' @export
-layer_average_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding = "valid", 
+layer_average_pooling_1d <- function(object, pool_size = 2L, strides = NULL, padding = "valid", 
                                      batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$AveragePooling1D, x, list(
+  call_layer(keras$layers$AveragePooling1D, object, list(
     pool_size = as.integer(pool_size),
     strides = as_nullable_integer(strides),
     padding = padding,
@@ -176,10 +176,10 @@ layer_average_pooling_1d <- function(x, pool_size = 2L, strides = NULL, padding 
 #' @family pooling layers 
 #'   
 #' @export
-layer_average_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, padding = "valid", data_format = NULL, 
+layer_average_pooling_2d <- function(object, pool_size = c(2L, 2L), strides = NULL, padding = "valid", data_format = NULL, 
                                      batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$AveragePooling2D, x, list(
+  call_layer(keras$layers$AveragePooling2D, object, list(
     pool_size = as.integer(pool_size),
     strides = as_nullable_integer(strides),
     padding = padding,
@@ -221,9 +221,9 @@ layer_average_pooling_2d <- function(x, pool_size = c(2L, 2L), strides = NULL, p
 #' @family pooling layers
 #'       
 #' @export
-layer_average_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NULL, padding = "valid", data_format = NULL, 
+layer_average_pooling_3d <- function(object, pool_size = c(2L, 2L, 2L), strides = NULL, padding = "valid", data_format = NULL, 
                                      batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$AveragePooling3D, x, list(
+  call_layer(keras$layers$AveragePooling3D, object, list(
     pool_size = as.integer(pool_size),
     strides = as_nullable_integer(strides),
     padding = padding,
@@ -250,9 +250,9 @@ layer_average_pooling_3d <- function(x, pool_size = c(2L, 2L, 2L), strides = NUL
 #' @family pooling layers
 #' 
 #' @export
-layer_global_max_pooling_1d <- function(x, 
+layer_global_max_pooling_1d <- function(object, 
                                         batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$GlobalMaxPooling1D, x, list(
+  call_layer(keras$layers$GlobalMaxPooling1D, object, list(
     batch_size = as_nullable_integer(batch_size),
     name = name,
     trainable = trainable,
@@ -273,9 +273,9 @@ layer_global_max_pooling_1d <- function(x,
 #' @family pooling layers
 #' 
 #' @export
-layer_global_average_pooling_1d <- function(x, 
+layer_global_average_pooling_1d <- function(object, 
                                             batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$GlobalAveragePooling1D, x, list(
+  call_layer(keras$layers$GlobalAveragePooling1D, object, list(
     batch_size = as_nullable_integer(batch_size),
     name = name,
     trainable = trainable,
@@ -298,9 +298,9 @@ layer_global_average_pooling_1d <- function(x,
 #' @family pooling layers
 #'     
 #' @export
-layer_global_max_pooling_2d <- function(x, data_format = NULL, 
+layer_global_max_pooling_2d <- function(object, data_format = NULL, 
                                         batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$GlobalMaxPooling2D, x, list(
+  call_layer(keras$layers$GlobalMaxPooling2D, object, list(
     data_format = data_format,
     batch_size = as_nullable_integer(batch_size),
     name = name,
@@ -323,9 +323,9 @@ layer_global_max_pooling_2d <- function(x, data_format = NULL,
 #' @family pooling layers
 #'     
 #' @export
-layer_global_average_pooling_2d <- function(x, data_format = NULL, 
+layer_global_average_pooling_2d <- function(object, data_format = NULL, 
                                             batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$GlobalAveragePooling2D, x, list(
+  call_layer(keras$layers$GlobalAveragePooling2D, object, list(
     data_format = data_format,
     batch_size = as_nullable_integer(batch_size),
     name = name,
@@ -357,9 +357,9 @@ layer_global_average_pooling_2d <- function(x, data_format = NULL,
 #' @family pooling layers
 #'         
 #' @export
-layer_global_max_pooling_3d <- function(x, data_format = NULL, 
+layer_global_max_pooling_3d <- function(object, data_format = NULL, 
                                         batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$GlobalMaxPooling3D, x, list(
+  call_layer(keras$layers$GlobalMaxPooling3D, object, list(
     data_format = data_format,
     batch_size = as_nullable_integer(batch_size),
     name = name,
@@ -390,9 +390,9 @@ layer_global_max_pooling_3d <- function(x, data_format = NULL,
 #' @family pooling layers
 #'       
 #' @export
-layer_global_average_pooling_3d <- function(x, data_format = NULL, 
+layer_global_average_pooling_3d <- function(object, data_format = NULL, 
                                             batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$GlobalAveragePooling3D, x, list(
+  call_layer(keras$layers$GlobalAveragePooling3D, object, list(
     data_format = data_format,
     batch_size = as_nullable_integer(batch_size),
     name = name,

@@ -31,7 +31,8 @@ test_callback("model_checkpoint", callback_model_checkpoint("checkpoint.h5"), h5
 test_callback("learning_rate_scheduler", callback_learning_rate_scheduler(schedule = function (index) {
   0.1
 }))
-test_callback("tensorboard", callback_tensorboard(log_dir = "./tb_logs"))
+if (is_backend("tensorflow"))
+  test_callback("tensorboard", callback_tensorboard(log_dir = "./tb_logs"))
 test_callback("reduce_lr_on_plateau", callback_reduce_lr_on_plateau())
 test_callback("csv_logger", callback_csv_logger("training.csv"))
 test_callback("lambd", callback_lambda(

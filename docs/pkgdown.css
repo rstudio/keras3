@@ -34,6 +34,10 @@ img.icon {
   float: right;
 }
 
+img {
+  max-width: 100%;
+}
+
 /* Section anchors ---------------------------------*/
 
 a.anchor {
@@ -133,9 +137,14 @@ pre, code {
   color: #333;
 }
 
-pre img {
+pre .img {
+  margin: 5px 0;
+}
+
+pre .img img {
   background-color: #fff;
   display: block;
+  height: auto;
 }
 
 code a, pre a {
@@ -152,43 +161,3 @@ code a, pre a {
 .error   { color: orange;  font-weight: bolder;}
 .warning { color: #6A0366; font-weight: bolder;}
 
-
-h4.date,
-h4.author {
-  display: none;
-}
-
-h2.hasAnchor {
-  font-weight: 350;
-}
-
-.ref-index tbody {
-  margin-bottom: 60px;
-}
-
-pre:not([class]) {
-  background-color: white;
-}
-
-.contents a {
-  text-decoration: none;
-}
-
-blockquote {
-  font-size: inherit;
-}
-
-.examples .page-header {
-  border-bottom: none;
-  margin: 0;
-  padding-bottom: 0;
-}
-
-.examples .sourceCode {
-  margin-top: 25px;
-}
-
-#sidebar .nav>li>a {
-  padding-top: 1px;
-  padding-bottom: 2px;
-}

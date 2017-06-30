@@ -4,12 +4,12 @@
 \alias{time_distributed}
 \title{Apply a layer to every temporal slice of an input.}
 \usage{
-time_distributed(x, layer, input_shape = NULL, batch_input_shape = NULL,
-  batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
-  weights = NULL)
+time_distributed(object, layer, input_shape = NULL,
+  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
+  name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{layer}{A layer instance.}
 

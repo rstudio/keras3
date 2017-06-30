@@ -4,12 +4,12 @@
 \alias{layer_activation_leaky_relu}
 \title{Leaky version of a Rectified Linear Unit.}
 \usage{
-layer_activation_leaky_relu(x, alpha = 0.3, input_shape = NULL,
+layer_activation_leaky_relu(object, alpha = 0.3, input_shape = NULL,
   batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
   name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{alpha}{float >= 0. Negative slope coefficient.}
 

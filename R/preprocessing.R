@@ -112,14 +112,14 @@ make_sampling_table <- function(size, sampling_factor = 1e-05) {
   )
 }
 
-#' Convert text to a sequence of word indices.
+#' Convert text to a sequence of words (or tokens).
 #' 
 #' @param text Input text (string).
 #' @param filters Sequence of characters to filter out.
 #' @param lower Whether to convert the input to lowercase.
 #' @param split Sentence split marker (string).
 #' 
-#' @return integer word indices.
+#' @return Words (or tokens)
 #' 
 #' @family text preprocessing
 #' 
@@ -177,18 +177,18 @@ text_one_hot <- function(text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\
 #'   breaks, minus the ' character.
 #' @param lower boolean. Whether to convert the texts to lowercase.
 #' @param split character or string to use for token splitting.
-#' @param char_level if True, every character will be treated as a word.
+#' @param char_level if `TRUE`, every character will be treated as a token
 #'   
 #' @section Attributes:
 #' The tokenizer object has the following attributes:
 #' - `word_counts` --- named list mapping words to the number of times they appeared
-#'   on during fit. Only set after `fit()` is called on the tokenizer.
+#'   on during fit. Only set after `fit_text_tokenizer()` is called on the tokenizer.
 #' - `word_docs` --- named list mapping words to the number of documents/texts they
-#'    appeared on during fit. Only set after `fit()` is called on the tokenizer.
+#'    appeared on during fit. Only set after `fit_text_tokenizer()` is called on the tokenizer.
 #' - `word_index` --- named list mapping words to their rank/index (int). Only set 
-#'    after `fit()` is called on the tokenizer.
+#'    after `fit_text_tokenizer()` is called on the tokenizer.
 #' -  `document_count` --- int. Number of documents (texts/sequences) the tokenizer 
-#'    was trained on. Only set after `fit()` is called on the tokenizer.
+#'    was trained on. Only set after `fit_text_tokenizer()` is called on the tokenizer.
 #'   
 #' @family text tokenization
 #'   
@@ -219,7 +219,7 @@ text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\
 #' @family text tokenization
 #'   
 #' @export
-fit.tensorflow.keras.preprocessing.text.Tokenizer <- function(object, x, ...) {
+fit_text_tokenizer <- function(object, x, ...) {
   tokenizer <- object
   if (is.list(x))
     tokenizer$fit_on_sequences(x)
@@ -239,7 +239,10 @@ fit.tensorflow.keras.preprocessing.text.Tokenizer <- function(object, x, ...) {
 #'   
 #' @export
 texts_to_sequences <- function(tokenizer, texts) {
-  tokenizer$texts_to_sequences(texts)  
+  # return it as an opaque python object b/c pad_sequences expects
+  # a list of iterables and we lose the iterable part if we convert to R
+  tokenzier_noconvert <- r_to_py(tokenizer, convert = FALSE)
+  tokenzier_noconvert$texts_to_sequences(texts)  
 }
 
 #' Transforms each text in texts in a sequence of integers.
@@ -310,7 +313,7 @@ sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count"
 #' @export
 image_load <- function(path, grayscale = FALSE, target_size = NULL) {
 
-  if (!have_Pillow())
+  if (!have_pillow())
     stop("The Pillow Python package is required to load images")
   
   # normalize target_size
@@ -388,7 +391,7 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
                                  height_shift_range = 0.0,  shear_range = 0.0, zoom_range = 0.0, channel_shift_range = 0.0, 
                                  fill_mode = "nearest", cval = 0.0, horizontal_flip = FALSE, vertical_flip = FALSE, 
                                  rescale = NULL, preprocessing_function = NULL, data_format = NULL) {
-  keras$preprocessing$image$ImageDataGenerator(
+  args <- list(
     featurewise_center = featurewise_center,
     samplewise_center = samplewise_center,
     featurewise_std_normalization = featurewise_std_normalization,
@@ -408,6 +411,9 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
     preprocessing_function = preprocessing_function,
     data_format = data_format
   )
+
+  do.call(keras$preprocessing$image$ImageDataGenerator, args)
+  
 }
 
 
@@ -427,7 +433,7 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
 #' @family image preprocessing
 #' 
 #' @export
-fit.tensorflow.keras.preprocessing.image.ImageDataGenerator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL, ...) {
+fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL, ...) {
   generator <- object
   history <- generator$fit(
     x = x,
@@ -456,7 +462,7 @@ fit.tensorflow.keras.preprocessing.image.ImageDataGenerator <- function(object, 
 #' @param save_prefix str (default: ''). Prefix to use for filenames of saved 
 #'   pictures (only relevant if `save_to_dir` is set).
 #' @param save_format one of "png", "jpeg" (only relevant if save_to_dir is 
-#'   set). Default: "jpeg".
+#'   set). Default: "png".
 #'   
 #' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a 
 #'   array of corresponding labels. The generator loops indefinitely.
@@ -467,7 +473,7 @@ fit.tensorflow.keras.preprocessing.image.ImageDataGenerator <- function(object, 
 flow_images_from_data <- function(
           x, y = NULL, generator = image_data_generator(), batch_size = 32, 
           shuffle = TRUE, seed = NULL, 
-          save_to_dir = NULL, save_prefix = "", save_format = 'jpeg') {
+          save_to_dir = NULL, save_prefix = "", save_format = 'png') {
   generator$flow(
     x = x,
     y = y,
@@ -521,7 +527,7 @@ flow_images_from_directory <- function(
       directory, generator = image_data_generator(), target_size = c(256, 256), color_mode = "rgb",
       classes = NULL, class_mode = "categorical",
       batch_size = 32, shuffle = TRUE, seed = NULL,
-      save_to_dir = NULL, save_prefix = "", save_format = "jpeg",
+      save_to_dir = NULL, save_prefix = "", save_format = "png",
       follow_links = FALSE) {
   generator$flow_from_directory(
     directory = normalize_path(directory),

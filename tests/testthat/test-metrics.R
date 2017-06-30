@@ -16,9 +16,9 @@ test_succeeds("metrics can be used when compiling models", {
 })
 
 test_succeeds("metrics be can called directly", {
-  tf <- tensorflow::tf
-  y_true <- tf$constant(matrix(runif(100), nrow = 10, ncol = 10))
-  y_pred <- tf$constant(matrix(runif(100), nrow = 10, ncol = 10))
+  K <- backend()
+  y_true <- K$constant(matrix(runif(100), nrow = 10, ncol = 10))
+  y_pred <- K$constant(matrix(runif(100), nrow = 10, ncol = 10))
   metric_binary_accuracy(y_true, y_pred)
   metric_binary_crossentropy(y_true, y_pred)
   metric_hinge(y_true, y_pred)

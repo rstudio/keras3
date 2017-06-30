@@ -23,10 +23,16 @@ navbar:
           href: articles/about_keras_models.html
         - text: "About Keras Layers"
           href: articles/about_keras_layers.html
-        - text: "Training Callbacks"
-          href: articles/training_callbacks.html
+        - text: "TensorBoard Visualization"
+          href: articles/tensorboard.html
         - text: "Pre-Trained Models"
           href: articles/applications.html
+        - text: "--------------------------"
+        - text: "Advanced"
+        - text: "Training Callbacks"
+          href: articles/training_callbacks.html
+        - text: "Keras Backend"
+          href: articles/backend.html
     - text: Examples
       href: articles/examples/index.html
     - text: "Reference"
@@ -40,13 +46,13 @@ reference:
     contents:
       - keras_model
       - keras_model_sequential
-      - summary.tensorflow.keras.engine.training.Model
+      - summary.keras.engine.training.Model
       - compile
-      - fit.tensorflow.keras.engine.training.Model
+      - fit
       - fit_generator
       - evaluate
       - evaluate_generator
-      - predict.tensorflow.keras.engine.training.Model
+      - predict.keras.engine.training.Model
       - predict_proba
       - predict_classes
       - predict_on_batch
@@ -54,10 +60,8 @@ reference:
       - train_on_batch
       - get_layer
       - pop_layer
-      - save_model
-      - load_model
-    exclude: 
-      - fit
+      - save_model_hdf5
+      - load_model_hdf5
  
   - title: "Core Layers"
     contents:
@@ -155,8 +159,8 @@ reference:
  
   - title: "Model Persistence"
     contents:
-      - save_model
-      - save_model_weights
+      - save_model_hdf5
+      - save_model_weights_hdf5
       - get_weights
       - get_config
       - model_to_json
@@ -190,7 +194,7 @@ reference:
   - title: "Text Preprocessing"
     contents:
       - text_tokenizer
-      - fit.tensorflow.keras.preprocessing.text.Tokenizer
+      - fit_text_tokenizer
       - texts_to_sequences
       - texts_to_sequences_generator
       - texts_to_matrix
@@ -203,7 +207,7 @@ reference:
       - image_load
       - image_to_array
       - image_data_generator
-      - fit.tensorflow.keras.preprocessing.image.ImageDataGenerator
+      - fit_image_data_generator
       - flow_images_from_data
       - flow_images_from_directory
  
@@ -262,6 +266,7 @@ reference:
       - hdf5_matrix
       - get_file
       - backend
+      - plot.keras_training_history
       
   - title: "Losses"
     contents:

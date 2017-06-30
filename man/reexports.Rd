@@ -9,7 +9,13 @@
 \alias{reexports}
 \alias{use_condaenv}
 \alias{reexports}
-\alias{py_config}
+\alias{install_tensorflow}
+\alias{reexports}
+\alias{tensorboard}
+\alias{reexports}
+\alias{unique_log_dir}
+\alias{reexports}
+\alias{tf_config}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -17,6 +23,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{reticulate}{\code{\link[reticulate]{use_python}}, \code{\link[reticulate]{use_virtualenv}}, \code{\link[reticulate]{use_condaenv}}, \code{\link[reticulate]{py_config}}}
+  \item{reticulate}{\code{\link[reticulate]{use_python}}, \code{\link[reticulate]{use_virtualenv}}, \code{\link[reticulate]{use_condaenv}}}
+
+  \item{tensorflow}{\code{\link[tensorflow]{install_tensorflow}}, \code{\link[tensorflow]{tensorboard}}, \code{\link[tensorflow]{unique_log_dir}}, \code{\link[tensorflow]{tf_config}}}
 }}
 

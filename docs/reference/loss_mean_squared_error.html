@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,10 +80,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -131,6 +140,10 @@
 
 <span class='fu'>loss_hinge</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
+<span class='fu'>loss_categorical_hinge</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
+
+<span class='fu'>loss_logcosh</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
+
 <span class='fu'>loss_categorical_crossentropy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
 <span class='fu'>loss_sparse_categorical_crossentropy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
@@ -148,11 +161,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>y_true</th>
-      <td><p>True labels (TensorFlow tensor)</p></td>
+      <td><p>True labels (Tensor)</p></td>
     </tr>
     <tr>
       <th>y_pred</th>
-      <td><p>Predictions (TensorFlow tensor of the same shape as <code>y_true</code>)</p></td>
+      <td><p>Predictions (Tensor of the same shape as <code>y_true</code>)</p></td>
     </tr>
     </table>
     
@@ -165,8 +178,8 @@ function (e.g. 'loss = binary_crossentropy'), a reference to a built in loss
 function (e.g. 'loss = loss_binary_crossentropy()') or by passing an
 artitrary function that returns a scalar for each data-point and takes the
 following two arguments:</p><ul>
-<li><p><code>y_true</code> True labels (TensorFlow tensor)</p></li>
-<li><p><code>y_pred</code> Predictions (TensorFlow tensor of the same shape as <code>y_true</code>)</p></li>
+<li><p><code>y_true</code> True labels (Tensor)</p></li>
+<li><p><code>y_pred</code> Predictions (Tensor of the same shape as <code>y_true</code>)</p></li>
 </ul>
     <p>The actual optimized objective is the mean of the output array across all
 datapoints.</p>
@@ -205,7 +218,7 @@ function <code><a href='to_categorical.html'>to_categorical()</a></code>:
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

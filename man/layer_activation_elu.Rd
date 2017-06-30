@@ -4,12 +4,12 @@
 \alias{layer_activation_elu}
 \title{Exponential Linear Unit.}
 \usage{
-layer_activation_elu(x, alpha = 1, input_shape = NULL,
+layer_activation_elu(object, alpha = 1, input_shape = NULL,
   batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
   name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{alpha}{Scale for the negative factor.}
 

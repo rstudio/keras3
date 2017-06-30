@@ -1,0 +1,119 @@
+---
+title: "TensorBoard Visualization"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{TensorBoard Visualization}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+library(keras)
+knitr::opts_chunk$set(comment = NA, eval = FALSE)
+```
+
+## Overview
+
+TensorBoard is a visualization tool included with TensorFlow that enables you to visualize dynamic graphs of your Keras training and test metrics, as well as activation histograms for the different layers in your model. 
+
+For example, here's a TensorBoard display for Keras accuracy and loss metrics:
+
+![](tensorboard.png){width=700 height=545 .screenshot}
+
+## Recording Data
+
+To record data that can be visualized with TensorBoard, you add a TensorBoard callback to the `fit()` function. For example:
+
+```{r}
+history <- model %>% fit(
+  x_train, y_train,
+  batch_size = batch_size,
+  epochs = epochs,
+  verbose = 1,
+  callbacks = callback_tensorboard(log_dir = "logs/run_a"),
+  validation_split = 0.2
+)
+```
+
+See the documentation on the `callback_tensorboard()` function for the various available options. The most important option is the `log_dir`, which determines which directory logs are written to for a given training run. 
+
+## Viewing Data
+
+To view TensorBoard data for a given set of runs you use the `tensorboard()` function. If your training logs are located within the current working directory then you can call `tensorboard()` with no arguments:
+
+```{r}
+tensorboard()
+```
+
+If you alternatively want to specify a specific directory as the root of all training logs then you can use the `log_dir` parameter, for example:
+
+```{r}
+tensorboard(log_dir = "logs")
+```
+
+Note that you don't need to change the `log_dir` for each training run (the default log directory if none is specified is "logs"). In the case of a `log_dir` used multiple times TensorBoard will simply visualize the metrics for the most recent training run.
+
+## Comparing Runs
+
+TensorBoard will automatically include all runs logged within the sub-directories of the specified `log_dir`, for example, if you logged another run using:
+
+```{r}
+callback_tensorboard(log_dir = "logs/run_b")
+```
+
+Then the TensorBoard visualization would look like this:
+
+![](tensorboard_compare.png){width=700 height=540 .screenshot}
+
+You can use the `unique_log_dir` function if you want to record every training run in it's own directory:
+
+```{r}
+callback_tensorboard(log_dir = unique_log_dir())
+```
+
+Once again note that it's not required to record every training run in it's own directory. Using the default "logs" directory will work just fine, you'll just only be able to visualize the most recent run using TensorBoard.
+
+## Customization
+
+### Metrics
+
+In the above examples TensorBoard metrics are logged for loss and accuracy. The TensorBoard callback will log data for any metrics which are specified in the `metrics` parameter of the `compile()` function. For example, in the following code:
+
+```r
+model %>% compile(
+  loss = 'mean_squared_error',
+  optimizer = 'sgd',
+  metrics= c('mae', 'acc')
+)
+```
+
+TensorBoard data series will be created for the loss (mean squared error) as well as for the mean absolute error and accuracy metrics.
+
+### Options
+
+The `callback_tensorboard()` function includes a number of other options that control logging during training:
+
+```r
+callback_tensorboard(log_dir = "logs", histogram_freq = 0,
+  write_graph = TRUE, write_images = FALSE, embeddings_freq = 0,
+  embeddings_layer_names = NULL, embeddings_metadata = NULL)
+```
+
+| Name  | Description |
+|-----------------|-------------------------------------------------------------------|
+| `log_dir`  | The path of the directory where to save the log files to be parsed by Tensorboard. |
+| `histogram_freq`  | Frequency (in epochs) at which to compute activation histograms for the layers of the model. If set to 0 (the default), histograms won't be computed.  |
+| `write_graph` | Whether to visualize the graph in Tensorboard. The log file can become quite large when write_graph is set to `TRUE`  |
+| `write_images`  | Whether to write model weights to visualize as image in Tensorboard.  |
+| `embeddings_freq` | Frequency (in epochs) at which selected embedding layers will be saved.  |
+| `embeddings_layer_names` | A list of names of layers to keep eye on. If `NULL` or empty list all the embedding layers will be watched.  |
+| `embeddings_metadata`  | A named list which maps layer name to a file name in which metadata for this embedding layer is saved. See the [details](https://www.tensorflow.org/how_tos/embedding_viz/#metadata_optional) about the metadata file format. In case if the same metadata file is used for all embedding layers, string can be passed.  |
+
+
+
+
+
+
+
+
+

@@ -9,7 +9,8 @@
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<script src="../extra.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -57,10 +58,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -129,21 +138,33 @@
 <li>Within Keras, there is the ability to add <a href="training_callbacks.html">callbacks</a> specifically designed to be run at the end of an <strong>epoch</strong>. Examples of these are learning rate changes and model checkpointing (saving).</li>
 </ul>
 </div>
+<div id="why-are-keras-objects-modified-in-place" class="section level2">
+<h2 class="hasAnchor">
+<a href="#why-are-keras-objects-modified-in-place" class="anchor"></a>Why are Keras objects modified in place?</h2>
+<p>Unlike most R objects, Keras objects are “mutable”. That means that when you modify an object you’re modifying it “in place”, and you don’t need to assign the updated object back to the original name. For example, to add layers to a Keras model you might use this code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>)</code></pre></div>
+<p>Rather than this code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>)</code></pre></div>
+<p>You need to be aware of this because it makes the Keras API a little different than most other pipelines you may have used, but it’s necessary to match the data structures and behavior of the underlying Keras library.</p>
+</div>
 <div id="how-can-i-save-a-keras-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-can-i-save-a-keras-model" class="anchor"></a>How can I save a Keras model?</h2>
-<p><em>It is not recommended to use pickle or cPickle to save a Keras model.</em></p>
-<p>You can use <code><a href="../reference/save_model.html">save_model()</a></code> to save a Keras model into a single HDF5 file which will contain:</p>
+<p>You can use <code><a href="../reference/save_model_hdf5.html">save_model_hdf5()</a></code> to save a Keras model into a single HDF5 file which will contain:</p>
 <ul>
 <li>the architecture of the model, allowing to re-create the model</li>
 <li>the weights of the model</li>
 <li>the training configuration (loss, optimizer)</li>
 <li>the state of the optimizer, allowing to resume training exactly where you left off.</li>
 </ul>
-<p>You can then use <code><a href="../reference/save_model.html">load_model()</a></code> to reinstantiate your model. <code><a href="../reference/save_model.html">load_model()</a></code> will also take care of compiling the model using the saved training configuration (unless the model was never compiled in the first place).</p>
+<p>You can then use <code><a href="../reference/save_model_hdf5.html">load_model_hdf5()</a></code> to reinstantiate your model. <code><a href="../reference/save_model_hdf5.html">load_model_hdf5()</a></code> will also take care of compiling the model using the saved training configuration (unless the model was never compiled in the first place).</p>
 <p>Example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/save_model.html">save_model</a></span>(model, <span class="st">'my_model.h5'</span>)
-model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/save_model.html">load_model</a></span>(<span class="st">'my_model.h5'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/save_model_hdf5.html">save_model_hdf5</a></span>(model, <span class="st">'my_model.h5'</span>)
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/save_model_hdf5.html">load_model_hdf5</a></span>(<span class="st">'my_model.h5'</span>)</code></pre></div>
 <p>If you only need to save the <strong>architecture of a model</strong>, and not its weights or its training configuration, you can do:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">json_string &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_to_json.html">model_to_json</a></span>(model)
 yaml_string &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_to_yaml.html">model_to_yaml</a></span>(model)</code></pre></div>
@@ -152,11 +173,11 @@ yaml_string &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_to_json.html">model_from_json</a></span>(json_string)
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_to_yaml.html">model_from_yaml</a></span>(yaml_string)</code></pre></div>
 <p>If you need to save the <strong>weights of a model</strong>, you can do so in HDF5 with the code below.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/save_model_weights.html">save_model_weights</a></span>(<span class="st">'my_model_weights.h5'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/save_model_weights_hdf5.html">save_model_weights_hdf5</a></span>(<span class="st">'my_model_weights.h5'</span>)</code></pre></div>
 <p>Assuming you have code for instantiating your model, you can then load the weights you saved into a model with the <em>same</em> architecture:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/save_model_weights.html">load_model_weights</a></span>(<span class="st">'my_model_weights.h5'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/save_model_weights_hdf5.html">load_model_weights_hdf5</a></span>(<span class="st">'my_model_weights.h5'</span>)</code></pre></div>
 <p>If you need to load weights into a <em>different</em> architecture (with some layers in common), for instance for fine-tuning or transfer-learning, you can load weights by <em>layer name</em>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/save_model_weights.html">load_model_weights</a></span>(<span class="st">'my_model_weights.h5'</span>, <span class="dt">by_name =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/save_model_weights_hdf5.html">load_model_weights_hdf5</a></span>(<span class="st">'my_model_weights.h5'</span>, <span class="dt">by_name =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># assuming the original model looks like this:</span>
 <span class="co">#   model &lt;- keras_model_sequential()</span>
@@ -168,12 +189,12 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model
 
 <span class="co"># new model</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
-model %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">2</span>, <span class="dt">input_dim =</span> <span class="dv">3</span>, <span class="dt">name =</span> <span class="st">"dense 1"</span>) %&gt;%<span class="st">  </span><span class="co"># will be loaded</span>
+model <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">2</span>, <span class="dt">input_dim =</span> <span class="dv">3</span>, <span class="dt">name =</span> <span class="st">"dense 1"</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># will be loaded</span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">3</span>, <span class="dt">name =</span> <span class="st">"dense_3"</span>)                     <span class="co"># will not be loaded</span>
 
 <span class="co"># load weights from first model; will only affect the first layer, dense_1.</span>
-<span class="kw"><a href="../reference/save_model_weights.html">load_model_weights</a></span>(fname, <span class="dt">by_name =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<span class="kw">load_model_weights</span>(fname, <span class="dt">by_name =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 <div id="why-is-the-training-loss-much-higher-than-the-testing-loss" class="section level2">
 <h2 class="hasAnchor">
@@ -188,8 +209,8 @@ model %&gt;%<span class="st"> </span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span>...  <span class="co"># create the original model</span>
 
 layer_name &lt;-<span class="st"> 'my_layer'</span>
-intermediate_layer_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> model$input,
-                                        <span class="dt">outputs =</span> <span class="kw"><a href="../reference/get_layer.html">get_layer</a></span>(layer_name)$output)
+intermediate_layer_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> model<span class="op">$</span>input,
+                                        <span class="dt">outputs =</span> <span class="kw"><a href="../reference/get_layer.html">get_layer</a></span>(layer_name)<span class="op">$</span>output)
 intermediate_output &lt;-<span class="st"> </span><span class="kw">predict</span>(intermediate_layer_model, data)</code></pre></div>
 </div>
 <div id="how-can-i-use-keras-with-datasets-that-dont-fit-in-memory" class="section level2">
@@ -204,7 +225,7 @@ intermediate_output &lt;-<span class="st"> </span><span class="kw">predict</span
 <a href="#how-can-i-interrupt-training-when-the-validation-loss-isnt-decreasing-anymore" class="anchor"></a>How can I interrupt training when the validation loss isn’t decreasing anymore?</h2>
 <p>You can use an early stopping callback:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">early_stopping &lt;-<span class="st"> </span><span class="kw"><a href="../reference/callback_early_stopping.html">callback_early_stopping</a></span>(<span class="dt">monitor =</span> <span class="st">'val_loss'</span>, <span class="dt">patience =</span> <span class="dv">2</span>)
-model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(X, y, <span class="dt">validation_split =</span> <span class="fl">0.2</span>, <span class="dt">callbacks =</span> <span class="kw">c</span>(early_stopping))</code></pre></div>
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(X, y, <span class="dt">validation_split =</span> <span class="fl">0.2</span>, <span class="dt">callbacks =</span> <span class="kw">c</span>(early_stopping))</code></pre></div>
 <p>Find out more in the <a href="training_callbacks.html">callbacks documentation</a>.</p>
 </div>
 <div id="how-is-the-validation-split-computed" class="section level2">
@@ -223,8 +244,8 @@ model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.
 <h2 class="hasAnchor">
 <a href="#how-can-i-record-the-training-validation-loss-accuracy-at-each-epoch" class="anchor"></a>How can I record the training / validation loss / accuracy at each epoch?</h2>
 <p>The <code>model.fit</code> method returns an <code>History</code> callback, which has a <code>history</code> attribute containing the lists of successive losses and other metrics.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hist &lt;-<span class="st"> </span>model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(X, y, <span class="dt">validation_split=</span><span class="fl">0.2</span>)
-hist$history</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hist &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(X, y, <span class="dt">validation_split=</span><span class="fl">0.2</span>)
+hist<span class="op">$</span>history</code></pre></div>
 </div>
 <div id="how-can-i-freeze-keras-layers" class="section level2">
 <h2 class="hasAnchor">
@@ -235,21 +256,21 @@ hist$history</code></pre></div>
 <p>Additionally, you can set the <code>trainable</code> property of a layer to <code>TRUE</code> or <code>FALSE</code> after instantiation. For this to take effect, you will need to call <code><a href="../reference/compile.html">compile()</a></code> on your model after modifying the <code>trainable</code> property. Here’s an example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">32</span>))
 layer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>)
-layer$trainable &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-y &lt;-<span class="st"> </span>x %&gt;%<span class="st"> </span>layer
+layer<span class="op">$</span>trainable &lt;-<span class="st"> </span><span class="ot">FALSE</span>
+y &lt;-<span class="st"> </span>x <span class="op">%&gt;%</span><span class="st"> </span>layer
 
 frozen_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(x, y)
 <span class="co"># in the model below, the weights of `layer` will not be updated during training</span>
-frozen_model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>, <span class="dt">loss =</span> <span class="st">'mse'</span>)
+frozen_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>, <span class="dt">loss =</span> <span class="st">'mse'</span>)
 
-layer$trainable &lt;-<span class="st"> </span><span class="ot">TRUE</span>
+layer<span class="op">$</span>trainable &lt;-<span class="st"> </span><span class="ot">TRUE</span>
 trainable_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(x, y)
 <span class="co"># with this model the weights of the layer will be updated during training</span>
 <span class="co"># (which will also affect the above model since it uses the same layer instance)</span>
-trainable_model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>, <span class="dt">loss =</span> <span class="st">'mse'</span>)
+trainable_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>, <span class="dt">loss =</span> <span class="st">'mse'</span>)
 
-frozen_model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels)  <span class="co"># this does NOT update the weights of `layer`</span>
-trainable_model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels)  <span class="co"># this updates the weights of `layer`</span></code></pre></div>
+frozen_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels)  <span class="co"># this does NOT update the weights of `layer`</span>
+trainable_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels)  <span class="co"># this updates the weights of `layer`</span></code></pre></div>
 </div>
 <div id="how-can-i-use-stateful-rnns" class="section level2">
 <h2 class="hasAnchor">
@@ -274,14 +295,14 @@ trainable_model %&gt;%<span class="st"> </span><span class="kw"><a href="../refe
 <a href="#how-can-i-remove-a-layer-from-a-sequential-model" class="anchor"></a>How can I remove a layer from a Sequential model?</h2>
 <p>You can remove the last added layer in a Sequential model by calling <code><a href="../reference/pop_layer.html">pop_layer()</a></code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
-model %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) %&gt;%<span class="st"> </span>
+model <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>)
 
-<span class="kw">length</span>(model$layers)     <span class="co"># "3"</span>
-model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/pop_layer.html">pop_layer</a></span>()
-<span class="kw">length</span>(model$layers)     <span class="co"># "2"</span></code></pre></div>
+<span class="kw">length</span>(model<span class="op">$</span>layers)     <span class="co"># "3"</span>
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/pop_layer.html">pop_layer</a></span>()
+<span class="kw">length</span>(model<span class="op">$</span>layers)     <span class="co"># "2"</span></code></pre></div>
 </div>
 <div id="how-can-i-use-pre-trained-models-in-keras" class="section level2">
 <h2 class="hasAnchor">
@@ -304,11 +325,43 @@ model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/pop_
 <li><a href="examples/deep_dream.html">Deep dream</a></li>
 </ul>
 </div>
+<div id="how-can-i-use-other-keras-backends" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-use-other-keras-backends" class="anchor"></a>How can I use other Keras backends?</h2>
+<p>By default the Keras Python and R packages use the TensorFlow backend. Other available backends include Theano or CNTK. To learn more about using alternatate backends (e.g. Theano or CNTK) see the <a href="backends.html">article on Keras backends</a>.</p>
+</div>
+<div id="how-can-i-run-keras-on-a-gpu" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-run-keras-on-a-gpu" class="anchor"></a>How can I run Keras on a GPU?</h2>
+<p>Note that installation and configuration of the GPU-based backends can take considerably more time and effort. So if you are just getting started with Keras you may want to stick with the CPU version initially, then install the appropriate GPU version once your training becomes more computationally demanding.</p>
+<p>Below are instructions for installing and enabling GPU support for the various supported backends.</p>
+<div id="tensorflow" class="section level3">
+<h3 class="hasAnchor">
+<a href="#tensorflow" class="anchor"></a>TensorFlow</h3>
+<p>If your system has an NVIDIA® GPU and you have the GPU version of TensorFlow installed then your Keras code will automatically run on the GPU.</p>
+<p>Additional details on GPU installation can be found here: <a href="https://tensorflow.rstudio.com/installation_gpu.html" class="uri">https://tensorflow.rstudio.com/installation_gpu.html</a>.</p>
+</div>
+<div id="theano" class="section level3">
+<h3 class="hasAnchor">
+<a href="#theano" class="anchor"></a>Theano</h3>
+<p>If you are running on the Theano backend, you can set the <code>THEANO_FLAGS</code> environment variable to indicate you’d like to execute tensor operations on the GPU. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.setenv</span>(<span class="dt">KERAS_BACKEND =</span> <span class="st">"keras"</span>)
+<span class="kw">Sys.setenv</span>(<span class="dt">THEANO_FLAGS =</span> <span class="st">"device=gpu,floatX=float32"</span>)
+<span class="kw">library</span>(keras)</code></pre></div>
+<p>The name ‘gpu’ might have to be changed depending on your device’s identifier (e.g. <code>gpu0</code>, <code>gpu1</code>, etc).</p>
+</div>
+<div id="cntk" class="section level3">
+<h3 class="hasAnchor">
+<a href="#cntk" class="anchor"></a>CNTK</h3>
+<p>If you have the GPU version of CNTK installed then your Keras code will automatically run on the GPU.</p>
+<p>Additional information on installing the GPU version of CNTK can be found here: <a href="https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python" class="uri">https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python</a></p>
+</div>
+</div>
 <div id="where-is-the-keras-configuration-filed-stored" class="section level2">
 <h2 class="hasAnchor">
 <a href="#where-is-the-keras-configuration-filed-stored" class="anchor"></a>Where is the Keras configuration filed stored?</h2>
 <p>The default directory where all Keras data is stored is:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">$HOME</span><span class="kw">/.keras/</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="va">$HOME</span><span class="ex">/.keras/</span></code></pre></div>
 <p>Note that Windows users should replace <code>$HOME</code> with <code>%USERPROFILE%</code>. In case Keras cannot create the above directory (e.g. due to permission issues), <code>/tmp/.keras/</code> is used as a backup.</p>
 <p>The Keras configuration file is a JSON file stored at <code>$HOME/.keras/keras.json</code>. The default configuration file looks like this:</p>
 <pre><code>{
@@ -331,10 +384,12 @@ model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/pop_
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#how-should-i-cite-keras">How should I cite Keras?</a></li>
       <li><a href="#what-does-sample-batch-epoch-mean">What does “sample”, “batch”, “epoch” mean?</a></li>
+      <li><a href="#why-are-keras-objects-modified-in-place">Why are Keras objects modified in place?</a></li>
       <li><a href="#how-can-i-save-a-keras-model">How can I save a Keras model?</a></li>
       <li><a href="#why-is-the-training-loss-much-higher-than-the-testing-loss">Why is the training loss much higher than the testing loss?</a></li>
       <li><a href="#how-can-i-obtain-the-output-of-an-intermediate-layer">How can I obtain the output of an intermediate layer?</a></li>
@@ -347,6 +402,8 @@ model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/pop_
       <li><a href="#how-can-i-use-stateful-rnns">How can I use stateful RNNs?</a></li>
       <li><a href="#how-can-i-remove-a-layer-from-a-sequential-model">How can I remove a layer from a Sequential model?</a></li>
       <li><a href="#how-can-i-use-pre-trained-models-in-keras">How can I use pre-trained models in Keras?</a></li>
+      <li><a href="#how-can-i-use-other-keras-backends">How can I use other Keras backends?</a></li>
+      <li><a href="#how-can-i-run-keras-on-a-gpu">How can I run Keras on a GPU?</a></li>
       <li><a href="#where-is-the-keras-configuration-filed-stored">Where is the Keras configuration filed stored?</a></li>
       </ul>
 </div>
@@ -356,7 +413,7 @@ model %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/pop_
 
 
       <footer><div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href="https://www.rstudio.com"><img src="http://tidyverse.org/rstudio-logo.svg" height="24"></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="http://tidyverse.org/rstudio-logo.svg" height="24"></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

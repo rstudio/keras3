@@ -52,7 +52,7 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
 #' 
 #' @inheritParams layer_input
 #' 
-#' @param x Model or layer
+#' @param object Model or layer object
 #' @param units Positive integer, dimensionality of the output space.
 #' @param activation Name of activation function to use. If you don't specify 
 #'   anything, no activation is applied (ie. "linear" activation: a(x) = x).
@@ -90,7 +90,7 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
 #' @family core layers   
 #'       
 #' @export
-layer_dense <- function(x, units, activation = NULL, use_bias = TRUE, 
+layer_dense <- function(object, units, activation = NULL, use_bias = TRUE, 
                         kernel_initializer = 'glorot_uniform', bias_initializer = 'zeros', 
                         kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
                         kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
@@ -98,7 +98,7 @@ layer_dense <- function(x, units, activation = NULL, use_bias = TRUE,
                         name = NULL, trainable = NULL, weights = NULL
                         ) {
   
-  call_layer(keras$layers$Dense, x, list(
+  call_layer(keras$layers$Dense, object, list(
     units = as.integer(units),
     activation = activation,
     use_bias = use_bias,
@@ -137,11 +137,11 @@ layer_dense <- function(x, units, activation = NULL, use_bias = TRUE,
 #' @family core layers   
 #'   
 #' @export
-layer_reshape <- function(x, target_shape, input_shape = NULL,
+layer_reshape <- function(object, target_shape, input_shape = NULL,
                           batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                           name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Reshape, x, list(
+  call_layer(keras$layers$Reshape, object, list(
     target_shape = normalize_shape(target_shape),
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -175,11 +175,11 @@ layer_reshape <- function(x, target_shape, input_shape = NULL,
 #' @family core layers   
 #'   
 #' @export
-layer_permute <- function(x, dims, input_shape = NULL,
+layer_permute <- function(object, dims, input_shape = NULL,
                           batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                           name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Permute, x, list(
+  call_layer(keras$layers$Permute, object, list(
     dims = as_integer_tuple(dims),
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -205,10 +205,10 @@ layer_permute <- function(x, dims, input_shape = NULL,
 #' @family core layers   
 #'   
 #' @export
-layer_repeat_vector <- function(x, n, 
+layer_repeat_vector <- function(object, n, 
                                 batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$RepeatVector, x, list(
+  call_layer(keras$layers$RepeatVector, object, list(
     n = as.integer(n),
     batch_size = as_nullable_integer(batch_size),
     name = name,
@@ -224,6 +224,8 @@ layer_repeat_vector <- function(x, n,
 #' 
 #' @param f The function to be evaluated. Takes input tensor as first
 #'   argument.
+#' @param output_shape Expected output shape from the function (not required
+#'   when using TensorFlow back-end).
 #' @param mask mask
 #' @param arguments optional named list of keyword arguments to be passed to the
 #'   function.
@@ -237,11 +239,11 @@ layer_repeat_vector <- function(x, n,
 #' @family core layers   
 #'     
 #' @export
-layer_lambda <- function(x, f, mask = NULL, arguments = NULL, input_shape = NULL,
-                         batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+layer_lambda <- function(object, f, output_shape = NULL, mask = NULL, arguments = NULL, 
+                         input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                          name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Lambda, x, list(
+  args <- list(
     `function` = f,
     mask = mask,
     arguments = arguments,
@@ -252,7 +254,12 @@ layer_lambda <- function(x, f, mask = NULL, arguments = NULL, input_shape = NULL
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
+  
+  if (identical(backend()$backend(), "theano"))
+    args$output_shape = as_integer_tuple(output_shape)
+  
+  call_layer(keras$layers$Lambda, object, args)
   
 }
 
@@ -273,12 +280,12 @@ layer_lambda <- function(x, f, mask = NULL, arguments = NULL, input_shape = NULL
 #' @family core layers   
 #'       
 #' @export
-layer_activity_regularization <- function(x, l1 = 0.0, l2 = 0.0, input_shape = NULL,
+layer_activity_regularization <- function(object, l1 = 0.0, l2 = 0.0, input_shape = NULL,
                                           batch_input_shape = NULL, batch_size = NULL, 
                                           dtype = NULL, name = NULL, trainable = NULL, 
                                           weights = NULL) {
   
-  call_layer(keras$layers$ActivityRegularization, x, list(
+  call_layer(keras$layers$ActivityRegularization, object, list(
     l1 = l1,
     l2 = l2,
     input_shape = normalize_shape(input_shape),
@@ -307,11 +314,11 @@ layer_activity_regularization <- function(x, l1 = 0.0, l2 = 0.0, input_shape = N
 #' @family core layers   
 #'   
 #' @export
-layer_masking <- function(x, mask_value = 0.0, input_shape = NULL,
+layer_masking <- function(object, mask_value = 0.0, input_shape = NULL,
                           batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                           name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Masking, x, list(
+  call_layer(keras$layers$Masking, object, list(
     mask_value = mask_value,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -335,10 +342,10 @@ layer_masking <- function(x, mask_value = 0.0, input_shape = NULL,
 #' @family core layers
 #' 
 #' @export
-layer_flatten <- function(x, 
+layer_flatten <- function(object, 
                           batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Flatten, x, list())
+  call_layer(keras$layers$Flatten, object, list())
   
 }
 
@@ -392,7 +399,7 @@ normalize_shape <- function(shape) {
 
 
 # Helper function to call a layer
-call_layer <- function(layer_function, x, args) {
+call_layer <- function(layer_function, object, args) {
   
   # remove kwargs that are null
   args$input_shape <- args$input_shape
@@ -407,49 +414,38 @@ call_layer <- function(layer_function, x, args) {
   layer <- do.call(layer_function, args)
   
   # compose if we have an x
-  if (missing(x) || is.null(x))
+  if (missing(object) || is.null(object))
     layer
   else
-    invisible(compose_layer(x, layer))
+    invisible(compose_layer(object, layer))
 }
 
 
 
 # Helper function to compose a layer with an object of type Model or Layer
-compose_layer <- function(x, layer) {
-  
-  # if a sequential is passed then add it to the model
-  if (is_sequential_model(x)) {
-    
-    x$add(layer)
-    x
-    
-    # if a layer is passed then wrap the layer
-  } else if (is_layer(x)) {
-    
-    layer(x)
-    
-    # otherwie it's an unexpected type
-  } else {
-    
-    stop("Invalid input to layer function (must be a model or a tensor)",
-         call. = FALSE)
-  }
+
+compose_layer <- function(object, layer) {
+  UseMethod("compose_layer")  
 }
 
-is_sequential_model <- function(x) {
-  inherits(x, "tensorflow.keras.models.Sequential")
+compose_layer.default <- function(object, layer) {
+  stop_with_invalid_layer()
 }
 
-is_layer <- function(x) {
-  inherits(x, "tensorflow.python.framework.ops.Tensor") ||
-    inherits(x, "tensorflow.keras.engine.topology.Layer")
+compose_layer.keras.models.Sequential <- function(object, layer) {
+  object$add(layer)
+  object
 }
 
-
-is_keras_function <- function(f) {
-  is.function(f) && identical(environment(f), getNamespace("keras"))
+compose_layer.python.builtin.object <- function(object, layer) {
+  if (is.function(layer))
+    layer(object)
+  else
+    stop_with_invalid_layer()
 }
 
-
+stop_with_invalid_layer <- function() {
+  stop("Invalid input to layer function (must be a model or a tensor)",
+       call. = FALSE)
+}
 

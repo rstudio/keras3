@@ -4,13 +4,14 @@
 \alias{layer_embedding}
 \title{Turns positive integers (indexes) into dense vectors of fixed size.}
 \usage{
-layer_embedding(x, input_dim, output_dim, embeddings_initializer = "uniform",
-  embeddings_regularizer = NULL, activity_regularizer = NULL,
-  embeddings_constraint = NULL, mask_zero = FALSE, input_length = NULL,
-  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
+layer_embedding(object, input_dim, output_dim,
+  embeddings_initializer = "uniform", embeddings_regularizer = NULL,
+  activity_regularizer = NULL, embeddings_constraint = NULL,
+  mask_zero = FALSE, input_length = NULL, batch_size = NULL,
+  name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{input_dim}{int > 0. Size of the vocabulary, i.e. maximum integer
 index + 1.}

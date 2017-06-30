@@ -1,6 +1,4 @@
 
-use_virtualenv("~/tensorflow")
-
 skip_if_no_keras <- function() {
   if (!reticulate::py_module_available("tensorflow.contrib.keras"))
     skip("keras not available for testing")
@@ -16,6 +14,14 @@ test_succeeds <- function(desc, expr) {
 
 test_call_succeeds <- function(call_name, expr) {
   test_succeeds(paste(call_name, "call succeeds"), expr)
+}
+
+is_implementation <- function(name) {
+  identical(name, getOption("keras.implementation", default = "tensorflow"))
+}
+
+is_backend <- function(name) {
+  identical(backend()$backend(), name)
 }
 
 define_model <- function() {

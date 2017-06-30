@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,10 +80,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -121,7 +130,7 @@ this allows you to do real-time data augmentation on images on CPU in
 parallel to training your model on GPU.</p>
     
 
-    <pre class="usage"><span class='fu'>fit_generator</span>(<span class='no'>model</span>, <span class='no'>generator</span>, <span class='no'>steps_per_epoch</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+    <pre class="usage"><span class='fu'>fit_generator</span>(<span class='no'>object</span>, <span class='no'>generator</span>, <span class='no'>steps_per_epoch</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max_q_size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>workers</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>pickle_safe</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
@@ -130,16 +139,18 @@ parallel to training your model on GPU.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
-      <td><p>Keras model</p></td>
+      <th>object</th>
+      <td><p>Keras model object</p></td>
     </tr>
     <tr>
       <th>generator</th>
-      <td><p>a generator. The output of the generator must be either - a
-list (inputs, targets) - a list (inputs, targets, sample_weights). All
+      <td><p>A generator (e.g. like the one provided by
+<code><a href='flow_images_from_directory.html'>flow_images_from_directory()</a></code>. The output of the generator must be either</p><ul>
+<li><p>a list (inputs, targets) - a list (inputs, targets, sample_weights). All
 arrays should contain the same number of samples. The generator is expected
 to loop over its data indefinitely. An epoch finishes when
-<code>steps_per_epoch</code> samples have been seen by the model.</p></td>
+<code>steps_per_epoch</code> batches have been seen by the model.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>steps_per_epoch</th>
@@ -203,19 +214,26 @@ previous training run)</p></td>
 
     <p>Training history object (invisibly)</p>
     
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Note that the <code>fit_generator()</code> function is included for use with
+built-in generators like <code><a href='flow_images_from_directory.html'>flow_images_from_directory()</a></code>. It's currently not
+possible to implement generators in R. If you want to stream training data
+within R you should use the <code><a href='train_on_batch.html'>train_on_batch()</a></code> function.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
   <code><a href='evaluate_generator.html'>evaluate_generator</a></code>, <code><a href='evaluate.html'>evaluate</a></code>,
-  <code><a href='fit.Model.html'>fit.Model</a></code>, <code><a href='get_config.html'>get_config</a></code>,
+  <code><a href='fit.html'>fit</a></code>, <code><a href='get_config.html'>get_config</a></code>,
   <code><a href='get_layer.html'>get_layer</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
   <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='pop_layer.html'>pop_layer</a></code>,
-  <code><a href='predict.tensorflow.keras.engine.training.Model.html'>predict.tensorflow.keras.engine.training.Model</a></code>,
+  <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
   <code><a href='predict_generator.html'>predict_generator</a></code>,
   <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
   <code><a href='predict_proba.html'>predict_proba</a></code>,
-  <code><a href='summary.tensorflow.keras.engine.training.Model.html'>summary.tensorflow.keras.engine.training.Model</a></code>,
+  <code><a href='summary.keras.engine.training.Model.html'>summary.keras.engine.training.Model</a></code>,
   <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
     
 
@@ -227,6 +245,8 @@ previous training run)</p></td>
       
       <li><a href="#value">Value</a></li>
 
+      <li><a href="#note">Note</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 
@@ -235,7 +255,7 @@ previous training run)</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

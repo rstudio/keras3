@@ -4,12 +4,12 @@
 \alias{layer_masking}
 \title{Masks a sequence by using a mask value to skip timesteps.}
 \usage{
-layer_masking(x, mask_value = 0, input_shape = NULL,
+layer_masking(object, mask_value = 0, input_shape = NULL,
   batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
   name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{mask_value}{float, mask value}
 

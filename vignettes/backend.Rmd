@@ -1,0 +1,234 @@
+---
+title: "Keras Backend"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Keras Backend}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+library(keras)
+knitr::opts_chunk$set(comment = NA, eval = FALSE)
+```
+
+
+## Overview
+
+Keras is a model-level library, providing high-level building blocks for developing deep learning models. It does not handle itself low-level operations such as tensor products, convolutions and so on. Instead, it relies on a specialized, well-optimized tensor manipulation library to do so, serving as the "backend engine" of Keras. 
+
+The R interface to Keras uses TensorFlow™ as it's default tensor backend engine, however it's possible to use other backends if desired. At this time, Keras has three backend implementations available:
+
+- [TensorFlow](http://www.tensorflow.org/) is an open-source symbolic tensor manipulation framework developed by Google, Inc.
+
+- [Theano](http://deeplearning.net/software/theano/) is an open-source symbolic tensor manipulation framework developed by LISA/MILA Lab at Université de Montréal.
+
+- [CNTK](https://www.microsoft.com/en-us/cognitive-toolkit/) is an open-source, commercial-grade toolkit for deep learning developed by Microsoft.
+
+## Selecting a Backend
+
+If you want to use Keras with TensorFlow then you should install it using the `install_tensorflow()` function. After a successful installation no further action or configuration is necessary since Keras will use TensorFlow by default.
+
+If you want to use another backend (e.g. "theano" or "cntk") then you should follow the [installation instructions](https://keras.io/#installation) on the Keras website for the Keras Python package and the requisite backend. Then, to select an alternate backend, set the `KERAS_BACKEND` environment variable before loading the keras R package. For example:
+
+```{r}
+Sys.setenv(KERAS_BACKEND = "theano")
+library(keras)
+```
+
+### Environment Variables
+
+If you want to use a backend provided by the keras Python package you typically need only to install the package and the backend, then set the `KERAS_BACKEND` environment variable as described above.
+
+If you need to customize things further there are several environment variables that affect the version of Keras used:
+
+| Variable           | Description 
+| ------------- | ------------------------------------------------------------------------- | 
+| `KERAS_IMPLEMENTATION` | Keras specifies an API that can be implemented by multiple providers. By default, the Keras R package uses the implementation embedded within TensorFlow ("tensorflow"). The Keras Python package ("keras") provides another implementation. You can specify either of these values, or another Python package entirely as the implementation. |  
+| `KERAS_BACKEND`        | The "tensorflow" implementation of Keras supports only TensorFlow as a backend engine However, the "keras" implementation supports the "tensorflow", "keras", and "cntk" backends. Note that if you specify a value for `KERAS_BACKEND` and do not specify one for `KERAS_IMPLEMENTATION` then the implementation will be automatically set to "keras".   |  
+| `KERAS_PYTHON`         | The Keras R package will automatically scan installed versions of Python (and virtual/conda environments) to find the one that includes the selected implementation of Keras. If this scanning doesn't find the right version or you want to override its behavior, you can set the `KERAS_PYTHON` environment variable to the location of the Python binary you want to use.  |
+
+Note that if you want to use TensorFlow as the backend engine you wouldn't need to set any of these variables, as it will be used automatically by default.
+
+## Accessing the Backend in Code
+
+If you want the Keras modules you write to be compatible with all available backends, you have to write them via the abstract Keras backend API. You can obtain a reference to the TensorFlow backend by calling the `backend()` function:
+
+```{r}
+library(keras)
+K <- backend()
+```
+
+The code below instantiates an input placeholder. It's equivalent to `tf$placeholder()`:
+
+```{r}
+input <- K$placeholder(shape = list(2L, 4L, 5L))
+# also works:
+input <-  K$placeholder(shape = list(NULL, 4L, 5L))
+# also works:
+input <- K$placeholder(ndim = 3L)
+```
+
+The code below instantiates a shared variable. It's equivalent to `tf$Variable()`:
+
+```{r}
+val <- array(runif(60), dim = c(3L, 4L, 5L))
+var <- K$variable(value = val)
+
+# all-zeros variable:
+var <- K$zeros(shape = list(3L, 4L, 5L))
+# all-ones:
+var <- K$ones(shape = list(3L, 4L, 5L))
+```
+
+Note that the examples above all pass integer values explicitly (e.g. `5L`). This is because unlike the high level R functions in the Keras package the backend APIs are all strongly typed (i.e. float values are not automatically converted to integers).
+
+## Backend Functions
+
+Name                                                                                           Description                                                                 
+---------------------------------------------------------------------------------------------  ----------------------------------------------------------------------------
+[abs](https://keras.io/backend/#abs)                                                           Element-wise absolute value.                                                
+[all](https://keras.io/backend/#all)                                                           Bitwise reduction (logical AND).                                            
+[any](https://keras.io/backend/#any)                                                           Bitwise reduction (logical OR).                                             
+[arange](https://keras.io/backend/#arange)                                                     Creates a 1D tensor containing a sequence of integers.                      
+[argmax](https://keras.io/backend/#argmax)                                                     Returns the index of the maximum value along an axis.                       
+[argmin](https://keras.io/backend/#argmin)                                                     Returns the index of the minimum value along an axis.                       
+[backend](https://keras.io/backend/#backend)                                                   Publicly accessible method for determining the current backend.             
+[batch_dot](https://keras.io/backend/#batch_dot)                                               Batchwise dot product.                                                      
+[batch_flatten](https://keras.io/backend/#batch_flatten)                                       Turn a nD tensor into a 2D tensor with same 0th dimension.                  
+[batch_get_value](https://keras.io/backend/#batch_get_value)                                   Returns the value of more than one tensor variable.                         
+[batch_normalization](https://keras.io/backend/#batch_normalization)                           Applies batch normalization on x given mean, var, beta and gamma.           
+[batch_set_value](https://keras.io/backend/#batch_set_value)                                   Sets the values of many tensor variables at once.                           
+[bias_add](https://keras.io/backend/#bias_add)                                                 Adds a bias vector to a tensor.                                             
+[binary_crossentropy](https://keras.io/backend/#binary_crossentropy)                           Binary crossentropy between an output tensor and a target tensor.           
+[cast](https://keras.io/backend/#cast)                                                         Casts a tensor to a different dtype and returns it.                         
+[cast_to_floatx](https://keras.io/backend/#cast_to_floatx)                                     Cast a Numpy array to the default Keras float type.                         
+[categorical_crossentropy](https://keras.io/backend/#categorical_crossentropy)                 Categorical crossentropy between an output tensor and a target tensor.      
+[clear_session](https://keras.io/backend/#clear_session)                                       Destroys the current TF graph and creates a new one.                        
+[clip](https://keras.io/backend/#clip)                                                         Element-wise value clipping.                                                
+[concatenate](https://keras.io/backend/#concatenate)                                           Concatenates a list of tensors alongside the specified axis.                
+[constant](https://keras.io/backend/#constant)                                                 Creates a constant tensor.                                                  
+[conv1d](https://keras.io/backend/#conv1d)                                                     1D convolution.                                                             
+[conv2d](https://keras.io/backend/#conv2d)                                                     2D convolution.                                                             
+[conv2d_transpose](https://keras.io/backend/#conv2d_transpose)                                 2D deconvolution (i.e.                                                      
+[conv3d](https://keras.io/backend/#conv3d)                                                     3D convolution.                                                             
+[cos](https://keras.io/backend/#cos)                                                           Computes cos of x element-wise.                                             
+[count_params](https://keras.io/backend/#count_params)                                         Returns the number of scalars in a Keras variable.                          
+[ctc_batch_cost](https://keras.io/backend/#ctc_batch_cost)                                     Runs CTC loss algorithm on each batch element.                              
+[ctc_decode](https://keras.io/backend/#ctc_decode)                                             Decodes the output of a softmax.                                            
+[ctc_label_dense_to_sparse](https://keras.io/backend/#ctc_label_dense_to_sparse)               Converts CTC labels from dense to sparse.                                   
+[cumprod](https://keras.io/backend/#cumprod)                                                   Cumulative product of the values in a tensor, alongside the specified axis. 
+[cumsum](https://keras.io/backend/#cumsum)                                                     Cumulative sum of the values in a tensor, alongside the specified axis.     
+[dot](https://keras.io/backend/#dot)                                                           Multiplies 2 tensors (and/or variables) and returns a *tensor*.             
+[dropout](https://keras.io/backend/#dropout)                                                   Sets entries in `x` to zero at random, while scaling the entire tensor.     
+[dtype](https://keras.io/backend/#dtype)                                                       Returns the dtype of a Keras tensor or variable, as a string.               
+[elu](https://keras.io/backend/#elu)                                                           Exponential linear unit.                                                    
+[epsilon](https://keras.io/backend/#epsilon)                                                   Returns the value of the fuzz factor used in numeric expressions.           
+[equal](https://keras.io/backend/#equal)                                                       Element-wise equality between two tensors.                                  
+[eval](https://keras.io/backend/#eval)                                                         Evaluates the value of a variable.                                          
+[exp](https://keras.io/backend/#exp)                                                           Element-wise exponential.                                                   
+[expand_dims](https://keras.io/backend/#expand_dims)                                           Adds a 1-sized dimension at index "axis".                                   
+[eye](https://keras.io/backend/#eye)                                                           Instantiate an identity matrix and returns it.                              
+[flatten](https://keras.io/backend/#flatten)                                                   Flatten a tensor.                                                           
+[floatx](https://keras.io/backend/#floatx)                                                     Returns the default float type, as a string.                                
+[foldl](https://keras.io/backend/#foldl)                                                       Reduce elems using fn to combine them from left to right.                   
+[foldr](https://keras.io/backend/#foldr)                                                       Reduce elems using fn to combine them from right to left.                   
+[gather](https://keras.io/backend/#gather)                                                     Retrieves the elements of indices `indices` in the tensor `reference`.      
+[get_session](https://keras.io/backend/#get_session)                                           Returns the TF session to be used by the backend.                           
+[get_uid](https://keras.io/backend/#get_uid)                                                   Associates a string prefix with an integer counter in a TensorFlow graph.   
+[get_value](https://keras.io/backend/#get_value)                                               Returns the value of a variable.                                            
+[gradients](https://keras.io/backend/#gradients)                                               Returns the gradients of `variables` w.r.t. `loss`.                         
+[greater](https://keras.io/backend/#greater)                                                   Element-wise truth value of (x > y).                                        
+[greater_equal](https://keras.io/backend/#greater_equal)                                       Element-wise truth value of (x >= y).                                       
+[hard_sigmoid](https://keras.io/backend/#hard_sigmoid)                                         Segment-wise linear approximation of sigmoid.                               
+[identity](https://keras.io/backend/#identity)                                                 Returns a tensor with the same content as the input tensor.                 
+[image_data_format](https://keras.io/backend/#image_data_format)                               Returns the default image data format convention.                           
+[in_test_phase](https://keras.io/backend/#in_test_phase)                                       Selects `x` in test phase, and `alt` otherwise.                             
+[in_top_k](https://keras.io/backend/#in_top_k)                                                 Returns whether the `targets` are in the top `k` `predictions`.             
+[in_train_phase](https://keras.io/backend/#in_train_phase)                                     Selects `x` in train phase, and `alt` otherwise.                            
+[int_shape](https://keras.io/backend/#int_shape)                                               Returns the shape tensor or variable as a list of int or NULL entries.      
+[is_sparse](https://keras.io/backend/#is_sparse)                                               Returns whether a tensor is a sparse tensor.                                
+[l2_normalize](https://keras.io/backend/#l2_normalize)                                         Normalizes a tensor wrt the L2 norm alongside the specified axis.           
+[learning_phase](https://keras.io/backend/#learning_phase)                                     Returns the learning phase flag.                                            
+[less](https://keras.io/backend/#less)                                                         Element-wise truth value of (x < y).                                        
+[less_equal](https://keras.io/backend/#less_equal)                                             Element-wise truth value of (x <= y).                                       
+[log](https://keras.io/backend/#log)                                                           Element-wise log.                                                           
+[logsumexp](https://keras.io/backend/#logsumexp)                                               Computes log(sum(exp(elements across dimensions of a tensor))).             
+[manual_variable_initialization](https://keras.io/backend/#manual_variable_initialization)     Sets the manual variable initialization flag.                               
+[map_fn](https://keras.io/backend/#map_fn)                                                     Map the function fn over the elements elems and return the outputs.         
+[max](https://keras.io/backend/#max)                                                           Maximum value in a tensor.                                                  
+[maximum](https://keras.io/backend/#maximum)                                                   Element-wise maximum of two tensors.                                        
+[mean](https://keras.io/backend/#mean)                                                         Mean of a tensor, alongside the specified axis.                             
+[min](https://keras.io/backend/#min)                                                           Minimum value in a tensor.                                                  
+[minimum](https://keras.io/backend/#minimum)                                                   Element-wise minimum of two tensors.                                        
+[moving_average_update](https://keras.io/backend/#moving_average_update)                       Compute the moving average of a variable.                                   
+[name_scope](https://keras.io/backend/#name_scope)                                             Returns a context manager for use when defining a Python op.                
+[ndim](https://keras.io/backend/#ndim)                                                         Returns the number of axes in a tensor, as an integer.                      
+[normalize_batch_in_training](https://keras.io/backend/#normalize_batch_in_training)           Computes mean and std for batch then apply batch_normalization on batch.    
+[not_equal](https://keras.io/backend/#not_equal)                                               Element-wise inequality between two tensors.                                
+[one_hot](https://keras.io/backend/#one_hot)                                                   Computes the one-hot representation of an integer tensor.                   
+[ones](https://keras.io/backend/#ones)                                                         Instantiates an all-ones tensor variable and returns it.                    
+[ones_like](https://keras.io/backend/#ones_like)                                               Instantiates an all-ones variable of the same shape as another tensor.      
+[permute_dimensions](https://keras.io/backend/#permute_dimensions)                             Permutes axes in a tensor.                                                  
+[placeholder](https://keras.io/backend/#placeholder)                                           Instantiates a placeholder tensor and returns it.                           
+[pool2d](https://keras.io/backend/#pool2d)                                                     2D Pooling.                                                                 
+[pool3d](https://keras.io/backend/#pool3d)                                                     3D Pooling.                                                                 
+[pow](https://keras.io/backend/#pow)                                                           Element-wise exponentiation.                                                
+[print_tensor](https://keras.io/backend/#print_tensor)                                         Prints `message` and the tensor value when evaluated.                       
+[prod](https://keras.io/backend/#prod)                                                         Multiplies the values in a tensor, alongside the specified axis.            
+[py_all](https://keras.io/backend/#py_all)                                                     all(iterable) -> bool                                                       
+[py_sum](https://keras.io/backend/#py_sum)                                                     sum(sequence[, start]) -> value                                             
+[random_binomial](https://keras.io/backend/#random_binomial)                                   Returns a tensor with random binomial distribution of values.               
+[random_normal](https://keras.io/backend/#random_normal)                                       Returns a tensor with normal distribution of values.                        
+[random_normal_variable](https://keras.io/backend/#random_normal_variable)                     Instantiates a variable with values drawn from a normal distribution.       
+[random_uniform](https://keras.io/backend/#random_uniform)                                     Returns a tensor with uniform distribution of values.                       
+[random_uniform_variable](https://keras.io/backend/#random_uniform_variable)                   Instantiates a variable with values drawn from a uniform distribution.      
+[relu](https://keras.io/backend/#relu)                                                         Rectified linear unit.                                                      
+[repeat_elements](https://keras.io/backend/#repeat_elements)                                   Repeats the elements of a tensor along an axis, like `np.repeat`.           
+[reset_uids](https://keras.io/backend/#reset_uids)                                                                                                                         
+[reshape](https://keras.io/backend/#reshape)                                                   Reshapes a tensor to the specified shape.                                   
+[resize_images](https://keras.io/backend/#resize_images)                                       Resizes the images contained in a 4D tensor.                                
+[resize_volumes](https://keras.io/backend/#resize_volumes)                                     Resizes the volume contained in a 5D tensor.                                
+[reverse](https://keras.io/backend/#reverse)                                                   Reverse a tensor along the specified axes.                                  
+[rnn](https://keras.io/backend/#rnn)                                                           Iterates over the time dimension of a tensor.                               
+[round](https://keras.io/backend/#round)                                                       Element-wise rounding to the closest integer.                               
+[separable_conv2d](https://keras.io/backend/#separable_conv2d)                                 2D convolution with separable filters.                                      
+[set_epsilon](https://keras.io/backend/#set_epsilon)                                           Sets the value of the fuzz factor used in numeric expressions.              
+[set_floatx](https://keras.io/backend/#set_floatx)                                             Sets the default float type.                                                
+[set_image_data_format](https://keras.io/backend/#set_image_data_format)                       Sets the value of the image data format convention.                         
+[set_learning_phase](https://keras.io/backend/#set_learning_phase)                             Sets the learning phase to a fixed value.                                   
+[set_session](https://keras.io/backend/#set_session)                                           Sets the global TensorFlow session.                                         
+[set_value](https://keras.io/backend/#set_value)                                               Sets the value of a variable, from a Numpy array.                           
+[shape](https://keras.io/backend/#shape)                                                       Returns the symbolic shape of a tensor or variable.                         
+[sigmoid](https://keras.io/backend/#sigmoid)                                                   Element-wise sigmoid.                                                       
+[sign](https://keras.io/backend/#sign)                                                         Element-wise sign.                                                          
+[sin](https://keras.io/backend/#sin)                                                           Computes sin of x element-wise.                                             
+[softmax](https://keras.io/backend/#softmax)                                                   Softmax of a tensor.                                                        
+[softplus](https://keras.io/backend/#softplus)                                                 Softplus of a tensor.                                                       
+[softsign](https://keras.io/backend/#softsign)                                                 Softsign of a tensor.                                                       
+[sparse_categorical_crossentropy](https://keras.io/backend/#sparse_categorical_crossentropy)   Categorical crossentropy with integer targets.                              
+[spatial_2d_padding](https://keras.io/backend/#spatial_2d_padding)                             Pads the 2nd and 3rd dimensions of a 4D tensor.                             
+[spatial_3d_padding](https://keras.io/backend/#spatial_3d_padding)                             Pads 5D tensor with zeros along the depth, height, width dimensions.        
+[sqrt](https://keras.io/backend/#sqrt)                                                         Element-wise square root.                                                   
+[square](https://keras.io/backend/#square)                                                     Element-wise square.                                                        
+[squeeze](https://keras.io/backend/#squeeze)                                                   Removes a 1-dimension from the tensor at index "axis".                      
+[stack](https://keras.io/backend/#stack)                                                       Stacks a list of rank `R` tensors into a rank `R+1` tensor.                 
+[std](https://keras.io/backend/#std)                                                           Standard deviation of a tensor, alongside the specified axis.               
+[stop_gradient](https://keras.io/backend/#stop_gradient)                                       Returns `variables` but with zero gradient w.r.t. every other variable.     
+[sum](https://keras.io/backend/#sum)                                                           Sum of the values in a tensor, alongside the specified axis.                
+[switch](https://keras.io/backend/#switch)                                                     Switches between two operations depending on a scalar value.                
+[tanh](https://keras.io/backend/#tanh)                                                         Element-wise tanh.                                                          
+[temporal_padding](https://keras.io/backend/#temporal_padding)                                 Pads the middle dimension of a 3D tensor.                                   
+[tile](https://keras.io/backend/#tile)                                                         Creates a tensor by tiling `x` by `n`.                                      
+[to_dense](https://keras.io/backend/#to_dense)                                                 Converts a sparse tensor into a dense tensor and returns it.                
+[transpose](https://keras.io/backend/#transpose)                                               Transposes a tensor and returns it.                                         
+[truncated_normal](https://keras.io/backend/#truncated_normal)                                 Returns a tensor with truncated random normal distribution of values.       
+[update](https://keras.io/backend/#update)                                                                                                                                 
+[update_add](https://keras.io/backend/#update_add)                                             Update the value of `x` by adding `increment`.                              
+[update_sub](https://keras.io/backend/#update_sub)                                             Update the value of `x` by subtracting `decrement`.                         
+[var](https://keras.io/backend/#var)                                                           Variance of a tensor, alongside the specified axis.                         
+[variable](https://keras.io/backend/#variable)                                                 Instantiates a variable and returns it.                                     
+[zeros](https://keras.io/backend/#zeros)                                                       Instantiates an all-zeros variable and returns it.                          
+[zeros_like](https://keras.io/backend/#zeros_like)                                             Instantiates an all-zeros variable of the same shape as another tensor.     
+
+

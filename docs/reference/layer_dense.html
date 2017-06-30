@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,10 +80,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -124,7 +133,7 @@ is <code>TRUE</code>). Note: if the input to the layer has a rank greater than 2
 it is flattened prior to the initial dot product with <code>kernel</code>.</p>
     
 
-    <pre class="usage"><span class='fu'>layer_dense</span>(<span class='no'>x</span>, <span class='no'>units</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+    <pre class="usage"><span class='fu'>layer_dense</span>(<span class='no'>object</span>, <span class='no'>units</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>kernel_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>, <span class='kw'>bias_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
   <span class='kw'>kernel_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bias_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>activity_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>kernel_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -136,8 +145,8 @@ it is flattened prior to the initial dot product with <code>kernel</code>.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Model or layer</p></td>
+      <th>object</th>
+      <td><p>Model or layer object</p></td>
     </tr>
     <tr>
       <th>units</th>
@@ -257,7 +266,7 @@ would have shape <code>(batch_size, unit)</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

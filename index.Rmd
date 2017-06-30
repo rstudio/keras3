@@ -4,6 +4,8 @@ title: "R interface to Keras"
 
 ```{r setup, include=FALSE}
 library(keras)
+knitr::opts_chunk$set(eval = FALSE)
+
 
 # generate dummy training data
 x_train <- matrix(rexp(1000*100), nrow = 1000, ncol = 100)
@@ -14,57 +16,127 @@ x_test <- matrix(rexp(10*100), nrow = 10, ncol = 100)
 y_test <- matrix(round(runif(10*10, min = 0, max = 9)), nrow = 10, ncol = 10)
 ```
 
-
 # R interface to Keras
 
-[Keras](https://keras.io/) is a high-level neural networks API developed with a focus on enabling fast experimentation. *Being able to go from idea to result with the least possible delay is key to doing good research.* Use Keras if you need a deep learning library that:
+[Keras](https://keras.io/) is a high-level neural networks API developed with a focus on enabling fast experimentation. *Being able to go from idea to result with the least possible delay is key to doing good research.* Keras has the following key features:
 
-- Allows for easy and fast prototyping (through user friendliness, modularity, and extensibility).
-- Supports both convolutional networks and recurrent networks, as well as combinations of the two.
-- Runs seamlessly on CPU and GPU.
+- Allows the same code to run on CPU or on GPU, seamlessly.
+
+- User-friendly API which makes it easy to quickly prototype deep learning models.
+
+- Built-in support for convolutional networks (for computer vision), recurrent networks (for sequence processing), and any combination of both.
+
+- Supports arbitrary network architectures: multi-input or multi-output models, layer sharing, model sharing, etc. This means that Keras is appropriate for building essentially any deep learning model, from a memory network to a neural Turing machine.
+
+This website provides documentation for the R interface to Keras. See the main Keras website at <https://keras.io> for additional information on the project.
+
+## Installation
+
+The R interface to Keras uses [TensorFlow™](https://www.tensorflow.org/) as it's default tensor backend engine. To get started you should therefore install both the keras R package and the TensorFlow engine.
+
+First, install the keras R package from GitHub as follows:
+
+```{r, eval=FALSE}
+devtools::install_github("rstudio/keras")
+```
+
+Then, use the `install_tensorflow()` function to install TensorFlow:
+
+```{r, eval=FALSE}
+library(keras)
+install_tensorflow()
+```
+
+This will provide you with a default installation of TensorFlow suitable for use with the keras R package. See the [article on TensorFlow installation](https://tensorflow.rstudio.com/installation.html) to learn about more advanced options, including installing a version of TensorFlow that takes advantage of Nvidia GPUs if you have the correct CUDA libraries installed.
 
 ## Getting started: 30 seconds to Keras
 
 The core data structure of Keras is a **model**, a way to organize layers. The simplest type of model is the Sequential model, a linear stack of layers. For more complex architectures, you should use the Keras functional API, which allows to build arbitrary graphs of layers.
 
-Here is the Sequential model:
+Define a sequential model:
 
 ```{r}
 library(keras)
-
 model <- keras_model_sequential() 
-
 model %>% 
-  layer_dense(units = 64, input_shape = 100) %>% 
-  layer_activation(activation = 'relu') %>% 
-  layer_dense(units = 10) %>% 
-  layer_activation(activation = 'softmax') %>% 
-  compile(
-    loss = 'categorical_crossentropy',
-    optimizer = optimizer_sgd(lr = 0.02),
-    metrics = c('accuracy')
-  )
+  layer_dense(units = 512, activation = 'relu', input_shape = c(784)) %>% 
+  layer_dropout(rate = 0.2) %>% 
+  layer_dense(units = 512, activation = 'relu') %>%
+  layer_dropout(rate = 0.2) %>%
+  layer_dense(units = 10, activation = 'softmax')
+```
+
+Print a summary of the model's structure using the `summary()` function:
+
+```{r}
+summary(model)
+```
+```
+Model
+_____________________________________________________________________________________
+Layer (type)                          Output Shape                      Param #      
+=====================================================================================
+dense_4 (Dense)                       (None, 512)                       401920       
+_____________________________________________________________________________________
+dropout_3 (Dropout)                   (None, 512)                       0            
+_____________________________________________________________________________________
+dense_5 (Dense)                       (None, 512)                       262656       
+_____________________________________________________________________________________
+dropout_4 (Dropout)                   (None, 512)                       0            
+_____________________________________________________________________________________
+dense_6 (Dense)                       (None, 10)                        5130         
+=====================================================================================
+Total params: 669,706
+Trainable params: 669,706
+Non-trainable params: 0
+_____________________________________________________________________________________
+```
+
+Compile the model with appropriate loss function, optimizer, and metrics:
+
+```{r}
+model %>% compile(
+  loss = 'categorical_crossentropy',
+  optimizer = optimizer_sgd(lr = 0.02),
+  metrics = c('accuracy')
+)
 ```
 
 You can now iterate on your training data in batches (`x_train` and `y_train` are R matrices):
 
 ```{r, results='hide'}
-model %>% fit(x_train, y_train, epochs = 5, batch_size = 32)
+history <- model %>% fit(
+  x_train, y_train, 
+  epochs = 20, batch_size = 128, 
+  validation_split = 0.2
+)
 ```
 
-Evaluate your performance in one line:
+Plot loss and accuracy metrics from training:
+
+```{r}
+plot(history)
+```
+
+![](training_history_ggplot2.png){width=753 height=488 .r-plot}
+
+Evaluate your performance on test data:
 
 ```{r, results = 'hide'}
 loss_and_metrics <- model %>% evaluate(x_test, y_test, batch_size = 128)
 ```
 
-Or generate predictions on new data:
+Generate predictions on new data:
 
 ```{r, results = 'hide'}
 classes <- model %>% predict(x_test, batch_size = 128)
 ```
 
 Building a question answering system, an image classification model, a Neural Turing Machine, or any other model is just as fast. The ideas behind deep learning are simple, so why should their implementation be painful?
+
+
+
+## Learning More
 
 To learn more about Keras, you can check out these articles:
 
@@ -74,20 +146,13 @@ To learn more about Keras, you can check out these articles:
 
 - [Frequently Asked Questions](articles/faq.html)
 
+- [TensorBoard Visualizations](articles/tensorboard.html)
+
+- [Using Pre-Trained Models](articles/applications.html)
+
 The [examples](articles/examples) demonstrate more advanced models including transfer learning, variational auto-encoding, question-answering with memory networks, text generation with stacked LSTMs, etc.
 
 The [function reference](reference/index.html) includes detailed information on all of the functions available in the package.
-
-
-## Installation
-
-1. The R interface to Keras uses [TensorFlow](https://rstudio.github.io/tensorflow/) as it's underlying computation engine. Therefore, you need to install TensorFlow (version 1.1 or higher) before using the package. Instructions for installing TensorFlow are here: <https://www.tensorflow.org/install/>.
-
-2. Then, install the Keras R package from GitHub:
-
-    ```r
-    devtools::install_github("rstudio/keras")
-    ```
 
 ## Why this name, Keras?
 

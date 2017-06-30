@@ -65,9 +65,8 @@ constraint_unitnorm <- function(axis = 0) {
 #'       
 #' @export
 constraint_minmaxnorm <- function(min_value = 0.0, max_value = 1.0, rate = 1.0, axis = 0) {
-  if (py_has_attr(keras$constraints, "MinMaxNorm"))
-    keras$constraints$MinMaxNorm(min_value = min_value, max_value = max_value, rate = rate, axis = as.integer(axis))
-  else
-    stop("constraint_minmaxnorm not supported in this version of TensorFlow")
+  keras$constraints$MinMaxNorm(min_value = min_value, max_value = max_value, rate = rate, axis = as.integer(axis))
 }
+
+
 

@@ -4,10 +4,10 @@
 \alias{reset_states}
 \title{Reset the states for a layer}
 \usage{
-reset_states(layer)
+reset_states(object)
 }
 \arguments{
-\item{layer}{Model or layer}
+\item{object}{Model or layer object}
 }
 \description{
 Reset the states for a layer

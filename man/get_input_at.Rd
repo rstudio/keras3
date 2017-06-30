@@ -9,20 +9,20 @@
 \alias{get_output_mask_at}
 \title{Retrieve tensors for layers with multiple nodes}
 \usage{
-get_input_at(layer, node_index)
+get_input_at(object, node_index)
 
-get_output_at(layer, node_index)
+get_output_at(object, node_index)
 
-get_input_shape_at(layer, node_index)
+get_input_shape_at(object, node_index)
 
-get_output_shape_at(layer, node_index)
+get_output_shape_at(object, node_index)
 
-get_input_mask_at(layer, node_index)
+get_input_mask_at(object, node_index)
 
-get_output_mask_at(layer, node_index)
+get_output_mask_at(object, node_index)
 }
 \arguments{
-\item{layer}{Layer}
+\item{object}{Layer or model object}
 
 \item{node_index}{Integer, index of the node from which to retrieve the
 attribute. E.g. \code{node_index = 1} will correspond to the first time the

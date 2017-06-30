@@ -36,10 +36,10 @@
 #' - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
 #'   
 #' @export
-layer_embedding <- function(x, input_dim, output_dim, embeddings_initializer = "uniform", embeddings_regularizer = NULL, 
+layer_embedding <- function(object, input_dim, output_dim, embeddings_initializer = "uniform", embeddings_regularizer = NULL, 
                             activity_regularizer = NULL, embeddings_constraint = NULL, mask_zero = FALSE, input_length = NULL, 
                             batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$Embedding, x, list(
+  call_layer(keras$layers$Embedding, object, list(
     input_dim = as.integer(input_dim),
     output_dim = as.integer(output_dim),
     embeddings_initializer = embeddings_initializer,

@@ -21,14 +21,18 @@
 #' @export
 optimizer_sgd <- function(lr = 0.01, momentum = 0.0, decay = 0.0, nesterov = FALSE,
                           clipnorm = NULL, clipvalue = NULL) {
-  keras$optimizers$SGD(
+  
+  # compose args using list so that clipnorm and clipvalue are excluded
+  # from the call when they aren't sepcified
+  args <- list(
     lr = lr,
     momentum = momentum,
     decay = decay,
-    nesterov = nesterov,
-    clipnorm = clipnorm,
-    clipvalue = clipvalue
+    nesterov = nesterov
   )
+  args$clipnorm <- clipnorm
+  args$clipvalue <- clipvalue
+  do.call(keras$optimizers$SGD, args)
 }
 
 #' RMSProp optimizer
@@ -47,14 +51,17 @@ optimizer_sgd <- function(lr = 0.01, momentum = 0.0, decay = 0.0, nesterov = FAL
 #' @export
 optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = 1e-08, decay = 0.0,
                               clipnorm = NULL, clipvalue = NULL) {
-  keras$optimizers$RMSprop(
+  # compose args using list so that clipnorm and clipvalue are excluded
+  # from the call when they aren't sepcified
+  args <- list(
     lr = lr,
     rho = rho,
     epsilon = epsilon,
-    decay = decay,
-    clipnorm = clipnorm,
-    clipvalue = clipvalue
+    decay = decay
   )
+  args$clipnorm <- clipnorm
+  args$clipvalue <- clipvalue
+  do.call(keras$optimizers$RMSprop, args)
 }
 
 
@@ -74,13 +81,16 @@ optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = 1e-08, decay = 0.
 #' @export
 optimizer_adagrad <- function(lr = 0.01, epsilon = 1e-08, decay = 0.0,
                               clipnorm = NULL, clipvalue = NULL) {
-  keras$optimizers$Adagrad(
+  # compose args using list so that clipnorm and clipvalue are excluded
+  # from the call when they aren't sepcified
+  args <- list(
     lr = lr,
     epsilon = epsilon,
-    decay = decay,
-    clipnorm = clipnorm,
-    clipvalue = clipvalue
+    decay = decay
   )
+  args$clipnorm <- clipnorm
+  args$clipvalue <- clipvalue
+  do.call(keras$optimizers$Adagrad, args)
 }
 
 #' Adadelta optimizer.
@@ -99,14 +109,17 @@ optimizer_adagrad <- function(lr = 0.01, epsilon = 1e-08, decay = 0.0,
 #' @export
 optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = 1e-08, decay = 0.0,
                                clipnorm = NULL, clipvalue = NULL) {
-  keras$optimizers$Adadelta(
+  # compose args using list so that clipnorm and clipvalue are excluded
+  # from the call when they aren't sepcified
+  args <- list(
     lr = lr,
     rho = rho,
     epsilon = epsilon,
-    decay = decay,
-    clipnorm = normalize_clip(clipnorm),
-    clipvalue = normalize_clip(clipvalue)
+    decay = decay
   )
+  args$clipnorm <- clipnorm
+  args$clipvalue <- clipvalue
+  do.call(keras$optimizers$Adadelta, args)
 }
 
 #' Adam optimizer
@@ -127,15 +140,18 @@ optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = 1e-08, decay = 0.
 #' @export
 optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, decay = 0.0,
                            clipnorm = NULL, clipvalue = NULL) {
-  keras$optimizers$Adam(
+  # compose args using list so that clipnorm and clipvalue are excluded
+  # from the call when they aren't sepcified
+  args <- list(
     lr = lr,
     beta_1 = beta_1,
     beta_2 = beta_2,
     epsilon = epsilon,
-    decay = decay,
-    clipnorm = normalize_clip(clipnorm),
-    clipvalue = normalize_clip(clipvalue)
+    decay = decay
   )
+  args$clipnorm <- clipnorm
+  args$clipvalue <- clipvalue
+  do.call(keras$optimizers$Adam, args)
 }
 
 #' Adamax optimizer
@@ -150,15 +166,18 @@ optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1
 #' @export
 optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, decay = 0.0,
                              clipnorm = NULL, clipvalue = NULL) {
-  keras$optimizers$Adamax(
+  # compose args using list so that clipnorm and clipvalue are excluded
+  # from the call when they aren't sepcified
+  args <- list(
     lr = lr,
     beta_1 = beta_1,
     beta_2 = beta_2,
     epsilon = epsilon,
-    decay = decay,
-    clipnorm = normalize_clip(clipnorm),
-    clipvalue = normalize_clip(clipvalue)
+    decay = decay
   )
+  args$clipnorm <- clipnorm
+  args$clipvalue <- clipvalue
+  do.call(keras$optimizers$Adamax, args)
 }
 
 #' Nesterov Adam optimizer
@@ -183,22 +202,17 @@ optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon =
 #' @export
 optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, 
                             schedule_decay = 0.004, clipnorm = NULL, clipvalue = NULL) {
-  keras$optimizers$Nadam(
+  # compose args using list so that clipnorm and clipvalue are excluded
+  # from the call when they aren't sepcified
+  args <- list(
     lr = lr,
     beta_1 = beta_1,
     beta_2 = beta_2,
     epsilon = epsilon,
-    schedule_decay = schedule_decay,
-    clipnorm = normalize_clip(clipnorm),
-    clipvalue = normalize_clip(clipvalue)
+    schedule_decay = schedule_decay
   )
+  args$clipnorm <- clipnorm
+  args$clipvalue <- clipvalue
+  do.call(keras$optimizers$Nadam, args)
 }
 
-
-# normalize NULL clip value to 0 (a no-op)
-normalize_clip <- function(clip) {
-  if (is.null(clip))
-    0
-  else
-    clip
-}

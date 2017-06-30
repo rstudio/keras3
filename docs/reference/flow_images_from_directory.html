@@ -24,7 +24,8 @@ augmented/normalized data) — flow_images_from_directory • keras</title>
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -80,10 +81,18 @@ augmented/normalized data) — flow_images_from_directory • keras</title>
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -126,7 +135,7 @@ augmented/normalized data)</p>
   <span class='kw'>target_size</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>256</span>, <span class='fl'>256</span>), <span class='kw'>color_mode</span> <span class='kw'>=</span> <span class='st'>"rgb"</span>, <span class='kw'>classes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>class_mode</span> <span class='kw'>=</span> <span class='st'>"categorical"</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>save_to_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>save_prefix</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>save_format</span> <span class='kw'>=</span> <span class='st'>"jpeg"</span>, <span class='kw'>follow_links</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>save_format</span> <span class='kw'>=</span> <span class='st'>"png"</span>, <span class='kw'>follow_links</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -135,7 +144,7 @@ augmented/normalized data)</p>
       <th>directory</th>
       <td><p>path to the target directory. It should contain one
 subdirectory per class. Any PNG, JPG or BMP images inside each of the
-subdirectories directory tree will be included in the generator. See <a href = 'https://gist.github.com/fchollet/0830affa1f7f19fd47b06d4cf89ed44d'>thisscript</a>
+subdirectories directory tree will be included in the generator. See <a href='https://gist.github.com/fchollet/0830affa1f7f19fd47b06d4cf89ed44d'>thisscript</a>
 for more details.</p></td>
     </tr>
     <tr>
@@ -194,7 +203,7 @@ pictures (only relevant if <code>save_to_dir</code> is set).</p></td>
     <tr>
       <th>save_format</th>
       <td><p>one of "png", "jpeg" (only relevant if save_to_dir is
-set). Default: "jpeg".</p></td>
+set). Default: "png".</p></td>
     </tr>
     <tr>
       <th>follow_links</th>
@@ -214,7 +223,7 @@ array of corresponding labels. The generator loops indefinitely.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other image preprocessing: <code><a href='fit.tensorflow.keras.preprocessing.image.ImageDataGenerator.html'>fit.tensorflow.keras.preprocessing.image.ImageDataGenerator</a></code>,
+    <p>Other image preprocessing: <code><a href='fit_image_data_generator.html'>fit_image_data_generator</a></code>,
   <code><a href='flow_images_from_data.html'>flow_images_from_data</a></code>,
   <code><a href='image_load.html'>image_load</a></code>, <code><a href='image_to_array.html'>image_to_array</a></code></p>
     
@@ -237,7 +246,7 @@ array of corresponding labels. The generator loops indefinitely.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

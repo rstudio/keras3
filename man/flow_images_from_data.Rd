@@ -6,7 +6,7 @@
 \usage{
 flow_images_from_data(x, y = NULL, generator = image_data_generator(),
   batch_size = 32, shuffle = TRUE, seed = NULL, save_to_dir = NULL,
-  save_prefix = "", save_format = "jpeg")
+  save_prefix = "", save_format = "png")
 }
 \arguments{
 \item{x}{data. Should have rank 4. In case of grayscale data, the channels
@@ -31,7 +31,7 @@ generated (useful for visualizing what you are doing).}
 pictures (only relevant if \code{save_to_dir} is set).}
 
 \item{save_format}{one of "png", "jpeg" (only relevant if save_to_dir is
-set). Default: "jpeg".}
+set). Default: "png".}
 }
 \description{
 Generates batches of augmented/normalized data from image data and labels
@@ -45,7 +45,7 @@ array of corresponding labels. The generator loops indefinitely.
 }
 
 \seealso{
-Other image preprocessing: \code{\link{fit.tensorflow.keras.preprocessing.image.ImageDataGenerator}},
+Other image preprocessing: \code{\link{fit_image_data_generator}},
   \code{\link{flow_images_from_directory}},
   \code{\link{image_load}}, \code{\link{image_to_array}}
 }

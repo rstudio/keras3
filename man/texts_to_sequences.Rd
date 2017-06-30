@@ -16,7 +16,7 @@ Only top "num_words" most frequent words will be taken into account.
 Only words known by the tokenizer will be taken into account.
 }
 \seealso{
-Other text tokenization: \code{\link{fit.tensorflow.keras.preprocessing.text.Tokenizer}},
+Other text tokenization: \code{\link{fit_text_tokenizer}},
   \code{\link{sequences_to_matrix}},
   \code{\link{text_tokenizer}},
   \code{\link{texts_to_matrix}},

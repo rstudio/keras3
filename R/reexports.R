@@ -11,17 +11,35 @@
 NULL
 
 
+#' @importFrom reticulate use_python
 #' @export
 reticulate::use_python
 
+#' @importFrom reticulate use_virtualenv
 #' @export
 reticulate::use_virtualenv
 
+#' @importFrom reticulate use_condaenv
 #' @export
 reticulate::use_condaenv
 
+#' @importFrom tensorflow install_tensorflow
 #' @export
-reticulate::py_config
+tensorflow::install_tensorflow
+
+#' @importFrom tensorflow tensorboard
+#' @export
+tensorflow::tensorboard
+
+#' @importFrom tensorflow unique_log_dir
+#' @export
+tensorflow::unique_log_dir
+
+
+#' @importFrom tensorflow tf_config
+#' @export
+tensorflow::tf_config
+
 
 
 

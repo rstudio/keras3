@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,10 +80,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -133,7 +142,7 @@
 
     <p>The <code>logs</code> named list that callback methods take as argument will
 contain keys for quantities relevant to the current batch or epoch.</p>
-<p>Currently, the <code>fit()</code> method for sequential models will include the following quantities in the <code>logs</code> that
+<p>Currently, the <code><a href='fit.html'>fit()</a></code> method for sequential models will include the following quantities in the <code>logs</code> that
 it passes to its callbacks:</p><ul>
 <li><p><code>on_epoch_end</code>: logs include <code>acc</code> and <code>loss</code>, and optionally include <code>val_loss</code> (if validation is enabled in <code>fit</code>), and <code>val_acc</code> (if validation and accuracy monitoring are enabled).</p></li>
 <li><p><code>on_batch_begin</code>: logs include <code>size</code>, the number of samples in the current batch.</p></li>
@@ -164,7 +173,7 @@ it passes to its callbacks:</p><ul>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>keras</span>)
 
-<span class='no'>LossHistory</span> <span class='kw'>&lt;-</span> <span class='kw'>R6</span><span class='kw'>::</span><span class='fu'>R6Class</span>(<span class='st'>"LossHistory"</span>,
+<span class='no'>LossHistory</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>R6</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/R6/topics/R6Class'>R6Class</a></span>(<span class='st'>"LossHistory"</span>,
   <span class='kw'>inherit</span> <span class='kw'>=</span> <span class='no'>KerasCallback</span>,
 
   <span class='kw'>public</span> <span class='kw'>=</span> <span class='fu'>list</span>(
@@ -199,7 +208,7 @@ it passes to its callbacks:</p><ul>
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

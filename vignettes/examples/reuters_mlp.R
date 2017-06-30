@@ -25,15 +25,15 @@ tokenizer <- text_tokenizer(num_words = max_words)
 x_train <- sequences_to_matrix(tokenizer, x_train, mode = 'binary')
 x_test <- sequences_to_matrix(tokenizer, x_test, mode = 'binary')
 
-cat('x_train shape:', dim(x_train))
-cat('x_test shape:', dim(x_test))
+cat('x_train shape:', dim(x_train), '\n')
+cat('x_test shape:', dim(x_test), '\n')
 
 cat('Convert class vector to binary class matrix',
     '(for use with categorical_crossentropy)\n')
 y_train <- to_categorical(y_train, num_classes)
 y_test <- to_categorical(y_test, num_classes)
-cat('y_train shape:', dim(y_train))
-cat('y_test shape:', dim(y_test))
+cat('y_train shape:', dim(y_train), '\n')
+cat('y_test shape:', dim(y_test), '\n')
 
 cat('Building model...\n')
 model <- keras_model_sequential()

@@ -5,12 +5,12 @@
 \alias{model_from_yaml}
 \title{Model configuration as YAML}
 \usage{
-model_to_yaml(model)
+model_to_yaml(object)
 
 model_from_yaml(yaml, custom_objects = NULL)
 }
 \arguments{
-\item{model}{Model to save}
+\item{object}{Model object to save}
 
 \item{yaml}{YAML with model configuration}
 
@@ -24,6 +24,6 @@ does not include the weights, only the architecture.
 \seealso{
 Other model persistence: \code{\link{get_weights}},
   \code{\link{model_to_json}},
-  \code{\link{save_model_weights}},
-  \code{\link{save_model}}
+  \code{\link{save_model_hdf5}},
+  \code{\link{save_model_weights_hdf5}}
 }

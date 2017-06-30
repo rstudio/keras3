@@ -4,12 +4,12 @@
 \alias{layer_activation}
 \title{Apply an activation function to an output.}
 \usage{
-layer_activation(x, activation, input_shape = NULL,
+layer_activation(object, activation, input_shape = NULL,
   batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
   name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{activation}{Name of activation function to use. If you don't specify
 anything, no activation is applied (ie. "linear" activation: a(x) = x).}

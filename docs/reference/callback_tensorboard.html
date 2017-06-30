@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,10 +80,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -121,7 +130,7 @@ dynamic graphs of your training and test metrics, as well as activation
 histograms for the different layers in your model.</p>
     
 
-    <pre class="usage"><span class='fu'>callback_tensorboard</span>(<span class='kw'>log_dir</span> <span class='kw'>=</span> <span class='st'>"./logs"</span>, <span class='kw'>histogram_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+    <pre class="usage"><span class='fu'>callback_tensorboard</span>(<span class='kw'>log_dir</span> <span class='kw'>=</span> <span class='st'>"logs"</span>, <span class='kw'>histogram_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>write_graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>write_images</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>embeddings_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>embeddings_layer_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>embeddings_metadata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
@@ -163,7 +172,7 @@ layers will be saved.</p></td>
       <th>embeddings_metadata</th>
       <td><p>a named list which maps layer name to a file name in
 which metadata for this embedding layer is saved. See the
-<a href = 'https://www.tensorflow.org/how_tos/embedding_viz/#metadata_optional'>details</a>
+<a href='https://www.tensorflow.org/how_tos/embedding_viz/#metadata_optional'>details</a>
 about the metadata file format. In case if the same metadata file is used
 for all embedding layers, string can be passed.</p></td>
     </tr>
@@ -172,11 +181,11 @@ for all embedding layers, string can be passed.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>TensorBoard is a visualization tool provided with TensorFlow.</p>
-<p>If you have installed TensorFlow with pip, you should be able to launch
-TensorBoard from the command line:</p><pre>--logdir=/full_path_to_your_logs 
+<p>If you have installed TensorFlow with pip, you can launch TensorBoard
+using the <code><a href='http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard'>tensorboard()</a></code> function:</p><pre>tensorboard(log_dir = "/full_path_to_your_logs") 
 </pre>
     <p>You can find more information about TensorBoard
-<a href = 'https://www.tensorflow.org/get_started/summaries_and_tensorboard'>here</a>.</p>
+<a href='https://www.tensorflow.org/get_started/summaries_and_tensorboard'>here</a>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -206,7 +215,7 @@ TensorBoard from the command line:</p><pre>--logdir=/full_path_to_your_logs
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

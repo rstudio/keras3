@@ -20,10 +20,10 @@
 #' @family noise layers   
 #'   
 #' @export
-layer_gaussian_noise <- function(x, stddev, input_shape = NULL,
+layer_gaussian_noise <- function(object, stddev, input_shape = NULL,
                                  batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                                  name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$GaussianNoise, x, list(
+  call_layer(keras$layers$GaussianNoise, object, list(
     stddev = stddev,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -56,10 +56,10 @@ layer_gaussian_noise <- function(x, stddev, input_shape = NULL,
 #' @family noise layers   
 #'   
 #' @export
-layer_gaussian_dropout <- function(x, rate, input_shape = NULL,
+layer_gaussian_dropout <- function(object, rate, input_shape = NULL,
                                    batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                                    name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$GaussianDropout, x, list(
+  call_layer(keras$layers$GaussianDropout, object, list(
     rate = rate,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),

@@ -11,8 +11,7 @@ Reference to Keras backend python module.
 }
 \description{
 Obtain a reference to the \code{keras.backend} Python module used to implement
-tensor operations (this will always be the TensorFlow backend in the current
-implementation, which only works with TensorFlow).
+tensor operations.
 }
 \note{
 See the documentation here \url{https://keras.io/backend/} for

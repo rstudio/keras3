@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,10 +80,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -119,15 +128,15 @@
     <p>Configure a Keras model for training</p>
     
 
-    <pre class="usage"><span class='fu'>compile</span>(<span class='no'>model</span>, <span class='no'>optimizer</span>, <span class='no'>loss</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>loss_weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sample_weight_mode</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>compile</span>(<span class='no'>object</span>, <span class='no'>optimizer</span>, <span class='no'>loss</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>loss_weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sample_weight_mode</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
-      <td><p>Model to compile.</p></td>
+      <th>object</th>
+      <td><p>Model object to compile.</p></td>
     </tr>
     <tr>
       <th>optimizer</th>
@@ -137,7 +146,8 @@
       <th>loss</th>
       <td><p>Name of objective function or objective function. If the model
 has multiple outputs, you can use a different loss on each output by
-passing a dictionary or a list of objectives.</p></td>
+passing a dictionary or a list of objectives. The loss value that will be
+minimized by the model will then be the sum of all individual losses.</p></td>
     </tr>
     <tr>
       <th>metrics</th>
@@ -148,7 +158,10 @@ also pass a named list such as <code>metrics=list(output_a = 'accuracy')</code>.
     </tr>
     <tr>
       <th>loss_weights</th>
-      <td><p>Loss weights</p></td>
+      <td><p>Optional list specifying scalar coefficients to weight
+the loss contributions of different model outputs. The loss value that will
+be minimized by the model will then be the <em>weighted sum</em> of all indvidual
+losses, weighted by the <code>loss_weights</code> coefficients.</p></td>
     </tr>
     <tr>
       <th>sample_weight_mode</th>
@@ -157,21 +170,25 @@ also pass a named list such as <code>metrics=list(output_a = 'accuracy')</code>.
 weights (1D). If the model has multiple outputs, you can use a different
 <code>sample_weight_mode</code> on each output by passing a list of modes.</p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional named arguments passed to <code>tf$Session$run</code>.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other model functions: <code><a href='evaluate_generator.html'>evaluate_generator</a></code>,
-  <code><a href='evaluate.html'>evaluate</a></code>, <code><a href='fit.Model.html'>fit.Model</a></code>,
-  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='get_config.html'>get_config</a></code>,
+  <code><a href='evaluate.html'>evaluate</a></code>, <code><a href='fit_generator.html'>fit_generator</a></code>,
+  <code><a href='fit.html'>fit</a></code>, <code><a href='get_config.html'>get_config</a></code>,
   <code><a href='get_layer.html'>get_layer</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
   <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='pop_layer.html'>pop_layer</a></code>,
-  <code><a href='predict.tensorflow.keras.engine.training.Model.html'>predict.tensorflow.keras.engine.training.Model</a></code>,
+  <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
   <code><a href='predict_generator.html'>predict_generator</a></code>,
   <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
   <code><a href='predict_proba.html'>predict_proba</a></code>,
-  <code><a href='summary.tensorflow.keras.engine.training.Model.html'>summary.tensorflow.keras.engine.training.Model</a></code>,
+  <code><a href='summary.keras.engine.training.Model.html'>summary.keras.engine.training.Model</a></code>,
   <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
     
 
@@ -189,7 +206,7 @@ weights (1D). If the model has multiple outputs, you can use a different
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

@@ -30,8 +30,8 @@ callback_progbar_logger <- function(count_mode = "samples") {
 #' @param save_best_only if `save_best_only=TRUE`, the latest best model 
 #'   according to the quantity monitored will not be overwritten.
 #' @param save_weights_only  if `TRUE`, then only the model's weights will be 
-#'   saved (`save_model_weights(filepath)`), else the full model is saved 
-#'   (`save_model(filepath)`).
+#'   saved (`save_model_weights_hdf5(filepath)`), else the full model is saved 
+#'   (`save_model_hdf5(filepath)`).
 #' @param mode one of "auto", "min", "max". If `save_best_only=TRUE`, the decision to
 #'   overwrite the current save file is made based on either the maximization or
 #'   the minimization of the monitored quantity. For val_acc, this should be
@@ -165,10 +165,10 @@ callback_learning_rate_scheduler <- function(schedule) {
 
 #' @details TensorBoard is a visualization tool provided with TensorFlow.
 #'   
-#'   If you have installed TensorFlow with pip, you should be able to launch 
-#'   TensorBoard from the command line: 
-#'   ``` tensorboard
-#'   --logdir=/full_path_to_your_logs 
+#'   If you have installed TensorFlow with pip, you can launch TensorBoard
+#'   using the `tensorboard()` function:
+#'   ```
+#'   tensorboard(log_dir = "/full_path_to_your_logs") 
 #'   ``` 
 #'   
 #'   You can find more information about TensorBoard
@@ -177,7 +177,7 @@ callback_learning_rate_scheduler <- function(schedule) {
 #' @family callbacks 
 #'    
 #' @export
-callback_tensorboard <- function(log_dir = "./logs", histogram_freq = 0, 
+callback_tensorboard <- function(log_dir = "logs", histogram_freq = 0, 
                                  write_graph = TRUE, write_images = FALSE,
                                  embeddings_freq = 0, embeddings_layer_names = NULL,
                                  embeddings_metadata = NULL) {
@@ -376,6 +376,8 @@ KerasCallback <- R6Class("KerasCallback",
 )
 
 normalize_callbacks <- function(callbacks) {
+  
+  if(is.null(callbacks)) return(NULL)
   
   # if callbacks isn't a list then make it one
   if (!is.null(callbacks) && !is.list(callbacks))

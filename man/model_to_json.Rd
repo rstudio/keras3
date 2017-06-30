@@ -5,12 +5,12 @@
 \alias{model_from_json}
 \title{Model configuration as JSON}
 \usage{
-model_to_json(model)
+model_to_json(object)
 
 model_from_json(json, custom_objects = NULL)
 }
 \arguments{
-\item{model}{Model to save}
+\item{object}{Model object to save}
 
 \item{json}{JSON with model configuration}
 
@@ -24,6 +24,6 @@ does not include the weights, only the architecture.
 \seealso{
 Other model persistence: \code{\link{get_weights}},
   \code{\link{model_to_yaml}},
-  \code{\link{save_model_weights}},
-  \code{\link{save_model}}
+  \code{\link{save_model_hdf5}},
+  \code{\link{save_model_weights_hdf5}}
 }

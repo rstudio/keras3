@@ -48,7 +48,10 @@ attr(activation_sigmoid, "py_function_name") <- "sigmoid"
 #' @rdname activation_relu
 #' @export
 activation_softmax <- function(x, axis = -1) {
-  keras$activations$softmax(x, axis = as.integer(axis))
+  args <- list(x = x)
+  if (keras_version() >= "2.0.2")
+    args$axis <- as.integer(axis)
+  do.call(keras$activations$softmax, args)
 }
 attr(activation_softmax, "py_function_name") <- "softmax"
 

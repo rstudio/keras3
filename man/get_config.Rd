@@ -5,12 +5,12 @@
 \alias{from_config}
 \title{Layer/Model configuration}
 \usage{
-get_config(layer)
+get_config(object)
 
 from_config(config)
 }
 \arguments{
-\item{layer}{Layer or model}
+\item{object}{Layer or model object}
 
 \item{config}{Object with layer or model configuration}
 }
@@ -29,21 +29,21 @@ nor the class name (those are handled externally).
 Objects returned from \code{get_config()} are not serializable. Therefore,
 if you want to save and restore a model across sessions, you can use the
 \code{model_to_json()} or \code{model_to_yaml()} functions (for model configuration
-only, not weights) or the \code{save_model()} function to save the model
+only, not weights) or the \code{save_model_hdf5()} function to save the model
 configuration and weights to a file.
 }
 \seealso{
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate_generator}}, \code{\link{evaluate}},
-  \code{\link{fit.Model}}, \code{\link{fit_generator}},
+  \code{\link{fit_generator}}, \code{\link{fit}},
   \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}}, \code{\link{pop_layer}},
-  \code{\link{predict.tensorflow.keras.engine.training.Model}},
+  \code{\link{predict.keras.engine.training.Model}},
   \code{\link{predict_generator}},
   \code{\link{predict_on_batch}},
   \code{\link{predict_proba}},
-  \code{\link{summary.tensorflow.keras.engine.training.Model}},
+  \code{\link{summary.keras.engine.training.Model}},
   \code{\link{train_on_batch}}
 
 Other layer methods: \code{\link{count_params}},

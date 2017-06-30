@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,10 +80,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -186,12 +195,13 @@ and a top-5 validation accuracy of 0.945.</p>
 the VGG16 and ResNet models (299x299 instead of 224x224).</p>
 <p>The <code>xception_preprocess_input()</code> function should be used for image
 preprocessing.</p>
+<p>This application is only available when using the TensorFlow back-end.</p>
     
     <h2 class="hasAnchor" id="reference"><a class="anchor" href="#reference"></a>Reference</h2>
 
     
     <ul>
-<li><p><a href = 'https://arxiv.org/abs/1610.02357'>Xception: Deep Learning with Depthwise Separable Convolutions</a></p></li>
+<li><p><a href='https://arxiv.org/abs/1610.02357'>Xception: Deep Learning with Depthwise Separable Convolutions</a></p></li>
 </ul>
     
 
@@ -213,7 +223,7 @@ preprocessing.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

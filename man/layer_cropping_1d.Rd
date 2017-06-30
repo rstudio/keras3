@@ -4,11 +4,11 @@
 \alias{layer_cropping_1d}
 \title{Cropping layer for 1D input (e.g. temporal sequence).}
 \usage{
-layer_cropping_1d(x, cropping = c(1L, 1L), batch_size = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+layer_cropping_1d(object, cropping = c(1L, 1L), batch_size = NULL,
+  name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{cropping}{int or list of int (length 2) How many units should be
 trimmed off at the beginning and end of the cropping dimension (axis 1). If

@@ -4,11 +4,11 @@
 \alias{layer_upsampling_1d}
 \title{Upsampling layer for 1D inputs.}
 \usage{
-layer_upsampling_1d(x, size = 2L, batch_size = NULL, name = NULL,
+layer_upsampling_1d(object, size = 2L, batch_size = NULL, name = NULL,
   trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{size}{integer. Upsampling factor.}
 

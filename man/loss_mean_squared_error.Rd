@@ -7,6 +7,8 @@
 \alias{loss_mean_squared_logarithmic_error}
 \alias{loss_squared_hinge}
 \alias{loss_hinge}
+\alias{loss_categorical_hinge}
+\alias{loss_logcosh}
 \alias{loss_categorical_crossentropy}
 \alias{loss_sparse_categorical_crossentropy}
 \alias{loss_binary_crossentropy}
@@ -27,6 +29,10 @@ loss_squared_hinge(y_true, y_pred)
 
 loss_hinge(y_true, y_pred)
 
+loss_categorical_hinge(y_true, y_pred)
+
+loss_logcosh(y_true, y_pred)
+
 loss_categorical_crossentropy(y_true, y_pred)
 
 loss_sparse_categorical_crossentropy(y_true, y_pred)
@@ -40,9 +46,9 @@ loss_poisson(y_true, y_pred)
 loss_cosine_proximity(y_true, y_pred)
 }
 \arguments{
-\item{y_true}{True labels (TensorFlow tensor)}
+\item{y_true}{True labels (Tensor)}
 
-\item{y_pred}{Predictions (TensorFlow tensor of the same shape as \code{y_true})}
+\item{y_pred}{Predictions (Tensor of the same shape as \code{y_true})}
 }
 \description{
 Model loss functions
@@ -57,8 +63,8 @@ function (e.g. 'loss = loss_binary_crossentropy()') or by passing an
 artitrary function that returns a scalar for each data-point and takes the
 following two arguments:
 \itemize{
-\item \code{y_true} True labels (TensorFlow tensor)
-\item \code{y_pred} Predictions (TensorFlow tensor of the same shape as \code{y_true})
+\item \code{y_true} True labels (Tensor)
+\item \code{y_pred} Predictions (Tensor of the same shape as \code{y_true})
 }
 
 The actual optimized objective is the mean of the output array across all

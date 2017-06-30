@@ -4,12 +4,12 @@
 \alias{layer_permute}
 \title{Permute the dimensions of an input according to a given pattern}
 \usage{
-layer_permute(x, dims, input_shape = NULL, batch_input_shape = NULL,
+layer_permute(object, dims, input_shape = NULL, batch_input_shape = NULL,
   batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
   weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{dims}{List of integers. Permutation pattern, does not include the
 samples dimension. Indexing starts at 1. For instance, \code{(2, 1)} permutes

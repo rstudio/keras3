@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,10 +80,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -119,16 +128,16 @@
     <p>Single gradient update or model evaluation over one batch of samples.</p>
     
 
-    <pre class="usage"><span class='fu'>train_on_batch</span>(<span class='no'>model</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>train_on_batch</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>test_on_batch</span>(<span class='no'>model</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>test_on_batch</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
-      <td><p>Keras model</p></td>
+      <th>object</th>
+      <td><p>Keras model object</p></td>
     </tr>
     <tr>
       <th>x</th>
@@ -160,15 +169,15 @@ will give you the display labels for the scalar outputs.</p>
 
     <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
   <code><a href='evaluate_generator.html'>evaluate_generator</a></code>, <code><a href='evaluate.html'>evaluate</a></code>,
-  <code><a href='fit.Model.html'>fit.Model</a></code>, <code><a href='fit_generator.html'>fit_generator</a></code>,
+  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='fit.html'>fit</a></code>,
   <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_layer.html'>get_layer</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
   <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='pop_layer.html'>pop_layer</a></code>,
-  <code><a href='predict.tensorflow.keras.engine.training.Model.html'>predict.tensorflow.keras.engine.training.Model</a></code>,
+  <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
   <code><a href='predict_generator.html'>predict_generator</a></code>,
   <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
   <code><a href='predict_proba.html'>predict_proba</a></code>,
-  <code><a href='summary.tensorflow.keras.engine.training.Model.html'>summary.tensorflow.keras.engine.training.Model</a></code></p>
+  <code><a href='summary.keras.engine.training.Model.html'>summary.keras.engine.training.Model</a></code></p>
     
 
   </div>
@@ -187,7 +196,7 @@ will give you the display labels for the scalar outputs.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

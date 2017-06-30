@@ -11,11 +11,11 @@
 #' @family activation layers    
 #'   
 #' @export
-layer_activation <- function(x, activation, input_shape = NULL,
+layer_activation <- function(object, activation, input_shape = NULL,
                              batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                              name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Activation, x, list(
+  call_layer(keras$layers$Activation, object, list(
     activation = activation,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -43,12 +43,12 @@ layer_activation <- function(x, activation, input_shape = NULL,
 #' @family activation layers 
 #' 
 #' @export
-layer_activation_leaky_relu <- function(x, alpha = 0.3, input_shape = NULL,
+layer_activation_leaky_relu <- function(object, alpha = 0.3, input_shape = NULL,
                                         batch_input_shape = NULL, batch_size = NULL, 
                                         dtype = NULL, name = NULL, trainable = NULL, 
                                         weights = NULL) {
   
-  call_layer(keras$layers$LeakyReLU, x, list(
+  call_layer(keras$layers$LeakyReLU, object, list(
     alpha = alpha,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -82,7 +82,7 @@ layer_activation_leaky_relu <- function(x, alpha = 0.3, input_shape = NULL,
 #' @family activation layers  
 #'   
 #' @export
-layer_activation_parametric_relu <- function(x, alpha_initializer = "zeros", alpha_regularizer = NULL, 
+layer_activation_parametric_relu <- function(object, alpha_initializer = "zeros", alpha_regularizer = NULL, 
                                              alpha_constraint = NULL, shared_axes = NULL, 
                                              input_shape = NULL,
                                              batch_input_shape = NULL, batch_size = NULL, 
@@ -106,7 +106,7 @@ layer_activation_parametric_relu <- function(x, alpha_initializer = "zeros", alp
   args$weights <- weights
   
   # call layer
-  call_layer(keras$layers$PReLU, x, args)
+  call_layer(keras$layers$PReLU, object, args)
 }
 
 
@@ -123,12 +123,12 @@ layer_activation_parametric_relu <- function(x, alpha_initializer = "zeros", alp
 #' @family activation layers  
 #'   
 #' @export
-layer_activation_thresholded_relu <- function(x, theta = 1.0, input_shape = NULL,
+layer_activation_thresholded_relu <- function(object, theta = 1.0, input_shape = NULL,
                                               batch_input_shape = NULL, batch_size = NULL, 
                                               dtype = NULL, name = NULL, trainable = NULL, 
                                               weights = NULL) {
   
-  call_layer(keras$layers$ThresholdedReLU, x, list(
+  call_layer(keras$layers$ThresholdedReLU, object, list(
     theta = theta,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -156,11 +156,11 @@ layer_activation_thresholded_relu <- function(x, theta = 1.0, input_shape = NULL
 #' @family activation layers  
 #' 
 #' @export
-layer_activation_elu <- function(x, alpha = 1.0, input_shape = NULL,
+layer_activation_elu <- function(object, alpha = 1.0, input_shape = NULL,
                                  batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                                  name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$ELU, x, list(
+  call_layer(keras$layers$ELU, object, list(
     alpha = alpha,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),

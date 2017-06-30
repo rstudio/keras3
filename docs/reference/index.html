@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,10 +80,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -114,7 +123,7 @@
     <div class="page-header">
       <h1>
         Reference
-        <small>version&nbsp;0.3</small>
+        <small>version&nbsp;0.3.12</small>
       </h1>
     </div>
 
@@ -148,7 +157,7 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="summary.tensorflow.keras.engine.training.Model.html">summary</a></code> </p>
+            <p><code><a href="summary.keras.engine.training.Model.html">summary</a></code> </p>
           </td>
           <td><p>Print a summary of a Keras model</p></td>
         </tr><tr>
@@ -160,7 +169,7 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="fit.Model.html">fit</a></code> </p>
+            <p><code><a href="fit.html">fit</a></code> </p>
           </td>
           <td><p>Train a Keras model</p></td>
         </tr><tr>
@@ -184,7 +193,7 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="predict.tensorflow.keras.engine.training.Model.html">predict</a></code> </p>
+            <p><code><a href="predict.keras.engine.training.Model.html">predict</a></code> </p>
           </td>
           <td><p>Generate predictions from a Keras model</p></td>
         </tr><tr>
@@ -226,7 +235,7 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="save_model.html">save_model</a></code> <code><a href="save_model.html">load_model</a></code> </p>
+            <p><code><a href="save_model_hdf5.html">save_model_hdf5</a></code> <code><a href="save_model_hdf5.html">load_model_hdf5</a></code> </p>
           </td>
           <td><p>Save/Load models using HDF5 files</p></td>
         </tr>
@@ -758,13 +767,13 @@
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="save_model.html">save_model</a></code> <code><a href="save_model.html">load_model</a></code> </p>
+            <p><code><a href="save_model_hdf5.html">save_model_hdf5</a></code> <code><a href="save_model_hdf5.html">load_model_hdf5</a></code> </p>
           </td>
           <td><p>Save/Load models using HDF5 files</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="save_model_weights.html">save_model_weights</a></code> <code><a href="save_model_weights.html">load_model_weights</a></code> </p>
+            <p><code><a href="save_model_weights_hdf5.html">save_model_weights_hdf5</a></code> <code><a href="save_model_weights_hdf5.html">load_model_weights_hdf5</a></code> </p>
           </td>
           <td><p>Save/Load model weights using HDF5 files</p></td>
         </tr><tr>
@@ -922,7 +931,7 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="fit.tensorflow.keras.preprocessing.text.Tokenizer.html">fit</a></code> </p>
+            <p><code><a href="fit_text_tokenizer.html">fit_text_tokenizer</a></code> </p>
           </td>
           <td><p>Update tokenizer internal vocabulary based on a list of texts or list of
 sequences.</p></td>
@@ -961,7 +970,7 @@ sequences.</p></td>
           <td>
             <p><code><a href="text_to_word_sequence.html">text_to_word_sequence</a></code> </p>
           </td>
-          <td><p>Convert text to a sequence of word indices.</p></td>
+          <td><p>Convert text to a sequence of words (or tokens).</p></td>
         </tr>
       </tbody><tbody>
         <tr>
@@ -991,7 +1000,7 @@ sequences.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="fit.tensorflow.keras.preprocessing.image.ImageDataGenerator.html">fit</a></code> </p>
+            <p><code><a href="fit_image_data_generator.html">fit_image_data_generator</a></code> </p>
           </td>
           <td><p>Fit image data generator internal statistics to some sample data.</p></td>
         </tr><tr>
@@ -1287,6 +1296,12 @@ augmented/normalized data)</p></td>
             <p><code><a href="backend.html">backend</a></code> </p>
           </td>
           <td><p>Keras backend tensor engine</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="plot.keras_training_history.html">plot</a></code> </p>
+          </td>
+          <td><p>Plot training history</p></td>
         </tr>
       </tbody><tbody>
         <tr>
@@ -1298,7 +1313,7 @@ augmented/normalized data)</p></td>
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="loss_mean_squared_error.html">loss_mean_squared_error</a></code> <code><a href="loss_mean_squared_error.html">loss_mean_absolute_error</a></code> <code><a href="loss_mean_squared_error.html">loss_mean_absolute_percentage_error</a></code> <code><a href="loss_mean_squared_error.html">loss_mean_squared_logarithmic_error</a></code> <code><a href="loss_mean_squared_error.html">loss_squared_hinge</a></code> <code><a href="loss_mean_squared_error.html">loss_hinge</a></code> <code><a href="loss_mean_squared_error.html">loss_categorical_crossentropy</a></code> <code><a href="loss_mean_squared_error.html">loss_sparse_categorical_crossentropy</a></code> <code><a href="loss_mean_squared_error.html">loss_binary_crossentropy</a></code> <code><a href="loss_mean_squared_error.html">loss_kullback_leibler_divergence</a></code> <code><a href="loss_mean_squared_error.html">loss_poisson</a></code> <code><a href="loss_mean_squared_error.html">loss_cosine_proximity</a></code> </p>
+            <p><code><a href="loss_mean_squared_error.html">loss_mean_squared_error</a></code> <code><a href="loss_mean_squared_error.html">loss_mean_absolute_error</a></code> <code><a href="loss_mean_squared_error.html">loss_mean_absolute_percentage_error</a></code> <code><a href="loss_mean_squared_error.html">loss_mean_squared_logarithmic_error</a></code> <code><a href="loss_mean_squared_error.html">loss_squared_hinge</a></code> <code><a href="loss_mean_squared_error.html">loss_hinge</a></code> <code><a href="loss_mean_squared_error.html">loss_categorical_hinge</a></code> <code><a href="loss_mean_squared_error.html">loss_logcosh</a></code> <code><a href="loss_mean_squared_error.html">loss_categorical_crossentropy</a></code> <code><a href="loss_mean_squared_error.html">loss_sparse_categorical_crossentropy</a></code> <code><a href="loss_mean_squared_error.html">loss_binary_crossentropy</a></code> <code><a href="loss_mean_squared_error.html">loss_kullback_leibler_divergence</a></code> <code><a href="loss_mean_squared_error.html">loss_poisson</a></code> <code><a href="loss_mean_squared_error.html">loss_cosine_proximity</a></code> </p>
           </td>
           <td><p>Model loss functions</p></td>
         </tr>
@@ -1387,7 +1402,7 @@ augmented/normalized data)</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

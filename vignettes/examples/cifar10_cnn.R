@@ -19,12 +19,8 @@ cifar10 <- dataset_cifar10()
 
 x_train <- cifar10$train$x/255
 x_test <- cifar10$test$x/255
-
-y_train <- cifar10$train$y %>%
-  to_categorical(num_classes = 10)
-
-y_test <- cifar10$test$y %>%
-  to_categorical(num_classes = 10)
+y_train <- to_categorical(cifar10$train$y, num_classes = 10)
+y_test <- to_categorical(cifar10$test$y, num_classes = 10)
 
 # Defining the model ------------------------------------------------------
 
@@ -87,7 +83,7 @@ if(!data_augmentation){
     horizontal_flip = TRUE
   )
   
-  datagen %>% fit(x_train)
+  datagen %>% fit_image_data_generator(x_train)
   
   model %>% fit_generator(
     flow_images_from_data(x_train, y_train, datagen, batch_size = batch_size),

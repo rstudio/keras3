@@ -11,7 +11,8 @@ test_succeeds("keras pre-built models can be instantiated", {
   if (skip)
     return()
   
-  application_xception()
+  if (is_backend("tensorflow"))
+    application_xception()
   application_resnet50()
   application_vgg16()
   application_vgg19()

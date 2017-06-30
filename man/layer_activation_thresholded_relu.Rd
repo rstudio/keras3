@@ -4,12 +4,12 @@
 \alias{layer_activation_thresholded_relu}
 \title{Thresholded Rectified Linear Unit.}
 \usage{
-layer_activation_thresholded_relu(x, theta = 1, input_shape = NULL,
+layer_activation_thresholded_relu(object, theta = 1, input_shape = NULL,
   batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
   name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{theta}{float >= 0. Threshold location of activation.}
 

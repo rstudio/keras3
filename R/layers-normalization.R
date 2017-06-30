@@ -36,14 +36,14 @@
 #' - [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/abs/1502.03167)
 #'   
 #' @export
-layer_batch_normalization <- function(x, axis = -1L, momentum = 0.99, epsilon = 0.001, center = TRUE, scale = TRUE, 
+layer_batch_normalization <- function(object, axis = -1L, momentum = 0.99, epsilon = 0.001, center = TRUE, scale = TRUE, 
                                       beta_initializer = "zeros", gamma_initializer = "ones", 
                                       moving_mean_initializer = "zeros", moving_variance_initializer = "ones", 
                                       beta_regularizer = NULL, gamma_regularizer = NULL, 
                                       beta_constraint = NULL, gamma_constraint = NULL, 
                                       input_shape = NULL,  batch_input_shape = NULL, batch_size = NULL, 
                                       dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$BatchNormalization, x, list(
+  call_layer(keras$layers$BatchNormalization, object, list(
     axis = as.integer(axis),
     momentum = momentum,
     epsilon = epsilon,

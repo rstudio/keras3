@@ -4,12 +4,12 @@
 \alias{layer_cropping_2d}
 \title{Cropping layer for 2D input (e.g. picture).}
 \usage{
-layer_cropping_2d(x, cropping = list(c(0L, 0L), c(0L, 0L)),
+layer_cropping_2d(object, cropping = list(c(0L, 0L), c(0L, 0L)),
   data_format = NULL, batch_size = NULL, name = NULL, trainable = NULL,
   weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{cropping}{int, or list of 2 ints, or list of 2 lists of 2 ints.
 \itemize{

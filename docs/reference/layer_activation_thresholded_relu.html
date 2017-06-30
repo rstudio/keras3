@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  <link href="../extra.css" rel="stylesheet">
+  <script src="../extra.js"></script>
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,10 +80,18 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/training_callbacks.html">Training Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/backend.html">Keras Backend</a>
     </li>
   </ul>
 </li>
@@ -119,7 +128,7 @@
     <p>It follows: <code>f(x) = x</code> for <code>x &gt; theta</code>, <code>f(x) = 0</code> otherwise.</p>
     
 
-    <pre class="usage"><span class='fu'>layer_activation_thresholded_relu</span>(<span class='no'>x</span>, <span class='kw'>theta</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>layer_activation_thresholded_relu</span>(<span class='no'>object</span>, <span class='kw'>theta</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>batch_input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
@@ -127,8 +136,8 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Model or layer</p></td>
+      <th>object</th>
+      <td><p>Model or layer object</p></td>
     </tr>
     <tr>
       <th>theta</th>
@@ -174,7 +183,7 @@ isn't provided.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href = 'https://arxiv.org/abs/1402.3337'>Zero-bias autoencoders and
+    <p><a href='https://arxiv.org/abs/1402.3337'>Zero-bias autoencoders and
 the benefits of co-adapting features</a></p>
 <p>Other activation layers: <code><a href='layer_activation_elu.html'>layer_activation_elu</a></code>,
   <code><a href='layer_activation_leaky_relu.html'>layer_activation_leaky_relu</a></code>,
@@ -196,7 +205,7 @@ the benefits of co-adapting features</a></p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by François Chollet, JJ Allaire, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
 </div>
 
 <div class="pkgdown">

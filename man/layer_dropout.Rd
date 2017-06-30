@@ -4,11 +4,11 @@
 \alias{layer_dropout}
 \title{Applies Dropout to the input.}
 \usage{
-layer_dropout(x, rate, noise_shape = NULL, seed = NULL, batch_size = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_dropout(object, rate, noise_shape = NULL, seed = NULL,
+  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{rate}{float between 0 and 1. Fraction of the input units to drop.}
 

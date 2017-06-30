@@ -5,12 +5,12 @@
 \alias{test_on_batch}
 \title{Single gradient update or model evaluation over one batch of samples.}
 \usage{
-train_on_batch(model, x, y, class_weight = NULL, sample_weight = NULL)
+train_on_batch(object, x, y, class_weight = NULL, sample_weight = NULL)
 
-test_on_batch(model, x, y, sample_weight = NULL)
+test_on_batch(object, x, y, sample_weight = NULL)
 }
 \arguments{
-\item{model}{Keras model}
+\item{object}{Keras model object}
 
 \item{x}{input data, as an array or list of arrays (if the model has multiple
 inputs).}
@@ -33,13 +33,13 @@ Single gradient update or model evaluation over one batch of samples.
 \seealso{
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate_generator}}, \code{\link{evaluate}},
-  \code{\link{fit.Model}}, \code{\link{fit_generator}},
+  \code{\link{fit_generator}}, \code{\link{fit}},
   \code{\link{get_config}}, \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}}, \code{\link{pop_layer}},
-  \code{\link{predict.tensorflow.keras.engine.training.Model}},
+  \code{\link{predict.keras.engine.training.Model}},
   \code{\link{predict_generator}},
   \code{\link{predict_on_batch}},
   \code{\link{predict_proba}},
-  \code{\link{summary.tensorflow.keras.engine.training.Model}}
+  \code{\link{summary.keras.engine.training.Model}}
 }

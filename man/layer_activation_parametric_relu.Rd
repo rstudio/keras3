@@ -4,13 +4,13 @@
 \alias{layer_activation_parametric_relu}
 \title{Parametric Rectified Linear Unit.}
 \usage{
-layer_activation_parametric_relu(x, alpha_initializer = "zeros",
+layer_activation_parametric_relu(object, alpha_initializer = "zeros",
   alpha_regularizer = NULL, alpha_constraint = NULL, shared_axes = NULL,
   input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
   dtype = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
-\item{x}{Model or layer}
+\item{object}{Model or layer object}
 
 \item{alpha_initializer}{Initializer function for the weights.}
 

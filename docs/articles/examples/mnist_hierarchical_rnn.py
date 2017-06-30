@@ -29,7 +29,8 @@ from __future__ import print_function
 import tensorflow.contrib.keras.api.keras as keras
 from tensorflow.contrib.keras.api.keras.datasets import mnist
 from tensorflow.contrib.keras.api.keras.models import Model
-from tensorflow.contrib.keras.api.keras.layers import Input, Dense, TimeDistributed
+from tensorflow.contrib.keras.api.keras.layers import Input, Dense
+from tensorflow.contrib.keras.python.keras.layers import TimeDistributed
 from tensorflow.contrib.keras.api.keras.layers import LSTM
 
 # Training parameters.
