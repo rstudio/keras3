@@ -2,7 +2,7 @@
 # This network is used to predict the next frame of an artificially
 # generated movie which contains moving squares.
 library(keras)
-
+library(abind)
 
 # Function Definition -----------------------------------------------------
 
@@ -101,11 +101,11 @@ model <- keras_model_sequential()
 
 model %>%
   layer_conv_lstm_2d(
-    input_shape = c(15,40,40,1), 
+    input_shape = list(NULL,40,40,1), 
     filters = 40, kernel_size = c(3,3),
     padding = "same", 
     return_sequences = TRUE
-    ) %>%
+  ) %>%
   layer_batch_normalization() %>%
   
   layer_conv_lstm_2d(
@@ -146,9 +146,42 @@ model %>% fit(
   movies$noisy_movies,
   movies$shifted_movies,
   batch_size = 10,
-  epochs = 300, 
+  epochs = 30, 
   validation_split = 0.05
 )
 
+save_model_weights_hdf5(model, 'Conv_LSTM_epochs30.h5', overwrite = TRUE)
+load_model_weights_hdf5(model,'Conv_LSTM_epochs30.h5')
 
+# Visualization  ----------------------------------------------------------------
+# Testing the network on one movie
+# feed it with the first 7 positions and then
+# predict the new positions
 
+which <- 100 #Example to visualize on
+
+track <- more_movies$noisy_movies[which,1:8,,,1]
+track <- array(track, c(1,8,40,40,1))
+for (k in 1:15){
+if (k<8){
+  png(paste0(k,'_animate.png'))
+  par(mfrow=c(1,2),bg = 'white')
+  (more_movies$noisy_movies[which,k,,,1])  %>% raster() %>% plot() %>% title (main=paste0('Ground_',k)) 
+  (more_movies$noisy_movies[which,k,,,1])  %>% raster() %>% plot() %>% title (main=paste0('Ground_',k)) 
+  dev.off()
+}  else {
+  # And then compare the predictions
+  # to the ground truth
+  png(paste0(k,'_animate.png'))
+  par(mfrow=c(1,2),bg = 'white')
+  (more_movies$noisy_movies[which,k,,,1])  %>% raster() %>% plot() %>% title (main=paste0('Ground_',k))
+   
+  new_pos <- model %>% predict(track1)  #Make Prediction
+  new_pos_loc <- new_pos[1,k,1:40,1:40,1]  #Slice the last row
+  new_pos_loc  %>% raster() %>% plot() %>% title (main=paste0('Pred_',k))
+  
+  new_pos <- array(new_pos_loc, c(1,1, 40,40,1)) #Reshape it
+  track <- abind(track,new_pos,along = 2)  #Bind it to the earlier data
+  dev.off()
+}
+}  
