@@ -98,6 +98,7 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
       ggplot2::facet_grid(metric~., switch = 'y', scales = 'free_y') +
       ggplot2::scale_x_continuous(breaks = int_breaks) +
       ggplot2::theme(axis.title.y = ggplot2::element_blank(), strip.placement = 'outside',
+                     strip.text = ggplot2::element_text(colour = 'black', size = 11),
                      strip.background = ggplot2::element_rect(fill = NA))
     return(p)
   }
