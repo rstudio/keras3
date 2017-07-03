@@ -82,6 +82,9 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
   df$metric <- factor(df$metric, unique(sub("^val_", "", names(x$metrics))))
   
   if (method == "ggplot2") {
+    # helper function for correct breaks (integers only)
+    int_breaks <- function(x) pretty(x)[pretty(x) %% 1 == 0]
+    
     if (x$params$do_validation)
       p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data))
     else 
@@ -89,11 +92,11 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
     
     if (smooth && x$params$epochs >= 10)
       p <- p + ggplot2::geom_smooth(se = FALSE, method = 'loess')
-        
+    
     p <- p +
       ggplot2::geom_point(shape = 21, col = 1) +
       ggplot2::facet_grid(metric~., switch = 'y', scales = 'free_y') +
-      ggplot2::scale_x_continuous(breaks = scales::pretty_breaks()) +
+      ggplot2::scale_x_continuous(breaks = int_breaks) +
       ggplot2::theme(axis.title.y = ggplot2::element_blank(), strip.placement = 'outside',
                      strip.background = ggplot2::element_rect(fill = NA))
     return(p)
