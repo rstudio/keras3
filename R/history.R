@@ -39,17 +39,20 @@ print.keras_training_history <- function(x, ...) {
 #' 
 #' Plots metrics recorded during training. 
 #' 
-#' @param x Training history object returned from `fit()`
-#' @param y Unused
+#' @param x Training history object returned from `fit()`.
+#' @param y Unused.
 #' @param metrics One or more metrics to plot (e.g. `c('loss', 'accuracy')`).
 #'   Defaults to plotting all captured metrics.
 #' @param method Method to use for plotting. The default "auto" will use 
 #'   \pkg{ggplot2} if available, and otherwise will use base graphics.
+#' @param smooth Whether a loess smooth should be added to the plot, only 
+#'   available for the `ggplot2` method. If the number of epochs is smaller
+#'   than ten, it is forced to false.
 #' @param ... Additional parameters to pass to the [plot()] method.
 #'
 #' @export
 plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto", "ggplot2", "base"), 
-                                        ...) {
+                                        smooth = TRUE, ...) {
   # check which method we should use
   method <- match.arg(method)
   if (method == "auto") {
@@ -79,16 +82,23 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
   df$metric <- factor(df$metric, unique(sub("^val_", "", names(x$metrics))))
   
   if (method == "ggplot2") {
+    # helper function for correct breaks (integers only)
+    int_breaks <- function(x) pretty(x)[pretty(x) %% 1 == 0]
+    
     if (x$params$do_validation)
       p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data))
     else 
       p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value))
     
+    if (smooth && x$params$epochs >= 10)
+      p <- p + ggplot2::geom_smooth(se = FALSE, method = 'loess')
+    
     p <- p +
-      ggplot2::geom_smooth(se = FALSE, method = 'loess') +
       ggplot2::geom_point(shape = 21, col = 1) +
       ggplot2::facet_grid(metric~., switch = 'y', scales = 'free_y') +
+      ggplot2::scale_x_continuous(breaks = int_breaks) +
       ggplot2::theme(axis.title.y = ggplot2::element_blank(), strip.placement = 'outside',
+                     strip.text = ggplot2::element_text(colour = 'black', size = 11),
                      strip.background = ggplot2::element_rect(fill = NA))
     return(p)
   }
