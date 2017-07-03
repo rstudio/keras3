@@ -36,7 +36,7 @@ print.keras_training_history <- function(x, ...) {
 
 #' @export
 plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto", "ggplot2", "base"), 
-                                        ...) {
+                                        smooth = TRUE, ...) {
   # check which method we should use
   method <- match.arg(method)
   if (method == "auto") {
@@ -71,10 +71,13 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
     else 
       p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value))
     
+    if (smooth && x$params$epochs >= 10)
+      p <- p + ggplot2::geom_smooth(se = FALSE, method = 'loess')
+        
     p <- p +
-      ggplot2::geom_smooth(se = FALSE, method = 'loess') +
       ggplot2::geom_point(shape = 21, col = 1) +
       ggplot2::facet_grid(metric~., switch = 'y', scales = 'free_y') +
+      ggplot2::scale_x_continuous(breaks = scales::pretty_breaks()) +
       ggplot2::theme(axis.title.y = ggplot2::element_blank(), strip.placement = 'outside',
                      strip.background = ggplot2::element_rect(fill = NA))
     return(p)
