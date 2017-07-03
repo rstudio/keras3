@@ -1,10 +1,21 @@
 ---
 title: "Frequently Asked Questions"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette: default
+  blogdown::html_page: 
+    toc: true
+    toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{Guide to the Sequential Model} 
   %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
+type: docs
+menu:
+  main:
+    name: "Frequently Asked Questions"
+    identifier: "keras-faq"
+    parent: "keras-using-keras"
+    weight: 60
 ---
 
 ```{r setup, include=FALSE}

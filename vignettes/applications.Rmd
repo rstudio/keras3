@@ -5,6 +5,13 @@ vignette: >
   %\VignetteIndexEntry{Using Pre-Trained Models} 
   %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
+type: docs
+menu:
+  main:
+    name: "Pre-Trained Models"
+    identifier: "keras-pre-trained-models"
+    parent: "keras-using-keras"
+    weight: 40
 ---
 
 ```{r setup, include = FALSE}

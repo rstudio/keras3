@@ -1,14 +1,15 @@
 Package: keras
 Type: Package
 Title: R Interface to Keras
-Version: 0.3.11
+Version: 0.3.12
 Authors@R: c(
   person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
   person("François", "Chollet", role = c("aut", "cph")),
   person("RStudio", role = c("cph", "fnd")),
   person(family = "Google", role = c("ctb", "cph", "fnd")),
   person("Yuan", "Tang", role = c("ctb", "cph")),
-  person("Daniel", "Falbel", role = c("ctb", "cph"))
+  person("Daniel", "Falbel", role = c("ctb", "cph")),
+  person("Wouter", "Van Der Bijl", role = c("ctb", "cph"))
   )
 Description: Interface to 'Keras', a high-level neural networks API which 
   runs on top of TensorFlow. 'Keras' was developed with a focus on enabling

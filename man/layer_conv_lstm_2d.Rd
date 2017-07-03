@@ -15,7 +15,7 @@ layer_conv_lstm_2d(object, filters, kernel_size, strides = c(1L, 1L),
   recurrent_constraint = NULL, bias_constraint = NULL,
   return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE,
   dropout = 0, recurrent_dropout = 0, batch_size = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+  trainable = NULL, weights = NULL, input_shape = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -107,6 +107,10 @@ isn't provided.}
 \item{trainable}{Whether the layer weights will be updated during training.}
 
 \item{weights}{Initial weights for layer.}
+
+\item{input_shape}{Dimensionality of the input (integer) not including the
+samples axis. This argument is required when using this layer as the first
+layer in a model.}
 }
 \description{
 It is similar to an LSTM layer, but the input transformations and recurrent

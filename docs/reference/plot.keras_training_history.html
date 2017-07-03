@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • keras</title>
+<title>Plot training history — plot.keras_training_history • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-vignette-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -118,60 +118,55 @@
       
       </header>
 
-      <div class="page-header">
-  <h1>Articles <small>version&nbsp;0.3.12</small></h1>
-</div>
-
-<div class="row">
-  <div class="col-md-9">
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <ul>
-        <li><a href="about_keras_layers.html">About Keras Layers</a></li>
-        <li><a href="about_keras_models.html">About Keras Models</a></li>
-        <li><a href="applications.html">Using Pre-Trained Models</a></li>
-        <li><a href="backend.html">Keras Backend</a></li>
-        <li><a href="examples/addition_rnn.html">addition_rnn.R</a></li>
-        <li><a href="examples/babi_memnn.html">babi_memnn.R</a></li>
-        <li><a href="examples/babi_rnn.html">babi_rnn.R</a></li>
-        <li><a href="examples/cifar10_cnn.html">cifar10_cnn.R</a></li>
-        <li><a href="examples/conv_filter_visualization.html">conv_filter_visualization.R</a></li>
-        <li><a href="examples/conv_lstm.html">conv_lstm.R</a></li>
-        <li><a href="examples/deep_dream.html">deep_dream.R</a></li>
-        <li><a href="examples/image_ocr.html">image_ocr.R</a></li>
-        <li><a href="examples/imdb_bidirectional_lstm.html">imdb_bidirectional_lstm.R</a></li>
-        <li><a href="examples/imdb_cnn_lstm.html">imdb_cnn_lstm.R</a></li>
-        <li><a href="examples/imdb_cnn.html">imdb_cnn.R</a></li>
-        <li><a href="examples/imdb_fasttext.html">imdb_fasttext.R</a></li>
-        <li><a href="examples/imdb_lstm.html">imdb_lstm.R</a></li>
-        <li><a href="examples/index.html">Keras Examples</a></li>
-        <li><a href="examples/lstm_benchmark.html">lstm_benchmark.R</a></li>
-        <li><a href="examples/lstm_text_generation.html">lstm_text_generation.R</a></li>
-        <li><a href="examples/mnist_acgan.html">mnist_acgan.R</a></li>
-        <li><a href="examples/mnist_cnn.html">mnist_cnn.R</a></li>
-        <li><a href="examples/mnist_hierarchical_rnn.html">mnist_hierarchical_rnn.R</a></li>
-        <li><a href="examples/mnist_irnn.html">mnist_irnn.R</a></li>
-        <li><a href="examples/mnist_mlp.html">mnist_mlp.R</a></li>
-        <li><a href="examples/mnist_net2net.html">mnist_net2net.R</a></li>
-        <li><a href="examples/mnist_siamese_graph.html">mnist_siamese_graph.R</a></li>
-        <li><a href="examples/mnist_swwae.html">mnist_swwae.R</a></li>
-        <li><a href="examples/mnist_transfer_cnn.html">mnist_transfer_cnn.R</a></li>
-        <li><a href="examples/neural_style_transfer.html">nueral_style_transfer.R</a></li>
-        <li><a href="examples/nueral_doodle.html">nueral_doodle.R</a></li>
-        <li><a href="examples/pretrained_word_embeddings.html">pretrained_word_embeddings.R</a></li>
-        <li><a href="examples/reuters_mlp.html">reuters_mlp.R</a></li>
-        <li><a href="examples/stateful_lstm.html">stateful_lstm.R</a></li>
-        <li><a href="examples/variational_autoencoder_deconv.html">variational_autoencoder_deconv.R</a></li>
-        <li><a href="examples/variational_autoencoder.html">variational_autoencoder.R</a></li>
-        <li><a href="faq.html">Frequently Asked Questions</a></li>
-        <li><a href="functional_api.html">Guide to the Functional API</a></li>
-        <li><a href="sequential_model.html">Guide to the Sequential Model</a></li>
-        <li><a href="tensorboard.html">TensorBoard Visualization</a></li>
-        <li><a href="training_callbacks.html">Training Callbacks</a></li>
-      </ul>
+      <div class="row">
+  <div class="col-md-9 contents">
+    <div class="page-header">
+    <h1>Plot training history</h1>
     </div>
+
+    
+    <p>Plots metrics recorded during training.</p>
+    
+
+    <pre class="usage"><span class='co'># S3 method for keras_training_history</span>
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"auto"</span>, <span class='st'>"ggplot2"</span>, <span class='st'>"base"</span>), <span class='no'>...</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Training history object returned from <code><a href='fit.html'>fit()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td><p>Unused</p></td>
+    </tr>
+    <tr>
+      <th>metrics</th>
+      <td><p>One or more metrics to plot (e.g. <code>c('loss', 'accuracy')</code>).
+Defaults to plotting all captured metrics.</p></td>
+    </tr>
+    <tr>
+      <th>method</th>
+      <td><p>Method to use for plotting. The default "auto" will use
+<span class="pkg">ggplot2</span> if available, and otherwise will use base graphics.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional parameters to pass to the <code>plot()</code> method.</p></td>
+    </tr>
+    </table>
+    
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+                </ul>
+
   </div>
 </div>
 

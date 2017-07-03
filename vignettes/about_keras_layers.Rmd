@@ -5,6 +5,13 @@ vignette: >
   %\VignetteIndexEntry{About Keras Layers}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+type: docs
+menu:
+  main:
+    name: "About Keras Layers"
+    identifier: "keras-about-keras-layers"
+    parent: "keras-advanced"
+    weight: 20
 ---
 
 ```{r setup, include = FALSE}

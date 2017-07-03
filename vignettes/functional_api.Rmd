@@ -5,6 +5,13 @@ vignette: >
   %\VignetteIndexEntry{Guide to the Functional API} 
   %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
+type: docs
+menu:
+  main:
+    name: "Guide to the Functional API"
+    identifier: "keras-functional-api"
+    parent: "keras-using-keras"
+    weight: 30
 ---
 
 ```{r setup, include = FALSE}

@@ -256,7 +256,7 @@ layer_lambda <- function(object, f, output_shape = NULL, mask = NULL, arguments 
     weights = weights
   )
   
-  if (is_backend("theano"))
+  if (identical(backend()$backend(), "theano"))
     args$output_shape = as_integer_tuple(output_shape)
   
   call_layer(keras$layers$Lambda, object, args)
