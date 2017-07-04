@@ -221,8 +221,8 @@ ________________________________________________________________________________
 )</code></pre></div>
 <p>We can train the model by passing it lists of input arrays and target arrays:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
-  <span class="dt">x =</span> <span class="kw">c</span>(headline_data, additional_data),
-  <span class="dt">y =</span> <span class="kw">c</span>(labels, labels),
+  <span class="dt">x =</span> <span class="kw">list</span>(headline_data, additional_data),
+  <span class="dt">y =</span> <span class="kw">list</span>(labels, labels),
   <span class="dt">epochs =</span> <span class="dv">50</span>,
   <span class="dt">batch_size =</span> <span class="dv">32</span>
 )</code></pre></div>
@@ -275,7 +275,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
   <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
 )
 
-model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(<span class="kw">c</span>(data_a, data_b), labels, <span class="dt">epochs =</span> <span class="dv">10</span>)</code></pre></div>
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(<span class="kw">list</span>(data_a, data_b), labels, <span class="dt">epochs =</span> <span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="the-concept-of-layer-node" class="section level2">
 <h2 class="hasAnchor">
