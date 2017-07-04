@@ -50,3 +50,12 @@ blockquote {
 .screenshot {
   margin-bottom: 20px;
 }
+
+.source-ref {
+  margin-bottom: 20px;
+}
+
+.source-ref .caption {
+  display: none;
+}
+
