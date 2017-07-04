@@ -130,18 +130,18 @@
 
     <pre class="usage"><span class='co'># S3 method for keras_training_history</span>
 <span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"auto"</span>, <span class='st'>"ggplot2"</span>, <span class='st'>"base"</span>), <span class='no'>...</span>)</pre>
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"auto"</span>, <span class='st'>"ggplot2"</span>, <span class='st'>"base"</span>), <span class='kw'>smooth</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Training history object returned from <code><a href='fit.html'>fit()</a></code></p></td>
+      <td><p>Training history object returned from <code><a href='fit.html'>fit()</a></code>.</p></td>
     </tr>
     <tr>
       <th>y</th>
-      <td><p>Unused</p></td>
+      <td><p>Unused.</p></td>
     </tr>
     <tr>
       <th>metrics</th>
@@ -152,6 +152,12 @@ Defaults to plotting all captured metrics.</p></td>
       <th>method</th>
       <td><p>Method to use for plotting. The default "auto" will use
 <span class="pkg">ggplot2</span> if available, and otherwise will use base graphics.</p></td>
+    </tr>
+    <tr>
+      <th>smooth</th>
+      <td><p>Whether a loess smooth should be added to the plot, only
+available for the <code>ggplot2</code> method. If the number of epochs is smaller
+than ten, it is forced to false.</p></td>
     </tr>
     <tr>
       <th>...</th>
