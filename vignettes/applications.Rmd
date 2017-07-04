@@ -6,6 +6,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
 type: docs
+repo: https://github.com/rstudio/keras
 menu:
   main:
     name: "Pre-Trained Models"
