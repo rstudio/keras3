@@ -5,18 +5,22 @@
 \title{Plot training history}
 \usage{
 \method{plot}{keras_training_history}(x, y, metrics = NULL,
-  method = c("auto", "ggplot2", "base"), ...)
+  method = c("auto", "ggplot2", "base"), smooth = TRUE, ...)
 }
 \arguments{
-\item{x}{Training history object returned from \code{fit()}}
+\item{x}{Training history object returned from \code{fit()}.}
 
-\item{y}{Unused}
+\item{y}{Unused.}
 
 \item{metrics}{One or more metrics to plot (e.g. \code{c('loss', 'accuracy')}).
 Defaults to plotting all captured metrics.}
 
 \item{method}{Method to use for plotting. The default "auto" will use
 \pkg{ggplot2} if available, and otherwise will use base graphics.}
+
+\item{smooth}{Whether a loess smooth should be added to the plot, only
+available for the \code{ggplot2} method. If the number of epochs is smaller
+than ten, it is forced to false.}
 
 \item{...}{Additional parameters to pass to the \code{\link[=plot]{plot()}} method.}
 }
