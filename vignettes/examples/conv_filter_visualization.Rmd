@@ -1,5 +1,9 @@
 ---
 title: conv_filter_visualization.R
+type: docs
+menu:
+  main:
+    parent: keras-examples
 ---
 
 ```{r, echo = FALSE}

@@ -1,5 +1,9 @@
 ---
 title: mnist_siamese_graph.R
+type: docs
+menu:
+  main:
+    parent: keras-examples
 ---
 
 ```{r, echo = FALSE}

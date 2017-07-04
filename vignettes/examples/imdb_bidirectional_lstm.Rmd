@@ -1,5 +1,9 @@
 ---
 title: imdb_bidirectional_lstm.R
+type: docs
+menu:
+  main:
+    parent: keras-examples
 ---
 
 ```{r, echo = FALSE}

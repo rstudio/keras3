@@ -1,5 +1,9 @@
 ---
 title: imdb_fasttext.R
+type: docs
+menu:
+  main:
+    parent: keras-examples
 ---
 
 ```{r, echo = FALSE}

@@ -1,5 +1,9 @@
 ---
 title: mnist_transfer_cnn.R
+type: docs
+menu:
+  main:
+    parent: keras-examples
 ---
 
 ```{r, echo = FALSE}

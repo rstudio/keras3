@@ -1,5 +1,9 @@
 ---
 title: pretrained_word_embeddings.R
+type: docs
+menu:
+  main:
+    parent: keras-examples
 ---
 
 ```{r, echo = FALSE}

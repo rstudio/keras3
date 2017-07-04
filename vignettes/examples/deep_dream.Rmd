@@ -1,5 +1,9 @@
 ---
 title: deep_dream.R
+type: docs
+menu:
+  main:
+    parent: keras-examples
 ---
 
 ```{r, echo = FALSE}

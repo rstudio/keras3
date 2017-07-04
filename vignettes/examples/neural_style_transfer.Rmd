@@ -1,5 +1,9 @@
 ---
-title: nueral_style_transfer.R
+title: neural_style_transfer.R
+type: docs
+menu:
+  main:
+    parent: keras-examples
 ---
 
 ```{r, echo = FALSE}

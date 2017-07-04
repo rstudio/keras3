@@ -1,5 +1,9 @@
 ---
 title: reuters_mlp.R
+type: docs
+menu:
+  main:
+    parent: keras-examples
 ---
 
 ```{r, echo = FALSE}

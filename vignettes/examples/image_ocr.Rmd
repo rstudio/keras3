@@ -1,5 +1,9 @@
 ---
 title: image_ocr.R
+type: docs
+menu:
+  main:
+    parent: keras-examples
 ---
 
 ```{r, echo = FALSE}

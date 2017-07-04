@@ -1,5 +1,9 @@
 ---
 title: variational_autoencoder.R
+type: docs
+menu:
+  main:
+    parent: keras-examples
 ---
 
 ```{r, echo = FALSE}

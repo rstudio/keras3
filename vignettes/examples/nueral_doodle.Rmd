@@ -1,5 +1,9 @@
 ---
 title: nueral_doodle.R
+type: docs
+menu:
+  main:
+    parent: keras-examples
 ---
 
 ```{r, echo = FALSE}
