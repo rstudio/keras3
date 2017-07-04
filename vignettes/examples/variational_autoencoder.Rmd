@@ -1,6 +1,7 @@
 ---
 title: variational_autoencoder
 type: docs
+repo: https://github.com/rstudio/keras
 menu:
   main:
     parent: keras-examples

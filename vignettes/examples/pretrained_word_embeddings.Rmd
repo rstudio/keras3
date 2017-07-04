@@ -1,6 +1,7 @@
 ---
 title: pretrained_word_embeddings
 type: docs
+repo: https://github.com/rstudio/keras
 menu:
   main:
     parent: keras-examples

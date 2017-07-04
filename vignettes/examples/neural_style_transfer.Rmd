@@ -1,6 +1,7 @@
 ---
 title: neural_style_transfer
 type: docs
+repo: https://github.com/rstudio/keras
 menu:
   main:
     parent: keras-examples

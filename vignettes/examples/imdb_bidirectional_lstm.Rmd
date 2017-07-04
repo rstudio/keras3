@@ -1,6 +1,7 @@
 ---
 title: imdb_bidirectional_lstm
 type: docs
+repo: https://github.com/rstudio/keras
 menu:
   main:
     parent: keras-examples

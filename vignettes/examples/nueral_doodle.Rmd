@@ -1,6 +1,7 @@
 ---
 title: nueral_doodle
 type: docs
+repo: https://github.com/rstudio/keras
 menu:
   main:
     parent: keras-examples

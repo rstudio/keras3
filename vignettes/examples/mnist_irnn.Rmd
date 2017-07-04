@@ -1,6 +1,7 @@
 ---
 title: mnist_irnn
 type: docs
+repo: https://github.com/rstudio/keras
 menu:
   main:
     parent: keras-examples

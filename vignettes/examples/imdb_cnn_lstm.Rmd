@@ -1,6 +1,7 @@
 ---
 title: imdb_cnn_lstm
 type: docs
+repo: https://github.com/rstudio/keras
 menu:
   main:
     parent: keras-examples
