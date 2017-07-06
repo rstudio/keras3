@@ -1,6 +1,13 @@
 
-from tensorflow.contrib.keras.python.keras.callbacks import Callback
-import tensorflow.contrib.keras as keras
+
+import os
+
+if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'tensorflow'):
+  from tensorflow.contrib.keras.python.keras.callbacks import Callback
+  import tensorflow.contrib.keras as keras
+else:
+  import keras
+  from keras.callbacks import Callback
 
 class RCallback(Callback):
   

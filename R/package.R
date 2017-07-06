@@ -59,26 +59,20 @@ keras <- NULL
       else
         stop(e, call. = FALSE)
     }
-     
+    
   ))
-  
-  # until we depend on a version of reticulate that implements the 'priority'
-  # field we manually overwrite the 'delay_load_module` so that we can 
-  # still find the right python when not using the tensorflow back-end
-  globals <- get(".globals", envir = getNamespace("reticulate"))
-  globals$delay_load_module <- implementation_module
 }
 
 get_keras_implementation <- function(default = "tensorflow") {
-  get_keras_option("keras.implementation", default = default)
+  get_keras_option("KERAS_IMPLEMENTATION", default = default)
 }
 
 get_keras_backend <- function(default = NULL) {
-  get_keras_option("keras.backend", default = default)
+  get_keras_option("KERAS_BACKEND", default = default)
 }
 
 get_keras_python <- function(default = NULL) {
-  get_keras_option("keras.python", default = default, as_lower = FALSE)
+  get_keras_option("KERAS_PYTHON", default = default, as_lower = FALSE)
 }
 
 get_keras_option <- function(name, default = NULL, as_lower = TRUE) {
@@ -91,18 +85,11 @@ get_keras_option <- function(name, default = NULL, as_lower = TRUE) {
       x
   }
   
-  # first check the option
-  value <- getOption(name, default = NA)
-  if (!is.na(value)) {
+  value <- Sys.getenv(name, unset = NA)
+  if (!is.na(value))
     uncase(value)
-  } else {
-    env_var_name <- gsub(".", "_", toupper(name), fixed = TRUE)
-    value <- Sys.getenv(env_var_name, unset = NA)
-    if (!is.na(value))
-      uncase(value)
-    else
-      uncase(default)
-  }
+  else
+    uncase(default)
 }
 
 
