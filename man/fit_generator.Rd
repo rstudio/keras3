@@ -12,10 +12,12 @@ fit_generator(object, generator, steps_per_epoch, epochs = 1, verbose = 1,
 \item{object}{Keras model object}
 
 \item{generator}{A generator (e.g. like the one provided by
-\code{\link[=flow_images_from_directory]{flow_images_from_directory()}} or a custom R \href{https://rstudio.github.io/reticulate/articles/introduction.html#generators}{generatorfunction}.
-The output of the generator must be either:
-- a list (inputs, targets); or
-- a list (inputs, targets, sample_weights).
+\code{\link[=flow_images_from_directory]{flow_images_from_directory()}} or a custom R \href{https://rstudio.github.io/reticulate/articles/introduction.html#generators}{generator function}.
+
+The output of the generator must be a list of one of these forms:\preformatted{ - (inputs, targets)
+ - (inputs, targets, sample_weights)
+}
+
 All arrays should contain the same number of samples. The generator is expected
 to loop over its data indefinitely. An epoch finishes when \code{steps_per_epoch}
 batches have been seen by the model.}

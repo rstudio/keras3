@@ -317,11 +317,13 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'
 #' @param object Keras model object
 #' @param generator A generator (e.g. like the one provided by
-#'   [flow_images_from_directory()] or a custom R [generator
-#'   function](https://rstudio.github.io/reticulate/articles/introduction.html#generators).
-#'   The output of the generator must be either:
-#'     - a list (inputs, targets); or
-#'     - a list (inputs, targets, sample_weights). 
+#'   [flow_images_from_directory()] or a custom R [generator function](https://rstudio.github.io/reticulate/articles/introduction.html#generators)).
+#'
+#'   The output of the generator must be a list of one of these forms:
+#'      
+#'      - (inputs, targets)
+#'      - (inputs, targets, sample_weights)
+#'      
 #'   All arrays should contain the same number of samples. The generator is expected
 #'   to loop over its data indefinitely. An epoch finishes when `steps_per_epoch`
 #'   batches have been seen by the model.

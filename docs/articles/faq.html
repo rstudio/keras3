@@ -216,9 +216,62 @@ intermediate_output &lt;-<span class="st"> </span><span class="kw">predict</span
 <div id="how-can-i-use-keras-with-datasets-that-dont-fit-in-memory" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-can-i-use-keras-with-datasets-that-dont-fit-in-memory" class="anchor"></a>How can I use Keras with datasets that don’t fit in memory?</h2>
-<p>You can do batch training using <code><a href="../reference/train_on_batch.html">train_on_batch()</a></code> and <code><a href="../reference/train_on_batch.html">test_on_batch()</a></code>.</p>
-<p>You can also use <code><a href="../reference/flow_images_from_directory.html">flow_images_from_directory()</a></code> along with <code><a href="../reference/fit_generator.html">fit_generator()</a></code> for training on sets of images stored on disk (with optional image augmentation/normalization via <code><a href="../reference/image_data_generator.html">image_data_generator()</a></code>).</p>
+<div id="generator-functions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#generator-functions" class="anchor"></a>Generator Functions</h3>
+<p>To provide training or evaluation data incrementally you can write an R generator function that yields batches of training data then pass the function to the <code><a href="../reference/fit_generator.html">fit_generator()</a></code> function (or related functions <code><a href="../reference/evaluate_generator.html">evaluate_generator()</a></code> and <code><a href="../reference/predict_generator.html">predict_generator()</a></code>.</p>
+<p>The output of generator functions must be a list of one of these forms:</p>
+<ul>
+<li>(inputs, targets)</li>
+<li>(inputs, targets, sample_weights)</li>
+</ul>
+<p>All arrays should contain the same number of samples. The generator is expected to loop over its data indefinitely. For example, here’s simple generator function that yields randomly sampled batches of data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sampling_generator &lt;-<span class="st"> </span><span class="cf">function</span>(X_data, Y_data, batch_size) {
+  <span class="cf">function</span>() {
+    rows &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(X_data), batch_size, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+    <span class="kw">list</span>(X_data[rows,], Y_data[rows,])
+  }
+}
+
+model <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/fit_generator.html">fit_generator</a></span>(<span class="kw">sampling_generator</span>(X_train, Y_train, <span class="dt">batch_size =</span> <span class="dv">128</span>), 
+                <span class="dt">steps_per_epoch =</span> <span class="kw">nrow</span>(X_train) <span class="op">/</span><span class="st"> </span><span class="dv">128</span>, <span class="dt">epochs =</span> <span class="dv">10</span>)</code></pre></div>
+<p>The <code>steps_per_epoch</code> parameter indicates the number of steps (batches of samples) to yield from generator before declaring one epoch finished and starting the next epoch. It should typically be equal to the number of unique samples if your dataset divided by the batch size.</p>
+</div>
+<div id="external-data-generators" class="section level3">
+<h3 class="hasAnchor">
+<a href="#external-data-generators" class="anchor"></a>External Data Generators</h3>
+<p>The above example doesn’t however address the use case of datasets that don’t fit in memory. Typically to do that you’ll write a generator that reads from another source (e.g. a sparse matrix or file(s) on disk) and maintains an offset into that data as it’s called repeatedly. For example, imagine you have a set of text files in a directory you want to read from:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_files_generator &lt;-<span class="st"> </span><span class="cf">function</span>(dir) {
+  
+  files <span class="op">&lt;</span><span class="st"> </span><span class="kw">list.files</span>(dir)
+  next_file &lt;-<span class="st"> </span><span class="dv">0</span>
+  
+  <span class="cf">function</span>() {
+    
+    <span class="co"># move to the next file (note the &lt;&lt;- assignment operator)</span>
+    next_file &lt;&lt;-<span class="st"> </span>next_file <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+    
+    <span class="co"># determine the file name</span>
+    file &lt;-<span class="st"> </span>files[[next_file]]
+    
+    <span class="co"># process and return the data in the file</span>
+    <span class="kw">file_to_training_data</span>(file)
+  }
+}</code></pre></div>
+<p>The above function is an example of a stateful generator—the function maintains information across calls to keep track of which data to provide next. This is accomplished by defining shared state outside the generator function body and using the <code>&lt;&lt;-</code> operator to assign to it from within the generator.</p>
+</div>
+<div id="image-generators" class="section level3">
+<h3 class="hasAnchor">
+<a href="#image-generators" class="anchor"></a>Image Generators</h3>
+<p>You can also use the <code><a href="../reference/flow_images_from_directory.html">flow_images_from_directory()</a></code> and <code><a href="../reference/flow_images_from_data.html">flow_images_from_data()</a></code> functions along with <code><a href="../reference/fit_generator.html">fit_generator()</a></code> for training on sets of images stored on disk (with optional image augmentation/normalization via <code><a href="../reference/image_data_generator.html">image_data_generator()</a></code>).</p>
 <p>You can see batch image training in action in our <a href="examples/cifar10_cnn.html">CIFAR10 example</a>.</p>
+</div>
+<div id="batch-functions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#batch-functions" class="anchor"></a>Batch Functions</h3>
+<p>You can also do batch training using the <code><a href="../reference/train_on_batch.html">train_on_batch()</a></code> and <code><a href="../reference/train_on_batch.html">test_on_batch()</a></code> functions. These functions enable you to write a training loop that reads into memory only the data required for each batch.</p>
+</div>
 </div>
 <div id="how-can-i-interrupt-training-when-the-validation-loss-isnt-decreasing-anymore" class="section level2">
 <h2 class="hasAnchor">
