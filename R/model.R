@@ -317,11 +317,14 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'
 #' @param object Keras model object
 #' @param generator A generator (e.g. like the one provided by
-#'   [flow_images_from_directory()]. The output of the generator must be either
-#'   - a list (inputs, targets) - a list (inputs, targets, sample_weights). All
-#'   arrays should contain the same number of samples. The generator is expected
-#'   to loop over its data indefinitely. An epoch finishes when
-#'   `steps_per_epoch` batches have been seen by the model.
+#'   [flow_images_from_directory()] or a custom R [generator
+#'   function](https://rstudio.github.io/reticulate/articles/introduction.html#generators).
+#'   The output of the generator must be either:
+#'     - a list (inputs, targets); or
+#'     - a list (inputs, targets, sample_weights). 
+#'   All arrays should contain the same number of samples. The generator is expected
+#'   to loop over its data indefinitely. An epoch finishes when `steps_per_epoch`
+#'   batches have been seen by the model.
 #' @param steps_per_epoch Total number of steps (batches of samples) to yield
 #'   from `generator` before declaring one epoch finished and starting the next
 #'   epoch. It should typically be equal to the number of unique samples if your
@@ -337,19 +340,8 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #' @param class_weight dictionary mapping class indices to a weight for the
 #'   class.
 #' @param max_q_size maximum size for the generator queue
-#' @param workers maximum number of processes to spin up when using process
-#'   based threading
-#' @param pickle_safe if TRUE, use process based threading. Note that because
-#'   this implementation relies on multiprocessing, you should not pass non
-#'   picklable arguments to the generator as they can't be passed easily to
-#'   children processes.
 #' @param initial_epoch epoch at which to start training (useful for resuming a
 #'   previous training run)
-#'
-#' @note Note that the `fit_generator()` function is included for use with
-#'   built-in generators like [flow_images_from_directory()]. It's currently not
-#'   possible to implement generators in R. If you want to stream training data
-#'   within R you should use the [train_on_batch()] function.
 #'
 #' @return Training history object (invisibly)
 #'
@@ -358,10 +350,10 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #' @export
 fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, verbose = 1, 
                           callbacks = NULL, validation_data = NULL, validation_steps = NULL, 
-                          class_weight = NULL, max_q_size = 10, workers = 1, 
-                          pickle_safe = FALSE, initial_epoch = 0) {
-  object$fit_generator(
-    generator = generator,
+                          class_weight = NULL, max_q_size = 10, initial_epoch = 0) {
+  
+  call_generator_function(object$fit_generator, list(
+    generator = as_generator(generator),
     steps_per_epoch = as.integer(steps_per_epoch),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
@@ -370,10 +362,8 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, verbos
     validation_steps = as_nullable_integer(validation_steps),
     class_weight = as_class_weight(class_weight),
     max_q_size = as.integer(max_q_size),
-    workers = as.integer(workers),
-    pickle_safe = pickle_safe,
     initial_epoch = as.integer(initial_epoch) 
-  )
+  ))
 }
 
 #' Evaluates the model on a data generator.
@@ -383,17 +373,12 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, verbos
 #' 
 #' @inheritParams evaluate
 #' 
+#' 
 #' @param generator Generator yielding lists (inputs, targets) or (inputs,
 #'   targets, sample_weights)
 #' @param steps Total number of steps (batches of samples) to yield from
 #'   `generator` before stopping.
 #' @param max_q_size maximum size for the generator queue
-#' @param workers maximum number of processes to spin up when using process
-#'   based threading
-#' @param pickle_safe if `TRUE`, use process based threading. Note that because
-#'   this implementation relies on multiprocessing, you should not pass non
-#'   picklable arguments to the generator as they can't be passed easily to
-#'   children processes.
 #'   
 #' @return Scalar test loss (if the model has a single output and no metrics) or
 #'   list of scalars (if the model has multiple outputs and/or metrics). The
@@ -403,14 +388,12 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, verbos
 #' @family model functions   
 #'     
 #' @export
-evaluate_generator <- function(object, generator, steps, max_q_size = 10, workers = 1, pickle_safe = FALSE) {
-  object$evaluate_generator(
+evaluate_generator <- function(object, generator, steps, max_q_size = 10) {
+  call_generator_function(object$evaluate_generator, list(
     generator = generator,
     steps = as.integer(steps),
-    max_q_size = as.integer(max_q_size),
-    workers = as.integer(workers),
-    pickle_safe = pickle_safe
-  )
+    max_q_size = as.integer(max_q_size)
+  ))
 }
 
 
@@ -426,12 +409,6 @@ evaluate_generator <- function(object, generator, steps, max_q_size = 10, worker
 #' @param steps Total number of steps (batches of samples) to yield from
 #'   `generator` before stopping.
 #' @param max_q_size Maximum size for the generator queue.
-#' @param workers Maximum number of processes to spin up when using process
-#'   based threading
-#' @param pickle_safe If `TRUE`, use process based threading. Note that because
-#'   this implementation relies on multiprocessing, you should not pass non
-#'   picklable arguments to the generator as they can't be passed easily to
-#'   children processes.
 #' @param verbose verbosity mode, 0 or 1.
 #'   
 #' @return Numpy array(s) of predictions.
@@ -442,19 +419,52 @@ evaluate_generator <- function(object, generator, steps, max_q_size = 10, worker
 #' @family model functions   
 #'     
 #' @export
-predict_generator <- function(object, generator, steps, max_q_size = 10, workers = 1, pickle_safe = FALSE, verbose = 0) {
+predict_generator <- function(object, generator, steps, max_q_size = 10, verbose = 0) {
+  
   args <- list(
     generator = generator,
     steps = as.integer(steps),
-    max_q_size = as.integer(max_q_size),
-    workers = as.integer(workers),
-    pickle_safe = pickle_safe
+    max_q_size = as.integer(max_q_size)
   )
   
   if (keras_version() >= "2.0.1")
     args$verbose <- as.integer(verbose)
   
-  do.call(object$predict_generator, args)
+  call_generator_function(object$predict_generator, args)
+}
+
+
+call_generator_function <- function(func, args) {
+  
+  # convert R function to Python iterator if necessary
+  args$generator <- as_generator(args$generator)
+  
+  # force use of single background thread
+  args$workers = 1L
+  if (keras_version() >= "2.0.6")
+    args$use_multiprocessing <- FALSE
+  else
+    args$pickle_safe <- FALSE
+  
+  # call the generator
+  do.call(func, args)
+}
+
+
+as_generator <- function(x) {
+  UseMethod("as_generator")
+}
+
+as_generator.default <- function(x) {
+  stop("Unable to convert object to generator")
+}
+
+as_generator.python.builtin.object <- function(x) {
+  x
+}
+
+as_generator.function <- function(x) {
+  reticulate::generator(x)
 }
 
   
