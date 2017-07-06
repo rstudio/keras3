@@ -1,6 +1,7 @@
 ---
 title: "R interface to Keras"
 type: docs
+repo: https://github.com/rstudio/keras
 menu:
   main:
     name: "Overview"
