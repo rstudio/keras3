@@ -4,8 +4,7 @@
 \alias{evaluate_generator}
 \title{Evaluates the model on a data generator.}
 \usage{
-evaluate_generator(object, generator, steps, max_q_size = 10, workers = 1,
-  pickle_safe = FALSE)
+evaluate_generator(object, generator, steps, max_q_size = 10)
 }
 \arguments{
 \item{object}{Model object to evaluate}
@@ -17,14 +16,6 @@ targets, sample_weights)}
 \code{generator} before stopping.}
 
 \item{max_q_size}{maximum size for the generator queue}
-
-\item{workers}{maximum number of processes to spin up when using process
-based threading}
-
-\item{pickle_safe}{if \code{TRUE}, use process based threading. Note that because
-this implementation relies on multiprocessing, you should not pass non
-picklable arguments to the generator as they can't be passed easily to
-children processes.}
 }
 \value{
 Scalar test loss (if the model has a single output and no metrics) or

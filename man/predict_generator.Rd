@@ -4,8 +4,7 @@
 \alias{predict_generator}
 \title{Generates predictions for the input samples from a data generator.}
 \usage{
-predict_generator(object, generator, steps, max_q_size = 10, workers = 1,
-  pickle_safe = FALSE, verbose = 0)
+predict_generator(object, generator, steps, max_q_size = 10, verbose = 0)
 }
 \arguments{
 \item{object}{Keras model object}
@@ -16,14 +15,6 @@ predict_generator(object, generator, steps, max_q_size = 10, workers = 1,
 \code{generator} before stopping.}
 
 \item{max_q_size}{Maximum size for the generator queue.}
-
-\item{workers}{Maximum number of processes to spin up when using process
-based threading}
-
-\item{pickle_safe}{If \code{TRUE}, use process based threading. Note that because
-this implementation relies on multiprocessing, you should not pass non
-picklable arguments to the generator as they can't be passed easily to
-children processes.}
 
 \item{verbose}{verbosity mode, 0 or 1.}
 }

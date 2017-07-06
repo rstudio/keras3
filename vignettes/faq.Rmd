@@ -169,11 +169,69 @@ intermediate_output <- predict(intermediate_layer_model, data)
 
 ## How can I use Keras with datasets that don't fit in memory?
 
-You can do batch training using `train_on_batch()` and `test_on_batch()`.
+### Generator Functions
 
-You can also use `flow_images_from_directory()` along with `fit_generator()` for training on sets of images stored on disk (with optional image augmentation/normalization via `image_data_generator()`).
+To provide training or evaluation data incrementally you can write an R generator function that yields batches of training data then pass the function to the `fit_generator()` function (or related functions `evaluate_generator()` and `predict_generator()`.
+
+The output of generator functions must be a list of one of these forms:
+
+   - (inputs, targets)
+   - (inputs, targets, sample_weights)
+     
+All arrays should contain the same number of samples. The generator is expected to loop over its data indefinitely. For example, here's simple generator function that yields randomly sampled batches of data:
+
+```{r}
+sampling_generator <- function(X_data, Y_data, batch_size) {
+  function() {
+    rows <- sample(1:nrow(X_data), batch_size, replace = TRUE)
+    list(X_data[rows,], Y_data[rows,])
+  }
+}
+
+model %>% 
+  fit_generator(sampling_generator(X_train, Y_train, batch_size = 128), 
+                steps_per_epoch = nrow(X_train) / 128, epochs = 10)
+  
+```
+
+
+The `steps_per_epoch` parameter indicates the number of steps (batches of samples) to yield from generator before declaring one epoch finished and starting the next epoch. It should typically be equal to the number of unique samples if your dataset divided by the batch size.
+
+### External Data Generators
+
+The above example doesn't however address the use case of datasets that don't fit in memory. Typically to do that you'll write a generator that reads from another source (e.g. a sparse matrix or file(s) on disk) and maintains an offset into that data as it's called repeatedly. For example, imagine you have a set of text files in a directory you want to read from:
+
+```{r}
+data_files_generator <- function(dir) {
+  
+  files < list.files(dir)
+  next_file <- 0
+  
+  function() {
+    
+    # move to the next file (note the <<- assignment operator)
+    next_file <<- next_file + 1
+    
+    # determine the file name
+    file <- files[[next_file]]
+    
+    # process and return the data in the file
+    file_to_training_data(file)
+  }
+}
+```
+
+The above function is an example of a stateful generator---the function maintains information across calls to keep track of which data to provide next. This is accomplished by defining shared state outside the generator function body and using the `<<-` operator to assign to it from within the generator.
+
+### Image Generators
+
+You can also use the `flow_images_from_directory()` and `flow_images_from_data()` functions along with `fit_generator()` for training on sets of images stored on disk (with optional image augmentation/normalization via `image_data_generator()`).
 
 You can see batch image training in action in our [CIFAR10 example](examples/cifar10_cnn.html).
+
+### Batch Functions
+
+You can also do batch training using the `train_on_batch()` and `test_on_batch()` functions. These functions enable you to write a training loop that reads into memory only the data required for each batch.
 
 
 ## How can I interrupt training when the validation loss isn't decreasing anymore?

@@ -6,20 +6,21 @@
 \usage{
 fit_generator(object, generator, steps_per_epoch, epochs = 1, verbose = 1,
   callbacks = NULL, validation_data = NULL, validation_steps = NULL,
-  class_weight = NULL, max_q_size = 10, workers = 1,
-  pickle_safe = FALSE, initial_epoch = 0)
+  class_weight = NULL, max_q_size = 10, initial_epoch = 0)
 }
 \arguments{
 \item{object}{Keras model object}
 
 \item{generator}{A generator (e.g. like the one provided by
-\code{\link[=flow_images_from_directory]{flow_images_from_directory()}}. The output of the generator must be either
-\itemize{
-\item a list (inputs, targets) - a list (inputs, targets, sample_weights). All
-arrays should contain the same number of samples. The generator is expected
-to loop over its data indefinitely. An epoch finishes when
-\code{steps_per_epoch} batches have been seen by the model.
-}}
+\code{\link[=flow_images_from_directory]{flow_images_from_directory()}} or a custom R \href{https://rstudio.github.io/reticulate/articles/introduction.html#generators}{generator function}.
+
+The output of the generator must be a list of one of these forms:\preformatted{ - (inputs, targets)
+ - (inputs, targets, sample_weights)
+}
+
+All arrays should contain the same number of samples. The generator is expected
+to loop over its data indefinitely. An epoch finishes when \code{steps_per_epoch}
+batches have been seen by the model.}
 
 \item{steps_per_epoch}{Total number of steps (batches of samples) to yield
 from \code{generator} before declaring one epoch finished and starting the next
@@ -44,14 +45,6 @@ class.}
 
 \item{max_q_size}{maximum size for the generator queue}
 
-\item{workers}{maximum number of processes to spin up when using process
-based threading}
-
-\item{pickle_safe}{if TRUE, use process based threading. Note that because
-this implementation relies on multiprocessing, you should not pass non
-picklable arguments to the generator as they can't be passed easily to
-children processes.}
-
 \item{initial_epoch}{epoch at which to start training (useful for resuming a
 previous training run)}
 }
@@ -62,12 +55,6 @@ Training history object (invisibly)
 The generator is run in parallel to the model, for efficiency. For instance,
 this allows you to do real-time data augmentation on images on CPU in
 parallel to training your model on GPU.
-}
-\note{
-Note that the \code{fit_generator()} function is included for use with
-built-in generators like \code{\link[=flow_images_from_directory]{flow_images_from_directory()}}. It's currently not
-possible to implement generators in R. If you want to stream training data
-within R you should use the \code{\link[=train_on_batch]{train_on_batch()}} function.
 }
 \seealso{
 Other model functions: \code{\link{compile}},
