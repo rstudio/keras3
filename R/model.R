@@ -466,7 +466,7 @@ as_generator.python.builtin.object <- function(x) {
 }
 
 as_generator.function <- function(x) {
-  reticulate::generator(x)
+  reticulate::py_iterator(x)
 }
 
   
