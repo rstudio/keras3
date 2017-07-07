@@ -352,11 +352,7 @@ model <- application_vgg16(weights = 'imagenet', include_top = TRUE)
 
 For a few simple usage examples, see [the documentation for the Applications module](applications.html).
 
-The VGG16 model is also the basis for several Keras example scripts:
-
-- [Style transfer](examples/neural_style_transfer.html)
-- [Feature visualization](examples/conv_filter_visualization.html)
-- [Deep dream](examples/deep_dream.html)
+The VGG16 model is also the basis for the [Deep dream](examples/deep_dream.html) Keras example script.
 
 ## How can I use other Keras backends?
 
