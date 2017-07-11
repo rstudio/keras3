@@ -39,6 +39,8 @@ test_succeeds("use of text tokenizer", {
 })
 
 test_succeeds("loading an image for preprocessing", {
-  img <- image_load("digit.jpeg")
-  img_arr <- image_to_array(img)
+  if (have_pillow()) {
+    img <- image_load("digit.jpeg")
+    img_arr <- image_to_array(img)
+  }
 })
