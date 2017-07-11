@@ -11,33 +11,8 @@ keras <- NULL
 
 .onLoad <- function(libname, pkgname) {
   
-  # determine implementation to use
-  implementation <- get_keras_implementation(default = NULL)
-  
-  # determine backend to use
-  backend <- get_keras_backend()
-  
-  # set KERAS_BACKEND environment variable 
-  if (!is.null(backend))
-    Sys.setenv(KERAS_BACKEND = backend)
-  
-  # fully resolve implementation if it's not yet provided
-  if (is.null(implementation)) {
-    # if there is a backend then this implies 'keras' implementation
-    if (!is.null(backend)) {
-      implementation <- "keras"
-      Sys.setenv(KERAS_IMPLEMENTATION = "keras")
-    # otherwise implementation is 'tensorflow'
-    } else {
-      implementation <- "tensorflow"
-    }
-  }
-  
-  # set the implementation module
-  if (identical(implementation, "tensorflow"))
-    implementation_module <- "tensorflow.contrib.keras.python.keras"
-  else
-    implementation_module <- implementation
+  # resolve the implementaiton module (might be keras proper or might be tensorflow)
+  implementation_module <- resolve_implementation_module()
   
   # if KERAS_PYTHON is defined then forward it to RETICULATE_PYTHON
   keras_python <- get_keras_python()
@@ -59,8 +34,41 @@ keras <- NULL
       else
         stop(e, call. = FALSE)
     }
-    
   ))
+}
+
+resolve_implementation_module <- function() {
+  
+  # determine implementation to use
+  implementation <- get_keras_implementation(default = NULL)
+  
+  # determine backend to use
+  backend <- get_keras_backend()
+  
+  # set KERAS_BACKEND environment variable 
+  if (!is.null(backend))
+    Sys.setenv(KERAS_BACKEND = backend)
+  
+  # fully resolve implementation if it's not yet provided
+  if (is.null(implementation)) {
+    # if there is a backend then this implies 'keras' implementation
+    if (!is.null(backend)) {
+      implementation <- "keras"
+      Sys.setenv(KERAS_IMPLEMENTATION = "keras")
+      # otherwise implementation is 'tensorflow'
+    } else {
+      implementation <- "tensorflow"
+    }
+  }
+  
+  # set the implementation module
+  if (identical(implementation, "tensorflow"))
+    implementation_module <- "tensorflow.contrib.keras.python.keras"
+  else
+    implementation_module <- implementation
+  
+  # return implementation_module
+  implementation_module
 }
 
 get_keras_implementation <- function(default = "tensorflow") {

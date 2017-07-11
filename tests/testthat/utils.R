@@ -1,6 +1,10 @@
 
 skip_if_no_keras <- function() {
-  if (!reticulate::py_module_available("tensorflow.contrib.keras"))
+  # determine implementation module
+  implementation_module <- resolve_implementation_module()
+  
+  # force resolution of keras import (catch errors)
+  if (!reticulate::py_module_available(implementation_module))
     skip("keras not available for testing")
 }
 
