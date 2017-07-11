@@ -24,7 +24,7 @@ test_initializer("random_uniform")
 test_initializer("truncated_normal")
 test_initializer("variance_scaling")
 test_initializer("orthogonal")
-if (!is_implementation("tensorflow") || (tensorflow::tf_version() <= "1.1"))
+if (is_keras_implementation() || (is_tensorflow_implementation() && (tensorflow::tf_version() <= "1.1")))
   test_initializer("identity") # don't know why this test fails on v1.2
 test_initializer("glorot_normal")
 test_initializer("glorot_uniform")

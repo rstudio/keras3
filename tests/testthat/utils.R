@@ -16,10 +16,6 @@ test_call_succeeds <- function(call_name, expr) {
   test_succeeds(paste(call_name, "call succeeds"), expr)
 }
 
-is_implementation <- function(name) {
-  identical(name, getOption("keras.implementation", default = "tensorflow"))
-}
-
 is_backend <- function(name) {
   identical(backend()$backend(), name)
 }
