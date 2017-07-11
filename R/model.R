@@ -341,7 +341,7 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'   stopping.
 #' @param class_weight dictionary mapping class indices to a weight for the
 #'   class.
-#' @param max_q_size maximum size for the generator queue
+#' @param max_queue_size maximum size for the generator queue
 #' @param initial_epoch epoch at which to start training (useful for resuming a
 #'   previous training run)
 #'
@@ -352,7 +352,7 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #' @export
 fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, verbose = 1, 
                           callbacks = NULL, validation_data = NULL, validation_steps = NULL, 
-                          class_weight = NULL, max_q_size = 10, initial_epoch = 0) {
+                          class_weight = NULL, max_queue_size = 10, initial_epoch = 0) {
   
   call_generator_function(object$fit_generator, list(
     generator = as_generator(generator),
@@ -363,7 +363,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, verbos
     validation_data = validation_data,
     validation_steps = as_nullable_integer(validation_steps),
     class_weight = as_class_weight(class_weight),
-    max_q_size = as.integer(max_q_size),
+    max_queue_size = as.integer(max_queue_size),
     initial_epoch = as.integer(initial_epoch) 
   ))
 }
@@ -380,7 +380,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, verbos
 #'   targets, sample_weights)
 #' @param steps Total number of steps (batches of samples) to yield from
 #'   `generator` before stopping.
-#' @param max_q_size maximum size for the generator queue
+#' @param max_queue_size maximum size for the generator queue
 #'   
 #' @return Scalar test loss (if the model has a single output and no metrics) or
 #'   list of scalars (if the model has multiple outputs and/or metrics). The
@@ -390,11 +390,11 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, verbos
 #' @family model functions   
 #'     
 #' @export
-evaluate_generator <- function(object, generator, steps, max_q_size = 10) {
+evaluate_generator <- function(object, generator, steps, max_queue_size = 10) {
   call_generator_function(object$evaluate_generator, list(
     generator = generator,
     steps = as.integer(steps),
-    max_q_size = as.integer(max_q_size)
+    max_queue_size = as.integer(max_queue_size)
   ))
 }
 
@@ -410,7 +410,7 @@ evaluate_generator <- function(object, generator, steps, max_q_size = 10) {
 #' @param generator Generator yielding batches of input samples.
 #' @param steps Total number of steps (batches of samples) to yield from
 #'   `generator` before stopping.
-#' @param max_q_size Maximum size for the generator queue.
+#' @param max_queue_size Maximum size for the generator queue.
 #' @param verbose verbosity mode, 0 or 1.
 #'   
 #' @return Numpy array(s) of predictions.
@@ -421,12 +421,12 @@ evaluate_generator <- function(object, generator, steps, max_q_size = 10) {
 #' @family model functions   
 #'     
 #' @export
-predict_generator <- function(object, generator, steps, max_q_size = 10, verbose = 0) {
+predict_generator <- function(object, generator, steps, max_queue_size = 10, verbose = 0) {
   
   args <- list(
     generator = generator,
     steps = as.integer(steps),
-    max_q_size = as.integer(max_q_size)
+    max_queue_size = as.integer(max_queue_size)
   )
   
   if (keras_version() >= "2.0.1")
@@ -445,8 +445,11 @@ call_generator_function <- function(func, args) {
   args$workers = 1L
   if (keras_version() >= "2.0.6")
     args$use_multiprocessing <- FALSE
-  else
+  else {
+    args$max_q_size <- args$max_queue_size
+    args$max_queue_size <- NULL
     args$pickle_safe <- FALSE
+  }
   
   # call the generator
   do.call(func, args)

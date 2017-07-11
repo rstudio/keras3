@@ -4,7 +4,8 @@
 \alias{predict_generator}
 \title{Generates predictions for the input samples from a data generator.}
 \usage{
-predict_generator(object, generator, steps, max_q_size = 10, verbose = 0)
+predict_generator(object, generator, steps, max_queue_size = 10,
+  verbose = 0)
 }
 \arguments{
 \item{object}{Keras model object}
@@ -14,7 +15,7 @@ predict_generator(object, generator, steps, max_q_size = 10, verbose = 0)
 \item{steps}{Total number of steps (batches of samples) to yield from
 \code{generator} before stopping.}
 
-\item{max_q_size}{Maximum size for the generator queue.}
+\item{max_queue_size}{Maximum size for the generator queue.}
 
 \item{verbose}{verbosity mode, 0 or 1.}
 }

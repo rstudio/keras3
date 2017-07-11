@@ -4,7 +4,7 @@
 \alias{evaluate_generator}
 \title{Evaluates the model on a data generator.}
 \usage{
-evaluate_generator(object, generator, steps, max_q_size = 10)
+evaluate_generator(object, generator, steps, max_queue_size = 10)
 }
 \arguments{
 \item{object}{Model object to evaluate}
@@ -15,7 +15,7 @@ targets, sample_weights)}
 \item{steps}{Total number of steps (batches of samples) to yield from
 \code{generator} before stopping.}
 
-\item{max_q_size}{maximum size for the generator queue}
+\item{max_queue_size}{maximum size for the generator queue}
 }
 \value{
 Scalar test loss (if the model has a single output and no metrics) or

@@ -6,7 +6,7 @@
 \usage{
 fit_generator(object, generator, steps_per_epoch, epochs = 1, verbose = 1,
   callbacks = NULL, validation_data = NULL, validation_steps = NULL,
-  class_weight = NULL, max_q_size = 10, initial_epoch = 0)
+  class_weight = NULL, max_queue_size = 10, initial_epoch = 0)
 }
 \arguments{
 \item{object}{Keras model object}
@@ -43,7 +43,7 @@ stopping.}
 \item{class_weight}{dictionary mapping class indices to a weight for the
 class.}
 
-\item{max_q_size}{maximum size for the generator queue}
+\item{max_queue_size}{maximum size for the generator queue}
 
 \item{initial_epoch}{epoch at which to start training (useful for resuming a
 previous training run)}
