@@ -7,6 +7,8 @@
 layer_alpha_dropout(object, rate, noise_shape = NULL, seed = NULL)
 }
 \arguments{
+\item{object}{Model or layer object}
+
 \item{rate}{float, drop probability (as with \code{layer_dropout()}). The
 multiplicative noise will have standard deviation \code{sqrt(rate / (1 - rate))}.}
 

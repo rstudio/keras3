@@ -81,6 +81,8 @@ layer_gaussian_dropout <- function(object, rate, input_shape = NULL,
 #' Alpha Dropout fits well to Scaled Exponential Linear Units by randomly
 #' setting activations to the negative saturation value.
 #'
+#' @inheritParams layer_dense
+#'
 #' @param rate float, drop probability (as with `layer_dropout()`). The
 #'   multiplicative noise will have standard deviation `sqrt(rate / (1 -
 #'   rate))`.
