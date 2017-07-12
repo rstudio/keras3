@@ -129,8 +129,19 @@
 tensor operations.</p>
     
 
-    <pre class="usage"><span class='fu'>backend</span>()</pre>
-        
+    <pre class="usage"><span class='fu'>backend</span>(<span class='kw'>convert</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>convert</th>
+      <td><p><code>TRUE</code> to automatically convert Python objects to their R
+equivalent. If you pass <code>FALSE</code> you can do manual conversion using the
+<code>py_to_r()</code> function.</p></td>
+    </tr>
+    </table>
+    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Reference to Keras backend python module.</p>
@@ -145,6 +156,7 @@ additional details on the available functions.</p>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
 

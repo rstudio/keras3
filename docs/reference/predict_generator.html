@@ -129,7 +129,8 @@
 <code><a href='predict_on_batch.html'>predict_on_batch()</a></code>.</p>
     
 
-    <pre class="usage"><span class='fu'>predict_generator</span>(<span class='no'>object</span>, <span class='no'>generator</span>, <span class='no'>steps</span>, <span class='kw'>max_q_size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>predict_generator</span>(<span class='no'>object</span>, <span class='no'>generator</span>, <span class='no'>steps</span>, <span class='kw'>max_queue_size</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -148,7 +149,7 @@
 <code>generator</code> before stopping.</p></td>
     </tr>
     <tr>
-      <th>max_q_size</th>
+      <th>max_queue_size</th>
       <td><p>Maximum size for the generator queue.</p></td>
     </tr>
     <tr>
