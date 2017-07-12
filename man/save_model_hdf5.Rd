@@ -8,7 +8,7 @@
 save_model_hdf5(object, filepath, overwrite = TRUE,
   include_optimizer = TRUE)
 
-load_model_hdf5(filepath, custom_objects = NULL)
+load_model_hdf5(filepath, custom_objects = NULL, compile = TRUE)
 }
 \arguments{
 \item{object}{Model object to save}
@@ -21,6 +21,8 @@ load_model_hdf5(filepath, custom_objects = NULL)
 
 \item{custom_objects}{Mapping class names (or function names) of custom
 (non-Keras) objects to class/functions}
+
+\item{compile}{Whether to compile the model after loading.}
 }
 \description{
 Save/Load models using HDF5 files
