@@ -33,8 +33,12 @@ dataset divided by the batch size.}
 
 \item{callbacks}{list of callbacks to be called during training.}
 
-\item{validation_data}{this can be either - a generator for the validation
-data - a list (inputs, targets) - a list (inputs, targets, sample_weights).}
+\item{validation_data}{this can be either:
+\itemize{
+\item a generator for the validation data
+\item a list (inputs, targets)
+\item a list (inputs, targets, sample_weights).
+}}
 
 \item{validation_steps}{Only relevant if \code{validation_data} is a generator.
 Total number of steps (batches of samples) to yield from \code{generator} before

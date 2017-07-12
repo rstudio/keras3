@@ -334,8 +334,10 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #' @param epochs integer, total number of iterations on the data.
 #' @param verbose verbosity mode, 0, 1, or 2.
 #' @param callbacks list of callbacks to be called during training.
-#' @param validation_data this can be either - a generator for the validation
-#'   data - a list (inputs, targets) - a list (inputs, targets, sample_weights).
+#' @param validation_data this can be either: 
+#'    - a generator for the validation data 
+#'    - a list (inputs, targets) 
+#'    - a list (inputs, targets, sample_weights).
 #' @param validation_steps Only relevant if `validation_data` is a generator.
 #'   Total number of steps (batches of samples) to yield from `generator` before
 #'   stopping.
