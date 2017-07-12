@@ -23,9 +23,7 @@ value.}
 this value.}
 }
 \description{
-Adadelta optimizer as described in
-\href{https://arxiv.org/abs/1212.5701}{ADADELTA: An Adaptive Learning Rate
-Method}.
+Adadelta optimizer as described in \href{https://arxiv.org/abs/1212.5701}{ADADELTA: An Adaptive Learning RateMethod}.
 }
 \note{
 It is recommended to leave the parameters of this optimizer at their

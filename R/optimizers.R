@@ -66,18 +66,18 @@ optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = 1e-08, decay = 0.
 
 
 #' Adagrad optimizer.
-#' 
-#' Adagrad optimizer as described in
-#' \href{http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf}{Adaptive 
-#' Subgradient Methods for Online Learning and Stochastic Optimization}.
-#' 
+#'
+#' Adagrad optimizer as described in [Adaptive Subgradient Methods for Online
+#' Learning and Stochastic
+#' Optimization](http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf).
+#'
 #' @inheritParams optimizer_rmsprop
-#' 
-#' @note It is recommended to leave the parameters of this optimizer at their 
+#'
+#' @note It is recommended to leave the parameters of this optimizer at their
 #'   default values.
-#' 
-#' @family optimizers  
-#' 
+#'
+#' @family optimizers
+#'
 #' @export
 optimizer_adagrad <- function(lr = 0.01, epsilon = 1e-08, decay = 0.0,
                               clipnorm = NULL, clipvalue = NULL) {
@@ -94,18 +94,17 @@ optimizer_adagrad <- function(lr = 0.01, epsilon = 1e-08, decay = 0.0,
 }
 
 #' Adadelta optimizer.
-#' 
-#' Adadelta optimizer as described in
-#' \href{https://arxiv.org/abs/1212.5701}{ADADELTA: An Adaptive Learning Rate
-#' Method}.
-#' 
+#'
+#' Adadelta optimizer as described in [ADADELTA: An Adaptive Learning Rate
+#' Method](https://arxiv.org/abs/1212.5701).
+#'
 #' @inheritParams optimizer_rmsprop
-#'   
-#' @note It is recommended to leave the parameters of this optimizer at their 
+#'
+#' @note It is recommended to leave the parameters of this optimizer at their
 #'   default values.
 #'
-#' @family optimizers  
-#'         
+#' @family optimizers
+#'
 #' @export
 optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = 1e-08, decay = 0.0,
                                clipnorm = NULL, clipvalue = NULL) {
@@ -123,20 +122,20 @@ optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = 1e-08, decay = 0.
 }
 
 #' Adam optimizer
-#' 
-#' Adam optimizer as described in \href{https://arxiv.org/abs/1412.6980v8}{Adam 
-#' - A Method for Stochastic Optimization}.
-#' 
+#'
+#' Adam optimizer as described in [Adam - A Method for Stochastic
+#' Optimization](https://arxiv.org/abs/1412.6980v8).
+#'
 #' @inheritParams optimizer_rmsprop
 #' @param beta_1 The exponential decay rate for the 1st moment estimates. float,
 #'   0 < beta < 1. Generally close to 1.
 #' @param beta_2 The exponential decay rate for the 2nd moment estimates. float,
 #'   0 < beta < 1. Generally close to 1.
-#'   
+#'
 #' @note Default parameters follow those provided in the original paper.
-#'   
-#' @family optimizers  
-#'   
+#'
+#' @family optimizers
+#'
 #' @export
 optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, decay = 0.0,
                            clipnorm = NULL, clipvalue = NULL) {
@@ -156,7 +155,7 @@ optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1
 
 #' Adamax optimizer
 #' 
-#' Adamax optimizer from Section 7 of the \href{https://arxiv.org/abs/1412.6980v8}{Adam paper}.
+#' Adamax optimizer from Section 7 of the [Adam paper](https://arxiv.org/abs/1412.6980v8).
 #' It is a variant of Adam based on the infinity norm.
 #' 
 #' @inheritParams optimizer_adam
@@ -181,24 +180,23 @@ optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon =
 }
 
 #' Nesterov Adam optimizer
-#' 
-#' Much like Adam is essentially RMSprop with momentum, Nadam is Adam RMSprop 
-#' with Nesterov momentum. See 
-#' \href{http://cs229.stanford.edu/proj2015/054_report.pdf}{Incorporating 
-#' Nesterov Momentum into Adam}.
-#' 
+#'
+#' Much like Adam is essentially RMSprop with momentum, Nadam is Adam RMSprop
+#' with Nesterov momentum. See [Incorporating Nesterov Momentum into
+#' Adam](http://cs229.stanford.edu/proj2015/054_report.pdf).
+#'
 #' @inheritParams optimizer_adam
 #' @param schedule_decay Schedule deacy.
-#'   
-#' @details Default parameters follow those provided in the paper. It is 
-#'   recommended to leave the parameters of this optimizer at their default 
+#'
+#' @details Default parameters follow those provided in the paper. It is
+#'   recommended to leave the parameters of this optimizer at their default
 #'   values.
-#'   
-#' @seealso \href{http://www.cs.toronto.edu/~fritz/absps/momentum.pdf}{On the
-#'   importance of initialization and momentum in deep learning}.
-#'   
-#' @family optimizers  
-#'   
+#'
+#' @seealso [On the importance of initialization and momentum in deep
+#'   learning](http://www.cs.toronto.edu/~fritz/absps/momentum.pdf).
+#'
+#' @family optimizers
+#'
 #' @export
 optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, 
                             schedule_decay = 0.004, clipnorm = NULL, clipvalue = NULL) {
