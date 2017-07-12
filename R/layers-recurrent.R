@@ -168,7 +168,7 @@ layer_gru <- function(object, units, activation = "tanh", recurrent_activation =
 #' @template roxlate-recurrent-layer    
 #'   
 #' @section References: 
-#' - [Long short-term memory](http://deeplearning.cs.cmu.edu/pdfs/Hochreiter97_lstm.pdf) (original 1997 paper) 
+#' - [Long short-term memory](http://www.bioinf.jku.at/publications/older/2604.pdf) (original 1997 paper) 
 #' - [Supervised sequence labeling with recurrent neural networks](http://www.cs.toronto.edu/~graves/preprint.pdf) 
 #' - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
 #'  
