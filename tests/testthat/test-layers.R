@@ -352,34 +352,39 @@ test_call_succeeds("layer_embedding", {
     layer_embedding(1000, 64, input_length = 10)
 })
 
-merge_inputs <- c(
-  layer_input(shape = c(4, 5)),
-  layer_input(shape = c(4, 5)),
-  layer_input(shape = c(4, 5))
-)
+get_merge_inputs <- function() {
+  c(layer_input(shape = c(4, 5)),
+    layer_input(shape = c(4, 5)),
+    layer_input(shape = c(4, 5)))
+}
 
 
 test_call_succeeds("layer_add", {
+  merge_inputs <- get_merge_inputs()
   output <- layer_add(merge_inputs)
   keras_model(merge_inputs, output)
 })
 
 test_call_succeeds("layer_multiply", {
+  merge_inputs <- get_merge_inputs()
   output <- layer_multiply(merge_inputs)
   keras_model(merge_inputs, output)
 })
 
 test_call_succeeds("layer_maximum", {
+  merge_inputs <- get_merge_inputs()
   output <- layer_maximum(merge_inputs)
   keras_model(merge_inputs, output)
 })
 
 test_call_succeeds("layer_average", {
+  merge_inputs <- get_merge_inputs()
   output <- layer_average(merge_inputs)
   keras_model(merge_inputs, output)
 })
 
 test_call_succeeds("layer_concatenate", {
+  merge_inputs <- get_merge_inputs()
   output <- layer_concatenate(merge_inputs)
   keras_model(merge_inputs, output)
 })
