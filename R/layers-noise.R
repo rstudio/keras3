@@ -72,4 +72,39 @@ layer_gaussian_dropout <- function(object, rate, input_shape = NULL,
 }
 
 
+#' Applies Alpha Dropout to the input.
+#'
+#' Alpha Dropout is a dropout that keeps mean and variance of inputs to their
+#' original values, in order to ensure the self-normalizing property even after
+#' this dropout.
+#'
+#' Alpha Dropout fits well to Scaled Exponential Linear Units by randomly
+#' setting activations to the negative saturation value.
+#'
+#' @param rate float, drop probability (as with `layer_dropout()`). The
+#'   multiplicative noise will have standard deviation `sqrt(rate / (1 -
+#'   rate))`.
+#' @param noise_shape Noise shape
+#' @param seed An integer to use as random seed.
+#'
+#' @section Input shape: Arbitrary. Use the keyword argument `input_shape` (list
+#'   of integers, does not include the samples axis) when using this layer as
+#'   the first layer in a model.
+#'   
+#' @section Output shape: Same shape as input.
+#'   
+#' @section References: 
+#'   - [Self-Normalizing Neural Networks](https://arxiv.org/abs/1706.02515)
+#'   
+#' @family noise layers   
+#'
+#' @export
+layer_alpha_dropout <- function(object, rate, noise_shape = NULL, seed = NULL) {
+  call_layer(keras$layers$AlphaDropout, object, list(
+    rate = rate,
+    noise_shape = noise_shape,
+    seed = as_nullable_integer(seed)
+  ))
+}
+
 

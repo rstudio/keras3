@@ -28,5 +28,6 @@ One-hot encode a text into a list of word indexes in a vocabulary of size n.
 \seealso{
 Other text preprocessing: \code{\link{make_sampling_table}},
   \code{\link{pad_sequences}}, \code{\link{skipgrams}},
+  \code{\link{text_hashing_trick}},
   \code{\link{text_to_word_sequence}}
 }

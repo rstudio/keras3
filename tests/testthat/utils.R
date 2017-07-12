@@ -1,7 +1,11 @@
 
-skip_if_no_keras <- function() {
+skip_if_no_keras <- function(required_version = NULL) {
   if (!have_keras())
     skip("keras not available for testing")
+  else if (!is.null(required_version)) {
+    if (keras_version() < required_version)
+      skip("required version of keras not available for testing")
+  }
 }
 
 have_keras <- function() {
@@ -10,15 +14,15 @@ have_keras <- function() {
 }
 
 
-test_succeeds <- function(desc, expr) {
+test_succeeds <- function(desc, expr, required_version = NULL) {
   test_that(desc, {
-    skip_if_no_keras()
+    skip_if_no_keras(required_version)
     expect_error(force(expr), NA)
   })
 }
 
-test_call_succeeds <- function(call_name, expr) {
-  test_succeeds(paste(call_name, "call succeeds"), expr)
+test_call_succeeds <- function(call_name, expr, required_version = NULL) {
+  test_succeeds(paste(call_name, "call succeeds"), expr, required_version)
 }
 
 is_backend <- function(name) {

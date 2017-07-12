@@ -60,7 +60,9 @@ Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 \seealso{
 Other convolutional layers: \code{\link{layer_conv_1d}},
   \code{\link{layer_conv_2d_transpose}},
-  \code{\link{layer_conv_2d}}, \code{\link{layer_conv_3d}},
+  \code{\link{layer_conv_2d}},
+  \code{\link{layer_conv_3d_transpose}},
+  \code{\link{layer_conv_3d}},
   \code{\link{layer_conv_lstm_2d}},
   \code{\link{layer_cropping_1d}},
   \code{\link{layer_cropping_2d}},

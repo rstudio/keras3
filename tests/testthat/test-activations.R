@@ -2,9 +2,9 @@ context("activations")
 
 source("utils.R")
 
-test_activation <- function(name) {
+test_activation <- function(name, required_version = NULL) {
   test_succeeds(paste("use activation", name), {
-    skip_if_no_keras()
+    skip_if_no_keras(required_version)
     activation_fn <- eval(parse(text = name))
     test_call_succeeds(name, {
       keras_model_sequential() %>% 
@@ -19,6 +19,7 @@ test_activation <- function(name) {
 
 
 test_activation("activation_elu")
+test_activation("activation_selu", required_version = "2.0.5")
 test_activation("activation_hard_sigmoid")
 test_activation("activation_linear")
 test_activation("activation_relu")

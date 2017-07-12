@@ -160,6 +160,10 @@ Name                                                                            
 [learning_phase](https://keras.io/backend/#learning_phase)                                     Returns the learning phase flag.                                            
 [less](https://keras.io/backend/#less)                                                         Element-wise truth value of (x < y).                                        
 [less_equal](https://keras.io/backend/#less_equal)                                             Element-wise truth value of (x <= y).                                       
+[local_conv1d](https://keras.io/backend/#local_conv1d)                                         Apply 1D conv with un-shared weights.
+
+[local_conv2d](https://keras.io/backend/#local_conv2d)                                         Apply 2D conv with un-shared weights.
+
 [log](https://keras.io/backend/#log)                                                           Element-wise log.                                                           
 [logsumexp](https://keras.io/backend/#logsumexp)                                               Computes log(sum(exp(elements across dimensions of a tensor))).             
 [manual_variable_initialization](https://keras.io/backend/#manual_variable_initialization)     Sets the manual variable initialization flag.                               

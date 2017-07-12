@@ -33,6 +33,8 @@ the end of the sequence. Supports post-padding and pre-padding (default).
 }
 \seealso{
 Other text preprocessing: \code{\link{make_sampling_table}},
-  \code{\link{skipgrams}}, \code{\link{text_one_hot}},
+  \code{\link{skipgrams}},
+  \code{\link{text_hashing_trick}},
+  \code{\link{text_one_hot}},
   \code{\link{text_to_word_sequence}}
 }

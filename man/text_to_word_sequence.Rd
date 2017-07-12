@@ -26,5 +26,6 @@ Convert text to a sequence of words (or tokens).
 \seealso{
 Other text preprocessing: \code{\link{make_sampling_table}},
   \code{\link{pad_sequences}}, \code{\link{skipgrams}},
+  \code{\link{text_hashing_trick}},
   \code{\link{text_one_hot}}
 }

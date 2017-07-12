@@ -524,7 +524,10 @@ summary.keras.engine.training.Model <- function(object, line_length = getOption(
   if (py_is_null_xptr(object))
     cat("<pointer: 0x0>\n")
   else {
-    cat(py_str(object, line_length = line_length, positions = positions), "\n")
+    if (keras_version() >= "2.05")
+      object$summary(line_length = getOption("width"), print_fn = function(object) cat(object, "\n", sep = ""))
+    else
+      cat(py_str(object, line_length = line_length, positions = positions), "\n")
   }
 }
 

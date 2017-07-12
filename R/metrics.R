@@ -7,6 +7,7 @@
 #' 
 #' @param y_true True labels (tensor)
 #' @param y_pred Predictions (tensor of the same shape as y_true).
+#' @param k An integer, number of top elements to consider.
 #'       
 #' @section Custom Metrics:
 #' You can provide an arbitrary R function as a custom metric. Note that
@@ -150,12 +151,19 @@ attr(metric_squared_hinge, "py_function_name") <- "squared_hinge"
 
 #' @rdname metric_binary_accuracy
 #' @export
-metric_top_k_categorical_accuracy <- function(y_true, y_pred) {
-  keras$metrics$top_k_categorical_accuracy(y_true, y_pred)
+metric_top_k_categorical_accuracy <- function(y_true, y_pred, k = 5) {
+  keras$metrics$top_k_categorical_accuracy(y_true, y_pred, k = as.integer(k))
 }
 attr(metric_top_k_categorical_accuracy, "py_function_name") <- "top_k_categorical_accuracy"
 
 
+
+#' @rdname metric_binary_accuracy
+#' @export
+metric_sparse_top_k_categorical_accuracy <- function(y_true, y_pred, k = 5) {
+  keras$metrics$sparse_top_k_categorical_accuracy(y_true, y_pred, k = as.integer(k))
+}
+attr(metric_sparse_top_k_categorical_accuracy, "py_function_name") <- "sparse_top_k_categorical_accuracy"
 
 
 

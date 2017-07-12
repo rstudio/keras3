@@ -35,7 +35,7 @@ isn't provided.}
 \item{weights}{Initial weights for layer.}
 }
 \description{
-This layer can add rows and columns or zeros at the top, bottom, left and
+This layer can add rows and columns of zeros at the top, bottom, left and
 right side of an image tensor.
 }
 \section{Input shape}{
@@ -57,7 +57,9 @@ right side of an image tensor.
 \seealso{
 Other convolutional layers: \code{\link{layer_conv_1d}},
   \code{\link{layer_conv_2d_transpose}},
-  \code{\link{layer_conv_2d}}, \code{\link{layer_conv_3d}},
+  \code{\link{layer_conv_2d}},
+  \code{\link{layer_conv_3d_transpose}},
+  \code{\link{layer_conv_3d}},
   \code{\link{layer_conv_lstm_2d}},
   \code{\link{layer_cropping_1d}},
   \code{\link{layer_cropping_2d}},

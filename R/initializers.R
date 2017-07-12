@@ -155,6 +155,28 @@ initializer_identity <- function(gain = 1.0) {
   )
 }
 
+#' LeCun normal initializer.
+#'
+#' It draws samples from a truncated normal distribution centered on 0 with
+#' `stddev <- sqrt(1 / fan_in)` where `fan_in` is the number of input units in
+#' the weight tensor.. 
+#' 
+#' @param seed A Python integer. Used to seed the random generator.
+#' 
+#' @section References:
+#'  - [Self-Normalizing Neural Networks](https://arxiv.org/abs/1706.02515) 
+#'  - [Efficient Backprop](http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf)
+#'
+#' @family initializers
+#'
+#' @export
+initializer_lecun_normal <- function(seed = NULL) {
+  keras$initializers$lecun_normal(
+    seed = as_nullable_integer(seed)
+  )
+}
+
+
 
 #' Glorot normal initializer, also called Xavier normal initializer.
 #' 

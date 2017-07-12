@@ -326,6 +326,94 @@ layer_conv_2d_transpose <- function(object, filters, kernel_size, strides = c(1L
   
 }
 
+
+#' Transposed convolution layer (sometimes called Deconvolution).
+#'
+#' The need for transposed convolutions generally arises from the desire to use
+#' a transformation going in the opposite direction of a normal convolution,
+#' i.e., from something that has the shape of the output of some convolution to
+#' something that has the shape of its input while maintaining a connectivity
+#' pattern that is compatible with said convolution. 
+#' 
+#' When using this layer as the first layer in a model, provide the keyword argument 
+#' `input_shape` (list of integers, does not include the sample axis), e.g. 
+#' `input_shape = list(128, 128, 128, 3)` for a 128x128x128 volume with 3 channels if
+#' `data_format="channels_last"`. 
+#'
+#' @inheritParams layer_conv_2d
+#'
+#' @param filters Integer, the dimensionality of the output space (i.e. the
+#'   number of output filters in the convolution).
+#' @param kernel_size An integer or list of 3 integers, specifying the width and
+#'   height of the 3D convolution window. Can be a single integer to specify the
+#'   same value for all spatial dimensions.
+#' @param strides An integer or list of 3 integers, specifying the strides of
+#'   the convolution along the width and height. Can be a single integer to
+#'   specify the same value for all spatial dimensions. Specifying any stride
+#'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
+#' @param padding one of `"valid"` or `"same"` (case-insensitive).
+#' @param data_format A string, one of `channels_last` (default) or
+#'   `channels_first`. The ordering of the dimensions in the inputs.
+#'   `channels_last` corresponds to inputs with shape `(batch, depth, height,
+#'   width, channels)` while `channels_first` corresponds to inputs with shape
+#'   `(batch, channels, depth, height, width)`. It defaults to the
+#'   `image_data_format` value found in your Keras config file at
+#'   `~/.keras/keras.json`. If you never set it, then it will be
+#'   "channels_last".
+#' @param activation Activation function to use. If you don't specify anything, no
+#'   activation is applied (ie. "linear" activation: `a(x) = x`).
+#' @param use_bias Boolean, whether the layer uses a bias vector.
+#' @param kernel_initializer Initializer for the `kernel` weights matrix.
+#' @param bias_initializer Initializer for the bias vector.
+#' @param kernel_regularizer Regularizer function applied to the `kernel`
+#'   weights matrix,
+#' @param bias_regularizer Regularizer function applied to the bias vector.
+#' @param activity_regularizer Regularizer function applied to the output of the
+#'   layer (its "activation").
+#' @param kernel_constraint Constraint function applied to the kernel matrix.
+#' @param bias_constraint Constraint function applied to the bias vector.
+#'
+#' @section References:
+#'   - [A guide to convolution arithmetic for deep learning](https://arxiv.org/abs/1603.07285v1)
+#'   - [Deconvolutional Networks](http://www.matthewzeiler.com/pubs/cvpr2010/cvpr2010.pdf)
+#'
+#' @family convolutional layers 
+#'
+#' @export
+layer_conv_3d_transpose <- function(object, filters, kernel_size, strides = c(1, 1, 1), padding = "valid", 
+                                    data_format = NULL, activation = NULL, use_bias = TRUE, 
+                                    kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
+                                    kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
+                                    kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
+                                    batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                                    name = NULL, trainable = NULL, weights = NULL) {
+  call_layer(keras$layers$Conv3DTranspose, object, list(
+    filters = as.integer(filters),
+    kernel_size = as_integer_tuple(kernel_size),
+    strides = as_integer_tuple(strides),
+    padding = padding,
+    data_format = data_format,
+    activation = activation,
+    use_bias = use_bias,
+    kernel_initializer = kernel_initializer,
+    bias_initializer = bias_initializer,
+    kernel_regularizer = kernel_regularizer,
+    bias_regularizer = bias_regularizer,
+    activity_regularizer = activity_regularizer,
+    kernel_constraint = kernel_constraint,
+    bias_constraint = bias_constraint,
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
+  ))
+}
+
+
+
 #' Depthwise separable 2D convolution.
 #' 
 #' Separable convolutions consist in first performing a depthwise spatial
@@ -552,7 +640,7 @@ layer_zero_padding_1d <- function(object, padding = 1L,
 
 #' Zero-padding layer for 2D input (e.g. picture).
 #' 
-#' This layer can add rows and columns or zeros at the top, bottom, left and
+#' This layer can add rows and columns of zeros at the top, bottom, left and
 #' right side of an image tensor.
 #' 
 #' @inheritParams layer_conv_2d

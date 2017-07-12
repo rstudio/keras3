@@ -157,6 +157,43 @@ text_one_hot <- function(text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\
   )
 }
 
+#' Converts a text to a sequence of indexes in a fixed-size hashing space.
+#' 
+#' @param text Input text (string).
+#' @param n Dimension of the hashing space.
+#' @param hash_function if `NULL` uses python `hash` function, can be 'md5' or
+#'   any function that takes in input a string and returns a int. Note that
+#'   `hash` is not a stable hashing function, so it is not consistent across
+#'   different runs, while 'md5' is a stable hashing function.
+#' @param filters Sequence of characters to filter out.
+#' @param lower Whether to convert the input to lowercase.
+#' @param split Sentence split marker (string).
+#' 
+#' @return  A list of integer word indices (unicity non-guaranteed).
+#' 
+#' @details 
+#' Two or more words may be assigned to the same index, due to possible
+#' collisions by the hashing function.
+#' 
+#' @family text preprocessing   
+#'
+#' @export
+text_hashing_trick <- function(text, n, 
+                               hash_function = NULL, 
+                               filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n', 
+                               lower = TRUE, split = ' ') {
+  keras$preprocessing$text$hashing_trick(
+    text = text,
+    n = as.integer(n),
+    hash_function = hash_function,
+    filters = filters,
+    lower = lower,
+    split = split
+  )
+}
+
+
+
 #' Text tokenization utility
 #' 
 #' Vectorize a text corpus, by turning each text into either a sequence of 

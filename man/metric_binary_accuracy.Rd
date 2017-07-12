@@ -16,6 +16,7 @@
 \alias{metric_sparse_categorical_crossentropy}
 \alias{metric_squared_hinge}
 \alias{metric_top_k_categorical_accuracy}
+\alias{metric_sparse_top_k_categorical_accuracy}
 \title{Model performance metrics}
 \usage{
 metric_binary_accuracy(y_true, y_pred)
@@ -46,12 +47,16 @@ metric_sparse_categorical_crossentropy(y_true, y_pred)
 
 metric_squared_hinge(y_true, y_pred)
 
-metric_top_k_categorical_accuracy(y_true, y_pred)
+metric_top_k_categorical_accuracy(y_true, y_pred, k = 5)
+
+metric_sparse_top_k_categorical_accuracy(y_true, y_pred, k = 5)
 }
 \arguments{
 \item{y_true}{True labels (tensor)}
 
 \item{y_pred}{Predictions (tensor of the same shape as y_true).}
+
+\item{k}{An integer, number of top elements to consider.}
 }
 \description{
 Model performance metrics

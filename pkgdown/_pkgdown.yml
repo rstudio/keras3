@@ -134,6 +134,7 @@ reference:
     contents:
       - layer_gaussian_noise
       - layer_gaussian_dropout
+      - layer_alpha_dropout
 
   - title: "Merge Layers"
     contents:
@@ -200,6 +201,7 @@ reference:
       - texts_to_matrix
       - sequences_to_matrix
       - text_one_hot
+      - text_hashing_trick
       - text_to_word_sequence
        
   - title: "Image Preprocessing"
@@ -250,6 +252,7 @@ reference:
       - initializer_he_normal
       - initializer_he_uniform
       - initializer_lecun_uniform
+      - initializer_lecun_normal
 
    
   - title: "Constraints"

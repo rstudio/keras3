@@ -140,6 +140,13 @@ test_call_succeeds("layer_conv_2d_transpose", {
     layer_conv_2d_transpose(filters = 3, kernel_size = c(2, 2))
 })
 
+test_call_succeeds("layer_conv_3d_transpose", required_version = "2.0.5", {
+  keras_model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,2,2,4)) %>% 
+    layer_conv_3d_transpose(filters = 3, kernel_size = c(2, 2, 2))
+})
+
 test_call_succeeds("layer_separable_conv_2d", {
   if (is_tensorflow_implementation()) {
     keras_model_sequential() %>% 
@@ -411,6 +418,12 @@ test_call_succeeds("layer_gaussian_dropout", {
     layer_gaussian_dropout(rate = 0.5)
 })
 
+test_call_succeeds("layer_alpha_dropout", required_version = "2.0.5", {
+  keras_model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,16)) %>% 
+    layer_alpha_dropout(rate = 0.5)
+})
 
 test_call_succeeds("time_distributed", {
   keras_model_sequential() %>%

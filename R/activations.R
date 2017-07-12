@@ -10,6 +10,10 @@
 #' @param alpha Alpha value
 #' @param max_value Max value
 #' 
+#' @section References:
+#' 
+#'   - `activation_selu()`: [Self-Normalizing Neural Networks](https://arxiv.org/abs/1706.02515)
+#' 
 #' @export
 activation_relu <- function(x, alpha = 0.0, max_value = NULL) {
   keras$activations$relu(x, alpha = alpha, max_value = max_value)
@@ -23,6 +27,15 @@ activation_elu <- function(x, alpha = 1.0) {
   keras$activations$elu(x, alpha = alpha)
 }
 attr(activation_elu, "py_function_name") <- "elu"
+
+
+#' @rdname activation_relu
+#' @export
+activation_selu <- function(x, alpha = 1.0) {
+  keras$activations$selu(x)
+}
+attr(activation_elu, "py_function_name") <- "selu"
+
 
 #' @rdname activation_relu
 #' @export
