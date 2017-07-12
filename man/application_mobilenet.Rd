@@ -64,13 +64,14 @@ specified.}
 A Keras model instance
 }
 \description{
+Instantiates the MobileNet architecture.
+}
+\details{
 The \code{mobilenet_preprocess_input()} function should be used for image
 preprocessing. To load a saved instance of a MobileNet model use
 the \code{mobilenet_load_model_hdf5()} function.
-}
-\note{
-A special load_model function is required for MobileNet models to correctly
-handle some special object types that are serialized along with the model.
+
+MobileNet is currently only supported with the TensorFlow backend.
 }
 \section{Reference}{
 
