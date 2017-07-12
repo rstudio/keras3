@@ -226,6 +226,90 @@ imagenet_preprocess_input <- function(x) {
 }
 
 
+#' Instantiates the MobileNet architecture.
+#'
+#' @details 
+#'
+#' The `mobilenet_preprocess_input()` function should be used for image 
+#' preprocessing. To load a saved instance of a MobileNet model use
+#' the `mobilenet_load_model_hdf5()` function.
+#' 
+#' MobileNet is currently only supported with the TensorFlow backend.
+#'
+#' @inheritParams load_model_hdf5
+#'
+#' @param input_shape optional shape list, only to be specified if `include_top`
+#'   is FALSE (otherwise the input shape has to be `(224, 224, 3)` (with
+#'   `channels_last` data format) or (3, 224, 224) (with `channels_first` data
+#'   format). It should have exactly 3 inputs channels, and width and height
+#'   should be no smaller than 32. E.g. `(200, 200, 3)` would be one valid
+#'   value.
+#' @param alpha controls the width of the network. 
+#'    - If `alpha` < 1.0, proportionally decreases the number of filters in each layer. 
+#'    - If `alpha` > 1.0, proportionally increases the number of filters in each layer. 
+#'    - If `alpha` = 1, default number of filters from the paper are used at each layer.
+#' @param depth_multiplier depth multiplier for depthwise convolution (also
+#'   called the resolution multiplier)
+#' @param dropout dropout rate
+#' @param include_top whether to include the fully-connected layer at the top of
+#'   the network.
+#' @param weights `NULL` (random initialization) or `imagenet` (ImageNet
+#'   weights)
+#' @param input_tensor optional Keras tensor (i.e. output of `layers.Input()`)
+#'   to use as image input for the model.
+#' @param pooling Optional pooling mode for feature extraction when
+#'   `include_top` is `FALSE`. 
+#'     - `NULL` means that the output of the model will be the 4D tensor output
+#'        of the last convolutional layer. 
+#'     - `avg` means that global average pooling will be applied to the output
+#'        of the last convolutional layer, and thus the output of the model will
+#'        be a 2D tensor.
+#'     - `max` means that global max pooling will be applied.
+#' @param classes optional number of classes to classify images into, only to be
+#'   specified if `include_top` is TRUE, and if no `weights` argument is
+#'   specified.
+#' @param x input tensor, 4D   
+#'
+#' @return A Keras model instance
+#'
+#' @section Reference:
+#'   - [MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/pdf/1704.04861v1.pdf).
+#'
+#' @export
+application_mobilenet <- function(input_shape = NULL, alpha = 1.0, depth_multiplier = 1, dropout = 0.001, 
+                                  include_top = TRUE, weights = "imagenet", input_tensor = NULL, pooling = NULL, 
+                                  classes = 1000) {
+  keras$applications$MobileNet(
+    input_shape = as_integer_tuple(input_shape),
+    alpha = alpha,
+    depth_multiplier = as.integer(depth_multiplier),
+    dropout = dropout,
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+}
+
+
+#' @rdname application_mobilenet
+#' @export
+mobilenet_preprocess_input <- function(x) {
+  preprocess_input(x, keras$applications$mobilenet$preprocess_input)
+}
+
+#' @rdname application_mobilenet
+#' @export
+mobilenet_load_model_hdf5 <- function(filepath) {
+  load_model_hdf5(filepath, custom_objects = list(
+    relu6 = keras$applications$mobilenet$relu6,
+    DepthwiseConv2D = keras$applications$mobilenet$DepthwiseConv2D
+  ))
+}
+
+
+
 # the preprocesssing functions modify the ndarray in place
 # so we can't pass an R marshalled array (since it points to
 # R managed memory numpy won't allow writing to it). this 

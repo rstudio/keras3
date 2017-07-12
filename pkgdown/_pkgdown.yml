@@ -183,8 +183,10 @@ reference:
       - application_inception_v3
       - application_vgg
       - application_resnet50
+      - application_mobilenet
       - imagenet_preprocess_input
       - imagenet_decode_predictions
+      
 
   - title: "Sequence Preprocessing"
     contents: 

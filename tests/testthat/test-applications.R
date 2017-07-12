@@ -11,8 +11,11 @@ test_succeeds("keras pre-built models can be instantiated", {
   if (skip)
     return()
   
-  if (is_backend("tensorflow"))
+  if (is_backend("tensorflow")) {
     application_xception()
+    if (keras_version() >= "2.0.5")
+      application_mobilenet()
+  }
   application_resnet50()
   application_vgg16()
   application_vgg19()
