@@ -123,7 +123,7 @@
     <div class="page-header">
       <h1>
         Reference
-        <small>version&nbsp;0.3.12</small>
+        <small>version&nbsp;0.3.13</small>
       </h1>
     </div>
 
@@ -338,6 +338,12 @@
             <p><code><a href="layer_conv_2d.html">layer_conv_2d</a></code> </p>
           </td>
           <td><p>2D convolution layer (e.g. spatial convolution over images).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a></code> </p>
+          </td>
+          <td><p>Transposed convolution layer (sometimes called Deconvolution).</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -654,6 +660,12 @@
             <p><code><a href="layer_gaussian_dropout.html">layer_gaussian_dropout</a></code> </p>
           </td>
           <td><p>Apply multiplicative 1-centered Gaussian noise.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_alpha_dropout.html">layer_alpha_dropout</a></code> </p>
+          </td>
+          <td><p>Applies Alpha Dropout to the input.</p></td>
         </tr>
       </tbody><tbody>
         <tr>
@@ -879,6 +891,12 @@
         </tr><tr>
           <!--  -->
           <td>
+            <p><code><a href="application_mobilenet.html">application_mobilenet</a></code> <code><a href="application_mobilenet.html">mobilenet_preprocess_input</a></code> <code><a href="application_mobilenet.html">mobilenet_load_model_hdf5</a></code> </p>
+          </td>
+          <td><p>Instantiates the MobileNet architecture.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
             <p><code><a href="imagenet_preprocess_input.html">imagenet_preprocess_input</a></code> </p>
           </td>
           <td><p>Preprocesses a tensor encoding a batch of images.</p></td>
@@ -965,6 +983,12 @@ sequences.</p></td>
             <p><code><a href="text_one_hot.html">text_one_hot</a></code> </p>
           </td>
           <td><p>One-hot encode a text into a list of word indexes in a vocabulary of size n.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="text_hashing_trick.html">text_hashing_trick</a></code> </p>
+          </td>
+          <td><p>Converts a text to a sequence of indexes in a fixed-size hashing space.</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -1226,6 +1250,12 @@ augmented/normalized data)</p></td>
             <p><code><a href="initializer_lecun_uniform.html">initializer_lecun_uniform</a></code> </p>
           </td>
           <td><p>LeCun uniform initializer.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="initializer_lecun_normal.html">initializer_lecun_normal</a></code> </p>
+          </td>
+          <td><p>LeCun normal initializer.</p></td>
         </tr>
       </tbody><tbody>
         <tr>
@@ -1327,7 +1357,7 @@ augmented/normalized data)</p></td>
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="metric_binary_accuracy.html">metric_binary_accuracy</a></code> <code><a href="metric_binary_accuracy.html">metric_binary_crossentropy</a></code> <code><a href="metric_binary_accuracy.html">metric_categorical_accuracy</a></code> <code><a href="metric_binary_accuracy.html">metric_categorical_crossentropy</a></code> <code><a href="metric_binary_accuracy.html">metric_cosine_proximity</a></code> <code><a href="metric_binary_accuracy.html">metric_hinge</a></code> <code><a href="metric_binary_accuracy.html">metric_kullback_leibler_divergence</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_absolute_error</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_absolute_percentage_error</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_squared_error</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_squared_logarithmic_error</a></code> <code><a href="metric_binary_accuracy.html">metric_poisson</a></code> <code><a href="metric_binary_accuracy.html">metric_sparse_categorical_crossentropy</a></code> <code><a href="metric_binary_accuracy.html">metric_squared_hinge</a></code> <code><a href="metric_binary_accuracy.html">metric_top_k_categorical_accuracy</a></code> </p>
+            <p><code><a href="metric_binary_accuracy.html">metric_binary_accuracy</a></code> <code><a href="metric_binary_accuracy.html">metric_binary_crossentropy</a></code> <code><a href="metric_binary_accuracy.html">metric_categorical_accuracy</a></code> <code><a href="metric_binary_accuracy.html">metric_categorical_crossentropy</a></code> <code><a href="metric_binary_accuracy.html">metric_cosine_proximity</a></code> <code><a href="metric_binary_accuracy.html">metric_hinge</a></code> <code><a href="metric_binary_accuracy.html">metric_kullback_leibler_divergence</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_absolute_error</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_absolute_percentage_error</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_squared_error</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_squared_logarithmic_error</a></code> <code><a href="metric_binary_accuracy.html">metric_poisson</a></code> <code><a href="metric_binary_accuracy.html">metric_sparse_categorical_crossentropy</a></code> <code><a href="metric_binary_accuracy.html">metric_squared_hinge</a></code> <code><a href="metric_binary_accuracy.html">metric_top_k_categorical_accuracy</a></code> <code><a href="metric_binary_accuracy.html">metric_sparse_top_k_categorical_accuracy</a></code> </p>
           </td>
           <td><p>Model performance metrics</p></td>
         </tr>
@@ -1355,7 +1385,7 @@ augmented/normalized data)</p></td>
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="activation_relu.html">activation_relu</a></code> <code><a href="activation_relu.html">activation_elu</a></code> <code><a href="activation_relu.html">activation_hard_sigmoid</a></code> <code><a href="activation_relu.html">activation_linear</a></code> <code><a href="activation_relu.html">activation_sigmoid</a></code> <code><a href="activation_relu.html">activation_softmax</a></code> <code><a href="activation_relu.html">activation_softplus</a></code> <code><a href="activation_relu.html">activation_softsign</a></code> <code><a href="activation_relu.html">activation_tanh</a></code> </p>
+            <p><code><a href="activation_relu.html">activation_relu</a></code> <code><a href="activation_relu.html">activation_elu</a></code> <code><a href="activation_relu.html">activation_selu</a></code> <code><a href="activation_relu.html">activation_hard_sigmoid</a></code> <code><a href="activation_relu.html">activation_linear</a></code> <code><a href="activation_relu.html">activation_sigmoid</a></code> <code><a href="activation_relu.html">activation_softmax</a></code> <code><a href="activation_relu.html">activation_softplus</a></code> <code><a href="activation_relu.html">activation_softsign</a></code> <code><a href="activation_relu.html">activation_tanh</a></code> </p>
           </td>
           <td><p>Activation functions</p></td>
         </tr>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>He uniform variance scaling initializer. — initializer_he_uniform • keras</title>
+<title>Instantiates the MobileNet architecture. — application_mobilenet • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -121,46 +121,109 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>He uniform variance scaling initializer.</h1>
+    <h1>Instantiates the MobileNet architecture.</h1>
     </div>
 
     
-    <p>It draws samples from a uniform distribution within <code>-limit, limit</code> where
-<code>limit`` is</code>sqrt(6 / fan_in)<code>where</code>fan_in` is the number of input units in the
-weight tensor.</p>
+    <p>Instantiates the MobileNet architecture.</p>
     
 
-    <pre class="usage"><span class='fu'>initializer_he_uniform</span>(<span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>application_mobilenet</span>(<span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>depth_multiplier</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>dropout</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='st'>"imagenet"</span>,
+  <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
+
+<span class='fu'>mobilenet_preprocess_input</span>(<span class='no'>x</span>)
+
+<span class='fu'>mobilenet_load_model_hdf5</span>(<span class='no'>filepath</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>seed</th>
-      <td><p>Integer used to seed the random generator.</p></td>
+      <th>input_shape</th>
+      <td><p>optional shape list, only to be specified if <code>include_top</code>
+is FALSE (otherwise the input shape has to be <code>(224, 224, 3)</code> (with
+<code>channels_last</code> data format) or (3, 224, 224) (with <code>channels_first</code> data
+format). It should have exactly 3 inputs channels, and width and height
+should be no smaller than 32. E.g. <code>(200, 200, 3)</code> would be one valid
+value.</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>controls the width of the network.</p><ul>
+<li><p>If <code>alpha</code> &lt; 1.0, proportionally decreases the number of filters in each layer.</p></li>
+<li><p>If <code>alpha</code> &gt; 1.0, proportionally increases the number of filters in each layer.</p></li>
+<li><p>If <code>alpha</code> = 1, default number of filters from the paper are used at each layer.</p></li>
+</ul></td>
+    </tr>
+    <tr>
+      <th>depth_multiplier</th>
+      <td><p>depth multiplier for depthwise convolution (also
+called the resolution multiplier)</p></td>
+    </tr>
+    <tr>
+      <th>dropout</th>
+      <td><p>dropout rate</p></td>
+    </tr>
+    <tr>
+      <th>include_top</th>
+      <td><p>whether to include the fully-connected layer at the top of
+the network.</p></td>
+    </tr>
+    <tr>
+      <th>weights</th>
+      <td><p><code>NULL</code> (random initialization) or <code>imagenet</code> (ImageNet
+weights)</p></td>
+    </tr>
+    <tr>
+      <th>input_tensor</th>
+      <td><p>optional Keras tensor (i.e. output of <code>layers.Input()</code>)
+to use as image input for the model.</p></td>
+    </tr>
+    <tr>
+      <th>pooling</th>
+      <td><p>Optional pooling mode for feature extraction when
+<code>include_top</code> is <code>FALSE</code>.
+- <code>NULL</code> means that the output of the model will be the 4D tensor output
+of the last convolutional layer.
+- <code>avg</code> means that global average pooling will be applied to the output
+of the last convolutional layer, and thus the output of the model will
+be a 2D tensor.
+- <code>max</code> means that global max pooling will be applied.</p></td>
+    </tr>
+    <tr>
+      <th>classes</th>
+      <td><p>optional number of classes to classify images into, only to be
+specified if <code>include_top</code> is TRUE, and if no <code>weights</code> argument is
+specified.</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>input tensor, 4D</p></td>
+    </tr>
+    <tr>
+      <th>filepath</th>
+      <td><p>File path</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>He et al., http://arxiv.org/abs/1502.01852</p>
+    <p>A Keras model instance</p>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Other initializers: <code><a href='initializer_constant.html'>initializer_constant</a></code>,
-  <code><a href='initializer_glorot_normal.html'>initializer_glorot_normal</a></code>,
-  <code><a href='initializer_glorot_uniform.html'>initializer_glorot_uniform</a></code>,
-  <code><a href='initializer_he_normal.html'>initializer_he_normal</a></code>,
-  <code><a href='initializer_identity.html'>initializer_identity</a></code>,
-  <code><a href='initializer_lecun_normal.html'>initializer_lecun_normal</a></code>,
-  <code><a href='initializer_lecun_uniform.html'>initializer_lecun_uniform</a></code>,
-  <code><a href='initializer_ones.html'>initializer_ones</a></code>,
-  <code><a href='initializer_orthogonal.html'>initializer_orthogonal</a></code>,
-  <code><a href='initializer_random_normal.html'>initializer_random_normal</a></code>,
-  <code><a href='initializer_random_uniform.html'>initializer_random_uniform</a></code>,
-  <code><a href='initializer_truncated_normal.html'>initializer_truncated_normal</a></code>,
-  <code><a href='initializer_variance_scaling.html'>initializer_variance_scaling</a></code>,
-  <code><a href='initializer_zeros.html'>initializer_zeros</a></code></p>
+    <p>The <code>mobilenet_preprocess_input()</code> function should be used for image
+preprocessing. To load a saved instance of a MobileNet model use
+the <code>mobilenet_load_model_hdf5()</code> function.</p>
+<p>MobileNet is currently only supported with the TensorFlow backend.</p>
+    
+    <h2 class="hasAnchor" id="reference"><a class="anchor" href="#reference"></a>Reference</h2>
+
+    
+    <ul>
+<li><p><a href='https://arxiv.org/pdf/1704.04861v1.pdf'>MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications</a>.</p></li>
+</ul>
     
 
   </div>
@@ -169,9 +232,11 @@ weight tensor.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#references">References</a></li>
+      <li><a href="#value">Value</a></li>
 
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#reference">Reference</a></li>
           </ul>
 
   </div>

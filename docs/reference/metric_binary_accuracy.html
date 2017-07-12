@@ -156,7 +156,9 @@
 
 <span class='fu'>metric_squared_hinge</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)
 
-<span class='fu'>metric_top_k_categorical_accuracy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)</pre>
+<span class='fu'>metric_top_k_categorical_accuracy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>)
+
+<span class='fu'>metric_sparse_top_k_categorical_accuracy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -168,6 +170,10 @@
     <tr>
       <th>y_pred</th>
       <td><p>Predictions (tensor of the same shape as y_true).</p></td>
+    </tr>
+    <tr>
+      <th>k</th>
+      <td><p>An integer, number of top elements to consider.</p></td>
     </tr>
     </table>
     

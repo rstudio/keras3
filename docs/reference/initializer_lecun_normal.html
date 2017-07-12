@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>He uniform variance scaling initializer. — initializer_he_uniform • keras</title>
+<title>LeCun normal initializer. — initializer_lecun_normal • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -121,29 +121,33 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>He uniform variance scaling initializer.</h1>
+    <h1>LeCun normal initializer.</h1>
     </div>
 
     
-    <p>It draws samples from a uniform distribution within <code>-limit, limit</code> where
-<code>limit`` is</code>sqrt(6 / fan_in)<code>where</code>fan_in` is the number of input units in the
-weight tensor.</p>
+    <p>It draws samples from a truncated normal distribution centered on 0 with
+<code>stddev &lt;- sqrt(1 / fan_in)</code> where <code>fan_in</code> is the number of input units in
+the weight tensor..</p>
     
 
-    <pre class="usage"><span class='fu'>initializer_he_uniform</span>(<span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>initializer_lecun_normal</span>(<span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>seed</th>
-      <td><p>Integer used to seed the random generator.</p></td>
+      <td><p>A Python integer. Used to seed the random generator.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>He et al., http://arxiv.org/abs/1502.01852</p>
+    
+    <ul>
+<li><p><a href='https://arxiv.org/abs/1706.02515'>Self-Normalizing Neural Networks</a></p></li>
+<li><p><a href='http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf'>Efficient Backprop</a></p></li>
+</ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -151,8 +155,8 @@ weight tensor.</p>
   <code><a href='initializer_glorot_normal.html'>initializer_glorot_normal</a></code>,
   <code><a href='initializer_glorot_uniform.html'>initializer_glorot_uniform</a></code>,
   <code><a href='initializer_he_normal.html'>initializer_he_normal</a></code>,
+  <code><a href='initializer_he_uniform.html'>initializer_he_uniform</a></code>,
   <code><a href='initializer_identity.html'>initializer_identity</a></code>,
-  <code><a href='initializer_lecun_normal.html'>initializer_lecun_normal</a></code>,
   <code><a href='initializer_lecun_uniform.html'>initializer_lecun_uniform</a></code>,
   <code><a href='initializer_ones.html'>initializer_ones</a></code>,
   <code><a href='initializer_orthogonal.html'>initializer_orthogonal</a></code>,

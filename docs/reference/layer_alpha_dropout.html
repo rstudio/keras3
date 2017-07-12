@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>He uniform variance scaling initializer. — initializer_he_uniform • keras</title>
+<title>Applies Alpha Dropout to the input. — layer_alpha_dropout • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -121,46 +121,65 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>He uniform variance scaling initializer.</h1>
+    <h1>Applies Alpha Dropout to the input.</h1>
     </div>
 
     
-    <p>It draws samples from a uniform distribution within <code>-limit, limit</code> where
-<code>limit`` is</code>sqrt(6 / fan_in)<code>where</code>fan_in` is the number of input units in the
-weight tensor.</p>
+    <p>Alpha Dropout is a dropout that keeps mean and variance of inputs to their
+original values, in order to ensure the self-normalizing property even after
+this dropout.</p>
     
 
-    <pre class="usage"><span class='fu'>initializer_he_uniform</span>(<span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>layer_alpha_dropout</span>(<span class='no'>object</span>, <span class='no'>rate</span>, <span class='kw'>noise_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>object</th>
+      <td><p>Model or layer object</p></td>
+    </tr>
+    <tr>
+      <th>rate</th>
+      <td><p>float, drop probability (as with <code><a href='layer_dropout.html'>layer_dropout()</a></code>). The
+multiplicative noise will have standard deviation <code>sqrt(rate / (1 - rate))</code>.</p></td>
+    </tr>
+    <tr>
+      <th>noise_shape</th>
+      <td><p>Noise shape</p></td>
+    </tr>
+    <tr>
       <th>seed</th>
-      <td><p>Integer used to seed the random generator.</p></td>
+      <td><p>An integer to use as random seed.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Alpha Dropout fits well to Scaled Exponential Linear Units by randomly
+setting activations to the negative saturation value.</p>
+    
+    <h2 class="hasAnchor" id="input-shape"><a class="anchor" href="#input-shape"></a>Input shape</h2>
+
+    <p>Arbitrary. Use the keyword argument <code>input_shape</code> (list
+of integers, does not include the samples axis) when using this layer as
+the first layer in a model.</p>
+    
+    <h2 class="hasAnchor" id="output-shape"><a class="anchor" href="#output-shape"></a>Output shape</h2>
+
+    <p>Same shape as input.</p>
+    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>He et al., http://arxiv.org/abs/1502.01852</p>
+    
+    <ul>
+<li><p><a href='https://arxiv.org/abs/1706.02515'>Self-Normalizing Neural Networks</a></p></li>
+</ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other initializers: <code><a href='initializer_constant.html'>initializer_constant</a></code>,
-  <code><a href='initializer_glorot_normal.html'>initializer_glorot_normal</a></code>,
-  <code><a href='initializer_glorot_uniform.html'>initializer_glorot_uniform</a></code>,
-  <code><a href='initializer_he_normal.html'>initializer_he_normal</a></code>,
-  <code><a href='initializer_identity.html'>initializer_identity</a></code>,
-  <code><a href='initializer_lecun_normal.html'>initializer_lecun_normal</a></code>,
-  <code><a href='initializer_lecun_uniform.html'>initializer_lecun_uniform</a></code>,
-  <code><a href='initializer_ones.html'>initializer_ones</a></code>,
-  <code><a href='initializer_orthogonal.html'>initializer_orthogonal</a></code>,
-  <code><a href='initializer_random_normal.html'>initializer_random_normal</a></code>,
-  <code><a href='initializer_random_uniform.html'>initializer_random_uniform</a></code>,
-  <code><a href='initializer_truncated_normal.html'>initializer_truncated_normal</a></code>,
-  <code><a href='initializer_variance_scaling.html'>initializer_variance_scaling</a></code>,
-  <code><a href='initializer_zeros.html'>initializer_zeros</a></code></p>
+    <p>Other noise layers: <code><a href='layer_gaussian_dropout.html'>layer_gaussian_dropout</a></code>,
+  <code><a href='layer_gaussian_noise.html'>layer_gaussian_noise</a></code></p>
     
 
   </div>
@@ -169,6 +188,12 @@ weight tensor.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#input-shape">Input shape</a></li>
+
+      <li><a href="#output-shape">Output shape</a></li>
+
       <li><a href="#references">References</a></li>
 
       <li><a href="#see-also">See also</a></li>

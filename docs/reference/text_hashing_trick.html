@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>He uniform variance scaling initializer. — initializer_he_uniform • keras</title>
+<title>Converts a text to a sequence of indexes in a fixed-size hashing space. — text_hashing_trick • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -121,46 +121,64 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>He uniform variance scaling initializer.</h1>
+    <h1>Converts a text to a sequence of indexes in a fixed-size hashing space.</h1>
     </div>
 
     
-    <p>It draws samples from a uniform distribution within <code>-limit, limit</code> where
-<code>limit`` is</code>sqrt(6 / fan_in)<code>where</code>fan_in` is the number of input units in the
-weight tensor.</p>
+    <p>Converts a text to a sequence of indexes in a fixed-size hashing space.</p>
     
 
-    <pre class="usage"><span class='fu'>initializer_he_uniform</span>(<span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>text_hashing_trick</span>(<span class='no'>text</span>, <span class='no'>n</span>, <span class='kw'>hash_function</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>filters</span> <span class='kw'>=</span> <span class='st'>"!\"#$%&amp;()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~\t\n"</span>, <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>" "</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>seed</th>
-      <td><p>Integer used to seed the random generator.</p></td>
+      <th>text</th>
+      <td><p>Input text (string).</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>Dimension of the hashing space.</p></td>
+    </tr>
+    <tr>
+      <th>hash_function</th>
+      <td><p>if <code>NULL</code> uses python <code>hash</code> function, can be 'md5' or
+any function that takes in input a string and returns a int. Note that
+<code>hash</code> is not a stable hashing function, so it is not consistent across
+different runs, while 'md5' is a stable hashing function.</p></td>
+    </tr>
+    <tr>
+      <th>filters</th>
+      <td><p>Sequence of characters to filter out.</p></td>
+    </tr>
+    <tr>
+      <th>lower</th>
+      <td><p>Whether to convert the input to lowercase.</p></td>
+    </tr>
+    <tr>
+      <th>split</th>
+      <td><p>Sentence split marker (string).</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>He et al., http://arxiv.org/abs/1502.01852</p>
+    <p>A list of integer word indices (unicity non-guaranteed).</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Two or more words may be assigned to the same index, due to possible
+collisions by the hashing function.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other initializers: <code><a href='initializer_constant.html'>initializer_constant</a></code>,
-  <code><a href='initializer_glorot_normal.html'>initializer_glorot_normal</a></code>,
-  <code><a href='initializer_glorot_uniform.html'>initializer_glorot_uniform</a></code>,
-  <code><a href='initializer_he_normal.html'>initializer_he_normal</a></code>,
-  <code><a href='initializer_identity.html'>initializer_identity</a></code>,
-  <code><a href='initializer_lecun_normal.html'>initializer_lecun_normal</a></code>,
-  <code><a href='initializer_lecun_uniform.html'>initializer_lecun_uniform</a></code>,
-  <code><a href='initializer_ones.html'>initializer_ones</a></code>,
-  <code><a href='initializer_orthogonal.html'>initializer_orthogonal</a></code>,
-  <code><a href='initializer_random_normal.html'>initializer_random_normal</a></code>,
-  <code><a href='initializer_random_uniform.html'>initializer_random_uniform</a></code>,
-  <code><a href='initializer_truncated_normal.html'>initializer_truncated_normal</a></code>,
-  <code><a href='initializer_variance_scaling.html'>initializer_variance_scaling</a></code>,
-  <code><a href='initializer_zeros.html'>initializer_zeros</a></code></p>
+    <p>Other text preprocessing: <code><a href='make_sampling_table.html'>make_sampling_table</a></code>,
+  <code><a href='pad_sequences.html'>pad_sequences</a></code>, <code><a href='skipgrams.html'>skipgrams</a></code>,
+  <code><a href='text_one_hot.html'>text_one_hot</a></code>,
+  <code><a href='text_to_word_sequence.html'>text_to_word_sequence</a></code></p>
     
 
   </div>
@@ -169,7 +187,9 @@ weight tensor.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#references">References</a></li>
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>
