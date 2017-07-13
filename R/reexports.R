@@ -31,9 +31,9 @@ tensorflow::install_tensorflow
 #' @export
 tensorflow::tensorboard
 
-#' @importFrom tensorflow unique_log_dir
+#' @importFrom tensorflow unique_dir
 #' @export
-tensorflow::unique_log_dir
+tensorflow::unique_dir
 
 
 #' @importFrom tensorflow tf_config

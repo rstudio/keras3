@@ -73,10 +73,10 @@ Then the TensorBoard visualization would look like this:
 
 ![](images/tensorboard_compare.png){width=700 height=540 .screenshot}
 
-You can use the `unique_log_dir` function if you want to record every training run in it's own directory:
+You can use the `unique_dir` function if you want to record every training run in it's own directory:
 
 ```{r}
-callback_tensorboard(log_dir = unique_log_dir())
+callback_tensorboard(log_dir = unique_dir("logs"))
 ```
 
 Once again note that it's not required to record every training run in it's own directory. Using the default "logs" directory will work just fine, you'll just only be able to visualize the most recent run using TensorBoard.
