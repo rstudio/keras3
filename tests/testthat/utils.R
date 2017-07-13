@@ -1,16 +1,19 @@
 
 skip_if_no_keras <- function(required_version = NULL) {
-  if (!have_keras())
-    skip("keras not available for testing")
-  else if (!is.null(required_version)) {
-    if (keras_version() < required_version)
-      skip("required version of keras not available for testing")
-  }
+  if (!have_keras(required_version))
+    skip("required keras version not available for testing")
 }
 
-have_keras <- function() {
+have_keras <- function(required_version = NULL) {
   implementation_module <- keras:::resolve_implementation_module()
-  reticulate::py_module_available(implementation_module)
+  if (reticulate::py_module_available(implementation_module)) {
+    if (!is.null(required_version))
+      keras:::keras_version() >= required_version
+    else
+      TRUE
+  } else {
+    FALSE
+  }
 }
 
 

@@ -139,9 +139,7 @@ check_implementation_version <- function() {
 }
 
 
-#' Current version of Keras
-#' 
-#' @export
+# Current version of Keras
 keras_version <- function() {
   ver <- keras$`__version__`
   ver <- regmatches(ver, regexec("^([0-9\\.]+).*$", ver))[[1]][[2]]
