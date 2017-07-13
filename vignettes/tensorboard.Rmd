@@ -45,7 +45,7 @@ history <- model %>% fit(
 
 See the documentation on the `callback_tensorboard()` function for the various available options. The most important option is the `log_dir`, which determines which directory logs are written to for a given training run. 
 
-## Viewing Data
+## Running TensorBoard
 
 To view TensorBoard data for a given set of runs you use the `tensorboard()` function. If your training logs are located within the current working directory then you can call `tensorboard()` with no arguments:
 
@@ -60,6 +60,27 @@ tensorboard(log_dir = "logs")
 ```
 
 Note that you don't need to change the `log_dir` for each training run (the default log directory if none is specified is "logs"). In the case of a `log_dir` used multiple times TensorBoard will simply visualize the metrics for the most recent training run.
+
+## Training View
+
+You can run TensorBoard while you are training a model. To do this you can either:
+
+1. Call the `tensorboard()` function within the directory you are training from; or
+
+2. Specify the `launch = TRUE` parameter to the `callback_tensorboard()` function. For example;
+
+    ```{r}
+    history <- model %>% fit(
+      x_train, y_train,
+      batch_size = batch_size,
+      epochs = epochs,
+      verbose = 1,
+      callbacks = callback_tensorboard(log_dir = "logs/run_a", launch = TRUE),
+      validation_split = 0.2
+    )
+    ```    
+
+Note that when TensorBoard is first launched you won't see any scalar data plotted initially. This is because Keras writes TensorBoard data at the end of each training epoch, and the first epoch will likely not yet have completed. TensorBoard will automatically refresh it's display every 30 seconds during training.
 
 ## Comparing Runs
 

@@ -129,14 +129,34 @@
 )</code></pre></div>
 <p>See the documentation on the <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code> function for the various available options. The most important option is the <code>log_dir</code>, which determines which directory logs are written to for a given training run.</p>
 </div>
-<div id="viewing-data" class="section level2">
+<div id="running-tensorboard" class="section level2">
 <h2 class="hasAnchor">
-<a href="#viewing-data" class="anchor"></a>Viewing Data</h2>
+<a href="#running-tensorboard" class="anchor"></a>Running TensorBoard</h2>
 <p>To view TensorBoard data for a given set of runs you use the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard()</a></code> function. If your training logs are located within the current working directory then you can call <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard()</a></code> with no arguments:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>()</code></pre></div>
 <p>If you alternatively want to specify a specific directory as the root of all training logs then you can use the <code>log_dir</code> parameter, for example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="st">"logs"</span>)</code></pre></div>
 <p>Note that you don’t need to change the <code>log_dir</code> for each training run (the default log directory if none is specified is “logs”). In the case of a <code>log_dir</code> used multiple times TensorBoard will simply visualize the metrics for the most recent training run.</p>
+</div>
+<div id="training-view" class="section level2">
+<h2 class="hasAnchor">
+<a href="#training-view" class="anchor"></a>Training View</h2>
+<p>You can run TensorBoard while you are training a model. To do this you can either:</p>
+<ol style="list-style-type: decimal">
+<li><p>Call the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard()</a></code> function within the directory you are training from; or</p></li>
+<li>
+<p>Specify the <code>launch = TRUE</code> parameter to the <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code> function. For example;</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
+  x_train, y_train,
+  <span class="dt">batch_size =</span> batch_size,
+  <span class="dt">epochs =</span> epochs,
+  <span class="dt">verbose =</span> <span class="dv">1</span>,
+  <span class="dt">callbacks =</span> <span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="st">"logs/run_a"</span>, <span class="dt">launch =</span> <span class="ot">TRUE</span>),
+  <span class="dt">validation_split =</span> <span class="fl">0.2</span>
+)</code></pre></div>
+</li>
+</ol>
+<p>Note that when TensorBoard is first launched you won’t see any scalar data plotted initially. This is because Keras writes TensorBoard data at the end of each training epoch, and the first epoch will likely not yet have completed. TensorBoard will automatically refresh it’s display every 30 seconds during training.</p>
 </div>
 <div id="comparing-runs" class="section level2">
 <h2 class="hasAnchor">
@@ -225,7 +245,8 @@
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#overview">Overview</a></li>
       <li><a href="#recording-data">Recording Data</a></li>
-      <li><a href="#viewing-data">Viewing Data</a></li>
+      <li><a href="#running-tensorboard">Running TensorBoard</a></li>
+      <li><a href="#training-view">Training View</a></li>
       <li><a href="#comparing-runs">Comparing Runs</a></li>
       <li><a href="#customization">Customization</a></li>
       </ul>

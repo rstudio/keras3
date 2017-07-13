@@ -146,6 +146,10 @@ callback_learning_rate_scheduler <- function(schedule) {
 #' 
 #' @param log_dir the path of the directory where to save the log files to be
 #'   parsed by Tensorboard.
+#' @param launch `TRUE` to automatically launch TensorBoard at the beginning 
+#'   of training. Note that you will not see any scalar data plotted until
+#'   the end of the first epoch. TensorBoard automatically refreshes it's 
+#'   display every 30 seconds.
 #' @param histogram_freq frequency (in epochs) at which to compute activation 
 #'   histograms for the layers of the model. If set to 0, histograms won't be
 #'   computed.
@@ -177,11 +181,13 @@ callback_learning_rate_scheduler <- function(schedule) {
 #' @family callbacks 
 #'    
 #' @export
-callback_tensorboard <- function(log_dir = "logs", histogram_freq = 0, 
+callback_tensorboard <- function(log_dir = "logs", launch = FALSE, histogram_freq = 0, 
                                  write_graph = TRUE, write_images = FALSE,
                                  embeddings_freq = 0, embeddings_layer_names = NULL,
                                  embeddings_metadata = NULL) {
-  keras$callbacks$TensorBoard(
+  
+  # create the callback
+  callback <- keras$callbacks$TensorBoard(
     log_dir = normalize_path(log_dir),
     histogram_freq = as.integer(histogram_freq),
     write_graph = write_graph,
@@ -190,6 +196,16 @@ callback_tensorboard <- function(log_dir = "logs", histogram_freq = 0,
     embeddings_layer_names = embeddings_layer_names,
     embeddings_metadata = embeddings_metadata
   )
+  
+  # if a launch is requested then monkeypatch on_train_begin to do the launch
+  if (launch) {
+    callback$on_train_begin <- function(logs = NULL) {
+      tensorboard(log_dir = log_dir, launch_browser = TRUE)  
+    }
+  }
+ 
+  # return callback
+  callback
 }
 
 
