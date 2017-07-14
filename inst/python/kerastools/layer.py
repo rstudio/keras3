@@ -20,8 +20,8 @@ class RLayer(Layer):
     self.r_build(input_shape)
     super(RLayer, self).build(input_shape) 
 
-  def call(self, x):
-    return self.r_call(x)
+  def call(self, inputs, mask = None):
+    return self.r_call(inputs, mask)
       
   def compute_output_shape(self, input_shape):
     return self.r_compute_output_shape(input_shape)

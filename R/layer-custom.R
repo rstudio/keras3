@@ -1,41 +1,58 @@
 
 
 #' Base R6 class for Keras layers
-#' 
+#'
 #' @docType class
-#' 
-#' @format An [R6Class] generator object
-#' #' 
-#' @section Methods:
-#' \describe{
-#'  \item{\code{build(input_shape)}}{Build the layer.}
-#'  \item{\code{call(x)}}{Call the layer on an input tensor.}
-#'  \item{\code{compute_output_shape(input_shape)}}{Compute the output shape for the layer.}
-#' }
-#' 
+#'
+#' @format An [R6Class] generator object #'
+#' @section Methods: \describe{ \item{\code{build(input_shape)}}{Creates the
+#'   layer weights (must be implemented by all layers that have weights)}
+#'   \item{\code{call(inputs,mask)}}{Call the layer on an input tensor.}
+#'   \item{\code{compute_output_shape(input_shape)}}{Compute the output shape
+#'   for the layer.}
+#'   \item{\code{add_weight(name,shape,dtype,initializer,regularizer,trainable,constraint)}}{Adds
+#'   a weight variable to the layer.} }
+#'
 #' @return [KerasLayer].
-#' 
+#'
 #' @export
 KerasLayer <- R6Class("KerasLayer",
              
   public = list(
    
-   build = function(input_shape) {
-  
-   },
+    # Create the layer weights. 
+    build = function(input_shape) {
+    
+    },
    
-   call = function(x) {
-     stop("Keras custom layers must implement the call function")
-   },
+    # Call the layer on an input tensor.
+    call = function(inputs, mask = NULL) {
+      stop("Keras custom layers must implement the call function")
+    },
    
-   compute_output_shape = function(input_shape) {
-     input_shape
-   },
+    # Compute the output shape for the layer.
+    compute_output_shape = function(input_shape) {
+      input_shape
+    },
    
-   # back reference to python layer that wraps us
-   .set_wrapper = function(wrapper) {
-     private$wrapper <- wrapper
-   }
+    # Adds a weight variable to the layer.
+    add_weight = function(name, shape, dtype = NULL, initializer = NULL,
+                          regularizer = NULL, trainable = TRUE, constraint = NULL) {
+      private$wrapper$add_weight(
+        name = name, 
+        shape = shape, 
+        dtype = dtype, 
+        initializer = initializer, 
+        regularizer = regularizer,
+        trainable = trainable,
+        constraint = constraint
+      )
+    },
+   
+    # back reference to python layer that wraps us
+    .set_wrapper = function(wrapper) {
+      private$wrapper <- wrapper
+    }
   ),
   
   active = list(
