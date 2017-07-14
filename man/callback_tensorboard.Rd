@@ -4,18 +4,13 @@
 \alias{callback_tensorboard}
 \title{TensorBoard basic visualizations}
 \usage{
-callback_tensorboard(log_dir = "logs", launch = FALSE, histogram_freq = 0,
+callback_tensorboard(log_dir = "logs", histogram_freq = 0,
   write_graph = TRUE, write_images = FALSE, embeddings_freq = 0,
   embeddings_layer_names = NULL, embeddings_metadata = NULL)
 }
 \arguments{
 \item{log_dir}{the path of the directory where to save the log files to be
 parsed by Tensorboard.}
-
-\item{launch}{\code{TRUE} to automatically launch TensorBoard at the beginning
-of training. Note that you will not see any scalar data plotted until
-the end of the first epoch. TensorBoard automatically refreshes it's
-display every 30 seconds.}
 
 \item{histogram_freq}{frequency (in epochs) at which to compute activation
 histograms for the layers of the model. If set to 0, histograms won't be

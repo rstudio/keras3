@@ -45,7 +45,13 @@ history <- model %>% fit(
 
 See the documentation on the `callback_tensorboard()` function for the various available options. The most important option is the `log_dir`, which determines which directory logs are written to for a given training run. 
 
-## Running TensorBoard
+You should either use a distinct log directory for each training run or remove the log directory between runs. You can use the `unique_dir` function to easily create a directory per-run:
+
+```{r}
+callback_tensorboard(log_dir = unique_dir("logs"))
+```
+
+## Viewing Data
 
 To view TensorBoard data for a given set of runs you use the `tensorboard()` function. If your training logs are located within the current working directory then you can call `tensorboard()` with no arguments:
 
@@ -59,28 +65,24 @@ If you alternatively want to specify a specific directory as the root of all tra
 tensorboard(log_dir = "logs")
 ```
 
-Note that you don't need to change the `log_dir` for each training run (the default log directory if none is specified is "logs"). In the case of a `log_dir` used multiple times TensorBoard will simply visualize the metrics for the most recent training run.
+It's often useful to run TensorBoard while you are training a model. To do this, simply launch tensorboard within the training directory right before you begin training:
 
-## Training View
+```{r}
+# launch TensorBoard (data won't show up until after the first epoch)
+tensorboard()
 
-You can run TensorBoard while you are training a model. To do this you can either:
+# fit the model with the TensorBoard callback
+history <- model %>% fit(
+  x_train, y_train,
+  batch_size = batch_size,
+  epochs = epochs,
+  verbose = 1,
+  callbacks = callback_tensorboard(log_dir = "logs/run_a"),
+  validation_split = 0.2
+)
+```    
 
-1. Call the `tensorboard()` function within the directory you are training from; or
-
-2. Specify the `launch = TRUE` parameter to the `callback_tensorboard()` function. For example;
-
-    ```{r}
-    history <- model %>% fit(
-      x_train, y_train,
-      batch_size = batch_size,
-      epochs = epochs,
-      verbose = 1,
-      callbacks = callback_tensorboard(log_dir = "logs/run_a", launch = TRUE),
-      validation_split = 0.2
-    )
-    ```    
-
-Note that when TensorBoard is first launched you won't see any scalar data plotted initially. This is because Keras writes TensorBoard data at the end of each training epoch, and the first epoch will likely not yet have completed. TensorBoard will automatically refresh it's display every 30 seconds during training.
+Keras writes TensorBoard data at the end of each epoch so you won't see any data in TensorBoard until 10-20 seconds after the end of the first epoch (TensorBoard automatically refreshes it's display every 30 seconds during training). 
 
 ## Comparing Runs
 
@@ -100,7 +102,6 @@ You can use the `unique_dir` function if you want to record every training run i
 callback_tensorboard(log_dir = unique_dir("logs"))
 ```
 
-Once again note that it's not required to record every training run in it's own directory. Using the default "logs" directory will work just fine, you'll just only be able to visualize the most recent run using TensorBoard.
 
 ## Customization
 
