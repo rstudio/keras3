@@ -130,7 +130,7 @@ dynamic graphs of your training and test metrics, as well as activation
 histograms for the different layers in your model.</p>
     
 
-    <pre class="usage"><span class='fu'>callback_tensorboard</span>(<span class='kw'>log_dir</span> <span class='kw'>=</span> <span class='st'>"logs"</span>, <span class='kw'>launch</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>histogram_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+    <pre class="usage"><span class='fu'>callback_tensorboard</span>(<span class='kw'>log_dir</span> <span class='kw'>=</span> <span class='st'>"logs"</span>, <span class='kw'>histogram_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>write_graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>write_images</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>embeddings_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>embeddings_layer_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>embeddings_metadata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
@@ -141,13 +141,6 @@ histograms for the different layers in your model.</p>
       <th>log_dir</th>
       <td><p>the path of the directory where to save the log files to be
 parsed by Tensorboard.</p></td>
-    </tr>
-    <tr>
-      <th>launch</th>
-      <td><p><code>TRUE</code> to automatically launch TensorBoard at the beginning
-of training. Note that you will not see any scalar data plotted until
-the end of the first epoch. TensorBoard automatically refreshes it's
-display every 30 seconds.</p></td>
     </tr>
     <tr>
       <th>histogram_freq</th>
