@@ -13,7 +13,7 @@ create_layer(layer_class, object, args = list())
 \code{\link[=keras_model_sequential]{keras_model_sequential()}} to add the layer to, or another Layer which
 this layer will call.}
 
-\item{args}{Arguments to layer constructor function}
+\item{args}{List of arguments to layer constructor function}
 }
 \value{
 A Keras layer
