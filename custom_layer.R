@@ -23,10 +23,14 @@ CustomLayer <- R6::R6Class("KerasLayer",
   )
 )
 
-lyr <- create_layer(CustomLayer)
 
-layer_abs <- function(object) {
-  create_layer(CustomLayer, object)
+
+
+layer_abs <- function(object, name = NULL, trainable = FALSE) {
+  create_layer(CustomLayer, object, list(
+    name = name,
+    trainable = trainable
+  ))
 }
 
 model <- keras_model_sequential() 
