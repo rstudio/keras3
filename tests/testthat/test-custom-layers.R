@@ -47,14 +47,14 @@ layer_custom <- function(object, output_dim, name = NULL, trainable = TRUE) {
   ))
 }
 
-test_succeeds("Use an R-based custom Keras layer", {
-  
-  model <- keras_model_sequential() 
-  model %>%
-    layer_dense(32, input_shape = 784, kernel_initializer = initializer_ones()) %>%
-    layer_activation('relu') %>%
-    layer_custom(output_dim = 10) %>% 
-    layer_dense(10) %>%
-    layer_activation('softmax')
-  
-})
+# test_succeeds("Use an R-based custom Keras layer", {
+#   
+#   model <- keras_model_sequential() 
+#   model %>%
+#     layer_dense(32, input_shape = 784, kernel_initializer = initializer_ones()) %>%
+#     layer_activation('relu') %>%
+#     layer_custom(output_dim = 10) %>% 
+#     layer_dense(10) %>%
+#     layer_activation('softmax')
+#   
+# })
