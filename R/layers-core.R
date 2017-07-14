@@ -402,7 +402,7 @@ normalize_shape <- function(shape) {
 #' 
 #' @param layer_class Python layer class or R6 class of type KerasLayer
 #' @param object Object to compose layer with. This is either a 
-#' [keras_sequential_model()] to add the layer to, or another Layer which
+#' [keras_model_sequential()] to add the layer to, or another Layer which
 #' this layer will call.
 #' @param args Arguments to layer constructor function 
 #' 
@@ -412,7 +412,7 @@ normalize_shape <- function(shape) {
 #' layer is created without a connection to an existing graph.
 #' 
 #' @export
-create_layer <- function(layer_class, object, args) {
+create_layer <- function(layer_class, object, args = list()) {
   
   # remove kwargs that are null
   args$input_shape <- args$input_shape
@@ -423,8 +423,38 @@ create_layer <- function(layer_class, object, args) {
   args$trainable <- args$trainable
   args$weights <- args$weights
   
-  # create layer from class
-  layer <- do.call(layer_class, args)
+  # if this is an R6 class then create a Python wrapper for it
+  if (inherits(layer_class, "R6ClassGenerator")) {
+    
+    # scrape out the "common" layer parameters (these will need to
+    # be passed to the Python wrapper constructor whereas the other
+    # params are passed to the R6 constructor)
+    common_arg_names <- c("input_shape", "batch_input_shape", "batch_size",
+                          "dtype", "name", "trainable", "weights")
+    layer_args <- args[common_arg_names]
+    layer_args[sapply(layer_args, is.null)] <- NULL
+    
+    # set those to NULL within args
+    for (arg in names(layer_args))
+      args[[arg]] <- NULL
+    
+    # create the layer
+    layer <- do.call(layer_class$new, args)
+    
+    # create the python wrapper
+    python_path <- system.file("python", package = "keras")
+    tools <- import_from_path("kerastools", path = python_path)
+    layer_args$r_build <- layer$build
+    layer_args$r_call <-  layer$call
+    layer_args$r_compute_output_shape <- layer$compute_output_shape
+    layer <- do.call(tools$layer$RLayer, layer_args)
+    
+  } else {
+    # create layer from class
+    layer <- do.call(layer_class, args)
+  }
+  
+  
   
   # compose if we have an x
   if (missing(object) || is.null(object))
