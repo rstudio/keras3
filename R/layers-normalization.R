@@ -43,7 +43,7 @@ layer_batch_normalization <- function(object, axis = -1L, momentum = 0.99, epsil
                                       beta_constraint = NULL, gamma_constraint = NULL, 
                                       input_shape = NULL,  batch_input_shape = NULL, batch_size = NULL, 
                                       dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$BatchNormalization, object, list(
+  create_layer(keras$layers$BatchNormalization, object, list(
     axis = as.integer(axis),
     momentum = momentum,
     epsilon = epsilon,

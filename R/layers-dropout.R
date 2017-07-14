@@ -21,7 +21,7 @@
 layer_dropout <- function(object, rate, noise_shape = NULL, seed = NULL, 
                           batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Dropout, object, list(
+  create_layer(keras$layers$Dropout, object, list(
     rate = rate,
     noise_shape = normalize_shape(noise_shape),
     seed = seed,
@@ -58,7 +58,7 @@ layer_dropout <- function(object, rate, noise_shape = NULL, seed = NULL,
 layer_spatial_dropout_1d <- function(object, rate, 
                                      batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$SpatialDropout1D, object, list(
+  create_layer(keras$layers$SpatialDropout1D, object, list(
     rate = rate,
     batch_size = as_nullable_integer(batch_size),
     name = name,
@@ -102,7 +102,7 @@ layer_spatial_dropout_1d <- function(object, rate,
 layer_spatial_dropout_2d <- function(object, rate, data_format = NULL, 
                                      batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$SpatialDropout2D, object, list(
+  create_layer(keras$layers$SpatialDropout2D, object, list(
     rate = rate,
     data_format = data_format,
     batch_size = as_nullable_integer(batch_size),
@@ -148,7 +148,7 @@ layer_spatial_dropout_2d <- function(object, rate, data_format = NULL,
 layer_spatial_dropout_3d <- function(object, rate, data_format = NULL, 
                                      batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$SpatialDropout3D, object, list(
+  create_layer(keras$layers$SpatialDropout3D, object, list(
     rate = rate,
     data_format = data_format,
     batch_size = as_nullable_integer(batch_size),

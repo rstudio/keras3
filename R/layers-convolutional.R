@@ -56,7 +56,7 @@ layer_conv_1d <- function(object, filters, kernel_size, strides = 1L, padding = 
                           batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                           name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Conv1D, object, list(
+  create_layer(keras$layers$Conv1D, object, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -138,7 +138,7 @@ layer_conv_2d <- function(object, filters, kernel_size, strides = c(1L, 1L), pad
                           batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                           name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Conv2D, object, list(
+  create_layer(keras$layers$Conv2D, object, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -225,7 +225,7 @@ layer_conv_3d <- function(object, filters, kernel_size, strides = c(1L, 1L, 1L),
                           batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                           name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Conv3D, object, list(
+  create_layer(keras$layers$Conv3D, object, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -300,7 +300,7 @@ layer_conv_2d_transpose <- function(object, filters, kernel_size, strides = c(1L
                                     batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                                     name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Conv2DTranspose, object, list(
+  create_layer(keras$layers$Conv2DTranspose, object, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -387,7 +387,7 @@ layer_conv_3d_transpose <- function(object, filters, kernel_size, strides = c(1,
                                     kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
                                     batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                                     name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$Conv3DTranspose, object, list(
+  create_layer(keras$layers$Conv3DTranspose, object, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -469,7 +469,7 @@ layer_separable_conv_2d <- function(object, filters, kernel_size, strides = c(1L
                                     depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL,
                                     batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$SeparableConv2D, object, list(
+  create_layer(keras$layers$SeparableConv2D, object, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -516,7 +516,7 @@ layer_separable_conv_2d <- function(object, filters, kernel_size, strides = c(1L
 layer_upsampling_1d <- function(object, size = 2L,
                                 batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$UpSampling1D, object, list(
+  create_layer(keras$layers$UpSampling1D, object, list(
     size = as.integer(size),
     batch_size = as_nullable_integer(batch_size),
     name = name,
@@ -552,7 +552,7 @@ layer_upsampling_1d <- function(object, size = 2L,
 layer_upsampling_2d <- function(object, size = c(2L, 2L), data_format = NULL,
                                 batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$UpSampling2D, object, list(
+  create_layer(keras$layers$UpSampling2D, object, list(
     size = as.integer(size),
     data_format = data_format,
     batch_size = as_nullable_integer(batch_size),
@@ -598,7 +598,7 @@ layer_upsampling_2d <- function(object, size = c(2L, 2L), data_format = NULL,
 layer_upsampling_3d <- function(object, size= c(2L, 2L, 2L), data_format = NULL,
                                 batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$UpSampling3D, object, list(
+  create_layer(keras$layers$UpSampling3D, object, list(
     size = as.integer(size),
     data_format = data_format,
     batch_size = as_nullable_integer(batch_size),
@@ -628,7 +628,7 @@ layer_upsampling_3d <- function(object, size= c(2L, 2L, 2L), data_format = NULL,
 #' @export
 layer_zero_padding_1d <- function(object, padding = 1L,
                                   batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$ZeroPadding1D, object, list(
+  create_layer(keras$layers$ZeroPadding1D, object, list(
     padding = as.integer(padding),
     batch_size = as_nullable_integer(batch_size),
     name = name,
@@ -667,7 +667,7 @@ layer_zero_padding_1d <- function(object, padding = 1L,
 layer_zero_padding_2d <- function(object, padding = c(1L, 1L), data_format = NULL,
                                   batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
 
-  call_layer(keras$layers$ZeroPadding2D, object, list(
+  create_layer(keras$layers$ZeroPadding2D, object, list(
     padding = normalize_padding(padding, 2L),
     data_format = data_format,
     batch_size = as_nullable_integer(batch_size),
@@ -714,7 +714,7 @@ layer_zero_padding_2d <- function(object, padding = c(1L, 1L), data_format = NUL
 layer_zero_padding_3d <- function(object,  padding = c(1L, 1L, 1L), data_format = NULL,
                                   batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$ZeroPadding3D, object, list(
+  create_layer(keras$layers$ZeroPadding3D, object, list(
     padding = normalize_padding(padding, 3L),
     data_format = data_format,
     batch_size = as_nullable_integer(batch_size),
@@ -745,7 +745,7 @@ layer_zero_padding_3d <- function(object,  padding = c(1L, 1L, 1L), data_format 
 #' @export
 layer_cropping_1d <- function(object, cropping = c(1L, 1L),
                               batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$Cropping1D, object, list(
+  create_layer(keras$layers$Cropping1D, object, list(
     cropping = as.integer(cropping),
     batch_size = as_nullable_integer(batch_size),
     name = name,
@@ -783,7 +783,7 @@ layer_cropping_1d <- function(object, cropping = c(1L, 1L),
 layer_cropping_2d <- function(object, cropping = list(c(0L, 0L), c(0L, 0L)), data_format = NULL,
                               batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Cropping2D, object, list(
+  create_layer(keras$layers$Cropping2D, object, list(
     cropping = normalize_cropping(cropping, 2L),
     data_format = data_format,
     batch_size = as_nullable_integer(batch_size),
@@ -834,7 +834,7 @@ layer_cropping_2d <- function(object, cropping = list(c(0L, 0L), c(0L, 0L)), dat
 #' @export
 layer_cropping_3d <- function(object, cropping = list(c(1L, 1L), c(1L, 1L), c(1L, 1L)), data_format = NULL,
                               batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$Cropping3D, object, list(
+  create_layer(keras$layers$Cropping3D, object, list(
     cropping = normalize_cropping(cropping, 3L),
     data_format = data_format,
     batch_size = as_nullable_integer(batch_size),
@@ -931,7 +931,7 @@ layer_conv_lstm_2d <- function(object, filters, kernel_size, strides = c(1L, 1L)
                                return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, dropout = 0.0, recurrent_dropout = 0.0,
                                batch_size = NULL, name = NULL, trainable = NULL, weights = NULL, input_shape = NULL) {
   
-  call_layer(keras$layers$ConvLSTM2D, object, list(
+  create_layer(keras$layers$ConvLSTM2D, object, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),

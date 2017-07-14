@@ -61,7 +61,7 @@ layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE
                              kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
                              dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
                              dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$SimpleRNN, object, list(
+  create_layer(keras$layers$SimpleRNN, object, list(
     units = as.integer(units),
     activation = activation,
     use_bias = use_bias,
@@ -120,7 +120,7 @@ layer_gru <- function(object, units, activation = "tanh", recurrent_activation =
                       kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
                       dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
                       dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$GRU, object, list(
+  create_layer(keras$layers$GRU, object, list(
     units = as.integer(units),
     activation = activation,
     recurrent_activation = recurrent_activation,
@@ -183,7 +183,7 @@ layer_lstm <- function(object, units, activation = "tanh", recurrent_activation 
                        dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
                        dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$LSTM, object, list(
+  create_layer(keras$layers$LSTM, object, list(
     units = as.integer(units),
     activation = activation,
     recurrent_activation = recurrent_activation,

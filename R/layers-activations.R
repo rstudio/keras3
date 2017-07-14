@@ -15,7 +15,7 @@ layer_activation <- function(object, activation, input_shape = NULL,
                              batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                              name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Activation, object, list(
+  create_layer(keras$layers$Activation, object, list(
     activation = activation,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -47,7 +47,7 @@ layer_activation_leaky_relu <- function(object, alpha = 0.3, input_shape = NULL,
                                         dtype = NULL, name = NULL, trainable = NULL, 
                                         weights = NULL) {
   
-  call_layer(keras$layers$LeakyReLU, object, list(
+  create_layer(keras$layers$LeakyReLU, object, list(
     alpha = alpha,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -105,7 +105,7 @@ layer_activation_parametric_relu <- function(object, alpha_initializer = "zeros"
   args$weights <- weights
   
   # call layer
-  call_layer(keras$layers$PReLU, object, args)
+  create_layer(keras$layers$PReLU, object, args)
 }
 
 
@@ -126,7 +126,7 @@ layer_activation_thresholded_relu <- function(object, theta = 1.0, input_shape =
                                               dtype = NULL, name = NULL, trainable = NULL, 
                                               weights = NULL) {
   
-  call_layer(keras$layers$ThresholdedReLU, object, list(
+  create_layer(keras$layers$ThresholdedReLU, object, list(
     theta = theta,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -158,7 +158,7 @@ layer_activation_elu <- function(object, alpha = 1.0, input_shape = NULL,
                                  batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                                  name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$ELU, object, list(
+  create_layer(keras$layers$ELU, object, list(
     alpha = alpha,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),

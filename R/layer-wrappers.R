@@ -21,7 +21,7 @@ time_distributed <- function(object, layer, input_shape = NULL,
                              batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                              name = NULL, trainable = NULL, weights = NULL) {
 
-  call_layer(keras$layers$TimeDistributed, object, list(
+  create_layer(keras$layers$TimeDistributed, object, list(
     layer = layer,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -51,7 +51,7 @@ bidirectional <- function(object, layer, merge_mode = "concat", input_shape = NU
                           batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                           name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Bidirectional, object, list(
+  create_layer(keras$layers$Bidirectional, object, list(
     layer = layer,
     merge_mode = merge_mode,
     input_shape = normalize_shape(input_shape),

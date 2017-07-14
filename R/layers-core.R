@@ -98,7 +98,7 @@ layer_dense <- function(object, units, activation = NULL, use_bias = TRUE,
                         name = NULL, trainable = NULL, weights = NULL
                         ) {
   
-  call_layer(keras$layers$Dense, object, list(
+  create_layer(keras$layers$Dense, object, list(
     units = as.integer(units),
     activation = activation,
     use_bias = use_bias,
@@ -141,7 +141,7 @@ layer_reshape <- function(object, target_shape, input_shape = NULL,
                           batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                           name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Reshape, object, list(
+  create_layer(keras$layers$Reshape, object, list(
     target_shape = normalize_shape(target_shape),
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -179,7 +179,7 @@ layer_permute <- function(object, dims, input_shape = NULL,
                           batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                           name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Permute, object, list(
+  create_layer(keras$layers$Permute, object, list(
     dims = as_integer_tuple(dims),
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -208,7 +208,7 @@ layer_permute <- function(object, dims, input_shape = NULL,
 layer_repeat_vector <- function(object, n, 
                                 batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$RepeatVector, object, list(
+  create_layer(keras$layers$RepeatVector, object, list(
     n = as.integer(n),
     batch_size = as_nullable_integer(batch_size),
     name = name,
@@ -259,7 +259,7 @@ layer_lambda <- function(object, f, output_shape = NULL, mask = NULL, arguments 
   if (identical(backend()$backend(), "theano"))
     args$output_shape = as_integer_tuple(output_shape)
   
-  call_layer(keras$layers$Lambda, object, args)
+  create_layer(keras$layers$Lambda, object, args)
   
 }
 
@@ -285,7 +285,7 @@ layer_activity_regularization <- function(object, l1 = 0.0, l2 = 0.0, input_shap
                                           dtype = NULL, name = NULL, trainable = NULL, 
                                           weights = NULL) {
   
-  call_layer(keras$layers$ActivityRegularization, object, list(
+  create_layer(keras$layers$ActivityRegularization, object, list(
     l1 = l1,
     l2 = l2,
     input_shape = normalize_shape(input_shape),
@@ -318,7 +318,7 @@ layer_masking <- function(object, mask_value = 0.0, input_shape = NULL,
                           batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                           name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Masking, object, list(
+  create_layer(keras$layers$Masking, object, list(
     mask_value = mask_value,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -345,7 +345,7 @@ layer_masking <- function(object, mask_value = 0.0, input_shape = NULL,
 layer_flatten <- function(object, 
                           batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Flatten, object, list())
+  create_layer(keras$layers$Flatten, object, list())
   
 }
 
@@ -398,8 +398,21 @@ normalize_shape <- function(shape) {
 }
 
 
-# Helper function to call a layer
-call_layer <- function(layer_function, object, args) {
+#' Create a Keras Layer
+#' 
+#' @param layer_class Python layer class or R6 class of type KerasLayer
+#' @param object Object to compose layer with. This is either a 
+#' [keras_sequential_model()] to add the layer to, or another Layer which
+#' this layer will call.
+#' @param args Arguments to layer constructor function 
+#' 
+#' @return A Keras layer
+#' 
+#' @note The `object` parameter can be missing, in which case the 
+#' layer is created without a connection to an existing graph.
+#' 
+#' @export
+create_layer <- function(layer_class, object, args) {
   
   # remove kwargs that are null
   args$input_shape <- args$input_shape
@@ -410,8 +423,8 @@ call_layer <- function(layer_function, object, args) {
   args$trainable <- args$trainable
   args$weights <- args$weights
   
-  # call function
-  layer <- do.call(layer_function, args)
+  # create layer from class
+  layer <- do.call(layer_class, args)
   
   # compose if we have an x
   if (missing(object) || is.null(object))
