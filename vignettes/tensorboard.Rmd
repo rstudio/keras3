@@ -45,31 +45,31 @@ history <- model %>% fit(
 
 See the documentation on the `callback_tensorboard()` function for the various available options. The most important option is the `log_dir`, which determines which directory logs are written to for a given training run. 
 
-You should either use a distinct log directory for each training run or remove the log directory between runs. You can use the `unique_dir` function to easily create a directory per-run:
+You should either use a distinct log directory for each training run or remove the log directory between runs. You can use the `run_dir()` function to easily create a directory per-run:
 
 ```{r}
-callback_tensorboard(log_dir = unique_dir("logs"))
+callback_tensorboard(log_dir = run_dir())
 ```
 
 ## Viewing Data
 
-To view TensorBoard data for a given set of runs you use the `tensorboard()` function. If your training logs are located within the current working directory then you can call `tensorboard()` with no arguments:
+To view TensorBoard data for a given set of runs you use the `tensorboard()` function, pointing it to the previously specified `log_dir`:
 
 ```{r}
-tensorboard()
+tensorboard("logs/run_a")
 ```
 
-If you alternatively want to specify a specific directory as the root of all training logs then you can use the `log_dir` parameter, for example:
+Note that if you used the `run_dir()` function in `callback_tensorboard()`, you can use it again in the call to `tensorboard()` (by default `run_dir()` returns the same directory within a single R session):
 
 ```{r}
-tensorboard(log_dir = "logs")
+tensorboard(run_dir())
 ```
 
 It's often useful to run TensorBoard while you are training a model. To do this, simply launch tensorboard within the training directory right before you begin training:
 
 ```{r}
 # launch TensorBoard (data won't show up until after the first epoch)
-tensorboard()
+tensorboard(run_dir())
 
 # fit the model with the TensorBoard callback
 history <- model %>% fit(
@@ -77,7 +77,7 @@ history <- model %>% fit(
   batch_size = batch_size,
   epochs = epochs,
   verbose = 1,
-  callbacks = callback_tensorboard(log_dir = "logs/run_a"),
+  callbacks = callback_tensorboard(log_dir = run_dir()),
   validation_split = 0.2
 )
 ```    
@@ -96,11 +96,6 @@ Then the TensorBoard visualization would look like this:
 
 ![](images/tensorboard_compare.png){width=700 height=540 .screenshot}
 
-You can use the `unique_dir` function if you want to record every training run in it's own directory:
-
-```{r}
-callback_tensorboard(log_dir = unique_dir("logs"))
-```
 
 
 ## Customization
