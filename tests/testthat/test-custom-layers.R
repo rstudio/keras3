@@ -16,7 +16,7 @@ CustomLayer <- R6::R6Class("KerasLayer",
     kernel = NULL,
     
     initialize = function(output_dim) {
-      self$output_dim <- as.integer(output_dim)
+      self$output_dim <- output_dim
     },
     
     build = function(input_shape) {
@@ -41,7 +41,7 @@ CustomLayer <- R6::R6Class("KerasLayer",
 # create layer wrapper function
 layer_custom <- function(object, output_dim, name = NULL, trainable = TRUE) {
   create_layer(CustomLayer, object, list(
-    output_dim = output_dim,
+    output_dim = as.integer(output_dim),
     name = name,
     trainable = trainable
   ))
