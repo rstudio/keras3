@@ -38,15 +38,17 @@ KerasLayer <- R6Class("KerasLayer",
     # Adds a weight variable to the layer.
     add_weight = function(name, shape, dtype = NULL, initializer = NULL,
                           regularizer = NULL, trainable = TRUE, constraint = NULL) {
-      private$wrapper$add_weight(
-        name = name, 
-        shape = shape, 
-        dtype = dtype, 
-        initializer = initializer, 
-        regularizer = regularizer,
-        trainable = trainable,
-        constraint = constraint
-      )
+      
+      args <- list()
+      args$name <- name
+      args$shape <- shape
+      args$dtype <- dtype
+      args$initializer <- initializer
+      args$regularizer <- regularizer
+      args$trainable <- trainable
+      args$constraint <- constraint
+      
+      do.call(private$wrapper$add_weight, args)
     },
    
     # back reference to python layer that wraps us
