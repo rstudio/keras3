@@ -31,10 +31,6 @@ tensorflow::install_tensorflow
 #' @export
 tensorflow::tensorboard
 
-#' @importFrom tensorflow unique_dir
-#' @export
-tensorflow::unique_dir
-
 #' @importFrom tensorflow run_dir
 #' @export
 tensorflow::run_dir
