@@ -5,44 +5,52 @@ source("utils.R")
 K <- backend()
 
 # Custom layer class
-K <- backend()
-
-# Custom layer class
-AntirectifierLayer <- R6::R6Class("KerasLayer",
-  
+CustomLayer <- R6::R6Class("KerasLayer",
+                                  
   inherit = KerasLayer,
   
   public = list(
     
+    output_dim = NULL,
+    
+    kernel = NULL,
+    
+    initialize = function(output_dim) {
+      self$output_dim <- output_dim
+    },
+    
+    build = function(input_shape) {
+      self$kernel <- self$add_weight(
+        name = 'kernel', 
+        shape = list(input_shape$dims[[2]], self$output_dim),
+        initializer = initializer_random_uniform(),
+        trainable = TRUE
+      )
+    },
+    
     call = function(x, mask = NULL) {
-      x <- x - K$mean(x, axis = 1L, keepdims = TRUE)
-      x <- K$l2_normalize(x, axis = 1L)
-      pos <- K$relu(x)
-      neg <- K$relu(-x)
-      K$concatenate(c(pos, neg), axis = 1L)
-      
+      K$dot(x, self$kernel)
     },
     
     compute_output_shape = function(input_shape) {
-      input_shape[[2]] <- input_shape[[2]] * 2 
-      tuple(input_shape)
+      list(input_shape$dims[[1]], self$output_dim)
     }
   )
 )
 
 # create layer wrapper function
-layer_antirectifier <- function(object) {
-  create_layer(AntirectifierLayer, object)
+layer_custom <- function(object, output_dim, name = NULL, trainable = TRUE) {
+  create_layer(CustomLayer, object, list(
+    output_dim = output_dim,
+    name = name,
+    trainable = trainable
+  ))
 }
 
 test_succeeds("Use an R-based custom Keras layer", {
+
   model <- keras_model_sequential()
   model %>% 
-    layer_dense(units = 256, input_shape = c(784)) %>% 
-    layer_antirectifier() %>% 
-    layer_dropout(rate = 0.1) %>% 
-    layer_dense(units = 256) %>%
-    layer_antirectifier() %>% 
-    layer_dropout(rate = 0.1) %>%
-    layer_dense(units = 10, activation = 'softmax')
+    layer_dense(units = 32, input_shape = c(32,32,32)) %>% 
+    layer_custom(output_dim = 32)
 })
