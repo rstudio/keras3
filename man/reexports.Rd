@@ -15,6 +15,8 @@
 \alias{reexports}
 \alias{unique_dir}
 \alias{reexports}
+\alias{run_dir}
+\alias{reexports}
 \alias{tf_config}
 \title{Objects exported from other packages}
 \keyword{internal}
@@ -25,6 +27,6 @@ below to see their documentation.
 \describe{
   \item{reticulate}{\code{\link[reticulate]{use_python}}, \code{\link[reticulate]{use_virtualenv}}, \code{\link[reticulate]{use_condaenv}}}
 
-  \item{tensorflow}{\code{\link[tensorflow]{install_tensorflow}}, \code{\link[tensorflow]{tensorboard}}, \code{\link[tensorflow]{unique_dir}}, \code{\link[tensorflow]{tf_config}}}
+  \item{tensorflow}{\code{\link[tensorflow]{install_tensorflow}}, \code{\link[tensorflow]{tensorboard}}, \code{\link[tensorflow]{unique_dir}}, \code{\link[tensorflow]{run_dir}}, \code{\link[tensorflow]{tf_config}}}
 }}
 

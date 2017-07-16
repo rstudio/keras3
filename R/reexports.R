@@ -35,6 +35,9 @@ tensorflow::tensorboard
 #' @export
 tensorflow::unique_dir
 
+#' @importFrom tensorflow run_dir
+#' @export
+tensorflow::run_dir
 
 #' @importFrom tensorflow tf_config
 #' @export
