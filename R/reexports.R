@@ -35,6 +35,14 @@ tensorflow::tensorboard
 #' @export
 tensorflow::run_dir
 
+#' @importFrom tensorflow list_runs
+#' @export
+tensorflow::latest_run
+
+#' @importFrom tensorflow latest_run
+#' @export
+tensorflow::list_runs
+
 #' @importFrom tensorflow tf_config
 #' @export
 tensorflow::tf_config

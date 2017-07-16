@@ -38,7 +38,7 @@ history <- model %>% fit(
   batch_size = batch_size,
   epochs = epochs,
   verbose = 1,
-  callbacks = callback_tensorboard(log_dir = "logs/run_a"),
+  callbacks = callback_tensorboard("logs/run_a"),
   validation_split = 0.2
 )
 ```
@@ -48,7 +48,16 @@ See the documentation on the `callback_tensorboard()` function for the various a
 You should either use a distinct log directory for each training run or remove the log directory between runs. You can use the `run_dir()` function to easily create a directory per-run:
 
 ```{r}
-callback_tensorboard(log_dir = run_dir())
+run_dir <- run_dir()
+
+history <- model %>% fit(
+  x_train, y_train,
+  batch_size = batch_size,
+  epochs = epochs,
+  verbose = 1,
+  callbacks = callback_tensorboard(run_dir),
+  validation_split = 0.2
+)
 ```
 
 ## Viewing Data
@@ -59,17 +68,19 @@ To view TensorBoard data for a given set of runs you use the `tensorboard()` fun
 tensorboard("logs/run_a")
 ```
 
-Note that if you used the `run_dir()` function in `callback_tensorboard()`, you can use it again in the call to `tensorboard()` (by default `run_dir()` returns the same directory within a single R session):
+If you are using the `run_dir()` function to create a unique directory for each training run, you can either pass the `run_dir` to the `tensorboard()` function or use the `latest_run()` function to 
+run tensorboad against the most recent run directory:
 
 ```{r}
-tensorboard(run_dir())
+tensorboard(latest_run())
 ```
 
 It's often useful to run TensorBoard while you are training a model. To do this, simply launch tensorboard within the training directory right before you begin training:
 
 ```{r}
 # launch TensorBoard (data won't show up until after the first epoch)
-tensorboard(run_dir())
+run_dir <- run_dir()
+tensorboard(run_dir)
 
 # fit the model with the TensorBoard callback
 history <- model %>% fit(
@@ -77,7 +88,7 @@ history <- model %>% fit(
   batch_size = batch_size,
   epochs = epochs,
   verbose = 1,
-  callbacks = callback_tensorboard(log_dir = run_dir()),
+  callbacks = callback_tensorboard(run_dir),
   validation_split = 0.2
 )
 ```    
