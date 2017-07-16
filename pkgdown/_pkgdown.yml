@@ -33,6 +33,8 @@ navbar:
           href: articles/training_callbacks.html
         - text: "Keras Backend"
           href: articles/backend.html
+        - text: "Custom Layers"
+          href: articles/custom_layers.html
     - text: Examples
       href: articles/examples/index.html
     - text: "Reference"
@@ -157,6 +159,11 @@ reference:
       - get_input_at
       - count_params
       - reset_states
+      
+  - title: "Custom Layers"
+    contents:
+      - KerasLayer
+      - create_layer
  
   - title: "Model Persistence"
     contents:
