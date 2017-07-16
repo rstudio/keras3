@@ -131,29 +131,16 @@
   <span class="dt">validation_split =</span> <span class="fl">0.2</span>
 )</code></pre></div>
 <p>See the documentation on the <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code> function for the various available options. The most important option is the <code>log_dir</code>, which determines which directory logs are written to for a given training run.</p>
-<p>You should either use a distinct log directory for each training run or remove the log directory between runs. You can use the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/run_dir">run_dir()</a></code> function to easily create a directory per-run:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">run_dir &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/run_dir">run_dir</a></span>()
-
-history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
-  x_train, y_train,
-  <span class="dt">batch_size =</span> batch_size,
-  <span class="dt">epochs =</span> epochs,
-  <span class="dt">verbose =</span> <span class="dv">1</span>,
-  <span class="dt">callbacks =</span> <span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(run_dir),
-  <span class="dt">validation_split =</span> <span class="fl">0.2</span>
-)</code></pre></div>
+<p>You should either use a distinct log directory for each training run or remove the log directory between runs (see the <a href="#run-directories">Run Directories</a> section for one method of creating a distinct directory per run).</p>
 </div>
 <div id="viewing-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#viewing-data" class="anchor"></a>Viewing Data</h2>
 <p>To view TensorBoard data for a given set of runs you use the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard()</a></code> function, pointing it to the previously specified <code>log_dir</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(<span class="st">"logs/run_a"</span>)</code></pre></div>
-<p>If you are using the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/run_dir">run_dir()</a></code> function to create a unique directory for each training run, you can either pass the <code>run_dir</code> to the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard()</a></code> function or use the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/run_dir">latest_run()</a></code> function to run tensorboad against the most recent run directory:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/run_dir">latest_run</a></span>())</code></pre></div>
 <p>It’s often useful to run TensorBoard while you are training a model. To do this, simply launch tensorboard within the training directory right before you begin training:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># launch TensorBoard (data won't show up until after the first epoch)</span>
-run_dir &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/run_dir">run_dir</a></span>()
-<span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(run_dir)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(<span class="st">"logs/run_a"</span>)
 
 <span class="co"># fit the model with the TensorBoard callback</span>
 history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
@@ -161,7 +148,7 @@ history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span 
   <span class="dt">batch_size =</span> batch_size,
   <span class="dt">epochs =</span> epochs,
   <span class="dt">verbose =</span> <span class="dv">1</span>,
-  <span class="dt">callbacks =</span> <span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(run_dir),
+  <span class="dt">callbacks =</span> <span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="st">"logs/run_a"</span>),
   <span class="dt">validation_split =</span> <span class="fl">0.2</span>
 )</code></pre></div>
 <p>Keras writes TensorBoard data at the end of each epoch so you won’t see any data in TensorBoard until 10-20 seconds after the end of the first epoch (TensorBoard automatically refreshes it’s display every 30 seconds during training).</p>
@@ -175,6 +162,32 @@ history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span 
 <div class="figure">
 <img src="images/tensorboard_compare.png" class="screenshot" width="700" height="540">
 </div>
+</div>
+<div id="run-directories" class="section level2">
+<h2 class="hasAnchor">
+<a href="#run-directories" class="anchor"></a>Run Directories</h2>
+<p>If you want to create a distinct directory for recording the logs of each training run you can use the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/run_dir">run_dir()</a></code> function, which creates a timestamped sub-directory under the “runs” directory within the current working directory.</p>
+<p>Here’s how you would use the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/run_dir">run_dir()</a></code> function with TensorBoard:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create run directory at e.g. "runs/2017-07-16T19-31-14Z"</span>
+run_dir &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/run_dir">run_dir</a></span>()
+
+<span class="co"># train and instruct TensorBoard to log to the run_dir</span>
+history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
+  x_train, y_train,
+  <span class="dt">batch_size =</span> batch_size,
+  <span class="dt">epochs =</span> epochs,
+  <span class="dt">verbose =</span> <span class="dv">1</span>,
+  <span class="dt">callbacks =</span> <span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="dt">log_dir =</span> run_dir),
+  <span class="dt">validation_split =</span> <span class="fl">0.2</span>
+)</code></pre></div>
+<p>To view the results of the run in TensorBoard you can either pass the <code>run_dir</code> to the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard()</a></code> function or use the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/run_dir">latest_run()</a></code> function to run TensorBoard against the most recently created run directory:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/run_dir">latest_run</a></span>())</code></pre></div>
+<p>You can view all of your previous runs simultaneously in TensorBoard with:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(<span class="st">"runs"</span>)</code></pre></div>
+<p>You may want to periodically cleanup run directories. To do this you can use the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/run_dir">clean_runs()</a></code> function. To clean all existing runs:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/run_dir">clean_runs</a></span>()</code></pre></div>
+<p>To clean all but a selected number of recent runs you can use the <code>keep</code> parameter:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/run_dir">clean_runs</a></span>(<span class="dt">keep =</span> <span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="customization" class="section level2">
 <h2 class="hasAnchor">
@@ -252,6 +265,7 @@ history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span 
       <li><a href="#recording-data">Recording Data</a></li>
       <li><a href="#viewing-data">Viewing Data</a></li>
       <li><a href="#comparing-runs">Comparing Runs</a></li>
+      <li><a href="#run-directories">Run Directories</a></li>
       <li><a href="#customization">Customization</a></li>
       </ul>
 </div>
