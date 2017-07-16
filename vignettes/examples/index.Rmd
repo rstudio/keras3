@@ -17,6 +17,7 @@ title: "Keras Examples"
 | [imdb_lstm](imdb_lstm.html) | Trains a LSTM on the IMDB sentiment classification task. |
 | [lstm_text_generation](lstm_text_generation.html) | Generates text from Nietzsche's writings. |
 | [mnist_acgan](mnist_acgan.html) | Implementation of AC-GAN (Auxiliary Classifier GAN ) on the MNIST dataset |
+| [mnist_antirectifier](mnist_antirectifier.html) | Demonstrates how to write custom layers for Keras |
 | [mnist_cnn](mnist_cnn.html) | Trains a simple convnet on the MNIST dataset. |
 | [mnist_irnn](mnist_irnn.html) | Reproduction of the IRNN experiment with pixel-by-pixel sequential MNIST in "A Simple Way to Initialize Recurrent Networks of Rectified Linear Units" by Le et al. |
 | [mnist_mlp](mnist_mlp.html) | Trains a simple deep multi-layer perceptron on the MNIST dataset. |

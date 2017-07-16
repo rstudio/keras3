@@ -6,6 +6,7 @@
 ^README.R?md$
 ^docs$
 ^pkgdown$
+^dev$
 ^issues$
 ^external$
 ^vignettes/examples$

@@ -402,9 +402,9 @@ normalize_shape <- function(shape) {
 #' 
 #' @param layer_class Python layer class or R6 class of type KerasLayer
 #' @param object Object to compose layer with. This is either a 
-#' [keras_sequential_model()] to add the layer to, or another Layer which
+#' [keras_model_sequential()] to add the layer to, or another Layer which
 #' this layer will call.
-#' @param args Arguments to layer constructor function 
+#' @param args List of arguments to layer constructor function 
 #' 
 #' @return A Keras layer
 #' 
@@ -412,7 +412,7 @@ normalize_shape <- function(shape) {
 #' layer is created without a connection to an existing graph.
 #' 
 #' @export
-create_layer <- function(layer_class, object, args) {
+create_layer <- function(layer_class, object, args = list()) {
   
   # remove kwargs that are null
   args$input_shape <- args$input_shape
@@ -423,8 +423,40 @@ create_layer <- function(layer_class, object, args) {
   args$trainable <- args$trainable
   args$weights <- args$weights
   
-  # create layer from class
-  layer <- do.call(layer_class, args)
+  # if this is an R6 class then create a Python wrapper for it
+  if (inherits(layer_class, "R6ClassGenerator")) {
+    
+    # common layer parameters (e.g. "input_shape") need to be passed to the
+    # Python Layer constructor rather than the R6 constructor. Here we
+    # extract and set aside any of those arguments we find and set them to
+    # NULL within the args list which will be passed to the R6 layer
+    common_arg_names <- c("input_shape", "batch_input_shape", "batch_size",
+                          "dtype", "name", "trainable", "weights")
+    py_wrapper_args <- args[common_arg_names]
+    py_wrapper_args[sapply(py_wrapper_args, is.null)] <- NULL
+    for (arg in names(py_wrapper_args))
+      args[[arg]] <- NULL
+    
+    # create the R6 layer
+    r6_layer <- do.call(layer_class$new, args)
+    
+    # create the python wrapper (passing the extracted py_wrapper_args)
+    python_path <- system.file("python", package = "keras")
+    tools <- import_from_path("kerastools", path = python_path)
+    py_wrapper_args$r_build <- r6_layer$build
+    py_wrapper_args$r_call <-  r6_layer$call
+    py_wrapper_args$r_compute_output_shape <- r6_layer$compute_output_shape
+    layer <- do.call(tools$layer$RLayer, py_wrapper_args)
+    
+    # set back reference in R layer
+    r6_layer$.set_wrapper(layer)
+    
+  } else {
+    
+    # create layer from class
+    layer <- do.call(layer_class, args)
+    
+  }
   
   # compose if we have an x
   if (missing(object) || is.null(object))
@@ -432,7 +464,6 @@ create_layer <- function(layer_class, object, args) {
   else
     invisible(compose_layer(object, layer))
 }
-
 
 
 # Helper function to compose a layer with an object of type Model or Layer
