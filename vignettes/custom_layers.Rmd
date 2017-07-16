@@ -30,7 +30,6 @@ To create a custom Keras layer, you create an R6 class derived from `KerasLayer`
 ```{r}
 library(keras)
 
-# keras backend independent tensor-operations
 K <- backend()
 
 CustomLayer <- R6::R6Class("KerasLayer",
@@ -67,6 +66,8 @@ CustomLayer <- R6::R6Class("KerasLayer",
 )
 ```
 
+Note that tensor operations are executed using the Keras `backend()`. See the [Keras Backend](backend.html) article for details on the various functions available from Keras backends.
+
 ## Layer Wrapper Function
 
 In order to use the custom layer within a Keras model you also need to create a wrapper function which instantiates the layer using the `create_layer()` function. For example:
@@ -96,5 +97,7 @@ Some important things to note about the layer wrapper function:
 
 3) Some additional parameters not used by the layer (`name` and `trainable`) are in the function signature. Custom layer functions can include any of the core layer function arguments (`input_shape`,
 `batch_input_shape`, `batch_size`, `dtype`, `name`, `trainable`, and `weights`) and they will be automatically forwarded to the Layer base class.
+
+See the [mnist_antirectifier](examples/mnist_antirectifier.html) example for another demonstration of creating a custom layer.
 
 
