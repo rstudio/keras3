@@ -5,56 +5,44 @@ source("utils.R")
 K <- backend()
 
 # Custom layer class
-CustomLayer <- R6::R6Class("KerasLayer",
-                                  
+K <- backend()
+
+# Custom layer class
+AntirectifierLayer <- R6::R6Class("KerasLayer",
+  
   inherit = KerasLayer,
   
   public = list(
     
-    output_dim = NULL,
-    
-    kernel = NULL,
-    
-    initialize = function(output_dim) {
-      self$output_dim <- output_dim
-    },
-    
-    build = function(input_shape) {
-      self$kernel <- self$add_weight(
-        name = 'kernel', 
-        shape = list(input_shape[[1]], self$output_dim),
-        initializer = 'uniform',
-        trainable = TRUE
-      )
-    },
-    
     call = function(x, mask = NULL) {
-      K$dot(x, self$kernel)
+      x <- x - K$mean(x, axis = 1L, keepdims = TRUE)
+      x <- K$l2_normalize(x, axis = 1L)
+      pos <- K$relu(x)
+      neg <- K$relu(-x)
+      K$concatenate(c(pos, neg), axis = 1L)
+      
     },
     
     compute_output_shape = function(input_shape) {
-      list(input_shape[[0]], self$output_dim)
+      input_shape[[2]] <- input_shape[[2]] * 2 
+      tuple(input_shape)
     }
   )
 )
 
 # create layer wrapper function
-layer_custom <- function(object, output_dim, name = NULL, trainable = TRUE) {
-  create_layer(CustomLayer, object, list(
-    output_dim = output_dim,
-    name = name,
-    trainable = trainable
-  ))
+layer_antirectifier <- function(object) {
+  create_layer(AntirectifierLayer, object)
 }
 
-# test_succeeds("Use an R-based custom Keras layer", {
-#   
-#   model <- keras_model_sequential() 
-#   model %>%
-#     layer_dense(32, input_shape = 784, kernel_initializer = initializer_ones()) %>%
-#     layer_activation('relu') %>%
-#     layer_custom(output_dim = 10) %>% 
-#     layer_dense(10) %>%
-#     layer_activation('softmax')
-#   
-# })
+test_succeeds("Use an R-based custom Keras layer", {
+  model <- keras_model_sequential()
+  model %>% 
+    layer_dense(units = 256, input_shape = c(784)) %>% 
+    layer_antirectifier() %>% 
+    layer_dropout(rate = 0.1) %>% 
+    layer_dense(units = 256) %>%
+    layer_antirectifier() %>% 
+    layer_dropout(rate = 0.1) %>%
+    layer_dense(units = 10, activation = 'softmax')
+})
