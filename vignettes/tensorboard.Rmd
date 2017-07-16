@@ -45,20 +45,7 @@ history <- model %>% fit(
 
 See the documentation on the `callback_tensorboard()` function for the various available options. The most important option is the `log_dir`, which determines which directory logs are written to for a given training run. 
 
-You should either use a distinct log directory for each training run or remove the log directory between runs. You can use the `run_dir()` function to easily create a directory per-run:
-
-```{r}
-run_dir <- run_dir()
-
-history <- model %>% fit(
-  x_train, y_train,
-  batch_size = batch_size,
-  epochs = epochs,
-  verbose = 1,
-  callbacks = callback_tensorboard(run_dir),
-  validation_split = 0.2
-)
-```
+You should either use a distinct log directory for each training run or remove the log directory between runs (see the [Run Directories] section for one method of creating a distinct directory per run). 
 
 ## Viewing Data
 
@@ -68,19 +55,11 @@ To view TensorBoard data for a given set of runs you use the `tensorboard()` fun
 tensorboard("logs/run_a")
 ```
 
-If you are using the `run_dir()` function to create a unique directory for each training run, you can either pass the `run_dir` to the `tensorboard()` function or use the `latest_run()` function to 
-run tensorboad against the most recent run directory:
-
-```{r}
-tensorboard(latest_run())
-```
-
 It's often useful to run TensorBoard while you are training a model. To do this, simply launch tensorboard within the training directory right before you begin training:
 
 ```{r}
 # launch TensorBoard (data won't show up until after the first epoch)
-run_dir <- run_dir()
-tensorboard(run_dir)
+tensorboard("logs/run_a")
 
 # fit the model with the TensorBoard callback
 history <- model %>% fit(
@@ -88,7 +67,7 @@ history <- model %>% fit(
   batch_size = batch_size,
   epochs = epochs,
   verbose = 1,
-  callbacks = callback_tensorboard(run_dir),
+  callbacks = callback_tensorboard("logs/run_a"),
   validation_split = 0.2
 )
 ```    
@@ -107,7 +86,50 @@ Then the TensorBoard visualization would look like this:
 
 ![](images/tensorboard_compare.png){width=700 height=540 .screenshot}
 
+## Run Directories
 
+If you want to create a distinct directory for recording the logs of each training run you can use the `run_dir()` function, which creates a timestamped sub-directory under the "runs" directory within the current working directory.
+
+Here's how you would use the `run_dir()` function with TensorBoard:
+
+```{r}
+# create run directory at e.g. "runs/2017-07-16T19-31-14Z"
+run_dir <- run_dir()
+
+# train and instruct TensorBoard to log to the run_dir
+history <- model %>% fit(
+  x_train, y_train,
+  batch_size = batch_size,
+  epochs = epochs,
+  verbose = 1,
+  callbacks = callback_tensorboard(log_dir = run_dir),
+  validation_split = 0.2
+)
+```
+
+To view the results of the run in TensorBoard you can either pass the `run_dir` to the `tensorboard()` function or use the `latest_run()` function to run TensorBoard against the most recently created run directory:
+
+```{r}
+tensorboard(latest_run())
+```
+
+You can view all of your previous runs simultaneously in TensorBoard with:
+
+```{r}
+tensorboard("runs")
+```
+
+You may want to periodically cleanup run directories. To do this you can use the `clean_runs()` function. To clean all existing runs:
+
+```{r}
+clean_runs()
+```
+
+To clean all but a selected number of recent runs you can use the `keep` parameter:
+
+```{r}
+clean_runs(keep = 10)
+```
 
 ## Customization
 
