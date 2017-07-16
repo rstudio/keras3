@@ -16,14 +16,14 @@ CustomLayer <- R6::R6Class("KerasLayer",
     kernel = NULL,
     
     initialize = function(output_dim) {
-      self$output_dim <- output_dim
+      self$output_dim <- as.integer(output_dim)
     },
     
     build = function(input_shape) {
       self$kernel <- self$add_weight(
         name = 'kernel', 
-        shape = list(input_shape$dims[[2]], self$output_dim),
-        initializer = initializer_random_uniform(),
+        shape = list(input_shape[[2]], self$output_dim),
+        initializer = initializer_random_normal(),
         trainable = TRUE
       )
     },
@@ -33,7 +33,7 @@ CustomLayer <- R6::R6Class("KerasLayer",
     },
     
     compute_output_shape = function(input_shape) {
-      list(input_shape$dims[[1]], self$output_dim)
+      list(input_shape[[1]], self$output_dim)
     }
   )
 )
@@ -51,6 +51,6 @@ test_succeeds("Use an R-based custom Keras layer", {
 
   model <- keras_model_sequential()
   model %>% 
-    layer_dense(units = 32, input_shape = c(32,32,32)) %>% 
+    layer_dense(units = 32, input_shape = c(32,32)) %>% 
     layer_custom(output_dim = 32)
 })
