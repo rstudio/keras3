@@ -31,6 +31,10 @@ tensorflow::install_tensorflow
 #' @export
 tensorflow::tensorboard
 
+#' @importFrom tensorflow use_run_dir
+#' @export
+tensorflow::use_run_dir
+
 #' @importFrom tensorflow run_dir
 #' @export
 tensorflow::run_dir

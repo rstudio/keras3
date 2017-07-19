@@ -144,8 +144,9 @@ callback_learning_rate_scheduler <- function(schedule) {
 #' dynamic graphs of your training and test metrics, as well as activation 
 #' histograms for the different layers in your model.
 #' 
-#' @param log_dir the path of the directory where to save the log files to be
-#'   parsed by Tensorboard.
+#' @param log_dir The path of the directory where to save the log files to be
+#'   parsed by Tensorboard. The default is `NULL`, which will use the active
+#'   run directory (if available) and otherwise will use "logs".
 #' @param histogram_freq frequency (in epochs) at which to compute activation 
 #'   histograms for the layers of the model. If set to 0, histograms won't be
 #'   computed.
@@ -165,22 +166,25 @@ callback_learning_rate_scheduler <- function(schedule) {
 
 #' @details TensorBoard is a visualization tool provided with TensorFlow.
 #'   
-#'   If you have installed TensorFlow with pip, you can launch TensorBoard
-#'   using the `tensorboard()` function:
-#'   ```
-#'   tensorboard(log_dir = "/full_path_to_your_logs") 
-#'   ``` 
-#'   
-#'   You can find more information about TensorBoard
-#'   [here](https://www.tensorflow.org/get_started/summaries_and_tensorboard).
+#' You can find more information about TensorBoard
+#' [here](https://tensorflow.rstudio.com/howto_summaries_and_tensorboard.html).
 #' 
 #' @family callbacks 
 #'    
 #' @export
-callback_tensorboard <- function(log_dir = "logs", histogram_freq = 0, 
+callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0, 
                                  write_graph = TRUE, write_images = FALSE,
                                  embeddings_freq = 0, embeddings_layer_names = NULL,
                                  embeddings_metadata = NULL) {
+  
+  # establish the log_dir
+  if (is.null(log_dir)) {
+    if (!is.null(run_dir()))
+      log_dir <- run_dir()
+    else
+      log_dir <- "logs"
+  }
+  
   keras$callbacks$TensorBoard(
     log_dir = normalize_path(log_dir),
     histogram_freq = as.integer(histogram_freq),
@@ -377,8 +381,15 @@ KerasCallback <- R6Class("KerasCallback",
 
 normalize_callbacks <- function(callbacks) {
   
-  if(is.null(callbacks)) return(NULL)
+  # if there are no callbacks specified and we are in a run_dir
+  # then automatically add the tensorboard_callback
+  if (is.null(callbacks) && !is.null(run_dir()))
+    callbacks <- callback_tensorboard(run_dir())
   
+  # return NULL if there are no callbacks
+  if (is.null(callbacks)) 
+    return(NULL)
+    
   # if callbacks isn't a list then make it one
   if (!is.null(callbacks) && !is.list(callbacks))
     callbacks <- list(callbacks)
@@ -387,7 +398,13 @@ normalize_callbacks <- function(callbacks) {
   python_path <- system.file("python", package = "keras")
   tools <- import_from_path("kerastools", path = python_path)
   
-  lapply(callbacks, function(callback) {
+  have_tensorboard_callback <- FALSE
+  callbacks <- lapply(callbacks, function(callback) {
+    
+    # track whether we have a tensorboard callback
+    if (inherits(callback, "keras.callbacks.TensorBoard"))
+      have_tensorboard_callback <<- TRUE
+    
     if (inherits(callback, "KerasCallback")) {
       # create a python callback to map to our R callback
       tools$callback$RCallback(
@@ -403,6 +420,13 @@ normalize_callbacks <- function(callbacks) {
       callback
     }
   })
+  
+  # if we have a run_dir() and no tensorboard_callback then add one
+  if (!is.null(run_dir()) && !have_tensorboard_callback)
+    callbacks <- append(callbacks, callback_tensorboard(run_dir()))
+  
+  # return the callbacks
+  callbacks
 }
 
 
