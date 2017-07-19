@@ -381,9 +381,15 @@ KerasCallback <- R6Class("KerasCallback",
 
 normalize_callbacks <- function(callbacks) {
   
+  # helper to determine if we should add a tensorboard callback
+  have_tensorboard_callback <- FALSE
+  add_tensorboard_callback <- function() {
+    !have_tensorboard_callback && is_backend("tensorflow") && !is.null(run_dir())
+  }
+  
   # if there are no callbacks specified and we are in a run_dir
   # then automatically add the tensorboard_callback
-  if (is.null(callbacks) && is_backend("tensorflow") && !is.null(run_dir()))
+  if (is.null(callbacks) && add_tensorboard_callback())
     callbacks <- callback_tensorboard(run_dir())
   
   # return NULL if there are no callbacks
@@ -422,7 +428,7 @@ normalize_callbacks <- function(callbacks) {
   })
   
   # if we have a run_dir() and no tensorboard_callback then add one
-  if (!have_tensorboard_callback && is_backend("tensorflow") && !is.null(run_dir()))
+  if (add_tensorboard_callback())
     callbacks <- append(callbacks, callback_tensorboard(run_dir()))
   
   # return the callbacks
