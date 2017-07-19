@@ -130,6 +130,10 @@ backend <- function(convert = TRUE) {
 }
 
 
+is_backend <- function(name) {
+  identical(backend()$backend(), name)
+}
+
 
 
 
