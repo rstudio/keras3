@@ -383,7 +383,7 @@ normalize_callbacks <- function(callbacks) {
   
   # if there are no callbacks specified and we are in a run_dir
   # then automatically add the tensorboard_callback
-  if (is.null(callbacks) && !is.null(run_dir()))
+  if (is.null(callbacks) && is_backend("tensorflow") && !is.null(run_dir()))
     callbacks <- callback_tensorboard(run_dir())
   
   # return NULL if there are no callbacks
@@ -422,7 +422,7 @@ normalize_callbacks <- function(callbacks) {
   })
   
   # if we have a run_dir() and no tensorboard_callback then add one
-  if (!is.null(run_dir()) && !have_tensorboard_callback)
+  if (!have_tensorboard_callback && is_backend("tensorflow") && !is.null(run_dir()))
     callbacks <- append(callbacks, callback_tensorboard(run_dir()))
   
   # return the callbacks
