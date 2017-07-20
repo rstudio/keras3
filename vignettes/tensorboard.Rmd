@@ -82,9 +82,21 @@ TensorBoard will automatically include all runs logged within the sub-directorie
 callback_tensorboard(log_dir = "logs/run_b")
 ```
 
-Then the TensorBoard visualization would look like this:
+Then called tensorboard as follows:
+
+```{r}
+tensorboard("logs")
+```
+
+The TensorBoard visualization would look like this:
 
 ![](images/tensorboard_compare.png){width=700 height=540 .screenshot}
+
+You can also pass multiple log directories. For example:
+
+```{r}
+tensorboard(c("logs/run_a", "logs/run_b"))
+```
 
 ## Customization
 
@@ -114,7 +126,7 @@ callback_tensorboard(log_dir = "logs", histogram_freq = 0,
 
 | Name  | Description |
 |-----------------|-------------------------------------------------------------------|
-| `log_dir`  | The path of the directory where to save the log files to be parsed by Tensorboard. |
+| `log_dir`  | Path of the directory to save the log files to be parsed by Tensorboard. |
 | `histogram_freq`  | Frequency (in epochs) at which to compute activation histograms for the layers of the model. If set to 0 (the default), histograms won't be computed.  |
 | `write_graph` | Whether to visualize the graph in Tensorboard. The log file can become quite large when write_graph is set to `TRUE`  |
 | `write_images`  | Whether to write model weights to visualize as image in Tensorboard.  |

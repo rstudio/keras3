@@ -158,10 +158,14 @@ history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span 
 <a href="#comparing-runs" class="anchor"></a>Comparing Runs</h2>
 <p>TensorBoard will automatically include all runs logged within the sub-directories of the specified <code>log_dir</code>, for example, if you logged another run using:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="st">"logs/run_b"</span>)</code></pre></div>
-<p>Then the TensorBoard visualization would look like this:</p>
+<p>Then called tensorboard as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(<span class="st">"logs"</span>)</code></pre></div>
+<p>The TensorBoard visualization would look like this:</p>
 <div class="figure">
 <img src="images/tensorboard_compare.png" class="screenshot" width="700" height="540">
 </div>
+<p>You can also pass multiple log directories. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(<span class="kw">c</span>(<span class="st">"logs/run_a"</span>, <span class="st">"logs/run_b"</span>))</code></pre></div>
 </div>
 <div id="customization" class="section level2">
 <h2 class="hasAnchor">
@@ -196,7 +200,7 @@ history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span 
 <tbody>
 <tr class="odd">
 <td><code>log_dir</code></td>
-<td>The path of the directory where to save the log files to be parsed by Tensorboard.</td>
+<td>Path of the directory to save the log files to be parsed by Tensorboard.</td>
 </tr>
 <tr class="even">
 <td><code>histogram_freq</code></td>
