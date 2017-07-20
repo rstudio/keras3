@@ -43,6 +43,10 @@ tensorflow::run_dir
 #' @export
 tensorflow::latest_run
 
+#' @importFrom tensorflow latest_runs
+#' @export
+tensorflow::latest_runs
+
 #' @importFrom tensorflow clean_runs
 #' @export
 tensorflow::clean_runs
