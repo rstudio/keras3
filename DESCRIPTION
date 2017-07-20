@@ -1,7 +1,7 @@
 Package: keras
 Type: Package
 Title: R Interface to 'Keras'
-Version: 0.3.13
+Version: 0.3.14
 Authors@R: c(
   person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
   person("François", "Chollet", role = c("aut", "cph")),
@@ -24,6 +24,7 @@ BugReports: https://github.com/rstudio/keras/issues
 Imports:
     reticulate (>= 0.9.0.9004), 
     tensorflow (>= 0.9.0.9009),
+    tfruns,
     magrittr, 
     methods,
     R6
@@ -33,6 +34,7 @@ Suggests:
     knitr
 Remotes:
     rstudio/reticulate,
+    rstudio/tfruns,
     rstudio/tensorflow
 SystemRequirements: TensorFlow >= 1.1 (https://www.tensorflow.org/)
 Roxygen: list(markdown = TRUE)

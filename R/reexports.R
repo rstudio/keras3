@@ -31,25 +31,6 @@ tensorflow::install_tensorflow
 #' @export
 tensorflow::tensorboard
 
-#' @importFrom tensorflow use_run_dir
-#' @export
-tensorflow::use_run_dir
-
-#' @importFrom tensorflow run_dir
-#' @export
-tensorflow::run_dir
-
-#' @importFrom tensorflow latest_run
-#' @export
-tensorflow::latest_run
-
-#' @importFrom tensorflow latest_runs
-#' @export
-tensorflow::latest_runs
-
-#' @importFrom tensorflow clean_runs
-#' @export
-tensorflow::clean_runs
 
 #' @importFrom tensorflow tf_config
 #' @export
