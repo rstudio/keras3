@@ -193,6 +193,8 @@ reference:
       - application_mobilenet
       - imagenet_preprocess_input
       - imagenet_decode_predictions
+      - mobilenet_preprocess_input
+      - mobilenet_decode_predictions
       
 
   - title: "Sequence Preprocessing"
@@ -241,6 +243,7 @@ reference:
       - callback_learning_rate_scheduler
       - callback_tensorboard
       - callback_reduce_lr_on_plateau
+      - callback_terminate_on_naan
       - callback_csv_logger
       - callback_lambda
       - KerasCallback

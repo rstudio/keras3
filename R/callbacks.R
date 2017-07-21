@@ -138,6 +138,16 @@ callback_learning_rate_scheduler <- function(schedule) {
 }
 
 
+#' Callback that terminates training when a NaN loss is encountered.
+#' 
+#' @family callbacks
+#' 
+#' @export
+callback_terminate_on_naan <- function() {
+  keras$callbacks$TerminateOnNaN()
+}
+
+
 #' TensorBoard basic visualizations
 #' 
 #' This callback writes a log for TensorBoard, which allows you to visualize 

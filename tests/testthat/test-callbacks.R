@@ -16,9 +16,10 @@ define_compile_and_fit <- function(callbacks) {
   fit(model, data, labels, callbacks = callbacks)
 }
 
-test_callback <- function(name, callback, h5py = FALSE) {
+test_callback <- function(name, callback, h5py = FALSE, required_version = NULL) {
 
-  test_succeeds(paste0("callback_", name, " is called back"),  {
+  test_succeeds(required_version = required_version,
+                paste0("callback_", name, " is called back"),  {
     if (h5py && !have_h5py())
       skip(paste(name, "test requires h5py package"))
     define_compile_and_fit(callbacks = list(callback))   
@@ -32,6 +33,9 @@ test_callback("learning_rate_scheduler", callback_learning_rate_scheduler(schedu
 }))
 if (have_keras() && is_backend("tensorflow"))
   test_callback("tensorboard", callback_tensorboard(log_dir = "./tb_logs"))
+
+test_callback("terminate_on_naan", callback_terminate_on_naan(), required_version = "2.0.5")
+
 test_callback("reduce_lr_on_plateau", callback_reduce_lr_on_plateau())
 test_callback("csv_logger", callback_csv_logger("training.csv"))
 test_callback("lambd", callback_lambda(

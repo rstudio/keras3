@@ -299,6 +299,20 @@ mobilenet_preprocess_input <- function(x) {
   preprocess_input(x, keras$applications$mobilenet$preprocess_input)
 }
 
+
+#' Decodes the prediction of an MobileNet model.
+#' 
+#' @inheritParams imagenet_decode_predictions
+#' 
+#' @return List of data frames with variables `class_name`, `class_description`,
+#'   and `score` (one data frame per sample in batch input).
+#' 
+#' @export
+mobilenet_decode_predictions <- function(preds, top = 5) {
+  imagenet_decode_predictions(preds, top)
+}
+
+
 #' @rdname application_mobilenet
 #' @export
 mobilenet_load_model_hdf5 <- function(filepath) {
