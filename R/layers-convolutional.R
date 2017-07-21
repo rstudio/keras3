@@ -252,7 +252,7 @@ layer_conv_3d <- function(object, filters, kernel_size, strides = c(1L, 1L, 1L),
   
 }
 
-#' Transposed convolution layer (sometimes called Deconvolution).
+#' Transposed 2D convolution layer (sometimes called Deconvolution).
 #' 
 #' The need for transposed convolutions generally arises from the desire to use
 #' a transformation going in the opposite direction of a normal convolution,
@@ -327,7 +327,7 @@ layer_conv_2d_transpose <- function(object, filters, kernel_size, strides = c(1L
 }
 
 
-#' Transposed convolution layer (sometimes called Deconvolution).
+#' Transposed 3D convolution layer (sometimes called Deconvolution).
 #'
 #' The need for transposed convolutions generally arises from the desire to use
 #' a transformation going in the opposite direction of a normal convolution,

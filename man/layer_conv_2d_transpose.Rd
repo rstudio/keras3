@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-convolutional.R
 \name{layer_conv_2d_transpose}
 \alias{layer_conv_2d_transpose}
-\title{Transposed convolution layer (sometimes called Deconvolution).}
+\title{Transposed 2D convolution layer (sometimes called Deconvolution).}
 \usage{
 layer_conv_2d_transpose(object, filters, kernel_size, strides = c(1L, 1L),
   padding = "valid", data_format = NULL, activation = NULL,
