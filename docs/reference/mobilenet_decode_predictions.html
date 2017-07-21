@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Learning rate scheduler. — callback_learning_rate_scheduler • keras</title>
+<title>Decodes the prediction of an MobileNet model. — mobilenet_decode_predictions • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -124,36 +124,32 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Learning rate scheduler.</h1>
+    <h1>Decodes the prediction of an MobileNet model.</h1>
     </div>
 
     
-    <p>Learning rate scheduler.</p>
+    <p>Decodes the prediction of an MobileNet model.</p>
     
 
-    <pre class="usage"><span class='fu'>callback_learning_rate_scheduler</span>(<span class='no'>schedule</span>)</pre>
+    <pre class="usage"><span class='fu'>mobilenet_decode_predictions</span>(<span class='no'>preds</span>, <span class='kw'>top</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>schedule</th>
-      <td><p>a function that takes an epoch index as input (integer,
-indexed from 0) and returns a new learning rate as output (float).</p></td>
+      <th>preds</th>
+      <td><p>Tensor encoding a batch of predictions.</p></td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td><p>integer, how many top-guesses to return.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Other callbacks: <code><a href='callback_csv_logger.html'>callback_csv_logger</a></code>,
-  <code><a href='callback_early_stopping.html'>callback_early_stopping</a></code>,
-  <code><a href='callback_lambda.html'>callback_lambda</a></code>,
-  <code><a href='callback_model_checkpoint.html'>callback_model_checkpoint</a></code>,
-  <code><a href='callback_progbar_logger.html'>callback_progbar_logger</a></code>,
-  <code><a href='callback_reduce_lr_on_plateau.html'>callback_reduce_lr_on_plateau</a></code>,
-  <code><a href='callback_remote_monitor.html'>callback_remote_monitor</a></code>,
-  <code><a href='callback_tensorboard.html'>callback_tensorboard</a></code>,
-  <code><a href='callback_terminate_on_naan.html'>callback_terminate_on_naan</a></code></p>
+    <p>List of data frames with variables <code>class_name</code>, <code>class_description</code>,
+and <code>score</code> (one data frame per sample in batch input).</p>
     
 
   </div>
@@ -162,7 +158,7 @@ indexed from 0) and returns a new learning rate as output (float).</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#value">Value</a></li>
           </ul>
 
   </div>
