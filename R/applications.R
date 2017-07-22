@@ -226,16 +226,19 @@ imagenet_preprocess_input <- function(x) {
 }
 
 
-#' Instantiates the MobileNet architecture.
+#' MobileNet model architecture.
 #'
 #' @details 
 #'
 #' The `mobilenet_preprocess_input()` function should be used for image 
 #' preprocessing. To load a saved instance of a MobileNet model use
-#' the `mobilenet_load_model_hdf5()` function.
+#' the `mobilenet_load_model_hdf5()` function. To prepare image input
+#' for MobileNet use `mobilenet_preprocess_input()`. To decode 
+#' predictions use `mobilenet_decode_predictions()`.
 #' 
 #' MobileNet is currently only supported with the TensorFlow backend.
 #'
+#' @inheritParams imagenet_decode_predictions
 #' @inheritParams load_model_hdf5
 #'
 #' @param input_shape optional shape list, only to be specified if `include_top`
@@ -270,7 +273,11 @@ imagenet_preprocess_input <- function(x) {
 #'   specified.
 #' @param x input tensor, 4D   
 #'
-#' @return A Keras model instance
+#' @return `application_mobilenet()` and `mobilenet_load_model_hdf5()` return a 
+#'   Keras model instance. `mobilenet_preprocess_input()` returns image input
+#'   suitable for feeding into a mobilenet model. `mobilenet_decode_predictions()`
+#'   returns a list of data frames with variables `class_name`, `class_description`,
+#'   and `score` (one data frame per sample in batch input).
 #'
 #' @section Reference:
 #'   - [MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/pdf/1704.04861v1.pdf).
@@ -299,14 +306,7 @@ mobilenet_preprocess_input <- function(x) {
   preprocess_input(x, keras$applications$mobilenet$preprocess_input)
 }
 
-
-#' Decodes the prediction of an MobileNet model.
-#' 
-#' @inheritParams imagenet_decode_predictions
-#' 
-#' @return List of data frames with variables `class_name`, `class_description`,
-#'   and `score` (one data frame per sample in batch input).
-#' 
+#' @rdname application_mobilenet
 #' @export
 mobilenet_decode_predictions <- function(preds, top = 5) {
   imagenet_decode_predictions(preds, top)

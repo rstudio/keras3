@@ -3,14 +3,17 @@
 \name{application_mobilenet}
 \alias{application_mobilenet}
 \alias{mobilenet_preprocess_input}
+\alias{mobilenet_decode_predictions}
 \alias{mobilenet_load_model_hdf5}
-\title{Instantiates the MobileNet architecture.}
+\title{MobileNet model architecture.}
 \usage{
 application_mobilenet(input_shape = NULL, alpha = 1, depth_multiplier = 1,
   dropout = 0.001, include_top = TRUE, weights = "imagenet",
   input_tensor = NULL, pooling = NULL, classes = 1000)
 
 mobilenet_preprocess_input(x)
+
+mobilenet_decode_predictions(preds, top = 5)
 
 mobilenet_load_model_hdf5(filepath)
 }
@@ -58,18 +61,28 @@ specified.}
 
 \item{x}{input tensor, 4D}
 
+\item{preds}{Tensor encoding a batch of predictions.}
+
+\item{top}{integer, how many top-guesses to return.}
+
 \item{filepath}{File path}
 }
 \value{
-A Keras model instance
+\code{application_mobilenet()} and \code{mobilenet_load_model_hdf5()} return a
+Keras model instance. \code{mobilenet_preprocess_input()} returns image input
+suitable for feeding into a mobilenet model. \code{mobilenet_decode_predictions()}
+returns a list of data frames with variables \code{class_name}, \code{class_description},
+and \code{score} (one data frame per sample in batch input).
 }
 \description{
-Instantiates the MobileNet architecture.
+MobileNet model architecture.
 }
 \details{
 The \code{mobilenet_preprocess_input()} function should be used for image
 preprocessing. To load a saved instance of a MobileNet model use
-the \code{mobilenet_load_model_hdf5()} function.
+the \code{mobilenet_load_model_hdf5()} function. To prepare image input
+for MobileNet use \code{mobilenet_preprocess_input()}. To decode
+predictions use \code{mobilenet_decode_predictions()}.
 
 MobileNet is currently only supported with the TensorFlow backend.
 }
