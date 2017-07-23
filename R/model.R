@@ -8,6 +8,27 @@
 #'
 #' @family model functions
 #'
+#' @examples 
+#' \dontrun{
+#' library(keras)
+#' 
+#' # input layer
+#' inputs <- layer_input(shape = c(784))
+#' 
+#' # outputs compose input + dense layers
+#' predictions <- inputs %>%
+#'   layer_dense(units = 64, activation = 'relu') %>% 
+#'   layer_dense(units = 64, activation = 'relu') %>% 
+#'   layer_dense(units = 10, activation = 'softmax')
+#' 
+#' # create and compile model
+#' model <- keras_model(inputs = inputs, outputs = predictions)
+#' model %>% compile(
+#'   optimizer = 'rmsprop',
+#'   loss = 'categorical_crossentropy',
+#'   metrics = c('accuracy')
+#' )
+#' }
 #' @export
 keras_model <- function(inputs, outputs = NULL) {
   keras$models$Model(inputs = inputs, outputs = outputs)
@@ -28,6 +49,24 @@ keras_model <- function(inputs, outputs = NULL) {
 #' 
 #' @family model functions
 #' 
+#' @examples 
+#' \dontrun{
+#'  
+#' library(keras)
+#' 
+#' model <- keras_model_sequential() 
+#' model %>% 
+#'   layer_dense(units = 32, input_shape = c(784)) %>% 
+#'   layer_activation('relu') %>% 
+#'   layer_dense(units = 10) %>% 
+#'   layer_activation('softmax')
+#' 
+#' model %>% compile(
+#'   optimizer = 'rmsprop',
+#'   loss = 'categorical_crossentropy',
+#'   metrics = c('accuracy')
+#' )
+#' }
 #' @export
 keras_model_sequential <- function(layers = NULL, name = NULL) {
   keras$models$Sequential(layers = layers, name = name)

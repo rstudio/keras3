@@ -20,6 +20,25 @@ shape. What that means is that it should have received an \code{input_shape} or
 \code{batch_input_shape} argument, or for some type of layers (recurrent,
 Dense...) an \code{input_dim} argument.
 }
+\examples{
+\dontrun{
+ 
+library(keras)
+
+model <- keras_model_sequential() 
+model \%>\% 
+  layer_dense(units = 32, input_shape = c(784)) \%>\% 
+  layer_activation('relu') \%>\% 
+  layer_dense(units = 10) \%>\% 
+  layer_activation('softmax')
+
+model \%>\% compile(
+  optimizer = 'rmsprop',
+  loss = 'categorical_crossentropy',
+  metrics = c('accuracy')
+)
+}
+}
 \seealso{
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate_generator}}, \code{\link{evaluate}},

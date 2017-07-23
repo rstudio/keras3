@@ -335,6 +335,7 @@ callback_lambda <- function(on_epoch_begin = NULL, on_epoch_end = NULL,
 #' @return [KerasCallback].
 #' 
 #' @examples 
+#' \dontrun{
 #' library(keras)
 #' 
 #' LossHistory <- R6::R6Class("LossHistory",
@@ -349,7 +350,7 @@ callback_lambda <- function(on_epoch_begin = NULL, on_epoch_end = NULL,
 #'     }
 #'   )
 #' )
-#' 
+#' }
 #' @export
 KerasCallback <- R6Class("KerasCallback",
                          

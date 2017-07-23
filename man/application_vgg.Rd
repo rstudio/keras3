@@ -59,3 +59,18 @@ The \code{imagenet_preprocess_input()} function should be used for image preproc
  - \href{https://arxiv.org/abs/1409.1556}{Very Deep Convolutional Networks for Large-Scale ImageRecognition}
 }
 
+\examples{
+\dontrun{
+library(keras)
+
+model <- application_vgg16(weights = 'imagenet', include_top = FALSE)
+
+img_path <- "elephant.jpg"
+img <- image_load(img_path, target_size = c(224,224))
+x <- image_to_array(img)
+dim(x) <- c(1, dim(x))
+x <- imagenet_preprocess_input(x)
+
+features <- model \%>\% predict(x)
+}
+}

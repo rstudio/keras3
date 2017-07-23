@@ -87,6 +87,20 @@ xception_preprocess_input <- function(x) {
 #'   
 #' @name application_vgg
 #'   
+#' @examples 
+#' \dontrun{
+#' library(keras)
+#' 
+#' model <- application_vgg16(weights = 'imagenet', include_top = FALSE)
+#' 
+#' img_path <- "elephant.jpg"
+#' img <- image_load(img_path, target_size = c(224,224))
+#' x <- image_to_array(img)
+#' dim(x) <- c(1, dim(x))
+#' x <- imagenet_preprocess_input(x)
+#' 
+#' features <- model %>% predict(x)
+#' }
 #' @export
 application_vgg16 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
                               pooling = NULL, classes = 1000) {
@@ -135,6 +149,27 @@ application_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_te
 #' @section Reference: - [Deep Residual Learning for Image 
 #'   Recognition](https://arxiv.org/abs/1512.03385)
 #'   
+#' @examples 
+#' \dontrun{
+#' library(keras)
+#' 
+#' # instantiate the model
+#' model <- application_resnet50(weights = 'imagenet')
+#' 
+#' # load the image
+#' img_path <- "elephant.jpg"
+#' img <- image_load(img_path, target_size = c(224,224))
+#' x <- image_to_array(img)
+#' 
+#' # ensure we have a 4d tensor with single element in the batch dimension,
+#' # the preprocess the input for prediction using resnet50
+#' dim(x) <- c(1, dim(x))
+#' x <- imagenet_preprocess_input(x)
+#' 
+#' # make predictions then decode and print them
+#' preds <- model %>% predict(x)
+#' imagenet_decode_predictions(preds, top = 3)[[1]]
+#' }   
 #' @export
 application_resnet50 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
                                  pooling = NULL, classes = 1000) {

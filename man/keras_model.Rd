@@ -14,6 +14,28 @@ keras_model(inputs, outputs = NULL)
 \description{
 A model is a directed acyclic graph of layers.
 }
+\examples{
+\dontrun{
+library(keras)
+
+# input layer
+inputs <- layer_input(shape = c(784))
+
+# outputs compose input + dense layers
+predictions <- inputs \%>\%
+  layer_dense(units = 64, activation = 'relu') \%>\% 
+  layer_dense(units = 64, activation = 'relu') \%>\% 
+  layer_dense(units = 10, activation = 'softmax')
+
+# create and compile model
+model <- keras_model(inputs = inputs, outputs = predictions)
+model \%>\% compile(
+  optimizer = 'rmsprop',
+  loss = 'categorical_crossentropy',
+  metrics = c('accuracy')
+)
+}
+}
 \seealso{
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate_generator}}, \code{\link{evaluate}},
