@@ -31,7 +31,8 @@ Imports:
 Suggests: 
     ggplot2,
     testthat, 
-    knitr
+    knitr,
+    rmarkdown
 Remotes:
     rstudio/reticulate,
     rstudio/tfruns,
