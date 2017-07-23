@@ -55,15 +55,15 @@ K <- backend()
 
 # Parameters --------------------------------------------------------------
 
-base_image_path <- "1-content.jpg"
-style_reference_image_path <- "1-style.jpg"
+base_image_path <- "neural-style-base-img.png"
+style_reference_image_path <- "neural-style-style.jpg"
 result_prefix = "out"
 iterations <- 10
 
 # these are the weights of the different loss components
-total_variation_weight <- 0.025
+total_variation_weight <- 1
 style_weight <- 1
-content_weight <- 1
+content_weight <- 0.025
 
 # dimensions of the generated picture.
 img <- image_load(base_image_path)
@@ -194,7 +194,7 @@ for(layer_name in feature_layers){
   loss <- loss + ((style_weight / length(feature_layers)) * sl)
 }
 
-loss <- loss + total_variation_weight * total_variation_loss(combination_image)
+loss <- loss + (total_variation_weight * total_variation_loss(combination_image))
 
 # get the gradients of the generated image wrt the loss
 grads <- K$gradients(loss, combination_image)[[1]]
@@ -262,14 +262,14 @@ for(i in 1:10){
   opt <- optim(
     as.numeric(x), fn = evaluator$loss, gr = evaluator$grads, 
     method = "L-BFGS-B",
-    control = list(maxit = 20)
+    control = list(maxit = 15)
   )
   
   # Print loss value
   print(opt$value)
   
   # decode the image
-  image <- opt$par
+  image <- x <- opt$par
   dim(image) <- dms
   
   # plot
