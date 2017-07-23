@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>imdb_fasttext.R • keras</title>
+<title>imdb_fasttext • keras</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
@@ -69,7 +69,10 @@
       <a href="../../articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
-      <a href="../../articles/backend.html">Backend Functions</a>
+      <a href="../../articles/backend.html">Keras Backend</a>
+    </li>
+    <li>
+      <a href="../../articles/custom_layers.html">Custom Layers</a>
     </li>
   </ul>
 </li>
@@ -99,13 +102,16 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>imdb_fasttext.R</h1>
+      <h1>imdb_fasttext</h1>
             
           </div>
 
     
     
 <div class="contents">
+<div class="source-ref">
+<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/imdb_fasttext.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/imdb_fasttext.R</a></p>
+</div>
 <p>This example demonstrates the use of fasttext for text classification</p>
 <p>Based on Joulin et al’s paper:</p>
 <p>Bags of Tricks for Efficient Text Classification <a href="https://arxiv.org/abs/1607.01759" class="uri">https://arxiv.org/abs/1607.01759</a></p>
@@ -116,19 +122,19 @@
 <span class="co"># Function definition -----------------------------------------------------</span>
 
 create_ngram_set &lt;-<span class="st"> </span><span class="cf">function</span>(input_list, <span class="dt">ngram_value =</span> <span class="dv">2</span>){
-  indices &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="dv">0</span><span class="op">:</span>(<span class="kw">length</span>(input_list) <span class="op">-</span><span class="st"> </span>ngram_value), <span class="op">~</span><span class="dv">1</span><span class="op">:</span>ngram_value <span class="op">+</span><span class="st"> </span>.x)
+  indices &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(<span class="dv">0</span><span class="op">:</span>(<span class="kw">length</span>(input_list) <span class="op">-</span><span class="st"> </span>ngram_value), <span class="op">~</span><span class="dv">1</span><span class="op">:</span>ngram_value <span class="op">+</span><span class="st"> </span>.x)
   indices <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">map_chr</span>(<span class="op">~</span>input_list[.x] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">paste</span>(<span class="dt">collapse =</span> <span class="st">"|"</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_chr</a></span>(<span class="op">~</span>input_list[.x] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">paste</span>(<span class="dt">collapse =</span> <span class="st">"|"</span>)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">unique</span>()
 }
 
 add_ngram &lt;-<span class="st"> </span><span class="cf">function</span>(sequences, token_indice, <span class="dt">ngram_range =</span> <span class="dv">2</span>){
-  ngrams &lt;-<span class="st"> </span><span class="kw">map</span>(
+  ngrams &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(
     sequences, 
     create_ngram_set, <span class="dt">ngram_value =</span> ngram_range
   )
   
-  seqs &lt;-<span class="st"> </span><span class="kw">map2</span>(sequences, ngrams, <span class="cf">function</span>(x, y){
+  seqs &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map2">map2</a></span>(sequences, ngrams, <span class="cf">function</span>(x, y){
     tokens &lt;-<span class="st"> </span>token_indice<span class="op">$</span>token[token_indice<span class="op">$</span>ngrams <span class="op">%in%</span><span class="st"> </span>y]  
     <span class="kw">c</span>(x, tokens)
   })
@@ -154,14 +160,14 @@ imdb_data &lt;-<span class="st"> </span><span class="kw"><a href="../../referenc
 
 <span class="kw">print</span>(<span class="kw">length</span>(imdb_data<span class="op">$</span>train<span class="op">$</span>x)) <span class="co"># train sequences</span>
 <span class="kw">print</span>(<span class="kw">length</span>(imdb_data<span class="op">$</span>test<span class="op">$</span>x)) <span class="co"># test sequences</span>
-<span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"Average train sequence length: %f"</span>, <span class="kw">mean</span>(<span class="kw">map_int</span>(imdb_data<span class="op">$</span>train<span class="op">$</span>x, length))))
-<span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"Average test sequence length: %f"</span>, <span class="kw">mean</span>(<span class="kw">map_int</span>(imdb_data<span class="op">$</span>test<span class="op">$</span>x, length))))
+<span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"Average train sequence length: %f"</span>, <span class="kw">mean</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(imdb_data<span class="op">$</span>train<span class="op">$</span>x, length))))
+<span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"Average test sequence length: %f"</span>, <span class="kw">mean</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(imdb_data<span class="op">$</span>test<span class="op">$</span>x, length))))
 
 <span class="cf">if</span>(ngram_range <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) {
   
   <span class="co"># Create set of unique n-gram from the training set.</span>
   ngrams &lt;-<span class="st"> </span>imdb_data<span class="op">$</span>train<span class="op">$</span>x <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">map</span>(create_ngram_set) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(create_ngram_set) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">unique</span>()
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-convolutional.R
 \name{layer_conv_2d_transpose}
 \alias{layer_conv_2d_transpose}
-\title{Transposed convolution layer (sometimes called Deconvolution).}
+\title{Transposed 2D convolution layer (sometimes called Deconvolution).}
 \usage{
 layer_conv_2d_transpose(object, filters, kernel_size, strides = c(1L, 1L),
   padding = "valid", data_format = NULL, activation = NULL,
@@ -109,7 +109,9 @@ if data_format='channels_first' or 4D tensor with shape: \code{(batch, rows, col
 
 \seealso{
 Other convolutional layers: \code{\link{layer_conv_1d}},
-  \code{\link{layer_conv_2d}}, \code{\link{layer_conv_3d}},
+  \code{\link{layer_conv_2d}},
+  \code{\link{layer_conv_3d_transpose}},
+  \code{\link{layer_conv_3d}},
   \code{\link{layer_conv_lstm_2d}},
   \code{\link{layer_cropping_1d}},
   \code{\link{layer_cropping_2d}},

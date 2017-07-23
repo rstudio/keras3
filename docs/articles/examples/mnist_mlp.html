@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>mnist_mlp.R • keras</title>
+<title>mnist_mlp • keras</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
@@ -69,7 +69,10 @@
       <a href="../../articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
-      <a href="../../articles/backend.html">Backend Functions</a>
+      <a href="../../articles/backend.html">Keras Backend</a>
+    </li>
+    <li>
+      <a href="../../articles/custom_layers.html">Custom Layers</a>
     </li>
   </ul>
 </li>
@@ -99,13 +102,16 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>mnist_mlp.R</h1>
+      <h1>mnist_mlp</h1>
             
           </div>
 
     
     
 <div class="contents">
+<div class="source-ref">
+<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/mnist_mlp.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/mnist_mlp.R</a></p>
+</div>
 <p>Trains a simple deep NN on the MNIST dataset.</p>
 <p>Gets to 98.40% test accuracy after 20 epochs (there is <em>a lot</em> of margin for parameter tuning). 2 seconds per epoch on a K520 GPU.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
@@ -155,7 +161,6 @@ history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span 
   <span class="dt">batch_size =</span> batch_size,
   <span class="dt">epochs =</span> epochs,
   <span class="dt">verbose =</span> <span class="dv">1</span>,
-  <span class="dt">callbacks =</span> <span class="kw"><a href="../../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="st">"logs/run_b"</span>),
   <span class="dt">validation_split =</span> <span class="fl">0.2</span>
 )
   

@@ -77,7 +77,7 @@ test_call_succeeds("layer_spatial_dropout_3d", {
 test_call_succeeds("layer_lambda", {
   keras_model_sequential() %>% 
     layer_dense(32, input_shape = c(784)) %>% 
-    layer_lambda(function(t) t)
+    layer_lambda(function(t) t, output_shape = c(784))
 })
 
 test_call_succeeds("layer_masking", {
@@ -140,18 +140,27 @@ test_call_succeeds("layer_conv_2d_transpose", {
     layer_conv_2d_transpose(filters = 3, kernel_size = c(2, 2))
 })
 
-test_call_succeeds("layer_separable_conv_2d", {
+test_call_succeeds("layer_conv_3d_transpose", required_version = "2.0.5", {
   keras_model_sequential() %>% 
     layer_dense(32, input_shape = c(784)) %>% 
-    layer_reshape(target_shape = c(2,4,4)) %>% 
-    layer_separable_conv_2d(filters = 4, kernel_size = c(2,2))
+    layer_reshape(target_shape = c(2,2,2,4)) %>% 
+    layer_conv_3d_transpose(filters = 3, kernel_size = c(2, 2, 2))
+})
+
+test_call_succeeds("layer_separable_conv_2d", {
+  if (is_tensorflow_implementation()) {
+    keras_model_sequential() %>% 
+      layer_dense(32, input_shape = c(784)) %>% 
+      layer_reshape(target_shape = c(2,4,4)) %>% 
+      layer_separable_conv_2d(filters = 4, kernel_size = c(2,2))
+  }
 })
 
 
 test_call_succeeds("layer_conv_lstm_2d", {
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
-    layer_reshape(target_shape = c(2,4,4,4)) %>%
+    layer_reshape(target_shape = c(2,4,2,2)) %>%
     layer_conv_lstm_2d(filters = 3, kernel_size = c(2, 2))
 })
 
@@ -165,14 +174,14 @@ test_call_succeeds("layer_upsampling_1d", {
 test_call_succeeds("layer_upsampling_2d", {
   keras_model_sequential() %>% 
     layer_dense(32, input_shape = c(784)) %>% 
-    layer_reshape(target_shape = c(2,4,16)) %>% 
+    layer_reshape(target_shape = c(2,4,4)) %>% 
     layer_upsampling_2d()
 })
 
 test_call_succeeds("layer_upsampling_3d", {
   keras_model_sequential() %>% 
     layer_dense(32, input_shape = c(784)) %>% 
-    layer_reshape(target_shape = c(2,4,4,4)) %>% 
+    layer_reshape(target_shape = c(2,4,2,2)) %>% 
     layer_upsampling_3d()
 })
 
@@ -187,7 +196,7 @@ test_call_succeeds("layer_zero_padding_1d", {
 test_call_succeeds("layer_zero_padding_2d", {
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
-    layer_reshape(target_shape = c(2,4,16)) %>%
+    layer_reshape(target_shape = c(2,4,4)) %>%
     layer_zero_padding_2d()
 })
 
@@ -195,7 +204,7 @@ test_call_succeeds("layer_zero_padding_2d", {
 test_call_succeeds("layer_zero_padding_3d", {
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
-    layer_reshape(target_shape = c(2,4,4,4)) %>%
+    layer_reshape(target_shape = c(2,4,2,2)) %>%
     layer_zero_padding_3d()
 })
 
@@ -210,7 +219,7 @@ test_call_succeeds("layer_cropping_1d", {
 test_call_succeeds("layer_cropping_2d", {
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
-    layer_reshape(target_shape = c(2,4,16)) %>%
+    layer_reshape(target_shape = c(2,4,4)) %>%
     layer_cropping_2d()
 })
 
@@ -218,7 +227,7 @@ test_call_succeeds("layer_cropping_2d", {
 test_call_succeeds("layer_cropping_3d", {
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
-    layer_reshape(target_shape = c(2,4,4,4)) %>%
+    layer_reshape(target_shape = c(2,4,2,2)) %>%
     layer_cropping_3d()
 })
 
@@ -350,34 +359,39 @@ test_call_succeeds("layer_embedding", {
     layer_embedding(1000, 64, input_length = 10)
 })
 
-merge_inputs <- c(
-  layer_input(shape = c(4, 5)),
-  layer_input(shape = c(4, 5)),
-  layer_input(shape = c(4, 5))
-)
+get_merge_inputs <- function() {
+  c(layer_input(shape = c(4, 5)),
+    layer_input(shape = c(4, 5)),
+    layer_input(shape = c(4, 5)))
+}
 
 
 test_call_succeeds("layer_add", {
+  merge_inputs <- get_merge_inputs()
   output <- layer_add(merge_inputs)
   keras_model(merge_inputs, output)
 })
 
 test_call_succeeds("layer_multiply", {
+  merge_inputs <- get_merge_inputs()
   output <- layer_multiply(merge_inputs)
   keras_model(merge_inputs, output)
 })
 
 test_call_succeeds("layer_maximum", {
+  merge_inputs <- get_merge_inputs()
   output <- layer_maximum(merge_inputs)
   keras_model(merge_inputs, output)
 })
 
 test_call_succeeds("layer_average", {
+  merge_inputs <- get_merge_inputs()
   output <- layer_average(merge_inputs)
   keras_model(merge_inputs, output)
 })
 
 test_call_succeeds("layer_concatenate", {
+  merge_inputs <- get_merge_inputs()
   output <- layer_concatenate(merge_inputs)
   keras_model(merge_inputs, output)
 })
@@ -404,6 +418,12 @@ test_call_succeeds("layer_gaussian_dropout", {
     layer_gaussian_dropout(rate = 0.5)
 })
 
+test_call_succeeds("layer_alpha_dropout", required_version = "2.0.5", {
+  keras_model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_reshape(target_shape = c(2,16)) %>% 
+    layer_alpha_dropout(rate = 0.5)
+})
 
 test_call_succeeds("time_distributed", {
   keras_model_sequential() %>%

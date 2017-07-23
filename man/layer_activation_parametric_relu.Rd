@@ -51,8 +51,7 @@ It follows: \code{f(x) = alpha * x`` for}x < 0\code{,}f(x) = x\code{for}x >= 0`,
 alpha is a learned array with the same shape as x.
 }
 \seealso{
-\href{https://arxiv.org/abs/1502.01852}{Delving Deep into
-Rectifiers: Surpassing Human-Level Performance on ImageNet Classification}
+\href{https://arxiv.org/abs/1502.01852}{Delving Deep into Rectifiers: Surpassing Human-Level Performance onImageNet Classification}.
 
 Other activation layers: \code{\link{layer_activation_elu}},
   \code{\link{layer_activation_leaky_relu}},

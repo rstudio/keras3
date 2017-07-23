@@ -18,7 +18,7 @@ model <- keras_model_sequential() %>%
   compile( 
     loss= 'binary_crossentropy', 
     optimizer = optimizer_sgd(),
-    metrics = metric_binary_accuracy()
+    metrics = metric_binary_accuracy
   )
 
 # train the model 

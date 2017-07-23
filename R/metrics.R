@@ -7,7 +7,34 @@
 #' 
 #' @param y_true True labels (tensor)
 #' @param y_pred Predictions (tensor of the same shape as y_true).
+#' @param k An integer, number of top elements to consider.
 #'       
+#' @section Custom Metrics:
+#' You can provide an arbitrary R function as a custom metric. Note that
+#' the `y_true` and `y_pred` parameters are tensors, so computations on 
+#' them should use backend tensor functions. For example:
+#' 
+#' ```r
+#' # create metric using backend tensor functions
+#' K <- backend()
+#' metric_mean_pred <- function(y_true, y_pred) {
+#'   K$mean(y_pred) 
+#' }
+#' 
+#' model %>% compile( 
+#'   optimizer = optimizer_rmsprop(),
+#'   loss = loss_binary_crossentropy,
+#'   metrics = c('accuracy', 
+#'               'mean_pred' = metric_mean_pred)
+#' )
+#' ```
+#' 
+#' Note that a name ('mean_pred') is provided for the custom metric
+#' function. This name is used within training progress output.
+#' 
+#' Documentation on the available backend tensor functions can be 
+#' found at <https://rstudio.github.io/keras/articles/backend.html#backend-functions>.     
+#'
 #' @export
 metric_binary_accuracy <- function(y_true, y_pred) {
   keras$metrics$binary_accuracy(y_true, y_pred)
@@ -124,12 +151,19 @@ attr(metric_squared_hinge, "py_function_name") <- "squared_hinge"
 
 #' @rdname metric_binary_accuracy
 #' @export
-metric_top_k_categorical_accuracy <- function(y_true, y_pred) {
-  keras$metrics$top_k_categorical_accuracy(y_true, y_pred)
+metric_top_k_categorical_accuracy <- function(y_true, y_pred, k = 5) {
+  keras$metrics$top_k_categorical_accuracy(y_true, y_pred, k = as.integer(k))
 }
 attr(metric_top_k_categorical_accuracy, "py_function_name") <- "top_k_categorical_accuracy"
 
 
+
+#' @rdname metric_binary_accuracy
+#' @export
+metric_sparse_top_k_categorical_accuracy <- function(y_true, y_pred, k = 5) {
+  keras$metrics$sparse_top_k_categorical_accuracy(y_true, y_pred, k = as.integer(k))
+}
+attr(metric_sparse_top_k_categorical_accuracy, "py_function_name") <- "sparse_top_k_categorical_accuracy"
 
 
 

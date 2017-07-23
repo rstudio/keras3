@@ -52,7 +52,6 @@ history <- model %>% fit(
   batch_size = batch_size,
   epochs = epochs,
   verbose = 1,
-  callbacks = callback_tensorboard(log_dir = "logs/run_b"),
   validation_split = 0.2
 )
   

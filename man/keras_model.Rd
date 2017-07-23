@@ -14,6 +14,28 @@ keras_model(inputs, outputs = NULL)
 \description{
 A model is a directed acyclic graph of layers.
 }
+\examples{
+\dontrun{
+library(keras)
+
+# input layer
+inputs <- layer_input(shape = c(784))
+
+# outputs compose input + dense layers
+predictions <- inputs \%>\%
+  layer_dense(units = 64, activation = 'relu') \%>\% 
+  layer_dense(units = 64, activation = 'relu') \%>\% 
+  layer_dense(units = 10, activation = 'softmax')
+
+# create and compile model
+model <- keras_model(inputs = inputs, outputs = predictions)
+model \%>\% compile(
+  optimizer = 'rmsprop',
+  loss = 'categorical_crossentropy',
+  metrics = c('accuracy')
+)
+}
+}
 \seealso{
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate_generator}}, \code{\link{evaluate}},
@@ -21,10 +43,10 @@ Other model functions: \code{\link{compile}},
   \code{\link{get_config}}, \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{pop_layer}},
-  \code{\link{predict.tensorflow.keras.engine.training.Model}},
+  \code{\link{predict.keras.engine.training.Model}},
   \code{\link{predict_generator}},
   \code{\link{predict_on_batch}},
   \code{\link{predict_proba}},
-  \code{\link{summary.tensorflow.keras.engine.training.Model}},
+  \code{\link{summary.keras.engine.training.Model}},
   \code{\link{train_on_batch}}
 }

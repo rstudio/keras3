@@ -1,8 +1,8 @@
 
 #' Model loss functions
 #' 
-#' @param y_true True labels (TensorFlow tensor) 
-#' @param y_pred Predictions (TensorFlow tensor of the same shape as `y_true`)
+#' @param y_true True labels (Tensor) 
+#' @param y_pred Predictions (Tensor of the same shape as `y_true`)
 #' 
 #' @details Loss functions are to be supplied in the `loss` parameter of the 
 #' [compile()] function.
@@ -13,8 +13,8 @@
 #' artitrary function that returns a scalar for each data-point and takes the
 #' following two arguments: 
 #' 
-#' - `y_true` True labels (TensorFlow tensor) 
-#' - `y_pred` Predictions (TensorFlow tensor of the same shape as `y_true`)
+#' - `y_true` True labels (Tensor) 
+#' - `y_pred` Predictions (Tensor of the same shape as `y_true`)
 #' 
 #' The actual optimized objective is the mean of the output array across all
 #' datapoints.

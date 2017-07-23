@@ -1,35 +1,41 @@
 Package: keras
 Type: Package
-Title: R Interface to Keras
-Version: 0.3.9
+Title: R Interface to 'Keras'
+Version: 0.3.15
 Authors@R: c(
   person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
   person("François", "Chollet", role = c("aut", "cph")),
   person("RStudio", role = c("cph", "fnd")),
   person(family = "Google", role = c("ctb", "cph", "fnd")),
   person("Yuan", "Tang", role = c("ctb", "cph")),
-  person("Daniel", "Falbel", role = c("ctb", "cph"))
+  person("Daniel", "Falbel", role = c("ctb", "cph")),
+  person("Wouter", "Van Der Bijl", role = c("ctb", "cph")),
+  person("Martin", "Studer", role = c("ctb", "cph"))
   )
 Description: Interface to 'Keras', a high-level neural networks API which 
-  runs on top of TensorFlow. 'Keras' was developed with a focus on enabling
-  fast experimentation, supports both convolutional networks and recurrent
-  networks (as well as combinations of the two), and seamlessly on both CPUs
-  and GPUs.
+  runs on top of 'TensorFlow'. 'Keras' was developed with a focus on enabling
+  fast experimentation, supports both convolution based networks and recurrent
+  networks (as well as combinations of the two), and runs seamlessly on both 
+  'CPU' and 'GPU' devices.
 Encoding: UTF-8
 License: MIT + file LICENSE
 URL: https://github.com/rstudio/keras
 BugReports: https://github.com/rstudio/keras/issues
 Imports:
-    reticulate (>= 0.8.0.9008), 
-    tensorflow (>= 0.8.7),
+    reticulate (>= 1.0), 
+    tensorflow (>= 0.9.0.9010),
+    tfruns,
     magrittr, 
     methods,
     R6
 Suggests: 
+    ggplot2,
     testthat, 
-    knitr
+    knitr,
+    rmarkdown
 Remotes:
     rstudio/reticulate,
+    rstudio/tfruns,
     rstudio/tensorflow
 SystemRequirements: TensorFlow >= 1.1 (https://www.tensorflow.org/)
 Roxygen: list(markdown = TRUE)

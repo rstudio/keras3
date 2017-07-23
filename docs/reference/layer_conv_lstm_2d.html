@@ -91,7 +91,10 @@
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
-      <a href="../articles/backend.html">Backend Functions</a>
+      <a href="../articles/backend.html">Keras Backend</a>
+    </li>
+    <li>
+      <a href="../articles/custom_layers.html">Custom Layers</a>
     </li>
   </ul>
 </li>
@@ -140,7 +143,7 @@ transformations are both convolutional.</p>
   <span class='kw'>recurrent_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bias_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>return_sequences</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>go_backwards</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>stateful</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>dropout</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>recurrent_dropout</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -216,7 +219,7 @@ matrix, used for the linear transformation of the recurrent state..</p></td>
       <th>unit_forget_bias</th>
       <td><p>Boolean. If TRUE, add 1 to the bias of the forget
 gate at initialization. Use in combination with <code>bias_initializer="zeros"</code>.
-This is recommended in <a href = 'http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf'>Jozefowicz etal.</a></p></td>
+This is recommended in <a href='http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf'>Jozefowicz etal.</a></p></td>
     </tr>
     <tr>
       <th>kernel_regularizer</th>
@@ -295,6 +298,12 @@ isn't provided.</p></td>
       <th>weights</th>
       <td><p>Initial weights for layer.</p></td>
     </tr>
+    <tr>
+      <th>input_shape</th>
+      <td><p>Dimensionality of the input (integer) not including the
+samples axis. This argument is required when using this layer as the first
+layer in a model.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="input-shape"><a class="anchor" href="#input-shape"></a>Input shape</h2>
@@ -312,7 +321,7 @@ tensor with shape: <code>(samples,time, rows, cols, channels)</code></p></li>
 
     
     <ul>
-<li><p><a href = 'http://arxiv.org/abs/1506.04214v1'>Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting</a>
+<li><p><a href='http://arxiv.org/abs/1506.04214v1'>Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting</a>
 The current implementation does not include the feedback loop on the cells
 output</p></li>
 </ul>
@@ -321,7 +330,9 @@ output</p></li>
 
     <p>Other convolutional layers: <code><a href='layer_conv_1d.html'>layer_conv_1d</a></code>,
   <code><a href='layer_conv_2d_transpose.html'>layer_conv_2d_transpose</a></code>,
-  <code><a href='layer_conv_2d.html'>layer_conv_2d</a></code>, <code><a href='layer_conv_3d.html'>layer_conv_3d</a></code>,
+  <code><a href='layer_conv_2d.html'>layer_conv_2d</a></code>,
+  <code><a href='layer_conv_3d_transpose.html'>layer_conv_3d_transpose</a></code>,
+  <code><a href='layer_conv_3d.html'>layer_conv_3d</a></code>,
   <code><a href='layer_cropping_1d.html'>layer_cropping_1d</a></code>,
   <code><a href='layer_cropping_2d.html'>layer_cropping_2d</a></code>,
   <code><a href='layer_cropping_3d.html'>layer_cropping_3d</a></code>,

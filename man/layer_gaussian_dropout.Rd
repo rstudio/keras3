@@ -57,5 +57,6 @@ the first layer in a model.
 }
 
 \seealso{
-Other noise layers: \code{\link{layer_gaussian_noise}}
+Other noise layers: \code{\link{layer_alpha_dropout}},
+  \code{\link{layer_gaussian_noise}}
 }

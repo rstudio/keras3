@@ -4,13 +4,14 @@
 \alias{callback_tensorboard}
 \title{TensorBoard basic visualizations}
 \usage{
-callback_tensorboard(log_dir = "logs", histogram_freq = 0,
+callback_tensorboard(log_dir = NULL, histogram_freq = 0,
   write_graph = TRUE, write_images = FALSE, embeddings_freq = 0,
   embeddings_layer_names = NULL, embeddings_metadata = NULL)
 }
 \arguments{
-\item{log_dir}{the path of the directory where to save the log files to be
-parsed by Tensorboard.}
+\item{log_dir}{The path of the directory where to save the log files to be
+parsed by Tensorboard. The default is \code{NULL}, which will use the active
+run directory (if available) and otherwise will use "logs".}
 
 \item{histogram_freq}{frequency (in epochs) at which to compute activation
 histograms for the layers of the model. If set to 0, histograms won't be
@@ -42,12 +43,8 @@ histograms for the different layers in your model.
 \details{
 TensorBoard is a visualization tool provided with TensorFlow.
 
-If you have installed TensorFlow with pip, you can launch TensorBoard
-using the \code{tensorboard()} function:\preformatted{tensorboard(log_dir = "/full_path_to_your_logs") 
-}
-
 You can find more information about TensorBoard
-\href{https://www.tensorflow.org/get_started/summaries_and_tensorboard}{here}.
+\href{https://tensorflow.rstudio.com/howto_summaries_and_tensorboard.html}{here}.
 }
 \seealso{
 Other callbacks: \code{\link{callback_csv_logger}},
@@ -57,5 +54,6 @@ Other callbacks: \code{\link{callback_csv_logger}},
   \code{\link{callback_model_checkpoint}},
   \code{\link{callback_progbar_logger}},
   \code{\link{callback_reduce_lr_on_plateau}},
-  \code{\link{callback_remote_monitor}}
+  \code{\link{callback_remote_monitor}},
+  \code{\link{callback_terminate_on_naan}}
 }

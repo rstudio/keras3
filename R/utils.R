@@ -112,8 +112,9 @@ normalize <- function(x, axis = -1, order = 2) {
 #' Keras backend tensor engine
 #' 
 #' Obtain a reference to the `keras.backend` Python module used to implement
-#' tensor operations (this will always be the TensorFlow backend in the current
-#' implementation, which only works with TensorFlow).
+#' tensor operations.
+#'
+#' @inheritParams reticulate::import
 #'
 #' @note See the documentation here <https://keras.io/backend/> for 
 #'   additional details on the available functions.
@@ -121,10 +122,17 @@ normalize <- function(x, axis = -1, order = 2) {
 #' @return Reference to Keras backend python module.
 #'  
 #' @export   
-backend <- function() {
-  keras$backend
+backend <- function(convert = TRUE) {
+  if (convert)
+    keras$backend
+  else
+    r_to_py(keras$backend)
 }
 
+
+is_backend <- function(name) {
+  identical(backend()$backend(), name)
+}
 
 
 

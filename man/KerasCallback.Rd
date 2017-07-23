@@ -47,6 +47,7 @@ it passes to its callbacks:
 }
 
 \examples{
+\dontrun{
 library(keras)
 
 LossHistory <- R6::R6Class("LossHistory",
@@ -61,6 +62,6 @@ LossHistory <- R6::R6Class("LossHistory",
     }
   )
 )
-
+}
 }
 \keyword{datasets}

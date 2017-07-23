@@ -20,16 +20,35 @@ shape. What that means is that it should have received an \code{input_shape} or
 \code{batch_input_shape} argument, or for some type of layers (recurrent,
 Dense...) an \code{input_dim} argument.
 }
+\examples{
+\dontrun{
+ 
+library(keras)
+
+model <- keras_model_sequential() 
+model \%>\% 
+  layer_dense(units = 32, input_shape = c(784)) \%>\% 
+  layer_activation('relu') \%>\% 
+  layer_dense(units = 10) \%>\% 
+  layer_activation('softmax')
+
+model \%>\% compile(
+  optimizer = 'rmsprop',
+  loss = 'categorical_crossentropy',
+  metrics = c('accuracy')
+)
+}
+}
 \seealso{
 Other model functions: \code{\link{compile}},
   \code{\link{evaluate_generator}}, \code{\link{evaluate}},
   \code{\link{fit_generator}}, \code{\link{fit}},
   \code{\link{get_config}}, \code{\link{get_layer}},
   \code{\link{keras_model}}, \code{\link{pop_layer}},
-  \code{\link{predict.tensorflow.keras.engine.training.Model}},
+  \code{\link{predict.keras.engine.training.Model}},
   \code{\link{predict_generator}},
   \code{\link{predict_on_batch}},
   \code{\link{predict_proba}},
-  \code{\link{summary.tensorflow.keras.engine.training.Model}},
+  \code{\link{summary.keras.engine.training.Model}},
   \code{\link{train_on_batch}}
 }

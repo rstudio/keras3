@@ -30,7 +30,7 @@ layer_locally_connected_1d <- function(object, filters, kernel_size, strides = 1
                                        bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL, 
                                        activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL, 
                                        batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$LocallyConnected1D, object, list(
+  create_layer(keras$layers$LocallyConnected1D, object, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -96,7 +96,7 @@ layer_locally_connected_2d <- function(object, filters, kernel_size, strides = c
                                        bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL, 
                                        activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL, 
                                        batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  call_layer(keras$layers$LocallyConnected2D, object, list(
+  create_layer(keras$layers$LocallyConnected2D, object, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),

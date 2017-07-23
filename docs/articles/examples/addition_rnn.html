@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>addition_rnn.R • keras</title>
+<title>addition_rnn • keras</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
@@ -69,7 +69,10 @@
       <a href="../../articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
-      <a href="../../articles/backend.html">Backend Functions</a>
+      <a href="../../articles/backend.html">Keras Backend</a>
+    </li>
+    <li>
+      <a href="../../articles/custom_layers.html">Custom Layers</a>
     </li>
   </ul>
 </li>
@@ -99,13 +102,16 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>addition_rnn.R</h1>
+      <h1>addition_rnn</h1>
             
           </div>
 
     
     
 <div class="contents">
+<div class="source-ref">
+<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/addition_rnn.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/addition_rnn.R</a></p>
+</div>
 <p>An implementation of sequence to sequence learning for performing addition</p>
 <p>Input: “535+61”<br>
 Output: “596”</p>
@@ -169,13 +175,13 @@ generate_data &lt;-<span class="st"> </span><span class="cf">function</span>(siz
   
   <span class="co"># pad with spaces on the right</span>
   questions &lt;-<span class="st"> </span><span class="kw">paste0</span>(left_side, <span class="st">"+"</span>, right_side)
-  questions &lt;-<span class="st"> </span><span class="kw">stri_pad</span>(questions, <span class="dt">width =</span> <span class="dv">2</span><span class="op">*</span>digits<span class="op">+</span><span class="dv">1</span>, 
+  questions &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringi/topics/stri_pad">stri_pad</a></span>(questions, <span class="dt">width =</span> <span class="dv">2</span><span class="op">*</span>digits<span class="op">+</span><span class="dv">1</span>, 
                         <span class="dt">side =</span> <span class="st">"right"</span>, <span class="dt">pad =</span> <span class="st">" "</span>)
   <span class="cf">if</span>(invert){
-    questions &lt;-<span class="st"> </span><span class="kw">stri_reverse</span>(questions)
+    questions &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringi/topics/stri_reverse">stri_reverse</a></span>(questions)
   }
   <span class="co"># pad with spaces on the left</span>
-  results &lt;-<span class="st"> </span><span class="kw">stri_pad</span>(results, <span class="dt">width =</span> digits <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, 
+  results &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringi/topics/stri_pad">stri_pad</a></span>(results, <span class="dt">width =</span> digits <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, 
                       <span class="dt">side =</span> <span class="st">"left"</span>, <span class="dt">pad =</span> <span class="st">" "</span>)
   
   <span class="kw">list</span>(

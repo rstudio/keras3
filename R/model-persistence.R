@@ -3,6 +3,7 @@
 #' 
 #' @param object Model object to save
 #' @param filepath File path 
+#' @param compile Whether to compile the model after loading.
 #' @param overwrite Overwrite existing file if necessary
 #' @param include_optimizer If `TRUE`, save optimizer's state.
 #' @param custom_objects Mapping class names (or function names) of custom 
@@ -43,16 +44,20 @@ save_model_hdf5 <- function(object, filepath, overwrite = TRUE, include_optimize
 
 #' @rdname save_model_hdf5
 #' @export
-load_model_hdf5 <- function(filepath, custom_objects = NULL) {
+load_model_hdf5 <- function(filepath, custom_objects = NULL, compile = TRUE) {
   
   if (!have_h5py())
     stop("The h5py Python package is required to save and load models")
   
+  # build args dynamically so we can only pass `compile` if it's supported
+  # (compile requires keras 2.0.4 / tensorflow 1.3)
   args <- list(
     filepath = normalize_path(filepath), 
     custom_objects = custom_objects
   )
-
+  if (keras_version() >= "2.0.4")
+    args$compile <- compile
+  
   do.call(keras$models$load_model, args)
 }
 

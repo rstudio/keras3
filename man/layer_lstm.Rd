@@ -157,7 +157,7 @@ the initial state of the RNN layer.
 \section{References}{
 
 \itemize{
-\item \href{http://deeplearning.cs.cmu.edu/pdfs/Hochreiter97_lstm.pdf}{Long short-term memory} (original 1997 paper)
+\item \href{http://www.bioinf.jku.at/publications/older/2604.pdf}{Long short-term memory} (original 1997 paper)
 \item \href{http://www.cs.toronto.edu/~graves/preprint.pdf}{Supervised sequence labeling with recurrent neural networks}
 \item \href{http://arxiv.org/abs/1512.05287}{A Theoretically Grounded Application of Dropout in Recurrent Neural Networks}
 }

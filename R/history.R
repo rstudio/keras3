@@ -34,54 +34,112 @@ print.keras_training_history <- function(x, ...) {
   cat(str)
 }
 
+
+#' Plot training history
+#' 
+#' Plots metrics recorded during training. 
+#' 
+#' @param x Training history object returned from `fit()`.
+#' @param y Unused.
+#' @param metrics One or more metrics to plot (e.g. `c('loss', 'accuracy')`).
+#'   Defaults to plotting all captured metrics.
+#' @param method Method to use for plotting. The default "auto" will use 
+#'   \pkg{ggplot2} if available, and otherwise will use base graphics.
+#' @param smooth Whether a loess smooth should be added to the plot, only 
+#'   available for the `ggplot2` method. If the number of epochs is smaller
+#'   than ten, it is forced to false.
+#' @param ... Additional parameters to pass to the [plot()] method.
+#'
 #' @export
-plot.keras_training_history <- function(x, y, metrics = NULL, ...) {
+plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto", "ggplot2", "base"), 
+                                        smooth = TRUE, ...) {
+  # check which method we should use
+  method <- match.arg(method)
+  if (method == "auto") {
+    if (requireNamespace("ggplot2", quietly = TRUE))
+      method <- "ggplot2"
+    else
+      method <- "base"
+  }
   
   # if metrics is null we plot all of the metrics
   if (is.null(metrics))
     metrics <- Filter(function(name) !grepl("^val_", name), names(x$metrics))
+
+  # prepare data to plot as a data.frame
+  df <- data.frame(
+    epoch = seq_len(x$params$epochs),
+    value = unlist(x$metrics),
+    metric = rep(sub("^val_", "", names(x$metrics)), each = x$params$epochs),
+    data = rep(grepl("^val_", names(x$metrics)), each = x$params$epochs)
+  )
   
-  # par
-  op <- par(mfrow = c(length(metrics),1),
-            mar=c(3,3,2,2)) # (bottom, left, top, right)
-  on.exit(par(op), add = TRUE)
+  # select the correct metrics
+  df <- df[df$metric %in% metrics, ]
   
-  for (i in 1:length(metrics)) {
+  # order factor levles appropriately
+  df$data <- factor(df$data, c(FALSE, TRUE), c('training', 'validation'))
+  df$metric <- factor(df$metric, unique(sub("^val_", "", names(x$metrics))))
+  
+  if (method == "ggplot2") {
+    # helper function for correct breaks (integers only)
+    int_breaks <- function(x) pretty(x)[pretty(x) %% 1 == 0]
     
-    # get metric
-    metric <- metrics[[i]]
+    if (x$params$do_validation)
+      p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data))
+    else 
+      p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value))
     
-    # adjust margins
-    top_plot <- i == 1
-    bottom_plot <- i == length(metrics)
-    if (top_plot)
-      par(mar = c(1.5,3,1.5,1.5)) 
-    else if (bottom_plot)
-      par(mar = c(2.5,3,.5,1.5))
-    else
-      par(mar = c(1.5,3,.5,1.5))
+    if (smooth && x$params$epochs >= 10)
+      p <- p + ggplot2::geom_smooth(se = FALSE, method = 'loess')
     
-    # plot values
-    epochs <- 1:x$params$epochs
-    legend <- c(metric)
-    pch <- c(1)
-    values <- x$metrics[[metric]]
-    plot(epochs, values, xaxt = ifelse(bottom_plot, 's', 'n'),
-         xlab = "epoch", ylab = metric, pch = pch[[1]])
+    p <- p +
+      ggplot2::geom_point(shape = 21, col = 1) +
+      ggplot2::facet_grid(metric~., switch = 'y', scales = 'free_y') +
+      ggplot2::scale_x_continuous(breaks = int_breaks) +
+      ggplot2::theme(axis.title.y = ggplot2::element_blank(), strip.placement = 'outside',
+                     strip.text = ggplot2::element_text(colour = 'black', size = 11),
+                     strip.background = ggplot2::element_rect(fill = NA))
+    return(p)
+  }
+  
+  if (method == 'base') {
+    # par
+    op <- par(mfrow = c(length(metrics), 1),
+              mar = c(3, 3, 2, 2)) # (bottom, left, top, right)
+    on.exit(par(op), add = TRUE)
     
-    # plot validation values if we have them
-    val_metric <- paste0("val_", metric)
-    val_values <-x$metrics[[val_metric]] 
-    if (!is.null(val_values)) {
-      pch <- c(pch, 4)
-      legend <- c(legend, val_metric)
-      points(epochs, val_values, pch = pch[[2]])
+    for (i in seq_along(metrics)) {
+      
+      # get metric
+      metric <- metrics[[i]]
+      
+      # adjust margins
+      top_plot <- i == 1
+      bottom_plot <- i == length(metrics)
+      if (top_plot)
+        par(mar = c(1.5, 3, 1.5, 1.5)) 
+      else if (bottom_plot)
+        par(mar = c(2.5, 3, .5, 1.5))
+      else
+        par(mar = c(1.5, 3, .5, 1.5))
+      
+      # select data for current panel
+      df2 <- df[df$metric == metric, ]
+      
+      # plot values
+      plot(df2$epoch, df2$value, pch = c(1, 4)[df2$data],
+           xaxt = ifelse(bottom_plot, 's', 'n'), xlab = "epoch", ylab = metric, ...)
+      
+      # add legend
+      legend_location <- ifelse(
+        df2[df2$data == 'training', 'value'][1] > df2[df2$data == 'training', 'value'][x$params$epochs],
+        "topright", "bottomright")
+      if (x$params$do_validation)
+        graphics::legend(legend_location, legend = c(metric, paste0("val_", metric)), pch = c(1, 4))
+      else
+        graphics::legend(legend_location, legend = metric, pch = 1)
     }
-   
-    # add legend
-    legend_location <- ifelse(values[[1]] > values[[x$params$epochs]],
-                              "topright", "bottomright")
-    legend(legend_location, legend = legend, pch = pch)
   }
 }
 

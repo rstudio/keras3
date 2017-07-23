@@ -91,7 +91,10 @@
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
-      <a href="../articles/backend.html">Backend Functions</a>
+      <a href="../articles/backend.html">Keras Backend</a>
+    </li>
+    <li>
+      <a href="../articles/custom_layers.html">Custom Layers</a>
     </li>
   </ul>
 </li>
@@ -172,7 +175,7 @@ with specifying any <code>dilation_rate</code> value != 1.</p></td>
       <td><p>One of <code>"valid"</code>, <code>"causal"</code> or <code>"same"</code> (case-insensitive).
 <code>"causal"</code> results in causal (dilated) convolutions, e.g. <code>output[t]</code> does
 not depend on <code>input[t+1:]</code>. Useful when modeling temporal data where the
-model should not violate the temporal order. See <a href = 'https://arxiv.org/abs/1609.03499'>WaveNet: A GenerativeModel for Raw Audio, section 2.1</a>.</p></td>
+model should not violate the temporal order. See <a href='https://arxiv.org/abs/1609.03499'>WaveNet: A GenerativeModel for Raw Audio, section 2.1</a>.</p></td>
     </tr>
     <tr>
       <th>dilation_rate</th>
@@ -269,7 +272,9 @@ isn't provided.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other convolutional layers: <code><a href='layer_conv_2d_transpose.html'>layer_conv_2d_transpose</a></code>,
-  <code><a href='layer_conv_2d.html'>layer_conv_2d</a></code>, <code><a href='layer_conv_3d.html'>layer_conv_3d</a></code>,
+  <code><a href='layer_conv_2d.html'>layer_conv_2d</a></code>,
+  <code><a href='layer_conv_3d_transpose.html'>layer_conv_3d_transpose</a></code>,
+  <code><a href='layer_conv_3d.html'>layer_conv_3d</a></code>,
   <code><a href='layer_conv_lstm_2d.html'>layer_conv_lstm_2d</a></code>,
   <code><a href='layer_cropping_1d.html'>layer_cropping_1d</a></code>,
   <code><a href='layer_cropping_2d.html'>layer_cropping_2d</a></code>,

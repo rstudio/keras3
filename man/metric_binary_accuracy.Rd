@@ -16,6 +16,7 @@
 \alias{metric_sparse_categorical_crossentropy}
 \alias{metric_squared_hinge}
 \alias{metric_top_k_categorical_accuracy}
+\alias{metric_sparse_top_k_categorical_accuracy}
 \title{Model performance metrics}
 \usage{
 metric_binary_accuracy(y_true, y_pred)
@@ -46,12 +47,16 @@ metric_sparse_categorical_crossentropy(y_true, y_pred)
 
 metric_squared_hinge(y_true, y_pred)
 
-metric_top_k_categorical_accuracy(y_true, y_pred)
+metric_top_k_categorical_accuracy(y_true, y_pred, k = 5)
+
+metric_sparse_top_k_categorical_accuracy(y_true, y_pred, k = 5)
 }
 \arguments{
 \item{y_true}{True labels (tensor)}
 
 \item{y_pred}{Predictions (tensor of the same shape as y_true).}
+
+\item{k}{An integer, number of top elements to consider.}
 }
 \description{
 Model performance metrics
@@ -60,3 +65,28 @@ Model performance metrics
 Metric functions are to be supplied in the \code{metrics} parameter of the
 \code{\link[=compile]{compile()}} function.
 }
+\section{Custom Metrics}{
+
+You can provide an arbitrary R function as a custom metric. Note that
+the \code{y_true} and \code{y_pred} parameters are tensors, so computations on
+them should use backend tensor functions. For example:\preformatted{# create metric using backend tensor functions
+K <- backend()
+metric_mean_pred <- function(y_true, y_pred) {
+  K$mean(y_pred) 
+}
+
+model %>% compile( 
+  optimizer = optimizer_rmsprop(),
+  loss = loss_binary_crossentropy,
+  metrics = c('accuracy', 
+              'mean_pred' = metric_mean_pred)
+)
+}
+
+Note that a name ('mean_pred') is provided for the custom metric
+function. This name is used within training progress output.
+
+Documentation on the available backend tensor functions can be
+found at \url{https://rstudio.github.io/keras/articles/backend.html#backend-functions}.
+}
+

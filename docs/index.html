@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>R Interface to Keras • keras</title>
+<title>R Interface to 'Keras' • keras</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -71,7 +71,10 @@
       <a href="articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
-      <a href="articles/backend.html">Backend Functions</a>
+      <a href="articles/backend.html">Keras Backend</a>
+    </li>
+    <li>
+      <a href="articles/custom_layers.html">Custom Layers</a>
     </li>
   </ul>
 </li>
@@ -119,12 +122,12 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>The R interface to Keras uses <a href="https://www.tensorflow.org/">TensorFlow™</a> as it’s underlying computation engine. Therefore, you need to install both the keras R package as well as the the TensorFlow engine.</p>
+<p>The R interface to Keras uses <a href="https://www.tensorflow.org/">TensorFlow™</a> as it’s default tensor backend engine. To get started you should therefore install both the keras R package and the TensorFlow engine.</p>
 <p>First, install the keras R package from GitHub as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"rstudio/keras"</span>)</code></pre></div>
-<p>Then, use the <code><a href="reference/reexports.html">install_tensorflow()</a></code> function to install TensorFlow:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"rstudio/keras"</span>)</code></pre></div>
+<p>Then, use the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow">install_tensorflow()</a></code> function to install TensorFlow:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
-<span class="kw"><a href="reference/reexports.html">install_tensorflow</a></span>()</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow">install_tensorflow</a></span>()</code></pre></div>
 <p>This will provide you with a default installation of TensorFlow suitable for use with the keras R package. See the <a href="https://tensorflow.rstudio.com/installation.html">article on TensorFlow installation</a> to learn about more advanced options, including installing a version of TensorFlow that takes advantage of Nvidia GPUs if you have the correct CUDA libraries installed.</p>
 </div>
 <div id="getting-started-30-seconds-to-keras" class="section level2">
@@ -175,7 +178,7 @@ ________________________________________________________________________________
 <p>Plot loss and accuracy metrics from training:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(history)</code></pre></div>
 <div class="figure">
-<img src="training_history.png" class="r-plot" width="693" height="521">
+<img src="images/training_history_ggplot2.png" class="r-plot" width="753" height="488">
 </div>
 <p>Evaluate your performance on test data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loss_and_metrics &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>

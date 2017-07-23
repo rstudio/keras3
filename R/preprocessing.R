@@ -157,6 +157,43 @@ text_one_hot <- function(text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\
   )
 }
 
+#' Converts a text to a sequence of indexes in a fixed-size hashing space.
+#' 
+#' @param text Input text (string).
+#' @param n Dimension of the hashing space.
+#' @param hash_function if `NULL` uses python `hash` function, can be 'md5' or
+#'   any function that takes in input a string and returns a int. Note that
+#'   `hash` is not a stable hashing function, so it is not consistent across
+#'   different runs, while 'md5' is a stable hashing function.
+#' @param filters Sequence of characters to filter out.
+#' @param lower Whether to convert the input to lowercase.
+#' @param split Sentence split marker (string).
+#' 
+#' @return  A list of integer word indices (unicity non-guaranteed).
+#' 
+#' @details 
+#' Two or more words may be assigned to the same index, due to possible
+#' collisions by the hashing function.
+#' 
+#' @family text preprocessing   
+#'
+#' @export
+text_hashing_trick <- function(text, n, 
+                               hash_function = NULL, 
+                               filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n', 
+                               lower = TRUE, split = ' ') {
+  keras$preprocessing$text$hashing_trick(
+    text = text,
+    n = as.integer(n),
+    hash_function = hash_function,
+    filters = filters,
+    lower = lower,
+    split = split
+  )
+}
+
+
+
 #' Text tokenization utility
 #' 
 #' Vectorize a text corpus, by turning each text into either a sequence of 
@@ -356,6 +393,7 @@ image_to_array <- function(img, data_format = c("channels_last", "channels_first
 #' @param featurewise_std_normalization divide inputs by std of the dataset.
 #' @param samplewise_std_normalization divide each input by its std.
 #' @param zca_whitening apply ZCA whitening.
+#' @param zca_epsilon Epsilon for ZCA whitening. Default is 1e-6.
 #' @param rotation_range degrees (0 to 180).
 #' @param width_shift_range fraction of total width.
 #' @param height_shift_range fraction of total height.
@@ -387,7 +425,7 @@ image_to_array <- function(img, data_format = c("channels_last", "channels_first
 #' @export
 image_data_generator <- function(featurewise_center = FALSE, samplewise_center = FALSE, 
                                  featurewise_std_normalization = FALSE, samplewise_std_normalization = FALSE, 
-                                 zca_whitening = FALSE, rotation_range = 0.0, width_shift_range = 0.0, 
+                                 zca_whitening = FALSE, zca_epsilon = 1e-6, rotation_range = 0.0, width_shift_range = 0.0, 
                                  height_shift_range = 0.0,  shear_range = 0.0, zoom_range = 0.0, channel_shift_range = 0.0, 
                                  fill_mode = "nearest", cval = 0.0, horizontal_flip = FALSE, vertical_flip = FALSE, 
                                  rescale = NULL, preprocessing_function = NULL, data_format = NULL) {
@@ -411,7 +449,9 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
     preprocessing_function = preprocessing_function,
     data_format = data_format
   )
-
+  if (keras_version() >= "2.0.4")
+    args$zca_epsilon <- zca_epsilon
+  
   do.call(keras$preprocessing$image$ImageDataGenerator, args)
   
 }

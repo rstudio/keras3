@@ -3,6 +3,7 @@
 \name{activation_relu}
 \alias{activation_relu}
 \alias{activation_elu}
+\alias{activation_selu}
 \alias{activation_hard_sigmoid}
 \alias{activation_linear}
 \alias{activation_sigmoid}
@@ -15,6 +16,8 @@
 activation_relu(x, alpha = 0, max_value = NULL)
 
 activation_elu(x, alpha = 1)
+
+activation_selu(x, alpha = 1)
 
 activation_hard_sigmoid(x)
 
@@ -43,3 +46,10 @@ activation_tanh(x)
 Activations functions can either be used through \code{\link[=layer_activation]{layer_activation()}}, or
 through the activation argument supported by all forward layers.
 }
+\section{References}{
+
+\itemize{
+\item \code{activation_selu()}: \href{https://arxiv.org/abs/1706.02515}{Self-Normalizing Neural Networks}
+}
+}
+

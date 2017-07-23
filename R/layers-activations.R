@@ -15,7 +15,7 @@ layer_activation <- function(object, activation, input_shape = NULL,
                              batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                              name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$Activation, object, list(
+  create_layer(keras$layers$Activation, object, list(
     activation = activation,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -29,26 +29,25 @@ layer_activation <- function(object, activation, input_shape = NULL,
 }
 
 #' Leaky version of a Rectified Linear Unit.
-#' 
+#'
 #' Allows a small gradient when the unit is not active: `f(x) = alpha * x` for
 #' `x < 0`, `f(x) = x` for `x >= 0`.
-#' 
+#'
 #' @inheritParams layer_activation
 #' @param alpha float >= 0. Negative slope coefficient.
-#'   
-#' @seealso 
-#' \href{https://web.stanford.edu/~awni/papers/relu_hybrid_icml2013_final.pdf}{Rectifier
-#' Nonlinearities Improve Neural Network Acoustic Models}.
-#' 
-#' @family activation layers 
-#' 
+#'
+#' @seealso [Rectifier Nonlinearities Improve Neural Network Acoustic
+#'   Models](https://web.stanford.edu/~awni/papers/relu_hybrid_icml2013_final.pdf).
+#'
+#' @family activation layers
+#'
 #' @export
 layer_activation_leaky_relu <- function(object, alpha = 0.3, input_shape = NULL,
                                         batch_input_shape = NULL, batch_size = NULL, 
                                         dtype = NULL, name = NULL, trainable = NULL, 
                                         weights = NULL) {
   
-  call_layer(keras$layers$LeakyReLU, object, list(
+  create_layer(keras$layers$LeakyReLU, object, list(
     alpha = alpha,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -62,25 +61,25 @@ layer_activation_leaky_relu <- function(object, alpha = 0.3, input_shape = NULL,
 }
 
 #' Parametric Rectified Linear Unit.
-#' 
-#' It follows: `f(x) = alpha * x`` for `x < 0`, `f(x) = x` for `x >= 0`, where 
+#'
+#' It follows: `f(x) = alpha * x`` for `x < 0`, `f(x) = x` for `x >= 0`, where
 #' alpha is a learned array with the same shape as x.
-#' 
+#'
 #' @inheritParams layer_activation
 #' @param alpha_initializer Initializer function for the weights.
 #' @param alpha_regularizer Regularizer for the weights.
 #' @param alpha_constraint Constraint for the weights.
 #' @param shared_axes The axes along which to share learnable parameters for the
-#'   activation function. For example, if the incoming feature maps are from a 
-#'   2D convolution with output shape (batch, height, width, channels), and you 
-#'   wish to share parameters across space so that each filter only has one set 
+#'   activation function. For example, if the incoming feature maps are from a
+#'   2D convolution with output shape (batch, height, width, channels), and you
+#'   wish to share parameters across space so that each filter only has one set
 #'   of parameters, set shared_axes=c(1, 2).
-#'   
-#' @seealso \href{https://arxiv.org/abs/1502.01852}{Delving Deep into
-#'   Rectifiers: Surpassing Human-Level Performance on ImageNet Classification}
-#'   
-#' @family activation layers  
-#'   
+#'
+#' @seealso [Delving Deep into Rectifiers: Surpassing Human-Level Performance on
+#'   ImageNet Classification](https://arxiv.org/abs/1502.01852).
+#'
+#' @family activation layers
+#'
 #' @export
 layer_activation_parametric_relu <- function(object, alpha_initializer = "zeros", alpha_regularizer = NULL, 
                                              alpha_constraint = NULL, shared_axes = NULL, 
@@ -106,29 +105,28 @@ layer_activation_parametric_relu <- function(object, alpha_initializer = "zeros"
   args$weights <- weights
   
   # call layer
-  call_layer(keras$layers$PReLU, object, args)
+  create_layer(keras$layers$PReLU, object, args)
 }
 
 
 #' Thresholded Rectified Linear Unit.
-#' 
+#'
 #' It follows: `f(x) = x` for `x > theta`, `f(x) = 0` otherwise.
-#' 
+#'
 #' @inheritParams layer_activation
 #' @param theta float >= 0. Threshold location of activation.
-#'   
-#' @seealso \href{https://arxiv.org/abs/1402.3337}{Zero-bias autoencoders and
-#'   the benefits of co-adapting features}
-#'   
-#' @family activation layers  
-#'   
+#'
+#' @seealso [Zero-bias autoencoders and the benefits of co-adapting features](https://arxiv.org/abs/1402.3337).
+#'
+#' @family activation layers
+#'
 #' @export
 layer_activation_thresholded_relu <- function(object, theta = 1.0, input_shape = NULL,
                                               batch_input_shape = NULL, batch_size = NULL, 
                                               dtype = NULL, name = NULL, trainable = NULL, 
                                               weights = NULL) {
   
-  call_layer(keras$layers$ThresholdedReLU, object, list(
+  create_layer(keras$layers$ThresholdedReLU, object, list(
     theta = theta,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -143,24 +141,24 @@ layer_activation_thresholded_relu <- function(object, theta = 1.0, input_shape =
 
 
 #' Exponential Linear Unit.
-#' 
+#'
 #' It follows: `f(x) =  alpha * (exp(x) - 1.0)` for `x < 0`, `f(x) = x` for `x
 #' >= 0`.
-#' 
+#'
 #' @inheritParams layer_activation
 #' @param alpha Scale for the negative factor.
-#'   
-#' @seealso \href{https://arxiv.org/abs/1511.07289v1}{Fast and Accurate Deep
-#' Network Learning by Exponential Linear Units (ELUs)}.
-#' 
-#' @family activation layers  
-#' 
+#'
+#' @seealso [Fast and Accurate Deep Network Learning by Exponential Linear Units
+#'   (ELUs)](https://arxiv.org/abs/1511.07289v1).
+#'
+#' @family activation layers
+#'
 #' @export
 layer_activation_elu <- function(object, alpha = 1.0, input_shape = NULL,
                                  batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                                  name = NULL, trainable = NULL, weights = NULL) {
   
-  call_layer(keras$layers$ELU, object, list(
+  create_layer(keras$layers$ELU, object, list(
     alpha = alpha,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),

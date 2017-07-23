@@ -22,6 +22,12 @@ test_call_succeeds("text_one_hot", {
   expect_equal(length(encoded), 6)
 })
 
+test_call_succeeds("text_hashing_trick", required_version = "2.0.5", {
+  text <- 'The cat sat on the mat.'
+  encoded <- text_hashing_trick(text, 5)
+  expect_equal(length(encoded), 6)
+})
+
 test_succeeds("use of text tokenizer", {
   texts <- c(
     'The cat sat on the mat.',
@@ -39,6 +45,8 @@ test_succeeds("use of text tokenizer", {
 })
 
 test_succeeds("loading an image for preprocessing", {
-  img <- image_load("digit.jpeg")
-  img_arr <- image_to_array(img)
+  if (have_pillow()) {
+    img <- image_load("digit.jpeg")
+    img_arr <- image_to_array(img)
+  }
 })

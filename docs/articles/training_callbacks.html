@@ -69,7 +69,10 @@
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
-      <a href="../articles/backend.html">Backend Functions</a>
+      <a href="../articles/backend.html">Keras Backend</a>
+    </li>
+    <li>
+      <a href="../articles/custom_layers.html">Custom Layers</a>
     </li>
   </ul>
 </li>
@@ -243,7 +246,7 @@ Create a custom callback
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
 <span class="co"># define custom callback class</span>
-LossHistory &lt;-<span class="st"> </span>R6<span class="op">::</span><span class="kw">R6Class</span>(<span class="st">"LossHistory"</span>,
+LossHistory &lt;-<span class="st"> </span>R6<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/R6/topics/R6Class">R6Class</a></span>(<span class="st">"LossHistory"</span>,
   <span class="dt">inherit =</span> KerasCallback,
   
   <span class="dt">public =</span> <span class="kw">list</span>(

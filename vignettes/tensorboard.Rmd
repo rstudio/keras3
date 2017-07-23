@@ -5,6 +5,14 @@ vignette: >
   %\VignetteIndexEntry{TensorBoard Visualization}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+type: docs
+repo: https://github.com/rstudio/keras
+menu:
+  main:
+    name: "TensorBoard Visualizations"
+    identifier: "keras-tensorboard-visualization"
+    parent: "keras-using-keras"
+    weight: 50
 ---
 
 ```{r setup, include = FALSE}
@@ -18,7 +26,7 @@ TensorBoard is a visualization tool included with TensorFlow that enables you to
 
 For example, here's a TensorBoard display for Keras accuracy and loss metrics:
 
-![](tensorboard.png){width=700 height=545 .screenshot}
+![](images/tensorboard.png){width=700 height=545 .screenshot}
 
 ## Recording Data
 
@@ -30,28 +38,41 @@ history <- model %>% fit(
   batch_size = batch_size,
   epochs = epochs,
   verbose = 1,
-  callbacks = callback_tensorboard(log_dir = "logs/run_a"),
+  callbacks = callback_tensorboard("logs/run_a"),
   validation_split = 0.2
 )
 ```
 
 See the documentation on the `callback_tensorboard()` function for the various available options. The most important option is the `log_dir`, which determines which directory logs are written to for a given training run. 
 
+You should either use a distinct log directory for each training run or remove the log directory between runs.
+
 ## Viewing Data
 
-To view TensorBoard data for a given set of runs you use the `tensorboard()` function. If your training logs are located within the current working directory then you can call `tensorboard()` with no arguments:
+To view TensorBoard data for a given set of runs you use the `tensorboard()` function, pointing it to the previously specified `log_dir`:
 
 ```{r}
-tensorboard()
+tensorboard("logs/run_a")
 ```
 
-If you alternatively want to specify a specific directory as the root of all training logs then you can use the `log_dir` parameter, for example:
+It's often useful to run TensorBoard while you are training a model. To do this, simply launch tensorboard within the training directory right before you begin training:
 
 ```{r}
-tensorboard(log_dir = "logs")
-```
+# launch TensorBoard (data won't show up until after the first epoch)
+tensorboard("logs/run_a")
 
-Note that you don't need to change the `log_dir` for each training run (the default log directory if none is specified is "logs"). In the case of a `log_dir` used multiple times TensorBoard will simply visualize the metrics for the most recent training run.
+# fit the model with the TensorBoard callback
+history <- model %>% fit(
+  x_train, y_train,
+  batch_size = batch_size,
+  epochs = epochs,
+  verbose = 1,
+  callbacks = callback_tensorboard("logs/run_a"),
+  validation_split = 0.2
+)
+```    
+
+Keras writes TensorBoard data at the end of each epoch so you won't see any data in TensorBoard until 10-20 seconds after the end of the first epoch (TensorBoard automatically refreshes it's display every 30 seconds during training). 
 
 ## Comparing Runs
 
@@ -61,17 +82,21 @@ TensorBoard will automatically include all runs logged within the sub-directorie
 callback_tensorboard(log_dir = "logs/run_b")
 ```
 
-Then the TensorBoard visualization would look like this:
-
-![](tensorboard_compare.png){width=700 height=540 .screenshot}
-
-You can use the `unique_log_dir` function if you want to record every training run in it's own directory:
+Then called tensorboard as follows:
 
 ```{r}
-callback_tensorboard(log_dir = unique_log_dir())
+tensorboard("logs")
 ```
 
-Once again note that it's not required to record every training run in it's own directory. Using the default "logs" directory will work just fine, you'll just only be able to visualize the most recent run using TensorBoard.
+The TensorBoard visualization would look like this:
+
+![](images/tensorboard_compare.png){width=700 height=540 .screenshot}
+
+You can also pass multiple log directories. For example:
+
+```{r}
+tensorboard(c("logs/run_a", "logs/run_b"))
+```
 
 ## Customization
 
@@ -101,7 +126,7 @@ callback_tensorboard(log_dir = "logs", histogram_freq = 0,
 
 | Name  | Description |
 |-----------------|-------------------------------------------------------------------|
-| `log_dir`  | The path of the directory where to save the log files to be parsed by Tensorboard. |
+| `log_dir`  | Path of the directory to save the log files to be parsed by Tensorboard. |
 | `histogram_freq`  | Frequency (in epochs) at which to compute activation histograms for the layers of the model. If set to 0 (the default), histograms won't be computed.  |
 | `write_graph` | Whether to visualize the graph in Tensorboard. The log file can become quite large when write_graph is set to `TRUE`  |
 | `write_images`  | Whether to write model weights to visualize as image in Tensorboard.  |

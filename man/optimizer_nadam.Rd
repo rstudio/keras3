@@ -29,9 +29,7 @@ this value.}
 }
 \description{
 Much like Adam is essentially RMSprop with momentum, Nadam is Adam RMSprop
-with Nesterov momentum. See
-\href{http://cs229.stanford.edu/proj2015/054_report.pdf}{Incorporating
-Nesterov Momentum into Adam}.
+with Nesterov momentum. See \href{http://cs229.stanford.edu/proj2015/054_report.pdf}{Incorporating Nesterov Momentum intoAdam}.
 }
 \details{
 Default parameters follow those provided in the paper. It is
@@ -39,8 +37,7 @@ recommended to leave the parameters of this optimizer at their default
 values.
 }
 \seealso{
-\href{http://www.cs.toronto.edu/~fritz/absps/momentum.pdf}{On the
-importance of initialization and momentum in deep learning}.
+\href{http://www.cs.toronto.edu/~fritz/absps/momentum.pdf}{On the importance of initialization and momentum in deeplearning}.
 
 Other optimizers: \code{\link{optimizer_adadelta}},
   \code{\link{optimizer_adagrad}},

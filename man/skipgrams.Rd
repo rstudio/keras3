@@ -53,6 +53,8 @@ sampled
 }
 \seealso{
 Other text preprocessing: \code{\link{make_sampling_table}},
-  \code{\link{pad_sequences}}, \code{\link{text_one_hot}},
+  \code{\link{pad_sequences}},
+  \code{\link{text_hashing_trick}},
+  \code{\link{text_one_hot}},
   \code{\link{text_to_word_sequence}}
 }

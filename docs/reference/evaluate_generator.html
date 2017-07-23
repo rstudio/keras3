@@ -91,7 +91,10 @@
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
-      <a href="../articles/backend.html">Backend Functions</a>
+      <a href="../articles/backend.html">Keras Backend</a>
+    </li>
+    <li>
+      <a href="../articles/custom_layers.html">Custom Layers</a>
     </li>
   </ul>
 </li>
@@ -126,11 +129,10 @@
 
     
     <p>The generator should return the same kind of data as accepted by
-<code>test_on_batch()</code>.</p>
+<code><a href='train_on_batch.html'>test_on_batch()</a></code>.</p>
     
 
-    <pre class="usage"><span class='fu'>evaluate_generator</span>(<span class='no'>object</span>, <span class='no'>generator</span>, <span class='no'>steps</span>, <span class='kw'>max_q_size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>workers</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>pickle_safe</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>evaluate_generator</span>(<span class='no'>object</span>, <span class='no'>generator</span>, <span class='no'>steps</span>, <span class='kw'>max_queue_size</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -150,20 +152,8 @@ targets, sample_weights)</p></td>
 <code>generator</code> before stopping.</p></td>
     </tr>
     <tr>
-      <th>max_q_size</th>
+      <th>max_queue_size</th>
       <td><p>maximum size for the generator queue</p></td>
-    </tr>
-    <tr>
-      <th>workers</th>
-      <td><p>maximum number of processes to spin up when using process
-based threading</p></td>
-    </tr>
-    <tr>
-      <th>pickle_safe</th>
-      <td><p>if <code>TRUE</code>, use process based threading. Note that because
-this implementation relies on multiprocessing, you should not pass non
-picklable arguments to the generator as they can't be passed easily to
-children processes.</p></td>
     </tr>
     </table>
     
@@ -182,11 +172,11 @@ scalar outputs.</p>
   <code><a href='get_layer.html'>get_layer</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
   <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='pop_layer.html'>pop_layer</a></code>,
-  <code><a href='predict.tensorflow.keras.engine.training.Model.html'>predict.tensorflow.keras.engine.training.Model</a></code>,
+  <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
   <code><a href='predict_generator.html'>predict_generator</a></code>,
   <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
   <code><a href='predict_proba.html'>predict_proba</a></code>,
-  <code><a href='summary.tensorflow.keras.engine.training.Model.html'>summary.tensorflow.keras.engine.training.Model</a></code>,
+  <code><a href='summary.keras.engine.training.Model.html'>summary.keras.engine.training.Model</a></code>,
   <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
     
 

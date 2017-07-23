@@ -5,6 +5,14 @@ vignette: >
   %\VignetteIndexEntry{Guide to the Functional API} 
   %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
+type: docs
+repo: https://github.com/rstudio/keras
+menu:
+  main:
+    name: "Guide to the Functional API"
+    identifier: "keras-functional-api"
+    parent: "keras-using-keras"
+    weight: 30
 ---
 
 ```{r setup, include = FALSE}
@@ -183,8 +191,8 @@ We can train the model by passing it lists of input arrays and target arrays:
 
 ```{r, eval = FALSE}
 model %>% fit(
-  x = c(headline_data, additional_data),
-  y = c(labels, labels),
+  x = list(headline_data, additional_data),
+  y = list(labels, labels),
   epochs = 50,
   batch_size = 32
 )
@@ -254,7 +262,7 @@ model %>% compile(
   metrics = c('accuracy')
 )
 
-model %>% fit(c(data_a, data_b), labels, epochs = 10)
+model %>% fit(list(data_a, data_b), labels, epochs = 10)
 
 ```
 

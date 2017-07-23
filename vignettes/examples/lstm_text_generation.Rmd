@@ -1,9 +1,17 @@
 ---
-title: lstm_text_generation.R
+title: lstm_text_generation
+type: docs
+repo: https://github.com/rstudio/keras
+menu:
+  main:
+    parent: keras-examples
 ---
+
+<div class="source-ref">
+<span class="caption">Source: </span>`r sprintf("https://github.com/rstudio/keras/blob/master/vignettes/examples/%s.R", rmarkdown::metadata$title)`
+</div>
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(eval = FALSE)
-knitr::spin_child(rmarkdown::metadata$title)
+knitr::spin_child(paste0(rmarkdown::metadata$title, ".R"))
 ```
-

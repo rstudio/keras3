@@ -69,7 +69,10 @@
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
-      <a href="../articles/backend.html">Backend Functions</a>
+      <a href="../articles/backend.html">Keras Backend</a>
+    </li>
+    <li>
+      <a href="../articles/custom_layers.html">Custom Layers</a>
     </li>
   </ul>
 </li>
@@ -112,7 +115,7 @@
 <p>TensorBoard is a visualization tool included with TensorFlow that enables you to visualize dynamic graphs of your Keras training and test metrics, as well as activation histograms for the different layers in your model.</p>
 <p>For example, here’s a TensorBoard display for Keras accuracy and loss metrics:</p>
 <div class="figure">
-<img src="tensorboard.png" class="screenshot" width="700" height="545">
+<img src="images/tensorboard.png" class="screenshot" width="700" height="545">
 </div>
 </div>
 <div id="recording-data" class="section level2">
@@ -124,32 +127,45 @@
   <span class="dt">batch_size =</span> batch_size,
   <span class="dt">epochs =</span> epochs,
   <span class="dt">verbose =</span> <span class="dv">1</span>,
-  <span class="dt">callbacks =</span> <span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="st">"logs/run_a"</span>),
+  <span class="dt">callbacks =</span> <span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="st">"logs/run_a"</span>),
   <span class="dt">validation_split =</span> <span class="fl">0.2</span>
 )</code></pre></div>
 <p>See the documentation on the <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code> function for the various available options. The most important option is the <code>log_dir</code>, which determines which directory logs are written to for a given training run.</p>
+<p>You should either use a distinct log directory for each training run or remove the log directory between runs.</p>
 </div>
 <div id="viewing-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#viewing-data" class="anchor"></a>Viewing Data</h2>
-<p>To view TensorBoard data for a given set of runs you use the <code><a href="../reference/reexports.html">tensorboard()</a></code> function. If your training logs are located within the current working directory then you can call <code><a href="../reference/reexports.html">tensorboard()</a></code> with no arguments:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/reexports.html">tensorboard</a></span>()</code></pre></div>
-<p>If you alternatively want to specify a specific directory as the root of all training logs then you can use the <code>log_dir</code> parameter, for example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/reexports.html">tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="st">"logs"</span>)</code></pre></div>
-<p>Note that you don’t need to change the <code>log_dir</code> for each training run (the default log directory if none is specified is “logs”). In the case of a <code>log_dir</code> used multiple times TensorBoard will simply visualize the metrics for the most recent training run.</p>
+<p>To view TensorBoard data for a given set of runs you use the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard()</a></code> function, pointing it to the previously specified <code>log_dir</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(<span class="st">"logs/run_a"</span>)</code></pre></div>
+<p>It’s often useful to run TensorBoard while you are training a model. To do this, simply launch tensorboard within the training directory right before you begin training:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># launch TensorBoard (data won't show up until after the first epoch)</span>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(<span class="st">"logs/run_a"</span>)
+
+<span class="co"># fit the model with the TensorBoard callback</span>
+history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
+  x_train, y_train,
+  <span class="dt">batch_size =</span> batch_size,
+  <span class="dt">epochs =</span> epochs,
+  <span class="dt">verbose =</span> <span class="dv">1</span>,
+  <span class="dt">callbacks =</span> <span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="st">"logs/run_a"</span>),
+  <span class="dt">validation_split =</span> <span class="fl">0.2</span>
+)</code></pre></div>
+<p>Keras writes TensorBoard data at the end of each epoch so you won’t see any data in TensorBoard until 10-20 seconds after the end of the first epoch (TensorBoard automatically refreshes it’s display every 30 seconds during training).</p>
 </div>
 <div id="comparing-runs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#comparing-runs" class="anchor"></a>Comparing Runs</h2>
 <p>TensorBoard will automatically include all runs logged within the sub-directories of the specified <code>log_dir</code>, for example, if you logged another run using:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="st">"logs/run_b"</span>)</code></pre></div>
-<p>Then the TensorBoard visualization would look like this:</p>
+<p>Then called tensorboard as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(<span class="st">"logs"</span>)</code></pre></div>
+<p>The TensorBoard visualization would look like this:</p>
 <div class="figure">
-<img src="tensorboard_compare.png" class="screenshot" width="700" height="540">
+<img src="images/tensorboard_compare.png" class="screenshot" width="700" height="540">
 </div>
-<p>You can use the <code>unique_log_dir</code> function if you want to record every training run in it’s own directory:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="dt">log_dir =</span> <span class="kw"><a href="../reference/reexports.html">unique_log_dir</a></span>())</code></pre></div>
-<p>Once again note that it’s not required to record every training run in it’s own directory. Using the default “logs” directory will work just fine, you’ll just only be able to visualize the most recent run using TensorBoard.</p>
+<p>You can also pass multiple log directories. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(<span class="kw">c</span>(<span class="st">"logs/run_a"</span>, <span class="st">"logs/run_b"</span>))</code></pre></div>
 </div>
 <div id="customization" class="section level2">
 <h2 class="hasAnchor">
@@ -184,7 +200,7 @@
 <tbody>
 <tr class="odd">
 <td><code>log_dir</code></td>
-<td>The path of the directory where to save the log files to be parsed by Tensorboard.</td>
+<td>Path of the directory to save the log files to be parsed by Tensorboard.</td>
 </tr>
 <tr class="even">
 <td><code>histogram_freq</code></td>

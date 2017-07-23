@@ -4,8 +4,7 @@
 \alias{evaluate_generator}
 \title{Evaluates the model on a data generator.}
 \usage{
-evaluate_generator(object, generator, steps, max_q_size = 10, workers = 1,
-  pickle_safe = FALSE)
+evaluate_generator(object, generator, steps, max_queue_size = 10)
 }
 \arguments{
 \item{object}{Model object to evaluate}
@@ -16,15 +15,7 @@ targets, sample_weights)}
 \item{steps}{Total number of steps (batches of samples) to yield from
 \code{generator} before stopping.}
 
-\item{max_q_size}{maximum size for the generator queue}
-
-\item{workers}{maximum number of processes to spin up when using process
-based threading}
-
-\item{pickle_safe}{if \code{TRUE}, use process based threading. Note that because
-this implementation relies on multiprocessing, you should not pass non
-picklable arguments to the generator as they can't be passed easily to
-children processes.}
+\item{max_queue_size}{maximum size for the generator queue}
 }
 \value{
 Scalar test loss (if the model has a single output and no metrics) or
@@ -43,10 +34,10 @@ Other model functions: \code{\link{compile}},
   \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}}, \code{\link{pop_layer}},
-  \code{\link{predict.tensorflow.keras.engine.training.Model}},
+  \code{\link{predict.keras.engine.training.Model}},
   \code{\link{predict_generator}},
   \code{\link{predict_on_batch}},
   \code{\link{predict_proba}},
-  \code{\link{summary.tensorflow.keras.engine.training.Model}},
+  \code{\link{summary.keras.engine.training.Model}},
   \code{\link{train_on_batch}}
 }
