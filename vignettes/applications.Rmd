@@ -168,5 +168,5 @@ model <- application_inception_V3(input_tensor = input_tensor,
 
 ### Additional examples
 
-The VGG16 model is the basis for the [Deep dream](examples/deep_dream.html) Keras example script.
+The VGG16 model is the basis for the [Deep dream](https://rstudio.github.io/keras/articles/examples/deep_dream.html) Keras example script.
 

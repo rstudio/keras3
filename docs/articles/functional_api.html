@@ -160,7 +160,7 @@ processed_sequences &lt;-<span class="st"> </span>input_sequences <span class="o
 <p>Let’s consider the following model. We seek to predict how many retweets and likes a news headline will receive on Twitter. The main input to the model will be the headline itself, as a sequence of words, but to spice things up, our model will also have an auxiliary input, receiving extra data such as the time of day when the headline was posted, etc.</p>
 <p>The model will also be supervised via two loss functions. Using the main loss function earlier in a model is a good regularization mechanism for deep models.</p>
 <p>Here’s what our model looks like:</p>
-<p><img src="https://s3.amazonaws.com/keras.io/img/multi-input-multi-output-graph.png" alt="multi-input-multi-output-graph" style="width: 400px;"></p>
+<p><img src="images/multi-input-multi-output-graph.png" alt="multi-input-multi-output-graph" style="width: 400px;"></p>
 <p>Let’s implement it with the functional API.</p>
 <p>The main input will receive the headline, as a sequence of integers (each integer encodes a word). The integers will be between 1 and 10,000 (a vocabulary of 10,000 words) and the sequences will be 100 words long.</p>
 <p>We’ll include an</p>
