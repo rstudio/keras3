@@ -112,7 +112,245 @@
 <div class="source-ref">
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/neural_style_transfer.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/neural_style_transfer.R</a></p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)</code></pre></div>
+<p>Neural style transfer with Keras.</p>
+<p>It is preferable to run this script on a GPU, for speed.</p>
+<p>Example result: <a href="https://twitter.com/fchollet/status/686631033085677568" class="uri">https://twitter.com/fchollet/status/686631033085677568</a></p>
+<p>Style transfer consists in generating an image with the same “content” as a base image, but with the “style” of a different picture (typically artistic).</p>
+<p>This is achieved through the optimization of a loss function that has 3 components: “style loss”, “content loss”, and “total variation loss”:</p>
+<ul>
+<li><p>The total variation loss imposes local spatial continuity between the pixels of the combination image, giving it visual coherence.</p></li>
+<li><p>The style loss is where the deep learning keeps in –that one is defined using a deep convolutional neural network. Precisely, it consists in a sum of L2 distances between the Gram matrices of the representations of the base image and the style reference image, extracted from different layers of a convnet (trained on ImageNet). The general idea is to capture color/texture information at different spatial scales (fairly large scales –defined by the depth of the layer considered).</p></li>
+<li><p>The content loss is a L2 distance between the features of the base image (extracted from a deep layer) and the features of the combination image, keeping the generated image close enough to the original one.</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+<span class="kw">library</span>(purrr)
+<span class="kw">library</span>(R6)
+K &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/backend.html">backend</a></span>()
+
+<span class="co"># Parameters --------------------------------------------------------------</span>
+
+base_image_path &lt;-<span class="st"> "neural-style-base-img.png"</span>
+style_reference_image_path &lt;-<span class="st"> "neural-style-style.jpg"</span>
+result_prefix =<span class="st"> "out"</span>
+iterations &lt;-<span class="st"> </span><span class="dv">10</span>
+
+<span class="co"># these are the weights of the different loss components</span>
+total_variation_weight &lt;-<span class="st"> </span><span class="dv">1</span>
+style_weight &lt;-<span class="st"> </span><span class="dv">1</span>
+content_weight &lt;-<span class="st"> </span><span class="fl">0.025</span>
+
+<span class="co"># dimensions of the generated picture.</span>
+img &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/image_load.html">image_load</a></span>(base_image_path)
+width &lt;-<span class="st"> </span>img<span class="op">$</span>size[[<span class="dv">1</span>]]
+height &lt;-<span class="st"> </span>img<span class="op">$</span>size[[<span class="dv">2</span>]]
+img_nrows &lt;-<span class="st"> </span><span class="dv">400</span>
+img_ncols &lt;-<span class="st"> </span><span class="kw">as.integer</span>(width <span class="op">*</span><span class="st"> </span>img_nrows <span class="op">/</span><span class="st"> </span>height)
+
+
+<span class="co"># Functions ---------------------------------------------------------------</span>
+
+<span class="co"># util function to open, resize and format pictures into appropriate tensors</span>
+preprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(path){
+  img &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/image_load.html">image_load</a></span>(path, <span class="dt">target_size =</span> <span class="kw">c</span>(img_nrows, img_ncols)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../../reference/image_to_array.html">image_to_array</a></span>()
+  <span class="kw">dim</span>(img) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(img))
+  <span class="kw"><a href="../../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>(img)
+}
+
+<span class="co"># util function to convert a tensor into a valid image</span>
+deprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  x &lt;-<span class="st"> </span>x[<span class="dv">1</span>,,,]
+  <span class="co"># Remove zero-center by mean pixel</span>
+  x[,,<span class="dv">1</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="fl">103.939</span>
+  x[,,<span class="dv">2</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="fl">116.779</span>
+  x[,,<span class="dv">3</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">3</span>] <span class="op">+</span><span class="st"> </span><span class="fl">123.68</span>
+  <span class="co"># 'BGR'-&gt;'RGB'</span>
+  <span class="co">#x &lt;- x[,,c(3,2,1)]</span>
+  <span class="co"># clip to interval 0, 255</span>
+  x[x <span class="op">&gt;</span><span class="st"> </span><span class="dv">255</span>] &lt;-<span class="st"> </span><span class="dv">255</span>
+  x[x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="dv">0</span>
+  x[] &lt;-<span class="st"> </span><span class="kw">as.integer</span>(x)<span class="op">/</span><span class="dv">255</span>
+  x
+}
+
+<span class="co"># Defining the model ------------------------------------------------------</span>
+
+<span class="co"># get tensor representations of our images</span>
+base_image &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">variable</span>(<span class="kw">preprocess_image</span>(base_image_path))
+style_reference_image &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">variable</span>(<span class="kw">preprocess_image</span>(style_reference_image_path))
+
+<span class="co"># this will contain our generated image</span>
+combination_image &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">placeholder</span>(<span class="kw">c</span>(1L, img_nrows, img_ncols, 3L))
+
+<span class="co"># combine the 3 images into a single Keras tensor</span>
+input_tensor &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">concatenate</span>(<span class="kw">list</span>(base_image, style_reference_image, 
+                                   combination_image), <span class="dt">axis =</span> 0L)
+
+<span class="co"># build the VGG16 network with our 3 images as input</span>
+<span class="co"># the model will be loaded with pre-trained ImageNet weights</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/application_vgg.html">application_vgg16</a></span>(<span class="dt">input_tensor =</span> input_tensor, <span class="dt">weights =</span> <span class="st">"imagenet"</span>, 
+                           <span class="dt">include_top =</span> <span class="ot">FALSE</span>)
+
+<span class="kw">print</span>(<span class="st">"Model loaded."</span>)
+
+nms &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_chr</a></span>(model<span class="op">$</span>layers, <span class="op">~</span>.x<span class="op">$</span>name)
+output_dict &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(model<span class="op">$</span>layers, <span class="op">~</span>.x<span class="op">$</span>output) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/set_names">set_names</a></span>(nms)
+
+<span class="co"># compute the neural style loss</span>
+<span class="co"># first we need to define 4 util functions</span>
+
+<span class="co"># the gram matrix of an image tensor (feature-wise outer product)</span>
+
+gram_matrix &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  
+  features &lt;-<span class="st"> </span>x <span class="op">%&gt;%</span>
+<span class="st">    </span>K<span class="op">$</span><span class="kw">permute_dimensions</span>(<span class="dt">pattern =</span> <span class="kw">c</span>(2L, 0L, 1L)) <span class="op">%&gt;%</span>
+<span class="st">    </span>K<span class="op">$</span><span class="kw">batch_flatten</span>()
+  
+  K<span class="op">$</span><span class="kw">dot</span>(features, K<span class="op">$</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(features))
+}
+
+<span class="co"># the "style loss" is designed to maintain</span>
+<span class="co"># the style of the reference image in the generated image.</span>
+<span class="co"># It is based on the gram matrices (which capture style) of</span>
+<span class="co"># feature maps from the style reference image</span>
+<span class="co"># and from the generated image</span>
+
+style_loss &lt;-<span class="st"> </span><span class="cf">function</span>(style, combination){
+  S &lt;-<span class="st"> </span><span class="kw">gram_matrix</span>(style)
+  C &lt;-<span class="st"> </span><span class="kw">gram_matrix</span>(combination)
+  
+  channels &lt;-<span class="st"> </span><span class="dv">3</span>
+  size &lt;-<span class="st"> </span>img_nrows<span class="op">*</span>img_ncols
+  
+  K<span class="op">$</span><span class="kw">sum</span>(K<span class="op">$</span><span class="kw">square</span>(S <span class="op">-</span><span class="st"> </span>C)) <span class="op">/</span><span class="st"> </span>(<span class="dv">4</span> <span class="op">*</span><span class="st"> </span>channels<span class="op">^</span><span class="dv">2</span>  <span class="op">*</span><span class="st"> </span>size<span class="op">^</span><span class="dv">2</span>)
+}
+
+<span class="co"># an auxiliary loss function</span>
+<span class="co"># designed to maintain the "content" of the</span>
+<span class="co"># base image in the generated image</span>
+
+content_loss &lt;-<span class="st"> </span><span class="cf">function</span>(base, combination){
+  K<span class="op">$</span><span class="kw">sum</span>(K<span class="op">$</span><span class="kw">square</span>(combination <span class="op">-</span><span class="st"> </span>base))
+}
+
+<span class="co"># the 3rd loss function, total variation loss,</span>
+<span class="co"># designed to keep the generated image locally coherent</span>
+
+total_variation_loss &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  y_ij  &lt;-<span class="st"> </span>x[,<span class="dv">0</span><span class="op">:</span>(img_nrows <span class="op">-</span><span class="st"> </span>2L), <span class="dv">0</span><span class="op">:</span>(img_ncols <span class="op">-</span><span class="st"> </span>2L),]
+  y_i1j &lt;-<span class="st"> </span>x[,<span class="dv">1</span><span class="op">:</span>(img_nrows <span class="op">-</span><span class="st"> </span>1L), <span class="dv">0</span><span class="op">:</span>(img_ncols <span class="op">-</span><span class="st"> </span>2L),]
+  y_ij1 &lt;-<span class="st"> </span>x[,<span class="dv">0</span><span class="op">:</span>(img_nrows <span class="op">-</span><span class="st"> </span>2L), <span class="dv">1</span><span class="op">:</span>(img_ncols <span class="op">-</span><span class="st"> </span>1L),]
+  
+  a &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">square</span>(y_ij <span class="op">-</span><span class="st"> </span>y_i1j)
+  b &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">square</span>(y_ij <span class="op">-</span><span class="st"> </span>y_ij1)
+  K<span class="op">$</span><span class="kw">sum</span>(K<span class="op">$</span><span class="kw">pow</span>(a <span class="op">+</span><span class="st"> </span>b, <span class="fl">1.25</span>))
+}
+
+<span class="co"># combine these loss functions into a single scalar</span>
+loss &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">variable</span>(<span class="fl">0.0</span>)
+layer_features &lt;-<span class="st"> </span>output_dict<span class="op">$</span>block4_conv2
+base_image_features &lt;-<span class="st"> </span>layer_features[<span class="dv">0</span>,,,]
+combination_features &lt;-<span class="st"> </span>layer_features[<span class="dv">2</span>,,,]
+
+loss &lt;-<span class="st"> </span>loss <span class="op">+</span><span class="st"> </span>content_weight<span class="op">*</span><span class="kw">content_loss</span>(base_image_features, 
+                                           combination_features)
+
+feature_layers =<span class="st"> </span><span class="kw">c</span>(<span class="st">'block1_conv1'</span>, <span class="st">'block2_conv1'</span>,
+                  <span class="st">'block3_conv1'</span>, <span class="st">'block4_conv1'</span>,
+                  <span class="st">'block5_conv1'</span>)
+
+<span class="cf">for</span>(layer_name <span class="cf">in</span> feature_layers){
+  layer_features &lt;-<span class="st"> </span>output_dict[[layer_name]]
+  style_reference_features &lt;-<span class="st"> </span>layer_features[<span class="dv">1</span>,,,]
+  combination_features &lt;-<span class="st"> </span>layer_features[<span class="dv">2</span>,,,]
+  sl &lt;-<span class="st"> </span><span class="kw">style_loss</span>(style_reference_features, combination_features)
+  loss &lt;-<span class="st"> </span>loss <span class="op">+</span><span class="st"> </span>((style_weight <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(feature_layers)) <span class="op">*</span><span class="st"> </span>sl)
+}
+
+loss &lt;-<span class="st"> </span>loss <span class="op">+</span><span class="st"> </span>(total_variation_weight <span class="op">*</span><span class="st"> </span><span class="kw">total_variation_loss</span>(combination_image))
+
+<span class="co"># get the gradients of the generated image wrt the loss</span>
+grads &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">gradients</span>(loss, combination_image)[[<span class="dv">1</span>]]
+
+f_outputs &lt;-<span class="st">  </span>K<span class="op">$</span><span class="st">`</span><span class="dt">function</span><span class="st">`</span>(<span class="kw">list</span>(combination_image), <span class="kw">list</span>(loss, grads))
+
+eval_loss_and_grads &lt;-<span class="st"> </span><span class="cf">function</span>(image){
+  <span class="kw">dim</span>(image) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, img_nrows, img_ncols, <span class="dv">3</span>)
+  outs &lt;-<span class="st"> </span><span class="kw">f_outputs</span>(<span class="kw">list</span>(image))
+  <span class="kw">list</span>(
+    <span class="dt">loss_value =</span> outs[[<span class="dv">1</span>]],
+    <span class="dt">grad_values =</span> <span class="kw">as.numeric</span>(outs[[<span class="dv">2</span>]])
+  )
+}
+
+<span class="co"># Loss and gradients evaluator.</span>
+<span class="co"># </span>
+<span class="co"># This Evaluator class makes it possible</span>
+<span class="co"># to compute loss and gradients in one pass</span>
+<span class="co"># while retrieving them via two separate functions,</span>
+<span class="co"># "loss" and "grads". This is done because scipy.optimize</span>
+<span class="co"># requires separate functions for loss and gradients,</span>
+<span class="co"># but computing them separately would be inefficient.</span>
+Evaluator &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/R6/topics/R6Class">R6Class</a></span>(
+  <span class="st">"Evaluator"</span>,
+  <span class="dt">public =</span> <span class="kw">list</span>(
+    
+    <span class="dt">loss_value =</span> <span class="ot">NULL</span>,
+    <span class="dt">grad_values =</span> <span class="ot">NULL</span>,
+    
+    <span class="dt">initialize =</span> <span class="cf">function</span>() {
+      self<span class="op">$</span>loss_value &lt;-<span class="st"> </span><span class="ot">NULL</span>
+      self<span class="op">$</span>grad_values &lt;-<span class="st"> </span><span class="ot">NULL</span>
+    },
+    
+    <span class="dt">loss =</span> <span class="cf">function</span>(x){
+      loss_and_grad &lt;-<span class="st"> </span><span class="kw">eval_loss_and_grads</span>(x)
+      self<span class="op">$</span>loss_value &lt;-<span class="st"> </span>loss_and_grad<span class="op">$</span>loss_value
+      self<span class="op">$</span>grad_values &lt;-<span class="st"> </span>loss_and_grad<span class="op">$</span>grad_values
+      self<span class="op">$</span>loss_value
+    },
+    
+    <span class="dt">grads =</span> <span class="cf">function</span>(x){
+      grad_values &lt;-<span class="st"> </span>self<span class="op">$</span>grad_values
+      self<span class="op">$</span>loss_value &lt;-<span class="st"> </span><span class="ot">NULL</span>
+      self<span class="op">$</span>grad_values &lt;-<span class="st"> </span><span class="ot">NULL</span>
+      grad_values
+    }
+    
+  )
+)
+
+evaluator &lt;-<span class="st"> </span>Evaluator<span class="op">$</span><span class="kw">new</span>()
+
+<span class="co"># run scipy-based optimization (L-BFGS) over the pixels of the generated image</span>
+<span class="co"># so as to minimize the neural style loss</span>
+dms &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, img_nrows, img_ncols, <span class="dv">3</span>)
+x &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">data =</span> <span class="kw">runif</span>(<span class="kw">prod</span>(dms), <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">255</span>) <span class="op">-</span><span class="st"> </span><span class="dv">128</span>, <span class="dt">dim =</span> dms)
+
+<span class="co"># Run optimization (L-BFGS) over the pixels of the generated image</span>
+<span class="co"># so as to minimize the loss</span>
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){
+
+  <span class="co"># Run L-BFGS</span>
+  opt &lt;-<span class="st"> </span><span class="kw">optim</span>(
+    <span class="kw">as.numeric</span>(x), <span class="dt">fn =</span> evaluator<span class="op">$</span>loss, <span class="dt">gr =</span> evaluator<span class="op">$</span>grads, 
+    <span class="dt">method =</span> <span class="st">"L-BFGS-B"</span>,
+    <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">maxit =</span> <span class="dv">15</span>)
+  )
+  
+  <span class="co"># Print loss value</span>
+  <span class="kw">print</span>(opt<span class="op">$</span>value)
+  
+  <span class="co"># decode the image</span>
+  image &lt;-<span class="st"> </span>x &lt;-<span class="st"> </span>opt<span class="op">$</span>par
+  <span class="kw">dim</span>(image) &lt;-<span class="st"> </span>dms
+  
+  <span class="co"># plot</span>
+  im &lt;-<span class="st"> </span><span class="kw">deprocess_image</span>(image)
+  <span class="kw">plot</span>(<span class="kw">as.raster</span>(im))
+  
+}</code></pre></div>
 </div>
   </div>
 
