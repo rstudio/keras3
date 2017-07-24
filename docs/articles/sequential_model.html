@@ -430,7 +430,7 @@ score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span cl
 <a href="#stacked-lstm-for-sequence-classification" class="anchor"></a>Stacked LSTM for sequence classification</h3>
 <p>In this model, we stack 3 LSTM layers on top of each other, making the model capable of learning higher-level temporal representations.</p>
 <p>The first two LSTMs return their full output sequences, but the last one only returns the last step in its output sequence, thus dropping the temporal dimension (i.e. converting the input sequence into a single vector).</p>
-<p><img src="https://keras.io/img/regular_stacked_lstm.png" alt="stacked LSTM" style="width: 300px;"></p>
+<p><img src="images/regular_stacked_lstm.png" alt="stacked LSTM" style="width: 300px;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
 <span class="co"># constants</span>

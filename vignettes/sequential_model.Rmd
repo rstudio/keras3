@@ -394,7 +394,7 @@ The first two LSTMs return their full output sequences, but the last one only re
 the last step in its output sequence, thus dropping the temporal dimension
 (i.e. converting the input sequence into a single vector).
 
-<img src="https://keras.io/img/regular_stacked_lstm.png" alt="stacked LSTM" style="width: 300px;"/>
+<img src="images/regular_stacked_lstm.png" alt="stacked LSTM" style="width: 300px;"/>
 
 
 ```{r}
