@@ -37,7 +37,6 @@ K <- backend()
 
 base_image_path <- "neural-style-base-img.png"
 style_reference_image_path <- "neural-style-style.jpg"
-result_prefix = "out"
 iterations <- 10
 
 # these are the weights of the different loss components
@@ -70,8 +69,6 @@ deprocess_image <- function(x){
   x[,,1] <- x[,,1] + 103.939
   x[,,2] <- x[,,2] + 116.779
   x[,,3] <- x[,,3] + 123.68
-  # 'BGR'->'RGB'
-  #x <- x[,,c(3,2,1)]
   # clip to interval 0, 255
   x[x > 255] <- 255
   x[x < 0] <- 0
@@ -236,7 +233,7 @@ x <- array(data = runif(prod(dms), min = 0, max = 255) - 128, dim = dms)
 
 # Run optimization (L-BFGS) over the pixels of the generated image
 # so as to minimize the loss
-for(i in 1:10){
+for(i in 1:iterations){
 
   # Run L-BFGS
   opt <- optim(
