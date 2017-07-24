@@ -2,8 +2,6 @@ context("custom-layers")
 
 source("utils.R")
 
-K <- backend()
-
 # Custom layer class
 CustomLayer <- R6::R6Class("KerasLayer",
                                   
@@ -29,6 +27,7 @@ CustomLayer <- R6::R6Class("KerasLayer",
     },
     
     call = function(x, mask = NULL) {
+      K <- backend()
       K$dot(x, self$kernel)
     },
     
