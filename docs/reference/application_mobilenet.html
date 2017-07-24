@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Instantiates the MobileNet architecture. — application_mobilenet • keras</title>
+<title>MobileNet model architecture. — application_mobilenet • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -124,11 +124,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Instantiates the MobileNet architecture.</h1>
+    <h1>MobileNet model architecture.</h1>
     </div>
 
     
-    <p>Instantiates the MobileNet architecture.</p>
+    <p>MobileNet model architecture.</p>
     
 
     <pre class="usage"><span class='fu'>application_mobilenet</span>(<span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>depth_multiplier</span> <span class='kw'>=</span> <span class='fl'>1</span>,
@@ -136,6 +136,8 @@
   <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
 
 <span class='fu'>mobilenet_preprocess_input</span>(<span class='no'>x</span>)
+
+<span class='fu'>mobilenet_decode_predictions</span>(<span class='no'>preds</span>, <span class='kw'>top</span> <span class='kw'>=</span> <span class='fl'>5</span>)
 
 <span class='fu'>mobilenet_load_model_hdf5</span>(<span class='no'>filepath</span>)</pre>
     
@@ -205,6 +207,14 @@ specified.</p></td>
       <td><p>input tensor, 4D</p></td>
     </tr>
     <tr>
+      <th>preds</th>
+      <td><p>Tensor encoding a batch of predictions.</p></td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td><p>integer, how many top-guesses to return.</p></td>
+    </tr>
+    <tr>
       <th>filepath</th>
       <td><p>File path</p></td>
     </tr>
@@ -212,13 +222,19 @@ specified.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A Keras model instance</p>
+    <p><code>application_mobilenet()</code> and <code>mobilenet_load_model_hdf5()</code> return a
+Keras model instance. <code>mobilenet_preprocess_input()</code> returns image input
+suitable for feeding into a mobilenet model. <code>mobilenet_decode_predictions()</code>
+returns a list of data frames with variables <code>class_name</code>, <code>class_description</code>,
+and <code>score</code> (one data frame per sample in batch input).</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The <code>mobilenet_preprocess_input()</code> function should be used for image
 preprocessing. To load a saved instance of a MobileNet model use
-the <code>mobilenet_load_model_hdf5()</code> function.</p>
+the <code>mobilenet_load_model_hdf5()</code> function. To prepare image input
+for MobileNet use <code>mobilenet_preprocess_input()</code>. To decode
+predictions use <code>mobilenet_decode_predictions()</code>.</p>
 <p>MobileNet is currently only supported with the TensorFlow backend.</p>
     
     <h2 class="hasAnchor" id="reference"><a class="anchor" href="#reference"></a>Reference</h2>

@@ -162,6 +162,27 @@
   <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>library</span>(<span class='no'>keras</span>)
+
+<span class='co'># input layer</span>
+<span class='no'>inputs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='layer_input.html'>layer_input</a></span>(<span class='kw'>shape</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>784</span>))
+
+<span class='co'># outputs compose input + dense layers</span>
+<span class='no'>predictions</span> <span class='kw'>&lt;-</span> <span class='no'>inputs</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='layer_dense.html'>layer_dense</a></span>(<span class='kw'>units</span> <span class='kw'>=</span> <span class='fl'>64</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='st'>'relu'</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='layer_dense.html'>layer_dense</a></span>(<span class='kw'>units</span> <span class='kw'>=</span> <span class='fl'>64</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='st'>'relu'</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='layer_dense.html'>layer_dense</a></span>(<span class='kw'>units</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='st'>'softmax'</span>)
+
+<span class='co'># create and compile model</span>
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>keras_model</span>(<span class='kw'>inputs</span> <span class='kw'>=</span> <span class='no'>inputs</span>, <span class='kw'>outputs</span> <span class='kw'>=</span> <span class='no'>predictions</span>)
+<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='compile.html'>compile</a></span>(
+  <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='st'>'rmsprop'</span>,
+  <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>'categorical_crossentropy'</span>,
+  <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'accuracy'</span>)
+)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -169,7 +190,9 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

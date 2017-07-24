@@ -198,6 +198,20 @@ specified.</p></td>
     <p>- <a href='https://arxiv.org/abs/1409.1556'>Very Deep Convolutional Networks for Large-Scale ImageRecognition</a></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>library</span>(<span class='no'>keras</span>)
+
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>application_vgg16</span>(<span class='kw'>weights</span> <span class='kw'>=</span> <span class='st'>'imagenet'</span>, <span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='no'>img_path</span> <span class='kw'>&lt;-</span> <span class='st'>"elephant.jpg"</span>
+<span class='no'>img</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='image_load.html'>image_load</a></span>(<span class='no'>img_path</span>, <span class='kw'>target_size</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>224</span>,<span class='fl'>224</span>))
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='image_to_array.html'>image_to_array</a></span>(<span class='no'>img</span>)
+<span class='fu'>dim</span>(<span class='no'>x</span>) <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fu'>dim</span>(<span class='no'>x</span>))
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='imagenet_preprocess_input.html'>imagenet_preprocess_input</a></span>(<span class='no'>x</span>)
+
+<span class='no'>features</span> <span class='kw'>&lt;-</span> <span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'>predict</span>(<span class='no'>x</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -209,7 +223,9 @@ specified.</p></td>
       <li><a href="#details">Details</a></li>
 
       <li><a href="#reference">Reference</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
