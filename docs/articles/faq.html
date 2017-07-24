@@ -408,6 +408,34 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 <p>Additional information on installing the GPU version of CNTK can be found here: <a href="https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python" class="uri">https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python</a></p>
 </div>
 </div>
+<div id="how-can-i-obtain-reproducible-results-using-keras-during-development" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-obtain-reproducible-results-using-keras-during-development" class="anchor"></a>How can I obtain reproducible results using Keras during development?</h2>
+<p>During development of a model, sometimes it is useful to be able to obtain reproducible results from run to run in order to determine if a change in performance is due to an actual model or data modification, or merely a result of a new random sample.</p>
+<p>The below snippet of code provides an example of how to obtain reproducible results when using the TensorFlow backend. To do this we set the R session’s random seed, then manually construct a TensorFlow session (via the <strong>tensorflow</strong> package) and set it’s random seed, and then finally arrange for Keras to use this session within its backend.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+<span class="kw">library</span>(tensorflow)
+
+<span class="co"># Set R random seed</span>
+<span class="kw">set.seed</span>(42L)
+
+<span class="co"># TensorFlow session configuration that uses only a single thread. Multiple threads are a </span>
+<span class="co"># potential source of non-reproducible results, see: https://stackoverflow.com/questions/42022950/which-seeds-have-to-be-set-where-to-realize-100-reproducibility-of-training-res</span>
+session_conf &lt;-<span class="st"> </span>tf<span class="op">$</span><span class="kw">ConfigProto</span>(<span class="dt">intra_op_parallelism_threads =</span> 1L, 
+                               <span class="dt">inter_op_parallelism_threads =</span> 1L)
+
+<span class="co"># Set TF random seed (see: https://www.tensorflow.org/api_docs/python/tf/set_random_seed)</span>
+tf<span class="op">$</span><span class="kw">set_random_seed</span>(1042L)
+
+<span class="co"># Create the session using the custom configuration</span>
+sess &lt;-<span class="st"> </span>tf<span class="op">$</span><span class="kw">Session</span>(<span class="dt">graph =</span> tf<span class="op">$</span><span class="kw">get_default_graph</span>(), <span class="dt">config =</span> session_conf)
+
+<span class="co"># Instruct Keras to use this session</span>
+K &lt;-<span class="st"> </span><span class="kw"><a href="../reference/backend.html">backend</a></span>()
+K<span class="op">$</span><span class="kw">set_session</span>(sess)
+
+<span class="co"># Rest of code follows ...</span></code></pre></div>
+</div>
 <div id="where-is-the-keras-configuration-filed-stored" class="section level2">
 <h2 class="hasAnchor">
 <a href="#where-is-the-keras-configuration-filed-stored" class="anchor"></a>Where is the Keras configuration filed stored?</h2>
@@ -455,6 +483,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
       <li><a href="#how-can-i-use-pre-trained-models-in-keras">How can I use pre-trained models in Keras?</a></li>
       <li><a href="#how-can-i-use-other-keras-backends">How can I use other Keras backends?</a></li>
       <li><a href="#how-can-i-run-keras-on-a-gpu">How can I run Keras on a GPU?</a></li>
+      <li><a href="#how-can-i-obtain-reproducible-results-using-keras-during-development">How can I obtain reproducible results using Keras during development?</a></li>
       <li><a href="#where-is-the-keras-configuration-filed-stored">Where is the Keras configuration filed stored?</a></li>
       </ul>
 </div>

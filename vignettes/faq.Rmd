@@ -389,6 +389,37 @@ If you have the GPU version of CNTK installed then your Keras code will automati
 Additional information on installing the GPU version of CNTK can be found here: https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python
 
 
+## How can I obtain reproducible results using Keras during development?
+
+During development of a model, sometimes it is useful to be able to obtain reproducible results from run to run in order to determine if a change in performance is due to an actual model or data modification, or merely a result of a new random sample.  
+
+The below snippet of code provides an example of how to obtain reproducible results when using the TensorFlow backend. To do this we set the R session's random seed, then manually construct a TensorFlow session (via the **tensorflow** package) and set it's random seed, and then finally arrange for Keras to use this session within its backend.
+
+```{r}
+library(keras)
+library(tensorflow)
+
+# Set R random seed
+set.seed(42L)
+
+# TensorFlow session configuration that uses only a single thread. Multiple threads are a 
+# potential source of non-reproducible results, see: https://stackoverflow.com/questions/42022950/which-seeds-have-to-be-set-where-to-realize-100-reproducibility-of-training-res
+session_conf <- tf$ConfigProto(intra_op_parallelism_threads = 1L, 
+                               inter_op_parallelism_threads = 1L)
+
+# Set TF random seed (see: https://www.tensorflow.org/api_docs/python/tf/set_random_seed)
+tf$set_random_seed(1042L)
+
+# Create the session using the custom configuration
+sess <- tf$Session(graph = tf$get_default_graph(), config = session_conf)
+
+# Instruct Keras to use this session
+K <- backend()
+K$set_session(sess)
+
+# Rest of code follows ...
+```
+
 ## Where is the Keras configuration filed stored?
 
 The default directory where all Keras data is stored is:
