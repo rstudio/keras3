@@ -5,16 +5,12 @@ skip_if_no_keras <- function(required_version = NULL) {
 }
 
 have_keras <- function(required_version = NULL) {
-  if (reticulate::py_available()) {
-    implementation_module <- keras:::resolve_implementation_module()
-    if (reticulate::py_module_available(implementation_module)) {
-      if (!is.null(required_version))
-        keras:::keras_version() >= required_version
-      else
-        TRUE
-    } else {
-      FALSE
-    }
+  implementation_module <- keras:::resolve_implementation_module()
+  if (reticulate::py_module_available(implementation_module)) {
+    if (!is.null(required_version))
+      keras:::keras_version() >= required_version
+    else
+      TRUE
   } else {
     FALSE
   }
