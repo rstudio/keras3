@@ -287,7 +287,7 @@ layer_conv_3d <- function(object, filters, kernel_size, strides = c(1L, 1L, 1L),
 #'   
 #' @section References: 
 #'   - [A guide to convolution arithmetic for deep learning](https://arxiv.org/abs/1603.07285v1) 
-#'   - [Deconvolutional Networks](http://www.matthewzeiler.com/pubs/cvpr2010/cvpr2010.pdf)
+#'   - [Deconvolutional Networks](https://www.uoguelph.ca/~gwtaylor/publications/mattcvpr2010/deconvolutionalnets.pdf)
 #'   
 #' @family convolutional layers    
 #'   
@@ -375,7 +375,7 @@ layer_conv_2d_transpose <- function(object, filters, kernel_size, strides = c(1L
 #'
 #' @section References:
 #'   - [A guide to convolution arithmetic for deep learning](https://arxiv.org/abs/1603.07285v1)
-#'   - [Deconvolutional Networks](http://www.matthewzeiler.com/pubs/cvpr2010/cvpr2010.pdf)
+#'   - [Deconvolutional Networks](https://www.uoguelph.ca/~gwtaylor/publications/mattcvpr2010/deconvolutionalnets.pdf)
 #'
 #' @family convolutional layers 
 #'

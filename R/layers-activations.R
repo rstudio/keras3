@@ -37,7 +37,7 @@ layer_activation <- function(object, activation, input_shape = NULL,
 #' @param alpha float >= 0. Negative slope coefficient.
 #'
 #' @seealso [Rectifier Nonlinearities Improve Neural Network Acoustic
-#'   Models](https://web.stanford.edu/~awni/papers/relu_hybrid_icml2013_final.pdf).
+#'   Models](https://ai.stanford.edu/~amaas/papers/relu_hybrid_icml2013_final.pdf).
 #'
 #' @family activation layers
 #'

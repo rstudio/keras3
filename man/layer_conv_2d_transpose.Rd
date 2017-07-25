@@ -103,7 +103,7 @@ if data_format='channels_first' or 4D tensor with shape: \code{(batch, rows, col
 
 \itemize{
 \item \href{https://arxiv.org/abs/1603.07285v1}{A guide to convolution arithmetic for deep learning}
-\item \href{http://www.matthewzeiler.com/pubs/cvpr2010/cvpr2010.pdf}{Deconvolutional Networks}
+\item \href{https://www.uoguelph.ca/~gwtaylor/publications/mattcvpr2010/deconvolutionalnets.pdf}{Deconvolutional Networks}
 }
 }
 
