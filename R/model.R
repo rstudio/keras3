@@ -200,10 +200,10 @@ fit <- function(object, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NUL
   params <- history$params
   if (params$do_validation)
     params$validation_samples <- dim(history$validation_data[[1]])[[1]]
-  history <- structure(class = "keras_training_history", list(
+  history <- keras_training_history(
     params = params,
     metrics = lapply(history$history, as.numeric)
-  ))
+  )
   
   # return the history invisibly
   invisible(history)

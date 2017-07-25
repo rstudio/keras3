@@ -143,4 +143,9 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
   }
 }
 
-
+keras_training_history <- function(params, metrics) {
+  structure(class = "keras_training_history", list(
+    params = params,
+    metrics = metrics
+  ))
+}
