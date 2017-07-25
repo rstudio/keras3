@@ -10,7 +10,7 @@ print.keras_training_history <- function(x, ...) {
                  batch_size = params$batch_size, 
                  epochs = params$epochs)
   params <-  prettyNum(params, big.mark = ",")
-  if (!is.null(params[["validation_samples"]]))
+  if (!identical(params[["validation_samples"]], "NULL"))
     validate <- paste0(", validated on ", params[["validation_samples"]], " samples")
   else 
     validate <- ""
