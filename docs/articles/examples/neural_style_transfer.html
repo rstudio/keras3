@@ -131,7 +131,6 @@ K &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/backen
 
 base_image_path &lt;-<span class="st"> "neural-style-base-img.png"</span>
 style_reference_image_path &lt;-<span class="st"> "neural-style-style.jpg"</span>
-result_prefix =<span class="st"> "out"</span>
 iterations &lt;-<span class="st"> </span><span class="dv">10</span>
 
 <span class="co"># these are the weights of the different loss components</span>
@@ -164,8 +163,6 @@ deprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(x
   x[,,<span class="dv">1</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="fl">103.939</span>
   x[,,<span class="dv">2</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="fl">116.779</span>
   x[,,<span class="dv">3</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">3</span>] <span class="op">+</span><span class="st"> </span><span class="fl">123.68</span>
-  <span class="co"># 'BGR'-&gt;'RGB'</span>
-  <span class="co">#x &lt;- x[,,c(3,2,1)]</span>
   <span class="co"># clip to interval 0, 255</span>
   x[x <span class="op">&gt;</span><span class="st"> </span><span class="dv">255</span>] &lt;-<span class="st"> </span><span class="dv">255</span>
   x[x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="dv">0</span>
@@ -330,7 +327,7 @@ x &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">d
 
 <span class="co"># Run optimization (L-BFGS) over the pixels of the generated image</span>
 <span class="co"># so as to minimize the loss</span>
-<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>iterations){
 
   <span class="co"># Run L-BFGS</span>
   opt &lt;-<span class="st"> </span><span class="kw">optim</span>(
