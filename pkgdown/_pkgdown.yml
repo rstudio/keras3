@@ -276,13 +276,14 @@ reference:
       
   - title: "Utils"
     contents:
+      - plot.keras_training_history
       - to_categorical
       - normalize
       - hdf5_matrix
       - get_file
       - backend
-      - plot.keras_training_history
-      
+      - implementation
+     
   - title: "Losses"
     contents:
       - loss_mean_squared_error
