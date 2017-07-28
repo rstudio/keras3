@@ -127,7 +127,7 @@ Plot loss and accuracy metrics from training:
 plot(history)
 ```
 
-![](images/training_history_ggplot2.png){width=753 height=488 .r-plot}
+![](images/training_history_ggplot2.png){width=757 height=489 .r-plot}
 
 Evaluate your performance on test data:
 
