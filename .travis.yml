@@ -9,7 +9,6 @@ env:
   - KERAS_BACKEND="theano"
 
 cache:
-  packages: true
   directories:
     - $HOME/.keras
     - $HOME/.cache/pip
