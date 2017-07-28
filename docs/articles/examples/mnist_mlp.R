@@ -54,6 +54,8 @@ history <- model %>% fit(
   verbose = 1,
   validation_split = 0.2
 )
+
+plot(history)
   
 score <- model %>% evaluate(
   x_test, y_test,
