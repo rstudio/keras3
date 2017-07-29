@@ -124,7 +124,7 @@ The following built-in callbacks are available as part of Keras:
 
 ## Custom Callbacks
 
-You can create a custom callback by creating a new [R6 class](https://cran.r-project.org/web/packages/R6/vignettes/Introduction.html) that inherits from the `KerasCallback` class. 
+You can create a custom callback by creating a new [R6 class](https://CRAN.R-project.org/package=R6) that inherits from the `KerasCallback` class. 
 
 Here's a simple example saving a list of losses over each batch during training:
 
