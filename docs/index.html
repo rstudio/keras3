@@ -111,6 +111,7 @@
 <div id="r-interface-to-keras" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#r-interface-to-keras" class="anchor"></a>R interface to Keras</h1></div>
+
 <p><a href="https://keras.io/">Keras</a> is a high-level neural networks API developed with a focus on enabling fast experimentation. <em>Being able to go from idea to result with the least possible delay is key to doing good research.</em> Keras has the following key features:</p>
 <ul>
 <li><p>Allows the same code to run on CPU or on GPU, seamlessly.</p></li>
@@ -123,8 +124,8 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>The R interface to Keras uses <a href="https://www.tensorflow.org/">TensorFlow™</a> as it’s default tensor backend engine. To get started you should therefore install both the keras R package and the TensorFlow engine.</p>
-<p>First, install the keras R package from GitHub as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"rstudio/keras"</span>)</code></pre></div>
+<p>First, install the keras R package from CRAN as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"keras"</span>)</code></pre></div>
 <p>Then, use the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow">install_tensorflow()</a></code> function to install TensorFlow:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 <span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow">install_tensorflow</a></span>()</code></pre></div>
@@ -174,23 +175,23 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
 <p>Use the <code>summary()</code> function to print the details of the model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre></div>
 <pre style="box-shadow: none;"><code>Model
-___________________________________________________________________________________________
-Layer (type)                            Output Shape                         Param #       
-===========================================================================================
-dense_1 (Dense)                         (None, 256)                          200960        
-___________________________________________________________________________________________
-dropout_1 (Dropout)                     (None, 256)                          0             
-___________________________________________________________________________________________
-dense_2 (Dense)                         (None, 128)                          32896         
-___________________________________________________________________________________________
-dropout_2 (Dropout)                     (None, 128)                          0             
-___________________________________________________________________________________________
-dense_3 (Dense)                         (None, 10)                           1290          
-===========================================================================================
+________________________________________________________________________________
+Layer (type)                        Output Shape                    Param #     
+================================================================================
+dense_1 (Dense)                     (None, 256)                     200960      
+________________________________________________________________________________
+dropout_1 (Dropout)                 (None, 256)                     0           
+________________________________________________________________________________
+dense_2 (Dense)                     (None, 128)                     32896       
+________________________________________________________________________________
+dropout_2 (Dropout)                 (None, 128)                     0           
+________________________________________________________________________________
+dense_3 (Dense)                     (None, 10)                      1290        
+================================================================================
 Total params: 235,146
 Trainable params: 235,146
 Non-trainable params: 0
-___________________________________________________________________________________________</code></pre>
+________________________________________________________________________________</code></pre>
 <p>Next, compile the model with appropriate loss function, optimizer, and metrics:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/compile.html">compile</a></span>(
   <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
@@ -250,6 +251,8 @@ ________________________________________________________________________________
     <h2 class="hasAnchor">
 <a href="#sidebar" class="anchor"></a>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cran.r-project.org/package=keras">https://​cran.r-project.org/​package=keras</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/rstudio/keras">https://​github.com/​rstudio/​keras</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/rstudio/keras/issues">https://​github.com/​rstudio/​keras/​issues</a>
@@ -265,6 +268,11 @@ ________________________________________________________________________________
 <a href="https://www.rstudio.com"><img src="http://tidyverse.org/rstudio-logo.svg" height="24"></a> <br><small class="roles"> Copyright holder, funder </small> </li>
 <li> Google <br><small class="roles"> Contributor, copyright holder, funder </small> </li>
 <li><a href="authors.html">All authors...</a></li>
+</ul>
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://travis-ci.org/rstudio/keras"><img src="https://travis-ci.org/rstudio/keras.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://cran.r-project.org/package=keras"><img src="https://www.r-pkg.org/badges/version/keras" alt="CRAN_Status_Badge"></a></li>
 </ul>
 </div>
 
