@@ -6,7 +6,7 @@ output:
     toc: true
     toc_depth: 2
 vignette: >
-  %\VignetteIndexEntry{Guide to the Sequential Model} 
+  %\VignetteIndexEntry{Frequently Asked Questions} 
   %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
 type: docs
