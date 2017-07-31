@@ -12,11 +12,12 @@ Authors@R: c(
   person("Wouter", "Van Der Bijl", role = c("ctb", "cph")),
   person("Martin", "Studer", role = c("ctb", "cph"))
   )
-Description: Interface to 'Keras', a high-level neural networks API which 
-  runs on top of 'TensorFlow'. 'Keras' was developed with a focus on enabling
-  fast experimentation, supports both convolution based networks and recurrent
-  networks (as well as combinations of the two), and runs seamlessly on both 
-  'CPU' and 'GPU' devices.
+Description: Interface to 'Keras' (https://keras.io), a high-level neural 
+  networks API which runs on top of 'TensorFlow' (https://www.tensorflow.org).
+  'Keras' was developed with a focus on enabling fast experimentation, 
+  supports both convolution based networks and recurrent networks (as well as
+  combinations of the two), and runs seamlessly on both 'CPU' and 'GPU' 
+  devices.
 Encoding: UTF-8
 License: MIT + file LICENSE
 URL: https://github.com/rstudio/keras
