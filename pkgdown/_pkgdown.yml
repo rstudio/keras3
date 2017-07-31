@@ -284,6 +284,7 @@ reference:
       - get_file
       - backend
       - implementation
+      - install_keras
      
   - title: "Losses"
     contents:
