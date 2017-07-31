@@ -169,6 +169,7 @@ reference:
     contents:
       - save_model_hdf5
       - save_model_weights_hdf5
+      - serialize_model
       - get_weights
       - get_config
       - model_to_json

@@ -176,15 +176,21 @@ left off.
 This allows you to save the entirety of the state of a model
 in a single file.</p></li>
 </ul>
-    <p>Saved models can be reinstantiated via <code>load_model()</code>. The model returned by
-<code>load_model()</code> is a compiled model ready to be used (unless the saved model
+    <p>Saved models can be reinstantiated via <code>load_model_hdf5()</code>. The model returned by
+<code>load_model_hdf5()</code> is a compiled model ready to be used (unless the saved model
 was never compiled in the first place or <code>compile = FALSE</code> is specified.</p>
+    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>The <code><a href='serialize_model.html'>serialize_model()</a></code> function enables saving Keras models to
+R objects that can be persisted across R sessions.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other model persistence: <code><a href='get_weights.html'>get_weights</a></code>,
   <code><a href='model_to_json.html'>model_to_json</a></code>, <code><a href='model_to_yaml.html'>model_to_yaml</a></code>,
-  <code><a href='save_model_weights_hdf5.html'>save_model_weights_hdf5</a></code></p>
+  <code><a href='save_model_weights_hdf5.html'>save_model_weights_hdf5</a></code>,
+  <code><a href='serialize_model.html'>serialize_model</a></code></p>
     
 
   </div>
@@ -194,6 +200,8 @@ was never compiled in the first place or <code>compile = FALSE</code> is specifi
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#note">Note</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

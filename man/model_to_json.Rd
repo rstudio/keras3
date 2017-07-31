@@ -25,5 +25,6 @@ does not include the weights, only the architecture.
 Other model persistence: \code{\link{get_weights}},
   \code{\link{model_to_yaml}},
   \code{\link{save_model_hdf5}},
-  \code{\link{save_model_weights_hdf5}}
+  \code{\link{save_model_weights_hdf5}},
+  \code{\link{serialize_model}}
 }

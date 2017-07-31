@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Layer/Model weights as R arrays — get_weights • keras</title>
+<title>Serialize a model to an R object — serialize_model • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -124,40 +124,58 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Layer/Model weights as R arrays</h1>
+    <h1>Serialize a model to an R object</h1>
     </div>
 
     
-    <p>Layer/Model weights as R arrays</p>
+    <p>Model objects are external references to Keras objects which cannot be saved
+and restored across R sessions. The <code>serialize_model()</code> and
+<code>unserialize_model()</code> functions provide facilities to convert Keras models to
+R objects for persistence within R data files.</p>
     
 
-    <pre class="usage"><span class='fu'>get_weights</span>(<span class='no'>object</span>)
+    <pre class="usage"><span class='fu'>serialize_model</span>(<span class='no'>model</span>, <span class='kw'>include_optimizer</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>set_weights</span>(<span class='no'>object</span>, <span class='no'>weights</span>)</pre>
+<span class='fu'>unserialize_model</span>(<span class='no'>model</span>, <span class='kw'>custom_objects</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>compile</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>Layer or model object</p></td>
+      <th>model</th>
+      <td><p>Keras model or R "raw" object containing serialized Keras model.</p></td>
     </tr>
     <tr>
-      <th>weights</th>
-      <td><p>Weights as R array</p></td>
+      <th>include_optimizer</th>
+      <td><p>If <code>TRUE</code>, save optimizer's state.</p></td>
+    </tr>
+    <tr>
+      <th>custom_objects</th>
+      <td><p>Mapping class names (or function names) of custom
+(non-Keras) objects to class/functions</p></td>
+    </tr>
+    <tr>
+      <th>compile</th>
+      <td><p>Whether to compile the model after loading.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p><code>serialize_model()</code> returns an R "raw" object containing an hdf5
+version of the Keras model. <code>unserialize_model()</code> returns a Keras model.</p>
+    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>The <code><a href='save_model_hdf5.html'>save_model_hdf5()</a></code> function enables saving Keras models to
+external hdf5 files.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other model persistence: <code><a href='model_to_json.html'>model_to_json</a></code>,
-  <code><a href='model_to_yaml.html'>model_to_yaml</a></code>,
+    <p>Other model persistence: <code><a href='get_weights.html'>get_weights</a></code>,
+  <code><a href='model_to_json.html'>model_to_json</a></code>, <code><a href='model_to_yaml.html'>model_to_yaml</a></code>,
   <code><a href='save_model_hdf5.html'>save_model_hdf5</a></code>,
-  <code><a href='save_model_weights_hdf5.html'>save_model_weights_hdf5</a></code>,
-  <code><a href='serialize_model.html'>serialize_model</a></code></p>
-<p>Other layer methods: <code><a href='count_params.html'>count_params</a></code>,
-  <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_input_at.html'>get_input_at</a></code>,
-  <code><a href='reset_states.html'>reset_states</a></code></p>
+  <code><a href='save_model_weights_hdf5.html'>save_model_weights_hdf5</a></code></p>
     
 
   </div>
@@ -166,6 +184,10 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#note">Note</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 

@@ -43,6 +43,16 @@ test_succeeds("model can be saved and loaded from yaml", {
   expect_equal(yaml, model_to_yaml(model_from))
 })
 
+test_succeeds("model can be saved and loaded from R 'raw' object", {
+  
+  if (!keras:::have_h5py())
+    skip("h5py not available for testing")
+  
+  model <- define_and_compile_model()
+  
+  mdl_raw <- serialize_model(model)
+  model <- unserialize_model(mdl_raw)
 
+})
 
 
