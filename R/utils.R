@@ -109,6 +109,28 @@ normalize <- function(x, axis = -1, order = 2) {
 }
 
 
+#' Keras implementation
+#' 
+#' Obtain a reference to the Python module used for the implementation of Keras.
+#' 
+#' There are currently two Python modules which implement Keras:
+#' 
+#' - keras ("keras")
+#' - tensorflow.contrib.keras ("tensorflow")
+#' 
+#' This function returns a reference to the implementation being currently 
+#' used by the keras package. The default implementation is "tensorflow".
+#' You can override this by setting the `KERAS_IMPLEMENTATION` environment
+#' variable to "keras".
+#' 
+#' @return Reference to the Python module used for the implementation of Keras.
+#' 
+#' @export
+implementation <- function() {
+  keras
+}
+
+
 #' Keras backend tensor engine
 #' 
 #' Obtain a reference to the `keras.backend` Python module used to implement

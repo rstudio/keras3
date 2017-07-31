@@ -38,12 +38,17 @@ This allows you to save the entirety of the state of a model
 in a single file.
 }
 
-Saved models can be reinstantiated via \code{load_model()}. The model returned by
-\code{load_model()} is a compiled model ready to be used (unless the saved model
+Saved models can be reinstantiated via \code{load_model_hdf5()}. The model returned by
+\code{load_model_hdf5()} is a compiled model ready to be used (unless the saved model
 was never compiled in the first place or \code{compile = FALSE} is specified.
+}
+\note{
+The \code{\link[=serialize_model]{serialize_model()}} function enables saving Keras models to
+R objects that can be persisted across R sessions.
 }
 \seealso{
 Other model persistence: \code{\link{get_weights}},
   \code{\link{model_to_json}}, \code{\link{model_to_yaml}},
-  \code{\link{save_model_weights_hdf5}}
+  \code{\link{save_model_weights_hdf5}},
+  \code{\link{serialize_model}}
 }

@@ -111,6 +111,7 @@
 <div id="r-interface-to-keras" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#r-interface-to-keras" class="anchor"></a>R interface to Keras</h1></div>
+
 <p><a href="https://keras.io/">Keras</a> is a high-level neural networks API developed with a focus on enabling fast experimentation. <em>Being able to go from idea to result with the least possible delay is key to doing good research.</em> Keras has the following key features:</p>
 <ul>
 <li><p>Allows the same code to run on CPU or on GPU, seamlessly.</p></li>
@@ -123,68 +124,101 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>The R interface to Keras uses <a href="https://www.tensorflow.org/">TensorFlow™</a> as it’s default tensor backend engine. To get started you should therefore install both the keras R package and the TensorFlow engine.</p>
-<p>First, install the keras R package from GitHub as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"rstudio/keras"</span>)</code></pre></div>
+<p>First, install the keras R package from CRAN as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"keras"</span>)</code></pre></div>
 <p>Then, use the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow">install_tensorflow()</a></code> function to install TensorFlow:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 <span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow">install_tensorflow</a></span>()</code></pre></div>
 <p>This will provide you with a default installation of TensorFlow suitable for use with the keras R package. See the <a href="https://tensorflow.rstudio.com/installation.html">article on TensorFlow installation</a> to learn about more advanced options, including installing a version of TensorFlow that takes advantage of Nvidia GPUs if you have the correct CUDA libraries installed.</p>
 </div>
-<div id="getting-started-30-seconds-to-keras" class="section level2">
+<div id="mnist-example" class="section level2">
 <h2 class="hasAnchor">
-<a href="#getting-started-30-seconds-to-keras" class="anchor"></a>Getting started: 30 seconds to Keras</h2>
-<p>The core data structure of Keras is a <strong>model</strong>, a way to organize layers. The simplest type of model is the Sequential model, a linear stack of layers. For more complex architectures, you should use the Keras functional API, which allows to build arbitrary graphs of layers.</p>
-<p>Define a sequential model:</p>
+<a href="#mnist-example" class="anchor"></a>MNIST Example</h2>
+<p>We can learn the basics of Keras by walking through a simple example: recognizing handwritten digets from the <a href="https://en.wikipedia.org/wiki/MNIST_database">MNIST</a> dataset. MNIST consists of 28 x 28 grayscale images of handwritten digits like these:</p>
+<p><img style="width: 50%;" src="https://www.tensorflow.org/images/MNIST.png"></p>
+<p>The dataset also includes labels for each image, telling us which digit it is. For example, the labels for the above images are 5, 0, 4, and 1.</p>
+<div id="preparing-the-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#preparing-the-data" class="anchor"></a>Preparing the Data</h3>
+<p>The MNIST dataset is included with Keras and can be accessed using the <code><a href="reference/dataset_mnist.html">dataset_mnist()</a></code> function. Here we load the dataset then create variables for our test and training data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+mnist &lt;-<span class="st"> </span><span class="kw"><a href="reference/dataset_mnist.html">dataset_mnist</a></span>()
+x_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>x
+y_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>y
+x_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>x
+y_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y</code></pre></div>
+<p>The <code>x</code> data is a 3-d array <code>(images,width,height)</code> of grayscale values . To prepare the data for training we convert the 3-d arrays into matrices by reshaping width and height into a single dimension (28x28 images are flattened into length 784 vectors). Then, we convert the grayscale values from integers ranging between 0 to 255 into floating point values ranging between 0 and 1:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># reshape</span>
+<span class="kw">dim</span>(x_train) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_train), <span class="dv">784</span>)
+<span class="kw">dim</span>(x_test) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_test), <span class="dv">784</span>)
+<span class="co"># rescale</span>
+x_train &lt;-<span class="st"> </span>x_train <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
+x_test &lt;-<span class="st"> </span>x_test <span class="op">/</span><span class="st"> </span><span class="dv">255</span></code></pre></div>
+<p>The <code>y</code> data is an integer vector with values ranging from 0 to 9. To prepare this data for training we <a href="https://www.quora.com/What-is-one-hot-encoding-and-when-is-it-used-in-data-science">one-hot encode</a> the vectors into binary class matrices using the Keras <code><a href="reference/to_categorical.html">to_categorical()</a></code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y_train &lt;-<span class="st"> </span><span class="kw"><a href="reference/to_categorical.html">to_categorical</a></span>(y_train, <span class="dv">10</span>)
+y_test &lt;-<span class="st"> </span><span class="kw"><a href="reference/to_categorical.html">to_categorical</a></span>(y_test, <span class="dv">10</span>)</code></pre></div>
+</div>
+<div id="defining-the-model" class="section level3">
+<h3 class="hasAnchor">
+<a href="#defining-the-model" class="anchor"></a>Defining the Model</h3>
+<p>The core data structure of Keras is a model, a way to organize layers. The simplest type of model is the <a href="https://rstudio.github.io/keras/articles/sequential_model.html">Sequential model</a>, a linear stack of layers.</p>
+<p>We begin by creating a sequential model and then adding layers using the pipe (<code>%&gt;%</code>) operator:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 model &lt;-<span class="st"> </span><span class="kw"><a href="reference/keras_model_sequential.html">keras_model_sequential</a></span>() 
 model <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">512</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.2</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">512</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">256</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.4</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">128</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.3</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>)</code></pre></div>
-<p>Print a summary of the model’s structure using the <code>summary()</code> function:</p>
+<p>The <code>input_shape</code> argument to the first layer specifies the shape of the input data (a length 784 numeric vector representing a grayscale image). The final layer outputs a length 10 numeric vector (probabilities for each digit) using a <a href="https://en.wikipedia.org/wiki/Softmax_function">softmax activation function</a>.</p>
+<p>Use the <code>summary()</code> function to print the details of the model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre></div>
-<pre><code>Model
-_____________________________________________________________________________________
-Layer (type)                          Output Shape                      Param #      
-=====================================================================================
-dense_4 (Dense)                       (None, 512)                       401920       
-_____________________________________________________________________________________
-dropout_3 (Dropout)                   (None, 512)                       0            
-_____________________________________________________________________________________
-dense_5 (Dense)                       (None, 512)                       262656       
-_____________________________________________________________________________________
-dropout_4 (Dropout)                   (None, 512)                       0            
-_____________________________________________________________________________________
-dense_6 (Dense)                       (None, 10)                        5130         
-=====================================================================================
-Total params: 669,706
-Trainable params: 669,706
+<pre style="box-shadow: none;"><code>Model
+________________________________________________________________________________
+Layer (type)                        Output Shape                    Param #     
+================================================================================
+dense_1 (Dense)                     (None, 256)                     200960      
+________________________________________________________________________________
+dropout_1 (Dropout)                 (None, 256)                     0           
+________________________________________________________________________________
+dense_2 (Dense)                     (None, 128)                     32896       
+________________________________________________________________________________
+dropout_2 (Dropout)                 (None, 128)                     0           
+________________________________________________________________________________
+dense_3 (Dense)                     (None, 10)                      1290        
+================================================================================
+Total params: 235,146
+Trainable params: 235,146
 Non-trainable params: 0
-_____________________________________________________________________________________</code></pre>
-<p>Compile the model with appropriate loss function, optimizer, and metrics:</p>
+________________________________________________________________________________</code></pre>
+<p>Next, compile the model with appropriate loss function, optimizer, and metrics:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/compile.html">compile</a></span>(
   <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
-  <span class="dt">optimizer =</span> <span class="kw"><a href="reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="dt">lr =</span> <span class="fl">0.02</span>),
+  <span class="dt">optimizer =</span> <span class="kw"><a href="reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(),
   <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
 )</code></pre></div>
-<p>You can now iterate on your training data in batches (<code>x_train</code> and <code>y_train</code> are R matrices):</p>
+</div>
+<div id="training-and-evaluation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#training-and-evaluation" class="anchor"></a>Training and Evaluation</h3>
+<p>Use the <code><a href="reference/fit.html">fit()</a></code> function to train the model for 30 epochs using batches of 128 images:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/fit.html">fit</a></span>(
   x_train, y_train, 
-  <span class="dt">epochs =</span> <span class="dv">20</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>, 
+  <span class="dt">epochs =</span> <span class="dv">30</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>, 
   <span class="dt">validation_split =</span> <span class="fl">0.2</span>
 )</code></pre></div>
-<p>Plot loss and accuracy metrics from training:</p>
+<p>The <code>history</code> object returned by <code><a href="reference/fit.html">fit()</a></code> includes loss and accuracy metrics which we can plot:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(history)</code></pre></div>
 <div class="figure">
-<img src="images/training_history_ggplot2.png" class="r-plot" width="753" height="488">
+<img src="images/training_history_ggplot2.png" class="r-plot" width="757" height="489">
 </div>
-<p>Evaluate your performance on test data:</p>
+<p>Evaluate the model’s performance on the test data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loss_and_metrics &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
 <p>Generate predictions on new data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classes &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">predict</span>(x_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
-<p>Building a question answering system, an image classification model, a Neural Turing Machine, or any other model is just as fast. The ideas behind deep learning are simple, so why should their implementation be painful?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classes &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/predict_proba.html">predict_classes</a></span>(x_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
+<p>Keras provides a vocabulary for building deep learning models that is simple, elegant, and intuitive. Building a question answering system, an image classification model, a neural Turing machine, or any other model is just as straightforward.</p>
+</div>
 </div>
 <div id="learning-more" class="section level2">
 <h2 class="hasAnchor">
@@ -217,6 +251,8 @@ ________________________________________________________________________________
     <h2 class="hasAnchor">
 <a href="#sidebar" class="anchor"></a>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cran.r-project.org/package=keras">https://​cran.r-project.org/​package=keras</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/rstudio/keras">https://​github.com/​rstudio/​keras</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/rstudio/keras/issues">https://​github.com/​rstudio/​keras/​issues</a>
@@ -232,6 +268,11 @@ ________________________________________________________________________________
 <a href="https://www.rstudio.com"><img src="http://tidyverse.org/rstudio-logo.svg" height="24"></a> <br><small class="roles"> Copyright holder, funder </small> </li>
 <li> Google <br><small class="roles"> Contributor, copyright holder, funder </small> </li>
 <li><a href="authors.html">All authors...</a></li>
+</ul>
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://travis-ci.org/rstudio/keras"><img src="https://travis-ci.org/rstudio/keras.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://cran.r-project.org/package=keras"><img src="https://www.r-pkg.org/badges/version/keras" alt="CRAN_Status_Badge"></a></li>
 </ul>
 </div>
 

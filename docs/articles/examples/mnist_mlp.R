@@ -18,8 +18,8 @@ y_train <- mnist$train$y
 x_test <- mnist$test$x
 y_test <- mnist$test$y
 
-x_train <- array(as.numeric(x_train), dim = c(dim(x_train)[[1]], 784))
-x_test <- array(as.numeric(x_test), dim = c(dim(x_test)[[1]], 784))
+dim(x_train) <- c(nrow(x_train), 784)
+dim(x_test) <- c(nrow(x_test), 784)
 
 x_train <- x_train / 255
 x_test <- x_test / 255
@@ -54,6 +54,8 @@ history <- model %>% fit(
   verbose = 1,
   validation_split = 0.2
 )
+
+plot(history)
   
 score <- model %>% evaluate(
   x_test, y_test,
