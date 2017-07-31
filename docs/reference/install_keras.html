@@ -132,8 +132,7 @@
     
 
     <pre class="usage"><span class='fu'>install_keras</span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"auto"</span>, <span class='st'>"virtualenv"</span>, <span class='st'>"conda"</span>, <span class='st'>"system"</span>),
-  <span class='kw'>conda</span> <span class='kw'>=</span> <span class='st'>"auto"</span>, <span class='kw'>tensorflow_version</span> <span class='kw'>=</span> <span class='st'>"latest"</span>, <span class='kw'>tensorflow_gpu</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>tensorflow_package_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>conda</span> <span class='kw'>=</span> <span class='st'>"auto"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -152,22 +151,20 @@ available only on Windows.</p></td>
       <td><p>Path to conda executable (or "auto" to find conda using the PATH
 and other conventional install locations).</p></td>
     </tr>
-    <tr>
-      <th>tensorflow_version</th>
-      <td><p>TensorFlow version to install (must be either "latest" or a
-full major.minor.patch specification, e.g. "1.1.0").</p></td>
-    </tr>
-    <tr>
-      <th>tensorflow_gpu</th>
-      <td><p>Install the GPU version of TensorFlow</p></td>
-    </tr>
-    <tr>
-      <th>tensorflow_package_url</th>
-      <td><p>URL of the TensorFlow package to install (if not specified
-this is determined automatically). Note that if this parameter is provied
-then the <code>tensorflow_version</code> and <code>tensorflow_gpu</code> parameters are ignored.</p></td>
-    </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>If you want to do a more customized installation of TensorFlow
+(including installing a version that takes advantage of Nvidia GPUs if you
+have the correct CUDA libraries installed) you can call the
+<code><a href='http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow'>install_tensorflow()</a></code> function manually before calling <code>install_keras()</code>.
+See the <a href='https://tensorflow.rstudio.com/installation.html'>article on TensorFlow installation</a> to learn
+about more advanced options.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><code><a href='http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow'>install_tensorflow()</a></code></p>
     
 
   </div>
@@ -175,7 +172,11 @@ then the <code>tensorflow_version</code> and <code>tensorflow_gpu</code> paramet
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#note">Note</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>
