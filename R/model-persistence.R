@@ -202,7 +202,7 @@ serialize_model <- function(model, include_optimizer = TRUE) {
   on.exit(unlink(tmp), add = TRUE)
   save_model_hdf5(model, tmp, include_optimizer = include_optimizer)
   
-  # read it back intoa  raw vector
+  # read it back into a raw vector
   readBin(tmp, what = "raw", n = file.size(tmp))
 }
 
