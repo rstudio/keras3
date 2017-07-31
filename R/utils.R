@@ -156,6 +156,8 @@ is_backend <- function(name) {
   identical(backend()$backend(), name)
 }
 
-
+is_windows <- function() {
+  identical(.Platform$OS.type, "windows")
+}
 
 
