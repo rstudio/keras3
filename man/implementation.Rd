@@ -20,7 +20,7 @@ There are currently two Python modules which implement Keras:
 }
 
 This function returns a reference to the implementation being currently
-used by the keras package. The default implementation is "tensorflow".
+used by the keras package. The default implementation is "keras".
 You can override this by setting the \code{KERAS_IMPLEMENTATION} environment
-variable to "keras".
+variable to "tensorflow".
 }

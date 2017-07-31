@@ -119,9 +119,9 @@ normalize <- function(x, axis = -1, order = 2) {
 #' - tensorflow.contrib.keras ("tensorflow")
 #' 
 #' This function returns a reference to the implementation being currently 
-#' used by the keras package. The default implementation is "tensorflow".
+#' used by the keras package. The default implementation is "keras".
 #' You can override this by setting the `KERAS_IMPLEMENTATION` environment
-#' variable to "keras".
+#' variable to "tensorflow".
 #' 
 #' @return Reference to the Python module used for the implementation of Keras.
 #' 

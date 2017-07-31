@@ -118,18 +118,18 @@
 <li><p>User-friendly API which makes it easy to quickly prototype deep learning models.</p></li>
 <li><p>Built-in support for convolutional networks (for computer vision), recurrent networks (for sequence processing), and any combination of both.</p></li>
 <li><p>Supports arbitrary network architectures: multi-input or multi-output models, layer sharing, model sharing, etc. This means that Keras is appropriate for building essentially any deep learning model, from a memory network to a neural Turing machine.</p></li>
+<li><p>Is capable of running on top of multiple back-ends including <a href="https://github.com/tensorflow/tensorflow">TensorFlow</a>, <a href="https://github.com/Microsoft/cntk">CNTK</a>, or <a href="https://github.com/Theano/Theano">Theano</a>.</p></li>
 </ul>
 <p>This website provides documentation for the R interface to Keras. See the main Keras website at <a href="https://keras.io" class="uri">https://keras.io</a> for additional information on the project.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>The R interface to Keras uses <a href="https://www.tensorflow.org/">TensorFlow™</a> as it’s default tensor backend engine. To get started you should therefore install both the keras R package and the TensorFlow engine.</p>
 <p>First, install the keras R package from CRAN as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"keras"</span>)</code></pre></div>
-<p>Then, use the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow">install_tensorflow()</a></code> function to install TensorFlow:</p>
+<p>The Keras R interface uses the <a href="https://www.tensorflow.org/">TensorFlow</a> backend engine by default. To install both the core Keras library as well as the TensorFlow backend use the <code><a href="reference/install_keras.html">install_keras()</a></code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow">install_tensorflow</a></span>()</code></pre></div>
-<p>This will provide you with a default installation of TensorFlow suitable for use with the keras R package. See the <a href="https://tensorflow.rstudio.com/installation.html">article on TensorFlow installation</a> to learn about more advanced options, including installing a version of TensorFlow that takes advantage of Nvidia GPUs if you have the correct CUDA libraries installed.</p>
+<span class="kw"><a href="reference/install_keras.html">install_keras</a></span>()</code></pre></div>
+<p>This will provide you with default installations of Keras and TensorFlow. If you want to do a more customized installation of TensorFlow (including installing a version that takes advantage of Nvidia GPUs if you have the correct CUDA libraries installed) you can call the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow">install_tensorflow()</a></code> function manually before calling <code><a href="reference/install_keras.html">install_keras()</a></code>. See the <a href="https://tensorflow.rstudio.com/installation.html">article on TensorFlow installation</a> to learn about more advanced options.</p>
 </div>
 <div id="mnist-example" class="section level2">
 <h2 class="hasAnchor">
