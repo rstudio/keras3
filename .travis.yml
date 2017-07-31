@@ -17,6 +17,7 @@ cache:
 
 before_script:
   - pip2.7 install --upgrade --ignore-installed --user travis pip setuptools wheel virtualenv
-  - R -e 'keras::install_keras()'
+  - pip2.7 install --upgrade --ignore-installed --user travis keras h5py pyyaml requests Pillow scipy
+  - R -e 'tensorflow::install_tensorflow()'
 
 
