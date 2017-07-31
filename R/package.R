@@ -41,26 +41,7 @@ keras <- NULL
 resolve_implementation_module <- function() {
   
   # determine implementation to use
-  implementation <- get_keras_implementation(default = NULL)
-  
-  # determine backend to use
-  backend <- get_keras_backend()
-  
-  # set KERAS_BACKEND environment variable 
-  if (!is.null(backend))
-    Sys.setenv(KERAS_BACKEND = backend)
-  
-  # fully resolve implementation if it's not yet provided
-  if (is.null(implementation)) {
-    # if there is a backend then this implies 'keras' implementation
-    if (!is.null(backend)) {
-      implementation <- "keras"
-      Sys.setenv(KERAS_IMPLEMENTATION = "keras")
-      # otherwise implementation is 'tensorflow'
-    } else {
-      implementation <- "tensorflow"
-    }
-  }
+  implementation <- get_keras_implementation()
   
   # set the implementation module
   if (identical(implementation, "tensorflow"))
@@ -72,12 +53,8 @@ resolve_implementation_module <- function() {
   implementation_module
 }
 
-get_keras_implementation <- function(default = "tensorflow") {
+get_keras_implementation <- function(default = "keras") {
   get_keras_option("KERAS_IMPLEMENTATION", default = default)
-}
-
-get_keras_backend <- function(default = NULL) {
-  get_keras_option("KERAS_BACKEND", default = default)
 }
 
 get_keras_python <- function(default = NULL) {

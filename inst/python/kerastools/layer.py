@@ -1,7 +1,7 @@
 
 import os
 
-if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'tensorflow'):
+if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'tensorflow'):
   from tensorflow.contrib.keras.python.keras import backend as K
   from tensorflow.contrib.keras.python.keras.engine.topology import Layer
   def shape_filter(shape):

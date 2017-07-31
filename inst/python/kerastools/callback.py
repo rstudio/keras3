@@ -2,7 +2,7 @@
 
 import os
 
-if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'tensorflow'):
+if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'tensorflow'):
   from tensorflow.contrib.keras.python.keras.callbacks import Callback
   import tensorflow.contrib.keras as keras
 else:

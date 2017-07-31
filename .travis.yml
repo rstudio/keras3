@@ -5,8 +5,9 @@ dist: trusty
 sudo: false
 
 env:
-  - KERAS_IMPLEMENTATION="tensorflow"
+  - KERAS_BACKEND="tensorflow"
   - KERAS_BACKEND="theano"
+  - KERAS_IMPLEMENTATION="tensorflow"
 
 cache:
   packages: true
