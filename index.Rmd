@@ -179,13 +179,13 @@ plot(history)
 Evaluate the model's performance on the test data:
 
 ```{r, results = 'hide'}
-loss_and_metrics <- model %>% evaluate(x_test, y_test, batch_size = 128)
+loss_and_metrics <- model %>% evaluate(x_test, y_test)
 ```
 
 Generate predictions on new data:
 
 ```{r, results = 'hide'}
-classes <- model %>% predict_classes(x_test, batch_size = 128)
+classes <- model %>% predict_classes(x_test)
 ```
 
 Keras provides a vocabulary for building deep learning models that is simple, elegant, and intuitive. Building a question answering system, an image classification model, a neural Turing machine, or any other model is just as straightforward. 
