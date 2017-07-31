@@ -5,8 +5,7 @@
 \title{Install Keras and the TensorFlow backend}
 \usage{
 install_keras(method = c("auto", "virtualenv", "conda", "system"),
-  conda = "auto", tensorflow_version = "latest", tensorflow_gpu = FALSE,
-  tensorflow_package_url = NULL)
+  conda = "auto")
 }
 \arguments{
 \item{method}{Installation method. By default, "auto" automatically finds a
@@ -18,16 +17,18 @@ available only on Windows.}
 
 \item{conda}{Path to conda executable (or "auto" to find conda using the PATH
 and other conventional install locations).}
-
-\item{tensorflow_version}{TensorFlow version to install (must be either "latest" or a
-full major.minor.patch specification, e.g. "1.1.0").}
-
-\item{tensorflow_gpu}{Install the GPU version of TensorFlow}
-
-\item{tensorflow_package_url}{URL of the TensorFlow package to install (if not specified
-this is determined automatically). Note that if this parameter is provied
-then the \code{tensorflow_version} and \code{tensorflow_gpu} parameters are ignored.}
 }
 \description{
 Install Keras and the TensorFlow backend
+}
+\note{
+If you want to do a more customized installation of TensorFlow
+(including installing a version that takes advantage of Nvidia GPUs if you
+have the correct CUDA libraries installed) you can call the
+\code{\link[=install_tensorflow]{install_tensorflow()}} function manually before calling \code{install_keras()}.
+See the \href{https://tensorflow.rstudio.com/installation.html}{article on TensorFlow installation} to learn
+about more advanced options.
+}
+\seealso{
+\code{\link[=install_tensorflow]{install_tensorflow()}}
 }

@@ -1,46 +1,32 @@
 
 
 #' Install Keras and the TensorFlow backend
-#' 
+#'
 #' @inheritParams tensorflow::install_tensorflow
 #'
-#' @param tensorflow_version TensorFlow version to install (must be either "latest" or a
-#'   full major.minor.patch specification, e.g. "1.1.0").
-#' @param tensorflow_gpu Install the GPU version of TensorFlow
-#' @param tensorflow_package_url URL of the TensorFlow package to install (if not specified
-#'   this is determined automatically). Note that if this parameter is provied
-#'   then the `tensorflow_version` and `tensorflow_gpu` parameters are ignored.
-#'   
+#' @note If you want to do a more customized installation of TensorFlow
+#'   (including installing a version that takes advantage of Nvidia GPUs if you
+#'   have the correct CUDA libraries installed) you can call the
+#'   [install_tensorflow()] function manually before calling `install_keras()`.
+#'   See the [article on TensorFlow installation](https://tensorflow.rstudio.com/installation.html) to learn
+#'   about more advanced options.
+#'
+#' @seealso [install_tensorflow()]
+#' 
 #' @importFrom reticulate py_discover_config
 #' @importFrom tensorflow install_tensorflow_extras
 #'
 #' @export
-install_keras <- function(method = c("auto", "virtualenv", "conda", "system"), 
-                          conda = "auto",
-                          tensorflow_version = "latest",
-                          tensorflow_gpu = FALSE,
-                          tensorflow_package_url = NULL) {
+install_keras <- function(method = c("auto", "virtualenv", "conda", "system"), conda = "auto") {
   
   # see if we already have a version of tensorflow installed into an r-tensorflow environment
   config <- py_discover_config("tensorflow")
   
-  # helper to install tensorflow and reset the config to the newly installed location
-  install_tensorflow_environment <- function() {
-    
-    install_tensorflow(method = method, 
-                       conda = conda, 
-                       version = tensorflow_version,
-                       gpu = tensorflow_gpu,
-                       package_url = tensorflow_package_url)
-    
-    config <<- py_discover_config("tensorflow")
-    
-  }
-  
   # if there is no tensorflow available at all then install it and rediscover the config
   if (is.null(config$required_module_path)) {
     
-    install_tensorflow_environment() 
+    install_tensorflow(method = method, conda = conda)
+    config <- py_discover_config("tensorflow")
     
   # otherwise if we don't have a "managed" version of tensorflow then install one
   } else {
@@ -64,7 +50,10 @@ install_keras <- function(method = c("auto", "virtualenv", "conda", "system"),
     if (type %in% c("virtualenv", "conda")) {
       python_binary <- ifelse(is_windows(), "r-tensorflow\\python.exe", "r-tensorflow/bin/python")
       if (!endsWith(config$python, python_binary)) {
-        install_tensorflow_environment() 
+        
+        install_tensorflow(method = method, conda = conda)
+        config <- py_discover_config("tensorflow")
+        
       }
     }
   }
