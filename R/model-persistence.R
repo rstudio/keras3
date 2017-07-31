@@ -18,9 +18,12 @@
 #' This allows you to save the entirety of the state of a model
 #' in a single file.
 #' 
-#' Saved models can be reinstantiated via `load_model()`. The model returned by
-#' `load_model()` is a compiled model ready to be used (unless the saved model
+#' Saved models can be reinstantiated via `load_model_hdf5()`. The model returned by
+#' `load_model_hdf5()` is a compiled model ready to be used (unless the saved model
 #' was never compiled in the first place or `compile = FALSE` is specified.
+#'
+#' @note The [serialize_model()] function enables saving Keras models to
+#' R objects that can be persisted across R sessions.
 #' 
 #' @family model persistence
 #' 
@@ -169,6 +172,54 @@ model_from_yaml <- function(yaml, custom_objects = NULL) {
   
   keras$models$model_from_yaml(yaml, custom_objects)
 }
+
+#' Serialize a model to an R object
+#'
+#' Model objects are external references to Keras objects which cannot be saved
+#' and restored across R sessions. The `serialize_model()` and
+#' `unserialize_model()` functions provide facilities to convert Keras models to
+#' R objects for persistence within R data files.
+#'
+#' @note The [save_model_hdf5()] function enables saving Keras models to
+#' external hdf5 files.
+#'
+#' @inheritParams save_model_hdf5
+#' @param model Keras model or R "raw" object containing serialized Keras model.
+#'
+#' @return `serialize_model()` returns an R "raw" object containing an hdf5
+#'   version of the Keras model. `unserialize_model()` returns a Keras model.
+#'
+#' @family model persistence
+#'
+#' @export
+serialize_model <- function(model, include_optimizer = TRUE) {
+  
+  if (!inherits(model, "keras.engine.training.Model"))
+    stop("You must pass a Keras model object to serialize_model")
+  
+  # write hdf5 file to temp file
+  tmp <- tempfile(pattern = "keras_model", fileext = ".h5")  
+  on.exit(unlink(tmp), add = TRUE)
+  save_model_hdf5(model, tmp, include_optimizer = include_optimizer)
+  
+  # read it back intoa  raw vector
+  readBin(tmp, what = "raw", n = file.size(tmp))
+}
+
+#' @rdname serialize_model
+#' @export
+unserialize_model <- function(model, custom_objects = NULL, compile = TRUE) {
+  
+  # write raw hdf5 bytes to temp file 
+  tmp <- tempfile(pattern = "keras_model", fileext = ".h5")  
+  on.exit(unlink(tmp), add = TRUE)
+  writeBin(model, tmp)
+  
+  # read in from hdf5
+  load_model_hdf5(tmp, custom_objects = custom_objects, compile = compile)
+}
+
+
 
 
 
