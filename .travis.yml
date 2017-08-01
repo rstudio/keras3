@@ -15,8 +15,10 @@ cache:
     - $HOME/.keras
     - $HOME/.cache/pip
 
-before_install:
-  - sudo apt-get install openmpi-bin
+addons:
+  apt:
+    packages:
+    - openmpi-bin
 
 before_script:
   - pip2.7 install --upgrade --ignore-installed --user travis pip setuptools wheel virtualenv
