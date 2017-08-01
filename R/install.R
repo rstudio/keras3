@@ -49,7 +49,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda", "system"), c
     # we aren't then perform an installation of one
     if (type %in% c("virtualenv", "conda")) {
       python_binary <- ifelse(is_windows(), "r-tensorflow\\python.exe", "r-tensorflow/bin/python")
-      if (!endsWith(config$python, python_binary)) {
+      if (!grepl(paste0(python_binary, "$"), config$python)) {
         
         install_tensorflow(method = method, conda = conda)
         config <- py_discover_config("tensorflow")
