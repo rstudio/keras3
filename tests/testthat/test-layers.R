@@ -140,7 +140,7 @@ test_call_succeeds("layer_conv_2d_transpose", {
     layer_conv_2d_transpose(filters = 3, kernel_size = c(2, 2))
 })
 
-test_call_succeeds("layer_conv_3d_transpose", required_version = "2.0.5", {
+test_call_succeeds("layer_conv_3d_transpose", required_version = "2.0.6", {
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
     layer_reshape(target_shape = c(2,2,2,4)) %>%
@@ -424,7 +424,7 @@ test_call_succeeds("layer_gaussian_dropout", {
     layer_gaussian_dropout(rate = 0.5)
 })
 
-test_call_succeeds("layer_alpha_dropout", required_version = "2.0.5", {
+test_call_succeeds("layer_alpha_dropout", required_version = "2.0.6", {
   skip_if_cntk()
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%

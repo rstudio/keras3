@@ -32,7 +32,7 @@ test_initializer("glorot_uniform")
 test_initializer("he_uniform")
 test_initializer("he_normal")
 test_initializer("lecun_uniform")
-test_initializer("lecun_normal", required_version = "2.0.5")
+test_initializer("lecun_normal", required_version = "2.0.6")
 
 
 
