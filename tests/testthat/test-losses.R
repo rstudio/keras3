@@ -8,6 +8,7 @@ test_loss <- function(name, test_direct_call = TRUE) {
   test_call_succeeds(name, {
     keras_model_sequential() %>% 
       layer_dense(32, input_shape = c(784)) %>% 
+      layer_dropout(rate = 0.5) %>% 
       compile( 
         optimizer = optimizer_sgd(),
         loss = loss_fn, 
@@ -34,7 +35,7 @@ test_loss("sparse_categorical_crossentropy", test_direct_call = FALSE)
 test_loss("binary_crossentropy")
 test_loss("kullback_leibler_divergence")
 test_loss("poisson")
-test_loss("cosine_proximity")
+test_loss("cosine_proximity", test_direct_call = FALSE)
 
 
 
