@@ -123,7 +123,6 @@
 </ul>
 <p>In the below MNIST example the first LSTM layer first encodes every column of pixels of shape (28, 1) to a column vector of shape (128,). The second LSTM layer encodes then these 28 column vectors of shape (28, 128) to a image vector representing the whole image. A final Dense layer is added for prediction.</p>
 <p>After 5 epochs: train acc: 0.9858, val acc: 0.9864</p>
-<p>IMPORTANT NOTE: This example does net work correctly with the version of Keras integrated with TensorFlow (the Python variation doesn’t work either). Therefore, we shouldn’t yet add this to the list of published examples.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
 <span class="co"># Training parameters.</span>
@@ -194,7 +193,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 <span class="co"># Evaluation</span>
 scores &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">verbose =</span> <span class="dv">0</span>)
 <span class="kw">cat</span>(<span class="st">'Test loss:'</span>, scores[[<span class="dv">1</span>]], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
-<span class="kw">cat</span>(<span class="st">'Test accuracy:'</span>, scores[<span class="dv">2</span>], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</code></pre></div>
+<span class="kw">cat</span>(<span class="st">'Test accuracy:'</span>, scores[[<span class="dv">2</span>]], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</code></pre></div>
 </div>
   </div>
 

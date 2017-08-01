@@ -26,13 +26,6 @@
 #' After 5 epochs: train acc: 0.9858, val acc: 0.9864
 #'
 
-#' 
-#' IMPORTANT NOTE: This example does net work correctly with the version of 
-#' Keras integrated with TensorFlow (the Python variation doesn't work 
-#' either). Therefore, we shouldn't yet add this to the list of published
-#' examples.
-#' 
-
 library(keras)
 
 # Training parameters.
@@ -103,7 +96,7 @@ model %>% fit(
 # Evaluation
 scores <- model %>% evaluate(x_test, y_test, verbose = 0)
 cat('Test loss:', scores[[1]], '\n')
-cat('Test accuracy:', scores[2], '\n')
+cat('Test accuracy:', scores[[2]], '\n')
 
 
 
