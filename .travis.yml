@@ -15,9 +15,13 @@ cache:
     - $HOME/.keras
     - $HOME/.cache/pip
 
+before_install:
+  - sudo apt-get install openmpi-bin
+
 before_script:
   - pip2.7 install --upgrade --ignore-installed --user travis pip setuptools wheel virtualenv
   - pip2.7 install --upgrade --ignore-installed --user travis keras h5py pyyaml requests Pillow scipy
+  - pip2.7 install --upgrade --ignore-installed --user travis https://cntk.ai/PythonWheel/CPU-Only/cntk-2.1-cp27-cp27mu-linux_x86_64.whl
   - R -e 'tensorflow::install_tensorflow()'
 
 
