@@ -10,6 +10,8 @@
 
 - Automatically convert 64-bit R floats to backend default float type
 
+- Ensure that arrays passed to generator functions are normalized to C-order 
+
 
 # keras 2.0.5
 
