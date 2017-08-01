@@ -6,8 +6,8 @@
 \usage{
 layer_gru(object, units, activation = "tanh",
   recurrent_activation = "hard_sigmoid", use_bias = TRUE,
-  return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE,
-  unroll = FALSE, implementation = 0L,
+  return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE,
+  stateful = FALSE, unroll = FALSE, implementation = 0L,
   kernel_initializer = "glorot_uniform",
   recurrent_initializer = "orthogonal", bias_initializer = "zeros",
   kernel_regularizer = NULL, recurrent_regularizer = NULL,
@@ -32,6 +32,9 @@ step.}
 
 \item{return_sequences}{Boolean. Whether to return the last output in the
 output sequence, or the full sequence.}
+
+\item{return_state}{Boolean (default FALSE). Whether to return the last state
+in addition to the output.}
 
 \item{go_backwards}{Boolean (default FALSE). If TRUE, process the input
 sequence backwards and return the reversed sequence.}
@@ -111,6 +114,34 @@ isn't provided.}
 \description{
 Gated Recurrent Unit - Cho et al.
 }
+\section{Input shapes}{
+
+
+3D tensor with shape \code{(batch_size, timesteps, input_dim)},
+(Optional) 2D tensors with shape \code{(batch_size, output_dim)}.
+}
+
+\section{Output shape}{
+
+\itemize{
+\item if \code{return_state}: a list of tensors. The first tensor is
+the output. The remaining tensors are the last states,
+each with shape \code{(batch_size, units)}.
+\item if \code{return_sequences}: 3D tensor with shape
+\code{(batch_size, timesteps, units)}.
+\item else, 2D tensor with shape \code{(batch_size, units)}.
+}
+}
+
+\section{Masking}{
+
+
+This layer supports masking for input data with a variable number
+of timesteps. To introduce masks to your data,
+use an embedding layer with the \code{mask_zero} parameter
+set to \code{TRUE}.
+}
+
 \section{Statefulness in RNNs}{
 
 

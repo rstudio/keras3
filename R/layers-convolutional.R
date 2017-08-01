@@ -19,6 +19,9 @@
 #'   length of the convolution. Specifying any stride value != 1 is incompatible
 #'   with specifying any `dilation_rate` value != 1.
 #' @param padding One of `"valid"`, `"causal"` or `"same"` (case-insensitive). 
+#'   `"valid"` means "no padding".
+#'   `"same"` results in padding the input such that the output has the same 
+#'   length as the original input.
 #'   `"causal"` results in causal (dilated) convolutions, e.g. `output[t]` does
 #'   not depend on `input[t+1:]`. Useful when modeling temporal data where the
 #'   model should not violate the temporal order. See [WaveNet: A Generative

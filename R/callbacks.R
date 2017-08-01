@@ -160,8 +160,12 @@ callback_terminate_on_naan <- function() {
 #' @param histogram_freq frequency (in epochs) at which to compute activation 
 #'   histograms for the layers of the model. If set to 0, histograms won't be
 #'   computed.
+#' @param batch_size size of batch of inputs to feed to the network
+#'   for histograms computation.
 #' @param write_graph whether to visualize the graph in Tensorboard. The log
 #'   file can become quite large when write_graph is set to `TRUE`
+#' @param write_grads whether to visualize gradient histograms in TensorBoard.
+#'   `histogram_freq` must be greater than 0.
 #' @param write_images whether to write model weights to visualize as image in
 #'   Tensorboard.
 #' @param embeddings_freq frequency (in epochs) at which selected embedding 
@@ -182,8 +186,11 @@ callback_terminate_on_naan <- function() {
 #' @family callbacks 
 #'    
 #' @export
-callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0, 
-                                 write_graph = TRUE, write_images = FALSE,
+callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
+                                 batch_size = 32,
+                                 write_graph = TRUE, 
+                                 write_grads = FALSE,
+                                 write_images = FALSE,
                                  embeddings_freq = 0, embeddings_layer_names = NULL,
                                  embeddings_metadata = NULL) {
   
@@ -195,7 +202,7 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
       log_dir <- "logs"
   }
   
-  keras$callbacks$TensorBoard(
+  args <- list(
     log_dir = normalize_path(log_dir),
     histogram_freq = as.integer(histogram_freq),
     write_graph = write_graph,
@@ -204,6 +211,13 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
     embeddings_layer_names = embeddings_layer_names,
     embeddings_metadata = embeddings_metadata
   )
+  
+  if (keras_version() >= "2.0.5") {
+    args$batch_size <- as.integer(batch_size)
+    args$write_grads <- write_grads
+  }
+  
+  do.call(keras$callbacks$TensorBoard, args)
 }
 
 

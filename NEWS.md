@@ -14,6 +14,11 @@
 
 - Added `to_numpy_array()` utility function for custom generators (enables
   custom generators to yield C-ordered arrays of the correct float type)
+  
+- Added `batch_size` and `write_grads` arguments to `callback_tensorboard()`
+
+- Added `return_state` argument to recurrent layers.
+
 
 
 # keras 2.0.5
