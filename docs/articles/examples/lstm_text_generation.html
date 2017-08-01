@@ -134,7 +134,7 @@ path &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get
   <span class="dt">origin=</span><span class="st">'https://s3.amazonaws.com/text-datasets/nietzsche.txt'</span>
   )
 
-text &lt;-<span class="st"> </span><span class="kw">read_lines</span>(path) <span class="op">%&gt;%</span>
+text &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/readr/topics/read_lines">read_lines</a></span>(path) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/case">str_to_lower</a></span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_c">str_c</a></span>(<span class="dt">collapse =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">tokenize_characters</span>(<span class="dt">strip_non_alphanum =</span> <span class="ot">FALSE</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)

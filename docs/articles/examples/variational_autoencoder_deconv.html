@@ -307,8 +307,8 @@ vae <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a h
 ## display a 2D plot of the digit classes in the latent space
 x_test_encoded &lt;-<span class="st"> </span><span class="kw">predict</span>(encoder, x_test, <span class="dt">batch_size =</span> batch_size)
 x_test_encoded <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">class =</span> <span class="kw">as.factor</span>(mnist<span class="op">$</span>test<span class="op">$</span>y)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">as_data_frame</a></span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">class =</span> <span class="kw">as.factor</span>(mnist<span class="op">$</span>test<span class="op">$</span>y)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> V1, <span class="dt">y =</span> V2, <span class="dt">colour =</span> class)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()
 
 ## display a 2D manifold of the digits
