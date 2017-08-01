@@ -181,8 +181,8 @@ fit <- function(object, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NUL
   
   # fit the model
   history <- object$fit(
-    x = normalize_x(x),
-    y = normalize_x(y),
+    x = to_numpy_array(x),
+    y = to_numpy_array(y),
     batch_size = as.integer(batch_size),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
@@ -224,8 +224,8 @@ fit <- function(object, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NUL
 #' @export
 evaluate <- function(object, x, y, batch_size = 32, verbose=1, sample_weight = NULL) {
   object$evaluate(
-    x = normalize_x(x),
-    y = normalize_x(y),
+    x = to_numpy_array(x),
+    y = to_numpy_array(y),
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose),
     sample_weight = sample_weight
@@ -255,7 +255,7 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbos
   
   # call predict
   object$predict(
-    normalize_x(x), 
+    to_numpy_array(x), 
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose)
   )
@@ -275,7 +275,7 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=32, verbos
 #' @export
 predict_proba <- function(object, x, batch_size = 32, verbose = 0) {
   object$predict_proba(
-    x = normalize_x(x),
+    x = to_numpy_array(x),
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose)
   )
@@ -285,7 +285,7 @@ predict_proba <- function(object, x, batch_size = 32, verbose = 0) {
 #' @export
 predict_classes <- function(object, x, batch_size = 32, verbose = 0) {
   object$predict_classes(
-    x = normalize_x(x),
+    x = to_numpy_array(x),
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose)
   )
@@ -305,7 +305,7 @@ predict_classes <- function(object, x, batch_size = 32, verbose = 0) {
 #' @export
 predict_on_batch <- function(object, x) {
   object$predict_on_batch(
-    x = normalize_x(x)
+    x = to_numpy_array(x)
   )
 }
 
@@ -329,8 +329,8 @@ predict_on_batch <- function(object, x) {
 #' @export
 train_on_batch <- function(object, x, y, class_weight = NULL, sample_weight = NULL) {
   object$train_on_batch(
-    x = normalize_x(x),
-    y = normalize_x(y),
+    x = to_numpy_array(x),
+    y = to_numpy_array(y),
     class_weight = as_class_weight(class_weight),
     sample_weight = sample_weight
   )
@@ -340,8 +340,8 @@ train_on_batch <- function(object, x, y, class_weight = NULL, sample_weight = NU
 #' @export
 test_on_batch <- function(object, x, y, sample_weight = NULL) {
   object$test_on_batch(
-    x = normalize_x(x),
-    y = normalize_x(y),
+    x = to_numpy_array(x),
+    y = to_numpy_array(y),
     sample_weight = sample_weight
   )
 }
@@ -362,6 +362,10 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'      
 #'      - (inputs, targets)
 #'      - (inputs, targets, sample_weights)
+#'      
+#'   Note that the generator should call the [to_numpy_array()] function on its
+#'   results prior to returning them (this ensures that arrays are provided in 
+#'   'C' order and using the default floating point type for the backend.)
 #'      
 #'   All arrays should contain the same number of samples. The generator is expected
 #'   to loop over its data indefinitely. An epoch finishes when `steps_per_epoch`
@@ -577,41 +581,6 @@ py_str.keras.engine.training.Model <- function(object,  line_length = getOption(
 }
 
 
-# Convert input data into a numpy array. This would be done 
-# automatically by reticulate for arrays and matrices however we
-# want to marshall arrays/matrices with C column ordering 
-# rather than the default Fortrain column ordering, as this will
-# make for more efficient copying of data to GPUs
-normalize_x <- function(x, dtype = NULL) {
-  
-  # recurse for lists
-  if (is.list(x))
-    return(lapply(x, normalize_x))
-  
-  # convert to numpy
-  if (!inherits(x, "numpy.ndarray")) {
-    
-    # establish the target datatype - if we are converting a double from R
-    # into numpy then use the default floatx for the current backend
-    if (is.null(dtype) && is.double(x))
-      dtype <- backend()$floatx()
-  
-    # convert non-array to array
-    if (!is.array(x))
-      x <- as.array(x)
-    
-    # do the conversion (will result in Fortran column ordering)
-    x <- r_to_py(x)
-  }
-  
-  # if we don't yet have a dtype then use the converted type
-  if (is.null(dtype))
-    dtype <- x$dtype
-  
-  # ensure we use C column ordering (won't create a new array if the array
-  # is already using C ordering)
-  x$astype(dtype = dtype, order = 'C', copy = FALSE)
-}
 
 as_class_weight <- function(class_weight) {
   # convert class weights to python dict

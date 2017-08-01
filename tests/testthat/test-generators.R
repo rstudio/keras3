@@ -83,15 +83,14 @@ test_succeeds("R function can be used as custom generator", {
   Y_test <- matrix(round(runif(200, min = 0, max = 1)), nrow = 200, ncol = 1)
   
   # R generator that draws 32 random elements at a time from the data
-  K <- backend(convert = FALSE)
   sampling_generator <- function(X_data, Y_data = NULL, batch_size = 32) {
     function() {
       gc() # should blow up R if we are ever called on a background thread
       rows <- sample(1:nrow(X_data), batch_size, replace = TRUE)
       if (!is.null(Y_data))
-        list(K$cast_to_floatx(X_data[rows,]), K$cast_to_floatx(Y_data[rows,]))
+        to_numpy_array(list(X_data[rows,], Y_data[rows,]))
       else
-        list(K$cast_to_floatx(X_data[rows,]))
+        to_numpy_array(list(X_data[rows,]))
     }
   }
   

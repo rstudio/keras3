@@ -12,6 +12,9 @@
 
 - Ensure that arrays passed to generator functions are normalized to C-order 
 
+- Added `to_numpy_array()` utility function for custom generators (enables
+  custom generators to yield C-ordered arrays of the correct float type)
+
 
 # keras 2.0.5
 

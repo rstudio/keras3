@@ -18,6 +18,10 @@ The output of the generator must be a list of one of these forms:\preformatted{ 
  - (inputs, targets, sample_weights)
 }
 
+Note that the generator should call the \code{\link[=to_numpy_array]{to_numpy_array()}} function on its
+results prior to returning them (this ensures that arrays are provided in
+'C' order and using the default floating point type for the backend.)
+
 All arrays should contain the same number of samples. The generator is expected
 to loop over its data indefinitely. An epoch finishes when \code{steps_per_epoch}
 batches have been seen by the model.}

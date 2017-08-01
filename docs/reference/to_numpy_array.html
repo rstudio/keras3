@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fits the model on data yielded batch-by-batch by a generator. — fit_generator • keras</title>
+<title>Convert to NumPy Array — to_numpy_array • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -124,108 +124,40 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fits the model on data yielded batch-by-batch by a generator.</h1>
+    <h1>Convert to NumPy Array</h1>
     </div>
 
     
-    <p>The generator is run in parallel to the model, for efficiency. For instance,
-this allows you to do real-time data augmentation on images on CPU in
-parallel to training your model on GPU.</p>
+    <p>Convert an object to a NumPy array which has the optimal in-memory layout and
+floating point data type for the current Keras backend.</p>
     
 
-    <pre class="usage"><span class='fu'>fit_generator</span>(<span class='no'>object</span>, <span class='no'>generator</span>, <span class='no'>steps_per_epoch</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max_queue_size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>to_numpy_array</span>(<span class='no'>x</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>order</span> <span class='kw'>=</span> <span class='st'>"C"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>Keras model object</p></td>
+      <th>x</th>
+      <td><p>Object or list of objects to convert</p></td>
     </tr>
     <tr>
-      <th>generator</th>
-      <td><p>A generator (e.g. like the one provided by
-<code><a href='flow_images_from_directory.html'>flow_images_from_directory()</a></code> or a custom R <a href='https://rstudio.github.io/reticulate/articles/introduction.html#generators'>generator function</a>).</p>
-<p>The output of the generator must be a list of one of these forms:</p><pre> - (inputs, targets)
- - (inputs, targets, sample_weights)
-</pre>
-
-<p>Note that the generator should call the <code>to_numpy_array()</code> function on its
-results prior to returning them (this ensures that arrays are provided in
-'C' order and using the default floating point type for the backend.)</p>
-<p>All arrays should contain the same number of samples. The generator is expected
-to loop over its data indefinitely. An epoch finishes when <code>steps_per_epoch</code>
-batches have been seen by the model.</p></td>
+      <th>dtype</th>
+      <td><p>NumPy data type (e.g. float32, float64). If this is unspecified
+then R doubles will be converted to the default floating point type for the
+current Keras backend.</p></td>
     </tr>
     <tr>
-      <th>steps_per_epoch</th>
-      <td><p>Total number of steps (batches of samples) to yield
-from <code>generator</code> before declaring one epoch finished and starting the next
-epoch. It should typically be equal to the number of unique samples if your
-dataset divided by the batch size.</p></td>
-    </tr>
-    <tr>
-      <th>epochs</th>
-      <td><p>integer, total number of iterations on the data.</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>verbosity mode, 0, 1, or 2.</p></td>
-    </tr>
-    <tr>
-      <th>callbacks</th>
-      <td><p>list of callbacks to be called during training.</p></td>
-    </tr>
-    <tr>
-      <th>validation_data</th>
-      <td><p>this can be either:</p><ul>
-<li><p>a generator for the validation data</p></li>
-<li><p>a list (inputs, targets)</p></li>
-<li><p>a list (inputs, targets, sample_weights).</p></li>
-</ul></td>
-    </tr>
-    <tr>
-      <th>validation_steps</th>
-      <td><p>Only relevant if <code>validation_data</code> is a generator.
-Total number of steps (batches of samples) to yield from <code>generator</code> before
-stopping.</p></td>
-    </tr>
-    <tr>
-      <th>class_weight</th>
-      <td><p>dictionary mapping class indices to a weight for the
-class.</p></td>
-    </tr>
-    <tr>
-      <th>max_queue_size</th>
-      <td><p>maximum size for the generator queue</p></td>
-    </tr>
-    <tr>
-      <th>initial_epoch</th>
-      <td><p>epoch at which to start training (useful for resuming a
-previous training run)</p></td>
+      <th>order</th>
+      <td><p>In-memory order ('C' or 'F'). Defaults to 'C', which is the
+optimal order in nearly every case for Keras backends.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Training history object (invisibly)</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
-  <code><a href='evaluate_generator.html'>evaluate_generator</a></code>, <code><a href='evaluate.html'>evaluate</a></code>,
-  <code><a href='fit.html'>fit</a></code>, <code><a href='get_config.html'>get_config</a></code>,
-  <code><a href='get_layer.html'>get_layer</a></code>,
-  <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
-  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='pop_layer.html'>pop_layer</a></code>,
-  <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
-  <code><a href='predict_generator.html'>predict_generator</a></code>,
-  <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
-  <code><a href='predict_proba.html'>predict_proba</a></code>,
-  <code><a href='summary.keras.engine.training.Model.html'>summary.keras.engine.training.Model</a></code>,
-  <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
+    <p>NumPy array with the specified type and order (or list of NumPy
+arrays if a list was passed for <code>x</code>).</p>
     
 
   </div>
@@ -235,8 +167,6 @@ previous training run)</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

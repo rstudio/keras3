@@ -109,6 +109,55 @@ normalize <- function(x, axis = -1, order = 2) {
 }
 
 
+#' Convert to NumPy Array
+#'
+#' Convert an object to a NumPy array which has the optimal in-memory layout and
+#' floating point data type for the current Keras backend.
+#'
+#' @param x Object or list of objects to convert
+#' @param dtype NumPy data type (e.g. float32, float64). If this is unspecified
+#'   then R doubles will be converted to the default floating point type for the
+#'   current Keras backend.
+#' @param order In-memory order ('C' or 'F'). Defaults to 'C', which is the
+#'   optimal order in nearly every case for Keras backends.
+#'
+#' @return NumPy array with the specified type and order (or list of NumPy
+#'   arrays if a list was passed for `x`).
+#'
+#' @export
+to_numpy_array <- function(x, dtype = NULL, order = 'C') {
+  
+  # recurse for lists
+  if (is.list(x))
+    return(lapply(x, to_numpy_array))
+  
+  # convert to numpy
+  if (!inherits(x, "numpy.ndarray")) {
+    
+    # establish the target datatype - if we are converting a double from R
+    # into numpy then use the default floatx for the current backend
+    if (is.null(dtype) && is.double(x))
+      dtype <- backend()$floatx()
+    
+    # convert non-array to array
+    if (!is.array(x))
+      x <- as.array(x)
+    
+    # do the conversion (will result in Fortran column ordering)
+    x <- r_to_py(x)
+  }
+  
+  # if we don't yet have a dtype then use the converted type
+  if (is.null(dtype))
+    dtype <- x$dtype
+  
+  # ensure we use C column ordering (won't create a new array if the array
+  # is already using C ordering)
+  x$astype(dtype = dtype, order = order, copy = FALSE)
+}
+
+
+
 #' Keras implementation
 #' 
 #' Obtain a reference to the Python module used for the implementation of Keras.
