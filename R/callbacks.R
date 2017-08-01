@@ -181,7 +181,7 @@ callback_terminate_on_naan <- function() {
 #' @details TensorBoard is a visualization tool provided with TensorFlow.
 #'   
 #' You can find more information about TensorBoard
-#' [here](https://tensorflow.rstudio.com/howto_summaries_and_tensorboard.html).
+#' [here](https://www.tensorflow.org/get_started/summaries_and_tensorboard).
 #' 
 #' @family callbacks 
 #'    

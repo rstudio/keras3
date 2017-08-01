@@ -51,7 +51,7 @@ histograms for the different layers in your model.
 TensorBoard is a visualization tool provided with TensorFlow.
 
 You can find more information about TensorBoard
-\href{https://tensorflow.rstudio.com/howto_summaries_and_tensorboard.html}{here}.
+\href{https://www.tensorflow.org/get_started/summaries_and_tensorboard}{here}.
 }
 \seealso{
 Other callbacks: \code{\link{callback_csv_logger}},
