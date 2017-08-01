@@ -188,8 +188,8 @@ generate_movies &lt;-<span class="st"> </span><span class="cf">function</span>(<
   shifted_movies[shifted_movies <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">1</span>
 
   <span class="co"># add channel dimension</span>
-  <span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/dimensions">dim</a></span>(noisy_movies) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/dimensions">dim</a></span>(noisy_movies), <span class="dv">1</span>)
-  <span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/dimensions">dim</a></span>(shifted_movies) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/dimensions">dim</a></span>(shifted_movies), <span class="dv">1</span>)
+  <span class="kw">dim</span>(noisy_movies) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">dim</span>(noisy_movies), <span class="dv">1</span>)
+  <span class="kw">dim</span>(shifted_movies) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">dim</span>(shifted_movies), <span class="dv">1</span>)
   
   <span class="kw">list</span>(
     <span class="dt">noisy_movies =</span> noisy_movies,
@@ -278,22 +278,22 @@ track &lt;-<span class="st"> </span><span class="kw">array</span>(track, <span c
 <span class="cf">if</span> (k<span class="op">&lt;</span><span class="dv">8</span>){
   <span class="kw">png</span>(<span class="kw">paste0</span>(k,<span class="st">'_animate.png'</span>))
   <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="dt">bg =</span> <span class="st">'white'</span>)
-  (more_movies<span class="op">$</span>noisy_movies[which,k,,,<span class="dv">1</span>])  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Ground_'</span>,k)) 
-  (more_movies<span class="op">$</span>noisy_movies[which,k,,,<span class="dv">1</span>])  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Ground_'</span>,k)) 
+  (more_movies<span class="op">$</span>noisy_movies[which,k,,,<span class="dv">1</span>])  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">raster</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Ground_'</span>,k)) 
+  (more_movies<span class="op">$</span>noisy_movies[which,k,,,<span class="dv">1</span>])  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">raster</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Ground_'</span>,k)) 
   <span class="kw">dev.off</span>()
 }  <span class="cf">else</span> {
   <span class="co"># And then compare the predictions</span>
   <span class="co"># to the ground truth</span>
   <span class="kw">png</span>(<span class="kw">paste0</span>(k,<span class="st">'_animate.png'</span>))
   <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="dt">bg =</span> <span class="st">'white'</span>)
-  (more_movies<span class="op">$</span>noisy_movies[which,k,,,<span class="dv">1</span>])  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Ground_'</span>,k))
+  (more_movies<span class="op">$</span>noisy_movies[which,k,,,<span class="dv">1</span>])  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">raster</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Ground_'</span>,k))
    
-  new_pos &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/predict">predict</a></span>(track)  <span class="co">#Make Prediction</span>
+  new_pos &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">predict</span>(track)  <span class="co">#Make Prediction</span>
   new_pos_loc &lt;-<span class="st"> </span>new_pos[<span class="dv">1</span>,k,<span class="dv">1</span><span class="op">:</span><span class="dv">40</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">40</span>,<span class="dv">1</span>]  <span class="co">#Slice the last row</span>
-  new_pos_loc  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Pred_'</span>,k))
+  new_pos_loc  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">raster</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Pred_'</span>,k))
   
   new_pos &lt;-<span class="st"> </span><span class="kw">array</span>(new_pos_loc, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">40</span>,<span class="dv">40</span>,<span class="dv">1</span>)) <span class="co">#Reshape it</span>
-  track &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/abind/topics/abind">abind</a></span>(track,new_pos,<span class="dt">along =</span> <span class="dv">2</span>)  <span class="co">#Bind it to the earlier data</span>
+  track &lt;-<span class="st"> </span><span class="kw">abind</span>(track,new_pos,<span class="dt">along =</span> <span class="dv">2</span>)  <span class="co">#Bind it to the earlier data</span>
   <span class="kw">dev.off</span>()
 }
 }  

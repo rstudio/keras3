@@ -341,7 +341,7 @@ num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span cl
     <span class="co"># layer as a length one sequence</span>
     generated_images &lt;-<span class="st"> </span><span class="kw">predict</span>(generator, <span class="kw">list</span>(noise, sampled_labels))
     
-    X &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/abind/topics/abind">abind</a></span>(image_batch, generated_images, <span class="dt">along =</span> <span class="dv">1</span>)
+    X &lt;-<span class="st"> </span><span class="kw">abind</span>(image_batch, generated_images, <span class="dt">along =</span> <span class="dv">1</span>)
     y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(1L, batch_size), <span class="kw">rep</span>(0L, batch_size)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
     aux_y &lt;-<span class="st"> </span><span class="kw">c</span>(label_batch, sampled_labels) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
     
@@ -389,7 +389,7 @@ num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span cl
 <span class="st">    </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
   generated_images &lt;-<span class="st"> </span><span class="kw">predict</span>(generator, <span class="kw">list</span>(noise, sampled_labels))
   
-  X &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/abind/topics/abind">abind</a></span>(mnist<span class="op">$</span>test<span class="op">$</span>x, generated_images, <span class="dt">along =</span> <span class="dv">1</span>)
+  X &lt;-<span class="st"> </span><span class="kw">abind</span>(mnist<span class="op">$</span>test<span class="op">$</span>x, generated_images, <span class="dt">along =</span> <span class="dv">1</span>)
   y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, num_test), <span class="kw">rep</span>(<span class="dv">0</span>, num_test)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
   aux_y &lt;-<span class="st"> </span><span class="kw">c</span>(mnist<span class="op">$</span>test<span class="op">$</span>y, sampled_labels) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
   
