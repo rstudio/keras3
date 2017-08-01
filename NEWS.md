@@ -8,6 +8,8 @@
 - Added `serialize_model()` and `unserialize_model()` functions for saving 
   Keras models as 'raw' R objects.
 
+- Automatically convert 64-bit R floats to backend default float type
+
 
 # keras 2.0.5
 

@@ -588,9 +588,17 @@ normalize_x <- function(x) {
   if (is.list(x))
     return(lapply(x, normalize_x))
   
+  # target data type (not known yet)
+  dtype <- NULL
+  
   # convert to numpy
   if (!inherits(x, "numpy.ndarray")) {
     
+    # establish the target datatype - if we are converting a double from R
+    # into numpy then use the default floatx for the current backend
+    if (is.double(x))
+      dtype <- backend()$floatx()
+  
     # convert non-array to array
     if (!is.array(x))
       x <- as.array(x)
@@ -599,9 +607,13 @@ normalize_x <- function(x) {
     x <- r_to_py(x)
   }
   
+  # if we don't yet have a dtype then use the converted type
+  if (is.null(dtype))
+    dtype <- x$dtype
+  
   # ensure we use C column ordering (won't create a new array if the array
   # is already using C ordering)
-  x$astype(dtype = x$dtype, order = 'C', copy = FALSE)
+  x$astype(dtype = dtype, order = 'C', copy = FALSE)
 }
 
 as_class_weight <- function(class_weight) {
