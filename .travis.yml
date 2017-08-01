@@ -7,6 +7,7 @@ sudo: false
 env:
   - KERAS_BACKEND="tensorflow"
   - KERAS_BACKEND="theano"
+  - KERAS_BACKEND="cntk"
   - KERAS_IMPLEMENTATION="tensorflow"
 
 cache:
