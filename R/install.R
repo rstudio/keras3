@@ -13,11 +13,19 @@
 #'
 #' @seealso [install_tensorflow()]
 #' 
-#' @importFrom reticulate py_discover_config
+#' @importFrom reticulate py_discover_config py_available
 #' @importFrom tensorflow install_tensorflow_extras
 #'
 #' @export
 install_keras <- function(method = c("auto", "virtualenv", "conda", "system"), conda = "auto") {
+  
+  # ensure we call this in a fresh session on windows (avoid DLL
+  # in use errors)
+  if (is_windows() && py_available()) {
+    stop("You should call install_keras() only in a fresh ",
+         "R session that has not yet initialized Keras and TensorFlow (this is ",
+         "to avoid DLL in use errors during installation)")
+  }
   
   # see if we already have a version of tensorflow installed into an r-tensorflow environment
   config <- py_discover_config("tensorflow")
