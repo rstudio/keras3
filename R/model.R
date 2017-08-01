@@ -582,21 +582,18 @@ py_str.keras.engine.training.Model <- function(object,  line_length = getOption(
 # want to marshall arrays/matrices with C column ordering 
 # rather than the default Fortrain column ordering, as this will
 # make for more efficient copying of data to GPUs
-normalize_x <- function(x) {
+normalize_x <- function(x, dtype = NULL) {
   
   # recurse for lists
   if (is.list(x))
     return(lapply(x, normalize_x))
-  
-  # target data type (not known yet)
-  dtype <- NULL
   
   # convert to numpy
   if (!inherits(x, "numpy.ndarray")) {
     
     # establish the target datatype - if we are converting a double from R
     # into numpy then use the default floatx for the current backend
-    if (is.double(x))
+    if (is.null(dtype) && is.double(x))
       dtype <- backend()$floatx()
   
     # convert non-array to array
