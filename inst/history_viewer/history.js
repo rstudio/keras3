@@ -64,6 +64,17 @@ function init_charts(data, update) {
     // get the metric 
     var metric = metric_names[i];
     
+    // special y-axis treatment for accuracy (always 0 to 1)
+    var y_axis = {};
+    if (metric === 'acc') {
+      y_axis.max = 1;
+      y_axis.min = 0;
+      y_axis.padding = {
+        top: 0,
+        bottom: 0
+      };
+    }
+    
     // create a chart wrapper div
     var c3_div = document.createElement("div");
     c3_container.appendChild(c3_div);
@@ -84,7 +95,8 @@ function init_charts(data, update) {
           tick: {
             values: tick_values
           }
-        }  
+        },
+        y: y_axis
       },
       data: {
         columns: chart_columns(metric, data)
