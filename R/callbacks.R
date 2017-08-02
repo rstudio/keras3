@@ -283,38 +283,6 @@ callback_csv_logger <- function(filename, separator = ",", append = FALSE) {
 }
 
 
-#' @export
-callback_plot_history <- function(metrics = NULL, 
-                                  method = c("auto", "ggplot2", "base"), 
-                                  smooth = TRUE) {
-  R6::R6Class("PlotHistory",
-    inherit = KerasCallback,
-    
-    public = list(
-    
-      metrics = list(),
-      
-      on_epoch_end = function(epoch, logs = NULL) {
-        
-        # get params (tweak epochs based on current epoch)
-        params <- self$params
-        params$epochs <- epoch + 1
-        
-        # record metrics
-        for (metric in names(logs))
-          self$metrics[[metric]] <- c(self$metrics[[metric]], logs[[metric]])
-        
-        # create history and plot it
-        history <- keras_training_history(params, self$metrics)
-        print(plot(history, metrics = metrics, method = method, smooth = smooth))
-        
-        # return NULL to prevent unsuccessful attempt to convert plot object 
-        NULL
-      }
-    )
-  )$new()
-}
-
 
 #' Create a custom callback
 #' 

@@ -11,7 +11,7 @@ Authors@R: c(
   person("Daniel", "Falbel", role = c("ctb", "cph")),
   person("Wouter", "Van Der Bijl", role = c("ctb", "cph")),
   person("Martin", "Studer", role = c("ctb", "cph")),
-  person("Mike", "Bostock", role = c("aut", "cpy"),
+  person("Mike", "Bostock", role = c("aut", "cph"),
          comment = "D3 library (https://d3js.org/)"),
   person("Masayuki", "Tanaka", role = c("aut", "cph"),
          comment = "C3 library (http://c3js.org/)")
@@ -32,7 +32,8 @@ Imports:
     tfruns,
     magrittr, 
     methods,
-    R6
+    R6,
+    jsonlite
 Suggests: 
     ggplot2,
     testthat, 

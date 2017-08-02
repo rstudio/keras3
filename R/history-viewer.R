@@ -2,6 +2,41 @@
 
 
 
+callback_history_viewer <- function() {
+  
+  R6::R6Class("KerasHistoryViewer",
+              
+    inherit = KerasCallback,
+    
+    public = list(
+      
+      metrics = list(),
+      
+      history_viewer = NULL,
+      
+      on_epoch_end = function(epoch, logs = NULL) {
+        
+        # get params (tweak epochs based on current epoch)
+        params <- self$params
+       
+        # record metrics
+        for (metric in names(logs))
+          self$metrics[[metric]] <- c(self$metrics[[metric]], logs[[metric]])
+        
+        # create history object
+        history <- keras_training_history(params, self$metrics)
+        
+        # create the history_viewer or update if we already have one
+        if (is.null(self$history_viewer))
+          self$history_viewer <- view_history(history)
+        else
+          update_history(self$history_viewer, history)
+      }
+    )
+  )$new()
+}
+
+
 view_history <- function(history) {
   
   # create a new temp directory for the viewer's UI/data
@@ -13,27 +48,20 @@ view_history <- function(history) {
     viewer_dir = viewer_dir
   )
   
+  # copy dependencies to the viewer dir
+  history_viewer_html <- system.file("history_viewer", package = "keras")
+  file.copy(from = list.files(history_viewer_html),
+            to = viewer_dir)
+  
   # write the history
   update_history(history_viewer, history)
   
-  # copy dependencies to the viewer dir
-  
-  
-  # render history viewer html
-  run_viewer_template <- system.file("views/run.html", package = "tfruns")
-  run_viewer_html <- htmltools::htmlTemplate(run_template)
-  run_viewer_file <- file.path(viewer_dir, "index.html")
-  save_html(run_viewer_html,
-            file = run_viewer_file,
-            background = "white",
-            libdir = "lib")
-  
   # view it
-  getOption("viewer")(run_viewer_file)
+  getOption("viewer")(file.path(viewer_dir, "index.html"))
   
   # return history_viewer instance (invisibly) for subsequent
   # calls to update_run_history
-  invisible(run_viewer)
+  invisible(history_viewer)
 }
 
 
