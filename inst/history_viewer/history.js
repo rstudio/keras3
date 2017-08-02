@@ -71,7 +71,7 @@ function init_charts(data, update) {
     // create c3 chart bound to div
     var epochs = data.params.epochs[0];
     var tick_values = null;
-    if (epochs <= 20) {
+    if (epochs <= 30) {
       tick_values = [];
       for (var n = 1; n <= epochs; n++)
         tick_values.push(n);
@@ -91,6 +91,9 @@ function init_charts(data, update) {
       },
       size: {
         height: chart_height
+      },
+      transition: {
+        duration: 20
       }
     });
   
