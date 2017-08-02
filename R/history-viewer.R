@@ -34,10 +34,23 @@ callback_history_viewer <- function() {
           # pump events
           Sys.sleep(0.2)
         }
+      },
+      
+      on_train_end = function(logs = NULL) {
+        
+        # write a static version of the history at the end of training
+        # (enables saving & publishing of the history)
+        if (!is.null(self$history_viewer)) {
+          write_static_history(self$history_viewer, 
+                               keras_training_history(self$params, self$metrics))
+        }
       }
     )
   )$new()
 }
+
+
+
 
 
 view_history <- function(history) {
@@ -72,6 +85,21 @@ view_history <- function(history) {
 update_history <- function(history_viewer, history) {
   history_json <- file.path(history_viewer$viewer_dir, "history.json")
   jsonlite::write_json(unclass(history), history_json)
+}
+
+write_static_history <- function(history_viewer, history) {
+  
+  # create json version of history
+  history_json <- jsonlite::toJSON(unclass(history))
+  
+  # substitute static json into template
+  history_html <- file.path(history_viewer$viewer_dir, "index.html")
+  history_html_lines <- readLines(history_html, encoding = "UTF-8")
+  history_html_lines <- sprintf(history_html_lines, history_json)
+  
+  # re-write with static data
+  writeLines(history_html_lines, history_html)
+  
 }
 
 
