@@ -32,7 +32,7 @@ callback_history_viewer <- function() {
           }
           
           # pump events
-          Sys.sleep(0.2)
+          Sys.sleep(0.25)
         }
       },
       
