@@ -404,7 +404,7 @@ KerasCallback <- R6Class("KerasCallback",
   )
 )
 
-normalize_callbacks <- function(callbacks) {
+normalize_callbacks <- function(verbose, callbacks) {
   
   # helper to determine if we should add a tensorboard callback
   have_tensorboard_callback <- FALSE
@@ -416,6 +416,10 @@ normalize_callbacks <- function(callbacks) {
   # then automatically add the tensorboard_callback
   if (is.null(callbacks) && include_tensorboard_callback())
     callbacks <- callback_tensorboard(run_dir())
+  
+  # include the training history callback if appropriate
+  if ((verbose != 0) && can_view_history()) 
+    callbacks <- append(callbacks, callback_history_viewer())  
   
   # return NULL if there are no callbacks
   if (is.null(callbacks)) 

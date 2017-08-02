@@ -51,7 +51,6 @@ history <- model %>% fit(
   x_train, y_train,
   batch_size = batch_size,
   epochs = epochs,
-  callbacks = callback_plot_history(),
   verbose = 1,
   validation_split = 0.2
 )

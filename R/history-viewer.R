@@ -1,7 +1,6 @@
 
 
 
-
 callback_history_viewer <- function() {
   
   R6::R6Class("KerasHistoryViewer",
@@ -15,22 +14,26 @@ callback_history_viewer <- function() {
       history_viewer = NULL,
       
       on_epoch_end = function(epoch, logs = NULL) {
-        
-        # get params (tweak epochs based on current epoch)
-        params <- self$params
-       
+      
         # record metrics
         for (metric in names(logs))
           self$metrics[[metric]] <- c(self$metrics[[metric]], logs[[metric]])
         
         # create history object
-        history <- keras_training_history(params, self$metrics)
+        history <- keras_training_history(self$params, self$metrics)
         
         # create the history_viewer or update if we already have one
-        if (is.null(self$history_viewer))
-          self$history_viewer <- view_history(history)
-        else
-          update_history(self$history_viewer, history)
+        if (epoch > 0) {
+          if (is.null(self$history_viewer)) {
+            self$history_viewer <- view_history(history)
+          }
+          else {
+            update_history(self$history_viewer, history)
+          }
+          
+          # pump events
+          Sys.sleep(0.2)
+        }
       }
     )
   )$new()
@@ -40,17 +43,17 @@ callback_history_viewer <- function() {
 view_history <- function(history) {
   
   # create a new temp directory for the viewer's UI/data
-  viewer_dir <- tempfile("viewhtml")
-  dir.create(viewer_dir)
+  viewer_dir <- tempfile("keras-metrics")
+  dir.create(viewer_dir, recursive = TRUE)
   
   # create the history_viewer instance
-  history_viewer <- structure(class = "keras_history_viewer",
+  history_viewer <- structure(class = "keras_history_viewer", list(
     viewer_dir = viewer_dir
-  )
+  ))
   
   # copy dependencies to the viewer dir
   history_viewer_html <- system.file("history_viewer", package = "keras")
-  file.copy(from = list.files(history_viewer_html),
+  file.copy(from = list.files(history_viewer_html, full.names = TRUE),
             to = viewer_dir)
   
   # write the history
