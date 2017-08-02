@@ -19,14 +19,20 @@ function load_history(callback) {
 // yield chart column data
 function chart_columns(metric, data) {
   
+  var total_epochs = data.params.epochs[0];
+  var current_epochs = data.metrics[metric].length;
+  var padding = [];
+  for (var i = 0; i<(total_epochs-current_epochs); i++)
+    padding.push(null);
+  
   var columns = [
-    [metric,null].concat(data.metrics[metric])
+    [metric,null].concat(data.metrics[metric]).concat(padding)
   ];
   
   if (data.params.do_validation[0]) {
     var val_metric = "val_" + metric;
     columns.push(
-      [val_metric,null].concat(data.metrics[val_metric])
+      [val_metric,null].concat(data.metrics[val_metric]).concat(padding)
     );
   }
   
@@ -64,15 +70,17 @@ function init_charts(data, update) {
     
     // create c3 chart bound to div
     var epochs = data.params.epochs[0];
-    var tick_values = [];
-    for (var n = 1; n <= epochs; n++)
-      tick_values.push(n);
+    var tick_values = null;
+    if (epochs <= 20) {
+      tick_values = [];
+      for (var n = 1; n <= epochs; n++)
+        tick_values.push(n);
+    }
     var chart = c3.generate({
       bindto: c3_div,
       axis: {
         x: {
           min: 1,
-          max: tick_values.length,
           tick: {
             values: tick_values
           }
