@@ -113,6 +113,7 @@ function init_charts(data, update) {
           chart.load({
             columns: chart_columns(metric, data)
           });
+          chart.flush();
         }
         
         // stop refreshing when metrics when we have all epochs
