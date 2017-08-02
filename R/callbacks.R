@@ -283,6 +283,7 @@ callback_csv_logger <- function(filename, separator = ",", append = FALSE) {
 }
 
 
+
 #' Create a custom callback
 #' 
 #' This callback is constructed with anonymous functions that will be called at
@@ -315,7 +316,6 @@ callback_lambda <- function(on_epoch_begin = NULL, on_epoch_end = NULL,
     on_train_end = on_train_end
   )
 }
-
 
 #' Base R6 class for Keras callbacks
 #' 
@@ -404,7 +404,7 @@ KerasCallback <- R6Class("KerasCallback",
   )
 )
 
-normalize_callbacks <- function(callbacks) {
+normalize_callbacks <- function(view_history, callbacks) {
   
   # helper to determine if we should add a tensorboard callback
   have_tensorboard_callback <- FALSE
@@ -416,6 +416,10 @@ normalize_callbacks <- function(callbacks) {
   # then automatically add the tensorboard_callback
   if (is.null(callbacks) && include_tensorboard_callback())
     callbacks <- callback_tensorboard(run_dir())
+  
+  # include the training history callback if appropriate
+  if ((view_history > 0) && can_view_history()) 
+    callbacks <- append(callbacks, KerasHistoryViewer$new())  
   
   # return NULL if there are no callbacks
   if (is.null(callbacks)) 

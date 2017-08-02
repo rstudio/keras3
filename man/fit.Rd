@@ -5,9 +5,9 @@
 \title{Train a Keras model}
 \usage{
 fit(object, x, y, batch_size = 32, epochs = 10, verbose = 1,
-  callbacks = NULL, validation_split = 0, validation_data = NULL,
-  shuffle = TRUE, class_weight = NULL, sample_weight = NULL,
-  initial_epoch = 0, ...)
+  view_history = verbose, callbacks = NULL, validation_split = 0,
+  validation_data = NULL, shuffle = TRUE, class_weight = NULL,
+  sample_weight = NULL, initial_epoch = 0, ...)
 }
 \arguments{
 \item{object}{Model to train.}
@@ -26,6 +26,9 @@ a list mapping output names to data.}
 
 \item{verbose}{Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
 epoch).}
+
+\item{view_history}{View realtime plot of training metrics (by epoch) when
+running within RStudio.}
 
 \item{callbacks}{List of callbacks to be called during training.}
 

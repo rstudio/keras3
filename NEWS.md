@@ -5,6 +5,8 @@
 
 - Use keras package as default implementation rather than tf.contrib.keras
 
+- Training metrics plotted in realtime within the RStudio Viewer during fit 
+
 - Added `serialize_model()` and `unserialize_model()` functions for saving 
   Keras models as 'raw' R objects.
 

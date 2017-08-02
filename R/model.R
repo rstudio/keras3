@@ -148,6 +148,8 @@ compile <- function(object, optimizer, loss, metrics = NULL, loss_weights = NULL
 #' @param epochs Number of times to iterate over the training data arrays.
 #' @param verbose  Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
 #'   epoch).
+#' @param view_history View realtime plot of training metrics (by epoch) when
+#'   running within RStudio.
 #' @param callbacks List of callbacks to be called during training.
 #' @param validation_split Float between 0 and 1: fraction of the training data 
 #'   to be used as validation data. The model will set apart this fraction of 
@@ -175,7 +177,8 @@ compile <- function(object, optimizer, loss, metrics = NULL, loss_weights = NULL
 #' @family model functions
 #' 
 #' @export
-fit <- function(object, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NULL,
+fit <- function(object, x, y, batch_size=32, epochs=10, 
+                verbose=1, view_history=verbose, callbacks=NULL,
                 validation_split=0.0, validation_data=NULL, shuffle=TRUE,
                 class_weight=NULL, sample_weight=NULL, initial_epoch=0, ...) {
   
@@ -186,7 +189,7 @@ fit <- function(object, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NUL
     batch_size = as.integer(batch_size),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
-    callbacks = normalize_callbacks(callbacks),
+    callbacks = normalize_callbacks(view_history, callbacks),
     validation_split = validation_split,
     validation_data = validation_data,
     shuffle = shuffle,
@@ -200,10 +203,10 @@ fit <- function(object, x, y, batch_size=32, epochs=10, verbose=1, callbacks=NUL
   params <- history$params
   if (params$do_validation)
     params$validation_samples <- dim(history$validation_data[[1]])[[1]]
-  history <- structure(class = "keras_training_history", list(
+  history <- keras_training_history(
     params = params,
     metrics = lapply(history$history, as.numeric)
-  ))
+  )
   
   # return the history invisibly
   invisible(history)
@@ -353,6 +356,8 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #' The generator is run in parallel to the model, for efficiency. For instance,
 #' this allows you to do real-time data augmentation on images on CPU in
 #' parallel to training your model on GPU.
+#' 
+#' @inheritParams fit 
 #'
 #' @param object Keras model object
 #' @param generator A generator (e.g. like the one provided by
@@ -375,7 +380,6 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'   epoch. It should typically be equal to the number of unique samples if your
 #'   dataset divided by the batch size.
 #' @param epochs integer, total number of iterations on the data.
-#' @param verbose verbosity mode, 0, 1, or 2.
 #' @param callbacks list of callbacks to be called during training.
 #' @param validation_data this can be either: 
 #'    - a generator for the validation data 
@@ -395,8 +399,9 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #' @family model functions
 #'
 #' @export
-fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, verbose = 1, 
-                          callbacks = NULL, validation_data = NULL, validation_steps = NULL, 
+fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, 
+                          verbose = 1, view_history=verbose, callbacks = NULL, 
+                          validation_data = NULL, validation_steps = NULL, 
                           class_weight = NULL, max_queue_size = 10, initial_epoch = 0) {
   
   call_generator_function(object$fit_generator, list(
@@ -404,7 +409,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, verbos
     steps_per_epoch = as.integer(steps_per_epoch),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
-    callbacks = normalize_callbacks(callbacks),
+    callbacks = normalize_callbacks(view_history, callbacks),
     validation_data = validation_data,
     validation_steps = as_nullable_integer(validation_steps),
     class_weight = as_class_weight(class_weight),
