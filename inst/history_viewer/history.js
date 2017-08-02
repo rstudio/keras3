@@ -116,7 +116,7 @@ function init_charts(data, update) {
           chart.flush();
         }
         
-        // stop refreshing when metrics when we have all epochs
+        // stop refreshing metrics when we have all epochs
         var first_metric = data.metrics[Object.keys(data.metrics)[0]];
         if (first_metric.length >= epochs)
           clearInterval(updateInterval);
@@ -156,6 +156,7 @@ if (historyJson === "%s") {
   
 } else {
   
+  // initialize charts from embedded payload
   var data = JSON.parse(historyJson);
   init_charts(data, false);
   
