@@ -187,7 +187,7 @@ KerasHistoryViewer <- R6::R6Class("KerasHistoryViewer",
       }
       
       # pump events
-      Sys.sleep(0.5)
+      Sys.sleep(0.1)
     },
     
     on_train_end = function(logs = NULL) {
