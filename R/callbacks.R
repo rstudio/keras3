@@ -418,7 +418,7 @@ normalize_callbacks <- function(verbose, callbacks) {
     callbacks <- callback_tensorboard(run_dir())
   
   # include the training history callback if appropriate
-  if ((verbose != 0) && can_view_history()) 
+  if ((verbose > 0) && can_view_history()) 
     callbacks <- append(callbacks, callback_history_viewer())  
   
   # return NULL if there are no callbacks
