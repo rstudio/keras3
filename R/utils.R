@@ -157,6 +157,45 @@ to_numpy_array <- function(x, dtype = NULL, order = 'C') {
 }
 
 
+#' Check if Keras is Available
+#'
+#' Probe to see whether the Keras python package is available in the current
+#' system environment.
+#'
+#' @param version Minimum required version of Keras (defaults to `NULL`, no
+#'   required version).
+#'
+#' @return Logical indicating whether Keras (or the specified minimum version of
+#'   Keras) is available.
+#'
+#' @examples
+#' \dontrun{
+#' # testthat utilty for skipping tests when Keras isn't available
+#' skip_if_no_keras <- function(version = NULL) {
+#'   if (!is_keras_available(version))
+#'     skip("Required keras version not available for testing")
+#' }
+#'
+#' # use the function within a test
+#' test_that("keras function works correctly", {
+#'   skip_if_no_keras()
+#'   # test code here
+#' })
+#' }
+#'
+#' @export
+is_keras_available <- function(version = NULL) {
+  implementation_module <- resolve_implementation_module()
+  if (reticulate::py_module_available(implementation_module)) {
+    if (!is.null(version))
+      keras_version() >= version
+    else
+      TRUE
+  } else {
+    FALSE
+  }
+}
+
 
 #' Keras implementation
 #' 

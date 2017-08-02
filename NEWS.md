@@ -19,6 +19,7 @@
 
 - Added `return_state` argument to recurrent layers.
 
+- Added `is_keras_available()` function.
 
 
 # keras 2.0.5

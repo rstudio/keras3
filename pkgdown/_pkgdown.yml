@@ -286,6 +286,7 @@ reference:
       - backend
       - implementation
       - install_keras
+      - is_keras_available()
      
   - title: "Losses"
     contents:
