@@ -73,7 +73,10 @@ view_history <- function(history) {
   update_history(history_viewer, history)
   
   # view it
-  getOption("viewer")(file.path(viewer_dir, "index.html"))
+  viewer <- getOption("viewer")
+  metrics <- Filter(function(name) !grepl("^val_", name), history$params$metrics)
+  height <- length(metrics) * 250
+  viewer(file.path(viewer_dir, "index.html"), height = height)
   
   # return history_viewer instance (invisibly) for subsequent
   # calls to update_run_history
