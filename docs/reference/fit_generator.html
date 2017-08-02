@@ -134,8 +134,9 @@ parallel to training your model on GPU.</p>
     
 
     <pre class="usage"><span class='fu'>fit_generator</span>(<span class='no'>object</span>, <span class='no'>generator</span>, <span class='no'>steps_per_epoch</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max_queue_size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+  <span class='kw'>view_history</span> <span class='kw'>=</span> <span class='no'>verbose</span>, <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>validation_steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max_queue_size</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -172,7 +173,13 @@ dataset divided by the batch size.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>verbosity mode, 0, 1, or 2.</p></td>
+      <td><p>Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
+epoch).</p></td>
+    </tr>
+    <tr>
+      <th>view_history</th>
+      <td><p>View realtime plot of training metrics (by epoch) when
+running within RStudio.</p></td>
     </tr>
     <tr>
       <th>callbacks</th>
@@ -244,7 +251,7 @@ previous training run)</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google.</p>
+  <p>Developed by JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>,  Google, Mike Bostock, Masayuki Tanaka.</p>
 </div>
 
 <div class="pkgdown">
