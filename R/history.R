@@ -161,12 +161,18 @@ KerasHistoryViewer <- R6::R6Class("KerasHistoryViewer",
       
       # update view
       self$update_view(logs)
+      
+      # pump events
+      Sys.sleep(0.5)
     },
     
     on_epoch_end = function(epoch, logs = NULL) {
       
+      # update view
       self$update_view(logs)
       
+      # pump events
+      Sys.sleep(0.1)
     },
     
     update_view = function(logs = NULL) {
@@ -185,9 +191,6 @@ KerasHistoryViewer <- R6::R6Class("KerasHistoryViewer",
       else {
         update_history(self$history_viewer, history)
       }
-      
-      # pump events
-      Sys.sleep(0.1)
     },
     
     on_train_end = function(logs = NULL) {
@@ -220,11 +223,9 @@ view_history <- function(history) {
   # write the history
   update_history(history_viewer, history)
   
-  # view it (minimum height of 250px per chart)
+  # view it
   viewer <- getOption("viewer")
-  metrics <- Filter(function(name) !grepl("^val_", name), history$params$metrics)
-  height <- length(metrics) * 250
-  viewer(file.path(viewer_dir, "index.html"), height = height)
+  viewer(file.path(viewer_dir, "index.html"))
   
   # return history_viewer instance (invisibly) for subsequent
   # calls to update_run_history
