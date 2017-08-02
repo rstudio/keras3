@@ -206,7 +206,7 @@ view_history <- function(history) {
   # write the history
   update_history(history_viewer, history)
   
-  # view it
+  # view it (minimum height of 250px per chart)
   viewer <- getOption("viewer")
   metrics <- Filter(function(name) !grepl("^val_", name), history$params$metrics)
   height <- length(metrics) * 250
@@ -218,7 +218,6 @@ view_history <- function(history) {
 }
 
 
-# update the history
 update_history <- function(history_viewer, history) {
   history_json <- file.path(history_viewer$viewer_dir, "history.json")
   jsonlite::write_json(unclass(history), history_json)
@@ -245,9 +244,6 @@ write_static_history <- function(history_viewer, history) {
 can_view_history <- function() {
   !is.null(getOption("viewer")) && nzchar(Sys.getenv("RSTUDIO"))
 }
-
-
-
 
 
 keras_training_history <- function(params, metrics) {
