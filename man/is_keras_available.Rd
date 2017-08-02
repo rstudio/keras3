@@ -7,16 +7,16 @@
 is_keras_available(version = NULL)
 }
 \arguments{
-\item{version}{Minimum required version of Keras
-(defaults to \code{NULL}, no required version).}
+\item{version}{Minimum required version of Keras (defaults to \code{NULL}, no
+required version).}
 }
 \value{
-Logical indicating whether Keras (or the specified minimum
-version of Keras) is available.
+Logical indicating whether Keras (or the specified minimum version of
+Keras) is available.
 }
 \description{
-Probe to see whether the Keras Python package is available in the
-current system environment.
+Probe to see whether the Keras python package is available in the current
+system environment.
 }
 \examples{
 \dontrun{

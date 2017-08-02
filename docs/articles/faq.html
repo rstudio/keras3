@@ -408,6 +408,46 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 <p>Additional information on installing the GPU version of CNTK can be found here: <a href="https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python" class="uri">https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python</a></p>
 </div>
 </div>
+<div id="how-can-i-use-keras-in-another-r-package" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-use-keras-in-another-r-package" class="anchor"></a>How can I use Keras in another R package?</h2>
+<div id="testing-on-cran" class="section level3">
+<h3 class="hasAnchor">
+<a href="#testing-on-cran" class="anchor"></a>Testing on CRAN</h3>
+<p>The main consideration in using Keras within another R package is to ensure that your package can be tested in an environment where Keras is not available (e.g. the CRAN test servers). To do this, arrange for your tests to be skipped when Keras isn’t available using the <code><a href="../reference/is_keras_available.html">is_keras_available()</a></code> function.</p>
+<p>For example, here’s a <a href="http://r-pkgs.had.co.nz/tests.html">testthat</a> utility function that can be used to skip a test when Keras isn’t available:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># testthat utilty for skipping tests when Keras isn't available</span>
+skip_if_no_keras &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">version =</span> <span class="ot">NULL</span>) {
+  <span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="../reference/is_keras_available.html">is_keras_available</a></span>(version))
+    <span class="kw">skip</span>(<span class="st">"Required keras version not available for testing"</span>)
+}
+
+<span class="co"># use the function within a test</span>
+<span class="kw">test_that</span>(<span class="st">"keras function works correctly"</span>, {
+  <span class="kw">skip_if_no_keras</span>()
+  <span class="co"># test code here</span>
+})</code></pre></div>
+<p>You can pass the <code>version</code> argument to check for a specific version of Keras.</p>
+</div>
+<div id="keras-module" class="section level3">
+<h3 class="hasAnchor">
+<a href="#keras-module" class="anchor"></a>Keras Module</h3>
+<p>Another consideration is gaining access to the underlying Keras python module. You might need to do this if you require lower level access to Keras than is provided for by the Keras R package.</p>
+<p>Since the Keras R package can bind to multiple different implementations of Keras (either the original Keras or the TensorFlow implementation of Keras), you should use the <code><a href="http://www.rdocumentation.org/packages/keras/topics/implementation">keras::implementation()</a></code> function to obtain access to the correct python module. You can use this function within the <code>.onLoad</code> function of a package to provide global access to the module within your package. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Keras python module</span>
+keras &lt;-<span class="st"> </span><span class="ot">NULL</span>
+
+<span class="co"># Obtain a reference to the module from the keras R package</span>
+.onLoad &lt;-<span class="st"> </span><span class="cf">function</span>(libname, pkgname) {
+  keras &lt;&lt;-<span class="st"> </span>keras<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/keras/topics/implementation">implementation</a></span>() 
+}</code></pre></div>
+</div>
+<div id="custom-layers" class="section level3">
+<h3 class="hasAnchor">
+<a href="#custom-layers" class="anchor"></a>Custom Layers</h3>
+<p>If you create <a href="custom_layers.html">custom layers in R</a> or import other Python packages which include custom Keras layers, be sure to wrap them using the <code><a href="../reference/create_layer.html">create_layer()</a></code> function so that they are composable using the magrittr pipe operator. See the documentation on <a href="custom_layers.html#layer-wrapper-function">layer wrapper functions</a> for additional details.</p>
+</div>
+</div>
 <div id="how-can-i-obtain-reproducible-results-using-keras-during-development" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-can-i-obtain-reproducible-results-using-keras-during-development" class="anchor"></a>How can I obtain reproducible results using Keras during development?</h2>
@@ -483,6 +523,7 @@ K<span class="op">$</span><span class="kw">set_session</span>(sess)
       <li><a href="#how-can-i-use-pre-trained-models-in-keras">How can I use pre-trained models in Keras?</a></li>
       <li><a href="#how-can-i-use-other-keras-backends">How can I use other Keras backends?</a></li>
       <li><a href="#how-can-i-run-keras-on-a-gpu">How can I run Keras on a GPU?</a></li>
+      <li><a href="#how-can-i-use-keras-in-another-r-package">How can I use Keras in another R package?</a></li>
       <li><a href="#how-can-i-obtain-reproducible-results-using-keras-during-development">How can I obtain reproducible results using Keras during development?</a></li>
       <li><a href="#where-is-the-keras-configuration-filed-stored">Where is the Keras configuration filed stored?</a></li>
       </ul>

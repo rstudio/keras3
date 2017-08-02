@@ -389,6 +389,51 @@ If you have the GPU version of CNTK installed then your Keras code will automati
 Additional information on installing the GPU version of CNTK can be found here: https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python
 
 
+## How can I use Keras in another R package?
+
+### Testing on CRAN
+
+The main consideration in using Keras within another R package is to ensure that your package can be tested in an environment where Keras is not available (e.g. the CRAN test servers). To do this, arrange for your tests to be skipped when Keras isn't available using the `is_keras_available()` function. 
+
+For example, here's a [testthat](http://r-pkgs.had.co.nz/tests.html) utility function that can be used to skip a test when Keras isn't available:
+
+```{r}
+# testthat utilty for skipping tests when Keras isn't available
+skip_if_no_keras <- function(version = NULL) {
+  if (!is_keras_available(version))
+    skip("Required keras version not available for testing")
+}
+
+# use the function within a test
+test_that("keras function works correctly", {
+  skip_if_no_keras()
+  # test code here
+})
+```
+
+You can pass the `version` argument to check for a specific version of Keras.
+
+### Keras Module
+
+Another consideration is gaining access to the underlying Keras python module. You might need to do this if you require lower level access to Keras than is provided for by the Keras R package. 
+
+Since the Keras R package can bind to multiple different implementations of Keras (either the original Keras or the TensorFlow implementation of Keras), you should use the `keras::implementation()` function to obtain access to the correct python module. You can use this function within the `.onLoad` function of a package to provide global access to the module within your package. For example:
+
+```{r}
+# Keras python module
+keras <- NULL
+
+# Obtain a reference to the module from the keras R package
+.onLoad <- function(libname, pkgname) {
+  keras <<- keras::implementation() 
+}
+```
+
+### Custom Layers
+
+If you create [custom layers in R](custom_layers.html) or import other Python packages which include custom Keras layers, be sure to wrap them using the `create_layer()` function so that they are composable using the magrittr pipe operator. See the documentation on [layer wrapper functions](custom_layers.html#layer-wrapper-function) for additional details.
+
+
 ## How can I obtain reproducible results using Keras during development?
 
 During development of a model, sometimes it is useful to be able to obtain reproducible results from run to run in order to determine if a change in performance is due to an actual model or data modification, or merely a result of a new random sample.  
