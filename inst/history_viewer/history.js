@@ -57,6 +57,15 @@ function init_charts(data, update) {
   var c3_container = document.getElementById("c3-container");
   var chart_height = c3_container.offsetHeight / metric_names.length;
   
+  // helper function to tweak chart y-axis
+  function adjust_y_axis(chart, metric, data) {
+    var current_epochs = data.metrics[metric].length;
+    if (metric === 'acc' && current_epochs > 0)
+      chart.axis.max({
+        y: 1
+      });
+  }
+  
   // create a C3 chart for each metric
   var c3_charts = [];
   for (var i = 0; i<metric_names.length; i++) {
@@ -64,14 +73,11 @@ function init_charts(data, update) {
     // get the metric 
     var metric = metric_names[i];
     
-    // special y-axis treatment for accuracy (always 0 to 1)
+    // special y-axis treatment for accuracy
     var y_axis = {};
     if (metric === 'acc') {
-      y_axis.max = 1;
-      y_axis.min = 0;
       y_axis.padding = {
-        top: 0,
-        bottom: 0
+        top: 0
       };
     }
     
@@ -108,9 +114,13 @@ function init_charts(data, update) {
         duration: 20
       }
     });
+    
+    // adjust y axis
+    adjust_y_axis(chart, metric, data);
   
     // track chart
     c3_charts.push(chart);
+
   }
   
   // update all charts every second
@@ -125,6 +135,8 @@ function init_charts(data, update) {
           chart.load({
             columns: chart_columns(metric, data)
           });
+          adjust_y_axis(chart, metric, data);
+          // ensure repaint
           chart.flush();
         }
         

@@ -153,7 +153,23 @@ KerasHistoryViewer <- R6::R6Class("KerasHistoryViewer",
     
     history_viewer = NULL,
     
+    on_train_begin = function(logs = NULL) {
+      
+      # initialize metrics
+      for (metric in self$params$metrics)
+        self$metrics[[metric]] <- numeric()
+      
+      # update view
+      self$update_view(logs)
+    },
+    
     on_epoch_end = function(epoch, logs = NULL) {
+      
+      self$update_view(logs)
+      
+    },
+    
+    update_view = function(logs = NULL) {
       
       # record metrics
       for (metric in names(logs))
