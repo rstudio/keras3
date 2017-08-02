@@ -163,17 +163,15 @@ KerasHistoryViewer <- R6::R6Class("KerasHistoryViewer",
       history <- keras_training_history(self$params, self$metrics)
       
       # create the history_viewer or update if we already have one
-      if (epoch > 0) {
-        if (is.null(self$history_viewer)) {
-          self$history_viewer <- view_history(history)
-        }
-        else {
-          update_history(self$history_viewer, history)
-        }
-        
-        # pump events
-        Sys.sleep(0.25)
+      if (is.null(self$history_viewer)) {
+        self$history_viewer <- view_history(history)
       }
+      else {
+        update_history(self$history_viewer, history)
+      }
+      
+      # pump events
+      Sys.sleep(0.5)
     },
     
     on_train_end = function(logs = NULL) {
