@@ -50,9 +50,6 @@ callback_history_viewer <- function() {
 }
 
 
-
-
-
 view_history <- function(history) {
   
   # create a new temp directory for the viewer's UI/data
