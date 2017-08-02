@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<head>
+
+<meta charset="utf-8">
+<meta content='width=device-width' name='viewport'>
+
+<link href="c3/c3.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="d3/d3.min.js"></script>
+<script type="text/javascript" src="c3/c3.min.js"></script>
+
+<style type="text/css">
+#c3-container {
+  height: 99vh;
+} 
+
+.c3 {
+  width: 100%;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="c3-container"></div>
+
+<script type="text/javascript">
+
+// utility function to load history
+function load_history(callback) {
+  var request = new XMLHttpRequest();
+  request.onreadystatechange = function() {
+  if (request.readyState === 4) {
+    if (request.status === 200 || request.status === 0) {
+      var data = JSON.parse(request.responseText);
+      if (callback) 
+        callback(data);
+    }
+  }
+  };
+  request.open('GET', "history.json");
+  request.send(); 
+}
+
+// array of C3 charts we will be managing
+var c3_charts = [];
+
+// yield chart column data
+function chart_columns(metric, data) {
+  return [
+    [metric].concat(data.metrics.loss),
+    ['val_' + metric].concat(data.metrics.val_loss)
+  ];
+}
+
+// update chart data
+function update_chart(chart, data) {
+  chart.load({
+    columns: chart_columns('loss', data)
+  });
+}
+
+
+// initialize all charts
+
+
+// size chart
+function size_charts() {
+  var c3_container = document.getElementById("c3-container");
+  var chart_height = c3_container.offsetHeight / c3_charts.length;
+  for (var i = 0; i<c3_charts.length; i++) {
+    var chart = c3_charts[i];
+    var element = chart.element;
+    element.style.maxHeight = "none";
+    element.style.height = chart_height + "px";
+    var elementRect = element.getBoundingClientRect();
+    chart.resize({
+      height: elementRect.height,
+      width: elementRect.width
+    });
+  }
+    
+}
+
+// initialize charts
+load_history(function(data) {
+  
+  // alias params and metrics
+  var params = data.params;
+  var metrics = data.metrics;
+  
+  // create chart element and add it to the container
+  var c3_container = document.getElementById("c3-container");
+  var c3_div = document.createElement("div");
+  c3_container.appendChild(c3_div);
+  
+  // determine initial height of chart
+  var height = c3_container.offsetHeight / (c3_charts.length + 1);
+  
+  // create c3 chart bound to div
+  var chart = c3.generate({
+    bindto: c3_div,
+    data: {
+      columns: chart_columns('loss', data)
+    },
+    size: {
+      height: height
+    }
+  });
+  
+  // track chart
+  c3_charts.push(chart);
+  
+  // update data
+  update_chart(chart, data);
+  
+  // resize charts when window resizes
+  window.addEventListener("resize", size_charts);
+});
+
+</script>
+  
+
+  
+</body>
+
+
+
