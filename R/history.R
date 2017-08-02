@@ -143,54 +143,49 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
   }
 }
 
-callback_history_viewer <- function() {
+KerasHistoryViewer <- R6::R6Class("KerasHistoryViewer",
+                                  
+  inherit = KerasCallback,
   
-  R6::R6Class("KerasHistoryViewer",
-              
-    inherit = KerasCallback,
+  public = list(
     
-    public = list(
+    metrics = list(),
+    
+    history_viewer = NULL,
+    
+    on_epoch_end = function(epoch, logs = NULL) {
       
-      metrics = list(),
+      # record metrics
+      for (metric in names(logs))
+        self$metrics[[metric]] <- c(self$metrics[[metric]], logs[[metric]])
       
-      history_viewer = NULL,
+      # create history object
+      history <- keras_training_history(self$params, self$metrics)
       
-      on_epoch_end = function(epoch, logs = NULL) {
-        
-        # record metrics
-        for (metric in names(logs))
-          self$metrics[[metric]] <- c(self$metrics[[metric]], logs[[metric]])
-        
-        # create history object
-        history <- keras_training_history(self$params, self$metrics)
-        
-        # create the history_viewer or update if we already have one
-        if (epoch > 0) {
-          if (is.null(self$history_viewer)) {
-            self$history_viewer <- view_history(history)
-          }
-          else {
-            update_history(self$history_viewer, history)
-          }
-          
-          # pump events
-          Sys.sleep(0.25)
+      # create the history_viewer or update if we already have one
+      if (epoch > 0) {
+        if (is.null(self$history_viewer)) {
+          self$history_viewer <- view_history(history)
         }
-      },
-      
-      on_train_end = function(logs = NULL) {
-        
-        # write a static version of the history at the end of training
-        # (enables saving & publishing of the history)
-        if (!is.null(self$history_viewer)) {
-          write_static_history(self$history_viewer, 
-                               keras_training_history(self$params, self$metrics))
+        else {
+          update_history(self$history_viewer, history)
         }
+        
+        # pump events
+        Sys.sleep(0.25)
       }
-    )
-  )$new()
-}
-
+    },
+    
+    on_train_end = function(logs = NULL) {
+      # write a static version of the history at the end of training
+      # (enables saving & publishing of the history)
+      if (!is.null(self$history_viewer)) {
+        write_static_history(self$history_viewer, 
+                             keras_training_history(self$params, self$metrics))
+      }
+    }
+  )
+)
 
 view_history <- function(history) {
   

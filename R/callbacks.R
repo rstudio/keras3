@@ -419,7 +419,7 @@ normalize_callbacks <- function(verbose, callbacks) {
   
   # include the training history callback if appropriate
   if ((verbose > 0) && can_view_history()) 
-    callbacks <- append(callbacks, callback_history_viewer())  
+    callbacks <- append(callbacks, KerasHistoryViewer$new())  
   
   # return NULL if there are no callbacks
   if (is.null(callbacks)) 
