@@ -123,9 +123,11 @@
 <div id="selecting-a-backend" class="section level2">
 <h2 class="hasAnchor">
 <a href="#selecting-a-backend" class="anchor"></a>Selecting a Backend</h2>
-<p>If you want to use Keras with TensorFlow then you should install it using the <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow">install_tensorflow()</a></code> function. After a successful installation no further action or configuration is necessary since Keras will use TensorFlow by default.</p>
-<p>If you want to use another backend (e.g. “theano” or “cntk”) then you should follow the <a href="https://keras.io/#installation">installation instructions</a> on the Keras website for the Keras Python package and the requisite backend. Then, to select an alternate backend, set the <code>KERAS_BACKEND</code> environment variable before loading the keras R package. For example:</p>
+<p>Keras uses the TensorFlow backend by default. If you want to switch to Theano set the KERAS_BACKEND environment variable before loading the Keras package as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.setenv</span>(<span class="dt">KERAS_BACKEND =</span> <span class="st">"theano"</span>)
+<span class="kw">library</span>(keras)</code></pre></div>
+<p>If you want to use the CNTK backend then you should follow the <a href="https://docs.microsoft.com/en-us/cognitive-toolkit/setup-cntk-on-your-machine">installation instructions</a> for CNTK and then set the <code>KERAS_BACKEND</code> environment variable before loading the keras R package as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.setenv</span>(<span class="dt">KERAS_BACKEND =</span> <span class="st">"cntk"</span>)
 <span class="kw">library</span>(keras)</code></pre></div>
 <div id="environment-variables" class="section level3">
 <h3 class="hasAnchor">
@@ -144,11 +146,11 @@
 <tbody>
 <tr class="odd">
 <td><code>KERAS_IMPLEMENTATION</code></td>
-<td>Keras specifies an API that can be implemented by multiple providers. By default, the Keras R package uses the implementation embedded within TensorFlow (“tensorflow”). The Keras Python package (“keras”) provides another implementation. You can specify either of these values, or another Python package entirely as the implementation.</td>
+<td>Keras specifies an API that can be implemented by multiple providers. By default, the Keras R package uses the implementation provided by the Keras Python package (“keras”). TensorFlow also provides an integrated implementation of Keras which you can use by specifying “tensorflow” as the implementation.</td>
 </tr>
 <tr class="even">
 <td><code>KERAS_BACKEND</code></td>
-<td>The “tensorflow” implementation of Keras supports only TensorFlow as a backend engine However, the “keras” implementation supports the “tensorflow”, “keras”, and “cntk” backends. Note that if you specify a value for <code>KERAS_BACKEND</code> and do not specify one for <code>KERAS_IMPLEMENTATION</code> then the implementation will be automatically set to “keras”.</td>
+<td>The “keras” implementation supports the “tensorflow”, “keras”, and “cntk” backends. Note that the “tensorflow” implementation supports only the “tensorflow” backend.</td>
 </tr>
 <tr class="odd">
 <td><code>KERAS_PYTHON</code></td>

@@ -19,7 +19,7 @@ test_activation <- function(name, required_version = NULL) {
 
 
 test_activation("activation_elu")
-test_activation("activation_selu", required_version = "2.0.5")
+test_activation("activation_selu", required_version = "2.0.6")
 test_activation("activation_hard_sigmoid")
 test_activation("activation_linear")
 test_activation("activation_relu")

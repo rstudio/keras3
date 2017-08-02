@@ -17,7 +17,7 @@ activation_relu(x, alpha = 0, max_value = NULL)
 
 activation_elu(x, alpha = 1)
 
-activation_selu(x, alpha = 1)
+activation_selu(x)
 
 activation_hard_sigmoid(x)
 

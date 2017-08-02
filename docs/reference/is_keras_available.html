@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Keras implementation — implementation • keras</title>
+<title>Check if Keras is Available — is_keras_available • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -124,40 +124,57 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Keras implementation</h1>
+    <h1>Check if Keras is Available</h1>
     </div>
 
     
-    <p>Obtain a reference to the Python module used for the implementation of Keras.</p>
+    <p>Probe to see whether the Keras python package is available in the current
+system environment.</p>
     
 
-    <pre class="usage"><span class='fu'>implementation</span>()</pre>
-        
+    <pre class="usage"><span class='fu'>is_keras_available</span>(<span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>version</th>
+      <td><p>Minimum required version of Keras (defaults to <code>NULL</code>, no
+required version).</p></td>
+    </tr>
+    </table>
+    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Reference to the Python module used for the implementation of Keras.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>There are currently two Python modules which implement Keras:</p><ul>
-<li><p>keras ("keras")</p></li>
-<li><p>tensorflow.contrib.keras ("tensorflow")</p></li>
-</ul>
-    <p>This function returns a reference to the implementation being currently
-used by the keras package. The default implementation is "keras".
-You can override this by setting the <code>KERAS_IMPLEMENTATION</code> environment
-variable to "tensorflow".</p>
+    <p>Logical indicating whether Keras (or the specified minimum version of
+Keras) is available.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># testthat utilty for skipping tests when Keras isn't available</span>
+<span class='no'>skip_if_no_keras</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>) {
+  <span class='kw'>if</span> (!<span class='fu'>is_keras_available</span>(<span class='no'>version</span>))
+    <span class='fu'>skip</span>(<span class='st'>"Required keras version not available for testing"</span>)
+}
+
+<span class='co'># use the function within a test</span>
+<span class='fu'>test_that</span>(<span class='st'>"keras function works correctly"</span>, {
+  <span class='fu'>skip_if_no_keras</span>()
+  <span class='co'># test code here</span>
+})
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

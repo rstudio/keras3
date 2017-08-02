@@ -31,7 +31,7 @@ test_callback("model_checkpoint", callback_model_checkpoint("checkpoint.h5"), h5
 test_callback("learning_rate_scheduler", callback_learning_rate_scheduler(schedule = function (index) {
   0.1
 }))
-if (have_keras() && is_backend("tensorflow"))
+if (is_keras_available() && is_backend("tensorflow"))
   test_callback("tensorboard", callback_tensorboard(log_dir = "./tb_logs"))
 
 test_callback("terminate_on_naan", callback_terminate_on_naan(), required_version = "2.0.5")

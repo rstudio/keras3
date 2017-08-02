@@ -279,11 +279,14 @@ reference:
     contents:
       - plot.keras_training_history
       - to_categorical
+      - to_numpy_array
       - normalize
       - hdf5_matrix
       - get_file
       - backend
       - implementation
+      - install_keras
+      - is_keras_available
      
   - title: "Losses"
     contents:

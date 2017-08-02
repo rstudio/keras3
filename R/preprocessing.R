@@ -476,7 +476,7 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
 fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL, ...) {
   generator <- object
   history <- generator$fit(
-    x = x,
+    x = to_numpy_array(x),
     augment = augment,
     rounds = as.integer(rounds),
     seed = seed
@@ -515,8 +515,8 @@ flow_images_from_data <- function(
           shuffle = TRUE, seed = NULL, 
           save_to_dir = NULL, save_prefix = "", save_format = 'png') {
   generator$flow(
-    x = x,
-    y = y,
+    x = to_numpy_array(x),
+    y = to_numpy_array(y),
     batch_size = as.integer(batch_size),
     shuffle = shuffle,
     seed = as_nullable_integer(seed),

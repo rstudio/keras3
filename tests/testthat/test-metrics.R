@@ -23,10 +23,13 @@ test_succeeds("metrics be can called directly", {
   metric_binary_crossentropy(y_true, y_pred)
   metric_hinge(y_true, y_pred)
   
-
+  # remainder of operations don't work on CNTK
+  skip_if_cntk()
+  
   y_pred <- K$variable(matrix(c(0.3, 0.2, 0.1, 0.1, 0.2, 0.7), nrow=2, ncol = 3))
   y_true <- K$variable(matrix(c(0L, 1L), nrow = 2, ncol = 1))
   metric_top_k_categorical_accuracy(y_true, y_pred, k = 3)
-  if (have_keras("2.0.5"))
+  if (is_keras_available("2.0.5"))
     metric_sparse_top_k_categorical_accuracy(y_true, y_pred, k = 3)
+    
 })

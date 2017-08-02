@@ -133,9 +133,10 @@ dynamic graphs of your training and test metrics, as well as activation
 histograms for the different layers in your model.</p>
     
 
-    <pre class="usage"><span class='fu'>callback_tensorboard</span>(<span class='kw'>log_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>histogram_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>write_graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>write_images</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>embeddings_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>embeddings_layer_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>embeddings_metadata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>callback_tensorboard</span>(<span class='kw'>log_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>histogram_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>,
+  <span class='kw'>write_graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>write_grads</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>write_images</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>embeddings_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>embeddings_layer_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>embeddings_metadata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -153,9 +154,19 @@ histograms for the layers of the model. If set to 0, histograms won't be
 computed.</p></td>
     </tr>
     <tr>
+      <th>batch_size</th>
+      <td><p>size of batch of inputs to feed to the network
+for histograms computation.</p></td>
+    </tr>
+    <tr>
       <th>write_graph</th>
       <td><p>whether to visualize the graph in Tensorboard. The log
 file can become quite large when write_graph is set to <code>TRUE</code></p></td>
+    </tr>
+    <tr>
+      <th>write_grads</th>
+      <td><p>whether to visualize gradient histograms in TensorBoard.
+<code>histogram_freq</code> must be greater than 0.</p></td>
     </tr>
     <tr>
       <th>write_images</th>
@@ -186,7 +197,7 @@ for all embedding layers, string can be passed.</p></td>
 
     <p>TensorBoard is a visualization tool provided with TensorFlow.</p>
 <p>You can find more information about TensorBoard
-<a href='https://tensorflow.rstudio.com/howto_summaries_and_tensorboard.html'>here</a>.</p>
+<a href='https://www.tensorflow.org/get_started/summaries_and_tensorboard'>here</a>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

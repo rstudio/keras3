@@ -27,6 +27,9 @@ length of the convolution. Specifying any stride value != 1 is incompatible
 with specifying any \code{dilation_rate} value != 1.}
 
 \item{padding}{One of \code{"valid"}, \code{"causal"} or \code{"same"} (case-insensitive).
+\code{"valid"} means "no padding".
+\code{"same"} results in padding the input such that the output has the same
+length as the original input.
 \code{"causal"} results in causal (dilated) convolutions, e.g. \code{output[t]} does
 not depend on \code{input[t+1:]}. Useful when modeling temporal data where the
 model should not violate the temporal order. See \href{https://arxiv.org/abs/1609.03499}{WaveNet: A GenerativeModel for Raw Audio, section 2.1}.}

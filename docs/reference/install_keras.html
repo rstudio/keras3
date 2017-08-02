@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Keras implementation — implementation • keras</title>
+<title>Install Keras and the TensorFlow backend — install_keras • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -124,39 +124,58 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Keras implementation</h1>
+    <h1>Install Keras and the TensorFlow backend</h1>
     </div>
 
     
-    <p>Obtain a reference to the Python module used for the implementation of Keras.</p>
+    <p>Install Keras and the TensorFlow backend</p>
     
 
-    <pre class="usage"><span class='fu'>implementation</span>()</pre>
-        
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Reference to the Python module used for the implementation of Keras.</p>
+    <pre class="usage"><span class='fu'>install_keras</span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"auto"</span>, <span class='st'>"virtualenv"</span>, <span class='st'>"conda"</span>, <span class='st'>"system"</span>),
+  <span class='kw'>conda</span> <span class='kw'>=</span> <span class='st'>"auto"</span>)</pre>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>method</th>
+      <td><p>Installation method. By default, "auto" automatically finds a
+method that will work in the local environment. Change the default to force
+a specific installation method. Note that the "virtualenv" method is not
+available on Windows (as this isn't supported by TensorFlow). Note also
+that since this command runs without privillege the "system" method is
+available only on Windows.</p></td>
+    </tr>
+    <tr>
+      <th>conda</th>
+      <td><p>Path to conda executable (or "auto" to find conda using the PATH
+and other conventional install locations).</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>There are currently two Python modules which implement Keras:</p><ul>
-<li><p>keras ("keras")</p></li>
-<li><p>tensorflow.contrib.keras ("tensorflow")</p></li>
-</ul>
-    <p>This function returns a reference to the implementation being currently
-used by the keras package. The default implementation is "keras".
-You can override this by setting the <code>KERAS_IMPLEMENTATION</code> environment
-variable to "tensorflow".</p>
+    <p>If you want to do a more customized installation of TensorFlow
+(including installing a version that takes advantage of Nvidia GPUs if you
+have the correct CUDA libraries installed) you can call the
+<code><a href='http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow'>install_tensorflow()</a></code> function manually before calling <code>install_keras()</code>.
+See the <a href='https://tensorflow.rstudio.com/installation.html'>article on TensorFlow installation</a> to learn
+about more advanced options.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><code><a href='http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow'>install_tensorflow()</a></code></p>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#note">Note</a></li>
 
-      <li><a href="#details">Details</a></li>
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

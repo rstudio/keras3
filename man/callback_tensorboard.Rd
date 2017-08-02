@@ -4,9 +4,10 @@
 \alias{callback_tensorboard}
 \title{TensorBoard basic visualizations}
 \usage{
-callback_tensorboard(log_dir = NULL, histogram_freq = 0,
-  write_graph = TRUE, write_images = FALSE, embeddings_freq = 0,
-  embeddings_layer_names = NULL, embeddings_metadata = NULL)
+callback_tensorboard(log_dir = NULL, histogram_freq = 0, batch_size = 32,
+  write_graph = TRUE, write_grads = FALSE, write_images = FALSE,
+  embeddings_freq = 0, embeddings_layer_names = NULL,
+  embeddings_metadata = NULL)
 }
 \arguments{
 \item{log_dir}{The path of the directory where to save the log files to be
@@ -17,8 +18,14 @@ run directory (if available) and otherwise will use "logs".}
 histograms for the layers of the model. If set to 0, histograms won't be
 computed.}
 
+\item{batch_size}{size of batch of inputs to feed to the network
+for histograms computation.}
+
 \item{write_graph}{whether to visualize the graph in Tensorboard. The log
 file can become quite large when write_graph is set to \code{TRUE}}
+
+\item{write_grads}{whether to visualize gradient histograms in TensorBoard.
+\code{histogram_freq} must be greater than 0.}
 
 \item{write_images}{whether to write model weights to visualize as image in
 Tensorboard.}
@@ -44,7 +51,7 @@ histograms for the different layers in your model.
 TensorBoard is a visualization tool provided with TensorFlow.
 
 You can find more information about TensorBoard
-\href{https://tensorflow.rstudio.com/howto_summaries_and_tensorboard.html}{here}.
+\href{https://www.tensorflow.org/get_started/summaries_and_tensorboard}{here}.
 }
 \seealso{
 Other callbacks: \code{\link{callback_csv_logger}},

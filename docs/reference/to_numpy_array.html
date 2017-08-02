@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Keras implementation — implementation • keras</title>
+<title>Convert to NumPy Array — to_numpy_array • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -124,39 +124,49 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Keras implementation</h1>
+    <h1>Convert to NumPy Array</h1>
     </div>
 
     
-    <p>Obtain a reference to the Python module used for the implementation of Keras.</p>
+    <p>Convert an object to a NumPy array which has the optimal in-memory layout and
+floating point data type for the current Keras backend.</p>
     
 
-    <pre class="usage"><span class='fu'>implementation</span>()</pre>
-        
+    <pre class="usage"><span class='fu'>to_numpy_array</span>(<span class='no'>x</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>order</span> <span class='kw'>=</span> <span class='st'>"C"</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Object or list of objects to convert</p></td>
+    </tr>
+    <tr>
+      <th>dtype</th>
+      <td><p>NumPy data type (e.g. float32, float64). If this is unspecified
+then R doubles will be converted to the default floating point type for the
+current Keras backend.</p></td>
+    </tr>
+    <tr>
+      <th>order</th>
+      <td><p>In-memory order ('C' or 'F'). Defaults to 'C', which is the
+optimal order in nearly every case for Keras backends.</p></td>
+    </tr>
+    </table>
+    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Reference to the Python module used for the implementation of Keras.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>There are currently two Python modules which implement Keras:</p><ul>
-<li><p>keras ("keras")</p></li>
-<li><p>tensorflow.contrib.keras ("tensorflow")</p></li>
-</ul>
-    <p>This function returns a reference to the implementation being currently
-used by the keras package. The default implementation is "keras".
-You can override this by setting the <code>KERAS_IMPLEMENTATION</code> environment
-variable to "tensorflow".</p>
+    <p>NumPy array with the specified type and order (or list of NumPy
+arrays if a list was passed for <code>x</code>).</p>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
           </ul>
 
   </div>

@@ -9,6 +9,8 @@
 #' @param use_bias Boolean, whether the layer uses a bias vector.
 #' @param return_sequences Boolean. Whether to return the last output in the 
 #'   output sequence, or the full sequence.
+#' @param return_state Boolean (default FALSE). Whether to return the last state
+#'   in addition to the output.
 #' @param go_backwards Boolean (default FALSE). If TRUE, process the input 
 #'   sequence backwards and return the reversed sequence.
 #' @param stateful Boolean (default FALSE). If TRUE, the last state for each 
@@ -55,13 +57,14 @@
 #'   
 #' @export
 layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE, 
-                             return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,
+                             return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,
                              kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
                              kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                              kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
                              dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
                              dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  create_layer(keras$layers$SimpleRNN, object, list(
+  
+  args <- list(
     units = as.integer(units),
     activation = activation,
     use_bias = use_bias,
@@ -89,7 +92,12 @@ layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
+  
+  if (keras_version() >= "2.0.5")
+    args$return_state <- return_state
+  
+  create_layer(keras$layers$SimpleRNN, object, args)
 }
 
 
@@ -114,13 +122,14 @@ layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE
 #'     
 #' @export
 layer_gru <- function(object, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 
-                      return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,
+                      return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,
                       kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
                       kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                       kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
                       dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
                       dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  create_layer(keras$layers$GRU, object, list(
+  
+  args <- list(
     units = as.integer(units),
     activation = activation,
     recurrent_activation = recurrent_activation,
@@ -149,7 +158,12 @@ layer_gru <- function(object, units, activation = "tanh", recurrent_activation =
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
+  
+  if (keras_version() >= "2.0.5")
+    args$return_state <- return_state
+  
+  create_layer(keras$layers$GRU, object, args)
 }
 
 
@@ -176,14 +190,14 @@ layer_gru <- function(object, units, activation = "tanh", recurrent_activation =
 #'     
 #' @export
 layer_lstm <- function(object, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 
-                       return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,
+                       return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, implementation = 0L,
                        kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
                        unit_forget_bias = TRUE, kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, 
                        activity_regularizer = NULL, kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
                        dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
                        dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  create_layer(keras$layers$LSTM, object, list(
+  args <- list(
     units = as.integer(units),
     activation = activation,
     recurrent_activation = recurrent_activation,
@@ -213,8 +227,12 @@ layer_lstm <- function(object, units, activation = "tanh", recurrent_activation 
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
   
+  if (keras_version() >= "2.0.5")
+    args$return_state <- return_state
+  
+  create_layer(keras$layers$LSTM, object, args)
 }
 
 

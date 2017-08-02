@@ -152,6 +152,9 @@ parallel to training your model on GPU.</p>
  - (inputs, targets, sample_weights)
 </pre>
 
+<p>Note that the generator should call the <code><a href='to_numpy_array.html'>to_numpy_array()</a></code> function on its
+results prior to returning them (this ensures that arrays are provided in
+'C' order and using the default floating point type for the backend.)</p>
 <p>All arrays should contain the same number of samples. The generator is expected
 to loop over its data indefinitely. An epoch finishes when <code>steps_per_epoch</code>
 batches have been seen by the model.</p></td>

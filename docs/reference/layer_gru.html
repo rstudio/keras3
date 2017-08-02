@@ -133,8 +133,8 @@
 
     <pre class="usage"><span class='fu'>layer_gru</span>(<span class='no'>object</span>, <span class='no'>units</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='st'>"tanh"</span>,
   <span class='kw'>recurrent_activation</span> <span class='kw'>=</span> <span class='st'>"hard_sigmoid"</span>, <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>return_sequences</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>go_backwards</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>stateful</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>unroll</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>implementation</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
+  <span class='kw'>return_sequences</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>return_state</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>go_backwards</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>stateful</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>unroll</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>implementation</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
   <span class='kw'>kernel_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>,
   <span class='kw'>recurrent_initializer</span> <span class='kw'>=</span> <span class='st'>"orthogonal"</span>, <span class='kw'>bias_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
   <span class='kw'>kernel_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>recurrent_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -173,6 +173,11 @@ step.</p></td>
       <th>return_sequences</th>
       <td><p>Boolean. Whether to return the last output in the
 output sequence, or the full sequence.</p></td>
+    </tr>
+    <tr>
+      <th>return_state</th>
+      <td><p>Boolean (default FALSE). Whether to return the last state
+in addition to the output.</p></td>
     </tr>
     <tr>
       <th>go_backwards</th>
@@ -297,6 +302,32 @@ isn't provided.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="input-shapes"><a class="anchor" href="#input-shapes"></a>Input shapes</h2>
+
+    
+    <p>3D tensor with shape <code>(batch_size, timesteps, input_dim)</code>,
+(Optional) 2D tensors with shape <code>(batch_size, output_dim)</code>.</p>
+    
+    <h2 class="hasAnchor" id="output-shape"><a class="anchor" href="#output-shape"></a>Output shape</h2>
+
+    
+    <ul>
+<li><p>if <code>return_state</code>: a list of tensors. The first tensor is
+the output. The remaining tensors are the last states,
+each with shape <code>(batch_size, units)</code>.</p></li>
+<li><p>if <code>return_sequences</code>: 3D tensor with shape
+<code>(batch_size, timesteps, units)</code>.</p></li>
+<li><p>else, 2D tensor with shape <code>(batch_size, units)</code>.</p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="masking"><a class="anchor" href="#masking"></a>Masking</h2>
+
+    
+    <p>This layer supports masking for input data with a variable number
+of timesteps. To introduce masks to your data,
+use an embedding layer with the <code>mask_zero</code> parameter
+set to <code>TRUE</code>.</p>
+    
     <h2 class="hasAnchor" id="statefulness-in-rnns"><a class="anchor" href="#statefulness-in-rnns"></a>Statefulness in RNNs</h2>
 
     
@@ -350,6 +381,12 @@ the initial state of the RNN layer.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#input-shapes">Input shapes</a></li>
+
+      <li><a href="#output-shape">Output shape</a></li>
+
+      <li><a href="#masking">Masking</a></li>
+
       <li><a href="#statefulness-in-rnns">Statefulness in RNNs</a></li>
 
       <li><a href="#initial-state-of-rnns">Initial State of RNNs</a></li>

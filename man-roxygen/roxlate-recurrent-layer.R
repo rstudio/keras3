@@ -1,5 +1,26 @@
 #' @md
 #' 
+#' @section Input shapes:
+#' 
+#' 3D tensor with shape `(batch_size, timesteps, input_dim)`,
+#' (Optional) 2D tensors with shape `(batch_size, output_dim)`.
+#' 
+#' @section Output shape:
+#' 
+#' - if `return_state`: a list of tensors. The first tensor is
+#' the output. The remaining tensors are the last states,
+#' each with shape `(batch_size, units)`.
+#' - if `return_sequences`: 3D tensor with shape
+#' `(batch_size, timesteps, units)`.
+#' - else, 2D tensor with shape `(batch_size, units)`.
+#' 
+#' @section Masking:
+#' 
+#' This layer supports masking for input data with a variable number
+#' of timesteps. To introduce masks to your data,
+#' use an embedding layer with the `mask_zero` parameter
+#' set to `TRUE`.
+#' 
 #' @section Statefulness in RNNs:
 #' 
 #' You can set RNN layers to be 'stateful', which means that the states

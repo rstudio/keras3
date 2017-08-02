@@ -256,7 +256,7 @@ layer_lambda <- function(object, f, output_shape = NULL, mask = NULL, arguments 
     weights = weights
   )
   
-  if (identical(backend()$backend(), "theano"))
+  if (backend()$backend() %in% c("theano", "cntk"))
     args$output_shape = as_integer_tuple(output_shape)
   
   create_layer(keras$layers$Lambda, object, args)
