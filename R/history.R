@@ -62,24 +62,15 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
       method <- "base"
   }
   
+  # convert to data frame
+  df <- as.data.frame(x)
+  
   # if metrics is null we plot all of the metrics
   if (is.null(metrics))
     metrics <- Filter(function(name) !grepl("^val_", name), names(x$metrics))
 
-  # prepare data to plot as a data.frame
-  df <- data.frame(
-    epoch = seq_len(x$params$epochs),
-    value = unlist(x$metrics),
-    metric = rep(sub("^val_", "", names(x$metrics)), each = x$params$epochs),
-    data = rep(grepl("^val_", names(x$metrics)), each = x$params$epochs)
-  )
-  
   # select the correct metrics
   df <- df[df$metric %in% metrics, ]
-  
-  # order factor levles appropriately
-  df$data <- factor(df$data, c(FALSE, TRUE), c('training', 'validation'))
-  df$metric <- factor(df$metric, unique(sub("^val_", "", names(x$metrics))))
   
   if (method == "ggplot2") {
     # helper function for correct breaks (integers only)
@@ -141,6 +132,26 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
         graphics::legend(legend_location, legend = metric, pch = 1)
     }
   }
+}
+
+
+#' @export
+as.data.frame.keras_training_history <- function(x, ...) {
+  # prepare data to plot as a data.frame
+  df <- data.frame(
+    epoch = seq_len(x$params$epochs),
+    value = unlist(x$metrics),
+    metric = rep(sub("^val_", "", names(x$metrics)), each = x$params$epochs),
+    data = rep(grepl("^val_", names(x$metrics)), each = x$params$epochs)
+  )
+  rownames(df) <- NULL
+  
+  # order factor levles appropriately
+  df$data <- factor(df$data, c(FALSE, TRUE), c('training', 'validation'))
+  df$metric <- factor(df$metric, unique(sub("^val_", "", names(x$metrics))))
+
+  # return
+  df
 }
 
 KerasHistoryViewer <- R6::R6Class("KerasHistoryViewer",

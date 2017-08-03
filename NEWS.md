@@ -23,6 +23,8 @@
 
 - `is_keras_available()` function to probe whether the Keras python 
   package is available in the current environment.
+  
+- `as.data.frame()` S3 method for Keras training history 
 
 
 # keras 2.0.5
