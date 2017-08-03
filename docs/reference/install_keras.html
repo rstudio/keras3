@@ -131,8 +131,8 @@
     <p>Install Keras and the TensorFlow backend</p>
     
 
-    <pre class="usage"><span class='fu'>install_keras</span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"auto"</span>, <span class='st'>"virtualenv"</span>, <span class='st'>"conda"</span>, <span class='st'>"system"</span>),
-  <span class='kw'>conda</span> <span class='kw'>=</span> <span class='st'>"auto"</span>)</pre>
+    <pre class="usage"><span class='fu'>install_keras</span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"auto"</span>, <span class='st'>"virtualenv"</span>, <span class='st'>"conda"</span>),
+  <span class='kw'>tensorflow</span> <span class='kw'>=</span> <span class='st'>"default"</span>, <span class='kw'>conda</span> <span class='kw'>=</span> <span class='st'>"auto"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -142,9 +142,13 @@
       <td><p>Installation method. By default, "auto" automatically finds a
 method that will work in the local environment. Change the default to force
 a specific installation method. Note that the "virtualenv" method is not
-available on Windows (as this isn't supported by TensorFlow). Note also
-that since this command runs without privillege the "system" method is
-available only on Windows.</p></td>
+available on Windows (as this isn't supported by TensorFlow) so "conda"
+is the only supported method on windows.</p></td>
+    </tr>
+    <tr>
+      <th>tensorflow</th>
+      <td><p>Named character vector of additional options to pass to
+<code><a href='http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow'>install_tensorflow()</a></code>.</p></td>
     </tr>
     <tr>
       <th>conda</th>
@@ -157,16 +161,37 @@ and other conventional install locations).</p></td>
 
     <p>If you want to do a more customized installation of TensorFlow
 (including installing a version that takes advantage of Nvidia GPUs if you
-have the correct CUDA libraries installed) you can call the
-<code><a href='http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow'>install_tensorflow()</a></code> function manually before calling <code>install_keras()</code>.
-See the <a href='https://tensorflow.rstudio.com/installation.html'>article on TensorFlow installation</a> to learn
-about more advanced options.</p>
+have the correct CUDA libraries installed) you can pass additional options
+to the <code><a href='http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow'>install_tensorflow()</a></code> function using the <code>tensorflow</code> argument.</p>
+<p>If you want to do a fully custom installation of TensorFlow and
+Keras using pip (e.g. a shared installation on a server) you can
+do that and the keras R package will discover and use that version.</p>
+<p>See the <a href='https://tensorflow.rstudio.com/installation.html'>article on TensorFlow installation</a>
+to learn about more advanced installation options.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><code><a href='http://www.rdocumentation.org/packages/tensorflow/topics/install_tensorflow'>install_tensorflow()</a></code></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># default installation</span>
+<span class='fu'>library</span>(<span class='no'>keras</span>)
+<span class='fu'>install_keras</span>()
+
+<span class='co'># install using a conda environment (default is virtualenv)</span>
+<span class='fu'>install_keras</span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"conda"</span>)
+
+<span class='co'># install a specific version of TensorFlow</span>
+<span class='fu'>install_keras</span>(<span class='kw'>tensorflow</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"1.2.1"</span>))
+
+<span class='co'># install with GPU version of TensorFlow </span>
+<span class='co'># (NOTE: only do this if you have an Nvidia GPU + CUDA!)</span>
+<span class='fu'>install_keras</span>(<span class='kw'>tensorflow</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>gpu</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
+
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -176,7 +201,9 @@ about more advanced options.</p>
       <li><a href="#note">Note</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

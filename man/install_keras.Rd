@@ -15,9 +15,7 @@ available on Windows (as this isn't supported by TensorFlow) so "conda"
 is the only supported method on windows.}
 
 \item{tensorflow}{Named character vector of additional options to pass to
-\code{\link[=install_tensorflow]{install_tensorflow()}}. If this argument is "default" then a previous
-installation of TensorFlow will be used if available. Otherwise, a new
-installation will be performed using the specified options.}
+\code{\link[=install_tensorflow]{install_tensorflow()}}.}
 
 \item{conda}{Path to conda executable (or "auto" to find conda using the PATH
 and other conventional install locations).}
@@ -32,14 +30,15 @@ have the correct CUDA libraries installed) you can pass additional options
 to the \code{\link[=install_tensorflow]{install_tensorflow()}} function using the \code{tensorflow} argument.
 
 If you want to do a fully custom installation of TensorFlow and
-Keras using pip (e.g. a shared installation on a server) you can do that
-and the keras R package will discover and use that version.
+Keras using pip (e.g. a shared installation on a server) you can
+do that and the keras R package will discover and use that version.
 
 See the \href{https://tensorflow.rstudio.com/installation.html}{article on TensorFlow installation}
 to learn about more advanced installation options.
 }
 \examples{
 \dontrun{
+
 # default installation
 library(keras)
 install_keras()

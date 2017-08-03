@@ -11,9 +11,7 @@
 #'   is the only supported method on windows.
 #'
 #' @param tensorflow Named character vector of additional options to pass to
-#'   [install_tensorflow()]. If this argument is "default" then a previous 
-#'   installation of TensorFlow will be used if available. Otherwise, a new
-#'   installation will be performed using the specified options.
+#'   [install_tensorflow()]. 
 #'
 #' @note If you want to do a more customized installation of TensorFlow
 #'   (including installing a version that takes advantage of Nvidia GPUs if you
@@ -21,14 +19,15 @@
 #'   to the [install_tensorflow()] function using the `tensorflow` argument.
 #'   
 #'   If you want to do a fully custom installation of TensorFlow and
-#'   Keras using pip (e.g. a shared installation on a server) you can do that
-#'   and the keras R package will discover and use that version.
+#'   Keras using pip (e.g. a shared installation on a server) you can
+#'   do that and the keras R package will discover and use that version.
 #'   
 #'   See the [article on TensorFlow installation](https://tensorflow.rstudio.com/installation.html)
 #'   to learn about more advanced installation options.
 #'   
 #' @examples 
 #' \dontrun{
+#' 
 #' # default installation
 #' library(keras)
 #' install_keras()
