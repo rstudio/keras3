@@ -1,16 +1,16 @@
 ---
-title: "TensorBoard Visualization"
+title: "Training Visualization"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{TensorBoard Visualization}
+  %\VignetteIndexEntry{Training Visualization}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "TensorBoard Visualizations"
-    identifier: "keras-tensorboard-visualization"
+    name: "Training Visualization"
+    identifier: "keras-training-visualization"
     parent: "keras-using-keras"
     weight: 50
 ---
@@ -22,13 +22,102 @@ knitr::opts_chunk$set(comment = NA, eval = FALSE)
 
 ## Overview
 
+There are a number of tools available for visualizing the training of Keras models, including:
+
+1) A [plot method](https://rstudio.github.io/keras/reference/plot.keras_training_history.html) for the Keras training history returned from `fit()`.
+
+2) Real time visualization of model metrics within the RStudio IDE.
+
+3) Integration with the [TensorBoard](https://www.tensorflow.org/get_started/summaries_and_tensorboard) visualization tool included with TensorFlow.
+
+## Plotting History
+
+The Keras `fit()` method returns an R object containing the training history, including the value of each metric at each epoch of the training run. You can visualization the training history using the `plot()` method. For example, here we compile and fit a model with the "accuracy" metric:
+
+
+```{r}
+model %>% compile(
+  loss = 'categorical_crossentropy',
+  optimizer = optimizer_rmsprop(),
+  metrics = c('accuracy')
+)
+
+history <- model %>% fit(
+  x_train, y_train, 
+  epochs = 30, batch_size = 128, 
+  validation_split = 0.2
+)
+```
+
+We can then plot the history as follows:
+
+```{r}
+plot(history)
+```
+
+![](images/training_history_ggplot2.png){width=757 height=489 .r-plot}
+
+By default the history will be plotted using [ggplot2](http://ggplot2.tidyverse.org/) (a base graphics method is also available), include all specified metrics as well as the loss, and draw a smoothing line if there are 10 or more epochs. You can customize all of this behavior via various options of the [plot method](https://rstudio.github.io/keras/reference/plot.keras_training_history.html).
+
+## RStudio IDE 
+
+If you are training your model within the RStudio IDE then real time metrics are available within the Viewer pane:
+
+```{css}
+#rstudiohistory {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+```
+
+<a id="rstudiohistory" href="https://rstudioblog.files.wordpress.com/2017/08/rstudio-training-metrics-full.gif"></a>
+<script type="application/javascript">
+function isMobilePhone() {
+  try { return ! window.matchMedia("only screen and (min-width: 768px)").matches; }
+  catch(e) { return false; }
+}
+var a = document.getElementById("rstudiohistory");
+var img = document.createElement("IMG");
+img.className = "r-plot";
+img.width = 640;
+img.height = 502;
+if (!isMobilePhone()) {
+  img.src = "https://i1.wp.com/rstudioblog.files.wordpress.com/2017/08/rstudio-training-metrics.gif";
+} else {
+  a.href = '';
+  img.src = "https://i0.wp.com/rstudioblog.files.wordpress.com/2017/08/rstudio-training-metrics-mobile.png";
+}
+a.appendChild(img);
+</script>
+
+The `view_history` argument of the `fit()` method controls whether real time metrics are displayed. By default metrics are automatically displayed if one or more metrics are specified in the call to `compile()` and there is more than one training epoch. In addition, metrics are not shown if `verbose = 0`.
+
+You can explicitly control whether metrics are displayed by specifying the `view_history` argument. You can also set a global session default using the `keras.view_history` option:
+
+```{r}
+# don't show history during this run
+history <- model %>% fit(
+  x_train, y_train, 
+  epochs = 30, batch_size = 128, 
+  view_history = FALSE,
+  validation_split = 0.2
+)
+
+# set global default to never show history
+options(keras.view_history = FALSE)
+```
+
+Note that when `view_history` is `TRUE` metric history will be displayed even when not running within RStudio (in that case metrics will be displayed in an external web browser).
+
+## TensorBoard
+
 TensorBoard is a visualization tool included with TensorFlow that enables you to visualize dynamic graphs of your Keras training and test metrics, as well as activation histograms for the different layers in your model. 
 
 For example, here's a TensorBoard display for Keras accuracy and loss metrics:
 
 ![](images/tensorboard.png){width=700 height=545 .screenshot}
 
-## Recording Data
+### Recording Data
 
 To record data that can be visualized with TensorBoard, you add a TensorBoard callback to the `fit()` function. For example:
 
@@ -47,7 +136,7 @@ See the documentation on the `callback_tensorboard()` function for the various a
 
 You should either use a distinct log directory for each training run or remove the log directory between runs.
 
-## Viewing Data
+### Viewing Data
 
 To view TensorBoard data for a given set of runs you use the `tensorboard()` function, pointing it to the previously specified `log_dir`:
 
@@ -74,7 +163,7 @@ history <- model %>% fit(
 
 Keras writes TensorBoard data at the end of each epoch so you won't see any data in TensorBoard until 10-20 seconds after the end of the first epoch (TensorBoard automatically refreshes it's display every 30 seconds during training). 
 
-## Comparing Runs
+### Comparing Runs
 
 TensorBoard will automatically include all runs logged within the sub-directories of the specified `log_dir`, for example, if you logged another run using:
 
@@ -98,9 +187,9 @@ You can also pass multiple log directories. For example:
 tensorboard(c("logs/run_a", "logs/run_b"))
 ```
 
-## Customization
+### Customization
 
-### Metrics
+#### Metrics
 
 In the above examples TensorBoard metrics are logged for loss and accuracy. The TensorBoard callback will log data for any metrics which are specified in the `metrics` parameter of the `compile()` function. For example, in the following code:
 
@@ -114,7 +203,7 @@ model %>% compile(
 
 TensorBoard data series will be created for the loss (mean squared error) as well as for the mean absolute error and accuracy metrics.
 
-### Options
+#### Options
 
 The `callback_tensorboard()` function includes a number of other options that control logging during training:
 

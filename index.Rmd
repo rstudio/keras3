@@ -190,7 +190,7 @@ To learn more about Keras, you can check out these articles:
 
 - [Frequently Asked Questions](articles/faq.html)
 
-- [TensorBoard Visualizations](articles/tensorboard.html)
+- [Training Visualization](articles/training_visualization.html)
 
 - [Using Pre-Trained Models](articles/applications.html)
 

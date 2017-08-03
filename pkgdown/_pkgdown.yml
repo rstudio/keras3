@@ -23,8 +23,8 @@ navbar:
           href: articles/about_keras_models.html
         - text: "About Keras Layers"
           href: articles/about_keras_layers.html
-        - text: "TensorBoard Visualization"
-          href: articles/tensorboard.html
+        - text: "Training Visualization"
+          href: articles/training_visualization.html
         - text: "Pre-Trained Models"
           href: articles/applications.html
         - text: "--------------------------"

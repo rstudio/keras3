@@ -24,8 +24,8 @@ dim(x_test) <- c(nrow(x_test), 784)
 x_train <- x_train / 255
 x_test <- x_test / 255
 
-cat(dim(x_train)[[1]], 'train samples\n')
-cat(dim(x_test)[[1]], 'test samples\n')
+cat(nrow(x_train), 'train samples\n')
+cat(nrow(x_test), 'test samples\n')
 
 # convert class vectors to binary class matrices
 y_train <- to_categorical(y_train, num_classes)
