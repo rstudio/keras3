@@ -1,12 +1,20 @@
 // utility function to load history
-function load_history(callback) {
+function load_history(callback, on_error) {
   var request = new XMLHttpRequest();
   request.onreadystatechange = function() {
   if (request.readyState === 4) {
     if (request.status === 200 || request.status === 0) {
-      var data = JSON.parse(request.responseText);
-      if (callback) 
-        callback(data);
+      try {
+        var data = JSON.parse(request.responseText);
+        if (callback) 
+          callback(data);
+      } catch(err) {
+        if (on_error)
+          on_error();
+      }
+    } else {
+      if (on_error)
+        on_error();
     }
   }
   };
@@ -155,6 +163,10 @@ function init_charts() {
         // stop refreshing metrics when the run is completed
         if (run_completed(data))
           clearInterval(updateInterval);
+      },
+      // error handler
+      function() {
+        clearInterval(updateInterval);
       });
     }, 1000);
   }
