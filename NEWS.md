@@ -1,5 +1,5 @@
 
-# keras 2.0.6 (unreleased)
+# keras 2.0.7 (unreleased)
 
 - Added `install_keras()` function which installs both TensorFlow and Keras
 
