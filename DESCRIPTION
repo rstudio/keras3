@@ -11,9 +11,9 @@ Authors@R: c(
   person("Daniel", "Falbel", role = c("ctb", "cph")),
   person("Wouter", "Van Der Bijl", role = c("ctb", "cph")),
   person("Martin", "Studer", role = c("ctb", "cph")),
-  person("Mike", "Bostock", role = c("aut", "cph"),
+  person("Mike", "Bostock", role = c("cph"),
          comment = "D3 library (https://d3js.org/)"),
-  person("Masayuki", "Tanaka", role = c("aut", "cph"),
+  person("Masayuki", "Tanaka", role = c("cph"),
          comment = "C3 library (http://c3js.org/)")
   )
 Description: Interface to 'Keras' (https://keras.io), a high-level neural 
