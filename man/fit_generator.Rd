@@ -41,8 +41,9 @@ epoch).}
 
 \item{view_history}{View realtime plot of training metrics (by epoch). The
 default (\code{"auto"}) will display the plot when running within RStudio,
-\code{metrics} were specified during model \code{\link[=compile]{compile()}}, and \code{verbose > 0}. Use
-the global \code{keras.view_history} option to establish a different default.}
+\code{metrics} were specified during model \code{\link[=compile]{compile()}}, \code{epochs > 1} and
+\code{verbose > 0}. Use the global \code{keras.view_history} option to establish a
+different default.}
 
 \item{validation_data}{this can be either:
 \itemize{

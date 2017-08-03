@@ -150,8 +150,9 @@ compile <- function(object, optimizer, loss, metrics = NULL, loss_weights = NULL
 #'   epoch).
 #' @param view_history View realtime plot of training metrics (by epoch). The
 #'   default (`"auto"`) will display the plot when running within RStudio,
-#'   `metrics` were specified during model [compile()], and `verbose > 0`. Use
-#'   the global `keras.view_history` option to establish a different default.
+#'   `metrics` were specified during model [compile()], `epochs > 1` and
+#'   `verbose > 0`. Use the global `keras.view_history` option to establish a
+#'   different default.
 #' @param callbacks List of callbacks to be called during training.
 #' @param validation_split Float between 0 and 1: fraction of the training data
 #'   to be used as validation data. The model will set apart this fraction of
@@ -187,7 +188,7 @@ fit <- function(object, x, y, batch_size=32, epochs=10,
   
   # resolve view_history
   if (identical(view_history, "auto"))
-    view_history <- resolve_view_history(verbose, object$metrics)
+    view_history <- resolve_view_history(verbose, epochs, object$metrics)
   
   # fit the model
   history <- object$fit(
@@ -414,7 +415,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
   
   # resolve view_history
   if (identical(view_history, "auto"))
-    view_history <- resolve_view_history(verbose, object$metrics)
+    view_history <- resolve_view_history(verbose, epochs, object$metrics)
   
   call_generator_function(object$fit_generator, list(
     generator = as_generator(generator),

@@ -245,7 +245,8 @@ update_history <- function(history_viewer, history) {
 
 
 # determine whether to view history or not
-resolve_view_history <- function(verbose, metrics) {
+resolve_view_history <- function(verbose, epochs, metrics) {
+  (epochs > 1)          &&            # more than 1 epoch
   (length(metrics) > 0) &&            # capturing at least one metric
   (verbose > 0) &&                    # verbose mode is on
   !is.null(getOption("viewer")) &&    # have an internal viewer available
