@@ -49,7 +49,7 @@ library(keras)
 install_keras()
 ```
 
-This will provide you with default installations of Keras and TensorFlow. If you want to do a more customized installation of TensorFlow (including installing a version that takes advantage of Nvidia GPUs if you have the correct CUDA libraries installed) you can call the `install_tensorflow()` function manually before calling `install_keras()`. See the [article on TensorFlow installation](https://tensorflow.rstudio.com/installation.html) to learn about more advanced options.
+This will provide you with default installations of Keras and TensorFlow. If you want to do a more customized installation of TensorFlow (including installing a version that takes advantage of Nvidia GPUs if you have the correct CUDA libraries installed) see the documentation for `install_keras()`.
 
 Note that installing Keras and TensorFlow in the fashion described above isn't required. You can do a manual installation of Keras (and desired backend) as described on the [Keras website](https://keras.io/#installation) and the Keras R package will find and use that version.
 

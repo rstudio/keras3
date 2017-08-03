@@ -4,6 +4,12 @@
 #'
 #' @inheritParams tensorflow::install_tensorflow
 #'
+#' @param method Installation method. By default, "auto" automatically finds a
+#'   method that will work in the local environment. Change the default to force
+#'   a specific installation method. Note that the "virtualenv" method is not
+#'   available on Windows (as this isn't supported by TensorFlow) so "conda"
+#'   is the only supported method on windows.
+#'
 #' @param tensorflow Named character vector of additional options to pass to
 #'   [install_tensorflow()]. If this argument is "default" then a previous 
 #'   installation of TensorFlow will be used if available. Otherwise, a new
@@ -13,18 +19,13 @@
 #'   (including installing a version that takes advantage of Nvidia GPUs if you
 #'   have the correct CUDA libraries installed) you can pass additional options
 #'   to the [install_tensorflow()] function using the `tensorflow` argument.
-#'
-#'   You can also call [install_tensorflow()] prior to calling `install_keras()`
-#'   and Keras will be installed alongside the version of TensorFlow installed
-#'   in this fashion. 
 #'   
-#'   Finally, if you want to do a fully custom installation of TensorFlow and
+#'   If you want to do a fully custom installation of TensorFlow and
 #'   Keras using pip (e.g. a shared installation on a server) you can do that
 #'   and the keras R package will discover and use that version.
 #'   
-#'   See the [article on TensorFlow installation]
-#'   (https://tensorflow.rstudio.com/installation.html) to learn
-#'   about more advanced installation options.
+#'   See the [article on TensorFlow installation](https://tensorflow.rstudio.com/installation.html)
+#'   to learn about more advanced installation options.
 #'   
 #' @examples 
 #' \dontrun{
@@ -39,9 +40,6 @@
 #' # (NOTE: only do this if you have an Nvidia GPU + CUDA!)
 #' install_keras(tensorflow = c(gpu = TRUE))
 #' 
-#' # install TensorFlow w/ options first then install Keras
-#' install_tensorflow(version = "1.2.1")
-#' install_keras()
 #' }   
 #'
 #' @seealso [install_tensorflow()]
@@ -50,84 +48,84 @@
 #' @importFrom tensorflow install_tensorflow_extras
 #'
 #' @export
-install_keras <- function(method = c("auto", "virtualenv", "conda", "system"), 
-                          tensorflow = "default", conda = "auto") {
+install_keras <- function(method = c("auto", "virtualenv", "conda"), 
+                          tensorflow = "default", 
+                          conda = "auto") {
+  # verify method
+  method <- match.arg(method)
   
-  # ensure we call this in a fresh session on windows (avoid DLL
-  # in use errors)
-  if (is_windows() && py_available()) {
-    stop("You should call install_keras() only in a fresh ",
-         "R session that has not yet initialized Keras and TensorFlow (this is ",
-         "to avoid DLL in use errors during installation)")
-  }
-  
-  # utility function to install a "managed" version of tensorflow
-  install_managed_tensorflow <- function() {
-    if (identical(tensorflow, "default"))
-      args <- list()
-    else
-      args <- as.list(tensorflow)
-    args$method <- method
-    args$conda <- conda
-    do.call(install_tensorflow, args)
-  }
-  
-  # if tensorflow options were provied then install tensorflow and use the specifed version
-  if (!identical(tensorflow, "default")) {
-    install_managed_tensorflow()
-    if (identical(method, "virtualenv"))
-      use_virtualenv("r-tensorflow")
-    else if (identical(method, "conda"))
-      use_condaenv("r-tensorflow")
-  }
-  
-  # see if we already have a version of tensorflow installed into an r-tensorflow environment
-  config <- py_discover_config("tensorflow")
-  
-  # if there is no tensorflow available at all then install it and rediscover the config
-  if (is.null(config$required_module_path)) {
+  # some special handling for windows
+  if (is_windows()) {
     
-    install_managed_tensorflow()
+    # conda is the only supported method on windows
+    if (identical(method, "auto"))
+      method <- "conda"
     
-  # otherwise if we don't have a "managed" version of tensorflow then install one
-  } else {
-    
-    # determine which type of tensorflow installation we have
-    if (is_windows()) {
-      if (config$anaconda)
-        type <- "conda"
-      else
-        type <- "system"
-    } else {
-      if (nzchar(config$virtualenv_activate))
-        type <- "virtualenv"
-      else
-        type <- "conda"
-    }
-    
-    # if this is a virtualenv or conda based installation then do some extra checking
-    if (type %in% c("virtualenv", "conda")) {
-      
-      # confirm we are in an "r-tensorflow" environment (i.e. installed via install_tensorflow()). if 
-      # we aren't then perform an installation of one
-      python_binary <- ifelse(is_windows(), "r-tensorflow\\python.exe", "r-tensorflow/bin/python")
-      if (!grepl(paste0(python_binary, "$"), config$python)) {
-        
-        install_managed_tensorflow()
-       
-      # confirm that what we found matches any explicit method (if not then install using
-      # the requested method) 
-      } else if (!identical(method, "auto") && (!identical(method, type))) {
-        
-        install_managed_tensorflow()
-        
-      }
+    # avoid DLL in use errors
+    if (py_available()) {
+      stop("You should call install_keras() only in a fresh ",
+           "R session that has not yet initialized Keras and TensorFlow (this is ",
+           "to avoid DLL in use errors during installation)")
     }
   }
   
-  # at this point we should have an r-tensorflow environment to install keras into
-  install_tensorflow_extras("keras", conda = conda)
+  # build args
+  if (identical(tensorflow, "default"))
+    args <- list()
+  else
+    args <- as.list(tensorflow)
+  args$method <- method
+  args$conda <- conda
   
+  # chain keras install onto tf install for virtualenv
+  if (identical(method, "virtualenv"))
+    args$extra_packages <- "keras"
+  
+  # perform the installation
+  do.call(install_tensorflow, args)
+  
+  # execute separate keras install for conda
+  if (identical(method, "conda"))
+    conda_install_keras(conda)
+  
+  # print success and return
   cat("\nInstallation of Keras complete.\n\n")
   invisible(NULL)
 }
+
+
+# this is a clone of reticulate::conda_install which doesn't pass the 
+# --ignore-installed flag (this was causing pip to try to re-install
+# scipy from source rather than use the binary version already available
+# via conda)
+conda_install_keras <- function(conda = "auto") {
+  
+  # resolve conda binary
+  conda <- reticulate::conda_binary(conda)
+  
+  # packages to install
+  envname <- "r-tensorflow"
+  packages <- "keras"
+  
+  # use pip package manager
+  condaenv_bin <- function(bin) path.expand(file.path(dirname(conda), bin))
+  cmd <- sprintf("%s%s %s && pip install --upgrade %s%s",
+                 ifelse(is_windows(), "", ifelse(is_osx(), "source ", "/bin/bash -c \"source ")),
+                 shQuote(path.expand(condaenv_bin("activate"))),
+                 envname,
+                 paste(shQuote(packages), collapse = " "),
+                 ifelse(is_windows(), "", ifelse(is_osx(), "", "\"")))
+  result <- system(cmd)
+    
+  
+  # check for errors
+  if (result != 0L) {
+    stop("Error ", result, " occurred installing packages into conda environment ", 
+         envname, call. = FALSE)
+  }
+  
+  invisible(NULL)
+}
+
+
+
