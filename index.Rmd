@@ -14,15 +14,6 @@ menu:
 ```{r setup, include=FALSE}
 library(keras)
 knitr::opts_chunk$set(eval = FALSE)
-
-
-# generate dummy training data
-x_train <- matrix(rexp(1000*100), nrow = 1000, ncol = 100)
-y_train <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
-
-# genereate dummy input data
-x_test <- matrix(rexp(10*100), nrow = 10, ncol = 100)
-y_test <- matrix(round(runif(10*10, min = 0, max = 9)), nrow = 10, ncol = 10)
 ```
 
 # R interface to Keras
