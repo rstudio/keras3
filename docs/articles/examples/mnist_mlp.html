@@ -58,7 +58,7 @@
       <a href="../../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../../articles/tensorboard.html">TensorBoard Visualization</a>
+      <a href="../../articles/training_visualization.html">Training Visualization</a>
     </li>
     <li>
       <a href="../../articles/applications.html">Pre-Trained Models</a>
@@ -133,8 +133,8 @@ y_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span cla
 x_train &lt;-<span class="st"> </span>x_train <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
 x_test &lt;-<span class="st"> </span>x_test <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
 
-<span class="kw">cat</span>(<span class="kw">dim</span>(x_train)[[<span class="dv">1</span>]], <span class="st">'train samples</span><span class="ch">\n</span><span class="st">'</span>)
-<span class="kw">cat</span>(<span class="kw">dim</span>(x_test)[[<span class="dv">1</span>]], <span class="st">'test samples</span><span class="ch">\n</span><span class="st">'</span>)
+<span class="kw">cat</span>(<span class="kw">nrow</span>(x_train), <span class="st">'train samples</span><span class="ch">\n</span><span class="st">'</span>)
+<span class="kw">cat</span>(<span class="kw">nrow</span>(x_test), <span class="st">'test samples</span><span class="ch">\n</span><span class="st">'</span>)
 
 <span class="co"># convert class vectors to binary class matrices</span>
 y_train &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_train, num_classes)

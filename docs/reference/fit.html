@@ -80,7 +80,7 @@
       <a href="../articles/about_keras_layers.html">About Keras Layers</a>
     </li>
     <li>
-      <a href="../articles/tensorboard.html">TensorBoard Visualization</a>
+      <a href="../articles/training_visualization.html">Training Visualization</a>
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
@@ -132,9 +132,9 @@
     
 
     <pre class="usage"><span class='fu'>fit</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>view_history</span> <span class='kw'>=</span> <span class='no'>verbose</span>, <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_split</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>view_history</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"keras.view_history"</span>, <span class='kw'>default</span> <span class='kw'>=</span>
+  <span class='st'>"auto"</span>), <span class='kw'>validation_split</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -169,13 +169,16 @@ a list mapping output names to data.</p></td>
 epoch).</p></td>
     </tr>
     <tr>
-      <th>view_history</th>
-      <td><p>View realtime plot of training metrics (by epoch) when
-running within RStudio.</p></td>
-    </tr>
-    <tr>
       <th>callbacks</th>
       <td><p>List of callbacks to be called during training.</p></td>
+    </tr>
+    <tr>
+      <th>view_history</th>
+      <td><p>View realtime plot of training metrics (by epoch). The
+default (<code>"auto"</code>) will display the plot when running within RStudio,
+<code>metrics</code> were specified during model <code><a href='compile.html'>compile()</a></code>, <code>epochs &gt; 1</code> and
+<code>verbose &gt; 0</code>. Use the global <code>keras.view_history</code> option to establish a
+different default.</p></td>
     </tr>
     <tr>
       <th>validation_split</th>

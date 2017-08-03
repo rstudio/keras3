@@ -44,11 +44,14 @@ blockquote {
 }
 
 .r-plot {
-  margin-bottom: 25px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  border: solid 1px #cccccc;
 }
 
 .screenshot {
   margin-bottom: 20px;
+  border: solid 1px #cccccc;
 }
 
 .source-ref {
