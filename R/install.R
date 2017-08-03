@@ -36,11 +36,14 @@
 #' # install using a conda environment (default is virtualenv)
 #' install_keras(method = "conda")
 #' 
+#' # install a specific version of TensorFlow
+#' install_keras(tensorflow = c(version = "1.2.1"))
+#' 
 #' # install with GPU version of TensorFlow 
 #' # (NOTE: only do this if you have an Nvidia GPU + CUDA!)
 #' install_keras(tensorflow = c(gpu = TRUE))
 #' 
-#' }   
+#' }
 #'
 #' @seealso [install_tensorflow()]
 #'
