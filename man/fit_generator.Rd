@@ -5,9 +5,9 @@
 \title{Fits the model on data yielded batch-by-batch by a generator.}
 \usage{
 fit_generator(object, generator, steps_per_epoch, epochs = 1, verbose = 1,
-  view_history = verbose, callbacks = NULL, validation_data = NULL,
-  validation_steps = NULL, class_weight = NULL, max_queue_size = 10,
-  initial_epoch = 0)
+  callbacks = NULL, view_history = getOption("keras.view_history", default =
+  "auto"), validation_data = NULL, validation_steps = NULL,
+  class_weight = NULL, max_queue_size = 10, initial_epoch = 0)
 }
 \arguments{
 \item{object}{Keras model object}
@@ -37,10 +37,12 @@ dataset divided by the batch size.}
 \item{verbose}{Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
 epoch).}
 
-\item{view_history}{View realtime plot of training metrics (by epoch) when
-running within RStudio.}
-
 \item{callbacks}{list of callbacks to be called during training.}
+
+\item{view_history}{View realtime plot of training metrics (by epoch). The
+default (\code{"auto"}) will display the plot when running within RStudio,
+\code{metrics} were specified during model \code{\link[=compile]{compile()}}, and \code{verbose > 0}. Use
+the global \code{keras.view_history} option to establish a different default.}
 
 \item{validation_data}{this can be either:
 \itemize{

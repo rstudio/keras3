@@ -26,6 +26,8 @@ Encoding: UTF-8
 License: MIT + file LICENSE
 URL: https://github.com/rstudio/keras
 BugReports: https://github.com/rstudio/keras/issues
+Depends:
+    R (>= 3.2)
 Imports:
     reticulate (>= 1.0), 
     tensorflow (>= 1.3.0.9000),
@@ -33,7 +35,9 @@ Imports:
     magrittr, 
     methods,
     R6,
-    jsonlite
+    jsonlite,
+    utils,
+    tools
 Suggests: 
     ggplot2,
     testthat, 

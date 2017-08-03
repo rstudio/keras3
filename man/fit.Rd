@@ -5,9 +5,9 @@
 \title{Train a Keras model}
 \usage{
 fit(object, x, y, batch_size = 32, epochs = 10, verbose = 1,
-  view_history = verbose, callbacks = NULL, validation_split = 0,
-  validation_data = NULL, shuffle = TRUE, class_weight = NULL,
-  sample_weight = NULL, initial_epoch = 0, ...)
+  callbacks = NULL, view_history = getOption("keras.view_history", default =
+  "auto"), validation_split = 0, validation_data = NULL, shuffle = TRUE,
+  class_weight = NULL, sample_weight = NULL, initial_epoch = 0, ...)
 }
 \arguments{
 \item{object}{Model to train.}
@@ -27,10 +27,12 @@ a list mapping output names to data.}
 \item{verbose}{Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
 epoch).}
 
-\item{view_history}{View realtime plot of training metrics (by epoch) when
-running within RStudio.}
-
 \item{callbacks}{List of callbacks to be called during training.}
+
+\item{view_history}{View realtime plot of training metrics (by epoch). The
+default (\code{"auto"}) will display the plot when running within RStudio,
+\code{metrics} were specified during model \code{\link[=compile]{compile()}}, and \code{verbose > 0}. Use
+the global \code{keras.view_history} option to establish a different default.}
 
 \item{validation_split}{Float between 0 and 1: fraction of the training data
 to be used as validation data. The model will set apart this fraction of

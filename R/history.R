@@ -220,7 +220,7 @@ view_history <- function(history) {
   update_history(history_viewer, history)
   
   # view it
-  viewer <- getOption("viewer")
+  viewer <- getOption("viewer", default = browser_viewer(viewer_dir))
   viewer(file.path(viewer_dir, "index.html"))
   
   # return history_viewer instance (invisibly) for subsequent
@@ -244,11 +244,35 @@ update_history <- function(history_viewer, history) {
 }
 
 
+# determine whether to view history or not
+resolve_view_history <- function(verbose, metrics) {
+  (length(metrics) > 0) &&            # capturing at least one metric
+  (verbose > 0) &&                    # verbose mode is on
+  !is.null(getOption("viewer")) &&    # have an internal viewer available
+  nzchar(Sys.getenv("RSTUDIO"))       # running under RStudio
+}
 
-# check if the current environment can view training history
-# (requires the RStudio Viewer for realtime updates)
-can_view_history <- function() {
-  !is.null(getOption("viewer")) && nzchar(Sys.getenv("RSTUDIO"))
+# non-rstudio viewer function
+browser_viewer <- function(viewer_dir) {
+  function(url) {
+    # determine help server port
+    port <- tools::startDynamicHelp(NA)
+    if (port <= 0)
+      port <- tools::startDynamicHelp(TRUE)
+    if (port <= 0) {
+      warning("Unable to view keras training history ",
+              "(couldn't access help server port)",
+              call. = FALSE)
+      return(invisible(NULL))
+    }
+      
+    # determine path to history html
+    path <- paste("/session", basename(viewer_dir), "index.html", sep = "/")
+    
+    # build URL and browse it
+    url <- paste0("http://127.0.0.1:", port, path)
+    utils::browseURL(url)
+  }
 }
 
 
