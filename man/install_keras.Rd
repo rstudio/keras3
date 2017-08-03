@@ -5,7 +5,7 @@
 \title{Install Keras and the TensorFlow backend}
 \usage{
 install_keras(method = c("auto", "virtualenv", "conda", "system"),
-  conda = "auto")
+  tensorflow = "default", conda = "auto")
 }
 \arguments{
 \item{method}{Installation method. By default, "auto" automatically finds a
@@ -14,6 +14,11 @@ a specific installation method. Note that the "virtualenv" method is not
 available on Windows (as this isn't supported by TensorFlow). Note also
 that since this command runs without privillege the "system" method is
 available only on Windows.}
+
+\item{tensorflow}{Named character vector of additional options to pass to
+\code{\link[=install_tensorflow]{install_tensorflow()}}. If this argument is "default" then a previous
+installation of TensorFlow will be used if available. Otherwise, a new
+installation will be performed using the specified options.}
 
 \item{conda}{Path to conda executable (or "auto" to find conda using the PATH
 and other conventional install locations).}
@@ -24,10 +29,39 @@ Install Keras and the TensorFlow backend
 \note{
 If you want to do a more customized installation of TensorFlow
 (including installing a version that takes advantage of Nvidia GPUs if you
-have the correct CUDA libraries installed) you can call the
-\code{\link[=install_tensorflow]{install_tensorflow()}} function manually before calling \code{install_keras()}.
-See the \href{https://tensorflow.rstudio.com/installation.html}{article on TensorFlow installation} to learn
-about more advanced options.
+have the correct CUDA libraries installed) you can pass additional options
+to the \code{\link[=install_tensorflow]{install_tensorflow()}} function using the \code{tensorflow} argument.
+
+You can also call \code{\link[=install_tensorflow]{install_tensorflow()}} prior to calling \code{install_keras()}
+and Keras will be installed alongside the version of TensorFlow installed
+in this fashion.
+
+Finally, if you want to do a fully custom installation of TensorFlow and
+Keras using pip (e.g. a shared installation on a server) you can do that
+and the keras R package will discover and use that version.
+
+See the \link{article on TensorFlow installation}
+(https://tensorflow.rstudio.com/installation.html) to learn
+about more advanced installation options.
+}
+\examples{
+\dontrun{
+# default installation
+library(keras)
+install_keras()
+
+# install using a conda environment (default is virtualenv)
+install_keras(method = "conda")
+
+# install with GPU version of TensorFlow 
+# (NOTE: only do this if you have an Nvidia GPU + CUDA!)
+install_keras(tensorflow = c(gpu = TRUE))
+
+# install TensorFlow w/ options first then install Keras
+install_tensorflow(version = "1.2.1")
+install_keras()
+}   
+
 }
 \seealso{
 \code{\link[=install_tensorflow]{install_tensorflow()}}
