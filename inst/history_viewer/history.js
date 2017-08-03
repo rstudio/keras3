@@ -78,6 +78,17 @@ function init_charts() {
       });
   }
   
+  // helper to format y tick marks. use the default
+  // d3 formatter but strip long sequences of zeros
+  // followed by a single digit at the end (result
+  // of JavaScript floating point rouning issues 
+  // during axis interpolation)
+  var default_format = d3.format("");
+  function y_tick_format(d) {
+    var fmt = default_format(d);
+    return fmt.replace(/0+\d$/, '');
+  }
+  
   // create a C3 chart for each metric
   var c3_charts = [];
   for (var i = 0; i<metric_names.length; i++) {
@@ -85,8 +96,13 @@ function init_charts() {
     // get the metric 
     var metric = metric_names[i];
     
+    // default y_axis options
+    var y_axis = {
+      tick: {
+        format: y_tick_format
+      }
+    };
     // special y-axis treatment for accuracy
-    var y_axis = {};
     if (metric === 'acc') {
       y_axis.padding = {
         top: 0
