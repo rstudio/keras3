@@ -191,15 +191,6 @@ KerasHistoryViewer <- R6::R6Class("KerasHistoryViewer",
       else {
         update_history(self$history_viewer, history)
       }
-    },
-    
-    on_train_end = function(logs = NULL) {
-      # write a static version of the history at the end of training
-      # (enables saving & publishing of the history)
-      if (!is.null(self$history_viewer)) {
-        write_static_history(self$history_viewer, 
-                             keras_training_history(self$params, self$metrics))
-      }
     }
   )
 )
@@ -217,7 +208,12 @@ view_history <- function(history) {
   
   # copy dependencies to the viewer dir
   history_viewer_html <- system.file("history_viewer", package = "keras")
-  file.copy(from = list.files(history_viewer_html, full.names = TRUE),
+  file.copy(file.path(history_viewer_html, c(
+              "d3.min.js",
+              "c3.min.js",
+              "c3.min.css",
+              "history.js",
+              "history.css")),
             to = viewer_dir)
   
   # write the history
@@ -234,24 +230,19 @@ view_history <- function(history) {
 
 
 update_history <- function(history_viewer, history) {
+  
+  # re-write index.html with embedded history
+  history_json <- jsonlite::toJSON(unclass(history))
+  history_html <- system.file("history_viewer", "index.html", package = "keras")
+  history_html_lines <- readLines(history_html, encoding = "UTF-8")
+  history_html_lines <- sprintf(history_html_lines, history_json)
+  writeLines(history_html_lines, file.path(history_viewer$viewer_dir, "index.html"))
+  
+  # write history.json for polling
   history_json <- file.path(history_viewer$viewer_dir, "history.json")
   jsonlite::write_json(unclass(history), history_json)
 }
 
-write_static_history <- function(history_viewer, history) {
-  
-  # create json version of history
-  history_json <- jsonlite::toJSON(unclass(history))
-  
-  # substitute static json into template
-  history_html <- file.path(history_viewer$viewer_dir, "index.html")
-  history_html_lines <- readLines(history_html, encoding = "UTF-8")
-  history_html_lines <- sprintf(history_html_lines, history_json)
-  
-  # re-write with static data
-  writeLines(history_html_lines, history_html)
-  
-}
 
 
 # check if the current environment can view training history

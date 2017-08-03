@@ -39,7 +39,11 @@ function chart_columns(metric, data) {
   return columns;
 }
 
-function init_charts(data, update) {
+function init_charts() {
+  
+  // get the history json and parse it
+  var historyJson = document.getElementById('history').innerHTML;
+  var data = JSON.parse(historyJson);
   
   // alias params and metrics
   var params = data.params;
@@ -123,8 +127,16 @@ function init_charts(data, update) {
 
   }
   
-  // update all charts every second
-  if (update) {
+  // helper to determine whether we've seen all the data
+  function run_completed(data) {
+    var epochs = data.params.epochs[0];
+    var first_metric = data.metrics[Object.keys(data.metrics)[0]];
+    return first_metric.length >= epochs;
+  }
+  
+  // if the run isn't completed and we aren't runnign off of the filesystem
+  // then update all charts every second
+  if (!run_completed(data) && (window.location.protocol !== "file")) {
     var updateInterval = setInterval(function() {
       load_history(function(data) {
         
@@ -140,9 +152,8 @@ function init_charts(data, update) {
           chart.flush();
         }
         
-        // stop refreshing metrics when we have all epochs
-        var first_metric = data.metrics[Object.keys(data.metrics)[0]];
-        if (first_metric.length >= epochs)
+        // stop refreshing metrics when the run is completed
+        if (run_completed(data))
           clearInterval(updateInterval);
       });
     }, 1000);
@@ -166,25 +177,10 @@ function init_charts(data, update) {
   });  
 }
 
+// initialize charts
+init_charts();
 
-// check for a history json payload
-var historyJson = document.getElementById('history').innerHTML;
 
-// no payload, initialize charts from history.json
-if (historyJson === "%s") {
-  
-  // initialize charts
-  load_history(function(data) {
-    init_charts(data, true);
-  });
-  
-} else {
-  
-  // initialize charts from embedded payload
-  var data = JSON.parse(historyJson);
-  init_charts(data, false);
-  
-}
 
 
 
