@@ -248,4 +248,8 @@ is_windows <- function() {
   identical(.Platform$OS.type, "windows")
 }
 
+is_osx <- function() {
+  Sys.info()["sysname"] == "Darwin"
+}
+
 
