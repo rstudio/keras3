@@ -136,16 +136,16 @@ y_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span c
 x_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>x
 y_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y
 
-x_train &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">as.numeric</span>(x_train), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">dim</span>(x_train)[[<span class="dv">1</span>]], img_rows <span class="op">*</span><span class="st"> </span>img_cols, <span class="dv">1</span>))
-x_test &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">as.numeric</span>(x_test), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">dim</span>(x_test)[[<span class="dv">1</span>]], img_rows <span class="op">*</span><span class="st"> </span>img_cols, <span class="dv">1</span>))
+<span class="kw">dim</span>(x_train) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_train), img_rows <span class="op">*</span><span class="st"> </span>img_cols, <span class="dv">1</span>)
+<span class="kw">dim</span>(x_test) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_test), img_rows <span class="op">*</span><span class="st"> </span>img_cols, <span class="dv">1</span>)
 input_shape &lt;-<span class="st"> </span><span class="kw">c</span>(img_rows, img_cols, <span class="dv">1</span>)
 
 x_train &lt;-<span class="st"> </span>x_train <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
 x_test &lt;-<span class="st"> </span>x_test <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
 
 <span class="kw">cat</span>(<span class="st">'x_train_shape:'</span>, <span class="kw">dim</span>(x_train), <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
-<span class="kw">cat</span>(<span class="kw">dim</span>(x_train)[[<span class="dv">1</span>]], <span class="st">'train samples</span><span class="ch">\n</span><span class="st">'</span>)
-<span class="kw">cat</span>(<span class="kw">dim</span>(x_test)[[<span class="dv">1</span>]], <span class="st">'test samples</span><span class="ch">\n</span><span class="st">'</span>)
+<span class="kw">cat</span>(<span class="kw">nrow</span>(x_train), <span class="st">'train samples</span><span class="ch">\n</span><span class="st">'</span>)
+<span class="kw">cat</span>(<span class="kw">nrow</span>(x_test), <span class="st">'test samples</span><span class="ch">\n</span><span class="st">'</span>)
 
 <span class="co"># convert class vectors to binary class matrices</span>
 y_train &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_train, num_classes)

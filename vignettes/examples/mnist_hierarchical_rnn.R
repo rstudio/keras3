@@ -45,15 +45,15 @@ x_test <- mnist$test$x
 y_test <- mnist$test$y
 
 # Reshapes data to 4D for Hierarchical RNN.
-x_train <- array(as.numeric(x_train), dim = c(dim(x_train)[[1]], 28, 28, 1))
-x_test <- array(as.numeric(x_test), dim = c(dim(x_test)[[1]], 28, 28, 1))
+dim(x_train) <- c(nrow(x_train), 28, 28, 1) 
+dim(x_test) <- c(nrow(x_test), 28, 28, 1)
 x_train <- x_train / 255
 x_test <- x_test / 255
 
 dim_x_train <- dim(x_train)
 cat('x_train_shape:', dim_x_train)
-cat(dim_x_train[[1]], 'train samples')
-cat(dim(x_test)[[1]], 'test samples')
+cat(nrow(x_train), 'train samples')
+cat(nrow(x_test), 'test samples')
 
 # Converts class vectors to binary class matrices
 y_train <- to_categorical(y_train, num_classes)

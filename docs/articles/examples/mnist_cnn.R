@@ -22,16 +22,16 @@ y_train <- mnist$train$y
 x_test <- mnist$test$x
 y_test <- mnist$test$y
 
-x_train <- array(as.numeric(x_train), dim = c(dim(x_train)[[1]], img_rows, img_cols, 1))
-x_test <- array(as.numeric(x_test), dim = c(dim(x_test)[[1]], img_rows, img_cols, 1))
+dim(x_train) <- c(nrow(x_train), img_rows, img_cols, 1) 
+dim(x_test) <- c(nrow(x_test), img_rows, img_cols, 1)
 input_shape <- c(img_rows, img_cols, 1)
 
 x_train <- x_train / 255
 x_test <- x_test / 255
 
 cat('x_train_shape:', dim(x_train), '\n')
-cat(dim(x_train)[[1]], 'train samples\n')
-cat(dim(x_test)[[1]], 'test samples\n')
+cat(nrow(x_train), 'train samples\n')
+cat(nrow(x_test), 'test samples\n')
 
 # convert class vectors to binary class matrices
 y_train <- to_categorical(y_train, num_classes)
