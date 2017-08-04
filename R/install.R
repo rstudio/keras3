@@ -1,58 +1,99 @@
 
 
 #' Install Keras and the TensorFlow backend
+#' 
+#' Keras and TensorFlow will be installed into an "r-tensorflow" virtual or conda
+#' environment. Note that "virtualenv" is not available on Windows (as this isn't
+#' supported by TensorFlow).
 #'
 #' @inheritParams tensorflow::install_tensorflow
 #'
-#' @param method Installation method. By default, "auto" automatically finds a
-#'   method that will work in the local environment. Change the default to force
-#'   a specific installation method. Note that the "virtualenv" method is not
-#'   available on Windows (as this isn't supported by TensorFlow) so "conda"
-#'   is the only supported method on windows.
-#'
-#' @param tensorflow Named character vector of additional options to pass to
-#'   [install_tensorflow()]. 
-#'
-#' @note If you want to do a more customized installation of TensorFlow
-#'   (including installing a version that takes advantage of Nvidia GPUs if you
-#'   have the correct CUDA libraries installed) you can pass additional options
-#'   to the [install_tensorflow()] function using the `tensorflow` argument.
-#'   
-#'   If you want to do a fully custom installation of TensorFlow and
-#'   Keras using pip (e.g. a shared installation on a server) you can
-#'   do that and the keras R package will discover and use that version.
-#'   
-#'   See the [article on TensorFlow installation](https://tensorflow.rstudio.com/installation.html)
-#'   to learn about more advanced installation options.
-#'   
-#' @examples 
-#' \dontrun{
+#' @param method Installation method ("virtualenv" or "conda")
+#' @param tensorflow_ver TensorFlow version to install (must be either "latest"
+#'   or a full major.minor.patch specification, e.g. "1.1.0").
+#' @param tensorflow_gpu `TRUE` to install the GPU version of TensorFlow
+#' @param tensorflow_url URL of the TensorFlow package to install (if not specified
+#'   this is determined automatically). Note that if this parameter is provied
+#'   then the `tensorflow_ver` and `tensorflow_gpu` parameters are ignored.
+#' @param extra_packages Additional PyPI packages to install along with
+#'   Keras and TensorFlow.
 #' 
+#' @section GPU Installation:
+#' 
+#' Keras and TensorFlow can be configured to run on either CPUs or GPUs. The CPU 
+#' version is much easier to install and configure so is the best starting place 
+#' especially when you are first learning how to use Keras. Here's the guidance
+#' on CPU vs. GPU versions from the TensorFlow website:
+#'
+#' - *TensorFlow with CPU support only*. If your system does not have a NVIDIA® GPU, 
+#' you must install this version. Note that this version of TensorFlow is typically 
+#' much easier to install, so even if you have an NVIDIA GPU, we recommend installing
+#' this version first.
+#' 
+#' - *TensorFlow with GPU support*. TensorFlow programs typically run significantly 
+#' faster on a GPU than on a CPU. Therefore, if your system has a NVIDIA® GPU meeting
+#' all prerequisites and you need to run performance-critical applications, you should
+#' ultimately install this version.
+#' 
+#' To install the GPU version:
+#' 
+#' 1) Ensure that you have met all installation prerequisites including installation
+#'    of the CUDA and cuDNN libraries as described in [TensorFlow GPU Prerequistes](https://tensorflow.rstudio.com/installation_gpu.html#prerequisites).
+#'    
+#' 2) Pass `tensorflow_gpu = TRUE` to `install_keras()`. For example:
+#' 
+#'     ```
+#'       install_keras(tensorflow_gpu = TRUE)
+#'     ````
+#' 
+#' @section Windows Installation:
+#' 
+#' The only supported installation method on Windows is "conda". This means that you
+#' should install Anaconda 3.x for Windows (<https://www.continuum.io/downloads#windows>)
+#' prior to installing Keras.
+#' 
+#' @section Custom Installation:
+#'   
+#' Installing Keras and TensorFlow using `install_keras()` isn't required
+#' to use the Keras R package. You can do a custom installation of Keras (and
+#' desired backend) as described on the [Keras website](https://keras.io/#installation)
+#' and the Keras R package will find and use that version. 
+#' 
+#' See the documentation on [custom installations](https://tensorflow.rstudio.com/installation.html#custom-installation)
+#' for additional information on how version of Keras and TensorFlow are located
+#' by the Keras package.
+#'
+#' @section Additional Packages:
+#' 
+#' If you wish to add additional PyPI packages to your Keras / TensorFlow environment you 
+#' can either specify the packages in the `extra_packages` argument of `install_keras()`, 
+#' or alternatively install them into an existing environment using the 
+#' [install_tensorflow_extras()] function.
+#' 
+#' @examples
+#' \dontrun{
+#'
 #' # default installation
 #' library(keras)
 #' install_keras()
-#' 
+#'
 #' # install using a conda environment (default is virtualenv)
 #' install_keras(method = "conda")
-#' 
+#'
 #' # install a specific version of TensorFlow
-#' install_keras(tensorflow = c(version = "1.2.1"))
-#' 
-#' # install with GPU version of TensorFlow 
-#' # (NOTE: only do this if you have an Nvidia GPU + CUDA!)
-#' install_keras(tensorflow = c(gpu = TRUE))
-#' 
+#' install_keras(tensorflow_ver = "1.2.1")
+#'
+#' # install with GPU version of TensorFlow
+#' # (NOTE: only do this if you have an NVIDIA GPU + CUDA!)
+#' install_keras(tensorflow_gpu = TRUE)
 #' }
 #'
-#' @seealso [install_tensorflow()]
-#'
-#' @importFrom reticulate py_discover_config py_available
-#' @importFrom tensorflow install_tensorflow_extras
-#'
 #' @export
-install_keras <- function(method = c("auto", "virtualenv", "conda"), 
-                          tensorflow = "default", 
-                          conda = "auto") {
+install_keras <- function(method = c("virtualenv", "conda"), conda = "auto",
+                          tensorflow_ver = "latest",
+                          tensorflow_gpu = FALSE,
+                          tensorflow_url = NULL,
+                          extra_packages = NULL) {
   # verify method
   method <- match.arg(method)
   
@@ -60,8 +101,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
   if (is_windows()) {
     
     # conda is the only supported method on windows
-    if (identical(method, "auto"))
-      method <- "conda"
+    method <- "conda"
     
     # avoid DLL in use errors
     if (py_available()) {
@@ -71,24 +111,30 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
     }
   }
   
-  # build args
-  if (identical(tensorflow, "default"))
-    args <- list()
-  else
-    args <- as.list(tensorflow)
-  args$method <- method
-  args$conda <- conda
+  # extra packages
+  extra_packages <- c("keras", extra_packages)
   
-  # chain keras install onto tf install for virtualenv
-  if (identical(method, "virtualenv"))
-    args$extra_packages <- "keras"
+  # if this is a conda install then install the extra packages separately
+  # after the main installation (this is because we need to use a fork of
+  # conda_install (conda_install_packages below) which doesn't pass the 
+  # --ignore-installed flag to pip
+  conda_packages <- NULL
+  if (identical(method, "conda")) {
+    conda_packages <- extra_packages
+    extra_packages <- NULL
+  }
   
-  # perform the installation
-  do.call(install_tensorflow, args)
-  
-  # execute separate keras install for conda
-  if (identical(method, "conda"))
-    conda_install_keras(conda)
+  # perform the install
+  install_tensorflow(method = method,
+                     conda = conda,
+                     version = tensorflow_ver,
+                     gpu = tensorflow_gpu,
+                     package_url = tensorflow_url,
+                     extra_packages = extra_packages)
+ 
+  # additional conda pakcages
+  if (!is.null(conda_packages))
+    conda_install_packages(conda_packages, conda = conda)
   
   # print success and return
   cat("\nInstallation of Keras complete.\n\n")
@@ -100,14 +146,13 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
 # --ignore-installed flag (this was causing pip to try to re-install
 # scipy from source rather than use the binary version already available
 # via conda)
-conda_install_keras <- function(conda = "auto") {
+conda_install_packages <- function(packages, conda = "auto") {
   
   # resolve conda binary
   conda <- reticulate::conda_binary(conda)
   
-  # packages to install
+  # always use 'r-tensorflow' environment
   envname <- "r-tensorflow"
-  packages <- "keras"
   
   # use pip package manager
   condaenv_bin <- function(bin) path.expand(file.path(dirname(conda), bin))

@@ -27,6 +27,10 @@ reticulate::use_condaenv
 #' @export
 tensorflow::install_tensorflow
 
+#' @importFrom tensorflow install_tensorflow_extras
+#' @export
+tensorflow::install_tensorflow_extras
+
 #' @importFrom tensorflow tensorboard
 #' @export
 tensorflow::tensorboard

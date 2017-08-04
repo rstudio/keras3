@@ -4,38 +4,90 @@
 \alias{install_keras}
 \title{Install Keras and the TensorFlow backend}
 \usage{
-install_keras(method = c("auto", "virtualenv", "conda"),
-  tensorflow = "default", conda = "auto")
+install_keras(method = c("virtualenv", "conda"), conda = "auto",
+  tensorflow_ver = "latest", tensorflow_gpu = FALSE,
+  tensorflow_url = NULL, extra_packages = NULL)
 }
 \arguments{
-\item{method}{Installation method. By default, "auto" automatically finds a
-method that will work in the local environment. Change the default to force
-a specific installation method. Note that the "virtualenv" method is not
-available on Windows (as this isn't supported by TensorFlow) so "conda"
-is the only supported method on windows.}
-
-\item{tensorflow}{Named character vector of additional options to pass to
-\code{\link[=install_tensorflow]{install_tensorflow()}}.}
+\item{method}{Installation method ("virtualenv" or "conda")}
 
 \item{conda}{Path to conda executable (or "auto" to find conda using the PATH
 and other conventional install locations).}
+
+\item{tensorflow_ver}{TensorFlow version to install (must be either "latest"
+or a full major.minor.patch specification, e.g. "1.1.0").}
+
+\item{tensorflow_gpu}{\code{TRUE} to install the GPU version of TensorFlow}
+
+\item{tensorflow_url}{URL of the TensorFlow package to install (if not specified
+this is determined automatically). Note that if this parameter is provied
+then the \code{tensorflow_ver} and \code{tensorflow_gpu} parameters are ignored.}
+
+\item{extra_packages}{Additional PyPI packages to install along with
+Keras and TensorFlow.}
 }
 \description{
-Install Keras and the TensorFlow backend
+Keras and TensorFlow will be installed into an "r-tensorflow" virtual or conda
+environment. Note that "virtualenv" is not available on Windows (as this isn't
+supported by TensorFlow).
 }
-\note{
-If you want to do a more customized installation of TensorFlow
-(including installing a version that takes advantage of Nvidia GPUs if you
-have the correct CUDA libraries installed) you can pass additional options
-to the \code{\link[=install_tensorflow]{install_tensorflow()}} function using the \code{tensorflow} argument.
+\section{GPU Installation}{
 
-If you want to do a fully custom installation of TensorFlow and
-Keras using pip (e.g. a shared installation on a server) you can
-do that and the keras R package will discover and use that version.
 
-See the \href{https://tensorflow.rstudio.com/installation.html}{article on TensorFlow installation}
-to learn about more advanced installation options.
+Keras and TensorFlow can be configured to run on either CPUs or GPUs. The CPU
+version is much easier to install and configure so is the best starting place
+especially when you are first learning how to use Keras. Here's the guidance
+on CPU vs. GPU versions from the TensorFlow website:
+\itemize{
+\item \emph{TensorFlow with CPU support only}. If your system does not have a NVIDIA® GPU,
+you must install this version. Note that this version of TensorFlow is typically
+much easier to install, so even if you have an NVIDIA GPU, we recommend installing
+this version first.
+\item \emph{TensorFlow with GPU support}. TensorFlow programs typically run significantly
+faster on a GPU than on a CPU. Therefore, if your system has a NVIDIA® GPU meeting
+all prerequisites and you need to run performance-critical applications, you should
+ultimately install this version.
 }
+
+To install the GPU version:
+\enumerate{
+\item Ensure that you have met all installation prerequisites including installation
+of the CUDA and cuDNN libraries as described in \href{https://tensorflow.rstudio.com/installation_gpu.html#prerequisites}{TensorFlow GPU Prerequistes}.
+\item Pass \code{tensorflow_gpu = TRUE} to \code{install_keras()}. For example:\preformatted{  install_keras(tensorflow_gpu = TRUE)
+}
+}
+}
+
+\section{Windows Installation}{
+
+
+The only supported installation method on Windows is "conda". This means that you
+should install Anaconda 3.x for Windows (\url{https://www.continuum.io/downloads#windows})
+prior to installing Keras.
+}
+
+\section{Custom Installation}{
+
+
+Installing Keras and TensorFlow using \code{install_keras()} isn't required
+to use the Keras R package. You can do a custom installation of Keras (and
+desired backend) as described on the \href{https://keras.io/#installation}{Keras website}
+and the Keras R package will find and use that version.
+
+See the documentation on \href{https://tensorflow.rstudio.com/installation.html#custom-installation}{custom installations}
+for additional information on how version of Keras and TensorFlow are located
+by the Keras package.
+}
+
+\section{Additional Packages}{
+
+
+If you wish to add additional PyPI packages to your Keras / TensorFlow environment you
+can either specify the packages in the \code{extra_packages} argument of \code{install_keras()},
+or alternatively install them into an existing environment using the
+\code{\link[=install_tensorflow_extras]{install_tensorflow_extras()}} function.
+}
+
 \examples{
 \dontrun{
 
@@ -47,15 +99,11 @@ install_keras()
 install_keras(method = "conda")
 
 # install a specific version of TensorFlow
-install_keras(tensorflow = c(version = "1.2.1"))
+install_keras(tensorflow_ver = "1.2.1")
 
-# install with GPU version of TensorFlow 
-# (NOTE: only do this if you have an Nvidia GPU + CUDA!)
-install_keras(tensorflow = c(gpu = TRUE))
-
+# install with GPU version of TensorFlow
+# (NOTE: only do this if you have an NVIDIA GPU + CUDA!)
+install_keras(tensorflow_gpu = TRUE)
 }
 
-}
-\seealso{
-\code{\link[=install_tensorflow]{install_tensorflow()}}
 }
