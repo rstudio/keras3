@@ -104,7 +104,7 @@ install_keras <- function(method = c("virtualenv", "conda"), conda = "auto",
     method <- "conda"
     
     # avoid DLL in use errors
-    if (py_available()) {
+    if (reticulate::py_available()) {
       stop("You should call install_keras() only in a fresh ",
            "R session that has not yet initialized Keras and TensorFlow (this is ",
            "to avoid DLL in use errors during installation)")
