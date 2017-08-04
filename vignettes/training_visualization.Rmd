@@ -28,7 +28,9 @@ There are a number of tools available for visualizing the training of Keras mode
 
 2) Real time visualization of training metrics within the RStudio IDE.
 
-3) Integration with the [TensorBoard](https://www.tensorflow.org/get_started/summaries_and_tensorboard) visualization tool included with TensorFlow.
+3) Integration with the [TensorBoard](https://www.tensorflow.org/get_started/summaries_and_tensorboard) visualization tool included with TensorFlow. Beyond just training metrics, TensorBoard has a wide variety of other visualizations available including the underlying TensorFlow graph, gradient histograms, model weights, and more. TensorBoard also enables you to compare metrics across multiple training runs.
+
+Each of these tools is described in more detail below.
 
 ## Plotting History
 
