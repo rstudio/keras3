@@ -88,6 +88,8 @@
 #' install_keras(tensorflow_gpu = TRUE)
 #' }
 #'
+#' @importFrom reticulate py_available conda_binary
+#' 
 #' @export
 install_keras <- function(method = c("virtualenv", "conda"), conda = "auto",
                           tensorflow_ver = "latest",
@@ -103,8 +105,17 @@ install_keras <- function(method = c("virtualenv", "conda"), conda = "auto",
     # conda is the only supported method on windows
     method <- "conda"
     
+    # confirm we actually have conda
+    have_conda <- !is.null(tryCatch(conda_binary(conda), error = function(e) NULL))
+    if (!have_conda) {
+      stop("Keras installation failed (no conda binary found)\n\n",
+           "Install Anaconda for Python 3.x for Windows (https://www.continuum.io/downloads#windows)\n",
+           "before installing Keras.",
+           call. = FALSE)
+    }
+    
     # avoid DLL in use errors
-    if (reticulate::py_available()) {
+    if (py_available()) {
       stop("You should call install_keras() only in a fresh ",
            "R session that has not yet initialized Keras and TensorFlow (this is ",
            "to avoid DLL in use errors during installation)")
