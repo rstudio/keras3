@@ -31,7 +31,7 @@
 #' }
 #' @export
 keras_model <- function(inputs, outputs = NULL) {
-  keras$models$Model(inputs = inputs, outputs = outputs)
+  keras$models$Model(inputs = unname(inputs), outputs = unname(outputs))
 }
 
 
