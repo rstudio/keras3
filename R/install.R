@@ -109,7 +109,7 @@ install_keras <- function(method = c("virtualenv", "conda"), conda = "auto",
     have_conda <- !is.null(tryCatch(conda_binary(conda), error = function(e) NULL))
     if (!have_conda) {
       stop("Keras installation failed (no conda binary found)\n\n",
-           "Install Anaconda for Python 3.x for Windows (https://www.continuum.io/downloads#windows)\n",
+           "Install Anaconda for Python 3.x (https://www.continuum.io/downloads#windows)\n",
            "before installing Keras.",
            call. = FALSE)
     }
