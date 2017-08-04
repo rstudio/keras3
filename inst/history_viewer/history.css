@@ -4,10 +4,10 @@ body {
 }
 
 #c3-container {
-  height: 99vh;
+  height: 98vh;
 } 
 
 .c3 {
-  width: 100%;
+  width: 99%;
   font-family: "Lucida Sans", "DejaVu Sans", "Lucida Grande", "Segoe UI", Verdana, Helvetica, sans-serif;
 }
