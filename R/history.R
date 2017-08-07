@@ -224,8 +224,8 @@ view_run_metrics <- function(metrics) {
               "d3.min.js",
               "c3.min.js",
               "c3.min.css",
-              "history.js",
-              "history.css")),
+              "metrics.js",
+              "metrics.css")),
             to = viewer_dir)
   
   # write the history
