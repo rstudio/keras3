@@ -154,7 +154,7 @@ as.data.frame.keras_training_history <- function(x, ...) {
   df
 }
 
-KerasHistoryViewer <- R6::R6Class("KerasHistoryViewer",
+KerasMetricsViewer <- R6::R6Class("KerasMetricsViewer",
                                   
   inherit = KerasCallback,
   
@@ -162,7 +162,7 @@ KerasHistoryViewer <- R6::R6Class("KerasHistoryViewer",
     
     metrics = list(),
     
-    history_viewer = NULL,
+    metrics_viewer = NULL,
     
     on_train_begin = function(logs = NULL) {
       
@@ -192,34 +192,35 @@ KerasHistoryViewer <- R6::R6Class("KerasHistoryViewer",
       for (metric in names(logs))
         self$metrics[[metric]] <- c(self$metrics[[metric]], logs[[metric]])
       
-      # create history object
+      # create history object and convert to metrics data frame
       history <- keras_training_history(self$params, self$metrics)
+      metrics <- as_metrics_df(history)
       
-      # create the history_viewer or update if we already have one
-      if (is.null(self$history_viewer)) {
-        self$history_viewer <- view_history(history)
+      # create the metrics_viewer or update if we already have one
+      if (is.null(self$metrics_viewer)) {
+        self$metrics_viewer <- view_run_metrics(metrics)
       }
       else {
-        update_history(self$history_viewer, history)
+        update_run_metrics(self$metrics_viewer, metrics)
       }
     }
   )
 )
 
-view_history <- function(history) {
+view_run_metrics <- function(metrics) {
   
   # create a new temp directory for the viewer's UI/data
   viewer_dir <- tempfile("keras-metrics")
   dir.create(viewer_dir, recursive = TRUE)
   
-  # create the history_viewer instance
-  history_viewer <- structure(class = "keras_history_viewer", list(
+  # create the metrics_viewer instance
+  metrics_viewer <- structure(class = "tfruns_metrics_viewer", list(
     viewer_dir = viewer_dir
   ))
   
   # copy dependencies to the viewer dir
-  history_viewer_html <- system.file("history_viewer", package = "keras")
-  file.copy(file.path(history_viewer_html, c(
+  metrics_viewer_html <- system.file("metrics_viewer", package = "keras")
+  file.copy(file.path(metrics_viewer_html, c(
               "d3.min.js",
               "c3.min.js",
               "c3.min.css",
@@ -228,33 +229,30 @@ view_history <- function(history) {
             to = viewer_dir)
   
   # write the history
-  update_history(history_viewer, history)
+  update_run_metrics(metrics_viewer, metrics)
   
   # view it
   viewer <- getOption("viewer", default = browser_viewer(viewer_dir))
   viewer(file.path(viewer_dir, "index.html"))
   
-  # return history_viewer instance (invisibly) for subsequent
+  # return metrics_viewer instance (invisibly) for subsequent
   # calls to update_run_history
-  invisible(history_viewer)
+  invisible(metrics_viewer)
 }
 
 
-update_history <- function(history_viewer, history) {
-  
-  # convert to metrics_df
-  metrics_df <- as_metrics_df(history)
+update_run_metrics <- function(viewer, metrics) {
   
   # re-write index.html with embedded history
-  history_json <- jsonlite::toJSON(metrics_df, dataframe = "columns", na = "null")
-  history_html <- system.file("history_viewer", "index.html", package = "keras")
+  history_json <- jsonlite::toJSON(metrics, dataframe = "columns", na = "null")
+  history_html <- system.file("metrics_viewer", "index.html", package = "keras")
   history_html_lines <- readLines(history_html, encoding = "UTF-8")
   history_html_lines <- sprintf(history_html_lines, history_json)
-  writeLines(history_html_lines, file.path(history_viewer$viewer_dir, "index.html"))
+  writeLines(history_html_lines, file.path(viewer$viewer_dir, "index.html"))
   
   # write history.json for polling
-  history_json <- file.path(history_viewer$viewer_dir, "history.json")
-  jsonlite::write_json(metrics_df, history_json, dataframe = "columns", na = "null")
+  history_json <- file.path(viewer$viewer_dir, "history.json")
+  jsonlite::write_json(metrics, history_json, dataframe = "columns", na = "null")
 }
 
 as_metrics_df <- function(history) {
@@ -271,7 +269,6 @@ as_metrics_df <- function(history) {
   
   # return df
   df
-  
 }
 
 
