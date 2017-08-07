@@ -1,5 +1,5 @@
-// utility function to load history
-function load_history(callback, on_error) {
+// utility function to load metrics
+function load_metrics(callback, on_error) {
   var request = new XMLHttpRequest();
   request.onreadystatechange = function() {
   if (request.readyState === 4) {
@@ -18,7 +18,7 @@ function load_history(callback, on_error) {
     }
   }
   };
-  request.open('GET', "history.json");
+  request.open('GET', "metrics.json");
   request.setRequestHeader('Cache-Control', 'no-cache');
   request.send(); 
 }
@@ -45,7 +45,7 @@ function chart_columns(metric, data) {
 function init_charts() {
   
   // get the metrics json and parse it
-  var metricsJson = document.getElementById('history').innerHTML;
+  var metricsJson = document.getElementById('metrics').innerHTML;
   var metrics = JSON.parse(metricsJson);
   
   // determine metrics we will be plotting (filter out val_ prefixed ones)
@@ -173,7 +173,7 @@ function init_charts() {
   // then update all charts every second
   if (!run_completed(metrics) && (window.location.protocol !== "file")) {
     var updateInterval = setInterval(function() {
-      load_history(function(data) {
+      load_metrics(function(data) {
         
         // refresh each metric
         for (var i = 0; i<metric_names.length; i++) {

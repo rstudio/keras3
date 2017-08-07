@@ -250,8 +250,8 @@ update_run_metrics <- function(viewer, metrics) {
   history_html_lines <- sprintf(history_html_lines, history_json)
   writeLines(history_html_lines, file.path(viewer$viewer_dir, "index.html"))
   
-  # write history.json for polling
-  history_json <- file.path(viewer$viewer_dir, "history.json")
+  # write metrics.json for polling
+  history_json <- file.path(viewer$viewer_dir, "metrics.json")
   jsonlite::write_json(metrics, history_json, dataframe = "columns", na = "null")
 }
 
