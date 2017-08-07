@@ -18,7 +18,11 @@ knitr::opts_chunk$set(eval = FALSE)
 
 # R interface to Keras
 
+<div id="build-status">
 [![Travis-CI Build Status](https://travis-ci.org/rstudio/keras.svg?branch=master)](https://travis-ci.org/rstudio/keras) 
+</div>
+
+## Overview
 
 [Keras](https://keras.io/) is a high-level neural networks API developed with a focus on enabling fast experimentation. *Being able to go from idea to result with the least possible delay is key to doing good research.* Keras has the following key features:
 
