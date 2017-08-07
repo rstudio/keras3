@@ -242,8 +242,11 @@ view_history <- function(history) {
 
 update_history <- function(history_viewer, history) {
   
+  # convert to metrics_df
+  metrics_df <- as_metrics_df(history)
+  
   # re-write index.html with embedded history
-  history_json <- jsonlite::toJSON(unclass(history))
+  history_json <- jsonlite::toJSON(metrics_df, dataframe = "columns", na = "null")
   history_html <- system.file("history_viewer", "index.html", package = "keras")
   history_html_lines <- readLines(history_html, encoding = "UTF-8")
   history_html_lines <- sprintf(history_html_lines, history_json)
@@ -251,7 +254,24 @@ update_history <- function(history_viewer, history) {
   
   # write history.json for polling
   history_json <- file.path(history_viewer$viewer_dir, "history.json")
-  jsonlite::write_json(unclass(history), history_json)
+  jsonlite::write_json(metrics_df, history_json, dataframe = "columns", na = "null")
+}
+
+as_metrics_df <- function(history) {
+  
+  # create metrics data frame
+  df <- as.data.frame(history$metrics)
+  
+  # pad if necessary
+  pad <- history$params$epochs - nrow(df)
+  pad_data <- list()
+  for (metric in history$params$metrics)
+    pad_data[[metric]] <- rep_len(NA, pad)
+  df <- rbind(df, pad_data)
+  
+  # return df
+  df
+  
 }
 
 
