@@ -173,19 +173,19 @@ if (!isMobilePhone()) {
   img.src = "https://i0.wp.com/rstudioblog.files.wordpress.com/2017/08/rstudio-training-metrics-mobile.png";
 }
 a.appendChild(img);
-</script><p>The <code>view_history</code> argument of the <code><a href="../reference/fit.html">fit()</a></code> method controls whether real time metrics are displayed. By default metrics are automatically displayed if one or more metrics are specified in the call to <code><a href="../reference/compile.html">compile()</a></code> and there is more than one training epoch.</p>
-<p>You can explicitly control whether metrics are displayed by specifying the <code>view_history</code> argument. You can also set a global session default using the <code>keras.view_history</code> option:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># don't show history during this run</span>
+</script><p>The <code>view_metrics</code> argument of the <code><a href="../reference/fit.html">fit()</a></code> method controls whether real time metrics are displayed. By default metrics are automatically displayed if one or more metrics are specified in the call to <code><a href="../reference/compile.html">compile()</a></code> and there is more than one training epoch.</p>
+<p>You can explicitly control whether metrics are displayed by specifying the <code>view_metrics</code> argument. You can also set a global session default using the <code>keras.view_metrics</code> option:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># don't show metrics during this run</span>
 history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(
   x_train, y_train, 
   <span class="dt">epochs =</span> <span class="dv">30</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>, 
-  <span class="dt">view_history =</span> <span class="ot">FALSE</span>,
+  <span class="dt">view_metrics =</span> <span class="ot">FALSE</span>,
   <span class="dt">validation_split =</span> <span class="fl">0.2</span>
 )
 
-<span class="co"># set global default to never show history</span>
-<span class="kw">options</span>(<span class="dt">keras.view_history =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p>Note that when <code>view_history</code> is <code>TRUE</code> metric history will be displayed even when not running within RStudio (in that case metrics will be displayed in an external web browser).</p>
+<span class="co"># set global default to never show metrics</span>
+<span class="kw">options</span>(<span class="dt">keras.view_metrics =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>Note that when <code>view_metrics</code> is <code>TRUE</code> metrics will be displayed even when not running within RStudio (in that case metrics will be displayed in an external web browser).</p>
 </div>
 <div id="tensorboard" class="section level2">
 <h2 class="hasAnchor">

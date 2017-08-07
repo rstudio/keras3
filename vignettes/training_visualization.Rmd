@@ -108,24 +108,24 @@ if (!isMobilePhone()) {
 a.appendChild(img);
 </script>
 
-The `view_history` argument of the `fit()` method controls whether real time metrics are displayed. By default metrics are automatically displayed if one or more metrics are specified in the call to `compile()` and there is more than one training epoch. 
+The `view_metrics` argument of the `fit()` method controls whether real time metrics are displayed. By default metrics are automatically displayed if one or more metrics are specified in the call to `compile()` and there is more than one training epoch. 
 
-You can explicitly control whether metrics are displayed by specifying the `view_history` argument. You can also set a global session default using the `keras.view_history` option:
+You can explicitly control whether metrics are displayed by specifying the `view_metrics` argument. You can also set a global session default using the `keras.view_metrics` option:
 
 ```{r}
-# don't show history during this run
+# don't show metrics during this run
 history <- model %>% fit(
   x_train, y_train, 
   epochs = 30, batch_size = 128, 
-  view_history = FALSE,
+  view_metrics = FALSE,
   validation_split = 0.2
 )
 
-# set global default to never show history
-options(keras.view_history = FALSE)
+# set global default to never show metrics
+options(keras.view_metrics = FALSE)
 ```
 
-Note that when `view_history` is `TRUE` metric history will be displayed even when not running within RStudio (in that case metrics will be displayed in an external web browser).
+Note that when `view_metrics` is `TRUE` metrics will be displayed even when not running within RStudio (in that case metrics will be displayed in an external web browser).
 
 ## TensorBoard
 

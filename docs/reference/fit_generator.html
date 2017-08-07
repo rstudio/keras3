@@ -134,7 +134,7 @@ parallel to training your model on GPU.</p>
     
 
     <pre class="usage"><span class='fu'>fit_generator</span>(<span class='no'>object</span>, <span class='no'>generator</span>, <span class='no'>steps_per_epoch</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>view_history</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"keras.view_history"</span>, <span class='kw'>default</span> <span class='kw'>=</span>
+  <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>view_metrics</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"keras.view_metrics"</span>, <span class='kw'>default</span> <span class='kw'>=</span>
   <span class='st'>"auto"</span>), <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max_queue_size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
@@ -181,11 +181,11 @@ epoch).</p></td>
       <td><p>list of callbacks to be called during training.</p></td>
     </tr>
     <tr>
-      <th>view_history</th>
+      <th>view_metrics</th>
       <td><p>View realtime plot of training metrics (by epoch). The
 default (<code>"auto"</code>) will display the plot when running within RStudio,
 <code>metrics</code> were specified during model <code><a href='compile.html'>compile()</a></code>, <code>epochs &gt; 1</code> and
-<code>verbose &gt; 0</code>. Use the global <code>keras.view_history</code> option to establish a
+<code>verbose &gt; 0</code>. Use the global <code>keras.view_metrics</code> option to establish a
 different default.</p></td>
     </tr>
     <tr>

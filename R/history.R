@@ -272,8 +272,8 @@ as_metrics_df <- function(history) {
 }
 
 
-# determine whether to view history or not
-resolve_view_history <- function(verbose, epochs, metrics) {
+# determine whether to view metrics or not
+resolve_view_metrics <- function(verbose, epochs, metrics) {
   (epochs > 1)          &&            # more than 1 epoch
   (length(metrics) > 0) &&            # capturing at least one metric
   (verbose > 0) &&                    # verbose mode is on

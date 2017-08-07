@@ -417,7 +417,7 @@ normalize_callbacks <- function(view_metrics, callbacks) {
   if (is.null(callbacks) && include_tensorboard_callback())
     callbacks <- callback_tensorboard(run_dir())
   
-  # include the training history callback if appropriate
+  # include the metrics viewer callback if appropriate
   if (view_metrics) 
     callbacks <- append(callbacks, KerasMetricsViewer$new())  
   

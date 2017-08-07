@@ -148,10 +148,10 @@ compile <- function(object, optimizer, loss, metrics = NULL, loss_weights = NULL
 #' @param epochs Number of times to iterate over the training data arrays.
 #' @param verbose  Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
 #'   epoch).
-#' @param view_history View realtime plot of training metrics (by epoch). The
+#' @param view_metrics View realtime plot of training metrics (by epoch). The
 #'   default (`"auto"`) will display the plot when running within RStudio,
 #'   `metrics` were specified during model [compile()], `epochs > 1` and
-#'   `verbose > 0`. Use the global `keras.view_history` option to establish a
+#'   `verbose > 0`. Use the global `keras.view_metrics` option to establish a
 #'   different default.
 #' @param callbacks List of callbacks to be called during training.
 #' @param validation_split Float between 0 and 1: fraction of the training data
@@ -182,13 +182,13 @@ compile <- function(object, optimizer, loss, metrics = NULL, loss_weights = NULL
 #' @export
 fit <- function(object, x, y, batch_size=32, epochs=10, 
                 verbose=1, callbacks=NULL,
-                view_history = getOption("keras.view_history", default = "auto"),
+                view_metrics = getOption("keras.view_metrics", default = "auto"),
                 validation_split=0.0, validation_data=NULL, shuffle=TRUE,
                 class_weight=NULL, sample_weight=NULL, initial_epoch=0, ...) {
   
-  # resolve view_history
-  if (identical(view_history, "auto"))
-    view_history <- resolve_view_history(verbose, epochs, object$metrics)
+  # resolve view_metrics
+  if (identical(view_metrics, "auto"))
+    view_metrics <- resolve_view_metrics(verbose, epochs, object$metrics)
   
   # fit the model
   history <- object$fit(
@@ -197,7 +197,7 @@ fit <- function(object, x, y, batch_size=32, epochs=10,
     batch_size = as.integer(batch_size),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
-    callbacks = normalize_callbacks(view_history, callbacks),
+    callbacks = normalize_callbacks(view_metrics, callbacks),
     validation_split = validation_split,
     validation_data = validation_data,
     shuffle = shuffle,
@@ -409,20 +409,20 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #' @export
 fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, 
                           verbose = 1, callbacks = NULL, 
-                          view_history = getOption("keras.view_history", default = "auto"),
+                          view_metrics = getOption("keras.view_metrics", default = "auto"),
                           validation_data = NULL, validation_steps = NULL, 
                           class_weight = NULL, max_queue_size = 10, initial_epoch = 0) {
   
-  # resolve view_history
-  if (identical(view_history, "auto"))
-    view_history <- resolve_view_history(verbose, epochs, object$metrics)
+  # resolve view_metrics
+  if (identical(view_metrics, "auto"))
+    view_metrics <- resolve_view_metrics(verbose, epochs, object$metrics)
   
   call_generator_function(object$fit_generator, list(
     generator = as_generator(generator),
     steps_per_epoch = as.integer(steps_per_epoch),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
-    callbacks = normalize_callbacks(view_history, callbacks),
+    callbacks = normalize_callbacks(view_metrics, callbacks),
     validation_data = validation_data,
     validation_steps = as_nullable_integer(validation_steps),
     class_weight = as_class_weight(class_weight),
