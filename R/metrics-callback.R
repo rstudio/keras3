@@ -1,6 +1,6 @@
 
 
-KerasMetricsViewer <- R6::R6Class("KerasMetricsViewer",
+KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
                                   
   inherit = KerasCallback,
   

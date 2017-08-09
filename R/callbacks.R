@@ -421,7 +421,7 @@ normalize_callbacks <- function(view_metrics, callbacks) {
   
   # include the metrics viewer callback if appropriate
   if (view_metrics) 
-    callbacks <- append(callbacks, KerasMetricsViewer$new())  
+    callbacks <- append(callbacks, KerasMetricsCallback$new())  
   
   # return NULL if there are no callbacks
   if (is.null(callbacks)) 
