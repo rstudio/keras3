@@ -30,8 +30,8 @@ sample. In this case you should make sure to specify
 sample_weight_mode="temporal" in \code{\link[=compile]{compile()}}.}
 }
 \value{
-Scalar test loss (if the model has a single output and no metrics) or
-list of scalars (if the model has multiple outputs and/or metrics).
+Named list of model test loss (or losses for models with multiple outputs)
+and model metrics.
 }
 \description{
 Evaluate a Keras model

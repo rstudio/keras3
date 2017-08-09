@@ -31,6 +31,13 @@ test_succeeds("models can be fit, evaluated, and used for predictions", {
   predict_classes(model, input)
 })
 
+test_succeeds("evaluate function returns a named list", {
+  model <- define_and_compile_model()
+  fit(model, data, labels)
+  result <- evaluate(model, data, labels)
+  expect_true(!is.null(names(result)))
+})
+
 test_succeeds("models can be tested and trained on batches", {
   model <- define_and_compile_model()
   train_on_batch(model, data, labels)

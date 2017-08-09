@@ -28,6 +28,8 @@
 
 - Remove names from `keras_model()` inputs
 
+- Return result of `evaluate()` as named list
+
 
 # keras 2.0.5
 

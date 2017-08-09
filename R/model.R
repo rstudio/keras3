@@ -227,20 +227,28 @@ fit <- function(object, x, y, batch_size=32, epochs=10,
 #'   
 #' @param object Model object to evaluate
 #'   
-#' @return Scalar test loss (if the model has a single output and no metrics) or
-#'   list of scalars (if the model has multiple outputs and/or metrics).
+#' @return Named list of model test loss (or losses for models with multiple outputs) 
+#'   and model metrics.
 #'   
 #' @family model functions
 #'   
 #' @export
 evaluate <- function(object, x, y, batch_size = 32, verbose=1, sample_weight = NULL) {
-  object$evaluate(
+  
+  # perform evaluation
+  result <- object$evaluate(
     x = to_numpy_array(x),
     y = to_numpy_array(y),
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose),
     sample_weight = sample_weight
   )
+  
+  # apply names
+  names(result) <- object$metrics_names
+  
+  # return result
+  result
 }
 
 
