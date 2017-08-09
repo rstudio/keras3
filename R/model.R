@@ -247,6 +247,9 @@ evaluate <- function(object, x, y, batch_size = 32, verbose=1, sample_weight = N
   # apply names
   names(result) <- object$metrics_names
   
+  # write run data
+  tfruns::write_run_data("evaluation", result)
+  
   # return result
   result
 }
@@ -453,20 +456,29 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
 #'   `generator` before stopping.
 #' @param max_queue_size maximum size for the generator queue
 #'   
-#' @return Scalar test loss (if the model has a single output and no metrics) or
-#'   list of scalars (if the model has multiple outputs and/or metrics). The
-#'   attribute `model$metrics_names` will give you the display labels for the
-#'   scalar outputs.
+#' @return Named list of model test loss (or losses for models with multiple outputs) 
+#'   and model metrics.
 #'  
 #' @family model functions   
 #'     
 #' @export
 evaluate_generator <- function(object, generator, steps, max_queue_size = 10) {
-  call_generator_function(object$evaluate_generator, list(
+  
+  # perform evaluation
+  result <- call_generator_function(object$evaluate_generator, list(
     generator = generator,
     steps = as.integer(steps),
     max_queue_size = as.integer(max_queue_size)
   ))
+  
+  # apply names
+  names(result) <- object$metrics_names
+  
+  # write run data
+  tfruns::write_run_data("evaluation", result)
+  
+  # return result
+  result
 }
 
 

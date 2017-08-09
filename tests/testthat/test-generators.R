@@ -50,9 +50,10 @@ test_succeeds("image data generator can be used for training", {
                   steps_per_epoch = 32, epochs = 2)
   
   # evaluate using generator
-  model %>%
+  scores <- model %>%
     evaluate_generator(flow_images_from_data(X_test, Y_test, datagen, batch_size = 32),
                        steps = 5)
+  expect_equal(names(scores), c("loss", "acc"))
   
   # predict using generator
   model %>%
