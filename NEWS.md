@@ -30,6 +30,8 @@
 
 - Return result of `evaluate()` as named list
 
+- Write run metrics and evaluation data to tfruns
+
 
 # keras 2.0.5
 

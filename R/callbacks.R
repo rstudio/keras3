@@ -419,14 +419,9 @@ normalize_callbacks <- function(view_metrics, callbacks) {
   if (is.null(callbacks) && include_tensorboard_callback())
     callbacks <- callback_tensorboard(tfruns::run_dir())
   
-  # include the metrics viewer callback if appropriate
-  if (view_metrics) 
-    callbacks <- append(callbacks, KerasMetricsCallback$new())  
-  
-  # return NULL if there are no callbacks
-  if (is.null(callbacks)) 
-    return(NULL)
-    
+  # always include the metrics callback
+  callbacks <- append(callbacks, KerasMetricsCallback$new(view_metrics))  
+ 
   # if callbacks isn't a list then make it one
   if (!is.null(callbacks) && !is.list(callbacks))
     callbacks <- list(callbacks)
