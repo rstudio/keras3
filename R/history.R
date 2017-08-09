@@ -156,6 +156,18 @@ as.data.frame.keras_training_history <- function(x, ...) {
 
 
 keras_training_history <- function(params, metrics) {
+  
+  # pad missing metrics with NA
+  rows <- max(as.integer(lapply(metrics, length)))
+  for (metric in names(metrics)) {
+    metric_data <- metrics[[metric]]
+    pad <- rows - length(metric_data)
+    pad_data <- rep_len(NA, pad)
+    metric_data <- c(metric_data, pad_data)
+    metrics[[metric]] <- metric_data
+  }
+  
+  # return history
   structure(class = "keras_training_history", list(
     params = params,
     metrics = metrics
