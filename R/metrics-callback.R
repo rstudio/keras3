@@ -59,7 +59,7 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
       }
       
       # record metrics
-      tfruns::write_run_data("metrics", metrics)
+      tfruns::write_run_metadata("metrics", metrics)
       
     },
     

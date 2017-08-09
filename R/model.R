@@ -248,7 +248,7 @@ evaluate <- function(object, x, y, batch_size = 32, verbose=1, sample_weight = N
   names(result) <- object$metrics_names
   
   # write run data
-  tfruns::write_run_data("evaluation", result)
+  tfruns::write_run_metadata("evaluation", result)
   
   # return result
   result
@@ -475,7 +475,7 @@ evaluate_generator <- function(object, generator, steps, max_queue_size = 10) {
   names(result) <- object$metrics_names
   
   # write run data
-  tfruns::write_run_data("evaluation", result)
+  tfruns::write_run_metadata("evaluation", result)
   
   # return result
   result
