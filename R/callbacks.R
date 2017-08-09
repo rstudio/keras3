@@ -196,8 +196,8 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
   
   # establish the log_dir
   if (is.null(log_dir)) {
-    if (!is.null(run_dir()))
-      log_dir <- run_dir()
+    if (!is.null(tfruns::run_dir()))
+      log_dir <- tfruns::run_dir()
     else
       log_dir <- "logs"
   }
@@ -409,13 +409,15 @@ normalize_callbacks <- function(view_metrics, callbacks) {
   # helper to determine if we should add a tensorboard callback
   have_tensorboard_callback <- FALSE
   include_tensorboard_callback <- function() {
-    !have_tensorboard_callback && is_backend("tensorflow") && !is.null(run_dir())
+    !have_tensorboard_callback && 
+    is_backend("tensorflow") && 
+    !is.null(tfruns::run_dir())
   }
   
   # if there are no callbacks specified and we are in a run_dir
   # then automatically add the tensorboard_callback
   if (is.null(callbacks) && include_tensorboard_callback())
-    callbacks <- callback_tensorboard(run_dir())
+    callbacks <- callback_tensorboard(tfruns::run_dir())
   
   # include the metrics viewer callback if appropriate
   if (view_metrics) 
@@ -458,7 +460,7 @@ normalize_callbacks <- function(view_metrics, callbacks) {
   
   # if we have a run_dir() and no tensorboard_callback then add one
   if (include_tensorboard_callback())
-    callbacks <- append(callbacks, callback_tensorboard(run_dir()))
+    callbacks <- append(callbacks, callback_tensorboard(tfruns::run_dir()))
   
   # return the callbacks
   callbacks
