@@ -9,12 +9,17 @@
 #' @inheritParams tensorflow::install_tensorflow
 #'
 #' @param method Installation method ("virtualenv" or "conda")
-#' @param tensorflow_ver TensorFlow version to install (must be either "latest"
-#'   or a full major.minor.patch specification, e.g. "1.1.0").
-#' @param tensorflow_gpu `TRUE` to install the GPU version of TensorFlow
-#' @param tensorflow_url URL of the TensorFlow package to install (if not specified
-#'   this is determined automatically). Note that if this parameter is provied
-#'   then the `tensorflow_ver` and `tensorflow_gpu` parameters are ignored.
+#' 
+#' @param tensorflow TensorFlow version to install. Specify "default" to install
+#'   the CPU version of the latest release. Specify "gpu" to install the GPU
+#'   version of the latest release.
+#'
+#'   You can also provide a full major.minor.patch specification (e.g. "1.1.0"),
+#'   appending "-gpu" if you want the GPU version (e.g. "1.1.0-gpu").
+#'
+#'   Alternatively, you can provide the full URL to an installer binary (e.g.
+#'   for a nightly binary).
+#'
 #' @param extra_packages Additional PyPI packages to install along with
 #'   Keras and TensorFlow.
 #' 
@@ -40,10 +45,10 @@
 #' 1) Ensure that you have met all installation prerequisites including installation
 #'    of the CUDA and cuDNN libraries as described in [TensorFlow GPU Prerequistes](https://tensorflow.rstudio.com/installation_gpu.html#prerequisites).
 #'    
-#' 2) Pass `tensorflow_gpu = TRUE` to `install_keras()`. For example:
+#' 2) Pass `tensorflow = "gpu"` to `install_keras()`. For example:
 #' 
 #'     ```
-#'       install_keras(tensorflow_gpu = TRUE)
+#'       install_keras(tensorflow = "gpu")
 #'     ````
 #' 
 #' @section Windows Installation:
@@ -80,21 +85,22 @@
 #' # install using a conda environment (default is virtualenv)
 #' install_keras(method = "conda")
 #'
-#' # install a specific version of TensorFlow
-#' install_keras(tensorflow_ver = "1.2.1")
-#'
 #' # install with GPU version of TensorFlow
 #' # (NOTE: only do this if you have an NVIDIA GPU + CUDA!)
-#' install_keras(tensorflow_gpu = TRUE)
+#' install_keras(tensorflow = "gpu")
+#'
+#' # install a specific version of TensorFlow
+#' install_keras(tensorflow = "1.2.1")
+#' install_keras(tensorflow = "1.2.1-gpu")
+#'
 #' }
 #'
 #' @importFrom reticulate py_available conda_binary
 #' 
 #' @export
-install_keras <- function(method = c("virtualenv", "conda"), conda = "auto",
-                          tensorflow_ver = "latest",
-                          tensorflow_gpu = FALSE,
-                          tensorflow_url = NULL,
+install_keras <- function(method = c("virtualenv", "conda"), 
+                          conda = "auto",
+                          tensorflow = "default",
                           extra_packages = NULL) {
   # verify method
   method <- match.arg(method)
@@ -138,9 +144,7 @@ install_keras <- function(method = c("virtualenv", "conda"), conda = "auto",
   # perform the install
   install_tensorflow(method = method,
                      conda = conda,
-                     version = tensorflow_ver,
-                     gpu = tensorflow_gpu,
-                     package_url = tensorflow_url,
+                     version = tensorflow,
                      extra_packages = extra_packages)
  
   # additional conda pakcages

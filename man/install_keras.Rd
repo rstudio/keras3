@@ -5,8 +5,7 @@
 \title{Install Keras and the TensorFlow backend}
 \usage{
 install_keras(method = c("virtualenv", "conda"), conda = "auto",
-  tensorflow_ver = "latest", tensorflow_gpu = FALSE,
-  tensorflow_url = NULL, extra_packages = NULL)
+  tensorflow = "default", extra_packages = NULL)
 }
 \arguments{
 \item{method}{Installation method ("virtualenv" or "conda")}
@@ -14,14 +13,15 @@ install_keras(method = c("virtualenv", "conda"), conda = "auto",
 \item{conda}{Path to conda executable (or "auto" to find conda using the PATH
 and other conventional install locations).}
 
-\item{tensorflow_ver}{TensorFlow version to install (must be either "latest"
-or a full major.minor.patch specification, e.g. "1.1.0").}
+\item{tensorflow}{TensorFlow version to install. Specify "default" to install
+the CPU version of the latest release. Specify "gpu" to install the GPU
+version of the latest release.
 
-\item{tensorflow_gpu}{\code{TRUE} to install the GPU version of TensorFlow}
+You can also provide a full major.minor.patch specification (e.g. "1.1.0"),
+appending "-gpu" if you want the GPU version (e.g. "1.1.0-gpu").
 
-\item{tensorflow_url}{URL of the TensorFlow package to install (if not specified
-this is determined automatically). Note that if this parameter is provied
-then the \code{tensorflow_ver} and \code{tensorflow_gpu} parameters are ignored.}
+Alternatively, you can provide the full URL to an installer binary (e.g.
+for a nightly binary).}
 
 \item{extra_packages}{Additional PyPI packages to install along with
 Keras and TensorFlow.}
@@ -53,7 +53,7 @@ To install the GPU version:
 \enumerate{
 \item Ensure that you have met all installation prerequisites including installation
 of the CUDA and cuDNN libraries as described in \href{https://tensorflow.rstudio.com/installation_gpu.html#prerequisites}{TensorFlow GPU Prerequistes}.
-\item Pass \code{tensorflow_gpu = TRUE} to \code{install_keras()}. For example:\preformatted{  install_keras(tensorflow_gpu = TRUE)
+\item Pass \code{tensorflow = "gpu"} to \code{install_keras()}. For example:\preformatted{  install_keras(tensorflow = "gpu")
 }
 }
 }
@@ -98,12 +98,14 @@ install_keras()
 # install using a conda environment (default is virtualenv)
 install_keras(method = "conda")
 
-# install a specific version of TensorFlow
-install_keras(tensorflow_ver = "1.2.1")
-
 # install with GPU version of TensorFlow
 # (NOTE: only do this if you have an NVIDIA GPU + CUDA!)
-install_keras(tensorflow_gpu = TRUE)
+install_keras(tensorflow = "gpu")
+
+# install a specific version of TensorFlow
+install_keras(tensorflow = "1.2.1")
+install_keras(tensorflow = "1.2.1-gpu")
+
 }
 
 }

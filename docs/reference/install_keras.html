@@ -134,8 +134,7 @@ supported by TensorFlow).</p>
     
 
     <pre class="usage"><span class='fu'>install_keras</span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"virtualenv"</span>, <span class='st'>"conda"</span>), <span class='kw'>conda</span> <span class='kw'>=</span> <span class='st'>"auto"</span>,
-  <span class='kw'>tensorflow_ver</span> <span class='kw'>=</span> <span class='st'>"latest"</span>, <span class='kw'>tensorflow_gpu</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>tensorflow_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>extra_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>tensorflow</span> <span class='kw'>=</span> <span class='st'>"default"</span>, <span class='kw'>extra_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -150,19 +149,14 @@ supported by TensorFlow).</p>
 and other conventional install locations).</p></td>
     </tr>
     <tr>
-      <th>tensorflow_ver</th>
-      <td><p>TensorFlow version to install (must be either "latest"
-or a full major.minor.patch specification, e.g. "1.1.0").</p></td>
-    </tr>
-    <tr>
-      <th>tensorflow_gpu</th>
-      <td><p><code>TRUE</code> to install the GPU version of TensorFlow</p></td>
-    </tr>
-    <tr>
-      <th>tensorflow_url</th>
-      <td><p>URL of the TensorFlow package to install (if not specified
-this is determined automatically). Note that if this parameter is provied
-then the <code>tensorflow_ver</code> and <code>tensorflow_gpu</code> parameters are ignored.</p></td>
+      <th>tensorflow</th>
+      <td><p>TensorFlow version to install. Specify "default" to install
+the CPU version of the latest release. Specify "gpu" to install the GPU
+version of the latest release.</p>
+<p>You can also provide a full major.minor.patch specification (e.g. "1.1.0"),
+appending "-gpu" if you want the GPU version (e.g. "1.1.0-gpu").</p>
+<p>Alternatively, you can provide the full URL to an installer binary (e.g.
+for a nightly binary).</p></td>
     </tr>
     <tr>
       <th>extra_packages</th>
@@ -190,7 +184,7 @@ ultimately install this version.</p></li>
     <p>To install the GPU version:</p><ol>
 <li><p>Ensure that you have met all installation prerequisites including installation
 of the CUDA and cuDNN libraries as described in <a href='https://tensorflow.rstudio.com/installation_gpu.html#prerequisites'>TensorFlow GPU Prerequistes</a>.</p></li>
-<li><p>Pass <code>tensorflow_gpu = TRUE</code> to <code>install_keras()</code>. For example:</p><pre>  install_keras(tensorflow_gpu = TRUE)
+<li><p>Pass <code>tensorflow = "gpu"</code> to <code>install_keras()</code>. For example:</p><pre>  install_keras(tensorflow = "gpu")
 </pre></li>
 </ol>
     
@@ -230,12 +224,14 @@ or alternatively install them into an existing environment using the
 <span class='co'># install using a conda environment (default is virtualenv)</span>
 <span class='fu'>install_keras</span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"conda"</span>)
 
-<span class='co'># install a specific version of TensorFlow</span>
-<span class='fu'>install_keras</span>(<span class='kw'>tensorflow_ver</span> <span class='kw'>=</span> <span class='st'>"1.2.1"</span>)
-
 <span class='co'># install with GPU version of TensorFlow</span>
 <span class='co'># (NOTE: only do this if you have an NVIDIA GPU + CUDA!)</span>
-<span class='fu'>install_keras</span>(<span class='kw'>tensorflow_gpu</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>install_keras</span>(<span class='kw'>tensorflow</span> <span class='kw'>=</span> <span class='st'>"gpu"</span>)
+
+<span class='co'># install a specific version of TensorFlow</span>
+<span class='fu'>install_keras</span>(<span class='kw'>tensorflow</span> <span class='kw'>=</span> <span class='st'>"1.2.1"</span>)
+<span class='fu'>install_keras</span>(<span class='kw'>tensorflow</span> <span class='kw'>=</span> <span class='st'>"1.2.1-gpu"</span>)
+
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
