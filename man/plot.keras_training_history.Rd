@@ -22,7 +22,7 @@ Defaults to plotting all captured metrics.}
 available for the \code{ggplot2} method. If the number of epochs is smaller
 than ten, it is forced to false.}
 
-\item{...}{Additional parameters to pass to the \code{\link[=plot]{plot()}} method.}
+\item{...}{Additional parameters to pass to the \code{\link[=plot]{plot()}} or \code{\link[=ggplot]{ggplot()}} method.}
 }
 \description{
 Plots metrics recorded during training.

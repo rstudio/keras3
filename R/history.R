@@ -48,7 +48,7 @@ print.keras_training_history <- function(x, ...) {
 #' @param smooth Whether a loess smooth should be added to the plot, only 
 #'   available for the `ggplot2` method. If the number of epochs is smaller
 #'   than ten, it is forced to false.
-#' @param ... Additional parameters to pass to the [plot()] method.
+#' @param ... Additional parameters to pass to the [plot()] or [ggplot()] method.
 #'
 #' @export
 plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto", "ggplot2", "base"), 
@@ -77,9 +77,9 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
     int_breaks <- function(x) pretty(x)[pretty(x) %% 1 == 0]
     
     if (x$params$do_validation)
-      p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data))
+      p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data), ...)
     else 
-      p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value))
+      p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value), ...)
     
     if (smooth && x$params$epochs >= 10)
       p <- p + ggplot2::geom_smooth(se = FALSE, method = 'loess')
