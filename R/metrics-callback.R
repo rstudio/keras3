@@ -23,7 +23,9 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
       
       # handle metrics
       self$on_metrics(logs, 0.5)
-     
+      
+      # write params
+      self$write_params(self$params)
     },
     
     on_epoch_end = function(epoch, logs = NULL) {
@@ -78,6 +80,15 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
       
       # return df
       df
+    },
+    
+    write_params = function(params) {
+      properties <- list()
+      properties$samples <- params$samples
+      properties$validation_samples <- params$validation_samples
+      properties$epochs <- params$epochs
+      properties$batch_size <- params$batch_size
+      tfruns::write_run_metadata("properties", properties)
     }
   )
 )
