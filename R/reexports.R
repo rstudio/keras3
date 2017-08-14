@@ -23,21 +23,9 @@ reticulate::use_virtualenv
 #' @export
 reticulate::use_condaenv
 
-#' @importFrom tensorflow install_tensorflow
-#' @export
-tensorflow::install_tensorflow
-
-#' @importFrom tensorflow install_tensorflow_extras
-#' @export
-tensorflow::install_tensorflow_extras
-
 #' @importFrom tensorflow tensorboard
 #' @export
 tensorflow::tensorboard
-
-#' @importFrom tensorflow tf_config
-#' @export
-tensorflow::tf_config
 
 #' @importFrom tfruns flags
 #' @export

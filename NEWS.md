@@ -21,6 +21,9 @@
 
 - Added `return_state` argument to recurrent layers.
 
+- Don't re-export `install_tensorflow()` and `tf_config()` from tensorflow
+  package.
+
 - `is_keras_available()` function to probe whether the Keras python 
   package is available in the current environment.
   
