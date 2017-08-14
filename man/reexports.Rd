@@ -16,6 +16,18 @@
 \alias{tensorboard}
 \alias{reexports}
 \alias{tf_config}
+\alias{reexports}
+\alias{flags}
+\alias{reexports}
+\alias{flag_numeric}
+\alias{reexports}
+\alias{flag_integer}
+\alias{reexports}
+\alias{flag_string}
+\alias{reexports}
+\alias{flag_boolean}
+\alias{reexports}
+\alias{run_dir}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -26,5 +38,7 @@ below to see their documentation.
   \item{reticulate}{\code{\link[reticulate]{use_python}}, \code{\link[reticulate]{use_virtualenv}}, \code{\link[reticulate]{use_condaenv}}}
 
   \item{tensorflow}{\code{\link[tensorflow]{install_tensorflow}}, \code{\link[tensorflow]{install_tensorflow_extras}}, \code{\link[tensorflow]{tensorboard}}, \code{\link[tensorflow]{tf_config}}}
+
+  \item{tfruns}{\code{\link[tfruns]{flags}}, \code{\link[tfruns]{flag_numeric}}, \code{\link[tfruns]{flag_integer}}, \code{\link[tfruns]{flag_string}}, \code{\link[tfruns]{flag_boolean}}, \code{\link[tfruns]{run_dir}}}
 }}
 
