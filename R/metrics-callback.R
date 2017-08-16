@@ -24,8 +24,10 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
       # handle metrics
       self$on_metrics(logs, 0.5)
       
-      # write params
-      self$write_params(self$params)
+      if (tfruns::is_run_active()) {
+        self$write_params(self$params)
+        self$write_model_info(self$model)
+      }
     },
     
     on_epoch_end = function(epoch, logs = NULL) {
@@ -89,6 +91,26 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
       properties$epochs <- params$epochs
       properties$batch_size <- params$batch_size
       tfruns::write_run_metadata("properties", properties)
+    },
+    
+    write_model_info = function(model) {
+      tryCatch({
+        K <- backend()
+        model_info <- list()
+        model_info$model <- py_str(model)
+        model_info$loss <- model$loss
+        if (is.function(model_info$loss))
+          model_info$loss <- model_info$loss$func_name
+        optimizer <- model$optimizer
+        if (!is.null(optimizer)) {
+          model_info$optimizer <- py_str(optimizer)
+          model_info$learning_rate <- K$eval(optimizer$lr)                     
+        }
+        tfruns::write_run_metadata("properties", model_info)
+      }, error = function(e) {
+        warning("Unable to log model info: ", e$message, call. = FALSE)
+      })
+     
     }
   )
 )
