@@ -252,4 +252,26 @@ is_osx <- function() {
   Sys.info()["sysname"] == "Darwin"
 }
 
+relative_to <- function(dir, file) {
+  
+  # normalize paths
+  dir <- normalizePath(dir, mustWork = FALSE)
+  file <- normalizePath(file, mustWork = FALSE)
+  
+  # ensure directory ends with a /
+  if (!identical(substr(dir, nchar(dir), nchar(dir)), "/")) {
+    dir <- paste(dir, "/", sep="")
+  }
+  
+  # if the file is prefixed with the directory, return a relative path
+  if (identical(substr(file, 1, nchar(dir)), dir))
+    file <- substr(file, nchar(dir) + 1, nchar(file))
+  
+  # simplify ./
+  if (identical(substr(file, 1, 2), "./"))
+    file <- substr(file, 3, nchar(file))
+  
+  file
+}
+
 
