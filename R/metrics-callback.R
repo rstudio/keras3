@@ -98,9 +98,9 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
         K <- backend()
         model_info <- list()
         model_info$model <- py_str(model)
-        model_info$loss <- model$loss
-        if (is.function(model_info$loss))
-          model_info$loss <- model_info$loss$func_name
+        model_info$loss_function <- model$loss
+        if (is.function(model_info$loss_function))
+          model_info$loss_function <- model_info$loss_function$func_name
         optimizer <- model$optimizer
         if (!is.null(optimizer)) {
           model_info$optimizer <- py_str(optimizer)

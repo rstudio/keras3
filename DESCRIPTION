@@ -27,7 +27,7 @@ Depends:
 Imports:
     reticulate (>= 1.0.0.9001), 
     tensorflow (>= 1.3.0.9004),
-    tfruns (>= 0.9.0.9009),
+    tfruns (>= 0.9.0.9012),
     magrittr, 
     methods,
     R6,
