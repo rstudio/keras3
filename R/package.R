@@ -26,6 +26,10 @@ keras <- NULL
      
     on_load = function() {
       check_implementation_version()
+      
+      # force loading of TensorFlow (needed for S3
+      # dispatch of methods on Tensors)
+      tensorflow::tf$VERSION
     },
     
     on_error = function(e) {
