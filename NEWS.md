@@ -1,5 +1,5 @@
 
-# keras 2.0.7 (unreleased)
+# keras 2.0.6 (unreleased)
 
 - `install_keras()` function which installs both TensorFlow and Keras
 
@@ -34,6 +34,8 @@
 - Return result of `evaluate()` as named list
 
 - Write run metrics and evaluation data to tfruns
+
+- Provide hint to use r-tensorflow environment when importing keras
 
 
 # keras 2.0.5

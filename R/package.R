@@ -23,6 +23,8 @@ keras <- NULL
   keras <<- import(implementation_module, as = "keras", delay_load = list(
   
     priority = 10,
+    
+    environment = "r-tensorflow",
      
     on_load = function() {
       check_implementation_version()
