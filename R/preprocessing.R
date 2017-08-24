@@ -52,6 +52,7 @@ pad_sequences <- function(sequences, maxlen = NULL, dtype = "int32", padding = "
 #'   if TRUE labels will be categorical eg. `[[1,0],[0,1],[0,1] .. ]`
 #' @param sampling_table 1D array of size `vocabulary_size` where the entry i
 #'   encodes the probabibily to sample a word of rank i.
+#' @param seed Random seed
 #'   
 #' @return List of `couples`, `labels` where:
 #'   - `couples` is a list of 2-element integer vectors: `[word_index, other_word_index]`.
@@ -65,8 +66,9 @@ pad_sequences <- function(sequences, maxlen = NULL, dtype = "int32", padding = "
 #'   
 #' @export
 skipgrams <- function(sequence, vocabulary_size, window_size = 4, negative_samples = 1.0, 
-                      shuffle = TRUE, categorical = FALSE, sampling_table = NULL) {
-  sg <- keras$preprocessing$sequence$skipgrams(
+                      shuffle = TRUE, categorical = FALSE, sampling_table = NULL, seed = NULL) {
+  
+  args <- list(
     sequence = as.integer(sequence),
     vocabulary_size = as.integer(vocabulary_size),
     window_size = as.integer(window_size),
@@ -75,6 +77,12 @@ skipgrams <- function(sequence, vocabulary_size, window_size = 4, negative_sampl
     categorical = categorical,
     sampling_table = sampling_table
   )
+  
+  if (keras_version() >= "2.0.7")
+    args$seed <- as_nullable_integer(seed)
+  
+  sg <- do.call(keras$preprocessing$sequence$skipgrams, args)
+  
   sg <- list(
     couples = sg[[1]],
     labels = sg[[2]]

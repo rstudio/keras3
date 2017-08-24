@@ -4,7 +4,8 @@
 \alias{evaluate}
 \title{Evaluate a Keras model}
 \usage{
-evaluate(object, x, y, batch_size = 32, verbose = 1, sample_weight = NULL)
+evaluate(object, x, y, batch_size = NULL, verbose = 1,
+  sample_weight = NULL, steps = NULL)
 }
 \arguments{
 \item{object}{Model object to evaluate}
@@ -17,7 +18,8 @@ list mapping input names to data.}
 multiple outputs). If all outputs in the model are named, you can also pass
 a list mapping output names to data.}
 
-\item{batch_size}{Number of samples per gradient update.}
+\item{batch_size}{Integer or \code{NULL}. Number of samples per gradient update.
+If unspecified, it will default to 32.}
 
 \item{verbose}{Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
 epoch).}
@@ -28,10 +30,13 @@ temporal data, you can pass a 2D array with shape (samples,
 sequence_length), to apply a different weight to every timestep of every
 sample. In this case you should make sure to specify
 sample_weight_mode="temporal" in \code{\link[=compile]{compile()}}.}
+
+\item{steps}{Total number of steps (batches of samples) before declaring the
+evaluation round finished. Ignored with the default value of \code{NULL}.}
 }
 \value{
-Named list of model test loss (or losses for models with multiple outputs)
-and model metrics.
+Named list of model test loss (or losses for models with multiple
+outputs) and model metrics.
 }
 \description{
 Evaluate a Keras model

@@ -71,6 +71,8 @@ You need to be aware of this because it makes the Keras API a little different t
 
 ## How can I save a Keras model?
 
+### Saving/loading whole models (architecture + weights + optimizer state)
+
 You can use `save_model_hdf5()` to save a Keras model into a single HDF5 file which will contain:
 
 - the architecture of the model, allowing to re-create the model
@@ -89,6 +91,8 @@ save_model_hdf5(model, 'my_model.h5')
 model <- load_model_hdf5('my_model.h5')
 ```
 
+### Saving/loading only a model's architecture
+
 If you only need to save the **architecture of a model**, and not its weights or its training configuration, you can do:
 
 ```{r}
@@ -104,6 +108,8 @@ You can then build a fresh model from this data:
 model <- model_from_json(json_string)
 model <- model_from_yaml(yaml_string)
 ```
+
+### Saving/loading only a model's weights
 
 If you need to save the **weights of a model**, you can do so in HDF5 with the code below.
 

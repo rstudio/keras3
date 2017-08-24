@@ -12,6 +12,12 @@ test_succeeds("sequential models can be compiled", {
   define_and_compile_model()
 })
 
+test_succeeds(required_version = "2.0.7", "models can be cloned", {
+  model <- define_model()
+  model2 <- clone_model(model)
+})
+
+
 
 # generate dummy training data
 data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)

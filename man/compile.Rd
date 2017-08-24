@@ -5,7 +5,8 @@
 \title{Configure a Keras model for training}
 \usage{
 compile(object, optimizer, loss, metrics = NULL, loss_weights = NULL,
-  sample_weight_mode = NULL, ...)
+  sample_weight_mode = NULL, weighted_metrics = NULL,
+  target_tensors = NULL, ...)
 }
 \arguments{
 \item{object}{Model object to compile.}
@@ -32,7 +33,21 @@ losses, weighted by the \code{loss_weights} coefficients.}
 weights (1D). If the model has multiple outputs, you can use a different
 \code{sample_weight_mode} on each output by passing a list of modes.}
 
-\item{...}{Additional named arguments passed to \code{tf$Session$run}.}
+\item{weighted_metrics}{List of metrics to be evaluated and weighted
+by sample_weight or class_weight during training and testing}
+
+\item{target_tensors}{By default, Keras will create placeholders for the
+model's target, which will be fed with the target data during
+training. If instead you would like to use your own
+target tensors (in turn, Keras will not expect external
+data for these targets at training time), you
+can specify them via the \code{target_tensors} argument. It can be
+a single tensor (for a single-output model), a list of tensors,
+or a named list mapping output names to target tensors.}
+
+\item{...}{When using the Theano/CNTK backends, these arguments
+are passed into K.function. When using the TensorFlow backend,
+these arguments are passed into \code{tf$Session()$run}.}
 }
 \description{
 Configure a Keras model for training
