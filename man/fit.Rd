@@ -4,10 +4,11 @@
 \alias{fit}
 \title{Train a Keras model}
 \usage{
-fit(object, x, y, batch_size = 32, epochs = 10, verbose = 1,
+fit(object, x, y, batch_size = NULL, epochs = 10, verbose = 1,
   callbacks = NULL, view_metrics = getOption("keras.view_metrics", default =
   "auto"), validation_split = 0, validation_data = NULL, shuffle = TRUE,
-  class_weight = NULL, sample_weight = NULL, initial_epoch = 0, ...)
+  class_weight = NULL, sample_weight = NULL, initial_epoch = 0,
+  steps_per_epoch = NULL, validation_steps = NULL, ...)
 }
 \arguments{
 \item{object}{Model to train.}
@@ -20,7 +21,8 @@ list mapping input names to data.}
 multiple outputs). If all outputs in the model are named, you can also pass
 a list mapping output names to data.}
 
-\item{batch_size}{Number of samples per gradient update.}
+\item{batch_size}{Integer or \code{NULL}. Number of samples per gradient update.
+If unspecified, it will default to 32.}
 
 \item{epochs}{Number of times to iterate over the training data arrays.}
 
@@ -61,6 +63,15 @@ sample_weight_mode="temporal" in \code{\link[=compile]{compile()}}.}
 
 \item{initial_epoch}{epoch at which to start training (useful for resuming a
 previous training run).}
+
+\item{steps_per_epoch}{Total number of steps (batches of samples) before
+declaring one epoch finished and starting the next epoch. When training
+with Input Tensors such as TensorFlow data tensors, the default \code{NULL} is
+equal to the number of unique samples in your dataset divided by the batch
+size, or 1 if that cannot be determined.}
+
+\item{validation_steps}{Only relevant if \code{steps_per_epoch} is specified.
+Total number of steps (batches of samples) to validate before stopping.}
 
 \item{...}{Unused}
 }

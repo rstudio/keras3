@@ -446,7 +446,7 @@ layer_conv_3d_transpose <- function(object, filters, kernel_size, strides = c(1,
 #' @param pointwise_initializer Initializer for the pointwise kernel matrix.
 #' @param depthwise_regularizer Regularizer function applied to the depthwise
 #'   kernel matrix.
-#' @param pointwise_regularizer Regularizer function applied to the depthwise
+#' @param pointwise_regularizer Regularizer function applied to the pointwise
 #'   kernel matrix.
 #' @param depthwise_constraint Constraint function applied to the depthwise
 #'   kernel matrix.
@@ -802,14 +802,16 @@ layer_cropping_2d <- function(object, cropping = list(c(0L, 0L), c(0L, 0L)), dat
 #' 
 #' @inheritParams layer_cropping_1d
 #'  
-#' @param cropping int, or list of 3 ints, or list of 3 lists of 2 ints. 
-#' - If int: the same symmetric cropping is applied to width and height. 
-#' - If list of 3 ints: interpreted as two different symmetric cropping values for
-#'   height and width: `(symmetric_dim1_crop, symmetric_dim2_crop,
-#'   symmetric_dim3_crop)`. 
-#' - If list of 3 lists of 2 ints: interpreted as
-#'   `((left_dim1_crop, right_dim1_crop), (left_dim2_crop, right_dim2_crop),
-#'   (left_dim3_crop, right_dim3_crop))`
+#' @param cropping int, or list of 3 ints, or list of 3 lists of 2 ints.
+#'   - If int: the same symmetric cropping
+#'     is applied to depth, height, and width.
+#'   - If list of 3 ints:
+#'     interpreted as two different
+#'     symmetric cropping values for depth, height, and width:
+#'     `(symmetric_dim1_crop, symmetric_dim2_crop, symmetric_dim3_crop)`.
+#'   - If list of 3 list of 2 ints:
+#'     interpreted as
+#'     `((left_dim1_crop, right_dim1_crop), (left_dim2_crop, right_dim2_crop), (left_dim3_crop, right_dim3_crop))`
 #' @param data_format A string, one of `channels_last` (default) or
 #'   `channels_first`. The ordering of the dimensions in the inputs.
 #'   `channels_last` corresponds to inputs with shape `(batch, spatial_dim1,

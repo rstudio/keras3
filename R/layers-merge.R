@@ -16,6 +16,24 @@ layer_add <- function(inputs) {
   keras$layers$add(inputs = inputs)
 }
 
+
+#' Layer that subtracts two inputs.
+#'
+#' It takes as input a list of tensors of size 2, both of the same shape, and
+#' returns a single tensor, (`inputs[[1]] - inputs[[2]]``), also of the same
+#' shape.
+#'
+#' @param inputs A list of input tensors (exactly 2).
+#'
+#' @return A tensor, the difference of the inputs.
+#'
+#' @family merge layers
+#'
+#' @export
+layer_subtract <- function(inputs) {
+  keras$layers$subtract(inputs = inputs)
+}
+
 #' Layer that multiplies (element-wise) a list of inputs.
 #' 
 #' It takes as input a list of tensors, all of the same shape, and returns a

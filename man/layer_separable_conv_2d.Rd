@@ -56,7 +56,7 @@ no activation is applied (ie. "linear" activation: \code{a(x) = x}).}
 \item{depthwise_regularizer}{Regularizer function applied to the depthwise
 kernel matrix.}
 
-\item{pointwise_regularizer}{Regularizer function applied to the depthwise
+\item{pointwise_regularizer}{Regularizer function applied to the pointwise
 kernel matrix.}
 
 \item{bias_regularizer}{Regularizer function applied to the bias vector.}

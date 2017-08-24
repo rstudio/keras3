@@ -376,6 +376,13 @@ test_call_succeeds("layer_add", {
   keras_model(merge_inputs, output)
 })
 
+test_call_succeeds(required_version = "2.0.7", "layer_subtract", {
+  merge_inputs <- c(layer_input(shape = c(4, 5)),
+                    layer_input(shape = c(4, 5)))
+  output <- layer_subtract(merge_inputs)
+  keras_model(merge_inputs, output)
+})
+
 test_call_succeeds("layer_multiply", {
   merge_inputs <- get_merge_inputs()
   output <- layer_multiply(merge_inputs)
