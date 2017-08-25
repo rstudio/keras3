@@ -22,7 +22,8 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
         self$metrics[[metric]] <- numeric()
       
       # handle metrics
-      self$on_metrics(logs, 0.5)
+      if (length(logs) > 0)
+        self$on_metrics(logs, 0.5)
       
       if (tfruns::is_run_active()) {
         self$write_params(self$params)
@@ -40,8 +41,13 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
     on_metrics = function(logs, sleep) {
       
       # record metrics
-      for (metric in names(self$metrics))
-        self$metrics[[metric]] <- c(self$metrics[[metric]], logs[[metric]])
+      for (metric in names(self$metrics)) {
+        # take mean if more than one value is reported
+        value <- logs[[metric]]
+        if (length(value) > 1)
+          value <- mean(value)
+        self$metrics[[metric]] <- c(self$metrics[[metric]], value)
+      }
       
       # create history object and convert to metrics data frame
       history <- keras_training_history(self$params, self$metrics)

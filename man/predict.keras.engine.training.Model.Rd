@@ -4,8 +4,8 @@
 \alias{predict.keras.engine.training.Model}
 \title{Generate predictions from a Keras model}
 \usage{
-\method{predict}{keras.engine.training.Model}(object, x, batch_size = 32,
-  verbose = 0, ...)
+\method{predict}{keras.engine.training.Model}(object, x, batch_size = NULL,
+  verbose = 0, steps = NULL, ...)
 }
 \arguments{
 \item{object}{Keras model}
@@ -15,6 +15,9 @@
 \item{batch_size}{Integer}
 
 \item{verbose}{Verbosity mode, 0 or 1.}
+
+\item{steps}{Total number of steps (batches of samples) before declaring the
+evaluation round finished. Ignored with the default value of \code{NULL}.}
 
 \item{...}{Unused}
 }

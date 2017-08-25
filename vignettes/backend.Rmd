@@ -75,11 +75,11 @@ K <- backend()
 The code below instantiates an input placeholder. It's equivalent to `tf$placeholder()`:
 
 ```{r}
-input <- K$placeholder(shape = list(2L, 4L, 5L))
+inputs <- K$placeholder(shape = list(2L, 4L, 5L))
 # also works:
-input <-  K$placeholder(shape = list(NULL, 4L, 5L))
+inputs <-  K$placeholder(shape = list(NULL, 4L, 5L))
 # also works:
-input <- K$placeholder(ndim = 3L)
+inputs <- K$placeholder(ndim = 3L)
 ```
 
 The code below instantiates a shared variable. It's equivalent to `tf$Variable()`:

@@ -22,6 +22,7 @@ title: "Keras Examples"
 | [mnist_irnn](mnist_irnn.html) | Reproduction of the IRNN experiment with pixel-by-pixel sequential MNIST in "A Simple Way to Initialize Recurrent Networks of Rectified Linear Units" by Le et al. |
 | [mnist_mlp](mnist_mlp.html) | Trains a simple deep multi-layer perceptron on the MNIST dataset. |
 | [mnist_hierarchical_rnn](mnist_hierarchical_rnn.html) | Trains a Hierarchical RNN (HRNN) to classify MNIST digits. |
+| [mnist_tfrecord](mnist_tfrecord.html) | MNIST dataset with TFRecords, the standard TensorFlow data format. |
 | [mnist_transfer_cnn](mnist_transfer_cnn.html) | Transfer learning toy example. |
 | [neural_style_transfer](neural_style_transfer.html) | Neural style transfer (generating an image with the same “content” as a base image, but with the “style” of a different picture). |
 | [reuters_mlp](reuters_mlp.html) | Trains and evaluatea a simple MLP on the Reuters newswire topic classification task. |

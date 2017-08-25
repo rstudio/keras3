@@ -13,3 +13,5 @@ index.html
 external/
 issues
 runs
+MNIST-data
+saved_wt.h5

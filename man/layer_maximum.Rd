@@ -20,5 +20,6 @@ single tensor (also of the same shape).
 Other merge layers: \code{\link{layer_add}},
   \code{\link{layer_average}},
   \code{\link{layer_concatenate}}, \code{\link{layer_dot}},
-  \code{\link{layer_multiply}}
+  \code{\link{layer_multiply}},
+  \code{\link{layer_subtract}}
 }

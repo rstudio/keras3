@@ -13,10 +13,14 @@ layer_cropping_3d(object, cropping = list(c(1L, 1L), c(1L, 1L), c(1L, 1L)),
 
 \item{cropping}{int, or list of 3 ints, or list of 3 lists of 2 ints.
 \itemize{
-\item If int: the same symmetric cropping is applied to width and height.
-\item If list of 3 ints: interpreted as two different symmetric cropping values for
-height and width: \code{(symmetric_dim1_crop, symmetric_dim2_crop, symmetric_dim3_crop)}.
-\item If list of 3 lists of 2 ints: interpreted as
+\item If int: the same symmetric cropping
+is applied to depth, height, and width.
+\item If list of 3 ints:
+interpreted as two different
+symmetric cropping values for depth, height, and width:
+\code{(symmetric_dim1_crop, symmetric_dim2_crop, symmetric_dim3_crop)}.
+\item If list of 3 list of 2 ints:
+interpreted as
 \code{((left_dim1_crop, right_dim1_crop), (left_dim2_crop, right_dim2_crop), (left_dim3_crop, right_dim3_crop))}
 }}
 

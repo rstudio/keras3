@@ -5,7 +5,8 @@
 \title{Generates skipgram word pairs.}
 \usage{
 skipgrams(sequence, vocabulary_size, window_size = 4, negative_samples = 1,
-  shuffle = TRUE, categorical = FALSE, sampling_table = NULL)
+  shuffle = TRUE, categorical = FALSE, sampling_table = NULL,
+  seed = NULL)
 }
 \arguments{
 \item{sequence}{a word sequence (sentence), encoded as a list of word indices
@@ -33,6 +34,8 @@ if TRUE labels will be categorical eg. \code{[[1,0],[0,1],[0,1] .. ]}
 
 \item{sampling_table}{1D array of size \code{vocabulary_size} where the entry i
 encodes the probabibily to sample a word of rank i.}
+
+\item{seed}{Random seed}
 }
 \value{
 List of \code{couples}, \code{labels} where:
