@@ -23,7 +23,5 @@ Layer that computes a dot product between samples in two tensors.
 Other merge layers: \code{\link{layer_add}},
   \code{\link{layer_average}},
   \code{\link{layer_concatenate}},
-  \code{\link{layer_maximum}},
-  \code{\link{layer_multiply}},
-  \code{\link{layer_subtract}}
+  \code{\link{layer_maximum}}, \code{\link{layer_multiply}}
 }
