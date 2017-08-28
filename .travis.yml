@@ -11,7 +11,7 @@ env:
   - KERAS_IMPLEMENTATION="tensorflow"
 
 cache:
-  packages: false
+  packages: true
   directories:
     - $HOME/.keras
     - $HOME/.cache/pip
