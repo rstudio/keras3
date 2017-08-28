@@ -41,7 +41,7 @@ This website provides documentation for the R interface to Keras. See the main K
 
 ## Installation
 
-First, install the keras R package from CRAN as follows:
+First, install the keras R package from GitHub as follows:
 
 ```{r, eval=FALSE}
 devtools::install_github("rstudio/keras")
