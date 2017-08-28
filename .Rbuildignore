@@ -5,6 +5,7 @@
 ^.*\.hdf5$
 ^README.R?md$
 ^docs$
+^website$
 ^pkgdown$
 ^dev$
 ^runs$
