@@ -335,11 +335,12 @@ length(model$layers)     # "2"
 
 Code and pre-trained weights are available for the following image classification models:
 
-- [Xception](../reference/application_xception.html)
-- [VGG16](../reference/application_vgg.html)
-- [VGG19](../reference/application_vgg.html)
-- [ResNet50](../reference/application_resnet50.html)
-- [InceptionV3](../ reference/application_inception_v3.html)
+- [Xception](https://rstudio.github.io/keras/reference/application_xception.html)
+- [VGG16](https://rstudio.github.io/keras/reference/application_vgg.html)
+- [VGG19](https://rstudio.github.io/keras/reference/application_vgg.html)
+- [ResNet50](https://rstudio.github.io/keras/reference/application_resnet50.html)
+- [InceptionV3](https://rstudio.github.io/keras/reference/application_inception_v3.html)
+- [MobileNet](https://rstudio.github.io/keras/reference/application_mobilenet.html)
 
 For example:
 

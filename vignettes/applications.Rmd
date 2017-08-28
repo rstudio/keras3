@@ -28,12 +28,12 @@ Weights are downloaded automatically when instantiating a model. They are stored
 
 The following image classification models (with weights trained on ImageNet) are available:
 
-- [Xception](../reference/application_xception.html)
-- [VGG16](../reference/application_vgg.html)
-- [VGG19](../reference/application_vgg.html)
-- [ResNet50](../reference/application_resnet50.html)
-- [InceptionV3](../reference/application_inception_v3.html)
-- [MobileNet](../reference/application_mobilenet.html)
+- [Xception](https://rstudio.github.io/keras/reference/application_xception.html)
+- [VGG16](https://rstudio.github.io/keras/reference/application_vgg.html)
+- [VGG19](https://rstudio.github.io/keras/reference/application_vgg.html)
+- [ResNet50](https://rstudio.github.io/keras/reference/application_resnet50.html)
+- [InceptionV3](https://rstudio.github.io/keras/reference/application_inception_v3.html)
+- [MobileNet](https://rstudio.github.io/keras/reference/application_mobilenet.html)
 
 
 ## Usage Examples
