@@ -50,7 +50,7 @@ This will provide you with default installations of Keras and TensorFlow. If you
 
 We can learn the basics of Keras by walking through a simple example: recognizing handwritten digets from the [MNIST](https://en.wikipedia.org/wiki/MNIST_database) dataset. MNIST consists of 28 x 28 grayscale images of handwritten digits like these:
 
-<img style="width: 50%;" src="https://www.tensorflow.org/images/MNIST.png">
+<img style="width: 50%;" src="images/MNIST.png">
 
 The dataset also includes labels for each image, telling us which digit it is. For example, the labels for the above images are 5, 0, 4, and 1.
 
