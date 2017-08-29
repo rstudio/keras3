@@ -166,7 +166,13 @@ compile <- function(object, optimizer, loss,
   
   # keras 2.07 args
   if (keras_version() >= "2.0.7") {
+    # weighted metrics
+    if (!is.null(weighted_metrics) && !is.list(weighted_metrics))
+      weighted_metrics <- list(weighted_metrics)
     args$weighted_metrics <- weighted_metrics
+    # target tensors
+    if (!is.null(target_tensors) && !is.list(target_tensors))
+      target_tensors <- list(target_tensors)
     args$target_tensors <- target_tensors
   }
   

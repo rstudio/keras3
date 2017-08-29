@@ -27,11 +27,11 @@ Keras is a model-level library, providing high-level building blocks for develop
 
 The R interface to Keras uses TensorFlow™ as it's default tensor backend engine, however it's possible to use other backends if desired. At this time, Keras has three backend implementations available:
 
-- [TensorFlow](http://www.tensorflow.org/) is an open-source symbolic tensor manipulation framework developed by Google, Inc.
+- [TensorFlow](http://www.tensorflow.org/) is an open-source symbolic tensor manipulation framework developed by Google.
 
-- [Theano](http://deeplearning.net/software/theano/) is an open-source symbolic tensor manipulation framework developed by LISA/MILA Lab at Université de Montréal.
+- [Theano](http://deeplearning.net/software/theano/) is an open-source symbolic tensor manipulation framework developed by LISA Lab at Université de Montréal.
 
-- [CNTK](https://www.microsoft.com/en-us/cognitive-toolkit/) is an open-source, commercial-grade toolkit for deep learning developed by Microsoft.
+- [CNTK](https://www.microsoft.com/en-us/cognitive-toolkit/) is an open-source toolkit for deep learning developed by Microsoft.
 
 ## Selecting a Backend
 
@@ -63,6 +63,37 @@ If you need to customize things further there are several environment variables 
 
 Note that if you want to use TensorFlow as the backend engine you wouldn't need to set any of these variables, as it will be used automatically by default.
 
+### Keras Configuration File
+
+If you have run Keras at least once, you will find the Keras configuration file at:
+
+`$HOME/.keras/keras.json`
+
+If it isn't there, you can create it.
+
+**NOTE for Windows Users:** Please replace `$HOME` with `%USERPROFILE%`.
+
+The default configuration file looks like this:
+
+```json
+{
+    "image_data_format": "channels_last",
+    "epsilon": 1e-07,
+    "floatx": "float32",
+    "backend": "tensorflow"
+}
+```
+
+You can change these settings by editing `$HOME/.keras/keras.json`. 
+
+* `image_data_format`: String, either `"channels_last"` or `"channels_first"`. It specifies which data format convention Keras will follow. (`backend()$image_data_format()` returns it.)
+  - For 2D data (e.g. image), `"channels_last"` assumes `(rows, cols, channels)` while `"channels_first"` assumes `(channels, rows, cols)`. 
+  - For 3D data, `"channels_last"` assumes `(conv_dim1, conv_dim2, conv_dim3, channels)` while `"channels_first"` assumes `(channels, conv_dim1, conv_dim2, conv_dim3)`.
+* `epsilon`: Float, a numeric fuzzing constant used to avoid dividing by zero in some operations.
+* `floatx`: String, `"float16"`, `"float32"`, or `"float64"`. Default float precision.
+* `backend`: String, `"tensorflow"`, `"theano"`, or `"cntk"`.
+
+
 ## Accessing the Backend in Code
 
 If you want the Keras modules you write to be compatible with all available backends, you have to write them via the abstract Keras backend API. You can obtain a reference to the TensorFlow backend by calling the `backend()` function:
@@ -82,7 +113,7 @@ inputs <-  K$placeholder(shape = list(NULL, 4L, 5L))
 inputs <- K$placeholder(ndim = 3L)
 ```
 
-The code below instantiates a shared variable. It's equivalent to `tf$Variable()`:
+The code below instantiates a variable. It's equivalent to `tf$Variable()`:
 
 ```{r}
 val <- array(runif(60), dim = c(3L, 4L, 5L))

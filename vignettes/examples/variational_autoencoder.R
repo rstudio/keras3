@@ -15,7 +15,7 @@ epsilon_std <- 1.0
 
 # Model definition --------------------------------------------------------
 
-x <- layer_input(batch_shape = c(batch_size, original_dim))
+x <- layer_input(shape = c(original_dim))
 h <- layer_dense(x, intermediate_dim, activation = "relu")
 z_mean <- layer_dense(h, latent_dim)
 z_log_var <- layer_dense(h, latent_dim)
@@ -25,7 +25,7 @@ sampling <- function(arg){
   z_log_var <- arg[,2:3]
   
   epsilon <- K$random_normal(
-    shape = c(batch_size, latent_dim), 
+    shape = c(K$shape(z_mean)[[1]]), 
     mean=0.,
     stddev=epsilon_std
   )

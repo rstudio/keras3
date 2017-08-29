@@ -26,7 +26,7 @@
 #' to train with input tensors, save the model weights, and then evaluate the
 #' model using the standard Keras API.
 #'
-#' Gets to 99.1% test accuracy after 78 epochs (there is still a lot of margin
+#' Gets to ~99.1% validation accuracy after 5 epochs (there is still a lot of margin
 #' for parameter tuning).
 
 library(keras)
@@ -35,7 +35,7 @@ library(tensorflow)
 K <- backend()
 if (K$backend() != 'tensorflow') {
   stop('This example can only run with the ',
-       'TensorFlow backend for the time being, ',
+       'TensorFlow backend, ',
        'because it requires TFRecords, which ',
        'are not supported on other platforms.')
 }
@@ -44,11 +44,11 @@ cnn_layers <- function(x_train_input) {
   x_train_input %>% 
     layer_conv_2d(filters = 32, kernel_size = c(3,3), 
                   activation = 'relu', padding = 'valid') %>% 
+    layer_max_pooling_2d(pool_size = c(2,2)) %>% 
     layer_conv_2d(filters = 64, kernel_size = c(3,3), activation = 'relu') %>% 
     layer_max_pooling_2d(pool_size = c(2,2)) %>% 
-    layer_dropout(rate = 0.25) %>% 
     layer_flatten() %>% 
-    layer_dense(units = 128, activation = 'relu') %>% 
+    layer_dense(units = 512, activation = 'relu') %>% 
     layer_dropout(rate = 0.5) %>% 
     layer_dense(units = classes, activation = 'softmax', name = 'x_train_out')
 }
@@ -58,7 +58,7 @@ sess <- K$get_session()
 batch_size <- 128L
 batch_shape = list(batch_size, 28L, 28L, 1L)
 steps_per_epoch <- 469L
-epochs <- 78L
+epochs <- 5L
 classes <- 10L
 
 # The capacity variable controls the maximum queue size
@@ -108,19 +108,18 @@ x_train_input <- layer_input(tensor = x_train_batch, batch_shape = x_batch_shape
 x_train_out <- cnn_layers(x_train_input)
 train_model = keras_model(inputs = x_train_input, outputs = x_train_out)
 
-cce <- loss_categorical_crossentropy(y_train_batch, x_train_out)
-train_model$add_loss(cce)
-
-# Do not pass the loss directly to model.compile()
-# because it is not yet supported for Input Tensors.
+# Pass the target tensor `y_train_batch` to `compile`
+# via the `target_tensors` keyword argument:
 train_model %>% compile(
-  optimizer = 'rmsprop',
-  loss = NULL,
-  metrics = c('accuracy')
+  optimizer = optimizer_rmsprop(lr = 2e-3, decay = 1e-5),
+  loss = 'categorical_crossentropy',
+  metrics = c('accuracy'),
+  target_tensors = y_train_batch
 )
 
 summary(train_model)
 
+# Fit the model using data from the TFRecord data tensors.
 coord <- tf$train$Coordinator()
 threads = tf$train$start_queue_runners(sess, coord)
 
@@ -129,8 +128,10 @@ train_model %>% fit(
   steps_per_epoch = steps_per_epoch
 )
 
+# Save the model weights.
 train_model %>% save_model_weights_hdf5('saved_wt.h5')
 
+# Clean up the TF session.
 coord$request_stop()
 coord$join(threads)
 K$clear_session()
@@ -139,8 +140,7 @@ K$clear_session()
 x_test <- data$validation$images
 dim(x_test) <- c(nrow(x_test), 28, 28, 1)
 y_test <- data$validation$labels
-batch_shape <- append(list(NULL), dim(x_test)[-1])
-x_test_inp = layer_input(batch_shape = batch_shape)
+x_test_inp <- layer_input(shape = dim(x_test)[-1])
 test_out <- cnn_layers(x_test_inp)
 test_model <- keras_model(inputs = x_test_inp, outputs = test_out)
 test_model %>% load_model_weights_hdf5('saved_wt.h5')
