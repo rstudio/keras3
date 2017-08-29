@@ -1,10 +1,29 @@
-
+#' R interface to Keras
+#'
+#' Keras is a high-level neural networks API, developed with a focus on enabling
+#' fast experimentation. Keras has the following key features:
+#' 
+#' - Allows the same code to run on CPU or on GPU, seamlessly.
+#' - User-friendly API which makes it easy to quickly prototype deep learning models.
+#' - Built-in support for convolutional networks (for computer vision), recurrent 
+#'   networks (for sequence processing), and any combination of both.
+#' - Supports arbitrary network architectures: multi-input or multi-output models, 
+#'   layer sharing, model sharing, etc. This means that Keras is appropriate for 
+#'   building essentially any deep learning model, from a memory network to a neural
+#'   Turing machine.
+#' - Is capable of running on top of multiple back-ends including 
+#'   [TensorFlow](https://github.com/tensorflow/tensorflow), 
+#'   [CNTK](https://github.com/Microsoft/cntk), 
+#'   or [Theano](https://github.com/Theano/Theano).
+#' 
+#' See the package website at <https://keras.rstudio.com> for complete documentation.
+#'
 #' @import methods
 #' @import R6
 #' @importFrom reticulate import dict iterate import_from_path py_iterator py_call py_capture_output py_get_attr py_has_attr py_is_null_xptr py_to_r r_to_py tuple
 #' @importFrom graphics par plot points
 #' @importFrom tensorflow tf_version tf_config install_tensorflow
-NULL
+"_PACKAGE"
 
 # Main Keras module
 keras <- NULL
