@@ -62,8 +62,7 @@ of the CUDA and cuDNN libraries as described in \href{https://tensorflow.rstudio
 
 
 The only supported installation method on Windows is "conda". This means that you
-should install Anaconda 3.x for Windows (\url{https://www.continuum.io/downloads#windows})
-prior to installing Keras.
+should install Anaconda 3.x for Windows prior to installing Keras.
 }
 
 \section{Custom Installation}{

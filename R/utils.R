@@ -255,8 +255,8 @@ is_osx <- function() {
 relative_to <- function(dir, file) {
   
   # normalize paths
-  dir <- normalizePath(dir, mustWork = FALSE)
-  file <- normalizePath(file, mustWork = FALSE)
+  dir <- normalizePath(dir, mustWork = FALSE, winslash = "/")
+  file <- normalizePath(file, mustWork = FALSE, winslash = "/")
   
   # ensure directory ends with a /
   if (!identical(substr(dir, nchar(dir), nchar(dir)), "/")) {

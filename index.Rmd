@@ -59,7 +59,7 @@ This will provide you with default installations of Keras and TensorFlow. If you
 
 We can learn the basics of Keras by walking through a simple example: recognizing handwritten digets from the [MNIST](https://en.wikipedia.org/wiki/MNIST_database) dataset. MNIST consists of 28 x 28 grayscale images of handwritten digits like these:
 
-<img style="width: 50%;" src="https://www.tensorflow.org/images/MNIST.png">
+<img style="width: 50%;" src="images/MNIST.png">
 
 The dataset also includes labels for each image, telling us which digit it is. For example, the labels for the above images are 5, 0, 4, and 1.
 
@@ -96,12 +96,11 @@ y_test <- to_categorical(y_test, 10)
 
 ### Defining the Model
 
-The core data structure of Keras is a model, a way to organize layers. The simplest type of model is the [Sequential model](https://rstudio.github.io/keras/articles/sequential_model.html), a linear stack of layers.
+The core data structure of Keras is a model, a way to organize layers. The simplest type of model is the [Sequential model](https://keras.rstudio.com/articles/sequential_model.html), a linear stack of layers.
 
 We begin by creating a sequential model and then adding layers using the pipe (`%>%`) operator:
 
 ```{r}
-library(keras)
 model <- keras_model_sequential() 
 model %>% 
   layer_dense(units = 256, activation = 'relu', input_shape = c(784)) %>% 

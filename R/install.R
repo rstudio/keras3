@@ -54,8 +54,7 @@
 #' @section Windows Installation:
 #' 
 #' The only supported installation method on Windows is "conda". This means that you
-#' should install Anaconda 3.x for Windows (<https://www.continuum.io/downloads#windows>)
-#' prior to installing Keras.
+#' should install Anaconda 3.x for Windows prior to installing Keras.
 #' 
 #' @section Custom Installation:
 #'   

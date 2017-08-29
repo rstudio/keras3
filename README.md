@@ -14,5 +14,5 @@
 
 - Is capable of running on top of multiple back-ends including [TensorFlow](https://github.com/tensorflow/tensorflow), [CNTK](https://github.com/Microsoft/cntk), or [Theano](https://github.com/Theano/Theano).
 
-See the package website at <https://rstudio.github.io/keras> for complete documentation.
+See the package website at <https://keras.rstudio.com> for complete documentation.
 

@@ -111,7 +111,7 @@ These functions enable you to create, train, evaluate, persist, and generate pre
 </tr><tr>
 <!--  -->
 <td>
-<code>[fit()](../reference/fit.Model.html)</code>
+`fit()`
 </td>
 <td><p>Train a Keras model</p></td>
 </tr><tr>
@@ -123,13 +123,13 @@ These functions enable you to create, train, evaluate, persist, and generate pre
 </tr><tr>
 <!--  -->
 <td>
-<code>[predict()](../reference/predict.Model.html)</code>
+`predict()`
 </td>
 <td><p>Predict Method for Keras Models</p></td>
 </tr><tr>
 <!--  -->
 <td>
-<code>[summary()](../reference/summary.Model.html)</code>
+`summary()`
 </td>
 <td><p>Print a summary of a model</p></td>
 </tr>

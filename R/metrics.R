@@ -33,7 +33,7 @@
 #' function. This name is used within training progress output.
 #' 
 #' Documentation on the available backend tensor functions can be 
-#' found at <https://rstudio.github.io/keras/articles/backend.html#backend-functions>.     
+#' found at <https://keras.rstudio.com/articles/backend.html#backend-functions>.     
 #'
 #' @export
 metric_binary_accuracy <- function(y_true, y_pred) {

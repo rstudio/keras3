@@ -230,7 +230,7 @@ The above function is an example of a stateful generator---the function maintain
 
 You can also use the `flow_images_from_directory()` and `flow_images_from_data()` functions along with `fit_generator()` for training on sets of images stored on disk (with optional image augmentation/normalization via `image_data_generator()`).
 
-You can see batch image training in action in our [CIFAR10 example](https://rstudio.github.io/keras/articles/examples/cifar10_cnn.html).
+You can see batch image training in action in our [CIFAR10 example](https://keras.rstudio.com/articles/examples/cifar10_cnn.html).
 
 ### Batch Functions
 
@@ -341,11 +341,12 @@ length(model$layers)     # "2"
 
 Code and pre-trained weights are available for the following image classification models:
 
-- [Xception](../reference/application_xception.html)
-- [VGG16](../reference/application_vgg.html)
-- [VGG19](../reference/application_vgg.html)
-- [ResNet50](../reference/application_resnet50.html)
-- [InceptionV3](../ reference/application_inception_v3.html)
+- [Xception](https://keras.rstudio.com/reference/application_xception.html)
+- [VGG16](https://keras.rstudio.com/reference/application_vgg.html)
+- [VGG19](https://keras.rstudio.com/reference/application_vgg.html)
+- [ResNet50](https://keras.rstudio.com/reference/application_resnet50.html)
+- [InceptionV3](https://keras.rstudio.com/reference/application_inception_v3.html)
+- [MobileNet](https://keras.rstudio.com/reference/application_mobilenet.html)
 
 For example:
 
@@ -355,7 +356,7 @@ model <- application_vgg16(weights = 'imagenet', include_top = TRUE)
 
 For a few simple usage examples, see [the documentation for the Applications module](applications.html).
 
-The VGG16 model is also the basis for the [Deep dream](https://rstudio.github.io/keras/articles/examples/deep_dream.html) Keras example script.
+The VGG16 model is also the basis for the [Deep dream](https://keras.rstudio.com/articles/examples/deep_dream.html) Keras example script.
 
 ## How can I use other Keras backends?
 

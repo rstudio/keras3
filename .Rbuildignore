@@ -5,6 +5,7 @@
 ^.*\.hdf5$
 ^README.R?md$
 ^docs$
+^website$
 ^pkgdown$
 ^dev$
 ^runs$
@@ -23,6 +24,7 @@
 ^tests/testthat/weights$
 ^.*\.pyc$
 ^.*__pycache__$
-
 ^_pkgdown\.yml$
 ^.travis.yml$
+^Jenkinsfile$
+
