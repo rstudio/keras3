@@ -151,7 +151,7 @@ test_model %>% compile(
 )
 summary(test_model)
 
-result <- test_model %>% evaluate(x_test, to_categorical(y_test), classes)
+result <- test_model %>% evaluate(x_test, to_categorical(y_test, classes))
 cat(sprintf('\nTest accuracy: %f', result$acc))
 
 
