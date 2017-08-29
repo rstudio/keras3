@@ -1,0 +1,21 @@
+#!groovy
+
+properties([pipelineTriggers([githubPush()]),
+            disableConcurrentBuilds(),
+            buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10'))
+])
+
+node('docker') {
+    timestamps {
+        ansiColor('xterm') {
+            stage('Checkout source') {
+                checkout scm
+            }
+
+            stage('Publish to S3') {
+                milestone label: 'deploy'
+                sh 'aws s3 sync website s3://keras.rstudio.com/ --acl public-read --cache-control "public,max-age=900"'
+            }
+        }
+    }
+}
