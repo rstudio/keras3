@@ -229,8 +229,8 @@ mirror_to_run_dir <- function(filepath) {
   if (tfruns::is_run_active()) {
     
     # get the full path to the saved file and the working dir
-    saved_filepath <- normalizePath(filepath, mustWork = FALSE)
-    wd <- normalizePath(getwd(), mustWork = FALSE)
+    saved_filepath <- normalizePath(filepath, mustWork = FALSE, winslash = "/")
+    wd <- normalizePath(getwd(), mustWork = FALSE, winslash = "/")
   
     # if the saved file is within the working dir then mirror it  
     if (grepl(paste0("^", wd), saved_filepath)) {
