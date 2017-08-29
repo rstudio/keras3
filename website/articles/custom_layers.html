@@ -110,7 +110,7 @@
     
 <div class="contents">
 <p>If the existing Keras layers don’t meet your requirements you can create a custom layer. For simple, stateless custom operations, you are probably better off using <code><a href="../reference/layer_lambda.html">layer_lambda()</a></code> layers. But for any custom operation that has trainable weights, you should implement your own layer.</p>
-<p>The example below illustrates the skeleton of a Keras custom layer. The <a href="https://rstudio.github.io/keras/articles/examples/mnist_antirectifier.html">mnist_antirectifier</a> example includes another demonstration of creating a custom layer.</p>
+<p>The example below illustrates the skeleton of a Keras custom layer. The <a href="https://keras.rstudio.com/articles/examples/mnist_antirectifier.html">mnist_antirectifier</a> example includes another demonstration of creating a custom layer.</p>
 <div id="keraslayer-r6-class" class="section level2">
 <h2 class="hasAnchor">
 <a href="#keraslayer-r6-class" class="anchor"></a>KerasLayer R6 Class</h2>
@@ -185,7 +185,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
 <li><p>It converts it’s <code>output_dim</code> to integer using the <code>as.integer()</code> function. This is done as convenience to the user because Keras variables are strongly typed (you can’t pass a float if an integer is expected). This enables users of the function to write <code>output_dim = 32</code> rather than <code>output_dim = 32L</code>.</p></li>
 <li><p>Some additional parameters not used by the layer (<code>name</code> and <code>trainable</code>) are in the function signature. Custom layer functions can include any of the core layer function arguments (<code>input_shape</code>, <code>batch_input_shape</code>, <code>batch_size</code>, <code>dtype</code>, <code>name</code>, <code>trainable</code>, and <code>weights</code>) and they will be automatically forwarded to the Layer base class.</p></li>
 </ol>
-<p>See the <a href="https://rstudio.github.io/keras/articles/examples/mnist_antirectifier.html">mnist_antirectifier</a> example for another demonstration of creating a custom layer.</p>
+<p>See the <a href="https://keras.rstudio.com/articles/examples/mnist_antirectifier.html">mnist_antirectifier</a> example for another demonstration of creating a custom layer.</p>
 </div>
 </div>
   </div>

@@ -114,7 +114,7 @@
 <a href="#overview" class="anchor"></a>Overview</h2>
 <p>There are a number of tools available for visualizing the training of Keras models, including:</p>
 <ol style="list-style-type: decimal">
-<li><p>A <a href="https://rstudio.github.io/keras/reference/plot.keras_training_history.html">plot method</a> for the Keras training history returned from <code><a href="../reference/fit.html">fit()</a></code>.</p></li>
+<li><p>A <a href="https://keras.rstudio.com/reference/plot.keras_training_history.html">plot method</a> for the Keras training history returned from <code><a href="../reference/fit.html">fit()</a></code>.</p></li>
 <li><p>Real time visualization of training metrics within the RStudio IDE.</p></li>
 <li><p>Integration with the <a href="https://www.tensorflow.org/get_started/summaries_and_tensorboard">TensorBoard</a> visualization tool included with TensorFlow. Beyond just training metrics, TensorBoard has a wide variety of other visualizations available including the underlying TensorFlow graph, gradient histograms, model weights, and more. TensorBoard also enables you to compare metrics across multiple training runs.</p></li>
 </ol>
@@ -141,7 +141,7 @@ history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span 
 <div class="figure">
 <img src="images/training_history_ggplot2.png" class="r-plot" width="757" height="489">
 </div>
-<p>The history will be plotted using <a href="http://ggplot2.tidyverse.org/">ggplot2</a> if available (if not then base graphics will be used), include all specified metrics as well as the loss, and draw a smoothing line if there are 10 or more epochs. You can customize all of this behavior via various options of the <a href="https://rstudio.github.io/keras/reference/plot.keras_training_history.html">plot method</a>.</p>
+<p>The history will be plotted using <a href="http://ggplot2.tidyverse.org/">ggplot2</a> if available (if not then base graphics will be used), include all specified metrics as well as the loss, and draw a smoothing line if there are 10 or more epochs. You can customize all of this behavior via various options of the <a href="https://keras.rstudio.com/reference/plot.keras_training_history.html">plot method</a>.</p>
 <p>If you want to create a custom visualization you can call the <code>as.data.frame()</code> method on the history to obtain a data frame with factors for each metric as well as training vs. validation:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">history_df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(history)
 <span class="kw">str</span>(history_df)</code></pre></div>
