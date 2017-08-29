@@ -87,6 +87,6 @@ Note that a name ('mean_pred') is provided for the custom metric
 function. This name is used within training progress output.
 
 Documentation on the available backend tensor functions can be
-found at \url{https://rstudio.github.io/keras/articles/backend.html#backend-functions}.
+found at \url{https://keras.rstudio.com/articles/backend.html#backend-functions}.
 }
 

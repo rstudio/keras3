@@ -5,7 +5,7 @@ Version: 2.0.6
 Authors@R: c(
   person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
   person("François", "Chollet", role = c("aut", "cph")),
-  person("RStudio", role = c("cph", "fnd")),
+  person(family = "RStudio", role = c("cph", "fnd")),
   person(family = "Google", role = c("ctb", "cph", "fnd")),
   person("Yuan", "Tang", role = c("ctb", "cph")),
   person("Daniel", "Falbel", role = c("ctb", "cph")),

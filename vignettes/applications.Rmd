@@ -28,12 +28,12 @@ Weights are downloaded automatically when instantiating a model. They are stored
 
 The following image classification models (with weights trained on ImageNet) are available:
 
-- [Xception](https://rstudio.github.io/keras/reference/application_xception.html)
-- [VGG16](https://rstudio.github.io/keras/reference/application_vgg.html)
-- [VGG19](https://rstudio.github.io/keras/reference/application_vgg.html)
-- [ResNet50](https://rstudio.github.io/keras/reference/application_resnet50.html)
-- [InceptionV3](https://rstudio.github.io/keras/reference/application_inception_v3.html)
-- [MobileNet](https://rstudio.github.io/keras/reference/application_mobilenet.html)
+- [Xception](https://keras.rstudio.com/reference/application_xception.html)
+- [VGG16](https://keras.rstudio.com/reference/application_vgg.html)
+- [VGG19](https://keras.rstudio.com/reference/application_vgg.html)
+- [ResNet50](https://keras.rstudio.com/reference/application_resnet50.html)
+- [InceptionV3](https://keras.rstudio.com/reference/application_inception_v3.html)
+- [MobileNet](https://keras.rstudio.com/reference/application_mobilenet.html)
 
 
 ## Usage Examples
@@ -168,5 +168,5 @@ model <- application_inception_V3(input_tensor = input_tensor,
 
 ### Additional examples
 
-The VGG16 model is the basis for the [Deep dream](https://rstudio.github.io/keras/articles/examples/deep_dream.html) Keras example script.
+The VGG16 model is the basis for the [Deep dream](https://keras.rstudio.com/articles/examples/deep_dream.html) Keras example script.
 

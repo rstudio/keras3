@@ -36,29 +36,29 @@ model %>%
 
 A wide variety of layers are available, including:
 
-- [Core Layers](https://rstudio.github.io/keras/reference/index.html#section-core-layers)
+- [Core Layers](https://keras.rstudio.com/reference/index.html#section-core-layers)
 
-- [Convolutional Layers](https://rstudio.github.io/keras/reference/index.html#section-convolutional-layers)
+- [Convolutional Layers](https://keras.rstudio.com/reference/index.html#section-convolutional-layers)
 
-- [Pooling Layers](https://rstudio.github.io/keras/reference/index.html#section-pooling-layers)
+- [Pooling Layers](https://keras.rstudio.com/reference/index.html#section-pooling-layers)
 
-- [Activation Layers](https://rstudio.github.io/keras/reference/index.html#section-activation-layers)
+- [Activation Layers](https://keras.rstudio.com/reference/index.html#section-activation-layers)
 
-- [Dropout Layers](https://rstudio.github.io/keras/reference/index.html#section-dropout-layers)
+- [Dropout Layers](https://keras.rstudio.com/reference/index.html#section-dropout-layers)
 
-- [Locally-connected Layers](https://rstudio.github.io/keras/reference/index.html#section-locally-connected-layers)
+- [Locally-connected Layers](https://keras.rstudio.com/reference/index.html#section-locally-connected-layers)
 
-- [Recurrent Layers](https://rstudio.github.io/keras/reference/index.html#section-recurrent-layers)
+- [Recurrent Layers](https://keras.rstudio.com/reference/index.html#section-recurrent-layers)
 
-- [Embedding Layers](https://rstudio.github.io/keras/reference/index.html#section-embedding-layers)
+- [Embedding Layers](https://keras.rstudio.com/reference/index.html#section-embedding-layers)
 
-- [Normalization Layers](https://rstudio.github.io/keras/reference/index.html#section-normalization-layers)
+- [Normalization Layers](https://keras.rstudio.com/reference/index.html#section-normalization-layers)
 
-- [Noise Layers](https://rstudio.github.io/keras/reference/index.html#section-noise-layers)
+- [Noise Layers](https://keras.rstudio.com/reference/index.html#section-noise-layers)
 
-- [Merge Layers](https://rstudio.github.io/keras/reference/index.html#section-merge-layers)
+- [Merge Layers](https://keras.rstudio.com/reference/index.html#section-merge-layers)
 
-- [Layer Wrappers](https://rstudio.github.io/keras/reference/index.html#section-layer-wrappers)
+- [Layer Wrappers](https://keras.rstudio.com/reference/index.html#section-layer-wrappers)
 
 
 ## Properties

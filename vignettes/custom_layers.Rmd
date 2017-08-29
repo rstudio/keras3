@@ -23,7 +23,7 @@ knitr::opts_chunk$set(comment = NA, eval = FALSE)
 
 If the existing Keras layers don't meet your requirements you can create a custom layer. For simple, stateless custom operations, you are probably better off using `layer_lambda()` layers. But for any custom operation that has trainable weights, you should implement your own layer. 
 
-The example below illustrates the skeleton of a Keras custom layer. The [mnist_antirectifier](https://rstudio.github.io/keras/articles/examples/mnist_antirectifier.html) example includes another demonstration of creating a custom layer.
+The example below illustrates the skeleton of a Keras custom layer. The [mnist_antirectifier](https://keras.rstudio.com/articles/examples/mnist_antirectifier.html) example includes another demonstration of creating a custom layer.
 
 ## KerasLayer R6 Class
 
@@ -104,6 +104,6 @@ Some important things to note about the layer wrapper function:
 3) Some additional parameters not used by the layer (`name` and `trainable`) are in the function signature. Custom layer functions can include any of the core layer function arguments (`input_shape`,
 `batch_input_shape`, `batch_size`, `dtype`, `name`, `trainable`, and `weights`) and they will be automatically forwarded to the Layer base class.
 
-See the [mnist_antirectifier](https://rstudio.github.io/keras/articles/examples/mnist_antirectifier.html) example for another demonstration of creating a custom layer.
+See the [mnist_antirectifier](https://keras.rstudio.com/articles/examples/mnist_antirectifier.html) example for another demonstration of creating a custom layer.
 
 
