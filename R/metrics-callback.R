@@ -42,10 +42,7 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
       
       # record metrics
       for (metric in names(self$metrics)) {
-        # take mean if more than one value is reported
-        value <- logs[[metric]]
-        if (length(value) > 1)
-          value <- mean(value)
+        value <- mean(logs[[metric]])
         self$metrics[[metric]] <- c(self$metrics[[metric]], value)
       }
       
