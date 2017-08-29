@@ -7,7 +7,7 @@ navbar:
   type: inverse
   left:
     - text: "Home"
-      href: index.html
+      href: /
     - text: "Articles"
       menu:
         - text: "Getting Started"
@@ -36,9 +36,9 @@ navbar:
         - text: "Custom Layers"
           href: articles/custom_layers.html
     - text: Examples
-      href: articles/examples/index.html
+      href: articles/examples/
     - text: "Reference"
-      href: reference/index.html
+      href: reference/
   right:
    - icon: fa-github
      href: https://github.com/rstudio/keras
