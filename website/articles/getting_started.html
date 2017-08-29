@@ -163,9 +163,8 @@ y_test &lt;-<span class="st"> </span><span class="kw"><a href="../reference/to_c
 <h3 class="hasAnchor">
 <a href="#defining-the-model" class="anchor"></a>Defining the Model</h3>
 <p>The core data structure of Keras is a model, a way to organize layers. The simplest type of model is the <a href="https://keras.rstudio.com/articles/sequential_model.html">Sequential model</a>, a linear stack of layers.</p>
-<p>We begin by creating a sequential model and then adding layers using the pipe (<code>%&gt;%</code>) operator:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
-model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() 
+<p>Here we create a sequential model and then add layers using the pipe (<code>%&gt;%</code>) operator:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() 
 model <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">256</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.4</span>) <span class="op">%&gt;%</span><span class="st"> </span>
