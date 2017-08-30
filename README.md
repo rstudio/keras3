@@ -1,6 +1,7 @@
 ## R interface to Keras
 
 [![Travis-CI Build Status](https://travis-ci.org/rstudio/keras.svg?branch=master)](https://travis-ci.org/rstudio/keras) 
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/keras)](http://cran.r-project.org/package=keras)
 
 [Keras](https://keras.io/) is a high-level neural networks API developed with a focus on enabling fast experimentation. *Being able to go from idea to result with the least possible delay is key to doing good research.* Keras has the following key features:
 
