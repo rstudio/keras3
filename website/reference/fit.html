@@ -131,10 +131,11 @@
     <p>Trains the model for a fixed number of epochs (iterations on a dataset).</p>
     
 
-    <pre class="usage"><span class='fu'>fit</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+    <pre class="usage"><span class='fu'>fit</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>view_metrics</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"keras.view_metrics"</span>, <span class='kw'>default</span> <span class='kw'>=</span>
   <span class='st'>"auto"</span>), <span class='kw'>validation_split</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>steps_per_epoch</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -157,7 +158,8 @@ a list mapping output names to data.</p></td>
     </tr>
     <tr>
       <th>batch_size</th>
-      <td><p>Number of samples per gradient update.</p></td>
+      <td><p>Integer or <code>NULL</code>. Number of samples per gradient update.
+If unspecified, it will default to 32.</p></td>
     </tr>
     <tr>
       <th>epochs</th>
@@ -218,6 +220,19 @@ sample_weight_mode="temporal" in <code><a href='compile.html'>compile()</a></cod
       <th>initial_epoch</th>
       <td><p>epoch at which to start training (useful for resuming a
 previous training run).</p></td>
+    </tr>
+    <tr>
+      <th>steps_per_epoch</th>
+      <td><p>Total number of steps (batches of samples) before
+declaring one epoch finished and starting the next epoch. When training
+with Input Tensors such as TensorFlow data tensors, the default <code>NULL</code> is
+equal to the number of unique samples in your dataset divided by the batch
+size, or 1 if that cannot be determined.</p></td>
+    </tr>
+    <tr>
+      <th>validation_steps</th>
+      <td><p>Only relevant if <code>steps_per_epoch</code> is specified.
+Total number of steps (batches of samples) to validate before stopping.</p></td>
     </tr>
     <tr>
       <th>...</th>

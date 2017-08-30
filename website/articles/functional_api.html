@@ -249,7 +249,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 <a href="#shared-layers" class="anchor"></a>Shared layers</h2>
 <p>Another good use for the functional API are models that use shared layers. Let’s take a look at shared layers.</p>
 <p>Let’s consider a dataset of tweets. We want to build a model that can tell whether two tweets are from the same person or not (this can allow us to compare users by the similarity of their tweets, for instance).</p>
-<p>One way to achieve this is to build a model that encodes two tweets into two vectors, concatenates the vectors and adds a logistic regression of top, outputting a probability that the two tweets share the same author. The model would then be trained on positive tweet pairs and negative tweet pairs.</p>
+<p>One way to achieve this is to build a model that encodes two tweets into two vectors, concatenates the vectors and then adds a logistic regression; this outputs a probability that the two tweets share the same author. The model would then be trained on positive tweet pairs and negative tweet pairs.</p>
 <p>Because the problem is symmetric, the mechanism that encodes the first tweet should be reused (weights and all) to encode the second tweet. Here we use a shared LSTM layer to encode the tweets.</p>
 <p>Let’s build this with the functional API. We will take as input for a tweet a binary matrix of shape <code>(140, 256)</code>, i.e. a sequence of 140 vectors of size 256, where each dimension in the 256-dimensional vector encodes the presence/absence of a character (out of an alphabet of 256 frequent characters).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)

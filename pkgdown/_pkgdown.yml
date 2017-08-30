@@ -64,6 +64,8 @@ reference:
       - pop_layer
       - save_model_hdf5
       - load_model_hdf5
+      - serialize_model
+      - clone_model
  
   - title: "Core Layers"
     contents:
@@ -141,6 +143,7 @@ reference:
   - title: "Merge Layers"
     contents:
       - layer_add
+      - layer_subtract
       - layer_multiply
       - layer_average
       - layer_maximum

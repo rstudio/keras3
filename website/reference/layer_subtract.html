@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Layer that concatenates a list of inputs. — layer_concatenate • keras</title>
+<title>Layer that subtracts two inputs. — layer_subtract • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -124,41 +124,38 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Layer that concatenates a list of inputs.</h1>
+    <h1>Layer that subtracts two inputs.</h1>
     </div>
 
     
-    <p>It takes as input a list of tensors, all of the same shape expect for the
-concatenation axis, and returns a single tensor, the concatenation of all
-inputs.</p>
+    <p>It takes as input a list of tensors of size 2, both of the same shape, and
+returns a single tensor, (`inputs[[1]] - inputs[[2]]``), also of the same
+shape.</p>
+<p>[[1]: R:[1
+[[2]: R:[2</p>
     
 
-    <pre class="usage"><span class='fu'>layer_concatenate</span>(<span class='no'>inputs</span>, <span class='kw'>axis</span> <span class='kw'>=</span> -<span class='fl'>1L</span>)</pre>
+    <pre class="usage"><span class='fu'>layer_subtract</span>(<span class='no'>inputs</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>inputs</th>
-      <td><p>A list of input tensors (at least 2).</p></td>
-    </tr>
-    <tr>
-      <th>axis</th>
-      <td><p>Concatenation axis.</p></td>
+      <td><p>A list of input tensors (exactly 2).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tensor, the concatenation of the inputs alongside axis <code>axis</code>.</p>
+    <p>A tensor, the difference of the inputs.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other merge layers: <code><a href='layer_add.html'>layer_add</a></code>,
-  <code><a href='layer_average.html'>layer_average</a></code>, <code><a href='layer_dot.html'>layer_dot</a></code>,
-  <code><a href='layer_maximum.html'>layer_maximum</a></code>,
-  <code><a href='layer_multiply.html'>layer_multiply</a></code>,
-  <code>layer_subtract</code></p>
+  <code><a href='layer_average.html'>layer_average</a></code>,
+  <code><a href='layer_concatenate.html'>layer_concatenate</a></code>, <code><a href='layer_dot.html'>layer_dot</a></code>,
+  <code><a href='layer_maximum.html'>layer_maximum</a></code>, <code><a href='layer_multiply.html'>layer_multiply</a></code></p>
     
 
   </div>

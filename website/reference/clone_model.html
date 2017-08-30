@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Layer that concatenates a list of inputs. — layer_concatenate • keras</title>
+<title>Clone a model instance. — clone_model • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -124,41 +124,31 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Layer that concatenates a list of inputs.</h1>
+    <h1>Clone a model instance.</h1>
     </div>
 
     
-    <p>It takes as input a list of tensors, all of the same shape expect for the
-concatenation axis, and returns a single tensor, the concatenation of all
-inputs.</p>
+    <p>Model cloning is similar to calling a model on new inputs, except that it
+creates new layers (and thus new weights) instead of sharing the weights of
+the existing layers.</p>
     
 
-    <pre class="usage"><span class='fu'>layer_concatenate</span>(<span class='no'>inputs</span>, <span class='kw'>axis</span> <span class='kw'>=</span> -<span class='fl'>1L</span>)</pre>
+    <pre class="usage"><span class='fu'>clone_model</span>(<span class='no'>model</span>, <span class='kw'>input_tensors</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>inputs</th>
-      <td><p>A list of input tensors (at least 2).</p></td>
+      <th>model</th>
+      <td><p>Instance of Keras model (could be a functional model or a
+Sequential model).</p></td>
     </tr>
     <tr>
-      <th>axis</th>
-      <td><p>Concatenation axis.</p></td>
+      <th>input_tensors</th>
+      <td><p>Optional list of input tensors to build the model upon.
+If not provided, placeholders will be created.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A tensor, the concatenation of the inputs alongside axis <code>axis</code>.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p>Other merge layers: <code><a href='layer_add.html'>layer_add</a></code>,
-  <code><a href='layer_average.html'>layer_average</a></code>, <code><a href='layer_dot.html'>layer_dot</a></code>,
-  <code><a href='layer_maximum.html'>layer_maximum</a></code>,
-  <code><a href='layer_multiply.html'>layer_multiply</a></code>,
-  <code>layer_subtract</code></p>
     
 
   </div>
@@ -166,11 +156,7 @@ inputs.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

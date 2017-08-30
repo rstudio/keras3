@@ -115,9 +115,9 @@
 <p>Keras is a model-level library, providing high-level building blocks for developing deep learning models. It does not handle itself low-level operations such as tensor products, convolutions and so on. Instead, it relies on a specialized, well-optimized tensor manipulation library to do so, serving as the “backend engine” of Keras.</p>
 <p>The R interface to Keras uses TensorFlow™ as it’s default tensor backend engine, however it’s possible to use other backends if desired. At this time, Keras has three backend implementations available:</p>
 <ul>
-<li><p><a href="http://www.tensorflow.org/">TensorFlow</a> is an open-source symbolic tensor manipulation framework developed by Google, Inc.</p></li>
-<li><p><a href="http://deeplearning.net/software/theano/">Theano</a> is an open-source symbolic tensor manipulation framework developed by LISA/MILA Lab at Université de Montréal.</p></li>
-<li><p><a href="https://www.microsoft.com/en-us/cognitive-toolkit/">CNTK</a> is an open-source, commercial-grade toolkit for deep learning developed by Microsoft.</p></li>
+<li><p><a href="http://www.tensorflow.org/">TensorFlow</a> is an open-source symbolic tensor manipulation framework developed by Google.</p></li>
+<li><p><a href="http://deeplearning.net/software/theano/">Theano</a> is an open-source symbolic tensor manipulation framework developed by LISA Lab at Université de Montréal.</p></li>
+<li><p><a href="https://www.microsoft.com/en-us/cognitive-toolkit/">CNTK</a> is an open-source toolkit for deep learning developed by Microsoft.</p></li>
 </ul>
 </div>
 <div id="selecting-a-backend" class="section level2">
@@ -160,6 +160,34 @@
 </table>
 <p>Note that if you want to use TensorFlow as the backend engine you wouldn’t need to set any of these variables, as it will be used automatically by default.</p>
 </div>
+<div id="keras-configuration-file" class="section level3">
+<h3 class="hasAnchor">
+<a href="#keras-configuration-file" class="anchor"></a>Keras Configuration File</h3>
+<p>If you have run Keras at least once, you will find the Keras configuration file at:</p>
+<p><code>$HOME/.keras/keras.json</code></p>
+<p>If it isn’t there, you can create it.</p>
+<p><strong>NOTE for Windows Users:</strong> Please replace <code>$HOME</code> with <code>%USERPROFILE%</code>.</p>
+<p>The default configuration file looks like this:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">"image_data_format"</span><span class="fu">:</span> <span class="st">"channels_last"</span><span class="fu">,</span>
+    <span class="dt">"epsilon"</span><span class="fu">:</span> <span class="dv">1e-07</span><span class="fu">,</span>
+    <span class="dt">"floatx"</span><span class="fu">:</span> <span class="st">"float32"</span><span class="fu">,</span>
+    <span class="dt">"backend"</span><span class="fu">:</span> <span class="st">"tensorflow"</span>
+<span class="fu">}</span></code></pre></div>
+<p>You can change these settings by editing <code>$HOME/.keras/keras.json</code>.</p>
+<ul>
+<li>
+<code>image_data_format</code>: String, either <code>"channels_last"</code> or <code>"channels_first"</code>. It specifies which data format convention Keras will follow. (<code>backend()$image_data_format()</code> returns it.)</li>
+<li>For 2D data (e.g. image), <code>"channels_last"</code> assumes <code>(rows, cols, channels)</code> while <code>"channels_first"</code> assumes <code>(channels, rows, cols)</code>.</li>
+<li>For 3D data, <code>"channels_last"</code> assumes <code>(conv_dim1, conv_dim2, conv_dim3, channels)</code> while <code>"channels_first"</code> assumes <code>(channels, conv_dim1, conv_dim2, conv_dim3)</code>.</li>
+<li>
+<code>epsilon</code>: Float, a numeric fuzzing constant used to avoid dividing by zero in some operations.</li>
+<li>
+<code>floatx</code>: String, <code>"float16"</code>, <code>"float32"</code>, or <code>"float64"</code>. Default float precision.</li>
+<li>
+<code>backend</code>: String, <code>"tensorflow"</code>, <code>"theano"</code>, or <code>"cntk"</code>.</li>
+</ul>
+</div>
 </div>
 <div id="accessing-the-backend-in-code" class="section level2">
 <h2 class="hasAnchor">
@@ -168,12 +196,12 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 K &lt;-<span class="st"> </span><span class="kw"><a href="../reference/backend.html">backend</a></span>()</code></pre></div>
 <p>The code below instantiates an input placeholder. It’s equivalent to <code>tf$placeholder()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">input &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">placeholder</span>(<span class="dt">shape =</span> <span class="kw">list</span>(2L, 4L, 5L))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">inputs &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">placeholder</span>(<span class="dt">shape =</span> <span class="kw">list</span>(2L, 4L, 5L))
 <span class="co"># also works:</span>
-input &lt;-<span class="st">  </span>K<span class="op">$</span><span class="kw">placeholder</span>(<span class="dt">shape =</span> <span class="kw">list</span>(<span class="ot">NULL</span>, 4L, 5L))
+inputs &lt;-<span class="st">  </span>K<span class="op">$</span><span class="kw">placeholder</span>(<span class="dt">shape =</span> <span class="kw">list</span>(<span class="ot">NULL</span>, 4L, 5L))
 <span class="co"># also works:</span>
-input &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">placeholder</span>(<span class="dt">ndim =</span> 3L)</code></pre></div>
-<p>The code below instantiates a shared variable. It’s equivalent to <code>tf$Variable()</code>:</p>
+inputs &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">placeholder</span>(<span class="dt">ndim =</span> 3L)</code></pre></div>
+<p>The code below instantiates a variable. It’s equivalent to <code>tf$Variable()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">val &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">runif</span>(<span class="dv">60</span>), <span class="dt">dim =</span> <span class="kw">c</span>(3L, 4L, 5L))
 var &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">variable</span>(<span class="dt">value =</span> val)
 

@@ -157,6 +157,9 @@
 <div id="how-can-i-save-a-keras-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-can-i-save-a-keras-model" class="anchor"></a>How can I save a Keras model?</h2>
+<div id="savingloading-whole-models-architecture-weights-optimizer-state" class="section level3">
+<h3 class="hasAnchor">
+<a href="#savingloading-whole-models-architecture-weights-optimizer-state" class="anchor"></a>Saving/loading whole models (architecture + weights + optimizer state)</h3>
 <p>You can use <code><a href="../reference/save_model_hdf5.html">save_model_hdf5()</a></code> to save a Keras model into a single HDF5 file which will contain:</p>
 <ul>
 <li>the architecture of the model, allowing to re-create the model</li>
@@ -168,6 +171,10 @@
 <p>Example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/save_model_hdf5.html">save_model_hdf5</a></span>(model, <span class="st">'my_model.h5'</span>)
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/save_model_hdf5.html">load_model_hdf5</a></span>(<span class="st">'my_model.h5'</span>)</code></pre></div>
+</div>
+<div id="savingloading-only-a-models-architecture" class="section level3">
+<h3 class="hasAnchor">
+<a href="#savingloading-only-a-models-architecture" class="anchor"></a>Saving/loading only a model’s architecture</h3>
 <p>If you only need to save the <strong>architecture of a model</strong>, and not its weights or its training configuration, you can do:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">json_string &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_to_json.html">model_to_json</a></span>(model)
 yaml_string &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_to_yaml.html">model_to_yaml</a></span>(model)</code></pre></div>
@@ -175,6 +182,10 @@ yaml_string &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 <p>You can then build a fresh model from this data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_to_json.html">model_from_json</a></span>(json_string)
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/model_to_yaml.html">model_from_yaml</a></span>(yaml_string)</code></pre></div>
+</div>
+<div id="savingloading-only-a-models-weights" class="section level3">
+<h3 class="hasAnchor">
+<a href="#savingloading-only-a-models-weights" class="anchor"></a>Saving/loading only a model’s weights</h3>
 <p>If you need to save the <strong>weights of a model</strong>, you can do so in HDF5 with the code below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/save_model_weights_hdf5.html">save_model_weights_hdf5</a></span>(<span class="st">'my_model_weights.h5'</span>)</code></pre></div>
 <p>Assuming you have code for instantiating your model, you can then load the weights you saved into a model with the <em>same</em> architecture:</p>
@@ -198,6 +209,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
 
 <span class="co"># load weights from first model; will only affect the first layer, dense_1.</span>
 <span class="kw">load_model_weights</span>(fname, <span class="dt">by_name =</span> <span class="ot">TRUE</span>)</code></pre></div>
+</div>
 </div>
 <div id="why-is-the-training-loss-much-higher-than-the-testing-loss" class="section level2">
 <h2 class="hasAnchor">

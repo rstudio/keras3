@@ -127,7 +127,7 @@ epsilon_std &lt;-<span class="st"> </span><span class="fl">1.0</span>
 
 <span class="co"># Model definition --------------------------------------------------------</span>
 
-x &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">batch_shape =</span> <span class="kw">c</span>(batch_size, original_dim))
+x &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(original_dim))
 h &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(x, intermediate_dim, <span class="dt">activation =</span> <span class="st">"relu"</span>)
 z_mean &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(h, latent_dim)
 z_log_var &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(h, latent_dim)
@@ -137,7 +137,7 @@ sampling &lt;-<span class="st"> </span><span class="cf">function</span>(arg){
   z_log_var &lt;-<span class="st"> </span>arg[,<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]
   
   epsilon &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">random_normal</span>(
-    <span class="dt">shape =</span> <span class="kw">c</span>(batch_size, latent_dim), 
+    <span class="dt">shape =</span> <span class="kw">c</span>(K<span class="op">$</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes_linetype_size_shape">shape</a></span>(z_mean)[[<span class="dv">1</span>]]), 
     <span class="dt">mean=</span><span class="dv">0</span>.,
     <span class="dt">stddev=</span>epsilon_std
   )

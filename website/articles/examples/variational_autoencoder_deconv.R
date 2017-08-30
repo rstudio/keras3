@@ -32,7 +32,7 @@ epochs <- 5L
 
 original_img_size <- c(img_rows, img_cols, img_chns)
 
-x <- layer_input(batch_shape = c(batch_size, original_img_size))
+x <- layer_input(shape = c(original_img_size))
 
 conv_1 <- layer_conv_2d(
   x,
@@ -81,7 +81,7 @@ sampling <- function(args) {
   z_log_var <- args[, latent_dim:(2 * latent_dim - 1)]
   
   epsilon <- K$random_normal(
-    shape = c(batch_size, latent_dim),
+    shape = c(K$shape(z_mean)[[1]]),
     mean = 0.,
     stddev = epsilon_std
   )

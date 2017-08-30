@@ -135,7 +135,8 @@ sampled</p>
     
 
     <pre class="usage"><span class='fu'>skipgrams</span>(<span class='no'>sequence</span>, <span class='no'>vocabulary_size</span>, <span class='kw'>window_size</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>negative_samples</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>categorical</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sampling_table</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>categorical</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sampling_table</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -178,6 +179,10 @@ if TRUE labels will be categorical eg. <code>[[1,0],[0,1],[0,1] .. ]</code></p>
       <th>sampling_table</th>
       <td><p>1D array of size <code>vocabulary_size</code> where the entry i
 encodes the probabibily to sample a word of rank i.</p></td>
+    </tr>
+    <tr>
+      <th>seed</th>
+      <td><p>Random seed</p></td>
     </tr>
     </table>
     

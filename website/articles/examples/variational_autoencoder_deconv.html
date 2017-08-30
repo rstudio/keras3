@@ -143,7 +143,7 @@ epochs &lt;-<span class="st"> </span>5L
 
 original_img_size &lt;-<span class="st"> </span><span class="kw">c</span>(img_rows, img_cols, img_chns)
 
-x &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">batch_shape =</span> <span class="kw">c</span>(batch_size, original_img_size))
+x &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(original_img_size))
 
 conv_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(
   x,
@@ -192,7 +192,7 @@ sampling &lt;-<span class="st"> </span><span class="cf">function</span>(args) {
   z_log_var &lt;-<span class="st"> </span>args[, latent_dim<span class="op">:</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>latent_dim <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)]
   
   epsilon &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">random_normal</span>(
-    <span class="dt">shape =</span> <span class="kw">c</span>(batch_size, latent_dim),
+    <span class="dt">shape =</span> <span class="kw">c</span>(K<span class="op">$</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes_linetype_size_shape">shape</a></span>(z_mean)[[<span class="dv">1</span>]]),
     <span class="dt">mean =</span> <span class="dv">0</span>.,
     <span class="dt">stddev =</span> epsilon_std
   )
