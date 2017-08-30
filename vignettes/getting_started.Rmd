@@ -186,6 +186,6 @@ To learn more about Keras, see these other package vignettes:
 
 - [Using Pre-Trained Models](applications.html)
 
-The [examples](https://keras.rstudio.com/articles/examples/) demonstrate more advanced models including transfer learning, variational auto-encoding, question-answering with memory networks, text generation with stacked LSTMs, etc.
+The [examples](https://keras.rstudio.com/articles/examples/index.html) demonstrate more advanced models including transfer learning, variational auto-encoding, question-answering with memory networks, text generation with stacked LSTMs, etc.
 
-The [function reference](https://keras.rstudio.com/reference/) includes detailed information on all of the functions available in the package.
+The [function reference](https://keras.rstudio.com/reference/index.html) includes detailed information on all of the functions available in the package.

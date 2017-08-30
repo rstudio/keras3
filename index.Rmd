@@ -195,7 +195,7 @@ To learn more about Keras, you can check out these articles:
 
 - [Using Pre-Trained Models](articles/applications.html)
 
-The [examples](articles/examples) demonstrate more advanced models including transfer learning, variational auto-encoding, question-answering with memory networks, text generation with stacked LSTMs, etc.
+The [examples](articles/examples/index.html) demonstrate more advanced models including transfer learning, variational auto-encoding, question-answering with memory networks, text generation with stacked LSTMs, etc.
 
 The [function reference](reference/index.html) includes detailed information on all of the functions available in the package.
 
