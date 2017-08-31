@@ -130,8 +130,8 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>First, install the keras R package from GitHub as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"rstudio/keras"</span>)</code></pre></div>
+<p>First, install the keras R package from CRAN as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"keras"</span>)</code></pre></div>
 <p>The Keras R interface uses the <a href="https://www.tensorflow.org/">TensorFlow</a> backend engine by default. To install both the core Keras library as well as the TensorFlow backend use the <code><a href="reference/install_keras.html">install_keras()</a></code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 <span class="kw"><a href="reference/install_keras.html">install_keras</a></span>()</code></pre></div>
@@ -267,13 +267,14 @@ ________________________________________________________________________________
 <ul class="list-unstyled">
 <li>JJ Allaire <br><small class="roles"> Author, maintainer </small> </li>
 <li>François Chollet <br><small class="roles"> Author, copyright holder </small> </li>
-<li> RStudio <br><small class="roles"> Copyright holder, funder </small> </li>
+<li> RStudio <br><small class="roles"> Contributor, copyright holder, funder </small> </li>
 <li> Google <br><small class="roles"> Contributor, copyright holder, funder </small> </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/rstudio/keras"><img src="https://travis-ci.org/rstudio/keras.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="http://cran.r-project.org/package=keras"><img src="http://www.r-pkg.org/badges/version/keras" alt="CRAN_Status_Badge"></a></li>
 </ul>
 </div>
 
