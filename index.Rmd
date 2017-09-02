@@ -54,7 +54,7 @@ library(keras)
 install_keras()
 ```
 
-This will provide you with default CPU-based installations of Keras and TensorFlow. If you want a more customized installation, e.g. if you want to take advantage of NVIDIA GPUs, see the documentation for [`install_keras()`](https://keras.rstudio.com/reference/install_keras.html).
+This will provide you with default CPU-based installations of Keras and TensorFlow. If you want a more customized installation, e.g. if you want to take advantage of NVIDIA GPUs, see the documentation for `install_keras()`.
 
 ## MNIST Example
 

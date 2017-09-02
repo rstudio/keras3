@@ -44,7 +44,8 @@ library(keras)
 install_keras()
 ```
 
-This will provide you with default installations of Keras and TensorFlow. If you want to do a more customized installation of TensorFlow (including installing a version that takes advantage of Nvidia GPUs if you have the correct CUDA libraries installed) see the documentation for `install_keras()`.
+This will provide you with default CPU-based installations of Keras and TensorFlow. If you want a more customized installation, e.g. if you want to take advantage of NVIDIA GPUs, see the documentation for `install_keras()`.
+
 
 ## MNIST Example
 
