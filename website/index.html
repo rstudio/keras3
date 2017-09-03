@@ -135,7 +135,7 @@
 <p>The Keras R interface uses the <a href="https://www.tensorflow.org/">TensorFlow</a> backend engine by default. To install both the core Keras library as well as the TensorFlow backend use the <code><a href="reference/install_keras.html">install_keras()</a></code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 <span class="kw"><a href="reference/install_keras.html">install_keras</a></span>()</code></pre></div>
-<p>This will provide you with default installations of Keras and TensorFlow. If you want to do a more customized installation of TensorFlow (including installing a version that takes advantage of Nvidia GPUs if you have the correct CUDA libraries installed) see the documentation for <code><a href="reference/install_keras.html">install_keras()</a></code>.</p>
+<p>This will provide you with default CPU-based installations of Keras and TensorFlow. If you want a more customized installation, e.g. if you want to take advantage of NVIDIA GPUs, see the documentation for <code><a href="reference/install_keras.html">install_keras()</a></code>.</p>
 </div>
 <div id="mnist-example" class="section level2">
 <h2 class="hasAnchor">
@@ -219,9 +219,18 @@ ________________________________________________________________________________
 <img src="images/training_history_ggplot2.png" class="r-plot" width="757" height="489">
 </div>
 <p>Evaluate the model’s performance on the test data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loss_and_metrics &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/evaluate.html">evaluate</a></span>(x_test, y_test)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/evaluate.html">evaluate</a></span>(x_test, y_test)</code></pre></div>
+<pre><code>$loss
+[1] 0.1149
+
+$acc
+[1] 0.9807</code></pre>
 <p>Generate predictions on new data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classes &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/predict_proba.html">predict_classes</a></span>(x_test)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/predict_proba.html">predict_classes</a></span>(x_test)</code></pre></div>
+<pre><code>  [1] 7 2 1 0 4 1 4 9 5 9 0 6 9 0 1 5 9 7 3 4 9 6 6 5 4 0 7 4 0 1 3 1 3 4 7 2 7 1 2
+ [40] 1 1 7 4 2 3 5 1 2 4 4 6 3 5 5 6 0 4 1 9 5 7 8 9 3 7 4 6 4 3 0 7 0 2 9 1 7 3 2
+ [79] 9 7 7 6 2 7 8 4 7 3 6 1 3 6 9 3 1 4 1 7 6 9
+ [ reached getOption("max.print") -- omitted 9900 entries ]</code></pre>
 <p>Keras provides a vocabulary for building deep learning models that is simple, elegant, and intuitive. Building a question answering system, an image classification model, a neural Turing machine, or any other model is just as straightforward.</p>
 </div>
 </div>
