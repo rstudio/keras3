@@ -42,7 +42,13 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
       
       # record metrics
       for (metric in names(self$metrics)) {
-        value <- mean(logs[[metric]])
+        # guard against metrics not yet available by using NA 
+        # when a named metrics isn't passed in 'logs'
+        value <- logs[[metric]]
+        if (is.null(value))
+          value <- NA
+        else
+          value <- mean(value)
         self$metrics[[metric]] <- c(self$metrics[[metric]], value)
       }
       
