@@ -137,16 +137,24 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
 
 #' @export
 as.data.frame.keras_training_history <- function(x, ...) {
+  # pad to epochs if necessary
+  values <- x$metrics
+  pad <- x$params$epochs - length(values$loss)
+  pad_data <- list()
+  for (metric in x$params$metrics)
+    pad_data[[metric]] <- rep_len(NA, pad)
+  values <- rbind(values, pad_data)
+
   # prepare data to plot as a data.frame
   df <- data.frame(
     epoch = seq_len(x$params$epochs),
-    value = unlist(x$metrics),
+    value = unlist(values),
     metric = rep(sub("^val_", "", names(x$metrics)), each = x$params$epochs),
     data = rep(grepl("^val_", names(x$metrics)), each = x$params$epochs)
   )
   rownames(df) <- NULL
   
-  # order factor levles appropriately
+  # order factor levels appropriately
   df$data <- factor(df$data, c(FALSE, TRUE), c('training', 'validation'))
   df$metric <- factor(df$metric, unique(sub("^val_", "", names(x$metrics))))
 
