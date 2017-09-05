@@ -36,7 +36,7 @@ if (is_keras_available() && is_backend("tensorflow"))
 
 test_callback("terminate_on_naan", callback_terminate_on_naan(), required_version = "2.0.5")
 
-test_callback("reduce_lr_on_plateau", callback_reduce_lr_on_plateau())
+test_callback("reduce_lr_on_plateau", callback_reduce_lr_on_plateau(monitor = "loss"))
 test_callback("csv_logger", callback_csv_logger("training.csv"))
 test_callback("lambd", callback_lambda(
   on_epoch_begin = function(epoch, logs) {
