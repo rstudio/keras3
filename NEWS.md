@@ -3,6 +3,8 @@
 
 Install the development version with: `install_github("rstudio/keras")`
 
+- Add `set_keras_seed()` function that establishes a random seed for the Keras session.
+
 - Fix for plotting training history with early stopping callback (thanks to @JamesAllingham).
 
 - Better support for training models from data tensors in TensorFlow (e.g. Datasets, TFRecords). Add a related example script.
