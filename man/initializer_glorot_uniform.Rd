@@ -4,7 +4,7 @@
 \alias{initializer_glorot_uniform}
 \title{Glorot uniform initializer, also called Xavier uniform initializer.}
 \usage{
-initializer_glorot_uniform(seed = NULL)
+initializer_glorot_uniform(seed = sample.int(10^5, 1))
 }
 \arguments{
 \item{seed}{Integer used to seed the random generator.}

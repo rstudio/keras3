@@ -4,7 +4,7 @@
 \alias{initializer_he_normal}
 \title{He normal initializer.}
 \usage{
-initializer_he_normal(seed = NULL)
+initializer_he_normal(seed = sample.int(10^5, 1))
 }
 \arguments{
 \item{seed}{Integer used to seed the random generator.}

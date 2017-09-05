@@ -4,7 +4,8 @@
 \alias{layer_alpha_dropout}
 \title{Applies Alpha Dropout to the input.}
 \usage{
-layer_alpha_dropout(object, rate, noise_shape = NULL, seed = NULL)
+layer_alpha_dropout(object, rate, noise_shape = NULL,
+  seed = sample.int(10^5, 1))
 }
 \arguments{
 \item{object}{Model or layer object}

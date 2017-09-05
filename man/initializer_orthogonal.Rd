@@ -4,7 +4,7 @@
 \alias{initializer_orthogonal}
 \title{Initializer that generates a random orthogonal matrix.}
 \usage{
-initializer_orthogonal(gain = 1, seed = NULL)
+initializer_orthogonal(gain = 1, seed = sample.int(10^5, 1))
 }
 \arguments{
 \item{gain}{Multiplicative factor to apply to the orthogonal matrix.}

@@ -8,7 +8,7 @@ augmented/normalized data)}
 flow_images_from_directory(directory, generator = image_data_generator(),
   target_size = c(256, 256), color_mode = "rgb", classes = NULL,
   class_mode = "categorical", batch_size = 32, shuffle = TRUE,
-  seed = NULL, save_to_dir = NULL, save_prefix = "",
+  seed = sample.int(10^5, 1), save_to_dir = NULL, save_prefix = "",
   save_format = "png", follow_links = FALSE)
 }
 \arguments{

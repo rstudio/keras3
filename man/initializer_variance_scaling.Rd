@@ -5,7 +5,8 @@
 \title{Initializer capable of adapting its scale to the shape of weights.}
 \usage{
 initializer_variance_scaling(scale = 1, mode = c("fan_in", "fan_out",
-  "fan_avg"), distribution = c("normal", "uniform"), seed = NULL)
+  "fan_avg"), distribution = c("normal", "uniform"), seed = sample.int(10^5,
+  1))
 }
 \arguments{
 \item{scale}{Scaling factor (positive float).}

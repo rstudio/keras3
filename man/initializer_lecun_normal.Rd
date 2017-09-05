@@ -4,7 +4,7 @@
 \alias{initializer_lecun_normal}
 \title{LeCun normal initializer.}
 \usage{
-initializer_lecun_normal(seed = NULL)
+initializer_lecun_normal(seed = sample.int(10^5, 1))
 }
 \arguments{
 \item{seed}{A Python integer. Used to seed the random generator.}

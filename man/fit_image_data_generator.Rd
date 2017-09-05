@@ -5,7 +5,7 @@
 \title{Fit image data generator internal statistics to some sample data.}
 \usage{
 fit_image_data_generator(object, x, augment = FALSE, rounds = 1,
-  seed = NULL, ...)
+  seed = sample.int(10^5, 1), ...)
 }
 \arguments{
 \item{object}{\code{\link[=image_data_generator]{image_data_generator()}}}

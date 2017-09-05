@@ -4,7 +4,7 @@
 \alias{layer_dropout}
 \title{Applies Dropout to the input.}
 \usage{
-layer_dropout(object, rate, noise_shape = NULL, seed = NULL,
+layer_dropout(object, rate, noise_shape = NULL, seed = sample.int(10^5, 1),
   batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{

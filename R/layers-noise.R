@@ -101,7 +101,7 @@ layer_gaussian_dropout <- function(object, rate, input_shape = NULL,
 #' @family noise layers   
 #'
 #' @export
-layer_alpha_dropout <- function(object, rate, noise_shape = NULL, seed = NULL) {
+layer_alpha_dropout <- function(object, rate, noise_shape = NULL, seed = sample.int(10^5, 1)) {
   create_layer(keras$layers$AlphaDropout, object, list(
     rate = rate,
     noise_shape = noise_shape,
