@@ -39,6 +39,8 @@ navbar:
       href: articles/examples/index.html
     - text: "Reference"
       href: reference/index.html
+    - text: "News"
+      href: news/index.html
   right:
    - icon: fa-github
      href: https://github.com/rstudio/keras

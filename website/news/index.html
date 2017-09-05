@@ -104,6 +104,9 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -129,16 +132,23 @@
     </div>
 
     <div class="contents">
-    <div id="keras-2-0-8-unreleased" class="section level1">
-<h1 class="hasAnchor">
-<a href="#keras-2-0-8-unreleased" class="anchor"></a>keras 2.0.8 (unreleased)</h1>
+    <div id="keras-2-0-8-development" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2-0-8-development" class="anchor"></a>keras 2.0.8 (development)</h2>
+<p>Install the development version with: <code>install_github("rstudio/keras")</code></p>
 <ul>
-<li>Changes from Keras v2.0.7 and v2.0.8</li>
+<li><p>Better support for training models from data tensors in TensorFlow (e.g. Datasets, TFRecords). Add a related example script.</p></li>
+<li><p>Add <code><a href="../reference/clone_model.html">clone_model()</a></code> function, enabling to construct a new model, given an existing model to use as a template. Works even in a TensorFlow graph different from that of the original model.</p></li>
+<li><p>Add <code>target_tensors</code> argument in <code><a href="../reference/compile.html">compile()</a></code>, enabling to use custom tensors or placeholders as model targets.</p></li>
+<li><p>Add <code>steps_per_epoch</code> argument in <code><a href="../reference/fit.html">fit()</a></code>, enabling to train a model from data tensors in a way that is consistent with training from arrays. Similarly, add <code>steps</code> argument in <code>predict()</code> and <code><a href="../reference/evaluate.html">evaluate()</a></code>.</p></li>
+<li><p>Add <code><a href="../reference/layer_subtract.html">layer_subtract()</a></code> layer function.</p></li>
+<li><p>Add <code>weighted_metrics</code> argument in compile to specify metric functions meant to take into account <code>sample_weight</code> or <code>class_weight</code>.</p></li>
+<li><p>Enable stateful RNNs with CNTK.</p></li>
 </ul>
 </div>
-    <div id="keras-2-0-6" class="section level1">
-<h1 class="hasAnchor">
-<a href="#keras-2-0-6" class="anchor"></a>keras 2.0.6</h1>
+    <div id="keras-2-0-6-cran" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2-0-6-cran" class="anchor"></a>keras 2.0.6 (CRAN)</h2>
 <ul>
 <li><p><code><a href="../reference/install_keras.html">install_keras()</a></code> function which installs both TensorFlow and Keras</p></li>
 <li><p>Use keras package as default implementation rather than tf.contrib.keras</p></li>
@@ -158,9 +168,9 @@
 <li><p>Provide hint to use r-tensorflow environment when importing keras</p></li>
 </ul>
 </div>
-    <div id="keras-2-0-5" class="section level1">
-<h1 class="hasAnchor">
-<a href="#keras-2-0-5" class="anchor"></a>keras 2.0.5</h1>
+    <div id="keras-2-0-5" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2-0-5" class="anchor"></a>keras 2.0.5</h2>
 <ul>
 <li>Initial CRAN release</li>
 </ul>
@@ -172,8 +182,8 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#keras-2-0-8-unreleased">2.0.8</a></li>
-        <li><a href="#keras-2-0-6">2.0.6</a></li>
+        <li><a href="#keras-2-0-8-development">2.0.8</a></li>
+        <li><a href="#keras-2-0-6-cran">2.0.6</a></li>
         <li><a href="#keras-2-0-5">2.0.5</a></li>
       </ul>
     </div>

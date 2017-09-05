@@ -1,10 +1,24 @@
 
-# keras 2.0.8 (unreleased)
+## keras 2.0.8 (development)
 
-- Changes from Keras v2.0.7 and v2.0.8
+Install the development version with: `install_github("rstudio/keras")`
+
+- Better support for training models from data tensors in TensorFlow (e.g. Datasets, TFRecords). Add a related example script.
+
+- Add `clone_model()` function, enabling to construct a new model, given an existing model to use as a template. Works even in a TensorFlow graph different from that of the original model.
+
+- Add `target_tensors` argument in `compile()`, enabling to use custom tensors or placeholders as model targets.
+
+- Add `steps_per_epoch` argument in `fit()`, enabling to train a model from data tensors in a way that is consistent with training from arrays. Similarly, add `steps` argument in `predict()` and `evaluate()`.
+
+- Add `layer_subtract()` layer function.
+
+- Add `weighted_metrics` argument in compile to specify metric functions meant to take into account `sample_weight` or `class_weight`.
+
+- Enable stateful RNNs with CNTK.
 
 
-# keras 2.0.6
+## keras 2.0.6 (CRAN)
 
 - `install_keras()` function which installs both TensorFlow and Keras
 
@@ -43,7 +57,7 @@
 - Provide hint to use r-tensorflow environment when importing keras
 
 
-# keras 2.0.5
+## keras 2.0.5
 
 - Initial CRAN release
 
