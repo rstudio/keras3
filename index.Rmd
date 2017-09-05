@@ -58,7 +58,7 @@ This will provide you with default CPU-based installations of Keras and TensorFl
 
 ## MNIST Example
 
-We can learn the basics of Keras by walking through a simple example: recognizing handwritten digets from the [MNIST](https://en.wikipedia.org/wiki/MNIST_database) dataset. MNIST consists of 28 x 28 grayscale images of handwritten digits like these:
+We can learn the basics of Keras by walking through a simple example: recognizing handwritten digits from the [MNIST](https://en.wikipedia.org/wiki/MNIST_database) dataset. MNIST consists of 28 x 28 grayscale images of handwritten digits like these:
 
 <img style="width: 50%;" src="images/MNIST.png">
 
