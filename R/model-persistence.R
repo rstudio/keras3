@@ -225,33 +225,44 @@ unserialize_model <- function(model, custom_objects = NULL, compile = TRUE) {
 # utility function to mirror saved models/weights into the run_dir
 # whenever a training_run is active
 mirror_to_run_dir <- function(filepath) {
+  mirror_path <- run_dir_path(filepath)
+  if (!is.null(mirror_path))
+    file.copy(filepath, mirror_path, overwrite = TRUE)
+}
+
+run_dir_path <- function(filepath, default = NULL) {
   
-  if (tfruns::is_run_active()) {
+  if (tfruns::is_run_active() && is_working_dir_path(filepath)) {
     
-    # get the full path to the saved file and the working dir
-    saved_filepath <- normalizePath(filepath, mustWork = FALSE, winslash = "/")
-    wd <- normalizePath(getwd(), mustWork = FALSE, winslash = "/")
-  
-    # if the saved file is within the working dir then mirror it  
-    if (grepl(paste0("^", wd), saved_filepath)) {
-      
-      # compute target path within run_dir
-      relative_filepath <- relative_to(wd, saved_filepath)
-      copy_filepath <- file.path(run_dir(), relative_filepath)
-      
-      # create directory if needed
-      copy_dir <- dirname(copy_filepath)
-      if (!utils::file_test("-d", copy_dir))
-        dir.create(copy_dir, recursive = TRUE)
-      
-      # perform the copy
-      file.copy(saved_filepath, copy_filepath, overwrite = TRUE)
-    }
+    # create the working dir path
+    run_dir_path <- file.path(run_dir(), filepath)
+    
+    # create directory if needed
+    target_dir <- dirname(run_dir_path)
+    if (!utils::file_test("-d", target_dir))
+      dir.create(target_dir, recursive = TRUE)
+    
+    # return the path
+    run_dir_path
+    
+  } else {
+    default
   }
   
 }
 
 
-
+is_working_dir_path <- function(path) {
+  if (regexpr("^~", path) != -1L)
+    FALSE
+  else if (regexpr("^.:(/|\\\\)", path) != -1L)
+    FALSE
+  else if (regexpr("^(/|\\\\)", path) != -1L)
+    FALSE
+  else if (regexpr("^\\.\\.", path) != -1L)
+    FALSE
+  else 
+    TRUE
+}
 
 

@@ -18,7 +18,19 @@ data <- matrix(runif(1000*100), nrow = 1000, ncol = 100)
 labels <- matrix(round(runif(1000, min = 0, max = 1)), nrow = 1000, ncol = 1)
 
 # Train the model, iterating on the data in batches of 32 samples
-model %>% fit(data, labels, epochs=10, batch_size=32, view_metrics = FALSE)
+model %>% fit(
+  data, 
+  labels, 
+  epochs=10, 
+  batch_size=32, 
+  validation_split = 0.2,
+  callbacks = list(
+    callback_tensorboard(log_dir = "tflogs"),
+    callback_model_checkpoint("cbk_checkpoint.h5"),
+    callback_csv_logger("cbk_history.csv")
+  ),
+  view_metrics = FALSE
+)
 
 # Save model and weights
 save_model_hdf5(model, "model.h5")
