@@ -39,9 +39,14 @@ set_keras_seed <- function(seed,
                            disable_parallel_cpu = TRUE,
                            quiet = FALSE) {
   
+  # note what has been disabled
+  disabled <- character()
+  
   # disable CUDA if requeasted
-  if (disable_gpu)
+  if (disable_gpu) {
     Sys.setenv(CUDA_VISIBLE_DEVICES = "")
+    disabled <- c(disabled, "GPU")
+  }
   
   # alias to Keras backend
   K <- backend()
@@ -72,11 +77,9 @@ set_keras_seed <- function(seed,
     tf <- tensorflow::tf
     
     # disable parallelism if requested
-    disabled <- character()
     config <- list()
     if (disable_gpu) {
       config$device_count <-  list(gpu = 0L)
-      disabled <- c(disabled, "GPU")
     }
     if (disable_parallel_cpu) {
       config$intra_op_parallelism_threads <- 1L
@@ -84,13 +87,6 @@ set_keras_seed <- function(seed,
       disabled <- c(disabled, "CPU parallelism")
     }
     session_conf <- do.call(tf$ConfigProto, config)
-    
-    # show message
-    msg <- paste("Set Keras session seed to", seed)
-    if (length(disabled) > 0)
-      msg <- paste0(msg, " (disabled ", paste(disabled, collapse = ", "), ")")
-    if (!quiet)
-      message(msg)
     
     # The below tf$set_random_seed() will make random number generation in the 
     # TensorFlow backend have a well-defined initial state. For further details, 
@@ -103,6 +99,13 @@ set_keras_seed <- function(seed,
     # set it as the keras session
     K$set_session(sess)
   }
+  
+  # show message
+  msg <- paste("Set Keras session seed to", seed)
+  if (length(disabled) > 0)
+    msg <- paste0(msg, " (disabled ", paste(disabled, collapse = ", "), ")")
+  if (!quiet)
+    message(msg)
  
   # return keras session invisibly
   invisible(K$get_session())
