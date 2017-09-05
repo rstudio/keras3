@@ -225,28 +225,39 @@ unserialize_model <- function(model, custom_objects = NULL, compile = TRUE) {
 # utility function to mirror saved models/weights into the run_dir
 # whenever a training_run is active
 mirror_to_run_dir <- function(filepath) {
+  mirror_path <- run_dir_mirror_path(filepath)
+  if (!is.null(mirror_path))
+    file.copy(filepath, mirror_path, overwrite = TRUE)
+}
+
+run_dir_mirror_path <- function(filepath) {
   
   if (tfruns::is_run_active()) {
     
     # get the full path to the saved file and the working dir
     saved_filepath <- normalizePath(filepath, mustWork = FALSE, winslash = "/")
     wd <- normalizePath(getwd(), mustWork = FALSE, winslash = "/")
-  
+    
     # if the saved file is within the working dir then mirror it  
     if (grepl(paste0("^", wd), saved_filepath)) {
       
       # compute target path within run_dir
       relative_filepath <- relative_to(wd, saved_filepath)
-      copy_filepath <- file.path(run_dir(), relative_filepath)
+      mirror_path <- file.path(run_dir(), relative_filepath)
       
       # create directory if needed
-      copy_dir <- dirname(copy_filepath)
+      copy_dir <- dirname(mirror_path)
       if (!utils::file_test("-d", copy_dir))
         dir.create(copy_dir, recursive = TRUE)
       
-      # perform the copy
-      file.copy(saved_filepath, copy_filepath, overwrite = TRUE)
+      # return the filepath
+      mirror_path
+      
+    } else {
+      NULL
     }
+  } else {
+    NULL
   }
   
 }
