@@ -45,7 +45,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item  RStudio [copyright holder, funder]
+  \item  RStudio [contributor, copyright holder, funder]
   \item  Google [contributor, copyright holder, funder]
   \item Yuan Tang [contributor, copyright holder]
   \item Daniel Falbel [contributor, copyright holder]
