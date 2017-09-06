@@ -3,7 +3,9 @@
 
 Install the development version with: `install_github("rstudio/keras")`
 
-- Add `set_keras_seed()` function that establishes a random seed for the Keras session.
+- Add `use_session_with_seed()` function that establishes a random seed for the Keras session.
+  Note that this should not be used when training time is paramount, as it disables GPU
+  computation and CPU parallelism by default for more deterministic computations.
 
 - Fix for plotting training history with early stopping callback (thanks to @JamesAllingham).
 
