@@ -13,6 +13,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Rename `to_numpy_array()` function to `keras_array()` reflecting automatic use
   of Keras default backend float type and "C" ordering.
+  
+- Add standard layer arguments (e.g. `name`, `trainable`, etc.) to merge layers
 
 - Better support for training models from data tensors in TensorFlow (e.g. Datasets, TFRecords). Add a related example script.
 

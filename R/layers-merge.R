@@ -5,6 +5,8 @@
 #' It takes as input a list of tensors, all of the same shape, and returns a
 #' single tensor (also of the same shape).
 #' 
+#' @inheritParams layer_dense
+#' 
 #' @param inputs A list of input tensors (at least 2).
 #'   
 #' @return A tensor, the sum of the inputs.
@@ -12,8 +14,16 @@
 #' @family merge layers
 #'   
 #' @export
-layer_add <- function(inputs) {
-  keras$layers$add(inputs = inputs)
+layer_add <- function(inputs, batch_size = NULL, dtype = NULL, 
+                      name = NULL, trainable = NULL, weights = NULL) {
+  keras$layers$add(
+    inputs = inputs,
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
+  )
 }
 
 
@@ -23,6 +33,8 @@ layer_add <- function(inputs) {
 #' returns a single tensor, (`inputs[[1]] - inputs[[2]]``), also of the same
 #' shape.
 #'
+#' @inheritParams layer_dense
+#'
 #' @param inputs A list of input tensors (exactly 2).
 #'
 #' @return A tensor, the difference of the inputs.
@@ -30,14 +42,24 @@ layer_add <- function(inputs) {
 #' @family merge layers
 #'
 #' @export
-layer_subtract <- function(inputs) {
-  keras$layers$subtract(inputs = inputs)
+layer_subtract <- function(inputs, batch_size = NULL, dtype = NULL, 
+                           name = NULL, trainable = NULL, weights = NULL) {
+  keras$layers$subtract(
+    inputs = inputs,
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
+  )
 }
 
 #' Layer that multiplies (element-wise) a list of inputs.
 #' 
 #' It takes as input a list of tensors, all of the same shape, and returns a
 #' single tensor (also of the same shape).
+#'   
+#' @inheritParams layer_dense
 #'   
 #' @param inputs A list of input tensors (at least 2).
 #'   
@@ -46,8 +68,16 @@ layer_subtract <- function(inputs) {
 #' @family merge layers
 #' 
 #' @export
-layer_multiply <- function(inputs) {
-  keras$layers$multiply(inputs = inputs)
+layer_multiply <- function(inputs, batch_size = NULL, dtype = NULL, 
+                           name = NULL, trainable = NULL, weights = NULL) {
+  keras$layers$multiply(
+    inputs = inputs,
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
+  )
 }
 
 
@@ -56,6 +86,8 @@ layer_multiply <- function(inputs) {
 #' It takes as input a list of tensors, all of the same shape, and returns a
 #' single tensor (also of the same shape).
 #' 
+#' @inheritParams layer_dense
+#' 
 #' @param inputs A list of input tensors (at least 2).
 #'   
 #' @return A tensor, the average of the inputs.
@@ -63,14 +95,24 @@ layer_multiply <- function(inputs) {
 #' @family merge layers
 #'   
 #' @export
-layer_average <- function(inputs) {
-  keras$layers$average(inputs = inputs)
+layer_average <- function(inputs, batch_size = NULL, dtype = NULL, 
+                          name = NULL, trainable = NULL, weights = NULL) {
+  keras$layers$average(
+    inputs = inputs,
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
+  )
 }
 
 #' Layer that computes the maximum (element-wise) a list of inputs.
 #' 
 #' It takes as input a list of tensors, all of the same shape, and returns a
 #' single tensor (also of the same shape).
+#' 
+#' @inheritParams layer_dense
 #' 
 #' @param inputs A list of input tensors (at least 2). 
 #'   
@@ -79,8 +121,16 @@ layer_average <- function(inputs) {
 #' @family merge layers   
 #'     
 #' @export
-layer_maximum <- function(inputs) {
-  keras$layers$maximum(inputs = inputs)
+layer_maximum <- function(inputs, batch_size = NULL, dtype = NULL, 
+                          name = NULL, trainable = NULL, weights = NULL) {
+  keras$layers$maximum(
+    inputs = inputs,
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
+  )
 }
 
 
@@ -91,6 +141,8 @@ layer_maximum <- function(inputs) {
 #' concatenation axis, and returns a single tensor, the concatenation of all
 #' inputs.
 #'   
+#' @inheritParams layer_dense
+#'   
 #' @param inputs A list of input tensors (at least 2).
 #' @param axis Concatenation axis.
 #'   
@@ -99,14 +151,22 @@ layer_maximum <- function(inputs) {
 #' @family merge layers   
 #'   
 #' @export
-layer_concatenate <- function(inputs, axis = -1L) {
+layer_concatenate <- function(inputs, axis = -1, batch_size = NULL, dtype = NULL, 
+                              name = NULL, trainable = NULL, weights = NULL) {
   keras$layers$concatenate(
     inputs = inputs,
-    axis = as.integer(axis)
+    axis = as.integer(axis),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   )
 }
 
 #' Layer that computes a dot product between samples in two tensors.
+#' 
+#' @inheritParams layer_dense
 #' 
 #' @param inputs A list of input tensors (at least 2).
 #' @param axes Integer or list of integers, axis or axes along which to take the dot product.
@@ -117,11 +177,17 @@ layer_concatenate <- function(inputs, axis = -1L) {
 #' @family merge layers
 #' 
 #' @export
-layer_dot <- function(inputs, axes, normalize = FALSE) {
+layer_dot <- function(inputs, axes, normalize = FALSE, batch_size = NULL, dtype = NULL, 
+                      name = NULL, trainable = NULL, weights = NULL) {
   keras$layers$dot(
     inputs = inputs,
     axes = as.integer(axes),
-    normalize = normalize
+    normalize = normalize,
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
   )
 }
 
