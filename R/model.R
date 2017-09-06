@@ -285,23 +285,8 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
   # fit the model
   history <- do.call(object$fit, args)
   
-  # turn history into an R object so it can be persited and
-  # and give it a class so we can write print/plot methods
-  params <- history$params
-  if (params$do_validation)
-    params$validation_samples <- dim(history$validation_data[[1]])[[1]]
-  
-  # normalize metrics
-  metrics <- history$history
-  metrics <- lapply(metrics, function(metric) {
-    as.numeric(lapply(metric, mean))
-  })
-  
-  # create history
-  history <- keras_training_history(
-    params = params,
-    metrics = metrics
-  )
+  # convert to a keras_training history object
+  history <- to_keras_training_history(history)
   
   # return the history invisibly
   invisible(history)
@@ -537,7 +522,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
   if (identical(view_metrics, "auto"))
     view_metrics <- resolve_view_metrics(verbose, epochs, object$metrics)
   
-  call_generator_function(object$fit_generator, list(
+  history <- call_generator_function(object$fit_generator, list(
     generator = as_generator(generator),
     steps_per_epoch = as.integer(steps_per_epoch),
     epochs = as.integer(epochs),
@@ -549,6 +534,12 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
     max_queue_size = as.integer(max_queue_size),
     initial_epoch = as.integer(initial_epoch) 
   ))
+  
+  # convert to a keras_training history object
+  history <- to_keras_training_history(history)
+  
+  # return the history invisibly
+  invisible(history)
 }
 
 #' Evaluates the model on a data generator.

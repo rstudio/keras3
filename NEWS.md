@@ -9,6 +9,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Fix for plotting training history with early stopping callback (thanks to @JamesAllingham).
 
+- Return R training history object from `fit_generator()`
+
 - Better support for training models from data tensors in TensorFlow (e.g. Datasets, TFRecords). Add a related example script.
 
 - Add `clone_model()` function, enabling to construct a new model, given an existing model to use as a template. Works even in a TensorFlow graph different from that of the original model.
