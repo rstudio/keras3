@@ -17,6 +17,15 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
     
     on_train_begin = function(logs = NULL) {
       
+      # strip validation metrics if do_validation is FALSE (for
+      # fit_generator and fitting TF record the val_ metrics are
+      # passed even though no data will be provided for them)
+      if (!self$params$do_validation) {
+        self$params$metrics <- Filter(function(metric) {
+          !grepl("^val_", metric)
+        }, self$params$metrics)
+      }
+      
       # initialize metrics
       for (metric in self$params$metrics)
         self$metrics[[metric]] <- numeric()
