@@ -442,32 +442,28 @@ If you create [custom layers in R](custom_layers.html) or import other Python pa
 
 During development of a model, sometimes it is useful to be able to obtain reproducible results from run to run in order to determine if a change in performance is due to an actual model or data modification, or merely a result of a new random sample.  
 
-The below snippet of code provides an example of how to obtain reproducible results when using the TensorFlow backend. To do this we set the R session's random seed, then manually construct a TensorFlow session (via the **tensorflow** package) and set it's random seed, and then finally arrange for Keras to use this session within its backend.
+The `use_session_with_seed()` function establishes a common random seed for R, Python, NumPy, and TensorFlow. It furthermore disables hash randomization, GPU computations, and CPU parallelization,
+which can be additional sources of non-reproducibility. 
+
+The `use_session_with_seed()` function is available in the development version of the Keras package, which you can install as follows:
+
+```{r}
+devtools::install_github("rstudio/keras")
+```
+
+To use the function, call it immediately after you load the keras package:
 
 ```{r}
 library(keras)
-library(tensorflow)
+use_session_with_seed(42)
 
-# Set R random seed
-set.seed(42L)
+# ...rest of code follows...
 
-# TensorFlow session configuration that uses only a single thread. Multiple threads are a 
-# potential source of non-reproducible results, see: https://stackoverflow.com/questions/42022950/which-seeds-have-to-be-set-where-to-realize-100-reproducibility-of-training-res
-session_conf <- tf$ConfigProto(intra_op_parallelism_threads = 1L, 
-                               inter_op_parallelism_threads = 1L)
-
-# Set TF random seed (see: https://www.tensorflow.org/api_docs/python/tf/set_random_seed)
-tf$set_random_seed(1042L)
-
-# Create the session using the custom configuration
-sess <- tf$Session(graph = tf$get_default_graph(), config = session_conf)
-
-# Instruct Keras to use this session
-K <- backend()
-K$set_session(sess)
-
-# Rest of code follows ...
 ```
+
+This function takes all measures known to promote reproducible results from Keras sessions, however it's possible that various individual features or libraries used by the backend escape its effects. If you encounter non-reproducible results please investigate the possible sources of the problem. The source code for `use_session_with_seed()` is here: https://github.com/rstudio/tensorflow/blob/master/R/seed.R Contributions via pull request are very welcome!
+
+Please note again that `use_session_with_seed()` disables GPU computations and CPU parallelization by default (as both can lead to non-deterministic computations) so should generally not be used when model training time is paramount.
 
 ## Where is the Keras configuration filed stored?
 

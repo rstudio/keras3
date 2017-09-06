@@ -290,6 +290,7 @@ reference:
       - get_file
       - backend
       - implementation
+      - use_session_with_seed
       - install_keras
       - is_keras_available
      
