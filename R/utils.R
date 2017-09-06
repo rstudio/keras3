@@ -111,26 +111,29 @@ normalize <- function(x, axis = -1, order = 2) {
 
 #' Keras array object
 #'
-#' Convert an object to a NumPy array which has the optimal in-memory layout and
-#' floating point data type for the current Keras backend.
-#' 
+#' Convert an R vector, matrix, or array object to an array that has the optimal
+#' in-memory layout and floating point data type for the current Keras backend.
+#'
 #' Keras does frequent row-oriented access to arrays (for shuffling and drawing
-#' batches) so the order of arrays created by this function is always row-oriented
-#' ("C" as opposed to "Fortran" ordering, which is the default for R arrays).
-#' 
-#' If the passed array is already a NumPy array with the desired `dtype` and
-#' "C" order then it is returned unmodified (no additional copies are made). 
+#' batches) so the order of arrays created by this function is always
+#' row-oriented ("C" as opposed to "Fortran" ordering, which is the default for
+#' R arrays).
+#'
+#' If the passed array is already a NumPy array with the desired `dtype` and "C"
+#' order then it is returned unmodified (no additional copies are made).
 #'
 #' @param x Object or list of objects to convert
+#' @param dim Integer vector with array dimensions (defaults to dimensions of
+#'   `x`)
 #' @param dtype NumPy data type (e.g. float32, float64). If this is unspecified
 #'   then R doubles will be converted to the default floating point type for the
 #'   current Keras backend.
 #'
-#' @return NumPy array with the specified type (or list of NumPy arrays if a
-#'   list was passed for `x`).
+#' @return NumPy array with the specified dimensions and type (or list of NumPy
+#'   arrays if a list was passed for `x`).
 #'
 #' @export
-keras_array <- function(x, dim = dim(data), dtype = NULL) {
+keras_array <- function(x, dim = dim(x), dtype = NULL) {
   
   # recurse for lists
   if (is.list(x))
