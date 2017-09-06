@@ -442,8 +442,7 @@ If you create [custom layers in R](custom_layers.html) or import other Python pa
 
 During development of a model, sometimes it is useful to be able to obtain reproducible results from run to run in order to determine if a change in performance is due to an actual model or data modification, or merely a result of a new random sample.  
 
-The `use_session_with_seed()` function establishes a common random seed for R, Python, NumPy, and TensorFlow. It furthermore disables hash randomization, GPU computations, and CPU parallelization,
-which can be additional sources of non-reproducibility. 
+The `use_session_with_seed()` function establishes a common random seed for R, Python, NumPy, and TensorFlow. It furthermore disables hash randomization, GPU computations, and CPU parallelization, which can be additional sources of non-reproducibility. 
 
 The `use_session_with_seed()` function is available in the development version of the Keras package, which you can install as follows:
 
@@ -461,9 +460,15 @@ use_session_with_seed(42)
 
 ```
 
-This function takes all measures known to promote reproducible results from Keras sessions, however it's possible that various individual features or libraries used by the backend escape its effects. If you encounter non-reproducible results please investigate the possible sources of the problem. The source code for `use_session_with_seed()` is here: https://github.com/rstudio/tensorflow/blob/master/R/seed.R Contributions via pull request are very welcome!
+This function takes all measures known to promote reproducible results from Keras sessions, however it's possible that various individual features or libraries used by the backend escape its effects. If you encounter non-reproducible results please investigate the possible sources of the problem. The source code for `use_session_with_seed()` is here: https://github.com/rstudio/tensorflow/blob/master/R/seed.R. Contributions via pull request are very welcome!
 
-Please note again that `use_session_with_seed()` disables GPU computations and CPU parallelization by default (as both can lead to non-deterministic computations) so should generally not be used when model training time is paramount.
+Please note again that `use_session_with_seed()` disables GPU computations and CPU parallelization by default (as both can lead to non-deterministic computations) so should generally not be used when model training time is paramount. You can re-enable GPU computations and/or CPU parallelism using the `disable_gpu` and `disable_parallel_cpu` arguments. For example:
+
+```{r}
+library(keras)
+use_session_with_seed(42, disable_gpu = FALSE, disable_parallel_cpu = FALSE)
+```
+
 
 ## Where is the Keras configuration filed stored?
 
