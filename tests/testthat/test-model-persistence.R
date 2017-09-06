@@ -66,7 +66,8 @@ test_succeeds("callback output is redirected to run_dir", {
   run <- tfruns::training_run("train.R")
   run_dir <- run$run_dir
   expect_false(file_test("-d", "tflogs"))
-  expect_true(file_test("-d", file.path(run_dir, "tflogs")))
+  if (is_backend("tensorflow"))
+    expect_true(file_test("-d", file.path(run_dir, "tflogs")))
   expect_false(file.exists("cbk_checkpoint.h5"))
   expect_true(file.exists(file.path(run_dir, "cbk_checkpoint.h5")))
   expect_false(file.exists("cbk_history.csv"))
