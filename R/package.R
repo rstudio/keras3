@@ -56,6 +56,10 @@ keras <- NULL
         stop(e, call. = FALSE)
     }
   ))
+  
+  # tensorflow use_session hooks
+  setHook("tensorflow.on_before_use_session", tensorflow_on_before_use_session)
+  setHook("tensorflow.on_use_session", tensorflow_on_use_session)
 }
 
 resolve_implementation_module <- function() {

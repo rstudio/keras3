@@ -9,6 +9,8 @@
 \alias{reexports}
 \alias{use_condaenv}
 \alias{reexports}
+\alias{use_session_with_seed}
+\alias{reexports}
 \alias{tensorboard}
 \alias{reexports}
 \alias{flags}
@@ -31,7 +33,7 @@ below to see their documentation.
 \describe{
   \item{reticulate}{\code{\link[reticulate]{use_python}}, \code{\link[reticulate]{use_virtualenv}}, \code{\link[reticulate]{use_condaenv}}}
 
-  \item{tensorflow}{\code{\link[tensorflow]{tensorboard}}}
+  \item{tensorflow}{\code{\link[tensorflow]{use_session_with_seed}}, \code{\link[tensorflow]{tensorboard}}}
 
   \item{tfruns}{\code{\link[tfruns]{flags}}, \code{\link[tfruns]{flag_numeric}}, \code{\link[tfruns]{flag_integer}}, \code{\link[tfruns]{flag_string}}, \code{\link[tfruns]{flag_boolean}}, \code{\link[tfruns]{run_dir}}}
 }}

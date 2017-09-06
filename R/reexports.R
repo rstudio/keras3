@@ -23,6 +23,10 @@ reticulate::use_virtualenv
 #' @export
 reticulate::use_condaenv
 
+#' @importFrom tensorflow use_session_with_seed
+#' @export
+tensorflow::use_session_with_seed
+
 #' @importFrom tensorflow tensorboard
 #' @export
 tensorflow::tensorboard
