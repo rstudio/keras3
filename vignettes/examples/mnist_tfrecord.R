@@ -138,10 +138,9 @@ K$clear_session()
 
 # Second Session to test loading trained model without tensors
 x_test <- data$validation$images
-np <- import("numpy")
-x_test <- np$reshape(x_test, c(nrow(x_test), 28L, 28L, 1L))
+x_test <- keras_array(x_test, dim = c(nrow(x_test), 28, 28, 1))
 y_test <- data$validation$labels
-x_test_inp <- layer_input(shape = dim(x_test)[-1])
+x_test_inp <- layer_input(shape = c(28, 28, 1))
 test_out <- cnn_layers(x_test_inp)
 test_model <- keras_model(inputs = x_test_inp, outputs = test_out)
 test_model %>% load_model_weights_hdf5('saved_wt.h5')

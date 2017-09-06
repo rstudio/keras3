@@ -284,8 +284,8 @@ reference:
     contents:
       - plot.keras_training_history
       - to_categorical
-      - to_numpy_array
       - normalize
+      - keras_array
       - hdf5_matrix
       - get_file
       - backend

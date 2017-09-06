@@ -273,9 +273,9 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
   )
   
   if (!missing(x))
-    args$x <- to_numpy_array(x)
+    args$x <- keras_array(x)
   if (!missing(y))
-    args$y <- to_numpy_array(y)
+    args$y <- keras_array(y)
   
   if (keras_version() >= "2.0.7") {
     args$steps_per_epoch <- steps_per_epoch
@@ -315,8 +315,8 @@ evaluate <- function(object, x, y, batch_size = NULL, verbose=1, sample_weight =
   
   # args
   args <- list(
-    x = to_numpy_array(x),
-    y = to_numpy_array(y),
+    x = keras_array(x),
+    y = keras_array(y),
     batch_size = as_nullable_integer(batch_size),
     verbose = as.integer(verbose),
     sample_weight = sample_weight
@@ -366,7 +366,7 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
   
   # args
   args <- list(
-    x = to_numpy_array(x), 
+    x = keras_array(x), 
     batch_size = as_nullable_integer(batch_size),
     verbose = as.integer(verbose)
   )
@@ -391,7 +391,7 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
 #' @export
 predict_proba <- function(object, x, batch_size = 32, verbose = 0) {
   object$predict_proba(
-    x = to_numpy_array(x),
+    x = keras_array(x),
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose)
   )
@@ -401,7 +401,7 @@ predict_proba <- function(object, x, batch_size = 32, verbose = 0) {
 #' @export
 predict_classes <- function(object, x, batch_size = 32, verbose = 0) {
   object$predict_classes(
-    x = to_numpy_array(x),
+    x = keras_array(x),
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose)
   )
@@ -421,7 +421,7 @@ predict_classes <- function(object, x, batch_size = 32, verbose = 0) {
 #' @export
 predict_on_batch <- function(object, x) {
   object$predict_on_batch(
-    x = to_numpy_array(x)
+    x = keras_array(x)
   )
 }
 
@@ -445,8 +445,8 @@ predict_on_batch <- function(object, x) {
 #' @export
 train_on_batch <- function(object, x, y, class_weight = NULL, sample_weight = NULL) {
   object$train_on_batch(
-    x = to_numpy_array(x),
-    y = to_numpy_array(y),
+    x = keras_array(x),
+    y = keras_array(y),
     class_weight = as_class_weight(class_weight),
     sample_weight = sample_weight
   )
@@ -456,8 +456,8 @@ train_on_batch <- function(object, x, y, class_weight = NULL, sample_weight = NU
 #' @export
 test_on_batch <- function(object, x, y, sample_weight = NULL) {
   object$test_on_batch(
-    x = to_numpy_array(x),
-    y = to_numpy_array(y),
+    x = keras_array(x),
+    y = keras_array(y),
     sample_weight = sample_weight
   )
 }
@@ -481,7 +481,7 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'      - (inputs, targets)
 #'      - (inputs, targets, sample_weights)
 #'      
-#'   Note that the generator should call the [to_numpy_array()] function on its
+#'   Note that the generator should call the [keras_array()] function on its
 #'   results prior to returning them (this ensures that arrays are provided in 
 #'   'C' order and using the default floating point type for the backend.)
 #'      

@@ -11,6 +11,9 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Return R training history object from `fit_generator()`
 
+- Rename `to_numpy_array()` function to `keras_array()` reflecting automatic use
+  of Keras default backend float type and "C" ordering.
+
 - Better support for training models from data tensors in TensorFlow (e.g. Datasets, TFRecords). Add a related example script.
 
 - Add `clone_model()` function, enabling to construct a new model, given an existing model to use as a template. Works even in a TensorFlow graph different from that of the original model.

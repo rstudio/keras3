@@ -109,27 +109,32 @@ normalize <- function(x, axis = -1, order = 2) {
 }
 
 
-#' Convert to NumPy Array
+#' Keras array object
 #'
 #' Convert an object to a NumPy array which has the optimal in-memory layout and
 #' floating point data type for the current Keras backend.
+#' 
+#' Keras does frequent row-oriented access to arrays (for shuffling and drawing
+#' batches) so the order of arrays created by this function is always row-oriented
+#' ("C" as opposed to "Fortran" ordering, which is the default for R arrays).
+#' 
+#' If the passed array is already a NumPy array with the desired `dtype` and
+#' "C" order then it is returned unmodified (no additional copies are made). 
 #'
 #' @param x Object or list of objects to convert
 #' @param dtype NumPy data type (e.g. float32, float64). If this is unspecified
 #'   then R doubles will be converted to the default floating point type for the
 #'   current Keras backend.
-#' @param order In-memory order ('C' or 'F'). Defaults to 'C', which is the
-#'   optimal order in nearly every case for Keras backends.
 #'
-#' @return NumPy array with the specified type and order (or list of NumPy
-#'   arrays if a list was passed for `x`).
+#' @return NumPy array with the specified type (or list of NumPy arrays if a
+#'   list was passed for `x`).
 #'
 #' @export
-to_numpy_array <- function(x, dtype = NULL, order = 'C') {
+keras_array <- function(x, dim = dim(data), dtype = NULL) {
   
   # recurse for lists
   if (is.list(x))
-    return(lapply(x, to_numpy_array))
+    return(lapply(x, keras_array))
   
   # convert to numpy
   if (!inherits(x, "numpy.ndarray")) {
@@ -151,9 +156,15 @@ to_numpy_array <- function(x, dtype = NULL, order = 'C') {
   if (is.null(dtype))
     dtype <- x$dtype
   
+  # reshape if necessary
+  if (!missing(dim)) {
+    np <- import("numpy", convert = FALSE)
+    x <- np$reshape(x, as.integer(dim), order = "C")
+  }
+  
   # ensure we use C column ordering (won't create a new array if the array
   # is already using C ordering)
-  x$astype(dtype = dtype, order = order, copy = FALSE)
+  x$astype(dtype = dtype, order = "C", copy = FALSE)
 }
 
 

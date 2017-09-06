@@ -89,9 +89,9 @@ test_succeeds("R function can be used as custom generator", {
       gc() # should blow up R if we are ever called on a background thread
       rows <- sample(1:nrow(X_data), batch_size, replace = TRUE)
       if (!is.null(Y_data))
-        to_numpy_array(list(X_data[rows,], Y_data[rows,]))
+        keras_array(list(X_data[rows,], Y_data[rows,]))
       else
-        to_numpy_array(list(X_data[rows,]))
+        keras_array(list(X_data[rows,]))
     }
   }
   
