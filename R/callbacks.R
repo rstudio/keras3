@@ -423,32 +423,10 @@ normalize_callbacks <- function(view_metrics, callbacks) {
   have_tensorboard_callback <- FALSE
   callbacks <- lapply(callbacks, function(callback) {
     
-    # manipulate some callback file paths when tfruns is active
-    if (tfruns::is_run_active()) {
+    # track whether we have a TensorBoard callback
+    if (inherits(callback, "keras.callbacks.TensorBoard"))
+      have_tensorboard_callback <<- TRUE
     
-      # TensorBoard
-      if (inherits(callback, "keras.callbacks.TensorBoard")) {
-        
-        # track for auto-add below
-        have_tensorboard_callback <<- TRUE
-        
-        # provide log_dir if it's not already the run_dir
-        if (!identical(callback$log_dir, tfruns::run_dir())) {
-          callback$log_dir <- run_dir_path(callback$log_dir, default = callback$log_dir)  
-        }
-      }
-      
-      # Checkpointing
-      else if (inherits(callback, "keras.callbacks.ModelCheckpoint")) {
-        callback$filepath <- run_dir_path(callback$filepath, default = callback$file_path)
-      }
-      
-      # CSV logging
-      else if (inherits(callback, "keras.callbacks.CSVLogger")) {
-        callback$filename <- run_dir_path(callback$filename, default = callback$filename)
-      }
-    }
-  
     if (inherits(callback, "KerasCallback")) {
       # create a python callback to map to our R callback
       tools$callback$RCallback(

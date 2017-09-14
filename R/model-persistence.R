@@ -39,7 +39,6 @@ save_model_hdf5 <- function(object, filepath, overwrite = TRUE, include_optimize
                             filepath = filepath, 
                             overwrite = overwrite,
                             include_optimizer = include_optimizer)
-    mirror_to_run_dir(filepath)
     invisible(TRUE) 
   } else {
     invisible(FALSE)
@@ -103,7 +102,6 @@ save_model_weights_hdf5 <- function(object, filepath, overwrite = TRUE) {
   filepath <- normalize_path(filepath)
   if (confirm_overwrite(filepath, overwrite)) {
     object$save_weights(filepath = filepath, overwrite = overwrite)
-    mirror_to_run_dir(filepath)
     invisible(TRUE)
   } else {
     invisible(FALSE)
@@ -221,48 +219,5 @@ unserialize_model <- function(model, custom_objects = NULL, compile = TRUE) {
   load_model_hdf5(tmp, custom_objects = custom_objects, compile = compile)
 }
 
-
-# utility function to mirror saved models/weights into the run_dir
-# whenever a training_run is active
-mirror_to_run_dir <- function(filepath) {
-  mirror_path <- run_dir_path(filepath)
-  if (!is.null(mirror_path))
-    file.copy(filepath, mirror_path, overwrite = TRUE)
-}
-
-run_dir_path <- function(filepath, default = NULL) {
-  
-  if (tfruns::is_run_active() && is_working_dir_path(filepath)) {
-    
-    # create the working dir path
-    run_dir_path <- file.path(run_dir(), filepath)
-    
-    # create directory if needed
-    target_dir <- dirname(run_dir_path)
-    if (!utils::file_test("-d", target_dir))
-      dir.create(target_dir, recursive = TRUE)
-    
-    # return the path
-    run_dir_path
-    
-  } else {
-    default
-  }
-  
-}
-
-
-is_working_dir_path <- function(path) {
-  if (regexpr("^~", path) != -1L)
-    FALSE
-  else if (regexpr("^.:(/|\\\\)", path) != -1L)
-    FALSE
-  else if (regexpr("^(/|\\\\)", path) != -1L)
-    FALSE
-  else if (regexpr("^\\.\\.", path) != -1L)
-    FALSE
-  else 
-    TRUE
-}
 
 
