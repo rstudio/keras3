@@ -139,6 +139,9 @@
 <ul>
 <li><p>Add <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/use_session_with_seed">use_session_with_seed()</a></code> function that establishes a random seed for the Keras session. Note that this should not be used when training time is paramount, as it disables GPU computation and CPU parallelism by default for more deterministic computations.</p></li>
 <li><p>Fix for plotting training history with early stopping callback (thanks to @JamesAllingham).</p></li>
+<li><p>Return R training history object from <code><a href="../reference/fit_generator.html">fit_generator()</a></code></p></li>
+<li><p>Rename <code>to_numpy_array()</code> function to <code><a href="../reference/keras_array.html">keras_array()</a></code> reflecting automatic use of Keras default backend float type and “C” ordering.</p></li>
+<li><p>Add standard layer arguments (e.g. <code>name</code>, <code>trainable</code>, etc.) to merge layers</p></li>
 <li><p>Better support for training models from data tensors in TensorFlow (e.g. Datasets, TFRecords). Add a related example script.</p></li>
 <li><p>Add <code><a href="../reference/clone_model.html">clone_model()</a></code> function, enabling to construct a new model, given an existing model to use as a template. Works even in a TensorFlow graph different from that of the original model.</p></li>
 <li><p>Add <code>target_tensors</code> argument in <code><a href="../reference/compile.html">compile()</a></code>, enabling to use custom tensors or placeholders as model targets.</p></li>
@@ -158,7 +161,7 @@
 <li><p><code><a href="../reference/serialize_model.html">serialize_model()</a></code> and <code><a href="../reference/serialize_model.html">unserialize_model()</a></code> functions for saving Keras models as ‘raw’ R objects.</p></li>
 <li><p>Automatically convert 64-bit R floats to backend default float type</p></li>
 <li><p>Ensure that arrays passed to generator functions are normalized to C-order</p></li>
-<li><p><code><a href="../reference/to_numpy_array.html">to_numpy_array()</a></code> utility function for custom generators (enables custom generators to yield C-ordered arrays of the correct float type)</p></li>
+<li><p><code>to_numpy_array()</code> utility function for custom generators (enables custom generators to yield C-ordered arrays of the correct float type)</p></li>
 <li><p>Added <code>batch_size</code> and <code>write_grads</code> arguments to <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code></p></li>
 <li><p>Added <code>return_state</code> argument to recurrent layers.</p></li>
 <li><p>Don’t re-export <code>install_tensorflow()</code> and <code>tf_config()</code> from tensorflow package.</p></li>
