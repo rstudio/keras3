@@ -288,6 +288,9 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
   # convert to a keras_training history object
   history <- to_keras_training_history(history)
   
+  # write metadata contained in history
+  write_history_metadata(history)
+  
   # return the history invisibly
   invisible(history)
 }
@@ -538,6 +541,9 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
   # convert to a keras_training history object
   history <- to_keras_training_history(history)
   
+  # write metadata from history
+  write_history_metadata(history)
+  
   # return the history invisibly
   invisible(history)
 }
@@ -728,6 +734,12 @@ resolve_view_metrics <- function(verbose, epochs, metrics) {
   nzchar(Sys.getenv("RSTUDIO"))       # running under RStudio
 }
 
+
+write_history_metadata <- function(history) {
+  properties <- list()
+  properties$validation_samples <- history$params$validation_samples
+  tfruns::write_run_metadata("properties", properties)
+}
 
 
 as_class_weight <- function(class_weight) {
