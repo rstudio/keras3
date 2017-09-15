@@ -3,7 +3,7 @@
 ^man-roxygen/
 ^resources/
 ^.*\.hdf5$
-^README.R?md$
+^README\.R?md$
 ^docs$
 ^website$
 ^pkgdown$
@@ -12,19 +12,20 @@
 ^issues$
 ^external$
 ^vignettes/examples$
-^_pkgdown.yml$
-^index.Rmd$
-^index.html$
+^_pkgdown\.yml$
+^index\.Rmd$
+^index\.html$
 ^tests/testthat/runs$
 ^tests/testthat/tb_logs$
+^tests/testthat/tflogs$
 ^tests/testthat/MNIST-data$
-^tests/testthat/checkpoint.h5
-^tests/testthat/training.csv
-^tests/testthat/model.h5
+^tests/testthat/model\.h5
+^tests/testthat/.*checkpoint\.h5
+^tests/testthat/.*\.csv
 ^tests/testthat/weights$
 ^.*\.pyc$
 ^.*__pycache__$
 ^_pkgdown\.yml$
-^.travis.yml$
+^.travis\.yml$
 ^Jenkinsfile$
 

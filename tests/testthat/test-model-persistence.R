@@ -55,5 +55,28 @@ test_succeeds("model can be saved and loaded from R 'raw' object", {
 
 })
 
+test_succeeds("saved models/weights are mirrored in the run_dir", {
+  
+  if (packageVersion("tfruns") < "0.9.1.9002")
+    skip("required version of tfruns not available")
+  
+  run <- tfruns::training_run("train.R")
+  run_dir <- run$run_dir
+  expect_true(file.exists(file.path(run_dir, "model.h5")))
+  expect_true(file.exists(file.path(run_dir, "weights", "weights.h5")))
+})
+
+test_succeeds("callback output is redirected to run_dir", {
+  
+  if (packageVersion("tfruns") < "0.9.1.9002")
+    skip("required version of tfruns not available")
+  
+  run <- tfruns::training_run("train.R")
+  run_dir <- run$run_dir
+  if (is_backend("tensorflow"))
+    expect_true(file_test("-d", file.path(run_dir, "tflogs")))
+  expect_true(file.exists(file.path(run_dir, "cbk_checkpoint.h5")))
+  expect_true(file.exists(file.path(run_dir, "cbk_history.csv")))
+})
 
 
