@@ -25,7 +25,6 @@
 ^tests/testthat/weights$
 ^.*\.pyc$
 ^.*__pycache__$
-^_pkgdown\.yml$
 ^.travis\.yml$
 ^Jenkinsfile$
 
