@@ -198,7 +198,7 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
   # establish the log_dir
   if (is.null(log_dir)) {
     if (tfruns::is_run_active())
-      log_dir <- tfruns::run_dir()
+      log_dir <- file.path(tfruns::run_dir(), "logs")
     else
       log_dir <- "logs"
   }
