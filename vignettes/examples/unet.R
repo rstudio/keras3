@@ -4,6 +4,7 @@
 # and working with images using magick package. 
 # parallel + doParallel + foreach allows to speed up the code.
 # You can download the data from https://www.kaggle.com/c/carvana-image-masking-challenge
+
 library(keras)
 library(magick)
 library(abind)
@@ -29,7 +30,7 @@ train_samples <- 5088
 train_index <- sample(1:train_samples, round(train_samples * 0.8)) # 80%
 val_index <- c(1:train_samples)[-train_index]
 
-images_dir <- "input/train/"
+images_dir <- "input/train/" 
 masks_dir <- "input/train_masks/"
 
 
@@ -325,10 +326,10 @@ train_generator <- function(images_dir,
                              pattern = ".jpg",
                              full.names = TRUE)[samples_index]  # for next epoch
     masks_iter <- list.files(masks_dir, 
-                             pattern = ".png",
+                             pattern = ".gif",
                              full.names = TRUE)[samples_index] # for current epoch
     masks_all <- list.files(masks_dir, 
-                            pattern = ".png",
+                            pattern = ".gif",
                             full.names = TRUE)[samples_index] # for next epoch
     
     function() {
@@ -380,10 +381,10 @@ val_generator <- function(images_dir,
                              pattern = ".jpg",
                              full.names = TRUE)[samples_index]  # for next epoch
     masks_iter <- list.files(masks_dir, 
-                             pattern = ".png",
+                             pattern = ".gif",
                              full.names = TRUE)[samples_index] # for current epoch
     masks_all <- list.files(masks_dir, 
-                            pattern = ".png",
+                            pattern = ".gif",
                             full.names = TRUE)[samples_index] # for next epoch
     
     function() {
