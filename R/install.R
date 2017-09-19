@@ -97,10 +97,11 @@
 #' @importFrom reticulate py_available conda_binary
 #' 
 #' @export
-install_keras <- function(method = c("virtualenv", "conda"), 
+install_keras <- function(method = c("auto", "virtualenv", "conda"), 
                           conda = "auto",
                           tensorflow = "default",
                           extra_packages = NULL) {
+  
   # verify method
   method <- match.arg(method)
   
@@ -130,61 +131,14 @@ install_keras <- function(method = c("virtualenv", "conda"),
   # extra packages
   extra_packages <- c("keras", extra_packages)
   
-  # if this is a conda install then install the extra packages separately
-  # after the main installation (this is because we need to use a fork of
-  # conda_install (conda_install_packages below) which doesn't pass the 
-  # --ignore-installed flag to pip
-  conda_packages <- NULL
-  if (identical(method, "conda")) {
-    conda_packages <- extra_packages
-    extra_packages <- NULL
-  }
-  
   # perform the install
   install_tensorflow(method = method,
                      conda = conda,
                      version = tensorflow,
                      extra_packages = extra_packages)
- 
-  # additional conda pakcages
-  if (!is.null(conda_packages))
-    conda_install_packages(conda_packages, conda = conda)
-  
+
   # print success and return
   cat("\nInstallation of Keras complete.\n\n")
-  invisible(NULL)
-}
-
-
-# this is a clone of reticulate::conda_install which doesn't pass the 
-# --ignore-installed flag (this was causing pip to try to re-install
-# scipy from source rather than use the binary version already available
-# via conda)
-conda_install_packages <- function(packages, conda = "auto") {
-  
-  # resolve conda binary
-  conda <- reticulate::conda_binary(conda)
-  
-  # always use 'r-tensorflow' environment
-  envname <- "r-tensorflow"
-  
-  # use pip package manager
-  condaenv_bin <- function(bin) path.expand(file.path(dirname(conda), bin))
-  cmd <- sprintf("%s%s %s && pip install --upgrade %s%s",
-                 ifelse(is_windows(), "", ifelse(is_osx(), "source ", "/bin/bash -c \"source ")),
-                 shQuote(path.expand(condaenv_bin("activate"))),
-                 envname,
-                 paste(shQuote(packages), collapse = " "),
-                 ifelse(is_windows(), "", ifelse(is_osx(), "", "\"")))
-  result <- system(cmd)
-    
-  
-  # check for errors
-  if (result != 0L) {
-    stop("Error ", result, " occurred installing packages into conda environment ", 
-         envname, call. = FALSE)
-  }
-  
   invisible(NULL)
 }
 
