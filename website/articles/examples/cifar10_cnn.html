@@ -116,7 +116,7 @@
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/cifar10_cnn.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/cifar10_cnn.R</a></p>
 </div>
 <p>Train a simple deep CNN on the CIFAR10 small images dataset.</p>
-<p>It gets down to 0.65 test logloss in 25 epochs, and down to 0.55 after 50 epochs. (it’s still underfitting at that point, though).</p>
+<p>It gets down to 0.65 test logloss in 25 epochs, and down to 0.55 after 50 epochs, though it is still underfitting at that point.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
 <span class="co"># Parameters --------------------------------------------------------------</span>
@@ -128,40 +128,56 @@ data_augmentation &lt;-<span class="st"> </span><span class="ot">TRUE</span>
 
 <span class="co"># Data Preparation --------------------------------------------------------</span>
 
-<span class="co"># see ?dataset_cifar10 for more info</span>
+<span class="co"># See ?dataset_cifar10 for more info</span>
 cifar10 &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dataset_cifar10.html">dataset_cifar10</a></span>()
 
+<span class="co"># Feature scale RGB values in test and train inputs  </span>
 x_train &lt;-<span class="st"> </span>cifar10<span class="op">$</span>train<span class="op">$</span>x<span class="op">/</span><span class="dv">255</span>
 x_test &lt;-<span class="st"> </span>cifar10<span class="op">$</span>test<span class="op">$</span>x<span class="op">/</span><span class="dv">255</span>
 y_train &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(cifar10<span class="op">$</span>train<span class="op">$</span>y, <span class="dt">num_classes =</span> <span class="dv">10</span>)
 y_test &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(cifar10<span class="op">$</span>test<span class="op">$</span>y, <span class="dt">num_classes =</span> <span class="dv">10</span>)
 
-<span class="co"># Defining the model ------------------------------------------------------</span>
 
+<span class="co"># Defining Model ----------------------------------------------------------</span>
+
+<span class="co"># Initialize sequential model</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
 
 model <span class="op">%&gt;%</span>
+<span class="st"> </span>
+<span class="st">  </span><span class="co"># Start with hidden 2D convolutional layer being fed 32x32 pixel images</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(
     <span class="dt">filter =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>), <span class="dt">padding =</span> <span class="st">"same"</span>, 
     <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">32</span>, <span class="dv">32</span>, <span class="dv">3</span>)
   ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="op">%&gt;%</span>
+
+<span class="st">  </span><span class="co"># Second hidden layer</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filter =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="op">%&gt;%</span>
+
+<span class="st">  </span><span class="co"># Use max pooling</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="fl">0.25</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>
+<span class="st">  </span><span class="co"># 2 additional hidden 2D convolutional layers</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filter =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>), <span class="dt">padding =</span> <span class="st">"same"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filter =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="op">%&gt;%</span>
+
+<span class="st">  </span><span class="co"># Use max pooling once more</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="fl">0.25</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>
+<span class="st">  </span><span class="co"># Flatten max filtered output into feature vector </span>
+<span class="st">  </span><span class="co"># and feed into dense layer</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_flatten.html">layer_flatten</a></span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dv">512</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+
+<span class="st">  </span><span class="co"># Outputs from dense layer are projected onto 10 unit output layer</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dv">10</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"softmax"</span>)
 

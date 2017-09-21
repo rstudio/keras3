@@ -31,14 +31,12 @@ library(stringi)
 
 # Function Definitions ----------------------------------------------------
 
-# Creates the char table
-# Just sorts them..
+# Creates the char table and sorts them.
 learn_encoding <- function(chars){
   sort(chars)
 }
 
-# Encode to a character sequence to a one hot
-# integer representation. 
+# Encode from a character sequence to a one hot integer representation.
 # > encode("22+22", char_table)
 # [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]
 # 2    0    0    0    0    1    0    0    0    0     0     0     0
@@ -72,7 +70,7 @@ generate_data <- function(size, digits, invert = TRUE){
   x <- sample(1:max_num, size = size, replace = TRUE)
   y <- sample(1:max_num, size = size, replace = TRUE)
   
-  # make left side always samalller then right side
+  # make left side always smaller than right side
   left_side <- ifelse(x <= y, x, y)
   right_side <- ifelse(x >= y, x, y)
   
@@ -97,15 +95,15 @@ generate_data <- function(size, digits, invert = TRUE){
 
 # Parameters --------------------------------------------------------------
 
-# Parameters for the model and dataset.
+# Parameters for the model and dataset
 TRAINING_SIZE <- 50000
 DIGITS <- 2
 
 # Maximum length of input is 'int + int' (e.g., '345+678'). Maximum length of
-# int is DIGITS.
+# int is DIGITS
 MAXLEN <- DIGITS + 1 + DIGITS
 
-# All the numbers, plus sign and space for padding.
+# All the numbers, plus sign and space for padding
 charset <- c(0:9, "+", " ")
 char_table <- learn_encoding(charset)
 
@@ -113,11 +111,9 @@ char_table <- learn_encoding(charset)
 # Data Preparation --------------------------------------------------------
 
 # Generate Data
-
 examples <- generate_data(size = TRAINING_SIZE, digits = DIGITS)
 
 # Vectorization
-
 x <- array(0, dim = c(length(examples$questions), MAXLEN, length(char_table)))
 y <- array(0, dim = c(length(examples$questions), DIGITS + 1, length(char_table)))
 
@@ -127,14 +123,12 @@ for(i in 1:TRAINING_SIZE){
 }
 
 # Shuffle
-
 indices <- sample(1:TRAINING_SIZE, size = TRAINING_SIZE)
 x <- x[indices,,]
 y <- y[indices,,]
 
 
-# Explicitly set apart 10% for validation data that we never train over.
-
+# Explicitly set apart 10% for validation data that we never train over
 split_at <- trunc(TRAINING_SIZE/10)
 x_val <- x[1:split_at,,]
 y_val <- y[1:split_at,,]
@@ -202,7 +196,7 @@ model %>% fit(
   validation_data = list(x_val, y_val)
 )
 
-# Predict for a new obs
+# Predict for a new observation
 new_obs <- encode("55+22", char_table) %>%
   array(dim = c(1,5,12))
 result <- predict(model, new_obs)
