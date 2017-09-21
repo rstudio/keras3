@@ -20,7 +20,6 @@ library(purrr)
 library(tibble)
 library(dplyr)
 
-
 # Function definition -----------------------------------------------------
 
 tokenize_words <- function(x){
@@ -88,7 +87,6 @@ vectorize_stories <- function(data, vocab, story_maxlen, query_maxlen){
     as.integer(x == data$answer)
   })
   
-  
   list(
     questions = pad_sequences(questions, maxlen = query_maxlen),
     stories   = pad_sequences(stories, maxlen = story_maxlen),
@@ -110,6 +108,7 @@ challenge_type <- "single_supporting_fact_10k"
 challenge <- challenges[[challenge_type]]
 max_length <- 999999
 
+
 # Data Preparation --------------------------------------------------------
 
 # Download data
@@ -129,7 +128,7 @@ test <- read_lines(sprintf(challenge, path, "test")) %>%
   parse_stories() %>%
   filter(map_int(story, ~length(.x)) <= max_length)
 
-# extract the vocabulary
+# Extract the vocabulary
 all_data <- bind_rows(train, test)
 vocab <- c(unlist(all_data$question), all_data$answer, 
            unlist(all_data$story)) %>%
@@ -141,32 +140,33 @@ vocab_size <- length(vocab) + 1
 story_maxlen <- map_int(all_data$story, ~length(.x)) %>% max()
 query_maxlen <- map_int(all_data$question, ~length(.x)) %>% max()
 
-# vectorized versions of training and test sets
+# Vectorized versions of training and test sets
 train_vec <- vectorize_stories(train, vocab, story_maxlen, query_maxlen)
 test_vec <- vectorize_stories(test, vocab, story_maxlen, query_maxlen)
 
+
 # Defining the model ------------------------------------------------------
 
-# placeholders
+# Placeholders
 sequence <- layer_input(shape = c(story_maxlen))
 question <- layer_input(shape = c(query_maxlen))
 
-# encoders
-# embed the input sequence into a sequence of vectors
+# Encoders
+# Embed the input sequence into a sequence of vectors
 sequence_encoder_m <- keras_model_sequential()
 sequence_encoder_m %>%
   layer_embedding(input_dim = vocab_size, output_dim = 64) %>%
   layer_dropout(rate = 0.3)
 # output: (samples, story_maxlen, embedding_dim)
 
-# embed the input into a sequence of vectors of size query_maxlen
+# Embed the input into a sequence of vectors of size query_maxlen
 sequence_encoder_c <- keras_model_sequential()
 sequence_encoder_c %>%
   layer_embedding(input_dim = vocab_size, output = query_maxlen) %>%
   layer_dropout(rate = 0.3)
 # output: (samples, story_maxlen, query_maxlen)
 
-# embed the question into a sequence of vectors
+# Embed the question into a sequence of vectors
 question_encoder <- keras_model_sequential()
 question_encoder %>%
   layer_embedding(input_dim = vocab_size, output_dim = 64, 
@@ -174,37 +174,37 @@ question_encoder %>%
   layer_dropout(rate = 0.3)
 # output: (samples, query_maxlen, embedding_dim)
 
-# encode input sequence and questions (which are indices)
+# Encode input sequence and questions (which are indices)
 # to sequences of dense vectors
 sequence_encoded_m <- sequence_encoder_m(sequence)
 sequence_encoded_c <- sequence_encoder_c(sequence)
 question_encoded <- question_encoder(question)
 
-# compute a 'match' between the first input vector sequence
+# Compute a 'match' between the first input vector sequence
 # and the question vector sequence
 # shape: `(samples, story_maxlen, query_maxlen)`
 match <- list(sequence_encoded_m, question_encoded) %>%
   layer_dot(axes = c(2,2)) %>%
   layer_activation("softmax")
 
-# add the match matrix with the second input vector sequence
+# Add the match matrix with the second input vector sequence
 response <- list(match, sequence_encoded_c) %>%
   layer_add() %>%
   layer_permute(c(2,1))
 
-# concatenate the match matrix with the question vector sequence
+# Concatenate the match matrix with the question vector sequence
 answer <- list(response, question_encoded) %>%
   layer_concatenate() %>%
-  # the original paper uses a matrix multiplication for this reduction step.
-  # we choose to use a RNN instead.
+  # The original paper uses a matrix multiplication for this reduction step.
+  # We choose to use an RNN instead.
   layer_lstm(32) %>%
-  # one regularization layer -- more would probably be needed.
+  # One regularization layer -- more would probably be needed.
   layer_dropout(rate = 0.3) %>%
   layer_dense(vocab_size) %>%
-  # we output a probability distribution over the vocabulary
+  # We output a probability distribution over the vocabulary
   layer_activation("softmax")
 
-# build the final model
+# Build the final model
 model <- keras_model(inputs = list(sequence, question), answer)
 model %>% compile(
   optimizer = "rmsprop",
@@ -222,8 +222,3 @@ model %>% fit(
   epochs = 120,
   validation_data = list(list(test_vec$stories, test_vec$questions), test_vec$answers)
 )
-
-
-
-
-
