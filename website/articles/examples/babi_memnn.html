@@ -129,7 +129,6 @@
 <span class="kw">library</span>(tibble)
 <span class="kw">library</span>(dplyr)
 
-
 <span class="co"># Function definition -----------------------------------------------------</span>
 
 tokenize_words &lt;-<span class="st"> </span><span class="cf">function</span>(x){
@@ -197,7 +196,6 @@ vectorize_stories &lt;-<span class="st"> </span><span class="cf">function</span>
     <span class="kw">as.integer</span>(x <span class="op">==</span><span class="st"> </span>data<span class="op">$</span>answer)
   })
   
-  
   <span class="kw">list</span>(
     <span class="dt">questions =</span> <span class="kw"><a href="../../reference/pad_sequences.html">pad_sequences</a></span>(questions, <span class="dt">maxlen =</span> query_maxlen),
     <span class="dt">stories   =</span> <span class="kw"><a href="../../reference/pad_sequences.html">pad_sequences</a></span>(stories, <span class="dt">maxlen =</span> story_maxlen),
@@ -219,6 +217,7 @@ challenge_type &lt;-<span class="st"> "single_supporting_fact_10k"</span>
 challenge &lt;-<span class="st"> </span>challenges[[challenge_type]]
 max_length &lt;-<span class="st"> </span><span class="dv">999999</span>
 
+
 <span class="co"># Data Preparation --------------------------------------------------------</span>
 
 <span class="co"># Download data</span>
@@ -238,7 +237,7 @@ test &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumen
 <span class="st">  </span><span class="kw">parse_stories</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(story, <span class="op">~</span><span class="kw">length</span>(.x)) <span class="op">&lt;=</span><span class="st"> </span>max_length)
 
-<span class="co"># extract the vocabulary</span>
+<span class="co"># Extract the vocabulary</span>
 all_data &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(train, test)
 vocab &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">unlist</span>(all_data<span class="op">$</span>question), all_data<span class="op">$</span>answer, 
            <span class="kw">unlist</span>(all_data<span class="op">$</span>story)) <span class="op">%&gt;%</span>
@@ -250,32 +249,33 @@ vocab_size &lt;-<span class="st"> </span><span class="kw">length</span>(vocab) <
 story_maxlen &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(all_data<span class="op">$</span>story, <span class="op">~</span><span class="kw">length</span>(.x)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">max</span>()
 query_maxlen &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(all_data<span class="op">$</span>question, <span class="op">~</span><span class="kw">length</span>(.x)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">max</span>()
 
-<span class="co"># vectorized versions of training and test sets</span>
+<span class="co"># Vectorized versions of training and test sets</span>
 train_vec &lt;-<span class="st"> </span><span class="kw">vectorize_stories</span>(train, vocab, story_maxlen, query_maxlen)
 test_vec &lt;-<span class="st"> </span><span class="kw">vectorize_stories</span>(test, vocab, story_maxlen, query_maxlen)
 
+
 <span class="co"># Defining the model ------------------------------------------------------</span>
 
-<span class="co"># placeholders</span>
+<span class="co"># Placeholders</span>
 sequence &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(story_maxlen))
 question &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(query_maxlen))
 
-<span class="co"># encoders</span>
-<span class="co"># embed the input sequence into a sequence of vectors</span>
+<span class="co"># Encoders</span>
+<span class="co"># Embed the input sequence into a sequence of vectors</span>
 sequence_encoder_m &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
 sequence_encoder_m <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_embedding.html">layer_embedding</a></span>(<span class="dt">input_dim =</span> vocab_size, <span class="dt">output_dim =</span> <span class="dv">64</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.3</span>)
 <span class="co"># output: (samples, story_maxlen, embedding_dim)</span>
 
-<span class="co"># embed the input into a sequence of vectors of size query_maxlen</span>
+<span class="co"># Embed the input into a sequence of vectors of size query_maxlen</span>
 sequence_encoder_c &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
 sequence_encoder_c <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_embedding.html">layer_embedding</a></span>(<span class="dt">input_dim =</span> vocab_size, <span class="dt">output =</span> query_maxlen) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.3</span>)
 <span class="co"># output: (samples, story_maxlen, query_maxlen)</span>
 
-<span class="co"># embed the question into a sequence of vectors</span>
+<span class="co"># Embed the question into a sequence of vectors</span>
 question_encoder &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
 question_encoder <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_embedding.html">layer_embedding</a></span>(<span class="dt">input_dim =</span> vocab_size, <span class="dt">output_dim =</span> <span class="dv">64</span>, 
@@ -283,37 +283,37 @@ question_encoder <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.3</span>)
 <span class="co"># output: (samples, query_maxlen, embedding_dim)</span>
 
-<span class="co"># encode input sequence and questions (which are indices)</span>
+<span class="co"># Encode input sequence and questions (which are indices)</span>
 <span class="co"># to sequences of dense vectors</span>
 sequence_encoded_m &lt;-<span class="st"> </span><span class="kw">sequence_encoder_m</span>(sequence)
 sequence_encoded_c &lt;-<span class="st"> </span><span class="kw">sequence_encoder_c</span>(sequence)
 question_encoded &lt;-<span class="st"> </span><span class="kw">question_encoder</span>(question)
 
-<span class="co"># compute a 'match' between the first input vector sequence</span>
+<span class="co"># Compute a 'match' between the first input vector sequence</span>
 <span class="co"># and the question vector sequence</span>
 <span class="co"># shape: `(samples, story_maxlen, query_maxlen)`</span>
 match &lt;-<span class="st"> </span><span class="kw">list</span>(sequence_encoded_m, question_encoded) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dot.html">layer_dot</a></span>(<span class="dt">axes =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"softmax"</span>)
 
-<span class="co"># add the match matrix with the second input vector sequence</span>
+<span class="co"># Add the match matrix with the second input vector sequence</span>
 response &lt;-<span class="st"> </span><span class="kw">list</span>(match, sequence_encoded_c) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_add.html">layer_add</a></span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_permute.html">layer_permute</a></span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))
 
-<span class="co"># concatenate the match matrix with the question vector sequence</span>
+<span class="co"># Concatenate the match matrix with the question vector sequence</span>
 answer &lt;-<span class="st"> </span><span class="kw">list</span>(response, question_encoded) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># the original paper uses a matrix multiplication for this reduction step.</span>
-<span class="st">  </span><span class="co"># we choose to use a RNN instead.</span>
+<span class="st">  </span><span class="co"># The original paper uses a matrix multiplication for this reduction step.</span>
+<span class="st">  </span><span class="co"># We choose to use an RNN instead.</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dv">32</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># one regularization layer -- more would probably be needed.</span>
+<span class="st">  </span><span class="co"># One regularization layer -- more would probably be needed.</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.3</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(vocab_size) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># we output a probability distribution over the vocabulary</span>
+<span class="st">  </span><span class="co"># We output a probability distribution over the vocabulary</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"softmax"</span>)
 
-<span class="co"># build the final model</span>
+<span class="co"># Build the final model</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> <span class="kw">list</span>(sequence, question), answer)
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(
   <span class="dt">optimizer =</span> <span class="st">"rmsprop"</span>,

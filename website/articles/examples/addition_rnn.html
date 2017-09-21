@@ -129,14 +129,12 @@ Output: “596”</p>
 
 <span class="co"># Function Definitions ----------------------------------------------------</span>
 
-<span class="co"># Creates the char table</span>
-<span class="co"># Just sorts them..</span>
+<span class="co"># Creates the char table and sorts them.</span>
 learn_encoding &lt;-<span class="st"> </span><span class="cf">function</span>(chars){
   <span class="kw">sort</span>(chars)
 }
 
-<span class="co"># Encode to a character sequence to a one hot</span>
-<span class="co"># integer representation. </span>
+<span class="co"># Encode from a character sequence to a one hot integer representation.</span>
 <span class="co"># &gt; encode("22+22", char_table)</span>
 <span class="co"># [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]</span>
 <span class="co"># 2    0    0    0    0    1    0    0    0    0     0     0     0</span>
@@ -170,7 +168,7 @@ generate_data &lt;-<span class="st"> </span><span class="cf">function</span>(siz
   x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>max_num, <span class="dt">size =</span> size, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
   y &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>max_num, <span class="dt">size =</span> size, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
   
-  <span class="co"># make left side always samalller then right side</span>
+  <span class="co"># make left side always smaller than right side</span>
   left_side &lt;-<span class="st"> </span><span class="kw">ifelse</span>(x <span class="op">&lt;=</span><span class="st"> </span>y, x, y)
   right_side &lt;-<span class="st"> </span><span class="kw">ifelse</span>(x <span class="op">&gt;=</span><span class="st"> </span>y, x, y)
   
@@ -195,15 +193,15 @@ generate_data &lt;-<span class="st"> </span><span class="cf">function</span>(siz
 
 <span class="co"># Parameters --------------------------------------------------------------</span>
 
-<span class="co"># Parameters for the model and dataset.</span>
+<span class="co"># Parameters for the model and dataset</span>
 TRAINING_SIZE &lt;-<span class="st"> </span><span class="dv">50000</span>
 DIGITS &lt;-<span class="st"> </span><span class="dv">2</span>
 
 <span class="co"># Maximum length of input is 'int + int' (e.g., '345+678'). Maximum length of</span>
-<span class="co"># int is DIGITS.</span>
+<span class="co"># int is DIGITS</span>
 MAXLEN &lt;-<span class="st"> </span>DIGITS <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>DIGITS
 
-<span class="co"># All the numbers, plus sign and space for padding.</span>
+<span class="co"># All the numbers, plus sign and space for padding</span>
 charset &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>, <span class="st">"+"</span>, <span class="st">" "</span>)
 char_table &lt;-<span class="st"> </span><span class="kw">learn_encoding</span>(charset)
 
@@ -211,11 +209,9 @@ char_table &lt;-<span class="st"> </span><span class="kw">learn_encoding</span>(
 <span class="co"># Data Preparation --------------------------------------------------------</span>
 
 <span class="co"># Generate Data</span>
-
 examples &lt;-<span class="st"> </span><span class="kw">generate_data</span>(<span class="dt">size =</span> TRAINING_SIZE, <span class="dt">digits =</span> DIGITS)
 
 <span class="co"># Vectorization</span>
-
 x &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">length</span>(examples<span class="op">$</span>questions), MAXLEN, <span class="kw">length</span>(char_table)))
 y &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">length</span>(examples<span class="op">$</span>questions), DIGITS <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">length</span>(char_table)))
 
@@ -225,14 +221,12 @@ y &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0
 }
 
 <span class="co"># Shuffle</span>
-
 indices &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>TRAINING_SIZE, <span class="dt">size =</span> TRAINING_SIZE)
 x &lt;-<span class="st"> </span>x[indices,,]
 y &lt;-<span class="st"> </span>y[indices,,]
 
 
-<span class="co"># Explicitly set apart 10% for validation data that we never train over.</span>
-
+<span class="co"># Explicitly set apart 10% for validation data that we never train over</span>
 split_at &lt;-<span class="st"> </span><span class="kw">trunc</span>(TRAINING_SIZE<span class="op">/</span><span class="dv">10</span>)
 x_val &lt;-<span class="st"> </span>x[<span class="dv">1</span><span class="op">:</span>split_at,,]
 y_val &lt;-<span class="st"> </span>y[<span class="dv">1</span><span class="op">:</span>split_at,,]
@@ -300,7 +294,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
   <span class="dt">validation_data =</span> <span class="kw">list</span>(x_val, y_val)
 )
 
-<span class="co"># Predict for a new obs</span>
+<span class="co"># Predict for a new observation</span>
 new_obs &lt;-<span class="st"> </span><span class="kw">encode</span>(<span class="st">"55+22"</span>, char_table) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">12</span>))
 result &lt;-<span class="st"> </span><span class="kw">predict</span>(model, new_obs)
