@@ -4,7 +4,8 @@
 \alias{initializer_random_normal}
 \title{Initializer that generates tensors with a normal distribution.}
 \usage{
-initializer_random_normal(mean = 0, stddev = 0.05, seed = NULL)
+initializer_random_normal(mean = 0, stddev = 0.05, seed = sample.int(10^5,
+  1))
 }
 \arguments{
 \item{mean}{Mean of the random values to generate.}

@@ -18,7 +18,7 @@
 #' @family dropout layers   
 #'         
 #' @export
-layer_dropout <- function(object, rate, noise_shape = NULL, seed = NULL, 
+layer_dropout <- function(object, rate, noise_shape = NULL, seed = sample.int(10^5, 1), 
                           batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   create_layer(keras$layers$Dropout, object, list(

@@ -4,7 +4,7 @@
 \alias{initializer_he_uniform}
 \title{He uniform variance scaling initializer.}
 \usage{
-initializer_he_uniform(seed = NULL)
+initializer_he_uniform(seed = sample.int(10^5, 1))
 }
 \arguments{
 \item{seed}{Integer used to seed the random generator.}

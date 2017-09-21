@@ -6,7 +6,7 @@
 \usage{
 skipgrams(sequence, vocabulary_size, window_size = 4, negative_samples = 1,
   shuffle = TRUE, categorical = FALSE, sampling_table = NULL,
-  seed = NULL)
+  seed = sample.int(10^5, 1))
 }
 \arguments{
 \item{sequence}{a word sequence (sentence), encoded as a list of word indices

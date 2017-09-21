@@ -4,7 +4,7 @@
 \alias{initializer_lecun_uniform}
 \title{LeCun uniform initializer.}
 \usage{
-initializer_lecun_uniform(seed = NULL)
+initializer_lecun_uniform(seed = sample.int(10^5, 1))
 }
 \arguments{
 \item{seed}{Integer used to seed the random generator.}

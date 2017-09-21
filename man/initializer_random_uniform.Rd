@@ -4,7 +4,8 @@
 \alias{initializer_random_uniform}
 \title{Initializer that generates tensors with a uniform distribution.}
 \usage{
-initializer_random_uniform(minval = -0.05, maxval = 0.05, seed = NULL)
+initializer_random_uniform(minval = -0.05, maxval = 0.05,
+  seed = sample.int(10^5, 1))
 }
 \arguments{
 \item{minval}{Lower bound of the range of random values to generate.}

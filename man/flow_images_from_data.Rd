@@ -5,8 +5,8 @@
 \title{Generates batches of augmented/normalized data from image data and labels}
 \usage{
 flow_images_from_data(x, y = NULL, generator = image_data_generator(),
-  batch_size = 32, shuffle = TRUE, seed = NULL, save_to_dir = NULL,
-  save_prefix = "", save_format = "png")
+  batch_size = 32, shuffle = TRUE, seed = sample.int(10^5, 1),
+  save_to_dir = NULL, save_prefix = "", save_format = "png")
 }
 \arguments{
 \item{x}{data. Should have rank 4. In case of grayscale data, the channels

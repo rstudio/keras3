@@ -66,7 +66,7 @@ pad_sequences <- function(sequences, maxlen = NULL, dtype = "int32", padding = "
 #'   
 #' @export
 skipgrams <- function(sequence, vocabulary_size, window_size = 4, negative_samples = 1.0, 
-                      shuffle = TRUE, categorical = FALSE, sampling_table = NULL, seed = NULL) {
+                      shuffle = TRUE, categorical = FALSE, sampling_table = NULL, seed = sample.int(10^5, 1)) {
   
   args <- list(
     sequence = as.integer(sequence),
@@ -481,7 +481,7 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
 #' @family image preprocessing
 #' 
 #' @export
-fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL, ...) {
+fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, seed = sample.int(10^5, 1), ...) {
   generator <- object
   history <- generator$fit(
     x = keras_array(x),
@@ -520,7 +520,7 @@ fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, see
 #' @export
 flow_images_from_data <- function(
           x, y = NULL, generator = image_data_generator(), batch_size = 32, 
-          shuffle = TRUE, seed = NULL, 
+          shuffle = TRUE, seed = sample.int(10^5, 1), 
           save_to_dir = NULL, save_prefix = "", save_format = 'png') {
   generator$flow(
     x = keras_array(x),
@@ -574,7 +574,7 @@ flow_images_from_data <- function(
 flow_images_from_directory <- function(
       directory, generator = image_data_generator(), target_size = c(256, 256), color_mode = "rgb",
       classes = NULL, class_mode = "categorical",
-      batch_size = 32, shuffle = TRUE, seed = NULL,
+      batch_size = 32, shuffle = TRUE, seed = sample.int(10^5, 1),
       save_to_dir = NULL, save_prefix = "", save_format = "png",
       follow_links = FALSE) {
   generator$flow_from_directory(

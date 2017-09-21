@@ -4,7 +4,8 @@
 \alias{initializer_truncated_normal}
 \title{Initializer that generates a truncated normal distribution.}
 \usage{
-initializer_truncated_normal(mean = 0, stddev = 0.05, seed = NULL)
+initializer_truncated_normal(mean = 0, stddev = 0.05,
+  seed = sample.int(10^5, 1))
 }
 \arguments{
 \item{mean}{Mean of the random values to generate.}
