@@ -1,11 +1,20 @@
-# This code runs only on Windows because of specific parallel backend. 
-# You can find Linux version here: https://keras.rstudio.com/articles/examples/unet_linux.html
-# unet architecture is based on original Python code 
-# from https://github.com/petrosgk/Kaggle-Carvana-Image-Masking-Challenge. 
-# It shows an example of creating custom architectures in R version of keras 
-# and working with images using magick package. 
-# parallel + doParallel + foreach allows to speed up the code.
-# You can download the data from https://www.kaggle.com/c/carvana-image-masking-challenge
+#' To run this example:
+#' 
+#'  1) Download the train.zip and train_masks.zip files from: 
+#'     https://www.kaggle.com/c/carvana-image-masking-challenge/data
+#' 
+#'  2) Create an "input" directory and extract the zip files into it (after this there
+#'     should be "train" and "train_masks" subdirectories within the "input" directory).
+#'
+
+#` This code runs only on Windows because of specific parallel backend. 
+#` You can find Linux version here: https://keras.rstudio.com/articles/examples/unet_linux.html
+#` unet architecture is based on original Python code 
+#` from https://github.com/petrosgk/Kaggle-Carvana-Image-Masking-Challenge. 
+#` It shows an example of creating custom architectures in R version of keras 
+#` and working with images using magick package. 
+#` parallel + doParallel + foreach allows to speed up the code.
+#` You can download the data from https://www.kaggle.com/c/carvana-image-masking-challenge
 
 library(keras)
 library(magick)
