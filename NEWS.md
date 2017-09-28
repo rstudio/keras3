@@ -1,7 +1,5 @@
 
-## keras 2.0.8 (development)
-
-Install the development version with: `install_github("rstudio/keras")`
+## keras 2.0.8 (CRAN)
 
 - Add `use_session_with_seed()` function that establishes a random seed for the Keras session.
   Note that this should not be used when training time is paramount, as it disables GPU
@@ -31,7 +29,7 @@ Install the development version with: `install_github("rstudio/keras")`
 - Enable stateful RNNs with CNTK.
 
 
-## keras 2.0.6 (CRAN)
+## keras 2.0.6
 
 - `install_keras()` function which installs both TensorFlow and Keras
 
