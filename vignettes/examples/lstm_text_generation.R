@@ -16,18 +16,19 @@ library(stringr)
 library(purrr)
 library(tokenizers)
 
-
 # Parameters --------------------------------------------------------------
 
 maxlen <- 40
 
-# Data preparation --------------------------------------------------------
+# Data Preparation --------------------------------------------------------
 
+# Retrieve text
 path <- get_file(
   'nietzsche.txt', 
   origin='https://s3.amazonaws.com/text-datasets/nietzsche.txt'
   )
 
+# Load, collapse, and tokenize text
 text <- read_lines(path) %>%
   str_to_lower() %>%
   str_c(collapse = "\n") %>%
@@ -41,7 +42,7 @@ chars <- text %>%
 
 print(sprintf("total chars: %d", length(chars)))  
 
-# cut the text in semi-redundant sequences of maxlen characters
+# Cut the text in semi-redundant sequences of maxlen characters
 dataset <- map(
   seq(1, length(text) - maxlen - 1, by = 3), 
   ~list(sentece = text[.x:(.x + maxlen - 1)], next_char = text[.x + maxlen])
@@ -49,7 +50,7 @@ dataset <- map(
 
 dataset <- transpose(dataset)
 
-# vectorization
+# Vectorization
 X <- array(0, dim = c(length(dataset$sentece), maxlen, length(chars)))
 y <- array(0, dim = c(length(dataset$sentece), length(chars)))
 
@@ -63,7 +64,7 @@ for(i in 1:length(dataset$sentece)){
   
 }
 
-# Model definition --------------------------------------------------------
+# Model Definition --------------------------------------------------------
 
 model <- keras_model_sequential()
 
@@ -79,8 +80,7 @@ model %>% compile(
   optimizer = optimizer
 )
 
-
-# Training and results ----------------------------------------------------
+# Training & Results ----------------------------------------------------
 
 sample_mod <- function(preds, temperature = 1){
   preds <- log(preds)/temperature
@@ -131,7 +131,3 @@ for(iteration in 1:60){
     
   }
 }
-
-
-
-
