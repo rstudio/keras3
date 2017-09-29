@@ -27,6 +27,7 @@
 
 # Main Keras module
 keras <- NULL
+tf_keras_impl <- NULL
 
 .onLoad <- function(libname, pkgname) {
   
@@ -40,15 +41,15 @@ keras <- NULL
   
   # delay load keras
   keras <<- import(implementation_module, as = "keras", delay_load = list(
-  
+
     priority = 10,
-    
+
     environment = "r-tensorflow",
-     
+
     on_load = function() {
       check_implementation_version()
     },
-    
+
     on_error = function(e) {
       if (is_tensorflow_implementation())
         stop(tf_config()$error_message, call. = FALSE)
@@ -57,6 +58,20 @@ keras <- NULL
     }
   ))
   
+  if (is_backend("tensorflow")) {
+    if (tf_version() == "1.4") {
+      library(tensorflow)
+      tf_keras_impl <- tf$python$keras$`_impl`$keras
+
+      # Switch to use tf keras models and layers implementation for Estimator conversion
+      keras$models <<- tf_keras_impl$models
+      old_layer_input <- keras$layers$Input
+      keras$layers <<- tf_keras_impl$layers
+      # TODO: this is necessary for now since `Input` in core tf is problematic
+      keras$layers$Input <<- old_layer_input
+    }
+  }
+
   # tensorflow use_session hooks
   setHook("tensorflow.on_before_use_session", tensorflow_on_before_use_session)
   setHook("tensorflow.on_use_session", tensorflow_on_use_session)
