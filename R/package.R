@@ -155,7 +155,6 @@ check_implementation_version <- function() {
   }
 }
 
-
 # Current version of Keras
 keras_version <- function() {
   ver <- keras$`__version__`
@@ -163,5 +162,6 @@ keras_version <- function() {
   package_version(ver)
 }
 
-
-
+is_backend <- function(name) {
+  identical(backend()$backend(), name)
+}
