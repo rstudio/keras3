@@ -16,10 +16,6 @@ test_call_succeeds <- function(call_name, expr, required_version = NULL) {
   test_succeeds(paste(call_name, "call succeeds"), expr, required_version)
 }
 
-is_backend <- function(name) {
-  identical(backend()$backend(), name)
-}
-
 skip_if_cntk <- function() {
   if (is_backend("cntk"))
     skip("Test not run for CNTK backend")
