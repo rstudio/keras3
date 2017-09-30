@@ -29,8 +29,7 @@ Imports:
     magrittr, 
     methods,
     R6,
-    utils,
-    tools
+    utils
 Suggests: 
     ggplot2,
     testthat, 
