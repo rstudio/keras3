@@ -117,16 +117,12 @@
 </div>
 <p>This is an example of using Hierarchical RNN (HRNN) to classify MNIST digits.</p>
 <p>HRNNs can learn across multiple levels of temporal hiearchy over a complex sequence. Usually, the first recurrent layer of an HRNN encodes a sentence (e.g. of word vectors) into a sentence vector. The second recurrent layer then encodes a sequence of such vectors (encoded by the first layer) into a document vector. This document vector is considered to preserve both the word-level and sentence-level structure of the context.</p>
-<p>References:</p>
-<ul>
-<li>
-<a href="https://arxiv.org/abs/1506.01057">A Hierarchical Neural Autoencoder for Paragraphs and Documents</a> Encodes paragraphs and documents with HRNN. Results have shown that HRNN outperforms standard RNNs and may play some role in more sophisticated generation tasks like summarization or question answering.</li>
-<li>
-<a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7298714">Hierarchical recurrent neural network for skeleton based action recognition</a> Achieved state-of-the-art results on skeleton based action recognition with 3 levels of bidirectional HRNN combined with fully connected layers.</li>
-</ul>
-<p>In the below MNIST example the first LSTM layer first encodes every column of pixels of shape (28, 1) to a column vector of shape (128,). The second LSTM layer encodes then these 28 column vectors of shape (28, 128) to a image vector representing the whole image. A final Dense layer is added for prediction.</p>
+<p>References: - <a href="https://arxiv.org/abs/1506.01057">A Hierarchical Neural Autoencoder for Paragraphs and Documents</a> Encodes paragraphs and documents with HRNN. Results have shown that HRNN outperforms standard RNNs and may play some role in more sophisticated generation tasks like summarization or question answering. - <a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7298714">Hierarchical recurrent neural network for skeleton based action recognition</a> Achieved state-of-the-art results on skeleton based action recognition with 3 levels of bidirectional HRNN combined with fully connected layers.</p>
+<p>In the below MNIST example the first LSTM layer first encodes every column of pixels of shape (28, 1) to a column vector of shape (128,). The second LSTM layer encodes then these 28 column vectors of shape (28, 128) to a image vector representing the whole image. A final dense layer is added for prediction.</p>
 <p>After 5 epochs: train acc: 0.9858, val acc: 0.9864</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+<span class="co"># Data Preparation -----------------------------------------------------------------</span>
 
 <span class="co"># Training parameters.</span>
 batch_size &lt;-<span class="st"> </span><span class="dv">32</span>
@@ -137,7 +133,7 @@ epochs &lt;-<span class="st"> </span><span class="dv">5</span>
 row_hidden &lt;-<span class="st"> </span><span class="dv">128</span>
 col_hidden &lt;-<span class="st"> </span><span class="dv">128</span>
 
-<span class="co"># the data, shuffled and split between train and test sets</span>
+<span class="co"># The data, shuffled and split between train and test sets</span>
 mnist &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span>()
 x_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>x
 y_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>y
@@ -159,6 +155,7 @@ dim_x_train &lt;-<span class="st"> </span><span class="kw">dim</span>(x_train)
 y_train &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_train, num_classes)
 y_test &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_test, num_classes)
 
+<span class="co"># Define input dimensions</span>
 row &lt;-<span class="st"> </span>dim_x_train[[<span class="dv">2</span>]]
 col &lt;-<span class="st"> </span>dim_x_train[[<span class="dv">3</span>]]
 pixel &lt;-<span class="st"> </span>dim_x_train[[<span class="dv">4</span>]]
@@ -169,14 +166,15 @@ input &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/la
 <span class="co"># Encodes a row of pixels using TimeDistributed Wrapper</span>
 encoded_rows &lt;-<span class="st"> </span>input <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/time_distributed.html">time_distributed</a></span>(<span class="kw"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> row_hidden))
 
-<span class="co"># Encodes columns of encoded rows.</span>
+<span class="co"># Encodes columns of encoded rows</span>
 encoded_columns &lt;-<span class="st"> </span>encoded_rows <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> col_hidden)
 
 <span class="co"># Model output</span>
 prediction &lt;-<span class="st"> </span>encoded_columns <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> num_classes, <span class="dt">activation =</span> <span class="st">'softmax'</span>)
 
-<span class="co"># Define and compile model</span>
+<span class="co"># Define Model ------------------------------------------------------------------------</span>
+
 model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(input, prediction)
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(
   <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,

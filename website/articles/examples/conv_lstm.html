@@ -118,6 +118,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This script demonstrates the use of a convolutional LSTM network.</span>
 <span class="co"># This network is used to predict the next frame of an artificially</span>
 <span class="co"># generated movie which contains moving squares.</span>
+
 <span class="kw">library</span>(keras)
 <span class="kw">library</span>(abind)
 <span class="kw">library</span>(raster)
@@ -157,10 +158,9 @@ generate_movies &lt;-<span class="st"> </span><span class="cf">function</span>(<
         noisy_movies[s, t, square_x, square_y] &lt;-<span class="st"> </span>
 <span class="st">          </span>noisy_movies[s, t, square_x, square_y] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
         
-        <span class="co"># Make it more robust by adding noise.</span>
-        <span class="co"># The idea is that if during inference,</span>
-        <span class="co"># the value of the pixel is not exactly one,</span>
-        <span class="co"># we need to train the network to be robust and still</span>
+        <span class="co"># Make it more robust by adding noise. The idea is that if </span>
+        <span class="co"># during inference, the value of the pixel is not exactly </span>
+        <span class="co"># one; we need to train the network to be robust and still </span>
         <span class="co"># consider it as a pixel belonging to a square.</span>
         <span class="cf">if</span>(<span class="kw">runif</span>(<span class="dv">1</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>){
           noise_f &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dv">1</span>)
@@ -190,7 +190,7 @@ generate_movies &lt;-<span class="st"> </span><span class="cf">function</span>(<
   noisy_movies[noisy_movies <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">1</span>
   shifted_movies[shifted_movies <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">1</span>
 
-  <span class="co"># add channel dimension</span>
+  <span class="co"># Add channel dimension</span>
   <span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/dimensions">dim</a></span>(noisy_movies) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/dimensions">dim</a></span>(noisy_movies), <span class="dv">1</span>)
   <span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/dimensions">dim</a></span>(shifted_movies) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/dimensions">dim</a></span>(shifted_movies), <span class="dv">1</span>)
   
@@ -204,52 +204,57 @@ generate_movies &lt;-<span class="st"> </span><span class="cf">function</span>(<
 <span class="co"># Data Preparation --------------------------------------------------------</span>
 
 <span class="co"># Artificial data generation:</span>
-<span class="co"># Generate movies with 3 to 7 moving squares inside.</span>
-<span class="co"># The squares are of shape 1x1 or 2x2 pixels,</span>
-<span class="co"># which move linearly over time.</span>
-<span class="co"># For convenience we first create movies with bigger width and height (80x80)</span>
-<span class="co"># and at the end we select a 40x40 window.</span>
+  <span class="co"># Generate movies with 3 to 7 moving squares inside.</span>
+  <span class="co"># The squares are of shape 1x1 or 2x2 pixels, which move linearly over time.</span>
+  <span class="co"># For convenience we first create movies with bigger width and height (80x80)</span>
+  <span class="co"># and at the end we select a 40x40 window.</span>
 movies &lt;-<span class="st"> </span><span class="kw">generate_movies</span>(<span class="dt">n_samples =</span> <span class="dv">1000</span>, <span class="dt">n_frames =</span> <span class="dv">15</span>)
 more_movies &lt;-<span class="st"> </span><span class="kw">generate_movies</span>(<span class="dt">n_samples =</span> <span class="dv">200</span>, <span class="dt">n_frames =</span> <span class="dv">15</span>)
 
 
 <span class="co"># Model definition --------------------------------------------------------</span>
 
+<span class="co">#Initialize model</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
 
 model <span class="op">%&gt;%</span>
+
+<span class="st">  </span><span class="co"># Begin with 2D convolutional LSTM layer</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_lstm_2d.html">layer_conv_lstm_2d</a></span>(
     <span class="dt">input_shape =</span> <span class="kw">list</span>(<span class="ot">NULL</span>,<span class="dv">40</span>,<span class="dv">40</span>,<span class="dv">1</span>), 
     <span class="dt">filters =</span> <span class="dv">40</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
     <span class="dt">padding =</span> <span class="st">"same"</span>, 
     <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>
   ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Normalize the activations of the previous layer</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="op">%&gt;%</span>
 <span class="st">  </span>
+<span class="st">  </span><span class="co"># Add 3x hidden 2D convolutions LSTM layers, with</span>
+<span class="st">  </span><span class="co"># batch normalization layers between</span>
+<span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_lstm_2d.html">layer_conv_lstm_2d</a></span>(
+    <span class="dt">filters =</span> <span class="dv">40</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+    <span class="dt">padding =</span> <span class="st">"same"</span>, <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_lstm_2d.html">layer_conv_lstm_2d</a></span>(
+    <span class="dt">filters =</span> <span class="dv">40</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+    <span class="dt">padding =</span> <span class="st">"same"</span>, <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_lstm_2d.html">layer_conv_lstm_2d</a></span>(
     <span class="dt">filters =</span> <span class="dv">40</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
     <span class="dt">padding =</span> <span class="st">"same"</span>, <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>
   ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="op">%&gt;%</span>
 <span class="st">  </span>
-<span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_lstm_2d.html">layer_conv_lstm_2d</a></span>(
-    <span class="dt">filters =</span> <span class="dv">40</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
-    <span class="dt">padding =</span> <span class="st">"same"</span>, <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>
-  ) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="op">%&gt;%</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_lstm_2d.html">layer_conv_lstm_2d</a></span>(
-    <span class="dt">filters =</span> <span class="dv">40</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
-    <span class="dt">padding =</span> <span class="st">"same"</span>, <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>
-  ) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="op">%&gt;%</span>
-<span class="st">  </span>
+<span class="st">  </span><span class="co"># Add final 3D convolutional output layer </span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_3d.html">layer_conv_3d</a></span>(
     <span class="dt">filters =</span> <span class="dv">1</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>),
     <span class="dt">activation =</span> <span class="st">"sigmoid"</span>, 
     <span class="dt">padding =</span> <span class="st">"same"</span>, <span class="dt">data_format =</span><span class="st">"channels_last"</span>
   )
 
+<span class="co"># Prepare model for training</span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(
   <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span>, 
   <span class="dt">optimizer =</span> <span class="st">"adadelta"</span>
@@ -268,39 +273,50 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
   <span class="dt">validation_split =</span> <span class="fl">0.05</span>
 )
 
+
 <span class="co"># Visualization  ----------------------------------------------------------------</span>
+
 <span class="co"># Testing the network on one movie</span>
 <span class="co"># feed it with the first 7 positions and then</span>
 <span class="co"># predict the new positions</span>
 
-which &lt;-<span class="st"> </span><span class="dv">100</span> <span class="co">#Example to visualize on</span>
+<span class="co">#Example to visualize on</span>
+which &lt;-<span class="st"> </span><span class="dv">100</span>
 
 track &lt;-<span class="st"> </span>more_movies<span class="op">$</span>noisy_movies[which,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,,,<span class="dv">1</span>]
 track &lt;-<span class="st"> </span><span class="kw">array</span>(track, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">40</span>,<span class="dv">40</span>,<span class="dv">1</span>))
+
 <span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>){
-<span class="cf">if</span> (k<span class="op">&lt;</span><span class="dv">8</span>){
-  <span class="kw">png</span>(<span class="kw">paste0</span>(k,<span class="st">'_animate.png'</span>))
-  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="dt">bg =</span> <span class="st">'white'</span>)
-  (more_movies<span class="op">$</span>noisy_movies[which,k,,,<span class="dv">1</span>])  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Ground_'</span>,k)) 
-  (more_movies<span class="op">$</span>noisy_movies[which,k,,,<span class="dv">1</span>])  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Ground_'</span>,k)) 
-  <span class="kw">dev.off</span>()
-}  <span class="cf">else</span> {
-  <span class="co"># And then compare the predictions</span>
-  <span class="co"># to the ground truth</span>
-  <span class="kw">png</span>(<span class="kw">paste0</span>(k,<span class="st">'_animate.png'</span>))
-  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="dt">bg =</span> <span class="st">'white'</span>)
-  (more_movies<span class="op">$</span>noisy_movies[which,k,,,<span class="dv">1</span>])  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Ground_'</span>,k))
+  <span class="cf">if</span> (k<span class="op">&lt;</span><span class="dv">8</span>){ 
+    <span class="kw">png</span>(<span class="kw">paste0</span>(k,<span class="st">'_animate.png'</span>))
+    <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="dt">bg =</span> <span class="st">'white'</span>)
+    (more_movies<span class="op">$</span>noisy_movies[which,k,,,<span class="dv">1</span>])  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Ground_'</span>,k)) 
+    (more_movies<span class="op">$</span>noisy_movies[which,k,,,<span class="dv">1</span>])  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Ground_'</span>,k)) 
+    <span class="kw">dev.off</span>()
+  } <span class="cf">else</span> {
+    
+    <span class="co"># And then compare the predictions to the ground truth</span>
+    <span class="kw">png</span>(<span class="kw">paste0</span>(k,<span class="st">'_animate.png'</span>))
+    <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="dt">bg =</span> <span class="st">'white'</span>)
+    (more_movies<span class="op">$</span>noisy_movies[which,k,,,<span class="dv">1</span>])  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Ground_'</span>,k))
+    
+    <span class="co"># Make Prediction</span>
+    new_pos &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/predict">predict</a></span>(track)
    
-  new_pos &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/predict">predict</a></span>(track)  <span class="co">#Make Prediction</span>
-  new_pos_loc &lt;-<span class="st"> </span>new_pos[<span class="dv">1</span>,k,<span class="dv">1</span><span class="op">:</span><span class="dv">40</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">40</span>,<span class="dv">1</span>]  <span class="co">#Slice the last row</span>
-  new_pos_loc  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Pred_'</span>,k))
-  
-  new_pos &lt;-<span class="st"> </span><span class="kw">array</span>(new_pos_loc, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">40</span>,<span class="dv">40</span>,<span class="dv">1</span>)) <span class="co">#Reshape it</span>
-  track &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/abind/topics/abind">abind</a></span>(track,new_pos,<span class="dt">along =</span> <span class="dv">2</span>)  <span class="co">#Bind it to the earlier data</span>
-  <span class="kw">dev.off</span>()
-}
-}  
-<span class="co"># you can also create a gif by running</span>
+    <span class="co"># Slice the last row  </span>
+    new_pos_loc &lt;-<span class="st"> </span>new_pos[<span class="dv">1</span>,k,<span class="dv">1</span><span class="op">:</span><span class="dv">40</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">40</span>,<span class="dv">1</span>]  
+    new_pos_loc  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">title</span> (<span class="dt">main=</span><span class="kw">paste0</span>(<span class="st">'Pred_'</span>,k))    
+    
+    <span class="co"># Reshape it</span>
+    new_pos &lt;-<span class="st"> </span><span class="kw">array</span>(new_pos_loc, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">40</span>,<span class="dv">40</span>,<span class="dv">1</span>))     
+    
+    <span class="co"># Bind it to the earlier data</span>
+    track &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/abind/topics/abind">abind</a></span>(track,new_pos,<span class="dt">along =</span> <span class="dv">2</span>)  
+    <span class="kw">dev.off</span>()
+  }
+} 
+
+<span class="co"># Can also create a gif by running</span>
 <span class="kw">system</span>(<span class="st">"convert -delay 40 *.png animation.gif"</span>)</code></pre></div>
 </div>
   </div>

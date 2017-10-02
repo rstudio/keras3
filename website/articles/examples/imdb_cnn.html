@@ -115,11 +115,11 @@
 <div class="source-ref">
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/imdb_cnn.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/imdb_cnn.R</a></p>
 </div>
-<p>This example demonstrates the use of Convolution1D for text classification.</p>
-<p>Gets to 0.89 test accuracy after 2 epochs. 90s/epoch on Intel i5 2.4Ghz CPU. 10s/epoch on Tesla K40 GPU.</p>
+<p>Use Convolution1D for text classification.</p>
+<p>Output after 2 epochs: ~0.89 Time per epoch on CPU (Intel i5 2.4Ghz): 90s Time per epoch on GPU (Tesla K40): 10s</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
-<span class="co"># set parameters:</span>
+<span class="co"># Set parameters:</span>
 max_features &lt;-<span class="st"> </span><span class="dv">5000</span>
 maxlen &lt;-<span class="st"> </span><span class="dv">400</span>
 batch_size &lt;-<span class="st"> </span><span class="dv">32</span>
@@ -152,42 +152,48 @@ epochs &lt;-<span class="st"> </span><span class="dv">2</span>
 <span class="co"># See help(dataset_imdb)</span>
 imdb &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dataset_imdb.html">dataset_imdb</a></span>(<span class="dt">num_words =</span> max_features)
 
-<span class="co"># pad the sequences, so they have all the same lenght</span>
-<span class="co"># this will conver our dataset into a matrix: each line is a review</span>
+<span class="co"># Pad the sequences, so they have all the same length</span>
+<span class="co"># This will convert the dataset into a matrix: each line is a review</span>
 <span class="co"># and each column a word on the sequence. </span>
-<span class="co"># we pad the sequences with 0 to the left.</span>
+<span class="co"># Pad the sequences with 0 to the left.</span>
 x_train &lt;-<span class="st"> </span>imdb<span class="op">$</span>train<span class="op">$</span>x <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/pad_sequences.html">pad_sequences</a></span>(<span class="dt">maxlen =</span> maxlen)
-
 x_test &lt;-<span class="st"> </span>imdb<span class="op">$</span>test<span class="op">$</span>x <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/pad_sequences.html">pad_sequences</a></span>(<span class="dt">maxlen =</span> maxlen)
 
-<span class="co"># Defining the model ------------------------------------------------------</span>
+<span class="co"># Defining Model ------------------------------------------------------</span>
 
+<span class="co">#Initialize model</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
 
 model <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="co"># we start off with an efficient embedding layer which maps</span>
-<span class="st">  </span><span class="co"># our vocab indices into embedding_dims dimensions</span>
+<span class="st">  </span><span class="co"># Start off with an efficient embedding layer which maps</span>
+<span class="st">  </span><span class="co"># the vocab indices into embedding_dims dimensions</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_embedding.html">layer_embedding</a></span>(max_features, embedding_dims, <span class="dt">input_length =</span> maxlen) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="fl">0.2</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># we add a Convolution1D, which will learn filters</span>
-<span class="st">  </span><span class="co"># word group filters of size filter_length:</span>
+
+<span class="st">  </span><span class="co"># Add a Convolution1D, which will learn filters</span>
+<span class="st">    </span><span class="co"># Word group filters of size filter_length:</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_1d.html">layer_conv_1d</a></span>(
     filters, kernel_size, 
     <span class="dt">padding =</span> <span class="st">"valid"</span>, <span class="dt">activation =</span> <span class="st">"relu"</span>, <span class="dt">strides =</span> <span class="dv">1</span>
   ) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># we use max pooling:</span>
+<span class="st">  </span><span class="co"># Apply max pooling:</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_global_max_pooling_1d.html">layer_global_max_pooling_1d</a></span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># We add a vanilla hidden layer:</span>
+
+<span class="st">  </span><span class="co"># Add a vanilla hidden layer:</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(hidden_dims) <span class="op">%&gt;%</span>
+
+<span class="st">  </span><span class="co"># Apply 20% layer dropout</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="fl">0.2</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># We project onto a single unit output layer, and squash it with a sigmoid:</span>
+
+<span class="st">  </span><span class="co"># Project onto a single unit output layer, and squash it with a sigmoid</span>
+
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"sigmoid"</span>)
 
-
+<span class="co"># Compile model</span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(
   <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span>,
   <span class="dt">optimizer =</span> <span class="st">"adam"</span>,

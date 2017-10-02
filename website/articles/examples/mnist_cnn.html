@@ -116,28 +116,33 @@
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/mnist_cnn.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/mnist_cnn.R</a></p>
 </div>
 <p>Trains a simple convnet on the MNIST dataset.</p>
-<p>Gets to 99.25% test accuracy after 12 epochs (there is still a lot of margin for parameter tuning). 16 seconds per epoch on a GRID K520 GPU.</p>
+<p>Gets to 99.25% test accuracy after 12 epochs Note: There is still a large margin for parameter tuning</p>
+<p>16 seconds per epoch on a GRID K520 GPU.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+<span class="co"># Data Preparation -----------------------------------------------------</span>
 
 batch_size &lt;-<span class="st"> </span><span class="dv">128</span>
 num_classes &lt;-<span class="st"> </span><span class="dv">10</span>
 epochs &lt;-<span class="st"> </span><span class="dv">12</span>
 
-<span class="co"># input image dimensions</span>
+<span class="co"># Input image dimensions</span>
 img_rows &lt;-<span class="st"> </span><span class="dv">28</span>
 img_cols &lt;-<span class="st"> </span><span class="dv">28</span>
 
-<span class="co"># the data, shuffled and split between train and test sets</span>
+<span class="co"># The data, shuffled and split between train and test sets</span>
 mnist &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span>()
 x_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>x
 y_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>y
 x_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>x
 y_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y
 
+<span class="co"># Redefine  dimension of train/test inputs</span>
 <span class="kw">dim</span>(x_train) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_train), img_rows, img_cols, <span class="dv">1</span>) 
 <span class="kw">dim</span>(x_test) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_test), img_rows, img_cols, <span class="dv">1</span>)
 input_shape &lt;-<span class="st"> </span><span class="kw">c</span>(img_rows, img_cols, <span class="dv">1</span>)
 
+<span class="co"># Transform RGB values into [0,1] range</span>
 x_train &lt;-<span class="st"> </span>x_train <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
 x_test &lt;-<span class="st"> </span>x_test <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
 
@@ -145,11 +150,12 @@ x_test &lt;-<span class="st"> </span>x_test <span class="op">/</span><span class
 <span class="kw">cat</span>(<span class="kw">nrow</span>(x_train), <span class="st">'train samples</span><span class="ch">\n</span><span class="st">'</span>)
 <span class="kw">cat</span>(<span class="kw">nrow</span>(x_test), <span class="st">'test samples</span><span class="ch">\n</span><span class="st">'</span>)
 
-<span class="co"># convert class vectors to binary class matrices</span>
+<span class="co"># Convert class vectors to binary class matrices</span>
 y_train &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_train, num_classes)
 y_test &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_test, num_classes)
 
-<span class="co"># define model</span>
+<span class="co"># Define Model -----------------------------------------------------------</span>
+
 model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
 model <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>,
@@ -162,14 +168,15 @@ model <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> num_classes, <span class="dt">activation =</span> <span class="st">'softmax'</span>)
 
-<span class="co"># compile model</span>
+<span class="co"># Compile model</span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(
   <span class="dt">loss =</span> loss_categorical_crossentropy,
   <span class="dt">optimizer =</span> <span class="kw"><a href="../../reference/optimizer_adadelta.html">optimizer_adadelta</a></span>(),
   <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
 )
 
-<span class="co"># train and evaluate</span>
+<span class="co"># Train &amp; Evaluate -------------------------------------------------------</span>
+
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>(
   x_train, y_train,
   <span class="dt">batch_size =</span> batch_size,
@@ -181,6 +188,7 @@ scores &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span c
   x_test, y_test, <span class="dt">verbose =</span> <span class="dv">0</span>
 )
 
+<span class="co"># Output metrics</span>
 <span class="kw">cat</span>(<span class="st">'Test loss:'</span>, scores[[<span class="dv">1</span>]], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
 <span class="kw">cat</span>(<span class="st">'Test accuracy:'</span>, scores[[<span class="dv">2</span>]], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</code></pre></div>
 </div>

@@ -116,8 +116,7 @@
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/deep_dream.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/deep_dream.R</a></p>
 </div>
 <p>Deep Dreaming in Keras.</p>
-<p>It is preferable to run this script on GPU, for speed.</p>
-<p>Example results: <a href="http://i.imgur.com/FX6ROg9.jpg" class="uri">http://i.imgur.com/FX6ROg9.jpg</a></p>
+<p>Note: It is preferable to run this script on GPU, for speed. Example results: <a href="http://i.imgur.com/FX6ROg9.jpg" class="uri">http://i.imgur.com/FX6ROg9.jpg</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 <span class="kw">library</span>(tensorflow)
 <span class="kw">library</span>(purrr)
@@ -135,21 +134,25 @@ preprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(
 
 deprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(x){
   x &lt;-<span class="st"> </span>x[<span class="dv">1</span>,,,]
+  
   <span class="co"># Remove zero-center by mean pixel</span>
   x[,,<span class="dv">1</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="fl">103.939</span>
   x[,,<span class="dv">2</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="fl">116.779</span>
   x[,,<span class="dv">3</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">3</span>] <span class="op">+</span><span class="st"> </span><span class="fl">123.68</span>
+  
   <span class="co"># 'BGR'-&gt;'RGB'</span>
   x &lt;-<span class="st"> </span>x[,,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>)]
-  <span class="co"># clip to interval 0, 255</span>
+  
+  <span class="co"># Clip to interval 0, 255</span>
   x[x <span class="op">&gt;</span><span class="st"> </span><span class="dv">255</span>] &lt;-<span class="st"> </span><span class="dv">255</span>
   x[x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="dv">0</span>
   x[] &lt;-<span class="st"> </span><span class="kw">as.integer</span>(x)<span class="op">/</span><span class="dv">255</span>
   x
 }
 
-<span class="co"># calculates the total variation loss</span>
-<span class="co"># https://en.wikipedia.org/wiki/Total_variation_denoising</span>
+<span class="co"># Calculates the total variation loss</span>
+  <span class="co"># See https://en.wikipedia.org/wiki/Total_variation_denoising </span>
+  <span class="co"># for further explanation</span>
 total_variation_loss &lt;-<span class="st"> </span><span class="cf">function</span>(x, h, w){
   
   y_ij  &lt;-<span class="st"> </span>x[,<span class="dv">0</span><span class="op">:</span>(h <span class="op">-</span><span class="st"> </span>2L), <span class="dv">0</span><span class="op">:</span>(w <span class="op">-</span><span class="st"> </span>2L),]
@@ -164,7 +167,7 @@ total_variation_loss &lt;-<span class="st"> </span><span class="cf">function</sp
 
 <span class="co"># Parameters --------------------------------------------------------</span>
 
-<span class="co"># some settings we found interesting</span>
+<span class="co"># Some interesting parameter groupings we found</span>
 saved_settings =<span class="st"> </span><span class="kw">list</span>(
   <span class="dt">bad_trip =</span> <span class="kw">list</span>(
     <span class="dt">features =</span> <span class="kw">list</span>(
@@ -187,51 +190,52 @@ saved_settings =<span class="st"> </span><span class="kw">list</span>(
   )
 )
 
-<span class="co"># the settings we will use in this experiment</span>
+<span class="co"># The settings to be used in this experiment</span>
 img_height &lt;-<span class="st"> </span>600L
 img_width &lt;-<span class="st"> </span>600L
 img_size &lt;-<span class="st"> </span><span class="kw">c</span>(img_height, img_width, <span class="dv">3</span>)
 settings &lt;-<span class="st"> </span>saved_settings<span class="op">$</span>dreamy
 image &lt;-<span class="st"> </span><span class="kw">preprocess_image</span>(<span class="st">"deep_dream.jpg"</span>, img_height, img_width)
 
-<span class="co"># Model definition --------------------------------------------------------</span>
+<span class="co"># Model Definition --------------------------------------------------------</span>
 
-<span class="co"># this will contain our generated image</span>
+<span class="co"># This will contain our generated image</span>
 dream &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">batch_shape =</span> <span class="kw">c</span>(<span class="dv">1</span>, img_size))
 
-<span class="co"># build the VGG16 network with our placeholder</span>
-<span class="co"># the model will be loaded with pre-trained ImageNet weights</span>
+<span class="co"># Build the VGG16 network with our placeholder</span>
+  <span class="co"># The model will be loaded with pre-trained ImageNet weights</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/application_vgg.html">application_vgg16</a></span>(<span class="dt">input_tensor =</span> dream, <span class="dt">weights =</span> <span class="st">"imagenet"</span>,
                            <span class="dt">include_top =</span> <span class="ot">FALSE</span>)
 
-
-<span class="co"># get the symbolic outputs of each "key" layer (we gave them unique names).</span>
+<span class="co"># Get the symbolic outputs of each "key" layer (we gave them unique names).</span>
 layer_dict &lt;-<span class="st"> </span>model<span class="op">$</span>layers
 <span class="kw">names</span>(layer_dict) &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_chr</a></span>(layer_dict ,<span class="op">~</span>.x<span class="op">$</span>name)
 
-<span class="co"># define the loss</span>
+<span class="co"># Define the loss</span>
 loss &lt;-<span class="st"> </span>tf<span class="op">$</span><span class="kw">Variable</span>(<span class="fl">0.0</span>)
 <span class="cf">for</span>(layer_name <span class="cf">in</span> <span class="kw">names</span>(settings<span class="op">$</span>features)){
-  <span class="co"># add the L2 norm of the features of a layer to the loss</span>
+  
+  <span class="co"># Add the L2 norm of the features of a layer to the loss</span>
   coeff &lt;-<span class="st"> </span>settings<span class="op">$</span>features[[layer_name]]
   x &lt;-<span class="st"> </span>layer_dict[[layer_name]]<span class="op">$</span>output
   out_shape &lt;-<span class="st"> </span>layer_dict[[layer_name]]<span class="op">$</span>output_shape <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unlist</span>()
-  <span class="co"># we avoid border artifacts by only involving non-border pixels in the loss</span>
+  
+  <span class="co"># Avoid border artifacts by only involving non-border pixels in the loss</span>
   loss &lt;-<span class="st"> </span>loss <span class="op">-</span><span class="st"> </span>
 <span class="st">    </span>coeff<span class="op">*</span>K<span class="op">$</span><span class="kw">sum</span>(K<span class="op">$</span><span class="kw">square</span>(x[,<span class="dv">3</span><span class="op">:</span>(out_shape[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span><span class="dv">2</span>), <span class="dv">3</span><span class="op">:</span>(out_shape[<span class="dv">3</span>] <span class="op">-</span><span class="st"> </span><span class="dv">2</span>),])) <span class="op">/</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">prod</span>(out_shape[<span class="op">-</span><span class="dv">1</span>])
 }
 
-<span class="co"># add continuity loss (gives image local coherence, can result in an artful blur)</span>
+<span class="co"># Add continuity loss (gives image local coherence, can result in an artful blur)</span>
 loss &lt;-<span class="st"> </span>loss <span class="op">+</span><span class="st"> </span>settings<span class="op">$</span>continuity<span class="op">*</span>
 <span class="st">  </span><span class="kw">total_variation_loss</span>(<span class="dt">x =</span> dream, img_height, img_width)<span class="op">/</span>
 <span class="st">  </span><span class="kw">prod</span>(img_size)
-<span class="co"># add image L2 norm to loss (prevents pixels from taking very high values, makes image darker)</span>
+
+<span class="co"># Add image L2 norm to loss (prevents pixels from taking very high values, makes image darker)</span>
+  <span class="co"># Note that the loss can be further modified to achieve new effects</span>
 loss &lt;-<span class="st"> </span>loss <span class="op">+</span><span class="st"> </span>settings<span class="op">$</span>dream_l2<span class="op">*</span>K<span class="op">$</span><span class="kw">sum</span>(K<span class="op">$</span><span class="kw">square</span>(dream))<span class="op">/</span><span class="kw">prod</span>(img_size)
 
-<span class="co"># feel free to further modify the loss as you see fit, to achieve new effects...</span>
-
-<span class="co"># compute the gradients of the dream wrt the loss</span>
+<span class="co"># Compute the gradients of the dream wrt the loss</span>
 grads &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">gradients</span>(loss, dream)[[<span class="dv">1</span>]] 
 
 f_outputs &lt;-<span class="st"> </span>K<span class="op">$</span><span class="st">`</span><span class="dt">function</span><span class="st">`</span>(<span class="kw">list</span>(dream), <span class="kw">list</span>(loss,grads))
@@ -245,14 +249,12 @@ eval_loss_and_grads &lt;-<span class="st"> </span><span class="cf">function</spa
   )
 }
 
-<span class="co"># Loss and gradients evaluator.</span>
-<span class="co"># </span>
-<span class="co"># This Evaluator class makes it possible</span>
-<span class="co"># to compute loss and gradients in one pass</span>
-<span class="co"># while retrieving them via two separate functions,</span>
-<span class="co"># "loss" and "grads". This is done because scipy.optimize</span>
-<span class="co"># requires separate functions for loss and gradients,</span>
-<span class="co"># but computing them separately would be inefficient.</span>
+<span class="co"># Loss and gradients evaluator:</span>
+  <span class="co"># This Evaluator class makes it possible to compute loss and </span>
+  <span class="co"># gradients in one pass while retrieving them via two separate </span>
+  <span class="co"># functions, "loss" and "grads". This is done because </span>
+  <span class="co"># scipy.optimize requires separate functions for loss and </span>
+  <span class="co"># gradients, but computing them separately would be inefficient.</span>
 Evaluator &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/R6/topics/R6Class">R6Class</a></span>(
   <span class="st">"Evaluator"</span>,
   <span class="dt">public =</span> <span class="kw">list</span>(
@@ -277,8 +279,7 @@ Evaluator &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdo
       self<span class="op">$</span>loss_value &lt;-<span class="st"> </span><span class="ot">NULL</span>
       self<span class="op">$</span>grad_values &lt;-<span class="st"> </span><span class="ot">NULL</span>
       grad_values
-    }
-      
+    }      
   )
 )
 
@@ -288,7 +289,7 @@ evaluator &lt;-<span class="st"> </span>Evaluator<span class="op">$</span><span 
 <span class="co"># so as to minimize the loss</span>
 <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>){
   
-  <span class="co"># add random jitter to initial image</span>
+  <span class="co"># Add random jitter to initial image</span>
   random_jitter &lt;-<span class="st"> </span>settings<span class="op">$</span>jitter<span class="op">*</span><span class="dv">2</span><span class="op">*</span>(<span class="kw">runif</span>(<span class="kw">prod</span>(img_size)) <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">1</span>, img_size))
   image &lt;-<span class="st"> </span>image <span class="op">+</span><span class="st"> </span>random_jitter
@@ -303,15 +304,14 @@ evaluator &lt;-<span class="st"> </span>Evaluator<span class="op">$</span><span 
   <span class="co"># Print loss value</span>
   <span class="kw">print</span>(opt<span class="op">$</span>value)
   
-  <span class="co"># decode the image</span>
+  <span class="co"># Decode the image</span>
   image &lt;-<span class="st"> </span>opt<span class="op">$</span>par
   <span class="kw">dim</span>(image) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, img_size)
   image &lt;-<span class="st"> </span>image <span class="op">-</span><span class="st"> </span>random_jitter
 
-  <span class="co"># plot</span>
+  <span class="co"># Plot</span>
   im &lt;-<span class="st"> </span><span class="kw">deprocess_image</span>(image)
-  <span class="kw">plot</span>(<span class="kw">as.raster</span>(im))
-  
+  <span class="kw">plot</span>(<span class="kw">as.raster</span>(im)) 
 }</code></pre></div>
 </div>
   </div>

@@ -4,18 +4,18 @@
 #' simpler, much faster methods such as TF-IDF + LogReg.
 #' 
 #' Notes:
-#' 
 #' - RNNs are tricky. Choice of batch size is important, choice of loss and
-#' optimizer is critical, etc. Some configurations won't converge.
-#' 
+#'   optimizer is critical, etc. Some configurations won't converge.
 #' - LSTM loss decrease patterns during training can be quite different from
-#' what you see with CNNs/MLPs/etc.
+#'   what you see with CNNs/MLPs/etc.
 
 library(keras)
 
 max_features <- 20000
-maxlen <- 80  # cut texts after this number of words (among top max_features most common words)
 batch_size <- 32
+
+# Cut texts after this number of words (among top max_features most common words)
+maxlen <- 80  
 
 cat('Loading data...\n')
 imdb <- dataset_imdb(num_words = max_features)
@@ -40,7 +40,7 @@ model %>%
   layer_lstm(units = 64, dropout = 0.2, recurrent_dropout = 0.2) %>% 
   layer_dense(units = 1, activation = 'sigmoid')
 
-# try using different optimizers and different optimizer configs
+# Try using different optimizers and different optimizer configs
 model %>% compile(
   loss = 'binary_crossentropy',
   optimizer = 'adam',
@@ -54,11 +54,11 @@ model %>% fit(
   epochs = 15,
   validation_data = list(x_test, y_test)
 )
+
 scores <- model %>% evaluate(
   x_test, y_test,
   batch_size = batch_size
 )
+
 cat('Test score:', scores[[1]])
 cat('Test accuracy', scores[[2]])
-
-
