@@ -29,9 +29,6 @@
 #' Gets to ~99.1% validation accuracy after 5 epochs (there is still a lot of margin
 #' for parameter tuning).
 #' 
-#' Note that this example requires the development version of the keras R package.
-#' You can install this version as follows: `install_github("rstudio/keras")`.
-#' 
 #' 
 
 library(keras)
