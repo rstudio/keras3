@@ -23,8 +23,8 @@ test_succeeds("metrics be can called directly", {
   metric_binary_crossentropy(y_true, y_pred)
   metric_hinge(y_true, y_pred)
   
-  # remainder of operations don't work on CNTK
-  skip_if_cntk()
+  skip_if_cntk() # top_k doesn't work on CNTK, see 
+                 # https://docs.microsoft.com/en-us/cognitive-toolkit/using-cntk-with-keras#known-issues)
   
   y_pred <- K$variable(matrix(c(0.3, 0.2, 0.1, 0.1, 0.2, 0.7), nrow=2, ncol = 3))
   y_true <- K$variable(matrix(c(0L, 1L), nrow = 2, ncol = 1))
