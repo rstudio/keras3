@@ -444,12 +444,6 @@ During development of a model, sometimes it is useful to be able to obtain repro
 
 The `use_session_with_seed()` function establishes a common random seed for R, Python, NumPy, and TensorFlow. It furthermore disables hash randomization, GPU computations, and CPU parallelization, which can be additional sources of non-reproducibility. 
 
-The `use_session_with_seed()` function is available in the development version of the Keras package, which you can install as follows:
-
-```{r}
-devtools::install_github("rstudio/keras")
-```
-
 To use the function, call it immediately after you load the keras package:
 
 ```{r}
