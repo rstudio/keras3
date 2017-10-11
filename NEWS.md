@@ -1,4 +1,11 @@
 
+## keras 2.0.9 (development)
+
+Install the development version with: `install_github("rstudio/keras")`
+
+- Automatically call `keras_array()` on the results of generator functions.
+
+
 ## keras 2.0.8 (CRAN)
 
 - Add `use_session_with_seed()` function that establishes a random seed for the Keras session.

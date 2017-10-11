@@ -484,10 +484,6 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'      - (inputs, targets)
 #'      - (inputs, targets, sample_weights)
 #'      
-#'   Note that the generator should call the [keras_array()] function on its
-#'   results prior to returning them (this ensures that arrays are provided in 
-#'   'C' order and using the default floating point type for the backend.)
-#'      
 #'   All arrays should contain the same number of samples. The generator is expected
 #'   to loop over its data indefinitely. An epoch finishes when `steps_per_epoch`
 #'   batches have been seen by the model.
@@ -526,7 +522,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
     view_metrics <- resolve_view_metrics(verbose, epochs, object$metrics)
   
   history <- call_generator_function(object$fit_generator, list(
-    generator = as_generator(generator),
+    generator = generator,
     steps_per_epoch = as.integer(steps_per_epoch),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
@@ -658,7 +654,7 @@ as_generator.python.builtin.object <- function(x) {
 }
 
 as_generator.function <- function(x) {
-  reticulate::py_iterator(x)
+  reticulate::py_iterator(function() keras_array(x()))
 }
 
   
