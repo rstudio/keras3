@@ -5,6 +5,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Automatically call `keras_array()` on the results of generator functions.
 
+- Ensure that `steps_per_epoch` is passed as an integer
+
 
 ## keras 2.0.8 (CRAN)
 

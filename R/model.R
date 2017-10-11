@@ -278,8 +278,8 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
     args$y <- keras_array(y)
   
   if (keras_version() >= "2.0.7") {
-    args$steps_per_epoch <- steps_per_epoch
-    args$validation_steps <- validation_steps
+    args$steps_per_epoch <- as_nullable_integer(steps_per_epoch)
+    args$validation_steps <- as_nullable_integer(validation_steps)
   }
   
   # fit the model
