@@ -54,7 +54,6 @@ reference:
       - compile
       - fit
       - fit_generator
-      - evaluate
       - evaluate_generator
       - predict.keras.engine.training.Model
       - predict_proba

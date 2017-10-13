@@ -410,7 +410,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
   <span class="dt">validation_split=</span><span class="fl">0.05</span>
 )
 
-evaluation &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/evaluate.html">evaluate</a></span>(
+evaluation &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(
   <span class="dt">x =</span> <span class="kw">list</span>(test_vec<span class="op">$</span>stories, test_vec<span class="op">$</span>questions),
   <span class="dt">y =</span> test_vec<span class="op">$</span>answers,
   <span class="dt">batch_size =</span> batch_size

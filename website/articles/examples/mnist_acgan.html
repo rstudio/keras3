@@ -395,7 +395,7 @@ num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span cl
   aux_y &lt;-<span class="st"> </span><span class="kw">c</span>(mnist<span class="op">$</span>test<span class="op">$</span>y, sampled_labels) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
   
   <span class="co"># See if the discriminator can figure itself out...</span>
-  discriminator_test_loss &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/evaluate.html">evaluate</a></span>(
+  discriminator_test_loss &lt;-<span class="st"> </span><span class="kw">evaluate</span>(
     discriminator, X, <span class="kw">list</span>(y, aux_y), 
     <span class="dt">verbose =</span> <span class="ot">FALSE</span>
   ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unlist</span>()
@@ -410,7 +410,7 @@ num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span cl
   
   trick &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">2</span><span class="op">*</span>num_test) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
   
-  generator_test_loss =<span class="st"> </span>combined <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/evaluate.html">evaluate</a></span>(
+  generator_test_loss =<span class="st"> </span>combined <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(
     <span class="kw">list</span>(noise, sampled_labels),
     <span class="kw">list</span>(trick, sampled_labels),
     <span class="dt">verbose =</span> <span class="ot">FALSE</span>

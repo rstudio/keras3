@@ -31,10 +31,10 @@ This website provides documentation for the R interface to Keras. See the main K
 
 ## Installation
 
-First, install the keras R package from CRAN as follows:
+First, install the keras R package from GitHub as follows:
 
 ```{r, eval=FALSE}
-install.packages("keras")
+devtools::install_github("rstudio/keras")
 ```
 
 The Keras R interface uses the [TensorFlow](https://www.tensorflow.org/) backend engine by default. To install both the core Keras library as well as the TensorFlow backend use the `install_keras()` function: 

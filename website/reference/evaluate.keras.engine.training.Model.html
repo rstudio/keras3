@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Evaluates the model on a data generator. — evaluate_generator • keras</title>
+<title>Evaluate a Keras model — evaluate.keras.engine.training.Model • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -127,15 +127,16 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Evaluates the model on a data generator.</h1>
+    <h1>Evaluate a Keras model</h1>
     </div>
 
     
-    <p>The generator should return the same kind of data as accepted by
-<code><a href='train_on_batch.html'>test_on_batch()</a></code>.</p>
+    <p>Evaluate a Keras model</p>
     
 
-    <pre class="usage"><span class='fu'>evaluate_generator</span>(<span class='no'>object</span>, <span class='no'>generator</span>, <span class='no'>steps</span>, <span class='kw'>max_queue_size</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for keras.engine.training.Model</span>
+<span class='fu'>evaluate</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='no'>y</span>,
+  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -145,30 +146,52 @@
       <td><p>Model object to evaluate</p></td>
     </tr>
     <tr>
-      <th>generator</th>
-      <td><p>Generator yielding lists (inputs, targets) or (inputs,
-targets, sample_weights)</p></td>
+      <th>x</th>
+      <td><p>Vector, matrix, or array of training data (or list if the model has
+multiple inputs). If all inputs in the model are named, you can also pass a
+list mapping input names to data.</p></td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td><p>Vector, matrix, or array of target data (or list if the model has
+multiple outputs). If all outputs in the model are named, you can also pass
+a list mapping output names to data.</p></td>
+    </tr>
+    <tr>
+      <th>batch_size</th>
+      <td><p>Integer or <code>NULL</code>. Number of samples per gradient update.
+If unspecified, it will default to 32.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
+epoch).</p></td>
+    </tr>
+    <tr>
+      <th>sample_weight</th>
+      <td><p>Optional array of the same length as x, containing
+weights to apply to the model's loss for each sample. In the case of
+temporal data, you can pass a 2D array with shape (samples,
+sequence_length), to apply a different weight to every timestep of every
+sample. In this case you should make sure to specify
+sample_weight_mode="temporal" in <code><a href='compile.html'>compile()</a></code>.</p></td>
     </tr>
     <tr>
       <th>steps</th>
-      <td><p>Total number of steps (batches of samples) to yield from
-<code>generator</code> before stopping.</p></td>
-    </tr>
-    <tr>
-      <th>max_queue_size</th>
-      <td><p>maximum size for the generator queue</p></td>
+      <td><p>Total number of steps (batches of samples) before declaring the
+evaluation round finished. Ignored with the default value of <code>NULL</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Named list of model test loss (or losses for models with multiple outputs)
-and model metrics.</p>
+    <p>Named list of model test loss (or losses for models with multiple
+outputs) and model metrics.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
-  <code><a href='evaluate.keras.engine.training.Model.html'>evaluate.keras.engine.training.Model</a></code>,
+  <code><a href='evaluate_generator.html'>evaluate_generator</a></code>,
   <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='fit.html'>fit</a></code>,
   <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_layer.html'>get_layer</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,

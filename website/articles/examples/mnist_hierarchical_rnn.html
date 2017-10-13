@@ -192,7 +192,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 )
 
 <span class="co"># Evaluation</span>
-scores &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">verbose =</span> <span class="dv">0</span>)
+scores &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(x_test, y_test, <span class="dt">verbose =</span> <span class="dv">0</span>)
 <span class="kw">cat</span>(<span class="st">'Test loss:'</span>, scores[[<span class="dv">1</span>]], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
 <span class="kw">cat</span>(<span class="st">'Test accuracy:'</span>, scores[[<span class="dv">2</span>]], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</code></pre></div>
 </div>

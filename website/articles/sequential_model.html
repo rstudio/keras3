@@ -303,7 +303,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">epochs =</span> <span class="dv">20</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>)
 
 <span class="co"># evaluate</span>
-score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
+score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
 </div>
 <div id="mlp-for-binary-classification" class="section level3">
 <h3 class="hasAnchor">
@@ -336,7 +336,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">epochs =</span> <span class="dv">20</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>)
 
 <span class="co"># evaluate</span>
-score =<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size=</span><span class="dv">128</span>)</code></pre></div>
+score =<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(x_test, y_test, <span class="dt">batch_size=</span><span class="dv">128</span>)</code></pre></div>
 </div>
 <div id="vgg-like-convnet" class="section level3">
 <h3 class="hasAnchor">
@@ -387,7 +387,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">batch_size =</span> <span class="dv">32</span>, <span class="dt">epochs =</span> <span class="dv">10</span>)
 
 <span class="co"># evaluate</span>
-score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">32</span>)</code></pre></div>
+score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">32</span>)</code></pre></div>
 </div>
 <div id="sequence-classification-with-lstm" class="section level3">
 <h3 class="hasAnchor">
@@ -405,7 +405,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
   )
 
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">batch_size =</span> <span class="dv">16</span>, <span class="dt">epochs =</span> <span class="dv">10</span>)
-score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">16</span>)</code></pre></div>
+score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">16</span>)</code></pre></div>
 </div>
 <div id="sequence-classification-with-1d-convolutions" class="section level3">
 <h3 class="hasAnchor">
@@ -428,7 +428,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
   )
 
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">batch_size =</span> <span class="dv">16</span>, <span class="dt">epochs =</span> <span class="dv">10</span>)
-score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/evaluate.html">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">16</span>)</code></pre></div>
+score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">16</span>)</code></pre></div>
 </div>
 <div id="stacked-lstm-for-sequence-classification" class="section level3">
 <h3 class="hasAnchor">

@@ -250,7 +250,7 @@ test_model <span class="op">%&gt;%</span><span class="st"> </span><span class="k
 )
 <span class="kw">summary</span>(test_model)
 
-result &lt;-<span class="st"> </span>test_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/evaluate.html">evaluate</a></span>(x_test, <span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_test, classes))
+result &lt;-<span class="st"> </span>test_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(x_test, <span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_test, classes))
 <span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Test accuracy: %f'</span>, result<span class="op">$</span>acc))</code></pre></div>
 </div>
   </div>
