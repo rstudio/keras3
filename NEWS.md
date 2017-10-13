@@ -7,6 +7,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Ensure that `steps_per_epoch` is passed as an integer
 
+- Import `evaluate()` generic from tensorflow package
+
 
 ## keras 2.0.8 (CRAN)
 

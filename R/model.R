@@ -309,8 +309,9 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
 #'
 #' @family model functions
 #'
+#' @importFrom tensorflow evaluate
 #' @export
-evaluate <- function(object, x, y, batch_size = NULL, verbose=1, sample_weight = NULL, steps = NULL) {
+evaluate.keras.engine.training.Model <- function(object, x, y, batch_size = NULL, verbose=1, sample_weight = NULL, steps = NULL) {
   
   # defaults
   if (is.null(batch_size) && is.null(steps))
@@ -346,7 +347,7 @@ evaluate <- function(object, x, y, batch_size = NULL, verbose=1, sample_weight =
 #' Generates output predictions for the input samples, processing the samples in
 #' a batched way.
 #'
-#' @inheritParams evaluate
+#' @inheritParams evaluate.keras.engine.training.Model
 #'
 #' @param object Keras model
 #' @param x Input data (vector, matrix, or array)
@@ -549,8 +550,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
 #' The generator should return the same kind of data as accepted by
 #' `test_on_batch()`.
 #' 
-#' @inheritParams evaluate
-#' 
+#' @inheritParams evaluate.keras.engine.training.Model
 #' 
 #' @param generator Generator yielding lists (inputs, targets) or (inputs,
 #'   targets, sample_weights)
