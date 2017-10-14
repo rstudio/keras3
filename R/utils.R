@@ -135,6 +135,10 @@ normalize <- function(x, axis = -1, order = 2) {
 #' @export
 keras_array <- function(x, dim = dim(x), dtype = NULL) {
   
+  # reflect NULL
+  if (is.null(x))
+    return(x)
+  
   # recurse for lists
   if (is.list(x))
     return(lapply(x, keras_array))

@@ -9,6 +9,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Import `evaluate()` generic from tensorflow package
 
+- Handle `NULL` when converting R arrays to Keras friendly arrays
+
 
 ## keras 2.0.8 (CRAN)
 
