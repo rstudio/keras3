@@ -31,6 +31,9 @@ tensorflow::use_session_with_seed
 #' @export
 tensorflow::tensorboard
 
+#' @importFrom tensorflow evaluate
+#' @export evaluate
+
 #' @importFrom tfruns flags
 #' @export
 tfruns::flags

@@ -295,7 +295,6 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
   invisible(history)
 }
 
-
 #' Evaluate a Keras model
 
 #' @inheritParams fit
@@ -309,7 +308,6 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
 #'
 #' @family model functions
 #'
-#' @importFrom tensorflow evaluate
 #' @export
 evaluate.keras.engine.training.Model <- function(object, x, y, batch_size = NULL, verbose=1, sample_weight = NULL, steps = NULL) {
   
