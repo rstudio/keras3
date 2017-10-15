@@ -5,8 +5,7 @@
 \title{Evaluate a Keras model}
 \usage{
 \method{evaluate}{keras.engine.training.Model}(object, x, y,
-  batch_size = NULL, verbose = 1, sample_weight = NULL, steps = NULL,
-  ...)
+  batch_size = NULL, verbose = 1, sample_weight = NULL, steps = NULL)
 }
 \arguments{
 \item{object}{Model object to evaluate}
@@ -34,8 +33,6 @@ sample_weight_mode="temporal" in \code{\link[=compile]{compile()}}.}
 
 \item{steps}{Total number of steps (batches of samples) before declaring the
 evaluation round finished. Ignored with the default value of \code{NULL}.}
-
-\item{...}{Unused}
 }
 \value{
 Named list of model test loss (or losses for models with multiple

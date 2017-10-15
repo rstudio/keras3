@@ -302,7 +302,6 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
 #' @param object Model object to evaluate
 #' @param steps Total number of steps (batches of samples) before declaring the
 #'   evaluation round finished. Ignored with the default value of `NULL`.
-#' @param ... Unused   
 #'   
 #' @return Named list of model test loss (or losses for models with multiple
 #'   outputs) and model metrics.
@@ -310,7 +309,7 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
 #' @family model functions
 #'
 #' @export
-evaluate.keras.engine.training.Model <- function(object, x, y, batch_size = NULL, verbose=1, sample_weight = NULL, steps = NULL, ...) {
+evaluate.keras.engine.training.Model <- function(object, x, y, batch_size = NULL, verbose=1, sample_weight = NULL, steps = NULL) {
   
   # defaults
   if (is.null(batch_size) && is.null(steps))
