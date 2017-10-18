@@ -67,7 +67,7 @@ model <- keras_model(inputs = c(tweet_a, tweet_b), outputs = predictions)
 
 Learn more by reading the [Guide to the Functional API](unctional_api.html).
 
-## Properites
+## Properties
 
 All models share the following properties:
 

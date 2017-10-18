@@ -317,7 +317,7 @@ To use statefulness in RNNs, you need to:
 - set `stateful=TRUE` in your RNN layer(s).
 - specify `shuffle=FALSE` when calling fit().
 
-To reset the states accumulated in either a singel layer or an entire model use the `reset_states()` function.
+To reset the states accumulated in either a single layer or an entire model use the `reset_states()` function.
 
 Notes that the methods `predict()`, `fit()`, `train_on_batch()`, `predict_classes()`, etc. will *all* update the states of the stateful layers in a model. This allows you to do not only stateful training, but also stateful prediction.
 

@@ -85,7 +85,7 @@ Before training a model, you need to configure the learning process, which is do
 
 - A list of metrics. For any classification problem you will want to set this to `metrics = c('accuracy')`. A metric could be the string identifier of an existing metric or a call to metric function (e.g. `metric_binary_crossentropy()`).
 
-Here's the definition of a model along with the compilation step (the `compile()` function has arguments appropriate for a a multi-class classification problem):
+Here's the definition of a model along with the compilation step (the `compile()` function has arguments appropriate for a multi-class classification problem):
 
 ```{r}
 # For a multi-class classification problem
@@ -141,7 +141,7 @@ model %>% compile(
 
 ## Training
 
-Keras models are trained on R matrixes or higher dimensional arrays of input data and labels. For training a model, you will typically use the `fit()` function.
+Keras models are trained on R matrices or higher dimensional arrays of input data and labels. For training a model, you will typically use the `fit()` function.
 
 Here's a single-input model with 2 classes (binary classification):
 
