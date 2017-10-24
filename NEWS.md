@@ -11,6 +11,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Handle `NULL` when converting R arrays to Keras friendly arrays
 
+- Added `dataset_imbd_word_index()` function
+
 
 ## keras 2.0.8 (CRAN)
 

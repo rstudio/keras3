@@ -185,7 +185,6 @@ reference:
       - dataset_cifar100
       - dataset_imdb
       - dataset_reuters
-      - dataset_reuters_word_index
       - dataset_mnist
       - dataset_boston_housing
 
