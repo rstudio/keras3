@@ -268,7 +268,7 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
     validation_data = validation_data,
     shuffle = shuffle,
     class_weight = as_class_weight(class_weight),
-    sample_weight = as.array(sample_weight),
+    sample_weight = as_nullable_array(sample_weight),
     initial_epoch = as.integer(initial_epoch)
   )
   
