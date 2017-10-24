@@ -13,6 +13,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Added `dataset_imbd_word_index()` function
 
+- Ensure that `sample_weight` is passed to `fit()` as an array.
+
 
 ## keras 2.0.8 (CRAN)
 
