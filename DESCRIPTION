@@ -23,7 +23,7 @@ BugReports: https://github.com/rstudio/keras/issues
 Depends:
     R (>= 3.2)
 Imports:
-    reticulate (>= 1.2), 
+    reticulate (>= 1.2.0.9008), 
     tensorflow (>= 1.4.0.9003),
     tfruns (>= 0.9.1),
     magrittr, 
@@ -36,6 +36,7 @@ Suggests:
     knitr,
     rmarkdown
 Remotes:
+    rstudio/reticulate,
     rstudio/tensorflow
 SystemRequirements: Keras >= 2.0 (https://keras.io)
 Roxygen: list(markdown = TRUE)

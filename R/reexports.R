@@ -23,6 +23,10 @@ reticulate::use_virtualenv
 #' @export
 reticulate::use_condaenv
 
+#' @importFrom reticulate array_reshape
+#' @export
+reticulate::array_reshape
+
 #' @importFrom tensorflow use_session_with_seed
 #' @export
 tensorflow::use_session_with_seed
