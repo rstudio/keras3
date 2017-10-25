@@ -163,7 +163,7 @@ ________________________________________________________________________________
 <li><p>A loss function. This is the objective that the model will try to minimize. It can be the string identifier of an existing loss function (e.g. “categorical_crossentropy” or “mse”) or a call to a loss function (e.g. <code><a href="../reference/loss_mean_squared_error.html">loss_mean_squared_error()</a></code>).</p></li>
 <li><p>A list of metrics. For any classification problem you will want to set this to <code>metrics = c('accuracy')</code>. A metric could be the string identifier of an existing metric or a call to metric function (e.g. <code><a href="../reference/metric_binary_accuracy.html">metric_binary_crossentropy()</a></code>).</p></li>
 </ul>
-<p>Here’s the definition of a model along with the compilation step (the <code><a href="../reference/compile.html">compile()</a></code> function has arguments appropriate for a a multi-class classification problem):</p>
+<p>Here’s the definition of a model along with the compilation step (the <code><a href="../reference/compile.html">compile()</a></code> function has arguments appropriate for a multi-class classification problem):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># For a multi-class classification problem</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() 
 model <span class="op">%&gt;%</span><span class="st"> </span>
@@ -205,7 +205,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 <div id="training" class="section level2">
 <h2 class="hasAnchor">
 <a href="#training" class="anchor"></a>Training</h2>
-<p>Keras models are trained on R matrixes or higher dimensional arrays of input data and labels. For training a model, you will typically use the <code><a href="../reference/fit.html">fit()</a></code> function.</p>
+<p>Keras models are trained on R matrices or higher dimensional arrays of input data and labels. For training a model, you will typically use the <code><a href="../reference/fit.html">fit()</a></code> function.</p>
 <p>Here’s a single-input model with 2 classes (binary classification):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create model</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
@@ -303,7 +303,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">epochs =</span> <span class="dv">20</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>)
 
 <span class="co"># evaluate</span>
-score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
+score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
 </div>
 <div id="mlp-for-binary-classification" class="section level3">
 <h3 class="hasAnchor">
@@ -336,7 +336,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">epochs =</span> <span class="dv">20</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>)
 
 <span class="co"># evaluate</span>
-score =<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(x_test, y_test, <span class="dt">batch_size=</span><span class="dv">128</span>)</code></pre></div>
+score =<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size=</span><span class="dv">128</span>)</code></pre></div>
 </div>
 <div id="vgg-like-convnet" class="section level3">
 <h3 class="hasAnchor">
@@ -387,7 +387,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">batch_size =</span> <span class="dv">32</span>, <span class="dt">epochs =</span> <span class="dv">10</span>)
 
 <span class="co"># evaluate</span>
-score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">32</span>)</code></pre></div>
+score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">32</span>)</code></pre></div>
 </div>
 <div id="sequence-classification-with-lstm" class="section level3">
 <h3 class="hasAnchor">
@@ -405,7 +405,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
   )
 
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">batch_size =</span> <span class="dv">16</span>, <span class="dt">epochs =</span> <span class="dv">10</span>)
-score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">16</span>)</code></pre></div>
+score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">16</span>)</code></pre></div>
 </div>
 <div id="sequence-classification-with-1d-convolutions" class="section level3">
 <h3 class="hasAnchor">
@@ -428,7 +428,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
   )
 
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(x_train, y_train, <span class="dt">batch_size =</span> <span class="dv">16</span>, <span class="dt">epochs =</span> <span class="dv">10</span>)
-score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">16</span>)</code></pre></div>
+score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(x_test, y_test, <span class="dt">batch_size =</span> <span class="dv">16</span>)</code></pre></div>
 </div>
 <div id="stacked-lstm-for-sequence-classification" class="section level3">
 <h3 class="hasAnchor">

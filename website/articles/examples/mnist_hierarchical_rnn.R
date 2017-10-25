@@ -45,8 +45,8 @@ x_test <- mnist$test$x
 y_test <- mnist$test$y
 
 # Reshapes data to 4D for Hierarchical RNN.
-dim(x_train) <- c(nrow(x_train), 28, 28, 1) 
-dim(x_test) <- c(nrow(x_test), 28, 28, 1)
+x_train <- array_reshape(x_train, c(nrow(x_train), 28, 28, 1))
+x_test <- array_reshape(x_test, c(nrow(x_test), 28, 28, 1))
 x_train <- x_train / 255
 x_test <- x_test / 255
 

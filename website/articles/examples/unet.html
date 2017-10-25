@@ -324,11 +324,11 @@ imagesRead &lt;-<span class="st"> </span><span class="cf">function</span>(image_
                        mask_file,
                        <span class="dt">target_width =</span> <span class="dv">128</span>, 
                        <span class="dt">target_height =</span> <span class="dv">128</span>) {
-    img &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/edit">image_read</a></span>(image_file)
-    img &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/transformations">image_scale</a></span>(img, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))
+    img &lt;-<span class="st"> </span><span class="kw">image_read</span>(image_file)
+    img &lt;-<span class="st"> </span><span class="kw">image_scale</span>(img, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))
     
-    mask &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/edit">image_read</a></span>(mask_file)
-    mask &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/transformations">image_scale</a></span>(mask, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))
+    mask &lt;-<span class="st"> </span><span class="kw">image_read</span>(mask_file)
+    mask &lt;-<span class="st"> </span><span class="kw">image_scale</span>(mask, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))
     <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">img =</span> img, <span class="dt">mask =</span> mask))
 }
 
@@ -361,23 +361,21 @@ img2arr &lt;-<span class="st"> </span><span class="cf">function</span>(image,
                     <span class="dt">target_width =</span> <span class="dv">128</span>,
                     <span class="dt">target_height =</span> <span class="dv">128</span>) {
     result &lt;-<span class="st"> </span><span class="kw">aperm</span>(<span class="kw">as.numeric</span>(image[[<span class="dv">1</span>]])[, , <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>)) <span class="co"># transpose</span>
-    <span class="kw">dim</span>(result) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, target_width, target_height, <span class="dv">3</span>)
-    <span class="kw">return</span>(result)
+    <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(result, <span class="kw">c</span>(<span class="dv">1</span>, target_width, target_height, <span class="dv">3</span>))
 }
 
 mask2arr &lt;-<span class="st"> </span><span class="cf">function</span>(mask,
                      <span class="dt">target_width =</span> <span class="dv">128</span>,
                      <span class="dt">target_height =</span> <span class="dv">128</span>) {
     result &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">as.numeric</span>(mask[[<span class="dv">1</span>]])[, , <span class="dv">1</span>]) <span class="co"># transpose</span>
-    <span class="kw">dim</span>(result) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, target_width, target_height, <span class="dv">1</span>)
-    <span class="kw">return</span>(result)
+    <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(result, <span class="kw">c</span>(<span class="dv">1</span>, target_width, target_height, <span class="dv">1</span>))
 }
 
 
 <span class="co"># Iterators with parallel processing -----------------------------------------------------</span>
 
-cl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="dv">4</span>) 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/clusterApply">clusterEvalQ</a></span>(cl, {
+cl &lt;-<span class="st"> </span><span class="kw">makePSOCKcluster</span>(<span class="dv">4</span>) 
+<span class="kw">clusterEvalQ</span>(cl, {
     <span class="kw">library</span>(magick)     
     <span class="kw">library</span>(abind)     
     <span class="kw">library</span>(reticulate)
@@ -386,11 +384,11 @@ cl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumenta
                            mask_file,
                            <span class="dt">target_width =</span> <span class="dv">128</span>, 
                            <span class="dt">target_height =</span> <span class="dv">128</span>) {
-        img &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/edit">image_read</a></span>(image_file)
-        img &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/transformations">image_scale</a></span>(img, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))
+        img &lt;-<span class="st"> </span><span class="kw">image_read</span>(image_file)
+        img &lt;-<span class="st"> </span><span class="kw">image_scale</span>(img, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))
         
-        mask &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/edit">image_read</a></span>(mask_file)
-        mask &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/transformations">image_scale</a></span>(mask, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))
+        mask &lt;-<span class="st"> </span><span class="kw">image_read</span>(mask_file)
+        mask &lt;-<span class="st"> </span><span class="kw">image_scale</span>(mask, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))
         <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">img =</span> img, <span class="dt">mask =</span> mask))
     }
     
@@ -423,16 +421,14 @@ cl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumenta
                         <span class="dt">target_width =</span> <span class="dv">128</span>,
                         <span class="dt">target_height =</span> <span class="dv">128</span>) {
         result &lt;-<span class="st"> </span><span class="kw">aperm</span>(<span class="kw">as.numeric</span>(image[[<span class="dv">1</span>]])[, , <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>)) <span class="co"># transpose</span>
-        <span class="kw">dim</span>(result) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, target_width, target_height, <span class="dv">3</span>)
-        <span class="kw">return</span>(result)
+        <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(result, &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, target_width, target_height, <span class="dv">3</span>))
     }
     
     mask2arr &lt;-<span class="st"> </span><span class="cf">function</span>(mask,
                          <span class="dt">target_width =</span> <span class="dv">128</span>,
                          <span class="dt">target_height =</span> <span class="dv">128</span>) {
         result &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">as.numeric</span>(mask[[<span class="dv">1</span>]])[, , <span class="dv">1</span>]) <span class="co"># transpose</span>
-        <span class="kw">dim</span>(result) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, target_width, target_height, <span class="dv">1</span>)
-        <span class="kw">return</span>(result)
+        <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(result, &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, target_width, target_height, <span class="dv">1</span>))
     }
 })
 
@@ -472,7 +468,7 @@ train_generator &lt;-<span class="st"> </span><span class="cf">function</span>(i
         masks_iter &lt;&lt;-<span class="st"> </span>masks_iter[<span class="op">-</span>batch_ind]
         
         
-        x_y_batch &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dt">i =</span> <span class="dv">1</span><span class="op">:</span>batch_size) <span class="op">%dopar%</span><span class="st"> </span>{
+        x_y_batch &lt;-<span class="st"> </span><span class="kw">foreach</span>(<span class="dt">i =</span> <span class="dv">1</span><span class="op">:</span>batch_size) <span class="op">%dopar%</span><span class="st"> </span>{
             x_y_imgs &lt;-<span class="st"> </span><span class="kw">imagesRead</span>(<span class="dt">image_file =</span> batch_images_list[i],
                                    <span class="dt">mask_file =</span> batch_masks_list[i])
             <span class="co"># augmentation</span>
@@ -527,7 +523,7 @@ val_generator &lt;-<span class="st"> </span><span class="cf">function</span>(ima
         masks_iter &lt;&lt;-<span class="st"> </span>masks_iter[<span class="op">-</span>batch_ind]
         
         
-        x_y_batch &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dt">i =</span> <span class="dv">1</span><span class="op">:</span>batch_size) <span class="op">%dopar%</span><span class="st"> </span>{
+        x_y_batch &lt;-<span class="st"> </span><span class="kw">foreach</span>(<span class="dt">i =</span> <span class="dv">1</span><span class="op">:</span>batch_size) <span class="op">%dopar%</span><span class="st"> </span>{
             x_y_imgs &lt;-<span class="st"> </span><span class="kw">imagesRead</span>(<span class="dt">image_file =</span> batch_images_list[i],
                                    <span class="dt">mask_file =</span> batch_masks_list[i])
             <span class="co"># without augmentation</span>
@@ -549,12 +545,12 @@ val_generator &lt;-<span class="st"> </span><span class="cf">function</span>(ima
     }
 }
 
-train_iterator &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/py_iterator">py_iterator</a></span>(<span class="kw">train_generator</span>(<span class="dt">images_dir =</span> images_dir,
+train_iterator &lt;-<span class="st"> </span><span class="kw">py_iterator</span>(<span class="kw">train_generator</span>(<span class="dt">images_dir =</span> images_dir,
                                               <span class="dt">masks_dir =</span> masks_dir,
                                               <span class="dt">samples_index =</span> train_index,
                                               <span class="dt">batch_size =</span> batch_size))
 
-val_iterator &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/py_iterator">py_iterator</a></span>(<span class="kw">val_generator</span>(<span class="dt">images_dir =</span> images_dir,
+val_iterator &lt;-<span class="st"> </span><span class="kw">py_iterator</span>(<span class="kw">val_generator</span>(<span class="dt">images_dir =</span> images_dir,
                                           <span class="dt">masks_dir =</span> masks_dir,
                                           <span class="dt">samples_index =</span> val_index,
                                           <span class="dt">batch_size =</span> batch_size))
@@ -594,7 +590,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
     <span class="dt">callbacks =</span> callbacks_list
 )
 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">stopCluster</a></span>(cl)</code></pre></div>
+<span class="kw">stopCluster</span>(cl)</code></pre></div>
 </div>
   </div>
 

@@ -138,8 +138,8 @@ x_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span cla
 y_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y
 
 <span class="co"># Redefine  dimension of train/test inputs</span>
-<span class="kw">dim</span>(x_train) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_train), img_rows, img_cols, <span class="dv">1</span>) 
-<span class="kw">dim</span>(x_test) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_test), img_rows, img_cols, <span class="dv">1</span>)
+x_train &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_train, <span class="kw">c</span>(<span class="kw">nrow</span>(x_train), img_rows, img_cols, <span class="dv">1</span>))
+x_test &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_test, <span class="kw">c</span>(<span class="kw">nrow</span>(x_test), img_rows, img_cols, <span class="dv">1</span>))
 input_shape &lt;-<span class="st"> </span><span class="kw">c</span>(img_rows, img_cols, <span class="dv">1</span>)
 
 <span class="co"># Transform RGB values into [0,1] range</span>
@@ -184,7 +184,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
   <span class="dt">verbose =</span> <span class="dv">1</span>,
   <span class="dt">validation_data =</span> <span class="kw">list</span>(x_test, y_test)
 )
-scores &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(
+scores &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(
   x_test, y_test, <span class="dt">verbose =</span> <span class="dv">0</span>
 )
 

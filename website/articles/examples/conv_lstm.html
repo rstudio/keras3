@@ -191,8 +191,8 @@ generate_movies &lt;-<span class="st"> </span><span class="cf">function</span>(<
   shifted_movies[shifted_movies <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">1</span>
 
   <span class="co"># Add channel dimension</span>
-  <span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/dimensions">dim</a></span>(noisy_movies) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/dimensions">dim</a></span>(noisy_movies), <span class="dv">1</span>)
-  <span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/dimensions">dim</a></span>(shifted_movies) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/dimensions">dim</a></span>(shifted_movies), <span class="dv">1</span>)
+  noisy_movies &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(noisy_movies, <span class="kw">c</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/dimensions">dim</a></span>(noisy_movies), <span class="dv">1</span>))
+  shifted_movies &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(shifted_movies, <span class="kw">c</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/dimensions">dim</a></span>(shifted_movies), <span class="dv">1</span>))
   
   <span class="kw">list</span>(
     <span class="dt">noisy_movies =</span> noisy_movies,

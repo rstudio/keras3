@@ -154,8 +154,8 @@ img_ncols &lt;-<span class="st"> </span><span class="kw">as.integer</span>(width
 <span class="co"># util function to open, resize and format pictures into appropriate tensors</span>
 preprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(path){
   img &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/image_load.html">image_load</a></span>(path, <span class="dt">target_size =</span> <span class="kw">c</span>(img_nrows, img_ncols)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../../reference/image_to_array.html">image_to_array</a></span>()
-  <span class="kw">dim</span>(img) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(img))
+<span class="st">    </span><span class="kw"><a href="../../reference/image_to_array.html">image_to_array</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(img)))
   <span class="kw"><a href="../../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>(img)
 }
 
@@ -276,7 +276,7 @@ grads &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">g
 f_outputs &lt;-<span class="st">  </span>K<span class="op">$</span><span class="st">`</span><span class="dt">function</span><span class="st">`</span>(<span class="kw">list</span>(combination_image), <span class="kw">list</span>(loss, grads))
 
 eval_loss_and_grads &lt;-<span class="st"> </span><span class="cf">function</span>(image){
-  <span class="kw">dim</span>(image) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, img_nrows, img_ncols, <span class="dv">3</span>)
+  image &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(image, <span class="kw">c</span>(<span class="dv">1</span>, img_nrows, img_ncols, <span class="dv">3</span>))
   outs &lt;-<span class="st"> </span><span class="kw">f_outputs</span>(<span class="kw">list</span>(image))
   <span class="kw">list</span>(
     <span class="dt">loss_value =</span> outs[[<span class="dv">1</span>]],
@@ -344,7 +344,7 @@ x &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">d
   
   <span class="co"># decode the image</span>
   image &lt;-<span class="st"> </span>x &lt;-<span class="st"> </span>opt<span class="op">$</span>par
-  <span class="kw">dim</span>(image) &lt;-<span class="st"> </span>dms
+  image &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(image, dms)
   
   <span class="co"># plot</span>
   im &lt;-<span class="st"> </span><span class="kw">deprocess_image</span>(image)

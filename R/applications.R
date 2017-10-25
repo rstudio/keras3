@@ -96,7 +96,7 @@ xception_preprocess_input <- function(x) {
 #' img_path <- "elephant.jpg"
 #' img <- image_load(img_path, target_size = c(224,224))
 #' x <- image_to_array(img)
-#' dim(x) <- c(1, dim(x))
+#' x <- array_reshape(x, c(1, dim(x)))
 #' x <- imagenet_preprocess_input(x)
 #' 
 #' features <- model %>% predict(x)
@@ -163,7 +163,7 @@ application_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_te
 #' 
 #' # ensure we have a 4d tensor with single element in the batch dimension,
 #' # the preprocess the input for prediction using resnet50
-#' dim(x) <- c(1, dim(x))
+#' x <- array_reshape(x, c(1, dim(x)))
 #' x <- imagenet_preprocess_input(x)
 #' 
 #' # make predictions then decode and print them

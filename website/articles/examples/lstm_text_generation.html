@@ -224,7 +224,7 @@ sample_mod &lt;-<span class="st"> </span><span class="cf">function</span>(preds,
       x &lt;-<span class="st"> </span><span class="kw">sapply</span>(chars, <span class="cf">function</span>(x){
         <span class="kw">as.integer</span>(x <span class="op">==</span><span class="st"> </span>sentence)
       })
-      <span class="kw">dim</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x))
+      x &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x, <span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x)))
       
       preds &lt;-<span class="st"> </span><span class="kw">predict</span>(model, x)
       next_index &lt;-<span class="st"> </span><span class="kw">sample_mod</span>(preds, diversity)

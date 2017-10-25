@@ -171,7 +171,7 @@ generator <- keras_model(gen_decoder_input, gen_x_decoded_mean_squash)
 
 mnist <- dataset_mnist()
 data <- lapply(mnist, function(m) {
-  array(m$x / 255, dim = c(dim(m$x)[1], original_img_size))
+  array_reshape(m$x / 255, dim = c(dim(m$x)[1], original_img_size))
 })
 x_train <- data$train
 x_test <- data$test

@@ -141,8 +141,8 @@ x_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span cla
 y_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y
 
 <span class="co"># Reshapes data to 4D for Hierarchical RNN.</span>
-<span class="kw">dim</span>(x_train) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_train), <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>) 
-<span class="kw">dim</span>(x_test) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_test), <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>)
+x_train &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_train, <span class="kw">c</span>(<span class="kw">nrow</span>(x_train), <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>))
+x_test &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_test, <span class="kw">c</span>(<span class="kw">nrow</span>(x_test), <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>))
 x_train &lt;-<span class="st"> </span>x_train <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
 x_test &lt;-<span class="st"> </span>x_test <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
 
@@ -192,7 +192,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 )
 
 <span class="co"># Evaluation</span>
-scores &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(x_test, y_test, <span class="dt">verbose =</span> <span class="dv">0</span>)
+scores &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(x_test, y_test, <span class="dt">verbose =</span> <span class="dv">0</span>)
 <span class="kw">cat</span>(<span class="st">'Test loss:'</span>, scores[[<span class="dv">1</span>]], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
 <span class="kw">cat</span>(<span class="st">'Test accuracy:'</span>, scores[[<span class="dv">2</span>]], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</code></pre></div>
 </div>

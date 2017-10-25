@@ -128,7 +128,7 @@ grads <- K$gradients(loss, dream)[[1]]
 f_outputs <- K$`function`(list(dream), list(loss,grads))
 
 eval_loss_and_grads <- function(image){
-  dim(image) <- c(1, img_size)
+  image <- array_reshape(image, c(1, img_size))
   outs <- f_outputs(list(image))
   list(
     loss_value = outs[[1]],
@@ -193,7 +193,7 @@ for(i in 1:5){
   
   # Decode the image
   image <- opt$par
-  dim(image) <- c(1, img_size)
+  image <- array_reshape(image, c(1, img_size))
   image <- image - random_jitter
 
   # Plot

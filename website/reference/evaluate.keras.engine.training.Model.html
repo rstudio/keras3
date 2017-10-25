@@ -135,8 +135,9 @@
     
 
     <pre class="usage"><span class='co'># S3 method for keras.engine.training.Model</span>
-<span class='fu'>evaluate</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='no'>y</span>,
-  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/tensorflow/topics/evaluate'>evaluate</a></span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='no'>y</span>,
+  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -180,6 +181,10 @@ sample_weight_mode="temporal" in <code><a href='compile.html'>compile()</a></cod
       <th>steps</th>
       <td><p>Total number of steps (batches of samples) before declaring the
 evaluation round finished. Ignored with the default value of <code>NULL</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Unused</p></td>
     </tr>
     </table>
     

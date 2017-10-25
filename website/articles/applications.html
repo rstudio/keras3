@@ -145,7 +145,7 @@ x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_to_
 
 <span class="co"># ensure we have a 4d tensor with single element in the batch dimension,</span>
 <span class="co"># the preprocess the input for prediction using resnet50</span>
-<span class="kw">dim</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x))
+x &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x, <span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x)))
 x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>(x)
 
 <span class="co"># make predictions then decode and print them</span>
@@ -164,7 +164,7 @@ preds &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span cl
 img_path &lt;-<span class="st"> "elephant.jpg"</span>
 img &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_load.html">image_load</a></span>(img_path, <span class="dt">target_size =</span> <span class="kw">c</span>(<span class="dv">224</span>,<span class="dv">224</span>))
 x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_to_array.html">image_to_array</a></span>(img)
-<span class="kw">dim</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x))
+x &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x, <span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x)))
 x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>(x)
 
 features &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">predict</span>(x)</code></pre></div>
@@ -179,7 +179,7 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras
 img_path &lt;-<span class="st"> "elephant.jpg"</span>
 img &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_load.html">image_load</a></span>(img_path, <span class="dt">target_size =</span> <span class="kw">c</span>(<span class="dv">224</span>,<span class="dv">224</span>))
 x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_to_array.html">image_to_array</a></span>(img)
-<span class="kw">dim</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x)) 
+x &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x, <span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x)))
 x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>(x)
 
 block4_pool_features &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">predict</span>(x)</code></pre></div>

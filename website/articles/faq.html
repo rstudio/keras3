@@ -358,7 +358,7 @@ trainable_model <span class="op">%&gt;%</span><span class="st"> </span><span cla
 <li>set <code>stateful=TRUE</code> in your RNN layer(s).</li>
 <li>specify <code>shuffle=FALSE</code> when calling fit().</li>
 </ul>
-<p>To reset the states accumulated in either a singel layer or an entire model use the <code><a href="../reference/reset_states.html">reset_states()</a></code> function.</p>
+<p>To reset the states accumulated in either a single layer or an entire model use the <code><a href="../reference/reset_states.html">reset_states()</a></code> function.</p>
 <p>Notes that the methods <code>predict()</code>, <code><a href="../reference/fit.html">fit()</a></code>, <code><a href="../reference/train_on_batch.html">train_on_batch()</a></code>, <code><a href="../reference/predict_proba.html">predict_classes()</a></code>, etc. will <em>all</em> update the states of the stateful layers in a model. This allows you to do not only stateful training, but also stateful prediction.</p>
 </div>
 <div id="how-can-i-remove-a-layer-from-a-sequential-model" class="section level2">

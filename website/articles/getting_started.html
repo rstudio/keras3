@@ -153,11 +153,12 @@ x_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span cla
 y_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y</code></pre></div>
 <p>The <code>x</code> data is a 3-d array <code>(images,width,height)</code> of grayscale values . To prepare the data for training we convert the 3-d arrays into matrices by reshaping width and height into a single dimension (28x28 images are flattened into length 784 vectors). Then, we convert the grayscale values from integers ranging between 0 to 255 into floating point values ranging between 0 and 1:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># reshape</span>
-<span class="kw">dim</span>(x_train) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_train), <span class="dv">784</span>)
-<span class="kw">dim</span>(x_test) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_test), <span class="dv">784</span>)
+x_train &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_train, <span class="kw">c</span>(<span class="kw">nrow</span>(x_train), <span class="dv">784</span>))
+x_test &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_test, <span class="kw">c</span>(<span class="kw">nrow</span>(x_test), <span class="dv">784</span>))
 <span class="co"># rescale</span>
 x_train &lt;-<span class="st"> </span>x_train <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
 x_test &lt;-<span class="st"> </span>x_test <span class="op">/</span><span class="st"> </span><span class="dv">255</span></code></pre></div>
+<p>Note that we use the <code><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape()</a></code> function rather than the <code>dim&lt;-()</code> function to reshape the array. This is so that the data is re-interpreted using row-major semantics (as opposed to R’s default column-major semantics), which is in turn compatible with the way that the numerical libraries called by Keras interpret array dimensions.</p>
 <p>The <code>y</code> data is an integer vector with values ranging from 0 to 9. To prepare this data for training we <a href="https://www.quora.com/What-is-one-hot-encoding-and-when-is-it-used-in-data-science">one-hot encode</a> the vectors into binary class matrices using the Keras <code><a href="../reference/to_categorical.html">to_categorical()</a></code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y_train &lt;-<span class="st"> </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(y_train, <span class="dv">10</span>)
 y_test &lt;-<span class="st"> </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(y_test, <span class="dv">10</span>)</code></pre></div>
@@ -217,7 +218,7 @@ ________________________________________________________________________________
 <img src="images/training_history_ggplot2.png" class="r-plot" width="757" height="489">
 </div>
 <p>Evaluate the model’s performance on the test data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(x_test, y_test)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(x_test, y_test)</code></pre></div>
 <pre><code>$loss
 [1] 0.1149
 

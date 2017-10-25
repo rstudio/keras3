@@ -132,8 +132,8 @@ y_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span c
 x_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>x
 y_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y
 
-<span class="kw">dim</span>(x_train) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_train), <span class="dv">784</span>)
-<span class="kw">dim</span>(x_test) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_test), <span class="dv">784</span>)
+x_train &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_train, <span class="kw">c</span>(<span class="kw">nrow</span>(x_train), <span class="dv">784</span>))
+x_test &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_test, <span class="kw">c</span>(<span class="kw">nrow</span>(x_test), <span class="dv">784</span>))
 
 <span class="co"># Transform RGB values into [0,1] range</span>
 x_train &lt;-<span class="st"> </span>x_train <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
@@ -177,7 +177,7 @@ history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span 
 
 <span class="kw">plot</span>(history)
   
-score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(
+score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(
   x_test, y_test,
   <span class="dt">verbose =</span> <span class="dv">0</span>
 )

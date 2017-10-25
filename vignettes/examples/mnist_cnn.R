@@ -26,8 +26,8 @@ x_test <- mnist$test$x
 y_test <- mnist$test$y
 
 # Redefine  dimension of train/test inputs
-dim(x_train) <- c(nrow(x_train), img_rows, img_cols, 1) 
-dim(x_test) <- c(nrow(x_test), img_rows, img_cols, 1)
+x_train <- array_reshape(x_train, c(nrow(x_train), img_rows, img_cols, 1))
+x_test <- array_reshape(x_test, c(nrow(x_test), img_rows, img_cols, 1))
 input_shape <- c(img_rows, img_cols, 1)
 
 # Transform RGB values into [0,1] range

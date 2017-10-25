@@ -247,16 +247,14 @@ img2arr <- function(image,
 					target_width = 128,
 					target_height = 128) {
 	result <- aperm(as.numeric(image[[1]])[, , 1:3], c(2, 1, 3)) # transpose
-	dim(result) <- c(1, target_width, target_height, 3)
-	return(result)
+	array_reshape(result, <- c(1, target_width, target_height, 3))
 }
 
 mask2arr <- function(mask,
 					 target_width = 128,
 					 target_height = 128) {
 	result <- t(as.numeric(mask[[1]])[, , 1]) # transpose
-	dim(result) <- c(1, target_width, target_height, 1)
-	return(result)
+	array_reshape(result, <- c(1, target_width, target_height, 1))
 }
 
 

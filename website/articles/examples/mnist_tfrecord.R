@@ -148,7 +148,7 @@ K$clear_session()
 
 # Second Session to test loading trained model without tensors
 x_test <- data$validation$images
-x_test <- keras_array(x_test, dim = c(nrow(x_test), 28, 28, 1))
+x_test <- array_reshape(x_test, dim = c(nrow(x_test), 28, 28, 1))
 y_test <- data$validation$labels
 x_test_inp <- layer_input(shape = dim(x_test)[-1])
 test_out <- cnn_layers(x_test_inp)

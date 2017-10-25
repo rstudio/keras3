@@ -139,7 +139,10 @@
 <ul>
 <li><p>Automatically call <code><a href="../reference/keras_array.html">keras_array()</a></code> on the results of generator functions.</p></li>
 <li><p>Ensure that <code>steps_per_epoch</code> is passed as an integer</p></li>
-<li><p>Import <code>evaluate()</code> generic from tensorflow package</p></li>
+<li><p>Import <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate()</a></code> generic from tensorflow package</p></li>
+<li><p>Handle <code>NULL</code> when converting R arrays to Keras friendly arrays</p></li>
+<li><p>Added <code>dataset_imbd_word_index()</code> function</p></li>
+<li><p>Ensure that <code>sample_weight</code> is passed to <code><a href="../reference/fit.html">fit()</a></code> as an array.</p></li>
 </ul>
 </div>
     <div id="keras-2-0-8-cran" class="section level2">
@@ -154,7 +157,7 @@
 <li><p>Better support for training models from data tensors in TensorFlow (e.g. Datasets, TFRecords). Add a related example script.</p></li>
 <li><p>Add <code><a href="../reference/clone_model.html">clone_model()</a></code> function, enabling to construct a new model, given an existing model to use as a template. Works even in a TensorFlow graph different from that of the original model.</p></li>
 <li><p>Add <code>target_tensors</code> argument in <code><a href="../reference/compile.html">compile()</a></code>, enabling to use custom tensors or placeholders as model targets.</p></li>
-<li><p>Add <code>steps_per_epoch</code> argument in <code><a href="../reference/fit.html">fit()</a></code>, enabling to train a model from data tensors in a way that is consistent with training from arrays. Similarly, add <code>steps</code> argument in <code>predict()</code> and <code>evaluate()</code>.</p></li>
+<li><p>Add <code>steps_per_epoch</code> argument in <code><a href="../reference/fit.html">fit()</a></code>, enabling to train a model from data tensors in a way that is consistent with training from arrays. Similarly, add <code>steps</code> argument in <code>predict()</code> and <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate()</a></code>.</p></li>
 <li><p>Add <code><a href="../reference/layer_subtract.html">layer_subtract()</a></code> layer function.</p></li>
 <li><p>Add <code>weighted_metrics</code> argument in compile to specify metric functions meant to take into account <code>sample_weight</code> or <code>class_weight</code>.</p></li>
 <li><p>Enable stateful RNNs with CNTK.</p></li>
@@ -177,7 +180,7 @@
 <li><p><code><a href="../reference/is_keras_available.html">is_keras_available()</a></code> function to probe whether the Keras python package is available in the current environment.</p></li>
 <li><p><code>as.data.frame()</code> S3 method for Keras training history</p></li>
 <li><p>Remove names from <code><a href="../reference/keras_model.html">keras_model()</a></code> inputs</p></li>
-<li><p>Return result of <code>evaluate()</code> as named list</p></li>
+<li><p>Return result of <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate()</a></code> as named list</p></li>
 <li><p>Write run metrics and evaluation data to tfruns</p></li>
 <li><p>Provide hint to use r-tensorflow environment when importing keras</p></li>
 </ul>

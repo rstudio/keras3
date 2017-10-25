@@ -57,8 +57,8 @@ img_ncols <- as.integer(width * img_nrows / height)
 # util function to open, resize and format pictures into appropriate tensors
 preprocess_image <- function(path){
   img <- image_load(path, target_size = c(img_nrows, img_ncols)) %>%
-    image_to_array()
-  dim(img) <- c(1, dim(img))
+    image_to_array() %>% 
+    array_reshape(c(1, dim(img)))
   imagenet_preprocess_input(img)
 }
 
@@ -179,7 +179,7 @@ grads <- K$gradients(loss, combination_image)[[1]]
 f_outputs <-  K$`function`(list(combination_image), list(loss, grads))
 
 eval_loss_and_grads <- function(image){
-  dim(image) <- c(1, img_nrows, img_ncols, 3)
+  image <- array_reshape(image, c(1, img_nrows, img_ncols, 3))
   outs <- f_outputs(list(image))
   list(
     loss_value = outs[[1]],
@@ -247,7 +247,7 @@ for(i in 1:iterations){
   
   # decode the image
   image <- x <- opt$par
-  dim(image) <- dms
+  image <- array_reshape(image, dms)
   
   # plot
   im <- deprocess_image(image)
