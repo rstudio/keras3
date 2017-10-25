@@ -141,6 +141,10 @@ compile <- function(object, optimizer, loss,
   # handle metrics
   if (!is.null(metrics)) {
     
+    # convert metrics to list if it isn't one
+    if (!is.list(metrics) && length(metrics) == 1)
+      metrics <- list(metrics)
+    
     # get metric names (if any)
     metric_names <- names(metrics)
     if (is.null(metric_names))

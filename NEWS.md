@@ -15,6 +15,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Ensure that `sample_weight` is passed to `fit()` as an array.
 
+- Accept single function as `metrics` argument to `compile()`
+
 
 ## keras 2.0.8 (CRAN)
 
