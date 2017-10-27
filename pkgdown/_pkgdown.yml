@@ -227,6 +227,7 @@ reference:
       - fit_image_data_generator
       - flow_images_from_data
       - flow_images_from_directory
+      - generator_next
  
   - title: "Optimizers"
     contents:

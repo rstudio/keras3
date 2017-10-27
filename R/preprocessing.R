@@ -465,6 +465,21 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
 }
 
 
+#' Retreive the next item from a generator
+#' 
+#' Use to retrieve items from generators (e.g. [image_data_generator()]). Will return
+#' either the next item or `NULL` if there are no more items.
+#' 
+#' @param generator Generator 
+#' @param completed Sentinel value to return from `generator_next()` if the iteration
+#'   completes (defaults to `NULL` but can be any R value you specify).
+#'
+#' @export
+generator_next <- function(generator, completed = NULL) {
+  reticulate::iter_next(generator, completed = completed)
+}
+
+
 #' Fit image data generator internal statistics to some sample data.
 #' 
 #' Required for `featurewise_center`, `featurewise_std_normalization`
