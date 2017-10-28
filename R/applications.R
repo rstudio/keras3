@@ -51,7 +51,7 @@ application_xception <- function(include_top = TRUE, weights = "imagenet",
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -109,7 +109,7 @@ application_vgg16 <- function(include_top = TRUE, weights = "imagenet", input_te
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -124,7 +124,7 @@ application_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_te
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -178,7 +178,7 @@ application_resnet50 <- function(include_top = TRUE, weights = "imagenet", input
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -209,7 +209,7 @@ application_inception_v3 <- function(include_top = TRUE, weights = "imagenet", i
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )

@@ -17,6 +17,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Accept single function as `metrics` argument to `compile()`
 
+- Automatically cast `input_shape` argument to applications to integer
+
 
 ## keras 2.0.8 (CRAN)
 
