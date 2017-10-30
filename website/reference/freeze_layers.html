@@ -136,7 +136,7 @@
 
     <pre class="usage"><span class='fu'>freeze_layers</span>(<span class='no'>object</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>unfreeze_layers</span>(<span class='no'>model</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>unfreeze_layers</span>(<span class='no'>object</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -145,15 +145,70 @@
       <th>object</th>
       <td><p>Keras model object</p></td>
     </tr>
+    <tr>
+      <th>from</th>
+      <td><p>Layer instance, layer name, or layer index within model</p></td>
+    </tr>
+    <tr>
+      <th>to</th>
+      <td><p>Layer instance, layer name, or layer index within model</p></td>
+    </tr>
     </table>
     
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
+    <p>The <code>from</code> and <code>to</code> layer arguments are both inclusive. Models must be
+compiled again after layers are frozen or unfrozen.</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># instantiate a VGG16 model</span>
+<span class='no'>conv_base</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='application_vgg.html'>application_vgg16</a></span>(
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='st'>"imagenet"</span>,
+  <span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>150</span>, <span class='fl'>150</span>, <span class='fl'>3</span>)
+)
+
+<span class='co'># freeze it's layers</span>
+<span class='fu'>freeze_layers</span>(<span class='no'>conv_base</span>)
+
+<span class='co'># create a composite model that includes the base + more layers</span>
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='keras_model_sequential.html'>keras_model_sequential</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='no'>conv_base</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='layer_flatten.html'>layer_flatten</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='layer_dense.html'>layer_dense</a></span>(<span class='kw'>units</span> <span class='kw'>=</span> <span class='fl'>256</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='st'>"relu"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='layer_dense.html'>layer_dense</a></span>(<span class='kw'>units</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='st'>"sigmoid"</span>)
+
+<span class='co'># compile</span>
+<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='compile.html'>compile</a></span>(
+  <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>"binary_crossentropy"</span>,
+  <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span>(<span class='kw'>lr</span> <span class='kw'>=</span> <span class='fl'>2e-5</span>),
+  <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"accuracy"</span>)
+)
+
+<span class='co'># unfreeze layers from "block5_conv1" on</span>
+<span class='fu'>unfreeze_layers</span>(<span class='no'>conv_base</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"block5_conv1"</span>)
+
+<span class='co'># compile again since we froze or unfroze layers</span>
+<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='compile.html'>compile</a></span>(
+  <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>"binary_crossentropy"</span>,
+  <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span>(<span class='kw'>lr</span> <span class='kw'>=</span> <span class='fl'>2e-5</span>),
+  <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"accuracy"</span>)
+)
+
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#note">Note</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

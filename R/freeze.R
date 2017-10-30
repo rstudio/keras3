@@ -1,16 +1,16 @@
 
 
 #' Freeze and unfreeze layers
-#' 
+#'
 #' Freeze layers in a model so that they are no longer trainable.
-#' 
+#'
 #' @param object Keras model object
 #' @param from Layer instance, layer name, or layer index within model
-#' @param from Layer instance, layer name, or layer index within model 
-#' 
-#' @note Models must be compiled again after layers are frozen
-#'  or unfrozen.
-#' 
+#' @param to Layer instance, layer name, or layer index within model
+#'
+#' @note The `from` and `to` layer arguments are both inclusive. Models must be
+#'   compiled again after layers are frozen or unfrozen.
+#'
 #' @examples \dontrun{
 #' # instantiate a VGG16 model
 #' conv_base <- application_vgg16(
@@ -18,36 +18,36 @@
 #'   include_top = FALSE,
 #'   input_shape = c(150, 150, 3)
 #' )
-#' 
+#'
 #' # freeze it's layers
 #' freeze_layers(conv_base)
-#' 
+#'
 #' # create a composite model that includes the base + more layers
-#' model <- keras_model_sequential() %>% 
-#'   conv_base %>% 
-#'   layer_flatten() %>% 
-#'   layer_dense(units = 256, activation = "relu") %>% 
+#' model <- keras_model_sequential() %>%
+#'   conv_base %>%
+#'   layer_flatten() %>%
+#'   layer_dense(units = 256, activation = "relu") %>%
 #'   layer_dense(units = 1, activation = "sigmoid")
-#' 
+#'
 #' # compile
 #' model %>% compile(
 #'   loss = "binary_crossentropy",
 #'   optimizer = optimizer_rmsprop(lr = 2e-5),
 #'   metrics = c("accuracy")
 #' )
-#' 
+#'
 #' # unfreeze layers from "block5_conv1" on
 #' unfreeze_layers(conv_base, from = "block5_conv1")
-#' 
+#'
 #' # compile again since we froze or unfroze layers
 #' model %>% compile(
 #'   loss = "binary_crossentropy",
 #'   optimizer = optimizer_rmsprop(lr = 2e-5),
 #'   metrics = c("accuracy")
 #' )
-#' 
+#'
 #' }
-#' 
+#'
 #' @export
 freeze_layers <- function(object, from = NULL, to = NULL) {
   

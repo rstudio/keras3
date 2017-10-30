@@ -14,14 +14,14 @@ unfreeze_layers(object, from = NULL, to = NULL)
 
 \item{from}{Layer instance, layer name, or layer index within model}
 
-\item{from}{Layer instance, layer name, or layer index within model}
+\item{to}{Layer instance, layer name, or layer index within model}
 }
 \description{
 Freeze layers in a model so that they are no longer trainable.
 }
 \note{
-Models must be compiled again after layers are frozen
-or unfrozen.
+The \code{from} and \code{to} layer arguments are both inclusive. Models must be
+compiled again after layers are frozen or unfrozen.
 }
 \examples{
 \dontrun{
@@ -36,10 +36,10 @@ conv_base <- application_vgg16(
 freeze_layers(conv_base)
 
 # create a composite model that includes the base + more layers
-model <- keras_model_sequential() \%>\% 
-  conv_base \%>\% 
-  layer_flatten() \%>\% 
-  layer_dense(units = 256, activation = "relu") \%>\% 
+model <- keras_model_sequential() \%>\%
+  conv_base \%>\%
+  layer_flatten() \%>\%
+  layer_dense(units = 256, activation = "relu") \%>\%
   layer_dense(units = 1, activation = "sigmoid")
 
 # compile
