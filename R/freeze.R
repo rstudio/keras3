@@ -8,8 +8,13 @@
 #' @param from Layer instance, layer name, or layer index within model
 #' @param to Layer instance, layer name, or layer index within model
 #'
-#' @note The `from` and `to` layer arguments are both inclusive. Models must be
-#'   compiled again after layers are frozen or unfrozen.
+#' @note The `from` and `to` layer arguments are both inclusive.
+#'
+#'   The freeze and unfreeze functions are global operations over all layers in
+#'   a model (i.e. layers not within the specified range will be set to the
+#'   opposite value, e.g. unfrozen for a call to freeze_layers).
+#'
+#'   Models must be compiled again after layers are frozen or unfrozen.
 #'
 #' @examples \dontrun{
 #' # instantiate a VGG16 model
@@ -72,7 +77,7 @@ unfreeze_layers <- function(object, from = NULL, to = NULL) {
   object$trainable <- TRUE
   
   # apply to individual layers if requested
-  if (!missing(from) || !missing(true))
+  if (!missing(from) || !missing(to))
     apply_trainable(object, from, to, TRUE)
   
   # return model invisibly (for chaining)
@@ -113,8 +118,10 @@ apply_trainable <- function(object, from, to, trainable) {
     # apply property
     if (set_trainable)
       layer$trainable <- trainable
+    else
+      layer$trainable <- !trainable
     
-    # flat to stop applying property
+    # flag to stop applying property
     if (layer$name == to)
       set_trainable <- FALSE
   }
