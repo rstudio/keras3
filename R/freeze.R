@@ -51,11 +51,13 @@
 #' @export
 freeze_layers <- function(object, from = NULL, to = NULL) {
   
-  # object is still globally trainable if either from or to is specified
-  object$trainable <- !missing(from) || !missing(to)
-  
-  # apply trainlable 
-  apply_trainable(object, from, to, FALSE)
+  # check for from and to and apply accordingly
+  if (missing(from) && missing(to)) {
+    object$trainable <- FALSE
+  } else {
+    object$trainable <- TRUE
+    apply_trainable(object, from, to, FALSE)
+  }
     
   # return model invisibly (for chaining)
   invisible(object)
@@ -69,8 +71,9 @@ unfreeze_layers <- function(object, from = NULL, to = NULL) {
   # object always trainable after unfreeze
   object$trainable <- TRUE
   
-  # apply trainable
-  apply_trainable(object, from, to, TRUE)
+  # apply to individual layers if requested
+  if (!missing(from) || !missing(true))
+    apply_trainable(object, from, to, TRUE)
   
   # return model invisibly (for chaining)
   invisible(object)
