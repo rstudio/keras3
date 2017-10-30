@@ -21,6 +21,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Allow Keras models to be composable within model pipelines
 
+- Added `freeze_layers()` and `unfreeze_layers()` functions.
+
 
 ## keras 2.0.8 (CRAN)
 

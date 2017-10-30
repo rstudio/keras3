@@ -152,7 +152,7 @@ image_class <- layer_input(shape = list(1), dtype = "int32")
 fake <- generator(list(latent, image_class))
 
 # Only want to be able to train generation for the combined model
-discriminator$trainable <- FALSE
+freeze_layers(discriminator)
 results <- discriminator(fake)
 
 combined <- keras_model(list(latent, image_class), results)

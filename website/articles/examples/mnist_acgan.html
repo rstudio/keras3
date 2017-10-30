@@ -280,7 +280,7 @@ image_class &lt;-<span class="st"> </span><span class="kw"><a href="../../refere
 fake &lt;-<span class="st"> </span><span class="kw">generator</span>(<span class="kw">list</span>(latent, image_class))
 
 <span class="co"># Only want to be able to train generation for the combined model</span>
-discriminator<span class="op">$</span>trainable &lt;-<span class="st"> </span><span class="ot">FALSE</span>
+<span class="kw"><a href="../../reference/freeze_layers.html">freeze_layers</a></span>(discriminator)
 results &lt;-<span class="st"> </span><span class="kw">discriminator</span>(fake)
 
 combined &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="kw">list</span>(latent, image_class), results)
