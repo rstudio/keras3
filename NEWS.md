@@ -19,6 +19,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Automatically cast `input_shape` argument to applications to integer
 
+- Allow Keras models to be composable within model pipelines
+
 
 ## keras 2.0.8 (CRAN)
 

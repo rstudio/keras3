@@ -73,6 +73,15 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 }
 
 
+#' @importFrom reticulate py_to_r_wrapper
+#' @export
+py_to_r_wrapper.keras.engine.training.Model <- function(x) {
+  function(object) {
+    compose_layer(object, x)
+  }
+}
+
+
 #' Clone a model instance.
 #'
 #' Model cloning is similar to calling a model on new inputs, except that it
