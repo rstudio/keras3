@@ -10,6 +10,17 @@
 #' @usage lhs \%>\% rhs
 NULL
 
+#' Assign values to names
+#'
+#' See \code{\link[zeallot]{\%<-\%}} for more details.
+#'
+#' @name %<-%
+#' @rdname multi-assign
+#' @keywords internal
+#' @export
+#' @import zeallot
+#' @usage x \%<-\% value
+NULL
 
 #' @importFrom reticulate use_python
 #' @export

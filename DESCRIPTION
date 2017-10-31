@@ -27,6 +27,7 @@ Imports:
     tensorflow (>= 1.4.0.9003),
     tfruns (>= 0.9.1),
     magrittr, 
+    zeallot,
     methods,
     R6,
     utils
