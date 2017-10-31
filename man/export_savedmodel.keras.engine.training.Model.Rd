@@ -18,7 +18,4 @@ The path to the exported directory, as a string.
 \description{
 Serialize a model to disk.
 }
-\details{
-See \code{\link[export_savedmodel]{\%>\%}} for more details.
-}
 \keyword{internal}

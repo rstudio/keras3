@@ -235,8 +235,6 @@ model_to_tensors_info <- function(layers, name) {
 #' Export a Saved Model
 #'
 #' Serialize a model to disk.
-#' 
-#' See \code{\link[export_savedmodel]{\%>\%}} for more details.
 #'
 #' @param object An \R object.
 #' @param export_dir_base A string containing a directory in which to create
