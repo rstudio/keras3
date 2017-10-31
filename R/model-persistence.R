@@ -221,7 +221,7 @@ unserialize_model <- function(model, custom_objects = NULL, compile = TRUE) {
 
 model_to_tensors_info <- function(layers, name) {
   named_layers <- lapply(layers, function(layer) {
-    backend()$saved_model$utils$build_tensor_info(layer[[name]])
+    tensorflow::tf$saved_model$utils$build_tensor_info(layer[[name]])
   })
   
   if (length(named_layers) == 1)
@@ -255,14 +255,14 @@ export_savedmodel.keras.engine.training.Model <- function(model, export_dir_base
   input_info <- model_to_tensors_info(model$input_layers, "input")
   output_info <- model_to_tensors_info(model$output_layers, "output")
   
-  builder <- backend()$saved_model$builder$SavedModelBuilder(export_dir_base)
+  builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir_base)
   builder$add_meta_graph_and_variables(
     sess,
     list(
-      backend()$python$saved_model$tag_constants$SERVING
+      tensorflow::tf$python$saved_model$tag_constants$SERVING
     ),
     signature_def_map = list(
-      serving_default = backend()$saved_model$signature_def_utils$build_signature_def(
+      serving_default = tensorflow::tf$saved_model$signature_def_utils$build_signature_def(
         inputs = input_info,
         outputs = output_info
       )
