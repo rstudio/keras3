@@ -301,6 +301,44 @@ frozen_model %>% fit(data, labels)  # this does NOT update the weights of `layer
 trainable_model %>% fit(data, labels)  # this updates the weights of `layer`
 ```
 
+Finally, you can freeze or unfreeze and entire model (or a range of layers within the model) using the `freeze_layers()` and `unfreeze_layers()` functions. For example:
+
+```{r}
+# instantiate a VGG16 model
+conv_base <- application_vgg16(
+  weights = "imagenet",
+  include_top = FALSE,
+  input_shape = c(150, 150, 3)
+)
+
+# freeze it's layers
+freeze_layers(conv_base)
+
+# create a composite model that includes the base + more layers
+model <- keras_model_sequential() %>% 
+  conv_base %>% 
+  layer_flatten() %>% 
+  layer_dense(units = 256, activation = "relu") %>% 
+  layer_dense(units = 1, activation = "sigmoid")
+
+# compile
+model %>% compile(
+  loss = "binary_crossentropy",
+  optimizer = optimizer_rmsprop(lr = 2e-5),
+  metrics = c("accuracy")
+)
+
+# unfreeze layers from "block5_conv1" on
+unfreeze_layers(conv_base, from = "block5_conv1")
+
+# compile again since we froze or unfroze layers
+model %>% compile(
+  loss = "binary_crossentropy",
+  optimizer = optimizer_rmsprop(lr = 2e-5),
+  metrics = c("accuracy")
+)
+```
+
 
 ## How can I use stateful RNNs?
 

@@ -262,6 +262,10 @@ is_osx <- function() {
   Sys.info()["sysname"] == "Darwin"
 }
 
+is_layer <- function(object) {
+  inherits(object, "keras.engine.topology.Layer")
+}
+
 relative_to <- function(dir, file) {
   
   # normalize paths

@@ -342,6 +342,40 @@ trainable_model <span class="op">%&gt;%</span><span class="st"> </span><span cla
 
 frozen_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels)  <span class="co"># this does NOT update the weights of `layer`</span>
 trainable_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels)  <span class="co"># this updates the weights of `layer`</span></code></pre></div>
+<p>Finally, you can freeze or unfreeze and entire model (or a range of layers within the model) using the <code><a href="../reference/freeze_layers.html">freeze_layers()</a></code> and <code><a href="../reference/freeze_layers.html">unfreeze_layers()</a></code> functions. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># instantiate a VGG16 model</span>
+conv_base &lt;-<span class="st"> </span><span class="kw"><a href="../reference/application_vgg.html">application_vgg16</a></span>(
+  <span class="dt">weights =</span> <span class="st">"imagenet"</span>,
+  <span class="dt">include_top =</span> <span class="ot">FALSE</span>,
+  <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">3</span>)
+)
+
+<span class="co"># freeze it's layers</span>
+<span class="kw"><a href="../reference/freeze_layers.html">freeze_layers</a></span>(conv_base)
+
+<span class="co"># create a composite model that includes the base + more layers</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>conv_base <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_flatten.html">layer_flatten</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">256</span>, <span class="dt">activation =</span> <span class="st">"relu"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">"sigmoid"</span>)
+
+<span class="co"># compile</span>
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+  <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span>,
+  <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="dt">lr =</span> <span class="fl">2e-5</span>),
+  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">"accuracy"</span>)
+)
+
+<span class="co"># unfreeze layers from "block5_conv1" on</span>
+<span class="kw"><a href="../reference/freeze_layers.html">unfreeze_layers</a></span>(conv_base, <span class="dt">from =</span> <span class="st">"block5_conv1"</span>)
+
+<span class="co"># compile again since we froze or unfroze layers</span>
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+  <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span>,
+  <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="dt">lr =</span> <span class="fl">2e-5</span>),
+  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">"accuracy"</span>)
+)</code></pre></div>
 </div>
 <div id="how-can-i-use-stateful-rnns" class="section level2">
 <h2 class="hasAnchor">
