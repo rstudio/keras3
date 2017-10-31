@@ -4,13 +4,13 @@
 \alias{export_savedmodel.keras.engine.training.Model}
 \title{Export a Saved Model}
 \usage{
-export_savedmodel.keras.engine.training.Model(model, export_dir_base)
+export_savedmodel.keras.engine.training.Model(object, export_dir_base)
 }
 \arguments{
+\item{object}{An \R object.}
+
 \item{export_dir_base}{A string containing a directory in which to create
 versioned subdirectories containing exported SavedModels.}
-
-\item{object}{An \R object.}
 }
 \value{
 The path to the exported directory, as a string.
@@ -18,4 +18,3 @@ The path to the exported directory, as a string.
 \description{
 Serialize a model to disk.
 }
-\keyword{internal}

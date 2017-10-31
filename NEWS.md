@@ -23,6 +23,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Added `freeze_layers()` and `unfreeze_layers()` functions.
 
+- Implement `export_savedmodel()` generic from TensorFlow package
+
 
 ## keras 2.0.8 (CRAN)
 
