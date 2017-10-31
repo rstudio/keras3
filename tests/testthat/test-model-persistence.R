@@ -88,5 +88,5 @@ test_succeeds("model can be exported to TensorFlow", {
   tensorflow::export_savedmodel(model, model_dir)
   
   files <- dir(tmp, recursive = TRUE)
-  expect_true(any(grepl("saved_model\.pb", tmp)))
+  expect_true(any(grepl("saved_model\\.pb", tmp)))
 })
