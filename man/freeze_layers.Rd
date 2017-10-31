@@ -20,8 +20,13 @@ unfreeze_layers(object, from = NULL, to = NULL)
 Freeze layers in a model so that they are no longer trainable.
 }
 \note{
-The \code{from} and \code{to} layer arguments are both inclusive. Models must be
-compiled again after layers are frozen or unfrozen.
+The \code{from} and \code{to} layer arguments are both inclusive.
+
+The freeze and unfreeze functions are global operations over all layers in
+a model (i.e. layers not within the specified range will be set to the
+opposite value, e.g. unfrozen for a call to freeze_layers).
+
+Models must be compiled again after layers are frozen or unfrozen.
 }
 \examples{
 \dontrun{
