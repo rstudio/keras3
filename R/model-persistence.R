@@ -219,5 +219,53 @@ unserialize_model <- function(model, custom_objects = NULL, compile = TRUE) {
   load_model_hdf5(tmp, custom_objects = custom_objects, compile = compile)
 }
 
+model_to_tensors_info <- function(layers, name) {
+  named_layers <- lapply(layers, function(layer) {
+    tensorflow::tf$saved_model$utils$build_tensor_info(layer[[name]])
+  })
+  
+  if (length(named_layers) == 1)
+    names(named_layers) <- name
+  else
+    names(named_layers) <- paste(name, seq_along(named_layers), sep = "")
+  
+  named_layers
+}
 
+#' Export a Saved Model
+#'
+#' Serialize a model to disk.
+#'
+#' @param object An \R object.
+#' @param export_dir_base A string containing a directory in which to create
+#'   versioned subdirectories containing exported SavedModels.
+#' 
+#' @return The path to the exported directory, as a string.
+#'
+#' @keywords internal
+#' @export
+export_savedmodel.keras.engine.training.Model <- function(model, export_dir_base) {
+  if (!is_backend("tensorflow"))
+    stop("'export_savedmodel' is only supported in the TensorFlow backend.")
+  
+  sess <- backend()$get_session()
+  
+  input_info <- model_to_tensors_info(model$input_layers, "input")
+  output_info <- model_to_tensors_info(model$output_layers, "output")
+  
+  builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir_base)
+  builder$add_meta_graph_and_variables(
+    sess,
+    list(
+      tensorflow::tf$python$saved_model$tag_constants$SERVING
+    ),
+    signature_def_map = list(
+      serving_default = tensorflow::tf$saved_model$signature_def_utils$build_signature_def(
+        inputs = input_info,
+        outputs = output_info
+      )
+    )
+  )
+  builder$save()
+}
 

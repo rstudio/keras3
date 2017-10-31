@@ -79,4 +79,14 @@ test_succeeds("callback output is redirected to run_dir", {
   expect_true(file.exists(file.path(run_dir, "cbk_history.csv")))
 })
 
-
+test_succeeds("model can be exported to TensorFlow", {
+  if (!is_backend("tensorflow")) skip("not a tensorflow backend")
+    
+  model <- define_and_compile_model()
+  model_dir <- tempfile()
+  
+  tensorflow::export_savedmodel(model, model_dir)
+  
+  model_files <- dir(model_dir, recursive = TRUE)
+  expect_true(any(grepl("saved_model\\.pb", model_files)))
+})
