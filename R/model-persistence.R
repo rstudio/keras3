@@ -225,9 +225,9 @@ model_to_tensors_info <- function(layers, name) {
   })
   
   if (length(named_layers) == 1)
-    names(named_layers) <- "input"
+    names(named_layers) <- name
   else
-    names(named_layers) <- paste("input", seq_along(named_layers), sep = "")
+    names(named_layers) <- paste(name, seq_along(named_layers), sep = "")
   
   named_layers
 }
