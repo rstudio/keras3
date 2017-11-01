@@ -25,6 +25,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Implement `export_savedmodel()` generic from TensorFlow package
 
+- Convert R arrays to row-major before image preprocessing
+
 
 ## keras 2.0.8 (CRAN)
 

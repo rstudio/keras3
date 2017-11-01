@@ -358,17 +358,8 @@ mobilenet_load_model_hdf5 <- function(filepath) {
 }
 
 
-
-# the preprocesssing functions modify the ndarray in place
-# so we can't pass an R marshalled array (since it points to
-# R managed memory numpy won't allow writing to it). this 
-# function wraps preprocessing by making a copy of the R
-# array before passing it to numpy
 preprocess_input <- function(x, preprocessor) {
-  np <- import("numpy", convert = FALSE)
-  x_np <- np$copy(x)
-  preprocessor(x_np)
-  py_to_r(x_np)
+  preprocessor(keras_array(x))
 }
 
 
