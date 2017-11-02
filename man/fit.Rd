@@ -24,7 +24,11 @@ a list mapping output names to data.}
 \item{batch_size}{Integer or \code{NULL}. Number of samples per gradient update.
 If unspecified, it will default to 32.}
 
-\item{epochs}{Number of times to iterate over the training data arrays.}
+\item{epochs}{Number of epochs to train the model.
+Note that in conjunction with initial_epoch, the parameter
+epochs is to be understood as "final epoch". The model is
+not trained for a number of steps given by epochs, but
+until the epoch epochs is reached.}
 
 \item{verbose}{Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
 epoch).}
@@ -85,7 +89,8 @@ Other model functions: \code{\link{compile}},
   \code{\link{fit_generator}}, \code{\link{get_config}},
   \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
-  \code{\link{keras_model}}, \code{\link{pop_layer}},
+  \code{\link{keras_model}}, \code{\link{multi_gpu_model}},
+  \code{\link{pop_layer}},
   \code{\link{predict.keras.engine.training.Model}},
   \code{\link{predict_generator}},
   \code{\link{predict_on_batch}},

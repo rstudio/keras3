@@ -3,6 +3,8 @@
 
 Install the development version with: `install_github("rstudio/keras")`
 
+- Added `multi_gpu_model()` function.
+
 - Automatically call `keras_array()` on the results of generator functions.
 
 - Ensure that `steps_per_epoch` is passed as an integer

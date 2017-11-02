@@ -72,6 +72,81 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
   keras$models$Sequential(layers = layers, name = name)
 }
 
+#' Replicates a model on different GPUs.
+#' 
+#' @param model A Keras model instance. To avoid OOM errors,
+#'   this model could have been built on CPU, for instance
+#'    (see usage example below).
+#' @param gpus Integer >= 2, number of on GPUs on which to create
+#'   model replicas.
+#' 
+#' @return  A Keras model object which can be used just like the initial
+#'  `model` argument, but which distributes its workload on multiple GPUs.
+#' 
+#' @details 
+#' Specifically, this function implements single-machine
+#' multi-GPU data parallelism. It works in the following way:
+#'   - Divide the model's input(s) into multiple sub-batches.
+#'   - Apply a model copy on each sub-batch. Every model copy
+#'     is executed on a dedicated GPU.
+#'    - Concatenate the results (on CPU) into one big batch.
+#'    
+#' E.g. if your `batch_size` is 64 and you use `gpus=2`,
+#' then we will divide the input into 2 sub-batches of 32 samples,
+#' process each sub-batch on one GPU, then return the full
+#' batch of 64 processed samples.
+#' 
+#' This induces quasi-linear speedup on up to 8 GPUs.
+#' 
+#' This function is only available with the TensorFlow backend
+#' for the time being.
+#'
+#' @examples \dontrun{
+#' 
+#' library(keras)
+#' library(tensorflow)
+#' 
+#' num_samples <- 1000
+#' height <- 224
+#' width <- 224
+#' num_classes <- 1000
+#' 
+#' # Instantiate the base model
+#' # (here, we do it on CPU, which is optional).
+#' with(tf$device("/cpu:0"), {
+#'   model <- application_xception(
+#'     weights = NULL,
+#'     input_shape = c(height, width, 3),
+#'     classes = num_classes
+#'   )
+#' })
+#' 
+#' # Replicates the model on 8 GPUs.
+#' # This assumes that your machine has 8 available GPUs.
+#' parallel_model <- multi_gpu_model(model, gpus = 8)
+#' parallel_model %>% compile(
+#'   loss = "categorical_crossentropy",
+#'   optimizer = "rmsprop"
+#' )
+#' 
+#' # Generate dummy data.
+#' x <- array(runif(num_samples * height * width*3), 
+#'            dim = c(num_samples, height, width, 3))
+#' y <- array(runif(num_samples * num_classes), 
+#'            dim = c(num_samples, num_classes))
+#' 
+#' # This `fit` call will be distributed on 8 GPUs.
+#' # Since the batch size is 256, each GPU will process 32 samples.
+#' parallel_model %>% fit(x, y, epochs = 20, batch_size = 256)
+#' }
+#'
+#' @family model functions
+#'
+#' @export
+multi_gpu_model <- function(model, gpus) {
+  keras$utils$multi_gpu_model(model, as.integer(gpus))
+}
+
 
 #' @importFrom reticulate py_to_r_wrapper
 #' @export
@@ -214,7 +289,11 @@ compile <- function(object, optimizer, loss,
 #'   a list mapping output names to data.
 #' @param batch_size Integer or `NULL`. Number of samples per gradient update.
 #'   If unspecified, it will default to 32.
-#' @param epochs Number of times to iterate over the training data arrays.
+#' @param epochs Number of epochs to train the model.
+#'   Note that in conjunction with initial_epoch, the parameter
+#'   epochs is to be understood as "final epoch". The model is
+#'   not trained for a number of steps given by epochs, but
+#'   until the epoch epochs is reached.
 #' @param verbose  Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
 #'   epoch).
 #' @param view_metrics View realtime plot of training metrics (by epoch). The

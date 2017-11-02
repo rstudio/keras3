@@ -74,22 +74,22 @@ In most cases, what you need is most likely data parallelism.
 #### Data parallelism
 
 Data parallelism consists in replicating the target model once on each device, and using each replica to process a different fraction of the input data.
-Keras has a built-in utility, `keras.utils.multi_gpu_model`, which can produce a data-parallel version of any model, and achieves quasi-linear speedup on up to 8 GPUs.
+Keras has a built-in utility, `multi_gpu_model()`, which can produce a data-parallel version of any model, and achieves quasi-linear speedup on up to 8 GPUs.
 
-For more information, see the documentation for [multi_gpu_model](/utils/#multi_gpu_model). Here is a quick example:
+For more information, see the documentation for [multi_gpu_model](https://keras.rstudio.com/reference/multi_gpu_model.html). Here is a quick example:
 
-```python
-from keras.utils import multi_gpu_model
-
+```{r, eval= FALSE}
 # Replicates `model` on 8 GPUs.
 # This assumes that your machine has 8 available GPUs.
-parallel_model = multi_gpu_model(model, gpus=8)
-parallel_model.compile(loss='categorical_crossentropy',
-                       optimizer='rmsprop')
+parallel_model <- multi_gpu_model(model, gpus=8)
+parallel_model %>% compile(
+  loss = "categorical_crossentropy",
+  optimizer = "rmsprop"
+)
 
 # This `fit` call will be distributed on 8 GPUs.
 # Since the batch size is 256, each GPU will process 32 samples.
-parallel_model.fit(x, y, epochs=20, batch_size=256)
+parallel_model %>% fit(x, y, epochs = 20, batch_size = 256)
 ```
 
 #### Device parallelism
@@ -98,24 +98,28 @@ Device parallelism consists in running different parts of a same model on differ
 
 This can be achieved by using TensorFlow device scopes. Here is a quick example:
 
-```python
+```{r, eval = FALSE}
 # Model where a shared LSTM is used to encode two different sequences in parallel
-input_a = keras.Input(shape=(140, 256))
-input_b = keras.Input(shape=(140, 256))
+input_a <- layer_input(shape = c(140, 256))
+input_b <- layer_input(shape = c(140, 256))
 
-shared_lstm = keras.layers.LSTM(64)
+shared_lstm <- layer_lstm(units = 64)
 
 # Process the first sequence on one GPU
-with tf.device_scope('/gpu:0'):
-    encoded_a = shared_lstm(tweet_a)
+library(tensorflow)
+with(tf$device_scope("/gpu:0", {
+  encoded_a <- shared_lstm(tweet_a)
+}):
+    
 # Process the next sequence on another GPU
-with tf.device_scope('/gpu:1'):
-    encoded_b = shared_lstm(tweet_b)
+with(tf$device_scope("/gpu:1", {
+  encoded_b <- shared_lstm(tweet_b)
+}):
 
 # Concatenate results on CPU
-with tf.device_scope('/cpu:0'):
-    merged_vector = keras.layers.concatenate([encoded_a, encoded_b],
-                                             axis=-1)
+with(tf$device_scope("/cpu:0", {
+  merged_vector <- layer_concatenate(list(encoded_a, encoded_b))
+}):
 ```
 
 ## What does "sample", "batch", "epoch" mean?
