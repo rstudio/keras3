@@ -59,7 +59,7 @@ Note that Keras objects are [modified in place](faq.html#why-are-keras-objects-m
 
 ## All models are callable, just like layers
 
-With the functional API, it is easy to re-use trained models: you can treat any model as if it were a layer. Note that you aren't just re-using the architecture of the model, you are also re-using its weights.
+With the functional API, it is easy to reuse trained models: you can treat any model as if it were a layer. Note that you aren't just reusing the architecture of the model, you are also reusing its weights.
 
 ```{r}
 x <- layer_input(shape = c(784))
@@ -376,7 +376,7 @@ z <- layer_add(c(x, y))
 
 ### Shared vision model
 
-This model re-uses the same image-processing module on two inputs, to classify whether two MNIST digits are the same digit or different digits.
+This model reuses the same image-processing module on two inputs, to classify whether two MNIST digits are the same digit or different digits.
 
 ```{r}
 # First, define the vision model

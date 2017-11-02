@@ -44,9 +44,13 @@ test_succeeds("use of text tokenizer", {
     texts_to_matrix(tokenizer, texts, mode)
 })
 
-test_succeeds("loading an image for preprocessing", {
+test_succeeds("image can be preprocessed", {
   if (have_pillow()) {
     img <- image_load("digit.jpeg")
     img_arr <- image_to_array(img)
+    img_arr <- array_reshape(img_arr, c(1, dim(img_arr)))
+    img_arr <- imagenet_preprocess_input(img_arr)
   }
 })
+
+

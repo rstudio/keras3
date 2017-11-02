@@ -29,6 +29,10 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Use `tensorflow.keras` for tensorflow implementation (TF v1.4)
 
+- Added `application_inception_resnet_v2()` pre-trained model
+
+- Added `dataset_fashion_mnist()` dataset
+
 
 ## keras 2.0.8 (CRAN)
 

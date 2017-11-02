@@ -21,5 +21,6 @@ Dataset of 60,000 28x28 grayscale images of the 10 digits, along with a test set
 Other datasets: \code{\link{dataset_boston_housing}},
   \code{\link{dataset_cifar100}},
   \code{\link{dataset_cifar10}},
+  \code{\link{dataset_fashion_mnist}},
   \code{\link{dataset_imdb}}, \code{\link{dataset_reuters}}
 }

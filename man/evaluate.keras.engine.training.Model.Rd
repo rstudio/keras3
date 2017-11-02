@@ -4,7 +4,7 @@
 \alias{evaluate.keras.engine.training.Model}
 \title{Evaluate a Keras model}
 \usage{
-\method{evaluate}{keras.engine.training.Model}(object, x, y,
+\method{evaluate}{keras.engine.training.Model}(object, x = NULL, y = NULL,
   batch_size = NULL, verbose = 1, sample_weight = NULL, steps = NULL,
   ...)
 }
@@ -13,11 +13,13 @@
 
 \item{x}{Vector, matrix, or array of training data (or list if the model has
 multiple inputs). If all inputs in the model are named, you can also pass a
-list mapping input names to data.}
+list mapping input names to data. Can be \code{NULL} if feeding from framework
+native tensors.}
 
 \item{y}{Vector, matrix, or array of target data (or list if the model has
 multiple outputs). If all outputs in the model are named, you can also pass
-a list mapping output names to data.}
+a list mapping output names to data. Can be \code{NULL} if feeding from framework
+native tensors.}
 
 \item{batch_size}{Integer or \code{NULL}. Number of samples per gradient update.
 If unspecified, it will default to 32.}

@@ -313,6 +313,14 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
 #' @inheritParams fit
 #'
 #' @param object Model object to evaluate
+#' @param x Vector, matrix, or array of training data (or list if the model has
+#'   multiple inputs). If all inputs in the model are named, you can also pass a
+#'   list mapping input names to data. Can be `NULL` if feeding from framework
+#'   native tensors.
+#' @param y  Vector, matrix, or array of target data (or list if the model has
+#'   multiple outputs). If all outputs in the model are named, you can also pass
+#'   a list mapping output names to data. Can be `NULL` if feeding from framework
+#'   native tensors.
 #' @param steps Total number of steps (batches of samples) before declaring the
 #'   evaluation round finished. Ignored with the default value of `NULL`.
 #' @param ... Unused   
@@ -324,7 +332,8 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
 #' @family model functions
 #'
 #' @export
-evaluate.keras.engine.training.Model <- function(object, x, y, batch_size = NULL, verbose=1, sample_weight = NULL, steps = NULL, ...) {
+evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, batch_size = NULL, 
+                                                 verbose=1, sample_weight = NULL, steps = NULL, ...) {
   
   # defaults
   if (is.null(batch_size) && is.null(steps))
