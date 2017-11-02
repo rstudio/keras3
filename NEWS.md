@@ -35,6 +35,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Added `layer_cudnn_gru()` and `layer_cudnn_lstm()` (faster 
   recurrent layers backed by [CuDNN](https://developer.nvidia.com/cudnn))
+  
+- Added `layer_minimum()` function
 
 
 ## keras 2.0.8 (CRAN)

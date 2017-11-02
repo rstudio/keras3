@@ -150,6 +150,7 @@ reference:
       - layer_multiply
       - layer_average
       - layer_maximum
+      - layer_minimum
       - layer_concatenate
       - layer_dot
 
