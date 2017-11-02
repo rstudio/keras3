@@ -65,13 +65,13 @@ If you have the GPU version of CNTK installed then your Keras code will automati
 
 Additional information on installing the GPU version of CNTK can be found here: https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python
 
-### How can I run a Keras model on multiple GPUs?
+## How can I run a Keras model on multiple GPUs?
 
 We recommend doing so using the **TensorFlow** backend. There are two ways to run a single model on multiple GPUs: **data parallelism** and **device parallelism**.
 
 In most cases, what you need is most likely data parallelism.
 
-#### Data parallelism
+### Data parallelism
 
 Data parallelism consists in replicating the target model once on each device, and using each replica to process a different fraction of the input data.
 Keras has a built-in utility, `multi_gpu_model()`, which can produce a data-parallel version of any model, and achieves quasi-linear speedup on up to 8 GPUs.
@@ -92,7 +92,7 @@ parallel_model %>% compile(
 parallel_model %>% fit(x, y, epochs = 20, batch_size = 256)
 ```
 
-#### Device parallelism
+### Device parallelism
 
 Device parallelism consists in running different parts of a same model on different devices. It works best for models that have a parallel architecture, e.g. a model with two branches.
 

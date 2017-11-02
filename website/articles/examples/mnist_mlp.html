@@ -126,11 +126,7 @@ num_classes &lt;-<span class="st"> </span><span class="dv">10</span>
 epochs &lt;-<span class="st"> </span><span class="dv">30</span>
 
 <span class="co"># The data, shuffled and split between train and test sets</span>
-mnist &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span>()
-x_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>x
-y_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>y
-x_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>x
-y_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y
+<span class="kw">c</span>(<span class="kw">c</span>(x_train, y_train), <span class="kw">c</span>(x_test, y_test)) <span class="op">%&lt;-%</span><span class="st"> </span><span class="kw"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span>()
 
 x_train &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_train, <span class="kw">c</span>(<span class="kw">nrow</span>(x_train), <span class="dv">784</span>))
 x_test &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_test, <span class="kw">c</span>(<span class="kw">nrow</span>(x_test), <span class="dv">784</span>))

@@ -148,10 +148,10 @@ of 32-dimensional vectors.</p></td>
     </tr>
     <tr>
       <th>batch_shape</th>
-      <td><p>Shapes, including the batch size. For instance,
-<code>batch_shape=c(10, 32)</code> indicates that the expected input will be
-batches of 10 32-dimensional vectors. <code>batch_shape=list(NULL, 32)</code>
-indicates batches of an arbitrary number of 32-dimensional vectors.</p></td>
+      <td><p>Shape, including the batch size. For instance,
+<code>shape = c(10,32)</code> indicates that the expected input will be batches
+of 10 32-dimensional vectors. <code>batch_shape = list(NULL, 32)</code> indicates
+batches of an arbitrary number of 32-dimensional vectors.</p></td>
     </tr>
     <tr>
       <th>name</th>
@@ -179,12 +179,6 @@ layer will not create a placeholder tensor.</p></td>
 
     <p>A tensor</p>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>It can either wrap an existing tensor (pass an <code>input_tensor</code>
-argument) or create its a placeholder tensor (pass arguments <code>input_shape</code>
-or <code>batch_input_shape</code> as well as <code>input_dtype</code>).</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other core layers: <code><a href='layer_activation.html'>layer_activation</a></code>,
@@ -203,8 +197,6 @@ or <code>batch_input_shape</code> as well as <code>input_dtype</code>).</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

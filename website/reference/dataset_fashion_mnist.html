@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Returns predictions for a single batch of samples. — predict_on_batch • keras</title>
+<title>Fashion-MNIST database of fashion articles — dataset_fashion_mnist • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -127,56 +127,58 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Returns predictions for a single batch of samples.</h1>
+    <h1>Fashion-MNIST database of fashion articles</h1>
     </div>
 
     
-    <p>Returns predictions for a single batch of samples.</p>
+    <p>Dataset of 60,000 28x28 grayscale images of the 10 fashion article classes,
+along with a test set of 10,000 images. This dataset can be used as a drop-in
+replacement for MNIST. The class labels are encoded as integers from 0-9 which
+correspond to T-shirt/top, Trouser, Pullover, Dress, Coat, Sandal, Shirt,</p>
     
 
-    <pre class="usage"><span class='fu'>predict_on_batch</span>(<span class='no'>object</span>, <span class='no'>x</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>object</th>
-      <td><p>Keras model object</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>Input data (vector, matrix, or array)</p></td>
-    </tr>
-    </table>
-    
+    <pre class="usage"><span class='fu'>dataset_fashion_mnist</span>()</pre>
+        
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>array of predictions.</p>
+    <p>Lists of training and test data: <code>train$x, train$y, test$x, test$y</code>, where
+<code>x</code> is an array of grayscale image data with shape (num_samples, 28, 28) and <code>y</code>
+is an array of article labels (integers in range 0-9) with shape (num_samples).</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Dataset of 60,000 28x28 grayscale images of 10 fashion categories,
+along with a test set of 10,000 images. This dataset can be used as a drop-in
+replacement for MNIST. The class labels are:</p><ul>
+<li><p>0 - T-shirt/top</p></li>
+<li><p>1 - Trouser</p></li>
+<li><p>2 - Pullover</p></li>
+<li><p>3 - Dress</p></li>
+<li><p>4 - Coat</p></li>
+<li><p>5 - Sandal</p></li>
+<li><p>6 - Shirt</p></li>
+<li><p>7 - Sneaker</p></li>
+<li><p>8 - Bag</p></li>
+<li><p>9 - Ankle boot</p></li>
+</ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
-  <code><a href='evaluate.keras.engine.training.Model.html'>evaluate.keras.engine.training.Model</a></code>,
-  <code><a href='evaluate_generator.html'>evaluate_generator</a></code>,
-  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='fit.html'>fit</a></code>,
-  <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_layer.html'>get_layer</a></code>,
-  <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
-  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='multi_gpu_model.html'>multi_gpu_model</a></code>,
-  <code><a href='pop_layer.html'>pop_layer</a></code>,
-  <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
-  <code><a href='predict_generator.html'>predict_generator</a></code>,
-  <code><a href='predict_proba.html'>predict_proba</a></code>,
-  <code><a href='summary.keras.engine.training.Model.html'>summary.keras.engine.training.Model</a></code>,
-  <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
+    <p>Other datasets: <code><a href='dataset_boston_housing.html'>dataset_boston_housing</a></code>,
+  <code><a href='dataset_cifar100.html'>dataset_cifar100</a></code>,
+  <code><a href='dataset_cifar10.html'>dataset_cifar10</a></code>,
+  <code><a href='dataset_imdb.html'>dataset_imdb</a></code>, <code><a href='dataset_mnist.html'>dataset_mnist</a></code>,
+  <code><a href='dataset_reuters.html'>dataset_reuters</a></code></p>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

@@ -137,6 +137,7 @@
 <a href="#keras-2-0-9-development" class="anchor"></a>keras 2.0.9 (development)</h2>
 <p>Install the development version with: <code>install_github("rstudio/keras")</code></p>
 <ul>
+<li><p>Added <code><a href="../reference/multi_gpu_model.html">multi_gpu_model()</a></code> function.</p></li>
 <li><p>Automatically call <code><a href="../reference/keras_array.html">keras_array()</a></code> on the results of generator functions.</p></li>
 <li><p>Ensure that <code>steps_per_epoch</code> is passed as an integer</p></li>
 <li><p>Import <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate()</a></code> generic from tensorflow package</p></li>
@@ -147,6 +148,14 @@
 <li><p>Automatically cast <code>input_shape</code> argument to applications to integer</p></li>
 <li><p>Allow Keras models to be composable within model pipelines</p></li>
 <li><p>Added <code><a href="../reference/freeze_layers.html">freeze_layers()</a></code> and <code><a href="../reference/freeze_layers.html">unfreeze_layers()</a></code> functions.</p></li>
+<li><p>Implement <code>export_savedmodel()</code> generic from TensorFlow package</p></li>
+<li><p>Convert R arrays to row-major before image preprocessing</p></li>
+<li><p>Use <code>tensorflow.keras</code> for tensorflow implementation (TF v1.4)</p></li>
+<li><p>Added <code><a href="../reference/application_inception_resnet_v2.html">application_inception_resnet_v2()</a></code> pre-trained model</p></li>
+<li><p>Added <code><a href="../reference/dataset_fashion_mnist.html">dataset_fashion_mnist()</a></code> dataset</p></li>
+<li><p>Added <code><a href="../reference/layer_cudnn_gru.html">layer_cudnn_gru()</a></code> and <code><a href="../reference/layer_cudnn_lstm.html">layer_cudnn_lstm()</a></code> (faster recurrent layers backed by <a href="https://developer.nvidia.com/cudnn">CuDNN</a>)</p></li>
+<li><p>Added <code><a href="../reference/layer_minimum.html">layer_minimum()</a></code> function</p></li>
+<li><p>Added <code>interpolation</code> parameter to <code><a href="../reference/image_load.html">image_load()</a></code> function</p></li>
 </ul>
 </div>
     <div id="keras-2-0-8-cran" class="section level2">

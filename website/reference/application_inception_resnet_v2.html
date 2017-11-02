@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Returns predictions for a single batch of samples. — predict_on_batch • keras</title>
+<title>Inception-ResNet v2 model, with weights trained on ImageNet — application_inception_resnet_v2 • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -127,47 +127,85 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Returns predictions for a single batch of samples.</h1>
+    <h1>Inception-ResNet v2 model, with weights trained on ImageNet</h1>
     </div>
 
     
-    <p>Returns predictions for a single batch of samples.</p>
+    <p>Inception-ResNet v2 model, with weights trained on ImageNet</p>
     
 
-    <pre class="usage"><span class='fu'>predict_on_batch</span>(<span class='no'>object</span>, <span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>application_inception_resnet_v2</span>(<span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='st'>"imagenet"</span>,
+  <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
+
+<span class='fu'>inception_resnet_v2_preprocess_input</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>Keras model object</p></td>
+      <th>include_top</th>
+      <td><p>whether to include the fully-connected layer at the top of
+the network.</p></td>
+    </tr>
+    <tr>
+      <th>weights</th>
+      <td><p>one of <code>NULL</code> (random initialization) or "imagenet"
+(pre-training on ImageNet).</p></td>
+    </tr>
+    <tr>
+      <th>input_tensor</th>
+      <td><p>optional Keras tensor to use as image input for the
+model.</p></td>
+    </tr>
+    <tr>
+      <th>input_shape</th>
+      <td><p>optional shape list, only to be specified if <code>include_top</code>
+is FALSE (otherwise the input shape has to be <code>(299, 299, 3)</code>. It should
+have exactly 3 inputs channels, and width and height should be no smaller
+than 71. E.g. <code>(150, 150, 3)</code> would be one valid value.</p></td>
+    </tr>
+    <tr>
+      <th>pooling</th>
+      <td><p>Optional pooling mode for feature extraction when
+<code>include_top</code> is <code>FALSE</code>.</p><ul>
+<li><p><code>NULL</code> means that the output of the model will be the 4D tensor output
+of the last convolutional layer.</p></li>
+<li><p><code>avg</code> means that global average pooling will be applied to the output of
+the last convolutional layer, and thus the output of the model will be
+a 2D tensor.</p></li>
+<li><p><code>max</code> means that global max pooling will be applied.</p></li>
+</ul></td>
+    </tr>
+    <tr>
+      <th>classes</th>
+      <td><p>optional number of classes to classify images into, only to be
+specified if <code>include_top</code> is TRUE, and if no <code>weights</code> argument is
+specified.</p></td>
     </tr>
     <tr>
       <th>x</th>
-      <td><p>Input data (vector, matrix, or array)</p></td>
+      <td><p>Input tensor for preprocessing</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>array of predictions.</p>
+    <p>A Keras model instance.</p>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
-  <code><a href='evaluate.keras.engine.training.Model.html'>evaluate.keras.engine.training.Model</a></code>,
-  <code><a href='evaluate_generator.html'>evaluate_generator</a></code>,
-  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='fit.html'>fit</a></code>,
-  <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_layer.html'>get_layer</a></code>,
-  <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
-  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='multi_gpu_model.html'>multi_gpu_model</a></code>,
-  <code><a href='pop_layer.html'>pop_layer</a></code>,
-  <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
-  <code><a href='predict_generator.html'>predict_generator</a></code>,
-  <code><a href='predict_proba.html'>predict_proba</a></code>,
-  <code><a href='summary.keras.engine.training.Model.html'>summary.keras.engine.training.Model</a></code>,
-  <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
+    <p>Do note that the input image format for this model is different than for
+the VGG16 and ResNet models (299x299 instead of 224x224).</p>
+<p>The <code>inception_resnet_v2_preprocess_input()</code> function should be used for image
+preprocessing.</p>
+    
+    <h2 class="hasAnchor" id="reference"><a class="anchor" href="#reference"></a>Reference</h2>
+
+    
+    <ul>
+<li><p><a href='https://arxiv.org/abs/1602.07261'>Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning</a>(http://arxiv.org/abs/1512.00567)</p></li>
+</ul>
     
 
   </div>
@@ -178,7 +216,9 @@
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#reference">Reference</a></li>
           </ul>
 
   </div>

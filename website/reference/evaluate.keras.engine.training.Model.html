@@ -135,7 +135,7 @@
     
 
     <pre class="usage"><span class='co'># S3 method for keras.engine.training.Model</span>
-<span class='fu'><a href='http://www.rdocumentation.org/packages/tensorflow/topics/evaluate'>evaluate</a></span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='no'>y</span>,
+<span class='fu'><a href='http://www.rdocumentation.org/packages/tensorflow/topics/evaluate'>evaluate</a></span>(<span class='no'>object</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='no'>...</span>)</pre>
     
@@ -150,13 +150,15 @@
       <th>x</th>
       <td><p>Vector, matrix, or array of training data (or list if the model has
 multiple inputs). If all inputs in the model are named, you can also pass a
-list mapping input names to data.</p></td>
+list mapping input names to data. Can be <code>NULL</code> if feeding from framework
+native tensors.</p></td>
     </tr>
     <tr>
       <th>y</th>
       <td><p>Vector, matrix, or array of target data (or list if the model has
 multiple outputs). If all outputs in the model are named, you can also pass
-a list mapping output names to data.</p></td>
+a list mapping output names to data. Can be <code>NULL</code> if feeding from framework
+native tensors.</p></td>
     </tr>
     <tr>
       <th>batch_size</th>
@@ -200,7 +202,8 @@ outputs) and model metrics.</p>
   <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='fit.html'>fit</a></code>,
   <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_layer.html'>get_layer</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
-  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='pop_layer.html'>pop_layer</a></code>,
+  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='multi_gpu_model.html'>multi_gpu_model</a></code>,
+  <code><a href='pop_layer.html'>pop_layer</a></code>,
   <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
   <code><a href='predict_generator.html'>predict_generator</a></code>,
   <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,

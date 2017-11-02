@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Returns predictions for a single batch of samples. — predict_on_batch • keras</title>
+<title>Replicates a model on different GPUs. — multi_gpu_model • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -127,31 +127,52 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Returns predictions for a single batch of samples.</h1>
+    <h1>Replicates a model on different GPUs.</h1>
     </div>
 
     
-    <p>Returns predictions for a single batch of samples.</p>
+    <p>Replicates a model on different GPUs.</p>
     
 
-    <pre class="usage"><span class='fu'>predict_on_batch</span>(<span class='no'>object</span>, <span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>multi_gpu_model</span>(<span class='no'>model</span>, <span class='no'>gpus</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>Keras model object</p></td>
+      <th>model</th>
+      <td><p>A Keras model instance. To avoid OOM errors,
+this model could have been built on CPU, for instance
+(see usage example below).</p></td>
     </tr>
     <tr>
-      <th>x</th>
-      <td><p>Input data (vector, matrix, or array)</p></td>
+      <th>gpus</th>
+      <td><p>Integer &gt;= 2, number of on GPUs on which to create
+model replicas.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>array of predictions.</p>
+    <p>A Keras model object which can be used just like the initial
+<code>model</code> argument, but which distributes its workload on multiple GPUs.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Specifically, this function implements single-machine
+multi-GPU data parallelism. It works in the following way:</p><ul>
+<li><p>Divide the model's input(s) into multiple sub-batches.</p></li>
+<li><p>Apply a model copy on each sub-batch. Every model copy
+is executed on a dedicated GPU.</p></li>
+<li><p>Concatenate the results (on CPU) into one big batch.</p></li>
+</ul>
+    <p>E.g. if your <code>batch_size</code> is 64 and you use <code>gpus=2</code>,
+then we will divide the input into 2 sub-batches of 32 samples,
+process each sub-batch on one GPU, then return the full
+batch of 64 processed samples.</p>
+<p>This induces quasi-linear speedup on up to 8 GPUs.</p>
+<p>This function is only available with the TensorFlow backend
+for the time being.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -161,15 +182,54 @@
   <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='fit.html'>fit</a></code>,
   <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_layer.html'>get_layer</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
-  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='multi_gpu_model.html'>multi_gpu_model</a></code>,
-  <code><a href='pop_layer.html'>pop_layer</a></code>,
+  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='pop_layer.html'>pop_layer</a></code>,
   <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
   <code><a href='predict_generator.html'>predict_generator</a></code>,
+  <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
   <code><a href='predict_proba.html'>predict_proba</a></code>,
   <code><a href='summary.keras.engine.training.Model.html'>summary.keras.engine.training.Model</a></code>,
   <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>library</span>(<span class='no'>keras</span>)
+<span class='fu'>library</span>(<span class='no'>tensorflow</span>)
+
+<span class='no'>num_samples</span> <span class='kw'>&lt;-</span> <span class='fl'>1000</span>
+<span class='no'>height</span> <span class='kw'>&lt;-</span> <span class='fl'>224</span>
+<span class='no'>width</span> <span class='kw'>&lt;-</span> <span class='fl'>224</span>
+<span class='no'>num_classes</span> <span class='kw'>&lt;-</span> <span class='fl'>1000</span>
+
+<span class='co'># Instantiate the base model</span>
+<span class='co'># (here, we do it on CPU, which is optional).</span>
+<span class='fu'>with</span>(<span class='no'>tf</span>$<span class='fu'>device</span>(<span class='st'>"/cpu:0"</span>), {
+  <span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='application_xception.html'>application_xception</a></span>(
+    <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='no'>height</span>, <span class='no'>width</span>, <span class='fl'>3</span>),
+    <span class='kw'>classes</span> <span class='kw'>=</span> <span class='no'>num_classes</span>
+  )
+})
+
+<span class='co'># Replicates the model on 8 GPUs.</span>
+<span class='co'># This assumes that your machine has 8 available GPUs.</span>
+<span class='no'>parallel_model</span> <span class='kw'>&lt;-</span> <span class='fu'>multi_gpu_model</span>(<span class='no'>model</span>, <span class='kw'>gpus</span> <span class='kw'>=</span> <span class='fl'>8</span>)
+<span class='no'>parallel_model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='compile.html'>compile</a></span>(
+  <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>"categorical_crossentropy"</span>,
+  <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='st'>"rmsprop"</span>
+)
+
+<span class='co'># Generate dummy data.</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>array</span>(<span class='fu'>runif</span>(<span class='no'>num_samples</span> * <span class='no'>height</span> * <span class='no'>width</span>*<span class='fl'>3</span>),
+           <span class='kw'>dim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='no'>num_samples</span>, <span class='no'>height</span>, <span class='no'>width</span>, <span class='fl'>3</span>))
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>array</span>(<span class='fu'>runif</span>(<span class='no'>num_samples</span> * <span class='no'>num_classes</span>),
+           <span class='kw'>dim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='no'>num_samples</span>, <span class='no'>num_classes</span>))
+
+<span class='co'># This `fit` call will be distributed on 8 GPUs.</span>
+<span class='co'># Since the batch size is 256, each GPU will process 32 samples.</span>
+<span class='no'>parallel_model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='fit.html'>fit</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>256</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -178,8 +238,12 @@
       
       <li><a href="#value">Value</a></li>
 
+      <li><a href="#details">Details</a></li>
+
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

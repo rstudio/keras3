@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fully-connected RNN where the output is to be fed back to input. — layer_simple_rnn • keras</title>
+<title>Fast LSTM implementation backed by <a href='https://developer.nvidia.com/cudnn'>CuDNN</a>. — layer_cudnn_lstm • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -127,22 +127,20 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fully-connected RNN where the output is to be fed back to input.</h1>
+    <h1>Fast LSTM implementation backed by <a href='https://developer.nvidia.com/cudnn'>CuDNN</a>.</h1>
     </div>
 
     
-    <p>Fully-connected RNN where the output is to be fed back to input.</p>
+    <p>Can only be run on GPU, with the TensorFlow backend.</p>
     
 
-    <pre class="usage"><span class='fu'>layer_simple_rnn</span>(<span class='no'>object</span>, <span class='no'>units</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='st'>"tanh"</span>, <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>return_sequences</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>return_state</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>go_backwards</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>stateful</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>unroll</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>implementation</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
-  <span class='kw'>kernel_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>,
+    <pre class="usage"><span class='fu'>layer_cudnn_lstm</span>(<span class='no'>object</span>, <span class='no'>units</span>, <span class='kw'>kernel_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>,
   <span class='kw'>recurrent_initializer</span> <span class='kw'>=</span> <span class='st'>"orthogonal"</span>, <span class='kw'>bias_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
-  <span class='kw'>kernel_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>recurrent_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bias_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>activity_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>kernel_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>recurrent_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bias_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dropout</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>recurrent_dropout</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>unit_forget_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>kernel_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>recurrent_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bias_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>activity_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>kernel_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>recurrent_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bias_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>return_sequences</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>return_state</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>stateful</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
@@ -158,53 +156,6 @@
       <td><p>Positive integer, dimensionality of the output space.</p></td>
     </tr>
     <tr>
-      <th>activation</th>
-      <td><p>Activation function to use. If you pass <code>NULL</code>, no
-activation is applied (ie. "linear" activation: <code>a(x) = x</code>).</p></td>
-    </tr>
-    <tr>
-      <th>use_bias</th>
-      <td><p>Boolean, whether the layer uses a bias vector.</p></td>
-    </tr>
-    <tr>
-      <th>return_sequences</th>
-      <td><p>Boolean. Whether to return the last output in the
-output sequence, or the full sequence.</p></td>
-    </tr>
-    <tr>
-      <th>return_state</th>
-      <td><p>Boolean (default FALSE). Whether to return the last state
-in addition to the output.</p></td>
-    </tr>
-    <tr>
-      <th>go_backwards</th>
-      <td><p>Boolean (default FALSE). If TRUE, process the input
-sequence backwards and return the reversed sequence.</p></td>
-    </tr>
-    <tr>
-      <th>stateful</th>
-      <td><p>Boolean (default FALSE). If TRUE, the last state for each
-sample at index i in a batch will be used as initial state for the sample
-of index i in the following batch.</p></td>
-    </tr>
-    <tr>
-      <th>unroll</th>
-      <td><p>Boolean (default FALSE). If TRUE, the network will be unrolled,
-else a symbolic loop will be used. Unrolling can speed-up a RNN, although
-it tends to be more memory-intensive. Unrolling is only suitable for short
-sequences.</p></td>
-    </tr>
-    <tr>
-      <th>implementation</th>
-      <td><p>one of 0, 1, or 2. If set to 0, the RNN will use an
-implementation that uses fewer, larger matrix products, thus running faster
-on CPU but consuming more memory. If set to 1, the RNN will use more matrix
-products, but smaller ones, thus running slower (may actually be faster on
-GPU) while consuming less memory. If set to 2 (LSTM/GRU only), the RNN will
-combine the input gate, the forget gate and the output gate into a single
-matrix, enabling more time-efficient parallelization on the GPU.</p></td>
-    </tr>
-    <tr>
       <th>kernel_initializer</th>
       <td><p>Initializer for the <code>kernel</code> weights matrix, used
 for the linear transformation of the inputs..</p></td>
@@ -217,6 +168,12 @@ matrix, used for the linear transformation of the recurrent state..</p></td>
     <tr>
       <th>bias_initializer</th>
       <td><p>Initializer for the bias vector.</p></td>
+    </tr>
+    <tr>
+      <th>unit_forget_bias</th>
+      <td><p>Boolean. If TRUE, add 1 to the bias of the forget
+gate at initialization. Setting it to true will also force
+<code>bias_initializer="zeros"</code>. This is recommended in <a href='http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf'>Jozefowicz etal.</a></p></td>
     </tr>
     <tr>
       <th>kernel_regularizer</th>
@@ -252,14 +209,20 @@ matrix.</p></td>
       <td><p>Constraint function applied to the bias vector.</p></td>
     </tr>
     <tr>
-      <th>dropout</th>
-      <td><p>Float between 0 and 1. Fraction of the units to drop for the
-linear transformation of the inputs.</p></td>
+      <th>return_sequences</th>
+      <td><p>Boolean. Whether to return the last output in the
+output sequence, or the full sequence.</p></td>
     </tr>
     <tr>
-      <th>recurrent_dropout</th>
-      <td><p>Float between 0 and 1. Fraction of the units to drop
-for the linear transformation of the recurrent state.</p></td>
+      <th>return_state</th>
+      <td><p>Boolean (default FALSE). Whether to return the last state
+in addition to the output.</p></td>
+    </tr>
+    <tr>
+      <th>stateful</th>
+      <td><p>Boolean (default FALSE). If TRUE, the last state for each
+sample at index i in a batch will be used as initial state for the sample
+of index i in the following batch.</p></td>
     </tr>
     <tr>
       <th>input_shape</th>
@@ -299,76 +262,20 @@ isn't provided.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="input-shapes"><a class="anchor" href="#input-shapes"></a>Input shapes</h2>
-
-    
-    <p>3D tensor with shape <code>(batch_size, timesteps, input_dim)</code>,
-(Optional) 2D tensors with shape <code>(batch_size, output_dim)</code>.</p>
-    
-    <h2 class="hasAnchor" id="output-shape"><a class="anchor" href="#output-shape"></a>Output shape</h2>
-
-    
-    <ul>
-<li><p>if <code>return_state</code>: a list of tensors. The first tensor is
-the output. The remaining tensors are the last states,
-each with shape <code>(batch_size, units)</code>.</p></li>
-<li><p>if <code>return_sequences</code>: 3D tensor with shape
-<code>(batch_size, timesteps, units)</code>.</p></li>
-<li><p>else, 2D tensor with shape <code>(batch_size, units)</code>.</p></li>
-</ul>
-    
-    <h2 class="hasAnchor" id="masking"><a class="anchor" href="#masking"></a>Masking</h2>
-
-    
-    <p>This layer supports masking for input data with a variable number
-of timesteps. To introduce masks to your data,
-use an embedding layer with the <code>mask_zero</code> parameter
-set to <code>TRUE</code>.</p>
-    
-    <h2 class="hasAnchor" id="statefulness-in-rnns"><a class="anchor" href="#statefulness-in-rnns"></a>Statefulness in RNNs</h2>
-
-    
-    <p>You can set RNN layers to be 'stateful', which means that the states
-computed for the samples in one batch will be reused as initial states
-for the samples in the next batch. This assumes a one-to-one mapping
-between samples in different successive batches.</p>
-<p>To enable statefulness:</p><ul>
-<li><p>Specify <code>stateful=TRUE</code> in the layer constructor.</p></li>
-<li><p>Specify a fixed batch size for your model. For sequential models,
-pass <code>batch_input_shape = c(...)</code> to the first layer in your model.
-For functional models with 1 or more Input layers, pass
-<code>batch_shape = c(...)</code> to all the first layers in your model.
-This is the expected shape of your inputs <em>including the batch size</em>.
-It should be a vector of integers, e.g. <code>c(32, 10, 100)</code>.</p></li>
-<li><p>Specify <code>shuffle = FALSE</code> when calling fit().</p></li>
-</ul>
-    <p>To reset the states of your model, call <code><a href='reset_states.html'>reset_states()</a></code> on either
-a specific layer, or on your entire model.</p>
-    
-    <h2 class="hasAnchor" id="initial-state-of-rnns"><a class="anchor" href="#initial-state-of-rnns"></a>Initial State of RNNs</h2>
-
-    
-    <p>You can specify the initial state of RNN layers symbolically by calling
-them with the keyword argument <code>initial_state</code>. The value of
-<code>initial_state</code> should be a tensor or list of tensors representing
-the initial state of the RNN layer.</p>
-<p>You can specify the initial state of RNN layers numerically by
-calling <code>reset_states</code> with the keyword argument <code>states</code>. The value of
-<code>states</code> should be a numpy array or list of numpy arrays representing
-the initial state of the RNN layer.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
     <ul>
+<li><p><a href='http://www.bioinf.jku.at/publications/older/2604.pdf'>Long short-term memory</a> (original 1997 paper)</p></li>
+<li><p><a href='http://www.cs.toronto.edu/~graves/preprint.pdf'>Supervised sequence labeling with recurrent neural networks</a></p></li>
 <li><p><a href='http://arxiv.org/abs/1512.05287'>A Theoretically Grounded Application of Dropout in Recurrent Neural Networks</a></p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other recurrent layers: <code><a href='layer_cudnn_gru.html'>layer_cudnn_gru</a></code>,
-  <code><a href='layer_cudnn_lstm.html'>layer_cudnn_lstm</a></code>, <code><a href='layer_gru.html'>layer_gru</a></code>,
-  <code><a href='layer_lstm.html'>layer_lstm</a></code></p>
+  <code><a href='layer_gru.html'>layer_gru</a></code>, <code><a href='layer_lstm.html'>layer_lstm</a></code>,
+  <code><a href='layer_simple_rnn.html'>layer_simple_rnn</a></code></p>
     
 
   </div>
@@ -377,16 +284,6 @@ the initial state of the RNN layer.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#input-shapes">Input shapes</a></li>
-
-      <li><a href="#output-shape">Output shape</a></li>
-
-      <li><a href="#masking">Masking</a></li>
-
-      <li><a href="#statefulness-in-rnns">Statefulness in RNNs</a></li>
-
-      <li><a href="#initial-state-of-rnns">Initial State of RNNs</a></li>
-
       <li><a href="#references">References</a></li>
 
       <li><a href="#see-also">See also</a></li>

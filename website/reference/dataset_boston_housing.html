@@ -135,8 +135,8 @@
 University.</p>
     
 
-    <pre class="usage"><span class='fu'>dataset_boston_housing</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"boston_housing.npz"</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>113L</span>,
-  <span class='kw'>test_split</span> <span class='kw'>=</span> <span class='fl'>0.2</span>)</pre>
+    <pre class="usage"><span class='fu'>dataset_boston_housing</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"boston_housing.npz"</span>, <span class='kw'>test_split</span> <span class='kw'>=</span> <span class='fl'>0.2</span>,
+  <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>113L</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -147,13 +147,13 @@ University.</p>
 ~/.keras/datasets).</p></td>
     </tr>
     <tr>
+      <th>test_split</th>
+      <td><p>fraction of the data to reserve as test set.</p></td>
+    </tr>
+    <tr>
       <th>seed</th>
       <td><p>Random seed for shuffling the data before computing the test
 split.</p></td>
-    </tr>
-    <tr>
-      <th>test_split</th>
-      <td><p>fraction of the data to reserve as test set.</p></td>
     </tr>
     </table>
     
@@ -168,6 +168,7 @@ houses at a location (in k$).</p>
 
     <p>Other datasets: <code><a href='dataset_cifar100.html'>dataset_cifar100</a></code>,
   <code><a href='dataset_cifar10.html'>dataset_cifar10</a></code>,
+  <code><a href='dataset_fashion_mnist.html'>dataset_fashion_mnist</a></code>,
   <code><a href='dataset_imdb.html'>dataset_imdb</a></code>, <code><a href='dataset_mnist.html'>dataset_mnist</a></code>,
   <code><a href='dataset_reuters.html'>dataset_reuters</a></code></p>
     
