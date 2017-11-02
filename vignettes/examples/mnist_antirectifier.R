@@ -103,7 +103,7 @@ model %>%
   layer_dense(units = 256) %>%
   layer_antirectifier() %>% 
   layer_dropout(rate = 0.1) %>%
-  layer_dense(units = 10, activation = 'softmax')
+  layer_dense(units = num_classes, activation = 'softmax')
 
 # Compile the model
 model %>% compile(

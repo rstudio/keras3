@@ -190,6 +190,42 @@ dataset_mnist <- function(path = "mnist.npz") {
 }
 
 
+#' Fashion-MNIST database of fashion articles
+#' 
+#' Dataset of 60,000 28x28 grayscale images of the 10 fashion article classes, 
+#' along with a test set of 10,000 images. This dataset can be used as a drop-in
+#' replacement for MNIST. The class labels are encoded as integers from 0-9 which
+#' correspond to T-shirt/top, Trouser, Pullover, Dress, Coat, Sandal, Shirt, 
+# 'Sneaker, Bag and Ankle boot.
+#' 
+#' @return Lists of training and test data: `train$x, train$y, test$x, test$y`, where
+#'   `x` is an array of grayscale image data with shape (num_samples, 28, 28) and `y`
+#'   is an array of article labels (integers in range 0-9) with shape (num_samples).
+#'
+#' @details Dataset of 60,000 28x28 grayscale images of 10 fashion categories, 
+#' along with a test set of 10,000 images. This dataset can be used as a drop-in 
+#' replacement for MNIST. The class labels are:
+#' 
+#' * 0 - T-shirt/top 
+#' * 1 - Trouser
+#' * 2 - Pullover
+#' * 3 - Dress 
+#' * 4 - Coat
+#' * 5 - Sandal
+#' * 6 - Shirt
+#' * 7 - Sneaker
+#' * 8 - Bag
+#' * 9 - Ankle boot
+#'
+#' @family datasets
+#'
+#' @export
+dataset_fashion_mnist <- function() {
+  dataset <- keras$datasets$fashion_mnist$load_data()
+  as_dataset_list(dataset)
+}
+
+
 #' Boston housing price regression dataset
 #' 
 #' Dataset taken from the StatLib library which is maintained at Carnegie Mellon
@@ -197,9 +233,9 @@ dataset_mnist <- function(path = "mnist.npz") {
 #' 
 #' @param path Path where to cache the dataset locally (relative to
 #'   ~/.keras/datasets).
+#' @param test_split fraction of the data to reserve as test set.
 #' @param seed Random seed for shuffling the data before computing the test
 #'   split.
-#' @param test_split fraction of the data to reserve as test set.
 #'   
 #' @return Lists of training and test data: `train$x, train$y, test$x, test$y`.
 #' 
@@ -210,7 +246,7 @@ dataset_mnist <- function(path = "mnist.npz") {
 #' @family datasets   
 #'   
 #' @export
-dataset_boston_housing <- function(path = "boston_housing.npz", seed = 113L, test_split = 0.2) {
+dataset_boston_housing <- function(path = "boston_housing.npz", test_split = 0.2, seed = 113L) {
   dataset <- keras$datasets$boston_housing$load_data(
     path = path,
     seed = as.integer(seed),

@@ -394,6 +394,12 @@ test_call_succeeds("layer_maximum", {
   keras_model(merge_inputs, output)
 })
 
+test_call_succeeds("layer_minumum", {
+  merge_inputs <- get_merge_inputs()
+  output <- layer_minimum(merge_inputs)
+  keras_model(merge_inputs, output)
+})
+
 test_call_succeeds("layer_average", {
   merge_inputs <- get_merge_inputs()
   output <- layer_average(merge_inputs)

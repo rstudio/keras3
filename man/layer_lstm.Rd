@@ -195,9 +195,11 @@ the initial state of the RNN layer.
 }
 
 \seealso{
-Other recurrent layers: \code{\link{layer_gru}},
+Other recurrent layers: \code{\link{layer_cudnn_gru}},
+  \code{\link{layer_cudnn_lstm}}, \code{\link{layer_gru}},
   \code{\link{layer_simple_rnn}}
 
-Other recurrent layers: \code{\link{layer_gru}},
+Other recurrent layers: \code{\link{layer_cudnn_gru}},
+  \code{\link{layer_cudnn_lstm}}, \code{\link{layer_gru}},
   \code{\link{layer_simple_rnn}}
 }

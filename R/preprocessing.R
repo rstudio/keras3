@@ -346,17 +346,25 @@ sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count"
 
 
 #' Loads an image into PIL format.
-#' 
+#'
 #' @param path Path to image file
 #' @param grayscale Boolean, whether to load the image as grayscale.
-#' @param target_size Either `NULL` (default to original size) or integer vector `(img_height, img_width)`.
-#' 
+#' @param target_size Either `NULL` (default to original size) or integer vector
+#'   `(img_height, img_width)`.
+#' @param interpolation Interpolation method used to resample the image if the
+#'   target size is different from that of the loaded image. Supported methods
+#'   are "nearest", "bilinear", and "bicubic". If PIL version 1.1.3 or newer is
+#'   installed, "lanczos" is also supported. If PIL version 3.4.0 or newer is
+#'   installed, "box" and "hamming" are also supported. By default, "bilinear"
+#'   is used.
+#'
 #' @return A PIL Image instance.
-#' 
+#'
 #' @family image preprocessing
-#' 
+#'
 #' @export
-image_load <- function(path, grayscale = FALSE, target_size = NULL) {
+image_load <- function(path, grayscale = FALSE, target_size = NULL,
+                       interpolation = "bilinear") {
 
   if (!have_pillow())
     stop("The Pillow Python package is required to load images")
@@ -369,11 +377,16 @@ image_load <- function(path, grayscale = FALSE, target_size = NULL) {
     target_size <- tuple(target_size[[1]], target_size[[2]])
   }
   
-  keras$preprocessing$image$load_img(
+  args <- list(
     path = normalize_path(path),
     grayscale = grayscale,
     target_size = target_size
   )
+  
+  if (keras_version() >= "2.0.9")
+    args$interpolation <- interpolation
+  
+  do.call(keras$preprocessing$image$load_img, args)
 }
 
 #' Converts a PIL Image instance to a 3d-array.

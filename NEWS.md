@@ -3,6 +3,8 @@
 
 Install the development version with: `install_github("rstudio/keras")`
 
+- Added `multi_gpu_model()` function.
+
 - Automatically call `keras_array()` on the results of generator functions.
 
 - Ensure that `steps_per_epoch` is passed as an integer
@@ -28,6 +30,17 @@ Install the development version with: `install_github("rstudio/keras")`
 - Convert R arrays to row-major before image preprocessing
 
 - Use `tensorflow.keras` for tensorflow implementation (TF v1.4)
+
+- Added `application_inception_resnet_v2()` pre-trained model
+
+- Added `dataset_fashion_mnist()` dataset
+
+- Added `layer_cudnn_gru()` and `layer_cudnn_lstm()` (faster 
+  recurrent layers backed by [CuDNN](https://developer.nvidia.com/cudnn))
+  
+- Added `layer_minimum()` function
+
+- Added `interpolation` parameter to `image_load()` function
 
 
 ## keras 2.0.8 (CRAN)

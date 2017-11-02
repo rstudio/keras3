@@ -134,6 +134,32 @@ layer_maximum <- function(inputs, batch_size = NULL, dtype = NULL,
 }
 
 
+#' Layer that computes the minimum (element-wise) a list of inputs.
+#' 
+#' It takes as input a list of tensors, all of the same shape, and returns a
+#' single tensor (also of the same shape).
+#' 
+#' @inheritParams layer_dense
+#' 
+#' @param inputs A list of input tensors (at least 2). 
+#'   
+#' @return A tensor, the element-wise maximum of the inputs.
+#'  
+#' @family merge layers   
+#'     
+#' @export
+layer_minimum <- function(inputs, batch_size = NULL, dtype = NULL, 
+                          name = NULL, trainable = NULL, weights = NULL) {
+  keras$layers$minimum(
+    inputs = inputs,
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
+  )
+}
+
 
 #' Layer that concatenates a list of inputs.
 #' 

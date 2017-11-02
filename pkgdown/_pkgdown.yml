@@ -50,6 +50,7 @@ reference:
     contents:
       - keras_model
       - keras_model_sequential
+      - multi_gpu_model
       - summary.keras.engine.training.Model
       - compile
       - fit
@@ -124,9 +125,10 @@ reference:
     contents:
       - layer_simple_rnn
       - layer_gru
+      - layer_cudnn_gru
       - layer_lstm
+      - layer_cudnn_gru
        
-
   - title: "Embedding Layers"
     contents:
       - layer_embedding
@@ -149,6 +151,7 @@ reference:
       - layer_multiply
       - layer_average
       - layer_maximum
+      - layer_minimum
       - layer_concatenate
       - layer_dot
 
