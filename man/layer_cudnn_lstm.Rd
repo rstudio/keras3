@@ -11,9 +11,8 @@ layer_cudnn_lstm(object, units, kernel_initializer = "glorot_uniform",
   activity_regularizer = NULL, kernel_constraint = NULL,
   recurrent_constraint = NULL, bias_constraint = NULL,
   return_sequences = FALSE, return_state = FALSE, stateful = FALSE,
-  recurrent_dropout = 0, input_shape = NULL, batch_input_shape = NULL,
-  batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
-  weights = NULL)
+  input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
+  dtype = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -60,9 +59,6 @@ in addition to the output.}
 \item{stateful}{Boolean (default FALSE). If TRUE, the last state for each
 sample at index i in a batch will be used as initial state for the sample
 of index i in the following batch.}
-
-\item{recurrent_dropout}{Float between 0 and 1. Fraction of the units to drop
-for the linear transformation of the recurrent state.}
 
 \item{input_shape}{Dimensionality of the input (integer) not including the
 samples axis. This argument is required when using this layer as the first
