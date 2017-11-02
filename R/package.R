@@ -52,8 +52,14 @@ keras <- NULL
     on_error = function(e) {
       if (is_tensorflow_implementation())
         stop(tf_config()$error_message, call. = FALSE)
-      else
-        stop(e, call. = FALSE)
+      else {
+        if (grepl("No module named keras", e$message)) {
+          message(e$message)
+          message("Use the install_keras() function to install the core Keras library")
+        } else {
+          stop(e$message, call. = FALSE) 
+        }
+      }
     }
   ))
   
