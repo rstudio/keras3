@@ -38,6 +38,8 @@ Install the development version with: `install_github("rstudio/keras")`
   
 - Added `layer_minimum()` function
 
+- Added `interpolation` parameter to `image_load()` function
+
 
 ## keras 2.0.8 (CRAN)
 

@@ -369,11 +369,16 @@ image_load <- function(path, grayscale = FALSE, target_size = NULL) {
     target_size <- tuple(target_size[[1]], target_size[[2]])
   }
   
-  keras$preprocessing$image$load_img(
+  args <- list(
     path = normalize_path(path),
     grayscale = grayscale,
     target_size = target_size
   )
+  
+  if (keras_version() >= "2.0.9")
+    args$interpolation <- interpolation
+  
+  do.call(keras$preprocessing$image$load_img, args)
 }
 
 #' Converts a PIL Image instance to a 3d-array.
