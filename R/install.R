@@ -136,10 +136,6 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
                      conda = conda,
                      version = tensorflow,
                      extra_packages = extra_packages)
-
-  # print success and return
-  cat("\nInstallation of Keras complete.\n\n")
-  invisible(NULL)
 }
 
 
