@@ -54,8 +54,7 @@ keras <- NULL
         stop(tf_config()$error_message, call. = FALSE)
       else {
         if (grepl("No module named keras", e$message)) {
-          message(e$message)
-          message("Use the install_keras() function to install the core Keras library")
+          keras_not_found_message(e$message)
         } else {
           stop(e$message, call. = FALSE) 
         }
@@ -66,6 +65,11 @@ keras <- NULL
   # tensorflow use_session hooks
   setHook("tensorflow.on_before_use_session", tensorflow_on_before_use_session)
   setHook("tensorflow.on_use_session", tensorflow_on_use_session)
+}
+
+keras_not_found_message <- function(error_message) {
+  message(error_message)
+  message("Use the install_keras() function to install the core Keras library")
 }
 
 resolve_implementation_module <- function() {
