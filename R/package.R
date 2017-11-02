@@ -75,7 +75,7 @@ resolve_implementation_module <- function() {
   
   # set the implementation module
   if (identical(implementation, "tensorflow"))
-    implementation_module <- "tensorflow.contrib.keras.python.keras"
+    implementation_module <- "tensorflow.python.keras._impl.keras"
   else
     implementation_module <- implementation
   

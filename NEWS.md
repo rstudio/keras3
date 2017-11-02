@@ -27,6 +27,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Convert R arrays to row-major before image preprocessing
 
+- Use `tensorflow.keras` for tensorflow implementation (TF v1.4)
+
 
 ## keras 2.0.8 (CRAN)
 

@@ -207,11 +207,16 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
     log_dir = normalize_path(log_dir),
     histogram_freq = as.integer(histogram_freq),
     write_graph = write_graph,
-    write_images = write_images,
-    embeddings_freq = as.integer(embeddings_freq),
-    embeddings_layer_names = embeddings_layer_names,
-    embeddings_metadata = embeddings_metadata
+    write_images = write_images
   )
+  
+  # embeddings arguments seem to have been excluded in the TF implementation
+  # (even though they are stil part of the docs there)
+  if (!is_tensorflow_implementation()) {
+    args$embeddings_freq <- as.integer(embeddings_freq)
+    args$embeddings_layer_names <- embeddings_layer_names
+    args$embeddings_metadata <- embeddings_metadata
+  }
   
   if (keras_version() >= "2.0.5") {
     args$batch_size <- as.integer(batch_size)

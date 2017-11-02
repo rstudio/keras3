@@ -214,7 +214,7 @@ is_keras_available <- function(version = NULL) {
 #' There are currently two Python modules which implement Keras:
 #' 
 #' - keras ("keras")
-#' - tensorflow.contrib.keras ("tensorflow")
+#' - tensorflow.keras ("tensorflow")
 #' 
 #' This function returns a reference to the implementation being currently 
 #' used by the keras package. The default implementation is "keras".
