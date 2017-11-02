@@ -212,7 +212,7 @@ preprocessing.</p>
 
 <span class='co'># ensure we have a 4d tensor with single element in the batch dimension,</span>
 <span class='co'># the preprocess the input for prediction using resnet50</span>
-<span class='fu'>dim</span>(<span class='no'>x</span>) <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fu'>dim</span>(<span class='no'>x</span>))
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/reticulate/topics/array_reshape'>array_reshape</a></span>(<span class='no'>x</span>, <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fu'>dim</span>(<span class='no'>x</span>)))
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='imagenet_preprocess_input.html'>imagenet_preprocess_input</a></span>(<span class='no'>x</span>)
 
 <span class='co'># make predictions then decode and print them</span>

@@ -123,6 +123,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 <span class="kw">library</span>(tensorflow)
 
+
 K &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/backend.html">backend</a></span>()
 <span class="cf">if</span> (K<span class="op">$</span><span class="kw"><a href="../../reference/backend.html">backend</a></span>() <span class="op">!=</span><span class="st"> 'tensorflow'</span>) {
   <span class="kw">stop</span>(<span class="st">'This example can only run with the '</span>,
@@ -130,6 +131,8 @@ K &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/backen
        <span class="st">'because it requires TFRecords, which '</span>,
        <span class="st">'are not supported on other platforms.'</span>)
 }
+
+<span class="co"># Define Model -------------------------------------------------------------------</span>
 
 cnn_layers &lt;-<span class="st"> </span><span class="cf">function</span>(x_train_input) {
   x_train_input <span class="op">%&gt;%</span><span class="st"> </span>
@@ -145,6 +148,8 @@ cnn_layers &lt;-<span class="st"> </span><span class="cf">function</span>(x_trai
 }
 
 sess &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">get_session</span>()
+
+<span class="co"># Data Preparation --------------------------------------------------------------</span>
 
 batch_size &lt;-<span class="st"> </span>128L
 batch_shape =<span class="st"> </span><span class="kw">list</span>(batch_size, 28L, 28L, 1L)
@@ -197,6 +202,9 @@ y_batch_shape =<span class="st"> </span>y_train_batch<span class="op">$</span><s
 
 x_train_input &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">tensor =</span> x_train_batch, <span class="dt">batch_shape =</span> x_batch_shape)
 x_train_out &lt;-<span class="st"> </span><span class="kw">cnn_layers</span>(x_train_input)
+
+<span class="co"># Training &amp; Evaluation ---------------------------------------------------------</span>
+
 train_model =<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> x_train_input, <span class="dt">outputs =</span> x_train_out)
 
 <span class="co"># Pass the target tensor `y_train_batch` to `compile`</span>
@@ -229,8 +237,7 @@ K<span class="op">$</span><span class="kw">clear_session</span>()
 
 <span class="co"># Second Session to test loading trained model without tensors</span>
 x_test &lt;-<span class="st"> </span>data<span class="op">$</span>validation<span class="op">$</span>images
-np &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/reexports">import</a></span>(<span class="st">"numpy"</span>)
-x_test &lt;-<span class="st"> </span>np<span class="op">$</span><span class="kw">reshape</span>(x_test, <span class="kw">c</span>(<span class="kw">nrow</span>(x_test), 28L, 28L, 1L))
+x_test &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_test, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">nrow</span>(x_test), <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>))
 y_test &lt;-<span class="st"> </span>data<span class="op">$</span>validation<span class="op">$</span>labels
 x_test_inp &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">dim</span>(x_test)[<span class="op">-</span><span class="dv">1</span>])
 test_out &lt;-<span class="st"> </span><span class="kw">cnn_layers</span>(x_test_inp)
@@ -243,7 +250,7 @@ test_model <span class="op">%&gt;%</span><span class="st"> </span><span class="k
 )
 <span class="kw">summary</span>(test_model)
 
-result &lt;-<span class="st"> </span>test_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/evaluate.html">evaluate</a></span>(x_test, <span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_test, classes))
+result &lt;-<span class="st"> </span>test_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(x_test, <span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_test, classes))
 <span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Test accuracy: %f'</span>, result<span class="op">$</span>acc))</code></pre></div>
 </div>
   </div>

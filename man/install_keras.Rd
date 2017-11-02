@@ -4,7 +4,7 @@
 \alias{install_keras}
 \title{Install Keras and the TensorFlow backend}
 \usage{
-install_keras(method = c("virtualenv", "conda"), conda = "auto",
+install_keras(method = c("auto", "virtualenv", "conda"), conda = "auto",
   tensorflow = "default", extra_packages = NULL)
 }
 \arguments{

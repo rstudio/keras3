@@ -51,7 +51,7 @@ application_xception <- function(include_top = TRUE, weights = "imagenet",
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -96,7 +96,7 @@ xception_preprocess_input <- function(x) {
 #' img_path <- "elephant.jpg"
 #' img <- image_load(img_path, target_size = c(224,224))
 #' x <- image_to_array(img)
-#' dim(x) <- c(1, dim(x))
+#' x <- array_reshape(x, c(1, dim(x)))
 #' x <- imagenet_preprocess_input(x)
 #' 
 #' features <- model %>% predict(x)
@@ -109,7 +109,7 @@ application_vgg16 <- function(include_top = TRUE, weights = "imagenet", input_te
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -124,7 +124,7 @@ application_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_te
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -163,7 +163,7 @@ application_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_te
 #' 
 #' # ensure we have a 4d tensor with single element in the batch dimension,
 #' # the preprocess the input for prediction using resnet50
-#' dim(x) <- c(1, dim(x))
+#' x <- array_reshape(x, c(1, dim(x)))
 #' x <- imagenet_preprocess_input(x)
 #' 
 #' # make predictions then decode and print them
@@ -178,7 +178,7 @@ application_resnet50 <- function(include_top = TRUE, weights = "imagenet", input
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -209,7 +209,7 @@ application_inception_v3 <- function(include_top = TRUE, weights = "imagenet", i
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -358,17 +358,8 @@ mobilenet_load_model_hdf5 <- function(filepath) {
 }
 
 
-
-# the preprocesssing functions modify the ndarray in place
-# so we can't pass an R marshalled array (since it points to
-# R managed memory numpy won't allow writing to it). this 
-# function wraps preprocessing by making a copy of the R
-# array before passing it to numpy
 preprocess_input <- function(x, preprocessor) {
-  np <- import("numpy", convert = FALSE)
-  x_np <- np$copy(x)
-  preprocessor(x_np)
-  py_to_r(x_np)
+  preprocessor(keras_array(x))
 }
 
 

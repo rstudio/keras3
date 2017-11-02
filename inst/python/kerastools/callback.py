@@ -3,10 +3,8 @@
 import os
 
 if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'tensorflow'):
-  from tensorflow.contrib.keras.python.keras.callbacks import Callback
-  import tensorflow.contrib.keras as keras
+  from tensorflow.python.keras.callbacks import Callback
 else:
-  import keras
   from keras.callbacks import Callback
 
 class RCallback(Callback):

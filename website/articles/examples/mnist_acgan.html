@@ -151,7 +151,7 @@ K<span class="op">$</span><span class="kw">set_image_data_format</span>(<span cl
 
 build_generator &lt;-<span class="st"> </span><span class="cf">function</span>(latent_size){
   
-  <span class="co"># we will map a pair of (z, L), where z is a latent vector and L is a</span>
+  <span class="co"># We will map a pair of (z, L), where z is a latent vector and L is a</span>
   <span class="co"># label drawn from P_c, to image space (..., 1, 28, 28)</span>
   cnn &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
   
@@ -159,29 +159,29 @@ build_generator &lt;-<span class="st"> </span><span class="cf">function</span>(l
 <span class="st">    </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dv">1024</span>, <span class="dt">input_shape =</span> latent_size, <span class="dt">activation =</span> <span class="st">"relu"</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dv">128</span><span class="op">*</span><span class="dv">7</span><span class="op">*</span><span class="dv">7</span>, <span class="dt">activation =</span> <span class="st">"relu"</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../../reference/layer_reshape.html">layer_reshape</a></span>(<span class="kw">c</span>(<span class="dv">128</span>, <span class="dv">7</span>, <span class="dv">7</span>)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="co"># upsample to (..., 14, 14)</span>
+<span class="st">    </span><span class="co"># Upsample to (..., 14, 14)</span>
 <span class="st">    </span><span class="kw"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span>(<span class="dt">size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(
       <span class="dv">256</span>, <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>), <span class="dt">padding =</span> <span class="st">"same"</span>, <span class="dt">activation =</span> <span class="st">"relu"</span>,
       <span class="dt">kernel_initializer =</span> <span class="st">"glorot_normal"</span>
     ) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="co"># upsample to (..., 28, 28)</span>
+<span class="st">    </span><span class="co"># Upsample to (..., 28, 28)</span>
 <span class="st">    </span><span class="kw"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span>(<span class="dt">size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(
       <span class="dv">128</span>, <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>), <span class="dt">padding =</span> <span class="st">"same"</span>, <span class="dt">activation =</span> <span class="st">"tanh"</span>,
       <span class="dt">kernel_initializer =</span> <span class="st">"glorot_normal"</span>
     ) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="co"># take a channel axis reduction</span>
+<span class="st">    </span><span class="co"># Take a channel axis reduction</span>
 <span class="st">    </span><span class="kw"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(
       <span class="dv">1</span>, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="dt">padding =</span> <span class="st">"same"</span>, <span class="dt">activation =</span> <span class="st">"tanh"</span>,
       <span class="dt">kernel_initializer =</span> <span class="st">"glorot_normal"</span>
     )
   
   
-  <span class="co"># this is the z space commonly refered to in GAN papers</span>
+  <span class="co"># This is the z space commonly refered to in GAN papers</span>
   latent &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">list</span>(latent_size))
   
-  <span class="co"># this will be our label</span>
+  <span class="co"># This will be our label</span>
   image_class &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">list</span>(<span class="dv">1</span>))
   
   <span class="co"># 10 classes in MNIST</span>
@@ -193,7 +193,7 @@ build_generator &lt;-<span class="st"> </span><span class="cf">function</span>(l
 <span class="st">    </span><span class="kw"><a href="../../reference/layer_flatten.html">layer_flatten</a></span>()
   
   
-  <span class="co"># hadamard product between z-space and a class conditional embedding</span>
+  <span class="co"># Hadamard product between z-space and a class conditional embedding</span>
   h &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_multiply.html">layer_multiply</a></span>(<span class="kw">list</span>(latent, cls))
   
   fake_image &lt;-<span class="st"> </span><span class="kw">cnn</span>(h)
@@ -203,7 +203,7 @@ build_generator &lt;-<span class="st"> </span><span class="cf">function</span>(l
 
 build_discriminator &lt;-<span class="st"> </span><span class="cf">function</span>(){
   
-  <span class="co"># build a relatively standard conv net, with LeakyReLUs as suggested in</span>
+  <span class="co"># Build a relatively standard conv net, with LeakyReLUs as suggested in</span>
   <span class="co"># the reference paper</span>
   cnn &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
   
@@ -234,7 +234,7 @@ build_discriminator &lt;-<span class="st"> </span><span class="cf">function</spa
   image &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">28</span>, <span class="dv">28</span>))
   features &lt;-<span class="st"> </span><span class="kw">cnn</span>(image)
   
-  <span class="co"># first output (name=generation) is whether or not the discriminator</span>
+  <span class="co"># First output (name=generation) is whether or not the discriminator</span>
   <span class="co"># thinks the image that is being shown is fake, and the second output</span>
   <span class="co"># (name=auxiliary) is the class that the discriminator thinks the image</span>
   <span class="co"># belongs to.</span>
@@ -249,7 +249,7 @@ build_discriminator &lt;-<span class="st"> </span><span class="cf">function</spa
 
 <span class="co"># Parameters --------------------------------------------------------------</span>
 
-<span class="co"># batch and latent size taken from the paper</span>
+<span class="co"># Batch and latent size taken from the paper</span>
 epochs &lt;-<span class="st"> </span><span class="dv">50</span>
 batch_size &lt;-<span class="st"> </span><span class="dv">100</span>
 latent_size &lt;-<span class="st"> </span><span class="dv">100</span>
@@ -258,16 +258,16 @@ latent_size &lt;-<span class="st"> </span><span class="dv">100</span>
 adam_lr &lt;-<span class="st"> </span><span class="fl">0.00005</span> 
 adam_beta_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="fl">0.5</span>
 
-<span class="co"># Model definition --------------------------------------------------------</span>
+<span class="co"># Model Definition --------------------------------------------------------</span>
 
-<span class="co"># build the discriminator</span>
+<span class="co"># Build the discriminator</span>
 discriminator &lt;-<span class="st"> </span><span class="kw">build_discriminator</span>()
 discriminator <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(
   <span class="dt">optimizer =</span> <span class="kw"><a href="../../reference/optimizer_adam.html">optimizer_adam</a></span>(<span class="dt">lr =</span> adam_lr, <span class="dt">beta_1 =</span> adam_beta_<span class="dv">1</span>),
   <span class="dt">loss =</span> <span class="kw">list</span>(<span class="st">"binary_crossentropy"</span>, <span class="st">"sparse_categorical_crossentropy"</span>)
 )
 
-<span class="co"># build the generator</span>
+<span class="co"># Build the generator</span>
 generator &lt;-<span class="st"> </span><span class="kw">build_generator</span>(latent_size)
 generator <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(
   <span class="dt">optimizer =</span> <span class="kw"><a href="../../reference/optimizer_adam.html">optimizer_adam</a></span>(<span class="dt">lr =</span> adam_lr, <span class="dt">beta_1 =</span> adam_beta_<span class="dv">1</span>),
@@ -279,9 +279,8 @@ image_class &lt;-<span class="st"> </span><span class="kw"><a href="../../refere
 
 fake &lt;-<span class="st"> </span><span class="kw">generator</span>(<span class="kw">list</span>(latent, image_class))
 
-<span class="co"># we only want to be able to train generation for the combined model</span>
-
-discriminator<span class="op">$</span>trainable &lt;-<span class="st"> </span><span class="ot">FALSE</span>
+<span class="co"># Only want to be able to train generation for the combined model</span>
+<span class="kw"><a href="../../reference/freeze_layers.html">freeze_layers</a></span>(discriminator)
 results &lt;-<span class="st"> </span><span class="kw">discriminator</span>(fake)
 
 combined &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="kw">list</span>(latent, image_class), results)
@@ -290,16 +289,15 @@ combined <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"
   <span class="dt">loss =</span> <span class="kw">list</span>(<span class="st">"binary_crossentropy"</span>, <span class="st">"sparse_categorical_crossentropy"</span>)
 )
 
+<span class="co"># Data Preparation --------------------------------------------------------</span>
 
-<span class="co"># Data preparation --------------------------------------------------------</span>
-
-<span class="co"># get our mnist data, and force it to be of shape (..., 1, 28, 28) with</span>
+<span class="co"># Loade mnist data, and force it to be of shape (..., 1, 28, 28) with</span>
 <span class="co"># range [-1, 1]</span>
 mnist &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span>()
 mnist<span class="op">$</span>train<span class="op">$</span>x &lt;-<span class="st"> </span>(mnist<span class="op">$</span>train<span class="op">$</span>x <span class="op">-</span><span class="st"> </span><span class="fl">127.5</span>)<span class="op">/</span><span class="fl">127.5</span>
 mnist<span class="op">$</span>test<span class="op">$</span>x &lt;-<span class="st"> </span>(mnist<span class="op">$</span>test<span class="op">$</span>x <span class="op">-</span><span class="st"> </span><span class="fl">127.5</span>)<span class="op">/</span><span class="fl">127.5</span>
-<span class="kw">dim</span>(mnist<span class="op">$</span>train<span class="op">$</span>x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">60000</span>, <span class="dv">1</span>, <span class="dv">28</span>, <span class="dv">28</span>) 
-<span class="kw">dim</span>(mnist<span class="op">$</span>test<span class="op">$</span>x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10000</span>, <span class="dv">1</span>, <span class="dv">28</span>, <span class="dv">28</span>) 
+mnist<span class="op">$</span>train<span class="op">$</span>x &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(mnist<span class="op">$</span>train<span class="op">$</span>x, <span class="kw">c</span>(<span class="dv">60000</span>, <span class="dv">1</span>, <span class="dv">28</span>, <span class="dv">28</span>))
+mnist<span class="op">$</span>test<span class="op">$</span>x &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(mnist<span class="op">$</span>test<span class="op">$</span>x, <span class="kw">c</span>(<span class="dv">10000</span>, <span class="dv">1</span>, <span class="dv">28</span>, <span class="dv">28</span>))
 
 num_train &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span class="op">$</span>train<span class="op">$</span>x)[<span class="dv">1</span>]
 num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span class="op">$</span>test<span class="op">$</span>x)[<span class="dv">1</span>]
@@ -324,21 +322,21 @@ num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span cl
     
     pb<span class="op">$</span><span class="kw">tick</span>()
     
-    <span class="co"># generate a new batch of noise</span>
+    <span class="co"># Generate a new batch of noise</span>
     noise &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> batch_size<span class="op">*</span>latent_size, <span class="dt">min =</span> <span class="op">-</span><span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">      </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> batch_size, <span class="dt">ncol =</span> latent_size)
     
-    <span class="co"># get a batch of real images</span>
+    <span class="co"># Get a batch of real images</span>
     batch &lt;-<span class="st"> </span><span class="kw">sample</span>(possible_indexes, <span class="dt">size =</span> batch_size)
     possible_indexes &lt;-<span class="st"> </span>possible_indexes[<span class="op">!</span>possible_indexes <span class="op">%in%</span><span class="st"> </span>batch]
     image_batch &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>x[batch,,,,drop =<span class="st"> </span><span class="ot">FALSE</span>]
     label_batch &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>y[batch]
     
-    <span class="co"># sample some labels from p_c</span>
+    <span class="co"># Sample some labels from p_c</span>
     sampled_labels &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>, batch_size, <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
 <span class="st">      </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
     
-    <span class="co"># generate a batch of fake images, using the generated labels as a</span>
+    <span class="co"># Generate a batch of fake images, using the generated labels as a</span>
     <span class="co"># conditioner. We reshape the sampled labels to be</span>
     <span class="co"># (batch_size, 1) so that we can feed them into the embedding</span>
     <span class="co"># layer as a length one sequence</span>
@@ -348,7 +346,7 @@ num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span cl
     y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(1L, batch_size), <span class="kw">rep</span>(0L, batch_size)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
     aux_y &lt;-<span class="st"> </span><span class="kw">c</span>(label_batch, sampled_labels) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
     
-    <span class="co"># see if the discriminator can figure itself out...</span>
+    <span class="co"># Check if the discriminator can figure itself out</span>
     disc_loss &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/train_on_batch.html">train_on_batch</a></span>(
       discriminator, <span class="dt">x =</span> X, 
       <span class="dt">y =</span> <span class="kw">list</span>(y, aux_y)
@@ -356,15 +354,15 @@ num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span cl
     
     epoch_disc_loss &lt;-<span class="st"> </span><span class="kw">rbind</span>(epoch_disc_loss, <span class="kw">unlist</span>(disc_loss))
     
-    <span class="co"># make new noise. we generate 2 * batch size here such that we have</span>
-    <span class="co"># the generator optimize over an identical number of images as the</span>
+    <span class="co"># Make new noise. Generate 2 * batch size here such that</span>
+    <span class="co"># the generator optimizes over an identical number of images as the</span>
     <span class="co"># discriminator</span>
     noise &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">2</span><span class="op">*</span>batch_size<span class="op">*</span>latent_size, <span class="dt">min =</span> <span class="op">-</span><span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">      </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">2</span><span class="op">*</span>batch_size, <span class="dt">ncol =</span> latent_size)
     sampled_labels &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">size =</span> <span class="dv">2</span><span class="op">*</span>batch_size, <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
 <span class="st">      </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
     
-    <span class="co"># we want to train the generator to trick the discriminator</span>
+    <span class="co"># Want to train the generator to trick the discriminator</span>
     <span class="co"># For the generator, we want all the {fake, not-fake} labels to say</span>
     <span class="co"># not-fake</span>
     trick &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">2</span><span class="op">*</span>batch_size) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
@@ -381,13 +379,13 @@ num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span cl
   
   <span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Testing for epoch %02d:"</span>, epoch))
   
-  <span class="co"># evaluate the testing loss here</span>
+  <span class="co"># Evaluate the testing loss here</span>
   
-  <span class="co"># generate a new batch of noise</span>
+  <span class="co"># Generate a new batch of noise</span>
   noise &lt;-<span class="st"> </span><span class="kw">runif</span>(num_test<span class="op">*</span>latent_size, <span class="dt">min =</span> <span class="op">-</span><span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> num_test, <span class="dt">ncol =</span> latent_size)
   
-  <span class="co"># sample some labels from p_c and generate images from them</span>
+  <span class="co"># Sample some labels from p_c and generate images from them</span>
   sampled_labels &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">size =</span> num_test, <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
   generated_images &lt;-<span class="st"> </span><span class="kw">predict</span>(generator, <span class="kw">list</span>(noise, sampled_labels))
@@ -396,15 +394,15 @@ num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span cl
   y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, num_test), <span class="kw">rep</span>(<span class="dv">0</span>, num_test)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
   aux_y &lt;-<span class="st"> </span><span class="kw">c</span>(mnist<span class="op">$</span>test<span class="op">$</span>y, sampled_labels) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
   
-  <span class="co"># see if the discriminator can figure itself out...</span>
-  discriminator_test_loss &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/evaluate.html">evaluate</a></span>(
+  <span class="co"># See if the discriminator can figure itself out...</span>
+  discriminator_test_loss &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(
     discriminator, X, <span class="kw">list</span>(y, aux_y), 
     <span class="dt">verbose =</span> <span class="ot">FALSE</span>
   ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unlist</span>()
   
   discriminator_train_loss &lt;-<span class="st"> </span><span class="kw">apply</span>(epoch_disc_loss, <span class="dv">2</span>, mean)
   
-  <span class="co"># make new noise</span>
+  <span class="co"># Make new noise</span>
   noise &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">2</span><span class="op">*</span>num_test<span class="op">*</span>latent_size, <span class="dt">min =</span> <span class="op">-</span><span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">2</span><span class="op">*</span>num_test, <span class="dt">ncol =</span> latent_size)
   sampled_labels &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">size =</span> <span class="dv">2</span><span class="op">*</span>num_test, <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
@@ -412,7 +410,7 @@ num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span cl
   
   trick &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">2</span><span class="op">*</span>num_test) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
   
-  generator_test_loss =<span class="st"> </span>combined <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/evaluate.html">evaluate</a></span>(
+  generator_test_loss =<span class="st"> </span>combined <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(
     <span class="kw">list</span>(noise, sampled_labels),
     <span class="kw">list</span>(trick, sampled_labels),
     <span class="dt">verbose =</span> <span class="ot">FALSE</span>
@@ -421,7 +419,7 @@ num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span cl
   generator_train_loss &lt;-<span class="st"> </span><span class="kw">apply</span>(epoch_gen_loss, <span class="dv">2</span>, mean)
   
   
-  <span class="co"># generate an epoch report on performance</span>
+  <span class="co"># Generate an epoch report on performance</span>
   row_fmt &lt;-<span class="st"> "</span><span class="ch">\n</span><span class="st">%22s : loss %4.2f | %5.2f | %5.2f"</span>
   <span class="kw">cat</span>(<span class="kw">sprintf</span>(
     row_fmt, 
@@ -445,6 +443,7 @@ num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span cl
     discriminator_train_loss[<span class="dv">2</span>],
     discriminator_train_loss[<span class="dv">3</span>]
   ))
+  
   <span class="kw">cat</span>(<span class="kw">sprintf</span>(
     row_fmt, 
     <span class="st">"discriminator (test)"</span>,
@@ -455,14 +454,14 @@ num_test &lt;-<span class="st"> </span><span class="kw">dim</span>(mnist<span cl
   
   <span class="kw">cat</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)
   
-  <span class="co"># generate some digits to display</span>
+  <span class="co"># Generate some digits to display</span>
   noise &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span><span class="op">*</span>latent_size, <span class="dt">min =</span> <span class="op">-</span><span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">10</span>, <span class="dt">ncol =</span> latent_size)
   
   sampled_labels &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">9</span> <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">1</span>)
   
-  <span class="co"># get a batch to display</span>
+  <span class="co"># Get a batch to display</span>
   generated_images &lt;-<span class="st"> </span><span class="kw">predict</span>(
     generator,    
     <span class="kw">list</span>(noise, sampled_labels)

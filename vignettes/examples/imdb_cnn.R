@@ -1,13 +1,13 @@
-#' This example demonstrates the use of Convolution1D for text classification.
+#' Use Convolution1D for text classification.
 #' 
-#' Gets to 0.89 test accuracy after 2 epochs.
-#' 90s/epoch on Intel i5 2.4Ghz CPU.
-#' 10s/epoch on Tesla K40 GPU.
+#' Output after 2 epochs: ~0.89 
+#' Time per epoch on CPU (Intel i5 2.4Ghz): 90s
+#' Time per epoch on GPU (Tesla K40): 10s
 #'
 
 library(keras)
 
-# set parameters:
+# Set parameters:
 max_features <- 5000
 maxlen <- 400
 batch_size <- 32
@@ -40,42 +40,48 @@ epochs <- 2
 # See help(dataset_imdb)
 imdb <- dataset_imdb(num_words = max_features)
 
-# pad the sequences, so they have all the same lenght
-# this will conver our dataset into a matrix: each line is a review
+# Pad the sequences, so they have all the same length
+# This will convert the dataset into a matrix: each line is a review
 # and each column a word on the sequence. 
-# we pad the sequences with 0 to the left.
+# Pad the sequences with 0 to the left.
 x_train <- imdb$train$x %>%
   pad_sequences(maxlen = maxlen)
-
 x_test <- imdb$test$x %>%
   pad_sequences(maxlen = maxlen)
 
-# Defining the model ------------------------------------------------------
+# Defining Model ------------------------------------------------------
 
+#Initialize model
 model <- keras_model_sequential()
 
 model %>% 
-  # we start off with an efficient embedding layer which maps
-  # our vocab indices into embedding_dims dimensions
+  # Start off with an efficient embedding layer which maps
+  # the vocab indices into embedding_dims dimensions
   layer_embedding(max_features, embedding_dims, input_length = maxlen) %>%
   layer_dropout(0.2) %>%
-  # we add a Convolution1D, which will learn filters
-  # word group filters of size filter_length:
+
+  # Add a Convolution1D, which will learn filters
+    # Word group filters of size filter_length:
   layer_conv_1d(
     filters, kernel_size, 
     padding = "valid", activation = "relu", strides = 1
   ) %>%
-  # we use max pooling:
+  # Apply max pooling:
   layer_global_max_pooling_1d() %>%
-  # We add a vanilla hidden layer:
+
+  # Add a vanilla hidden layer:
   layer_dense(hidden_dims) %>%
+
+  # Apply 20% layer dropout
   layer_dropout(0.2) %>%
   layer_activation("relu") %>%
-  # We project onto a single unit output layer, and squash it with a sigmoid:
+
+  # Project onto a single unit output layer, and squash it with a sigmoid
+
   layer_dense(1) %>%
   layer_activation("sigmoid")
 
-
+# Compile model
 model %>% compile(
   loss = "binary_crossentropy",
   optimizer = "adam",

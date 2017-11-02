@@ -198,7 +198,7 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
   # establish the log_dir
   if (is.null(log_dir)) {
     if (tfruns::is_run_active())
-      log_dir <- tfruns::run_dir()
+      log_dir <- file.path(tfruns::run_dir(), "logs")
     else
       log_dir <- "logs"
   }
@@ -207,11 +207,16 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
     log_dir = normalize_path(log_dir),
     histogram_freq = as.integer(histogram_freq),
     write_graph = write_graph,
-    write_images = write_images,
-    embeddings_freq = as.integer(embeddings_freq),
-    embeddings_layer_names = embeddings_layer_names,
-    embeddings_metadata = embeddings_metadata
+    write_images = write_images
   )
+  
+  # embeddings arguments seem to have been excluded in the TF implementation
+  # (even though they are stil part of the docs there)
+  if (!is_tensorflow_implementation()) {
+    args$embeddings_freq <- as.integer(embeddings_freq)
+    args$embeddings_layer_names <- embeddings_layer_names
+    args$embeddings_metadata <- embeddings_metadata
+  }
   
   if (keras_version() >= "2.0.5") {
     args$batch_size <- as.integer(batch_size)
@@ -423,32 +428,10 @@ normalize_callbacks <- function(view_metrics, callbacks) {
   have_tensorboard_callback <- FALSE
   callbacks <- lapply(callbacks, function(callback) {
     
-    # manipulate some callback file paths when tfruns is active
-    if (tfruns::is_run_active()) {
+    # track whether we have a TensorBoard callback
+    if (inherits(callback, "keras.callbacks.TensorBoard"))
+      have_tensorboard_callback <<- TRUE
     
-      # TensorBoard
-      if (inherits(callback, "keras.callbacks.TensorBoard")) {
-        
-        # track for auto-add below
-        have_tensorboard_callback <<- TRUE
-        
-        # provide log_dir if it's not already the run_dir
-        if (!identical(callback$log_dir, tfruns::run_dir())) {
-          callback$log_dir <- run_dir_path(callback$log_dir, default = callback$log_dir)  
-        }
-      }
-      
-      # Checkpointing
-      else if (inherits(callback, "keras.callbacks.ModelCheckpoint")) {
-        callback$filepath <- run_dir_path(callback$filepath, default = callback$file_path)
-      }
-      
-      # CSV logging
-      else if (inherits(callback, "keras.callbacks.CSVLogger")) {
-        callback$filename <- run_dir_path(callback$filename, default = callback$filename)
-      }
-    }
-  
     if (inherits(callback, "KerasCallback")) {
       # create a python callback to map to our R callback
       tools$callback$RCallback(

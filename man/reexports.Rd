@@ -9,9 +9,13 @@
 \alias{reexports}
 \alias{use_condaenv}
 \alias{reexports}
+\alias{array_reshape}
+\alias{reexports}
 \alias{use_session_with_seed}
 \alias{reexports}
 \alias{tensorboard}
+\alias{reexports}
+\alias{evaluate}
 \alias{reexports}
 \alias{flags}
 \alias{reexports}
@@ -31,9 +35,9 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{reticulate}{\code{\link[reticulate]{use_python}}, \code{\link[reticulate]{use_virtualenv}}, \code{\link[reticulate]{use_condaenv}}}
+  \item{reticulate}{\code{\link[reticulate]{use_python}}, \code{\link[reticulate]{use_virtualenv}}, \code{\link[reticulate]{use_condaenv}}, \code{\link[reticulate]{array_reshape}}}
 
-  \item{tensorflow}{\code{\link[tensorflow]{use_session_with_seed}}, \code{\link[tensorflow]{tensorboard}}}
+  \item{tensorflow}{\code{\link[tensorflow]{use_session_with_seed}}, \code{\link[tensorflow]{tensorboard}}, \code{\link[tensorflow]{evaluate}}}
 
   \item{tfruns}{\code{\link[tfruns]{flags}}, \code{\link[tfruns]{flag_numeric}}, \code{\link[tfruns]{flag_integer}}, \code{\link[tfruns]{flag_string}}, \code{\link[tfruns]{flag_boolean}}, \code{\link[tfruns]{run_dir}}}
 }}

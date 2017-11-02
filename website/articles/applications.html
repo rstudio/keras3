@@ -145,7 +145,7 @@ x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_to_
 
 <span class="co"># ensure we have a 4d tensor with single element in the batch dimension,</span>
 <span class="co"># the preprocess the input for prediction using resnet50</span>
-<span class="kw">dim</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x))
+x &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x, <span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x)))
 x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>(x)
 
 <span class="co"># make predictions then decode and print them</span>
@@ -164,7 +164,7 @@ preds &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span cl
 img_path &lt;-<span class="st"> "elephant.jpg"</span>
 img &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_load.html">image_load</a></span>(img_path, <span class="dt">target_size =</span> <span class="kw">c</span>(<span class="dv">224</span>,<span class="dv">224</span>))
 x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_to_array.html">image_to_array</a></span>(img)
-<span class="kw">dim</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x))
+x &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x, <span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x)))
 x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>(x)
 
 features &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">predict</span>(x)</code></pre></div>
@@ -179,7 +179,7 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras
 img_path &lt;-<span class="st"> "elephant.jpg"</span>
 img &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_load.html">image_load</a></span>(img_path, <span class="dt">target_size =</span> <span class="kw">c</span>(<span class="dv">224</span>,<span class="dv">224</span>))
 x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/image_to_array.html">image_to_array</a></span>(img)
-<span class="kw">dim</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x)) 
+x &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x, <span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(x)))
 x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>(x)
 
 block4_pool_features &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">predict</span>(x)</code></pre></div>
@@ -201,8 +201,7 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras
 
 <span class="co"># first: train only the top layers (which were randomly initialized)</span>
 <span class="co"># i.e. freeze all convolutional InceptionV3 layers</span>
-<span class="cf">for</span> (layer <span class="cf">in</span> base_model<span class="op">$</span>layers)
-  layer<span class="op">$</span>trainable &lt;-<span class="st"> </span><span class="ot">FALSE</span>
+<span class="kw"><a href="../reference/freeze_layers.html">freeze_layers</a></span>(base_model)
 
 <span class="co"># compile the model (should be done *after* setting layers to non-trainable)</span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>, <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>)
@@ -222,10 +221,8 @@ layers &lt;-<span class="st"> </span>base_model<span class="op">$</span>layers
 
 <span class="co"># we chose to train the top 2 inception blocks, i.e. we will freeze</span>
 <span class="co"># the first 172 layers and unfreeze the rest:</span>
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">172</span>)
-  layers[[i]]<span class="op">$</span>trainable &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">173</span><span class="op">:</span><span class="kw">length</span>(layers))
-  layers[[i]]<span class="op">$</span>trainable &lt;-<span class="st"> </span><span class="ot">TRUE</span>
+<span class="kw"><a href="../reference/freeze_layers.html">freeze_layers</a></span>(base_model, <span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">172</span>)
+<span class="kw"><a href="../reference/freeze_layers.html">unfreeze_layers</a></span>(base_model, <span class="dt">from =</span> <span class="dv">173</span>)
 
 <span class="co"># we need to recompile the model for these modifications to take effect</span>
 <span class="co"># we use SGD with a low learning rate</span>

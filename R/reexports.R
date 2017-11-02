@@ -10,6 +10,17 @@
 #' @usage lhs \%>\% rhs
 NULL
 
+#' Assign values to names
+#'
+#' See \code{\link[zeallot]{\%<-\%}} for more details.
+#'
+#' @name %<-%
+#' @rdname multi-assign
+#' @keywords internal
+#' @export
+#' @import zeallot
+#' @usage x \%<-\% value
+NULL
 
 #' @importFrom reticulate use_python
 #' @export
@@ -23,6 +34,10 @@ reticulate::use_virtualenv
 #' @export
 reticulate::use_condaenv
 
+#' @importFrom reticulate array_reshape
+#' @export
+reticulate::array_reshape
+
 #' @importFrom tensorflow use_session_with_seed
 #' @export
 tensorflow::use_session_with_seed
@@ -30,6 +45,10 @@ tensorflow::use_session_with_seed
 #' @importFrom tensorflow tensorboard
 #' @export
 tensorflow::tensorboard
+
+#' @importFrom tensorflow evaluate
+#' @export
+tensorflow::evaluate
 
 #' @importFrom tfruns flags
 #' @export

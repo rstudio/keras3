@@ -115,7 +115,7 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
       tryCatch({
         K <- backend()
         model_info <- list()
-        model_info$model <- py_str(model)
+        model_info$model <- py_str(model, line_length = 80L)
         model_info$loss_function <- model$loss
         if (is.function(model_info$loss_function))
           model_info$loss_function <- model_info$loss_function$func_name

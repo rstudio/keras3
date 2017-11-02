@@ -1,6 +1,7 @@
 MNIST-data
-checkpoint.h5
-training.csv
+*checkpoint.h5
+model.h5
+*.csv
+tflogs
 tb_logs
 weights
-model.h5

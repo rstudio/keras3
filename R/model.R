@@ -73,6 +73,15 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 }
 
 
+#' @importFrom reticulate py_to_r_wrapper
+#' @export
+py_to_r_wrapper.keras.engine.training.Model <- function(x) {
+  function(object) {
+    compose_layer(object, x)
+  }
+}
+
+
 #' Clone a model instance.
 #'
 #' Model cloning is similar to calling a model on new inputs, except that it
@@ -140,6 +149,10 @@ compile <- function(object, optimizer, loss,
   
   # handle metrics
   if (!is.null(metrics)) {
+    
+    # convert metrics to list if it isn't one
+    if (!is.list(metrics) && length(metrics) == 1)
+      metrics <- list(metrics)
     
     # get metric names (if any)
     metric_names <- names(metrics)
@@ -268,7 +281,7 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
     validation_data = validation_data,
     shuffle = shuffle,
     class_weight = as_class_weight(class_weight),
-    sample_weight = sample_weight,
+    sample_weight = as_nullable_array(sample_weight),
     initial_epoch = as.integer(initial_epoch)
   )
   
@@ -278,8 +291,8 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
     args$y <- keras_array(y)
   
   if (keras_version() >= "2.0.7") {
-    args$steps_per_epoch <- steps_per_epoch
-    args$validation_steps <- validation_steps
+    args$steps_per_epoch <- as_nullable_integer(steps_per_epoch)
+    args$validation_steps <- as_nullable_integer(validation_steps)
   }
   
   # fit the model
@@ -288,10 +301,12 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
   # convert to a keras_training history object
   history <- to_keras_training_history(history)
   
+  # write metadata contained in history
+  write_history_metadata(history)
+  
   # return the history invisibly
   invisible(history)
 }
-
 
 #' Evaluate a Keras model
 
@@ -300,14 +315,16 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
 #' @param object Model object to evaluate
 #' @param steps Total number of steps (batches of samples) before declaring the
 #'   evaluation round finished. Ignored with the default value of `NULL`.
-#'
+#' @param ... Unused   
+#'   
+#'   
 #' @return Named list of model test loss (or losses for models with multiple
 #'   outputs) and model metrics.
 #'
 #' @family model functions
 #'
 #' @export
-evaluate <- function(object, x, y, batch_size = NULL, verbose=1, sample_weight = NULL, steps = NULL) {
+evaluate.keras.engine.training.Model <- function(object, x, y, batch_size = NULL, verbose=1, sample_weight = NULL, steps = NULL, ...) {
   
   # defaults
   if (is.null(batch_size) && is.null(steps))
@@ -343,7 +360,7 @@ evaluate <- function(object, x, y, batch_size = NULL, verbose=1, sample_weight =
 #' Generates output predictions for the input samples, processing the samples in
 #' a batched way.
 #'
-#' @inheritParams evaluate
+#' @inheritParams evaluate.keras.engine.training.Model
 #'
 #' @param object Keras model
 #' @param x Input data (vector, matrix, or array)
@@ -481,10 +498,6 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'      - (inputs, targets)
 #'      - (inputs, targets, sample_weights)
 #'      
-#'   Note that the generator should call the [keras_array()] function on its
-#'   results prior to returning them (this ensures that arrays are provided in 
-#'   'C' order and using the default floating point type for the backend.)
-#'      
 #'   All arrays should contain the same number of samples. The generator is expected
 #'   to loop over its data indefinitely. An epoch finishes when `steps_per_epoch`
 #'   batches have been seen by the model.
@@ -523,7 +536,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
     view_metrics <- resolve_view_metrics(verbose, epochs, object$metrics)
   
   history <- call_generator_function(object$fit_generator, list(
-    generator = as_generator(generator),
+    generator = generator,
     steps_per_epoch = as.integer(steps_per_epoch),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
@@ -538,6 +551,9 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
   # convert to a keras_training history object
   history <- to_keras_training_history(history)
   
+  # write metadata from history
+  write_history_metadata(history)
+  
   # return the history invisibly
   invisible(history)
 }
@@ -547,8 +563,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
 #' The generator should return the same kind of data as accepted by
 #' `test_on_batch()`.
 #' 
-#' @inheritParams evaluate
-#' 
+#' @inheritParams evaluate.keras.engine.training.Model
 #' 
 #' @param generator Generator yielding lists (inputs, targets) or (inputs,
 #'   targets, sample_weights)
@@ -652,7 +667,7 @@ as_generator.python.builtin.object <- function(x) {
 }
 
 as_generator.function <- function(x) {
-  reticulate::py_iterator(x)
+  reticulate::py_iterator(function() keras_array(x()))
 }
 
   
@@ -728,6 +743,12 @@ resolve_view_metrics <- function(verbose, epochs, metrics) {
   nzchar(Sys.getenv("RSTUDIO"))       # running under RStudio
 }
 
+
+write_history_metadata <- function(history) {
+  properties <- list()
+  properties$validation_samples <- history$params$validation_samples
+  tfruns::write_run_metadata("properties", properties)
+}
 
 
 as_class_weight <- function(class_weight) {

@@ -16,7 +16,7 @@ Obtain a reference to the Python module used for the implementation of Keras.
 There are currently two Python modules which implement Keras:
 \itemize{
 \item keras ("keras")
-\item tensorflow.contrib.keras ("tensorflow")
+\item tensorflow.keras ("tensorflow")
 }
 
 This function returns a reference to the implementation being currently

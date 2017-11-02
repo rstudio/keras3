@@ -1,7 +1,7 @@
 #' Train a recurrent convolutional network on the IMDB sentiment
 #' classification task.
 #'  
-#' Gets to 0.8498 test accuracy after 2 epochs. 41s/epoch on K520 GPU.
+#' Achieves 0.8498 test accuracy after 2 epochs. 41s/epoch on K520 GPU.
 
 library(keras)
 
@@ -26,37 +26,25 @@ epochs = 2
 
 # Data Preparation --------------------------------------------------------
 
-# Keras load all data into a list with the following structure:
-# List of 2
-# $ train:List of 2
-# ..$ x:List of 25000
-# .. .. [list output truncated]
-# .. ..- attr(*, "dim")= int 25000
-# ..$ y: num [1:25000(1d)] 1 0 0 1 0 0 1 0 1 0 ...
-# $ test :List of 2
-# ..$ x:List of 25000
-# .. .. [list output truncated]
-# .. ..- attr(*, "dim")= int 25000
-# ..$ y: num [1:25000(1d)] 1 1 1 1 1 0 0 0 1 1 ...
-#
-# The x data includes integer sequences, each integer is a word.
-# The y data includes a set of integer labels (0 or 1).
+# The x data includes integer sequences, each integer is a word
+# The y data includes a set of integer labels (0 or 1)
 # The num_words argument indicates that only the max_fetures most frequent
 # words will be integerized. All other will be ignored.
 # See help(dataset_imdb)
 imdb <- dataset_imdb(num_words = max_features)
+# Keras load all data into a list with the following structure:
+str(imdb)
 
-# pad the sequences, so they have all the same lenght
-# this will conver our dataset into a matrix: each line is a review
-# and each column a word on the sequence. 
-# we pad the sequences with 0 to the left.
+# Pad the sequences to the same length
+  # This will convert our dataset into a matrix: each line is a review
+  # and each column a word on the sequence
+# We pad the sequences with 0s to the left
 x_train <- imdb$train$x %>%
   pad_sequences(maxlen = maxlen)
-
 x_test <- imdb$test$x %>%
   pad_sequences(maxlen = maxlen)
 
-# Defining the model ------------------------------------------------------
+# Defining Model ------------------------------------------------------
 
 model <- keras_model_sequential()
 

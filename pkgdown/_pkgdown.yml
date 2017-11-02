@@ -54,7 +54,6 @@ reference:
       - compile
       - fit
       - fit_generator
-      - evaluate
       - evaluate_generator
       - predict.keras.engine.training.Model
       - predict_proba
@@ -68,6 +67,7 @@ reference:
       - load_model_hdf5
       - serialize_model
       - clone_model
+      - freeze_layers
  
   - title: "Core Layers"
     contents:
@@ -186,7 +186,6 @@ reference:
       - dataset_cifar100
       - dataset_imdb
       - dataset_reuters
-      - dataset_reuters_word_index
       - dataset_mnist
       - dataset_boston_housing
 
@@ -229,6 +228,7 @@ reference:
       - fit_image_data_generator
       - flow_images_from_data
       - flow_images_from_directory
+      - generator_next
  
   - title: "Optimizers"
     contents:

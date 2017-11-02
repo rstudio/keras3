@@ -301,6 +301,44 @@ frozen_model %>% fit(data, labels)  # this does NOT update the weights of `layer
 trainable_model %>% fit(data, labels)  # this updates the weights of `layer`
 ```
 
+Finally, you can freeze or unfreeze and entire model (or a range of layers within the model) using the `freeze_layers()` and `unfreeze_layers()` functions. For example:
+
+```{r}
+# instantiate a VGG16 model
+conv_base <- application_vgg16(
+  weights = "imagenet",
+  include_top = FALSE,
+  input_shape = c(150, 150, 3)
+)
+
+# freeze it's layers
+freeze_layers(conv_base)
+
+# create a composite model that includes the base + more layers
+model <- keras_model_sequential() %>% 
+  conv_base %>% 
+  layer_flatten() %>% 
+  layer_dense(units = 256, activation = "relu") %>% 
+  layer_dense(units = 1, activation = "sigmoid")
+
+# compile
+model %>% compile(
+  loss = "binary_crossentropy",
+  optimizer = optimizer_rmsprop(lr = 2e-5),
+  metrics = c("accuracy")
+)
+
+# unfreeze layers from "block5_conv1" on
+unfreeze_layers(conv_base, from = "block5_conv1")
+
+# compile again since we froze or unfroze layers
+model %>% compile(
+  loss = "binary_crossentropy",
+  optimizer = optimizer_rmsprop(lr = 2e-5),
+  metrics = c("accuracy")
+)
+```
+
 
 ## How can I use stateful RNNs?
 
@@ -317,7 +355,7 @@ To use statefulness in RNNs, you need to:
 - set `stateful=TRUE` in your RNN layer(s).
 - specify `shuffle=FALSE` when calling fit().
 
-To reset the states accumulated in either a singel layer or an entire model use the `reset_states()` function.
+To reset the states accumulated in either a single layer or an entire model use the `reset_states()` function.
 
 Notes that the methods `predict()`, `fit()`, `train_on_batch()`, `predict_classes()`, etc. will *all* update the states of the stateful layers in a model. This allows you to do not only stateful training, but also stateful prediction.
 
@@ -443,12 +481,6 @@ If you create [custom layers in R](custom_layers.html) or import other Python pa
 During development of a model, sometimes it is useful to be able to obtain reproducible results from run to run in order to determine if a change in performance is due to an actual model or data modification, or merely a result of a new random sample.  
 
 The `use_session_with_seed()` function establishes a common random seed for R, Python, NumPy, and TensorFlow. It furthermore disables hash randomization, GPU computations, and CPU parallelization, which can be additional sources of non-reproducibility. 
-
-The `use_session_with_seed()` function is available in the development version of the Keras package, which you can install as follows:
-
-```{r}
-devtools::install_github("rstudio/keras")
-```
 
 To use the function, call it immediately after you load the keras package:
 

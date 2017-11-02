@@ -123,17 +123,19 @@ normalize <- function(x, axis = -1, order = 2) {
 #' order then it is returned unmodified (no additional copies are made).
 #'
 #' @param x Object or list of objects to convert
-#' @param dim Integer vector with array dimensions (defaults to dimensions of
-#'   `x`)
 #' @param dtype NumPy data type (e.g. float32, float64). If this is unspecified
 #'   then R doubles will be converted to the default floating point type for the
 #'   current Keras backend.
 #'
-#' @return NumPy array with the specified dimensions and type (or list of NumPy
-#'   arrays if a list was passed for `x`).
+#' @return NumPy array with the specified `dtype` (or list of NumPy arrays if a
+#'   list was passed for `x`).
 #'
 #' @export
-keras_array <- function(x, dim = dim(x), dtype = NULL) {
+keras_array <- function(x, dtype = NULL) {
+  
+  # reflect NULL
+  if (is.null(x))
+    return(x)
   
   # recurse for lists
   if (is.list(x))
@@ -158,12 +160,6 @@ keras_array <- function(x, dim = dim(x), dtype = NULL) {
   # if we don't yet have a dtype then use the converted type
   if (is.null(dtype))
     dtype <- x$dtype
-  
-  # reshape if necessary
-  if (!missing(dim)) {
-    np <- import("numpy", convert = FALSE)
-    x <- np$reshape(x, as.integer(dim), order = "C")
-  }
   
   # ensure we use C column ordering (won't create a new array if the array
   # is already using C ordering)
@@ -218,7 +214,7 @@ is_keras_available <- function(version = NULL) {
 #' There are currently two Python modules which implement Keras:
 #' 
 #' - keras ("keras")
-#' - tensorflow.contrib.keras ("tensorflow")
+#' - tensorflow.keras ("tensorflow")
 #' 
 #' This function returns a reference to the implementation being currently 
 #' used by the keras package. The default implementation is "keras".
@@ -264,6 +260,10 @@ is_windows <- function() {
 
 is_osx <- function() {
   Sys.info()["sysname"] == "Darwin"
+}
+
+is_layer <- function(object) {
+  inherits(object, "keras.engine.topology.Layer")
 }
 
 relative_to <- function(dir, file) {

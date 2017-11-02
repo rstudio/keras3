@@ -176,7 +176,8 @@ Name                                                                            
 [flatten](https://keras.io/backend/#flatten)                                                   Flatten a tensor.                                                           
 [floatx](https://keras.io/backend/#floatx)                                                     Returns the default float type, as a string.                                
 [foldl](https://keras.io/backend/#foldl)                                                       Reduce elems using fn to combine them from left to right.                   
-[foldr](https://keras.io/backend/#foldr)                                                       Reduce elems using fn to combine them from right to left.                   
+[foldr](https://keras.io/backend/#foldr)                                                       Reduce elems using fn to combine them from right to left.                 
+[\`function\`](https://keras.io/backend/#function)                                             Instantiates a Keras function.
 [gather](https://keras.io/backend/#gather)                                                     Retrieves the elements of indices `indices` in the tensor `reference`.      
 [get_session](https://keras.io/backend/#get_session)                                           Returns the TF session to be used by the backend.                           
 [get_uid](https://keras.io/backend/#get_uid)                                                   Associates a string prefix with an integer counter in a TensorFlow graph.   
@@ -231,7 +232,7 @@ Name                                                                            
 [random_uniform_variable](https://keras.io/backend/#random_uniform_variable)                   Instantiates a variable with values drawn from a uniform distribution.      
 [relu](https://keras.io/backend/#relu)                                                         Rectified linear unit.                                                      
 [repeat_elements](https://keras.io/backend/#repeat_elements)                                   Repeats the elements of a tensor along an axis, like `np.repeat`.           
-[reset_uids](https://keras.io/backend/#reset_uids)                                                                                                                         
+[reset_uids](https://keras.io/backend/#reset_uids)                                             Reset graph identifiers.                    
 [reshape](https://keras.io/backend/#reshape)                                                   Reshapes a tensor to the specified shape.                                   
 [resize_images](https://keras.io/backend/#resize_images)                                       Resizes the images contained in a 4D tensor.                                
 [resize_volumes](https://keras.io/backend/#resize_volumes)                                     Resizes the volume contained in a 5D tensor.                                
@@ -269,7 +270,7 @@ Name                                                                            
 [to_dense](https://keras.io/backend/#to_dense)                                                 Converts a sparse tensor into a dense tensor and returns it.                
 [transpose](https://keras.io/backend/#transpose)                                               Transposes a tensor and returns it.                                         
 [truncated_normal](https://keras.io/backend/#truncated_normal)                                 Returns a tensor with truncated random normal distribution of values.       
-[update](https://keras.io/backend/#update)                                                                                                                                 
+[update](https://keras.io/backend/#update)                                                     Update the value of `x` to `new_x`.                  
 [update_add](https://keras.io/backend/#update_add)                                             Update the value of `x` by adding `increment`.                              
 [update_sub](https://keras.io/backend/#update_sub)                                             Update the value of `x` by subtracting `decrement`.                         
 [var](https://keras.io/backend/#var)                                                           Variance of a tensor, alongside the specified axis.                         

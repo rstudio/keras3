@@ -342,6 +342,40 @@ trainable_model <span class="op">%&gt;%</span><span class="st"> </span><span cla
 
 frozen_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels)  <span class="co"># this does NOT update the weights of `layer`</span>
 trainable_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels)  <span class="co"># this updates the weights of `layer`</span></code></pre></div>
+<p>Finally, you can freeze or unfreeze and entire model (or a range of layers within the model) using the <code><a href="../reference/freeze_layers.html">freeze_layers()</a></code> and <code><a href="../reference/freeze_layers.html">unfreeze_layers()</a></code> functions. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># instantiate a VGG16 model</span>
+conv_base &lt;-<span class="st"> </span><span class="kw"><a href="../reference/application_vgg.html">application_vgg16</a></span>(
+  <span class="dt">weights =</span> <span class="st">"imagenet"</span>,
+  <span class="dt">include_top =</span> <span class="ot">FALSE</span>,
+  <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">3</span>)
+)
+
+<span class="co"># freeze it's layers</span>
+<span class="kw"><a href="../reference/freeze_layers.html">freeze_layers</a></span>(conv_base)
+
+<span class="co"># create a composite model that includes the base + more layers</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>conv_base <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_flatten.html">layer_flatten</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">256</span>, <span class="dt">activation =</span> <span class="st">"relu"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">"sigmoid"</span>)
+
+<span class="co"># compile</span>
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+  <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span>,
+  <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="dt">lr =</span> <span class="fl">2e-5</span>),
+  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">"accuracy"</span>)
+)
+
+<span class="co"># unfreeze layers from "block5_conv1" on</span>
+<span class="kw"><a href="../reference/freeze_layers.html">unfreeze_layers</a></span>(conv_base, <span class="dt">from =</span> <span class="st">"block5_conv1"</span>)
+
+<span class="co"># compile again since we froze or unfroze layers</span>
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(
+  <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span>,
+  <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="dt">lr =</span> <span class="fl">2e-5</span>),
+  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">"accuracy"</span>)
+)</code></pre></div>
 </div>
 <div id="how-can-i-use-stateful-rnns" class="section level2">
 <h2 class="hasAnchor">
@@ -358,7 +392,7 @@ trainable_model <span class="op">%&gt;%</span><span class="st"> </span><span cla
 <li>set <code>stateful=TRUE</code> in your RNN layer(s).</li>
 <li>specify <code>shuffle=FALSE</code> when calling fit().</li>
 </ul>
-<p>To reset the states accumulated in either a singel layer or an entire model use the <code><a href="../reference/reset_states.html">reset_states()</a></code> function.</p>
+<p>To reset the states accumulated in either a single layer or an entire model use the <code><a href="../reference/reset_states.html">reset_states()</a></code> function.</p>
 <p>Notes that the methods <code>predict()</code>, <code><a href="../reference/fit.html">fit()</a></code>, <code><a href="../reference/train_on_batch.html">train_on_batch()</a></code>, <code><a href="../reference/predict_proba.html">predict_classes()</a></code>, etc. will <em>all</em> update the states of the stateful layers in a model. This allows you to do not only stateful training, but also stateful prediction.</p>
 </div>
 <div id="how-can-i-remove-a-layer-from-a-sequential-model" class="section level2">
@@ -469,8 +503,6 @@ keras &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <a href="#how-can-i-obtain-reproducible-results-using-keras-during-development" class="anchor"></a>How can I obtain reproducible results using Keras during development?</h2>
 <p>During development of a model, sometimes it is useful to be able to obtain reproducible results from run to run in order to determine if a change in performance is due to an actual model or data modification, or merely a result of a new random sample.</p>
 <p>The <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/use_session_with_seed">use_session_with_seed()</a></code> function establishes a common random seed for R, Python, NumPy, and TensorFlow. It furthermore disables hash randomization, GPU computations, and CPU parallelization, which can be additional sources of non-reproducibility.</p>
-<p>The <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/use_session_with_seed">use_session_with_seed()</a></code> function is available in the development version of the Keras package, which you can install as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"rstudio/keras"</span>)</code></pre></div>
 <p>To use the function, call it immediately after you load the keras package:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 <span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/use_session_with_seed">use_session_with_seed</a></span>(<span class="dv">42</span>)

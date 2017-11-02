@@ -116,13 +116,12 @@
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/imdb_fasttext.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/imdb_fasttext.R</a></p>
 </div>
 <p>This example demonstrates the use of fasttext for text classification</p>
-<p>Based on Joulin et al’s paper:</p>
-<p>Bags of Tricks for Efficient Text Classification <a href="https://arxiv.org/abs/1607.01759" class="uri">https://arxiv.org/abs/1607.01759</a></p>
-<p>Results on IMDB datasets with uni and bi-gram embeddings: Uni-gram: 0.8813 test accuracy after 5 epochs. 8s/epoch on i7 cpu. Bi-gram : 0.9056 test accuracy after 5 epochs. 2s/epoch on GTx 980M gpu.</p>
+<p>Based on Joulin et al’s paper: “Bags of Tricks for Efficient Text Classification” <a href="https://arxiv.org/abs/1607.01759" class="uri">https://arxiv.org/abs/1607.01759</a></p>
+<p>Results on IMDB datasets with uni and bi-gram embeddings: Uni-gram: 0.8813 test accuracy after 5 epochs. 8s/epoch on i7 CPU Bi-gram : 0.9056 test accuracy after 5 epochs. 2s/epoch on GTx 980M GPU</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 <span class="kw">library</span>(purrr)
 
-<span class="co"># Function definition -----------------------------------------------------</span>
+<span class="co"># Function Definitions ----------------------------------------------------</span>
 
 create_ngram_set &lt;-<span class="st"> </span><span class="cf">function</span>(input_list, <span class="dt">ngram_value =</span> <span class="dv">2</span>){
   indices &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(<span class="dv">0</span><span class="op">:</span>(<span class="kw">length</span>(input_list) <span class="op">-</span><span class="st"> </span>ngram_value), <span class="op">~</span><span class="dv">1</span><span class="op">:</span>ngram_value <span class="op">+</span><span class="st"> </span>.x)
@@ -157,13 +156,17 @@ embedding_dims &lt;-<span class="st"> </span><span class="dv">50</span>
 epochs &lt;-<span class="st"> </span><span class="dv">5</span>
 
 
-<span class="co"># Data preparation --------------------------------------------------------</span>
+<span class="co"># Data Preparation --------------------------------------------------------</span>
 
+<span class="co"># Load data</span>
 imdb_data &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dataset_imdb.html">dataset_imdb</a></span>(<span class="dt">num_words =</span> max_features)
 
-<span class="kw">print</span>(<span class="kw">length</span>(imdb_data<span class="op">$</span>train<span class="op">$</span>x)) <span class="co"># train sequences</span>
-<span class="kw">print</span>(<span class="kw">length</span>(imdb_data<span class="op">$</span>test<span class="op">$</span>x)) <span class="co"># test sequences</span>
+<span class="co"># Train sequences</span>
+<span class="kw">print</span>(<span class="kw">length</span>(imdb_data<span class="op">$</span>train<span class="op">$</span>x))
 <span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"Average train sequence length: %f"</span>, <span class="kw">mean</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(imdb_data<span class="op">$</span>train<span class="op">$</span>x, length))))
+
+<span class="co"># Test sequences</span>
+<span class="kw">print</span>(<span class="kw">length</span>(imdb_data<span class="op">$</span>test<span class="op">$</span>x)) 
 <span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"Average test sequence length: %f"</span>, <span class="kw">mean</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(imdb_data<span class="op">$</span>test<span class="op">$</span>x, length))))
 
 <span class="cf">if</span>(ngram_range <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) {
@@ -174,16 +177,16 @@ imdb_data &lt;-<span class="st"> </span><span class="kw"><a href="../../referenc
 <span class="st">    </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">unique</span>()
 
-  <span class="co"># Dictionary mapping n-gram token to a unique integer.</span>
-  <span class="co"># Integer values are greater than max_features in order</span>
-  <span class="co"># to avoid collision with existing features.</span>
+  <span class="co"># Dictionary mapping n-gram token to a unique integer</span>
+    <span class="co"># Integer values are greater than max_features in order</span>
+    <span class="co"># to avoid collision with existing features</span>
   token_indice &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
     <span class="dt">ngrams =</span> ngrams,
     <span class="dt">token  =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(ngrams) <span class="op">+</span><span class="st"> </span>(max_features), 
     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>
   )
   
-  <span class="co"># max_features is the highest integer that could be found in the dataset.</span>
+  <span class="co"># max_features is the highest integer that could be found in the dataset</span>
   max_features &lt;-<span class="st"> </span><span class="kw">max</span>(token_indice<span class="op">$</span>token) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
   
   <span class="co"># Augmenting x_train and x_test with n-grams features</span>
@@ -191,12 +194,12 @@ imdb_data &lt;-<span class="st"> </span><span class="kw"><a href="../../referenc
   imdb_data<span class="op">$</span>test<span class="op">$</span>x &lt;-<span class="st"> </span><span class="kw">add_ngram</span>(imdb_data<span class="op">$</span>test<span class="op">$</span>x, token_indice, ngram_range)
 }
 
-<span class="co"># pad sequences</span>
+<span class="co"># Pad sequences</span>
 imdb_data<span class="op">$</span>train<span class="op">$</span>x &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/pad_sequences.html">pad_sequences</a></span>(imdb_data<span class="op">$</span>train<span class="op">$</span>x, <span class="dt">maxlen =</span> maxlen)
 imdb_data<span class="op">$</span>test<span class="op">$</span>x &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/pad_sequences.html">pad_sequences</a></span>(imdb_data<span class="op">$</span>test<span class="op">$</span>x, <span class="dt">maxlen =</span> maxlen)
 
 
-<span class="co"># Model definition --------------------------------------------------------</span>
+<span class="co"># Model Definition --------------------------------------------------------</span>
 
 model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
 

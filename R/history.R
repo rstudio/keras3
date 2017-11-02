@@ -31,7 +31,7 @@ print.keras_training_history <- function(x, ...) {
                 "Final epoch (plot to see history):\n",
                 paste0(labels, ": ", metrics, collapse = "\n"),
                 collapse = "\n")
-  cat(str)
+  cat(str, "\n")
 }
 
 

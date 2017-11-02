@@ -179,7 +179,6 @@ test_call_succeeds("layer_upsampling_2d", {
 })
 
 test_call_succeeds("layer_upsampling_3d", {
-  skip_if_cntk()
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
     layer_reshape(target_shape = c(2,4,2,2)) %>%
@@ -415,7 +414,6 @@ test_call_succeeds("layer_batch_normalization", {
 })
 
 test_call_succeeds("layer_gaussian_noise", {
-  skip_if_cntk()
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
     layer_reshape(target_shape = c(2,16)) %>%
@@ -424,7 +422,6 @@ test_call_succeeds("layer_gaussian_noise", {
 
 
 test_call_succeeds("layer_gaussian_dropout", {
-  skip_if_cntk()
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
     layer_reshape(target_shape = c(2,16)) %>%
@@ -432,7 +429,6 @@ test_call_succeeds("layer_gaussian_dropout", {
 })
 
 test_call_succeeds("layer_alpha_dropout", required_version = "2.0.6", {
-  skip_if_cntk()
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
     layer_reshape(target_shape = c(2,16)) %>%
@@ -445,7 +441,6 @@ test_call_succeeds("time_distributed", {
 })
 
 test_call_succeeds("bidirectional", {
-  skip_if_cntk()
   keras_model_sequential() %>%
     bidirectional(layer_lstm(units = 10, return_sequences = TRUE), input_shape = c(5, 10)) %>%
     bidirectional(layer_lstm(units = 10)) %>%

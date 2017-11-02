@@ -1,7 +1,36 @@
 
-## keras 2.0.8 (development)
+## keras 2.0.9 (development)
 
 Install the development version with: `install_github("rstudio/keras")`
+
+- Automatically call `keras_array()` on the results of generator functions.
+
+- Ensure that `steps_per_epoch` is passed as an integer
+
+- Import `evaluate()` generic from tensorflow package
+
+- Handle `NULL` when converting R arrays to Keras friendly arrays
+
+- Added `dataset_imbd_word_index()` function
+
+- Ensure that `sample_weight` is passed to `fit()` as an array.
+
+- Accept single function as `metrics` argument to `compile()`
+
+- Automatically cast `input_shape` argument to applications to integer
+
+- Allow Keras models to be composable within model pipelines
+
+- Added `freeze_layers()` and `unfreeze_layers()` functions.
+
+- Implement `export_savedmodel()` generic from TensorFlow package
+
+- Convert R arrays to row-major before image preprocessing
+
+- Use `tensorflow.keras` for tensorflow implementation (TF v1.4)
+
+
+## keras 2.0.8 (CRAN)
 
 - Add `use_session_with_seed()` function that establishes a random seed for the Keras session.
   Note that this should not be used when training time is paramount, as it disables GPU
@@ -31,7 +60,7 @@ Install the development version with: `install_github("rstudio/keras")`
 - Enable stateful RNNs with CNTK.
 
 
-## keras 2.0.6 (CRAN)
+## keras 2.0.6
 
 - `install_keras()` function which installs both TensorFlow and Keras
 

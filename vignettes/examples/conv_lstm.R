@@ -1,6 +1,7 @@
 # This script demonstrates the use of a convolutional LSTM network.
 # This network is used to predict the next frame of an artificially
 # generated movie which contains moving squares.
+
 library(keras)
 library(abind)
 library(raster)
@@ -40,10 +41,9 @@ generate_movies <- function(n_samples = 1200, n_frames = 15){
         noisy_movies[s, t, square_x, square_y] <- 
           noisy_movies[s, t, square_x, square_y] + 1
         
-        # Make it more robust by adding noise.
-        # The idea is that if during inference,
-        # the value of the pixel is not exactly one,
-        # we need to train the network to be robust and still
+        # Make it more robust by adding noise. The idea is that if 
+        # during inference, the value of the pixel is not exactly 
+        # one; we need to train the network to be robust and still 
         # consider it as a pixel belonging to a square.
         if(runif(1) > 0.5){
           noise_f <- sample(c(-1, 1), 1)
@@ -73,9 +73,9 @@ generate_movies <- function(n_samples = 1200, n_frames = 15){
   noisy_movies[noisy_movies > 1] <- 1
   shifted_movies[shifted_movies > 1] <- 1
 
-  # add channel dimension
-  dim(noisy_movies) <- c(dim(noisy_movies), 1)
-  dim(shifted_movies) <- c(dim(shifted_movies), 1)
+  # Add channel dimension
+  noisy_movies <- array_reshape(noisy_movies, c(dim(noisy_movies), 1))
+  shifted_movies <- array_reshape(shifted_movies, c(dim(shifted_movies), 1))
   
   list(
     noisy_movies = noisy_movies,
@@ -87,52 +87,57 @@ generate_movies <- function(n_samples = 1200, n_frames = 15){
 # Data Preparation --------------------------------------------------------
 
 # Artificial data generation:
-# Generate movies with 3 to 7 moving squares inside.
-# The squares are of shape 1x1 or 2x2 pixels,
-# which move linearly over time.
-# For convenience we first create movies with bigger width and height (80x80)
-# and at the end we select a 40x40 window.
+  # Generate movies with 3 to 7 moving squares inside.
+  # The squares are of shape 1x1 or 2x2 pixels, which move linearly over time.
+  # For convenience we first create movies with bigger width and height (80x80)
+  # and at the end we select a 40x40 window.
 movies <- generate_movies(n_samples = 1000, n_frames = 15)
 more_movies <- generate_movies(n_samples = 200, n_frames = 15)
 
 
 # Model definition --------------------------------------------------------
 
+#Initialize model
 model <- keras_model_sequential()
 
 model %>%
+
+  # Begin with 2D convolutional LSTM layer
   layer_conv_lstm_2d(
     input_shape = list(NULL,40,40,1), 
     filters = 40, kernel_size = c(3,3),
     padding = "same", 
     return_sequences = TRUE
   ) %>%
+  # Normalize the activations of the previous layer
   layer_batch_normalization() %>%
   
+  # Add 3x hidden 2D convolutions LSTM layers, with
+  # batch normalization layers between
+  layer_conv_lstm_2d(
+    filters = 40, kernel_size = c(3,3),
+    padding = "same", return_sequences = TRUE
+  ) %>%
+  layer_batch_normalization() %>%
+  layer_conv_lstm_2d(
+    filters = 40, kernel_size = c(3,3),
+    padding = "same", return_sequences = TRUE
+  ) %>%
+  layer_batch_normalization() %>% 
   layer_conv_lstm_2d(
     filters = 40, kernel_size = c(3,3),
     padding = "same", return_sequences = TRUE
   ) %>%
   layer_batch_normalization() %>%
   
-  layer_conv_lstm_2d(
-    filters = 40, kernel_size = c(3,3),
-    padding = "same", return_sequences = TRUE
-  ) %>%
-  layer_batch_normalization() %>%
-  
-  layer_conv_lstm_2d(
-    filters = 40, kernel_size = c(3,3),
-    padding = "same", return_sequences = TRUE
-  ) %>%
-  layer_batch_normalization() %>%
-  
+  # Add final 3D convolutional output layer 
   layer_conv_3d(
     filters = 1, kernel_size = c(3,3,3),
     activation = "sigmoid", 
     padding = "same", data_format ="channels_last"
   )
 
+# Prepare model for training
 model %>% compile(
   loss = "binary_crossentropy", 
   optimizer = "adadelta"
@@ -151,37 +156,48 @@ model %>% fit(
   validation_split = 0.05
 )
 
+
 # Visualization  ----------------------------------------------------------------
+
 # Testing the network on one movie
 # feed it with the first 7 positions and then
 # predict the new positions
 
-which <- 100 #Example to visualize on
+#Example to visualize on
+which <- 100
 
 track <- more_movies$noisy_movies[which,1:8,,,1]
 track <- array(track, c(1,8,40,40,1))
+
 for (k in 1:15){
-if (k<8){
-  png(paste0(k,'_animate.png'))
-  par(mfrow=c(1,2),bg = 'white')
-  (more_movies$noisy_movies[which,k,,,1])  %>% raster() %>% plot() %>% title (main=paste0('Ground_',k)) 
-  (more_movies$noisy_movies[which,k,,,1])  %>% raster() %>% plot() %>% title (main=paste0('Ground_',k)) 
-  dev.off()
-}  else {
-  # And then compare the predictions
-  # to the ground truth
-  png(paste0(k,'_animate.png'))
-  par(mfrow=c(1,2),bg = 'white')
-  (more_movies$noisy_movies[which,k,,,1])  %>% raster() %>% plot() %>% title (main=paste0('Ground_',k))
+  if (k<8){ 
+    png(paste0(k,'_animate.png'))
+    par(mfrow=c(1,2),bg = 'white')
+    (more_movies$noisy_movies[which,k,,,1])  %>% raster() %>% plot() %>% title (main=paste0('Ground_',k)) 
+    (more_movies$noisy_movies[which,k,,,1])  %>% raster() %>% plot() %>% title (main=paste0('Ground_',k)) 
+    dev.off()
+  } else {
+    
+    # And then compare the predictions to the ground truth
+    png(paste0(k,'_animate.png'))
+    par(mfrow=c(1,2),bg = 'white')
+    (more_movies$noisy_movies[which,k,,,1])  %>% raster() %>% plot() %>% title (main=paste0('Ground_',k))
+    
+    # Make Prediction
+    new_pos <- model %>% predict(track)
    
-  new_pos <- model %>% predict(track)  #Make Prediction
-  new_pos_loc <- new_pos[1,k,1:40,1:40,1]  #Slice the last row
-  new_pos_loc  %>% raster() %>% plot() %>% title (main=paste0('Pred_',k))
-  
-  new_pos <- array(new_pos_loc, c(1,1, 40,40,1)) #Reshape it
-  track <- abind(track,new_pos,along = 2)  #Bind it to the earlier data
-  dev.off()
-}
-}  
-# you can also create a gif by running
+    # Slice the last row  
+    new_pos_loc <- new_pos[1,k,1:40,1:40,1]  
+    new_pos_loc  %>% raster() %>% plot() %>% title (main=paste0('Pred_',k))    
+    
+    # Reshape it
+    new_pos <- array(new_pos_loc, c(1,1, 40,40,1))     
+    
+    # Bind it to the earlier data
+    track <- abind(track,new_pos,along = 2)  
+    dev.off()
+  }
+} 
+
+# Can also create a gif by running
 system("convert -delay 40 *.png animation.gif")

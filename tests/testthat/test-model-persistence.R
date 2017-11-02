@@ -56,6 +56,10 @@ test_succeeds("model can be saved and loaded from R 'raw' object", {
 })
 
 test_succeeds("saved models/weights are mirrored in the run_dir", {
+  
+  if (packageVersion("tfruns") < "0.9.1.9002")
+    skip("required version of tfruns not available")
+  
   run <- tfruns::training_run("train.R")
   run_dir <- run$run_dir
   expect_true(file.exists(file.path(run_dir, "model.h5")))
@@ -63,15 +67,26 @@ test_succeeds("saved models/weights are mirrored in the run_dir", {
 })
 
 test_succeeds("callback output is redirected to run_dir", {
+  
+  if (packageVersion("tfruns") < "0.9.1.9002")
+    skip("required version of tfruns not available")
+  
   run <- tfruns::training_run("train.R")
   run_dir <- run$run_dir
-  expect_false(file_test("-d", "tflogs"))
   if (is_backend("tensorflow"))
     expect_true(file_test("-d", file.path(run_dir, "tflogs")))
-  expect_false(file.exists("cbk_checkpoint.h5"))
   expect_true(file.exists(file.path(run_dir, "cbk_checkpoint.h5")))
-  expect_false(file.exists("cbk_history.csv"))
   expect_true(file.exists(file.path(run_dir, "cbk_history.csv")))
 })
 
-
+test_succeeds("model can be exported to TensorFlow", {
+  if (!is_backend("tensorflow")) skip("not a tensorflow backend")
+    
+  model <- define_and_compile_model()
+  model_dir <- tempfile()
+  
+  tensorflow::export_savedmodel(model, model_dir)
+  
+  model_files <- dir(model_dir, recursive = TRUE)
+  expect_true(any(grepl("saved_model\\.pb", model_files)))
+})
