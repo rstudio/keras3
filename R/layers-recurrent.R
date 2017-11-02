@@ -167,6 +167,62 @@ layer_gru <- function(object, units, activation = "tanh", recurrent_activation =
 }
 
 
+#' Fast GRU implementation backed by [CuDNN](https://developer.nvidia.com/cudnn).
+#' 
+#' Can only be run on GPU, with the TensorFlow backend.
+#' 
+#' @inheritParams layer_simple_rnn
+#' 
+#' @family recurrent layers  
+#' 
+#' @section References: 
+#' - [On the Properties of Neural Machine Translation:
+#'   Encoder-Decoder Approaches](https://arxiv.org/abs/1409.1259) 
+#' - [Empirical
+#'   Evaluation of Gated Recurrent Neural Networks on Sequence
+#'   Modeling](http://arxiv.org/abs/1412.3555v1) 
+#' - [A Theoretically Grounded
+#'   Application of Dropout in Recurrent Neural
+#'   Networks](http://arxiv.org/abs/1512.05287)
+#'
+#' @export
+layer_cudnn_gru <- function(object, units,
+                            kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
+                            kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
+                            kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL,
+                            return_sequences = FALSE, return_state = FALSE, stateful = FALSE,
+                            dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
+                            dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
+  args <- list(
+    units = as.integer(units),
+    kernel_initializer = kernel_initializer,
+    recurrent_initializer = recurrent_initializer,
+    bias_initializer = bias_initializer,
+    kernel_regularizer = kernel_regularizer,
+    recurrent_regularizer = recurrent_regularizer,
+    bias_regularizer = bias_regularizer,
+    activity_regularizer = activity_regularizer,
+    kernel_constraint = kernel_constraint,
+    recurrent_constraint = recurrent_constraint,
+    bias_constraint = bias_constraint,
+    return_sequences = return_sequences,
+    return_state = return_state,
+    stateful = stateful,
+    dropout = dropout,
+    recurrent_dropout = recurrent_dropout,
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
+  )
+  
+  create_layer(keras$layers$CuDNNGRU, object, args)
+}
+
+
 #' Long-Short Term Memory unit - Hochreiter 1997.
 #' 
 #' For a step-by-step description of the algorithm, see [this
@@ -233,6 +289,58 @@ layer_lstm <- function(object, units, activation = "tanh", recurrent_activation 
     args$return_state <- return_state
   
   create_layer(keras$layers$LSTM, object, args)
+}
+
+#' Fast LSTM implementation backed by [CuDNN](https://developer.nvidia.com/cudnn).
+#' 
+#' Can only be run on GPU, with the TensorFlow backend.
+#'
+#' @inheritParams layer_lstm
+#' 
+#' @section References: 
+#' - [Long short-term memory](http://www.bioinf.jku.at/publications/older/2604.pdf) (original 1997 paper) 
+#' - [Supervised sequence labeling with recurrent neural networks](http://www.cs.toronto.edu/~graves/preprint.pdf) 
+#' - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
+#'  
+#' @family recurrent layers  
+#' 
+#' @export
+layer_cudnn_lstm <- function(object, units, 
+                             kernel_initializer = "glorot_uniform",  recurrent_initializer = "orthogonal", 
+                             bias_initializer = "zeros",  unit_forget_bias = TRUE,
+                             kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
+                             kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL,
+                             return_sequences = FALSE, return_state = FALSE, stateful = FALSE,
+                             dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
+                             dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
+  args <- list(
+    units = as.integer(units),
+    kernel_initializer = kernel_initializer,
+    recurrent_initializer = recurrent_initializer,
+    bias_initializer = bias_initializer,
+    unit_forget_bias = unit_forget_bias,
+    kernel_regularizer = kernel_regularizer,
+    recurrent_regularizer = recurrent_regularizer,
+    bias_regularizer = bias_regularizer,
+    activity_regularizer = activity_regularizer,
+    kernel_constraint = kernel_constraint,
+    recurrent_constraint = recurrent_constraint,
+    bias_constraint = bias_constraint,
+    return_sequences = return_sequences,
+    return_state = return_state,
+    stateful = stateful,
+    dropout = dropout,
+    recurrent_dropout = recurrent_dropout,
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
+  )
+  
+  create_layer(keras$layers$CuDNNLSTM, object, args)
 }
 
 

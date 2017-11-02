@@ -124,9 +124,10 @@ reference:
     contents:
       - layer_simple_rnn
       - layer_gru
+      - layer_cudnn_gru
       - layer_lstm
+      - layer_cudnn_gru
        
-
   - title: "Embedding Layers"
     contents:
       - layer_embedding
