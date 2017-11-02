@@ -33,6 +33,9 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Added `dataset_fashion_mnist()` dataset
 
+- Added `layer_cudnn_gru()` and `layer_cudnn_lstm()` (faster 
+  recurrent layers backed by [CuDNN](https://developer.nvidia.com/cudnn))
+
 
 ## keras 2.0.8 (CRAN)
 
