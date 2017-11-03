@@ -25,6 +25,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Added `freeze_weights()` and `unfreeze_weights()` functions.
 
+- Implement `export_savedmodel()` generic from TensorFlow package
+
 - Convert R arrays to row-major before image preprocessing
 
 - Use `tensorflow.keras` for tensorflow implementation (TF v1.4)
