@@ -388,13 +388,13 @@ test_call_succeeds("layer_multiply", {
   keras_model(merge_inputs, output)
 })
 
-test_call_succeeds("layer_maximum", required_version = "2.0.9", {
+test_call_succeeds("layer_maximum", {
   merge_inputs <- get_merge_inputs()
   output <- layer_maximum(merge_inputs)
   keras_model(merge_inputs, output)
 })
 
-test_call_succeeds("layer_minumum",  {
+test_call_succeeds("layer_minumum", required_version = "2.0.9", {
   merge_inputs <- get_merge_inputs()
   output <- layer_minimum(merge_inputs)
   keras_model(merge_inputs, output)
