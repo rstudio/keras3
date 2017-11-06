@@ -141,9 +141,9 @@ content_loss <- function(base, combination){
 # designed to keep the generated image locally coherent
 
 total_variation_loss <- function(x){
-  y_ij  <- x[,0:(img_nrows - 2L), 0:(img_ncols - 2L),]
-  y_i1j <- x[,1:(img_nrows - 1L), 0:(img_ncols - 2L),]
-  y_ij1 <- x[,0:(img_nrows - 2L), 1:(img_ncols - 1L),]
+  y_ij  <- x[,1:(img_nrows - 1L), 1:(img_ncols - 1L),]
+  y_i1j <- x[,2:(img_nrows), 1:(img_ncols - 1L),]
+  y_ij1 <- x[,1:(img_nrows - 1L), 2:(img_ncols),]
   
   a <- K$square(y_ij - y_i1j)
   b <- K$square(y_ij - y_ij1)
@@ -153,8 +153,8 @@ total_variation_loss <- function(x){
 # combine these loss functions into a single scalar
 loss <- K$variable(0.0)
 layer_features <- output_dict$block4_conv2
-base_image_features <- layer_features[0,,,]
-combination_features <- layer_features[2,,,]
+base_image_features <- layer_features[1,,,]
+combination_features <- layer_features[3,,,]
 
 loss <- loss + content_weight*content_loss(base_image_features, 
                                            combination_features)
@@ -165,8 +165,8 @@ feature_layers = c('block1_conv1', 'block2_conv1',
 
 for(layer_name in feature_layers){
   layer_features <- output_dict[[layer_name]]
-  style_reference_features <- layer_features[1,,,]
-  combination_features <- layer_features[2,,,]
+  style_reference_features <- layer_features[2,,,]
+  combination_features <- layer_features[3,,,]
   sl <- style_loss(style_reference_features, combination_features)
   loss <- loss + ((style_weight / length(feature_layers)) * sl)
 }
