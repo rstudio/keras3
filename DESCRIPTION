@@ -23,8 +23,8 @@ BugReports: https://github.com/rstudio/keras/issues
 Depends:
     R (>= 3.2)
 Imports:
-    reticulate (>= 1.2.0.9009), 
-    tensorflow (>= 1.4.0.9005),
+    reticulate (>= 1.2.0.9010), 
+    tensorflow (>= 1.4.0.9006),
     tfruns (>= 0.9.1),
     magrittr, 
     zeallot,

@@ -215,6 +215,7 @@ reference:
     contents:
       - text_tokenizer
       - fit_text_tokenizer
+      - save_text_tokenizer
       - texts_to_sequences
       - texts_to_sequences_generator
       - texts_to_matrix

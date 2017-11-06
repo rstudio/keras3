@@ -40,6 +40,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Added `interpolation` parameter to `image_load()` function
 
+- Add `save_text_tokenizer()` and `load_text_tokenizer()` functions.
+
 
 ## keras 2.0.8 (CRAN)
 

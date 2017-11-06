@@ -23,7 +23,8 @@ Required before using \code{\link[=texts_to_sequences]{texts_to_sequences()}}, \
 \code{\link[=sequences_to_matrix]{sequences_to_matrix()}}.
 }
 \seealso{
-Other text tokenization: \code{\link{sequences_to_matrix}},
+Other text tokenization: \code{\link{save_text_tokenizer}},
+  \code{\link{sequences_to_matrix}},
   \code{\link{text_tokenizer}},
   \code{\link{texts_to_matrix}},
   \code{\link{texts_to_sequences_generator}},

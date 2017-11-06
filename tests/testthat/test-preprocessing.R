@@ -40,6 +40,11 @@ test_succeeds("use of text tokenizer", {
   sequences <- iterate(texts_to_sequences_generator(tokenizer, texts))
   tokenizer %>% fit_text_tokenizer(sequences)
   
+  # save and then reload tokenizer
+  save_text_tokenizer(tokenizer, "tokenizer")
+  on.exit(unlink("tokenizer"), add = TRUE)
+  tokenizer <- load_text_tokenizer("tokenizer")
+  
   for (mode in c('binary', 'count', 'tfidf', 'freq'))
     texts_to_matrix(tokenizer, texts, mode)
 })

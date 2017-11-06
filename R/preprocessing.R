@@ -271,6 +271,59 @@ fit_text_tokenizer <- function(object, x) {
     tokenizer$fit_on_texts(x)
 }
 
+
+#' Save a text tokenizer to an external file
+#' 
+#' Enables persistence of text tokenizers alongside saved models.
+#' 
+#' @details 
+#' You should always use the same text tokenizer for training and  
+#' prediction. In many cases however prediction will occur in another
+#' session with a version of the model loaded via [load_model_hdf5()].
+#' 
+#' In this case you need to save the text tokenizer object after training
+#' and then reload it prior to prediction.
+#' 
+#' @param object Text tokenizer fit with [fit_text_tokenizer()]
+#' @param filename File to save/load
+#' 
+#' @family text tokenization
+#'
+#' @examples \dontrun{
+#' 
+#' # vectorize texts then save for using in prediction
+#' tokenizer <- text_tokenizer(num_words = 10000) %>% 
+#' fit_text_tokenizer(tokenizer, texts)
+#' save_text_tokenizer(tokenizer, "tokenizer")
+#' 
+#' # (train model, etc.)
+#' 
+#' # ...later in another session
+#' tokenizer <- load_text_tokenizer("tokenizer")
+#' 
+#' # (use tokenizer to preprocess data for scoring)
+#' 
+#' }
+#' 
+#' @importFrom reticulate py_save_object
+#' @export 
+save_text_tokenizer <- function(object, filename) {
+  py_save_object(object, filename)
+}
+
+
+#' @importFrom reticulate py_load_object
+#' @rdname save_text_tokenizer
+#' @export
+load_text_tokenizer <- function(filename) {
+  py_load_object(filename)
+}
+
+
+
+
+
+
 #' Transform each text in texts in a sequence of integers.
 #'
 #' Only top "num_words" most frequent words will be taken into account.

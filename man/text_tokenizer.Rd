@@ -52,6 +52,7 @@ was trained on. Only set after \code{fit_text_tokenizer()} is called on the toke
 
 \seealso{
 Other text tokenization: \code{\link{fit_text_tokenizer}},
+  \code{\link{save_text_tokenizer}},
   \code{\link{sequences_to_matrix}},
   \code{\link{texts_to_matrix}},
   \code{\link{texts_to_sequences_generator}},
