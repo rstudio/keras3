@@ -192,6 +192,11 @@ labels_index &lt;-<span class="st"> </span><span class="kw">list</span>()  <span
 tokenizer &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/text_tokenizer.html">text_tokenizer</a></span>(<span class="dt">num_words=</span>MAX_NB_WORDS)
 tokenizer <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit_text_tokenizer.html">fit_text_tokenizer</a></span>(texts)
 
+<span class="co"># save the tokenizer in case we want to use it again</span>
+<span class="co"># for prediction within another R session, see:</span>
+<span class="co"># https://keras.rstudio.com/reference/save_text_tokenizer.html</span>
+<span class="kw"><a href="../../reference/save_text_tokenizer.html">save_text_tokenizer</a></span>(tokenizer, <span class="st">"tokenizer"</span>)
+
 sequences &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/texts_to_sequences.html">texts_to_sequences</a></span>(tokenizer, texts)
 
 word_index &lt;-<span class="st"> </span>tokenizer<span class="op">$</span>word_index
