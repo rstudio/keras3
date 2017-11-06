@@ -42,6 +42,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Add `save_text_tokenizer()` and `load_text_tokenizer()` functions.
 
+- Fix for progress bar output in Keras >= 2.0.9
+
 
 ## keras 2.0.8 (CRAN)
 
