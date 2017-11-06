@@ -5,7 +5,7 @@
 \title{Update tokenizer internal vocabulary based on a list of texts or list of
 sequences.}
 \usage{
-fit_text_tokenizer(object, x, ...)
+fit_text_tokenizer(object, x)
 }
 \arguments{
 \item{object}{Tokenizer returned by \code{\link[=text_tokenizer]{text_tokenizer()}}}
@@ -13,8 +13,6 @@ fit_text_tokenizer(object, x, ...)
 \item{x}{Vector/list of strings, or a generator of strings (for
 memory-efficiency); Alternatively a list of "sequence" (a sequence is a
 list of integer word indices).}
-
-\item{...}{Unused}
 }
 \description{
 Update tokenizer internal vocabulary based on a list of texts or list of

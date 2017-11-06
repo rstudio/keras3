@@ -5,7 +5,7 @@
 \title{Fit image data generator internal statistics to some sample data.}
 \usage{
 fit_image_data_generator(object, x, augment = FALSE, rounds = 1,
-  seed = NULL, ...)
+  seed = NULL)
 }
 \arguments{
 \item{object}{\code{\link[=image_data_generator]{image_data_generator()}}}
@@ -18,8 +18,6 @@ the channels axis should have value 1, and in case of RGB data, it should have v
 \item{rounds}{If \code{augment}, how many augmentation passes to do over the data}
 
 \item{seed}{random seed.}
-
-\item{...}{Unused}
 }
 \description{
 Required for \code{featurewise_center}, \code{featurewise_std_normalization}

@@ -256,7 +256,6 @@ text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\
 #' @param x Vector/list of strings, or a generator of strings (for 
 #'   memory-efficiency); Alternatively a list of "sequence" (a sequence is a 
 #'   list of integer word indices).
-#' @param ... Unused
 #'
 #' @note Required before using [texts_to_sequences()], [texts_to_matrix()], or 
 #'   [sequences_to_matrix()].
@@ -264,7 +263,7 @@ text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\
 #' @family text tokenization
 #'   
 #' @export
-fit_text_tokenizer <- function(object, x, ...) {
+fit_text_tokenizer <- function(object, x) {
   tokenizer <- object
   if (is.list(x))
     tokenizer$fit_on_sequences(x)
@@ -504,12 +503,11 @@ generator_next <- function(generator, completed = NULL) {
 #' @param augment Whether to fit on randomly augmented samples
 #' @param rounds If `augment`, how many augmentation passes to do over the data
 #' @param seed random seed.
-#' @param ... Unused
 #' 
 #' @family image preprocessing
 #' 
 #' @export
-fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL, ...) {
+fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL) {
   generator <- object
   history <- generator$fit(
     x = keras_array(x),
