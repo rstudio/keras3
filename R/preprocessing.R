@@ -269,6 +269,7 @@ fit_text_tokenizer <- function(object, x) {
     tokenizer$fit_on_sequences(x)
   else
     tokenizer$fit_on_texts(x)
+  invisible(tokenizer)
 }
 
 
@@ -309,6 +310,7 @@ fit_text_tokenizer <- function(object, x) {
 #' @export 
 save_text_tokenizer <- function(object, filename) {
   py_save_object(object, filename)
+  invisible(object)
 }
 
 
