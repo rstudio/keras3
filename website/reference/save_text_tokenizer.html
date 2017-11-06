@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Transforms each text in texts in a sequence of integers. — texts_to_sequences_generator • keras</title>
+<title>Save a text tokenizer to an external file — save_text_tokenizer • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -127,53 +127,76 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Transforms each text in texts in a sequence of integers.</h1>
+    <h1>Save a text tokenizer to an external file</h1>
     </div>
 
     
-    <p>Only top "num_words" most frequent words will be taken into account.
-Only words known by the tokenizer will be taken into account.</p>
+    <p>Enables persistence of text tokenizers alongside saved models.</p>
     
 
-    <pre class="usage"><span class='fu'>texts_to_sequences_generator</span>(<span class='no'>tokenizer</span>, <span class='no'>texts</span>)</pre>
+    <pre class="usage"><span class='fu'>save_text_tokenizer</span>(<span class='no'>object</span>, <span class='no'>filename</span>)
+
+<span class='fu'>load_text_tokenizer</span>(<span class='no'>filename</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>tokenizer</th>
-      <td><p>Tokenizer</p></td>
+      <th>object</th>
+      <td><p>Text tokenizer fit with <code><a href='fit_text_tokenizer.html'>fit_text_tokenizer()</a></code></p></td>
     </tr>
     <tr>
-      <th>texts</th>
-      <td><p>Vector/list of texts (strings).</p></td>
+      <th>filename</th>
+      <td><p>File to save/load</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Generator which yields individual sequences</p>
+    <p>You should always use the same text tokenizer for training and
+prediction. In many cases however prediction will occur in another
+session with a version of the model loaded via <code><a href='save_model_hdf5.html'>load_model_hdf5()</a></code>.</p>
+<p>In this case you need to save the text tokenizer object after training
+and then reload it prior to prediction.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other text tokenization: <code><a href='fit_text_tokenizer.html'>fit_text_tokenizer</a></code>,
-  <code><a href='save_text_tokenizer.html'>save_text_tokenizer</a></code>,
   <code><a href='sequences_to_matrix.html'>sequences_to_matrix</a></code>,
   <code><a href='text_tokenizer.html'>text_tokenizer</a></code>,
   <code><a href='texts_to_matrix.html'>texts_to_matrix</a></code>,
+  <code><a href='texts_to_sequences_generator.html'>texts_to_sequences_generator</a></code>,
   <code><a href='texts_to_sequences.html'>texts_to_sequences</a></code></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># vectorize texts then save for use in prediction</span>
+<span class='no'>tokenizer</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='text_tokenizer.html'>text_tokenizer</a></span>(<span class='kw'>num_words</span> <span class='kw'>=</span> <span class='fl'>10000</span>) <span class='kw'>%&gt;%</span>
+<span class='fu'><a href='fit_text_tokenizer.html'>fit_text_tokenizer</a></span>(<span class='no'>tokenizer</span>, <span class='no'>texts</span>)
+<span class='fu'>save_text_tokenizer</span>(<span class='no'>tokenizer</span>, <span class='st'>"tokenizer"</span>)
+
+<span class='co'># (train model, etc.)</span>
+
+<span class='co'># ...later in another session</span>
+<span class='no'>tokenizer</span> <span class='kw'>&lt;-</span> <span class='fu'>load_text_tokenizer</span>(<span class='st'>"tokenizer"</span>)
+
+<span class='co'># (use tokenizer to preprocess data for prediction)</span>
+
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
