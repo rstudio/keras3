@@ -114,7 +114,8 @@ save_model_weights_hdf5 <- function(object, filepath, overwrite = TRUE) {
 load_model_weights_hdf5 <- function(object, filepath, by_name = FALSE) {
   if (!have_h5py())
     stop("The h5py Python package is required to save and load model weights")
-  invisible(object$load_weights(filepath = normalize_path(filepath), by_name = by_name))
+  object$load_weights(filepath = normalize_path(filepath), by_name = by_name)
+  invisible(object)
 }
 
 
