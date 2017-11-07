@@ -419,7 +419,7 @@ trainable_model <span class="op">%&gt;%</span><span class="st"> </span><span cla
 
 frozen_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels)  <span class="co"># this does NOT update the weights of `layer`</span>
 trainable_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels)  <span class="co"># this updates the weights of `layer`</span></code></pre></div>
-<p>Finally, you can freeze or unfreeze and entire model (or a range of layers within the model) using the <code><a href="../reference/freeze_layers.html">freeze_layers()</a></code> and <code><a href="../reference/freeze_layers.html">unfreeze_layers()</a></code> functions. For example:</p>
+<p>Finally, you can freeze or unfreeze the weights for an entire model (or a range of layers within the model) using the <code><a href="../reference/freeze_weights.html">freeze_weights()</a></code> and <code><a href="../reference/freeze_weights.html">unfreeze_weights()</a></code> functions. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># instantiate a VGG16 model</span>
 conv_base &lt;-<span class="st"> </span><span class="kw"><a href="../reference/application_vgg.html">application_vgg16</a></span>(
   <span class="dt">weights =</span> <span class="st">"imagenet"</span>,
@@ -427,8 +427,8 @@ conv_base &lt;-<span class="st"> </span><span class="kw"><a href="../reference/a
   <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">3</span>)
 )
 
-<span class="co"># freeze it's layers</span>
-<span class="kw"><a href="../reference/freeze_layers.html">freeze_layers</a></span>(conv_base)
+<span class="co"># freeze it's weights</span>
+<span class="kw"><a href="../reference/freeze_weights.html">freeze_weights</a></span>(conv_base)
 
 <span class="co"># create a composite model that includes the base + more layers</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
@@ -444,8 +444,8 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
   <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">"accuracy"</span>)
 )
 
-<span class="co"># unfreeze layers from "block5_conv1" on</span>
-<span class="kw"><a href="../reference/freeze_layers.html">unfreeze_layers</a></span>(conv_base, <span class="dt">from =</span> <span class="st">"block5_conv1"</span>)
+<span class="co"># unfreeze weights from "block5_conv1" on</span>
+<span class="kw"><a href="../reference/freeze_weights.html">unfreeze_weights</a></span>(conv_base, <span class="dt">from =</span> <span class="st">"block5_conv1"</span>)
 
 <span class="co"># compile again since we froze or unfroze layers</span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(

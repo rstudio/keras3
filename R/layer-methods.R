@@ -63,6 +63,7 @@ get_weights <- function(object) {
 #' @export
 set_weights <- function(object, weights) {
   object$set_weights(weights)
+  invisible(object)
 }
 
 
@@ -147,6 +148,7 @@ get_output_mask_at <- function(object, node_index) {
 #' @export
 reset_states <- function(object) {
   object$reset_states()
+  invisible(object)
 }
 
 

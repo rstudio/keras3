@@ -23,7 +23,7 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Allow Keras models to be composable within model pipelines
 
-- Added `freeze_layers()` and `unfreeze_layers()` functions.
+- Added `freeze_weights()` and `unfreeze_weights()` functions.
 
 - Convert R arrays to row-major before image preprocessing
 

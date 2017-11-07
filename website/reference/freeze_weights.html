@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Freeze and unfreeze layers — freeze_layers • keras</title>
+<title>Freeze and unfreeze weights — freeze_weights • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -127,23 +127,23 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Freeze and unfreeze layers</h1>
+    <h1>Freeze and unfreeze weights</h1>
     </div>
 
     
-    <p>Freeze layers in a model so that they are no longer trainable.</p>
+    <p>Freeze weights in a model or layer so that they are no longer trainable.</p>
     
 
-    <pre class="usage"><span class='fu'>freeze_layers</span>(<span class='no'>object</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>freeze_weights</span>(<span class='no'>object</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>unfreeze_layers</span>(<span class='no'>object</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>unfreeze_weights</span>(<span class='no'>object</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>Keras model object</p></td>
+      <td><p>Keras model or layer object</p></td>
     </tr>
     <tr>
       <th>from</th>
@@ -158,10 +158,11 @@
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>The <code>from</code> and <code>to</code> layer arguments are both inclusive.</p>
-<p>The freeze and unfreeze functions are global operations over all layers in
-a model (i.e. layers not within the specified range will be set to the
-opposite value, e.g. unfrozen for a call to freeze_layers).</p>
-<p>Models must be compiled again after layers are frozen or unfrozen.</p>
+<p>When applied to a model, the freeze or unfreeze is a global operation
+over all layers in the model (i.e. layers not within the specified
+range will be set to the opposite value, e.g. unfrozen for a call to
+freeze).</p>
+<p>Models must be compiled again after weights are frozen or unfrozen.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -173,8 +174,8 @@ opposite value, e.g. unfrozen for a call to freeze_layers).</p>
   <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>150</span>, <span class='fl'>150</span>, <span class='fl'>3</span>)
 )
 
-<span class='co'># freeze it's layers</span>
-<span class='fu'>freeze_layers</span>(<span class='no'>conv_base</span>)
+<span class='co'># freeze it's weights</span>
+<span class='fu'>freeze_weights</span>(<span class='no'>conv_base</span>)
 
 <span class='co'># create a composite model that includes the base + more layers</span>
 <span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='keras_model_sequential.html'>keras_model_sequential</a></span>() <span class='kw'>%&gt;%</span>
@@ -190,10 +191,10 @@ opposite value, e.g. unfrozen for a call to freeze_layers).</p>
   <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"accuracy"</span>)
 )
 
-<span class='co'># unfreeze layers from "block5_conv1" on</span>
-<span class='fu'>unfreeze_layers</span>(<span class='no'>conv_base</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"block5_conv1"</span>)
+<span class='co'># unfreeze weights from "block5_conv1" on</span>
+<span class='fu'>unfreeze_weights</span>(<span class='no'>conv_base</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"block5_conv1"</span>)
 
-<span class='co'># compile again since we froze or unfroze layers</span>
+<span class='co'># compile again since we froze or unfroze weights</span>
 <span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='compile.html'>compile</a></span>(
   <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>"binary_crossentropy"</span>,
   <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span>(<span class='kw'>lr</span> <span class='kw'>=</span> <span class='fl'>2e-5</span>),

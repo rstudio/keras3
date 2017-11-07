@@ -68,7 +68,7 @@ reference:
       - load_model_hdf5
       - serialize_model
       - clone_model
-      - freeze_layers
+      - freeze_weights
  
   - title: "Core Layers"
     contents:

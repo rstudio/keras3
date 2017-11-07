@@ -120,7 +120,7 @@ model <- keras_model(inputs = base_model$input, outputs = predictions)
 
 # first: train only the top layers (which were randomly initialized)
 # i.e. freeze all convolutional InceptionV3 layers
-freeze_layers(base_model)
+freeze_weights(base_model)
 
 # compile the model (should be done *after* setting layers to non-trainable)
 model %>% compile(optimizer = 'rmsprop', loss = 'categorical_crossentropy')
@@ -140,8 +140,8 @@ for (i in 1:length(layers))
 
 # we chose to train the top 2 inception blocks, i.e. we will freeze
 # the first 172 layers and unfreeze the rest:
-freeze_layers(base_model, from = 1, to = 172)
-unfreeze_layers(base_model, from = 173)
+freeze_weights(base_model, from = 1, to = 172)
+unfreeze_weights(base_model, from = 173)
 
 # we need to recompile the model for these modifications to take effect
 # we use SGD with a low learning rate

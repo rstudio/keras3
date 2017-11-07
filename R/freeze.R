@@ -1,20 +1,21 @@
 
 
-#' Freeze and unfreeze layers
+#' Freeze and unfreeze weights
 #'
-#' Freeze layers in a model so that they are no longer trainable.
+#' Freeze weights in a model or layer so that they are no longer trainable.
 #'
-#' @param object Keras model object
+#' @param object Keras model or layer object
 #' @param from Layer instance, layer name, or layer index within model
 #' @param to Layer instance, layer name, or layer index within model
 #'
 #' @note The `from` and `to` layer arguments are both inclusive.
 #'
-#'   The freeze and unfreeze functions are global operations over all layers in
-#'   a model (i.e. layers not within the specified range will be set to the
-#'   opposite value, e.g. unfrozen for a call to freeze_layers).
+#'   When applied to a model, the freeze or unfreeze is a global operation
+#'   over all layers in the model (i.e. layers not within the specified 
+#'   range will be set to the opposite value, e.g. unfrozen for a call to
+#'   freeze).
 #'
-#'   Models must be compiled again after layers are frozen or unfrozen.
+#'   Models must be compiled again after weights are frozen or unfrozen.
 #'
 #' @examples \dontrun{
 #' # instantiate a VGG16 model
@@ -24,8 +25,8 @@
 #'   input_shape = c(150, 150, 3)
 #' )
 #'
-#' # freeze it's layers
-#' freeze_layers(conv_base)
+#' # freeze it's weights
+#' freeze_weights(conv_base)
 #'
 #' # create a composite model that includes the base + more layers
 #' model <- keras_model_sequential() %>%
@@ -41,10 +42,10 @@
 #'   metrics = c("accuracy")
 #' )
 #'
-#' # unfreeze layers from "block5_conv1" on
-#' unfreeze_layers(conv_base, from = "block5_conv1")
+#' # unfreeze weights from "block5_conv1" on
+#' unfreeze_weights(conv_base, from = "block5_conv1")
 #'
-#' # compile again since we froze or unfroze layers
+#' # compile again since we froze or unfroze weights
 #' model %>% compile(
 #'   loss = "binary_crossentropy",
 #'   optimizer = optimizer_rmsprop(lr = 2e-5),
@@ -54,7 +55,7 @@
 #' }
 #'
 #' @export
-freeze_layers <- function(object, from = NULL, to = NULL) {
+freeze_weights <- function(object, from = NULL, to = NULL) {
   
   # check for from and to and apply accordingly
   if (missing(from) && missing(to)) {
@@ -69,9 +70,9 @@ freeze_layers <- function(object, from = NULL, to = NULL) {
 }
 
 
-#' @rdname freeze_layers 
+#' @rdname freeze_weights
 #' @export
-unfreeze_layers <- function(object, from = NULL, to = NULL) {
+unfreeze_weights <- function(object, from = NULL, to = NULL) {
   
   # object always trainable after unfreeze
   object$trainable <- TRUE

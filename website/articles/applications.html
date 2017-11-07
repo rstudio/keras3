@@ -202,7 +202,7 @@ model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras
 
 <span class="co"># first: train only the top layers (which were randomly initialized)</span>
 <span class="co"># i.e. freeze all convolutional InceptionV3 layers</span>
-<span class="kw"><a href="../reference/freeze_layers.html">freeze_layers</a></span>(base_model)
+<span class="kw"><a href="../reference/freeze_weights.html">freeze_weights</a></span>(base_model)
 
 <span class="co"># compile the model (should be done *after* setting layers to non-trainable)</span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>, <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>)
@@ -222,8 +222,8 @@ layers &lt;-<span class="st"> </span>base_model<span class="op">$</span>layers
 
 <span class="co"># we chose to train the top 2 inception blocks, i.e. we will freeze</span>
 <span class="co"># the first 172 layers and unfreeze the rest:</span>
-<span class="kw"><a href="../reference/freeze_layers.html">freeze_layers</a></span>(base_model, <span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">172</span>)
-<span class="kw"><a href="../reference/freeze_layers.html">unfreeze_layers</a></span>(base_model, <span class="dt">from =</span> <span class="dv">173</span>)
+<span class="kw"><a href="../reference/freeze_weights.html">freeze_weights</a></span>(base_model, <span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">172</span>)
+<span class="kw"><a href="../reference/freeze_weights.html">unfreeze_weights</a></span>(base_model, <span class="dt">from =</span> <span class="dv">173</span>)
 
 <span class="co"># we need to recompile the model for these modifications to take effect</span>
 <span class="co"># we use SGD with a low learning rate</span>
