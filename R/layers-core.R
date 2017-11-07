@@ -343,10 +343,16 @@ layer_masking <- function(object, mask_value = 0.0, input_shape = NULL,
 #' @family core layers
 #' 
 #' @export
-layer_flatten <- function(object, 
-                          batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
+layer_flatten <- function(object, input_shape = NULL, dtype = NULL, 
+                          name = NULL, trainable = NULL, weights = NULL) {
   
-  create_layer(keras$layers$Flatten, object, list())
+  create_layer(keras$layers$Flatten, object, list(
+    input_shape = normalize_shape(input_shape),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
+  ))
   
 }
 
