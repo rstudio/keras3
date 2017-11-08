@@ -292,7 +292,7 @@ imagenet_decode_predictions <- function(preds, top = 5) {
 #' 
 #' @param x input tensor, 4D
 #' @param data_format Data format of the image tensor
-#' @param mode One of "caffe", "tf
+#' @param mode One of "caffe", "tf"
 #'   - caffe: will convert the images from RGB to BGR,
 #'     then will zero-center each color channel with
 #'     respect to the ImageNet dataset,
