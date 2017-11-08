@@ -27,12 +27,10 @@
 #'    image (extracted from a deep layer) and the features of the combination image,
 #'    keeping the generated image close enough to the original one.
 #'
- 
 library(keras)
 library(purrr)
 library(R6)
 K <- backend()
-
 # Parameters --------------------------------------------------------------
 
 base_image_path <- "neural-style-base-img.png"
@@ -57,24 +55,28 @@ img_ncols <- as.integer(width * img_nrows / height)
 # util function to open, resize and format pictures into appropriate tensors
 preprocess_image <- function(path){
   img <- image_load(path, target_size = c(img_nrows, img_ncols)) %>%
-    image_to_array() %>% 
-    array_reshape(c(1, dim(img)))
+    image_to_array() %>%
+    array_reshape(c(1, dim(.)))
   imagenet_preprocess_input(img)
 }
 
 # util function to convert a tensor into a valid image
+# also turn BGR into RGB.
 deprocess_image <- function(x){
   x <- x[1,,,]
   # Remove zero-center by mean pixel
   x[,,1] <- x[,,1] + 103.939
   x[,,2] <- x[,,2] + 116.779
   x[,,3] <- x[,,3] + 123.68
+  # BGR -> RGB
+  x <- x[,,c(3,2,1)]
   # clip to interval 0, 255
   x[x > 255] <- 255
   x[x < 0] <- 0
   x[] <- as.integer(x)/255
   x
 }
+
 
 # Defining the model ------------------------------------------------------
 
@@ -183,7 +185,7 @@ eval_loss_and_grads <- function(image){
   outs <- f_outputs(list(image))
   list(
     loss_value = outs[[1]],
-    grad_values = as.numeric(outs[[2]])
+    grad_values = array_reshape(outs[[2]], dim = length(outs[[2]]))
   )
 }
 
@@ -237,7 +239,7 @@ for(i in 1:iterations){
 
   # Run L-BFGS
   opt <- optim(
-    as.numeric(x), fn = evaluator$loss, gr = evaluator$grads, 
+    array_reshape(x, dim = length(x)), fn = evaluator$loss, gr = evaluator$grads, 
     method = "L-BFGS-B",
     control = list(maxit = 15)
   )
@@ -252,5 +254,5 @@ for(i in 1:iterations){
   # plot
   im <- deprocess_image(image)
   plot(as.raster(im))
-  
 }
+
