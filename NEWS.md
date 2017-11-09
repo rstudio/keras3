@@ -50,6 +50,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Support for passing generators for validation data in `fit_generator()`
 
+- Accept single integer arguments for kernel sizes
+
 
 ## keras 2.0.8 (CRAN)
 

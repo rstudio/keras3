@@ -363,8 +363,10 @@ layer_flatten <- function(object, input_shape = NULL, dtype = NULL,
 as_integer_tuple <- function(x) {
   if (is.null(x))
     x
-  else
+  else if (is.list(x))
     tuple(as.list(as.integer(x)))
+  else
+    as.integer(x)
 }
 
 as_nullable_integer <- function(x) {
