@@ -128,7 +128,7 @@ K &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/backen
 preprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(image_path, height, width){
   <span class="kw"><a href="../../reference/image_load.html">image_load</a></span>(image_path, <span class="dt">target_size =</span> <span class="kw">c</span>(height, width)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../../reference/image_to_array.html">image_to_array</a></span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(.))) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(.))) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>()
 }
 
@@ -155,9 +155,9 @@ deprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(x
   <span class="co"># for further explanation</span>
 total_variation_loss &lt;-<span class="st"> </span><span class="cf">function</span>(x, h, w){
   
-  y_ij  &lt;-<span class="st"> </span>x[,<span class="dv">0</span><span class="op">:</span>(h <span class="op">-</span><span class="st"> </span>2L), <span class="dv">0</span><span class="op">:</span>(w <span class="op">-</span><span class="st"> </span>2L),]
-  y_i1j &lt;-<span class="st"> </span>x[,<span class="dv">1</span><span class="op">:</span>(h <span class="op">-</span><span class="st"> </span>1L), <span class="dv">0</span><span class="op">:</span>(w <span class="op">-</span><span class="st"> </span>2L),]
-  y_ij1 &lt;-<span class="st"> </span>x[,<span class="dv">0</span><span class="op">:</span>(h <span class="op">-</span><span class="st"> </span>2L), <span class="dv">1</span><span class="op">:</span>(w <span class="op">-</span><span class="st"> </span>1L),]
+  y_ij  &lt;-<span class="st"> </span>x[,<span class="dv">1</span><span class="op">:</span>(h <span class="op">-</span><span class="st"> </span>1L), <span class="dv">1</span><span class="op">:</span>(w <span class="op">-</span><span class="st"> </span>1L),]
+  y_i1j &lt;-<span class="st"> </span>x[,<span class="dv">2</span><span class="op">:</span>(h), <span class="dv">1</span><span class="op">:</span>(w <span class="op">-</span><span class="st"> </span>1L),]
+  y_ij1 &lt;-<span class="st"> </span>x[,<span class="dv">1</span><span class="op">:</span>(h <span class="op">-</span><span class="st"> </span>1L), <span class="dv">2</span><span class="op">:</span>(w),]
   
   a &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">square</span>(y_ij <span class="op">-</span><span class="st"> </span>y_i1j)
   b &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">square</span>(y_ij <span class="op">-</span><span class="st"> </span>y_ij1)
@@ -222,7 +222,7 @@ loss &lt;-<span class="st"> </span>tf<span class="op">$</span><span class="kw">V
   
   <span class="co"># Avoid border artifacts by only involving non-border pixels in the loss</span>
   loss &lt;-<span class="st"> </span>loss <span class="op">-</span><span class="st"> </span>
-<span class="st">    </span>coeff<span class="op">*</span>K<span class="op">$</span><span class="kw">sum</span>(K<span class="op">$</span><span class="kw">square</span>(x[,<span class="dv">3</span><span class="op">:</span>(out_shape[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span><span class="dv">2</span>), <span class="dv">3</span><span class="op">:</span>(out_shape[<span class="dv">3</span>] <span class="op">-</span><span class="st"> </span><span class="dv">2</span>),])) <span class="op">/</span><span class="st"> </span>
+<span class="st">    </span>coeff<span class="op">*</span>K<span class="op">$</span><span class="kw">sum</span>(K<span class="op">$</span><span class="kw">square</span>(x[,<span class="dv">4</span><span class="op">:</span>(out_shape[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>), <span class="dv">4</span><span class="op">:</span>(out_shape[<span class="dv">3</span>] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>),])) <span class="op">/</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">prod</span>(out_shape[<span class="op">-</span><span class="dv">1</span>])
 }
 
@@ -245,7 +245,7 @@ eval_loss_and_grads &lt;-<span class="st"> </span><span class="cf">function</spa
   outs &lt;-<span class="st"> </span><span class="kw">f_outputs</span>(<span class="kw">list</span>(image))
   <span class="kw">list</span>(
     <span class="dt">loss_value =</span> outs[[<span class="dv">1</span>]],
-    <span class="dt">grad_values =</span> <span class="kw">as.numeric</span>(outs[[<span class="dv">2</span>]])
+    <span class="dt">grad_values =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(outs[[<span class="dv">2</span>]], <span class="dt">dim =</span> <span class="kw">length</span>(outs[[<span class="dv">2</span>]]))
   )
 }
 
@@ -296,7 +296,7 @@ evaluator &lt;-<span class="st"> </span>Evaluator<span class="op">$</span><span 
 
   <span class="co"># Run L-BFGS</span>
   opt &lt;-<span class="st"> </span><span class="kw">optim</span>(
-    <span class="kw">as.numeric</span>(image), <span class="dt">fn =</span> evaluator<span class="op">$</span>loss, <span class="dt">gr =</span> evaluator<span class="op">$</span>grads, 
+    <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(image, <span class="dt">dim =</span> <span class="kw">length</span>(image)), <span class="dt">fn =</span> evaluator<span class="op">$</span>loss, <span class="dt">gr =</span> evaluator<span class="op">$</span>grads, 
     <span class="dt">method =</span> <span class="st">"L-BFGS-B"</span>,
     <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">maxit =</span> <span class="dv">2</span>)
     )
