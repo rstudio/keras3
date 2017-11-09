@@ -102,7 +102,7 @@ test_call_succeeds("layer_reshape", {
 test_call_succeeds("layer_permute", {
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
-    layer_permute(dims = 1)
+    layer_permute(dims = c(1))
 })
 
 test_call_succeeds("layer_flatten", {

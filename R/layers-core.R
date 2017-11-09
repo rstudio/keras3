@@ -181,7 +181,7 @@ layer_permute <- function(object, dims, input_shape = NULL,
                           name = NULL, trainable = NULL, weights = NULL) {
   
   create_layer(keras$layers$Permute, object, list(
-    dims = as_integer_tuple(dims),
+    dims = as_integer_tuple(dims, force_tuple = TRUE),
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
     batch_size = as_nullable_integer(batch_size),
@@ -360,10 +360,10 @@ layer_flatten <- function(object, input_shape = NULL, dtype = NULL,
 
 
 
-as_integer_tuple <- function(x) {
+as_integer_tuple <- function(x, force_tuple = FALSE) {
   if (is.null(x))
     x
-  else if (is.list(x))
+  else if (is.list(x) || force_tuple)
     tuple(as.list(as.integer(x)))
   else
     as.integer(x)
