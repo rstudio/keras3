@@ -2,6 +2,15 @@
 #' CIFAR10 small images dataset. This takes ~125s per epoch on a NVIDIA GEFORCE 1080 Ti,
 #' so using a GPU is highly recommended.
 #' 
+#' [DenseNet](https://arxiv.org/abs/1608.06993) is a network architecture where each 
+#' layer is directly connected to every other layer in a feed-forward fashion 
+#' (within each dense block). For each layer, the feature maps of all preceding 
+#' layers are treated as separate inputs whereas its own feature maps are passed on as 
+#' inputs to all subsequent layers. This connectivity pattern yields state-of-the-art 
+#' accuracies on CIFAR10/100 (with or without data augmentation) and SVHN. On the large scale
+#' ILSVRC 2012 (ImageNet) dataset, DenseNet achieves a similar accuracy as ResNet, but using 
+#' less than half the amount of parameters and roughly half the number of FLOPs.
+#' 
 #' Final accuracy on test set was 0.9351 versus 0.9300 reported on the 
 #' [paper](https://arxiv.org/abs/1608.06993).
 #'
@@ -56,13 +65,13 @@ model %>% compile(
 lr_schedule <- function(epoch) {
   
   if(epoch <= 150) {
-    return(0.1)
-  } else if(epoch > 150 & epoch <= 225){
-    return(0.01)
+    0.1
+  } else if(epoch > 150 && epoch <= 225){
+    0.01
   } else {
-    return(0.001)
+    0.001
   }
-  
+
 }
 
 lr_reducer <- callback_learning_rate_scheduler(lr_schedule)
