@@ -46,11 +46,11 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Remove deprecated `implementation` argument from recurrent layers
 
-- Support all standard arguments for `layer_flatten()`
-
 - Support for passing generators for validation data in `fit_generator()`
 
 - Accept single integer arguments for kernel sizes
+
+- Add standard layer arguments to `layer_flatten()` and `layer_separable_conv_2d()`
 
 
 ## keras 2.0.8 (CRAN)

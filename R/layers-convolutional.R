@@ -469,8 +469,9 @@ layer_separable_conv_2d <- function(object, filters, kernel_size, strides = c(1L
                                     depth_multiplier = 1L, activation = NULL, use_bias = TRUE, 
                                     depthwise_initializer = "glorot_uniform", pointwise_initializer = "glorot_uniform", bias_initializer = "zeros", 
                                     depthwise_regularizer = NULL, pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
-                                    depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL,
-                                    batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
+                                    depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
+                                    batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                                    name = NULL, trainable = NULL, weights = NULL) {
   
   create_layer(keras$layers$SeparableConv2D, object, list(
     filters = as.integer(filters),
@@ -491,7 +492,10 @@ layer_separable_conv_2d <- function(object, filters, kernel_size, strides = c(1L
     depthwise_constraint = depthwise_constraint,
     pointwise_constraint = pointwise_constraint,
     bias_constraint = bias_constraint,
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
     batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
     name = name,
     trainable = trainable,
     weights = weights
