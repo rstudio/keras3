@@ -13,28 +13,28 @@ define_freeze_model <- function() {
   model
 }
 
-test_succeeds("freeze_layers can freeze an entire model", {
+test_succeeds("freeze_weights can freeze an entire model", {
   model <- define_freeze_model()
-  freeze_layers(model)
+  freeze_weights(model)
   expect_length(model$trainable_weights, 0)
 })
 
 test_succeeds("model can be unfrozen after freezing", {
   model <- define_freeze_model()
-  freeze_layers(model)
-  unfreeze_layers(model)
+  freeze_weights(model)
+  unfreeze_weights(model)
   expect_length(model$trainable_weights, 4)
 })
 
-test_succeeds("freeze_layers can work on indexes", {
+test_succeeds("freeze_weights can work on indexes", {
   model <- define_freeze_model()
-  freeze_layers(model, from = 2, to = 3)
+  freeze_weights(model, from = 2, to = 3)
   expect_length(model$trainable_weights, 2)
 })
 
-test_succeeds("freeze_layers can work on names", {
+test_succeeds("freeze_weights can work on names", {
   model <- define_freeze_model()
-  freeze_layers(model, from = "dense")
+  freeze_weights(model, from = "dense")
   expect_length(model$trainable_weights, 2)
 })
 

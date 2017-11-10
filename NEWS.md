@@ -23,7 +23,7 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Allow Keras models to be composable within model pipelines
 
-- Added `freeze_layers()` and `unfreeze_layers()` functions.
+- Added `freeze_weights()` and `unfreeze_weights()` functions.
 
 - Implement `export_savedmodel()` generic from TensorFlow package
 
@@ -41,6 +41,18 @@ Install the development version with: `install_github("rstudio/keras")`
 - Added `layer_minimum()` function
 
 - Added `interpolation` parameter to `image_load()` function
+
+- Add `save_text_tokenizer()` and `load_text_tokenizer()` functions.
+
+- Fix for progress bar output in Keras >= 2.0.9
+
+- Remove deprecated `implementation` argument from recurrent layers
+
+- Support all standard arguments for `layer_flatten()`
+
+- Support for passing generators for validation data in `fit_generator()`
+
+- Accept single integer arguments for kernel sizes
 
 
 ## keras 2.0.8 (CRAN)

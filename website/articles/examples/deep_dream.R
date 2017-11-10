@@ -15,7 +15,7 @@ K <- backend()
 preprocess_image <- function(image_path, height, width){
   image_load(image_path, target_size = c(height, width)) %>%
     image_to_array() %>%
-    array(dim = c(1, dim(.))) %>%
+    array_reshape(dim = c(1, dim(.))) %>%
     imagenet_preprocess_input()
 }
 
@@ -42,9 +42,9 @@ deprocess_image <- function(x){
   # for further explanation
 total_variation_loss <- function(x, h, w){
   
-  y_ij  <- x[,0:(h - 2L), 0:(w - 2L),]
-  y_i1j <- x[,1:(h - 1L), 0:(w - 2L),]
-  y_ij1 <- x[,0:(h - 2L), 1:(w - 1L),]
+  y_ij  <- x[,1:(h - 1L), 1:(w - 1L),]
+  y_i1j <- x[,2:(h), 1:(w - 1L),]
+  y_ij1 <- x[,1:(h - 1L), 2:(w),]
   
   a <- K$square(y_ij - y_i1j)
   b <- K$square(y_ij - y_ij1)
@@ -109,7 +109,7 @@ for(layer_name in names(settings$features)){
   
   # Avoid border artifacts by only involving non-border pixels in the loss
   loss <- loss - 
-    coeff*K$sum(K$square(x[,3:(out_shape[2] - 2), 3:(out_shape[3] - 2),])) / 
+    coeff*K$sum(K$square(x[,4:(out_shape[2] - 1), 4:(out_shape[3] - 1),])) / 
     prod(out_shape[-1])
 }
 
@@ -132,7 +132,7 @@ eval_loss_and_grads <- function(image){
   outs <- f_outputs(list(image))
   list(
     loss_value = outs[[1]],
-    grad_values = as.numeric(outs[[2]])
+    grad_values = array_reshape(outs[[2]], dim = length(outs[[2]]))
   )
 }
 
@@ -183,7 +183,7 @@ for(i in 1:5){
 
   # Run L-BFGS
   opt <- optim(
-    as.numeric(image), fn = evaluator$loss, gr = evaluator$grads, 
+    array_reshape(image, dim = length(image)), fn = evaluator$loss, gr = evaluator$grads, 
     method = "L-BFGS-B",
     control = list(maxit = 2)
     )

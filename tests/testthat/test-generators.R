@@ -12,6 +12,11 @@ test_succeeds("image data generator can be used for training", {
   Y_train <- to_categorical(cifar10$train$y, num_classes)
   Y_test <- to_categorical(cifar10$test$y, num_classes)
   
+  X_train <- X_train[1:500,,,]
+  X_test <- X_test[1:100,,,]
+  Y_train <- Y_train[1:500,]
+  Y_test <- Y_test[1:100,]
+  
   # create model
   model <- keras_model_sequential()
   model %>% 

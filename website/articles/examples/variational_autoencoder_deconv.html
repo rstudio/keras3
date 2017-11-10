@@ -191,8 +191,8 @@ z_mean &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/l
 z_log_var &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(hidden, <span class="dt">units =</span> latent_dim)
 
 sampling &lt;-<span class="st"> </span><span class="cf">function</span>(args) {
-  z_mean &lt;-<span class="st"> </span>args[, <span class="dv">0</span><span class="op">:</span>(latent_dim <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)]
-  z_log_var &lt;-<span class="st"> </span>args[, latent_dim<span class="op">:</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>latent_dim <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)]
+  z_mean &lt;-<span class="st"> </span>args[, <span class="dv">1</span><span class="op">:</span>(latent_dim)]
+  z_log_var &lt;-<span class="st"> </span>args[, (latent_dim <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>latent_dim)]
   
   epsilon &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">random_normal</span>(
     <span class="dt">shape =</span> <span class="kw">c</span>(K<span class="op">$</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes_linetype_size_shape">shape</a></span>(z_mean)[[<span class="dv">1</span>]]),

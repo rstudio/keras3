@@ -737,6 +737,10 @@ call_generator_function <- function(func, args) {
     args$pickle_safe <- FALSE
   }
   
+  # convert validation_data to generator
+  if (is.function(args$validation_data))
+    args$validation_data <- as_generator(args$validation_data)
+  
   # call the generator
   do.call(func, args)
 }

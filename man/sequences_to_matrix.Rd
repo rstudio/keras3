@@ -22,6 +22,7 @@ Convert a list of sequences into a matrix.
 }
 \seealso{
 Other text tokenization: \code{\link{fit_text_tokenizer}},
+  \code{\link{save_text_tokenizer}},
   \code{\link{text_tokenizer}},
   \code{\link{texts_to_matrix}},
   \code{\link{texts_to_sequences_generator}},
