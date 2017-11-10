@@ -11,7 +11,7 @@ imagenet_preprocess_input(x, data_format = NULL, mode = "caffe")
 
 \item{data_format}{Data format of the image tensor}
 
-\item{mode}{One of "caffe", "tf
+\item{mode}{One of "caffe", "tf"
 \itemize{
 \item caffe: will convert the images from RGB to BGR,
 then will zero-center each color channel with
