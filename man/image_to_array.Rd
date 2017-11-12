@@ -8,7 +8,7 @@
 \usage{
 image_to_array(img, data_format = c("channels_last", "channels_first"))
 
-image_array_resize(img, width, height, data_format = c("channels_last",
+image_array_resize(img, height, width, data_format = c("channels_last",
   "channels_first"))
 
 image_array_save(img, path)
@@ -18,9 +18,9 @@ image_array_save(img, path)
 
 \item{data_format}{Image data format ("channels_last" or "channels_first")}
 
-\item{width}{Width to resize to}
-
 \item{height}{Height to resize to}
+
+\item{width}{Width to resize to}
 
 \item{path}{Path to save image to}
 }
