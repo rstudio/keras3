@@ -419,7 +419,7 @@ sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count"
 #' @export
 image_load <- function(path, grayscale = FALSE, target_size = NULL,
                        interpolation = "nearest") {
-
+  
   if (!have_pillow())
     stop("The Pillow Python package is required to load images")
   
@@ -478,8 +478,17 @@ image_array_resize <- function(img, width, height,
   # make copy as necessary
   img <- np$copy(img)
   
+  # capture dimensions and reduce to 3 if necessary
+  dims <- dim(img)
+  is_4d_array <- FALSE
+  if (length(dims) == 4 && dims[[1]] == 1) {
+    is_4d_array <- TRUE
+    img <- array_reshape(img, dims[-1])
+  }
+  
   # calculate zoom factors (invert the dimensions to reflect height,width
   # order of numpy/scipy array represenations of images)
+  data_format <- match.arg(data_format)
   if (data_format == "channels_last") {
     factors <- tuple(
       height / dim(img)[[1]],
@@ -494,8 +503,15 @@ image_array_resize <- function(img, width, height,
     )
   }
   
-  # return zoomed version
-  scipy$ndimage$zoom(img, factors, order = 1L)
+  # zoom
+  img <- scipy$ndimage$zoom(img, factors, order = 1L)
+  
+  # reshape if necessary
+  if (is_4d_array)
+    img <- array_reshape(img, dim = c(1, dim(img)))
+  
+  # return
+  img
 }
 
 #' @rdname image_to_array
@@ -647,9 +663,9 @@ fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, see
 #'   
 #' @export
 flow_images_from_data <- function(
-          x, y = NULL, generator = image_data_generator(), batch_size = 32, 
-          shuffle = TRUE, seed = NULL, 
-          save_to_dir = NULL, save_prefix = "", save_format = 'png') {
+  x, y = NULL, generator = image_data_generator(), batch_size = 32, 
+  shuffle = TRUE, seed = NULL, 
+  save_to_dir = NULL, save_prefix = "", save_format = 'png') {
   generator$flow(
     x = keras_array(x),
     y = keras_array(y),
@@ -700,11 +716,11 @@ flow_images_from_data <- function(
 #'   
 #' @export
 flow_images_from_directory <- function(
-      directory, generator = image_data_generator(), target_size = c(256, 256), color_mode = "rgb",
-      classes = NULL, class_mode = "categorical",
-      batch_size = 32, shuffle = TRUE, seed = NULL,
-      save_to_dir = NULL, save_prefix = "", save_format = "png",
-      follow_links = FALSE) {
+  directory, generator = image_data_generator(), target_size = c(256, 256), color_mode = "rgb",
+  classes = NULL, class_mode = "categorical",
+  batch_size = 32, shuffle = TRUE, seed = NULL,
+  save_to_dir = NULL, save_prefix = "", save_format = "png",
+  follow_links = FALSE) {
   generator$flow_from_directory(
     directory = normalize_path(directory),
     target_size = as.integer(target_size),
