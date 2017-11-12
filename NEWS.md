@@ -52,6 +52,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Add standard layer arguments to `layer_flatten()` and `layer_separable_conv_2d()`
 
+- Added `image_array_resize()` and `image_array_save()` for 3D image arrays.
+
 
 ## keras 2.0.8 (CRAN)
 

@@ -5,7 +5,7 @@
 \title{Loads an image into PIL format.}
 \usage{
 image_load(path, grayscale = FALSE, target_size = NULL,
-  interpolation = "bilinear")
+  interpolation = "nearest")
 }
 \arguments{
 \item{path}{Path to image file}
@@ -19,7 +19,7 @@ image_load(path, grayscale = FALSE, target_size = NULL,
 target size is different from that of the loaded image. Supported methods
 are "nearest", "bilinear", and "bicubic". If PIL version 1.1.3 or newer is
 installed, "lanczos" is also supported. If PIL version 3.4.0 or newer is
-installed, "box" and "hamming" are also supported. By default, "bilinear"
+installed, "box" and "hamming" are also supported. By default, "nearest"
 is used.}
 }
 \value{

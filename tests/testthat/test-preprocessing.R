@@ -58,4 +58,22 @@ test_succeeds("image can be preprocessed", {
   }
 })
 
+test_succeeds("images arrays can be saved", {
+  if (have_pillow()) {
+    img <- image_load("digit.jpeg")
+    img_arr <- image_to_array(img)
+    image_array_save(img_arr, "digit2.jpeg")
+  }
+})
+
+test_succeeds("images arrays can be resized", {
+  if (have_pillow()) {
+    img <- image_load("digit.jpeg")
+    img_arr <- image_to_array(img)
+    image_array_resize(img_arr, width = 448, height = 450) %>% 
+      image_array_save("digit_resized.jpeg")
+  }
+})
+
+
 

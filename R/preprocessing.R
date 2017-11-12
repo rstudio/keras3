@@ -409,7 +409,7 @@ sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count"
 #'   target size is different from that of the loaded image. Supported methods
 #'   are "nearest", "bilinear", and "bicubic". If PIL version 1.1.3 or newer is
 #'   installed, "lanczos" is also supported. If PIL version 3.4.0 or newer is
-#'   installed, "box" and "hamming" are also supported. By default, "bilinear"
+#'   installed, "box" and "hamming" are also supported. By default, "nearest"
 #'   is used.
 #'
 #' @return A PIL Image instance.
@@ -418,7 +418,7 @@ sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count"
 #'
 #' @export
 image_load <- function(path, grayscale = FALSE, target_size = NULL,
-                       interpolation = "bilinear") {
+                       interpolation = "nearest") {
 
   if (!have_pillow())
     stop("The Pillow Python package is required to load images")
@@ -443,12 +443,18 @@ image_load <- function(path, grayscale = FALSE, target_size = NULL,
   do.call(keras$preprocessing$image$load_img, args)
 }
 
-#' Converts a PIL Image instance to a 3d-array.
+
+
+#' 3D array representation of images
 #' 
-#' @param img PIL Image instance.
+#' 3D array that represents an image with dimensions (height,width,channels) or 
+#'  (channels,height,width) depending on the data_format.
+#' 
+#' @param img Image
+#' @param path Path to save image to
+#' @param width Width to resize to
+#' @param height Height to resize to
 #' @param data_format Image data format ("channels_last" or "channels_first")
-#' 
-#' @return A 3D array.
 #' 
 #' @family image preprocessing
 #' 
@@ -459,6 +465,47 @@ image_to_array <- function(img, data_format = c("channels_last", "channels_first
     data_format = match.arg(data_format)
   )
 }
+
+#' @rdname image_to_array
+#' @export
+image_array_resize <- function(img, width, height, 
+                               data_format = c("channels_last", "channels_first")) {
+  
+  # imports
+  np <- import("numpy")
+  scipy <- import("scipy")
+  
+  # make copy as necessary
+  img <- np$copy(img)
+  
+  # calculate zoom factors (invert the dimensions to reflect height,width
+  # order of numpy/scipy array represenations of images)
+  if (data_format == "channels_last") {
+    factors <- tuple(
+      height / dim(img)[[1]],
+      width / dim(img)[[2]],
+      1
+    )
+  } else {
+    factors <- tuple(
+      1,
+      height / dim(img)[[1]],
+      width / dim(img)[[2]],
+    )
+  }
+  
+  # return zoomed version
+  scipy$ndimage$zoom(img, factors, order = 1L)
+}
+
+#' @rdname image_to_array
+#' @export
+image_array_save <- function(img, path) {
+  scipy <- import("scipy")
+  invisible(scipy$misc$imsave(path, img))
+}
+
+
 
 
 #' Generate minibatches of image data with real-time data augmentation.
