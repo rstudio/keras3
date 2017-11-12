@@ -1,7 +1,61 @@
 
-## keras 2.0.8 (development)
+## keras 2.0.9 (development)
 
 Install the development version with: `install_github("rstudio/keras")`
+
+- Added `multi_gpu_model()` function.
+
+- Automatically call `keras_array()` on the results of generator functions.
+
+- Ensure that `steps_per_epoch` is passed as an integer
+
+- Import `evaluate()` generic from tensorflow package
+
+- Handle `NULL` when converting R arrays to Keras friendly arrays
+
+- Added `dataset_imbd_word_index()` function
+
+- Ensure that `sample_weight` is passed to `fit()` as an array.
+
+- Accept single function as `metrics` argument to `compile()`
+
+- Automatically cast `input_shape` argument to applications to integer
+
+- Allow Keras models to be composable within model pipelines
+
+- Added `freeze_weights()` and `unfreeze_weights()` functions.
+
+- Convert R arrays to row-major before image preprocessing
+
+- Use `tensorflow.keras` for tensorflow implementation (TF v1.4)
+
+- Added `application_inception_resnet_v2()` pre-trained model
+
+- Added `dataset_fashion_mnist()` dataset
+
+- Added `layer_cudnn_gru()` and `layer_cudnn_lstm()` (faster 
+  recurrent layers backed by [CuDNN](https://developer.nvidia.com/cudnn))
+  
+- Added `layer_minimum()` function
+
+- Added `interpolation` parameter to `image_load()` function
+
+- Add `save_text_tokenizer()` and `load_text_tokenizer()` functions.
+
+- Fix for progress bar output in Keras >= 2.0.9
+
+- Remove deprecated `implementation` argument from recurrent layers
+
+- Support for passing generators for validation data in `fit_generator()`
+
+- Accept single integer arguments for kernel sizes
+
+- Add standard layer arguments to `layer_flatten()` and `layer_separable_conv_2d()`
+
+- Added `image_array_resize()` and `image_array_save()` for 3D image arrays.
+
+
+## keras 2.0.8 (CRAN)
 
 - Add `use_session_with_seed()` function that establishes a random seed for the Keras session.
   Note that this should not be used when training time is paramount, as it disables GPU
@@ -31,7 +85,7 @@ Install the development version with: `install_github("rstudio/keras")`
 - Enable stateful RNNs with CNTK.
 
 
-## keras 2.0.6 (CRAN)
+## keras 2.0.6
 
 - `install_keras()` function which installs both TensorFlow and Keras
 

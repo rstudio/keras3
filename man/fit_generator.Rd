@@ -19,10 +19,6 @@ The output of the generator must be a list of one of these forms:\preformatted{ 
  - (inputs, targets, sample_weights)
 }
 
-Note that the generator should call the \code{\link[=keras_array]{keras_array()}} function on its
-results prior to returning them (this ensures that arrays are provided in
-'C' order and using the default floating point type for the backend.)
-
 All arrays should contain the same number of samples. The generator is expected
 to loop over its data indefinitely. An epoch finishes when \code{steps_per_epoch}
 batches have been seen by the model.}
@@ -74,11 +70,12 @@ parallel to training your model on GPU.
 }
 \seealso{
 Other model functions: \code{\link{compile}},
-  \code{\link{evaluate_generator}}, \code{\link{evaluate}},
-  \code{\link{fit}}, \code{\link{get_config}},
-  \code{\link{get_layer}},
+  \code{\link{evaluate.keras.engine.training.Model}},
+  \code{\link{evaluate_generator}}, \code{\link{fit}},
+  \code{\link{get_config}}, \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
-  \code{\link{keras_model}}, \code{\link{pop_layer}},
+  \code{\link{keras_model}}, \code{\link{multi_gpu_model}},
+  \code{\link{pop_layer}},
   \code{\link{predict.keras.engine.training.Model}},
   \code{\link{predict_generator}},
   \code{\link{predict_on_batch}},

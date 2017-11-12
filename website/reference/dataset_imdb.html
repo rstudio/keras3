@@ -142,7 +142,9 @@ words, but eliminate the top 20 most common words".</p>
 
     <pre class="usage"><span class='fu'>dataset_imdb</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"imdb.npz"</span>, <span class='kw'>num_words</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>skip_top</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
   <span class='kw'>maxlen</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>113L</span>, <span class='kw'>start_char</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>oov_char</span> <span class='kw'>=</span> <span class='fl'>2L</span>,
-  <span class='kw'>index_from</span> <span class='kw'>=</span> <span class='fl'>3L</span>)</pre>
+  <span class='kw'>index_from</span> <span class='kw'>=</span> <span class='fl'>3L</span>)
+
+<span class='fu'>dataset_imdb_word_index</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"imdb_word_index.json"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -189,9 +191,12 @@ Set to 1 because 0 is usually the padding character.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Lists of training and test data: <code>train$x, train$y, test$x, test$y</code>.</p>
-<p>The <code>x</code> data includes integer sequences. If the <code>num_words`` argument was specific, the maximum possible index value is</code>num_words-1<code>. If the</code>maxlen``
-argument was specified, the largest possible sequence length is <code>maxlen</code>.</p>
+<p>The <code>x</code> data includes integer sequences. If the <code>num_words</code> argument was
+specific, the maximum possible index value is <code>num_words-1</code>. If the
+<code>maxlen`` argument was specified, the largest possible sequence length is</code>maxlen`.</p>
 <p>The <code>y</code> data includes a set of integer labels (0 or 1).</p>
+<p>The <code>dataset_imdb_word_index()</code> function returns a list where the
+names are words and the values are integer.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -203,6 +208,7 @@ to encode any unknown word.</p>
     <p>Other datasets: <code><a href='dataset_boston_housing.html'>dataset_boston_housing</a></code>,
   <code><a href='dataset_cifar100.html'>dataset_cifar100</a></code>,
   <code><a href='dataset_cifar10.html'>dataset_cifar10</a></code>,
+  <code><a href='dataset_fashion_mnist.html'>dataset_fashion_mnist</a></code>,
   <code><a href='dataset_mnist.html'>dataset_mnist</a></code>,
   <code><a href='dataset_reuters.html'>dataset_reuters</a></code></p>
     

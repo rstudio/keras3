@@ -2,20 +2,31 @@
 % Please edit documentation in R/preprocessing.R
 \name{image_to_array}
 \alias{image_to_array}
-\title{Converts a PIL Image instance to a 3d-array.}
+\alias{image_array_resize}
+\alias{image_array_save}
+\title{3D array representation of images}
 \usage{
 image_to_array(img, data_format = c("channels_last", "channels_first"))
+
+image_array_resize(img, height, width, data_format = c("channels_last",
+  "channels_first"))
+
+image_array_save(img, path)
 }
 \arguments{
-\item{img}{PIL Image instance.}
+\item{img}{Image}
 
 \item{data_format}{Image data format ("channels_last" or "channels_first")}
-}
-\value{
-A 3D array.
+
+\item{height}{Height to resize to}
+
+\item{width}{Width to resize to}
+
+\item{path}{Path to save image to}
 }
 \description{
-Converts a PIL Image instance to a 3d-array.
+3D array that represents an image with dimensions (height,width,channels) or
+(channels,height,width) depending on the data_format.
 }
 \seealso{
 Other image preprocessing: \code{\link{fit_image_data_generator}},

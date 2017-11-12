@@ -119,44 +119,59 @@
 <p>Output after 4 epochs on CPU: ~0.8146 Time per epoch on CPU (Core i7): ~150s.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
+<span class="co"># Define maximum number of input features</span>
 max_features &lt;-<span class="st"> </span><span class="dv">20000</span>
 
-<span class="co"># cut texts after this number of words</span>
+<span class="co"># Cut texts after this number of words</span>
 <span class="co"># (among top max_features most common words)</span>
 maxlen &lt;-<span class="st"> </span><span class="dv">100</span>
 
 batch_size &lt;-<span class="st"> </span><span class="dv">32</span>
 
+<span class="co"># Load imdb dataset </span>
 <span class="kw">cat</span>(<span class="st">'Loading data...</span><span class="ch">\n</span><span class="st">'</span>)
 imdb &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dataset_imdb.html">dataset_imdb</a></span>(<span class="dt">num_words =</span> max_features)
+
+<span class="co"># Define training and test sets</span>
 x_train &lt;-<span class="st"> </span>imdb<span class="op">$</span>train<span class="op">$</span>x
 y_train &lt;-<span class="st"> </span>imdb<span class="op">$</span>train<span class="op">$</span>y
 x_test &lt;-<span class="st"> </span>imdb<span class="op">$</span>test<span class="op">$</span>x
 y_test &lt;-<span class="st"> </span>imdb<span class="op">$</span>test<span class="op">$</span>y
 
+<span class="co"># Output lengths of testing and training sets</span>
 <span class="kw">cat</span>(<span class="kw">length</span>(x_train), <span class="st">'train sequences</span><span class="ch">\n</span><span class="st">'</span>)
 <span class="kw">cat</span>(<span class="kw">length</span>(x_test), <span class="st">'test sequences</span><span class="ch">\n</span><span class="st">'</span>)
 
 <span class="kw">cat</span>(<span class="st">'Pad sequences (samples x time)</span><span class="ch">\n</span><span class="st">'</span>)
+
+<span class="co"># Pad training and test inputs</span>
 x_train &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/pad_sequences.html">pad_sequences</a></span>(x_train, <span class="dt">maxlen =</span> maxlen)
 x_test &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/pad_sequences.html">pad_sequences</a></span>(x_test, <span class="dt">maxlen =</span> maxlen)
+
+<span class="co"># Output dimensions of training and test inputs</span>
 <span class="kw">cat</span>(<span class="st">'x_train shape:'</span>, <span class="kw">dim</span>(x_train), <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
 <span class="kw">cat</span>(<span class="st">'x_test shape:'</span>, <span class="kw">dim</span>(x_test), <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
 
+<span class="co"># Initialize model</span>
 model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
 model <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../../reference/layer_embedding.html">layer_embedding</a></span>(<span class="dt">input_dim =</span> max_features, <span class="dt">output_dim =</span> <span class="dv">128</span>, <span class="dt">input_length =</span> maxlen) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../../reference/bidirectional.html">bidirectional</a></span>(<span class="kw"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">64</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># Creates dense embedding layer; outputs 3D tensor</span>
+<span class="st">  </span><span class="co"># with shape (batch_size, sequence_length, output_dim)</span>
+<span class="st">  </span><span class="kw"><a href="../../reference/layer_embedding.html">layer_embedding</a></span>(<span class="dt">input_dim =</span> max_features, 
+                  <span class="dt">output_dim =</span> <span class="dv">128</span>, 
+                  <span class="dt">input_length =</span> maxlen) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../../reference/bidirectional.html">bidirectional</a></span>(<span class="kw"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">64</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>)
 
-<span class="co"># try using different optimizers and different optimizer configs</span>
+<span class="co"># Try using different optimizers and different optimizer configs</span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(
   <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
   <span class="dt">optimizer =</span> <span class="st">'adam'</span>,
   <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
 )
 
+<span class="co"># Train model over four epochs</span>
 <span class="kw">cat</span>(<span class="st">'Train...</span><span class="ch">\n</span><span class="st">'</span>)
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>(
   x_train, y_train,

@@ -118,48 +118,44 @@
 <p>Demonstrates how to write custom layers for Keras.</p>
 <p>We build a custom activation layer called ‘Antirectifier’, which modifies the shape of the tensor that passes through it. We need to specify two methods: <code>compute_output_shape</code> and <code>call</code>.</p>
 <p>Note that the same result can also be achieved via a Lambda layer.</p>
-<div id="data-preparation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-preparation" class="anchor"></a>Data Preparation</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+<span class="co"># Data Preparation --------------------------------------------------------</span>
 
 batch_size &lt;-<span class="st"> </span><span class="dv">128</span>
 num_classes &lt;-<span class="st"> </span><span class="dv">10</span>
 epochs &lt;-<span class="st"> </span><span class="dv">40</span>
 
-<span class="co"># the data, shuffled and split between train and test sets</span>
+<span class="co"># The data, shuffled and split between train and test sets</span>
 mnist &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span>()
 x_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>x
 y_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>y
 x_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>x
 y_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y
 
-<span class="kw">dim</span>(x_train) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_train), <span class="dv">784</span>)
-<span class="kw">dim</span>(x_test) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_test), <span class="dv">784</span>)
+<span class="co"># Redimension</span>
+x_train &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_train, <span class="kw">c</span>(<span class="kw">nrow</span>(x_train), <span class="dv">784</span>))
+x_test &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_test, <span class="kw">c</span>(<span class="kw">nrow</span>(x_test), <span class="dv">784</span>))
 
+<span class="co"># Transform RGB values into [0,1] range</span>
 x_train &lt;-<span class="st"> </span>x_train <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
 x_test &lt;-<span class="st"> </span>x_test <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
 
 <span class="kw">cat</span>(<span class="kw">nrow</span>(x_train), <span class="st">'train samples</span><span class="ch">\n</span><span class="st">'</span>)
 <span class="kw">cat</span>(<span class="kw">nrow</span>(x_test), <span class="st">'test samples</span><span class="ch">\n</span><span class="st">'</span>)
 
-<span class="co"># convert class vectors to binary class matrices</span>
+<span class="co"># Convert class vectors to binary class matrices</span>
 y_train &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_train, num_classes)
-y_test &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_test, num_classes)</code></pre></div>
-</div>
-<div id="antirectifier-layer" class="section level2">
-<h2 class="hasAnchor">
-<a href="#antirectifier-layer" class="anchor"></a>Antirectifier Layer</h2>
+y_test &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_test, num_classes)
+
+<span class="co"># Antirectifier Layer -----------------------------------------------------</span></code></pre></div>
 <p>This is the combination of a sample-wise L2 normalization with the concatenation of the positive part of the input with the negative part of the input. The result is a tensor of samples that are twice as large as the input samples.</p>
-<p>It can be used in place of a ReLU.</p>
-<p>Input shape: 2D tensor of shape (samples, n)</p>
-<p>Output shape: 2D tensor of shape (samples, 2*n)</p>
+<p>It can be used in place of a ReLU. Input shape: 2D tensor of shape (samples, n) Output shape: 2D tensor of shape (samples, 2*n)</p>
 <p>When applying ReLU, assuming that the distribution of the previous output is approximately centered around 0., you are discarding half of your input. This is inefficient.</p>
 <p>Antirectifier allows to return all-positive outputs like ReLU, without discarding any data.</p>
-<p>Tests on MNIST show that Antirectifier allows to train networks with twice less parameters yet with comparable classification accuracy as an equivalent ReLU-based network.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Because our custom layer is written with primitives from the Keras backend</span>
-<span class="co"># (`K`), our code can run both on TensorFlow and Theano.</span>
-K &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/backend.html">backend</a></span>()
+<p>Tests on MNIST show that Antirectifier allows to train networks with half the parameters yet with comparable classification accuracy as an equivalent ReLU-based network.</p>
+<p>Because our custom layer is written with primitives from the Keras backend (<code>K</code>), our code can run both on TensorFlow and Theano.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">K &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/backend.html">backend</a></span>()
 
 <span class="co"># Custom layer class</span>
 AntirectifierLayer &lt;-<span class="st"> </span>R6<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/R6/topics/R6Class">R6Class</a></span>(<span class="st">"KerasLayer"</span>,
@@ -184,15 +180,15 @@ AntirectifierLayer &lt;-<span class="st"> </span>R6<span class="op">::</span><sp
   )
 )
 
-<span class="co"># create layer wrapper function</span>
+<span class="co"># Create layer wrapper function</span>
 layer_antirectifier &lt;-<span class="st"> </span><span class="cf">function</span>(object) {
   <span class="kw"><a href="../../reference/create_layer.html">create_layer</a></span>(AntirectifierLayer, object)
-}</code></pre></div>
-</div>
-<div id="define-and-train-model" class="section level2">
-<h2 class="hasAnchor">
-<a href="#define-and-train-model" class="anchor"></a>Define and Train Model</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
+}
+
+
+<span class="co"># Define &amp; Train Model -------------------------------------------------</span>
+
+model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
 model <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">256</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">layer_antirectifier</span>() <span class="op">%&gt;%</span><span class="st"> </span>
@@ -200,16 +196,16 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">256</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">layer_antirectifier</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.1</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>)
+<span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> num_classes, <span class="dt">activation =</span> <span class="st">'softmax'</span>)
 
-<span class="co"># compile the model</span>
+<span class="co"># Compile the model</span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(
   <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,
   <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,
   <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
 )
 
-<span class="co"># train the model</span>
+<span class="co"># Train the model</span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>(x_train, y_train,
   <span class="dt">batch_size =</span> batch_size,
   <span class="dt">epochs =</span> epochs,
@@ -217,19 +213,9 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
   <span class="dt">validation_data=</span> <span class="kw">list</span>(x_test, y_test)
 )</code></pre></div>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#data-preparation">Data Preparation</a></li>
-      <li><a href="#antirectifier-layer">Antirectifier Layer</a></li>
-      <li><a href="#define-and-train-model">Define and Train Model</a></li>
-      </ul>
-</div>
       </div>
 
 </div>

@@ -35,6 +35,92 @@ Please cite Keras in your publications if it helps your research. Here is an exa
 }
 ```
 
+## How can I run Keras on a GPU?
+
+Note that installation and configuration of the GPU-based backends can take considerably more time and effort. So if you are just getting started with Keras you may want to stick with the CPU version initially, then install the appropriate GPU version once your training becomes more computationally demanding.
+
+Below are instructions for installing and enabling GPU support for the various supported backends.
+
+### TensorFlow
+
+If your system has an NVIDIA® GPU and you have the GPU version of TensorFlow installed then your Keras code will automatically run on the GPU.
+
+Additional details on GPU installation can be found here: <https://tensorflow.rstudio.com/installation_gpu.html>.
+
+### Theano
+
+If you are running on the Theano backend, you can set the `THEANO_FLAGS` environment variable to indicate you'd like to execute tensor operations on the GPU. For example:
+
+```r
+Sys.setenv(KERAS_BACKEND = "keras")
+Sys.setenv(THEANO_FLAGS = "device=gpu,floatX=float32")
+library(keras)
+```
+
+The name 'gpu' might have to be changed depending on your device's identifier (e.g. `gpu0`, `gpu1`, etc).
+
+### CNTK
+
+If you have the GPU version of CNTK installed then your Keras code will automatically run on the GPU.
+
+Additional information on installing the GPU version of CNTK can be found here: https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python
+
+## How can I run a Keras model on multiple GPUs?
+
+We recommend doing so using the **TensorFlow** backend. There are two ways to run a single model on multiple GPUs: **data parallelism** and **device parallelism**.
+
+In most cases, what you need is most likely data parallelism.
+
+### Data parallelism
+
+Data parallelism consists in replicating the target model once on each device, and using each replica to process a different fraction of the input data.
+Keras has a built-in utility, `multi_gpu_model()`, which can produce a data-parallel version of any model, and achieves quasi-linear speedup on up to 8 GPUs.
+
+For more information, see the documentation for [multi_gpu_model](https://keras.rstudio.com/reference/multi_gpu_model.html). Here is a quick example:
+
+```{r, eval= FALSE}
+# Replicates `model` on 8 GPUs.
+# This assumes that your machine has 8 available GPUs.
+parallel_model <- multi_gpu_model(model, gpus=8)
+parallel_model %>% compile(
+  loss = "categorical_crossentropy",
+  optimizer = "rmsprop"
+)
+
+# This `fit` call will be distributed on 8 GPUs.
+# Since the batch size is 256, each GPU will process 32 samples.
+parallel_model %>% fit(x, y, epochs = 20, batch_size = 256)
+```
+
+### Device parallelism
+
+Device parallelism consists in running different parts of a same model on different devices. It works best for models that have a parallel architecture, e.g. a model with two branches.
+
+This can be achieved by using TensorFlow device scopes. Here is a quick example:
+
+```{r, eval = FALSE}
+# Model where a shared LSTM is used to encode two different sequences in parallel
+input_a <- layer_input(shape = c(140, 256))
+input_b <- layer_input(shape = c(140, 256))
+
+shared_lstm <- layer_lstm(units = 64)
+
+# Process the first sequence on one GPU
+library(tensorflow)
+with(tf$device_scope("/gpu:0", {
+  encoded_a <- shared_lstm(tweet_a)
+}):
+    
+# Process the next sequence on another GPU
+with(tf$device_scope("/gpu:1", {
+  encoded_b <- shared_lstm(tweet_b)
+}):
+
+# Concatenate results on CPU
+with(tf$device_scope("/cpu:0", {
+  merged_vector <- layer_concatenate(list(encoded_a, encoded_b))
+}):
+```
 
 ## What does "sample", "batch", "epoch" mean?
 
@@ -301,6 +387,44 @@ frozen_model %>% fit(data, labels)  # this does NOT update the weights of `layer
 trainable_model %>% fit(data, labels)  # this updates the weights of `layer`
 ```
 
+Finally, you can freeze or unfreeze the weights for an entire model (or a range of layers within the model) using the `freeze_weights()` and `unfreeze_weights()` functions. For example:
+
+```{r}
+# instantiate a VGG16 model
+conv_base <- application_vgg16(
+  weights = "imagenet",
+  include_top = FALSE,
+  input_shape = c(150, 150, 3)
+)
+
+# freeze it's weights
+freeze_weights(conv_base)
+
+# create a composite model that includes the base + more layers
+model <- keras_model_sequential() %>% 
+  conv_base %>% 
+  layer_flatten() %>% 
+  layer_dense(units = 256, activation = "relu") %>% 
+  layer_dense(units = 1, activation = "sigmoid")
+
+# compile
+model %>% compile(
+  loss = "binary_crossentropy",
+  optimizer = optimizer_rmsprop(lr = 2e-5),
+  metrics = c("accuracy")
+)
+
+# unfreeze weights from "block5_conv1" on
+unfreeze_weights(conv_base, from = "block5_conv1")
+
+# compile again since we froze or unfroze layers
+model %>% compile(
+  loss = "binary_crossentropy",
+  optimizer = optimizer_rmsprop(lr = 2e-5),
+  metrics = c("accuracy")
+)
+```
+
 
 ## How can I use stateful RNNs?
 
@@ -317,7 +441,7 @@ To use statefulness in RNNs, you need to:
 - set `stateful=TRUE` in your RNN layer(s).
 - specify `shuffle=FALSE` when calling fit().
 
-To reset the states accumulated in either a singel layer or an entire model use the `reset_states()` function.
+To reset the states accumulated in either a single layer or an entire model use the `reset_states()` function.
 
 Notes that the methods `predict()`, `fit()`, `train_on_batch()`, `predict_classes()`, etc. will *all* update the states of the stateful layers in a model. This allows you to do not only stateful training, but also stateful prediction.
 
@@ -346,6 +470,7 @@ Code and pre-trained weights are available for the following image classificatio
 - [VGG19](https://keras.rstudio.com/reference/application_vgg.html)
 - [ResNet50](https://keras.rstudio.com/reference/application_resnet50.html)
 - [InceptionV3](https://keras.rstudio.com/reference/application_inception_v3.html)
+- [InceptionResNetV2](https://keras.rstudio.com/reference/application_inception_resnet_v2.html)
 - [MobileNet](https://keras.rstudio.com/reference/application_mobilenet.html)
 
 For example:
@@ -362,35 +487,6 @@ The VGG16 model is also the basis for the [Deep dream](https://keras.rstudio.com
 
 By default the Keras Python and R packages use the TensorFlow backend. Other available backends include Theano or CNTK. To learn more about using alternatate backends (e.g. Theano or CNTK) see the [article on  Keras backends](backends.html).
 
-## How can I run Keras on a GPU?
-
-Note that installation and configuration of the GPU-based backends can take considerably more time and effort. So if you are just getting started with Keras you may want to stick with the CPU version initially, then install the appropriate GPU version once your training becomes more computationally demanding.
-
-Below are instructions for installing and enabling GPU support for the various supported backends.
-
-### TensorFlow
-
-If your system has an NVIDIA® GPU and you have the GPU version of TensorFlow installed then your Keras code will automatically run on the GPU.
-
-Additional details on GPU installation can be found here: <https://tensorflow.rstudio.com/installation_gpu.html>.
-
-### Theano
-
-If you are running on the Theano backend, you can set the `THEANO_FLAGS` environment variable to indicate you'd like to execute tensor operations on the GPU. For example:
-
-```r
-Sys.setenv(KERAS_BACKEND = "keras")
-Sys.setenv(THEANO_FLAGS = "device=gpu,floatX=float32")
-library(keras)
-```
-
-The name 'gpu' might have to be changed depending on your device's identifier (e.g. `gpu0`, `gpu1`, etc).
-
-### CNTK
-
-If you have the GPU version of CNTK installed then your Keras code will automatically run on the GPU.
-
-Additional information on installing the GPU version of CNTK can be found here: https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python
 
 
 ## How can I use Keras in another R package?
@@ -443,12 +539,6 @@ If you create [custom layers in R](custom_layers.html) or import other Python pa
 During development of a model, sometimes it is useful to be able to obtain reproducible results from run to run in order to determine if a change in performance is due to an actual model or data modification, or merely a result of a new random sample.  
 
 The `use_session_with_seed()` function establishes a common random seed for R, Python, NumPy, and TensorFlow. It furthermore disables hash randomization, GPU computations, and CPU parallelization, which can be additional sources of non-reproducibility. 
-
-The `use_session_with_seed()` function is available in the development version of the Keras package, which you can install as follows:
-
-```{r}
-devtools::install_github("rstudio/keras")
-```
 
 To use the function, call it immediately after you load the keras package:
 

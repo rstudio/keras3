@@ -119,29 +119,30 @@
 <p>Gets to 98.40% test accuracy after 20 epochs (there is <em>a lot</em> of margin for parameter tuning). 2 seconds per epoch on a K520 GPU.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
+<span class="co"># Data Preparation ---------------------------------------------------</span>
+
 batch_size &lt;-<span class="st"> </span><span class="dv">128</span>
 num_classes &lt;-<span class="st"> </span><span class="dv">10</span>
 epochs &lt;-<span class="st"> </span><span class="dv">30</span>
 
-<span class="co"># the data, shuffled and split between train and test sets</span>
-mnist &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span>()
-x_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>x
-y_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>y
-x_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>x
-y_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y
+<span class="co"># The data, shuffled and split between train and test sets</span>
+<span class="kw">c</span>(<span class="kw">c</span>(x_train, y_train), <span class="kw">c</span>(x_test, y_test)) <span class="op">%&lt;-%</span><span class="st"> </span><span class="kw"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span>()
 
-<span class="kw">dim</span>(x_train) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_train), <span class="dv">784</span>)
-<span class="kw">dim</span>(x_test) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">nrow</span>(x_test), <span class="dv">784</span>)
+x_train &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_train, <span class="kw">c</span>(<span class="kw">nrow</span>(x_train), <span class="dv">784</span>))
+x_test &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_test, <span class="kw">c</span>(<span class="kw">nrow</span>(x_test), <span class="dv">784</span>))
 
+<span class="co"># Transform RGB values into [0,1] range</span>
 x_train &lt;-<span class="st"> </span>x_train <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
 x_test &lt;-<span class="st"> </span>x_test <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
 
 <span class="kw">cat</span>(<span class="kw">nrow</span>(x_train), <span class="st">'train samples</span><span class="ch">\n</span><span class="st">'</span>)
 <span class="kw">cat</span>(<span class="kw">nrow</span>(x_test), <span class="st">'test samples</span><span class="ch">\n</span><span class="st">'</span>)
 
-<span class="co"># convert class vectors to binary class matrices</span>
+<span class="co"># Convert class vectors to binary class matrices</span>
 y_train &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_train, num_classes)
 y_test &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_test, num_classes)
+
+<span class="co"># Define Model --------------------------------------------------------------</span>
 
 model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
 model <span class="op">%&gt;%</span><span class="st"> </span>
@@ -159,6 +160,9 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
   <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
 )
 
+<span class="co"># Training &amp; Evaluation ----------------------------------------------------</span>
+
+<span class="co"># Fit model to data</span>
 history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>(
   x_train, y_train,
   <span class="dt">batch_size =</span> batch_size,
@@ -169,11 +173,12 @@ history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span 
 
 <span class="kw">plot</span>(history)
   
-score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/evaluate.html">evaluate</a></span>(
+score &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(
   x_test, y_test,
   <span class="dt">verbose =</span> <span class="dv">0</span>
 )
-  
+
+<span class="co"># Output metrics</span>
 <span class="kw">cat</span>(<span class="st">'Test loss:'</span>, score[[<span class="dv">1</span>]], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
 <span class="kw">cat</span>(<span class="st">'Test accuracy:'</span>, score[[<span class="dv">2</span>]], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</code></pre></div>
 </div>

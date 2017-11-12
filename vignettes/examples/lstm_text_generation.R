@@ -115,7 +115,7 @@ for(iteration in 1:60){
       x <- sapply(chars, function(x){
         as.integer(x == sentence)
       })
-      dim(x) <- c(1, dim(x))
+      x <- array_reshape(x, c(1, dim(x)))
       
       preds <- predict(model, x)
       next_index <- sample_mod(preds, diversity)

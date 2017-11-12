@@ -46,20 +46,39 @@ keras <- NULL
     environment = "r-tensorflow",
      
     on_load = function() {
+      # check version
       check_implementation_version()
+      
+      # patch progress bar for interactive/tty sessions
+      if ((interactive() || isatty(stdout())) && keras_version() >= "2.0.9") {
+        python_path <- system.file("python", package = "keras")
+        tools <- import_from_path("kerastools", path = python_path)
+        tools$progbar$apply_patch()
+      }
+        
     },
     
     on_error = function(e) {
       if (is_tensorflow_implementation())
         stop(tf_config()$error_message, call. = FALSE)
-      else
-        stop(e, call. = FALSE)
+      else {
+        if (grepl("No module named keras", e$message)) {
+          keras_not_found_message(e$message)
+        } else {
+          stop(e$message, call. = FALSE) 
+        }
+      }
     }
   ))
   
   # tensorflow use_session hooks
   setHook("tensorflow.on_before_use_session", tensorflow_on_before_use_session)
   setHook("tensorflow.on_use_session", tensorflow_on_use_session)
+}
+
+keras_not_found_message <- function(error_message) {
+  message(error_message)
+  message("Use the install_keras() function to install the core Keras library")
 }
 
 resolve_implementation_module <- function() {
@@ -69,7 +88,7 @@ resolve_implementation_module <- function() {
   
   # set the implementation module
   if (identical(implementation, "tensorflow"))
-    implementation_module <- "tensorflow.contrib.keras.python.keras"
+    implementation_module <- "tensorflow.python.keras._impl.keras"
   else
     implementation_module <- implementation
   

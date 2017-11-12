@@ -50,11 +50,11 @@ reference:
     contents:
       - keras_model
       - keras_model_sequential
+      - multi_gpu_model
       - summary.keras.engine.training.Model
       - compile
       - fit
       - fit_generator
-      - evaluate
       - evaluate_generator
       - predict.keras.engine.training.Model
       - predict_proba
@@ -68,6 +68,7 @@ reference:
       - load_model_hdf5
       - serialize_model
       - clone_model
+      - freeze_weights
  
   - title: "Core Layers"
     contents:
@@ -124,9 +125,10 @@ reference:
     contents:
       - layer_simple_rnn
       - layer_gru
+      - layer_cudnn_gru
       - layer_lstm
+      - layer_cudnn_gru
        
-
   - title: "Embedding Layers"
     contents:
       - layer_embedding
@@ -149,6 +151,7 @@ reference:
       - layer_multiply
       - layer_average
       - layer_maximum
+      - layer_minimum
       - layer_concatenate
       - layer_dot
 
@@ -186,7 +189,6 @@ reference:
       - dataset_cifar100
       - dataset_imdb
       - dataset_reuters
-      - dataset_reuters_word_index
       - dataset_mnist
       - dataset_boston_housing
 
@@ -213,6 +215,7 @@ reference:
     contents:
       - text_tokenizer
       - fit_text_tokenizer
+      - save_text_tokenizer
       - texts_to_sequences
       - texts_to_sequences_generator
       - texts_to_matrix
@@ -229,6 +232,7 @@ reference:
       - fit_image_data_generator
       - flow_images_from_data
       - flow_images_from_directory
+      - generator_next
  
   - title: "Optimizers"
     contents:

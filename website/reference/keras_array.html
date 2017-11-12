@@ -135,7 +135,7 @@
 in-memory layout and floating point data type for the current Keras backend.</p>
     
 
-    <pre class="usage"><span class='fu'>keras_array</span>(<span class='no'>x</span>, <span class='kw'>dim</span> <span class='kw'>=</span> <span class='fu'>dim</span>(<span class='no'>x</span>), <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>keras_array</span>(<span class='no'>x</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -143,11 +143,6 @@ in-memory layout and floating point data type for the current Keras backend.</p>
     <tr>
       <th>x</th>
       <td><p>Object or list of objects to convert</p></td>
-    </tr>
-    <tr>
-      <th>dim</th>
-      <td><p>Integer vector with array dimensions (defaults to dimensions of
-<code>x</code>)</p></td>
     </tr>
     <tr>
       <th>dtype</th>
@@ -159,8 +154,8 @@ current Keras backend.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>NumPy array with the specified dimensions and type (or list of NumPy
-arrays if a list was passed for <code>x</code>).</p>
+    <p>NumPy array with the specified <code>dtype</code> (or list of NumPy arrays if a
+list was passed for <code>x</code>).</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 

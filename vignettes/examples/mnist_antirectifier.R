@@ -23,8 +23,8 @@ x_test <- mnist$test$x
 y_test <- mnist$test$y
 
 # Redimension
-dim(x_train) <- c(nrow(x_train), 784)
-dim(x_test) <- c(nrow(x_test), 784)
+x_train <- array_reshape(x_train, c(nrow(x_train), 784))
+x_test <- array_reshape(x_test, c(nrow(x_test), 784))
 
 # Transform RGB values into [0,1] range
 x_train <- x_train / 255
@@ -103,7 +103,7 @@ model %>%
   layer_dense(units = 256) %>%
   layer_antirectifier() %>% 
   layer_dropout(rate = 0.1) %>%
-  layer_dense(units = 10, activation = 'softmax')
+  layer_dense(units = num_classes, activation = 'softmax')
 
 # Compile the model
 model %>% compile(

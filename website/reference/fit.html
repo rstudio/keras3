@@ -166,7 +166,11 @@ If unspecified, it will default to 32.</p></td>
     </tr>
     <tr>
       <th>epochs</th>
-      <td><p>Number of times to iterate over the training data arrays.</p></td>
+      <td><p>Number of epochs to train the model.
+Note that in conjunction with initial_epoch, the parameter
+epochs is to be understood as "final epoch". The model is
+not trained for a number of steps given by epochs, but
+until the epoch epochs is reached.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -246,11 +250,13 @@ Total number of steps (batches of samples) to validate before stopping.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
-  <code><a href='evaluate_generator.html'>evaluate_generator</a></code>, <code><a href='evaluate.html'>evaluate</a></code>,
+  <code><a href='evaluate.keras.engine.training.Model.html'>evaluate.keras.engine.training.Model</a></code>,
+  <code><a href='evaluate_generator.html'>evaluate_generator</a></code>,
   <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='get_config.html'>get_config</a></code>,
   <code><a href='get_layer.html'>get_layer</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
-  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='pop_layer.html'>pop_layer</a></code>,
+  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='multi_gpu_model.html'>multi_gpu_model</a></code>,
+  <code><a href='pop_layer.html'>pop_layer</a></code>,
   <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
   <code><a href='predict_generator.html'>predict_generator</a></code>,
   <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,

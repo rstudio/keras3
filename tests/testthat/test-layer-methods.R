@@ -80,7 +80,8 @@ test_succeeds("layer node functions are accessible", {
 
 
 test_succeeds("layer state can be reset", {
-  skip_if_cntk() # CNTK backend does not support stateful RNNs
+  skip_if_cntk() # CNTK backend does not support stateful RNNs, see
+                 # https://docs.microsoft.com/en-us/cognitive-toolkit/using-cntk-with-keras#known-issues
   model <- keras_model_sequential()
   model %>% 
     layer_lstm(units = 32, input_shape=c(10, 16), batch_size=32, stateful=TRUE) %>% 

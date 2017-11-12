@@ -137,8 +137,7 @@
     <pre class="usage"><span class='fu'>layer_lstm</span>(<span class='no'>object</span>, <span class='no'>units</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='st'>"tanh"</span>,
   <span class='kw'>recurrent_activation</span> <span class='kw'>=</span> <span class='st'>"hard_sigmoid"</span>, <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>return_sequences</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>return_state</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>go_backwards</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>stateful</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>unroll</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>implementation</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
-  <span class='kw'>kernel_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>,
+  <span class='kw'>stateful</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>unroll</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>kernel_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>,
   <span class='kw'>recurrent_initializer</span> <span class='kw'>=</span> <span class='st'>"orthogonal"</span>, <span class='kw'>bias_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
   <span class='kw'>unit_forget_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>kernel_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>recurrent_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bias_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -200,16 +199,6 @@ of index i in the following batch.</p></td>
 else a symbolic loop will be used. Unrolling can speed-up a RNN, although
 it tends to be more memory-intensive. Unrolling is only suitable for short
 sequences.</p></td>
-    </tr>
-    <tr>
-      <th>implementation</th>
-      <td><p>one of 0, 1, or 2. If set to 0, the RNN will use an
-implementation that uses fewer, larger matrix products, thus running faster
-on CPU but consuming more memory. If set to 1, the RNN will use more matrix
-products, but smaller ones, thus running slower (may actually be faster on
-GPU) while consuming less memory. If set to 2 (LSTM/GRU only), the RNN will
-combine the input gate, the forget gate and the output gate into a single
-matrix, enabling more time-efficient parallelization on the GPU.</p></td>
     </tr>
     <tr>
       <th>kernel_initializer</th>
@@ -381,9 +370,11 @@ the initial state of the RNN layer.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other recurrent layers: <code><a href='layer_gru.html'>layer_gru</a></code>,
+    <p>Other recurrent layers: <code><a href='layer_cudnn_gru.html'>layer_cudnn_gru</a></code>,
+  <code><a href='layer_cudnn_lstm.html'>layer_cudnn_lstm</a></code>, <code><a href='layer_gru.html'>layer_gru</a></code>,
   <code><a href='layer_simple_rnn.html'>layer_simple_rnn</a></code></p>
-<p>Other recurrent layers: <code><a href='layer_gru.html'>layer_gru</a></code>,
+<p>Other recurrent layers: <code><a href='layer_cudnn_gru.html'>layer_cudnn_gru</a></code>,
+  <code><a href='layer_cudnn_lstm.html'>layer_cudnn_lstm</a></code>, <code><a href='layer_gru.html'>layer_gru</a></code>,
   <code><a href='layer_simple_rnn.html'>layer_simple_rnn</a></code></p>
     
 

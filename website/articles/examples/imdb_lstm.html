@@ -117,16 +117,14 @@
 </div>
 <p>Trains a LSTM on the IMDB sentiment classification task.</p>
 <p>The dataset is actually too small for LSTM to be of any advantage compared to simpler, much faster methods such as TF-IDF + LogReg.</p>
-<p>Notes:</p>
-<ul>
-<li><p>RNNs are tricky. Choice of batch size is important, choice of loss and optimizer is critical, etc. Some configurations won’t converge.</p></li>
-<li><p>LSTM loss decrease patterns during training can be quite different from what you see with CNNs/MLPs/etc.</p></li>
-</ul>
+<p>Notes: - RNNs are tricky. Choice of batch size is important, choice of loss and optimizer is critical, etc. Some configurations won’t converge. - LSTM loss decrease patterns during training can be quite different from what you see with CNNs/MLPs/etc.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
 max_features &lt;-<span class="st"> </span><span class="dv">20000</span>
-maxlen &lt;-<span class="st"> </span><span class="dv">80</span>  <span class="co"># cut texts after this number of words (among top max_features most common words)</span>
 batch_size &lt;-<span class="st"> </span><span class="dv">32</span>
+
+<span class="co"># Cut texts after this number of words (among top max_features most common words)</span>
+maxlen &lt;-<span class="st"> </span><span class="dv">80</span>  
 
 <span class="kw">cat</span>(<span class="st">'Loading data...</span><span class="ch">\n</span><span class="st">'</span>)
 imdb &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dataset_imdb.html">dataset_imdb</a></span>(<span class="dt">num_words =</span> max_features)
@@ -151,7 +149,7 @@ model <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">dropout =</span> <span class="fl">0.2</span>, <span class="dt">recurrent_dropout =</span> <span class="fl">0.2</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">'sigmoid'</span>)
 
-<span class="co"># try using different optimizers and different optimizer configs</span>
+<span class="co"># Try using different optimizers and different optimizer configs</span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(
   <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,
   <span class="dt">optimizer =</span> <span class="st">'adam'</span>,
@@ -165,10 +163,12 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
   <span class="dt">epochs =</span> <span class="dv">15</span>,
   <span class="dt">validation_data =</span> <span class="kw">list</span>(x_test, y_test)
 )
-scores &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/evaluate.html">evaluate</a></span>(
+
+scores &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(
   x_test, y_test,
   <span class="dt">batch_size =</span> batch_size
 )
+
 <span class="kw">cat</span>(<span class="st">'Test score:'</span>, scores[[<span class="dv">1</span>]])
 <span class="kw">cat</span>(<span class="st">'Test accuracy'</span>, scores[[<span class="dv">2</span>]])</code></pre></div>
 </div>

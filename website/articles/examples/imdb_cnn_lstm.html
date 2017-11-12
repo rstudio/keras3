@@ -116,7 +116,7 @@
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/imdb_cnn_lstm.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/imdb_cnn_lstm.R</a></p>
 </div>
 <p>Train a recurrent convolutional network on the IMDB sentiment classification task.</p>
-<p>Gets to 0.8498 test accuracy after 2 epochs. 41s/epoch on K520 GPU.</p>
+<p>Achieves 0.8498 test accuracy after 2 epochs. 41s/epoch on K520 GPU.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
 <span class="co"># Parameters --------------------------------------------------------------</span>
@@ -140,37 +140,25 @@ epochs =<span class="st"> </span><span class="dv">2</span>
 
 <span class="co"># Data Preparation --------------------------------------------------------</span>
 
-<span class="co"># Keras load all data into a list with the following structure:</span>
-<span class="co"># List of 2</span>
-<span class="co"># $ train:List of 2</span>
-<span class="co"># ..$ x:List of 25000</span>
-<span class="co"># .. .. [list output truncated]</span>
-<span class="co"># .. ..- attr(*, "dim")= int 25000</span>
-<span class="co"># ..$ y: num [1:25000(1d)] 1 0 0 1 0 0 1 0 1 0 ...</span>
-<span class="co"># $ test :List of 2</span>
-<span class="co"># ..$ x:List of 25000</span>
-<span class="co"># .. .. [list output truncated]</span>
-<span class="co"># .. ..- attr(*, "dim")= int 25000</span>
-<span class="co"># ..$ y: num [1:25000(1d)] 1 1 1 1 1 0 0 0 1 1 ...</span>
-<span class="co">#</span>
-<span class="co"># The x data includes integer sequences, each integer is a word.</span>
-<span class="co"># The y data includes a set of integer labels (0 or 1).</span>
+<span class="co"># The x data includes integer sequences, each integer is a word</span>
+<span class="co"># The y data includes a set of integer labels (0 or 1)</span>
 <span class="co"># The num_words argument indicates that only the max_fetures most frequent</span>
 <span class="co"># words will be integerized. All other will be ignored.</span>
 <span class="co"># See help(dataset_imdb)</span>
 imdb &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dataset_imdb.html">dataset_imdb</a></span>(<span class="dt">num_words =</span> max_features)
+<span class="co"># Keras load all data into a list with the following structure:</span>
+<span class="kw">str</span>(imdb)
 
-<span class="co"># pad the sequences, so they have all the same lenght</span>
-<span class="co"># this will conver our dataset into a matrix: each line is a review</span>
-<span class="co"># and each column a word on the sequence. </span>
-<span class="co"># we pad the sequences with 0 to the left.</span>
+<span class="co"># Pad the sequences to the same length</span>
+  <span class="co"># This will convert our dataset into a matrix: each line is a review</span>
+  <span class="co"># and each column a word on the sequence</span>
+<span class="co"># We pad the sequences with 0s to the left</span>
 x_train &lt;-<span class="st"> </span>imdb<span class="op">$</span>train<span class="op">$</span>x <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/pad_sequences.html">pad_sequences</a></span>(<span class="dt">maxlen =</span> maxlen)
-
 x_test &lt;-<span class="st"> </span>imdb<span class="op">$</span>test<span class="op">$</span>x <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/pad_sequences.html">pad_sequences</a></span>(<span class="dt">maxlen =</span> maxlen)
 
-<span class="co"># Defining the model ------------------------------------------------------</span>
+<span class="co"># Defining Model ------------------------------------------------------</span>
 
 model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
 

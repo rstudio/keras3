@@ -143,7 +143,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 <div id="all-models-are-callable-just-like-layers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#all-models-are-callable-just-like-layers" class="anchor"></a>All models are callable, just like layers</h2>
-<p>With the functional API, it is easy to re-use trained models: you can treat any model as if it were a layer. Note that you aren’t just re-using the architecture of the model, you are also re-using its weights.</p>
+<p>With the functional API, it is easy to reuse trained models: you can treat any model as if it were a layer. Note that you aren’t just reusing the architecture of the model, you are also reusing its weights.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">784</span>))
 <span class="co"># This works, and returns the 10-way softmax we defined above.</span>
 y &lt;-<span class="st"> </span>x <span class="op">%&gt;%</span><span class="st"> </span>model</code></pre></div>
@@ -367,7 +367,7 @@ z &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_add
 <div id="shared-vision-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#shared-vision-model" class="anchor"></a>Shared vision model</h3>
-<p>This model re-uses the same image-processing module on two inputs, to classify whether two MNIST digits are the same digit or different digits.</p>
+<p>This model reuses the same image-processing module on two inputs, to classify whether two MNIST digits are the same digit or different digits.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, define the vision model</span>
 digit_input &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">1</span>))
 out &lt;-<span class="st"> </span>digit_input <span class="op">%&gt;%</span><span class="st"> </span>

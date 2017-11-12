@@ -29,13 +29,11 @@
 #' Gets to ~99.1% validation accuracy after 5 epochs (there is still a lot of margin
 #' for parameter tuning).
 #' 
-#' Note that this example requires the development version of the keras R package.
-#' You can install this version as follows: `install_github("rstudio/keras")`.
-#' 
 #' 
 
 library(keras)
 library(tensorflow)
+
 
 K <- backend()
 if (K$backend() != 'tensorflow') {
@@ -44,6 +42,8 @@ if (K$backend() != 'tensorflow') {
        'because it requires TFRecords, which ',
        'are not supported on other platforms.')
 }
+
+# Define Model -------------------------------------------------------------------
 
 cnn_layers <- function(x_train_input) {
   x_train_input %>% 
@@ -59,6 +59,8 @@ cnn_layers <- function(x_train_input) {
 }
 
 sess <- K$get_session()
+
+# Data Preparation --------------------------------------------------------------
 
 batch_size <- 128L
 batch_shape = list(batch_size, 28L, 28L, 1L)
@@ -111,6 +113,9 @@ y_batch_shape = y_train_batch$get_shape()$as_list()
 
 x_train_input <- layer_input(tensor = x_train_batch, batch_shape = x_batch_shape)
 x_train_out <- cnn_layers(x_train_input)
+
+# Training & Evaluation ---------------------------------------------------------
+
 train_model = keras_model(inputs = x_train_input, outputs = x_train_out)
 
 # Pass the target tensor `y_train_batch` to `compile`
@@ -143,7 +148,7 @@ K$clear_session()
 
 # Second Session to test loading trained model without tensors
 x_test <- data$validation$images
-x_test <- keras_array(x_test, dim = c(nrow(x_test), 28, 28, 1))
+x_test <- array_reshape(x_test, dim = c(nrow(x_test), 28, 28, 1))
 y_test <- data$validation$labels
 x_test_inp <- layer_input(shape = dim(x_test)[-1])
 test_out <- cnn_layers(x_test_inp)
@@ -158,9 +163,3 @@ summary(test_model)
 
 result <- test_model %>% evaluate(x_test, to_categorical(y_test, classes))
 cat(sprintf('\nTest accuracy: %f', result$acc))
-
-
-
-
-
-

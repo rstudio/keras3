@@ -33,6 +33,7 @@ The following image classification models (with weights trained on ImageNet) are
 - [VGG19](https://keras.rstudio.com/reference/application_vgg.html)
 - [ResNet50](https://keras.rstudio.com/reference/application_resnet50.html)
 - [InceptionV3](https://keras.rstudio.com/reference/application_inception_v3.html)
+- [InceptionResNetV2](https://keras.rstudio.com/reference/application_inception_resnet_v2.html)
 - [MobileNet](https://keras.rstudio.com/reference/application_mobilenet.html)
 
 All of these architectures (except Xception and MobileNet) are compatible with both TensorFlow and Theano, and upon instantiation the models will be built according to the image data format set in your Keras configuration file at `~/.keras/keras.json`. For instance, if you have set `image_data_format=channels_last`, then any model loaded from this repository will get built according to the TensorFlow data format convention, "Width-Height-Depth".
@@ -55,7 +56,7 @@ x <- image_to_array(img)
 
 # ensure we have a 4d tensor with single element in the batch dimension,
 # the preprocess the input for prediction using resnet50
-dim(x) <- c(1, dim(x))
+x <- array_reshape(x, c(1, dim(x)))
 x <- imagenet_preprocess_input(x)
 
 # make predictions then decode and print them
@@ -78,7 +79,7 @@ model <- application_vgg16(weights = 'imagenet', include_top = FALSE)
 img_path <- "elephant.jpg"
 img <- image_load(img_path, target_size = c(224,224))
 x <- image_to_array(img)
-dim(x) <- c(1, dim(x))
+x <- array_reshape(x, c(1, dim(x)))
 x <- imagenet_preprocess_input(x)
 
 features <- model %>% predict(x)
@@ -95,7 +96,7 @@ model <- keras_model(inputs = base_model$input,
 img_path <- "elephant.jpg"
 img <- image_load(img_path, target_size = c(224,224))
 x <- image_to_array(img)
-dim(x) <- c(1, dim(x)) 
+x <- array_reshape(x, c(1, dim(x)))
 x <- imagenet_preprocess_input(x)
 
 block4_pool_features <- model %>% predict(x)
@@ -119,8 +120,7 @@ model <- keras_model(inputs = base_model$input, outputs = predictions)
 
 # first: train only the top layers (which were randomly initialized)
 # i.e. freeze all convolutional InceptionV3 layers
-for (layer in base_model$layers)
-  layer$trainable <- FALSE
+freeze_weights(base_model)
 
 # compile the model (should be done *after* setting layers to non-trainable)
 model %>% compile(optimizer = 'rmsprop', loss = 'categorical_crossentropy')
@@ -140,10 +140,8 @@ for (i in 1:length(layers))
 
 # we chose to train the top 2 inception blocks, i.e. we will freeze
 # the first 172 layers and unfreeze the rest:
-for (i in 1:172)
-  layers[[i]]$trainable <- FALSE
-for (i in 173:length(layers))
-  layers[[i]]$trainable <- TRUE
+freeze_weights(base_model, from = 1, to = 172)
+unfreeze_weights(base_model, from = 173)
 
 # we need to recompile the model for these modifications to take effect
 # we use SGD with a low learning rate

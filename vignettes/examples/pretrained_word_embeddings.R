@@ -93,6 +93,11 @@ cat(sprintf('Found %s texts.\n', length(texts)))
 tokenizer <- text_tokenizer(num_words=MAX_NB_WORDS)
 tokenizer %>% fit_text_tokenizer(texts)
 
+# save the tokenizer in case we want to use it again
+# for prediction within another R session, see:
+# https://keras.rstudio.com/reference/save_text_tokenizer.html
+save_text_tokenizer(tokenizer, "tokenizer")
+
 sequences <- texts_to_sequences(tokenizer, texts)
 
 word_index <- tokenizer$word_index

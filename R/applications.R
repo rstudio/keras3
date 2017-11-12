@@ -51,7 +51,7 @@ application_xception <- function(include_top = TRUE, weights = "imagenet",
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -96,7 +96,7 @@ xception_preprocess_input <- function(x) {
 #' img_path <- "elephant.jpg"
 #' img <- image_load(img_path, target_size = c(224,224))
 #' x <- image_to_array(img)
-#' dim(x) <- c(1, dim(x))
+#' x <- array_reshape(x, c(1, dim(x)))
 #' x <- imagenet_preprocess_input(x)
 #' 
 #' features <- model %>% predict(x)
@@ -109,7 +109,7 @@ application_vgg16 <- function(include_top = TRUE, weights = "imagenet", input_te
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -124,7 +124,7 @@ application_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_te
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -163,7 +163,7 @@ application_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_te
 #' 
 #' # ensure we have a 4d tensor with single element in the batch dimension,
 #' # the preprocess the input for prediction using resnet50
-#' dim(x) <- c(1, dim(x))
+#' x <- array_reshape(x, c(1, dim(x)))
 #' x <- imagenet_preprocess_input(x)
 #' 
 #' # make predictions then decode and print them
@@ -178,7 +178,7 @@ application_resnet50 <- function(include_top = TRUE, weights = "imagenet", input
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -209,16 +209,55 @@ application_inception_v3 <- function(include_top = TRUE, weights = "imagenet", i
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
 }
 
+
 #' @rdname application_inception_v3
 #' @export
 inception_v3_preprocess_input <- function(x) {
   preprocess_input(x, keras$applications$inception_v3$preprocess_input)
+}
+
+
+#' Inception-ResNet v2 model, with weights trained on ImageNet
+#' 
+#' 
+#' @inheritParams application_xception
+#'
+#' @return A Keras model instance.
+#'
+#' @details 
+#' Do note that the input image format for this model is different than for
+#' the VGG16 and ResNet models (299x299 instead of 224x224). 
+#' 
+#' The `inception_resnet_v2_preprocess_input()` function should be used for image 
+#' preprocessing.
+#' 
+#' @section Reference:
+#'  - [Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning](https://arxiv.org/abs/1602.07261)(http://arxiv.org/abs/1512.00567)
+#'
+#' @export
+application_inception_resnet_v2 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL,
+                                            pooling = NULL, classes = 1000) {
+  verify_application_prerequistes()
+  keras$applications$InceptionResNetV2(
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = as_nullable_integer(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+}
+
+#' @rdname application_inception_resnet_v2
+#' @export
+inception_resnet_v2_preprocess_input <- function(x) {
+  preprocess_input(x, keras$applications$inception_resnet_v2$preprocess_input)
 }
 
 #' Decodes the prediction of an ImageNet model.
@@ -252,11 +291,26 @@ imagenet_decode_predictions <- function(preds, top = 5) {
 #' Preprocesses a tensor encoding a batch of images.
 #' 
 #' @param x input tensor, 4D
+#' @param data_format Data format of the image tensor
+#' @param mode One of "caffe", "tf"
+#'   - caffe: will convert the images from RGB to BGR,
+#'     then will zero-center each color channel with
+#'     respect to the ImageNet dataset,
+#'     without scaling.
+#'   - tf: will scale pixels between -1 and 1, sample-wise.
 #' 
 #' @return Preprocessed tensor
 #' 
 #' @export
-imagenet_preprocess_input <- function(x) {
+imagenet_preprocess_input <- function(x, data_format = NULL, mode = "caffe") {
+  args <- list(
+    x = x,
+    preprocessor = keras$applications$imagenet_utils$preprocess_input
+  )
+  if (keras_version() >= "2.0.9") {
+    args$data_format <- data_format
+    args$mode <- mode
+  }
   preprocess_input(x, keras$applications$imagenet_utils$preprocess_input)
 }
 
@@ -358,17 +412,8 @@ mobilenet_load_model_hdf5 <- function(filepath) {
 }
 
 
-
-# the preprocesssing functions modify the ndarray in place
-# so we can't pass an R marshalled array (since it points to
-# R managed memory numpy won't allow writing to it). this 
-# function wraps preprocessing by making a copy of the R
-# array before passing it to numpy
-preprocess_input <- function(x, preprocessor) {
-  np <- import("numpy", convert = FALSE)
-  x_np <- np$copy(x)
-  preprocessor(x_np)
-  py_to_r(x_np)
+preprocess_input <- function(x, preprocessor, ...) {
+  preprocessor(keras_array(x), ...)
 }
 
 

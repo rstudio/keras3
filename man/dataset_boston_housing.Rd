@@ -4,17 +4,17 @@
 \alias{dataset_boston_housing}
 \title{Boston housing price regression dataset}
 \usage{
-dataset_boston_housing(path = "boston_housing.npz", seed = 113L,
-  test_split = 0.2)
+dataset_boston_housing(path = "boston_housing.npz", test_split = 0.2,
+  seed = 113L)
 }
 \arguments{
 \item{path}{Path where to cache the dataset locally (relative to
 ~/.keras/datasets).}
 
+\item{test_split}{fraction of the data to reserve as test set.}
+
 \item{seed}{Random seed for shuffling the data before computing the test
 split.}
-
-\item{test_split}{fraction of the data to reserve as test set.}
 }
 \value{
 Lists of training and test data: \code{train$x, train$y, test$x, test$y}.
@@ -30,6 +30,7 @@ University.
 \seealso{
 Other datasets: \code{\link{dataset_cifar100}},
   \code{\link{dataset_cifar10}},
+  \code{\link{dataset_fashion_mnist}},
   \code{\link{dataset_imdb}}, \code{\link{dataset_mnist}},
   \code{\link{dataset_reuters}}
 }

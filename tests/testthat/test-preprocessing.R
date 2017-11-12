@@ -40,13 +40,40 @@ test_succeeds("use of text tokenizer", {
   sequences <- iterate(texts_to_sequences_generator(tokenizer, texts))
   tokenizer %>% fit_text_tokenizer(sequences)
   
+  # save and then reload tokenizer
+  save_text_tokenizer(tokenizer, "tokenizer")
+  on.exit(unlink("tokenizer"), add = TRUE)
+  tokenizer <- load_text_tokenizer("tokenizer")
+  
   for (mode in c('binary', 'count', 'tfidf', 'freq'))
     texts_to_matrix(tokenizer, texts, mode)
 })
 
-test_succeeds("loading an image for preprocessing", {
+test_succeeds("image can be preprocessed", {
   if (have_pillow()) {
     img <- image_load("digit.jpeg")
     img_arr <- image_to_array(img)
+    img_arr <- array_reshape(img_arr, c(1, dim(img_arr)))
+    img_arr <- imagenet_preprocess_input(img_arr)
   }
 })
+
+test_succeeds("images arrays can be saved", {
+  if (have_pillow()) {
+    img <- image_load("digit.jpeg")
+    img_arr <- image_to_array(img)
+    image_array_save(img_arr, "digit2.jpeg")
+  }
+})
+
+test_succeeds("images arrays can be resized", {
+  if (have_pillow()) {
+    img <- image_load("digit.jpeg")
+    img_arr <- image_to_array(img)
+    image_array_resize(img_arr, height = 450, width = 448) %>% 
+      image_array_save("digit_resized.jpeg")
+  }
+})
+
+
+

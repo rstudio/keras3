@@ -72,6 +72,90 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
   keras$models$Sequential(layers = layers, name = name)
 }
 
+#' Replicates a model on different GPUs.
+#' 
+#' @param model A Keras model instance. To avoid OOM errors,
+#'   this model could have been built on CPU, for instance
+#'    (see usage example below).
+#' @param gpus Integer >= 2, number of on GPUs on which to create
+#'   model replicas.
+#' 
+#' @return  A Keras model object which can be used just like the initial
+#'  `model` argument, but which distributes its workload on multiple GPUs.
+#' 
+#' @details 
+#' Specifically, this function implements single-machine
+#' multi-GPU data parallelism. It works in the following way:
+#'   - Divide the model's input(s) into multiple sub-batches.
+#'   - Apply a model copy on each sub-batch. Every model copy
+#'     is executed on a dedicated GPU.
+#'    - Concatenate the results (on CPU) into one big batch.
+#'    
+#' E.g. if your `batch_size` is 64 and you use `gpus=2`,
+#' then we will divide the input into 2 sub-batches of 32 samples,
+#' process each sub-batch on one GPU, then return the full
+#' batch of 64 processed samples.
+#' 
+#' This induces quasi-linear speedup on up to 8 GPUs.
+#' 
+#' This function is only available with the TensorFlow backend
+#' for the time being.
+#'
+#' @examples \dontrun{
+#' 
+#' library(keras)
+#' library(tensorflow)
+#' 
+#' num_samples <- 1000
+#' height <- 224
+#' width <- 224
+#' num_classes <- 1000
+#' 
+#' # Instantiate the base model
+#' # (here, we do it on CPU, which is optional).
+#' with(tf$device("/cpu:0"), {
+#'   model <- application_xception(
+#'     weights = NULL,
+#'     input_shape = c(height, width, 3),
+#'     classes = num_classes
+#'   )
+#' })
+#' 
+#' # Replicates the model on 8 GPUs.
+#' # This assumes that your machine has 8 available GPUs.
+#' parallel_model <- multi_gpu_model(model, gpus = 8)
+#' parallel_model %>% compile(
+#'   loss = "categorical_crossentropy",
+#'   optimizer = "rmsprop"
+#' )
+#' 
+#' # Generate dummy data.
+#' x <- array(runif(num_samples * height * width*3), 
+#'            dim = c(num_samples, height, width, 3))
+#' y <- array(runif(num_samples * num_classes), 
+#'            dim = c(num_samples, num_classes))
+#' 
+#' # This `fit` call will be distributed on 8 GPUs.
+#' # Since the batch size is 256, each GPU will process 32 samples.
+#' parallel_model %>% fit(x, y, epochs = 20, batch_size = 256)
+#' }
+#'
+#' @family model functions
+#'
+#' @export
+multi_gpu_model <- function(model, gpus) {
+  keras$utils$multi_gpu_model(model, as.integer(gpus))
+}
+
+
+#' @importFrom reticulate py_to_r_wrapper
+#' @export
+py_to_r_wrapper.keras.engine.training.Model <- function(x) {
+  function(object) {
+    compose_layer(object, x)
+  }
+}
+
 
 #' Clone a model instance.
 #'
@@ -141,6 +225,10 @@ compile <- function(object, optimizer, loss,
   # handle metrics
   if (!is.null(metrics)) {
     
+    # convert metrics to list if it isn't one
+    if (!is.list(metrics) && length(metrics) == 1)
+      metrics <- list(metrics)
+    
     # get metric names (if any)
     metric_names <- names(metrics)
     if (is.null(metric_names))
@@ -201,7 +289,11 @@ compile <- function(object, optimizer, loss,
 #'   a list mapping output names to data.
 #' @param batch_size Integer or `NULL`. Number of samples per gradient update.
 #'   If unspecified, it will default to 32.
-#' @param epochs Number of times to iterate over the training data arrays.
+#' @param epochs Number of epochs to train the model.
+#'   Note that in conjunction with initial_epoch, the parameter
+#'   epochs is to be understood as "final epoch". The model is
+#'   not trained for a number of steps given by epochs, but
+#'   until the epoch epochs is reached.
 #' @param verbose  Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
 #'   epoch).
 #' @param view_metrics View realtime plot of training metrics (by epoch). The
@@ -268,7 +360,7 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
     validation_data = validation_data,
     shuffle = shuffle,
     class_weight = as_class_weight(class_weight),
-    sample_weight = sample_weight,
+    sample_weight = as_nullable_array(sample_weight),
     initial_epoch = as.integer(initial_epoch)
   )
   
@@ -278,8 +370,8 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
     args$y <- keras_array(y)
   
   if (keras_version() >= "2.0.7") {
-    args$steps_per_epoch <- steps_per_epoch
-    args$validation_steps <- validation_steps
+    args$steps_per_epoch <- as_nullable_integer(steps_per_epoch)
+    args$validation_steps <- as_nullable_integer(validation_steps)
   }
   
   # fit the model
@@ -295,22 +387,32 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
   invisible(history)
 }
 
-
 #' Evaluate a Keras model
 
 #' @inheritParams fit
 #'
 #' @param object Model object to evaluate
+#' @param x Vector, matrix, or array of training data (or list if the model has
+#'   multiple inputs). If all inputs in the model are named, you can also pass a
+#'   list mapping input names to data. Can be `NULL` if feeding from framework
+#'   native tensors.
+#' @param y  Vector, matrix, or array of target data (or list if the model has
+#'   multiple outputs). If all outputs in the model are named, you can also pass
+#'   a list mapping output names to data. Can be `NULL` if feeding from framework
+#'   native tensors.
 #' @param steps Total number of steps (batches of samples) before declaring the
 #'   evaluation round finished. Ignored with the default value of `NULL`.
-#'
+#' @param ... Unused   
+#'   
+#'   
 #' @return Named list of model test loss (or losses for models with multiple
 #'   outputs) and model metrics.
 #'
 #' @family model functions
 #'
 #' @export
-evaluate <- function(object, x, y, batch_size = NULL, verbose=1, sample_weight = NULL, steps = NULL) {
+evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, batch_size = NULL, 
+                                                 verbose=1, sample_weight = NULL, steps = NULL, ...) {
   
   # defaults
   if (is.null(batch_size) && is.null(steps))
@@ -346,7 +448,7 @@ evaluate <- function(object, x, y, batch_size = NULL, verbose=1, sample_weight =
 #' Generates output predictions for the input samples, processing the samples in
 #' a batched way.
 #'
-#' @inheritParams evaluate
+#' @inheritParams evaluate.keras.engine.training.Model
 #'
 #' @param object Keras model
 #' @param x Input data (vector, matrix, or array)
@@ -484,10 +586,6 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'      - (inputs, targets)
 #'      - (inputs, targets, sample_weights)
 #'      
-#'   Note that the generator should call the [keras_array()] function on its
-#'   results prior to returning them (this ensures that arrays are provided in 
-#'   'C' order and using the default floating point type for the backend.)
-#'      
 #'   All arrays should contain the same number of samples. The generator is expected
 #'   to loop over its data indefinitely. An epoch finishes when `steps_per_epoch`
 #'   batches have been seen by the model.
@@ -526,7 +624,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
     view_metrics <- resolve_view_metrics(verbose, epochs, object$metrics)
   
   history <- call_generator_function(object$fit_generator, list(
-    generator = as_generator(generator),
+    generator = generator,
     steps_per_epoch = as.integer(steps_per_epoch),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
@@ -553,8 +651,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
 #' The generator should return the same kind of data as accepted by
 #' `test_on_batch()`.
 #' 
-#' @inheritParams evaluate
-#' 
+#' @inheritParams evaluate.keras.engine.training.Model
 #' 
 #' @param generator Generator yielding lists (inputs, targets) or (inputs,
 #'   targets, sample_weights)
@@ -640,6 +737,10 @@ call_generator_function <- function(func, args) {
     args$pickle_safe <- FALSE
   }
   
+  # convert validation_data to generator
+  if (is.function(args$validation_data))
+    args$validation_data <- as_generator(args$validation_data)
+  
   # call the generator
   do.call(func, args)
 }
@@ -658,7 +759,7 @@ as_generator.python.builtin.object <- function(x) {
 }
 
 as_generator.function <- function(x) {
-  reticulate::py_iterator(x)
+  reticulate::py_iterator(function() keras_array(x()))
 }
 
   

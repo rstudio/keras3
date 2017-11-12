@@ -256,7 +256,6 @@ text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\
 #' @param x Vector/list of strings, or a generator of strings (for 
 #'   memory-efficiency); Alternatively a list of "sequence" (a sequence is a 
 #'   list of integer word indices).
-#' @param ... Unused
 #'
 #' @note Required before using [texts_to_sequences()], [texts_to_matrix()], or 
 #'   [sequences_to_matrix()].
@@ -264,13 +263,68 @@ text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\
 #' @family text tokenization
 #'   
 #' @export
-fit_text_tokenizer <- function(object, x, ...) {
+fit_text_tokenizer <- function(object, x) {
   tokenizer <- object
   if (is.list(x))
     tokenizer$fit_on_sequences(x)
   else
     tokenizer$fit_on_texts(x)
+  invisible(tokenizer)
 }
+
+
+#' Save a text tokenizer to an external file
+#' 
+#' Enables persistence of text tokenizers alongside saved models.
+#' 
+#' @details 
+#' You should always use the same text tokenizer for training and  
+#' prediction. In many cases however prediction will occur in another
+#' session with a version of the model loaded via [load_model_hdf5()].
+#' 
+#' In this case you need to save the text tokenizer object after training
+#' and then reload it prior to prediction.
+#' 
+#' @param object Text tokenizer fit with [fit_text_tokenizer()]
+#' @param filename File to save/load
+#' 
+#' @family text tokenization
+#'
+#' @examples \dontrun{
+#' 
+#' # vectorize texts then save for use in prediction
+#' tokenizer <- text_tokenizer(num_words = 10000) %>% 
+#' fit_text_tokenizer(tokenizer, texts)
+#' save_text_tokenizer(tokenizer, "tokenizer")
+#' 
+#' # (train model, etc.)
+#' 
+#' # ...later in another session
+#' tokenizer <- load_text_tokenizer("tokenizer")
+#' 
+#' # (use tokenizer to preprocess data for prediction)
+#' 
+#' }
+#' 
+#' @importFrom reticulate py_save_object
+#' @export 
+save_text_tokenizer <- function(object, filename) {
+  py_save_object(object, filename)
+  invisible(object)
+}
+
+
+#' @importFrom reticulate py_load_object
+#' @rdname save_text_tokenizer
+#' @export
+load_text_tokenizer <- function(filename) {
+  py_load_object(filename)
+}
+
+
+
+
+
 
 #' Transform each text in texts in a sequence of integers.
 #'
@@ -346,18 +400,26 @@ sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count"
 
 
 #' Loads an image into PIL format.
-#' 
+#'
 #' @param path Path to image file
 #' @param grayscale Boolean, whether to load the image as grayscale.
-#' @param target_size Either `NULL` (default to original size) or integer vector `(img_height, img_width)`.
-#' 
+#' @param target_size Either `NULL` (default to original size) or integer vector
+#'   `(img_height, img_width)`.
+#' @param interpolation Interpolation method used to resample the image if the
+#'   target size is different from that of the loaded image. Supported methods
+#'   are "nearest", "bilinear", and "bicubic". If PIL version 1.1.3 or newer is
+#'   installed, "lanczos" is also supported. If PIL version 3.4.0 or newer is
+#'   installed, "box" and "hamming" are also supported. By default, "nearest"
+#'   is used.
+#'
 #' @return A PIL Image instance.
-#' 
+#'
 #' @family image preprocessing
-#' 
+#'
 #' @export
-image_load <- function(path, grayscale = FALSE, target_size = NULL) {
-
+image_load <- function(path, grayscale = FALSE, target_size = NULL,
+                       interpolation = "nearest") {
+  
   if (!have_pillow())
     stop("The Pillow Python package is required to load images")
   
@@ -369,19 +431,30 @@ image_load <- function(path, grayscale = FALSE, target_size = NULL) {
     target_size <- tuple(target_size[[1]], target_size[[2]])
   }
   
-  keras$preprocessing$image$load_img(
+  args <- list(
     path = normalize_path(path),
     grayscale = grayscale,
     target_size = target_size
   )
+  
+  if (keras_version() >= "2.0.9")
+    args$interpolation <- interpolation
+  
+  do.call(keras$preprocessing$image$load_img, args)
 }
 
-#' Converts a PIL Image instance to a 3d-array.
+
+
+#' 3D array representation of images
 #' 
-#' @param img PIL Image instance.
+#' 3D array that represents an image with dimensions (height,width,channels) or 
+#'  (channels,height,width) depending on the data_format.
+#' 
+#' @param img Image
+#' @param path Path to save image to
+#' @param width Width to resize to
+#' @param height Height to resize to
 #' @param data_format Image data format ("channels_last" or "channels_first")
-#' 
-#' @return A 3D array.
 #' 
 #' @family image preprocessing
 #' 
@@ -392,6 +465,63 @@ image_to_array <- function(img, data_format = c("channels_last", "channels_first
     data_format = match.arg(data_format)
   )
 }
+
+#' @rdname image_to_array
+#' @export
+image_array_resize <- function(img, height, width,
+                               data_format = c("channels_last", "channels_first")) {
+  
+  # imports
+  np <- import("numpy")
+  scipy <- import("scipy")
+  
+  # make copy as necessary
+  img <- np$copy(img)
+  
+  # capture dimensions and reduce to 3 if necessary
+  dims <- dim(img)
+  is_4d_array <- FALSE
+  if (length(dims) == 4 && dims[[1]] == 1) {
+    is_4d_array <- TRUE
+    img <- array_reshape(img, dims[-1])
+  }
+  
+  # calculate zoom factors (invert the dimensions to reflect height,width
+  # order of numpy/scipy array represenations of images)
+  data_format <- match.arg(data_format)
+  if (data_format == "channels_last") {
+    factors <- tuple(
+      height / dim(img)[[1]],
+      width / dim(img)[[2]],
+      1
+    )
+  } else {
+    factors <- tuple(
+      1,
+      height / dim(img)[[1]],
+      width / dim(img)[[2]],
+    )
+  }
+  
+  # zoom
+  img <- scipy$ndimage$zoom(img, factors, order = 1L)
+  
+  # reshape if necessary
+  if (is_4d_array)
+    img <- array_reshape(img, dim = c(1, dim(img)))
+  
+  # return
+  img
+}
+
+#' @rdname image_to_array
+#' @export
+image_array_save <- function(img, path) {
+  scipy <- import("scipy")
+  invisible(scipy$misc$imsave(path, img))
+}
+
+
 
 
 #' Generate minibatches of image data with real-time data augmentation.
@@ -465,6 +595,21 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
 }
 
 
+#' Retreive the next item from a generator
+#' 
+#' Use to retrieve items from generators (e.g. [image_data_generator()]). Will return
+#' either the next item or `NULL` if there are no more items.
+#' 
+#' @param generator Generator 
+#' @param completed Sentinel value to return from `generator_next()` if the iteration
+#'   completes (defaults to `NULL` but can be any R value you specify).
+#'
+#' @export
+generator_next <- function(generator, completed = NULL) {
+  reticulate::iter_next(generator, completed = completed)
+}
+
+
 #' Fit image data generator internal statistics to some sample data.
 #' 
 #' Required for `featurewise_center`, `featurewise_std_normalization`
@@ -476,12 +621,11 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
 #' @param augment Whether to fit on randomly augmented samples
 #' @param rounds If `augment`, how many augmentation passes to do over the data
 #' @param seed random seed.
-#' @param ... Unused
 #' 
 #' @family image preprocessing
 #' 
 #' @export
-fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL, ...) {
+fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL) {
   generator <- object
   history <- generator$fit(
     x = keras_array(x),
@@ -519,9 +663,9 @@ fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, see
 #'   
 #' @export
 flow_images_from_data <- function(
-          x, y = NULL, generator = image_data_generator(), batch_size = 32, 
-          shuffle = TRUE, seed = NULL, 
-          save_to_dir = NULL, save_prefix = "", save_format = 'png') {
+  x, y = NULL, generator = image_data_generator(), batch_size = 32, 
+  shuffle = TRUE, seed = NULL, 
+  save_to_dir = NULL, save_prefix = "", save_format = 'png') {
   generator$flow(
     x = keras_array(x),
     y = keras_array(y),
@@ -572,11 +716,11 @@ flow_images_from_data <- function(
 #'   
 #' @export
 flow_images_from_directory <- function(
-      directory, generator = image_data_generator(), target_size = c(256, 256), color_mode = "rgb",
-      classes = NULL, class_mode = "categorical",
-      batch_size = 32, shuffle = TRUE, seed = NULL,
-      save_to_dir = NULL, save_prefix = "", save_format = "png",
-      follow_links = FALSE) {
+  directory, generator = image_data_generator(), target_size = c(256, 256), color_mode = "rgb",
+  classes = NULL, class_mode = "categorical",
+  batch_size = 32, shuffle = TRUE, seed = NULL,
+  save_to_dir = NULL, save_prefix = "", save_format = "png",
+  follow_links = FALSE) {
   generator$flow_from_directory(
     directory = normalize_path(directory),
     target_size = as.integer(target_size),

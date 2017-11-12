@@ -74,8 +74,8 @@ generate_movies <- function(n_samples = 1200, n_frames = 15){
   shifted_movies[shifted_movies > 1] <- 1
 
   # Add channel dimension
-  dim(noisy_movies) <- c(dim(noisy_movies), 1)
-  dim(shifted_movies) <- c(dim(shifted_movies), 1)
+  noisy_movies <- array_reshape(noisy_movies, c(dim(noisy_movies), 1))
+  shifted_movies <- array_reshape(shifted_movies, c(dim(shifted_movies), 1))
   
   list(
     noisy_movies = noisy_movies,

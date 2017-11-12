@@ -134,7 +134,7 @@
     <p>Preprocesses a tensor encoding a batch of images.</p>
     
 
-    <pre class="usage"><span class='fu'>imagenet_preprocess_input</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>imagenet_preprocess_input</span>(<span class='no'>x</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"caffe"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -142,6 +142,20 @@
     <tr>
       <th>x</th>
       <td><p>input tensor, 4D</p></td>
+    </tr>
+    <tr>
+      <th>data_format</th>
+      <td><p>Data format of the image tensor</p></td>
+    </tr>
+    <tr>
+      <th>mode</th>
+      <td><p>One of "caffe", "tf</p><ul>
+<li><p>caffe: will convert the images from RGB to BGR,
+then will zero-center each color channel with
+respect to the ImageNet dataset,
+without scaling.</p></li>
+<li><p>tf: will scale pixels between -1 and 1, sample-wise.</p></li>
+</ul></td>
     </tr>
     </table>
     

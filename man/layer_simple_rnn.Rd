@@ -6,8 +6,7 @@
 \usage{
 layer_simple_rnn(object, units, activation = "tanh", use_bias = TRUE,
   return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE,
-  stateful = FALSE, unroll = FALSE, implementation = 0L,
-  kernel_initializer = "glorot_uniform",
+  stateful = FALSE, unroll = FALSE, kernel_initializer = "glorot_uniform",
   recurrent_initializer = "orthogonal", bias_initializer = "zeros",
   kernel_regularizer = NULL, recurrent_regularizer = NULL,
   bias_regularizer = NULL, activity_regularizer = NULL,
@@ -43,14 +42,6 @@ of index i in the following batch.}
 else a symbolic loop will be used. Unrolling can speed-up a RNN, although
 it tends to be more memory-intensive. Unrolling is only suitable for short
 sequences.}
-
-\item{implementation}{one of {0, 1, or 2}. If set to 0, the RNN will use an
-implementation that uses fewer, larger matrix products, thus running faster
-on CPU but consuming more memory. If set to 1, the RNN will use more matrix
-products, but smaller ones, thus running slower (may actually be faster on
-GPU) while consuming less memory. If set to 2 (LSTM/GRU only), the RNN will
-combine the input gate, the forget gate and the output gate into a single
-matrix, enabling more time-efficient parallelization on the GPU.}
 
 \item{kernel_initializer}{Initializer for the \code{kernel} weights matrix, used
 for the linear transformation of the inputs..}
@@ -184,6 +175,7 @@ the initial state of the RNN layer.
 }
 
 \seealso{
-Other recurrent layers: \code{\link{layer_gru}},
+Other recurrent layers: \code{\link{layer_cudnn_gru}},
+  \code{\link{layer_cudnn_lstm}}, \code{\link{layer_gru}},
   \code{\link{layer_lstm}}
 }

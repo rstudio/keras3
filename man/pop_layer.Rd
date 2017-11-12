@@ -14,11 +14,12 @@ Remove the last layer in a model
 }
 \seealso{
 Other model functions: \code{\link{compile}},
-  \code{\link{evaluate_generator}}, \code{\link{evaluate}},
+  \code{\link{evaluate.keras.engine.training.Model}},
+  \code{\link{evaluate_generator}},
   \code{\link{fit_generator}}, \code{\link{fit}},
   \code{\link{get_config}}, \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
-  \code{\link{keras_model}},
+  \code{\link{keras_model}}, \code{\link{multi_gpu_model}},
   \code{\link{predict.keras.engine.training.Model}},
   \code{\link{predict_generator}},
   \code{\link{predict_on_batch}},

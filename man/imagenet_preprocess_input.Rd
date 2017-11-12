@@ -4,10 +4,21 @@
 \alias{imagenet_preprocess_input}
 \title{Preprocesses a tensor encoding a batch of images.}
 \usage{
-imagenet_preprocess_input(x)
+imagenet_preprocess_input(x, data_format = NULL, mode = "caffe")
 }
 \arguments{
 \item{x}{input tensor, 4D}
+
+\item{data_format}{Data format of the image tensor}
+
+\item{mode}{One of "caffe", "tf"
+\itemize{
+\item caffe: will convert the images from RGB to BGR,
+then will zero-center each color channel with
+respect to the ImageNet dataset,
+without scaling.
+\item tf: will scale pixels between -1 and 1, sample-wise.
+}}
 }
 \value{
 Preprocessed tensor

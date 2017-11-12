@@ -4,14 +4,23 @@
 \alias{image_load}
 \title{Loads an image into PIL format.}
 \usage{
-image_load(path, grayscale = FALSE, target_size = NULL)
+image_load(path, grayscale = FALSE, target_size = NULL,
+  interpolation = "nearest")
 }
 \arguments{
 \item{path}{Path to image file}
 
 \item{grayscale}{Boolean, whether to load the image as grayscale.}
 
-\item{target_size}{Either \code{NULL} (default to original size) or integer vector \code{(img_height, img_width)}.}
+\item{target_size}{Either \code{NULL} (default to original size) or integer vector
+\code{(img_height, img_width)}.}
+
+\item{interpolation}{Interpolation method used to resample the image if the
+target size is different from that of the loaded image. Supported methods
+are "nearest", "bilinear", and "bicubic". If PIL version 1.1.3 or newer is
+installed, "lanczos" is also supported. If PIL version 3.4.0 or newer is
+installed, "box" and "hamming" are also supported. By default, "nearest"
+is used.}
 }
 \value{
 A PIL Image instance.
