@@ -503,6 +503,13 @@ compose_layer.python.builtin.object <- function(object, layer) {
     stop_with_invalid_layer()
 }
 
+compose_layer.list <- function(object, layer) {
+  if(is.function(layer))
+    layer(object)
+  else 
+    stop_with_invalid_layer()
+}
+
 stop_with_invalid_layer <- function() {
   stop("Invalid input to layer function (must be a model or a tensor)",
        call. = FALSE)
