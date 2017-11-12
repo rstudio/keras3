@@ -468,7 +468,7 @@ image_to_array <- function(img, data_format = c("channels_last", "channels_first
 
 #' @rdname image_to_array
 #' @export
-image_array_resize <- function(img, width, height, 
+image_array_resize <- function(img, height, width,
                                data_format = c("channels_last", "channels_first")) {
   
   # imports
