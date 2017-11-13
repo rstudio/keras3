@@ -54,6 +54,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Added `image_array_resize()` and `image_array_save()` for 3D image arrays.
 
+- Allow custom layers and lambda layers to accept list parameters.
+
 
 ## keras 2.0.8 (CRAN)
 
