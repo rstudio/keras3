@@ -56,6 +56,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Allow custom layers and lambda layers to accept list parameters.
 
+- Expose `add_loss()` function for custom layers
+
 
 ## keras 2.0.8 (CRAN)
 

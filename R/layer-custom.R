@@ -34,6 +34,14 @@ KerasLayer <- R6Class("KerasLayer",
     compute_output_shape = function(input_shape) {
       input_shape
     },
+    
+    # Add losses to the layer
+    add_loss = function(losses, inputs = NULL) {
+      args <- list()
+      args$losses <- losses
+      args$inputs <- inputs
+      do.call(private$wrapper$add_loss, args)
+    },
    
     # Adds a weight variable to the layer.
     add_weight = function(name, shape, dtype = NULL, initializer = NULL,
