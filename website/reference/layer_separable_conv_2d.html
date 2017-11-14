@@ -148,8 +148,9 @@ kernels, or as an extreme version of an Inception block.</p>
   <span class='kw'>depthwise_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pointwise_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>bias_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>activity_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>depthwise_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pointwise_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bias_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>bias_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -249,8 +250,26 @@ kernel matrix.</p></td>
       <td><p>Constraint function applied to the bias vector.</p></td>
     </tr>
     <tr>
+      <th>input_shape</th>
+      <td><p>Dimensionality of the input (integer) not including the
+samples axis. This argument is required when using this layer as the first
+layer in a model.</p></td>
+    </tr>
+    <tr>
+      <th>batch_input_shape</th>
+      <td><p>Shapes, including the batch size. For instance,
+<code>batch_input_shape=c(10, 32)</code> indicates that the expected input will be
+batches of 10 32-dimensional vectors. <code>batch_input_shape=list(NULL, 32)</code>
+indicates batches of an arbitrary number of 32-dimensional vectors.</p></td>
+    </tr>
+    <tr>
       <th>batch_size</th>
       <td><p>Fixed batch size for layer</p></td>
+    </tr>
+    <tr>
+      <th>dtype</th>
+      <td><p>The data type expected by the input, as a string (<code>float32</code>,
+<code>float64</code>, <code>int32</code>...)</p></td>
     </tr>
     <tr>
       <th>name</th>

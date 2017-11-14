@@ -148,6 +148,7 @@
 <li><p>Automatically cast <code>input_shape</code> argument to applications to integer</p></li>
 <li><p>Allow Keras models to be composable within model pipelines</p></li>
 <li><p>Added <code><a href="../reference/freeze_weights.html">freeze_weights()</a></code> and <code><a href="../reference/freeze_weights.html">unfreeze_weights()</a></code> functions.</p></li>
+<li><p>Implement <code>export_savedmodel()</code> generic from TensorFlow package</p></li>
 <li><p>Convert R arrays to row-major before image preprocessing</p></li>
 <li><p>Use <code>tensorflow.keras</code> for tensorflow implementation (TF v1.4)</p></li>
 <li><p>Added <code><a href="../reference/application_inception_resnet_v2.html">application_inception_resnet_v2()</a></code> pre-trained model</p></li>
@@ -158,8 +159,12 @@
 <li><p>Add <code><a href="../reference/save_text_tokenizer.html">save_text_tokenizer()</a></code> and <code><a href="../reference/save_text_tokenizer.html">load_text_tokenizer()</a></code> functions.</p></li>
 <li><p>Fix for progress bar output in Keras &gt;= 2.0.9</p></li>
 <li><p>Remove deprecated <code>implementation</code> argument from recurrent layers</p></li>
-<li><p>Support all standard arguments for <code><a href="../reference/layer_flatten.html">layer_flatten()</a></code></p></li>
 <li><p>Support for passing generators for validation data in <code><a href="../reference/fit_generator.html">fit_generator()</a></code></p></li>
+<li><p>Accept single integer arguments for kernel sizes</p></li>
+<li><p>Add standard layer arguments to <code><a href="../reference/layer_flatten.html">layer_flatten()</a></code> and <code><a href="../reference/layer_separable_conv_2d.html">layer_separable_conv_2d()</a></code></p></li>
+<li><p>Added <code><a href="../reference/image_to_array.html">image_array_resize()</a></code> and <code><a href="../reference/image_to_array.html">image_array_save()</a></code> for 3D image arrays.</p></li>
+<li><p>Allow custom layers and lambda layers to accept list parameters.</p></li>
+<li><p>Expose <code>add_loss()</code> function for custom layers</p></li>
 </ul>
 </div>
     <div id="keras-2-0-8-cran" class="section level2">
