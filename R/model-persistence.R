@@ -244,28 +244,37 @@ model_to_tensors_info <- function(layers, name) {
 #' @return The path to the exported directory, as a string.
 #'
 #' @export
-# export_savedmodel.keras.engine.training.Model <- function(object, export_dir_base) {
-#   if (!is_backend("tensorflow"))
-#     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
-#   
-#   sess <- backend()$get_session()
-#   
-#   input_info <- model_to_tensors_info(object$input_layers, "input")
-#   output_info <- model_to_tensors_info(object$output_layers, "output")
-#   
-#   builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir_base)
-#   builder$add_meta_graph_and_variables(
-#     sess,
-#     list(
-#       tensorflow::tf$python$saved_model$tag_constants$SERVING
-#     ),
-#     signature_def_map = list(
-#       serving_default = tensorflow::tf$saved_model$signature_def_utils$build_signature_def(
-#         inputs = input_info,
-#         outputs = output_info
-#       )
-#     )
-#   )
-#   builder$save()
-# }
+export_savedmodel.keras.engine.training.Model <- function(object, export_dir_base) {
+  if (!is_backend("tensorflow"))
+    stop("'export_savedmodel' is only supported in the TensorFlow backend.")
+  
+  sess <- backend()$get_session()
+  
+  if (tensorflow::tf_version() < '1.4') {
+    input_tensor <- object$input_layers
+    output_tensor <- object$output_layers
+  }
+  else {
+    input_tensor <- object$layers
+    output_tensor <- object$layers
+  }
+
+  input_info <- model_to_tensors_info(input_tensor, "input")
+  output_info <- model_to_tensors_info(output_tensor, "output")
+  
+  builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir_base)
+  builder$add_meta_graph_and_variables(
+    sess,
+    list(
+      tensorflow::tf$python$saved_model$tag_constants$SERVING
+    ),
+    signature_def_map = list(
+      serving_default = tensorflow::tf$saved_model$signature_def_utils$build_signature_def(
+        inputs = input_info,
+        outputs = output_info
+      )
+    )
+  )
+  builder$save()
+}
 
