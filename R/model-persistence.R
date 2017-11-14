@@ -250,8 +250,17 @@ export_savedmodel.keras.engine.training.Model <- function(object, export_dir_bas
   
   sess <- backend()$get_session()
   
-  input_info <- model_to_tensors_info(object$input_layers, "input")
-  output_info <- model_to_tensors_info(object$output_layers, "output")
+  if (tensorflow::tf_version() < '1.4') {
+    input_tensor <- object$input_layers
+    output_tensor <- object$output_layers
+  }
+  else {
+    input_tensor <- object$layers
+    output_tensor <- object$layers
+  }
+
+  input_info <- model_to_tensors_info(input_tensor, "input")
+  output_info <- model_to_tensors_info(output_tensor, "output")
   
   builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir_base)
   builder$add_meta_graph_and_variables(
