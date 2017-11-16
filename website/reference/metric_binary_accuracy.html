@@ -198,7 +198,7 @@ K &lt;- backend()
 metric_mean_pred &lt;- function(y_true, y_pred) {
   K$mean(y_pred) 
 }
-    model <!-- %&gt;% compile(  -->
+    compile(model, 
   optimizer = optimizer_rmsprop(),
   loss = loss_binary_crossentropy,
   metrics = c('accuracy', 
@@ -218,7 +218,7 @@ you should create a custom metric that wraps the call with the parameter.
 For example:</p><pre>metric_top_3_categorical_accuracy &lt;- function(y_true, y_pred) {
   metric_top_k_categorical_accuracy(y_true, y_pred, k = 3) 
 }
-    model <!-- %&gt;% compile( -->
+    compile(model,
   loss = 'categorical_crossentropy',
   optimizer = optimizer_rmsprop(),
   metrics = c(top_3_categorical_accuracy = metric_top_3_categorical_accuracy)

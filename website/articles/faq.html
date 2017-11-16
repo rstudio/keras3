@@ -305,7 +305,7 @@ model <span class="op">%&gt;%</span><span class="st"> </span>
 
 layer_name &lt;-<span class="st"> 'my_layer'</span>
 intermediate_layer_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> model<span class="op">$</span>input,
-                                        <span class="dt">outputs =</span> <span class="kw"><a href="../reference/get_layer.html">get_layer</a></span>(layer_name)<span class="op">$</span>output)
+                                        <span class="dt">outputs =</span> <span class="kw"><a href="../reference/get_layer.html">get_layer</a></span>(model, layer_name)<span class="op">$</span>output)
 intermediate_output &lt;-<span class="st"> </span><span class="kw">predict</span>(intermediate_layer_model, data)</code></pre></div>
 </div>
 <div id="how-can-i-use-keras-with-datasets-that-dont-fit-in-memory" class="section level2">

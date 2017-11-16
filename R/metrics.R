@@ -21,7 +21,7 @@
 #'   K$mean(y_pred) 
 #' }
 #' 
-#' model %>% compile( 
+#'compile(model, 
 #'   optimizer = optimizer_rmsprop(),
 #'   loss = loss_binary_crossentropy,
 #'   metrics = c('accuracy', 
@@ -46,7 +46,7 @@
 #'   metric_top_k_categorical_accuracy(y_true, y_pred, k = 3) 
 #' }
 #'
-#' model %>% compile(
+#' compile(model,
 #'   loss = 'categorical_crossentropy',
 #'   optimizer = optimizer_rmsprop(),
 #'   metrics = c(top_3_categorical_accuracy = metric_top_3_categorical_accuracy)
