@@ -251,7 +251,7 @@ model <- ...  # create the original model
 
 layer_name <- 'my_layer'
 intermediate_layer_model <- keras_model(inputs = model$input,
-                                        outputs = get_layer(layer_name)$output)
+                                        outputs = get_layer(model, layer_name)$output)
 intermediate_output <- predict(intermediate_layer_model, data)
 ```
 
