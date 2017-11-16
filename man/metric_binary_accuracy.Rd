@@ -69,19 +69,7 @@ Metric functions are to be supplied in the \code{metrics} parameter of the
 
 You can provide an arbitrary R function as a custom metric. Note that
 the \code{y_true} and \code{y_pred} parameters are tensors, so computations on
-them should use backend tensor functions. For example:\preformatted{# create metric using backend tensor functions
-K <- backend()
-metric_mean_pred <- function(y_true, y_pred) {
-  K$mean(y_pred) 
-}
-
-compile(model, 
-  optimizer = optimizer_rmsprop(),
-  loss = loss_binary_crossentropy,
-  metrics = c('accuracy', 
-              'mean_pred' = metric_mean_pred)
-)
-}
+them should use backend tensor functions. See below for an example.
 
 Note that a name ('mean_pred') is provided for the custom metric
 function. This name is used within training progress output.
@@ -95,15 +83,34 @@ found at \url{https://keras.rstudio.com/articles/backend.html#backend-functions}
 
 To use metrics with parameters (e.g. \code{metric_top_k_categorical_accurary()})
 you should create a custom metric that wraps the call with the parameter.
-For example:\preformatted{metric_top_3_categorical_accuracy <- function(y_true, y_pred) {
+See below for an example.
+}
+
+\examples{
+\dontrun{
+
+# create metric using backend tensor functions
+K <- backend()
+metric_mean_pred <- function(y_true, y_pred) {
+  K$mean(y_pred) 
+}
+
+model \%>\% compile(
+  optimizer = optimizer_rmsprop(),
+  loss = loss_binary_crossentropy,
+  metrics = c('accuracy', 
+              'mean_pred' = metric_mean_pred)
+)
+
+# create custom metric to wrap metric with parameter
+metric_top_3_categorical_accuracy <- function(y_true, y_pred) {
   metric_top_k_categorical_accuracy(y_true, y_pred, k = 3) 
 }
 
-compile(model,
+model \%>\% compile(
   loss = 'categorical_crossentropy',
   optimizer = optimizer_rmsprop(),
   metrics = c(top_3_categorical_accuracy = metric_top_3_categorical_accuracy)
-)  
+)
 }
 }
-
