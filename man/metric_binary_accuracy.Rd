@@ -90,3 +90,20 @@ Documentation on the available backend tensor functions can be
 found at \url{https://keras.rstudio.com/articles/backend.html#backend-functions}.
 }
 
+\section{Metrics with Parameters}{
+
+
+To use metrics with parameters (e.g. \code{metric_top_k_categorical_accurary()})
+you should create a custom metric that wraps the call with the parameter.
+For example:\preformatted{metric_top_3_categorical_accuracy <- function(y_true, y_pred) {
+  metric_top_k_categorical_accuracy(y_true, y_pred, k = 3) 
+}
+
+model %>% compile(
+  loss = 'categorical_crossentropy',
+  optimizer = optimizer_rmsprop(),
+  metrics = c(top_3_categorical_accuracy = metric_top_3_categorical_accuracy)
+)  
+}
+}
+

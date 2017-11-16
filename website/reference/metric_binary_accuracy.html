@@ -210,6 +210,21 @@ function. This name is used within training progress output.</p>
 <p>Documentation on the available backend tensor functions can be
 found at <a href='https://keras.rstudio.com/articles/backend.html#backend-functions'>https://keras.rstudio.com/articles/backend.html#backend-functions</a>.</p>
     
+    <h2 class="hasAnchor" id="metrics-with-parameters"><a class="anchor" href="#metrics-with-parameters"></a>Metrics with Parameters</h2>
+
+    
+    <p>To use metrics with parameters (e.g. <code>metric_top_k_categorical_accurary()</code>)
+you should create a custom metric that wraps the call with the parameter.
+For example:</p><pre>metric_top_3_categorical_accuracy &lt;- function(y_true, y_pred) {
+  metric_top_k_categorical_accuracy(y_true, y_pred, k = 3) 
+}
+    model <!-- %&gt;% compile( -->
+  loss = 'categorical_crossentropy',
+  optimizer = optimizer_rmsprop(),
+  metrics = c(top_3_categorical_accuracy = metric_top_3_categorical_accuracy)
+)  
+</pre>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -220,6 +235,8 @@ found at <a href='https://keras.rstudio.com/articles/backend.html#backend-functi
       <li><a href="#note">Note</a></li>
 
       <li><a href="#custom-metrics">Custom Metrics</a></li>
+
+      <li><a href="#metrics-with-parameters">Metrics with Parameters</a></li>
           </ul>
 
   </div>
