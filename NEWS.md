@@ -1,7 +1,5 @@
 
-## keras 2.0.9 (development)
-
-Install the development version with: `install_github("rstudio/keras")`
+## keras 2.0.9
 
 - Added `multi_gpu_model()` function.
 
@@ -61,7 +59,7 @@ Install the development version with: `install_github("rstudio/keras")`
 - Expose `add_loss()` function for custom layers
 
 
-## keras 2.0.8 (CRAN)
+## keras 2.0.8
 
 - Add `use_session_with_seed()` function that establishes a random seed for the Keras session.
   Note that this should not be used when training time is paramount, as it disables GPU
