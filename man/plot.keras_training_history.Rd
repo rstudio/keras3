@@ -5,7 +5,9 @@
 \title{Plot training history}
 \usage{
 \method{plot}{keras_training_history}(x, y, metrics = NULL,
-  method = c("auto", "ggplot2", "base"), smooth = TRUE, ...)
+  method = c("auto", "ggplot2", "base"),
+  smooth = getOption("keras.plot.history.smooth", TRUE),
+  theme_bw = getOption("keras.plot.history.theme_bw", FALSE), ...)
 }
 \arguments{
 \item{x}{Training history object returned from \code{fit()}.}
@@ -21,6 +23,9 @@ Defaults to plotting all captured metrics.}
 \item{smooth}{Whether a loess smooth should be added to the plot, only
 available for the \code{ggplot2} method. If the number of epochs is smaller
 than ten, it is forced to false.}
+
+\item{theme_bw}{Use \code{ggplot2::theme_bw()} to plot the history in
+black and white.}
 
 \item{...}{Additional parameters to pass to the \code{\link[=plot]{plot()}} method.}
 }

@@ -48,11 +48,15 @@ print.keras_training_history <- function(x, ...) {
 #' @param smooth Whether a loess smooth should be added to the plot, only 
 #'   available for the `ggplot2` method. If the number of epochs is smaller
 #'   than ten, it is forced to false.
+#' @param theme_bw Use `ggplot2::theme_bw()` to plot the history in 
+#'   black and white.
 #' @param ... Additional parameters to pass to the [plot()] method.
 #'
 #' @export
 plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto", "ggplot2", "base"), 
-                                        smooth = TRUE, ...) {
+                                        smooth = getOption("keras.plot.history.smooth", TRUE),
+                                        theme_bw = getOption("keras.plot.history.theme_bw", FALSE),
+                                        ...) {
   # check which method we should use
   method <- match.arg(method)
   if (method == "auto") {
@@ -76,21 +80,39 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
     # helper function for correct breaks (integers only)
     int_breaks <- function(x) pretty(x)[pretty(x) %% 1 == 0]
     
-    if (x$params$do_validation)
-      p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data))
-    else 
+    if (x$params$do_validation) {
+      if (theme_bw)
+        p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data, linetype = ~data, shape = ~data))
+      else
+        p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data))
+    } else { 
       p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value))
+    }
+    
+    smooth_args <- list(se = FALSE, method = 'loess', na.rm = TRUE)
+    
+    if (theme_bw) {
+      smooth_args$size <- 0.5
+      smooth_args$color <- "gray47"
+      p <- p + 
+        ggplot2::theme_bw() + 
+        ggplot2::geom_point(col = 1, na.rm = TRUE, size = 2) + 
+        ggplot2::scale_shape(solid = FALSE)
+    } else {
+      p <- p + 
+        ggplot2::geom_point(shape = 21, col = 1, na.rm = TRUE)
+    }
     
     if (smooth && x$params$epochs >= 10)
-      p <- p + ggplot2::geom_smooth(se = FALSE, method = 'loess', na.rm = TRUE)
+      p <- p + do.call(ggplot2::geom_smooth, smooth_args)
     
     p <- p +
-      ggplot2::geom_point(shape = 21, col = 1, na.rm = TRUE) +
       ggplot2::facet_grid(metric~., switch = 'y', scales = 'free_y') +
-      ggplot2::scale_x_continuous(breaks = int_breaks) +
+      ggplot2::scale_x_continuous(breaks = int_breaks) + 
       ggplot2::theme(axis.title.y = ggplot2::element_blank(), strip.placement = 'outside',
                      strip.text = ggplot2::element_text(colour = 'black', size = 11),
-                     strip.background = ggplot2::element_rect(fill = NA))
+                     strip.background = ggplot2::element_rect(fill = NA, color = NA))
+    
     return(p)
   }
   
