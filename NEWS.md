@@ -3,6 +3,7 @@
 
 Install the development version with: `install_github("rstudio/keras")`
 
+- Added `theme_bw` option to plot method for training history 
 
 
 ## keras 2.0.9 (CRAN)
