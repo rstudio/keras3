@@ -1,5 +1,11 @@
 
-## keras 2.0.9
+## Keras 2.0.10 (development)
+
+Install the development version with: `install_github("rstudio/keras")`
+
+
+
+## keras 2.0.9 (CRAN)
 
 - Added `multi_gpu_model()` function.
 
