@@ -35,7 +35,11 @@ Suggests:
     testthat, 
     knitr,
     rmarkdown
+Remotes:
+    rstudio/reticulate,
+    rstudio/tensorflow
 SystemRequirements: Keras >= 2.0 (https://keras.io)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
+
