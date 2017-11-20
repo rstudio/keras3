@@ -5,6 +5,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Added `theme_bw` option to plot method for training history 
 
+- Support TF Dataset objects as generators for `fit_generator()`, etc.
+
 
 ## keras 2.0.9 (CRAN)
 
