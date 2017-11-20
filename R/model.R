@@ -724,11 +724,17 @@ predict_generator <- function(object, generator, steps, max_queue_size = 10, ver
 
 call_generator_function <- function(func, args) {
   
-  # convert R function to Python iterator if necessary
-  args$generator <- as_generator(args$generator)
+  # check if any generators should run on the main thread
+  use_main_thread_generator <- 
+    is_main_thread_generator(args$generator) ||
+    is_main_thread_generator(args$validation_data)
   
-  # force use of single background thread
-  args$workers = 1L
+  # handle generators
+  args$generator <- as_generator(args$generator)
+  if (!is.null(args$validation_data))
+    args$validation_data <- as_generator(args$validation_data)
+  
+  # force use of thread based concurrency
   if (keras_version() >= "2.0.6")
     args$use_multiprocessing <- FALSE
   else {
@@ -737,9 +743,11 @@ call_generator_function <- function(func, args) {
     args$pickle_safe <- FALSE
   }
   
-  # convert validation_data to generator
-  if (is.function(args$validation_data))
-    args$validation_data <- as_generator(args$validation_data)
+  # set workers to 0 for versions of keras that support this
+  if (use_main_thread_generator && keras_supports_main_thread_generators())
+    args$workers = 0L
+  else
+    args$workers = 1L
   
   # call the generator
   do.call(func, args)
@@ -751,15 +759,42 @@ as_generator <- function(x) {
 }
 
 as_generator.default <- function(x) {
-  stop("Unable to convert object to generator")
+  x
 }
 
-as_generator.python.builtin.object <- function(x) {
-  x
+as_generator.tensorflow.python.data.ops.dataset_ops.Dataset <- function(x) {
+  K <- backend()
+  python_path <- system.file("python", package = "tfdatasets")
+  tools <- reticulate::import_from_path("kerastools", path = python_path)
+  tools$generator$dataset_generator(x , K$get_session())
 }
 
 as_generator.function <- function(x) {
   reticulate::py_iterator(function() keras_array(x()))
+}
+
+is_main_thread_generator <- function(x) {
+  UseMethod("is_main_thread_generator")
+}
+
+is_main_thread_generator.default <- function(x) {
+  FALSE
+}
+
+is_main_thread_generator.tensorflow.python.data.ops.dataset_ops.Dataset <- function(x) {
+  TRUE
+}
+
+is_main_thread_generator.function <- function(x) {
+  TRUE
+}
+
+
+# TODO: replace this with a version-based check once keras > 2.1.2 ships
+keras_supports_main_thread_generators <- function() {
+  flow_from_directory <- keras$preprocessing$image$ImageDataGenerator()$flow_from_directory
+  help <- reticulate::import("rpytools.help") 
+  "interpolation" %in% help$get_arguments(flow_from_directory)
 }
 
   
