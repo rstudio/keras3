@@ -75,5 +75,28 @@ test_succeeds("images arrays can be resized", {
   }
 })
 
+test_succeeds("center_and_scale preprocesses data", {
+
+  dataset <- dataset_boston_housing()
+  c(c(train_data, train_targets), c(test_data, test_targets)) %<-% dataset
+  
+  # normalize data manually 
+  mean <- apply(train_data, 2, mean)
+  train_data <- scale(train_data, center = mean, scale = FALSE)
+  std <- apply(train_data, 2, sd)
+  train_data <- scale(train_data, center = FALSE, scale = std)
+  test_data <- scale(test_data, center = mean, scale = std)
+  
+  # normallize data with center_and_scale
+  c(c(train_data_cs, train_targets), c(test_data_cs, test_targets)) %<-% dataset
+  values <- fit_center_and_scale(train_data_cs)
+  train_data_cs <- center_and_scale(train_data_cs, values)
+  test_data_cs <- center_and_scale(test_data_cs, values)
+  
+  # ensure they are identical
+  expect_identical(train_data, train_data_cs)
+  expect_identical(test_data, test_data_cs)
+})
+
 
 
