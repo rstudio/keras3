@@ -738,6 +738,59 @@ flow_images_from_directory <- function(
 }
 
 
+#' Normalize columns of a matrix by centering and scaling their values
+#'
+#' For each column of a matrix, subtract the mean of the column and divide by
+#' the standard deviation, so that the column is centered around 0 and has a
+#' unit standard deviation.
+#'
+#' @details The R [scale()] function is similar in purpose to these functions,
+#'   however it operates on a single matrix. In contrast, these functions
+#'   compute ("fit") the scales on training data and then subsequently apply
+#'   those scales on both training and test data. This ensures that no aspect
+#'   of the test data influences data processed in the training phase.
+#'
+#' @param x A matrix
+#' @param values Scaling values to apply (`mean` and `std`).
+#'
+#' @return For `fit_center_and_scale()`, a list of values (`mean`) and `std`)
+#'   to be passed to `apply_center_and_scale()`. For
+#'   `apply_center_and_scale()`, the matrix `x` scaled using the supplied
+#'   values via the R [scale()] function.
+#'
+#' @examples \dontrun{
+#'
+#' # load data
+#' library(keras)
+#' dataset <- dataset_boston_housing()
+#' c(c(train_data, train_targets), c(test_data, test_targets)) %<-% dataset
+#'
+#' # normalize data
+#' values <- fit_center_and_scale(train_data)
+#' train_data <- center_and_scale(train_data, values)
+#' test_data <- center_and_scale(train_data, values)
+#' }
+#'
+#' @name center_and_scale
+#' @export
+fit_center_and_scale <- function(x) {
+  
+  # find mean and std
+  mean <- apply(x, 2, mean)
+  x <- scale(x, center = mean, scale = FALSE)
+  std <- apply(x, 2, sd)
+  
+  # return list of values
+  list(mean = mean, std = std)
+}
+
+
+#' @rdname center_and_scale
+#' @export
+center_and_scale <- function(x, values) {
+  scale(x, center = values$mean, scale = values$std)
+}
+
 
 
 
