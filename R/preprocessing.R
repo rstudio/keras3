@@ -748,7 +748,7 @@ flow_images_from_directory <- function(
 #'   however it operates on a single matrix. In contrast, these functions
 #'   compute ("fit") the scales on training data and then subsequently apply
 #'   those scales on both training and test data. This ensures that no aspect
-#'   of the test data influences data processed in the training phase.
+#'   of the test data influences the training phase.
 #'
 #' @param x A matrix
 #' @param values Scaling values to apply (`mean` and `std`).

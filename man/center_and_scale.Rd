@@ -31,7 +31,7 @@ The R \code{\link[=scale]{scale()}} function is similar in purpose to these func
 however it operates on a single matrix. In contrast, these functions
 compute ("fit") the scales on training data and then subsequently apply
 those scales on both training and test data. This ensures that no aspect
-of the test data influences data processed in the training phase.
+of the test data influences the training phase.
 }
 \examples{
 \dontrun{
