@@ -40,9 +40,15 @@ this range.}
 
 \item{channel_shift_range}{shift range for each channels.}
 
-\item{fill_mode}{points outside the boundaries are filled according to the
-given mode ('constant', 'nearest', 'reflect' or 'wrap'). Default is
-'nearest'.}
+\item{fill_mode}{One of "constant", "nearest", "reflect" or "wrap".
+Points outside the boundaries of the input are filled according to
+the given mode:
+\itemize{
+\item "constant": \code{kkkkkkkk|abcd|kkkkkkkk} (\code{cval=k})
+\item "nearest":  \code{aaaaaaaa|abcd|dddddddd}
+\item "reflect":  \code{abcddcba|abcd|dcbaabcd}
+\item "wrap":     \code{abcdabcd|abcd|abcdabcd}
+}}
 
 \item{cval}{value used for points outside the boundaries when fill_mode is
 'constant'. Default is 0.}

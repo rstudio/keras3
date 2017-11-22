@@ -83,6 +83,17 @@ function \code{\link[=to_categorical]{to_categorical()}}:
 \code{categorical_labels <- to_categorical(int_labels, num_classes = NULL)}
 }
 
+\section{loss_logcosh}{
+
+
+\code{log(cosh(x))} is approximately equal to \code{(x ** 2) / 2} for small \code{x} and
+to \code{abs(x) - log(2)} for large \code{x}. This means that 'logcosh' works mostly
+like the mean squared error, but will not be so strongly affected by the
+occasional wildly incorrect prediction. However, it may return NaNs if the
+intermediate value \code{cosh(y_pred - y_true)} is too large to be represented
+in the chosen precision.
+}
+
 \seealso{
 \code{\link[=compile]{compile()}}
 }

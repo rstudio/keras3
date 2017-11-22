@@ -4,9 +4,10 @@
 \alias{fit}
 \title{Train a Keras model}
 \usage{
-fit(object, x, y, batch_size = NULL, epochs = 10, verbose = 1,
-  callbacks = NULL, view_metrics = getOption("keras.view_metrics", default =
-  "auto"), validation_split = 0, validation_data = NULL, shuffle = TRUE,
+fit(object, x = NULL, y = NULL, batch_size = NULL, epochs = 10,
+  verbose = 1, callbacks = NULL,
+  view_metrics = getOption("keras.view_metrics", default = "auto"),
+  validation_split = 0, validation_data = NULL, shuffle = TRUE,
   class_weight = NULL, sample_weight = NULL, initial_epoch = 0,
   steps_per_epoch = NULL, validation_steps = NULL, ...)
 }
@@ -15,22 +16,24 @@ fit(object, x, y, batch_size = NULL, epochs = 10, verbose = 1,
 
 \item{x}{Vector, matrix, or array of training data (or list if the model has
 multiple inputs). If all inputs in the model are named, you can also pass a
-list mapping input names to data.}
+list mapping input names to data. \code{x} can be \code{NULL} (default) if feeding
+from framework-native tensors (e.g. TensorFlow data tensors).}
 
-\item{y}{Vector, matrix, or array of target data (or list if the model has
+\item{y}{Vector, matrix, or array of target (label) data (or list if the model has
 multiple outputs). If all outputs in the model are named, you can also pass
-a list mapping output names to data.}
+a list mapping output names to data. \code{y} can be \code{NULL} (default) if feeding
+from framework-native tensors (e.g. TensorFlow data tensors).}
 
 \item{batch_size}{Integer or \code{NULL}. Number of samples per gradient update.
-If unspecified, it will default to 32.}
+If unspecified, \code{batch_size} will default to 32.}
 
 \item{epochs}{Number of epochs to train the model.
-Note that in conjunction with initial_epoch, the parameter
-epochs is to be understood as "final epoch". The model is
-not trained for a number of steps given by epochs, but
-until the epoch epochs is reached.}
+Note that in conjunction with \code{initial_epoch},
+\code{epochs} is to be understood as "final epoch". The model is
+not trained for a number of iterations given by \code{epochs}, but
+merely until the epoch of index \code{epochs} is reached.}
 
-\item{verbose}{Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
+\item{verbose}{Verbosity mode (0 = silent, 1 = progress bar, 2 = one line per
 epoch).}
 
 \item{callbacks}{List of callbacks to be called during training.}
@@ -41,43 +44,52 @@ default (\code{"auto"}) will display the plot when running within RStudio,
 \code{verbose > 0}. Use the global \code{keras.view_metrics} option to establish a
 different default.}
 
-\item{validation_split}{Float between 0 and 1: fraction of the training data
+\item{validation_split}{Float between 0 and 1. Fraction of the training data
 to be used as validation data. The model will set apart this fraction of
 the training data, will not train on it, and will evaluate the loss and any
-model metrics on this data at the end of each epoch.}
+model metrics on this data at the end of each epoch. The validation data
+is selected from the last samples in the \code{x} and \code{y} data provided,
+before shuffling.}
 
 \item{validation_data}{Data on which to evaluate the loss and any model
 metrics at the end of each epoch. The model will not be trained on this
 data. This could be a list (x_val, y_val) or a list (x_val, y_val,
-val_sample_weights).}
+val_sample_weights). \code{validation_data} will override \code{validation_split}.}
 
-\item{shuffle}{\code{TRUE} to shuffle the training data before each epoch.}
+\item{shuffle}{shuffle: Logical (whether to shuffle the training data
+before each epoch) or string (for "batch"). "batch" is a special option
+for dealing with the limitations of HDF5 data; it shuffles in batch-sized
+chunks. Has no effect when \code{steps_per_epoch} is not \code{NULL}.}
 
 \item{class_weight}{Optional named list mapping indices (integers) to a
-weight (float) to apply to the model's loss for the samples from this class
-during training. This can be useful to tell the model to "pay more
-attention" to samples from an under-represented class.}
+weight (float) value, used for weighting the loss function
+(during training only). This can be useful to tell the model to
+"pay more attention" to samples from an under-represented class.}
 
 \item{sample_weight}{Optional array of the same length as x, containing
 weights to apply to the model's loss for each sample. In the case of
 temporal data, you can pass a 2D array with shape (samples,
 sequence_length), to apply a different weight to every timestep of every
 sample. In this case you should make sure to specify
-sample_weight_mode="temporal" in \code{\link[=compile]{compile()}}.}
+\code{sample_weight_mode="temporal"} in \code{\link[=compile]{compile()}}.}
 
-\item{initial_epoch}{epoch at which to start training (useful for resuming a
-previous training run).}
+\item{initial_epoch}{Integer, Epoch at which to start training (useful for
+resuming a previous training run).}
 
 \item{steps_per_epoch}{Total number of steps (batches of samples) before
 declaring one epoch finished and starting the next epoch. When training
-with Input Tensors such as TensorFlow data tensors, the default \code{NULL} is
-equal to the number of unique samples in your dataset divided by the batch
+with input tensors such as TensorFlow data tensors, the default \code{NULL} is
+equal to the number of samples in your dataset divided by the batch
 size, or 1 if that cannot be determined.}
 
 \item{validation_steps}{Only relevant if \code{steps_per_epoch} is specified.
 Total number of steps (batches of samples) to validate before stopping.}
 
 \item{...}{Unused}
+}
+\value{
+A \code{history} object that contains all information collected
+during training.
 }
 \description{
 Trains the model for a fixed number of epochs (iterations on a dataset).

@@ -41,6 +41,15 @@ This induces quasi-linear speedup on up to 8 GPUs.
 This function is only available with the TensorFlow backend
 for the time being.
 }
+\section{Model Saving}{
+
+
+To save the multi-gpu model, use \code{\link[=save_model_hdf5]{save_model_hdf5()}} or
+\code{\link[=save_model_weights_hdf5]{save_model_weights_hdf5()}} with the template model (the argument you
+passed to \code{multi_gpu_model}), rather than the model returned
+by \code{multi_gpu_model}.
+}
+
 \examples{
 \dontrun{
 
@@ -52,8 +61,11 @@ height <- 224
 width <- 224
 num_classes <- 1000
 
-# Instantiate the base model
-# (here, we do it on CPU, which is optional).
+# Instantiate the base model (or "template" model).
+# We recommend doing this with under a CPU device scope,
+# so that the model's weights are hosted on CPU memory.
+# Otherwise they may end up hosted on a GPU, which would
+# complicate weight sharing.
 with(tf$device("/cpu:0"), {
   model <- application_xception(
     weights = NULL,
@@ -79,6 +91,9 @@ y <- array(runif(num_samples * num_classes),
 # This `fit` call will be distributed on 8 GPUs.
 # Since the batch size is 256, each GPU will process 32 samples.
 parallel_model \%>\% fit(x, y, epochs = 20, batch_size = 256)
+
+# Save model via the template model (which shares the same weights):
+model \%>\% save_model_hdf5("my_model.h5")
 }
 
 }

@@ -11,7 +11,7 @@ compile(object, optimizer, loss, metrics = NULL, loss_weights = NULL,
 \arguments{
 \item{object}{Model object to compile.}
 
-\item{optimizer}{Name of optimizer or optimizer object.}
+\item{optimizer}{Name of optimizer or optimizer instance.}
 
 \item{loss}{Name of objective function or objective function. If the model
 has multiple outputs, you can use a different loss on each output by
@@ -36,14 +36,13 @@ weights (1D). If the model has multiple outputs, you can use a different
 \item{weighted_metrics}{List of metrics to be evaluated and weighted
 by sample_weight or class_weight during training and testing}
 
-\item{target_tensors}{By default, Keras will create placeholders for the
+\item{target_tensors}{By default, Keras will create a placeholder for the
 model's target, which will be fed with the target data during
 training. If instead you would like to use your own
-target tensors (in turn, Keras will not expect external
+target tensor (in turn, Keras will not expect external
 data for these targets at training time), you
-can specify them via the \code{target_tensors} argument. It can be
-a single tensor (for a single-output model), a list of tensors,
-or a named list mapping output names to target tensors.}
+can specify them via the \code{target_tensors} argument. It should be
+a single tensor (for a single-output sequential model),}
 
 \item{...}{When using the Theano/CNTK backends, these arguments
 are passed into K.function. When using the TensorFlow backend,

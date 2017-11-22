@@ -19,18 +19,22 @@ The output of the generator must be a list of one of these forms:\preformatted{ 
  - (inputs, targets, sample_weights)
 }
 
-All arrays should contain the same number of samples. The generator is expected
-to loop over its data indefinitely. An epoch finishes when \code{steps_per_epoch}
-batches have been seen by the model.}
+This list (a single output of the generator) makes a single batch.
+Therefore, all arrays in this list must have the same length (equal to
+the size of this batch). Different batches may have different sizes.
+For example, the last batch of the epoch is commonly smaller than the
+others, if the size of the dataset is not divisible by the batch size.
+The generator is expected to loop over its data indefinitely. An epoch
+finishes when \code{steps_per_epoch} batches have been seen by the model.}
 
 \item{steps_per_epoch}{Total number of steps (batches of samples) to yield
 from \code{generator} before declaring one epoch finished and starting the next
-epoch. It should typically be equal to the number of unique samples if your
+epoch. It should typically be equal to the number of samples if your
 dataset divided by the batch size.}
 
 \item{epochs}{integer, total number of iterations on the data.}
 
-\item{verbose}{Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
+\item{verbose}{Verbosity mode (0 = silent, 1 = progress bar, 2 = one line per
 epoch).}
 
 \item{callbacks}{list of callbacks to be called during training.}
@@ -52,10 +56,11 @@ different default.}
 Total number of steps (batches of samples) to yield from \code{generator} before
 stopping.}
 
-\item{class_weight}{dictionary mapping class indices to a weight for the
+\item{class_weight}{Named list mapping class indices to a weight for the
 class.}
 
-\item{max_queue_size}{maximum size for the generator queue}
+\item{max_queue_size}{Maximum size for the generator queue. If unspecified,
+\code{max_queue_size} will default to 10.}
 
 \item{initial_epoch}{epoch at which to start training (useful for resuming a
 previous training run)}

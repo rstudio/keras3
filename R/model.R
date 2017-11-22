@@ -101,6 +101,13 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 #' This function is only available with the TensorFlow backend
 #' for the time being.
 #'
+#' @section Model Saving:
+#' 
+#' To save the multi-gpu model, use [save_model_hdf5()] or 
+#' [save_model_weights_hdf5()] with the template model (the argument you 
+#' passed to `multi_gpu_model`), rather than the model returned 
+#' by `multi_gpu_model`.
+#'
 #' @examples \dontrun{
 #' 
 #' library(keras)
@@ -111,8 +118,11 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 #' width <- 224
 #' num_classes <- 1000
 #' 
-#' # Instantiate the base model
-#' # (here, we do it on CPU, which is optional).
+#' # Instantiate the base model (or "template" model).
+#' # We recommend doing this with under a CPU device scope,
+#' # so that the model's weights are hosted on CPU memory.
+#' # Otherwise they may end up hosted on a GPU, which would
+#' # complicate weight sharing.
 #' with(tf$device("/cpu:0"), {
 #'   model <- application_xception(
 #'     weights = NULL,
@@ -138,6 +148,9 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 #' # This `fit` call will be distributed on 8 GPUs.
 #' # Since the batch size is 256, each GPU will process 32 samples.
 #' parallel_model %>% fit(x, y, epochs = 20, batch_size = 256)
+#' 
+#' # Save model via the template model (which shares the same weights):
+#' model %>% save_model_hdf5("my_model.h5")
 #' }
 #'
 #' @family model functions
@@ -180,7 +193,7 @@ clone_model <- function(model, input_tensors = NULL) {
 #' Configure a Keras model for training
 #'
 #' @param object Model object to compile.
-#' @param optimizer Name of optimizer or optimizer object.
+#' @param optimizer Name of optimizer or optimizer instance.
 #' @param loss Name of objective function or objective function. If the model
 #'   has multiple outputs, you can use a different loss on each output by
 #'   passing a dictionary or a list of objectives. The loss value that will be
@@ -197,14 +210,13 @@ clone_model <- function(model, input_tensors = NULL) {
 #'   (2D weights), set this to "temporal". `NULL` defaults to sample-wise
 #'   weights (1D). If the model has multiple outputs, you can use a different
 #'   `sample_weight_mode` on each output by passing a list of modes.
-#' @param target_tensors By default, Keras will create placeholders for the
+#' @param target_tensors By default, Keras will create a placeholder for the
 #'   model's target, which will be fed with the target data during
 #'   training. If instead you would like to use your own
-#'   target tensors (in turn, Keras will not expect external
+#'   target tensor (in turn, Keras will not expect external
 #'   data for these targets at training time), you
-#'   can specify them via the `target_tensors` argument. It can be
-#'   a single tensor (for a single-output model), a list of tensors,
-#'   or a named list mapping output names to target tensors.
+#'   can specify them via the `target_tensors` argument. It should be
+#'   a single tensor (for a single-output sequential model),
 #' @param weighted_metrics List of metrics to be evaluated and weighted
 #'   by sample_weight or class_weight during training and testing
 #' @param ... When using the Theano/CNTK backends, these arguments
@@ -283,18 +295,20 @@ compile <- function(object, optimizer, loss,
 #' @param object Model to train.
 #' @param x Vector, matrix, or array of training data (or list if the model has
 #'   multiple inputs). If all inputs in the model are named, you can also pass a
-#'   list mapping input names to data.
-#' @param y  Vector, matrix, or array of target data (or list if the model has
+#'   list mapping input names to data. `x` can be `NULL` (default) if feeding 
+#'   from framework-native tensors (e.g. TensorFlow data tensors).
+#' @param y  Vector, matrix, or array of target (label) data (or list if the model has
 #'   multiple outputs). If all outputs in the model are named, you can also pass
-#'   a list mapping output names to data.
+#'   a list mapping output names to data. `y` can be `NULL` (default) if feeding 
+#'   from framework-native tensors (e.g. TensorFlow data tensors).
 #' @param batch_size Integer or `NULL`. Number of samples per gradient update.
-#'   If unspecified, it will default to 32.
+#'   If unspecified, `batch_size` will default to 32.
 #' @param epochs Number of epochs to train the model.
-#'   Note that in conjunction with initial_epoch, the parameter
-#'   epochs is to be understood as "final epoch". The model is
-#'   not trained for a number of steps given by epochs, but
-#'   until the epoch epochs is reached.
-#' @param verbose  Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
+#'   Note that in conjunction with `initial_epoch`,
+#'   `epochs` is to be understood as "final epoch". The model is
+#'   not trained for a number of iterations given by `epochs`, but
+#'   merely until the epoch of index `epochs` is reached.
+#' @param verbose  Verbosity mode (0 = silent, 1 = progress bar, 2 = one line per
 #'   epoch).
 #' @param view_metrics View realtime plot of training metrics (by epoch). The
 #'   default (`"auto"`) will display the plot when running within RStudio,
@@ -302,40 +316,48 @@ compile <- function(object, optimizer, loss,
 #'   `verbose > 0`. Use the global `keras.view_metrics` option to establish a
 #'   different default.
 #' @param callbacks List of callbacks to be called during training.
-#' @param validation_split Float between 0 and 1: fraction of the training data
+#' @param validation_split Float between 0 and 1. Fraction of the training data
 #'   to be used as validation data. The model will set apart this fraction of
 #'   the training data, will not train on it, and will evaluate the loss and any
-#'   model metrics on this data at the end of each epoch.
+#'   model metrics on this data at the end of each epoch. The validation data
+#'   is selected from the last samples in the `x` and `y` data provided, 
+#'   before shuffling.
 #' @param validation_data Data on which to evaluate the loss and any model
 #'   metrics at the end of each epoch. The model will not be trained on this
 #'   data. This could be a list (x_val, y_val) or a list (x_val, y_val,
-#'   val_sample_weights).
-#' @param shuffle `TRUE` to shuffle the training data before each epoch.
+#'   val_sample_weights). `validation_data` will override `validation_split`.
+#' @param shuffle shuffle: Logical (whether to shuffle the training data
+#'    before each epoch) or string (for "batch"). "batch" is a special option
+#'    for dealing with the limitations of HDF5 data; it shuffles in batch-sized
+#'    chunks. Has no effect when `steps_per_epoch` is not `NULL`.
 #' @param class_weight Optional named list mapping indices (integers) to a
-#'   weight (float) to apply to the model's loss for the samples from this class
-#'   during training. This can be useful to tell the model to "pay more
-#'   attention" to samples from an under-represented class.
+#'   weight (float) value, used for weighting the loss function
+#'   (during training only). This can be useful to tell the model to
+#'   "pay more attention" to samples from an under-represented class.
 #' @param sample_weight Optional array of the same length as x, containing
 #'   weights to apply to the model's loss for each sample. In the case of
 #'   temporal data, you can pass a 2D array with shape (samples,
 #'   sequence_length), to apply a different weight to every timestep of every
 #'   sample. In this case you should make sure to specify
-#'   sample_weight_mode="temporal" in [compile()].
-#' @param initial_epoch epoch at which to start training (useful for resuming a
-#'   previous training run).
+#'   `sample_weight_mode="temporal"` in [compile()].
+#' @param initial_epoch Integer, Epoch at which to start training (useful for
+#'   resuming a previous training run).
 #' @param steps_per_epoch Total number of steps (batches of samples) before
 #'   declaring one epoch finished and starting the next epoch. When training
-#'   with Input Tensors such as TensorFlow data tensors, the default `NULL` is
-#'   equal to the number of unique samples in your dataset divided by the batch
+#'   with input tensors such as TensorFlow data tensors, the default `NULL` is
+#'   equal to the number of samples in your dataset divided by the batch
 #'   size, or 1 if that cannot be determined. 
 #' @param  validation_steps Only relevant if `steps_per_epoch` is specified. 
 #'   Total number of steps (batches of samples) to validate before stopping.
 #' @param ... Unused
 #'
+#' @return A `history` object that contains all information collected
+#'   during training.
+#'
 #' @family model functions
 #'
 #' @export
-fit <- function(object, x, y, batch_size=NULL, epochs=10, 
+fit <- function(object, x = NULL, y = NULL, batch_size=NULL, epochs=10, 
                 verbose=1, callbacks=NULL,
                 view_metrics = getOption("keras.view_metrics", default = "auto"),
                 validation_split=0.0, validation_data=NULL, shuffle=TRUE,
@@ -364,9 +386,9 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
     initial_epoch = as.integer(initial_epoch)
   )
   
-  if (!missing(x))
+  if (!is.null(x))
     args$x <- keras_array(x)
-  if (!missing(y))
+  if (!is.null(y))
     args$y <- keras_array(y)
   
   if (keras_version() >= "2.0.7") {
@@ -392,16 +414,17 @@ fit <- function(object, x, y, batch_size=NULL, epochs=10,
 #' @inheritParams fit
 #'
 #' @param object Model object to evaluate
-#' @param x Vector, matrix, or array of training data (or list if the model has
+#' @param x Vector, matrix, or array of test data (or list if the model has
 #'   multiple inputs). If all inputs in the model are named, you can also pass a
-#'   list mapping input names to data. Can be `NULL` if feeding from framework
-#'   native tensors.
-#' @param y  Vector, matrix, or array of target data (or list if the model has
+#'   list mapping input names to data. `x` can be `NULL` (default) if feeding 
+#'   from framework-native tensors (e.g. TensorFlow data tensors).
+#' @param y  Vector, matrix, or array of target (label) data (or list if the model has
 #'   multiple outputs). If all outputs in the model are named, you can also pass
-#'   a list mapping output names to data. Can be `NULL` if feeding from framework
-#'   native tensors.
+#'   a list mapping output names to data. `y` can be `NULL` (default) if feeding 
+#'   from framework-native tensors (e.g. TensorFlow data tensors).
 #' @param steps Total number of steps (batches of samples) before declaring the
-#'   evaluation round finished. Ignored with the default value of `NULL`.
+#'   evaluation round finished. The default `NULL` is equal to the number of 
+#'   samples in your dataset divided by the batch size.
 #' @param ... Unused   
 #'   
 #'   
@@ -586,12 +609,16 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'      - (inputs, targets)
 #'      - (inputs, targets, sample_weights)
 #'      
-#'   All arrays should contain the same number of samples. The generator is expected
-#'   to loop over its data indefinitely. An epoch finishes when `steps_per_epoch`
-#'   batches have been seen by the model.
+#'   This list (a single output of the generator) makes a single batch.
+#'   Therefore, all arrays in this list must have the same length (equal to 
+#'   the size of this batch). Different batches may have different sizes.
+#'   For example, the last batch of the epoch is commonly smaller than the
+#'   others, if the size of the dataset is not divisible by the batch size.
+#'   The generator is expected to loop over its data indefinitely. An epoch
+#'   finishes when `steps_per_epoch` batches have been seen by the model.
 #' @param steps_per_epoch Total number of steps (batches of samples) to yield
 #'   from `generator` before declaring one epoch finished and starting the next
-#'   epoch. It should typically be equal to the number of unique samples if your
+#'   epoch. It should typically be equal to the number of samples if your
 #'   dataset divided by the batch size.
 #' @param epochs integer, total number of iterations on the data.
 #' @param callbacks list of callbacks to be called during training.
@@ -602,9 +629,10 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #' @param validation_steps Only relevant if `validation_data` is a generator.
 #'   Total number of steps (batches of samples) to yield from `generator` before
 #'   stopping.
-#' @param class_weight dictionary mapping class indices to a weight for the
+#' @param class_weight Named list mapping class indices to a weight for the
 #'   class.
-#' @param max_queue_size maximum size for the generator queue
+#' @param max_queue_size Maximum size for the generator queue. If unspecified,
+#'   `max_queue_size` will default to 10.
 #' @param initial_epoch epoch at which to start training (useful for resuming a
 #'   previous training run)
 #'

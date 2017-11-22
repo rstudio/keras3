@@ -11,20 +11,20 @@
 \arguments{
 \item{object}{Model object to evaluate}
 
-\item{x}{Vector, matrix, or array of training data (or list if the model has
+\item{x}{Vector, matrix, or array of test data (or list if the model has
 multiple inputs). If all inputs in the model are named, you can also pass a
-list mapping input names to data. Can be \code{NULL} if feeding from framework
-native tensors.}
+list mapping input names to data. \code{x} can be \code{NULL} (default) if feeding
+from framework-native tensors (e.g. TensorFlow data tensors).}
 
-\item{y}{Vector, matrix, or array of target data (or list if the model has
+\item{y}{Vector, matrix, or array of target (label) data (or list if the model has
 multiple outputs). If all outputs in the model are named, you can also pass
-a list mapping output names to data. Can be \code{NULL} if feeding from framework
-native tensors.}
+a list mapping output names to data. \code{y} can be \code{NULL} (default) if feeding
+from framework-native tensors (e.g. TensorFlow data tensors).}
 
 \item{batch_size}{Integer or \code{NULL}. Number of samples per gradient update.
-If unspecified, it will default to 32.}
+If unspecified, \code{batch_size} will default to 32.}
 
-\item{verbose}{Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
+\item{verbose}{Verbosity mode (0 = silent, 1 = progress bar, 2 = one line per
 epoch).}
 
 \item{sample_weight}{Optional array of the same length as x, containing
@@ -32,10 +32,11 @@ weights to apply to the model's loss for each sample. In the case of
 temporal data, you can pass a 2D array with shape (samples,
 sequence_length), to apply a different weight to every timestep of every
 sample. In this case you should make sure to specify
-sample_weight_mode="temporal" in \code{\link[=compile]{compile()}}.}
+\code{sample_weight_mode="temporal"} in \code{\link[=compile]{compile()}}.}
 
 \item{steps}{Total number of steps (batches of samples) before declaring the
-evaluation round finished. Ignored with the default value of \code{NULL}.}
+evaluation round finished. The default \code{NULL} is equal to the number of
+samples in your dataset divided by the batch size.}
 
 \item{...}{Unused}
 }
