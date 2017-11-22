@@ -16,14 +16,15 @@ library(keras)
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-# R interface to Keras
+# ![](https://s3.amazonaws.com/keras.io/img/keras-logo-2018-large-1200.png){width=300}
 
 <div id="build-status">
 [![Travis-CI Build Status](https://travis-ci.org/rstudio/keras.svg?branch=master)](https://travis-ci.org/rstudio/keras) 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/keras)](http://cran.r-project.org/package=keras)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/fchollet/keras/blob/master/LICENSE)
 </div>
 
-## Overview
+## R interface to Keras
 
 [Keras](https://keras.io/) is a high-level neural networks API developed with a focus on enabling fast experimentation. *Being able to go from idea to result with the least possible delay is key to doing good research.* Keras has the following key features:
 
@@ -41,10 +42,10 @@ This website provides documentation for the R interface to Keras. See the main K
 
 ## Installation
 
-First, install the keras R package from CRAN as follows:
+First, install the keras R package from GitHub as follows:
 
 ```{r, eval=FALSE}
-install.packages("keras")
+devtools::install_github("rstudio/keras")
 ```
 
 The Keras R interface uses the [TensorFlow](https://www.tensorflow.org/) backend engine by default. To install both the core Keras library as well as the TensorFlow backend use the `install_keras()` function: 

@@ -16,10 +16,6 @@ pre:not([class]) {
   background-color: white;
 }
 
-.contents a {
-  text-decoration: none;
-}
-
 blockquote {
   font-size: inherit;
 }
@@ -62,3 +58,50 @@ blockquote {
   display: none;
 }
 
+.navbar-inverse {
+  background-color: rgba(195,0,4, 0.9);
+  border-color: rgba(195,0,4, 0.9);
+}
+
+.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus {
+  color: #ffffff;
+  background-color: rgb(180,0,12);
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus {
+  background-color: rgb(180,0,12);
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus {
+  background-color: rgb(180,0,12);
+}
+
+
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus,  .dropdown-menu>li.active>a {
+  background-color: rgba(195,0,4, 0.9); 
+}
+
+a {
+  color: rgba(195,0,4,0.8);
+}
+
+a:hover {
+  color: rgba(195,0,4,0.8);
+  text-decoration: underline;
+}
+
+
+/*
+code a, pre a {
+  color: rgba(195,0,4,0.8);  
+}
+
+pre span a {
+  color: #375f84;
+} 
+
+pre span a:hover {
+  color: #375f84;
+} 
+*/

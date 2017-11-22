@@ -27,4 +27,6 @@
 ^.*__pycache__$
 ^.travis\.yml$
 ^Jenkinsfile$
+^logo.png$
+
 
