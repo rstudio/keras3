@@ -1,8 +1,6 @@
-## R interface to Keras
+# R interface to Keras
 
 ![](https://s3.amazonaws.com/keras.io/img/keras-logo-2018-large-1200.png){max-width=600px}
-
-<img src='https://s3.amazonaws.com/keras.io/img/keras-logo-2018-large-1200.png', style='max-width: 600px;'>
 
 [![Travis-CI Build Status](https://travis-ci.org/rstudio/keras.svg?branch=master)](https://travis-ci.org/rstudio/keras) 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/keras)](http://cran.r-project.org/package=keras)
