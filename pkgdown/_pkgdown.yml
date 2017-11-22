@@ -233,10 +233,6 @@ reference:
       - flow_images_from_data
       - flow_images_from_directory
       - generator_next
-      
-  - title: "Vector Preprocessing"
-    contents: 
-      - center_and_scale
  
   - title: "Optimizers"
     contents:

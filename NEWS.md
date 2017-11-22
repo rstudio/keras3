@@ -7,8 +7,6 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Support TF Dataset objects as generators for `fit_generator()`, etc.
 
-- Add `center_and_scale()` function for preprocessing vector data.
-
 
 ## keras 2.0.9 (CRAN)
 
