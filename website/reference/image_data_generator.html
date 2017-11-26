@@ -198,9 +198,14 @@ this range.</p></td>
     </tr>
     <tr>
       <th>fill_mode</th>
-      <td><p>points outside the boundaries are filled according to the
-given mode ('constant', 'nearest', 'reflect' or 'wrap'). Default is
-'nearest'.</p></td>
+      <td><p>One of "constant", "nearest", "reflect" or "wrap".
+Points outside the boundaries of the input are filled according to
+the given mode:</p><ul>
+<li><p>"constant": <code>kkkkkkkk|abcd|kkkkkkkk</code> (<code>cval=k</code>)</p></li>
+<li><p>"nearest":  <code>aaaaaaaa|abcd|dddddddd</code></p></li>
+<li><p>"reflect":  <code>abcddcba|abcd|dcbaabcd</code></p></li>
+<li><p>"wrap":     <code>abcdabcd|abcd|abcdabcd</code></p></li>
+</ul></td>
     </tr>
     <tr>
       <th>cval</th>

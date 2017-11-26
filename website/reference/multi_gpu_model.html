@@ -174,6 +174,14 @@ batch of 64 processed samples.</p>
 <p>This function is only available with the TensorFlow backend
 for the time being.</p>
     
+    <h2 class="hasAnchor" id="model-saving"><a class="anchor" href="#model-saving"></a>Model Saving</h2>
+
+    
+    <p>To save the multi-gpu model, use <code><a href='save_model_hdf5.html'>save_model_hdf5()</a></code> or
+<code><a href='save_model_weights_hdf5.html'>save_model_weights_hdf5()</a></code> with the template model (the argument you
+passed to <code>multi_gpu_model</code>), rather than the model returned
+by <code>multi_gpu_model</code>.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
@@ -201,8 +209,11 @@ for the time being.</p>
 <span class='no'>width</span> <span class='kw'>&lt;-</span> <span class='fl'>224</span>
 <span class='no'>num_classes</span> <span class='kw'>&lt;-</span> <span class='fl'>1000</span>
 
-<span class='co'># Instantiate the base model</span>
-<span class='co'># (here, we do it on CPU, which is optional).</span>
+<span class='co'># Instantiate the base model (or "template" model).</span>
+<span class='co'># We recommend doing this with under a CPU device scope,</span>
+<span class='co'># so that the model's weights are hosted on CPU memory.</span>
+<span class='co'># Otherwise they may end up hosted on a GPU, which would</span>
+<span class='co'># complicate weight sharing.</span>
 <span class='fu'>with</span>(<span class='no'>tf</span>$<span class='fu'>device</span>(<span class='st'>"/cpu:0"</span>), {
   <span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='application_xception.html'>application_xception</a></span>(
     <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -228,6 +239,9 @@ for the time being.</p>
 <span class='co'># This `fit` call will be distributed on 8 GPUs.</span>
 <span class='co'># Since the batch size is 256, each GPU will process 32 samples.</span>
 <span class='no'>parallel_model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='fit.html'>fit</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>256</span>)
+
+<span class='co'># Save model via the template model (which shares the same weights):</span>
+<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='save_model_hdf5.html'>save_model_hdf5</a></span>(<span class='st'>"my_model.h5"</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
@@ -239,6 +253,8 @@ for the time being.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#model-saving">Model Saving</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

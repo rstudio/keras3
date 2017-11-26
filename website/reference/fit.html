@@ -134,9 +134,10 @@
     <p>Trains the model for a fixed number of epochs (iterations on a dataset).</p>
     
 
-    <pre class="usage"><span class='fu'>fit</span>(<span class='no'>object</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>view_metrics</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"keras.view_metrics"</span>, <span class='kw'>default</span> <span class='kw'>=</span>
-  <span class='st'>"auto"</span>), <span class='kw'>validation_split</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+    <pre class="usage"><span class='fu'>fit</span>(<span class='no'>object</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>view_metrics</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"keras.view_metrics"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='st'>"auto"</span>),
+  <span class='kw'>validation_split</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>steps_per_epoch</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
@@ -151,30 +152,32 @@
       <th>x</th>
       <td><p>Vector, matrix, or array of training data (or list if the model has
 multiple inputs). If all inputs in the model are named, you can also pass a
-list mapping input names to data.</p></td>
+list mapping input names to data. <code>x</code> can be <code>NULL</code> (default) if feeding
+from framework-native tensors (e.g. TensorFlow data tensors).</p></td>
     </tr>
     <tr>
       <th>y</th>
-      <td><p>Vector, matrix, or array of target data (or list if the model has
+      <td><p>Vector, matrix, or array of target (label) data (or list if the model has
 multiple outputs). If all outputs in the model are named, you can also pass
-a list mapping output names to data.</p></td>
+a list mapping output names to data. <code>y</code> can be <code>NULL</code> (default) if feeding
+from framework-native tensors (e.g. TensorFlow data tensors).</p></td>
     </tr>
     <tr>
       <th>batch_size</th>
       <td><p>Integer or <code>NULL</code>. Number of samples per gradient update.
-If unspecified, it will default to 32.</p></td>
+If unspecified, <code>batch_size</code> will default to 32.</p></td>
     </tr>
     <tr>
       <th>epochs</th>
       <td><p>Number of epochs to train the model.
-Note that in conjunction with initial_epoch, the parameter
-epochs is to be understood as "final epoch". The model is
-not trained for a number of steps given by epochs, but
-until the epoch epochs is reached.</p></td>
+Note that in conjunction with <code>initial_epoch</code>,
+<code>epochs</code> is to be understood as "final epoch". The model is
+not trained for a number of iterations given by <code>epochs</code>, but
+merely until the epoch of index <code>epochs</code> is reached.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
+      <td><p>Verbosity mode (0 = silent, 1 = progress bar, 2 = one line per
 epoch).</p></td>
     </tr>
     <tr>
@@ -191,28 +194,33 @@ different default.</p></td>
     </tr>
     <tr>
       <th>validation_split</th>
-      <td><p>Float between 0 and 1: fraction of the training data
+      <td><p>Float between 0 and 1. Fraction of the training data
 to be used as validation data. The model will set apart this fraction of
 the training data, will not train on it, and will evaluate the loss and any
-model metrics on this data at the end of each epoch.</p></td>
+model metrics on this data at the end of each epoch. The validation data
+is selected from the last samples in the <code>x</code> and <code>y</code> data provided,
+before shuffling.</p></td>
     </tr>
     <tr>
       <th>validation_data</th>
       <td><p>Data on which to evaluate the loss and any model
 metrics at the end of each epoch. The model will not be trained on this
 data. This could be a list (x_val, y_val) or a list (x_val, y_val,
-val_sample_weights).</p></td>
+val_sample_weights). <code>validation_data</code> will override <code>validation_split</code>.</p></td>
     </tr>
     <tr>
       <th>shuffle</th>
-      <td><p><code>TRUE</code> to shuffle the training data before each epoch.</p></td>
+      <td><p>shuffle: Logical (whether to shuffle the training data
+before each epoch) or string (for "batch"). "batch" is a special option
+for dealing with the limitations of HDF5 data; it shuffles in batch-sized
+chunks. Has no effect when <code>steps_per_epoch</code> is not <code>NULL</code>.</p></td>
     </tr>
     <tr>
       <th>class_weight</th>
       <td><p>Optional named list mapping indices (integers) to a
-weight (float) to apply to the model's loss for the samples from this class
-during training. This can be useful to tell the model to "pay more
-attention" to samples from an under-represented class.</p></td>
+weight (float) value, used for weighting the loss function
+(during training only). This can be useful to tell the model to
+"pay more attention" to samples from an under-represented class.</p></td>
     </tr>
     <tr>
       <th>sample_weight</th>
@@ -221,19 +229,19 @@ weights to apply to the model's loss for each sample. In the case of
 temporal data, you can pass a 2D array with shape (samples,
 sequence_length), to apply a different weight to every timestep of every
 sample. In this case you should make sure to specify
-sample_weight_mode="temporal" in <code><a href='compile.html'>compile()</a></code>.</p></td>
+<code>sample_weight_mode="temporal"</code> in <code><a href='compile.html'>compile()</a></code>.</p></td>
     </tr>
     <tr>
       <th>initial_epoch</th>
-      <td><p>epoch at which to start training (useful for resuming a
-previous training run).</p></td>
+      <td><p>Integer, Epoch at which to start training (useful for
+resuming a previous training run).</p></td>
     </tr>
     <tr>
       <th>steps_per_epoch</th>
       <td><p>Total number of steps (batches of samples) before
 declaring one epoch finished and starting the next epoch. When training
-with Input Tensors such as TensorFlow data tensors, the default <code>NULL</code> is
-equal to the number of unique samples in your dataset divided by the batch
+with input tensors such as TensorFlow data tensors, the default <code>NULL</code> is
+equal to the number of samples in your dataset divided by the batch
 size, or 1 if that cannot be determined.</p></td>
     </tr>
     <tr>
@@ -246,6 +254,11 @@ Total number of steps (batches of samples) to validate before stopping.</p></td>
       <td><p>Unused</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code>history</code> object that contains all information collected
+during training.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -271,6 +284,8 @@ Total number of steps (batches of samples) to validate before stopping.</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 

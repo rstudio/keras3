@@ -148,26 +148,26 @@
     </tr>
     <tr>
       <th>x</th>
-      <td><p>Vector, matrix, or array of training data (or list if the model has
+      <td><p>Vector, matrix, or array of test data (or list if the model has
 multiple inputs). If all inputs in the model are named, you can also pass a
-list mapping input names to data. Can be <code>NULL</code> if feeding from framework
-native tensors.</p></td>
+list mapping input names to data. <code>x</code> can be <code>NULL</code> (default) if feeding
+from framework-native tensors (e.g. TensorFlow data tensors).</p></td>
     </tr>
     <tr>
       <th>y</th>
-      <td><p>Vector, matrix, or array of target data (or list if the model has
+      <td><p>Vector, matrix, or array of target (label) data (or list if the model has
 multiple outputs). If all outputs in the model are named, you can also pass
-a list mapping output names to data. Can be <code>NULL</code> if feeding from framework
-native tensors.</p></td>
+a list mapping output names to data. <code>y</code> can be <code>NULL</code> (default) if feeding
+from framework-native tensors (e.g. TensorFlow data tensors).</p></td>
     </tr>
     <tr>
       <th>batch_size</th>
       <td><p>Integer or <code>NULL</code>. Number of samples per gradient update.
-If unspecified, it will default to 32.</p></td>
+If unspecified, <code>batch_size</code> will default to 32.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>Verbosity mode (0 = silent, 1 = verbose, 2 = one log line per
+      <td><p>Verbosity mode (0 = silent, 1 = progress bar, 2 = one line per
 epoch).</p></td>
     </tr>
     <tr>
@@ -177,12 +177,13 @@ weights to apply to the model's loss for each sample. In the case of
 temporal data, you can pass a 2D array with shape (samples,
 sequence_length), to apply a different weight to every timestep of every
 sample. In this case you should make sure to specify
-sample_weight_mode="temporal" in <code><a href='compile.html'>compile()</a></code>.</p></td>
+<code>sample_weight_mode="temporal"</code> in <code><a href='compile.html'>compile()</a></code>.</p></td>
     </tr>
     <tr>
       <th>steps</th>
       <td><p>Total number of steps (batches of samples) before declaring the
-evaluation round finished. Ignored with the default value of <code>NULL</code>.</p></td>
+evaluation round finished. The default <code>NULL</code> is equal to the number of
+samples in your dataset divided by the batch size.</p></td>
     </tr>
     <tr>
       <th>...</th>

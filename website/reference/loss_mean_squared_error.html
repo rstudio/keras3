@@ -201,6 +201,16 @@ integer targets into categorical targets, you can use the Keras utility
 function <code><a href='to_categorical.html'>to_categorical()</a></code>:
     <code>categorical_labels &lt;- to_categorical(int_labels, num_classes = NULL)</code></p>
     
+    <h2 class="hasAnchor" id="loss-logcosh"><a class="anchor" href="#loss-logcosh"></a>loss_logcosh</h2>
+
+    
+    <p><code>log(cosh(x))</code> is approximately equal to <code>(x ** 2) / 2</code> for small <code>x</code> and
+to <code>abs(x) - log(2)</code> for large <code>x</code>. This means that 'logcosh' works mostly
+like the mean squared error, but will not be so strongly affected by the
+occasional wildly incorrect prediction. However, it may return NaNs if the
+intermediate value <code>cosh(y_pred - y_true)</code> is too large to be represented
+in the chosen precision.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><code><a href='compile.html'>compile()</a></code></p>
@@ -215,6 +225,8 @@ function <code><a href='to_categorical.html'>to_categorical()</a></code>:
       <li><a href="#details">Details</a></li>
 
       <li><a href="#categorical-crossentropy">Categorical Crossentropy</a></li>
+
+      <li><a href="#loss-logcosh">loss_logcosh</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

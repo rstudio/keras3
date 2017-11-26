@@ -147,7 +147,7 @@
     </tr>
     <tr>
       <th>optimizer</th>
-      <td><p>Name of optimizer or optimizer object.</p></td>
+      <td><p>Name of optimizer or optimizer instance.</p></td>
     </tr>
     <tr>
       <th>loss</th>
@@ -184,14 +184,13 @@ by sample_weight or class_weight during training and testing</p></td>
     </tr>
     <tr>
       <th>target_tensors</th>
-      <td><p>By default, Keras will create placeholders for the
+      <td><p>By default, Keras will create a placeholder for the
 model's target, which will be fed with the target data during
 training. If instead you would like to use your own
-target tensors (in turn, Keras will not expect external
+target tensor (in turn, Keras will not expect external
 data for these targets at training time), you
-can specify them via the <code>target_tensors</code> argument. It can be
-a single tensor (for a single-output model), a list of tensors,
-or a named list mapping output names to target tensors.</p></td>
+can specify them via the <code>target_tensors</code> argument. It should be
+a single tensor (for a single-output sequential model),</p></td>
     </tr>
     <tr>
       <th>...</th>
