@@ -9,7 +9,7 @@ k_cumprod(x, axis = 1L)
 \arguments{
 \item{x}{A tensor or variable.}
 
-\item{axis}{An integer, the axis to compute the product.}
+\item{axis}{An integer, the 1-based axis to compute the product.}
 }
 \value{
 A tensor of the cumulative product of values of \code{x} along \code{axis}.

@@ -9,7 +9,7 @@ k_l2_normalize(x, axis = NULL)
 \arguments{
 \item{x}{Tensor or variable.}
 
-\item{axis}{axis along which to perform normalization.}
+\item{axis}{1-based axis along which to perform normalization.}
 }
 \value{
 A tensor.

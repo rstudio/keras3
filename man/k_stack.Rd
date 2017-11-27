@@ -9,7 +9,7 @@ k_stack(x, axis = 1L)
 \arguments{
 \item{x}{List of tensors.}
 
-\item{axis}{Axis along which to perform stacking.}
+\item{axis}{1-basd axis along which to perform stacking.}
 }
 \value{
 A tensor.

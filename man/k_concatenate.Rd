@@ -9,7 +9,7 @@ k_concatenate(tensors, axis = -1L)
 \arguments{
 \item{tensors}{list of tensors to concatenate.}
 
-\item{axis}{concatenation axis.}
+\item{axis}{1-based concatenation axis.}
 }
 \value{
 A tensor.

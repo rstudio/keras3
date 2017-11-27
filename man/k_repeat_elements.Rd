@@ -11,7 +11,7 @@ k_repeat_elements(x, rep, axis)
 
 \item{rep}{Integer, number of times to repeat.}
 
-\item{axis}{Axis along which to repeat.}
+\item{axis}{1-based axis along which to repeat.}
 }
 \value{
 A tensor.

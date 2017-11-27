@@ -9,7 +9,7 @@ k_argmax(x, axis = -1L)
 \arguments{
 \item{x}{Tensor or variable.}
 
-\item{axis}{axis along which to perform the reduction.}
+\item{axis}{1-based axis along which to perform the reduction.}
 }
 \value{
 A tensor.

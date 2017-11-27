@@ -9,7 +9,7 @@ k_reverse(x, axes)
 \arguments{
 \item{x}{Tensor to reverse.}
 
-\item{axes}{Integer or iterable of integers. Axes to reverse.}
+\item{axes}{Integer or list of integers. 1-based axes to reverse.}
 }
 \value{
 A tensor.

@@ -9,7 +9,7 @@ k_expand_dims(x, axis = -1L)
 \arguments{
 \item{x}{A tensor or variable.}
 
-\item{axis}{Position where to add a new axis.}
+\item{axis}{Position (1-based) where to add a new axis.}
 }
 \value{
 A tensor with expanded dimensions.

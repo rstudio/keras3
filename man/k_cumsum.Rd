@@ -9,7 +9,7 @@ k_cumsum(x, axis = 1L)
 \arguments{
 \item{x}{A tensor or variable.}
 
-\item{axis}{An integer, the axis to compute the sum.}
+\item{axis}{An integer, the 1-based axis to compute the sum.}
 }
 \value{
 A tensor of the cumulative sum of values of \code{x} along \code{axis}.

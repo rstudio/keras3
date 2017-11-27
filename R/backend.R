@@ -40,7 +40,7 @@ k_abs <- function(x) {
 #' Bitwise reduction (logical AND).
 #' 
 #' @param x Tensor or variable.
-#' @param axis axis along which to perform the reduction.
+#' @param axis 1-based axis along which to perform the reduction.
 #' @param keepdims whether the drop or broadcast the reduction axes.
 #' 
 #' @return A uint8 tensor (0s and 1s).
@@ -60,7 +60,7 @@ k_all <- function(x, axis = NULL, keepdims = FALSE) {
 #' Bitwise reduction (logical OR).
 #' 
 #' @param x Tensor or variable.
-#' @param axis axis along which to perform the reduction.
+#' @param axis 1-based axis along which to perform the reduction.
 #' @param keepdims whether the drop or broadcast the reduction axes.
 #' 
 #' @return A uint8 tensor (0s and 1s).
@@ -106,7 +106,7 @@ k_arange <- function(start, stop = NULL, step = 1, dtype = "int32") {
 #' Returns the index of the maximum value along an axis.
 #' 
 #' @param x Tensor or variable.
-#' @param axis axis along which to perform the reduction.
+#' @param axis 1-based axis along which to perform the reduction.
 #' 
 #' @return A tensor.
 #' 
@@ -124,7 +124,7 @@ k_argmax <- function(x, axis = -1L) {
 #' Returns the index of the minimum value along an axis.
 #' 
 #' @param x Tensor or variable.
-#' @param axis axis along which to perform the reduction.
+#' @param axis 1-based axis along which to perform the reduction.
 #' 
 #' @return A tensor.
 #' 
@@ -155,22 +155,22 @@ k_backend <- function() {
 #' Batchwise dot product.
 #'
 #' `batch_dot` is used to compute dot product of `x` and `y` when `x` and `y`
-#' are data in batch, i.e. in a shape of `(batch_size)`. `batch_dot` results
-#' in a tensor or variable with less dimensions than the input. If the number
-#' of dimensions is reduced to 1, we use `expand_dims` to make sure that ndim
-#' is at least 2.
+#' are data in batch, i.e. in a shape of `(batch_size)`. `batch_dot` results in
+#' a tensor or variable with less dimensions than the input. If the number of
+#' dimensions is reduced to 1, we use `expand_dims` to make sure that ndim is
+#' at least 2.
 #'
 #' @param x Keras tensor or variable with 2 more more axes.
 #' @param y Keras tensor or variable with 2 or more axes
-#' @param axes list of (or single) integer with target dimensions. The lengths of
-#'   `axes[[1]]` and `axes[[2]]` should be the same.
+#' @param axes list of (or single) integer with target (1-based) dimensions.
+#'   The lengths of `axes[[1]]` and `axes[[2]]` should be the same.
 #'
 #' @return A tensor with shape equal to the concatenation of `x`'s shape (less
 #'   the dimension that was summed over) and `y`'s shape (less the batch
 #'   dimension and the dimension that was summed over). If the final rank is 1,
 #'   we reshape it to `(batch_size, 1)`.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_batch_dot <- function(x, y, axes) {
@@ -397,7 +397,7 @@ k_clip <- function(x, min_value, max_value) {
 #' Concatenates a list of tensors alongside the specified axis.
 #' 
 #' @param tensors list of tensors to concatenate.
-#' @param axis concatenation axis.
+#' @param axis 1-based concatenation axis.
 #' 
 #' @return A tensor.
 #' 
@@ -690,7 +690,7 @@ k_ctc_label_dense_to_sparse <- function(labels, label_lengths) {
 #' Cumulative product of the values in a tensor, alongside the specified axis.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the axis to compute the product.
+#' @param axis An integer, the 1-based axis to compute the product.
 #'
 #' @return A tensor of the cumulative product of values of `x` along `axis`.
 #'
@@ -708,7 +708,7 @@ k_cumprod <- function(x, axis = 1L) {
 #' Cumulative sum of the values in a tensor, alongside the specified axis.
 #' 
 #' @param x A tensor or variable.
-#' @param axis An integer, the axis to compute the sum.
+#' @param axis An integer, the 1-based axis to compute the sum.
 #' 
 #' @return A tensor of the cumulative sum of values of `x` along `axis`.
 #' 
@@ -905,7 +905,7 @@ k_exp <- function(x) {
 #' Adds a 1-sized dimension at index "axis".
 #' 
 #' @param x A tensor or variable.
-#' @param axis Position where to add a new axis.
+#' @param axis Position (1-based) where to add a new axis.
 #' 
 #' @return A tensor with expanded dimensions.
 #' 
@@ -1396,7 +1396,7 @@ k_is_sparse <- function(tensor) {
 #' Normalizes a tensor wrt the L2 norm alongside the specified axis.
 #' 
 #' @param x Tensor or variable.
-#' @param axis axis along which to perform normalization.
+#' @param axis 1-based axis along which to perform normalization.
 #' 
 #' @return A tensor.
 #' 
@@ -1547,7 +1547,7 @@ k_log <- function(x) {
 #' taking the log of small inputs.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the axis to reduce over.
+#' @param axis An integer, the 1-based axis to reduce over.
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1. If
 #'   `keepdims` is `TRUE`, the reduced dimension is retained with length 1.
@@ -1609,7 +1609,7 @@ k_map_fn <- function(fn, elems, name = NULL, dtype = NULL) {
 #' Maximum value in a tensor.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the axis to find maximum values.
+#' @param axis An integer, the 1-based axis to find maximum values.
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1. If
 #'   `keepdims` is `TRUE`, the reduced dimension is retained with length 1.
@@ -1649,7 +1649,7 @@ k_maximum <- function(x, y) {
 #' Mean of a tensor, alongside the specified axis.
 #'
 #' @param x A tensor or variable.
-#' @param axis A list of integer Axes to compute the mean.
+#' @param axis A list of 1-based axes to compute the mean over.
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1 for each
 #'   entry in `axis`. If `keep_dims` is `TRUE`, the reduced dimensions are
@@ -1672,7 +1672,7 @@ k_mean <- function(x, axis = NULL, keepdims = FALSE) {
 #' Minimum value in a tensor.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the axis to find minimum values.
+#' @param axis An integer, the 1-based axis to find minimum values.
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1. If
 #'   `keepdims` is `TRUE`, the reduced dimension is retained with length 1.
@@ -1852,7 +1852,7 @@ k_ones_like <- function(x, dtype = NULL, name = NULL) {
 #' Permutes axes in a tensor.
 #' 
 #' @param x Tensor or variable.
-#' @param pattern A list of dimension indices, e.g. `(1, 3, 2)`.
+#' @param pattern A list of 1-based dimension indices, e.g. `(1, 3, 2)`.
 #' 
 #' @return A tensor.
 #' 
@@ -1990,7 +1990,7 @@ k_print_tensor <- function(x, message = "") {
 #' Multiplies the values in a tensor, alongside the specified axis.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the axis to compute the product.
+#' @param axis An integer, the 1-based axis to compute the product.
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1. If
 #'   `keepdims` is `TRUE`, the reduced dimension is retained with length 1.
@@ -2182,7 +2182,7 @@ k_repeat <- function(x, n) {
 #' 
 #' @param x Tensor or variable.
 #' @param rep Integer, number of times to repeat.
-#' @param axis Axis along which to repeat.
+#' @param axis 1-based axis along which to repeat.
 #' 
 #' @return A tensor.
 #' 
@@ -2276,7 +2276,7 @@ k_resize_volumes <- function(x, depth_factor, height_factor, width_factor, data_
 #' Reverse a tensor along the specified axes.
 #' 
 #' @param x Tensor to reverse.
-#' @param axes Integer or iterable of integers. Axes to reverse.
+#' @param axes Integer or list of integers. 1-based axes to reverse.
 #' 
 #' @return A tensor.
 #' 
@@ -2626,7 +2626,7 @@ k_square <- function(x) {
 #' Removes a 1-dimension from the tensor at index "axis".
 #' 
 #' @param x A tensor or variable.
-#' @param axis Axis to drop.
+#' @param axis 1-based axis to drop.
 #' 
 #' @return A tensor with the same data as `x` but reduced dimensions.
 #' 
@@ -2644,7 +2644,7 @@ k_squeeze <- function(x, axis) {
 #' Stacks a list of rank `R` tensors into a rank `R+1` tensor.
 #' 
 #' @param x List of tensors.
-#' @param axis Axis along which to perform stacking.
+#' @param axis 1-basd axis along which to perform stacking.
 #' 
 #' @return A tensor.
 #' 
@@ -2662,7 +2662,7 @@ k_stack <- function(x, axis = 1L) {
 #' Standard deviation of a tensor, alongside the specified axis.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the axis to compute the standard deviation.
+#' @param axis An integer, the 1-based axis to compute the standard deviation.
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1. If
 #'   `keepdims` is `TRUE`, the reduced dimension is retained with length 1.
@@ -2702,7 +2702,7 @@ k_stop_gradient <- function(variables) {
 #' Sum of the values in a tensor, alongside the specified axis.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the axis to sum over.
+#' @param axis An integer, the 1-based axis to sum over.
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1. If
 #'   `keepdims` is `TRUE`, the reduced dimension is retained with length 1.
@@ -2914,7 +2914,7 @@ k_update_sub <- function(x, decrement) {
 #' Variance of a tensor, alongside the specified axis.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the axis to compute the variance.
+#' @param axis An integer, the 1-based axis to compute the variance.
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1. If
 #'   `keepdims` is `TRUE`, the reduced dimension is retained with length 1.

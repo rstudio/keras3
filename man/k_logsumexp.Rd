@@ -9,7 +9,7 @@ k_logsumexp(x, axis = NULL, keepdims = FALSE)
 \arguments{
 \item{x}{A tensor or variable.}
 
-\item{axis}{An integer, the axis to reduce over.}
+\item{axis}{An integer, the 1-based axis to reduce over.}
 
 \item{keepdims}{A boolean, whether to keep the dimensions or not. If
 \code{keepdims} is \code{FALSE}, the rank of the tensor is reduced by 1. If

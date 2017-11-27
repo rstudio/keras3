@@ -9,7 +9,7 @@ k_squeeze(x, axis)
 \arguments{
 \item{x}{A tensor or variable.}
 
-\item{axis}{Axis to drop.}
+\item{axis}{1-based axis to drop.}
 }
 \value{
 A tensor with the same data as \code{x} but reduced dimensions.

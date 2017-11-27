@@ -11,8 +11,8 @@ k_batch_dot(x, y, axes)
 
 \item{y}{Keras tensor or variable with 2 or more axes}
 
-\item{axes}{list of (or single) integer with target dimensions. The lengths of
-\code{axes[[1]]} and \code{axes[[2]]} should be the same.
+\item{axes}{list of (or single) integer with target (1-based) dimensions.
+The lengths of \code{axes[[1]]} and \code{axes[[2]]} should be the same.
 
 [[1]: R:[1
 [[2]: R:[2}
@@ -25,10 +25,10 @@ we reshape it to \code{(batch_size, 1)}.
 }
 \description{
 \code{batch_dot} is used to compute dot product of \code{x} and \code{y} when \code{x} and \code{y}
-are data in batch, i.e. in a shape of \code{(batch_size)}. \code{batch_dot} results
-in a tensor or variable with less dimensions than the input. If the number
-of dimensions is reduced to 1, we use \code{expand_dims} to make sure that ndim
-is at least 2.
+are data in batch, i.e. in a shape of \code{(batch_size)}. \code{batch_dot} results in
+a tensor or variable with less dimensions than the input. If the number of
+dimensions is reduced to 1, we use \code{expand_dims} to make sure that ndim is
+at least 2.
 }
 \section{Keras Backend}{
 
