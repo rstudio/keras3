@@ -32,11 +32,15 @@ test_backend("k_arange", {
   k_arange(1, 11, 2)
 })
 
-test_backend("k_clear_session", k_clear_session())
+test_backend("k_clear_session", {
+  if (is_backend("tensorflow"))
+    k_clear_session()
+})
+            
 
-float_vals <- k_constant(array(runif(3*5), dim = c(3,5)))
-x <- k_constant(array(runif(10*28*28), dim = c(10,28,28)))
-y <- k_constant(array(runif(10*28*28), dim = c(10,28,28)))
+float_vals <- k_variable(array(runif(3*5), dim = c(3,5)))
+x <- k_variable(array(runif(10*28*28), dim = c(10,28,28)))
+y <- k_variable(array(runif(10*28*28), dim = c(10,28,28)))
 test_backend("k_argmax", {
   k_argmax(float_vals)
   k_argmax(float_vals, axis = 1)
@@ -61,7 +65,9 @@ test_backend("k_batch_get_value", k_batch_get_value(list(x,y)))
 test_backend("k_batch_normalization, k_mean, k_std", {
   mean <- k_mean(x, axis = c(1,2))
   sd <- k_std(x, axis = c(1,2))
-  k_batch_normalization(x, mean, sd, beta = 0.1, gamma = 0.1)
+  k_batch_normalization(x, mean, sd, 
+                        beta = mean, 
+                        gamma = mean)
 })
 
 test_backend("k_batch_set_value", {

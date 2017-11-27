@@ -202,7 +202,7 @@ k_batch_flatten <- function(x) {
 
 #' Returns the value of more than one tensor variable.
 #' 
-#' @param ops list of ops to run.
+#' @param ops Ops to evaluate
 #' 
 #' @return A list of arrays.
 #' 
@@ -212,9 +212,7 @@ k_batch_flatten <- function(x) {
 #'
 #' @export
 k_batch_get_value <- function(ops) {
-  keras$backend$batch_get_value(
-    ops = ops
-  )
+  keras$backend$batch_get_value(ops)
 }
 
 
