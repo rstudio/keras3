@@ -2,7 +2,7 @@
 % Please edit documentation in R/backend.R
 \name{k_squeeze}
 \alias{k_squeeze}
-\title{Removes a 1-dimension from the tensor at index "axis".}
+\title{Removes a 1-dimension from the tensor at index \code{axis}.}
 \usage{
 k_squeeze(x, axis)
 }
@@ -15,7 +15,7 @@ k_squeeze(x, axis)
 A tensor with the same data as \code{x} but reduced dimensions.
 }
 \description{
-Removes a 1-dimension from the tensor at index "axis".
+Removes a 1-dimension from the tensor at index \code{axis}.
 }
 \section{Keras Backend}{
 

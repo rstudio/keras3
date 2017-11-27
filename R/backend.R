@@ -2621,7 +2621,7 @@ k_square <- function(x) {
 }
 
 
-#' Removes a 1-dimension from the tensor at index "axis".
+#' Removes a 1-dimension from the tensor at index `axis`.
 #' 
 #' @param x A tensor or variable.
 #' @param axis 1-based axis to drop.
