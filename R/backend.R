@@ -202,7 +202,7 @@ k_batch_flatten <- function(x) {
 
 #' Returns the value of more than one tensor variable.
 #' 
-#' @param ops Ops to evaluate
+#' @param ops List of ops to evaluate.
 #' 
 #' @return A list of arrays.
 #' 

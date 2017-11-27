@@ -91,9 +91,9 @@ You can change these settings by editing `$HOME/.keras/keras.json`.
 * `backend`: String, `"tensorflow"`, `"theano"`, or `"cntk"`.
 
 
-## Accessing the Backend in Code
+## Using the Backend
 
-If you want the Keras modules you write to be compatible with all available backends, you have to write them via the abstract Keras backend API.
+If you want the Keras modules you write to be compatible with all available backends, you have to write them via the abstract Keras backend API. Backend API functions have a `k_` prefix (e.g. `k_placeholder`, `k_constant`, `k_dot`, etc.).
 
 For example, the code below instantiates an input placeholder. It's equivalent to `tf$placeholder()`:
 
@@ -118,7 +118,7 @@ var <- k_zeros(shape = c(3, 4, 5))
 var <- k_ones(shape = c(3, 4, 5))
 ```
 
-### Backend Functions
+## Backend Functions
 
 <table>
 <tbody>

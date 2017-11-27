@@ -169,10 +169,10 @@
 </ul>
 </div>
 </div>
-<div id="accessing-the-backend-in-code" class="section level2">
+<div id="using-the-backend" class="section level2">
 <h2 class="hasAnchor">
-<a href="#accessing-the-backend-in-code" class="anchor"></a>Accessing the Backend in Code</h2>
-<p>If you want the Keras modules you write to be compatible with all available backends, you have to write them via the abstract Keras backend API.</p>
+<a href="#using-the-backend" class="anchor"></a>Using the Backend</h2>
+<p>If you want the Keras modules you write to be compatible with all available backends, you have to write them via the abstract Keras backend API. Backend API functions have a <code>k_</code> prefix (e.g. <code>k_placeholder</code>, <code>k_constant</code>, <code>k_dot</code>, etc.).</p>
 <p>For example, the code below instantiates an input placeholder. It’s equivalent to <code>tf$placeholder()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 inputs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/k_placeholder.html">k_placeholder</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>))
@@ -188,9 +188,10 @@ var &lt;-<span class="st"> </span><span class="kw"><a href="../reference/k_varia
 var &lt;-<span class="st"> </span><span class="kw"><a href="../reference/k_zeros.html">k_zeros</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>))
 <span class="co"># all-ones:</span>
 var &lt;-<span class="st"> </span><span class="kw"><a href="../reference/k_ones.html">k_ones</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>))</code></pre></div>
-<div id="backend-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#backend-functions" class="anchor"></a>Backend Functions</h3>
+</div>
+<div id="backend-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#backend-functions" class="anchor"></a>Backend Functions</h2>
 <table class="table"><tbody>
 <tr>
 <!--  --><td>
@@ -1935,7 +1936,6 @@ Instantiates an all-zeros variable and returns it.
 </tbody></table>
 </div>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -1946,7 +1946,8 @@ Instantiates an all-zeros variable and returns it.
 <li><a href="#overview">Overview</a></li>
       <li><a href="#selecting-a-backend">Selecting a Backend</a></li>
       <li><a href="#selecting-an-implementation">Selecting an Implementation</a></li>
-      <li><a href="#accessing-the-backend-in-code">Accessing the Backend in Code</a></li>
+      <li><a href="#using-the-backend">Using the Backend</a></li>
+      <li><a href="#backend-functions">Backend Functions</a></li>
       </ul>
 </div>
       </div>

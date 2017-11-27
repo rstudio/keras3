@@ -7,7 +7,7 @@
 k_batch_get_value(ops)
 }
 \arguments{
-\item{ops}{Ops to evaluate}
+\item{ops}{List of ops to evaluate.}
 }
 \value{
 A list of arrays.
