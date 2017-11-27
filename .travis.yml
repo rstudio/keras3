@@ -22,7 +22,7 @@ addons:
 
 before_script:
   - pip2.7 install --upgrade --ignore-installed --user travis pip setuptools wheel virtualenv
-  - pip2.7 install --upgrade --ignore-installed --user travis keras h5py pyyaml requests Pillow scipy
+  - pip2.7 install --upgrade --ignore-installed --user travis keras h5py pyyaml requests Pillow scipy theano
   - R -e 'tensorflow::install_tensorflow()'
 
 

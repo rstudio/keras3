@@ -26,7 +26,6 @@ test_succeeds("image data generator can be used for training", {
     layer_conv_2d(filters = 32, kernel_size = c(3,3)) %>% 
     layer_activation(activation = 'relu') %>% 
     layer_max_pooling_2d(pool_size = c(2,2)) %>% 
-    layer_dropout(rate = 0.25) %>% 
     layer_flatten() %>% 
     layer_dense(units = num_classes) %>% 
     layer_activation(activation = 'softmax')
