@@ -132,10 +132,10 @@
 
     
     <p><code>batch_dot</code> is used to compute dot product of <code>x</code> and <code>y</code> when <code>x</code> and <code>y</code>
-are data in batch, i.e. in a shape of <code>(batch_size)</code>. <code>batch_dot</code> results
-in a tensor or variable with less dimensions than the input. If the number
-of dimensions is reduced to 1, we use <code>expand_dims</code> to make sure that ndim
-is at least 2.</p>
+are data in batch, i.e. in a shape of <code>(batch_size)</code>. <code>batch_dot</code> results in
+a tensor or variable with less dimensions than the input. If the number of
+dimensions is reduced to 1, we use <code>expand_dims</code> to make sure that ndim is
+at least 2.</p>
     
 
     <pre class="usage"><span class='fu'>k_batch_dot</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>axes</span>)</pre>
@@ -153,8 +153,8 @@ is at least 2.</p>
     </tr>
     <tr>
       <th>axes</th>
-      <td><p>list of (or single) integer with target dimensions. The lengths of
-<code>axes[[1]]</code> and <code>axes[[2]]</code> should be the same.</p>
+      <td><p>list of (or single) integer with target (1-based) dimensions.
+The lengths of <code>axes[[1]]</code> and <code>axes[[2]]</code> should be the same.</p>
 <p>[[1]: R:[1
 [[2]: R:[2</p></td>
     </tr>
