@@ -7,6 +7,9 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Support TF Dataset objects as generators for `fit_generator()`, etc.
 
+- Added `use_implementation()` and `use_backend()` functions as alternative to
+  setting `KERAS_IMPLEMENATION` and `KERAS_BACKEND` environment variables.
+
 
 ## keras 2.0.9 (CRAN)
 

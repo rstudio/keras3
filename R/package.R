@@ -25,6 +25,54 @@
 #' @importFrom tensorflow tf_version tf_config install_tensorflow
 "_PACKAGE"
 
+# package level global state
+.globals <- new.env(parent = emptyenv())
+.globals$use_implementation <- NULL
+
+
+#' Select a Keras implementation and backend
+#'
+#' @param implementation One of "keras" or "tensorflow" (defaults to "keras").
+#' @param backend One of "tensorflow", "cntk", or "theano" (defaults
+#'   to "tensorflow")
+#'   
+#' @details 
+#' Keras has multiple implementations (the original keras implementation
+#' and the implementation native to TensorFlow) and supports multiple 
+#' backends ("tensorflow", "cntk", and "theano"). These functions allow
+#' switching between the various implementations and backends.
+#' 
+#' The functions should be called after `library(keras)` and before calling
+#' other functions within the package (see below for an example).
+#' 
+#' The default implementation and backend should be suitable for most 
+#' use cases. The "tensorflow" implementation is useful when using Keras
+#' in conjunction with TensorFlow Estimators (the \pkg{tfestimators} 
+#' R package).
+#' 
+#' @examples \dontrun{
+#' # use the tensorflow implementation
+#' library(keras)
+#' use_implementation("tensorflow")
+#' 
+#' # use the cntk backend
+#' library(keras)
+#' use_backend("theano")
+#' }
+#'
+#' @export
+use_implementation <- function(implementation = c("keras", "tensorflow")) {
+  .globals$use_implementation <- match.arg(implementation)
+}
+
+
+#' @rdname use_implementation
+#' @export
+use_backend <- function(backend = c("tensorflow", "cntk", "theano")) {
+  Sys.setenv(KERAS_BACKEND = match.arg(backend))
+}
+
+
 # Main Keras module
 keras <- NULL
 
@@ -44,6 +92,10 @@ keras <- NULL
     priority = 10,
     
     environment = "r-tensorflow",
+    
+    get_module = function() {
+      resolve_implementation_module()
+    },
      
     on_load = function() {
       # check version
@@ -97,7 +149,10 @@ resolve_implementation_module <- function() {
 }
 
 get_keras_implementation <- function(default = "keras") {
-  get_keras_option("KERAS_IMPLEMENTATION", default = default)
+  if (!is.null(.globals$use_implementation))
+    .globals$use_implementation
+  else
+    get_keras_option("KERAS_IMPLEMENTATION", default = default)
 }
 
 get_keras_python <- function(default = NULL) {
