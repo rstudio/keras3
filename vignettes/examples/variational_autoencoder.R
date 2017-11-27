@@ -24,13 +24,13 @@ sampling <- function(arg){
   z_mean <- arg[,1:2]
   z_log_var <- arg[,3:4]
   
-  epsilon <- K$random_normal(
-    shape = c(K$shape(z_mean)[[1]]), 
+  epsilon <- k_random_normal(
+    shape = c(k_shape(z_mean)[[1]]), 
     mean=0.,
     stddev=epsilon_std
   )
   
-  z_mean + K$exp(z_log_var/2)*epsilon
+  z_mean + k_exp(z_log_var/2)*epsilon
 }
 
 # note that "output_shape" isn't necessary with the TensorFlow backend
@@ -58,7 +58,7 @@ generator <- keras_model(decoder_input, x_decoded_mean_2)
 
 vae_loss <- function(x, x_decoded_mean){
   xent_loss <- (original_dim/1.0)*loss_binary_crossentropy(x, x_decoded_mean)
-  kl_loss <- -0.5*K$mean(1 + z_log_var - K$square(z_mean) - K$exp(z_log_var), axis = -1L)
+  kl_loss <- -0.5*k_mean(1 + z_log_var - k_square(z_mean) - k_exp(z_log_var), axis = -1L)
   xent_loss + kl_loss
 }
 

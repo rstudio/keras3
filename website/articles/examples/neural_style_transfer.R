@@ -30,7 +30,7 @@
 library(keras)
 library(purrr)
 library(R6)
-K <- backend()
+
 # Parameters --------------------------------------------------------------
 
 base_image_path <- "neural-style-base-img.png"
@@ -81,15 +81,15 @@ deprocess_image <- function(x){
 # Defining the model ------------------------------------------------------
 
 # get tensor representations of our images
-base_image <- K$variable(preprocess_image(base_image_path))
-style_reference_image <- K$variable(preprocess_image(style_reference_image_path))
+base_image <- k_variable(preprocess_image(base_image_path))
+style_reference_image <- k_variable(preprocess_image(style_reference_image_path))
 
 # this will contain our generated image
-combination_image <- K$placeholder(c(1L, img_nrows, img_ncols, 3L))
+combination_image <- k_placeholder(c(1, img_nrows, img_ncols, 3))
 
 # combine the 3 images into a single Keras tensor
-input_tensor <- K$concatenate(list(base_image, style_reference_image, 
-                                   combination_image), axis = 0L)
+input_tensor <- k_concatenate(list(base_image, style_reference_image, 
+                                   combination_image), axis = 1)
 
 # build the VGG16 network with our 3 images as input
 # the model will be loaded with pre-trained ImageNet weights
@@ -109,10 +109,10 @@ output_dict <- map(model$layers, ~.x$output) %>% set_names(nms)
 gram_matrix <- function(x){
   
   features <- x %>%
-    K$permute_dimensions(pattern = c(2L, 0L, 1L)) %>%
-    K$batch_flatten()
+    k_permute_dimensions(pattern = c(3, 1, 2)) %>%
+    k_batch_flatten()
   
-  K$dot(features, K$transpose(features))
+  k_dot(features, k_transpose(features))
 }
 
 # the "style loss" is designed to maintain
@@ -128,7 +128,7 @@ style_loss <- function(style, combination){
   channels <- 3
   size <- img_nrows*img_ncols
   
-  K$sum(K$square(S - C)) / (4 * channels^2  * size^2)
+  k_sum(k_square(S - C)) / (4 * channels^2  * size^2)
 }
 
 # an auxiliary loss function
@@ -136,7 +136,7 @@ style_loss <- function(style, combination){
 # base image in the generated image
 
 content_loss <- function(base, combination){
-  K$sum(K$square(combination - base))
+  k_sum(k_square(combination - base))
 }
 
 # the 3rd loss function, total variation loss,
@@ -147,13 +147,13 @@ total_variation_loss <- function(x){
   y_i1j <- x[,2:(img_nrows), 1:(img_ncols - 1L),]
   y_ij1 <- x[,1:(img_nrows - 1L), 2:(img_ncols),]
   
-  a <- K$square(y_ij - y_i1j)
-  b <- K$square(y_ij - y_ij1)
-  K$sum(K$pow(a + b, 1.25))
+  a <- k_square(y_ij - y_i1j)
+  b <- k_square(y_ij - y_ij1)
+  k_sum(k_pow(a + b, 1.25))
 }
 
 # combine these loss functions into a single scalar
-loss <- K$variable(0.0)
+loss <- k_variable(0.0)
 layer_features <- output_dict$block4_conv2
 base_image_features <- layer_features[1,,,]
 combination_features <- layer_features[3,,,]
@@ -176,9 +176,9 @@ for(layer_name in feature_layers){
 loss <- loss + (total_variation_weight * total_variation_loss(combination_image))
 
 # get the gradients of the generated image wrt the loss
-grads <- K$gradients(loss, combination_image)[[1]]
+grads <- k_gradients(loss, combination_image)[[1]]
 
-f_outputs <-  K$`function`(list(combination_image), list(loss, grads))
+f_outputs <- k_function(list(combination_image), list(loss, grads))
 
 eval_loss_and_grads <- function(image){
   image <- array_reshape(image, c(1, img_nrows, img_ncols, 3))

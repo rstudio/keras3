@@ -80,12 +80,12 @@ sampling <- function(args) {
   z_mean <- args[, 1:(latent_dim)]
   z_log_var <- args[, (latent_dim + 1):(2 * latent_dim)]
   
-  epsilon <- K$random_normal(
-    shape = c(K$shape(z_mean)[[1]]),
+  epsilon <- k_random_normal(
+    shape = c(k_shape(z_mean)[[1]]),
     mean = 0.,
     stddev = epsilon_std
   )
-  z_mean + K$exp(z_log_var) * epsilon
+  z_mean + k_exp(z_log_var) * epsilon
 }
 
 z <- layer_concatenate(list(z_mean, z_log_var)) %>% layer_lambda(sampling)
@@ -138,13 +138,13 @@ x_decoded_mean_squash <- decoder_mean_squash(x_decoded_relu)
 
 # custom loss function
 vae_loss <- function(x, x_decoded_mean_squash) {
-  x <- K$flatten(x)
-  x_decoded_mean_squash <- K$flatten(x_decoded_mean_squash)
+  x <- k_flatten(x)
+  x_decoded_mean_squash <- k_flatten(x_decoded_mean_squash)
   xent_loss <- 1.0 * img_rows * img_cols *
     loss_binary_crossentropy(x, x_decoded_mean_squash)
-  kl_loss <- -0.5 * K$mean(1 + z_log_var - K$square(z_mean) -
-                           K$exp(z_log_var), axis = -1L)
-  K$mean(xent_loss + kl_loss)
+  kl_loss <- -0.5 * k_mean(1 + z_log_var - k_square(z_mean) -
+                           k_exp(z_log_var), axis = -1L)
+  k_mean(xent_loss + kl_loss)
 }
 
 ## variational autoencoder

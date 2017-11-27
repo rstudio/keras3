@@ -15,9 +15,8 @@ test_loss <- function(name, test_direct_call = TRUE) {
         metrics='accuracy'
       )
     if (test_direct_call) {
-      K <- backend()
-      y_true <- K$constant(matrix(runif(100), nrow = 10, ncol = 10))
-      y_pred <- K$constant(matrix(runif(100), nrow = 10, ncol = 10))
+      y_true <- k_constant(matrix(runif(100), nrow = 10, ncol = 10))
+      y_pred <- k_constant(matrix(runif(100), nrow = 10, ncol = 10))
       loss_fn(y_true, y_pred)
     }
   }) 

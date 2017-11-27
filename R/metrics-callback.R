@@ -113,7 +113,6 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
     
     write_model_info = function(model) {
       tryCatch({
-        K <- backend()
         model_info <- list()
         model_info$model <- py_str(model, line_length = 80L)
         model_info$loss_function <- model$loss
@@ -122,7 +121,7 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
         optimizer <- model$optimizer
         if (!is.null(optimizer)) {
           model_info$optimizer <- py_str(optimizer)
-          model_info$learning_rate <- K$eval(optimizer$lr)                     
+          model_info$learning_rate <- k_eval(optimizer$lr)                     
         }
         tfruns::write_run_metadata("properties", model_info)
       }, error = function(e) {

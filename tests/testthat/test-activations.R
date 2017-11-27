@@ -11,8 +11,7 @@ test_activation <- function(name, required_version = NULL) {
         layer_dense(32, input_shape = 784) %>% 
         layer_activation(activation = activation_fn)
     }) 
-    K <- backend()
-    tensor <- K$constant(matrix(runif(100), nrow = 10, ncol = 10), shape = c(10L, 10L))
+    tensor <- k_constant(matrix(runif(100), nrow = 10, ncol = 10), shape = c(10, 10))
     activation_fn(tensor)
   })
 }

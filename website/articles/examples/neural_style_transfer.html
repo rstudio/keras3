@@ -128,7 +128,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 <span class="kw">library</span>(purrr)
 <span class="kw">library</span>(R6)
-K &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/backend.html">backend</a></span>()
+
 <span class="co"># Parameters --------------------------------------------------------------</span>
 
 base_image_path &lt;-<span class="st"> "neural-style-base-img.png"</span>
@@ -179,15 +179,15 @@ deprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(x
 <span class="co"># Defining the model ------------------------------------------------------</span>
 
 <span class="co"># get tensor representations of our images</span>
-base_image &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">variable</span>(<span class="kw">preprocess_image</span>(base_image_path))
-style_reference_image &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">variable</span>(<span class="kw">preprocess_image</span>(style_reference_image_path))
+base_image &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_variable.html">k_variable</a></span>(<span class="kw">preprocess_image</span>(base_image_path))
+style_reference_image &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_variable.html">k_variable</a></span>(<span class="kw">preprocess_image</span>(style_reference_image_path))
 
 <span class="co"># this will contain our generated image</span>
-combination_image &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">placeholder</span>(<span class="kw">c</span>(1L, img_nrows, img_ncols, 3L))
+combination_image &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_placeholder.html">k_placeholder</a></span>(<span class="kw">c</span>(<span class="dv">1</span>, img_nrows, img_ncols, <span class="dv">3</span>))
 
 <span class="co"># combine the 3 images into a single Keras tensor</span>
-input_tensor &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">concatenate</span>(<span class="kw">list</span>(base_image, style_reference_image, 
-                                   combination_image), <span class="dt">axis =</span> 0L)
+input_tensor &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_concatenate.html">k_concatenate</a></span>(<span class="kw">list</span>(base_image, style_reference_image, 
+                                   combination_image), <span class="dt">axis =</span> <span class="dv">1</span>)
 
 <span class="co"># build the VGG16 network with our 3 images as input</span>
 <span class="co"># the model will be loaded with pre-trained ImageNet weights</span>
@@ -207,10 +207,10 @@ output_dict &lt;-<span class="st"> </span><span class="kw"><a href="http://www.r
 gram_matrix &lt;-<span class="st"> </span><span class="cf">function</span>(x){
   
   features &lt;-<span class="st"> </span>x <span class="op">%&gt;%</span>
-<span class="st">    </span>K<span class="op">$</span><span class="kw">permute_dimensions</span>(<span class="dt">pattern =</span> <span class="kw">c</span>(2L, 0L, 1L)) <span class="op">%&gt;%</span>
-<span class="st">    </span>K<span class="op">$</span><span class="kw">batch_flatten</span>()
+<span class="st">    </span><span class="kw"><a href="../../reference/k_permute_dimensions.html">k_permute_dimensions</a></span>(<span class="dt">pattern =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../../reference/k_batch_flatten.html">k_batch_flatten</a></span>()
   
-  K<span class="op">$</span><span class="kw">dot</span>(features, K<span class="op">$</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(features))
+  <span class="kw"><a href="../../reference/k_dot.html">k_dot</a></span>(features, <span class="kw"><a href="../../reference/k_transpose.html">k_transpose</a></span>(features))
 }
 
 <span class="co"># the "style loss" is designed to maintain</span>
@@ -226,7 +226,7 @@ style_loss &lt;-<span class="st"> </span><span class="cf">function</span>(style,
   channels &lt;-<span class="st"> </span><span class="dv">3</span>
   size &lt;-<span class="st"> </span>img_nrows<span class="op">*</span>img_ncols
   
-  K<span class="op">$</span><span class="kw">sum</span>(K<span class="op">$</span><span class="kw">square</span>(S <span class="op">-</span><span class="st"> </span>C)) <span class="op">/</span><span class="st"> </span>(<span class="dv">4</span> <span class="op">*</span><span class="st"> </span>channels<span class="op">^</span><span class="dv">2</span>  <span class="op">*</span><span class="st"> </span>size<span class="op">^</span><span class="dv">2</span>)
+  <span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(S <span class="op">-</span><span class="st"> </span>C)) <span class="op">/</span><span class="st"> </span>(<span class="dv">4</span> <span class="op">*</span><span class="st"> </span>channels<span class="op">^</span><span class="dv">2</span>  <span class="op">*</span><span class="st"> </span>size<span class="op">^</span><span class="dv">2</span>)
 }
 
 <span class="co"># an auxiliary loss function</span>
@@ -234,7 +234,7 @@ style_loss &lt;-<span class="st"> </span><span class="cf">function</span>(style,
 <span class="co"># base image in the generated image</span>
 
 content_loss &lt;-<span class="st"> </span><span class="cf">function</span>(base, combination){
-  K<span class="op">$</span><span class="kw">sum</span>(K<span class="op">$</span><span class="kw">square</span>(combination <span class="op">-</span><span class="st"> </span>base))
+  <span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(combination <span class="op">-</span><span class="st"> </span>base))
 }
 
 <span class="co"># the 3rd loss function, total variation loss,</span>
@@ -245,13 +245,13 @@ total_variation_loss &lt;-<span class="st"> </span><span class="cf">function</sp
   y_i1j &lt;-<span class="st"> </span>x[,<span class="dv">2</span><span class="op">:</span>(img_nrows), <span class="dv">1</span><span class="op">:</span>(img_ncols <span class="op">-</span><span class="st"> </span>1L),]
   y_ij1 &lt;-<span class="st"> </span>x[,<span class="dv">1</span><span class="op">:</span>(img_nrows <span class="op">-</span><span class="st"> </span>1L), <span class="dv">2</span><span class="op">:</span>(img_ncols),]
   
-  a &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">square</span>(y_ij <span class="op">-</span><span class="st"> </span>y_i1j)
-  b &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">square</span>(y_ij <span class="op">-</span><span class="st"> </span>y_ij1)
-  K<span class="op">$</span><span class="kw">sum</span>(K<span class="op">$</span><span class="kw">pow</span>(a <span class="op">+</span><span class="st"> </span>b, <span class="fl">1.25</span>))
+  a &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(y_ij <span class="op">-</span><span class="st"> </span>y_i1j)
+  b &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(y_ij <span class="op">-</span><span class="st"> </span>y_ij1)
+  <span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="kw"><a href="../../reference/k_pow.html">k_pow</a></span>(a <span class="op">+</span><span class="st"> </span>b, <span class="fl">1.25</span>))
 }
 
 <span class="co"># combine these loss functions into a single scalar</span>
-loss &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">variable</span>(<span class="fl">0.0</span>)
+loss &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_variable.html">k_variable</a></span>(<span class="fl">0.0</span>)
 layer_features &lt;-<span class="st"> </span>output_dict<span class="op">$</span>block4_conv2
 base_image_features &lt;-<span class="st"> </span>layer_features[<span class="dv">1</span>,,,]
 combination_features &lt;-<span class="st"> </span>layer_features[<span class="dv">3</span>,,,]
@@ -274,9 +274,9 @@ feature_layers =<span class="st"> </span><span class="kw">c</span>(<span class="
 loss &lt;-<span class="st"> </span>loss <span class="op">+</span><span class="st"> </span>(total_variation_weight <span class="op">*</span><span class="st"> </span><span class="kw">total_variation_loss</span>(combination_image))
 
 <span class="co"># get the gradients of the generated image wrt the loss</span>
-grads &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">gradients</span>(loss, combination_image)[[<span class="dv">1</span>]]
+grads &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_gradients.html">k_gradients</a></span>(loss, combination_image)[[<span class="dv">1</span>]]
 
-f_outputs &lt;-<span class="st">  </span>K<span class="op">$</span><span class="st">`</span><span class="dt">function</span><span class="st">`</span>(<span class="kw">list</span>(combination_image), <span class="kw">list</span>(loss, grads))
+f_outputs &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_function.html">k_function</a></span>(<span class="kw">list</span>(combination_image), <span class="kw">list</span>(loss, grads))
 
 eval_loss_and_grads &lt;-<span class="st"> </span><span class="cf">function</span>(image){
   image &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(image, <span class="kw">c</span>(<span class="dv">1</span>, img_nrows, img_ncols, <span class="dv">3</span>))

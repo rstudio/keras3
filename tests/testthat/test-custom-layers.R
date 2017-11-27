@@ -28,8 +28,7 @@ CustomLayer <- R6::R6Class("CustomLayer",
     
     call = function(x, mask = NULL) {
       self$add_loss(list(5))
-      K <- backend()
-      K$dot(x, self$kernel)
+      k_dot(x, self$kernel)
     },
     
     compute_output_shape = function(input_shape) {

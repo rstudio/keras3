@@ -59,10 +59,7 @@ y_test <- to_categorical(y_test, num_classes)
 #' the parameters yet with comparable classification accuracy as an equivalent
 #' ReLU-based network.
 #'
-#' Because our custom layer is written with primitives from the Keras backend
-#' (`K`), our code can run both on TensorFlow and Theano.
 
-K <- backend()
 
 # Custom layer class
 AntirectifierLayer <- R6::R6Class("KerasLayer",
@@ -72,16 +69,16 @@ AntirectifierLayer <- R6::R6Class("KerasLayer",
   public = list(
    
     call = function(x, mask = NULL) {
-      x <- x - K$mean(x, axis = 1L, keepdims = TRUE)
-      x <- K$l2_normalize(x, axis = 1L)
-      pos <- K$relu(x)
-      neg <- K$relu(-x)
-      K$concatenate(c(pos, neg), axis = 1L)
+      x <- x - k_mean(x, axis = 2, keepdims = TRUE)
+      x <- k_l2_normalize(x, axis = 2)
+      pos <- k_relu(x)
+      neg <- k_relu(-x)
+      k_concatenate(c(pos, neg), axis = 2)
       
     },
      
     compute_output_shape = function(input_shape) {
-      input_shape[[2]] <- input_shape[[2]] * 2 
+      input_shape[[2]] <- input_shape[[2]] * 2L 
       tuple(input_shape)
     }
   )

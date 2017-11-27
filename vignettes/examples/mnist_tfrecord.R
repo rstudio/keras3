@@ -34,9 +34,7 @@
 library(keras)
 library(tensorflow)
 
-
-K <- backend()
-if (K$backend() != 'tensorflow') {
+if (k_backend() != 'tensorflow') {
   stop('This example can only run with the ',
        'TensorFlow backend, ',
        'because it requires TFRecords, which ',
@@ -58,7 +56,7 @@ cnn_layers <- function(x_train_input) {
     layer_dense(units = classes, activation = 'softmax', name = 'x_train_out')
 }
 
-sess <- K$get_session()
+sess <- k_get_session()
 
 # Data Preparation --------------------------------------------------------------
 
@@ -144,7 +142,7 @@ train_model %>% save_model_weights_hdf5('saved_wt.h5')
 # Clean up the TF session.
 coord$request_stop()
 coord$join(threads)
-K$clear_session()
+k_clear_session()
 
 # Second Session to test loading trained model without tensors
 x_test <- data$validation$images

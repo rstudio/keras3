@@ -129,7 +129,7 @@
     <div class="page-header">
       <h1>
         Reference
-        <small>version&nbsp;2.1.0.9000</small>
+        <small>version&nbsp;2.1.0.9001</small>
       </h1>
     </div>
 
@@ -1448,6 +1448,12 @@ augmented/normalized data)</p></td>
             <p><code><a href="is_keras_available.html">is_keras_available</a></code> </p>
           </td>
           <td><p>Check if Keras is Available</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="use_implementation.html">use_implementation</a></code> <code><a href="use_implementation.html">use_backend</a></code> </p>
+          </td>
+          <td><p>Select a Keras implementation and backend</p></td>
         </tr>
       </tbody><tbody>
         <tr>
@@ -1505,6 +1511,884 @@ augmented/normalized data)</p></td>
           </td>
           <td><p>Activation functions</p></td>
         </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-backend" class="hasAnchor"><a href="#section-backend" class="anchor"></a>Backend</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_abs.html">k_abs</a></code> </p>
+          </td>
+          <td><p>Element-wise absolute value.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_all.html">k_all</a></code> </p>
+          </td>
+          <td><p>Bitwise reduction (logical AND).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_any.html">k_any</a></code> </p>
+          </td>
+          <td><p>Bitwise reduction (logical OR).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_arange.html">k_arange</a></code> </p>
+          </td>
+          <td><p>Creates a 1D tensor containing a sequence of integers.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_argmax.html">k_argmax</a></code> </p>
+          </td>
+          <td><p>Returns the index of the maximum value along an axis.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_argmin.html">k_argmin</a></code> </p>
+          </td>
+          <td><p>Returns the index of the minimum value along an axis.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_backend.html">k_backend</a></code> </p>
+          </td>
+          <td><p>Active Keras backend</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_batch_dot.html">k_batch_dot</a></code> </p>
+          </td>
+          <td><p>Batchwise dot product.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_batch_flatten.html">k_batch_flatten</a></code> </p>
+          </td>
+          <td><p>Turn a nD tensor into a 2D tensor with same 1st dimension.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_batch_get_value.html">k_batch_get_value</a></code> </p>
+          </td>
+          <td><p>Returns the value of more than one tensor variable.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_batch_normalization.html">k_batch_normalization</a></code> </p>
+          </td>
+          <td><p>Applies batch normalization on x given mean, var, beta and gamma.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_batch_set_value.html">k_batch_set_value</a></code> </p>
+          </td>
+          <td><p>Sets the values of many tensor variables at once.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_bias_add.html">k_bias_add</a></code> </p>
+          </td>
+          <td><p>Adds a bias vector to a tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_binary_crossentropy.html">k_binary_crossentropy</a></code> </p>
+          </td>
+          <td><p>Binary crossentropy between an output tensor and a target tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_cast_to_floatx.html">k_cast_to_floatx</a></code> </p>
+          </td>
+          <td><p>Cast an array to the default Keras float type.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_cast.html">k_cast</a></code> </p>
+          </td>
+          <td><p>Casts a tensor to a different dtype and returns it.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_categorical_crossentropy.html">k_categorical_crossentropy</a></code> </p>
+          </td>
+          <td><p>Categorical crossentropy between an output tensor and a target tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_clear_session.html">k_clear_session</a></code> </p>
+          </td>
+          <td><p>Destroys the current TF graph and creates a new one.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_clip.html">k_clip</a></code> </p>
+          </td>
+          <td><p>Element-wise value clipping.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_concatenate.html">k_concatenate</a></code> </p>
+          </td>
+          <td><p>Concatenates a list of tensors alongside the specified axis.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_constant.html">k_constant</a></code> </p>
+          </td>
+          <td><p>Creates a constant tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_conv1d.html">k_conv1d</a></code> </p>
+          </td>
+          <td><p>1D convolution.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_conv2d_transpose.html">k_conv2d_transpose</a></code> </p>
+          </td>
+          <td><p>2D deconvolution (i.e. transposed convolution).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_conv2d.html">k_conv2d</a></code> </p>
+          </td>
+          <td><p>2D convolution.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_conv3d_transpose.html">k_conv3d_transpose</a></code> </p>
+          </td>
+          <td><p>3D deconvolution (i.e. transposed convolution).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_conv3d.html">k_conv3d</a></code> </p>
+          </td>
+          <td><p>3D convolution.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_cos.html">k_cos</a></code> </p>
+          </td>
+          <td><p>Computes cos of x element-wise.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_count_params.html">k_count_params</a></code> </p>
+          </td>
+          <td><p>Returns the static number of elements in a Keras variable or tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_ctc_batch_cost.html">k_ctc_batch_cost</a></code> </p>
+          </td>
+          <td><p>Runs CTC loss algorithm on each batch element.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_ctc_decode.html">k_ctc_decode</a></code> </p>
+          </td>
+          <td><p>Decodes the output of a softmax.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_ctc_label_dense_to_sparse.html">k_ctc_label_dense_to_sparse</a></code> </p>
+          </td>
+          <td><p>Converts CTC labels from dense to sparse.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_cumprod.html">k_cumprod</a></code> </p>
+          </td>
+          <td><p>Cumulative product of the values in a tensor, alongside the specified axis.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_cumsum.html">k_cumsum</a></code> </p>
+          </td>
+          <td><p>Cumulative sum of the values in a tensor, alongside the specified axis.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_depthwise_conv2d.html">k_depthwise_conv2d</a></code> </p>
+          </td>
+          <td><p>2D convolution with separable filters.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_dot.html">k_dot</a></code> </p>
+          </td>
+          <td><p>Multiplies 2 tensors (and/or variables) and returns a <em>tensor</em>.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_dropout.html">k_dropout</a></code> </p>
+          </td>
+          <td><p>Sets entries in <code>x</code> to zero at random, while scaling the entire tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_dtype.html">k_dtype</a></code> </p>
+          </td>
+          <td><p>Returns the dtype of a Keras tensor or variable, as a string.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_elu.html">k_elu</a></code> </p>
+          </td>
+          <td><p>Exponential linear unit.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_epsilon.html">k_epsilon</a></code> <code><a href="k_epsilon.html">k_set_epsilon</a></code> </p>
+          </td>
+          <td><p>Fuzz factor used in numeric expressions.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_equal.html">k_equal</a></code> </p>
+          </td>
+          <td><p>Element-wise equality between two tensors.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_eval.html">k_eval</a></code> </p>
+          </td>
+          <td><p>Evaluates the value of a variable.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_exp.html">k_exp</a></code> </p>
+          </td>
+          <td><p>Element-wise exponential.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_expand_dims.html">k_expand_dims</a></code> </p>
+          </td>
+          <td><p>Adds a 1-sized dimension at index "axis".</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_eye.html">k_eye</a></code> </p>
+          </td>
+          <td><p>Instantiate an identity matrix and returns it.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_flatten.html">k_flatten</a></code> </p>
+          </td>
+          <td><p>Flatten a tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_floatx.html">k_floatx</a></code> <code><a href="k_floatx.html">k_set_floatx</a></code> </p>
+          </td>
+          <td><p>Default float type</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_foldl.html">k_foldl</a></code> </p>
+          </td>
+          <td><p>Reduce elems using fn to combine them from left to right.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_foldr.html">k_foldr</a></code> </p>
+          </td>
+          <td><p>Reduce elems using fn to combine them from right to left.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_function.html">k_function</a></code> </p>
+          </td>
+          <td><p>Instantiates a Keras function</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_gather.html">k_gather</a></code> </p>
+          </td>
+          <td><p>Retrieves the elements of indices <code>indices</code> in the tensor <code>reference</code>.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_get_session.html">k_get_session</a></code> <code><a href="k_get_session.html">k_set_session</a></code> </p>
+          </td>
+          <td><p>TF session to be used by the backend.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_get_uid.html">k_get_uid</a></code> </p>
+          </td>
+          <td><p>Get the uid for the default graph.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_get_value.html">k_get_value</a></code> </p>
+          </td>
+          <td><p>Returns the value of a variable.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_get_variable_shape.html">k_get_variable_shape</a></code> </p>
+          </td>
+          <td><p>Returns the shape of a variable.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_gradients.html">k_gradients</a></code> </p>
+          </td>
+          <td><p>Returns the gradients of <code>variables</code> w.r.t. <code>loss</code>.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_greater_equal.html">k_greater_equal</a></code> </p>
+          </td>
+          <td><p>Element-wise truth value of (x &gt;= y).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_greater.html">k_greater</a></code> </p>
+          </td>
+          <td><p>Element-wise truth value of (x &gt; y).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_hard_sigmoid.html">k_hard_sigmoid</a></code> </p>
+          </td>
+          <td><p>Segment-wise linear approximation of sigmoid.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_identity.html">k_identity</a></code> </p>
+          </td>
+          <td><p>Returns a tensor with the same content as the input tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_image_data_format.html">k_image_data_format</a></code> <code><a href="k_image_data_format.html">k_set_image_data_format</a></code> </p>
+          </td>
+          <td><p>Default image data format convention ('channels_first' or 'channels_last').</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_in_test_phase.html">k_in_test_phase</a></code> </p>
+          </td>
+          <td><p>Selects <code>x</code> in test phase, and <code>alt</code> otherwise.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_in_top_k.html">k_in_top_k</a></code> </p>
+          </td>
+          <td><p>Returns whether the <code>targets</code> are in the top <code>k</code> <code>predictions</code>.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_in_train_phase.html">k_in_train_phase</a></code> </p>
+          </td>
+          <td><p>Selects <code>x</code> in train phase, and <code>alt</code> otherwise.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_int_shape.html">k_int_shape</a></code> </p>
+          </td>
+          <td><p>Returns the shape of tensor or variable as a list of int or NULL entries.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_is_keras_tensor.html">k_is_keras_tensor</a></code> </p>
+          </td>
+          <td><p>Returns whether <code>x</code> is a Keras tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_is_placeholder.html">k_is_placeholder</a></code> </p>
+          </td>
+          <td><p>Returns whether <code>x</code> is a placeholder.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_is_sparse.html">k_is_sparse</a></code> </p>
+          </td>
+          <td><p>Returns whether a tensor is a sparse tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_l2_normalize.html">k_l2_normalize</a></code> </p>
+          </td>
+          <td><p>Normalizes a tensor wrt the L2 norm alongside the specified axis.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_learning_phase.html">k_learning_phase</a></code> </p>
+          </td>
+          <td><p>Returns the learning phase flag.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_less_equal.html">k_less_equal</a></code> </p>
+          </td>
+          <td><p>Element-wise truth value of (x &lt;= y).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_less.html">k_less</a></code> </p>
+          </td>
+          <td><p>Element-wise truth value of (x &lt; y).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_local_conv1d.html">k_local_conv1d</a></code> </p>
+          </td>
+          <td><p>Apply 1D conv with un-shared weights.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_local_conv2d.html">k_local_conv2d</a></code> </p>
+          </td>
+          <td><p>Apply 2D conv with un-shared weights.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_log.html">k_log</a></code> </p>
+          </td>
+          <td><p>Element-wise log.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_logsumexp.html">k_logsumexp</a></code> </p>
+          </td>
+          <td><p>Computes log(sum(exp(elements across dimensions of a tensor))).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_manual_variable_initialization.html">k_manual_variable_initialization</a></code> </p>
+          </td>
+          <td><p>Sets the manual variable initialization flag.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_map_fn.html">k_map_fn</a></code> </p>
+          </td>
+          <td><p>Map the function fn over the elements elems and return the outputs.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_max.html">k_max</a></code> </p>
+          </td>
+          <td><p>Maximum value in a tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_maximum.html">k_maximum</a></code> </p>
+          </td>
+          <td><p>Element-wise maximum of two tensors.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_mean.html">k_mean</a></code> </p>
+          </td>
+          <td><p>Mean of a tensor, alongside the specified axis.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_min.html">k_min</a></code> </p>
+          </td>
+          <td><p>Minimum value in a tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_minimum.html">k_minimum</a></code> </p>
+          </td>
+          <td><p>Element-wise minimum of two tensors.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_moving_average_update.html">k_moving_average_update</a></code> </p>
+          </td>
+          <td><p>Compute the moving average of a variable.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_ndim.html">k_ndim</a></code> </p>
+          </td>
+          <td><p>Returns the number of axes in a tensor, as an integer.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_normalize_batch_in_training.html">k_normalize_batch_in_training</a></code> </p>
+          </td>
+          <td><p>Computes mean and std for batch then apply batch_normalization on batch.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_not_equal.html">k_not_equal</a></code> </p>
+          </td>
+          <td><p>Element-wise inequality between two tensors.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_one_hot.html">k_one_hot</a></code> </p>
+          </td>
+          <td><p>Computes the one-hot representation of an integer tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_ones_like.html">k_ones_like</a></code> </p>
+          </td>
+          <td><p>Instantiates an all-ones variable of the same shape as another tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_ones.html">k_ones</a></code> </p>
+          </td>
+          <td><p>Instantiates an all-ones tensor variable and returns it.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_permute_dimensions.html">k_permute_dimensions</a></code> </p>
+          </td>
+          <td><p>Permutes axes in a tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_placeholder.html">k_placeholder</a></code> </p>
+          </td>
+          <td><p>Instantiates a placeholder tensor and returns it.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_pool2d.html">k_pool2d</a></code> </p>
+          </td>
+          <td><p>2D Pooling.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_pool3d.html">k_pool3d</a></code> </p>
+          </td>
+          <td><p>3D Pooling.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_pow.html">k_pow</a></code> </p>
+          </td>
+          <td><p>Element-wise exponentiation.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_print_tensor.html">k_print_tensor</a></code> </p>
+          </td>
+          <td><p>Prints <code>message</code> and the tensor value when evaluated.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_prod.html">k_prod</a></code> </p>
+          </td>
+          <td><p>Multiplies the values in a tensor, alongside the specified axis.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_random_binomial.html">k_random_binomial</a></code> </p>
+          </td>
+          <td><p>Returns a tensor with random binomial distribution of values.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_random_normal_variable.html">k_random_normal_variable</a></code> </p>
+          </td>
+          <td><p>Instantiates a variable with values drawn from a normal distribution.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_random_normal.html">k_random_normal</a></code> </p>
+          </td>
+          <td><p>Returns a tensor with normal distribution of values.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_random_uniform_variable.html">k_random_uniform_variable</a></code> </p>
+          </td>
+          <td><p>Instantiates a variable with values drawn from a uniform distribution.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_random_uniform.html">k_random_uniform</a></code> </p>
+          </td>
+          <td><p>Returns a tensor with uniform distribution of values.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_relu.html">k_relu</a></code> </p>
+          </td>
+          <td><p>Rectified linear unit.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_repeat_elements.html">k_repeat_elements</a></code> </p>
+          </td>
+          <td><p>Repeats the elements of a tensor along an axis.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_repeat.html">k_repeat</a></code> </p>
+          </td>
+          <td><p>Repeats a 2D tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_reset_uids.html">k_reset_uids</a></code> </p>
+          </td>
+          <td><p>Reset graph identifiers.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_reshape.html">k_reshape</a></code> </p>
+          </td>
+          <td><p>Reshapes a tensor to the specified shape.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_resize_images.html">k_resize_images</a></code> </p>
+          </td>
+          <td><p>Resizes the images contained in a 4D tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_resize_volumes.html">k_resize_volumes</a></code> </p>
+          </td>
+          <td><p>Resizes the volume contained in a 5D tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_reverse.html">k_reverse</a></code> </p>
+          </td>
+          <td><p>Reverse a tensor along the specified axes.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_rnn.html">k_rnn</a></code> </p>
+          </td>
+          <td><p>Iterates over the time dimension of a tensor</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_round.html">k_round</a></code> </p>
+          </td>
+          <td><p>Element-wise rounding to the closest integer.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_separable_conv2d.html">k_separable_conv2d</a></code> </p>
+          </td>
+          <td><p>2D convolution with separable filters.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_set_learning_phase.html">k_set_learning_phase</a></code> </p>
+          </td>
+          <td><p>Sets the learning phase to a fixed value.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_set_value.html">k_set_value</a></code> </p>
+          </td>
+          <td><p>Sets the value of a variable, from an R array.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_shape.html">k_shape</a></code> </p>
+          </td>
+          <td><p>Returns the symbolic shape of a tensor or variable.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_sigmoid.html">k_sigmoid</a></code> </p>
+          </td>
+          <td><p>Element-wise sigmoid.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_sign.html">k_sign</a></code> </p>
+          </td>
+          <td><p>Element-wise sign.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_sin.html">k_sin</a></code> </p>
+          </td>
+          <td><p>Computes sin of x element-wise.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_softmax.html">k_softmax</a></code> </p>
+          </td>
+          <td><p>Softmax of a tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_softplus.html">k_softplus</a></code> </p>
+          </td>
+          <td><p>Softplus of a tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_softsign.html">k_softsign</a></code> </p>
+          </td>
+          <td><p>Softsign of a tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_sparse_categorical_crossentropy.html">k_sparse_categorical_crossentropy</a></code> </p>
+          </td>
+          <td><p>Categorical crossentropy with integer targets.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_spatial_2d_padding.html">k_spatial_2d_padding</a></code> </p>
+          </td>
+          <td><p>Pads the 2nd and 3rd dimensions of a 4D tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_spatial_3d_padding.html">k_spatial_3d_padding</a></code> </p>
+          </td>
+          <td><p>Pads 5D tensor with zeros along the depth, height, width dimensions.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_sqrt.html">k_sqrt</a></code> </p>
+          </td>
+          <td><p>Element-wise square root.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_square.html">k_square</a></code> </p>
+          </td>
+          <td><p>Element-wise square.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_squeeze.html">k_squeeze</a></code> </p>
+          </td>
+          <td><p>Removes a 1-dimension from the tensor at index "axis".</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_stack.html">k_stack</a></code> </p>
+          </td>
+          <td><p>Stacks a list of rank <code>R</code> tensors into a rank <code>R+1</code> tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_std.html">k_std</a></code> </p>
+          </td>
+          <td><p>Standard deviation of a tensor, alongside the specified axis.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_stop_gradient.html">k_stop_gradient</a></code> </p>
+          </td>
+          <td><p>Returns <code>variables</code> but with zero gradient w.r.t. every other variable.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_sum.html">k_sum</a></code> </p>
+          </td>
+          <td><p>Sum of the values in a tensor, alongside the specified axis.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_switch.html">k_switch</a></code> </p>
+          </td>
+          <td><p>Switches between two operations depending on a scalar value.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_tanh.html">k_tanh</a></code> </p>
+          </td>
+          <td><p>Element-wise tanh.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_temporal_padding.html">k_temporal_padding</a></code> </p>
+          </td>
+          <td><p>Pads the middle dimension of a 3D tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_tile.html">k_tile</a></code> </p>
+          </td>
+          <td><p>Creates a tensor by tiling <code>x</code> by <code>n</code>.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_to_dense.html">k_to_dense</a></code> </p>
+          </td>
+          <td><p>Converts a sparse tensor into a dense tensor and returns it.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_transpose.html">k_transpose</a></code> </p>
+          </td>
+          <td><p>Transposes a tensor and returns it.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_truncated_normal.html">k_truncated_normal</a></code> </p>
+          </td>
+          <td><p>Returns a tensor with truncated random normal distribution of values.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_update_add.html">k_update_add</a></code> </p>
+          </td>
+          <td><p>Update the value of <code>x</code> by adding <code>increment</code>.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_update_sub.html">k_update_sub</a></code> </p>
+          </td>
+          <td><p>Update the value of <code>x</code> by subtracting <code>decrement</code>.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_update.html">k_update</a></code> </p>
+          </td>
+          <td><p>Update the value of <code>x</code> to <code>new_x</code>.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_var.html">k_var</a></code> </p>
+          </td>
+          <td><p>Variance of a tensor, alongside the specified axis.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_variable.html">k_variable</a></code> </p>
+          </td>
+          <td><p>Instantiates a variable and returns it.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_zeros_like.html">k_zeros_like</a></code> </p>
+          </td>
+          <td><p>Instantiates an all-zeros variable of the same shape as another tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_zeros.html">k_zeros</a></code> </p>
+          </td>
+          <td><p>Instantiates an all-zeros variable and returns it.</p></td>
+        </tr>
       </tbody>
       </table>
     </div>
@@ -1543,6 +2427,7 @@ augmented/normalized data)</p></td>
       <li><a href="#section-metrics">Metrics</a></li>
       <li><a href="#section-regularizers">Regularizers</a></li>
       <li><a href="#section-activations">Activations</a></li>
+      <li><a href="#section-backend">Backend</a></li>
     </ul>
   </div>
 </div>

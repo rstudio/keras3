@@ -16,8 +16,7 @@
 library(keras)
 library(progress)
 library(abind)
-K <- keras::backend()
-K$set_image_data_format('channels_first')
+k_set_image_data_format('channels_first')
 
 # Functions ---------------------------------------------------------------
 

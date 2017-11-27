@@ -8,7 +8,6 @@ library(keras)
 library(tensorflow)
 library(purrr)
 library(R6)
-K <- backend()
 
 # Function Definitions ----------------------------------------------------
 
@@ -46,9 +45,9 @@ total_variation_loss <- function(x, h, w){
   y_i1j <- x[,2:(h), 1:(w - 1L),]
   y_ij1 <- x[,1:(h - 1L), 2:(w),]
   
-  a <- K$square(y_ij - y_i1j)
-  b <- K$square(y_ij - y_ij1)
-  K$sum(K$pow(a + b, 1.25))
+  a <- k_square(y_ij - y_i1j)
+  b <- k_square(y_ij - y_ij1)
+  k_sum(k_pow(a + b, 1.25))
 }
 
 
@@ -109,7 +108,7 @@ for(layer_name in names(settings$features)){
   
   # Avoid border artifacts by only involving non-border pixels in the loss
   loss <- loss - 
-    coeff*K$sum(K$square(x[,4:(out_shape[2] - 1), 4:(out_shape[3] - 1),])) / 
+    coeff*k_sum(k_square(x[,4:(out_shape[2] - 1), 4:(out_shape[3] - 1),])) / 
     prod(out_shape[-1])
 }
 
@@ -120,12 +119,12 @@ loss <- loss + settings$continuity*
 
 # Add image L2 norm to loss (prevents pixels from taking very high values, makes image darker)
   # Note that the loss can be further modified to achieve new effects
-loss <- loss + settings$dream_l2*K$sum(K$square(dream))/prod(img_size)
+loss <- loss + settings$dream_l2*k_sum(k_square(dream))/prod(img_size)
 
 # Compute the gradients of the dream wrt the loss
-grads <- K$gradients(loss, dream)[[1]] 
+grads <- k_gradients(loss, dream)[[1]] 
 
-f_outputs <- K$`function`(list(dream), list(loss,grads))
+f_outputs <- k_function(list(dream), list(loss,grads))
 
 eval_loss_and_grads <- function(image){
   image <- array_reshape(image, c(1, img_size))

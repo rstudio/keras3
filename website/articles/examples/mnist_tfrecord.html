@@ -123,9 +123,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 <span class="kw">library</span>(tensorflow)
 
-
-K &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/backend.html">backend</a></span>()
-<span class="cf">if</span> (K<span class="op">$</span><span class="kw"><a href="../../reference/backend.html">backend</a></span>() <span class="op">!=</span><span class="st"> 'tensorflow'</span>) {
+<span class="cf">if</span> (<span class="kw"><a href="../../reference/k_backend.html">k_backend</a></span>() <span class="op">!=</span><span class="st"> 'tensorflow'</span>) {
   <span class="kw">stop</span>(<span class="st">'This example can only run with the '</span>,
        <span class="st">'TensorFlow backend, '</span>,
        <span class="st">'because it requires TFRecords, which '</span>,
@@ -147,7 +145,7 @@ cnn_layers &lt;-<span class="st"> </span><span class="cf">function</span>(x_trai
 <span class="st">    </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> classes, <span class="dt">activation =</span> <span class="st">'softmax'</span>, <span class="dt">name =</span> <span class="st">'x_train_out'</span>)
 }
 
-sess &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">get_session</span>()
+sess &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_get_session.html">k_get_session</a></span>()
 
 <span class="co"># Data Preparation --------------------------------------------------------------</span>
 
@@ -233,7 +231,7 @@ train_model <span class="op">%&gt;%</span><span class="st"> </span><span class="
 <span class="co"># Clean up the TF session.</span>
 coord<span class="op">$</span><span class="kw">request_stop</span>()
 coord<span class="op">$</span><span class="kw">join</span>(threads)
-K<span class="op">$</span><span class="kw">clear_session</span>()
+<span class="kw"><a href="../../reference/k_clear_session.html">k_clear_session</a></span>()
 
 <span class="co"># Second Session to test loading trained model without tensors</span>
 x_test &lt;-<span class="st"> </span>data<span class="op">$</span>validation<span class="op">$</span>images

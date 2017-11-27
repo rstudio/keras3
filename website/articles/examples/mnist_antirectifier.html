@@ -154,10 +154,7 @@ y_test &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/t
 <p>When applying ReLU, assuming that the distribution of the previous output is approximately centered around 0., you are discarding half of your input. This is inefficient.</p>
 <p>Antirectifier allows to return all-positive outputs like ReLU, without discarding any data.</p>
 <p>Tests on MNIST show that Antirectifier allows to train networks with half the parameters yet with comparable classification accuracy as an equivalent ReLU-based network.</p>
-<p>Because our custom layer is written with primitives from the Keras backend (<code>K</code>), our code can run both on TensorFlow and Theano.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">K &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/backend.html">backend</a></span>()
-
-<span class="co"># Custom layer class</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Custom layer class</span>
 AntirectifierLayer &lt;-<span class="st"> </span>R6<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/R6/topics/R6Class">R6Class</a></span>(<span class="st">"KerasLayer"</span>,
   
   <span class="dt">inherit =</span> KerasLayer,
@@ -165,16 +162,16 @@ AntirectifierLayer &lt;-<span class="st"> </span>R6<span class="op">::</span><sp
   <span class="dt">public =</span> <span class="kw">list</span>(
    
     <span class="dt">call =</span> <span class="cf">function</span>(x, <span class="dt">mask =</span> <span class="ot">NULL</span>) {
-      x &lt;-<span class="st"> </span>x <span class="op">-</span><span class="st"> </span>K<span class="op">$</span><span class="kw">mean</span>(x, <span class="dt">axis =</span> 1L, <span class="dt">keepdims =</span> <span class="ot">TRUE</span>)
-      x &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">l2_normalize</span>(x, <span class="dt">axis =</span> 1L)
-      pos &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">relu</span>(x)
-      neg &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">relu</span>(<span class="op">-</span>x)
-      K<span class="op">$</span><span class="kw">concatenate</span>(<span class="kw">c</span>(pos, neg), <span class="dt">axis =</span> 1L)
+      x &lt;-<span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../../reference/k_mean.html">k_mean</a></span>(x, <span class="dt">axis =</span> <span class="dv">2</span>, <span class="dt">keepdims =</span> <span class="ot">TRUE</span>)
+      x &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_l2_normalize.html">k_l2_normalize</a></span>(x, <span class="dt">axis =</span> <span class="dv">2</span>)
+      pos &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_relu.html">k_relu</a></span>(x)
+      neg &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_relu.html">k_relu</a></span>(<span class="op">-</span>x)
+      <span class="kw"><a href="../../reference/k_concatenate.html">k_concatenate</a></span>(<span class="kw">c</span>(pos, neg), <span class="dt">axis =</span> <span class="dv">2</span>)
       
     },
      
     <span class="dt">compute_output_shape =</span> <span class="cf">function</span>(input_shape) {
-      input_shape[[<span class="dv">2</span>]] &lt;-<span class="st"> </span>input_shape[[<span class="dv">2</span>]] <span class="op">*</span><span class="st"> </span><span class="dv">2</span> 
+      input_shape[[<span class="dv">2</span>]] &lt;-<span class="st"> </span>input_shape[[<span class="dv">2</span>]] <span class="op">*</span><span class="st"> </span>2L 
       <span class="kw">tuple</span>(input_shape)
     }
   )

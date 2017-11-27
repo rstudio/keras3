@@ -29,9 +29,8 @@
 #' @examples \dontrun{
 #' 
 #' # create metric using backend tensor functions
-#' K <- backend()
 #' metric_mean_pred <- function(y_true, y_pred) {
-#'   K$mean(y_pred) 
+#'   k_mean(y_pred) 
 #' }
 #' 
 #' model %>% compile(

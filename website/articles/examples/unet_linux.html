@@ -162,11 +162,11 @@ masks_dir &lt;-<span class="st"> "./input/train_masks/"</span>
 K &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/backend.html">backend</a></span>()
 
 dice_coef &lt;-<span class="st"> </span><span class="cf">function</span>(y_true, y_pred, <span class="dt">smooth =</span> <span class="fl">1.0</span>) {
-    y_true_f &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">flatten</span>(y_true)
-    y_pred_f &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">flatten</span>(y_pred)
-    intersection &lt;-<span class="st"> </span>K<span class="op">$</span><span class="kw">sum</span>(y_true_f <span class="op">*</span><span class="st"> </span>y_pred_f)
+    y_true_f &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_flatten.html">k_flatten</a></span>(y_true)
+    y_pred_f &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_flatten.html">k_flatten</a></span>(y_pred)
+    intersection &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(y_true_f <span class="op">*</span><span class="st"> </span>y_pred_f)
     result &lt;-<span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>intersection <span class="op">+</span><span class="st"> </span>smooth) <span class="op">/</span><span class="st"> </span>
-<span class="st">        </span>(K<span class="op">$</span><span class="kw">sum</span>(y_true_f) <span class="op">+</span><span class="st"> </span>K<span class="op">$</span><span class="kw">sum</span>(y_pred_f) <span class="op">+</span><span class="st"> </span>smooth)
+<span class="st">        </span>(<span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(y_true_f) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(y_pred_f) <span class="op">+</span><span class="st"> </span>smooth)
     <span class="kw">return</span>(result)
 }
 

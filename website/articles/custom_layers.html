@@ -128,8 +128,6 @@
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 
-K &lt;-<span class="st"> </span><span class="kw"><a href="../reference/backend.html">backend</a></span>()
-
 CustomLayer &lt;-<span class="st"> </span>R6<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/R6/topics/R6Class">R6Class</a></span>(<span class="st">"CustomLayer"</span>,
                                   
   <span class="dt">inherit =</span> KerasLayer,
@@ -154,7 +152,7 @@ CustomLayer &lt;-<span class="st"> </span>R6<span class="op">::</span><span clas
     },
     
     <span class="dt">call =</span> <span class="cf">function</span>(x, <span class="dt">mask =</span> <span class="ot">NULL</span>) {
-      K<span class="op">$</span><span class="kw">dot</span>(x, self<span class="op">$</span>kernel)
+      <span class="kw"><a href="../reference/k_dot.html">k_dot</a></span>(x, self<span class="op">$</span>kernel)
     },
     
     <span class="dt">compute_output_shape =</span> <span class="cf">function</span>(input_shape) {

@@ -297,6 +297,8 @@ reference:
       - use_session_with_seed
       - install_keras
       - is_keras_available
+      - use_implementation
+      - use_backend
      
   - title: "Losses"
     contents:
@@ -314,5 +316,12 @@ reference:
   - title: "Activations" 
     contents:
       - activation_relu
+      
+  - title: "Backend"
+    contents:
+      - starts_with("k_")
+
+      
+      
 
 
