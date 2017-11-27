@@ -900,7 +900,7 @@ k_exp <- function(x) {
 }
 
 
-#' Adds a 1-sized dimension at index "axis".
+#' Adds a 1-sized dimension at index `axis`.
 #' 
 #' @param x A tensor or variable.
 #' @param axis Position (1-based) where to add a new axis.

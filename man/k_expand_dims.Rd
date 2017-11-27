@@ -2,7 +2,7 @@
 % Please edit documentation in R/backend.R
 \name{k_expand_dims}
 \alias{k_expand_dims}
-\title{Adds a 1-sized dimension at index "axis".}
+\title{Adds a 1-sized dimension at index \code{axis}.}
 \usage{
 k_expand_dims(x, axis = -1L)
 }
@@ -15,7 +15,7 @@ k_expand_dims(x, axis = -1L)
 A tensor with expanded dimensions.
 }
 \description{
-Adds a 1-sized dimension at index "axis".
+Adds a 1-sized dimension at index \code{axis}.
 }
 \section{Keras Backend}{
 
