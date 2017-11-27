@@ -76,6 +76,9 @@ blockquote {
   background-color: rgb(180,0,12);
 }
 
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+  background-color: rgba(195,0,4, 0.9);
+}
 
 
 .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus,  .dropdown-menu>li.active>a {
