@@ -10,6 +10,11 @@ Install the development version with: `install_github("rstudio/keras")`
 - Added `use_implementation()` and `use_backend()` functions as alternative to
   setting `KERAS_IMPLEMENATION` and `KERAS_BACKEND` environment variables.
 
+- Added R wrappers for Keras backend functions (e.g. `k_variable()`, 
+  `k_dot()`, etc.)
+
+- Fix issue with printing training history after early stopping.
+
 
 ## keras 2.0.9 (CRAN)
 
