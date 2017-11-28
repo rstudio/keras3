@@ -20,8 +20,12 @@ addons:
   apt:
     packages:
     - openmpi-bin
+    - python-dev 
+    - libffi-dev 
+    - libssl-dev
 
 before_script:
+  - pip2.7 install --upgrade --ignore-installed --user ndg-httpsclient 
   - pip2.7 install --upgrade --ignore-installed --user travis pip setuptools wheel virtualenv
   - pip2.7 install --upgrade --ignore-installed --user travis keras h5py pyyaml requests Pillow scipy theano
   - pip2.7 install --upgrade --ignore-installed --user https://cntk.ai/PythonWheel/CPU-Only/cntk-2.3-cp27-cp27mu-linux_x86_64.whl
