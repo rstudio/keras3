@@ -54,6 +54,8 @@ reference:
       - summary.keras.engine.training.Model
       - compile
       - fit
+      - evaluate.keras.engine.training.Model
+      - export_savedmodel.keras.engine.training.Model
       - fit_generator
       - evaluate_generator
       - predict.keras.engine.training.Model
@@ -127,7 +129,7 @@ reference:
       - layer_gru
       - layer_cudnn_gru
       - layer_lstm
-      - layer_cudnn_gru
+      - layer_cudnn_lstm
        
   - title: "Embedding Layers"
     contents:
@@ -190,12 +192,14 @@ reference:
       - dataset_imdb
       - dataset_reuters
       - dataset_mnist
+      - dataset_fashion_mnist
       - dataset_boston_housing
 
   - title: "Applications"
     contents:
       - application_xception
       - application_inception_v3
+      - application_inception_resnet_v2
       - application_vgg
       - application_resnet50
       - application_mobilenet
