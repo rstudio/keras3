@@ -240,11 +240,12 @@ model_to_tensors_info <- function(layers, name) {
 #' @param object An \R object.
 #' @param export_dir_base A string containing a directory in which to create
 #'   versioned subdirectories containing exported SavedModels.
+#' @param ... Unused
 #' 
 #' @return The path to the exported directory, as a string.
 #'
 #' @export
-export_savedmodel.keras.engine.training.Model <- function(object, export_dir_base) {
+export_savedmodel.keras.engine.training.Model <- function(object, export_dir_base, ...) {
   if (!is_backend("tensorflow"))
     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
   

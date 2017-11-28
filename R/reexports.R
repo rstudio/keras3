@@ -50,6 +50,10 @@ tensorflow::tensorboard
 #' @export
 tensorflow::evaluate
 
+#' @importFrom tensorflow export_savedmodel
+#' @export
+tensorflow::export_savedmodel
+
 #' @importFrom tfruns flags
 #' @export
 tfruns::flags

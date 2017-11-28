@@ -4,13 +4,16 @@
 \alias{export_savedmodel.keras.engine.training.Model}
 \title{Export a Saved Model}
 \usage{
-export_savedmodel.keras.engine.training.Model(object, export_dir_base)
+\method{export_savedmodel}{keras.engine.training.Model}(object, export_dir_base,
+  ...)
 }
 \arguments{
 \item{object}{An \R object.}
 
 \item{export_dir_base}{A string containing a directory in which to create
 versioned subdirectories containing exported SavedModels.}
+
+\item{...}{Unused}
 }
 \value{
 The path to the exported directory, as a string.
