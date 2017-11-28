@@ -4,7 +4,7 @@
 \alias{k_pool2d}
 \title{2D Pooling.}
 \usage{
-k_pool2d(x, pool_size, strides = c(1L, 1L), padding = "valid",
+k_pool2d(x, pool_size, strides = c(1, 1), padding = "valid",
   data_format = NULL, pool_mode = "max")
 }
 \arguments{

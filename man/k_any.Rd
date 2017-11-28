@@ -9,7 +9,8 @@ k_any(x, axis = NULL, keepdims = FALSE)
 \arguments{
 \item{x}{Tensor or variable.}
 
-\item{axis}{1-based axis along which to perform the reduction.}
+\item{axis}{Axis along which to perform the reduction (axis indexes
+are 1-based).}
 
 \item{keepdims}{whether the drop or broadcast the reduction axes.}
 }

@@ -4,7 +4,7 @@
 \alias{k_pool3d}
 \title{3D Pooling.}
 \usage{
-k_pool3d(x, pool_size, strides = c(1L, 1L, 1L), padding = "valid",
+k_pool3d(x, pool_size, strides = c(1, 1, 1), padding = "valid",
   data_format = NULL, pool_mode = "max")
 }
 \arguments{

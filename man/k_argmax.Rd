@@ -4,12 +4,13 @@
 \alias{k_argmax}
 \title{Returns the index of the maximum value along an axis.}
 \usage{
-k_argmax(x, axis = -1L)
+k_argmax(x, axis = -1)
 }
 \arguments{
 \item{x}{Tensor or variable.}
 
-\item{axis}{1-based axis along which to perform the reduction.}
+\item{axis}{Axis along which to perform the reduction (axis indexes are
+1-based). Pass -1 (the default) to select the last axis.}
 }
 \value{
 A tensor.

@@ -9,7 +9,8 @@ k_mean(x, axis = NULL, keepdims = FALSE)
 \arguments{
 \item{x}{A tensor or variable.}
 
-\item{axis}{A list of 1-based axes to compute the mean over.}
+\item{axis}{A list of axes to compute the mean over (axis indexes are
+1-based).}
 
 \item{keepdims}{A boolean, whether to keep the dimensions or not. If
 \code{keepdims} is \code{FALSE}, the rank of the tensor is reduced by 1 for each

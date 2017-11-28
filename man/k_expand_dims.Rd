@@ -4,12 +4,13 @@
 \alias{k_expand_dims}
 \title{Adds a 1-sized dimension at index \code{axis}.}
 \usage{
-k_expand_dims(x, axis = -1L)
+k_expand_dims(x, axis = -1)
 }
 \arguments{
 \item{x}{A tensor or variable.}
 
-\item{axis}{Position (1-based) where to add a new axis.}
+\item{axis}{Position where to add a new axis (axis indexes are 1-based).
+Pass -1 (the default) to select the last axis.}
 }
 \value{
 A tensor with expanded dimensions.

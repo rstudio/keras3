@@ -11,8 +11,9 @@ k_batch_dot(x, y, axes)
 
 \item{y}{Keras tensor or variable with 2 or more axes}
 
-\item{axes}{list of (or single) integer with target (1-based) dimensions.
-The lengths of \code{axes[[1]]} and \code{axes[[2]]} should be the same.
+\item{axes}{List of (or single) integer with target dimensions (axis indexes
+are 1-based). The lengths of \code{axes[[1]]} and \code{axes[[2]]} should be the
+same.
 
 [[1]: R:[1
 [[2]: R:[2}

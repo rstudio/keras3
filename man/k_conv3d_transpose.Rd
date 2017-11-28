@@ -4,7 +4,7 @@
 \alias{k_conv3d_transpose}
 \title{3D deconvolution (i.e. transposed convolution).}
 \usage{
-k_conv3d_transpose(x, kernel, output_shape, strides = c(1L, 1L, 1L),
+k_conv3d_transpose(x, kernel, output_shape, strides = c(1, 1, 1),
   padding = "valid", data_format = NULL)
 }
 \arguments{

@@ -4,12 +4,12 @@
 \alias{k_stack}
 \title{Stacks a list of rank \code{R} tensors into a rank \code{R+1} tensor.}
 \usage{
-k_stack(x, axis = 1L)
+k_stack(x, axis = 1)
 }
 \arguments{
 \item{x}{List of tensors.}
 
-\item{axis}{1-basd axis along which to perform stacking.}
+\item{axis}{Axis along which to perform stacking (axis indexes are 1-based).}
 }
 \value{
 A tensor.

@@ -4,7 +4,7 @@
 \alias{k_temporal_padding}
 \title{Pads the middle dimension of a 3D tensor.}
 \usage{
-k_temporal_padding(x, padding = c(1L, 1L))
+k_temporal_padding(x, padding = c(1, 1))
 }
 \arguments{
 \item{x}{Tensor or variable.}

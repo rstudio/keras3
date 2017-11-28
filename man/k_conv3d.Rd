@@ -4,8 +4,8 @@
 \alias{k_conv3d}
 \title{3D convolution.}
 \usage{
-k_conv3d(x, kernel, strides = c(1L, 1L, 1L), padding = "valid",
-  data_format = NULL, dilation_rate = c(1L, 1L, 1L))
+k_conv3d(x, kernel, strides = c(1, 1, 1), padding = "valid",
+  data_format = NULL, dilation_rate = c(1, 1, 1))
 }
 \arguments{
 \item{x}{Tensor or variable.}

@@ -134,7 +134,7 @@
     <p>Concatenates a list of tensors alongside the specified axis.</p>
     
 
-    <pre class="usage"><span class='fu'>k_concatenate</span>(<span class='no'>tensors</span>, <span class='kw'>axis</span> <span class='kw'>=</span> -<span class='fl'>1L</span>)</pre>
+    <pre class="usage"><span class='fu'>k_concatenate</span>(<span class='no'>tensors</span>, <span class='kw'>axis</span> <span class='kw'>=</span> -<span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -145,7 +145,8 @@
     </tr>
     <tr>
       <th>axis</th>
-      <td><p>1-based concatenation axis.</p></td>
+      <td><p>concatenation axis (axis indexes are 1-based). Pass -1 (the
+default) to select the last axis.</p></td>
     </tr>
     </table>
     

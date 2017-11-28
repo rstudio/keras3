@@ -38,15 +38,16 @@ k_abs <- function(x) {
 
 
 #' Bitwise reduction (logical AND).
-#' 
+#'
 #' @param x Tensor or variable.
-#' @param axis 1-based axis along which to perform the reduction.
+#' @param axis Axis along which to perform the reduction (axis indexes are
+#'   1-based).
 #' @param keepdims whether the drop or broadcast the reduction axes.
-#' 
+#'
 #' @return A uint8 tensor (0s and 1s).
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_all <- function(x, axis = NULL, keepdims = FALSE) {
   keras$backend$all(
@@ -60,7 +61,8 @@ k_all <- function(x, axis = NULL, keepdims = FALSE) {
 #' Bitwise reduction (logical OR).
 #' 
 #' @param x Tensor or variable.
-#' @param axis 1-based axis along which to perform the reduction.
+#' @param axis Axis along which to perform the reduction (axis indexes
+#'   are 1-based).
 #' @param keepdims whether the drop or broadcast the reduction axes.
 #' 
 #' @return A uint8 tensor (0s and 1s).
@@ -104,16 +106,17 @@ k_arange <- function(start, stop = NULL, step = 1, dtype = "int32") {
 
 
 #' Returns the index of the maximum value along an axis.
-#' 
+#'
 #' @param x Tensor or variable.
-#' @param axis 1-based axis along which to perform the reduction.
-#' 
+#' @param axis Axis along which to perform the reduction (axis indexes are
+#'   1-based). Pass -1 (the default) to select the last axis.
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
-k_argmax <- function(x, axis = -1L) {
+k_argmax <- function(x, axis = -1) {
   keras$backend$argmax(
     x = x,
     axis = as_axis(axis)
@@ -122,16 +125,17 @@ k_argmax <- function(x, axis = -1L) {
 
 
 #' Returns the index of the minimum value along an axis.
-#' 
+#'
 #' @param x Tensor or variable.
-#' @param axis 1-based axis along which to perform the reduction.
-#' 
+#' @param axis Axis along which to perform the reduction (axis indexes are
+#'   1-based). Pass -1 (the default) to select the last axis.
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
-k_argmin <- function(x, axis = -1L) {
+k_argmin <- function(x, axis = -1) {
   keras$backend$argmin(
     x = x,
     axis = as_axis(axis)
@@ -162,8 +166,9 @@ k_backend <- function() {
 #'
 #' @param x Keras tensor or variable with 2 more more axes.
 #' @param y Keras tensor or variable with 2 or more axes
-#' @param axes list of (or single) integer with target (1-based) dimensions.
-#'   The lengths of `axes[[1]]` and `axes[[2]]` should be the same.
+#' @param axes List of (or single) integer with target dimensions (axis indexes
+#'   are 1-based). The lengths of `axes[[1]]` and `axes[[2]]` should be the
+#'   same.
 #'
 #' @return A tensor with shape equal to the concatenation of `x`'s shape (less
 #'   the dimension that was summed over) and `y`'s shape (less the batch
@@ -393,16 +398,17 @@ k_clip <- function(x, min_value, max_value) {
 
 
 #' Concatenates a list of tensors alongside the specified axis.
-#' 
+#'
 #' @param tensors list of tensors to concatenate.
-#' @param axis 1-based concatenation axis.
-#' 
+#' @param axis concatenation axis (axis indexes are 1-based). Pass -1 (the
+#'   default) to select the last axis.
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
-k_concatenate <- function(tensors, axis = -1L) {
+k_concatenate <- function(tensors, axis = -1) {
   keras$backend$concatenate(
     tensors = tensors,
     axis = as_axis(axis)
@@ -447,7 +453,7 @@ k_constant <- function(value, dtype = NULL, shape = NULL, name = NULL) {
 #' @template roxlate-keras-backend  
 #' 
 #' @export
-k_conv1d <- function(x, kernel, strides = 1L, padding = "valid", data_format = NULL, dilation_rate = 1L) {
+k_conv1d <- function(x, kernel, strides = 1, padding = "valid", data_format = NULL, dilation_rate = 1) {
   keras$backend$conv1d(
     x = x,
     kernel = kernel,
@@ -474,9 +480,9 @@ k_conv1d <- function(x, kernel, strides = 1L, padding = "valid", data_format = N
 #' @template roxlate-keras-backend  
 #'
 #' @export
-k_conv2d <- function(x, kernel, strides = c(1L, 1L), padding = "valid", 
+k_conv2d <- function(x, kernel, strides = c(1, 1), padding = "valid", 
                      data_format = NULL, 
-                     dilation_rate = c(1L, 1L)) {
+                     dilation_rate = c(1, 1)) {
   keras$backend$conv2d(
     x = x,
     kernel = kernel,
@@ -503,7 +509,7 @@ k_conv2d <- function(x, kernel, strides = c(1L, 1L), padding = "valid",
 #' @template roxlate-keras-backend  
 #'
 #' @export
-k_conv2d_transpose <- function(x, kernel, output_shape, strides = c(1L, 1L), 
+k_conv2d_transpose <- function(x, kernel, output_shape, strides = c(1, 1), 
                                padding = "valid", data_format = NULL) {
   keras$backend$conv2d_transpose(
     x = x,
@@ -531,8 +537,8 @@ k_conv2d_transpose <- function(x, kernel, output_shape, strides = c(1L, 1L),
 #' @template roxlate-keras-backend  
 #'
 #' @export
-k_conv3d <- function(x, kernel, strides = c(1L, 1L, 1L), padding = "valid", 
-                     data_format = NULL, dilation_rate = c(1L, 1L, 1L)) {
+k_conv3d <- function(x, kernel, strides = c(1, 1, 1), padding = "valid", 
+                     data_format = NULL, dilation_rate = c(1, 1, 1)) {
   keras$backend$conv3d(
     x = x,
     kernel = kernel,
@@ -559,7 +565,7 @@ k_conv3d <- function(x, kernel, strides = c(1L, 1L, 1L), padding = "valid",
 #' @template roxlate-keras-backend  
 #'
 #' @export
-k_conv3d_transpose <- function(x, kernel, output_shape, strides = c(1L, 1L, 1L), 
+k_conv3d_transpose <- function(x, kernel, output_shape, strides = c(1, 1, 1), 
                                padding = "valid", data_format = NULL) {
   keras$backend$conv3d_transpose(
     x = x,
@@ -656,7 +662,7 @@ k_ctc_batch_cost <- function(y_true, y_pred, input_length, label_length) {
 #' @template roxlate-keras-backend  
 #'
 #' @export
-k_ctc_decode <- function(y_pred, input_length, greedy = TRUE, beam_width = 100L, top_paths = 1L) {
+k_ctc_decode <- function(y_pred, input_length, greedy = TRUE, beam_width = 100L, top_paths = 1) {
   keras$backend$ctc_decode(
     y_pred = y_pred,
     input_length = input_length,
@@ -688,14 +694,15 @@ k_ctc_label_dense_to_sparse <- function(labels, label_lengths) {
 #' Cumulative product of the values in a tensor, alongside the specified axis.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the 1-based axis to compute the product.
+#' @param axis An integer, the axis to compute the product (axis indexes are
+#'   1-based).
 #'
 #' @return A tensor of the cumulative product of values of `x` along `axis`.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
-k_cumprod <- function(x, axis = 1L) {
+k_cumprod <- function(x, axis = 1) {
   keras$backend$cumprod(
     x = x,
     axis = as_axis(axis)
@@ -704,16 +711,17 @@ k_cumprod <- function(x, axis = 1L) {
 
 
 #' Cumulative sum of the values in a tensor, alongside the specified axis.
-#' 
+#'
 #' @param x A tensor or variable.
-#' @param axis An integer, the 1-based axis to compute the sum.
-#' 
+#' @param axis An integer, the axis to compute the sum (axis indexes are
+#'   1-based).
+#'
 #' @return A tensor of the cumulative sum of values of `x` along `axis`.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
-k_cumsum <- function(x, axis = 1L) {
+k_cumsum <- function(x, axis = 1) {
   keras$backend$cumsum(
     x = x,
     axis = as_axis(axis)
@@ -736,8 +744,8 @@ k_cumsum <- function(x, axis = 1L) {
 #' @template roxlate-keras-backend  
 #'
 #' @export
-k_depthwise_conv2d <- function(x, depthwise_kernel, strides = c(1L, 1L), padding = "valid", 
-                               data_format = NULL, dilation_rate = c(1L, 1L)) {
+k_depthwise_conv2d <- function(x, depthwise_kernel, strides = c(1, 1), padding = "valid", 
+                               data_format = NULL, dilation_rate = c(1, 1)) {
   keras$backend$depthwise_conv2d(
     x = x,
     depthwise_kernel = depthwise_kernel,
@@ -901,16 +909,17 @@ k_exp <- function(x) {
 
 
 #' Adds a 1-sized dimension at index `axis`.
-#' 
+#'
 #' @param x A tensor or variable.
-#' @param axis Position (1-based) where to add a new axis.
-#' 
+#' @param axis Position where to add a new axis (axis indexes are 1-based).
+#'   Pass -1 (the default) to select the last axis.
+#'
 #' @return A tensor with expanded dimensions.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
-k_expand_dims <- function(x, axis = -1L) {
+k_expand_dims <- function(x, axis = -1) {
   keras$backend$expand_dims(
     x = x,
     axis = as_axis(axis)
@@ -1394,7 +1403,8 @@ k_is_sparse <- function(tensor) {
 #' Normalizes a tensor wrt the L2 norm alongside the specified axis.
 #' 
 #' @param x Tensor or variable.
-#' @param axis 1-based axis along which to perform normalization.
+#' @param axis Axis along which to perform normalization (axis indexes
+#'   are 1-based)
 #' 
 #' @return A tensor.
 #' 
@@ -1545,14 +1555,14 @@ k_log <- function(x) {
 #' taking the log of small inputs.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the 1-based axis to reduce over.
+#' @param axis An integer, the axis to reduce over (axis indexes are 1-based).
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1. If
 #'   `keepdims` is `TRUE`, the reduced dimension is retained with length 1.
 #'
 #' @return The reduced tensor.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_logsumexp <- function(x, axis = NULL, keepdims = FALSE) {
@@ -1607,14 +1617,15 @@ k_map_fn <- function(fn, elems, name = NULL, dtype = NULL) {
 #' Maximum value in a tensor.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the 1-based axis to find maximum values.
+#' @param axis An integer, the axis to find maximum values (axis indexes are
+#'   1-based).
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1. If
 #'   `keepdims` is `TRUE`, the reduced dimension is retained with length 1.
 #'
 #' @return A tensor with maximum values of `x`.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_max <- function(x, axis = NULL, keepdims = FALSE) {
@@ -1647,7 +1658,8 @@ k_maximum <- function(x, y) {
 #' Mean of a tensor, alongside the specified axis.
 #'
 #' @param x A tensor or variable.
-#' @param axis A list of 1-based axes to compute the mean over.
+#' @param axis A list of axes to compute the mean over (axis indexes are
+#'   1-based).
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1 for each
 #'   entry in `axis`. If `keep_dims` is `TRUE`, the reduced dimensions are
@@ -1655,7 +1667,7 @@ k_maximum <- function(x, y) {
 #'
 #' @return A tensor with the mean of elements of `x`.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_mean <- function(x, axis = NULL, keepdims = FALSE) {
@@ -1670,15 +1682,16 @@ k_mean <- function(x, axis = NULL, keepdims = FALSE) {
 #' Minimum value in a tensor.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the 1-based axis to find minimum values.
+#' @param axis An integer, axis to find minimum values (axis indexes are
+#'   1-based).
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1. If
 #'   `keepdims` is `TRUE`, the reduced dimension is retained with length 1.
 #'
 #' @return A tensor with miminum values of `x`.
 #'
-#' @template roxlate-keras-backend  
-#' 
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_min <- function(x, axis = NULL, keepdims = FALSE) {
   keras$backend$min(
@@ -1848,14 +1861,15 @@ k_ones_like <- function(x, dtype = NULL, name = NULL) {
 
 
 #' Permutes axes in a tensor.
-#' 
+#'
 #' @param x Tensor or variable.
-#' @param pattern A list of 1-based dimension indices, e.g. `(1, 3, 2)`.
-#' 
+#' @param pattern A list of dimension indices, e.g. `(1, 3, 2)`. Dimension
+#'   indices are 1-based.
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_permute_dimensions <- function(x, pattern) {
   keras$backend$permute_dimensions(
@@ -1905,7 +1919,7 @@ k_placeholder <- function(shape = NULL, ndim = NULL, dtype = NULL, sparse = FALS
 #' @template roxlate-keras-backend  
 #' 
 #' @export
-k_pool2d <- function(x, pool_size, strides = c(1L, 1L), padding = "valid", data_format = NULL, pool_mode = "max") {
+k_pool2d <- function(x, pool_size, strides = c(1, 1), padding = "valid", data_format = NULL, pool_mode = "max") {
   keras$backend$pool2d(
     x = x,
     pool_size = as.integer(pool_size),
@@ -1931,7 +1945,7 @@ k_pool2d <- function(x, pool_size, strides = c(1L, 1L), padding = "valid", data_
 #' @template roxlate-keras-backend  
 #' 
 #' @export
-k_pool3d <- function(x, pool_size, strides = c(1L, 1L, 1L), padding = "valid", 
+k_pool3d <- function(x, pool_size, strides = c(1, 1, 1), padding = "valid", 
                      data_format = NULL, pool_mode = "max") {
   keras$backend$pool3d(
     x = x,
@@ -1988,14 +2002,15 @@ k_print_tensor <- function(x, message = "") {
 #' Multiplies the values in a tensor, alongside the specified axis.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the 1-based axis to compute the product.
+#' @param axis An integer, axis to compute the product over (axis indexes are
+#'   1-based).
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1. If
 #'   `keepdims` is `TRUE`, the reduced dimension is retained with length 1.
 #'
 #' @return A tensor with the product of elements of `x`.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_prod <- function(x, axis = NULL, keepdims = FALSE) {
@@ -2180,7 +2195,7 @@ k_repeat <- function(x, n) {
 #' 
 #' @param x Tensor or variable.
 #' @param rep Integer, number of times to repeat.
-#' @param axis 1-based axis along which to repeat.
+#' @param axis Axis along which to repeat (axis indexes are 1-based)
 #' 
 #' @return A tensor.
 #' 
@@ -2272,14 +2287,15 @@ k_resize_volumes <- function(x, depth_factor, height_factor, width_factor, data_
 
 
 #' Reverse a tensor along the specified axes.
-#' 
+#'
 #' @param x Tensor to reverse.
-#' @param axes Integer or list of integers. 1-based axes to reverse.
-#' 
+#' @param axes Integer or list of integers of axes to reverse (axis indexes are
+#'   1-based).
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_reverse <- function(x, axes) {
   keras$backend$reverse(
@@ -2366,8 +2382,8 @@ k_round <- function(x) {
 #' @template roxlate-keras-backend  
 #' 
 #' @export
-k_separable_conv2d <- function(x, depthwise_kernel, pointwise_kernel, strides = c(1L, 1L), 
-                               padding = "valid", data_format = NULL, dilation_rate = c(1L, 1L)) {
+k_separable_conv2d <- function(x, depthwise_kernel, pointwise_kernel, strides = c(1, 1), 
+                               padding = "valid", data_format = NULL, dilation_rate = c(1, 1)) {
   keras$backend$separable_conv2d(
     x = x,
     depthwise_kernel = depthwise_kernel,
@@ -2553,7 +2569,7 @@ k_sparse_categorical_crossentropy <- function(target, output, from_logits = FALS
 #' @template roxlate-keras-backend  
 #' 
 #' @export
-k_spatial_2d_padding <- function(x, padding = list(list(1L, 1L), list(1L, 1L)), data_format = NULL) {
+k_spatial_2d_padding <- function(x, padding = list(list(1, 1), list(1, 1)), data_format = NULL) {
   keras$backend$spatial_2d_padding(
     x = x,
     padding = padding,
@@ -2579,7 +2595,7 @@ k_spatial_2d_padding <- function(x, padding = list(list(1L, 1L), list(1L, 1L)), 
 #'
 #' @export
 k_spatial_3d_padding <- function(x, 
-                                 padding = list(list(1L, 1L), list(1L, 1L), list(1L, 1L)), 
+                                 padding = list(list(1, 1), list(1, 1), list(1, 1)), 
                                  data_format = NULL) {
   keras$backend$spatial_3d_padding(
     x = x,
@@ -2622,14 +2638,14 @@ k_square <- function(x) {
 
 
 #' Removes a 1-dimension from the tensor at index `axis`.
-#' 
+#'
 #' @param x A tensor or variable.
-#' @param axis 1-based axis to drop.
-#' 
+#' @param axis Axis to drop (axis indexes are 1-based).
+#'
 #' @return A tensor with the same data as `x` but reduced dimensions.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_squeeze <- function(x, axis) {
   keras$backend$squeeze(
@@ -2640,16 +2656,16 @@ k_squeeze <- function(x, axis) {
 
 
 #' Stacks a list of rank `R` tensors into a rank `R+1` tensor.
-#' 
+#'
 #' @param x List of tensors.
-#' @param axis 1-basd axis along which to perform stacking.
-#' 
+#' @param axis Axis along which to perform stacking (axis indexes are 1-based).
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
-k_stack <- function(x, axis = 1L) {
+k_stack <- function(x, axis = 1) {
   keras$backend$stack(
     x = x,
     axis = as_axis(axis)
@@ -2660,14 +2676,15 @@ k_stack <- function(x, axis = 1L) {
 #' Standard deviation of a tensor, alongside the specified axis.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the 1-based axis to compute the standard deviation.
+#' @param axis An integer, the axis to compute the standard deviation over
+#'   (axis indexes are 1-based).
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1. If
 #'   `keepdims` is `TRUE`, the reduced dimension is retained with length 1.
 #'
 #' @return A tensor with the standard deviation of elements of `x`.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_std <- function(x, axis = NULL, keepdims = FALSE) {
@@ -2700,7 +2717,7 @@ k_stop_gradient <- function(variables) {
 #' Sum of the values in a tensor, alongside the specified axis.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the 1-based axis to sum over.
+#' @param axis An integer, the axis to sum over (axis indexes are 1-based).
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1. If
 #'   `keepdims` is `TRUE`, the reduced dimension is retained with length 1.
@@ -2769,7 +2786,7 @@ k_tanh <- function(x) {
 #' @template roxlate-keras-backend  
 #' 
 #' @export
-k_temporal_padding <- function(x, padding = c(1L, 1L)) {
+k_temporal_padding <- function(x, padding = c(1, 1)) {
   keras$backend$temporal_padding(
     x = x,
     padding = as_integer_tuple(padding, force_tuple = TRUE)
@@ -2912,14 +2929,15 @@ k_update_sub <- function(x, decrement) {
 #' Variance of a tensor, alongside the specified axis.
 #'
 #' @param x A tensor or variable.
-#' @param axis An integer, the 1-based axis to compute the variance.
+#' @param axis An integer, the axis to compute the variance over (axis indexes
+#'   are 1-based).
 #' @param keepdims A boolean, whether to keep the dimensions or not. If
 #'   `keepdims` is `FALSE`, the rank of the tensor is reduced by 1. If
 #'   `keepdims` is `TRUE`, the reduced dimension is retained with length 1.
 #'
 #' @return A tensor with the variance of elements of `x`.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_var <- function(x, axis = NULL, keepdims = FALSE) {

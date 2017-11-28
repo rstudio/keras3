@@ -4,12 +4,13 @@
 \alias{k_cumprod}
 \title{Cumulative product of the values in a tensor, alongside the specified axis.}
 \usage{
-k_cumprod(x, axis = 1L)
+k_cumprod(x, axis = 1)
 }
 \arguments{
 \item{x}{A tensor or variable.}
 
-\item{axis}{An integer, the 1-based axis to compute the product.}
+\item{axis}{An integer, the axis to compute the product (axis indexes are
+1-based).}
 }
 \value{
 A tensor of the cumulative product of values of \code{x} along \code{axis}.

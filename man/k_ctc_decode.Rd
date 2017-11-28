@@ -5,7 +5,7 @@
 \title{Decodes the output of a softmax.}
 \usage{
 k_ctc_decode(y_pred, input_length, greedy = TRUE, beam_width = 100L,
-  top_paths = 1L)
+  top_paths = 1)
 }
 \arguments{
 \item{y_pred}{tensor \code{(samples, time_steps, num_categories)} containing the

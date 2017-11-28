@@ -4,12 +4,13 @@
 \alias{k_cumsum}
 \title{Cumulative sum of the values in a tensor, alongside the specified axis.}
 \usage{
-k_cumsum(x, axis = 1L)
+k_cumsum(x, axis = 1)
 }
 \arguments{
 \item{x}{A tensor or variable.}
 
-\item{axis}{An integer, the 1-based axis to compute the sum.}
+\item{axis}{An integer, the axis to compute the sum (axis indexes are
+1-based).}
 }
 \value{
 A tensor of the cumulative sum of values of \code{x} along \code{axis}.

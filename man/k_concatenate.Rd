@@ -4,12 +4,13 @@
 \alias{k_concatenate}
 \title{Concatenates a list of tensors alongside the specified axis.}
 \usage{
-k_concatenate(tensors, axis = -1L)
+k_concatenate(tensors, axis = -1)
 }
 \arguments{
 \item{tensors}{list of tensors to concatenate.}
 
-\item{axis}{1-based concatenation axis.}
+\item{axis}{concatenation axis (axis indexes are 1-based). Pass -1 (the
+default) to select the last axis.}
 }
 \value{
 A tensor.
