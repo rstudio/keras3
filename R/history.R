@@ -3,12 +3,15 @@
 #' @export
 print.keras_training_history <- function(x, ...) {
   
+  # compute epochs actuually trained for
+  epochs <- min(x$params$epochs, length(x$metrics[[1]]))
+  
   # training params
   params <- x$params
   params <- list(samples = params$samples, 
                  validation_samples = params$validation_samples,
                  batch_size = params$batch_size, 
-                 epochs = params$epochs)
+                 epochs = epochs)
   params <-  prettyNum(params, big.mark = ",")
   if (!identical(params[["validation_samples"]], "NULL"))
     validate <- paste0(", validated on ", params[["validation_samples"]], " samples")
@@ -18,7 +21,6 @@ print.keras_training_history <- function(x, ...) {
                 params[["batch_size"]], ", epochs=", params[["epochs"]], ")")
 
   # last epoch metrics
-  epochs <- x$params$epochs
   metrics <- lapply(x$metrics, function(metric) {
     metric[[epochs]]
   })
