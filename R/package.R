@@ -62,6 +62,15 @@
 #'
 #' @export
 use_implementation <- function(implementation = c("keras", "tensorflow")) {
+  
+  if (utils::packageVersion("reticulate") < "1.3.1.9001") {
+    warning(
+     "The use_implementation function requires a newer version of the ",
+     "reticulate package.\nYou can install this version with:",
+     " devtools::install_github('rstudio/reticulate')", call. = FALSE
+    )
+  }
+  
   .globals$use_implementation <- match.arg(implementation)
 }
 
