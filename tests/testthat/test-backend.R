@@ -109,7 +109,7 @@ test_backend("k_concatenate", {
 
 # https://github.com/fchollet/keras/blob/b285d710f6f3ae8478b9a17e86c6b6aabbd22494/tests/keras/backend/backend_test.py#L802
 
-test_backend("k_conv1d", {
-  k_conv1d(k_constant(1:10), kernel = k_constant(1))
-})
+# test_backend("k_conv1d", {
+#   k_conv1d(k_constant(1:10), kernel = k_constant(1))
+# })
 
