@@ -432,7 +432,7 @@ k_constant <- function(value, dtype = NULL, shape = NULL, name = NULL) {
   keras$backend$constant(
     value = value,
     dtype = dtype,
-    shape = normalize_shape(shape),
+    shape = backend_normalize_shape(shape),
     name = name
   )
 }
@@ -1896,7 +1896,7 @@ k_permute_dimensions <- function(x, pattern) {
 #' @export
 k_placeholder <- function(shape = NULL, ndim = NULL, dtype = NULL, sparse = FALSE, name = NULL) {
   keras$backend$placeholder(
-    shape = normalize_shape(shape),
+    shape = backend_normalize_shape(shape),
     ndim = as.integer(ndim),
     dtype = dtype,
     sparse = sparse,
@@ -2036,7 +2036,7 @@ k_prod <- function(x, axis = NULL, keepdims = FALSE) {
 #' @export
 k_random_binomial <- function(shape, p = 0.0, dtype = NULL, seed = NULL) {
   keras$backend$random_binomial(
-    shape = normalize_shape(shape),
+    shape = backend_normalize_shape(shape),
     p = p,
     dtype = dtype,
     seed = as_nullable_integer(seed)
@@ -2060,7 +2060,7 @@ k_random_binomial <- function(shape, p = 0.0, dtype = NULL, seed = NULL) {
 #' @export
 k_random_normal <- function(shape, mean = 0.0, stddev = 1.0, dtype = NULL, seed = NULL) {
   keras$backend$random_normal(
-    shape = normalize_shape(shape),
+    shape = backend_normalize_shape(shape),
     mean = mean,
     stddev = stddev,
     dtype = dtype,
@@ -2085,7 +2085,7 @@ k_random_normal <- function(shape, mean = 0.0, stddev = 1.0, dtype = NULL, seed 
 #' @export
 k_random_normal_variable <- function(shape, mean, scale, dtype = NULL, name = NULL, seed = NULL) {
   keras$backend$random_normal_variable(
-    shape = normalize_shape(shape),
+    shape = backend_normalize_shape(shape),
     mean = mean,
     scale = scale,
     dtype = dtype,
@@ -2110,7 +2110,7 @@ k_random_normal_variable <- function(shape, mean, scale, dtype = NULL, name = NU
 #' @export
 k_random_uniform <- function(shape, minval = 0.0, maxval = 1.0, dtype = NULL, seed = NULL) {
   keras$backend$random_uniform(
-    shape = normalize_shape(shape),
+    shape = backend_normalize_shape(shape),
     minval = minval,
     maxval = maxval,
     dtype = dtype,
@@ -2135,7 +2135,7 @@ k_random_uniform <- function(shape, minval = 0.0, maxval = 1.0, dtype = NULL, se
 #' @export
 k_random_uniform_variable <- function(shape, low, high, dtype = NULL, name = NULL, seed = NULL) {
   keras$backend$random_uniform_variable(
-    shape = normalize_shape(shape),
+    shape = backend_normalize_shape(shape),
     low = low,
     high = high,
     dtype = dtype,
@@ -2235,7 +2235,7 @@ k_reset_uids <- function() {
 k_reshape <- function(x, shape) {
   keras$backend$reshape(
     x = x,
-    shape = normalize_shape(shape)
+    shape = backend_normalize_shape(shape)
   )
 }
 
@@ -2863,7 +2863,7 @@ k_transpose <- function(x) {
 #' @export
 k_truncated_normal <- function(shape, mean = 0.0, stddev = 1.0, dtype = NULL, seed = NULL) {
   keras$backend$truncated_normal(
-    shape = normalize_shape(shape),
+    shape = backend_normalize_shape(shape),
     mean = mean,
     stddev = stddev,
     dtype = dtype,
@@ -2984,7 +2984,7 @@ k_variable <- function(value, dtype = NULL, name = NULL, constraint = NULL) {
 #' @export
 k_zeros <- function(shape, dtype = NULL, name = NULL) {
   keras$backend$zeros(
-    shape = normalize_shape(shape),
+    shape = backend_normalize_shape(shape),
     dtype = dtype,
     name = name
   )
@@ -3025,3 +3025,17 @@ as_axis <- function(axis) {
   }
 }
 
+
+backend_normalize_shape <- function(shape) {
+  
+  # if it's a Python object or a list with python objects then leave it alone
+  if (inherits(shape, "python.builtin.object"))
+    return(shape)
+  
+  if (is.list(shape)) {
+    if (any(sapply(unlist(shape), function(x) inherits(x, "python.builtin.object"))))
+      return(shape)
+  }
+  
+  normalize_shape(shape)
+}
