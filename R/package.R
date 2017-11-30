@@ -39,7 +39,7 @@
 #' @details 
 #' Keras has multiple implementations (the original keras implementation
 #' and the implementation native to TensorFlow) and supports multiple 
-#' backends ("tensorflow", "cntk", and "theano"). These functions allow
+#' backends ("tensorflow", "cntk", "theano", and "plaidml"). These functions allow
 #' switching between the various implementations and backends.
 #' 
 #' The functions should be called after `library(keras)` and before calling
@@ -77,8 +77,14 @@ use_implementation <- function(implementation = c("keras", "tensorflow")) {
 
 #' @rdname use_implementation
 #' @export
-use_backend <- function(backend = c("tensorflow", "cntk", "theano")) {
-  Sys.setenv(KERAS_BACKEND = match.arg(backend))
+use_backend <- function(backend = c("tensorflow", "cntk", "theano", "plaidml")) {
+  backend <- match.arg(backend)
+  if (backend == "plaidml") {
+    pml_keras <- import("plaidml.keras")
+    pml_keras$install_backend()
+  } else {
+    Sys.setenv(KERAS_BACKEND = match.arg(backend))
+  }
 }
 
 

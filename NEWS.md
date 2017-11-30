@@ -15,6 +15,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Fix issue with printing training history after early stopping.
 
+- Experimental support for using the PlaidML backend.
+
 
 ## keras 2.0.9 (CRAN)
 

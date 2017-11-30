@@ -65,6 +65,21 @@ If you have the GPU version of CNTK installed then your Keras code will automati
 
 Additional information on installing the GPU version of CNTK can be found here: https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python
 
+### PlaidML
+
+[PlaidML](http://vertex.ai/blog/announcing-plaidml) is an open source portable deep learning engine that runs on most existing PC hardware with OpenCL-capable GPUs from NVIDIA, AMD, or Intel. PlaidML includes a Keras backend which you can use as described below.
+
+First, build and install PlaidML as described on the [project website](https://github.com/plaidml/plaidml). You must be sure that PlaidML is correctly installed and working before proceeding further!
+
+You installed PlaidML within a version of Python on your system (e.g. `/usr/bin/python`, `/anaconda3/bin/python`). If you aren't sure which version you used then execute `which python` from a shell to see what your system's default version is. When you load the Keras R package you should specify that this version of Python be used via the `use_python()` function. You should furthermore call the `use_backend()` function to specify that you want to use the PlaidML backend. For example:
+
+```{r}
+library(keras)
+use_python("/anaconda3/bin/python")
+use_backend("plaidml")
+```
+
+
 ## How can I run a Keras model on multiple GPUs?
 
 We recommend doing so using the **TensorFlow** backend. There are two ways to run a single model on multiple GPUs: **data parallelism** and **device parallelism**.

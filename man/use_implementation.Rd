@@ -7,7 +7,7 @@
 \usage{
 use_implementation(implementation = c("keras", "tensorflow"))
 
-use_backend(backend = c("tensorflow", "cntk", "theano"))
+use_backend(backend = c("tensorflow", "cntk", "theano", "plaidml"))
 }
 \arguments{
 \item{implementation}{One of "keras" or "tensorflow" (defaults to "keras").}
@@ -21,7 +21,7 @@ Select a Keras implementation and backend
 \details{
 Keras has multiple implementations (the original keras implementation
 and the implementation native to TensorFlow) and supports multiple
-backends ("tensorflow", "cntk", and "theano"). These functions allow
+backends ("tensorflow", "cntk", "theano", and "plaidml"). These functions allow
 switching between the various implementations and backends.
 
 The functions should be called after \code{library(keras)} and before calling
