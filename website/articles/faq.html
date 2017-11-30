@@ -509,6 +509,17 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 <a href="#how-can-i-use-other-keras-backends" class="anchor"></a>How can I use other Keras backends?</h2>
 <p>By default the Keras Python and R packages use the TensorFlow backend. Other available backends include Theano or CNTK. To learn more about using alternatate backends (e.g. Theano or CNTK) see the <a href="backend.html">article on Keras backends</a>.</p>
 </div>
+<div id="how-can-i-use-the-plaidml-backend" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-i-use-the-plaidml-backend" class="anchor"></a>How can I use the PlaidML backend?</h2>
+<p><a href="http://vertex.ai/blog/announcing-plaidml">PlaidML</a> is an open source portable deep learning engine that runs on most existing PC hardware with OpenCL-capable GPUs from NVIDIA, AMD, or Intel. PlaidML includes a Keras backend which you can use as described below.</p>
+<p>First, build and install PlaidML as described on the <a href="https://github.com/plaidml/plaidml">project website</a>. You must be sure that PlaidML is correctly installed, setup, and working before proceeding further!</p>
+<p>You installed PlaidML within a version of Python on your system (e.g. <code>/usr/bin/python</code>, <code>/anaconda3/bin/python</code>). If you aren’t sure which version you used then execute <code>which python</code> from the shell where you installed PlaidML to see which version of Python was used.</p>
+<p>When you load the Keras R package you should specify that this same version of Python be used via the <code><a href="http://www.rdocumentation.org/packages/reticulate/topics/use_python">use_python()</a></code> function. You should furthermore call the <code><a href="../reference/use_implementation.html">use_backend()</a></code> function to specify that you want to use the PlaidML backend. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/use_python">use_python</a></span>(<span class="st">"/anaconda3/bin/python"</span>)
+<span class="kw"><a href="../reference/use_implementation.html">use_backend</a></span>(<span class="st">"plaidml"</span>)</code></pre></div>
+</div>
 <div id="how-can-i-use-keras-in-another-r-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-can-i-use-keras-in-another-r-package" class="anchor"></a>How can I use Keras in another R package?</h2>
@@ -612,6 +623,7 @@ keras &lt;-<span class="st"> </span><span class="ot">NULL</span>
       <li><a href="#how-can-i-remove-a-layer-from-a-sequential-model">How can I remove a layer from a Sequential model?</a></li>
       <li><a href="#how-can-i-use-pre-trained-models-in-keras">How can I use pre-trained models in Keras?</a></li>
       <li><a href="#how-can-i-use-other-keras-backends">How can I use other Keras backends?</a></li>
+      <li><a href="#how-can-i-use-the-plaidml-backend">How can I use the PlaidML backend?</a></li>
       <li><a href="#how-can-i-use-keras-in-another-r-package">How can I use Keras in another R package?</a></li>
       <li><a href="#how-can-i-obtain-reproducible-results-using-keras-during-development">How can I obtain reproducible results using Keras during development?</a></li>
       <li><a href="#where-is-the-keras-configuration-filed-stored">Where is the Keras configuration filed stored?</a></li>

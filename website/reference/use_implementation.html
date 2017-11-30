@@ -136,7 +136,7 @@
 
     <pre class="usage"><span class='fu'>use_implementation</span>(<span class='kw'>implementation</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"keras"</span>, <span class='st'>"tensorflow"</span>))
 
-<span class='fu'>use_backend</span>(<span class='kw'>backend</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"tensorflow"</span>, <span class='st'>"cntk"</span>, <span class='st'>"theano"</span>))</pre>
+<span class='fu'>use_backend</span>(<span class='kw'>backend</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"tensorflow"</span>, <span class='st'>"cntk"</span>, <span class='st'>"theano"</span>, <span class='st'>"plaidml"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -156,7 +156,7 @@ to "tensorflow")</p></td>
 
     <p>Keras has multiple implementations (the original keras implementation
 and the implementation native to TensorFlow) and supports multiple
-backends ("tensorflow", "cntk", and "theano"). These functions allow
+backends ("tensorflow", "cntk", "theano", and "plaidml"). These functions allow
 switching between the various implementations and backends.</p>
 <p>The functions should be called after <code>library(keras)</code> and before calling
 other functions within the package (see below for an example).</p>
