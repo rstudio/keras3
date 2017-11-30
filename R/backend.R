@@ -729,7 +729,7 @@ k_cumsum <- function(x, axis = 1) {
 }
 
 
-#' 2D convolution with separable filters.
+#' Depthwise 2D convolution with separable filters.
 #'
 #' @param x input tensor
 #' @param depthwise_kernel convolution kernel for the depthwise convolution.

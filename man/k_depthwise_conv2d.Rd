@@ -2,7 +2,7 @@
 % Please edit documentation in R/backend.R
 \name{k_depthwise_conv2d}
 \alias{k_depthwise_conv2d}
-\title{2D convolution with separable filters.}
+\title{Depthwise 2D convolution with separable filters.}
 \usage{
 k_depthwise_conv2d(x, depthwise_kernel, strides = c(1, 1),
   padding = "valid", data_format = NULL, dilation_rate = c(1, 1))
@@ -25,7 +25,7 @@ convolution.}
 Output tensor.
 }
 \description{
-2D convolution with separable filters.
+Depthwise 2D convolution with separable filters.
 }
 \section{Keras Backend}{
 
