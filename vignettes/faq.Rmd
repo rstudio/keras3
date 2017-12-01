@@ -505,6 +505,15 @@ use_python("/anaconda3/bin/python")
 use_backend("plaidml")
 ```
 
+If you installed PlaidML in a virtual or conda environment you can alternatively specify that through the `use_virtualenv()` or `use_condaenv()` function. For example:
+
+```{r}
+library(keras)
+use_condaenv("plaidml") 
+use_backend("plaidml")
+```
+
+
 
 ## How can I use Keras in another R package?
 

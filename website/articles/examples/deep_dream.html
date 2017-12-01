@@ -211,7 +211,7 @@ layer_dict &lt;-<span class="st"> </span>model<span class="op">$</span>layers
 <span class="kw">names</span>(layer_dict) &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_chr</a></span>(layer_dict ,<span class="op">~</span>.x<span class="op">$</span>name)
 
 <span class="co"># Define the loss</span>
-loss &lt;-<span class="st"> </span>tf<span class="op">$</span><span class="kw">Variable</span>(<span class="fl">0.0</span>)
+loss &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_variable.html">k_variable</a></span>(<span class="fl">0.0</span>)
 <span class="cf">for</span>(layer_name <span class="cf">in</span> <span class="kw">names</span>(settings<span class="op">$</span>features)){
   
   <span class="co"># Add the L2 norm of the features of a layer to the loss</span>

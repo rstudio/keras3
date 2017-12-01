@@ -519,6 +519,10 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/use_python">use_python</a></span>(<span class="st">"/anaconda3/bin/python"</span>)
 <span class="kw"><a href="../reference/use_implementation.html">use_backend</a></span>(<span class="st">"plaidml"</span>)</code></pre></div>
+<p>If you installed PlaidML in a virtual or conda environment you can alternatively specify that through the <code><a href="http://www.rdocumentation.org/packages/reticulate/topics/use_python">use_virtualenv()</a></code> or <code><a href="http://www.rdocumentation.org/packages/reticulate/topics/use_python">use_condaenv()</a></code> function. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/use_python">use_condaenv</a></span>(<span class="st">"plaidml"</span>) 
+<span class="kw"><a href="../reference/use_implementation.html">use_backend</a></span>(<span class="st">"plaidml"</span>)</code></pre></div>
 </div>
 <div id="how-can-i-use-keras-in-another-r-package" class="section level2">
 <h2 class="hasAnchor">

@@ -98,7 +98,7 @@ layer_dict <- model$layers
 names(layer_dict) <- map_chr(layer_dict ,~.x$name)
 
 # Define the loss
-loss <- tf$Variable(0.0)
+loss <- k_variable(0.0)
 for(layer_name in names(settings$features)){
   
   # Add the L2 norm of the features of a layer to the loss
