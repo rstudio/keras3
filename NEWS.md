@@ -17,6 +17,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Experimental support for using the PlaidML backend.
 
+- Correct handling for R functions specified in `custom_objects`
+
 
 ## keras 2.0.9 (CRAN)
 

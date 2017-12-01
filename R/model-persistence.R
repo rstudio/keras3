@@ -52,6 +52,20 @@ load_model_hdf5 <- function(filepath, custom_objects = NULL, compile = TRUE) {
   if (!have_h5py())
     stop("The h5py Python package is required to save and load models")
   
+  # apply py_function_name to any functions in custom objects
+  if (!is.null(custom_objects)) {
+    custom_object_names <- names(custom_objects)
+    if (is.null(custom_object_names))
+      stop("custom_objects must be named")
+    custom_objects <- lapply(1:length(custom_objects), function(i) {
+      custom_object <- custom_objects[[i]]
+      if (is.function(custom_object))
+        attr(custom_object, "py_function_name") <- custom_object_names[[i]]
+      custom_object
+    })
+    names(custom_objects) <- custom_object_names
+  }
+  
   # build args dynamically so we can only pass `compile` if it's supported
   # (compile requires keras 2.0.4 / tensorflow 1.3)
   args <- list(
