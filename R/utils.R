@@ -114,6 +114,17 @@ normalize <- function(x, axis = -1, order = 2) {
 #' @param objects Named list of objects
 #' @param expr Expression to evaluate
 #' 
+#' @details 
+#' There are many elements of Keras models that can be customized with
+#' user objects (e.g. losses, metrics, regularizers, etc.). When
+#' loading saved models that use these functions you typically 
+#' need to explicitily map names to user objects via the `custom_objects` 
+#' parmaeter. 
+#' 
+#' The `with_custom_object_scope()` function provides an alternative that 
+#' lets you create a named alias for a user object that applies to an entire
+#' block of code, and is automatically recognized when loading saved models.
+#' 
 #' @examples \dontrun{
 #' # define custom metric
 #' sparse_top_k_cat_acc <- function(y_pred, y_true) {
@@ -133,7 +144,7 @@ normalize <- function(x, axis = -1, order = 2) {
 #'
 #'   # save the model
 #'   save_model_hdf5("my_model.h5")
-#
+#'
 #'   # loading the model within the custom object scope doesn't
 #'   # require explicitly providing the custom_object
 #'   load_model_hdf5("my_model.h5")
