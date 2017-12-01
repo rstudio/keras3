@@ -21,6 +21,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Correct handling for R functions specified in `custom_objects`
 
+- Added `with_custom_object_scope()` function.
+
 
 ## keras 2.0.9 (CRAN)
 

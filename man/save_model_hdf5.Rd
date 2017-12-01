@@ -40,7 +40,11 @@ in a single file.
 
 Saved models can be reinstantiated via \code{load_model_hdf5()}. The model returned by
 \code{load_model_hdf5()} is a compiled model ready to be used (unless the saved model
-was never compiled in the first place or \code{compile = FALSE} is specified.
+was never compiled in the first place or \code{compile = FALSE} is specified).
+
+As an alternative to providing the \code{custom_objects} argument, you can
+execute the definition and persistence of your model using the
+\code{\link[=with_custom_object_scope]{with_custom_object_scope()}} function.
 }
 \note{
 The \code{\link[=serialize_model]{serialize_model()}} function enables saving Keras models to

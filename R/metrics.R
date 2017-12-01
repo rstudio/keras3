@@ -17,6 +17,14 @@
 #' Note that a name ('mean_pred') is provided for the custom metric
 #' function. This name is used within training progress output.
 #' 
+#' If you want to save and load a model with custom metrics, you should
+#' also specify the metric in the call the [load_model_hdf5()]. For example:
+#' `load_model_hdf5("my_model.h5", c('mean_pred' = metric_mean_pred))`. 
+#' 
+#' Alternatively, you can wrap all of your code in a call to 
+#' [with_custom_object_scope()] which will allow you to refer to the 
+#' metric by name just like you do with built in keras metrics.
+#' 
 #' Documentation on the available backend tensor functions can be 
 #' found at <https://keras.rstudio.com/articles/backend.html#backend-functions>.
 #' 

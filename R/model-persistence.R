@@ -20,7 +20,11 @@
 #' 
 #' Saved models can be reinstantiated via `load_model_hdf5()`. The model returned by
 #' `load_model_hdf5()` is a compiled model ready to be used (unless the saved model
-#' was never compiled in the first place or `compile = FALSE` is specified.
+#' was never compiled in the first place or `compile = FALSE` is specified).
+#'
+#' As an alternative to providing the `custom_objects` argument, you can 
+#' execute the definition and persistence of your model using the 
+#' [with_custom_object_scope()] function.
 #'
 #' @note The [serialize_model()] function enables saving Keras models to
 #' R objects that can be persisted across R sessions.
@@ -52,19 +56,8 @@ load_model_hdf5 <- function(filepath, custom_objects = NULL, compile = TRUE) {
   if (!have_h5py())
     stop("The h5py Python package is required to save and load models")
   
-  # apply py_function_name to any functions in custom objects
-  if (!is.null(custom_objects)) {
-    custom_object_names <- names(custom_objects)
-    if (is.null(custom_object_names))
-      stop("custom_objects must be named")
-    custom_objects <- lapply(1:length(custom_objects), function(i) {
-      custom_object <- custom_objects[[i]]
-      if (is.function(custom_object))
-        attr(custom_object, "py_function_name") <- custom_object_names[[i]]
-      custom_object
-    })
-    names(custom_objects) <- custom_object_names
-  }
+  # prepare custom objects
+  custom_objects <- objects_with_py_function_names(custom_objects)
   
   # build args dynamically so we can only pass `compile` if it's supported
   # (compile requires keras 2.0.4 / tensorflow 1.3)

@@ -293,14 +293,15 @@ reference:
       - plot.keras_training_history
       - to_categorical
       - normalize
+      - with_custom_object_scope
       - keras_array
       - hdf5_matrix
       - get_file
-      - backend
-      - implementation
       - use_session_with_seed
       - install_keras
       - is_keras_available
+      - backend
+      - implementation
       - use_implementation
       - use_backend
      
