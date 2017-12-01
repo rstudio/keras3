@@ -40,8 +40,8 @@ called the resolution multiplier)}
 \item{include_top}{whether to include the fully-connected layer at the top of
 the network.}
 
-\item{weights}{\code{NULL} (random initialization) or \code{imagenet} (ImageNet
-weights)}
+\item{weights}{\code{NULL} (random initialization), \code{imagenet} (ImageNet
+weights), or the path to the weights file to be loaded.}
 
 \item{input_tensor}{optional Keras tensor (i.e. output of \code{layers.Input()})
 to use as image input for the model.}

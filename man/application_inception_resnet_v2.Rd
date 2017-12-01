@@ -15,8 +15,8 @@ inception_resnet_v2_preprocess_input(x)
 \item{include_top}{whether to include the fully-connected layer at the top of
 the network.}
 
-\item{weights}{one of \code{NULL} (random initialization) or "imagenet"
-(pre-training on ImageNet).}
+\item{weights}{\code{NULL} (random initialization), \code{imagenet} (ImageNet
+weights), or the path to the weights file to be loaded.}
 
 \item{input_tensor}{optional Keras tensor to use as image input for the
 model.}

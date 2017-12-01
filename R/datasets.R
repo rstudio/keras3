@@ -68,7 +68,7 @@ dataset_cifar100 <- function(label_mode = c("fine", "coarse")) {
 #'   kept
 #' @param skip_top Skip the top N most frequently occuring words (which may not
 #'   be informative).
-#' @param maxlen Truncate sequences after this length.
+#' @param maxlen sequences longer than this will be filtered out.
 #' @param seed random seed for sample shuffling.
 #' @param start_char The start of a sequence will be marked with this character.
 #'   Set to 1 because 0 is usually the padding character.

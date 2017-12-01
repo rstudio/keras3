@@ -772,7 +772,7 @@ call_generator_function <- function(func, args) {
   }
   
   # set workers to 0 for versions of keras that support this
-  if (use_main_thread_generator && keras_supports_main_thread_generators())
+  if (use_main_thread_generator && (keras_version() >= "2.1.2"))
     args$workers = 0L
   else
     args$workers = 1L
@@ -814,14 +814,6 @@ is_main_thread_generator.tensorflow.python.data.ops.dataset_ops.Dataset <- funct
 
 is_main_thread_generator.function <- function(x) {
   TRUE
-}
-
-
-# TODO: replace this with a version-based check once keras > 2.1.2 ships
-keras_supports_main_thread_generators <- function() {
-  flow_from_directory <- keras$preprocessing$image$ImageDataGenerator()$flow_from_directory
-  help <- reticulate::import("rpytools.help") 
-  "interpolation" %in% help$get_arguments(flow_from_directory)
 }
 
   

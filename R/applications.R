@@ -17,8 +17,8 @@
 #' @param x Input tensor for preprocessing
 #' @param include_top whether to include the fully-connected layer at the top of
 #'   the network.
-#' @param weights one of `NULL` (random initialization) or "imagenet" 
-#'   (pre-training on ImageNet).
+#' @param weights `NULL` (random initialization), `imagenet` (ImageNet
+#'   weights), or the path to the weights file to be loaded.
 #' @param input_tensor optional Keras tensor to use as image input for the
 #'   model.
 #' @param input_shape optional shape list, only to be specified if `include_top`
@@ -290,7 +290,7 @@ imagenet_decode_predictions <- function(preds, top = 5) {
 
 #' Preprocesses a tensor encoding a batch of images.
 #' 
-#' @param x input tensor, 4D
+#' @param x input tensor, 3D or 4D
 #' @param data_format Data format of the image tensor
 #' @param mode One of "caffe", "tf"
 #'   - caffe: will convert the images from RGB to BGR,
@@ -345,8 +345,8 @@ imagenet_preprocess_input <- function(x, data_format = NULL, mode = "caffe") {
 #' @param dropout dropout rate
 #' @param include_top whether to include the fully-connected layer at the top of
 #'   the network.
-#' @param weights `NULL` (random initialization) or `imagenet` (ImageNet
-#'   weights)
+#' @param weights `NULL` (random initialization), `imagenet` (ImageNet
+#'   weights), or the path to the weights file to be loaded.
 #' @param input_tensor optional Keras tensor (i.e. output of `layers.Input()`)
 #'   to use as image input for the model.
 #' @param pooling Optional pooling mode for feature extraction when

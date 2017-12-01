@@ -7,7 +7,7 @@
 imagenet_preprocess_input(x, data_format = NULL, mode = "caffe")
 }
 \arguments{
-\item{x}{input tensor, 4D}
+\item{x}{input tensor, 3D or 4D}
 
 \item{data_format}{Data format of the image tensor}
 
