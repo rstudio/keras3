@@ -13,6 +13,8 @@ Install the development version with: `install_github("rstudio/keras")`
 - Added R wrappers for Keras backend functions (e.g. `k_variable()`, 
   `k_dot()`, etc.)
 
+- Use 1-based axis for `normalize` function.
+
 - Fix issue with printing training history after early stopping.
 
 - Experimental support for using the PlaidML backend.

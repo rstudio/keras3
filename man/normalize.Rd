@@ -9,7 +9,8 @@ normalize(x, axis = -1, order = 2)
 \arguments{
 \item{x}{Matrix or array to normalize}
 
-\item{axis}{Axis along which to normalize}
+\item{axis}{Axis along which to normalize. Axis indexes are 1-based
+(pass -1 to select the last axis).}
 
 \item{order}{Normalization order (e.g. 2 for L2 norm)}
 }
