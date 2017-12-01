@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Save/Load models using HDF5 files — save_model_hdf5 • keras</title>
+<title>Provide a scope with mappings of names to custom objects — with_custom_object_scope • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -127,90 +127,63 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Save/Load models using HDF5 files</h1>
+    <h1>Provide a scope with mappings of names to custom objects</h1>
     </div>
 
     
-    <p>Save/Load models using HDF5 files</p>
+    <p>Provide a scope with mappings of names to custom objects</p>
     
 
-    <pre class="usage"><span class='fu'>save_model_hdf5</span>(<span class='no'>object</span>, <span class='no'>filepath</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>include_optimizer</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>load_model_hdf5</span>(<span class='no'>filepath</span>, <span class='kw'>custom_objects</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>compile</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>with_custom_object_scope</span>(<span class='no'>objects</span>, <span class='no'>expr</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>Model object to save</p></td>
+      <th>objects</th>
+      <td><p>Named list of objects</p></td>
     </tr>
     <tr>
-      <th>filepath</th>
-      <td><p>File path</p></td>
-    </tr>
-    <tr>
-      <th>overwrite</th>
-      <td><p>Overwrite existing file if necessary</p></td>
-    </tr>
-    <tr>
-      <th>include_optimizer</th>
-      <td><p>If <code>TRUE</code>, save optimizer's state.</p></td>
-    </tr>
-    <tr>
-      <th>custom_objects</th>
-      <td><p>Mapping class names (or function names) of custom
-(non-Keras) objects to class/functions</p></td>
-    </tr>
-    <tr>
-      <th>compile</th>
-      <td><p>Whether to compile the model after loading.</p></td>
+      <th>expr</th>
+      <td><p>Expression to evaluate</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The following components of the model are saved:</p><ul>
-<li><p>The model architecture, allowing to re-instantiate the model.</p></li>
-<li><p>The model weights.</p></li>
-<li><p>The state of the optimizer, allowing to resume training exactly where you
-left off.
-This allows you to save the entirety of the state of a model
-in a single file.</p></li>
-</ul>
-    <p>Saved models can be reinstantiated via <code>load_model_hdf5()</code>. The model returned by
-<code>load_model_hdf5()</code> is a compiled model ready to be used (unless the saved model
-was never compiled in the first place or <code>compile = FALSE</code> is specified).</p>
-<p>As an alternative to providing the <code>custom_objects</code> argument, you can
-execute the definition and persistence of your model using the
-<code><a href='with_custom_object_scope.html'>with_custom_object_scope()</a></code> function.</p>
-    
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># define custom metric</span>
+<span class='no'>sparse_top_k_cat_acc</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>y_pred</span>, <span class='no'>y_true</span>) {
+  <span class='fu'><a href='metric_binary_accuracy.html'>metric_sparse_top_k_categorical_accuracy</a></span>(<span class='no'>y_pred</span>, <span class='no'>y_true</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>)
+}
 
-    <p>The <code><a href='serialize_model.html'>serialize_model()</a></code> function enables saving Keras models to
-R objects that can be persisted across R sessions.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+<span class='fu'>with_custom_object_scope</span>(<span class='fu'>c</span>(<span class='kw'>top_k_acc</span> <span class='kw'>=</span> <span class='no'>sparse_top_k_cat_acc</span>), {
 
-    <p>Other model persistence: <code><a href='get_weights.html'>get_weights</a></code>,
-  <code><a href='model_to_json.html'>model_to_json</a></code>, <code><a href='model_to_yaml.html'>model_to_yaml</a></code>,
-  <code><a href='save_model_weights_hdf5.html'>save_model_weights_hdf5</a></code>,
-  <code><a href='serialize_model.html'>serialize_model</a></code></p>
-    
+  <span class='co'># ...define model...</span>
 
+  <span class='co'># compile model (refer to "top_k_acc" by name)</span>
+  <span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='compile.html'>compile</a></span>(
+    <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>"binary_crossentropy"</span>,
+    <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='fu'><a href='optimizer_nadam.html'>optimizer_nadam</a></span>(),
+    <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"top_k_acc"</span>)
+  )
+
+  <span class='co'># save the model</span>
+  <span class='fu'><a href='save_model_hdf5.html'>save_model_hdf5</a></span>(<span class='st'>"my_model.h5"</span>)
+  <span class='co'># loading the model within the custom object scope doesn't</span>
+  <span class='co'># require explicitly providing the custom_object</span>
+  <span class='fu'><a href='save_model_hdf5.html'>load_model_hdf5</a></span>(<span class='st'>"my_model.h5"</span>)
+})
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#note">Note</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

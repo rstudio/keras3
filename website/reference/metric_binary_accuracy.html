@@ -196,6 +196,12 @@ the <code>y_true</code> and <code>y_pred</code> parameters are tensors, so compu
 them should use backend tensor functions. See below for an example.</p>
 <p>Note that a name ('mean_pred') is provided for the custom metric
 function. This name is used within training progress output.</p>
+<p>If you want to save and load a model with custom metrics, you should
+also specify the metric in the call the <code><a href='save_model_hdf5.html'>load_model_hdf5()</a></code>. For example:
+<code><a href='save_model_hdf5.html'>load_model_hdf5("my_model.h5", c('mean_pred' = metric_mean_pred))</a></code>.</p>
+<p>Alternatively, you can wrap all of your code in a call to
+<code><a href='with_custom_object_scope.html'>with_custom_object_scope()</a></code> which will allow you to refer to the
+metric by name just like you do with built in keras metrics.</p>
 <p>Documentation on the available backend tensor functions can be
 found at <a href='https://keras.rstudio.com/articles/backend.html#backend-functions'>https://keras.rstudio.com/articles/backend.html#backend-functions</a>.</p>
     
