@@ -46,6 +46,9 @@ define_and_compile_model <- function() {
   model
 }
 
+random_array <- function(dim) {
+  array(runif(prod(dim)), dim = dim)
+}
 
 
 
