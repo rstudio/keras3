@@ -11,6 +11,8 @@ navbar:
     - text: "Articles"
       menu:
         - text: "Getting Started"
+        - text: "Why Use Keras?"
+          href: articles/why_use_keras.html
         - text: "Guide to the Sequential Model"
           href: articles/sequential_model.html
         - text: "Guide to the Functional API"

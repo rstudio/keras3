@@ -38,7 +38,7 @@ knitr::opts_chunk$set(eval = FALSE)
 
 - Is capable of running on top of multiple back-ends including [TensorFlow](https://github.com/tensorflow/tensorflow), [CNTK](https://github.com/Microsoft/cntk), or [Theano](https://github.com/Theano/Theano).
 
-The [Why Use Keras?](articles/why_use_keras.html) article provides additional details on why you might consider using Keras for your deep learning projects.
+For additional details on why you might consider using Keras for your deep learning projects, see the [Why Use Keras?](articles/why_use_keras.html) article.
 
 This website provides documentation for the R interface to Keras. See the main Keras website at <https://keras.io> for additional information on the project. 
 
