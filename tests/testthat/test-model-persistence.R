@@ -14,7 +14,7 @@ test_succeeds("model can be saved and loaded", {
   model <- load_model_hdf5(tmp)
 })
 
-test_succeeds("model with custom metrics can be saved and loaded", {
+test_succeeds("model with custom loss and metrics can be saved and loaded", {
   
   if (!keras:::have_h5py())
     skip("h5py not available for testing")
@@ -25,15 +25,20 @@ test_succeeds("model with custom metrics can be saved and loaded", {
     metric_sparse_top_k_categorical_accuracy(y_pred, y_true, k = 5)
   }
   
+  custom_loss <- function(y_pred, y_true) {
+    loss_categorical_crossentropy(y_pred, y_true)
+  }
+  
   model %>% compile(
-    loss = "binary_crossentropy",
+    loss = custom_loss,
     optimizer = optimizer_nadam(),
     metrics = c(top_k_acc = sparse_top_k_cat_acc)
   )
   
   tmp <- tempfile("model", fileext = ".hdf5")
   save_model_hdf5(model, tmp)
-  model <- load_model_hdf5(tmp, custom_objects = c(top_k_acc = sparse_top_k_cat_acc))
+  model <- load_model_hdf5(tmp, custom_objects = c(top_k_acc = sparse_top_k_cat_acc,
+                                                   custom_loss = custom_loss))
   
   # generate dummy training data
   data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)

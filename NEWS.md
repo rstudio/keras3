@@ -23,6 +23,9 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Added `with_custom_object_scope()` function.
 
+- Automatically provide name to loss function during compile
+  (enables save/load of models with custom loss function)
+
 
 ## keras 2.0.9 (CRAN)
 

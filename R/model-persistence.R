@@ -7,7 +7,8 @@
 #' @param overwrite Overwrite existing file if necessary
 #' @param include_optimizer If `TRUE`, save optimizer's state.
 #' @param custom_objects Mapping class names (or function names) of custom 
-#'   (non-Keras) objects to class/functions
+#'   (non-Keras) objects to class/functions (for example, custom metrics
+#'   or custom loss functions).
 #' 
 #' @details The following components of the model are saved: 
 #' 

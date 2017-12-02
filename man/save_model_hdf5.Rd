@@ -20,7 +20,8 @@ load_model_hdf5(filepath, custom_objects = NULL, compile = TRUE)
 \item{include_optimizer}{If \code{TRUE}, save optimizer's state.}
 
 \item{custom_objects}{Mapping class names (or function names) of custom
-(non-Keras) objects to class/functions}
+(non-Keras) objects to class/functions (for example, custom metrics
+or custom loss functions).}
 
 \item{compile}{Whether to compile the model after loading.}
 }

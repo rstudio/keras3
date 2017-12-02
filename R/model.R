@@ -234,6 +234,11 @@ compile <- function(object, optimizer, loss,
                     target_tensors = NULL,
                     ...) {
   
+  # give losses a name
+  loss_name <- deparse(substitute(loss))
+  if (is.function(loss) && !inherits(loss, "python.builtin.object"))
+    attr(loss, "py_function_name") <- loss_name
+  
   # handle metrics
   if (!is.null(metrics)) {
     
