@@ -11,8 +11,8 @@ multi_gpu_model(model, gpus)
 this model could have been built on CPU, for instance
 (see usage example below).}
 
-\item{gpus}{Integer >= 2, number of on GPUs on which to create
-model replicas.}
+\item{gpus}{Integer >= 2 or list of integers, number of GPUs or
+list of GPU IDs on which to create model replicas.}
 }
 \value{
 A Keras model object which can be used just like the initial

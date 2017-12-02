@@ -77,8 +77,8 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 #' @param model A Keras model instance. To avoid OOM errors,
 #'   this model could have been built on CPU, for instance
 #'    (see usage example below).
-#' @param gpus Integer >= 2, number of on GPUs on which to create
-#'   model replicas.
+#' @param gpus Integer >= 2 or list of integers, number of GPUs or
+#'   list of GPU IDs on which to create model replicas.
 #' 
 #' @return  A Keras model object which can be used just like the initial
 #'  `model` argument, but which distributes its workload on multiple GPUs.

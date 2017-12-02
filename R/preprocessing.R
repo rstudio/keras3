@@ -687,6 +687,7 @@ flow_images_from_data <- function(
 #' 
 #' @details Yields batches indefinitely, in an infinite loop.
 #'   
+#' @inheritParams image_load   
 #' @inheritParams flow_images_from_data
 #'   
 #' @param generator Image data generator (default generator does no data
@@ -724,8 +725,9 @@ flow_images_from_directory <- function(
   classes = NULL, class_mode = "categorical",
   batch_size = 32, shuffle = TRUE, seed = NULL,
   save_to_dir = NULL, save_prefix = "", save_format = "png",
-  follow_links = FALSE) {
-  generator$flow_from_directory(
+  follow_links = FALSE, interpolation = "nearest") {
+  
+  args <- list(
     directory = normalize_path(directory),
     target_size = as.integer(target_size),
     color_mode = color_mode,
@@ -739,6 +741,11 @@ flow_images_from_directory <- function(
     save_format = save_format,
     follow_links = follow_links
   )
+  
+  if (keras_version() >= "2.1.2")
+    args$interpolation <- interpolation
+  
+  do.call(generator$flow_from_directory, args)
 }
 
 

@@ -21,7 +21,7 @@ kept}
 \item{skip_top}{Skip the top N most frequently occuring words (which may not
 be informative).}
 
-\item{maxlen}{Truncate sequences after this length.}
+\item{maxlen}{sequences longer than this will be filtered out.}
 
 \item{seed}{random seed for sample shuffling.}
 
