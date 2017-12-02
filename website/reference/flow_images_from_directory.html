@@ -141,7 +141,7 @@ augmented/normalized data)</p>
   <span class='kw'>target_size</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>256</span>, <span class='fl'>256</span>), <span class='kw'>color_mode</span> <span class='kw'>=</span> <span class='st'>"rgb"</span>, <span class='kw'>classes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>class_mode</span> <span class='kw'>=</span> <span class='st'>"categorical"</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>save_to_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>save_prefix</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>save_format</span> <span class='kw'>=</span> <span class='st'>"png"</span>, <span class='kw'>follow_links</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>save_format</span> <span class='kw'>=</span> <span class='st'>"png"</span>, <span class='kw'>follow_links</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>interpolation</span> <span class='kw'>=</span> <span class='st'>"nearest"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -215,6 +215,15 @@ set). Default: "png".</p></td>
       <th>follow_links</th>
       <td><p>whether to follow symlinks inside class subdirectories
 (default: <code>FALSE</code>)</p></td>
+    </tr>
+    <tr>
+      <th>interpolation</th>
+      <td><p>Interpolation method used to resample the image if the
+target size is different from that of the loaded image. Supported methods
+are "nearest", "bilinear", and "bicubic". If PIL version 1.1.3 or newer is
+installed, "lanczos" is also supported. If PIL version 3.4.0 or newer is
+installed, "box" and "hamming" are also supported. By default, "nearest"
+is used.</p></td>
     </tr>
     </table>
     
