@@ -88,8 +88,6 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras">
     <span class="fa fa-github"></span>
@@ -97,6 +95,7 @@
   </a>
 </li>
       </ul>
+<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -528,12 +527,10 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
 <a href="#how-can-i-use-the-plaidml-backend" class="anchor"></a>How can I use the PlaidML backend?</h2>
 <p><a href="http://vertex.ai/blog/announcing-plaidml">PlaidML</a> is an open source portable deep learning engine that runs on most existing PC hardware with OpenCL-capable GPUs from NVIDIA, AMD, or Intel. PlaidML includes a Keras backend which you can use as described below.</p>
 <p>First, build and install PlaidML as described on the <a href="https://github.com/plaidml/plaidml">project website</a>. You must be sure that PlaidML is correctly installed, setup, and working before proceeding further!</p>
-<p>You installed PlaidML within a version of Python on your system (e.g. <code>/usr/bin/python</code>, <code>/anaconda3/bin/python</code>). If you aren’t sure which version you used then execute <code>which python</code> from the shell where you installed PlaidML to see which version of Python was used.</p>
-<p>When you load the Keras R package you should specify that this same version of Python be used via the <code><a href="http://www.rdocumentation.org/packages/reticulate/topics/use_python">use_python()</a></code> function. You should furthermore call the <code><a href="../reference/use_implementation.html">use_backend()</a></code> function to specify that you want to use the PlaidML backend. For example:</p>
+<p>Then, to use Keras with the PlaidML backend you do the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/use_python">use_python</a></span>(<span class="st">"/anaconda3/bin/python"</span>)
 <span class="kw"><a href="../reference/use_implementation.html">use_backend</a></span>(<span class="st">"plaidml"</span>)</code></pre></div>
-<p>If you installed PlaidML in a virtual or conda environment you can alternatively specify that through the <code><a href="http://www.rdocumentation.org/packages/reticulate/topics/use_python">use_virtualenv()</a></code> or <code><a href="http://www.rdocumentation.org/packages/reticulate/topics/use_python">use_condaenv()</a></code> function. For example:</p>
+<p>This should automatically discover and use the Python environment where <code>plaidml</code> and <code>plaidml-keras</code> were installed. If this doesn’t work as expected you can also force the selection of a particular Python environment. For example, if you installed PlaidML in conda environment named “plaidml” you would do this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/use_python">use_condaenv</a></span>(<span class="st">"plaidml"</span>) 
 <span class="kw"><a href="../reference/use_implementation.html">use_backend</a></span>(<span class="st">"plaidml"</span>)</code></pre></div>

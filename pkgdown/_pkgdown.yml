@@ -43,9 +43,8 @@ navbar:
       href: reference/index.html
     - text: "News"
       href: news/index.html
-  right:
-   - icon: fa-github
-     href: https://github.com/rstudio/keras
+    - icon: fa-github
+      href: https://github.com/rstudio/keras
 
 reference:
   - title: "Keras Models"

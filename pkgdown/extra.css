@@ -95,6 +95,21 @@ a:hover {
 }
 
 
+.st-default-search-input {
+  margin-top: 10px;
+}
+
+.st-default-search-input {
+  display: none !important;
+}
+
+@media only screen and (min-width : 992px) {
+.st-default-search-input {
+  display: inline-block !important;
+}
+}
+
+
 /*
 code a, pre a {
   color: rgba(195,0,4,0.8);  
