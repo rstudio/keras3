@@ -506,24 +506,20 @@ By default the Keras Python and R packages use the TensorFlow backend. Other ava
 
 First, build and install PlaidML as described on the [project website](https://github.com/plaidml/plaidml). You must be sure that PlaidML is correctly installed, setup, and working before proceeding further!
 
-You installed PlaidML within a version of Python on your system (e.g. `/usr/bin/python`, `/anaconda3/bin/python`). If you aren't sure which version you used then execute `which python` from the shell where you installed PlaidML to see which version of Python was used.
-
-When you load the Keras R package you should specify that this same version of Python be used via the `use_python()` function. You should furthermore call the `use_backend()` function to specify that you want to use the PlaidML backend. For example:
+Then, to use Keras with the PlaidML backend you do the following:
 
 ```{r}
 library(keras)
-use_python("/anaconda3/bin/python")
 use_backend("plaidml")
 ```
 
-If you installed PlaidML in a virtual or conda environment you can alternatively specify that through the `use_virtualenv()` or `use_condaenv()` function. For example:
+This should automatically discover and use the Python environment where `plaidml` and `plaidml-keras` were installed. If this doesn't work as expected you can also force the selection of a particular Python environment. For example, if you installed PlaidML in conda environment named "plaidml" you would do this:
 
 ```{r}
 library(keras)
 use_condaenv("plaidml") 
 use_backend("plaidml")
 ```
-
 
 
 ## How can I use Keras in another R package?

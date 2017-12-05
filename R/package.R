@@ -80,7 +80,9 @@ use_implementation <- function(implementation = c("keras", "tensorflow")) {
 use_backend <- function(backend = c("tensorflow", "cntk", "theano", "plaidml")) {
   backend <- match.arg(backend)
   if (backend == "plaidml") {
-    pml_keras <- import("plaidml.keras")
+    pml_keras <- import("plaidml.keras", delay_load = list(
+      priority = 20
+    ))
     pml_keras$install_backend()
   } else {
     Sys.setenv(KERAS_BACKEND = match.arg(backend))
