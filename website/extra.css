@@ -111,7 +111,7 @@ a:hover {
 
 .st-default-search-input, .st-ui-search-input {
     display: inline-block;
-    width: 190px;
+    width: 220px;
     height: 16px;
     padding: 7px 11px 7px 28px;
     border: 1px solid rgba(195,0,4, 0.9) !important;
@@ -134,6 +134,7 @@ a:hover {
     box-shadow: none;
     font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Lucida Grande", sans-serif;
 }
+
 
 /*
 code a, pre a {
