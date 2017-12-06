@@ -114,8 +114,7 @@ a:hover {
     width: 190px;
     height: 16px;
     padding: 7px 11px 7px 28px;
-    border: 1px solid #bbb;
-    border: 1px solid rgba(0,0,0,0.25);
+    border: 1px solid rgba(195,0,4, 0.9) !important;
     font-weight: 400;
     color: #3B454F;
     font-size: 14px;
