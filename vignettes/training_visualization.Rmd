@@ -81,7 +81,7 @@ str(history_df)
 
 If you are training your model within the RStudio IDE then real time metrics are available within the Viewer pane:
 
-```{css}
+```{css, echo=FALSE}
 #rstudiohistory {
   margin-top: 15px;
   margin-bottom: 15px;
