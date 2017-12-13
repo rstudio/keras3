@@ -25,6 +25,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Automatically provide name to loss function during compile
   (enables save/load of models with custom loss function)
+  
+- Provide global `keras.fit_verbose` option (defaults to 1)
 
 
 ## keras 2.0.9 (CRAN)

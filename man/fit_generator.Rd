@@ -4,10 +4,11 @@
 \alias{fit_generator}
 \title{Fits the model on data yielded batch-by-batch by a generator.}
 \usage{
-fit_generator(object, generator, steps_per_epoch, epochs = 1, verbose = 1,
-  callbacks = NULL, view_metrics = getOption("keras.view_metrics", default =
-  "auto"), validation_data = NULL, validation_steps = NULL,
-  class_weight = NULL, max_queue_size = 10, initial_epoch = 0)
+fit_generator(object, generator, steps_per_epoch, epochs = 1,
+  verbose = getOption("keras.fit_verbose", default = 1), callbacks = NULL,
+  view_metrics = getOption("keras.view_metrics", default = "auto"),
+  validation_data = NULL, validation_steps = NULL, class_weight = NULL,
+  max_queue_size = 10, initial_epoch = 0)
 }
 \arguments{
 \item{object}{Keras model object}

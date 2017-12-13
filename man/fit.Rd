@@ -5,7 +5,7 @@
 \title{Train a Keras model}
 \usage{
 fit(object, x = NULL, y = NULL, batch_size = NULL, epochs = 10,
-  verbose = 1, callbacks = NULL,
+  verbose = getOption("keras.fit_verbose", default = 1), callbacks = NULL,
   view_metrics = getOption("keras.view_metrics", default = "auto"),
   validation_split = 0, validation_data = NULL, shuffle = TRUE,
   class_weight = NULL, sample_weight = NULL, initial_epoch = 0,

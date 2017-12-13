@@ -363,7 +363,7 @@ compile <- function(object, optimizer, loss,
 #'
 #' @export
 fit <- function(object, x = NULL, y = NULL, batch_size=NULL, epochs=10, 
-                verbose=1, callbacks=NULL,
+                verbose=getOption("keras.fit_verbose", default = 1), callbacks=NULL,
                 view_metrics = getOption("keras.view_metrics", default = "auto"),
                 validation_split=0.0, validation_data=NULL, shuffle=TRUE,
                 class_weight=NULL, sample_weight=NULL, initial_epoch=0,
@@ -647,7 +647,7 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'
 #' @export
 fit_generator <- function(object, generator, steps_per_epoch, epochs = 1, 
-                          verbose = 1, callbacks = NULL, 
+                          verbose=getOption("keras.fit_verbose", default = 1), callbacks = NULL, 
                           view_metrics = getOption("keras.view_metrics", default = "auto"),
                           validation_data = NULL, validation_steps = NULL, 
                           class_weight = NULL, max_queue_size = 10, initial_epoch = 0) {
