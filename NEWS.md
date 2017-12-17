@@ -1,7 +1,5 @@
 
-## Keras 2.0.10 (development)
-
-Install the development version with: `install_github("rstudio/keras")`
+## Keras 2.1.2 (CRAN)
 
 - Added `theme_bw` option to plot method for training history 
 
@@ -29,7 +27,7 @@ Install the development version with: `install_github("rstudio/keras")`
 - Provide global `keras.fit_verbose` option (defaults to 1)
 
 
-## keras 2.0.9 (CRAN)
+## keras 2.0.9
 
 - Added `multi_gpu_model()` function.
 
