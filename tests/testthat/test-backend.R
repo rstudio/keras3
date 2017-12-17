@@ -14,44 +14,49 @@ test_backend <- function(name, expr, required_version = NULL) {
 
 test_backend("k_abs", k_abs(42))
 
-if (!is_backend("cntk")) {
+test_backend("k_all", {
+  skip_if_cntk()
   logical_vals <- k_constant(array(TRUE, dim = c(3,5)), dtype = "bool")
-  test_backend("k_all", {
-    k_all(logical_vals)
-    k_all(logical_vals, axis = 1)
-    k_all(logical_vals, axis = 2)
-  })
-  test_backend("k_any", {
-    k_any(logical_vals)
-    k_any(logical_vals, axis = 1)
-    k_any(logical_vals, axis = 2)
-  })
-}
+  k_all(logical_vals)
+  k_all(logical_vals, axis = 1)
+  k_all(logical_vals, axis = 2)
+})
+  
+test_backend("k_any", {
+  skip_if_cntk()
+  logical_vals <- k_constant(array(TRUE, dim = c(3,5)), dtype = "bool")
+  k_any(logical_vals)
+  k_any(logical_vals, axis = 1)
+  k_any(logical_vals, axis = 2)
+})
 
-if (!is_backend("cntk")) {
-  test_backend("k_arange", {
-    k_arange(10)
-    k_arange(1, 11)
-    k_arange(1, 11, 2)
-  })
-}
+
+test_backend("k_arange", {
+  skip_if_cntk()
+  logical_vals <- k_constant(array(TRUE, dim = c(3,5)), dtype = "bool")
+  k_arange(10)
+  k_arange(1, 11)
+  k_arange(1, 11, 2)
+})
   
 test_backend("k_clear_session", {
   if (is_backend("tensorflow"))
     k_clear_session()
 })
             
-if (is_keras_available()) {
+
+test_backend("k_argmax", {
   float_vals <- k_variable(array(runif(3*5), dim = c(3,5)))
   x <- k_variable(array(runif(10*28*28), dim = c(10,28,28)))
   y <- k_variable(array(runif(10*28*28), dim = c(10,28,28)))
-}
-test_backend("k_argmax", {
   k_argmax(float_vals)
   k_argmax(float_vals, axis = 1)
   k_argmax(float_vals, axis = 2)
 })
 test_backend("k_argmin", {
+  float_vals <- k_variable(array(runif(3*5), dim = c(3,5)))
+  x <- k_variable(array(runif(10*28*28), dim = c(10,28,28)))
+  y <- k_variable(array(runif(10*28*28), dim = c(10,28,28)))
   k_argmin(float_vals)
   k_argmin(float_vals, axis = 1)
   k_argmin(float_vals, axis = 2)
