@@ -17,7 +17,7 @@ test_call_succeeds <- function(call_name, expr, required_version = NULL) {
 }
 
 is_backend <- function(name) {
-  identical(backend()$backend(), name)
+  is_keras_available() && identical(backend()$backend(), name)
 }
 
 skip_if_cntk <- function() {

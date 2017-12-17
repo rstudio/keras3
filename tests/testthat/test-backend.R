@@ -41,10 +41,11 @@ test_backend("k_clear_session", {
     k_clear_session()
 })
             
-
-float_vals <- k_variable(array(runif(3*5), dim = c(3,5)))
-x <- k_variable(array(runif(10*28*28), dim = c(10,28,28)))
-y <- k_variable(array(runif(10*28*28), dim = c(10,28,28)))
+if (is_keras_available()) {
+  float_vals <- k_variable(array(runif(3*5), dim = c(3,5)))
+  x <- k_variable(array(runif(10*28*28), dim = c(10,28,28)))
+  y <- k_variable(array(runif(10*28*28), dim = c(10,28,28)))
+}
 test_backend("k_argmax", {
   k_argmax(float_vals)
   k_argmax(float_vals, axis = 1)
