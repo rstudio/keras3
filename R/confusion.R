@@ -16,8 +16,6 @@ confusion <- function(object = NULL, y_test = NULL, predictions = NULL, return_x
 
   return_xtab <- if(is.null(return_xtab)) n_distinct(obj$predictions) < 6 else return_xtab 
   
-  
-  
   if(return_xtab){
     
     cf <- table(obj$y_test, obj$predictions)
@@ -38,22 +36,23 @@ confusion <- function(object = NULL, y_test = NULL, predictions = NULL, return_x
     
     for(i in 1:nrow(cf)){
       
-      cf$pCorrect[i] <- mean(obj$y_test[obj$y_test == cf$label[i]] == obj$predictions[obj$y_test == cf$label[i]])
+      lab_i <- obj$y_test == cf$label[i]
+      Nlab_i <- sum(lab_i)
       
-      yi <- obj$y_test == cf$label[i]
-      Nyi <- sum(yi)
-      tab <- sort(table(obj$predictions[yi]), decreasing = TRUE)
+      cf$pCorrect[i] <- mean(obj$y_test[lab_i] == obj$predictions[lab_i])
+      
+      tab <- sort(table(obj$predictions[lab_i]), decreasing = TRUE)
       tab <- tab[-which(names(tab) == cf$label[i])]
       
       if(cf$pCorrect[i] != 1){
         
         cf$MCE[i] <- names(tab)[1]
-        cf$pMCE[i] <- tab[1]/Nyi
+        cf$pMCE[i] <- tab[1]/Nlab_i
         
         if(cf$pCorrect[i] + cf$pMCE[i] != 1){
           
           cf$MCE2[i] <- names(tab)[2]
-          cf$pMCE2[i] <- tab[2]/Nyi
+          cf$pMCE2[i] <- tab[2]/Nlab_i
           cf$pOther[i] <- 1 - (cf$pCorrect[i] + cf$pMCE[i] + cf$pMCE2[i])
           
         }
