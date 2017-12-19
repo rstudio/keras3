@@ -24,7 +24,7 @@
 #' out <- lstm("y ~ X", DF)
 #' @author Pete Mohanty
 #' @importFrom Matrix sparse.model.matrix
-#' @importFrom dplyr n_distinct  
+#' @importFrom dplyr n_distinct mutate group_by summarise select 
 #' @export
 lstm <- function(input.formula, data, 
                  layers = list(units = c(128, NA), activation = c("relu", "softmax"), dropout = c(0.4, NA)), 
@@ -57,7 +57,7 @@ lstm <- function(input.formula, data,
    
   if(is.numeric(y)) 
     if((n_distinct(y) == length(y) | min(y) < 0 | sum(y %% 1) < length(y) * .Machine$double.eps))
-      warning("y does not appear to be categorical." )
+      warning("y does not appear to be categorical.\n\n" )
   
   if(is.na(layers$units[length(layers$units)]))
     layers$units[length(layers$units)] <- n_distinct(y)
@@ -95,23 +95,28 @@ lstm <- function(input.formula, data,
     validation_split = validation_split
   )
   
-  plot(history) 
-  
   evals <- model %>% evaluate(x_test, y_test)
   print(evals)
   
   # 1 + to get back to R/Fortran land... 
   y_fit <- labs[1 + predict_classes(model, x_test)]
 
-  cf <- confusion(y_fit, y[split=="test"])
-  print(cf)
-  
   object <- list(input.formula = input.formula, model = model, history = history, 
                  evaluations = evals, predictions = y_fit, 
-                 confusion = cf, Nlayers = Nlayers, seed = seed)
+                 y_test = y[split=="test"],
+                 confusion = cf, 
+                 layers = layers, seed = seed, split = split)
+  object[["confusion"]] <- confusion(object)
   class(object) <- "keras.fit"
   return(object)
   
+}
+
+#' @export    
+grepv <- function(pattern, x){
+  z <- vector(mode = "integer", length = length(x))
+  z[grep(pattern, x)] <- 1
+  return(z)
 }
 
 

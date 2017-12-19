@@ -4,15 +4,15 @@
 \alias{confusion}
 \title{confusion}
 \usage{
-confusion(y_test = NULL, predictions = NULL, object = NULL,
+confusion(object = NULL, y_test = NULL, predictions = NULL,
   return_xtab = NULL)
 }
 \arguments{
+\item{object}{Optional fit object. confusion() assumes object contains holdout/vaidation data as \code{y_test} and the forecasts/classifications as \code{predictions} but alternative variable names can be specified with the input arguments by those names.}
+
 \item{y_test}{A vector of holdout/validation data or the name in object (if fit object provided but alternative variable name required).}
 
 \item{predictions}{A vector predictions or the name in object (if fit object provided but alternative variable name required).}
-
-\item{object}{Optional fit object. confusion() assumes object contains holdout/vaidation data as \code{y_test} and the forecasts/classifications as \code{predictions} but alternative variable names can be specified with the input arguments by those names.}
 
 \item{return_xtab}{Logical. If TRUE, returns confusion matrix, which is a crosstable with correct predictions on the diagonal (if all levels are predicted at least once). If FALSE, returns (rectangular) table with columns for percent correct, most common misclassification, second most common misclassification, and other predictions. Defaults to TRUE (crosstable-style) only if number of levels < 6.}
 }
