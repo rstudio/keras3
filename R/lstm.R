@@ -104,7 +104,6 @@ lstm <- function(input.formula, data,
   object <- list(input.formula = input.formula, model = model, history = history, 
                  evaluations = evals, predictions = y_fit, 
                  y_test = y[split=="test"],
-                 confusion = cf, 
                  layers = layers, seed = seed, split = split)
   object[["confusion"]] <- confusion(object)
   class(object) <- "keras.fit"
