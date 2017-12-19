@@ -4,8 +4,8 @@
 \alias{summary.keras.engine.training.Model}
 \title{Print a summary of a Keras model}
 \usage{
-\method{summary}{keras.engine.training.Model}(object,
-  line_length = getOption("width"), positions = NULL, ...)
+summary.keras.engine.training.Model(object, line_length = getOption("width"),
+  positions = NULL, ...)
 }
 \arguments{
 \item{object}{Keras model instance}
