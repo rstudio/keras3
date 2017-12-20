@@ -4,7 +4,7 @@
 #' 
 #' @param input.formula an object of class "formula" (or one coerceable to a formula): a symbolic description of the keras inputs. The outcome, y, is assumed to be categorical, e.g. "stars ~ mentions.tasty + mentions.fun".
 #' @param data a data.frame.
-#' @param layers a list that contains the number of units, activation type, and dropout rate. Example with three layers and length(unique(y)) == 10: layers = list(units = c(256, 128, 10), activation = c("relu", "relu", "softmax"), dropout = c(0.4, 0.3, NA)). If the final element of units is NA (the default), chosen to be the number of unique elements in y. See ?layer_dense or ?layer_dropout. 
+#' @param layers a list that contains the number of units, activation type, and dropout rate. Example with three layers and length(unique(y)) == 10: layers = list(units = c(256, 128, NA), activation = c("relu", "relu", "softmax"), dropout = c(0.4, 0.3, NA)). If the final element of units is NA (the default), chosen to be the number of unique elements in y. See ?layer_dense or ?layer_dropout. 
 #' @param pTraining Proportion of the data to be used for training the model;  0 < pTraining < 1. By default, pTraining == 0.8. Other observations used only postestimation (e.g., for confusion matrix). 
 #' @param seed seed to passed to set.seed for partitioning data. If NULL (default), automatically generated.
 #' @param validation_split Portion of data to be used for validating each epoch (i.e., portion of pTraining). To be passed to keras::fit. Default == 0.2. 
@@ -80,7 +80,6 @@ lstm <- function(input.formula, data,
     if(i != Nlayers)
       model <- layer_dropout(model, rate = layers$rate[i])
   }
-  summary(model)
   
   model %>% compile(
     loss = loss,
@@ -96,13 +95,12 @@ lstm <- function(input.formula, data,
   )
   
   evals <- model %>% evaluate(x_test, y_test)
-  print(evals)
-  
+
   # 1 + to get back to R/Fortran land... 
   y_fit <- labs[1 + predict_classes(model, x_test)]
 
   object <- list(input.formula = input.formula, model = model, history = history, 
-                 evaluations = evals, predictions = y_fit, 
+                 evaluations = evals, predictions = y_fit, N = N, P = P,
                  y_test = y[split=="test"],
                  layers = layers, seed = seed, split = split)
   object[["confusion"]] <- confusion(object)
@@ -112,11 +110,15 @@ lstm <- function(input.formula, data,
 }
 
 #' @export    
-grepv <- function(pattern, x){
-  z <- vector(mode = "integer", length = length(x))
-  z[grep(pattern, x)] <- 1
+grepv <- function(pattern, x, ...){
+  
+  z <- vector(mode = "integer", length = length(x)) 
+  z[grep(pattern, x, ...)] <- 1
+  
   return(z)
+  
 }
+
 
 
 

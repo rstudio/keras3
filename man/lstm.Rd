@@ -15,7 +15,7 @@ lstm(input.formula, data, layers = list(units = c(128, NA), activation =
 
 \item{data}{a data.frame.}
 
-\item{layers}{a list that contains the number of units, activation type, and dropout rate. Example with three layers and length(unique(y)) == 10: layers = list(units = c(256, 128, 10), activation = c("relu", "relu", "softmax"), dropout = c(0.4, 0.3, NA)). If the final element of units is NA (the default), chosen to be the number of unique elements in y. See ?layer_dense or ?layer_dropout.}
+\item{layers}{a list that contains the number of units, activation type, and dropout rate. Example with three layers and length(unique(y)) == 10: layers = list(units = c(256, 128, NA), activation = c("relu", "relu", "softmax"), dropout = c(0.4, 0.3, NA)). If the final element of units is NA (the default), chosen to be the number of unique elements in y. See ?layer_dense or ?layer_dropout.}
 
 \item{pTraining}{Proportion of the data to be used for training the model;  0 < pTraining < 1. By default, pTraining == 0.8. Other observations used only postestimation (e.g., for confusion matrix).}
 
