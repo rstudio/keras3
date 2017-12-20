@@ -42,12 +42,15 @@ keras.fit object. A list containing model, predictions, evaluations, as well as 
 A regression-style function call for LSTM for Keras for R which uses sparse matrices.
 }
 \examples{
-n <- 1000
-p <- 26
-X <- matrix(runif(n*p), ncol = p) 
-y <- letters[apply(X, 1, which.max)]
-DF <- data.frame(y, X)
-out <- lstm("y ~ X", DF)
+# not run
+# n <- 1000
+# p <- 26
+# X <- matrix(runif(n*p), ncol = p) 
+# y <- letters[apply(X, 1, which.max)]
+# DF <- data.frame(y, X)
+# out <- lstm("y ~ X", DF)
+# out2 <- lstm("y ~ .", DF, pTraining = 0.9, Nepochs = 10, batch_size = 16)
+# cars_out <- lstm("mpg \%/\% 1 ~ grepl('Mazda', rownames(mtcars), ignore.case = TRUE)", mtcars)
 }
 \author{
 Pete Mohanty

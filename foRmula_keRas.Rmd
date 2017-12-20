@@ -21,16 +21,17 @@ rt <- search_tweets(
 dim(rt)
 summary(rt$retweet_count)
 ```
-Suppose we wanted to predict how many times a tweet with `#rstat` is going to be retweeted. And suppose we wanted to bin the retweent count into five categories (none, 1-10, 11-50, 51-99, and 100 or more). Suppose we believe that the twitter handle matters as does day and time of day. Also, this demo makes use of a `grepv`, a wrapper function for grep that returns an `N` length dummy vector.
+Suppose we wanted to predict how many times a tweet with `#rstat` is going to be retweeted. And suppose we wanted to bin the retweent count into five categories (none, 1-10, 11-50, 51-99, and 100 or more). Suppose we believe that the twitter handle matters as does day and time of day. 
 ```{r}
 library(keras)
 breaks <- c(-1, 0, 1, 10, 50, 100, 10000)
 out <- lstm("cut(retweet_count, breaks) ~ screen_name + 
-            grepv('gg', text) + grepv('tidy', text) + 
-            grepv('rstudio', text, ignore.case = TRUE) + grepv('python', text, ignore.case = TRUE) + 
-            grepv('cran', text, ignore.case = TRUE) +
-            grepv('trump', text, ignore.case = TRUE) +
-            weekdays(rt$created_at) + format(rt$created_at, '%d') + 
+            grepl('gg', text) + grepl('tidy', text) + 
+            grepl('rstudio', text, ignore.case = TRUE) +
+            grepl('cran', text, ignore.case = TRUE) +
+            grepl('trump', text, ignore.case = TRUE) +
+            weekdays(rt$created_at) + 
+            format(rt$created_at, '%d') + 
             format(rt$created_at, '%H')", data = rt)
 plot(out$history)
 summary(out$model)
@@ -45,11 +46,12 @@ rt$Nmentions <- unlist(lapply(rt$mentions_screen_name,
                               function(x){length(x[[1]]) - is.na(x[[1]])}))
 
 out2 <- lstm("floor(log(retweet_count + 1)) ~ Nmentions + screen_name + 
-            grepv('gg', text) + grepv('tidy', text) + 
-            grepv('rstudio', text, ignore.case = TRUE) + grepv('python', text, ignore.case = TRUE) + 
-            grepv('cran', text, ignore.case = TRUE) +
-            grepv('trump', text, ignore.case = TRUE) +
-            weekdays(rt$created_at) + format(rt$created_at, '%d') + 
+            grepl('gg', text) + grepl('tidy', text) + 
+            grepl('rstudio', text, ignore.case = TRUE) +
+            grepl('cran', text, ignore.case = TRUE) +
+            grepl('trump', text, ignore.case = TRUE) +
+            weekdays(rt$created_at) + 
+            format(rt$created_at, '%d') + 
             format(rt$created_at, '%H')", 
             data = rt, Nepochs = 10)
 out2$evaluations
@@ -61,10 +63,10 @@ Heading in the right direction. Suppose instead we wanted to add who was mention
 
 ```{r}
 input.formula <- "floor(log(retweet_count + 1)) ~ Nmentions + screen_name + 
-            grepv('gg', text) + grepv('tidy', text) + 
-            grepv('rstudio', text, ignore.case = TRUE) + grepv('python', text, ignore.case = TRUE) + 
-            grepv('cran', text, ignore.case = TRUE) +
-            grepv('trump', text, ignore.case = TRUE) +
+            grepl('gg', text) + grepl('tidy', text) + 
+            grepl('rstudio', text, ignore.case = TRUE) + grepl('python', text, ignore.case = TRUE) + 
+            grepl('cran', text, ignore.case = TRUE) +
+            grepl('trump', text, ignore.case = TRUE) +
             weekdays(rt$created_at) + format(rt$created_at, '%d') + 
             format(rt$created_at, '%H')"
 
@@ -72,7 +74,7 @@ handles <- names(table(unlist(rt$mentions_screen_name)))
 
 for(i in 1:length(handles)){
   lab <- paste0("mentions_", handles[i])
-  rt[[lab]] <- grepv(handles[i], rt$mentions_screen_name)
+  rt[[lab]] <- grepl(handles[i], rt$mentions_screen_name)
   input.formula <- paste(input.formula, "+", lab)
 }
 

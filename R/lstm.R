@@ -16,12 +16,15 @@
 #' @param ... Additional parameters to be passsed to Matrix::sparse.model.matrix.
 #' @return keras.fit object. A list containing model, predictions, evaluations, as well as details on the function call.
 #' @examples
-#' n <- 1000
-#' p <- 26
-#' X <- matrix(runif(n*p), ncol = p) 
-#' y <- letters[apply(X, 1, which.max)]
-#' DF <- data.frame(y, X)
-#' out <- lstm("y ~ X", DF)
+#' # not run
+#' # n <- 1000
+#' # p <- 26
+#' # X <- matrix(runif(n*p), ncol = p) 
+#' # y <- letters[apply(X, 1, which.max)]
+#' # DF <- data.frame(y, X)
+#' # out <- lstm("y ~ X", DF)
+#' # out2 <- lstm("y ~ .", DF, pTraining = 0.9, Nepochs = 10, batch_size = 16)
+#' # cars_out <- lstm("mpg %/% 1 ~ grepl('Mazda', rownames(mtcars), ignore.case = TRUE)", mtcars)
 #' @author Pete Mohanty
 #' @importFrom Matrix sparse.model.matrix
 #' @importFrom dplyr n_distinct mutate group_by summarise select 
@@ -106,16 +109,6 @@ lstm <- function(input.formula, data,
   object[["confusion"]] <- confusion(object)
   class(object) <- "keras.fit"
   return(object)
-  
-}
-
-#' @export    
-grepv <- function(pattern, x, ...){
-  
-  z <- vector(mode = "integer", length = length(x)) 
-  z[grep(pattern, x, ...)] <- 1
-  
-  return(z)
   
 }
 
