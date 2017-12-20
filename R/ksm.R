@@ -30,7 +30,7 @@
 #' @importFrom Matrix sparse.model.matrix
 #' @importFrom dplyr n_distinct mutate group_by summarise select 
 #' @export
-ksm <- function(input.formula, data, keras.model,
+ksm <- function(input.formula, data, keras.model = NULL,
                  layers = list(units = c(128, NA), activation = c("relu", "softmax"), dropout = c(0.4, NA)), 
                  pTraining = 0.8, seed = NULL, validation_split = 0.2, 
                  Nepochs = 25, batch_size = 32, loss = "categorical_crossentropy", metrics = c("accuracy"),
@@ -74,6 +74,12 @@ ksm <- function(input.formula, data, keras.model,
   remove(y_cat)
   
   Nlayers <- length(layers$units)
+  
+  if(!is.null(keras.model)){
+    cat("")
+    # insert bypass here
+  }
+  
   model <- keras_model_sequential() 
   for(i in 1:Nlayers){
     model <- if(i == 1){

@@ -11,21 +11,24 @@ opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
 ```
 
 
-The goal of this document is to introduce `lstm`, a regression style function which allows users to call `keras` with `R` `formula` objects and which splits training and test data into sparse matrices. Let's start with an example using `rtweet` from `@kearneymw`. The examples here don't provide particularly predictive models so much as show how using `formula` objects can smooth data cleaning and hyperparameter selection.
+The goal of this document is to introduce `ksm` (as in `keras_sequential_model()`), a regression-style function which allows users to call `keras` neural nets with `R` `formula` objects. `ksm` splits training and test data into sparse matrices and contains the major parameters found in `library(keras)` as inputs (loss function, batch size, number of epochs, etc.). To install my [branch](https://github.com/rdrr1990/keras) of `keras`,
+
+```{r, eval = FALSE}
+devtools::install_github("rdrr1990/keras")
+```
+Let's start with an example using `rtweet` (from `@kearneymw`). The examples here don't provide particularly predictive models so much as show how using `formula` objects can smooth data cleaning and hyperparameter selection.
 
 ```{r}
 library(rtweet)
-rt <- search_tweets(
-  "#rstats", n = 10000, include_rts = FALSE
-)
+rt <- search_tweets("#rstats", n = 5000, include_rts = FALSE)
 dim(rt)
 summary(rt$retweet_count)
 ```
-Suppose we wanted to predict how many times a tweet with `#rstat` is going to be retweeted. And suppose we wanted to bin the retweent count into five categories (none, 1-10, 11-50, 51-99, and 100 or more). Suppose we believe that the twitter handle matters as does day and time of day. 
+Suppose we wanted to predict how many times a tweet with `#rstat` is going to be retweeted. And suppose we wanted to bin the retweent count into five categories (none, 1-10, 11-50, 51-99, and 100 or more). Suppose we believe that the twitter handle and source matters as does day of week and time of day. 
 ```{r}
 library(keras)
 breaks <- c(-1, 0, 1, 10, 50, 100, 10000)
-out <- lstm("cut(retweet_count, breaks) ~ screen_name + 
+out <- ksm("cut(retweet_count, breaks) ~ screen_name + source +
             grepl('gg', text) + grepl('tidy', text) + 
             grepl('rstudio', text, ignore.case = TRUE) +
             grepl('cran', text, ignore.case = TRUE) +
@@ -45,7 +48,7 @@ Let's say we want to add some data about how many other people are mentioned in 
 rt$Nmentions <- unlist(lapply(rt$mentions_screen_name, 
                               function(x){length(x[[1]]) - is.na(x[[1]])}))
 
-out2 <- lstm("floor(log(retweet_count + 1)) ~ Nmentions + screen_name + 
+out2 <- ksm("floor(log(retweet_count + 1)) ~ Nmentions + screen_name + source +
             grepl('gg', text) + grepl('tidy', text) + 
             grepl('rstudio', text, ignore.case = TRUE) +
             grepl('cran', text, ignore.case = TRUE) +
@@ -62,7 +65,7 @@ out2$confusion
 Heading in the right direction. Suppose instead we wanted to add who was mentioned.
 
 ```{r}
-input.formula <- "floor(log(retweet_count + 1)) ~ Nmentions + screen_name + 
+input.formula <- "floor(log(retweet_count + 1)) ~ Nmentions + screen_name + source +
             grepl('gg', text) + grepl('tidy', text) + 
             grepl('rstudio', text, ignore.case = TRUE) + grepl('python', text, ignore.case = TRUE) + 
             grepl('cran', text, ignore.case = TRUE) +
@@ -78,14 +81,14 @@ for(i in 1:length(handles)){
   input.formula <- paste(input.formula, "+", lab)
 }
 
-out3 <- lstm(input.formula, data = rt, Nepochs = 10)
+out3 <- ksm(input.formula, data = rt, Nepochs = 10)
 out3$evaluations
 out3$confusion
 ```
 Marginal improvement but the model is still clearly overpredicting the modal outcome (zero retweets) and struggling to forecast the rare, popular tweets. Maybe the model needs more layers. 
 
 ```{r}
-out4 <- lstm(input.formula, data = rt, 
+out4 <- ksm(input.formula, data = rt, 
             layers = list(units = c(405, 135, 45, 15, NA), 
                          activation = c("softmax", "relu", "relu", "relu", "softmax"), 
                          dropout = c(0.7, 0.6, 0.5, 0.4, NA)),
@@ -99,7 +102,7 @@ Suppose we wanted to see if the estimates were stable across 10 test/train split
 est <- list()
 accuracy <- c()
 for(i in 1:10){
-  est[[paste0("seed", i)]] <- lstm(input.formula, data = rt, seed = i,
+  est[[paste0("seed", i)]] <- ksm(input.formula, data = rt, seed = i,
             layers = list(units = c(405, 135, 45, 15, NA), 
                          activation = c("softmax", "relu", "relu", "relu", "softmax"), 
                          dropout = c(0.7, 0.6, 0.5, 0.4, NA)),
@@ -111,4 +114,4 @@ accuracy
 
 Hmmm... Maybe Model 3 is the closest ... Or maybe we just need more data :)
 
-Though `lstm` contains a number of parameters, the goal is not to replace all the vast customizability that `keras` offers. Rather, like `qplot` in the `ggplot` library, `lstm` offers convenience for common scenarios. Or, perhaps better, like `MCMCpack` or `rstan` do for Bayesian MCMC, `lstm` aims to introduce users familiar with regression in R to neural nets without steep scripting stumbling blocks. Suggestions are more than welcome!
+Though `ksm` contains a number of parameters, the goal is not to replace all the vast customizability that `keras` offers. Rather, like `qplot` in the `ggplot` library, `ksm` offers convenience for common scenarios. Or, perhaps better, like `MCMCpack` or `rstan` do for Bayesian MCMC, `ksm` aims to introduce users familiar with regression in R to neural nets without steep scripting stumbling blocks. Next on the to-do list is to add support for accepting keras models as a parameter. Suggestions are more than welcome!
