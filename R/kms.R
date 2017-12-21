@@ -1,10 +1,10 @@
-#' ksm
+#' kms
 #' 
-#' A regression-style function call for Keras sequential model (KSM) which uses sparse matrices.
+#' A regression-style function call for Keras model sequential (KMS) which uses sparse matrices.
 #' 
 #' @param input.formula an object of class "formula" (or one coerceable to a formula): a symbolic description of the keras inputs. The outcome, y, is assumed to be categorical, e.g. "stars ~ mentions.tasty + mentions.fun".
 #' @param data a data.frame.
-#' @param keras.model A Keras sequential model.
+#' @param keras.model A compiled Keras sequential model. If non-NULL (NULL is the default), then bypasses the following `kms` parameters: layers, loss, metrics, and optimizer.
 #' @param layers a list that contains the number of units, activation type, and dropout rate. Example with three layers and length(unique(y)) == 10: layers = list(units = c(256, 128, NA), activation = c("relu", "relu", "softmax"), dropout = c(0.4, 0.3, NA)). If the final element of units is NA (the default), chosen to be the number of unique elements in y. See ?layer_dense or ?layer_dropout. 
 #' @param pTraining Proportion of the data to be used for training the model;  0 < pTraining < 1. By default, pTraining == 0.8. Other observations used only postestimation (e.g., for confusion matrix). 
 #' @param seed seed to passed to set.seed for partitioning data. If NULL (default), automatically generated.
@@ -23,14 +23,14 @@
 #' # X <- matrix(runif(n*p), ncol = p) 
 #' # y <- letters[apply(X, 1, which.max)]
 #' # DF <- data.frame(y, X)
-#' # out <- ksm("y ~ X", DF)
-#' # out2 <- ksm("y ~ .", DF, pTraining = 0.9, Nepochs = 10, batch_size = 16)
-#' # cars_out <- ksm("mpg %/% 1 ~ grepl('Mazda', rownames(mtcars), ignore.case = TRUE)", mtcars)
+#' # out <- kms("y ~ X", DF)
+#' # out2 <- kms("y ~ .", DF, pTraining = 0.9, Nepochs = 10, batch_size = 16)
+#' # cars_out <- kms("mpg %/% 1 ~ grepl('Mazda', rownames(mtcars), ignore.case = TRUE)", mtcars)
 #' @author Pete Mohanty
 #' @importFrom Matrix sparse.model.matrix
-#' @importFrom dplyr n_distinct mutate group_by summarise select 
+#' @importFrom dplyr n_distinct
 #' @export
-ksm <- function(input.formula, data, keras.model = NULL,
+kms <- function(input.formula, data, keras.model = NULL, 
                  layers = list(units = c(128, NA), activation = c("relu", "softmax"), dropout = c(0.4, NA)), 
                  pTraining = 0.8, seed = NULL, validation_split = 0.2, 
                  Nepochs = 25, batch_size = 32, loss = "categorical_crossentropy", metrics = c("accuracy"),
@@ -75,27 +75,27 @@ ksm <- function(input.formula, data, keras.model = NULL,
   
   Nlayers <- length(layers$units)
   
-  if(!is.null(keras.model)){
-    cat("")
-    # insert bypass here
-  }
-  
-  model <- keras_model_sequential() 
-  for(i in 1:Nlayers){
-    model <- if(i == 1){
-      layer_dense(model, units = layers$units[i], activation = layers$activation[i], input_shape = c(P))
-    }else{
-      layer_dense(model, units = layers$units[i], activation = layers$activation[i])
+  if(is.null(keras.model)){
+    
+    model <- keras_model_sequential() 
+    for(i in 1:Nlayers){
+      model <- if(i == 1){
+        layer_dense(model, units = layers$units[i], activation = layers$activation[i], input_shape = c(P))
+      }else{
+        layer_dense(model, units = layers$units[i], activation = layers$activation[i])
+      }
+      if(i != Nlayers)
+        model <- layer_dropout(model, rate = layers$rate[i])
     }
-    if(i != Nlayers)
-      model <- layer_dropout(model, rate = layers$rate[i])
+    
+    model %>% compile(
+      loss = loss,
+      optimizer = do.call(optimizer, args = list()),
+      metrics = metrics
+    )
+    
   }
-  
-  model %>% compile(
-    loss = loss,
-    optimizer = do.call(optimizer, args = list()),
-    metrics = metrics
-  )
+
   
   history <- model %>% fit(
     x_train, y_train, 
