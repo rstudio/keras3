@@ -2,7 +2,7 @@
 % Please edit documentation in R/preprocessing.R
 \name{generator_next}
 \alias{generator_next}
-\title{Retreive the next item from a generator}
+\title{Retrieve the next item from a generator}
 \usage{
 generator_next(generator, completed = NULL)
 }

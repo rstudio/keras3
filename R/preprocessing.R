@@ -599,7 +599,7 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
 }
 
 
-#' Retreive the next item from a generator
+#' Retrieve the next item from a generator
 #' 
 #' Use to retrieve items from generators (e.g. [image_data_generator()]). Will return
 #' either the next item or `NULL` if there are no more items.
@@ -682,43 +682,43 @@ flow_images_from_data <- function(
   )
 }
 
-#' Generates batches of data from images in a directory (with optional 
+#' Generates batches of data from images in a directory (with optional
 #' augmented/normalized data)
-#' 
+#'
 #' @details Yields batches indefinitely, in an infinite loop.
-#'   
-#' @inheritParams image_load   
+#'
+#' @inheritParams image_load
 #' @inheritParams flow_images_from_data
-#'   
+#'
 #' @param generator Image data generator (default generator does no data
 #'   augmentation/normalization transformations)
-#' @param directory path to the target directory. It should contain one 
-#'   subdirectory per class. Any PNG, JPG or BMP images inside each of the 
-#'   subdirectories directory tree will be included in the generator. See [this 
-#'   script](https://gist.github.com/fchollet/0830affa1f7f19fd47b06d4cf89ed44d) 
+#' @param directory path to the target directory. It should contain one
+#'   subdirectory per class. Any PNG, JPG or BMP images inside each of the
+#'   subdirectories directory tree will be included in the generator. See [this
+#'   script](https://gist.github.com/fchollet/0830affa1f7f19fd47b06d4cf89ed44d)
 #'   for more details.
-#' @param target_size integer vectir, default: `c(256, 256)`. The dimensions to 
+#' @param target_size integer vectir, default: `c(256, 256)`. The dimensions to
 #'   which all images found will be resized.
-#' @param color_mode one of "grayscale", "rbg". Default: "rgb". Whether the 
+#' @param color_mode one of "grayscale", "rbg". Default: "rgb". Whether the
 #'   images will be converted to have 1 or 3 color channels.
-#' @param classes optional list of class subdirectories (e.g. `c('dogs', 
-#'   'cats')`). Default: `NULL`, If not provided, the list of classes will be 
+#' @param classes optional list of class subdirectories (e.g. `c('dogs',
+#'   'cats')`). Default: `NULL`, If not provided, the list of classes will be
 #'   automatically inferred (and the order of the classes, which will map to the
 #'   label indices, will be alphanumeric).
-#' @param class_mode one of "categorical", "binary", "sparse" or `NULL`. 
-#'   Default: "categorical". Determines the type of label arrays that are 
+#' @param class_mode one of "categorical", "binary", "sparse" or `NULL`.
+#'   Default: "categorical". Determines the type of label arrays that are
 #'   returned: "categorical" will be 2D one-hot encoded labels, "binary" will be
-#'   1D binary labels, "sparse" will be 1D integer labels. If `NULL`, no labels 
+#'   1D binary labels, "sparse" will be 1D integer labels. If `NULL`, no labels
 #'   are returned (the generator will only yield batches of image data, which is
 #'   useful to use [predict_generator()], [evaluate_generator()], etc.).
-#' @param follow_links whether to follow symlinks inside class subdirectories 
+#' @param follow_links whether to follow symlinks inside class subdirectories
 #'   (default: `FALSE`)
-#'   
-#' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a 
+#'
+#' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a
 #'   array of corresponding labels. The generator loops indefinitely.
-#'   
+#'
 #' @family image preprocessing
-#'   
+#'
 #' @export
 flow_images_from_directory <- function(
   directory, generator = image_data_generator(), target_size = c(256, 256), color_mode = "rgb",

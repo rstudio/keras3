@@ -89,7 +89,7 @@ count_params <- function(object) {
 #' (the output of the layer), and you are adding a "node" to the layer, linking 
 #' the input tensor to the output tensor. When you are calling the same layer 
 #' multiple times, that layer owns multiple nodes indexed as 1, 2, 3. These 
-#' functions enable you to retreive various tensor properties of layers with 
+#' functions enable you to retrieve various tensor properties of layers with 
 #' multiple nodes.
 #' 
 #' @param object Layer or model object
