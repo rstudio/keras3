@@ -1,4 +1,11 @@
 
+## Keras 2.1.3 (Development)
+
+Install the development version with: `install_github("rstudio/keras")`
+
+- Ensure that models saved via export_savedmodel can be served from CloudML
+
+
 ## Keras 2.1.2 (CRAN)
 
 - Added `theme_bw` option to plot method for training history 
