@@ -5,6 +5,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Ensure that models saved via export_savedmodel can be served from CloudML
 
+- Run image data generators with R preprocessing functions on the main thread
+
 
 ## Keras 2.1.2 (CRAN)
 

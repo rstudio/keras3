@@ -821,6 +821,15 @@ is_main_thread_generator.function <- function(x) {
   TRUE
 }
 
+is_main_thread_generator.keras.preprocessing.image.Iterator <- function(x) {
+  if (py_has_attr(x, "image_data_generator")) {
+    generator <- x$image_data_generator
+    !is.null(generator$preprocessing_function)
+  } else {
+    FALSE
+  }
+}
+
   
 #' Retrieves a layer based on either its name (unique) or index.
 #' 
