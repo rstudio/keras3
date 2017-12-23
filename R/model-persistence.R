@@ -228,19 +228,6 @@ unserialize_model <- function(model, custom_objects = NULL, compile = TRUE) {
   load_model_hdf5(tmp, custom_objects = custom_objects, compile = compile)
 }
 
-model_to_tensors_info <- function(layers, name) {
-  named_layers <- lapply(layers, function(layer) {
-    tensorflow::tf$saved_model$utils$build_tensor_info(layer[[name]])
-  })
-  
-  if (length(named_layers) == 1)
-    names(named_layers) <- name
-  else
-    names(named_layers) <- paste(name, seq_along(named_layers), sep = "")
-  
-  named_layers
-}
-
 #' Export a Saved Model
 #'
 #' Serialize a model to disk.
@@ -259,18 +246,14 @@ export_savedmodel.keras.engine.training.Model <- function(object, export_dir_bas
   
   sess <- backend()$get_session()
   
-  if (tensorflow::tf_version() < '1.4') {
-    input_tensor <- object$input_layers
-    output_tensor <- object$output_layers
-  }
-  else {
-    input_tensor <- object$layers
-    output_tensor <- object$layers
-  }
+  input_info <- list(
+    input = tensorflow::tf$saved_model$utils$build_tensor_info(object$input)
+  )
 
-  input_info <- model_to_tensors_info(input_tensor, "input")
-  output_info <- model_to_tensors_info(output_tensor, "output")
-  
+  output_info <- list(
+    output = tensorflow::tf$saved_model$utils$build_tensor_info(object$output)
+  )
+
   builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir_base)
   builder$add_meta_graph_and_variables(
     sess,
