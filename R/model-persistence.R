@@ -266,7 +266,8 @@ export_savedmodel.keras.engine.training.Model <- function(object, export_dir_bas
     signature_def_map = list(
       serving_default = tensorflow::tf$saved_model$signature_def_utils$build_signature_def(
         inputs = input_info,
-        outputs = output_info
+        outputs = output_info,
+        method_name = tensorflow::tf$saved_model$signature_constants$PREDICT_METHOD_NAME
       )
     )
   )

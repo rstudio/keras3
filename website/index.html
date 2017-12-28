@@ -134,15 +134,26 @@
 <p>For additional details on why you might consider using Keras for your deep learning projects, see the <a href="articles/why_use_keras.html">Why Use Keras?</a> article.</p>
 <p>This website provides documentation for the R interface to Keras. See the main Keras website at <a href="https://keras.io" class="uri">https://keras.io</a> for additional information on the project.</p>
 </div>
-<div id="installation" class="section level2">
+<div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#getting-started" class="anchor"></a>Getting Started</h2>
+<div id="installation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h3>
 <p>First, install the keras R package from GitHub as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"rstudio/keras"</span>)</code></pre></div>
 <p>The Keras R interface uses the <a href="https://www.tensorflow.org/">TensorFlow</a> backend engine by default. To install both the core Keras library as well as the TensorFlow backend use the <code><a href="reference/install_keras.html">install_keras()</a></code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
 <span class="kw"><a href="reference/install_keras.html">install_keras</a></span>()</code></pre></div>
 <p>This will provide you with default CPU-based installations of Keras and TensorFlow. If you want a more customized installation, e.g. if you want to take advantage of NVIDIA GPUs, see the documentation for <code><a href="reference/install_keras.html">install_keras()</a></code>.</p>
+</div>
+<div id="learning-keras" class="section level3">
+<h3 class="hasAnchor">
+<a href="#learning-keras" class="anchor"></a>Learning Keras</h3>
+<p>Below we walk through a simple example of using Keras to recognize handwritten digits from the <a href="https://en.wikipedia.org/wiki/MNIST_database">MNIST</a> dataset. After getting familiar with the basics, check out the additional <a href="#learning-more">learning resources</a> available on this website.</p>
+<p>The <a href="https://www.manning.com/books/deep-learning-with-r">Deep Learning with R</a> book by François Chollet (the creator of Keras) provides a more comprehensive introduction to both Keras and the concepts and practice of deep learning.</p>
+<p>You may also find it convenient to download the <a href="https://github.com/rstudio/cheatsheets/raw/master/keras.pdf" target="_self">Deep Learning with Keras</a> cheat sheet, a quick high-level reference to all of the capabilities of Keras.</p>
+</div>
 </div>
 <div id="mnist-example" class="section level2">
 <h2 class="hasAnchor">
@@ -253,6 +264,7 @@ $acc
 <li><p><a href="articles/training_visualization.html">Training Visualization</a></p></li>
 <li><p><a href="articles/applications.html">Using Pre-Trained Models</a></p></li>
 </ul>
+<p>The <a href="https://github.com/rstudio/cheatsheets/raw/master/keras.pdf">Deep Learning with Keras</a> cheat sheet provides a condensed high level guide to using Keras.</p>
 <p>The <a href="articles/examples/index.html">examples</a> demonstrate more advanced models including transfer learning, variational auto-encoding, question-answering with memory networks, text generation with stacked LSTMs, etc.</p>
 <p>The <a href="reference/index.html">function reference</a> includes detailed information on all of the functions available in the package.</p>
 <p><a href="https://www.manning.com/books/deep-learning-with-r"><img src="https://images.manning.com/720/960/resize/book/7/9e4c694-85cf-4063-9fad-eab693da11ff/Allaire-DLwithR-MEAP-HI.png" align="right" style="margin-left:10px; margin-right: 20px; margin-top: 15px; border: solid 1px #cccccc;" width="125"></a></p>
