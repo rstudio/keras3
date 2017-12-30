@@ -246,16 +246,16 @@ export_savedmodel.keras.engine.training.Model <- function(object, export_dir_bas
   
   sess <- backend()$get_session()
 
-  input_info <- lapply(object$input_layers, function(e) {
-    tensorflow::tf$saved_model$utils$build_tensor_info(e$input)
+  input_info <- lapply(object$inputs, function(e) {
+    tensorflow::tf$saved_model$utils$build_tensor_info(e)
   })
   
-  output_info <- lapply(object$output_layers, function(e) {
-    tensorflow::tf$saved_model$utils$build_tensor_info(e$output)
+  output_info <- lapply(object$outputs, function(e) {
+    tensorflow::tf$saved_model$utils$build_tensor_info(e)
   })
   
-  names(input_info) <- lapply(object$input_layers, function(e) e$name)
-  names(output_info) <- lapply(object$output_layers, function(e) e$name)
+  names(input_info) <- lapply(object$input_names, function(e) e)
+  names(output_info) <- lapply(object$output_names, function(e) e)
 
   builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir_base)
   builder$add_meta_graph_and_variables(
