@@ -245,14 +245,17 @@ export_savedmodel.keras.engine.training.Model <- function(object, export_dir_bas
     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
   
   sess <- backend()$get_session()
-  
-  input_info <- list(
-    input = tensorflow::tf$saved_model$utils$build_tensor_info(object$input)
-  )
 
-  output_info <- list(
-    output = tensorflow::tf$saved_model$utils$build_tensor_info(object$output)
-  )
+  input_info <- lapply(object$inputs, function(e) {
+    tensorflow::tf$saved_model$utils$build_tensor_info(e)
+  })
+  
+  output_info <- lapply(object$outputs, function(e) {
+    tensorflow::tf$saved_model$utils$build_tensor_info(e)
+  })
+  
+  names(input_info) <- lapply(object$input_names, function(e) e)
+  names(output_info) <- lapply(object$output_names, function(e) e)
 
   builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir_base)
   builder$add_meta_graph_and_variables(
