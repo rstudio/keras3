@@ -21,8 +21,8 @@ z_mean <- layer_dense(h, latent_dim)
 z_log_var <- layer_dense(h, latent_dim)
 
 sampling <- function(arg){
-  z_mean <- arg[,1:2]
-  z_log_var <- arg[,3:4]
+  z_mean <- arg[, 1:(latent_dim)]
+  z_log_var <- arg[, (latent_dim + 1):(2 * latent_dim)]
   
   epsilon <- k_random_normal(
     shape = c(k_shape(z_mean)[[1]]), 
