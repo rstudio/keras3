@@ -27,7 +27,6 @@
 
 # package level global state
 .globals <- new.env(parent = emptyenv())
-.globals$use_implementation <- NULL
 
 
 #' Select a Keras implementation and backend
@@ -62,16 +61,7 @@
 #'
 #' @export
 use_implementation <- function(implementation = c("keras", "tensorflow")) {
-  
-  if (utils::packageVersion("reticulate") < "1.3.1.9001") {
-    warning(
-     "The use_implementation function requires a newer version of the ",
-     "reticulate package.\nYou can install this version with:",
-     " devtools::install_github('rstudio/reticulate')", call. = FALSE
-    )
-  }
-  
-  .globals$use_implementation <- match.arg(implementation)
+  Sys.setenv(KERAS_IMPLEMENTATION = match.arg(implementation))
 }
 
 
@@ -104,7 +94,7 @@ keras <- NULL
     Sys.setenv(RETICULATE_PYTHON = keras_python)
   
   # delay load keras
-  keras <<- import(implementation_module, as = "keras", delay_load = list(
+  keras <<- import(implementation_module, delay_load = list(
   
     priority = 10,
     
@@ -124,6 +114,11 @@ keras <- NULL
         tools <- import_from_path("kerastools", path = python_path)
         tools$progbar$apply_patch()
       }
+      
+      # register class filter to alias classes to 'keras'
+      reticulate::register_class_filter(function(classes) {
+        sub(paste0("^", resolve_implementation_module()), "keras", classes)
+      })
         
     },
     
@@ -166,10 +161,7 @@ resolve_implementation_module <- function() {
 }
 
 get_keras_implementation <- function(default = "keras") {
-  if (!is.null(.globals$use_implementation))
-    .globals$use_implementation
-  else
-    get_keras_option("KERAS_IMPLEMENTATION", default = default)
+  get_keras_option("KERAS_IMPLEMENTATION", default = default)
 }
 
 get_keras_python <- function(default = NULL) {

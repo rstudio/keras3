@@ -9,6 +9,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Return R list from `texts_to_sequences()`
 
+- Various fixes for `use_implementation()` function
+
 
 ## Keras 2.1.2 (CRAN)
 
