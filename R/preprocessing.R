@@ -20,6 +20,17 @@
 #' @export
 pad_sequences <- function(sequences, maxlen = NULL, dtype = "int32", padding = "pre", 
                           truncating = "pre", value = 0.0) {
+  
+  # force length-1 sequences to list (so they aren't treated as scalars)
+  if (is.list(sequences)) {
+    sequences <- lapply(sequences, function(seq) {
+      if (length(seq) == 1)
+        as.list(seq)
+      else
+        seq
+    })
+  }
+  
   keras$preprocessing$sequence$pad_sequences(
     sequences = sequences,
     maxlen = as_nullable_integer(maxlen),
@@ -338,10 +349,7 @@ load_text_tokenizer <- function(filename) {
 #'   
 #' @export
 texts_to_sequences <- function(tokenizer, texts) {
-  # return it as an opaque python object b/c pad_sequences expects
-  # a list of iterables and we lose the iterable part if we convert to R
-  tokenzier_noconvert <- r_to_py(tokenizer, convert = FALSE)
-  tokenzier_noconvert$texts_to_sequences(texts)  
+  tokenizer$texts_to_sequences(texts)  
 }
 
 #' Transforms each text in texts in a sequence of integers.
@@ -392,6 +400,17 @@ texts_to_matrix <- function(tokenizer, texts, mode = c("binary", "count", "tfidf
 #'   
 #' @export
 sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count", "tfidf", "freq")) {
+  
+  # force length-1 sequences to list (so they aren't treated as scalars)
+  if (is.list(sequences)) {
+    sequences <- lapply(sequences, function(seq) {
+      if (length(seq) == 1)
+        as.list(seq)
+      else
+        seq
+    })
+  }
+  
   tokenizer$sequences_to_matrix(
     sequences = sequences,
     mode = mode

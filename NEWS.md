@@ -7,6 +7,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Run image data generators with R preprocessing functions on the main thread
 
+- Return R list from `texts_to_sequences()`
+
 
 ## Keras 2.1.2 (CRAN)
 
