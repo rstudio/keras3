@@ -63,6 +63,18 @@ blockquote {
   border-color: rgba(195,0,4, 0.9);
 }
 
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+  background-color: rgba(195,0,4, 0.9);
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+  border-color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu>.dropdown-header {
+  border-color: #ffffff !important;
+}
+
 .navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus {
   color: #ffffff;
   background-color: rgb(180,0,12);

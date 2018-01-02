@@ -138,8 +138,8 @@ z_mean &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/l
 z_log_var &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(h, latent_dim)
 
 sampling &lt;-<span class="st"> </span><span class="cf">function</span>(arg){
-  z_mean &lt;-<span class="st"> </span>arg[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
-  z_log_var &lt;-<span class="st"> </span>arg[,<span class="dv">3</span><span class="op">:</span><span class="dv">4</span>]
+  z_mean &lt;-<span class="st"> </span>arg[, <span class="dv">1</span><span class="op">:</span>(latent_dim)]
+  z_log_var &lt;-<span class="st"> </span>arg[, (latent_dim <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>latent_dim)]
   
   epsilon &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_random_normal.html">k_random_normal</a></span>(
     <span class="dt">shape =</span> <span class="kw">c</span>(<span class="kw"><a href="../../reference/k_shape.html">k_shape</a></span>(z_mean)[[<span class="dv">1</span>]]), 
