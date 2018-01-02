@@ -594,8 +594,8 @@ keras &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <h2 class="hasAnchor">
 <a href="#where-is-the-keras-configuration-filed-stored" class="anchor"></a>Where is the Keras configuration filed stored?</h2>
 <p>The default directory where all Keras data is stored is:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="va">$HOME</span><span class="ex">/.keras/</span></code></pre></div>
-<p>Note that Windows users should replace <code>$HOME</code> with <code>%USERPROFILE%</code>. In case Keras cannot create the above directory (e.g. due to permission issues), <code>/tmp/.keras/</code> is used as a backup.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">~/.keras/</span></code></pre></div>
+<p>In case Keras cannot create the above directory (e.g. due to permission issues), <code>/tmp/.keras/</code> is used as a backup.</p>
 <p>The Keras configuration file is a JSON file stored at <code>$HOME/.keras/keras.json</code>. The default configuration file looks like this:</p>
 <pre><code>{
     "image_data_format": "channels_last",

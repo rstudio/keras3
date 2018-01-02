@@ -598,10 +598,9 @@ use_session_with_seed(42, disable_gpu = FALSE, disable_parallel_cpu = FALSE)
 The default directory where all Keras data is stored is:
 
 ```bash
-$HOME/.keras/
+~/.keras/
 ```
 
-Note that Windows users should replace `$HOME` with `%USERPROFILE%`.
 In case Keras cannot create the above directory (e.g. due to permission issues), `/tmp/.keras/` is used as a backup.
 
 The Keras configuration file is a JSON file stored at `$HOME/.keras/keras.json`. The default configuration file looks like this:

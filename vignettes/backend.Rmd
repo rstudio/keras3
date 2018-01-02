@@ -64,11 +64,9 @@ You would typically specify the "tensorflow" implementation when using Keras wit
 
 If you have run Keras at least once, you will find the Keras configuration file at:
 
-`$HOME/.keras/keras.json`
+`~/.keras/keras.json`
 
 If it isn't there, you can create it.
-
-**NOTE for Windows Users:** Please replace `$HOME` with `%USERPROFILE%`.
 
 The default configuration file looks like this:
 
