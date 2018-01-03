@@ -11,6 +11,8 @@
 \alias{reexports}
 \alias{array_reshape}
 \alias{reexports}
+\alias{iter_next}
+\alias{reexports}
 \alias{use_session_with_seed}
 \alias{reexports}
 \alias{tensorboard}
@@ -37,7 +39,7 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{reticulate}{\code{\link[reticulate]{use_python}}, \code{\link[reticulate]{use_virtualenv}}, \code{\link[reticulate]{use_condaenv}}, \code{\link[reticulate]{array_reshape}}}
+  \item{reticulate}{\code{\link[reticulate]{use_python}}, \code{\link[reticulate]{use_virtualenv}}, \code{\link[reticulate]{use_condaenv}}, \code{\link[reticulate]{array_reshape}}, \code{\link[reticulate]{iter_next}}}
 
   \item{tensorflow}{\code{\link[tensorflow]{use_session_with_seed}}, \code{\link[tensorflow]{tensorboard}}, \code{\link[tensorflow]{evaluate}}, \code{\link[tensorflow]{export_savedmodel}}}
 
