@@ -11,8 +11,6 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Various fixes for `use_implementation()` function
 
-- Reexport `iter_next()` from reticulate
-
 
 ## Keras 2.1.2 (CRAN)
 
