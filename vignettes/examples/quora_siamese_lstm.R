@@ -1,19 +1,19 @@
-# In this tutorial we will use Keras to classify duplicated questions from Quora.
-# The dataset first appeared in the Kaggle competition 
-# [*Quora Question Pairs*](https://www.kaggle.com/c/quora-question-pairs).
-# The dataset consists of ~400k pairs of questions and a column indicating 
-# if the question pair is duplicated. 
-# 
-# Our implementation is inspired by the Siamese Recurrent Architecture, Mueller et al. [*Siamese recurrent architectures for learning sentence similarity*](https://dl.acm.org/citation.cfm?id=3016291), with small modifications like the similarity
-# measure and the embedding layers (The original paper uses pre-trained word vectors). Using this kind
-# of architecture dates back to 2005 with [Le Cun et al](https://dl.acm.org/citation.cfm?id=1068961) and is usefull for
-# verification tasks. The idea is to learn a function that maps input patterns into a
-# target space such that a similarity measure in the target space approximates
-# the “semantic” distance in the input space. 
-# 
-# After the competition, Quora also described their approach to this problem in 
-# this [blog post](https://engineering.quora.com/Semantic-Question-Matching-with-Deep-Learning).
-# 
+#' In this tutorial we will use Keras to classify duplicated questions from Quora.
+#' The dataset first appeared in the Kaggle competition 
+#' [*Quora Question Pairs*](https://www.kaggle.com/c/quora-question-pairs).
+#' The dataset consists of ~400k pairs of questions and a column indicating 
+#' if the question pair is duplicated. 
+#' 
+#' Our implementation is inspired by the Siamese Recurrent Architecture, Mueller et al. [*Siamese recurrent architectures for learning sentence similarity*](https://dl.acm.org/citation.cfm?id=3016291), with small modifications like the similarity
+#' measure and the embedding layers (The original paper uses pre-trained word vectors). Using this kind
+#' of architecture dates back to 2005 with [Le Cun et al](https://dl.acm.org/citation.cfm?id=1068961) and is usefull for
+#' verification tasks. The idea is to learn a function that maps input patterns into a
+#' target space such that a similarity measure in the target space approximates
+#' the “semantic” distance in the input space. 
+#' 
+#' After the competition, Quora also described their approach to this problem in 
+#' this [blog post](https://engineering.quora.com/Semantic-Question-Matching-with-Deep-Learning).
+#' 
 
 library(readr)
 library(keras)
