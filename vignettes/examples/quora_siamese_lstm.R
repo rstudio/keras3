@@ -29,15 +29,15 @@ FLAGS <- flags(
 
 # Downloading Data --------------------------------------------------------
 
-download.file(
-  url = "http://qim.ec.quoracdn.net/quora_duplicate_questions.tsv",
-  dest = "quora_duplicate_questions.tsv"
+quora_data <- get_file(
+  "quora_duplicate_questions.tsv",
+  "http://qim.ec.quoracdn.net/quora_duplicate_questions.tsv"
 )
 
 
 # Pre-processing ----------------------------------------------------------
 
-df <- read_tsv("quora_duplicate_questions.tsv")
+df <- read_tsv(quora_data)
 
 tokenizer <- text_tokenizer(num_words = FLAGS$vocab_size)
 fit_text_tokenizer(tokenizer, x = c(df$question1, df$question2))
