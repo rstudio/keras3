@@ -3,7 +3,10 @@
 
 Install the development version with: `install_github("rstudio/keras")`
 
-- Ensure that models saved via export_savedmodel can be served from CloudML
+- Models saved via `export_savedmodel()` that make use of learning phases can
+  now be exported without having to manually reload the original model.
+
+- Ensure that models saved via `export_savedmodel()` can be served from CloudML
 
 - Run image data generators with R preprocessing functions on the main thread
 
