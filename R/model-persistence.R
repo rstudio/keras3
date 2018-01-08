@@ -262,8 +262,8 @@ export_savedmodel.keras.engine.training.Model <- function(object, export_dir_bas
     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
 
   if (!is_tensorflow_implementation()) {
-    learning_phase <- k_learning_phase()
-    on.exit(k_set_learning_phase(learning_phase))
+    original_learning_phase <- k_learning_phase()
+    on.exit(function() k_set_learning_phase(original_learning_phase), add = TRUE)
     
     k_set_learning_phase(FALSE)
     object <- reload_model(object)
