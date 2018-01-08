@@ -230,7 +230,7 @@ unserialize_model <- function(model, custom_objects = NULL, compile = TRUE) {
 
 reload_model <- function(object) {
   old_config <- object$get_config()
-  old_weigths <- object$get_weights()
+  old_weights <- object$get_weights()
   
   models <- import("keras.models")
   if ("keras.models.Sequential" %in% class(object)) {
@@ -240,7 +240,7 @@ reload_model <- function(object) {
     new_model <- models$Model$from_config(old_config)
   }
   
-  new_model$set_weights(old_weigths)
+  new_model$set_weights(old_weights)
   
   new_model
 }
@@ -261,6 +261,9 @@ export_savedmodel.keras.engine.training.Model <- function(object, export_dir_bas
   if (!is_backend("tensorflow"))
     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
 
+  learning_phase <- k_learning_phase()
+  on.exit(k_set_learning_phase(learning_phase))
+  
   k_set_learning_phase(FALSE)
   object <- reload_model(object)
   
