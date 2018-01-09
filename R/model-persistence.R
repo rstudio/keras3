@@ -263,6 +263,7 @@ export_savedmodel.keras.engine.training.Model <- function(object, export_dir_bas
 
   if (!is_tensorflow_implementation()) {
     k_set_learning_phase(0)
+    message("Keras learning phase set to 0 for export (restart R session before doing additional training)")
     object <- reload_model(object)
   }
   
