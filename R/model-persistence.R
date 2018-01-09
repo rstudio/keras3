@@ -228,6 +228,23 @@ unserialize_model <- function(model, custom_objects = NULL, compile = TRUE) {
   load_model_hdf5(tmp, custom_objects = custom_objects, compile = compile)
 }
 
+reload_model <- function(object) {
+  old_config <- object$get_config()
+  old_weights <- object$get_weights()
+  
+  models <- import("keras.models")
+  if ("keras.models.Sequential" %in% class(object)) {
+    new_model <- models$Sequential$from_config(old_config)
+  }
+  else {
+    new_model <- models$Model$from_config(old_config)
+  }
+  
+  new_model$set_weights(old_weights)
+  
+  new_model
+}
+
 #' Export a Saved Model
 #'
 #' Serialize a model to disk.
@@ -243,6 +260,11 @@ unserialize_model <- function(model, custom_objects = NULL, compile = TRUE) {
 export_savedmodel.keras.engine.training.Model <- function(object, export_dir_base, ...) {
   if (!is_backend("tensorflow"))
     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
+
+  if (!is_tensorflow_implementation()) {
+    k_set_learning_phase(0)
+    object <- reload_model(object)
+  }
   
   sess <- backend()$get_session()
 
