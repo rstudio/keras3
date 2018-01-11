@@ -261,7 +261,7 @@ reload_model <- function(object) {
 #' @export
 export_savedmodel.keras.engine.training.Model <- function(
   object,
-  export_dir,
+  export_dir = NULL,
   overwrite = TRUE,
   versioned = !overwrite,
   ...) {
