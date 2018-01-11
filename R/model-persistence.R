@@ -314,6 +314,8 @@ export_savedmodel.keras.engine.training.Model <- function(
     )
   )
   
-  invisible(builder$save())
+  builder$save()
+  
+  invisible(export_dir_base)
 }
 
