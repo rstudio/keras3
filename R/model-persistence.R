@@ -250,9 +250,9 @@ reload_model <- function(object) {
 #' Serialize a model to disk.
 #'
 #' @param object An \R object.
-#' @param export_dir A string containing a directory in which to export the
+#' @param export_dir_base A string containing a directory in which to export the
 #'   SavedModel.
-#' @param overwrite Should the \code{export_dir} directory be overwritten?
+#' @param overwrite Should the \code{export_dir_base} directory be overwritten?
 #' @param versioned Should the model be exported under a versioned subdirectory?
 #' @param ... Unused
 #' 
@@ -261,21 +261,15 @@ reload_model <- function(object) {
 #' @export
 export_savedmodel.keras.engine.training.Model <- function(
   object,
-  export_dir = NULL,
+  export_dir_base,
   overwrite = TRUE,
   versioned = !overwrite,
   ...) {
   if (!is_backend("tensorflow"))
     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
-
-  params <- list(...)
-  if (is.null(export_dir) && !is.null(params$export_dir_base)) {
-    .Deprecated(msg = "Param 'export_dir_base' is deprecated, use 'export_dir' instead.")
-    export_dir <- params$export_dir_base
-  }
   
   if (versioned) {
-    export_dir <- file.path(export_dir, format(Sys.time(), "%Y%m%d%H%M%OS", tz = "GMT"))
+    export_dir_base <- file.path(export_dir_base, format(Sys.time(), "%Y%m%d%H%M%OS", tz = "GMT"))
   }
   
   if (is_tensorflow_implementation()) {
@@ -302,10 +296,10 @@ export_savedmodel.keras.engine.training.Model <- function(
   names(input_info) <- lapply(object$input_names, function(e) e)
   names(output_info) <- lapply(object$output_names, function(e) e)
   
-  if (overwrite && file.exists(export_dir))
-    unlink(export_dir, recursive = TRUE)
+  if (overwrite && file.exists(export_dir_base))
+    unlink(export_dir_base, recursive = TRUE)
 
-  builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir)
+  builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir_base)
   builder$add_meta_graph_and_variables(
     sess,
     list(
