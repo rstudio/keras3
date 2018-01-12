@@ -250,18 +250,34 @@ reload_model <- function(object) {
 #' Serialize a model to disk.
 #'
 #' @param object An \R object.
-#' @param export_dir_base A string containing a directory in which to create
-#'   versioned subdirectories containing exported SavedModels.
+#' @param export_dir_base A string containing a directory in which to export the
+#'   SavedModel.
+#' @param overwrite Should the \code{export_dir_base} directory be overwritten?
+#' @param versioned Should the model be exported under a versioned subdirectory?
 #' @param ... Unused
 #' 
 #' @return The path to the exported directory, as a string.
 #'
 #' @export
-export_savedmodel.keras.engine.training.Model <- function(object, export_dir_base, ...) {
+export_savedmodel.keras.engine.training.Model <- function(
+  object,
+  export_dir_base,
+  overwrite = TRUE,
+  versioned = !overwrite,
+  ...) {
   if (!is_backend("tensorflow"))
     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
-
-  if (!is_tensorflow_implementation()) {
+  
+  if (versioned) {
+    export_dir_base <- file.path(export_dir_base, format(Sys.time(), "%Y%m%d%H%M%OS", tz = "GMT"))
+  }
+  
+  if (is_tensorflow_implementation()) {
+    stop(
+      "'export_savedmodel()' is currently unsupported under the TensorFlow Keras ",
+      "implementation, consider using 'tfestimators::keras_model_to_estimator()'."
+    )
+  } else {
     k_set_learning_phase(0)
     message("Keras learning phase set to 0 for export (restart R session before doing additional training)")
     object <- reload_model(object)
@@ -279,6 +295,9 @@ export_savedmodel.keras.engine.training.Model <- function(object, export_dir_bas
   
   names(input_info) <- lapply(object$input_names, function(e) e)
   names(output_info) <- lapply(object$output_names, function(e) e)
+  
+  if (overwrite && file.exists(export_dir_base))
+    unlink(export_dir_base, recursive = TRUE)
 
   builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir_base)
   builder$add_meta_graph_and_variables(
@@ -294,6 +313,9 @@ export_savedmodel.keras.engine.training.Model <- function(object, export_dir_bas
       )
     )
   )
-  invisible(builder$save())
+  
+  builder$save()
+  
+  invisible(export_dir_base)
 }
 
