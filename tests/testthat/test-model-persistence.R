@@ -116,10 +116,10 @@ test_succeeds("model can be exported to TensorFlow", {
   export <- function() tensorflow::export_savedmodel(model, model_dir)
   
   if (grepl("^tensorflow", Sys.getenv("KERAS_IMPLEMENTATION"))) {
-    expect_failure(export())
+    expect_error(export())
   }
   else {
-    expect_success(export())
+    export()
     model_files <- dir(model_dir, recursive = TRUE)
     expect_true(any(grepl("saved_model\\.pb", model_files)))
   }
