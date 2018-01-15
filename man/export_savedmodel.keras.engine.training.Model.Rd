@@ -5,7 +5,7 @@
 \title{Export a Saved Model}
 \usage{
 \method{export_savedmodel}{keras.engine.training.Model}(object, export_dir_base,
-  overwrite = TRUE, versioned = !overwrite, ...)
+  overwrite = TRUE, versioned = !overwrite, as_text = FALSE, ...)
 }
 \arguments{
 \item{object}{An \R object.}
@@ -16,6 +16,8 @@ SavedModel.}
 \item{overwrite}{Should the \code{export_dir_base} directory be overwritten?}
 
 \item{versioned}{Should the model be exported under a versioned subdirectory?}
+
+\item{as_text}{Whether to write the SavedModel in text format.}
 
 \item{...}{Unused}
 }

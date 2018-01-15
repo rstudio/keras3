@@ -254,6 +254,7 @@ reload_model <- function(object) {
 #'   SavedModel.
 #' @param overwrite Should the \code{export_dir_base} directory be overwritten?
 #' @param versioned Should the model be exported under a versioned subdirectory?
+#' @param as_text Whether to write the SavedModel in text format.
 #' @param ... Unused
 #' 
 #' @return The path to the exported directory, as a string.
@@ -264,6 +265,7 @@ export_savedmodel.keras.engine.training.Model <- function(
   export_dir_base,
   overwrite = TRUE,
   versioned = !overwrite,
+  as_text = FALSE,
   ...) {
   if (!is_backend("tensorflow"))
     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
@@ -314,7 +316,7 @@ export_savedmodel.keras.engine.training.Model <- function(
     )
   )
   
-  builder$save()
+  builder$save(as_text = as_text)
   
   invisible(export_dir_base)
 }
