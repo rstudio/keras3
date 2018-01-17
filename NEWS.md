@@ -1,7 +1,5 @@
 
-## Keras 2.1.3 (Development)
-
-Install the development version with: `install_github("rstudio/keras")`
+## Keras 2.1.3 (CRAN)
 
 - Models saved via `export_savedmodel()` that make use of learning phases can
   now be exported without having to manually reload the original model.
@@ -15,7 +13,7 @@ Install the development version with: `install_github("rstudio/keras")`
 - Various fixes for `use_implementation()` function
 
 
-## Keras 2.1.2 (CRAN)
+## Keras 2.1.2
 
 - Added `theme_bw` option to plot method for training history 
 
