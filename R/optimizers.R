@@ -182,8 +182,7 @@ optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon =
 #' Nesterov Adam optimizer
 #'
 #' Much like Adam is essentially RMSprop with momentum, Nadam is Adam RMSprop
-#' with Nesterov momentum. See [Incorporating Nesterov Momentum into
-#' Adam](http://cs229.stanford.edu/proj2015/054_report.pdf).
+#' with Nesterov momentum.
 #'
 #' @inheritParams optimizer_adam
 #' @param schedule_decay Schedule deacy.
