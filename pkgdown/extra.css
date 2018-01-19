@@ -45,10 +45,11 @@ blockquote {
   border: solid 1px #cccccc;
 }
 
-.screenshot {
+.screenshot, .illustration {
   margin-bottom: 20px;
   border: solid 1px #cccccc;
 }
+
 
 .source-ref {
   margin-bottom: 20px;
@@ -56,6 +57,11 @@ blockquote {
 
 .source-ref .caption {
   display: none;
+}
+
+.link-table td {
+  padding-top: 20px !important;
+  padding-bottom: 210x !important;
 }
 
 .navbar-inverse {

@@ -1,0 +1,35 @@
+---
+title: "Tools"
+---
+
+```{r setup, include=FALSE}
+library(keras)
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+Tools which provide various enhancements to Keras.
+
+<style type="text/css">
+.page-header {
+  border-bottom: none;
+  margin: 0;
+  padding-bottom: 0;
+}
+</style>
+
+<br/>
+
+<div class="link-table">
+
+
+
+|  |  |
+|---------------|---------------------------------------------------------------|
+| <a href="https://tensorflow.rstudio.com/tools/gpu.html">GPUs<br/><img class="nav-image" src="images/tools-gpu.png" width=64/></a>  | It's highly recommended, although not strictly necessary, that you run deep-learning code on a modern NVIDIA GPU. Some applications -- in particular, image processing with convolutional networks and sequence processing with recurrent neural networks -- will be excruciatingly slow on CPU, even a fast multicore CPU. |
+| <a href="https://tensorflow.rstudio.com/tools/cloudml/articles/getting_started.html">CloudML<br/><img class="nav-image" src="images/tools-cloud-ml.png" width=64/></a> | The cloudml package provides an R interface to [Google Cloud Machine Learning Engine](https://cloud.google.com/ml-engine/), a managed service that provides on-demand access to training on GPUs, hyperparameter tuning to optmize key attributes of model architectures, and deployment of trained models to the Google global prediction platform. |
+| <a href="https://tensorflow.rstudio.com/tools/training_flags.html">Training Flags<br/><img class="nav-image" src="images/tools-training-flags.png" width=64/></a> | Tuning a model often requires exploring the impact of changes to many hyperparameters. The best way to approach this is generally not to progressively change your source code, but rather to define external flags for key parameters which you may want to vary.  |
+| <a href="https://tensorflow.rstudio.com/tools/tfruns/articles/overview.html">Training Runs<br/><img class="nav-image" src="images/tools-training-runs.png" width=64/></a>  | The tfruns package provides a suite of tools for tracking and managing TensorFlow training runs and experiments from R. Track the hyperparameters, metrics, output, and source code of every training run, visualize the results of individual runs and comparisons between runs. |
+
+
+</div>
+
