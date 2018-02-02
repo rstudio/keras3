@@ -384,12 +384,14 @@ fit <- function(object, x = NULL, y = NULL, batch_size=NULL, epochs=10,
     verbose = as.integer(verbose),
     callbacks = normalize_callbacks(view_metrics, callbacks),
     validation_split = validation_split,
-    validation_data = validation_data,
     shuffle = shuffle,
     class_weight = as_class_weight(class_weight),
     sample_weight = as_nullable_array(sample_weight),
     initial_epoch = as.integer(initial_epoch)
   )
+  
+  if (!is.null(validation_data))
+    args$validation_data <- keras_array(validation_data)
   
   if (!is.null(x))
     args$x <- keras_array(x)
