@@ -214,8 +214,7 @@ layer_cudnn_gru <- function(object, units,
 
 #' Long-Short Term Memory unit - Hochreiter 1997.
 #' 
-#' For a step-by-step description of the algorithm, see [this
-#' tutorial](http://deeplearning.net/tutorial/lstm.html).
+#' For a step-by-step description of the algorithm, see [this tutorial](http://deeplearning.net/tutorial/lstm.html).
 #' 
 #' @inheritParams layer_gru
 #' 
