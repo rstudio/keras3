@@ -3,8 +3,10 @@
 
 Install the development version with: `install_github("rstudio/keras")`
 
+- Added support for `remove_learning_phase` in `export_savedmodel()` to avoid
+  removing learning phase.
+  
 - Normalize validation data to Keras array in `fit()` function
-
 
 ## Keras 2.1.3 (CRAN)
 
