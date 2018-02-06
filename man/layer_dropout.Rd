@@ -18,7 +18,7 @@ inputs have shape \code{(batch_size, timesteps, features)} and you want the
 dropout mask to be the same for all timesteps, you can use
 \code{noise_shape=c(batch_size, 1, features)}.}
 
-\item{seed}{A Python integer to use as random seed.}
+\item{seed}{integer to use as random seed.}
 
 \item{batch_size}{Fixed batch size for layer}
 

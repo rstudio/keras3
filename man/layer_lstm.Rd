@@ -108,7 +108,7 @@ isn't provided.}
 \item{weights}{Initial weights for layer.}
 }
 \description{
-For a step-by-step description of the algorithm, see \href{http://deeplearning.net/tutorial/lstm.html}{thistutorial}.
+For a step-by-step description of the algorithm, see \href{http://deeplearning.net/tutorial/lstm.html}{this tutorial}.
 }
 \section{Input shapes}{
 
