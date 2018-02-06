@@ -254,6 +254,8 @@ reload_model <- function(object) {
 #'   SavedModel.
 #' @param overwrite Should the \code{export_dir_base} directory be overwritten?
 #' @param versioned Should the model be exported under a versioned subdirectory?
+#' @param remove_learning_phase Should the learning phase be removed by saving
+#'   and reloading the model? Defaults to \code{TRUE}.
 #' @param ... Unused
 #' 
 #' @return The path to the exported directory, as a string.
@@ -264,6 +266,7 @@ export_savedmodel.keras.engine.training.Model <- function(
   export_dir_base,
   overwrite = TRUE,
   versioned = !overwrite,
+  remove_learning_phase = TRUE,
   ...) {
   if (!is_backend("tensorflow"))
     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
@@ -277,7 +280,7 @@ export_savedmodel.keras.engine.training.Model <- function(
       "'export_savedmodel()' is currently unsupported under the TensorFlow Keras ",
       "implementation, consider using 'tfestimators::keras_model_to_estimator()'."
     )
-  } else {
+  } else if (identical(remove_learning_phase, TRUE)) {
     k_set_learning_phase(0)
     message("Keras learning phase set to 0 for export (restart R session before doing additional training)")
     object <- reload_model(object)
