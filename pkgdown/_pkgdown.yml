@@ -208,6 +208,8 @@ reference:
       - application_vgg
       - application_resnet50
       - application_mobilenet
+      - application_densenet
+      - application_nasnet
       - imagenet_preprocess_input
       - imagenet_decode_predictions
       - mobilenet_preprocess_input

@@ -411,6 +411,8 @@ mobilenet_load_model_hdf5 <- function(filepath) {
   ))
 }
 
+# TODO: [DenseNet](#densenet) application_densenet
+# TODO: [NASNet](#nasnet) application_nasnet
 
 preprocess_input <- function(x, preprocessor, ...) {
   preprocessor(keras_array(x), ...)
