@@ -4,7 +4,10 @@ import os
 if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'tensorflow'):
   from tensorflow.python.keras._impl.keras.engine.topology import Layer
   def shape_filter(shape):
-    return shape.as_list()
+    if not isinstance(shape, list):
+      return shape.as_list()
+    else:
+      return shape
 else:
   from keras.engine.topology import Layer
   def shape_filter(shape):
@@ -26,6 +29,6 @@ class RLayer(Layer):
     return self.r_call(inputs, mask)
       
   def compute_output_shape(self, input_shape):
-    return self.r_compute_output_shape(shape_filter(input_shape))
+    return tuple(self.r_compute_output_shape(shape_filter(input_shape)))
 
 

@@ -8,6 +8,9 @@ Install the development version with: `install_github("rstudio/keras")`
   
 - Normalize validation data to Keras array in `fit()` function
 
+- Ensure that custom layers return a tuple from `compute_output_shape()`
+
+
 ## Keras 2.1.3 (CRAN)
 
 - Models saved via `export_savedmodel()` that make use of learning phases can
