@@ -1,3 +1,5 @@
+# TODO: Out of date, recopy.
+
 """Trains a ResNet on the CIFAR10 dataset.
 
 Greater than 91% test accuracy (0.52 val_loss) after 50 epochs
@@ -22,7 +24,7 @@ import numpy as np
 import os
 
 # Training params.
-batch_size = 32
+batch_size = 32  # orig paper trained all networks with batch_size=128
 epochs = 100
 data_augmentation = True
 

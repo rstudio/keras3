@@ -124,6 +124,10 @@ loss <- loss + settings$dream_l2*k_sum(k_square(dream))/prod(img_size)
 # Compute the gradients of the dream wrt the loss
 grads <- k_gradients(loss, dream)[[1]] 
 
+# TODO: Consider,
+# # Normalize gradients.
+# grads /= K.maximum(K.mean(K.abs(grads)), K.epsilon())
+
 f_outputs <- k_function(list(dream), list(loss,grads))
 
 eval_loss_and_grads <- function(image){

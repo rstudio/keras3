@@ -1,3 +1,5 @@
+# TODO: Out of date, recopy.
+
 '''Example script showing how to use a stateful LSTM model
 and how its stateless counterpart performs.
 
