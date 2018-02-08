@@ -412,7 +412,18 @@ mobilenet_load_model_hdf5 <- function(filepath) {
 }
 
 # TODO: [DenseNet](#densenet) application_densenet
+application_densenet <- function(blocks, include_top = True, weights = "imagenet", input_tensor = NULL, 
+                                 input_shape = NULL, pooling = NULL, classes = 1000) {
+}
+
+
 # TODO: [NASNet](#nasnet) application_nasnet
+application_nasnet <- function(input_shape = NULL, penultimate_filters = 4032, num_blocks = 6,
+                               stem_block_filters = 96, skip_reduction = TRUE, filter_multiplier = 2,
+                               include_top = TRUE, weights = NULL, input_tensor = NULL,
+                               pooling = NULL, classes = 1000, default_size = NULL) {
+  
+}
 
 preprocess_input <- function(x, preprocessor, ...) {
   preprocessor(keras_array(x), ...)
