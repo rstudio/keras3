@@ -1010,5 +1010,7 @@ normalize_scale <- function(name, scale, dims) {
   }
 }
 
-
-
+#TODO: separable_conv1d
+layer_conv_1d <- function(object, depthwise_kernel, pointwise_kernel, strides = 1,
+                          padding = 'valid', data_format = None, dilation_rate = 1) {
+}

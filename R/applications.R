@@ -288,10 +288,10 @@ imagenet_decode_predictions <- function(preds, top = 5) {
 }
 
 
-#' Preprocesses a tensor encoding a batch of images.
+#' Preprocesses a tensor or Numpy array encoding a batch of images.
 #' 
-#' @param x input tensor, 3D or 4D
-#' @param data_format Data format of the image tensor
+#' @param x Input Numpy or symbolic tensor, 3D or 4D.
+#' @param data_format Data format of the image tensor/array.
 #' @param mode One of "caffe", "tf"
 #'   - caffe: will convert the images from RGB to BGR,
 #'     then will zero-center each color channel with
@@ -299,7 +299,7 @@ imagenet_decode_predictions <- function(preds, top = 5) {
 #'     without scaling.
 #'   - tf: will scale pixels between -1 and 1, sample-wise.
 #' 
-#' @return Preprocessed tensor
+#' @return Preprocessed tensor or Numpy array.
 #' 
 #' @export
 imagenet_preprocess_input <- function(x, data_format = NULL, mode = "caffe") {
@@ -484,7 +484,7 @@ application_nasnet <- function(input_shape = NULL, penultimate_filters = 4032, n
   
 }
 
-preprocess_input <- function(x, preprocessor, ...) {
+nasnet_preprocess_input <- function(x, preprocessor, ...) {
   preprocessor(keras_array(x), ...)
 }
 
