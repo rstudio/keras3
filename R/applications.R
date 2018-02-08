@@ -412,10 +412,69 @@ mobilenet_load_model_hdf5 <- function(filepath) {
 }
 
 # TODO: [DenseNet](#densenet) application_densenet
-application_densenet <- function(blocks, include_top = True, weights = "imagenet", input_tensor = NULL, 
+application_densenet <- function(blocks, include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
                                  input_shape = NULL, pooling = NULL, classes = 1000) {
+  keras$applications$DenseNet(
+    blocks,
+    include_top,
+    weights,
+    input_tensor,
+    input_shape,
+    pooling,
+    classes
+  )
 }
 
+#' @rdname application_densenet   
+#' @export
+application_densenet121 <- function(blocks, include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
+                                     input_shape = NULL, pooling = NULL, classes = 1000) {
+  keras$applications$DenseNet121(
+    blocks,
+    include_top,
+    weights,
+    input_tensor,
+    input_shape,
+    pooling,
+    classes
+  )
+}
+
+#' @rdname application_densenet   
+#' @export
+application_densenet169 <- function(blocks, include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
+                                    input_shape = NULL, pooling = NULL, classes = 1000) {
+  keras$applications$DenseNet169(
+    blocks,
+    include_top,
+    weights,
+    input_tensor,
+    input_shape,
+    pooling,
+    classes
+  )
+}
+
+#' @rdname application_densenet   
+#' @export
+application_densenet201 <- function(blocks, include_top = True, weights = "imagenet", input_tensor = NULL, 
+                                    input_shape = NULL, pooling = NULL, classes = 1000) {
+  keras$applications$DenseNet201(
+    blocks,
+    include_top,
+    weights,
+    input_tensor,
+    input_shape,
+    pooling,
+    classes
+  )
+}
+
+#' @rdname application_densenet
+#' @export
+densenet_preprocess_input <- function(x) {
+  preprocess_input(x, keras$applications$densenet$preprocess_input)
+}
 
 # TODO: [NASNet](#nasnet) application_nasnet
 application_nasnet <- function(input_shape = NULL, penultimate_filters = 4032, num_blocks = 6,
