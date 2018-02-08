@@ -26,7 +26,7 @@ library(keras)
 GLOVE_DIR <- 'glove.6B'
 TEXT_DATA_DIR <- '20_newsgroup'
 MAX_SEQUENCE_LENGTH <- 1000
-MAX_NB_WORDS <- 20000
+MAX_NUM_WORDS <- 20000
 EMBEDDING_DIM <- 100
 VALIDATION_SPLIT <- 0.2
 
@@ -90,7 +90,7 @@ for (name in list.files(TEXT_DATA_DIR)) {
 cat(sprintf('Found %s texts.\n', length(texts)))
 
 # finally, vectorize the text samples into a 2D integer tensor
-tokenizer <- text_tokenizer(num_words=MAX_NB_WORDS)
+tokenizer <- text_tokenizer(num_words=MAX_NUM_WORDS)
 tokenizer %>% fit_text_tokenizer(texts)
 
 # save the tokenizer in case we want to use it again
@@ -124,12 +124,12 @@ y_val <- labels[1:num_validation_samples,]
 cat('Preparing embedding matrix.\n')
 
 # prepare embedding matrix
-num_words <- min(MAX_NB_WORDS, length(word_index))
+num_words <- min(MAX_NUM_WORDS, length(word_index))
 prepare_embedding_matrix <- function() {
   embedding_matrix <- matrix(0L, nrow = num_words, ncol = EMBEDDING_DIM)
   for (word in names(word_index)) {
     index <- word_index[[word]]
-    if (index >= MAX_NB_WORDS)
+    if (index >= MAX_NUM_WORDS)
       next
     embedding_vector <- embeddings_index[[word]]
     if (!is.null(embedding_vector)) {
