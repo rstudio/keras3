@@ -658,6 +658,9 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
   if (identical(view_metrics, "auto"))
     view_metrics <- resolve_view_metrics(verbose, epochs, object$metrics)
   
+  if (!is.null(validation_data))
+    validation_data <- keras_array(validation_data)
+  
   history <- call_generator_function(object$fit_generator, list(
     generator = generator,
     steps_per_epoch = as.integer(steps_per_epoch),
