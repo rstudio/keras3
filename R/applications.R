@@ -587,10 +587,15 @@ application_nasnet <- function(input_shape = NULL, penultimate_filters = 4032L,
   
 }
 
+#' @rdname application_nasnet
+#' @export
 nasnet_preprocess_input <- function(x, preprocessor, ...) {
-  preprocessor(keras_array(x), ...)
+  preprocess_input(x, keras$applications$nasnet$preprocess_input)
 }
 
+preprocess_input <- function(x, preprocessor, ...) {
+  preprocessor(keras_array(x), ...)
+}
 
 verify_application_prerequistes <- function() {
 
