@@ -11,7 +11,7 @@ application_nasnet(input_shape = NULL, penultimate_filters = 4032L,
   input_tensor = NULL, pooling = NULL, classes = 1000L,
   default_size = NULL)
 
-nasnet_preprocess_input(x, preprocessor, ...)
+nasnet_preprocess_input(x)
 }
 \arguments{
 \item{input_shape}{Optional shape list, only to be specified if \code{include_top}
@@ -65,6 +65,8 @@ specified if \code{include_top} is TRUE, and if no \code{weights} argument is
 specified.}
 
 \item{default_size}{Specifies the default image size of the model}
+
+\item{x}{a 4D numpy array consists of RGB values within \code{[0, 255]}.}
 }
 \description{
 Note that only TensorFlow is supported for now,

@@ -20,11 +20,11 @@ application_densenet169(blocks, include_top = TRUE, weights = "imagenet",
   input_tensor = NULL, input_shape = NULL, pooling = NULL,
   classes = 1000)
 
-application_densenet201(blocks, include_top = True, weights = "imagenet",
+application_densenet201(blocks, include_top = TRUE, weights = "imagenet",
   input_tensor = NULL, input_shape = NULL, pooling = NULL,
   classes = 1000)
 
-densenet_preprocess_input(x)
+densenet_preprocess_input(x, data_format = NULL)
 }
 \arguments{
 \item{blocks}{numbers of building blocks for the four dense layers.}
@@ -54,6 +54,10 @@ will be a 2D tensor.
 \item{classes}{optional number of classes to classify images into, only to be
 specified if \code{include_top} is TRUE, and if no \code{weights} argument is
 specified.}
+
+\item{x}{a 3D or 4D numpy array consists of RGB values within \code{[0, 255]}.}
+
+\item{data_format}{data format of the image tensor.}
 }
 \description{
 Instantiates the DenseNet architecture.
