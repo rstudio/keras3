@@ -447,6 +447,8 @@ mobilenet_load_model_hdf5 <- function(filepath) {
 #' @param classes optional number of classes to classify images into, only to be 
 #'   specified if `include_top` is TRUE, and if no `weights` argument is 
 #'   specified.
+#' @param data_format data format of the image tensor.
+#' @param x a 3D or 4D numpy array consists of RGB values within `[0, 255]`.
 #' 
 #' @export
 application_densenet <- function(blocks, include_top = TRUE, weights = "imagenet", 
@@ -497,7 +499,7 @@ application_densenet169 <- function(blocks, include_top = TRUE, weights = "image
 
 #' @rdname application_densenet   
 #' @export
-application_densenet201 <- function(blocks, include_top = True, weights = "imagenet", input_tensor = NULL, 
+application_densenet201 <- function(blocks, include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
                                     input_shape = NULL, pooling = NULL, classes = 1000) {
   keras$applications$DenseNet201(
     blocks,
@@ -512,7 +514,7 @@ application_densenet201 <- function(blocks, include_top = True, weights = "image
 
 #' @rdname application_densenet
 #' @export
-densenet_preprocess_input <- function(x) {
+densenet_preprocess_input <- function(x, data_format = NULL) {
   preprocess_input(x, keras$applications$densenet$preprocess_input)
 }
 
@@ -561,6 +563,7 @@ densenet_preprocess_input <- function(x) {
 #'   specified if `include_top` is TRUE, and if no `weights` argument is 
 #'   specified.
 #' @param default_size Specifies the default image size of the model
+#' @param x a 4D numpy array consists of RGB values within `[0, 255]`.
 #' 
 #' @export
 application_nasnet <- function(input_shape = NULL, penultimate_filters = 4032L,
@@ -589,7 +592,7 @@ application_nasnet <- function(input_shape = NULL, penultimate_filters = 4032L,
 
 #' @rdname application_nasnet
 #' @export
-nasnet_preprocess_input <- function(x, preprocessor, ...) {
+nasnet_preprocess_input <- function(x) {
   preprocess_input(x, keras$applications$nasnet$preprocess_input)
 }
 
