@@ -21,8 +21,8 @@ test_succeeds("keras pre-built models can be instantiated", {
   application_vgg19()
   application_inception_v3()
   
-  # TODO: application_densenet()
-  # TODO: application_nasnet()
+  application_densenet()
+  application_nasnet()
 })
 
 
