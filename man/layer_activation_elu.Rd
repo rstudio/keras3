@@ -45,6 +45,7 @@ It follows: \code{f(x) = alpha * (exp(x) - 1.0)} for \code{x < 0}, \code{f(x) = 
 
 Other activation layers: \code{\link{layer_activation_leaky_relu}},
   \code{\link{layer_activation_parametric_relu}},
+  \code{\link{layer_activation_softmax}},
   \code{\link{layer_activation_thresholded_relu}},
   \code{\link{layer_activation}}
 }

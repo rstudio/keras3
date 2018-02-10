@@ -9,7 +9,7 @@ k_elu(x, alpha = 1)
 \arguments{
 \item{x}{A tensor or variable to compute the activation function for.}
 
-\item{alpha}{A scalar, slope of positive section.}
+\item{alpha}{A scalar, slope of negative section.}
 }
 \value{
 A tensor.

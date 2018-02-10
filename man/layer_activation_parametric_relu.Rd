@@ -55,6 +55,7 @@ alpha is a learned array with the same shape as x.
 
 Other activation layers: \code{\link{layer_activation_elu}},
   \code{\link{layer_activation_leaky_relu}},
+  \code{\link{layer_activation_softmax}},
   \code{\link{layer_activation_thresholded_relu}},
   \code{\link{layer_activation}}
 }
