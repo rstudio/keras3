@@ -10,7 +10,7 @@
 \usage{
 application_densenet(blocks, include_top = TRUE, weights = "imagenet",
   input_tensor = NULL, input_shape = NULL, pooling = NULL,
-  classes = 1000L)
+  classes = 1000)
 
 application_densenet121(blocks, include_top = TRUE, weights = "imagenet",
   input_tensor = NULL, input_shape = NULL, pooling = NULL,
@@ -35,7 +35,7 @@ of the network.}
 \item{weights}{one of \code{NULL} (random initialization), 'imagenet'
 (pre-training on ImageNet), or the path to the weights file to be loaded.}
 
-\item{input_tensor}{optional Keras tensor (i.e. output of \code{layers.Input()})
+\item{input_tensor}{optional Keras tensor (i.e. output of \code{layer_input()})
 to use as image input for the model.}
 
 \item{input_shape}{optional shape list, only to be specified if \code{include_top}
@@ -44,8 +44,9 @@ is FALSE (otherwise the input shape has to be \code{(224, 224, 3)}
 \code{channels_first} data format). It should have exactly 3 inputs channels.}
 
 \item{pooling}{optional pooling mode for feature extraction when
-\code{include_top} is \code{FALSE}. - \code{NULL} means that the output of the model will
-be the 4D tensor output of the last convolutional layer.
+\code{include_top} is \code{FALSE}.
+- \code{NULL} means that the output of the model will be the 4D tensor output
+of the last convolutional layer.
 - \code{avg} means that global average pooling will be applied to the output
 of the last convolutional layer, and thus the output of the model
 will be a 2D tensor.
@@ -55,7 +56,7 @@ will be a 2D tensor.
 specified if \code{include_top} is TRUE, and if no \code{weights} argument is
 specified.}
 
-\item{x}{a 3D or 4D numpy array consists of RGB values within \code{[0, 255]}.}
+\item{x}{a 3D or 4D array consists of RGB values within \code{[0, 255]}.}
 
 \item{data_format}{data format of the image tensor.}
 }

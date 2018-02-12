@@ -4,8 +4,8 @@
 \alias{layer_separable_conv_1d}
 \title{Depthwise separable 1D convolution.}
 \usage{
-layer_separable_conv_1d(object, filters, kernel_size, strides = c(1L, 1L),
-  padding = "valid", data_format = NULL, depth_multiplier = 1L,
+layer_separable_conv_1d(object, filters, kernel_size, strides = 1L,
+  padding = "valid", data_format = NULL, depth_multiplier = 1,
   activation = NULL, use_bias = TRUE,
   depthwise_initializer = "glorot_uniform",
   pointwise_initializer = "glorot_uniform", bias_initializer = "zeros",

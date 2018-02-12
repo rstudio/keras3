@@ -2,7 +2,7 @@
 % Please edit documentation in R/applications.R
 \name{imagenet_preprocess_input}
 \alias{imagenet_preprocess_input}
-\title{Preprocesses a tensor or Numpy array encoding a batch of images.}
+\title{Preprocesses a tensor or array encoding a batch of images.}
 \usage{
 imagenet_preprocess_input(x, data_format = NULL, mode = "caffe")
 }
@@ -21,8 +21,8 @@ without scaling.
 }}
 }
 \value{
-Preprocessed tensor or Numpy array.
+Preprocessed tensor or array.
 }
 \description{
-Preprocesses a tensor or Numpy array encoding a batch of images.
+Preprocesses a tensor or array encoding a batch of images.
 }

@@ -8,7 +8,7 @@
 application_nasnet(input_shape = NULL, penultimate_filters = 4032L,
   num_blocks = 6L, stem_block_filters = 96L, skip_reduction = TRUE,
   filter_multiplier = 2L, include_top = TRUE, weights = NULL,
-  input_tensor = NULL, pooling = NULL, classes = 1000L,
+  input_tensor = NULL, pooling = NULL, classes = 1000,
   default_size = NULL)
 
 nasnet_preprocess_input(x)
@@ -49,12 +49,13 @@ of the network.}
 
 \item{weights}{\code{NULL} (random initialization) or \code{imagenet} (ImageNet weights)}
 
-\item{input_tensor}{Optional Keras tensor (i.e. output of \code{layers.Input()})
+\item{input_tensor}{Optional Keras tensor (i.e. output of \code{layer_input()})
 to use as image input for the model.}
 
 \item{pooling}{Optional pooling mode for feature extraction when
-\code{include_top} is \code{FALSE}. - \code{NULL} means that the output of the model will
-be the 4D tensor output of the last convolutional layer.
+\code{include_top} is \code{FALSE}.
+- \code{NULL} means that the output of the model will be the 4D tensor output
+of the last convolutional layer.
 - \code{avg} means that global average pooling will be applied to the output
 of the last convolutional layer, and thus the output of the model will
 be a 2D tensor.
@@ -66,7 +67,7 @@ specified.}
 
 \item{default_size}{Specifies the default image size of the model}
 
-\item{x}{a 4D numpy array consists of RGB values within \code{[0, 255]}.}
+\item{x}{a 4D array consists of RGB values within \code{[0, 255]}.}
 }
 \description{
 Note that only TensorFlow is supported for now,

@@ -43,7 +43,7 @@ the network.}
 \item{weights}{\code{NULL} (random initialization), \code{imagenet} (ImageNet
 weights), or the path to the weights file to be loaded.}
 
-\item{input_tensor}{optional Keras tensor (i.e. output of \code{layers.Input()})
+\item{input_tensor}{optional Keras tensor (i.e. output of \code{layer_input()})
 to use as image input for the model.}
 
 \item{pooling}{Optional pooling mode for feature extraction when
