@@ -288,7 +288,7 @@ imagenet_decode_predictions <- function(preds, top = 5) {
 }
 
 
-#' Preprocesses a tensor or Numpy array encoding a batch of images.
+#' Preprocesses a tensor or array encoding a batch of images.
 #' 
 #' @param x Input Numpy or symbolic tensor, 3D or 4D.
 #' @param data_format Data format of the image tensor/array.
@@ -299,7 +299,7 @@ imagenet_decode_predictions <- function(preds, top = 5) {
 #'     without scaling.
 #'   - tf: will scale pixels between -1 and 1, sample-wise.
 #' 
-#' @return Preprocessed tensor or Numpy array.
+#' @return Preprocessed tensor or array.
 #' 
 #' @export
 imagenet_preprocess_input <- function(x, data_format = NULL, mode = "caffe") {
@@ -347,7 +347,7 @@ imagenet_preprocess_input <- function(x, data_format = NULL, mode = "caffe") {
 #'   the network.
 #' @param weights `NULL` (random initialization), `imagenet` (ImageNet
 #'   weights), or the path to the weights file to be loaded.
-#' @param input_tensor optional Keras tensor (i.e. output of `layers.Input()`)
+#' @param input_tensor optional Keras tensor (i.e. output of `layer_input()`)
 #'   to use as image input for the model.
 #' @param pooling Optional pooling mode for feature extraction when
 #'   `include_top` is `FALSE`. 
@@ -431,15 +431,16 @@ mobilenet_load_model_hdf5 <- function(filepath) {
 #'   of the network.
 #' @param weights one of `NULL` (random initialization), 'imagenet' 
 #'   (pre-training on ImageNet), or the path to the weights file to be loaded.
-#' @param input_tensor optional Keras tensor (i.e. output of `layers.Input()`)
+#' @param input_tensor optional Keras tensor (i.e. output of `layer_input()`)
 #'   to use as image input for the model.
 #' @param input_shape optional shape list, only to be specified if `include_top`
 #'   is FALSE (otherwise the input shape has to be `(224, 224, 3)` 
 #'   (with `channels_last` data format) or `(3, 224, 224)` (with 
 #'   `channels_first` data format). It should have exactly 3 inputs channels.
 #' @param pooling optional pooling mode for feature extraction when
-#'   `include_top` is `FALSE`. - `NULL` means that the output of the model will
-#'   be the 4D tensor output of the last convolutional layer. 
+#'   `include_top` is `FALSE`.
+#'      - `NULL` means that the output of the model will be the 4D tensor output 
+#'        of the last convolutional layer. 
 #'     - `avg` means that global average pooling will be applied to the output 
 #'        of the last convolutional layer, and thus the output of the model
 #'        will be a 2D tensor.
@@ -448,21 +449,21 @@ mobilenet_load_model_hdf5 <- function(filepath) {
 #'   specified if `include_top` is TRUE, and if no `weights` argument is 
 #'   specified.
 #' @param data_format data format of the image tensor.
-#' @param x a 3D or 4D numpy array consists of RGB values within `[0, 255]`.
+#' @param x a 3D or 4D array consists of RGB values within `[0, 255]`.
 #' 
 #' @export
 application_densenet <- function(blocks, include_top = TRUE, weights = "imagenet", 
                                  input_tensor = NULL, input_shape = NULL, 
-                                 pooling = NULL, classes = 1000L) {
+                                 pooling = NULL, classes = 1000) {
   
   keras$applications$densenet$DenseNet(
-    blocks = blocks,
+    blocks = as.integer(blocks),
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = input_shape,
+    input_shape = as_nullable_integer(input_shape),
     pooling = pooling,
-    classes = classes
+    classes = as.integer(classes)
   )
   
 }
@@ -550,11 +551,12 @@ densenet_preprocess_input <- function(x, data_format = NULL) {
 #' @param include_top Whether to include the fully-connected layer at the top 
 #'   of the network.
 #' @param weights `NULL` (random initialization) or `imagenet` (ImageNet weights)
-#' @param input_tensor Optional Keras tensor (i.e. output of `layers.Input()`) 
+#' @param input_tensor Optional Keras tensor (i.e. output of `layer_input()`) 
 #'   to use as image input for the model.
 #' @param pooling Optional pooling mode for feature extraction when 
-#'   `include_top` is `FALSE`. - `NULL` means that the output of the model will 
-#'   be the 4D tensor output of the last convolutional layer.
+#'   `include_top` is `FALSE`.
+#'     - `NULL` means that the output of the model will be the 4D tensor output
+#'       of the last convolutional layer.
 #'     - `avg` means that global average pooling will be applied to the output 
 #'       of the last convolutional layer, and thus the output of the model will 
 #'       be a 2D tensor.
@@ -563,7 +565,7 @@ densenet_preprocess_input <- function(x, data_format = NULL) {
 #'   specified if `include_top` is TRUE, and if no `weights` argument is 
 #'   specified.
 #' @param default_size Specifies the default image size of the model
-#' @param x a 4D numpy array consists of RGB values within `[0, 255]`.
+#' @param x a 4D array consists of RGB values within `[0, 255]`.
 #' 
 #' @export
 application_nasnet <- function(input_shape = NULL, penultimate_filters = 4032L,
@@ -571,20 +573,20 @@ application_nasnet <- function(input_shape = NULL, penultimate_filters = 4032L,
                                skip_reduction = TRUE, filter_multiplier = 2L,
                                include_top = TRUE, weights = NULL, 
                                input_tensor = NULL, pooling = NULL, 
-                               classes = 1000L, default_size = NULL) {
+                               classes = 1000, default_size = NULL) {
   
   keras$applications$nasnet$NASNet(
-    input_shape = input_shape,
-    penultimate_filters = penultimate_filters,
-    num_blocks = num_blocks,
-    stem_block_filters = stem_block_filters,
+    input_shape = as_nullable_integer(input_shape),
+    penultimate_filters = as.integer(penultimate_filters),
+    num_blocks = as.integer(num_blocks),
+    stem_block_filters = as.integer(stem_block_filters),
     skip_reduction = skip_reduction,
     filter_multiplier = filter_multiplier,
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
     pooling = pooling,
-    classes = classes,
+    classes = as.integer(classes),
     default_size = default_size
   )
   

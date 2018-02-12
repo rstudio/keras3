@@ -552,8 +552,8 @@ layer_separable_conv_2d <- function(object, filters, kernel_size, strides = c(1L
 #' @family convolutional layers 
 #'   
 #' @export
-layer_separable_conv_1d <- function(object, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL, 
-                                    depth_multiplier = 1L, activation = NULL, use_bias = TRUE, 
+layer_separable_conv_1d <- function(object, filters, kernel_size, strides = 1L, padding = "valid", data_format = NULL, 
+                                    depth_multiplier = 1, activation = NULL, use_bias = TRUE, 
                                     depthwise_initializer = "glorot_uniform", pointwise_initializer = "glorot_uniform", bias_initializer = "zeros", 
                                     depthwise_regularizer = NULL, pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                                     depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL, input_shape = NULL,

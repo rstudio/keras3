@@ -187,7 +187,7 @@ layer_activation_softmax <- function(object, axis = -1, input_shape = NULL,
                                      name = NULL, trainable = NULL, weights = NULL) {
   
   create_layer(keras$layers$Softmax, object, list(
-    axis = axis,
+    axis = as.integer(axis),
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
     batch_size = as_nullable_integer(batch_size),
