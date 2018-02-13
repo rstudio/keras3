@@ -42,9 +42,18 @@ activation_tanh(x)
 
 \item{axis}{Integer, axis along which the softmax normalization is applied}
 }
+\value{
+Tensor with the same shape and dtype as \code{x}.
+}
 \description{
 Activations functions can either be used through \code{\link[=layer_activation]{layer_activation()}}, or
 through the activation argument supported by all forward layers.
+}
+\details{
+\itemize{
+\item \code{activation_selu()} to be used together with the initialization "lecun_normal".
+\item \code{activation_selu()} to be used together with the dropout variant "AlphaDropout".
+}
 }
 \section{References}{
 

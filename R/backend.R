@@ -821,7 +821,7 @@ k_dtype <- function(x) {
 #' Exponential linear unit.
 #' 
 #' @param x A tensor or variable to compute the activation function for.
-#' @param alpha A scalar, slope of positive section.
+#' @param alpha A scalar, slope of negative section.
 #' 
 #' @return A tensor.
 #' 

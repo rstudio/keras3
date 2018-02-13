@@ -5,10 +5,16 @@
 #' Activations functions can either be used through [layer_activation()], or
 #' through the activation argument supported by all forward layers.
 #' 
+#' @details
+#'   - `activation_selu()` to be used together with the initialization "lecun_normal".
+#'   - `activation_selu()` to be used together with the dropout variant "AlphaDropout".
+#' 
 #' @param x Tensor
 #' @param axis Integer, axis along which the softmax normalization is applied
 #' @param alpha Alpha value
 #' @param max_value Max value
+#' 
+#' @return Tensor with the same shape and dtype as \code{x}.
 #' 
 #' @section References:
 #' 
