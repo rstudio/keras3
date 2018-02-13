@@ -2,6 +2,8 @@
 % Please edit documentation in R/applications.R
 \name{application_nasnet}
 \alias{application_nasnet}
+\alias{application_nasnetlarge}
+\alias{application_nasnetmobile}
 \alias{nasnet_preprocess_input}
 \title{Instantiates a NASNet model.}
 \usage{
@@ -10,6 +12,12 @@ application_nasnet(input_shape = NULL, penultimate_filters = 4032L,
   filter_multiplier = 2L, include_top = TRUE, weights = NULL,
   input_tensor = NULL, pooling = NULL, classes = 1000,
   default_size = NULL)
+
+application_nasnetlarge(input_shape = NULL, include_top = TRUE,
+  weights = NULL, input_tensor = NULL, pooling = NULL, classes = 1000)
+
+application_nasnetmobile(input_shape = NULL, include_top = TRUE,
+  weights = NULL, input_tensor = NULL, pooling = NULL, classes = 1000)
 
 nasnet_preprocess_input(x)
 }

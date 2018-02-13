@@ -12,15 +12,15 @@ application_densenet(blocks, include_top = TRUE, weights = "imagenet",
   input_tensor = NULL, input_shape = NULL, pooling = NULL,
   classes = 1000)
 
-application_densenet121(blocks, include_top = TRUE, weights = "imagenet",
+application_densenet121(include_top = TRUE, weights = "imagenet",
   input_tensor = NULL, input_shape = NULL, pooling = NULL,
   classes = 1000)
 
-application_densenet169(blocks, include_top = TRUE, weights = "imagenet",
+application_densenet169(include_top = TRUE, weights = "imagenet",
   input_tensor = NULL, input_shape = NULL, pooling = NULL,
   classes = 1000)
 
-application_densenet201(blocks, include_top = TRUE, weights = "imagenet",
+application_densenet201(include_top = TRUE, weights = "imagenet",
   input_tensor = NULL, input_shape = NULL, pooling = NULL,
   classes = 1000)
 
