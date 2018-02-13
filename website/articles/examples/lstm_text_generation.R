@@ -51,12 +51,12 @@ dataset <- map(
 dataset <- transpose(dataset)
 
 # Vectorization
-X <- array(0, dim = c(length(dataset$sentece), maxlen, length(chars)))
+x <- array(0, dim = c(length(dataset$sentece), maxlen, length(chars)))
 y <- array(0, dim = c(length(dataset$sentece), length(chars)))
 
 for(i in 1:length(dataset$sentece)){
   
-  X[i,,] <- sapply(chars, function(x){
+  x[i,,] <- sapply(chars, function(x){
     as.integer(x == dataset$sentece[[i]])
   })
   
@@ -92,15 +92,9 @@ sample_mod <- function(preds, temperature = 1){
     which.max()
 }
 
-for(iteration in 1:60){
+on_epoch_end <- function(epoch, logs) {
   
-  cat(sprintf("iteration: %02d ---------------\n\n", iteration))
-  
-  model %>% fit(
-    X, y,
-    batch_size = 128,
-    epochs = 1
-  )
+  cat(sprintf("epoch: %02d ---------------\n\n", epoch))
   
   for(diversity in c(0.2, 0.5, 1, 1.2)){
     
@@ -131,3 +125,12 @@ for(iteration in 1:60){
     
   }
 }
+
+print_callback <- callback_lambda(on_epoch_end = on_epoch_end)
+
+model %>% fit(
+  x, y,
+  batch_size = 128,
+  epochs = 1,
+  callbacks = print_callback
+)

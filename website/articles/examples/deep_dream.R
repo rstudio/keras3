@@ -118,11 +118,14 @@ loss <- loss + settings$continuity*
   prod(img_size)
 
 # Add image L2 norm to loss (prevents pixels from taking very high values, makes image darker)
-  # Note that the loss can be further modified to achieve new effects
+# Note that the loss can be further modified to achieve new effects
 loss <- loss + settings$dream_l2*k_sum(k_square(dream))/prod(img_size)
 
 # Compute the gradients of the dream wrt the loss
 grads <- k_gradients(loss, dream)[[1]] 
+
+# Normalize gradients.
+grads <- grads / k_maximum(k_mean(k_abs(grads)), k_epsilon())
 
 f_outputs <- k_function(list(dream), list(loss,grads))
 

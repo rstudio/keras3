@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>1D convolution layer (e.g. temporal convolution). — layer_conv_1d • keras</title>
+<title>Depthwise separable 1D convolution. — layer_separable_conv_1d • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -137,25 +137,27 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>1D convolution layer (e.g. temporal convolution).</h1>
+    <h1>Depthwise separable 1D convolution.</h1>
     </div>
 
     
-    <p>This layer creates a convolution kernel that is convolved with the layer
-input over a single spatial (or temporal) dimension to produce a tensor of
-outputs. If <code>use_bias</code> is TRUE, a bias vector is created and added to the
-outputs. Finally, if <code>activation</code> is not <code>NULL</code>, it is applied to the outputs
-as well. When using this layer as the first layer in a model, provide an
-<code>input_shape</code> argument (list of integers or <code>NULL</code>, e.g. <code>(10, 128)</code> for
-sequences of 10 vectors of 128-dimensional vectors, or <code>(NULL, 128)</code> for
-variable-length sequences of 128-dimensional vectors.</p>
+    <p>Separable convolutions consist in first performing a depthwise spatial
+convolution (which acts on each input channel separately) followed by a
+pointwise convolution which mixes together the resulting output channels. The
+<code>depth_multiplier</code> argument controls how many output channels are generated
+per input channel in the depthwise step. Intuitively, separable convolutions
+can be understood as a way to factorize a convolution kernel into two smaller
+kernels, or as an extreme version of an Inception block.</p>
     
 
-    <pre class="usage"><span class='fu'>layer_conv_1d</span>(<span class='no'>object</span>, <span class='no'>filters</span>, <span class='no'>kernel_size</span>, <span class='kw'>strides</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"valid"</span>,
-  <span class='kw'>dilation_rate</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>kernel_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>, <span class='kw'>bias_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
-  <span class='kw'>kernel_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bias_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>activity_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>kernel_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>layer_separable_conv_1d</span>(<span class='no'>object</span>, <span class='no'>filters</span>, <span class='no'>kernel_size</span>, <span class='kw'>strides</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"valid"</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>depth_multiplier</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>activation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>depthwise_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>,
+  <span class='kw'>pointwise_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>, <span class='kw'>bias_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
+  <span class='kw'>depthwise_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pointwise_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>bias_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>activity_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>depthwise_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pointwise_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>bias_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -174,31 +176,34 @@ number output of filters in the convolution).</p></td>
     </tr>
     <tr>
       <th>kernel_size</th>
-      <td><p>An integer or list of a single integer, specifying the
-length of the 1D convolution window.</p></td>
+      <td><p>An integer or list of 2 integers, specifying the width and
+height of the 2D convolution window. Can be a single integer to specify the
+same value for all spatial dimensions.</p></td>
     </tr>
     <tr>
       <th>strides</th>
-      <td><p>An integer or list of a single integer, specifying the stride
-length of the convolution. Specifying any stride value != 1 is incompatible
-with specifying any <code>dilation_rate</code> value != 1.</p></td>
+      <td><p>An integer or list of 2 integers, specifying the strides of
+the convolution along the width and height. Can be a single integer to
+specify the same value for all spatial dimensions. Specifying any stride
+value != 1 is incompatible with specifying any <code>dilation_rate</code> value != 1.</p></td>
     </tr>
     <tr>
       <th>padding</th>
-      <td><p>One of <code>"valid"</code>, <code>"causal"</code> or <code>"same"</code> (case-insensitive).
-<code>"valid"</code> means "no padding".
-<code>"same"</code> results in padding the input such that the output has the same
-length as the original input.
-<code>"causal"</code> results in causal (dilated) convolutions, e.g. <code>output[t]</code> does
-not depend on <code>input[t+1:]</code>. Useful when modeling temporal data where the
-model should not violate the temporal order. See <a href='https://arxiv.org/abs/1609.03499'>WaveNet: A GenerativeModel for Raw Audio, section 2.1</a>.</p></td>
+      <td><p>one of <code>"valid"</code> or <code>"same"</code> (case-insensitive).</p></td>
     </tr>
     <tr>
-      <th>dilation_rate</th>
-      <td><p>an integer or list of a single integer, specifying the
-dilation rate to use for dilated convolution. Currently, specifying any
-<code>dilation_rate</code> value != 1 is incompatible with specifying any <code>strides</code>
-value != 1.</p></td>
+      <th>data_format</th>
+      <td><p>A string, one of <code>channels_last</code> (default) or
+<code>channels_first</code>. The ordering of the dimensions in the inputs.
+<code>channels_last</code> corresponds to inputs with shape <code>(batch, height, width, channels)</code> while <code>channels_first</code> corresponds to inputs with shape <code>(batch, channels, height, width)</code>. It defaults to the <code>image_data_format</code> value
+found in your Keras config file at <code>~/.keras/keras.json</code>. If you never set
+it, then it will be "channels_last".</p></td>
+    </tr>
+    <tr>
+      <th>depth_multiplier</th>
+      <td><p>The number of depthwise convolution output channels
+for each input channel. The total number of depthwise convolution output
+channels will be equal to <code>filterss_in * depth_multiplier</code>.</p></td>
     </tr>
     <tr>
       <th>activation</th>
@@ -210,17 +215,26 @@ no activation is applied (ie. "linear" activation: <code>a(x) = x</code>).</p></
       <td><p>Boolean, whether the layer uses a bias vector.</p></td>
     </tr>
     <tr>
-      <th>kernel_initializer</th>
-      <td><p>Initializer for the <code>kernel</code> weights matrix.</p></td>
+      <th>depthwise_initializer</th>
+      <td><p>Initializer for the depthwise kernel matrix.</p></td>
+    </tr>
+    <tr>
+      <th>pointwise_initializer</th>
+      <td><p>Initializer for the pointwise kernel matrix.</p></td>
     </tr>
     <tr>
       <th>bias_initializer</th>
       <td><p>Initializer for the bias vector.</p></td>
     </tr>
     <tr>
-      <th>kernel_regularizer</th>
-      <td><p>Regularizer function applied to the <code>kernel</code>
-weights matrix.</p></td>
+      <th>depthwise_regularizer</th>
+      <td><p>Regularizer function applied to the depthwise
+kernel matrix.</p></td>
+    </tr>
+    <tr>
+      <th>pointwise_regularizer</th>
+      <td><p>Regularizer function applied to the pointwise
+kernel matrix.</p></td>
     </tr>
     <tr>
       <th>bias_regularizer</th>
@@ -232,8 +246,14 @@ weights matrix.</p></td>
 layer (its "activation")..</p></td>
     </tr>
     <tr>
-      <th>kernel_constraint</th>
-      <td><p>Constraint function applied to the kernel matrix.</p></td>
+      <th>depthwise_constraint</th>
+      <td><p>Constraint function applied to the depthwise
+kernel matrix.</p></td>
+    </tr>
+    <tr>
+      <th>pointwise_constraint</th>
+      <td><p>Constraint function applied to the pointwise
+kernel matrix.</p></td>
     </tr>
     <tr>
       <th>bias_constraint</th>
@@ -279,15 +299,21 @@ isn't provided.</p></td>
     
     <h2 class="hasAnchor" id="input-shape"><a class="anchor" href="#input-shape"></a>Input shape</h2>
 
-    <p>3D tensor with shape: <code>(batch_size, steps, input_dim)</code></p>
+    <p>3D tensor with shape: <code>(batch, channels, steps)</code>
+if data_format='channels_first' or 3D tensor with shape: <code>(batch, steps, channels)</code>
+if data_format='channels_last'.</p>
     
     <h2 class="hasAnchor" id="output-shape"><a class="anchor" href="#output-shape"></a>Output shape</h2>
 
-    <p>3D tensor with shape: <code>(batch_size, new_steps, filters)</code> <code>steps</code> value might have changed due to padding or strides.</p>
+    <p>3D tensor with shape: <code>(batch, filters, new_steps)</code>
+if data_format='channels_first' or 3D tensor with shape:
+<code>(batch, new_steps, filters)</code> if data_format='channels_last'.
+<code>new_steps</code> values might have changed due to padding or strides.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other convolutional layers: <code><a href='layer_conv_2d_transpose.html'>layer_conv_2d_transpose</a></code>,
+    <p>Other convolutional layers: <code><a href='layer_conv_1d.html'>layer_conv_1d</a></code>,
+  <code><a href='layer_conv_2d_transpose.html'>layer_conv_2d_transpose</a></code>,
   <code><a href='layer_conv_2d.html'>layer_conv_2d</a></code>,
   <code><a href='layer_conv_3d_transpose.html'>layer_conv_3d_transpose</a></code>,
   <code><a href='layer_conv_3d.html'>layer_conv_3d</a></code>,
@@ -295,7 +321,6 @@ isn't provided.</p></td>
   <code><a href='layer_cropping_1d.html'>layer_cropping_1d</a></code>,
   <code><a href='layer_cropping_2d.html'>layer_cropping_2d</a></code>,
   <code><a href='layer_cropping_3d.html'>layer_cropping_3d</a></code>,
-  <code><a href='layer_separable_conv_1d.html'>layer_separable_conv_1d</a></code>,
   <code><a href='layer_separable_conv_2d.html'>layer_separable_conv_2d</a></code>,
   <code><a href='layer_upsampling_1d.html'>layer_upsampling_1d</a></code>,
   <code><a href='layer_upsampling_2d.html'>layer_upsampling_2d</a></code>,

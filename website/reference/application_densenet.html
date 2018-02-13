@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Zero-padding layer for 3D data (spatial or spatio-temporal). — layer_zero_padding_3d • keras</title>
+<title>Instantiates the DenseNet architecture. — application_densenet • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -137,93 +137,98 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Zero-padding layer for 3D data (spatial or spatio-temporal).</h1>
+    <h1>Instantiates the DenseNet architecture.</h1>
     </div>
 
     
-    <p>Zero-padding layer for 3D data (spatial or spatio-temporal).</p>
+    <p>Instantiates the DenseNet architecture.</p>
     
 
-    <pre class="usage"><span class='fu'>layer_zero_padding_3d</span>(<span class='no'>object</span>, <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1L</span>, <span class='fl'>1L</span>, <span class='fl'>1L</span>), <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>application_densenet</span>(<span class='no'>blocks</span>, <span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='st'>"imagenet"</span>,
+  <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
+
+<span class='fu'>application_densenet121</span>(<span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='st'>"imagenet"</span>,
+  <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
+
+<span class='fu'>application_densenet169</span>(<span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='st'>"imagenet"</span>,
+  <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
+
+<span class='fu'>application_densenet201</span>(<span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='st'>"imagenet"</span>,
+  <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
+
+<span class='fu'>densenet_preprocess_input</span>(<span class='no'>x</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>Model or layer object</p></td>
+      <th>blocks</th>
+      <td><p>numbers of building blocks for the four dense layers.</p></td>
     </tr>
     <tr>
-      <th>padding</th>
-      <td><p>int, or list of 3 ints, or list of 3 lists of 2 ints.</p><ul>
-<li><p>If int: the same symmetric padding is applied to width and height.</p></li>
-<li><p>If list of 3 ints: interpreted as three different symmetric padding values:
-<code>(symmetric_dim1_pad, symmetric_dim2_pad, symmetric_dim3_pad)</code>.</p></li>
-<li><p>If list of 3 lists of 2 ints: interpreted as <code>((left_dim1_pad, right_dim1_pad), (left_dim2_pad, right_dim2_pad), (left_dim3_pad, right_dim3_pad))</code></p></li>
-</ul></td>
-    </tr>
-    <tr>
-      <th>data_format</th>
-      <td><p>A string, one of <code>channels_last</code> (default) or
-<code>channels_first</code>. The ordering of the dimensions in the inputs.
-<code>channels_last</code> corresponds to inputs with shape <code>(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)</code> while <code>channels_first</code> corresponds
-to inputs with shape <code>(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)</code>. It defaults to the <code>image_data_format</code> value found in your
-Keras config file at <code>~/.keras/keras.json</code>. If you never set it, then it
-will be "channels_last".</p></td>
-    </tr>
-    <tr>
-      <th>batch_size</th>
-      <td><p>Fixed batch size for layer</p></td>
-    </tr>
-    <tr>
-      <th>name</th>
-      <td><p>An optional name string for the layer. Should be unique in a
-model (do not reuse the same name twice). It will be autogenerated if it
-isn't provided.</p></td>
-    </tr>
-    <tr>
-      <th>trainable</th>
-      <td><p>Whether the layer weights will be updated during training.</p></td>
+      <th>include_top</th>
+      <td><p>whether to include the fully-connected layer at the top
+of the network.</p></td>
     </tr>
     <tr>
       <th>weights</th>
-      <td><p>Initial weights for layer.</p></td>
+      <td><p>one of <code>NULL</code> (random initialization), 'imagenet'
+(pre-training on ImageNet), or the path to the weights file to be loaded.</p></td>
+    </tr>
+    <tr>
+      <th>input_tensor</th>
+      <td><p>optional Keras tensor (i.e. output of <code><a href='layer_input.html'>layer_input()</a></code>)
+to use as image input for the model.</p></td>
+    </tr>
+    <tr>
+      <th>input_shape</th>
+      <td><p>optional shape list, only to be specified if <code>include_top</code>
+is FALSE (otherwise the input shape has to be <code>(224, 224, 3)</code>
+(with <code>channels_last</code> data format) or <code>(3, 224, 224)</code> (with
+<code>channels_first</code> data format). It should have exactly 3 inputs channels.</p></td>
+    </tr>
+    <tr>
+      <th>pooling</th>
+      <td><p>optional pooling mode for feature extraction when
+<code>include_top</code> is <code>FALSE</code>.
+- <code>NULL</code> means that the output of the model will be the 4D tensor output
+of the last convolutional layer.
+- <code>avg</code> means that global average pooling will be applied to the output
+of the last convolutional layer, and thus the output of the model
+will be a 2D tensor.
+- <code>max</code> means that global max pooling will be applied.</p></td>
+    </tr>
+    <tr>
+      <th>classes</th>
+      <td><p>optional number of classes to classify images into, only to be
+specified if <code>include_top</code> is TRUE, and if no <code>weights</code> argument is
+specified.</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>a 3D or 4D array consists of RGB values within <code>[0, 255]</code>.</p></td>
+    </tr>
+    <tr>
+      <th>data_format</th>
+      <td><p>data format of the image tensor.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="input-shape"><a class="anchor" href="#input-shape"></a>Input shape</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>5D tensor with shape:</p><ul>
-<li><p>If <code>data_format</code> is <code>"channels_last"</code>: <code>(batch, first_axis_to_pad, second_axis_to_pad, third_axis_to_pad, depth)</code></p></li>
-<li><p>If <code>data_format</code> is <code>"channels_first"</code>: <code>(batch, depth, first_axis_to_pad, second_axis_to_pad, third_axis_to_pad)</code></p></li>
-</ul>
-    
-    <h2 class="hasAnchor" id="output-shape"><a class="anchor" href="#output-shape"></a>Output shape</h2>
-
-    <p>5D tensor with shape:</p><ul>
-<li><p>If <code>data_format</code> is <code>"channels_last"</code>: <code>(batch, first_padded_axis, second_padded_axis, third_axis_to_pad, depth)</code></p></li>
-<li><p>If <code>data_format</code> is <code>"channels_first"</code>: <code>(batch, depth, first_padded_axis, second_padded_axis, third_axis_to_pad)</code></p></li>
-</ul>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p>Other convolutional layers: <code><a href='layer_conv_1d.html'>layer_conv_1d</a></code>,
-  <code><a href='layer_conv_2d_transpose.html'>layer_conv_2d_transpose</a></code>,
-  <code><a href='layer_conv_2d.html'>layer_conv_2d</a></code>,
-  <code><a href='layer_conv_3d_transpose.html'>layer_conv_3d_transpose</a></code>,
-  <code><a href='layer_conv_3d.html'>layer_conv_3d</a></code>,
-  <code><a href='layer_conv_lstm_2d.html'>layer_conv_lstm_2d</a></code>,
-  <code><a href='layer_cropping_1d.html'>layer_cropping_1d</a></code>,
-  <code><a href='layer_cropping_2d.html'>layer_cropping_2d</a></code>,
-  <code><a href='layer_cropping_3d.html'>layer_cropping_3d</a></code>,
-  <code><a href='layer_separable_conv_1d.html'>layer_separable_conv_1d</a></code>,
-  <code><a href='layer_separable_conv_2d.html'>layer_separable_conv_2d</a></code>,
-  <code><a href='layer_upsampling_1d.html'>layer_upsampling_1d</a></code>,
-  <code><a href='layer_upsampling_2d.html'>layer_upsampling_2d</a></code>,
-  <code><a href='layer_upsampling_3d.html'>layer_upsampling_3d</a></code>,
-  <code><a href='layer_zero_padding_1d.html'>layer_zero_padding_1d</a></code>,
-  <code><a href='layer_zero_padding_2d.html'>layer_zero_padding_2d</a></code></p>
+    <p>Optionally loads weights pre-trained
+on ImageNet. Note that when using TensorFlow,
+for best performance you should set
+<code>image_data_format='channels_last'</code> in your Keras config
+at ~/.keras/keras.json.</p>
+<p>The model and the weights are compatible with
+TensorFlow, Theano, and CNTK. The data format
+convention used by the model is the one
+specified in your Keras config file.</p>
     
 
   </div>
@@ -232,11 +237,7 @@ isn't provided.</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#input-shape">Input shape</a></li>
-
-      <li><a href="#output-shape">Output shape</a></li>
-
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#details">Details</a></li>
           </ul>
 
   </div>

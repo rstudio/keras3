@@ -158,7 +158,7 @@ y_test &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/t
 <span class="co"># Model Definition -------------------------------------------------------</span>
 
 input_img &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">32</span>, <span class="dv">32</span>, <span class="dv">3</span>))
-model &lt;-<span class="st"> </span><span class="kw">application_densenet</span>(<span class="dt">include_top =</span> <span class="ot">TRUE</span>, <span class="dt">input_tensor =</span> input_img, <span class="dt">dropout_rate =</span> <span class="fl">0.2</span>)
+model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/application_densenet.html">application_densenet</a></span>(<span class="dt">include_top =</span> <span class="ot">TRUE</span>, <span class="dt">input_tensor =</span> input_img, <span class="dt">dropout_rate =</span> <span class="fl">0.2</span>)
 
 opt &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="dt">lr =</span> <span class="fl">0.1</span>, <span class="dt">momentum =</span> <span class="fl">0.9</span>, <span class="dt">nesterov =</span> <span class="ot">TRUE</span>)
 

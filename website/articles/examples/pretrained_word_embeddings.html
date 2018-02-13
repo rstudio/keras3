@@ -133,7 +133,7 @@
 GLOVE_DIR &lt;-<span class="st"> 'glove.6B'</span>
 TEXT_DATA_DIR &lt;-<span class="st"> '20_newsgroup'</span>
 MAX_SEQUENCE_LENGTH &lt;-<span class="st"> </span><span class="dv">1000</span>
-MAX_NB_WORDS &lt;-<span class="st"> </span><span class="dv">20000</span>
+MAX_NUM_WORDS &lt;-<span class="st"> </span><span class="dv">20000</span>
 EMBEDDING_DIM &lt;-<span class="st"> </span><span class="dv">100</span>
 VALIDATION_SPLIT &lt;-<span class="st"> </span><span class="fl">0.2</span>
 
@@ -197,7 +197,7 @@ labels_index &lt;-<span class="st"> </span><span class="kw">list</span>()  <span
 <span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">'Found %s texts.</span><span class="ch">\n</span><span class="st">'</span>, <span class="kw">length</span>(texts)))
 
 <span class="co"># finally, vectorize the text samples into a 2D integer tensor</span>
-tokenizer &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/text_tokenizer.html">text_tokenizer</a></span>(<span class="dt">num_words=</span>MAX_NB_WORDS)
+tokenizer &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/text_tokenizer.html">text_tokenizer</a></span>(<span class="dt">num_words=</span>MAX_NUM_WORDS)
 tokenizer <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit_text_tokenizer.html">fit_text_tokenizer</a></span>(texts)
 
 <span class="co"># save the tokenizer in case we want to use it again</span>
@@ -231,12 +231,12 @@ y_val &lt;-<span class="st"> </span>labels[<span class="dv">1</span><span class=
 <span class="kw">cat</span>(<span class="st">'Preparing embedding matrix.</span><span class="ch">\n</span><span class="st">'</span>)
 
 <span class="co"># prepare embedding matrix</span>
-num_words &lt;-<span class="st"> </span><span class="kw">min</span>(MAX_NB_WORDS, <span class="kw">length</span>(word_index))
+num_words &lt;-<span class="st"> </span><span class="kw">min</span>(MAX_NUM_WORDS, <span class="kw">length</span>(word_index))
 prepare_embedding_matrix &lt;-<span class="st"> </span><span class="cf">function</span>() {
   embedding_matrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(0L, <span class="dt">nrow =</span> num_words, <span class="dt">ncol =</span> EMBEDDING_DIM)
   <span class="cf">for</span> (word <span class="cf">in</span> <span class="kw">names</span>(word_index)) {
     index &lt;-<span class="st"> </span>word_index[[word]]
-    <span class="cf">if</span> (index <span class="op">&gt;=</span><span class="st"> </span>MAX_NB_WORDS)
+    <span class="cf">if</span> (index <span class="op">&gt;=</span><span class="st"> </span>MAX_NUM_WORDS)
       <span class="cf">next</span>
     embedding_vector &lt;-<span class="st"> </span>embeddings_index[[word]]
     <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(embedding_vector)) {

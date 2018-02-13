@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Zero-padding layer for 3D data (spatial or spatio-temporal). — layer_zero_padding_3d • keras</title>
+<title>Softmax activation function. — layer_activation_softmax • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -137,15 +137,17 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Zero-padding layer for 3D data (spatial or spatio-temporal).</h1>
+    <h1>Softmax activation function.</h1>
     </div>
 
     
-    <p>Zero-padding layer for 3D data (spatial or spatio-temporal).</p>
+    <p>It follows: <code>f(x) = alpha * (exp(x) - 1.0)</code> for <code>x &lt; 0</code>, <code>f(x) = x</code> for `x</p>
+<p>= 0`.</p>
     
 
-    <pre class="usage"><span class='fu'>layer_zero_padding_3d</span>(<span class='no'>object</span>, <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1L</span>, <span class='fl'>1L</span>, <span class='fl'>1L</span>), <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>layer_activation_softmax</span>(<span class='no'>object</span>, <span class='kw'>axis</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>batch_input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -155,26 +157,30 @@
       <td><p>Model or layer object</p></td>
     </tr>
     <tr>
-      <th>padding</th>
-      <td><p>int, or list of 3 ints, or list of 3 lists of 2 ints.</p><ul>
-<li><p>If int: the same symmetric padding is applied to width and height.</p></li>
-<li><p>If list of 3 ints: interpreted as three different symmetric padding values:
-<code>(symmetric_dim1_pad, symmetric_dim2_pad, symmetric_dim3_pad)</code>.</p></li>
-<li><p>If list of 3 lists of 2 ints: interpreted as <code>((left_dim1_pad, right_dim1_pad), (left_dim2_pad, right_dim2_pad), (left_dim3_pad, right_dim3_pad))</code></p></li>
-</ul></td>
+      <th>axis</th>
+      <td><p>Integer, axis along which the softmax normalization is applied.</p></td>
     </tr>
     <tr>
-      <th>data_format</th>
-      <td><p>A string, one of <code>channels_last</code> (default) or
-<code>channels_first</code>. The ordering of the dimensions in the inputs.
-<code>channels_last</code> corresponds to inputs with shape <code>(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)</code> while <code>channels_first</code> corresponds
-to inputs with shape <code>(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)</code>. It defaults to the <code>image_data_format</code> value found in your
-Keras config file at <code>~/.keras/keras.json</code>. If you never set it, then it
-will be "channels_last".</p></td>
+      <th>input_shape</th>
+      <td><p>Input shape (list of integers, does not include the
+samples axis) which is required when using this layer as the first layer in
+a model.</p></td>
+    </tr>
+    <tr>
+      <th>batch_input_shape</th>
+      <td><p>Shapes, including the batch size. For instance,
+<code>batch_input_shape=c(10, 32)</code> indicates that the expected input will be
+batches of 10 32-dimensional vectors. <code>batch_input_shape=list(NULL, 32)</code>
+indicates batches of an arbitrary number of 32-dimensional vectors.</p></td>
     </tr>
     <tr>
       <th>batch_size</th>
       <td><p>Fixed batch size for layer</p></td>
+    </tr>
+    <tr>
+      <th>dtype</th>
+      <td><p>The data type expected by the input, as a string (<code>float32</code>,
+<code>float64</code>, <code>int32</code>...)</p></td>
     </tr>
     <tr>
       <th>name</th>
@@ -192,38 +198,13 @@ isn't provided.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="input-shape"><a class="anchor" href="#input-shape"></a>Input shape</h2>
-
-    <p>5D tensor with shape:</p><ul>
-<li><p>If <code>data_format</code> is <code>"channels_last"</code>: <code>(batch, first_axis_to_pad, second_axis_to_pad, third_axis_to_pad, depth)</code></p></li>
-<li><p>If <code>data_format</code> is <code>"channels_first"</code>: <code>(batch, depth, first_axis_to_pad, second_axis_to_pad, third_axis_to_pad)</code></p></li>
-</ul>
-    
-    <h2 class="hasAnchor" id="output-shape"><a class="anchor" href="#output-shape"></a>Output shape</h2>
-
-    <p>5D tensor with shape:</p><ul>
-<li><p>If <code>data_format</code> is <code>"channels_last"</code>: <code>(batch, first_padded_axis, second_padded_axis, third_axis_to_pad, depth)</code></p></li>
-<li><p>If <code>data_format</code> is <code>"channels_first"</code>: <code>(batch, depth, first_padded_axis, second_padded_axis, third_axis_to_pad)</code></p></li>
-</ul>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other convolutional layers: <code><a href='layer_conv_1d.html'>layer_conv_1d</a></code>,
-  <code><a href='layer_conv_2d_transpose.html'>layer_conv_2d_transpose</a></code>,
-  <code><a href='layer_conv_2d.html'>layer_conv_2d</a></code>,
-  <code><a href='layer_conv_3d_transpose.html'>layer_conv_3d_transpose</a></code>,
-  <code><a href='layer_conv_3d.html'>layer_conv_3d</a></code>,
-  <code><a href='layer_conv_lstm_2d.html'>layer_conv_lstm_2d</a></code>,
-  <code><a href='layer_cropping_1d.html'>layer_cropping_1d</a></code>,
-  <code><a href='layer_cropping_2d.html'>layer_cropping_2d</a></code>,
-  <code><a href='layer_cropping_3d.html'>layer_cropping_3d</a></code>,
-  <code><a href='layer_separable_conv_1d.html'>layer_separable_conv_1d</a></code>,
-  <code><a href='layer_separable_conv_2d.html'>layer_separable_conv_2d</a></code>,
-  <code><a href='layer_upsampling_1d.html'>layer_upsampling_1d</a></code>,
-  <code><a href='layer_upsampling_2d.html'>layer_upsampling_2d</a></code>,
-  <code><a href='layer_upsampling_3d.html'>layer_upsampling_3d</a></code>,
-  <code><a href='layer_zero_padding_1d.html'>layer_zero_padding_1d</a></code>,
-  <code><a href='layer_zero_padding_2d.html'>layer_zero_padding_2d</a></code></p>
+    <p>Other activation layers: <code><a href='layer_activation_elu.html'>layer_activation_elu</a></code>,
+  <code><a href='layer_activation_leaky_relu.html'>layer_activation_leaky_relu</a></code>,
+  <code><a href='layer_activation_parametric_relu.html'>layer_activation_parametric_relu</a></code>,
+  <code><a href='layer_activation_thresholded_relu.html'>layer_activation_thresholded_relu</a></code>,
+  <code><a href='layer_activation.html'>layer_activation</a></code></p>
     
 
   </div>
@@ -232,10 +213,6 @@ isn't provided.</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#input-shape">Input shape</a></li>
-
-      <li><a href="#output-shape">Output shape</a></li>
-
       <li><a href="#see-also">See also</a></li>
           </ul>
 

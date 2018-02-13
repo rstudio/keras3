@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MobileNet model architecture. — application_mobilenet • keras</title>
+<title>Instantiates a NASNet model. — application_nasnet • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -137,65 +137,86 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>MobileNet model architecture.</h1>
+    <h1>Instantiates a NASNet model.</h1>
     </div>
 
     
-    <p>MobileNet model architecture.</p>
+    <p>Note that only TensorFlow is supported for now,
+therefore it only works with the data format
+<code>image_data_format='channels_last'</code> in your Keras config
+at <code>~/.keras/keras.json</code>.</p>
     
 
-    <pre class="usage"><span class='fu'>application_mobilenet</span>(<span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>depth_multiplier</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>dropout</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='st'>"imagenet"</span>,
-  <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
+    <pre class="usage"><span class='fu'>application_nasnet</span>(<span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>penultimate_filters</span> <span class='kw'>=</span> <span class='fl'>4032L</span>,
+  <span class='kw'>num_blocks</span> <span class='kw'>=</span> <span class='fl'>6L</span>, <span class='kw'>stem_block_filters</span> <span class='kw'>=</span> <span class='fl'>96L</span>, <span class='kw'>skip_reduction</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>filter_multiplier</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>default_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>mobilenet_preprocess_input</span>(<span class='no'>x</span>)
+<span class='fu'>application_nasnetlarge</span>(<span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
 
-<span class='fu'>mobilenet_decode_predictions</span>(<span class='no'>preds</span>, <span class='kw'>top</span> <span class='kw'>=</span> <span class='fl'>5</span>)
+<span class='fu'>application_nasnetmobile</span>(<span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
 
-<span class='fu'>mobilenet_load_model_hdf5</span>(<span class='no'>filepath</span>)</pre>
+<span class='fu'>nasnet_preprocess_input</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input_shape</th>
-      <td><p>optional shape list, only to be specified if <code>include_top</code>
-is FALSE (otherwise the input shape has to be <code>(224, 224, 3)</code> (with
-<code>channels_last</code> data format) or (3, 224, 224) (with <code>channels_first</code> data
-format). It should have exactly 3 inputs channels, and width and height
-should be no smaller than 32. E.g. <code>(200, 200, 3)</code> would be one valid
-value.</p></td>
+      <td><p>Optional shape list, only to be specified if <code>include_top</code>
+is FALSE (otherwise the input shape has to be <code>(331, 331, 3)</code> for
+NASNetLarge or <code>(224, 224, 3)</code> for NASNetMobile It should have exactly 3
+inputs channels, and width and height should be no smaller than 32. E.g.
+<code>(224, 224, 3)</code> would be one valid value.</p></td>
     </tr>
     <tr>
-      <th>alpha</th>
-      <td><p>controls the width of the network.</p><ul>
-<li><p>If <code>alpha</code> &lt; 1.0, proportionally decreases the number of filters in each layer.</p></li>
-<li><p>If <code>alpha</code> &gt; 1.0, proportionally increases the number of filters in each layer.</p></li>
-<li><p>If <code>alpha</code> = 1, default number of filters from the paper are used at each layer.</p></li>
+      <th>penultimate_filters</th>
+      <td><p>Number of filters in the penultimate layer.
+NASNet models use the notation <code>NASNet (N @ P)</code>, where:
+- N is the number of blocks
+- P is the number of penultimate filters</p></td>
+    </tr>
+    <tr>
+      <th>num_blocks</th>
+      <td><p>Number of repeated blocks of the NASNet model. NASNet
+models use the notation <code>NASNet (N @ P)</code>, where:
+- N is the number of blocks
+- P is the number of penultimate filters</p></td>
+    </tr>
+    <tr>
+      <th>stem_block_filters</th>
+      <td><p>Number of filters in the initial stem block</p></td>
+    </tr>
+    <tr>
+      <th>skip_reduction</th>
+      <td><p>Whether to skip the reduction step at the tail end
+of the network. Set to <code>FALSE</code> for CIFAR models.</p></td>
+    </tr>
+    <tr>
+      <th>filter_multiplier</th>
+      <td><p>Controls the width of the network.</p><ul>
+<li><p>If <code>filter_multiplier</code> &lt; 1.0, proportionally decreases the number of
+filters in each layer.</p></li>
+<li><p>If <code>filter_multiplier</code> &gt; 1.0, proportionally increases the number of
+filters in each layer. - If <code>filter_multiplier</code> = 1, default number of
+filters from the paper are used at each layer.</p></li>
 </ul></td>
     </tr>
     <tr>
-      <th>depth_multiplier</th>
-      <td><p>depth multiplier for depthwise convolution (also
-called the resolution multiplier)</p></td>
-    </tr>
-    <tr>
-      <th>dropout</th>
-      <td><p>dropout rate</p></td>
-    </tr>
-    <tr>
       <th>include_top</th>
-      <td><p>whether to include the fully-connected layer at the top of
-the network.</p></td>
+      <td><p>Whether to include the fully-connected layer at the top
+of the network.</p></td>
     </tr>
     <tr>
       <th>weights</th>
-      <td><p><code>NULL</code> (random initialization), <code>imagenet</code> (ImageNet
-weights), or the path to the weights file to be loaded.</p></td>
+      <td><p><code>NULL</code> (random initialization) or <code>imagenet</code> (ImageNet weights)</p></td>
     </tr>
     <tr>
       <th>input_tensor</th>
-      <td><p>optional Keras tensor (i.e. output of <code><a href='layer_input.html'>layer_input()</a></code>)
+      <td><p>Optional Keras tensor (i.e. output of <code><a href='layer_input.html'>layer_input()</a></code>)
 to use as image input for the model.</p></td>
     </tr>
     <tr>
@@ -211,51 +232,19 @@ be a 2D tensor.
     </tr>
     <tr>
       <th>classes</th>
-      <td><p>optional number of classes to classify images into, only to be
+      <td><p>Optional number of classes to classify images into, only to be
 specified if <code>include_top</code> is TRUE, and if no <code>weights</code> argument is
 specified.</p></td>
     </tr>
     <tr>
+      <th>default_size</th>
+      <td><p>Specifies the default image size of the model</p></td>
+    </tr>
+    <tr>
       <th>x</th>
-      <td><p>input tensor, 4D</p></td>
-    </tr>
-    <tr>
-      <th>preds</th>
-      <td><p>Tensor encoding a batch of predictions.</p></td>
-    </tr>
-    <tr>
-      <th>top</th>
-      <td><p>integer, how many top-guesses to return.</p></td>
-    </tr>
-    <tr>
-      <th>filepath</th>
-      <td><p>File path</p></td>
+      <td><p>a 4D array consists of RGB values within <code>[0, 255]</code>.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p><code>application_mobilenet()</code> and <code>mobilenet_load_model_hdf5()</code> return a
-Keras model instance. <code>mobilenet_preprocess_input()</code> returns image input
-suitable for feeding into a mobilenet model. <code>mobilenet_decode_predictions()</code>
-returns a list of data frames with variables <code>class_name</code>, <code>class_description</code>,
-and <code>score</code> (one data frame per sample in batch input).</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The <code>mobilenet_preprocess_input()</code> function should be used for image
-preprocessing. To load a saved instance of a MobileNet model use
-the <code>mobilenet_load_model_hdf5()</code> function. To prepare image input
-for MobileNet use <code>mobilenet_preprocess_input()</code>. To decode
-predictions use <code>mobilenet_decode_predictions()</code>.</p>
-<p>MobileNet is currently only supported with the TensorFlow backend.</p>
-    
-    <h2 class="hasAnchor" id="reference"><a class="anchor" href="#reference"></a>Reference</h2>
-
-    
-    <ul>
-<li><p><a href='https://arxiv.org/pdf/1704.04861v1.pdf'>MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications</a>.</p></li>
-</ul>
     
 
   </div>
@@ -263,13 +252,7 @@ predictions use <code>mobilenet_decode_predictions()</code>.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#reference">Reference</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>
