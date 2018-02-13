@@ -10,6 +10,10 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Ensure that custom layers return a tuple from `compute_output_shape()`
 
+- Added Nasnet and Densenet pre-trained models
+
+- New layers `layer_activation_softmax()` and `layer_separable_conv_1d()`
+
 
 ## Keras 2.1.3 (CRAN)
 
