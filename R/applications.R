@@ -470,10 +470,9 @@ application_densenet <- function(blocks, include_top = TRUE, weights = "imagenet
 
 #' @rdname application_densenet   
 #' @export
-application_densenet121 <- function(blocks, include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
+application_densenet121 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
                                     input_shape = NULL, pooling = NULL, classes = 1000) {
   keras$applications$DenseNet121(
-    blocks,
     include_top,
     weights,
     input_tensor,
@@ -485,10 +484,9 @@ application_densenet121 <- function(blocks, include_top = TRUE, weights = "image
 
 #' @rdname application_densenet   
 #' @export
-application_densenet169 <- function(blocks, include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
+application_densenet169 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
                                     input_shape = NULL, pooling = NULL, classes = 1000) {
   keras$applications$DenseNet169(
-    blocks,
     include_top,
     weights,
     input_tensor,
@@ -500,10 +498,9 @@ application_densenet169 <- function(blocks, include_top = TRUE, weights = "image
 
 #' @rdname application_densenet   
 #' @export
-application_densenet201 <- function(blocks, include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
+application_densenet201 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
                                     input_shape = NULL, pooling = NULL, classes = 1000) {
   keras$applications$DenseNet201(
-    blocks,
     include_top,
     weights,
     input_tensor,
@@ -588,6 +585,38 @@ application_nasnet <- function(input_shape = NULL, penultimate_filters = 4032L,
     pooling = pooling,
     classes = as.integer(classes),
     default_size = default_size
+  )
+  
+}
+
+#' @rdname application_nasnet
+#' @export
+application_nasnetlarge <- function(input_shape = NULL, include_top = TRUE, weights = NULL, 
+                               input_tensor = NULL, pooling = NULL, classes = 1000) {
+  
+  keras$applications$NASNetLarge(
+    input_shape,
+    include_top,
+    weights,
+    input_tensor,
+    pooling,
+    classes
+  )
+  
+}
+
+#' @rdname application_nasnet
+#' @export
+application_nasnetmobile <- function(input_shape = NULL, include_top = TRUE, weights = NULL, 
+                                    input_tensor = NULL, pooling = NULL, classes = 1000) {
+  
+  keras$applications$NASNetMobile(
+    input_shape,
+    include_top,
+    weights,
+    input_tensor,
+    pooling,
+    classes
   )
   
 }
