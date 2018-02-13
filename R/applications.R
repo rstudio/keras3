@@ -473,12 +473,12 @@ application_densenet <- function(blocks, include_top = TRUE, weights = "imagenet
 application_densenet121 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
                                     input_shape = NULL, pooling = NULL, classes = 1000) {
   keras$applications$DenseNet121(
-    include_top,
-    weights,
-    input_tensor,
-    input_shape,
-    pooling,
-    classes
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = as_nullable_integer(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
   )
 }
 
@@ -487,12 +487,12 @@ application_densenet121 <- function(include_top = TRUE, weights = "imagenet", in
 application_densenet169 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
                                     input_shape = NULL, pooling = NULL, classes = 1000) {
   keras$applications$DenseNet169(
-    include_top,
-    weights,
-    input_tensor,
-    input_shape,
-    pooling,
-    classes
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = as_nullable_integer(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
   )
 }
 
@@ -501,12 +501,12 @@ application_densenet169 <- function(include_top = TRUE, weights = "imagenet", in
 application_densenet201 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
                                     input_shape = NULL, pooling = NULL, classes = 1000) {
   keras$applications$DenseNet201(
-    include_top,
-    weights,
-    input_tensor,
-    input_shape,
-    pooling,
-    classes
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = as_nullable_integer(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
   )
 }
 
@@ -595,12 +595,12 @@ application_nasnetlarge <- function(input_shape = NULL, include_top = TRUE, weig
                                input_tensor = NULL, pooling = NULL, classes = 1000) {
   
   keras$applications$NASNetLarge(
-    input_shape,
-    include_top,
-    weights,
-    input_tensor,
-    pooling,
-    classes
+    input_shape = as_nullable_integer(input_shape),
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    pooling = pooling,
+    classes = as.integer(classes)
   )
   
 }
@@ -611,12 +611,12 @@ application_nasnetmobile <- function(input_shape = NULL, include_top = TRUE, wei
                                     input_tensor = NULL, pooling = NULL, classes = 1000) {
   
   keras$applications$NASNetMobile(
-    input_shape,
-    include_top,
-    weights,
-    input_tensor,
-    pooling,
-    classes
+    input_shape = as_nullable_integer(input_shape),
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    pooling = pooling,
+    classes = as.integer(classes)
   )
   
 }
