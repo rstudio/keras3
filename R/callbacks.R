@@ -4,14 +4,22 @@
 #' 
 #' @param count_mode One of "steps" or "samples". Whether the progress bar
 #'   should count samples seens or steps (batches) seen.
+#' @param stateful_metrics List of metric names that should *not*
+#'   be averaged onver an epoch. Metrics in this list will be logged
+#'   as-is in `on_epoch_end`. All others will be averaged in 
+#'   `on_epoch_end`.
 #'   
 #' @family callbacks   
 #'   
 #' @export
-callback_progbar_logger <- function(count_mode = "samples") {
-  keras$callbacks$ProgbarLogger(
+callback_progbar_logger <- function(count_mode = "samples", stateful_metrics = NULL) {
+  args <- list(
     count_mode = count_mode
   )
+  if (keras_version() >= "2.1.4")
+    args$stateful_metrics <- stateful_metrics
+  
+  do.call(keras$callbacks$ProgbarLogger, args)
 }
 
 
@@ -126,7 +134,8 @@ callback_remote_monitor <- function(root = "http://localhost:9000", path = "/pub
 #' Learning rate scheduler.
 #' 
 #' @param schedule a function that takes an epoch index as input (integer,
-#'   indexed from 0) and returns a new learning rate as output (float).
+#'   indexed from 0) and current learning rate and returns a new learning rate
+#'   as output (float).
 #'
 #' @family callbacks 
 #'            
@@ -182,6 +191,10 @@ callback_terminate_on_naan <- function() {
 #'   
 #' You can find more information about TensorBoard
 #' [here](https://www.tensorflow.org/get_started/summaries_and_tensorboard).
+#' 
+#' When using a backend other than TensorFlow, TensorBoard will still work
+#' (if you have TensorFlow installed), but the only feature available will
+#' be the display of the losses and metrics plots.
 #' 
 #' @family callbacks 
 #'    

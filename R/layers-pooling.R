@@ -124,7 +124,7 @@ layer_max_pooling_3d <- function(object, pool_size = c(2L, 2L, 2L), strides = NU
 #' 
 #' @inheritParams layer_max_pooling_1d
 #'   
-#' @param pool_size Integer, size of the max pooling windows.
+#' @param pool_size Integer, size of the average pooling windows.
 #' @param strides Integer, or NULL. Factor by which to downscale. E.g. 2 will
 #'   halve the input. If NULL, it will default to `pool_size`.
 #' @param padding One of `"valid"` or `"same"` (case-insensitive).

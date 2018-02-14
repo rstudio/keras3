@@ -21,8 +21,9 @@ layer_gru(object, units, activation = "tanh",
 
 \item{units}{Positive integer, dimensionality of the output space.}
 
-\item{activation}{Activation function to use. If you pass \code{NULL}, no
-activation is applied (ie. "linear" activation: \code{a(x) = x}).}
+\item{activation}{Activation function to use. Default: hyperbolic tangent
+(\code{tanh}). If you pass \code{NULL}, no activation is applied
+(ie. "linear" activation: \code{a(x) = x}).}
 
 \item{recurrent_activation}{Activation function to use for the recurrent
 step.}

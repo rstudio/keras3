@@ -33,7 +33,12 @@ from \code{generator} before declaring one epoch finished and starting the next
 epoch. It should typically be equal to the number of samples if your
 dataset divided by the batch size.}
 
-\item{epochs}{integer, total number of iterations on the data.}
+\item{epochs}{Integer. Number of epochs to train the model.
+An epoch is an iteration over the entire data provided, as defined by
+\code{steps_per_epoch}. Note that in conjunction with \code{initial_epoch},
+\code{epochs} is to be understood as "final epoch". The model is not trained
+for a number of iterations given by \code{epochs}, but merely until the epoch
+of index \code{epochs} is reached.}
 
 \item{verbose}{Verbosity mode (0 = silent, 1 = progress bar, 2 = one line per
 epoch).}
@@ -51,14 +56,19 @@ different default.}
 \item a generator for the validation data
 \item a list (inputs, targets)
 \item a list (inputs, targets, sample_weights).
+on which to evaluate
+the loss and any model metrics at the end of each epoch.
+The model will not be trained on this data.
 }}
 
 \item{validation_steps}{Only relevant if \code{validation_data} is a generator.
 Total number of steps (batches of samples) to yield from \code{generator} before
 stopping.}
 
-\item{class_weight}{Named list mapping class indices to a weight for the
-class.}
+\item{class_weight}{Optional named list mapping class indices (integer) to a
+weight (float) value, used for weighting the loss function (during
+training only). This can be useful to tell the model to "pay more
+attention" to samples from an under-represented class.}
 
 \item{max_queue_size}{Maximum size for the generator queue. If unspecified,
 \code{max_queue_size} will default to 10.}

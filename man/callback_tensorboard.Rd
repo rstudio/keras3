@@ -52,6 +52,10 @@ TensorBoard is a visualization tool provided with TensorFlow.
 
 You can find more information about TensorBoard
 \href{https://www.tensorflow.org/get_started/summaries_and_tensorboard}{here}.
+
+When using a backend other than TensorFlow, TensorBoard will still work
+(if you have TensorFlow installed), but the only feature available will
+be the display of the losses and metrics plots.
 }
 \seealso{
 Other callbacks: \code{\link{callback_csv_logger}},

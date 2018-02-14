@@ -8,7 +8,8 @@ callback_learning_rate_scheduler(schedule)
 }
 \arguments{
 \item{schedule}{a function that takes an epoch index as input (integer,
-indexed from 0) and returns a new learning rate as output (float).}
+indexed from 0) and current learning rate and returns a new learning rate
+as output (float).}
 }
 \description{
 Learning rate scheduler.

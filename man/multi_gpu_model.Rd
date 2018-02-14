@@ -4,15 +4,16 @@
 \alias{multi_gpu_model}
 \title{Replicates a model on different GPUs.}
 \usage{
-multi_gpu_model(model, gpus)
+multi_gpu_model(model, gpus = NULL)
 }
 \arguments{
 \item{model}{A Keras model instance. To avoid OOM errors,
 this model could have been built on CPU, for instance
 (see usage example below).}
 
-\item{gpus}{Integer >= 2 or list of integers, number of GPUs or
-list of GPU IDs on which to create model replicas.}
+\item{gpus}{\code{NULL} to use all available GPUs (default). Integer >= 2 or
+list of integers, number of GPUs or list of GPU IDs on which to create
+model replicas.}
 }
 \value{
 A Keras model object which can be used just like the initial

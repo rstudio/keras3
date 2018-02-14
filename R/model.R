@@ -77,8 +77,9 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 #' @param model A Keras model instance. To avoid OOM errors,
 #'   this model could have been built on CPU, for instance
 #'    (see usage example below).
-#' @param gpus Integer >= 2 or list of integers, number of GPUs or
-#'   list of GPU IDs on which to create model replicas.
+#' @param gpus `NULL` to use all available GPUs (default). Integer >= 2 or 
+#'   list of integers, number of GPUs or list of GPU IDs on which to create 
+#'   model replicas.
 #' 
 #' @return  A Keras model object which can be used just like the initial
 #'  `model` argument, but which distributes its workload on multiple GPUs.
@@ -156,8 +157,14 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 #' @family model functions
 #'
 #' @export
-multi_gpu_model <- function(model, gpus) {
-  keras$utils$multi_gpu_model(model, as.integer(gpus))
+multi_gpu_model <- function(model, gpus = NULL) {
+  
+  if (is.null(gpus) && keras_version() < "2.1.4") {
+    stop("You must provide an explicit gpus argument in Keras versions ",
+         "prior to 2.1.4")
+  }
+  
+  keras$utils$multi_gpu_model(model, as_nullable_integer(gpus))
 }
 
 
@@ -627,17 +634,27 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'   from `generator` before declaring one epoch finished and starting the next
 #'   epoch. It should typically be equal to the number of samples if your
 #'   dataset divided by the batch size.
-#' @param epochs integer, total number of iterations on the data.
+#' @param epochs Integer. Number of epochs to train the model.
+#'   An epoch is an iteration over the entire data provided, as defined by 
+#'   `steps_per_epoch`. Note that in conjunction with `initial_epoch`,
+#'   `epochs` is to be understood as "final epoch". The model is not trained
+#'    for a number of iterations given by `epochs`, but merely until the epoch
+#'    of index `epochs` is reached.
 #' @param callbacks list of callbacks to be called during training.
 #' @param validation_data this can be either: 
 #'    - a generator for the validation data 
 #'    - a list (inputs, targets) 
 #'    - a list (inputs, targets, sample_weights).
+#'  on which to evaluate
+#'  the loss and any model metrics at the end of each epoch.
+#'  The model will not be trained on this data.
 #' @param validation_steps Only relevant if `validation_data` is a generator.
 #'   Total number of steps (batches of samples) to yield from `generator` before
 #'   stopping.
-#' @param class_weight Named list mapping class indices to a weight for the
-#'   class.
+#' @param class_weight Optional named list mapping class indices (integer) to a
+#'   weight (float) value, used for weighting the loss function (during 
+#'   training only). This can be useful to tell the model to "pay more 
+#'   attention" to samples from an under-represented class.
 #' @param max_queue_size Maximum size for the generator queue. If unspecified,
 #'   `max_queue_size` will default to 10.
 #' @param initial_epoch epoch at which to start training (useful for resuming a

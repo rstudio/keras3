@@ -18,7 +18,7 @@ layer_conv_3d(object, filters, kernel_size, strides = c(1L, 1L, 1L),
 \item{object}{Model or layer object}
 
 \item{filters}{Integer, the dimensionality of the output space (i.e. the
-number output of filters in the convolution).}
+number of output filters in the convolution).}
 
 \item{kernel_size}{An integer or list of 3 integers, specifying the depth,
 height, and width of the 3D convolution window. Can be a single integer
