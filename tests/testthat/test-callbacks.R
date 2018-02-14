@@ -28,7 +28,7 @@ test_callback <- function(name, callback, h5py = FALSE, required_version = NULL)
 
 test_callback("progbar_logger", callback_progbar_logger())
 test_callback("model_checkpoint", callback_model_checkpoint("checkpoint.h5"), h5py = TRUE)
-test_callback("learning_rate_scheduler", callback_learning_rate_scheduler(schedule = function (index) {
+test_callback("learning_rate_scheduler", callback_learning_rate_scheduler(schedule = function (index, ...) {
   0.1
 }))
 if (is_keras_available() && is_backend("tensorflow"))
