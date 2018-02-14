@@ -184,7 +184,12 @@ dataset divided by the batch size.</p></td>
     </tr>
     <tr>
       <th>epochs</th>
-      <td><p>integer, total number of iterations on the data.</p></td>
+      <td><p>Integer. Number of epochs to train the model.
+An epoch is an iteration over the entire data provided, as defined by
+<code>steps_per_epoch</code>. Note that in conjunction with <code>initial_epoch</code>,
+<code>epochs</code> is to be understood as "final epoch". The model is not trained
+for a number of iterations given by <code>epochs</code>, but merely until the epoch
+of index <code>epochs</code> is reached.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -208,7 +213,10 @@ different default.</p></td>
       <td><p>this can be either:</p><ul>
 <li><p>a generator for the validation data</p></li>
 <li><p>a list (inputs, targets)</p></li>
-<li><p>a list (inputs, targets, sample_weights).</p></li>
+<li><p>a list (inputs, targets, sample_weights).
+on which to evaluate
+the loss and any model metrics at the end of each epoch.
+The model will not be trained on this data.</p></li>
 </ul></td>
     </tr>
     <tr>
@@ -219,8 +227,10 @@ stopping.</p></td>
     </tr>
     <tr>
       <th>class_weight</th>
-      <td><p>Named list mapping class indices to a weight for the
-class.</p></td>
+      <td><p>Optional named list mapping class indices (integer) to a
+weight (float) value, used for weighting the loss function (during
+training only). This can be useful to tell the model to "pay more
+attention" to samples from an under-represented class.</p></td>
     </tr>
     <tr>
       <th>max_queue_size</th>
