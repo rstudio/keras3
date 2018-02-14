@@ -13,8 +13,9 @@ flow_images_from_directory(directory, generator = image_data_generator(),
 }
 \arguments{
 \item{directory}{path to the target directory. It should contain one
-subdirectory per class. Any PNG, JPG or BMP images inside each of the
-subdirectories directory tree will be included in the generator. See \href{https://gist.github.com/fchollet/0830affa1f7f19fd47b06d4cf89ed44d}{thisscript}
+subdirectory per class. Any PNG, JPG, BMP, PPM, or TIF images inside each
+of the subdirectories directory tree will be included in the generator.
+See \href{https://gist.github.com/fchollet/0830affa1f7f19fd47b06d4cf89ed44d}{this script}
 for more details.}
 
 \item{generator}{Image data generator (default generator does no data
@@ -27,15 +28,16 @@ which all images found will be resized.}
 images will be converted to have 1 or 3 color channels.}
 
 \item{classes}{optional list of class subdirectories (e.g. \code{c('dogs', 'cats')}). Default: \code{NULL}, If not provided, the list of classes will be
-automatically inferred (and the order of the classes, which will map to the
-label indices, will be alphanumeric).}
+automatically inferred (and the order of the classes, which will map to
+the label indices, will be alphanumeric).}
 
 \item{class_mode}{one of "categorical", "binary", "sparse" or \code{NULL}.
 Default: "categorical". Determines the type of label arrays that are
-returned: "categorical" will be 2D one-hot encoded labels, "binary" will be
-1D binary labels, "sparse" will be 1D integer labels. If \code{NULL}, no labels
-are returned (the generator will only yield batches of image data, which is
-useful to use \code{\link[=predict_generator]{predict_generator()}}, \code{\link[=evaluate_generator]{evaluate_generator()}}, etc.).}
+returned: "categorical" will be 2D one-hot encoded labels, "binary" will
+be 1D binary labels, "sparse" will be 1D integer labels. If \code{NULL}, no
+labels are returned (the generator will only yield batches of image data,
+which is useful to use \code{\link[=predict_generator]{predict_generator()}}, \code{\link[=evaluate_generator]{evaluate_generator()}},
+etc.).}
 
 \item{batch_size}{int (default: \code{32}).}
 
@@ -44,7 +46,7 @@ useful to use \code{\link[=predict_generator]{predict_generator()}}, \code{\link
 \item{seed}{int (default: \code{NULL}).}
 
 \item{save_to_dir}{\code{NULL} or str (default: \code{NULL}). This allows you to
-optimally specify a directory to which to save the augmented pictures being
+optionally specify a directory to which to save the augmented pictures being
 generated (useful for visualizing what you are doing).}
 
 \item{save_prefix}{str (default: ''). Prefix to use for filenames of saved

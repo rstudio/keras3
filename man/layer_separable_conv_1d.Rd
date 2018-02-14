@@ -20,7 +20,7 @@ layer_separable_conv_1d(object, filters, kernel_size, strides = 1,
 \item{object}{Model or layer object}
 
 \item{filters}{Integer, the dimensionality of the output space (i.e. the
-number output of filters in the convolution).}
+number of output filters in the convolution).}
 
 \item{kernel_size}{An integer or list of 2 integers, specifying the width and
 height of the 2D convolution window. Can be a single integer to specify the

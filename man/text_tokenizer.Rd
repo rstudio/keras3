@@ -6,7 +6,7 @@
 \usage{
 text_tokenizer(num_words = NULL,
   filters = "!\\"#$\%&()*+,-./:;<=>?@[\\\\]^_`{|}~\\t\\n", lower = TRUE,
-  split = " ", char_level = FALSE)
+  split = " ", char_level = FALSE, oov_token = NULL)
 }
 \arguments{
 \item{num_words}{the maximum number of words to keep, based on word
@@ -21,6 +21,9 @@ breaks, minus the ' character.}
 \item{split}{character or string to use for token splitting.}
 
 \item{char_level}{if \code{TRUE}, every character will be treated as a token}
+
+\item{oov_token}{\code{NULL} or string If given, it will be added to `word_index``
+and used to replace out-of-vocabulary words during text_to_sequence calls.}
 }
 \description{
 Vectorize a text corpus, by turning each text into either a sequence of

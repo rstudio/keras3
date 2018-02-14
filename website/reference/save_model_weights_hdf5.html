@@ -146,7 +146,8 @@
 
     <pre class="usage"><span class='fu'>save_model_weights_hdf5</span>(<span class='no'>object</span>, <span class='no'>filepath</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>load_model_weights_hdf5</span>(<span class='no'>object</span>, <span class='no'>filepath</span>, <span class='kw'>by_name</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>load_model_weights_hdf5</span>(<span class='no'>object</span>, <span class='no'>filepath</span>, <span class='kw'>by_name</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>skip_mismatch</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>reshape</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -167,6 +168,17 @@ file at the target location</p></td>
     <tr>
       <th>by_name</th>
       <td><p>Whether to load weights by name or by topological order.</p></td>
+    </tr>
+    <tr>
+      <th>skip_mismatch</th>
+      <td><p>Logical, whether to skip loading of layers
+where there is a mismatch in the number of weights, or a mismatch in the
+shape of the weight (only valid when <code>by_name = FALSE</code>).</p></td>
+    </tr>
+    <tr>
+      <th>reshape</th>
+      <td><p>Reshape weights to fit the layer when the correct number
+of values are present but the shape does not match.</p></td>
     </tr>
     </table>
     

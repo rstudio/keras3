@@ -11,7 +11,7 @@ layer_average_pooling_1d(object, pool_size = 2L, strides = NULL,
 \arguments{
 \item{object}{Model or layer object}
 
-\item{pool_size}{Integer, size of the max pooling windows.}
+\item{pool_size}{Integer, size of the average pooling windows.}
 
 \item{strides}{Integer, or NULL. Factor by which to downscale. E.g. 2 will
 halve the input. If NULL, it will default to \code{pool_size}.}
