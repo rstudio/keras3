@@ -131,6 +131,8 @@ optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = 1e-08, decay = 0.
 #'   0 < beta < 1. Generally close to 1.
 #' @param beta_2 The exponential decay rate for the 2nd moment estimates. float,
 #'   0 < beta < 1. Generally close to 1.
+#' @param amsgrad boolean.  Whether to apply the AMSGrad variant of this
+#'   algorithm from the paper "On the Convergence of Adam and Beyond".
 #'
 #' @note Default parameters follow those provided in the original paper.
 #'
@@ -138,7 +140,7 @@ optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = 1e-08, decay = 0.
 #'
 #' @export
 optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, decay = 0.0,
-                           clipnorm = NULL, clipvalue = NULL) {
+                           amsgrad = FALSE, clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
@@ -146,7 +148,8 @@ optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1
     beta_1 = beta_1,
     beta_2 = beta_2,
     epsilon = epsilon,
-    decay = decay
+    decay = decay,
+    amsgrad = amsgrad
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
