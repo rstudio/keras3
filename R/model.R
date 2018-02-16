@@ -430,8 +430,7 @@ fit <- function(object, x = NULL, y = NULL, batch_size=NULL, epochs=10,
 #'   a list mapping output names to data. `y` can be `NULL` (default) if feeding 
 #'   from framework-native tensors (e.g. TensorFlow data tensors).
 #' @param steps Total number of steps (batches of samples) before declaring the
-#'   evaluation round finished. The default `NULL` is equal to the number of 
-#'   samples in your dataset divided by the batch size.
+#'   evaluation round finished. Ignored with the default value of `NULL`.
 #' @param ... Unused   
 #'   
 #'   
@@ -482,7 +481,7 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
 #'
 #' @param object Keras model
 #' @param x Input data (vector, matrix, or array)
-#' @param batch_size Integer
+#' @param batch_size Integer. If unspecified, it will default to 32.
 #' @param verbose Verbosity mode, 0 or 1.
 #' @param ... Unused
 #' 
@@ -518,28 +517,41 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
 #' @inheritParams predict.keras.engine.training.Model
 #' 
 #' @param object Keras model object
-#' 
+#' @param steps Total number of steps (batches of samples) before declaring the
+#'   evaluation round finished. The default `NULL` is equal to the number of 
+#'   samples in your dataset divided by the batch size.
+#'   
 #' @details The input samples are processed batch by batch.
 #' 
 #' @family model functions
 #' 
 #' @export
-predict_proba <- function(object, x, batch_size = 32, verbose = 0) {
-  object$predict_proba(
+predict_proba <- function(object, x, batch_size = NULL, verbose = 0, steps = NULL) {
+  args <- list(
     x = keras_array(x),
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose)
   )
+  
+  if (keras_version() >= "2.1.3")
+    args$steps <- as.integer(steps)
+  
+  do.call(object$predict_proba, args)
 }
 
 #' @rdname predict_proba
 #' @export
-predict_classes <- function(object, x, batch_size = 32, verbose = 0) {
-  object$predict_classes(
+predict_classes <- function(object, x, batch_size = NULL, verbose = 0, steps = NULL) {
+  args <- list(
     x = keras_array(x),
     batch_size = as.integer(batch_size),
     verbose = as.integer(verbose)
   )
+
+  if (keras_version() >= "2.1.3")
+    args$steps <- as.integer(steps)
+  
+  do.call(object$predict_classes, args)
 }
 
 

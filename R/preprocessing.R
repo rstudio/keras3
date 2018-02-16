@@ -234,6 +234,8 @@ text_hashing_trick <- function(text, n,
 #' @param lower boolean. Whether to convert the texts to lowercase.
 #' @param split character or string to use for token splitting.
 #' @param char_level if `TRUE`, every character will be treated as a token
+#' @param oov_token if given, it will be added to word_index and used to
+#'   replace out-of-vocabulary words during text_to_sequence calls.
 #'   
 #' @section Attributes:
 #' The tokenizer object has the following attributes:
@@ -250,14 +252,19 @@ text_hashing_trick <- function(text, n,
 #'   
 #' @export
 text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',
-                           lower = TRUE, split = ' ', char_level = FALSE) {
-  keras$preprocessing$text$Tokenizer(
+                           lower = TRUE, split = ' ', char_level = FALSE, oov_token = NULL) {
+  args <- list(
     num_words = as_nullable_integer(num_words),
     filters = filters,
     lower = lower,
     split = split,
     char_level = char_level
   )
+  
+  if (keras_version() >= "2.1.3")
+    args$oov_token <- as.integer(oov_token)
+  
+  do.call(keras$preprocessing$text$Tokenizer, args)
 }
 
 #' Update tokenizer internal vocabulary based on a list of texts or list of
