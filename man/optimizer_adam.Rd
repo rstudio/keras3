@@ -4,8 +4,9 @@
 \alias{optimizer_adam}
 \title{Adam optimizer}
 \usage{
-optimizer_adam(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL,
-  decay = 0, amsgrad = FALSE, clipnorm = NULL, clipvalue = NULL)
+optimizer_adam(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999,
+  epsilon = k_epsilon(), decay = 0, amsgrad = FALSE, clipnorm = NULL,
+  clipvalue = NULL)
 }
 \arguments{
 \item{lr}{float >= 0. Learning rate.}

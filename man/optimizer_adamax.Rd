@@ -5,7 +5,7 @@
 \title{Adamax optimizer}
 \usage{
 optimizer_adamax(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999,
-  epsilon = NULL, decay = 0, clipnorm = NULL, clipvalue = NULL)
+  epsilon = k_epsilon(), decay = 0, clipnorm = NULL, clipvalue = NULL)
 }
 \arguments{
 \item{lr}{float >= 0. Learning rate.}

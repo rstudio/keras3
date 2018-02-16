@@ -4,8 +4,8 @@
 \alias{optimizer_rmsprop}
 \title{RMSProp optimizer}
 \usage{
-optimizer_rmsprop(lr = 0.001, rho = 0.9, epsilon = NULL, decay = 0,
-  clipnorm = NULL, clipvalue = NULL)
+optimizer_rmsprop(lr = 0.001, rho = 0.9, epsilon = k_epsilon(),
+  decay = 0, clipnorm = NULL, clipvalue = NULL)
 }
 \arguments{
 \item{lr}{float >= 0. Learning rate.}
