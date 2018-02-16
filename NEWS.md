@@ -14,6 +14,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - New layers `layer_activation_softmax()` and `layer_separable_conv_1d()`
 
+- Added `amsgrad` parameter to `optimizer_adam()` 
+
 - Fix incompatibility with Progbar.update() method in Keras 2.1.4
 
 
