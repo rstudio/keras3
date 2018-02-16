@@ -4,8 +4,9 @@
 #' @inheritParams layer_dense
 #'   
 #' @param units Positive integer, dimensionality of the output space.
-#' @param activation Activation function to use. If you pass `NULL`, no
-#'   activation is applied (ie. "linear" activation: `a(x) = x`).
+#' @param activation Activation function to use. Default: hyperbolic tangent 
+#'   (`tanh`). If you pass `NULL`, no activation is applied 
+#'   (ie. "linear" activation: `a(x) = x`).
 #' @param use_bias Boolean, whether the layer uses a bias vector.
 #' @param return_sequences Boolean. Whether to return the last output in the 
 #'   output sequence, or the full sequence.

@@ -132,14 +132,20 @@ optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = NULL, decay = 0.0
 #'   0 < beta < 1. Generally close to 1.
 #' @param beta_2 The exponential decay rate for the 2nd moment estimates. float,
 #'   0 < beta < 1. Generally close to 1.
+#' @param amsgrad Whether to apply the AMSGrad variant of this algorithm from 
+#'   the paper "On the Convergence of Adam and Beyond".
 #'
 #' @note Default parameters follow those provided in the original paper.
+#'
+#' @section References:
+#'   - [Adam - A Method for Stochastic Optimization](http://arxiv.org/abs/1412.6980v8)
+#'   - [On the Convergence of Adam and Beyond](https://openreview.net/forum?id=ryQu7f-RZ)
 #'
 #' @family optimizers
 #'
 #' @export
 optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, decay = 0.0,
-                           clipnorm = NULL, clipvalue = NULL) {
+                           amsgrad = FALSE, clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
@@ -151,6 +157,10 @@ optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = N
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
+  
+  if (keras_version() >= "2.1.3")
+    args$amsgrad <- amsgrad
+  
   do.call(keras$optimizers$Adam, args)
 }
 

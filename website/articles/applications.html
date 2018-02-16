@@ -134,6 +134,8 @@
 <li><a href="https://keras.rstudio.com/reference/application_inception_v3.html">InceptionV3</a></li>
 <li><a href="https://keras.rstudio.com/reference/application_inception_resnet_v2.html">InceptionResNetV2</a></li>
 <li><a href="https://keras.rstudio.com/reference/application_mobilenet.html">MobileNet</a></li>
+<li><a href="https://keras.rstudio.com/reference/application_densenet.html">DenseNet</a></li>
+<li><a href="https://keras.rstudio.com/reference/application_nasnet.html">NASNet</a></li>
 </ul>
 <p>All of these architectures (except Xception and MobileNet) are compatible with both TensorFlow and Theano, and upon instantiation the models will be built according to the image data format set in your Keras configuration file at <code>~/.keras/keras.json</code>. For instance, if you have set <code>image_data_format=channels_last</code>, then any model loaded from this repository will get built according to the TensorFlow data format convention, “Width-Height-Depth”.</p>
 <p>The Xception model is only available for TensorFlow, due to its reliance on <code>SeparableConvolution</code> layers. The MobileNet model is only available for TensorFlow, due to its reliance on <code>DepthwiseConvolution</code> layers.</p>

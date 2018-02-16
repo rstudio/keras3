@@ -49,7 +49,7 @@ build_generator <- function(latent_size){
     )
   
   
-  # This is the z space commonly refered to in GAN papers
+  # This is the z space commonly referred to in GAN papers
   latent <- layer_input(shape = list(latent_size))
   
   # This will be our label

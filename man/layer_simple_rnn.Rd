@@ -20,8 +20,9 @@ layer_simple_rnn(object, units, activation = "tanh", use_bias = TRUE,
 
 \item{units}{Positive integer, dimensionality of the output space.}
 
-\item{activation}{Activation function to use. If you pass \code{NULL}, no
-activation is applied (ie. "linear" activation: \code{a(x) = x}).}
+\item{activation}{Activation function to use. Default: hyperbolic tangent
+(\code{tanh}). If you pass \code{NULL}, no activation is applied
+(ie. "linear" activation: \code{a(x) = x}).}
 
 \item{use_bias}{Boolean, whether the layer uses a bias vector.}
 

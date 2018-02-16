@@ -149,7 +149,7 @@ count, based on tf-idf...</p>
 
     <pre class="usage"><span class='fu'>text_tokenizer</span>(<span class='kw'>num_words</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>filters</span> <span class='kw'>=</span> <span class='st'>"!\"#$%&amp;()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~\t\n"</span>, <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>" "</span>, <span class='kw'>char_level</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>" "</span>, <span class='kw'>char_level</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>oov_token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -176,6 +176,11 @@ breaks, minus the ' character.</p></td>
     <tr>
       <th>char_level</th>
       <td><p>if <code>TRUE</code>, every character will be treated as a token</p></td>
+    </tr>
+    <tr>
+      <th>oov_token</th>
+      <td><p><code>NULL</code> or string If given, it will be added to `word_index``
+and used to replace out-of-vocabulary words during text_to_sequence calls.</p></td>
     </tr>
     </table>
     

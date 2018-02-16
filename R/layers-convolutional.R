@@ -12,7 +12,7 @@
 #' @inheritParams layer_dense
 #'   
 #' @param filters Integer, the dimensionality of the output space (i.e. the 
-#'   number output of filters in the convolution).
+#'   number of output filters in the convolution).
 #' @param kernel_size An integer or list of a single integer, specifying the
 #'   length of the 1D convolution window.
 #' @param strides An integer or list of a single integer, specifying the stride
@@ -99,7 +99,7 @@ layer_conv_1d <- function(object, filters, kernel_size, strides = 1L, padding = 
 #' @inheritParams layer_conv_1d  
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number output of filters in the convolution).
+#'   number of output filters in the convolution).
 #' @param kernel_size An integer or list of 2 integers, specifying the width and
 #'   height of the 2D convolution window. Can be a single integer to specify the
 #'   same value for all spatial dimensions.
@@ -182,7 +182,7 @@ layer_conv_2d <- function(object, filters, kernel_size, strides = c(1L, 1L), pad
 #' @inheritParams layer_conv_2d  
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number output of filters in the convolution).
+#'   number of output filters in the convolution).
 #' @param kernel_size An integer or list of 3 integers, specifying the depth,
 #'   height, and width of the 3D convolution window. Can be a single integer 
 #'   to specify the same value for all spatial dimensions.
@@ -430,7 +430,7 @@ layer_conv_3d_transpose <- function(object, filters, kernel_size, strides = c(1,
 #' @inheritParams layer_conv_2d
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number output of filters in the convolution).
+#'   number of output filters in the convolution).
 #' @param kernel_size An integer or list of 2 integers, specifying the width and
 #'   height of the 2D convolution window. Can be a single integer to specify the
 #'   same value for all spatial dimensions.
@@ -517,7 +517,7 @@ layer_separable_conv_2d <- function(object, filters, kernel_size, strides = c(1L
 #' @inheritParams layer_conv_2d
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number output of filters in the convolution).
+#'   number of output filters in the convolution).
 #' @param kernel_size An integer or list of 2 integers, specifying the width and
 #'   height of the 2D convolution window. Can be a single integer to specify the
 #'   same value for all spatial dimensions.
@@ -949,7 +949,7 @@ layer_cropping_3d <- function(object, cropping = list(c(1L, 1L), c(1L, 1L), c(1L
 #' @inheritParams layer_conv_2d
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number output of filters in the convolution).
+#'   number of output filters in the convolution).
 #' @param kernel_size An integer or list of n integers, specifying the
 #'   dimensions of the convolution window.
 #' @param strides An integer or list of n integers, specifying the strides of
