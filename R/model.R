@@ -536,7 +536,7 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
 predict_proba <- function(object, x, batch_size = NULL, verbose = 0, steps = NULL) {
   args <- list(
     x = keras_array(x),
-    batch_size = as.integer(batch_size),
+    batch_size = as_nullable_integer(batch_size),
     verbose = as.integer(verbose)
   )
   
