@@ -50,7 +50,7 @@ optimizer_sgd <- function(lr = 0.01, momentum = 0.0, decay = 0.0, nesterov = FAL
 #' @family optimizers  
 #' 
 #' @export
-optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = NULL, decay = 0.0,
+optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = k_epsilon(), decay = 0.0,
                               clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
@@ -80,7 +80,7 @@ optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = NULL, decay = 0.0
 #' @family optimizers
 #'
 #' @export
-optimizer_adagrad <- function(lr = 0.01, epsilon = NULL, decay = 0.0,
+optimizer_adagrad <- function(lr = 0.01, epsilon = k_epsilon(), decay = 0.0,
                               clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
@@ -107,7 +107,7 @@ optimizer_adagrad <- function(lr = 0.01, epsilon = NULL, decay = 0.0,
 #' @family optimizers
 #'
 #' @export
-optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = NULL, decay = 0.0,
+optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = k_epsilon(), decay = 0.0,
                                clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
@@ -144,7 +144,7 @@ optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = NULL, decay = 0.0
 #' @family optimizers
 #'
 #' @export
-optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, decay = 0.0,
+optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = k_epsilon(), decay = 0.0,
                            amsgrad = FALSE, clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
@@ -174,7 +174,7 @@ optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = N
 #' @family optimizers  
 #' 
 #' @export
-optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, decay = 0.0,
+optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = k_epsilon(), decay = 0.0,
                              clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
@@ -208,7 +208,7 @@ optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon =
 #' @family optimizers
 #'
 #' @export
-optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, 
+optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = k_epsilon(), 
                             schedule_decay = 0.004, clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
