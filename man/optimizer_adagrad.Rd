@@ -4,13 +4,13 @@
 \alias{optimizer_adagrad}
 \title{Adagrad optimizer.}
 \usage{
-optimizer_adagrad(lr = 0.01, epsilon = 1e-08, decay = 0,
-  clipnorm = NULL, clipvalue = NULL)
+optimizer_adagrad(lr = 0.01, epsilon = NULL, decay = 0, clipnorm = NULL,
+  clipvalue = NULL)
 }
 \arguments{
 \item{lr}{float >= 0. Learning rate.}
 
-\item{epsilon}{float >= 0. Fuzz factor.}
+\item{epsilon}{float >= 0. Fuzz factor. If \code{NULL}, defaults to \code{k_epsilon()}.}
 
 \item{decay}{float >= 0. Learning rate decay over each update.}
 

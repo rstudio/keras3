@@ -541,7 +541,7 @@ predict_proba <- function(object, x, batch_size = NULL, verbose = 0, steps = NUL
   )
   
   if (keras_version() >= "2.1.3")
-    args$steps <- as.integer(steps)
+    args$steps <- as_nullable_integer(steps)
   
   do.call(object$predict_proba, args)
 }
@@ -556,7 +556,7 @@ predict_classes <- function(object, x, batch_size = NULL, verbose = 0, steps = N
   )
 
   if (keras_version() >= "2.1.3")
-    args$steps <- as.integer(steps)
+    args$steps <- as_nullable_integer(steps)
   
   do.call(object$predict_classes, args)
 }

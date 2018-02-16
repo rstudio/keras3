@@ -5,18 +5,22 @@
 \alias{predict_classes}
 \title{Generates probability or class probability predictions for the input samples.}
 \usage{
-predict_proba(object, x, batch_size = 32, verbose = 0)
+predict_proba(object, x, batch_size = NULL, verbose = 0, steps = NULL)
 
-predict_classes(object, x, batch_size = 32, verbose = 0)
+predict_classes(object, x, batch_size = NULL, verbose = 0, steps = NULL)
 }
 \arguments{
 \item{object}{Keras model object}
 
 \item{x}{Input data (vector, matrix, or array)}
 
-\item{batch_size}{Integer}
+\item{batch_size}{Integer. If unspecified, it will default to 32.}
 
 \item{verbose}{Verbosity mode, 0 or 1.}
+
+\item{steps}{Total number of steps (batches of samples) before declaring the
+evaluation round finished. The default \code{NULL} is equal to the number of
+samples in your dataset divided by the batch size.}
 }
 \description{
 Generates probability or class probability predictions for the input samples.

@@ -20,10 +20,10 @@ layer_cudnn_lstm(object, units, kernel_initializer = "glorot_uniform",
 \item{units}{Positive integer, dimensionality of the output space.}
 
 \item{kernel_initializer}{Initializer for the \code{kernel} weights matrix, used
-for the linear transformation of the inputs..}
+for the linear transformation of the inputs.}
 
 \item{recurrent_initializer}{Initializer for the \code{recurrent_kernel} weights
-matrix, used for the linear transformation of the recurrent state..}
+matrix, used for the linear transformation of the recurrent state.}
 
 \item{bias_initializer}{Initializer for the bias vector.}
 
