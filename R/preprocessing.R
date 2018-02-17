@@ -261,7 +261,7 @@ text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\
     char_level = char_level
   )
   
-  if (keras_version() >= "2.1.4")
+  if (keras_version() >= "2.1.3")
     args$oov_token <- oov_token
   
   do.call(keras$preprocessing$text$Tokenizer, args)

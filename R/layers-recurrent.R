@@ -22,9 +22,9 @@
 #'   it tends to be more memory-intensive. Unrolling is only suitable for short 
 #'   sequences.
 #' @param kernel_initializer Initializer for the `kernel` weights matrix, used 
-#'   for the linear transformation of the inputs..
+#'   for the linear transformation of the inputs.
 #' @param recurrent_initializer Initializer for the `recurrent_kernel` weights 
-#'   matrix, used for the linear transformation of the recurrent state..
+#'   matrix, used for the linear transformation of the recurrent state.
 #' @param bias_initializer Initializer for the bias vector.
 #' @param kernel_regularizer Regularizer function applied to the `kernel` 
 #'   weights matrix.

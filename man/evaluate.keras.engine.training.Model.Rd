@@ -35,8 +35,7 @@ sample. In this case you should make sure to specify
 \code{sample_weight_mode="temporal"} in \code{\link[=compile]{compile()}}.}
 
 \item{steps}{Total number of steps (batches of samples) before declaring the
-evaluation round finished. The default \code{NULL} is equal to the number of
-samples in your dataset divided by the batch size.}
+evaluation round finished. Ignored with the default value of \code{NULL}.}
 
 \item{...}{Unused}
 }

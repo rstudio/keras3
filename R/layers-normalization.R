@@ -10,7 +10,7 @@
 #' @param axis Integer, the axis that should be normalized (typically the
 #'   features axis). For instance, after a `Conv2D` layer with
 #'   `data_format="channels_first"`, set `axis=1` in `BatchNormalization`.
-#' @param momentum Momentum for the moving average.
+#' @param momentum Momentum for the moving mean and the moving variance.
 #' @param epsilon Small float added to variance to avoid dividing by zero.
 #' @param center If TRUE, add offset of `beta` to normalized tensor. If FALSE,
 #'   `beta` is ignored.

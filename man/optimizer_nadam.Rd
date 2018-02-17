@@ -5,7 +5,7 @@
 \title{Nesterov Adam optimizer}
 \usage{
 optimizer_nadam(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999,
-  epsilon = 1e-08, schedule_decay = 0.004, clipnorm = NULL,
+  epsilon = NULL, schedule_decay = 0.004, clipnorm = NULL,
   clipvalue = NULL)
 }
 \arguments{
@@ -17,7 +17,7 @@ optimizer_nadam(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999,
 \item{beta_2}{The exponential decay rate for the 2nd moment estimates. float,
 0 < beta < 1. Generally close to 1.}
 
-\item{epsilon}{float >= 0. Fuzz factor.}
+\item{epsilon}{float >= 0. Fuzz factor. If \code{NULL}, defaults to \code{k_epsilon()}.}
 
 \item{schedule_decay}{Schedule deacy.}
 

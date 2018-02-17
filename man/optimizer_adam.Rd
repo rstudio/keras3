@@ -4,9 +4,8 @@
 \alias{optimizer_adam}
 \title{Adam optimizer}
 \usage{
-optimizer_adam(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999,
-  epsilon = 1e-08, decay = 0, amsgrad = FALSE, clipnorm = NULL,
-  clipvalue = NULL)
+optimizer_adam(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL,
+  decay = 0, amsgrad = FALSE, clipnorm = NULL, clipvalue = NULL)
 }
 \arguments{
 \item{lr}{float >= 0. Learning rate.}
@@ -17,7 +16,7 @@ optimizer_adam(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 \item{beta_2}{The exponential decay rate for the 2nd moment estimates. float,
 0 < beta < 1. Generally close to 1.}
 
-\item{epsilon}{float >= 0. Fuzz factor.}
+\item{epsilon}{float >= 0. Fuzz factor. If \code{NULL}, defaults to \code{k_epsilon()}.}
 
 \item{decay}{float >= 0. Learning rate decay over each update.}
 
