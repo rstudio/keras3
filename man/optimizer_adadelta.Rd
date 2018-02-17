@@ -4,7 +4,7 @@
 \alias{optimizer_adadelta}
 \title{Adadelta optimizer.}
 \usage{
-optimizer_adadelta(lr = 1, rho = 0.95, epsilon = k_epsilon(), decay = 0,
+optimizer_adadelta(lr = 1, rho = 0.95, epsilon = NULL, decay = 0,
   clipnorm = NULL, clipvalue = NULL)
 }
 \arguments{

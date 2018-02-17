@@ -5,7 +5,7 @@
 \title{Nesterov Adam optimizer}
 \usage{
 optimizer_nadam(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999,
-  epsilon = k_epsilon(), schedule_decay = 0.004, clipnorm = NULL,
+  epsilon = NULL, schedule_decay = 0.004, clipnorm = NULL,
   clipvalue = NULL)
 }
 \arguments{

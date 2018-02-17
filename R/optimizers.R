@@ -50,14 +50,14 @@ optimizer_sgd <- function(lr = 0.01, momentum = 0.0, decay = 0.0, nesterov = FAL
 #' @family optimizers  
 #' 
 #' @export
-optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = k_epsilon(), decay = 0.0,
+optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = NULL, decay = 0.0,
                               clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
     lr = lr,
     rho = rho,
-    epsilon = epsilon,
+    epsilon = resolve_epsilon(epsilon),
     decay = decay
   )
   args$clipnorm <- clipnorm
@@ -80,13 +80,13 @@ optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = k_epsilon(), deca
 #' @family optimizers
 #'
 #' @export
-optimizer_adagrad <- function(lr = 0.01, epsilon = k_epsilon(), decay = 0.0,
+optimizer_adagrad <- function(lr = 0.01, epsilon = NULL, decay = 0.0,
                               clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
     lr = lr,
-    epsilon = epsilon,
+    epsilon = resolve_epsilon(epsilon),
     decay = decay
   )
   args$clipnorm <- clipnorm
@@ -107,14 +107,14 @@ optimizer_adagrad <- function(lr = 0.01, epsilon = k_epsilon(), decay = 0.0,
 #' @family optimizers
 #'
 #' @export
-optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = k_epsilon(), decay = 0.0,
+optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = NULL, decay = 0.0,
                                clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
     lr = lr,
     rho = rho,
-    epsilon = epsilon,
+    epsilon = resolve_epsilon(epsilon),
     decay = decay
   )
   args$clipnorm <- clipnorm
@@ -144,7 +144,7 @@ optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = k_epsilon(), deca
 #' @family optimizers
 #'
 #' @export
-optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = k_epsilon(), decay = 0.0,
+optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, decay = 0.0,
                            amsgrad = FALSE, clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
@@ -152,7 +152,7 @@ optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = k
     lr = lr,
     beta_1 = beta_1,
     beta_2 = beta_2,
-    epsilon = epsilon,
+    epsilon = resolve_epsilon(epsilon),
     decay = decay
   )
   args$clipnorm <- clipnorm
@@ -174,7 +174,7 @@ optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = k
 #' @family optimizers  
 #' 
 #' @export
-optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = k_epsilon(), decay = 0.0,
+optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, decay = 0.0,
                              clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
@@ -182,7 +182,7 @@ optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon =
     lr = lr,
     beta_1 = beta_1,
     beta_2 = beta_2,
-    epsilon = epsilon,
+    epsilon = resolve_epsilon(epsilon),
     decay = decay
   )
   args$clipnorm <- clipnorm
@@ -208,7 +208,7 @@ optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon =
 #' @family optimizers
 #'
 #' @export
-optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = k_epsilon(), 
+optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, 
                             schedule_decay = 0.004, clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
@@ -216,7 +216,7 @@ optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = 
     lr = lr,
     beta_1 = beta_1,
     beta_2 = beta_2,
-    epsilon = epsilon,
+    epsilon = resolve_epsilon(epsilon),
     schedule_decay = schedule_decay
   )
   args$clipnorm <- clipnorm
@@ -224,3 +224,9 @@ optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = 
   do.call(keras$optimizers$Nadam, args)
 }
 
+resolve_epsilon <- function(epsilon) {
+  if (is.null(epsilon) && keras_version() < "2.1.3")
+    k_epsilon()
+  else 
+    epsilon
+}

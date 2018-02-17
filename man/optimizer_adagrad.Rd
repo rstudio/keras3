@@ -4,8 +4,8 @@
 \alias{optimizer_adagrad}
 \title{Adagrad optimizer.}
 \usage{
-optimizer_adagrad(lr = 0.01, epsilon = k_epsilon(), decay = 0,
-  clipnorm = NULL, clipvalue = NULL)
+optimizer_adagrad(lr = 0.01, epsilon = NULL, decay = 0, clipnorm = NULL,
+  clipvalue = NULL)
 }
 \arguments{
 \item{lr}{float >= 0. Learning rate.}
