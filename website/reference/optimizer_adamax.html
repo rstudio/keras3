@@ -146,7 +146,7 @@ It is a variant of Adam based on the infinity norm.</p>
     
 
     <pre class="usage"><span class='fu'>optimizer_adamax</span>(<span class='kw'>lr</span> <span class='kw'>=</span> <span class='fl'>0.002</span>, <span class='kw'>beta_1</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>beta_2</span> <span class='kw'>=</span> <span class='fl'>0.999</span>,
-  <span class='kw'>epsilon</span> <span class='kw'>=</span> <span class='fl'>1e-08</span>, <span class='kw'>decay</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>clipnorm</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>clipvalue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>epsilon</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>decay</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>clipnorm</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>clipvalue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -167,7 +167,7 @@ It is a variant of Adam based on the infinity norm.</p>
     </tr>
     <tr>
       <th>epsilon</th>
-      <td><p>float &gt;= 0. Fuzz factor.</p></td>
+      <td><p>float &gt;= 0. Fuzz factor. If <code>NULL</code>, defaults to <code><a href='k_epsilon.html'>k_epsilon()</a></code>.</p></td>
     </tr>
     <tr>
       <th>decay</th>

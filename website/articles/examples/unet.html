@@ -492,8 +492,8 @@ train_generator &lt;-<span class="st"> </span><span class="cf">function</span>(i
         
         y_batch &lt;-<span class="st"> </span><span class="kw">do.call</span>(abind, <span class="kw">c</span>(x_y_batch<span class="op">$</span>y, <span class="kw">list</span>(<span class="dt">along =</span> <span class="dv">1</span>)))
         
-        result &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">to_numpy_array</span>(x_batch), 
-                       <span class="kw">to_numpy_array</span>(y_batch))
+        result &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw"><a href="../../reference/keras_array.html">keras_array</a></span>(x_batch), 
+                       <span class="kw"><a href="../../reference/keras_array.html">keras_array</a></span>(y_batch))
         <span class="kw">return</span>(result)
     }
 }
@@ -547,8 +547,8 @@ val_generator &lt;-<span class="st"> </span><span class="cf">function</span>(ima
         
         y_batch &lt;-<span class="st"> </span><span class="kw">do.call</span>(abind, <span class="kw">c</span>(x_y_batch<span class="op">$</span>y, <span class="kw">list</span>(<span class="dt">along =</span> <span class="dv">1</span>)))
         
-        result &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">to_numpy_array</span>(x_batch), 
-                       <span class="kw">to_numpy_array</span>(y_batch))
+        result &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw"><a href="../../reference/keras_array.html">keras_array</a></span>(x_batch), 
+                       <span class="kw"><a href="../../reference/keras_array.html">keras_array</a></span>(y_batch))
         <span class="kw">return</span>(result)
     }
 }
