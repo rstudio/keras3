@@ -10,7 +10,8 @@ optimizer_sgd(lr = 0.01, momentum = 0, decay = 0, nesterov = FALSE,
 \arguments{
 \item{lr}{float >= 0. Learning rate.}
 
-\item{momentum}{float >= 0. Parameter updates momentum.}
+\item{momentum}{float >= 0. Parameter that accelerates SGD in the relevant
+direction and dampens oscillations.}
 
 \item{decay}{float >= 0. Learning rate decay over each update.}
 

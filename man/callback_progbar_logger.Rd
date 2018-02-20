@@ -4,11 +4,16 @@
 \alias{callback_progbar_logger}
 \title{Callback that prints metrics to stdout.}
 \usage{
-callback_progbar_logger(count_mode = "samples")
+callback_progbar_logger(count_mode = "samples", stateful_metrics = NULL)
 }
 \arguments{
 \item{count_mode}{One of "steps" or "samples". Whether the progress bar
 should count samples seens or steps (batches) seen.}
+
+\item{stateful_metrics}{List of metric names that should \emph{not}
+be averaged onver an epoch. Metrics in this list will be logged
+as-is in \code{on_epoch_end}. All others will be averaged in
+\code{on_epoch_end}.}
 }
 \description{
 Callback that prints metrics to stdout.

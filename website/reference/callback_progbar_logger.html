@@ -102,6 +102,12 @@
   </ul>
 </li>
 <li>
+  <a href="../articles/learn.html">Learn</a>
+</li>
+<li>
+  <a href="../articles/tools.html">Tools</a>
+</li>
+<li>
   <a href="../articles/examples/index.html">Examples</a>
 </li>
 <li>
@@ -138,7 +144,7 @@
     <p>Callback that prints metrics to stdout.</p>
     
 
-    <pre class="usage"><span class='fu'>callback_progbar_logger</span>(<span class='kw'>count_mode</span> <span class='kw'>=</span> <span class='st'>"samples"</span>)</pre>
+    <pre class="usage"><span class='fu'>callback_progbar_logger</span>(<span class='kw'>count_mode</span> <span class='kw'>=</span> <span class='st'>"samples"</span>, <span class='kw'>stateful_metrics</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -147,6 +153,13 @@
       <th>count_mode</th>
       <td><p>One of "steps" or "samples". Whether the progress bar
 should count samples seens or steps (batches) seen.</p></td>
+    </tr>
+    <tr>
+      <th>stateful_metrics</th>
+      <td><p>List of metric names that should <em>not</em>
+be averaged onver an epoch. Metrics in this list will be logged
+as-is in <code>on_epoch_end</code>. All others will be averaged in
+<code>on_epoch_end</code>.</p></td>
     </tr>
     </table>
     

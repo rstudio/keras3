@@ -12,7 +12,7 @@
 #'   inputs have shape `(batch_size, timesteps, features)` and you want the
 #'   dropout mask to be the same for all timesteps, you can use
 #'   `noise_shape=c(batch_size, 1, features)`.
-#' @param seed A Python integer to use as random seed.
+#' @param seed integer to use as random seed.
 #'
 #' @family core layers
 #' @family dropout layers   

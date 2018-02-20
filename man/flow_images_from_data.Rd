@@ -24,7 +24,7 @@ data.}
 \item{seed}{int (default: \code{NULL}).}
 
 \item{save_to_dir}{\code{NULL} or str (default: \code{NULL}). This allows you to
-optimally specify a directory to which to save the augmented pictures being
+optionally specify a directory to which to save the augmented pictures being
 generated (useful for visualizing what you are doing).}
 
 \item{save_prefix}{str (default: ''). Prefix to use for filenames of saved

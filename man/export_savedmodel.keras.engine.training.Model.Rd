@@ -5,7 +5,8 @@
 \title{Export a Saved Model}
 \usage{
 \method{export_savedmodel}{keras.engine.training.Model}(object, export_dir_base,
-  overwrite = TRUE, versioned = !overwrite, as_text = FALSE, ...)
+  overwrite = TRUE, versioned = !overwrite, remove_learning_phase = TRUE,
+  as_text = FALSE, ...)
 }
 \arguments{
 \item{object}{An \R object.}
@@ -17,6 +18,9 @@ SavedModel.}
 
 \item{versioned}{Should the model be exported under a versioned subdirectory?}
 
+\item{remove_learning_phase}{Should the learning phase be removed by saving
+and reloading the model? Defaults to \code{TRUE}.}
+  
 \item{as_text}{Whether to write the SavedModel in text format.}
 
 \item{...}{Unused}

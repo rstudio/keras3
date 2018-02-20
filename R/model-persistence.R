@@ -80,6 +80,11 @@ load_model_hdf5 <- function(filepath, custom_objects = NULL, compile = TRUE) {
 #' @param overwrite Whether to silently overwrite any existing
 #'   file at the target location
 #' @param by_name Whether to load weights by name or by topological order.
+#' @param skip_mismatch Logical, whether to skip loading of layers
+#'   where there is a mismatch in the number of weights, or a mismatch in the
+#'   shape of the weight (only valid when `by_name = FALSE`).
+#' @param reshape Reshape weights to fit the layer when the correct number
+#'   of values are present but the shape does not match.
 #' 
 #' @details The weight file has:
 #'   - `layer_names` (attribute), a list of strings (ordered names of model layers).
@@ -119,10 +124,24 @@ save_model_weights_hdf5 <- function(object, filepath, overwrite = TRUE) {
 
 #' @rdname save_model_weights_hdf5
 #' @export
-load_model_weights_hdf5 <- function(object, filepath, by_name = FALSE) {
+load_model_weights_hdf5 <- function(object, filepath, by_name = FALSE,
+                                    skip_mismatch = FALSE, reshape = FALSE) {
   if (!have_h5py())
     stop("The h5py Python package is required to save and load model weights")
-  object$load_weights(filepath = normalize_path(filepath), by_name = by_name)
+  
+  args <- list(
+    filepath = normalize_path(filepath), 
+    by_name = by_name
+  )
+  
+  if (keras_version() >= "2.1.3")
+    args$skip_mismatch <- skip_mismatch
+  
+  if (keras_version() >= "2.1.4")
+    args$reshape <- reshape
+  
+  do.call(object$load_weights, args)
+  
   invisible(object)
 }
 
@@ -254,6 +273,8 @@ reload_model <- function(object) {
 #'   SavedModel.
 #' @param overwrite Should the \code{export_dir_base} directory be overwritten?
 #' @param versioned Should the model be exported under a versioned subdirectory?
+#' @param remove_learning_phase Should the learning phase be removed by saving
+#'   and reloading the model? Defaults to \code{TRUE}.
 #' @param as_text Whether to write the SavedModel in text format.
 #' @param ... Unused
 #' 
@@ -265,6 +286,7 @@ export_savedmodel.keras.engine.training.Model <- function(
   export_dir_base,
   overwrite = TRUE,
   versioned = !overwrite,
+  remove_learning_phase = TRUE,
   as_text = FALSE,
   ...) {
   if (!is_backend("tensorflow"))
@@ -279,7 +301,7 @@ export_savedmodel.keras.engine.training.Model <- function(
       "'export_savedmodel()' is currently unsupported under the TensorFlow Keras ",
       "implementation, consider using 'tfestimators::keras_model_to_estimator()'."
     )
-  } else {
+  } else if (identical(remove_learning_phase, TRUE)) {
     k_set_learning_phase(0)
     message("Keras learning phase set to 0 for export (restart R session before doing additional training)")
     object <- reload_model(object)

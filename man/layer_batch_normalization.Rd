@@ -20,7 +20,7 @@ layer_batch_normalization(object, axis = -1L, momentum = 0.99,
 features axis). For instance, after a \code{Conv2D} layer with
 \code{data_format="channels_first"}, set \code{axis=1} in \code{BatchNormalization}.}
 
-\item{momentum}{Momentum for the moving average.}
+\item{momentum}{Momentum for the moving mean and the moving variance.}
 
 \item{epsilon}{Small float added to variance to avoid dividing by zero.}
 

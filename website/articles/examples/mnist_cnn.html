@@ -80,6 +80,12 @@
   </ul>
 </li>
 <li>
+  <a href="../../articles/learn.html">Learn</a>
+</li>
+<li>
+  <a href="../../articles/tools.html">Tools</a>
+</li>
+<li>
   <a href="../../articles/examples/index.html">Examples</a>
 </li>
 <li>
@@ -158,8 +164,8 @@ y_test &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/t
 
 <span class="co"># Define Model -----------------------------------------------------------</span>
 
-model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
-model <span class="op">%&gt;%</span>
+<span class="co"># Define model</span>
+model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>,
                 <span class="dt">input_shape =</span> input_shape) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>), <span class="dt">activation =</span> <span class="st">'relu'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -177,15 +183,17 @@ model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a
   <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
 )
 
-<span class="co"># Train &amp; Evaluate -------------------------------------------------------</span>
-
+<span class="co"># Train model</span>
 model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>(
   x_train, y_train,
   <span class="dt">batch_size =</span> batch_size,
   <span class="dt">epochs =</span> epochs,
-  <span class="dt">verbose =</span> <span class="dv">1</span>,
-  <span class="dt">validation_data =</span> <span class="kw">list</span>(x_test, y_test)
+  <span class="dt">validation_split =</span> <span class="fl">0.2</span>
 )
+
+
+
+
 scores &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(
   x_test, y_test, <span class="dt">verbose =</span> <span class="dv">0</span>
 )

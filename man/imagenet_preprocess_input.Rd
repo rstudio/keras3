@@ -2,14 +2,14 @@
 % Please edit documentation in R/applications.R
 \name{imagenet_preprocess_input}
 \alias{imagenet_preprocess_input}
-\title{Preprocesses a tensor encoding a batch of images.}
+\title{Preprocesses a tensor or array encoding a batch of images.}
 \usage{
 imagenet_preprocess_input(x, data_format = NULL, mode = "caffe")
 }
 \arguments{
-\item{x}{input tensor, 3D or 4D}
+\item{x}{Input Numpy or symbolic tensor, 3D or 4D.}
 
-\item{data_format}{Data format of the image tensor}
+\item{data_format}{Data format of the image tensor/array.}
 
 \item{mode}{One of "caffe", "tf"
 \itemize{
@@ -21,8 +21,8 @@ without scaling.
 }}
 }
 \value{
-Preprocessed tensor
+Preprocessed tensor or array.
 }
 \description{
-Preprocesses a tensor encoding a batch of images.
+Preprocesses a tensor or array encoding a batch of images.
 }

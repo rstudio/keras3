@@ -4,8 +4,8 @@
 \alias{optimizer_adam}
 \title{Adam optimizer}
 \usage{
-optimizer_adam(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999,
-  epsilon = 1e-08, decay = 0, clipnorm = NULL, clipvalue = NULL)
+optimizer_adam(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL,
+  decay = 0, amsgrad = FALSE, clipnorm = NULL, clipvalue = NULL)
 }
 \arguments{
 \item{lr}{float >= 0. Learning rate.}
@@ -16,9 +16,12 @@ optimizer_adam(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 \item{beta_2}{The exponential decay rate for the 2nd moment estimates. float,
 0 < beta < 1. Generally close to 1.}
 
-\item{epsilon}{float >= 0. Fuzz factor.}
+\item{epsilon}{float >= 0. Fuzz factor. If \code{NULL}, defaults to \code{k_epsilon()}.}
 
 \item{decay}{float >= 0. Learning rate decay over each update.}
+
+\item{amsgrad}{Whether to apply the AMSGrad variant of this algorithm from
+the paper "On the Convergence of Adam and Beyond".}
 
 \item{clipnorm}{Gradients will be clipped when their L2 norm exceeds this
 value.}
@@ -32,6 +35,14 @@ Adam optimizer as described in \href{https://arxiv.org/abs/1412.6980v8}{Adam - A
 \note{
 Default parameters follow those provided in the original paper.
 }
+\section{References}{
+
+\itemize{
+\item \href{http://arxiv.org/abs/1412.6980v8}{Adam - A Method for Stochastic Optimization}
+\item \href{https://openreview.net/forum?id=ryQu7f-RZ}{On the Convergence of Adam and Beyond}
+}
+}
+
 \seealso{
 Other optimizers: \code{\link{optimizer_adadelta}},
   \code{\link{optimizer_adagrad}},

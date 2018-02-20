@@ -234,6 +234,8 @@ text_hashing_trick <- function(text, n,
 #' @param lower boolean. Whether to convert the texts to lowercase.
 #' @param split character or string to use for token splitting.
 #' @param char_level if `TRUE`, every character will be treated as a token
+#' @param oov_token `NULL` or string If given, it will be added to `word_index``
+#'  and used to replace out-of-vocabulary words during text_to_sequence calls.
 #'   
 #' @section Attributes:
 #' The tokenizer object has the following attributes:
@@ -250,14 +252,19 @@ text_hashing_trick <- function(text, n,
 #'   
 #' @export
 text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',
-                           lower = TRUE, split = ' ', char_level = FALSE) {
-  keras$preprocessing$text$Tokenizer(
+                           lower = TRUE, split = ' ', char_level = FALSE, oov_token = NULL) {
+  args <- list(
     num_words = as_nullable_integer(num_words),
     filters = filters,
     lower = lower,
     split = split,
     char_level = char_level
   )
+  
+  if (keras_version() >= "2.1.3")
+    args$oov_token <- oov_token
+  
+  do.call(keras$preprocessing$text$Tokenizer, args)
 }
 
 #' Update tokenizer internal vocabulary based on a list of texts or list of
@@ -672,7 +679,7 @@ fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, see
 #' @param shuffle boolean (defaut: `TRUE`).
 #' @param seed int (default: `NULL`).
 #' @param save_to_dir `NULL` or str (default: `NULL`). This allows you to 
-#'   optimally specify a directory to which to save the augmented pictures being
+#'   optionally specify a directory to which to save the augmented pictures being
 #'   generated (useful for visualizing what you are doing).
 #' @param save_prefix str (default: ''). Prefix to use for filenames of saved 
 #'   pictures (only relevant if `save_to_dir` is set).
@@ -712,9 +719,9 @@ flow_images_from_data <- function(
 #' @param generator Image data generator (default generator does no data
 #'   augmentation/normalization transformations)
 #' @param directory path to the target directory. It should contain one
-#'   subdirectory per class. Any PNG, JPG or BMP images inside each of the
-#'   subdirectories directory tree will be included in the generator. See [this
-#'   script](https://gist.github.com/fchollet/0830affa1f7f19fd47b06d4cf89ed44d)
+#'   subdirectory per class. Any PNG, JPG, BMP, PPM, or TIF images inside each
+#'   of the subdirectories directory tree will be included in the generator.
+#'   See [this script](https://gist.github.com/fchollet/0830affa1f7f19fd47b06d4cf89ed44d)
 #'   for more details.
 #' @param target_size integer vectir, default: `c(256, 256)`. The dimensions to
 #'   which all images found will be resized.
@@ -722,14 +729,15 @@ flow_images_from_data <- function(
 #'   images will be converted to have 1 or 3 color channels.
 #' @param classes optional list of class subdirectories (e.g. `c('dogs',
 #'   'cats')`). Default: `NULL`, If not provided, the list of classes will be
-#'   automatically inferred (and the order of the classes, which will map to the
-#'   label indices, will be alphanumeric).
+#'   automatically inferred (and the order of the classes, which will map to
+#'   the label indices, will be alphanumeric).
 #' @param class_mode one of "categorical", "binary", "sparse" or `NULL`.
 #'   Default: "categorical". Determines the type of label arrays that are
-#'   returned: "categorical" will be 2D one-hot encoded labels, "binary" will be
-#'   1D binary labels, "sparse" will be 1D integer labels. If `NULL`, no labels
-#'   are returned (the generator will only yield batches of image data, which is
-#'   useful to use [predict_generator()], [evaluate_generator()], etc.).
+#'   returned: "categorical" will be 2D one-hot encoded labels, "binary" will
+#'   be 1D binary labels, "sparse" will be 1D integer labels. If `NULL`, no
+#'   labels are returned (the generator will only yield batches of image data,
+#'   which is useful to use [predict_generator()], [evaluate_generator()],
+#'   etc.).
 #' @param follow_links whether to follow symlinks inside class subdirectories
 #'   (default: `FALSE`)
 #'

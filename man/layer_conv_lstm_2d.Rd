@@ -21,7 +21,7 @@ layer_conv_lstm_2d(object, filters, kernel_size, strides = c(1L, 1L),
 \item{object}{Model or layer object}
 
 \item{filters}{Integer, the dimensionality of the output space (i.e. the
-number output of filters in the convolution).}
+number of output filters in the convolution).}
 
 \item{kernel_size}{An integer or list of n integers, specifying the
 dimensions of the convolution window.}
@@ -146,6 +146,7 @@ Other convolutional layers: \code{\link{layer_conv_1d}},
   \code{\link{layer_cropping_1d}},
   \code{\link{layer_cropping_2d}},
   \code{\link{layer_cropping_3d}},
+  \code{\link{layer_separable_conv_1d}},
   \code{\link{layer_separable_conv_2d}},
   \code{\link{layer_upsampling_1d}},
   \code{\link{layer_upsampling_2d}},

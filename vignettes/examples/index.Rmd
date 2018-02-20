@@ -26,6 +26,7 @@ title: "Keras Examples"
 | [mnist_tfrecord](mnist_tfrecord.html) | MNIST dataset with TFRecords, the standard TensorFlow data format. |
 | [mnist_transfer_cnn](mnist_transfer_cnn.html) | Transfer learning toy example. |
 | [neural_style_transfer](neural_style_transfer.html) | Neural style transfer (generating an image with the same “content” as a base image, but with the “style” of a different picture). |
+| [quora_siamese_lstm](quora_siamese_lstm.html) | Classifying duplicate quesitons from Quora using Siamese Recurrent Architecture. | 
 | [reuters_mlp](reuters_mlp.html) | Trains and evaluatea a simple MLP on the Reuters newswire topic classification task. |
 | [stateful_lstm](stateful_lstm.html) | Demonstrates how to use stateful RNNs to model long sequences efficiently. |
 | [variational_autoencoder](variational_autoencoder.html) | Demonstrates how to build a variational autoencoder. |

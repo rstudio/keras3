@@ -12,7 +12,7 @@
 #' @inheritParams layer_dense
 #'   
 #' @param filters Integer, the dimensionality of the output space (i.e. the 
-#'   number output of filters in the convolution).
+#'   number of output filters in the convolution).
 #' @param kernel_size An integer or list of a single integer, specifying the
 #'   length of the 1D convolution window.
 #' @param strides An integer or list of a single integer, specifying the stride
@@ -99,7 +99,7 @@ layer_conv_1d <- function(object, filters, kernel_size, strides = 1L, padding = 
 #' @inheritParams layer_conv_1d  
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number output of filters in the convolution).
+#'   number of output filters in the convolution).
 #' @param kernel_size An integer or list of 2 integers, specifying the width and
 #'   height of the 2D convolution window. Can be a single integer to specify the
 #'   same value for all spatial dimensions.
@@ -182,7 +182,7 @@ layer_conv_2d <- function(object, filters, kernel_size, strides = c(1L, 1L), pad
 #' @inheritParams layer_conv_2d  
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number output of filters in the convolution).
+#'   number of output filters in the convolution).
 #' @param kernel_size An integer or list of 3 integers, specifying the depth,
 #'   height, and width of the 3D convolution window. Can be a single integer 
 #'   to specify the same value for all spatial dimensions.
@@ -430,7 +430,7 @@ layer_conv_3d_transpose <- function(object, filters, kernel_size, strides = c(1,
 #' @inheritParams layer_conv_2d
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number output of filters in the convolution).
+#'   number of output filters in the convolution).
 #' @param kernel_size An integer or list of 2 integers, specifying the width and
 #'   height of the 2D convolution window. Can be a single integer to specify the
 #'   same value for all spatial dimensions.
@@ -474,6 +474,93 @@ layer_separable_conv_2d <- function(object, filters, kernel_size, strides = c(1L
                                     name = NULL, trainable = NULL, weights = NULL) {
   
   create_layer(keras$layers$SeparableConv2D, object, list(
+    filters = as.integer(filters),
+    kernel_size = as_integer_tuple(kernel_size),
+    strides = as_integer_tuple(strides),
+    padding = padding,
+    data_format = data_format,
+    depth_multiplier = as.integer(depth_multiplier),
+    activation = activation,
+    use_bias = use_bias,
+    depthwise_initializer = depthwise_initializer,
+    pointwise_initializer = pointwise_initializer,
+    bias_initializer = bias_initializer,
+    depthwise_regularizer = depthwise_regularizer,
+    pointwise_regularizer = pointwise_regularizer,
+    bias_regularizer = bias_regularizer,
+    activity_regularizer = activity_regularizer,
+    depthwise_constraint = depthwise_constraint,
+    pointwise_constraint = pointwise_constraint,
+    bias_constraint = bias_constraint,
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
+  ))
+  
+}
+
+
+#' Depthwise separable 1D convolution.
+#' 
+#' Separable convolutions consist in first performing a depthwise spatial
+#' convolution (which acts on each input channel separately) followed by a
+#' pointwise convolution which mixes together the resulting output channels. The
+#' `depth_multiplier` argument controls how many output channels are generated
+#' per input channel in the depthwise step. Intuitively, separable convolutions
+#' can be understood as a way to factorize a convolution kernel into two smaller
+#' kernels, or as an extreme version of an Inception block.
+#' 
+#' @inheritParams layer_conv_2d
+#' 
+#' @param filters Integer, the dimensionality of the output space (i.e. the
+#'   number of output filters in the convolution).
+#' @param kernel_size An integer or list of 2 integers, specifying the width and
+#'   height of the 2D convolution window. Can be a single integer to specify the
+#'   same value for all spatial dimensions.
+#' @param strides An integer or list of 2 integers, specifying the strides of
+#'   the convolution along the width and height. Can be a single integer to
+#'   specify the same value for all spatial dimensions. Specifying any stride
+#'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
+#' @param padding one of `"valid"` or `"same"` (case-insensitive).
+#' @param depth_multiplier The number of depthwise convolution output channels
+#'   for each input channel. The total number of depthwise convolution output
+#'   channels will be equal to `filterss_in * depth_multiplier`.
+#' @param depthwise_initializer Initializer for the depthwise kernel matrix.
+#' @param pointwise_initializer Initializer for the pointwise kernel matrix.
+#' @param depthwise_regularizer Regularizer function applied to the depthwise
+#'   kernel matrix.
+#' @param pointwise_regularizer Regularizer function applied to the pointwise
+#'   kernel matrix.
+#' @param depthwise_constraint Constraint function applied to the depthwise
+#'   kernel matrix.
+#' @param pointwise_constraint Constraint function applied to the pointwise
+#'   kernel matrix.
+#'   
+#' @section Input shape: 3D tensor with shape: `(batch, channels, steps)`
+#'   if data_format='channels_first' or 3D tensor with shape: `(batch, steps, channels)`
+#'   if data_format='channels_last'.
+#'   
+#' @section Output shape: 3D tensor with shape: `(batch, filters, new_steps)`
+#'   if data_format='channels_first' or 3D tensor with shape:
+#'   `(batch, new_steps, filters)` if data_format='channels_last'.
+#'   `new_steps` values might have changed due to padding or strides.
+#'   
+#' @family convolutional layers 
+#'   
+#' @export
+layer_separable_conv_1d <- function(object, filters, kernel_size, strides = 1, padding = "valid", data_format = NULL, 
+                                    depth_multiplier = 1, activation = NULL, use_bias = TRUE, 
+                                    depthwise_initializer = "glorot_uniform", pointwise_initializer = "glorot_uniform", bias_initializer = "zeros", 
+                                    depthwise_regularizer = NULL, pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
+                                    depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
+                                    batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                                    name = NULL, trainable = NULL, weights = NULL) {
+  
+  create_layer(keras$layers$SeparableConv1D, object, list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -862,7 +949,7 @@ layer_cropping_3d <- function(object, cropping = list(c(1L, 1L), c(1L, 1L), c(1L
 #' @inheritParams layer_conv_2d
 #' 
 #' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number output of filters in the convolution).
+#'   number of output filters in the convolution).
 #' @param kernel_size An integer or list of n integers, specifying the
 #'   dimensions of the convolution window.
 #' @param strides An integer or list of n integers, specifying the strides of
@@ -1009,6 +1096,3 @@ normalize_scale <- function(name, scale, dims) {
     throw_invalid_scale()
   }
 }
-
-
-

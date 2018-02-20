@@ -12,6 +12,10 @@
 ^issues$
 ^external$
 ^vignettes/examples$
+^vignettes/learn\.Rmd$
+^vignettes/tools\.Rmd$
+^vignettes/images/resources-.*$
+^vignettes/images/tools-.*$
 ^_pkgdown\.yml$
 ^index\.Rmd$
 ^index\.html$

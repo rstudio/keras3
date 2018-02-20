@@ -20,7 +20,7 @@ def apply_patch():
     # force dynamic display
     self._dynamic_display = True
     # delegate 
-    update(self, current, values, force)
+    update(self, current, values)
     
   # apply the patch
   Progbar.update = update_with_patch

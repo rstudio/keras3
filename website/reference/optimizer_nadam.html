@@ -102,6 +102,12 @@
   </ul>
 </li>
 <li>
+  <a href="../articles/learn.html">Learn</a>
+</li>
+<li>
+  <a href="../articles/tools.html">Tools</a>
+</li>
+<li>
   <a href="../articles/examples/index.html">Examples</a>
 </li>
 <li>
@@ -136,11 +142,11 @@
 
     
     <p>Much like Adam is essentially RMSprop with momentum, Nadam is Adam RMSprop
-with Nesterov momentum. See <a href='http://cs229.stanford.edu/proj2015/054_report.pdf'>Incorporating Nesterov Momentum intoAdam</a>.</p>
+with Nesterov momentum.</p>
     
 
     <pre class="usage"><span class='fu'>optimizer_nadam</span>(<span class='kw'>lr</span> <span class='kw'>=</span> <span class='fl'>0.002</span>, <span class='kw'>beta_1</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>beta_2</span> <span class='kw'>=</span> <span class='fl'>0.999</span>,
-  <span class='kw'>epsilon</span> <span class='kw'>=</span> <span class='fl'>1e-08</span>, <span class='kw'>schedule_decay</span> <span class='kw'>=</span> <span class='fl'>0.004</span>, <span class='kw'>clipnorm</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>epsilon</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>schedule_decay</span> <span class='kw'>=</span> <span class='fl'>0.004</span>, <span class='kw'>clipnorm</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>clipvalue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -162,7 +168,7 @@ with Nesterov momentum. See <a href='http://cs229.stanford.edu/proj2015/054_repo
     </tr>
     <tr>
       <th>epsilon</th>
-      <td><p>float &gt;= 0. Fuzz factor.</p></td>
+      <td><p>float &gt;= 0. Fuzz factor. If <code>NULL</code>, defaults to <code><a href='k_epsilon.html'>k_epsilon()</a></code>.</p></td>
     </tr>
     <tr>
       <th>schedule_decay</th>

@@ -1,7 +1,25 @@
 
-## Keras 2.1.3 (Development)
+## Keras 2.1.4 (development)
 
 Install the development version with: `install_github("rstudio/keras")`
+
+- Added support for `remove_learning_phase` in `export_savedmodel()` to avoid
+  removing learning phase.
+  
+- Normalize validation data to Keras array in `fit()` and `fit_generator()`
+
+- Ensure that custom layers return a tuple from `compute_output_shape()`
+
+- Added Nasnet and Densenet pre-trained models
+
+- New layers `layer_activation_softmax()` and `layer_separable_conv_1d()`
+
+- Added `amsgrad` parameter to `optimizer_adam()` 
+
+- Fix incompatibility with Progbar.update() method in Keras 2.1.4
+
+
+## Keras 2.1.3 (CRAN)
 
 - Models saved via `export_savedmodel()` that make use of learning phases can
   now be exported without having to manually reload the original model.
@@ -15,7 +33,7 @@ Install the development version with: `install_github("rstudio/keras")`
 - Various fixes for `use_implementation()` function
 
 
-## Keras 2.1.2 (CRAN)
+## Keras 2.1.2 
 
 - Added `theme_bw` option to plot method for training history 
 

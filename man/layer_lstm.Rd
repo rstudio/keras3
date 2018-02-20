@@ -22,8 +22,9 @@ layer_lstm(object, units, activation = "tanh",
 
 \item{units}{Positive integer, dimensionality of the output space.}
 
-\item{activation}{Activation function to use. If you pass \code{NULL}, no
-activation is applied (ie. "linear" activation: \code{a(x) = x}).}
+\item{activation}{Activation function to use. Default: hyperbolic tangent
+(\code{tanh}). If you pass \code{NULL}, no activation is applied
+(ie. "linear" activation: \code{a(x) = x}).}
 
 \item{recurrent_activation}{Activation function to use for the recurrent
 step.}
@@ -49,10 +50,10 @@ it tends to be more memory-intensive. Unrolling is only suitable for short
 sequences.}
 
 \item{kernel_initializer}{Initializer for the \code{kernel} weights matrix, used
-for the linear transformation of the inputs..}
+for the linear transformation of the inputs.}
 
 \item{recurrent_initializer}{Initializer for the \code{recurrent_kernel} weights
-matrix, used for the linear transformation of the recurrent state..}
+matrix, used for the linear transformation of the recurrent state.}
 
 \item{bias_initializer}{Initializer for the bias vector.}
 
@@ -108,7 +109,7 @@ isn't provided.}
 \item{weights}{Initial weights for layer.}
 }
 \description{
-For a step-by-step description of the algorithm, see \href{http://deeplearning.net/tutorial/lstm.html}{thistutorial}.
+For a step-by-step description of the algorithm, see \href{http://deeplearning.net/tutorial/lstm.html}{this tutorial}.
 }
 \section{Input shapes}{
 

@@ -80,6 +80,12 @@
   </ul>
 </li>
 <li>
+  <a href="../../articles/learn.html">Learn</a>
+</li>
+<li>
+  <a href="../../articles/tools.html">Tools</a>
+</li>
+<li>
   <a href="../../articles/examples/index.html">Examples</a>
 </li>
 <li>
@@ -233,11 +239,14 @@ loss &lt;-<span class="st"> </span>loss <span class="op">+</span><span class="st
 <span class="st">  </span><span class="kw">prod</span>(img_size)
 
 <span class="co"># Add image L2 norm to loss (prevents pixels from taking very high values, makes image darker)</span>
-  <span class="co"># Note that the loss can be further modified to achieve new effects</span>
+<span class="co"># Note that the loss can be further modified to achieve new effects</span>
 loss &lt;-<span class="st"> </span>loss <span class="op">+</span><span class="st"> </span>settings<span class="op">$</span>dream_l2<span class="op">*</span><span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(dream))<span class="op">/</span><span class="kw">prod</span>(img_size)
 
 <span class="co"># Compute the gradients of the dream wrt the loss</span>
 grads &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_gradients.html">k_gradients</a></span>(loss, dream)[[<span class="dv">1</span>]] 
+
+<span class="co"># Normalize gradients.</span>
+grads &lt;-<span class="st"> </span>grads <span class="op">/</span><span class="st"> </span><span class="kw"><a href="../../reference/k_maximum.html">k_maximum</a></span>(<span class="kw"><a href="../../reference/k_mean.html">k_mean</a></span>(<span class="kw"><a href="../../reference/k_abs.html">k_abs</a></span>(grads)), <span class="kw"><a href="../../reference/k_epsilon.html">k_epsilon</a></span>())
 
 f_outputs &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_function.html">k_function</a></span>(<span class="kw">list</span>(dream), <span class="kw">list</span>(loss,grads))
 

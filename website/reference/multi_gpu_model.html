@@ -102,6 +102,12 @@
   </ul>
 </li>
 <li>
+  <a href="../articles/learn.html">Learn</a>
+</li>
+<li>
+  <a href="../articles/tools.html">Tools</a>
+</li>
+<li>
   <a href="../articles/examples/index.html">Examples</a>
 </li>
 <li>
@@ -138,7 +144,7 @@
     <p>Replicates a model on different GPUs.</p>
     
 
-    <pre class="usage"><span class='fu'>multi_gpu_model</span>(<span class='no'>model</span>, <span class='no'>gpus</span>)</pre>
+    <pre class="usage"><span class='fu'>multi_gpu_model</span>(<span class='no'>model</span>, <span class='kw'>gpus</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -151,8 +157,9 @@ this model could have been built on CPU, for instance
     </tr>
     <tr>
       <th>gpus</th>
-      <td><p>Integer &gt;= 2 or list of integers, number of GPUs or
-list of GPU IDs on which to create model replicas.</p></td>
+      <td><p><code>NULL</code> to use all available GPUs (default). Integer &gt;= 2 or
+list of integers, number of GPUs or list of GPU IDs on which to create
+model replicas.</p></td>
     </tr>
     </table>
     

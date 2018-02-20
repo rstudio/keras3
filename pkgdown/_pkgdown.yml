@@ -37,6 +37,10 @@ navbar:
           href: articles/backend.html
         - text: "Custom Layers"
           href: articles/custom_layers.html
+    - text: Learn
+      href: articles/learn.html
+    - text: Tools
+      href: articles/tools.html
     - text: Examples
       href: articles/examples/index.html
     - text: "Reference"
@@ -204,6 +208,8 @@ reference:
       - application_vgg
       - application_resnet50
       - application_mobilenet
+      - application_densenet
+      - application_nasnet
       - imagenet_preprocess_input
       - imagenet_decode_predictions
       - mobilenet_preprocess_input

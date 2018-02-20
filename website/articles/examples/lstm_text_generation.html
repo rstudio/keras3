@@ -80,6 +80,12 @@
   </ul>
 </li>
 <li>
+  <a href="../../articles/learn.html">Learn</a>
+</li>
+<li>
+  <a href="../../articles/tools.html">Tools</a>
+</li>
+<li>
   <a href="../../articles/examples/index.html">Examples</a>
 </li>
 <li>
@@ -117,6 +123,8 @@
 <div class="source-ref">
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/lstm_text_generation.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/lstm_text_generation.R</a></p>
 </div>
+<pre><code>## Warning in readLines(input): incomplete final line found on
+## 'lstm_text_generation.R'</code></pre>
 <p>Example script to generate text from Nietzsche’s writings.</p>
 <p>At least 20 epochs are required before the generated text starts sounding coherent.</p>
 <p>It is recommended to run this script on GPU, as recurrent networks are quite computationally intensive.</p>
@@ -162,12 +170,12 @@ dataset &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocu
 dataset &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(dataset)
 
 <span class="co"># Vectorization</span>
-X &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">length</span>(dataset<span class="op">$</span>sentece), maxlen, <span class="kw">length</span>(chars)))
+x &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">length</span>(dataset<span class="op">$</span>sentece), maxlen, <span class="kw">length</span>(chars)))
 y &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">length</span>(dataset<span class="op">$</span>sentece), <span class="kw">length</span>(chars)))
 
 <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(dataset<span class="op">$</span>sentece)){
   
-  X[i,,] &lt;-<span class="st"> </span><span class="kw">sapply</span>(chars, <span class="cf">function</span>(x){
+  x[i,,] &lt;-<span class="st"> </span><span class="kw">sapply</span>(chars, <span class="cf">function</span>(x){
     <span class="kw">as.integer</span>(x <span class="op">==</span><span class="st"> </span>dataset<span class="op">$</span>sentece[[i]])
   })
   
@@ -203,15 +211,9 @@ sample_mod &lt;-<span class="st"> </span><span class="cf">function</span>(preds,
 <span class="st">    </span><span class="kw">which.max</span>()
 }
 
-<span class="cf">for</span>(iteration <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">60</span>){
+on_epoch_end &lt;-<span class="st"> </span><span class="cf">function</span>(epoch, logs) {
   
-  <span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">"iteration: %02d ---------------</span><span class="ch">\n\n</span><span class="st">"</span>, iteration))
-  
-  model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>(
-    X, y,
-    <span class="dt">batch_size =</span> <span class="dv">128</span>,
-    <span class="dt">epochs =</span> <span class="dv">1</span>
-  )
+  <span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">"epoch: %02d ---------------</span><span class="ch">\n\n</span><span class="st">"</span>, epoch))
   
   <span class="cf">for</span>(diversity <span class="cf">in</span> <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.2</span>)){
     
@@ -241,7 +243,16 @@ sample_mod &lt;-<span class="st"> </span><span class="cf">function</span>(preds,
     <span class="kw">cat</span>(<span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>)
     
   }
-}</code></pre></div>
+}
+
+print_callback &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/callback_lambda.html">callback_lambda</a></span>(<span class="dt">on_epoch_end =</span> on_epoch_end)
+
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>(
+  x, y,
+  <span class="dt">batch_size =</span> <span class="dv">128</span>,
+  <span class="dt">epochs =</span> <span class="dv">1</span>,
+  <span class="dt">callbacks =</span> print_callback
+)</code></pre></div>
 </div>
   </div>
 

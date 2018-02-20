@@ -44,8 +44,8 @@ y_test <- to_categorical(y_test, num_classes)
 
 # Define Model -----------------------------------------------------------
 
-model <- keras_model_sequential()
-model %>%
+# Define model
+model <- keras_model_sequential() %>%
   layer_conv_2d(filters = 32, kernel_size = c(3,3), activation = 'relu',
                 input_shape = input_shape) %>% 
   layer_conv_2d(filters = 64, kernel_size = c(3,3), activation = 'relu') %>% 
@@ -63,15 +63,17 @@ model %>% compile(
   metrics = c('accuracy')
 )
 
-# Train & Evaluate -------------------------------------------------------
-
+# Train model
 model %>% fit(
   x_train, y_train,
   batch_size = batch_size,
   epochs = epochs,
-  verbose = 1,
-  validation_data = list(x_test, y_test)
+  validation_split = 0.2
 )
+
+
+
+
 scores <- model %>% evaluate(
   x_test, y_test, verbose = 0
 )

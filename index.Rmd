@@ -65,7 +65,7 @@ This will provide you with default CPU-based installations of Keras and TensorFl
 
 Below we walk through a simple example of using Keras to recognize handwritten digits from the [MNIST](https://en.wikipedia.org/wiki/MNIST_database) dataset. After getting familiar with the basics, check out the additional [learning resources](#learning-more) available on this website.
 
-The [Deep Learning with R](https://www.manning.com/books/deep-learning-with-r) book by François Chollet (the creator of Keras) provides a more comprehensive introduction to both Keras and the concepts and practice of deep learning.
+The [Deep Learning with R](https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X) book by François Chollet (the creator of Keras) provides a more comprehensive introduction to both Keras and the concepts and practice of deep learning.
 
 You may also find it convenient to download the [Deep Learning with Keras](https://github.com/rstudio/cheatsheets/raw/master/keras.pdf){target="_self"} cheat sheet, a quick high-level reference to all of the capabilities of Keras.
 
@@ -230,12 +230,12 @@ The [examples](articles/examples/index.html) demonstrate more advanced models in
 
 The [function reference](reference/index.html) includes detailed information on all of the functions available in the package.
 
-[![](https://images.manning.com/720/960/resize/book/7/9e4c694-85cf-4063-9fad-eab693da11ff/Allaire-DLwithR-MEAP-HI.png){width=125 align=right style="margin-left:10px; margin-right: 20px; margin-top: 15px; border: solid 1px #cccccc;"}](https://www.manning.com/books/deep-learning-with-r)
+[![](https://images.manning.com/720/960/resize/book/a/4e5e97f-4e8d-4d97-a715-f6c2b0eb95f5/Allaire-DLwithR-HI.png){width=125 align=right style="margin-left:10px; margin-right: 20px; margin-top: 15px; border: solid 1px #cccccc;"}](https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X)
 
 
 ### Deep Learning with R Book
 
-If you want a more comprehensive introduction to both Keras and the concepts and practice of deep learning, we recommend the [Deep Learning with R](https://www.manning.com/books/deep-learning-with-r) book from Manning. This book is a collaboration between François Chollet, the creator of Keras, and J.J. Allaire, who wrote the R interface to Keras.
+If you want a more comprehensive introduction to both Keras and the concepts and practice of deep learning, we recommend the [Deep Learning with R](https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X) book from Manning. This book is a collaboration between François Chollet, the creator of Keras, and J.J. Allaire, who wrote the R interface to Keras.
 
 The book presumes no significant knowledge of machine learning and deep learning, and goes all the way from basic theory to advanced practical applications, all using the R interface to Keras. 
 

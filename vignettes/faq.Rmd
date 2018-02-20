@@ -484,6 +484,9 @@ Code and pre-trained weights are available for the following image classificatio
 - [InceptionV3](https://keras.rstudio.com/reference/application_inception_v3.html)
 - [InceptionResNetV2](https://keras.rstudio.com/reference/application_inception_resnet_v2.html)
 - [MobileNet](https://keras.rstudio.com/reference/application_mobilenet.html)
+- [DenseNet](https://keras.rstudio.com/reference/application_densenet.html)
+- [NASNet](https://keras.rstudio.com/reference/application_nasnet.html)
+
 
 For example:
 

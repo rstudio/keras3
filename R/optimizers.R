@@ -6,7 +6,8 @@
 #' rate decay, and Nesterov momentum.
 #' 
 #' @param lr float >= 0. Learning rate.
-#' @param momentum float >= 0. Parameter updates momentum.
+#' @param momentum float >= 0. Parameter that accelerates SGD in the relevant 
+#'   direction and dampens oscillations.
 #' @param decay float >= 0. Learning rate decay over each update.
 #' @param nesterov boolean. Whether to apply Nesterov momentum.
 #' @param clipnorm Gradients will be clipped when their L2 norm exceeds this
@@ -39,7 +40,7 @@ optimizer_sgd <- function(lr = 0.01, momentum = 0.0, decay = 0.0, nesterov = FAL
 #' 
 #' @inheritParams optimizer_sgd
 #' @param rho float >= 0. Decay factor.
-#' @param epsilon float >= 0. Fuzz factor. 
+#' @param epsilon float >= 0. Fuzz factor. If `NULL`, defaults to `k_epsilon()`.
 #' 
 #' @note It is recommended to leave the parameters of this optimizer at their
 #' default values (except the learning rate, which can be freely tuned).
@@ -49,14 +50,14 @@ optimizer_sgd <- function(lr = 0.01, momentum = 0.0, decay = 0.0, nesterov = FAL
 #' @family optimizers  
 #' 
 #' @export
-optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = 1e-08, decay = 0.0,
+optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = NULL, decay = 0.0,
                               clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
     lr = lr,
     rho = rho,
-    epsilon = epsilon,
+    epsilon = resolve_epsilon(epsilon),
     decay = decay
   )
   args$clipnorm <- clipnorm
@@ -79,13 +80,13 @@ optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = 1e-08, decay = 0.
 #' @family optimizers
 #'
 #' @export
-optimizer_adagrad <- function(lr = 0.01, epsilon = 1e-08, decay = 0.0,
+optimizer_adagrad <- function(lr = 0.01, epsilon = NULL, decay = 0.0,
                               clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
     lr = lr,
-    epsilon = epsilon,
+    epsilon = resolve_epsilon(epsilon),
     decay = decay
   )
   args$clipnorm <- clipnorm
@@ -106,14 +107,14 @@ optimizer_adagrad <- function(lr = 0.01, epsilon = 1e-08, decay = 0.0,
 #' @family optimizers
 #'
 #' @export
-optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = 1e-08, decay = 0.0,
+optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = NULL, decay = 0.0,
                                clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
     lr = lr,
     rho = rho,
-    epsilon = epsilon,
+    epsilon = resolve_epsilon(epsilon),
     decay = decay
   )
   args$clipnorm <- clipnorm
@@ -131,25 +132,35 @@ optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = 1e-08, decay = 0.
 #'   0 < beta < 1. Generally close to 1.
 #' @param beta_2 The exponential decay rate for the 2nd moment estimates. float,
 #'   0 < beta < 1. Generally close to 1.
+#' @param amsgrad Whether to apply the AMSGrad variant of this algorithm from 
+#'   the paper "On the Convergence of Adam and Beyond".
 #'
 #' @note Default parameters follow those provided in the original paper.
+#'
+#' @section References:
+#'   - [Adam - A Method for Stochastic Optimization](http://arxiv.org/abs/1412.6980v8)
+#'   - [On the Convergence of Adam and Beyond](https://openreview.net/forum?id=ryQu7f-RZ)
 #'
 #' @family optimizers
 #'
 #' @export
-optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, decay = 0.0,
-                           clipnorm = NULL, clipvalue = NULL) {
+optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, decay = 0.0,
+                           amsgrad = FALSE, clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
     lr = lr,
     beta_1 = beta_1,
     beta_2 = beta_2,
-    epsilon = epsilon,
+    epsilon = resolve_epsilon(epsilon),
     decay = decay
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
+  
+  if (keras_version() >= "2.1.3")
+    args$amsgrad <- amsgrad
+  
   do.call(keras$optimizers$Adam, args)
 }
 
@@ -163,7 +174,7 @@ optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1
 #' @family optimizers  
 #' 
 #' @export
-optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, decay = 0.0,
+optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, decay = 0.0,
                              clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
@@ -171,7 +182,7 @@ optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon =
     lr = lr,
     beta_1 = beta_1,
     beta_2 = beta_2,
-    epsilon = epsilon,
+    epsilon = resolve_epsilon(epsilon),
     decay = decay
   )
   args$clipnorm <- clipnorm
@@ -182,8 +193,7 @@ optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon =
 #' Nesterov Adam optimizer
 #'
 #' Much like Adam is essentially RMSprop with momentum, Nadam is Adam RMSprop
-#' with Nesterov momentum. See [Incorporating Nesterov Momentum into
-#' Adam](http://cs229.stanford.edu/proj2015/054_report.pdf).
+#' with Nesterov momentum.
 #'
 #' @inheritParams optimizer_adam
 #' @param schedule_decay Schedule deacy.
@@ -198,7 +208,7 @@ optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon =
 #' @family optimizers
 #'
 #' @export
-optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, 
+optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, 
                             schedule_decay = 0.004, clipnorm = NULL, clipvalue = NULL) {
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
@@ -206,7 +216,7 @@ optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = 
     lr = lr,
     beta_1 = beta_1,
     beta_2 = beta_2,
-    epsilon = epsilon,
+    epsilon = resolve_epsilon(epsilon),
     schedule_decay = schedule_decay
   )
   args$clipnorm <- clipnorm
@@ -214,3 +224,9 @@ optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = 
   do.call(keras$optimizers$Nadam, args)
 }
 
+resolve_epsilon <- function(epsilon) {
+  if (is.null(epsilon) && keras_version() < "2.1.3")
+    k_epsilon()
+  else 
+    epsilon
+}

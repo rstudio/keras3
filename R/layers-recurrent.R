@@ -4,8 +4,9 @@
 #' @inheritParams layer_dense
 #'   
 #' @param units Positive integer, dimensionality of the output space.
-#' @param activation Activation function to use. If you pass `NULL`, no
-#'   activation is applied (ie. "linear" activation: `a(x) = x`).
+#' @param activation Activation function to use. Default: hyperbolic tangent 
+#'   (`tanh`). If you pass `NULL`, no activation is applied 
+#'   (ie. "linear" activation: `a(x) = x`).
 #' @param use_bias Boolean, whether the layer uses a bias vector.
 #' @param return_sequences Boolean. Whether to return the last output in the 
 #'   output sequence, or the full sequence.
@@ -21,9 +22,9 @@
 #'   it tends to be more memory-intensive. Unrolling is only suitable for short 
 #'   sequences.
 #' @param kernel_initializer Initializer for the `kernel` weights matrix, used 
-#'   for the linear transformation of the inputs..
+#'   for the linear transformation of the inputs.
 #' @param recurrent_initializer Initializer for the `recurrent_kernel` weights 
-#'   matrix, used for the linear transformation of the recurrent state..
+#'   matrix, used for the linear transformation of the recurrent state.
 #' @param bias_initializer Initializer for the bias vector.
 #' @param kernel_regularizer Regularizer function applied to the `kernel` 
 #'   weights matrix.
@@ -214,8 +215,7 @@ layer_cudnn_gru <- function(object, units,
 
 #' Long-Short Term Memory unit - Hochreiter 1997.
 #' 
-#' For a step-by-step description of the algorithm, see [this
-#' tutorial](http://deeplearning.net/tutorial/lstm.html).
+#' For a step-by-step description of the algorithm, see [this tutorial](http://deeplearning.net/tutorial/lstm.html).
 #' 
 #' @inheritParams layer_gru
 #' 

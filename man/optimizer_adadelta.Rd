@@ -4,7 +4,7 @@
 \alias{optimizer_adadelta}
 \title{Adadelta optimizer.}
 \usage{
-optimizer_adadelta(lr = 1, rho = 0.95, epsilon = 1e-08, decay = 0,
+optimizer_adadelta(lr = 1, rho = 0.95, epsilon = NULL, decay = 0,
   clipnorm = NULL, clipvalue = NULL)
 }
 \arguments{
@@ -12,7 +12,7 @@ optimizer_adadelta(lr = 1, rho = 0.95, epsilon = 1e-08, decay = 0,
 
 \item{rho}{float >= 0. Decay factor.}
 
-\item{epsilon}{float >= 0. Fuzz factor.}
+\item{epsilon}{float >= 0. Fuzz factor. If \code{NULL}, defaults to \code{k_epsilon()}.}
 
 \item{decay}{float >= 0. Learning rate decay over each update.}
 

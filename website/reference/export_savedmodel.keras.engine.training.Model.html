@@ -102,6 +102,12 @@
   </ul>
 </li>
 <li>
+  <a href="../articles/learn.html">Learn</a>
+</li>
+<li>
+  <a href="../articles/tools.html">Tools</a>
+</li>
+<li>
   <a href="../articles/examples/index.html">Examples</a>
 </li>
 <li>
@@ -140,6 +146,7 @@
 
     <pre class="usage"><span class='co'># S3 method for keras.engine.training.Model</span>
 <span class='fu'><a href='http://www.rdocumentation.org/packages/tensorflow/topics/export_savedmodel'>export_savedmodel</a></span>(<span class='no'>object</span>, <span class='no'>export_dir_base</span>,
+  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>versioned</span> <span class='kw'>=</span> !<span class='no'>overwrite</span>, <span class='kw'>remove_learning_phase</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -151,8 +158,21 @@
     </tr>
     <tr>
       <th>export_dir_base</th>
-      <td><p>A string containing a directory in which to create
-versioned subdirectories containing exported SavedModels.</p></td>
+      <td><p>A string containing a directory in which to export the
+SavedModel.</p></td>
+    </tr>
+    <tr>
+      <th>overwrite</th>
+      <td><p>Should the <code>export_dir_base</code> directory be overwritten?</p></td>
+    </tr>
+    <tr>
+      <th>versioned</th>
+      <td><p>Should the model be exported under a versioned subdirectory?</p></td>
+    </tr>
+    <tr>
+      <th>remove_learning_phase</th>
+      <td><p>Should the learning phase be removed by saving
+and reloading the model? Defaults to <code>TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>

@@ -288,10 +288,10 @@ imagenet_decode_predictions <- function(preds, top = 5) {
 }
 
 
-#' Preprocesses a tensor encoding a batch of images.
+#' Preprocesses a tensor or array encoding a batch of images.
 #' 
-#' @param x input tensor, 3D or 4D
-#' @param data_format Data format of the image tensor
+#' @param x Input Numpy or symbolic tensor, 3D or 4D.
+#' @param data_format Data format of the image tensor/array.
 #' @param mode One of "caffe", "tf"
 #'   - caffe: will convert the images from RGB to BGR,
 #'     then will zero-center each color channel with
@@ -299,7 +299,7 @@ imagenet_decode_predictions <- function(preds, top = 5) {
 #'     without scaling.
 #'   - tf: will scale pixels between -1 and 1, sample-wise.
 #' 
-#' @return Preprocessed tensor
+#' @return Preprocessed tensor or array.
 #' 
 #' @export
 imagenet_preprocess_input <- function(x, data_format = NULL, mode = "caffe") {
@@ -347,7 +347,7 @@ imagenet_preprocess_input <- function(x, data_format = NULL, mode = "caffe") {
 #'   the network.
 #' @param weights `NULL` (random initialization), `imagenet` (ImageNet
 #'   weights), or the path to the weights file to be loaded.
-#' @param input_tensor optional Keras tensor (i.e. output of `layers.Input()`)
+#' @param input_tensor optional Keras tensor (i.e. output of `layer_input()`)
 #'   to use as image input for the model.
 #' @param pooling Optional pooling mode for feature extraction when
 #'   `include_top` is `FALSE`. 
@@ -411,11 +411,225 @@ mobilenet_load_model_hdf5 <- function(filepath) {
   ))
 }
 
+#' Instantiates the DenseNet architecture.
+#' 
+#' @details 
+#' 
+#' Optionally loads weights pre-trained
+#' on ImageNet. Note that when using TensorFlow,
+#' for best performance you should set
+#' `image_data_format='channels_last'` in your Keras config
+#' at ~/.keras/keras.json.
+#' 
+#' The model and the weights are compatible with
+#' TensorFlow, Theano, and CNTK. The data format
+#' convention used by the model is the one
+#' specified in your Keras config file.
+#' 
+#' @param blocks numbers of building blocks for the four dense layers.
+#' @param include_top whether to include the fully-connected layer at the top 
+#'   of the network.
+#' @param weights one of `NULL` (random initialization), 'imagenet' 
+#'   (pre-training on ImageNet), or the path to the weights file to be loaded.
+#' @param input_tensor optional Keras tensor (i.e. output of `layer_input()`)
+#'   to use as image input for the model.
+#' @param input_shape optional shape list, only to be specified if `include_top`
+#'   is FALSE (otherwise the input shape has to be `(224, 224, 3)` 
+#'   (with `channels_last` data format) or `(3, 224, 224)` (with 
+#'   `channels_first` data format). It should have exactly 3 inputs channels.
+#' @param pooling optional pooling mode for feature extraction when
+#'   `include_top` is `FALSE`.
+#'      - `NULL` means that the output of the model will be the 4D tensor output 
+#'        of the last convolutional layer. 
+#'     - `avg` means that global average pooling will be applied to the output 
+#'        of the last convolutional layer, and thus the output of the model
+#'        will be a 2D tensor.
+#'     - `max` means that global max pooling will be applied.
+#' @param classes optional number of classes to classify images into, only to be 
+#'   specified if `include_top` is TRUE, and if no `weights` argument is 
+#'   specified.
+#' @param data_format data format of the image tensor.
+#' @param x a 3D or 4D array consists of RGB values within `[0, 255]`.
+#' 
+#' @export
+application_densenet <- function(blocks, include_top = TRUE, weights = "imagenet", 
+                                 input_tensor = NULL, input_shape = NULL, 
+                                 pooling = NULL, classes = 1000) {
+  
+  keras$applications$densenet$DenseNet(
+    blocks = as.integer(blocks),
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = as_nullable_integer(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+  
+}
+
+#' @rdname application_densenet   
+#' @export
+application_densenet121 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
+                                    input_shape = NULL, pooling = NULL, classes = 1000) {
+  keras$applications$DenseNet121(
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = as_nullable_integer(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+}
+
+#' @rdname application_densenet   
+#' @export
+application_densenet169 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
+                                    input_shape = NULL, pooling = NULL, classes = 1000) {
+  keras$applications$DenseNet169(
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = as_nullable_integer(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+}
+
+#' @rdname application_densenet   
+#' @export
+application_densenet201 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, 
+                                    input_shape = NULL, pooling = NULL, classes = 1000) {
+  keras$applications$DenseNet201(
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = as_nullable_integer(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+}
+
+#' @rdname application_densenet
+#' @export
+densenet_preprocess_input <- function(x, data_format = NULL) {
+  preprocess_input(x, keras$applications$densenet$preprocess_input)
+}
+
+#' Instantiates a NASNet model.
+#' 
+#' Note that only TensorFlow is supported for now,
+#' therefore it only works with the data format
+#' `image_data_format='channels_last'` in your Keras config
+#' at `~/.keras/keras.json`. 
+#' 
+#' @param input_shape Optional shape list, only to be specified if `include_top` 
+#'   is FALSE (otherwise the input shape has to be `(331, 331, 3)` for 
+#'   NASNetLarge or `(224, 224, 3)` for NASNetMobile It should have exactly 3 
+#'   inputs channels, and width and height should be no smaller than 32. E.g. 
+#'   `(224, 224, 3)` would be one valid value.
+#' @param penultimate_filters Number of filters in the penultimate layer. 
+#'   NASNet models use the notation `NASNet (N @ P)`, where:
+#'     - N is the number of blocks
+#'     - P is the number of penultimate filters
+#' @param num_blocks Number of repeated blocks of the NASNet model. NASNet 
+#'   models use the notation `NASNet (N @ P)`, where: 
+#'     - N is the number of blocks 
+#'     - P is the number of penultimate filters
+#' @param stem_block_filters Number of filters in the initial stem block
+#' @param skip_reduction Whether to skip the reduction step at the tail end 
+#'   of the network. Set to `FALSE` for CIFAR models.
+#' @param filter_multiplier Controls the width of the network. 
+#'   - If `filter_multiplier` < 1.0, proportionally decreases the number of 
+#'     filters in each layer. 
+#'   - If `filter_multiplier` > 1.0, proportionally increases the number of 
+#'     filters in each layer. - If `filter_multiplier` = 1, default number of 
+#'     filters from the paper are used at each layer.
+#' @param include_top Whether to include the fully-connected layer at the top 
+#'   of the network.
+#' @param weights `NULL` (random initialization) or `imagenet` (ImageNet weights)
+#' @param input_tensor Optional Keras tensor (i.e. output of `layer_input()`) 
+#'   to use as image input for the model.
+#' @param pooling Optional pooling mode for feature extraction when 
+#'   `include_top` is `FALSE`.
+#'     - `NULL` means that the output of the model will be the 4D tensor output
+#'       of the last convolutional layer.
+#'     - `avg` means that global average pooling will be applied to the output 
+#'       of the last convolutional layer, and thus the output of the model will 
+#'       be a 2D tensor.
+#'     - `max` means that global max pooling will be applied.
+#' @param classes Optional number of classes to classify images into, only to be 
+#'   specified if `include_top` is TRUE, and if no `weights` argument is 
+#'   specified.
+#' @param default_size Specifies the default image size of the model
+#' @param x a 4D array consists of RGB values within `[0, 255]`.
+#' 
+#' @export
+application_nasnet <- function(input_shape = NULL, penultimate_filters = 4032L,
+                               num_blocks = 6L, stem_block_filters = 96L,
+                               skip_reduction = TRUE, filter_multiplier = 2L,
+                               include_top = TRUE, weights = NULL, 
+                               input_tensor = NULL, pooling = NULL, 
+                               classes = 1000, default_size = NULL) {
+  
+  keras$applications$nasnet$NASNet(
+    input_shape = as_nullable_integer(input_shape),
+    penultimate_filters = as.integer(penultimate_filters),
+    num_blocks = as.integer(num_blocks),
+    stem_block_filters = as.integer(stem_block_filters),
+    skip_reduction = skip_reduction,
+    filter_multiplier = filter_multiplier,
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    pooling = pooling,
+    classes = as.integer(classes),
+    default_size = default_size
+  )
+  
+}
+
+#' @rdname application_nasnet
+#' @export
+application_nasnetlarge <- function(input_shape = NULL, include_top = TRUE, weights = NULL, 
+                               input_tensor = NULL, pooling = NULL, classes = 1000) {
+  
+  keras$applications$NASNetLarge(
+    input_shape = as_nullable_integer(input_shape),
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+  
+}
+
+#' @rdname application_nasnet
+#' @export
+application_nasnetmobile <- function(input_shape = NULL, include_top = TRUE, weights = NULL, 
+                                    input_tensor = NULL, pooling = NULL, classes = 1000) {
+  
+  keras$applications$NASNetMobile(
+    input_shape = as_nullable_integer(input_shape),
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+  
+}
+
+#' @rdname application_nasnet
+#' @export
+nasnet_preprocess_input <- function(x) {
+  preprocess_input(x, keras$applications$nasnet$preprocess_input)
+}
 
 preprocess_input <- function(x, preprocessor, ...) {
   preprocessor(keras_array(x), ...)
 }
-
 
 verify_application_prerequistes <- function() {
 

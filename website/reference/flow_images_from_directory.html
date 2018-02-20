@@ -103,6 +103,12 @@ augmented/normalized data) — flow_images_from_directory • keras</title>
   </ul>
 </li>
 <li>
+  <a href="../articles/learn.html">Learn</a>
+</li>
+<li>
+  <a href="../articles/tools.html">Tools</a>
+</li>
+<li>
   <a href="../articles/examples/index.html">Examples</a>
 </li>
 <li>
@@ -153,8 +159,9 @@ augmented/normalized data)</p>
     <tr>
       <th>directory</th>
       <td><p>path to the target directory. It should contain one
-subdirectory per class. Any PNG, JPG or BMP images inside each of the
-subdirectories directory tree will be included in the generator. See <a href='https://gist.github.com/fchollet/0830affa1f7f19fd47b06d4cf89ed44d'>thisscript</a>
+subdirectory per class. Any PNG, JPG, BMP, PPM, or TIF images inside each
+of the subdirectories directory tree will be included in the generator.
+See <a href='https://gist.github.com/fchollet/0830affa1f7f19fd47b06d4cf89ed44d'>this script</a>
 for more details.</p></td>
     </tr>
     <tr>
@@ -175,17 +182,18 @@ images will be converted to have 1 or 3 color channels.</p></td>
     <tr>
       <th>classes</th>
       <td><p>optional list of class subdirectories (e.g. <code>c('dogs', 'cats')</code>). Default: <code>NULL</code>, If not provided, the list of classes will be
-automatically inferred (and the order of the classes, which will map to the
-label indices, will be alphanumeric).</p></td>
+automatically inferred (and the order of the classes, which will map to
+the label indices, will be alphanumeric).</p></td>
     </tr>
     <tr>
       <th>class_mode</th>
       <td><p>one of "categorical", "binary", "sparse" or <code>NULL</code>.
 Default: "categorical". Determines the type of label arrays that are
-returned: "categorical" will be 2D one-hot encoded labels, "binary" will be
-1D binary labels, "sparse" will be 1D integer labels. If <code>NULL</code>, no labels
-are returned (the generator will only yield batches of image data, which is
-useful to use <code><a href='predict_generator.html'>predict_generator()</a></code>, <code><a href='evaluate_generator.html'>evaluate_generator()</a></code>, etc.).</p></td>
+returned: "categorical" will be 2D one-hot encoded labels, "binary" will
+be 1D binary labels, "sparse" will be 1D integer labels. If <code>NULL</code>, no
+labels are returned (the generator will only yield batches of image data,
+which is useful to use <code><a href='predict_generator.html'>predict_generator()</a></code>, <code><a href='evaluate_generator.html'>evaluate_generator()</a></code>,
+etc.).</p></td>
     </tr>
     <tr>
       <th>batch_size</th>
@@ -202,7 +210,7 @@ useful to use <code><a href='predict_generator.html'>predict_generator()</a></co
     <tr>
       <th>save_to_dir</th>
       <td><p><code>NULL</code> or str (default: <code>NULL</code>). This allows you to
-optimally specify a directory to which to save the augmented pictures being
+optionally specify a directory to which to save the augmented pictures being
 generated (useful for visualizing what you are doing).</p></td>
     </tr>
     <tr>

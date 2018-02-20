@@ -77,8 +77,9 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 #' @param model A Keras model instance. To avoid OOM errors,
 #'   this model could have been built on CPU, for instance
 #'    (see usage example below).
-#' @param gpus Integer >= 2 or list of integers, number of GPUs or
-#'   list of GPU IDs on which to create model replicas.
+#' @param gpus `NULL` to use all available GPUs (default). Integer >= 2 or 
+#'   list of integers, number of GPUs or list of GPU IDs on which to create 
+#'   model replicas.
 #' 
 #' @return  A Keras model object which can be used just like the initial
 #'  `model` argument, but which distributes its workload on multiple GPUs.
@@ -156,8 +157,14 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 #' @family model functions
 #'
 #' @export
-multi_gpu_model <- function(model, gpus) {
-  keras$utils$multi_gpu_model(model, as.integer(gpus))
+multi_gpu_model <- function(model, gpus = NULL) {
+  
+  if (is.null(gpus) && keras_version() < "2.1.4") {
+    stop("You must provide an explicit gpus argument in Keras versions ",
+         "prior to 2.1.4")
+  }
+  
+  keras$utils$multi_gpu_model(model, as_nullable_integer(gpus))
 }
 
 
@@ -384,12 +391,14 @@ fit <- function(object, x = NULL, y = NULL, batch_size=NULL, epochs=10,
     verbose = as.integer(verbose),
     callbacks = normalize_callbacks(view_metrics, callbacks),
     validation_split = validation_split,
-    validation_data = validation_data,
     shuffle = shuffle,
     class_weight = as_class_weight(class_weight),
     sample_weight = as_nullable_array(sample_weight),
     initial_epoch = as.integer(initial_epoch)
   )
+  
+  if (!is.null(validation_data))
+    args$validation_data <- keras_array(validation_data)
   
   if (!is.null(x))
     args$x <- keras_array(x)
@@ -428,8 +437,7 @@ fit <- function(object, x = NULL, y = NULL, batch_size=NULL, epochs=10,
 #'   a list mapping output names to data. `y` can be `NULL` (default) if feeding 
 #'   from framework-native tensors (e.g. TensorFlow data tensors).
 #' @param steps Total number of steps (batches of samples) before declaring the
-#'   evaluation round finished. The default `NULL` is equal to the number of 
-#'   samples in your dataset divided by the batch size.
+#'   evaluation round finished. Ignored with the default value of `NULL`.
 #' @param ... Unused   
 #'   
 #'   
@@ -480,7 +488,7 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
 #'
 #' @param object Keras model
 #' @param x Input data (vector, matrix, or array)
-#' @param batch_size Integer
+#' @param batch_size Integer. If unspecified, it will default to 32.
 #' @param verbose Verbosity mode, 0 or 1.
 #' @param ... Unused
 #' 
@@ -516,28 +524,41 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
 #' @inheritParams predict.keras.engine.training.Model
 #' 
 #' @param object Keras model object
-#' 
+#' @param steps Total number of steps (batches of samples) before declaring the
+#'   evaluation round finished. The default `NULL` is equal to the number of 
+#'   samples in your dataset divided by the batch size.
+#'   
 #' @details The input samples are processed batch by batch.
 #' 
 #' @family model functions
 #' 
 #' @export
-predict_proba <- function(object, x, batch_size = 32, verbose = 0) {
-  object$predict_proba(
+predict_proba <- function(object, x, batch_size = NULL, verbose = 0, steps = NULL) {
+  args <- list(
     x = keras_array(x),
-    batch_size = as.integer(batch_size),
+    batch_size = as_nullable_integer(batch_size),
     verbose = as.integer(verbose)
   )
+  
+  if (keras_version() >= "2.1.3")
+    args$steps <- as_nullable_integer(steps)
+  
+  do.call(object$predict_proba, args)
 }
 
 #' @rdname predict_proba
 #' @export
-predict_classes <- function(object, x, batch_size = 32, verbose = 0) {
-  object$predict_classes(
+predict_classes <- function(object, x, batch_size = NULL, verbose = 0, steps = NULL) {
+  args <- list(
     x = keras_array(x),
-    batch_size = as.integer(batch_size),
+    batch_size = as_nullable_integer(batch_size),
     verbose = as.integer(verbose)
   )
+
+  if (keras_version() >= "2.1.3")
+    args$steps <- as_nullable_integer(steps)
+  
+  do.call(object$predict_classes, args)
 }
 
 
@@ -625,17 +646,27 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'   from `generator` before declaring one epoch finished and starting the next
 #'   epoch. It should typically be equal to the number of samples if your
 #'   dataset divided by the batch size.
-#' @param epochs integer, total number of iterations on the data.
+#' @param epochs Integer. Number of epochs to train the model.
+#'   An epoch is an iteration over the entire data provided, as defined by 
+#'   `steps_per_epoch`. Note that in conjunction with `initial_epoch`,
+#'   `epochs` is to be understood as "final epoch". The model is not trained
+#'    for a number of iterations given by `epochs`, but merely until the epoch
+#'    of index `epochs` is reached.
 #' @param callbacks list of callbacks to be called during training.
 #' @param validation_data this can be either: 
 #'    - a generator for the validation data 
 #'    - a list (inputs, targets) 
 #'    - a list (inputs, targets, sample_weights).
+#'  on which to evaluate
+#'  the loss and any model metrics at the end of each epoch.
+#'  The model will not be trained on this data.
 #' @param validation_steps Only relevant if `validation_data` is a generator.
 #'   Total number of steps (batches of samples) to yield from `generator` before
 #'   stopping.
-#' @param class_weight Named list mapping class indices to a weight for the
-#'   class.
+#' @param class_weight Optional named list mapping class indices (integer) to a
+#'   weight (float) value, used for weighting the loss function (during 
+#'   training only). This can be useful to tell the model to "pay more 
+#'   attention" to samples from an under-represented class.
 #' @param max_queue_size Maximum size for the generator queue. If unspecified,
 #'   `max_queue_size` will default to 10.
 #' @param initial_epoch epoch at which to start training (useful for resuming a
@@ -655,6 +686,9 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
   # resolve view_metrics
   if (identical(view_metrics, "auto"))
     view_metrics <- resolve_view_metrics(verbose, epochs, object$metrics)
+  
+  if (is.list(validation_data))
+    validation_data <- keras_array(validation_data)
   
   history <- call_generator_function(object$fit_generator, list(
     generator = generator,

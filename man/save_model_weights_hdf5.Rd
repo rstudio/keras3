@@ -7,7 +7,8 @@
 \usage{
 save_model_weights_hdf5(object, filepath, overwrite = TRUE)
 
-load_model_weights_hdf5(object, filepath, by_name = FALSE)
+load_model_weights_hdf5(object, filepath, by_name = FALSE,
+  skip_mismatch = FALSE, reshape = FALSE)
 }
 \arguments{
 \item{object}{Model object to save/load}
@@ -18,6 +19,13 @@ load_model_weights_hdf5(object, filepath, by_name = FALSE)
 file at the target location}
 
 \item{by_name}{Whether to load weights by name or by topological order.}
+
+\item{skip_mismatch}{Logical, whether to skip loading of layers
+where there is a mismatch in the number of weights, or a mismatch in the
+shape of the weight (only valid when \code{by_name = FALSE}).}
+
+\item{reshape}{Reshape weights to fit the layer when the correct number
+of values are present but the shape does not match.}
 }
 \description{
 Save/Load model weights using HDF5 files

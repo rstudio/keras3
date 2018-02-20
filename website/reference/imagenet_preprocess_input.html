@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Preprocesses a tensor encoding a batch of images. — imagenet_preprocess_input • keras</title>
+<title>Preprocesses a tensor or array encoding a batch of images. — imagenet_preprocess_input • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -102,6 +102,12 @@
   </ul>
 </li>
 <li>
+  <a href="../articles/learn.html">Learn</a>
+</li>
+<li>
+  <a href="../articles/tools.html">Tools</a>
+</li>
+<li>
   <a href="../articles/examples/index.html">Examples</a>
 </li>
 <li>
@@ -131,11 +137,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Preprocesses a tensor encoding a batch of images.</h1>
+    <h1>Preprocesses a tensor or array encoding a batch of images.</h1>
     </div>
 
     
-    <p>Preprocesses a tensor encoding a batch of images.</p>
+    <p>Preprocesses a tensor or array encoding a batch of images.</p>
     
 
     <pre class="usage"><span class='fu'>imagenet_preprocess_input</span>(<span class='no'>x</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"caffe"</span>)</pre>
@@ -145,11 +151,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>input tensor, 3D or 4D</p></td>
+      <td><p>Input Numpy or symbolic tensor, 3D or 4D.</p></td>
     </tr>
     <tr>
       <th>data_format</th>
-      <td><p>Data format of the image tensor</p></td>
+      <td><p>Data format of the image tensor/array.</p></td>
     </tr>
     <tr>
       <th>mode</th>
@@ -165,7 +171,7 @@ without scaling.</p></li>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Preprocessed tensor</p>
+    <p>Preprocessed tensor or array.</p>
     
 
   </div>

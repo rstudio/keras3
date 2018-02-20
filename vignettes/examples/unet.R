@@ -371,8 +371,8 @@ train_generator <- function(images_dir,
         
         y_batch <- do.call(abind, c(x_y_batch$y, list(along = 1)))
         
-        result <- list(to_numpy_array(x_batch), 
-                       to_numpy_array(y_batch))
+        result <- list(keras_array(x_batch), 
+                       keras_array(y_batch))
         return(result)
     }
 }
@@ -426,8 +426,8 @@ val_generator <- function(images_dir,
         
         y_batch <- do.call(abind, c(x_y_batch$y, list(along = 1)))
         
-        result <- list(to_numpy_array(x_batch), 
-                       to_numpy_array(y_batch))
+        result <- list(keras_array(x_batch), 
+                       keras_array(y_batch))
         return(result)
     }
 }

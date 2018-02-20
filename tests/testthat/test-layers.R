@@ -458,7 +458,22 @@ test_call_succeeds("bidirectional", {
     layer_activation(activation = "softmax")
 })
 
+test_call_succeeds("layer_activation_softmax", required_version = "2.1.3", {
+  if (is_tensorflow_implementation()) {
+    keras_model_sequential() %>% 
+      layer_dense(32, input_shape = c(784)) %>% 
+      layer_activation_softmax()
+  }
+})
 
+test_call_succeeds("layer_separable_conv_1d", required_version = "2.1.3", {
+  if (is_tensorflow_implementation()) {
+    keras_model_sequential() %>% 
+      layer_dense(32, input_shape = c(784)) %>%
+      layer_reshape(target_shape = c(4, 8)) %>%
+      layer_separable_conv_1d(filters = 4, kernel_size = c(4))
+  }
+})
 
 
 

@@ -171,3 +171,30 @@ layer_activation_elu <- function(object, alpha = 1.0, input_shape = NULL,
   
 }
 
+#' Softmax activation function.
+#'
+#' It follows: `f(x) =  alpha * (exp(x) - 1.0)` for `x < 0`, `f(x) = x` for `x
+#' >= 0`.
+#'
+#' @inheritParams layer_activation
+#' @param axis Integer, axis along which the softmax normalization is applied.
+#'
+#' @family activation layers
+#'
+#' @export
+layer_activation_softmax <- function(object, axis = -1, input_shape = NULL,
+                                     batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                                     name = NULL, trainable = NULL, weights = NULL) {
+  
+  create_layer(keras$layers$Softmax, object, list(
+    axis = as.integer(axis),
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
+  ))
+  
+}

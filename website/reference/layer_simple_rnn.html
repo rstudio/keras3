@@ -102,6 +102,12 @@
   </ul>
 </li>
 <li>
+  <a href="../articles/learn.html">Learn</a>
+</li>
+<li>
+  <a href="../articles/tools.html">Tools</a>
+</li>
+<li>
   <a href="../articles/examples/index.html">Examples</a>
 </li>
 <li>
@@ -162,8 +168,9 @@
     </tr>
     <tr>
       <th>activation</th>
-      <td><p>Activation function to use. If you pass <code>NULL</code>, no
-activation is applied (ie. "linear" activation: <code>a(x) = x</code>).</p></td>
+      <td><p>Activation function to use. Default: hyperbolic tangent
+(<code>tanh</code>). If you pass <code>NULL</code>, no activation is applied
+(ie. "linear" activation: <code>a(x) = x</code>).</p></td>
     </tr>
     <tr>
       <th>use_bias</th>
@@ -200,12 +207,12 @@ sequences.</p></td>
     <tr>
       <th>kernel_initializer</th>
       <td><p>Initializer for the <code>kernel</code> weights matrix, used
-for the linear transformation of the inputs..</p></td>
+for the linear transformation of the inputs.</p></td>
     </tr>
     <tr>
       <th>recurrent_initializer</th>
       <td><p>Initializer for the <code>recurrent_kernel</code> weights
-matrix, used for the linear transformation of the recurrent state..</p></td>
+matrix, used for the linear transformation of the recurrent state.</p></td>
     </tr>
     <tr>
       <th>bias_initializer</th>
