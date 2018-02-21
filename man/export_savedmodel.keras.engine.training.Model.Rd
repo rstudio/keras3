@@ -20,7 +20,7 @@ SavedModel.}
 
 \item{remove_learning_phase}{Should the learning phase be removed by saving
 and reloading the model? Defaults to \code{TRUE}.}
-  
+
 \item{as_text}{Whether to write the SavedModel in text format.}
 
 \item{...}{Unused}
