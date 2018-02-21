@@ -1,7 +1,5 @@
 
-## Keras 2.1.4 (development)
-
-Install the development version with: `install_github("rstudio/keras")`
+## Keras 2.1.4 (CRAN)
 
 - Added support for `remove_learning_phase` in `export_savedmodel()` to avoid
   removing learning phase.
@@ -19,7 +17,7 @@ Install the development version with: `install_github("rstudio/keras")`
 - Fix incompatibility with Progbar.update() method in Keras 2.1.4
 
 
-## Keras 2.1.3 (CRAN)
+## Keras 2.1.3
 
 - Models saved via `export_savedmodel()` that make use of learning phases can
   now be exported without having to manually reload the original model.
