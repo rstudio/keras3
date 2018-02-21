@@ -275,6 +275,7 @@ reload_model <- function(object) {
 #' @param versioned Should the model be exported under a versioned subdirectory?
 #' @param remove_learning_phase Should the learning phase be removed by saving
 #'   and reloading the model? Defaults to \code{TRUE}.
+#' @param as_text Whether to write the SavedModel in text format.
 #' @param ... Unused
 #' 
 #' @return The path to the exported directory, as a string.
@@ -286,6 +287,7 @@ export_savedmodel.keras.engine.training.Model <- function(
   overwrite = TRUE,
   versioned = !overwrite,
   remove_learning_phase = TRUE,
+  as_text = FALSE,
   ...) {
   if (!is_backend("tensorflow"))
     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
@@ -336,7 +338,7 @@ export_savedmodel.keras.engine.training.Model <- function(
     )
   )
   
-  builder$save()
+  builder$save(as_text = as_text)
   
   invisible(export_dir_base)
 }
