@@ -3,6 +3,8 @@
 
 Install the development version with: `install_github("rstudio/keras")`
 
+- Support for custom constraints from R 
+
 
 ## Keras 2.1.4 (CRAN)
 
