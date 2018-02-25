@@ -438,6 +438,12 @@ create_layer <- function(layer_class, object, args = list()) {
   args$trainable <- args$trainable
   args$weights <- args$weights
   
+  # convert custom constraints
+  constraint_args <- grepl("^.*_constraint$", names(args))
+  constraint_args <- names(args)[constraint_args]
+  for (arg in constraint_args)
+    args[[arg]] <- as_constraint(args[[arg]])
+ 
   # if this is an R6 class then create a Python wrapper for it
   if (inherits(layer_class, "R6ClassGenerator")) {
     

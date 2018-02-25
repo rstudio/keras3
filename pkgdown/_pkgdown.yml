@@ -291,9 +291,6 @@ reference:
   - title: "Constraints"
     contents:
       - constraint_maxnorm
-      - constraint_nonneg
-      - constraint_unitnorm
-      - constraint_minmaxnorm
       
   - title: "Utils"
     contents:
