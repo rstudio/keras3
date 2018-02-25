@@ -291,6 +291,7 @@ reference:
   - title: "Constraints"
     contents:
       - constraint_maxnorm
+      - KerasConstraint
       
   - title: "Utils"
     contents:
