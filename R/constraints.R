@@ -35,12 +35,12 @@
 #' functions (e.g. [k_greater_equal()]) should be used in the 
 #' implementation of custom constraints. For example:
 #' 
-#' ```
+#' ```r
 #' nonneg_constraint <- function(w) {
 #'   w * k_cast(k_greater_equal(w, 0), k_floatx())
 #' }
 #' 
-#' layer_dense(32, input_shape = c(784), 
+#' layer_dense(units = 32, input_shape = c(784), 
 #'             kernel_constraint = nonneg_constraint)
 #' ```
 #' 

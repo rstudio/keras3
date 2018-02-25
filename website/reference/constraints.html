@@ -204,7 +204,7 @@ functions (e.g. <code><a href='k_greater_equal.html'>k_greater_equal()</a></code
 implementation of custom constraints. For example:</p><pre>nonneg_constraint &lt;- function(w) {
   w * k_cast(k_greater_equal(w, 0), k_floatx())
 }
-    layer_dense(32, input_shape = c(784), 
+    layer_dense(units = 32, input_shape = c(784), 
             kernel_constraint = nonneg_constraint)
 </pre>
     <p>Note that models which use custom constraints cannot be serialized using

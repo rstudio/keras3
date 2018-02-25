@@ -59,7 +59,7 @@ implementation of custom constraints. For example:\preformatted{nonneg_constrain
   w * k_cast(k_greater_equal(w, 0), k_floatx())
 }
 
-layer_dense(32, input_shape = c(784), 
+layer_dense(units = 32, input_shape = c(784), 
             kernel_constraint = nonneg_constraint)
 }
 
