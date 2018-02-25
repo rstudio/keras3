@@ -43,12 +43,14 @@ test_succeeds("R custom constraints", {
       metrics='accuracy'
     )
     
-    data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)
-    labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
-    
-    model %>% fit(
-      data, labels
-    )
+    if (!is_backend("theano")) {
+      data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)
+      labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
+      
+      model %>% fit(
+        data, labels
+      )
+    }
 })
 
 
