@@ -33,8 +33,6 @@ yield (1 - rate) * norm + rate * norm.clip(low, high). Effectively, this
 means that rate=1.0 stands for strict enforcement of the constraint, while
 rate<1.0 means that weights will be rescaled at each step to slowly move
 towards a value inside the desired interval.}
-
-\item{max_value}{The maximum norm for the incoming weights.}
 }
 \description{
 Functions that impose constraints on weight values.

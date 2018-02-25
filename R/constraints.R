@@ -11,7 +11,6 @@
 #'   - `constraint_minmaxnorm()` constrains the weights incident to each 
 #'      hidden unit to have the norm between a lower bound and an upper bound.
 #'   
-#' @param max_value The maximum norm for the incoming weights.
 #' @param axis The axis along which to calculate weight norms. For instance, in
 #'   a dense layer the weight matrix has shape `input_dim, output_dim`, set
 #'   `axis` to `0` to constrain each weight vector of length `input_dim,`. In a
