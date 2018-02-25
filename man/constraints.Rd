@@ -70,4 +70,6 @@ and restored using \code{\link[=save_model_weights_hdf5]{save_model_weights_hdf5
 
 \seealso{
 \href{http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf}{Dropout: A Simple Way to Prevent Neural Networks from OverfittingSrivastava, Hinton, et al.2014}
+
+\link{KerasConstraint}
 }

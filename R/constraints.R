@@ -53,6 +53,9 @@
 #'   2014](http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf)
 #'
 #' @name constraints
+#' 
+#' @seealso [KerasConstraint]
+#' 
 #' @export
 constraint_maxnorm <- function(max_value = 2, axis = 0) {
   keras$constraints$MaxNorm(max_value = as.integer(max_value), axis = as.integer(axis))
@@ -78,6 +81,46 @@ constraint_minmaxnorm <- function(min_value = 0.0, max_value = 1.0, rate = 1.0, 
   keras$constraints$MinMaxNorm(min_value = min_value, max_value = max_value, rate = rate, axis = as.integer(axis))
 }
 
+
+#' Base R6 class for Keras constraints
+#' 
+#' @docType class
+#' 
+#' @format An [R6Class] generator object
+#' 
+#' @section Methods:
+#' \describe{
+#'  \item{\code{call(w)}}{Constrain the specified weights.}
+#' }
+#' 
+#' @details You can implement a custom constraint either by creating an
+#'  R function that accepts a weights (`w`) parameter, or by creating
+#'  an R6 class that derives from `KerasConstraint` and implements a
+#'  `call` method.
+#'  
+#' @note 
+#' Models which use custom constraints cannot be serialized using 
+#' [save_model_hdf5()]. Rather, the weights of the model should be saved
+#' and restored using [save_model_weights_hdf5()].
+#'
+#' @examples \dontrun{
+#' CustomNonNegConstraint <- R6::R6Class(
+#'   "CustomNonNegConstraint",
+#'   inherit = KerasConstraint,
+#'   public = list(
+#'     call = function(x) {
+#'        w * k_cast(k_greater_equal(w, 0), k_floatx())
+#'     }
+#'   )
+#' )
+#' 
+#' layer_dense(units = 32, input_shape = c(784), 
+#'             kernel_constraint = CustomNonNegConstraint$new())
+#' }
+#' 
+#' @seealso [constraints]
+#' 
+#' @export
 KerasConstraint <- R6::R6Class("KerasConstraint",
   public = list(
     call = function(w) {
