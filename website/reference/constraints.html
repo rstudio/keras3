@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MinMaxNorm weight constraint — constraint_minmaxnorm • keras</title>
+<title>Weight constraints — constraints • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -137,26 +137,40 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>MinMaxNorm weight constraint</h1>
+    <h1>Weight constraints</h1>
     </div>
 
     
-    <p>Constrains the weights incident to each hidden unit to have the norm between
-a lower bound and an upper bound.</p>
+    <p>Functions that impose constraints on weight values.</p>
     
 
-    <pre class="usage"><span class='fu'>constraint_minmaxnorm</span>(<span class='kw'>min_value</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>max_value</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>axis</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>constraint_maxnorm</span>(<span class='kw'>max_value</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>axis</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>constraint_nonneg</span>()
+
+<span class='fu'>constraint_unitnorm</span>(<span class='kw'>axis</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>constraint_minmaxnorm</span>(<span class='kw'>min_value</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>max_value</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>axis</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>min_value</th>
-      <td><p>The minimum norm for the incoming weights.</p></td>
-    </tr>
-    <tr>
       <th>max_value</th>
       <td><p>The maximum norm for the incoming weights.</p></td>
+    </tr>
+    <tr>
+      <th>axis</th>
+      <td><p>The axis along which to calculate weight norms. For instance, in
+a dense layer the weight matrix has shape <code>input_dim, output_dim</code>, set
+<code>axis</code> to <code>0</code> to constrain each weight vector of length <code>input_dim,</code>. In a
+convolution 2D layer with <code>dim_ordering="tf"</code>, the weight tensor has shape
+<code>rows, cols, input_depth, output_depth</code>, set <code>axis</code> to <code>c(0, 1, 2)</code> to
+constrain the weights of each filter tensor of size <code>rows, cols, input_depth</code>.</p></td>
+    </tr>
+    <tr>
+      <th>min_value</th>
+      <td><p>The minimum norm for the incoming weights.</p></td>
     </tr>
     <tr>
       <th>rate</th>
@@ -167,21 +181,43 @@ rate&lt;1.0 means that weights will be rescaled at each step to slowly move
 towards a value inside the desired interval.</p></td>
     </tr>
     <tr>
-      <th>axis</th>
-      <td><p>The axis along which to calculate weight norms. For instance, in
-a dense layer the weight matrix has shape <code>input_dim, output_dim</code>,
-set <code>axis</code> to <code>0</code> to constrain each weight vector of length <code>input_dim,</code>.
-In a convolution 2D layer with <code>dim_ordering="tf"</code>, the weight tensor has
-shape <code>rows, cols, input_depth, output_depth</code>, set <code>axis</code> to <code>c(0, 1, 2)</code>
-to constrain the weights of each filter tensor of size <code>rows, cols, input_depth</code>.</p></td>
+      <th>max_value</th>
+      <td><p>The maximum norm for the incoming weights.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <ul>
+<li><p><code>constraint_maxnorm()</code> constrains the weights incident to each
+hidden unit to have a norm less than or equal to a desired value.</p></li>
+<li><p><code>constraint_nonneg()</code> constraints the weights to be non-negative</p></li>
+<li><p><code>constraint_unitnorm()</code> constrains the weights incident to each hidden
+unit to have unit norm.</p></li>
+<li><p><code>constraint_minmaxnorm()</code> constrains the weights incident to each
+hidden unit to have the norm between a lower bound and an upper bound.</p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="custom-constraints"><a class="anchor" href="#custom-constraints"></a>Custom constraints</h2>
+
+    
+    <p>You can implement your own constraint functions in R. A custom
+constraint is an R function that takes weights (<code>w</code>) as input
+and returns modified weights. Note that keras <code><a href='backend.html'>backend()</a></code> tensor
+functions (e.g. <code><a href='k_greater_equal.html'>k_greater_equal()</a></code>) should be used in the
+implementation of custom constraints. For example:</p><pre>nonneg_constraint &lt;- function(w) {
+  w * k_cast(k_greater_equal(w, 0), k_floatx())
+}
+    layer_dense(32, input_shape = c(784), 
+            kernel_constraint = nonneg_constraint)
+</pre>
+    <p>Note that models which use custom constraints cannot be serialized using
+<code><a href='save_model_hdf5.html'>save_model_hdf5()</a></code>. Rather, the weights of the model should be saved
+and restored using <code><a href='save_model_weights_hdf5.html'>save_model_weights_hdf5()</a></code>.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other constraints: <code><a href='constraint_maxnorm.html'>constraint_maxnorm</a></code>,
-  <code><a href='constraint_nonneg.html'>constraint_nonneg</a></code>,
-  <code><a href='constraint_unitnorm.html'>constraint_unitnorm</a></code></p>
+    <p><a href='http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf'>Dropout: A Simple Way to Prevent Neural Networks from OverfittingSrivastava, Hinton, et al.2014</a></p>
     
 
   </div>
@@ -190,6 +226,10 @@ to constrain the weights of each filter tensor of size <code>rows, cols, input_d
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#custom-constraints">Custom constraints</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 
