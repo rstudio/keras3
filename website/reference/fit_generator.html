@@ -198,7 +198,7 @@ epoch).</p></td>
     </tr>
     <tr>
       <th>callbacks</th>
-      <td><p>list of callbacks to be called during training.</p></td>
+      <td><p>List of callbacks to apply during training.</p></td>
     </tr>
     <tr>
       <th>view_metrics</th>
@@ -223,7 +223,8 @@ The model will not be trained on this data.</p></li>
       <th>validation_steps</th>
       <td><p>Only relevant if <code>validation_data</code> is a generator.
 Total number of steps (batches of samples) to yield from <code>generator</code> before
-stopping.</p></td>
+stopping at the end of every epoch. It should typically be equal to the number
+of samples of your validation dataset divided by the batch size.</p></td>
     </tr>
     <tr>
       <th>class_weight</th>

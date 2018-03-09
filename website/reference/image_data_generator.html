@@ -148,10 +148,11 @@
   <span class='kw'>featurewise_std_normalization</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>samplewise_std_normalization</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>zca_whitening</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>zca_epsilon</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>, <span class='kw'>rotation_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>width_shift_range</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>height_shift_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>shear_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>zoom_range</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>channel_shift_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>fill_mode</span> <span class='kw'>=</span> <span class='st'>"nearest"</span>, <span class='kw'>cval</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>horizontal_flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>vertical_flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rescale</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>preprocessing_function</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>height_shift_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>brightness_range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>shear_range</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>zoom_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>channel_shift_range</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>fill_mode</span> <span class='kw'>=</span> <span class='st'>"nearest"</span>,
+  <span class='kw'>cval</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>horizontal_flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>vertical_flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>rescale</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>preprocessing_function</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>validation_split</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -191,6 +192,10 @@
     <tr>
       <th>height_shift_range</th>
       <td><p>fraction of total height.</p></td>
+    </tr>
+    <tr>
+      <th>brightness_range</th>
+      <td><p>the range of brightness to apply</p></td>
     </tr>
     <tr>
       <th>shear_range</th>
@@ -250,6 +255,10 @@ mode, the channels dimension (the depth) is at index 1, in 'channels_last'
 mode it is at index 3. It defaults to the <code>image_data_format</code> value found
 in your Keras config file at <code>~/.keras/keras.json</code>. If you never set it,
 then it will be "channels_last".</p></td>
+    </tr>
+    <tr>
+      <th>validation_split</th>
+      <td><p>fraction of images reserved for validation (strictly between 0 and 1).</p></td>
     </tr>
     </table>
     

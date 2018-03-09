@@ -231,7 +231,7 @@ y_val &lt;-<span class="st"> </span>labels[<span class="dv">1</span><span class=
 <span class="kw">cat</span>(<span class="st">'Preparing embedding matrix.</span><span class="ch">\n</span><span class="st">'</span>)
 
 <span class="co"># prepare embedding matrix</span>
-num_words &lt;-<span class="st"> </span><span class="kw">min</span>(MAX_NUM_WORDS, <span class="kw">length</span>(word_index))
+num_words &lt;-<span class="st"> </span><span class="kw">min</span>(MAX_NUM_WORDS, <span class="kw">length</span>(word_index) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)
 prepare_embedding_matrix &lt;-<span class="st"> </span><span class="cf">function</span>() {
   embedding_matrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(0L, <span class="dt">nrow =</span> num_words, <span class="dt">ncol =</span> EMBEDDING_DIM)
   <span class="cf">for</span> (word <span class="cf">in</span> <span class="kw">names</span>(word_index)) {

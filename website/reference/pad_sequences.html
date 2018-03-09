@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pads each sequence to the same length (length of the longest sequence). — pad_sequences • keras</title>
+<title>Pads sequences to the same length — pad_sequences • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -137,11 +137,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pads each sequence to the same length (length of the longest sequence).</h1>
+    <h1>Pads sequences to the same length</h1>
     </div>
 
     
-    <p>Pads each sequence to the same length (length of the longest sequence).</p>
+    <p>Pads sequences to the same length</p>
     
 
     <pre class="usage"><span class='fu'>pad_sequences</span>(<span class='no'>sequences</span>, <span class='kw'>maxlen</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='st'>"int32"</span>, <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"pre"</span>,
@@ -156,11 +156,11 @@
     </tr>
     <tr>
       <th>maxlen</th>
-      <td><p>int, maximum length</p></td>
+      <td><p>int, maximum length of all sequences</p></td>
     </tr>
     <tr>
       <th>dtype</th>
-      <td><p>type to cast the resulting sequence.</p></td>
+      <td><p>type of the output sequences</p></td>
     </tr>
     <tr>
       <th>padding</th>
@@ -168,23 +168,31 @@
     </tr>
     <tr>
       <th>truncating</th>
-      <td><p>'pre' or 'post', remove values from sequences larger than maxlen either in the beginning or in the end of the sequence</p></td>
+      <td><p>'pre' or 'post', remove values from sequences larger than
+maxlen either in the beginning or in the end of the sequence</p></td>
     </tr>
     <tr>
       <th>value</th>
-      <td><p>float, value to pad the sequences to the desired value.</p></td>
+      <td><p>float, padding value</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Array with dimensions (number_of_sequences, maxlen)</p>
+    <p>Matrix with dimensions (number_of_sequences, maxlen)</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If maxlen is provided, any sequence longer than maxlen is truncated to maxlen.
-Truncation happens off either the beginning (default) or
-the end of the sequence. Supports post-padding and pre-padding (default).</p>
+    <p>This function transforms a list of <code>num_samples</code> sequences (lists
+of integers) into a matrix of shape <code>(num_samples, num_timesteps)</code>.
+<code>num_timesteps</code> is either the <code>maxlen</code> argument if provided, or the length
+of the longest sequence otherwise.</p>
+<p>Sequences that are shorter than <code>num_timesteps</code> are padded with <code>value</code> at
+the end.</p>
+<p>Sequences longer than <code>num_timesteps</code> are truncated so that they fit the
+desired length. The position where padding or truncation happens is
+determined by the arguments <code>padding</code> and <code>truncating</code>, respectively.</p>
+<p>Pre-padding is the default.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

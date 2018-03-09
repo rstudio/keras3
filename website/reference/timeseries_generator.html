@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieves a layer based on either its name (unique) or index. — get_layer • keras</title>
+<title>Utility function for generating batches of temporal data. — timeseries_generator • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -137,54 +137,73 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieves a layer based on either its name (unique) or index.</h1>
+    <h1>Utility function for generating batches of temporal data.</h1>
     </div>
 
     
-    <p>Indices are based on order of horizontal graph traversal (bottom-up) and are
-0-based. If <code>name</code> and <code>index</code> are both provided, <code>index</code> will take
-precedence.</p>
+    <p>Utility function for generating batches of temporal data.</p>
     
 
-    <pre class="usage"><span class='fu'>get_layer</span>(<span class='no'>object</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>index</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>timeseries_generator</span>(<span class='no'>data</span>, <span class='no'>targets</span>, <span class='no'>length</span>, <span class='kw'>sampling_rate</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>stride</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>start_index</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>end_index</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>128</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>Keras model object</p></td>
+      <th>data</th>
+      <td><p>Object containing consecutive data points (timesteps). The data
+should be 2D, and axis 1 is expected to be the time dimension.</p></td>
     </tr>
     <tr>
-      <th>name</th>
-      <td><p>String, name of layer.</p></td>
+      <th>targets</th>
+      <td><p>Targets corresponding to timesteps in <code>data</code>.
+It should have same length as <code>data</code>.</p></td>
     </tr>
     <tr>
-      <th>index</th>
-      <td><p>Integer, index of layer (0-based)</p></td>
+      <th>length</th>
+      <td><p>Length of the output sequences (in number of timesteps).</p></td>
+    </tr>
+    <tr>
+      <th>sampling_rate</th>
+      <td><p>Period between successive individual timesteps
+within sequences. For rate <code>r</code>, timesteps <code>data[i]</code>, <code>data[i-r]</code>, ... <code>data[i - length]</code>
+are used for create a sample sequence.</p></td>
+    </tr>
+    <tr>
+      <th>stride</th>
+      <td><p>Period between successive output sequences.
+For stride <code>s</code>, consecutive output samples would
+be centered around <code>data[i]</code>, <code>data[i+s]</code>, <code>data[i+2*s]</code>, etc.</p></td>
+    </tr>
+    <tr>
+      <th>start_index, end_index</th>
+      <td><p>Data points earlier than <code>start_index</code>
+or later than <code>end_index</code> will not be used in the output sequences.
+This is useful to reserve part of the data for test or validation.</p></td>
+    </tr>
+    <tr>
+      <th>shuffle</th>
+      <td><p>Whether to shuffle output samples,
+or instead draw them in chronological order.</p></td>
+    </tr>
+    <tr>
+      <th>reverse</th>
+      <td><p>Boolean: if <code>true</code>, timesteps in each output sample will be
+in reverse chronological order.</p></td>
+    </tr>
+    <tr>
+      <th>batch_size</th>
+      <td><p>Number of timeseries samples in each batch
+(except maybe the last one).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A layer instance.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p>Other model functions: <code><a href='compile.html'>compile</a></code>,
-  <code><a href='evaluate.keras.engine.training.Model.html'>evaluate.keras.engine.training.Model</a></code>,
-  <code><a href='evaluate_generator.html'>evaluate_generator</a></code>,
-  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='fit.html'>fit</a></code>,
-  <code><a href='get_config.html'>get_config</a></code>,
-  <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
-  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='multi_gpu_model.html'>multi_gpu_model</a></code>,
-  <code><a href='pop_layer.html'>pop_layer</a></code>,
-  <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
-  <code><a href='predict_generator.html'>predict_generator</a></code>,
-  <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
-  <code><a href='predict_proba.html'>predict_proba</a></code>,
-  <code><a href='summary.keras.engine.training.Model.html'>summary.keras.engine.training.Model</a></code>,
-  <code><a href='train_on_batch.html'>train_on_batch</a></code></p>
+    <p>An object that can be passed to generator based training
+functions (e.g. <code><a href='fit_generator.html'>fit_generator()</a></code>).ma</p>
     
 
   </div>
@@ -194,8 +213,6 @@ precedence.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

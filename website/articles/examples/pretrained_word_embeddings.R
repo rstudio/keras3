@@ -124,7 +124,7 @@ y_val <- labels[1:num_validation_samples,]
 cat('Preparing embedding matrix.\n')
 
 # prepare embedding matrix
-num_words <- min(MAX_NUM_WORDS, length(word_index))
+num_words <- min(MAX_NUM_WORDS, length(word_index) + 1)
 prepare_embedding_matrix <- function() {
   embedding_matrix <- matrix(0L, nrow = num_words, ncol = EMBEDDING_DIM)
   for (word in names(word_index)) {
