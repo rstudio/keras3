@@ -43,7 +43,7 @@ of index \code{epochs} is reached.}
 \item{verbose}{Verbosity mode (0 = silent, 1 = progress bar, 2 = one line per
 epoch).}
 
-\item{callbacks}{list of callbacks to be called during training.}
+\item{callbacks}{List of callbacks to apply during training.}
 
 \item{view_metrics}{View realtime plot of training metrics (by epoch). The
 default (\code{"auto"}) will display the plot when running within RStudio,
@@ -63,7 +63,8 @@ The model will not be trained on this data.
 
 \item{validation_steps}{Only relevant if \code{validation_data} is a generator.
 Total number of steps (batches of samples) to yield from \code{generator} before
-stopping.}
+stopping at the end of every epoch. It should typically be equal to the number
+of samples of your validation dataset divided by the batch size.}
 
 \item{class_weight}{Optional named list mapping class indices (integer) to a
 weight (float) value, used for weighting the loss function (during

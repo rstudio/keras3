@@ -6,7 +6,7 @@
 \usage{
 flow_images_from_data(x, y = NULL, generator = image_data_generator(),
   batch_size = 32, shuffle = TRUE, seed = NULL, save_to_dir = NULL,
-  save_prefix = "", save_format = "png")
+  save_prefix = "", save_format = "png", subset = NULL)
 }
 \arguments{
 \item{x}{data. Should have rank 4. In case of grayscale data, the channels
@@ -32,6 +32,9 @@ pictures (only relevant if \code{save_to_dir} is set).}
 
 \item{save_format}{one of "png", "jpeg" (only relevant if save_to_dir is
 set). Default: "png".}
+
+\item{subset}{Subset of data (\code{"training"} or \code{"validation"}) if
+\code{validation_split} is set in \code{\link[=image_data_generator]{image_data_generator()}}.}
 }
 \description{
 Generates batches of augmented/normalized data from image data and labels

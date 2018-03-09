@@ -83,8 +83,6 @@ preprocessing. To load a saved instance of a MobileNet model use
 the \code{mobilenet_load_model_hdf5()} function. To prepare image input
 for MobileNet use \code{mobilenet_preprocess_input()}. To decode
 predictions use \code{mobilenet_decode_predictions()}.
-
-MobileNet is currently only supported with the TensorFlow backend.
 }
 \section{Reference}{
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-recurrent.R
 \name{layer_lstm}
 \alias{layer_lstm}
-\title{Long-Short Term Memory unit - Hochreiter 1997.}
+\title{Long Short-Term Memory unit - Hochreiter 1997.}
 \usage{
 layer_lstm(object, units, activation = "tanh",
   recurrent_activation = "hard_sigmoid", use_bias = TRUE,

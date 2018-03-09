@@ -156,6 +156,15 @@ test_call_succeeds("layer_separable_conv_2d", {
   }
 })
 
+test_call_succeeds("layer_depthwise_conv_2d", required_version = "2.1.5", {
+  if (is_tensorflow_implementation()) {
+    keras_model_sequential() %>%
+      layer_dense(32, input_shape = c(784)) %>%
+      layer_reshape(target_shape = c(2,4,4)) %>%
+      layer_depthwise_conv_2d(kernel_size = c(2,2))
+  }
+})
+
 
 test_call_succeeds("layer_conv_lstm_2d", {
   keras_model_sequential() %>%

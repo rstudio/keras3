@@ -95,6 +95,7 @@ reference:
     contents:
       - starts_with("layer_conv_")
       - layer_separable_conv_2d
+      - layer_depthwise_conv_2d
       - starts_with("layer_upsampling_")
       - starts_with("layer_zero_padding_")
       - starts_with("layer_cropping_")
@@ -296,6 +297,7 @@ reference:
   - title: "Utils"
     contents:
       - plot.keras_training_history
+      - timeseries_generator
       - to_categorical
       - normalize
       - with_custom_object_scope

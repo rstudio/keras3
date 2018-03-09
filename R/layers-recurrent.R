@@ -96,14 +96,29 @@ layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE
 
 #' Gated Recurrent Unit - Cho et al.
 #' 
+#' There are two variants. The default one is based on 1406.1078v3 and
+#' has reset gate applied to hidden state before matrix multiplication. The
+#' other one is based on original 1406.1078v1 and has the order reversed.
+#' 
+#' The second variant is compatible with CuDNNGRU (GPU-only) and allows
+#' inference on CPU. Thus it has separate biases for `kernel` and
+#' `recurrent_kernel`. Use `reset_after = TTRUE` and
+#' `recurrent_activation = "sigmoid"`.
+#' 
 #' @inheritParams layer_simple_rnn
 #' 
 #' @param recurrent_activation Activation function to use for the recurrent
 #'   step.
+#' @param reset_after GRU convention (whether to apply reset gate after or
+#'   before matrix multiplication). FALSE = "before" (default),
+#'   TRUE = "after" (CuDNN compatible).   
+#'  
 #'   
 #' @template roxlate-recurrent-layer    
 #' 
 #' @section References: 
+#' - [Learning Phrase Representations using RNN Encoder-Decoder for Statistical
+#'    Machine Translation](https://arxiv.org/abs/1406.1078)
 #' - [On the Properties of Neural Machine Translation:
 #'   Encoder-Decoder Approaches](https://arxiv.org/abs/1409.1259) 
 #' - [Empirical
@@ -115,7 +130,7 @@ layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE
 #'     
 #' @export
 layer_gru <- function(object, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 
-                      return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE,
+                      return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, reset_after = FALSE,
                       kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros", 
                       kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                       kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL, 
@@ -154,6 +169,9 @@ layer_gru <- function(object, units, activation = "tanh", recurrent_activation =
   
   if (keras_version() >= "2.0.5")
     args$return_state <- return_state
+  
+  if (keras_version() >= "2.1.5")
+    args$reset_after <- reset_after
   
   create_layer(keras$layers$GRU, object, args)
 }
@@ -213,7 +231,7 @@ layer_cudnn_gru <- function(object, units,
 }
 
 
-#' Long-Short Term Memory unit - Hochreiter 1997.
+#' Long Short-Term Memory unit - Hochreiter 1997.
 #' 
 #' For a step-by-step description of the algorithm, see [this tutorial](http://deeplearning.net/tutorial/lstm.html).
 #' 

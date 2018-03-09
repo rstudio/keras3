@@ -652,7 +652,7 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'   `epochs` is to be understood as "final epoch". The model is not trained
 #'    for a number of iterations given by `epochs`, but merely until the epoch
 #'    of index `epochs` is reached.
-#' @param callbacks list of callbacks to be called during training.
+#' @param callbacks List of callbacks to apply during training.
 #' @param validation_data this can be either: 
 #'    - a generator for the validation data 
 #'    - a list (inputs, targets) 
@@ -662,7 +662,8 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'  The model will not be trained on this data.
 #' @param validation_steps Only relevant if `validation_data` is a generator.
 #'   Total number of steps (batches of samples) to yield from `generator` before
-#'   stopping.
+#'   stopping at the end of every epoch. It should typically be equal to the number
+#'   of samples of your validation dataset divided by the batch size.
 #' @param class_weight Optional named list mapping class indices (integer) to a
 #'   weight (float) value, used for weighting the loss function (during 
 #'   training only). This can be useful to tell the model to "pay more 
@@ -866,18 +867,19 @@ is_main_thread_generator.keras.preprocessing.image.Iterator <- function(x) {
 
   
 #' Retrieves a layer based on either its name (unique) or index.
-#' 
-#' Indices are based on order of horizontal graph traversal (bottom-up) and 
-#' are 0-based.
-#' 
+#'
+#' Indices are based on order of horizontal graph traversal (bottom-up) and are
+#' 0-based. If `name` and `index` are both provided, `index` will take
+#' precedence.
+#'
 #' @param object Keras model object
 #' @param name String, name of layer.
 #' @param index Integer, index of layer (0-based)
-#' 
+#'
 #' @return A layer instance.
-#' 
-#' @family model functions   
-#' 
+#'
+#' @family model functions
+#'
 #' @export
 get_layer <- function(object, name = NULL, index = NULL) {
   object$get_layer(

@@ -4,7 +4,7 @@
 \alias{layer_separable_conv_2d}
 \title{Depthwise separable 2D convolution.}
 \usage{
-layer_separable_conv_2d(object, filters, kernel_size, strides = c(1L, 1L),
+layer_separable_conv_2d(object, filters, kernel_size, strides = c(1, 1),
   padding = "valid", data_format = NULL, depth_multiplier = 1L,
   activation = NULL, use_bias = TRUE,
   depthwise_initializer = "glorot_uniform",
@@ -125,6 +125,7 @@ Other convolutional layers: \code{\link{layer_conv_1d}},
   \code{\link{layer_cropping_1d}},
   \code{\link{layer_cropping_2d}},
   \code{\link{layer_cropping_3d}},
+  \code{\link{layer_depthwise_conv_2d}},
   \code{\link{layer_separable_conv_1d}},
   \code{\link{layer_upsampling_1d}},
   \code{\link{layer_upsampling_2d}},
