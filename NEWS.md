@@ -5,6 +5,13 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Support for custom constraints from R 
 
+- Added `timeseries_generator()` utilty function 
+
+- New layer `layer_depthwise_conv_2d()`
+
+- Added `brightness_range` and `validation_split` arguments to 
+  [image_data_generator()].
+
 
 ## Keras 2.1.4 (CRAN)
 

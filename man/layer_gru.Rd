@@ -7,7 +7,8 @@
 layer_gru(object, units, activation = "tanh",
   recurrent_activation = "hard_sigmoid", use_bias = TRUE,
   return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE,
-  stateful = FALSE, unroll = FALSE, kernel_initializer = "glorot_uniform",
+  stateful = FALSE, unroll = FALSE, reset_after = FALSE,
+  kernel_initializer = "glorot_uniform",
   recurrent_initializer = "orthogonal", bias_initializer = "zeros",
   kernel_regularizer = NULL, recurrent_regularizer = NULL,
   bias_regularizer = NULL, activity_regularizer = NULL,
@@ -47,6 +48,10 @@ of index i in the following batch.}
 else a symbolic loop will be used. Unrolling can speed-up a RNN, although
 it tends to be more memory-intensive. Unrolling is only suitable for short
 sequences.}
+
+\item{reset_after}{GRU convention (whether to apply reset gate after or
+before matrix multiplication). FALSE = "before" (default),
+TRUE = "after" (CuDNN compatible).}
 
 \item{kernel_initializer}{Initializer for the \code{kernel} weights matrix, used
 for the linear transformation of the inputs.}
@@ -104,7 +109,15 @@ isn't provided.}
 \item{weights}{Initial weights for layer.}
 }
 \description{
-Gated Recurrent Unit - Cho et al.
+There are two variants. The default one is based on 1406.1078v3 and
+has reset gate applied to hidden state before matrix multiplication. The
+other one is based on original 1406.1078v1 and has the order reversed.
+}
+\details{
+The second variant is compatible with CuDNNGRU (GPU-only) and allows
+inference on CPU. Thus it has separate biases for \code{kernel} and
+\code{recurrent_kernel}. Use \code{reset_after = TTRUE} and
+\code{recurrent_activation = "sigmoid"}.
 }
 \section{Input shapes}{
 
@@ -175,6 +188,7 @@ the initial state of the RNN layer.
 \section{References}{
 
 \itemize{
+\item \href{https://arxiv.org/abs/1406.1078}{Learning Phrase Representations using RNN Encoder-Decoder for StatisticalMachine Translation}
 \item \href{https://arxiv.org/abs/1409.1259}{On the Properties of Neural Machine Translation:Encoder-Decoder Approaches}
 \item \href{http://arxiv.org/abs/1412.3555v1}{EmpiricalEvaluation of Gated Recurrent Neural Networks on SequenceModeling}
 \item \href{http://arxiv.org/abs/1512.05287}{A Theoretically GroundedApplication of Dropout in Recurrent NeuralNetworks}

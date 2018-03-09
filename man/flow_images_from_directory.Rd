@@ -9,7 +9,8 @@ flow_images_from_directory(directory, generator = image_data_generator(),
   target_size = c(256, 256), color_mode = "rgb", classes = NULL,
   class_mode = "categorical", batch_size = 32, shuffle = TRUE,
   seed = NULL, save_to_dir = NULL, save_prefix = "",
-  save_format = "png", follow_links = FALSE, interpolation = "nearest")
+  save_format = "png", follow_links = FALSE, subset = NULL,
+  interpolation = "nearest")
 }
 \arguments{
 \item{directory}{path to the target directory. It should contain one
@@ -57,6 +58,9 @@ set). Default: "png".}
 
 \item{follow_links}{whether to follow symlinks inside class subdirectories
 (default: \code{FALSE})}
+
+\item{subset}{Subset of data (\code{"training"} or \code{"validation"}) if
+\code{validation_split} is set in \code{\link[=image_data_generator]{image_data_generator()}}.}
 
 \item{interpolation}{Interpolation method used to resample the image if the
 target size is different from that of the loaded image. Supported methods

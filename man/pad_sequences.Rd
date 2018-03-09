@@ -2,7 +2,7 @@
 % Please edit documentation in R/preprocessing.R
 \name{pad_sequences}
 \alias{pad_sequences}
-\title{Pads each sequence to the same length (length of the longest sequence).}
+\title{Pads sequences to the same length}
 \usage{
 pad_sequences(sequences, maxlen = NULL, dtype = "int32", padding = "pre",
   truncating = "pre", value = 0)
@@ -10,26 +10,37 @@ pad_sequences(sequences, maxlen = NULL, dtype = "int32", padding = "pre",
 \arguments{
 \item{sequences}{List of lists where each element is a sequence}
 
-\item{maxlen}{int, maximum length}
+\item{maxlen}{int, maximum length of all sequences}
 
-\item{dtype}{type to cast the resulting sequence.}
+\item{dtype}{type of the output sequences}
 
 \item{padding}{'pre' or 'post', pad either before or after each sequence.}
 
-\item{truncating}{'pre' or 'post', remove values from sequences larger than maxlen either in the beginning or in the end of the sequence}
+\item{truncating}{'pre' or 'post', remove values from sequences larger than
+maxlen either in the beginning or in the end of the sequence}
 
-\item{value}{float, value to pad the sequences to the desired value.}
+\item{value}{float, padding value}
 }
 \value{
-Array with dimensions (number_of_sequences, maxlen)
+Matrix with dimensions (number_of_sequences, maxlen)
 }
 \description{
-Pads each sequence to the same length (length of the longest sequence).
+Pads sequences to the same length
 }
 \details{
-If maxlen is provided, any sequence longer than maxlen is truncated to maxlen.
-Truncation happens off either the beginning (default) or
-the end of the sequence. Supports post-padding and pre-padding (default).
+This function transforms a list of \code{num_samples} sequences (lists
+of integers) into a matrix of shape \code{(num_samples, num_timesteps)}.
+\code{num_timesteps} is either the \code{maxlen} argument if provided, or the length
+of the longest sequence otherwise.
+
+Sequences that are shorter than \code{num_timesteps} are padded with \code{value} at
+the end.
+
+Sequences longer than \code{num_timesteps} are truncated so that they fit the
+desired length. The position where padding or truncation happens is
+determined by the arguments \code{padding} and \code{truncating}, respectively.
+
+Pre-padding is the default.
 }
 \seealso{
 Other text preprocessing: \code{\link{make_sampling_table}},

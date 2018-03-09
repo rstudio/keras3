@@ -324,8 +324,6 @@ imagenet_preprocess_input <- function(x, data_format = NULL, mode = "caffe") {
 #' the `mobilenet_load_model_hdf5()` function. To prepare image input
 #' for MobileNet use `mobilenet_preprocess_input()`. To decode 
 #' predictions use `mobilenet_decode_predictions()`.
-#' 
-#' MobileNet is currently only supported with the TensorFlow backend.
 #'
 #' @inheritParams imagenet_decode_predictions
 #' @inheritParams load_model_hdf5
@@ -405,10 +403,15 @@ mobilenet_decode_predictions <- function(preds, top = 5) {
 #' @rdname application_mobilenet
 #' @export
 mobilenet_load_model_hdf5 <- function(filepath) {
-  load_model_hdf5(filepath, custom_objects = list(
-    relu6 = keras$applications$mobilenet$relu6,
-    DepthwiseConv2D = keras$applications$mobilenet$DepthwiseConv2D
-  ))
+  
+  custom_objects <- list(
+    relu6 = keras$applications$mobilenet$relu6
+  )
+  
+  if (keras_version() < "2.1.5")
+    custom_objects$DepthwiseConv2D <- keras$applications$mobilenet$DepthwiseConv2D
+  
+  load_model_hdf5(filepath, custom_objects = custom_objects)
 }
 
 #' Instantiates the DenseNet architecture.

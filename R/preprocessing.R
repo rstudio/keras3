@@ -1,19 +1,29 @@
 
-#' Pads each sequence to the same length (length of the longest sequence).
-#' 
-#' @details 
-#' If maxlen is provided, any sequence longer than maxlen is truncated to maxlen.
-#' Truncation happens off either the beginning (default) or
-#' the end of the sequence. Supports post-padding and pre-padding (default).
-#' 
+#' Pads sequences to the same length
+#'
+#' @details This function transforms a list of `num_samples` sequences (lists
+#' of integers) into a matrix of shape `(num_samples, num_timesteps)`.
+#' `num_timesteps` is either the `maxlen` argument if provided, or the length
+#' of the longest sequence otherwise.
+#'
+#' Sequences that are shorter than `num_timesteps` are padded with `value` at
+#' the end.
+#'
+#' Sequences longer than `num_timesteps` are truncated so that they fit the
+#' desired length. The position where padding or truncation happens is
+#' determined by the arguments `padding` and `truncating`, respectively.
+#'
+#' Pre-padding is the default.
+#'
 #' @param sequences List of lists where each element is a sequence
-#' @param maxlen int, maximum length
-#' @param dtype type to cast the resulting sequence.
+#' @param maxlen int, maximum length of all sequences
+#' @param dtype type of the output sequences
 #' @param padding 'pre' or 'post', pad either before or after each sequence.
-#' @param truncating 'pre' or 'post', remove values from sequences larger than maxlen either in the beginning or in the end of the sequence
-#' @param value float, value to pad the sequences to the desired value.
-#' 
-#' @return Array with dimensions (number_of_sequences, maxlen)
+#' @param truncating 'pre' or 'post', remove values from sequences larger than
+#'   maxlen either in the beginning or in the end of the sequence
+#' @param value float, padding value
+#'
+#' @return Matrix with dimensions (number_of_sequences, maxlen)
 #'
 #' @family text preprocessing
 #'
@@ -43,24 +53,29 @@ pad_sequences <- function(sequences, maxlen = NULL, dtype = "int32", padding = "
 
 #' Generates skipgram word pairs.
 #' 
-#' Takes a sequence (list of indexes of words), returns list of `couples` (word_index,
-#' other_word index) and `labels` (1s or 0s), where label = 1 if 'other_word'
-#' belongs to the context of 'word', and label=0 if 'other_word' is randomly
-#' sampled
+#' @details 
+#' This function transforms a list of word indexes (lists of integers)
+#' into lists of words of the form:
+#'
+#' - (word, word in the same window), with label 1 (positive samples).
+#' - (word, random word from the vocabulary), with label 0 (negative samples).
+#'
+#' Read more about Skipgram in this gnomic paper by Mikolov et al.:
+#' [Efficient Estimation of Word Representations in Vector Space](http://arxiv.org/pdf/1301.3781v3.pdf)
 #' 
-#' @param sequence a word sequence (sentence), encoded as a list of word indices
+#' @param sequence A word sequence (sentence), encoded as a list of word indices
 #'   (integers). If using a `sampling_table`, word indices are expected to match
 #'   the rank of the words in a reference dataset (e.g. 10 would encode the
 #'   10-th most frequently occuring token). Note that index 0 is expected to be
 #'   a non-word and will be skipped.
-#' @param vocabulary_size int. maximum possible word index + 1
-#' @param window_size int. actually half-window. The window of a word wi will be
-#'   `[i-window_size, i+window_size+1]`
-#' @param negative_samples float >= 0. 0 for no negative (=random) samples. 1
-#'   for same number as positive samples. etc.
+#' @param vocabulary_size Int, maximum possible word index + 1
+#' @param window_size Int, size of sampling windows (technically half-window). 
+#'   The window of a word `w_i` will be `[i-window_size, i+window_size+1]`
+#' @param negative_samples float >= 0. 0 for no negative (i.e. random) samples. 1
+#'   for same number as positive samples. 
 #' @param shuffle whether to shuffle the word couples before returning them.
-#' @param categorical bool. if FALSE, labels will be integers (eg. `[0, 1, 1 .. ]`), 
-#'   if TRUE labels will be categorical eg. `[[1,0],[0,1],[0,1] .. ]`
+#' @param categorical bool. if `FALSE`, labels will be integers (eg. `[0, 1, 1 .. ]`), 
+#'   if `TRUE` labels will be categorical eg. `[[1,0],[0,1],[0,1] .. ]`
 #' @param sampling_table 1D array of size `vocabulary_size` where the entry i
 #'   encodes the probabibily to sample a word of rank i.
 #' @param seed Random seed
@@ -103,17 +118,25 @@ skipgrams <- function(sequence, vocabulary_size, window_size = 4, negative_sampl
 
 #' Generates a word rank-based probabilistic sampling table.
 #' 
-#' This generates an array where the ith element is the probability that a word
-#' of rank i would be sampled, according to the sampling distribution used in
-#' word2vec. The word2vec formula is: p(word) = min(1,
-#' sqrt(word.frequency/sampling_factor) / (word.frequency/sampling_factor)) We
-#' assume that the word frequencies follow Zipf's law (s=1) to derive a
-#' numerical approximation of frequency(rank): frequency(rank) ~ 1/(rank *
-#' (log(rank) + gamma) + 1/2 - 1/(12*rank)) where gamma is the Euler-Mascheroni
-#' constant.
+#' @details 
 #' 
-#' @param size int, number of possible words to sample.
-#' @param sampling_factor the sampling factor in the word2vec formula.
+#' Used for generating the `sampling_table` argument for [skipgrams()].
+#' `sampling_table[[i]]` is the probability of sampling the word i-th most common
+#' word in a dataset (more common words should be sampled less frequently, for balance).
+#' 
+#' The sampling probabilities are generated according to the sampling distribution used in word2vec:
+#'
+#'  `p(word) = min(1, sqrt(word_frequency / sampling_factor) / (word_frequency / sampling_factor))`
+#' 
+#' We assume that the word frequencies follow Zipf's law (s=1) to derive a 
+#' numerical approximation of frequency(rank):
+#' 
+#' `frequency(rank) ~ 1/(rank * (log(rank) + gamma) + 1/2 - 1/(12*rank))`
+#' 
+#' where `gamma` is the Euler-Mascheroni constant.
+#' 
+#' @param size Int, number of possible words to sample.
+#' @param sampling_factor The sampling factor in the word2vec formula.
 #'   
 #' @return An array of length `size` where the ith entry is the
 #'   probability that a word of rank i should be sampled.
@@ -561,6 +584,7 @@ image_array_save <- function(img, path) {
 #' @param rotation_range degrees (0 to 180).
 #' @param width_shift_range fraction of total width.
 #' @param height_shift_range fraction of total height.
+#' @param brightness_range the range of brightness to apply
 #' @param shear_range shear intensity (shear angle in radians).
 #' @param zoom_range amount of zoom. if scalar z, zoom will be randomly picked
 #'   in the range `[1-z, 1+z]`. A sequence of two can be passed instead to select
@@ -589,14 +613,15 @@ image_array_save <- function(img, path) {
 #'   mode it is at index 3. It defaults to the `image_data_format` value found
 #'   in your Keras config file at `~/.keras/keras.json`. If you never set it,
 #'   then it will be "channels_last".
+#' @param validation_split fraction of images reserved for validation (strictly between 0 and 1).
 #'   
 #' @export
 image_data_generator <- function(featurewise_center = FALSE, samplewise_center = FALSE, 
                                  featurewise_std_normalization = FALSE, samplewise_std_normalization = FALSE, 
                                  zca_whitening = FALSE, zca_epsilon = 1e-6, rotation_range = 0.0, width_shift_range = 0.0, 
-                                 height_shift_range = 0.0,  shear_range = 0.0, zoom_range = 0.0, channel_shift_range = 0.0, 
+                                 height_shift_range = 0.0, brightness_range = NULL, shear_range = 0.0, zoom_range = 0.0, channel_shift_range = 0.0, 
                                  fill_mode = "nearest", cval = 0.0, horizontal_flip = FALSE, vertical_flip = FALSE, 
-                                 rescale = NULL, preprocessing_function = NULL, data_format = NULL) {
+                                 rescale = NULL, preprocessing_function = NULL, data_format = NULL, validation_split=0.0) {
   args <- list(
     featurewise_center = featurewise_center,
     samplewise_center = samplewise_center,
@@ -619,6 +644,10 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
   )
   if (keras_version() >= "2.0.4")
     args$zca_epsilon <- zca_epsilon
+  if (keras_version() >= "2.1.5") {
+    args$brightness_range <- brightness_range
+    args$validation_split <- validation_split
+  }
   
   do.call(keras$preprocessing$image$ImageDataGenerator, args)
   
@@ -685,6 +714,8 @@ fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, see
 #'   pictures (only relevant if `save_to_dir` is set).
 #' @param save_format one of "png", "jpeg" (only relevant if save_to_dir is 
 #'   set). Default: "png".
+#' @param subset Subset of data (`"training"` or `"validation"`) if
+#'   `validation_split` is set in [image_data_generator()].
 #'   
 #' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a 
 #'   array of corresponding labels. The generator loops indefinitely.
@@ -695,8 +726,9 @@ fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, see
 flow_images_from_data <- function(
   x, y = NULL, generator = image_data_generator(), batch_size = 32, 
   shuffle = TRUE, seed = NULL, 
-  save_to_dir = NULL, save_prefix = "", save_format = 'png') {
-  generator$flow(
+  save_to_dir = NULL, save_prefix = "", save_format = 'png', subset = NULL) {
+  
+  args <- list(
     x = keras_array(x),
     y = keras_array(y),
     batch_size = as.integer(batch_size),
@@ -706,6 +738,11 @@ flow_images_from_data <- function(
     save_prefix = save_prefix,
     save_format = save_format
   )
+  
+  if (keras_version() >= "2.1.5")
+    args$subset <- subset
+  
+  do.call(generator$flow, args)
 }
 
 #' Generates batches of data from images in a directory (with optional
@@ -752,7 +789,7 @@ flow_images_from_directory <- function(
   classes = NULL, class_mode = "categorical",
   batch_size = 32, shuffle = TRUE, seed = NULL,
   save_to_dir = NULL, save_prefix = "", save_format = "png",
-  follow_links = FALSE, interpolation = "nearest") {
+  follow_links = FALSE, subset = NULL, interpolation = "nearest") {
   
   args <- list(
     directory = normalize_path(directory),
@@ -771,6 +808,9 @@ flow_images_from_directory <- function(
   
   if (keras_version() >= "2.1.2")
     args$interpolation <- interpolation
+  
+  if (keras_version() >= "2.1.5")
+    args$subset <- subset
   
   do.call(generator$flow_from_directory, args)
 }

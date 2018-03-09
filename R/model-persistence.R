@@ -134,7 +134,7 @@ load_model_weights_hdf5 <- function(object, filepath, by_name = FALSE,
     by_name = by_name
   )
   
-  if (keras_version() >= "2.1.3")
+  if (keras_version() >= "2.1.4")
     args$skip_mismatch <- skip_mismatch
   
   if (keras_version() >= "2.1.4")
