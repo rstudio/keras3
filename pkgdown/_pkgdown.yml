@@ -94,6 +94,7 @@ reference:
   - title: "Convolutional Layers"
     contents:
       - starts_with("layer_conv_")
+      - layer_separable_conv_1d
       - layer_separable_conv_2d
       - layer_depthwise_conv_2d
       - starts_with("layer_upsampling_")
@@ -118,6 +119,7 @@ reference:
       - layer_activation_parametric_relu
       - layer_activation_thresholded_relu
       - layer_activation_elu
+      - layer_activation_softmax
       
   - title: "Dropout Layers"
     contents:
