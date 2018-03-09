@@ -17,8 +17,7 @@ title: "Keras Examples"
 | [imdb_fasttext](imdb_fasttext.html) | Trains a FastText model on the IMDB sentiment classification task. |
 | [imdb_lstm](imdb_lstm.html) | Trains a LSTM on the IMDB sentiment classification task. |
 | [lstm_text_generation](lstm_text_generation.html) | Generates text from Nietzsche's writings. |
-| [lstm_seq2seq](lstm_seq2seq.html) | This script demonstrates how to implement a basic character-level
-sequence-to-sequence model. |
+| [lstm_seq2seq](lstm_seq2seq.html) | This script demonstrates how to implement a basic character-level sequence-to-sequence model. |
 | [mnist_acgan](mnist_acgan.html) | Implementation of AC-GAN (Auxiliary Classifier GAN ) on the MNIST dataset |
 | [mnist_antirectifier](mnist_antirectifier.html) | Demonstrates how to write custom layers for Keras |
 | [mnist_cnn](mnist_cnn.html) | Trains a simple convnet on the MNIST dataset. |
