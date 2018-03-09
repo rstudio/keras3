@@ -123,7 +123,208 @@
 <div class="source-ref">
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/lstm_seq2seq.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/lstm_seq2seq.R</a></p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Example</span></code></pre></div>
+<p>Sequence to sequence example in Keras (character-level).</p>
+<p>This script demonstrates how to implement a basic character-level sequence-to-sequence model. We apply it to translating short English sentences into short French sentences, character-by-character. Note that it is fairly unusual to do character-level machine translation, as word-level models are more common in this domain.</p>
+<p><strong>Algorithm</strong></p>
+<ul>
+<li>We start with input sequences from a domain (e.g. English sentences) and correspding target sequences from another domain (e.g. French sentences).</li>
+<li>An encoder LSTM turns input sequences to 2 state vectors (we keep the last LSTM state and discard the outputs).</li>
+<li>A decoder LSTM is trained to turn the target sequences into the same sequence but offset by one timestep in the future, a training process called “teacher forcing” in this context. Is uses as initial state the state vectors from the encoder. Effectively, the decoder learns to generate <code>targets[t+1...]</code> given <code>targets[...t]</code>, conditioned on the input sequence.</li>
+<li>In inference mode, when we want to decode unknown input sequences, we:
+<ul>
+<li>Encode the input sequence into state vectors</li>
+<li>Start with a target sequence of size 1 (just the start-of-sequence character)</li>
+<li>Feed the state vectors and 1-char target sequence to the decoder to produce predictions for the next character</li>
+<li>Sample the next character using these predictions (we simply use argmax).</li>
+<li>Append the sampled character to the target sequence</li>
+<li>Repeat until we generate the end-of-sequence character or we hit the character limit.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Data download</strong></p>
+<p>English to French sentence pairs. <a href="http://www.manythings.org/anki/fra-eng.zip" class="uri">http://www.manythings.org/anki/fra-eng.zip</a></p>
+<p>Lots of neat sentence pairs datasets can be found at: <a href="http://www.manythings.org/anki/" class="uri">http://www.manythings.org/anki/</a></p>
+<p><strong>References</strong></p>
+<ul>
+<li>Sequence to Sequence Learning with Neural Networks <a href="https://arxiv.org/abs/1409.3215" class="uri">https://arxiv.org/abs/1409.3215</a>
+</li>
+<li>Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation <a href="https://arxiv.org/abs/1406.1078" class="uri">https://arxiv.org/abs/1406.1078</a>
+</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+<span class="kw">library</span>(data.table)
+
+batch_size =<span class="st"> </span><span class="dv">64</span>  <span class="co"># Batch size for training.</span>
+epochs =<span class="st"> </span><span class="dv">100</span>  <span class="co"># Number of epochs to train for.</span>
+latent_dim =<span class="st"> </span><span class="dv">256</span>  <span class="co"># Latent dimensionality of the encoding space.</span>
+num_samples =<span class="st"> </span><span class="dv">10000</span>  <span class="co"># Number of samples to train on.</span>
+
+## Path to the data txt file on disk.
+data_path =<span class="st"> 'fra.txt'</span>
+text &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/data.table/topics/fread">fread</a></span>(data_path, <span class="dt">sep=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, <span class="dt">header=</span><span class="ot">FALSE</span>, <span class="dt">nrows=</span>num_samples)
+
+## Vectorize the data.
+input_texts  &lt;-<span class="st"> </span>text[[<span class="dv">1</span>]]
+target_texts &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">'</span><span class="ch">\t</span><span class="st">'</span>,text[[<span class="dv">2</span>]],<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
+input_texts  &lt;-<span class="st"> </span><span class="kw">lapply</span>( input_texts, <span class="cf">function</span>(s) <span class="kw"><a href="http://www.rdocumentation.org/packages/data.table/topics/tstrsplit">strsplit</a></span>(s, <span class="dt">split=</span><span class="st">""</span>)[[<span class="dv">1</span>]])
+target_texts &lt;-<span class="st"> </span><span class="kw">lapply</span>( target_texts, <span class="cf">function</span>(s) <span class="kw"><a href="http://www.rdocumentation.org/packages/data.table/topics/tstrsplit">strsplit</a></span>(s, <span class="dt">split=</span><span class="st">""</span>)[[<span class="dv">1</span>]])
+
+input_characters  &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/data.table/topics/duplicated">unique</a></span>(<span class="kw">unlist</span>(input_texts)))
+target_characters &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/data.table/topics/duplicated">unique</a></span>(<span class="kw">unlist</span>(target_texts)))
+num_encoder_tokens &lt;-<span class="st"> </span><span class="kw">length</span>(input_characters)
+num_decoder_tokens &lt;-<span class="st"> </span><span class="kw">length</span>(target_characters)
+max_encoder_seq_length &lt;-<span class="st"> </span><span class="kw">max</span>(<span class="kw">sapply</span>(input_texts,length))
+max_decoder_seq_length &lt;-<span class="st"> </span><span class="kw">max</span>(<span class="kw">sapply</span>(target_texts,length))
+
+<span class="kw">cat</span>(<span class="st">'Number of samples:'</span>, <span class="kw">length</span>(input_texts),<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
+<span class="kw">cat</span>(<span class="st">'Number of unique input tokens:'</span>, num_encoder_tokens,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
+<span class="kw">cat</span>(<span class="st">'Number of unique output tokens:'</span>, num_decoder_tokens,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
+<span class="kw">cat</span>(<span class="st">'Max sequence length for inputs:'</span>, max_encoder_seq_length,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
+<span class="kw">cat</span>(<span class="st">'Max sequence length for outputs:'</span>, max_decoder_seq_length,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
+
+input_token_index  &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(input_characters)
+<span class="kw">names</span>(input_token_index) &lt;-<span class="st"> </span>input_characters
+target_token_index &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(target_characters)
+<span class="kw">names</span>(target_token_index) &lt;-<span class="st"> </span>target_characters
+encoder_input_data &lt;-<span class="st"> </span><span class="kw">array</span>(
+  <span class="dv">0</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">length</span>(input_texts), max_encoder_seq_length, num_encoder_tokens))
+decoder_input_data &lt;-<span class="st"> </span><span class="kw">array</span>(
+  <span class="dv">0</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">length</span>(input_texts), max_decoder_seq_length, num_decoder_tokens))
+decoder_target_data &lt;-<span class="st"> </span><span class="kw">array</span>(
+  <span class="dv">0</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">length</span>(input_texts), max_decoder_seq_length, num_decoder_tokens))
+
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(input_texts)) {
+  d1 &lt;-<span class="st"> </span><span class="kw">sapply</span>( input_characters, <span class="cf">function</span>(x) { <span class="kw">as.integer</span>(x <span class="op">==</span><span class="st"> </span>input_texts[[i]]) })
+  encoder_input_data[i,<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(d1),] &lt;-<span class="st"> </span>d1
+  d2 &lt;-<span class="st"> </span><span class="kw">sapply</span>( target_characters, <span class="cf">function</span>(x) { <span class="kw">as.integer</span>(x <span class="op">==</span><span class="st"> </span>target_texts[[i]]) })
+  decoder_input_data[i,<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(d2),] &lt;-<span class="st"> </span>d2
+  d3 &lt;-<span class="st"> </span><span class="kw">sapply</span>( target_characters, <span class="cf">function</span>(x) { <span class="kw">as.integer</span>(x <span class="op">==</span><span class="st"> </span>target_texts[[i]][<span class="op">-</span><span class="dv">1</span>]) })
+  decoder_target_data[i,<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(d3),] &lt;-<span class="st"> </span>d3
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Create the model</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Define an input sequence and process it.
+encoder_inputs  &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape=</span><span class="kw">list</span>(<span class="ot">NULL</span>,num_encoder_tokens))
+encoder         &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units=</span>latent_dim, <span class="dt">return_state=</span><span class="ot">TRUE</span>)
+encoder_results &lt;-<span class="st"> </span>encoder_inputs <span class="op">%&gt;%</span><span class="st"> </span>encoder
+## We discard `encoder_outputs` and only keep the states.
+encoder_states  &lt;-<span class="st"> </span>encoder_results[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]
+
+## Set up the decoder, using `encoder_states` as initial state.
+decoder_inputs  &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape=</span><span class="kw">list</span>(<span class="ot">NULL</span>, num_decoder_tokens))
+## We set up our decoder to return full output sequences,
+## and to return internal states as well. We don't use the
+## return states in the training model, but we will use them in inference.
+decoder_lstm    &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units=</span>latent_dim, <span class="dt">return_sequences=</span><span class="ot">TRUE</span>,
+                              <span class="dt">return_state=</span><span class="ot">TRUE</span>, <span class="dt">stateful=</span><span class="ot">FALSE</span>)
+decoder_results &lt;-<span class="st"> </span><span class="kw">decoder_lstm</span>(decoder_inputs, <span class="dt">initial_state=</span>encoder_states)
+decoder_dense   &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units=</span>num_decoder_tokens, <span class="dt">activation=</span><span class="st">'softmax'</span>)
+decoder_outputs &lt;-<span class="st"> </span><span class="kw">decoder_dense</span>(decoder_results[[<span class="dv">1</span>]])
+
+## Define the model that will turn
+## `encoder_input_data` &amp; `decoder_input_data` into `decoder_target_data`
+model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>( <span class="dt">inputs =</span> <span class="kw">list</span>(encoder_inputs, decoder_inputs),
+                      <span class="dt">outputs =</span> decoder_outputs )
+
+## Compile model
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(<span class="dt">optimizer=</span><span class="st">'rmsprop'</span>, <span class="dt">loss=</span><span class="st">'categorical_crossentropy'</span>)
+
+## Run model
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>( <span class="kw">list</span>(encoder_input_data, decoder_input_data), decoder_target_data,
+               <span class="dt">batch_size=</span>batch_size,
+               <span class="dt">epochs=</span>epochs,
+               <span class="dt">validation_split=</span><span class="fl">0.2</span>)
+
+## Save model
+<span class="kw"><a href="../../reference/save_model_hdf5.html">save_model_hdf5</a></span>(model,<span class="st">'s2s.h5'</span>)
+<span class="kw"><a href="../../reference/save_model_weights_hdf5.html">save_model_weights_hdf5</a></span>(model,<span class="st">'s2s-wt.h5'</span>)
+
+##model &lt;- load_model_hdf5('s2s.h5')
+##load_model_weights_hdf5(model,'s2s-wt.h5')</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Next: inference mode (sampling).</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Here's the drill:
+## 1) encode input and retrieve initial decoder state
+## 2) run one step of decoder with this initial state
+## and a "start of sequence" token as target.
+## Output will be the next target token
+## 3) Repeat with the current target token and current states
+
+## Define sampling models
+encoder_model &lt;-<span class="st">  </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(encoder_inputs, encoder_states)
+decoder_state_input_h &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape=</span>latent_dim)
+decoder_state_input_c &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape=</span>latent_dim)
+decoder_states_inputs &lt;-<span class="st"> </span><span class="kw">c</span>(decoder_state_input_h, decoder_state_input_c)
+decoder_results &lt;-<span class="st"> </span><span class="kw">decoder_lstm</span>(decoder_inputs, <span class="dt">initial_state=</span>decoder_states_inputs)
+decoder_states  &lt;-<span class="st"> </span>decoder_results[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]
+decoder_outputs &lt;-<span class="st"> </span><span class="kw">decoder_dense</span>(decoder_results[[<span class="dv">1</span>]])
+decoder_model   &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(
+  <span class="dt">inputs  =</span> <span class="kw">c</span>(decoder_inputs, decoder_states_inputs),
+  <span class="dt">outputs =</span> <span class="kw">c</span>(decoder_outputs, decoder_states))
+
+## Reverse-lookup token index to decode sequences back to
+## something readable.
+reverse_input_char_index  &lt;-<span class="st"> </span><span class="kw">as.character</span>(input_characters)
+reverse_target_char_index &lt;-<span class="st"> </span><span class="kw">as.character</span>(target_characters)
+
+decode_sequence &lt;-<span class="st"> </span><span class="cf">function</span>(input_seq) {
+  ## Encode the input as state vectors.
+  states_value &lt;-<span class="st"> </span><span class="kw">predict</span>(encoder_model, input_seq)
+  
+  ## Generate empty target sequence of length 1.
+  target_seq &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, num_decoder_tokens))
+  ## Populate the first character of target sequence with the start character.
+  target_seq[<span class="dv">1</span>, <span class="dv">1</span>, target_token_index[<span class="st">'</span><span class="ch">\t</span><span class="st">'</span>]] &lt;-<span class="st"> </span><span class="dv">1</span>.
+  
+  ## Sampling loop for a batch of sequences
+  ## (to simplify, here we assume a batch of size 1).
+  stop_condition =<span class="st"> </span><span class="ot">FALSE</span>
+  decoded_sentence =<span class="st"> ''</span>
+  maxiter =<span class="st"> </span>max_decoder_seq_length
+  niter =<span class="st"> </span><span class="dv">1</span>
+  <span class="cf">while</span> (<span class="op">!</span>stop_condition <span class="op">&amp;&amp;</span><span class="st"> </span>niter <span class="op">&lt;</span><span class="st"> </span>maxiter) {
+    
+    ## output_tokens, h, c = decoder_model.predict([target_seq] + states_value)
+    decoder_predict &lt;-<span class="st"> </span><span class="kw">predict</span>(decoder_model, <span class="kw">c</span>(<span class="kw">list</span>(target_seq), states_value))
+    output_tokens &lt;-<span class="st"> </span>decoder_predict[[<span class="dv">1</span>]]
+    
+    ## Sample a token
+    sampled_token_index &lt;-<span class="st"> </span><span class="kw">which.max</span>(output_tokens[<span class="dv">1</span>, <span class="dv">1</span>, ])
+    sampled_char &lt;-<span class="st"> </span>reverse_target_char_index[sampled_token_index]
+    decoded_sentence &lt;-<span class="st">  </span><span class="kw">paste0</span>(decoded_sentence, sampled_char)
+    decoded_sentence
+    
+    ## Exit condition: either hit max length
+    ## or find stop character.
+    <span class="cf">if</span> (sampled_char <span class="op">==</span><span class="st"> '</span><span class="ch">\n</span><span class="st">'</span> <span class="op">||</span>
+<span class="st">        </span><span class="kw">length</span>(decoded_sentence) <span class="op">&gt;</span><span class="st"> </span>max_decoder_seq_length) {
+      stop_condition =<span class="st"> </span><span class="ot">TRUE</span>
+    }
+    
+    ## Update the target sequence (of length 1).
+    ## target_seq = np.zeros((1, 1, num_decoder_tokens))
+    target_seq[<span class="dv">1</span>, <span class="dv">1</span>, ] &lt;-<span class="st"> </span><span class="dv">0</span>
+    target_seq[<span class="dv">1</span>, <span class="dv">1</span>, sampled_token_index] &lt;-<span class="st"> </span><span class="dv">1</span>.
+    
+    ## Update states
+    h &lt;-<span class="st"> </span>decoder_predict[[<span class="dv">2</span>]]
+    c &lt;-<span class="st"> </span>decoder_predict[[<span class="dv">3</span>]]
+    states_value =<span class="st"> </span><span class="kw">list</span>(h, c)
+    niter &lt;-<span class="st"> </span>niter <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+  }    
+  <span class="kw">return</span>(decoded_sentence)
+}
+
+<span class="cf">for</span> (seq_index <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) {
+  ## Take one sequence (part of the training test)
+  ## for trying out decoding.
+  input_seq =<span class="st"> </span>encoder_input_data[seq_index,,,drop=<span class="ot">FALSE</span>]
+  decoded_sentence =<span class="st"> </span><span class="kw">decode_sequence</span>(input_seq)
+  target_sentence &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">|</span><span class="ch">\n</span><span class="st">"</span>,<span class="st">""</span>,<span class="kw">paste</span>(target_texts[[seq_index]],<span class="dt">collapse=</span><span class="st">''</span>))
+  input_sentence  &lt;-<span class="st"> </span><span class="kw">paste</span>(input_texts[[seq_index]],<span class="dt">collapse=</span><span class="st">''</span>)
+  <span class="kw">cat</span>(<span class="st">'-</span><span class="ch">\n</span><span class="st">'</span>)
+  <span class="kw">cat</span>(<span class="st">'Input sentence  : '</span>, input_sentence,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
+  <span class="kw">cat</span>(<span class="st">'Target sentence : '</span>, target_sentence,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
+  <span class="kw">cat</span>(<span class="st">'Decoded sentence: '</span>, decoded_sentence,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
+}</code></pre></div>
 </div>
   </div>
 
