@@ -141,14 +141,7 @@
     </div>
 
     
-    <p>This generates an array where the ith element is the probability that a word
-of rank i would be sampled, according to the sampling distribution used in
-word2vec. The word2vec formula is: p(word) = min(1,
-sqrt(word.frequency/sampling_factor) / (word.frequency/sampling_factor)) We
-assume that the word frequencies follow Zipf's law (s=1) to derive a
-numerical approximation of frequency(rank): frequency(rank) ~ 1/(rank *
-(log(rank) + gamma) + 1/2 - 1/(12*rank)) where gamma is the Euler-Mascheroni
-constant.</p>
+    <p>Generates a word rank-based probabilistic sampling table.</p>
     
 
     <pre class="usage"><span class='fu'>make_sampling_table</span>(<span class='no'>size</span>, <span class='kw'>sampling_factor</span> <span class='kw'>=</span> <span class='fl'>1e-05</span>)</pre>
@@ -158,11 +151,11 @@ constant.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>size</th>
-      <td><p>int, number of possible words to sample.</p></td>
+      <td><p>Int, number of possible words to sample.</p></td>
     </tr>
     <tr>
       <th>sampling_factor</th>
-      <td><p>the sampling factor in the word2vec formula.</p></td>
+      <td><p>The sampling factor in the word2vec formula.</p></td>
     </tr>
     </table>
     
@@ -170,6 +163,19 @@ constant.</p>
 
     <p>An array of length <code>size</code> where the ith entry is the
 probability that a word of rank i should be sampled.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Used for generating the <code>sampling_table</code> argument for <code><a href='skipgrams.html'>skipgrams()</a></code>.
+<code>sampling_table[[i]]</code> is the probability of sampling the word i-th most common
+word in a dataset (more common words should be sampled less frequently, for balance).</p>
+<p>The sampling probabilities are generated according to the sampling distribution used in word2vec:
+    <code>p(word) = min(1, sqrt(word_frequency / sampling_factor) / (word_frequency / sampling_factor))</code></p>
+<p>We assume that the word frequencies follow Zipf's law (s=1) to derive a
+numerical approximation of frequency(rank):
+    <code>frequency(rank) ~ 1/(rank * (log(rank) + gamma) + 1/2 - 1/(12*rank))</code></p>
+<p>where <code>gamma</code> is the Euler-Mascheroni constant.</p>
+<p>[[i]: R:[i</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
@@ -192,6 +198,8 @@ sqrt(word.frequency/sampling_factor) / (word.frequency/sampling_factor))</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#note">Note</a></li>
 

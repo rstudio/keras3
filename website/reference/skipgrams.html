@@ -141,10 +141,7 @@
     </div>
 
     
-    <p>Takes a sequence (list of indexes of words), returns list of <code>couples</code> (word_index,
-other_word index) and <code>labels</code> (1s or 0s), where label = 1 if 'other_word'
-belongs to the context of 'word', and label=0 if 'other_word' is randomly
-sampled</p>
+    <p>Generates skipgram word pairs.</p>
     
 
     <pre class="usage"><span class='fu'>skipgrams</span>(<span class='no'>sequence</span>, <span class='no'>vocabulary_size</span>, <span class='kw'>window_size</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>negative_samples</span> <span class='kw'>=</span> <span class='fl'>1</span>,
@@ -156,7 +153,7 @@ sampled</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>sequence</th>
-      <td><p>a word sequence (sentence), encoded as a list of word indices
+      <td><p>A word sequence (sentence), encoded as a list of word indices
 (integers). If using a <code>sampling_table</code>, word indices are expected to match
 the rank of the words in a reference dataset (e.g. 10 would encode the
 10-th most frequently occuring token). Note that index 0 is expected to be
@@ -164,17 +161,17 @@ a non-word and will be skipped.</p></td>
     </tr>
     <tr>
       <th>vocabulary_size</th>
-      <td><p>int. maximum possible word index + 1</p></td>
+      <td><p>Int, maximum possible word index + 1</p></td>
     </tr>
     <tr>
       <th>window_size</th>
-      <td><p>int. actually half-window. The window of a word wi will be
-<code>[i-window_size, i+window_size+1]</code></p></td>
+      <td><p>Int, size of sampling windows (technically half-window).
+The window of a word <code>w_i</code> will be <code>[i-window_size, i+window_size+1]</code></p></td>
     </tr>
     <tr>
       <th>negative_samples</th>
-      <td><p>float &gt;= 0. 0 for no negative (=random) samples. 1
-for same number as positive samples. etc.</p></td>
+      <td><p>float &gt;= 0. 0 for no negative (i.e. random) samples. 1
+for same number as positive samples.</p></td>
     </tr>
     <tr>
       <th>shuffle</th>
@@ -182,8 +179,8 @@ for same number as positive samples. etc.</p></td>
     </tr>
     <tr>
       <th>categorical</th>
-      <td><p>bool. if FALSE, labels will be integers (eg. <code>[0, 1, 1 .. ]</code>),
-if TRUE labels will be categorical eg. <code>[[1,0],[0,1],[0,1] .. ]</code></p>
+      <td><p>bool. if <code>FALSE</code>, labels will be integers (eg. <code>[0, 1, 1 .. ]</code>),
+if <code>TRUE</code> labels will be categorical eg. <code>[[1,0],[0,1],[0,1] .. ]</code></p>
 <p>[[1,0]: R:[1,0
 [0,1]: R:0,1
 [0,1]: R:0,1</p></td>
@@ -211,6 +208,16 @@ and 0 becomes <code>[1, 0]</code>.</p></li>
 </ul>
 
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function transforms a list of word indexes (lists of integers)
+into lists of words of the form:</p><ul>
+<li><p>(word, word in the same window), with label 1 (positive samples).</p></li>
+<li><p>(word, random word from the vocabulary), with label 0 (negative samples).</p></li>
+</ul>
+    <p>Read more about Skipgram in this gnomic paper by Mikolov et al.:
+<a href='http://arxiv.org/pdf/1301.3781v3.pdf'>Efficient Estimation of Word Representations in Vector Space</a></p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other text preprocessing: <code><a href='make_sampling_table.html'>make_sampling_table</a></code>,
@@ -227,6 +234,8 @@ and 0 becomes <code>[1, 0]</code>.</p></li>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

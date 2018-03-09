@@ -5,7 +5,7 @@
 #' 
 #' Padding is handled by using a repeated sentinel character (space)
 #' 
-#' Input may optionally be inverted, shown to increase performance in many tasks in:
+#' Input may optionally be reversed, shown to increase performance in many tasks in:
 #' "Learning to Execute"
 #' http://arxiv.org/abs/1410.4615
 #' and
@@ -13,16 +13,16 @@
 #' http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf
 #' Theoretically it introduces shorter term dependencies between source and target.
 #' 
-#' Two digits inverted:
+#' Two digits reversed:
 #'  One layer LSTM (128 HN), 5k training examples = 99% train/test accuracy in 55 epochs
 #' 
-#' Three digits inverted:
+#' Three digits reversed:
 #'  One layer LSTM (128 HN), 50k training examples = 99% train/test accuracy in 100 epochs
 #' 
-#' Four digits inverted:
+#' Four digits reversed:
 #'  One layer LSTM (128 HN), 400k training examples = 99% train/test accuracy in 20 epochs
 #' 
-#' Five digits inverted:
+#' Five digits reversed:
 #'  One layer LSTM (128 HN), 550k training examples = 99% train/test accuracy in 30 epochs
 #' 
 
