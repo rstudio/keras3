@@ -18,6 +18,8 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -25,6 +27,10 @@
 <script src="../pkgdown.js"></script>
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
+<meta property="og:title" content="Function reference" />
+
+<meta property="og:image" content="/logo.png" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -375,27 +381,27 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></code> </p>
-          </td>
-          <td><p>Transposed 2D convolution layer (sometimes called Deconvolution).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="layer_conv_2d.html">layer_conv_2d</a></code> </p>
           </td>
           <td><p>2D convolution layer (e.g. spatial convolution over images).</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a></code> </p>
+            <p><code><a href="layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></code> </p>
           </td>
-          <td><p>Transposed 3D convolution layer (sometimes called Deconvolution).</p></td>
+          <td><p>Transposed 2D convolution layer (sometimes called Deconvolution).</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="layer_conv_3d.html">layer_conv_3d</a></code> </p>
           </td>
           <td><p>3D convolution layer (e.g. spatial convolution over volumes).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a></code> </p>
+          </td>
+          <td><p>Transposed 3D convolution layer (sometimes called Deconvolution).</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -1675,15 +1681,15 @@ augmented/normalized data)</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="k_cast_to_floatx.html">k_cast_to_floatx</a></code> </p>
-          </td>
-          <td><p>Cast an array to the default Keras float type.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="k_cast.html">k_cast</a></code> </p>
           </td>
           <td><p>Casts a tensor to a different dtype and returns it.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_cast_to_floatx.html">k_cast_to_floatx</a></code> </p>
+          </td>
+          <td><p>Cast an array to the default Keras float type.</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -1723,27 +1729,27 @@ augmented/normalized data)</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="k_conv2d_transpose.html">k_conv2d_transpose</a></code> </p>
-          </td>
-          <td><p>2D deconvolution (i.e. transposed convolution).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="k_conv2d.html">k_conv2d</a></code> </p>
           </td>
           <td><p>2D convolution.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="k_conv3d_transpose.html">k_conv3d_transpose</a></code> </p>
+            <p><code><a href="k_conv2d_transpose.html">k_conv2d_transpose</a></code> </p>
           </td>
-          <td><p>3D deconvolution (i.e. transposed convolution).</p></td>
+          <td><p>2D deconvolution (i.e. transposed convolution).</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="k_conv3d.html">k_conv3d</a></code> </p>
           </td>
           <td><p>3D convolution.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_conv3d_transpose.html">k_conv3d_transpose</a></code> </p>
+          </td>
+          <td><p>3D deconvolution (i.e. transposed convolution).</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -1921,15 +1927,15 @@ augmented/normalized data)</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="k_greater_equal.html">k_greater_equal</a></code> </p>
-          </td>
-          <td><p>Element-wise truth value of (x &gt;= y).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="k_greater.html">k_greater</a></code> </p>
           </td>
           <td><p>Element-wise truth value of (x &gt; y).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_greater_equal.html">k_greater_equal</a></code> </p>
+          </td>
+          <td><p>Element-wise truth value of (x &gt;= y).</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -2005,15 +2011,15 @@ augmented/normalized data)</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="k_less_equal.html">k_less_equal</a></code> </p>
-          </td>
-          <td><p>Element-wise truth value of (x &lt;= y).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="k_less.html">k_less</a></code> </p>
           </td>
           <td><p>Element-wise truth value of (x &lt; y).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_less_equal.html">k_less_equal</a></code> </p>
+          </td>
+          <td><p>Element-wise truth value of (x &lt;= y).</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -2113,15 +2119,15 @@ augmented/normalized data)</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="k_ones_like.html">k_ones_like</a></code> </p>
-          </td>
-          <td><p>Instantiates an all-ones variable of the same shape as another tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="k_ones.html">k_ones</a></code> </p>
           </td>
           <td><p>Instantiates an all-ones tensor variable and returns it.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_ones_like.html">k_ones_like</a></code> </p>
+          </td>
+          <td><p>Instantiates an all-ones variable of the same shape as another tensor.</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -2173,21 +2179,15 @@ augmented/normalized data)</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="k_random_normal_variable.html">k_random_normal_variable</a></code> </p>
-          </td>
-          <td><p>Instantiates a variable with values drawn from a normal distribution.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="k_random_normal.html">k_random_normal</a></code> </p>
           </td>
           <td><p>Returns a tensor with normal distribution of values.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="k_random_uniform_variable.html">k_random_uniform_variable</a></code> </p>
+            <p><code><a href="k_random_normal_variable.html">k_random_normal_variable</a></code> </p>
           </td>
-          <td><p>Instantiates a variable with values drawn from a uniform distribution.</p></td>
+          <td><p>Instantiates a variable with values drawn from a normal distribution.</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -2197,21 +2197,27 @@ augmented/normalized data)</p></td>
         </tr><tr>
           <!--  -->
           <td>
+            <p><code><a href="k_random_uniform_variable.html">k_random_uniform_variable</a></code> </p>
+          </td>
+          <td><p>Instantiates a variable with values drawn from a uniform distribution.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
             <p><code><a href="k_relu.html">k_relu</a></code> </p>
           </td>
           <td><p>Rectified linear unit.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="k_repeat_elements.html">k_repeat_elements</a></code> </p>
-          </td>
-          <td><p>Repeats the elements of a tensor along an axis.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="k_repeat.html">k_repeat</a></code> </p>
           </td>
           <td><p>Repeats a 2D tensor.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_repeat_elements.html">k_repeat_elements</a></code> </p>
+          </td>
+          <td><p>Repeats the elements of a tensor along an axis.</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -2419,6 +2425,12 @@ augmented/normalized data)</p></td>
         </tr><tr>
           <!--  -->
           <td>
+            <p><code><a href="k_update.html">k_update</a></code> </p>
+          </td>
+          <td><p>Update the value of <code>x</code> to <code>new_x</code>.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
             <p><code><a href="k_update_add.html">k_update_add</a></code> </p>
           </td>
           <td><p>Update the value of <code>x</code> by adding <code>increment</code>.</p></td>
@@ -2428,12 +2440,6 @@ augmented/normalized data)</p></td>
             <p><code><a href="k_update_sub.html">k_update_sub</a></code> </p>
           </td>
           <td><p>Update the value of <code>x</code> by subtracting <code>decrement</code>.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_update.html">k_update</a></code> </p>
-          </td>
-          <td><p>Update the value of <code>x</code> to <code>new_x</code>.</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -2449,15 +2455,15 @@ augmented/normalized data)</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="k_zeros_like.html">k_zeros_like</a></code> </p>
-          </td>
-          <td><p>Instantiates an all-zeros variable of the same shape as another tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="k_zeros.html">k_zeros</a></code> </p>
           </td>
           <td><p>Instantiates an all-zeros variable and returns it.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="k_zeros_like.html">k_zeros_like</a></code> </p>
+          </td>
+          <td><p>Instantiates an all-zeros variable of the same shape as another tensor.</p></td>
         </tr>
       </tbody>
       </table>
@@ -2508,7 +2514,7 @@ augmented/normalized data)</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -2516,3 +2522,4 @@ augmented/normalized data)</p></td>
 
   </body>
 </html>
+

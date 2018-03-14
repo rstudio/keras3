@@ -8,9 +8,13 @@
 <title>neural_style_transfer • keras</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
 <script src="../../jquery.sticky-kit.min.js"></script><script src="../../pkgdown.js"></script><link href="../../extra.css" rel="stylesheet">
-<script src="../../extra.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<script src="../../extra.js"></script><meta property="og:title" content="neural_style_transfer">
+<meta property="og:description" content="">
+<meta property="og:image" content="/logo.png">
+<meta name="twitter:card" content="summary">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -133,234 +137,234 @@
 <li><p>The style loss is where the deep learning keeps in –that one is defined using a deep convolutional neural network. Precisely, it consists in a sum of L2 distances between the Gram matrices of the representations of the base image and the style reference image, extracted from different layers of a convnet (trained on ImageNet). The general idea is to capture color/texture information at different spatial scales (fairly large scales –defined by the depth of the layer considered).</p></li>
 <li><p>The content loss is a L2 distance between the features of the base image (extracted from a deep layer) and the features of the combination image, keeping the generated image close enough to the original one.</p></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
-<span class="kw">library</span>(purrr)
-<span class="kw">library</span>(R6)
-
-<span class="co"># Parameters --------------------------------------------------------------</span>
-
-base_image_path &lt;-<span class="st"> "neural-style-base-img.png"</span>
-style_reference_image_path &lt;-<span class="st"> "neural-style-style.jpg"</span>
-iterations &lt;-<span class="st"> </span><span class="dv">10</span>
-
-<span class="co"># these are the weights of the different loss components</span>
-total_variation_weight &lt;-<span class="st"> </span><span class="dv">1</span>
-style_weight &lt;-<span class="st"> </span><span class="dv">1</span>
-content_weight &lt;-<span class="st"> </span><span class="fl">0.025</span>
-
-<span class="co"># dimensions of the generated picture.</span>
-img &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/image_load.html">image_load</a></span>(base_image_path)
-width &lt;-<span class="st"> </span>img<span class="op">$</span>size[[<span class="dv">1</span>]]
-height &lt;-<span class="st"> </span>img<span class="op">$</span>size[[<span class="dv">2</span>]]
-img_nrows &lt;-<span class="st"> </span><span class="dv">400</span>
-img_ncols &lt;-<span class="st"> </span><span class="kw">as.integer</span>(width <span class="op">*</span><span class="st"> </span>img_nrows <span class="op">/</span><span class="st"> </span>height)
-
-
-<span class="co"># Functions ---------------------------------------------------------------</span>
-
-<span class="co"># util function to open, resize and format pictures into appropriate tensors</span>
-preprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(path){
-  img &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/image_load.html">image_load</a></span>(path, <span class="dt">target_size =</span> <span class="kw">c</span>(img_nrows, img_ncols)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../../reference/image_to_array.html">image_to_array</a></span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(.)))
-  <span class="kw"><a href="../../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>(img)
-}
-
-<span class="co"># util function to convert a tensor into a valid image</span>
-<span class="co"># also turn BGR into RGB.</span>
-deprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(x){
-  x &lt;-<span class="st"> </span>x[<span class="dv">1</span>,,,]
-  <span class="co"># Remove zero-center by mean pixel</span>
-  x[,,<span class="dv">1</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="fl">103.939</span>
-  x[,,<span class="dv">2</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="fl">116.779</span>
-  x[,,<span class="dv">3</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">3</span>] <span class="op">+</span><span class="st"> </span><span class="fl">123.68</span>
-  <span class="co"># BGR -&gt; RGB</span>
-  x &lt;-<span class="st"> </span>x[,,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>)]
-  <span class="co"># clip to interval 0, 255</span>
-  x[x <span class="op">&gt;</span><span class="st"> </span><span class="dv">255</span>] &lt;-<span class="st"> </span><span class="dv">255</span>
-  x[x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="dv">0</span>
-  x[] &lt;-<span class="st"> </span><span class="kw">as.integer</span>(x)<span class="op">/</span><span class="dv">255</span>
-  x
-}
-
-
-<span class="co"># Defining the model ------------------------------------------------------</span>
-
-<span class="co"># get tensor representations of our images</span>
-base_image &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_variable.html">k_variable</a></span>(<span class="kw">preprocess_image</span>(base_image_path))
-style_reference_image &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_variable.html">k_variable</a></span>(<span class="kw">preprocess_image</span>(style_reference_image_path))
-
-<span class="co"># this will contain our generated image</span>
-combination_image &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_placeholder.html">k_placeholder</a></span>(<span class="kw">c</span>(<span class="dv">1</span>, img_nrows, img_ncols, <span class="dv">3</span>))
-
-<span class="co"># combine the 3 images into a single Keras tensor</span>
-input_tensor &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_concatenate.html">k_concatenate</a></span>(<span class="kw">list</span>(base_image, style_reference_image, 
-                                   combination_image), <span class="dt">axis =</span> <span class="dv">1</span>)
-
-<span class="co"># build the VGG16 network with our 3 images as input</span>
-<span class="co"># the model will be loaded with pre-trained ImageNet weights</span>
-model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/application_vgg.html">application_vgg16</a></span>(<span class="dt">input_tensor =</span> input_tensor, <span class="dt">weights =</span> <span class="st">"imagenet"</span>, 
-                           <span class="dt">include_top =</span> <span class="ot">FALSE</span>)
-
-<span class="kw">print</span>(<span class="st">"Model loaded."</span>)
-
-nms &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_chr</a></span>(model<span class="op">$</span>layers, <span class="op">~</span>.x<span class="op">$</span>name)
-output_dict &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(model<span class="op">$</span>layers, <span class="op">~</span>.x<span class="op">$</span>output) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/set_names">set_names</a></span>(nms)
-
-<span class="co"># compute the neural style loss</span>
-<span class="co"># first we need to define 4 util functions</span>
-
-<span class="co"># the gram matrix of an image tensor (feature-wise outer product)</span>
-
-gram_matrix &lt;-<span class="st"> </span><span class="cf">function</span>(x){
-  
-  features &lt;-<span class="st"> </span>x <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../../reference/k_permute_dimensions.html">k_permute_dimensions</a></span>(<span class="dt">pattern =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../../reference/k_batch_flatten.html">k_batch_flatten</a></span>()
-  
-  <span class="kw"><a href="../../reference/k_dot.html">k_dot</a></span>(features, <span class="kw"><a href="../../reference/k_transpose.html">k_transpose</a></span>(features))
-}
-
-<span class="co"># the "style loss" is designed to maintain</span>
-<span class="co"># the style of the reference image in the generated image.</span>
-<span class="co"># It is based on the gram matrices (which capture style) of</span>
-<span class="co"># feature maps from the style reference image</span>
-<span class="co"># and from the generated image</span>
-
-style_loss &lt;-<span class="st"> </span><span class="cf">function</span>(style, combination){
-  S &lt;-<span class="st"> </span><span class="kw">gram_matrix</span>(style)
-  C &lt;-<span class="st"> </span><span class="kw">gram_matrix</span>(combination)
-  
-  channels &lt;-<span class="st"> </span><span class="dv">3</span>
-  size &lt;-<span class="st"> </span>img_nrows<span class="op">*</span>img_ncols
-  
-  <span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(S <span class="op">-</span><span class="st"> </span>C)) <span class="op">/</span><span class="st"> </span>(<span class="dv">4</span> <span class="op">*</span><span class="st"> </span>channels<span class="op">^</span><span class="dv">2</span>  <span class="op">*</span><span class="st"> </span>size<span class="op">^</span><span class="dv">2</span>)
-}
-
-<span class="co"># an auxiliary loss function</span>
-<span class="co"># designed to maintain the "content" of the</span>
-<span class="co"># base image in the generated image</span>
-
-content_loss &lt;-<span class="st"> </span><span class="cf">function</span>(base, combination){
-  <span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(combination <span class="op">-</span><span class="st"> </span>base))
-}
-
-<span class="co"># the 3rd loss function, total variation loss,</span>
-<span class="co"># designed to keep the generated image locally coherent</span>
-
-total_variation_loss &lt;-<span class="st"> </span><span class="cf">function</span>(x){
-  y_ij  &lt;-<span class="st"> </span>x[,<span class="dv">1</span><span class="op">:</span>(img_nrows <span class="op">-</span><span class="st"> </span>1L), <span class="dv">1</span><span class="op">:</span>(img_ncols <span class="op">-</span><span class="st"> </span>1L),]
-  y_i1j &lt;-<span class="st"> </span>x[,<span class="dv">2</span><span class="op">:</span>(img_nrows), <span class="dv">1</span><span class="op">:</span>(img_ncols <span class="op">-</span><span class="st"> </span>1L),]
-  y_ij1 &lt;-<span class="st"> </span>x[,<span class="dv">1</span><span class="op">:</span>(img_nrows <span class="op">-</span><span class="st"> </span>1L), <span class="dv">2</span><span class="op">:</span>(img_ncols),]
-  
-  a &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(y_ij <span class="op">-</span><span class="st"> </span>y_i1j)
-  b &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(y_ij <span class="op">-</span><span class="st"> </span>y_ij1)
-  <span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="kw"><a href="../../reference/k_pow.html">k_pow</a></span>(a <span class="op">+</span><span class="st"> </span>b, <span class="fl">1.25</span>))
-}
-
-<span class="co"># combine these loss functions into a single scalar</span>
-loss &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_variable.html">k_variable</a></span>(<span class="fl">0.0</span>)
-layer_features &lt;-<span class="st"> </span>output_dict<span class="op">$</span>block4_conv2
-base_image_features &lt;-<span class="st"> </span>layer_features[<span class="dv">1</span>,,,]
-combination_features &lt;-<span class="st"> </span>layer_features[<span class="dv">3</span>,,,]
-
-loss &lt;-<span class="st"> </span>loss <span class="op">+</span><span class="st"> </span>content_weight<span class="op">*</span><span class="kw">content_loss</span>(base_image_features, 
-                                           combination_features)
-
-feature_layers =<span class="st"> </span><span class="kw">c</span>(<span class="st">'block1_conv1'</span>, <span class="st">'block2_conv1'</span>,
-                  <span class="st">'block3_conv1'</span>, <span class="st">'block4_conv1'</span>,
-                  <span class="st">'block5_conv1'</span>)
-
-<span class="cf">for</span>(layer_name <span class="cf">in</span> feature_layers){
-  layer_features &lt;-<span class="st"> </span>output_dict[[layer_name]]
-  style_reference_features &lt;-<span class="st"> </span>layer_features[<span class="dv">2</span>,,,]
-  combination_features &lt;-<span class="st"> </span>layer_features[<span class="dv">3</span>,,,]
-  sl &lt;-<span class="st"> </span><span class="kw">style_loss</span>(style_reference_features, combination_features)
-  loss &lt;-<span class="st"> </span>loss <span class="op">+</span><span class="st"> </span>((style_weight <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(feature_layers)) <span class="op">*</span><span class="st"> </span>sl)
-}
-
-loss &lt;-<span class="st"> </span>loss <span class="op">+</span><span class="st"> </span>(total_variation_weight <span class="op">*</span><span class="st"> </span><span class="kw">total_variation_loss</span>(combination_image))
-
-<span class="co"># get the gradients of the generated image wrt the loss</span>
-grads &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_gradients.html">k_gradients</a></span>(loss, combination_image)[[<span class="dv">1</span>]]
-
-f_outputs &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_function.html">k_function</a></span>(<span class="kw">list</span>(combination_image), <span class="kw">list</span>(loss, grads))
-
-eval_loss_and_grads &lt;-<span class="st"> </span><span class="cf">function</span>(image){
-  image &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(image, <span class="kw">c</span>(<span class="dv">1</span>, img_nrows, img_ncols, <span class="dv">3</span>))
-  outs &lt;-<span class="st"> </span><span class="kw">f_outputs</span>(<span class="kw">list</span>(image))
-  <span class="kw">list</span>(
-    <span class="dt">loss_value =</span> outs[[<span class="dv">1</span>]],
-    <span class="dt">grad_values =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(outs[[<span class="dv">2</span>]], <span class="dt">dim =</span> <span class="kw">length</span>(outs[[<span class="dv">2</span>]]))
-  )
-}
-
-<span class="co"># Loss and gradients evaluator.</span>
-<span class="co"># </span>
-<span class="co"># This Evaluator class makes it possible</span>
-<span class="co"># to compute loss and gradients in one pass</span>
-<span class="co"># while retrieving them via two separate functions,</span>
-<span class="co"># "loss" and "grads". This is done because scipy.optimize</span>
-<span class="co"># requires separate functions for loss and gradients,</span>
-<span class="co"># but computing them separately would be inefficient.</span>
-Evaluator &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/R6/topics/R6Class">R6Class</a></span>(
-  <span class="st">"Evaluator"</span>,
-  <span class="dt">public =</span> <span class="kw">list</span>(
-    
-    <span class="dt">loss_value =</span> <span class="ot">NULL</span>,
-    <span class="dt">grad_values =</span> <span class="ot">NULL</span>,
-    
-    <span class="dt">initialize =</span> <span class="cf">function</span>() {
-      self<span class="op">$</span>loss_value &lt;-<span class="st"> </span><span class="ot">NULL</span>
-      self<span class="op">$</span>grad_values &lt;-<span class="st"> </span><span class="ot">NULL</span>
-    },
-    
-    <span class="dt">loss =</span> <span class="cf">function</span>(x){
-      loss_and_grad &lt;-<span class="st"> </span><span class="kw">eval_loss_and_grads</span>(x)
-      self<span class="op">$</span>loss_value &lt;-<span class="st"> </span>loss_and_grad<span class="op">$</span>loss_value
-      self<span class="op">$</span>grad_values &lt;-<span class="st"> </span>loss_and_grad<span class="op">$</span>grad_values
-      self<span class="op">$</span>loss_value
-    },
-    
-    <span class="dt">grads =</span> <span class="cf">function</span>(x){
-      grad_values &lt;-<span class="st"> </span>self<span class="op">$</span>grad_values
-      self<span class="op">$</span>loss_value &lt;-<span class="st"> </span><span class="ot">NULL</span>
-      self<span class="op">$</span>grad_values &lt;-<span class="st"> </span><span class="ot">NULL</span>
-      grad_values
-    }
-    
-  )
-)
-
-evaluator &lt;-<span class="st"> </span>Evaluator<span class="op">$</span><span class="kw">new</span>()
-
-<span class="co"># run scipy-based optimization (L-BFGS) over the pixels of the generated image</span>
-<span class="co"># so as to minimize the neural style loss</span>
-dms &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, img_nrows, img_ncols, <span class="dv">3</span>)
-x &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">data =</span> <span class="kw">runif</span>(<span class="kw">prod</span>(dms), <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">255</span>) <span class="op">-</span><span class="st"> </span><span class="dv">128</span>, <span class="dt">dim =</span> dms)
-
-<span class="co"># Run optimization (L-BFGS) over the pixels of the generated image</span>
-<span class="co"># so as to minimize the loss</span>
-<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>iterations){
-
-  <span class="co"># Run L-BFGS</span>
-  opt &lt;-<span class="st"> </span><span class="kw">optim</span>(
-    <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x, <span class="dt">dim =</span> <span class="kw">length</span>(x)), <span class="dt">fn =</span> evaluator<span class="op">$</span>loss, <span class="dt">gr =</span> evaluator<span class="op">$</span>grads, 
-    <span class="dt">method =</span> <span class="st">"L-BFGS-B"</span>,
-    <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">maxit =</span> <span class="dv">15</span>)
-  )
-  
-  <span class="co"># Print loss value</span>
-  <span class="kw">print</span>(opt<span class="op">$</span>value)
-  
-  <span class="co"># decode the image</span>
-  image &lt;-<span class="st"> </span>x &lt;-<span class="st"> </span>opt<span class="op">$</span>par
-  image &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(image, dms)
-  
-  <span class="co"># plot</span>
-  im &lt;-<span class="st"> </span><span class="kw">deprocess_image</span>(image)
-  <span class="kw">plot</span>(<span class="kw">as.raster</span>(im))
-}</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(keras)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(purrr)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(R6)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># Parameters --------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">base_image_path &lt;-<span class="st"> "neural-style-base-img.png"</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">style_reference_image_path &lt;-<span class="st"> "neural-style-style.jpg"</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">iterations &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co"># these are the weights of the different loss components</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">total_variation_weight &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">style_weight &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">content_weight &lt;-<span class="st"> </span><span class="fl">0.025</span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co"># dimensions of the generated picture.</span></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">img &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/image_load.html">image_load</a></span>(base_image_path)</a>
+<a class="sourceLine" id="cb1-18" data-line-number="18">width &lt;-<span class="st"> </span>img<span class="op">$</span>size[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb1-19" data-line-number="19">height &lt;-<span class="st"> </span>img<span class="op">$</span>size[[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb1-20" data-line-number="20">img_nrows &lt;-<span class="st"> </span><span class="dv">400</span></a>
+<a class="sourceLine" id="cb1-21" data-line-number="21">img_ncols &lt;-<span class="st"> </span><span class="kw">as.integer</span>(width <span class="op">*</span><span class="st"> </span>img_nrows <span class="op">/</span><span class="st"> </span>height)</a>
+<a class="sourceLine" id="cb1-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb1-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="co"># Functions ---------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb1-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb1-26" data-line-number="26"><span class="co"># util function to open, resize and format pictures into appropriate tensors</span></a>
+<a class="sourceLine" id="cb1-27" data-line-number="27">preprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(path){</a>
+<a class="sourceLine" id="cb1-28" data-line-number="28">  img &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/image_load.html">image_load</a></span>(path, <span class="dt">target_size =</span> <span class="kw">c</span>(img_nrows, img_ncols)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-29" data-line-number="29"><span class="st">    </span><span class="kw"><a href="../../reference/image_to_array.html">image_to_array</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-30" data-line-number="30"><span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">dim</span>(.)))</a>
+<a class="sourceLine" id="cb1-31" data-line-number="31">  <span class="kw"><a href="../../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>(img)</a>
+<a class="sourceLine" id="cb1-32" data-line-number="32">}</a>
+<a class="sourceLine" id="cb1-33" data-line-number="33"></a>
+<a class="sourceLine" id="cb1-34" data-line-number="34"><span class="co"># util function to convert a tensor into a valid image</span></a>
+<a class="sourceLine" id="cb1-35" data-line-number="35"><span class="co"># also turn BGR into RGB.</span></a>
+<a class="sourceLine" id="cb1-36" data-line-number="36">deprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb1-37" data-line-number="37">  x &lt;-<span class="st"> </span>x[<span class="dv">1</span>,,,]</a>
+<a class="sourceLine" id="cb1-38" data-line-number="38">  <span class="co"># Remove zero-center by mean pixel</span></a>
+<a class="sourceLine" id="cb1-39" data-line-number="39">  x[,,<span class="dv">1</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="fl">103.939</span></a>
+<a class="sourceLine" id="cb1-40" data-line-number="40">  x[,,<span class="dv">2</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="fl">116.779</span></a>
+<a class="sourceLine" id="cb1-41" data-line-number="41">  x[,,<span class="dv">3</span>] &lt;-<span class="st"> </span>x[,,<span class="dv">3</span>] <span class="op">+</span><span class="st"> </span><span class="fl">123.68</span></a>
+<a class="sourceLine" id="cb1-42" data-line-number="42">  <span class="co"># BGR -&gt; RGB</span></a>
+<a class="sourceLine" id="cb1-43" data-line-number="43">  x &lt;-<span class="st"> </span>x[,,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>)]</a>
+<a class="sourceLine" id="cb1-44" data-line-number="44">  <span class="co"># clip to interval 0, 255</span></a>
+<a class="sourceLine" id="cb1-45" data-line-number="45">  x[x <span class="op">&gt;</span><span class="st"> </span><span class="dv">255</span>] &lt;-<span class="st"> </span><span class="dv">255</span></a>
+<a class="sourceLine" id="cb1-46" data-line-number="46">  x[x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-47" data-line-number="47">  x[] &lt;-<span class="st"> </span><span class="kw">as.integer</span>(x)<span class="op">/</span><span class="dv">255</span></a>
+<a class="sourceLine" id="cb1-48" data-line-number="48">  x</a>
+<a class="sourceLine" id="cb1-49" data-line-number="49">}</a>
+<a class="sourceLine" id="cb1-50" data-line-number="50"></a>
+<a class="sourceLine" id="cb1-51" data-line-number="51"></a>
+<a class="sourceLine" id="cb1-52" data-line-number="52"><span class="co"># Defining the model ------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb1-53" data-line-number="53"></a>
+<a class="sourceLine" id="cb1-54" data-line-number="54"><span class="co"># get tensor representations of our images</span></a>
+<a class="sourceLine" id="cb1-55" data-line-number="55">base_image &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_variable.html">k_variable</a></span>(<span class="kw">preprocess_image</span>(base_image_path))</a>
+<a class="sourceLine" id="cb1-56" data-line-number="56">style_reference_image &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_variable.html">k_variable</a></span>(<span class="kw">preprocess_image</span>(style_reference_image_path))</a>
+<a class="sourceLine" id="cb1-57" data-line-number="57"></a>
+<a class="sourceLine" id="cb1-58" data-line-number="58"><span class="co"># this will contain our generated image</span></a>
+<a class="sourceLine" id="cb1-59" data-line-number="59">combination_image &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_placeholder.html">k_placeholder</a></span>(<span class="kw">c</span>(<span class="dv">1</span>, img_nrows, img_ncols, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb1-60" data-line-number="60"></a>
+<a class="sourceLine" id="cb1-61" data-line-number="61"><span class="co"># combine the 3 images into a single Keras tensor</span></a>
+<a class="sourceLine" id="cb1-62" data-line-number="62">input_tensor &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_concatenate.html">k_concatenate</a></span>(<span class="kw">list</span>(base_image, style_reference_image, </a>
+<a class="sourceLine" id="cb1-63" data-line-number="63">                                   combination_image), <span class="dt">axis =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1-64" data-line-number="64"></a>
+<a class="sourceLine" id="cb1-65" data-line-number="65"><span class="co"># build the VGG16 network with our 3 images as input</span></a>
+<a class="sourceLine" id="cb1-66" data-line-number="66"><span class="co"># the model will be loaded with pre-trained ImageNet weights</span></a>
+<a class="sourceLine" id="cb1-67" data-line-number="67">model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/application_vgg.html">application_vgg16</a></span>(<span class="dt">input_tensor =</span> input_tensor, <span class="dt">weights =</span> <span class="st">"imagenet"</span>, </a>
+<a class="sourceLine" id="cb1-68" data-line-number="68">                           <span class="dt">include_top =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1-69" data-line-number="69"></a>
+<a class="sourceLine" id="cb1-70" data-line-number="70"><span class="kw">print</span>(<span class="st">"Model loaded."</span>)</a>
+<a class="sourceLine" id="cb1-71" data-line-number="71"></a>
+<a class="sourceLine" id="cb1-72" data-line-number="72">nms &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_chr</a></span>(model<span class="op">$</span>layers, <span class="op">~</span>.x<span class="op">$</span>name)</a>
+<a class="sourceLine" id="cb1-73" data-line-number="73">output_dict &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(model<span class="op">$</span>layers, <span class="op">~</span>.x<span class="op">$</span>output) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/set_names">set_names</a></span>(nms)</a>
+<a class="sourceLine" id="cb1-74" data-line-number="74"></a>
+<a class="sourceLine" id="cb1-75" data-line-number="75"><span class="co"># compute the neural style loss</span></a>
+<a class="sourceLine" id="cb1-76" data-line-number="76"><span class="co"># first we need to define 4 util functions</span></a>
+<a class="sourceLine" id="cb1-77" data-line-number="77"></a>
+<a class="sourceLine" id="cb1-78" data-line-number="78"><span class="co"># the gram matrix of an image tensor (feature-wise outer product)</span></a>
+<a class="sourceLine" id="cb1-79" data-line-number="79"></a>
+<a class="sourceLine" id="cb1-80" data-line-number="80">gram_matrix &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb1-81" data-line-number="81">  </a>
+<a class="sourceLine" id="cb1-82" data-line-number="82">  features &lt;-<span class="st"> </span>x <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-83" data-line-number="83"><span class="st">    </span><span class="kw"><a href="../../reference/k_permute_dimensions.html">k_permute_dimensions</a></span>(<span class="dt">pattern =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-84" data-line-number="84"><span class="st">    </span><span class="kw"><a href="../../reference/k_batch_flatten.html">k_batch_flatten</a></span>()</a>
+<a class="sourceLine" id="cb1-85" data-line-number="85">  </a>
+<a class="sourceLine" id="cb1-86" data-line-number="86">  <span class="kw"><a href="../../reference/k_dot.html">k_dot</a></span>(features, <span class="kw"><a href="../../reference/k_transpose.html">k_transpose</a></span>(features))</a>
+<a class="sourceLine" id="cb1-87" data-line-number="87">}</a>
+<a class="sourceLine" id="cb1-88" data-line-number="88"></a>
+<a class="sourceLine" id="cb1-89" data-line-number="89"><span class="co"># the "style loss" is designed to maintain</span></a>
+<a class="sourceLine" id="cb1-90" data-line-number="90"><span class="co"># the style of the reference image in the generated image.</span></a>
+<a class="sourceLine" id="cb1-91" data-line-number="91"><span class="co"># It is based on the gram matrices (which capture style) of</span></a>
+<a class="sourceLine" id="cb1-92" data-line-number="92"><span class="co"># feature maps from the style reference image</span></a>
+<a class="sourceLine" id="cb1-93" data-line-number="93"><span class="co"># and from the generated image</span></a>
+<a class="sourceLine" id="cb1-94" data-line-number="94"></a>
+<a class="sourceLine" id="cb1-95" data-line-number="95">style_loss &lt;-<span class="st"> </span><span class="cf">function</span>(style, combination){</a>
+<a class="sourceLine" id="cb1-96" data-line-number="96">  S &lt;-<span class="st"> </span><span class="kw">gram_matrix</span>(style)</a>
+<a class="sourceLine" id="cb1-97" data-line-number="97">  C &lt;-<span class="st"> </span><span class="kw">gram_matrix</span>(combination)</a>
+<a class="sourceLine" id="cb1-98" data-line-number="98">  </a>
+<a class="sourceLine" id="cb1-99" data-line-number="99">  channels &lt;-<span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb1-100" data-line-number="100">  size &lt;-<span class="st"> </span>img_nrows<span class="op">*</span>img_ncols</a>
+<a class="sourceLine" id="cb1-101" data-line-number="101">  </a>
+<a class="sourceLine" id="cb1-102" data-line-number="102">  <span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(S <span class="op">-</span><span class="st"> </span>C)) <span class="op">/</span><span class="st"> </span>(<span class="dv">4</span> <span class="op">*</span><span class="st"> </span>channels<span class="op">^</span><span class="dv">2</span>  <span class="op">*</span><span class="st"> </span>size<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1-103" data-line-number="103">}</a>
+<a class="sourceLine" id="cb1-104" data-line-number="104"></a>
+<a class="sourceLine" id="cb1-105" data-line-number="105"><span class="co"># an auxiliary loss function</span></a>
+<a class="sourceLine" id="cb1-106" data-line-number="106"><span class="co"># designed to maintain the "content" of the</span></a>
+<a class="sourceLine" id="cb1-107" data-line-number="107"><span class="co"># base image in the generated image</span></a>
+<a class="sourceLine" id="cb1-108" data-line-number="108"></a>
+<a class="sourceLine" id="cb1-109" data-line-number="109">content_loss &lt;-<span class="st"> </span><span class="cf">function</span>(base, combination){</a>
+<a class="sourceLine" id="cb1-110" data-line-number="110">  <span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(combination <span class="op">-</span><span class="st"> </span>base))</a>
+<a class="sourceLine" id="cb1-111" data-line-number="111">}</a>
+<a class="sourceLine" id="cb1-112" data-line-number="112"></a>
+<a class="sourceLine" id="cb1-113" data-line-number="113"><span class="co"># the 3rd loss function, total variation loss,</span></a>
+<a class="sourceLine" id="cb1-114" data-line-number="114"><span class="co"># designed to keep the generated image locally coherent</span></a>
+<a class="sourceLine" id="cb1-115" data-line-number="115"></a>
+<a class="sourceLine" id="cb1-116" data-line-number="116">total_variation_loss &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb1-117" data-line-number="117">  y_ij  &lt;-<span class="st"> </span>x[,<span class="dv">1</span><span class="op">:</span>(img_nrows <span class="op">-</span><span class="st"> </span>1L), <span class="dv">1</span><span class="op">:</span>(img_ncols <span class="op">-</span><span class="st"> </span>1L),]</a>
+<a class="sourceLine" id="cb1-118" data-line-number="118">  y_i1j &lt;-<span class="st"> </span>x[,<span class="dv">2</span><span class="op">:</span>(img_nrows), <span class="dv">1</span><span class="op">:</span>(img_ncols <span class="op">-</span><span class="st"> </span>1L),]</a>
+<a class="sourceLine" id="cb1-119" data-line-number="119">  y_ij1 &lt;-<span class="st"> </span>x[,<span class="dv">1</span><span class="op">:</span>(img_nrows <span class="op">-</span><span class="st"> </span>1L), <span class="dv">2</span><span class="op">:</span>(img_ncols),]</a>
+<a class="sourceLine" id="cb1-120" data-line-number="120">  </a>
+<a class="sourceLine" id="cb1-121" data-line-number="121">  a &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(y_ij <span class="op">-</span><span class="st"> </span>y_i1j)</a>
+<a class="sourceLine" id="cb1-122" data-line-number="122">  b &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(y_ij <span class="op">-</span><span class="st"> </span>y_ij1)</a>
+<a class="sourceLine" id="cb1-123" data-line-number="123">  <span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="kw"><a href="../../reference/k_pow.html">k_pow</a></span>(a <span class="op">+</span><span class="st"> </span>b, <span class="fl">1.25</span>))</a>
+<a class="sourceLine" id="cb1-124" data-line-number="124">}</a>
+<a class="sourceLine" id="cb1-125" data-line-number="125"></a>
+<a class="sourceLine" id="cb1-126" data-line-number="126"><span class="co"># combine these loss functions into a single scalar</span></a>
+<a class="sourceLine" id="cb1-127" data-line-number="127">loss &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_variable.html">k_variable</a></span>(<span class="fl">0.0</span>)</a>
+<a class="sourceLine" id="cb1-128" data-line-number="128">layer_features &lt;-<span class="st"> </span>output_dict<span class="op">$</span>block4_conv2</a>
+<a class="sourceLine" id="cb1-129" data-line-number="129">base_image_features &lt;-<span class="st"> </span>layer_features[<span class="dv">1</span>,,,]</a>
+<a class="sourceLine" id="cb1-130" data-line-number="130">combination_features &lt;-<span class="st"> </span>layer_features[<span class="dv">3</span>,,,]</a>
+<a class="sourceLine" id="cb1-131" data-line-number="131"></a>
+<a class="sourceLine" id="cb1-132" data-line-number="132">loss &lt;-<span class="st"> </span>loss <span class="op">+</span><span class="st"> </span>content_weight<span class="op">*</span><span class="kw">content_loss</span>(base_image_features, </a>
+<a class="sourceLine" id="cb1-133" data-line-number="133">                                           combination_features)</a>
+<a class="sourceLine" id="cb1-134" data-line-number="134"></a>
+<a class="sourceLine" id="cb1-135" data-line-number="135">feature_layers =<span class="st"> </span><span class="kw">c</span>(<span class="st">'block1_conv1'</span>, <span class="st">'block2_conv1'</span>,</a>
+<a class="sourceLine" id="cb1-136" data-line-number="136">                  <span class="st">'block3_conv1'</span>, <span class="st">'block4_conv1'</span>,</a>
+<a class="sourceLine" id="cb1-137" data-line-number="137">                  <span class="st">'block5_conv1'</span>)</a>
+<a class="sourceLine" id="cb1-138" data-line-number="138"></a>
+<a class="sourceLine" id="cb1-139" data-line-number="139"><span class="cf">for</span>(layer_name <span class="cf">in</span> feature_layers){</a>
+<a class="sourceLine" id="cb1-140" data-line-number="140">  layer_features &lt;-<span class="st"> </span>output_dict[[layer_name]]</a>
+<a class="sourceLine" id="cb1-141" data-line-number="141">  style_reference_features &lt;-<span class="st"> </span>layer_features[<span class="dv">2</span>,,,]</a>
+<a class="sourceLine" id="cb1-142" data-line-number="142">  combination_features &lt;-<span class="st"> </span>layer_features[<span class="dv">3</span>,,,]</a>
+<a class="sourceLine" id="cb1-143" data-line-number="143">  sl &lt;-<span class="st"> </span><span class="kw">style_loss</span>(style_reference_features, combination_features)</a>
+<a class="sourceLine" id="cb1-144" data-line-number="144">  loss &lt;-<span class="st"> </span>loss <span class="op">+</span><span class="st"> </span>((style_weight <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(feature_layers)) <span class="op">*</span><span class="st"> </span>sl)</a>
+<a class="sourceLine" id="cb1-145" data-line-number="145">}</a>
+<a class="sourceLine" id="cb1-146" data-line-number="146"></a>
+<a class="sourceLine" id="cb1-147" data-line-number="147">loss &lt;-<span class="st"> </span>loss <span class="op">+</span><span class="st"> </span>(total_variation_weight <span class="op">*</span><span class="st"> </span><span class="kw">total_variation_loss</span>(combination_image))</a>
+<a class="sourceLine" id="cb1-148" data-line-number="148"></a>
+<a class="sourceLine" id="cb1-149" data-line-number="149"><span class="co"># get the gradients of the generated image wrt the loss</span></a>
+<a class="sourceLine" id="cb1-150" data-line-number="150">grads &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_gradients.html">k_gradients</a></span>(loss, combination_image)[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb1-151" data-line-number="151"></a>
+<a class="sourceLine" id="cb1-152" data-line-number="152">f_outputs &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_function.html">k_function</a></span>(<span class="kw">list</span>(combination_image), <span class="kw">list</span>(loss, grads))</a>
+<a class="sourceLine" id="cb1-153" data-line-number="153"></a>
+<a class="sourceLine" id="cb1-154" data-line-number="154">eval_loss_and_grads &lt;-<span class="st"> </span><span class="cf">function</span>(image){</a>
+<a class="sourceLine" id="cb1-155" data-line-number="155">  image &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(image, <span class="kw">c</span>(<span class="dv">1</span>, img_nrows, img_ncols, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb1-156" data-line-number="156">  outs &lt;-<span class="st"> </span><span class="kw">f_outputs</span>(<span class="kw">list</span>(image))</a>
+<a class="sourceLine" id="cb1-157" data-line-number="157">  <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb1-158" data-line-number="158">    <span class="dt">loss_value =</span> outs[[<span class="dv">1</span>]],</a>
+<a class="sourceLine" id="cb1-159" data-line-number="159">    <span class="dt">grad_values =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(outs[[<span class="dv">2</span>]], <span class="dt">dim =</span> <span class="kw">length</span>(outs[[<span class="dv">2</span>]]))</a>
+<a class="sourceLine" id="cb1-160" data-line-number="160">  )</a>
+<a class="sourceLine" id="cb1-161" data-line-number="161">}</a>
+<a class="sourceLine" id="cb1-162" data-line-number="162"></a>
+<a class="sourceLine" id="cb1-163" data-line-number="163"><span class="co"># Loss and gradients evaluator.</span></a>
+<a class="sourceLine" id="cb1-164" data-line-number="164"><span class="co"># </span></a>
+<a class="sourceLine" id="cb1-165" data-line-number="165"><span class="co"># This Evaluator class makes it possible</span></a>
+<a class="sourceLine" id="cb1-166" data-line-number="166"><span class="co"># to compute loss and gradients in one pass</span></a>
+<a class="sourceLine" id="cb1-167" data-line-number="167"><span class="co"># while retrieving them via two separate functions,</span></a>
+<a class="sourceLine" id="cb1-168" data-line-number="168"><span class="co"># "loss" and "grads". This is done because scipy.optimize</span></a>
+<a class="sourceLine" id="cb1-169" data-line-number="169"><span class="co"># requires separate functions for loss and gradients,</span></a>
+<a class="sourceLine" id="cb1-170" data-line-number="170"><span class="co"># but computing them separately would be inefficient.</span></a>
+<a class="sourceLine" id="cb1-171" data-line-number="171">Evaluator &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/R6/topics/R6Class">R6Class</a></span>(</a>
+<a class="sourceLine" id="cb1-172" data-line-number="172">  <span class="st">"Evaluator"</span>,</a>
+<a class="sourceLine" id="cb1-173" data-line-number="173">  <span class="dt">public =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb1-174" data-line-number="174">    </a>
+<a class="sourceLine" id="cb1-175" data-line-number="175">    <span class="dt">loss_value =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb1-176" data-line-number="176">    <span class="dt">grad_values =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb1-177" data-line-number="177">    </a>
+<a class="sourceLine" id="cb1-178" data-line-number="178">    <span class="dt">initialize =</span> <span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb1-179" data-line-number="179">      self<span class="op">$</span>loss_value &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb1-180" data-line-number="180">      self<span class="op">$</span>grad_values &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb1-181" data-line-number="181">    },</a>
+<a class="sourceLine" id="cb1-182" data-line-number="182">    </a>
+<a class="sourceLine" id="cb1-183" data-line-number="183">    <span class="dt">loss =</span> <span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb1-184" data-line-number="184">      loss_and_grad &lt;-<span class="st"> </span><span class="kw">eval_loss_and_grads</span>(x)</a>
+<a class="sourceLine" id="cb1-185" data-line-number="185">      self<span class="op">$</span>loss_value &lt;-<span class="st"> </span>loss_and_grad<span class="op">$</span>loss_value</a>
+<a class="sourceLine" id="cb1-186" data-line-number="186">      self<span class="op">$</span>grad_values &lt;-<span class="st"> </span>loss_and_grad<span class="op">$</span>grad_values</a>
+<a class="sourceLine" id="cb1-187" data-line-number="187">      self<span class="op">$</span>loss_value</a>
+<a class="sourceLine" id="cb1-188" data-line-number="188">    },</a>
+<a class="sourceLine" id="cb1-189" data-line-number="189">    </a>
+<a class="sourceLine" id="cb1-190" data-line-number="190">    <span class="dt">grads =</span> <span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb1-191" data-line-number="191">      grad_values &lt;-<span class="st"> </span>self<span class="op">$</span>grad_values</a>
+<a class="sourceLine" id="cb1-192" data-line-number="192">      self<span class="op">$</span>loss_value &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb1-193" data-line-number="193">      self<span class="op">$</span>grad_values &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb1-194" data-line-number="194">      grad_values</a>
+<a class="sourceLine" id="cb1-195" data-line-number="195">    }</a>
+<a class="sourceLine" id="cb1-196" data-line-number="196">    </a>
+<a class="sourceLine" id="cb1-197" data-line-number="197">  )</a>
+<a class="sourceLine" id="cb1-198" data-line-number="198">)</a>
+<a class="sourceLine" id="cb1-199" data-line-number="199"></a>
+<a class="sourceLine" id="cb1-200" data-line-number="200">evaluator &lt;-<span class="st"> </span>Evaluator<span class="op">$</span><span class="kw">new</span>()</a>
+<a class="sourceLine" id="cb1-201" data-line-number="201"></a>
+<a class="sourceLine" id="cb1-202" data-line-number="202"><span class="co"># run scipy-based optimization (L-BFGS) over the pixels of the generated image</span></a>
+<a class="sourceLine" id="cb1-203" data-line-number="203"><span class="co"># so as to minimize the neural style loss</span></a>
+<a class="sourceLine" id="cb1-204" data-line-number="204">dms &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, img_nrows, img_ncols, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb1-205" data-line-number="205">x &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">data =</span> <span class="kw">runif</span>(<span class="kw">prod</span>(dms), <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">255</span>) <span class="op">-</span><span class="st"> </span><span class="dv">128</span>, <span class="dt">dim =</span> dms)</a>
+<a class="sourceLine" id="cb1-206" data-line-number="206"></a>
+<a class="sourceLine" id="cb1-207" data-line-number="207"><span class="co"># Run optimization (L-BFGS) over the pixels of the generated image</span></a>
+<a class="sourceLine" id="cb1-208" data-line-number="208"><span class="co"># so as to minimize the loss</span></a>
+<a class="sourceLine" id="cb1-209" data-line-number="209"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>iterations){</a>
+<a class="sourceLine" id="cb1-210" data-line-number="210"></a>
+<a class="sourceLine" id="cb1-211" data-line-number="211">  <span class="co"># Run L-BFGS</span></a>
+<a class="sourceLine" id="cb1-212" data-line-number="212">  opt &lt;-<span class="st"> </span><span class="kw">optim</span>(</a>
+<a class="sourceLine" id="cb1-213" data-line-number="213">    <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x, <span class="dt">dim =</span> <span class="kw">length</span>(x)), <span class="dt">fn =</span> evaluator<span class="op">$</span>loss, <span class="dt">gr =</span> evaluator<span class="op">$</span>grads, </a>
+<a class="sourceLine" id="cb1-214" data-line-number="214">    <span class="dt">method =</span> <span class="st">"L-BFGS-B"</span>,</a>
+<a class="sourceLine" id="cb1-215" data-line-number="215">    <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">maxit =</span> <span class="dv">15</span>)</a>
+<a class="sourceLine" id="cb1-216" data-line-number="216">  )</a>
+<a class="sourceLine" id="cb1-217" data-line-number="217">  </a>
+<a class="sourceLine" id="cb1-218" data-line-number="218">  <span class="co"># Print loss value</span></a>
+<a class="sourceLine" id="cb1-219" data-line-number="219">  <span class="kw">print</span>(opt<span class="op">$</span>value)</a>
+<a class="sourceLine" id="cb1-220" data-line-number="220">  </a>
+<a class="sourceLine" id="cb1-221" data-line-number="221">  <span class="co"># decode the image</span></a>
+<a class="sourceLine" id="cb1-222" data-line-number="222">  image &lt;-<span class="st"> </span>x &lt;-<span class="st"> </span>opt<span class="op">$</span>par</a>
+<a class="sourceLine" id="cb1-223" data-line-number="223">  image &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(image, dms)</a>
+<a class="sourceLine" id="cb1-224" data-line-number="224">  </a>
+<a class="sourceLine" id="cb1-225" data-line-number="225">  <span class="co"># plot</span></a>
+<a class="sourceLine" id="cb1-226" data-line-number="226">  im &lt;-<span class="st"> </span><span class="kw">deprocess_image</span>(image)</a>
+<a class="sourceLine" id="cb1-227" data-line-number="227">  <span class="kw">plot</span>(<span class="kw">as.raster</span>(im))</a>
+<a class="sourceLine" id="cb1-228" data-line-number="228">}</a></code></pre></div>
 </div>
   </div>
 
@@ -375,7 +379,7 @@ x &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">d
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

@@ -18,6 +18,8 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -25,6 +27,18 @@
 <script src="../pkgdown.js"></script>
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
+<meta property="og:title" content="Depthwise separable 2D convolution. — layer_separable_conv_2d" />
+
+<meta property="og:description" content="Separable convolutions consist in first performing a depthwise spatial
+convolution (which acts on each input channel separately) followed by a
+pointwise convolution which mixes together the resulting output channels. The
+depth_multiplier argument controls how many output channels are generated
+per input channel in the depthwise step. Intuitively, separable convolutions
+can be understood as a way to factorize a convolution kernel into two smaller
+kernels, or as an extreme version of an Inception block." />
+
+<meta property="og:image" content="/logo.png" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -351,7 +365,7 @@ if data_format='channels_first' or 4D tensor with shape: <code>(batch, rows, col
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -359,3 +373,4 @@ if data_format='channels_first' or 4D tensor with shape: <code>(batch, rows, col
 
   </body>
 </html>
+
