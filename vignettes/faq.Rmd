@@ -26,12 +26,12 @@ knitr::opts_chunk$set(eval = FALSE)
 Please cite Keras in your publications if it helps your research. Here is an example BibTeX entry:
 
 ```
-@misc{chollet2015keras,
-  title={Keras},
-  author={Chollet, Fran\c{c}ois and others},
-  year={2015},
+@misc{allaire2017keras,
+  title={keras: R Interface to 'Keras'},
+  author={Allaire, JJ and Chollet, Fran\c{c}ois and others},
+  year={2017},
   publisher={GitHub},
-  howpublished={\url{https://github.com/keras-team/keras}},
+  howpublished={\url{https://github.com/rstudio/keras}},
 }
 ```
 
