@@ -7,7 +7,9 @@ Authors@R: c(
   person("François", "Chollet", role = c("aut", "cph")),
   person(family = "RStudio", role = c("ctb", "cph", "fnd")),
   person(family = "Google", role = c("ctb", "cph", "fnd")),
-  person("Yuan", "Tang", role = c("ctb", "cph")),
+  person("Yuan", "Tang", role = c("ctb", "cph"),
+         email = "terrytangyuan@gmail.com",
+         comment = c(ORCID = "0000-0001-5243-233X")),
   person("Daniel", "Falbel", role = c("ctb", "cph")),
   person("Wouter", "Van Der Bijl", role = c("ctb", "cph")),
   person("Martin", "Studer", role = c("ctb", "cph"))
