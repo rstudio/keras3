@@ -1,7 +1,5 @@
 
-## Keras 2.1.5 (development)
-
-Install the development version with: `install_github("rstudio/keras")`
+## Keras 2.1.5 (CRAN)
 
 - Support for custom constraints from R 
 
@@ -13,7 +11,7 @@ Install the development version with: `install_github("rstudio/keras")`
   [image_data_generator()].
 
 
-## Keras 2.1.4 (CRAN)
+## Keras 2.1.4
 
 - Added support for `remove_learning_phase` in `export_savedmodel()` to avoid
   removing learning phase.
