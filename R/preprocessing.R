@@ -308,8 +308,9 @@ fit_text_tokenizer <- function(object, x) {
   tokenizer <- object
   if (is.list(x))
     tokenizer$fit_on_sequences(x)
-  else
-    tokenizer$fit_on_texts(x)
+  else {
+    tokenizer$fit_on_texts(as_texts(x))
+  }
   invisible(tokenizer)
 }
 
@@ -379,7 +380,7 @@ load_text_tokenizer <- function(filename) {
 #'   
 #' @export
 texts_to_sequences <- function(tokenizer, texts) {
-  tokenizer$texts_to_sequences(texts)  
+  tokenizer$texts_to_sequences(as_texts(texts))
 }
 
 #' Transforms each text in texts in a sequence of integers.
@@ -395,7 +396,7 @@ texts_to_sequences <- function(tokenizer, texts) {
 #'   
 #' @export
 texts_to_sequences_generator <- function(tokenizer, texts) {
-  tokenizer$texts_to_sequences_generator(texts)
+  tokenizer$texts_to_sequences_generator(as_texts(texts))
 }
 
 
@@ -412,9 +413,16 @@ texts_to_sequences_generator <- function(tokenizer, texts) {
 #' @export
 texts_to_matrix <- function(tokenizer, texts, mode = c("binary", "count", "tfidf", "freq")) {
   tokenizer$texts_to_matrix(
-    texts = texts, 
+    texts = as_texts(texts), 
     mode = mode
   )
+}
+
+as_texts <- function(texts) {
+  if (is.character(texts) && length(texts) == 1)
+    as.array(texts)
+  else
+    texts
 }
 
 

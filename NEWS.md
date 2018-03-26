@@ -1,4 +1,11 @@
 
+## Keras 2.1.6 (development)
+
+Install the development version with: `install_github("rstudio/keras")`
+
+- Fix issue with single-element vectors passed to text preprocessing functions
+
+
 ## Keras 2.1.5 (CRAN)
 
 - Support for custom constraints from R 
