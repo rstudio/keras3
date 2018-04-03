@@ -308,14 +308,14 @@ clusterEvalQ(cl, {
                         target_width = 128,
                         target_height = 128) {
         result <- aperm(as.numeric(image[[1]])[, , 1:3], c(2, 1, 3)) # transpose
-        array_reshape(result, <- c(1, target_width, target_height, 3))
+        array_reshape(result, c(1, target_width, target_height, 3))
     }
     
     mask2arr <- function(mask,
                          target_width = 128,
                          target_height = 128) {
         result <- t(as.numeric(mask[[1]])[, , 1]) # transpose
-        array_reshape(result, <- c(1, target_width, target_height, 1))
+        array_reshape(result, c(1, target_width, target_height, 1))
     }
 })
 
