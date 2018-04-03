@@ -167,3 +167,9 @@ pre span a:hover {
   color: #375f84;
 } 
 */
+
+
+.navbar-brand .label {
+  display: none;
+}
+

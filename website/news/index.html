@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • keras</title>
+<title>Changelog • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,10 +27,12 @@
 <script src="../pkgdown.js"></script>
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
-<meta property="og:title" content="All news" />
+<meta property="og:title" content="Changelog" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -38,6 +40,8 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
 
 
   </head>
@@ -53,8 +57,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Keras for R</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">keras</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.5.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -133,6 +141,7 @@
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -144,13 +153,22 @@
 
   <div class="col-md-9">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+      <h1>Changelog <small></small></h1>
+      
     </div>
 
     <div class="contents">
-    <div class="section level2">
-<h2>Keras 2.1.5 (development)</h2>
+    <div id="keras-2-1-6-development" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2-1-6-development" class="anchor"></a>Keras 2.1.6 (development)</h2>
 <p>Install the development version with: <code>install_github("rstudio/keras")</code></p>
+<ul>
+<li>Fix issue with single-element vectors passed to text preprocessing functions</li>
+</ul>
+</div>
+    <div id="keras-2-1-5-cran" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2-1-5-cran" class="anchor"></a>Keras 2.1.5 (CRAN)</h2>
 <ul>
 <li><p>Support for custom constraints from R</p></li>
 <li><p>Added <code><a href="../reference/timeseries_generator.html">timeseries_generator()</a></code> utilty function</p></li>
@@ -158,8 +176,9 @@
 <li><p>Added <code>brightness_range</code> and <code>validation_split</code> arguments to [image_data_generator()].</p></li>
 </ul>
 </div>
-    <div class="section level2">
-<h2>Keras 2.1.4 (CRAN)</h2>
+    <div id="keras-2-1-4" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2-1-4" class="anchor"></a>Keras 2.1.4</h2>
 <ul>
 <li><p>Added support for <code>remove_learning_phase</code> in <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/export_savedmodel">export_savedmodel()</a></code> to avoid removing learning phase.</p></li>
 <li><p>Normalize validation data to Keras array in <code><a href="../reference/fit.html">fit()</a></code> and <code><a href="../reference/fit_generator.html">fit_generator()</a></code></p></li>
@@ -170,8 +189,9 @@
 <li><p>Fix incompatibility with Progbar.update() method in Keras 2.1.4</p></li>
 </ul>
 </div>
-    <div class="section level2">
-<h2>Keras 2.1.3</h2>
+    <div id="keras-2-1-3" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2-1-3" class="anchor"></a>Keras 2.1.3</h2>
 <ul>
 <li><p>Models saved via <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/export_savedmodel">export_savedmodel()</a></code> that make use of learning phases can now be exported without having to manually reload the original model.</p></li>
 <li><p>Ensure that models saved via <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/export_savedmodel">export_savedmodel()</a></code> can be served from CloudML</p></li>
@@ -180,8 +200,9 @@
 <li><p>Various fixes for <code><a href="../reference/use_implementation.html">use_implementation()</a></code> function</p></li>
 </ul>
 </div>
-    <div class="section level2">
-<h2>Keras 2.1.2</h2>
+    <div id="keras-2-1-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2-1-2" class="anchor"></a>Keras 2.1.2</h2>
 <ul>
 <li><p>Added <code>theme_bw</code> option to plot method for training history</p></li>
 <li><p>Support TF Dataset objects as generators for <code><a href="../reference/fit_generator.html">fit_generator()</a></code>, etc.</p></li>
@@ -196,8 +217,9 @@
 <li><p>Provide global <code>keras.fit_verbose</code> option (defaults to 1)</p></li>
 </ul>
 </div>
-    <div class="section level2">
-<h2>keras 2.0.9</h2>
+    <div id="keras-2-0-9" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2-0-9" class="anchor"></a>keras 2.0.9</h2>
 <ul>
 <li><p>Added <code><a href="../reference/multi_gpu_model.html">multi_gpu_model()</a></code> function.</p></li>
 <li><p>Automatically call <code><a href="../reference/keras_array.html">keras_array()</a></code> on the results of generator functions.</p></li>
@@ -229,8 +251,9 @@
 <li><p>Expose <code>add_loss()</code> function for custom layers</p></li>
 </ul>
 </div>
-    <div class="section level2">
-<h2>keras 2.0.8</h2>
+    <div id="keras-2-0-8" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2-0-8" class="anchor"></a>keras 2.0.8</h2>
 <ul>
 <li><p>Add <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/use_session_with_seed">use_session_with_seed()</a></code> function that establishes a random seed for the Keras session. Note that this should not be used when training time is paramount, as it disables GPU computation and CPU parallelism by default for more deterministic computations.</p></li>
 <li><p>Fix for plotting training history with early stopping callback (thanks to <a href='http://github.com/JamesAllingham'>@JamesAllingham</a>).</p></li>
@@ -246,8 +269,9 @@
 <li><p>Enable stateful RNNs with CNTK.</p></li>
 </ul>
 </div>
-    <div class="section level2">
-<h2>keras 2.0.6</h2>
+    <div id="keras-2-0-6" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2-0-6" class="anchor"></a>keras 2.0.6</h2>
 <ul>
 <li><p><code><a href="../reference/install_keras.html">install_keras()</a></code> function which installs both TensorFlow and Keras</p></li>
 <li><p>Use keras package as default implementation rather than tf.contrib.keras</p></li>
@@ -267,8 +291,9 @@
 <li><p>Provide hint to use r-tensorflow environment when importing keras</p></li>
 </ul>
 </div>
-    <div class="section level2">
-<h2>keras 2.0.5</h2>
+    <div id="keras-2-0-5" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2-0-5" class="anchor"></a>keras 2.0.5</h2>
 <ul>
 <li>Initial CRAN release</li>
 </ul>
@@ -280,14 +305,15 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#NA">2.1.5</a></li>
-        <li><a href="#NA">2.1.4</a></li>
-        <li><a href="#NA">2.1.3</a></li>
-        <li><a href="#NA">2.1.2</a></li>
-        <li><a href="#NA">2.0.9</a></li>
-        <li><a href="#NA">2.0.8</a></li>
-        <li><a href="#NA">2.0.6</a></li>
-        <li><a href="#NA">2.0.5</a></li>
+        <li><a href="#keras-2-1-6-development">2.1.6</a></li>
+        <li><a href="#keras-2-1-5-cran">2.1.5</a></li>
+        <li><a href="#keras-2-1-4">2.1.4</a></li>
+        <li><a href="#keras-2-1-3">2.1.3</a></li>
+        <li><a href="#keras-2-1-2">2.1.2</a></li>
+        <li><a href="#keras-2-0-9">2.0.9</a></li>
+        <li><a href="#keras-2-0-8">2.0.8</a></li>
+        <li><a href="#keras-2-0-6">2.0.6</a></li>
+        <li><a href="#keras-2-0-5">2.0.5</a></li>
       </ul>
     </div>
   </div>
@@ -305,6 +331,8 @@
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

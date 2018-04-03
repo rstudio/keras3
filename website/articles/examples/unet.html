@@ -29,8 +29,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../../index.html">Keras for R</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../../index.html">keras</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.5.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -119,7 +123,10 @@
     <div class="page-header toc-ignore">
       <h1>unet</h1>
             
-          </div>
+      
+      
+
+    </div>
 
     
     
@@ -336,11 +343,11 @@
 <a class="sourceLine" id="cb1-202" data-line-number="202">                       mask_file,</a>
 <a class="sourceLine" id="cb1-203" data-line-number="203">                       <span class="dt">target_width =</span> <span class="dv">128</span>, </a>
 <a class="sourceLine" id="cb1-204" data-line-number="204">                       <span class="dt">target_height =</span> <span class="dv">128</span>) {</a>
-<a class="sourceLine" id="cb1-205" data-line-number="205">    img &lt;-<span class="st"> </span><span class="kw">image_read</span>(image_file)</a>
-<a class="sourceLine" id="cb1-206" data-line-number="206">    img &lt;-<span class="st"> </span><span class="kw">image_scale</span>(img, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))</a>
+<a class="sourceLine" id="cb1-205" data-line-number="205">    img &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/editing">image_read</a></span>(image_file)</a>
+<a class="sourceLine" id="cb1-206" data-line-number="206">    img &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/transform">image_scale</a></span>(img, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))</a>
 <a class="sourceLine" id="cb1-207" data-line-number="207">    </a>
-<a class="sourceLine" id="cb1-208" data-line-number="208">    mask &lt;-<span class="st"> </span><span class="kw">image_read</span>(mask_file)</a>
-<a class="sourceLine" id="cb1-209" data-line-number="209">    mask &lt;-<span class="st"> </span><span class="kw">image_scale</span>(mask, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))</a>
+<a class="sourceLine" id="cb1-208" data-line-number="208">    mask &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/editing">image_read</a></span>(mask_file)</a>
+<a class="sourceLine" id="cb1-209" data-line-number="209">    mask &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/transform">image_scale</a></span>(mask, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))</a>
 <a class="sourceLine" id="cb1-210" data-line-number="210">    <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">img =</span> img, <span class="dt">mask =</span> mask))</a>
 <a class="sourceLine" id="cb1-211" data-line-number="211">}</a>
 <a class="sourceLine" id="cb1-212" data-line-number="212"></a>
@@ -362,7 +369,7 @@
 <a class="sourceLine" id="cb1-228" data-line-number="228">                       hue_shift_lim[<span class="dv">1</span>], </a>
 <a class="sourceLine" id="cb1-229" data-line-number="229">                       hue_shift_lim[<span class="dv">2</span>])</a>
 <a class="sourceLine" id="cb1-230" data-line-number="230">    </a>
-<a class="sourceLine" id="cb1-231" data-line-number="231">    img &lt;-<span class="st"> </span><span class="kw">image_modulate</span>(img, </a>
+<a class="sourceLine" id="cb1-231" data-line-number="231">    img &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/color">image_modulate</a></span>(img, </a>
 <a class="sourceLine" id="cb1-232" data-line-number="232">                          <span class="dt">brightness =</span> brightness_shift, </a>
 <a class="sourceLine" id="cb1-233" data-line-number="233">                          <span class="dt">saturation =</span>  saturation_shift, </a>
 <a class="sourceLine" id="cb1-234" data-line-number="234">                          <span class="dt">hue =</span> hue_shift)</a>
@@ -386,8 +393,8 @@
 <a class="sourceLine" id="cb1-252" data-line-number="252"></a>
 <a class="sourceLine" id="cb1-253" data-line-number="253"><span class="co"># Iterators with parallel processing -----------------------------------------------------</span></a>
 <a class="sourceLine" id="cb1-254" data-line-number="254"></a>
-<a class="sourceLine" id="cb1-255" data-line-number="255">cl &lt;-<span class="st"> </span><span class="kw">makePSOCKcluster</span>(<span class="dv">4</span>) </a>
-<a class="sourceLine" id="cb1-256" data-line-number="256"><span class="kw">clusterEvalQ</span>(cl, {</a>
+<a class="sourceLine" id="cb1-255" data-line-number="255">cl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="dv">4</span>) </a>
+<a class="sourceLine" id="cb1-256" data-line-number="256"><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/clusterApply">clusterEvalQ</a></span>(cl, {</a>
 <a class="sourceLine" id="cb1-257" data-line-number="257">    <span class="kw">library</span>(magick)     </a>
 <a class="sourceLine" id="cb1-258" data-line-number="258">    <span class="kw">library</span>(abind)     </a>
 <a class="sourceLine" id="cb1-259" data-line-number="259">    <span class="kw">library</span>(reticulate)</a>
@@ -396,11 +403,11 @@
 <a class="sourceLine" id="cb1-262" data-line-number="262">                           mask_file,</a>
 <a class="sourceLine" id="cb1-263" data-line-number="263">                           <span class="dt">target_width =</span> <span class="dv">128</span>, </a>
 <a class="sourceLine" id="cb1-264" data-line-number="264">                           <span class="dt">target_height =</span> <span class="dv">128</span>) {</a>
-<a class="sourceLine" id="cb1-265" data-line-number="265">        img &lt;-<span class="st"> </span><span class="kw">image_read</span>(image_file)</a>
-<a class="sourceLine" id="cb1-266" data-line-number="266">        img &lt;-<span class="st"> </span><span class="kw">image_scale</span>(img, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))</a>
+<a class="sourceLine" id="cb1-265" data-line-number="265">        img &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/editing">image_read</a></span>(image_file)</a>
+<a class="sourceLine" id="cb1-266" data-line-number="266">        img &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/transform">image_scale</a></span>(img, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))</a>
 <a class="sourceLine" id="cb1-267" data-line-number="267">        </a>
-<a class="sourceLine" id="cb1-268" data-line-number="268">        mask &lt;-<span class="st"> </span><span class="kw">image_read</span>(mask_file)</a>
-<a class="sourceLine" id="cb1-269" data-line-number="269">        mask &lt;-<span class="st"> </span><span class="kw">image_scale</span>(mask, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))</a>
+<a class="sourceLine" id="cb1-268" data-line-number="268">        mask &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/editing">image_read</a></span>(mask_file)</a>
+<a class="sourceLine" id="cb1-269" data-line-number="269">        mask &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/transform">image_scale</a></span>(mask, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))</a>
 <a class="sourceLine" id="cb1-270" data-line-number="270">        <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">img =</span> img, <span class="dt">mask =</span> mask))</a>
 <a class="sourceLine" id="cb1-271" data-line-number="271">    }</a>
 <a class="sourceLine" id="cb1-272" data-line-number="272">    </a>
@@ -422,7 +429,7 @@
 <a class="sourceLine" id="cb1-288" data-line-number="288">                           hue_shift_lim[<span class="dv">1</span>], </a>
 <a class="sourceLine" id="cb1-289" data-line-number="289">                           hue_shift_lim[<span class="dv">2</span>])</a>
 <a class="sourceLine" id="cb1-290" data-line-number="290">        </a>
-<a class="sourceLine" id="cb1-291" data-line-number="291">        img &lt;-<span class="st"> </span><span class="kw">image_modulate</span>(img, </a>
+<a class="sourceLine" id="cb1-291" data-line-number="291">        img &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/color">image_modulate</a></span>(img, </a>
 <a class="sourceLine" id="cb1-292" data-line-number="292">                              <span class="dt">brightness =</span> brightness_shift, </a>
 <a class="sourceLine" id="cb1-293" data-line-number="293">                              <span class="dt">saturation =</span>  saturation_shift, </a>
 <a class="sourceLine" id="cb1-294" data-line-number="294">                              <span class="dt">hue =</span> hue_shift)</a>
@@ -433,14 +440,14 @@
 <a class="sourceLine" id="cb1-299" data-line-number="299">                        <span class="dt">target_width =</span> <span class="dv">128</span>,</a>
 <a class="sourceLine" id="cb1-300" data-line-number="300">                        <span class="dt">target_height =</span> <span class="dv">128</span>) {</a>
 <a class="sourceLine" id="cb1-301" data-line-number="301">        result &lt;-<span class="st"> </span><span class="kw">aperm</span>(<span class="kw">as.numeric</span>(image[[<span class="dv">1</span>]])[, , <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>)) <span class="co"># transpose</span></a>
-<a class="sourceLine" id="cb1-302" data-line-number="302">        <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(result, &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, target_width, target_height, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb1-302" data-line-number="302">        <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(result, <span class="kw">c</span>(<span class="dv">1</span>, target_width, target_height, <span class="dv">3</span>))</a>
 <a class="sourceLine" id="cb1-303" data-line-number="303">    }</a>
 <a class="sourceLine" id="cb1-304" data-line-number="304">    </a>
 <a class="sourceLine" id="cb1-305" data-line-number="305">    mask2arr &lt;-<span class="st"> </span><span class="cf">function</span>(mask,</a>
 <a class="sourceLine" id="cb1-306" data-line-number="306">                         <span class="dt">target_width =</span> <span class="dv">128</span>,</a>
 <a class="sourceLine" id="cb1-307" data-line-number="307">                         <span class="dt">target_height =</span> <span class="dv">128</span>) {</a>
 <a class="sourceLine" id="cb1-308" data-line-number="308">        result &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">as.numeric</span>(mask[[<span class="dv">1</span>]])[, , <span class="dv">1</span>]) <span class="co"># transpose</span></a>
-<a class="sourceLine" id="cb1-309" data-line-number="309">        <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(result, &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, target_width, target_height, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb1-309" data-line-number="309">        <span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(result, <span class="kw">c</span>(<span class="dv">1</span>, target_width, target_height, <span class="dv">1</span>))</a>
 <a class="sourceLine" id="cb1-310" data-line-number="310">    }</a>
 <a class="sourceLine" id="cb1-311" data-line-number="311">})</a>
 <a class="sourceLine" id="cb1-312" data-line-number="312"></a>
@@ -480,7 +487,7 @@
 <a class="sourceLine" id="cb1-346" data-line-number="346">        masks_iter &lt;&lt;-<span class="st"> </span>masks_iter[<span class="op">-</span>batch_ind]</a>
 <a class="sourceLine" id="cb1-347" data-line-number="347">        </a>
 <a class="sourceLine" id="cb1-348" data-line-number="348">        </a>
-<a class="sourceLine" id="cb1-349" data-line-number="349">        x_y_batch &lt;-<span class="st"> </span><span class="kw">foreach</span>(<span class="dt">i =</span> <span class="dv">1</span><span class="op">:</span>batch_size) <span class="op">%dopar%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb1-349" data-line-number="349">        x_y_batch &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dt">i =</span> <span class="dv">1</span><span class="op">:</span>batch_size) <span class="op">%dopar%</span><span class="st"> </span>{</a>
 <a class="sourceLine" id="cb1-350" data-line-number="350">            x_y_imgs &lt;-<span class="st"> </span><span class="kw">imagesRead</span>(<span class="dt">image_file =</span> batch_images_list[i],</a>
 <a class="sourceLine" id="cb1-351" data-line-number="351">                                   <span class="dt">mask_file =</span> batch_masks_list[i])</a>
 <a class="sourceLine" id="cb1-352" data-line-number="352">            <span class="co"># augmentation</span></a>
@@ -535,7 +542,7 @@
 <a class="sourceLine" id="cb1-401" data-line-number="401">        masks_iter &lt;&lt;-<span class="st"> </span>masks_iter[<span class="op">-</span>batch_ind]</a>
 <a class="sourceLine" id="cb1-402" data-line-number="402">        </a>
 <a class="sourceLine" id="cb1-403" data-line-number="403">        </a>
-<a class="sourceLine" id="cb1-404" data-line-number="404">        x_y_batch &lt;-<span class="st"> </span><span class="kw">foreach</span>(<span class="dt">i =</span> <span class="dv">1</span><span class="op">:</span>batch_size) <span class="op">%dopar%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb1-404" data-line-number="404">        x_y_batch &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dt">i =</span> <span class="dv">1</span><span class="op">:</span>batch_size) <span class="op">%dopar%</span><span class="st"> </span>{</a>
 <a class="sourceLine" id="cb1-405" data-line-number="405">            x_y_imgs &lt;-<span class="st"> </span><span class="kw">imagesRead</span>(<span class="dt">image_file =</span> batch_images_list[i],</a>
 <a class="sourceLine" id="cb1-406" data-line-number="406">                                   <span class="dt">mask_file =</span> batch_masks_list[i])</a>
 <a class="sourceLine" id="cb1-407" data-line-number="407">            <span class="co"># without augmentation</span></a>
@@ -557,12 +564,12 @@
 <a class="sourceLine" id="cb1-423" data-line-number="423">    }</a>
 <a class="sourceLine" id="cb1-424" data-line-number="424">}</a>
 <a class="sourceLine" id="cb1-425" data-line-number="425"></a>
-<a class="sourceLine" id="cb1-426" data-line-number="426">train_iterator &lt;-<span class="st"> </span><span class="kw">py_iterator</span>(<span class="kw">train_generator</span>(<span class="dt">images_dir =</span> images_dir,</a>
+<a class="sourceLine" id="cb1-426" data-line-number="426">train_iterator &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/py_iterator">py_iterator</a></span>(<span class="kw">train_generator</span>(<span class="dt">images_dir =</span> images_dir,</a>
 <a class="sourceLine" id="cb1-427" data-line-number="427">                                              <span class="dt">masks_dir =</span> masks_dir,</a>
 <a class="sourceLine" id="cb1-428" data-line-number="428">                                              <span class="dt">samples_index =</span> train_index,</a>
 <a class="sourceLine" id="cb1-429" data-line-number="429">                                              <span class="dt">batch_size =</span> batch_size))</a>
 <a class="sourceLine" id="cb1-430" data-line-number="430"></a>
-<a class="sourceLine" id="cb1-431" data-line-number="431">val_iterator &lt;-<span class="st"> </span><span class="kw">py_iterator</span>(<span class="kw">val_generator</span>(<span class="dt">images_dir =</span> images_dir,</a>
+<a class="sourceLine" id="cb1-431" data-line-number="431">val_iterator &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/py_iterator">py_iterator</a></span>(<span class="kw">val_generator</span>(<span class="dt">images_dir =</span> images_dir,</a>
 <a class="sourceLine" id="cb1-432" data-line-number="432">                                          <span class="dt">masks_dir =</span> masks_dir,</a>
 <a class="sourceLine" id="cb1-433" data-line-number="433">                                          <span class="dt">samples_index =</span> val_index,</a>
 <a class="sourceLine" id="cb1-434" data-line-number="434">                                          <span class="dt">batch_size =</span> batch_size))</a>
@@ -602,7 +609,7 @@
 <a class="sourceLine" id="cb1-468" data-line-number="468">    <span class="dt">callbacks =</span> callbacks_list</a>
 <a class="sourceLine" id="cb1-469" data-line-number="469">)</a>
 <a class="sourceLine" id="cb1-470" data-line-number="470"></a>
-<a class="sourceLine" id="cb1-471" data-line-number="471"><span class="kw">stopCluster</span>(cl)</a></code></pre></div>
+<a class="sourceLine" id="cb1-471" data-line-number="471"><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">stopCluster</a></span>(cl)</a></code></pre></div>
 </div>
   </div>
 
@@ -622,6 +629,8 @@
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>
