@@ -26,7 +26,7 @@ skip_if_cntk <- function() {
 }
 
 skip_if_tensorflow_implementation <- function() {
-  if (is_tensorflow_implementation())
+  if (keras:::is_tensorflow_implementation())
     skip("Test not run for TensorFlow implementation")
 }
 
