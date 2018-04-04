@@ -417,7 +417,7 @@ layer_conv_3d_transpose <- function(object, filters, kernel_size, strides = c(1,
 
 
 
-#' Depthwise separable 2D convolution.
+#' Separable 2D convolution.
 #' 
 #' Separable convolutions consist in first performing a depthwise spatial
 #' convolution (which acts on each input channel separately) followed by a

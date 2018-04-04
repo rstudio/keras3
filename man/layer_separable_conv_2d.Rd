@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-convolutional.R
 \name{layer_separable_conv_2d}
 \alias{layer_separable_conv_2d}
-\title{Depthwise separable 2D convolution.}
+\title{Separable 2D convolution.}
 \usage{
 layer_separable_conv_2d(object, filters, kernel_size, strides = c(1, 1),
   padding = "valid", data_format = NULL, depth_multiplier = 1L,
