@@ -46,8 +46,9 @@ layer_custom <- function(object, output_dim, name = NULL, trainable = TRUE) {
   ))
 }
 
-test_succeeds("Use an R-based custom Keras layer", {
 
+test_succeeds("Use an R-based custom Keras layer", {
+  skip_if_tensorflow_implementation()
   model <- keras_model_sequential()
   model %>% 
     layer_dense(units = 32, input_shape = c(32,32)) %>% 
