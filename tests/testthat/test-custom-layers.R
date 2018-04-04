@@ -27,7 +27,7 @@ CustomLayer <- R6::R6Class("CustomLayer",
     },
     
     call = function(x, mask = NULL) {
-      self$add_loss(list(5))
+      self$add_loss(list(k_constant(5)))
       k_dot(x, self$kernel)
     },
     

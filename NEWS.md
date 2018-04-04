@@ -5,12 +5,14 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Fix issue with single-element vectors passed to text preprocessing functions
 
+- Compatibility with TensorFlow v1.7 Keras implementation
+
 
 ## Keras 2.1.5 (CRAN)
 
 - Support for custom constraints from R 
 
-- Added `timeseries_generator()` utilty function 
+- Added `timeseries_generator()` utility function 
 
 - New layer `layer_depthwise_conv_2d()`
 

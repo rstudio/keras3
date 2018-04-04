@@ -134,12 +134,11 @@ load_model_weights_hdf5 <- function(object, filepath, by_name = FALSE,
     by_name = by_name
   )
   
-  if (keras_version() >= "2.1.4")
+  if (keras_version() >= "2.1.4" && !is_tensorflow_implementation()) {
     args$skip_mismatch <- skip_mismatch
-  
-  if (keras_version() >= "2.1.4")
     args$reshape <- reshape
-  
+  }
+   
   do.call(object$load_weights, args)
   
   invisible(object)
@@ -252,7 +251,8 @@ reload_model <- function(object) {
   old_weights <- object$get_weights()
   
   models <- import("keras.models")
-  if ("keras.models.Sequential" %in% class(object)) {
+  if ("keras.models.Sequential" %in% class(object) ||
+      "keras.engine.sequential.Sequential" %in% class(object)) {
     new_model <- models$Sequential$from_config(old_config)
   }
   else {

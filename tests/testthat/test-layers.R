@@ -41,6 +41,7 @@ test_call_succeeds("layer_activation_elu", {
 })
 
 test_call_succeeds("layer_activity_regularization", {
+  skip_if_tensorflow_implementation()
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
     layer_activity_regularization()

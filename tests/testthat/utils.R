@@ -25,6 +25,11 @@ skip_if_cntk <- function() {
     skip("Test not run for CNTK backend")
 }
 
+skip_if_tensorflow_implementation <- function() {
+  if (is_tensorflow_implementation())
+    skip("Test not run for TensorFlow implementation")
+}
+
 define_model <- function() {
   model <- keras_model_sequential() 
   model %>%
