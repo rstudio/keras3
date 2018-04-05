@@ -8,7 +8,7 @@ fit_generator(object, generator, steps_per_epoch, epochs = 1,
   verbose = getOption("keras.fit_verbose", default = 1), callbacks = NULL,
   view_metrics = getOption("keras.view_metrics", default = "auto"),
   validation_data = NULL, validation_steps = NULL, class_weight = NULL,
-  max_queue_size = 10, initial_epoch = 0)
+  max_queue_size = 10, workers = 1, initial_epoch = 0)
 }
 \arguments{
 \item{object}{Keras model object}
@@ -73,6 +73,10 @@ attention" to samples from an under-represented class.}
 
 \item{max_queue_size}{Maximum size for the generator queue. If unspecified,
 \code{max_queue_size} will default to 10.}
+
+\item{workers}{Maximum number of threads to use for parallel processing. Note that
+parallel processing will only be performed for native Keras generators (e.g.
+\code{flow_images_from_directory()}) as R based generators must run on the main thread.}
 
 \item{initial_epoch}{epoch at which to start training (useful for resuming a
 previous training run)}

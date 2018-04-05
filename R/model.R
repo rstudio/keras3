@@ -670,6 +670,9 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'   attention" to samples from an under-represented class.
 #' @param max_queue_size Maximum size for the generator queue. If unspecified,
 #'   `max_queue_size` will default to 10.
+#' @param workers Maximum number of threads to use for parallel processing. Note that
+#'   parallel processing will only be performed for native Keras generators (e.g.
+#'   `flow_images_from_directory()`) as R based generators must run on the main thread.
 #' @param initial_epoch epoch at which to start training (useful for resuming a
 #'   previous training run)
 #'
@@ -682,7 +685,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
                           verbose=getOption("keras.fit_verbose", default = 1), callbacks = NULL, 
                           view_metrics = getOption("keras.view_metrics", default = "auto"),
                           validation_data = NULL, validation_steps = NULL, 
-                          class_weight = NULL, max_queue_size = 10, initial_epoch = 0) {
+                          class_weight = NULL, max_queue_size = 10, workers = 1, initial_epoch = 0) {
   
   # resolve view_metrics
   if (identical(view_metrics, "auto"))
@@ -701,6 +704,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
     validation_steps = as_nullable_integer(validation_steps),
     class_weight = as_class_weight(class_weight),
     max_queue_size = as.integer(max_queue_size),
+    workers = as.integer(workers),
     initial_epoch = as.integer(initial_epoch) 
   ))
   
@@ -720,12 +724,12 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
 #' `test_on_batch()`.
 #' 
 #' @inheritParams evaluate.keras.engine.training.Model
+#' @inheritParams fit_generator
 #' 
 #' @param generator Generator yielding lists (inputs, targets) or (inputs,
 #'   targets, sample_weights)
 #' @param steps Total number of steps (batches of samples) to yield from
 #'   `generator` before stopping.
-#' @param max_queue_size maximum size for the generator queue
 #'   
 #' @return Named list of model test loss (or losses for models with multiple outputs) 
 #'   and model metrics.
@@ -733,13 +737,14 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
 #' @family model functions   
 #'     
 #' @export
-evaluate_generator <- function(object, generator, steps, max_queue_size = 10) {
+evaluate_generator <- function(object, generator, steps, max_queue_size = 10, workers = 1) {
   
   # perform evaluation
   result <- call_generator_function(object$evaluate_generator, list(
     generator = generator,
     steps = as.integer(steps),
-    max_queue_size = as.integer(max_queue_size)
+    max_queue_size = as.integer(max_queue_size),
+    workers = as.integer(workers)
   ))
   
   # apply names
@@ -759,12 +764,12 @@ evaluate_generator <- function(object, generator, steps, max_queue_size = 10) {
 #' `predict_on_batch()`.
 #' 
 #' @inheritParams predict.keras.engine.training.Model
+#' @inheritParams fit_generator
 #' 
 #' @param object Keras model object
 #' @param generator Generator yielding batches of input samples.
 #' @param steps Total number of steps (batches of samples) to yield from
 #'   `generator` before stopping.
-#' @param max_queue_size Maximum size for the generator queue.
 #' @param verbose verbosity mode, 0 or 1.
 #'   
 #' @return Numpy array(s) of predictions.
@@ -775,12 +780,13 @@ evaluate_generator <- function(object, generator, steps, max_queue_size = 10) {
 #' @family model functions   
 #'     
 #' @export
-predict_generator <- function(object, generator, steps, max_queue_size = 10, verbose = 0) {
+predict_generator <- function(object, generator, steps, max_queue_size = 10, workers = 1, verbose = 0) {
   
   args <- list(
     generator = generator,
     steps = as.integer(steps),
-    max_queue_size = as.integer(max_queue_size)
+    max_queue_size = as.integer(max_queue_size),
+    workers = as.integer(workers)
   )
   
   if (keras_version() >= "2.0.1")
@@ -811,11 +817,21 @@ call_generator_function <- function(func, args) {
     args$pickle_safe <- FALSE
   }
   
-  # set workers to 0 for versions of keras that support this
-  if (use_main_thread_generator && (keras_version() >= "2.1.2"))
-    args$workers = 0L
-  else
-    args$workers = 1L
+  # if it's a main thread generator then force workers to correct value
+  if (use_main_thread_generator) {
+    
+    # error to use workers > 1 for main thread generator
+    if (args$workers > 1) {
+      stop('You may not specify workers > 1 for R based generator functions (R ',
+           'generators must run on the main thread)', call. = FALSE)
+    }
+    
+    # set workers to 0 for versions of keras that support this
+    if (keras_version() >= "2.1.2")
+      args$workers = 0L
+    else
+      args$workers = 1L
+  }
   
   # call the generator
   do.call(func, args)

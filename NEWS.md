@@ -7,6 +7,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Compatibility with TensorFlow v1.7 Keras implementation
 
+- Support `workers` parameter for native Keras generators (e.g. `flow_images_from_directory()`)
+
 
 ## Keras 2.1.5 (CRAN)
 

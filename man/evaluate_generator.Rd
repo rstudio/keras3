@@ -4,7 +4,8 @@
 \alias{evaluate_generator}
 \title{Evaluates the model on a data generator.}
 \usage{
-evaluate_generator(object, generator, steps, max_queue_size = 10)
+evaluate_generator(object, generator, steps, max_queue_size = 10,
+  workers = 1)
 }
 \arguments{
 \item{object}{Model object to evaluate}
@@ -15,7 +16,12 @@ targets, sample_weights)}
 \item{steps}{Total number of steps (batches of samples) to yield from
 \code{generator} before stopping.}
 
-\item{max_queue_size}{maximum size for the generator queue}
+\item{max_queue_size}{Maximum size for the generator queue. If unspecified,
+\code{max_queue_size} will default to 10.}
+
+\item{workers}{Maximum number of threads to use for parallel processing. Note that
+parallel processing will only be performed for native Keras generators (e.g.
+\code{flow_images_from_directory()}) as R based generators must run on the main thread.}
 }
 \value{
 Named list of model test loss (or losses for models with multiple outputs)

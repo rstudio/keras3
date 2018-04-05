@@ -5,7 +5,7 @@
 \title{Generates predictions for the input samples from a data generator.}
 \usage{
 predict_generator(object, generator, steps, max_queue_size = 10,
-  verbose = 0)
+  workers = 1, verbose = 0)
 }
 \arguments{
 \item{object}{Keras model object}
@@ -15,7 +15,12 @@ predict_generator(object, generator, steps, max_queue_size = 10,
 \item{steps}{Total number of steps (batches of samples) to yield from
 \code{generator} before stopping.}
 
-\item{max_queue_size}{Maximum size for the generator queue.}
+\item{max_queue_size}{Maximum size for the generator queue. If unspecified,
+\code{max_queue_size} will default to 10.}
+
+\item{workers}{Maximum number of threads to use for parallel processing. Note that
+parallel processing will only be performed for native Keras generators (e.g.
+\code{flow_images_from_directory()}) as R based generators must run on the main thread.}
 
 \item{verbose}{verbosity mode, 0 or 1.}
 }
