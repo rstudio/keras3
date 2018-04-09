@@ -360,6 +360,13 @@ layer_flatten <- function(object, input_shape = NULL, dtype = NULL,
 
 
 
+as_integer <- function(x) {
+  if (is.numeric(x))
+    as.integer(x)
+  else
+    x
+}
+
 as_integer_tuple <- function(x, force_tuple = FALSE) {
   if (is.null(x))
     x

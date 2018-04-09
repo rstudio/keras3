@@ -1971,7 +1971,7 @@ k_pool3d <- function(x, pool_size, strides = c(1, 1, 1), padding = "valid",
 k_pow <- function(x, a) {
   keras$backend$pow(
     x = x,
-    a = as.integer(a)
+    a = as_integer(a)
   )
 }
 

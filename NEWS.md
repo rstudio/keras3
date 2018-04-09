@@ -9,6 +9,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Support `workers` parameter for native Keras generators (e.g. `flow_images_from_directory()`)
 
+- Accept tensor as argument to `k_pow()` 
+
 
 ## Keras 2.1.5 (CRAN)
 
