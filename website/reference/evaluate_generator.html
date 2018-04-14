@@ -164,7 +164,8 @@ test_on_batch()." />
 <code><a href='train_on_batch.html'>test_on_batch()</a></code>.</p>
     
 
-    <pre class="usage"><span class='fu'>evaluate_generator</span>(<span class='no'>object</span>, <span class='no'>generator</span>, <span class='no'>steps</span>, <span class='kw'>max_queue_size</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>
+    <pre class="usage"><span class='fu'>evaluate_generator</span>(<span class='no'>object</span>, <span class='no'>generator</span>, <span class='no'>steps</span>, <span class='kw'>max_queue_size</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>workers</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,7 +186,14 @@ targets, sample_weights)</p></td>
     </tr>
     <tr>
       <th>max_queue_size</th>
-      <td><p>maximum size for the generator queue</p></td>
+      <td><p>Maximum size for the generator queue. If unspecified,
+<code>max_queue_size</code> will default to 10.</p></td>
+    </tr>
+    <tr>
+      <th>workers</th>
+      <td><p>Maximum number of threads to use for parallel processing. Note that
+parallel processing will only be performed for native Keras generators (e.g.
+<code><a href='flow_images_from_directory.html'>flow_images_from_directory()</a></code>) as R based generators must run on the main thread.</p></td>
     </tr>
     </table>
     
