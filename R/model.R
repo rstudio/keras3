@@ -80,7 +80,13 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 #' @param gpus `NULL` to use all available GPUs (default). Integer >= 2 or 
 #'   list of integers, number of GPUs or list of GPU IDs on which to create 
 #'   model replicas.
-#' 
+#' @param cpu_merge A boolean value to identify whether to force
+#'   merging model weights under the scope of the CPU or not.
+#' @param cpu_relocation A boolean value to identify whether to
+#'   create the model's weights under the scope of the CPU.
+#'   If the model is not defined under any preceding device
+#'   scope, you can still rescue it by activating this option.   
+#'  
 #' @return  A Keras model object which can be used just like the initial
 #'  `model` argument, but which distributes its workload on multiple GPUs.
 #' 
@@ -157,14 +163,24 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 #' @family model functions
 #'
 #' @export
-multi_gpu_model <- function(model, gpus = NULL) {
+multi_gpu_model <- function(model, gpus = NULL, cpu_merge = TRUE, cpu_relocation = FALSE) {
   
   if (is.null(gpus) && keras_version() < "2.1.4") {
     stop("You must provide an explicit gpus argument in Keras versions ",
          "prior to 2.1.4")
   }
   
-  keras$utils$multi_gpu_model(model, as_nullable_integer(gpus))
+  args <- list(
+    model = model,
+    gpus = as_nullable_integer(gpus)
+  )
+  
+  if (keras_version() >= "2.1.6") {
+    args$cpu_merge <- cpu_merge
+    args$cpu_relocation <- cpu_relocation
+  }
+  
+  do.call(keras$utils$multi_gpu_model, args)
 }
 
 

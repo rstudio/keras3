@@ -2,7 +2,8 @@
 % Please edit documentation in R/preprocessing.R
 \name{image_data_generator}
 \alias{image_data_generator}
-\title{Generate minibatches of image data with real-time data augmentation.}
+\title{Generate batches of image data with real-time data augmentation. The data will be
+looped over (in batches).}
 \usage{
 image_data_generator(featurewise_center = FALSE, samplewise_center = FALSE,
   featurewise_std_normalization = FALSE,
@@ -15,13 +16,13 @@ image_data_generator(featurewise_center = FALSE, samplewise_center = FALSE,
   validation_split = 0)
 }
 \arguments{
-\item{featurewise_center}{set input mean to 0 over the dataset.}
+\item{featurewise_center}{Set input mean to 0 over the dataset, feature-wise.}
 
-\item{samplewise_center}{set each sample mean to 0.}
+\item{samplewise_center}{Boolean. Set each sample mean to 0.}
 
-\item{featurewise_std_normalization}{divide inputs by std of the dataset.}
+\item{featurewise_std_normalization}{Divide inputs by std of the dataset, feature-wise.}
 
-\item{samplewise_std_normalization}{divide each input by its std.}
+\item{samplewise_std_normalization}{Divide each input by its std.}
 
 \item{zca_whitening}{apply ZCA whitening.}
 
@@ -78,5 +79,6 @@ then it will be "channels_last".}
 \item{validation_split}{fraction of images reserved for validation (strictly between 0 and 1).}
 }
 \description{
-Generate minibatches of image data with real-time data augmentation.
+Generate batches of image data with real-time data augmentation. The data will be
+looped over (in batches).
 }

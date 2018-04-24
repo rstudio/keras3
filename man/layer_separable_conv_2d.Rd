@@ -5,8 +5,8 @@
 \title{Separable 2D convolution.}
 \usage{
 layer_separable_conv_2d(object, filters, kernel_size, strides = c(1, 1),
-  padding = "valid", data_format = NULL, depth_multiplier = 1L,
-  activation = NULL, use_bias = TRUE,
+  padding = "valid", data_format = NULL, dilation_rate = 1,
+  depth_multiplier = 1, activation = NULL, use_bias = TRUE,
   depthwise_initializer = "glorot_uniform",
   pointwise_initializer = "glorot_uniform", bias_initializer = "zeros",
   depthwise_regularizer = NULL, pointwise_regularizer = NULL,
@@ -39,9 +39,15 @@ value != 1 is incompatible with specifying any \code{dilation_rate} value != 1.}
 found in your Keras config file at \code{~/.keras/keras.json}. If you never set
 it, then it will be "channels_last".}
 
+\item{dilation_rate}{an integer or list of 2 integers, specifying the
+dilation rate to use for dilated convolution. Can be a single integer to
+specify the same value for all spatial dimensions. Currently, specifying
+any \code{dilation_rate} value != 1 is incompatible with specifying any stride
+value != 1.}
+
 \item{depth_multiplier}{The number of depthwise convolution output channels
 for each input channel. The total number of depthwise convolution output
-channels will be equal to \code{filterss_in * depth_multiplier}.}
+channels will be equal to \code{filters_in * depth_multiplier}.}
 
 \item{activation}{Activation function to use. If you don't specify anything,
 no activation is applied (ie. "linear" activation: \code{a(x) = x}).}

@@ -157,7 +157,8 @@ make_sampling_table <- function(size, sampling_factor = 1e-05) {
 #' Convert text to a sequence of words (or tokens).
 #' 
 #' @param text Input text (string).
-#' @param filters Sequence of characters to filter out.
+#' @param filters Sequence of characters to filter out such as
+#'   punctuation. Default includes basic punctuation, tabs, and newlines.
 #' @param lower Whether to convert the input to lowercase.
 #' @param split Sentence split marker (string).
 #' 
@@ -207,7 +208,8 @@ text_one_hot <- function(text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\
 #'   any function that takes in input a string and returns a int. Note that
 #'   `hash` is not a stable hashing function, so it is not consistent across
 #'   different runs, while 'md5' is a stable hashing function.
-#' @param filters Sequence of characters to filter out.
+#' @param filters Sequence of characters to filter out such as
+#'   punctuation. Default includes basic punctuation, tabs, and newlines.
 #' @param lower Whether to convert the input to lowercase.
 #' @param split Sentence split marker (string).
 #' 
@@ -581,12 +583,13 @@ image_array_save <- function(img, path) {
 
 
 
-#' Generate minibatches of image data with real-time data augmentation.
+#' Generate batches of image data with real-time data augmentation. The data will be
+#' looped over (in batches).
 #' 
-#' @param featurewise_center set input mean to 0 over the dataset.
-#' @param samplewise_center set each sample mean to 0.
-#' @param featurewise_std_normalization divide inputs by std of the dataset.
-#' @param samplewise_std_normalization divide each input by its std.
+#' @param featurewise_center Set input mean to 0 over the dataset, feature-wise.
+#' @param samplewise_center Boolean. Set each sample mean to 0.
+#' @param featurewise_std_normalization Divide inputs by std of the dataset, feature-wise.
+#' @param samplewise_std_normalization Divide each input by its std.
 #' @param zca_whitening apply ZCA whitening.
 #' @param zca_epsilon Epsilon for ZCA whitening. Default is 1e-6.
 #' @param rotation_range degrees (0 to 180).

@@ -6,7 +6,7 @@
 \usage{
 callback_reduce_lr_on_plateau(monitor = "val_loss", factor = 0.1,
   patience = 10, verbose = 0, mode = c("auto", "min", "max"),
-  epsilon = 1e-04, cooldown = 0, min_lr = 0)
+  min_delta = 1e-04, cooldown = 0, min_lr = 0)
 }
 \arguments{
 \item{monitor}{quantity to be monitored.}
@@ -27,7 +27,7 @@ reduced when the quantity monitored has stopped increasing; in auto mode,
 the direction is automatically inferred from the name of the monitored
 quantity.}
 
-\item{epsilon}{threshold for measuring the new optimum, to only focus on
+\item{min_delta}{threshold for measuring the new optimum, to only focus on
 significant changes.}
 
 \item{cooldown}{number of epochs to wait before resuming normal operation

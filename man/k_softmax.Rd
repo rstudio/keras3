@@ -4,10 +4,13 @@
 \alias{k_softmax}
 \title{Softmax of a tensor.}
 \usage{
-k_softmax(x)
+k_softmax(x, axis = -1)
 }
 \arguments{
 \item{x}{A tensor or variable.}
+
+\item{axis}{The dimension softmax would be performed on.
+The default is -1 which indicates the last dimension.}
 }
 \value{
 A tensor.

@@ -11,13 +11,16 @@ imagenet_preprocess_input(x, data_format = NULL, mode = "caffe")
 
 \item{data_format}{Data format of the image tensor/array.}
 
-\item{mode}{One of "caffe", "tf"
+\item{mode}{One of "caffe", "tf", or "torch"
 \itemize{
 \item caffe: will convert the images from RGB to BGR,
 then will zero-center each color channel with
 respect to the ImageNet dataset,
 without scaling.
 \item tf: will scale pixels between -1 and 1, sample-wise.
+\item torch: will scale pixels between 0 and 1 and then
+will normalize each channel with respect to the
+ImageNet dataset.
 }}
 }
 \value{

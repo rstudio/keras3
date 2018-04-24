@@ -12,7 +12,8 @@ text_one_hot(text, n, filters = "!\\"#$\%&()*+,-./:;<=>?@[\\\\]^_`{|}~\\t\\n",
 
 \item{n}{Size of vocabulary (integer)}
 
-\item{filters}{Sequence of characters to filter out.}
+\item{filters}{Sequence of characters to filter out such as
+punctuation. Default includes basic punctuation, tabs, and newlines.}
 
 \item{lower}{Whether to convert the input to lowercase.}
 

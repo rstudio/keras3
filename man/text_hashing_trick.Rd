@@ -18,7 +18,8 @@ any function that takes in input a string and returns a int. Note that
 \code{hash} is not a stable hashing function, so it is not consistent across
 different runs, while 'md5' is a stable hashing function.}
 
-\item{filters}{Sequence of characters to filter out.}
+\item{filters}{Sequence of characters to filter out such as
+punctuation. Default includes basic punctuation, tabs, and newlines.}
 
 \item{lower}{Whether to convert the input to lowercase.}
 

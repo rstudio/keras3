@@ -30,7 +30,7 @@ value != 1 is incompatible with specifying any \code{dilation_rate} value != 1.}
 
 \item{depth_multiplier}{The number of depthwise convolution output channels
 for each input channel. The total number of depthwise convolution output
-channels will be equal to \code{filterss_in * depth_multiplier}.}
+channels will be equal to \code{filters_in * depth_multiplier}.}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.

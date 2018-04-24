@@ -11,6 +11,18 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Accept tensor as argument to `k_pow()` 
 
+- In `callback_reduce_lr_on_plateau()`, rename `epsilon` argument to `min_delta` 
+  (backwards-compatible).
+
+- Add `axis` parameter to `k_softmax()`
+
+- Add `send_as_json` parameter to `callback_remote_monitor()`
+
+- Add `data_format` method to `layer_flatten()`
+
+- In `multi_gpu_model()`, add arguments `cpu_merge` and `cpu_relocation` (controlling whether
+  to force the template model's weights to be on CPU, and whether to operate merge operations
+  on CPU or GPU).
 
 ## Keras 2.1.5 (CRAN)
 

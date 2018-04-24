@@ -5,8 +5,8 @@
 \title{Depthwise separable 1D convolution.}
 \usage{
 layer_separable_conv_1d(object, filters, kernel_size, strides = 1,
-  padding = "valid", data_format = NULL, depth_multiplier = 1,
-  activation = NULL, use_bias = TRUE,
+  padding = "valid", data_format = NULL, dilation_rate = 1,
+  depth_multiplier = 1, activation = NULL, use_bias = TRUE,
   depthwise_initializer = "glorot_uniform",
   pointwise_initializer = "glorot_uniform", bias_initializer = "zeros",
   depthwise_regularizer = NULL, pointwise_regularizer = NULL,
@@ -38,6 +38,12 @@ value != 1 is incompatible with specifying any \code{dilation_rate} value != 1.}
 \code{channels_last} corresponds to inputs with shape \code{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
 found in your Keras config file at \code{~/.keras/keras.json}. If you never set
 it, then it will be "channels_last".}
+
+\item{dilation_rate}{an integer or list of 2 integers, specifying the
+dilation rate to use for dilated convolution. Can be a single integer to
+specify the same value for all spatial dimensions. Currently, specifying
+any \code{dilation_rate} value != 1 is incompatible with specifying any stride
+value != 1.}
 
 \item{depth_multiplier}{The number of depthwise convolution output channels
 for each input channel. The total number of depthwise convolution output
