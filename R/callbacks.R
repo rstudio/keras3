@@ -105,28 +105,40 @@ callback_early_stopping <- function(monitor = "val_loss", min_delta = 0, patienc
 
 
 #' Callback used to stream events to a server.
-#' 
+#'
 #' @param root root url of the target server.
 #' @param path path relative to root to which the events will be sent.
 #' @param field JSON field under which the data will be stored.
 #' @param headers Optional named list of custom HTTP headers. Defaults to:
 #'   `list(Accept = "application/json", `Content-Type` = "application/json")`
-#' 
-#' @family callbacks 
-#' 
+#' @param send_as_json Whether the request should be sent as application/json.
+#'
+#' @details Events are sent to `root + '/publish/epoch/end/'` by default. Calls
+#'   are HTTP POST, with a `data` argument which is a JSON-encoded dictionary
+#'   of event data. If send_as_json is set to True, the content type of the
+#'   request will be application/json. Otherwise the serialized JSON will be
+#'   send within a form
+#'
+#' @family callbacks
+#'
 #' @export
 callback_remote_monitor <- function(root = "http://localhost:9000", path = "/publish/epoch/end/", 
-                                    field = "data", headers = NULL) {
+                                    field = "data", headers = NULL, send_as_json = FALSE) {
   
   if (!have_requests())
     stop("The requests Python package is required for remote monitoring")
   
-  keras$callbacks$RemoteMonitor(
+  args <- list(
     root = root,
     path = path,
     field = field,
     headers = headers
   )
+  
+  if (keras_version() >= "2.1.6")
+    args$send_as_json <- send_as_json
+  
+  do.call(keras$callbacks$RemoteMonitor, args)
 }
 
 
@@ -257,7 +269,7 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
 #'   reduced when the quantity monitored has stopped increasing; in auto mode, 
 #'   the direction is automatically inferred from the name of the monitored 
 #'   quantity.
-#' @param epsilon threshold for measuring the new optimum, to only focus on 
+#' @param min_delta threshold for measuring the new optimum, to only focus on 
 #'   significant changes.
 #' @param cooldown number of epochs to wait before resuming normal operation 
 #'   after lr has been reduced.
@@ -268,17 +280,24 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
 #' @export
 callback_reduce_lr_on_plateau <- function(monitor = "val_loss", factor = 0.1, patience = 10, 
                                           verbose = 0, mode = c("auto", "min", "max"), 
-                                          epsilon = 0.0001, cooldown = 0, min_lr = 0.0) {
-  keras$callbacks$ReduceLROnPlateau(
+                                          min_delta = 0.0001, cooldown = 0, min_lr = 0.0) {
+  
+  args <- list(
     monitor = monitor,
     factor = factor,
     patience = as.integer(patience),
     verbose = as.integer(verbose),
     mode = match.arg(mode),
-    epsilon = epsilon,
     cooldown = as.integer(cooldown),
     min_lr = min_lr
   )
+  
+  if (keras_version() >= "2.1.6")
+    args$min_delta <- min_delta
+  else
+    args$epsilon <- min_delta
+  
+  do.call(keras$callbacks$ReduceLROnPlateau, args)
 }
 
 #' Callback that streams epoch results to a csv file

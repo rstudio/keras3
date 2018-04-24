@@ -5,7 +5,8 @@
 \title{Callback used to stream events to a server.}
 \usage{
 callback_remote_monitor(root = "http://localhost:9000",
-  path = "/publish/epoch/end/", field = "data", headers = NULL)
+  path = "/publish/epoch/end/", field = "data", headers = NULL,
+  send_as_json = FALSE)
 }
 \arguments{
 \item{root}{root url of the target server.}
@@ -16,9 +17,18 @@ callback_remote_monitor(root = "http://localhost:9000",
 
 \item{headers}{Optional named list of custom HTTP headers. Defaults to:
 \code{list(Accept = "application/json",}Content-Type\code{= "application/json")}}
+
+\item{send_as_json}{Whether the request should be sent as application/json.}
 }
 \description{
 Callback used to stream events to a server.
+}
+\details{
+Events are sent to \code{root + '/publish/epoch/end/'} by default. Calls
+are HTTP POST, with a \code{data} argument which is a JSON-encoded dictionary
+of event data. If send_as_json is set to True, the content type of the
+request will be application/json. Otherwise the serialized JSON will be
+send within a form
 }
 \seealso{
 Other callbacks: \code{\link{callback_csv_logger}},

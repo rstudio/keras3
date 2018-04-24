@@ -4,11 +4,16 @@
 \alias{layer_flatten}
 \title{Flattens an input}
 \usage{
-layer_flatten(object, input_shape = NULL, dtype = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+layer_flatten(object, data_format = "channels_last", input_shape = NULL,
+  dtype = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
+
+\item{data_format}{A string, one of \code{channels_last} (default) or
+\code{channels_first}. The ordering of the dimensions in the inputs.
+\code{channels_last} corresponds to inputs with shape \code{(batch, ..., channels)}
+while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, ...)}.}
 
 \item{input_shape}{Input shape (list of integers, does not include the
 samples axis) which is required when using this layer as the first layer in

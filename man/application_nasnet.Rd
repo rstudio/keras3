@@ -22,9 +22,8 @@ application_nasnetmobile(input_shape = NULL, include_top = TRUE,
 nasnet_preprocess_input(x)
 }
 \arguments{
-\item{input_shape}{Optional shape list, only to be specified if \code{include_top}
-is FALSE (otherwise the input shape has to be \code{(331, 331, 3)} for
-NASNetLarge or \code{(224, 224, 3)} for NASNetMobile It should have exactly 3
+\item{input_shape}{Optional shape list, the input shape is by default \code{(331, 331, 3)}
+for NASNetLarge and \code{(224, 224, 3)} for NASNetMobile It should have exactly 3
 inputs channels, and width and height should be no smaller than 32. E.g.
 \code{(224, 224, 3)} would be one valid value.}
 

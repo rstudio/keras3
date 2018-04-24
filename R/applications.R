@@ -292,12 +292,15 @@ imagenet_decode_predictions <- function(preds, top = 5) {
 #' 
 #' @param x Input Numpy or symbolic tensor, 3D or 4D.
 #' @param data_format Data format of the image tensor/array.
-#' @param mode One of "caffe", "tf"
+#' @param mode One of "caffe", "tf", or "torch"
 #'   - caffe: will convert the images from RGB to BGR,
 #'     then will zero-center each color channel with
 #'     respect to the ImageNet dataset,
 #'     without scaling.
 #'   - tf: will scale pixels between -1 and 1, sample-wise.
+#'   - torch: will scale pixels between 0 and 1 and then
+#'     will normalize each channel with respect to the
+#'     ImageNet dataset.
 #' 
 #' @return Preprocessed tensor or array.
 #' 
@@ -526,9 +529,8 @@ densenet_preprocess_input <- function(x, data_format = NULL) {
 #' `image_data_format='channels_last'` in your Keras config
 #' at `~/.keras/keras.json`. 
 #' 
-#' @param input_shape Optional shape list, only to be specified if `include_top` 
-#'   is FALSE (otherwise the input shape has to be `(331, 331, 3)` for 
-#'   NASNetLarge or `(224, 224, 3)` for NASNetMobile It should have exactly 3 
+#' @param input_shape Optional shape list, the input shape is by default `(331, 331, 3)`
+#'   for NASNetLarge and `(224, 224, 3)` for NASNetMobile It should have exactly 3 
 #'   inputs channels, and width and height should be no smaller than 32. E.g. 
 #'   `(224, 224, 3)` would be one valid value.
 #' @param penultimate_filters Number of filters in the penultimate layer. 

@@ -107,7 +107,9 @@ layer_conv_1d <- function(object, filters, kernel_size, strides = 1L, padding = 
 #'   the convolution along the width and height. Can be a single integer to
 #'   specify the same value for all spatial dimensions. Specifying any stride
 #'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
-#' @param padding one of `"valid"` or `"same"` (case-insensitive).
+#' @param padding one of `"valid"` or `"same"` (case-insensitive). Note that `"same"` 
+#'   is slightly inconsistent across backends with `strides` != 1, as described
+#'   [here](https://github.com/keras-team/keras/pull/9473#issuecomment-372166860)
 #' @param data_format A string, one of `channels_last` (default) or
 #'   `channels_first`. The ordering of the dimensions in the inputs.
 #'   `channels_last` corresponds to inputs with shape `(batch, height, width,
@@ -441,7 +443,7 @@ layer_conv_3d_transpose <- function(object, filters, kernel_size, strides = c(1,
 #' @param padding one of `"valid"` or `"same"` (case-insensitive).
 #' @param depth_multiplier The number of depthwise convolution output channels
 #'   for each input channel. The total number of depthwise convolution output
-#'   channels will be equal to `filterss_in * depth_multiplier`.
+#'   channels will be equal to `filters_in * depth_multiplier`.
 #' @param depthwise_initializer Initializer for the depthwise kernel matrix.
 #' @param pointwise_initializer Initializer for the pointwise kernel matrix.
 #' @param depthwise_regularizer Regularizer function applied to the depthwise
@@ -466,14 +468,14 @@ layer_conv_3d_transpose <- function(object, filters, kernel_size, strides = c(1,
 #'   
 #' @export
 layer_separable_conv_2d <- function(object, filters, kernel_size, strides = c(1, 1), padding = "valid", data_format = NULL, 
-                                    depth_multiplier = 1L, activation = NULL, use_bias = TRUE, 
+                                    dilation_rate = 1, depth_multiplier = 1, activation = NULL, use_bias = TRUE, 
                                     depthwise_initializer = "glorot_uniform", pointwise_initializer = "glorot_uniform", bias_initializer = "zeros", 
                                     depthwise_regularizer = NULL, pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                                     depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
                                     batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                                     name = NULL, trainable = NULL, weights = NULL) {
   
-  create_layer(keras$layers$SeparableConv2D, object, list(
+  args <- list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -499,7 +501,12 @@ layer_separable_conv_2d <- function(object, filters, kernel_size, strides = c(1,
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
+  
+  if (keras_version() >= "2.1.6")
+    args$dilation_rate <- as.integer(dilation_rate)
+  
+  create_layer(keras$layers$SeparableConv2D, object, args)
   
 }
 
@@ -598,14 +605,14 @@ layer_depthwise_conv_2d <- function(object, kernel_size, strides = c(1, 1), padd
 #'   
 #' @export
 layer_separable_conv_1d <- function(object, filters, kernel_size, strides = 1, padding = "valid", data_format = NULL, 
-                                    depth_multiplier = 1, activation = NULL, use_bias = TRUE, 
+                                    dilation_rate = 1, depth_multiplier = 1, activation = NULL, use_bias = TRUE, 
                                     depthwise_initializer = "glorot_uniform", pointwise_initializer = "glorot_uniform", bias_initializer = "zeros", 
                                     depthwise_regularizer = NULL, pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                                     depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
                                     batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                                     name = NULL, trainable = NULL, weights = NULL) {
   
-  create_layer(keras$layers$SeparableConv1D, object, list(
+  args <- list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -631,7 +638,12 @@ layer_separable_conv_1d <- function(object, filters, kernel_size, strides = 1, p
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
+  
+  if (keras_version() >= "2.1.6")
+    args$dilation_rate <- as.integer(dilation_rate)
+  
+  create_layer(keras$layers$SeparableConv1D, object, args)
   
 }
 

@@ -4,7 +4,8 @@
 \alias{multi_gpu_model}
 \title{Replicates a model on different GPUs.}
 \usage{
-multi_gpu_model(model, gpus = NULL)
+multi_gpu_model(model, gpus = NULL, cpu_merge = TRUE,
+  cpu_relocation = FALSE)
 }
 \arguments{
 \item{model}{A Keras model instance. To avoid OOM errors,
@@ -14,6 +15,14 @@ this model could have been built on CPU, for instance
 \item{gpus}{\code{NULL} to use all available GPUs (default). Integer >= 2 or
 list of integers, number of GPUs or list of GPU IDs on which to create
 model replicas.}
+
+\item{cpu_merge}{A boolean value to identify whether to force
+merging model weights under the scope of the CPU or not.}
+
+\item{cpu_relocation}{A boolean value to identify whether to
+create the model's weights under the scope of the CPU.
+If the model is not defined under any preceding device
+scope, you can still rescue it by activating this option.}
 }
 \value{
 A Keras model object which can be used just like the initial
