@@ -23,6 +23,9 @@ Install the development version with: `install_github("rstudio/keras")`
 - In `multi_gpu_model()`, add arguments `cpu_merge` and `cpu_relocation` (controlling whether
   to force the template model's weights to be on CPU, and whether to operate merge operations
   on CPU or GPU).
+  
+- Record correct loss name for tfruns when custom functions are provided for `loss`
+
 
 ## Keras 2.1.5 (CRAN)
 

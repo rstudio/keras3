@@ -115,9 +115,10 @@ KerasMetricsCallback <- R6::R6Class("KerasMetricsCallback",
       tryCatch({
         model_info <- list()
         model_info$model <- py_str(model, line_length = 80L)
-        model_info$loss_function <- model$loss
-        if (is.function(model_info$loss_function))
-          model_info$loss_function <- model_info$loss_function$func_name
+        if (is.character(model$loss))
+          model_info$loss_function <- model$loss
+        else if (inherits(model$loss, "python.builtin.function"))
+          model_info$loss_function <- model$loss$`__name__`
         optimizer <- model$optimizer
         if (!is.null(optimizer)) {
           model_info$optimizer <- py_str(optimizer)
