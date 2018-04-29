@@ -1,7 +1,5 @@
 
-## Keras 2.1.6 (development)
-
-Install the development version with: `install_github("rstudio/keras")`
+## Keras 2.1.6 (CRAN)
 
 - Fix issue with single-element vectors passed to text preprocessing functions
 
@@ -27,7 +25,7 @@ Install the development version with: `install_github("rstudio/keras")`
 - Record correct loss name for tfruns when custom functions are provided for `loss`
 
 
-## Keras 2.1.5 (CRAN)
+## Keras 2.1.5
 
 - Support for custom constraints from R 
 
