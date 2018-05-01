@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.5.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6</span>
       </span>
     </div>
 
@@ -162,7 +162,8 @@
     <p>Replicates a model on different GPUs.</p>
     
 
-    <pre class="usage"><span class='fu'>multi_gpu_model</span>(<span class='no'>model</span>, <span class='kw'>gpus</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>multi_gpu_model</span>(<span class='no'>model</span>, <span class='kw'>gpus</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cpu_merge</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>cpu_relocation</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,6 +179,18 @@ this model could have been built on CPU, for instance
       <td><p><code>NULL</code> to use all available GPUs (default). Integer &gt;= 2 or
 list of integers, number of GPUs or list of GPU IDs on which to create
 model replicas.</p></td>
+    </tr>
+    <tr>
+      <th>cpu_merge</th>
+      <td><p>A boolean value to identify whether to force
+merging model weights under the scope of the CPU or not.</p></td>
+    </tr>
+    <tr>
+      <th>cpu_relocation</th>
+      <td><p>A boolean value to identify whether to
+create the model's weights under the scope of the CPU.
+If the model is not defined under any preceding device
+scope, you can still rescue it by activating this option.</p></td>
     </tr>
     </table>
     

@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.5.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6</span>
       </span>
     </div>
 
@@ -177,12 +177,15 @@
     </tr>
     <tr>
       <th>mode</th>
-      <td><p>One of "caffe", "tf"</p><ul>
+      <td><p>One of "caffe", "tf", or "torch"</p><ul>
 <li><p>caffe: will convert the images from RGB to BGR,
 then will zero-center each color channel with
 respect to the ImageNet dataset,
 without scaling.</p></li>
 <li><p>tf: will scale pixels between -1 and 1, sample-wise.</p></li>
+<li><p>torch: will scale pixels between 0 and 1 and then
+will normalize each channel with respect to the
+ImageNet dataset.</p></li>
 </ul></td>
     </tr>
     </table>

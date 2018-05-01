@@ -59,7 +59,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.5.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6</span>
       </span>
     </div>
 
@@ -158,20 +158,25 @@
     </div>
 
     <div class="contents">
-    <div id="keras-2-1-6-development" class="section level2">
+    <div id="keras-2-1-6-cran" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-1-6-development" class="anchor"></a>Keras 2.1.6 (development)</h2>
-<p>Install the development version with: <code>install_github("rstudio/keras")</code></p>
+<a href="#keras-2-1-6-cran" class="anchor"></a>Keras 2.1.6 (CRAN)</h2>
 <ul>
 <li><p>Fix issue with single-element vectors passed to text preprocessing functions</p></li>
 <li><p>Compatibility with TensorFlow v1.7 Keras implementation</p></li>
 <li><p>Support <code>workers</code> parameter for native Keras generators (e.g. <code><a href="../reference/flow_images_from_directory.html">flow_images_from_directory()</a></code>)</p></li>
 <li><p>Accept tensor as argument to <code><a href="../reference/k_pow.html">k_pow()</a></code></p></li>
+<li><p>In <code><a href="../reference/callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau()</a></code>, rename <code>epsilon</code> argument to <code>min_delta</code> (backwards-compatible).</p></li>
+<li><p>Add <code>axis</code> parameter to <code><a href="../reference/k_softmax.html">k_softmax()</a></code></p></li>
+<li><p>Add <code>send_as_json</code> parameter to <code><a href="../reference/callback_remote_monitor.html">callback_remote_monitor()</a></code></p></li>
+<li><p>Add <code>data_format</code> method to <code><a href="../reference/layer_flatten.html">layer_flatten()</a></code></p></li>
+<li><p>In <code><a href="../reference/multi_gpu_model.html">multi_gpu_model()</a></code>, add arguments <code>cpu_merge</code> and <code>cpu_relocation</code> (controlling whether to force the template model’s weights to be on CPU, and whether to operate merge operations on CPU or GPU).</p></li>
+<li><p>Record correct loss name for tfruns when custom functions are provided for <code>loss</code></p></li>
 </ul>
 </div>
-    <div id="keras-2-1-5-cran" class="section level2">
+    <div id="keras-2-1-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-1-5-cran" class="anchor"></a>Keras 2.1.5 (CRAN)</h2>
+<a href="#keras-2-1-5" class="anchor"></a>Keras 2.1.5</h2>
 <ul>
 <li><p>Support for custom constraints from R</p></li>
 <li><p>Added <code><a href="../reference/timeseries_generator.html">timeseries_generator()</a></code> utility function</p></li>
@@ -308,8 +313,8 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#keras-2-1-6-development">2.1.6</a></li>
-        <li><a href="#keras-2-1-5-cran">2.1.5</a></li>
+        <li><a href="#keras-2-1-6-cran">2.1.6</a></li>
+        <li><a href="#keras-2-1-5">2.1.5</a></li>
         <li><a href="#keras-2-1-4">2.1.4</a></li>
         <li><a href="#keras-2-1-3">2.1.3</a></li>
         <li><a href="#keras-2-1-2">2.1.2</a></li>

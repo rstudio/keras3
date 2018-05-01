@@ -63,7 +63,7 @@ is seen for a 'patience' number of epochs, the learning rate is reduced." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.5.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6</span>
       </span>
     </div>
 
@@ -168,7 +168,7 @@ is seen for a 'patience' number of epochs, the learning rate is reduced.</p>
 
     <pre class="usage"><span class='fu'>callback_reduce_lr_on_plateau</span>(<span class='kw'>monitor</span> <span class='kw'>=</span> <span class='st'>"val_loss"</span>, <span class='kw'>factor</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
   <span class='kw'>patience</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"auto"</span>, <span class='st'>"min"</span>, <span class='st'>"max"</span>),
-  <span class='kw'>epsilon</span> <span class='kw'>=</span> <span class='fl'>1e-04</span>, <span class='kw'>cooldown</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>min_lr</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+  <span class='kw'>min_delta</span> <span class='kw'>=</span> <span class='fl'>1e-04</span>, <span class='kw'>cooldown</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>min_lr</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,7 +201,7 @@ the direction is automatically inferred from the name of the monitored
 quantity.</p></td>
     </tr>
     <tr>
-      <th>epsilon</th>
+      <th>min_delta</th>
       <td><p>threshold for measuring the new optimum, to only focus on
 significant changes.</p></td>
     </tr>

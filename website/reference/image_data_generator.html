@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate minibatches of image data with real-time data augmentation. — image_data_generator • keras</title>
+<title>Generate batches of image data with real-time data augmentation. The data will be
+looped over (in batches). — image_data_generator • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,9 +28,11 @@
 <script src="../pkgdown.js"></script>
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
-<meta property="og:title" content="Generate minibatches of image data with real-time data augmentation. — image_data_generator" />
+<meta property="og:title" content="Generate batches of image data with real-time data augmentation. The data will be
+looped over (in batches). — image_data_generator" />
 
-<meta property="og:description" content="Generate minibatches of image data with real-time data augmentation." />
+<meta property="og:description" content="Generate batches of image data with real-time data augmentation. The data will be
+looped over (in batches)." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -61,7 +64,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.5.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6</span>
       </span>
     </div>
 
@@ -154,12 +157,14 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate minibatches of image data with real-time data augmentation.</h1>
+    <h1>Generate batches of image data with real-time data augmentation. The data will be
+looped over (in batches).</h1>
     
     </div>
 
     
-    <p>Generate minibatches of image data with real-time data augmentation.</p>
+    <p>Generate batches of image data with real-time data augmentation. The data will be
+looped over (in batches).</p>
     
 
     <pre class="usage"><span class='fu'>image_data_generator</span>(<span class='kw'>featurewise_center</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>samplewise_center</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -177,19 +182,19 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>featurewise_center</th>
-      <td><p>set input mean to 0 over the dataset.</p></td>
+      <td><p>Set input mean to 0 over the dataset, feature-wise.</p></td>
     </tr>
     <tr>
       <th>samplewise_center</th>
-      <td><p>set each sample mean to 0.</p></td>
+      <td><p>Boolean. Set each sample mean to 0.</p></td>
     </tr>
     <tr>
       <th>featurewise_std_normalization</th>
-      <td><p>divide inputs by std of the dataset.</p></td>
+      <td><p>Divide inputs by std of the dataset, feature-wise.</p></td>
     </tr>
     <tr>
       <th>samplewise_std_normalization</th>
-      <td><p>divide each input by its std.</p></td>
+      <td><p>Divide each input by its std.</p></td>
     </tr>
     <tr>
       <th>zca_whitening</th>

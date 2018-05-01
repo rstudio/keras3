@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.5.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6</span>
       </span>
     </div>
 
@@ -162,8 +162,8 @@
     <p>Flatten a given input, does not affect the batch size.</p>
     
 
-    <pre class="usage"><span class='fu'>layer_flatten</span>(<span class='no'>object</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>layer_flatten</span>(<span class='no'>object</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='st'>"channels_last"</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,6 +171,13 @@
     <tr>
       <th>object</th>
       <td><p>Model or layer object</p></td>
+    </tr>
+    <tr>
+      <th>data_format</th>
+      <td><p>A string, one of <code>channels_last</code> (default) or
+<code>channels_first</code>. The ordering of the dimensions in the inputs.
+<code>channels_last</code> corresponds to inputs with shape <code>(batch, ..., channels)</code>
+while <code>channels_first</code> corresponds to inputs with shape <code>(batch, channels, ...)</code>.</p></td>
     </tr>
     <tr>
       <th>input_shape</th>

@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.5.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6</span>
       </span>
     </div>
 
@@ -163,7 +163,8 @@
     
 
     <pre class="usage"><span class='fu'>callback_remote_monitor</span>(<span class='kw'>root</span> <span class='kw'>=</span> <span class='st'>"http://localhost:9000"</span>,
-  <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"/publish/epoch/end/"</span>, <span class='kw'>field</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>headers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"/publish/epoch/end/"</span>, <span class='kw'>field</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>headers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>send_as_json</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,7 +186,19 @@
       <td><p>Optional named list of custom HTTP headers. Defaults to:
 <code>list(Accept = "application/json",</code>Content-Type<code>= "application/json")</code></p></td>
     </tr>
+    <tr>
+      <th>send_as_json</th>
+      <td><p>Whether the request should be sent as application/json.</p></td>
+    </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Events are sent to <code>root + '/publish/epoch/end/'</code> by default. Calls
+are HTTP POST, with a <code>data</code> argument which is a JSON-encoded dictionary
+of event data. If send_as_json is set to True, the content type of the
+request will be application/json. Otherwise the serialized JSON will be
+send within a form</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -206,6 +219,8 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#details">Details</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 

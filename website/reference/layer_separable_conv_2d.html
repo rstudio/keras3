@@ -67,7 +67,7 @@ kernels, or as an extreme version of an Inception block." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.5.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6</span>
       </span>
     </div>
 
@@ -175,8 +175,8 @@ kernels, or as an extreme version of an Inception block.</p>
     
 
     <pre class="usage"><span class='fu'>layer_separable_conv_2d</span>(<span class='no'>object</span>, <span class='no'>filters</span>, <span class='no'>kernel_size</span>, <span class='kw'>strides</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>1</span>),
-  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"valid"</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>depth_multiplier</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>activation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"valid"</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dilation_rate</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>depth_multiplier</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>depthwise_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>,
   <span class='kw'>pointwise_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>, <span class='kw'>bias_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
   <span class='kw'>depthwise_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pointwise_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -224,10 +224,18 @@ found in your Keras config file at <code>~/.keras/keras.json</code>. If you neve
 it, then it will be "channels_last".</p></td>
     </tr>
     <tr>
+      <th>dilation_rate</th>
+      <td><p>an integer or list of 2 integers, specifying the
+dilation rate to use for dilated convolution. Can be a single integer to
+specify the same value for all spatial dimensions. Currently, specifying
+any <code>dilation_rate</code> value != 1 is incompatible with specifying any stride
+value != 1.</p></td>
+    </tr>
+    <tr>
       <th>depth_multiplier</th>
       <td><p>The number of depthwise convolution output channels
 for each input channel. The total number of depthwise convolution output
-channels will be equal to <code>filterss_in * depth_multiplier</code>.</p></td>
+channels will be equal to <code>filters_in * depth_multiplier</code>.</p></td>
     </tr>
     <tr>
       <th>activation</th>

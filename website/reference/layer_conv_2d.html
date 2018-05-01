@@ -67,7 +67,7 @@ does not include the sample axis), e.g. input_shape=c(128, 128, 3) for
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.5.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6</span>
       </span>
     </div>
 
@@ -211,7 +211,9 @@ value != 1 is incompatible with specifying any <code>dilation_rate</code> value 
     </tr>
     <tr>
       <th>padding</th>
-      <td><p>one of <code>"valid"</code> or <code>"same"</code> (case-insensitive).</p></td>
+      <td><p>one of <code>"valid"</code> or <code>"same"</code> (case-insensitive). Note that <code>"same"</code>
+is slightly inconsistent across backends with <code>strides</code> != 1, as described
+<a href='https://github.com/keras-team/keras/pull/9473#issuecomment-372166860'>here</a></p></td>
     </tr>
     <tr>
       <th>data_format</th>
