@@ -142,7 +142,9 @@ as_constraint <- function(constraint) {
     tools$constraint$RConstraint(call, get_config)
   }
   
-  if (is.function(constraint)) {
+  if (inherits(constraint, "keras.constraints.Constraint")) {
+    constraint
+  } else if (is.function(constraint)) {
     create_constraint(constraint)  
   } else if (inherits(constraint, "KerasConstraint")) {
     create_constraint(constraint$call, constraint$get_config)

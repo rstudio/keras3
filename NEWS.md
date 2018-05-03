@@ -1,4 +1,11 @@
 
+## Keras 2.1.7 (development)
+
+Install the development version with: `install_github("rstudio/keras")`
+
+- Fix issue with serializing models that have constraint arguments
+
+
 ## Keras 2.1.6 (CRAN)
 
 - Fix issue with single-element vectors passed to text preprocessing functions
