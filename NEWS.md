@@ -5,6 +5,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Fix issue with serializing models that have constraint arguments
 
+- Fix issue with `k_tile` that needs an integer vector instead of a list as the `n` argument.
+
 
 ## Keras 2.1.6 (CRAN)
 
