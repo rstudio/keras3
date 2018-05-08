@@ -5,6 +5,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Fix issue with serializing models that have constraint arguments
 
+- Fix issue with `k_tile` that needs an integer vector instead of a list as the `n` argument.
+
 - Fix issue with user-supplied `output_shape` in `layer_lambda()` not being supplied to tensorflow backends
 
 
