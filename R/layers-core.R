@@ -259,6 +259,9 @@ layer_lambda <- function(object, f, output_shape = NULL, mask = NULL, arguments 
   
   if (backend()$backend() %in% c("theano", "cntk"))
     args$output_shape <- as_integer_tuple(output_shape, force_tuple = TRUE)
+  else if(!is.null(output_shape))
+    args$output_shape <- as_shape(output_shape)
+    
   
   create_layer(keras$layers$Lambda, object, args)
   

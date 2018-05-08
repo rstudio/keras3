@@ -336,3 +336,11 @@ relative_to <- function(dir, file) {
 }
 
 
+as_shape <- function(x) {
+  lapply(x, function(d) {
+    if (is.null(d))
+      NULL
+    else
+      as.integer(d)
+  })
+}
