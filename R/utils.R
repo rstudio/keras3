@@ -205,6 +205,10 @@ keras_array <- function(x, dtype = NULL) {
   if (is.null(x))
     return(x)
   
+  # reflect HDF5
+  if (inherits(x, "keras.utils.io_utils.HDF5Matrix"))
+    return(x)
+  
   # recurse for lists
   if (is.list(x))
     return(lapply(x, keras_array))
