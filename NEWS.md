@@ -9,6 +9,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Fix issue with user-supplied `output_shape` in `layer_lambda()` not being supplied to tensorflow backends
 
+- Filter out metrics that were created for callbacks (e.g. `lr`)
+
 
 ## Keras 2.1.6 (CRAN)
 
