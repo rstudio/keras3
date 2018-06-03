@@ -161,6 +161,10 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
 
 #' @export
 as.data.frame.keras_training_history <- function(x, ...) {
+  
+  # filter out metrics that were collected for callbacks (e.g. lr)
+  x$metrics <- x$metrics[x$params$metrics]
+  
   # pad to epochs if necessary
   values <- x$metrics
   pad <- x$params$epochs - length(values$loss)
