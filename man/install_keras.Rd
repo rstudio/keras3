@@ -10,8 +10,8 @@ install_keras(method = c("auto", "virtualenv", "conda"), conda = "auto",
 \arguments{
 \item{method}{Installation method ("virtualenv" or "conda")}
 
-\item{conda}{Path to conda executable (or "auto" to find conda using the PATH
-and other conventional install locations).}
+\item{conda}{Path to conda executable (or "auto" to find conda using the
+PATH and other conventional install locations).}
 
 \item{tensorflow}{TensorFlow version to install. Specify "default" to install
 the CPU version of the latest release. Specify "gpu" to install the GPU
