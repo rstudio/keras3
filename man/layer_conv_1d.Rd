@@ -5,13 +5,13 @@
 \title{1D convolution layer (e.g. temporal convolution).}
 \usage{
 layer_conv_1d(object, filters, kernel_size, strides = 1L, padding = "valid",
-  dilation_rate = 1L, activation = NULL, use_bias = TRUE,
-  kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
-  kernel_regularizer = NULL, bias_regularizer = NULL,
-  activity_regularizer = NULL, kernel_constraint = NULL,
-  bias_constraint = NULL, input_shape = NULL, batch_input_shape = NULL,
-  batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
-  weights = NULL)
+  data_format = "channels_last", dilation_rate = 1L, activation = NULL,
+  use_bias = TRUE, kernel_initializer = "glorot_uniform",
+  bias_initializer = "zeros", kernel_regularizer = NULL,
+  bias_regularizer = NULL, activity_regularizer = NULL,
+  kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
+  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
+  name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -81,6 +81,12 @@ isn't provided.}
 \item{trainable}{Whether the layer weights will be updated during training.}
 
 \item{weights}{Initial weights for layer.}
+
+\item{`data_format`}{A string, one of \code{"channels_last"} (default) or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"} corresponds
+to inputs with shape \code{(batch, length, channels)} (default format for
+temporal data in Keras) while \code{"channels_first"} corresponds to inputs
+with shape \code{(batch, channels, length)}.}
 }
 \description{
 This layer creates a convolution kernel that is convolved with the layer
