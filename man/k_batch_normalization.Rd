@@ -4,7 +4,7 @@
 \alias{k_batch_normalization}
 \title{Applies batch normalization on x given mean, var, beta and gamma.}
 \usage{
-k_batch_normalization(x, mean, var, beta, gamma, epsilon = 0.001)
+k_batch_normalization(x, mean, var, beta, gamma, axis = -1, epsilon = 0.001)
 }
 \arguments{
 \item{x}{Input tensor or variable.}
@@ -16,6 +16,9 @@ k_batch_normalization(x, mean, var, beta, gamma, epsilon = 0.001)
 \item{beta}{Tensor with which to center the input.}
 
 \item{gamma}{Tensor by which to scale the input.}
+
+\item{axis}{Axis (axis indexes are 1-based). Pass -1 (the
+default) to select the last axis.}
 
 \item{epsilon}{Fuzz factor.}
 }

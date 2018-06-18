@@ -231,6 +231,8 @@ k_batch_get_value <- function(ops) {
 #' @param var Variance of batch.
 #' @param beta Tensor with which to center the input.
 #' @param gamma Tensor by which to scale the input.
+#' @param axis Axis (axis indexes are 1-based). Pass -1 (the
+#'   default) to select the last axis.
 #' @param epsilon Fuzz factor.
 #' 
 #' @return A tensor.
@@ -238,8 +240,9 @@ k_batch_get_value <- function(ops) {
 #' @template roxlate-keras-backend  
 #' 
 #' @export
-k_batch_normalization <- function(x, mean, var, beta, gamma, epsilon = 0.001) {
-  keras$backend$batch_normalization(
+k_batch_normalization <- function(x, mean, var, beta, gamma, axis = -1, epsilon = 0.001) {
+  
+  args <- list(
     x = x,
     mean = mean,
     var = var,
@@ -247,6 +250,11 @@ k_batch_normalization <- function(x, mean, var, beta, gamma, epsilon = 0.001) {
     gamma = gamma,
     epsilon = epsilon
   )
+  
+  if (keras_version() >= "2.2.0")
+    args$axis <- as_axis(axis)
+  
+  do.call(keras$backend$batch_normalization, args)
 }
 
 
@@ -345,6 +353,8 @@ k_cast_to_floatx <- function(x) {
 
 #' Categorical crossentropy between an output tensor and a target tensor.
 #'
+#' @inheritParams k_batch_normalization
+#'
 #' @param target A tensor of the same shape as `output`.
 #' @param output A tensor resulting from a softmax (unless `from_logits` is
 #'   TRUE, in which case `output` is expected to be the logits).
@@ -356,12 +366,18 @@ k_cast_to_floatx <- function(x) {
 #' @template roxlate-keras-backend  
 #'
 #' @export
-k_categorical_crossentropy <- function(target, output, from_logits = FALSE) {
-  keras$backend$categorical_crossentropy(
+k_categorical_crossentropy <- function(target, output, from_logits = FALSE, axis = -1) {
+  
+  args <- list(
     target = target,
     output = output,
     from_logits = from_logits
   )
+  
+  if (keras_version() >= "2.2.0")
+    args$axis <- as_axis(axis)
+  
+  do.call(keras$backend$categorical_crossentropy, args)
 }
 
 
@@ -1348,6 +1364,22 @@ k_int_shape <- function(x) {
     x = x
   )
 }
+
+#' Returns whether `x` is a symbolic tensor.
+#' 
+#' @param x A candidate tensor.
+#' 
+#' @return A logical: Whether the argument is a symbolic tensor.
+#' 
+#' @template roxlate-keras-backend  
+#' 
+#' @export
+k_is_tensor <- function(x) {
+  keras$backend$is_tensor(
+    x = x
+  )
+}
+
 
 
 #' Returns whether `x` is a Keras tensor.
@@ -2548,6 +2580,8 @@ k_softsign <- function(x) {
 
 #' Categorical crossentropy with integer targets.
 #' 
+#' @inheritParams k_batch_normalization
+#' 
 #' @param target An integer tensor.
 #' @param output A tensor resulting from a softmax (unless `from_logits` is TRUE, in which case `output` is expected to be the logits).
 #' @param from_logits Boolean, whether `output` is the result of a softmax, or is a tensor of logits.
@@ -2557,12 +2591,18 @@ k_softsign <- function(x) {
 #' @template roxlate-keras-backend  
 #' 
 #' @export
-k_sparse_categorical_crossentropy <- function(target, output, from_logits = FALSE) {
-  keras$backend$sparse_categorical_crossentropy(
+k_sparse_categorical_crossentropy <- function(target, output, from_logits = FALSE, axis = -1) {
+  
+  args <- list(
     target = target,
     output = output,
     from_logits = from_logits
   )
+  
+  if (keras_version() >= "2.2.0")
+    args$axis <- as_axis(axis)
+  
+  do.call(keras$backend$sparse_categorical_crossentropy, args)
 }
 
 

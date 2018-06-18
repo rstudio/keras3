@@ -2,7 +2,7 @@
 
 #' Install Keras and the TensorFlow backend
 #' 
-#' Keras and TensorFlow will be installed into an "r-tensorflow" virtual or conda
+#' Keras and TensorFlow will be installed into an "r-reticulate" virtual or conda
 #' environment. Note that "virtualenv" is not available on Windows (as this isn't
 #' supported by TensorFlow).
 #'
@@ -72,7 +72,7 @@
 #' If you wish to add additional PyPI packages to your Keras / TensorFlow environment you 
 #' can either specify the packages in the `extra_packages` argument of `install_keras()`, 
 #' or alternatively install them into an existing environment using the 
-#' [install_tensorflow_extras()] function.
+#' [reticulate::py_install()] function.
 #' 
 #' @examples
 #' \dontrun{

@@ -5,8 +5,9 @@
 \title{Generates batches of augmented/normalized data from image data and labels}
 \usage{
 flow_images_from_data(x, y = NULL, generator = image_data_generator(),
-  batch_size = 32, shuffle = TRUE, seed = NULL, save_to_dir = NULL,
-  save_prefix = "", save_format = "png", subset = NULL)
+  batch_size = 32, shuffle = TRUE, sample_weight = NULL, seed = NULL,
+  save_to_dir = NULL, save_prefix = "", save_format = "png",
+  subset = NULL)
 }
 \arguments{
 \item{x}{data. Should have rank 4. In case of grayscale data, the channels
@@ -20,6 +21,8 @@ data.}
 \item{batch_size}{int (default: \code{32}).}
 
 \item{shuffle}{boolean (defaut: \code{TRUE}).}
+
+\item{sample_weight}{Sample weights.}
 
 \item{seed}{int (default: \code{NULL}).}
 

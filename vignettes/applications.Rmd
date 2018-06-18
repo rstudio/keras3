@@ -35,13 +35,14 @@ The following image classification models (with weights trained on ImageNet) are
 - [InceptionV3](https://keras.rstudio.com/reference/application_inception_v3.html)
 - [InceptionResNetV2](https://keras.rstudio.com/reference/application_inception_resnet_v2.html)
 - [MobileNet](https://keras.rstudio.com/reference/application_mobilenet.html)
+- [MobileNetV2](https://keras.rstudio.com/reference/application_mobilenet_v2.html)
 - [DenseNet](https://keras.rstudio.com/reference/application_densenet.html)
 - [NASNet](https://keras.rstudio.com/reference/application_nasnet.html)
 
-All of these architectures (except Xception and MobileNet) are compatible with both TensorFlow and Theano, and upon instantiation the models will be built according to the image data format set in your Keras configuration file at `~/.keras/keras.json`. For instance, if you have set `image_data_format=channels_last`, then any model loaded from this repository will get built according to the TensorFlow data format convention, "Width-Height-Depth".
- 
-The Xception model is only available for TensorFlow, due to its reliance on `SeparableConvolution` layers.
-The MobileNet model is only available for TensorFlow, due to its reliance on `DepthwiseConvolution` layers.
+All of these architectures are compatible with all the backends (TensorFlow, Theano, and CNTK), and upon instantiation the models will be built according to the image data format set in your Keras configuration file at `~/.keras/keras.json`. For instance, if you have set `image_data_format=channels_last`, then any model loaded from this repository will get built according to the TensorFlow data format convention, "Height-Width-Depth".
+
+- For `Keras < 2.2.0`, The Xception model is only available for TensorFlow, due to its reliance on `SeparableConvolution` layers.
+- For `Keras < 2.1.5`, The MobileNet model is only available for TensorFlow, due to its reliance on `DepthwiseConvolution` layers.
 
 ## Usage Examples
 

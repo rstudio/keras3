@@ -88,19 +88,28 @@ callback_model_checkpoint <- function(filepath, monitor = "val_loss", verbose = 
 #'   when the quantity monitored has stopped increasing; in `auto` mode, the
 #'   direction is automatically inferred from the name of the monitored
 #'   quantity.
+#' @param baseline Baseline value for the monitored quantity to reach.
+#'   Training will stop if the model doesn't show improvement
+#'   over the baseline.
 #' 
 #' @family callbacks 
 #'       
 #' @export
 callback_early_stopping <- function(monitor = "val_loss", min_delta = 0, patience = 0, 
-                                    verbose = 0, mode = c("auto", "min", "max")) {
-  keras$callbacks$EarlyStopping(
+                                    verbose = 0, mode = c("auto", "min", "max"), baseline = NULL) {
+  
+  args <- list(
     monitor = monitor,
     min_delta = min_delta,
     patience = as.integer(patience),
     verbose = as.integer(verbose),
     mode = match.arg(mode)
   )
+  
+  if (keras_version() >= "2.2")
+    args$baseline <- baseline
+  
+  do.call(keras$callbacks$EarlyStopping, args)
 }
 
 

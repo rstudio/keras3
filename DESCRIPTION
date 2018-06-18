@@ -1,7 +1,7 @@
 Package: keras
 Type: Package
 Title: R Interface to 'Keras'
-Version: 2.1.6.9001
+Version: 2.1.6.9002
 Authors@R: c(
   person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
   person("François", "Chollet", role = c("aut", "cph")),
@@ -26,7 +26,7 @@ Depends:
     R (>= 3.2)
 Imports:
     reticulate (>= 1.5), 
-    tensorflow (>= 1.5.0.9001),
+    tensorflow (>= 1.8.0.9000),
     tfruns (>= 1.0),
     magrittr, 
     zeallot,

@@ -30,7 +30,6 @@ skip_if_theano <- function() {
     skip("Test not run for theano backend")
 }
 
-
 skip_if_tensorflow_implementation <- function() {
   if (keras:::is_tensorflow_implementation())
     skip("Test not run for TensorFlow implementation")

@@ -417,6 +417,69 @@ mobilenet_load_model_hdf5 <- function(filepath) {
   load_model_hdf5(filepath, custom_objects = custom_objects)
 }
 
+
+
+#' MobileNetV2 model architecture
+#' 
+#' @inheritParams application_mobilenet
+#' 
+#' @return `application_mobilenet_v2()` and `mobilenet_v2_load_model_hdf5()` return a 
+#'   Keras model instance. `mobilenet_v2_preprocess_input()` returns image input
+#'   suitable for feeding into a mobilenet v2 model. `mobilenet_v2_decode_predictions()`
+#'   returns a list of data frames with variables `class_name`, `class_description`,
+#'   and `score` (one data frame per sample in batch input).
+#' 
+#' @section Reference:
+#' - [MobileNetV2: Inverted Residuals and Linear Bottlenecks](https://arxiv.org/abs/1801.04381)
+#' 
+#' @seealso application_mobilenet
+#' 
+#' @export
+application_mobilenet_v2 <- function(input_shape = NULL, alpha = 1.0, depth_multiplier = 1,  include_top = TRUE, 
+                                     weights = "imagenet", input_tensor = NULL, pooling = NULL, classes = 1000) {
+  
+  keras$applications$MobileNetV2(
+    input_shape = as_integer_tuple(input_shape),
+    alpha = alpha,
+    depth_multiplier = as.integer(depth_multiplier),
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+  
+}
+
+#' @rdname application_mobilenet_v2
+#' @export
+mobilenet_v2_preprocess_input <- function(x) {
+  preprocess_input(x, keras$applications$mobilenetv2$preprocess_input)
+}
+
+#' @rdname application_mobilenet_v2
+#' @export
+mobilenet_v2_decode_predictions <- function(preds, top = 5) {
+  imagenet_decode_predictions(preds, top)
+}
+
+
+#' @rdname application_mobilenet_v2
+#' @export
+mobilenet_v2_load_model_hdf5 <- function(filepath) {
+  
+  custom_objects <- list(
+    relu6 = keras$applications$mobilenetv2$mobilenet_v2$relu6
+  )
+  
+  if (keras_version() < "2.1.5")
+    custom_objects$DepthwiseConv2D <- keras$applications$mobilenet$DepthwiseConv2D
+  
+  load_model_hdf5(filepath, custom_objects = custom_objects)
+}
+
+
+
 #' Instantiates the DenseNet architecture.
 #' 
 #' @details 
