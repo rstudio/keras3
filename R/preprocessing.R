@@ -727,6 +727,7 @@ fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, see
 #'   set). Default: "png".
 #' @param subset Subset of data (`"training"` or `"validation"`) if
 #'   `validation_split` is set in [image_data_generator()].
+#' @param sample_weight Sample weights.
 #'   
 #' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a 
 #'   array of corresponding labels. The generator loops indefinitely.
@@ -736,7 +737,7 @@ fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, see
 #' @export
 flow_images_from_data <- function(
   x, y = NULL, generator = image_data_generator(), batch_size = 32, 
-  shuffle = TRUE, seed = NULL, 
+  shuffle = TRUE, sample_weight = NULL, seed = NULL, 
   save_to_dir = NULL, save_prefix = "", save_format = 'png', subset = NULL) {
   
   args <- list(
@@ -752,6 +753,9 @@ flow_images_from_data <- function(
   
   if (keras_version() >= "2.1.5")
     args$subset <- subset
+  
+  if (keras_version() >= "2.2.0")
+    args$sample_weight <- sample_weight
   
   do.call(generator$flow, args)
 }
@@ -825,7 +829,6 @@ flow_images_from_directory <- function(
   
   do.call(generator$flow_from_directory, args)
 }
-
 
 
 

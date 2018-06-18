@@ -13,6 +13,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Added `application_mobilenet_v2()` pre-trained model
 
+- Added `sample_weight` parameter to `flow_images_from_data()`
+
 
 ## Keras 2.1.6 (CRAN)
 
