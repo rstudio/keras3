@@ -26,6 +26,9 @@ Install the development version with: `install_github("rstudio/keras")`
 - Add `layer_activation_relu()`, making the ReLU activation easier to configure
   while retaining easy serialization capabilities.
 
+- Add `axis = -1` argument in backend crossentropy functions specifying the class prediction
+  axis in the input tensor.
+
 
 ## Keras 2.1.6 (CRAN)
 
