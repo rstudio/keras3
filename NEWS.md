@@ -19,6 +19,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Default `layer_flatten()` `data_format` argument to `NULL` (which defaults to global Keras config).
 
+- Add `baseline` argument to `callback_early_stopping()` (stop training if a given baseline isn't reached).
+
 
 ## Keras 2.1.6 (CRAN)
 
