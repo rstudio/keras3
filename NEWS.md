@@ -23,6 +23,9 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Add `data_format` argument to `layer_conv_1d()`.
 
+- Add `layer_activation_relu()`, making the ReLU activation easier to configure
+  while retaining easy serialization capabilities.
+
 
 ## Keras 2.1.6 (CRAN)
 

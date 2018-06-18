@@ -44,6 +44,7 @@ It follows: \code{f(x) = x} for \code{x > theta}, \code{f(x) = 0} otherwise.
 Other activation layers: \code{\link{layer_activation_elu}},
   \code{\link{layer_activation_leaky_relu}},
   \code{\link{layer_activation_parametric_relu}},
+  \code{\link{layer_activation_relu}},
   \code{\link{layer_activation_softmax}},
   \code{\link{layer_activation}}
 }

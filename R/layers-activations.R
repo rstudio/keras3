@@ -198,3 +198,30 @@ layer_activation_softmax <- function(object, axis = -1, input_shape = NULL,
   ))
   
 }
+
+#' Rectified Linear Unit activation function
+#' 
+#' @inheritParams layer_activation
+#' 
+#' @param max_value loat, the maximum output value.
+#' 
+#' @family activation layers
+#' 
+#' @export
+layer_activation_relu <- function(object, max_value = NULL, input_shape = NULL,
+                                  batch_input_shape = NULL, batch_size = NULL, 
+                                  dtype = NULL, name = NULL, trainable = NULL, 
+                                  weights = NULL) {
+  create_layer(keras$layers$ReLU, object, list(
+    max_value = max_value,
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
+  ))
+}
+
+
