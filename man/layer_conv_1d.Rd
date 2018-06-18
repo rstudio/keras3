@@ -34,6 +34,12 @@ length as the original input.
 not depend on \code{input[t+1:]}. Useful when modeling temporal data where the
 model should not violate the temporal order. See \href{https://arxiv.org/abs/1609.03499}{WaveNet: A GenerativeModel for Raw Audio, section 2.1}.}
 
+\item{data_format}{A string, one of \code{"channels_last"} (default) or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"} corresponds
+to inputs with shape \code{(batch, length, channels)} (default format for
+temporal data in Keras) while \code{"channels_first"} corresponds to inputs
+with shape \code{(batch, channels, length)}.}
+
 \item{dilation_rate}{an integer or list of a single integer, specifying the
 dilation rate to use for dilated convolution. Currently, specifying any
 \code{dilation_rate} value != 1 is incompatible with specifying any \code{strides}
@@ -81,12 +87,6 @@ isn't provided.}
 \item{trainable}{Whether the layer weights will be updated during training.}
 
 \item{weights}{Initial weights for layer.}
-
-\item{`data_format`}{A string, one of \code{"channels_last"} (default) or \code{"channels_first"}.
-The ordering of the dimensions in the inputs. \code{"channels_last"} corresponds
-to inputs with shape \code{(batch, length, channels)} (default format for
-temporal data in Keras) while \code{"channels_first"} corresponds to inputs
-with shape \code{(batch, channels, length)}.}
 }
 \description{
 This layer creates a convolution kernel that is convolved with the layer

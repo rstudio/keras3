@@ -26,7 +26,7 @@
 #'   not depend on `input[t+1:]`. Useful when modeling temporal data where the
 #'   model should not violate the temporal order. See [WaveNet: A Generative
 #'   Model for Raw Audio, section 2.1](https://arxiv.org/abs/1609.03499).
-#' @param `data_format` A string, one of `"channels_last"` (default) or `"channels_first"`.
+#' @param data_format A string, one of `"channels_last"` (default) or `"channels_first"`.
 #'   The ordering of the dimensions in the inputs. `"channels_last"` corresponds
 #'   to inputs with shape `(batch, length, channels)` (default format for 
 #'   temporal data in Keras) while `"channels_first"` corresponds to inputs
