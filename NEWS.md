@@ -17,6 +17,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Use native Keras implementation (rather than SciPy) for `image_array_save()`
 
+- Default `layer_flatten()` `data_format` argument to `NULL` (which defaults to global Keras config).
+
 
 ## Keras 2.1.6 (CRAN)
 

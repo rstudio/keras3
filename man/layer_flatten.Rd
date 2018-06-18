@@ -4,16 +4,20 @@
 \alias{layer_flatten}
 \title{Flattens an input}
 \usage{
-layer_flatten(object, data_format = "channels_last", input_shape = NULL,
+layer_flatten(object, data_format = NULL, input_shape = NULL,
   dtype = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
 
-\item{data_format}{A string, one of \code{channels_last} (default) or
-\code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \code{(batch, ..., channels)}
-while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, ...)}.}
+\item{data_format}{A string. one of \code{channels_last} (default) or
+\code{channels_first}. The ordering of the dimensions in the inputs. The purpose
+of this argument is to preserve weight ordering when switching a model from
+one data format to another. \code{channels_last} corresponds to inputs with
+shape \code{(batch, ..., channels)} while \code{channels_first} corresponds to inputs
+with shape \code{(batch, channels, ...)}. It defaults to the \code{image_data_format}
+value found in your Keras config file at \code{~/.keras/keras.json}. If you
+never set it, then it will be "channels_last".}
 
 \item{input_shape}{Input shape (list of integers, does not include the
 samples axis) which is required when using this layer as the first layer in
