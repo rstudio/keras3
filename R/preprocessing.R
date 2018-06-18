@@ -581,15 +581,15 @@ image_array_resize <- function(img, height, width,
 #' @export
 image_array_save <- function(img, path, data_format = NULL, file_format = NULL, scale = TRUE) {
   if (keras_version() >= "2.2.0") {
-    scipy <- import("scipy")
-    invisible(scipy$misc$imsave(path, img))
-  } else {
     keras$preprocessing$image$save_img(
       path, img, 
       data_format = data_format, 
       file_format = file_format, 
       scale = scale
     )
+  } else {
+    scipy <- import("scipy")
+    invisible(scipy$misc$imsave(path, img))
   }
 }
 
