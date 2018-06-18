@@ -1,5 +1,5 @@
 
-## Keras 2.1.7 (development)
+## Keras 2.2.0 (development)
 
 Install the development version with: `install_github("rstudio/keras")`
 
@@ -10,6 +10,8 @@ Install the development version with: `install_github("rstudio/keras")`
 - Fix issue with user-supplied `output_shape` in `layer_lambda()` not being supplied to tensorflow backends
 
 - Filter out metrics that were created for callbacks (e.g. `lr`)
+
+- Added `application_mobilenet_v2()` pre-trained model
 
 
 ## Keras 2.1.6 (CRAN)
