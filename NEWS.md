@@ -21,6 +21,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Add `baseline` argument to `callback_early_stopping()` (stop training if a given baseline isn't reached).
 
+- Add `data_format` argument to `layer_conv_1d()`.
+
 
 ## Keras 2.1.6 (CRAN)
 
