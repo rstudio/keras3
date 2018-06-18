@@ -209,6 +209,10 @@ keras_array <- function(x, dtype = NULL) {
   if (inherits(x, "keras.utils.io_utils.HDF5Matrix"))
     return(x)
   
+  # reflect tensor for keras v2.2
+  if ((keras_version() >= "2.2.0") && k_is_tensor(x))
+    return(x)
+  
   # recurse for lists
   if (is.list(x))
     return(lapply(x, keras_array))

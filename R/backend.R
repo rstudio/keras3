@@ -1365,6 +1365,22 @@ k_int_shape <- function(x) {
   )
 }
 
+#' Returns whether `x` is a symbolic tensor.
+#' 
+#' @param x A candidate tensor.
+#' 
+#' @return A logical: Whether the argument is a symbolic tensor.
+#' 
+#' @template roxlate-keras-backend  
+#' 
+#' @export
+k_is_tensor <- function(x) {
+  keras$backend$is_tensor(
+    x = x
+  )
+}
+
+
 
 #' Returns whether `x` is a Keras tensor.
 #' 

@@ -28,6 +28,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Add `axis = -1` argument in backend crossentropy functions specifying the class prediction
   axis in the input tensor.
+  
+- Handle symbolic tensors and TF datasets in calls to `fit()`, `evaluate()`, and `predict()`
 
 
 ## Keras 2.1.6 (CRAN)
