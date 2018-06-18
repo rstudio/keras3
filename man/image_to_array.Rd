@@ -11,7 +11,8 @@ image_to_array(img, data_format = c("channels_last", "channels_first"))
 image_array_resize(img, height, width, data_format = c("channels_last",
   "channels_first"))
 
-image_array_save(img, path)
+image_array_save(img, path, data_format = NULL, file_format = NULL,
+  scale = TRUE)
 }
 \arguments{
 \item{img}{Image}
@@ -23,6 +24,12 @@ image_array_save(img, path)
 \item{width}{Width to resize to}
 
 \item{path}{Path to save image to}
+
+\item{file_format}{Optional file format override. If omitted, the format to
+use is determined from the filename extension. If a file object was used
+instead of a filename, this parameter should always be used.}
+
+\item{scale}{Whether to rescale image values to be within 0,255}
 }
 \description{
 3D array that represents an image with dimensions (height,width,channels) or

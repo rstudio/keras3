@@ -15,6 +15,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Added `sample_weight` parameter to `flow_images_from_data()`
 
+- Use native Keras implementation (rather than SciPy) for `image_array_save()`
+
 
 ## Keras 2.1.6 (CRAN)
 
