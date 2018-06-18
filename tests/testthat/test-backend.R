@@ -24,6 +24,7 @@ test_backend("k_all", {
   
 test_backend("k_any", {
   skip_if_cntk()
+  skip_if_theano()
   logical_vals <- k_constant(array(TRUE, dim = c(3,5)), dtype = "bool")
   k_any(logical_vals)
   k_any(logical_vals, axis = 1)
