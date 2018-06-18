@@ -16,6 +16,12 @@ test_call_succeeds("layer_activation", {
     layer_activation('relu')
 })
 
+test_call_succeeds("layer_activation_relu", required_version = "2.2.0", {
+  keras_model_sequential() %>% 
+    layer_dense(32, input_shape = c(784)) %>% 
+    layer_activation_leaky_relu()
+})
+
 test_call_succeeds("layer_activation_leaky_relu", {
   keras_model_sequential() %>% 
     layer_dense(32, input_shape = c(784)) %>% 

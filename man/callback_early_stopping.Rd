@@ -5,7 +5,7 @@
 \title{Stop training when a monitored quantity has stopped improving.}
 \usage{
 callback_early_stopping(monitor = "val_loss", min_delta = 0, patience = 0,
-  verbose = 0, mode = c("auto", "min", "max"))
+  verbose = 0, mode = c("auto", "min", "max"), baseline = NULL)
 }
 \arguments{
 \item{monitor}{quantity to be monitored.}
@@ -24,6 +24,10 @@ the quantity monitored has stopped decreasing; in \code{max} mode it will stop
 when the quantity monitored has stopped increasing; in \code{auto} mode, the
 direction is automatically inferred from the name of the monitored
 quantity.}
+
+\item{baseline}{Baseline value for the monitored quantity to reach.
+Training will stop if the model doesn't show improvement
+over the baseline.}
 }
 \description{
 Stop training when a monitored quantity has stopped improving.

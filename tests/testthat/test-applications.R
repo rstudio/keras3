@@ -24,6 +24,9 @@ test_succeeds("keras pre-built models can be instantiated", {
       application_nasnetlarge()
       application_nasnetmobile()
     }
+    
+    if (is_keras_available("2.2.0"))
+      application_mobilenet_v2()
   }
   
   application_resnet50()

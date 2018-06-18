@@ -507,6 +507,12 @@ var <- k_ones(shape = c(3, 4, 5))
 </tr><tr>
 <!--  -->
 <td>
+<p><code><a href="https://keras.rstudio.com/reference/k_is_tensor.html">k_is_tensor</a></code> </p>
+</td>
+<td><p>Returns whether <code>x</code> is a symbolic tensor.</p></td>
+</tr><tr>
+<!--  -->
+<td>
 <p><code><a href="https://keras.rstudio.com/reference/k_is_keras_tensor.html">k_is_keras_tensor</a></code> </p>
 </td>
 <td><p>Returns whether <code>x</code> is a Keras tensor.</p></td>

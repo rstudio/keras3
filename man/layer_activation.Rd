@@ -51,6 +51,7 @@ Other core layers: \code{\link{layer_activity_regularization}},
 Other activation layers: \code{\link{layer_activation_elu}},
   \code{\link{layer_activation_leaky_relu}},
   \code{\link{layer_activation_parametric_relu}},
+  \code{\link{layer_activation_relu}},
   \code{\link{layer_activation_softmax}},
   \code{\link{layer_activation_thresholded_relu}}
 }

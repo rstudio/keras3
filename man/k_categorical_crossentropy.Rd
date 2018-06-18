@@ -4,7 +4,7 @@
 \alias{k_categorical_crossentropy}
 \title{Categorical crossentropy between an output tensor and a target tensor.}
 \usage{
-k_categorical_crossentropy(target, output, from_logits = FALSE)
+k_categorical_crossentropy(target, output, from_logits = FALSE, axis = -1)
 }
 \arguments{
 \item{target}{A tensor of the same shape as \code{output}.}
@@ -14,6 +14,9 @@ TRUE, in which case \code{output} is expected to be the logits).}
 
 \item{from_logits}{Logical, whether \code{output} is the result of a softmax, or
 is a tensor of logits.}
+
+\item{axis}{Axis (axis indexes are 1-based). Pass -1 (the
+default) to select the last axis.}
 }
 \value{
 Output tensor.

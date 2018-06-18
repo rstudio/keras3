@@ -26,6 +26,11 @@
 #'   not depend on `input[t+1:]`. Useful when modeling temporal data where the
 #'   model should not violate the temporal order. See [WaveNet: A Generative
 #'   Model for Raw Audio, section 2.1](https://arxiv.org/abs/1609.03499).
+#' @param data_format A string, one of `"channels_last"` (default) or `"channels_first"`.
+#'   The ordering of the dimensions in the inputs. `"channels_last"` corresponds
+#'   to inputs with shape `(batch, length, channels)` (default format for 
+#'   temporal data in Keras) while `"channels_first"` corresponds to inputs
+#'   with shape `(batch, channels, length)`.
 #' @param dilation_rate an integer or list of a single integer, specifying the
 #'   dilation rate to use for dilated convolution. Currently, specifying any 
 #'   `dilation_rate` value != 1 is incompatible with specifying any `strides` 
@@ -52,6 +57,7 @@
 #'   
 #' @export
 layer_conv_1d <- function(object, filters, kernel_size, strides = 1L, padding = "valid", 
+                          data_format = "channels_last",
                           dilation_rate = 1L, activation = NULL, use_bias = TRUE, 
                           kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
@@ -59,7 +65,7 @@ layer_conv_1d <- function(object, filters, kernel_size, strides = 1L, padding = 
                           batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                           name = NULL, trainable = NULL, weights = NULL) {
   
-  create_layer(keras$layers$Conv1D, object, list(
+  args <- list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -81,7 +87,12 @@ layer_conv_1d <- function(object, filters, kernel_size, strides = 1L, padding = 
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
+  
+  if (keras_version() >= "2.2")
+    args$data_format <- data_format
+  
+  create_layer(keras$layers$Conv1D, object, args)
   
 }
 

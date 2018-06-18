@@ -5,13 +5,13 @@
 \title{1D convolution layer (e.g. temporal convolution).}
 \usage{
 layer_conv_1d(object, filters, kernel_size, strides = 1L, padding = "valid",
-  dilation_rate = 1L, activation = NULL, use_bias = TRUE,
-  kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
-  kernel_regularizer = NULL, bias_regularizer = NULL,
-  activity_regularizer = NULL, kernel_constraint = NULL,
-  bias_constraint = NULL, input_shape = NULL, batch_input_shape = NULL,
-  batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
-  weights = NULL)
+  data_format = "channels_last", dilation_rate = 1L, activation = NULL,
+  use_bias = TRUE, kernel_initializer = "glorot_uniform",
+  bias_initializer = "zeros", kernel_regularizer = NULL,
+  bias_regularizer = NULL, activity_regularizer = NULL,
+  kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
+  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
+  name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -33,6 +33,12 @@ length as the original input.
 \code{"causal"} results in causal (dilated) convolutions, e.g. \code{output[t]} does
 not depend on \code{input[t+1:]}. Useful when modeling temporal data where the
 model should not violate the temporal order. See \href{https://arxiv.org/abs/1609.03499}{WaveNet: A GenerativeModel for Raw Audio, section 2.1}.}
+
+\item{data_format}{A string, one of \code{"channels_last"} (default) or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"} corresponds
+to inputs with shape \code{(batch, length, channels)} (default format for
+temporal data in Keras) while \code{"channels_first"} corresponds to inputs
+with shape \code{(batch, channels, length)}.}
 
 \item{dilation_rate}{an integer or list of a single integer, specifying the
 dilation rate to use for dilated convolution. Currently, specifying any

@@ -343,15 +343,19 @@ layer_masking <- function(object, mask_value = 0.0, input_shape = NULL,
 #'
 #' @inheritParams layer_activation
 #'
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, ..., channels)`
-#'   while `channels_first` corresponds to inputs with shape `(batch, channels, ...)`.
+#' @param data_format A string. one of `channels_last` (default) or
+#'   `channels_first`. The ordering of the dimensions in the inputs. The purpose
+#'   of this argument is to preserve weight ordering when switching a model from
+#'   one data format to another. `channels_last` corresponds to inputs with
+#'   shape `(batch, ..., channels)` while `channels_first` corresponds to inputs
+#'   with shape `(batch, channels, ...)`. It defaults to the `image_data_format`
+#'   value found in your Keras config file at `~/.keras/keras.json`. If you
+#'   never set it, then it will be "channels_last".
 #'
 #' @family core layers
 #'
 #' @export
-layer_flatten <- function(object, data_format = "channels_last", input_shape = NULL, dtype = NULL, 
+layer_flatten <- function(object, data_format = NULL, input_shape = NULL, dtype = NULL, 
                           name = NULL, trainable = NULL, weights = NULL) {
   
   args <- list(
@@ -362,8 +366,13 @@ layer_flatten <- function(object, data_format = "channels_last", input_shape = N
     weights = weights
   )
   
-  if (keras_version() >= "2.1.6")
+  if (keras_version() >= "2.2.0") {
     args$data_format <- data_format
+  } else if (keras_version() >= "2.1.6") {
+    if (is.null(data_format))
+      data_format <- "channels_last"
+    args$data_format <- data_format
+  }
   
   create_layer(keras$layers$Flatten, object, args)
   

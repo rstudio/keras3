@@ -4,7 +4,8 @@
 \alias{k_sparse_categorical_crossentropy}
 \title{Categorical crossentropy with integer targets.}
 \usage{
-k_sparse_categorical_crossentropy(target, output, from_logits = FALSE)
+k_sparse_categorical_crossentropy(target, output, from_logits = FALSE,
+  axis = -1)
 }
 \arguments{
 \item{target}{An integer tensor.}
@@ -12,6 +13,9 @@ k_sparse_categorical_crossentropy(target, output, from_logits = FALSE)
 \item{output}{A tensor resulting from a softmax (unless \code{from_logits} is TRUE, in which case \code{output} is expected to be the logits).}
 
 \item{from_logits}{Boolean, whether \code{output} is the result of a softmax, or is a tensor of logits.}
+
+\item{axis}{Axis (axis indexes are 1-based). Pass -1 (the
+default) to select the last axis.}
 }
 \value{
 Output tensor.
