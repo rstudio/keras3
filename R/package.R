@@ -98,7 +98,7 @@ keras <- NULL
   
     priority = 10,
     
-    environment = "r-reticulate",
+    environment = "r-tensorflow",
     
     get_module = function() {
       resolve_implementation_module()

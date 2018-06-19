@@ -2,7 +2,7 @@
 
 #' Install Keras and the TensorFlow backend
 #' 
-#' Keras and TensorFlow will be installed into an "r-reticulate" virtual or conda
+#' Keras and TensorFlow will be installed into an "r-tensorflow" virtual or conda
 #' environment. Note that "virtualenv" is not available on Windows (as this isn't
 #' supported by TensorFlow).
 #'
