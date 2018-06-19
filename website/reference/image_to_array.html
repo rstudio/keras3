@@ -62,7 +62,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9002</span>
       </span>
     </div>
 
@@ -169,7 +169,8 @@
 <span class='fu'>image_array_resize</span>(<span class='no'>img</span>, <span class='no'>height</span>, <span class='no'>width</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"channels_last"</span>,
   <span class='st'>"channels_first"</span>))
 
-<span class='fu'>image_array_save</span>(<span class='no'>img</span>, <span class='no'>path</span>)</pre>
+<span class='fu'>image_array_save</span>(<span class='no'>img</span>, <span class='no'>path</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>file_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,6 +194,16 @@
     <tr>
       <th>path</th>
       <td><p>Path to save image to</p></td>
+    </tr>
+    <tr>
+      <th>file_format</th>
+      <td><p>Optional file format override. If omitted, the format to
+use is determined from the filename extension. If a file object was used
+instead of a filename, this parameter should always be used.</p></td>
+    </tr>
+    <tr>
+      <th>scale</th>
+      <td><p>Whether to rescale image values to be within 0,255</p></td>
     </tr>
     </table>
     

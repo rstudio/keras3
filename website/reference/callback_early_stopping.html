@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9002</span>
       </span>
     </div>
 
@@ -163,7 +163,7 @@
     
 
     <pre class="usage"><span class='fu'>callback_early_stopping</span>(<span class='kw'>monitor</span> <span class='kw'>=</span> <span class='st'>"val_loss"</span>, <span class='kw'>min_delta</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>patience</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"auto"</span>, <span class='st'>"min"</span>, <span class='st'>"max"</span>))</pre>
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"auto"</span>, <span class='st'>"min"</span>, <span class='st'>"max"</span>), <span class='kw'>baseline</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -194,6 +194,12 @@ the quantity monitored has stopped decreasing; in <code>max</code> mode it will 
 when the quantity monitored has stopped increasing; in <code>auto</code> mode, the
 direction is automatically inferred from the name of the monitored
 quantity.</p></td>
+    </tr>
+    <tr>
+      <th>baseline</th>
+      <td><p>Baseline value for the monitored quantity to reach.
+Training will stop if the model doesn't show improvement
+over the baseline.</p></td>
     </tr>
     </table>
     

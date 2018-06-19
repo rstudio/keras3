@@ -59,7 +59,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9002</span>
       </span>
     </div>
 
@@ -158,15 +158,24 @@
     </div>
 
     <div class="contents">
-    <div id="keras-2-1-7-development" class="section level2">
+    <div id="keras-2-2-0-development" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-1-7-development" class="anchor"></a>Keras 2.1.7 (development)</h2>
+<a href="#keras-2-2-0-development" class="anchor"></a>Keras 2.2.0 (development)</h2>
 <p>Install the development version with: <code>install_github("rstudio/keras")</code></p>
 <ul>
 <li><p>Fix issue with serializing models that have constraint arguments</p></li>
 <li><p>Fix issue with <code>k_tile</code> that needs an integer vector instead of a list as the <code>n</code> argument.</p></li>
 <li><p>Fix issue with user-supplied <code>output_shape</code> in <code><a href="../reference/layer_lambda.html">layer_lambda()</a></code> not being supplied to tensorflow backends</p></li>
 <li><p>Filter out metrics that were created for callbacks (e.g. <code>lr</code>)</p></li>
+<li><p>Added <code><a href="../reference/application_mobilenet_v2.html">application_mobilenet_v2()</a></code> pre-trained model</p></li>
+<li><p>Added <code>sample_weight</code> parameter to <code><a href="../reference/flow_images_from_data.html">flow_images_from_data()</a></code></p></li>
+<li><p>Use native Keras implementation (rather than SciPy) for <code><a href="../reference/image_to_array.html">image_array_save()</a></code></p></li>
+<li><p>Default <code><a href="../reference/layer_flatten.html">layer_flatten()</a></code> <code>data_format</code> argument to <code>NULL</code> (which defaults to global Keras config).</p></li>
+<li><p>Add <code>baseline</code> argument to <code><a href="../reference/callback_early_stopping.html">callback_early_stopping()</a></code> (stop training if a given baseline isn’t reached).</p></li>
+<li><p>Add <code>data_format</code> argument to <code><a href="../reference/layer_conv_1d.html">layer_conv_1d()</a></code>.</p></li>
+<li><p>Add <code><a href="../reference/layer_activation_relu.html">layer_activation_relu()</a></code>, making the ReLU activation easier to configure while retaining easy serialization capabilities.</p></li>
+<li><p>Add <code>axis = -1</code> argument in backend crossentropy functions specifying the class prediction axis in the input tensor.</p></li>
+<li><p>Handle symbolic tensors and TF datasets in calls to <code><a href="../reference/fit.html">fit()</a></code>, <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate()</a></code>, and <code>predict()</code></p></li>
 </ul>
 </div>
     <div id="keras-2-1-6-cran" class="section level2">
@@ -324,7 +333,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#keras-2-1-7-development">2.1.7</a></li>
+        <li><a href="#keras-2-2-0-development">2.2.0</a></li>
         <li><a href="#keras-2-1-6-cran">2.1.6</a></li>
         <li><a href="#keras-2-1-5">2.1.5</a></li>
         <li><a href="#keras-2-1-4">2.1.4</a></li>

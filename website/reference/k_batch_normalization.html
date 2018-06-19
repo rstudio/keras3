@@ -62,7 +62,7 @@ output &lt;- (x - mean) / (sqrt(var) + epsilon) * gamma + beta" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9002</span>
       </span>
     </div>
 
@@ -164,7 +164,7 @@ output &lt;- (x - mean) / (sqrt(var) + epsilon) * gamma + beta" />
 <code>output &lt;- (x - mean) / (sqrt(var) + epsilon) * gamma + beta</code></p>
     
 
-    <pre class="usage"><span class='fu'>k_batch_normalization</span>(<span class='no'>x</span>, <span class='no'>mean</span>, <span class='no'>var</span>, <span class='no'>beta</span>, <span class='no'>gamma</span>, <span class='kw'>epsilon</span> <span class='kw'>=</span> <span class='fl'>0.001</span>)</pre>
+    <pre class="usage"><span class='fu'>k_batch_normalization</span>(<span class='no'>x</span>, <span class='no'>mean</span>, <span class='no'>var</span>, <span class='no'>beta</span>, <span class='no'>gamma</span>, <span class='kw'>axis</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>epsilon</span> <span class='kw'>=</span> <span class='fl'>0.001</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,6 +188,11 @@ output &lt;- (x - mean) / (sqrt(var) + epsilon) * gamma + beta" />
     <tr>
       <th>gamma</th>
       <td><p>Tensor by which to scale the input.</p></td>
+    </tr>
+    <tr>
+      <th>axis</th>
+      <td><p>Axis (axis indexes are 1-based). Pass -1 (the
+default) to select the last axis.</p></td>
     </tr>
     <tr>
       <th>epsilon</th>

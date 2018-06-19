@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9002</span>
       </span>
     </div>
 
@@ -163,8 +163,9 @@
     
 
     <pre class="usage"><span class='fu'>flow_images_from_data</span>(<span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>generator</span> <span class='kw'>=</span> <span class='fu'><a href='image_data_generator.html'>image_data_generator</a></span>(),
-  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>save_to_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>save_prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>save_format</span> <span class='kw'>=</span> <span class='st'>"png"</span>, <span class='kw'>subset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>save_to_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>save_prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>save_format</span> <span class='kw'>=</span> <span class='st'>"png"</span>,
+  <span class='kw'>subset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -190,6 +191,10 @@ data.</p></td>
     <tr>
       <th>shuffle</th>
       <td><p>boolean (defaut: <code>TRUE</code>).</p></td>
+    </tr>
+    <tr>
+      <th>sample_weight</th>
+      <td><p>Sample weights.</p></td>
     </tr>
     <tr>
       <th>seed</th>
