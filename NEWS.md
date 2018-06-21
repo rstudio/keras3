@@ -31,6 +31,8 @@ Install the development version with: `install_github("rstudio/keras")`
   
 - Handle symbolic tensors and TF datasets in calls to `fit()`, `evaluate()`, and `predict()`
 
+- Add `embeddings_data` argument to `callback_tensorboard()`
+
 
 ## Keras 2.1.6 (CRAN)
 

@@ -7,7 +7,7 @@
 callback_tensorboard(log_dir = NULL, histogram_freq = 0, batch_size = 32,
   write_graph = TRUE, write_grads = FALSE, write_images = FALSE,
   embeddings_freq = 0, embeddings_layer_names = NULL,
-  embeddings_metadata = NULL)
+  embeddings_metadata = NULL, embeddings_data = NULL)
 }
 \arguments{
 \item{log_dir}{The path of the directory where to save the log files to be
@@ -41,6 +41,10 @@ which metadata for this embedding layer is saved. See the
 \href{https://www.tensorflow.org/how_tos/embedding_viz/#metadata_optional}{details}
 about the metadata file format. In case if the same metadata file is used
 for all embedding layers, string can be passed.}
+
+\item{embeddings_data}{Data to be embedded at layers specified in
+\code{embeddings_layer_names}. Array (if the model has a single input) or list
+of arrays (if the model has multiple inputs). Learn \href{https://www.tensorflow.org/programmers_guide/embedding}{more about embeddings}}
 }
 \description{
 This callback writes a log for TensorBoard, which allows you to visualize
