@@ -91,8 +91,6 @@ if(!data_augmentation){
 } else {
   
   datagen <- image_data_generator(
-    featurewise_center = TRUE,
-    featurewise_std_normalization = TRUE,
     rotation_range = 20,
     width_shift_range = 0.2,
     height_shift_range = 0.2,
