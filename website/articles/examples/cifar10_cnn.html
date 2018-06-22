@@ -224,24 +224,22 @@
 <a class="sourceLine" id="cb1-86" data-line-number="86">} <span class="cf">else</span> {</a>
 <a class="sourceLine" id="cb1-87" data-line-number="87">  </a>
 <a class="sourceLine" id="cb1-88" data-line-number="88">  datagen &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/image_data_generator.html">image_data_generator</a></span>(</a>
-<a class="sourceLine" id="cb1-89" data-line-number="89">    <span class="dt">featurewise_center =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb1-90" data-line-number="90">    <span class="dt">featurewise_std_normalization =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb1-91" data-line-number="91">    <span class="dt">rotation_range =</span> <span class="dv">20</span>,</a>
-<a class="sourceLine" id="cb1-92" data-line-number="92">    <span class="dt">width_shift_range =</span> <span class="fl">0.2</span>,</a>
-<a class="sourceLine" id="cb1-93" data-line-number="93">    <span class="dt">height_shift_range =</span> <span class="fl">0.2</span>,</a>
-<a class="sourceLine" id="cb1-94" data-line-number="94">    <span class="dt">horizontal_flip =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb1-95" data-line-number="95">  )</a>
+<a class="sourceLine" id="cb1-89" data-line-number="89">    <span class="dt">rotation_range =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb1-90" data-line-number="90">    <span class="dt">width_shift_range =</span> <span class="fl">0.2</span>,</a>
+<a class="sourceLine" id="cb1-91" data-line-number="91">    <span class="dt">height_shift_range =</span> <span class="fl">0.2</span>,</a>
+<a class="sourceLine" id="cb1-92" data-line-number="92">    <span class="dt">horizontal_flip =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb1-93" data-line-number="93">  )</a>
+<a class="sourceLine" id="cb1-94" data-line-number="94">  </a>
+<a class="sourceLine" id="cb1-95" data-line-number="95">  datagen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit_image_data_generator.html">fit_image_data_generator</a></span>(x_train)</a>
 <a class="sourceLine" id="cb1-96" data-line-number="96">  </a>
-<a class="sourceLine" id="cb1-97" data-line-number="97">  datagen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit_image_data_generator.html">fit_image_data_generator</a></span>(x_train)</a>
-<a class="sourceLine" id="cb1-98" data-line-number="98">  </a>
-<a class="sourceLine" id="cb1-99" data-line-number="99">  model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit_generator.html">fit_generator</a></span>(</a>
-<a class="sourceLine" id="cb1-100" data-line-number="100">    <span class="kw"><a href="../../reference/flow_images_from_data.html">flow_images_from_data</a></span>(x_train, y_train, datagen, <span class="dt">batch_size =</span> batch_size),</a>
-<a class="sourceLine" id="cb1-101" data-line-number="101">    <span class="dt">steps_per_epoch =</span> <span class="kw">as.integer</span>(<span class="dv">50000</span><span class="op">/</span>batch_size), </a>
-<a class="sourceLine" id="cb1-102" data-line-number="102">    <span class="dt">epochs =</span> epochs, </a>
-<a class="sourceLine" id="cb1-103" data-line-number="103">    <span class="dt">validation_data =</span> <span class="kw">list</span>(x_test, y_test)</a>
-<a class="sourceLine" id="cb1-104" data-line-number="104">  )</a>
-<a class="sourceLine" id="cb1-105" data-line-number="105">  </a>
-<a class="sourceLine" id="cb1-106" data-line-number="106">}</a></code></pre></div>
+<a class="sourceLine" id="cb1-97" data-line-number="97">  model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit_generator.html">fit_generator</a></span>(</a>
+<a class="sourceLine" id="cb1-98" data-line-number="98">    <span class="kw"><a href="../../reference/flow_images_from_data.html">flow_images_from_data</a></span>(x_train, y_train, datagen, <span class="dt">batch_size =</span> batch_size),</a>
+<a class="sourceLine" id="cb1-99" data-line-number="99">    <span class="dt">steps_per_epoch =</span> <span class="kw">as.integer</span>(<span class="dv">50000</span><span class="op">/</span>batch_size), </a>
+<a class="sourceLine" id="cb1-100" data-line-number="100">    <span class="dt">epochs =</span> epochs, </a>
+<a class="sourceLine" id="cb1-101" data-line-number="101">    <span class="dt">validation_data =</span> <span class="kw">list</span>(x_test, y_test)</a>
+<a class="sourceLine" id="cb1-102" data-line-number="102">  )</a>
+<a class="sourceLine" id="cb1-103" data-line-number="103">  </a>
+<a class="sourceLine" id="cb1-104" data-line-number="104">}</a></code></pre></div>
 </div>
   </div>
 

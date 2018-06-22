@@ -169,7 +169,7 @@ histograms for the different layers in your model.</p>
     <pre class="usage"><span class='fu'>callback_tensorboard</span>(<span class='kw'>log_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>histogram_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>,
   <span class='kw'>write_graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>write_grads</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>write_images</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>embeddings_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>embeddings_layer_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>embeddings_metadata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>embeddings_metadata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>embeddings_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -223,6 +223,12 @@ which metadata for this embedding layer is saved. See the
 <a href='https://www.tensorflow.org/how_tos/embedding_viz/#metadata_optional'>details</a>
 about the metadata file format. In case if the same metadata file is used
 for all embedding layers, string can be passed.</p></td>
+    </tr>
+    <tr>
+      <th>embeddings_data</th>
+      <td><p>Data to be embedded at layers specified in
+<code>embeddings_layer_names</code>. Array (if the model has a single input) or list
+of arrays (if the model has multiple inputs). Learn <a href='https://www.tensorflow.org/programmers_guide/embedding'>more about embeddings</a></p></td>
     </tr>
     </table>
     
