@@ -15,6 +15,25 @@ test_succeeds("metrics can be used when compiling models", {
     )
 })
 
+test_succeeds("custom metrics can be used when compiling models", {
+  
+  metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
+    k_mean(y_pred) 
+  })
+  
+  define_model() %>% 
+    compile(
+      loss='binary_crossentropy',
+      optimizer = optimizer_sgd(),
+      metrics=list(
+        metric_binary_accuracy,
+        metric_binary_crossentropy,
+        metric_hinge,
+        metric_mean_pred
+      )
+    )
+})
+
 test_succeeds("metrics be can called directly", {
   y_true <- k_constant(matrix(runif(100), nrow = 10, ncol = 10))
   y_pred <- k_constant(matrix(runif(100), nrow = 10, ncol = 10))

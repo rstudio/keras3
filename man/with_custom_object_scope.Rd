@@ -28,9 +28,10 @@ block of code, and is automatically recognized when loading saved models.
 \examples{
 \dontrun{
 # define custom metric
-sparse_top_k_cat_acc <- function(y_pred, y_true) {
-  metric_sparse_top_k_categorical_accuracy(y_pred, y_true, k = 5)
-}
+metric_top_3_categorical_accuracy <- 
+  custom_metric("top_3_categorical_accuracy", function(y_true, y_pred) {
+    metric_top_k_categorical_accuracy(y_true, y_pred, k = 3) 
+  })
 
 with_custom_object_scope(c(top_k_acc = sparse_top_k_cat_acc), {
 

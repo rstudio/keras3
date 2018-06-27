@@ -8,14 +8,18 @@
 #' @param y_true True labels (tensor)
 #' @param y_pred Predictions (tensor of the same shape as y_true).
 #' @param k An integer, number of top elements to consider.
+#' @param name Name of custom metric
+#' @param metric_fn Custom metric function
 #'       
 #' @section Custom Metrics:
 #' You can provide an arbitrary R function as a custom metric. Note that
 #' the `y_true` and `y_pred` parameters are tensors, so computations on 
-#' them should use backend tensor functions. See below for an example.
+#' them should use backend tensor functions.
 #' 
+#' Use the `custom_metric()` function to define a custom metric.
 #' Note that a name ('mean_pred') is provided for the custom metric
-#' function. This name is used within training progress output.
+#' function: this name is used within training progress output.
+#' See below for an example.
 #' 
 #' If you want to save and load a model with custom metrics, you should
 #' also specify the metric in the call the [load_model_hdf5()]. For example:
@@ -37,26 +41,26 @@
 #' @examples \dontrun{
 #' 
 #' # create metric using backend tensor functions
-#' metric_mean_pred <- function(y_true, y_pred) {
+#' metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
 #'   k_mean(y_pred) 
-#' }
+#' })
 #' 
 #' model %>% compile(
 #'   optimizer = optimizer_rmsprop(),
 #'   loss = loss_binary_crossentropy,
-#'   metrics = c('accuracy', 
-#'               'mean_pred' = metric_mean_pred)
+#'   metrics = c('accuracy', metric_mean_pred)
 #' )
 #' 
 #' # create custom metric to wrap metric with parameter
-#' metric_top_3_categorical_accuracy <- function(y_true, y_pred) {
-#'   metric_top_k_categorical_accuracy(y_true, y_pred, k = 3) 
-#' }
+#' metric_top_3_categorical_accuracy <- 
+#'   custom_metric("top_3_categorical_accuracy", function(y_true, y_pred) {
+#'     metric_top_k_categorical_accuracy(y_true, y_pred, k = 3) 
+#'   })
 #'
 #' model %>% compile(
 #'   loss = 'categorical_crossentropy',
 #'   optimizer = optimizer_rmsprop(),
-#'   metrics = c(top_3_categorical_accuracy = metric_top_3_categorical_accuracy)
+#'   metrics = metric_top_3_categorical_accuracy
 #' )
 #' }
 #' @export
@@ -190,6 +194,12 @@ metric_sparse_top_k_categorical_accuracy <- function(y_true, y_pred, k = 5) {
 attr(metric_sparse_top_k_categorical_accuracy, "py_function_name") <- "sparse_top_k_categorical_accuracy"
 
 
+#' @rdname metric_binary_accuracy
+#' @export
+custom_metric <- function(name, metric_fn) {
+  attr(metric_fn, "py_function_name") <- name
+  metric_fn
+}
 
 
 

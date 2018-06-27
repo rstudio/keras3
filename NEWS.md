@@ -33,6 +33,10 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Add `embeddings_data` argument to `callback_tensorboard()`
 
+- Handle named list of model output names in `metrics` argument of `compile()`
+
+- New `custom_metric()` function for defining custom metrics in R
+
 
 ## Keras 2.1.6 (CRAN)
 
