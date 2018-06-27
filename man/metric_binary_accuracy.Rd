@@ -17,6 +17,7 @@
 \alias{metric_squared_hinge}
 \alias{metric_top_k_categorical_accuracy}
 \alias{metric_sparse_top_k_categorical_accuracy}
+\alias{custom_metric}
 \title{Model performance metrics}
 \usage{
 metric_binary_accuracy(y_true, y_pred)
@@ -50,6 +51,8 @@ metric_squared_hinge(y_true, y_pred)
 metric_top_k_categorical_accuracy(y_true, y_pred, k = 5)
 
 metric_sparse_top_k_categorical_accuracy(y_true, y_pred, k = 5)
+
+custom_metric(name, metric_fn)
 }
 \arguments{
 \item{y_true}{True labels (tensor)}
@@ -57,6 +60,10 @@ metric_sparse_top_k_categorical_accuracy(y_true, y_pred, k = 5)
 \item{y_pred}{Predictions (tensor of the same shape as y_true).}
 
 \item{k}{An integer, number of top elements to consider.}
+
+\item{name}{Name of custom metric}
+
+\item{metric_fn}{Custom metric function}
 }
 \description{
 Model performance metrics
@@ -69,10 +76,12 @@ Metric functions are to be supplied in the \code{metrics} parameter of the
 
 You can provide an arbitrary R function as a custom metric. Note that
 the \code{y_true} and \code{y_pred} parameters are tensors, so computations on
-them should use backend tensor functions. See below for an example.
+them should use backend tensor functions.
 
+Use the \code{custom_metric()} function to define a custom metric.
 Note that a name ('mean_pred') is provided for the custom metric
-function. This name is used within training progress output.
+function: this name is used within training progress output.
+See below for an example.
 
 If you want to save and load a model with custom metrics, you should
 also specify the metric in the call the \code{\link[=load_model_hdf5]{load_model_hdf5()}}. For example:
@@ -98,26 +107,26 @@ See below for an example.
 \dontrun{
 
 # create metric using backend tensor functions
-metric_mean_pred <- function(y_true, y_pred) {
+metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
   k_mean(y_pred) 
-}
+})
 
 model \%>\% compile(
   optimizer = optimizer_rmsprop(),
   loss = loss_binary_crossentropy,
-  metrics = c('accuracy', 
-              'mean_pred' = metric_mean_pred)
+  metrics = c('accuracy', metric_mean_pred)
 )
 
 # create custom metric to wrap metric with parameter
-metric_top_3_categorical_accuracy <- function(y_true, y_pred) {
-  metric_top_k_categorical_accuracy(y_true, y_pred, k = 3) 
-}
+metric_top_3_categorical_accuracy <- 
+  custom_metric("top_3_categorical_accuracy", function(y_true, y_pred) {
+    metric_top_k_categorical_accuracy(y_true, y_pred, k = 3) 
+  })
 
 model \%>\% compile(
   loss = 'categorical_crossentropy',
   optimizer = optimizer_rmsprop(),
-  metrics = c(top_3_categorical_accuracy = metric_top_3_categorical_accuracy)
+  metrics = metric_top_3_categorical_accuracy
 )
 }
 }
