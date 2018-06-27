@@ -192,7 +192,9 @@
 
 <span class='fu'>metric_top_k_categorical_accuracy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>)
 
-<span class='fu'>metric_sparse_top_k_categorical_accuracy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
+<span class='fu'>metric_sparse_top_k_categorical_accuracy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>)
+
+<span class='fu'>custom_metric</span>(<span class='no'>name</span>, <span class='no'>metric_fn</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -209,6 +211,14 @@
       <th>k</th>
       <td><p>An integer, number of top elements to consider.</p></td>
     </tr>
+    <tr>
+      <th>name</th>
+      <td><p>Name of custom metric</p></td>
+    </tr>
+    <tr>
+      <th>metric_fn</th>
+      <td><p>Custom metric function</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
@@ -221,9 +231,11 @@
     
     <p>You can provide an arbitrary R function as a custom metric. Note that
 the <code>y_true</code> and <code>y_pred</code> parameters are tensors, so computations on
-them should use backend tensor functions. See below for an example.</p>
-<p>Note that a name ('mean_pred') is provided for the custom metric
-function. This name is used within training progress output.</p>
+them should use backend tensor functions.</p>
+<p>Use the <code>custom_metric()</code> function to define a custom metric.
+Note that a name ('mean_pred') is provided for the custom metric
+function: this name is used within training progress output.
+See below for an example.</p>
 <p>If you want to save and load a model with custom metrics, you should
 also specify the metric in the call the <code><a href='save_model_hdf5.html'>load_model_hdf5()</a></code>. For example:
 <code><a href='save_model_hdf5.html'>load_model_hdf5("my_model.h5", c('mean_pred' = metric_mean_pred))</a></code>.</p>
@@ -244,26 +256,26 @@ See below for an example.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># create metric using backend tensor functions</span>
-<span class='no'>metric_mean_pred</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>) {
+<span class='no'>metric_mean_pred</span> <span class='kw'>&lt;-</span> <span class='fu'>custom_metric</span>(<span class='st'>"mean_pred"</span>, <span class='kw'>function</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>) {
   <span class='fu'><a href='k_mean.html'>k_mean</a></span>(<span class='no'>y_pred</span>)
-}
+})
 
 <span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='compile.html'>compile</a></span>(
   <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span>(),
   <span class='kw'>loss</span> <span class='kw'>=</span> <span class='no'>loss_binary_crossentropy</span>,
-  <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'accuracy'</span>,
-              <span class='st'>'mean_pred'</span> <span class='kw'>=</span> <span class='no'>metric_mean_pred</span>)
+  <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'accuracy'</span>, <span class='no'>metric_mean_pred</span>)
 )
 
 <span class='co'># create custom metric to wrap metric with parameter</span>
-<span class='no'>metric_top_3_categorical_accuracy</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>) {
-  <span class='fu'>metric_top_k_categorical_accuracy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>3</span>)
-}
+<span class='no'>metric_top_3_categorical_accuracy</span> <span class='kw'>&lt;-</span>
+  <span class='fu'>custom_metric</span>(<span class='st'>"top_3_categorical_accuracy"</span>, <span class='kw'>function</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>) {
+    <span class='fu'>metric_top_k_categorical_accuracy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+  })
 
 <span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='compile.html'>compile</a></span>(
   <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>'categorical_crossentropy'</span>,
   <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span>(),
-  <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>top_3_categorical_accuracy</span> <span class='kw'>=</span> <span class='no'>metric_top_3_categorical_accuracy</span>)
+  <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='no'>metric_top_3_categorical_accuracy</span>
 )
 <span class='co'># }</span></pre>
   </div>

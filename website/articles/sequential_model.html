@@ -209,16 +209,15 @@ ________________________________________________________________________________
 <a class="sourceLine" id="cb6-5" data-line-number="5">)</a></code></pre></div>
 <p>Here’s compilation with a custom metric:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># create metric using backend tensor functions</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">metric_mean_pred &lt;-<span class="st"> </span><span class="cf">function</span>(y_true, y_pred) {</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">metric_mean_pred &lt;-<span class="st"> </span><span class="kw"><a href="../reference/metric_binary_accuracy.html">custom_metric</a></span>(<span class="st">"mean_pred"</span>, <span class="cf">function</span>(y_true, y_pred) {</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="kw"><a href="../reference/k_mean.html">k_mean</a></span>(y_pred) </a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">})</a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb7-6" data-line-number="6">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>( </a>
 <a class="sourceLine" id="cb7-7" data-line-number="7">  <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(),</a>
 <a class="sourceLine" id="cb7-8" data-line-number="8">  <span class="dt">loss =</span> loss_binary_crossentropy,</a>
-<a class="sourceLine" id="cb7-9" data-line-number="9">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>, </a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">              <span class="st">'mean_pred'</span> =<span class="st"> </span>metric_mean_pred)</a>
-<a class="sourceLine" id="cb7-11" data-line-number="11">)</a></code></pre></div>
+<a class="sourceLine" id="cb7-9" data-line-number="9">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>, metric_mean_pred)</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">)</a></code></pre></div>
 </div>
 <div id="training" class="section level2">
 <h2 class="hasAnchor">
