@@ -1,7 +1,7 @@
 # This example shows how to visualize embeddings in TensorBoard.
 # 
-# Embeddings in the sense used here doesn't necessarily refer to embedding layers.
-# In fact, features (= acitvations) from other hidden layers can be visualized,
+# Embeddings in the sense used here don't necessarily refer to embedding layers.
+# In fact, features (= activations) from other hidden layers can be visualized,
 # as shown in this example for a dense layer.
 
 library(keras)
