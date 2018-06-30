@@ -21,6 +21,7 @@ title: "Keras Examples"
 | [mnist_acgan](mnist_acgan.html) | Implementation of AC-GAN (Auxiliary Classifier GAN ) on the MNIST dataset |
 | [mnist_antirectifier](mnist_antirectifier.html) | Demonstrates how to write custom layers for Keras |
 | [mnist_cnn](mnist_cnn.html) | Trains a simple convnet on the MNIST dataset. |
+| [mnist_cnn_embeddings](mnist_cnn_embeddings.html) | Demonstrates how to visualize embeddings in TensorBoard. |
 | [mnist_irnn](mnist_irnn.html) | Reproduction of the IRNN experiment with pixel-by-pixel sequential MNIST in "A Simple Way to Initialize Recurrent Networks of Rectified Linear Units" by Le et al. |
 | [mnist_mlp](mnist_mlp.html) | Trains a simple deep multi-layer perceptron on the MNIST dataset. |
 | [mnist_hierarchical_rnn](mnist_hierarchical_rnn.html) | Trains a Hierarchical RNN (HRNN) to classify MNIST digits. |

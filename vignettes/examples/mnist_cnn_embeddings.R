@@ -1,8 +1,8 @@
-# This example shows how to visualize embeddings in TensorBoard.
-# 
-# Embeddings in the sense used here don't necessarily refer to embedding layers.
-# In fact, features (= activations) from other hidden layers can be visualized,
-# as shown in this example for a dense layer.
+#' This example shows how to visualize embeddings in TensorBoard.
+#' 
+#' Embeddings in the sense used here don't necessarily refer to embedding layers.
+#' In fact, features (= activations) from other hidden layers can be visualized,
+#' as shown in this example for a dense layer.
 
 library(keras)
 
@@ -55,7 +55,8 @@ tensorboard_callback <- callback_tensorboard(
   embeddings_freq = 1,
   # if missing or NULL all embedding layers will be monitored
   embeddings_layer_names = list('features'),
-  # single file for all embedding layers, could also be a named list mapping layer names to file names
+  # single file for all embedding layers, could also be a named list mapping
+  # layer names to file names
   embeddings_metadata = embeddings_metadata,
   # data to be embedded
   embeddings_data = x_test
@@ -94,6 +95,13 @@ model %>% compile(
   metrics = c('accuracy')
 )
 
+# Launch TensorBoard
+#
+# As the model is being fit you will be able to view the embedings in the 
+# Projector tab. On the left, use "color by label" to see the digits displayed
+# in 10 different colors. Hover over a point to see its label.
+tensorboard(embeddings_dir)
+
 # Train model
 model %>% fit(
   x_train,
@@ -104,7 +112,6 @@ model %>% fit(
   callbacks = list(tensorboard_callback)
 )
 
-
 scores <- model %>% evaluate(x_test, y_test, verbose = 0)
 
 # Output metrics
@@ -112,10 +119,3 @@ cat('Test loss:', scores[[1]], '\n')
 cat('Test accuracy:', scores[[2]], '\n')
 
 
-# You can now launch tensorboard from the command line 
-# with `tensorboard --logdir=<embeddings_dir from above>
-# and then go to http://localhost:6006/#projector 
-# to view the embeddings
-
-# On the left, use "color by label" to see the digits displayed in 10 different colors.
-# Hover over a point to see its label.
