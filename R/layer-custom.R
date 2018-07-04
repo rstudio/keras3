@@ -62,6 +62,10 @@ KerasLayer <- R6Class("KerasLayer",
     # back reference to python layer that wraps us
     .set_wrapper = function(wrapper) {
       private$wrapper <- wrapper
+    },
+    
+    python_layer = function() {
+      private$wrapper
     }
   ),
   

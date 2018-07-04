@@ -37,6 +37,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - New `custom_metric()` function for defining custom metrics in R
 
+- Provide access to Python layer within R custom layers
+
 
 ## Keras 2.1.6 (CRAN)
 
