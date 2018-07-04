@@ -39,6 +39,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Provide access to Python layer within R custom layers
 
+- Don't convert custom layer output shape to tuple when shape is a list
+  or tuple of other shapes
 
 ## Keras 2.1.6 (CRAN)
 

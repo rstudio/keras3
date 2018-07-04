@@ -79,7 +79,7 @@ AntirectifierLayer <- R6::R6Class("KerasLayer",
      
     compute_output_shape = function(input_shape) {
       input_shape[[2]] <- input_shape[[2]] * 2L 
-      tuple(input_shape)
+      input_shape
     }
   )
 )

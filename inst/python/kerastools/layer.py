@@ -29,6 +29,15 @@ class RLayer(Layer):
     return self.r_call(inputs, mask)
       
   def compute_output_shape(self, input_shape):
-    return tuple(self.r_compute_output_shape(shape_filter(input_shape)))
+    
+    # call R to compute the output shape
+    output_shape = self.r_compute_output_shape(shape_filter(input_shape))
+    
+    # if it was a list of lists then leave it alone, otherwise force to tuple
+    # so that R users don't need to explicitly return a tuple
+    if all(isinstance(x, (tuple,list)) for x in output_shape):
+      return output_shape
+    else:
+      return tuple(output_shape)
 
 
