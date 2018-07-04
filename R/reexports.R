@@ -54,6 +54,10 @@ tensorflow::evaluate
 #' @export
 tensorflow::export_savedmodel
 
+#' @importFrom tensorflow shape
+#' @export
+tensorflow::shape
+
 #' @importFrom tfruns flags
 #' @export
 tfruns::flags

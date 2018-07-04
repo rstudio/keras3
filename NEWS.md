@@ -41,6 +41,9 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Don't convert custom layer output shape to tuple when shape is a list
   or tuple of other shapes
+  
+- Re-export `shape()` function from tensorflow package
+
 
 ## Keras 2.1.6 (CRAN)
 

@@ -19,6 +19,8 @@
 \alias{reexports}
 \alias{export_savedmodel}
 \alias{reexports}
+\alias{shape}
+\alias{reexports}
 \alias{flags}
 \alias{reexports}
 \alias{flag_numeric}
@@ -39,7 +41,7 @@ below to see their documentation.
 \describe{
   \item{reticulate}{\code{\link[reticulate]{use_python}}, \code{\link[reticulate]{use_virtualenv}}, \code{\link[reticulate]{use_condaenv}}, \code{\link[reticulate]{array_reshape}}}
 
-  \item{tensorflow}{\code{\link[tensorflow]{use_session_with_seed}}, \code{\link[tensorflow]{tensorboard}}, \code{\link[tensorflow]{evaluate}}, \code{\link[tensorflow]{export_savedmodel}}}
+  \item{tensorflow}{\code{\link[tensorflow]{use_session_with_seed}}, \code{\link[tensorflow]{tensorboard}}, \code{\link[tensorflow]{evaluate}}, \code{\link[tensorflow]{export_savedmodel}}, \code{\link[tensorflow]{shape}}}
 
   \item{tfruns}{\code{\link[tfruns]{flags}}, \code{\link[tfruns]{flag_numeric}}, \code{\link[tfruns]{flag_integer}}, \code{\link[tfruns]{flag_string}}, \code{\link[tfruns]{flag_boolean}}, \code{\link[tfruns]{run_dir}}}
 }}
