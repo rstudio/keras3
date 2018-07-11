@@ -20,6 +20,7 @@ layer weights (must be implemented by all layers that have weights)}
 \item{\code{call(inputs,mask)}}{Call the layer on an input tensor.}
 \item{\code{compute_output_shape(input_shape)}}{Compute the output shape
 for the layer.}
+\item{\code{add_loss(losses, inputs)}}{Add losses to the layer.}
 \item{\code{add_weight(name,shape,dtype,initializer,regularizer,trainable,constraint)}}{Adds
 a weight variable to the layer.} }
 }

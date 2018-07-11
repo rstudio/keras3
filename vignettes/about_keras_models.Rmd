@@ -22,7 +22,7 @@ knitr::opts_chunk$set(comment = NA, eval = FALSE)
 
 ## Overview
 
-There are two types of models available in Keras: [sequential models](sequential_model.html) and models created with the [functional API](functional_api.html).
+There are two types of built-in models available in Keras: [sequential models](sequential_model.html) and models created with the [functional API](functional_api.html). In addition, you can also create [custom models](custom_models.html) that define their own forward-pass logic.
 
 ### Sequential
 
@@ -66,6 +66,10 @@ model <- keras_model(inputs = c(tweet_a, tweet_b), outputs = predictions)
 ```
 
 Learn more by reading the [Guide to the Functional API](unctional_api.html).
+
+### Custom
+
+Custom models enable you to implement custom forward-pass logic (e.g. to encapsulate the logic associated with constructuing various types of models). See the article on [Writing Custom Keras Models](custom_models.html) for additional documentation, including an example that demonstrates creating a custom model that encapsulates a simple multi-layer-perceptron model with optional dropout and batch normalization layers.
 
 ## Properties
 

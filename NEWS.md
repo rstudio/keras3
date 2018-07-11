@@ -33,6 +33,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Add `embeddings_data` argument to `callback_tensorboard()`
 
+- Support for defining custom Keras models (i.e. custom `call()` logic for forward pass)
+
 - Handle named list of model output names in `metrics` argument of `compile()`
 
 - New `custom_metric()` function for defining custom metrics in R

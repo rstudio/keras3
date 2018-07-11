@@ -40,6 +40,8 @@ navbar:
           href: articles/backend.html
         - text: "Custom Layers"
           href: articles/custom_layers.html
+        - text: "Custom Models"
+          href: articles/custom_models.html
     - text: Learn
       href: articles/learn.html
     - text: Tools
@@ -79,6 +81,8 @@ reference:
       - serialize_model
       - clone_model
       - freeze_weights
+      - KerasModel
+      - keras_model_custom
  
   - title: "Core Layers"
     contents:

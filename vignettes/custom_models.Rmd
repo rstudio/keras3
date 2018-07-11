@@ -1,0 +1,115 @@
+---
+title: "Writing Custom Keras Models"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Writing Custom Keras Models} 
+  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteEncoding{UTF-8}
+type: docs
+repo: https://github.com/rstudio/keras
+menu:
+  main:
+    name: "Custom Models"
+    identifier: "keras-custom-models"
+    parent: "keras-advanced"
+    weight: 60
+---
+
+```{r setup, include = FALSE}
+library(keras)
+knitr::opts_chunk$set(comment = NA, eval = FALSE)
+```
+
+In addition to [sequential models](sequential_model.html) and models created with the [functional API](functional_api.html), you may also define models by creating a custom R6 class and writing your own own `call()` forward pass.
+
+The example below illustrates the implementation of a simple custom custom model that implements a multi-layer-perceptron with optional dropout and batch normalization.
+
+## KerasModel R6 Class
+
+To create a custom Keras model, you create an R6 class derived from `KerasModel`, and implement a `call()` method which defines the model's forward-pass behavior:
+
+```{r}
+library(keras)
+
+SimpleMLP <- R6::R6Class("SimpleMLP",
+                                  
+  inherit = KerasModel,
+  
+  public = list(
+    
+    num_classes = NULL,
+    use_bn = NULL,
+    use_dp = NULL,
+    dense1 = NULL,
+    dense2 = NULL,
+    dp = NULL,
+    bn = NULL,
+    
+    initialize = function(num_classes, use_bn = FALSE, use_dp = FALSE) {
+      self$num_classes <- num_classes
+      self$use_bn <- use_bn
+      self$use_dp <- use_dp
+      self$dense1 <- layer_dense(units = 32, activation = "relu")
+      self$dense2 <- layer_dense(units = num_classes, activation = "softmax")
+      if (self$use_dp)
+        self$dp <- layer_dropout(rate = 0.5)
+      if (self$use_bn)
+        self$bn <- layer_batch_normalization(axis = -1)
+    },
+    
+    call = function(inputs, mask = NULL) {
+      x <- self$dense1(inputs)
+      if (self$use_dp)
+        x <- self$dp(x)
+      if (self$use_bn)
+        x <- self$bn(x)
+      self$dense2(x)
+    }
+  )
+)
+```
+
+Layers are defined within the `initialize()` method and the forward pass is specified in the `call()` method. In `call()`, you may specify custom losses by calling `self$add_loss()`, like you would in a custom layer (you can also access any other members of the base Keras model you need to using `self$`).
+
+
+## Model Wrapper Function
+
+In order to use the custom model, you also need to create a wrapper function which instantiates the model using the `keras_model_custom()` function. For example:
+
+```{r}
+# define model wrapper function
+keras_model_simple_mlp <- function(num_classes, use_bn = FALSE, use_dp = FALSE, name = NULL) {
+  keras_model_custom(SimpleMLP, 
+    num_classes = num_classes,
+    use_bn = use_bn,
+    use_dp = use_dp,
+    name = name
+  )
+}
+
+# create the model 
+model <- keras_model_simple_mlp(10, use_dp = TRUE)
+
+# compile graph
+model %>% compile(
+  loss = 'categorical_crossentropy',
+  optimizer = optimizer_rmsprop(),
+  metrics = c('accuracy')
+)
+
+# Generate dummy data
+data <- matrix(runif(1000*100), nrow = 1000, ncol = 100)
+labels <- matrix(round(runif(1000, min = 0, max = 9)), nrow = 1000, ncol = 1)
+
+# Convert labels to categorical one-hot encoding
+one_hot_labels <- to_categorical(labels, num_classes = 10)
+
+# Train the model
+model %>% fit(data, one_hot_labels, epochs=10, batch_size=32)
+```
+
+
+
+
+
+
