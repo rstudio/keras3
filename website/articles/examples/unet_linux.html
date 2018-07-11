@@ -8,8 +8,8 @@
 <title>unet_linux • keras</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
-<script src="../../jquery.sticky-kit.min.js"></script><script src="../../pkgdown.js"></script><link href="../../extra.css" rel="stylesheet">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
+<script src="../../pkgdown.js"></script><link href="../../extra.css" rel="stylesheet">
 <script src="../../extra.js"></script><meta property="og:title" content="unet_linux">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
@@ -20,7 +20,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9002</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9003</span>
       </span>
     </div>
 
@@ -85,6 +85,9 @@
     <li>
       <a href="../../articles/custom_layers.html">Custom Layers</a>
     </li>
+    <li>
+      <a href="../../articles/custom_models.html">Custom Models</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -119,18 +122,18 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>unet_linux</h1>
             
       
       
+      <div class="hidden name"><code>unet_linux.Rmd</code></div>
 
     </div>
 
     
     
-<div class="contents">
 <div class="source-ref">
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/unet_linux.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/unet_linux.R</a></p>
 </div>
@@ -342,11 +345,11 @@
 <a class="sourceLine" id="cb1-201" data-line-number="201">                       mask_file,</a>
 <a class="sourceLine" id="cb1-202" data-line-number="202">                       <span class="dt">target_width =</span> <span class="dv">128</span>, </a>
 <a class="sourceLine" id="cb1-203" data-line-number="203">                       <span class="dt">target_height =</span> <span class="dv">128</span>) {</a>
-<a class="sourceLine" id="cb1-204" data-line-number="204">    img &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/editing">image_read</a></span>(image_file)</a>
-<a class="sourceLine" id="cb1-205" data-line-number="205">    img &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/transform">image_scale</a></span>(img, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))</a>
+<a class="sourceLine" id="cb1-204" data-line-number="204">    img &lt;-<span class="st"> </span><span class="kw">image_read</span>(image_file)</a>
+<a class="sourceLine" id="cb1-205" data-line-number="205">    img &lt;-<span class="st"> </span><span class="kw">image_scale</span>(img, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))</a>
 <a class="sourceLine" id="cb1-206" data-line-number="206">    </a>
-<a class="sourceLine" id="cb1-207" data-line-number="207">    mask &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/editing">image_read</a></span>(mask_file)</a>
-<a class="sourceLine" id="cb1-208" data-line-number="208">    mask &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/transform">image_scale</a></span>(mask, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))</a>
+<a class="sourceLine" id="cb1-207" data-line-number="207">    mask &lt;-<span class="st"> </span><span class="kw">image_read</span>(mask_file)</a>
+<a class="sourceLine" id="cb1-208" data-line-number="208">    mask &lt;-<span class="st"> </span><span class="kw">image_scale</span>(mask, <span class="kw">paste0</span>(target_width, <span class="st">"x"</span>, target_height, <span class="st">"!"</span>))</a>
 <a class="sourceLine" id="cb1-209" data-line-number="209">    <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">img =</span> img, <span class="dt">mask =</span> mask))</a>
 <a class="sourceLine" id="cb1-210" data-line-number="210">}</a>
 <a class="sourceLine" id="cb1-211" data-line-number="211"></a>
@@ -368,7 +371,7 @@
 <a class="sourceLine" id="cb1-227" data-line-number="227">                       hue_shift_lim[<span class="dv">1</span>], </a>
 <a class="sourceLine" id="cb1-228" data-line-number="228">                       hue_shift_lim[<span class="dv">2</span>])</a>
 <a class="sourceLine" id="cb1-229" data-line-number="229">    </a>
-<a class="sourceLine" id="cb1-230" data-line-number="230">    img &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/color">image_modulate</a></span>(img, </a>
+<a class="sourceLine" id="cb1-230" data-line-number="230">    img &lt;-<span class="st"> </span><span class="kw">image_modulate</span>(img, </a>
 <a class="sourceLine" id="cb1-231" data-line-number="231">                          <span class="dt">brightness =</span> brightness_shift, </a>
 <a class="sourceLine" id="cb1-232" data-line-number="232">                          <span class="dt">saturation =</span>  saturation_shift, </a>
 <a class="sourceLine" id="cb1-233" data-line-number="233">                          <span class="dt">hue =</span> hue_shift)</a>
@@ -427,7 +430,7 @@
 <a class="sourceLine" id="cb1-286" data-line-number="286">        masks_iter &lt;&lt;-<span class="st"> </span>masks_iter[<span class="op">-</span>batch_ind]</a>
 <a class="sourceLine" id="cb1-287" data-line-number="287">        </a>
 <a class="sourceLine" id="cb1-288" data-line-number="288">        </a>
-<a class="sourceLine" id="cb1-289" data-line-number="289">        x_y_batch &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dt">i =</span> <span class="dv">1</span><span class="op">:</span>batch_size) <span class="op">%dopar%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb1-289" data-line-number="289">        x_y_batch &lt;-<span class="st"> </span><span class="kw">foreach</span>(<span class="dt">i =</span> <span class="dv">1</span><span class="op">:</span>batch_size) <span class="op">%dopar%</span><span class="st"> </span>{</a>
 <a class="sourceLine" id="cb1-290" data-line-number="290">            x_y_imgs &lt;-<span class="st"> </span><span class="kw">imagesRead</span>(<span class="dt">image_file =</span> batch_images_list[i],</a>
 <a class="sourceLine" id="cb1-291" data-line-number="291">                                   <span class="dt">mask_file =</span> batch_masks_list[i])</a>
 <a class="sourceLine" id="cb1-292" data-line-number="292">            <span class="co"># augmentation</span></a>
@@ -481,7 +484,7 @@
 <a class="sourceLine" id="cb1-340" data-line-number="340">        masks_iter &lt;&lt;-<span class="st"> </span>masks_iter[<span class="op">-</span>batch_ind]</a>
 <a class="sourceLine" id="cb1-341" data-line-number="341">        </a>
 <a class="sourceLine" id="cb1-342" data-line-number="342">        </a>
-<a class="sourceLine" id="cb1-343" data-line-number="343">        x_y_batch &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dt">i =</span> <span class="dv">1</span><span class="op">:</span>batch_size) <span class="op">%dopar%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb1-343" data-line-number="343">        x_y_batch &lt;-<span class="st"> </span><span class="kw">foreach</span>(<span class="dt">i =</span> <span class="dv">1</span><span class="op">:</span>batch_size) <span class="op">%dopar%</span><span class="st"> </span>{</a>
 <a class="sourceLine" id="cb1-344" data-line-number="344">            x_y_imgs &lt;-<span class="st"> </span><span class="kw">imagesRead</span>(<span class="dt">image_file =</span> batch_images_list[i],</a>
 <a class="sourceLine" id="cb1-345" data-line-number="345">                                   <span class="dt">mask_file =</span> batch_masks_list[i])</a>
 <a class="sourceLine" id="cb1-346" data-line-number="346">            <span class="co"># without augmentation</span></a>
@@ -546,7 +549,6 @@
 <a class="sourceLine" id="cb1-405" data-line-number="405">    <span class="dt">verbose =</span> <span class="dv">1</span>,</a>
 <a class="sourceLine" id="cb1-406" data-line-number="406">    <span class="dt">callbacks =</span> callbacks_list</a>
 <a class="sourceLine" id="cb1-407" data-line-number="407">)</a></code></pre></div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

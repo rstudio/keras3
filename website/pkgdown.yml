@@ -1,12 +1,13 @@
 pandoc: 2.2.1
-pkgdown: 0.1.0.9000
-pkgdown_sha: cb70bf3abeac66cb969901ef5f9caeac9c2ab8cc
+pkgdown: 1.1.0
+pkgdown_sha: ~
 articles:
   about_keras_layers: about_keras_layers.html
   about_keras_models: about_keras_models.html
   applications: applications.html
   backend: backend.html
   custom_layers: custom_layers.html
+  custom_models: custom_models.html
   addition_rnn: examples/addition_rnn.html
   babi_memnn: examples/babi_memnn.html
   babi_rnn: examples/babi_rnn.html

@@ -8,8 +8,8 @@
 <title>lstm_seq2seq • keras</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
-<script src="../../jquery.sticky-kit.min.js"></script><script src="../../pkgdown.js"></script><link href="../../extra.css" rel="stylesheet">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
+<script src="../../pkgdown.js"></script><link href="../../extra.css" rel="stylesheet">
 <script src="../../extra.js"></script><meta property="og:title" content="lstm_seq2seq">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
@@ -20,7 +20,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9002</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9003</span>
       </span>
     </div>
 
@@ -85,6 +85,9 @@
     <li>
       <a href="../../articles/custom_layers.html">Custom Layers</a>
     </li>
+    <li>
+      <a href="../../articles/custom_models.html">Custom Models</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -119,18 +122,18 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>lstm_seq2seq</h1>
             
       
       
+      <div class="hidden name"><code>lstm_seq2seq.Rmd</code></div>
 
     </div>
 
     
     
-<div class="contents">
 <div class="source-ref">
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/lstm_seq2seq.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/lstm_seq2seq.R</a></p>
 </div>
@@ -172,16 +175,16 @@
 <a class="sourceLine" id="cb1-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9">## Path to the data txt file on disk.</a>
 <a class="sourceLine" id="cb1-10" data-line-number="10">data_path =<span class="st"> 'fra.txt'</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">text &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/data.table/topics/fread">fread</a></span>(data_path, <span class="dt">sep=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, <span class="dt">header=</span><span class="ot">FALSE</span>, <span class="dt">nrows=</span>num_samples)</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">text &lt;-<span class="st"> </span><span class="kw">fread</span>(data_path, <span class="dt">sep=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, <span class="dt">header=</span><span class="ot">FALSE</span>, <span class="dt">nrows=</span>num_samples)</a>
 <a class="sourceLine" id="cb1-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb1-13" data-line-number="13">## Vectorize the data.</a>
 <a class="sourceLine" id="cb1-14" data-line-number="14">input_texts  &lt;-<span class="st"> </span>text[[<span class="dv">1</span>]]</a>
 <a class="sourceLine" id="cb1-15" data-line-number="15">target_texts &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">'</span><span class="ch">\t</span><span class="st">'</span>,text[[<span class="dv">2</span>]],<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">input_texts  &lt;-<span class="st"> </span><span class="kw">lapply</span>( input_texts, <span class="cf">function</span>(s) <span class="kw"><a href="http://www.rdocumentation.org/packages/data.table/topics/tstrsplit">strsplit</a></span>(s, <span class="dt">split=</span><span class="st">""</span>)[[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb1-17" data-line-number="17">target_texts &lt;-<span class="st"> </span><span class="kw">lapply</span>( target_texts, <span class="cf">function</span>(s) <span class="kw"><a href="http://www.rdocumentation.org/packages/data.table/topics/tstrsplit">strsplit</a></span>(s, <span class="dt">split=</span><span class="st">""</span>)[[<span class="dv">1</span>]])</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">input_texts  &lt;-<span class="st"> </span><span class="kw">lapply</span>( input_texts, <span class="cf">function</span>(s) <span class="kw">strsplit</span>(s, <span class="dt">split=</span><span class="st">""</span>)[[<span class="dv">1</span>]])</a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">target_texts &lt;-<span class="st"> </span><span class="kw">lapply</span>( target_texts, <span class="cf">function</span>(s) <span class="kw">strsplit</span>(s, <span class="dt">split=</span><span class="st">""</span>)[[<span class="dv">1</span>]])</a>
 <a class="sourceLine" id="cb1-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb1-19" data-line-number="19">input_characters  &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/data.table/topics/duplicated">unique</a></span>(<span class="kw">unlist</span>(input_texts)))</a>
-<a class="sourceLine" id="cb1-20" data-line-number="20">target_characters &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/data.table/topics/duplicated">unique</a></span>(<span class="kw">unlist</span>(target_texts)))</a>
+<a class="sourceLine" id="cb1-19" data-line-number="19">input_characters  &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">unique</span>(<span class="kw">unlist</span>(input_texts)))</a>
+<a class="sourceLine" id="cb1-20" data-line-number="20">target_characters &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">unique</span>(<span class="kw">unlist</span>(target_texts)))</a>
 <a class="sourceLine" id="cb1-21" data-line-number="21">num_encoder_tokens &lt;-<span class="st"> </span><span class="kw">length</span>(input_characters)</a>
 <a class="sourceLine" id="cb1-22" data-line-number="22">num_decoder_tokens &lt;-<span class="st"> </span><span class="kw">length</span>(target_characters)</a>
 <a class="sourceLine" id="cb1-23" data-line-number="23">max_encoder_seq_length &lt;-<span class="st"> </span><span class="kw">max</span>(<span class="kw">sapply</span>(input_texts,length))</a>
@@ -336,7 +339,6 @@
 <a class="sourceLine" id="cb5-82" data-line-number="82">  <span class="kw">cat</span>(<span class="st">'Target sentence : '</span>, target_sentence,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</a>
 <a class="sourceLine" id="cb5-83" data-line-number="83">  <span class="kw">cat</span>(<span class="st">'Decoded sentence: '</span>, decoded_sentence,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</a>
 <a class="sourceLine" id="cb5-84" data-line-number="84">}</a></code></pre></div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
