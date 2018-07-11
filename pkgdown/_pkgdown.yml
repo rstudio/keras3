@@ -122,6 +122,7 @@ reference:
   - title: "Activation Layers"
     contents:
       - layer_activation
+      - layer_activation_relu
       - layer_activation_leaky_relu
       - layer_activation_parametric_relu
       - layer_activation_thresholded_relu
@@ -218,6 +219,7 @@ reference:
       - application_vgg
       - application_resnet50
       - application_mobilenet
+      - application_mobilenet_v2
       - application_densenet
       - application_nasnet
       - imagenet_preprocess_input
