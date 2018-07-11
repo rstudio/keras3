@@ -2,7 +2,7 @@
 import os
 
 if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'tensorflow'):
-  from tensorflow.python.keras._impl.keras.engine.topology import Layer
+  from tensorflow.python.keras.engine.topology import Layer
   def shape_filter(shape):
     if not isinstance(shape, list):
       return shape.as_list()

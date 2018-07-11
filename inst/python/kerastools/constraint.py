@@ -2,7 +2,7 @@
 import os
 
 if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'tensorflow'):
-  from tensorflow.python.keras._impl.keras.constraints import Constraint
+  from tensorflow.python.keras.constraints import Constraint
 else:
   from keras.constraints import Constraint
 

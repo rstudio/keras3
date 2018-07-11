@@ -152,7 +152,7 @@ resolve_implementation_module <- function() {
   
   # set the implementation module
   if (identical(implementation, "tensorflow"))
-    implementation_module <- "tensorflow.python.keras._impl.keras"
+    implementation_module <- "tensorflow.python.keras"
   else
     implementation_module <- implementation
   
@@ -207,18 +207,21 @@ check_implementation_version <- function() {
   if (is_tensorflow_implementation(implementation)) {
     name <- "TensorFlow"
     ver <- tf_version() 
-    required_ver <- "1.1"
+    required_ver <- "1.9"
+    update_with <- "tensorflow::install_tensorflow()"
   } else if (is_keras_implementation(implementation)) {
     name <- "Keras"
     ver <- keras_version()
     required_ver <- "2.0.0"
+    update_with <- "keras::install_keras()"
   }
   
   # check version if we can
   if (!is.null(required_ver)) {
     if (ver < required_ver) {
-      message("Keras loaded from ", implementation, " Python module v", ver, ", however version ",
-              required_ver, " is required. Please update the ", implementation, " Python package.")
+      stop("Keras loaded from ", implementation, " v", ver, ", however version ",
+            required_ver, " is required. Please update with ", update_with, ".",
+           call. = FALSE)
     }
   }
 }
