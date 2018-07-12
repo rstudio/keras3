@@ -128,9 +128,6 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
     }
   }
   
-  # extra packages
-  extra_packages <- c("keras", extra_packages)
-  
   # perform the install
   install_tensorflow(method = method,
                      conda = conda,
