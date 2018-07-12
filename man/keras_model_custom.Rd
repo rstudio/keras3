@@ -4,18 +4,20 @@
 \alias{keras_model_custom}
 \title{Create a Keras custom model}
 \usage{
-keras_model_custom(model_class, ..., name = NULL)
+keras_model_custom(model_fn, name = NULL)
 }
 \arguments{
-\item{model_class}{R6 class of type KerasModel}
+\item{model_fn}{Function that returns an R custom model}
 
-\item{...}{Additional arguments for R6 constructor}
-
-\item{name}{Optional model name}
+\item{name}{Optional name for model}
 }
 \value{
 A Keras model
 }
 \description{
 Create a Keras custom model
+}
+\details{
+For documentation on using custom models,
+see \url{https://keras.rstudio.com/articles/custom_models.html}.
 }

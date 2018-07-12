@@ -60,6 +60,7 @@ reference:
     contents:
       - keras_model
       - keras_model_sequential
+      - keras_model_custom
       - multi_gpu_model
       - summary.keras.engine.training.Model
       - compile
@@ -81,8 +82,6 @@ reference:
       - serialize_model
       - clone_model
       - freeze_weights
-      - KerasModel
-      - keras_model_custom
  
   - title: "Core Layers"
     contents:

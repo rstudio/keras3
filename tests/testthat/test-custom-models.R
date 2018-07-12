@@ -2,52 +2,34 @@ context("custom-models")
 
 source("utils.R")
 
-# Custom model class
-SimpleMLP <- R6::R6Class("SimpleMLP",
-                         
-  inherit = KerasModel,
-  
-  public = list(
-    
-    num_classes = NULL,
-    use_bn = NULL,
-    use_dp = NULL,
-    dense1 = NULL,
-    dense2 = NULL,
-    dp = NULL,
-    bn = NULL,
-    
-    initialize = function(num_classes, use_bn = FALSE, use_dp = FALSE) {
-      self$num_classes <- num_classes
-      self$use_bn <- use_bn
-      self$use_dp <- use_dp
-      self$dense1 <- layer_dense(units = 32, activation = "relu")
-      self$dense2 <- layer_dense(units = num_classes, activation = "softmax")
-      if (self$use_dp)
-        self$dp <- layer_dropout(rate = 0.5)
-      if (self$use_bn)
-        self$bn <- layer_batch_normalization(axis = -1)
-    },
-    
-    call = function(inputs, mask = NULL) {
-      x <- self$dense1(inputs)
-      if (self$use_dp)
-        x <- self$dp(x)
-      if (self$use_bn)
-        x <- self$bn(x)
-      self$dense2(x)
-    }
-  )
-)
-
 # define model wrapper function
-keras_model_simple_mlp <- function(num_classes, use_bn = FALSE, use_dp = FALSE, name = NULL) {
-  keras_model_custom(SimpleMLP, 
-    num_classes = num_classes,
-    use_bn = use_bn,
-    use_dp = use_dp,
-    name = name
-  )
+library(keras)
+
+keras_model_simple_mlp <- function(num_classes, 
+                                   use_bn = FALSE, use_dp = FALSE, 
+                                   name = NULL) {
+  
+  # define and return a custom model
+  keras_model_custom(name = name, function(model) {
+    
+    # create layers we'll need for the call (this code executes once)
+    dense1 <- layer_dense(units = 32, activation = "relu")
+    dense2 <- layer_dense(units = num_classes, activation = "softmax")
+    if (use_dp)
+      dp <- layer_dropout(rate = 0.5)
+    if (use_bn)
+      bn <- layer_batch_normalization(axis = -1)
+    
+    # implement call (this code executes during training & inference)
+    function(inputs, mask = NULL) {
+      x <- dense1(inputs)
+      if (use_dp)
+        x <- dp(x)
+      if (use_bn)
+        x <- bn(x)
+      dense2(x)
+    }
+  })
 }
 
 test_succeeds("Use an R-based custom Keras model", {
