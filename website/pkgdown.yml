@@ -1,6 +1,6 @@
 pandoc: 2.2.1
-pkgdown: 1.1.0
-pkgdown_sha: ~
+pkgdown: 0.1.0.9000
+pkgdown_sha: cb70bf3abeac66cb969901ef5f9caeac9c2ab8cc
 articles:
   about_keras_layers: about_keras_layers.html
   about_keras_models: about_keras_models.html

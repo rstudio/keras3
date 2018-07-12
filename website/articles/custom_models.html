@@ -8,8 +8,8 @@
 <title>Writing Custom Keras Models • keras</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <script src="../extra.js"></script><meta property="og:title" content="Writing Custom Keras Models">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
@@ -20,7 +20,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-vignette">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -122,97 +122,86 @@
 
       
       </header><div class="row">
-  <div class="col-md-9 contents">
+  <div class="col-md-9">
     <div class="page-header toc-ignore">
       <h1>Writing Custom Keras Models</h1>
             
       
       
-      <div class="hidden name"><code>custom_models.Rmd</code></div>
 
     </div>
 
     
     
-<p>In addition to <a href="sequential_model.html">sequential models</a> and models created with the <a href="functional_api.html">functional API</a>, you may also define models by creating a custom R6 class and writing your own own <code>call()</code> forward pass.</p>
-<p>The example below illustrates the implementation of a simple custom custom model that implements a multi-layer-perceptron with optional dropout and batch normalization.</p>
-<div id="kerasmodel-r6-class" class="section level2">
+<div class="contents">
+<div id="overview" class="section level2">
 <h2 class="hasAnchor">
-<a href="#kerasmodel-r6-class" class="anchor"></a>KerasModel R6 Class</h2>
-<p>To create a custom Keras model, you create an R6 class derived from <code>KerasModel</code>, and implement a <code>call()</code> method which defines the model’s forward-pass behavior:</p>
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>In addition to <a href="sequential_model.html">sequential models</a> and models created with the <a href="functional_api.html">functional API</a>, you may also define models by defining a custom <code>call()</code> (forward pass) operation.</p>
+<p>To create a custom Keras model, you call the <code><a href="../reference/keras_model_custom.html">keras_model_custom()</a></code> function, passing it an R function which in turn returns another R function that implements the custom <code>call()</code> (forward pass) operation. The R function you pass takes a <code>model</code> argument, which provides access to the underlying Keras model object should you need it.</p>
+<p>Typically, you’ll wrap your call to <code><a href="../reference/keras_model_custom.html">keras_model_custom()</a></code> in yet another function that enables callers to easily instantiate your custom model.</p>
+</div>
+<div id="creating-a-custom-model" class="section level2">
+<h2 class="hasAnchor">
+<a href="#creating-a-custom-model" class="anchor"></a>Creating a Custom Model</h2>
+<p>This example demonstrates the implementation of a simple custom model that implements a multi-layer-perceptron with optional dropout and batch normalization:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(keras)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">SimpleMLP &lt;-<span class="st"> </span>R6<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/R6/topics/R6Class">R6Class</a></span>(<span class="st">"SimpleMLP"</span>,</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">                                  </a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="dt">inherit =</span> KerasModel,</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">keras_model_simple_mlp &lt;-<span class="st"> </span><span class="cf">function</span>(num_classes, </a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">                                   <span class="dt">use_bn =</span> <span class="ot">FALSE</span>, <span class="dt">use_dp =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">                                   <span class="dt">name =</span> <span class="ot">NULL</span>) {</a>
 <a class="sourceLine" id="cb1-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="dt">public =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">    </a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="dt">num_classes =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">    <span class="dt">use_bn =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">    <span class="dt">use_dp =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">    <span class="dt">dense1 =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">    <span class="dt">dense2 =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">    <span class="dt">dp =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb1-15" data-line-number="15">    <span class="dt">bn =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">    </a>
-<a class="sourceLine" id="cb1-17" data-line-number="17">    <span class="dt">initialize =</span> <span class="cf">function</span>(num_classes, <span class="dt">use_bn =</span> <span class="ot">FALSE</span>, <span class="dt">use_dp =</span> <span class="ot">FALSE</span>) {</a>
-<a class="sourceLine" id="cb1-18" data-line-number="18">      self<span class="op">$</span>num_classes &lt;-<span class="st"> </span>num_classes</a>
-<a class="sourceLine" id="cb1-19" data-line-number="19">      self<span class="op">$</span>use_bn &lt;-<span class="st"> </span>use_bn</a>
-<a class="sourceLine" id="cb1-20" data-line-number="20">      self<span class="op">$</span>use_dp &lt;-<span class="st"> </span>use_dp</a>
-<a class="sourceLine" id="cb1-21" data-line-number="21">      self<span class="op">$</span>dense1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">"relu"</span>)</a>
-<a class="sourceLine" id="cb1-22" data-line-number="22">      self<span class="op">$</span>dense2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> num_classes, <span class="dt">activation =</span> <span class="st">"softmax"</span>)</a>
-<a class="sourceLine" id="cb1-23" data-line-number="23">      <span class="cf">if</span> (self<span class="op">$</span>use_dp)</a>
-<a class="sourceLine" id="cb1-24" data-line-number="24">        self<span class="op">$</span>dp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb1-25" data-line-number="25">      <span class="cf">if</span> (self<span class="op">$</span>use_bn)</a>
-<a class="sourceLine" id="cb1-26" data-line-number="26">        self<span class="op">$</span>bn &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>(<span class="dt">axis =</span> <span class="dv">-1</span>)</a>
-<a class="sourceLine" id="cb1-27" data-line-number="27">    },</a>
-<a class="sourceLine" id="cb1-28" data-line-number="28">    </a>
-<a class="sourceLine" id="cb1-29" data-line-number="29">    <span class="dt">call =</span> <span class="cf">function</span>(inputs, <span class="dt">mask =</span> <span class="ot">NULL</span>) {</a>
-<a class="sourceLine" id="cb1-30" data-line-number="30">      x &lt;-<span class="st"> </span>self<span class="op">$</span><span class="kw">dense1</span>(inputs)</a>
-<a class="sourceLine" id="cb1-31" data-line-number="31">      <span class="cf">if</span> (self<span class="op">$</span>use_dp)</a>
-<a class="sourceLine" id="cb1-32" data-line-number="32">        x &lt;-<span class="st"> </span>self<span class="op">$</span><span class="kw">dp</span>(x)</a>
-<a class="sourceLine" id="cb1-33" data-line-number="33">      <span class="cf">if</span> (self<span class="op">$</span>use_bn)</a>
-<a class="sourceLine" id="cb1-34" data-line-number="34">        x &lt;-<span class="st"> </span>self<span class="op">$</span><span class="kw">bn</span>(x)</a>
-<a class="sourceLine" id="cb1-35" data-line-number="35">      self<span class="op">$</span><span class="kw">dense2</span>(x)</a>
-<a class="sourceLine" id="cb1-36" data-line-number="36">    }</a>
-<a class="sourceLine" id="cb1-37" data-line-number="37">  )</a>
-<a class="sourceLine" id="cb1-38" data-line-number="38">)</a></code></pre></div>
-<p>Layers are defined within the <code>initialize()</code> method and the forward pass is specified in the <code>call()</code> method. In <code>call()</code>, you may specify custom losses by calling <code>self$add_loss()</code>, like you would in a custom layer (you can also access any other members of the base Keras model you need to using <code>self$</code>).</p>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="co"># define and return a custom model</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="kw"><a href="../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="dt">name =</span> name, <span class="cf">function</span>(model) {</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">    </a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">    <span class="co"># create layers we'll need for the call (this code executes once)</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">    dense1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">"relu"</span>)</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">    dense2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> num_classes, <span class="dt">activation =</span> <span class="st">"softmax"</span>)</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">    <span class="cf">if</span> (use_dp)</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">      dp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">    <span class="cf">if</span> (use_bn)</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">      bn &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>(<span class="dt">axis =</span> <span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">    </a>
+<a class="sourceLine" id="cb1-18" data-line-number="18">    <span class="co"># implement call (this code executes during training &amp; inference)</span></a>
+<a class="sourceLine" id="cb1-19" data-line-number="19">    <span class="cf">function</span>(inputs, <span class="dt">mask =</span> <span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb1-20" data-line-number="20">      x &lt;-<span class="st"> </span><span class="kw">dense1</span>(inputs)</a>
+<a class="sourceLine" id="cb1-21" data-line-number="21">      <span class="cf">if</span> (use_dp)</a>
+<a class="sourceLine" id="cb1-22" data-line-number="22">        x &lt;-<span class="st"> </span><span class="kw">dp</span>(x)</a>
+<a class="sourceLine" id="cb1-23" data-line-number="23">      <span class="cf">if</span> (use_bn)</a>
+<a class="sourceLine" id="cb1-24" data-line-number="24">        x &lt;-<span class="st"> </span><span class="kw">bn</span>(x)</a>
+<a class="sourceLine" id="cb1-25" data-line-number="25">      <span class="kw">dense2</span>(x)</a>
+<a class="sourceLine" id="cb1-26" data-line-number="26">    }</a>
+<a class="sourceLine" id="cb1-27" data-line-number="27">  })</a>
+<a class="sourceLine" id="cb1-28" data-line-number="28">}</a></code></pre></div>
+<p>Note that we include a <code>name</code> parameter so that users can optionally provide a human readable name for the model.</p>
+<p>Also note that in <code>call()</code>, you may specify custom losses by calling <code>model$add_loss()</code>. You can also access any other members of the Keras model you need (or even add fields to the model) by using <code>model$</code>.</p>
 </div>
-<div id="model-wrapper-function" class="section level2">
+<div id="using-a-custom-model" class="section level2">
 <h2 class="hasAnchor">
-<a href="#model-wrapper-function" class="anchor"></a>Model Wrapper Function</h2>
-<p>In order to use the custom model, you also need to create a wrapper function which instantiates the model using the <code><a href="../reference/keras_model_custom.html">keras_model_custom()</a></code> function. For example:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># define model wrapper function</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">keras_model_simple_mlp &lt;-<span class="st"> </span><span class="cf">function</span>(num_classes, <span class="dt">use_bn =</span> <span class="ot">FALSE</span>, <span class="dt">use_dp =</span> <span class="ot">FALSE</span>, <span class="dt">name =</span> <span class="ot">NULL</span>) {</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="kw"><a href="../reference/keras_model_custom.html">keras_model_custom</a></span>(SimpleMLP, </a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">    <span class="dt">num_classes =</span> num_classes,</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">    <span class="dt">use_bn =</span> use_bn,</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">    <span class="dt">use_dp =</span> use_dp,</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">    <span class="dt">name =</span> name</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">  )</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">}</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co"># create the model </span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">model &lt;-<span class="st"> </span><span class="kw">keras_model_simple_mlp</span>(<span class="dv">10</span>, <span class="dt">use_dp =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co"># compile graph</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">  <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,</a>
-<a class="sourceLine" id="cb2-17" data-line-number="17">  <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(),</a>
-<a class="sourceLine" id="cb2-18" data-line-number="18">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)</a>
-<a class="sourceLine" id="cb2-19" data-line-number="19">)</a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co"># Generate dummy data</span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22">data &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">1000</span><span class="op">*</span><span class="dv">100</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb2-23" data-line-number="23">labels &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>)), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb2-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co"># Convert labels to categorical one-hot encoding</span></a>
-<a class="sourceLine" id="cb2-26" data-line-number="26">one_hot_labels &lt;-<span class="st"> </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(labels, <span class="dt">num_classes =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb2-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co"># Train the model</span></a>
-<a class="sourceLine" id="cb2-29" data-line-number="29">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, one_hot_labels, <span class="dt">epochs=</span><span class="dv">10</span>, <span class="dt">batch_size=</span><span class="dv">32</span>)</a></code></pre></div>
+<a href="#using-a-custom-model" class="anchor"></a>Using a Custom Model</h2>
+<p>To use a custom model, just call your model’s high-level wrapper function. For example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(keras)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co"># create the model </span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">model &lt;-<span class="st"> </span><span class="kw">keras_model_simple_mlp</span>(<span class="dt">num_classes =</span> <span class="dv">10</span>, <span class="dt">use_dp =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co"># compile graph</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">  <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">  <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(),</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">)</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co"># Generate dummy data</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">data &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">1000</span><span class="op">*</span><span class="dv">100</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">labels &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">9</span>)), <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co"># Convert labels to categorical one-hot encoding</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">one_hot_labels &lt;-<span class="st"> </span><span class="kw"><a href="../reference/to_categorical.html">to_categorical</a></span>(labels, <span class="dt">num_classes =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co"># Train the model</span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, one_hot_labels, <span class="dt">epochs=</span><span class="dv">10</span>, <span class="dt">batch_size=</span><span class="dv">32</span>)</a></code></pre></div>
+</div>
 </div>
   </div>
 
@@ -221,8 +210,9 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#kerasmodel-r6-class">KerasModel R6 Class</a></li>
-      <li><a href="#model-wrapper-function">Model Wrapper Function</a></li>
+<li><a href="#overview">Overview</a></li>
+      <li><a href="#creating-a-custom-model">Creating a Custom Model</a></li>
+      <li><a href="#using-a-custom-model">Using a Custom Model</a></li>
       </ul>
 </div>
       </div>
