@@ -26,7 +26,7 @@ Depends:
     R (>= 3.2)
 Imports:
     reticulate (>= 1.9), 
-    tensorflow (>= 1.8.0.9004),
+    tensorflow (>= 1.8.0.9005),
     tfruns (>= 1.0),
     magrittr, 
     zeallot,
