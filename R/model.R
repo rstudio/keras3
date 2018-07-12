@@ -981,7 +981,7 @@ resolve_tensorflow_dataset <- function(x) {
 #' Retrieves a layer based on either its name (unique) or index.
 #'
 #' Indices are based on order of horizontal graph traversal (bottom-up) and are
-#' 0-based. If `name` and `index` are both provided, `index` will take
+#' 1-based. If `name` and `index` are both provided, `index` will take
 #' precedence.
 #'
 #' @param object Keras model object
@@ -994,9 +994,18 @@ resolve_tensorflow_dataset <- function(x) {
 #'
 #' @export
 get_layer <- function(object, name = NULL, index = NULL) {
+  
+  # convert to layer index
+  index <- as_layer_index(index)
+  
+  # check for 0
+  if (identical(index, -1L))
+    stop("Indexes for get_layer() are 1-based (0 was passed as the index)")
+  
+  # call get_layer
   object$get_layer(
     name = name,
-    index = as_nullable_integer(index)
+    index = index
   )
 }
 

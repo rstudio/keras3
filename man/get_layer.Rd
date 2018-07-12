@@ -18,7 +18,7 @@ A layer instance.
 }
 \description{
 Indices are based on order of horizontal graph traversal (bottom-up) and are
-0-based. If \code{name} and \code{index} are both provided, \code{index} will take
+1-based. If \code{name} and \code{index} are both provided, \code{index} will take
 precedence.
 }
 \seealso{

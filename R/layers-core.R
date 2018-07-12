@@ -405,6 +405,13 @@ as_nullable_integer <- function(x) {
     as.integer(x)
 }
 
+as_layer_index <- function(x) {
+  x <- as_nullable_integer(x)
+  if (!is.null(x))
+    x <- x - 1L
+  x
+}
+
 as_nullable_array <- function(x) {
   if (is.null(x))
     x
