@@ -22,7 +22,7 @@ for more details.}
 \item{generator}{Image data generator (default generator does no data
 augmentation/normalization transformations)}
 
-\item{target_size}{integer vectir, default: \code{c(256, 256)}. The dimensions to
+\item{target_size}{integer vector, default: \code{c(256, 256)}. The dimensions to
 which all images found will be resized.}
 
 \item{color_mode}{one of "grayscale", "rbg". Default: "rgb". Whether the
