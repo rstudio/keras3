@@ -46,6 +46,8 @@ Install the development version with: `install_github("rstudio/keras")`
   
 - Re-export `shape()` function from tensorflow package
 
+- Re-export `tuple()` function from reticulate package
+
 - Indexes for `get_layer()` are now 1-based (for consistency w/ `freeze_weights()`)
 
 

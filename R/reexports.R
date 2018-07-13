@@ -38,6 +38,10 @@ reticulate::use_condaenv
 #' @export
 reticulate::array_reshape
 
+#' @importFrom reticulate tuple
+#' @export
+reticulate::tuple
+
 #' @importFrom tensorflow use_session_with_seed
 #' @export
 tensorflow::use_session_with_seed
