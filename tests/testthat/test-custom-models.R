@@ -13,21 +13,21 @@ keras_model_simple_mlp <- function(num_classes,
   keras_model_custom(name = name, function(model) {
     
     # create layers we'll need for the call (this code executes once)
-    dense1 <- layer_dense(units = 32, activation = "relu")
-    dense2 <- layer_dense(units = num_classes, activation = "softmax")
+    model$dense1 <- layer_dense(units = 32, activation = "relu")
+    model$dense2 <- layer_dense(units = num_classes, activation = "softmax")
     if (use_dp)
-      dp <- layer_dropout(rate = 0.5)
+      model$dp <- layer_dropout(rate = 0.5)
     if (use_bn)
-      bn <- layer_batch_normalization(axis = -1)
+      model$bn <- layer_batch_normalization(axis = -1)
     
     # implement call (this code executes during training & inference)
     function(inputs, mask = NULL) {
-      x <- dense1(inputs)
+      x <- model$dense1(inputs)
       if (use_dp)
-        x <- dp(x)
+        x <- model$dp(x)
       if (use_bn)
-        x <- bn(x)
-      dense2(x)
+        x <- model$bn(x)
+      model$dense2(x)
     }
   })
 }

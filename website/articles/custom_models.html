@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9003</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9004</span>
       </span>
     </div>
 
@@ -155,26 +155,27 @@
 <a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="kw"><a href="../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="dt">name =</span> name, <span class="cf">function</span>(model) {</a>
 <a class="sourceLine" id="cb1-9" data-line-number="9">    </a>
 <a class="sourceLine" id="cb1-10" data-line-number="10">    <span class="co"># create layers we'll need for the call (this code executes once)</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">    dense1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">"relu"</span>)</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">    dense2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> num_classes, <span class="dt">activation =</span> <span class="st">"softmax"</span>)</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">    model<span class="op">$</span>dense1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">"relu"</span>)</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">    model<span class="op">$</span>dense2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> num_classes, <span class="dt">activation =</span> <span class="st">"softmax"</span>)</a>
 <a class="sourceLine" id="cb1-13" data-line-number="13">    <span class="cf">if</span> (use_dp)</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">      dp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">      model<span class="op">$</span>dp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="dt">rate =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb1-15" data-line-number="15">    <span class="cf">if</span> (use_bn)</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">      bn &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>(<span class="dt">axis =</span> <span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">      model<span class="op">$</span>bn &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>(<span class="dt">axis =</span> <span class="dv">-1</span>)</a>
 <a class="sourceLine" id="cb1-17" data-line-number="17">    </a>
 <a class="sourceLine" id="cb1-18" data-line-number="18">    <span class="co"># implement call (this code executes during training &amp; inference)</span></a>
 <a class="sourceLine" id="cb1-19" data-line-number="19">    <span class="cf">function</span>(inputs, <span class="dt">mask =</span> <span class="ot">NULL</span>) {</a>
-<a class="sourceLine" id="cb1-20" data-line-number="20">      x &lt;-<span class="st"> </span><span class="kw">dense1</span>(inputs)</a>
+<a class="sourceLine" id="cb1-20" data-line-number="20">      x &lt;-<span class="st"> </span>model<span class="op">$</span><span class="kw">dense1</span>(inputs)</a>
 <a class="sourceLine" id="cb1-21" data-line-number="21">      <span class="cf">if</span> (use_dp)</a>
-<a class="sourceLine" id="cb1-22" data-line-number="22">        x &lt;-<span class="st"> </span><span class="kw">dp</span>(x)</a>
+<a class="sourceLine" id="cb1-22" data-line-number="22">        x &lt;-<span class="st"> </span>model<span class="op">$</span><span class="kw">dp</span>(x)</a>
 <a class="sourceLine" id="cb1-23" data-line-number="23">      <span class="cf">if</span> (use_bn)</a>
-<a class="sourceLine" id="cb1-24" data-line-number="24">        x &lt;-<span class="st"> </span><span class="kw">bn</span>(x)</a>
-<a class="sourceLine" id="cb1-25" data-line-number="25">      <span class="kw">dense2</span>(x)</a>
+<a class="sourceLine" id="cb1-24" data-line-number="24">        x &lt;-<span class="st"> </span>model<span class="op">$</span><span class="kw">bn</span>(x)</a>
+<a class="sourceLine" id="cb1-25" data-line-number="25">      model<span class="op">$</span><span class="kw">dense2</span>(x)</a>
 <a class="sourceLine" id="cb1-26" data-line-number="26">    }</a>
 <a class="sourceLine" id="cb1-27" data-line-number="27">  })</a>
 <a class="sourceLine" id="cb1-28" data-line-number="28">}</a></code></pre></div>
 <p>Note that we include a <code>name</code> parameter so that users can optionally provide a human readable name for the model.</p>
-<p>Also note that in <code>call()</code>, you may specify custom losses by calling <code>model$add_loss()</code>. You can also access any other members of the Keras model you need (or even add fields to the model) by using <code>model$</code>.</p>
+<p>Note also that when we create layers to be used in our forward pass we set them onto the <code>model</code> object so they are tracked appropriately by Keras.</p>
+<p>In <code>call()</code>, you may specify custom losses by calling <code>model$add_loss()</code>. You can also access any other members of the Keras model you need (or even add fields to the model) by using <code>model$</code>.</p>
 </div>
 <div id="using-a-custom-model" class="section level2">
 <h2 class="hasAnchor">
