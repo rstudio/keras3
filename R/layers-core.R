@@ -412,13 +412,6 @@ as_layer_index <- function(x) {
   x
 }
 
-as_nullable_array <- function(x) {
-  if (is.null(x))
-    x
-  else
-    as.array(x)
-}
-
 # Helper function to normalize paths
 normalize_path <- function(path) {
   if (is.null(path))

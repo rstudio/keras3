@@ -50,6 +50,8 @@ Install the development version with: `install_github("rstudio/keras")`
 
 - Indexes for `get_layer()` are now 1-based (for consistency w/ `freeze_weights()`)
 
+- Accept named list for `sample_weight` argument to `fit()`
+
 
 ## Keras 2.1.6 (CRAN)
 

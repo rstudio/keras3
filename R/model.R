@@ -417,7 +417,7 @@ fit <- function(object, x = NULL, y = NULL, batch_size=NULL, epochs=10,
     validation_split = validation_split,
     shuffle = shuffle,
     class_weight = as_class_weight(class_weight),
-    sample_weight = as_nullable_array(sample_weight),
+    sample_weight = keras_array(sample_weight),
     initial_epoch = as.integer(initial_epoch)
   )
   
