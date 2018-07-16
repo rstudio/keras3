@@ -959,12 +959,19 @@ resolve_tensorflow_dataset <- function(x) {
   if (is_tensorflow_dataset(x)) {
     
     # check version compatibility
-    if (keras_version() < "2.2.0")
-      stop("Keras v2.2 or higher is required for direct tensor input to models", call. = FALSE)
-    if (!is_backend("tensorflow"))
-      stop("The tensorflow backend is required for direct tensor input to models", call. = FALSE)
-    if (tensorflow::tf_version() < "1.8")
-      stop("TensorFlow v1.8 or higher is required for direct tensor input to models", call. = FALSE)
+    
+    if (is_tensorflow_implementation()) {
+      if (tensorflow::tf_version() < "1.9")
+        stop("TensorFlow v1.9 or higher is required for direct tensor input to models", call. = FALSE)
+    } else {
+      if (keras_version() < "2.2.0")
+        stop("Keras v2.2 or higher is required for direct tensor input to models", call. = FALSE)
+      if (!is_backend("tensorflow"))
+        stop("The tensorflow backend is required for direct tensor input to models", call. = FALSE)
+      if (tensorflow::tf_version() < "1.8")
+        stop("TensorFlow v1.8 or higher is required for direct tensor input to models", call. = FALSE)
+    }
+    
     
     # yield iterators
     iter = x$make_one_shot_iterator()
