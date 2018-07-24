@@ -1,7 +1,5 @@
 
-## Keras 2.2.0 (development)
-
-Install the development version with: `install_github("rstudio/keras")`
+## Keras 2.2.0 (CRAN)
 
 - Fix issue with serializing models that have constraint arguments
 
@@ -53,7 +51,7 @@ Install the development version with: `install_github("rstudio/keras")`
 - Accept named list for `sample_weight` argument to `fit()`
 
 
-## Keras 2.1.6 (CRAN)
+## Keras 2.1.6 
 
 - Fix issue with single-element vectors passed to text preprocessing functions
 
