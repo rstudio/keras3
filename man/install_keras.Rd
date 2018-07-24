@@ -5,7 +5,7 @@
 \title{Install Keras and the TensorFlow backend}
 \usage{
 install_keras(method = c("auto", "virtualenv", "conda"), conda = "auto",
-  tensorflow = "default", extra_packages = NULL)
+  tensorflow = "default", extra_packages = c("tensorflow-hub"))
 }
 \arguments{
 \item{method}{Installation method ("virtualenv" or "conda")}
