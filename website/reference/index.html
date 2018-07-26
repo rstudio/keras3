@@ -21,16 +21,22 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 <meta property="og:title" content="Function reference" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -40,8 +46,6 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
-
 
 
   </head>
@@ -59,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9004</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9005</span>
       </span>
     </div>
 
@@ -152,2356 +156,2355 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9">
+<div class="row">
+  <div class="contents col-md-9">
     <div class="page-header">
       <h1>Reference</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    <table class="ref-index">
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <colgroup>
+      
+      <col class="alias" />
+      <col class="title" />
+    </colgroup>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-keras-models" class="hasAnchor"><a href="#section-keras-models" class="anchor"></a>Keras Models</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="keras_model.html">keras_model()</a></code> </p>
-          </td>
-          <td><p>Keras Model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="keras_model_sequential.html">keras_model_sequential()</a></code> </p>
-          </td>
-          <td><p>Keras Model composed of a linear stack of layers</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="keras_model_custom.html">keras_model_custom()</a></code> </p>
-          </td>
-          <td><p>Create a Keras custom model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="multi_gpu_model.html">multi_gpu_model()</a></code> </p>
-          </td>
-          <td><p>Replicates a model on different GPUs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="summary.keras.engine.training.Model.html">summary(<i>&lt;keras.engine.training.Model&gt;</i>)</a></code> </p>
-          </td>
-          <td><p>Print a summary of a Keras model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="compile.html">compile()</a></code> </p>
-          </td>
-          <td><p>Configure a Keras model for training</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="fit.html">fit()</a></code> </p>
-          </td>
-          <td><p>Train a Keras model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="evaluate.keras.engine.training.Model.html">evaluate(<i>&lt;keras.engine.training.Model&gt;</i>)</a></code> </p>
-          </td>
-          <td><p>Evaluate a Keras model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="export_savedmodel.keras.engine.training.Model.html">export_savedmodel(<i>&lt;keras.engine.training.Model&gt;</i>)</a></code> </p>
-          </td>
-          <td><p>Export a Saved Model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="fit_generator.html">fit_generator()</a></code> </p>
-          </td>
-          <td><p>Fits the model on data yielded batch-by-batch by a generator.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="evaluate_generator.html">evaluate_generator()</a></code> </p>
-          </td>
-          <td><p>Evaluates the model on a data generator.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="predict.keras.engine.training.Model.html">predict(<i>&lt;keras.engine.training.Model&gt;</i>)</a></code> </p>
-          </td>
-          <td><p>Generate predictions from a Keras model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="predict_proba.html">predict_proba()</a></code> <code><a href="predict_proba.html">predict_classes()</a></code> </p>
-          </td>
-          <td><p>Generates probability or class probability predictions for the input samples.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="predict_on_batch.html">predict_on_batch()</a></code> </p>
-          </td>
-          <td><p>Returns predictions for a single batch of samples.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="predict_generator.html">predict_generator()</a></code> </p>
-          </td>
-          <td><p>Generates predictions for the input samples from a data generator.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="train_on_batch.html">train_on_batch()</a></code> <code><a href="train_on_batch.html">test_on_batch()</a></code> </p>
-          </td>
-          <td><p>Single gradient update or model evaluation over one batch of samples.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_layer.html">get_layer()</a></code> </p>
-          </td>
-          <td><p>Retrieves a layer based on either its name (unique) or index.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="pop_layer.html">pop_layer()</a></code> </p>
-          </td>
-          <td><p>Remove the last layer in a model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="save_model_hdf5.html">save_model_hdf5()</a></code> <code><a href="save_model_hdf5.html">load_model_hdf5()</a></code> </p>
-          </td>
-          <td><p>Save/Load models using HDF5 files</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="serialize_model.html">serialize_model()</a></code> <code><a href="serialize_model.html">unserialize_model()</a></code> </p>
-          </td>
-          <td><p>Serialize a model to an R object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="clone_model.html">clone_model()</a></code> </p>
-          </td>
-          <td><p>Clone a model instance.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="freeze_weights.html">freeze_weights()</a></code> <code><a href="freeze_weights.html">unfreeze_weights()</a></code> </p>
-          </td>
-          <td><p>Freeze and unfreeze weights</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-core-layers" class="hasAnchor"><a href="#section-core-layers" class="anchor"></a>Core Layers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_input.html">layer_input()</a></code> </p>
-          </td>
-          <td><p>Input layer</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_dense.html">layer_dense()</a></code> </p>
-          </td>
-          <td><p>Add a densely-connected NN layer to an output</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_activation.html">layer_activation()</a></code> </p>
-          </td>
-          <td><p>Apply an activation function to an output.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_dropout.html">layer_dropout()</a></code> </p>
-          </td>
-          <td><p>Applies Dropout to the input.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_reshape.html">layer_reshape()</a></code> </p>
-          </td>
-          <td><p>Reshapes an output to a certain shape.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_permute.html">layer_permute()</a></code> </p>
-          </td>
-          <td><p>Permute the dimensions of an input according to a given pattern</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_repeat_vector.html">layer_repeat_vector()</a></code> </p>
-          </td>
-          <td><p>Repeats the input n times.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_lambda.html">layer_lambda()</a></code> </p>
-          </td>
-          <td><p>Wraps arbitrary expression as a layer</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_activity_regularization.html">layer_activity_regularization()</a></code> </p>
-          </td>
-          <td><p>Layer that applies an update to the cost function based input activity.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_masking.html">layer_masking()</a></code> </p>
-          </td>
-          <td><p>Masks a sequence by using a mask value to skip timesteps.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_flatten.html">layer_flatten()</a></code> </p>
-          </td>
-          <td><p>Flattens an input</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-convolutional-layers" class="hasAnchor"><a href="#section-convolutional-layers" class="anchor"></a>Convolutional Layers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_conv_1d.html">layer_conv_1d()</a></code> </p>
-          </td>
-          <td><p>1D convolution layer (e.g. temporal convolution).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_conv_2d.html">layer_conv_2d()</a></code> </p>
-          </td>
-          <td><p>2D convolution layer (e.g. spatial convolution over images).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_conv_2d_transpose.html">layer_conv_2d_transpose()</a></code> </p>
-          </td>
-          <td><p>Transposed 2D convolution layer (sometimes called Deconvolution).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_conv_3d.html">layer_conv_3d()</a></code> </p>
-          </td>
-          <td><p>3D convolution layer (e.g. spatial convolution over volumes).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose()</a></code> </p>
-          </td>
-          <td><p>Transposed 3D convolution layer (sometimes called Deconvolution).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_conv_lstm_2d.html">layer_conv_lstm_2d()</a></code> </p>
-          </td>
-          <td><p>Convolutional LSTM.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_separable_conv_1d.html">layer_separable_conv_1d()</a></code> </p>
-          </td>
-          <td><p>Depthwise separable 1D convolution.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_separable_conv_2d.html">layer_separable_conv_2d()</a></code> </p>
-          </td>
-          <td><p>Separable 2D convolution.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_depthwise_conv_2d.html">layer_depthwise_conv_2d()</a></code> </p>
-          </td>
-          <td><p>Depthwise separable 2D convolution.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_upsampling_1d.html">layer_upsampling_1d()</a></code> </p>
-          </td>
-          <td><p>Upsampling layer for 1D inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_upsampling_2d.html">layer_upsampling_2d()</a></code> </p>
-          </td>
-          <td><p>Upsampling layer for 2D inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_upsampling_3d.html">layer_upsampling_3d()</a></code> </p>
-          </td>
-          <td><p>Upsampling layer for 3D inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_zero_padding_1d.html">layer_zero_padding_1d()</a></code> </p>
-          </td>
-          <td><p>Zero-padding layer for 1D input (e.g. temporal sequence).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_zero_padding_2d.html">layer_zero_padding_2d()</a></code> </p>
-          </td>
-          <td><p>Zero-padding layer for 2D input (e.g. picture).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_zero_padding_3d.html">layer_zero_padding_3d()</a></code> </p>
-          </td>
-          <td><p>Zero-padding layer for 3D data (spatial or spatio-temporal).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_cropping_1d.html">layer_cropping_1d()</a></code> </p>
-          </td>
-          <td><p>Cropping layer for 1D input (e.g. temporal sequence).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_cropping_2d.html">layer_cropping_2d()</a></code> </p>
-          </td>
-          <td><p>Cropping layer for 2D input (e.g. picture).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_cropping_3d.html">layer_cropping_3d()</a></code> </p>
-          </td>
-          <td><p>Cropping layer for 3D data (e.g. spatial or spatio-temporal).</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-pooling-layers" class="hasAnchor"><a href="#section-pooling-layers" class="anchor"></a>Pooling Layers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_max_pooling_1d.html">layer_max_pooling_1d()</a></code> </p>
-          </td>
-          <td><p>Max pooling operation for temporal data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_max_pooling_2d.html">layer_max_pooling_2d()</a></code> </p>
-          </td>
-          <td><p>Max pooling operation for spatial data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_max_pooling_3d.html">layer_max_pooling_3d()</a></code> </p>
-          </td>
-          <td><p>Max pooling operation for 3D data (spatial or spatio-temporal).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_average_pooling_1d.html">layer_average_pooling_1d()</a></code> </p>
-          </td>
-          <td><p>Average pooling for temporal data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_average_pooling_2d.html">layer_average_pooling_2d()</a></code> </p>
-          </td>
-          <td><p>Average pooling operation for spatial data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_average_pooling_3d.html">layer_average_pooling_3d()</a></code> </p>
-          </td>
-          <td><p>Average pooling operation for 3D data (spatial or spatio-temporal).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_global_max_pooling_1d.html">layer_global_max_pooling_1d()</a></code> </p>
-          </td>
-          <td><p>Global max pooling operation for temporal data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_global_average_pooling_1d.html">layer_global_average_pooling_1d()</a></code> </p>
-          </td>
-          <td><p>Global average pooling operation for temporal data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_global_max_pooling_2d.html">layer_global_max_pooling_2d()</a></code> </p>
-          </td>
-          <td><p>Global max pooling operation for spatial data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_global_average_pooling_2d.html">layer_global_average_pooling_2d()</a></code> </p>
-          </td>
-          <td><p>Global average pooling operation for spatial data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_global_max_pooling_3d.html">layer_global_max_pooling_3d()</a></code> </p>
-          </td>
-          <td><p>Global Max pooling operation for 3D data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_global_average_pooling_3d.html">layer_global_average_pooling_3d()</a></code> </p>
-          </td>
-          <td><p>Global Average pooling operation for 3D data.</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-activation-layers" class="hasAnchor"><a href="#section-activation-layers" class="anchor"></a>Activation Layers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_activation.html">layer_activation()</a></code> </p>
-          </td>
-          <td><p>Apply an activation function to an output.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_activation_relu.html">layer_activation_relu()</a></code> </p>
-          </td>
-          <td><p>Rectified Linear Unit activation function</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_activation_leaky_relu.html">layer_activation_leaky_relu()</a></code> </p>
-          </td>
-          <td><p>Leaky version of a Rectified Linear Unit.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_activation_parametric_relu.html">layer_activation_parametric_relu()</a></code> </p>
-          </td>
-          <td><p>Parametric Rectified Linear Unit.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_activation_thresholded_relu.html">layer_activation_thresholded_relu()</a></code> </p>
-          </td>
-          <td><p>Thresholded Rectified Linear Unit.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_activation_elu.html">layer_activation_elu()</a></code> </p>
-          </td>
-          <td><p>Exponential Linear Unit.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_activation_softmax.html">layer_activation_softmax()</a></code> </p>
-          </td>
-          <td><p>Softmax activation function.</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-dropout-layers" class="hasAnchor"><a href="#section-dropout-layers" class="anchor"></a>Dropout Layers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_dropout.html">layer_dropout()</a></code> </p>
-          </td>
-          <td><p>Applies Dropout to the input.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_spatial_dropout_1d.html">layer_spatial_dropout_1d()</a></code> </p>
-          </td>
-          <td><p>Spatial 1D version of Dropout.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_spatial_dropout_2d.html">layer_spatial_dropout_2d()</a></code> </p>
-          </td>
-          <td><p>Spatial 2D version of Dropout.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_spatial_dropout_3d.html">layer_spatial_dropout_3d()</a></code> </p>
-          </td>
-          <td><p>Spatial 3D version of Dropout.</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-locally-connected-layers" class="hasAnchor"><a href="#section-locally-connected-layers" class="anchor"></a>Locally-connected Layers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_locally_connected_1d.html">layer_locally_connected_1d()</a></code> </p>
-          </td>
-          <td><p>Locally-connected layer for 1D inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_locally_connected_2d.html">layer_locally_connected_2d()</a></code> </p>
-          </td>
-          <td><p>Locally-connected layer for 2D inputs.</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-recurrent-layers" class="hasAnchor"><a href="#section-recurrent-layers" class="anchor"></a>Recurrent Layers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_simple_rnn.html">layer_simple_rnn()</a></code> </p>
-          </td>
-          <td><p>Fully-connected RNN where the output is to be fed back to input.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_gru.html">layer_gru()</a></code> </p>
-          </td>
-          <td><p>Gated Recurrent Unit - Cho et al.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_cudnn_gru.html">layer_cudnn_gru()</a></code> </p>
-          </td>
-          <td><p>Fast GRU implementation backed by <a href='https://developer.nvidia.com/cudnn'>CuDNN</a>.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_lstm.html">layer_lstm()</a></code> </p>
-          </td>
-          <td><p>Long Short-Term Memory unit - Hochreiter 1997.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_cudnn_lstm.html">layer_cudnn_lstm()</a></code> </p>
-          </td>
-          <td><p>Fast LSTM implementation backed by <a href='https://developer.nvidia.com/cudnn'>CuDNN</a>.</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-embedding-layers" class="hasAnchor"><a href="#section-embedding-layers" class="anchor"></a>Embedding Layers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_embedding.html">layer_embedding()</a></code> </p>
-          </td>
-          <td><p>Turns positive integers (indexes) into dense vectors of fixed size.</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-normalization-layers" class="hasAnchor"><a href="#section-normalization-layers" class="anchor"></a>Normalization Layers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_batch_normalization.html">layer_batch_normalization()</a></code> </p>
-          </td>
-          <td><p>Batch normalization layer (Ioffe and Szegedy, 2014).</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-noise-layers" class="hasAnchor"><a href="#section-noise-layers" class="anchor"></a>Noise Layers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_gaussian_noise.html">layer_gaussian_noise()</a></code> </p>
-          </td>
-          <td><p>Apply additive zero-centered Gaussian noise.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_gaussian_dropout.html">layer_gaussian_dropout()</a></code> </p>
-          </td>
-          <td><p>Apply multiplicative 1-centered Gaussian noise.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_alpha_dropout.html">layer_alpha_dropout()</a></code> </p>
-          </td>
-          <td><p>Applies Alpha Dropout to the input.</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-merge-layers" class="hasAnchor"><a href="#section-merge-layers" class="anchor"></a>Merge Layers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_add.html">layer_add()</a></code> </p>
-          </td>
-          <td><p>Layer that adds a list of inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_subtract.html">layer_subtract()</a></code> </p>
-          </td>
-          <td><p>Layer that subtracts two inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_multiply.html">layer_multiply()</a></code> </p>
-          </td>
-          <td><p>Layer that multiplies (element-wise) a list of inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_average.html">layer_average()</a></code> </p>
-          </td>
-          <td><p>Layer that averages a list of inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_maximum.html">layer_maximum()</a></code> </p>
-          </td>
-          <td><p>Layer that computes the maximum (element-wise) a list of inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_minimum.html">layer_minimum()</a></code> </p>
-          </td>
-          <td><p>Layer that computes the minimum (element-wise) a list of inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_concatenate.html">layer_concatenate()</a></code> </p>
-          </td>
-          <td><p>Layer that concatenates a list of inputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layer_dot.html">layer_dot()</a></code> </p>
-          </td>
-          <td><p>Layer that computes a dot product between samples in two tensors.</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-layer-wrappers" class="hasAnchor"><a href="#section-layer-wrappers" class="anchor"></a>Layer Wrappers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="time_distributed.html">time_distributed()</a></code> </p>
-          </td>
-          <td><p>Apply a layer to every temporal slice of an input.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="bidirectional.html">bidirectional()</a></code> </p>
-          </td>
-          <td><p>Bidirectional wrapper for RNNs.</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-layer-methods" class="hasAnchor"><a href="#section-layer-methods" class="anchor"></a>Layer Methods</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_config.html">get_config()</a></code> <code><a href="get_config.html">from_config()</a></code> </p>
-          </td>
-          <td><p>Layer/Model configuration</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_weights.html">get_weights()</a></code> <code><a href="get_weights.html">set_weights()</a></code> </p>
-          </td>
-          <td><p>Layer/Model weights as R arrays</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_input_at.html">get_input_at()</a></code> <code><a href="get_input_at.html">get_output_at()</a></code> <code><a href="get_input_at.html">get_input_shape_at()</a></code> <code><a href="get_input_at.html">get_output_shape_at()</a></code> <code><a href="get_input_at.html">get_input_mask_at()</a></code> <code><a href="get_input_at.html">get_output_mask_at()</a></code> </p>
-          </td>
-          <td><p>Retrieve tensors for layers with multiple nodes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="count_params.html">count_params()</a></code> </p>
-          </td>
-          <td><p>Count the total number of scalars composing the weights.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="reset_states.html">reset_states()</a></code> </p>
-          </td>
-          <td><p>Reset the states for a layer</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-custom-layers" class="hasAnchor"><a href="#section-custom-layers" class="anchor"></a>Custom Layers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="KerasLayer.html">KerasLayer</a></code> </p>
-          </td>
-          <td><p>Base R6 class for Keras layers</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="create_layer.html">create_layer()</a></code> </p>
-          </td>
-          <td><p>Create a Keras Layer</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-model-persistence" class="hasAnchor"><a href="#section-model-persistence" class="anchor"></a>Model Persistence</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="save_model_hdf5.html">save_model_hdf5()</a></code> <code><a href="save_model_hdf5.html">load_model_hdf5()</a></code> </p>
-          </td>
-          <td><p>Save/Load models using HDF5 files</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="save_model_weights_hdf5.html">save_model_weights_hdf5()</a></code> <code><a href="save_model_weights_hdf5.html">load_model_weights_hdf5()</a></code> </p>
-          </td>
-          <td><p>Save/Load model weights using HDF5 files</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="serialize_model.html">serialize_model()</a></code> <code><a href="serialize_model.html">unserialize_model()</a></code> </p>
-          </td>
-          <td><p>Serialize a model to an R object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_weights.html">get_weights()</a></code> <code><a href="get_weights.html">set_weights()</a></code> </p>
-          </td>
-          <td><p>Layer/Model weights as R arrays</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_config.html">get_config()</a></code> <code><a href="get_config.html">from_config()</a></code> </p>
-          </td>
-          <td><p>Layer/Model configuration</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="model_to_json.html">model_to_json()</a></code> <code><a href="model_to_json.html">model_from_json()</a></code> </p>
-          </td>
-          <td><p>Model configuration as JSON</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="model_to_yaml.html">model_to_yaml()</a></code> <code><a href="model_to_yaml.html">model_from_yaml()</a></code> </p>
-          </td>
-          <td><p>Model configuration as YAML</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-datasets" class="hasAnchor"><a href="#section-datasets" class="anchor"></a>Datasets</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dataset_cifar10.html">dataset_cifar10()</a></code> </p>
-          </td>
-          <td><p>CIFAR10 small image classification</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dataset_cifar100.html">dataset_cifar100()</a></code> </p>
-          </td>
-          <td><p>CIFAR100 small image classification</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dataset_imdb.html">dataset_imdb()</a></code> <code><a href="dataset_imdb.html">dataset_imdb_word_index()</a></code> </p>
-          </td>
-          <td><p>IMDB Movie reviews sentiment classification</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dataset_reuters.html">dataset_reuters()</a></code> <code><a href="dataset_reuters.html">dataset_reuters_word_index()</a></code> </p>
-          </td>
-          <td><p>Reuters newswire topics classification</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dataset_mnist.html">dataset_mnist()</a></code> </p>
-          </td>
-          <td><p>MNIST database of handwritten digits</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dataset_fashion_mnist.html">dataset_fashion_mnist()</a></code> </p>
-          </td>
-          <td><p>Fashion-MNIST database of fashion articles</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dataset_boston_housing.html">dataset_boston_housing()</a></code> </p>
-          </td>
-          <td><p>Boston housing price regression dataset</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-applications" class="hasAnchor"><a href="#section-applications" class="anchor"></a>Applications</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="application_xception.html">application_xception()</a></code> <code><a href="application_xception.html">xception_preprocess_input()</a></code> </p>
-          </td>
-          <td><p>Xception V1 model for Keras.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="application_inception_v3.html">application_inception_v3()</a></code> <code><a href="application_inception_v3.html">inception_v3_preprocess_input()</a></code> </p>
-          </td>
-          <td><p>Inception V3 model, with weights pre-trained on ImageNet.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="application_inception_resnet_v2.html">application_inception_resnet_v2()</a></code> <code><a href="application_inception_resnet_v2.html">inception_resnet_v2_preprocess_input()</a></code> </p>
-          </td>
-          <td><p>Inception-ResNet v2 model, with weights trained on ImageNet</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="application_vgg.html">application_vgg16()</a></code> <code><a href="application_vgg.html">application_vgg19()</a></code> </p>
-          </td>
-          <td><p>VGG16 and VGG19 models for Keras.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="application_resnet50.html">application_resnet50()</a></code> </p>
-          </td>
-          <td><p>ResNet50 model for Keras.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="application_mobilenet.html">application_mobilenet()</a></code> <code><a href="application_mobilenet.html">mobilenet_preprocess_input()</a></code> <code><a href="application_mobilenet.html">mobilenet_decode_predictions()</a></code> <code><a href="application_mobilenet.html">mobilenet_load_model_hdf5()</a></code> </p>
-          </td>
-          <td><p>MobileNet model architecture.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="application_mobilenet_v2.html">application_mobilenet_v2()</a></code> <code><a href="application_mobilenet_v2.html">mobilenet_v2_preprocess_input()</a></code> <code><a href="application_mobilenet_v2.html">mobilenet_v2_decode_predictions()</a></code> <code><a href="application_mobilenet_v2.html">mobilenet_v2_load_model_hdf5()</a></code> </p>
-          </td>
-          <td><p>MobileNetV2 model architecture</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="application_densenet.html">application_densenet()</a></code> <code><a href="application_densenet.html">application_densenet121()</a></code> <code><a href="application_densenet.html">application_densenet169()</a></code> <code><a href="application_densenet.html">application_densenet201()</a></code> <code><a href="application_densenet.html">densenet_preprocess_input()</a></code> </p>
-          </td>
-          <td><p>Instantiates the DenseNet architecture.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="application_nasnet.html">application_nasnet()</a></code> <code><a href="application_nasnet.html">application_nasnetlarge()</a></code> <code><a href="application_nasnet.html">application_nasnetmobile()</a></code> <code><a href="application_nasnet.html">nasnet_preprocess_input()</a></code> </p>
-          </td>
-          <td><p>Instantiates a NASNet model.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="imagenet_preprocess_input.html">imagenet_preprocess_input()</a></code> </p>
-          </td>
-          <td><p>Preprocesses a tensor or array encoding a batch of images.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="imagenet_decode_predictions.html">imagenet_decode_predictions()</a></code> </p>
-          </td>
-          <td><p>Decodes the prediction of an ImageNet model.</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-sequence-preprocessing" class="hasAnchor"><a href="#section-sequence-preprocessing" class="anchor"></a>Sequence Preprocessing</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="pad_sequences.html">pad_sequences()</a></code> </p>
-          </td>
-          <td><p>Pads sequences to the same length</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="skipgrams.html">skipgrams()</a></code> </p>
-          </td>
-          <td><p>Generates skipgram word pairs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="make_sampling_table.html">make_sampling_table()</a></code> </p>
-          </td>
-          <td><p>Generates a word rank-based probabilistic sampling table.</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-text-preprocessing" class="hasAnchor"><a href="#section-text-preprocessing" class="anchor"></a>Text Preprocessing</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="text_tokenizer.html">text_tokenizer()</a></code> </p>
-          </td>
-          <td><p>Text tokenization utility</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="fit_text_tokenizer.html">fit_text_tokenizer()</a></code> </p>
-          </td>
-          <td><p>Update tokenizer internal vocabulary based on a list of texts or list of
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-keras-models" class="hasAnchor"><a href="#section-keras-models" class="anchor"></a>Keras Models</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="keras_model.html">keras_model()</a></code> </p>
+        </td>
+        <td><p>Keras Model</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="keras_model_sequential.html">keras_model_sequential()</a></code> </p>
+        </td>
+        <td><p>Keras Model composed of a linear stack of layers</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="keras_model_custom.html">keras_model_custom()</a></code> </p>
+        </td>
+        <td><p>Create a Keras custom model</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="multi_gpu_model.html">multi_gpu_model()</a></code> </p>
+        </td>
+        <td><p>Replicates a model on different GPUs.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="summary.keras.engine.training.Model.html">summary(<i>&lt;keras.engine.training.Model&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Print a summary of a Keras model</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="compile.html">compile()</a></code> </p>
+        </td>
+        <td><p>Configure a Keras model for training</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fit.html">fit()</a></code> </p>
+        </td>
+        <td><p>Train a Keras model</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="evaluate.keras.engine.training.Model.html">evaluate(<i>&lt;keras.engine.training.Model&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Evaluate a Keras model</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="export_savedmodel.keras.engine.training.Model.html">export_savedmodel(<i>&lt;keras.engine.training.Model&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Export a Saved Model</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fit_generator.html">fit_generator()</a></code> </p>
+        </td>
+        <td><p>Fits the model on data yielded batch-by-batch by a generator.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="evaluate_generator.html">evaluate_generator()</a></code> </p>
+        </td>
+        <td><p>Evaluates the model on a data generator.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="predict.keras.engine.training.Model.html">predict(<i>&lt;keras.engine.training.Model&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Generate predictions from a Keras model</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="predict_proba.html">predict_proba()</a></code> <code><a href="predict_proba.html">predict_classes()</a></code> </p>
+        </td>
+        <td><p>Generates probability or class probability predictions for the input samples.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="predict_on_batch.html">predict_on_batch()</a></code> </p>
+        </td>
+        <td><p>Returns predictions for a single batch of samples.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="predict_generator.html">predict_generator()</a></code> </p>
+        </td>
+        <td><p>Generates predictions for the input samples from a data generator.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="train_on_batch.html">train_on_batch()</a></code> <code><a href="train_on_batch.html">test_on_batch()</a></code> </p>
+        </td>
+        <td><p>Single gradient update or model evaluation over one batch of samples.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_layer.html">get_layer()</a></code> </p>
+        </td>
+        <td><p>Retrieves a layer based on either its name (unique) or index.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="pop_layer.html">pop_layer()</a></code> </p>
+        </td>
+        <td><p>Remove the last layer in a model</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="save_model_hdf5.html">save_model_hdf5()</a></code> <code><a href="save_model_hdf5.html">load_model_hdf5()</a></code> </p>
+        </td>
+        <td><p>Save/Load models using HDF5 files</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="serialize_model.html">serialize_model()</a></code> <code><a href="serialize_model.html">unserialize_model()</a></code> </p>
+        </td>
+        <td><p>Serialize a model to an R object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="clone_model.html">clone_model()</a></code> </p>
+        </td>
+        <td><p>Clone a model instance.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="freeze_weights.html">freeze_weights()</a></code> <code><a href="freeze_weights.html">unfreeze_weights()</a></code> </p>
+        </td>
+        <td><p>Freeze and unfreeze weights</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-core-layers" class="hasAnchor"><a href="#section-core-layers" class="anchor"></a>Core Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_input.html">layer_input()</a></code> </p>
+        </td>
+        <td><p>Input layer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_dense.html">layer_dense()</a></code> </p>
+        </td>
+        <td><p>Add a densely-connected NN layer to an output</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_activation.html">layer_activation()</a></code> </p>
+        </td>
+        <td><p>Apply an activation function to an output.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_dropout.html">layer_dropout()</a></code> </p>
+        </td>
+        <td><p>Applies Dropout to the input.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_reshape.html">layer_reshape()</a></code> </p>
+        </td>
+        <td><p>Reshapes an output to a certain shape.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_permute.html">layer_permute()</a></code> </p>
+        </td>
+        <td><p>Permute the dimensions of an input according to a given pattern</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_repeat_vector.html">layer_repeat_vector()</a></code> </p>
+        </td>
+        <td><p>Repeats the input n times.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_lambda.html">layer_lambda()</a></code> </p>
+        </td>
+        <td><p>Wraps arbitrary expression as a layer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_activity_regularization.html">layer_activity_regularization()</a></code> </p>
+        </td>
+        <td><p>Layer that applies an update to the cost function based input activity.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_masking.html">layer_masking()</a></code> </p>
+        </td>
+        <td><p>Masks a sequence by using a mask value to skip timesteps.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_flatten.html">layer_flatten()</a></code> </p>
+        </td>
+        <td><p>Flattens an input</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-convolutional-layers" class="hasAnchor"><a href="#section-convolutional-layers" class="anchor"></a>Convolutional Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_conv_1d.html">layer_conv_1d()</a></code> </p>
+        </td>
+        <td><p>1D convolution layer (e.g. temporal convolution).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_conv_2d.html">layer_conv_2d()</a></code> </p>
+        </td>
+        <td><p>2D convolution layer (e.g. spatial convolution over images).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_conv_2d_transpose.html">layer_conv_2d_transpose()</a></code> </p>
+        </td>
+        <td><p>Transposed 2D convolution layer (sometimes called Deconvolution).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_conv_3d.html">layer_conv_3d()</a></code> </p>
+        </td>
+        <td><p>3D convolution layer (e.g. spatial convolution over volumes).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose()</a></code> </p>
+        </td>
+        <td><p>Transposed 3D convolution layer (sometimes called Deconvolution).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_conv_lstm_2d.html">layer_conv_lstm_2d()</a></code> </p>
+        </td>
+        <td><p>Convolutional LSTM.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_separable_conv_1d.html">layer_separable_conv_1d()</a></code> </p>
+        </td>
+        <td><p>Depthwise separable 1D convolution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_separable_conv_2d.html">layer_separable_conv_2d()</a></code> </p>
+        </td>
+        <td><p>Separable 2D convolution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_depthwise_conv_2d.html">layer_depthwise_conv_2d()</a></code> </p>
+        </td>
+        <td><p>Depthwise separable 2D convolution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_upsampling_1d.html">layer_upsampling_1d()</a></code> </p>
+        </td>
+        <td><p>Upsampling layer for 1D inputs.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_upsampling_2d.html">layer_upsampling_2d()</a></code> </p>
+        </td>
+        <td><p>Upsampling layer for 2D inputs.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_upsampling_3d.html">layer_upsampling_3d()</a></code> </p>
+        </td>
+        <td><p>Upsampling layer for 3D inputs.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_zero_padding_1d.html">layer_zero_padding_1d()</a></code> </p>
+        </td>
+        <td><p>Zero-padding layer for 1D input (e.g. temporal sequence).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_zero_padding_2d.html">layer_zero_padding_2d()</a></code> </p>
+        </td>
+        <td><p>Zero-padding layer for 2D input (e.g. picture).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_zero_padding_3d.html">layer_zero_padding_3d()</a></code> </p>
+        </td>
+        <td><p>Zero-padding layer for 3D data (spatial or spatio-temporal).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_cropping_1d.html">layer_cropping_1d()</a></code> </p>
+        </td>
+        <td><p>Cropping layer for 1D input (e.g. temporal sequence).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_cropping_2d.html">layer_cropping_2d()</a></code> </p>
+        </td>
+        <td><p>Cropping layer for 2D input (e.g. picture).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_cropping_3d.html">layer_cropping_3d()</a></code> </p>
+        </td>
+        <td><p>Cropping layer for 3D data (e.g. spatial or spatio-temporal).</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-pooling-layers" class="hasAnchor"><a href="#section-pooling-layers" class="anchor"></a>Pooling Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_max_pooling_1d.html">layer_max_pooling_1d()</a></code> </p>
+        </td>
+        <td><p>Max pooling operation for temporal data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_max_pooling_2d.html">layer_max_pooling_2d()</a></code> </p>
+        </td>
+        <td><p>Max pooling operation for spatial data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_max_pooling_3d.html">layer_max_pooling_3d()</a></code> </p>
+        </td>
+        <td><p>Max pooling operation for 3D data (spatial or spatio-temporal).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_average_pooling_1d.html">layer_average_pooling_1d()</a></code> </p>
+        </td>
+        <td><p>Average pooling for temporal data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_average_pooling_2d.html">layer_average_pooling_2d()</a></code> </p>
+        </td>
+        <td><p>Average pooling operation for spatial data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_average_pooling_3d.html">layer_average_pooling_3d()</a></code> </p>
+        </td>
+        <td><p>Average pooling operation for 3D data (spatial or spatio-temporal).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_global_max_pooling_1d.html">layer_global_max_pooling_1d()</a></code> </p>
+        </td>
+        <td><p>Global max pooling operation for temporal data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_global_average_pooling_1d.html">layer_global_average_pooling_1d()</a></code> </p>
+        </td>
+        <td><p>Global average pooling operation for temporal data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_global_max_pooling_2d.html">layer_global_max_pooling_2d()</a></code> </p>
+        </td>
+        <td><p>Global max pooling operation for spatial data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_global_average_pooling_2d.html">layer_global_average_pooling_2d()</a></code> </p>
+        </td>
+        <td><p>Global average pooling operation for spatial data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_global_max_pooling_3d.html">layer_global_max_pooling_3d()</a></code> </p>
+        </td>
+        <td><p>Global Max pooling operation for 3D data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_global_average_pooling_3d.html">layer_global_average_pooling_3d()</a></code> </p>
+        </td>
+        <td><p>Global Average pooling operation for 3D data.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-activation-layers" class="hasAnchor"><a href="#section-activation-layers" class="anchor"></a>Activation Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_activation.html">layer_activation()</a></code> </p>
+        </td>
+        <td><p>Apply an activation function to an output.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_activation_relu.html">layer_activation_relu()</a></code> </p>
+        </td>
+        <td><p>Rectified Linear Unit activation function</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_activation_leaky_relu.html">layer_activation_leaky_relu()</a></code> </p>
+        </td>
+        <td><p>Leaky version of a Rectified Linear Unit.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_activation_parametric_relu.html">layer_activation_parametric_relu()</a></code> </p>
+        </td>
+        <td><p>Parametric Rectified Linear Unit.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_activation_thresholded_relu.html">layer_activation_thresholded_relu()</a></code> </p>
+        </td>
+        <td><p>Thresholded Rectified Linear Unit.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_activation_elu.html">layer_activation_elu()</a></code> </p>
+        </td>
+        <td><p>Exponential Linear Unit.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_activation_softmax.html">layer_activation_softmax()</a></code> </p>
+        </td>
+        <td><p>Softmax activation function.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-dropout-layers" class="hasAnchor"><a href="#section-dropout-layers" class="anchor"></a>Dropout Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_dropout.html">layer_dropout()</a></code> </p>
+        </td>
+        <td><p>Applies Dropout to the input.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_spatial_dropout_1d.html">layer_spatial_dropout_1d()</a></code> </p>
+        </td>
+        <td><p>Spatial 1D version of Dropout.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_spatial_dropout_2d.html">layer_spatial_dropout_2d()</a></code> </p>
+        </td>
+        <td><p>Spatial 2D version of Dropout.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_spatial_dropout_3d.html">layer_spatial_dropout_3d()</a></code> </p>
+        </td>
+        <td><p>Spatial 3D version of Dropout.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-locally-connected-layers" class="hasAnchor"><a href="#section-locally-connected-layers" class="anchor"></a>Locally-connected Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_locally_connected_1d.html">layer_locally_connected_1d()</a></code> </p>
+        </td>
+        <td><p>Locally-connected layer for 1D inputs.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_locally_connected_2d.html">layer_locally_connected_2d()</a></code> </p>
+        </td>
+        <td><p>Locally-connected layer for 2D inputs.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-recurrent-layers" class="hasAnchor"><a href="#section-recurrent-layers" class="anchor"></a>Recurrent Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_simple_rnn.html">layer_simple_rnn()</a></code> </p>
+        </td>
+        <td><p>Fully-connected RNN where the output is to be fed back to input.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_gru.html">layer_gru()</a></code> </p>
+        </td>
+        <td><p>Gated Recurrent Unit - Cho et al.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_cudnn_gru.html">layer_cudnn_gru()</a></code> </p>
+        </td>
+        <td><p>Fast GRU implementation backed by <a href='https://developer.nvidia.com/cudnn'>CuDNN</a>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_lstm.html">layer_lstm()</a></code> </p>
+        </td>
+        <td><p>Long Short-Term Memory unit - Hochreiter 1997.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_cudnn_lstm.html">layer_cudnn_lstm()</a></code> </p>
+        </td>
+        <td><p>Fast LSTM implementation backed by <a href='https://developer.nvidia.com/cudnn'>CuDNN</a>.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-embedding-layers" class="hasAnchor"><a href="#section-embedding-layers" class="anchor"></a>Embedding Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_embedding.html">layer_embedding()</a></code> </p>
+        </td>
+        <td><p>Turns positive integers (indexes) into dense vectors of fixed size.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-normalization-layers" class="hasAnchor"><a href="#section-normalization-layers" class="anchor"></a>Normalization Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_batch_normalization.html">layer_batch_normalization()</a></code> </p>
+        </td>
+        <td><p>Batch normalization layer (Ioffe and Szegedy, 2014).</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-noise-layers" class="hasAnchor"><a href="#section-noise-layers" class="anchor"></a>Noise Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_gaussian_noise.html">layer_gaussian_noise()</a></code> </p>
+        </td>
+        <td><p>Apply additive zero-centered Gaussian noise.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_gaussian_dropout.html">layer_gaussian_dropout()</a></code> </p>
+        </td>
+        <td><p>Apply multiplicative 1-centered Gaussian noise.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_alpha_dropout.html">layer_alpha_dropout()</a></code> </p>
+        </td>
+        <td><p>Applies Alpha Dropout to the input.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-merge-layers" class="hasAnchor"><a href="#section-merge-layers" class="anchor"></a>Merge Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_add.html">layer_add()</a></code> </p>
+        </td>
+        <td><p>Layer that adds a list of inputs.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_subtract.html">layer_subtract()</a></code> </p>
+        </td>
+        <td><p>Layer that subtracts two inputs.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_multiply.html">layer_multiply()</a></code> </p>
+        </td>
+        <td><p>Layer that multiplies (element-wise) a list of inputs.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_average.html">layer_average()</a></code> </p>
+        </td>
+        <td><p>Layer that averages a list of inputs.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_maximum.html">layer_maximum()</a></code> </p>
+        </td>
+        <td><p>Layer that computes the maximum (element-wise) a list of inputs.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_minimum.html">layer_minimum()</a></code> </p>
+        </td>
+        <td><p>Layer that computes the minimum (element-wise) a list of inputs.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_concatenate.html">layer_concatenate()</a></code> </p>
+        </td>
+        <td><p>Layer that concatenates a list of inputs.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_dot.html">layer_dot()</a></code> </p>
+        </td>
+        <td><p>Layer that computes a dot product between samples in two tensors.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-layer-wrappers" class="hasAnchor"><a href="#section-layer-wrappers" class="anchor"></a>Layer Wrappers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="time_distributed.html">time_distributed()</a></code> </p>
+        </td>
+        <td><p>Apply a layer to every temporal slice of an input.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bidirectional.html">bidirectional()</a></code> </p>
+        </td>
+        <td><p>Bidirectional wrapper for RNNs.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-layer-methods" class="hasAnchor"><a href="#section-layer-methods" class="anchor"></a>Layer Methods</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="get_config.html">get_config()</a></code> <code><a href="get_config.html">from_config()</a></code> </p>
+        </td>
+        <td><p>Layer/Model configuration</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_weights.html">get_weights()</a></code> <code><a href="get_weights.html">set_weights()</a></code> </p>
+        </td>
+        <td><p>Layer/Model weights as R arrays</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_input_at.html">get_input_at()</a></code> <code><a href="get_input_at.html">get_output_at()</a></code> <code><a href="get_input_at.html">get_input_shape_at()</a></code> <code><a href="get_input_at.html">get_output_shape_at()</a></code> <code><a href="get_input_at.html">get_input_mask_at()</a></code> <code><a href="get_input_at.html">get_output_mask_at()</a></code> </p>
+        </td>
+        <td><p>Retrieve tensors for layers with multiple nodes</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="count_params.html">count_params()</a></code> </p>
+        </td>
+        <td><p>Count the total number of scalars composing the weights.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="reset_states.html">reset_states()</a></code> </p>
+        </td>
+        <td><p>Reset the states for a layer</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-custom-layers" class="hasAnchor"><a href="#section-custom-layers" class="anchor"></a>Custom Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="KerasLayer.html">KerasLayer</a></code> </p>
+        </td>
+        <td><p>Base R6 class for Keras layers</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="create_layer.html">create_layer()</a></code> </p>
+        </td>
+        <td><p>Create a Keras Layer</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-model-persistence" class="hasAnchor"><a href="#section-model-persistence" class="anchor"></a>Model Persistence</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="save_model_hdf5.html">save_model_hdf5()</a></code> <code><a href="save_model_hdf5.html">load_model_hdf5()</a></code> </p>
+        </td>
+        <td><p>Save/Load models using HDF5 files</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="save_model_weights_hdf5.html">save_model_weights_hdf5()</a></code> <code><a href="save_model_weights_hdf5.html">load_model_weights_hdf5()</a></code> </p>
+        </td>
+        <td><p>Save/Load model weights using HDF5 files</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="serialize_model.html">serialize_model()</a></code> <code><a href="serialize_model.html">unserialize_model()</a></code> </p>
+        </td>
+        <td><p>Serialize a model to an R object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_weights.html">get_weights()</a></code> <code><a href="get_weights.html">set_weights()</a></code> </p>
+        </td>
+        <td><p>Layer/Model weights as R arrays</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_config.html">get_config()</a></code> <code><a href="get_config.html">from_config()</a></code> </p>
+        </td>
+        <td><p>Layer/Model configuration</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="model_to_json.html">model_to_json()</a></code> <code><a href="model_to_json.html">model_from_json()</a></code> </p>
+        </td>
+        <td><p>Model configuration as JSON</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="model_to_yaml.html">model_to_yaml()</a></code> <code><a href="model_to_yaml.html">model_from_yaml()</a></code> </p>
+        </td>
+        <td><p>Model configuration as YAML</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-datasets" class="hasAnchor"><a href="#section-datasets" class="anchor"></a>Datasets</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="dataset_cifar10.html">dataset_cifar10()</a></code> </p>
+        </td>
+        <td><p>CIFAR10 small image classification</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dataset_cifar100.html">dataset_cifar100()</a></code> </p>
+        </td>
+        <td><p>CIFAR100 small image classification</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dataset_imdb.html">dataset_imdb()</a></code> <code><a href="dataset_imdb.html">dataset_imdb_word_index()</a></code> </p>
+        </td>
+        <td><p>IMDB Movie reviews sentiment classification</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dataset_reuters.html">dataset_reuters()</a></code> <code><a href="dataset_reuters.html">dataset_reuters_word_index()</a></code> </p>
+        </td>
+        <td><p>Reuters newswire topics classification</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dataset_mnist.html">dataset_mnist()</a></code> </p>
+        </td>
+        <td><p>MNIST database of handwritten digits</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dataset_fashion_mnist.html">dataset_fashion_mnist()</a></code> </p>
+        </td>
+        <td><p>Fashion-MNIST database of fashion articles</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dataset_boston_housing.html">dataset_boston_housing()</a></code> </p>
+        </td>
+        <td><p>Boston housing price regression dataset</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-applications" class="hasAnchor"><a href="#section-applications" class="anchor"></a>Applications</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="application_xception.html">application_xception()</a></code> <code><a href="application_xception.html">xception_preprocess_input()</a></code> </p>
+        </td>
+        <td><p>Xception V1 model for Keras.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="application_inception_v3.html">application_inception_v3()</a></code> <code><a href="application_inception_v3.html">inception_v3_preprocess_input()</a></code> </p>
+        </td>
+        <td><p>Inception V3 model, with weights pre-trained on ImageNet.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="application_inception_resnet_v2.html">application_inception_resnet_v2()</a></code> <code><a href="application_inception_resnet_v2.html">inception_resnet_v2_preprocess_input()</a></code> </p>
+        </td>
+        <td><p>Inception-ResNet v2 model, with weights trained on ImageNet</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="application_vgg.html">application_vgg16()</a></code> <code><a href="application_vgg.html">application_vgg19()</a></code> </p>
+        </td>
+        <td><p>VGG16 and VGG19 models for Keras.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="application_resnet50.html">application_resnet50()</a></code> </p>
+        </td>
+        <td><p>ResNet50 model for Keras.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="application_mobilenet.html">application_mobilenet()</a></code> <code><a href="application_mobilenet.html">mobilenet_preprocess_input()</a></code> <code><a href="application_mobilenet.html">mobilenet_decode_predictions()</a></code> <code><a href="application_mobilenet.html">mobilenet_load_model_hdf5()</a></code> </p>
+        </td>
+        <td><p>MobileNet model architecture.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="application_mobilenet_v2.html">application_mobilenet_v2()</a></code> <code><a href="application_mobilenet_v2.html">mobilenet_v2_preprocess_input()</a></code> <code><a href="application_mobilenet_v2.html">mobilenet_v2_decode_predictions()</a></code> <code><a href="application_mobilenet_v2.html">mobilenet_v2_load_model_hdf5()</a></code> </p>
+        </td>
+        <td><p>MobileNetV2 model architecture</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="application_densenet.html">application_densenet()</a></code> <code><a href="application_densenet.html">application_densenet121()</a></code> <code><a href="application_densenet.html">application_densenet169()</a></code> <code><a href="application_densenet.html">application_densenet201()</a></code> <code><a href="application_densenet.html">densenet_preprocess_input()</a></code> </p>
+        </td>
+        <td><p>Instantiates the DenseNet architecture.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="application_nasnet.html">application_nasnet()</a></code> <code><a href="application_nasnet.html">application_nasnetlarge()</a></code> <code><a href="application_nasnet.html">application_nasnetmobile()</a></code> <code><a href="application_nasnet.html">nasnet_preprocess_input()</a></code> </p>
+        </td>
+        <td><p>Instantiates a NASNet model.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="imagenet_preprocess_input.html">imagenet_preprocess_input()</a></code> </p>
+        </td>
+        <td><p>Preprocesses a tensor or array encoding a batch of images.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="imagenet_decode_predictions.html">imagenet_decode_predictions()</a></code> </p>
+        </td>
+        <td><p>Decodes the prediction of an ImageNet model.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-sequence-preprocessing" class="hasAnchor"><a href="#section-sequence-preprocessing" class="anchor"></a>Sequence Preprocessing</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="pad_sequences.html">pad_sequences()</a></code> </p>
+        </td>
+        <td><p>Pads sequences to the same length</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="skipgrams.html">skipgrams()</a></code> </p>
+        </td>
+        <td><p>Generates skipgram word pairs.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="make_sampling_table.html">make_sampling_table()</a></code> </p>
+        </td>
+        <td><p>Generates a word rank-based probabilistic sampling table.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-text-preprocessing" class="hasAnchor"><a href="#section-text-preprocessing" class="anchor"></a>Text Preprocessing</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="text_tokenizer.html">text_tokenizer()</a></code> </p>
+        </td>
+        <td><p>Text tokenization utility</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fit_text_tokenizer.html">fit_text_tokenizer()</a></code> </p>
+        </td>
+        <td><p>Update tokenizer internal vocabulary based on a list of texts or list of
 sequences.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="save_text_tokenizer.html">save_text_tokenizer()</a></code> <code><a href="save_text_tokenizer.html">load_text_tokenizer()</a></code> </p>
-          </td>
-          <td><p>Save a text tokenizer to an external file</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="texts_to_sequences.html">texts_to_sequences()</a></code> </p>
-          </td>
-          <td><p>Transform each text in texts in a sequence of integers.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="texts_to_sequences_generator.html">texts_to_sequences_generator()</a></code> </p>
-          </td>
-          <td><p>Transforms each text in texts in a sequence of integers.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="texts_to_matrix.html">texts_to_matrix()</a></code> </p>
-          </td>
-          <td><p>Convert a list of texts to a matrix.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sequences_to_matrix.html">sequences_to_matrix()</a></code> </p>
-          </td>
-          <td><p>Convert a list of sequences into a matrix.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="text_one_hot.html">text_one_hot()</a></code> </p>
-          </td>
-          <td><p>One-hot encode a text into a list of word indexes in a vocabulary of size n.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="text_hashing_trick.html">text_hashing_trick()</a></code> </p>
-          </td>
-          <td><p>Converts a text to a sequence of indexes in a fixed-size hashing space.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="text_to_word_sequence.html">text_to_word_sequence()</a></code> </p>
-          </td>
-          <td><p>Convert text to a sequence of words (or tokens).</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-image-preprocessing" class="hasAnchor"><a href="#section-image-preprocessing" class="anchor"></a>Image Preprocessing</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="image_load.html">image_load()</a></code> </p>
-          </td>
-          <td><p>Loads an image into PIL format.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="image_to_array.html">image_to_array()</a></code> <code><a href="image_to_array.html">image_array_resize()</a></code> <code><a href="image_to_array.html">image_array_save()</a></code> </p>
-          </td>
-          <td><p>3D array representation of images</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="image_data_generator.html">image_data_generator()</a></code> </p>
-          </td>
-          <td><p>Generate batches of image data with real-time data augmentation. The data will be
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="save_text_tokenizer.html">save_text_tokenizer()</a></code> <code><a href="save_text_tokenizer.html">load_text_tokenizer()</a></code> </p>
+        </td>
+        <td><p>Save a text tokenizer to an external file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="texts_to_sequences.html">texts_to_sequences()</a></code> </p>
+        </td>
+        <td><p>Transform each text in texts in a sequence of integers.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="texts_to_sequences_generator.html">texts_to_sequences_generator()</a></code> </p>
+        </td>
+        <td><p>Transforms each text in texts in a sequence of integers.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="texts_to_matrix.html">texts_to_matrix()</a></code> </p>
+        </td>
+        <td><p>Convert a list of texts to a matrix.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sequences_to_matrix.html">sequences_to_matrix()</a></code> </p>
+        </td>
+        <td><p>Convert a list of sequences into a matrix.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="text_one_hot.html">text_one_hot()</a></code> </p>
+        </td>
+        <td><p>One-hot encode a text into a list of word indexes in a vocabulary of size n.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="text_hashing_trick.html">text_hashing_trick()</a></code> </p>
+        </td>
+        <td><p>Converts a text to a sequence of indexes in a fixed-size hashing space.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="text_to_word_sequence.html">text_to_word_sequence()</a></code> </p>
+        </td>
+        <td><p>Convert text to a sequence of words (or tokens).</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-image-preprocessing" class="hasAnchor"><a href="#section-image-preprocessing" class="anchor"></a>Image Preprocessing</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="image_load.html">image_load()</a></code> </p>
+        </td>
+        <td><p>Loads an image into PIL format.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="image_to_array.html">image_to_array()</a></code> <code><a href="image_to_array.html">image_array_resize()</a></code> <code><a href="image_to_array.html">image_array_save()</a></code> </p>
+        </td>
+        <td><p>3D array representation of images</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="image_data_generator.html">image_data_generator()</a></code> </p>
+        </td>
+        <td><p>Generate batches of image data with real-time data augmentation. The data will be
 looped over (in batches).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="fit_image_data_generator.html">fit_image_data_generator()</a></code> </p>
-          </td>
-          <td><p>Fit image data generator internal statistics to some sample data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="flow_images_from_data.html">flow_images_from_data()</a></code> </p>
-          </td>
-          <td><p>Generates batches of augmented/normalized data from image data and labels</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="flow_images_from_directory.html">flow_images_from_directory()</a></code> </p>
-          </td>
-          <td><p>Generates batches of data from images in a directory (with optional
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fit_image_data_generator.html">fit_image_data_generator()</a></code> </p>
+        </td>
+        <td><p>Fit image data generator internal statistics to some sample data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="flow_images_from_data.html">flow_images_from_data()</a></code> </p>
+        </td>
+        <td><p>Generates batches of augmented/normalized data from image data and labels</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="flow_images_from_directory.html">flow_images_from_directory()</a></code> </p>
+        </td>
+        <td><p>Generates batches of data from images in a directory (with optional
 augmented/normalized data)</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="generator_next.html">generator_next()</a></code> </p>
-          </td>
-          <td><p>Retrieve the next item from a generator</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-optimizers" class="hasAnchor"><a href="#section-optimizers" class="anchor"></a>Optimizers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="optimizer_sgd.html">optimizer_sgd()</a></code> </p>
-          </td>
-          <td><p>Stochastic gradient descent optimizer</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="optimizer_rmsprop.html">optimizer_rmsprop()</a></code> </p>
-          </td>
-          <td><p>RMSProp optimizer</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="optimizer_adagrad.html">optimizer_adagrad()</a></code> </p>
-          </td>
-          <td><p>Adagrad optimizer.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="optimizer_adadelta.html">optimizer_adadelta()</a></code> </p>
-          </td>
-          <td><p>Adadelta optimizer.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="optimizer_adam.html">optimizer_adam()</a></code> </p>
-          </td>
-          <td><p>Adam optimizer</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="optimizer_adamax.html">optimizer_adamax()</a></code> </p>
-          </td>
-          <td><p>Adamax optimizer</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="optimizer_nadam.html">optimizer_nadam()</a></code> </p>
-          </td>
-          <td><p>Nesterov Adam optimizer</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-callbacks" class="hasAnchor"><a href="#section-callbacks" class="anchor"></a>Callbacks</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="callback_progbar_logger.html">callback_progbar_logger()</a></code> </p>
-          </td>
-          <td><p>Callback that prints metrics to stdout.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="callback_model_checkpoint.html">callback_model_checkpoint()</a></code> </p>
-          </td>
-          <td><p>Save the model after every epoch.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="callback_early_stopping.html">callback_early_stopping()</a></code> </p>
-          </td>
-          <td><p>Stop training when a monitored quantity has stopped improving.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="callback_remote_monitor.html">callback_remote_monitor()</a></code> </p>
-          </td>
-          <td><p>Callback used to stream events to a server.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="callback_learning_rate_scheduler.html">callback_learning_rate_scheduler()</a></code> </p>
-          </td>
-          <td><p>Learning rate scheduler.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="callback_tensorboard.html">callback_tensorboard()</a></code> </p>
-          </td>
-          <td><p>TensorBoard basic visualizations</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau()</a></code> </p>
-          </td>
-          <td><p>Reduce learning rate when a metric has stopped improving.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="callback_terminate_on_naan.html">callback_terminate_on_naan()</a></code> </p>
-          </td>
-          <td><p>Callback that terminates training when a NaN loss is encountered.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="callback_csv_logger.html">callback_csv_logger()</a></code> </p>
-          </td>
-          <td><p>Callback that streams epoch results to a csv file</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="callback_lambda.html">callback_lambda()</a></code> </p>
-          </td>
-          <td><p>Create a custom callback</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="KerasCallback.html">KerasCallback</a></code> </p>
-          </td>
-          <td><p>Base R6 class for Keras callbacks</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-initializers" class="hasAnchor"><a href="#section-initializers" class="anchor"></a>Initializers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_zeros.html">initializer_zeros()</a></code> </p>
-          </td>
-          <td><p>Initializer that generates tensors initialized to 0.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_ones.html">initializer_ones()</a></code> </p>
-          </td>
-          <td><p>Initializer that generates tensors initialized to 1.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_constant.html">initializer_constant()</a></code> </p>
-          </td>
-          <td><p>Initializer that generates tensors initialized to a constant value.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_random_normal.html">initializer_random_normal()</a></code> </p>
-          </td>
-          <td><p>Initializer that generates tensors with a normal distribution.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_random_uniform.html">initializer_random_uniform()</a></code> </p>
-          </td>
-          <td><p>Initializer that generates tensors with a uniform distribution.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_truncated_normal.html">initializer_truncated_normal()</a></code> </p>
-          </td>
-          <td><p>Initializer that generates a truncated normal distribution.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_variance_scaling.html">initializer_variance_scaling()</a></code> </p>
-          </td>
-          <td><p>Initializer capable of adapting its scale to the shape of weights.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_orthogonal.html">initializer_orthogonal()</a></code> </p>
-          </td>
-          <td><p>Initializer that generates a random orthogonal matrix.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_identity.html">initializer_identity()</a></code> </p>
-          </td>
-          <td><p>Initializer that generates the identity matrix.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_glorot_normal.html">initializer_glorot_normal()</a></code> </p>
-          </td>
-          <td><p>Glorot normal initializer, also called Xavier normal initializer.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_glorot_uniform.html">initializer_glorot_uniform()</a></code> </p>
-          </td>
-          <td><p>Glorot uniform initializer, also called Xavier uniform initializer.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_he_normal.html">initializer_he_normal()</a></code> </p>
-          </td>
-          <td><p>He normal initializer.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_he_uniform.html">initializer_he_uniform()</a></code> </p>
-          </td>
-          <td><p>He uniform variance scaling initializer.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_lecun_uniform.html">initializer_lecun_uniform()</a></code> </p>
-          </td>
-          <td><p>LeCun uniform initializer.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="initializer_lecun_normal.html">initializer_lecun_normal()</a></code> </p>
-          </td>
-          <td><p>LeCun normal initializer.</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-constraints" class="hasAnchor"><a href="#section-constraints" class="anchor"></a>Constraints</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="constraints.html">constraint_maxnorm()</a></code> <code><a href="constraints.html">constraint_nonneg()</a></code> <code><a href="constraints.html">constraint_unitnorm()</a></code> <code><a href="constraints.html">constraint_minmaxnorm()</a></code> </p>
-          </td>
-          <td><p>Weight constraints</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="KerasConstraint.html">KerasConstraint</a></code> </p>
-          </td>
-          <td><p>Base R6 class for Keras constraints</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-utils" class="hasAnchor"><a href="#section-utils" class="anchor"></a>Utils</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="plot.keras_training_history.html">plot(<i>&lt;keras_training_history&gt;</i>)</a></code> </p>
-          </td>
-          <td><p>Plot training history</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="timeseries_generator.html">timeseries_generator()</a></code> </p>
-          </td>
-          <td><p>Utility function for generating batches of temporal data.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="to_categorical.html">to_categorical()</a></code> </p>
-          </td>
-          <td><p>Converts a class vector (integers) to binary class matrix.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="normalize.html">normalize()</a></code> </p>
-          </td>
-          <td><p>Normalize a matrix or nd-array</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="with_custom_object_scope.html">with_custom_object_scope()</a></code> </p>
-          </td>
-          <td><p>Provide a scope with mappings of names to custom objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="keras_array.html">keras_array()</a></code> </p>
-          </td>
-          <td><p>Keras array object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="hdf5_matrix.html">hdf5_matrix()</a></code> </p>
-          </td>
-          <td><p>Representation of HDF5 dataset to be used instead of an R array</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_file.html">get_file()</a></code> </p>
-          </td>
-          <td><p>Downloads a file from a URL if it not already in the cache.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="reexports.html">reexports</a></code> </p>
-          </td>
-          <td><p>Objects exported from other packages</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="install_keras.html">install_keras()</a></code> </p>
-          </td>
-          <td><p>Install Keras and the TensorFlow backend</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="is_keras_available.html">is_keras_available()</a></code> </p>
-          </td>
-          <td><p>Check if Keras is Available</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="backend.html">backend()</a></code> </p>
-          </td>
-          <td><p>Keras backend tensor engine</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="implementation.html">implementation()</a></code> </p>
-          </td>
-          <td><p>Keras implementation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="use_implementation.html">use_implementation()</a></code> <code><a href="use_implementation.html">use_backend()</a></code> </p>
-          </td>
-          <td><p>Select a Keras implementation and backend</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-losses" class="hasAnchor"><a href="#section-losses" class="anchor"></a>Losses</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="loss_mean_squared_error.html">loss_mean_squared_error()</a></code> <code><a href="loss_mean_squared_error.html">loss_mean_absolute_error()</a></code> <code><a href="loss_mean_squared_error.html">loss_mean_absolute_percentage_error()</a></code> <code><a href="loss_mean_squared_error.html">loss_mean_squared_logarithmic_error()</a></code> <code><a href="loss_mean_squared_error.html">loss_squared_hinge()</a></code> <code><a href="loss_mean_squared_error.html">loss_hinge()</a></code> <code><a href="loss_mean_squared_error.html">loss_categorical_hinge()</a></code> <code><a href="loss_mean_squared_error.html">loss_logcosh()</a></code> <code><a href="loss_mean_squared_error.html">loss_categorical_crossentropy()</a></code> <code><a href="loss_mean_squared_error.html">loss_sparse_categorical_crossentropy()</a></code> <code><a href="loss_mean_squared_error.html">loss_binary_crossentropy()</a></code> <code><a href="loss_mean_squared_error.html">loss_kullback_leibler_divergence()</a></code> <code><a href="loss_mean_squared_error.html">loss_poisson()</a></code> <code><a href="loss_mean_squared_error.html">loss_cosine_proximity()</a></code> </p>
-          </td>
-          <td><p>Model loss functions</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-metrics" class="hasAnchor"><a href="#section-metrics" class="anchor"></a>Metrics</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="metric_binary_accuracy.html">metric_binary_accuracy()</a></code> <code><a href="metric_binary_accuracy.html">metric_binary_crossentropy()</a></code> <code><a href="metric_binary_accuracy.html">metric_categorical_accuracy()</a></code> <code><a href="metric_binary_accuracy.html">metric_categorical_crossentropy()</a></code> <code><a href="metric_binary_accuracy.html">metric_cosine_proximity()</a></code> <code><a href="metric_binary_accuracy.html">metric_hinge()</a></code> <code><a href="metric_binary_accuracy.html">metric_kullback_leibler_divergence()</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_absolute_error()</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_absolute_percentage_error()</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_squared_error()</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_squared_logarithmic_error()</a></code> <code><a href="metric_binary_accuracy.html">metric_poisson()</a></code> <code><a href="metric_binary_accuracy.html">metric_sparse_categorical_crossentropy()</a></code> <code><a href="metric_binary_accuracy.html">metric_squared_hinge()</a></code> <code><a href="metric_binary_accuracy.html">metric_top_k_categorical_accuracy()</a></code> <code><a href="metric_binary_accuracy.html">metric_sparse_top_k_categorical_accuracy()</a></code> <code><a href="metric_binary_accuracy.html">custom_metric()</a></code> </p>
-          </td>
-          <td><p>Model performance metrics</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-regularizers" class="hasAnchor"><a href="#section-regularizers" class="anchor"></a>Regularizers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="regularizer_l1.html">regularizer_l1()</a></code> <code><a href="regularizer_l1.html">regularizer_l2()</a></code> <code><a href="regularizer_l1.html">regularizer_l1_l2()</a></code> </p>
-          </td>
-          <td><p>L1 and L2 regularization</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-activations" class="hasAnchor"><a href="#section-activations" class="anchor"></a>Activations</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="activation_relu.html">activation_relu()</a></code> <code><a href="activation_relu.html">activation_elu()</a></code> <code><a href="activation_relu.html">activation_selu()</a></code> <code><a href="activation_relu.html">activation_hard_sigmoid()</a></code> <code><a href="activation_relu.html">activation_linear()</a></code> <code><a href="activation_relu.html">activation_sigmoid()</a></code> <code><a href="activation_relu.html">activation_softmax()</a></code> <code><a href="activation_relu.html">activation_softplus()</a></code> <code><a href="activation_relu.html">activation_softsign()</a></code> <code><a href="activation_relu.html">activation_tanh()</a></code> </p>
-          </td>
-          <td><p>Activation functions</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-backend" class="hasAnchor"><a href="#section-backend" class="anchor"></a>Backend</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_abs.html">k_abs()</a></code> </p>
-          </td>
-          <td><p>Element-wise absolute value.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_all.html">k_all()</a></code> </p>
-          </td>
-          <td><p>Bitwise reduction (logical AND).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_any.html">k_any()</a></code> </p>
-          </td>
-          <td><p>Bitwise reduction (logical OR).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_arange.html">k_arange()</a></code> </p>
-          </td>
-          <td><p>Creates a 1D tensor containing a sequence of integers.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_argmax.html">k_argmax()</a></code> </p>
-          </td>
-          <td><p>Returns the index of the maximum value along an axis.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_argmin.html">k_argmin()</a></code> </p>
-          </td>
-          <td><p>Returns the index of the minimum value along an axis.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_backend.html">k_backend()</a></code> </p>
-          </td>
-          <td><p>Active Keras backend</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_batch_dot.html">k_batch_dot()</a></code> </p>
-          </td>
-          <td><p>Batchwise dot product.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_batch_flatten.html">k_batch_flatten()</a></code> </p>
-          </td>
-          <td><p>Turn a nD tensor into a 2D tensor with same 1st dimension.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_batch_get_value.html">k_batch_get_value()</a></code> </p>
-          </td>
-          <td><p>Returns the value of more than one tensor variable.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_batch_normalization.html">k_batch_normalization()</a></code> </p>
-          </td>
-          <td><p>Applies batch normalization on x given mean, var, beta and gamma.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_batch_set_value.html">k_batch_set_value()</a></code> </p>
-          </td>
-          <td><p>Sets the values of many tensor variables at once.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_bias_add.html">k_bias_add()</a></code> </p>
-          </td>
-          <td><p>Adds a bias vector to a tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_binary_crossentropy.html">k_binary_crossentropy()</a></code> </p>
-          </td>
-          <td><p>Binary crossentropy between an output tensor and a target tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_cast.html">k_cast()</a></code> </p>
-          </td>
-          <td><p>Casts a tensor to a different dtype and returns it.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_cast_to_floatx.html">k_cast_to_floatx()</a></code> </p>
-          </td>
-          <td><p>Cast an array to the default Keras float type.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_categorical_crossentropy.html">k_categorical_crossentropy()</a></code> </p>
-          </td>
-          <td><p>Categorical crossentropy between an output tensor and a target tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_clear_session.html">k_clear_session()</a></code> </p>
-          </td>
-          <td><p>Destroys the current TF graph and creates a new one.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_clip.html">k_clip()</a></code> </p>
-          </td>
-          <td><p>Element-wise value clipping.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_concatenate.html">k_concatenate()</a></code> </p>
-          </td>
-          <td><p>Concatenates a list of tensors alongside the specified axis.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_constant.html">k_constant()</a></code> </p>
-          </td>
-          <td><p>Creates a constant tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_conv1d.html">k_conv1d()</a></code> </p>
-          </td>
-          <td><p>1D convolution.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_conv2d.html">k_conv2d()</a></code> </p>
-          </td>
-          <td><p>2D convolution.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_conv2d_transpose.html">k_conv2d_transpose()</a></code> </p>
-          </td>
-          <td><p>2D deconvolution (i.e. transposed convolution).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_conv3d.html">k_conv3d()</a></code> </p>
-          </td>
-          <td><p>3D convolution.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_conv3d_transpose.html">k_conv3d_transpose()</a></code> </p>
-          </td>
-          <td><p>3D deconvolution (i.e. transposed convolution).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_cos.html">k_cos()</a></code> </p>
-          </td>
-          <td><p>Computes cos of x element-wise.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_count_params.html">k_count_params()</a></code> </p>
-          </td>
-          <td><p>Returns the static number of elements in a Keras variable or tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_ctc_batch_cost.html">k_ctc_batch_cost()</a></code> </p>
-          </td>
-          <td><p>Runs CTC loss algorithm on each batch element.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_ctc_decode.html">k_ctc_decode()</a></code> </p>
-          </td>
-          <td><p>Decodes the output of a softmax.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_ctc_label_dense_to_sparse.html">k_ctc_label_dense_to_sparse()</a></code> </p>
-          </td>
-          <td><p>Converts CTC labels from dense to sparse.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_cumprod.html">k_cumprod()</a></code> </p>
-          </td>
-          <td><p>Cumulative product of the values in a tensor, alongside the specified axis.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_cumsum.html">k_cumsum()</a></code> </p>
-          </td>
-          <td><p>Cumulative sum of the values in a tensor, alongside the specified axis.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_depthwise_conv2d.html">k_depthwise_conv2d()</a></code> </p>
-          </td>
-          <td><p>Depthwise 2D convolution with separable filters.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_dot.html">k_dot()</a></code> </p>
-          </td>
-          <td><p>Multiplies 2 tensors (and/or variables) and returns a <em>tensor</em>.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_dropout.html">k_dropout()</a></code> </p>
-          </td>
-          <td><p>Sets entries in <code>x</code> to zero at random, while scaling the entire tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_dtype.html">k_dtype()</a></code> </p>
-          </td>
-          <td><p>Returns the dtype of a Keras tensor or variable, as a string.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_elu.html">k_elu()</a></code> </p>
-          </td>
-          <td><p>Exponential linear unit.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_epsilon.html">k_epsilon()</a></code> <code><a href="k_epsilon.html">k_set_epsilon()</a></code> </p>
-          </td>
-          <td><p>Fuzz factor used in numeric expressions.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_equal.html">k_equal()</a></code> </p>
-          </td>
-          <td><p>Element-wise equality between two tensors.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_eval.html">k_eval()</a></code> </p>
-          </td>
-          <td><p>Evaluates the value of a variable.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_exp.html">k_exp()</a></code> </p>
-          </td>
-          <td><p>Element-wise exponential.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_expand_dims.html">k_expand_dims()</a></code> </p>
-          </td>
-          <td><p>Adds a 1-sized dimension at index <code>axis</code>.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_eye.html">k_eye()</a></code> </p>
-          </td>
-          <td><p>Instantiate an identity matrix and returns it.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_flatten.html">k_flatten()</a></code> </p>
-          </td>
-          <td><p>Flatten a tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_floatx.html">k_floatx()</a></code> <code><a href="k_floatx.html">k_set_floatx()</a></code> </p>
-          </td>
-          <td><p>Default float type</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_foldl.html">k_foldl()</a></code> </p>
-          </td>
-          <td><p>Reduce elems using fn to combine them from left to right.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_foldr.html">k_foldr()</a></code> </p>
-          </td>
-          <td><p>Reduce elems using fn to combine them from right to left.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_function.html">k_function()</a></code> </p>
-          </td>
-          <td><p>Instantiates a Keras function</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_gather.html">k_gather()</a></code> </p>
-          </td>
-          <td><p>Retrieves the elements of indices <code>indices</code> in the tensor <code>reference</code>.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_get_session.html">k_get_session()</a></code> <code><a href="k_get_session.html">k_set_session()</a></code> </p>
-          </td>
-          <td><p>TF session to be used by the backend.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_get_uid.html">k_get_uid()</a></code> </p>
-          </td>
-          <td><p>Get the uid for the default graph.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_get_value.html">k_get_value()</a></code> </p>
-          </td>
-          <td><p>Returns the value of a variable.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_get_variable_shape.html">k_get_variable_shape()</a></code> </p>
-          </td>
-          <td><p>Returns the shape of a variable.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_gradients.html">k_gradients()</a></code> </p>
-          </td>
-          <td><p>Returns the gradients of <code>variables</code> w.r.t. <code>loss</code>.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_greater.html">k_greater()</a></code> </p>
-          </td>
-          <td><p>Element-wise truth value of (x &gt; y).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_greater_equal.html">k_greater_equal()</a></code> </p>
-          </td>
-          <td><p>Element-wise truth value of (x &gt;= y).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_hard_sigmoid.html">k_hard_sigmoid()</a></code> </p>
-          </td>
-          <td><p>Segment-wise linear approximation of sigmoid.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_identity.html">k_identity()</a></code> </p>
-          </td>
-          <td><p>Returns a tensor with the same content as the input tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_image_data_format.html">k_image_data_format()</a></code> <code><a href="k_image_data_format.html">k_set_image_data_format()</a></code> </p>
-          </td>
-          <td><p>Default image data format convention ('channels_first' or 'channels_last').</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_in_test_phase.html">k_in_test_phase()</a></code> </p>
-          </td>
-          <td><p>Selects <code>x</code> in test phase, and <code>alt</code> otherwise.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_in_top_k.html">k_in_top_k()</a></code> </p>
-          </td>
-          <td><p>Returns whether the <code>targets</code> are in the top <code>k</code> <code>predictions</code>.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_in_train_phase.html">k_in_train_phase()</a></code> </p>
-          </td>
-          <td><p>Selects <code>x</code> in train phase, and <code>alt</code> otherwise.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_int_shape.html">k_int_shape()</a></code> </p>
-          </td>
-          <td><p>Returns the shape of tensor or variable as a list of int or NULL entries.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_is_keras_tensor.html">k_is_keras_tensor()</a></code> </p>
-          </td>
-          <td><p>Returns whether <code>x</code> is a Keras tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_is_placeholder.html">k_is_placeholder()</a></code> </p>
-          </td>
-          <td><p>Returns whether <code>x</code> is a placeholder.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_is_sparse.html">k_is_sparse()</a></code> </p>
-          </td>
-          <td><p>Returns whether a tensor is a sparse tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_is_tensor.html">k_is_tensor()</a></code> </p>
-          </td>
-          <td><p>Returns whether <code>x</code> is a symbolic tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_l2_normalize.html">k_l2_normalize()</a></code> </p>
-          </td>
-          <td><p>Normalizes a tensor wrt the L2 norm alongside the specified axis.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_learning_phase.html">k_learning_phase()</a></code> </p>
-          </td>
-          <td><p>Returns the learning phase flag.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_less.html">k_less()</a></code> </p>
-          </td>
-          <td><p>Element-wise truth value of (x &lt; y).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_less_equal.html">k_less_equal()</a></code> </p>
-          </td>
-          <td><p>Element-wise truth value of (x &lt;= y).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_local_conv1d.html">k_local_conv1d()</a></code> </p>
-          </td>
-          <td><p>Apply 1D conv with un-shared weights.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_local_conv2d.html">k_local_conv2d()</a></code> </p>
-          </td>
-          <td><p>Apply 2D conv with un-shared weights.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_log.html">k_log()</a></code> </p>
-          </td>
-          <td><p>Element-wise log.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_logsumexp.html">k_logsumexp()</a></code> </p>
-          </td>
-          <td><p>Computes log(sum(exp(elements across dimensions of a tensor))).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_manual_variable_initialization.html">k_manual_variable_initialization()</a></code> </p>
-          </td>
-          <td><p>Sets the manual variable initialization flag.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_map_fn.html">k_map_fn()</a></code> </p>
-          </td>
-          <td><p>Map the function fn over the elements elems and return the outputs.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_max.html">k_max()</a></code> </p>
-          </td>
-          <td><p>Maximum value in a tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_maximum.html">k_maximum()</a></code> </p>
-          </td>
-          <td><p>Element-wise maximum of two tensors.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_mean.html">k_mean()</a></code> </p>
-          </td>
-          <td><p>Mean of a tensor, alongside the specified axis.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_min.html">k_min()</a></code> </p>
-          </td>
-          <td><p>Minimum value in a tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_minimum.html">k_minimum()</a></code> </p>
-          </td>
-          <td><p>Element-wise minimum of two tensors.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_moving_average_update.html">k_moving_average_update()</a></code> </p>
-          </td>
-          <td><p>Compute the moving average of a variable.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_ndim.html">k_ndim()</a></code> </p>
-          </td>
-          <td><p>Returns the number of axes in a tensor, as an integer.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_normalize_batch_in_training.html">k_normalize_batch_in_training()</a></code> </p>
-          </td>
-          <td><p>Computes mean and std for batch then apply batch_normalization on batch.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_not_equal.html">k_not_equal()</a></code> </p>
-          </td>
-          <td><p>Element-wise inequality between two tensors.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_one_hot.html">k_one_hot()</a></code> </p>
-          </td>
-          <td><p>Computes the one-hot representation of an integer tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_ones.html">k_ones()</a></code> </p>
-          </td>
-          <td><p>Instantiates an all-ones tensor variable and returns it.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_ones_like.html">k_ones_like()</a></code> </p>
-          </td>
-          <td><p>Instantiates an all-ones variable of the same shape as another tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_permute_dimensions.html">k_permute_dimensions()</a></code> </p>
-          </td>
-          <td><p>Permutes axes in a tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_placeholder.html">k_placeholder()</a></code> </p>
-          </td>
-          <td><p>Instantiates a placeholder tensor and returns it.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_pool2d.html">k_pool2d()</a></code> </p>
-          </td>
-          <td><p>2D Pooling.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_pool3d.html">k_pool3d()</a></code> </p>
-          </td>
-          <td><p>3D Pooling.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_pow.html">k_pow()</a></code> </p>
-          </td>
-          <td><p>Element-wise exponentiation.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_print_tensor.html">k_print_tensor()</a></code> </p>
-          </td>
-          <td><p>Prints <code>message</code> and the tensor value when evaluated.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_prod.html">k_prod()</a></code> </p>
-          </td>
-          <td><p>Multiplies the values in a tensor, alongside the specified axis.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_random_binomial.html">k_random_binomial()</a></code> </p>
-          </td>
-          <td><p>Returns a tensor with random binomial distribution of values.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_random_normal.html">k_random_normal()</a></code> </p>
-          </td>
-          <td><p>Returns a tensor with normal distribution of values.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_random_normal_variable.html">k_random_normal_variable()</a></code> </p>
-          </td>
-          <td><p>Instantiates a variable with values drawn from a normal distribution.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_random_uniform.html">k_random_uniform()</a></code> </p>
-          </td>
-          <td><p>Returns a tensor with uniform distribution of values.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_random_uniform_variable.html">k_random_uniform_variable()</a></code> </p>
-          </td>
-          <td><p>Instantiates a variable with values drawn from a uniform distribution.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_relu.html">k_relu()</a></code> </p>
-          </td>
-          <td><p>Rectified linear unit.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_repeat.html">k_repeat()</a></code> </p>
-          </td>
-          <td><p>Repeats a 2D tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_repeat_elements.html">k_repeat_elements()</a></code> </p>
-          </td>
-          <td><p>Repeats the elements of a tensor along an axis.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_reset_uids.html">k_reset_uids()</a></code> </p>
-          </td>
-          <td><p>Reset graph identifiers.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_reshape.html">k_reshape()</a></code> </p>
-          </td>
-          <td><p>Reshapes a tensor to the specified shape.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_resize_images.html">k_resize_images()</a></code> </p>
-          </td>
-          <td><p>Resizes the images contained in a 4D tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_resize_volumes.html">k_resize_volumes()</a></code> </p>
-          </td>
-          <td><p>Resizes the volume contained in a 5D tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_reverse.html">k_reverse()</a></code> </p>
-          </td>
-          <td><p>Reverse a tensor along the specified axes.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_rnn.html">k_rnn()</a></code> </p>
-          </td>
-          <td><p>Iterates over the time dimension of a tensor</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_round.html">k_round()</a></code> </p>
-          </td>
-          <td><p>Element-wise rounding to the closest integer.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_separable_conv2d.html">k_separable_conv2d()</a></code> </p>
-          </td>
-          <td><p>2D convolution with separable filters.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_set_learning_phase.html">k_set_learning_phase()</a></code> </p>
-          </td>
-          <td><p>Sets the learning phase to a fixed value.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_set_value.html">k_set_value()</a></code> </p>
-          </td>
-          <td><p>Sets the value of a variable, from an R array.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_shape.html">k_shape()</a></code> </p>
-          </td>
-          <td><p>Returns the symbolic shape of a tensor or variable.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_sigmoid.html">k_sigmoid()</a></code> </p>
-          </td>
-          <td><p>Element-wise sigmoid.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_sign.html">k_sign()</a></code> </p>
-          </td>
-          <td><p>Element-wise sign.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_sin.html">k_sin()</a></code> </p>
-          </td>
-          <td><p>Computes sin of x element-wise.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_softmax.html">k_softmax()</a></code> </p>
-          </td>
-          <td><p>Softmax of a tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_softplus.html">k_softplus()</a></code> </p>
-          </td>
-          <td><p>Softplus of a tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_softsign.html">k_softsign()</a></code> </p>
-          </td>
-          <td><p>Softsign of a tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_sparse_categorical_crossentropy.html">k_sparse_categorical_crossentropy()</a></code> </p>
-          </td>
-          <td><p>Categorical crossentropy with integer targets.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_spatial_2d_padding.html">k_spatial_2d_padding()</a></code> </p>
-          </td>
-          <td><p>Pads the 2nd and 3rd dimensions of a 4D tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_spatial_3d_padding.html">k_spatial_3d_padding()</a></code> </p>
-          </td>
-          <td><p>Pads 5D tensor with zeros along the depth, height, width dimensions.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_sqrt.html">k_sqrt()</a></code> </p>
-          </td>
-          <td><p>Element-wise square root.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_square.html">k_square()</a></code> </p>
-          </td>
-          <td><p>Element-wise square.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_squeeze.html">k_squeeze()</a></code> </p>
-          </td>
-          <td><p>Removes a 1-dimension from the tensor at index <code>axis</code>.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_stack.html">k_stack()</a></code> </p>
-          </td>
-          <td><p>Stacks a list of rank <code>R</code> tensors into a rank <code>R+1</code> tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_std.html">k_std()</a></code> </p>
-          </td>
-          <td><p>Standard deviation of a tensor, alongside the specified axis.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_stop_gradient.html">k_stop_gradient()</a></code> </p>
-          </td>
-          <td><p>Returns <code>variables</code> but with zero gradient w.r.t. every other variable.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_sum.html">k_sum()</a></code> </p>
-          </td>
-          <td><p>Sum of the values in a tensor, alongside the specified axis.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_switch.html">k_switch()</a></code> </p>
-          </td>
-          <td><p>Switches between two operations depending on a scalar value.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_tanh.html">k_tanh()</a></code> </p>
-          </td>
-          <td><p>Element-wise tanh.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_temporal_padding.html">k_temporal_padding()</a></code> </p>
-          </td>
-          <td><p>Pads the middle dimension of a 3D tensor.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_tile.html">k_tile()</a></code> </p>
-          </td>
-          <td><p>Creates a tensor by tiling <code>x</code> by <code>n</code>.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_to_dense.html">k_to_dense()</a></code> </p>
-          </td>
-          <td><p>Converts a sparse tensor into a dense tensor and returns it.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_transpose.html">k_transpose()</a></code> </p>
-          </td>
-          <td><p>Transposes a tensor and returns it.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_truncated_normal.html">k_truncated_normal()</a></code> </p>
-          </td>
-          <td><p>Returns a tensor with truncated random normal distribution of values.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_update.html">k_update()</a></code> </p>
-          </td>
-          <td><p>Update the value of <code>x</code> to <code>new_x</code>.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_update_add.html">k_update_add()</a></code> </p>
-          </td>
-          <td><p>Update the value of <code>x</code> by adding <code>increment</code>.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_update_sub.html">k_update_sub()</a></code> </p>
-          </td>
-          <td><p>Update the value of <code>x</code> by subtracting <code>decrement</code>.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_var.html">k_var()</a></code> </p>
-          </td>
-          <td><p>Variance of a tensor, alongside the specified axis.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_variable.html">k_variable()</a></code> </p>
-          </td>
-          <td><p>Instantiates a variable and returns it.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_zeros.html">k_zeros()</a></code> </p>
-          </td>
-          <td><p>Instantiates an all-zeros variable and returns it.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="k_zeros_like.html">k_zeros_like()</a></code> </p>
-          </td>
-          <td><p>Instantiates an all-zeros variable of the same shape as another tensor.</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="generator_next.html">generator_next()</a></code> </p>
+        </td>
+        <td><p>Retrieve the next item from a generator</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-optimizers" class="hasAnchor"><a href="#section-optimizers" class="anchor"></a>Optimizers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="optimizer_sgd.html">optimizer_sgd()</a></code> </p>
+        </td>
+        <td><p>Stochastic gradient descent optimizer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="optimizer_rmsprop.html">optimizer_rmsprop()</a></code> </p>
+        </td>
+        <td><p>RMSProp optimizer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="optimizer_adagrad.html">optimizer_adagrad()</a></code> </p>
+        </td>
+        <td><p>Adagrad optimizer.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="optimizer_adadelta.html">optimizer_adadelta()</a></code> </p>
+        </td>
+        <td><p>Adadelta optimizer.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="optimizer_adam.html">optimizer_adam()</a></code> </p>
+        </td>
+        <td><p>Adam optimizer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="optimizer_adamax.html">optimizer_adamax()</a></code> </p>
+        </td>
+        <td><p>Adamax optimizer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="optimizer_nadam.html">optimizer_nadam()</a></code> </p>
+        </td>
+        <td><p>Nesterov Adam optimizer</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-callbacks" class="hasAnchor"><a href="#section-callbacks" class="anchor"></a>Callbacks</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="callback_progbar_logger.html">callback_progbar_logger()</a></code> </p>
+        </td>
+        <td><p>Callback that prints metrics to stdout.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="callback_model_checkpoint.html">callback_model_checkpoint()</a></code> </p>
+        </td>
+        <td><p>Save the model after every epoch.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="callback_early_stopping.html">callback_early_stopping()</a></code> </p>
+        </td>
+        <td><p>Stop training when a monitored quantity has stopped improving.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="callback_remote_monitor.html">callback_remote_monitor()</a></code> </p>
+        </td>
+        <td><p>Callback used to stream events to a server.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="callback_learning_rate_scheduler.html">callback_learning_rate_scheduler()</a></code> </p>
+        </td>
+        <td><p>Learning rate scheduler.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="callback_tensorboard.html">callback_tensorboard()</a></code> </p>
+        </td>
+        <td><p>TensorBoard basic visualizations</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau()</a></code> </p>
+        </td>
+        <td><p>Reduce learning rate when a metric has stopped improving.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="callback_terminate_on_naan.html">callback_terminate_on_naan()</a></code> </p>
+        </td>
+        <td><p>Callback that terminates training when a NaN loss is encountered.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="callback_csv_logger.html">callback_csv_logger()</a></code> </p>
+        </td>
+        <td><p>Callback that streams epoch results to a csv file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="callback_lambda.html">callback_lambda()</a></code> </p>
+        </td>
+        <td><p>Create a custom callback</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="KerasCallback.html">KerasCallback</a></code> </p>
+        </td>
+        <td><p>Base R6 class for Keras callbacks</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-initializers" class="hasAnchor"><a href="#section-initializers" class="anchor"></a>Initializers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="initializer_zeros.html">initializer_zeros()</a></code> </p>
+        </td>
+        <td><p>Initializer that generates tensors initialized to 0.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="initializer_ones.html">initializer_ones()</a></code> </p>
+        </td>
+        <td><p>Initializer that generates tensors initialized to 1.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="initializer_constant.html">initializer_constant()</a></code> </p>
+        </td>
+        <td><p>Initializer that generates tensors initialized to a constant value.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="initializer_random_normal.html">initializer_random_normal()</a></code> </p>
+        </td>
+        <td><p>Initializer that generates tensors with a normal distribution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="initializer_random_uniform.html">initializer_random_uniform()</a></code> </p>
+        </td>
+        <td><p>Initializer that generates tensors with a uniform distribution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="initializer_truncated_normal.html">initializer_truncated_normal()</a></code> </p>
+        </td>
+        <td><p>Initializer that generates a truncated normal distribution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="initializer_variance_scaling.html">initializer_variance_scaling()</a></code> </p>
+        </td>
+        <td><p>Initializer capable of adapting its scale to the shape of weights.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="initializer_orthogonal.html">initializer_orthogonal()</a></code> </p>
+        </td>
+        <td><p>Initializer that generates a random orthogonal matrix.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="initializer_identity.html">initializer_identity()</a></code> </p>
+        </td>
+        <td><p>Initializer that generates the identity matrix.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="initializer_glorot_normal.html">initializer_glorot_normal()</a></code> </p>
+        </td>
+        <td><p>Glorot normal initializer, also called Xavier normal initializer.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="initializer_glorot_uniform.html">initializer_glorot_uniform()</a></code> </p>
+        </td>
+        <td><p>Glorot uniform initializer, also called Xavier uniform initializer.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="initializer_he_normal.html">initializer_he_normal()</a></code> </p>
+        </td>
+        <td><p>He normal initializer.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="initializer_he_uniform.html">initializer_he_uniform()</a></code> </p>
+        </td>
+        <td><p>He uniform variance scaling initializer.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="initializer_lecun_uniform.html">initializer_lecun_uniform()</a></code> </p>
+        </td>
+        <td><p>LeCun uniform initializer.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="initializer_lecun_normal.html">initializer_lecun_normal()</a></code> </p>
+        </td>
+        <td><p>LeCun normal initializer.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-constraints" class="hasAnchor"><a href="#section-constraints" class="anchor"></a>Constraints</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="constraints.html">constraint_maxnorm()</a></code> <code><a href="constraints.html">constraint_nonneg()</a></code> <code><a href="constraints.html">constraint_unitnorm()</a></code> <code><a href="constraints.html">constraint_minmaxnorm()</a></code> </p>
+        </td>
+        <td><p>Weight constraints</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="KerasConstraint.html">KerasConstraint</a></code> </p>
+        </td>
+        <td><p>Base R6 class for Keras constraints</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-utils" class="hasAnchor"><a href="#section-utils" class="anchor"></a>Utils</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="plot.keras_training_history.html">plot(<i>&lt;keras_training_history&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Plot training history</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="timeseries_generator.html">timeseries_generator()</a></code> </p>
+        </td>
+        <td><p>Utility function for generating batches of temporal data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="to_categorical.html">to_categorical()</a></code> </p>
+        </td>
+        <td><p>Converts a class vector (integers) to binary class matrix.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="normalize.html">normalize()</a></code> </p>
+        </td>
+        <td><p>Normalize a matrix or nd-array</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="with_custom_object_scope.html">with_custom_object_scope()</a></code> </p>
+        </td>
+        <td><p>Provide a scope with mappings of names to custom objects</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="keras_array.html">keras_array()</a></code> </p>
+        </td>
+        <td><p>Keras array object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="hdf5_matrix.html">hdf5_matrix()</a></code> </p>
+        </td>
+        <td><p>Representation of HDF5 dataset to be used instead of an R array</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_file.html">get_file()</a></code> </p>
+        </td>
+        <td><p>Downloads a file from a URL if it not already in the cache.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="reexports.html">reexports</a></code> </p>
+        </td>
+        <td><p>Objects exported from other packages</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="install_keras.html">install_keras()</a></code> </p>
+        </td>
+        <td><p>Install Keras and the TensorFlow backend</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="is_keras_available.html">is_keras_available()</a></code> </p>
+        </td>
+        <td><p>Check if Keras is Available</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="backend.html">backend()</a></code> </p>
+        </td>
+        <td><p>Keras backend tensor engine</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="implementation.html">implementation()</a></code> </p>
+        </td>
+        <td><p>Keras implementation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="use_implementation.html">use_implementation()</a></code> <code><a href="use_implementation.html">use_backend()</a></code> </p>
+        </td>
+        <td><p>Select a Keras implementation and backend</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-losses" class="hasAnchor"><a href="#section-losses" class="anchor"></a>Losses</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="loss_mean_squared_error.html">loss_mean_squared_error()</a></code> <code><a href="loss_mean_squared_error.html">loss_mean_absolute_error()</a></code> <code><a href="loss_mean_squared_error.html">loss_mean_absolute_percentage_error()</a></code> <code><a href="loss_mean_squared_error.html">loss_mean_squared_logarithmic_error()</a></code> <code><a href="loss_mean_squared_error.html">loss_squared_hinge()</a></code> <code><a href="loss_mean_squared_error.html">loss_hinge()</a></code> <code><a href="loss_mean_squared_error.html">loss_categorical_hinge()</a></code> <code><a href="loss_mean_squared_error.html">loss_logcosh()</a></code> <code><a href="loss_mean_squared_error.html">loss_categorical_crossentropy()</a></code> <code><a href="loss_mean_squared_error.html">loss_sparse_categorical_crossentropy()</a></code> <code><a href="loss_mean_squared_error.html">loss_binary_crossentropy()</a></code> <code><a href="loss_mean_squared_error.html">loss_kullback_leibler_divergence()</a></code> <code><a href="loss_mean_squared_error.html">loss_poisson()</a></code> <code><a href="loss_mean_squared_error.html">loss_cosine_proximity()</a></code> </p>
+        </td>
+        <td><p>Model loss functions</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-metrics" class="hasAnchor"><a href="#section-metrics" class="anchor"></a>Metrics</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="metric_binary_accuracy.html">metric_binary_accuracy()</a></code> <code><a href="metric_binary_accuracy.html">metric_binary_crossentropy()</a></code> <code><a href="metric_binary_accuracy.html">metric_categorical_accuracy()</a></code> <code><a href="metric_binary_accuracy.html">metric_categorical_crossentropy()</a></code> <code><a href="metric_binary_accuracy.html">metric_cosine_proximity()</a></code> <code><a href="metric_binary_accuracy.html">metric_hinge()</a></code> <code><a href="metric_binary_accuracy.html">metric_kullback_leibler_divergence()</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_absolute_error()</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_absolute_percentage_error()</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_squared_error()</a></code> <code><a href="metric_binary_accuracy.html">metric_mean_squared_logarithmic_error()</a></code> <code><a href="metric_binary_accuracy.html">metric_poisson()</a></code> <code><a href="metric_binary_accuracy.html">metric_sparse_categorical_crossentropy()</a></code> <code><a href="metric_binary_accuracy.html">metric_squared_hinge()</a></code> <code><a href="metric_binary_accuracy.html">metric_top_k_categorical_accuracy()</a></code> <code><a href="metric_binary_accuracy.html">metric_sparse_top_k_categorical_accuracy()</a></code> <code><a href="metric_binary_accuracy.html">custom_metric()</a></code> </p>
+        </td>
+        <td><p>Model performance metrics</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-regularizers" class="hasAnchor"><a href="#section-regularizers" class="anchor"></a>Regularizers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="regularizer_l1.html">regularizer_l1()</a></code> <code><a href="regularizer_l1.html">regularizer_l2()</a></code> <code><a href="regularizer_l1.html">regularizer_l1_l2()</a></code> </p>
+        </td>
+        <td><p>L1 and L2 regularization</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-activations" class="hasAnchor"><a href="#section-activations" class="anchor"></a>Activations</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="activation_relu.html">activation_relu()</a></code> <code><a href="activation_relu.html">activation_elu()</a></code> <code><a href="activation_relu.html">activation_selu()</a></code> <code><a href="activation_relu.html">activation_hard_sigmoid()</a></code> <code><a href="activation_relu.html">activation_linear()</a></code> <code><a href="activation_relu.html">activation_sigmoid()</a></code> <code><a href="activation_relu.html">activation_softmax()</a></code> <code><a href="activation_relu.html">activation_softplus()</a></code> <code><a href="activation_relu.html">activation_softsign()</a></code> <code><a href="activation_relu.html">activation_tanh()</a></code> </p>
+        </td>
+        <td><p>Activation functions</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-backend" class="hasAnchor"><a href="#section-backend" class="anchor"></a>Backend</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="k_abs.html">k_abs()</a></code> </p>
+        </td>
+        <td><p>Element-wise absolute value.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_all.html">k_all()</a></code> </p>
+        </td>
+        <td><p>Bitwise reduction (logical AND).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_any.html">k_any()</a></code> </p>
+        </td>
+        <td><p>Bitwise reduction (logical OR).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_arange.html">k_arange()</a></code> </p>
+        </td>
+        <td><p>Creates a 1D tensor containing a sequence of integers.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_argmax.html">k_argmax()</a></code> </p>
+        </td>
+        <td><p>Returns the index of the maximum value along an axis.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_argmin.html">k_argmin()</a></code> </p>
+        </td>
+        <td><p>Returns the index of the minimum value along an axis.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_backend.html">k_backend()</a></code> </p>
+        </td>
+        <td><p>Active Keras backend</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_batch_dot.html">k_batch_dot()</a></code> </p>
+        </td>
+        <td><p>Batchwise dot product.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_batch_flatten.html">k_batch_flatten()</a></code> </p>
+        </td>
+        <td><p>Turn a nD tensor into a 2D tensor with same 1st dimension.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_batch_get_value.html">k_batch_get_value()</a></code> </p>
+        </td>
+        <td><p>Returns the value of more than one tensor variable.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_batch_normalization.html">k_batch_normalization()</a></code> </p>
+        </td>
+        <td><p>Applies batch normalization on x given mean, var, beta and gamma.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_batch_set_value.html">k_batch_set_value()</a></code> </p>
+        </td>
+        <td><p>Sets the values of many tensor variables at once.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_bias_add.html">k_bias_add()</a></code> </p>
+        </td>
+        <td><p>Adds a bias vector to a tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_binary_crossentropy.html">k_binary_crossentropy()</a></code> </p>
+        </td>
+        <td><p>Binary crossentropy between an output tensor and a target tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_cast.html">k_cast()</a></code> </p>
+        </td>
+        <td><p>Casts a tensor to a different dtype and returns it.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_cast_to_floatx.html">k_cast_to_floatx()</a></code> </p>
+        </td>
+        <td><p>Cast an array to the default Keras float type.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_categorical_crossentropy.html">k_categorical_crossentropy()</a></code> </p>
+        </td>
+        <td><p>Categorical crossentropy between an output tensor and a target tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_clear_session.html">k_clear_session()</a></code> </p>
+        </td>
+        <td><p>Destroys the current TF graph and creates a new one.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_clip.html">k_clip()</a></code> </p>
+        </td>
+        <td><p>Element-wise value clipping.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_concatenate.html">k_concatenate()</a></code> </p>
+        </td>
+        <td><p>Concatenates a list of tensors alongside the specified axis.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_constant.html">k_constant()</a></code> </p>
+        </td>
+        <td><p>Creates a constant tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_conv1d.html">k_conv1d()</a></code> </p>
+        </td>
+        <td><p>1D convolution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_conv2d.html">k_conv2d()</a></code> </p>
+        </td>
+        <td><p>2D convolution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_conv2d_transpose.html">k_conv2d_transpose()</a></code> </p>
+        </td>
+        <td><p>2D deconvolution (i.e. transposed convolution).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_conv3d.html">k_conv3d()</a></code> </p>
+        </td>
+        <td><p>3D convolution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_conv3d_transpose.html">k_conv3d_transpose()</a></code> </p>
+        </td>
+        <td><p>3D deconvolution (i.e. transposed convolution).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_cos.html">k_cos()</a></code> </p>
+        </td>
+        <td><p>Computes cos of x element-wise.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_count_params.html">k_count_params()</a></code> </p>
+        </td>
+        <td><p>Returns the static number of elements in a Keras variable or tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_ctc_batch_cost.html">k_ctc_batch_cost()</a></code> </p>
+        </td>
+        <td><p>Runs CTC loss algorithm on each batch element.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_ctc_decode.html">k_ctc_decode()</a></code> </p>
+        </td>
+        <td><p>Decodes the output of a softmax.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_ctc_label_dense_to_sparse.html">k_ctc_label_dense_to_sparse()</a></code> </p>
+        </td>
+        <td><p>Converts CTC labels from dense to sparse.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_cumprod.html">k_cumprod()</a></code> </p>
+        </td>
+        <td><p>Cumulative product of the values in a tensor, alongside the specified axis.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_cumsum.html">k_cumsum()</a></code> </p>
+        </td>
+        <td><p>Cumulative sum of the values in a tensor, alongside the specified axis.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_depthwise_conv2d.html">k_depthwise_conv2d()</a></code> </p>
+        </td>
+        <td><p>Depthwise 2D convolution with separable filters.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_dot.html">k_dot()</a></code> </p>
+        </td>
+        <td><p>Multiplies 2 tensors (and/or variables) and returns a <em>tensor</em>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_dropout.html">k_dropout()</a></code> </p>
+        </td>
+        <td><p>Sets entries in <code>x</code> to zero at random, while scaling the entire tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_dtype.html">k_dtype()</a></code> </p>
+        </td>
+        <td><p>Returns the dtype of a Keras tensor or variable, as a string.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_elu.html">k_elu()</a></code> </p>
+        </td>
+        <td><p>Exponential linear unit.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_epsilon.html">k_epsilon()</a></code> <code><a href="k_epsilon.html">k_set_epsilon()</a></code> </p>
+        </td>
+        <td><p>Fuzz factor used in numeric expressions.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_equal.html">k_equal()</a></code> </p>
+        </td>
+        <td><p>Element-wise equality between two tensors.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_eval.html">k_eval()</a></code> </p>
+        </td>
+        <td><p>Evaluates the value of a variable.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_exp.html">k_exp()</a></code> </p>
+        </td>
+        <td><p>Element-wise exponential.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_expand_dims.html">k_expand_dims()</a></code> </p>
+        </td>
+        <td><p>Adds a 1-sized dimension at index <code>axis</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_eye.html">k_eye()</a></code> </p>
+        </td>
+        <td><p>Instantiate an identity matrix and returns it.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_flatten.html">k_flatten()</a></code> </p>
+        </td>
+        <td><p>Flatten a tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_floatx.html">k_floatx()</a></code> <code><a href="k_floatx.html">k_set_floatx()</a></code> </p>
+        </td>
+        <td><p>Default float type</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_foldl.html">k_foldl()</a></code> </p>
+        </td>
+        <td><p>Reduce elems using fn to combine them from left to right.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_foldr.html">k_foldr()</a></code> </p>
+        </td>
+        <td><p>Reduce elems using fn to combine them from right to left.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_function.html">k_function()</a></code> </p>
+        </td>
+        <td><p>Instantiates a Keras function</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_gather.html">k_gather()</a></code> </p>
+        </td>
+        <td><p>Retrieves the elements of indices <code>indices</code> in the tensor <code>reference</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_get_session.html">k_get_session()</a></code> <code><a href="k_get_session.html">k_set_session()</a></code> </p>
+        </td>
+        <td><p>TF session to be used by the backend.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_get_uid.html">k_get_uid()</a></code> </p>
+        </td>
+        <td><p>Get the uid for the default graph.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_get_value.html">k_get_value()</a></code> </p>
+        </td>
+        <td><p>Returns the value of a variable.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_get_variable_shape.html">k_get_variable_shape()</a></code> </p>
+        </td>
+        <td><p>Returns the shape of a variable.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_gradients.html">k_gradients()</a></code> </p>
+        </td>
+        <td><p>Returns the gradients of <code>variables</code> w.r.t. <code>loss</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_greater.html">k_greater()</a></code> </p>
+        </td>
+        <td><p>Element-wise truth value of (x &gt; y).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_greater_equal.html">k_greater_equal()</a></code> </p>
+        </td>
+        <td><p>Element-wise truth value of (x &gt;= y).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_hard_sigmoid.html">k_hard_sigmoid()</a></code> </p>
+        </td>
+        <td><p>Segment-wise linear approximation of sigmoid.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_identity.html">k_identity()</a></code> </p>
+        </td>
+        <td><p>Returns a tensor with the same content as the input tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_image_data_format.html">k_image_data_format()</a></code> <code><a href="k_image_data_format.html">k_set_image_data_format()</a></code> </p>
+        </td>
+        <td><p>Default image data format convention ('channels_first' or 'channels_last').</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_in_test_phase.html">k_in_test_phase()</a></code> </p>
+        </td>
+        <td><p>Selects <code>x</code> in test phase, and <code>alt</code> otherwise.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_in_top_k.html">k_in_top_k()</a></code> </p>
+        </td>
+        <td><p>Returns whether the <code>targets</code> are in the top <code>k</code> <code>predictions</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_in_train_phase.html">k_in_train_phase()</a></code> </p>
+        </td>
+        <td><p>Selects <code>x</code> in train phase, and <code>alt</code> otherwise.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_int_shape.html">k_int_shape()</a></code> </p>
+        </td>
+        <td><p>Returns the shape of tensor or variable as a list of int or NULL entries.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_is_keras_tensor.html">k_is_keras_tensor()</a></code> </p>
+        </td>
+        <td><p>Returns whether <code>x</code> is a Keras tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_is_placeholder.html">k_is_placeholder()</a></code> </p>
+        </td>
+        <td><p>Returns whether <code>x</code> is a placeholder.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_is_sparse.html">k_is_sparse()</a></code> </p>
+        </td>
+        <td><p>Returns whether a tensor is a sparse tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_is_tensor.html">k_is_tensor()</a></code> </p>
+        </td>
+        <td><p>Returns whether <code>x</code> is a symbolic tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_l2_normalize.html">k_l2_normalize()</a></code> </p>
+        </td>
+        <td><p>Normalizes a tensor wrt the L2 norm alongside the specified axis.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_learning_phase.html">k_learning_phase()</a></code> </p>
+        </td>
+        <td><p>Returns the learning phase flag.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_less.html">k_less()</a></code> </p>
+        </td>
+        <td><p>Element-wise truth value of (x &lt; y).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_less_equal.html">k_less_equal()</a></code> </p>
+        </td>
+        <td><p>Element-wise truth value of (x &lt;= y).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_local_conv1d.html">k_local_conv1d()</a></code> </p>
+        </td>
+        <td><p>Apply 1D conv with un-shared weights.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_local_conv2d.html">k_local_conv2d()</a></code> </p>
+        </td>
+        <td><p>Apply 2D conv with un-shared weights.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_log.html">k_log()</a></code> </p>
+        </td>
+        <td><p>Element-wise log.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_logsumexp.html">k_logsumexp()</a></code> </p>
+        </td>
+        <td><p>Computes log(sum(exp(elements across dimensions of a tensor))).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_manual_variable_initialization.html">k_manual_variable_initialization()</a></code> </p>
+        </td>
+        <td><p>Sets the manual variable initialization flag.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_map_fn.html">k_map_fn()</a></code> </p>
+        </td>
+        <td><p>Map the function fn over the elements elems and return the outputs.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_max.html">k_max()</a></code> </p>
+        </td>
+        <td><p>Maximum value in a tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_maximum.html">k_maximum()</a></code> </p>
+        </td>
+        <td><p>Element-wise maximum of two tensors.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_mean.html">k_mean()</a></code> </p>
+        </td>
+        <td><p>Mean of a tensor, alongside the specified axis.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_min.html">k_min()</a></code> </p>
+        </td>
+        <td><p>Minimum value in a tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_minimum.html">k_minimum()</a></code> </p>
+        </td>
+        <td><p>Element-wise minimum of two tensors.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_moving_average_update.html">k_moving_average_update()</a></code> </p>
+        </td>
+        <td><p>Compute the moving average of a variable.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_ndim.html">k_ndim()</a></code> </p>
+        </td>
+        <td><p>Returns the number of axes in a tensor, as an integer.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_normalize_batch_in_training.html">k_normalize_batch_in_training()</a></code> </p>
+        </td>
+        <td><p>Computes mean and std for batch then apply batch_normalization on batch.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_not_equal.html">k_not_equal()</a></code> </p>
+        </td>
+        <td><p>Element-wise inequality between two tensors.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_one_hot.html">k_one_hot()</a></code> </p>
+        </td>
+        <td><p>Computes the one-hot representation of an integer tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_ones.html">k_ones()</a></code> </p>
+        </td>
+        <td><p>Instantiates an all-ones tensor variable and returns it.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_ones_like.html">k_ones_like()</a></code> </p>
+        </td>
+        <td><p>Instantiates an all-ones variable of the same shape as another tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_permute_dimensions.html">k_permute_dimensions()</a></code> </p>
+        </td>
+        <td><p>Permutes axes in a tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_placeholder.html">k_placeholder()</a></code> </p>
+        </td>
+        <td><p>Instantiates a placeholder tensor and returns it.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_pool2d.html">k_pool2d()</a></code> </p>
+        </td>
+        <td><p>2D Pooling.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_pool3d.html">k_pool3d()</a></code> </p>
+        </td>
+        <td><p>3D Pooling.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_pow.html">k_pow()</a></code> </p>
+        </td>
+        <td><p>Element-wise exponentiation.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_print_tensor.html">k_print_tensor()</a></code> </p>
+        </td>
+        <td><p>Prints <code>message</code> and the tensor value when evaluated.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_prod.html">k_prod()</a></code> </p>
+        </td>
+        <td><p>Multiplies the values in a tensor, alongside the specified axis.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_random_binomial.html">k_random_binomial()</a></code> </p>
+        </td>
+        <td><p>Returns a tensor with random binomial distribution of values.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_random_normal.html">k_random_normal()</a></code> </p>
+        </td>
+        <td><p>Returns a tensor with normal distribution of values.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_random_normal_variable.html">k_random_normal_variable()</a></code> </p>
+        </td>
+        <td><p>Instantiates a variable with values drawn from a normal distribution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_random_uniform.html">k_random_uniform()</a></code> </p>
+        </td>
+        <td><p>Returns a tensor with uniform distribution of values.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_random_uniform_variable.html">k_random_uniform_variable()</a></code> </p>
+        </td>
+        <td><p>Instantiates a variable with values drawn from a uniform distribution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_relu.html">k_relu()</a></code> </p>
+        </td>
+        <td><p>Rectified linear unit.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_repeat.html">k_repeat()</a></code> </p>
+        </td>
+        <td><p>Repeats a 2D tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_repeat_elements.html">k_repeat_elements()</a></code> </p>
+        </td>
+        <td><p>Repeats the elements of a tensor along an axis.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_reset_uids.html">k_reset_uids()</a></code> </p>
+        </td>
+        <td><p>Reset graph identifiers.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_reshape.html">k_reshape()</a></code> </p>
+        </td>
+        <td><p>Reshapes a tensor to the specified shape.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_resize_images.html">k_resize_images()</a></code> </p>
+        </td>
+        <td><p>Resizes the images contained in a 4D tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_resize_volumes.html">k_resize_volumes()</a></code> </p>
+        </td>
+        <td><p>Resizes the volume contained in a 5D tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_reverse.html">k_reverse()</a></code> </p>
+        </td>
+        <td><p>Reverse a tensor along the specified axes.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_rnn.html">k_rnn()</a></code> </p>
+        </td>
+        <td><p>Iterates over the time dimension of a tensor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_round.html">k_round()</a></code> </p>
+        </td>
+        <td><p>Element-wise rounding to the closest integer.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_separable_conv2d.html">k_separable_conv2d()</a></code> </p>
+        </td>
+        <td><p>2D convolution with separable filters.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_set_learning_phase.html">k_set_learning_phase()</a></code> </p>
+        </td>
+        <td><p>Sets the learning phase to a fixed value.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_set_value.html">k_set_value()</a></code> </p>
+        </td>
+        <td><p>Sets the value of a variable, from an R array.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_shape.html">k_shape()</a></code> </p>
+        </td>
+        <td><p>Returns the symbolic shape of a tensor or variable.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_sigmoid.html">k_sigmoid()</a></code> </p>
+        </td>
+        <td><p>Element-wise sigmoid.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_sign.html">k_sign()</a></code> </p>
+        </td>
+        <td><p>Element-wise sign.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_sin.html">k_sin()</a></code> </p>
+        </td>
+        <td><p>Computes sin of x element-wise.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_softmax.html">k_softmax()</a></code> </p>
+        </td>
+        <td><p>Softmax of a tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_softplus.html">k_softplus()</a></code> </p>
+        </td>
+        <td><p>Softplus of a tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_softsign.html">k_softsign()</a></code> </p>
+        </td>
+        <td><p>Softsign of a tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_sparse_categorical_crossentropy.html">k_sparse_categorical_crossentropy()</a></code> </p>
+        </td>
+        <td><p>Categorical crossentropy with integer targets.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_spatial_2d_padding.html">k_spatial_2d_padding()</a></code> </p>
+        </td>
+        <td><p>Pads the 2nd and 3rd dimensions of a 4D tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_spatial_3d_padding.html">k_spatial_3d_padding()</a></code> </p>
+        </td>
+        <td><p>Pads 5D tensor with zeros along the depth, height, width dimensions.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_sqrt.html">k_sqrt()</a></code> </p>
+        </td>
+        <td><p>Element-wise square root.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_square.html">k_square()</a></code> </p>
+        </td>
+        <td><p>Element-wise square.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_squeeze.html">k_squeeze()</a></code> </p>
+        </td>
+        <td><p>Removes a 1-dimension from the tensor at index <code>axis</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_stack.html">k_stack()</a></code> </p>
+        </td>
+        <td><p>Stacks a list of rank <code>R</code> tensors into a rank <code>R+1</code> tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_std.html">k_std()</a></code> </p>
+        </td>
+        <td><p>Standard deviation of a tensor, alongside the specified axis.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_stop_gradient.html">k_stop_gradient()</a></code> </p>
+        </td>
+        <td><p>Returns <code>variables</code> but with zero gradient w.r.t. every other variable.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_sum.html">k_sum()</a></code> </p>
+        </td>
+        <td><p>Sum of the values in a tensor, alongside the specified axis.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_switch.html">k_switch()</a></code> </p>
+        </td>
+        <td><p>Switches between two operations depending on a scalar value.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_tanh.html">k_tanh()</a></code> </p>
+        </td>
+        <td><p>Element-wise tanh.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_temporal_padding.html">k_temporal_padding()</a></code> </p>
+        </td>
+        <td><p>Pads the middle dimension of a 3D tensor.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_tile.html">k_tile()</a></code> </p>
+        </td>
+        <td><p>Creates a tensor by tiling <code>x</code> by <code>n</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_to_dense.html">k_to_dense()</a></code> </p>
+        </td>
+        <td><p>Converts a sparse tensor into a dense tensor and returns it.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_transpose.html">k_transpose()</a></code> </p>
+        </td>
+        <td><p>Transposes a tensor and returns it.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_truncated_normal.html">k_truncated_normal()</a></code> </p>
+        </td>
+        <td><p>Returns a tensor with truncated random normal distribution of values.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_update.html">k_update()</a></code> </p>
+        </td>
+        <td><p>Update the value of <code>x</code> to <code>new_x</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_update_add.html">k_update_add()</a></code> </p>
+        </td>
+        <td><p>Update the value of <code>x</code> by adding <code>increment</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_update_sub.html">k_update_sub()</a></code> </p>
+        </td>
+        <td><p>Update the value of <code>x</code> by subtracting <code>decrement</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_var.html">k_var()</a></code> </p>
+        </td>
+        <td><p>Variance of a tensor, alongside the specified axis.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_variable.html">k_variable()</a></code> </p>
+        </td>
+        <td><p>Instantiates a variable and returns it.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_zeros.html">k_zeros()</a></code> </p>
+        </td>
+        <td><p>Instantiates an all-zeros variable and returns it.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="k_zeros_like.html">k_zeros_like()</a></code> </p>
+        </td>
+        <td><p>Instantiates an all-zeros variable of the same shape as another tensor.</p></td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

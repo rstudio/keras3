@@ -1,6 +1,6 @@
 pandoc: 2.2.1
-pkgdown: 0.1.0.9000
-pkgdown_sha: cb70bf3abeac66cb969901ef5f9caeac9c2ab8cc
+pkgdown: 1.1.0
+pkgdown_sha: ~
 articles:
   about_keras_layers: about_keras_layers.html
   about_keras_models: about_keras_models.html
@@ -42,6 +42,7 @@ articles:
   mnist_tfrecord: examples/mnist_tfrecord.html
   mnist_transfer_cnn: examples/mnist_transfer_cnn.html
   neural_style_transfer: examples/neural_style_transfer.html
+  nmt_attention: examples/nmt_attention.html
   nueral_doodle: examples/nueral_doodle.html
   pretrained_word_embeddings: examples/pretrained_word_embeddings.html
   quora_siamese_lstm: examples/quora_siamese_lstm.html
