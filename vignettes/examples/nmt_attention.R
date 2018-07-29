@@ -1,4 +1,5 @@
-#' This is the companion code to the post "An attention mechanism for Keras"
+#' This is the companion code to the post 
+#' "Attention-based Neural Machine Translation with Keras"
 #' on the TensorFlow for R blog.
 #' 
 #' https://blogs.rstudio.com/tensorflow/posts/2018-07-30-attention-layer/
