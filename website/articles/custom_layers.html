@@ -8,8 +8,8 @@
 <title>Writing Custom Keras Layers • keras</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <script src="../extra.js"></script><meta property="og:title" content="Writing Custom Keras Layers">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
@@ -20,7 +20,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9004</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9005</span>
       </span>
     </div>
 
@@ -122,18 +122,18 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Writing Custom Keras Layers</h1>
             
       
       
+      <div class="hidden name"><code>custom_layers.Rmd</code></div>
 
     </div>
 
     
     
-<div class="contents">
 <p>If the existing Keras layers don’t meet your requirements you can create a custom layer. For simple, stateless custom operations, you are probably better off using <code><a href="../reference/layer_lambda.html">layer_lambda()</a></code> layers. But for any custom operation that has trainable weights, you should implement your own layer.</p>
 <p>The example below illustrates the skeleton of a Keras custom layer. The <a href="https://keras.rstudio.com/articles/examples/mnist_antirectifier.html">mnist_antirectifier</a> example includes another demonstration of creating a custom layer.</p>
 <div id="keraslayer-r6-class" class="section level2">
@@ -209,7 +209,6 @@
 <li><p>Some additional parameters not used by the layer (<code>name</code> and <code>trainable</code>) are in the function signature. Custom layer functions can include any of the core layer function arguments (<code>input_shape</code>, <code>batch_input_shape</code>, <code>batch_size</code>, <code>dtype</code>, <code>name</code>, <code>trainable</code>, and <code>weights</code>) and they will be automatically forwarded to the Layer base class.</p></li>
 </ol>
 <p>See the <a href="https://keras.rstudio.com/articles/examples/mnist_antirectifier.html">mnist_antirectifier</a> example for another demonstration of creating a custom layer.</p>
-</div>
 </div>
   </div>
 
