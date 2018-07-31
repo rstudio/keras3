@@ -3,7 +3,10 @@
 import os
 
 if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'tensorflow'):
-  from tensorflow.python.keras.engine import Model
+  try:
+    from tensorflow.python.keras.engine import Model
+  except:
+    from tensorflow.python.keras.engine.training import Model
 else:
   from keras.engine import Model
  
