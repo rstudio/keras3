@@ -1,0 +1,303 @@
+---
+title: "Tutorial: Predict house prices: Regression"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tutorial: Predict house prices: Regression}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+type: docs
+repo: https://github.com/rstudio/keras
+menu:
+  main:
+    name: "Tutorial: Predict house prices: Regression"
+    identifier: "keras-tutorial-basic-regression"
+    parent: "keras-tutorials"
+    weight: 10
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+
+In a regression problem, we aim to predict the output of a continuous value, like a price or a probability. Contrast this with a classification problem, where we aim to predict a discrete label (for example, where a picture contains an apple or an orange).
+
+This notebook builds a model to predict the median price of homes in a Boston suburb during the mid-1970s. To do this, we'll provide the model with some data points about the suburb, such as the crime rate and the local property tax rate.
+
+
+```{r}
+library(keras)
+```
+
+
+## The Boston Housing Prices dataset
+
+The [Boston Housing Prices dataset](https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html) is accessible directly from keras.
+
+```{r}
+boston_housing <- dataset_boston_housing()
+
+c(train_data, train_labels) %<-% boston_housing$train
+c(test_data, test_labels) %<-% boston_housing$test
+```
+
+
+### Examples and features
+
+This dataset is much smaller than the others we've worked with so far: it has 506 total examples that are split between 404 training examples and 102 test examples:
+
+
+```{r}
+paste0("Training entries: ", length(train_data), ", labels: ", length(train_labels))
+```
+
+
+```
+[1] "Training entries: 5252, labels: 404"
+```
+
+The dataset contains 13 different features:
+
+ - Per capita crime rate.
+ - The proportion of residential land zoned for lots over 25,000 square feet.
+ - The proportion of non-retail business acres per town.
+ - Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).
+ - Nitric oxides concentration (parts per 10 million).
+ - The average number of rooms per dwelling.
+ - The proportion of owner-occupied units built before 1940.
+ - Weighted distances to five Boston employment centers.
+ - Index of accessibility to radial highways.
+ - Full-value property-tax rate per $10,000.
+ - Pupil-teacher ratio by town.
+ - 1000 * (Bk - 0.63) ** 2 where Bk is the proportion of Black people by town.
+ - Percentage lower status of the population.
+
+Each one of these input data features is stored using a different scale. Some features are represented by a proportion between 0 and 1, other features are ranges between 1 and 12, some are ranges between 0 and 100, and so on. 
+
+```{r}
+train_data[1, ] # Display sample features, notice the different scales
+```
+
+```
+[1]   1.23247   0.00000   8.14000   0.00000   0.53800   6.14200  91.70000   3.97690   4.00000 307.00000
+[11]  21.00000 396.90000  18.72000
+```
+
+Let's add column names for better data inspection.
+
+
+```{r}
+library(tibble)
+
+column_names <- c('CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT')
+train_df <- as_tibble(train_data)
+colnames(train_df) <- column_names
+
+train_df
+```
+
+```
+# A tibble: 404 x 13
+     CRIM    ZN INDUS  CHAS   NOX    RM   AGE   DIS   RAD   TAX PTRATIO     B LSTAT
+    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl> <dbl> <dbl>
+ 1 1.23     0    8.14     0 0.538  6.14  91.7  3.98     4   307    21    397. 18.7 
+ 2 0.0218  82.5  2.03     0 0.415  7.61  15.7  6.27     2   348    14.7  395.  3.11
+ 3 4.90     0   18.1      0 0.631  4.97 100    1.33    24   666    20.2  376.  3.26
+ 4 0.0396   0    5.19     0 0.515  6.04  34.5  5.99     5   224    20.2  397.  8.01
+ 5 3.69     0   18.1      0 0.713  6.38  88.4  2.57    24   666    20.2  391. 14.6 
+ 6 0.284    0    7.38     0 0.493  5.71  74.3  4.72     5   287    19.6  391. 11.7 
+ 7 9.19     0   18.1      0 0.7    5.54 100    1.58    24   666    20.2  397. 23.6 
+ 8 4.10     0   19.6      0 0.871  5.47 100    1.41     5   403    14.7  397. 26.4 
+ 9 2.16     0   19.6      0 0.871  5.63 100    1.52     5   403    14.7  169. 16.6 
+10 1.63     0   21.9      0 0.624  5.02 100    1.44     4   437    21.2  397. 34.4 
+# ... with 394 more rows
+```
+
+
+### Labels
+
+The labels are the house prices in thousands of dollars. (You may notice the mid-1970s prices.)
+
+```{r}
+train_labels[1:10] # Display first 10 entries
+
+```
+
+```
+[1] 15.2 42.3 50.0 21.1 17.7 18.5 11.3 15.6 15.6 14.4
+```
+
+
+## Normalize features
+
+It's recommended to normalize features that use different scales and ranges. Although the model might converge without feature normalization, it makes training more difficult, and it makes the resulting model more dependant on the choice of units used in the input.
+
+```{r}
+train_data <- scale(train_data) # Test data is *not* used when calculating the mean and std.
+col_means_train <- attr(train_data, "scaled:center") 
+col_stddevs_train <- attr(train_data, "scaled:scale")
+
+# use means and standard deviations from training set to normalize test set
+test_data <- scale(test_data, center = col_means_train, scale = col_stddevs_train)
+
+train_data[1, ] # First training sample, normalized
+```
+
+```
+[1] -0.2719092 -0.4830166 -0.4352220 -0.2565147 -0.1650220 -0.1762241  0.8120550  0.1165538 -0.6254735
+[10] -0.5944330  1.1470781  0.4475222  0.8241983
+```
+
+
+## Create the model
+
+Let's build our model. Here, we'll use a `sequential` model with two densely connected hidden layers, and an output layer that returns a single, continuous value. The model building steps are wrapped in a function, `build_model`, since we'll create a second model, later on.
+
+```{r}
+build_model <- function() {
+  
+  model <- keras_model_sequential() %>%
+    layer_dense(units = 64,
+                activation = "relu",
+                input_shape = dim(train_data)[2]
+                ) %>%
+    layer_dense(units = 64, activation = "relu") %>%
+    layer_dense(units = 1)
+  
+  model %>% compile(loss = "mse",
+                    optimizer = optimizer_rmsprop(),
+                    metrics = list("mean_absolute_error")
+                    )
+  model
+}
+
+model <- build_model()
+model %>% summary()
+```
+
+```
+Layer (type)                                      Output Shape                                 Param #          
+================================================================================================================
+dense_1 (Dense)                                   (None, 64)                                   896              
+________________________________________________________________________________________________________________
+dense_2 (Dense)                                   (None, 64)                                   4160             
+________________________________________________________________________________________________________________
+dense_3 (Dense)                                   (None, 1)                                    65               
+================================================================================================================
+Total params: 5,121
+Trainable params: 5,121
+Non-trainable params: 0
+```
+
+
+## Train the model
+
+The model is trained for 500 epochs, recording training and validation accuracy in a `keras_training_history` object.
+We also show how to use a custom callback, replacing the default training output by a single dot per epoch.
+
+```{r}
+# Display training progress by printing a single dot for each completed epoch.
+print_dot_callback <- callback_lambda(
+  on_epoch_end = function(epoch, logs) {
+    if (epoch %% 80 == 0) cat("\n")
+    cat(".")
+  }
+)    
+
+epochs <- 500
+
+# Store training stats
+history <- model %>% fit(
+  train_data,
+  train_labels,
+  epochs = epochs,
+  validation_split = 0.2,
+  verbose = 0,
+  callbacks = list(print_dot_callback)
+)
+
+
+```
+
+Now, we visualize the model's training progress using the metrics stored in the `history` variable. We want to use this data to determine how long to train before the model stops making progress.
+
+```{r}
+library(ggplot2)
+
+plot(history, metrics = "mean_absolute_error", smooth = FALSE) +
+  coord_cartesian(ylim = c(0, 5))
+```
+
+
+![](images/boston_mae.png)
+
+This graph shows little improvement in the model after about 200 epochs. Let's update the `fit` method to automatically stop training when the validation score doesn't improve. We'll use a [callback](https://keras.rstudio.com/reference/callback_early_stopping.html) that tests a training condition for every epoch. If a set amount of epochs elapses without showing improvement, it automatically stops the training.
+
+```{r}
+# The patience parameter is the amount of epochs to check for improvement.
+early_stop <- callback_early_stopping(monitor = "val_loss", patience = 20)
+
+model <- build_model()
+history <- model %>% fit(
+  train_data,
+  train_labels,
+  epochs = epochs,
+  validation_split = 0.2,
+  verbose = 0,
+  callbacks = list(early_stop, print_dot_callback)
+)
+
+plot(history, metrics = "mean_absolute_error", smooth = FALSE) +
+  coord_cartesian(xlim = c(0, 150), ylim = c(0, 5))
+```
+
+
+![](images/boston_mae_earlystop.png)
+
+The graph shows the average error is about $2,500 dollars. Is this good? Well, $2,500 is not an insignificant amount when some of the labels are only $15,000.
+
+Let's see how did the model performs on the test set:
+
+```{r}
+c(loss, mae) %<-% (model %>% evaluate(test_data, test_labels, verbose = 0))
+
+paste0("Mean absolute error on test set: $", sprintf("%.2f", mae * 1000))
+```
+
+```
+[1] "Mean absolute error on test set: $3297.68"
+```
+
+## Predict
+
+Finally, predict some housing prices using data in the testing set:
+
+```{r}
+test_predictions <- model %>% predict(test_data)
+test_predictions[ , 1]
+```
+
+```
+ [1]  8.007033 18.153156 21.616066 31.284706 26.284445 19.741478 28.916748 22.962608 19.520395 21.477909
+ [11] 19.306627 17.479231 14.995399 43.237667 18.181221 20.486805 28.540936 21.580551 18.925463 37.664436
+ [21] 10.997092 13.498063 20.555744 14.972000 23.043034 25.181206 31.070011 33.881676 10.061424 22.055264
+ [31] 19.047733 12.997090 34.065460 26.652784 17.594194  7.601262 14.989892 17.475399 19.075344 29.014477
+ [41] 31.474913 29.175596 13.835101 42.377480 30.460976 26.400883 28.388220 16.290909 22.766804 23.140137
+ [51] 38.747765 20.003471 11.512418 15.724887 36.897202 29.616425 12.119034 49.743866 34.149521 24.879330
+ [61] 23.744190 16.407722 12.654126 18.168047 24.095661 24.611050 12.430396 24.793139 13.584899  7.653455
+ [71] 37.167645 32.139378 25.921822 14.376559 27.738743 19.491718 21.113312 24.868862 37.598633  9.865499
+ [81] 20.322922 39.640156 15.201268 13.107138 17.114182 20.144257 20.070990 20.365595 23.018572 31.493315
+ [91] 21.859282 22.314922 27.089687 45.900990 37.716213 17.741659 37.281250 53.972012 27.489983 43.101936
+[101] 32.614670 19.385052
+```
+
+## Conclusion
+
+This notebook introduced a few techniques to handle a regression problem.
+
+ - Mean Squared Error (MSE) is a common loss function used for regression problems (different than classification problems).
+ - Similarly, evaluation metrics used for regression differ from classification. A common regression metric is Mean Absolute Error (MAE).
+- When input data features have values with different ranges, each feature should be scaled independently.
+- If there is not much training data, prefer a small network with few hidden layers to avoid overfitting.
+- Early stopping is a useful technique to prevent overfitting.
+
