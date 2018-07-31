@@ -56,10 +56,16 @@ articles:
   faq: faq.html
   functional_api: functional_api.html
   getting_started: getting_started.html
+  guide_keras: guide_keras.html
   learn: learn.html
   sequential_model: sequential_model.html
   tools: tools.html
   training_callbacks: training_callbacks.html
   training_visualization: training_visualization.html
+  tutorial_basic_classification: tutorial_basic_classification.html
+  tutorial_basic_regression: tutorial_basic_regression.html
+  tutorial_basic_text_classification: tutorial_basic_text_classification.html
+  tutorial_overfit_underfit: tutorial_overfit_underfit.html
+  tutorial_save_and_restore: tutorial_save_and_restore.html
   why_use_keras: why_use_keras.html
 

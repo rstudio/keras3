@@ -1,8 +1,8 @@
 ---
-title: "Keras Guide"
+title: "Guide to Keras Basics"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Keras Guide}
+  %\VignetteIndexEntry{Guide to Keras Basics}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 type: docs
@@ -19,9 +19,6 @@ menu:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
-
-
-# Keras
 
 Keras is a high-level API to build and train deep learning models. It’s
 used for fast prototyping, advanced research, and production, with three

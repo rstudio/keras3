@@ -1,15 +1,15 @@
 ---
-title: "Tutorial: Regression"
+title: "Tutorial: Basic Regression"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Tutorial: Regression}
+  %\VignetteIndexEntry{Tutorial: Basic Regression}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Regression"
+    name: "Basic Regression"
     identifier: "keras-tutorial-basic-regression"
     parent: "keras-tutorials"
     weight: 30
