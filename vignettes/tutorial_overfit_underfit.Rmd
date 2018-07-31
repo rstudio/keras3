@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
 
-In two of the previous examples — classifying movie reviews, and predicting housing prices — we saw that the accuracy of our model on the validation data would peak after training for a number of epochs, and would then start decreasing.
+In two of the previous tutorails — [classifying movie reviews](tutorial_basic_text_classification.html), and [predicting housing prices](tutorial_basic_regression.html) — we saw that the accuracy of our model on the validation data would peak after training for a number of epochs, and would then start decreasing.
 
 In other words, our model would overfit to the training data. Learning how to deal with overfitting is important. Although it's often possible to achieve high accuracy on the training set, what we really want is to develop models that generalize well to testing data (or data they haven't seen before).
 
@@ -120,17 +120,18 @@ baseline_model %>% summary()
 ```
 
 ```
-Layer (type)                                       Output Shape                                 Param #           
-==================================================================================================================
-dense_1 (Dense)                                    (None, 16)                                   160016            
-__________________________________________________________________________________________________________________
-dense_2 (Dense)                                    (None, 16)                                   272               
-__________________________________________________________________________________________________________________
-dense_3 (Dense)                                    (None, 1)                                    17                
-==================================================================================================================
+Layer (type)                          Output Shape                      Param #      
+=====================================================================================
+dense_17 (Dense)                      (None, 16)                        160016       
+_____________________________________________________________________________________
+dense_18 (Dense)                      (None, 16)                        272          
+_____________________________________________________________________________________
+dense_19 (Dense)                      (None, 1)                         17           
+=====================================================================================
 Total params: 160,305
 Trainable params: 160,305
 Non-trainable params: 0
+_____________________________________________________________________________________
 ```
 
 ```{r}
@@ -166,17 +167,18 @@ smaller_model %>% summary()
 ```
 
 ```
-Layer (type)                                       Output Shape                                 Param #           
-==================================================================================================================
-dense_4 (Dense)                                    (None, 4)                                    40004             
-__________________________________________________________________________________________________________________
-dense_5 (Dense)                                    (None, 4)                                    20                
-__________________________________________________________________________________________________________________
-dense_6 (Dense)                                    (None, 1)                                    5                 
-==================================================================================================================
+Layer (type)                          Output Shape                      Param #      
+=====================================================================================
+dense_7 (Dense)                       (None, 4)                         40004        
+_____________________________________________________________________________________
+dense_8 (Dense)                       (None, 4)                         20           
+_____________________________________________________________________________________
+dense_9 (Dense)                       (None, 1)                         5            
+=====================================================================================
 Total params: 40,029
 Trainable params: 40,029
 Non-trainable params: 0
+_____________________________________________________________________________________
 ```
 
 And train the model using the same data:
@@ -214,17 +216,19 @@ bigger_model %>% summary()
 ```
 
 ```
-Layer (type)                                       Output Shape                                 Param #           
-==================================================================================================================
-dense_7 (Dense)                                    (None, 512)                                  5120512           
-__________________________________________________________________________________________________________________
-dense_8 (Dense)                                    (None, 512)                                  262656            
-__________________________________________________________________________________________________________________
-dense_9 (Dense)                                    (None, 1)                                    513               
-==================================================================================================================
+_____________________________________________________________________________________
+Layer (type)                          Output Shape                      Param #      
+=====================================================================================
+dense_10 (Dense)                      (None, 512)                       5120512      
+_____________________________________________________________________________________
+dense_11 (Dense)                      (None, 512)                       262656       
+_____________________________________________________________________________________
+dense_12 (Dense)                      (None, 1)                         513          
+=====================================================================================
 Total params: 5,383,681
 Trainable params: 5,383,681
 Non-trainable params: 0
+_____________________________________________________________________________________
 ```
 
 And, again, train the model using the same data:
@@ -245,7 +249,7 @@ bigger_history <- bigger_model %>% fit(
 
 ### Plot the training and validation loss
 
-Now, let's plot the losscurves for the 3 models.
+Now, let's plot the loss curves for the 3 models.
 The smaller network begins overfitting a litle later than the baseline model and its performance degrades much more slowly once it starts overfitting. Notice that the larger network begins overfitting almost right away, after just one epoch, and overfits much more severely. The more capacity the network has, the quicker it will be able to model the training data (resulting in a low training loss), but the more susceptible it is to overfitting (resulting in a large difference between the training and validation loss).
 
 ```{r}
