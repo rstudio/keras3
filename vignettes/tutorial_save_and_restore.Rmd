@@ -1,18 +1,18 @@
 ---
-title: "Tutorial: Save and restore models"
+title: "Tutorial: Save and Restore Models"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Tutorial: Save and restore models}
+  %\VignetteIndexEntry{Tutorial: Save and Restore Models}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Tutorial: Save and restore models"
+    name: "Save and Restore Models"
     identifier: "keras-tutorial-save-restore"
     parent: "keras-tutorials"
-    weight: 10
+    weight: 50
     
 ---
 

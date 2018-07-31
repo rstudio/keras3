@@ -1,18 +1,18 @@
 ---
-title: "Tutorial: Explore overfitting and underfitting"
+title: "Tutorial: Overfitting and Underfitting"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Tutorial: Explore overfitting and underfitting}
+  %\VignetteIndexEntry{Tutorial: Overfitting and Underfitting}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Tutorial: Explore overfitting and underfitting"
+    name: "Overfitting and Underfitting"
     identifier: "keras-tutorial-overfitting"
     parent: "keras-tutorials"
-    weight: 10
+    weight: 40
 ---
 
 ```{r setup, include=FALSE}

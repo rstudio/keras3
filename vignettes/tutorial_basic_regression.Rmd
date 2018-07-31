@@ -1,18 +1,18 @@
 ---
-title: "Tutorial: Predict house prices: Regression"
+title: "Tutorial: Regression"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Tutorial: Predict house prices: Regression}
+  %\VignetteIndexEntry{Tutorial: Regression}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Tutorial: Predict house prices: Regression"
+    name: "Regression"
     identifier: "keras-tutorial-basic-regression"
     parent: "keras-tutorials"
-    weight: 10
+    weight: 30
 ---
 
 ```{r setup, include=FALSE}

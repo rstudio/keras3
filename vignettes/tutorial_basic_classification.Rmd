@@ -1,15 +1,15 @@
 ---
-title: "Tutorial: Train your first neural network: Basic classification"
+title: "Tutorial: Basic Classification"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Tutorial: Train your first neural network: Basic classification}
+  %\VignetteIndexEntry{Tutorial: Basic Classification}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Tutorial: Train your first neural network: Basic classification"
+    name: "Basic Classification"
     identifier: "keras-tutorial-basic-classification"
     parent: "keras-tutorials"
     weight: 10

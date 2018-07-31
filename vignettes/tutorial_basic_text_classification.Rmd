@@ -1,18 +1,18 @@
 ---
-title: "Tutorial: Classify movie reviews: Basic text classification"
+title: "Tutorial: Text Classification"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Tutorial: Classify movie reviews: Basic text classification}
+  %\VignetteIndexEntry{Tutorial: Text Classification}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Tutorial: Classify movie reviews: Basic text classification"
+    name: "Text Classification"
     identifier: "keras-tutorial-basic-text-classification"
     parent: "keras-tutorials"
-    weight: 10
+    weight: 20
 ---
 
 ```{r setup, include=FALSE}
