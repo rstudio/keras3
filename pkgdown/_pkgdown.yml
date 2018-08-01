@@ -14,6 +14,8 @@ navbar:
     - text: "Articles"
       menu:
         - text: "Getting Started"
+        - text: "Overview"
+          href: articles/getting_started.html
         - text: "Tutorial: Basic Classification"
           href: articles/tutorial_basic_classification.html
         - text: "Tutorial: Text Classification"
@@ -26,7 +28,9 @@ navbar:
           href: articles/tutorial_save_and_restore.html
         - text: "--------------------------"
         - text: "Using Keras"
-        - text: "Guide to Keras Basics"
+        - text: "Why Use Keras?"
+          href: articles/why_use_keras.html
+        - text: "Keras Basics"
           href: articles/guide_keras.html
         - text: "Sequential Model in Depth"
           href: articles/sequential_model.html
@@ -40,6 +44,8 @@ navbar:
           href: articles/training_visualization.html
         - text: "Pre-Trained Models"
           href: articles/applications.html
+        - text: "Frequently Asked Questions"
+          href: articles/faq.html
         - text: "--------------------------"
         - text: "Advanced"
         - text: "Training Callbacks"
@@ -50,12 +56,6 @@ navbar:
           href: articles/custom_layers.html
         - text: "Custom Models"
           href: articles/custom_models.html
-        - text: "---------------------------"
-        - text: "More"
-        - text: "Why Use Keras?"
-          href: articles/why_use_keras.html
-        - text: "Frequently Asked Questions"
-          href: articles/faq.html
     - text: Learn
       href: articles/learn.html
     - text: Tools

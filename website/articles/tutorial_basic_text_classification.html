@@ -49,6 +49,9 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Getting Started</li>
     <li>
+      <a href="../articles/getting_started.html">Overview</a>
+    </li>
+    <li>
       <a href="../articles/tutorial_basic_classification.html">Tutorial: Basic Classification</a>
     </li>
     <li>
@@ -66,7 +69,10 @@
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
     <li>
-      <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
+      <a href="../articles/why_use_keras.html">Why Use Keras?</a>
+    </li>
+    <li>
+      <a href="../articles/guide_keras.html">Keras Basics</a>
     </li>
     <li>
       <a href="../articles/sequential_model.html">Sequential Model in Depth</a>
@@ -86,6 +92,9 @@
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
     </li>
+    <li>
+      <a href="../articles/faq.html">Frequently Asked Questions</a>
+    </li>
     <li class="divider">
     <li class="dropdown-header">Advanced</li>
     <li>
@@ -99,14 +108,6 @@
     </li>
     <li>
       <a href="../articles/custom_models.html">Custom Models</a>
-    </li>
-    <li class="divider">
-    <li class="dropdown-header">More</li>
-    <li>
-      <a href="../articles/why_use_keras.html">Why Use Keras?</a>
-    </li>
-    <li>
-      <a href="../articles/faq.html">Frequently Asked Questions</a>
     </li>
   </ul>
 </li>
@@ -154,7 +155,7 @@
 
     
     
-<p>This notebook classifies movie reviews as positive or negative using the text of the review. This is an example of binary — or two-class — classification, an important and widely applicable kind of machine learning problem.</p>
+<p>This tutorial classifies movie reviews as positive or negative using the text of the review. This is an example of binary — or two-class — classification, an important and widely applicable kind of machine learning problem.</p>
 <p>We’ll use the <a href="https://keras.rstudio.com/reference/dataset_imdb.html">IMDB dataset</a> that contains the text of 50,000 movie reviews from the <a href="https://www.imdb.com/">Internet Movie Database</a>. These are split into 25,000 reviews for training and 25,000 reviews for testing. The training and testing sets are balanced, meaning they contain an equal number of positive and negative reviews.</p>
 <p>Let’s start and load Keras, as well as a few other required libraries.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(keras)</a>
@@ -487,6 +488,17 @@ $acc
 <p>This isn’t the case for the validation loss and accuracy — they seem to peak after about twenty epochs. This is an example of overfitting: the model performs better on the training data than it does on data it has never seen before. After this point, the model over-optimizes and learns representations specific to the training data that do not generalize to test data.</p>
 <p>For this particular case, we could prevent overfitting by simply stopping the training after twenty or so epochs. Later, you’ll see how to do this automatically with a callback.</p>
 </div>
+<div id="more-tutorials" class="section level2">
+<h2 class="hasAnchor">
+<a href="#more-tutorials" class="anchor"></a>More Tutorials</h2>
+<p>Check out these additional tutorials to learn more:</p>
+<ul>
+<li><p><a href="tutorial_basic_classfication.html">Basic Classification</a> — In this tutorial, we train a neural network model to classify images of clothing, like sneakers and shirts.</p></li>
+<li><p><a href="tutorial_basic_regression.html">Basic Regression</a> — This tutorial builds a model to predict the median price of homes in a Boston suburb during the mid-1970s.</p></li>
+<li><p><a href="tutorial_overfit_underfit.html">Overfitting and Underfitting</a> — In this tutorial, we explore two common regularization techniques (weight regularization and dropout) and use them to improve our movie review classification results.</p></li>
+<li><p><a href="tutorial_save_and_restore.html">Save and Restore Models</a> — This tutorial demonstrates various ways to save and share models (after as well as during training).</p></li>
+</ul>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -502,6 +514,7 @@ $acc
       <li><a href="#train-the-model">Train the model</a></li>
       <li><a href="#evaluate-the-model">Evaluate the model</a></li>
       <li><a href="#create-a-graph-of-accuracy-and-loss-over-time">Create a graph of accuracy and loss over time</a></li>
+      <li><a href="#more-tutorials">More Tutorials</a></li>
       </ul>
 </div>
       </div>
