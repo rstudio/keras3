@@ -9,10 +9,10 @@ type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Text Classification"
-    identifier: "keras-tutorial-basic-text-classification"
-    parent: "keras-tutorials"
-    weight: 20
+    name: "Tutorial: Text Classification"
+    identifier: "keras-tutorial-text-classification"
+    parent: "keras-getting-started"
+    weight: 30
 ---
 
 ```{r setup, include=FALSE}

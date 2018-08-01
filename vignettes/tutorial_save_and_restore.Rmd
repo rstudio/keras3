@@ -9,11 +9,10 @@ type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Save and Restore Models"
-    identifier: "keras-tutorial-save-restore"
-    parent: "keras-tutorials"
-    weight: 50
-    
+    name: "Tutorial: Save and Restore Models"
+    identifier: "keras-tutorial-save-and-restore"
+    parent: "keras-getting-started"
+    weight: 60
 ---
 
 ```{r setup, include=FALSE}

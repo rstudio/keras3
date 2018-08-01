@@ -28,9 +28,7 @@ navbar:
           href: articles/tutorial_save_and_restore.html
         - text: "--------------------------"
         - text: "Using Keras"
-        - text: "Why Use Keras?"
-          href: articles/why_use_keras.html
-        - text: "Keras Basics"
+        - text: "Guide to Keras Basics"
           href: articles/guide_keras.html
         - text: "Sequential Model in Depth"
           href: articles/sequential_model.html
@@ -46,6 +44,8 @@ navbar:
           href: articles/applications.html
         - text: "Frequently Asked Questions"
           href: articles/faq.html
+        - text: "Why Use Keras?"
+          href: articles/why_use_keras.html
         - text: "--------------------------"
         - text: "Advanced"
         - text: "Training Callbacks"

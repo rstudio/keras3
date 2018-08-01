@@ -9,10 +9,10 @@ type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Basic Classification"
+    name: "Tutorial: Basic Classification"
     identifier: "keras-tutorial-basic-classification"
-    parent: "keras-tutorials"
-    weight: 10
+    parent: "keras-getting-started"
+    weight: 20
 ---
 
 ```{r setup, include=FALSE}

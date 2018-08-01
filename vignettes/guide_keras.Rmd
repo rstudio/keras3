@@ -9,9 +9,9 @@ type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Keras Guide"
-    identifier: "keras-guide"
-    parent: "keras-tutorials"
+    name: "Guide to Keras Basics"
+    identifier: "keras-keras-basics"
+    parent: "keras-using-keras"
     weight: 10
     
 ---

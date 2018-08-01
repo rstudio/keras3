@@ -6,7 +6,7 @@ menu:
   main:
     name: "Overview"
     identifier: "keras-overview"
-    parent: "keras-using-keras"
+    parent: "keras-getting-started"
     weight: 10
 ---
 

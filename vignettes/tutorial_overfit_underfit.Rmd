@@ -9,10 +9,10 @@ type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Overfitting and Underfitting"
-    identifier: "keras-tutorial-overfitting"
-    parent: "keras-tutorials"
-    weight: 40
+    name: "Tutorial: Overfitting and Underfitting"
+    identifier: "keras-tutorial-overfitting-and-underfitting"
+    parent: "keras-getting-started"
+    weight: 50
 ---
 
 ```{r setup, include=FALSE}

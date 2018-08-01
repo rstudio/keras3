@@ -9,10 +9,10 @@ type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Basic Regression"
+    name: "Tutorial: Basic Regression"
     identifier: "keras-tutorial-basic-regression"
-    parent: "keras-tutorials"
-    weight: 30
+    parent: "keras-getting-started"
+    weight: 40
 ---
 
 ```{r setup, include=FALSE}
