@@ -311,3 +311,16 @@ This notebook introduced a few techniques to handle a regression problem.
 - If there is not much training data, prefer a small network with few hidden layers to avoid overfitting.
 - Early stopping is a useful technique to prevent overfitting.
 
+## More Tutorials
+
+Check out these additional tutorials to learn more:
+
+- [Basic Classification](tutorial_basic_classfication.html) --- In this tutorial, we train a neural network model to classify images of clothing, like sneakers and shirts. 
+
+- [Text Classification](tutorial_basic_text_classification.html) --- This tutorial classifies movie reviews as positive or negative using the text of the review. 
+
+- [Overfitting and Underfitting](tutorial_overfit_underfit.html) --- In this tutorial, we explore two common regularization techniques (weight regularization and dropout) and use them to improve our movie review classification results.
+
+- [Save and Restore Models](tutorial_save_and_restore.html) --- This tutorial demonstrates various ways to save and share models (after as well as during training).
+
+

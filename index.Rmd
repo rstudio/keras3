@@ -63,7 +63,7 @@ This will provide you with default CPU-based installations of Keras and TensorFl
 
 ### Learning Keras
 
-Below we walk through a simple example of using Keras to recognize handwritten digits from the [MNIST](https://en.wikipedia.org/wiki/MNIST_database) dataset. After getting familiar with the basics, check out the additional [learning resources](#learning-more) available on this website.
+Below we walk through a simple example of using Keras to recognize handwritten digits from the [MNIST](https://en.wikipedia.org/wiki/MNIST_database) dataset. After getting familiar with the basics, check out the [tutorials](#tutorials) and additional [learning resources](#learning-more) available on this website.
 
 The [Deep Learning with R](https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X) book by François Chollet (the creator of Keras) provides a more comprehensive introduction to both Keras and the concepts and practice of deep learning.
 
@@ -210,6 +210,24 @@ model %>% predict_classes(x_test)
 
 Keras provides a vocabulary for building deep learning models that is simple, elegant, and intuitive. Building a question answering system, an image classification model, a neural Turing machine, or any other model is just as straightforward. 
 
+## Tutorials
+
+To learn the basics of Keras, we recommend the following sequence of tutorials:
+
+- [Basic Classification](articles/tutorial_basic_classfication.html) --- In this tutorial, we train a neural network model to classify images of clothing, like sneakers and shirts. 
+
+- [Text Classification](articles/tutorial_basic_text_classification.html) --- This tutorial classifies movie reviews as positive or negative using the text of the review. 
+
+- [Basic Regression](articles/tutorial_basic_regression.html) --- This tutorial builds a model to predict the median price of homes in a Boston suburb during the mid-1970s. 
+
+- [Overfitting and Underfitting](articles/tutorial_overfit_underfit.html) --- In this tutorial, we explore two common regularization techniques (weight regularization and dropout) and use them to improve our movie review classification results.
+
+- [Save and Restore Models](articles/tutorial_save_and_restore.html) --- This tutorial demonstrates various ways to save and share models (after as well as during training).
+
+These tutorials walk you through the main components of the Keras library and demonstrate the core workflows used for training and improving the performance of nueral networks. The [Guide to Keras Basics](articles/guide_keras.html) provides a more condensed summary of this material.
+
+The [Deep Learning with Keras](https://github.com/rstudio/cheatsheets/raw/master/keras.pdf) cheat sheet also provides a condensed high level guide to using Keras.
+
 ## Learning More
 
 To learn more about Keras, you can check out these articles:
@@ -223,8 +241,6 @@ To learn more about Keras, you can check out these articles:
 - [Training Visualization](articles/training_visualization.html)
 
 - [Using Pre-Trained Models](articles/applications.html)
-
-The [Deep Learning with Keras](https://github.com/rstudio/cheatsheets/raw/master/keras.pdf) cheat sheet provides a condensed high level guide to using Keras.
 
 The [examples](articles/examples/index.html) demonstrate more advanced models including transfer learning, variational auto-encoding, question-answering with memory networks, text generation with stacked LSTMs, etc.
 

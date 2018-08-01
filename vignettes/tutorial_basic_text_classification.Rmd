@@ -19,7 +19,7 @@ menu:
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
-This notebook classifies movie reviews as positive or negative using the text of the review. This is an example of binary — or two-class — classification, an important and widely applicable kind of machine learning problem.
+This tutorial classifies movie reviews as positive or negative using the text of the review. This is an example of binary — or two-class — classification, an important and widely applicable kind of machine learning problem.
 
 We'll use the [IMDB dataset](https://keras.rstudio.com/reference/dataset_imdb.html) that contains the text of 50,000 movie reviews from the [Internet Movie Database](https://www.imdb.com/). These are split into 25,000 reviews for training and 25,000 reviews for testing. The training and testing sets are balanced, meaning they contain an equal number of positive and negative reviews.
 
@@ -466,3 +466,17 @@ Notice the training loss decreases with each epoch and the training accuracy inc
 This isn't the case for the validation loss and accuracy — they seem to peak after about twenty epochs. This is an example of overfitting: the model performs better on the training data than it does on data it has never seen before. After this point, the model over-optimizes and learns representations specific to the training data that do not generalize to test data.
 
 For this particular case, we could prevent overfitting by simply stopping the training after twenty or so epochs. Later, you'll see how to do this automatically with a callback.
+
+## More Tutorials
+
+Check out these additional tutorials to learn more:
+
+- [Basic Classification](tutorial_basic_classfication.html) --- In this tutorial, we train a neural network model to classify images of clothing, like sneakers and shirts. 
+
+- [Basic Regression](tutorial_basic_regression.html) --- This tutorial builds a model to predict the median price of homes in a Boston suburb during the mid-1970s. 
+
+- [Overfitting and Underfitting](tutorial_overfit_underfit.html) --- In this tutorial, we explore two common regularization techniques (weight regularization and dropout) and use them to improve our movie review classification results.
+
+- [Save and Restore Models](tutorial_save_and_restore.html) --- This tutorial demonstrates various ways to save and share models (after as well as during training).
+
+
