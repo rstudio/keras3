@@ -49,6 +49,9 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Getting Started</li>
     <li>
+      <a href="../articles/getting_started.html">Overview</a>
+    </li>
+    <li>
       <a href="../articles/tutorial_basic_classification.html">Tutorial: Basic Classification</a>
     </li>
     <li>
@@ -66,7 +69,10 @@
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
     <li>
-      <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
+      <a href="../articles/why_use_keras.html">Why Use Keras?</a>
+    </li>
+    <li>
+      <a href="../articles/guide_keras.html">Keras Basics</a>
     </li>
     <li>
       <a href="../articles/sequential_model.html">Sequential Model in Depth</a>
@@ -86,6 +92,9 @@
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
     </li>
+    <li>
+      <a href="../articles/faq.html">Frequently Asked Questions</a>
+    </li>
     <li class="divider">
     <li class="dropdown-header">Advanced</li>
     <li>
@@ -99,14 +108,6 @@
     </li>
     <li>
       <a href="../articles/custom_models.html">Custom Models</a>
-    </li>
-    <li class="divider">
-    <li class="dropdown-header">More</li>
-    <li>
-      <a href="../articles/why_use_keras.html">Why Use Keras?</a>
-    </li>
-    <li>
-      <a href="../articles/faq.html">Frequently Asked Questions</a>
     </li>
   </ul>
 </li>
@@ -159,7 +160,7 @@
 <p>The opposite of overfitting is underfitting. Underfitting occurs when there is still room for improvement on the test data. This can happen for a number of reasons: If the model is not powerful enough, is over-regularized, or has simply not been trained long enough. This means the network has not learned the relevant patterns in the training data.</p>
 <p>If you train for too long though, the model will start to overfit and learn patterns from the training data that don’t generalize to the test data. We need to strike a balance. Understanding how to train for an appropriate number of epochs as we’ll explore below is a useful skill.</p>
 <p>To prevent overfitting, the best solution is to use more training data. A model trained on more data will naturally generalize better. When that is no longer possible, the next best solution is to use techniques like regularization. These place constraints on the quantity and type of information your model can store. If a network can only afford to memorize a small number of patterns, the optimization process will force it to focus on the most prominent patterns, which have a better chance of generalizing well.</p>
-<p>In this notebook, we’ll explore two common regularization techniques — weight regularization and dropout — and use them to improve our IMDB movie review classification notebook.</p>
+<p>In this tutorial, we’ll explore two common regularization techniques — weight regularization and dropout — and use them to improve our IMDB movie review classification results.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(keras)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(ggplot2)</a>
@@ -451,6 +452,17 @@ ________________________________________________________________________________
 <p>And two important approaches not covered in this guide are data augmentation and batch normalization.</p>
 </div>
 </div>
+<div id="more-tutorials" class="section level2">
+<h2 class="hasAnchor">
+<a href="#more-tutorials" class="anchor"></a>More Tutorials</h2>
+<p>Check out these additional tutorials to learn more:</p>
+<ul>
+<li><p><a href="tutorial_basic_classfication.html">Basic Classification</a> — In this tutorial, we train a neural network model to classify images of clothing, like sneakers and shirts.</p></li>
+<li><p><a href="tutorial_basic_text_classification.html">Text Classification</a> — This tutorial classifies movie reviews as positive or negative using the text of the review.</p></li>
+<li><p><a href="tutorial_basic_regression.html">Basic Regression</a> — This tutorial builds a model to predict the median price of homes in a Boston suburb during the mid-1970s.</p></li>
+<li><p><a href="tutorial_save_and_restore.html">Save and Restore Models</a> — This tutorial demonstrates various ways to save and share models (after as well as during training).</p></li>
+</ul>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -461,6 +473,7 @@ ________________________________________________________________________________
 <li><a href="#download-the-imdb-dataset">Download the IMDB dataset</a></li>
       <li><a href="#demonstrate-overfitting">Demonstrate overfitting</a></li>
       <li><a href="#strategies">Strategies</a></li>
+      <li><a href="#more-tutorials">More Tutorials</a></li>
       </ul>
 </div>
       </div>

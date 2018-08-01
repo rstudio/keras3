@@ -30,7 +30,7 @@ If you train for too long though, the model will start to overfit and learn patt
 
 To prevent overfitting, the best solution is to use more training data. A model trained on more data will naturally generalize better. When that is no longer possible, the next best solution is to use techniques like regularization. These place constraints on the quantity and type of information your model can store. If a network can only afford to memorize a small number of patterns, the optimization process will force it to focus on the most prominent patterns, which have a better chance of generalizing well.
 
-In this notebook, we'll explore two common regularization techniques — weight regularization and dropout — and use them to improve our IMDB movie review classification notebook.
+In this tutorial, we'll explore two common regularization techniques — weight regularization and dropout — and use them to improve our IMDB movie review classification results.
 
 
 
@@ -405,5 +405,18 @@ To recap: here the most common ways to prevent overfitting in neural networks:
  - Add dropout.
 
 And two important approaches not covered in this guide are data augmentation and batch normalization.
+
+## More Tutorials
+
+Check out these additional tutorials to learn more:
+
+- [Basic Classification](tutorial_basic_classfication.html) --- In this tutorial, we train a neural network model to classify images of clothing, like sneakers and shirts. 
+
+- [Text Classification](tutorial_basic_text_classification.html) --- This tutorial classifies movie reviews as positive or negative using the text of the review. 
+
+- [Basic Regression](tutorial_basic_regression.html) --- This tutorial builds a model to predict the median price of homes in a Boston suburb during the mid-1970s. 
+
+- [Save and Restore Models](tutorial_save_and_restore.html) --- This tutorial demonstrates various ways to save and share models (after as well as during training).
+
 
 
