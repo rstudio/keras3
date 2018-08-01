@@ -224,7 +224,7 @@ To learn the basics of Keras, we recommend the following sequence of tutorials:
 
 - [Save and Restore Models](articles/tutorial_save_and_restore.html) --- This tutorial demonstrates various ways to save and share models (after as well as during training).
 
-These tutorials walk you through the main components of the Keras library and demonstrate the core workflows used for training and improving the performance of nueral networks. The [Guide to Keras Basics](articles/guide_keras.html) provides a more condensed summary of this material.
+These tutorials walk you through the main components of the Keras library and demonstrate the core workflows used for training and improving the performance of neural networks. The [Guide to Keras Basics](articles/guide_keras.html) provides a more condensed summary of this material.
 
 The [Deep Learning with Keras](https://github.com/rstudio/cheatsheets/raw/master/keras.pdf) cheat sheet also provides a condensed high level guide to using Keras.
 
