@@ -165,11 +165,11 @@ attention_encoder <-
            embedding_dim,
            src_vocab_size,
            name = NULL) {
-    keras_model_custom(name = name, function(model) {
-      model$embedding <-
+    keras_model_custom(name = name, function(self) {
+      self$embedding <-
         layer_embedding(input_dim = src_vocab_size,
                         output_dim = embedding_dim)
-      model$gru <-
+      self$gru <-
         layer_gru(
           units = gru_units,
           return_sequences = TRUE,
@@ -180,8 +180,8 @@ attention_encoder <-
         x <- inputs[[1]]
         hidden <- inputs[[2]]
         
-        x <- model$embedding(x)
-        c(output, state) %<-% model$gru(x, initial_state = hidden)
+        x <- self$embedding(x)
+        c(output, state) %<-% self$gru(x, initial_state = hidden)
         
         list(output, state)
       }
@@ -199,20 +199,20 @@ attention_decoder <-
            embedding_dim,
            target_vocab_size,
            name = NULL) {
-    keras_model_custom(name = name, function(model) {
-      model$gru <-
+    keras_model_custom(name = name, function(self) {
+      self$gru <-
         layer_gru(
           units = gru_units,
           return_sequences = TRUE,
           return_state = TRUE
         )
-      model$embedding <-
+      self$embedding <-
         layer_embedding(input_dim = target_vocab_size, output_dim = embedding_dim)
       gru_units <- gru_units
-      model$fc <- layer_dense(units = target_vocab_size)
-      model$W1 <- layer_dense(units = gru_units)
-      model$W2 <- layer_dense(units = gru_units)
-      model$V <- layer_dense(units = 1L)
+      self$fc <- layer_dense(units = target_vocab_size)
+      self$W1 <- layer_dense(units = gru_units)
+      self$W2 <- layer_dense(units = gru_units)
+      self$V <- layer_dense(units = 1L)
       
       function(inputs, mask = NULL) {
         x <- inputs[[1]]
@@ -222,8 +222,8 @@ attention_decoder <-
         hidden_with_time_axis <- k_expand_dims(hidden, 2)
         
         score <-
-          model$V(k_tanh(
-            model$W1(encoder_output) + model$W2(hidden_with_time_axis)
+          self$V(k_tanh(
+            self$W1(encoder_output) + self$W2(hidden_with_time_axis)
           ))
         
         attention_weights <- k_softmax(score, axis = 2)
@@ -231,16 +231,16 @@ attention_decoder <-
         context_vector <- attention_weights * encoder_output
         context_vector <- k_sum(context_vector, axis = 2)
         
-        x <- model$embedding(x)
+        x <- self$embedding(x)
         
         x <-
           k_concatenate(list(k_expand_dims(context_vector, 2), x), axis = 3)
         
-        c(output, state) %<-% model$gru(x)
+        c(output, state) %<-% self$gru(x)
         
         output <- k_reshape(output, c(-1, gru_units))
         
-        x <- model$fc(output)
+        x <- self$fc(output)
         
         list(x, state, attention_weights)
         

@@ -360,20 +360,20 @@ A custom model is defined by calling `keras_model_custom()` passing a function t
 my_model <- function(input_dim, output_dim, name = NULL) {
   
   # define and return a custom model
-  keras_model_custom(name = name, function(model) {
+  keras_model_custom(name = name, function(self) {
     
     # create layers we'll need for the call (this code executes once)
-    # note: the layers have to be created on the model object!
-    model$dense1 <- layer_dense(units = 64, activation = 'relu', input_shape = input_dim)
-    model$dense2 <- layer_dense(units = 64, activation = 'relu')
-    model$dense3 <- layer_dense(units = 10, activation = 'softmax')
+    # note: the layers have to be created on the self object!
+    self$dense1 <- layer_dense(units = 64, activation = 'relu', input_shape = input_dim)
+    self$dense2 <- layer_dense(units = 64, activation = 'relu')
+    self$dense3 <- layer_dense(units = 10, activation = 'softmax')
     
     # implement call (this code executes during training & inference)
     function(inputs, mask = NULL) {
       x <- inputs %>%
-        model$dense1() %>%
-        model$dense2() %>% 
-        model$dense3()
+        self$dense1() %>%
+        self$dense2() %>% 
+        self$dense3()
       x
     }
   })

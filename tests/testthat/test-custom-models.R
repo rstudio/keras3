@@ -10,24 +10,24 @@ keras_model_simple_mlp <- function(num_classes,
                                    name = NULL) {
   
   # define and return a custom model
-  keras_model_custom(name = name, function(model) {
+  keras_model_custom(name = name, function(self) {
     
     # create layers we'll need for the call (this code executes once)
-    model$dense1 <- layer_dense(units = 32, activation = "relu")
-    model$dense2 <- layer_dense(units = num_classes, activation = "softmax")
+    self$dense1 <- layer_dense(units = 32, activation = "relu")
+    self$dense2 <- layer_dense(units = num_classes, activation = "softmax")
     if (use_dp)
-      model$dp <- layer_dropout(rate = 0.5)
+      self$dp <- layer_dropout(rate = 0.5)
     if (use_bn)
-      model$bn <- layer_batch_normalization(axis = -1)
+      self$bn <- layer_batch_normalization(axis = -1)
     
     # implement call (this code executes during training & inference)
     function(inputs, mask = NULL) {
-      x <- model$dense1(inputs)
+      x <- self$dense1(inputs)
       if (use_dp)
-        x <- model$dp(x)
+        x <- self$dp(x)
       if (use_bn)
-        x <- model$bn(x)
-      model$dense2(x)
+        x <- self$bn(x)
+      self$dense2(x)
     }
   })
 }
