@@ -423,20 +423,20 @@
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">my_model &lt;-<span class="st"> </span><span class="cf">function</span>(input_dim, output_dim, <span class="dt">name =</span> <span class="ot">NULL</span>) {</a>
 <a class="sourceLine" id="cb14-2" data-line-number="2">  </a>
 <a class="sourceLine" id="cb14-3" data-line-number="3">  <span class="co"># define and return a custom model</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">  <span class="kw"><a href="../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="dt">name =</span> name, <span class="cf">function</span>(model) {</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">  <span class="kw"><a href="../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="dt">name =</span> name, <span class="cf">function</span>(self) {</a>
 <a class="sourceLine" id="cb14-5" data-line-number="5">    </a>
 <a class="sourceLine" id="cb14-6" data-line-number="6">    <span class="co"># create layers we'll need for the call (this code executes once)</span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7">    <span class="co"># note: the layers have to be created on the model object!</span></a>
-<a class="sourceLine" id="cb14-8" data-line-number="8">    model<span class="op">$</span>dense1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> input_dim)</a>
-<a class="sourceLine" id="cb14-9" data-line-number="9">    model<span class="op">$</span>dense2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>)</a>
-<a class="sourceLine" id="cb14-10" data-line-number="10">    model<span class="op">$</span>dense3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>)</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">    <span class="co"># note: the layers have to be created on the self object!</span></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8">    self<span class="op">$</span>dense1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>, <span class="dt">input_shape =</span> input_dim)</a>
+<a class="sourceLine" id="cb14-9" data-line-number="9">    self<span class="op">$</span>dense2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">'relu'</span>)</a>
+<a class="sourceLine" id="cb14-10" data-line-number="10">    self<span class="op">$</span>dense3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">'softmax'</span>)</a>
 <a class="sourceLine" id="cb14-11" data-line-number="11">    </a>
 <a class="sourceLine" id="cb14-12" data-line-number="12">    <span class="co"># implement call (this code executes during training &amp; inference)</span></a>
 <a class="sourceLine" id="cb14-13" data-line-number="13">    <span class="cf">function</span>(inputs, <span class="dt">mask =</span> <span class="ot">NULL</span>) {</a>
 <a class="sourceLine" id="cb14-14" data-line-number="14">      x &lt;-<span class="st"> </span>inputs <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-15" data-line-number="15"><span class="st">        </span>model<span class="op">$</span><span class="kw">dense1</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-16" data-line-number="16"><span class="st">        </span>model<span class="op">$</span><span class="kw">dense2</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-17" data-line-number="17"><span class="st">        </span>model<span class="op">$</span><span class="kw">dense3</span>()</a>
+<a class="sourceLine" id="cb14-15" data-line-number="15"><span class="st">        </span>self<span class="op">$</span><span class="kw">dense1</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-16" data-line-number="16"><span class="st">        </span>self<span class="op">$</span><span class="kw">dense2</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-17" data-line-number="17"><span class="st">        </span>self<span class="op">$</span><span class="kw">dense3</span>()</a>
 <a class="sourceLine" id="cb14-18" data-line-number="18">      x</a>
 <a class="sourceLine" id="cb14-19" data-line-number="19">    }</a>
 <a class="sourceLine" id="cb14-20" data-line-number="20">  })</a>

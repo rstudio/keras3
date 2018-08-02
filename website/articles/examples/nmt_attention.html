@@ -320,11 +320,11 @@
 <a class="sourceLine" id="cb1-158" data-line-number="158">           embedding_dim,</a>
 <a class="sourceLine" id="cb1-159" data-line-number="159">           src_vocab_size,</a>
 <a class="sourceLine" id="cb1-160" data-line-number="160">           <span class="dt">name =</span> <span class="ot">NULL</span>) {</a>
-<a class="sourceLine" id="cb1-161" data-line-number="161">    <span class="kw"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="dt">name =</span> name, <span class="cf">function</span>(model) {</a>
-<a class="sourceLine" id="cb1-162" data-line-number="162">      model<span class="op">$</span>embedding &lt;-</a>
+<a class="sourceLine" id="cb1-161" data-line-number="161">    <span class="kw"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="dt">name =</span> name, <span class="cf">function</span>(self) {</a>
+<a class="sourceLine" id="cb1-162" data-line-number="162">      self<span class="op">$</span>embedding &lt;-</a>
 <a class="sourceLine" id="cb1-163" data-line-number="163"><span class="st">        </span><span class="kw"><a href="../../reference/layer_embedding.html">layer_embedding</a></span>(<span class="dt">input_dim =</span> src_vocab_size,</a>
 <a class="sourceLine" id="cb1-164" data-line-number="164">                        <span class="dt">output_dim =</span> embedding_dim)</a>
-<a class="sourceLine" id="cb1-165" data-line-number="165">      model<span class="op">$</span>gru &lt;-</a>
+<a class="sourceLine" id="cb1-165" data-line-number="165">      self<span class="op">$</span>gru &lt;-</a>
 <a class="sourceLine" id="cb1-166" data-line-number="166"><span class="st">        </span><span class="kw"><a href="../../reference/layer_gru.html">layer_gru</a></span>(</a>
 <a class="sourceLine" id="cb1-167" data-line-number="167">          <span class="dt">units =</span> gru_units,</a>
 <a class="sourceLine" id="cb1-168" data-line-number="168">          <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>,</a>
@@ -335,8 +335,8 @@
 <a class="sourceLine" id="cb1-173" data-line-number="173">        x &lt;-<span class="st"> </span>inputs[[<span class="dv">1</span>]]</a>
 <a class="sourceLine" id="cb1-174" data-line-number="174">        hidden &lt;-<span class="st"> </span>inputs[[<span class="dv">2</span>]]</a>
 <a class="sourceLine" id="cb1-175" data-line-number="175">        </a>
-<a class="sourceLine" id="cb1-176" data-line-number="176">        x &lt;-<span class="st"> </span>model<span class="op">$</span><span class="kw">embedding</span>(x)</a>
-<a class="sourceLine" id="cb1-177" data-line-number="177">        <span class="kw">c</span>(output, state) <span class="op">%&lt;-%</span><span class="st"> </span>model<span class="op">$</span><span class="kw">gru</span>(x, <span class="dt">initial_state =</span> hidden)</a>
+<a class="sourceLine" id="cb1-176" data-line-number="176">        x &lt;-<span class="st"> </span>self<span class="op">$</span><span class="kw">embedding</span>(x)</a>
+<a class="sourceLine" id="cb1-177" data-line-number="177">        <span class="kw">c</span>(output, state) <span class="op">%&lt;-%</span><span class="st"> </span>self<span class="op">$</span><span class="kw">gru</span>(x, <span class="dt">initial_state =</span> hidden)</a>
 <a class="sourceLine" id="cb1-178" data-line-number="178">        </a>
 <a class="sourceLine" id="cb1-179" data-line-number="179">        <span class="kw">list</span>(output, state)</a>
 <a class="sourceLine" id="cb1-180" data-line-number="180">      }</a>
@@ -354,20 +354,20 @@
 <a class="sourceLine" id="cb1-192" data-line-number="192">           embedding_dim,</a>
 <a class="sourceLine" id="cb1-193" data-line-number="193">           target_vocab_size,</a>
 <a class="sourceLine" id="cb1-194" data-line-number="194">           <span class="dt">name =</span> <span class="ot">NULL</span>) {</a>
-<a class="sourceLine" id="cb1-195" data-line-number="195">    <span class="kw"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="dt">name =</span> name, <span class="cf">function</span>(model) {</a>
-<a class="sourceLine" id="cb1-196" data-line-number="196">      model<span class="op">$</span>gru &lt;-</a>
+<a class="sourceLine" id="cb1-195" data-line-number="195">    <span class="kw"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="dt">name =</span> name, <span class="cf">function</span>(self) {</a>
+<a class="sourceLine" id="cb1-196" data-line-number="196">      self<span class="op">$</span>gru &lt;-</a>
 <a class="sourceLine" id="cb1-197" data-line-number="197"><span class="st">        </span><span class="kw"><a href="../../reference/layer_gru.html">layer_gru</a></span>(</a>
 <a class="sourceLine" id="cb1-198" data-line-number="198">          <span class="dt">units =</span> gru_units,</a>
 <a class="sourceLine" id="cb1-199" data-line-number="199">          <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb1-200" data-line-number="200">          <span class="dt">return_state =</span> <span class="ot">TRUE</span></a>
 <a class="sourceLine" id="cb1-201" data-line-number="201">        )</a>
-<a class="sourceLine" id="cb1-202" data-line-number="202">      model<span class="op">$</span>embedding &lt;-</a>
+<a class="sourceLine" id="cb1-202" data-line-number="202">      self<span class="op">$</span>embedding &lt;-</a>
 <a class="sourceLine" id="cb1-203" data-line-number="203"><span class="st">        </span><span class="kw"><a href="../../reference/layer_embedding.html">layer_embedding</a></span>(<span class="dt">input_dim =</span> target_vocab_size, <span class="dt">output_dim =</span> embedding_dim)</a>
 <a class="sourceLine" id="cb1-204" data-line-number="204">      gru_units &lt;-<span class="st"> </span>gru_units</a>
-<a class="sourceLine" id="cb1-205" data-line-number="205">      model<span class="op">$</span>fc &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> target_vocab_size)</a>
-<a class="sourceLine" id="cb1-206" data-line-number="206">      model<span class="op">$</span>W1 &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> gru_units)</a>
-<a class="sourceLine" id="cb1-207" data-line-number="207">      model<span class="op">$</span>W2 &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> gru_units)</a>
-<a class="sourceLine" id="cb1-208" data-line-number="208">      model<span class="op">$</span>V &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> 1L)</a>
+<a class="sourceLine" id="cb1-205" data-line-number="205">      self<span class="op">$</span>fc &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> target_vocab_size)</a>
+<a class="sourceLine" id="cb1-206" data-line-number="206">      self<span class="op">$</span>W1 &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> gru_units)</a>
+<a class="sourceLine" id="cb1-207" data-line-number="207">      self<span class="op">$</span>W2 &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> gru_units)</a>
+<a class="sourceLine" id="cb1-208" data-line-number="208">      self<span class="op">$</span>V &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> 1L)</a>
 <a class="sourceLine" id="cb1-209" data-line-number="209">      </a>
 <a class="sourceLine" id="cb1-210" data-line-number="210">      <span class="cf">function</span>(inputs, <span class="dt">mask =</span> <span class="ot">NULL</span>) {</a>
 <a class="sourceLine" id="cb1-211" data-line-number="211">        x &lt;-<span class="st"> </span>inputs[[<span class="dv">1</span>]]</a>
@@ -377,8 +377,8 @@
 <a class="sourceLine" id="cb1-215" data-line-number="215">        hidden_with_time_axis &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span>(hidden, <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb1-216" data-line-number="216">        </a>
 <a class="sourceLine" id="cb1-217" data-line-number="217">        score &lt;-</a>
-<a class="sourceLine" id="cb1-218" data-line-number="218"><span class="st">          </span>model<span class="op">$</span><span class="kw">V</span>(<span class="kw"><a href="../../reference/k_tanh.html">k_tanh</a></span>(</a>
-<a class="sourceLine" id="cb1-219" data-line-number="219">            model<span class="op">$</span><span class="kw">W1</span>(encoder_output) <span class="op">+</span><span class="st"> </span>model<span class="op">$</span><span class="kw">W2</span>(hidden_with_time_axis)</a>
+<a class="sourceLine" id="cb1-218" data-line-number="218"><span class="st">          </span>self<span class="op">$</span><span class="kw">V</span>(<span class="kw"><a href="../../reference/k_tanh.html">k_tanh</a></span>(</a>
+<a class="sourceLine" id="cb1-219" data-line-number="219">            self<span class="op">$</span><span class="kw">W1</span>(encoder_output) <span class="op">+</span><span class="st"> </span>self<span class="op">$</span><span class="kw">W2</span>(hidden_with_time_axis)</a>
 <a class="sourceLine" id="cb1-220" data-line-number="220">          ))</a>
 <a class="sourceLine" id="cb1-221" data-line-number="221">        </a>
 <a class="sourceLine" id="cb1-222" data-line-number="222">        attention_weights &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_softmax.html">k_softmax</a></span>(score, <span class="dt">axis =</span> <span class="dv">2</span>)</a>
@@ -386,16 +386,16 @@
 <a class="sourceLine" id="cb1-224" data-line-number="224">        context_vector &lt;-<span class="st"> </span>attention_weights <span class="op">*</span><span class="st"> </span>encoder_output</a>
 <a class="sourceLine" id="cb1-225" data-line-number="225">        context_vector &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(context_vector, <span class="dt">axis =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb1-226" data-line-number="226">        </a>
-<a class="sourceLine" id="cb1-227" data-line-number="227">        x &lt;-<span class="st"> </span>model<span class="op">$</span><span class="kw">embedding</span>(x)</a>
+<a class="sourceLine" id="cb1-227" data-line-number="227">        x &lt;-<span class="st"> </span>self<span class="op">$</span><span class="kw">embedding</span>(x)</a>
 <a class="sourceLine" id="cb1-228" data-line-number="228">        </a>
 <a class="sourceLine" id="cb1-229" data-line-number="229">        x &lt;-</a>
 <a class="sourceLine" id="cb1-230" data-line-number="230"><span class="st">          </span><span class="kw"><a href="../../reference/k_concatenate.html">k_concatenate</a></span>(<span class="kw">list</span>(<span class="kw"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span>(context_vector, <span class="dv">2</span>), x), <span class="dt">axis =</span> <span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb1-231" data-line-number="231">        </a>
-<a class="sourceLine" id="cb1-232" data-line-number="232">        <span class="kw">c</span>(output, state) <span class="op">%&lt;-%</span><span class="st"> </span>model<span class="op">$</span><span class="kw">gru</span>(x)</a>
+<a class="sourceLine" id="cb1-232" data-line-number="232">        <span class="kw">c</span>(output, state) <span class="op">%&lt;-%</span><span class="st"> </span>self<span class="op">$</span><span class="kw">gru</span>(x)</a>
 <a class="sourceLine" id="cb1-233" data-line-number="233">        </a>
 <a class="sourceLine" id="cb1-234" data-line-number="234">        output &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_reshape.html">k_reshape</a></span>(output, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, gru_units))</a>
 <a class="sourceLine" id="cb1-235" data-line-number="235">        </a>
-<a class="sourceLine" id="cb1-236" data-line-number="236">        x &lt;-<span class="st"> </span>model<span class="op">$</span><span class="kw">fc</span>(output)</a>
+<a class="sourceLine" id="cb1-236" data-line-number="236">        x &lt;-<span class="st"> </span>self<span class="op">$</span><span class="kw">fc</span>(output)</a>
 <a class="sourceLine" id="cb1-237" data-line-number="237">        </a>
 <a class="sourceLine" id="cb1-238" data-line-number="238">        <span class="kw">list</span>(x, state, attention_weights)</a>
 <a class="sourceLine" id="cb1-239" data-line-number="239">        </a>
