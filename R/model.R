@@ -192,6 +192,13 @@ py_to_r_wrapper.keras.engine.training.Model <- function(x) {
   }
 }
 
+#' @export
+py_to_r_wrapper.kerastools.model.RModel <- function(x) {
+  function(...) {
+    x$call(...)
+  }
+}
+
 
 #' Clone a model instance.
 #'
