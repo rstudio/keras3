@@ -16,5 +16,5 @@ class RModel(Model):
   def __init__(self, name = None):
     super(RModel, self).__init__(name = name)
  
-  def call(self, inputs, mask = None, **kwargs):
-    return self._r_call(inputs, mask, **kwargs)
+  def call(self, inputs, mask = None):
+    return self._r_call(inputs, mask)
