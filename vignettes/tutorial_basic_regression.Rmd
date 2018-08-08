@@ -315,7 +315,7 @@ This notebook introduced a few techniques to handle a regression problem.
 
 Check out these additional tutorials to learn more:
 
-- [Basic Classification](tutorial_basic_classfication.html) --- In this tutorial, we train a neural network model to classify images of clothing, like sneakers and shirts. 
+- [Basic Classification](tutorial_basic_classification.html) --- In this tutorial, we train a neural network model to classify images of clothing, like sneakers and shirts. 
 
 - [Text Classification](tutorial_basic_text_classification.html) --- This tutorial classifies movie reviews as positive or negative using the text of the review. 
 

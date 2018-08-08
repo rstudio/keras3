@@ -162,7 +162,7 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(keras)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">K &lt;-<span class="st"> </span>keras<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/keras/topics/backend">backend</a></span>()</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">#### Parameterization ####</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#### Parameterization ####</span></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co"># input image dimensions</span></a>
 <a class="sourceLine" id="cb1-7" data-line-number="7">img_rows &lt;-<span class="st"> </span>28L</a>
@@ -185,7 +185,7 @@
 <a class="sourceLine" id="cb1-24" data-line-number="24">epochs &lt;-<span class="st"> </span>5L</a>
 <a class="sourceLine" id="cb1-25" data-line-number="25"></a>
 <a class="sourceLine" id="cb1-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb1-27" data-line-number="27">#### Model Construction ####</a>
+<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="co">#### Model Construction ####</span></a>
 <a class="sourceLine" id="cb1-28" data-line-number="28"></a>
 <a class="sourceLine" id="cb1-29" data-line-number="29">original_img_size &lt;-<span class="st"> </span><span class="kw">c</span>(img_rows, img_cols, img_chns)</a>
 <a class="sourceLine" id="cb1-30" data-line-number="30"></a>
@@ -304,15 +304,15 @@
 <a class="sourceLine" id="cb1-143" data-line-number="143">  <span class="kw"><a href="../../reference/k_mean.html">k_mean</a></span>(xent_loss <span class="op">+</span><span class="st"> </span>kl_loss)</a>
 <a class="sourceLine" id="cb1-144" data-line-number="144">}</a>
 <a class="sourceLine" id="cb1-145" data-line-number="145"></a>
-<a class="sourceLine" id="cb1-146" data-line-number="146">## variational autoencoder</a>
+<a class="sourceLine" id="cb1-146" data-line-number="146"><span class="co">## variational autoencoder</span></a>
 <a class="sourceLine" id="cb1-147" data-line-number="147">vae &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(x, x_decoded_mean_squash)</a>
 <a class="sourceLine" id="cb1-148" data-line-number="148">vae <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">"rmsprop"</span>, <span class="dt">loss =</span> vae_loss)</a>
 <a class="sourceLine" id="cb1-149" data-line-number="149"><span class="kw">summary</span>(vae)</a>
 <a class="sourceLine" id="cb1-150" data-line-number="150"></a>
-<a class="sourceLine" id="cb1-151" data-line-number="151">## encoder: model to project inputs on the latent space</a>
+<a class="sourceLine" id="cb1-151" data-line-number="151"><span class="co">## encoder: model to project inputs on the latent space</span></a>
 <a class="sourceLine" id="cb1-152" data-line-number="152">encoder &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(x, z_mean)</a>
 <a class="sourceLine" id="cb1-153" data-line-number="153"></a>
-<a class="sourceLine" id="cb1-154" data-line-number="154">## build a digit generator that can sample from the learned distribution</a>
+<a class="sourceLine" id="cb1-154" data-line-number="154"><span class="co">## build a digit generator that can sample from the learned distribution</span></a>
 <a class="sourceLine" id="cb1-155" data-line-number="155">gen_decoder_input &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> latent_dim)</a>
 <a class="sourceLine" id="cb1-156" data-line-number="156">gen_hidden_decoded &lt;-<span class="st"> </span><span class="kw">decoder_hidden</span>(gen_decoder_input)</a>
 <a class="sourceLine" id="cb1-157" data-line-number="157">gen_up_decoded &lt;-<span class="st"> </span><span class="kw">decoder_upsample</span>(gen_hidden_decoded)</a>
@@ -324,7 +324,7 @@
 <a class="sourceLine" id="cb1-163" data-line-number="163">generator &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(gen_decoder_input, gen_x_decoded_mean_squash)</a>
 <a class="sourceLine" id="cb1-164" data-line-number="164"></a>
 <a class="sourceLine" id="cb1-165" data-line-number="165"></a>
-<a class="sourceLine" id="cb1-166" data-line-number="166">#### Data Preparation ####</a>
+<a class="sourceLine" id="cb1-166" data-line-number="166"><span class="co">#### Data Preparation ####</span></a>
 <a class="sourceLine" id="cb1-167" data-line-number="167"></a>
 <a class="sourceLine" id="cb1-168" data-line-number="168">mnist &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span>()</a>
 <a class="sourceLine" id="cb1-169" data-line-number="169">data &lt;-<span class="st"> </span><span class="kw">lapply</span>(mnist, <span class="cf">function</span>(m) {</a>
@@ -334,7 +334,7 @@
 <a class="sourceLine" id="cb1-173" data-line-number="173">x_test &lt;-<span class="st"> </span>data<span class="op">$</span>test</a>
 <a class="sourceLine" id="cb1-174" data-line-number="174"></a>
 <a class="sourceLine" id="cb1-175" data-line-number="175"></a>
-<a class="sourceLine" id="cb1-176" data-line-number="176">#### Model Fitting ####</a>
+<a class="sourceLine" id="cb1-176" data-line-number="176"><span class="co">#### Model Fitting ####</span></a>
 <a class="sourceLine" id="cb1-177" data-line-number="177"></a>
 <a class="sourceLine" id="cb1-178" data-line-number="178">vae <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>(</a>
 <a class="sourceLine" id="cb1-179" data-line-number="179">  x_train, x_train, </a>
@@ -345,19 +345,19 @@
 <a class="sourceLine" id="cb1-184" data-line-number="184">)</a>
 <a class="sourceLine" id="cb1-185" data-line-number="185"></a>
 <a class="sourceLine" id="cb1-186" data-line-number="186"></a>
-<a class="sourceLine" id="cb1-187" data-line-number="187">#### Visualizations ####</a>
+<a class="sourceLine" id="cb1-187" data-line-number="187"><span class="co">#### Visualizations ####</span></a>
 <a class="sourceLine" id="cb1-188" data-line-number="188"></a>
 <a class="sourceLine" id="cb1-189" data-line-number="189"><span class="kw">library</span>(ggplot2)</a>
 <a class="sourceLine" id="cb1-190" data-line-number="190"><span class="kw">library</span>(dplyr)</a>
 <a class="sourceLine" id="cb1-191" data-line-number="191"></a>
-<a class="sourceLine" id="cb1-192" data-line-number="192">## display a 2D plot of the digit classes in the latent space</a>
+<a class="sourceLine" id="cb1-192" data-line-number="192"><span class="co">## display a 2D plot of the digit classes in the latent space</span></a>
 <a class="sourceLine" id="cb1-193" data-line-number="193">x_test_encoded &lt;-<span class="st"> </span><span class="kw">predict</span>(encoder, x_test, <span class="dt">batch_size =</span> batch_size)</a>
 <a class="sourceLine" id="cb1-194" data-line-number="194">x_test_encoded <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-195" data-line-number="195"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">as_data_frame</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-196" data-line-number="196"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">class =</span> <span class="kw">as.factor</span>(mnist<span class="op">$</span>test<span class="op">$</span>y)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-197" data-line-number="197"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> V1, <span class="dt">y =</span> V2, <span class="dt">colour =</span> class)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</a>
 <a class="sourceLine" id="cb1-198" data-line-number="198"></a>
-<a class="sourceLine" id="cb1-199" data-line-number="199">## display a 2D manifold of the digits</a>
+<a class="sourceLine" id="cb1-199" data-line-number="199"><span class="co">## display a 2D manifold of the digits</span></a>
 <a class="sourceLine" id="cb1-200" data-line-number="200">n &lt;-<span class="st"> </span><span class="dv">15</span>  <span class="co"># figure with 15x15 digits</span></a>
 <a class="sourceLine" id="cb1-201" data-line-number="201">digit_size &lt;-<span class="st"> </span><span class="dv">28</span></a>
 <a class="sourceLine" id="cb1-202" data-line-number="202"></a>

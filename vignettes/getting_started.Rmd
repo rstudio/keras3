@@ -192,7 +192,7 @@ Keras provides a vocabulary for building deep learning models that is simple, el
 
 To learn the basics of Keras, we recommend the following sequence of tutorials:
 
-- [Basic Classification](tutorial_basic_classfication.html) --- In this tutorial, we train a neural network model to classify images of clothing, like sneakers and shirts. 
+- [Basic Classification](tutorial_basic_classification.html) --- In this tutorial, we train a neural network model to classify images of clothing, like sneakers and shirts. 
 
 - [Text Classification](tutorial_basic_text_classification.html) --- This tutorial classifies movie reviews as positive or negative using the text of the review. 
 
