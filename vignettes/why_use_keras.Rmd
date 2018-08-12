@@ -58,8 +58,6 @@ Your Keras models can be easily deployed across a greater range of platforms tha
 - In the browser, via GPU-accelerated JavaScript runtimes such as [Keras.js](https://transcranial.github.io/keras-js/#/) and [WebDNN](https://mil-tokyo.github.io/webdnn/)
 - On Google Cloud, via [TensorFlow-Serving](https://www.tensorflow.org/serving/)
 - In an R or Python webapp backend (such as a Shiny or Flask app)
-- On the JVM, via [DL4J model import provided by SkyMind](https://deeplearning4j.org/model-import-keras)
-- On Raspberry Pi
 
 ---
 
