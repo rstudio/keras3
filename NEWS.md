@@ -1,7 +1,7 @@
 
 ## Keras 2.2.0 (development)
 
-Install the development version with: `install_github("rstudio/keras")`
+Install the development version with: `devtools::install_github("rstudio/keras")`
 
 - Fix issue with serializing models that have constraint arguments
 
