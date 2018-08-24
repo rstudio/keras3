@@ -8,8 +8,8 @@
 <title>Learning Resources • keras</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <script src="../extra.js"></script><meta property="og:title" content="Learning Resources">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
@@ -20,7 +20,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9004</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.1.6.9005</span>
       </span>
     </div>
 
@@ -49,19 +49,34 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Getting Started</li>
     <li>
-      <a href="../articles/why_use_keras.html">Why Use Keras?</a>
+      <a href="../articles/getting_started.html">Overview</a>
     </li>
     <li>
-      <a href="../articles/sequential_model.html">Guide to the Sequential Model</a>
+      <a href="../articles/tutorial_basic_classification.html">Tutorial: Basic Classification</a>
     </li>
     <li>
-      <a href="../articles/functional_api.html">Guide to the Functional API</a>
+      <a href="../articles/tutorial_basic_text_classification.html">Tutorial: Text Classification</a>
     </li>
     <li>
-      <a href="../articles/faq.html">Frequently Asked Questions</a>
+      <a href="../articles/tutorial_basic_regression.html">Tutorial: Basic Regression</a>
+    </li>
+    <li>
+      <a href="../articles/tutorial_overfit_underfit.html">Tutorial: Overfitting and Underfitting</a>
+    </li>
+    <li>
+      <a href="../articles/tutorial_save_and_restore.html">Tutorial: Save and Restore Models</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
+    <li>
+      <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
+    </li>
+    <li>
+      <a href="../articles/sequential_model.html">Sequential Model in Depth</a>
+    </li>
+    <li>
+      <a href="../articles/functional_api.html">Functional API in Depth</a>
+    </li>
     <li>
       <a href="../articles/about_keras_models.html">About Keras Models</a>
     </li>
@@ -73,6 +88,12 @@
     </li>
     <li>
       <a href="../articles/applications.html">Pre-Trained Models</a>
+    </li>
+    <li>
+      <a href="../articles/faq.html">Frequently Asked Questions</a>
+    </li>
+    <li>
+      <a href="../articles/why_use_keras.html">Why Use Keras?</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Advanced</li>
@@ -122,18 +143,18 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Learning Resources</h1>
             
       
       
+      <div class="hidden name"><code>learn.Rmd</code></div>
 
     </div>
 
     
     
-<div class="contents">
 <p>Resources for learning how to use Keras as well as the underlying principles of deep learning.</p>
 <style type="text/css">
 .page-header {
@@ -151,33 +172,37 @@
 </colgroup>
 <tbody>
 <tr class="odd">
-<td><a href="https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X"><img class="nav-image illustration" src="images/resources-deep-learning-with-r.png" width="250/"></a></td>
+<td><a href="tutorial_basic_classification.html"><img class="nav-image illustration" src="images/boston_mae_earlystop.png" width="250/"></a></td>
 <td>
-<a href="https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X"><strong>Deep Learning with R</strong></a> <br>Deep Learning with R is meant for statisticians, analysts, engineers, and students with a reasonable amount of R experience but no significant knowledge of machine learning and deep learning. The goal of the book is to provide a learning resource for the R community that goes all the way from basic theory to advanced practical applications. You’ll learn from more than 30 code examples that include detailed commentary and practical recommendations. You don’t need previous experience with machine learning or deep learning: this book covers from scratch all the necessary basics. You don’t need an advanced mathematics background, either—high school– level mathematics should suffice in order to follow along.</td>
+<a href="tutorial_basic_classification.html"><strong>Keras Tutorials</strong></a> <br> A sequence of step-by-step tutorials that walk you through the main components of the Keras library and demonstrate the core workflows used for training and improving the performance of neural networks. There are 5 tutorials covering <a href="tutorial_basic_classfication.html">Basic Classification</a>, <a href="tutorial_basic_text_classification.html">Text Classification</a>, <a href="tutorial_basic_regression.html">Basic Regression</a>, <a href="tutorial_overfit_underfit.html">Overfitting and Underfitting</a>, and how to <a href="tutorial_save_and_restore.html">Save and Restore Models</a>.</td>
 </tr>
 <tr class="even">
+<td><a href="https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X"><img class="nav-image illustration" src="images/resources-deep-learning-with-r.png" width="250/"></a></td>
+<td>
+<a href="https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X"><strong>Deep Learning with R</strong></a> <br>Deep Learning with R is meant for statisticians, analysts, engineers, and students with a reasonable amount of R experience but no significant knowledge of machine learning and deep learning. The goal of the book is to provide a learning resource for the R community that goes all the way from basic theory to advanced practical applications. You’ll learn from more than 30 code examples that include detailed commentary and practical recommendations. You don’t need previous experience with machine learning or deep learning: this book covers from scratch all the necessary basics. You don’t need an advanced mathematics background, either—high-school-level mathematics should suffice in order to follow along.</td>
+</tr>
+<tr class="odd">
 <td><a href="https://www.amazon.com/Deep-Learning-Adaptive-Computation-Machine/dp/0262035618"><img class="nav-image illustration" src="images/resources-deep-learning.jpg" width="250/"></a></td>
 <td>
 <a href="https://www.amazon.com/Deep-Learning-Adaptive-Computation-Machine/dp/0262035618"><strong>Deep Learning</strong></a> <br>An introduction to a broad range of topics in deep learning. The text offers mathematical and conceptual background, covering relevant concepts in linear algebra, probability theory and information theory, numerical computation, and machine learning. It describes deep learning techniques used by practitioners in industry, including deep feedforward networks, regularization, optimization algorithms, convolutional networks, sequence modeling, and practical methodology. This is the definitive textbook on deep learning. Written by major contributors to the field, it is clear, comprehensive, and authoritative. If you want to know where deep learning came from, what it is good for, and where it is going, read this book.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://github.com/rstudio/cheatsheets/raw/master/keras.pdf"><img class="nav-image illustration" src="images/resources-cheatsheet.png" width="250/"></a></td>
 <td>
 <a href="https://github.com/rstudio/cheatsheets/raw/master/keras.pdf"><strong>Deep Learning with Keras Cheatsheet</strong></a> <br>A quick reference guide to the concepts and available functions in the R interface to Keras. Covers the various types of Keras layers, data preprocessing, training workflow, and pre-trained models.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://tensorflow.rstudio.com/learn/gallery.html"><img class="nav-image illustration" src="images/resources-gallery.png" width="250/"></a></td>
 <td>
 <a href="https://tensorflow.rstudio.com/learn/gallery.html"><strong>Gallery</strong></a> <br>In-depth examples of using Keras with R, including detailed explanatory narrative as well as coverage of ancillary tasks like data preprocessing and visualization. A great resource for taking the next step after you’ve learned the basics.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="examples/index.html"><img class="nav-image illustration" src="images/resources-examples.png" width="250/"></a></td>
 <td>
 <a href="examples/index.html"><strong>Examples</strong></a> <br> Introductory examples of using Keras with R. These examples cover the basics of training models with the keras, tfestimators, and tensorflow packages.</td>
 </tr>
 </tbody>
 </table>
-</div>
 </div>
   </div>
 

@@ -100,7 +100,7 @@
 install_keras <- function(method = c("auto", "virtualenv", "conda"), 
                           conda = "auto",
                           tensorflow = "default",
-                          extra_packages = NULL) {
+                          extra_packages = c("tensorflow-hub")) {
   
   # verify method
   method <- match.arg(method)
@@ -132,7 +132,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
   install_tensorflow(method = method,
                      conda = conda,
                      version = tensorflow,
-                     extra_packages = extra_packages)
+                     extra_packages = c("keras", extra_packages))
 }
 
 

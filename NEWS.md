@@ -37,6 +37,8 @@
 
 - New `custom_metric()` function for defining custom metrics in R
 
+- Provide typed wrapper for categorical custom metrics
+
 - Provide access to Python layer within R custom layers
 
 - Don't convert custom layer output shape to tuple when shape is a list

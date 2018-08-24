@@ -21,9 +21,11 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
   
   model <- define_model()
   
-  sparse_top_k_cat_acc <- function(y_pred, y_true){
-    metric_sparse_top_k_categorical_accuracy(y_pred, y_true, k = 5)
-  }
+  sparse_top_k_cat_acc <- custom_metric("top_k_acc", 
+    function(y_pred, y_true){
+      metric_sparse_top_k_categorical_accuracy(y_pred, y_true, k = 5)
+    }
+  )
   
   custom_loss <- function(y_pred, y_true) {
     loss_categorical_crossentropy(y_pred, y_true)
@@ -32,7 +34,7 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
   model %>% compile(
     loss = custom_loss,
     optimizer = optimizer_nadam(),
-    metrics = c(top_k_acc = sparse_top_k_cat_acc)
+    metrics = c(sparse_top_k_cat_acc)
   )
   
   tmp <- tempfile("model", fileext = ".hdf5")

@@ -188,20 +188,57 @@ model %>% predict_classes(x_test)
 
 Keras provides a vocabulary for building deep learning models that is simple, elegant, and intuitive. Building a question answering system, an image classification model, a neural Turing machine, or any other model is just as straightforward. 
 
+## Tutorials
+
+To learn the basics of Keras, we recommend the following sequence of tutorials:
+
+- [Basic Classification](tutorial_basic_classification.html) --- In this tutorial, we train a neural network model to classify images of clothing, like sneakers and shirts. 
+
+- [Text Classification](tutorial_basic_text_classification.html) --- This tutorial classifies movie reviews as positive or negative using the text of the review. 
+
+- [Basic Regression](tutorial_basic_regression.html) --- This tutorial builds a model to predict the median price of homes in a Boston suburb during the mid-1970s. 
+
+- [Overfitting and Underfitting](tutorial_overfit_underfit.html) --- In this tutorial, we explore two common regularization techniques (weight regularization and dropout) and use them to improve our movie review classification results.
+
+- [Save and Restore Models](tutorial_save_and_restore.html) --- This tutorial demonstrates various ways to save and share models (after as well as during training).
+
+These tutorials walk you through the main components of the Keras library and demonstrate the core workflows used for training and improving the performance of neural networks. The [Guide to Keras Basics](guide_keras.html) provides a more condensed summary of this material.
+
+The [Deep Learning with Keras](https://github.com/rstudio/cheatsheets/raw/master/keras.pdf) cheat sheet also provides a condensed high level guide to using Keras.
+
 ## Learning More
 
-To learn more about Keras, see these other package vignettes:
+To learn more about Keras, you can check out these articles:
 
-- [Guide to the Sequential Model](sequential_model.html)
+- [Guide to the Sequential Model](articles/sequential_model.html)
 
-- [Guide to the Functional API](functional_api.html)
+- [Guide to the Functional API](articles/functional_api.html)
 
-- [Frequently Asked Questions](faq.html)
+- [Frequently Asked Questions](articles/faq.html)
 
-- [Training Visualization](training_visualization.html)
+- [Training Visualization](articles/training_visualization.html)
 
-- [Using Pre-Trained Models](applications.html)
+- [Using Pre-Trained Models](articles/applications.html)
 
-The [examples](https://keras.rstudio.com/articles/examples/index.html) demonstrate more advanced models including transfer learning, variational auto-encoding, question-answering with memory networks, text generation with stacked LSTMs, etc.
+The [examples](articles/examples/index.html) demonstrate more advanced models including transfer learning, variational auto-encoding, question-answering with memory networks, text generation with stacked LSTMs, etc.
 
-The [function reference](https://keras.rstudio.com/reference/index.html) includes detailed information on all of the functions available in the package.
+The [function reference](reference/index.html) includes detailed information on all of the functions available in the package.
+
+[![](https://images.manning.com/720/960/resize/book/a/4e5e97f-4e8d-4d97-a715-f6c2b0eb95f5/Allaire-DLwithR-HI.png){width=125 align=right style="margin-left:10px; margin-right: 20px; margin-top: 15px; border: solid 1px #cccccc;"}](https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X)
+
+
+### Deep Learning with R Book
+
+If you want a more comprehensive introduction to both Keras and the concepts and practice of deep learning, we recommend the [Deep Learning with R](https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X) book from Manning. This book is a collaboration between François Chollet, the creator of Keras, and J.J. Allaire, who wrote the R interface to Keras.
+
+The book presumes no significant knowledge of machine learning and deep learning, and goes all the way from basic theory to advanced practical applications, all using the R interface to Keras. 
+
+<div style="clear: both;"></div>
+
+## Why this name, Keras?
+
+Keras (κέρας) means horn in Greek. It is a reference to a literary image from ancient Greek and Latin literature, first found in the Odyssey, where dream spirits (Oneiroi, singular Oneiros) are divided between those who deceive men with false visions, who arrive to Earth through a gate of ivory, and those who announce a future that will come to pass, who arrive through a gate of horn. It's a play on the words κέρας (horn) / κραίνω (fulfill), and ἐλέφας (ivory) / ἐλεφαίρομαι (deceive).
+
+Keras was initially developed as part of the research effort of project ONEIROS (Open-ended Neuro-Electronic Intelligent Robot Operating System).
+
+> "Oneiroi are beyond our unravelling --who can be sure what tale they tell? Not all that men look for comes to pass. Two gates there are that give passage to fleeting Oneiroi; one is made of horn, one of ivory. The Oneiroi that pass through sawn ivory are deceitful, bearing a message that will not be fulfilled; those that come out through polished horn have truth behind them, to be accomplished for men who see them." Homer, Odyssey 19. 562 ff (Shewring translation).

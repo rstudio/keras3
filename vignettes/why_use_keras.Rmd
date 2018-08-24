@@ -13,7 +13,7 @@ menu:
     name: "Why Use Keras?"
     identifier: "keras-why-use-keras"
     parent: "keras-using-keras"
-    weight: 15
+    weight: 70
 ---
 
 ```{r setup, include=FALSE}

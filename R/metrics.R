@@ -197,7 +197,8 @@ attr(metric_sparse_top_k_categorical_accuracy, "py_function_name") <- "sparse_to
 #' @rdname metric_binary_accuracy
 #' @export
 custom_metric <- function(name, metric_fn) {
-  attr(metric_fn, "py_function_name") <- name
+  metric_fn <- reticulate::py_func(metric_fn)
+  reticulate::py_set_attr(metric_fn, "__name__", name)
   metric_fn
 }
 

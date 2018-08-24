@@ -14,16 +14,26 @@ navbar:
     - text: "Articles"
       menu:
         - text: "Getting Started"
-        - text: "Why Use Keras?"
-          href: articles/why_use_keras.html
-        - text: "Guide to the Sequential Model"
-          href: articles/sequential_model.html
-        - text: "Guide to the Functional API"
-          href: articles/functional_api.html
-        - text: "Frequently Asked Questions"
-          href: articles/faq.html
+        - text: "Overview"
+          href: articles/getting_started.html
+        - text: "Tutorial: Basic Classification"
+          href: articles/tutorial_basic_classification.html
+        - text: "Tutorial: Text Classification"
+          href: articles/tutorial_basic_text_classification.html
+        - text: "Tutorial: Basic Regression"
+          href: articles/tutorial_basic_regression.html
+        - text: "Tutorial: Overfitting and Underfitting"
+          href: articles/tutorial_overfit_underfit.html
+        - text: "Tutorial: Save and Restore Models"
+          href: articles/tutorial_save_and_restore.html
         - text: "--------------------------"
         - text: "Using Keras"
+        - text: "Guide to Keras Basics"
+          href: articles/guide_keras.html
+        - text: "Sequential Model in Depth"
+          href: articles/sequential_model.html
+        - text: "Functional API in Depth"
+          href: articles/functional_api.html
         - text: "About Keras Models"
           href: articles/about_keras_models.html
         - text: "About Keras Layers"
@@ -32,6 +42,10 @@ navbar:
           href: articles/training_visualization.html
         - text: "Pre-Trained Models"
           href: articles/applications.html
+        - text: "Frequently Asked Questions"
+          href: articles/faq.html
+        - text: "Why Use Keras?"
+          href: articles/why_use_keras.html
         - text: "--------------------------"
         - text: "Advanced"
         - text: "Training Callbacks"

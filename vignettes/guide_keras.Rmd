@@ -1,0 +1,543 @@
+---
+title: "Guide to Keras Basics"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Guide to Keras Basics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+type: docs
+repo: https://github.com/rstudio/keras
+menu:
+  main:
+    name: "Guide to Keras Basics"
+    identifier: "keras-keras-basics"
+    parent: "keras-using-keras"
+    weight: 10
+    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+Keras is a high-level API to build and train deep learning models. It’s
+used for fast prototyping, advanced research, and production, with three
+key advantages:
+
+  - *User friendly*<br> Keras has a simple, consistent interface
+    optimized for common use cases. It provides clear and actionable
+    feedback for user errors.
+  - *Modular and composable*<br> Keras models are made by connecting
+    configurable building blocks together, with few restrictions.
+  - *Easy to extend*<br> Write custom building blocks to express new
+    ideas for research. Create new layers, loss functions, and develop
+    state-of-the-art models.
+
+## Import keras
+
+To get started, load the `keras` library:
+
+```{r}
+library(keras)
+```
+
+
+
+## Build a simple model
+
+### Sequential model
+
+In Keras, you assemble *layers* to build *models*. A model is (usually)
+a graph of layers. The most common type of model is a stack of layers:
+the `sequential` model.
+
+To build a simple, fully-connected network (i.e., a multi-layer
+perceptron):
+
+```{r}
+model <- keras_model_sequential()
+
+model %>% 
+  
+  # Adds a densely-connected layer with 64 units to the model:
+  layer_dense(units = 64, activation = 'relu') %>%
+  
+  # Add another:
+  layer_dense(units = 64, activation = 'relu') %>%
+  
+  # Add a softmax layer with 10 output units:
+  layer_dense(units = 10, activation = 'softmax')
+```
+
+### Configure the layers
+
+There are many `layers` available with some common constructor
+parameters:
+
+  - `activation`: Set the [activation function](https://tensorflow.rstudio.com/keras/reference/#section-activation-layers) for the layer. By default, no activation is applied.
+  - `kernel_initializer` and `bias_initializer`: The initialization
+    schemes that create the layer’s weights (kernel and bias). This defaults to the
+    [`Glorot uniform`](https://tensorflow.rstudio.com/keras/reference/initializer_glorot_uniform.html) initializer.
+  - `kernel_regularizer` and `bias_regularizer`: The regularization
+    schemes that apply to the layer’s weights (kernel and bias), such as L1
+    or L2 regularization. By default, no regularization is applied.
+
+The following instantiates `dense` layers using
+constructor arguments:
+
+```{r}
+# Create a sigmoid layer:
+layer_dense(units = 64, activation ='sigmoid')
+
+# A linear layer with L1 regularization of factor 0.01 applied to the kernel matrix:
+layer_dense(units = 64, kernel_regularizer = regularizer_l1(0.01))
+
+# A linear layer with L2 regularization of factor 0.01 applied to the bias vector:
+layer_dense(units = 64, bias_regularizer = regularizer_l2(0.01))
+
+# A linear layer with a kernel initialized to a random orthogonal matrix:
+layer_dense(units = 64, kernel_initializer = 'orthogonal')
+
+# A linear layer with a bias vector initialized to 2.0:
+layer_dense(units = 64, bias_initializer = initializer_constant(2.0))
+```
+
+## Train and evaluate
+
+### Set up training
+
+After the model is constructed, configure its learning process by
+calling the `compile` method:
+
+```{r}
+model %>% compile(
+  optimizer = 'adam',
+  loss = 'categorical_crossentropy',
+  metrics = list('accuracy')
+)
+```
+
+`compile` takes three important arguments:
+
+  - `optimizer`: This object specifies the training procedure. Commonly used optimizers are e.g.  
+    [`adam`](https://tensorflow.rstudio.com/keras/reference/optimizer_adam.html), 
+    [`rmsprop`](https://tensorflow.rstudio.com/keras/reference/optimizer_rmsprop.html), or
+    [`sgd`](https://tensorflow.rstudio.com/keras/reference/optimizer_sgd.html).
+  - `loss`: The function to minimize during optimization. Common choices
+    include mean square error (`mse`), `categorical_crossentropy`, and
+    `binary_crossentropy`.
+  - `metrics`: Used to monitor training. In classification, this usually is accuracy.
+
+The following shows a few examples of configuring a model for training:
+
+```{r}
+# Configure a model for mean-squared error regression.
+model %>% compile(
+  optimizer = 'adam',
+  loss = 'mse',           # mean squared error
+  metrics = list('mae')   # mean absolute error
+)
+
+# Configure a model for categorical classification.
+model %>% compile(
+  optimizer = optimizer_rmsprop(lr = 0.01),
+  loss = "categorical_crossentropy",
+  metrics = list("categorical_accuracy")
+)
+```
+
+### Input data
+
+You can train keras models directly on R matrices and arrays (possibly created from R `data.frames`).
+A model is fit to the training data using the `fit` method:
+
+```{r} 
+
+data <- matrix(rnorm(1000 * 32), nrow = 1000, ncol = 32)
+labels <- matrix(rnorm(1000 * 10), nrow = 1000, ncol = 10)
+
+model %>% fit(
+  data,
+  labels,
+  epochs = 10,
+  batch_size = 32
+)
+```
+
+`fit` takes three important arguments:
+
+  - `epochs`: Training is structured into *epochs*. An epoch is one
+    iteration over the entire input data (this is done in smaller
+    batches).
+  - `batch_size`: When passed matrix or array data, the model slices the data into
+    smaller batches and iterates over these batches during training.
+    This integer specifies the size of each batch. Be aware that the
+    last batch may be smaller if the total number of samples is not
+    divisible by the batch size.
+  - `validation_data`: When prototyping a model, you want to easily
+    monitor its performance on some validation data. Passing this
+    argument — a list of inputs and labels — allows the model to display
+    the loss and metrics in inference mode for the passed data, at the
+    end of each epoch.
+
+Here’s an example using `validation_data`:
+
+```{r}
+data <- matrix(rnorm(1000 * 32), nrow = 1000, ncol = 32)
+labels <- matrix(rnorm(1000 * 10), nrow = 1000, ncol = 10)
+
+val_data <- matrix(rnorm(1000 * 32), nrow = 100, ncol = 32)
+val_labels <- matrix(rnorm(100 * 10), nrow = 100, ncol = 10)
+
+model %>% fit(
+  data,
+  labels,
+  epochs = 10,
+  batch_size = 32,
+  validation_data = list(val_data, val_labels)
+)
+```
+
+
+### Evaluate and predict
+
+Same as `fit`, the `evaluate` and `predict` methods can
+use raw R data as well as a `dataset`.
+
+To *evaluate* the inference-mode loss and metrics for the data provided:
+
+```{r}
+model %>% evaluate(test_data, test_labels, batch_size = 32)
+
+model %>% evaluate(test_dataset, steps = 30)
+```
+
+And to *predict* the output of the last layer in inference for the data
+provided, again as R data as well as a `dataset`:
+
+```{r}
+model %>% predict(test_data, batch_size = 32)
+    
+model %>% predict(test_dataset, steps = 30)
+```
+
+    
+
+## Build advanced models
+
+### Functional API
+
+The `sequential` model is a simple stack of layers that cannot
+represent arbitrary models. Use the [Keras functional
+API](functional_api.html)
+to build complex model topologies such as:
+
+  - multi-input models,
+  - multi-output models,
+  - models with shared layers (the same layer called several times),
+  - models with non-sequential data flows (e.g., residual connections).
+
+Building a model with the functional API works like this:
+
+1.  A layer instance is callable and returns a tensor.
+2.  Input tensors and output tensors are used to define a
+    `keras_model` instance.
+3.  This model is trained just like the `sequential` model.
+
+The following example uses the functional API to build a simple,
+fully-connected network:
+
+```{r}
+inputs <- layer_input(shape = (32))  # Returns a placeholder tensor
+
+predictions <- inputs %>% 
+  layer_dense(units = 64, activation = 'relu') %>%
+  layer_dense(units = 64, activation = 'relu') %>% 
+  layer_dense(units = 10, activation = 'softmax')
+
+# Instantiate the model given inputs and outputs.
+model <- keras_model(inputs = inputs, outputs = predictions)
+
+# The compile step specifies the training configuration.
+model %>% compile(
+  optimizer = optimizer_rmsprop(lr = 0.001),
+  loss = 'categorical_crossentropy',
+  metrics = list('accuracy')
+)
+
+# Trains for 5 epochs
+model %>% fit(
+  data,
+  labels,
+  batch_size = 32,
+  epochs = 5
+)
+```
+
+
+### Custom layers
+
+To create a custom Keras layer, you create an R6 class derived from `KerasLayer`. There are three methods to implement (only one of which, `call()`, is required for all types of layer):
+
+ - `build(input_shape)`: This is where you will define your weights. Note that if your layer doesn’t define trainable weights then you need not implement this method.
+ - `call(x)`: This is where the layer’s logic lives. Unless you want your layer to support masking, you only have to care about the first argument passed to call: the input tensor.
+ - `compute_output_shape(input_shape)`: In case your layer modifies the shape of its input, you should specify here the shape transformation logic. This allows Keras to do automatic shape inference. If you don’t modify the shape of the input then you need not implement this method.
+    
+Here is an example custom layer that performs a matrix multiplication:
+
+```{r}
+library(keras)
+
+CustomLayer <- R6::R6Class("CustomLayer",
+                                  
+  inherit = KerasLayer,
+  
+  public = list(
+    
+    output_dim = NULL,
+    
+    kernel = NULL,
+    
+    initialize = function(output_dim) {
+      self$output_dim <- output_dim
+    },
+    
+    build = function(input_shape) {
+      self$kernel <- self$add_weight(
+        name = 'kernel', 
+        shape = list(input_shape[[2]], self$output_dim),
+        initializer = initializer_random_normal(),
+        trainable = TRUE
+      )
+    },
+    
+    call = function(x, mask = NULL) {
+      k_dot(x, self$kernel)
+    },
+    
+    compute_output_shape = function(input_shape) {
+      list(input_shape[[1]], self$output_dim)
+    }
+  )
+)
+```
+
+In order to use the custom layer within a Keras model you also need to create a wrapper function which instantiates the layer using the `create_layer()` function. For example:
+
+```{r}
+# define layer wrapper function
+layer_custom <- function(object, output_dim, name = NULL, trainable = TRUE) {
+  create_layer(CustomLayer, object, list(
+    output_dim = as.integer(output_dim),
+    name = name,
+    trainable = trainable
+  ))
+}
+
+```
+
+
+You can now use the layer in a model as usual:
+
+```{r}
+model <- keras_model_sequential()
+model %>% 
+  layer_dense(units = 32, input_shape = c(32,32)) %>% 
+  layer_custom(output_dim = 32)
+```
+
+
+### Custom models
+
+In addition to creating custom layers, you can also create a custom model.
+This might be necessary if you wanted to use TensorFlow eager execution in combination with an imperatively written forward pass.
+
+In cases where this is not needed, but flexibility in building the architecture is required, it is recommended to just stick with the functional API.
+
+A custom model is defined by calling `keras_model_custom()` passing a function that specifies the layers to be created and the operations to be executed on forward pass.
+
+```{r}
+my_model <- function(input_dim, output_dim, name = NULL) {
+  
+  # define and return a custom model
+  keras_model_custom(name = name, function(self) {
+    
+    # create layers we'll need for the call (this code executes once)
+    # note: the layers have to be created on the self object!
+    self$dense1 <- layer_dense(units = 64, activation = 'relu', input_shape = input_dim)
+    self$dense2 <- layer_dense(units = 64, activation = 'relu')
+    self$dense3 <- layer_dense(units = 10, activation = 'softmax')
+    
+    # implement call (this code executes during training & inference)
+    function(inputs, mask = NULL) {
+      x <- inputs %>%
+        self$dense1() %>%
+        self$dense2() %>% 
+        self$dense3()
+      x
+    }
+  })
+}
+
+model <- my_model(input_dim = 32, output_dim = 10)
+
+model %>% compile(
+  optimizer = optimizer_rmsprop(lr = 0.001),
+  loss = 'categorical_crossentropy',
+  metrics = list('accuracy')
+)
+
+# Trains for 5 epochs
+model %>% fit(
+  data,
+  labels,
+  batch_size = 32,
+  epochs = 5
+)
+```
+
+
+
+## Callbacks
+
+A callback is an object passed to a model to customize and extend its
+behavior during training. You can write your own custom callback, or use
+the built-in `callbacks` that include:
+
+  - `callback_model_checkpoint`: Save checkpoints of your model
+    at regular intervals.
+  - `callback_learning_rate_scheduler`: Dynamically change the
+    learning rate.
+  - `callback_early_stopping`: Interrupt training when
+    validation performance has stopped improving.
+  - `callbacks_tensorboard`: Monitor the model’s behavior using
+    [TensorBoard](training_visualization.html#tensorboard).
+
+To use a `callback`, pass it to the model’s `fit`
+method:
+
+```{r}
+callbacks <- list(
+  callback_early_stopping(patience = 2, monitor = 'val_loss'),
+  callback_tensorboard(log_dir = './logs')
+)
+
+model %>% fit(
+  data,
+  labels,
+  batch_size = 32,
+  epochs = 5,
+  callbacks = callbacks,
+  validation_data = list(val_data, val_labels)
+)
+```
+
+
+
+## Save and restore
+
+### Weights only
+
+Save and load the weights of a model using `save_model_weights_hdf5` and `load_model_weights_hdf5`, respectively:
+
+```{r}
+# save in HDF5 format
+model %>% save_model_weights_hdf5('my_model.h5')
+
+# Restore the model's state,
+# this requires a model with the same architecture.
+model %>% load_model_weights_hdf5('my_model.h5')
+```
+
+
+### Configuration only
+
+A model’s configuration can be saved - this serializes the model
+architecture without any weights. A saved configuration can recreate and
+initialize the same model, even without the code that defined the
+original model. Keras supports JSON and YAML serialization formats:
+
+```{r}
+# Serialize a model to JSON format
+json_string <- model %>% model_to_json()
+
+# Recreate the model (freshly initialized)
+fresh_model <- model_from_json(json_string)
+
+# Serializes a model to YAML format
+yaml_string <- model %>% model_to_yaml()
+
+# Recreate the model
+fresh_model <- model_from_yaml(yaml_string)
+```
+
+Caution: Custom models are not serializable because their
+architecture is defined by the R code in the function passed to `keras_model_custom`.
+
+### Entire model
+
+The entire model can be saved to a file that contains the weight values,
+the model’s configuration, and even the optimizer’s configuration. This
+allows you to checkpoint a model and resume training later —from the
+exact same state —without access to the original code.
+
+```{r}
+# Save entire model to a HDF5 file
+model %>% save_model_hdf5('my_model.h5')
+
+# Recreate the exact same model, including weights and optimizer.
+model <- load_model_hdf5('my_model.h5')
+```
+
+## Eager execution
+
+TensorFlow [Eager execution](https://www.tensorflow.org/guide/eager) is an imperative programming environment that evaluates operations immediately. This is not required for Keras,
+but is supported by the TensorFlow backend and useful for inspecting your program
+and debugging.
+
+To use eager execution from R, you need to tell Keras to use the TensorFlow implementation of Keras (as opposed to native Keras):
+
+```{r}
+library(keras)
+use_implementation("tensorflow")
+```
+
+
+When using the TensorFlow implementation,  all model-building APIs are compatible with eager
+execution. 
+
+See the [eager execution guide](./eager.md#build_a_model) for examples
+of using Keras models with custom training loops and `tf$GradientTape`.
+
+## Distribution
+
+### Estimators
+
+The [Estimators](https://tensorflow.rstudio.com/tfestimators/) API is used for training models for distributed environments. This targets industry use cases such as
+distributed training on large datasets that can export a model for
+production.
+
+To use `tfestimators`, you need to install separately:
+
+```{r}
+install.packages("tfestimators")
+```
+
+
+A `model` can be trained with the `tfestimators` API by
+converting the model to an `estimator` object with
+`keras_model_to_estimator`. 
+Note: As of today this only works with the TensorFlow implementation of Keras.
+
+
+```{r}
+library(keras)
+use_implementation("tensorflow")
+library(tfestimators)
+
+estimator <- keras_model_to_estimator(model)
+```
+
+Note: You can enable eager execution for debugging [estimator
+input functions](https://tensorflow.rstudio.com/tfestimators/articles/estimator_basics.html) and inspecting data.
+
