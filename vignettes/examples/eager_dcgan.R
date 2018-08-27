@@ -7,7 +7,7 @@
 
 library(keras)
 use_implementation("tensorflow")
-use_session_with_seed(disable_gpu = FALSE)
+use_session_with_seed(7777, disable_gpu = FALSE, disable_parallel_cpu = FALSE)
 library(tensorflow)
 tfe_enable_eager_execution(device_policy = "silent")
 
