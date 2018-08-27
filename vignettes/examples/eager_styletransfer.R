@@ -5,27 +5,15 @@
 #' https://blogs.rstudio.com/tensorflow/posts/2018-09-09-eager-style-transfer
 
 
-# Setup -------------------------------------------------------------------
-
-# Important: Make sure you are using the latest versions of reticulate, keras, tensorflow and tfdatasets from github.
-# devtools::install_github(
-#   c(
-#     "rstudio/keras",
-#     "rstudio/tensorflow",
-#     "rstudio/tfdatasets",
-#     "rstudio/reticulate"
-#   )
-# )
-
 library(keras)
 use_implementation("tensorflow")
+use_session_with_seed(7777, disable_gpu = FALSE, disable_parallel_cpu = FALSE)
 library(tensorflow)
 tfe_enable_eager_execution(device_policy = "silent")
 
 library(purrr)
 library(glue)
 
-tf$set_random_seed(7777)
 img_shape <- c(128, 128, 3)
 content_path <- "isar.jpg"
 style_path <- "The_Great_Wave_off_Kanagawa.jpg"
@@ -49,7 +37,7 @@ style_image %>% image_to_array() %>%
   as.raster() %>%  plot()
 
 
-load_and_process_image <- function(path) {
+load_and_preprocess_image <- function(path) {
   img <- image_load(path, target_size = img_shape[1:2]) %>%
     image_to_array() %>%
     k_expand_dims(axis = 1) %>%
