@@ -5,25 +5,14 @@
 #' https://blogs.rstudio.com/tensorflow/posts/2018-08-26-eager-dcgan/
 
 
-# Setup -------------------------------------------------------------------
-
-# Important: Make sure you are using the latest versions of reticulate, keras, tensorflow and tfdatasets from github.
-# devtools::install_github(
-#   c(
-#     "rstudio/keras",
-#     "rstudio/tensorflow",
-#     "rstudio/tfdatasets",
-#     "rstudio/reticulate"
-#   )
-# )
-
 library(keras)
 use_implementation("tensorflow")
+use_session_with_seed(disable_gpu = FALSE)
 library(tensorflow)
 tfe_enable_eager_execution(device_policy = "silent")
 
 library(tfdatasets)
-tf$set_random_seed(7777)
+
 
 mnist <- dataset_mnist()
 c(train_images, train_labels) %<-% mnist$train
@@ -35,7 +24,7 @@ train_images <- train_images %>%
 train_images <- (train_images - 127.5) / 127.5
 
 buffer_size <- 60000
-batch_size <- 256L
+batch_size <- 256
 batches_per_epoch <- (buffer_size / batch_size) %>% round()
 
 train_dataset <- tensor_slices_dataset(train_images) %>%
@@ -123,7 +112,6 @@ discriminator <-
         )
       self$leaky_relu2 <- layer_activation_leaky_relu()
       self$flatten <- layer_flatten()
-      # no sigmoid because using tf$losses$sigmoid_cross_entropy
       self$fc1 <- layer_dense(units = 1)
       
       function(inputs,
@@ -144,7 +132,6 @@ discriminator <-
 generator <- generator()
 discriminator <- discriminator()
 
-# https://www.tensorflow.org/api_docs/python/tf/contrib/eager/defun
 generator$call = tf$contrib$eager$defun(generator$call)
 discriminator$call = tf$contrib$eager$defun(discriminator$call)
 
@@ -166,7 +153,7 @@ discriminator_optimizer <- tf$train$AdamOptimizer(1e-4)
 generator_optimizer <- tf$train$AdamOptimizer(1e-4)
 
 num_epochs <- 150
-noise_dim <- 100L
+noise_dim <- 100
 num_examples_to_generate <- 25L
 
 random_vector_for_generation <-
