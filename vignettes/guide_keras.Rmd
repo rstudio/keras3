@@ -506,8 +506,8 @@ use_implementation("tensorflow")
 When using the TensorFlow implementation,  all model-building APIs are compatible with eager
 execution. 
 
-See the [eager execution guide](./eager.md#build_a_model) for examples
-of using Keras models with custom training loops and `tf$GradientTape`.
+Confer the [RStudio TensorFlow blog](https://blogs.rstudio.com/tensorflow/) for examples
+using eager execution.
 
 ## Distribution
 
