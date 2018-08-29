@@ -506,7 +506,7 @@ use_implementation("tensorflow")
 When using the TensorFlow implementation,  all model-building APIs are compatible with eager
 execution. 
 
-Confer the [RStudio TensorFlow blog](https://blogs.rstudio.com/tensorflow/) for examples
+Consult the [RStudio TensorFlow blog](https://blogs.rstudio.com/tensorflow/) for examples
 using eager execution.
 
 ## Distribution
