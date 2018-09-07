@@ -196,7 +196,7 @@ get_unet_128 <- function(input_shape = c(128, 128, 3),
     model %>% compile(
         optimizer = optimizer_rmsprop(lr = 0.0001),
         loss = bce_dice_loss,
-        metrics = c(dice_coef)
+        metrics = custom_metric("dice_coef", dice_coef)
     )
     
     return(model)
