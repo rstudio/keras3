@@ -17,6 +17,7 @@ articles:
   conv_filter_visualization: examples/conv_filter_visualization.html
   conv_lstm: examples/conv_lstm.html
   deep_dream: examples/deep_dream.html
+  eager_dcgan: examples/eager_dcgan.html
   image_ocr: examples/image_ocr.html
   imdb_bidirectional_lstm: examples/imdb_bidirectional_lstm.html
   imdb_cnn: examples/imdb_cnn.html
