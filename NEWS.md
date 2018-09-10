@@ -1,4 +1,11 @@
 
+## Keras 2.3 (development)
+
+Install the development version with `devtools::install_github("rstudio/keras")`
+
+- Improve handling of `timeseries_generator()` in calls to `fit_generator()`
+
+
 ## Keras 2.2.0 (CRAN)
 
 - Fix issue with serializing models that have constraint arguments

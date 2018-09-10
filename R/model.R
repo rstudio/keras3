@@ -932,6 +932,10 @@ as_generator.function <- function(x) {
   reticulate::py_iterator(function() keras_array(x()))
 }
 
+as_generator.keras_preprocessing.sequence.TimeseriesGenerator <- function(x) {
+  reticulate::as_iterator(x)
+}
+
 is_main_thread_generator <- function(x) {
   UseMethod("is_main_thread_generator")
 }
