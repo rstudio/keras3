@@ -195,9 +195,12 @@ to_keras_training_history <- function(history) {
   # turn history into an R object so it can be persited and
   # and give it a class so we can write print/plot methods
   params <- history$params
-  if (params$do_validation)
-    params$validation_samples <- dim(history$validation_data[[1]])[[1]]
-  
+  if (params$do_validation) {
+    if (!is.null(params$validation_steps))
+      params$validation_samples <- params$validation_steps
+    else
+      params$validation_samples <- dim(history$validation_data[[1]])[[1]]
+  }
   # normalize metrics
   metrics <- history$history
   metrics <- lapply(metrics, function(metric) {
