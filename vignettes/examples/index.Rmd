@@ -11,8 +11,10 @@ title: "Keras Examples"
 | [cifar10_densenet](cifar10_densenet.html) | Trains a DenseNet-40-12 on the CIFAR10 small images dataset. |
 | [conv_lstm](conv_lstm.html) | Demonstrates the use of a convolutional LSTM network. |
 | [deep_dream](deep_dream.html) | Deep Dreams in Keras. |
-| [eager_styletransfer](eager_styletransfer.html) | Neural style transfer with eager execution. |
 | [eager_dcgan](eager_dcgan.html) | Generating digits with generative adversarial networks and eager execution. |
+| [eager_image_captioning](eager_image_captioning.html) | Generating image captions with Keras and eager execution. |
+| [eager_pix2pix](eager_pix2pix.html) | Image-to-image translation with Pix2Pix, using eager execution. |
+| [eager_styletransfer](eager_styletransfer.html) | Neural style transfer with eager execution. |
 | [imdb_bidirectional_lstm](imdb_bidirectional_lstm.html) | Trains a Bidirectional LSTM on the IMDB sentiment classification task. |
 | [imdb_cnn](imdb_cnn.html) | Demonstrates the use of Convolution1D for text classification. |
 | [imdb_cnn_lstm](imdb_cnn_lstm.html) | Trains a convolutional stack followed by a recurrent stack network on the IMDB sentiment classification task. |
