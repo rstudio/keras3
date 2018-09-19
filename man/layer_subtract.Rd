@@ -28,7 +28,7 @@ A tensor, the difference of the inputs.
 }
 \description{
 It takes as input a list of tensors of size 2, both of the same shape, and
-returns a single tensor, (`inputs[\link{1}] - inputs[\link{2}]``), also of the same
+returns a single tensor, (\code{inputs[[1]] - inputs[[2]]}), also of the same
 shape.
 }
 \seealso{
