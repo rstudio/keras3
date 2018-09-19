@@ -19,12 +19,15 @@
 #'         
 #' @export
 layer_dropout <- function(object, rate, noise_shape = NULL, seed = NULL, 
+                          input_shape = NULL, batch_input_shape = NULL,
                           batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
   create_layer(keras$layers$Dropout, object, list(
     rate = rate,
     noise_shape = normalize_shape(noise_shape),
     seed = seed,
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
     batch_size = as_nullable_integer(batch_size),
     name = name,
     trainable = trainable,

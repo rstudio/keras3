@@ -5,6 +5,8 @@ Install the development version with `devtools::install_github("rstudio/keras")`
 
 - Improve handling of `timeseries_generator()` in calls to `fit_generator()`
 
+- Add support for `input_shape` argument to `layer_dropout()`
+
 
 ## Keras 2.2.0 (CRAN)
 

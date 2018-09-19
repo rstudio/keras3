@@ -5,7 +5,8 @@
 \title{Applies Dropout to the input.}
 \usage{
 layer_dropout(object, rate, noise_shape = NULL, seed = NULL,
-  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
+  input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
+  name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -19,6 +20,15 @@ dropout mask to be the same for all timesteps, you can use
 \code{noise_shape=c(batch_size, 1, features)}.}
 
 \item{seed}{integer to use as random seed.}
+
+\item{input_shape}{Dimensionality of the input (integer) not including the
+samples axis. This argument is required when using this layer as the first
+layer in a model.}
+
+\item{batch_input_shape}{Shapes, including the batch size. For instance,
+\code{batch_input_shape=c(10, 32)} indicates that the expected input will be
+batches of 10 32-dimensional vectors. \code{batch_input_shape=list(NULL, 32)}
+indicates batches of an arbitrary number of 32-dimensional vectors.}
 
 \item{batch_size}{Fixed batch size for layer}
 
@@ -47,3 +57,5 @@ Other dropout layers: \code{\link{layer_spatial_dropout_1d}},
   \code{\link{layer_spatial_dropout_2d}},
   \code{\link{layer_spatial_dropout_3d}}
 }
+\concept{core layers}
+\concept{dropout layers}
