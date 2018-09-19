@@ -4,8 +4,8 @@
 \alias{layer_input}
 \title{Input layer}
 \usage{
-layer_input(shape = NULL, batch_shape = NULL, name = NULL, dtype = NULL,
-  sparse = FALSE, tensor = NULL)
+layer_input(shape = NULL, batch_shape = NULL, name = NULL,
+  dtype = NULL, sparse = FALSE, tensor = NULL)
 }
 \arguments{
 \item{shape}{Shape, not including the batch size. For instance,
@@ -44,3 +44,4 @@ Other core layers: \code{\link{layer_activation}},
   \code{\link{layer_repeat_vector}},
   \code{\link{layer_reshape}}
 }
+\concept{core layers}

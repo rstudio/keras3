@@ -42,3 +42,4 @@ Other callbacks: \code{\link{callback_csv_logger}},
   \code{\link{callback_tensorboard}},
   \code{\link{callback_terminate_on_naan}}
 }
+\concept{callbacks}

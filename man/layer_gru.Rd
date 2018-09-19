@@ -6,9 +6,9 @@
 \usage{
 layer_gru(object, units, activation = "tanh",
   recurrent_activation = "hard_sigmoid", use_bias = TRUE,
-  return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE,
-  stateful = FALSE, unroll = FALSE, reset_after = FALSE,
-  kernel_initializer = "glorot_uniform",
+  return_sequences = FALSE, return_state = FALSE,
+  go_backwards = FALSE, stateful = FALSE, unroll = FALSE,
+  reset_after = FALSE, kernel_initializer = "glorot_uniform",
   recurrent_initializer = "orthogonal", bias_initializer = "zeros",
   kernel_regularizer = NULL, recurrent_regularizer = NULL,
   bias_regularizer = NULL, activity_regularizer = NULL,
@@ -188,10 +188,10 @@ the initial state of the RNN layer.
 \section{References}{
 
 \itemize{
-\item \href{https://arxiv.org/abs/1406.1078}{Learning Phrase Representations using RNN Encoder-Decoder for StatisticalMachine Translation}
-\item \href{https://arxiv.org/abs/1409.1259}{On the Properties of Neural Machine Translation:Encoder-Decoder Approaches}
-\item \href{http://arxiv.org/abs/1412.3555v1}{EmpiricalEvaluation of Gated Recurrent Neural Networks on SequenceModeling}
-\item \href{http://arxiv.org/abs/1512.05287}{A Theoretically GroundedApplication of Dropout in Recurrent NeuralNetworks}
+\item \href{https://arxiv.org/abs/1406.1078}{Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation}
+\item \href{https://arxiv.org/abs/1409.1259}{On the Properties of Neural Machine Translation: Encoder-Decoder Approaches}
+\item \href{http://arxiv.org/abs/1412.3555v1}{Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling}
+\item \href{http://arxiv.org/abs/1512.05287}{A Theoretically Grounded Application of Dropout in Recurrent Neural Networks}
 }
 }
 
@@ -200,3 +200,4 @@ Other recurrent layers: \code{\link{layer_cudnn_gru}},
   \code{\link{layer_cudnn_lstm}}, \code{\link{layer_lstm}},
   \code{\link{layer_simple_rnn}}
 }
+\concept{recurrent layers}

@@ -5,8 +5,8 @@
 \title{Generate batches of image data with real-time data augmentation. The data will be
 looped over (in batches).}
 \usage{
-image_data_generator(featurewise_center = FALSE, samplewise_center = FALSE,
-  featurewise_std_normalization = FALSE,
+image_data_generator(featurewise_center = FALSE,
+  samplewise_center = FALSE, featurewise_std_normalization = FALSE,
   samplewise_std_normalization = FALSE, zca_whitening = FALSE,
   zca_epsilon = 1e-06, rotation_range = 0, width_shift_range = 0,
   height_shift_range = 0, brightness_range = NULL, shear_range = 0,

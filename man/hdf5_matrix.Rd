@@ -4,7 +4,8 @@
 \alias{hdf5_matrix}
 \title{Representation of HDF5 dataset to be used instead of an R array}
 \usage{
-hdf5_matrix(datapath, dataset, start = 0, end = NULL, normalizer = NULL)
+hdf5_matrix(datapath, dataset, start = 0, end = NULL,
+  normalizer = NULL)
 }
 \arguments{
 \item{datapath}{string, path to a HDF5 file}

@@ -4,7 +4,8 @@
 \alias{k_batch_normalization}
 \title{Applies batch normalization on x given mean, var, beta and gamma.}
 \usage{
-k_batch_normalization(x, mean, var, beta, gamma, axis = -1, epsilon = 0.001)
+k_batch_normalization(x, mean, var, beta, gamma, axis = -1,
+  epsilon = 0.001)
 }
 \arguments{
 \item{x}{Input tensor or variable.}

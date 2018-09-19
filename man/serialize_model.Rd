@@ -40,3 +40,4 @@ Other model persistence: \code{\link{get_weights}},
   \code{\link{save_model_hdf5}},
   \code{\link{save_model_weights_hdf5}}
 }
+\concept{model persistence}

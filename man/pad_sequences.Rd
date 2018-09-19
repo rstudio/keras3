@@ -4,8 +4,8 @@
 \alias{pad_sequences}
 \title{Pads sequences to the same length}
 \usage{
-pad_sequences(sequences, maxlen = NULL, dtype = "int32", padding = "pre",
-  truncating = "pre", value = 0)
+pad_sequences(sequences, maxlen = NULL, dtype = "int32",
+  padding = "pre", truncating = "pre", value = 0)
 }
 \arguments{
 \item{sequences}{List of lists where each element is a sequence}
@@ -49,3 +49,4 @@ Other text preprocessing: \code{\link{make_sampling_table}},
   \code{\link{text_one_hot}},
   \code{\link{text_to_word_sequence}}
 }
+\concept{text preprocessing}

@@ -51,3 +51,4 @@ Other core layers: \code{\link{layer_activation}},
   \code{\link{layer_repeat_vector}},
   \code{\link{layer_reshape}}
 }
+\concept{core layers}

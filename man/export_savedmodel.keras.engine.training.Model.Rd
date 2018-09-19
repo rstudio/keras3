@@ -4,9 +4,9 @@
 \alias{export_savedmodel.keras.engine.training.Model}
 \title{Export a Saved Model}
 \usage{
-\method{export_savedmodel}{keras.engine.training.Model}(object, export_dir_base,
-  overwrite = TRUE, versioned = !overwrite, remove_learning_phase = TRUE,
-  as_text = FALSE, ...)
+\method{export_savedmodel}{keras.engine.training.Model}(object,
+  export_dir_base, overwrite = TRUE, versioned = !overwrite,
+  remove_learning_phase = TRUE, as_text = FALSE, ...)
 }
 \arguments{
 \item{object}{An \R object.}

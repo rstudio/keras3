@@ -46,3 +46,4 @@ Other activation layers: \code{\link{layer_activation_elu}},
   \code{\link{layer_activation_thresholded_relu}},
   \code{\link{layer_activation}}
 }
+\concept{activation layers}

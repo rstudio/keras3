@@ -46,7 +46,7 @@ feature maps and should be used instead.
 }
 
 \section{References}{
- - \href{https://arxiv.org/abs/1411.4280}{Efficient Object Localization Using ConvolutionalNetworks}
+ - \href{https://arxiv.org/abs/1411.4280}{Efficient Object Localization Using Convolutional Networks}
 }
 
 \seealso{
@@ -54,3 +54,4 @@ Other dropout layers: \code{\link{layer_dropout}},
   \code{\link{layer_spatial_dropout_1d}},
   \code{\link{layer_spatial_dropout_2d}}
 }
+\concept{dropout layers}

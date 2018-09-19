@@ -4,8 +4,8 @@
 \alias{optimizer_adagrad}
 \title{Adagrad optimizer.}
 \usage{
-optimizer_adagrad(lr = 0.01, epsilon = NULL, decay = 0, clipnorm = NULL,
-  clipvalue = NULL)
+optimizer_adagrad(lr = 0.01, epsilon = NULL, decay = 0,
+  clipnorm = NULL, clipvalue = NULL)
 }
 \arguments{
 \item{lr}{float >= 0. Learning rate.}
@@ -21,7 +21,7 @@ value.}
 this value.}
 }
 \description{
-Adagrad optimizer as described in \href{http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf}{Adaptive Subgradient Methods for OnlineLearning and StochasticOptimization}.
+Adagrad optimizer as described in \href{http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf}{Adaptive Subgradient Methods for Online Learning and Stochastic Optimization}.
 }
 \note{
 It is recommended to leave the parameters of this optimizer at their
@@ -35,3 +35,4 @@ Other optimizers: \code{\link{optimizer_adadelta}},
   \code{\link{optimizer_rmsprop}},
   \code{\link{optimizer_sgd}}
 }
+\concept{optimizers}

@@ -5,8 +5,8 @@
 \title{Convert text to a sequence of words (or tokens).}
 \usage{
 text_to_word_sequence(text,
-  filters = "!\\"#$\%&()*+,-./:;<=>?@[\\\\]^_`{|}~\\t\\n", lower = TRUE,
-  split = " ")
+  filters = "!\\"#$\%&()*+,-./:;<=>?@[\\\\]^_`{|}~\\t\\n",
+  lower = TRUE, split = " ")
 }
 \arguments{
 \item{text}{Input text (string).}
@@ -30,3 +30,4 @@ Other text preprocessing: \code{\link{make_sampling_table}},
   \code{\link{text_hashing_trick}},
   \code{\link{text_one_hot}}
 }
+\concept{text preprocessing}

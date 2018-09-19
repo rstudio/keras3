@@ -45,3 +45,4 @@ Bidirectional wrapper for RNNs.
 \seealso{
 Other layer wrappers: \code{\link{time_distributed}}
 }
+\concept{layer wrappers}

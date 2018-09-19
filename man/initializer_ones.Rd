@@ -25,3 +25,4 @@ Other initializers: \code{\link{initializer_constant}},
   \code{\link{initializer_variance_scaling}},
   \code{\link{initializer_zeros}}
 }
+\concept{initializers}

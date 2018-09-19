@@ -4,9 +4,9 @@
 \alias{evaluate.keras.engine.training.Model}
 \title{Evaluate a Keras model}
 \usage{
-\method{evaluate}{keras.engine.training.Model}(object, x = NULL, y = NULL,
-  batch_size = NULL, verbose = 1, sample_weight = NULL, steps = NULL,
-  ...)
+\method{evaluate}{keras.engine.training.Model}(object, x = NULL,
+  y = NULL, batch_size = NULL, verbose = 1, sample_weight = NULL,
+  steps = NULL, ...)
 }
 \arguments{
 \item{object}{Model object to evaluate}
@@ -61,3 +61,4 @@ Other model functions: \code{\link{compile}},
   \code{\link{summary.keras.engine.training.Model}},
   \code{\link{train_on_batch}}
 }
+\concept{model functions}

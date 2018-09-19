@@ -40,3 +40,4 @@ Other merge layers: \code{\link{layer_add}},
   \code{\link{layer_multiply}},
   \code{\link{layer_subtract}}
 }
+\concept{merge layers}

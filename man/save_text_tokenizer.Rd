@@ -51,3 +51,4 @@ Other text tokenization: \code{\link{fit_text_tokenizer}},
   \code{\link{texts_to_sequences_generator}},
   \code{\link{texts_to_sequences}}
 }
+\concept{text tokenization}

@@ -6,16 +6,17 @@
 \usage{
 layer_lstm(object, units, activation = "tanh",
   recurrent_activation = "hard_sigmoid", use_bias = TRUE,
-  return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE,
-  stateful = FALSE, unroll = FALSE, kernel_initializer = "glorot_uniform",
+  return_sequences = FALSE, return_state = FALSE,
+  go_backwards = FALSE, stateful = FALSE, unroll = FALSE,
+  kernel_initializer = "glorot_uniform",
   recurrent_initializer = "orthogonal", bias_initializer = "zeros",
   unit_forget_bias = TRUE, kernel_regularizer = NULL,
   recurrent_regularizer = NULL, bias_regularizer = NULL,
   activity_regularizer = NULL, kernel_constraint = NULL,
   recurrent_constraint = NULL, bias_constraint = NULL, dropout = 0,
-  recurrent_dropout = 0, input_shape = NULL, batch_input_shape = NULL,
-  batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
-  weights = NULL)
+  recurrent_dropout = 0, input_shape = NULL,
+  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
+  name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -59,7 +60,7 @@ matrix, used for the linear transformation of the recurrent state.}
 
 \item{unit_forget_bias}{Boolean. If TRUE, add 1 to the bias of the forget
 gate at initialization. Setting it to true will also force
-\code{bias_initializer="zeros"}. This is recommended in \href{http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf}{Jozefowicz etal.}}
+\code{bias_initializer="zeros"}. This is recommended in \href{http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf}{Jozefowicz et al.}}
 
 \item{kernel_regularizer}{Regularizer function applied to the \code{kernel}
 weights matrix.}
@@ -195,3 +196,4 @@ Other recurrent layers: \code{\link{layer_cudnn_gru}},
   \code{\link{layer_cudnn_lstm}}, \code{\link{layer_gru}},
   \code{\link{layer_simple_rnn}}
 }
+\concept{recurrent layers}

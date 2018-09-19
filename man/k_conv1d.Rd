@@ -4,8 +4,8 @@
 \alias{k_conv1d}
 \title{1D convolution.}
 \usage{
-k_conv1d(x, kernel, strides = 1, padding = "valid", data_format = NULL,
-  dilation_rate = 1)
+k_conv1d(x, kernel, strides = 1, padding = "valid",
+  data_format = NULL, dilation_rate = 1)
 }
 \arguments{
 \item{x}{Tensor or variable.}

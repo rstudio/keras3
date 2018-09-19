@@ -56,7 +56,7 @@ Optionally loads weights pre-trained on ImageNet.
 The \code{imagenet_preprocess_input()} function should be used for image preprocessing.
 }
 \section{Reference}{
- - \href{https://arxiv.org/abs/1409.1556}{Very Deep Convolutional Networks for Large-Scale ImageRecognition}
+ - \href{https://arxiv.org/abs/1409.1556}{Very Deep Convolutional Networks for Large-Scale Image Recognition}
 }
 
 \examples{

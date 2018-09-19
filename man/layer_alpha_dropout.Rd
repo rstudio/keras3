@@ -46,3 +46,4 @@ the first layer in a model.
 Other noise layers: \code{\link{layer_gaussian_dropout}},
   \code{\link{layer_gaussian_noise}}
 }
+\concept{noise layers}

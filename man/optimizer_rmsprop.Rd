@@ -39,3 +39,4 @@ Other optimizers: \code{\link{optimizer_adadelta}},
   \code{\link{optimizer_nadam}},
   \code{\link{optimizer_sgd}}
 }
+\concept{optimizers}

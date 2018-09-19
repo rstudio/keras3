@@ -8,9 +8,9 @@ layer_dense(object, units, activation = NULL, use_bias = TRUE,
   kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
   kernel_regularizer = NULL, bias_regularizer = NULL,
   activity_regularizer = NULL, kernel_constraint = NULL,
-  bias_constraint = NULL, input_shape = NULL, batch_input_shape = NULL,
-  batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
-  weights = NULL)
+  bias_constraint = NULL, input_shape = NULL,
+  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
+  name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -89,3 +89,4 @@ Other core layers: \code{\link{layer_activation}},
   \code{\link{layer_repeat_vector}},
   \code{\link{layer_reshape}}
 }
+\concept{core layers}

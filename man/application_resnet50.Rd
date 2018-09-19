@@ -51,7 +51,7 @@ The \code{imagenet_preprocess_input()} function should be used for image
 preprocessing.
 }
 \section{Reference}{
- - \href{https://arxiv.org/abs/1512.03385}{Deep Residual Learning for ImageRecognition}
+ - \href{https://arxiv.org/abs/1512.03385}{Deep Residual Learning for Image Recognition}
 }
 
 \examples{

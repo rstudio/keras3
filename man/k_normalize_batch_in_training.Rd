@@ -4,7 +4,8 @@
 \alias{k_normalize_batch_in_training}
 \title{Computes mean and std for batch then apply batch_normalization on batch.}
 \usage{
-k_normalize_batch_in_training(x, gamma, beta, reduction_axes, epsilon = 0.001)
+k_normalize_batch_in_training(x, gamma, beta, reduction_axes,
+  epsilon = 0.001)
 }
 \arguments{
 \item{x}{Input tensor or variable.}

@@ -55,3 +55,4 @@ Other pooling layers: \code{\link{layer_average_pooling_1d}},
   \code{\link{layer_max_pooling_2d}},
   \code{\link{layer_max_pooling_3d}}
 }
+\concept{pooling layers}

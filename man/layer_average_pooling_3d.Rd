@@ -4,9 +4,9 @@
 \alias{layer_average_pooling_3d}
 \title{Average pooling operation for 3D data (spatial or spatio-temporal).}
 \usage{
-layer_average_pooling_3d(object, pool_size = c(2L, 2L, 2L), strides = NULL,
-  padding = "valid", data_format = NULL, batch_size = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+layer_average_pooling_3d(object, pool_size = c(2L, 2L, 2L),
+  strides = NULL, padding = "valid", data_format = NULL,
+  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -68,3 +68,4 @@ Other pooling layers: \code{\link{layer_average_pooling_1d}},
   \code{\link{layer_max_pooling_2d}},
   \code{\link{layer_max_pooling_3d}}
 }
+\concept{pooling layers}

@@ -66,3 +66,4 @@ Other model functions: \code{\link{evaluate.keras.engine.training.Model}},
   \code{\link{summary.keras.engine.training.Model}},
   \code{\link{train_on_batch}}
 }
+\concept{model functions}

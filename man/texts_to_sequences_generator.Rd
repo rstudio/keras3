@@ -26,3 +26,4 @@ Other text tokenization: \code{\link{fit_text_tokenizer}},
   \code{\link{texts_to_matrix}},
   \code{\link{texts_to_sequences}}
 }
+\concept{text tokenization}

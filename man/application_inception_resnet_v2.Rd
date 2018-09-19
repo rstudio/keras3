@@ -5,9 +5,9 @@
 \alias{inception_resnet_v2_preprocess_input}
 \title{Inception-ResNet v2 model, with weights trained on ImageNet}
 \usage{
-application_inception_resnet_v2(include_top = TRUE, weights = "imagenet",
-  input_tensor = NULL, input_shape = NULL, pooling = NULL,
-  classes = 1000)
+application_inception_resnet_v2(include_top = TRUE,
+  weights = "imagenet", input_tensor = NULL, input_shape = NULL,
+  pooling = NULL, classes = 1000)
 
 inception_resnet_v2_preprocess_input(x)
 }

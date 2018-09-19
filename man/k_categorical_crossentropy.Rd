@@ -4,7 +4,8 @@
 \alias{k_categorical_crossentropy}
 \title{Categorical crossentropy between an output tensor and a target tensor.}
 \usage{
-k_categorical_crossentropy(target, output, from_logits = FALSE, axis = -1)
+k_categorical_crossentropy(target, output, from_logits = FALSE,
+  axis = -1)
 }
 \arguments{
 \item{target}{A tensor of the same shape as \code{output}.}

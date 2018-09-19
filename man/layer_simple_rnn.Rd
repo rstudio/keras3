@@ -5,8 +5,9 @@
 \title{Fully-connected RNN where the output is to be fed back to input.}
 \usage{
 layer_simple_rnn(object, units, activation = "tanh", use_bias = TRUE,
-  return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE,
-  stateful = FALSE, unroll = FALSE, kernel_initializer = "glorot_uniform",
+  return_sequences = FALSE, return_state = FALSE,
+  go_backwards = FALSE, stateful = FALSE, unroll = FALSE,
+  kernel_initializer = "glorot_uniform",
   recurrent_initializer = "orthogonal", bias_initializer = "zeros",
   kernel_regularizer = NULL, recurrent_regularizer = NULL,
   bias_regularizer = NULL, activity_regularizer = NULL,
@@ -180,3 +181,4 @@ Other recurrent layers: \code{\link{layer_cudnn_gru}},
   \code{\link{layer_cudnn_lstm}}, \code{\link{layer_gru}},
   \code{\link{layer_lstm}}
 }
+\concept{recurrent layers}

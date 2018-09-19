@@ -20,3 +20,4 @@ Other callbacks: \code{\link{callback_csv_logger}},
   \code{\link{callback_remote_monitor}},
   \code{\link{callback_tensorboard}}
 }
+\concept{callbacks}

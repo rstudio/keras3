@@ -14,7 +14,8 @@ constraint_nonneg()
 
 constraint_unitnorm(axis = 0)
 
-constraint_minmaxnorm(min_value = 0, max_value = 1, rate = 1, axis = 0)
+constraint_minmaxnorm(min_value = 0, max_value = 1, rate = 1,
+  axis = 0)
 }
 \arguments{
 \item{max_value}{The maximum norm for the incoming weights.}
@@ -69,7 +70,7 @@ and restored using \code{\link[=save_model_weights_hdf5]{save_model_weights_hdf5
 }
 
 \seealso{
-\href{http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf}{Dropout: A Simple Way to Prevent Neural Networks from OverfittingSrivastava, Hinton, et al.2014}
+\href{http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf}{Dropout: A Simple Way to Prevent Neural Networks from Overfitting Srivastava, Hinton, et al. 2014}
 
 \link{KerasConstraint}
 }

@@ -55,3 +55,5 @@ Other activation layers: \code{\link{layer_activation_elu}},
   \code{\link{layer_activation_softmax}},
   \code{\link{layer_activation_thresholded_relu}}
 }
+\concept{activation layers}
+\concept{core layers}

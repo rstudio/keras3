@@ -37,3 +37,4 @@ Other merge layers: \code{\link{layer_add}},
   \code{\link{layer_maximum}}, \code{\link{layer_minimum}},
   \code{\link{layer_subtract}}
 }
+\concept{merge layers}

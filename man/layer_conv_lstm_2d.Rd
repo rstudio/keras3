@@ -14,8 +14,9 @@ layer_conv_lstm_2d(object, filters, kernel_size, strides = c(1L, 1L),
   activity_regularizer = NULL, kernel_constraint = NULL,
   recurrent_constraint = NULL, bias_constraint = NULL,
   return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE,
-  dropout = 0, recurrent_dropout = 0, batch_size = NULL, name = NULL,
-  trainable = NULL, weights = NULL, input_shape = NULL)
+  dropout = 0, recurrent_dropout = 0, batch_size = NULL,
+  name = NULL, trainable = NULL, weights = NULL,
+  input_shape = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -61,7 +62,7 @@ matrix, used for the linear transformation of the recurrent state..}
 
 \item{unit_forget_bias}{Boolean. If TRUE, add 1 to the bias of the forget
 gate at initialization. Use in combination with \code{bias_initializer="zeros"}.
-This is recommended in \href{http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf}{Jozefowicz etal.}}
+This is recommended in \href{http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf}{Jozefowicz et al.}}
 
 \item{kernel_regularizer}{Regularizer function applied to the \code{kernel}
 weights matrix.}
@@ -156,3 +157,4 @@ Other convolutional layers: \code{\link{layer_conv_1d}},
   \code{\link{layer_zero_padding_2d}},
   \code{\link{layer_zero_padding_3d}}
 }
+\concept{convolutional layers}

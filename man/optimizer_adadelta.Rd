@@ -23,7 +23,7 @@ value.}
 this value.}
 }
 \description{
-Adadelta optimizer as described in \href{https://arxiv.org/abs/1212.5701}{ADADELTA: An Adaptive Learning RateMethod}.
+Adadelta optimizer as described in \href{https://arxiv.org/abs/1212.5701}{ADADELTA: An Adaptive Learning Rate Method}.
 }
 \note{
 It is recommended to leave the parameters of this optimizer at their
@@ -37,3 +37,4 @@ Other optimizers: \code{\link{optimizer_adagrad}},
   \code{\link{optimizer_rmsprop}},
   \code{\link{optimizer_sgd}}
 }
+\concept{optimizers}

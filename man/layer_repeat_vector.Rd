@@ -41,3 +41,4 @@ Other core layers: \code{\link{layer_activation}},
   \code{\link{layer_lambda}}, \code{\link{layer_masking}},
   \code{\link{layer_permute}}, \code{\link{layer_reshape}}
 }
+\concept{core layers}

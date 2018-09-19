@@ -4,8 +4,9 @@
 \alias{layer_zero_padding_3d}
 \title{Zero-padding layer for 3D data (spatial or spatio-temporal).}
 \usage{
-layer_zero_padding_3d(object, padding = c(1L, 1L, 1L), data_format = NULL,
-  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
+layer_zero_padding_3d(object, padding = c(1L, 1L, 1L),
+  data_format = NULL, batch_size = NULL, name = NULL,
+  trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -73,3 +74,4 @@ Other convolutional layers: \code{\link{layer_conv_1d}},
   \code{\link{layer_zero_padding_1d}},
   \code{\link{layer_zero_padding_2d}}
 }
+\concept{convolutional layers}

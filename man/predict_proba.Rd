@@ -5,9 +5,11 @@
 \alias{predict_classes}
 \title{Generates probability or class probability predictions for the input samples.}
 \usage{
-predict_proba(object, x, batch_size = NULL, verbose = 0, steps = NULL)
+predict_proba(object, x, batch_size = NULL, verbose = 0,
+  steps = NULL)
 
-predict_classes(object, x, batch_size = NULL, verbose = 0, steps = NULL)
+predict_classes(object, x, batch_size = NULL, verbose = 0,
+  steps = NULL)
 }
 \arguments{
 \item{object}{Keras model object}
@@ -43,3 +45,4 @@ Other model functions: \code{\link{compile}},
   \code{\link{summary.keras.engine.training.Model}},
   \code{\link{train_on_batch}}
 }
+\concept{model functions}

@@ -5,7 +5,8 @@
 \title{Iterates over the time dimension of a tensor}
 \usage{
 k_rnn(step_function, inputs, initial_states, go_backwards = FALSE,
-  mask = NULL, constants = NULL, unroll = FALSE, input_length = NULL)
+  mask = NULL, constants = NULL, unroll = FALSE,
+  input_length = NULL)
 }
 \arguments{
 \item{step_function}{RNN step function.}

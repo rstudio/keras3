@@ -4,13 +4,13 @@
 \alias{layer_locally_connected_2d}
 \title{Locally-connected layer for 2D inputs.}
 \usage{
-layer_locally_connected_2d(object, filters, kernel_size, strides = c(1L, 1L),
-  padding = "valid", data_format = NULL, activation = NULL,
+layer_locally_connected_2d(object, filters, kernel_size, strides = c(1L,
+  1L), padding = "valid", data_format = NULL, activation = NULL,
   use_bias = TRUE, kernel_initializer = "glorot_uniform",
   bias_initializer = "zeros", kernel_regularizer = NULL,
   bias_regularizer = NULL, activity_regularizer = NULL,
-  kernel_constraint = NULL, bias_constraint = NULL, batch_size = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+  kernel_constraint = NULL, bias_constraint = NULL,
+  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -86,3 +86,4 @@ if data_format='channels_first' or 4D tensor with shape: \code{(samples, rows, c
 \seealso{
 Other locally connected layers: \code{\link{layer_locally_connected_1d}}
 }
+\concept{locally connected layers}

@@ -14,10 +14,12 @@ application_nasnet(input_shape = NULL, penultimate_filters = 4032L,
   default_size = NULL)
 
 application_nasnetlarge(input_shape = NULL, include_top = TRUE,
-  weights = NULL, input_tensor = NULL, pooling = NULL, classes = 1000)
+  weights = NULL, input_tensor = NULL, pooling = NULL,
+  classes = 1000)
 
 application_nasnetmobile(input_shape = NULL, include_top = TRUE,
-  weights = NULL, input_tensor = NULL, pooling = NULL, classes = 1000)
+  weights = NULL, input_tensor = NULL, pooling = NULL,
+  classes = 1000)
 
 nasnet_preprocess_input(x)
 }

@@ -45,3 +45,4 @@ Other initializers: \code{\link{initializer_constant}},
   \code{\link{initializer_truncated_normal}},
   \code{\link{initializer_zeros}}
 }
+\concept{initializers}

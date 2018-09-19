@@ -4,7 +4,8 @@
 \alias{text_one_hot}
 \title{One-hot encode a text into a list of word indexes in a vocabulary of size n.}
 \usage{
-text_one_hot(text, n, filters = "!\\"#$\%&()*+,-./:;<=>?@[\\\\]^_`{|}~\\t\\n",
+text_one_hot(text, n,
+  filters = "!\\"#$\%&()*+,-./:;<=>?@[\\\\]^_`{|}~\\t\\n",
   lower = TRUE, split = " ")
 }
 \arguments{
@@ -32,3 +33,4 @@ Other text preprocessing: \code{\link{make_sampling_table}},
   \code{\link{text_hashing_trick}},
   \code{\link{text_to_word_sequence}}
 }
+\concept{text preprocessing}

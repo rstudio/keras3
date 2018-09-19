@@ -44,3 +44,4 @@ Other layer methods: \code{\link{count_params}},
   \code{\link{get_config}}, \code{\link{get_weights}},
   \code{\link{reset_states}}
 }
+\concept{layer methods}

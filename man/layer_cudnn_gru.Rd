@@ -9,10 +9,10 @@ layer_cudnn_gru(object, units, kernel_initializer = "glorot_uniform",
   kernel_regularizer = NULL, recurrent_regularizer = NULL,
   bias_regularizer = NULL, activity_regularizer = NULL,
   kernel_constraint = NULL, recurrent_constraint = NULL,
-  bias_constraint = NULL, return_sequences = FALSE, return_state = FALSE,
-  stateful = FALSE, input_shape = NULL, batch_input_shape = NULL,
-  batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
-  weights = NULL)
+  bias_constraint = NULL, return_sequences = FALSE,
+  return_state = FALSE, stateful = FALSE, input_shape = NULL,
+  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
+  name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -84,9 +84,9 @@ Can only be run on GPU, with the TensorFlow backend.
 \section{References}{
 
 \itemize{
-\item \href{https://arxiv.org/abs/1409.1259}{On the Properties of Neural Machine Translation:Encoder-Decoder Approaches}
-\item \href{http://arxiv.org/abs/1412.3555v1}{EmpiricalEvaluation of Gated Recurrent Neural Networks on SequenceModeling}
-\item \href{http://arxiv.org/abs/1512.05287}{A Theoretically GroundedApplication of Dropout in Recurrent NeuralNetworks}
+\item \href{https://arxiv.org/abs/1409.1259}{On the Properties of Neural Machine Translation: Encoder-Decoder Approaches}
+\item \href{http://arxiv.org/abs/1412.3555v1}{Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling}
+\item \href{http://arxiv.org/abs/1512.05287}{A Theoretically Grounded Application of Dropout in Recurrent Neural Networks}
 }
 }
 
@@ -95,3 +95,4 @@ Other recurrent layers: \code{\link{layer_cudnn_lstm}},
   \code{\link{layer_gru}}, \code{\link{layer_lstm}},
   \code{\link{layer_simple_rnn}}
 }
+\concept{recurrent layers}

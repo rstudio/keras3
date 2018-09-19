@@ -29,7 +29,7 @@ matrix, used for the linear transformation of the recurrent state.}
 
 \item{unit_forget_bias}{Boolean. If TRUE, add 1 to the bias of the forget
 gate at initialization. Setting it to true will also force
-\code{bias_initializer="zeros"}. This is recommended in \href{http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf}{Jozefowicz etal.}}
+\code{bias_initializer="zeros"}. This is recommended in \href{http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf}{Jozefowicz et al.}}
 
 \item{kernel_regularizer}{Regularizer function applied to the \code{kernel}
 weights matrix.}
@@ -99,3 +99,4 @@ Other recurrent layers: \code{\link{layer_cudnn_gru}},
   \code{\link{layer_gru}}, \code{\link{layer_lstm}},
   \code{\link{layer_simple_rnn}}
 }
+\concept{recurrent layers}

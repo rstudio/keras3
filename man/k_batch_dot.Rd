@@ -13,10 +13,7 @@ k_batch_dot(x, y, axes)
 
 \item{axes}{List of (or single) integer with target dimensions (axis indexes
 are 1-based). The lengths of \code{axes[[1]]} and \code{axes[[2]]} should be the
-same.
-
-[[1]: R:[1
-[[2]: R:[2}
+same.}
 }
 \value{
 A tensor with shape equal to the concatenation of \code{x}'s shape (less

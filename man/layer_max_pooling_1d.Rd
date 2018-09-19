@@ -5,8 +5,8 @@
 \title{Max pooling operation for temporal data.}
 \usage{
 layer_max_pooling_1d(object, pool_size = 2L, strides = NULL,
-  padding = "valid", batch_size = NULL, name = NULL, trainable = NULL,
-  weights = NULL)
+  padding = "valid", batch_size = NULL, name = NULL,
+  trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -52,3 +52,4 @@ Other pooling layers: \code{\link{layer_average_pooling_1d}},
   \code{\link{layer_max_pooling_2d}},
   \code{\link{layer_max_pooling_3d}}
 }
+\concept{pooling layers}

@@ -4,8 +4,9 @@
 \alias{optimizer_adam}
 \title{Adam optimizer}
 \usage{
-optimizer_adam(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL,
-  decay = 0, amsgrad = FALSE, clipnorm = NULL, clipvalue = NULL)
+optimizer_adam(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999,
+  epsilon = NULL, decay = 0, amsgrad = FALSE, clipnorm = NULL,
+  clipvalue = NULL)
 }
 \arguments{
 \item{lr}{float >= 0. Learning rate.}
@@ -30,7 +31,7 @@ value.}
 this value.}
 }
 \description{
-Adam optimizer as described in \href{https://arxiv.org/abs/1412.6980v8}{Adam - A Method for StochasticOptimization}.
+Adam optimizer as described in \href{https://arxiv.org/abs/1412.6980v8}{Adam - A Method for Stochastic Optimization}.
 }
 \note{
 Default parameters follow those provided in the original paper.
@@ -51,3 +52,4 @@ Other optimizers: \code{\link{optimizer_adadelta}},
   \code{\link{optimizer_rmsprop}},
   \code{\link{optimizer_sgd}}
 }
+\concept{optimizers}

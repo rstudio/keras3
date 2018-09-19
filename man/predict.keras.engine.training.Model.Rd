@@ -4,8 +4,8 @@
 \alias{predict.keras.engine.training.Model}
 \title{Generate predictions from a Keras model}
 \usage{
-\method{predict}{keras.engine.training.Model}(object, x, batch_size = NULL,
-  verbose = 0, steps = NULL, ...)
+\method{predict}{keras.engine.training.Model}(object, x,
+  batch_size = NULL, verbose = 0, steps = NULL, ...)
 }
 \arguments{
 \item{object}{Keras model}
@@ -42,3 +42,4 @@ Other model functions: \code{\link{compile}},
   \code{\link{summary.keras.engine.training.Model}},
   \code{\link{train_on_batch}}
 }
+\concept{model functions}

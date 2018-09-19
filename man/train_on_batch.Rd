@@ -45,3 +45,4 @@ Other model functions: \code{\link{compile}},
   \code{\link{predict_proba}},
   \code{\link{summary.keras.engine.training.Model}}
 }
+\concept{model functions}

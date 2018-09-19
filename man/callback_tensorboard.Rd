@@ -4,10 +4,11 @@
 \alias{callback_tensorboard}
 \title{TensorBoard basic visualizations}
 \usage{
-callback_tensorboard(log_dir = NULL, histogram_freq = 0, batch_size = 32,
-  write_graph = TRUE, write_grads = FALSE, write_images = FALSE,
-  embeddings_freq = 0, embeddings_layer_names = NULL,
-  embeddings_metadata = NULL, embeddings_data = NULL)
+callback_tensorboard(log_dir = NULL, histogram_freq = 0,
+  batch_size = 32, write_graph = TRUE, write_grads = FALSE,
+  write_images = FALSE, embeddings_freq = 0,
+  embeddings_layer_names = NULL, embeddings_metadata = NULL,
+  embeddings_data = NULL)
 }
 \arguments{
 \item{log_dir}{The path of the directory where to save the log files to be
@@ -72,3 +73,4 @@ Other callbacks: \code{\link{callback_csv_logger}},
   \code{\link{callback_remote_monitor}},
   \code{\link{callback_terminate_on_naan}}
 }
+\concept{callbacks}

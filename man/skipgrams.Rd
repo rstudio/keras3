@@ -4,9 +4,9 @@
 \alias{skipgrams}
 \title{Generates skipgram word pairs.}
 \usage{
-skipgrams(sequence, vocabulary_size, window_size = 4, negative_samples = 1,
-  shuffle = TRUE, categorical = FALSE, sampling_table = NULL,
-  seed = NULL)
+skipgrams(sequence, vocabulary_size, window_size = 4,
+  negative_samples = 1, shuffle = TRUE, categorical = FALSE,
+  sampling_table = NULL, seed = NULL)
 }
 \arguments{
 \item{sequence}{A word sequence (sentence), encoded as a list of word indices
@@ -26,11 +26,7 @@ for same number as positive samples.}
 \item{shuffle}{whether to shuffle the word couples before returning them.}
 
 \item{categorical}{bool. if \code{FALSE}, labels will be integers (eg. \code{[0, 1, 1 .. ]}),
-if \code{TRUE} labels will be categorical eg. \code{[[1,0],[0,1],[0,1] .. ]}
-
-[[1,0]: R:[1,0
-[0,1]: R:0,1
-[0,1]: R:0,1}
+if \code{TRUE} labels will be categorical eg. \code{[[1,0],[0,1],[0,1] .. ]}}
 
 \item{sampling_table}{1D array of size \code{vocabulary_size} where the entry i
 encodes the probabibily to sample a word of rank i.}
@@ -69,3 +65,4 @@ Other text preprocessing: \code{\link{make_sampling_table}},
   \code{\link{text_one_hot}},
   \code{\link{text_to_word_sequence}}
 }
+\concept{text preprocessing}

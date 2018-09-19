@@ -40,7 +40,7 @@ Allows a small gradient when the unit is not active: \code{f(x) = alpha * x} for
 \code{x < 0}, \code{f(x) = x} for \code{x >= 0}.
 }
 \seealso{
-\href{https://ai.stanford.edu/~amaas/papers/relu_hybrid_icml2013_final.pdf}{Rectifier Nonlinearities Improve Neural Network AcousticModels}.
+\href{https://ai.stanford.edu/~amaas/papers/relu_hybrid_icml2013_final.pdf}{Rectifier Nonlinearities Improve Neural Network Acoustic Models}.
 
 Other activation layers: \code{\link{layer_activation_elu}},
   \code{\link{layer_activation_parametric_relu}},
@@ -49,3 +49,4 @@ Other activation layers: \code{\link{layer_activation_elu}},
   \code{\link{layer_activation_thresholded_relu}},
   \code{\link{layer_activation}}
 }
+\concept{activation layers}

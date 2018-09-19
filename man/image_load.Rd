@@ -34,3 +34,4 @@ Other image preprocessing: \code{\link{fit_image_data_generator}},
   \code{\link{flow_images_from_directory}},
   \code{\link{image_to_array}}
 }
+\concept{image preprocessing}

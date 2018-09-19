@@ -4,8 +4,8 @@
 \alias{k_spatial_3d_padding}
 \title{Pads 5D tensor with zeros along the depth, height, width dimensions.}
 \usage{
-k_spatial_3d_padding(x, padding = list(list(1, 1), list(1, 1), list(1, 1)),
-  data_format = NULL)
+k_spatial_3d_padding(x, padding = list(list(1, 1), list(1, 1), list(1,
+  1)), data_format = NULL)
 }
 \arguments{
 \item{x}{Tensor or variable.}
@@ -22,10 +22,6 @@ Pads these dimensions with respectively \code{padding[[1]]}, \code{padding[[2]]}
 \code{padding[[3]]} zeros left and right. For 'channels_last' data_format, the
 2nd, 3rd and 4th dimension will be padded. For 'channels_first' data_format,
 the 3rd, 4th and 5th dimension will be padded.
-
-[[1]: R:[1
-[[2]: R:[2
-[[3]: R:[3
 }
 \section{Keras Backend}{
 

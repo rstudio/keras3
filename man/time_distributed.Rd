@@ -49,3 +49,4 @@ independently.
 \seealso{
 Other layer wrappers: \code{\link{bidirectional}}
 }
+\concept{layer wrappers}

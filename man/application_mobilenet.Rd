@@ -7,9 +7,10 @@
 \alias{mobilenet_load_model_hdf5}
 \title{MobileNet model architecture.}
 \usage{
-application_mobilenet(input_shape = NULL, alpha = 1, depth_multiplier = 1,
-  dropout = 0.001, include_top = TRUE, weights = "imagenet",
-  input_tensor = NULL, pooling = NULL, classes = 1000)
+application_mobilenet(input_shape = NULL, alpha = 1,
+  depth_multiplier = 1, dropout = 0.001, include_top = TRUE,
+  weights = "imagenet", input_tensor = NULL, pooling = NULL,
+  classes = 1000)
 
 mobilenet_preprocess_input(x)
 

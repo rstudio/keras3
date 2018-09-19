@@ -34,3 +34,4 @@ Other model functions: \code{\link{compile}},
   \code{\link{predict_on_batch}},
   \code{\link{predict_proba}}, \code{\link{train_on_batch}}
 }
+\concept{model functions}

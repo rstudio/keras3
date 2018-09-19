@@ -5,8 +5,8 @@
 \title{Cropping layer for 2D input (e.g. picture).}
 \usage{
 layer_cropping_2d(object, cropping = list(c(0L, 0L), c(0L, 0L)),
-  data_format = NULL, batch_size = NULL, name = NULL, trainable = NULL,
-  weights = NULL)
+  data_format = NULL, batch_size = NULL, name = NULL,
+  trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -73,3 +73,4 @@ Other convolutional layers: \code{\link{layer_conv_1d}},
   \code{\link{layer_zero_padding_2d}},
   \code{\link{layer_zero_padding_3d}}
 }
+\concept{convolutional layers}

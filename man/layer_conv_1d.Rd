@@ -4,12 +4,13 @@
 \alias{layer_conv_1d}
 \title{1D convolution layer (e.g. temporal convolution).}
 \usage{
-layer_conv_1d(object, filters, kernel_size, strides = 1L, padding = "valid",
-  data_format = "channels_last", dilation_rate = 1L, activation = NULL,
-  use_bias = TRUE, kernel_initializer = "glorot_uniform",
-  bias_initializer = "zeros", kernel_regularizer = NULL,
-  bias_regularizer = NULL, activity_regularizer = NULL,
-  kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
+layer_conv_1d(object, filters, kernel_size, strides = 1L,
+  padding = "valid", data_format = "channels_last",
+  dilation_rate = 1L, activation = NULL, use_bias = TRUE,
+  kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
+  kernel_regularizer = NULL, bias_regularizer = NULL,
+  activity_regularizer = NULL, kernel_constraint = NULL,
+  bias_constraint = NULL, input_shape = NULL,
   batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
   name = NULL, trainable = NULL, weights = NULL)
 }
@@ -32,7 +33,7 @@ with specifying any \code{dilation_rate} value != 1.}
 length as the original input.
 \code{"causal"} results in causal (dilated) convolutions, e.g. \code{output[t]} does
 not depend on \code{input[t+1:]}. Useful when modeling temporal data where the
-model should not violate the temporal order. See \href{https://arxiv.org/abs/1609.03499}{WaveNet: A GenerativeModel for Raw Audio, section 2.1}.}
+model should not violate the temporal order. See \href{https://arxiv.org/abs/1609.03499}{WaveNet: A Generative Model for Raw Audio, section 2.1}.}
 
 \item{data_format}{A string, one of \code{"channels_last"} (default) or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"} corresponds
@@ -125,3 +126,4 @@ Other convolutional layers: \code{\link{layer_conv_2d_transpose}},
   \code{\link{layer_zero_padding_2d}},
   \code{\link{layer_zero_padding_3d}}
 }
+\concept{convolutional layers}

@@ -57,3 +57,4 @@ Other core layers: \code{\link{layer_activation}},
   \code{\link{layer_permute}},
   \code{\link{layer_repeat_vector}}
 }
+\concept{core layers}

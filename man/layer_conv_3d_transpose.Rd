@@ -4,14 +4,14 @@
 \alias{layer_conv_3d_transpose}
 \title{Transposed 3D convolution layer (sometimes called Deconvolution).}
 \usage{
-layer_conv_3d_transpose(object, filters, kernel_size, strides = c(1, 1, 1),
-  padding = "valid", data_format = NULL, activation = NULL,
+layer_conv_3d_transpose(object, filters, kernel_size, strides = c(1, 1,
+  1), padding = "valid", data_format = NULL, activation = NULL,
   use_bias = TRUE, kernel_initializer = "glorot_uniform",
   bias_initializer = "zeros", kernel_regularizer = NULL,
   bias_regularizer = NULL, activity_regularizer = NULL,
-  kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+  kernel_constraint = NULL, bias_constraint = NULL,
+  input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
+  dtype = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -120,3 +120,4 @@ Other convolutional layers: \code{\link{layer_conv_1d}},
   \code{\link{layer_zero_padding_2d}},
   \code{\link{layer_zero_padding_3d}}
 }
+\concept{convolutional layers}

@@ -33,8 +33,6 @@ numerical approximation of frequency(rank):
 \code{frequency(rank) ~ 1/(rank * (log(rank) + gamma) + 1/2 - 1/(12*rank))}
 
 where \code{gamma} is the Euler-Mascheroni constant.
-
-[[i]: R:[i
 }
 \note{
 The word2vec formula is: p(word) = min(1,
@@ -47,3 +45,4 @@ Other text preprocessing: \code{\link{pad_sequences}},
   \code{\link{text_one_hot}},
   \code{\link{text_to_word_sequence}}
 }
+\concept{text preprocessing}

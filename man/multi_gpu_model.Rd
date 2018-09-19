@@ -122,3 +122,4 @@ Other model functions: \code{\link{compile}},
   \code{\link{summary.keras.engine.training.Model}},
   \code{\link{train_on_batch}}
 }
+\concept{model functions}

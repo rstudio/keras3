@@ -33,10 +33,6 @@ isn't provided.}
 \description{
 Repeats the 1st, 2nd and 3rd dimensions of the data by \code{size[[0]]}, \code{size[[1]]} and
 \code{size[[2]]} respectively.
-
-[[0]: R:[0
-[[1]: R:[1
-[[2]: R:[2
 }
 \section{Input shape}{
 
@@ -75,3 +71,4 @@ Other convolutional layers: \code{\link{layer_conv_1d}},
   \code{\link{layer_zero_padding_2d}},
   \code{\link{layer_zero_padding_3d}}
 }
+\concept{convolutional layers}

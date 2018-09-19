@@ -4,8 +4,8 @@
 \alias{layer_upsampling_1d}
 \title{Upsampling layer for 1D inputs.}
 \usage{
-layer_upsampling_1d(object, size = 2L, batch_size = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+layer_upsampling_1d(object, size = 2L, batch_size = NULL,
+  name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -52,3 +52,4 @@ Other convolutional layers: \code{\link{layer_conv_1d}},
   \code{\link{layer_zero_padding_2d}},
   \code{\link{layer_zero_padding_3d}}
 }
+\concept{convolutional layers}

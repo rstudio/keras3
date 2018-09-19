@@ -4,8 +4,9 @@
 \alias{callback_early_stopping}
 \title{Stop training when a monitored quantity has stopped improving.}
 \usage{
-callback_early_stopping(monitor = "val_loss", min_delta = 0, patience = 0,
-  verbose = 0, mode = c("auto", "min", "max"), baseline = NULL)
+callback_early_stopping(monitor = "val_loss", min_delta = 0,
+  patience = 0, verbose = 0, mode = c("auto", "min", "max"),
+  baseline = NULL)
 }
 \arguments{
 \item{monitor}{quantity to be monitored.}
@@ -43,3 +44,4 @@ Other callbacks: \code{\link{callback_csv_logger}},
   \code{\link{callback_tensorboard}},
   \code{\link{callback_terminate_on_naan}}
 }
+\concept{callbacks}

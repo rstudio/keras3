@@ -28,3 +28,4 @@ Other model persistence: \code{\link{get_weights}},
   \code{\link{save_model_weights_hdf5}},
   \code{\link{serialize_model}}
 }
+\concept{model persistence}

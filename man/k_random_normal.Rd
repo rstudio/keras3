@@ -4,7 +4,8 @@
 \alias{k_random_normal}
 \title{Returns a tensor with normal distribution of values.}
 \usage{
-k_random_normal(shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
+k_random_normal(shape, mean = 0, stddev = 1, dtype = NULL,
+  seed = NULL)
 }
 \arguments{
 \item{shape}{A list of integers, the shape of tensor to create.}

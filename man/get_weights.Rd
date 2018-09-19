@@ -28,3 +28,5 @@ Other layer methods: \code{\link{count_params}},
   \code{\link{get_config}}, \code{\link{get_input_at}},
   \code{\link{reset_states}}
 }
+\concept{layer methods}
+\concept{model persistence}

@@ -19,10 +19,6 @@ k_in_top_k(predictions, targets, k)
 A 1D tensor of length \code{batch_size} and type \code{bool}. \code{output[[i]]} is
 \code{TRUE} if \code{predictions[i, targets[[i]]} is within top-\code{k} values of
 \code{predictions[[i]]}.
-
-[[i]: R:[i
-[i, targets[[i]: R:i,%20targets[[i
-[[i]: R:[i
 }
 \description{
 Returns whether the \code{targets} are in the top \code{k} \code{predictions}.

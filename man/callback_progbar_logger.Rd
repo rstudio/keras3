@@ -4,7 +4,8 @@
 \alias{callback_progbar_logger}
 \title{Callback that prints metrics to stdout.}
 \usage{
-callback_progbar_logger(count_mode = "samples", stateful_metrics = NULL)
+callback_progbar_logger(count_mode = "samples",
+  stateful_metrics = NULL)
 }
 \arguments{
 \item{count_mode}{One of "steps" or "samples". Whether the progress bar
@@ -29,3 +30,4 @@ Other callbacks: \code{\link{callback_csv_logger}},
   \code{\link{callback_tensorboard}},
   \code{\link{callback_terminate_on_naan}}
 }
+\concept{callbacks}

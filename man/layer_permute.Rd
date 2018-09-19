@@ -4,9 +4,9 @@
 \alias{layer_permute}
 \title{Permute the dimensions of an input according to a given pattern}
 \usage{
-layer_permute(object, dims, input_shape = NULL, batch_input_shape = NULL,
-  batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
-  weights = NULL)
+layer_permute(object, dims, input_shape = NULL,
+  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
+  name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -61,3 +61,4 @@ Other core layers: \code{\link{layer_activation}},
   \code{\link{layer_repeat_vector}},
   \code{\link{layer_reshape}}
 }
+\concept{core layers}

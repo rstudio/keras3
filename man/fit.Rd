@@ -5,11 +5,12 @@
 \title{Train a Keras model}
 \usage{
 fit(object, x = NULL, y = NULL, batch_size = NULL, epochs = 10,
-  verbose = getOption("keras.fit_verbose", default = 1), callbacks = NULL,
-  view_metrics = getOption("keras.view_metrics", default = "auto"),
-  validation_split = 0, validation_data = NULL, shuffle = TRUE,
-  class_weight = NULL, sample_weight = NULL, initial_epoch = 0,
-  steps_per_epoch = NULL, validation_steps = NULL, ...)
+  verbose = getOption("keras.fit_verbose", default = 1),
+  callbacks = NULL, view_metrics = getOption("keras.view_metrics",
+  default = "auto"), validation_split = 0, validation_data = NULL,
+  shuffle = TRUE, class_weight = NULL, sample_weight = NULL,
+  initial_epoch = 0, steps_per_epoch = NULL, validation_steps = NULL,
+  ...)
 }
 \arguments{
 \item{object}{Model to train.}
@@ -110,3 +111,4 @@ Other model functions: \code{\link{compile}},
   \code{\link{summary.keras.engine.training.Model}},
   \code{\link{train_on_batch}}
 }
+\concept{model functions}

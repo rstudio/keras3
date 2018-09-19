@@ -5,8 +5,8 @@
 \title{Converts a text to a sequence of indexes in a fixed-size hashing space.}
 \usage{
 text_hashing_trick(text, n, hash_function = NULL,
-  filters = "!\\"#$\%&()*+,-./:;<=>?@[\\\\]^_`{|}~\\t\\n", lower = TRUE,
-  split = " ")
+  filters = "!\\"#$\%&()*+,-./:;<=>?@[\\\\]^_`{|}~\\t\\n",
+  lower = TRUE, split = " ")
 }
 \arguments{
 \item{text}{Input text (string).}
@@ -41,3 +41,4 @@ Other text preprocessing: \code{\link{make_sampling_table}},
   \code{\link{text_one_hot}},
   \code{\link{text_to_word_sequence}}
 }
+\concept{text preprocessing}
