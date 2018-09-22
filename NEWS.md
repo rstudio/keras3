@@ -7,6 +7,8 @@ Install the development version with `devtools::install_github("rstudio/keras")`
 
 - Add support for `input_shape` argument to `layer_dropout()`
 
+- Improve error message for data frames passed to `fit()`, etc.
+
 
 ## Keras 2.2.0 (CRAN)
 

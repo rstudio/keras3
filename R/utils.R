@@ -214,6 +214,12 @@ keras_array <- function(x, dtype = NULL) {
   if ((keras_version() >= "2.2.0") && k_is_tensor(x))
     return(x)
   
+  # error for data frames
+  if (is.data.frame(x)) {
+    stop("Data passed to Keras must be a vector, matrix, or array (you passed a ",
+         "data frame)", call. = FALSE)
+  }
+  
   # recurse for lists
   if (is.list(x))
     return(lapply(x, keras_array))
