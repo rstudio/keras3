@@ -9,8 +9,7 @@ k_gather(reference, indices)
 \arguments{
 \item{reference}{A tensor.}
 
-\item{indices}{An integer tensor of indices.  Dimension
-indices are 1-based.}
+\item{indices}{An integer tensor of indices.}
 }
 \value{
 A tensor of same type as \code{reference}.

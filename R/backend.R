@@ -1072,8 +1072,7 @@ k_function <- function(inputs, outputs, updates = NULL, ...) {
 #' Retrieves the elements of indices `indices` in the tensor `reference`.
 #' 
 #' @param reference A tensor.
-#' @param indices An integer tensor of indices.  Dimension
-#'   indices are 1-based.
+#' @param indices An integer tensor of indices.
 #' 
 #' @return A tensor of same type as `reference`.
 #' 
@@ -1083,7 +1082,7 @@ k_function <- function(inputs, outputs, updates = NULL, ...) {
 k_gather <- function(reference, indices) {
   keras$backend$gather(
     reference = reference,
-    indices = as_axis(indices)
+    indices = indices
   )
 }
 
