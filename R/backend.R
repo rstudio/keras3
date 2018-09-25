@@ -1070,16 +1070,23 @@ k_function <- function(inputs, outputs, updates = NULL, ...) {
 
 
 #' Retrieves the elements of indices `indices` in the tensor `reference`.
-#' 
+#'
 #' @param reference A tensor.
-#' @param indices An integer tensor of indices.
-#' 
+#' @param indices Indices. Dimension indices are 1-based. Note however that if you pass a
+#'   tensor for `indices` they will be passed as-is, in which case indices will be 0 based
+#'   because no normalizing of R 1-based axes to Python 0-based axes is performed.
+#'
 #' @return A tensor of same type as `reference`.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_gather <- function(reference, indices) {
+  
+  # offset indices if it's an R object
+  if (!inherits(indices, "python.builtin.object"))
+    indices <- as_axis(indices)
+  
   keras$backend$gather(
     reference = reference,
     indices = indices

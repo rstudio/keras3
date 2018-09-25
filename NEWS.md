@@ -9,6 +9,8 @@ Install the development version with `devtools::install_github("rstudio/keras")`
 
 - Improve error message for data frames passed to `fit()`, etc.
 
+- Use 1-based axis indices for `k_gather()`
+
 
 ## Keras 2.2.0 (CRAN)
 

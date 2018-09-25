@@ -9,7 +9,9 @@ k_gather(reference, indices)
 \arguments{
 \item{reference}{A tensor.}
 
-\item{indices}{An integer tensor of indices.}
+\item{indices}{Indices. Dimension indices are 1-based. Note however that if you pass a
+tensor for \code{indices} they will be passed as-is, in which case indices will be 0 based
+because no normalizing of R 1-based axes to Python 0-based axes is performed.}
 }
 \value{
 A tensor of same type as \code{reference}.
