@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
       </span>
     </div>
 
@@ -97,6 +97,9 @@
     </li>
     <li class="divider">
     <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/eager_guide.html">Eager Execution</a>
+    </li>
     <li>
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
@@ -533,12 +536,11 @@
 <div id="eager-execution" class="section level2">
 <h2 class="hasAnchor">
 <a href="#eager-execution" class="anchor"></a>Eager execution</h2>
-<p>TensorFlow <a href="https://www.tensorflow.org/guide/eager">Eager execution</a> is an imperative programming environment that evaluates operations immediately. This is not required for Keras, but is supported by the TensorFlow backend and useful for inspecting your program and debugging.</p>
+<p><a href="eager_guide.Rmd">Eager execution</a> is an imperative programming environment that evaluates operations immediately. This is not required for Keras, but is supported by the TensorFlow backend and useful for inspecting your program and debugging.</p>
 <p>To use eager execution from R, you need to tell Keras to use the TensorFlow implementation of Keras (as opposed to native Keras):</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">library</span>(keras)</a>
 <a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw"><a href="../reference/use_implementation.html">use_implementation</a></span>(<span class="st">"tensorflow"</span>)</a></code></pre></div>
 <p>When using the TensorFlow implementation, all model-building APIs are compatible with eager execution.</p>
-<p>See the <a href="./eager.md#build_a_model">eager execution guide</a> for examples of using Keras models with custom training loops and <code>tf$GradientTape</code>.</p>
 </div>
 <div id="distribution" class="section level2">
 <h2 class="hasAnchor">

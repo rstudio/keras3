@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
       </span>
     </div>
 
@@ -97,6 +97,9 @@
     </li>
     <li class="divider">
     <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../../articles/eager_guide.html">Eager Execution</a>
+    </li>
     <li>
       <a href="../../articles/training_callbacks.html">Training Callbacks</a>
     </li>
@@ -352,7 +355,7 @@
 <a class="sourceLine" id="cb1-187" data-line-number="187">    model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(</a>
 <a class="sourceLine" id="cb1-188" data-line-number="188">        <span class="dt">optimizer =</span> <span class="kw"><a href="../../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="dt">lr =</span> <span class="fl">0.0001</span>),</a>
 <a class="sourceLine" id="cb1-189" data-line-number="189">        <span class="dt">loss =</span> bce_dice_loss,</a>
-<a class="sourceLine" id="cb1-190" data-line-number="190">        <span class="dt">metrics =</span> <span class="kw">c</span>(dice_coef)</a>
+<a class="sourceLine" id="cb1-190" data-line-number="190">        <span class="dt">metrics =</span> <span class="kw"><a href="../../reference/metric_binary_accuracy.html">custom_metric</a></span>(<span class="st">"dice_coef"</span>, dice_coef)</a>
 <a class="sourceLine" id="cb1-191" data-line-number="191">    )</a>
 <a class="sourceLine" id="cb1-192" data-line-number="192">    </a>
 <a class="sourceLine" id="cb1-193" data-line-number="193">    <span class="kw">return</span>(model)</a>

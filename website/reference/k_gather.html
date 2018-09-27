@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
       </span>
     </div>
 
@@ -131,6 +131,9 @@
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="../articles/eager_guide.html">Eager Execution</a>
+    </li>
     <li>
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
@@ -204,7 +207,9 @@
     </tr>
     <tr>
       <th>indices</th>
-      <td><p>An integer tensor of indices.</p></td>
+      <td><p>Indices. Dimension indices are 1-based. Note however that if you pass a
+tensor for <code>indices</code> they will be passed as-is, in which case indices will be 0 based
+because no normalizing of R 1-based axes to Python 0-based axes is performed.</p></td>
     </tr>
     </table>
     

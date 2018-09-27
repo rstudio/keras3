@@ -67,7 +67,7 @@ conventions)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
       </span>
     </div>
 
@@ -134,6 +134,9 @@ conventions)." />
     <li class="divider"></li>
     <li class="dropdown-header">Advanced</li>
     <li>
+      <a href="../articles/eager_guide.html">Eager Execution</a>
+    </li>
+    <li>
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
@@ -197,9 +200,9 @@ conventions).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>dataset_reuters</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"reuters.npz"</span>, <span class='kw'>num_words</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>skip_top</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
-  <span class='kw'>maxlen</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_split</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>113L</span>, <span class='kw'>start_char</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>oov_char</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>index_from</span> <span class='kw'>=</span> <span class='fl'>3L</span>)
+    <pre class="usage"><span class='fu'>dataset_reuters</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"reuters.npz"</span>, <span class='kw'>num_words</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>skip_top</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='kw'>maxlen</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_split</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>113L</span>,
+  <span class='kw'>start_char</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>oov_char</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>index_from</span> <span class='kw'>=</span> <span class='fl'>3L</span>)
 
 <span class='fu'>dataset_reuters_word_index</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"reuters_word_index.pkl"</span>)</pre>
     
@@ -255,7 +258,6 @@ Set to 1 because 0 is usually the padding character.</p></td>
 with same format as <code><a href='dataset_imdb.html'>dataset_imdb()</a></code>. The <code>dataset_reuters_word_index()</code>
 function returns a list where the names are words and the values are
 integer. e.g. <code>word_index[["giraffe"]]</code> might return <code>1234</code>.</p>
-<p>[["giraffe"]: R:[<!-- %22giraffe%22 --></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

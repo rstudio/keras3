@@ -67,7 +67,7 @@ parallel to training your model on GPU." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
       </span>
     </div>
 
@@ -134,6 +134,9 @@ parallel to training your model on GPU." />
     <li class="divider"></li>
     <li class="dropdown-header">Advanced</li>
     <li>
+      <a href="../articles/eager_guide.html">Eager Execution</a>
+    </li>
+    <li>
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
@@ -198,10 +201,11 @@ parallel to training your model on GPU.</p>
     </div>
 
     <pre class="usage"><span class='fu'>fit_generator</span>(<span class='no'>object</span>, <span class='no'>generator</span>, <span class='no'>steps_per_epoch</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"keras.fit_verbose"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>view_metrics</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"keras.view_metrics"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='st'>"auto"</span>),
-  <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>max_queue_size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>workers</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"keras.fit_verbose"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>1</span>),
+  <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>view_metrics</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"keras.view_metrics"</span>,
+  <span class='kw'>default</span> <span class='kw'>=</span> <span class='st'>"auto"</span>), <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max_queue_size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>workers</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

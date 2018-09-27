@@ -8,6 +8,7 @@ articles:
   backend: backend.html
   custom_layers: custom_layers.html
   custom_models: custom_models.html
+  eager_guide: eager_guide.html
   addition_rnn: examples/addition_rnn.html
   babi_memnn: examples/babi_memnn.html
   babi_rnn: examples/babi_rnn.html
@@ -18,6 +19,9 @@ articles:
   conv_lstm: examples/conv_lstm.html
   deep_dream: examples/deep_dream.html
   eager_dcgan: examples/eager_dcgan.html
+  eager_image_captioning: examples/eager_image_captioning.html
+  eager_pix2pix: examples/eager_pix2pix.html
+  eager_styletransfer: examples/eager_styletransfer.html
   image_ocr: examples/image_ocr.html
   imdb_bidirectional_lstm: examples/imdb_bidirectional_lstm.html
   imdb_cnn: examples/imdb_cnn.html

@@ -37,10 +37,7 @@
 <meta property="og:description" content="Pads these dimensions with respectively padding[[1]], padding[[2]], and
 padding[[3]] zeros left and right. For 'channels_last' data_format, the
 2nd, 3rd and 4th dimension will be padded. For 'channels_first' data_format,
-the 3rd, 4th and 5th dimension will be padded.
-[[1]: R:[1
-[[2]: R:[2
-[[3]: R:[3" />
+the 3rd, 4th and 5th dimension will be padded." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -71,7 +68,7 @@ the 3rd, 4th and 5th dimension will be padded.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
       </span>
     </div>
 
@@ -138,6 +135,9 @@ the 3rd, 4th and 5th dimension will be padded.
     <li class="divider"></li>
     <li class="dropdown-header">Advanced</li>
     <li>
+      <a href="../articles/eager_guide.html">Eager Execution</a>
+    </li>
+    <li>
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
@@ -199,14 +199,11 @@ the 3rd, 4th and 5th dimension will be padded.
 <code>padding[[3]]</code> zeros left and right. For 'channels_last' data_format, the
 2nd, 3rd and 4th dimension will be padded. For 'channels_first' data_format,
 the 3rd, 4th and 5th dimension will be padded.</p>
-<p>[[1]: R:[1
-[[2]: R:[2
-[[3]: R:[3</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>k_spatial_3d_padding</span>(<span class='no'>x</span>, <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='fu'>list</span>(<span class='fl'>1</span>, <span class='fl'>1</span>), <span class='fu'>list</span>(<span class='fl'>1</span>, <span class='fl'>1</span>), <span class='fu'>list</span>(<span class='fl'>1</span>, <span class='fl'>1</span>)),
-  <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>k_spatial_3d_padding</span>(<span class='no'>x</span>, <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='fu'>list</span>(<span class='fl'>1</span>, <span class='fl'>1</span>), <span class='fu'>list</span>(<span class='fl'>1</span>, <span class='fl'>1</span>), <span class='fu'>list</span>(<span class='fl'>1</span>,
+  <span class='fl'>1</span>)), <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

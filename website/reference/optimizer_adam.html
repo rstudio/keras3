@@ -34,7 +34,7 @@
   <script src="../extra.js"></script>
 <meta property="og:title" content="Adam optimizer — optimizer_adam" />
 
-<meta property="og:description" content="Adam optimizer as described in Adam - A Method for StochasticOptimization." />
+<meta property="og:description" content="Adam optimizer as described in Adam - A Method for Stochastic Optimization." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
       </span>
     </div>
 
@@ -132,6 +132,9 @@
     <li class="divider"></li>
     <li class="dropdown-header">Advanced</li>
     <li>
+      <a href="../articles/eager_guide.html">Eager Execution</a>
+    </li>
+    <li>
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
@@ -189,12 +192,13 @@
 
     <div class="ref-description">
     
-    <p>Adam optimizer as described in <a href='https://arxiv.org/abs/1412.6980v8'>Adam - A Method for StochasticOptimization</a>.</p>
+    <p>Adam optimizer as described in <a href='https://arxiv.org/abs/1412.6980v8'>Adam - A Method for Stochastic Optimization</a>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>optimizer_adam</span>(<span class='kw'>lr</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>beta_1</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>beta_2</span> <span class='kw'>=</span> <span class='fl'>0.999</span>, <span class='kw'>epsilon</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>decay</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>amsgrad</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>clipnorm</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>clipvalue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>optimizer_adam</span>(<span class='kw'>lr</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>beta_1</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>beta_2</span> <span class='kw'>=</span> <span class='fl'>0.999</span>,
+  <span class='kw'>epsilon</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>decay</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>amsgrad</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>clipnorm</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>clipvalue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

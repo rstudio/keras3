@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
       </span>
     </div>
 
@@ -130,6 +130,9 @@
     <li class="divider"></li>
     <li class="dropdown-header">Advanced</li>
     <li>
+      <a href="../articles/eager_guide.html">Eager Execution</a>
+    </li>
+    <li>
       <a href="../articles/training_callbacks.html">Training Callbacks</a>
     </li>
     <li>
@@ -184,6 +187,17 @@
       
     </div>
 
+    <div id="keras-2-3-development" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2-3-development" class="anchor"></a>Keras 2.3 (development)</h2>
+<p>Install the development version with <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github("rstudio/keras")</a></code></p>
+<ul>
+<li><p>Improve handling of <code><a href="../reference/timeseries_generator.html">timeseries_generator()</a></code> in calls to <code><a href="../reference/fit_generator.html">fit_generator()</a></code></p></li>
+<li><p>Add support for <code>input_shape</code> argument to <code><a href="../reference/layer_dropout.html">layer_dropout()</a></code></p></li>
+<li><p>Improve error message for data frames passed to <code><a href="../reference/fit.html">fit()</a></code>, etc.</p></li>
+<li><p>Use 1-based axis indices for <code><a href="../reference/k_gather.html">k_gather()</a></code></p></li>
+</ul>
+</div>
     <div id="keras-2-2-0-cran" class="section level2">
 <h2 class="hasAnchor">
 <a href="#keras-2-2-0-cran" class="anchor"></a>Keras 2.2.0 (CRAN)</h2>
@@ -368,6 +382,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#keras-2-3-development">2.3</a></li>
         <li><a href="#keras-2-2-0-cran">2.2.0</a></li>
         <li><a href="#keras-2-1-6">2.1.6</a></li>
         <li><a href="#keras-2-1-5">2.1.5</a></li>
