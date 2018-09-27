@@ -491,7 +491,7 @@ model <- load_model_hdf5('my_model.h5')
 
 ## Eager execution
 
-TensorFlow [Eager execution](https://www.tensorflow.org/guide/eager) is an imperative programming environment that evaluates operations immediately. This is not required for Keras,
+[Eager execution](eager_guide.Rmd) is an imperative programming environment that evaluates operations immediately. This is not required for Keras,
 but is supported by the TensorFlow backend and useful for inspecting your program
 and debugging.
 
@@ -506,8 +506,6 @@ use_implementation("tensorflow")
 When using the TensorFlow implementation,  all model-building APIs are compatible with eager
 execution. 
 
-Consult the [RStudio TensorFlow blog](https://blogs.rstudio.com/tensorflow/) for examples
-using eager execution.
 
 ## Distribution
 
