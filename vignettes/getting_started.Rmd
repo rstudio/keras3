@@ -210,19 +210,17 @@ The [Deep Learning with Keras](https://github.com/rstudio/cheatsheets/raw/master
 
 To learn more about Keras, you can check out these articles:
 
-- [Guide to the Sequential Model](articles/sequential_model.html)
+- [Guide to the Sequential Model](sequential_model.html)
 
-- [Guide to the Functional API](articles/functional_api.html)
+- [Guide to the Functional API](functional_api.html)
 
-- [Frequently Asked Questions](articles/faq.html)
+- [Frequently Asked Questions](faq.html)
 
-- [Training Visualization](articles/training_visualization.html)
+- [Training Visualization](training_visualization.html)
 
-- [Using Pre-Trained Models](articles/applications.html)
+- [Using Pre-Trained Models](applications.html)
 
-The [examples](articles/examples/index.html) demonstrate more advanced models including transfer learning, variational auto-encoding, question-answering with memory networks, text generation with stacked LSTMs, etc.
-
-The [function reference](reference/index.html) includes detailed information on all of the functions available in the package.
+- [Keras with Eager Execution](eager_guide.html)
 
 [![](https://images.manning.com/720/960/resize/book/a/4e5e97f-4e8d-4d97-a715-f6c2b0eb95f5/Allaire-DLwithR-HI.png){width=125 align=right style="margin-left:10px; margin-right: 20px; margin-top: 15px; border: solid 1px #cccccc;"}](https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X)
 

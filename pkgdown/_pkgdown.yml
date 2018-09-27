@@ -48,6 +48,8 @@ navbar:
           href: articles/why_use_keras.html
         - text: "--------------------------"
         - text: "Advanced"
+        - text: "Eager Execution"
+          href: articles/eager_guide.html
         - text: "Training Callbacks"
           href: articles/training_callbacks.html
         - text: "Keras Backend"
