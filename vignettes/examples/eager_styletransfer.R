@@ -37,7 +37,7 @@ style_image %>% image_to_array() %>%
   as.raster() %>%  plot()
 
 
-load_and_preprocess_image <- function(path) {
+load_and_process_image <- function(path) {
   img <- image_load(path, target_size = img_shape[1:2]) %>%
     image_to_array() %>%
     k_expand_dims(axis = 1) %>%
