@@ -9,7 +9,7 @@ type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Keras with eager execution"
+    name: "Keras with Eager Execution"
     identifier: "keras-eager"
     parent: "keras-using-keras"
     weight: 15
