@@ -195,7 +195,7 @@
 <a class="sourceLine" id="cb1-30" data-line-number="30"><span class="st">  </span><span class="kw">as.raster</span>() <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">plot</span>()</a>
 <a class="sourceLine" id="cb1-31" data-line-number="31"></a>
 <a class="sourceLine" id="cb1-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb1-33" data-line-number="33">load_and_preprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(path) {</a>
+<a class="sourceLine" id="cb1-33" data-line-number="33">load_and_process_image &lt;-<span class="st"> </span><span class="cf">function</span>(path) {</a>
 <a class="sourceLine" id="cb1-34" data-line-number="34">  img &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/image_load.html">image_load</a></span>(path, <span class="dt">target_size =</span> img_shape[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-35" data-line-number="35"><span class="st">    </span><span class="kw"><a href="../../reference/image_to_array.html">image_to_array</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-36" data-line-number="36"><span class="st">    </span><span class="kw"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span>(<span class="dt">axis =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span></a>

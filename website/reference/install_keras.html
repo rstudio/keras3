@@ -201,7 +201,7 @@ supported by TensorFlow).</p>
     </div>
 
     <pre class="usage"><span class='fu'>install_keras</span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"auto"</span>, <span class='st'>"virtualenv"</span>, <span class='st'>"conda"</span>),
-  <span class='kw'>conda</span> <span class='kw'>=</span> <span class='st'>"auto"</span>, <span class='kw'>tensorflow</span> <span class='kw'>=</span> <span class='st'>"default"</span>,
+  <span class='kw'>conda</span> <span class='kw'>=</span> <span class='st'>"auto"</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"default"</span>, <span class='kw'>tensorflow</span> <span class='kw'>=</span> <span class='st'>"default"</span>,
   <span class='kw'>extra_packages</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"tensorflow-hub"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -215,6 +215,11 @@ supported by TensorFlow).</p>
       <th>conda</th>
       <td><p>Path to conda executable (or "auto" to find conda using the
 PATH and other conventional install locations).</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>Version of Keras to install. Specify "default" to install
+the latest release. Otherwise specify an alternate version (e.g. "2.2.2").</p></td>
     </tr>
     <tr>
       <th>tensorflow</th>
