@@ -128,6 +128,8 @@ layer_max_pooling_3d <- function(object, pool_size = c(2L, 2L, 2L), strides = NU
 #' @param strides Integer, or NULL. Factor by which to downscale. E.g. 2 will
 #'   halve the input. If NULL, it will default to `pool_size`.
 #' @param padding One of `"valid"` or `"same"` (case-insensitive).
+#' @param data_format One of `channels_last` (default) or `channels_first`.
+#'   The ordering of the dimensions in the inputs.
 #'   
 #' @section Input shape: 3D tensor with shape: `(batch_size, steps, features)`.
 #'   
@@ -138,9 +140,10 @@ layer_max_pooling_3d <- function(object, pool_size = c(2L, 2L, 2L), strides = NU
 #'     
 #' @export
 layer_average_pooling_1d <- function(object, pool_size = 2L, strides = NULL, padding = "valid", 
+                                     data_format = "channels_last",
                                      batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  create_layer(keras$layers$AveragePooling1D, object, list(
+  args <- list(
     pool_size = as.integer(pool_size),
     strides = as_nullable_integer(strides),
     padding = padding,
@@ -148,7 +151,12 @@ layer_average_pooling_1d <- function(object, pool_size = 2L, strides = NULL, pad
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
+  
+  if (keras_version() >= "2.2.3")
+    args$data_format <- data_format
+  
+  create_layer(keras$layers$AveragePooling1D, object, args)
   
 }
 
@@ -240,6 +248,7 @@ layer_average_pooling_3d <- function(object, pool_size = c(2L, 2L, 2L), strides 
 #' Global max pooling operation for temporal data.
 #' 
 #' @inheritParams layer_dense
+#' @inheritParams layer_average_pooling_1d
 #' 
 #' @section Input shape:
 #' 3D tensor with shape: `(batch_size, steps, features)`.
@@ -250,14 +259,20 @@ layer_average_pooling_3d <- function(object, pool_size = c(2L, 2L, 2L), strides 
 #' @family pooling layers
 #' 
 #' @export
-layer_global_max_pooling_1d <- function(object, 
+layer_global_max_pooling_1d <- function(object, data_format = "channels_last",
                                         batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  create_layer(keras$layers$GlobalMaxPooling1D, object, list(
+  
+  args <- list(
     batch_size = as_nullable_integer(batch_size),
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
+  
+  if (keras_version() >= "2.2.3")
+    args$data_format <- data_format
+  
+  create_layer(keras$layers$GlobalMaxPooling1D, object, args)
 }
 
 #' Global average pooling operation for temporal data.
@@ -273,14 +288,20 @@ layer_global_max_pooling_1d <- function(object,
 #' @family pooling layers
 #' 
 #' @export
-layer_global_average_pooling_1d <- function(object, 
+layer_global_average_pooling_1d <- function(object, data_format = "channels_last",
                                             batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  create_layer(keras$layers$GlobalAveragePooling1D, object, list(
+  
+  args <- list(
     batch_size = as_nullable_integer(batch_size),
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
+  
+  if (keras_version() >= "2.2.3")
+    args$data_format <- data_format
+  
+  create_layer(keras$layers$GlobalAveragePooling1D, object, args)
 }
 
 

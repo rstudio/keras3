@@ -13,6 +13,27 @@ Install the development version with `devtools::install_github("rstudio/keras")`
 
 - Added `version` parameter to `install_keras()` for installing alternate/older versions
 
+- Added `activation_exponential()` function.
+
+- Added `threshold` parameter to `activation_relu()`
+
+- Added `restore_best_weights` parameter to `callback_model_checkpoint()`
+
+- Added `update_freq` parameter to `callback_tensorboard()`
+
+- Added `negative_slope` and `threshold` parameters to `layer_activation_relu()`
+
+- Added `output_padding` and `dilation_rate` parameters to `layer_conv_2d_transpose()`
+
+- Added `output_padding` argument to `layer_conv_3d_transpose()`
+
+- Added `data_format` argument to `layer_separable_conv_1d()`, `layer_average_pooling_1d()`,
+  `layer_global_max_pooling_1d()`, and `layer_global_average_pooling_1d()`
+
+- Added `interpolation` argument to `layer_upsampling_1d()` and `layer_upsampling_2d()`
+
+- Added `dtype` argument to `to_categorical()`
+
 
 ## Keras 2.2.0 (CRAN)
 

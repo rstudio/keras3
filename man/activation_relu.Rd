@@ -11,9 +11,10 @@
 \alias{activation_softplus}
 \alias{activation_softsign}
 \alias{activation_tanh}
+\alias{activation_exponential}
 \title{Activation functions}
 \usage{
-activation_relu(x, alpha = 0, max_value = NULL)
+activation_relu(x, alpha = 0, max_value = NULL, threshold = 0)
 
 activation_elu(x, alpha = 1)
 
@@ -32,6 +33,8 @@ activation_softplus(x)
 activation_softsign(x)
 
 activation_tanh(x)
+
+activation_exponential(x)
 }
 \arguments{
 \item{x}{Tensor}
@@ -39,6 +42,8 @@ activation_tanh(x)
 \item{alpha}{Alpha value}
 
 \item{max_value}{Max value}
+
+\item{threshold}{Threshold value for thresholded activation.}
 
 \item{axis}{Integer, axis along which the softmax normalization is applied}
 }

@@ -5,9 +5,9 @@
 \title{Depthwise separable 1D convolution.}
 \usage{
 layer_separable_conv_1d(object, filters, kernel_size, strides = 1,
-  padding = "valid", data_format = NULL, dilation_rate = 1,
-  depth_multiplier = 1, activation = NULL, use_bias = TRUE,
-  depthwise_initializer = "glorot_uniform",
+  padding = "valid", data_format = "channels_last",
+  dilation_rate = 1, depth_multiplier = 1, activation = NULL,
+  use_bias = TRUE, depthwise_initializer = "glorot_uniform",
   pointwise_initializer = "glorot_uniform", bias_initializer = "zeros",
   depthwise_regularizer = NULL, pointwise_regularizer = NULL,
   bias_regularizer = NULL, activity_regularizer = NULL,

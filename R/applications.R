@@ -24,7 +24,7 @@
 #' @param input_shape optional shape list, only to be specified if `include_top`
 #'   is FALSE (otherwise the input shape has to be `(299, 299, 3)`. It should 
 #'   have exactly 3 inputs channels, and width and height should be no smaller 
-#'   than 71. E.g. `(150, 150, 3)` would be one valid value.
+#'   than 75. E.g. `(150, 150, 3)` would be one valid value.
 #' @param pooling Optional pooling mode for feature extraction when 
 #'   `include_top` is `FALSE`. 
 #'   - `NULL` means that the output of the model will be the 4D tensor output 
@@ -78,7 +78,7 @@ xception_preprocess_input <- function(x) {
 #' @param input_shape optional shape list, only to be specified if `include_top`
 #'   is FALSE (otherwise the input shape has to be `(224, 224, 3)` It should
 #'   have exactly 3 inputs channels, and width and height should be no smaller
-#'   than 48. E.g. `(200, 200, 3)` would be one valid value.
+#'   than 32. E.g. `(200, 200, 3)` would be one valid value.
 #'   
 #' @return Keras model instance.
 #'   
@@ -142,7 +142,7 @@ application_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_te
 #' @param input_shape optional shape list, only to be specified if `include_top`
 #'   is FALSE (otherwise the input shape has to be `(224, 224, 3)`. It should
 #'   have exactly 3 inputs channels, and width and height should be no smaller
-#'   than 197. E.g. `(200, 200, 3)` would be one valid value.
+#'   than 32. E.g. `(200, 200, 3)` would be one valid value.
 #'   
 #' @return A Keras model instance.
 #'   

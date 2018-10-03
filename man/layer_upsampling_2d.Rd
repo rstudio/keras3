@@ -5,7 +5,8 @@
 \title{Upsampling layer for 2D inputs.}
 \usage{
 layer_upsampling_2d(object, size = c(2L, 2L), data_format = NULL,
-  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
+  interpolation = "nearest", batch_size = NULL, name = NULL,
+  trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -18,6 +19,10 @@ columns.}
 \code{channels_last} corresponds to inputs with shape \code{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
 found in your Keras config file at \code{~/.keras/keras.json}. If you never set
 it, then it will be "channels_last".}
+
+\item{interpolation}{A string, one of \code{nearest} or \code{bilinear}.
+Note that CNTK does not support yet the \code{bilinear} upscaling
+and that with Theano, only \code{size=(2, 2)} is possible.}
 
 \item{batch_size}{Fixed batch size for layer}
 

@@ -13,6 +13,7 @@
 #' @param axis Integer, axis along which the softmax normalization is applied
 #' @param alpha Alpha value
 #' @param max_value Max value
+#' @param threshold Threshold value for thresholded activation.
 #' 
 #' @return Tensor with the same shape and dtype as \code{x}.
 #' 
@@ -21,8 +22,16 @@
 #'   - `activation_selu()`: [Self-Normalizing Neural Networks](https://arxiv.org/abs/1706.02515)
 #' 
 #' @export
-activation_relu <- function(x, alpha = 0.0, max_value = NULL) {
-  keras$activations$relu(x, alpha = alpha, max_value = max_value)
+activation_relu <- function(x, alpha = 0.0, max_value = NULL, threshold = 0.0) {
+  args <- list(
+    x = x,
+    alpha = alpha, 
+    max_value = max_value
+  )
+  if (keras_version() >= "2.2.3")
+    args$threshold <- threshold
+  
+  do.call(keras$activations$relu, args)
 }
 attr(activation_relu, "py_function_name") <- "relu"
 
@@ -95,6 +104,13 @@ activation_tanh <- function(x) {
 }
 attr(activation_tanh, "py_function_name") <- "tanh"
 
+
+#' @rdname activation_relu
+#' @export
+activation_exponential <- function(x) {
+  keras$activations$exponential(x)
+}
+attr(activation_exponential, "py_function_name") <- "exponential"
 
 
 

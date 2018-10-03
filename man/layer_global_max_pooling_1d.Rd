@@ -4,11 +4,14 @@
 \alias{layer_global_max_pooling_1d}
 \title{Global max pooling operation for temporal data.}
 \usage{
-layer_global_max_pooling_1d(object, batch_size = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+layer_global_max_pooling_1d(object, data_format = "channels_last",
+  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
+
+\item{data_format}{One of \code{channels_last} (default) or \code{channels_first}.
+The ordering of the dimensions in the inputs.}
 
 \item{batch_size}{Fixed batch size for layer}
 

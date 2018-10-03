@@ -5,8 +5,8 @@
 \title{Average pooling for temporal data.}
 \usage{
 layer_average_pooling_1d(object, pool_size = 2L, strides = NULL,
-  padding = "valid", batch_size = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+  padding = "valid", data_format = "channels_last",
+  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -17,6 +17,9 @@ layer_average_pooling_1d(object, pool_size = 2L, strides = NULL,
 halve the input. If NULL, it will default to \code{pool_size}.}
 
 \item{padding}{One of \code{"valid"} or \code{"same"} (case-insensitive).}
+
+\item{data_format}{One of \code{channels_last} (default) or \code{channels_first}.
+The ordering of the dimensions in the inputs.}
 
 \item{batch_size}{Fixed batch size for layer}
 

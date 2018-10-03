@@ -27,6 +27,7 @@ test_activation("activation_softmax")
 test_activation("activation_softplus")
 test_activation("activation_softsign")
 test_activation("activation_tanh")
+test_activation("activation_exponential", required_version = "2.2.3")
 
 
 

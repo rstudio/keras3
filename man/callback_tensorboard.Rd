@@ -8,7 +8,7 @@ callback_tensorboard(log_dir = NULL, histogram_freq = 0,
   batch_size = 32, write_graph = TRUE, write_grads = FALSE,
   write_images = FALSE, embeddings_freq = 0,
   embeddings_layer_names = NULL, embeddings_metadata = NULL,
-  embeddings_data = NULL)
+  embeddings_data = NULL, update_freq = "epoch")
 }
 \arguments{
 \item{log_dir}{The path of the directory where to save the log files to be
@@ -46,6 +46,13 @@ for all embedding layers, string can be passed.}
 \item{embeddings_data}{Data to be embedded at layers specified in
 \code{embeddings_layer_names}. Array (if the model has a single input) or list
 of arrays (if the model has multiple inputs). Learn \href{https://www.tensorflow.org/programmers_guide/embedding}{more about embeddings}}
+
+\item{update_freq}{\code{'batch'} or \code{'epoch'} or integer. When using \code{'batch'}, writes
+the losses and metrics to TensorBoard after each batch. The same
+applies for \code{'epoch'}. If using an integer, let's say \code{10000},
+the callback will write the metrics and losses to TensorBoard every
+10000 samples. Note that writing too frequently to TensorBoard
+can slow down your training.}
 }
 \description{
 This callback writes a log for TensorBoard, which allows you to visualize
