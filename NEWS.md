@@ -11,6 +11,8 @@ Install the development version with `devtools::install_github("rstudio/keras")`
 
 - Use 1-based axis indices for `k_gather()`
 
+- Added `version` parameter to `install_keras()` for installing alternate/older versions
+
 
 ## Keras 2.2.0 (CRAN)
 

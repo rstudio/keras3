@@ -10,6 +10,9 @@
 #'
 #' @param method Installation method ("virtualenv" or "conda")
 #' 
+#' @param version Version of Keras to install. Specify "default" to install
+#'   the latest release. Otherwise specify an alternate version (e.g. "2.2.2").
+#' 
 #' @param tensorflow TensorFlow version to install. Specify "default" to install
 #'   the CPU version of the latest release. Specify "gpu" to install the GPU
 #'   version of the latest release.
@@ -99,11 +102,18 @@
 #' @export
 install_keras <- function(method = c("auto", "virtualenv", "conda"), 
                           conda = "auto",
+                          version = "default",
                           tensorflow = "default",
                           extra_packages = c("tensorflow-hub")) {
   
   # verify method
   method <- match.arg(method)
+  
+  # resolve version
+  if (identical(version, "default"))
+    version <- ""
+  else
+    version <- paste0("==", version)
   
   # some special handling for windows
   if (is_windows()) {
@@ -132,7 +142,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
   install_tensorflow(method = method,
                      conda = conda,
                      version = tensorflow,
-                     extra_packages = c("keras", extra_packages))
+                     extra_packages = c(paste0("keras", version), extra_packages))
 }
 
 

@@ -5,7 +5,7 @@
 \title{Install Keras and the TensorFlow backend}
 \usage{
 install_keras(method = c("auto", "virtualenv", "conda"),
-  conda = "auto", tensorflow = "default",
+  conda = "auto", version = "default", tensorflow = "default",
   extra_packages = c("tensorflow-hub"))
 }
 \arguments{
@@ -13,6 +13,9 @@ install_keras(method = c("auto", "virtualenv", "conda"),
 
 \item{conda}{Path to conda executable (or "auto" to find conda using the
 PATH and other conventional install locations).}
+
+\item{version}{Version of Keras to install. Specify "default" to install
+the latest release. Otherwise specify an alternate version (e.g. "2.2.2").}
 
 \item{tensorflow}{TensorFlow version to install. Specify "default" to install
 the CPU version of the latest release. Specify "gpu" to install the GPU
