@@ -111,7 +111,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
   
   # resolve version
   if (identical(version, "default"))
-    version <- ""
+    version <- "==2.2.2"
   else
     version <- paste0("==", version)
   
