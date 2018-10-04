@@ -17,6 +17,6 @@ cache:
 
 before_script:
   - pip2.7 install --upgrade --ignore-installed --user travis pip setuptools wheel virtualenv
-  - pip2.7 install --upgrade --ignore-installed --user travis keras==2.2.2 h5py pyyaml requests Pillow scipy theano tensorflow
+  - pip2.7 install --upgrade --ignore-installed --user travis keras h5py pyyaml requests Pillow scipy theano tensorflow
 
 
