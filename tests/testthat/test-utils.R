@@ -50,7 +50,7 @@ test_call_succeeds("with_custom_object_scope", {
     model %>% compile(
       loss = "binary_crossentropy",
       optimizer = optimizer_nadam(),
-      metrics = "mean_pred"
+      metrics = metric_mean_pred
     )
     
     tmp <- tempfile("model", fileext = ".hdf5")
