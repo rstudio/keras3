@@ -24,7 +24,7 @@ model.}
 \item{input_shape}{optional shape list, only to be specified if \code{include_top}
 is FALSE (otherwise the input shape has to be \code{(299, 299, 3)}. It should
 have exactly 3 inputs channels, and width and height should be no smaller
-than 71. E.g. \code{(150, 150, 3)} would be one valid value.}
+than 75. E.g. \code{(150, 150, 3)} would be one valid value.}
 
 \item{pooling}{Optional pooling mode for feature extraction when
 \code{include_top} is \code{FALSE}.

@@ -39,18 +39,18 @@ test_call_succeeds("with_custom_object_scope", {
     skip("h5py not available for testing")
   
 
-  sparse_top_k_cat_acc <- function(y_pred, y_true){
-    metric_sparse_top_k_categorical_accuracy(y_pred, y_true, k = 5)
-  }
+  metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
+    k_mean(y_pred) 
+  })
   
-  with_custom_object_scope(c(top_k_acc = sparse_top_k_cat_acc), {
+  with_custom_object_scope(c(mean_pred = metric_mean_pred), {
     
     model <- define_model()
     
     model %>% compile(
       loss = "binary_crossentropy",
       optimizer = optimizer_nadam(),
-      metrics = "top_k_acc"
+      metrics = metric_mean_pred
     )
     
     tmp <- tempfile("model", fileext = ".hdf5")

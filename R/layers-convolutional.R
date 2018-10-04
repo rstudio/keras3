@@ -280,7 +280,7 @@ layer_conv_3d <- function(object, filters, kernel_size, strides = c(1L, 1L, 1L),
 #' 128L, 3L)` for 128x128 RGB pictures in `data_format="channels_last"`.
 #' 
 #' @inheritParams layer_conv_2d
-#' 
+#'
 #' @param filters Integer, the dimensionality of the output space (i.e. the
 #'   number of output filters in the convolution).
 #' @param kernel_size An integer or list of 2 integers, specifying the width and
@@ -291,7 +291,14 @@ layer_conv_3d <- function(object, filters, kernel_size, strides = c(1L, 1L, 1L),
 #'   specify the same value for all spatial dimensions. Specifying any stride
 #'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
 #' @param padding one of `"valid"` or `"same"` (case-insensitive).
-#'   
+#' @param output_padding An integer or list of 2 integers,
+#'   specifying the amount of padding along the height and width
+#'   of the output tensor. Can be a single integer to specify the same 
+#'   value for all spatial dimensions. The amount of output padding along a
+#'   given dimension must be lower than the stride along that same dimension.
+#'   If set to `NULL` (default), the output shape is inferred.
+#' @param dilation_rate Dialation rate.
+#'  
 #' @section Input shape: 4D tensor with shape: `(batch, channels, rows, cols)`
 #'   if data_format='channels_first' or 4D tensor with shape: `(batch, rows,
 #'   cols, channels)` if data_format='channels_last'.
@@ -308,15 +315,15 @@ layer_conv_3d <- function(object, filters, kernel_size, strides = c(1L, 1L, 1L),
 #' @family convolutional layers    
 #'   
 #' @export
-layer_conv_2d_transpose <- function(object, filters, kernel_size, strides = c(1L, 1L), padding = "valid", 
-                                    data_format = NULL, activation = NULL, use_bias = TRUE, 
+layer_conv_2d_transpose <- function(object, filters, kernel_size, strides = c(1, 1), padding = "valid", output_padding = NULL,
+                                    data_format = NULL, dilation_rate = c(1, 1), activation = NULL, use_bias = TRUE, 
                                     kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                                     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                                     kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
                                     batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                                     name = NULL, trainable = NULL, weights = NULL) {
   
-  create_layer(keras$layers$Conv2DTranspose, object, list(
+  args <- list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -338,8 +345,14 @@ layer_conv_2d_transpose <- function(object, filters, kernel_size, strides = c(1L
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
   
+  if (keras_version() >= "2.2.3") {
+    args$output_padding <- as_integer_tuple(output_padding)
+    args$dilation_rate <- as_integer_tuple(dilation_rate)
+  }
+  
+  create_layer(keras$layers$Conv2DTranspose, object, args)
 }
 
 
@@ -368,6 +381,12 @@ layer_conv_2d_transpose <- function(object, filters, kernel_size, strides = c(1L
 #'   to specify the same value for all spatial dimensions. Specifying any stride
 #'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
 #' @param padding one of `"valid"` or `"same"` (case-insensitive).
+#' @param output_padding An integer or list of 3 integers,
+#'   specifying the amount of padding along the depth, height, and width
+#'   of the output tensor. Can be a single integer to specify the same 
+#'   value for all spatial dimensions. The amount of output padding along a
+#'   given dimension must be lower than the stride along that same dimension.
+#'   If set to `NULL` (default), the output shape is inferred.
 #' @param data_format A string, one of `channels_last` (default) or
 #'   `channels_first`. The ordering of the dimensions in the inputs.
 #'   `channels_last` corresponds to inputs with shape `(batch, depth, height,
@@ -396,14 +415,16 @@ layer_conv_2d_transpose <- function(object, filters, kernel_size, strides = c(1L
 #' @family convolutional layers 
 #'
 #' @export
-layer_conv_3d_transpose <- function(object, filters, kernel_size, strides = c(1, 1, 1), padding = "valid", 
+layer_conv_3d_transpose <- function(object, filters, kernel_size, strides = c(1, 1, 1), 
+                                    padding = "valid", output_padding = NULL,
                                     data_format = NULL, activation = NULL, use_bias = TRUE, 
                                     kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
                                     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
                                     kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
                                     batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                                     name = NULL, trainable = NULL, weights = NULL) {
-  create_layer(keras$layers$Conv3DTranspose, object, list(
+  
+  args <- list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -425,7 +446,12 @@ layer_conv_3d_transpose <- function(object, filters, kernel_size, strides = c(1,
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
+  
+  if (keras_version() >= "2.2.3")
+    args$output_padding <- as_integer_tuple(output_padding)
+  
+  create_layer(keras$layers$Conv3DTranspose, object, args)
 }
 
 
@@ -615,7 +641,7 @@ layer_depthwise_conv_2d <- function(object, kernel_size, strides = c(1, 1), padd
 #' @family convolutional layers 
 #'   
 #' @export
-layer_separable_conv_1d <- function(object, filters, kernel_size, strides = 1, padding = "valid", data_format = NULL, 
+layer_separable_conv_1d <- function(object, filters, kernel_size, strides = 1, padding = "valid", data_format = "channels_last", 
                                     dilation_rate = 1, depth_multiplier = 1, activation = NULL, use_bias = TRUE, 
                                     depthwise_initializer = "glorot_uniform", pointwise_initializer = "glorot_uniform", bias_initializer = "zeros", 
                                     depthwise_regularizer = NULL, pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
@@ -697,6 +723,10 @@ layer_upsampling_1d <- function(object, size = 2L,
 #' 
 #' @param size int, or list of 2 integers. The upsampling factors for rows and
 #'   columns.
+#' @param interpolation  A string, one of `nearest` or `bilinear`.
+#'   Note that CNTK does not support yet the `bilinear` upscaling
+#'   and that with Theano, only `size=(2, 2)` is possible.   
+#'  
 #'   
 #' @section Input shape: 
 #' 4D tensor with shape: 
@@ -711,17 +741,22 @@ layer_upsampling_1d <- function(object, size = 2L,
 #' @family convolutional layers 
 #'   
 #' @export
-layer_upsampling_2d <- function(object, size = c(2L, 2L), data_format = NULL,
+layer_upsampling_2d <- function(object, size = c(2L, 2L), data_format = NULL, interpolation = "nearest",
                                 batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
   
-  create_layer(keras$layers$UpSampling2D, object, list(
+  args <- list(
     size = as.integer(size),
     data_format = data_format,
     batch_size = as_nullable_integer(batch_size),
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
+  
+  if (keras_version() >= "2.2.3")
+    args$interpolation <- interpolation
+  
+  create_layer(keras$layers$UpSampling2D, object, args)
   
 }
 

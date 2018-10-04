@@ -91,12 +91,18 @@ callback_model_checkpoint <- function(filepath, monitor = "val_loss", verbose = 
 #' @param baseline Baseline value for the monitored quantity to reach.
 #'   Training will stop if the model doesn't show improvement
 #'   over the baseline.
+#' @param restore_best_weights Whether to restore model weights from
+#'   the epoch with the best value of the monitored quantity.
+#'   If `FALSE`, the model weights obtained at the last step of
+#'   training are used.  
+#'
 #' 
 #' @family callbacks 
 #'       
 #' @export
 callback_early_stopping <- function(monitor = "val_loss", min_delta = 0, patience = 0, 
-                                    verbose = 0, mode = c("auto", "min", "max"), baseline = NULL) {
+                                    verbose = 0, mode = c("auto", "min", "max"), 
+                                    baseline = NULL, restore_best_weights = FALSE) {
   
   args <- list(
     monitor = monitor,
@@ -108,6 +114,9 @@ callback_early_stopping <- function(monitor = "val_loss", min_delta = 0, patienc
   
   if (keras_version() >= "2.2")
     args$baseline <- baseline
+  
+  if (keras_version() >= "2.2.3")
+    args$restore_best_weights <- restore_best_weights
   
   do.call(keras$callbacks$EarlyStopping, args)
 }
@@ -210,7 +219,13 @@ callback_terminate_on_naan <- function() {
 #' @param embeddings_data Data to be embedded at layers specified in
 #'   `embeddings_layer_names`. Array (if the model has a single input) or list 
 #'   of arrays (if the model has multiple inputs). Learn [more about embeddings](https://www.tensorflow.org/programmers_guide/embedding)
-#'
+#' @param update_freq `'batch'` or `'epoch'` or integer. When using `'batch'`, writes
+#'   the losses and metrics to TensorBoard after each batch. The same
+#'   applies for `'epoch'`. If using an integer, let's say `10000`,
+#'   the callback will write the metrics and losses to TensorBoard every
+#'   10000 samples. Note that writing too frequently to TensorBoard
+#'   can slow down your training.
+#'  
 #' @details TensorBoard is a visualization tool provided with TensorFlow.
 #'   
 #' You can find more information about TensorBoard
@@ -231,7 +246,8 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
                                  embeddings_freq = 0, 
                                  embeddings_layer_names = NULL,
                                  embeddings_metadata = NULL,
-                                 embeddings_data = NULL) {
+                                 embeddings_data = NULL,
+                                 update_freq = "epoch") {
   
   # establish the log_dir
   if (is.null(log_dir)) {
@@ -264,6 +280,9 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
     args$batch_size <- as.integer(batch_size)
     args$write_grads <- write_grads
   }
+  
+  if (keras_version() >= "2.2.3")
+    args$update_freq <- update_freq
   
   do.call(keras$callbacks$TensorBoard, args)
 }

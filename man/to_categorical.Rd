@@ -4,12 +4,14 @@
 \alias{to_categorical}
 \title{Converts a class vector (integers) to binary class matrix.}
 \usage{
-to_categorical(y, num_classes = NULL)
+to_categorical(y, num_classes = NULL, dtype = "float32")
 }
 \arguments{
 \item{y}{Class vector to be converted into a matrix (integers from 0 to num_classes).}
 
 \item{num_classes}{Total number of classes.}
+
+\item{dtype}{The data type expected by the input, as a string}
 }
 \value{
 A binary matrix representation of the input.

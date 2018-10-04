@@ -204,15 +204,18 @@ layer_activation_softmax <- function(object, axis = -1, input_shape = NULL,
 #' @inheritParams layer_activation
 #' 
 #' @param max_value loat, the maximum output value.
+#' @param negative_slope float >= 0 Negative slope coefficient.
+#' @param threshold float. Threshold value for thresholded activation.
 #' 
 #' @family activation layers
 #' 
 #' @export
-layer_activation_relu <- function(object, max_value = NULL, input_shape = NULL,
-                                  batch_input_shape = NULL, batch_size = NULL, 
+layer_activation_relu <- function(object, max_value = NULL, negative_slope = 0, threshold = 0, 
+                                  input_shape = NULL, batch_input_shape = NULL, batch_size = NULL, 
                                   dtype = NULL, name = NULL, trainable = NULL, 
                                   weights = NULL) {
-  create_layer(keras$layers$ReLU, object, list(
+  
+  args <- list(
     max_value = max_value,
     input_shape = normalize_shape(input_shape),
     batch_input_shape = normalize_shape(batch_input_shape),
@@ -221,7 +224,14 @@ layer_activation_relu <- function(object, max_value = NULL, input_shape = NULL,
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
+  
+  if (keras_version >= "2.2.3") {
+    args$negative_slope <- negative_slope
+    args$threshold <- threshold
+  }
+  
+  create_layer(keras$layers$ReLU, object, args)
 }
 
 

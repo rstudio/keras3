@@ -4,14 +4,15 @@
 \alias{layer_conv_2d_transpose}
 \title{Transposed 2D convolution layer (sometimes called Deconvolution).}
 \usage{
-layer_conv_2d_transpose(object, filters, kernel_size, strides = c(1L,
-  1L), padding = "valid", data_format = NULL, activation = NULL,
-  use_bias = TRUE, kernel_initializer = "glorot_uniform",
-  bias_initializer = "zeros", kernel_regularizer = NULL,
-  bias_regularizer = NULL, activity_regularizer = NULL,
-  kernel_constraint = NULL, bias_constraint = NULL,
-  input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
-  dtype = NULL, name = NULL, trainable = NULL, weights = NULL)
+layer_conv_2d_transpose(object, filters, kernel_size, strides = c(1, 1),
+  padding = "valid", output_padding = NULL, data_format = NULL,
+  dilation_rate = c(1, 1), activation = NULL, use_bias = TRUE,
+  kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
+  kernel_regularizer = NULL, bias_regularizer = NULL,
+  activity_regularizer = NULL, kernel_constraint = NULL,
+  bias_constraint = NULL, input_shape = NULL,
+  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
+  name = NULL, trainable = NULL, weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -30,11 +31,20 @@ value != 1 is incompatible with specifying any \code{dilation_rate} value != 1.}
 
 \item{padding}{one of \code{"valid"} or \code{"same"} (case-insensitive).}
 
+\item{output_padding}{An integer or list of 2 integers,
+specifying the amount of padding along the height and width
+of the output tensor. Can be a single integer to specify the same
+value for all spatial dimensions. The amount of output padding along a
+given dimension must be lower than the stride along that same dimension.
+If set to \code{NULL} (default), the output shape is inferred.}
+
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
 \code{channels_last} corresponds to inputs with shape \code{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
 found in your Keras config file at \code{~/.keras/keras.json}. If you never set
 it, then it will be "channels_last".}
+
+\item{dilation_rate}{Dialation rate.}
 
 \item{activation}{Activation function to use. If you don't specify anything,
 no activation is applied (ie. "linear" activation: \code{a(x) = x}).}

@@ -5,15 +5,24 @@
 #' 
 #' @param y Class vector to be converted into a matrix (integers from 0 to num_classes).
 #' @param num_classes Total number of classes.
+#' @param dtype The data type expected by the input, as a string
+#    (`float32`, `float64`, `int32`...)
 #' 
 #' @return A binary matrix representation of the input.
 #' 
 #' @export
-to_categorical <- function(y, num_classes = NULL) {
-  keras$utils$to_categorical(
+to_categorical <- function(y, num_classes = NULL, dtype = "float32") {
+  
+  args <- list(
     y = y,
     num_classes = as_nullable_integer(num_classes)
   )
+
+  if (keras_version() >= "2.2.3")
+    args$dtype <- dtype
+    
+  do.call(keras$utils$to_categorical, args)
+
 }
 
  

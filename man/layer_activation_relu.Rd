@@ -4,14 +4,19 @@
 \alias{layer_activation_relu}
 \title{Rectified Linear Unit activation function}
 \usage{
-layer_activation_relu(object, max_value = NULL, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_activation_relu(object, max_value = NULL, negative_slope = 0,
+  threshold = 0, input_shape = NULL, batch_input_shape = NULL,
+  batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
+  weights = NULL)
 }
 \arguments{
 \item{object}{Model or layer object}
 
 \item{max_value}{loat, the maximum output value.}
+
+\item{negative_slope}{float >= 0 Negative slope coefficient.}
+
+\item{threshold}{float. Threshold value for thresholded activation.}
 
 \item{input_shape}{Input shape (list of integers, does not include the
 samples axis) which is required when using this layer as the first layer in
