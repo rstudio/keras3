@@ -16,6 +16,7 @@ test_backend("k_abs", k_abs(42))
 
 test_backend("k_all", {
   skip_if_cntk()
+  skip_if_theano()
   logical_vals <- k_constant(array(TRUE, dim = c(3,5)), dtype = "bool")
   k_all(logical_vals)
   k_all(logical_vals, axis = 1)
