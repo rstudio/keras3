@@ -86,7 +86,9 @@ tfruns::flag_boolean
 #' @export
 tfruns::run_dir
 
-
+#' @importFrom generics fit
+#' @export
+generics::fit
 
 
 
