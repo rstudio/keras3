@@ -21,11 +21,12 @@ If not provided, defaults to \code{c(0.33, 0.55, 0.67, 1.0)}.}
 Print a summary of a Keras model
 }
 \seealso{
-Other model functions: \code{\link{compile}},
+Other model functions: \code{\link{compile.keras.engine.training.Model}},
   \code{\link{evaluate.keras.engine.training.Model}},
   \code{\link{evaluate_generator}},
-  \code{\link{fit_generator}}, \code{\link{fit}},
-  \code{\link{get_config}}, \code{\link{get_layer}},
+  \code{\link{fit.keras.engine.training.Model}},
+  \code{\link{fit_generator}}, \code{\link{get_config}},
+  \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}}, \code{\link{multi_gpu_model}},
   \code{\link{pop_layer}},

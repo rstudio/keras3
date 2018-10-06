@@ -91,9 +91,10 @@ this allows you to do real-time data augmentation on images on CPU in
 parallel to training your model on GPU.
 }
 \seealso{
-Other model functions: \code{\link{compile}},
+Other model functions: \code{\link{compile.keras.engine.training.Model}},
   \code{\link{evaluate.keras.engine.training.Model}},
-  \code{\link{evaluate_generator}}, \code{\link{fit}},
+  \code{\link{evaluate_generator}},
+  \code{\link{fit.keras.engine.training.Model}},
   \code{\link{get_config}}, \code{\link{get_layer}},
   \code{\link{keras_model_sequential}},
   \code{\link{keras_model}}, \code{\link{multi_gpu_model}},

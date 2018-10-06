@@ -70,7 +70,7 @@ Model performance metrics
 }
 \note{
 Metric functions are to be supplied in the \code{metrics} parameter of the
-\code{\link[=compile]{compile()}} function.
+\code{\link[=compile.keras.engine.training.Model]{compile.keras.engine.training.Model()}} function.
 }
 \section{Custom Metrics}{
 

@@ -19,6 +19,8 @@
 \alias{flag_string}
 \alias{flag_boolean}
 \alias{run_dir}
+\alias{fit}
+\alias{compile}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -26,6 +28,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
+  \item{generics}{\code{\link[generics]{fit}}, \code{\link[generics]{compile}}}
+
   \item{reticulate}{\code{\link[reticulate]{use_python}}, \code{\link[reticulate]{use_virtualenv}}, \code{\link[reticulate]{use_condaenv}}, \code{\link[reticulate]{array_reshape}}, \code{\link[reticulate]{tuple}}}
 
   \item{tensorflow}{\code{\link[tensorflow]{use_session_with_seed}}, \code{\link[tensorflow]{tensorboard}}, \code{\link[tensorflow]{evaluate}}, \code{\link[tensorflow]{export_savedmodel}}, \code{\link[tensorflow]{shape}}}

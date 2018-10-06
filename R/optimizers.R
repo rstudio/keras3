@@ -15,7 +15,7 @@
 #' @param clipvalue Gradients will be clipped when their absolute value exceeds
 #'   this value.
 #' 
-#' @return Optimizer for use with \code{\link{compile}}.
+#' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
 #' 
 #' @family optimizers  
 #' 
