@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -213,11 +213,12 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other model functions: <code><a href='compile.html'>compile</a></code>,
+    <div class='dont-index'><p>Other model functions: <code><a href='compile.keras.engine.training.Model.html'>compile.keras.engine.training.Model</a></code>,
   <code><a href='evaluate.keras.engine.training.Model.html'>evaluate.keras.engine.training.Model</a></code>,
   <code><a href='evaluate_generator.html'>evaluate_generator</a></code>,
-  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='fit.html'>fit</a></code>,
-  <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_layer.html'>get_layer</a></code>,
+  <code><a href='fit.keras.engine.training.Model.html'>fit.keras.engine.training.Model</a></code>,
+  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='get_config.html'>get_config</a></code>,
+  <code><a href='get_layer.html'>get_layer</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
   <code><a href='multi_gpu_model.html'>multi_gpu_model</a></code>, <code><a href='pop_layer.html'>pop_layer</a></code>,
   <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
@@ -243,7 +244,7 @@
 
 <span class='co'># create and compile model</span>
 <span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>keras_model</span>(<span class='kw'>inputs</span> <span class='kw'>=</span> <span class='no'>inputs</span>, <span class='kw'>outputs</span> <span class='kw'>=</span> <span class='no'>predictions</span>)
-<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='compile.html'>compile</a></span>(
+<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/generics/topics/compile'>compile</a></span>(
   <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='st'>'rmsprop'</span>,
   <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>'categorical_crossentropy'</span>,
   <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'accuracy'</span>)

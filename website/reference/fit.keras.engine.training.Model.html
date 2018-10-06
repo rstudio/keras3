@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Returns predictions for a single batch of samples. — predict_on_batch • keras</title>
+<title>Train a Keras model — fit.keras.engine.training.Model • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
-<meta property="og:title" content="Returns predictions for a single batch of samples. — predict_on_batch" />
+<meta property="og:title" content="Train a Keras model — fit.keras.engine.training.Model" />
 
-<meta property="og:description" content="Returns predictions for a single batch of samples." />
+<meta property="og:description" content="Trains the model for a fixed number of epochs (iterations on a dataset)." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -185,42 +185,151 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Returns predictions for a single batch of samples.</h1>
+    <h1>Train a Keras model</h1>
     
-    <div class="hidden name"><code>predict_on_batch.Rd</code></div>
+    <div class="hidden name"><code>fit.keras.engine.training.Model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Returns predictions for a single batch of samples.</p>
+    <p>Trains the model for a fixed number of epochs (iterations on a dataset).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>predict_on_batch</span>(<span class='no'>object</span>, <span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for keras.engine.training.Model</span>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/generics/topics/fit'>fit</a></span>(<span class='no'>object</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"keras.fit_verbose"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>1</span>),
+  <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>view_metrics</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"keras.view_metrics"</span>,
+  <span class='kw'>default</span> <span class='kw'>=</span> <span class='st'>"auto"</span>), <span class='kw'>validation_split</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>steps_per_epoch</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>validation_steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>Keras model object</p></td>
+      <td><p>Model to train.</p></td>
     </tr>
     <tr>
       <th>x</th>
-      <td><p>Input data (vector, matrix, or array)</p></td>
+      <td><p>Vector, matrix, or array of training data (or list if the model has
+multiple inputs). If all inputs in the model are named, you can also pass a
+list mapping input names to data. <code>x</code> can be <code>NULL</code> (default) if feeding
+from framework-native tensors (e.g. TensorFlow data tensors).</p></td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td><p>Vector, matrix, or array of target (label) data (or list if the model has
+multiple outputs). If all outputs in the model are named, you can also pass
+a list mapping output names to data. <code>y</code> can be <code>NULL</code> (default) if feeding
+from framework-native tensors (e.g. TensorFlow data tensors).</p></td>
+    </tr>
+    <tr>
+      <th>batch_size</th>
+      <td><p>Integer or <code>NULL</code>. Number of samples per gradient update.
+If unspecified, <code>batch_size</code> will default to 32.</p></td>
+    </tr>
+    <tr>
+      <th>epochs</th>
+      <td><p>Number of epochs to train the model.
+Note that in conjunction with <code>initial_epoch</code>,
+<code>epochs</code> is to be understood as "final epoch". The model is
+not trained for a number of iterations given by <code>epochs</code>, but
+merely until the epoch of index <code>epochs</code> is reached.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Verbosity mode (0 = silent, 1 = progress bar, 2 = one line per
+epoch).</p></td>
+    </tr>
+    <tr>
+      <th>callbacks</th>
+      <td><p>List of callbacks to be called during training.</p></td>
+    </tr>
+    <tr>
+      <th>view_metrics</th>
+      <td><p>View realtime plot of training metrics (by epoch). The
+default (<code>"auto"</code>) will display the plot when running within RStudio,
+<code>metrics</code> were specified during model <code><a href='http://www.rdocumentation.org/packages/generics/topics/compile'>compile()</a></code>, <code>epochs &gt; 1</code> and
+<code>verbose &gt; 0</code>. Use the global <code>keras.view_metrics</code> option to establish a
+different default.</p></td>
+    </tr>
+    <tr>
+      <th>validation_split</th>
+      <td><p>Float between 0 and 1. Fraction of the training data
+to be used as validation data. The model will set apart this fraction of
+the training data, will not train on it, and will evaluate the loss and any
+model metrics on this data at the end of each epoch. The validation data
+is selected from the last samples in the <code>x</code> and <code>y</code> data provided,
+before shuffling.</p></td>
+    </tr>
+    <tr>
+      <th>validation_data</th>
+      <td><p>Data on which to evaluate the loss and any model
+metrics at the end of each epoch. The model will not be trained on this
+data. This could be a list (x_val, y_val) or a list (x_val, y_val,
+val_sample_weights). <code>validation_data</code> will override <code>validation_split</code>.</p></td>
+    </tr>
+    <tr>
+      <th>shuffle</th>
+      <td><p>shuffle: Logical (whether to shuffle the training data
+before each epoch) or string (for "batch"). "batch" is a special option
+for dealing with the limitations of HDF5 data; it shuffles in batch-sized
+chunks. Has no effect when <code>steps_per_epoch</code> is not <code>NULL</code>.</p></td>
+    </tr>
+    <tr>
+      <th>class_weight</th>
+      <td><p>Optional named list mapping indices (integers) to a
+weight (float) value, used for weighting the loss function
+(during training only). This can be useful to tell the model to
+"pay more attention" to samples from an under-represented class.</p></td>
+    </tr>
+    <tr>
+      <th>sample_weight</th>
+      <td><p>Optional array of the same length as x, containing
+weights to apply to the model's loss for each sample. In the case of
+temporal data, you can pass a 2D array with shape (samples,
+sequence_length), to apply a different weight to every timestep of every
+sample. In this case you should make sure to specify
+<code>sample_weight_mode="temporal"</code> in <code><a href='http://www.rdocumentation.org/packages/generics/topics/compile'>compile()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>initial_epoch</th>
+      <td><p>Integer, Epoch at which to start training (useful for
+resuming a previous training run).</p></td>
+    </tr>
+    <tr>
+      <th>steps_per_epoch</th>
+      <td><p>Total number of steps (batches of samples) before
+declaring one epoch finished and starting the next epoch. When training
+with input tensors such as TensorFlow data tensors, the default <code>NULL</code> is
+equal to the number of samples in your dataset divided by the batch
+size, or 1 if that cannot be determined.</p></td>
+    </tr>
+    <tr>
+      <th>validation_steps</th>
+      <td><p>Only relevant if <code>steps_per_epoch</code> is specified.
+Total number of steps (batches of samples) to validate before stopping.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Unused</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>array of predictions.</p>
+    <p>A <code>history</code> object that contains all information collected
+during training.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other model functions: <code><a href='compile.keras.engine.training.Model.html'>compile.keras.engine.training.Model</a></code>,
   <code><a href='evaluate.keras.engine.training.Model.html'>evaluate.keras.engine.training.Model</a></code>,
   <code><a href='evaluate_generator.html'>evaluate_generator</a></code>,
-  <code><a href='fit.keras.engine.training.Model.html'>fit.keras.engine.training.Model</a></code>,
   <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='get_config.html'>get_config</a></code>,
   <code><a href='get_layer.html'>get_layer</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
@@ -228,6 +337,7 @@
   <code><a href='pop_layer.html'>pop_layer</a></code>,
   <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
   <code><a href='predict_generator.html'>predict_generator</a></code>,
+  <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
   <code><a href='predict_proba.html'>predict_proba</a></code>,
   <code><a href='summary.keras.engine.training.Model.html'>summary.keras.engine.training.Model</a></code>,
   <code><a href='train_on_batch.html'>train_on_batch</a></code></p></div>

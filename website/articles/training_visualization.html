@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -163,7 +163,7 @@
 <a href="#overview" class="anchor"></a>Overview</h2>
 <p>There are a number of tools available for visualizing the training of Keras models, including:</p>
 <ol style="list-style-type: decimal">
-<li><p>A <a href="https://keras.rstudio.com/reference/plot.keras_training_history.html">plot method</a> for the Keras training history returned from <code><a href="../reference/fit.html">fit()</a></code>.</p></li>
+<li><p>A <a href="https://keras.rstudio.com/reference/plot.keras_training_history.html">plot method</a> for the Keras training history returned from <code><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code>.</p></li>
 <li><p>Real time visualization of training metrics within the RStudio IDE.</p></li>
 <li><p>Integration with the <a href="https://www.tensorflow.org/get_started/summaries_and_tensorboard">TensorBoard</a> visualization tool included with TensorFlow. Beyond just training metrics, TensorBoard has a wide variety of other visualizations available including the underlying TensorFlow graph, gradient histograms, model weights, and more. TensorBoard also enables you to compare metrics across multiple training runs.</p></li>
 </ol>
@@ -172,15 +172,15 @@
 <div id="plotting-history" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plotting-history" class="anchor"></a>Plotting History</h2>
-<p>The Keras <code><a href="../reference/fit.html">fit()</a></code> method returns an R object containing the training history, including the value of metrics at the end of each epoch . You can plot the training metrics by epoch using the <code>plot()</code> method.</p>
+<p>The Keras <code><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code> method returns an R object containing the training history, including the value of metrics at the end of each epoch . You can plot the training metrics by epoch using the <code>plot()</code> method.</p>
 <p>For example, here we compile and fit a model with the “accuracy” metric:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(),</a>
 <a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)</a>
 <a class="sourceLine" id="cb1-5" data-line-number="5">)</a>
 <a class="sourceLine" id="cb1-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb1-8" data-line-number="8">  x_train, y_train, </a>
 <a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="dt">epochs =</span> <span class="dv">30</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>, </a>
 <a class="sourceLine" id="cb1-10" data-line-number="10">  <span class="dt">validation_split =</span> <span class="fl">0.2</span></a>
@@ -220,10 +220,10 @@ if (!isMobilePhone()) {
   img.src = "https://i0.wp.com/rstudioblog.files.wordpress.com/2017/08/rstudio-training-metrics-mobile.png";
 }
 a.appendChild(img);
-</script><p>The <code>view_metrics</code> argument of the <code><a href="../reference/fit.html">fit()</a></code> method controls whether real time metrics are displayed. By default metrics are automatically displayed if one or more metrics are specified in the call to <code><a href="../reference/compile.html">compile()</a></code> and there is more than one training epoch.</p>
+</script><p>The <code>view_metrics</code> argument of the <code><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code> method controls whether real time metrics are displayed. By default metrics are automatically displayed if one or more metrics are specified in the call to <code><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile()</a></code> and there is more than one training epoch.</p>
 <p>You can explicitly control whether metrics are displayed by specifying the <code>view_metrics</code> argument. You can also set a global session default using the <code>keras.view_metrics</code> option:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># don't show metrics during this run</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">  x_train, y_train, </a>
 <a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="dt">epochs =</span> <span class="dv">30</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>, </a>
 <a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="dt">view_metrics =</span> <span class="ot">FALSE</span>,</a>
@@ -243,8 +243,8 @@ a.appendChild(img);
 <div id="recording-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#recording-data" class="anchor"></a>Recording Data</h3>
-<p>To record data that can be visualized with TensorBoard, you add a TensorBoard callback to the <code><a href="../reference/fit.html">fit()</a></code> function. For example:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<p>To record data that can be visualized with TensorBoard, you add a TensorBoard callback to the <code><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code> function. For example:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">  x_train, y_train,</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="dt">batch_size =</span> batch_size,</a>
 <a class="sourceLine" id="cb6-4" data-line-number="4">  <span class="dt">epochs =</span> epochs,</a>
@@ -265,7 +265,7 @@ a.appendChild(img);
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/tensorflow/topics/tensorboard">tensorboard</a></span>(<span class="st">"logs/run_a"</span>)</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># fit the model with the TensorBoard callback</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb8-6" data-line-number="6">  x_train, y_train,</a>
 <a class="sourceLine" id="cb8-7" data-line-number="7">  <span class="dt">batch_size =</span> batch_size,</a>
 <a class="sourceLine" id="cb8-8" data-line-number="8">  <span class="dt">epochs =</span> epochs,</a>
@@ -293,8 +293,8 @@ a.appendChild(img);
 <div id="metrics" class="section level4">
 <h4 class="hasAnchor">
 <a href="#metrics" class="anchor"></a>Metrics</h4>
-<p>In the above examples TensorBoard metrics are logged for loss and accuracy. The TensorBoard callback will log data for any metrics which are specified in the <code>metrics</code> parameter of the <code><a href="../reference/compile.html">compile()</a></code> function. For example, in the following code:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<p>In the above examples TensorBoard metrics are logged for loss and accuracy. The TensorBoard callback will log data for any metrics which are specified in the <code>metrics</code> parameter of the <code><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile()</a></code> function. For example, in the following code:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2">  <span class="dt">loss =</span> <span class="st">'mean_squared_error'</span>,</a>
 <a class="sourceLine" id="cb12-3" data-line-number="3">  <span class="dt">optimizer =</span> <span class="st">'sgd'</span>,</a>
 <a class="sourceLine" id="cb12-4" data-line-number="4">  <span class="dt">metrics=</span> <span class="kw">c</span>(<span class="st">'mae'</span>, <span class="st">'acc'</span>)</a>

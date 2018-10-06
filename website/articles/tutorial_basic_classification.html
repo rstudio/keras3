@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -319,7 +319,7 @@
 <li>Optimizer — This is how the model is updated based on the data it sees and its loss function.</li>
 <li>Metrics —Used to monitor the training and testing steps. The following example uses accuracy, the fraction of the images that are correctly classified.</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="dt">optimizer =</span> <span class="st">'adam'</span>, </a>
 <a class="sourceLine" id="cb18-3" data-line-number="3">  <span class="dt">loss =</span> <span class="st">'sparse_categorical_crossentropy'</span>,</a>
 <a class="sourceLine" id="cb18-4" data-line-number="4">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)</a>
@@ -335,7 +335,7 @@
 <li>We ask the model to make predictions about a test set — in this example, the test_images array. We verify that the predictions match the labels from the test_labels array.</li>
 </ul>
 <p>To start training, call the <code>fit</code> method — the model is “fit” to the training data:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(train_images, train_labels, <span class="dt">epochs =</span> <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(train_images, train_labels, <span class="dt">epochs =</span> <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>Epoch 1/5
 60000/60000 [==============================] - 7s 118us/step - loss: 0.4980 - acc: 0.8238
 Epoch 2/5

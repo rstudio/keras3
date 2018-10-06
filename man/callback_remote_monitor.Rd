@@ -16,7 +16,7 @@ callback_remote_monitor(root = "http://localhost:9000",
 \item{field}{JSON field under which the data will be stored.}
 
 \item{headers}{Optional named list of custom HTTP headers. Defaults to:
-\code{list(Accept = "application/json",}Content-Type\code{= "application/json")}}
+\code{list(Accept = "application/json", }Content-Type\code{ = "application/json")}}
 
 \item{send_as_json}{Whether the request should be sent as application/json.}
 }

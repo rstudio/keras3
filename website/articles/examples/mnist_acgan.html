@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -307,14 +307,14 @@
 <a class="sourceLine" id="cb1-118" data-line-number="118"></a>
 <a class="sourceLine" id="cb1-119" data-line-number="119"><span class="co"># Build the discriminator</span></a>
 <a class="sourceLine" id="cb1-120" data-line-number="120">discriminator &lt;-<span class="st"> </span><span class="kw">build_discriminator</span>()</a>
-<a class="sourceLine" id="cb1-121" data-line-number="121">discriminator <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb1-121" data-line-number="121">discriminator <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb1-122" data-line-number="122">  <span class="dt">optimizer =</span> <span class="kw"><a href="../../reference/optimizer_adam.html">optimizer_adam</a></span>(<span class="dt">lr =</span> adam_lr, <span class="dt">beta_1 =</span> adam_beta_<span class="dv">1</span>),</a>
 <a class="sourceLine" id="cb1-123" data-line-number="123">  <span class="dt">loss =</span> <span class="kw">list</span>(<span class="st">"binary_crossentropy"</span>, <span class="st">"sparse_categorical_crossentropy"</span>)</a>
 <a class="sourceLine" id="cb1-124" data-line-number="124">)</a>
 <a class="sourceLine" id="cb1-125" data-line-number="125"></a>
 <a class="sourceLine" id="cb1-126" data-line-number="126"><span class="co"># Build the generator</span></a>
 <a class="sourceLine" id="cb1-127" data-line-number="127">generator &lt;-<span class="st"> </span><span class="kw">build_generator</span>(latent_size)</a>
-<a class="sourceLine" id="cb1-128" data-line-number="128">generator <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb1-128" data-line-number="128">generator <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb1-129" data-line-number="129">  <span class="dt">optimizer =</span> <span class="kw"><a href="../../reference/optimizer_adam.html">optimizer_adam</a></span>(<span class="dt">lr =</span> adam_lr, <span class="dt">beta_1 =</span> adam_beta_<span class="dv">1</span>),</a>
 <a class="sourceLine" id="cb1-130" data-line-number="130">  <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span></a>
 <a class="sourceLine" id="cb1-131" data-line-number="131">)</a>
@@ -329,7 +329,7 @@
 <a class="sourceLine" id="cb1-140" data-line-number="140">results &lt;-<span class="st"> </span><span class="kw">discriminator</span>(fake)</a>
 <a class="sourceLine" id="cb1-141" data-line-number="141"></a>
 <a class="sourceLine" id="cb1-142" data-line-number="142">combined &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="kw">list</span>(latent, image_class), results)</a>
-<a class="sourceLine" id="cb1-143" data-line-number="143">combined <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb1-143" data-line-number="143">combined <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb1-144" data-line-number="144">  <span class="dt">optimizer =</span> <span class="kw"><a href="../../reference/optimizer_adam.html">optimizer_adam</a></span>(<span class="dt">lr =</span> adam_lr, <span class="dt">beta_1 =</span> adam_beta_<span class="dv">1</span>),</a>
 <a class="sourceLine" id="cb1-145" data-line-number="145">  <span class="dt">loss =</span> <span class="kw">list</span>(<span class="st">"binary_crossentropy"</span>, <span class="st">"sparse_categorical_crossentropy"</span>)</a>
 <a class="sourceLine" id="cb1-146" data-line-number="146">)</a>

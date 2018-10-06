@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -223,7 +223,7 @@
 <a class="sourceLine" id="cb1-59" data-line-number="59">  xent_loss <span class="op">+</span><span class="st"> </span>kl_loss</a>
 <a class="sourceLine" id="cb1-60" data-line-number="60">}</a>
 <a class="sourceLine" id="cb1-61" data-line-number="61"></a>
-<a class="sourceLine" id="cb1-62" data-line-number="62">vae <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">"rmsprop"</span>, <span class="dt">loss =</span> vae_loss)</a>
+<a class="sourceLine" id="cb1-62" data-line-number="62">vae <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">"rmsprop"</span>, <span class="dt">loss =</span> vae_loss)</a>
 <a class="sourceLine" id="cb1-63" data-line-number="63"></a>
 <a class="sourceLine" id="cb1-64" data-line-number="64"></a>
 <a class="sourceLine" id="cb1-65" data-line-number="65"><span class="co"># Data preparation --------------------------------------------------------</span></a>
@@ -237,7 +237,7 @@
 <a class="sourceLine" id="cb1-73" data-line-number="73"></a>
 <a class="sourceLine" id="cb1-74" data-line-number="74"><span class="co"># Model training ----------------------------------------------------------</span></a>
 <a class="sourceLine" id="cb1-75" data-line-number="75"></a>
-<a class="sourceLine" id="cb1-76" data-line-number="76">vae <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb1-76" data-line-number="76">vae <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb1-77" data-line-number="77">  x_train, x_train, </a>
 <a class="sourceLine" id="cb1-78" data-line-number="78">  <span class="dt">shuffle =</span> <span class="ot">TRUE</span>, </a>
 <a class="sourceLine" id="cb1-79" data-line-number="79">  <span class="dt">epochs =</span> epochs, </a>

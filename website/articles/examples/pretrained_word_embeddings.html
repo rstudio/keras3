@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -317,13 +317,13 @@
 <a class="sourceLine" id="cb1-149" data-line-number="149"></a>
 <a class="sourceLine" id="cb1-150" data-line-number="150">model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(sequence_input, preds)</a>
 <a class="sourceLine" id="cb1-151" data-line-number="151"></a>
-<a class="sourceLine" id="cb1-152" data-line-number="152">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb1-152" data-line-number="152">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb1-153" data-line-number="153">  <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,</a>
 <a class="sourceLine" id="cb1-154" data-line-number="154">  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,</a>
 <a class="sourceLine" id="cb1-155" data-line-number="155">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'acc'</span>)  </a>
 <a class="sourceLine" id="cb1-156" data-line-number="156">)</a>
 <a class="sourceLine" id="cb1-157" data-line-number="157"></a>
-<a class="sourceLine" id="cb1-158" data-line-number="158">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb1-158" data-line-number="158">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb1-159" data-line-number="159">  x_train, y_train,</a>
 <a class="sourceLine" id="cb1-160" data-line-number="160">  <span class="dt">batch_size =</span> <span class="dv">128</span>,</a>
 <a class="sourceLine" id="cb1-161" data-line-number="161">  <span class="dt">epochs =</span> <span class="dv">10</span>,</a>

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -257,7 +257,7 @@
 <a class="sourceLine" id="cb5-15" data-line-number="15"><span class="kw"><a href="../reference/freeze_weights.html">freeze_weights</a></span>(base_model)</a>
 <a class="sourceLine" id="cb5-16" data-line-number="16"></a>
 <a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co"># compile the model (should be done *after* setting layers to non-trainable)</span></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>, <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>)</a>
+<a class="sourceLine" id="cb5-18" data-line-number="18">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>, <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>)</a>
 <a class="sourceLine" id="cb5-19" data-line-number="19"></a>
 <a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co"># train the model on the new data for a few epochs</span></a>
 <a class="sourceLine" id="cb5-21" data-line-number="21">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit_generator.html">fit_generator</a></span>(...)</a>
@@ -279,7 +279,7 @@
 <a class="sourceLine" id="cb5-37" data-line-number="37"></a>
 <a class="sourceLine" id="cb5-38" data-line-number="38"><span class="co"># we need to recompile the model for these modifications to take effect</span></a>
 <a class="sourceLine" id="cb5-39" data-line-number="39"><span class="co"># we use SGD with a low learning rate</span></a>
-<a class="sourceLine" id="cb5-40" data-line-number="40">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb5-40" data-line-number="40">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb5-41" data-line-number="41">  <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="dt">lr =</span> <span class="fl">0.0001</span>, <span class="dt">momentum =</span> <span class="fl">0.9</span>), </a>
 <a class="sourceLine" id="cb5-42" data-line-number="42">  <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span></a>
 <a class="sourceLine" id="cb5-43" data-line-number="43">)</a>

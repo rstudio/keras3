@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -183,8 +183,8 @@
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
-<p>First, install the keras R package from CRAN as follows:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"keras"</span>)</a></code></pre></div>
+<p>First, install the keras R package from GitHub as follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"rstudio/keras"</span>)</a></code></pre></div>
 <p>The Keras R interface uses the <a href="https://www.tensorflow.org/">TensorFlow</a> backend engine by default. To install both the core Keras library as well as the TensorFlow backend use the <code><a href="reference/install_keras.html">install_keras()</a></code> function:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(keras)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="reference/install_keras.html">install_keras</a></span>()</a></code></pre></div>
@@ -260,7 +260,7 @@ Trainable params: 235,146
 Non-trainable params: 0
 ________________________________________________________________________________</code></pre>
 <p>Next, compile the model with appropriate loss function, optimizer, and metrics:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/compile.html">compile</a></span>(</a>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="dt">optimizer =</span> <span class="kw"><a href="reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(),</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)</a>
@@ -269,13 +269,13 @@ ________________________________________________________________________________
 <div id="training-and-evaluation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#training-and-evaluation" class="anchor"></a>Training and Evaluation</h3>
-<p>Use the <code><a href="reference/fit.html">fit()</a></code> function to train the model for 30 epochs using batches of 128 images:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/fit.html">fit</a></span>(</a>
+<p>Use the <code><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code> function to train the model for 30 epochs using batches of 128 images:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">  x_train, y_train, </a>
 <a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="dt">epochs =</span> <span class="dv">30</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>, </a>
 <a class="sourceLine" id="cb9-4" data-line-number="4">  <span class="dt">validation_split =</span> <span class="fl">0.2</span></a>
 <a class="sourceLine" id="cb9-5" data-line-number="5">)</a></code></pre></div>
-<p>The <code>history</code> object returned by <code><a href="reference/fit.html">fit()</a></code> includes loss and accuracy metrics which we can plot:</p>
+<p>The <code>history</code> object returned by <code><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code> includes loss and accuracy metrics which we can plot:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">plot</span>(history)</a></code></pre></div>
 <p><img src="images/training_history_ggplot2.png" class="r-plot" width="757" height="489"></p>
 <p>Evaluate the model’s performance on the test data:</p>

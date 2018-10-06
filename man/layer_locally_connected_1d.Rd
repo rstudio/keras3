@@ -75,7 +75,7 @@ each different patch of the input.
 }
 
 \section{Output shape}{
- 3D tensor with shape: \code{(batch_size, new_steps, filters)} \code{steps} value might have changed due to padding or strides.
+ 3D tensor with shape: \code{(batch_size, new_steps,  filters)} \code{steps} value might have changed due to padding or strides.
 }
 
 \seealso{

@@ -36,7 +36,7 @@ isn't provided.}
 \item{weights}{Initial weights for layer.}
 }
 \description{
-It follows: \code{f(x) = alpha * (exp(x) - 1.0)} for \code{x < 0}, \code{f(x) = x} for `x
+It follows: \code{f(x) =  alpha * (exp(x) - 1.0)} for \code{x < 0}, \code{f(x) = x} for `x
 
 = 0`.
 }

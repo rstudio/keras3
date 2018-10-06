@@ -95,7 +95,7 @@ input over a single spatial (or temporal) dimension to produce a tensor of
 outputs. If \code{use_bias} is TRUE, a bias vector is created and added to the
 outputs. Finally, if \code{activation} is not \code{NULL}, it is applied to the outputs
 as well. When using this layer as the first layer in a model, provide an
-\code{input_shape} argument (list of integers or \code{NULL}, e.g. \code{(10, 128)} for
+\code{input_shape} argument (list of integers or \code{NULL }, e.g. \code{(10, 128)} for
 sequences of 10 vectors of 128-dimensional vectors, or \code{(NULL, 128)} for
 variable-length sequences of 128-dimensional vectors.
 }
@@ -104,7 +104,7 @@ variable-length sequences of 128-dimensional vectors.
 }
 
 \section{Output shape}{
- 3D tensor with shape: \code{(batch_size, new_steps, filters)} \code{steps} value might have changed due to padding or strides.
+ 3D tensor with shape: \code{(batch_size, new_steps,  filters)} \code{steps} value might have changed due to padding or strides.
 }
 
 \seealso{

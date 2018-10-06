@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -179,7 +179,7 @@
 <a class="sourceLine" id="cb1-11" data-line-number="11"></a>
 <a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co"># create and compile model</span></a>
 <a class="sourceLine" id="cb1-13" data-line-number="13">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> inputs, <span class="dt">outputs =</span> predictions)</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb1-15" data-line-number="15">  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,</a>
 <a class="sourceLine" id="cb1-16" data-line-number="16">  <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,</a>
 <a class="sourceLine" id="cb1-17" data-line-number="17">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)</a>
@@ -266,27 +266,27 @@ Trainable params: 5,200,610
 Non-trainable params: 0
 __________________________________________________________________________________________</code></pre>
 <p>We compile the model and assign a weight of 0.2 to the auxiliary loss. To specify different <code>loss_weights</code> or <code>loss</code> for each different output, you can use a list or a dictionary. Here we pass a single loss as the <code>loss</code> argument, so the same loss will be used on all outputs.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,</a>
 <a class="sourceLine" id="cb10-3" data-line-number="3">  <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,</a>
 <a class="sourceLine" id="cb10-4" data-line-number="4">  <span class="dt">loss_weights =</span> <span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.2</span>)</a>
 <a class="sourceLine" id="cb10-5" data-line-number="5">)</a></code></pre></div>
 <p>We can train the model by passing it lists of input arrays and target arrays:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">  <span class="dt">x =</span> <span class="kw">list</span>(headline_data, additional_data),</a>
 <a class="sourceLine" id="cb11-3" data-line-number="3">  <span class="dt">y =</span> <span class="kw">list</span>(labels, labels),</a>
 <a class="sourceLine" id="cb11-4" data-line-number="4">  <span class="dt">epochs =</span> <span class="dv">50</span>,</a>
 <a class="sourceLine" id="cb11-5" data-line-number="5">  <span class="dt">batch_size =</span> <span class="dv">32</span></a>
 <a class="sourceLine" id="cb11-6" data-line-number="6">)</a></code></pre></div>
 <p>Since our inputs and outputs are named (we passed them a “name” argument), We could also have compiled the model via:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2">  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,</a>
 <a class="sourceLine" id="cb12-3" data-line-number="3">  <span class="dt">loss =</span> <span class="kw">list</span>(<span class="dt">main_output =</span> <span class="st">'binary_crossentropy'</span>, <span class="dt">aux_output =</span> <span class="st">'binary_crossentropy'</span>),</a>
 <a class="sourceLine" id="cb12-4" data-line-number="4">  <span class="dt">loss_weights =</span> <span class="kw">list</span>(<span class="dt">main_output =</span> <span class="fl">1.0</span>, <span class="dt">aux_output =</span> <span class="fl">0.2</span>)</a>
 <a class="sourceLine" id="cb12-5" data-line-number="5">)</a>
 <a class="sourceLine" id="cb12-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co"># And trained it via:</span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb12-9" data-line-number="9">  <span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">main_input =</span> headline_data, <span class="dt">aux_input =</span> additional_data),</a>
 <a class="sourceLine" id="cb12-10" data-line-number="10">  <span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">main_output =</span> labels, <span class="dt">aux_output =</span> labels),</a>
 <a class="sourceLine" id="cb12-11" data-line-number="11">  <span class="dt">epochs =</span> <span class="dv">50</span>,</a>
@@ -321,13 +321,13 @@ ________________________________________________________________________________
 <a class="sourceLine" id="cb14-13" data-line-number="13"><span class="co"># We define a trainable model linking the tweet inputs to the predictions</span></a>
 <a class="sourceLine" id="cb14-14" data-line-number="14">model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> <span class="kw">c</span>(tweet_a, tweet_b), <span class="dt">outputs =</span> predictions)</a>
 <a class="sourceLine" id="cb14-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb14-16" data-line-number="16">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb14-16" data-line-number="16">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb14-17" data-line-number="17">  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,</a>
 <a class="sourceLine" id="cb14-18" data-line-number="18">  <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,</a>
 <a class="sourceLine" id="cb14-19" data-line-number="19">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)</a>
 <a class="sourceLine" id="cb14-20" data-line-number="20">)</a>
 <a class="sourceLine" id="cb14-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb14-22" data-line-number="22">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(<span class="kw">list</span>(data_a, data_b), labels, <span class="dt">epochs =</span> <span class="dv">10</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb14-22" data-line-number="22">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(<span class="kw">list</span>(data_a, data_b), labels, <span class="dt">epochs =</span> <span class="dv">10</span>)</a></code></pre></div>
 </div>
 <div id="the-concept-of-layer-node" class="section level2">
 <h2 class="hasAnchor">

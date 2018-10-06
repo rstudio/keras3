@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -354,7 +354,7 @@ ________________________________________________________________________________
 <p>This isn’t the only choice for a loss function, you could, for instance, choose <code>mean_squared_error</code>. But, generally, binary_crossentropy is better for dealing with probabilities — it measures the “distance” between probability distributions, or in our case, between the ground-truth distribution and the predictions.</p>
 <p>Later, when we are exploring regression problems (say, to predict the price of a house), we will see how to use another loss function called mean squared error.</p>
 <p>Now, configure the model to use an optimizer and a loss function:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb20-2" data-line-number="2">  <span class="dt">optimizer =</span> <span class="st">'adam'</span>,</a>
 <a class="sourceLine" id="cb20-3" data-line-number="3">  <span class="dt">loss =</span> <span class="st">'binary_crossentropy'</span>,</a>
 <a class="sourceLine" id="cb20-4" data-line-number="4">  <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">'accuracy'</span>)</a>
@@ -375,7 +375,7 @@ ________________________________________________________________________________
 <h2 class="hasAnchor">
 <a href="#train-the-model" class="anchor"></a>Train the model</h2>
 <p>Train the model for 20 epochs in mini-batches of 512 samples. This is 20 iterations over all samples in the x_train and y_train tensors. While training, monitor the model’s loss and accuracy on the 10,000 samples from the validation set:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb22-2" data-line-number="2">  partial_x_train,</a>
 <a class="sourceLine" id="cb22-3" data-line-number="3">  partial_y_train,</a>
 <a class="sourceLine" id="cb22-4" data-line-number="4">  <span class="dt">epochs =</span> <span class="dv">40</span>,</a>

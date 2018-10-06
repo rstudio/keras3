@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MobileNet model architecture. — application_mobilenet • keras</title>
+<title>Configure a Keras model for training — compile.keras.engine.training.Model • keras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
-<meta property="og:title" content="MobileNet model architecture. — application_mobilenet" />
+<meta property="og:title" content="Configure a Keras model for training — compile.keras.engine.training.Model" />
 
-<meta property="og:description" content="MobileNet model architecture." />
+<meta property="og:description" content="Configure a Keras model for training" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -185,129 +185,100 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>MobileNet model architecture.</h1>
+    <h1>Configure a Keras model for training</h1>
     
-    <div class="hidden name"><code>application_mobilenet.Rd</code></div>
+    <div class="hidden name"><code>compile.keras.engine.training.Model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>MobileNet model architecture.</p>
+    <p>Configure a Keras model for training</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>application_mobilenet</span>(<span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>depth_multiplier</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>dropout</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='st'>"imagenet"</span>, <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
-
-<span class='fu'>mobilenet_preprocess_input</span>(<span class='no'>x</span>)
-
-<span class='fu'>mobilenet_decode_predictions</span>(<span class='no'>preds</span>, <span class='kw'>top</span> <span class='kw'>=</span> <span class='fl'>5</span>)
-
-<span class='fu'>mobilenet_load_model_hdf5</span>(<span class='no'>filepath</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for keras.engine.training.Model</span>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/generics/topics/compile'>compile</a></span>(<span class='no'>object</span>, <span class='no'>optimizer</span>, <span class='no'>loss</span>,
+  <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>loss_weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_weight_mode</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>weighted_metrics</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>target_tensors</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input_shape</th>
-      <td><p>optional shape list, only to be specified if <code>include_top</code>
-is FALSE (otherwise the input shape has to be <code>(224, 224, 3)</code> (with
-<code>channels_last</code> data format) or (3, 224, 224) (with <code>channels_first</code> data
-format). It should have exactly 3 inputs channels, and width and height
-should be no smaller than 32. E.g. <code>(200, 200, 3)</code> would be one valid
-value.</p></td>
+      <th>object</th>
+      <td><p>Model object to compile.</p></td>
     </tr>
     <tr>
-      <th>alpha</th>
-      <td><p>controls the width of the network.</p><ul>
-<li><p>If <code>alpha</code> &lt; 1.0, proportionally decreases the number of filters in each layer.</p></li>
-<li><p>If <code>alpha</code> &gt; 1.0, proportionally increases the number of filters in each layer.</p></li>
-<li><p>If <code>alpha</code> = 1, default number of filters from the paper are used at each layer.</p></li>
-</ul></td>
+      <th>optimizer</th>
+      <td><p>Name of optimizer or optimizer instance.</p></td>
     </tr>
     <tr>
-      <th>depth_multiplier</th>
-      <td><p>depth multiplier for depthwise convolution (also
-called the resolution multiplier)</p></td>
+      <th>loss</th>
+      <td><p>Name of objective function or objective function. If the model
+has multiple outputs, you can use a different loss on each output by
+passing a dictionary or a list of objectives. The loss value that will be
+minimized by the model will then be the sum of all individual losses.</p></td>
     </tr>
     <tr>
-      <th>dropout</th>
-      <td><p>dropout rate</p></td>
+      <th>metrics</th>
+      <td><p>List of metrics to be evaluated by the model during training
+and testing. Typically you will use <code>metrics='accuracy'</code>. To specify
+different metrics for different outputs of a multi-output model, you could
+also pass a named list such as <code>metrics=list(output_a = 'accuracy')</code>.</p></td>
     </tr>
     <tr>
-      <th>include_top</th>
-      <td><p>whether to include the fully-connected layer at the top of
-the network.</p></td>
+      <th>loss_weights</th>
+      <td><p>Optional list specifying scalar coefficients to weight
+the loss contributions of different model outputs. The loss value that will
+be minimized by the model will then be the <em>weighted sum</em> of all indvidual
+losses, weighted by the <code>loss_weights</code> coefficients.</p></td>
     </tr>
     <tr>
-      <th>weights</th>
-      <td><p><code>NULL</code> (random initialization), <code>imagenet</code> (ImageNet
-weights), or the path to the weights file to be loaded.</p></td>
+      <th>sample_weight_mode</th>
+      <td><p>If you need to do timestep-wise sample weighting
+(2D weights), set this to "temporal". <code>NULL</code> defaults to sample-wise
+weights (1D). If the model has multiple outputs, you can use a different
+<code>sample_weight_mode</code> on each output by passing a list of modes.</p></td>
     </tr>
     <tr>
-      <th>input_tensor</th>
-      <td><p>optional Keras tensor (i.e. output of <code><a href='layer_input.html'>layer_input()</a></code>)
-to use as image input for the model.</p></td>
+      <th>weighted_metrics</th>
+      <td><p>List of metrics to be evaluated and weighted
+by sample_weight or class_weight during training and testing</p></td>
     </tr>
     <tr>
-      <th>pooling</th>
-      <td><p>Optional pooling mode for feature extraction when
-<code>include_top</code> is <code>FALSE</code>.
-- <code>NULL</code> means that the output of the model will be the 4D tensor output
-of the last convolutional layer.
-- <code>avg</code> means that global average pooling will be applied to the output
-of the last convolutional layer, and thus the output of the model will
-be a 2D tensor.
-- <code>max</code> means that global max pooling will be applied.</p></td>
+      <th>target_tensors</th>
+      <td><p>By default, Keras will create a placeholder for the
+model's target, which will be fed with the target data during
+training. If instead you would like to use your own
+target tensor (in turn, Keras will not expect external
+data for these targets at training time), you
+can specify them via the <code>target_tensors</code> argument. It should be
+a single tensor (for a single-output sequential model),</p></td>
     </tr>
     <tr>
-      <th>classes</th>
-      <td><p>optional number of classes to classify images into, only to be
-specified if <code>include_top</code> is TRUE, and if no <code>weights</code> argument is
-specified.</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>input tensor, 4D</p></td>
-    </tr>
-    <tr>
-      <th>preds</th>
-      <td><p>Tensor encoding a batch of predictions.</p></td>
-    </tr>
-    <tr>
-      <th>top</th>
-      <td><p>integer, how many top-guesses to return.</p></td>
-    </tr>
-    <tr>
-      <th>filepath</th>
-      <td><p>File path</p></td>
+      <th>...</th>
+      <td><p>When using the Theano/CNTK backends, these arguments
+are passed into K.function. When using the TensorFlow backend,
+these arguments are passed into <code>tf$Session()$run</code>.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code>application_mobilenet()</code> and <code>mobilenet_load_model_hdf5()</code> return a
-Keras model instance. <code>mobilenet_preprocess_input()</code> returns image input
-suitable for feeding into a mobilenet model. <code>mobilenet_decode_predictions()</code>
-returns a list of data frames with variables <code>class_name</code>, <code>class_description</code>,
-and <code>score</code> (one data frame per sample in batch input).</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The <code>mobilenet_preprocess_input()</code> function should be used for image
-preprocessing. To load a saved instance of a MobileNet model use
-the <code>mobilenet_load_model_hdf5()</code> function. To prepare image input
-for MobileNet use <code>mobilenet_preprocess_input()</code>. To decode
-predictions use <code>mobilenet_decode_predictions()</code>.</p>
-    
-    <h2 class="hasAnchor" id="reference"><a class="anchor" href="#reference"></a>Reference</h2>
-
-    
-    <ul>
-<li><p><a href='https://arxiv.org/pdf/1704.04861v1.pdf'>MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications</a>.</p></li>
-</ul>
+    <div class='dont-index'><p>Other model functions: <code><a href='evaluate.keras.engine.training.Model.html'>evaluate.keras.engine.training.Model</a></code>,
+  <code><a href='evaluate_generator.html'>evaluate_generator</a></code>,
+  <code><a href='fit.keras.engine.training.Model.html'>fit.keras.engine.training.Model</a></code>,
+  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='get_config.html'>get_config</a></code>,
+  <code><a href='get_layer.html'>get_layer</a></code>,
+  <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
+  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='multi_gpu_model.html'>multi_gpu_model</a></code>,
+  <code><a href='pop_layer.html'>pop_layer</a></code>,
+  <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
+  <code><a href='predict_generator.html'>predict_generator</a></code>,
+  <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
+  <code><a href='predict_proba.html'>predict_proba</a></code>,
+  <code><a href='summary.keras.engine.training.Model.html'>summary.keras.engine.training.Model</a></code>,
+  <code><a href='train_on_batch.html'>train_on_batch</a></code></p></div>
     
 
   </div>
@@ -316,11 +287,7 @@ predictions use <code>mobilenet_decode_predictions()</code>.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#reference">Reference</a></li>
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

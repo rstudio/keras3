@@ -38,7 +38,7 @@ Lists of training and test data: \code{train$x, train$y, test$x, test$y}.
 
 The \code{x} data includes integer sequences. If the \code{num_words} argument was
 specific, the maximum possible index value is \code{num_words-1}. If the
-\code{maxlen`` argument was specified, the largest possible sequence length is}maxlen`.
+\code{maxlen`` argument was specified, the largest possible sequence length is }maxlen`.
 
 The \code{y} data includes a set of integer labels (0 or 1).
 

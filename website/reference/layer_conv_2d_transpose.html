@@ -71,7 +71,7 @@ of integers, does not include the sample axis), e.g. input_shape=c(128L, 128L, 3
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -208,14 +208,15 @@ of integers, does not include the sample axis), e.g. <code>input_shape=c(128L, 1
     
     </div>
 
-    <pre class="usage"><span class='fu'>layer_conv_2d_transpose</span>(<span class='no'>object</span>, <span class='no'>filters</span>, <span class='no'>kernel_size</span>, <span class='kw'>strides</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1L</span>,
-  <span class='fl'>1L</span>), <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"valid"</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>kernel_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>,
-  <span class='kw'>bias_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>, <span class='kw'>kernel_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bias_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>activity_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>kernel_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bias_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>layer_conv_2d_transpose</span>(<span class='no'>object</span>, <span class='no'>filters</span>, <span class='no'>kernel_size</span>, <span class='kw'>strides</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>1</span>),
+  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"valid"</span>, <span class='kw'>output_padding</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>dilation_rate</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>1</span>), <span class='kw'>activation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>kernel_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>, <span class='kw'>bias_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
+  <span class='kw'>kernel_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bias_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>activity_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>kernel_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>bias_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>batch_input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -247,12 +248,25 @@ value != 1 is incompatible with specifying any <code>dilation_rate</code> value 
       <td><p>one of <code>"valid"</code> or <code>"same"</code> (case-insensitive).</p></td>
     </tr>
     <tr>
+      <th>output_padding</th>
+      <td><p>An integer or list of 2 integers,
+specifying the amount of padding along the height and width
+of the output tensor. Can be a single integer to specify the same
+value for all spatial dimensions. The amount of output padding along a
+given dimension must be lower than the stride along that same dimension.
+If set to <code>NULL</code> (default), the output shape is inferred.</p></td>
+    </tr>
+    <tr>
       <th>data_format</th>
       <td><p>A string, one of <code>channels_last</code> (default) or
 <code>channels_first</code>. The ordering of the dimensions in the inputs.
 <code>channels_last</code> corresponds to inputs with shape <code>(batch, height, width, channels)</code> while <code>channels_first</code> corresponds to inputs with shape <code>(batch, channels, height, width)</code>. It defaults to the <code>image_data_format</code> value
 found in your Keras config file at <code>~/.keras/keras.json</code>. If you never set
 it, then it will be "channels_last".</p></td>
+    </tr>
+    <tr>
+      <th>dilation_rate</th>
+      <td><p>Dialation rate.</p></td>
     </tr>
     <tr>
       <th>activation</th>

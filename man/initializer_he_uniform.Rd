@@ -11,7 +11,7 @@ initializer_he_uniform(seed = NULL)
 }
 \description{
 It draws samples from a uniform distribution within \code{-limit, limit} where
-\code{limit`` is}sqrt(6 / fan_in)\code{where}fan_in` is the number of input units in the
+\code{limit`` is }sqrt(6 / fan_in)\code{where }fan_in` is the number of input units in the
 weight tensor.
 }
 \section{References}{

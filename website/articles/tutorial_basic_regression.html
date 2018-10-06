@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -257,7 +257,7 @@
 <a class="sourceLine" id="cb13-6" data-line-number="6"><span class="st">    </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">64</span>, <span class="dt">activation =</span> <span class="st">"relu"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-7" data-line-number="7"><span class="st">    </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb13-8" data-line-number="8">  </a>
-<a class="sourceLine" id="cb13-9" data-line-number="9">  model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">  model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb13-10" data-line-number="10">    <span class="dt">loss =</span> <span class="st">"mse"</span>,</a>
 <a class="sourceLine" id="cb13-11" data-line-number="11">    <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(),</a>
 <a class="sourceLine" id="cb13-12" data-line-number="12">    <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">"mean_absolute_error"</span>)</a>
@@ -297,7 +297,7 @@ ________________________________________________________________________________
 <a class="sourceLine" id="cb15-9" data-line-number="9">epochs &lt;-<span class="st"> </span><span class="dv">500</span></a>
 <a class="sourceLine" id="cb15-10" data-line-number="10"></a>
 <a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co"># Fit the model and store training stats</span></a>
-<a class="sourceLine" id="cb15-12" data-line-number="12">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb15-12" data-line-number="12">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb15-13" data-line-number="13">  train_data,</a>
 <a class="sourceLine" id="cb15-14" data-line-number="14">  train_labels,</a>
 <a class="sourceLine" id="cb15-15" data-line-number="15">  <span class="dt">epochs =</span> epochs,</a>
@@ -316,7 +316,7 @@ ________________________________________________________________________________
 <a class="sourceLine" id="cb17-2" data-line-number="2">early_stop &lt;-<span class="st"> </span><span class="kw"><a href="../reference/callback_early_stopping.html">callback_early_stopping</a></span>(<span class="dt">monitor =</span> <span class="st">"val_loss"</span>, <span class="dt">patience =</span> <span class="dv">20</span>)</a>
 <a class="sourceLine" id="cb17-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb17-4" data-line-number="4">model &lt;-<span class="st"> </span><span class="kw">build_model</span>()</a>
-<a class="sourceLine" id="cb17-5" data-line-number="5">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb17-6" data-line-number="6">  train_data,</a>
 <a class="sourceLine" id="cb17-7" data-line-number="7">  train_labels,</a>
 <a class="sourceLine" id="cb17-8" data-line-number="8">  <span class="dt">epochs =</span> epochs,</a>

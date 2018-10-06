@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -264,10 +264,10 @@
 <a class="sourceLine" id="cb3-22" data-line-number="22">                      <span class="dt">outputs =</span> decoder_outputs )</a>
 <a class="sourceLine" id="cb3-23" data-line-number="23"></a>
 <a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">## Compile model</span></a>
-<a class="sourceLine" id="cb3-25" data-line-number="25">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(<span class="dt">optimizer=</span><span class="st">'rmsprop'</span>, <span class="dt">loss=</span><span class="st">'categorical_crossentropy'</span>)</a>
+<a class="sourceLine" id="cb3-25" data-line-number="25">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(<span class="dt">optimizer=</span><span class="st">'rmsprop'</span>, <span class="dt">loss=</span><span class="st">'categorical_crossentropy'</span>)</a>
 <a class="sourceLine" id="cb3-26" data-line-number="26"></a>
 <a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">## Run model</span></a>
-<a class="sourceLine" id="cb3-28" data-line-number="28">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>( <span class="kw">list</span>(encoder_input_data, decoder_input_data), decoder_target_data,</a>
+<a class="sourceLine" id="cb3-28" data-line-number="28">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>( <span class="kw">list</span>(encoder_input_data, decoder_input_data), decoder_target_data,</a>
 <a class="sourceLine" id="cb3-29" data-line-number="29">               <span class="dt">batch_size=</span>batch_size,</a>
 <a class="sourceLine" id="cb3-30" data-line-number="30">               <span class="dt">epochs=</span>epochs,</a>
 <a class="sourceLine" id="cb3-31" data-line-number="31">               <span class="dt">validation_split=</span><span class="fl">0.2</span>)</a>

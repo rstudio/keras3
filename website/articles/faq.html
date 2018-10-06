@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -210,14 +210,14 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Replicates `model` on 8 GPUs.</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co"># This assumes that your machine has 8 available GPUs.</span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">parallel_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/multi_gpu_model.html">multi_gpu_model</a></span>(model, <span class="dt">gpus=</span><span class="dv">8</span>)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">parallel_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">parallel_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="dt">loss =</span> <span class="st">"categorical_crossentropy"</span>,</a>
 <a class="sourceLine" id="cb3-6" data-line-number="6">  <span class="dt">optimizer =</span> <span class="st">"rmsprop"</span></a>
 <a class="sourceLine" id="cb3-7" data-line-number="7">)</a>
 <a class="sourceLine" id="cb3-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co"># This `fit` call will be distributed on 8 GPUs.</span></a>
 <a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co"># Since the batch size is 256, each GPU will process 32 samples.</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11">parallel_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(x, y, <span class="dt">epochs =</span> <span class="dv">20</span>, <span class="dt">batch_size =</span> <span class="dv">256</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb3-11" data-line-number="11">parallel_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(x, y, <span class="dt">epochs =</span> <span class="dv">20</span>, <span class="dt">batch_size =</span> <span class="dv">256</span>)</a></code></pre></div>
 </div>
 <div id="device-parallelism" class="section level3">
 <h3 class="hasAnchor">
@@ -439,7 +439,7 @@
 <a href="#how-can-i-interrupt-training-when-the-validation-loss-isnt-decreasing-anymore" class="anchor"></a>How can I interrupt training when the validation loss isn’t decreasing anymore?</h2>
 <p>You can use an early stopping callback:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">early_stopping &lt;-<span class="st"> </span><span class="kw"><a href="../reference/callback_early_stopping.html">callback_early_stopping</a></span>(<span class="dt">monitor =</span> <span class="st">'val_loss'</span>, <span class="dt">patience =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(X, y, <span class="dt">validation_split =</span> <span class="fl">0.2</span>, <span class="dt">callbacks =</span> <span class="kw">c</span>(early_stopping))</a></code></pre></div>
+<a class="sourceLine" id="cb17-2" data-line-number="2">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(X, y, <span class="dt">validation_split =</span> <span class="fl">0.2</span>, <span class="dt">callbacks =</span> <span class="kw">c</span>(early_stopping))</a></code></pre></div>
 <p>Find out more in the <a href="training_callbacks.html">callbacks documentation</a>.</p>
 </div>
 <div id="how-is-the-validation-split-computed" class="section level2">
@@ -458,7 +458,7 @@
 <h2 class="hasAnchor">
 <a href="#how-can-i-record-the-training-validation-loss-accuracy-at-each-epoch" class="anchor"></a>How can I record the training / validation loss / accuracy at each epoch?</h2>
 <p>The <code>model.fit</code> method returns an <code>History</code> callback, which has a <code>history</code> attribute containing the lists of successive losses and other metrics.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">hist &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(X, y, <span class="dt">validation_split=</span><span class="fl">0.2</span>)</a>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">hist &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(X, y, <span class="dt">validation_split=</span><span class="fl">0.2</span>)</a>
 <a class="sourceLine" id="cb18-2" data-line-number="2">hist<span class="op">$</span>history</a></code></pre></div>
 </div>
 <div id="how-can-i-freeze-keras-layers" class="section level2">
@@ -467,7 +467,7 @@
 <p>To “freeze” a layer means to exclude it from training, i.e. its weights will never be updated. This is useful in the context of fine-tuning a model, or using fixed embeddings for a text input.</p>
 <p>You can pass a <code>trainable</code> argument (boolean) to a layer constructor to set a layer to be non-trainable:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">frozen_layer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">trainable =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p>Additionally, you can set the <code>trainable</code> property of a layer to <code>TRUE</code> or <code>FALSE</code> after instantiation. For this to take effect, you will need to call <code><a href="../reference/compile.html">compile()</a></code> on your model after modifying the <code>trainable</code> property. Here’s an example:</p>
+<p>Additionally, you can set the <code>trainable</code> property of a layer to <code>TRUE</code> or <code>FALSE</code> after instantiation. For this to take effect, you will need to call <code><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile()</a></code> on your model after modifying the <code>trainable</code> property. Here’s an example:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">32</span>))</a>
 <a class="sourceLine" id="cb20-2" data-line-number="2">layer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">32</span>)</a>
 <a class="sourceLine" id="cb20-3" data-line-number="3">layer<span class="op">$</span>trainable &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
@@ -475,16 +475,16 @@
 <a class="sourceLine" id="cb20-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb20-6" data-line-number="6">frozen_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(x, y)</a>
 <a class="sourceLine" id="cb20-7" data-line-number="7"><span class="co"># in the model below, the weights of `layer` will not be updated during training</span></a>
-<a class="sourceLine" id="cb20-8" data-line-number="8">frozen_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>, <span class="dt">loss =</span> <span class="st">'mse'</span>)</a>
+<a class="sourceLine" id="cb20-8" data-line-number="8">frozen_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>, <span class="dt">loss =</span> <span class="st">'mse'</span>)</a>
 <a class="sourceLine" id="cb20-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb20-10" data-line-number="10">layer<span class="op">$</span>trainable &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
 <a class="sourceLine" id="cb20-11" data-line-number="11">trainable_model &lt;-<span class="st"> </span><span class="kw"><a href="../reference/keras_model.html">keras_model</a></span>(x, y)</a>
 <a class="sourceLine" id="cb20-12" data-line-number="12"><span class="co"># with this model the weights of the layer will be updated during training</span></a>
 <a class="sourceLine" id="cb20-13" data-line-number="13"><span class="co"># (which will also affect the above model since it uses the same layer instance)</span></a>
-<a class="sourceLine" id="cb20-14" data-line-number="14">trainable_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>, <span class="dt">loss =</span> <span class="st">'mse'</span>)</a>
+<a class="sourceLine" id="cb20-14" data-line-number="14">trainable_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(<span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>, <span class="dt">loss =</span> <span class="st">'mse'</span>)</a>
 <a class="sourceLine" id="cb20-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb20-16" data-line-number="16">frozen_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels)  <span class="co"># this does NOT update the weights of `layer`</span></a>
-<a class="sourceLine" id="cb20-17" data-line-number="17">trainable_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels)  <span class="co"># this updates the weights of `layer`</span></a></code></pre></div>
+<a class="sourceLine" id="cb20-16" data-line-number="16">frozen_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(data, labels)  <span class="co"># this does NOT update the weights of `layer`</span></a>
+<a class="sourceLine" id="cb20-17" data-line-number="17">trainable_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(data, labels)  <span class="co"># this updates the weights of `layer`</span></a></code></pre></div>
 <p>Finally, you can freeze or unfreeze the weights for an entire model (or a range of layers within the model) using the <code><a href="../reference/freeze_weights.html">freeze_weights()</a></code> and <code><a href="../reference/freeze_weights.html">unfreeze_weights()</a></code> functions. For example:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co"># instantiate a VGG16 model</span></a>
 <a class="sourceLine" id="cb21-2" data-line-number="2">conv_base &lt;-<span class="st"> </span><span class="kw"><a href="../reference/application_vgg.html">application_vgg16</a></span>(</a>
@@ -504,7 +504,7 @@
 <a class="sourceLine" id="cb21-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">"sigmoid"</span>)</a>
 <a class="sourceLine" id="cb21-17" data-line-number="17"></a>
 <a class="sourceLine" id="cb21-18" data-line-number="18"><span class="co"># compile</span></a>
-<a class="sourceLine" id="cb21-19" data-line-number="19">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb21-19" data-line-number="19">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb21-20" data-line-number="20">  <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span>,</a>
 <a class="sourceLine" id="cb21-21" data-line-number="21">  <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="dt">lr =</span> <span class="fl">2e-5</span>),</a>
 <a class="sourceLine" id="cb21-22" data-line-number="22">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">"accuracy"</span>)</a>
@@ -514,7 +514,7 @@
 <a class="sourceLine" id="cb21-26" data-line-number="26"><span class="kw"><a href="../reference/freeze_weights.html">unfreeze_weights</a></span>(conv_base, <span class="dt">from =</span> <span class="st">"block5_conv1"</span>)</a>
 <a class="sourceLine" id="cb21-27" data-line-number="27"></a>
 <a class="sourceLine" id="cb21-28" data-line-number="28"><span class="co"># compile again since we froze or unfroze layers</span></a>
-<a class="sourceLine" id="cb21-29" data-line-number="29">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb21-29" data-line-number="29">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb21-30" data-line-number="30">  <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span>,</a>
 <a class="sourceLine" id="cb21-31" data-line-number="31">  <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="dt">lr =</span> <span class="fl">2e-5</span>),</a>
 <a class="sourceLine" id="cb21-32" data-line-number="32">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">"accuracy"</span>)</a>
@@ -536,7 +536,7 @@
 <li>specify <code>shuffle=FALSE</code> when calling fit().</li>
 </ul>
 <p>To reset the states accumulated in either a single layer or an entire model use the <code><a href="../reference/reset_states.html">reset_states()</a></code> function.</p>
-<p>Notes that the methods <code>predict()</code>, <code><a href="../reference/fit.html">fit()</a></code>, <code><a href="../reference/train_on_batch.html">train_on_batch()</a></code>, <code><a href="../reference/predict_proba.html">predict_classes()</a></code>, etc. will <em>all</em> update the states of the stateful layers in a model. This allows you to do not only stateful training, but also stateful prediction.</p>
+<p>Notes that the methods <code>predict()</code>, <code><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code>, <code><a href="../reference/train_on_batch.html">train_on_batch()</a></code>, <code><a href="../reference/predict_proba.html">predict_classes()</a></code>, etc. will <em>all</em> update the states of the stateful layers in a model. This allows you to do not only stateful training, but also stateful prediction.</p>
 </div>
 <div id="how-can-i-remove-a-layer-from-a-sequential-model" class="section level2">
 <h2 class="hasAnchor">

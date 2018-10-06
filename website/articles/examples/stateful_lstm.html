@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -208,11 +208,11 @@
 <a class="sourceLine" id="cb1-44" data-line-number="44">             <span class="dt">return_sequences =</span> <span class="ot">TRUE</span>, <span class="dt">stateful =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1-45" data-line-number="45"><span class="st">  </span><span class="kw"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> <span class="dv">50</span>, <span class="dt">return_sequences =</span> <span class="ot">FALSE</span>, <span class="dt">stateful =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1-46" data-line-number="46"><span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb1-47" data-line-number="47">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(<span class="dt">loss =</span> <span class="st">'mse'</span>, <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>)</a>
+<a class="sourceLine" id="cb1-47" data-line-number="47">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(<span class="dt">loss =</span> <span class="st">'mse'</span>, <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>)</a>
 <a class="sourceLine" id="cb1-48" data-line-number="48"></a>
 <a class="sourceLine" id="cb1-49" data-line-number="49"><span class="kw">cat</span>(<span class="st">'Training</span><span class="ch">\n</span><span class="st">'</span>)</a>
 <a class="sourceLine" id="cb1-50" data-line-number="50"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>epochs) {</a>
-<a class="sourceLine" id="cb1-51" data-line-number="51">  model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>(cos, expected_output, <span class="dt">batch_size =</span> batch_size,</a>
+<a class="sourceLine" id="cb1-51" data-line-number="51">  model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(cos, expected_output, <span class="dt">batch_size =</span> batch_size,</a>
 <a class="sourceLine" id="cb1-52" data-line-number="52">                <span class="dt">epochs =</span> <span class="dv">1</span>, <span class="dt">verbose =</span> <span class="dv">1</span>, <span class="dt">shuffle =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb1-53" data-line-number="53">            </a>
 <a class="sourceLine" id="cb1-54" data-line-number="54">  model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/reset_states.html">reset_states</a></span>()</a>

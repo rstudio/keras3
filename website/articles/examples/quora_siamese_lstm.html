@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -223,7 +223,7 @@
 <a class="sourceLine" id="cb1-57" data-line-number="57"><span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">"sigmoid"</span>)</a>
 <a class="sourceLine" id="cb1-58" data-line-number="58"></a>
 <a class="sourceLine" id="cb1-59" data-line-number="59">model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="kw">list</span>(input1, input2), out)</a>
-<a class="sourceLine" id="cb1-60" data-line-number="60">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb1-60" data-line-number="60">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb1-61" data-line-number="61">  <span class="dt">optimizer =</span> <span class="st">"adam"</span>, </a>
 <a class="sourceLine" id="cb1-62" data-line-number="62">  <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span>, </a>
 <a class="sourceLine" id="cb1-63" data-line-number="63">  <span class="dt">metrics =</span> <span class="kw">list</span>(</a>
@@ -237,7 +237,7 @@
 <a class="sourceLine" id="cb1-71" data-line-number="71">val_sample &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="kw">nrow</span>(question1), <span class="dt">size =</span> <span class="fl">0.1</span><span class="op">*</span><span class="kw">nrow</span>(question1))</a>
 <a class="sourceLine" id="cb1-72" data-line-number="72"></a>
 <a class="sourceLine" id="cb1-73" data-line-number="73">model <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-74" data-line-number="74"><span class="st">  </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb1-74" data-line-number="74"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb1-75" data-line-number="75">    <span class="kw">list</span>(question1[<span class="op">-</span>val_sample,], question2[<span class="op">-</span>val_sample,]),</a>
 <a class="sourceLine" id="cb1-76" data-line-number="76">    df<span class="op">$</span>is_duplicate[<span class="op">-</span>val_sample], </a>
 <a class="sourceLine" id="cb1-77" data-line-number="77">    <span class="dt">batch_size =</span> <span class="dv">128</span>, </a>

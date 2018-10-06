@@ -16,7 +16,7 @@ layer_cropping_2d(object, cropping = list(c(0L, 0L), c(0L, 0L)),
 \item If int: the same symmetric cropping is applied to width and height.
 \item If list of 2 ints: interpreted as two different symmetric cropping values for
 height and width: \code{(symmetric_height_crop, symmetric_width_crop)}.
-\item If list of 2 lists of 2 ints: interpreted as \code{((top_crop, bottom_crop), (left_crop, right_crop))}
+\item If list of 2 lists of 2 ints: interpreted as \code{((top_crop, bottom_crop), (left_crop,   right_crop))}
 }}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or

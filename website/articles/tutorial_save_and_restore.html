@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -196,7 +196,7 @@
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="st">    </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">512</span>, <span class="dt">activation =</span> <span class="st">"relu"</span>, <span class="dt">input_shape =</span> <span class="dv">784</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="st">    </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="fl">0.2</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="st">    </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">"softmax"</span>)</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">  model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb2-8" data-line-number="8">    <span class="dt">optimizer =</span> <span class="st">"adam"</span>,</a>
 <a class="sourceLine" id="cb2-9" data-line-number="9">    <span class="dt">loss =</span> <span class="st">"sparse_categorical_crossentropy"</span>,</a>
 <a class="sourceLine" id="cb2-10" data-line-number="10">    <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">"accuracy"</span>)</a>
@@ -226,7 +226,7 @@ ________________________________________________________________________________
 <p>The resulting file contains the weight values, the model’s configuration, and even the optimizer’s configuration. This allows you to save a model and resume training later — from the exact same state — without access to the original code.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">model &lt;-<span class="st"> </span><span class="kw">create_model</span>()</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(train_images, train_labels, <span class="dt">epochs =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(train_images, train_labels, <span class="dt">epochs =</span> <span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb4-5" data-line-number="5">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/save_model_hdf5.html">save_model_hdf5</a></span>(<span class="st">"my_model.h5"</span>)</a></code></pre></div>
 <p>If you only wanted to save the weights, you could replace that last line by</p>
@@ -275,7 +275,7 @@ ________________________________________________________________________________
 <a class="sourceLine" id="cb8-11" data-line-number="11"></a>
 <a class="sourceLine" id="cb8-12" data-line-number="12">model &lt;-<span class="st"> </span><span class="kw">create_model</span>()</a>
 <a class="sourceLine" id="cb8-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb8-14" data-line-number="14">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb8-15" data-line-number="15">  train_images,</a>
 <a class="sourceLine" id="cb8-16" data-line-number="16">  train_labels,</a>
 <a class="sourceLine" id="cb8-17" data-line-number="17">  <span class="dt">epochs =</span> <span class="dv">10</span>, </a>
@@ -325,7 +325,7 @@ Test accuracy: 0.088 </code></pre>
 <a class="sourceLine" id="cb15-13" data-line-number="13"></a>
 <a class="sourceLine" id="cb15-14" data-line-number="14">model &lt;-<span class="st"> </span><span class="kw">create_model</span>()</a>
 <a class="sourceLine" id="cb15-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb15-16" data-line-number="16">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb15-16" data-line-number="16">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb15-17" data-line-number="17">  train_images,</a>
 <a class="sourceLine" id="cb15-18" data-line-number="18">  train_labels,</a>
 <a class="sourceLine" id="cb15-19" data-line-number="19">  <span class="dt">epochs =</span> <span class="dv">10</span>, </a>
@@ -351,7 +351,7 @@ Test accuracy: 0.088 </code></pre>
 <a class="sourceLine" id="cb17-13" data-line-number="13"></a>
 <a class="sourceLine" id="cb17-14" data-line-number="14">model &lt;-<span class="st"> </span><span class="kw">create_model</span>()</a>
 <a class="sourceLine" id="cb17-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb17-16" data-line-number="16">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb17-16" data-line-number="16">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb17-17" data-line-number="17">  train_images,</a>
 <a class="sourceLine" id="cb17-18" data-line-number="18">  train_labels,</a>
 <a class="sourceLine" id="cb17-19" data-line-number="19">  <span class="dt">epochs =</span> <span class="dv">10</span>, </a>

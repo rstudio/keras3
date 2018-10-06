@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -258,7 +258,7 @@
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>Metric functions are to be supplied in the <code>metrics</code> parameter of the
-<code><a href='compile.html'>compile()</a></code> function.</p>
+<code><a href='compile.keras.engine.training.Model.html'>compile.keras.engine.training.Model()</a></code> function.</p>
     
     <h2 class="hasAnchor" id="custom-metrics"><a class="anchor" href="#custom-metrics"></a>Custom Metrics</h2>
 
@@ -294,7 +294,7 @@ See below for an example.</p>
   <span class='fu'><a href='k_mean.html'>k_mean</a></span>(<span class='no'>y_pred</span>)
 })
 
-<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='compile.html'>compile</a></span>(
+<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/generics/topics/compile'>compile</a></span>(
   <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span>(),
   <span class='kw'>loss</span> <span class='kw'>=</span> <span class='no'>loss_binary_crossentropy</span>,
   <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'accuracy'</span>, <span class='no'>metric_mean_pred</span>)
@@ -306,7 +306,7 @@ See below for an example.</p>
     <span class='fu'>metric_top_k_categorical_accuracy</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>3</span>)
   })
 
-<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='compile.html'>compile</a></span>(
+<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/generics/topics/compile'>compile</a></span>(
   <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>'categorical_crossentropy'</span>,
   <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span>(),
   <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='no'>metric_top_3_categorical_accuracy</span>

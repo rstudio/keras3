@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -198,7 +198,7 @@
 
     <pre class="usage"><span class='fu'>callback_early_stopping</span>(<span class='kw'>monitor</span> <span class='kw'>=</span> <span class='st'>"val_loss"</span>, <span class='kw'>min_delta</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>patience</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"auto"</span>, <span class='st'>"min"</span>, <span class='st'>"max"</span>),
-  <span class='kw'>baseline</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>baseline</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>restore_best_weights</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -235,6 +235,13 @@ quantity.</p></td>
       <td><p>Baseline value for the monitored quantity to reach.
 Training will stop if the model doesn't show improvement
 over the baseline.</p></td>
+    </tr>
+    <tr>
+      <th>restore_best_weights</th>
+      <td><p>Whether to restore model weights from
+the epoch with the best value of the monitored quantity.
+If <code>FALSE</code>, the model weights obtained at the last step of
+training are used.</p></td>
     </tr>
     </table>
     

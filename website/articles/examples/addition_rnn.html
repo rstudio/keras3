@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -322,7 +322,7 @@ Output: “596”</p>
 <a class="sourceLine" id="cb1-150" data-line-number="150"><span class="st">  </span><span class="kw"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"softmax"</span>)</a>
 <a class="sourceLine" id="cb1-151" data-line-number="151"></a>
 <a class="sourceLine" id="cb1-152" data-line-number="152"><span class="co"># Compiling the model</span></a>
-<a class="sourceLine" id="cb1-153" data-line-number="153">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb1-153" data-line-number="153">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb1-154" data-line-number="154">  <span class="dt">loss =</span> <span class="st">"categorical_crossentropy"</span>, </a>
 <a class="sourceLine" id="cb1-155" data-line-number="155">  <span class="dt">optimizer =</span> <span class="st">"adam"</span>, </a>
 <a class="sourceLine" id="cb1-156" data-line-number="156">  <span class="dt">metrics =</span> <span class="st">"accuracy"</span></a>
@@ -332,7 +332,7 @@ Output: “596”</p>
 <a class="sourceLine" id="cb1-160" data-line-number="160"><span class="kw">summary</span>(model)</a>
 <a class="sourceLine" id="cb1-161" data-line-number="161"></a>
 <a class="sourceLine" id="cb1-162" data-line-number="162"><span class="co"># Fitting loop</span></a>
-<a class="sourceLine" id="cb1-163" data-line-number="163">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>( </a>
+<a class="sourceLine" id="cb1-163" data-line-number="163">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>( </a>
 <a class="sourceLine" id="cb1-164" data-line-number="164">  <span class="dt">x =</span> x_train, </a>
 <a class="sourceLine" id="cb1-165" data-line-number="165">  <span class="dt">y =</span> y_train, </a>
 <a class="sourceLine" id="cb1-166" data-line-number="166">  <span class="dt">batch_size =</span> BATCH_SIZE, </a>

@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -247,7 +247,7 @@ freeze).</p>
   <span class='fu'><a href='layer_dense.html'>layer_dense</a></span>(<span class='kw'>units</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='st'>"sigmoid"</span>)
 
 <span class='co'># compile</span>
-<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='compile.html'>compile</a></span>(
+<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/generics/topics/compile'>compile</a></span>(
   <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>"binary_crossentropy"</span>,
   <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span>(<span class='kw'>lr</span> <span class='kw'>=</span> <span class='fl'>2e-5</span>),
   <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"accuracy"</span>)
@@ -257,7 +257,7 @@ freeze).</p>
 <span class='fu'>unfreeze_weights</span>(<span class='no'>conv_base</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"block5_conv1"</span>)
 
 <span class='co'># compile again since we froze or unfroze weights</span>
-<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='compile.html'>compile</a></span>(
+<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/generics/topics/compile'>compile</a></span>(
   <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>"binary_crossentropy"</span>,
   <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span>(<span class='kw'>lr</span> <span class='kw'>=</span> <span class='fl'>2e-5</span>),
   <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"accuracy"</span>)

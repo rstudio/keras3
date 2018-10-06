@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -260,11 +260,12 @@ by <code>multi_gpu_model</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other model functions: <code><a href='compile.html'>compile</a></code>,
+    <div class='dont-index'><p>Other model functions: <code><a href='compile.keras.engine.training.Model.html'>compile.keras.engine.training.Model</a></code>,
   <code><a href='evaluate.keras.engine.training.Model.html'>evaluate.keras.engine.training.Model</a></code>,
   <code><a href='evaluate_generator.html'>evaluate_generator</a></code>,
-  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='fit.html'>fit</a></code>,
-  <code><a href='get_config.html'>get_config</a></code>, <code><a href='get_layer.html'>get_layer</a></code>,
+  <code><a href='fit.keras.engine.training.Model.html'>fit.keras.engine.training.Model</a></code>,
+  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='get_config.html'>get_config</a></code>,
+  <code><a href='get_layer.html'>get_layer</a></code>,
   <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
   <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='pop_layer.html'>pop_layer</a></code>,
   <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
@@ -301,7 +302,7 @@ by <code>multi_gpu_model</code>.</p>
 <span class='co'># Replicates the model on 8 GPUs.</span>
 <span class='co'># This assumes that your machine has 8 available GPUs.</span>
 <span class='no'>parallel_model</span> <span class='kw'>&lt;-</span> <span class='fu'>multi_gpu_model</span>(<span class='no'>model</span>, <span class='kw'>gpus</span> <span class='kw'>=</span> <span class='fl'>8</span>)
-<span class='no'>parallel_model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='compile.html'>compile</a></span>(
+<span class='no'>parallel_model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/generics/topics/compile'>compile</a></span>(
   <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>"categorical_crossentropy"</span>,
   <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='st'>"rmsprop"</span>
 )
@@ -314,7 +315,7 @@ by <code>multi_gpu_model</code>.</p>
 
 <span class='co'># This `fit` call will be distributed on 8 GPUs.</span>
 <span class='co'># Since the batch size is 256, each GPU will process 32 samples.</span>
-<span class='no'>parallel_model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='fit.html'>fit</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>256</span>)
+<span class='no'>parallel_model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/generics/topics/fit'>fit</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>256</span>)
 
 <span class='co'># Save model via the template model (which shares the same weights):</span>
 <span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='save_model_hdf5.html'>save_model_hdf5</a></span>(<span class='st'>"my_model.h5"</span>)

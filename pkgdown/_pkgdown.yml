@@ -79,10 +79,10 @@ reference:
       - keras_model_custom
       - multi_gpu_model
       - summary.keras.engine.training.Model
-      - compile
-      - fit
+      - compile.keras.engine.training.Model
       - evaluate.keras.engine.training.Model
       - export_savedmodel.keras.engine.training.Model
+      - fit.keras.engine.training.Model
       - fit_generator
       - evaluate_generator
       - predict.keras.engine.training.Model

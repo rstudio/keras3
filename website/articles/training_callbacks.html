@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -161,7 +161,7 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>A callback is a set of functions to be applied at given stages of the training procedure. You can use callbacks to get a view on internal states and statistics of the model during training. You can pass a list of callbacks (as the keyword argument <code>callbacks</code>) to the <code><a href="../reference/fit.html">fit()</a></code> function. The relevant methods of the callbacks will then be called at each stage of the training.</p>
+<p>A callback is a set of functions to be applied at given stages of the training procedure. You can use callbacks to get a view on internal states and statistics of the model during training. You can pass a list of callbacks (as the keyword argument <code>callbacks</code>) to the <code><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code> function. The relevant methods of the callbacks will then be called at each stage of the training.</p>
 <p>For example:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(keras)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
@@ -178,14 +178,14 @@
 <a class="sourceLine" id="cb1-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dv">10</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'softmax'</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb1-17" data-line-number="17">    <span class="dt">loss=</span><span class="st">'binary_crossentropy'</span>,</a>
 <a class="sourceLine" id="cb1-18" data-line-number="18">    <span class="dt">optimizer =</span> <span class="kw"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span>(),</a>
 <a class="sourceLine" id="cb1-19" data-line-number="19">    <span class="dt">metrics=</span><span class="st">'accuracy'</span></a>
 <a class="sourceLine" id="cb1-20" data-line-number="20">  )</a>
 <a class="sourceLine" id="cb1-21" data-line-number="21">  </a>
 <a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co"># fit with callbacks</span></a>
-<a class="sourceLine" id="cb1-23" data-line-number="23">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(data, labels, <span class="dt">callbacks =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb1-23" data-line-number="23">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(data, labels, <span class="dt">callbacks =</span> <span class="kw">list</span>(</a>
 <a class="sourceLine" id="cb1-24" data-line-number="24">  <span class="kw"><a href="../reference/callback_model_checkpoint.html">callback_model_checkpoint</a></span>(<span class="st">"checkpoints.h5"</span>),</a>
 <a class="sourceLine" id="cb1-25" data-line-number="25">  <span class="kw"><a href="../reference/callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau</a></span>(<span class="dt">monitor =</span> <span class="st">"val_loss"</span>, <span class="dt">factor =</span> <span class="fl">0.1</span>)</a>
 <a class="sourceLine" id="cb1-26" data-line-number="26">))</a></code></pre></div>
@@ -314,14 +314,14 @@ Create a custom callback
 <a class="sourceLine" id="cb2-20" data-line-number="20">model <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb2-21" data-line-number="21"><span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">784</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb2-22" data-line-number="22"><span class="st">  </span><span class="kw"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="dt">activation =</span> <span class="st">'softmax'</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="st">  </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb2-24" data-line-number="24">    <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>, </a>
 <a class="sourceLine" id="cb2-25" data-line-number="25">    <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span></a>
 <a class="sourceLine" id="cb2-26" data-line-number="26">  )</a>
 <a class="sourceLine" id="cb2-27" data-line-number="27"></a>
 <a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co"># create history callback object and use it during training</span></a>
 <a class="sourceLine" id="cb2-29" data-line-number="29">history &lt;-<span class="st"> </span>LossHistory<span class="op">$</span><span class="kw">new</span>()</a>
-<a class="sourceLine" id="cb2-30" data-line-number="30">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb2-30" data-line-number="30">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb2-31" data-line-number="31">  X_train, Y_train,</a>
 <a class="sourceLine" id="cb2-32" data-line-number="32">  <span class="dt">batch_size=</span><span class="dv">128</span>, <span class="dt">epochs=</span><span class="dv">20</span>, <span class="dt">verbose=</span><span class="dv">0</span>,</a>
 <a class="sourceLine" id="cb2-33" data-line-number="33">  <span class="dt">callbacks=</span> <span class="kw">list</span>(history)</a>

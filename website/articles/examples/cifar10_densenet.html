@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -200,7 +200,7 @@
 <a class="sourceLine" id="cb1-33" data-line-number="33"></a>
 <a class="sourceLine" id="cb1-34" data-line-number="34">opt &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="dt">lr =</span> <span class="fl">0.1</span>, <span class="dt">momentum =</span> <span class="fl">0.9</span>, <span class="dt">nesterov =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb1-35" data-line-number="35"></a>
-<a class="sourceLine" id="cb1-36" data-line-number="36">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb1-36" data-line-number="36">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb1-37" data-line-number="37">  <span class="dt">optimizer =</span> opt,</a>
 <a class="sourceLine" id="cb1-38" data-line-number="38">  <span class="dt">loss =</span> <span class="st">"categorical_crossentropy"</span>,</a>
 <a class="sourceLine" id="cb1-39" data-line-number="39">  <span class="dt">metrics =</span> <span class="st">"accuracy"</span></a>
@@ -223,7 +223,7 @@
 <a class="sourceLine" id="cb1-56" data-line-number="56"></a>
 <a class="sourceLine" id="cb1-57" data-line-number="57">lr_reducer &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/callback_learning_rate_scheduler.html">callback_learning_rate_scheduler</a></span>(lr_schedule)</a>
 <a class="sourceLine" id="cb1-58" data-line-number="58"></a>
-<a class="sourceLine" id="cb1-59" data-line-number="59">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb1-59" data-line-number="59">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb1-60" data-line-number="60">  x_train, y_train, </a>
 <a class="sourceLine" id="cb1-61" data-line-number="61">  <span class="dt">batch_size =</span> batch_size, </a>
 <a class="sourceLine" id="cb1-62" data-line-number="62">  <span class="dt">epochs =</span> epochs, </a>

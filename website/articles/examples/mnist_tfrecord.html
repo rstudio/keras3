@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -253,7 +253,7 @@
 <a class="sourceLine" id="cb1-85" data-line-number="85"></a>
 <a class="sourceLine" id="cb1-86" data-line-number="86"><span class="co"># Pass the target tensor `y_train_batch` to `compile`</span></a>
 <a class="sourceLine" id="cb1-87" data-line-number="87"><span class="co"># via the `target_tensors` keyword argument:</span></a>
-<a class="sourceLine" id="cb1-88" data-line-number="88">train_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb1-88" data-line-number="88">train_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb1-89" data-line-number="89">  <span class="dt">optimizer =</span> <span class="kw"><a href="../../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="dt">lr =</span> <span class="fl">2e-3</span>, <span class="dt">decay =</span> <span class="fl">1e-5</span>),</a>
 <a class="sourceLine" id="cb1-90" data-line-number="90">  <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,</a>
 <a class="sourceLine" id="cb1-91" data-line-number="91">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>),</a>
@@ -266,7 +266,7 @@
 <a class="sourceLine" id="cb1-98" data-line-number="98">coord &lt;-<span class="st"> </span>tf<span class="op">$</span>train<span class="op">$</span><span class="kw">Coordinator</span>()</a>
 <a class="sourceLine" id="cb1-99" data-line-number="99">threads =<span class="st"> </span>tf<span class="op">$</span>train<span class="op">$</span><span class="kw">start_queue_runners</span>(sess, coord)</a>
 <a class="sourceLine" id="cb1-100" data-line-number="100"></a>
-<a class="sourceLine" id="cb1-101" data-line-number="101">train_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb1-101" data-line-number="101">train_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb1-102" data-line-number="102">  <span class="dt">epochs =</span> epochs,</a>
 <a class="sourceLine" id="cb1-103" data-line-number="103">  <span class="dt">steps_per_epoch =</span> steps_per_epoch</a>
 <a class="sourceLine" id="cb1-104" data-line-number="104">)</a>
@@ -287,7 +287,7 @@
 <a class="sourceLine" id="cb1-119" data-line-number="119">test_out &lt;-<span class="st"> </span><span class="kw">cnn_layers</span>(x_test_inp)</a>
 <a class="sourceLine" id="cb1-120" data-line-number="120">test_model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="dt">inputs =</span> x_test_inp, <span class="dt">outputs =</span> test_out)</a>
 <a class="sourceLine" id="cb1-121" data-line-number="121">test_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/save_model_weights_hdf5.html">load_model_weights_hdf5</a></span>(<span class="st">'saved_wt.h5'</span>)</a>
-<a class="sourceLine" id="cb1-122" data-line-number="122">test_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb1-122" data-line-number="122">test_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb1-123" data-line-number="123">  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>, </a>
 <a class="sourceLine" id="cb1-124" data-line-number="124">  <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>, </a>
 <a class="sourceLine" id="cb1-125" data-line-number="125">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)</a>

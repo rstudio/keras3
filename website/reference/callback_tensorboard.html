@@ -67,7 +67,7 @@ histograms for the different layers in your model." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -204,7 +204,7 @@ histograms for the different layers in your model.</p>
   <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>write_graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>write_grads</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>write_images</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>embeddings_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>embeddings_layer_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>embeddings_metadata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>embeddings_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>embeddings_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>update_freq</span> <span class='kw'>=</span> <span class='st'>"epoch"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -264,6 +264,15 @@ for all embedding layers, string can be passed.</p></td>
       <td><p>Data to be embedded at layers specified in
 <code>embeddings_layer_names</code>. Array (if the model has a single input) or list
 of arrays (if the model has multiple inputs). Learn <a href='https://www.tensorflow.org/programmers_guide/embedding'>more about embeddings</a></p></td>
+    </tr>
+    <tr>
+      <th>update_freq</th>
+      <td><p><code>'batch'</code> or <code>'epoch'</code> or integer. When using <code>'batch'</code>, writes
+the losses and metrics to TensorBoard after each batch. The same
+applies for <code>'epoch'</code>. If using an integer, let's say <code>10000</code>,
+the callback will write the metrics and losses to TensorBoard every
+10000 samples. Note that writing too frequently to TensorBoard
+can slow down your training.</p></td>
     </tr>
     </table>
     

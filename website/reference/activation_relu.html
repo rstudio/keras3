@@ -66,7 +66,7 @@ through the activation argument supported by all forward layers." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -198,7 +198,7 @@ through the activation argument supported by all forward layers.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>activation_relu</span>(<span class='no'>x</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>max_value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>activation_relu</span>(<span class='no'>x</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>max_value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0</span>)
 
 <span class='fu'>activation_elu</span>(<span class='no'>x</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 
@@ -216,7 +216,9 @@ through the activation argument supported by all forward layers.</p>
 
 <span class='fu'>activation_softsign</span>(<span class='no'>x</span>)
 
-<span class='fu'>activation_tanh</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>activation_tanh</span>(<span class='no'>x</span>)
+
+<span class='fu'>activation_exponential</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -232,6 +234,10 @@ through the activation argument supported by all forward layers.</p>
     <tr>
       <th>max_value</th>
       <td><p>Max value</p></td>
+    </tr>
+    <tr>
+      <th>threshold</th>
+      <td><p>Threshold value for thresholded activation.</p></td>
     </tr>
     <tr>
       <th>axis</th>

@@ -59,7 +59,7 @@ can only be used as the first layer in a model.
 }
 
 \section{Output shape}{
- 3D tensor with shape: \code{(batch_size, sequence_length, output_dim)}.
+ 3D tensor with shape: \code{(batch_size, sequence_length,  output_dim)}.
 }
 
 \section{References}{

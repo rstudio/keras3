@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -216,7 +216,7 @@
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">16</span>, <span class="dt">activation =</span> <span class="st">"relu"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">"sigmoid"</span>)</a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">baseline_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">baseline_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb5-8" data-line-number="8">  <span class="dt">optimizer =</span> <span class="st">"adam"</span>,</a>
 <a class="sourceLine" id="cb5-9" data-line-number="9">  <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span>,</a>
 <a class="sourceLine" id="cb5-10" data-line-number="10">  <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">"accuracy"</span>)</a>
@@ -235,7 +235,7 @@ Total params: 160,305
 Trainable params: 160,305
 Non-trainable params: 0
 _____________________________________________________________________________________</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">baseline_history &lt;-<span class="st"> </span>baseline_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">baseline_history &lt;-<span class="st"> </span>baseline_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">  train_data,</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">  train_labels,</a>
 <a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="dt">epochs =</span> <span class="dv">20</span>,</a>
@@ -254,7 +254,7 @@ ________________________________________________________________________________
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">4</span>, <span class="dt">activation =</span> <span class="st">"relu"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">"sigmoid"</span>)</a>
 <a class="sourceLine" id="cb8-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">smaller_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">smaller_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb8-8" data-line-number="8">  <span class="dt">optimizer =</span> <span class="st">"adam"</span>,</a>
 <a class="sourceLine" id="cb8-9" data-line-number="9">  <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span>,</a>
 <a class="sourceLine" id="cb8-10" data-line-number="10">  <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">"accuracy"</span>)</a>
@@ -274,7 +274,7 @@ Trainable params: 40,029
 Non-trainable params: 0
 _____________________________________________________________________________________</code></pre>
 <p>And train the model using the same data:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">smaller_history &lt;-<span class="st"> </span>smaller_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">smaller_history &lt;-<span class="st"> </span>smaller_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">  train_data,</a>
 <a class="sourceLine" id="cb10-3" data-line-number="3">  train_labels,</a>
 <a class="sourceLine" id="cb10-4" data-line-number="4">  <span class="dt">epochs =</span> <span class="dv">20</span>,</a>
@@ -293,7 +293,7 @@ ________________________________________________________________________________
 <a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">512</span>, <span class="dt">activation =</span> <span class="st">"relu"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">"sigmoid"</span>)</a>
 <a class="sourceLine" id="cb11-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7">bigger_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">bigger_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb11-8" data-line-number="8">  <span class="dt">optimizer =</span> <span class="st">"adam"</span>,</a>
 <a class="sourceLine" id="cb11-9" data-line-number="9">  <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span>,</a>
 <a class="sourceLine" id="cb11-10" data-line-number="10">  <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">"accuracy"</span>)</a>
@@ -314,7 +314,7 @@ Trainable params: 5,383,681
 Non-trainable params: 0
 _____________________________________________________________________________________</code></pre>
 <p>And, again, train the model using the same data:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">bigger_history &lt;-<span class="st"> </span>bigger_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">bigger_history &lt;-<span class="st"> </span>bigger_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">  train_data,</a>
 <a class="sourceLine" id="cb13-3" data-line-number="3">  train_labels,</a>
 <a class="sourceLine" id="cb13-4" data-line-number="4">  <span class="dt">epochs =</span> <span class="dv">20</span>,</a>
@@ -367,13 +367,13 @@ ________________________________________________________________________________
 <a class="sourceLine" id="cb15-6" data-line-number="6">              <span class="dt">kernel_regularizer =</span> <span class="kw"><a href="../reference/regularizer_l1.html">regularizer_l2</a></span>(<span class="dt">l =</span> <span class="fl">0.001</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb15-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">"sigmoid"</span>)</a>
 <a class="sourceLine" id="cb15-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb15-9" data-line-number="9">l2_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb15-9" data-line-number="9">l2_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb15-10" data-line-number="10">  <span class="dt">optimizer =</span> <span class="st">"adam"</span>,</a>
 <a class="sourceLine" id="cb15-11" data-line-number="11">  <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span>,</a>
 <a class="sourceLine" id="cb15-12" data-line-number="12">  <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">"accuracy"</span>)</a>
 <a class="sourceLine" id="cb15-13" data-line-number="13">)</a>
 <a class="sourceLine" id="cb15-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb15-15" data-line-number="15">l2_history &lt;-<span class="st"> </span>l2_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb15-15" data-line-number="15">l2_history &lt;-<span class="st"> </span>l2_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb15-16" data-line-number="16">  train_data,</a>
 <a class="sourceLine" id="cb15-17" data-line-number="17">  train_labels,</a>
 <a class="sourceLine" id="cb15-18" data-line-number="18">  <span class="dt">epochs =</span> <span class="dv">20</span>,</a>
@@ -414,13 +414,13 @@ ________________________________________________________________________________
 <a class="sourceLine" id="cb17-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="fl">0.6</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb17-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> <span class="dv">1</span>, <span class="dt">activation =</span> <span class="st">"sigmoid"</span>)</a>
 <a class="sourceLine" id="cb17-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb17-9" data-line-number="9">dropout_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/compile.html">compile</a></span>(</a>
+<a class="sourceLine" id="cb17-9" data-line-number="9">dropout_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
 <a class="sourceLine" id="cb17-10" data-line-number="10">  <span class="dt">optimizer =</span> <span class="st">"adam"</span>,</a>
 <a class="sourceLine" id="cb17-11" data-line-number="11">  <span class="dt">loss =</span> <span class="st">"binary_crossentropy"</span>,</a>
 <a class="sourceLine" id="cb17-12" data-line-number="12">  <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">"accuracy"</span>)</a>
 <a class="sourceLine" id="cb17-13" data-line-number="13">)</a>
 <a class="sourceLine" id="cb17-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb17-15" data-line-number="15">dropout_history &lt;-<span class="st"> </span>dropout_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/fit.html">fit</a></span>(</a>
+<a class="sourceLine" id="cb17-15" data-line-number="15">dropout_history &lt;-<span class="st"> </span>dropout_model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
 <a class="sourceLine" id="cb17-16" data-line-number="16">  train_data,</a>
 <a class="sourceLine" id="cb17-17" data-line-number="17">  train_labels,</a>
 <a class="sourceLine" id="cb17-18" data-line-number="18">  <span class="dt">epochs =</span> <span class="dv">20</span>,</a>

@@ -71,7 +71,7 @@ kernels, or as an extreme version of an Inception block." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -209,9 +209,9 @@ kernels, or as an extreme version of an Inception block.</p>
     </div>
 
     <pre class="usage"><span class='fu'>layer_separable_conv_1d</span>(<span class='no'>object</span>, <span class='no'>filters</span>, <span class='no'>kernel_size</span>, <span class='kw'>strides</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"valid"</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dilation_rate</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>depth_multiplier</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>depthwise_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>,
+  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"valid"</span>, <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='st'>"channels_last"</span>,
+  <span class='kw'>dilation_rate</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>depth_multiplier</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>depthwise_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>,
   <span class='kw'>pointwise_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>, <span class='kw'>bias_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
   <span class='kw'>depthwise_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pointwise_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>bias_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>activity_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,

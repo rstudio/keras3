@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
       </span>
     </div>
 
@@ -194,9 +194,19 @@
 <ul>
 <li><p>Improve handling of <code><a href="../reference/timeseries_generator.html">timeseries_generator()</a></code> in calls to <code><a href="../reference/fit_generator.html">fit_generator()</a></code></p></li>
 <li><p>Add support for <code>input_shape</code> argument to <code><a href="../reference/layer_dropout.html">layer_dropout()</a></code></p></li>
-<li><p>Improve error message for data frames passed to <code><a href="../reference/fit.html">fit()</a></code>, etc.</p></li>
+<li><p>Improve error message for data frames passed to <code><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code>, etc.</p></li>
 <li><p>Use 1-based axis indices for <code><a href="../reference/k_gather.html">k_gather()</a></code></p></li>
 <li><p>Added <code>version</code> parameter to <code><a href="../reference/install_keras.html">install_keras()</a></code> for installing alternate/older versions</p></li>
+<li><p>Added <code><a href="../reference/activation_relu.html">activation_exponential()</a></code> function.</p></li>
+<li><p>Added <code>threshold</code> parameter to <code><a href="../reference/activation_relu.html">activation_relu()</a></code></p></li>
+<li><p>Added <code>restore_best_weights</code> parameter to <code><a href="../reference/callback_model_checkpoint.html">callback_model_checkpoint()</a></code></p></li>
+<li><p>Added <code>update_freq</code> parameter to <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code></p></li>
+<li><p>Added <code>negative_slope</code> and <code>threshold</code> parameters to <code><a href="../reference/layer_activation_relu.html">layer_activation_relu()</a></code></p></li>
+<li><p>Added <code>output_padding</code> and <code>dilation_rate</code> parameters to <code><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose()</a></code></p></li>
+<li><p>Added <code>output_padding</code> argument to <code><a href="../reference/layer_conv_3d_transpose.html">layer_conv_3d_transpose()</a></code></p></li>
+<li><p>Added <code>data_format</code> argument to <code><a href="../reference/layer_separable_conv_1d.html">layer_separable_conv_1d()</a></code>, <code><a href="../reference/layer_average_pooling_1d.html">layer_average_pooling_1d()</a></code>, <code><a href="../reference/layer_global_max_pooling_1d.html">layer_global_max_pooling_1d()</a></code>, and <code><a href="../reference/layer_global_average_pooling_1d.html">layer_global_average_pooling_1d()</a></code></p></li>
+<li><p>Added <code>interpolation</code> argument to <code><a href="../reference/layer_upsampling_1d.html">layer_upsampling_1d()</a></code> and <code><a href="../reference/layer_upsampling_2d.html">layer_upsampling_2d()</a></code></p></li>
+<li><p>Added <code>dtype</code> argument to <code><a href="../reference/to_categorical.html">to_categorical()</a></code></p></li>
 </ul>
 </div>
     <div id="keras-2-2-0-cran" class="section level2">
@@ -215,10 +225,10 @@
 <li><p>Add <code>data_format</code> argument to <code><a href="../reference/layer_conv_1d.html">layer_conv_1d()</a></code>.</p></li>
 <li><p>Add <code><a href="../reference/layer_activation_relu.html">layer_activation_relu()</a></code>, making the ReLU activation easier to configure while retaining easy serialization capabilities.</p></li>
 <li><p>Add <code>axis = -1</code> argument in backend crossentropy functions specifying the class prediction axis in the input tensor.</p></li>
-<li><p>Handle symbolic tensors and TF datasets in calls to <code><a href="../reference/fit.html">fit()</a></code>, <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate()</a></code>, and <code>predict()</code></p></li>
+<li><p>Handle symbolic tensors and TF datasets in calls to <code><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code>, <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate()</a></code>, and <code>predict()</code></p></li>
 <li><p>Add <code>embeddings_data</code> argument to <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code></p></li>
 <li><p>Support for defining custom Keras models (i.e. custom <code>call()</code> logic for forward pass)</p></li>
-<li><p>Handle named list of model output names in <code>metrics</code> argument of <code><a href="../reference/compile.html">compile()</a></code></p></li>
+<li><p>Handle named list of model output names in <code>metrics</code> argument of <code><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile()</a></code></p></li>
 <li><p>New <code><a href="../reference/metric_binary_accuracy.html">custom_metric()</a></code> function for defining custom metrics in R</p></li>
 <li><p>Provide typed wrapper for categorical custom metrics</p></li>
 <li><p>Provide access to Python layer within R custom layers</p></li>
@@ -226,7 +236,7 @@
 <li><p>Re-export <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/shape">shape()</a></code> function from tensorflow package</p></li>
 <li><p>Re-export <code><a href="http://www.rdocumentation.org/packages/reticulate/topics/tuple">tuple()</a></code> function from reticulate package</p></li>
 <li><p>Indexes for <code><a href="../reference/get_layer.html">get_layer()</a></code> are now 1-based (for consistency w/ <code><a href="../reference/freeze_weights.html">freeze_weights()</a></code>)</p></li>
-<li><p>Accept named list for <code>sample_weight</code> argument to <code><a href="../reference/fit.html">fit()</a></code></p></li>
+<li><p>Accept named list for <code>sample_weight</code> argument to <code><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code></p></li>
 </ul>
 </div>
     <div id="keras-2-1-6" class="section level2">
@@ -260,7 +270,7 @@
 <a href="#keras-2-1-4" class="anchor"></a>Keras 2.1.4</h2>
 <ul>
 <li><p>Added support for <code>remove_learning_phase</code> in <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/export_savedmodel">export_savedmodel()</a></code> to avoid removing learning phase.</p></li>
-<li><p>Normalize validation data to Keras array in <code><a href="../reference/fit.html">fit()</a></code> and <code><a href="../reference/fit_generator.html">fit_generator()</a></code></p></li>
+<li><p>Normalize validation data to Keras array in <code><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code> and <code><a href="../reference/fit_generator.html">fit_generator()</a></code></p></li>
 <li><p>Ensure that custom layers return a tuple from <code>compute_output_shape()</code></p></li>
 <li><p>Added Nasnet and Densenet pre-trained models</p></li>
 <li><p>New layers <code><a href="../reference/layer_activation_softmax.html">layer_activation_softmax()</a></code> and <code><a href="../reference/layer_separable_conv_1d.html">layer_separable_conv_1d()</a></code></p></li>
@@ -306,8 +316,8 @@
 <li><p>Import <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate()</a></code> generic from tensorflow package</p></li>
 <li><p>Handle <code>NULL</code> when converting R arrays to Keras friendly arrays</p></li>
 <li><p>Added <code>dataset_imbd_word_index()</code> function</p></li>
-<li><p>Ensure that <code>sample_weight</code> is passed to <code><a href="../reference/fit.html">fit()</a></code> as an array.</p></li>
-<li><p>Accept single function as <code>metrics</code> argument to <code><a href="../reference/compile.html">compile()</a></code></p></li>
+<li><p>Ensure that <code>sample_weight</code> is passed to <code><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code> as an array.</p></li>
+<li><p>Accept single function as <code>metrics</code> argument to <code><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile()</a></code></p></li>
 <li><p>Automatically cast <code>input_shape</code> argument to applications to integer</p></li>
 <li><p>Allow Keras models to be composable within model pipelines</p></li>
 <li><p>Added <code><a href="../reference/freeze_weights.html">freeze_weights()</a></code> and <code><a href="../reference/freeze_weights.html">unfreeze_weights()</a></code> functions.</p></li>
@@ -341,8 +351,8 @@
 <li><p>Add standard layer arguments (e.g. <code>name</code>, <code>trainable</code>, etc.) to merge layers</p></li>
 <li><p>Better support for training models from data tensors in TensorFlow (e.g. Datasets, TFRecords). Add a related example script.</p></li>
 <li><p>Add <code><a href="../reference/clone_model.html">clone_model()</a></code> function, enabling to construct a new model, given an existing model to use as a template. Works even in a TensorFlow graph different from that of the original model.</p></li>
-<li><p>Add <code>target_tensors</code> argument in <code><a href="../reference/compile.html">compile()</a></code>, enabling to use custom tensors or placeholders as model targets.</p></li>
-<li><p>Add <code>steps_per_epoch</code> argument in <code><a href="../reference/fit.html">fit()</a></code>, enabling to train a model from data tensors in a way that is consistent with training from arrays. Similarly, add <code>steps</code> argument in <code>predict()</code> and <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate()</a></code>.</p></li>
+<li><p>Add <code>target_tensors</code> argument in <code><a href="http://www.rdocumentation.org/packages/generics/topics/compile">compile()</a></code>, enabling to use custom tensors or placeholders as model targets.</p></li>
+<li><p>Add <code>steps_per_epoch</code> argument in <code><a href="http://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code>, enabling to train a model from data tensors in a way that is consistent with training from arrays. Similarly, add <code>steps</code> argument in <code>predict()</code> and <code><a href="http://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate()</a></code>.</p></li>
 <li><p>Add <code><a href="../reference/layer_subtract.html">layer_subtract()</a></code> layer function.</p></li>
 <li><p>Add <code>weighted_metrics</code> argument in compile to specify metric functions meant to take into account <code>sample_weight</code> or <code>class_weight</code>.</p></li>
 <li><p>Enable stateful RNNs with CNTK.</p></li>
