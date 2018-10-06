@@ -5,7 +5,7 @@
 #' @param y_pred Predictions (Tensor of the same shape as `y_true`)
 #' 
 #' @details Loss functions are to be supplied in the `loss` parameter of the 
-#' [compile()] function.
+#' [compile.keras.engine.training.Model()] function.
 #' 
 #' Loss functions can be specified either using the name of a built in loss
 #' function (e.g. 'loss = binary_crossentropy'), a reference to a built in loss
@@ -39,7 +39,7 @@
 #' intermediate value `cosh(y_pred - y_true)` is too large to be represented
 #' in the chosen precision.   
 #'   
-#' @seealso [compile()]   
+#' @seealso [compile.keras.engine.training.Model()]   
 #'   
 #' @export
 loss_mean_squared_error <- function(y_true, y_pred) {

@@ -90,7 +90,9 @@ tfruns::run_dir
 #' @export
 generics::fit
 
-
+#' @importFrom generics compile
+#' @export
+generics::compile
 
 
 

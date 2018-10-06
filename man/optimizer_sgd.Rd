@@ -24,7 +24,7 @@ value.}
 this value.}
 }
 \value{
-Optimizer for use with \code{\link{compile}}.
+Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
 }
 \description{
 Stochastic gradient descent optimizer with support for momentum, learning

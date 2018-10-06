@@ -20,6 +20,7 @@
 \alias{flag_boolean}
 \alias{run_dir}
 \alias{fit}
+\alias{compile}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -27,7 +28,7 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{generics}{\code{\link[generics]{fit}}}
+  \item{generics}{\code{\link[generics]{fit}}, \code{\link[generics]{compile}}}
 
   \item{reticulate}{\code{\link[reticulate]{use_python}}, \code{\link[reticulate]{use_virtualenv}}, \code{\link[reticulate]{use_condaenv}}, \code{\link[reticulate]{array_reshape}}, \code{\link[reticulate]{tuple}}}
 

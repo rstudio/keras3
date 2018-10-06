@@ -37,7 +37,7 @@ format.
 }
 
 \seealso{
-Other model functions: \code{\link{compile}},
+Other model functions: \code{\link{compile.keras.engine.training.Model}},
   \code{\link{evaluate.keras.engine.training.Model}},
   \code{\link{evaluate_generator}},
   \code{\link{fit.keras.engine.training.Model}},

@@ -31,7 +31,7 @@ Generates probability or class probability predictions for the input samples.
 The input samples are processed batch by batch.
 }
 \seealso{
-Other model functions: \code{\link{compile}},
+Other model functions: \code{\link{compile.keras.engine.training.Model}},
   \code{\link{evaluate.keras.engine.training.Model}},
   \code{\link{evaluate_generator}},
   \code{\link{fit.keras.engine.training.Model}},

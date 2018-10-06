@@ -3,7 +3,7 @@
 #'   
 #' @note   
 #' Metric functions are to be supplied in the `metrics` parameter of the 
-#'   [compile()] function.
+#'   [compile.keras.engine.training.Model()] function.
 #' 
 #' @param y_true True labels (tensor)
 #' @param y_pred Predictions (tensor of the same shape as y_true).

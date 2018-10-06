@@ -21,7 +21,7 @@ If not provided, defaults to \code{c(0.33, 0.55, 0.67, 1.0)}.}
 Print a summary of a Keras model
 }
 \seealso{
-Other model functions: \code{\link{compile}},
+Other model functions: \code{\link{compile.keras.engine.training.Model}},
   \code{\link{evaluate.keras.engine.training.Model}},
   \code{\link{evaluate_generator}},
   \code{\link{fit.keras.engine.training.Model}},

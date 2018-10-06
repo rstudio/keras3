@@ -47,7 +47,7 @@ outputs) and model metrics.
 Evaluate a Keras model
 }
 \seealso{
-Other model functions: \code{\link{compile}},
+Other model functions: \code{\link{compile.keras.engine.training.Model}},
   \code{\link{evaluate_generator}},
   \code{\link{fit.keras.engine.training.Model}},
   \code{\link{fit_generator}}, \code{\link{get_config}},

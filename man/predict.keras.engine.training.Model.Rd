@@ -29,7 +29,7 @@ Generates output predictions for the input samples, processing the samples in
 a batched way.
 }
 \seealso{
-Other model functions: \code{\link{compile}},
+Other model functions: \code{\link{compile.keras.engine.training.Model}},
   \code{\link{evaluate.keras.engine.training.Model}},
   \code{\link{evaluate_generator}},
   \code{\link{fit.keras.engine.training.Model}},

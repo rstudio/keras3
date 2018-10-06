@@ -33,7 +33,7 @@ only, not weights) or the \code{save_model_hdf5()} function to save the model
 configuration and weights to a file.
 }
 \seealso{
-Other model functions: \code{\link{compile}},
+Other model functions: \code{\link{compile.keras.engine.training.Model}},
   \code{\link{evaluate.keras.engine.training.Model}},
   \code{\link{evaluate_generator}},
   \code{\link{fit.keras.engine.training.Model}},

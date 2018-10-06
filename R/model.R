@@ -256,13 +256,14 @@ clone_model <- function(model, input_tensors = NULL) {
 #' @family model functions
 #'
 #' @export
-compile <- function(object, optimizer, loss, 
-                    metrics = NULL, 
-                    loss_weights = NULL,
-                    sample_weight_mode = NULL, 
-                    weighted_metrics = NULL,
-                    target_tensors = NULL,
-                    ...) {
+compile.keras.engine.training.Model <-
+  function(object, optimizer, loss, 
+           metrics = NULL, 
+           loss_weights = NULL,
+           sample_weight_mode = NULL, 
+           weighted_metrics = NULL,
+           target_tensors = NULL,
+           ...) {
   
   # give losses a name
   loss_name <- deparse(substitute(loss))
@@ -407,7 +408,7 @@ fit.keras.engine.training.Model <-
            validation_split=0.0, validation_data=NULL, shuffle=TRUE,
            class_weight=NULL, sample_weight=NULL, initial_epoch=0,
            steps_per_epoch=NULL, validation_steps=NULL, ...) {
-  
+    
   # defaults
   if (is.null(batch_size) && is.null(steps_per_epoch))
     batch_size <- 32L

@@ -97,7 +97,7 @@ during training.
 Trains the model for a fixed number of epochs (iterations on a dataset).
 }
 \seealso{
-Other model functions: \code{\link{compile}},
+Other model functions: \code{\link{compile.keras.engine.training.Model}},
   \code{\link{evaluate.keras.engine.training.Model}},
   \code{\link{evaluate_generator}},
   \code{\link{fit_generator}}, \code{\link{get_config}},

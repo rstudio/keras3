@@ -32,7 +32,7 @@ The generator should return the same kind of data as accepted by
 \code{test_on_batch()}.
 }
 \seealso{
-Other model functions: \code{\link{compile}},
+Other model functions: \code{\link{compile.keras.engine.training.Model}},
   \code{\link{evaluate.keras.engine.training.Model}},
   \code{\link{fit.keras.engine.training.Model}},
   \code{\link{fit_generator}}, \code{\link{get_config}},

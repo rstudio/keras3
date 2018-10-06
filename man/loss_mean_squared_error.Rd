@@ -55,7 +55,7 @@ Model loss functions
 }
 \details{
 Loss functions are to be supplied in the \code{loss} parameter of the
-\code{\link[=compile]{compile()}} function.
+\code{\link[=compile.keras.engine.training.Model]{compile.keras.engine.training.Model()}} function.
 
 Loss functions can be specified either using the name of a built in loss
 function (e.g. 'loss = binary_crossentropy'), a reference to a built in loss
@@ -95,5 +95,5 @@ in the chosen precision.
 }
 
 \seealso{
-\code{\link[=compile]{compile()}}
+\code{\link[=compile.keras.engine.training.Model]{compile.keras.engine.training.Model()}}
 }
