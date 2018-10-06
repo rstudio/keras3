@@ -10,7 +10,8 @@
   theme_bw = getOption("keras.plot.history.theme_bw", FALSE), ...)
 }
 \arguments{
-\item{x}{Training history object returned from \code{fit()}.}
+\item{x}{Training history object returned from
+\code{fit.keras.engine.training.Model()}.}
 
 \item{y}{Unused.}
 

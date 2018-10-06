@@ -413,7 +413,8 @@ callback_lambda <- function(on_epoch_begin = NULL, on_epoch_end = NULL,
 #' @details  The `logs` named list that callback methods take as argument will 
 #' contain keys for quantities relevant to the current batch or epoch.
 #' 
-#' Currently, the `fit()` method for sequential models will include the following quantities in the `logs` that
+#' Currently, the `fit.keras.engine.training.Model()` method for sequential 
+#' models will include the following quantities in the `logs` that
 #' it passes to its callbacks:
 #'
 #' - `on_epoch_end`: logs include `acc` and `loss`, and optionally include `val_loss` (if validation is enabled in `fit`), and `val_acc` (if validation and accuracy monitoring are enabled).

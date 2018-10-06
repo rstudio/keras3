@@ -18,7 +18,8 @@ Base R6 class for Keras callbacks
 The \code{logs} named list that callback methods take as argument will
 contain keys for quantities relevant to the current batch or epoch.
 
-Currently, the \code{fit()} method for sequential models will include the following quantities in the \code{logs} that
+Currently, the \code{fit.keras.engine.training.Model()} method for sequential
+models will include the following quantities in the \code{logs} that
 it passes to its callbacks:
 \itemize{
 \item \code{on_epoch_end}: logs include \code{acc} and \code{loss}, and optionally include \code{val_loss} (if validation is enabled in \code{fit}), and \code{val_acc} (if validation and accuracy monitoring are enabled).

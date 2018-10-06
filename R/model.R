@@ -400,12 +400,13 @@ compile <- function(object, optimizer, loss,
 #' @family model functions
 #'
 #' @export
-fit <- function(object, x = NULL, y = NULL, batch_size=NULL, epochs=10, 
-                verbose=getOption("keras.fit_verbose", default = 1), callbacks=NULL,
-                view_metrics = getOption("keras.view_metrics", default = "auto"),
-                validation_split=0.0, validation_data=NULL, shuffle=TRUE,
-                class_weight=NULL, sample_weight=NULL, initial_epoch=0,
-                steps_per_epoch=NULL, validation_steps=NULL, ...) {
+fit.keras.engine.training.Model <- 
+  function(object, x = NULL, y = NULL, batch_size=NULL, epochs=10, 
+           verbose=getOption("keras.fit_verbose", default = 1), callbacks=NULL,
+           view_metrics = getOption("keras.view_metrics", default = "auto"),
+           validation_split=0.0, validation_data=NULL, shuffle=TRUE,
+           class_weight=NULL, sample_weight=NULL, initial_epoch=0,
+           steps_per_epoch=NULL, validation_steps=NULL, ...) {
   
   # defaults
   if (is.null(batch_size) && is.null(steps_per_epoch))
@@ -469,7 +470,7 @@ fit <- function(object, x = NULL, y = NULL, batch_size=NULL, epochs=10,
 
 #' Evaluate a Keras model
 
-#' @inheritParams fit
+#' @inheritParams fit.keras.engine.training.Model
 #'
 #' @param object Model object to evaluate
 #' @param x Vector, matrix, or array of test data (or list if the model has
@@ -700,7 +701,7 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #' this allows you to do real-time data augmentation on images on CPU in
 #' parallel to training your model on GPU.
 #' 
-#' @inheritParams fit 
+#' @inheritParams fit.keras.engine.training.Model 
 #'
 #' @param object Keras model object
 #' @param generator A generator (e.g. like the one provided by
