@@ -27,7 +27,7 @@ Depends:
 Imports:
     generics,
     reticulate (>= 1.10), 
-    tensorflow (>= 1.9),
+    tensorflow (>= 1.9.0.9000),
     tfruns (>= 1.0),
     magrittr, 
     zeallot,
@@ -43,4 +43,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.0.9000
 VignetteBuilder: knitr
 Remotes:
-    r-lib/generics
+    r-lib/generics,
+    rstudio/tensorflow
+
