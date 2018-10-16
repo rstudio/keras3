@@ -33,9 +33,20 @@ keras_model_custom <- function(model_fn, name = NULL) {
   model
 }
 
+#' @export
+print.kerastools.model.RModel <- function(x, ...) {
+  if (!x$built) {
+    cat("Custom Keras model: not yet fitted")
+    return(invisible(x))
+  }
+  NextMethod()
+}
 
-
-
-
-
-
+#' @export
+summary.kerastools.model.RModel <- function(object, ...) {
+  if (!object$built) {
+    cat("This custom model has not yet been built. To see a summary, compile and fit with some data.")
+    return(invisible(NULL))
+  }
+  NextMethod()
+}
