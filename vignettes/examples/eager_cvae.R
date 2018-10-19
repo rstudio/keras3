@@ -126,8 +126,8 @@ decoder_model <- function(name = NULL) {
 }
 
 reparameterize <- function(mean, logvar) {
-  eps = k_random_normal(shape = mean$shape)
-  k_exp(logvar * 0.5) + mean
+  eps <- k_random_normal(shape = mean$shape, dtype = tf$float64)
+  eps * k_exp(logvar * 0.5) + mean
 }
 
 
