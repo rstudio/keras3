@@ -49,7 +49,7 @@ attr(activation_elu, "py_function_name") <- "elu"
 activation_selu <- function(x) {
   keras$activations$selu(x)
 }
-attr(activation_elu, "py_function_name") <- "selu"
+attr(activation_selu, "py_function_name") <- "selu"
 
 
 #' @rdname activation_relu

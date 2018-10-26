@@ -171,6 +171,45 @@ layer_activation_elu <- function(object, alpha = 1.0, input_shape = NULL,
   
 }
 
+#' Scaled Exponential Linear Unit.
+#' 
+#' SELU is equal to: `scale * elu(x, alpha)`, where alpha and scale
+#' are pre-defined constants. 
+#' 
+#' The values of `alpha` and `scale` are
+#' chosen so that the mean and variance of the inputs are preserved
+#' between two consecutive layers as long as the weights are initialized
+#' correctly (see initializer_lecun_normal) and the number of inputs
+#' is "large enough" (see article for more information).
+#' 
+#' Note:
+#' - To be used together with the initialization "lecun_normal".
+#' - To be used together with the dropout variant "AlphaDropout".
+#'
+#' @inheritParams layer_activation
+#'
+#' @seealso [Self-Normalizing Neural Networks](https://arxiv.org/abs/1706.02515), \code{\link{initializer_lecun_normal}}, \code{\link{layer_alpha_dropout}}
+#'
+#' @family activation layers
+#'
+#' @export
+layer_activation_selu <- function(object, input_shape = NULL,
+                                 batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
+                                 name = NULL, trainable = NULL, weights = NULL) {
+  
+  create_layer(keras$layers$Activation, object, list(
+    activation = "selu",
+    input_shape = normalize_shape(input_shape),
+    batch_input_shape = normalize_shape(batch_input_shape),
+    batch_size = as_nullable_integer(batch_size),
+    dtype = dtype,
+    name = name,
+    trainable = trainable,
+    weights = weights
+  ))
+  
+}
+
 #' Softmax activation function.
 #'
 #' It follows: `f(x) =  alpha * (exp(x) - 1.0)` for `x < 0`, `f(x) = x` for `x
@@ -226,7 +265,7 @@ layer_activation_relu <- function(object, max_value = NULL, negative_slope = 0, 
     weights = weights
   )
   
-  if (keras_version >= "2.2.3") {
+  if (keras_version() >= "2.2.3") {
     args$negative_slope <- negative_slope
     args$threshold <- threshold
   }

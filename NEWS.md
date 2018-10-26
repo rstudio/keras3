@@ -34,6 +34,8 @@ Install the development version with `devtools::install_github("rstudio/keras")`
 
 - Added `dtype` argument to `to_categorical()`
 
+- Added `layer_activation_selu()` function.
+
 
 ## Keras 2.2.0 (CRAN)
 
