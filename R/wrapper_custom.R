@@ -118,6 +118,6 @@ create_wrapper <- function(wrapper_class, object, args = list()) {
   if (missing(object) || is.null(object))
     r6_wrapper
   else
-    invisible(compose_layer(object, r6_wrapper))
+    invisible(compose_layer(object, py_wrapper))
 }
 
