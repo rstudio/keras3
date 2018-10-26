@@ -181,7 +181,7 @@
 <a class="sourceLine" id="cb1-16" data-line-number="16"></a>
 <a class="sourceLine" id="cb1-17" data-line-number="17">maybecat &lt;-<span class="st"> </span><span class="cf">function</span>(context, x) {</a>
 <a class="sourceLine" id="cb1-18" data-line-number="18">  <span class="cf">if</span> (debugshapes) {</a>
-<a class="sourceLine" id="cb1-19" data-line-number="19">    name &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/rlang/topics/quotation">enexpr</a></span>(x)</a>
+<a class="sourceLine" id="cb1-19" data-line-number="19">    name &lt;-<span class="st"> </span><span class="kw"><a href="https://rlang.r-lib.org/reference/quotation.html">enexpr</a></span>(x)</a>
 <a class="sourceLine" id="cb1-20" data-line-number="20">    dims &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">dim</span>(x), <span class="dt">collapse =</span> <span class="st">" "</span>)</a>
 <a class="sourceLine" id="cb1-21" data-line-number="21">    <span class="kw">cat</span>(context, <span class="st">": shape of "</span>, name, <span class="st">": "</span>, dims, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, <span class="dt">sep =</span> <span class="st">""</span>)</a>
 <a class="sourceLine" id="cb1-22" data-line-number="22">  }</a>
