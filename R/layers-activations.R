@@ -265,7 +265,7 @@ layer_activation_relu <- function(object, max_value = NULL, negative_slope = 0, 
     weights = weights
   )
   
-  if (keras_version >= "2.2.3") {
+  if (keras_version() >= "2.2.3") {
     args$negative_slope <- negative_slope
     args$threshold <- threshold
   }
