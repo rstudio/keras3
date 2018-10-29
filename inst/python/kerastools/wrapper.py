@@ -1,4 +1,5 @@
 import os
+import sys
 
 if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'tensorflow'):
   from tensorflow.python.keras.layers import Wrapper
@@ -15,12 +16,16 @@ else:
 class RWrapper(Wrapper):
 
   def __init__(self, r_build, r_call, r_compute_output_shape, **kwargs):
+    sys.stderr.write(str(kwargs["input_shape"]) + "\n")
+    sys.stderr.flush()
     super(RWrapper, self).__init__(**kwargs)
     self.r_build = r_build
     self.r_call = r_call
     self.r_compute_output_shape = r_compute_output_shape
     
   def build(self, input_shape):
+    sys.stderr.write(str(input_shape) + "\n")
+    sys.stderr.flush()
     self.r_build(shape_filter(input_shape))
     super(RWrapper, self).build(input_shape) 
 
