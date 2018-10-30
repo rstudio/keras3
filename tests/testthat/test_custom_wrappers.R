@@ -23,7 +23,7 @@ CustomWrapper <- R6::R6Class(
     
     build = function(input_shape) {
       private$py_wrapper$layer$build(input_shape)
-      private$py_wrapper$build()
+      private$py_wrapper$build(input_shape)
       private$wrapper$layer$add_weight(
         name = 'custom_weight',
         shape = weight_shape,
