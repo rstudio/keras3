@@ -22,8 +22,7 @@ CustomWrapper <- R6::R6Class(
     },
     
     build = function(input_shape) {
-      private$py_wrapper$layer$build(input_shape)
-      private$py_wrapper$build(input_shape)
+      if (!private$py_wrapper$layer$built) private$py_wrapper$layer$build(input_shape)
       private$wrapper$layer$add_weight(
         name = 'custom_weight',
         shape = weight_shape,
@@ -46,15 +45,13 @@ CustomWrapper <- R6::R6Class(
 wrapper_custom <-
   function(object,
            layer,
-           input_shape,
            weight_shape,
            weight_init) {
     create_wrapper(
       CustomWrapper,
       object,
       list(
-        layer = layer,
-        input_shape = input_shape,
+        layer = layer
         weight_shape = weight_shape,
         weight_init = weight_init
       )
@@ -63,15 +60,16 @@ wrapper_custom <-
 
 
 #test_succeeds("Use an R-based custom Keras wrapper", {
-  model <- keras_model_sequential()
-  model %>%
+  input <- layer_input(shape = 2)
+  output <- input %>%
     wrapper_custom(layer = layer_dense(units = 32),
                    weight_shape = 1,
-                   weight_init = initializer_he_normal,
-                   input_shape = shape(2)) %>%
+                   weight_init = initializer_he_normal
+                   ) %>%
     wrapper_custom(layer = layer_dense(units = 32),
                    weight_shape = 1,
-                   weight_init = initializer_he_normal) %>%
+                   weight_init = initializer_he_normal
+                   ) %>%
     layer_dense(units = 1)
   
   model %>% compile(optimizer = "adam", loss = "mse")

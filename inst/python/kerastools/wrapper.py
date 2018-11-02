@@ -16,8 +16,6 @@ else:
 class RWrapper(Wrapper):
 
   def __init__(self, r_build, r_call, r_compute_output_shape, **kwargs):
-    sys.stderr.write(str(kwargs["input_shape"]) + "\n")
-    sys.stderr.flush()
     super(RWrapper, self).__init__(**kwargs)
     self.r_build = r_build
     self.r_call = r_call
