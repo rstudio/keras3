@@ -51,7 +51,7 @@ wrapper_custom <-
       CustomWrapper,
       object,
       list(
-        layer = layer
+        layer = layer,
         weight_shape = weight_shape,
         weight_init = weight_init
       )
