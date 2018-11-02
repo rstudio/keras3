@@ -23,10 +23,10 @@ CustomWrapper <- R6::R6Class(
     
     build = function(input_shape) {
       if (!private$py_wrapper$layer$built) private$py_wrapper$layer$build(input_shape)
-      private$wrapper$layer$add_weight(
+      private$py_wrapper$layer$add_weight(
         name = 'custom_weight',
-        shape = weight_shape,
-        initializer = weight_init,
+        shape = self$weight_shape,
+        initializer = self$weight_init,
         trainable = TRUE
       )
     },
