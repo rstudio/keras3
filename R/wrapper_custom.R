@@ -5,34 +5,24 @@ KerasWrapper <- R6::R6Class(
   
   public = list(
     build = function(input_shape) {
-      ### here a subclass will need to access the wrapped layer and build it
-      ### then build itself
-      ### then e.g. add a weight to the layer
-      ### then e.g. add a loss to the layer
-      private$py_wrapper$layer$build(input_shape)
-      private$py_wrapper$build()
+      if (!private$py_wrapper$layer$built) private$py_wrapper$layer$build(input_shape)
     },
     
     call = function(inputs, mask = NULL) {
-      ### call the wrapped layer
       private$py_wrapper$layer$call(inputs, mask)
     },
     
     compute_output_shape = function(input_shape) {
-      ### here we will want self.layer.compute_output_shape(input_shape)
       private$py_wrapper$layer$compute_output_shape(input_shape)
     },
     
-    # Add losses to the layer
     add_loss = function(losses, inputs = NULL) {
-      # I don't know if we need this, as losses should (could?) be added to the wrapped layer in build
       args <- list()
       args$losses <- losses
       args$inputs <- inputs
       do.call(private$py_wrapper$layer$add_loss, args)
     },
     
-    # Adds a weight variable to the layer.
     add_weight = function(name,
                           shape,
                           dtype = NULL,
@@ -40,9 +30,6 @@ KerasWrapper <- R6::R6Class(
                           regularizer = NULL,
                           trainable = TRUE,
                           constraint = NULL) {
-      # I don't know if we want to keep this and add weights to the wrapped layer instead,
-      # or if we assume that has happened in build, above
-      
       args <- list()
       args$name <- name
       args$shape <- shape
@@ -55,7 +42,6 @@ KerasWrapper <- R6::R6Class(
       do.call(private$wrapper$layer$add_weight, args)
     },
     
-    # back reference to python wrapper that wraps us
     .set_py_wrapper = function(py_wrapper) {
       private$py_wrapper <- py_wrapper
     },
@@ -86,7 +72,6 @@ KerasWrapper <- R6::R6Class(
 #' @export
 create_wrapper <- function(wrapper_class, object, args = list()) {
   
-  # remove kwargs that are null
   args$layer <- args$layer
   args$input_shape <- args$input_shape
   args$batch_input_shape <- args$batch_input_shape

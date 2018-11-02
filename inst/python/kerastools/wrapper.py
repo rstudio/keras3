@@ -1,5 +1,4 @@
 import os
-import sys
 
 if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'tensorflow'):
   from tensorflow.python.keras.layers import Wrapper
@@ -22,8 +21,6 @@ class RWrapper(Wrapper):
     self.r_compute_output_shape = r_compute_output_shape
     
   def build(self, input_shape):
-    sys.stderr.write(str(input_shape) + "\n")
-    sys.stderr.flush()
     self.r_build(shape_filter(input_shape))
     super(RWrapper, self).build(input_shape) 
 
@@ -31,12 +28,7 @@ class RWrapper(Wrapper):
     return self.r_call(inputs, mask)
       
   def compute_output_shape(self, input_shape):
-    
-    # call R to compute the output shape
     output_shape = self.r_compute_output_shape(shape_filter(input_shape))
-    
-    # if it was a list of lists then leave it alone, otherwise force to tuple
-    # so that R users don't need to explicitly return a tuple
     if all(isinstance(x, (tuple,list)) for x in output_shape):
       return output_shape
     else:
