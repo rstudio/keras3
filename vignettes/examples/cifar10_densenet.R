@@ -62,7 +62,7 @@ model %>% compile(
 # Model fitting -----------------------------------------------------------
 
 # callbacks for weights and learning rate
-lr_schedule <- function(epoch) {
+lr_schedule <- function(epoch, lr) {
   
   if(epoch <= 150) {
     0.1
