@@ -31,7 +31,7 @@ CustomWrapper <- R6::R6Class(
         trainable = TRUE
       )
       
-      regularizer <- k_log(self$custom_weight)
+      regularizer <- k_sum(k_log(self$custom_weight))
       super$add_loss(regularizer)
       
     }
