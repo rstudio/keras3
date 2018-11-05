@@ -1,4 +1,21 @@
+#' Base R6 class for Keras wrappers
+#'
+#' @docType class
+#'
+#' @format An [R6Class] generator object
+#' 
+#' @section Methods: \describe{ 
+#'   \item{\code{build(input_shape)}}{Builds the wrapped layer. 
+#'   Subclasses can extend this to perform custom operations on that layer.}
+#'   \item{\code{call(inputs,mask)}}{Calls the wrapped layer on an input tensor.}
+#'   \item{\code{compute_output_shape(input_shape)}}{Computes the output shape
+#'   for the wrapped layer.}
+#'   \item{\code{add_loss(losses, inputs)}}{Subclasses can use this to add losses to the wrapped layer.}
+#'   \item{\code{add_weight(name,shape,dtype,initializer,regularizer,trainable,constraint)}}{Subclasses can use this to add weights to the wrapped layer.} }
 
+#'
+#' @return [KerasWrapper].
+#'
 #' @export
 KerasWrapper <- R6::R6Class(
   "KerasWrapper",
@@ -9,7 +26,7 @@ KerasWrapper <- R6::R6Class(
     },
     
     call = function(inputs, mask = NULL) {
-      private$py_wrapper$layer$call(inputs, mask)
+      private$py_wrapper$layer$call(inputs)
     },
     
     compute_output_shape = function(input_shape) {
@@ -39,7 +56,7 @@ KerasWrapper <- R6::R6Class(
       args$trainable <- trainable
       args$constraint <- constraint
 
-      do.call(private$wrapper$layer$add_weight, args)
+      do.call(private$py_wrapper$layer$add_weight, args)
     },
     
     .set_py_wrapper = function(py_wrapper) {
@@ -69,6 +86,19 @@ KerasWrapper <- R6::R6Class(
   private = list(py_wrapper = NULL)
 )
 
+#' Create a Keras Wrapper
+#' 
+#' @param wrapper_class R6 class of type KerasWrapper
+#' @param object Object to compose layer with. This is either a 
+#' [keras_model_sequential()] to add the layer to, or another Layer which
+#' this layer will call.
+#' @param args List of arguments to layer constructor function 
+#' 
+#' @return A Keras wrapper
+#' 
+#' @note The `object` parameter can be missing, in which case the 
+#' layer is created without a connection to an existing graph.
+#' 
 #' @export
 create_wrapper <- function(wrapper_class, object, args = list()) {
   

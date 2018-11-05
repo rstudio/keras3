@@ -21,10 +21,10 @@ CustomWrapper <- R6::R6Class(
     },
     
     build = function(input_shape) {
-      if (!private$py_wrapper$layer$built)
-        private$py_wrapper$layer$build(input_shape)
       
-      self$custom_weight <- private$py_wrapper$layer$add_weight(
+      super$build(input_shape)
+
+      self$custom_weight <- super$add_weight(
         name = "custom_weight",
         shape = self$weight_shape,
         initializer = self$weight_init,
@@ -32,18 +32,8 @@ CustomWrapper <- R6::R6Class(
       )
       
       regularizer <- k_log(self$custom_weight)
-      private$py_wrapper$layer$add_loss(regularizer)
+      super$add_loss(regularizer)
       
-    },
-    
-    call = function(inputs,
-                    mask = NULL,
-                    training = NULL) {
-      private$py_wrapper$layer$call(inputs)
-    },
-    
-    compute_output_shape = function(input_shape) {
-      private$py_wrapper$layer$compute_output_shape(input_shape)
     }
   )
 )
