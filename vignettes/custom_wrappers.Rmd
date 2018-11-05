@@ -9,7 +9,7 @@ type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Custom Models"
+    name: "Custom Wrappers"
     identifier: "keras-custom-wrappers"
     parent: "keras-advanced"
     weight: 70

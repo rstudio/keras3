@@ -12,7 +12,6 @@
 #'   for the wrapped layer.}
 #'   \item{\code{add_loss(losses, inputs)}}{Subclasses can use this to add losses to the wrapped layer.}
 #'   \item{\code{add_weight(name,shape,dtype,initializer,regularizer,trainable,constraint)}}{Subclasses can use this to add weights to the wrapped layer.} }
-
 #'
 #' @return [KerasWrapper].
 #'
