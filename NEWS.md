@@ -36,6 +36,8 @@ Install the development version with `devtools::install_github("rstudio/keras")`
 
 - Added `layer_activation_selu()` function.
 
+- Added `KerasWrapper` class and corresponding `create_wrapper` function.
+
 
 ## Keras 2.2.0 (CRAN)
 
