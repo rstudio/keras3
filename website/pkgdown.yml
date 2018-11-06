@@ -8,6 +8,7 @@ articles:
   backend: backend.html
   custom_layers: custom_layers.html
   custom_models: custom_models.html
+  custom_wrappers: custom_wrappers.html
   eager_guide: eager_guide.html
   addition_rnn: examples/addition_rnn.html
   babi_memnn: examples/babi_memnn.html

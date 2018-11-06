@@ -51,6 +51,7 @@ Other contributors:
   \item Daniel Falbel [contributor, copyright holder]
   \item Wouter Van Der Bijl [contributor, copyright holder]
   \item Martin Studer [contributor, copyright holder]
+  \item Sigrid Keydana [contributor]
 }
 
 }

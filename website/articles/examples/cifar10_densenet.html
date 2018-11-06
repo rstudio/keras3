@@ -209,7 +209,7 @@
 <a class="sourceLine" id="cb1-42" data-line-number="42"><span class="co"># Model fitting -----------------------------------------------------------</span></a>
 <a class="sourceLine" id="cb1-43" data-line-number="43"></a>
 <a class="sourceLine" id="cb1-44" data-line-number="44"><span class="co"># callbacks for weights and learning rate</span></a>
-<a class="sourceLine" id="cb1-45" data-line-number="45">lr_schedule &lt;-<span class="st"> </span><span class="cf">function</span>(epoch) {</a>
+<a class="sourceLine" id="cb1-45" data-line-number="45">lr_schedule &lt;-<span class="st"> </span><span class="cf">function</span>(epoch, lr) {</a>
 <a class="sourceLine" id="cb1-46" data-line-number="46">  </a>
 <a class="sourceLine" id="cb1-47" data-line-number="47">  <span class="cf">if</span>(epoch <span class="op">&lt;=</span><span class="st"> </span><span class="dv">150</span>) {</a>
 <a class="sourceLine" id="cb1-48" data-line-number="48">    <span class="fl">0.1</span></a>
