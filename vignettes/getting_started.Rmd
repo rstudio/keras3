@@ -45,7 +45,7 @@ install_keras()
 ```
 
 This will provide you with default CPU-based installations of Keras and TensorFlow. If you want a more customized installation, e.g. if you want to take advantage of NVIDIA GPUs, see the documentation for `install_keras()`.
-
+If you have set a specific version of Python to use, you may need to unset it, e.g. with `Sys.unsetenv(x = "RETICULATE_PYTHON")`, at the beginning of a session that uses Keras.
 
 ## MNIST Example
 
