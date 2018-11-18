@@ -963,6 +963,15 @@ is_main_thread_generator.keras.preprocessing.image.Iterator <- function(x) {
   }
 }
 
+is_main_thread_generator.keras_preprocessing.image.Iterator <- function(x) {
+  if (py_has_attr(x, "image_data_generator")) {
+    generator <- x$image_data_generator
+    !is.null(generator$preprocessing_function)
+  } else {
+    FALSE
+  }
+}
+
 is_tensorflow_dataset <- function(x) {
   inherits(x, "tensorflow.python.data.ops.dataset_ops.Dataset")
 }
