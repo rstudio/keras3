@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4</span>
       </span>
     </div>
 
@@ -275,11 +275,11 @@
 <a class="sourceLine" id="cb1-105" data-line-number="105">path &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_replace">str_replace</a></span>(path, <span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/modifiers">fixed</a></span>(<span class="st">".tar.gz"</span>), <span class="st">"/"</span>)</a>
 <a class="sourceLine" id="cb1-106" data-line-number="106"></a>
 <a class="sourceLine" id="cb1-107" data-line-number="107"><span class="co"># Reading training and test data</span></a>
-<a class="sourceLine" id="cb1-108" data-line-number="108">train &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/readr/topics/read_lines">read_lines</a></span>(<span class="kw">sprintf</span>(challenge, path, <span class="st">"train"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-108" data-line-number="108">train &lt;-<span class="st"> </span><span class="kw"><a href="https://readr.tidyverse.org/reference/read_lines.html">read_lines</a></span>(<span class="kw">sprintf</span>(challenge, path, <span class="st">"train"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-109" data-line-number="109"><span class="st">  </span><span class="kw">parse_stories</span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-110" data-line-number="110"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(story, <span class="op">~</span><span class="kw">length</span>(.x)) <span class="op">&lt;=</span><span class="st"> </span>max_length)</a>
 <a class="sourceLine" id="cb1-111" data-line-number="111"></a>
-<a class="sourceLine" id="cb1-112" data-line-number="112">test &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/readr/topics/read_lines">read_lines</a></span>(<span class="kw">sprintf</span>(challenge, path, <span class="st">"test"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-112" data-line-number="112">test &lt;-<span class="st"> </span><span class="kw"><a href="https://readr.tidyverse.org/reference/read_lines.html">read_lines</a></span>(<span class="kw">sprintf</span>(challenge, path, <span class="st">"test"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-113" data-line-number="113"><span class="st">  </span><span class="kw">parse_stories</span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-114" data-line-number="114"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(story, <span class="op">~</span><span class="kw">length</span>(.x)) <span class="op">&lt;=</span><span class="st"> </span>max_length)</a>
 <a class="sourceLine" id="cb1-115" data-line-number="115"></a>

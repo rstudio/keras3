@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4</span>
       </span>
     </div>
 
@@ -186,7 +186,7 @@
 <a class="sourceLine" id="cb2-17" data-line-number="17">  )</a>
 <a class="sourceLine" id="cb2-18" data-line-number="18"></a>
 <a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co"># Load, collapse, and tokenize text</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20">text &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/readr/topics/read_lines">read_lines</a></span>(path) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">text &lt;-<span class="st"> </span><span class="kw"><a href="https://readr.tidyverse.org/reference/read_lines.html">read_lines</a></span>(path) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-21" data-line-number="21"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/case">str_to_lower</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-22" data-line-number="22"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_c">str_c</a></span>(<span class="dt">collapse =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-23" data-line-number="23"><span class="st">  </span><span class="kw"><a href="https://lincolnmullen.com/software/tokenizers/reference/basic-tokenizers.html">tokenize_characters</a></span>(<span class="dt">strip_non_alphanum =</span> <span class="ot">FALSE</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)</a>

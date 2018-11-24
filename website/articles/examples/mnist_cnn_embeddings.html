@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.0.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4</span>
       </span>
     </div>
 
@@ -206,7 +206,7 @@
 <a class="sourceLine" id="cb1-41" data-line-number="41">embeddings_metadata &lt;-<span class="st"> </span><span class="kw">file.path</span>(embeddings_dir, <span class="st">'metadata.tsv'</span>)</a>
 <a class="sourceLine" id="cb1-42" data-line-number="42"></a>
 <a class="sourceLine" id="cb1-43" data-line-number="43"><span class="co"># we use the class names from the test set as embeddings_metadata</span></a>
-<a class="sourceLine" id="cb1-44" data-line-number="44">readr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/readr/topics/write_delim">write_tsv</a></span>(<span class="kw">data.frame</span>(y_test), <span class="dt">path =</span> embeddings_metadata, <span class="dt">col_names =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1-44" data-line-number="44">readr<span class="op">::</span><span class="kw"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_tsv</a></span>(<span class="kw">data.frame</span>(y_test), <span class="dt">path =</span> embeddings_metadata, <span class="dt">col_names =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb1-45" data-line-number="45"></a>
 <a class="sourceLine" id="cb1-46" data-line-number="46">tensorboard_callback &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/callback_tensorboard.html">callback_tensorboard</a></span>(</a>
 <a class="sourceLine" id="cb1-47" data-line-number="47">  <span class="dt">log_dir =</span> embeddings_dir,</a>

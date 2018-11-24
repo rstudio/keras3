@@ -4,19 +4,6 @@
 #' 
 #' https://blogs.rstudio.com/tensorflow/posts/2018-07-30-attention-layer/
 
-
-# Setup -------------------------------------------------------------------
-
-# Important: Make sure you are using the latest versions of reticulate, keras, tensorflow and tfdatasets from github.
-# devtools::install_github(
-#   c(
-#     "rstudio/keras",
-#     "rstudio/tensorflow",
-#     "rstudio/tfdatasets",
-#     "rstudio/reticulate"
-#   )
-# )
-
 library(keras)
 use_implementation("tensorflow")
 
