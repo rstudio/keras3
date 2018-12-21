@@ -61,17 +61,13 @@ model <- application_inception_v3(weights = "imagenet", include_top = FALSE)
 # This will contain our generated image
 dream <- model$input
 
-# Get the symbolic outputs of each "key" layer (we gave them unique names).
-layer_dict <- model$layers
-names(layer_dict) <- map_chr(layer_dict ,~.x$name)
-
 # Define the loss
 loss <- k_variable(0.0)
 for(layer_name in names(settings$features)){
   
   # Add the L2 norm of the features of a layer to the loss
   coeff <- settings$features[[layer_name]]
-  x <- layer_dict[[layer_name]]$output
+  x <- model$get_layer(layer_name)$output
   scaling <- k_prod(k_cast(k_shape(x), 'float32'))
   
   # Avoid border artifacts by only involving non-border pixels in the loss
