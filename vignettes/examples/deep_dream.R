@@ -67,7 +67,7 @@ for(layer_name in names(settings$features)){
   
   # Add the L2 norm of the features of a layer to the loss
   coeff <- settings$features[[layer_name]]
-  x <- model$get_layer(layer_name)$output
+  x <- (model %>% get_layer(layer_name))$output
   scaling <- k_prod(k_cast(k_shape(x), 'float32'))
   
   # Avoid border artifacts by only involving non-border pixels in the loss
