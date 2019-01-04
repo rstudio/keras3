@@ -1,5 +1,5 @@
 ---
-title: tfprob-vae
+title: tfprob_vae
 type: docs
 repo: https://github.com/rstudio/keras
 menu:
