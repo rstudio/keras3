@@ -38,6 +38,7 @@ title: "Keras Examples"
 | [stateful_lstm](stateful_lstm.html) | Demonstrates how to use stateful RNNs to model long sequences efficiently. |
 | [variational_autoencoder](variational_autoencoder.html) | Demonstrates how to build a variational autoencoder. |
 | [variational_autoencoder_deconv](variational_autoencoder_deconv.html) | Demonstrates how to build a variational autoencoder with Keras using deconvolution layers. |
+| [tfprob_vae](tfprob_vae.html) | A variational autoencoder using TensorFlow Probability on Kuzushiji-MNIST. |
 
 <!--
 | [cifar10_resnet](cifar10_resnet.html) | Trains a ResNet on the CIFAR10 dataset. |
