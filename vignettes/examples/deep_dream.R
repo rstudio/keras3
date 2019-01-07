@@ -162,3 +162,4 @@ for (shape in successive_shapes) {
   save_img(img, fname = sprintf("dream_at_scale_%s.png",
                                 paste(shape, collapse = "x")))
 }
+
