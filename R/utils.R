@@ -220,17 +220,22 @@ keras_array <- function(x, dtype = NULL) {
     return(x)
   
   # reflect tensor for keras v2.2 or TF implementation >= 1.12
-  if (((keras_version() >= "2.2.0") && k_is_tensor(x)) ||
-      ((
-        is_tensorflow_implementation() &&
-        tf_version() >= "1.12" &&
-        (
-          tensorflow::tf$contrib$framework$is_tensor(x) ||
-          is.list(x) && all(vapply(x, tensorflow::tf$contrib$framework$is_tensor, logical(1)))
-        )
-      )))
-  return(x)
-  
+  if (is_tensorflow_implementation()) {
+    if (
+      tf_version() >= "1.12" &&
+      (
+        tensorflow::tf$contrib$framework$is_tensor(x) ||
+        is.list(x) && all(vapply(x, tensorflow::tf$contrib$framework$is_tensor, logical(1)))
+      )
+    ) {
+      return(x)
+    }
+  } else {
+    if ((keras_version() >= "2.2.0") && k_is_tensor(x)) {
+      return(x)
+    }
+  }
+
   # error for data frames
   if (is.data.frame(x)) {
     stop("Data passed to Keras must be a vector, matrix, or array (you passed a ",
