@@ -311,7 +311,7 @@ fit_text_tokenizer <- function(object, x) {
   if (is.list(x))
     tokenizer$fit_on_sequences(x)
   else {
-    tokenizer$fit_on_texts(as_texts(x))
+    tokenizer$fit_on_texts(if (is.function(x)) reticulate::py_iterator(x) else as_texts(x))
   }
   invisible(tokenizer)
 }
