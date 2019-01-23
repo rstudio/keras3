@@ -39,6 +39,7 @@ title: "Keras Examples"
 | [variational_autoencoder](variational_autoencoder.html) | Demonstrates how to build a variational autoencoder. |
 | [variational_autoencoder_deconv](variational_autoencoder_deconv.html) | Demonstrates how to build a variational autoencoder with Keras using deconvolution layers. |
 | [tfprob_vae](tfprob_vae.html) | A variational autoencoder using TensorFlow Probability on Kuzushiji-MNIST. |
+| [vq_vae](vq_vae.html) | Discrete Representation Learning with VQ-VAE and TensorFlow Probability. |
 
 <!--
 | [cifar10_resnet](cifar10_resnet.html) | Trains a ResNet on the CIFAR10 dataset. |
