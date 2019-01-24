@@ -68,10 +68,10 @@ vae %>% compile(optimizer = "rmsprop", loss = vae_loss)
 # Data preparation --------------------------------------------------------
 
 mnist <- dataset_mnist()
-x_train <- mnist$train$x/255
-x_test <- mnist$test$x/255
-x_train <- x_train %>% apply(1, as.numeric) %>% t()
-x_test <- x_test %>% apply(1, as.numeric) %>% t()
+dim_ts <- dim(mnist$test$x)
+dim_tr <- dim(mnist$train$x)
+x_test <- array(mnist$test$x / 255, c(dim_ts[1], prod(dim_ts[-1])))
+x_train <- array(mnist$train$x / 255, c(dim_tr[1], prod(dim_tr[-1])))
 
 
 # Model training ----------------------------------------------------------
