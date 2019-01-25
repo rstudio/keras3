@@ -70,8 +70,8 @@ vae %>% compile(optimizer = "rmsprop", loss = vae_loss)
 mnist <- dataset_mnist()
 x_train <- mnist$train$x/255
 x_test <- mnist$test$x/255
-x_train <- x_train %>% apply(1, as.numeric) %>% t()
-x_test <- x_test %>% apply(1, as.numeric) %>% t()
+x_train <- array_reshape(x_train, c(nrow(x_train), 784), order = "F")
+x_test <- array_reshape(x_test, c(nrow(x_test), 784), order = "F")
 
 
 # Model training ----------------------------------------------------------
