@@ -20,3 +20,6 @@
 
 See the package website at <https://keras.rstudio.com> for complete documentation.
 
+# Compatibility Issues
+
+The only supported installation method on Windows is "conda". This means that you should install Anaconda 3.x for Windows prior to installing Keras.
