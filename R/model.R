@@ -973,7 +973,7 @@ is_main_thread_generator.keras_preprocessing.image.Iterator <- function(x) {
 }
 
 is_tensorflow_dataset <- function(x) {
-  inherits(x, "tensorflow.python.data.ops.dataset_ops.Dataset")
+  inherits(x, "tf_dataset")
 }
 
 resolve_tensorflow_dataset <- function(x) {
