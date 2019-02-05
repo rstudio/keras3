@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4.9000</span>
       </span>
     </div>
 
@@ -194,8 +194,8 @@
 <a class="sourceLine" id="cb2-18" data-line-number="18"></a>
 <a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co"># Load, collapse, and tokenize text</span></a>
 <a class="sourceLine" id="cb2-20" data-line-number="20">text &lt;-<span class="st"> </span><span class="kw"><a href="https://readr.tidyverse.org/reference/read_lines.html">read_lines</a></span>(path) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/case">str_to_lower</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_c">str_c</a></span>(<span class="dt">collapse =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="st">  </span><span class="kw"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_lower</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="st">  </span><span class="kw"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span>(<span class="dt">collapse =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-23" data-line-number="23"><span class="st">  </span><span class="kw"><a href="https://lincolnmullen.com/software/tokenizers/reference/basic-tokenizers.html">tokenize_characters</a></span>(<span class="dt">strip_non_alphanum =</span> <span class="ot">FALSE</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb2-24" data-line-number="24"></a>
 <a class="sourceLine" id="cb2-25" data-line-number="25"><span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"corpus length: %d"</span>, <span class="kw">length</span>(text)))</a>
@@ -207,12 +207,12 @@
 <a class="sourceLine" id="cb2-31" data-line-number="31"><span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"total chars: %d"</span>, <span class="kw">length</span>(chars)))  </a>
 <a class="sourceLine" id="cb2-32" data-line-number="32"></a>
 <a class="sourceLine" id="cb2-33" data-line-number="33"><span class="co"># Cut the text in semi-redundant sequences of maxlen characters</span></a>
-<a class="sourceLine" id="cb2-34" data-line-number="34">dataset &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(</a>
+<a class="sourceLine" id="cb2-34" data-line-number="34">dataset &lt;-<span class="st"> </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(</a>
 <a class="sourceLine" id="cb2-35" data-line-number="35">  <span class="kw">seq</span>(<span class="dv">1</span>, <span class="kw">length</span>(text) <span class="op">-</span><span class="st"> </span>maxlen <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="dv">3</span>), </a>
 <a class="sourceLine" id="cb2-36" data-line-number="36">  <span class="op">~</span><span class="kw">list</span>(<span class="dt">sentece =</span> text[.x<span class="op">:</span>(.x <span class="op">+</span><span class="st"> </span>maxlen <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)], <span class="dt">next_char =</span> text[.x <span class="op">+</span><span class="st"> </span>maxlen])</a>
 <a class="sourceLine" id="cb2-37" data-line-number="37">  )</a>
 <a class="sourceLine" id="cb2-38" data-line-number="38"></a>
-<a class="sourceLine" id="cb2-39" data-line-number="39">dataset &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(dataset)</a>
+<a class="sourceLine" id="cb2-39" data-line-number="39">dataset &lt;-<span class="st"> </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(dataset)</a>
 <a class="sourceLine" id="cb2-40" data-line-number="40"></a>
 <a class="sourceLine" id="cb2-41" data-line-number="41"><span class="co"># Vectorization</span></a>
 <a class="sourceLine" id="cb2-42" data-line-number="42">x &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">length</span>(dataset<span class="op">$</span>sentece), maxlen, <span class="kw">length</span>(chars)))</a>
@@ -279,7 +279,7 @@
 <a class="sourceLine" id="cb2-103" data-line-number="103">      next_index &lt;-<span class="st"> </span><span class="kw">sample_mod</span>(preds, diversity)</a>
 <a class="sourceLine" id="cb2-104" data-line-number="104">      next_char &lt;-<span class="st"> </span>chars[next_index]</a>
 <a class="sourceLine" id="cb2-105" data-line-number="105">      </a>
-<a class="sourceLine" id="cb2-106" data-line-number="106">      generated &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_c">str_c</a></span>(generated, next_char, <span class="dt">collapse =</span> <span class="st">""</span>)</a>
+<a class="sourceLine" id="cb2-106" data-line-number="106">      generated &lt;-<span class="st"> </span><span class="kw"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span>(generated, next_char, <span class="dt">collapse =</span> <span class="st">""</span>)</a>
 <a class="sourceLine" id="cb2-107" data-line-number="107">      sentence &lt;-<span class="st"> </span><span class="kw">c</span>(sentence[<span class="op">-</span><span class="dv">1</span>], next_char)</a>
 <a class="sourceLine" id="cb2-108" data-line-number="108">      </a>
 <a class="sourceLine" id="cb2-109" data-line-number="109">    }</a>

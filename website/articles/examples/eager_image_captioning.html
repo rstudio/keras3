@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4.9000</span>
       </span>
     </div>
 
@@ -227,11 +227,11 @@
 <a class="sourceLine" id="cb1-55" data-line-number="55">num_examples &lt;-<span class="st"> </span><span class="dv">30000</span></a>
 <a class="sourceLine" id="cb1-56" data-line-number="56"></a>
 <a class="sourceLine" id="cb1-57" data-line-number="57"><span class="cf">if</span> (<span class="op">!</span>saved_features_exist) {</a>
-<a class="sourceLine" id="cb1-58" data-line-number="58">  random_sample &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(<span class="dv">1</span><span class="op">:</span>num_captions, <span class="dt">size =</span> num_examples)</a>
+<a class="sourceLine" id="cb1-58" data-line-number="58">  random_sample &lt;-<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(<span class="dv">1</span><span class="op">:</span>num_captions, <span class="dt">size =</span> num_examples)</a>
 <a class="sourceLine" id="cb1-59" data-line-number="59">  train_indices &lt;-</a>
-<a class="sourceLine" id="cb1-60" data-line-number="60"><span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(random_sample, <span class="dt">size =</span> <span class="kw">length</span>(random_sample) <span class="op">*</span><span class="st"> </span><span class="fl">0.8</span>)</a>
+<a class="sourceLine" id="cb1-60" data-line-number="60"><span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(random_sample, <span class="dt">size =</span> <span class="kw">length</span>(random_sample) <span class="op">*</span><span class="st"> </span><span class="fl">0.8</span>)</a>
 <a class="sourceLine" id="cb1-61" data-line-number="61">  validation_indices &lt;-</a>
-<a class="sourceLine" id="cb1-62" data-line-number="62"><span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/setops.html">setdiff</a></span>(random_sample, train_indices)</a>
+<a class="sourceLine" id="cb1-62" data-line-number="62"><span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/setops.html">setdiff</a></span>(random_sample, train_indices)</a>
 <a class="sourceLine" id="cb1-63" data-line-number="63">  <span class="kw">saveRDS</span>(random_sample,</a>
 <a class="sourceLine" id="cb1-64" data-line-number="64">          <span class="kw">paste0</span>(<span class="st">"random_sample_"</span>, num_examples, <span class="st">".rds"</span>))</a>
 <a class="sourceLine" id="cb1-65" data-line-number="65">  <span class="kw">saveRDS</span>(train_indices,</a>
@@ -322,20 +322,20 @@
 <a class="sourceLine" id="cb1-150" data-line-number="150">  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span></a>
 <a class="sourceLine" id="cb1-151" data-line-number="151">)</a>
 <a class="sourceLine" id="cb1-152" data-line-number="152"></a>
-<a class="sourceLine" id="cb1-153" data-line-number="153">word_index_df &lt;-<span class="st"> </span>word_index_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(index)</a>
+<a class="sourceLine" id="cb1-153" data-line-number="153">word_index_df &lt;-<span class="st"> </span>word_index_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(index)</a>
 <a class="sourceLine" id="cb1-154" data-line-number="154"></a>
 <a class="sourceLine" id="cb1-155" data-line-number="155">decode_caption &lt;-<span class="st"> </span><span class="cf">function</span>(text) {</a>
-<a class="sourceLine" id="cb1-156" data-line-number="156">  <span class="kw">paste</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(text, <span class="cf">function</span>(number)</a>
+<a class="sourceLine" id="cb1-156" data-line-number="156">  <span class="kw">paste</span>(<span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(text, <span class="cf">function</span>(number)</a>
 <a class="sourceLine" id="cb1-157" data-line-number="157">    word_index_df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-158" data-line-number="158"><span class="st">      </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(index <span class="op">==</span><span class="st"> </span>number) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-159" data-line-number="159"><span class="st">      </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(word) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-160" data-line-number="160"><span class="st">      </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/pull.html">pull</a></span>()),</a>
+<a class="sourceLine" id="cb1-158" data-line-number="158"><span class="st">      </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(index <span class="op">==</span><span class="st"> </span>number) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-159" data-line-number="159"><span class="st">      </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(word) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-160" data-line-number="160"><span class="st">      </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>()),</a>
 <a class="sourceLine" id="cb1-161" data-line-number="161">    <span class="dt">collapse =</span> <span class="st">" "</span>)</a>
 <a class="sourceLine" id="cb1-162" data-line-number="162">}</a>
 <a class="sourceLine" id="cb1-163" data-line-number="163"></a>
 <a class="sourceLine" id="cb1-164" data-line-number="164">caption_lengths &lt;-</a>
-<a class="sourceLine" id="cb1-165" data-line-number="165"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(all_captions[<span class="dv">1</span><span class="op">:</span>num_examples], <span class="cf">function</span>(c)</a>
-<a class="sourceLine" id="cb1-166" data-line-number="166">    <span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_split">str_split</a></span>(c, <span class="st">" "</span>)[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">length</span>()) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unlist</span>()</a>
+<a class="sourceLine" id="cb1-165" data-line-number="165"><span class="st">  </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(all_captions[<span class="dv">1</span><span class="op">:</span>num_examples], <span class="cf">function</span>(c)</a>
+<a class="sourceLine" id="cb1-166" data-line-number="166">    <span class="kw"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span>(c, <span class="st">" "</span>)[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">length</span>()) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unlist</span>()</a>
 <a class="sourceLine" id="cb1-167" data-line-number="167"><span class="kw">fivenum</span>(caption_lengths)</a>
 <a class="sourceLine" id="cb1-168" data-line-number="168">max_length &lt;-<span class="st"> </span><span class="kw">fivenum</span>(caption_lengths)[<span class="dv">5</span>]</a>
 <a class="sourceLine" id="cb1-169" data-line-number="169"></a>
@@ -571,8 +571,8 @@
 <a class="sourceLine" id="cb1-399" data-line-number="399">        result &lt;-</a>
 <a class="sourceLine" id="cb1-400" data-line-number="400"><span class="st">          </span><span class="kw">paste</span>(result, pred_word)</a>
 <a class="sourceLine" id="cb1-401" data-line-number="401">        attention_matrix &lt;-</a>
-<a class="sourceLine" id="cb1-402" data-line-number="402"><span class="st">          </span>attention_matrix[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_split">str_split</a></span>(result, <span class="st">" "</span>)[[<span class="dv">1</span>]]), , drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
-<a class="sourceLine" id="cb1-403" data-line-number="403">        <span class="kw">return</span> (<span class="kw">list</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_trim">str_trim</a></span>(result), attention_matrix))</a>
+<a class="sourceLine" id="cb1-402" data-line-number="402"><span class="st">          </span>attention_matrix[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(<span class="kw"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span>(result, <span class="st">" "</span>)[[<span class="dv">1</span>]]), , drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
+<a class="sourceLine" id="cb1-403" data-line-number="403">        <span class="kw">return</span> (<span class="kw">list</span>(<span class="kw"><a href="https://stringr.tidyverse.org/reference/str_trim.html">str_trim</a></span>(result), attention_matrix))</a>
 <a class="sourceLine" id="cb1-404" data-line-number="404">      } <span class="cf">else</span> {</a>
 <a class="sourceLine" id="cb1-405" data-line-number="405">        result &lt;-</a>
 <a class="sourceLine" id="cb1-406" data-line-number="406"><span class="st">          </span><span class="kw">paste</span>(result, pred_word)</a>
@@ -580,7 +580,7 @@
 <a class="sourceLine" id="cb1-408" data-line-number="408">      }</a>
 <a class="sourceLine" id="cb1-409" data-line-number="409">    }</a>
 <a class="sourceLine" id="cb1-410" data-line-number="410">    </a>
-<a class="sourceLine" id="cb1-411" data-line-number="411">    <span class="kw">list</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_trim">str_trim</a></span>(result), attention_matrix)</a>
+<a class="sourceLine" id="cb1-411" data-line-number="411">    <span class="kw">list</span>(<span class="kw"><a href="https://stringr.tidyverse.org/reference/str_trim.html">str_trim</a></span>(result), attention_matrix)</a>
 <a class="sourceLine" id="cb1-412" data-line-number="412">  }</a>
 <a class="sourceLine" id="cb1-413" data-line-number="413"></a>
 <a class="sourceLine" id="cb1-414" data-line-number="414">plot_attention &lt;-</a>
@@ -590,7 +590,7 @@
 <a class="sourceLine" id="cb1-418" data-line-number="418">           epoch) {</a>
 <a class="sourceLine" id="cb1-419" data-line-number="419">    image &lt;-</a>
 <a class="sourceLine" id="cb1-420" data-line-number="420"><span class="st">      </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/editing">image_read</a></span>(image_name) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magick/topics/transform">image_scale</a></span>(<span class="st">"299x299!"</span>)</a>
-<a class="sourceLine" id="cb1-421" data-line-number="421">    result &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_split">str_split</a></span>(result, <span class="st">" "</span>)[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.list</span>()</a>
+<a class="sourceLine" id="cb1-421" data-line-number="421">    result &lt;-<span class="st"> </span><span class="kw"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span>(result, <span class="st">" "</span>)[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.list</span>()</a>
 <a class="sourceLine" id="cb1-422" data-line-number="422">    <span class="co"># attention_matrix shape: nrow = max_length, ncol = attention_features_shape</span></a>
 <a class="sourceLine" id="cb1-423" data-line-number="423">    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(result)) {</a>
 <a class="sourceLine" id="cb1-424" data-line-number="424">      att &lt;-<span class="st"> </span>attention_matrix[i, ] <span class="op">%&gt;%</span><span class="st"> </span>np<span class="op">$</span><span class="kw">resize</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/reticulate/topics/tuple">tuple</a></span>(8L, 8L))</a>
@@ -611,7 +611,7 @@
 <a class="sourceLine" id="cb1-439" data-line-number="439">          <span class="st">"attention_plot_epoch_"</span>,</a>
 <a class="sourceLine" id="cb1-440" data-line-number="440">          epoch,</a>
 <a class="sourceLine" id="cb1-441" data-line-number="441">          <span class="st">"_img_"</span>,</a>
-<a class="sourceLine" id="cb1-442" data-line-number="442">          image_name <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">basename</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_sub">str_sub</a></span>(<span class="dv">16</span>,<span class="op">-</span><span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb1-442" data-line-number="442">          image_name <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">basename</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub</a></span>(<span class="dv">16</span>,<span class="op">-</span><span class="dv">5</span>),</a>
 <a class="sourceLine" id="cb1-443" data-line-number="443">          <span class="st">"_word_"</span>,</a>
 <a class="sourceLine" id="cb1-444" data-line-number="444">          i,</a>
 <a class="sourceLine" id="cb1-445" data-line-number="445">          <span class="st">".png"</span></a>
@@ -633,7 +633,7 @@
 <a class="sourceLine" id="cb1-461" data-line-number="461">    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(images)) {</a>
 <a class="sourceLine" id="cb1-462" data-line-number="462">      <span class="kw">c</span>(result, attention_matrix) <span class="op">%&lt;-%</span><span class="st"> </span><span class="kw">get_caption</span>(images[[i]])</a>
 <a class="sourceLine" id="cb1-463" data-line-number="463">      real_caption &lt;-</a>
-<a class="sourceLine" id="cb1-464" data-line-number="464"><span class="st">        </span><span class="kw">decode_caption</span>(captions[i,]) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_remove">str_remove_all</a></span>(<span class="st">" &lt;pad&gt;"</span>)</a>
+<a class="sourceLine" id="cb1-464" data-line-number="464"><span class="st">        </span><span class="kw">decode_caption</span>(captions[i,]) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://stringr.tidyverse.org/reference/str_remove.html">str_remove_all</a></span>(<span class="st">" &lt;pad&gt;"</span>)</a>
 <a class="sourceLine" id="cb1-465" data-line-number="465">      <span class="kw">cat</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Real caption:"</span>,  real_caption, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</a>
 <a class="sourceLine" id="cb1-466" data-line-number="466">      <span class="kw">cat</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Predicted caption:"</span>, result, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</a>
 <a class="sourceLine" id="cb1-467" data-line-number="467">      <span class="cf">if</span> (plot_attention)</a>
@@ -696,7 +696,7 @@
 <a class="sourceLine" id="cb1-524" data-line-number="524">      variables &lt;-<span class="st"> </span><span class="kw">c</span>(encoder<span class="op">$</span>variables, decoder<span class="op">$</span>variables)</a>
 <a class="sourceLine" id="cb1-525" data-line-number="525">      gradients &lt;-<span class="st"> </span>tape<span class="op">$</span><span class="kw">gradient</span>(loss, variables)</a>
 <a class="sourceLine" id="cb1-526" data-line-number="526">      </a>
-<a class="sourceLine" id="cb1-527" data-line-number="527">      optimizer<span class="op">$</span><span class="kw">apply_gradients</span>(purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(<span class="kw">list</span>(gradients, variables)),</a>
+<a class="sourceLine" id="cb1-527" data-line-number="527">      optimizer<span class="op">$</span><span class="kw">apply_gradients</span>(purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="kw">list</span>(gradients, variables)),</a>
 <a class="sourceLine" id="cb1-528" data-line-number="528">                                <span class="dt">global_step =</span> tf<span class="op">$</span>train<span class="op">$</span><span class="kw">get_or_create_global_step</span>())</a>
 <a class="sourceLine" id="cb1-529" data-line-number="529">    })</a>
 <a class="sourceLine" id="cb1-530" data-line-number="530">    <span class="kw">cat</span>(<span class="kw">paste0</span>(</a>

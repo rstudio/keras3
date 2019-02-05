@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4.9000</span>
       </span>
     </div>
 
@@ -236,10 +236,10 @@
 <a class="sourceLine" id="cb1-64" data-line-number="64">  vgg &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/application_vgg.html">application_vgg19</a></span>(<span class="dt">include_top =</span> <span class="ot">FALSE</span>, <span class="dt">weights =</span> <span class="st">"imagenet"</span>)</a>
 <a class="sourceLine" id="cb1-65" data-line-number="65">  vgg<span class="op">$</span>trainable &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
 <a class="sourceLine" id="cb1-66" data-line-number="66">  style_outputs &lt;-</a>
-<a class="sourceLine" id="cb1-67" data-line-number="67"><span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(style_layers, <span class="cf">function</span>(layer)</a>
+<a class="sourceLine" id="cb1-67" data-line-number="67"><span class="st">    </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(style_layers, <span class="cf">function</span>(layer)</a>
 <a class="sourceLine" id="cb1-68" data-line-number="68">      vgg<span class="op">$</span><span class="kw"><a href="../../reference/get_layer.html">get_layer</a></span>(layer)<span class="op">$</span>output)</a>
 <a class="sourceLine" id="cb1-69" data-line-number="69">  content_outputs &lt;-</a>
-<a class="sourceLine" id="cb1-70" data-line-number="70"><span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(content_layers, <span class="cf">function</span>(layer)</a>
+<a class="sourceLine" id="cb1-70" data-line-number="70"><span class="st">    </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(content_layers, <span class="cf">function</span>(layer)</a>
 <a class="sourceLine" id="cb1-71" data-line-number="71">      vgg<span class="op">$</span><span class="kw"><a href="../../reference/get_layer.html">get_layer</a></span>(layer)<span class="op">$</span>output)</a>
 <a class="sourceLine" id="cb1-72" data-line-number="72">  model_outputs &lt;-<span class="st"> </span><span class="kw">c</span>(style_outputs, content_outputs)</a>
 <a class="sourceLine" id="cb1-73" data-line-number="73">  <span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(vgg<span class="op">$</span>input, model_outputs)</a>
@@ -286,11 +286,11 @@
 <a class="sourceLine" id="cb1-114" data-line-number="114">    <span class="co"># dim(model_outputs[[6]]) = (2, 8, 8, 512)</span></a>
 <a class="sourceLine" id="cb1-115" data-line-number="115">    model_outputs &lt;-<span class="st"> </span><span class="kw">model</span>(stack_images)</a>
 <a class="sourceLine" id="cb1-116" data-line-number="116">    style_features &lt;-<span class="st"> </span>model_outputs[<span class="dv">1</span><span class="op">:</span>num_style_layers] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-117" data-line-number="117"><span class="st">      </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(<span class="cf">function</span>(batch)</a>
+<a class="sourceLine" id="cb1-117" data-line-number="117"><span class="st">      </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="cf">function</span>(batch)</a>
 <a class="sourceLine" id="cb1-118" data-line-number="118">        batch[<span class="dv">1</span>, , , ])</a>
 <a class="sourceLine" id="cb1-119" data-line-number="119">    content_features &lt;-</a>
 <a class="sourceLine" id="cb1-120" data-line-number="120"><span class="st">      </span>model_outputs[(num_style_layers <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span>(num_style_layers <span class="op">+</span><span class="st"> </span>num_content_layers)] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-121" data-line-number="121"><span class="st">      </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(<span class="cf">function</span>(batch)</a>
+<a class="sourceLine" id="cb1-121" data-line-number="121"><span class="st">      </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="cf">function</span>(batch)</a>
 <a class="sourceLine" id="cb1-122" data-line-number="122">        batch[<span class="dv">2</span>, , , ])</a>
 <a class="sourceLine" id="cb1-123" data-line-number="123">    <span class="kw">list</span>(style_features, content_features)</a>
 <a class="sourceLine" id="cb1-124" data-line-number="124">  }</a>
@@ -312,7 +312,7 @@
 <a class="sourceLine" id="cb1-140" data-line-number="140">    <span class="co"># str(style_zip, max.level = 1)</span></a>
 <a class="sourceLine" id="cb1-141" data-line-number="141">    <span class="co"># dim(style_zip[[5]][[1]]) == (512, 512)</span></a>
 <a class="sourceLine" id="cb1-142" data-line-number="142">    style_zip &lt;-</a>
-<a class="sourceLine" id="cb1-143" data-line-number="143"><span class="st">      </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(<span class="kw">list</span>(gram_style_features, style_output_features))</a>
+<a class="sourceLine" id="cb1-143" data-line-number="143"><span class="st">      </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="kw">list</span>(gram_style_features, style_output_features))</a>
 <a class="sourceLine" id="cb1-144" data-line-number="144">    <span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(style_zip)) {</a>
 <a class="sourceLine" id="cb1-145" data-line-number="145">      <span class="co"># for l == 1:</span></a>
 <a class="sourceLine" id="cb1-146" data-line-number="146">      <span class="co"># dim(target_style) == (64, 64)</span></a>
@@ -325,7 +325,7 @@
 <a class="sourceLine" id="cb1-153" data-line-number="153">    weight_per_content_layer &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>num_content_layers</a>
 <a class="sourceLine" id="cb1-154" data-line-number="154">    content_score &lt;-<span class="st"> </span><span class="dv">0</span></a>
 <a class="sourceLine" id="cb1-155" data-line-number="155">    content_zip &lt;-</a>
-<a class="sourceLine" id="cb1-156" data-line-number="156"><span class="st">      </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(<span class="kw">list</span>(content_features, content_output_features))</a>
+<a class="sourceLine" id="cb1-156" data-line-number="156"><span class="st">      </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="kw">list</span>(content_features, content_output_features))</a>
 <a class="sourceLine" id="cb1-157" data-line-number="157">    <span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(content_zip)) {</a>
 <a class="sourceLine" id="cb1-158" data-line-number="158">      <span class="co"># dim(comb_content) ==  (1, 8, 8, 512)</span></a>
 <a class="sourceLine" id="cb1-159" data-line-number="159">      <span class="co"># dim(target_content) == (8, 8, 512)</span></a>
@@ -364,14 +364,14 @@
 <a class="sourceLine" id="cb1-192" data-line-number="192">run_style_transfer &lt;-<span class="st"> </span><span class="cf">function</span>(content_path,</a>
 <a class="sourceLine" id="cb1-193" data-line-number="193">                               style_path) {</a>
 <a class="sourceLine" id="cb1-194" data-line-number="194">  model &lt;-<span class="st"> </span><span class="kw">get_model</span>()</a>
-<a class="sourceLine" id="cb1-195" data-line-number="195">  <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">walk</a></span>(model<span class="op">$</span>layers, <span class="cf">function</span>(layer)</a>
+<a class="sourceLine" id="cb1-195" data-line-number="195">  <span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">walk</a></span>(model<span class="op">$</span>layers, <span class="cf">function</span>(layer)</a>
 <a class="sourceLine" id="cb1-196" data-line-number="196">    layer<span class="op">$</span><span class="dt">trainable =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb1-197" data-line-number="197">  </a>
 <a class="sourceLine" id="cb1-198" data-line-number="198">  <span class="kw">c</span>(style_features, content_features) <span class="op">%&lt;-%</span><span class="st"> </span><span class="kw">get_feature_representations</span>(model, content_path, style_path)</a>
 <a class="sourceLine" id="cb1-199" data-line-number="199">  <span class="co"># dim(gram_style_features[[1]]) == (64, 64)</span></a>
 <a class="sourceLine" id="cb1-200" data-line-number="200">  <span class="co"># we compute this once, in advance</span></a>
 <a class="sourceLine" id="cb1-201" data-line-number="201">  gram_style_features &lt;-</a>
-<a class="sourceLine" id="cb1-202" data-line-number="202"><span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(style_features, <span class="cf">function</span>(feature)</a>
+<a class="sourceLine" id="cb1-202" data-line-number="202"><span class="st">    </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(style_features, <span class="cf">function</span>(feature)</a>
 <a class="sourceLine" id="cb1-203" data-line-number="203">      <span class="kw">gram_matrix</span>(feature))</a>
 <a class="sourceLine" id="cb1-204" data-line-number="204">  </a>
 <a class="sourceLine" id="cb1-205" data-line-number="205">  init_image &lt;-<span class="st"> </span><span class="kw">load_and_process_image</span>(content_path)</a>

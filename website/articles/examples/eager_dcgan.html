@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4.9000</span>
       </span>
     </div>
 
@@ -374,10 +374,10 @@
 <a class="sourceLine" id="cb1-202" data-line-number="202">      gradients_of_discriminator &lt;-</a>
 <a class="sourceLine" id="cb1-203" data-line-number="203"><span class="st">        </span>disc_tape<span class="op">$</span><span class="kw">gradient</span>(disc_loss, discriminator<span class="op">$</span>variables)</a>
 <a class="sourceLine" id="cb1-204" data-line-number="204">      </a>
-<a class="sourceLine" id="cb1-205" data-line-number="205">      generator_optimizer<span class="op">$</span><span class="kw">apply_gradients</span>(purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(<span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb1-205" data-line-number="205">      generator_optimizer<span class="op">$</span><span class="kw">apply_gradients</span>(purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="kw">list</span>(</a>
 <a class="sourceLine" id="cb1-206" data-line-number="206">        gradients_of_generator, generator<span class="op">$</span>variables</a>
 <a class="sourceLine" id="cb1-207" data-line-number="207">      )))</a>
-<a class="sourceLine" id="cb1-208" data-line-number="208">      discriminator_optimizer<span class="op">$</span><span class="kw">apply_gradients</span>(purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(</a>
+<a class="sourceLine" id="cb1-208" data-line-number="208">      discriminator_optimizer<span class="op">$</span><span class="kw">apply_gradients</span>(purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(</a>
 <a class="sourceLine" id="cb1-209" data-line-number="209">        <span class="kw">list</span>(gradients_of_discriminator, discriminator<span class="op">$</span>variables)</a>
 <a class="sourceLine" id="cb1-210" data-line-number="210">      ))</a>
 <a class="sourceLine" id="cb1-211" data-line-number="211">      </a>

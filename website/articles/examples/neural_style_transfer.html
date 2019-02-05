@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4.9000</span>
       </span>
     </div>
 
@@ -249,8 +249,8 @@
 <a class="sourceLine" id="cb1-69" data-line-number="69"></a>
 <a class="sourceLine" id="cb1-70" data-line-number="70"><span class="kw">print</span>(<span class="st">"Model loaded."</span>)</a>
 <a class="sourceLine" id="cb1-71" data-line-number="71"></a>
-<a class="sourceLine" id="cb1-72" data-line-number="72">nms &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_chr</a></span>(model<span class="op">$</span>layers, <span class="op">~</span>.x<span class="op">$</span>name)</a>
-<a class="sourceLine" id="cb1-73" data-line-number="73">output_dict &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(model<span class="op">$</span>layers, <span class="op">~</span>.x<span class="op">$</span>output) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/set_names">set_names</a></span>(nms)</a>
+<a class="sourceLine" id="cb1-72" data-line-number="72">nms &lt;-<span class="st"> </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span>(model<span class="op">$</span>layers, <span class="op">~</span>.x<span class="op">$</span>name)</a>
+<a class="sourceLine" id="cb1-73" data-line-number="73">output_dict &lt;-<span class="st"> </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(model<span class="op">$</span>layers, <span class="op">~</span>.x<span class="op">$</span>output) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span>(nms)</a>
 <a class="sourceLine" id="cb1-74" data-line-number="74"></a>
 <a class="sourceLine" id="cb1-75" data-line-number="75"><span class="co"># compute the neural style loss</span></a>
 <a class="sourceLine" id="cb1-76" data-line-number="76"><span class="co"># first we need to define 4 util functions</span></a>

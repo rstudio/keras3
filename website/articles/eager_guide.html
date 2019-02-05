@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4.9000</span>
       </span>
     </div>
 
@@ -373,7 +373,7 @@ tf.Tensor(
 <a class="sourceLine" id="cb15-35" data-line-number="35">    </a>
 <a class="sourceLine" id="cb15-36" data-line-number="36">    <span class="co"># update model weights</span></a>
 <a class="sourceLine" id="cb15-37" data-line-number="37">    optimizer<span class="op">$</span><span class="kw">apply_gradients</span>(</a>
-<a class="sourceLine" id="cb15-38" data-line-number="38">      purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(<span class="kw">list</span>(gradients, model<span class="op">$</span>variables)),</a>
+<a class="sourceLine" id="cb15-38" data-line-number="38">      purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="kw">list</span>(gradients, model<span class="op">$</span>variables)),</a>
 <a class="sourceLine" id="cb15-39" data-line-number="39">      <span class="dt">global_step =</span> tf<span class="op">$</span>train<span class="op">$</span><span class="kw">get_or_create_global_step</span>()</a>
 <a class="sourceLine" id="cb15-40" data-line-number="40">    )</a>
 <a class="sourceLine" id="cb15-41" data-line-number="41"></a>
@@ -513,7 +513,7 @@ tf.Tensor(
 <a class="sourceLine" id="cb21-93" data-line-number="93">      total_loss &lt;-<span class="st"> </span>total_loss <span class="op">+</span><span class="st"> </span>loss</a>
 <a class="sourceLine" id="cb21-94" data-line-number="94">      gradients &lt;-<span class="st"> </span>tape<span class="op">$</span><span class="kw">gradient</span>(loss, model<span class="op">$</span>variables)</a>
 <a class="sourceLine" id="cb21-95" data-line-number="95">      </a>
-<a class="sourceLine" id="cb21-96" data-line-number="96">      optimizer<span class="op">$</span><span class="kw">apply_gradients</span>(purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(<span class="kw">list</span>(gradients, model<span class="op">$</span>variables)),</a>
+<a class="sourceLine" id="cb21-96" data-line-number="96">      optimizer<span class="op">$</span><span class="kw">apply_gradients</span>(purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="kw">list</span>(gradients, model<span class="op">$</span>variables)),</a>
 <a class="sourceLine" id="cb21-97" data-line-number="97">                                <span class="dt">global_step =</span> tf<span class="op">$</span>train<span class="op">$</span><span class="kw">get_or_create_global_step</span>())</a>
 <a class="sourceLine" id="cb21-98" data-line-number="98">      </a>
 <a class="sourceLine" id="cb21-99" data-line-number="99">    })</a>

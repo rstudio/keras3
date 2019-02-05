@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4.9000</span>
       </span>
     </div>
 
@@ -353,7 +353,7 @@
 <a class="sourceLine" id="cb1-181" data-line-number="181">  x_test_encoded <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-182" data-line-number="182"><span class="st">    </span><span class="kw">as.matrix</span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-183" data-line-number="183"><span class="st">    </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-184" data-line-number="184"><span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">class =</span> class_names[fashion<span class="op">$</span>test<span class="op">$</span>y <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-184" data-line-number="184"><span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">class =</span> class_names[fashion<span class="op">$</span>test<span class="op">$</span>y <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-185" data-line-number="185"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> V1, <span class="dt">y =</span> V2, <span class="dt">colour =</span> class)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb1-186" data-line-number="186"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">aspect.ratio =</span> <span class="dv">1</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb1-187" data-line-number="187"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">plot.margin =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/reexports.html">unit</a></span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="st">"null"</span>)) <span class="op">+</span></a>
@@ -441,11 +441,11 @@
 <a class="sourceLine" id="cb1-269" data-line-number="269">    encoder_gradients &lt;-<span class="st"> </span>tape<span class="op">$</span><span class="kw">gradient</span>(loss, encoder<span class="op">$</span>variables)</a>
 <a class="sourceLine" id="cb1-270" data-line-number="270">    decoder_gradients &lt;-<span class="st"> </span>tape<span class="op">$</span><span class="kw">gradient</span>(loss, decoder<span class="op">$</span>variables)</a>
 <a class="sourceLine" id="cb1-271" data-line-number="271">    </a>
-<a class="sourceLine" id="cb1-272" data-line-number="272">    optimizer<span class="op">$</span><span class="kw">apply_gradients</span>(purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(<span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb1-272" data-line-number="272">    optimizer<span class="op">$</span><span class="kw">apply_gradients</span>(purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="kw">list</span>(</a>
 <a class="sourceLine" id="cb1-273" data-line-number="273">      encoder_gradients, encoder<span class="op">$</span>variables</a>
 <a class="sourceLine" id="cb1-274" data-line-number="274">    )),</a>
 <a class="sourceLine" id="cb1-275" data-line-number="275">    <span class="dt">global_step =</span> tf<span class="op">$</span>train<span class="op">$</span><span class="kw">get_or_create_global_step</span>())</a>
-<a class="sourceLine" id="cb1-276" data-line-number="276">    optimizer<span class="op">$</span><span class="kw">apply_gradients</span>(purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(<span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb1-276" data-line-number="276">    optimizer<span class="op">$</span><span class="kw">apply_gradients</span>(purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="kw">list</span>(</a>
 <a class="sourceLine" id="cb1-277" data-line-number="277">      decoder_gradients, decoder<span class="op">$</span>variables</a>
 <a class="sourceLine" id="cb1-278" data-line-number="278">    )),</a>
 <a class="sourceLine" id="cb1-279" data-line-number="279">    <span class="dt">global_step =</span> tf<span class="op">$</span>train<span class="op">$</span><span class="kw">get_or_create_global_step</span>())</a>

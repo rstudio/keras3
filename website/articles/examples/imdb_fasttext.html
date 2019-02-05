@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4.9000</span>
       </span>
     </div>
 
@@ -177,19 +177,19 @@
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># Function Definitions ----------------------------------------------------</span></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb1-6" data-line-number="6">create_ngram_set &lt;-<span class="st"> </span><span class="cf">function</span>(input_list, <span class="dt">ngram_value =</span> <span class="dv">2</span>){</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">  indices &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(<span class="dv">0</span><span class="op">:</span>(<span class="kw">length</span>(input_list) <span class="op">-</span><span class="st"> </span>ngram_value), <span class="op">~</span><span class="dv">1</span><span class="op">:</span>ngram_value <span class="op">+</span><span class="st"> </span>.x)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  indices &lt;-<span class="st"> </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="dv">0</span><span class="op">:</span>(<span class="kw">length</span>(input_list) <span class="op">-</span><span class="st"> </span>ngram_value), <span class="op">~</span><span class="dv">1</span><span class="op">:</span>ngram_value <span class="op">+</span><span class="st"> </span>.x)</a>
 <a class="sourceLine" id="cb1-8" data-line-number="8">  indices <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_chr</a></span>(<span class="op">~</span>input_list[.x] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">paste</span>(<span class="dt">collapse =</span> <span class="st">"|"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="st">    </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span>(<span class="op">~</span>input_list[.x] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">paste</span>(<span class="dt">collapse =</span> <span class="st">"|"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10"><span class="st">    </span><span class="kw">unique</span>()</a>
 <a class="sourceLine" id="cb1-11" data-line-number="11">}</a>
 <a class="sourceLine" id="cb1-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb1-13" data-line-number="13">add_ngram &lt;-<span class="st"> </span><span class="cf">function</span>(sequences, token_indice, <span class="dt">ngram_range =</span> <span class="dv">2</span>){</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">  ngrams &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">  ngrams &lt;-<span class="st"> </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(</a>
 <a class="sourceLine" id="cb1-15" data-line-number="15">    sequences, </a>
 <a class="sourceLine" id="cb1-16" data-line-number="16">    create_ngram_set, <span class="dt">ngram_value =</span> ngram_range</a>
 <a class="sourceLine" id="cb1-17" data-line-number="17">  )</a>
 <a class="sourceLine" id="cb1-18" data-line-number="18">  </a>
-<a class="sourceLine" id="cb1-19" data-line-number="19">  seqs &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map2">map2</a></span>(sequences, ngrams, <span class="cf">function</span>(x, y){</a>
+<a class="sourceLine" id="cb1-19" data-line-number="19">  seqs &lt;-<span class="st"> </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span>(sequences, ngrams, <span class="cf">function</span>(x, y){</a>
 <a class="sourceLine" id="cb1-20" data-line-number="20">    tokens &lt;-<span class="st"> </span>token_indice<span class="op">$</span>token[token_indice<span class="op">$</span>ngrams <span class="op">%in%</span><span class="st"> </span>y]  </a>
 <a class="sourceLine" id="cb1-21" data-line-number="21">    <span class="kw">c</span>(x, tokens)</a>
 <a class="sourceLine" id="cb1-22" data-line-number="22">  })</a>
@@ -216,17 +216,17 @@
 <a class="sourceLine" id="cb1-43" data-line-number="43"></a>
 <a class="sourceLine" id="cb1-44" data-line-number="44"><span class="co"># Train sequences</span></a>
 <a class="sourceLine" id="cb1-45" data-line-number="45"><span class="kw">print</span>(<span class="kw">length</span>(imdb_data<span class="op">$</span>train<span class="op">$</span>x))</a>
-<a class="sourceLine" id="cb1-46" data-line-number="46"><span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"Average train sequence length: %f"</span>, <span class="kw">mean</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(imdb_data<span class="op">$</span>train<span class="op">$</span>x, length))))</a>
+<a class="sourceLine" id="cb1-46" data-line-number="46"><span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"Average train sequence length: %f"</span>, <span class="kw">mean</span>(<span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span>(imdb_data<span class="op">$</span>train<span class="op">$</span>x, length))))</a>
 <a class="sourceLine" id="cb1-47" data-line-number="47"></a>
 <a class="sourceLine" id="cb1-48" data-line-number="48"><span class="co"># Test sequences</span></a>
 <a class="sourceLine" id="cb1-49" data-line-number="49"><span class="kw">print</span>(<span class="kw">length</span>(imdb_data<span class="op">$</span>test<span class="op">$</span>x)) </a>
-<a class="sourceLine" id="cb1-50" data-line-number="50"><span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"Average test sequence length: %f"</span>, <span class="kw">mean</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_int</a></span>(imdb_data<span class="op">$</span>test<span class="op">$</span>x, length))))</a>
+<a class="sourceLine" id="cb1-50" data-line-number="50"><span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">"Average test sequence length: %f"</span>, <span class="kw">mean</span>(<span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span>(imdb_data<span class="op">$</span>test<span class="op">$</span>x, length))))</a>
 <a class="sourceLine" id="cb1-51" data-line-number="51"></a>
 <a class="sourceLine" id="cb1-52" data-line-number="52"><span class="cf">if</span>(ngram_range <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) {</a>
 <a class="sourceLine" id="cb1-53" data-line-number="53">  </a>
 <a class="sourceLine" id="cb1-54" data-line-number="54">  <span class="co"># Create set of unique n-gram from the training set.</span></a>
 <a class="sourceLine" id="cb1-55" data-line-number="55">  ngrams &lt;-<span class="st"> </span>imdb_data<span class="op">$</span>train<span class="op">$</span>x <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-56" data-line-number="56"><span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(create_ngram_set) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-56" data-line-number="56"><span class="st">    </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(create_ngram_set) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-57" data-line-number="57"><span class="st">    </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-58" data-line-number="58"><span class="st">    </span><span class="kw">unique</span>()</a>
 <a class="sourceLine" id="cb1-59" data-line-number="59"></a>

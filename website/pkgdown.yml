@@ -57,10 +57,12 @@ articles:
   reuters_mlp: examples/reuters_mlp.html
   reuters_mlp_relu_vs_selu: examples/reuters_mlp_relu_vs_selu.html
   stateful_lstm: examples/stateful_lstm.html
+  tfprob_vae: examples/tfprob_vae.html
   unet: examples/unet.html
   unet_linux: examples/unet_linux.html
   variational_autoencoder: examples/variational_autoencoder.html
   variational_autoencoder_deconv: examples/variational_autoencoder_deconv.html
+  vq_vae: examples/vq_vae.html
   faq: faq.html
   functional_api: functional_api.html
   getting_started: getting_started.html

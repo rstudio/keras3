@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4.9000</span>
       </span>
     </div>
 
@@ -531,7 +531,7 @@
 <a class="sourceLine" id="cb1-356" data-line-number="356">                            <span class="dt">y =</span> <span class="kw">mask2arr</span>(x_y_imgs<span class="op">$</span>mask))</a>
 <a class="sourceLine" id="cb1-357" data-line-number="357">        }</a>
 <a class="sourceLine" id="cb1-358" data-line-number="358">        </a>
-<a class="sourceLine" id="cb1-359" data-line-number="359">        x_y_batch &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(x_y_batch)</a>
+<a class="sourceLine" id="cb1-359" data-line-number="359">        x_y_batch &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(x_y_batch)</a>
 <a class="sourceLine" id="cb1-360" data-line-number="360">        </a>
 <a class="sourceLine" id="cb1-361" data-line-number="361">        x_batch &lt;-<span class="st"> </span><span class="kw">do.call</span>(abind, <span class="kw">c</span>(x_y_batch<span class="op">$</span>x, <span class="kw">list</span>(<span class="dt">along =</span> <span class="dv">1</span>)))</a>
 <a class="sourceLine" id="cb1-362" data-line-number="362">        </a>
@@ -586,7 +586,7 @@
 <a class="sourceLine" id="cb1-411" data-line-number="411">                            <span class="dt">y =</span> <span class="kw">mask2arr</span>(x_y_imgs<span class="op">$</span>mask))</a>
 <a class="sourceLine" id="cb1-412" data-line-number="412">        }</a>
 <a class="sourceLine" id="cb1-413" data-line-number="413">        </a>
-<a class="sourceLine" id="cb1-414" data-line-number="414">        x_y_batch &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/transpose">transpose</a></span>(x_y_batch)</a>
+<a class="sourceLine" id="cb1-414" data-line-number="414">        x_y_batch &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(x_y_batch)</a>
 <a class="sourceLine" id="cb1-415" data-line-number="415">        </a>
 <a class="sourceLine" id="cb1-416" data-line-number="416">        x_batch &lt;-<span class="st"> </span><span class="kw">do.call</span>(abind, <span class="kw">c</span>(x_y_batch<span class="op">$</span>x, <span class="kw">list</span>(<span class="dt">along =</span> <span class="dv">1</span>)))</a>
 <a class="sourceLine" id="cb1-417" data-line-number="417">        </a>

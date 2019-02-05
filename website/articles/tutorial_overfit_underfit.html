@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.2.4.9000</span>
       </span>
     </div>
 
@@ -342,8 +342,8 @@ ________________________________________________________________________________
 <a class="sourceLine" id="cb14-6" data-line-number="6">  <span class="dt">bigger_train =</span> bigger_history<span class="op">$</span>metrics<span class="op">$</span>loss,</a>
 <a class="sourceLine" id="cb14-7" data-line-number="7">  <span class="dt">bigger_val =</span> bigger_history<span class="op">$</span>metrics<span class="op">$</span>val_loss</a>
 <a class="sourceLine" id="cb14-8" data-line-number="8">) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tibble/topics/rownames">rownames_to_column</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">rowname =</span> <span class="kw">as.integer</span>(rowname)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">rowname =</span> <span class="kw">as.integer</span>(rowname)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb14-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="dt">key =</span> <span class="st">"type"</span>, <span class="dt">value =</span> <span class="st">"value"</span>, <span class="op">-</span>rowname)</a>
 <a class="sourceLine" id="cb14-12" data-line-number="12">  </a>
 <a class="sourceLine" id="cb14-13" data-line-number="13"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(compare_cx, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> rowname, <span class="dt">y =</span> value, <span class="dt">color =</span> type)) <span class="op">+</span></a>
@@ -396,8 +396,8 @@ ________________________________________________________________________________
 <a class="sourceLine" id="cb16-4" data-line-number="4">  <span class="dt">l2_train =</span> l2_history<span class="op">$</span>metrics<span class="op">$</span>loss,</a>
 <a class="sourceLine" id="cb16-5" data-line-number="5">  <span class="dt">l2_val =</span> l2_history<span class="op">$</span>metrics<span class="op">$</span>val_loss</a>
 <a class="sourceLine" id="cb16-6" data-line-number="6">) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tibble/topics/rownames">rownames_to_column</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">rowname =</span> <span class="kw">as.integer</span>(rowname)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">rowname =</span> <span class="kw">as.integer</span>(rowname)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb16-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="dt">key =</span> <span class="st">"type"</span>, <span class="dt">value =</span> <span class="st">"value"</span>, <span class="op">-</span>rowname)</a>
 <a class="sourceLine" id="cb16-10" data-line-number="10">  </a>
 <a class="sourceLine" id="cb16-11" data-line-number="11"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(compare_cx, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> rowname, <span class="dt">y =</span> value, <span class="dt">color =</span> type)) <span class="op">+</span></a>
@@ -442,8 +442,8 @@ ________________________________________________________________________________
 <a class="sourceLine" id="cb18-4" data-line-number="4">  <span class="dt">dropout_train =</span> dropout_history<span class="op">$</span>metrics<span class="op">$</span>loss,</a>
 <a class="sourceLine" id="cb18-5" data-line-number="5">  <span class="dt">dropout_val =</span> dropout_history<span class="op">$</span>metrics<span class="op">$</span>val_loss</a>
 <a class="sourceLine" id="cb18-6" data-line-number="6">) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tibble/topics/rownames">rownames_to_column</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">rowname =</span> <span class="kw">as.integer</span>(rowname)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">rowname =</span> <span class="kw">as.integer</span>(rowname)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb18-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="dt">key =</span> <span class="st">"type"</span>, <span class="dt">value =</span> <span class="st">"value"</span>, <span class="op">-</span>rowname)</a>
 <a class="sourceLine" id="cb18-10" data-line-number="10">  </a>
 <a class="sourceLine" id="cb18-11" data-line-number="11"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(compare_cx, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> rowname, <span class="dt">y =</span> value, <span class="dt">color =</span> type)) <span class="op">+</span></a>
