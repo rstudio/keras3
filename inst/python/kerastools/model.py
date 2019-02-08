@@ -2,7 +2,7 @@
 
 import os
 
-if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'keras'):
+if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'keras'):
   from keras.engine import Model
 else:
   try:

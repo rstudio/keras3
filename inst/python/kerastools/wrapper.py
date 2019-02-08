@@ -1,6 +1,6 @@
 import os
 
-if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'keras'):
+if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'keras'):
   from keras.layers import Wrapper
   def shape_filter(shape): 
     return shape
