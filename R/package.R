@@ -88,9 +88,7 @@ keras <- NULL
   
   # resolve the implementaiton module (might be keras proper or might be tensorflow)
   implementation_module <- resolve_implementation_module()
-  if (implementation_module == "tensorflow.python.keras")
-    Sys.setenv(KERAS_IMPLEMENTATION = "tensorflow")
-  
+
   # if KERAS_PYTHON is defined then forward it to RETICULATE_PYTHON
   keras_python <- get_keras_python()
   if (!is.null(keras_python))
