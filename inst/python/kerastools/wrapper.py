@@ -1,17 +1,17 @@
 import os
 
-if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'tensorflow'):
+if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'keras'):
+  from keras.layers import Wrapper
+  def shape_filter(shape): 
+    return shape
+else:
   from tensorflow.python.keras.layers import Wrapper
   def shape_filter(shape):
     if not isinstance(shape, list):
       return shape.as_list()
     else:
       return shape
-else:
-  from keras.layers import Wrapper
-  def shape_filter(shape):
-    return shape
-
+ 
 class RWrapper(Wrapper):
 
   def __init__(self, r_build, r_call, r_compute_output_shape, **kwargs):

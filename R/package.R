@@ -77,6 +77,7 @@ use_backend <- function(backend = c("tensorflow", "cntk", "theano", "plaidml")) 
   } else {
     Sys.setenv(KERAS_BACKEND = match.arg(backend))
   }
+  if (backend != "tensorflow") use_implementation("keras")
 }
 
 
@@ -87,7 +88,7 @@ keras <- NULL
   
   # resolve the implementaiton module (might be keras proper or might be tensorflow)
   implementation_module <- resolve_implementation_module()
-  
+
   # if KERAS_PYTHON is defined then forward it to RETICULATE_PYTHON
   keras_python <- get_keras_python()
   if (!is.null(keras_python))
@@ -160,7 +161,7 @@ resolve_implementation_module <- function() {
   implementation_module
 }
 
-get_keras_implementation <- function(default = "keras") {
+get_keras_implementation <- function(default = "tensorflow") {
   get_keras_option("KERAS_IMPLEMENTATION", default = default)
 }
 

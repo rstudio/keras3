@@ -115,7 +115,7 @@ test_succeeds("model can be exported to TensorFlow", {
   
   export <- function() tensorflow::export_savedmodel(model, model_dir)
   
-  if (grepl("^tensorflow", Sys.getenv("KERAS_IMPLEMENTATION"))) {
+  if (!grepl("^keras", Sys.getenv("KERAS_IMPLEMENTATION"))) {
     expect_error(export())
   }
   else {

@@ -1,4 +1,9 @@
 
+## Development version
+
+- Use `tf.keras` as default implementation module.
+
+
 ## Keras 2.2.4 (CRAN)
 
 - Improve handling of `timeseries_generator()` in calls to `fit_generator()`
