@@ -35,6 +35,19 @@ skip_if_tensorflow_implementation <- function() {
     skip("Test not run for TensorFlow implementation")
 }
 
+skip_if_no_tfp <- function(required_version = NULL) {
+  
+  if (!reticulate::py_module_available("tensorflow_probability"))
+    skip ("TensorFlow probability not available.")
+  
+  version <- (import("tensorflow_probability")$`__version__` %>%
+    strsplit(".", fixed = TRUE))[[1]]
+  pkg_version <- package_version(paste(version[[1]], version[[2]], sep = "."))
+  if (pkg_version < required_version) 
+    skip ("Required TFP version not available for testing.")
+  
+}
+
 define_model <- function() {
   model <- keras_model_sequential() 
   model %>%
