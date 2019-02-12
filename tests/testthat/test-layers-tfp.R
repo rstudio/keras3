@@ -11,13 +11,35 @@ context("tensorflow probability layer methods")
 
 source("utils.R")
 
-library(tensorflow)
-tfp <- import("tensorflow_probability")
-tfd <- tfp$distributions
-tfpl <- tfp$layers
+load_tfp <- function() {
+  tfp <- NULL
+  makeActiveBinding("tfp", env = .GlobalEnv, function() {
+    if (!is.null(tfp)) {
+      return(tfp)
+    } else {
+      tfp <<- import("tensorflow_probability")
+      tfp
+    }
+  })
+}
+
+load_tf <- function() {
+  tf <- NULL
+  makeActiveBinding("tf", env = .GlobalEnv, function() {
+    if (!is.null(tf)) {
+      return(tf)
+    } else {
+      tf <<- import("tensorflow")
+      tf
+    }
+  })
+}
 
 test_succeeds("can use layer_multivariate_normal_tril in a keras model", {
+  
   skip_if_no_tfp(required_version = "0.7")
+  load_tf()
+  load_tfp()
   
   n <- as.integer(1e3)
   scale_tril <-
@@ -25,15 +47,15 @@ test_succeeds("can use layer_multivariate_normal_tril in a keras model", {
            ncol = 2,
            byrow = TRUE) %>% k_cast_to_floatx()
   scale_noise <- 0.01
-  x <- tfd$Normal(loc = 0, scale = 1)$sample(c(n, 2L))
+  x <- tfp$distributions$Normal(loc = 0, scale = 1)$sample(c(n, 2L))
   eps <-
-    tfd$Normal(loc = 0, scale = scale_noise)$sample(c(1000L, 2L))
+    tfp$distributions$Normal(loc = 0, scale = scale_noise)$sample(c(1000L, 2L))
   y = tf$matmul(x, scale_tril) + eps
   d <- tf$compat$dimension_value(y$shape[-1])
   
   model <- keras_model_sequential() %>%
     layer_dense(
-      units = tfpl$MultivariateNormalTriL$params_size(d),
+      units = tfp$layers$MultivariateNormalTriL$params_size(d),
       input_shape = x$shape[-1]
     ) %>%
     layer_multivariate_normal_tril(event_size = d)
@@ -54,7 +76,10 @@ test_succeeds("can use layer_multivariate_normal_tril in a keras model", {
 })
 
 test_succeeds("can use layer_kl_divergence_add_loss in a keras model", {
+  
   skip_if_no_tfp(required_version = "0.7")
+  load_tf()
+  load_tfp()
   
   encoded_size <- 2
   input_shape <- c(2L, 2L, 1L)
@@ -65,10 +90,10 @@ test_succeeds("can use layer_kl_divergence_add_loss in a keras model", {
   encoder_model <- keras_model_sequential() %>%
     layer_flatten(input_shape = input_shape) %>%
     layer_dense(units = 10, activation = "relu") %>%
-    layer_dense(units = tfpl$MultivariateNormalTriL$params_size(encoded_size)) %>%
+    layer_dense(units = tfp$layers$MultivariateNormalTriL$params_size(encoded_size)) %>%
     layer_multivariate_normal_tril(event_size = encoded_size) %>%
     layer_kl_divergence_add_loss(
-      distribution = tfd$Independent(tfd$Normal(loc = c(0, 0), scale = 1),
+      distribution = tfp$distributions$Independent(tfp$distributions$Normal(loc = c(0, 0), scale = 1),
                                      reinterpreted_batch_ndims = 1L),
       weight = train_size
     )
@@ -77,9 +102,9 @@ test_succeeds("can use layer_kl_divergence_add_loss in a keras model", {
     layer_dense(units = 10,
                 activation = 'relu',
                 input_shape = encoded_size) %>%
-    layer_dense(tfpl$IndependentBernoulli$params_size(input_shape)) %>%
+    layer_dense(tfp$layers$IndependentBernoulli$params_size(input_shape)) %>%
     layer_independent_bernoulli(event_shape = input_shape,
-                                convert_to_tensor_fn = tfd$Bernoulli$logits)
+                                convert_to_tensor_fn = tfp$distributions$Bernoulli$logits)
   
   vae_model <- keras_model(inputs = encoder_model$inputs,
                            outputs = decoder_model(encoder_model$outputs[1]))
@@ -98,7 +123,10 @@ test_succeeds("can use layer_kl_divergence_add_loss in a keras model", {
 })
 
 test_succeeds("can use layer_independent_bernoulli in a keras model", {
+  
   skip_if_no_tfp(required_version = "0.7")
+  load_tf()
+  load_tfp()
   
   n <- as.integer(1e3)
   scale_tril <-
@@ -106,18 +134,18 @@ test_succeeds("can use layer_independent_bernoulli in a keras model", {
            ncol = 2,
            byrow = TRUE) %>% k_cast_to_floatx()
   scale_noise <- 0.01
-  x <- tfd$Normal(loc = 0, scale = 1)$sample(c(n, 2L))
+  x <- tfp$distributions$Normal(loc = 0, scale = 1)$sample(c(n, 2L))
   eps <-
-    tfd$Normal(loc = 0, scale = scale_noise)$sample(c(1000L, 2L))
+    tfp$distributions$Normal(loc = 0, scale = scale_noise)$sample(c(1000L, 2L))
   y <-
-    tfd$Bernoulli(logits = tf$reshape(tf$matmul(x, scale_tril) + eps,
+    tfp$distributions$Bernoulli(logits = tf$reshape(tf$matmul(x, scale_tril) + eps,
                                       shape = shape(n, 1L, 2L, 1L)))$sample()
   
   event_shape <- dim(y)[2:4]
   
   model <- keras_model_sequential() %>%
     layer_dense(
-      units = tfpl$IndependentBernoulli$params_size(event_shape),
+      units = tfp$layers$IndependentBernoulli$params_size(event_shape),
       input_shape = dim(x)[2]
     ) %>%
     layer_independent_bernoulli(event_shape = event_shape)

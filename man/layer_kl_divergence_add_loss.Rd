@@ -26,7 +26,8 @@ As is with all \code{tf$reduce_*} ops, NULL means reduce over all dimensions;
 \code{()} means reduce over none of them. Default value: \code{()} (i.e., no reduction).}
 
 \item{test_points_fn}{A callable taking a \code{tfp$distribution} instance and returning a tensor
-used for random test points to approximate the KL divergence. Default value: \code{tf$convert_to_tensor}.#'}
+used for random test points to approximate the KL divergence.
+Default value: \code{tf$convert_to_tensor}.}
 
 \item{weight}{Multiplier applied to the calculated KL divergence for each Keras batch member.
 Default value: NULL (i.e., do not weight each batch member).}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers_tfp.R
 \name{layer_multivariate_normal_tril}
 \alias{layer_multivariate_normal_tril}
-\title{A \code{d}-variate MVNTriL Keras layer from \code{d + d * (d + 1) // 2} params.}
+\title{A \code{d}-variate MVNTriL Keras layer from \code{d+d*(d+1)/ 2} params.}
 \usage{
 layer_multivariate_normal_tril(object, event_size,
   convert_to_tensor_fn = NULL, validate_args = NULL,
@@ -11,6 +11,8 @@ layer_multivariate_normal_tril(object, event_size,
 }
 \arguments{
 \item{object}{Model or layer object}
+
+\item{event_size}{Integer vector tensor representing the shape of single draw from this distribution.}
 
 \item{convert_to_tensor_fn}{A callable that takes a \code{tfd$Distribution} instance and returns a
 \code{tf$Tensor}-like object. Default value: \code{tfd$Distribution$sample}.}
@@ -40,11 +42,9 @@ isn't provided.}
 \item{trainable}{Whether the layer weights will be updated during training.}
 
 \item{weights}{Initial weights for layer.}
-
-\item{event_shape}{Integer vector tensor representing the shape of single draw from this distribution.}
 }
 \description{
-A \code{d}-variate MVNTriL Keras layer from \code{d + d * (d + 1) // 2} params.
+A \code{d}-variate MVNTriL Keras layer from \code{d+d*(d+1)/ 2} params.
 }
 \seealso{
 Other Probabilistic layers (require TensorFlow probability): \code{\link{layer_independent_bernoulli}},

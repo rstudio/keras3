@@ -73,7 +73,7 @@ layer_kl_divergence_add_loss <- function(object,
 #'
 #' @inheritParams layer_dense
 #'
-#' @param event_shape Integer vector tensor representing the shape of single draw from this distribution.
+#' @param event_size Integer vector tensor representing the shape of single draw from this distribution.
 #' @param convert_to_tensor_fn A callable that takes a `tfd$Distribution` instance and returns a
 #'  `tf$Tensor`-like object. Default value: `tfd$Distribution$sample`.
 #' @param validate_args  Logical, default `FALSE`. When `TRUE` distribution parameters are checked
@@ -126,7 +126,7 @@ layer_multivariate_normal_tril <- function(object,
 #'
 #' @inheritParams layer_dense
 #'
-#' @param event_size Scalar integer representing the size of single draw from this distribution.
+#' @param event_shape Scalar integer representing the size of single draw from this distribution.
 #' @param convert_to_tensor_fn A callable that takes a `tfd$Distribution` instance and returns a
 #'  `tf$Tensor`-like object. Default value: `tfd$Distribution$sample`.
 #' @param sample_dtype `dtype` of samples produced by this distribution.

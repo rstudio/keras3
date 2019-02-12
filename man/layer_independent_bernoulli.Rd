@@ -13,6 +13,8 @@ layer_independent_bernoulli(object, event_shape,
 \arguments{
 \item{object}{Model or layer object}
 
+\item{event_shape}{Scalar integer representing the size of single draw from this distribution.}
+
 \item{convert_to_tensor_fn}{A callable that takes a \code{tfd$Distribution} instance and returns a
 \code{tf$Tensor}-like object. Default value: \code{tfd$Distribution$sample}.}
 
@@ -44,8 +46,6 @@ isn't provided.}
 \item{trainable}{Whether the layer weights will be updated during training.}
 
 \item{weights}{Initial weights for layer.}
-
-\item{event_size}{Scalar integer representing the size of single draw from this distribution.}
 }
 \description{
 An Independent-Bernoulli Keras layer from \code{prod(event_shape)} params
