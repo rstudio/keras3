@@ -6,10 +6,10 @@
 
 import os
 
-if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'tensorflow'):
-  from tensorflow.python.keras.utils import Progbar
-else:
+if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'keras'):
   from keras.utils import Progbar
+else:
+  from tensorflow.python.keras.utils import Progbar
 
 def apply_patch():
 

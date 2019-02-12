@@ -2,10 +2,10 @@
 
 import os
 
-if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'tensorflow'):
-  from tensorflow.python.keras.callbacks import Callback
-else:
+if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'keras'):
   from keras.callbacks import Callback
+else:
+  from tensorflow.python.keras.callbacks import Callback
 
 class RCallback(Callback):
   

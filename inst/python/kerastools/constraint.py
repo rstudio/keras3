@@ -1,10 +1,10 @@
 
 import os
 
-if (os.getenv('KERAS_IMPLEMENTATION', 'keras') == 'tensorflow'):
-  from tensorflow.python.keras.constraints import Constraint
-else:
+if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'keras'):
   from keras.constraints import Constraint
+else:
+  from tensorflow.python.keras.constraints import Constraint
 
 class RConstraint(Constraint):
 
