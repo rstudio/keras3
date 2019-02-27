@@ -867,9 +867,7 @@ k_epsilon <- function() {
 #' @rdname k_epsilon
 #' @export
 k_set_epsilon <- function(e) {
-  keras$backend$set_epsilon(
-    e = e
-  )
+  keras$backend$set_epsilon(e)
 }
 
 
@@ -994,9 +992,7 @@ k_floatx <- function() {
 #' @rdname k_floatx
 #' @export
 k_set_floatx <- function(floatx) {
-  keras$backend$set_floatx(
-    floatx = floatx
-  )
+  keras$backend$set_floatx(floatx)
 }
 
 
