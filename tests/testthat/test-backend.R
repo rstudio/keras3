@@ -115,3 +115,20 @@ test_backend("k_concatenate", {
   k_concatenate(list(x, y), 1)
 })
 
+test_backend("k_set_floatx", {
+  skip_if_cntk()
+  skip_if_theano()
+  k_set_floatx("float16")
+  expect_identical(k_floatx(), "float16")
+  k_set_floatx("float32")
+  expect_identical(k_floatx(), "float32")
+})
+
+test_backend("k_set_epsilon", {
+  skip_if_cntk()
+  skip_if_theano()
+  k_set_epsilon(1e-4)
+  expect_equal(k_epsilon(), 1e-4)
+  k_set_epsilon(1e-07)
+  expect_equal(k_epsilon(), 1e-07)
+})
