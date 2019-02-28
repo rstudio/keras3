@@ -925,10 +925,13 @@ as_generator.default <- function(x) {
 }
 
 as_generator.tensorflow.python.data.ops.dataset_ops.Dataset <- function(x) {
-  python_path <- system.file("python", package = "tfdatasets")
+  python_path <- system.file("python", package = "keras")
   tools <- reticulate::import_from_path("kerastools", path = python_path)
   tools$generator$dataset_generator(x , k_get_session())
 }
+
+as_generator.tensorflow.python.data.ops.dataset_ops.DatasetV2 <-
+  as_generator.tensorflow.python.data.ops.dataset_ops.Dataset
 
 as_generator.function <- function(x) {
   reticulate::py_iterator(function() keras_array(x()))
