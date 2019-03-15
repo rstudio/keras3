@@ -19,7 +19,8 @@ cache:
 before_script:
   - pip2.7 install --upgrade --ignore-installed --user travis virtualenv
   - pip2.7 install --upgrade --ignore-installed --user travis keras h5py pyyaml requests Pillow scipy theano
-  - if [[ $TENSORFLOW_VERSION == "1.12" ]]; then
+  - |
+    if [[ $TENSORFLOW_VERSION == "1.12" ]]; then
       pip2.7 install --upgrade --ignore-installed --user travis https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.12.0-cp27-none-linux_x86_64.whl
     else
       pip2.7 install --upgrade --ignore-installed --user travis tensorflow
