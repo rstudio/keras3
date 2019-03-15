@@ -8,6 +8,7 @@ env:
   - KERAS_BACKEND="tensorflow"
   - KERAS_BACKEND="theano" THEANO_FLAGS=optimizer=fast_compile
   - KERAS_IMPLEMENTATION="tensorflow"
+  - KERAS_IMPLEMENTATION="tensorflow" TENSORFLOW_VERSION="1.12"
 
 cache:
   packages: true
@@ -17,6 +18,12 @@ cache:
 
 before_script:
   - pip2.7 install --upgrade --ignore-installed --user travis virtualenv
-  - pip2.7 install --upgrade --ignore-installed --user travis keras h5py pyyaml requests Pillow scipy theano tensorflow
+  - pip2.7 install --upgrade --ignore-installed --user travis keras h5py pyyaml requests Pillow scipy theano
+  - if [[ $TENSORFLOW_VERSION == "1.12" ]]; then
+      pip2.7 install https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.12.0-cp27-none-linux_x86_64.whl
+    else
+      pip2.7 install tensorflow
+    fi
+  - pip show tensorflow
 
 
