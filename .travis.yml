@@ -4,11 +4,28 @@ language: r
 dist: trusty
 sudo: false
 
-env:
-  - KERAS_BACKEND="tensorflow"
-  - KERAS_BACKEND="theano" THEANO_FLAGS=optimizer=fast_compile
-  - KERAS_IMPLEMENTATION="tensorflow"
-  - KERAS_IMPLEMENTATION="tensorflow" TENSORFLOW_VERSION="1.12"
+matrix:
+  include:
+    - name: "TensorFlow (Keras)"
+      env:
+        - KERAS_BACKEND="tensorflow"
+        - KERAS_IMPLEMENTATION="tensorflow"
+    - name: "Theano"
+      env:
+        - KERAS_BACKEND="theano"
+        - THEANO_FLAGS=optimizer=fast_compile
+    - name: "TensorFlow (TensorFlow)"
+      env:
+        - KERAS_BACKEND="tensorflow"
+        - KERAS_IMPLEMENTATION="tensorflow"
+    - name: "TensorFlow (TensorFlow 1.12)"
+      env:
+        - KERAS_IMPLEMENTATION="tensorflow"
+        - TENSORFLOW_WHEEL="https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.12.0-cp27-none-linux_x86_64.whl"
+    - name: "TensorFlow (TensorFlow 2.0-preview)"
+      env:
+        - KERAS_IMPLEMENTATION="tensorflow"
+        - TENSORFLOW_WHEEL="https://files.pythonhosted.org/packages/b8/48/983c8af6e63cfeebb6bb89866c38ea7d16491b8f72309f27df41b33a751e/tf_nightly_2.0_preview-1.13.0.dev20190117-cp27-cp27mu-manylinux1_x86_64.whl"
 
 cache:
   packages: true
@@ -20,8 +37,8 @@ before_script:
   - pip2.7 install --upgrade --ignore-installed --user travis virtualenv
   - pip2.7 install --upgrade --ignore-installed --user travis keras h5py pyyaml requests Pillow scipy theano
   - |
-    if [[ $TENSORFLOW_VERSION == "1.12" ]]; then
-      pip2.7 install --upgrade --ignore-installed --user travis https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.12.0-cp27-none-linux_x86_64.whl
+    if [[ ! -z "$TENSORFLOW_WHEEL" ]]; then
+      pip2.7 install --upgrade --ignore-installed --user travis $TENSORFLOW_WHEEL
     else
       pip2.7 install --upgrade --ignore-installed --user travis tensorflow
     fi
