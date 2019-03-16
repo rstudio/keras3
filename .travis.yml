@@ -46,7 +46,5 @@ before_script:
       pip2.7 install --upgrade --ignore-installed --user travis $TENSORFLOW_WHEEL
     else
       pip2.7 install --upgrade --ignore-installed --user travis tensorflow
+      pip show tensorflow
     fi
-  - pip show tensorflow
-
-
