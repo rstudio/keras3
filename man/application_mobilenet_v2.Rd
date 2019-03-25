@@ -8,8 +8,8 @@
 \title{MobileNetV2 model architecture}
 \usage{
 application_mobilenet_v2(input_shape = NULL, alpha = 1,
-  depth_multiplier = 1, include_top = TRUE, weights = "imagenet",
-  input_tensor = NULL, pooling = NULL, classes = 1000)
+  include_top = TRUE, weights = "imagenet", input_tensor = NULL,
+  pooling = NULL, classes = 1000)
 
 mobilenet_v2_preprocess_input(x)
 
@@ -31,9 +31,6 @@ value.}
 \item If \code{alpha} > 1.0, proportionally increases the number of filters in each layer.
 \item If \code{alpha} = 1, default number of filters from the paper are used at each layer.
 }}
-
-\item{depth_multiplier}{depth multiplier for depthwise convolution (also
-called the resolution multiplier)}
 
 \item{include_top}{whether to include the fully-connected layer at the top of
 the network.}
