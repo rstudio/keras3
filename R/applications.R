@@ -435,13 +435,12 @@ mobilenet_load_model_hdf5 <- function(filepath) {
 #' @seealso application_mobilenet
 #' 
 #' @export
-application_mobilenet_v2 <- function(input_shape = NULL, alpha = 1.0, depth_multiplier = 1,  include_top = TRUE, 
+application_mobilenet_v2 <- function(input_shape = NULL, alpha = 1.0,  include_top = TRUE, 
                                      weights = "imagenet", input_tensor = NULL, pooling = NULL, classes = 1000) {
   
   keras$applications$MobileNetV2(
     input_shape = as_integer_tuple(input_shape),
     alpha = alpha,
-    depth_multiplier = as.integer(depth_multiplier),
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
