@@ -31,7 +31,7 @@ FLAGS <- flags(
 
 quora_data <- get_file(
   "quora_duplicate_questions.tsv",
-  "http://qim.fi.quoracdn.net/quora_duplicate_questions.tsv"
+  "http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv"
 )
 
 
