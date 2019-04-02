@@ -37,6 +37,7 @@ instead of a filename, this parameter should always be used.}
 }
 \seealso{
 Other image preprocessing: \code{\link{fit_image_data_generator}},
+  \code{\link{flow_images_from_dataframe}},
   \code{\link{flow_images_from_data}},
   \code{\link{flow_images_from_directory}},
   \code{\link{image_load}}

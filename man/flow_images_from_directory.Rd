@@ -83,6 +83,7 @@ array of corresponding labels. The generator loops indefinitely.
 
 \seealso{
 Other image preprocessing: \code{\link{fit_image_data_generator}},
+  \code{\link{flow_images_from_dataframe}},
   \code{\link{flow_images_from_data}},
   \code{\link{image_load}}, \code{\link{image_to_array}}
 }
