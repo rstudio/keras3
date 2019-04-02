@@ -3,6 +3,8 @@
 
 - Use `tf.keras` as default implementation module.
 
+- Added AppVeyor to test on Windows.
+
 
 ## Keras 2.2.4 (CRAN)
 
