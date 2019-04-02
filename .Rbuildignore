@@ -33,4 +33,4 @@
 ^Jenkinsfile$
 ^logo.png$
 
-
+^appveyor\.yml$
