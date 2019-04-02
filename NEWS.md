@@ -5,6 +5,8 @@
 
 - Added AppVeyor to test on Windows.
 
+- Added `flow_images_from_dataframe` function (#658).
+
 
 ## Keras 2.2.4 (CRAN)
 
