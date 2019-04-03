@@ -886,6 +886,13 @@ flow_images_from_directory <- function(
 #'   * "other": array of y_col data,
 #'   `NULL`, no targets are returned (the generator will only yield batches of 
 #'   image data, which is useful to use in  `predict_generator()`).
+#'   
+#' @note 
+#' This functions requires that `pandas` (python module) is installed in the 
+#' same environment as `tensorflow` and `keras`. 
+#' 
+#' If you are using `r-tensorflow` (the default environment) you can install 
+#' `pandas` by running `reticulate::py_install("pandas", envname = "r-tensorflow")`.
 #' 
 #' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a
 #'   array of corresponding labels. The generator loops indefinitely.
@@ -899,6 +906,10 @@ flow_images_from_dataframe <- function(
   batch_size = 32, shuffle = TRUE, seed = NULL, save_to_dir = NULL, 
   save_prefix = "", save_format = "png", subset = NULL, 
   interpolation = "nearest", drop_duplicates = TRUE) {
+  
+  if (!reticulate::py_module_available("pandas"))
+    stop("Pandas (python module) must be installed in the same environment as Keras.", 
+         '. Install it using reticulate::py_install("pandas", envname = "r-tensorflow").')
   
   args <- list(
     dataframe = as.data.frame(dataframe),

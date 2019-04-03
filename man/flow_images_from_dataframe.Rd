@@ -100,6 +100,13 @@ augmented/normalized data.
 \details{
 Yields batches indefinitely, in an infinite loop.
 }
+\note{
+This functions requires that \code{pandas} (python module) is installed in the
+same environment as \code{tensorflow} and \code{keras}.
+
+If you are using \code{r-tensorflow} (the default environment) you can install
+\code{pandas} by running \code{reticulate::py_install("pandas", envname = "r-tensorflow")}.
+}
 \section{Yields}{
  \code{(x, y)} where \code{x} is an array of image data and \code{y} is a
 array of corresponding labels. The generator loops indefinitely.
