@@ -76,6 +76,11 @@ test_succeeds("images arrays can be resized", {
 })
 
 test_succeeds("flow images from dataframe works", {
+  
+  if (!reticulate::py_module_available("pandas"))
+    skip("Needs pandas")
+    
+  
   if (have_pillow()) {
     
     df <- data.frame(
