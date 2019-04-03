@@ -81,7 +81,29 @@ test_succeeds("custom callbacks", {
   
 })
 
-
-
-
-
+test_succeeds("on predict callbacks", {
+  
+  CustomCallback <- R6::R6Class(
+    "CustomCallback",
+    inherit = KerasCallback,
+    public = list(
+      on_predict_begin = function(logs) {
+        cat("PREDICT BEGIN\n")
+      },
+      on_predict_end = function(logs) {
+        cat("PREDICT END\n")
+      }
+    )
+  )
+  
+  input <- layer_input(shape = 1)
+  output <- layer_dense(input, 1)
+  model <- keras_model(input, output)
+  
+  cc <- CustomCallback$new()
+  out <- capture.output(
+    pred <- predict(model, x = matrix(1:10, ncol = 1), callbacks = cc)
+    )
+  
+  expect_equal(out, c("PREDICT_BEGIN", "PREDICT_END"))
+})

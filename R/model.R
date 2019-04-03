@@ -554,7 +554,8 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
 #' 
 #' @importFrom stats predict
 #' @export
-predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verbose=0, steps=NULL, ...) {
+predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verbose=0, steps=NULL, 
+                                                callbacks = NULL,...) {
   
   # defaults
   if (is.null(batch_size) && is.null(steps))
@@ -563,7 +564,8 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
   # args
   args <- list(
     batch_size = as_nullable_integer(batch_size),
-    verbose = as.integer(verbose)
+    verbose = as.integer(verbose),
+    callbacks = normalize_callbacks(NA, callbacks)
   )
   
   # resolve x (check for TF dataset)

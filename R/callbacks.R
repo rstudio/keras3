@@ -475,7 +475,48 @@ KerasCallback <- R6Class("KerasCallback",
     
     on_train_end = function(logs = NULL) {
       
+    },
+    
+    on_predict_batch_begin = function(batch, logs = NULL) {
+      
+    },
+    
+    on_predict_batch_end = function(batch, logs = NULL) {
+      
+    },
+    
+    on_predict_begin = function(logs = NULL) {
+      
+    },
+    
+    on_predict_end = function(logs = NULL) {
+      
+    },
+    
+    on_test_batch_begin = function(batch, logs = NULL) {
+      
+    },
+    
+    on_test_batch_end = function(batch, logs = NULL) {
+      
+    },
+    
+    on_test_begin = function(logs = NULL) {
+      
+    },
+    
+    on_test_end = function(logs = NULL) {
+      
+    },
+    
+    on_train_batch_begin = function(batch, logs = NULL) {
+      
+    },
+    
+    on_train_batch_end = function(batch, logs = NULL) {
+      
     }
+    
   )
 )
 
@@ -486,7 +527,8 @@ normalize_callbacks <- function(view_metrics, callbacks) {
     callbacks <- list(callbacks)
   
   # always include the metrics callback
-  callbacks <- append(callbacks, KerasMetricsCallback$new(view_metrics))  
+  if (!is.na(view_metrics))
+    callbacks <- append(callbacks, KerasMetricsCallback$new(view_metrics))  
  
   # import callback utility module
   python_path <- system.file("python", package = "keras")
@@ -510,7 +552,17 @@ normalize_callbacks <- function(view_metrics, callbacks) {
         r_on_batch_begin = callback$on_batch_begin,
         r_on_batch_end = callback$on_batch_end,
         r_on_train_begin = callback$on_train_begin,
-        r_on_train_end = callback$on_train_end
+        r_on_train_end = callback$on_train_end,
+        r_on_predict_batch_begin = callback$on_predict_batch_begin,
+        r_on_predict_batch_end = callback$on_predict_batch_end,
+        r_on_predict_begin = callback$on_predict_begin,
+        r_on_predict_end = callback$on_predict_end,
+        r_on_test_batch_begin = callback$on_test_batch_begin,
+        r_on_test_batch_end = callback$on_test_batch_end,
+        r_on_test_begin = callback$on_test_begin,
+        r_on_test_end = callback$on_test_end,
+        r_on_train_batch_begin = callback$on_train_batch_begin,
+        r_on_train_batch_end = callback$on_train_batch_end
       )
     } else {
       callback
