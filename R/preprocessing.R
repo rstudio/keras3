@@ -893,7 +893,7 @@ flow_images_from_directory <- function(
 #' @family image preprocessing
 #' @export
 flow_images_from_dataframe <- function(
-  dataframe, directory=NULL, x_col="filename", y_col="class",
+  dataframe, directory = NULL, x_col = "filename", y_col = "class",
   generator = image_data_generator(), target_size = c(256,256), 
   color_mode = "rgb", classes = NULL, class_mode = "categorical", 
   batch_size = 32, shuffle = TRUE, seed = NULL, save_to_dir = NULL, 
