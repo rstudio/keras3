@@ -105,7 +105,9 @@ This functions requires that \code{pandas} (python module) is installed in the
 same environment as \code{tensorflow} and \code{keras}.
 
 If you are using \code{r-tensorflow} (the default environment) you can install
-\code{pandas} by running \code{reticulate::py_install("pandas", envname = "r-tensorflow")}.
+\code{pandas} by running \code{reticulate::virtualenv_install("pandas", envname = "r-tensorflow")}
+or \code{reticulate::conda_install("pandas", envname = "r-tensorflow")} depending on
+the kind of environment you are using.
 }
 \section{Yields}{
  \code{(x, y)} where \code{x} is an array of image data and \code{y} is a

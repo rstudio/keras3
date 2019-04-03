@@ -892,7 +892,9 @@ flow_images_from_directory <- function(
 #' same environment as `tensorflow` and `keras`. 
 #' 
 #' If you are using `r-tensorflow` (the default environment) you can install 
-#' `pandas` by running `reticulate::py_install("pandas", envname = "r-tensorflow")`.
+#' `pandas` by running `reticulate::virtualenv_install("pandas", envname = "r-tensorflow")`
+#' or `reticulate::conda_install("pandas", envname = "r-tensorflow")` depending on
+#' the kind of environment you are using. 
 #' 
 #' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a
 #'   array of corresponding labels. The generator loops indefinitely.
@@ -909,7 +911,9 @@ flow_images_from_dataframe <- function(
   
   if (!reticulate::py_module_available("pandas"))
     stop("Pandas (python module) must be installed in the same environment as Keras.", 
-         '. Install it using reticulate::py_install("pandas", envname = "r-tensorflow").')
+         'Install it using reticulate::virtualenv_install("pandas", envname = "r-tensorflow") ', 
+         'or reticulate::conda_install("pandas", envname = "r-tensorflow") depending on ', 
+         'the kind of environment you are using.')
   
   args <- list(
     dataframe = as.data.frame(dataframe),
