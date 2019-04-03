@@ -75,5 +75,34 @@ test_succeeds("images arrays can be resized", {
   }
 })
 
+test_succeeds("flow images from dataframe works", {
+  
+  if (!reticulate::py_module_available("pandas"))
+    skip("Needs pandas")
+    
+  
+  if (have_pillow()) {
+    
+    df <- data.frame(
+      fname = rep("digit.jpeg", 10), 
+      class = letters[1:10], 
+      stringsAsFactors = FALSE
+      )
+    img_gen <- flow_images_from_dataframe(
+      df, 
+      directory = ".", 
+      x_col = "fname", 
+      y_col = "class", 
+      drop_duplicates = FALSE
+      )
+    
+    batch <- reticulate::iter_next(img_gen)
+    
+    expect_equal(dim(batch[[1]]), c(10, 256, 256, 3))
+    expect_equal(dim(batch[[2]]), c(10, 10))
+  }
+})
+
+
 
 

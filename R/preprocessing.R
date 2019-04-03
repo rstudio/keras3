@@ -843,6 +843,104 @@ flow_images_from_directory <- function(
   do.call(generator$flow_from_directory, args)
 }
 
+#' Takes the dataframe and the path to a directory and generates batches of 
+#' augmented/normalized data.
+#' 
+#' @details Yields batches indefinitely, in an infinite loop.
+#' 
+#' @inheritParams image_load
+#' @inheritParams flow_images_from_data
+#' 
+#' @param dataframe `data.frame` containing the filepaths relative to  
+#'   directory (or absolute paths if directory is `NULL`) of the images in a 
+#'   character column. It should include other column/s depending on the 
+#'   `class_mode`: 
+#'   - if `class_mode` is "categorical" (default value) it must 
+#'   include the `y_col` column with the class/es of each image. Values in 
+#'   column can be character/list if a single class or list if multiple classes. 
+#'   - if `class_mode` is "binary" or "sparse" it must include the given 
+#'   `y_col` column with class values as strings. 
+#'   - if `class_mode` is "other" it 
+#'   should contain the columns specified in `y_col`. 
+#'   - if `class_mode` is "input" or NULL no extra column is needed.
+#' @param directory character, path to the directory to read images from. 
+#'   If `NULL`, data in `x_col` column should be absolute paths.
+#' @param x_col character, column in dataframe that contains the filenames 
+#'   (or absolute paths if directory is `NULL`).
+#' @param y_col string or list, column/s in dataframe that has the target data.
+#' @param color_mode one of "grayscale", "rgb". Default: "rgb". Whether the 
+#'   images will be converted to have 1 or 3 color channels.
+#' @param drop_duplicates Boolean, whether to drop duplicate rows based on 
+#'   filename.
+#' @param classes optional list of classes (e.g. `c('dogs', 'cats')`. Default: 
+#'  `NULL` If not provided, the list of classes will be automatically inferred 
+#'  from the `y_col`, which will map to the label indices, will be alphanumeric). 
+#'  The dictionary containing the mapping from class names to class indices 
+#'  can be obtained via the attribute `class_indices`.
+#' @param class_mode one of "categorical", "binary", "sparse", "input", "other" or None. 
+#'   Default: "categorical". Mode for yielding the targets:
+#'   * "binary": 1D array of binary labels,
+#'   * "categorical": 2D array of one-hot encoded labels. Supports multi-label output.
+#'   * "sparse": 1D array of integer labels,
+#'   * "input": images identical to input images (mainly used to work with autoencoders),
+#'   * "other": array of y_col data,
+#'   `NULL`, no targets are returned (the generator will only yield batches of 
+#'   image data, which is useful to use in  `predict_generator()`).
+#'   
+#' @note 
+#' This functions requires that `pandas` (python module) is installed in the 
+#' same environment as `tensorflow` and `keras`. 
+#' 
+#' If you are using `r-tensorflow` (the default environment) you can install 
+#' `pandas` by running `reticulate::virtualenv_install("pandas", envname = "r-tensorflow")`
+#' or `reticulate::conda_install("pandas", envname = "r-tensorflow")` depending on
+#' the kind of environment you are using. 
+#' 
+#' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a
+#'   array of corresponding labels. The generator loops indefinitely.
+#'
+#' @family image preprocessing
+#' @export
+flow_images_from_dataframe <- function(
+  dataframe, directory = NULL, x_col = "filename", y_col = "class",
+  generator = image_data_generator(), target_size = c(256,256), 
+  color_mode = "rgb", classes = NULL, class_mode = "categorical", 
+  batch_size = 32, shuffle = TRUE, seed = NULL, save_to_dir = NULL, 
+  save_prefix = "", save_format = "png", subset = NULL, 
+  interpolation = "nearest", drop_duplicates = TRUE) {
+  
+  if (!reticulate::py_module_available("pandas"))
+    stop("Pandas (python module) must be installed in the same environment as Keras.", 
+         'Install it using reticulate::virtualenv_install("pandas", envname = "r-tensorflow") ', 
+         'or reticulate::conda_install("pandas", envname = "r-tensorflow") depending on ', 
+         'the kind of environment you are using.')
+  
+  args <- list(
+    dataframe = as.data.frame(dataframe),
+    directory = normalize_path(directory),
+    x_col = x_col, y_col = y_col,
+    target_size = as.integer(target_size), 
+    color_mode = color_mode, 
+    classes = classes, 
+    class_mode = class_mode, 
+    batch_size = as.integer(batch_size), 
+    shuffle = shuffle, 
+    seed = as_nullable_integer(seed), 
+    save_to_dir = normalize_path(save_to_dir), 
+    save_prefix = save_prefix, 
+    save_format = save_format,
+    drop_duplicates = drop_duplicates
+  )
+  
+  if (keras_version() >= "2.1.2") 
+    args$interpolation <- interpolation
+  
+  if (keras_version() >= "2.1.5") 
+    args$subset <- subset
+  
+  do.call(generator$flow_from_dataframe, args)
+}
+
 
 
 
