@@ -564,9 +564,15 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
   # args
   args <- list(
     batch_size = as_nullable_integer(batch_size),
-    verbose = as.integer(verbose),
-    callbacks = normalize_callbacks(callbacks)
+    verbose = as.integer(verbose)
   )
+  
+  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= 2.0) {
+    args <- append(args, callbacks = normalize_callbacks(callbacks))
+  } else if (!is.null(callbacks)) {
+    warning("Prediction callbacks are only supported for TensorFlow ",
+            "implementation of Keras. And tf_version() >= 2.0")
+  }
   
   # resolve x (check for TF dataset)
   dataset <- resolve_tensorflow_dataset(x)
