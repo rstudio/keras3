@@ -70,6 +70,7 @@ test_succeeds("custom callbacks", {
       on_batch_end = function(batch, logs = list()) {
         self$losses <- c(self$losses, logs[["loss"]])
       }
+      
     ))
   
   cc <- CustomCallback$new()
@@ -88,10 +89,10 @@ test_succeeds("on predict callbacks", {
     inherit = KerasCallback,
     public = list(
       on_predict_begin = function(logs) {
-        cat("PREDICT BEGIN\n")
+        cat("PREDICT BEGIN")
       },
       on_predict_end = function(logs) {
-        cat("PREDICT END\n")
+        cat("PREDICT END")
       }
     )
   )
@@ -105,5 +106,5 @@ test_succeeds("on predict callbacks", {
     pred <- predict(model, x = matrix(1:10, ncol = 1), callbacks = cc)
     )
   
-  expect_equal(out, c("PREDICT_BEGIN", "PREDICT_END"))
+  expect_equal(out, c("PREDICT BEGINPREDICT END"))
 })

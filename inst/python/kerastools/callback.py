@@ -12,8 +12,6 @@ class RCallback(Callback):
   def __init__(self, r_set_context,
                      r_on_epoch_begin,
                      r_on_epoch_end,
-                     r_on_batch_begin,
-                     r_on_batch_end,
                      r_on_train_begin,
                      r_on_train_end,
                      r_on_predict_batch_begin,
@@ -31,8 +29,6 @@ class RCallback(Callback):
     self.r_set_context = r_set_context
     self.r_on_epoch_begin = r_on_epoch_begin
     self.r_on_epoch_end = r_on_epoch_end
-    self.r_on_batch_begin = r_on_batch_begin
-    self.r_on_batch_end = r_on_batch_end
     self.r_on_train_begin = r_on_train_begin
     self.r_on_train_end = r_on_train_end
     self.r_on_predict_batch_begin = r_on_predict_batch_begin
@@ -51,12 +47,6 @@ class RCallback(Callback):
 
   def on_epoch_end(self, epoch, logs=None):
     self.r_on_epoch_end(epoch, logs)
-
-  def on_batch_begin(self, batch, logs=None):
-    self.r_on_batch_begin(batch, logs)
- 
-  def on_batch_end(self, batch, logs=None):
-    self.r_on_batch_end(batch, logs)
 
   def on_train_begin(self, logs=None):
     self.r_set_context(self.params, self.model)

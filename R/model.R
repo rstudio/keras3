@@ -422,7 +422,7 @@ fit.keras.engine.training.Model <-
     batch_size = as_nullable_integer(batch_size),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
-    callbacks = normalize_callbacks(view_metrics, callbacks),
+    callbacks = normalize_callbacks_with_metrics(view_metrics, callbacks),
     validation_split = validation_split,
     shuffle = shuffle,
     class_weight = as_class_weight(class_weight),
@@ -565,7 +565,7 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
   args <- list(
     batch_size = as_nullable_integer(batch_size),
     verbose = as.integer(verbose),
-    callbacks = normalize_callbacks(NA, callbacks)
+    callbacks = normalize_callbacks(callbacks)
   )
   
   # resolve x (check for TF dataset)
@@ -779,7 +779,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
     steps_per_epoch = as.integer(steps_per_epoch),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
-    callbacks = normalize_callbacks(view_metrics, callbacks),
+    callbacks = normalize_callbacks_with_metrics(view_metrics, callbacks),
     validation_data = validation_data,
     validation_steps = as_nullable_integer(validation_steps),
     class_weight = as_class_weight(class_weight),

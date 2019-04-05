@@ -462,11 +462,11 @@ KerasCallback <- R6Class("KerasCallback",
     },
     
     on_batch_begin = function(batch, logs = NULL) {
-      
+
     },
-    
+
     on_batch_end = function(batch, logs = NULL) {
-      
+
     },
     
     on_train_begin = function(logs = NULL) {
@@ -520,16 +520,24 @@ KerasCallback <- R6Class("KerasCallback",
   )
 )
 
-normalize_callbacks <- function(view_metrics, callbacks) {
+normalize_callbacks_with_metrics <- function(view_metrics, callbacks) {
   
   # if callbacks isn't a list then make it one
   if (!is.null(callbacks) && !is.list(callbacks))
     callbacks <- list(callbacks)
   
   # always include the metrics callback
-  if (!is.na(view_metrics))
-    callbacks <- append(callbacks, KerasMetricsCallback$new(view_metrics))  
+  callbacks <- append(callbacks, KerasMetricsCallback$new(view_metrics))  
  
+  normalize_callbacks(callbacks) 
+}  
+
+normalize_callbacks <- function(callbacks) {
+  
+  # if callbacks isn't a list then make it one
+  if (!is.null(callbacks) && !is.list(callbacks))
+    callbacks <- list(callbacks)
+  
   # import callback utility module
   python_path <- system.file("python", package = "keras")
   tools <- import_from_path("kerastools", path = python_path)
@@ -544,13 +552,11 @@ normalize_callbacks <- function(view_metrics, callbacks) {
       have_tensorboard_callback <<- TRUE
     
     if (inherits(callback, "KerasCallback")) {
-      # create a python callback to map to our R callback
-      tools$callback$RCallback(
+      
+      args <- list(
         r_set_context = callback$set_context,
         r_on_epoch_begin = callback$on_epoch_begin,
         r_on_epoch_end = callback$on_epoch_end,
-        r_on_batch_begin = callback$on_batch_begin,
-        r_on_batch_end = callback$on_batch_end,
         r_on_train_begin = callback$on_train_begin,
         r_on_train_end = callback$on_train_end,
         r_on_predict_batch_begin = callback$on_predict_batch_begin,
@@ -564,6 +570,18 @@ normalize_callbacks <- function(view_metrics, callbacks) {
         r_on_train_batch_begin = callback$on_train_batch_begin,
         r_on_train_batch_end = callback$on_train_batch_end
       )
+      
+      # on_batch_* -> on_train_batch_*
+      if (!identical(callback$on_batch_begin, empty_fun)) {
+        args$r_on_train_batch_begin <- callback$on_batch_begin
+      }
+      
+      if (!identical(callback$on_batch_end, empty_fun)) {
+        args$r_on_train_batch_end <- callback$on_batch_end
+      }
+      
+      # create a python callback to map to our R callback
+      do.call(tools$callback$RCallback, args)
     } else {
       callback
     }
@@ -577,8 +595,4 @@ normalize_callbacks <- function(view_metrics, callbacks) {
   callbacks
 }
 
-
-
-
-
-
+empty_fun <- function(batch, logs = NULL) {}
