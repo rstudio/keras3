@@ -109,11 +109,6 @@ test_succeeds("on predict callbacks", {
     )  
   )
   
-  out <- capture.output(
-    pred <- predict(model, x = matrix(1:10, ncol = 1), callbacks = cc), 
-    type = c("output", "message", "warnings")
-  )
-  
   if (get_keras_implementation() == "tensorflow" && 
       tensorflow::tf_version() >= 2.0) {
     expect_equal(out, c("PREDICT BEGINPREDICT END")) 
