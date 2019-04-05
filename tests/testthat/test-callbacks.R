@@ -102,21 +102,25 @@ test_succeeds("on predict callbacks", {
   model <- keras_model(input, output)
   
   cc <- CustomCallback$new()
-  
-  warns <- capture_warning(
-    out <- capture.output(
-      pred <- predict(model, x = matrix(1:10, ncol = 1), callbacks = cc)
+ 
+  warns <- capture_warnings(
+    out <- capture_output(
+      pred <- predict(model, x = matrix(1:10, ncol = 1), callbacks = cc), 
     )  
   )
   
+  out <- capture.output(
+    pred <- predict(model, x = matrix(1:10, ncol = 1), callbacks = cc), 
+    type = c("output", "message", "warnings")
+  )
   
   if (get_keras_implementation() == "tensorflow" && 
       tensorflow::tf_version() >= 2.0) {
     expect_equal(out, c("PREDICT BEGINPREDICT END")) 
-    expect_null(warns)
+    expect_equal(warns, "")
   } else {
-    expect_equal(out, character(0L))
-    expect_true(is.character(warns$message))
+    expect_equal(out, "")
+    expect_true(warns != "")
   }
   
 })

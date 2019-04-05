@@ -5,7 +5,8 @@
 \title{Generate predictions from a Keras model}
 \usage{
 \method{predict}{keras.engine.training.Model}(object, x,
-  batch_size = NULL, verbose = 0, steps = NULL, ...)
+  batch_size = NULL, verbose = 0, steps = NULL, callbacks = NULL,
+  ...)
 }
 \arguments{
 \item{object}{Keras model}
@@ -18,6 +19,8 @@
 
 \item{steps}{Total number of steps (batches of samples) before declaring the
 evaluation round finished. Ignored with the default value of \code{NULL}.}
+
+\item{callbacks}{List of callbacks to apply during prediction.}
 
 \item{...}{Unused}
 }

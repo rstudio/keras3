@@ -545,6 +545,7 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
 #' @param x Input data (vector, matrix, or array)
 #' @param batch_size Integer. If unspecified, it will default to 32.
 #' @param verbose Verbosity mode, 0 or 1.
+#' @param callbacks List of callbacks to apply during prediction. 
 #' @param ... Unused
 #' 
 #' @return vector, matrix, or array of predictions
@@ -568,7 +569,7 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
   )
   
   if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= 2.0) {
-    args <- append(args, callbacks = normalize_callbacks(callbacks))
+    args <- append(args, list(callbacks = normalize_callbacks(callbacks)))
   } else if (!is.null(callbacks)) {
     warning("Prediction callbacks are only supported for TensorFlow ",
             "implementation of Keras. And tf_version() >= 2.0")
