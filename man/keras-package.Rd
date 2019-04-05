@@ -36,10 +36,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: JJ Allaire \email{jj@rstudio.com}
+\strong{Maintainer}: Daniel Falbel \email{daniel@rstudio.com} [contributor, copyright holder]
 
 Authors:
 \itemize{
+  \item JJ Allaire [copyright holder]
   \item François Chollet [copyright holder]
 }
 
@@ -48,7 +49,6 @@ Other contributors:
   \item  RStudio [contributor, copyright holder, funder]
   \item  Google [contributor, copyright holder, funder]
   \item Yuan Tang \email{terrytangyuan@gmail.com} (0000-0001-5243-233X) [contributor, copyright holder]
-  \item Daniel Falbel [contributor, copyright holder]
   \item Wouter Van Der Bijl [contributor, copyright holder]
   \item Martin Studer [contributor, copyright holder]
   \item Sigrid Keydana [contributor]
