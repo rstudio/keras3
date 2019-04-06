@@ -559,6 +559,8 @@ normalize_callbacks <- function(callbacks) {
         r_on_epoch_end = callback$on_epoch_end,
         r_on_train_begin = callback$on_train_begin,
         r_on_train_end = callback$on_train_end,
+        r_on_batch_begin = callback$on_batch_begin,
+        r_on_batch_end = callback$on_batch_end,
         r_on_predict_batch_begin = callback$on_predict_batch_begin,
         r_on_predict_batch_end = callback$on_predict_batch_end,
         r_on_predict_begin = callback$on_predict_begin,
