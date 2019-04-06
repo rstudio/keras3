@@ -1,16 +1,16 @@
 Package: keras
 Type: Package
 Title: R Interface to 'Keras'
-Version: 2.2.4.9001
+Version: 2.2.4.1
 Authors@R: c(
-  person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
+  person("Daniel", "Falbel", role = c("ctb", "cph", "cre"), email = "daniel@rstudio.com"),
+  person("JJ", "Allaire", role = c("aut", "cph")),
   person("François", "Chollet", role = c("aut", "cph")),
   person(family = "RStudio", role = c("ctb", "cph", "fnd")),
   person(family = "Google", role = c("ctb", "cph", "fnd")),
   person("Yuan", "Tang", role = c("ctb", "cph"),
          email = "terrytangyuan@gmail.com",
          comment = c(ORCID = "0000-0001-5243-233X")),
-  person("Daniel", "Falbel", role = c("ctb", "cph")),
   person("Wouter", "Van Der Bijl", role = c("ctb", "cph")),
   person("Martin", "Studer", role = c("ctb", "cph")),
   person("Sigrid", "Keydana", role = c("ctb"))
@@ -28,7 +28,7 @@ Depends:
 Imports:
     generics (>= 0.0.1),
     reticulate (>= 1.10), 
-    tensorflow (>= 1.10.0.9001),
+    tensorflow (>= 1.13.1),
     tfruns (>= 1.0),
     magrittr, 
     zeallot,
@@ -39,8 +39,6 @@ Suggests:
     testthat, 
     knitr,
     rmarkdown
-Remotes:
-    rstudio/tensorflow
 SystemRequirements: Keras >= 2.0 (https://keras.io)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
