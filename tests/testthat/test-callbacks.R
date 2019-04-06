@@ -112,7 +112,7 @@ test_succeeds("on predict callbacks", {
   if (get_keras_implementation() == "tensorflow" && 
       tensorflow::tf_version() >= 2.0) {
     expect_equal(out, c("PREDICT BEGINPREDICT END")) 
-    expect_equal(warns, "")
+    expect_equal(warns, character())
   } else {
     expect_equal(out, "")
     expect_true(warns != "")
