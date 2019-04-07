@@ -484,6 +484,7 @@ fit.keras.engine.training.Model <-
 #'   from framework-native tensors (e.g. TensorFlow data tensors).
 #' @param steps Total number of steps (batches of samples) before declaring the
 #'   evaluation round finished. Ignored with the default value of `NULL`.
+#' @param callbacks List of callbacks to apply during evaluation.
 #' @param ... Unused   
 #'   
 #'   
@@ -494,7 +495,8 @@ fit.keras.engine.training.Model <-
 #'
 #' @export
 evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, batch_size = NULL, 
-                                                 verbose=1, sample_weight = NULL, steps = NULL, ...) {
+                                                 verbose=1, sample_weight = NULL, steps = NULL, 
+                                                 callbacks = NULL, ...) {
   
   # defaults
   if (is.null(batch_size) && is.null(steps))
@@ -506,6 +508,8 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
     verbose = as.integer(verbose),
     sample_weight = sample_weight
   )
+  
+  args <- resolve_callbacks(args, callbacks)
   
   # resolve x and y (check for TF dataset)
   dataset <- resolve_tensorflow_dataset(x)
@@ -533,6 +537,15 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
   result
 }
 
+resolve_callbacks <- function(args, callbacks) {
+  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "1.13.1") {
+    args <- append(args, list(callbacks = normalize_callbacks(callbacks)))
+  } else if (!is.null(callbacks)) {
+    warning("Prediction callbacks are only supported for TensorFlow ",
+            "implementation of Keras. And tf_version() >= 2.0")
+  }
+  args
+}
 
 #' Generate predictions from a Keras model
 #' 
@@ -568,12 +581,7 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
     verbose = as.integer(verbose)
   )
   
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= 2.0) {
-    args <- append(args, list(callbacks = normalize_callbacks(callbacks)))
-  } else if (!is.null(callbacks)) {
-    warning("Prediction callbacks are only supported for TensorFlow ",
-            "implementation of Keras. And tf_version() >= 2.0")
-  }
+  args <- resolve_callbacks(args, callbacks)
   
   # resolve x (check for TF dataset)
   dataset <- resolve_tensorflow_dataset(x)
@@ -647,7 +655,6 @@ predict_classes <- function(object, x, batch_size = NULL, verbose = 0, steps = N
   
   do.call(object$predict_classes, args)
 }
-
 
 #' Returns predictions for a single batch of samples.
 #' 
@@ -824,15 +831,20 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
 #' @family model functions   
 #'     
 #' @export
-evaluate_generator <- function(object, generator, steps, max_queue_size = 10, workers = 1) {
+evaluate_generator <- function(object, generator, steps, max_queue_size = 10, workers = 1,
+                               callbacks = NULL) {
   
-  # perform evaluation
-  result <- call_generator_function(object$evaluate_generator, list(
+  args <- list(
     generator = generator,
     steps = as.integer(steps),
     max_queue_size = as.integer(max_queue_size),
     workers = as.integer(workers)
-  ))
+  )
+  
+  args <- resolve_callbacks(args, callbacks)
+  
+  # perform evaluation
+  result <- call_generator_function(object$evaluate_generator, args)
   
   # apply names
   names(result) <- object$metrics_names
@@ -867,7 +879,8 @@ evaluate_generator <- function(object, generator, steps, max_queue_size = 10, wo
 #' @family model functions   
 #'     
 #' @export
-predict_generator <- function(object, generator, steps, max_queue_size = 10, workers = 1, verbose = 0) {
+predict_generator <- function(object, generator, steps, max_queue_size = 10, workers = 1, verbose = 0,
+                              callbacks = NULL) {
   
   args <- list(
     generator = generator,
@@ -878,6 +891,8 @@ predict_generator <- function(object, generator, steps, max_queue_size = 10, wor
   
   if (keras_version() >= "2.0.1")
     args$verbose <- as.integer(verbose)
+  
+  args <- resolve_callbacks(args, callbacks)
   
   call_generator_function(object$predict_generator, args)
 }

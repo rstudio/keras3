@@ -82,7 +82,19 @@ test_succeeds("custom callbacks", {
   
 })
 
-test_succeeds("on predict callbacks", {
+
+expect_warns_and_out <- function(warns, out) {
+  if (get_keras_implementation() == "tensorflow" && 
+      tensorflow::tf_version() >= "2.0") {
+    expect_equal(out, c("PREDICT BEGINPREDICT END")) 
+    expect_equal(warns, character())
+  } else {
+    expect_equal(out, "")
+    expect_true(warns != "")
+  }
+}
+
+test_succeeds("on predict/evaluation callbacks", {
   
   CustomCallback <- R6::R6Class(
     "CustomCallback",
@@ -93,6 +105,12 @@ test_succeeds("on predict callbacks", {
       },
       on_predict_end = function(logs) {
         cat("PREDICT END")
+      },
+      on_test_begin = function(logs) {
+        cat("PREDICT BEGIN")
+      },
+      on_test_end = function(logs) {
+        cat("PREDICT END")
       }
     )
   )
@@ -100,22 +118,46 @@ test_succeeds("on predict callbacks", {
   input <- layer_input(shape = 1)
   output <- layer_dense(input, 1)
   model <- keras_model(input, output)
+  model %>% compile(optimizer = "adam", loss = "mae")
   
   cc <- CustomCallback$new()
  
+  # test for prediction
   warns <- capture_warnings(
     out <- capture_output(
-      pred <- predict(model, x = matrix(1:10, ncol = 1), callbacks = cc), 
+      pred <- predict(model, x = matrix(1:10, ncol = 1), callbacks = cc)
     )  
   )
+  expect_warns_and_out(warns, out)
   
-  if (get_keras_implementation() == "tensorflow" && 
-      tensorflow::tf_version() >= 2.0) {
-    expect_equal(out, c("PREDICT BEGINPREDICT END")) 
-    expect_equal(warns, character())
-  } else {
-    expect_equal(out, "")
-    expect_true(warns != "")
+  gen <- function() {
+    matrix(1:10, ncol = 1)
   }
+  
+  warns <- capture_warnings(
+    out <- capture_output(
+      pred <- predict_generator(model, gen, callbacks = cc, steps = 1)  
+    )
+  )
+  expect_warns_and_out(warns, out)
+  
+  # tests for evaluation
+  warns <- capture_warnings(
+    out <- capture_output(
+      ev <- evaluate(model, x = matrix(1:10, ncol = 1), y = 1:10, callbacks = cc)
+    )
+  )
+  expect_warns_and_out(warns, out)
+  
+  gen <- function() {
+    list(matrix(1:10, ncol = 1), 1:10)
+  }
+  
+  warns <- capture_warnings(
+    out <- capture_output(
+      ev <- evaluate_generator(model, gen, callbacks = cc, steps = 1)
+    )
+  )
+  expect_warns_and_out(warns, out)
   
 })
