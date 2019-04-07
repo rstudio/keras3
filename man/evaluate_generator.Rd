@@ -5,7 +5,7 @@
 \title{Evaluates the model on a data generator.}
 \usage{
 evaluate_generator(object, generator, steps, max_queue_size = 10,
-  workers = 1)
+  workers = 1, callbacks = NULL)
 }
 \arguments{
 \item{object}{Model object to evaluate}
@@ -22,6 +22,8 @@ targets, sample_weights)}
 \item{workers}{Maximum number of threads to use for parallel processing. Note that
 parallel processing will only be performed for native Keras generators (e.g.
 \code{flow_images_from_directory()}) as R based generators must run on the main thread.}
+
+\item{callbacks}{List of callbacks to apply during evaluation.}
 }
 \value{
 Named list of model test loss (or losses for models with multiple outputs)
