@@ -530,7 +530,38 @@ normalize_callbacks_with_metrics <- function(view_metrics, callbacks) {
   callbacks <- append(callbacks, KerasMetricsCallback$new(view_metrics))  
  
   normalize_callbacks(callbacks) 
-}  
+}
+
+warn_callback <- function(callback) {
+  
+  new_callbacks <- c("on_predict_batch_begin", "on_predict_batch_end", 
+    "on_predict_begin", "on_predict_end",
+    "on_test_batch_begin", "on_test_batch_end",
+    "on_test_begin", "on_test_end",
+    "on_train_batch_begin", "on_train_batch_end"
+    )
+  
+  lapply(new_callbacks, function(x) {
+    
+
+    if (!(get_keras_implementation() == "tensorflow" && 
+          tensorflow::tf_version() >= "2.0") &&
+        inherits(callback, "KerasCallback")) {
+      
+      # workaround to find out if the body is empty as expected.
+      bdy <- paste(as.character(body(callback[[x]])), collapse = "")
+      
+      if (!is.null(body) && bdy != "{") {
+        warning("Callback '", x, "' only works with Keras TensorFlow",
+                " implementation and Tensorflow >= 2.0")
+      }
+      
+    }
+    
+  })
+  
+  invisible(NULL)
+}
 
 normalize_callbacks <- function(callbacks) {
   
@@ -546,6 +577,8 @@ normalize_callbacks <- function(callbacks) {
   # has already included the tensorboard callback
   have_tensorboard_callback <- FALSE
   callbacks <- lapply(callbacks, function(callback) {
+    
+    warn_callback(callback)
     
     # track whether we have a TensorBoard callback
     if (inherits(callback, "keras.callbacks.TensorBoard"))

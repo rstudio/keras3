@@ -161,3 +161,43 @@ test_succeeds("on predict/evaluation callbacks", {
   expect_warns_and_out(warns, out)
   
 })
+
+test_that("warnings for new callback moment", {
+  
+  CustomCallback <- R6::R6Class(
+    "CustomCallback",
+    inherit = KerasCallback,
+    public = list(
+      on_predict_begin = function(logs) {
+        cat("PREDICT BEGIN")
+      },
+      on_predict_end = function(logs) {
+        cat("PREDICT END")
+      },
+      on_test_begin = function(logs) {
+        cat("PREDICT BEGIN")
+      },
+      on_test_end = function(logs) {
+        cat("PREDICT END")
+      }
+    )
+  )
+  
+  cc <- CustomCallback$new()
+  
+  input <- layer_input(shape = 1)
+  output <- layer_dense(input, 1)
+  model <- keras_model(input, output)
+  model %>% compile(optimizer = "adam", loss = "mae")
+  
+  warns <- capture_warnings(
+    model %>% 
+      fit(x = matrix(1:10, ncol = 1), y = 1:10, callbacks = list(cc))  
+  )
+  
+  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() < "2.0")
+    expect_equal(length(warns), 4)
+  else
+    expect_equal(length(warns), 0)
+    
+})
