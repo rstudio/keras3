@@ -538,7 +538,7 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
 }
 
 resolve_callbacks <- function(args, callbacks) {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "1.13.1") {
+  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0") {
     args <- append(args, list(callbacks = normalize_callbacks(callbacks)))
   } else if (!is.null(callbacks)) {
     warning("Prediction callbacks are only supported for TensorFlow ",
