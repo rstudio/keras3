@@ -365,8 +365,9 @@ callback_csv_logger <- function(filename, separator = ",", append = FALSE) {
 #' as:
 #'  
 #' - `on_epoch_begin` and `on_epoch_end` expect two positional arguments: `epoch`, `logs` 
-#' - `on_batch_begin` and `on_batch_end` expect two positional arguments: `batch`, `logs` 
-#' - `on_train_begin` and `on_train_end` expect one positional argument: `logs`
+#' - `on_batch_*`, `on_train_batch_*`, `on_predict_batch_*` and `on_test_batch_*`, expect 
+#'    two positional arguments: `batch`, `logs` 
+#' - `on_train_*`, `on_test_*` and `on_predict_*` expect one positional argument: `logs`
 #' 
 #' @param on_epoch_begin called at the beginning of every epoch.
 #' @param on_epoch_end called at the end of every epoch.
@@ -374,21 +375,56 @@ callback_csv_logger <- function(filename, separator = ",", append = FALSE) {
 #' @param on_batch_end called at the end of every batch.
 #' @param on_train_begin called at the beginning of model training.
 #' @param on_train_end called at the end of model training.
+#' @param on_predict_batch_begin called at the beginning of a batch in predict methods.
+#' @param on_predict_batch_end called at the end of a batch in predict methods.
+#' @param on_predict_begin called at the beginning of prediction.
+#' @param on_predict_end called at the end of prediction.
+#' @param on_test_batch_begin called at the beginning of a batch in evaluate methods.
+#'   Also called at the beginning of a validation batch in the fit methods, 
+#'   if validation data is provided.
+#' @param on_test_batch_end called at the end of a batch in evaluate methods.
+#'   Also called at the end of a validation batch in the fit methods, 
+#'   if validation data is provided.
+#' @param on_test_begin called at the beginning of evaluation or validation.
+#' @param on_test_end called at the end of evaluation or validation.
 #' 
 #' @family callbacks
 #'   
 #' @export
 callback_lambda <- function(on_epoch_begin = NULL, on_epoch_end = NULL, 
-                            on_batch_begin = NULL, on_batch_end = NULL, 
-                            on_train_begin = NULL, on_train_end = NULL) {
-  keras$callbacks$LambdaCallback(
+                            on_batch_begin = NULL, on_batch_end = NULL,
+                            on_train_batch_begin = NULL, on_train_batch_end = NULL,
+                            on_train_begin = NULL, on_train_end = NULL,
+                            on_predict_batch_begin = NULL, on_predict_batch_end = NULL,
+                            on_predict_begin = NULL, on_predict_end = NULL,
+                            on_test_batch_begin = NULL, on_test_batch_end = NULL,
+                            on_test_begin = NULL, on_test_end = NULL
+                            ) {
+  
+  
+  args <- list(
     on_epoch_begin = on_epoch_begin,
     on_epoch_end = on_epoch_end,
     on_batch_begin = on_batch_begin,
     on_batch_end = on_batch_end,
     on_train_begin = on_train_begin,
-    on_train_end = on_train_end
+    on_train_end = on_train_end,
+    on_train_batch_begin = on_train_batch_begin,
+    on_train_batch_end = on_train_batch_end,
+    on_predict_batch_begin = on_predict_batch_begin,
+    on_predict_batch_end = on_predict_batch_end,
+    on_predict_begin = on_predict_begin,
+    on_test_batch_begin = on_test_batch_begin,
+    on_test_batch_end = on_test_batch_end,
+    on_test_begin = on_test_begin,
+    on_test_end = on_test_end
   )
+  
+  # remove NULL arguments from args.
+  args <- Filter(function(x) !is.null(x), args)
+  warn_callback(args)
+  
+  do.call(keras$callbacks$LambdaCallback, args)
 }
 
 #' Base R6 class for Keras callbacks
@@ -543,17 +579,27 @@ warn_callback <- function(callback) {
   
   lapply(new_callbacks, function(x) {
     
-
+    
     if (!(get_keras_implementation() == "tensorflow" && 
-          tensorflow::tf_version() >= "2.0") &&
-        inherits(callback, "KerasCallback")) {
+          tensorflow::tf_version() >= "2.0")) {
       
-      # workaround to find out if the body is empty as expected.
-      bdy <- paste(as.character(body(callback[[x]])), collapse = "")
-      
-      if (!is.null(body) && bdy != "{") {
-        warning("Callback '", x, "' only works with Keras TensorFlow",
-                " implementation and Tensorflow >= 2.0")
+      if (inherits(callback, "KerasCallback")) {
+        
+        # workaround to find out if the body is empty as expected.
+        bdy <- paste(as.character(body(callback[[x]])), collapse = "")
+        
+        if (is.null(body) || bdy != "{") {
+          warning("Callback '", x, "' only works with Keras TensorFlow",
+                  " implementation and Tensorflow >= 2.0")
+        }
+        
+      } else if (inherits(callback, "list")) {
+        
+        if (!is.null(callback[[x]])) {
+          warning("Callback '", x, "' only works with Keras TensorFlow",
+                  " implementation and Tensorflow >= 2.0")
+        }
+        
       }
       
     }

@@ -47,6 +47,70 @@ test_callback("lambd", callback_lambda(
   }
 ))
 
+test_succeeds("lambda callbacks other args", {
+  
+  x <- layer_input(shape = 1)
+  y <- layer_dense(x, units = 1)
+  model <- keras_model(x, y)
+  model %>% compile(optimizer = "adam", loss = "mae")
+  
+  warns <- capture_warnings(
+    clb <- callback_lambda(
+      on_epoch_begin = function(epoch, logs) {
+        cat("Epoch Begin")
+      },
+      on_epoch_end = function(epoch, logs) {
+        cat("Epoch End")
+      },
+      on_predict_begin = function(epoch, logs) {
+        cat("Prediction Begin")
+      },
+      on_test_begin = function(epoch, logs) {
+        cat("Test Begin")
+      }
+    )
+  )
+  
+  if (get_keras_implementation() == "tensorflow" && 
+      tensorflow::tf_version() >= "2.0") {
+    expect_equal(length(warns), 0)
+  } else {
+    expect_equal(length(warns), 2)
+  }
+  
+  warns <- capture_warnings(
+    out <- capture_output(
+      pred <- predict(model, matrix(1:10, ncol = 1), callbacks = list(clb))   
+    )
+  )
+  
+  if (get_keras_implementation() == "tensorflow" && 
+      tensorflow::tf_version() >= "2.0") {
+    expect_equal(length(warns), 0)
+    expect_equal(out, "Prediction Begin")
+  } else {
+    expect_equal(length(warns), 1)
+    expect_equal(out, "")
+  }
+  
+  warns <- capture_warnings(
+    out <- capture_output(
+      pred <- evaluate(model, matrix(1:10, ncol = 1), y = 1:10, 
+                       callbacks = list(clb))   
+    )
+  )
+  
+  if (get_keras_implementation() == "tensorflow" && 
+      tensorflow::tf_version() >= "2.0") {
+    expect_equal(length(warns), 0)
+    expect_equal(out, "Test Begin")
+  } else {
+    expect_equal(length(warns), 1)
+    expect_equal(out, "")
+  }
+  
+})
+
 
 test_succeeds("custom callbacks", {
   
@@ -162,7 +226,7 @@ test_succeeds("on predict/evaluation callbacks", {
   
 })
 
-test_that("warnings for new callback moment", {
+test_succeeds("warnings for new callback moment", {
   
   CustomCallback <- R6::R6Class(
     "CustomCallback",
