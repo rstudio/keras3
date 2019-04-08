@@ -371,8 +371,10 @@ callback_csv_logger <- function(filename, separator = ",", append = FALSE) {
 #' 
 #' @param on_epoch_begin called at the beginning of every epoch.
 #' @param on_epoch_end called at the end of every epoch.
-#' @param on_batch_begin called at the beginning of every batch.
-#' @param on_batch_end called at the end of every batch.
+#' @param on_batch_begin called at the beginning of every training batch.
+#' @param on_batch_end called at the end of every training batch.
+#' @param on_train_batch_begin called at the beginning of every batch.
+#' @param on_train_batch_end called at the end of every batch.
 #' @param on_train_begin called at the beginning of model training.
 #' @param on_train_end called at the end of model training.
 #' @param on_predict_batch_begin called at the beginning of a batch in predict methods.

@@ -18,9 +18,13 @@ callback_lambda(on_epoch_begin = NULL, on_epoch_end = NULL,
 
 \item{on_epoch_end}{called at the end of every epoch.}
 
-\item{on_batch_begin}{called at the beginning of every batch.}
+\item{on_batch_begin}{called at the beginning of every training batch.}
 
-\item{on_batch_end}{called at the end of every batch.}
+\item{on_batch_end}{called at the end of every training batch.}
+
+\item{on_train_batch_begin}{called at the beginning of every batch.}
+
+\item{on_train_batch_end}{called at the end of every batch.}
 
 \item{on_train_begin}{called at the beginning of model training.}
 
