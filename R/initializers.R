@@ -60,7 +60,7 @@ initializer_random_normal <- function(mean = 0.0, stddev = 0.05, seed = NULL) {
       seed = as_nullable_integer(seed)
     )
   else
-    keras$initializers$RandomNormalV2(
+    keras$initializers$RandomNormal(
       mean = mean,
       stddev = stddev,
       seed = as_nullable_integer(seed)
