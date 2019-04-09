@@ -5,14 +5,17 @@
 \title{Initializer capable of adapting its scale to the shape of weights.}
 \usage{
 initializer_variance_scaling(scale = 1, mode = c("fan_in", "fan_out",
-  "fan_avg"), distribution = c("normal", "uniform"), seed = NULL)
+  "fan_avg"), distribution = c("normal", "uniform", "truncated_normal",
+  "untruncated_normal"), seed = NULL)
 }
 \arguments{
 \item{scale}{Scaling factor (positive float).}
 
 \item{mode}{One of "fan_in", "fan_out", "fan_avg".}
 
-\item{distribution}{One of "normal", "uniform"}
+\item{distribution}{One of "truncated_normal", "untruncated_normal" and "uniform".
+For backward compatibility, "normal" will be accepted and converted to
+"untruncated_normal".}
 
 \item{seed}{Integer used to seed the random generator.}
 }
