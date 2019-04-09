@@ -4,6 +4,8 @@ language: r
 dist: trusty
 sudo: false
 
+before_install: R -e 'source("https://install-github.me/r-lib/remotes")'
+
 matrix:
   include:
     - name: "TensorFlow (Keras)"
