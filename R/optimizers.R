@@ -33,7 +33,10 @@ optimizer_sgd <- function(lr = 0.01, momentum = 0.0, decay = 0.0, nesterov = FAL
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
-  do.call(keras$optimizers$SGD, args)
+  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= 2.0)
+    do.call(keras$optimizers$gradient_descent_v2$SGD, args)
+  else
+    do.call(keras$optimizers$SGD, args)
 }
 
 #' RMSProp optimizer
@@ -62,7 +65,10 @@ optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = NULL, decay = 0.0
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
-  do.call(keras$optimizers$RMSprop, args)
+  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= 2.0)
+    do.call(keras$optimizers$rmsprop_v2$RMSprop, args)
+  else
+    do.call(keras$optimizers$RMSprop, args)
 }
 
 
@@ -91,7 +97,10 @@ optimizer_adagrad <- function(lr = 0.01, epsilon = NULL, decay = 0.0,
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
-  do.call(keras$optimizers$Adagrad, args)
+  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= 2.0)
+    do.call(keras$optimizers$adagrad_v2$Adagrad, args)
+  else
+    do.call(keras$optimizers$Adagrad, args)
 }
 
 #' Adadelta optimizer.
@@ -119,7 +128,10 @@ optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = NULL, decay = 0.0
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
-  do.call(keras$optimizers$Adadelta, args)
+  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= 2.0)
+    do.call(keras$optimizers$adadelta_v2$Adadelta, args)
+  else
+    do.call(keras$optimizers$Adadelta, args)
 }
 
 #' Adam optimizer
@@ -161,7 +173,10 @@ optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = N
   if (keras_version() >= "2.1.3")
     args$amsgrad <- amsgrad
   
-  do.call(keras$optimizers$Adam, args)
+  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= 2.0)
+    do.call(keras$optimizers$adam_v2$Adam, args)
+  else
+    do.call(keras$optimizers$Adam, args)
 }
 
 #' Adamax optimizer
@@ -187,7 +202,11 @@ optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon =
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
-  do.call(keras$optimizers$Adamax, args)
+  
+  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= 2.0)
+    do.call(keras$optimizers$adamax_v2$Adamax, args)
+  else
+    do.call(keras$optimizers$Adamax, args)
 }
 
 #' Nesterov Adam optimizer
@@ -221,7 +240,11 @@ optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = 
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
-  do.call(keras$optimizers$Nadam, args)
+  
+  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= 2.0)
+    do.call(keras$optimizers$nadam_v2$Nadam, args)
+  else
+    do.call(keras$optimizers$Nadam, args)
 }
 
 resolve_epsilon <- function(epsilon) {
