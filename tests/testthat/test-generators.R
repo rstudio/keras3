@@ -49,15 +49,18 @@ test_succeeds("image data generator can be used for training", {
   datagen %>% fit_image_data_generator(X_train)
   
   # train using generator
-  model %>%
-    fit_generator(flow_images_from_data(X_train, Y_train, datagen, batch_size = 32),
-                  steps_per_epoch = 32, epochs = 2)
+  x <- capture_output(
+    model %>%
+      fit_generator(flow_images_from_data(X_train, Y_train, datagen, batch_size = 32),
+                    steps_per_epoch = 32, epochs = 2)  
+  )
   
   # evaluate using generator
   scores <- model %>%
     evaluate_generator(flow_images_from_data(X_test, Y_test, datagen, batch_size = 32),
                        steps = 5)
-  expect_equal(names(scores), c("loss", "acc"))
+  
+  expect_true(all(names(scores) %in% c("loss", "acc", "accuracy")))
   
   # predict using generator
   model %>%
