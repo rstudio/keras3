@@ -1,6 +1,8 @@
 
 ## Development version
 
+## Keras 2.2.4.1 (CRAN)
+
 - Use `tf.keras` as default implementation module.
 
 - Added AppVeyor to test on Windows.
