@@ -5,7 +5,7 @@
 \title{Generates predictions for the input samples from a data generator.}
 \usage{
 predict_generator(object, generator, steps, max_queue_size = 10,
-  workers = 1, verbose = 0)
+  workers = 1, verbose = 0, callbacks = NULL)
 }
 \arguments{
 \item{object}{Keras model object}
@@ -23,6 +23,8 @@ parallel processing will only be performed for native Keras generators (e.g.
 \code{flow_images_from_directory()}) as R based generators must run on the main thread.}
 
 \item{verbose}{verbosity mode, 0 or 1.}
+
+\item{callbacks}{List of callbacks to apply during prediction.}
 }
 \value{
 Numpy array(s) of predictions.

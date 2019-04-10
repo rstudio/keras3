@@ -5,21 +5,50 @@
 \title{Create a custom callback}
 \usage{
 callback_lambda(on_epoch_begin = NULL, on_epoch_end = NULL,
-  on_batch_begin = NULL, on_batch_end = NULL, on_train_begin = NULL,
-  on_train_end = NULL)
+  on_batch_begin = NULL, on_batch_end = NULL,
+  on_train_batch_begin = NULL, on_train_batch_end = NULL,
+  on_train_begin = NULL, on_train_end = NULL,
+  on_predict_batch_begin = NULL, on_predict_batch_end = NULL,
+  on_predict_begin = NULL, on_predict_end = NULL,
+  on_test_batch_begin = NULL, on_test_batch_end = NULL,
+  on_test_begin = NULL, on_test_end = NULL)
 }
 \arguments{
 \item{on_epoch_begin}{called at the beginning of every epoch.}
 
 \item{on_epoch_end}{called at the end of every epoch.}
 
-\item{on_batch_begin}{called at the beginning of every batch.}
+\item{on_batch_begin}{called at the beginning of every training batch.}
 
-\item{on_batch_end}{called at the end of every batch.}
+\item{on_batch_end}{called at the end of every training batch.}
+
+\item{on_train_batch_begin}{called at the beginning of every batch.}
+
+\item{on_train_batch_end}{called at the end of every batch.}
 
 \item{on_train_begin}{called at the beginning of model training.}
 
 \item{on_train_end}{called at the end of model training.}
+
+\item{on_predict_batch_begin}{called at the beginning of a batch in predict methods.}
+
+\item{on_predict_batch_end}{called at the end of a batch in predict methods.}
+
+\item{on_predict_begin}{called at the beginning of prediction.}
+
+\item{on_predict_end}{called at the end of prediction.}
+
+\item{on_test_batch_begin}{called at the beginning of a batch in evaluate methods.
+Also called at the beginning of a validation batch in the fit methods,
+if validation data is provided.}
+
+\item{on_test_batch_end}{called at the end of a batch in evaluate methods.
+Also called at the end of a validation batch in the fit methods,
+if validation data is provided.}
+
+\item{on_test_begin}{called at the beginning of evaluation or validation.}
+
+\item{on_test_end}{called at the end of evaluation or validation.}
 }
 \description{
 This callback is constructed with anonymous functions that will be called at
@@ -27,8 +56,9 @@ the appropriate time. Note that the callbacks expects positional arguments,
 as:
 \itemize{
 \item \code{on_epoch_begin} and \code{on_epoch_end} expect two positional arguments: \code{epoch}, \code{logs}
-\item \code{on_batch_begin} and \code{on_batch_end} expect two positional arguments: \code{batch}, \code{logs}
-\item \code{on_train_begin} and \code{on_train_end} expect one positional argument: \code{logs}
+\item \code{on_batch_*}, \code{on_train_batch_*}, \code{on_predict_batch_*} and \code{on_test_batch_*}, expect
+two positional arguments: \code{batch}, \code{logs}
+\item \code{on_train_*}, \code{on_test_*} and \code{on_predict_*} expect one positional argument: \code{logs}
 }
 }
 \seealso{

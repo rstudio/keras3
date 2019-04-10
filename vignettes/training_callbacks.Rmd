@@ -212,5 +212,45 @@ Custom callback objects can implement one or more of the following methods:
 
 :    Called at the end of training.
 
+`on_train_batch_begin` 
+
+:    Called at the beginning of every batch.
+
+`on_train_batch_end` 
+
+:    Called at the end of every batch.`
+
+`on_predict_batch_begin` 
+
+:    Called at the beginning of a batch in predict methods.
+
+`on_predict_batch_end` 
+
+:    Called at the end of a batch in predict methods.
+
+`on_predict_begin` 
+
+:    Called at the beginning of prediction.
+
+`on_predict_end` 
+
+:    Called at the end of prediction.
+
+`on_test_batch_begin` 
+
+:    Called at the beginning of a batch in evaluate methods. Also called at the beginning of a validation batch in the fit methods, if validation data is provided.
+     
+`on_test_batch_end` 
+
+:    Called at the end of a batch in evaluate methods. Also called at the end of a validation batch in the fit methods, if validation data is provided.
+
+`on_test_begin` 
+
+:    Called at the beginning of evaluation or validation.
+
+`on_test_end` 
+
+:    Called at the end of evaluation or validation.
+
 
 

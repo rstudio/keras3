@@ -365,30 +365,68 @@ callback_csv_logger <- function(filename, separator = ",", append = FALSE) {
 #' as:
 #'  
 #' - `on_epoch_begin` and `on_epoch_end` expect two positional arguments: `epoch`, `logs` 
-#' - `on_batch_begin` and `on_batch_end` expect two positional arguments: `batch`, `logs` 
-#' - `on_train_begin` and `on_train_end` expect one positional argument: `logs`
+#' - `on_batch_*`, `on_train_batch_*`, `on_predict_batch_*` and `on_test_batch_*`, expect 
+#'    two positional arguments: `batch`, `logs` 
+#' - `on_train_*`, `on_test_*` and `on_predict_*` expect one positional argument: `logs`
 #' 
 #' @param on_epoch_begin called at the beginning of every epoch.
 #' @param on_epoch_end called at the end of every epoch.
-#' @param on_batch_begin called at the beginning of every batch.
-#' @param on_batch_end called at the end of every batch.
+#' @param on_batch_begin called at the beginning of every training batch.
+#' @param on_batch_end called at the end of every training batch.
+#' @param on_train_batch_begin called at the beginning of every batch.
+#' @param on_train_batch_end called at the end of every batch.
 #' @param on_train_begin called at the beginning of model training.
 #' @param on_train_end called at the end of model training.
+#' @param on_predict_batch_begin called at the beginning of a batch in predict methods.
+#' @param on_predict_batch_end called at the end of a batch in predict methods.
+#' @param on_predict_begin called at the beginning of prediction.
+#' @param on_predict_end called at the end of prediction.
+#' @param on_test_batch_begin called at the beginning of a batch in evaluate methods.
+#'   Also called at the beginning of a validation batch in the fit methods, 
+#'   if validation data is provided.
+#' @param on_test_batch_end called at the end of a batch in evaluate methods.
+#'   Also called at the end of a validation batch in the fit methods, 
+#'   if validation data is provided.
+#' @param on_test_begin called at the beginning of evaluation or validation.
+#' @param on_test_end called at the end of evaluation or validation.
 #' 
 #' @family callbacks
 #'   
 #' @export
 callback_lambda <- function(on_epoch_begin = NULL, on_epoch_end = NULL, 
-                            on_batch_begin = NULL, on_batch_end = NULL, 
-                            on_train_begin = NULL, on_train_end = NULL) {
-  keras$callbacks$LambdaCallback(
+                            on_batch_begin = NULL, on_batch_end = NULL,
+                            on_train_batch_begin = NULL, on_train_batch_end = NULL,
+                            on_train_begin = NULL, on_train_end = NULL,
+                            on_predict_batch_begin = NULL, on_predict_batch_end = NULL,
+                            on_predict_begin = NULL, on_predict_end = NULL,
+                            on_test_batch_begin = NULL, on_test_batch_end = NULL,
+                            on_test_begin = NULL, on_test_end = NULL
+                            ) {
+  
+  
+  args <- list(
     on_epoch_begin = on_epoch_begin,
     on_epoch_end = on_epoch_end,
     on_batch_begin = on_batch_begin,
     on_batch_end = on_batch_end,
     on_train_begin = on_train_begin,
-    on_train_end = on_train_end
+    on_train_end = on_train_end,
+    on_train_batch_begin = on_train_batch_begin,
+    on_train_batch_end = on_train_batch_end,
+    on_predict_batch_begin = on_predict_batch_begin,
+    on_predict_batch_end = on_predict_batch_end,
+    on_predict_begin = on_predict_begin,
+    on_test_batch_begin = on_test_batch_begin,
+    on_test_batch_end = on_test_batch_end,
+    on_test_begin = on_test_begin,
+    on_test_end = on_test_end
   )
+  
+  # remove NULL arguments from args.
+  args <- Filter(function(x) !is.null(x), args)
+  warn_callback(args)
+  
+  do.call(keras$callbacks$LambdaCallback, args)
 }
 
 #' Base R6 class for Keras callbacks
@@ -462,11 +500,11 @@ KerasCallback <- R6Class("KerasCallback",
     },
     
     on_batch_begin = function(batch, logs = NULL) {
-      
+
     },
-    
+
     on_batch_end = function(batch, logs = NULL) {
-      
+
     },
     
     on_train_begin = function(logs = NULL) {
@@ -475,11 +513,52 @@ KerasCallback <- R6Class("KerasCallback",
     
     on_train_end = function(logs = NULL) {
       
+    },
+    
+    on_predict_batch_begin = function(batch, logs = NULL) {
+      
+    },
+    
+    on_predict_batch_end = function(batch, logs = NULL) {
+      
+    },
+    
+    on_predict_begin = function(logs = NULL) {
+      
+    },
+    
+    on_predict_end = function(logs = NULL) {
+      
+    },
+    
+    on_test_batch_begin = function(batch, logs = NULL) {
+      
+    },
+    
+    on_test_batch_end = function(batch, logs = NULL) {
+      
+    },
+    
+    on_test_begin = function(logs = NULL) {
+      
+    },
+    
+    on_test_end = function(logs = NULL) {
+      
+    },
+    
+    on_train_batch_begin = function(batch, logs = NULL) {
+      
+    },
+    
+    on_train_batch_end = function(batch, logs = NULL) {
+      
     }
+    
   )
 )
 
-normalize_callbacks <- function(view_metrics, callbacks) {
+normalize_callbacks_with_metrics <- function(view_metrics, callbacks) {
   
   # if callbacks isn't a list then make it one
   if (!is.null(callbacks) && !is.list(callbacks))
@@ -488,6 +567,56 @@ normalize_callbacks <- function(view_metrics, callbacks) {
   # always include the metrics callback
   callbacks <- append(callbacks, KerasMetricsCallback$new(view_metrics))  
  
+  normalize_callbacks(callbacks) 
+}
+
+warn_callback <- function(callback) {
+  
+  new_callbacks <- c("on_predict_batch_begin", "on_predict_batch_end", 
+    "on_predict_begin", "on_predict_end",
+    "on_test_batch_begin", "on_test_batch_end",
+    "on_test_begin", "on_test_end",
+    "on_train_batch_begin", "on_train_batch_end"
+    )
+  
+  lapply(new_callbacks, function(x) {
+    
+    
+    if (!(get_keras_implementation() == "tensorflow" && 
+          tensorflow::tf_version() >= "2.0")) {
+      
+      if (inherits(callback, "KerasCallback")) {
+        
+        # workaround to find out if the body is empty as expected.
+        bdy <- paste(as.character(body(callback[[x]])), collapse = "")
+        
+        if (is.null(body) || bdy != "{") {
+          warning("Callback '", x, "' only works with Keras TensorFlow",
+                  " implementation and Tensorflow >= 2.0")
+        }
+        
+      } else if (inherits(callback, "list")) {
+        
+        if (!is.null(callback[[x]])) {
+          warning("Callback '", x, "' only works with Keras TensorFlow",
+                  " implementation and Tensorflow >= 2.0")
+        }
+        
+      }
+      
+    }
+    
+  })
+  
+  invisible(NULL)
+}
+
+normalize_callbacks <- function(callbacks) {
+  
+  # if callbacks isn't a list then make it one
+  if (!is.null(callbacks) && !is.list(callbacks))
+    callbacks <- list(callbacks)
+  
   # import callback utility module
   python_path <- system.file("python", package = "keras")
   tools <- import_from_path("kerastools", path = python_path)
@@ -497,21 +626,45 @@ normalize_callbacks <- function(view_metrics, callbacks) {
   have_tensorboard_callback <- FALSE
   callbacks <- lapply(callbacks, function(callback) {
     
+    warn_callback(callback)
+    
     # track whether we have a TensorBoard callback
     if (inherits(callback, "keras.callbacks.TensorBoard"))
       have_tensorboard_callback <<- TRUE
     
     if (inherits(callback, "KerasCallback")) {
-      # create a python callback to map to our R callback
-      tools$callback$RCallback(
+      
+      args <- list(
         r_set_context = callback$set_context,
         r_on_epoch_begin = callback$on_epoch_begin,
         r_on_epoch_end = callback$on_epoch_end,
+        r_on_train_begin = callback$on_train_begin,
+        r_on_train_end = callback$on_train_end,
         r_on_batch_begin = callback$on_batch_begin,
         r_on_batch_end = callback$on_batch_end,
-        r_on_train_begin = callback$on_train_begin,
-        r_on_train_end = callback$on_train_end
+        r_on_predict_batch_begin = callback$on_predict_batch_begin,
+        r_on_predict_batch_end = callback$on_predict_batch_end,
+        r_on_predict_begin = callback$on_predict_begin,
+        r_on_predict_end = callback$on_predict_end,
+        r_on_test_batch_begin = callback$on_test_batch_begin,
+        r_on_test_batch_end = callback$on_test_batch_end,
+        r_on_test_begin = callback$on_test_begin,
+        r_on_test_end = callback$on_test_end,
+        r_on_train_batch_begin = callback$on_train_batch_begin,
+        r_on_train_batch_end = callback$on_train_batch_end
       )
+      
+      # on_batch_* -> on_train_batch_*
+      if (!identical(callback$on_batch_begin, empty_fun)) {
+        args$r_on_train_batch_begin <- callback$on_batch_begin
+      }
+      
+      if (!identical(callback$on_batch_end, empty_fun)) {
+        args$r_on_train_batch_end <- callback$on_batch_end
+      }
+      
+      # create a python callback to map to our R callback
+      do.call(tools$callback$RCallback, args)
     } else {
       callback
     }
@@ -525,8 +678,4 @@ normalize_callbacks <- function(view_metrics, callbacks) {
   callbacks
 }
 
-
-
-
-
-
+empty_fun <- function(batch, logs = NULL) {}

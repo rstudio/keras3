@@ -6,7 +6,7 @@
 \usage{
 \method{evaluate}{keras.engine.training.Model}(object, x = NULL,
   y = NULL, batch_size = NULL, verbose = 1, sample_weight = NULL,
-  steps = NULL, ...)
+  steps = NULL, callbacks = NULL, ...)
 }
 \arguments{
 \item{object}{Model object to evaluate}
@@ -36,6 +36,8 @@ sample. In this case you should make sure to specify
 
 \item{steps}{Total number of steps (batches of samples) before declaring the
 evaluation round finished. Ignored with the default value of \code{NULL}.}
+
+\item{callbacks}{List of callbacks to apply during evaluation.}
 
 \item{...}{Unused}
 }
