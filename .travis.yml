@@ -26,19 +26,19 @@ matrix:
       env:
         - TENSORFLOW_VERSION="nightly"
         - TENSORFLOW_PYTHON="/usr/bin/python3"
-    - name: "TensorFlow (TensorFlow 2.0-preview)"
+    - name: "TensorFlow (TensorFlow 2.0.0a0)"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
-        - TENSORFLOW_WHEEL="https://files.pythonhosted.org/packages/ba/98/b0b9b83c9eddb9a112e0f928481c78232e1675397ccc717d1dcd92b8544b/tf_nightly_2.0_preview-2.0.0.dev20190319-cp27-cp27mu-manylinux1_x86_64.whl"
+        - TENSORFLOW_WHEEL="https://files.pythonhosted.org/packages/bc/84/970bfb6eb04360a675627a38962127f0f5302ac1fd3ac4ad4f5d1befc9b7/tensorflow-2.0.0a0-cp27-cp27mu-manylinux1_x86_64.whl"
   allow_failures:
     - name: "nightly"
       env:
         - TENSORFLOW_VERSION="nightly"
         - TENSORFLOW_PYTHON="/usr/bin/python3"
-    - name: "TensorFlow (TensorFlow 2.0-preview)"
+    - name: "TensorFlow (TensorFlow 2.0.0a0)"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
-        - TENSORFLOW_WHEEL="https://files.pythonhosted.org/packages/ba/98/b0b9b83c9eddb9a112e0f928481c78232e1675397ccc717d1dcd92b8544b/tf_nightly_2.0_preview-2.0.0.dev20190319-cp27-cp27mu-manylinux1_x86_64.whl"
+        - TENSORFLOW_WHEEL="https://files.pythonhosted.org/packages/bc/84/970bfb6eb04360a675627a38962127f0f5302ac1fd3ac4ad4f5d1befc9b7/tensorflow-2.0.0a0-cp27-cp27mu-manylinux1_x86_64.whl"
         
 cache:
   packages: true
