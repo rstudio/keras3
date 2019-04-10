@@ -441,7 +441,9 @@ fit.keras.engine.training.Model <-
     
   # resolve x and y (check for TF dataset)
   dataset <- resolve_tensorflow_dataset(x)
-  if (!is.null(dataset)) {
+  if (inherits(dataset, "tf_dataset")) {
+    args$x <- dataset
+  } else if (!is.null(dataset)) {
     args$x <- dataset[[1]]
     args$y <- dataset[[2]]
   } else {
@@ -1005,9 +1007,13 @@ resolve_tensorflow_dataset <- function(x) {
     }
     
     
-    # yield iterators
-    iter = x$make_one_shot_iterator()
-    iter$get_next()
+    if (tensorflow::tf_version < "2.0") {
+      # yield iterators
+      iter = x$make_one_shot_iterator()
+      iter$get_next()  
+    } else {
+      x
+    }
     
   } else {
     NULL
