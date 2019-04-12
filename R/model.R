@@ -441,7 +441,9 @@ fit.keras.engine.training.Model <-
     
   # resolve x and y (check for TF dataset)
   dataset <- resolve_tensorflow_dataset(x)
-  if (!is.null(dataset)) {
+  if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
+    args$x <- dataset
+  } else if (!is.null(dataset)) {
     args$x <- dataset[[1]]
     args$y <- dataset[[2]]
   } else {
@@ -954,9 +956,15 @@ as_generator.tensorflow.python.data.ops.dataset_ops.Dataset <- function(x) {
   tools$generator$dataset_generator(x , k_get_session())
 }
 
-as_generator.tensorflow.python.data.ops.dataset_ops.DatasetV2 <-
-  as_generator.tensorflow.python.data.ops.dataset_ops.Dataset
-
+as_generator.tensorflow.python.data.ops.dataset_ops.DatasetV2 <- function(x) {
+   
+  if (tensorflow::tf_version() >= "2.0")
+    x
+  else
+    as_generator.tensorflow.python.data.ops.dataset_ops.Dataset(x)  
+  
+}
+  
 as_generator.function <- function(x) {
   python_path <- system.file("python", package = "keras")
   tools <- reticulate::import_from_path("kerastools", path = python_path)
@@ -1029,9 +1037,13 @@ resolve_tensorflow_dataset <- function(x) {
     }
     
     
-    # yield iterators
-    iter = x$make_one_shot_iterator()
-    iter$get_next()
+    if (tensorflow::tf_version() < "2.0") {
+      # yield iterators
+      iter = x$make_one_shot_iterator()
+      iter$get_next()  
+    } else {
+      x
+    }
     
   } else {
     NULL
