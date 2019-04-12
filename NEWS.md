@@ -1,6 +1,10 @@
 
 ## Development version
 
+- Added `on_test_*`, `on_test_batch_*`, `on_predict_*` and `on_predict_*` to callback options.
+
+- Search for the right optimizers and initializers on TensorFlow 2.0
+
 ## Keras 2.2.4.1 (CRAN)
 
 - Use `tf.keras` as default implementation module.
