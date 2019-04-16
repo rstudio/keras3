@@ -1,3 +1,5 @@
+#' This example shows how to use lime to explain text data.
+
 library(readr)
 library(dplyr)
 library(keras)
