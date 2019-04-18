@@ -498,5 +498,15 @@ test_call_succeeds("layer_separable_conv_1d", required_version = "2.1.3", {
   }
 })
 
+test_call_succeeds("layer_dense_features", required_version = "2.1.3", {
+  if (is_tensorflow_implementation() && tensorflow::tf_version() >= "2.0") {
+    
+    fc <- tfestimators::feature_columns(tfestimators::column_numeric("mpg"))
+    input <- list(mpg = layer_input(1))
+    
+    out <- input %>% 
+      layer_dense_features(feature_columns = fc)
+  }
+})
 
 
