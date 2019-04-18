@@ -41,6 +41,7 @@ Apply an activation function to an output.
 }
 \seealso{
 Other core layers: \code{\link{layer_activity_regularization}},
+  \code{\link{layer_dense_features}},
   \code{\link{layer_dense}}, \code{\link{layer_dropout}},
   \code{\link{layer_flatten}}, \code{\link{layer_input}},
   \code{\link{layer_lambda}}, \code{\link{layer_masking}},
