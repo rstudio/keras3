@@ -254,6 +254,7 @@ clone_model <- function(model, input_tensors = NULL) {
 #'   these arguments are passed into `tf$Session()$run`.
 #'
 #' @family model functions
+#' @rdname compile
 #'
 #' @export
 compile.keras.engine.training.Model <-
@@ -331,6 +332,9 @@ compile.keras.engine.training.Model <-
   invisible(object)
 }
 
+#' @rdname compile
+#' @export
+compile.tensorflow.python.keras.engine.sequential.Sequential <- compile.keras.engine.training.Model
 
 #' Train a Keras model
 #'
@@ -399,6 +403,8 @@ compile.keras.engine.training.Model <-
 #'   during training.
 #'
 #' @family model functions
+#' 
+#' @rdname fit
 #'
 #' @export
 fit.keras.engine.training.Model <- 
@@ -443,6 +449,7 @@ fit.keras.engine.training.Model <-
   dataset <- resolve_tensorflow_dataset(x)
   if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
     args$x <- dataset
+    args$batch_size <- NULL # batch_size must be null otherwise it errors on tf2.0
   } else if (!is.null(dataset)) {
     args$x <- dataset[[1]]
     args$y <- dataset[[2]]
@@ -471,6 +478,10 @@ fit.keras.engine.training.Model <-
   invisible(history)
 }
 
+#' @rdname fit
+#' @export
+fit.tensorflow.python.keras.engine.sequential.Sequential <- fit.keras.engine.training.Model
+
 #' Evaluate a Keras model
 
 #' @inheritParams fit.keras.engine.training.Model
@@ -494,6 +505,8 @@ fit.keras.engine.training.Model <-
 #'   outputs) and model metrics.
 #'
 #' @family model functions
+#' 
+#' @rdname evaluate
 #'
 #' @export
 evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, batch_size = NULL, 
@@ -515,7 +528,10 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
   
   # resolve x and y (check for TF dataset)
   dataset <- resolve_tensorflow_dataset(x)
-  if (!is.null(dataset)) {
+  if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
+    args$x <- dataset
+    args$batch_size <- NULL # batch_size must be null otherwise it errors on tf2.0
+  } else if (!is.null(dataset)) {
     args$x <- dataset[[1]]
     args$y <- dataset[[2]]
   } else {
@@ -538,6 +554,10 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
   # return result
   result
 }
+
+#' @rdname evaluate
+#' @export
+evaluate.tensorflow.python.keras.engine.sequential.Sequential <- evaluate.keras.engine.training.Model
 
 resolve_callbacks <- function(args, callbacks) {
   if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0") {
@@ -567,6 +587,7 @@ resolve_callbacks <- function(args, callbacks) {
 #' 
 #' @family model functions
 #' 
+#' @rdname predict
 #' 
 #' @importFrom stats predict
 #' @export
@@ -587,7 +608,10 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
   
   # resolve x (check for TF dataset)
   dataset <- resolve_tensorflow_dataset(x)
-  if (!is.null(dataset)) {
+  if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
+    args$x <- dataset
+    args$batch_size <- NULL # batch_size must be null otherwise it errors on tf2.0
+  } else if (!is.null(dataset)) {
     args$x <- dataset[[1]]
   } else {
     args$x <- keras_array(x)
@@ -599,6 +623,10 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
   # call predict
   do.call(object$predict, args)
 }
+
+#' @rdname predict
+#' @export
+predict.tensorflow.python.keras.engine.sequential.Sequential <- predict.keras.engine.training.Model
 
 
 #' Generates probability or class probability predictions for the input samples.

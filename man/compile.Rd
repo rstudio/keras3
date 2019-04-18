@@ -2,11 +2,18 @@
 % Please edit documentation in R/model.R
 \name{compile.keras.engine.training.Model}
 \alias{compile.keras.engine.training.Model}
+\alias{compile.tensorflow.python.keras.engine.sequential.Sequential}
 \title{Configure a Keras model for training}
 \usage{
 \method{compile}{keras.engine.training.Model}(object, optimizer, loss,
   metrics = NULL, loss_weights = NULL, sample_weight_mode = NULL,
   weighted_metrics = NULL, target_tensors = NULL, ...)
+
+
+  \method{compile}{tensorflow.python.keras.engine.sequential.Sequential}(object,
+  optimizer, loss, metrics = NULL, loss_weights = NULL,
+  sample_weight_mode = NULL, weighted_metrics = NULL,
+  target_tensors = NULL, ...)
 }
 \arguments{
 \item{object}{Model object to compile.}

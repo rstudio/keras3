@@ -2,11 +2,17 @@
 % Please edit documentation in R/model.R
 \name{evaluate.keras.engine.training.Model}
 \alias{evaluate.keras.engine.training.Model}
+\alias{evaluate.tensorflow.python.keras.engine.sequential.Sequential}
 \title{Evaluate a Keras model}
 \usage{
 \method{evaluate}{keras.engine.training.Model}(object, x = NULL,
   y = NULL, batch_size = NULL, verbose = 1, sample_weight = NULL,
   steps = NULL, callbacks = NULL, ...)
+
+
+  \method{evaluate}{tensorflow.python.keras.engine.sequential.Sequential}(object,
+  x = NULL, y = NULL, batch_size = NULL, verbose = 1,
+  sample_weight = NULL, steps = NULL, callbacks = NULL, ...)
 }
 \arguments{
 \item{object}{Model object to evaluate}

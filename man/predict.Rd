@@ -2,11 +2,17 @@
 % Please edit documentation in R/model.R
 \name{predict.keras.engine.training.Model}
 \alias{predict.keras.engine.training.Model}
+\alias{predict.tensorflow.python.keras.engine.sequential.Sequential}
 \title{Generate predictions from a Keras model}
 \usage{
 \method{predict}{keras.engine.training.Model}(object, x,
   batch_size = NULL, verbose = 0, steps = NULL, callbacks = NULL,
   ...)
+
+
+  \method{predict}{tensorflow.python.keras.engine.sequential.Sequential}(object,
+  x, batch_size = NULL, verbose = 0, steps = NULL,
+  callbacks = NULL, ...)
 }
 \arguments{
 \item{object}{Keras model}
