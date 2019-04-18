@@ -502,7 +502,8 @@ test_call_succeeds("layer_dense_features", required_version = "2.1.3", {
   if (is_tensorflow_implementation() && tensorflow::tf_version() >= "2.0") {
     
     # functional style
-    fc <- tfestimators::feature_columns(mpg = tfestimators::column_numeric("mpg"))
+    fc <- tfestimators::feature_columns(tfestimators::column_numeric("mpg"))
+    
     input <- list(mpg = layer_input(1))
     
     out <- input %>% 
@@ -515,6 +516,8 @@ test_call_succeeds("layer_dense_features", required_version = "2.1.3", {
       feature_layer,
       layer_dense(units = 1)
     ))
+    
+    model %>% compile(loss = "mae", optimizer = "adam")
     
     model %>% fit(x = list(mpg = 1:10), y = 1:10, verbose = 0)
   }
