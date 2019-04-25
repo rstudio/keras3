@@ -70,3 +70,11 @@ before_script:
   - R CMD INSTALL .
   - R -e 'tensorflow::install_tensorflow(version = Sys.getenv("TENSORFLOW_VERSION"))'
   - R -e 'tensorflow::tf_config()'
+
+notifications:
+  email:
+    recipients:
+      - daniel@rstudio.com
+      - sigrid@rstudio.com
+    on_success: never
+    on_failure: always
