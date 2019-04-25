@@ -56,3 +56,11 @@ before_script:
       pip2.7 install --upgrade --ignore-installed --user travis tensorflow
       pip show tensorflow
     fi
+
+notifications:
+  email:
+    recipients:
+      - daniel@rstudio.com
+      - sigrid@rstudio.com
+    on_success: never
+    on_failure: always
