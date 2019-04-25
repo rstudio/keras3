@@ -10,18 +10,21 @@ matrix:
       env:
         - KERAS_BACKEND="tensorflow"
         - KERAS_IMPLEMENTATION="tensorflow"
-    - name: "Theano"
+        - TENSORFLOW_VERSION="default"
+    - name: "Theano (Keras)"
       env:
         - KERAS_BACKEND="theano"
         - THEANO_FLAGS=optimizer=fast_compile
+        - TENSORFLOW_VERSION="default"
     - name: "TensorFlow (TensorFlow)"
       env:
         - KERAS_BACKEND="tensorflow"
         - KERAS_IMPLEMENTATION="tensorflow"
+        - TENSORFLOW_VERSION="default"
     - name: "TensorFlow (TensorFlow 1.12)"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
-        - TENSORFLOW_VERSION="https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.12.0-cp27-none-linux_x86_64.whl"
+        - TENSORFLOW_VERSION="1.12.0"
     - name: "nightly"
       env:
         - TENSORFLOW_VERSION="nightly"
@@ -32,7 +35,7 @@ matrix:
     - name: "TensorFlow (TensorFlow 2.0.0a0)"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
-        - TENSORFLOW_VERSION="https://files.pythonhosted.org/packages/bc/84/970bfb6eb04360a675627a38962127f0f5302ac1fd3ac4ad4f5d1befc9b7/tensorflow-2.0.0a0-cp27-cp27mu-manylinux1_x86_64.whl"
+        - TENSORFLOW_VERSION="2.0.0-alpha0"
   allow_failures:
     - name: "nightly"
       env:
@@ -44,7 +47,7 @@ matrix:
     - name: "TensorFlow (TensorFlow 2.0.0a0)"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
-        - TENSORFLOW_VERSION="https://files.pythonhosted.org/packages/bc/84/970bfb6eb04360a675627a38962127f0f5302ac1fd3ac4ad4f5d1befc9b7/tensorflow-2.0.0a0-cp27-cp27mu-manylinux1_x86_64.whl"
+        - TENSORFLOW_VERSION="2.0.0-alpha0"
         
 cache:
   packages: true
