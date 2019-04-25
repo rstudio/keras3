@@ -43,6 +43,12 @@ matrix:
       env:
         - TENSORFLOW_VERSION="nightly"
         - TENSORFLOW_EAGER="TRUE"
+    - name: "Backend: TensorFlow Eager | Implementation: TensorFlow"
+      env:
+        - KERAS_BACKEND="tensorflow"
+        - KERAS_IMPLEMENTATION="tensorflow"
+        - TENSORFLOW_VERSION="default"
+        - TENSORFLOW_EAGER="TRUE"
         
 cache:
   packages: true
