@@ -21,6 +21,12 @@ matrix:
         - KERAS_BACKEND="tensorflow"
         - KERAS_IMPLEMENTATION="tensorflow"
         - TENSORFLOW_VERSION="default"
+    - name: "TensorFlow (TensorFlow Eager)"
+      env:
+        - KERAS_BACKEND="tensorflow"
+        - KERAS_IMPLEMENTATION="tensorflow"
+        - TENSORFLOW_VERSION="default"
+        - TENSORFLOW_EAGER="TRUE"
     - name: "TensorFlow (TensorFlow 1.12)"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
