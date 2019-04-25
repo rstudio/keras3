@@ -26,6 +26,11 @@ matrix:
       env:
         - TENSORFLOW_VERSION="nightly"
         - TENSORFLOW_PYTHON="/usr/bin/python3"
+    - name: "nighly/eager"
+      env:
+        - TENSORFLOW_VERSION="nightly"
+        - TENSORFLOW_PYTHON="/usr/bin/python3"
+        - TENSORFLOW_EAGER="TRUE"
     - name: "TensorFlow (TensorFlow 2.0.0a0)"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
@@ -35,6 +40,11 @@ matrix:
       env:
         - TENSORFLOW_VERSION="nightly"
         - TENSORFLOW_PYTHON="/usr/bin/python3"
+    - name: "nighly/eager"
+      env:
+        - TENSORFLOW_VERSION="nightly"
+        - TENSORFLOW_PYTHON="/usr/bin/python3"
+        - TENSORFLOW_EAGER="TRUE"
     - name: "TensorFlow (TensorFlow 2.0.0a0)"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
