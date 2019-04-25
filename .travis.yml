@@ -6,54 +6,43 @@ sudo: false
 
 matrix:
   include:
-    - name: "TensorFlow (Keras)"
+    - name: "Backend: TensorFlow | Implementation: Keras"
       env:
         - KERAS_BACKEND="tensorflow"
         - KERAS_IMPLEMENTATION="tensorflow"
         - TENSORFLOW_VERSION="default"
-    - name: "Theano (Keras)"
+    - name: "Backend: Theano | Implementation: Keras"
       env:
         - KERAS_BACKEND="theano"
         - THEANO_FLAGS=optimizer=fast_compile
         - TENSORFLOW_VERSION="default"
-    - name: "TensorFlow (TensorFlow)"
+    - name: "Backend: TensorFlow | Implementation: TensorFlow"
       env:
         - KERAS_BACKEND="tensorflow"
         - KERAS_IMPLEMENTATION="tensorflow"
         - TENSORFLOW_VERSION="default"
-    - name: "TensorFlow (TensorFlow Eager)"
+    - name: "Backend: TensorFlow Eager | Implementation: TensorFlow"
       env:
         - KERAS_BACKEND="tensorflow"
         - KERAS_IMPLEMENTATION="tensorflow"
         - TENSORFLOW_VERSION="default"
         - TENSORFLOW_EAGER="TRUE"
-    - name: "TensorFlow (TensorFlow 1.12)"
+    - name: "Backend: TensorFlow | Implementation: TensorFlow 1.12"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
         - TENSORFLOW_VERSION="1.12.0"
-    - name: "nightly"
-      env:
-        - TENSORFLOW_VERSION="nightly"
-    - name: "nighly/eager"
-      env:
-        - TENSORFLOW_VERSION="nightly"
-        - TENSORFLOW_EAGER="TRUE"
-    - name: "TensorFlow (TensorFlow 2.0.0a0)"
+    - name: "Backend: TensorFlow | Implementation: TensorFlow 2.0.0a0"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
         - TENSORFLOW_VERSION="2.0.0-alpha0"
   allow_failures:
-    - name: "nightly"
+    - name: "Backend: Tensorflow | Implementation: TensorFlow Nightly"
       env:
         - TENSORFLOW_VERSION="nightly"
-    - name: "nighly/eager"
+    - name: "Backend: Tensorflow Eager | Implementation: Tensorflow Nightly"
       env:
         - TENSORFLOW_VERSION="nightly"
         - TENSORFLOW_EAGER="TRUE"
-    - name: "TensorFlow (TensorFlow 2.0.0a0)"
-      env:
-        - KERAS_IMPLEMENTATION="tensorflow"
-        - TENSORFLOW_VERSION="2.0.0-alpha0"
         
 cache:
   packages: true
