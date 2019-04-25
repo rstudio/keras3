@@ -21,34 +21,30 @@ matrix:
     - name: "TensorFlow (TensorFlow 1.12)"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
-        - TENSORFLOW_WHEEL="https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.12.0-cp27-none-linux_x86_64.whl"
+        - TENSORFLOW_VERSION="https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.12.0-cp27-none-linux_x86_64.whl"
     - name: "nightly"
       env:
         - TENSORFLOW_VERSION="nightly"
-        - TENSORFLOW_PYTHON="/usr/bin/python3"
     - name: "nighly/eager"
       env:
         - TENSORFLOW_VERSION="nightly"
-        - TENSORFLOW_PYTHON="/usr/bin/python3"
         - TENSORFLOW_EAGER="TRUE"
     - name: "TensorFlow (TensorFlow 2.0.0a0)"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
-        - TENSORFLOW_WHEEL="https://files.pythonhosted.org/packages/bc/84/970bfb6eb04360a675627a38962127f0f5302ac1fd3ac4ad4f5d1befc9b7/tensorflow-2.0.0a0-cp27-cp27mu-manylinux1_x86_64.whl"
+        - TENSORFLOW_VERSION="https://files.pythonhosted.org/packages/bc/84/970bfb6eb04360a675627a38962127f0f5302ac1fd3ac4ad4f5d1befc9b7/tensorflow-2.0.0a0-cp27-cp27mu-manylinux1_x86_64.whl"
   allow_failures:
     - name: "nightly"
       env:
         - TENSORFLOW_VERSION="nightly"
-        - TENSORFLOW_PYTHON="/usr/bin/python3"
     - name: "nighly/eager"
       env:
         - TENSORFLOW_VERSION="nightly"
-        - TENSORFLOW_PYTHON="/usr/bin/python3"
         - TENSORFLOW_EAGER="TRUE"
     - name: "TensorFlow (TensorFlow 2.0.0a0)"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
-        - TENSORFLOW_WHEEL="https://files.pythonhosted.org/packages/bc/84/970bfb6eb04360a675627a38962127f0f5302ac1fd3ac4ad4f5d1befc9b7/tensorflow-2.0.0a0-cp27-cp27mu-manylinux1_x86_64.whl"
+        - TENSORFLOW_VERSION="https://files.pythonhosted.org/packages/bc/84/970bfb6eb04360a675627a38962127f0f5302ac1fd3ac4ad4f5d1befc9b7/tensorflow-2.0.0a0-cp27-cp27mu-manylinux1_x86_64.whl"
         
 cache:
   packages: true
@@ -57,12 +53,8 @@ cache:
     - $HOME/.cache/pip
 
 before_script:
-  - pip2.7 install --upgrade --ignore-installed --user travis virtualenv
-  - pip2.7 install --upgrade --ignore-installed --user travis keras h5py pyyaml requests Pillow scipy theano
-  - |
-    if [[ ! -z "$TENSORFLOW_WHEEL" ]]; then
-      pip2.7 install --upgrade --ignore-installed --user travis $TENSORFLOW_WHEEL
-    else
-      pip2.7 install --upgrade --ignore-installed --user travis tensorflow
-      pip show tensorflow
-    fi
+  - sudo apt-get update
+  - sudo apt-get install python3
+  - pip install --upgrade --ignore-installed --user travis virtualenv
+  - R CMD INSTALL .
+  - R -e 'tensorflow::install_tensorflow(version = Sys.getenv("TENSORFLOW_VERSION"))'
