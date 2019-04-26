@@ -192,6 +192,7 @@ py_to_r_wrapper.keras.engine.training.Model <- function(x) {
   }
 }
 
+#' @export
 py_to_r_wrapper.tensorflow.python.keras.engine.training.Model <- py_to_r_wrapper.keras.engine.training.Model
 
 #' @export
@@ -333,6 +334,7 @@ compile.keras.engine.training.Model <-
   invisible(object)
 }
 
+#' @export
 compile.tensorflow.python.keras.engine.training.Model <- compile.keras.engine.training.Model
 
 #' Train a Keras model
@@ -474,6 +476,7 @@ fit.keras.engine.training.Model <-
   invisible(history)
 }
 
+#' @export
 fit.tensorflow.python.keras.engine.training.Model<- fit.keras.engine.training.Model
 
 #' Evaluate a Keras model
@@ -544,6 +547,7 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
   result
 }
 
+#' @export
 evaluate.tensorflow.python.keras.engine.training.Model <- evaluate.keras.engine.training.Model
 
 resolve_callbacks <- function(args, callbacks) {
@@ -607,6 +611,7 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
   do.call(object$predict, args)
 }
 
+#' @export
 predict.tensorflow.python.keras.engine.training.Model <- predict.keras.engine.training.Model
 
 #' Generates probability or class probability predictions for the input samples.
@@ -1127,6 +1132,7 @@ summary.keras.engine.training.Model <- function(object, line_length = getOption(
   }
 }
 
+#' @export
 summary.tensorflow.python.keras.engine.training.Model <- summary.keras.engine.training.Model
 
 #' @importFrom reticulate py_str
@@ -1135,6 +1141,7 @@ py_str.keras.engine.training.Model <- function(object,  line_length = getOption(
   paste0("Model\n", py_capture_output(object$summary(line_length = line_length, positions = positions), type = "stdout"))
 }
 
+#' @export
 py_str.tensorflow.python.keras.engine.training.Model <- py_str.keras.engine.training.Model
 
 
