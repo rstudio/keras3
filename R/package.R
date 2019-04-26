@@ -115,11 +115,6 @@ keras <- NULL
         tools <- import_from_path("kerastools", path = python_path)
         tools$progbar$apply_patch()
       }
-      
-      # register class filter to alias classes to 'keras'
-      reticulate::register_class_filter(function(classes) {
-        sub(paste0("^", resolve_implementation_module()), "keras", classes)
-      })
         
     },
     
@@ -135,6 +130,11 @@ keras <- NULL
       }
     }
   ))
+  
+  # register class filter to alias classes to 'keras'
+  reticulate::register_class_filter(function(classes) {
+    sub(paste0("^", resolve_implementation_module()), "keras", classes)
+  })
   
   # tensorflow use_session hooks
   setHook("tensorflow.on_before_use_session", tensorflow_on_before_use_session)
