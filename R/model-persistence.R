@@ -221,7 +221,8 @@ model_from_yaml <- function(yaml, custom_objects = NULL) {
 #' @export
 serialize_model <- function(model, include_optimizer = TRUE) {
   
-  if (!inherits(model, "keras.engine.training.Model"))
+  if (!inherits(model, "keras.engine.training.Model") && 
+      !inherits(model, "tensorflow.python.keras.engine.training.Model"))
     stop("You must pass a Keras model object to serialize_model")
   
   # write hdf5 file to temp file
@@ -252,10 +253,10 @@ reload_model <- function(object) {
   
   models <- import("keras.models")
   if ("keras.models.Sequential" %in% class(object) ||
-      "keras.engine.sequential.Sequential" %in% class(object)) {
+      "keras.engine.sequential.Sequential" %in% class(object) ||
+      "tensorflow.python.keras.engine.sequential.Sequential" %in% class(object)) {
     new_model <- models$Sequential$from_config(old_config)
-  }
-  else {
+  } else {
     new_model <- models$Model$from_config(old_config)
   }
   
@@ -342,4 +343,6 @@ export_savedmodel.keras.engine.training.Model <- function(
   
   invisible(export_dir_base)
 }
+
+export_savedmodel.tensorflow.python.keras.engine.training.Model <- export_savedmodel.keras.engine.training.Model
 

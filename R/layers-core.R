@@ -532,6 +532,7 @@ compose_layer.keras.models.Sequential <- function(object, layer) {
 }
 
 compose_layer.keras.engine.sequential.Sequential <- compose_layer.keras.models.Sequential
+compose_layer.tensorflow.python.keras.engine.sequential.Sequential <- compose_layer.keras.models.Sequential
 
 compose_layer.python.builtin.object <- function(object, layer) {
   if (is.function(layer))

@@ -192,6 +192,8 @@ py_to_r_wrapper.keras.engine.training.Model <- function(x) {
   }
 }
 
+py_to_r_wrapper.tensorflow.python.keras.engine.training.Model <- py_to_r_wrapper.keras.engine.training.Model
+
 #' @export
 py_to_r_wrapper.kerastools.model.RModel <- function(x) {
   function(...) {
@@ -331,6 +333,7 @@ compile.keras.engine.training.Model <-
   invisible(object)
 }
 
+compile.tensorflow.python.keras.engine.training.Model <- compile.keras.engine.training.Model
 
 #' Train a Keras model
 #'
@@ -471,6 +474,8 @@ fit.keras.engine.training.Model <-
   invisible(history)
 }
 
+fit.tensorflow.python.keras.engine.training.Model<- fit.keras.engine.training.Model
+
 #' Evaluate a Keras model
 
 #' @inheritParams fit.keras.engine.training.Model
@@ -539,6 +544,8 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
   result
 }
 
+evaluate.tensorflow.python.keras.engine.training.Model <- evaluate.keras.engine.training.Model
+
 resolve_callbacks <- function(args, callbacks) {
   if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0") {
     args <- append(args, list(callbacks = normalize_callbacks(callbacks)))
@@ -600,6 +607,7 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
   do.call(object$predict, args)
 }
 
+predict.tensorflow.python.keras.engine.training.Model <- predict.keras.engine.training.Model
 
 #' Generates probability or class probability predictions for the input samples.
 #' 
@@ -1119,11 +1127,15 @@ summary.keras.engine.training.Model <- function(object, line_length = getOption(
   }
 }
 
+summary.tensorflow.python.keras.engine.training.Model <- summary.keras.engine.training.Model
+
 #' @importFrom reticulate py_str
 #' @export
 py_str.keras.engine.training.Model <- function(object,  line_length = getOption("width"), positions = NULL, ...) {
   paste0("Model\n", py_capture_output(object$summary(line_length = line_length, positions = positions), type = "stdout"))
 }
+
+py_str.tensorflow.python.keras.engine.training.Model <- py_str.keras.engine.training.Model
 
 
 # determine whether to view metrics or not
