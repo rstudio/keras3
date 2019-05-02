@@ -21,9 +21,11 @@ layer_dense_features <- function(object, feature_columns, name = NULL,
   if (!is_tensorflow_implementation() || !tensorflow::tf_version() >= "2.0")
     stop("layer_dense_features requires TensorFlow implementation and version >= 2.0")
   
+  # feature_columns must be unamed otherwise they are converted to a dict
+  names(feature_columns) <- NULL
+  
   create_layer(keras$api$`_v2`$keras$layers$DenseFeatures, object, list(
-    # feature_columns must be unamed otherwise they are converted to a dic
-    feature_columns = setNames(feature_columns, NULL), 
+    feature_columns = feature_columns, 
     name = name,
     trainable = trainable,
     input_shape = normalize_shape(input_shape),
