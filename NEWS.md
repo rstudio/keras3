@@ -1,6 +1,8 @@
 
 ## Development version
 
+- Added `layer_dense_features`.
+
 - Added `on_test_*`, `on_test_batch_*`, `on_predict_*` and `on_predict_*` to callback options.
 
 - Search for the right optimizers and initializers on TensorFlow 2.0
