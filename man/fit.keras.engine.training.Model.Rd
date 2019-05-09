@@ -2,20 +2,10 @@
 % Please edit documentation in R/model.R
 \name{fit.keras.engine.training.Model}
 \alias{fit.keras.engine.training.Model}
-\alias{fit.tensorflow.python.keras.engine.sequential.Sequential}
 \title{Train a Keras model}
 \usage{
 \method{fit}{keras.engine.training.Model}(object, x = NULL, y = NULL,
   batch_size = NULL, epochs = 10,
-  verbose = getOption("keras.fit_verbose", default = 1),
-  callbacks = NULL, view_metrics = getOption("keras.view_metrics",
-  default = "auto"), validation_split = 0, validation_data = NULL,
-  shuffle = TRUE, class_weight = NULL, sample_weight = NULL,
-  initial_epoch = 0, steps_per_epoch = NULL, validation_steps = NULL,
-  ...)
-
-\method{fit}{tensorflow.python.keras.engine.sequential.Sequential}(object,
-  x = NULL, y = NULL, batch_size = NULL, epochs = 10,
   verbose = getOption("keras.fit_verbose", default = 1),
   callbacks = NULL, view_metrics = getOption("keras.view_metrics",
   default = "auto"), validation_split = 0, validation_data = NULL,
