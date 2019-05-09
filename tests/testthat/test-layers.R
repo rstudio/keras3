@@ -502,7 +502,8 @@ test_call_succeeds("layer_dense_features", required_version = "2.1.3", {
   if (is_tensorflow_implementation() && tensorflow::tf_version() >= "2.0") {
     
     # functional style
-    fc <- tfestimators::feature_columns(tfestimators::column_numeric("mpg"))
+    
+    fc <- list(tensorflow::tf$feature_column$numeric_column("mpg"))
     
     input <- list(mpg = layer_input(1))
     
