@@ -410,7 +410,8 @@ fit.keras.engine.training.Model <-
            steps_per_epoch=NULL, validation_steps=NULL, ...) {
     
   # defaults
-  if (is.null(batch_size) && is.null(steps_per_epoch))
+  if (is.null(batch_size) && is.null(steps_per_epoch) && 
+      !is_tensorflow_dataset(x))
     batch_size <- 32L
   
   # resolve view_metrics
@@ -501,7 +502,7 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
                                                  callbacks = NULL, ...) {
   
   # defaults
-  if (is.null(batch_size) && is.null(steps))
+  if (is.null(batch_size) && is.null(steps) &&!is_tensorflow_dataset(x))
     batch_size <- 32L
   
   # args
@@ -515,9 +516,11 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
   
   # resolve x and y (check for TF dataset)
   dataset <- resolve_tensorflow_dataset(x)
-  if (!is.null(dataset)) {
+  if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
+    args$x <- dataset
+  } else if (!is.null(dataset)) {
     args$x <- dataset[[1]]
-    args$y <- dataset[[2]]
+    args$y <- dataset[[2]] 
   } else {
     args$x <- keras_array(x)
     args$y <- keras_array(y) 
@@ -574,7 +577,7 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
                                                 callbacks = NULL,...) {
   
   # defaults
-  if (is.null(batch_size) && is.null(steps))
+  if (is.null(batch_size) && is.null(steps) &&!is_tensorflow_dataset(x))
     batch_size <- 32L
   
   # args
@@ -587,7 +590,9 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
   
   # resolve x (check for TF dataset)
   dataset <- resolve_tensorflow_dataset(x)
-  if (!is.null(dataset)) {
+  if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
+    args$x <- dataset 
+  } else if (!is.null(dataset)) {
     args$x <- dataset[[1]]
   } else {
     args$x <- keras_array(x)

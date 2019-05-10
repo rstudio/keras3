@@ -36,9 +36,10 @@ Imports:
     R6
 Suggests: 
     ggplot2,
-    testthat, 
+    testthat (>= 2.1.0),
     knitr,
-    rmarkdown
+    rmarkdown,
+    tfdatasets
 SystemRequirements: Keras >= 2.0 (https://keras.io)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
