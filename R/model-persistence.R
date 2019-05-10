@@ -247,19 +247,11 @@ unserialize_model <- function(model, custom_objects = NULL, compile = TRUE) {
 }
 
 reload_model <- function(object) {
-  old_config <- object$get_config()
-  old_weights <- object$get_weights()
+  old_config <- get_config(object)
+  old_weights <- get_weights(object)
   
-  models <- import("keras.models")
-  if ("keras.models.Sequential" %in% class(object) ||
-      "keras.engine.sequential.Sequential" %in% class(object)) {
-    new_model <- models$Sequential$from_config(old_config)
-  }
-  else {
-    new_model <- models$Model$from_config(old_config)
-  }
-  
-  new_model$set_weights(old_weights)
+  new_model <- from_config(old_config)
+  set_weights(new_model, old_weights)
   
   new_model
 }
@@ -276,7 +268,7 @@ reload_model <- function(object) {
 #' @param remove_learning_phase Should the learning phase be removed by saving
 #'   and reloading the model? Defaults to \code{TRUE}.
 #' @param as_text Whether to write the SavedModel in text format.
-#' @param ... Unused
+#' @param ... Other arguments passed to tf.keras.experimental.export_saved_model.
 #' 
 #' @return The path to the exported directory, as a string.
 #'
@@ -289,6 +281,7 @@ export_savedmodel.keras.engine.training.Model <- function(
   remove_learning_phase = TRUE,
   as_text = FALSE,
   ...) {
+  
   if (!is_backend("tensorflow"))
     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
   
@@ -296,49 +289,60 @@ export_savedmodel.keras.engine.training.Model <- function(
     export_dir_base <- file.path(export_dir_base, format(Sys.time(), "%Y%m%d%H%M%OS", tz = "GMT"))
   }
   
-  if (is_tensorflow_implementation()) {
-    stop(
-      "'export_savedmodel()' is currently unsupported under the TensorFlow Keras ",
-      "implementation, consider using 'tfestimators::keras_model_to_estimator()'."
-    )
-  } else if (identical(remove_learning_phase, TRUE)) {
+  if (identical(remove_learning_phase, TRUE)) {
     k_set_learning_phase(0)
     message("Keras learning phase set to 0 for export (restart R session before doing additional training)")
     object <- reload_model(object)
   }
   
-  sess <- backend()$get_session()
-
-  input_info <- lapply(object$inputs, function(e) {
-    tensorflow::tf$saved_model$utils$build_tensor_info(e)
-  })
-  
-  output_info <- lapply(object$outputs, function(e) {
-    tensorflow::tf$saved_model$utils$build_tensor_info(e)
-  })
-  
-  names(input_info) <- lapply(object$input_names, function(e) e)
-  names(output_info) <- lapply(object$output_names, function(e) e)
-  
-  if (overwrite && file.exists(export_dir_base))
-    unlink(export_dir_base, recursive = TRUE)
-
-  builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir_base)
-  builder$add_meta_graph_and_variables(
-    sess,
-    list(
-      tensorflow::tf$python$saved_model$tag_constants$SERVING
-    ),
-    signature_def_map = list(
-      serving_default = tensorflow::tf$saved_model$signature_def_utils$build_signature_def(
-        inputs = input_info,
-        outputs = output_info,
-        method_name = tensorflow::tf$saved_model$signature_constants$PREDICT_METHOD_NAME
+  if (tensorflow::tf_version() >= "2.0") {
+    
+    if (overwrite && file.exists(export_dir_base))
+      unlink(export_dir_base, recursive = TRUE)
+    
+    tensorflow::tf$keras$experimental$export_saved_model(
+      model = object, 
+      saved_model_path = export_dir_base, 
+      as_text = as_text, 
+      ...
+    )
+    
+  } else {
+    
+    sess <- backend()$get_session()
+    
+    input_info <- lapply(object$inputs, function(e) {
+      tensorflow::tf$saved_model$utils$build_tensor_info(e)
+    })
+    
+    output_info <- lapply(object$outputs, function(e) {
+      tensorflow::tf$saved_model$utils$build_tensor_info(e)
+    })
+    
+    names(input_info) <- lapply(object$input_names, function(e) e)
+    names(output_info) <- lapply(object$output_names, function(e) e)
+    
+    if (overwrite && file.exists(export_dir_base))
+      unlink(export_dir_base, recursive = TRUE)
+    
+    builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir_base)
+    builder$add_meta_graph_and_variables(
+      sess,
+      list(
+        tensorflow::tf$python$saved_model$tag_constants$SERVING
+      ),
+      signature_def_map = list(
+        serving_default = tensorflow::tf$saved_model$signature_def_utils$build_signature_def(
+          inputs = input_info,
+          outputs = output_info,
+          method_name = tensorflow::tf$saved_model$signature_constants$PREDICT_METHOD_NAME
+        )
       )
     )
-  )
-  
-  builder$save(as_text = as_text)
+    
+    builder$save(as_text = as_text)
+    
+  }
   
   invisible(export_dir_base)
 }
