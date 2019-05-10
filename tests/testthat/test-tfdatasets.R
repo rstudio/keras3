@@ -26,7 +26,7 @@ test_succeeds("Use tfdatasets to train a keras model", {
 
 test_that("Error when specifying batch_size with tfdatasets", {
   skip_if_no_keras()
-  if (!keras::is_tensorflow_implementation())
+  if (!is_tensorflow_implementation())
     skip("Datasets need TensorFlow implementation.")
   
   model <- keras_model_sequential() %>% 
