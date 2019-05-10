@@ -1,6 +1,6 @@
 context("tfdatasets")
 
-test_succeeds("Use an R-based custom Keras model", {
+test_succeeds("Use tfdatasets to train a keras model", {
   
   model <- keras_model_sequential() %>% 
     layer_dense(units = 1, input_shape = 1)
@@ -11,10 +11,14 @@ test_succeeds("Use an R-based custom Keras model", {
     tfdatasets::dataset_shuffle(buffer_size = 100) %>% 
     tfdatasets::dataset_batch(10)
   
-  model %>% fit(dataset, epochs = 2)
-  
-  evaluate(model, dataset)
-  
-  preds <- predict(model, dataset)
-  
+  if (tensorflow::tf_version() >= "2.0") {
+    model %>% fit(dataset, epochs = 2)
+    evaluate(model, dataset)
+    preds <- predict(model, dataset)
+  } else {
+    model %>% fit(dataset, epochs = 2, steps_per_epoch = 5)
+    evaluate(model, dataset, steps = 10)
+    preds <- predict(model, dataset, steps = 10)
+  }
+
 })
