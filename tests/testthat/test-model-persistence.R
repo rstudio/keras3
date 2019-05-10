@@ -109,18 +109,14 @@ test_succeeds("callback output is redirected to run_dir", {
 
 test_succeeds("model can be exported to TensorFlow", {
   if (!is_backend("tensorflow")) skip("not a tensorflow backend")
-
+  
   model <- define_and_compile_model()
   model_dir <- tempfile()
   
   export <- function() tensorflow::export_savedmodel(model, model_dir)
   
-  if (!grepl("^keras", Sys.getenv("KERAS_IMPLEMENTATION"))) {
-    expect_error(export())
-  }
-  else {
-    export()
-    model_files <- dir(model_dir, recursive = TRUE)
-    expect_true(any(grepl("saved_model\\.pb", model_files)))
-  }
+  export()
+  model_files <- dir(model_dir, recursive = TRUE)
+  expect_true(any(grepl("saved_model\\.pb", model_files)))
+
 })
