@@ -349,5 +349,78 @@ export_savedmodel.keras.engine.training.Model <- function(
   invisible(export_dir_base)
 }
 
+#' Export to Saved Model format
+#' 
+#' @param model A Keras model to be saved. If the model is subclassed, the flag 
+#'   `serving_only` must be set to `TRUE`.
+#' @param saved_model_path a string specifying the path to the SavedModel directory.
+#' @param custom_objects Optional dictionary mapping string names to custom classes 
+#'   or functions (e.g. custom loss functions).
+#' @param as_text  bool, `FALSE` by default. Whether to write the SavedModel proto in text 
+#'   format. Currently unavailable in serving-only mode.
+#' @param input_signature A possibly nested sequence of `tf.TensorSpec` objects, used to 
+#'   specify the expected model inputs. See tf.function for more details.
+#' @param serving_only bool, `FALSE` by default. When this is true, only the 
+#'   prediction graph is saved.
+#'   
+#' @note This functionality is experimental and only works with TensorFlow 
+#'   version >= "2.0".
+#'   
+#' @return Invisibly returns the `saved_model_path`.
+#' @family saved_model
+#' 
+#' @export
+model_to_saved_model <- function(model, saved_model_path, custom_objects = NULL, 
+                                 as_text = FALSE, input_signature = NULL, 
+                                 serving_only = FALSE) {
+  
+  if (!is_tensorflow_implementation())
+    stop("TensorFlow implementation is required.")
+  
+  if (!tensorflow::tf_version() >= "2.0")
+    stop("TensorFlow version >= 2.0 is required. Use export_savedmodel ",
+         "if you need to export to saved model format in older versions.")
+  
+  
+  saved_model_path <- normalizePath(saved_model_path)
+  
+  tensorflow::tf$keras$experimental$export_saved_model(
+    model = model,
+    saved_model_path = saved_model_path,
+    custom_objects = custom_objects,
+    as_text = as_text,
+    input_signature = input_signature,
+    serving_only = serving_only
+  )
+  
+  invisible(saved_model_path)
+}
+
+#' Load a Keras model from the Saved Model format
+#'
+#' @inheritParams model_to_saved_model
+#' 
+#' @return a Keras model.
+#' @family saved_model
+#' 
+#' @note This functionality is experimental and only works with TensorFlow 
+#'   version >= "2.0".
+#' 
+#' @export
+model_from_saved_model <- function(saved_model_path, custom_objects = NULL) {
+  
+  if (!is_tensorflow_implementation())
+    stop("TensorFlow implementation is required.")
+  
+  if (!tensorflow::tf_version() >= "2.0")
+    stop("TensorFlow version >= 2.0 is required. Use export_savedmodel ",
+         "if you need to export to saved model format in older versions.")
+  
+  saved_model_path <- normalizePath(saved_model_path)
+  tensorflow::tf$keras$experimental$load_from_saved_model(
+    saved_model_path = saved_model_path,
+    custom_objects = custom_objects
+  )
+}
 
 
