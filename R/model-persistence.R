@@ -268,7 +268,7 @@ reload_model <- function(object) {
 #' @param remove_learning_phase Should the learning phase be removed by saving
 #'   and reloading the model? Defaults to \code{TRUE}.
 #' @param as_text Whether to write the SavedModel in text format.
-#' @param ... Other arguments passed to tf.keras.experimental.export_saved_model.
+#' @param ... Other arguments passed to tf.saved_model.save.
 #' 
 #' @return The path to the exported directory, as a string.
 #'
@@ -300,10 +300,12 @@ export_savedmodel.keras.engine.training.Model <- function(
     if (overwrite && file.exists(export_dir_base))
       unlink(export_dir_base, recursive = TRUE)
     
-    tensorflow::tf$keras$experimental$export_saved_model(
-      model = object, 
-      saved_model_path = export_dir_base, 
-      as_text = as_text, 
+    if (as_text)
+      warning("as_text is ignored in TensorFlow 2.0")
+    
+    tensorflow::tf$saved_model$save(
+      obj = object, 
+      export_dir = export_dir_base, 
       ...
     )
     
@@ -346,4 +348,6 @@ export_savedmodel.keras.engine.training.Model <- function(
   
   invisible(export_dir_base)
 }
+
+
 
