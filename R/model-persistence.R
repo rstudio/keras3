@@ -114,13 +114,47 @@ save_model_weights_hdf5 <- function(object, filepath, overwrite = TRUE) {
     stop("The h5py Python package is required to save and load model weights")
   filepath <- normalize_path(filepath)
   if (confirm_overwrite(filepath, overwrite)) {
-    object$save_weights(filepath = filepath, overwrite = overwrite)
+    object$save_weights(filepath = filepath, overwrite = overwrite, 
+                        save_format = "h5")
     invisible(TRUE)
   } else {
     invisible(FALSE)
   }
 }
 
+#' Save model weights in the SavedModel format
+#' 
+#' @inheritParams save_model_weights_hdf5
+#' 
+#' @details 
+#' When saving in TensorFlow format, all objects referenced by the network 
+#' are saved in the same format as `tf.train.Checkpoint`, including any Layer instances 
+#' or Optimizer instances assigned to object attributes. For networks constructed from 
+#' inputs and outputs using `tf.keras.Model(inputs, outputs)`, Layer instances used by 
+#' the network are tracked/saved automatically. For user-defined classes which inherit 
+#' from `tf.keras.Model`, Layer instances must be assigned to object attributes, 
+#' typically in the constructor. 
+#' 
+#' See the documentation of `tf.train.Checkpoint` and `tf.keras.Model` for details.
+#' 
+#' @export
+save_model_weights_tf <- function(object, filepath, overwrite = TRUE) {
+  
+  if (!is_tensorflow_implementation())
+    stop("Save weights to the SavedModel format requires the TensorFlow implementation.")
+  
+  if (!tensorflow::tf_version() >= "2.0")
+    stop("Save weights to the SavedModel format requires TensorFlow version >= 2.0")
+  
+  filepath <- normalize_path(filepath)
+  if (confirm_overwrite(filepath, overwrite)) {
+    object$save_weights(filepath = filepath, overwrite = overwrite, 
+                        save_format = "tf")
+    invisible(TRUE)
+  } else {
+    invisible(FALSE)
+  }
+}
 
 #' @rdname save_model_weights_hdf5
 #' @export
@@ -139,6 +173,27 @@ load_model_weights_hdf5 <- function(object, filepath, by_name = FALSE,
     args$reshape <- reshape
   }
    
+  do.call(object$load_weights, args)
+  
+  invisible(object)
+}
+
+#' @inheritParams load_model_weights_hdf5
+#' @rdname save_model_weights_tf
+#' @export
+load_model_weights_tf <- function(object, filepath, by_name = FALSE,
+                                    skip_mismatch = FALSE, reshape = FALSE) {
+  
+  args <- list(
+    filepath = normalize_path(filepath), 
+    by_name = by_name
+  )
+  
+  if (keras_version() >= "2.1.4" && !is_tensorflow_implementation()) {
+    args$skip_mismatch <- skip_mismatch
+    args$reshape <- reshape
+  }
+  
   do.call(object$load_weights, args)
   
   invisible(object)
@@ -383,7 +438,7 @@ model_to_saved_model <- function(model, saved_model_path, custom_objects = NULL,
          "if you need to export to saved model format in older versions.")
   
   
-  saved_model_path <- normalizePath(saved_model_path)
+  saved_model_path <- path.expand(saved_model_path)
   
   tensorflow::tf$keras$experimental$export_saved_model(
     model = model,
@@ -417,7 +472,7 @@ model_from_saved_model <- function(saved_model_path, custom_objects = NULL) {
     stop("TensorFlow version >= 2.0 is required. Use export_savedmodel ",
          "if you need to export to saved model format in older versions.")
   
-  saved_model_path <- normalizePath(saved_model_path)
+  saved_model_path <- path.expand(saved_model_path)
   tensorflow::tf$keras$experimental$load_from_saved_model(
     saved_model_path = saved_model_path,
     custom_objects = custom_objects
