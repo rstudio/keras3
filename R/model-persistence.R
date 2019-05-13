@@ -268,7 +268,8 @@ reload_model <- function(object) {
 #' @param remove_learning_phase Should the learning phase be removed by saving
 #'   and reloading the model? Defaults to \code{TRUE}.
 #' @param as_text Whether to write the SavedModel in text format.
-#' @param ... Other arguments passed to tf.saved_model.save.
+#' @param ... Other arguments passed to tf.saved_model.save. (Used only if 
+#'   TensorFlow version >= 2.0)
 #' 
 #' @return The path to the exported directory, as a string.
 #'
