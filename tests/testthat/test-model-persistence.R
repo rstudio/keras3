@@ -120,3 +120,23 @@ test_succeeds("model can be exported to TensorFlow", {
   expect_true(any(grepl("saved_model\\.pb", model_files)))
 
 })
+
+test_succeeds("model can be exported to saved model format", {
+  if (!is_backend("tensorflow")) skip("not a tensorflow backend")
+  if (!tensorflow::tf_version() >= "2.0") skip("Needs TF 2.0")
+  
+  model <- define_and_compile_model()
+  model_dir <- tempfile()
+  dir.create(model_dir)
+  
+  model_to_saved_model(model, model_dir)
+  loaded <- model_from_saved_model(model_dir)
+  
+  expect_equal(
+    predict(model, matrix(rep(1, 784), nrow = 1)),
+    predict(loaded, matrix(rep(1, 784), nrow = 1))
+  )
+})
+
+
+
