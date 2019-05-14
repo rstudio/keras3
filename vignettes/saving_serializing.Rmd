@@ -2,7 +2,7 @@
 title: "Saving and serializing models"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Writing Custom Keras Wrappers} 
+  %\VignetteIndexEntry{Saving and serializing models} 
   %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
 type: docs
@@ -16,7 +16,7 @@ menu:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
 > This tutorial is an R translation of [this page](https://www.tensorflow.org/alpha/guide/keras/saving_and_serializing)
