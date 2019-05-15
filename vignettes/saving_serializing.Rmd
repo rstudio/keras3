@@ -22,8 +22,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 > This tutorial is an R translation of [this page](https://www.tensorflow.org/alpha/guide/keras/saving_and_serializing)
 available in the official TensorFlow documentation.
 
-The first part of this guide covers saving and serialization for Sequential models and 
-models built using the Functional API and for Sequential models. The saving and serialization 
+The first part of this guide covers saving and serialization for Sequential models and models built using the Functional API. The saving and serialization 
 APIs are the exact same for both of these types of models.
 
 Saving for custom subclasses of Model is covered in the section "Saving Subclassed Models". 
@@ -43,7 +42,7 @@ outputs <- inputs %>%
   layer_dense(units = 64, activation = "relu", name = "dense_1") %>% 
   layer_dense(units = 64, activation = "relu", name = "dense_2") %>% 
   layer_dense(units = 10, activation = "softmax", name = "predictions")
-model <- keras_model(inputs, outputs) # can't name the model
+model <- keras_model(inputs, outputs) 
 summary(model)
 ```
 
@@ -59,7 +58,7 @@ x_test <- x_test %>% array_reshape(dim = c(10000, 784))/255
 model %>% compile(loss = "sparse_categorical_crossentropy",
                   optimizer = optimizer_rmsprop())
 
-history <- model %>% fit(x_train, y_train, btach_size = 64, epochs = 1)
+history <- model %>% fit(x_train, y_train, batch_size = 64, epochs = 1)
 ```
 
 ```{r}
@@ -129,7 +128,7 @@ The `SavedModel` files that were created contain:
 Sometimes, you are only interested in the architecture of the model, and you 
 don't need to save the weight values or the optimizer. In this case, you can 
 retrieve the "config" of the model via the get_config() method. The config is 
-a Python dict that enables you to recreate the same model -- initialized from 
+a named list that enables you to recreate the same model -- initialized from 
 scratch, without any of the information learned previously during training.
 
 ```{r}
@@ -144,7 +143,7 @@ all.equal(predictions, new_predictions)
 ```
 
 You can alternatively use `model_to_json()` and `model_from_json()`, which uses a 
-JSON string to store the config instead of a Python dict. This is useeful to save 
+JSON string to store the config instead of a named list. This is useful to save 
 the config to disk.
 
 ```{r}
@@ -225,10 +224,10 @@ save_model_weights_tf(model, "model_weights")
 
 ## Saving Subclassed Models
 
-Sequential models and Functional models are datastructures that represent a 
+Sequential models and Functional models are data structures that represent a 
 DAG of layers. As such, they can be safely serialized and deserialized.
 
-A subclassed model differs in that it's not a datastructure, it's 
+A subclassed model differs in that it's not a data structure, it's 
 a piece of code. The architecture of the model is defined via the body of the 
 call method. This means that the architecture of the model cannot be safely 
 serialized. To load a model, you'll need to have access to the code that 
@@ -324,7 +323,6 @@ new_model %>% compile(loss = "sparse_categorical_crossentropy",
 train_on_batch(new_model, x_train[1:5,], y_train[1:5])
 
 # Load the state of the old model
-# add a load_weights fun?
 load_model_weights_tf(new_model, "my_weights")
 
 # Check that the model state has been preserved
