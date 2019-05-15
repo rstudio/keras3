@@ -28,6 +28,27 @@ APIs are the exact same for both of these types of models.
 Saving for custom subclasses of Model is covered in the section "Saving Subclassed Models". 
 The APIs in this case are slightly different than for Sequential or Functional models.
 
+## Overview
+
+For Sequential Models and models built using the Functional API use:
+
+* `save_model_hdf5()`/`load_model_hdf5()` to save the entire model to disk. Including the `optimizer` state.
+
+* `get_config()`/`from_config()` to get only the model architecture into an R object.
+
+* `model_to_json()`/`model_from_json()` to save only the architecture of the model to a single string - useful for saving the architecture to disk. You can also use `model_to_yaml()`/`model_from_yaml()` to save the architecture.
+
+* `save_model_weights_hdf5()`/`load_model_weights_hdf5()` if you want to save only the model weights to disk in the `hdf5` format. You can also use `save_model_weights_tf()`/`load_model_weights_tf()` to save the weights to the SavedModel format.
+
+**Note** you can use a combination of `model_to_json()` and `save_model_weights_hdf5()` to save both the architecture and the weights. In this case the optimizer state is not saved.
+
+* `model_to_saved_model()`/`model_from_saved_model()` to save both architecture and model weights to the SavedModel format. This is useful if you want to serve the model using TensorFlow Serving.
+
+For custom models use:
+
+* `save_model_weights_tf()` or `save_model_weights_hdf5()` to save the model weights. Usually for custom models, the architecture must be recreated using code.
+
+
 ## Setup
 
 ```{r}
@@ -287,7 +308,7 @@ Let's train the model, so as to give it a state:
 model %>% compile(loss = "sparse_categorical_crossentropy",
                   optimizer = optimizer_rmsprop())
 
-history <- model %>% fit(x_train, y_train, bach_size = 64, epochs = 1)
+history <- model %>% fit(x_train, y_train, batch_size = 64, epochs = 1)
 ```
 
 The recommended way to save a subclassed model is to use `save_model_weights_tf` to 
@@ -296,7 +317,7 @@ associated with the model: - The layers' weights - The optimizer's state - Any v
 associated with stateful model metrics (if any).
 
 ```{r}
-save_model_weights_tf(model, "my_weights")
+save_model_weights_hdf5(model, "my_weights.h5")
 ```
 
 ```{r}
@@ -323,7 +344,7 @@ new_model %>% compile(loss = "sparse_categorical_crossentropy",
 train_on_batch(new_model, x_train[1:5,], y_train[1:5])
 
 # Load the state of the old model
-load_model_weights_tf(new_model, "my_weights")
+load_model_weights_hdf5(new_model, "my_weights.h5")
 
 # Check that the model state has been preserved
 new_predictions <- predict(new_model, x_test)
