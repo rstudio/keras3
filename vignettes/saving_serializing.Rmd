@@ -32,13 +32,13 @@ The APIs in this case are slightly different than for Sequential or Functional m
 
 For Sequential Models and models built using the Functional API use:
 
-* `save_model_hdf5()`/`load_model_hdf5()` to save the entire model to disk. Including the `optimizer` state.
+* `save_model_hdf5()`/`load_model_hdf5()` to save the entire model to disk, including the `optimizer` state.
 
-* `get_config()`/`from_config()` to get only the model architecture into an R object.
+* `get_config()`/`from_config()` to load only the model architecture into an R object.
 
 * `model_to_json()`/`model_from_json()` to save only the architecture of the model to a single string - useful for saving the architecture to disk. You can also use `model_to_yaml()`/`model_from_yaml()` to save the architecture.
 
-* `save_model_weights_hdf5()`/`load_model_weights_hdf5()` if you want to save only the model weights to disk in the `hdf5` format. You can also use `save_model_weights_tf()`/`load_model_weights_tf()` to save the weights to the SavedModel format.
+* `save_model_weights_hdf5()`/`load_model_weights_hdf5()` if you want to save only the model weights to disk in the `hdf5` format. You can also use `save_model_weights_tf()`/`load_model_weights_tf()` to save the weights in the SavedModel format.
 
 **Note** you can use a combination of `model_to_json()` and `save_model_weights_hdf5()` to save both the architecture and the weights. In this case the optimizer state is not saved.
 
@@ -317,7 +317,7 @@ associated with the model: - The layers' weights - The optimizer's state - Any v
 associated with stateful model metrics (if any).
 
 ```{r}
-save_model_weights_hdf5(model, "my_weights.h5")
+save_model_weights_tf(model, "my_weights")
 ```
 
 ```{r}
@@ -344,7 +344,7 @@ new_model %>% compile(loss = "sparse_categorical_crossentropy",
 train_on_batch(new_model, x_train[1:5,], y_train[1:5])
 
 # Load the state of the old model
-load_model_weights_hdf5(new_model, "my_weights.h5")
+load_model_weights_tf(new_model, "my_weights")
 
 # Check that the model state has been preserved
 new_predictions <- predict(new_model, x_test)
