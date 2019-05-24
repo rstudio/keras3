@@ -58,6 +58,8 @@ navbar:
           href: articles/custom_layers.html
         - text: "Custom Models"
           href: articles/custom_models.html
+        - text: "Saving and serializing"
+          href: articles/saving_serializing.html
     - text: Learn
       href: articles/learn.html
     - text: Tools
