@@ -119,3 +119,21 @@ test_succeeds("R function can be used as custom generator", {
    
 })
 
+test_succeeds("R function can be used as custom generato with multiple inputs", {
+  
+  input1 <- layer_input(shape = 1)
+  input2 <- layer_input(shape = 1)
+  
+  out <- layer_add(list(input1, input2))
+  
+  model <- keras_model(list(input1, input2), out)
+  
+  generator <- function() {
+    list(list(1, 2), 3)
+  }
+  
+  model %>% compile(loss = "mse", optimizer = "sgd")
+  
+  model %>% fit_generator(generator, steps_per_epoch = 10)
+})
+

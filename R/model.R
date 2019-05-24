@@ -975,7 +975,7 @@ as_generator.function <- function(x) {
   tools <- reticulate::import_from_path("kerastools", path = python_path)
   iter <- reticulate::py_iterator(function() {
     elem <- keras_array(x())
-    reticulate::tuple(elem[1], elem[2])
+    reticulate::tuple(elem[[1]], elem[[2]])
   })
   tools$generator$iter_generator(iter)
 }
