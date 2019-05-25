@@ -196,7 +196,7 @@ test_succeeds("on predict/evaluation callbacks", {
   expect_warns_and_out(warns, out)
   
   gen <- function() {
-    matrix(1:10, ncol = 1)
+    list(matrix(1:10, ncol = 1))
   }
   
   warns <- capture_warnings(
