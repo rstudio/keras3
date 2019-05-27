@@ -9,6 +9,8 @@
 
 - Fixed bug in function generators when using models with multiple inputs. (#740)
 
+- Added `export_savedmodel` support for TensorFlow 2.0 (#773)
+
 ## Keras 2.2.4.1 (CRAN)
 
 - Use `tf.keras` as default implementation module.
