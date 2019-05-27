@@ -39,7 +39,8 @@ Suggests:
     testthat (>= 2.1.0),
     knitr,
     rmarkdown,
-    tfdatasets
+    tfdatasets,
+    jpeg
 SystemRequirements: Keras >= 2.0 (https://keras.io)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1

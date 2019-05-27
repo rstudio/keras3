@@ -103,6 +103,49 @@ test_succeeds("flow images from dataframe works", {
   }
 })
 
-
+test_succeeds("flow images from directory works", {
+  
+  if (!have_pillow())
+    skip("Pillow required.")
+  
+  dir <- tempdir()
+  dir.create(paste0(dir, "/flow-img"))
+  dir <- paste0(dir, "/flow-img")
+  dir.create(paste0(dir, "/0"))
+  dir.create(paste0(dir, "/1"))
+  
+  mnist <- dataset_mnist()
+  ind <- which(mnist$train$y %in% c(0, 1))
+  
+  for (i in ind) {
+    img <- mnist$train$x[i,,]/255
+    rname <- paste(sample(letters, size = 10, replace = TRUE), collapse = "")
+    jpeg::writeJPEG(img, target = paste0(dir, "/", mnist$train$y[i], "/", rname, ".jpeg"))
+  }
+  
+  img_gen <- image_data_generator()
+  
+  gen <- flow_images_from_directory(
+    directory = dir, 
+    generator = img_gen, 
+    target_size = c(28, 28), 
+    batch_size = 32
+  )
+  
+  model <- keras_model_sequential() %>% 
+    layer_flatten(input_shape = c(28,28, 3)) %>% 
+    layer_dense(units = 2, activation = "softmax")
+  
+  model %>% compile(loss = "binary_crossentropy", optimizer = "adam")
+  
+  # test fitting the model
+  model %>% fit_generator(gen, steps_per_epoch = 20)
+  
+  # test predictions
+  preds <- predict_generator(model, gen, steps = 10)
+  
+  # evaluate
+  eva <- evaluate_generator(model, gen, steps = 10)
+})
 
 
