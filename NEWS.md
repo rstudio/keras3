@@ -7,6 +7,8 @@
 
 - Search for the right optimizers and initializers on TensorFlow 2.0
 
+- Fixed bug in function generators when using models with multiple inputs. (#740)
+
 ## Keras 2.2.4.1 (CRAN)
 
 - Use `tf.keras` as default implementation module.

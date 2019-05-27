@@ -975,7 +975,13 @@ as_generator.function <- function(x) {
   tools <- reticulate::import_from_path("kerastools", path = python_path)
   iter <- reticulate::py_iterator(function() {
     elem <- keras_array(x())
-    reticulate::tuple(elem[1], elem[2])
+    
+    # deals with the case where the generator is used for prediction and only
+    # yields x's values.
+    if (length(elem) == 1)
+      elem[[2]] <- list()
+    
+    do.call(reticulate::tuple, elem)
   })
   tools$generator$iter_generator(iter)
 }
