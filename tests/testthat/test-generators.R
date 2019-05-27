@@ -119,7 +119,7 @@ test_succeeds("R function can be used as custom generator", {
    
 })
 
-test_succeeds("R function can be used as custom generato with multiple inputs", {
+test_succeeds("R function can be used as custom generator with multiple inputs", {
   
   input1 <- layer_input(shape = 1)
   input2 <- layer_input(shape = 1)
