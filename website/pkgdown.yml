@@ -1,5 +1,5 @@
 pandoc: 2.3.1
-pkgdown: 1.1.0
+pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
   about_keras_layers: about_keras_layers.html
@@ -57,6 +57,7 @@ articles:
   reuters_mlp: examples/reuters_mlp.html
   reuters_mlp_relu_vs_selu: examples/reuters_mlp_relu_vs_selu.html
   stateful_lstm: examples/stateful_lstm.html
+  text_explanation_lime: examples/text_explanation_lime.html
   tfprob_vae: examples/tfprob_vae.html
   unet: examples/unet.html
   unet_linux: examples/unet_linux.html
@@ -68,6 +69,7 @@ articles:
   getting_started: getting_started.html
   guide_keras: guide_keras.html
   learn: learn.html
+  saving_serializing: saving_serializing.html
   sequential_model: sequential_model.html
   tools: tools.html
   training_callbacks: training_callbacks.html

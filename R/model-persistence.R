@@ -114,13 +114,47 @@ save_model_weights_hdf5 <- function(object, filepath, overwrite = TRUE) {
     stop("The h5py Python package is required to save and load model weights")
   filepath <- normalize_path(filepath)
   if (confirm_overwrite(filepath, overwrite)) {
-    object$save_weights(filepath = filepath, overwrite = overwrite)
+    object$save_weights(filepath = filepath, overwrite = overwrite, 
+                        save_format = "h5")
     invisible(TRUE)
   } else {
     invisible(FALSE)
   }
 }
 
+#' Save model weights in the SavedModel format
+#' 
+#' @inheritParams save_model_weights_hdf5
+#' 
+#' @details 
+#' When saving in TensorFlow format, all objects referenced by the network 
+#' are saved in the same format as `tf.train.Checkpoint`, including any Layer instances 
+#' or Optimizer instances assigned to object attributes. For networks constructed from 
+#' inputs and outputs using `tf.keras.Model(inputs, outputs)`, Layer instances used by 
+#' the network are tracked/saved automatically. For user-defined classes which inherit 
+#' from `tf.keras.Model`, Layer instances must be assigned to object attributes, 
+#' typically in the constructor. 
+#' 
+#' See the documentation of `tf.train.Checkpoint` and `tf.keras.Model` for details.
+#' 
+#' @export
+save_model_weights_tf <- function(object, filepath, overwrite = TRUE) {
+  
+  if (!is_tensorflow_implementation())
+    stop("Save weights to the SavedModel format requires the TensorFlow implementation.")
+  
+  if (!tensorflow::tf_version() >= "2.0")
+    stop("Save weights to the SavedModel format requires TensorFlow version >= 2.0")
+  
+  filepath <- normalize_path(filepath)
+  if (confirm_overwrite(filepath, overwrite)) {
+    object$save_weights(filepath = filepath, overwrite = overwrite, 
+                        save_format = "tf")
+    invisible(TRUE)
+  } else {
+    invisible(FALSE)
+  }
+}
 
 #' @rdname save_model_weights_hdf5
 #' @export
@@ -139,6 +173,27 @@ load_model_weights_hdf5 <- function(object, filepath, by_name = FALSE,
     args$reshape <- reshape
   }
    
+  do.call(object$load_weights, args)
+  
+  invisible(object)
+}
+
+#' @inheritParams load_model_weights_hdf5
+#' @rdname save_model_weights_tf
+#' @export
+load_model_weights_tf <- function(object, filepath, by_name = FALSE,
+                                    skip_mismatch = FALSE, reshape = FALSE) {
+  
+  args <- list(
+    filepath = normalize_path(filepath), 
+    by_name = by_name
+  )
+  
+  if (keras_version() >= "2.1.4" && !is_tensorflow_implementation()) {
+    args$skip_mismatch <- skip_mismatch
+    args$reshape <- reshape
+  }
+  
   do.call(object$load_weights, args)
   
   invisible(object)
@@ -247,19 +302,11 @@ unserialize_model <- function(model, custom_objects = NULL, compile = TRUE) {
 }
 
 reload_model <- function(object) {
-  old_config <- object$get_config()
-  old_weights <- object$get_weights()
+  old_config <- get_config(object)
+  old_weights <- get_weights(object)
   
-  models <- import("keras.models")
-  if ("keras.models.Sequential" %in% class(object) ||
-      "keras.engine.sequential.Sequential" %in% class(object)) {
-    new_model <- models$Sequential$from_config(old_config)
-  }
-  else {
-    new_model <- models$Model$from_config(old_config)
-  }
-  
-  new_model$set_weights(old_weights)
+  new_model <- from_config(old_config)
+  set_weights(new_model, old_weights)
   
   new_model
 }
@@ -276,7 +323,8 @@ reload_model <- function(object) {
 #' @param remove_learning_phase Should the learning phase be removed by saving
 #'   and reloading the model? Defaults to \code{TRUE}.
 #' @param as_text Whether to write the SavedModel in text format.
-#' @param ... Unused
+#' @param ... Other arguments passed to tf.saved_model.save. (Used only if 
+#'   TensorFlow version >= 2.0)
 #' 
 #' @return The path to the exported directory, as a string.
 #'
@@ -289,6 +337,7 @@ export_savedmodel.keras.engine.training.Model <- function(
   remove_learning_phase = TRUE,
   as_text = FALSE,
   ...) {
+  
   if (!is_backend("tensorflow"))
     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
   
@@ -296,50 +345,138 @@ export_savedmodel.keras.engine.training.Model <- function(
     export_dir_base <- file.path(export_dir_base, format(Sys.time(), "%Y%m%d%H%M%OS", tz = "GMT"))
   }
   
-  if (is_tensorflow_implementation()) {
-    stop(
-      "'export_savedmodel()' is currently unsupported under the TensorFlow Keras ",
-      "implementation, consider using 'tfestimators::keras_model_to_estimator()'."
-    )
-  } else if (identical(remove_learning_phase, TRUE)) {
+  if (identical(remove_learning_phase, TRUE)) {
     k_set_learning_phase(0)
     message("Keras learning phase set to 0 for export (restart R session before doing additional training)")
     object <- reload_model(object)
   }
   
-  sess <- backend()$get_session()
-
-  input_info <- lapply(object$inputs, function(e) {
-    tensorflow::tf$saved_model$utils$build_tensor_info(e)
-  })
-  
-  output_info <- lapply(object$outputs, function(e) {
-    tensorflow::tf$saved_model$utils$build_tensor_info(e)
-  })
-  
-  names(input_info) <- lapply(object$input_names, function(e) e)
-  names(output_info) <- lapply(object$output_names, function(e) e)
-  
-  if (overwrite && file.exists(export_dir_base))
-    unlink(export_dir_base, recursive = TRUE)
-
-  builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir_base)
-  builder$add_meta_graph_and_variables(
-    sess,
-    list(
-      tensorflow::tf$python$saved_model$tag_constants$SERVING
-    ),
-    signature_def_map = list(
-      serving_default = tensorflow::tf$saved_model$signature_def_utils$build_signature_def(
-        inputs = input_info,
-        outputs = output_info,
-        method_name = tensorflow::tf$saved_model$signature_constants$PREDICT_METHOD_NAME
+  if (tensorflow::tf_version() >= "2.0") {
+    
+    if (overwrite && file.exists(export_dir_base))
+      unlink(export_dir_base, recursive = TRUE)
+    
+    if (as_text)
+      warning("as_text is ignored in TensorFlow 2.0")
+    
+    tensorflow::tf$saved_model$save(
+      obj = object, 
+      export_dir = export_dir_base, 
+      ...
+    )
+    
+  } else {
+    
+    sess <- backend()$get_session()
+    
+    input_info <- lapply(object$inputs, function(e) {
+      tensorflow::tf$saved_model$utils$build_tensor_info(e)
+    })
+    
+    output_info <- lapply(object$outputs, function(e) {
+      tensorflow::tf$saved_model$utils$build_tensor_info(e)
+    })
+    
+    names(input_info) <- lapply(object$input_names, function(e) e)
+    names(output_info) <- lapply(object$output_names, function(e) e)
+    
+    if (overwrite && file.exists(export_dir_base))
+      unlink(export_dir_base, recursive = TRUE)
+    
+    builder <- tensorflow::tf$saved_model$builder$SavedModelBuilder(export_dir_base)
+    builder$add_meta_graph_and_variables(
+      sess,
+      list(
+        tensorflow::tf$python$saved_model$tag_constants$SERVING
+      ),
+      signature_def_map = list(
+        serving_default = tensorflow::tf$saved_model$signature_def_utils$build_signature_def(
+          inputs = input_info,
+          outputs = output_info,
+          method_name = tensorflow::tf$saved_model$signature_constants$PREDICT_METHOD_NAME
+        )
       )
     )
-  )
-  
-  builder$save(as_text = as_text)
+    
+    builder$save(as_text = as_text)
+    
+  }
   
   invisible(export_dir_base)
 }
+
+#' Export to Saved Model format
+#' 
+#' @param model A Keras model to be saved. If the model is subclassed, the flag 
+#'   `serving_only` must be set to `TRUE`.
+#' @param saved_model_path a string specifying the path to the SavedModel directory.
+#' @param custom_objects Optional dictionary mapping string names to custom classes 
+#'   or functions (e.g. custom loss functions).
+#' @param as_text  bool, `FALSE` by default. Whether to write the SavedModel proto in text 
+#'   format. Currently unavailable in serving-only mode.
+#' @param input_signature A possibly nested sequence of `tf.TensorSpec` objects, used to 
+#'   specify the expected model inputs. See tf.function for more details.
+#' @param serving_only bool, `FALSE` by default. When this is true, only the 
+#'   prediction graph is saved.
+#'   
+#' @note This functionality is experimental and only works with TensorFlow 
+#'   version >= "2.0".
+#'   
+#' @return Invisibly returns the `saved_model_path`.
+#' @family saved_model
+#' 
+#' @export
+model_to_saved_model <- function(model, saved_model_path, custom_objects = NULL, 
+                                 as_text = FALSE, input_signature = NULL, 
+                                 serving_only = FALSE) {
+  
+  if (!is_tensorflow_implementation())
+    stop("TensorFlow implementation is required.")
+  
+  if (!tensorflow::tf_version() >= "2.0")
+    stop("TensorFlow version >= 2.0 is required. Use export_savedmodel ",
+         "if you need to export to saved model format in older versions.")
+  
+  
+  saved_model_path <- path.expand(saved_model_path)
+  
+  tensorflow::tf$keras$experimental$export_saved_model(
+    model = model,
+    saved_model_path = saved_model_path,
+    custom_objects = custom_objects,
+    as_text = as_text,
+    input_signature = input_signature,
+    serving_only = serving_only
+  )
+  
+  invisible(saved_model_path)
+}
+
+#' Load a Keras model from the Saved Model format
+#'
+#' @inheritParams model_to_saved_model
+#' 
+#' @return a Keras model.
+#' @family saved_model
+#' 
+#' @note This functionality is experimental and only works with TensorFlow 
+#'   version >= "2.0".
+#' 
+#' @export
+model_from_saved_model <- function(saved_model_path, custom_objects = NULL) {
+  
+  if (!is_tensorflow_implementation())
+    stop("TensorFlow implementation is required.")
+  
+  if (!tensorflow::tf_version() >= "2.0")
+    stop("TensorFlow version >= 2.0 is required. Use export_savedmodel ",
+         "if you need to export to saved model format in older versions.")
+  
+  saved_model_path <- path.expand(saved_model_path)
+  tensorflow::tf$keras$experimental$load_from_saved_model(
+    saved_model_path = saved_model_path,
+    custom_objects = custom_objects
+  )
+}
+
 

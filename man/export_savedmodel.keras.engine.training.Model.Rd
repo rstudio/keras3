@@ -23,7 +23,8 @@ and reloading the model? Defaults to \code{TRUE}.}
 
 \item{as_text}{Whether to write the SavedModel in text format.}
 
-\item{...}{Unused}
+\item{...}{Other arguments passed to tf.saved_model.save. (Used only if
+TensorFlow version >= 2.0)}
 }
 \value{
 The path to the exported directory, as a string.
