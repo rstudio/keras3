@@ -122,7 +122,7 @@ training where you left off.
 You can also export a whole model to the TensorFlow SavedModel format. SavedModel is 
 a standalone serialization format for Tensorflow objects, supported by TensorFlow 
 serving as well as TensorFlow implementations other than Python. Note that
-`model_to_saved_model` is only available for TensorFlow 2.0.
+`model_to_saved_model` is only available for TensorFlow version greater than 1.14.
 
 ```{r}
 # Export the model to a SavedModel
