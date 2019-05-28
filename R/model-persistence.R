@@ -433,8 +433,8 @@ model_to_saved_model <- function(model, saved_model_path, custom_objects = NULL,
   if (!is_tensorflow_implementation())
     stop("TensorFlow implementation is required.")
   
-  if (!tensorflow::tf_version() >= "2.0")
-    stop("TensorFlow version >= 2.0 is required. Use export_savedmodel ",
+  if (!tensorflow::tf_version() >= "1.14")
+    stop("TensorFlow version >= 1.14 is required. Use export_savedmodel ",
          "if you need to export to saved model format in older versions.")
   
   
@@ -468,8 +468,8 @@ model_from_saved_model <- function(saved_model_path, custom_objects = NULL) {
   if (!is_tensorflow_implementation())
     stop("TensorFlow implementation is required.")
   
-  if (!tensorflow::tf_version() >= "2.0")
-    stop("TensorFlow version >= 2.0 is required. Use export_savedmodel ",
+  if (!tensorflow::tf_version() >= "1.14")
+    stop("TensorFlow version >= 1.14 is required. Use export_savedmodel ",
          "if you need to export to saved model format in older versions.")
   
   saved_model_path <- path.expand(saved_model_path)

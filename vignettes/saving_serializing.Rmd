@@ -121,7 +121,8 @@ training where you left off.
 
 You can also export a whole model to the TensorFlow SavedModel format. SavedModel is 
 a standalone serialization format for Tensorflow objects, supported by TensorFlow 
-serving as well as TensorFlow implementations other than Python.
+serving as well as TensorFlow implementations other than Python. Note that
+`model_to_saved_model` is only available for TensorFlow version greater than 1.14.
 
 ```{r}
 # Export the model to a SavedModel
@@ -143,6 +144,17 @@ The `SavedModel` files that were created contain:
 * A TensorFlow checkpoint containing the model weights.
 * A SavedModel proto containing the underlying Tensorflow graph. Separate graphs are saved for prediction (serving), train, and evaluation. If the model wasn't compiled before, then only the inference graph gets exported.
 * The model's architecture config, if available.
+
+You can also use the `export_savedmodel` function to export models but those
+models can not be loaded as Keras models again. Models exported using 
+`exported_savedmodels` can be used for prediction though. 
+
+```{r,eval=FALSE}
+export_savedmodel(model, "savedmodel/")
+new_predictions <- tfdeploy::predict_savedmodel(x_test, "savedmodel/")
+```
+
+**Note** Exporting with `export_savedmodel` sets learning phase to 0 so you need to restart R and re-build the model before doing additional training.
 
 ### Architecture-only saving
 

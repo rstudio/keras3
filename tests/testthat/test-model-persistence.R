@@ -123,7 +123,7 @@ test_succeeds("model can be exported to TensorFlow", {
 
 test_succeeds("model can be exported to saved model format", {
   if (!is_backend("tensorflow")) skip("not a tensorflow backend")
-  if (!tensorflow::tf_version() >= "2.0") skip("Needs TF 2.0")
+  if (!tensorflow::tf_version() >= "1.14") skip("Needs TF >= 1.14")
   
   model <- define_and_compile_model()
   model_dir <- tempfile()
