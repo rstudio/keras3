@@ -15,6 +15,7 @@ title: "Keras Examples"
 | [eager_image_captioning](eager_image_captioning.html) | Generating image captions with Keras and eager execution. |
 | [eager_pix2pix](eager_pix2pix.html) | Image-to-image translation with Pix2Pix, using eager execution. |
 | [eager_styletransfer](eager_styletransfer.html) | Neural style transfer with eager execution. |
+| [fine_tuning](fine_tuning.html) | Fine tuning of a image classification model. | 
 | [imdb_bidirectional_lstm](imdb_bidirectional_lstm.html) | Trains a Bidirectional LSTM on the IMDB sentiment classification task. |
 | [imdb_cnn](imdb_cnn.html) | Demonstrates the use of Convolution1D for text classification. |
 | [imdb_cnn_lstm](imdb_cnn_lstm.html) | Trains a convolutional stack followed by a recurrent stack network on the IMDB sentiment classification task. |
