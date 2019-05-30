@@ -137,3 +137,29 @@ test_succeeds("R function can be used as custom generator with multiple inputs",
   model %>% fit_generator(generator, steps_per_epoch = 10)
 })
 
+test_succeeds("Can use a custom preprocessing function in image_data_generator", {
+  
+  img_gen <- image_data_generator(preprocessing_function = function(x) x/255)
+  
+  mnist <- dataset_mnist()
+  
+  flow <- flow_images_from_data(
+    array_reshape(mnist$train$x, dim = c(dim(mnist$train$x), 1)), 
+    to_categorical(mnist$train$y), 
+    img_gen
+  )
+  
+  model <- keras_model_sequential() %>% 
+    layer_flatten(input_shape = c(28,28, 1)) %>% 
+    layer_dense(units = 10, activation = "softmax")
+  
+  model %>% compile(loss = "categorical_crossentropy", optimizer = "adam", metrics = "accuracy")
+  
+  # test fitting the model
+  model %>% fit_generator(flow, steps_per_epoch = 5, epochs = 1)
+  preds <- predict_generator(model, flow, steps = 5)
+  eval <- evaluate_generator(model, flow, steps = 10)
+
+})
+
+
