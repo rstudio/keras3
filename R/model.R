@@ -1024,6 +1024,9 @@ is_main_thread_generator.keras_preprocessing.image.Iterator <- function(x) {
   }
 }
 
+is_main_thread_generator.keras_preprocessing.image.iterator.Iterator <- 
+  is_main_thread_generator.keras_preprocessing.image.Iterator
+
 is_tensorflow_dataset <- function(x) {
   inherits(x, "tensorflow.python.data.ops.dataset_ops.DatasetV2") ||
     inherits(x, "tensorflow.python.data.ops.dataset_ops.Dataset")
