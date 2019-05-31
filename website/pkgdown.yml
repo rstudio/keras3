@@ -24,6 +24,7 @@ articles:
   eager_image_captioning: examples/eager_image_captioning.html
   eager_pix2pix: examples/eager_pix2pix.html
   eager_styletransfer: examples/eager_styletransfer.html
+  fine_tuning: examples/fine_tuning.html
   image_ocr: examples/image_ocr.html
   imdb_bidirectional_lstm: examples/imdb_bidirectional_lstm.html
   imdb_cnn: examples/imdb_cnn.html
