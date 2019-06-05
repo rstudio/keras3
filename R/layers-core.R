@@ -544,6 +544,12 @@ compose_layer.list <- function(object, layer) {
   layer(object)
 }
 
+compose_layer.numeric <- function(object, layer) {
+  if (is.function(layer))
+    layer(object)
+  else
+    stop_with_invalid_layer()
+}
 
 stop_with_invalid_layer <- function() {
   stop("Invalid input to layer function (must be a model or a tensor)",
