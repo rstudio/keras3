@@ -77,6 +77,12 @@ test_succeeds("metrics for multiple output models", {
     epochs = 1
   )
   
-  expect_true(all(c("out2_mean_absolute_error", "out1_mean_squared_error") %in% names(history$metrics)))
-  expect_true(all(!c("out1_mean_absolute_error", "out2_mean_squared_error") %in% names(history$metrics)))
+  if (tensorflow::tf_version() < "2.0") {
+    expect_true(all(c("out2_mean_absolute_error", "out1_mean_squared_error") %in% names(history$metrics)))
+    expect_true(all(!c("out1_mean_absolute_error", "out2_mean_squared_error") %in% names(history$metrics)))  
+  } else {
+    expect_true(all(c("out2_mae", "out1_mse") %in% names(history$metrics)))
+    expect_true(all(!c("out1_mae", "out2_mse") %in% names(history$metrics)))  
+  }
+  
 })
