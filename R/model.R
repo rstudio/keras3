@@ -281,7 +281,7 @@ compile.keras.engine.training.Model <-
     metric_names <- names(metrics)
     if (is.null(metric_names))
       metric_names <- rep_len("", length(metrics))
-    
+
     # if all the metrics names are output names then leave them alone
     # (just convert to a list with no special processing)
     if (py_has_attr(object, "output_names") && all(metric_names %in% object$output_names)) {
@@ -290,10 +290,14 @@ compile.keras.engine.training.Model <-
       # convert metrics to a list (adding names to any custom functions)
       metrics <- lapply(1:length(metrics), function(i) {
         metric <- metrics[[i]]
-        if (is.function(metric) && nzchar(metric_names[[i]]))
+        
+        if (is.function(metric) && nzchar(metric_names[[i]]) &&
+            !is.null(attr(metric, "py_function_name"))) {
           warning("Passing names for custom metrics is deprecated. Please use the ",
                   "custom_metric() function to define custom metrics.")
           attr(metric, "py_function_name") <- metric_names[[i]]
+        }
+        
         metric
       })
     }
