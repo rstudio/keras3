@@ -78,6 +78,25 @@ test_succeeds("models layers can be popped", {
   
 })
 
+test_succeeds("can call model with R objects", {
+  
+  if (!tensorflow::tf_version() >= "1.14") skip("Needs TF >= 1.14")
+  
+  model <- keras_model_sequential() %>% 
+    layer_dense(units = 1, input_shape = 1)
+  
+  model(matrix(runif(10), ncol = 1))
+  
+  input1 <- layer_input(shape = 1)
+  input2 <- layer_input(shape = 1)
+  
+  output <- layer_concatenate(list(input1, input2))
+  
+  model <- keras_model(list(input1, input2), output)
+  
+  model(list(matrix(runif(10), ncol = 1), matrix(runif(10), ncol = 1)))
+})
+
 
 
 
