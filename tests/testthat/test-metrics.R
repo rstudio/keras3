@@ -86,3 +86,23 @@ test_succeeds("metrics for multiple output models", {
   }
   
 })
+
+
+test_succeeds("get warning when passing using named list of metrics", {
+  
+  input <- layer_input(shape = 1)
+  
+  output1 <- layer_dense(input, units = 1, name = "out1")
+  output2 <- layer_dense(input, units = 1, name = "out2")
+  
+  model <- keras_model(input, list(output1, output2))
+  
+  expect_warning({
+    model %>% compile(
+      loss = "mse",
+      optimizer = "adam",
+      metrics = list("metric1" = function(y_true, y_pred) k_mean(y_pred))
+    )  
+  })
+  
+})

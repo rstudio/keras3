@@ -291,8 +291,7 @@ compile.keras.engine.training.Model <-
       metrics <- lapply(1:length(metrics), function(i) {
         metric <- metrics[[i]]
         
-        if (is.function(metric) && nzchar(metric_names[[i]]) &&
-            !is.null(attr(metric, "py_function_name"))) {
+        if (is.function(metric) && nzchar(metric_names[[i]])) {
           warning("Passing names for custom metrics is deprecated. Please use the ",
                   "custom_metric() function to define custom metrics.")
           attr(metric, "py_function_name") <- metric_names[[i]]
