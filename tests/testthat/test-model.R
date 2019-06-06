@@ -80,6 +80,8 @@ test_succeeds("models layers can be popped", {
 
 test_succeeds("can call model with R objects", {
   
+  if (!tensorflow::tf_version() >= "1.14") skip("Needs TF >= 1.14")
+  
   model <- keras_model_sequential() %>% 
     layer_dense(units = 1, input_shape = 1)
   

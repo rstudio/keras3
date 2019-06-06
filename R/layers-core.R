@@ -545,6 +545,7 @@ compose_layer.list <- function(object, layer) {
 }
 
 compose_layer.numeric <- function(object, layer) {
+  if (!tensorflow::tf_version() >= "1.14") stop_with_invalid_layer()
   if (is.function(layer))
     layer(object)
   else
