@@ -11,6 +11,8 @@
 
 - Added `export_savedmodel` support for TensorFlow 2.0 (#773)
 
+- Fixed bug when using `metric_` functions. (#804)
+
 ## Keras 2.2.4.1 (CRAN)
 
 - Use `tf.keras` as default implementation module.
