@@ -35,6 +35,10 @@ matrix:
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
         - TENSORFLOW_VERSION="2.0.0-alpha0"
+    - name: "Backend: TensorFlow | Implementation: TensorFlow 1.14.0-rc0"
+      env:
+        - KERAS_IMPLEMENTATION="tensorflow"
+        - TENSORFLOW_VERSION="1.14.0-rc0"
     - name: "Backend: Tensorflow | Implementation: TensorFlow Nightly"
       env:
         - TENSORFLOW_VERSION="nightly"
