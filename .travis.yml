@@ -31,14 +31,14 @@ matrix:
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
         - TENSORFLOW_VERSION="1.12.0"
-    - name: "Backend: TensorFlow | Implementation: TensorFlow 2.0.0a0"
+    - name: "Backend: TensorFlow | Implementation: TensorFlow 2.0.0b0"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
-        - TENSORFLOW_VERSION="2.0.0-alpha0"
-    - name: "Backend: TensorFlow | Implementation: TensorFlow 1.14.0-rc0"
+        - TENSORFLOW_VERSION="2.0.0-b0"
+    - name: "Backend: TensorFlow | Implementation: TensorFlow 1.14.0-rc1"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
-        - TENSORFLOW_VERSION="1.14.0-rc0"
+        - TENSORFLOW_VERSION="1.14.0-rc1"
     - name: "Backend: Tensorflow | Implementation: TensorFlow Nightly"
       env:
         - TENSORFLOW_VERSION="nightly"
