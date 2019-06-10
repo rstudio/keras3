@@ -13,6 +13,10 @@
 
 - Fixed bug when using `metric_` functions. (#804)
 
+- Allow users to pass additional arguments to `install_keras` (#808)
+
+- Enabled calling Keras models with R arrays. (#806)
+
 ## Keras 2.2.4.1 (CRAN)
 
 - Use `tf.keras` as default implementation module.
