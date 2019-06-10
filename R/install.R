@@ -25,6 +25,8 @@
 #'
 #' @param extra_packages Additional PyPI packages to install along with
 #'   Keras and TensorFlow.
+#'   
+#' @param ... Other arguments passed to [tensorflow::install_tensorflow()].
 #' 
 #' @section GPU Installation:
 #' 
@@ -104,7 +106,8 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
                           conda = "auto",
                           version = "default",
                           tensorflow = "default",
-                          extra_packages = c("tensorflow-hub")) {
+                          extra_packages = c("tensorflow-hub"),
+                          ...) {
   
   # verify method
   method <- match.arg(method)
@@ -142,7 +145,8 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
   install_tensorflow(method = method,
                      conda = conda,
                      version = tensorflow,
-                     extra_packages = c(paste0("keras", version), extra_packages))
+                     extra_packages = c(paste0("keras", version), extra_packages),
+                     ...)
 }
 
 

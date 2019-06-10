@@ -6,7 +6,7 @@
 \usage{
 install_keras(method = c("auto", "virtualenv", "conda"),
   conda = "auto", version = "default", tensorflow = "default",
-  extra_packages = c("tensorflow-hub"))
+  extra_packages = c("tensorflow-hub"), ...)
 }
 \arguments{
 \item{method}{Installation method ("virtualenv" or "conda")}
@@ -29,6 +29,8 @@ for a nightly binary).}
 
 \item{extra_packages}{Additional PyPI packages to install along with
 Keras and TensorFlow.}
+
+\item{...}{Other arguments passed to \code{\link[tensorflow:install_tensorflow]{tensorflow::install_tensorflow()}}.}
 }
 \description{
 Keras and TensorFlow will be installed into an "r-tensorflow" virtual or conda
