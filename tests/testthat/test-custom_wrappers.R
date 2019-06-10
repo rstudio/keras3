@@ -34,7 +34,13 @@ CustomWrapper <- R6::R6Class(
       regularizer <- k_sum(k_log(self$custom_weight))
       super$add_loss(regularizer)
       
+    },
+    
+    call = function(x, mask = NULL, training = NULL) {
+      out <- super$call(x)
+      k_sum(self$custom_weight) + out
     }
+    
   )
 )
 
