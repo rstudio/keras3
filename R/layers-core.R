@@ -494,7 +494,7 @@ create_layer <- function(layer_class, object, args = list()) {
     python_path <- system.file("python", package = "keras")
     tools <- import_from_path("kerastools", path = python_path)
     py_wrapper_args$r_build <- r6_layer$build
-    py_wrapper_args$r_call <-  r6_layer$call
+    py_wrapper_args$r_call <-  reticulate::py_func(r6_layer$call)
     py_wrapper_args$r_compute_output_shape <- r6_layer$compute_output_shape
     layer <- do.call(tools$layer$RLayer, py_wrapper_args)
     

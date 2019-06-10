@@ -122,7 +122,7 @@ create_wrapper <- function(wrapper_class, object, args = list()) {
   python_path <- system.file("python", package = "keras")
   tools <- reticulate::import_from_path("kerastools", path = python_path)
   py_wrapper_args$r_build <- r6_wrapper$build
-  py_wrapper_args$r_call <-  r6_wrapper$call
+  py_wrapper_args$r_call <-  reticulate::py_func(r6_wrapper$call)
   py_wrapper_args$r_compute_output_shape <- r6_wrapper$compute_output_shape
   py_wrapper <- do.call(tools$wrapper$RWrapper, py_wrapper_args)
     
