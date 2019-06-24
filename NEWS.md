@@ -17,6 +17,8 @@
 
 - Enabled calling Keras models with R arrays. (#806)
 
+- Allow passing `data.frames` as inputs to Keras models. (#822)
+
 ## Keras 2.2.4.1 (CRAN)
 
 - Use `tf.keras` as default implementation module.
