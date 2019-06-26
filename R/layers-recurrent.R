@@ -102,7 +102,7 @@ layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE
 #' 
 #' The second variant is compatible with CuDNNGRU (GPU-only) and allows
 #' inference on CPU. Thus it has separate biases for `kernel` and
-#' `recurrent_kernel`. Use `reset_after = TTRUE` and
+#' `recurrent_kernel`. Use `reset_after = TRUE` and
 #' `recurrent_activation = "sigmoid"`.
 #' 
 #' @inheritParams layer_simple_rnn
