@@ -237,8 +237,7 @@ keras_array <- function(x, dtype = NULL) {
 
   # error for data frames
   if (is.data.frame(x)) {
-    stop("Data passed to Keras must be a vector, matrix, or array (you passed a ",
-         "data frame)", call. = FALSE)
+    x <- as.list(x)
   }
   
   # recurse for lists
