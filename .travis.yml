@@ -56,7 +56,7 @@ matrix:
         - TENSORFLOW_VERSION="nightly"
       r_github_packages:
         - rstudio/reticulate
-allow_failures:
+  allow_failures:
     - name: "Backend: Tensorflow | Implementation: TensorFlow Nightly"
       env:
         - TENSORFLOW_VERSION="nightly"
