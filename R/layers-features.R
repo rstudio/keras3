@@ -18,8 +18,8 @@ layer_dense_features <- function(object, feature_columns, name = NULL,
                                  batch_input_shape = NULL, batch_size = NULL, dtype = NULL, 
                                  weights = NULL) {
 
-  if (!is_tensorflow_implementation() || !tensorflow::tf_version() >= "2.0")
-    stop("layer_dense_features requires TensorFlow implementation and version >= 2.0")
+  if (!is_tensorflow_implementation() || !tensorflow::tf_version() >= "1.14")
+    stop("layer_dense_features requires TensorFlow implementation and version >= 1.14")
   
   # feature_columns must be unamed otherwise they are converted to a dict
   names(feature_columns) <- NULL
