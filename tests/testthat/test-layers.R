@@ -499,7 +499,7 @@ test_call_succeeds("layer_separable_conv_1d", required_version = "2.1.3", {
 })
 
 test_call_succeeds("layer_dense_features", required_version = "2.1.3", {
-  if (is_tensorflow_implementation() && tensorflow::tf_version() >= "2.0") {
+  if (is_tensorflow_implementation() && tensorflow::tf_version() >= "1.14") {
     
     # functional style
     
