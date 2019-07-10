@@ -134,7 +134,29 @@ test_succeeds("R function can be used as custom generator with multiple inputs",
   
   model %>% compile(loss = "mse", optimizer = "sgd")
   
-  model %>% fit_generator(generator, steps_per_epoch = 10)
+  model %>% fit_generator(generator, steps_per_epoch = 10, 
+                          validation_data = generator, validation_steps = 2)
+})
+
+test_succeeds("Fixed validation_data instead of generator with fit_generator", {
+
+  input1 <- layer_input(shape = 1)
+  input2 <- layer_input(shape = 1)
+  
+  out <- layer_add(list(input1, input2))
+  
+  model <- keras_model(list(input1, input2), out)
+  
+  generator <- function() {
+    list(list(1, 2), 3)
+  }
+  
+  model %>% compile(loss = "mse", optimizer = "sgd")
+  
+  model %>% fit_generator(
+    generator, steps_per_epoch = 2, 
+    validation_data = list(list(1, 2), 3))
+  
 })
 
 test_succeeds("Can use a custom preprocessing function in image_data_generator", {
