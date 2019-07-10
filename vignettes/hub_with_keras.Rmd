@@ -31,6 +31,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library(keras)
+library(magick)
 ```
 
 ## An ImageNet classifier
@@ -60,9 +61,9 @@ model <- keras_model(input, output)
 Download a single image to try the model on.
 
 ```{r}
-img <- magick::image_read('https://storage.googleapis.com/download.tensorflow.org/example_images/grace_hopper.jpg') %>%
-  magick::image_resize(geometry = "224x224x3!") %>% 
-  magick::image_data() %>% 
+img <- image_read('https://storage.googleapis.com/download.tensorflow.org/example_images/grace_hopper.jpg') %>%
+  image_resize(geometry = "224x224x3!") %>% 
+  image_data() %>% 
   as.numeric() %>% 
   abind::abind(along = 0) # expand to batch dimension
 ```
@@ -89,7 +90,7 @@ For this example you will use the TensorFlow flowers dataset:
 data_root <- get_file(
   fname = "flower_photos",
   origin = "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz",
-  extract = TRUE
+  untar = TRUE
   )
 ```
 
@@ -97,7 +98,69 @@ The simplest way to load this data into our model is using `image_data_generator
 
 All of TensorFlow Hub's image modules expect float inputs in the [0, 1] range. Use the image_data_generator's rescale parameter to achieve this.
 
-The image size will be handled later.
+```{r}
+image_generator <- image_data_generator(rescale = 1/255)
+image_data <- flow_images_from_directory(
+  directory = data_root, 
+  generator = image_generator,
+  target_size = c(224, 224, 3)
+)
+```
+
+The resulting object is an iterator that returns `image_batch`, `label_batch pairs`.
+
+### Download the headless model
+
+TensorFlow Hub also distributes models without the top classification layer. These 
+can be used to easily do transfer learning.
+
+Any Tensorflow 2 compatible image feature vector URL from tfhub.dev will work here.
+
+```{r}
+feature_extractor_url <- "https://tfhub.dev/google/tf2-preview/mobilenet_v2/feature_vector/2"
+feature_extractor_layer <- layer_hub(feature_extractor_url)
+```
+
+### Attach a classification head
+
+Now we can create our classification model by attaching a classification head into
+the feature extractor layer. We define the following model:
+
+```{r}
+input <- layer_input(shape = c(224, 224, 3))
+output <- input %>% 
+  feature_extractor_layer() %>% 
+  layer_dense(units = image_data$num_classes, activation = "softmax")
+
+model <- keras_model(input, output)
+summary(model)
+```
+
+### Train the model
+
+We can now train our model in the same way we would train any other Keras model.
+We first use `compile` to configure the training process:
+
+```{r}
+model %>% 
+  compile(
+    loss = "categorical_crossentropy",
+    optimizer = "adam",
+    metrics = "acc"
+  )
+```
+
+We can then use the `fit` function  to fit our model.
+
+```{r}
+model %>% 
+  fit_generator(image_data, steps_per_epoch = image_data$n/image_data$batch_size)
+```
+
+
+
+
+
 
 
 
