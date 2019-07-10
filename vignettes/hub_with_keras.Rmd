@@ -1,0 +1,53 @@
+---
+title: "TensorFlow Hub with Keras"
+output: 
+  rmarkdown::html_vignette: default
+vignette: >
+  %\VignetteIndexEntry{TensorFlow Hub with Keras} 
+  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteEncoding{UTF-8}
+type: docs
+repo: https://github.com/rstudio/keras
+menu:
+  main:
+    name: "TensorFlow Hub with Keras"
+    identifier: "hub-with-keras"
+    parent: "keras-using-keras"
+    weight: 70
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+[TensorFlow Hub](http://tensorflow.org/hub) is a way to share pretrained model components. See the TensorFlow Module Hub for a searchable listing of pre-trained models. This tutorial demonstrates:
+
+1. How to use TensorFlow Hub with Keras.
+2. How to do image classification using TensorFlow Hub.
+3. How to do simple transfer learning.
+
+## Setup
+
+```{r}
+library(keras)
+```
+
+## An ImageNet classifier
+
+### Download the classifier
+
+Use `layer_hub` to load a mobilenet and transform it into a Keras layer. 
+Any TensorFlow 2 compatible image classifier URL from tfhub.dev will work here.
+
+```{r}
+classifier_url <- "https://tfhub.dev/google/tf2-preview/mobilenet_v2/classification/2" 
+
+mobilenet_layer <- layer_hub(classifier_url, input_shape = shape(224, 224, 3))
+```
+
+
+
+
+
+
