@@ -55,7 +55,7 @@ to_categorical <- function(y, num_classes = NULL, dtype = "float32") {
 #' @export
 get_file <- function(fname, origin, file_hash = NULL, cache_subdir = "datasets", 
                      hash_algorithm = "auto", extract = FALSE,
-                     archive_format = "auto", cache_dir = NULL) {
+                     archive_format = "auto", cache_dir = NULL, untar = FALSE) {
   keras$utils$get_file(
     fname = normalize_path(fname),
     origin = origin,
@@ -64,7 +64,8 @@ get_file <- function(fname, origin, file_hash = NULL, cache_subdir = "datasets",
     hash_algorithm = hash_algorithm,
     extract = extract,
     archive_format = archive_format,
-    cache_dir = normalize_path(cache_dir)
+    cache_dir = normalize_path(cache_dir),
+    untar = untar
   )
 }
 
