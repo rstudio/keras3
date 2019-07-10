@@ -42,11 +42,62 @@ Any TensorFlow 2 compatible image classifier URL from tfhub.dev will work here.
 
 ```{r}
 classifier_url <- "https://tfhub.dev/google/tf2-preview/mobilenet_v2/classification/2" 
-
-mobilenet_layer <- layer_hub(classifier_url, input_shape = shape(224, 224, 3))
+mobilenet_layer <- layer_hub(classifier_url)
 ```
 
+We can then create our Keras model:
 
+```{r}
+input <- layer_input(shape = c(224, 224, 3))
+output <- input %>% 
+  mobilenet_layer()
+
+model <- keras_model(input, output)
+```
+
+### Run it on a single image
+
+Download a single image to try the model on.
+
+```{r}
+img <- magick::image_read('https://storage.googleapis.com/download.tensorflow.org/example_images/grace_hopper.jpg') %>%
+  magick::image_resize(geometry = "224x224x3!") %>% 
+  magick::image_data() %>% 
+  as.numeric() %>% 
+  abind::abind(along = 0) # expand to batch dimension
+```
+
+```{r, echo=FALSE}
+plot(as.raster(img[1,,,]))
+```
+
+```{r}
+result <- predict(model, img)
+mobilenet_decode_predictions(result[,-1, drop = FALSE])
+```
+
+## Simple transfer learning
+
+Using TF Hub it is simple to retrain the top layer of the model to recognize the 
+classes in our dataset.
+
+### Dataset
+
+For this example you will use the TensorFlow flowers dataset:
+
+```{r}
+data_root <- get_file(
+  fname = "flower_photos",
+  origin = "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz",
+  extract = TRUE
+  )
+```
+
+The simplest way to load this data into our model is using `image_data_generator`
+
+All of TensorFlow Hub's image modules expect float inputs in the [0, 1] range. Use the image_data_generator's rescale parameter to achieve this.
+
+The image size will be handled later.
 
 
 
