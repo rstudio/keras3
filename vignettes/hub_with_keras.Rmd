@@ -88,10 +88,13 @@ For this example you will use the TensorFlow flowers dataset:
 
 ```{r}
 data_root <- get_file(
-  fname = "flower_photos",
-  origin = "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz",
-  untar = TRUE
+  fname = "flower_photos.tgz",
+  origin = "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz"
   )
+if (!dir.exists("flower_photos")) {
+  untar(data_root)  
+}
+data_root <- "flower_photos"
 ```
 
 The simplest way to load this data into our model is using `image_data_generator`
