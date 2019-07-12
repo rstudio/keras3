@@ -99,11 +99,19 @@ The simplest way to load this data into our model is using `image_data_generator
 All of TensorFlow Hub's image modules expect float inputs in the [0, 1] range. Use the image_data_generator's rescale parameter to achieve this.
 
 ```{r}
-image_generator <- image_data_generator(rescale = 1/255)
-image_data <- flow_images_from_directory(
+image_generator <- image_data_generator(rescale = 1/255, validation_split = 0.2)
+training_data <- flow_images_from_directory(
   directory = data_root, 
   generator = image_generator,
-  target_size = c(224, 224, 3)
+  target_size = c(224, 224), 
+  subset = "training"
+)
+
+validation_data <- flow_images_from_directory(
+  directory = data_root, 
+  generator = image_generator,
+  target_size = c(224, 224), 
+  subset = "validation"
 )
 ```
 
@@ -130,7 +138,7 @@ the feature extractor layer. We define the following model:
 input <- layer_input(shape = c(224, 224, 3))
 output <- input %>% 
   feature_extractor_layer() %>% 
-  layer_dense(units = image_data$num_classes, activation = "softmax")
+  layer_dense(units = training_data$num_classes, activation = "softmax")
 
 model <- keras_model(input, output)
 summary(model)
@@ -154,12 +162,43 @@ We can then use the `fit` function  to fit our model.
 
 ```{r}
 model %>% 
-  fit_generator(image_data, steps_per_epoch = image_data$n/image_data$batch_size)
+  fit_generator(
+    training_data, 
+    steps_per_epoch = training_data$n/training_data$batch_size,
+    validation_data = validation_data
+  )
 ```
 
+You can then export your model with:
 
+```{r}
+model_to_saved_model(model, "model")
+```
 
+You can also reload the `model_from_saved_model` function. Note that you need to
+pass the `custom_object` with the definition of the KerasLayer since it/s not
+a default Keras layer.
 
+```{r}
+reloaded_model <- model_from_saved_model(
+  "model", 
+  custom_objects = list(KerasLayer = layer_hub)
+)
+```
+
+We can verify that the predictions of both the trained model and the reloaded
+model are equal:
+
+```{r}
+steps <- as.integer(validation_data$n/validation_data$batch_size)
+all.equal(
+  predict_generator(model, validation_data, steps = steps),
+  predict_generator(reloaded_model, validation_data, steps = steps),
+)
+```
+
+The saved model can also be loaded for inference later or be converted to
+[TFLite](https://www.tensorflow.org/lite/convert/) or [TFjs](https://github.com/tensorflow/tfjs-converter).
 
 
 
