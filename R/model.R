@@ -1054,7 +1054,7 @@ resolve_tensorflow_dataset <- function(x) {
     }
     
     
-    if (tensorflow::tf_version() < "2.0") {
+    if (tensorflow::tf_version() < "1.14.0") {
       # yield iterators
       iter = x$make_one_shot_iterator()
       iter$get_next()  
