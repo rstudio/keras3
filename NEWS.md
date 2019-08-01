@@ -21,6 +21,8 @@
 
 - Fixed bug when passing a fixed validation set to `fit_generator` (#837)
 
+- Fixed bug when passing a TensorFlow dataset to `fit` within a `tf$distribute` scope. (#856)
+
 ## Keras 2.2.4.1 (CRAN)
 
 - Use `tf.keras` as default implementation module.
