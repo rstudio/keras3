@@ -23,6 +23,8 @@
 
 - Fixed bug when passing a TensorFlow dataset to `fit` within a `tf$distribute` scope. (#856)
 
+- `install_keras` will now install Keras dependencies (#856). It won't re-install TensorFlow if it's already installed.
+
 ## Keras 2.2.4.1 (CRAN)
 
 - Use `tf.keras` as default implementation module.
