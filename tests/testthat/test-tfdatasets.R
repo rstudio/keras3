@@ -47,6 +47,9 @@ test_that("Error when specifying batch_size with tfdatasets", {
 
 test_succeeds("Works with tf$distribute", {
   
+  if (tensorflow::tf_version() < "1.14.0")
+    skip("tf$distribute is not available in TF prior to v1.14")
+  
   strategy <- tensorflow::tf$distribute$MirroredStrategy()
   
   with (strategy$scope(), {
