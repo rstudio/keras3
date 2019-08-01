@@ -27,7 +27,18 @@ keras_model_custom <- function(model_fn, name = NULL) {
   r_model_call <- model_fn(model)
   
   # set the _r_call for delegation
-  model$`_r_call` <- reticulate::py_func(r_model_call)
+  # we search for training ot ... in the function signature, otherwise
+  # we need to remove it from the call.
+  model$`_r_call` <- function(...) {
+    
+    args <- list(...)
+    
+    if (!any(c("...", "training") %in% names(formals(r_model_call))))
+      args[["training"]] <- NULL
+    
+    do.call(r_model_call, args) 
+    
+  }
   
   # return model
   model
