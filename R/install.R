@@ -141,11 +141,22 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
     }
   }
   
+  extra_packages <- unique(c(
+    paste0("keras", version), 
+    extra_packages,
+    "h5py", 
+    "pyyaml",
+    "requests",
+    "Pillow",
+    "scipy"
+  ))
+  
   # perform the install
   install_tensorflow(method = method,
                      conda = conda,
                      version = tensorflow,
-                     extra_packages = c(paste0("keras", version), extra_packages),
+                     extra_packages = extra_packages,
+                     pip_ignore_installed = FALSE,
                      ...)
 }
 
