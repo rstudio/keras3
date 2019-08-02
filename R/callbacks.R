@@ -46,6 +46,12 @@ callback_progbar_logger <- function(count_mode = "samples", stateful_metrics = N
 #'   max, for val_loss this should be min, etc. In auto mode, the direction is
 #'   automatically inferred from the name of the monitored quantity.
 #' @param period Interval (number of epochs) between checkpoints.
+#' @param save_freq `'epoch'` or integer. When using 'epoch', the callback saves 
+#'   the model after each epoch. When using integer, the callback saves the model 
+#'   at end of a batch at which this many samples have been seen since last saving. 
+#'   Note that if the saving isn't aligned to epochs, the monitored metric may 
+#'   potentially be less reliable (it could reflect as little as 1 batch, since 
+#'   the metrics get reset every epoch). Defaults to `'epoch'`
 #'   
 #' @section For example: if `filepath` is 
 #'   `weights.{epoch:02d}-{val_loss:.2f}.hdf5`,: then the model checkpoints will
@@ -56,20 +62,46 @@ callback_progbar_logger <- function(count_mode = "samples", stateful_metrics = N
 #' @export
 callback_model_checkpoint <- function(filepath, monitor = "val_loss", verbose = 0, 
                                       save_best_only = FALSE, save_weights_only = FALSE, 
-                                      mode = c("auto", "min", "max"), period = 1) {
+                                      mode = c("auto", "min", "max"), period = NULL,
+                                      save_freq = "epoch") {
   
   if (!save_weights_only && !have_h5py())
     stop("The h5py Python package is required to save model checkpoints")
   
-  keras$callbacks$ModelCheckpoint(
+  args <- list(
     filepath = normalize_path(filepath),
     monitor = monitor,
     verbose = as.integer(verbose),
     save_best_only = save_best_only,
     save_weights_only = save_weights_only,
-    mode = match.arg(mode),
-    period = as.integer(period)
+    mode = match.arg(mode)
   )
+  
+  if (tensorflow::tf_version() < "1.14") {
+    
+    if (!is.null(save_freq))
+      warning(
+        "The save_freq argument is only used by TensorFlow >= 1.14. ",
+        "Update TensorFlow or use save_freq = NULL"
+      )
+    
+    args$period <- as.integer(period)
+  } else {
+    
+    if (!is.null(period))
+      warning(
+      "The period argument is deprecated since TF v1.14 and will be ignored. ",
+      "Use save_freq instead."
+      )
+    
+    # save_freq can be a string or an integer
+    if (is.character(save_freq))
+      args$save_freq <- save_freq
+    else 
+      args$save_freq <- as.integer(save_freq)
+  }
+  
+  do.call(keras$callbacks$ModelCheckpoint, args)
 }
 
 
