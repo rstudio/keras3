@@ -200,7 +200,7 @@ callback_terminate_on_naan <- function() {
 #'   histograms for the layers of the model. If set to 0, histograms won't be
 #'   computed.
 #' @param batch_size size of batch of inputs to feed to the network
-#'   for histograms computation.
+#'   for histograms computation. No longer needed, ignored since TF 1.14.
 #' @param write_graph whether to visualize the graph in Tensorboard. The log
 #'   file can become quite large when write_graph is set to `TRUE`
 #' @param write_grads whether to visualize gradient histograms in TensorBoard.
@@ -239,7 +239,7 @@ callback_terminate_on_naan <- function() {
 #'    
 #' @export
 callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
-                                 batch_size = 32,
+                                 batch_size = NULL,
                                  write_graph = TRUE, 
                                  write_grads = FALSE,
                                  write_images = FALSE,
@@ -276,9 +276,15 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
     args$embeddings_data <- embeddings_data
   }
   
-  if (keras_version() >= "2.0.5") {
+  if (keras_version() >= "2.0.5" & tensorflow::tf_version() < "1.14") {
+    
+    if (is.null(batch_size))
+      batch_size <- 32L
+    
     args$batch_size <- as.integer(batch_size)
     args$write_grads <- write_grads
+  } else if (!is.null(batch_size)) {
+    warning("Batch size is ignored since TensorFlow 1.14.0")
   }
   
   if (keras_version() >= "2.2.3")
