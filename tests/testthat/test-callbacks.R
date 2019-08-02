@@ -13,7 +13,7 @@ input <- matrix(rexp(10*784), nrow = 10, ncol = 784)
 
 define_compile_and_fit <- function(callbacks) {
   model <- define_and_compile_model()
-  fit(model, data, labels, callbacks = callbacks)
+  fit(model, data, labels, callbacks = callbacks, verbose = 0, epochs = 1)
 }
 
 test_callback <- function(name, callback, h5py = FALSE, required_version = NULL) {
