@@ -116,7 +116,7 @@ other one is based on original 1406.1078v1 and has the order reversed.
 \details{
 The second variant is compatible with CuDNNGRU (GPU-only) and allows
 inference on CPU. Thus it has separate biases for \code{kernel} and
-\code{recurrent_kernel}. Use \code{reset_after = TTRUE} and
+\code{recurrent_kernel}. Use \code{reset_after = TRUE} and
 \code{recurrent_activation = "sigmoid"}.
 }
 \section{Input shapes}{
