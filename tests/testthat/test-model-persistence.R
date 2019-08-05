@@ -45,7 +45,7 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
   labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
   
   
-  model %>% fit(data, labels, epochs = 2)
+  model %>% fit(data, labels, epochs = 2, verbose = 0)
   
 })
 
