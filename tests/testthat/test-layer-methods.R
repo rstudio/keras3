@@ -48,7 +48,7 @@ input <- matrix(rexp(10*784), nrow = 10, ncol = 784)
 
 test_succeeds("layer weights as R array can be read and written", {
   model <- define_and_compile_model()
-  fit(model, data, labels)
+  fit(model, data, labels, epochs = 1, verbose = 0)
   
   layer <- model$layers[[1]]
   weights <- get_weights(layer)

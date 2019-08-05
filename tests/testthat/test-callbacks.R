@@ -257,7 +257,8 @@ test_succeeds("warnings for new callback moment", {
   
   warns <- capture_warnings(
     model %>% 
-      fit(x = matrix(1:10, ncol = 1), y = 1:10, callbacks = list(cc))  
+      fit(x = matrix(1:10, ncol = 1), y = 1:10, callbacks = list(cc), 
+          verbose = 0, epochs = 2)  
   )
   
   if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() < "2.0")
