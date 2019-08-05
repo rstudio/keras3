@@ -17,11 +17,19 @@ model %>%
 data <- matrix(runif(1000*100), nrow = 1000, ncol = 100)
 labels <- matrix(round(runif(1000, min = 0, max = 1)), nrow = 1000, ncol = 1)
 
+
+
 # create callbacks
 callbacks <- list(
-  callback_model_checkpoint("cbk_checkpoint.h5"),
   callback_csv_logger("cbk_history.csv")
 )
+
+if (tensorflow::tf_version() >= "1.14") {
+  callbacks[[2]] <- callback_model_checkpoint("cbk_checkpoint.h5")
+} else {
+  callbacks[[2]] <- callback_model_checkpoint("cbk_checkpoint.h5", 
+                                              save_freq = NULL, period = 1)
+}
 
 if (is_backend("tensorflow"))
   callbacks <- append(callbacks, callback_tensorboard(log_dir = "tflogs"))
