@@ -119,10 +119,10 @@ test_succeeds("custom callbacks", {
     inherit = KerasCallback,
     public = list(
       on_train_begin = function(logs) {
-        cat("TRAIN BEGIN\n")
+        print("TRAIN BEGIN\n")
       },
       on_train_end = function(logs) {
-        cat("TRAIN END\n")
+        print("TRAIN END\n")
       }
     )
   )

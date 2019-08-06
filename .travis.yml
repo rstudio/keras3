@@ -91,7 +91,7 @@ before_script:
   - sudo apt-get install python3
   - pip install --upgrade --ignore-installed --user travis virtualenv
   - R CMD INSTALL .
-  - R -e 'keras::install_keras(tensorflow = Sys.getenv("TENSORFLOW_VERSION"))'
+  - R -e 'keras::install_keras(tensorflow = Sys.getenv("TENSORFLOW_VERSION"), extra_packages = "IPython")'
   - R -e 'tensorflow::tf_config()'
 
 notifications:

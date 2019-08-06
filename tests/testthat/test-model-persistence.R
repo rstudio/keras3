@@ -1,5 +1,5 @@
 
-context("model persistence")
+context("model-persistence")
 
 source("utils.R")
 
@@ -49,7 +49,6 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
   
 })
 
-
 test_succeeds("model weights can be saved and loaded", {
 
   if (!keras:::have_h5py())
@@ -92,14 +91,14 @@ test_succeeds("model can be saved and loaded from R 'raw' object", {
 })
 
 test_succeeds("saved models/weights are mirrored in the run_dir", {
-  run <- tfruns::training_run("train.R")
+  run <- tfruns::training_run("train.R", echo = FALSE)
   run_dir <- run$run_dir
   expect_true(file.exists(file.path(run_dir, "model.h5")))
   expect_true(file.exists(file.path(run_dir, "weights", "weights.h5")))
 })
 
 test_succeeds("callback output is redirected to run_dir", {
-  run <- tfruns::training_run("train.R")
+  run <- tfruns::training_run("train.R", echo = FALSE)
   run_dir <- run$run_dir
   if (is_backend("tensorflow"))
     expect_true(file_test("-d", file.path(run_dir, "tflogs")))
