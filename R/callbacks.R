@@ -85,6 +85,9 @@ callback_model_checkpoint <- function(filepath, monitor = "val_loss", verbose = 
         "Update TensorFlow or use save_freq = NULL"
       )
     
+    if (is.null(period))
+      period <- 1L
+    
     args$period <- as.integer(period)
   } else {
     
