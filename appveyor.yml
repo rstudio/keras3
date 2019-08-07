@@ -21,7 +21,7 @@ cache:
 # Adapt as necessary starting from here
 
 build_script:
-  - C:\Miniconda3-x64\Scripts\conda create -y --name r-tensorflow tensorflow=%TF_VERSION% keras python=3.6.8
+  - C:\Miniconda3-x64\Scripts\conda create -y --name r-tensorflow tensorflow=%TF_VERSION% keras IPython python=3.6.8
   - travis-tool.sh install_deps
 
 test_script:
