@@ -46,5 +46,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 Remotes:
-  rstudio/reticulate
+  rstudio/reticulate,
+  rstudio/tensorflow
 
