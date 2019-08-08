@@ -45,3 +45,6 @@ SystemRequirements: Keras >= 2.0 (https://keras.io)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
+Remotes:
+  rstudio/reticulate
+
