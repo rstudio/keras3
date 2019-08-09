@@ -25,6 +25,10 @@
 
 - `install_keras` will now install Keras dependencies (#856). It won't re-install TensorFlow if it's already installed.
 
+- Fixed deprecation messages showed with TensorFlow v1.14.
+
+- Largely reduced tests verbosity.
+
 ## Keras 2.2.4.1 (CRAN)
 
 - Use `tf.keras` as default implementation module.
