@@ -351,13 +351,13 @@ export_savedmodel.keras.engine.training.Model <- function(
     object <- reload_model(object)
   }
   
-  if (tensorflow::tf_version() >= "2.0") {
+  if (tensorflow::tf_version() >= "1.14") {
     
     if (overwrite && file.exists(export_dir_base))
       unlink(export_dir_base, recursive = TRUE)
     
     if (as_text)
-      warning("as_text is ignored in TensorFlow 2.0")
+      warning("as_text is ignored in TensorFlow 1.14")
     
     tensorflow::tf$saved_model$save(
       obj = object, 

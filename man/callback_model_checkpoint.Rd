@@ -6,7 +6,7 @@
 \usage{
 callback_model_checkpoint(filepath, monitor = "val_loss", verbose = 0,
   save_best_only = FALSE, save_weights_only = FALSE, mode = c("auto",
-  "min", "max"), period = 1)
+  "min", "max"), period = NULL, save_freq = "epoch")
 }
 \arguments{
 \item{filepath}{string, path to save the model file.}
@@ -29,6 +29,13 @@ max, for val_loss this should be min, etc. In auto mode, the direction is
 automatically inferred from the name of the monitored quantity.}
 
 \item{period}{Interval (number of epochs) between checkpoints.}
+
+\item{save_freq}{\code{'epoch'} or integer. When using 'epoch', the callback saves
+the model after each epoch. When using integer, the callback saves the model
+at end of a batch at which this many samples have been seen since last saving.
+Note that if the saving isn't aligned to epochs, the monitored metric may
+potentially be less reliable (it could reflect as little as 1 batch, since
+the metrics get reset every epoch). Defaults to \code{'epoch'}}
 }
 \description{
 \code{filepath} can contain named formatting options, which will be filled the

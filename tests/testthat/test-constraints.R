@@ -48,7 +48,7 @@ test_succeeds("R custom constraints", {
       labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
       
       model %>% fit(
-        data, labels
+        data, labels, verbose = 0, epochs = 2
       )
     }
 })

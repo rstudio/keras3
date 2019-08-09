@@ -29,7 +29,7 @@ input <- matrix(rexp(10*784), nrow = 10, ncol = 784)
 
 test_succeeds("models can be fit, evaluated, and used for predictions", {
   model <- define_and_compile_model()
-  fit(model, data, labels)
+  fit(model, data, labels, verbose = 0)
   evaluate(model, data, labels)
   predict(model, input)
   predict_on_batch(model, input)

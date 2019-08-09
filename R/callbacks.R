@@ -46,6 +46,12 @@ callback_progbar_logger <- function(count_mode = "samples", stateful_metrics = N
 #'   max, for val_loss this should be min, etc. In auto mode, the direction is
 #'   automatically inferred from the name of the monitored quantity.
 #' @param period Interval (number of epochs) between checkpoints.
+#' @param save_freq `'epoch'` or integer. When using 'epoch', the callback saves 
+#'   the model after each epoch. When using integer, the callback saves the model 
+#'   at end of a batch at which this many samples have been seen since last saving. 
+#'   Note that if the saving isn't aligned to epochs, the monitored metric may 
+#'   potentially be less reliable (it could reflect as little as 1 batch, since 
+#'   the metrics get reset every epoch). Defaults to `'epoch'`
 #'   
 #' @section For example: if `filepath` is 
 #'   `weights.{epoch:02d}-{val_loss:.2f}.hdf5`,: then the model checkpoints will
@@ -56,20 +62,49 @@ callback_progbar_logger <- function(count_mode = "samples", stateful_metrics = N
 #' @export
 callback_model_checkpoint <- function(filepath, monitor = "val_loss", verbose = 0, 
                                       save_best_only = FALSE, save_weights_only = FALSE, 
-                                      mode = c("auto", "min", "max"), period = 1) {
+                                      mode = c("auto", "min", "max"), period = NULL,
+                                      save_freq = "epoch") {
   
   if (!save_weights_only && !have_h5py())
     stop("The h5py Python package is required to save model checkpoints")
   
-  keras$callbacks$ModelCheckpoint(
+  args <- list(
     filepath = normalize_path(filepath),
     monitor = monitor,
     verbose = as.integer(verbose),
     save_best_only = save_best_only,
     save_weights_only = save_weights_only,
-    mode = match.arg(mode),
-    period = as.integer(period)
+    mode = match.arg(mode)
   )
+  
+  if (tensorflow::tf_version() < "1.14") {
+    
+    if (!is.null(save_freq))
+      warning(
+        "The save_freq argument is only used by TensorFlow >= 1.14. ",
+        "Update TensorFlow or use save_freq = NULL"
+      )
+    
+    if (is.null(period))
+      period <- 1L
+    
+    args$period <- as.integer(period)
+  } else {
+    
+    if (!is.null(period))
+      warning(
+      "The period argument is deprecated since TF v1.14 and will be ignored. ",
+      "Use save_freq instead."
+      )
+    
+    # save_freq can be a string or an integer
+    if (is.character(save_freq))
+      args$save_freq <- save_freq
+    else 
+      args$save_freq <- as.integer(save_freq)
+  }
+  
+  do.call(keras$callbacks$ModelCheckpoint, args)
 }
 
 
@@ -200,7 +235,7 @@ callback_terminate_on_naan <- function() {
 #'   histograms for the layers of the model. If set to 0, histograms won't be
 #'   computed.
 #' @param batch_size size of batch of inputs to feed to the network
-#'   for histograms computation.
+#'   for histograms computation. No longer needed, ignored since TF 1.14.
 #' @param write_graph whether to visualize the graph in Tensorboard. The log
 #'   file can become quite large when write_graph is set to `TRUE`
 #' @param write_grads whether to visualize gradient histograms in TensorBoard.
@@ -239,7 +274,7 @@ callback_terminate_on_naan <- function() {
 #'    
 #' @export
 callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
-                                 batch_size = 32,
+                                 batch_size = NULL,
                                  write_graph = TRUE, 
                                  write_grads = FALSE,
                                  write_images = FALSE,
@@ -276,9 +311,15 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
     args$embeddings_data <- embeddings_data
   }
   
-  if (keras_version() >= "2.0.5") {
+  if (keras_version() >= "2.0.5" & tensorflow::tf_version() < "1.14") {
+    
+    if (is.null(batch_size))
+      batch_size <- 32L
+    
     args$batch_size <- as.integer(batch_size)
     args$write_grads <- write_grads
+  } else if (!is.null(batch_size)) {
+    warning("Batch size is ignored since TensorFlow 1.14.0")
   }
   
   if (keras_version() >= "2.2.3")

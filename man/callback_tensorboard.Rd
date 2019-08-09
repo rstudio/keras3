@@ -5,7 +5,7 @@
 \title{TensorBoard basic visualizations}
 \usage{
 callback_tensorboard(log_dir = NULL, histogram_freq = 0,
-  batch_size = 32, write_graph = TRUE, write_grads = FALSE,
+  batch_size = NULL, write_graph = TRUE, write_grads = FALSE,
   write_images = FALSE, embeddings_freq = 0,
   embeddings_layer_names = NULL, embeddings_metadata = NULL,
   embeddings_data = NULL, update_freq = "epoch")
@@ -20,7 +20,7 @@ histograms for the layers of the model. If set to 0, histograms won't be
 computed.}
 
 \item{batch_size}{size of batch of inputs to feed to the network
-for histograms computation.}
+for histograms computation. No longer needed, ignored since TF 1.14.}
 
 \item{write_graph}{whether to visualize the graph in Tensorboard. The log
 file can become quite large when write_graph is set to \code{TRUE}}

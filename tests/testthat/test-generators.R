@@ -52,7 +52,7 @@ test_succeeds("image data generator can be used for training", {
   x <- capture_output(
     model %>%
       fit_generator(flow_images_from_data(X_train, Y_train, datagen, batch_size = 32),
-                    steps_per_epoch = 32, epochs = 2)  
+                    steps_per_epoch = 32, epochs = 2, verbose = 0)  
   )
   
   # evaluate using generator
@@ -105,7 +105,7 @@ test_succeeds("R function can be used as custom generator", {
   # Train the model, iterating on the data in batches of 32 samples
   model %>% 
     fit_generator(sampling_generator(X_train, Y_train, batch_size = 32), 
-                  steps_per_epoch = 10, epochs = 10)
+                  steps_per_epoch = 10, epochs = 2, verbose = 0)
   
   # Evaluate the model
   model %>% 
@@ -135,7 +135,8 @@ test_succeeds("R function can be used as custom generator with multiple inputs",
   model %>% compile(loss = "mse", optimizer = "sgd")
   
   model %>% fit_generator(generator, steps_per_epoch = 10, 
-                          validation_data = generator, validation_steps = 2)
+                          validation_data = generator, validation_steps = 2,
+                          verbose = 0)
 })
 
 test_succeeds("Fixed validation_data instead of generator with fit_generator", {
@@ -155,7 +156,8 @@ test_succeeds("Fixed validation_data instead of generator with fit_generator", {
   
   model %>% fit_generator(
     generator, steps_per_epoch = 2, 
-    validation_data = list(list(1, 2), 3))
+    validation_data = list(list(1, 2), 3),
+    verbose = 0)
   
 })
 
@@ -178,7 +180,7 @@ test_succeeds("Can use a custom preprocessing function in image_data_generator",
   model %>% compile(loss = "categorical_crossentropy", optimizer = "adam", metrics = "accuracy")
   
   # test fitting the model
-  model %>% fit_generator(flow, steps_per_epoch = 5, epochs = 1)
+  model %>% fit_generator(flow, steps_per_epoch = 5, epochs = 1, verbose = 0)
   preds <- predict_generator(model, flow, steps = 5)
   eval <- evaluate_generator(model, flow, steps = 10)
 

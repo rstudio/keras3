@@ -13,7 +13,7 @@ input <- matrix(rexp(10*784), nrow = 10, ncol = 784)
 
 define_compile_and_fit <- function(callbacks) {
   model <- define_and_compile_model()
-  fit(model, data, labels, callbacks = callbacks)
+  fit(model, data, labels, callbacks = callbacks, epochs = 1)
 }
 
 test_callback <- function(name, callback, h5py = FALSE, required_version = NULL) {
@@ -119,10 +119,10 @@ test_succeeds("custom callbacks", {
     inherit = KerasCallback,
     public = list(
       on_train_begin = function(logs) {
-        cat("TRAIN BEGIN\n")
+        print("TRAIN BEGIN\n")
       },
       on_train_end = function(logs) {
-        cat("TRAIN END\n")
+        print("TRAIN END\n")
       }
     )
   )
@@ -257,7 +257,8 @@ test_succeeds("warnings for new callback moment", {
   
   warns <- capture_warnings(
     model %>% 
-      fit(x = matrix(1:10, ncol = 1), y = 1:10, callbacks = list(cc))  
+      fit(x = matrix(1:10, ncol = 1), y = 1:10, callbacks = list(cc), 
+          verbose = 0, epochs = 2)  
   )
   
   if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() < "2.0")

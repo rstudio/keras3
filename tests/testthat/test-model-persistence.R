@@ -1,5 +1,5 @@
 
-context("model persistence")
+context("model-persistence")
 
 source("utils.R")
 
@@ -45,10 +45,9 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
   labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
   
   
-  model %>% fit(data, labels, epochs = 2)
+  model %>% fit(data, labels, epochs = 2, verbose = 0)
   
 })
-
 
 test_succeeds("model weights can be saved and loaded", {
 
@@ -92,14 +91,14 @@ test_succeeds("model can be saved and loaded from R 'raw' object", {
 })
 
 test_succeeds("saved models/weights are mirrored in the run_dir", {
-  run <- tfruns::training_run("train.R")
+  run <- tfruns::training_run("train.R", echo = FALSE)
   run_dir <- run$run_dir
   expect_true(file.exists(file.path(run_dir, "model.h5")))
   expect_true(file.exists(file.path(run_dir, "weights", "weights.h5")))
 })
 
 test_succeeds("callback output is redirected to run_dir", {
-  run <- tfruns::training_run("train.R")
+  run <- tfruns::training_run("train.R", echo = FALSE)
   run_dir <- run$run_dir
   if (is_backend("tensorflow"))
     expect_true(file_test("-d", file.path(run_dir, "tflogs")))

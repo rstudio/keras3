@@ -57,6 +57,6 @@ test_succeeds("Use an R-based custom Keras model", {
   one_hot_labels <- to_categorical(labels, num_classes = 10)
   
   # Train the model
-  model %>% fit(data, one_hot_labels, epochs=10, batch_size=32)  
+  model %>% fit(data, one_hot_labels, epochs=2, batch_size=32, verbose = 0)  
   
 })

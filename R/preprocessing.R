@@ -588,8 +588,8 @@ image_array_save <- function(img, path, data_format = NULL, file_format = NULL, 
       scale = scale
     )
   } else {
-    scipy <- import("scipy")
-    invisible(scipy$misc$imsave(path, img))
+    pil <- import("PIL")
+    pil$Image$fromarray(reticulate::r_to_py(img)$astype("uint8"))$save(path)
   }
 }
 

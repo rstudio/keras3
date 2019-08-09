@@ -14,7 +14,7 @@ test_succeeds("metrics can be used when compiling models", {
       )
     ) %>% 
     fit(x = matrix(0, ncol = 784, nrow = 100), y = matrix(0, ncol = 10, nrow = 100), 
-        epochs = 1)
+        epochs = 1, verbose = 0)
 })
 
 test_succeeds("custom metrics can be used when compiling models", {
@@ -35,7 +35,7 @@ test_succeeds("custom metrics can be used when compiling models", {
       )
     ) %>% 
     fit(x = matrix(0, ncol = 784, nrow = 100), y = matrix(0, ncol = 10, nrow = 100),
-        epochs = 1)
+        epochs = 1, verbose = 0)
 })
 
 test_succeeds("metrics be can called directly", {
