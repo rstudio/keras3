@@ -51,7 +51,7 @@ application_xception <- function(include_top = TRUE, weights = "imagenet",
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = as_nullable_integer(input_shape),
+    input_shape = normalize_shape(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -109,7 +109,7 @@ application_vgg16 <- function(include_top = TRUE, weights = "imagenet", input_te
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = as_nullable_integer(input_shape),
+    input_shape = normalize_shape(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -124,7 +124,7 @@ application_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_te
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = as_nullable_integer(input_shape),
+    input_shape = normalize_shape(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -178,7 +178,7 @@ application_resnet50 <- function(include_top = TRUE, weights = "imagenet", input
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = as_nullable_integer(input_shape),
+    input_shape = normalize_shape(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -209,7 +209,7 @@ application_inception_v3 <- function(include_top = TRUE, weights = "imagenet", i
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = as_nullable_integer(input_shape),
+    input_shape = normalize_shape(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -248,7 +248,7 @@ application_inception_resnet_v2 <- function(include_top = TRUE, weights = "image
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = as_nullable_integer(input_shape),
+    input_shape = normalize_shape(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -377,7 +377,7 @@ application_mobilenet <- function(input_shape = NULL, alpha = 1.0, depth_multipl
                                   include_top = TRUE, weights = "imagenet", input_tensor = NULL, pooling = NULL, 
                                   classes = 1000) {
   keras$applications$MobileNet(
-    input_shape = as_integer_tuple(input_shape),
+    input_shape = normalize_shape(input_shape),
     alpha = alpha,
     depth_multiplier = as.integer(depth_multiplier),
     dropout = dropout,
@@ -439,7 +439,7 @@ application_mobilenet_v2 <- function(input_shape = NULL, alpha = 1.0,  include_t
                                      weights = "imagenet", input_tensor = NULL, pooling = NULL, classes = 1000) {
   
   keras$applications$MobileNetV2(
-    input_shape = as_integer_tuple(input_shape),
+    input_shape = normalize_shape(input_shape),
     alpha = alpha,
     include_top = include_top,
     weights = weights,
@@ -529,7 +529,7 @@ application_densenet <- function(blocks, include_top = TRUE, weights = "imagenet
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = as_nullable_integer(input_shape),
+    input_shape = normalize_shape(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -544,7 +544,7 @@ application_densenet121 <- function(include_top = TRUE, weights = "imagenet", in
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = as_nullable_integer(input_shape),
+    input_shape = normalize_shape(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -558,7 +558,7 @@ application_densenet169 <- function(include_top = TRUE, weights = "imagenet", in
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = as_nullable_integer(input_shape),
+    input_shape = normalize_shape(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -572,7 +572,7 @@ application_densenet201 <- function(include_top = TRUE, weights = "imagenet", in
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
-    input_shape = as_nullable_integer(input_shape),
+    input_shape = normalize_shape(input_shape),
     pooling = pooling,
     classes = as.integer(classes)
   )
@@ -640,7 +640,7 @@ application_nasnet <- function(input_shape = NULL, penultimate_filters = 4032L,
                                classes = 1000, default_size = NULL) {
   
   keras$applications$nasnet$NASNet(
-    input_shape = as_nullable_integer(input_shape),
+    input_shape = normalize_shape(input_shape),
     penultimate_filters = as.integer(penultimate_filters),
     num_blocks = as.integer(num_blocks),
     stem_block_filters = as.integer(stem_block_filters),
@@ -662,7 +662,7 @@ application_nasnetlarge <- function(input_shape = NULL, include_top = TRUE, weig
                                input_tensor = NULL, pooling = NULL, classes = 1000) {
   
   keras$applications$NASNetLarge(
-    input_shape = as_nullable_integer(input_shape),
+    input_shape = normalize_shape(input_shape),
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
@@ -678,7 +678,7 @@ application_nasnetmobile <- function(input_shape = NULL, include_top = TRUE, wei
                                     input_tensor = NULL, pooling = NULL, classes = 1000) {
   
   keras$applications$NASNetMobile(
-    input_shape = as_nullable_integer(input_shape),
+    input_shape = normalize_shape(input_shape),
     include_top = include_top,
     weights = weights,
     input_tensor = input_tensor,
