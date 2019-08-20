@@ -37,6 +37,8 @@
 
 - Added `flow_images_from_dataframe` function (#658).
 
+- Allow for unknown `input_shape` in `application_*` functions.
+
 
 ## Keras 2.2.4 (CRAN)
 
