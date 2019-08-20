@@ -3,7 +3,6 @@ context("applications")
 
 source("utils.R")
 
-
 test_succeeds("keras pre-built models can be instantiated", {
   
   skip <- is.na(Sys.getenv("KERAS_TEST_APPLICATIONS", unset = NA)) && 
@@ -33,6 +32,11 @@ test_succeeds("keras pre-built models can be instantiated", {
   application_vgg16()
   application_vgg19()
   application_inception_v3()
+})
+
+test_that("can use any input_shape", {
+  x <- application_vgg16(weights = NULL, input_shape = shape(NULL, NULL, 3), include_top = FALSE)
+  expect_s3_class(x, "keras.engine.training.Model")
 })
 
 
