@@ -417,7 +417,7 @@ normalize_path <- function(path) {
   if (is.null(path))
     NULL
   else
-    path.expand(path)
+    normalizePath(path.expand(path), mustWork = FALSE)
 }
 
 # Helper function to coerce shape arguments to tuple
