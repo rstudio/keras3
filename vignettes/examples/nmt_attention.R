@@ -409,3 +409,7 @@ for (epoch in seq_len(n_epochs)) {
   walk(validation_sample, function(pair)
     translate(pair[1]))
 }
+
+# plot a mask
+example_sentence <- train_sentences[[1]]
+translate(example_sentence)
