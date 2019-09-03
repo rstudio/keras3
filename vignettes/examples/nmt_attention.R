@@ -4,12 +4,8 @@
 #' 
 #' https://blogs.rstudio.com/tensorflow/posts/2018-07-30-attention-layer/
 
-library(keras)
-use_implementation("tensorflow")
-
 library(tensorflow)
-tfe_enable_eager_execution(device_policy = "silent")
-
+library(keras)
 library(tfdatasets)
 
 library(purrr)
@@ -251,7 +247,7 @@ decoder <- attention_decoder(
   target_vocab_size = target_vocab_size
 )
 
-optimizer <- tf$train$AdamOptimizer()
+optimizer <- tf$optimizers$Adam()
 
 cx_loss <- function(y_true, y_pred) {
   mask <- ifelse(y_true == 0L, 0, 1)
@@ -294,7 +290,7 @@ evaluate <-
       attention_matrix[t,] <- attention_weights %>% as.double()
       
       pred_idx <-
-        tf$multinomial(k_exp(preds), num_samples = 1)[1, 1] %>% as.double()
+        tf$compat$v1$multinomial(k_exp(preds), num_samples = 1L)[1, 1] %>% as.double()
       pred_word <- index2word(pred_idx, target_index)
       
       if (pred_word == '<stop>') {
@@ -361,7 +357,7 @@ for (epoch in seq_len(n_epochs)) {
     x <- batch[[1]]
     y <- batch[[2]]
     iteration <- iteration + 1
-    
+
     with(tf$GradientTape() %as% tape, {
       c(enc_output, enc_hidden) %<-% encoder(list(x, encoder_init_hidden))
       
@@ -380,7 +376,6 @@ for (epoch in seq_len(n_epochs)) {
         dec_input <- k_expand_dims(y[, t])
       }
     })
-    
     total_loss <-
       total_loss + loss / k_cast_to_floatx(dim(y)[2])
     
@@ -388,7 +383,7 @@ for (epoch in seq_len(n_epochs)) {
       "Batch loss (epoch/batch): ",
       epoch,
       "/",
-      iter,
+      iteration,
       ": ",
       (loss / k_cast_to_floatx(dim(y)[2])) %>% as.double() %>% round(4),
       "\n"
@@ -397,8 +392,7 @@ for (epoch in seq_len(n_epochs)) {
     variables <- c(encoder$variables, decoder$variables)
     gradients <- tape$gradient(loss, variables)
     
-    optimizer$apply_gradients(purrr::transpose(list(gradients, variables)),
-                              global_step = tf$train$get_or_create_global_step())
+    optimizer$apply_gradients(purrr::transpose(list(gradients, variables)))
     
   })
   
@@ -415,3 +409,7 @@ for (epoch in seq_len(n_epochs)) {
   walk(validation_sample, function(pair)
     translate(pair[1]))
 }
+
+# plot a mask
+example_sentence <- train_sentences[[1]]
+translate(example_sentence)
