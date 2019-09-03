@@ -4,12 +4,8 @@
 #' 
 #' https://blogs.rstudio.com/tensorflow/posts/2018-07-30-attention-layer/
 
-library(keras)
-use_implementation("tensorflow")
-
 library(tensorflow)
-tfe_enable_eager_execution(device_policy = "silent")
-
+library(keras)
 library(tfdatasets)
 
 library(purrr)
