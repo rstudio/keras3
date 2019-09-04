@@ -387,7 +387,7 @@ for (epoch in seq_len(n_epochs)) {
       ": ",
       (loss / k_cast_to_floatx(dim(y)[2])) %>% as.double() %>% round(4),
       "\n"
-    )
+    ) %>% print()
     
     variables <- c(encoder$variables, decoder$variables)
     gradients <- tape$gradient(loss, variables)
@@ -402,7 +402,7 @@ for (epoch in seq_len(n_epochs)) {
     ": ",
     (total_loss / k_cast_to_floatx(buffer_size)) %>% as.double() %>% round(4),
     "\n"
-  )
+  ) %>% print()
   
   walk(train_sentences[1:5], function(pair)
     translate(pair[1]))
