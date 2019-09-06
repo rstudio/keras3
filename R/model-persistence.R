@@ -342,7 +342,7 @@ export_savedmodel.keras.engine.training.Model <- function(
     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
   
   if (versioned) {
-    export_dir_base <- file.path(export_dir_base, format(Sys.time(), "%Y%m%d%H%M%OS", tz = "GMT"))
+    export_dir_base <- path.expand(file.path(export_dir_base, format(Sys.time(), "%Y%m%d%H%M%OS", tz = "GMT")))
   }
   
   if (identical(remove_learning_phase, TRUE)) {
