@@ -93,6 +93,9 @@ before_script:
   - R CMD INSTALL .
   - R -e 'keras::install_keras(tensorflow = Sys.getenv("TENSORFLOW_VERSION"), extra_packages = "IPython")'
   - R -e 'tensorflow::tf_config()'
+  
+after_failure:
+  - Rscript -e 'library(keras); testthat::test_dir("tests/testthat/")'
 
 notifications:
   email:
