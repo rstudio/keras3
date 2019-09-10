@@ -338,6 +338,8 @@ export_savedmodel.keras.engine.training.Model <- function(
   as_text = FALSE,
   ...) {
   
+  export_dir_base <- normalize_path(export_dir_base)
+  
   if (!is_backend("tensorflow"))
     stop("'export_savedmodel' is only supported in the TensorFlow backend.")
   
