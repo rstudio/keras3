@@ -3,9 +3,11 @@ context("losses")
 source("utils.R")
 
 test_loss <- function(name, test_direct_call = TRUE) {
+  
   loss_fn_name <- paste0("loss_", name)
   loss_fn <- eval(parse(text = loss_fn_name))
   test_call_succeeds(name, {
+
     keras_model_sequential() %>% 
       layer_dense(32, input_shape = c(784)) %>% 
       layer_dropout(rate = 0.5) %>% 
@@ -34,7 +36,7 @@ test_loss("sparse_categorical_crossentropy", test_direct_call = FALSE)
 test_loss("binary_crossentropy")
 test_loss("kullback_leibler_divergence")
 test_loss("poisson")
-test_loss("cosine_proximity", test_direct_call = FALSE)
+test_loss("cosine_similarity", test_direct_call = FALSE)
 
 
 

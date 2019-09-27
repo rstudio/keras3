@@ -136,10 +136,27 @@ attr(loss_poisson, "py_function_name") <- "poisson"
 #' @rdname loss_mean_squared_error
 #' @export
 loss_cosine_proximity <- function(y_true, y_pred) {
-  keras$losses$cosine_proximity(y_true, y_pred)
+  
+  if (tensorflow::tf_version() >= "2.0") {
+    warning("loss_cosine_proximity is deprecated and will be removed in a future version.")
+    keras$losses$cosine_similarity(y_true, y_pred)
+  } else {
+    keras$losses$cosine_proximity(y_true, y_pred)  
+  }
+    
 }
 attr(loss_cosine_proximity, "py_function_name") <- "cosine_proximity"
 
+#' @rdname loss_mean_squared_error
+#' @export
+loss_cosine_similarity <- function(y_true, y_pred) {
+  if (tensorflow::tf_version() >= "2.0") {
+    keras$losses$cosine_similarity(y_true, y_pred)
+  } else {
+    keras$losses$cosine_proximity(y_true, y_pred)  
+  }
+}
+attr(loss_cosine_similarity, "py_function_name") <- "cosine_similarity"
 
 
 
