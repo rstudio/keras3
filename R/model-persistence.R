@@ -39,15 +39,63 @@ save_model_hdf5 <- function(object, filepath, overwrite = TRUE, include_optimize
     stop("The h5py Python package is required to save and load models")
   
   filepath <- normalize_path(filepath)
+  
+  args <- list(
+    model = object, 
+    filepath = filepath, 
+    overwrite = overwrite,
+    include_optimizer = include_optimizer
+  )
+  
+  if (tensorflow::tf_version() >= "1.14.0") {
+    args[["save_format"]] <- "h5"
+  }
+  
   if (confirm_overwrite(filepath, overwrite)) {
-    keras$models$save_model(model = object, 
-                            filepath = filepath, 
-                            overwrite = overwrite,
-                            include_optimizer = include_optimizer)
+    do.call(keras$models$save_model, args)
     invisible(TRUE) 
   } else {
     invisible(FALSE)
   }
+}
+
+#' Save/Load models using SavedModel format
+#' 
+#' @inheritParams save_model_hdf5
+#' @param signatures Signatures to save with the SavedModel. Please see the signatures 
+#'  argument in `tf$saved_model$save` for details.
+#' @param options Optional `tf$saved_model$SaveOptions` object that specifies options
+#'  for saving to SavedModel
+#'  
+#' @family model persistence
+#' 
+#' @export
+save_model_tf <- function(object, filepath, overwrite = TRUE, include_optimizer = TRUE, 
+                          signatures = NULL, options = NULL) {
+  
+  if (tensorflow::tf_version() < "2.0.0")
+    stop("save_model_tf only works with TF >= 2.0.0", call.=FALSE)
+  
+  filepath <- normalize_path(filepath)
+  
+  args <- list(
+    model = object, 
+    filepath = filepath, 
+    overwrite = overwrite,
+    include_optimizer = include_optimizer,
+    signatures = signatures,
+    options = options,
+    save_format = "tf"
+  )
+  
+  
+  if (confirm_overwrite(filepath, overwrite)) {
+    do.call(keras$models$save_model, args)
+    invisible(TRUE) 
+  } else {
+    invisible(FALSE)
+  }
+  
 }
 
 #' @rdname save_model_hdf5
@@ -57,6 +105,21 @@ load_model_hdf5 <- function(filepath, custom_objects = NULL, compile = TRUE) {
   if (!have_h5py())
     stop("The h5py Python package is required to save and load models")
   
+  load_model(filepath, custom_objects, compile)
+}
+
+#' @rdname save_model_tf
+#' @export
+load_model_tf <- function(filepath, custom_objects = NULL, compile = TRUE) {
+  
+  if (tensorflow::tf_version() < "2.0.0")
+    stop("TensorFlow version >= 2.0.0 is requires to load models in the SavedModel format.", 
+         call. = FALSE)
+  
+  load_model(filepath, custom_objects, compile)
+}
+
+load_model <- function(filepath, custom_objects = NULL, compile = TRUE) {
   # prepare custom objects
   custom_objects <- objects_with_py_function_names(custom_objects)
   

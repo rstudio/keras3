@@ -39,6 +39,9 @@
 
 - Allow for unknown `input_shape` in `application_*` functions.
 
+- Added `save_model_tf` and `load_model_tf` to save/load models in the TensorFlow's 
+SavedModel format.
+
 
 ## Keras 2.2.4 (CRAN)
 
