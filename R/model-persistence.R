@@ -73,8 +73,8 @@ save_model_hdf5 <- function(object, filepath, overwrite = TRUE, include_optimize
 save_model_tf <- function(object, filepath, overwrite = TRUE, include_optimizer = TRUE, 
                           signatures = NULL, options = NULL) {
   
-  if (tensorflow::tf_version() < "1.14")
-    stop("save_model_tf only works with TF >= 1.14", call.=FALSE)
+  if (tensorflow::tf_version() < "2.0.0")
+    stop("save_model_tf only works with TF >= 2.0.0", call.=FALSE)
   
   filepath <- normalize_path(filepath)
   
@@ -112,8 +112,8 @@ load_model_hdf5 <- function(filepath, custom_objects = NULL, compile = TRUE) {
 #' @export
 load_model_tf <- function(filepath, custom_objects = NULL, compile = TRUE) {
   
-  if (tensorflow::tf_version() < "1.14.0")
-    stop("TensorFlow version >= 1.14 is requires to load models in the SavedModel format.", 
+  if (tensorflow::tf_version() < "2.0.0")
+    stop("TensorFlow version >= 2.0.0 is requires to load models in the SavedModel format.", 
          call. = FALSE)
   
   load_model(filepath, custom_objects, compile)
