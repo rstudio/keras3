@@ -137,5 +137,22 @@ test_succeeds("model can be exported to saved model format", {
   )
 })
 
+test_succeeds("model can be exported to saved model format using save_model_tf", {
+  
+  if (!is_backend("tensorflow")) skip("not a tensorflow backend")
+  if (!tensorflow::tf_version() >= "1.14") skip("Needs TF >= 1.14")
+  
+  model <- define_and_compile_model()
+  model_dir <- tempfile()
+  
+  s <- save_model_tf(model, model_dir)
+  loaded <- load_model_tf(model_dir)
+  
+  expect_equal(
+    predict(model, matrix(rep(1, 784), nrow = 1)),
+    predict(loaded, matrix(rep(1, 784), nrow = 1))
+  )
+})
+
 
 
