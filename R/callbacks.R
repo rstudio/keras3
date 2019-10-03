@@ -260,6 +260,9 @@ callback_terminate_on_naan <- function() {
 #'   the callback will write the metrics and losses to TensorBoard every
 #'   10000 samples. Note that writing too frequently to TensorBoard
 #'   can slow down your training.
+#' @param profile_batch Profile the batch to sample compute characteristics. By 
+#'   default, it will disbale profiling. Set profile_batch=2 profile the second
+#'   batch. Must run in TensorFlow eager mode. (TF >= 1.14)
 #'  
 #' @details TensorBoard is a visualization tool provided with TensorFlow.
 #'   
@@ -282,7 +285,8 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
                                  embeddings_layer_names = NULL,
                                  embeddings_metadata = NULL,
                                  embeddings_data = NULL,
-                                 update_freq = "epoch") {
+                                 update_freq = "epoch",
+                                 profile_batch = 0) {
   
   # establish the log_dir
   if (is.null(log_dir)) {
@@ -296,7 +300,8 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
     log_dir = normalize_path(log_dir),
     histogram_freq = as.integer(histogram_freq),
     write_graph = write_graph,
-    write_images = write_images
+    write_images = write_images,
+    profile_batch = as.integer(profile_batch)
   )
   
   if (!missing(embeddings_data) && keras_version() < "2.2.0")
