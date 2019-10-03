@@ -300,9 +300,14 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
     log_dir = normalize_path(log_dir),
     histogram_freq = as.integer(histogram_freq),
     write_graph = write_graph,
-    write_images = write_images,
-    profile_batch = as.integer(profile_batch)
+    write_images = write_images
   )
+  
+  if (tensorflow::tf_version() >= 1.14) {
+    args[["profile_batch"]] = as.integer(profile_batch)
+  } else if (profile_batch > 0) {
+    warning("profile_batch can only be used with TensorFlow >= 1.14", call. = FALSE)
+  }
   
   if (!missing(embeddings_data) && keras_version() < "2.2.0")
     stop("embeddings_data requires keras >= 2.2. Please update with install_keras()")
