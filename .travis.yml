@@ -35,10 +35,10 @@ matrix:
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
         - TENSORFLOW_VERSION="1.13.2"
-    - name: "Backend: TensorFlow | Implementation: TensorFlow 2.0.0rc2"
+    - name: "Backend: TensorFlow | Implementation: TensorFlow 2.0.0"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
-        - TENSORFLOW_VERSION="2.0.0-rc2"
+        - TENSORFLOW_VERSION="2.0.0"
     - name: "Backend: TensorFlow | Implementation: TensorFlow 1.14"
       env:
         - KERAS_IMPLEMENTATION="tensorflow"
