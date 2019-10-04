@@ -27,7 +27,7 @@ keras_model_custom <- function(model_fn, name = NULL) {
   r_model_call <- model_fn(model)
   
   # set the _r_call for delegation
-  model$`_r_call` <- reticulate::py_func(r_model_call)
+  model$`_r_call` <- r_model_call
   
   # return model
   model
