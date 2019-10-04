@@ -524,4 +524,42 @@ test_call_succeeds("layer_dense_features", required_version = "2.1.3", {
   }
 })
 
+test_succeeds("Can serialize a model that contains dense_features", {
+  
+  if (tensorflow::tf_version() <= "2.0")
+    skip("TensorFlow 2.0 is required.")
+  
+  fc <- list(tensorflow::tf$feature_column$numeric_column("mpg"))
+  
+  
+  input <- list(mpg = layer_input(1))
+  
+  out <- input %>% 
+    layer_dense_features(feature_columns = fc)
+  
+  # sequential: needs to pass a list in the begining.
+  feature_layer <- layer_dense_features(feature_columns = fc)
+  
+  model <- keras_model_sequential(list(
+    feature_layer,
+    layer_dense(units = 1)
+  ))
+  
+  model %>% compile(loss = "mae", optimizer = "adam")
+  
+  model %>% fit(x = list(mpg = 1:10), y = 1:10, verbose = 0)
+  
+  pred <- predict(model, list(mpg = 1:10))
+
+  fname <- tempfile()
+  save_model_tf(model, fname)
+  
+  loaded <- load_model_tf(fname)
+  pred2 <- predict(loaded, list(mpg = 1:10))
+  
+  expect_equal(pred, pred2)
+})
+
+
+
 
