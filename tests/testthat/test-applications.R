@@ -34,7 +34,7 @@ test_succeeds("keras pre-built models can be instantiated", {
   application_inception_v3()
 })
 
-test_that("can use any input_shape", {
+test_succeeds("can use any input_shape", {
   x <- application_vgg16(weights = NULL, input_shape = shape(NULL, NULL, 3), include_top = FALSE)
   expect_s3_class(x, "keras.engine.training.Model")
 })
