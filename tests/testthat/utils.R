@@ -7,13 +7,18 @@ skip_if_no_keras <- function(required_version = NULL) {
 
 
 test_succeeds <- function(desc, expr, required_version = NULL) {
-  IPython <- reticulate::import("IPython")
-  py_capture_output <- IPython$utils$capture$capture_output
+  
+  py_capture_output <- NULL
+  if (reticulate::py_module_available("IPython")) {
+    IPython <- reticulate::import("IPython")
+    py_capture_output <- IPython$utils$capture$capture_output
+  }
+  
   invisible(
     capture.output({
-      with(py_capture_output(), {
-        test_that(desc, {
-          skip_if_no_keras(required_version)
+      test_that(desc, {
+        skip_if_no_keras(required_version)
+        with(py_capture_output(), {
           expect_error(force(expr), NA)
         })
       })
