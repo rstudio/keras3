@@ -124,7 +124,8 @@ test_succeeds("R function can be used as custom generator with multiple inputs",
   input1 <- layer_input(shape = 1)
   input2 <- layer_input(shape = 1)
   
-  out <- layer_add(list(input1, input2))
+  out <- layer_add(list(input1, input2)) %>%
+    layer_dense(units = 1)
   
   model <- keras_model(list(input1, input2), out)
   
@@ -144,7 +145,8 @@ test_succeeds("Fixed validation_data instead of generator with fit_generator", {
   input1 <- layer_input(shape = 1)
   input2 <- layer_input(shape = 1)
   
-  out <- layer_add(list(input1, input2))
+  out <- layer_add(list(input1, input2)) %>% 
+    layer_dense(units = 1)
   
   model <- keras_model(list(input1, input2), out)
   
