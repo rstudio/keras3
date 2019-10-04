@@ -8,7 +8,7 @@ callback_tensorboard(log_dir = NULL, histogram_freq = 0,
   batch_size = NULL, write_graph = TRUE, write_grads = FALSE,
   write_images = FALSE, embeddings_freq = 0,
   embeddings_layer_names = NULL, embeddings_metadata = NULL,
-  embeddings_data = NULL, update_freq = "epoch")
+  embeddings_data = NULL, update_freq = "epoch", profile_batch = 0)
 }
 \arguments{
 \item{log_dir}{The path of the directory where to save the log files to be
@@ -53,6 +53,10 @@ applies for \code{'epoch'}. If using an integer, let's say \code{10000},
 the callback will write the metrics and losses to TensorBoard every
 10000 samples. Note that writing too frequently to TensorBoard
 can slow down your training.}
+
+\item{profile_batch}{Profile the batch to sample compute characteristics. By
+default, it will disbale profiling. Set profile_batch=2 profile the second
+batch. Must run in TensorFlow eager mode. (TF >= 1.14)}
 }
 \description{
 This callback writes a log for TensorBoard, which allows you to visualize

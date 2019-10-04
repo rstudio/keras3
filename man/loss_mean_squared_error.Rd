@@ -15,6 +15,7 @@
 \alias{loss_kullback_leibler_divergence}
 \alias{loss_poisson}
 \alias{loss_cosine_proximity}
+\alias{loss_cosine_similarity}
 \title{Model loss functions}
 \usage{
 loss_mean_squared_error(y_true, y_pred)
@@ -44,6 +45,8 @@ loss_kullback_leibler_divergence(y_true, y_pred)
 loss_poisson(y_true, y_pred)
 
 loss_cosine_proximity(y_true, y_pred)
+
+loss_cosine_similarity(y_true, y_pred)
 }
 \arguments{
 \item{y_true}{True labels (Tensor)}
