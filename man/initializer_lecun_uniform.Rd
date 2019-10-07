@@ -16,7 +16,6 @@ the weight tensor.
 }
 \section{References}{
  LeCun 98, Efficient Backprop,
-http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf
 }
 
 \seealso{

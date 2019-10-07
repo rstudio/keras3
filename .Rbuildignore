@@ -34,3 +34,4 @@
 ^logo.png$
 
 ^appveyor\.yml$
+^CRAN-RELEASE$

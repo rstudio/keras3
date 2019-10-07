@@ -38,6 +38,7 @@ external hdf5 files.
 Other model persistence: \code{\link{get_weights}},
   \code{\link{model_to_json}}, \code{\link{model_to_yaml}},
   \code{\link{save_model_hdf5}},
+  \code{\link{save_model_tf}},
   \code{\link{save_model_weights_hdf5}}
 }
 \concept{model persistence}
