@@ -5,4 +5,6 @@ if (Sys.getenv("TENSORFLOW_EAGER") == "TRUE")
 
 library(keras)
 
-test_check("keras")
+if (identical(Sys.getenv("NOT_CRAN"), "true")) {
+  test_check("keras") 
+}
