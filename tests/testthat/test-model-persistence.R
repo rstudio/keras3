@@ -125,6 +125,11 @@ test_succeeds("model can be exported to saved model format", {
   if (!tensorflow::tf_version() >= "1.14") skip("Needs TF >= 1.14")
   
   model <- define_and_compile_model()
+  data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)
+  labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
+  
+  model %>% fit(data, labels, epochs = 2, verbose = 0)
+  
   model_dir <- tempfile()
   dir.create(model_dir)
   

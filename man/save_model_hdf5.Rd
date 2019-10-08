@@ -54,6 +54,7 @@ R objects that can be persisted across R sessions.
 \seealso{
 Other model persistence: \code{\link{get_weights}},
   \code{\link{model_to_json}}, \code{\link{model_to_yaml}},
+  \code{\link{save_model_tf}},
   \code{\link{save_model_weights_hdf5}},
   \code{\link{serialize_model}}
 }

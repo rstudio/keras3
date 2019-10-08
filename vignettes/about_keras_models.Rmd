@@ -65,7 +65,7 @@ predictions <- layer_concatenate(c(encoded_a, encoded_b), axis=-1) %>%
 model <- keras_model(inputs = c(tweet_a, tweet_b), outputs = predictions)
 ```
 
-Learn more by reading the [Guide to the Functional API](unctional_api.html).
+Learn more by reading the [Guide to the Functional API](functional_api.html).
 
 ### Custom
 

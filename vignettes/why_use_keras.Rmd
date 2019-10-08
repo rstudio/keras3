@@ -90,7 +90,7 @@ As such, your Keras model can be trained on a number of different hardware platf
 
 - Keras has [built-in support for multi-GPU data parallelism](https://keras.rstudio.com/reference/multi_gpu_model.html)
 - [Horovod](https://github.com/uber/horovod), from Uber, has first-class support for Keras models
-- Keras models [can be turned into TensorFlow Estimators](https://www.tensorflow.org/versions/master/api_docs/python/tf/keras/estimator/model_to_estimator) and trained on [clusters of GPUs on Google Cloud](https://cloud.google.com/solutions/running-distributed-tensorflow-on-compute-engine)
+- Keras models can be turned into TensorFlow Estimators and trained on [clusters of GPUs on Google Cloud](https://cloud.google.com/solutions/running-distributed-tensorflow-on-compute-engine)
 - Keras can be run on Spark via [Dist-Keras](https://github.com/cerndb/dist-keras) (from CERN) and [Elephas](https://github.com/maxpumperla/elephas)
 
 ---

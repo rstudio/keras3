@@ -85,7 +85,12 @@ test_succeeds("can call model with R objects", {
   model <- keras_model_sequential() %>% 
     layer_dense(units = 1, input_shape = 1)
   
-  model(matrix(runif(10), ncol = 1))
+  model(
+    tensorflow::tf$convert_to_tensor(
+      matrix(runif(10), ncol = 1), 
+      dtype = tensorflow::tf$float32
+    )
+  )
   
   input1 <- layer_input(shape = 1)
   input2 <- layer_input(shape = 1)
@@ -93,8 +98,11 @@ test_succeeds("can call model with R objects", {
   output <- layer_concatenate(list(input1, input2))
   
   model <- keras_model(list(input1, input2), output)
-  
-  model(list(matrix(runif(10), ncol = 1), matrix(runif(10), ncol = 1)))
+  l <- lapply(
+    list(matrix(runif(10), ncol = 1), matrix(runif(10), ncol = 1)), 
+    function(x) tensorflow::tf$convert_to_tensor(x, dtype = tensorflow::tf$float32)
+  )
+  model(l)
 })
 
 

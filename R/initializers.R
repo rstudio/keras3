@@ -227,7 +227,7 @@ initializer_identity <- function(gain = 1.0) {
 #' 
 #' @section References:
 #'  - [Self-Normalizing Neural Networks](https://arxiv.org/abs/1706.02515) 
-#'  - [Efficient Backprop](http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf)
+#'  - Efficient Backprop, \cite{LeCun, Yann et al. 1998}
 #'
 #' @family initializers
 #'
@@ -356,7 +356,6 @@ initializer_he_uniform <- function(seed = NULL) {
 #' @inheritParams initializer_random_normal
 #'   
 #' @section References: LeCun 98, Efficient Backprop,
-#'   http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf
 #'   
 #' @family initializers
 #'   

@@ -18,7 +18,7 @@ the weight tensor..
 
 \itemize{
 \item \href{https://arxiv.org/abs/1706.02515}{Self-Normalizing Neural Networks}
-\item \href{http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf}{Efficient Backprop}
+\item Efficient Backprop, \cite{LeCun, Yann et al. 1998}
 }
 }
 
