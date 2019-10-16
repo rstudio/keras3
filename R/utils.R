@@ -56,6 +56,7 @@ to_categorical <- function(y, num_classes = NULL, dtype = "float32") {
 get_file <- function(fname, origin, file_hash = NULL, cache_subdir = "datasets", 
                      hash_algorithm = "auto", extract = FALSE,
                      archive_format = "auto", cache_dir = NULL) {
+  
   keras$utils$get_file(
     fname = normalize_path(fname),
     origin = origin,
