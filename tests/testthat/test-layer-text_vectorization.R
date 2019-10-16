@@ -10,7 +10,7 @@ test_call_succeeds("layer_text_vectorization", {
   input <- matrix(c("hello world", "hello world"), ncol = 1)
   
   layer <- layer_text_vectorization()
-  layer$adapt(input)
+  layer %>% adapt(input)
   output <- layer(input)
 
   expect_s3_class(output, "tensorflow.tensor")
@@ -24,7 +24,7 @@ test_call_succeeds("can use layer_text_vectorization in a functional model", {
   x <- matrix(c("hello world", "hello world"), ncol = 1)
   
   layer <- layer_text_vectorization()
-  layer$adapt(x)
+  layer %>% adapt(x)
   
   input <- layer_input(shape = 1, dtype = "string")
   output <- layer(input)
