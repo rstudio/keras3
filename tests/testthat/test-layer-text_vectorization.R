@@ -16,6 +16,22 @@ test_call_succeeds("layer_text_vectorization", {
   expect_s3_class(output, "tensorflow.tensor")
 })
 
+test_call_succeeds("layer_text_vectorization", {
+  
+  if (tensorflow::tf_version() < "2.1")
+    skip("TextVectorization requires TF version >= 2.1")
+  
+  x <- matrix(c("hello world", "hello world"), ncol = 1)
+  
+  layer <- layer_text_vectorization(output_mode = "binary", 
+                                    pad_to_max_tokens = FALSE)
+  layer %>% adapt(x)
+  
+  output <- layer(x)
+  
+  expect_s3_class(output, "tensorflow.tensor")
+})
+
 test_call_succeeds("can use layer_text_vectorization in a functional model", {
   
   if (tensorflow::tf_version() < "2.1")
