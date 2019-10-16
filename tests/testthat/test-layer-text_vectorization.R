@@ -34,5 +34,24 @@ test_call_succeeds("can use layer_text_vectorization in a functional model", {
   
 })
 
+test_call_succeeds("can set and get the vocabulary of layer_text_vectorization", {
+  
+  if (tensorflow::tf_version() < "2.1")
+    skip("TextVectorization requires TF version >= 2.1")
+  
+  x <- matrix(c("hello world", "hello world"), ncol = 1)
+  
+  layer <- layer_text_vectorization()
+  set_vocabulary(layer, vocab = c("hello", "world"))
+  
+  output <- layer(x)
+  
+  vocab <- get_vocabulary(layer)
+  
+  expect_s3_class(output, "tensorflow.tensor")
+  expect_length(vocab, 2)
+})
+
+
 
 
