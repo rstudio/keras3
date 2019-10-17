@@ -166,7 +166,7 @@ as_node_index <- function(node_index) {
 #'  the existing state. Subclasses may choose to throw if `reset_state` is set
 #'  to `FALSE`. `NULL` mean layer's default.
 #'  
-#'  @export
+#' @export
 adapt <- function(object, data, reset_state = NULL) {
   # layers can implement adapt with different default reset_state
   if (is.null(reset_state))

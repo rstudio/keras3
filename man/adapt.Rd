@@ -15,9 +15,7 @@ or as an R array.}
 \item{reset_state}{Optional argument specifying whether to clear the state of
 the layer at the start of the call to \code{adapt}, or whether to start from
 the existing state. Subclasses may choose to throw if \code{reset_state} is set
-to \code{FALSE}. \code{NULL} mean layer's default.
-
-@export}
+to \code{FALSE}. \code{NULL} mean layer's default.}
 }
 \description{
 Fits the state of the preprocessing layer to the data being passed.

@@ -8,6 +8,8 @@ set_vocabulary(object, vocab, df_data = NULL, oov_df_value = FALSE,
   append = FALSE)
 }
 \arguments{
+\item{object}{a text vectorization layer}
+
 \item{vocab}{An array of string tokens.}
 
 \item{df_data}{An array of document frequency data. Only necessary if the layer

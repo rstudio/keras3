@@ -127,6 +127,7 @@ get_vocabulary <- function(object) {
 #' replace it, if `append` is set to `FALSE`, or append to it (if 'append' is set
 #' to `TRUE`)
 #' 
+#' @inheritParams get_vocabulary
 #' @param vocab An array of string tokens.
 #' @param df_data An array of document frequency data. Only necessary if the layer
 #'  output_mode is "tfidf".
