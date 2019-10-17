@@ -31,7 +31,7 @@
 #'  integers will create ngrams for the specified values in the list. Passing
 #'  `NULL` means that no ngrams will be created.
 #' @param output_mode Optional specification for the output of the layer. Values can
-#'  be `"int"`, `"binary"`, `"count"` or `"tfidf`, which control the outputs as follows:
+#'  be `"int"`, `"binary"`, `"count"` or `"tfidf"`, which control the outputs as follows:
 #'  * "int": Outputs integer indices, one integer index per split string token.
 #'  * "binary": Outputs a single int array per batch, of either vocab_size or
 #'   `max_tokens` size, containing 1s in all elements where the token mapped
@@ -137,7 +137,7 @@ get_vocabulary <- function(object) {
 #' 
 #' @seealso [get_vocabulary()]
 #' 
-#' @export                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 to True).
+#' @export
 set_vocabulary <- function(object, vocab, df_data = NULL, oov_df_value = FALSE,
                            append = FALSE) {
   object$set_vocabulary(vocab, df_data, oov_df_value, append)

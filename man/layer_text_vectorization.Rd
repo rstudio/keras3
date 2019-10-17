@@ -31,7 +31,7 @@ integers will create ngrams for the specified values in the list. Passing
 \code{NULL} means that no ngrams will be created.}
 
 \item{output_mode}{Optional specification for the output of the layer. Values can
-be \code{"int"}, \code{"binary"}, \code{"count"} or \code{"tfidf}, which control the outputs as follows:
+be \code{"int"}, \code{"binary"}, \code{"count"} or \code{"tfidf"}, which control the outputs as follows:
 \itemize{
 \item "int": Outputs integer indices, one integer index per split string token.
 \item "binary": Outputs a single int array per batch, of either vocab_size or
