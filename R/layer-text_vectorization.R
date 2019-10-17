@@ -40,7 +40,7 @@
 #'   times the token at that index appeared in the batch item.
 #'  * "tfidf": As "binary", but the TF-IDF algorithm is applied to find the value
 #'   in each token slot.
-#' @param output_sequence_lenght Only valid in "int" mode. If set, the output will have
+#' @param output_sequence_length Only valid in "int" mode. If set, the output will have
 #'  its time dimension padded or truncated to exactly `output_sequence_length`
 #'  values, resulting in a tensor of shape (batch_size, output_sequence_length) regardless 
 #'  of how many tokens resulted from the splitting step. Defaults to `NULL`.
@@ -49,6 +49,7 @@
 #'  number of unique tokens in the vocabulary is less than max_tokens,
 #'  resulting in a tensor of shape (batch_size, max_tokens) regardless of
 #'  vocabulary size. Defaults to `TRUE`.
+#' @param ... Not used.
 #'  
 #' @export
 layer_text_vectorization <- function(object, max_tokens = NULL, standardize = "lower_and_strip_punctuation",

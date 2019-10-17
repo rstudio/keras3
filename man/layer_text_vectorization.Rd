@@ -43,16 +43,18 @@ times the token at that index appeared in the batch item.
 in each token slot.
 }}
 
+\item{output_sequence_length}{Only valid in "int" mode. If set, the output will have
+its time dimension padded or truncated to exactly \code{output_sequence_length}
+values, resulting in a tensor of shape (batch_size, output_sequence_length) regardless
+of how many tokens resulted from the splitting step. Defaults to \code{NULL}.}
+
 \item{pad_to_max_tokens}{Only valid in "binary", "count", and "tfidf" modes. If \code{TRUE},
 the output will have its feature axis padded to \code{max_tokens} even if the
 number of unique tokens in the vocabulary is less than max_tokens,
 resulting in a tensor of shape (batch_size, max_tokens) regardless of
 vocabulary size. Defaults to \code{TRUE}.}
 
-\item{output_sequence_lenght}{Only valid in "int" mode. If set, the output will have
-its time dimension padded or truncated to exactly \code{output_sequence_length}
-values, resulting in a tensor of shape (batch_size, output_sequence_length) regardless
-of how many tokens resulted from the splitting step. Defaults to \code{NULL}.}
+\item{...}{Not used.}
 }
 \description{
 This layer has basic options for managing text in a Keras model. It
