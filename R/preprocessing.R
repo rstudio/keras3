@@ -523,10 +523,11 @@ image_load <- function(path, grayscale = FALSE, target_size = NULL,
 #'
 #' @export
 image_to_array <- function(img, data_format = c("channels_last", "channels_first")) {
-  keras$preprocessing$image$img_to_array(
+  res_arr <- keras$preprocessing$image$img_to_array(
     img = img,
     data_format = match.arg(data_format)
   )
+  apply(res_arr, 1:3, as.integer)
 }
 
 #' @rdname image_to_array
