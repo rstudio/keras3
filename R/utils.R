@@ -1,3 +1,10 @@
+resolve_utils <- function() {
+  if (tensorflow::tf_version() > "2.0")
+    keras$utils$all_utils
+  else
+    keras$utils
+}
+
 #' Converts a class vector (integers) to binary class matrix.
 #' 
 #' @details 
@@ -21,7 +28,7 @@ to_categorical <- function(y, num_classes = NULL, dtype = "float32") {
   if (keras_version() >= "2.2.3")
     args$dtype <- dtype
     
-  do.call(keras$utils$to_categorical, args)
+  do.call(resolve_utils()$to_categorical, args)
 
 }
 
@@ -56,7 +63,7 @@ to_categorical <- function(y, num_classes = NULL, dtype = "float32") {
 get_file <- function(fname, origin, file_hash = NULL, cache_subdir = "datasets", 
                      hash_algorithm = "auto", extract = FALSE,
                      archive_format = "auto", cache_dir = NULL) {
-  keras$utils$get_file(
+  resolve_utils()$get_file(
     fname = normalize_path(fname),
     origin = origin,
     file_hash = file_hash,
@@ -91,7 +98,7 @@ hdf5_matrix <- function(datapath, dataset, start = 0, end = NULL, normalizer = N
   if (!have_h5py())
     stop("The h5py Python package is required to read h5 files")
   
-  keras$utils$HDF5Matrix(
+  resolve_utils()$HDF5Matrix(
     datapath = normalize_path(datapath), 
     dataset = dataset,
     start = as.integer(start),
@@ -111,7 +118,7 @@ hdf5_matrix <- function(datapath, dataset, start = 0, end = NULL, normalizer = N
 #' 
 #' @export
 normalize <- function(x, axis = -1, order = 2) {
-  keras$utils$normalize(
+  resolve_utils()$normalize(
     x = x,
     axis = as_axis(axis),
     order = as.integer(order)
@@ -164,7 +171,7 @@ normalize <- function(x, axis = -1, order = 2) {
 #' @export
 with_custom_object_scope <- function(objects, expr) {
   objects <- objects_with_py_function_names(objects)
-  with(keras$utils$custom_object_scope(objects), expr)
+  with(resolve_utils()$custom_object_scope(objects), expr)
 }
 
 
