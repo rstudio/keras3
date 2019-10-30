@@ -180,7 +180,7 @@ multi_gpu_model <- function(model, gpus = NULL, cpu_merge = TRUE, cpu_relocation
     args$cpu_relocation <- cpu_relocation
   }
   
-  do.call(keras$utils$multi_gpu_model, args)
+  do.call(resolve_utils()$multi_gpu_model, args)
 }
 
 

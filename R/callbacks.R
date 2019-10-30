@@ -77,31 +77,42 @@ callback_model_checkpoint <- function(filepath, monitor = "val_loss", verbose = 
     mode = match.arg(mode)
   )
   
-  if (tensorflow::tf_version() < "1.14") {
+  if (is_tensorflow_implementation()) {
+    if (tensorflow::tf_version() < "1.14") {
+      
+      if (!is.null(save_freq))
+        warning(
+          "The save_freq argument is only used by TensorFlow >= 1.14. ",
+          "Update TensorFlow or use save_freq = NULL"
+        )
+      
+      if (is.null(period))
+        period <- 1L
+      
+      args$period <- as.integer(period)
+    } else {
+      
+      if (!is.null(period))
+        warning(
+          "The period argument is deprecated since TF v1.14 and will be ignored. ",
+          "Use save_freq instead."
+        )
+      
+      # save_freq can be a string or an integer
+      if (is.character(save_freq))
+        args$save_freq <- save_freq
+      else 
+        args$save_freq <- as_nullable_integer(save_freq)
+    }
+  } else if (is_backend("plaidml")) {
     
     if (!is.null(save_freq))
-      warning(
-        "The save_freq argument is only used by TensorFlow >= 1.14. ",
-        "Update TensorFlow or use save_freq = NULL"
-      )
+      warning("`save_freq` is ignored in plaidml. Use the `period` argument.")
     
-    if (is.null(period))
+    if (is.null(save_freq) && is.null(period))
       period <- 1L
     
     args$period <- as.integer(period)
-  } else {
-    
-    if (!is.null(period))
-      warning(
-      "The period argument is deprecated since TF v1.14 and will be ignored. ",
-      "Use save_freq instead."
-      )
-    
-    # save_freq can be a string or an integer
-    if (is.character(save_freq))
-      args$save_freq <- save_freq
-    else 
-      args$save_freq <- as.integer(save_freq)
   }
   
   do.call(keras$callbacks$ModelCheckpoint, args)
