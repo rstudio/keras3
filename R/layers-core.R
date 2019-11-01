@@ -518,36 +518,38 @@ create_layer <- function(layer_class, object, args = list()) {
 
 # Helper function to compose a layer with an object of type Model or Layer
 
-compose_layer <- function(object, layer) {
+compose_layer <- function(object, layer, ...) {
   UseMethod("compose_layer")  
 }
 
-compose_layer.default <- function(object, layer) {
+compose_layer.default <- function(object, layer, ...) {
   stop_with_invalid_layer()
 }
 
-compose_layer.keras.models.Sequential <- function(object, layer) {
+compose_layer.keras.models.Sequential <- function(object, layer, ...) {
+  if(length(list(...)) > 0) warning("arguments passed via ellipsis will be ignored")
+  
   object$add(layer)
   object
 }
 
 compose_layer.keras.engine.sequential.Sequential <- compose_layer.keras.models.Sequential
 
-compose_layer.python.builtin.object <- function(object, layer) {
+compose_layer.python.builtin.object <- function(object, layer, ...) {
   if (is.function(layer))
-    layer(object)
+    layer(object, ...)
   else
     stop_with_invalid_layer()
 }
 
-compose_layer.list <- function(object, layer) {
-  layer(object)
+compose_layer.list <- function(object, layer, ...) {
+  layer(object, ...)
 }
 
-compose_layer.numeric <- function(object, layer) {
+compose_layer.numeric <- function(object, layer, ...) {
   if (!tensorflow::tf_version() >= "1.14") stop_with_invalid_layer()
   if (is.function(layer))
-    layer(object)
+    layer(object, ...)
   else
     stop_with_invalid_layer()
 }
