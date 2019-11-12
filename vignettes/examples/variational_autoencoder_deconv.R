@@ -2,6 +2,14 @@
 #' and deconvolution layers.
 #' Reference: "Auto-Encoding Variational Bayes" https://arxiv.org/abs/1312.6114
 
+# Note: This code reflects pre-TF2 idioms.
+# For an example of a TF2-style modularized VAE, see e.g.: https://github.com/rstudio/keras/blob/master/vignettes/examples/eager_cvae.R
+# Also cf. the tfprobability-style of coding VAEs: https://rstudio.github.io/tfprobability/
+
+# With TF-2, you can still run this code due to the following line:
+if (tensorflow::tf$executing_eagerly())
+  tensorflow::tf$compat$v1$disable_eager_execution()
+
 library(keras)
 K <- keras::backend()
 
