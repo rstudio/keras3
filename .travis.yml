@@ -4,9 +4,6 @@ language: r
 dist: xenial
 sudo: false
 
-env:
-  - PIP_QUIET=1
-
 matrix:
   include:
     - name: "Backend: TensorFlow | Implementation: Keras"
@@ -94,7 +91,7 @@ before_script:
   - sudo apt-get install python3 python3-pip
   - pip3 install --upgrade --ignore-installed --user travis virtualenv
   - R CMD INSTALL .
-  - R -e 'keras::install_keras(tensorflow = Sys.getenv("TENSORFLOW_VERSION"), extra_packages = "IPython")'
+  - R -e 'Sys.setenv(PIP_QUIET=1); keras::install_keras(tensorflow = Sys.getenv("TENSORFLOW_VERSION"), extra_packages = "IPython")'
   - R -e 'tensorflow::tf_config()'
   
 after_failure:
