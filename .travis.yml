@@ -4,6 +4,9 @@ language: r
 dist: xenial
 sudo: false
 
+env:
+  - PIP_QUIET=1
+
 matrix:
   include:
     - name: "Backend: TensorFlow | Implementation: Keras"
