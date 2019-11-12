@@ -19,7 +19,7 @@ same.}
 A tensor with shape equal to the concatenation of \code{x}'s shape (less
 the dimension that was summed over) and \code{y}'s shape (less the batch
 dimension and the dimension that was summed over). If the final rank is 1,
-we reshape it to \code{(batch_size, 1)}.
+we reshape it to \verb{(batch_size, 1)}.
 }
 \description{
 \code{batch_dot} is used to compute dot product of \code{x} and \code{y} when \code{x} and \code{y}

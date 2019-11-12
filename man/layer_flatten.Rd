@@ -4,8 +4,15 @@
 \alias{layer_flatten}
 \title{Flattens an input}
 \usage{
-layer_flatten(object, data_format = NULL, input_shape = NULL,
-  dtype = NULL, name = NULL, trainable = NULL, weights = NULL)
+layer_flatten(
+  object,
+  data_format = NULL,
+  input_shape = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -14,9 +21,9 @@ layer_flatten(object, data_format = NULL, input_shape = NULL,
 \code{channels_first}. The ordering of the dimensions in the inputs. The purpose
 of this argument is to preserve weight ordering when switching a model from
 one data format to another. \code{channels_last} corresponds to inputs with
-shape \code{(batch, ..., channels)} while \code{channels_first} corresponds to inputs
-with shape \code{(batch, channels, ...)}. It defaults to the \code{image_data_format}
-value found in your Keras config file at \code{~/.keras/keras.json}. If you
+shape \verb{(batch, ..., channels)} while \code{channels_first} corresponds to inputs
+with shape \verb{(batch, channels, ...)}. It defaults to the \code{image_data_format}
+value found in your Keras config file at \verb{~/.keras/keras.json}. If you
 never set it, then it will be "channels_last".}
 
 \item{input_shape}{Input shape (list of integers, does not include the
@@ -38,13 +45,17 @@ isn't provided.}
 Flatten a given input, does not affect the batch size.
 }
 \seealso{
-Other core layers: \code{\link{layer_activation}},
-  \code{\link{layer_activity_regularization}},
-  \code{\link{layer_dense_features}},
-  \code{\link{layer_dense}}, \code{\link{layer_dropout}},
-  \code{\link{layer_input}}, \code{\link{layer_lambda}},
-  \code{\link{layer_masking}}, \code{\link{layer_permute}},
-  \code{\link{layer_repeat_vector}},
-  \code{\link{layer_reshape}}
+Other core layers: 
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_dense_features}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_input}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_reshape}()}
 }
 \concept{core layers}

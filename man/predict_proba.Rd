@@ -5,11 +5,9 @@
 \alias{predict_classes}
 \title{Generates probability or class probability predictions for the input samples.}
 \usage{
-predict_proba(object, x, batch_size = NULL, verbose = 0,
-  steps = NULL)
+predict_proba(object, x, batch_size = NULL, verbose = 0, steps = NULL)
 
-predict_classes(object, x, batch_size = NULL, verbose = 0,
-  steps = NULL)
+predict_classes(object, x, batch_size = NULL, verbose = 0, steps = NULL)
 }
 \arguments{
 \item{object}{Keras model object}
@@ -31,19 +29,22 @@ Generates probability or class probability predictions for the input samples.
 The input samples are processed batch by batch.
 }
 \seealso{
-Other model functions: \code{\link{compile.keras.engine.training.Model}},
-  \code{\link{evaluate.keras.engine.training.Model}},
-  \code{\link{evaluate_generator}},
-  \code{\link{fit.keras.engine.training.Model}},
-  \code{\link{fit_generator}}, \code{\link{get_config}},
-  \code{\link{get_layer}},
-  \code{\link{keras_model_sequential}},
-  \code{\link{keras_model}}, \code{\link{multi_gpu_model}},
-  \code{\link{pop_layer}},
-  \code{\link{predict.keras.engine.training.Model}},
-  \code{\link{predict_generator}},
-  \code{\link{predict_on_batch}},
-  \code{\link{summary.keras.engine.training.Model}},
-  \code{\link{train_on_batch}}
+Other model functions: 
+\code{\link{compile.keras.engine.training.Model}()},
+\code{\link{evaluate.keras.engine.training.Model}()},
+\code{\link{evaluate_generator}()},
+\code{\link{fit.keras.engine.training.Model}()},
+\code{\link{fit_generator}()},
+\code{\link{get_config}()},
+\code{\link{get_layer}()},
+\code{\link{keras_model_sequential}()},
+\code{\link{keras_model}()},
+\code{\link{multi_gpu_model}()},
+\code{\link{pop_layer}()},
+\code{\link{predict.keras.engine.training.Model}()},
+\code{\link{predict_generator}()},
+\code{\link{predict_on_batch}()},
+\code{\link{summary.keras.engine.training.Model}()},
+\code{\link{train_on_batch}()}
 }
 \concept{model functions}

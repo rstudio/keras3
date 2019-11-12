@@ -4,15 +4,29 @@
 \alias{layer_batch_normalization}
 \title{Batch normalization layer (Ioffe and Szegedy, 2014).}
 \usage{
-layer_batch_normalization(object, axis = -1L, momentum = 0.99,
-  epsilon = 0.001, center = TRUE, scale = TRUE,
-  beta_initializer = "zeros", gamma_initializer = "ones",
+layer_batch_normalization(
+  object,
+  axis = -1L,
+  momentum = 0.99,
+  epsilon = 0.001,
+  center = TRUE,
+  scale = TRUE,
+  beta_initializer = "zeros",
+  gamma_initializer = "ones",
   moving_mean_initializer = "zeros",
-  moving_variance_initializer = "ones", beta_regularizer = NULL,
-  gamma_regularizer = NULL, beta_constraint = NULL,
-  gamma_constraint = NULL, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+  moving_variance_initializer = "ones",
+  beta_regularizer = NULL,
+  gamma_regularizer = NULL,
+  beta_constraint = NULL,
+  gamma_constraint = NULL,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}

@@ -7,27 +7,46 @@
 \alias{nasnet_preprocess_input}
 \title{Instantiates a NASNet model.}
 \usage{
-application_nasnet(input_shape = NULL, penultimate_filters = 4032L,
-  num_blocks = 6L, stem_block_filters = 96L, skip_reduction = TRUE,
-  filter_multiplier = 2L, include_top = TRUE, weights = NULL,
-  input_tensor = NULL, pooling = NULL, classes = 1000,
-  default_size = NULL)
+application_nasnet(
+  input_shape = NULL,
+  penultimate_filters = 4032L,
+  num_blocks = 6L,
+  stem_block_filters = 96L,
+  skip_reduction = TRUE,
+  filter_multiplier = 2L,
+  include_top = TRUE,
+  weights = NULL,
+  input_tensor = NULL,
+  pooling = NULL,
+  classes = 1000,
+  default_size = NULL
+)
 
-application_nasnetlarge(input_shape = NULL, include_top = TRUE,
-  weights = NULL, input_tensor = NULL, pooling = NULL,
-  classes = 1000)
+application_nasnetlarge(
+  input_shape = NULL,
+  include_top = TRUE,
+  weights = NULL,
+  input_tensor = NULL,
+  pooling = NULL,
+  classes = 1000
+)
 
-application_nasnetmobile(input_shape = NULL, include_top = TRUE,
-  weights = NULL, input_tensor = NULL, pooling = NULL,
-  classes = 1000)
+application_nasnetmobile(
+  input_shape = NULL,
+  include_top = TRUE,
+  weights = NULL,
+  input_tensor = NULL,
+  pooling = NULL,
+  classes = 1000
+)
 
 nasnet_preprocess_input(x)
 }
 \arguments{
-\item{input_shape}{Optional shape list, the input shape is by default \code{(331, 331, 3)}
-for NASNetLarge and \code{(224, 224, 3)} for NASNetMobile It should have exactly 3
+\item{input_shape}{Optional shape list, the input shape is by default \verb{(331, 331, 3)}
+for NASNetLarge and \verb{(224, 224, 3)} for NASNetMobile It should have exactly 3
 inputs channels, and width and height should be no smaller than 32. E.g.
-\code{(224, 224, 3)} would be one valid value.}
+\verb{(224, 224, 3)} would be one valid value.}
 
 \item{penultimate_filters}{Number of filters in the penultimate layer.
 NASNet models use the notation \code{NASNet (N @ P)}, where:
@@ -76,11 +95,11 @@ specified.}
 
 \item{default_size}{Specifies the default image size of the model}
 
-\item{x}{a 4D array consists of RGB values within \code{[0, 255]}.}
+\item{x}{a 4D array consists of RGB values within \verb{[0, 255]}.}
 }
 \description{
 Note that only TensorFlow is supported for now,
 therefore it only works with the data format
 \code{image_data_format='channels_last'} in your Keras config
-at \code{~/.keras/keras.json}.
+at \verb{~/.keras/keras.json}.
 }

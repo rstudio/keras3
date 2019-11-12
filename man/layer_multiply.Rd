@@ -4,8 +4,14 @@
 \alias{layer_multiply}
 \title{Layer that multiplies (element-wise) a list of inputs.}
 \usage{
-layer_multiply(inputs, batch_size = NULL, dtype = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+layer_multiply(
+  inputs,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{inputs}{A list of input tensors (at least 2).}
@@ -31,10 +37,13 @@ It takes as input a list of tensors, all of the same shape, and returns a
 single tensor (also of the same shape).
 }
 \seealso{
-Other merge layers: \code{\link{layer_add}},
-  \code{\link{layer_average}},
-  \code{\link{layer_concatenate}}, \code{\link{layer_dot}},
-  \code{\link{layer_maximum}}, \code{\link{layer_minimum}},
-  \code{\link{layer_subtract}}
+Other merge layers: 
+\code{\link{layer_add}()},
+\code{\link{layer_average}()},
+\code{\link{layer_concatenate}()},
+\code{\link{layer_dot}()},
+\code{\link{layer_maximum}()},
+\code{\link{layer_minimum}()},
+\code{\link{layer_subtract}()}
 }
 \concept{merge layers}

@@ -26,13 +26,13 @@ Dense...) an \code{input_dim} argument.
 library(keras)
 
 model <- keras_model_sequential() 
-model \%>\% 
-  layer_dense(units = 32, input_shape = c(784)) \%>\% 
-  layer_activation('relu') \%>\% 
-  layer_dense(units = 10) \%>\% 
+model %>% 
+  layer_dense(units = 32, input_shape = c(784)) %>% 
+  layer_activation('relu') %>% 
+  layer_dense(units = 10) %>% 
   layer_activation('softmax')
 
-model \%>\% compile(
+model %>% compile(
   optimizer = 'rmsprop',
   loss = 'categorical_crossentropy',
   metrics = c('accuracy')
@@ -40,18 +40,22 @@ model \%>\% compile(
 }
 }
 \seealso{
-Other model functions: \code{\link{compile.keras.engine.training.Model}},
-  \code{\link{evaluate.keras.engine.training.Model}},
-  \code{\link{evaluate_generator}},
-  \code{\link{fit.keras.engine.training.Model}},
-  \code{\link{fit_generator}}, \code{\link{get_config}},
-  \code{\link{get_layer}}, \code{\link{keras_model}},
-  \code{\link{multi_gpu_model}}, \code{\link{pop_layer}},
-  \code{\link{predict.keras.engine.training.Model}},
-  \code{\link{predict_generator}},
-  \code{\link{predict_on_batch}},
-  \code{\link{predict_proba}},
-  \code{\link{summary.keras.engine.training.Model}},
-  \code{\link{train_on_batch}}
+Other model functions: 
+\code{\link{compile.keras.engine.training.Model}()},
+\code{\link{evaluate.keras.engine.training.Model}()},
+\code{\link{evaluate_generator}()},
+\code{\link{fit.keras.engine.training.Model}()},
+\code{\link{fit_generator}()},
+\code{\link{get_config}()},
+\code{\link{get_layer}()},
+\code{\link{keras_model}()},
+\code{\link{multi_gpu_model}()},
+\code{\link{pop_layer}()},
+\code{\link{predict.keras.engine.training.Model}()},
+\code{\link{predict_generator}()},
+\code{\link{predict_on_batch}()},
+\code{\link{predict_proba}()},
+\code{\link{summary.keras.engine.training.Model}()},
+\code{\link{train_on_batch}()}
 }
 \concept{model functions}

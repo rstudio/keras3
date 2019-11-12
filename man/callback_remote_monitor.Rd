@@ -4,9 +4,13 @@
 \alias{callback_remote_monitor}
 \title{Callback used to stream events to a server.}
 \usage{
-callback_remote_monitor(root = "http://localhost:9000",
-  path = "/publish/epoch/end/", field = "data", headers = NULL,
-  send_as_json = FALSE)
+callback_remote_monitor(
+  root = "http://localhost:9000",
+  path = "/publish/epoch/end/",
+  field = "data",
+  headers = NULL,
+  send_as_json = FALSE
+)
 }
 \arguments{
 \item{root}{root url of the target server.}
@@ -16,7 +20,7 @@ callback_remote_monitor(root = "http://localhost:9000",
 \item{field}{JSON field under which the data will be stored.}
 
 \item{headers}{Optional named list of custom HTTP headers. Defaults to:
-\code{list(Accept = "application/json", }Content-Type\code{ = "application/json")}}
+\verb{list(Accept = "application/json", }Content-Type\verb{ = "application/json")}}
 
 \item{send_as_json}{Whether the request should be sent as application/json.}
 }
@@ -31,14 +35,15 @@ request will be application/json. Otherwise the serialized JSON will be
 send within a form
 }
 \seealso{
-Other callbacks: \code{\link{callback_csv_logger}},
-  \code{\link{callback_early_stopping}},
-  \code{\link{callback_lambda}},
-  \code{\link{callback_learning_rate_scheduler}},
-  \code{\link{callback_model_checkpoint}},
-  \code{\link{callback_progbar_logger}},
-  \code{\link{callback_reduce_lr_on_plateau}},
-  \code{\link{callback_tensorboard}},
-  \code{\link{callback_terminate_on_naan}}
+Other callbacks: 
+\code{\link{callback_csv_logger}()},
+\code{\link{callback_early_stopping}()},
+\code{\link{callback_lambda}()},
+\code{\link{callback_learning_rate_scheduler}()},
+\code{\link{callback_model_checkpoint}()},
+\code{\link{callback_progbar_logger}()},
+\code{\link{callback_reduce_lr_on_plateau}()},
+\code{\link{callback_tensorboard}()},
+\code{\link{callback_terminate_on_naan}()}
 }
 \concept{callbacks}

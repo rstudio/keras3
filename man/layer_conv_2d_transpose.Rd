@@ -4,15 +4,32 @@
 \alias{layer_conv_2d_transpose}
 \title{Transposed 2D convolution layer (sometimes called Deconvolution).}
 \usage{
-layer_conv_2d_transpose(object, filters, kernel_size, strides = c(1, 1),
-  padding = "valid", output_padding = NULL, data_format = NULL,
-  dilation_rate = c(1, 1), activation = NULL, use_bias = TRUE,
-  kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
-  kernel_regularizer = NULL, bias_regularizer = NULL,
-  activity_regularizer = NULL, kernel_constraint = NULL,
-  bias_constraint = NULL, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_conv_2d_transpose(
+  object,
+  filters,
+  kernel_size,
+  strides = c(1, 1),
+  padding = "valid",
+  output_padding = NULL,
+  data_format = NULL,
+  dilation_rate = c(1, 1),
+  activation = NULL,
+  use_bias = TRUE,
+  kernel_initializer = "glorot_uniform",
+  bias_initializer = "zeros",
+  kernel_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  kernel_constraint = NULL,
+  bias_constraint = NULL,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -40,8 +57,8 @@ If set to \code{NULL} (default), the output shape is inferred.}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \code{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
-found in your Keras config file at \code{~/.keras/keras.json}. If you never set
+\code{channels_last} corresponds to inputs with shape \verb{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \verb{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
+found in your Keras config file at \verb{~/.keras/keras.json}. If you never set
 it, then it will be "channels_last".}
 
 \item{dilation_rate}{Dialation rate.}
@@ -99,13 +116,13 @@ the first layer in a model, provide the keyword argument \code{input_shape} (lis
 of integers, does not include the sample axis), e.g. \code{input_shape=c(128L, 128L, 3L)} for 128x128 RGB pictures in \code{data_format="channels_last"}.
 }
 \section{Input shape}{
- 4D tensor with shape: \code{(batch, channels, rows, cols)}
-if data_format='channels_first' or 4D tensor with shape: \code{(batch, rows, cols, channels)} if data_format='channels_last'.
+ 4D tensor with shape: \verb{(batch, channels, rows, cols)}
+if data_format='channels_first' or 4D tensor with shape: \verb{(batch, rows, cols, channels)} if data_format='channels_last'.
 }
 
 \section{Output shape}{
- 4D tensor with shape: \code{(batch, filters, new_rows, new_cols)} if data_format='channels_first' or 4D tensor with shape:
-\code{(batch, new_rows, new_cols, filters)} if data_format='channels_last'.
+ 4D tensor with shape: \verb{(batch, filters, new_rows, new_cols)} if data_format='channels_first' or 4D tensor with shape:
+\verb{(batch, new_rows, new_cols, filters)} if data_format='channels_last'.
 \code{rows} and \code{cols} values might have changed due to padding.
 }
 
@@ -118,22 +135,23 @@ if data_format='channels_first' or 4D tensor with shape: \code{(batch, rows, col
 }
 
 \seealso{
-Other convolutional layers: \code{\link{layer_conv_1d}},
-  \code{\link{layer_conv_2d}},
-  \code{\link{layer_conv_3d_transpose}},
-  \code{\link{layer_conv_3d}},
-  \code{\link{layer_conv_lstm_2d}},
-  \code{\link{layer_cropping_1d}},
-  \code{\link{layer_cropping_2d}},
-  \code{\link{layer_cropping_3d}},
-  \code{\link{layer_depthwise_conv_2d}},
-  \code{\link{layer_separable_conv_1d}},
-  \code{\link{layer_separable_conv_2d}},
-  \code{\link{layer_upsampling_1d}},
-  \code{\link{layer_upsampling_2d}},
-  \code{\link{layer_upsampling_3d}},
-  \code{\link{layer_zero_padding_1d}},
-  \code{\link{layer_zero_padding_2d}},
-  \code{\link{layer_zero_padding_3d}}
+Other convolutional layers: 
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()}
 }
 \concept{convolutional layers}

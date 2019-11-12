@@ -4,16 +4,22 @@
 \alias{layer_global_average_pooling_2d}
 \title{Global average pooling operation for spatial data.}
 \usage{
-layer_global_average_pooling_2d(object, data_format = NULL,
-  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
+layer_global_average_pooling_2d(
+  object,
+  data_format = NULL,
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \code{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
-found in your Keras config file at \code{~/.keras/keras.json}. If you never set
+\code{channels_last} corresponds to inputs with shape \verb{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \verb{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
+found in your Keras config file at \verb{~/.keras/keras.json}. If you never set
 it, then it will be "channels_last".}
 
 \item{batch_size}{Fixed batch size for layer}
@@ -32,26 +38,27 @@ Global average pooling operation for spatial data.
 \section{Input shape}{
 
 \itemize{
-\item If \code{data_format='channels_last'}: 4D tensor with shape: \code{(batch_size, rows, cols, channels)}
-\item If \code{data_format='channels_first'}: 4D tensor with shape: \code{(batch_size, channels, rows, cols)}
+\item If \code{data_format='channels_last'}: 4D tensor with shape: \verb{(batch_size, rows, cols, channels)}
+\item If \code{data_format='channels_first'}: 4D tensor with shape: \verb{(batch_size, channels, rows, cols)}
 }
 }
 
 \section{Output shape}{
- 2D tensor with shape: \code{(batch_size, channels)}
+ 2D tensor with shape: \verb{(batch_size, channels)}
 }
 
 \seealso{
-Other pooling layers: \code{\link{layer_average_pooling_1d}},
-  \code{\link{layer_average_pooling_2d}},
-  \code{\link{layer_average_pooling_3d}},
-  \code{\link{layer_global_average_pooling_1d}},
-  \code{\link{layer_global_average_pooling_3d}},
-  \code{\link{layer_global_max_pooling_1d}},
-  \code{\link{layer_global_max_pooling_2d}},
-  \code{\link{layer_global_max_pooling_3d}},
-  \code{\link{layer_max_pooling_1d}},
-  \code{\link{layer_max_pooling_2d}},
-  \code{\link{layer_max_pooling_3d}}
+Other pooling layers: 
+\code{\link{layer_average_pooling_1d}()},
+\code{\link{layer_average_pooling_2d}()},
+\code{\link{layer_average_pooling_3d}()},
+\code{\link{layer_global_average_pooling_1d}()},
+\code{\link{layer_global_average_pooling_3d}()},
+\code{\link{layer_global_max_pooling_1d}()},
+\code{\link{layer_global_max_pooling_2d}()},
+\code{\link{layer_global_max_pooling_3d}()},
+\code{\link{layer_max_pooling_1d}()},
+\code{\link{layer_max_pooling_2d}()},
+\code{\link{layer_max_pooling_3d}()}
 }
 \concept{pooling layers}

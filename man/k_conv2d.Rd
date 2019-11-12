@@ -4,8 +4,14 @@
 \alias{k_conv2d}
 \title{2D convolution.}
 \usage{
-k_conv2d(x, kernel, strides = c(1, 1), padding = "valid",
-  data_format = NULL, dilation_rate = c(1, 1))
+k_conv2d(
+  x,
+  kernel,
+  strides = c(1, 1),
+  padding = "valid",
+  data_format = NULL,
+  dilation_rate = c(1, 1)
+)
 }
 \arguments{
 \item{x}{Tensor or variable.}

@@ -4,14 +4,19 @@
 \alias{k_ctc_decode}
 \title{Decodes the output of a softmax.}
 \usage{
-k_ctc_decode(y_pred, input_length, greedy = TRUE, beam_width = 100L,
-  top_paths = 1)
+k_ctc_decode(
+  y_pred,
+  input_length,
+  greedy = TRUE,
+  beam_width = 100L,
+  top_paths = 1
+)
 }
 \arguments{
-\item{y_pred}{tensor \code{(samples, time_steps, num_categories)} containing the
+\item{y_pred}{tensor \verb{(samples, time_steps, num_categories)} containing the
 prediction, or output of the softmax.}
 
-\item{input_length}{tensor \code{(samples, )} containing the sequence length for
+\item{input_length}{tensor \verb{(samples, )} containing the sequence length for
 each batch item in \code{y_pred}.}
 
 \item{greedy}{perform much faster best-path search if \code{TRUE}. This does not

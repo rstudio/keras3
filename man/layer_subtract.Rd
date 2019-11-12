@@ -4,8 +4,14 @@
 \alias{layer_subtract}
 \title{Layer that subtracts two inputs.}
 \usage{
-layer_subtract(inputs, batch_size = NULL, dtype = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+layer_subtract(
+  inputs,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{inputs}{A list of input tensors (exactly 2).}
@@ -32,10 +38,13 @@ returns a single tensor, (\code{inputs[[1]] - inputs[[2]]}), also of the same
 shape.
 }
 \seealso{
-Other merge layers: \code{\link{layer_add}},
-  \code{\link{layer_average}},
-  \code{\link{layer_concatenate}}, \code{\link{layer_dot}},
-  \code{\link{layer_maximum}}, \code{\link{layer_minimum}},
-  \code{\link{layer_multiply}}
+Other merge layers: 
+\code{\link{layer_add}()},
+\code{\link{layer_average}()},
+\code{\link{layer_concatenate}()},
+\code{\link{layer_dot}()},
+\code{\link{layer_maximum}()},
+\code{\link{layer_minimum}()},
+\code{\link{layer_multiply}()}
 }
 \concept{merge layers}

@@ -1,11 +1,11 @@
 
 #' Apply an activation function to an output.
 #' 
-#' @inheritParams layer_dense
-#'   
 #' @param input_shape Input shape (list of integers, does not include the
-#'   samples axis) which is required when using this layer as the first layer in
-#'   a model.
+#'  samples axis) which is required when using this layer as the first layer in
+#'  a model.
+#' 
+#' @inheritParams layer_dense
 #'   
 #' @family core layers
 #' @family activation layers    
@@ -142,8 +142,7 @@ layer_activation_thresholded_relu <- function(object, theta = 1.0, input_shape =
 
 #' Exponential Linear Unit.
 #'
-#' It follows: `f(x) =  alpha * (exp(x) - 1.0)` for `x < 0`, `f(x) = x` for `x
-#' >= 0`.
+#' It follows: `f(x) =  alpha * (exp(x) - 1.0)` for `x < 0`, `f(x) = x` for `x >= 0`.
 #'
 #' @inheritParams layer_activation
 #' @param alpha Scale for the negative factor.
@@ -212,8 +211,7 @@ layer_activation_selu <- function(object, input_shape = NULL,
 
 #' Softmax activation function.
 #'
-#' It follows: `f(x) =  alpha * (exp(x) - 1.0)` for `x < 0`, `f(x) = x` for `x
-#' >= 0`.
+#' It follows: `f(x) =  alpha * (exp(x) - 1.0)` for `x < 0`, `f(x) = x` for `x >= 0`.
 #'
 #' @inheritParams layer_activation
 #' @param axis Integer, axis along which the softmax normalization is applied.

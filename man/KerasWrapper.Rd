@@ -5,9 +5,6 @@
 \alias{KerasWrapper}
 \title{Base R6 class for Keras wrappers}
 \format{An \link{R6Class} generator object}
-\usage{
-KerasWrapper
-}
 \value{
 \link{KerasWrapper}.
 }
@@ -25,4 +22,3 @@ for the wrapped layer.}
 \item{\code{add_weight(name,shape,dtype,initializer,regularizer,trainable,constraint)}}{Subclasses can use this to add weights to the wrapped layer.} }
 }
 
-\keyword{datasets}

@@ -10,7 +10,7 @@ dataset_mnist(path = "mnist.npz")
 \item{path}{Path where to cache the dataset locally (relative to ~/.keras/datasets).}
 }
 \value{
-Lists of training and test data: \code{train$x, train$y, test$x, test$y}, where
+Lists of training and test data: \verb{train$x, train$y, test$x, test$y}, where
 \code{x} is an array of grayscale image data with shape (num_samples, 28, 28) and \code{y}
 is an array of digit labels (integers in range 0-9) with shape (num_samples).
 }
@@ -18,10 +18,12 @@ is an array of digit labels (integers in range 0-9) with shape (num_samples).
 Dataset of 60,000 28x28 grayscale images of the 10 digits, along with a test set of 10,000 images.
 }
 \seealso{
-Other datasets: \code{\link{dataset_boston_housing}},
-  \code{\link{dataset_cifar100}},
-  \code{\link{dataset_cifar10}},
-  \code{\link{dataset_fashion_mnist}},
-  \code{\link{dataset_imdb}}, \code{\link{dataset_reuters}}
+Other datasets: 
+\code{\link{dataset_boston_housing}()},
+\code{\link{dataset_cifar100}()},
+\code{\link{dataset_cifar10}()},
+\code{\link{dataset_fashion_mnist}()},
+\code{\link{dataset_imdb}()},
+\code{\link{dataset_reuters}()}
 }
 \concept{datasets}

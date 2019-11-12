@@ -4,8 +4,14 @@
 \alias{layer_zero_padding_1d}
 \title{Zero-padding layer for 1D input (e.g. temporal sequence).}
 \usage{
-layer_zero_padding_1d(object, padding = 1L, batch_size = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_zero_padding_1d(
+  object,
+  padding = 1L,
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -13,7 +19,7 @@ layer_zero_padding_1d(object, padding = 1L, batch_size = NULL,
 \item{padding}{int, or list of int (length 2)
 \itemize{
 \item If int: How many zeros to add at the beginning and end of the padding dimension (axis 1).
-\item If list of int (length 2): How many zeros to add at the beginning and at the end of the padding dimension (\code{(left_pad, right_pad)}).
+\item If list of int (length 2): How many zeros to add at the beginning and at the end of the padding dimension (\verb{(left_pad, right_pad)}).
 }}
 
 \item{batch_size}{Fixed batch size for layer}
@@ -31,31 +37,32 @@ Zero-padding layer for 1D input (e.g. temporal sequence).
 }
 \section{Input shape}{
 
-3D tensor with shape \code{(batch, axis_to_pad, features)}
+3D tensor with shape \verb{(batch, axis_to_pad, features)}
 }
 
 \section{Output shape}{
 
-3D tensor with shape \code{(batch, padded_axis, features)}
+3D tensor with shape \verb{(batch, padded_axis, features)}
 }
 
 \seealso{
-Other convolutional layers: \code{\link{layer_conv_1d}},
-  \code{\link{layer_conv_2d_transpose}},
-  \code{\link{layer_conv_2d}},
-  \code{\link{layer_conv_3d_transpose}},
-  \code{\link{layer_conv_3d}},
-  \code{\link{layer_conv_lstm_2d}},
-  \code{\link{layer_cropping_1d}},
-  \code{\link{layer_cropping_2d}},
-  \code{\link{layer_cropping_3d}},
-  \code{\link{layer_depthwise_conv_2d}},
-  \code{\link{layer_separable_conv_1d}},
-  \code{\link{layer_separable_conv_2d}},
-  \code{\link{layer_upsampling_1d}},
-  \code{\link{layer_upsampling_2d}},
-  \code{\link{layer_upsampling_3d}},
-  \code{\link{layer_zero_padding_2d}},
-  \code{\link{layer_zero_padding_3d}}
+Other convolutional layers: 
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()}
 }
 \concept{convolutional layers}

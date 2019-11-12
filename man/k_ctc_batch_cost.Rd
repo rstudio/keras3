@@ -7,16 +7,16 @@
 k_ctc_batch_cost(y_true, y_pred, input_length, label_length)
 }
 \arguments{
-\item{y_true}{tensor \code{(samples, max_string_length)} containing the truth
+\item{y_true}{tensor \verb{(samples, max_string_length)} containing the truth
 labels.}
 
-\item{y_pred}{tensor \code{(samples, time_steps, num_categories)} containing the
+\item{y_pred}{tensor \verb{(samples, time_steps, num_categories)} containing the
 prediction, or output of the softmax.}
 
-\item{input_length}{tensor \code{(samples, 1)} containing the sequence length for
+\item{input_length}{tensor \verb{(samples, 1)} containing the sequence length for
 each batch item in \code{y_pred}.}
 
-\item{label_length}{tensor \code{(samples, 1)} containing the sequence length for
+\item{label_length}{tensor \verb{(samples, 1)} containing the sequence length for
 each batch item in \code{y_true}.}
 }
 \value{

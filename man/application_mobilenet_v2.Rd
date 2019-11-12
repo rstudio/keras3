@@ -7,9 +7,15 @@
 \alias{mobilenet_v2_load_model_hdf5}
 \title{MobileNetV2 model architecture}
 \usage{
-application_mobilenet_v2(input_shape = NULL, alpha = 1,
-  include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-  pooling = NULL, classes = 1000)
+application_mobilenet_v2(
+  input_shape = NULL,
+  alpha = 1,
+  include_top = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  pooling = NULL,
+  classes = 1000
+)
 
 mobilenet_v2_preprocess_input(x)
 
@@ -19,10 +25,10 @@ mobilenet_v2_load_model_hdf5(filepath)
 }
 \arguments{
 \item{input_shape}{optional shape list, only to be specified if \code{include_top}
-is FALSE (otherwise the input shape has to be \code{(224, 224, 3)} (with
+is FALSE (otherwise the input shape has to be \verb{(224, 224, 3)} (with
 \code{channels_last} data format) or (3, 224, 224) (with \code{channels_first} data
 format). It should have exactly 3 inputs channels, and width and height
-should be no smaller than 32. E.g. \code{(200, 200, 3)} would be one valid
+should be no smaller than 32. E.g. \verb{(200, 200, 3)} would be one valid
 value.}
 
 \item{alpha}{controls the width of the network.

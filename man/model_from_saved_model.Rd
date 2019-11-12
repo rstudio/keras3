@@ -23,6 +23,7 @@ This functionality is experimental and only works with TensorFlow
 version >= "2.0".
 }
 \seealso{
-Other saved_model: \code{\link{model_to_saved_model}}
+Other saved_model: 
+\code{\link{model_to_saved_model}()}
 }
 \concept{saved_model}

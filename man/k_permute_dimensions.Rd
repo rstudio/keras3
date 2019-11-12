@@ -9,7 +9,7 @@ k_permute_dimensions(x, pattern)
 \arguments{
 \item{x}{Tensor or variable.}
 
-\item{pattern}{A list of dimension indices, e.g. \code{(1, 3, 2)}. Dimension
+\item{pattern}{A list of dimension indices, e.g. \verb{(1, 3, 2)}. Dimension
 indices are 1-based.}
 }
 \value{

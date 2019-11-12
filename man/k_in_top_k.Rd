@@ -7,7 +7,7 @@
 k_in_top_k(predictions, targets, k)
 }
 \arguments{
-\item{predictions}{A tensor of shape \code{(batch_size, classes)} and type
+\item{predictions}{A tensor of shape \verb{(batch_size, classes)} and type
 \code{float32}.}
 
 \item{targets}{A 1D tensor of length \code{batch_size} and type \code{int32} or
@@ -17,7 +17,7 @@ k_in_top_k(predictions, targets, k)
 }
 \value{
 A 1D tensor of length \code{batch_size} and type \code{bool}. \code{output[[i]]} is
-\code{TRUE} if \code{predictions[i, targets[[i]]} is within top-\code{k} values of
+\code{TRUE} if \verb{predictions[i, targets[[i]]} is within top-\code{k} values of
 \code{predictions[[i]]}.
 }
 \description{

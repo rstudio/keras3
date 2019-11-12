@@ -4,15 +4,23 @@
 \alias{layer_permute}
 \title{Permute the dimensions of an input according to a given pattern}
 \usage{
-layer_permute(object, dims, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_permute(
+  object,
+  dims,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
 
 \item{dims}{List of integers. Permutation pattern, does not include the
-samples dimension. Indexing starts at 1. For instance, \code{(2, 1)} permutes
+samples dimension. Indexing starts at 1. For instance, \verb{(2, 1)} permutes
 the first and second dimension of the input.}
 
 \item{input_shape}{Input shape (list of integers, does not include the
@@ -53,13 +61,17 @@ according to the specified pattern.
 }
 
 \seealso{
-Other core layers: \code{\link{layer_activation}},
-  \code{\link{layer_activity_regularization}},
-  \code{\link{layer_dense_features}},
-  \code{\link{layer_dense}}, \code{\link{layer_dropout}},
-  \code{\link{layer_flatten}}, \code{\link{layer_input}},
-  \code{\link{layer_lambda}}, \code{\link{layer_masking}},
-  \code{\link{layer_repeat_vector}},
-  \code{\link{layer_reshape}}
+Other core layers: 
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_dense_features}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_input}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_reshape}()}
 }
 \concept{core layers}

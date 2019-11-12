@@ -38,7 +38,7 @@ with_custom_object_scope(c(top_k_acc = sparse_top_k_cat_acc), {
   # ...define model...
   
   # compile model (refer to "top_k_acc" by name)
-  model \%>\% compile(
+  model %>% compile(
     loss = "binary_crossentropy",
     optimizer = optimizer_nadam(),
     metrics = c("top_k_acc")

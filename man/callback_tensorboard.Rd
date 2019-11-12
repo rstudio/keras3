@@ -4,11 +4,20 @@
 \alias{callback_tensorboard}
 \title{TensorBoard basic visualizations}
 \usage{
-callback_tensorboard(log_dir = NULL, histogram_freq = 0,
-  batch_size = NULL, write_graph = TRUE, write_grads = FALSE,
-  write_images = FALSE, embeddings_freq = 0,
-  embeddings_layer_names = NULL, embeddings_metadata = NULL,
-  embeddings_data = NULL, update_freq = "epoch", profile_batch = 0)
+callback_tensorboard(
+  log_dir = NULL,
+  histogram_freq = 0,
+  batch_size = NULL,
+  write_graph = TRUE,
+  write_grads = FALSE,
+  write_images = FALSE,
+  embeddings_freq = 0,
+  embeddings_layer_names = NULL,
+  embeddings_metadata = NULL,
+  embeddings_data = NULL,
+  update_freq = "epoch",
+  profile_batch = 0
+)
 }
 \arguments{
 \item{log_dir}{The path of the directory where to save the log files to be
@@ -74,14 +83,15 @@ When using a backend other than TensorFlow, TensorBoard will still work
 be the display of the losses and metrics plots.
 }
 \seealso{
-Other callbacks: \code{\link{callback_csv_logger}},
-  \code{\link{callback_early_stopping}},
-  \code{\link{callback_lambda}},
-  \code{\link{callback_learning_rate_scheduler}},
-  \code{\link{callback_model_checkpoint}},
-  \code{\link{callback_progbar_logger}},
-  \code{\link{callback_reduce_lr_on_plateau}},
-  \code{\link{callback_remote_monitor}},
-  \code{\link{callback_terminate_on_naan}}
+Other callbacks: 
+\code{\link{callback_csv_logger}()},
+\code{\link{callback_early_stopping}()},
+\code{\link{callback_lambda}()},
+\code{\link{callback_learning_rate_scheduler}()},
+\code{\link{callback_model_checkpoint}()},
+\code{\link{callback_progbar_logger}()},
+\code{\link{callback_reduce_lr_on_plateau}()},
+\code{\link{callback_remote_monitor}()},
+\code{\link{callback_terminate_on_naan}()}
 }
 \concept{callbacks}

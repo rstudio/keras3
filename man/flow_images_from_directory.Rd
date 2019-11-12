@@ -5,12 +5,23 @@
 \title{Generates batches of data from images in a directory (with optional
 augmented/normalized data)}
 \usage{
-flow_images_from_directory(directory, generator = image_data_generator(),
-  target_size = c(256, 256), color_mode = "rgb", classes = NULL,
-  class_mode = "categorical", batch_size = 32, shuffle = TRUE,
-  seed = NULL, save_to_dir = NULL, save_prefix = "",
-  save_format = "png", follow_links = FALSE, subset = NULL,
-  interpolation = "nearest")
+flow_images_from_directory(
+  directory,
+  generator = image_data_generator(),
+  target_size = c(256, 256),
+  color_mode = "rgb",
+  classes = NULL,
+  class_mode = "categorical",
+  batch_size = 32,
+  shuffle = TRUE,
+  seed = NULL,
+  save_to_dir = NULL,
+  save_prefix = "",
+  save_format = "png",
+  follow_links = FALSE,
+  subset = NULL,
+  interpolation = "nearest"
+)
 }
 \arguments{
 \item{directory}{path to the target directory. It should contain one
@@ -77,14 +88,16 @@ augmented/normalized data)
 Yields batches indefinitely, in an infinite loop.
 }
 \section{Yields}{
- \code{(x, y)} where \code{x} is an array of image data and \code{y} is a
+ \verb{(x, y)} where \code{x} is an array of image data and \code{y} is a
 array of corresponding labels. The generator loops indefinitely.
 }
 
 \seealso{
-Other image preprocessing: \code{\link{fit_image_data_generator}},
-  \code{\link{flow_images_from_dataframe}},
-  \code{\link{flow_images_from_data}},
-  \code{\link{image_load}}, \code{\link{image_to_array}}
+Other image preprocessing: 
+\code{\link{fit_image_data_generator}()},
+\code{\link{flow_images_from_dataframe}()},
+\code{\link{flow_images_from_data}()},
+\code{\link{image_load}()},
+\code{\link{image_to_array}()}
 }
 \concept{image preprocessing}

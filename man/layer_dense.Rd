@@ -4,13 +4,26 @@
 \alias{layer_dense}
 \title{Add a densely-connected NN layer to an output}
 \usage{
-layer_dense(object, units, activation = NULL, use_bias = TRUE,
-  kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
-  kernel_regularizer = NULL, bias_regularizer = NULL,
-  activity_regularizer = NULL, kernel_constraint = NULL,
-  bias_constraint = NULL, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_dense(
+  object,
+  units,
+  activation = NULL,
+  use_bias = TRUE,
+  kernel_initializer = "glorot_uniform",
+  bias_initializer = "zeros",
+  kernel_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  kernel_constraint = NULL,
+  bias_constraint = NULL,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -72,22 +85,26 @@ it is flattened prior to the initial dot product with \code{kernel}.
 \section{Input and Output Shapes}{
 
 
-Input shape: nD tensor with shape: \code{(batch_size, ..., input_dim)}. The most
-common situation would be a 2D input with shape \code{(batch_size, input_dim)}.
+Input shape: nD tensor with shape: \verb{(batch_size, ..., input_dim)}. The most
+common situation would be a 2D input with shape \verb{(batch_size, input_dim)}.
 
-Output shape: nD tensor with shape: \code{(batch_size, ..., units)}. For
-instance, for a 2D input with shape \code{(batch_size, input_dim)}, the output
-would have shape \code{(batch_size, unit)}.
+Output shape: nD tensor with shape: \verb{(batch_size, ..., units)}. For
+instance, for a 2D input with shape \verb{(batch_size, input_dim)}, the output
+would have shape \verb{(batch_size, unit)}.
 }
 
 \seealso{
-Other core layers: \code{\link{layer_activation}},
-  \code{\link{layer_activity_regularization}},
-  \code{\link{layer_dense_features}},
-  \code{\link{layer_dropout}}, \code{\link{layer_flatten}},
-  \code{\link{layer_input}}, \code{\link{layer_lambda}},
-  \code{\link{layer_masking}}, \code{\link{layer_permute}},
-  \code{\link{layer_repeat_vector}},
-  \code{\link{layer_reshape}}
+Other core layers: 
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_dense_features}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_input}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_reshape}()}
 }
 \concept{core layers}

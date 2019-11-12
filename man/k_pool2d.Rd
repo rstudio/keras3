@@ -4,8 +4,14 @@
 \alias{k_pool2d}
 \title{2D Pooling.}
 \usage{
-k_pool2d(x, pool_size, strides = c(1, 1), padding = "valid",
-  data_format = NULL, pool_mode = "max")
+k_pool2d(
+  x,
+  pool_size,
+  strides = c(1, 1),
+  padding = "valid",
+  data_format = NULL,
+  pool_mode = "max"
+)
 }
 \arguments{
 \item{x}{Tensor or variable.}

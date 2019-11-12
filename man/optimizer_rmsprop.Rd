@@ -4,8 +4,14 @@
 \alias{optimizer_rmsprop}
 \title{RMSProp optimizer}
 \usage{
-optimizer_rmsprop(lr = 0.001, rho = 0.9, epsilon = NULL, decay = 0,
-  clipnorm = NULL, clipvalue = NULL)
+optimizer_rmsprop(
+  lr = 0.001,
+  rho = 0.9,
+  epsilon = NULL,
+  decay = 0,
+  clipnorm = NULL,
+  clipvalue = NULL
+)
 }
 \arguments{
 \item{lr}{float >= 0. Learning rate.}
@@ -32,11 +38,12 @@ default values (except the learning rate, which can be freely tuned).
 This optimizer is usually a good choice for recurrent neural networks.
 }
 \seealso{
-Other optimizers: \code{\link{optimizer_adadelta}},
-  \code{\link{optimizer_adagrad}},
-  \code{\link{optimizer_adamax}},
-  \code{\link{optimizer_adam}},
-  \code{\link{optimizer_nadam}},
-  \code{\link{optimizer_sgd}}
+Other optimizers: 
+\code{\link{optimizer_adadelta}()},
+\code{\link{optimizer_adagrad}()},
+\code{\link{optimizer_adamax}()},
+\code{\link{optimizer_adam}()},
+\code{\link{optimizer_nadam}()},
+\code{\link{optimizer_sgd}()}
 }
 \concept{optimizers}

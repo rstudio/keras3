@@ -5,9 +5,6 @@
 \alias{KerasCallback}
 \title{Base R6 class for Keras callbacks}
 \format{An \link{R6Class} generator object}
-\usage{
-KerasCallback
-}
 \value{
 \link{KerasCallback}.
 }
@@ -65,4 +62,3 @@ LossHistory <- R6::R6Class("LossHistory",
 )
 }
 }
-\keyword{datasets}

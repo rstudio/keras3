@@ -7,7 +7,7 @@
 dataset_fashion_mnist()
 }
 \value{
-Lists of training and test data: \code{train$x, train$y, test$x, test$y}, where
+Lists of training and test data: \verb{train$x, train$y, test$x, test$y}, where
 \code{x} is an array of grayscale image data with shape (num_samples, 28, 28) and \code{y}
 is an array of article labels (integers in range 0-9) with shape (num_samples).
 }
@@ -35,10 +35,12 @@ replacement for MNIST. The class labels are:
 }
 }
 \seealso{
-Other datasets: \code{\link{dataset_boston_housing}},
-  \code{\link{dataset_cifar100}},
-  \code{\link{dataset_cifar10}},
-  \code{\link{dataset_imdb}}, \code{\link{dataset_mnist}},
-  \code{\link{dataset_reuters}}
+Other datasets: 
+\code{\link{dataset_boston_housing}()},
+\code{\link{dataset_cifar100}()},
+\code{\link{dataset_cifar10}()},
+\code{\link{dataset_imdb}()},
+\code{\link{dataset_mnist}()},
+\code{\link{dataset_reuters}()}
 }
 \concept{datasets}

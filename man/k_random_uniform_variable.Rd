@@ -4,8 +4,14 @@
 \alias{k_random_uniform_variable}
 \title{Instantiates a variable with values drawn from a uniform distribution.}
 \usage{
-k_random_uniform_variable(shape, low, high, dtype = NULL, name = NULL,
-  seed = NULL)
+k_random_uniform_variable(
+  shape,
+  low,
+  high,
+  dtype = NULL,
+  name = NULL,
+  seed = NULL
+)
 }
 \arguments{
 \item{shape}{Tuple of integers, shape of returned Keras variable.}

@@ -7,8 +7,13 @@
 \usage{
 save_model_weights_tf(object, filepath, overwrite = TRUE)
 
-load_model_weights_tf(object, filepath, by_name = FALSE,
-  skip_mismatch = FALSE, reshape = FALSE)
+load_model_weights_tf(
+  object,
+  filepath,
+  by_name = FALSE,
+  skip_mismatch = FALSE,
+  reshape = FALSE
+)
 }
 \arguments{
 \item{object}{Model object to save/load}

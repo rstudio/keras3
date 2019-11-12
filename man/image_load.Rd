@@ -4,8 +4,12 @@
 \alias{image_load}
 \title{Loads an image into PIL format.}
 \usage{
-image_load(path, grayscale = FALSE, target_size = NULL,
-  interpolation = "nearest")
+image_load(
+  path,
+  grayscale = FALSE,
+  target_size = NULL,
+  interpolation = "nearest"
+)
 }
 \arguments{
 \item{path}{Path to image file}
@@ -13,7 +17,7 @@ image_load(path, grayscale = FALSE, target_size = NULL,
 \item{grayscale}{Boolean, whether to load the image as grayscale.}
 
 \item{target_size}{Either \code{NULL} (default to original size) or integer vector
-\code{(img_height, img_width)}.}
+\verb{(img_height, img_width)}.}
 
 \item{interpolation}{Interpolation method used to resample the image if the
 target size is different from that of the loaded image. Supported methods
@@ -29,10 +33,11 @@ A PIL Image instance.
 Loads an image into PIL format.
 }
 \seealso{
-Other image preprocessing: \code{\link{fit_image_data_generator}},
-  \code{\link{flow_images_from_dataframe}},
-  \code{\link{flow_images_from_data}},
-  \code{\link{flow_images_from_directory}},
-  \code{\link{image_to_array}}
+Other image preprocessing: 
+\code{\link{fit_image_data_generator}()},
+\code{\link{flow_images_from_dataframe}()},
+\code{\link{flow_images_from_data}()},
+\code{\link{flow_images_from_directory}()},
+\code{\link{image_to_array}()}
 }
 \concept{image preprocessing}

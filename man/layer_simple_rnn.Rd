@@ -4,17 +4,36 @@
 \alias{layer_simple_rnn}
 \title{Fully-connected RNN where the output is to be fed back to input.}
 \usage{
-layer_simple_rnn(object, units, activation = "tanh", use_bias = TRUE,
-  return_sequences = FALSE, return_state = FALSE,
-  go_backwards = FALSE, stateful = FALSE, unroll = FALSE,
+layer_simple_rnn(
+  object,
+  units,
+  activation = "tanh",
+  use_bias = TRUE,
+  return_sequences = FALSE,
+  return_state = FALSE,
+  go_backwards = FALSE,
+  stateful = FALSE,
+  unroll = FALSE,
   kernel_initializer = "glorot_uniform",
-  recurrent_initializer = "orthogonal", bias_initializer = "zeros",
-  kernel_regularizer = NULL, recurrent_regularizer = NULL,
-  bias_regularizer = NULL, activity_regularizer = NULL,
-  kernel_constraint = NULL, recurrent_constraint = NULL,
-  bias_constraint = NULL, dropout = 0, recurrent_dropout = 0,
-  input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
-  dtype = NULL, name = NULL, trainable = NULL, weights = NULL)
+  recurrent_initializer = "orthogonal",
+  bias_initializer = "zeros",
+  kernel_regularizer = NULL,
+  recurrent_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  kernel_constraint = NULL,
+  recurrent_constraint = NULL,
+  bias_constraint = NULL,
+  dropout = 0,
+  recurrent_dropout = 0,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -106,8 +125,8 @@ Fully-connected RNN where the output is to be fed back to input.
 \section{Input shapes}{
 
 
-3D tensor with shape \code{(batch_size, timesteps, input_dim)},
-(Optional) 2D tensors with shape \code{(batch_size, output_dim)}.
+3D tensor with shape \verb{(batch_size, timesteps, input_dim)},
+(Optional) 2D tensors with shape \verb{(batch_size, output_dim)}.
 }
 
 \section{Output shape}{
@@ -115,10 +134,10 @@ Fully-connected RNN where the output is to be fed back to input.
 \itemize{
 \item if \code{return_state}: a list of tensors. The first tensor is
 the output. The remaining tensors are the last states,
-each with shape \code{(batch_size, units)}.
+each with shape \verb{(batch_size, units)}.
 \item if \code{return_sequences}: 3D tensor with shape
-\code{(batch_size, timesteps, units)}.
-\item else, 2D tensor with shape \code{(batch_size, units)}.
+\verb{(batch_size, timesteps, units)}.
+\item else, 2D tensor with shape \verb{(batch_size, units)}.
 }
 }
 
@@ -177,8 +196,10 @@ the initial state of the RNN layer.
 }
 
 \seealso{
-Other recurrent layers: \code{\link{layer_cudnn_gru}},
-  \code{\link{layer_cudnn_lstm}}, \code{\link{layer_gru}},
-  \code{\link{layer_lstm}}
+Other recurrent layers: 
+\code{\link{layer_cudnn_gru}()},
+\code{\link{layer_cudnn_lstm}()},
+\code{\link{layer_gru}()},
+\code{\link{layer_lstm}()}
 }
 \concept{recurrent layers}

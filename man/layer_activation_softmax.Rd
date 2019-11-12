@@ -4,9 +4,17 @@
 \alias{layer_activation_softmax}
 \title{Softmax activation function.}
 \usage{
-layer_activation_softmax(object, axis = -1, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_activation_softmax(
+  object,
+  axis = -1,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -36,17 +44,16 @@ isn't provided.}
 \item{weights}{Initial weights for layer.}
 }
 \description{
-It follows: \code{f(x) =  alpha * (exp(x) - 1.0)} for \code{x < 0}, \code{f(x) = x} for `x
-
-= 0`.
+It follows: \code{f(x) =  alpha * (exp(x) - 1.0)} for \code{x < 0}, \code{f(x) = x} for \code{x >= 0}.
 }
 \seealso{
-Other activation layers: \code{\link{layer_activation_elu}},
-  \code{\link{layer_activation_leaky_relu}},
-  \code{\link{layer_activation_parametric_relu}},
-  \code{\link{layer_activation_relu}},
-  \code{\link{layer_activation_selu}},
-  \code{\link{layer_activation_thresholded_relu}},
-  \code{\link{layer_activation}}
+Other activation layers: 
+\code{\link{layer_activation_elu}()},
+\code{\link{layer_activation_leaky_relu}()},
+\code{\link{layer_activation_parametric_relu}()},
+\code{\link{layer_activation_relu}()},
+\code{\link{layer_activation_selu}()},
+\code{\link{layer_activation_thresholded_relu}()},
+\code{\link{layer_activation}()}
 }
 \concept{activation layers}

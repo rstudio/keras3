@@ -5,8 +5,14 @@
 \alias{load_model_tf}
 \title{Save/Load models using SavedModel format}
 \usage{
-save_model_tf(object, filepath, overwrite = TRUE,
-  include_optimizer = TRUE, signatures = NULL, options = NULL)
+save_model_tf(
+  object,
+  filepath,
+  overwrite = TRUE,
+  include_optimizer = TRUE,
+  signatures = NULL,
+  options = NULL
+)
 
 load_model_tf(filepath, custom_objects = NULL, compile = TRUE)
 }
@@ -35,10 +41,12 @@ or custom loss functions).}
 Save/Load models using SavedModel format
 }
 \seealso{
-Other model persistence: \code{\link{get_weights}},
-  \code{\link{model_to_json}}, \code{\link{model_to_yaml}},
-  \code{\link{save_model_hdf5}},
-  \code{\link{save_model_weights_hdf5}},
-  \code{\link{serialize_model}}
+Other model persistence: 
+\code{\link{get_weights}()},
+\code{\link{model_to_json}()},
+\code{\link{model_to_yaml}()},
+\code{\link{save_model_hdf5}()},
+\code{\link{save_model_weights_hdf5}()},
+\code{\link{serialize_model}()}
 }
 \concept{model persistence}

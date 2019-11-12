@@ -5,9 +5,6 @@
 \alias{KerasLayer}
 \title{Base R6 class for Keras layers}
 \format{An \link{R6Class} generator object #'}
-\usage{
-KerasLayer
-}
 \value{
 \link{KerasLayer}.
 }
@@ -25,4 +22,3 @@ for the layer.}
 a weight variable to the layer.} }
 }
 
-\keyword{datasets}

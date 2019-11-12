@@ -4,8 +4,15 @@
 \alias{optimizer_adamax}
 \title{Adamax optimizer}
 \usage{
-optimizer_adamax(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999,
-  epsilon = NULL, decay = 0, clipnorm = NULL, clipvalue = NULL)
+optimizer_adamax(
+  lr = 0.002,
+  beta_1 = 0.9,
+  beta_2 = 0.999,
+  epsilon = NULL,
+  decay = 0,
+  clipnorm = NULL,
+  clipvalue = NULL
+)
 }
 \arguments{
 \item{lr}{float >= 0. Learning rate.}
@@ -31,11 +38,12 @@ Adamax optimizer from Section 7 of the \href{https://arxiv.org/abs/1412.6980v8}{
 It is a variant of Adam based on the infinity norm.
 }
 \seealso{
-Other optimizers: \code{\link{optimizer_adadelta}},
-  \code{\link{optimizer_adagrad}},
-  \code{\link{optimizer_adam}},
-  \code{\link{optimizer_nadam}},
-  \code{\link{optimizer_rmsprop}},
-  \code{\link{optimizer_sgd}}
+Other optimizers: 
+\code{\link{optimizer_adadelta}()},
+\code{\link{optimizer_adagrad}()},
+\code{\link{optimizer_adam}()},
+\code{\link{optimizer_nadam}()},
+\code{\link{optimizer_rmsprop}()},
+\code{\link{optimizer_sgd}()}
 }
 \concept{optimizers}
