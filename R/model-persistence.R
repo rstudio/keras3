@@ -495,8 +495,15 @@ model_to_saved_model <- function(model, saved_model_path, custom_objects = NULL,
                                  as_text = FALSE, input_signature = NULL, 
                                  serving_only = FALSE) {
   
+  
   if (!is_tensorflow_implementation())
     stop("TensorFlow implementation is required.")
+  
+  if (tensorflow::tf_version() > "2.0")
+    stop("This function is deprecated as of TF version 2.1")
+  
+  if (tensorflow::tf_version() > "1.14")
+    warning("This function is experimental and will be deprecated in TF 2.1")
   
   if (!tensorflow::tf_version() >= "1.14")
     stop("TensorFlow version >= 1.14 is required. Use export_savedmodel ",
@@ -532,6 +539,12 @@ model_from_saved_model <- function(saved_model_path, custom_objects = NULL) {
   
   if (!is_tensorflow_implementation())
     stop("TensorFlow implementation is required.")
+  
+  if (tensorflow::tf_version() > "2.0")
+    stop("This function is deprecated as of TF version 2.1")
+  
+  if (tensorflow::tf_version() > "1.14")
+    warning("This function is experimental and will be deprecated in TF 2.1")
   
   if (!tensorflow::tf_version() >= "1.14")
     stop("TensorFlow version >= 1.14 is required. Use export_savedmodel ",

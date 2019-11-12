@@ -180,15 +180,15 @@ multi_gpu_model <- function(model, gpus = NULL, cpu_merge = TRUE, cpu_relocation
     args$cpu_relocation <- cpu_relocation
   }
   
-  do.call(keras$utils$multi_gpu_model, args)
+  do.call(resolve_utils()$multi_gpu_model, args)
 }
 
 
 #' @importFrom reticulate py_to_r_wrapper
 #' @export
 py_to_r_wrapper.keras.engine.training.Model <- function(x) {
-  function(object) {
-    compose_layer(object, x)
+  function(object, ...) {
+    compose_layer(object, x, ...)
   }
 }
 

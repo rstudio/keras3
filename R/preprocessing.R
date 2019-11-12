@@ -763,6 +763,7 @@ flow_images_from_data <- function(
     save_prefix = save_prefix,
     save_format = save_format
   )
+  stopifnot(args$batch_size > 0)
   
   if (keras_version() >= "2.1.5")
     args$subset <- subset
@@ -833,6 +834,7 @@ flow_images_from_directory <- function(
     save_format = save_format,
     follow_links = follow_links
   )
+  stopifnot(args$batch_size > 0)
   
   if (keras_version() >= "2.1.2")
     args$interpolation <- interpolation
@@ -931,6 +933,7 @@ flow_images_from_dataframe <- function(
     save_format = save_format,
     drop_duplicates = drop_duplicates
   )
+  stopifnot(args$batch_size > 0)
   
   if (keras_version() >= "2.1.2") 
     args$interpolation <- interpolation

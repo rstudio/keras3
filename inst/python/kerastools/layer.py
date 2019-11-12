@@ -6,7 +6,7 @@ if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'keras'):
   def shape_filter(shape):
     return shape
 else:
-  from tensorflow.python.keras.engine import Layer
+  from tensorflow.keras.layers import Layer
   def shape_filter(shape):
     if not isinstance(shape, list):
       return shape.as_list()
