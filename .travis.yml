@@ -81,7 +81,7 @@ matrix:
         - rstudio/reticulate
         
 cache:
-  packages: true
+  packages: false
   directories:
     - $HOME/.keras
     - $HOME/.cache/pip
