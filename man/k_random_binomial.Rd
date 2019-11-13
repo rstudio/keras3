@@ -9,7 +9,7 @@ k_random_binomial(shape, p = 0, dtype = NULL, seed = NULL)
 \arguments{
 \item{shape}{A list of integers, the shape of tensor to create.}
 
-\item{p}{A float, \code{0. <= p <= 1}, probability of binomial distribution.}
+\item{p}{A float, \verb{0. <= p <= 1}, probability of binomial distribution.}
 
 \item{dtype}{String, dtype of returned tensor.}
 

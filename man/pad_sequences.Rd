@@ -4,8 +4,14 @@
 \alias{pad_sequences}
 \title{Pads sequences to the same length}
 \usage{
-pad_sequences(sequences, maxlen = NULL, dtype = "int32",
-  padding = "pre", truncating = "pre", value = 0)
+pad_sequences(
+  sequences,
+  maxlen = NULL,
+  dtype = "int32",
+  padding = "pre",
+  truncating = "pre",
+  value = 0
+)
 }
 \arguments{
 \item{sequences}{List of lists where each element is a sequence}
@@ -29,7 +35,7 @@ Pads sequences to the same length
 }
 \details{
 This function transforms a list of \code{num_samples} sequences (lists
-of integers) into a matrix of shape \code{(num_samples, num_timesteps)}.
+of integers) into a matrix of shape \verb{(num_samples, num_timesteps)}.
 \code{num_timesteps} is either the \code{maxlen} argument if provided, or the length
 of the longest sequence otherwise.
 
@@ -43,10 +49,11 @@ determined by the arguments \code{padding} and \code{truncating}, respectively.
 Pre-padding is the default.
 }
 \seealso{
-Other text preprocessing: \code{\link{make_sampling_table}},
-  \code{\link{skipgrams}},
-  \code{\link{text_hashing_trick}},
-  \code{\link{text_one_hot}},
-  \code{\link{text_to_word_sequence}}
+Other text preprocessing: 
+\code{\link{make_sampling_table}()},
+\code{\link{skipgrams}()},
+\code{\link{text_hashing_trick}()},
+\code{\link{text_one_hot}()},
+\code{\link{text_to_word_sequence}()}
 }
 \concept{text preprocessing}

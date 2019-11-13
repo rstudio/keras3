@@ -4,9 +4,18 @@
 \alias{layer_activity_regularization}
 \title{Layer that applies an update to the cost function based input activity.}
 \usage{
-layer_activity_regularization(object, l1 = 0, l2 = 0,
-  input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
-  dtype = NULL, name = NULL, trainable = NULL, weights = NULL)
+layer_activity_regularization(
+  object,
+  l1 = 0,
+  l2 = 0,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -51,13 +60,17 @@ the first layer in a model.
 }
 
 \seealso{
-Other core layers: \code{\link{layer_activation}},
-  \code{\link{layer_dense_features}},
-  \code{\link{layer_dense}}, \code{\link{layer_dropout}},
-  \code{\link{layer_flatten}}, \code{\link{layer_input}},
-  \code{\link{layer_lambda}}, \code{\link{layer_masking}},
-  \code{\link{layer_permute}},
-  \code{\link{layer_repeat_vector}},
-  \code{\link{layer_reshape}}
+Other core layers: 
+\code{\link{layer_activation}()},
+\code{\link{layer_dense_features}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_input}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_reshape}()}
 }
 \concept{core layers}

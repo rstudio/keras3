@@ -10,7 +10,7 @@ initializer_glorot_uniform(seed = NULL)
 \item{seed}{Integer used to seed the random generator.}
 }
 \description{
-It draws samples from a uniform distribution within \code{-limit, limit}
+It draws samples from a uniform distribution within \verb{-limit, limit}
 where \code{limit} is \code{sqrt(6 / (fan_in + fan_out))}
 where \code{fan_in} is the number of input units in the weight tensor
 and \code{fan_out} is the number of output units in the weight tensor.
@@ -21,19 +21,20 @@ Glorot & Bengio, AISTATS 2010 http://jmlr.org/proceedings/papers/v9/glorot10a/gl
 }
 
 \seealso{
-Other initializers: \code{\link{initializer_constant}},
-  \code{\link{initializer_glorot_normal}},
-  \code{\link{initializer_he_normal}},
-  \code{\link{initializer_he_uniform}},
-  \code{\link{initializer_identity}},
-  \code{\link{initializer_lecun_normal}},
-  \code{\link{initializer_lecun_uniform}},
-  \code{\link{initializer_ones}},
-  \code{\link{initializer_orthogonal}},
-  \code{\link{initializer_random_normal}},
-  \code{\link{initializer_random_uniform}},
-  \code{\link{initializer_truncated_normal}},
-  \code{\link{initializer_variance_scaling}},
-  \code{\link{initializer_zeros}}
+Other initializers: 
+\code{\link{initializer_constant}()},
+\code{\link{initializer_glorot_normal}()},
+\code{\link{initializer_he_normal}()},
+\code{\link{initializer_he_uniform}()},
+\code{\link{initializer_identity}()},
+\code{\link{initializer_lecun_normal}()},
+\code{\link{initializer_lecun_uniform}()},
+\code{\link{initializer_ones}()},
+\code{\link{initializer_orthogonal}()},
+\code{\link{initializer_random_normal}()},
+\code{\link{initializer_random_uniform}()},
+\code{\link{initializer_truncated_normal}()},
+\code{\link{initializer_variance_scaling}()},
+\code{\link{initializer_zeros}()}
 }
 \concept{initializers}

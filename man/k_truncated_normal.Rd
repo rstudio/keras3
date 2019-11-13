@@ -4,8 +4,7 @@
 \alias{k_truncated_normal}
 \title{Returns a tensor with truncated random normal distribution of values.}
 \usage{
-k_truncated_normal(shape, mean = 0, stddev = 1, dtype = NULL,
-  seed = NULL)
+k_truncated_normal(shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 }
 \arguments{
 \item{shape}{A list of integers, the shape of tensor to create.}

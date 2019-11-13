@@ -4,8 +4,7 @@
 \alias{fit_image_data_generator}
 \title{Fit image data generator internal statistics to some sample data.}
 \usage{
-fit_image_data_generator(object, x, augment = FALSE, rounds = 1,
-  seed = NULL)
+fit_image_data_generator(object, x, augment = FALSE, rounds = 1, seed = NULL)
 }
 \arguments{
 \item{object}{\code{\link[=image_data_generator]{image_data_generator()}}}
@@ -24,9 +23,11 @@ Required for \code{featurewise_center}, \code{featurewise_std_normalization}
 and \code{zca_whitening}.
 }
 \seealso{
-Other image preprocessing: \code{\link{flow_images_from_dataframe}},
-  \code{\link{flow_images_from_data}},
-  \code{\link{flow_images_from_directory}},
-  \code{\link{image_load}}, \code{\link{image_to_array}}
+Other image preprocessing: 
+\code{\link{flow_images_from_dataframe}()},
+\code{\link{flow_images_from_data}()},
+\code{\link{flow_images_from_directory}()},
+\code{\link{image_load}()},
+\code{\link{image_to_array}()}
 }
 \concept{image preprocessing}

@@ -4,9 +4,12 @@
 \alias{text_to_word_sequence}
 \title{Convert text to a sequence of words (or tokens).}
 \usage{
-text_to_word_sequence(text,
+text_to_word_sequence(
+  text,
   filters = "!\\"#$\%&()*+,-./:;<=>?@[\\\\]^_`{|}~\\t\\n",
-  lower = TRUE, split = " ")
+  lower = TRUE,
+  split = " "
+)
 }
 \arguments{
 \item{text}{Input text (string).}
@@ -25,9 +28,11 @@ Words (or tokens)
 Convert text to a sequence of words (or tokens).
 }
 \seealso{
-Other text preprocessing: \code{\link{make_sampling_table}},
-  \code{\link{pad_sequences}}, \code{\link{skipgrams}},
-  \code{\link{text_hashing_trick}},
-  \code{\link{text_one_hot}}
+Other text preprocessing: 
+\code{\link{make_sampling_table}()},
+\code{\link{pad_sequences}()},
+\code{\link{skipgrams}()},
+\code{\link{text_hashing_trick}()},
+\code{\link{text_one_hot}()}
 }
 \concept{text preprocessing}

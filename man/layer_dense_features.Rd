@@ -4,9 +4,17 @@
 \alias{layer_dense_features}
 \title{Constructs a DenseFeatures.}
 \usage{
-layer_dense_features(object, feature_columns, name = NULL,
-  trainable = NULL, input_shape = NULL, batch_input_shape = NULL,
-  batch_size = NULL, dtype = NULL, weights = NULL)
+layer_dense_features(
+  object,
+  feature_columns,
+  name = NULL,
+  trainable = NULL,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -43,13 +51,17 @@ indicates batches of an arbitrary number of 32-dimensional vectors.}
 A layer that produces a dense Tensor based on given feature_columns.
 }
 \seealso{
-Other core layers: \code{\link{layer_activation}},
-  \code{\link{layer_activity_regularization}},
-  \code{\link{layer_dense}}, \code{\link{layer_dropout}},
-  \code{\link{layer_flatten}}, \code{\link{layer_input}},
-  \code{\link{layer_lambda}}, \code{\link{layer_masking}},
-  \code{\link{layer_permute}},
-  \code{\link{layer_repeat_vector}},
-  \code{\link{layer_reshape}}
+Other core layers: 
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_input}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_reshape}()}
 }
 \concept{core layers}

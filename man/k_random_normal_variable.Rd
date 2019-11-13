@@ -4,8 +4,14 @@
 \alias{k_random_normal_variable}
 \title{Instantiates a variable with values drawn from a normal distribution.}
 \usage{
-k_random_normal_variable(shape, mean, scale, dtype = NULL, name = NULL,
-  seed = NULL)
+k_random_normal_variable(
+  shape,
+  mean,
+  scale,
+  dtype = NULL,
+  name = NULL,
+  seed = NULL
+)
 }
 \arguments{
 \item{shape}{Tuple of integers, shape of returned Keras variable.}

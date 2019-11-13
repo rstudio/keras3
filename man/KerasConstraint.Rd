@@ -5,9 +5,6 @@
 \alias{KerasConstraint}
 \title{Base R6 class for Keras constraints}
 \format{An \link{R6Class} generator object}
-\usage{
-KerasConstraint
-}
 \description{
 Base R6 class for Keras constraints
 }
@@ -49,4 +46,3 @@ layer_dense(units = 32, input_shape = c(784),
 \seealso{
 \link{constraints}
 }
-\keyword{datasets}

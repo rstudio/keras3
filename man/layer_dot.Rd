@@ -4,8 +4,16 @@
 \alias{layer_dot}
 \title{Layer that computes a dot product between samples in two tensors.}
 \usage{
-layer_dot(inputs, axes, normalize = FALSE, batch_size = NULL,
-  dtype = NULL, name = NULL, trainable = NULL, weights = NULL)
+layer_dot(
+  inputs,
+  axes,
+  normalize = FALSE,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{inputs}{A list of input tensors (at least 2).}
@@ -34,11 +42,13 @@ A tensor, the dot product of the samples from the inputs.
 Layer that computes a dot product between samples in two tensors.
 }
 \seealso{
-Other merge layers: \code{\link{layer_add}},
-  \code{\link{layer_average}},
-  \code{\link{layer_concatenate}},
-  \code{\link{layer_maximum}}, \code{\link{layer_minimum}},
-  \code{\link{layer_multiply}},
-  \code{\link{layer_subtract}}
+Other merge layers: 
+\code{\link{layer_add}()},
+\code{\link{layer_average}()},
+\code{\link{layer_concatenate}()},
+\code{\link{layer_maximum}()},
+\code{\link{layer_minimum}()},
+\code{\link{layer_multiply}()},
+\code{\link{layer_subtract}()}
 }
 \concept{merge layers}

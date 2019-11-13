@@ -4,9 +4,14 @@
 \alias{text_hashing_trick}
 \title{Converts a text to a sequence of indexes in a fixed-size hashing space.}
 \usage{
-text_hashing_trick(text, n, hash_function = NULL,
+text_hashing_trick(
+  text,
+  n,
+  hash_function = NULL,
   filters = "!\\"#$\%&()*+,-./:;<=>?@[\\\\]^_`{|}~\\t\\n",
-  lower = TRUE, split = " ")
+  lower = TRUE,
+  split = " "
+)
 }
 \arguments{
 \item{text}{Input text (string).}
@@ -36,9 +41,11 @@ Two or more words may be assigned to the same index, due to possible
 collisions by the hashing function.
 }
 \seealso{
-Other text preprocessing: \code{\link{make_sampling_table}},
-  \code{\link{pad_sequences}}, \code{\link{skipgrams}},
-  \code{\link{text_one_hot}},
-  \code{\link{text_to_word_sequence}}
+Other text preprocessing: 
+\code{\link{make_sampling_table}()},
+\code{\link{pad_sequences}()},
+\code{\link{skipgrams}()},
+\code{\link{text_one_hot}()},
+\code{\link{text_to_word_sequence}()}
 }
 \concept{text preprocessing}

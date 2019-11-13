@@ -10,8 +10,8 @@ initializer_he_uniform(seed = NULL)
 \item{seed}{Integer used to seed the random generator.}
 }
 \description{
-It draws samples from a uniform distribution within \code{-limit, limit} where
-\code{limit`` is }sqrt(6 / fan_in)\code{where }fan_in` is the number of input units in the
+It draws samples from a uniform distribution within \verb{-limit, limit} where
+\verb{limit`` is }sqrt(6 / fan_in)\code{where }fan_in` is the number of input units in the
 weight tensor.
 }
 \section{References}{
@@ -19,19 +19,20 @@ weight tensor.
 }
 
 \seealso{
-Other initializers: \code{\link{initializer_constant}},
-  \code{\link{initializer_glorot_normal}},
-  \code{\link{initializer_glorot_uniform}},
-  \code{\link{initializer_he_normal}},
-  \code{\link{initializer_identity}},
-  \code{\link{initializer_lecun_normal}},
-  \code{\link{initializer_lecun_uniform}},
-  \code{\link{initializer_ones}},
-  \code{\link{initializer_orthogonal}},
-  \code{\link{initializer_random_normal}},
-  \code{\link{initializer_random_uniform}},
-  \code{\link{initializer_truncated_normal}},
-  \code{\link{initializer_variance_scaling}},
-  \code{\link{initializer_zeros}}
+Other initializers: 
+\code{\link{initializer_constant}()},
+\code{\link{initializer_glorot_normal}()},
+\code{\link{initializer_glorot_uniform}()},
+\code{\link{initializer_he_normal}()},
+\code{\link{initializer_identity}()},
+\code{\link{initializer_lecun_normal}()},
+\code{\link{initializer_lecun_uniform}()},
+\code{\link{initializer_ones}()},
+\code{\link{initializer_orthogonal}()},
+\code{\link{initializer_random_normal}()},
+\code{\link{initializer_random_uniform}()},
+\code{\link{initializer_truncated_normal}()},
+\code{\link{initializer_variance_scaling}()},
+\code{\link{initializer_zeros}()}
 }
 \concept{initializers}

@@ -4,9 +4,17 @@
 \alias{layer_reshape}
 \title{Reshapes an output to a certain shape.}
 \usage{
-layer_reshape(object, target_shape, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_reshape(
+  object,
+  target_shape,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -45,17 +53,21 @@ Reshapes an output to a certain shape.
 Input shape: Arbitrary, although all dimensions in the input shaped must be
 fixed.
 
-Output shape: \code{(batch_size,) + target_shape}.
+Output shape: \verb{(batch_size,) + target_shape}.
 }
 
 \seealso{
-Other core layers: \code{\link{layer_activation}},
-  \code{\link{layer_activity_regularization}},
-  \code{\link{layer_dense_features}},
-  \code{\link{layer_dense}}, \code{\link{layer_dropout}},
-  \code{\link{layer_flatten}}, \code{\link{layer_input}},
-  \code{\link{layer_lambda}}, \code{\link{layer_masking}},
-  \code{\link{layer_permute}},
-  \code{\link{layer_repeat_vector}}
+Other core layers: 
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_dense_features}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_input}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_repeat_vector}()}
 }
 \concept{core layers}

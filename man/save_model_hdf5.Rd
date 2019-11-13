@@ -5,8 +5,7 @@
 \alias{load_model_hdf5}
 \title{Save/Load models using HDF5 files}
 \usage{
-save_model_hdf5(object, filepath, overwrite = TRUE,
-  include_optimizer = TRUE)
+save_model_hdf5(object, filepath, overwrite = TRUE, include_optimizer = TRUE)
 
 load_model_hdf5(filepath, custom_objects = NULL, compile = TRUE)
 }
@@ -52,10 +51,12 @@ The \code{\link[=serialize_model]{serialize_model()}} function enables saving Ke
 R objects that can be persisted across R sessions.
 }
 \seealso{
-Other model persistence: \code{\link{get_weights}},
-  \code{\link{model_to_json}}, \code{\link{model_to_yaml}},
-  \code{\link{save_model_tf}},
-  \code{\link{save_model_weights_hdf5}},
-  \code{\link{serialize_model}}
+Other model persistence: 
+\code{\link{get_weights}()},
+\code{\link{model_to_json}()},
+\code{\link{model_to_yaml}()},
+\code{\link{save_model_tf}()},
+\code{\link{save_model_weights_hdf5}()},
+\code{\link{serialize_model}()}
 }
 \concept{model persistence}

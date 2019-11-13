@@ -4,9 +4,18 @@
 \alias{timeseries_generator}
 \title{Utility function for generating batches of temporal data.}
 \usage{
-timeseries_generator(data, targets, length, sampling_rate = 1,
-  stride = 1, start_index = 0, end_index = NULL, shuffle = FALSE,
-  reverse = FALSE, batch_size = 128)
+timeseries_generator(
+  data,
+  targets,
+  length,
+  sampling_rate = 1,
+  stride = 1,
+  start_index = 0,
+  end_index = NULL,
+  shuffle = FALSE,
+  reverse = FALSE,
+  batch_size = 128
+)
 }
 \arguments{
 \item{data}{Object containing consecutive data points (timesteps). The data

@@ -4,9 +4,17 @@
 \alias{time_distributed}
 \title{Apply a layer to every temporal slice of an input.}
 \usage{
-time_distributed(object, layer, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+time_distributed(
+  object,
+  layer,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -41,12 +49,13 @@ considered to be the temporal dimension.
 }
 \details{
 Consider a batch of 32 samples,  where each sample is a sequence of 10 vectors of 16 dimensions. The batch
-input shape of the layer is then \code{(32, 10, 16)}, and the \code{input_shape}, not
-including the samples dimension, is \code{(10, 16)}. You can then use
+input shape of the layer is then \verb{(32, 10, 16)}, and the \code{input_shape}, not
+including the samples dimension, is \verb{(10, 16)}. You can then use
 \code{time_distributed} to apply a \code{layer_dense} to each of the 10 timesteps,
 independently.
 }
 \seealso{
-Other layer wrappers: \code{\link{bidirectional}}
+Other layer wrappers: 
+\code{\link{bidirectional}()}
 }
 \concept{layer wrappers}

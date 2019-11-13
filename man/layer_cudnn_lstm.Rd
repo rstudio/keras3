@@ -4,15 +4,31 @@
 \alias{layer_cudnn_lstm}
 \title{Fast LSTM implementation backed by \href{https://developer.nvidia.com/cudnn}{CuDNN}.}
 \usage{
-layer_cudnn_lstm(object, units, kernel_initializer = "glorot_uniform",
-  recurrent_initializer = "orthogonal", bias_initializer = "zeros",
-  unit_forget_bias = TRUE, kernel_regularizer = NULL,
-  recurrent_regularizer = NULL, bias_regularizer = NULL,
-  activity_regularizer = NULL, kernel_constraint = NULL,
-  recurrent_constraint = NULL, bias_constraint = NULL,
-  return_sequences = FALSE, return_state = FALSE, stateful = FALSE,
-  input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
-  dtype = NULL, name = NULL, trainable = NULL, weights = NULL)
+layer_cudnn_lstm(
+  object,
+  units,
+  kernel_initializer = "glorot_uniform",
+  recurrent_initializer = "orthogonal",
+  bias_initializer = "zeros",
+  unit_forget_bias = TRUE,
+  kernel_regularizer = NULL,
+  recurrent_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  kernel_constraint = NULL,
+  recurrent_constraint = NULL,
+  bias_constraint = NULL,
+  return_sequences = FALSE,
+  return_state = FALSE,
+  stateful = FALSE,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -95,8 +111,10 @@ Can only be run on GPU, with the TensorFlow backend.
 }
 
 \seealso{
-Other recurrent layers: \code{\link{layer_cudnn_gru}},
-  \code{\link{layer_gru}}, \code{\link{layer_lstm}},
-  \code{\link{layer_simple_rnn}}
+Other recurrent layers: 
+\code{\link{layer_cudnn_gru}()},
+\code{\link{layer_gru}()},
+\code{\link{layer_lstm}()},
+\code{\link{layer_simple_rnn}()}
 }
 \concept{recurrent layers}

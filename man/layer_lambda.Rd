@@ -4,10 +4,20 @@
 \alias{layer_lambda}
 \title{Wraps arbitrary expression as a layer}
 \usage{
-layer_lambda(object, f, output_shape = NULL, mask = NULL,
-  arguments = NULL, input_shape = NULL, batch_input_shape = NULL,
-  batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
-  weights = NULL)
+layer_lambda(
+  object,
+  f,
+  output_shape = NULL,
+  mask = NULL,
+  arguments = NULL,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -59,13 +69,17 @@ the first layer in a model.
 }
 
 \seealso{
-Other core layers: \code{\link{layer_activation}},
-  \code{\link{layer_activity_regularization}},
-  \code{\link{layer_dense_features}},
-  \code{\link{layer_dense}}, \code{\link{layer_dropout}},
-  \code{\link{layer_flatten}}, \code{\link{layer_input}},
-  \code{\link{layer_masking}}, \code{\link{layer_permute}},
-  \code{\link{layer_repeat_vector}},
-  \code{\link{layer_reshape}}
+Other core layers: 
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_dense_features}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_input}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_reshape}()}
 }
 \concept{core layers}

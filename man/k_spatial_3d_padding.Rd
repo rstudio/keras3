@@ -4,8 +4,11 @@
 \alias{k_spatial_3d_padding}
 \title{Pads 5D tensor with zeros along the depth, height, width dimensions.}
 \usage{
-k_spatial_3d_padding(x, padding = list(list(1, 1), list(1, 1), list(1,
-  1)), data_format = NULL)
+k_spatial_3d_padding(
+  x,
+  padding = list(list(1, 1), list(1, 1), list(1, 1)),
+  data_format = NULL
+)
 }
 \arguments{
 \item{x}{Tensor or variable.}

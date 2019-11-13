@@ -4,9 +4,17 @@
 \alias{layer_activation}
 \title{Apply an activation function to an output.}
 \usage{
-layer_activation(object, activation, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_activation(
+  object,
+  activation,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -40,22 +48,27 @@ isn't provided.}
 Apply an activation function to an output.
 }
 \seealso{
-Other core layers: \code{\link{layer_activity_regularization}},
-  \code{\link{layer_dense_features}},
-  \code{\link{layer_dense}}, \code{\link{layer_dropout}},
-  \code{\link{layer_flatten}}, \code{\link{layer_input}},
-  \code{\link{layer_lambda}}, \code{\link{layer_masking}},
-  \code{\link{layer_permute}},
-  \code{\link{layer_repeat_vector}},
-  \code{\link{layer_reshape}}
+Other core layers: 
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_dense_features}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_input}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_reshape}()}
 
-Other activation layers: \code{\link{layer_activation_elu}},
-  \code{\link{layer_activation_leaky_relu}},
-  \code{\link{layer_activation_parametric_relu}},
-  \code{\link{layer_activation_relu}},
-  \code{\link{layer_activation_selu}},
-  \code{\link{layer_activation_softmax}},
-  \code{\link{layer_activation_thresholded_relu}}
+Other activation layers: 
+\code{\link{layer_activation_elu}()},
+\code{\link{layer_activation_leaky_relu}()},
+\code{\link{layer_activation_parametric_relu}()},
+\code{\link{layer_activation_relu}()},
+\code{\link{layer_activation_selu}()},
+\code{\link{layer_activation_softmax}()},
+\code{\link{layer_activation_thresholded_relu}()}
 }
 \concept{activation layers}
 \concept{core layers}

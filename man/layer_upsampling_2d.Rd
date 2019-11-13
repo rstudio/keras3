@@ -4,9 +4,16 @@
 \alias{layer_upsampling_2d}
 \title{Upsampling layer for 2D inputs.}
 \usage{
-layer_upsampling_2d(object, size = c(2L, 2L), data_format = NULL,
-  interpolation = "nearest", batch_size = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+layer_upsampling_2d(
+  object,
+  size = c(2L, 2L),
+  data_format = NULL,
+  interpolation = "nearest",
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -16,13 +23,13 @@ columns.}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \code{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
-found in your Keras config file at \code{~/.keras/keras.json}. If you never set
+\code{channels_last} corresponds to inputs with shape \verb{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \verb{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
+found in your Keras config file at \verb{~/.keras/keras.json}. If you never set
 it, then it will be "channels_last".}
 
 \item{interpolation}{A string, one of \code{nearest} or \code{bilinear}.
 Note that CNTK does not support yet the \code{bilinear} upscaling
-and that with Theano, only \code{size=(2, 2)} is possible.}
+and that with Theano, only \verb{size=(2, 2)} is possible.}
 
 \item{batch_size}{Fixed batch size for layer}
 
@@ -41,8 +48,8 @@ Repeats the rows and columns of the data by \code{size[[0]]} and \code{size[[1]]
 
 4D tensor with shape:
 \itemize{
-\item If \code{data_format} is \code{"channels_last"}: \code{(batch, rows, cols, channels)}
-\item If \code{data_format} is \code{"channels_first"}: \code{(batch, channels, rows, cols)}
+\item If \code{data_format} is \code{"channels_last"}: \verb{(batch, rows, cols, channels)}
+\item If \code{data_format} is \code{"channels_first"}: \verb{(batch, channels, rows, cols)}
 }
 }
 
@@ -50,28 +57,29 @@ Repeats the rows and columns of the data by \code{size[[0]]} and \code{size[[1]]
 
 4D tensor with shape:
 \itemize{
-\item If \code{data_format} is \code{"channels_last"}: \code{(batch, upsampled_rows, upsampled_cols, channels)}
-\item If \code{data_format} is \code{"channels_first"}: \code{(batch, channels, upsampled_rows, upsampled_cols)}
+\item If \code{data_format} is \code{"channels_last"}: \verb{(batch, upsampled_rows, upsampled_cols, channels)}
+\item If \code{data_format} is \code{"channels_first"}: \verb{(batch, channels, upsampled_rows, upsampled_cols)}
 }
 }
 
 \seealso{
-Other convolutional layers: \code{\link{layer_conv_1d}},
-  \code{\link{layer_conv_2d_transpose}},
-  \code{\link{layer_conv_2d}},
-  \code{\link{layer_conv_3d_transpose}},
-  \code{\link{layer_conv_3d}},
-  \code{\link{layer_conv_lstm_2d}},
-  \code{\link{layer_cropping_1d}},
-  \code{\link{layer_cropping_2d}},
-  \code{\link{layer_cropping_3d}},
-  \code{\link{layer_depthwise_conv_2d}},
-  \code{\link{layer_separable_conv_1d}},
-  \code{\link{layer_separable_conv_2d}},
-  \code{\link{layer_upsampling_1d}},
-  \code{\link{layer_upsampling_3d}},
-  \code{\link{layer_zero_padding_1d}},
-  \code{\link{layer_zero_padding_2d}},
-  \code{\link{layer_zero_padding_3d}}
+Other convolutional layers: 
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()}
 }
 \concept{convolutional layers}

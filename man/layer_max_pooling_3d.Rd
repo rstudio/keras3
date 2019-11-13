@@ -4,9 +4,17 @@
 \alias{layer_max_pooling_3d}
 \title{Max pooling operation for 3D data (spatial or spatio-temporal).}
 \usage{
-layer_max_pooling_3d(object, pool_size = c(2L, 2L, 2L), strides = NULL,
-  padding = "valid", data_format = NULL, batch_size = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_max_pooling_3d(
+  object,
+  pool_size = c(2L, 2L, 2L),
+  strides = NULL,
+  padding = "valid",
+  data_format = NULL,
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -21,9 +29,9 @@ dimension.}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \code{(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)} while \code{channels_first} corresponds
-to inputs with shape \code{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}. It defaults to the \code{image_data_format} value found in your
-Keras config file at \code{~/.keras/keras.json}. If you never set it, then it
+\code{channels_last} corresponds to inputs with shape \verb{(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)} while \code{channels_first} corresponds
+to inputs with shape \verb{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}. It defaults to the \code{image_data_format} value found in your
+Keras config file at \verb{~/.keras/keras.json}. If you never set it, then it
 will be "channels_last".}
 
 \item{batch_size}{Fixed batch size for layer}
@@ -42,30 +50,31 @@ Max pooling operation for 3D data (spatial or spatio-temporal).
 \section{Input shape}{
 
 \itemize{
-\item If \code{data_format='channels_last'}: 5D tensor with shape: \code{(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)}
-\item If \code{data_format='channels_first'}: 5D tensor with shape: \code{(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)}
+\item If \code{data_format='channels_last'}: 5D tensor with shape: \verb{(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)}
+\item If \code{data_format='channels_first'}: 5D tensor with shape: \verb{(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)}
 }
 }
 
 \section{Output shape}{
 
 \itemize{
-\item If \code{data_format='channels_last'}: 5D tensor with shape: \code{(batch_size, pooled_dim1, pooled_dim2, pooled_dim3, channels)}
-\item If \code{data_format='channels_first'}: 5D tensor with shape: \code{(batch_size, channels, pooled_dim1, pooled_dim2, pooled_dim3)}
+\item If \code{data_format='channels_last'}: 5D tensor with shape: \verb{(batch_size, pooled_dim1, pooled_dim2, pooled_dim3, channels)}
+\item If \code{data_format='channels_first'}: 5D tensor with shape: \verb{(batch_size, channels, pooled_dim1, pooled_dim2, pooled_dim3)}
 }
 }
 
 \seealso{
-Other pooling layers: \code{\link{layer_average_pooling_1d}},
-  \code{\link{layer_average_pooling_2d}},
-  \code{\link{layer_average_pooling_3d}},
-  \code{\link{layer_global_average_pooling_1d}},
-  \code{\link{layer_global_average_pooling_2d}},
-  \code{\link{layer_global_average_pooling_3d}},
-  \code{\link{layer_global_max_pooling_1d}},
-  \code{\link{layer_global_max_pooling_2d}},
-  \code{\link{layer_global_max_pooling_3d}},
-  \code{\link{layer_max_pooling_1d}},
-  \code{\link{layer_max_pooling_2d}}
+Other pooling layers: 
+\code{\link{layer_average_pooling_1d}()},
+\code{\link{layer_average_pooling_2d}()},
+\code{\link{layer_average_pooling_3d}()},
+\code{\link{layer_global_average_pooling_1d}()},
+\code{\link{layer_global_average_pooling_2d}()},
+\code{\link{layer_global_average_pooling_3d}()},
+\code{\link{layer_global_max_pooling_1d}()},
+\code{\link{layer_global_max_pooling_2d}()},
+\code{\link{layer_global_max_pooling_3d}()},
+\code{\link{layer_max_pooling_1d}()},
+\code{\link{layer_max_pooling_2d}()}
 }
 \concept{pooling layers}

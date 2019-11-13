@@ -5,15 +5,29 @@
 \title{Generate batches of image data with real-time data augmentation. The data will be
 looped over (in batches).}
 \usage{
-image_data_generator(featurewise_center = FALSE,
-  samplewise_center = FALSE, featurewise_std_normalization = FALSE,
-  samplewise_std_normalization = FALSE, zca_whitening = FALSE,
-  zca_epsilon = 1e-06, rotation_range = 0, width_shift_range = 0,
-  height_shift_range = 0, brightness_range = NULL, shear_range = 0,
-  zoom_range = 0, channel_shift_range = 0, fill_mode = "nearest",
-  cval = 0, horizontal_flip = FALSE, vertical_flip = FALSE,
-  rescale = NULL, preprocessing_function = NULL, data_format = NULL,
-  validation_split = 0)
+image_data_generator(
+  featurewise_center = FALSE,
+  samplewise_center = FALSE,
+  featurewise_std_normalization = FALSE,
+  samplewise_std_normalization = FALSE,
+  zca_whitening = FALSE,
+  zca_epsilon = 1e-06,
+  rotation_range = 0,
+  width_shift_range = 0,
+  height_shift_range = 0,
+  brightness_range = NULL,
+  shear_range = 0,
+  zoom_range = 0,
+  channel_shift_range = 0,
+  fill_mode = "nearest",
+  cval = 0,
+  horizontal_flip = FALSE,
+  vertical_flip = FALSE,
+  rescale = NULL,
+  preprocessing_function = NULL,
+  data_format = NULL,
+  validation_split = 0
+)
 }
 \arguments{
 \item{featurewise_center}{Set input mean to 0 over the dataset, feature-wise.}
@@ -39,7 +53,7 @@ image_data_generator(featurewise_center = FALSE,
 \item{shear_range}{shear intensity (shear angle in radians).}
 
 \item{zoom_range}{amount of zoom. if scalar z, zoom will be randomly picked
-in the range \code{[1-z, 1+z]}. A sequence of two can be passed instead to select
+in the range \verb{[1-z, 1+z]}. A sequence of two can be passed instead to select
 this range.}
 
 \item{channel_shift_range}{shift range for each channels.}
@@ -73,7 +87,7 @@ output a tensor with the same shape.}
 \item{data_format}{'channels_first' or 'channels_last'. In 'channels_first'
 mode, the channels dimension (the depth) is at index 1, in 'channels_last'
 mode it is at index 3. It defaults to the \code{image_data_format} value found
-in your Keras config file at \code{~/.keras/keras.json}. If you never set it,
+in your Keras config file at \verb{~/.keras/keras.json}. If you never set it,
 then it will be "channels_last".}
 
 \item{validation_split}{fraction of images reserved for validation (strictly between 0 and 1).}

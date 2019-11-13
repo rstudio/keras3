@@ -13,8 +13,10 @@ reset_states(object)
 Reset the states for a layer
 }
 \seealso{
-Other layer methods: \code{\link{count_params}},
-  \code{\link{get_config}}, \code{\link{get_input_at}},
-  \code{\link{get_weights}}
+Other layer methods: 
+\code{\link{count_params}()},
+\code{\link{get_config}()},
+\code{\link{get_input_at}()},
+\code{\link{get_weights}()}
 }
 \concept{layer methods}

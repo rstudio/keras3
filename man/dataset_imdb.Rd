@@ -5,14 +5,21 @@
 \alias{dataset_imdb_word_index}
 \title{IMDB Movie reviews sentiment classification}
 \usage{
-dataset_imdb(path = "imdb.npz", num_words = NULL, skip_top = 0L,
-  maxlen = NULL, seed = 113L, start_char = 1L, oov_char = 2L,
-  index_from = 3L)
+dataset_imdb(
+  path = "imdb.npz",
+  num_words = NULL,
+  skip_top = 0L,
+  maxlen = NULL,
+  seed = 113L,
+  start_char = 1L,
+  oov_char = 2L,
+  index_from = 3L
+)
 
 dataset_imdb_word_index(path = "imdb_word_index.json")
 }
 \arguments{
-\item{path}{Where to cache the data (relative to \code{~/.keras/dataset}).}
+\item{path}{Where to cache the data (relative to \verb{~/.keras/dataset}).}
 
 \item{num_words}{Max number of words to include. Words are ranked by how
 often they occur (in the training set) and only the most frequent words are
@@ -34,11 +41,11 @@ Set to 1 because 0 is usually the padding character.}
 \item{index_from}{Index actual words with this index and higher.}
 }
 \value{
-Lists of training and test data: \code{train$x, train$y, test$x, test$y}.
+Lists of training and test data: \verb{train$x, train$y, test$x, test$y}.
 
 The \code{x} data includes integer sequences. If the \code{num_words} argument was
 specific, the maximum possible index value is \code{num_words-1}. If the
-\code{maxlen`` argument was specified, the largest possible sequence length is }maxlen`.
+\verb{maxlen`` argument was specified, the largest possible sequence length is }maxlen`.
 
 The \code{y} data includes a set of integer labels (0 or 1).
 
@@ -59,11 +66,12 @@ As a convention, "0" does not stand for a specific word, but instead is used
 to encode any unknown word.
 }
 \seealso{
-Other datasets: \code{\link{dataset_boston_housing}},
-  \code{\link{dataset_cifar100}},
-  \code{\link{dataset_cifar10}},
-  \code{\link{dataset_fashion_mnist}},
-  \code{\link{dataset_mnist}},
-  \code{\link{dataset_reuters}}
+Other datasets: 
+\code{\link{dataset_boston_housing}()},
+\code{\link{dataset_cifar100}()},
+\code{\link{dataset_cifar10}()},
+\code{\link{dataset_fashion_mnist}()},
+\code{\link{dataset_mnist}()},
+\code{\link{dataset_reuters}()}
 }
 \concept{datasets}

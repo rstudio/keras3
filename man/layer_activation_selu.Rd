@@ -4,9 +4,16 @@
 \alias{layer_activation_selu}
 \title{Scaled Exponential Linear Unit.}
 \usage{
-layer_activation_selu(object, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_activation_selu(
+  object,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -53,12 +60,13 @@ Note:
 \seealso{
 \href{https://arxiv.org/abs/1706.02515}{Self-Normalizing Neural Networks}, \code{\link{initializer_lecun_normal}}, \code{\link{layer_alpha_dropout}}
 
-Other activation layers: \code{\link{layer_activation_elu}},
-  \code{\link{layer_activation_leaky_relu}},
-  \code{\link{layer_activation_parametric_relu}},
-  \code{\link{layer_activation_relu}},
-  \code{\link{layer_activation_softmax}},
-  \code{\link{layer_activation_thresholded_relu}},
-  \code{\link{layer_activation}}
+Other activation layers: 
+\code{\link{layer_activation_elu}()},
+\code{\link{layer_activation_leaky_relu}()},
+\code{\link{layer_activation_parametric_relu}()},
+\code{\link{layer_activation_relu}()},
+\code{\link{layer_activation_softmax}()},
+\code{\link{layer_activation_thresholded_relu}()},
+\code{\link{layer_activation}()}
 }
 \concept{activation layers}

@@ -4,19 +4,39 @@
 \alias{layer_conv_lstm_2d}
 \title{Convolutional LSTM.}
 \usage{
-layer_conv_lstm_2d(object, filters, kernel_size, strides = c(1L, 1L),
-  padding = "valid", data_format = NULL, dilation_rate = c(1L, 1L),
-  activation = "tanh", recurrent_activation = "hard_sigmoid",
-  use_bias = TRUE, kernel_initializer = "glorot_uniform",
-  recurrent_initializer = "orthogonal", bias_initializer = "zeros",
-  unit_forget_bias = TRUE, kernel_regularizer = NULL,
-  recurrent_regularizer = NULL, bias_regularizer = NULL,
-  activity_regularizer = NULL, kernel_constraint = NULL,
-  recurrent_constraint = NULL, bias_constraint = NULL,
-  return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE,
-  dropout = 0, recurrent_dropout = 0, batch_size = NULL,
-  name = NULL, trainable = NULL, weights = NULL,
-  input_shape = NULL)
+layer_conv_lstm_2d(
+  object,
+  filters,
+  kernel_size,
+  strides = c(1L, 1L),
+  padding = "valid",
+  data_format = NULL,
+  dilation_rate = c(1L, 1L),
+  activation = "tanh",
+  recurrent_activation = "hard_sigmoid",
+  use_bias = TRUE,
+  kernel_initializer = "glorot_uniform",
+  recurrent_initializer = "orthogonal",
+  bias_initializer = "zeros",
+  unit_forget_bias = TRUE,
+  kernel_regularizer = NULL,
+  recurrent_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  kernel_constraint = NULL,
+  recurrent_constraint = NULL,
+  bias_constraint = NULL,
+  return_sequences = FALSE,
+  go_backwards = FALSE,
+  stateful = FALSE,
+  dropout = 0,
+  recurrent_dropout = 0,
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL,
+  input_shape = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -35,8 +55,8 @@ specifying any \code{dilation_rate} value != 1.}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \code{(batch, time, ..., channels)} while \code{channels_first} corresponds to inputs with shape \code{(batch, time, channels, ...)}. It defaults to the \code{image_data_format} value found
-in your Keras config file at \code{~/.keras/keras.json}. If you never set it,
+\code{channels_last} corresponds to inputs with shape \verb{(batch, time, ..., channels)} while \code{channels_first} corresponds to inputs with shape \verb{(batch, time, channels, ...)}. It defaults to the \code{image_data_format} value found
+in your Keras config file at \verb{~/.keras/keras.json}. If you never set it,
 then it will be "channels_last".}
 
 \item{dilation_rate}{An integer or list of n integers, specifying the
@@ -121,10 +141,10 @@ transformations are both convolutional.
 
 \itemize{
 \item if data_format='channels_first' 5D tensor with shape:
-\code{(samples,time, channels, rows, cols)}
+\verb{(samples,time, channels, rows, cols)}
 \itemize{
 \item if data_format='channels_last' 5D
-tensor with shape: \code{(samples,time, rows, cols, channels)}
+tensor with shape: \verb{(samples,time, rows, cols, channels)}
 }
 }
 }
@@ -139,22 +159,23 @@ output
 }
 
 \seealso{
-Other convolutional layers: \code{\link{layer_conv_1d}},
-  \code{\link{layer_conv_2d_transpose}},
-  \code{\link{layer_conv_2d}},
-  \code{\link{layer_conv_3d_transpose}},
-  \code{\link{layer_conv_3d}},
-  \code{\link{layer_cropping_1d}},
-  \code{\link{layer_cropping_2d}},
-  \code{\link{layer_cropping_3d}},
-  \code{\link{layer_depthwise_conv_2d}},
-  \code{\link{layer_separable_conv_1d}},
-  \code{\link{layer_separable_conv_2d}},
-  \code{\link{layer_upsampling_1d}},
-  \code{\link{layer_upsampling_2d}},
-  \code{\link{layer_upsampling_3d}},
-  \code{\link{layer_zero_padding_1d}},
-  \code{\link{layer_zero_padding_2d}},
-  \code{\link{layer_zero_padding_3d}}
+Other convolutional layers: 
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()}
 }
 \concept{convolutional layers}

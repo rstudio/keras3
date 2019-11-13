@@ -69,7 +69,6 @@ initializer_random_normal <- function(mean = 0.0, stddev = 0.05, seed = NULL) {
 
 #' Initializer that generates tensors with a uniform distribution.
 #' 
-#' @inheritParams initializer_random_normal
 #' 
 #' @param minval Lower bound of the range of random values to generate.
 #' @param maxval Upper bound of the range of random values to generate. Defaults to 1 for float types.

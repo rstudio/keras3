@@ -4,18 +4,38 @@
 \alias{layer_gru}
 \title{Gated Recurrent Unit - Cho et al.}
 \usage{
-layer_gru(object, units, activation = "tanh",
-  recurrent_activation = "hard_sigmoid", use_bias = TRUE,
-  return_sequences = FALSE, return_state = FALSE,
-  go_backwards = FALSE, stateful = FALSE, unroll = FALSE,
-  reset_after = FALSE, kernel_initializer = "glorot_uniform",
-  recurrent_initializer = "orthogonal", bias_initializer = "zeros",
-  kernel_regularizer = NULL, recurrent_regularizer = NULL,
-  bias_regularizer = NULL, activity_regularizer = NULL,
-  kernel_constraint = NULL, recurrent_constraint = NULL,
-  bias_constraint = NULL, dropout = 0, recurrent_dropout = 0,
-  input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
-  dtype = NULL, name = NULL, trainable = NULL, weights = NULL)
+layer_gru(
+  object,
+  units,
+  activation = "tanh",
+  recurrent_activation = "hard_sigmoid",
+  use_bias = TRUE,
+  return_sequences = FALSE,
+  return_state = FALSE,
+  go_backwards = FALSE,
+  stateful = FALSE,
+  unroll = FALSE,
+  reset_after = FALSE,
+  kernel_initializer = "glorot_uniform",
+  recurrent_initializer = "orthogonal",
+  bias_initializer = "zeros",
+  kernel_regularizer = NULL,
+  recurrent_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  kernel_constraint = NULL,
+  recurrent_constraint = NULL,
+  bias_constraint = NULL,
+  dropout = 0,
+  recurrent_dropout = 0,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -122,8 +142,8 @@ inference on CPU. Thus it has separate biases for \code{kernel} and
 \section{Input shapes}{
 
 
-3D tensor with shape \code{(batch_size, timesteps, input_dim)},
-(Optional) 2D tensors with shape \code{(batch_size, output_dim)}.
+3D tensor with shape \verb{(batch_size, timesteps, input_dim)},
+(Optional) 2D tensors with shape \verb{(batch_size, output_dim)}.
 }
 
 \section{Output shape}{
@@ -131,10 +151,10 @@ inference on CPU. Thus it has separate biases for \code{kernel} and
 \itemize{
 \item if \code{return_state}: a list of tensors. The first tensor is
 the output. The remaining tensors are the last states,
-each with shape \code{(batch_size, units)}.
+each with shape \verb{(batch_size, units)}.
 \item if \code{return_sequences}: 3D tensor with shape
-\code{(batch_size, timesteps, units)}.
-\item else, 2D tensor with shape \code{(batch_size, units)}.
+\verb{(batch_size, timesteps, units)}.
+\item else, 2D tensor with shape \verb{(batch_size, units)}.
 }
 }
 
@@ -196,8 +216,10 @@ the initial state of the RNN layer.
 }
 
 \seealso{
-Other recurrent layers: \code{\link{layer_cudnn_gru}},
-  \code{\link{layer_cudnn_lstm}}, \code{\link{layer_lstm}},
-  \code{\link{layer_simple_rnn}}
+Other recurrent layers: 
+\code{\link{layer_cudnn_gru}()},
+\code{\link{layer_cudnn_lstm}()},
+\code{\link{layer_lstm}()},
+\code{\link{layer_simple_rnn}()}
 }
 \concept{recurrent layers}

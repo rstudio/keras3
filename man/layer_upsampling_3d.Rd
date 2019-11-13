@@ -4,8 +4,15 @@
 \alias{layer_upsampling_3d}
 \title{Upsampling layer for 3D inputs.}
 \usage{
-layer_upsampling_3d(object, size = c(2L, 2L, 2L), data_format = NULL,
-  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
+layer_upsampling_3d(
+  object,
+  size = c(2L, 2L, 2L),
+  data_format = NULL,
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -15,9 +22,9 @@ and dim3.}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \code{(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)} while \code{channels_first} corresponds
-to inputs with shape \code{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}. It defaults to the \code{image_data_format} value found in your
-Keras config file at \code{~/.keras/keras.json}. If you never set it, then it
+\code{channels_last} corresponds to inputs with shape \verb{(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)} while \code{channels_first} corresponds
+to inputs with shape \verb{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}. It defaults to the \code{image_data_format} value found in your
+Keras config file at \verb{~/.keras/keras.json}. If you never set it, then it
 will be "channels_last".}
 
 \item{batch_size}{Fixed batch size for layer}
@@ -38,8 +45,8 @@ Repeats the 1st, 2nd and 3rd dimensions of the data by \code{size[[0]]}, \code{s
 
 5D tensor with shape:
 \itemize{
-\item If \code{data_format} is \code{"channels_last"}: \code{(batch, dim1, dim2, dim3, channels)}
-\item If \code{data_format} is \code{"channels_first"}: \code{(batch, channels, dim1, dim2, dim3)}
+\item If \code{data_format} is \code{"channels_last"}: \verb{(batch, dim1, dim2, dim3, channels)}
+\item If \code{data_format} is \code{"channels_first"}: \verb{(batch, channels, dim1, dim2, dim3)}
 }
 }
 
@@ -47,28 +54,29 @@ Repeats the 1st, 2nd and 3rd dimensions of the data by \code{size[[0]]}, \code{s
 
 5D tensor with shape:
 \itemize{
-\item If \code{data_format} is \code{"channels_last"}: \code{(batch, upsampled_dim1, upsampled_dim2, upsampled_dim3, channels)}
-\item If \code{data_format} is \code{"channels_first"}: \code{(batch, channels, upsampled_dim1, upsampled_dim2, upsampled_dim3)}
+\item If \code{data_format} is \code{"channels_last"}: \verb{(batch, upsampled_dim1, upsampled_dim2, upsampled_dim3, channels)}
+\item If \code{data_format} is \code{"channels_first"}: \verb{(batch, channels, upsampled_dim1, upsampled_dim2, upsampled_dim3)}
 }
 }
 
 \seealso{
-Other convolutional layers: \code{\link{layer_conv_1d}},
-  \code{\link{layer_conv_2d_transpose}},
-  \code{\link{layer_conv_2d}},
-  \code{\link{layer_conv_3d_transpose}},
-  \code{\link{layer_conv_3d}},
-  \code{\link{layer_conv_lstm_2d}},
-  \code{\link{layer_cropping_1d}},
-  \code{\link{layer_cropping_2d}},
-  \code{\link{layer_cropping_3d}},
-  \code{\link{layer_depthwise_conv_2d}},
-  \code{\link{layer_separable_conv_1d}},
-  \code{\link{layer_separable_conv_2d}},
-  \code{\link{layer_upsampling_1d}},
-  \code{\link{layer_upsampling_2d}},
-  \code{\link{layer_zero_padding_1d}},
-  \code{\link{layer_zero_padding_2d}},
-  \code{\link{layer_zero_padding_3d}}
+Other convolutional layers: 
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()}
 }
 \concept{convolutional layers}

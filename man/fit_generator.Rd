@@ -4,12 +4,21 @@
 \alias{fit_generator}
 \title{Fits the model on data yielded batch-by-batch by a generator.}
 \usage{
-fit_generator(object, generator, steps_per_epoch, epochs = 1,
+fit_generator(
+  object,
+  generator,
+  steps_per_epoch,
+  epochs = 1,
   verbose = getOption("keras.fit_verbose", default = 1),
-  callbacks = NULL, view_metrics = getOption("keras.view_metrics",
-  default = "auto"), validation_data = NULL, validation_steps = NULL,
-  class_weight = NULL, max_queue_size = 10, workers = 1,
-  initial_epoch = 0)
+  callbacks = NULL,
+  view_metrics = getOption("keras.view_metrics", default = "auto"),
+  validation_data = NULL,
+  validation_steps = NULL,
+  class_weight = NULL,
+  max_queue_size = 10,
+  workers = 1,
+  initial_epoch = 0
+)
 }
 \arguments{
 \item{object}{Keras model object}
@@ -91,19 +100,22 @@ this allows you to do real-time data augmentation on images on CPU in
 parallel to training your model on GPU.
 }
 \seealso{
-Other model functions: \code{\link{compile.keras.engine.training.Model}},
-  \code{\link{evaluate.keras.engine.training.Model}},
-  \code{\link{evaluate_generator}},
-  \code{\link{fit.keras.engine.training.Model}},
-  \code{\link{get_config}}, \code{\link{get_layer}},
-  \code{\link{keras_model_sequential}},
-  \code{\link{keras_model}}, \code{\link{multi_gpu_model}},
-  \code{\link{pop_layer}},
-  \code{\link{predict.keras.engine.training.Model}},
-  \code{\link{predict_generator}},
-  \code{\link{predict_on_batch}},
-  \code{\link{predict_proba}},
-  \code{\link{summary.keras.engine.training.Model}},
-  \code{\link{train_on_batch}}
+Other model functions: 
+\code{\link{compile.keras.engine.training.Model}()},
+\code{\link{evaluate.keras.engine.training.Model}()},
+\code{\link{evaluate_generator}()},
+\code{\link{fit.keras.engine.training.Model}()},
+\code{\link{get_config}()},
+\code{\link{get_layer}()},
+\code{\link{keras_model_sequential}()},
+\code{\link{keras_model}()},
+\code{\link{multi_gpu_model}()},
+\code{\link{pop_layer}()},
+\code{\link{predict.keras.engine.training.Model}()},
+\code{\link{predict_generator}()},
+\code{\link{predict_on_batch}()},
+\code{\link{predict_proba}()},
+\code{\link{summary.keras.engine.training.Model}()},
+\code{\link{train_on_batch}()}
 }
 \concept{model functions}

@@ -4,10 +4,19 @@
 \alias{layer_activation_relu}
 \title{Rectified Linear Unit activation function}
 \usage{
-layer_activation_relu(object, max_value = NULL, negative_slope = 0,
-  threshold = 0, input_shape = NULL, batch_input_shape = NULL,
-  batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
-  weights = NULL)
+layer_activation_relu(
+  object,
+  max_value = NULL,
+  negative_slope = 0,
+  threshold = 0,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -44,12 +53,13 @@ isn't provided.}
 Rectified Linear Unit activation function
 }
 \seealso{
-Other activation layers: \code{\link{layer_activation_elu}},
-  \code{\link{layer_activation_leaky_relu}},
-  \code{\link{layer_activation_parametric_relu}},
-  \code{\link{layer_activation_selu}},
-  \code{\link{layer_activation_softmax}},
-  \code{\link{layer_activation_thresholded_relu}},
-  \code{\link{layer_activation}}
+Other activation layers: 
+\code{\link{layer_activation_elu}()},
+\code{\link{layer_activation_leaky_relu}()},
+\code{\link{layer_activation_parametric_relu}()},
+\code{\link{layer_activation_selu}()},
+\code{\link{layer_activation_softmax}()},
+\code{\link{layer_activation_thresholded_relu}()},
+\code{\link{layer_activation}()}
 }
 \concept{activation layers}

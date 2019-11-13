@@ -4,10 +4,15 @@
 \alias{plot.keras_training_history}
 \title{Plot training history}
 \usage{
-\method{plot}{keras_training_history}(x, y, metrics = NULL,
+\method{plot}{keras_training_history}(
+  x,
+  y,
+  metrics = NULL,
   method = c("auto", "ggplot2", "base"),
   smooth = getOption("keras.plot.history.smooth", TRUE),
-  theme_bw = getOption("keras.plot.history.theme_bw", FALSE), ...)
+  theme_bw = getOption("keras.plot.history.theme_bw", FALSE),
+  ...
+)
 }
 \arguments{
 \item{x}{Training history object returned from

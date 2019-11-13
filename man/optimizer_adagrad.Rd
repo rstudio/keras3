@@ -4,8 +4,13 @@
 \alias{optimizer_adagrad}
 \title{Adagrad optimizer.}
 \usage{
-optimizer_adagrad(lr = 0.01, epsilon = NULL, decay = 0,
-  clipnorm = NULL, clipvalue = NULL)
+optimizer_adagrad(
+  lr = 0.01,
+  epsilon = NULL,
+  decay = 0,
+  clipnorm = NULL,
+  clipvalue = NULL
+)
 }
 \arguments{
 \item{lr}{float >= 0. Learning rate.}
@@ -28,11 +33,12 @@ It is recommended to leave the parameters of this optimizer at their
 default values.
 }
 \seealso{
-Other optimizers: \code{\link{optimizer_adadelta}},
-  \code{\link{optimizer_adamax}},
-  \code{\link{optimizer_adam}},
-  \code{\link{optimizer_nadam}},
-  \code{\link{optimizer_rmsprop}},
-  \code{\link{optimizer_sgd}}
+Other optimizers: 
+\code{\link{optimizer_adadelta}()},
+\code{\link{optimizer_adamax}()},
+\code{\link{optimizer_adam}()},
+\code{\link{optimizer_nadam}()},
+\code{\link{optimizer_rmsprop}()},
+\code{\link{optimizer_sgd}()}
 }
 \concept{optimizers}

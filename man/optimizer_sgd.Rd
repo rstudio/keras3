@@ -4,8 +4,14 @@
 \alias{optimizer_sgd}
 \title{Stochastic gradient descent optimizer}
 \usage{
-optimizer_sgd(lr = 0.01, momentum = 0, decay = 0, nesterov = FALSE,
-  clipnorm = NULL, clipvalue = NULL)
+optimizer_sgd(
+  lr = 0.01,
+  momentum = 0,
+  decay = 0,
+  nesterov = FALSE,
+  clipnorm = NULL,
+  clipvalue = NULL
+)
 }
 \arguments{
 \item{lr}{float >= 0. Learning rate.}
@@ -31,11 +37,12 @@ Stochastic gradient descent optimizer with support for momentum, learning
 rate decay, and Nesterov momentum.
 }
 \seealso{
-Other optimizers: \code{\link{optimizer_adadelta}},
-  \code{\link{optimizer_adagrad}},
-  \code{\link{optimizer_adamax}},
-  \code{\link{optimizer_adam}},
-  \code{\link{optimizer_nadam}},
-  \code{\link{optimizer_rmsprop}}
+Other optimizers: 
+\code{\link{optimizer_adadelta}()},
+\code{\link{optimizer_adagrad}()},
+\code{\link{optimizer_adamax}()},
+\code{\link{optimizer_adam}()},
+\code{\link{optimizer_nadam}()},
+\code{\link{optimizer_rmsprop}()}
 }
 \concept{optimizers}

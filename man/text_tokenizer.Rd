@@ -4,9 +4,14 @@
 \alias{text_tokenizer}
 \title{Text tokenization utility}
 \usage{
-text_tokenizer(num_words = NULL,
+text_tokenizer(
+  num_words = NULL,
   filters = "!\\"#$\%&()*+,-./:;<=>?@[\\\\]^_`{|}~\\t\\n",
-  lower = TRUE, split = " ", char_level = FALSE, oov_token = NULL)
+  lower = TRUE,
+  split = " ",
+  char_level = FALSE,
+  oov_token = NULL
+)
 }
 \arguments{
 \item{num_words}{the maximum number of words to keep, based on word
@@ -54,11 +59,12 @@ was trained on. Only set after \code{fit_text_tokenizer()} is called on the toke
 }
 
 \seealso{
-Other text tokenization: \code{\link{fit_text_tokenizer}},
-  \code{\link{save_text_tokenizer}},
-  \code{\link{sequences_to_matrix}},
-  \code{\link{texts_to_matrix}},
-  \code{\link{texts_to_sequences_generator}},
-  \code{\link{texts_to_sequences}}
+Other text tokenization: 
+\code{\link{fit_text_tokenizer}()},
+\code{\link{save_text_tokenizer}()},
+\code{\link{sequences_to_matrix}()},
+\code{\link{texts_to_matrix}()},
+\code{\link{texts_to_sequences_generator}()},
+\code{\link{texts_to_sequences}()}
 }
 \concept{text tokenization}

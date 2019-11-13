@@ -4,10 +4,19 @@
 \alias{flow_images_from_data}
 \title{Generates batches of augmented/normalized data from image data and labels}
 \usage{
-flow_images_from_data(x, y = NULL, generator = image_data_generator(),
-  batch_size = 32, shuffle = TRUE, sample_weight = NULL,
-  seed = NULL, save_to_dir = NULL, save_prefix = "",
-  save_format = "png", subset = NULL)
+flow_images_from_data(
+  x,
+  y = NULL,
+  generator = image_data_generator(),
+  batch_size = 32,
+  shuffle = TRUE,
+  sample_weight = NULL,
+  seed = NULL,
+  save_to_dir = NULL,
+  save_prefix = "",
+  save_format = "png",
+  subset = NULL
+)
 }
 \arguments{
 \item{x}{data. Should have rank 4. In case of grayscale data, the channels
@@ -46,14 +55,16 @@ Generates batches of augmented/normalized data from image data and labels
 Yields batches indefinitely, in an infinite loop.
 }
 \section{Yields}{
- \code{(x, y)} where \code{x} is an array of image data and \code{y} is a
+ \verb{(x, y)} where \code{x} is an array of image data and \code{y} is a
 array of corresponding labels. The generator loops indefinitely.
 }
 
 \seealso{
-Other image preprocessing: \code{\link{fit_image_data_generator}},
-  \code{\link{flow_images_from_dataframe}},
-  \code{\link{flow_images_from_directory}},
-  \code{\link{image_load}}, \code{\link{image_to_array}}
+Other image preprocessing: 
+\code{\link{fit_image_data_generator}()},
+\code{\link{flow_images_from_dataframe}()},
+\code{\link{flow_images_from_directory}()},
+\code{\link{image_load}()},
+\code{\link{image_to_array}()}
 }
 \concept{image preprocessing}

@@ -4,8 +4,7 @@
 \alias{callback_progbar_logger}
 \title{Callback that prints metrics to stdout.}
 \usage{
-callback_progbar_logger(count_mode = "samples",
-  stateful_metrics = NULL)
+callback_progbar_logger(count_mode = "samples", stateful_metrics = NULL)
 }
 \arguments{
 \item{count_mode}{One of "steps" or "samples". Whether the progress bar
@@ -20,14 +19,15 @@ as-is in \code{on_epoch_end}. All others will be averaged in
 Callback that prints metrics to stdout.
 }
 \seealso{
-Other callbacks: \code{\link{callback_csv_logger}},
-  \code{\link{callback_early_stopping}},
-  \code{\link{callback_lambda}},
-  \code{\link{callback_learning_rate_scheduler}},
-  \code{\link{callback_model_checkpoint}},
-  \code{\link{callback_reduce_lr_on_plateau}},
-  \code{\link{callback_remote_monitor}},
-  \code{\link{callback_tensorboard}},
-  \code{\link{callback_terminate_on_naan}}
+Other callbacks: 
+\code{\link{callback_csv_logger}()},
+\code{\link{callback_early_stopping}()},
+\code{\link{callback_lambda}()},
+\code{\link{callback_learning_rate_scheduler}()},
+\code{\link{callback_model_checkpoint}()},
+\code{\link{callback_reduce_lr_on_plateau}()},
+\code{\link{callback_remote_monitor}()},
+\code{\link{callback_tensorboard}()},
+\code{\link{callback_terminate_on_naan}()}
 }
 \concept{callbacks}

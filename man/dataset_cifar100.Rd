@@ -10,7 +10,7 @@ dataset_cifar100(label_mode = c("fine", "coarse"))
 \item{label_mode}{one of "fine", "coarse".}
 }
 \value{
-Lists of training and test data: \code{train$x, train$y, test$x, test$y}.
+Lists of training and test data: \verb{train$x, train$y, test$x, test$y}.
 
 The \code{x} data is an array of RGB image data with shape (num_samples, 3, 32, 32).
 
@@ -21,10 +21,12 @@ Dataset of 50,000 32x32 color training images, labeled over 100 categories,
 and 10,000 test images.
 }
 \seealso{
-Other datasets: \code{\link{dataset_boston_housing}},
-  \code{\link{dataset_cifar10}},
-  \code{\link{dataset_fashion_mnist}},
-  \code{\link{dataset_imdb}}, \code{\link{dataset_mnist}},
-  \code{\link{dataset_reuters}}
+Other datasets: 
+\code{\link{dataset_boston_housing}()},
+\code{\link{dataset_cifar10}()},
+\code{\link{dataset_fashion_mnist}()},
+\code{\link{dataset_imdb}()},
+\code{\link{dataset_mnist}()},
+\code{\link{dataset_reuters}()}
 }
 \concept{datasets}

@@ -4,11 +4,21 @@
 \alias{layer_embedding}
 \title{Turns positive integers (indexes) into dense vectors of fixed size.}
 \usage{
-layer_embedding(object, input_dim, output_dim,
-  embeddings_initializer = "uniform", embeddings_regularizer = NULL,
-  activity_regularizer = NULL, embeddings_constraint = NULL,
-  mask_zero = FALSE, input_length = NULL, batch_size = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_embedding(
+  object,
+  input_dim,
+  output_dim,
+  embeddings_initializer = "uniform",
+  embeddings_regularizer = NULL,
+  activity_regularizer = NULL,
+  embeddings_constraint = NULL,
+  mask_zero = FALSE,
+  input_length = NULL,
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -55,11 +65,11 @@ For example, \code{list(4L, 20L) -> list(c(0.25, 0.1), c(0.6, -0.2))} This layer
 can only be used as the first layer in a model.
 }
 \section{Input shape}{
- 2D tensor with shape: \code{(batch_size, sequence_length)}.
+ 2D tensor with shape: \verb{(batch_size, sequence_length)}.
 }
 
 \section{Output shape}{
- 3D tensor with shape: \code{(batch_size, sequence_length,  output_dim)}.
+ 3D tensor with shape: \verb{(batch_size, sequence_length,  output_dim)}.
 }
 
 \section{References}{

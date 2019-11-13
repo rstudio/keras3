@@ -4,13 +4,27 @@
 \alias{layer_locally_connected_1d}
 \title{Locally-connected layer for 1D inputs.}
 \usage{
-layer_locally_connected_1d(object, filters, kernel_size, strides = 1L,
-  padding = "valid", data_format = NULL, activation = NULL,
-  use_bias = TRUE, kernel_initializer = "glorot_uniform",
-  bias_initializer = "zeros", kernel_regularizer = NULL,
-  bias_regularizer = NULL, activity_regularizer = NULL,
-  kernel_constraint = NULL, bias_constraint = NULL,
-  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
+layer_locally_connected_1d(
+  object,
+  filters,
+  kernel_size,
+  strides = 1L,
+  padding = "valid",
+  data_format = NULL,
+  activation = NULL,
+  use_bias = TRUE,
+  kernel_initializer = "glorot_uniform",
+  bias_initializer = "zeros",
+  kernel_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  kernel_constraint = NULL,
+  bias_constraint = NULL,
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -30,8 +44,8 @@ may be supported in the future.}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \code{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \code{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
-found in your Keras config file at \code{~/.keras/keras.json}. If you never set
+\code{channels_last} corresponds to inputs with shape \verb{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \verb{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
+found in your Keras config file at \verb{~/.keras/keras.json}. If you never set
 it, then it will be "channels_last".}
 
 \item{activation}{Activation function to use. If you don't specify anything,
@@ -71,14 +85,15 @@ that weights are unshared, that is, a different set of filters is applied at
 each different patch of the input.
 }
 \section{Input shape}{
- 3D tensor with shape: \code{(batch_size, steps, input_dim)}
+ 3D tensor with shape: \verb{(batch_size, steps, input_dim)}
 }
 
 \section{Output shape}{
- 3D tensor with shape: \code{(batch_size, new_steps,  filters)} \code{steps} value might have changed due to padding or strides.
+ 3D tensor with shape: \verb{(batch_size, new_steps,  filters)} \code{steps} value might have changed due to padding or strides.
 }
 
 \seealso{
-Other locally connected layers: \code{\link{layer_locally_connected_2d}}
+Other locally connected layers: 
+\code{\link{layer_locally_connected_2d}()}
 }
 \concept{locally connected layers}

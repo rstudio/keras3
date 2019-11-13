@@ -4,9 +4,17 @@
 \alias{layer_gaussian_noise}
 \title{Apply additive zero-centered Gaussian noise.}
 \usage{
-layer_gaussian_noise(object, stddev, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_gaussian_noise(
+  object,
+  stddev,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -52,7 +60,8 @@ the first layer in a model.
 }
 
 \seealso{
-Other noise layers: \code{\link{layer_alpha_dropout}},
-  \code{\link{layer_gaussian_dropout}}
+Other noise layers: 
+\code{\link{layer_alpha_dropout}()},
+\code{\link{layer_gaussian_dropout}()}
 }
 \concept{noise layers}

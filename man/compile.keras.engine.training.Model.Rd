@@ -4,9 +4,17 @@
 \alias{compile.keras.engine.training.Model}
 \title{Configure a Keras model for training}
 \usage{
-\method{compile}{keras.engine.training.Model}(object, optimizer, loss,
-  metrics = NULL, loss_weights = NULL, sample_weight_mode = NULL,
-  weighted_metrics = NULL, target_tensors = NULL, ...)
+\method{compile}{keras.engine.training.Model}(
+  object,
+  optimizer,
+  loss,
+  metrics = NULL,
+  loss_weights = NULL,
+  sample_weight_mode = NULL,
+  weighted_metrics = NULL,
+  target_tensors = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{Model object to compile.}
@@ -52,19 +60,22 @@ these arguments are passed into \code{tf$Session()$run}.}
 Configure a Keras model for training
 }
 \seealso{
-Other model functions: \code{\link{evaluate.keras.engine.training.Model}},
-  \code{\link{evaluate_generator}},
-  \code{\link{fit.keras.engine.training.Model}},
-  \code{\link{fit_generator}}, \code{\link{get_config}},
-  \code{\link{get_layer}},
-  \code{\link{keras_model_sequential}},
-  \code{\link{keras_model}}, \code{\link{multi_gpu_model}},
-  \code{\link{pop_layer}},
-  \code{\link{predict.keras.engine.training.Model}},
-  \code{\link{predict_generator}},
-  \code{\link{predict_on_batch}},
-  \code{\link{predict_proba}},
-  \code{\link{summary.keras.engine.training.Model}},
-  \code{\link{train_on_batch}}
+Other model functions: 
+\code{\link{evaluate.keras.engine.training.Model}()},
+\code{\link{evaluate_generator}()},
+\code{\link{fit.keras.engine.training.Model}()},
+\code{\link{fit_generator}()},
+\code{\link{get_config}()},
+\code{\link{get_layer}()},
+\code{\link{keras_model_sequential}()},
+\code{\link{keras_model}()},
+\code{\link{multi_gpu_model}()},
+\code{\link{pop_layer}()},
+\code{\link{predict.keras.engine.training.Model}()},
+\code{\link{predict_generator}()},
+\code{\link{predict_on_batch}()},
+\code{\link{predict_proba}()},
+\code{\link{summary.keras.engine.training.Model}()},
+\code{\link{train_on_batch}()}
 }
 \concept{model functions}

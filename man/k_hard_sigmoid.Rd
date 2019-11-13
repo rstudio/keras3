@@ -15,7 +15,7 @@ A tensor.
 \description{
 Faster than sigmoid.
 Returns \code{0.} if \code{x < -2.5}, \code{1.} if \code{x > 2.5}.
-In \code{-2.5 <= x <= 2.5}, returns \code{0.2 * x + 0.5}.
+In \verb{-2.5 <= x <= 2.5}, returns \code{0.2 * x + 0.5}.
 }
 \section{Keras Backend}{
 

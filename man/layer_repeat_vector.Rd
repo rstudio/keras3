@@ -4,8 +4,14 @@
 \alias{layer_repeat_vector}
 \title{Repeats the input n times.}
 \usage{
-layer_repeat_vector(object, n, batch_size = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+layer_repeat_vector(
+  object,
+  n,
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -26,20 +32,25 @@ isn't provided.}
 Repeats the input n times.
 }
 \section{Input shape}{
- 2D tensor of shape \code{(num_samples, features)}.
+ 2D tensor of shape \verb{(num_samples, features)}.
 }
 
 \section{Output shape}{
- 3D tensor of shape \code{(num_samples, n, features)}.
+ 3D tensor of shape \verb{(num_samples, n, features)}.
 }
 
 \seealso{
-Other core layers: \code{\link{layer_activation}},
-  \code{\link{layer_activity_regularization}},
-  \code{\link{layer_dense_features}},
-  \code{\link{layer_dense}}, \code{\link{layer_dropout}},
-  \code{\link{layer_flatten}}, \code{\link{layer_input}},
-  \code{\link{layer_lambda}}, \code{\link{layer_masking}},
-  \code{\link{layer_permute}}, \code{\link{layer_reshape}}
+Other core layers: 
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_dense_features}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_input}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_reshape}()}
 }
 \concept{core layers}

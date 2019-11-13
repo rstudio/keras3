@@ -4,9 +4,17 @@
 \alias{layer_gaussian_dropout}
 \title{Apply multiplicative 1-centered Gaussian noise.}
 \usage{
-layer_gaussian_dropout(object, rate, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_gaussian_dropout(
+  object,
+  rate,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -57,7 +65,8 @@ the first layer in a model.
 }
 
 \seealso{
-Other noise layers: \code{\link{layer_alpha_dropout}},
-  \code{\link{layer_gaussian_noise}}
+Other noise layers: 
+\code{\link{layer_alpha_dropout}()},
+\code{\link{layer_gaussian_noise}()}
 }
 \concept{noise layers}

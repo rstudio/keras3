@@ -4,8 +4,14 @@
 \alias{k_depthwise_conv2d}
 \title{Depthwise 2D convolution with separable filters.}
 \usage{
-k_depthwise_conv2d(x, depthwise_kernel, strides = c(1, 1),
-  padding = "valid", data_format = NULL, dilation_rate = c(1, 1))
+k_depthwise_conv2d(
+  x,
+  depthwise_kernel,
+  strides = c(1, 1),
+  padding = "valid",
+  data_format = NULL,
+  dilation_rate = c(1, 1)
+)
 }
 \arguments{
 \item{x}{input tensor}

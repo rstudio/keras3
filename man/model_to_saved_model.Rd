@@ -4,8 +4,14 @@
 \alias{model_to_saved_model}
 \title{Export to Saved Model format}
 \usage{
-model_to_saved_model(model, saved_model_path, custom_objects = NULL,
-  as_text = FALSE, input_signature = NULL, serving_only = FALSE)
+model_to_saved_model(
+  model,
+  saved_model_path,
+  custom_objects = NULL,
+  as_text = FALSE,
+  input_signature = NULL,
+  serving_only = FALSE
+)
 }
 \arguments{
 \item{model}{A Keras model to be saved. If the model is subclassed, the flag
@@ -36,6 +42,7 @@ This functionality is experimental and only works with TensorFlow
 version >= "2.0".
 }
 \seealso{
-Other saved_model: \code{\link{model_from_saved_model}}
+Other saved_model: 
+\code{\link{model_from_saved_model}()}
 }
 \concept{saved_model}

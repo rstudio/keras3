@@ -4,9 +4,18 @@
 \alias{bidirectional}
 \title{Bidirectional wrapper for RNNs.}
 \usage{
-bidirectional(object, layer, merge_mode = "concat", input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+bidirectional(
+  object,
+  layer,
+  merge_mode = "concat",
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -43,6 +52,7 @@ isn't provided.}
 Bidirectional wrapper for RNNs.
 }
 \seealso{
-Other layer wrappers: \code{\link{time_distributed}}
+Other layer wrappers: 
+\code{\link{time_distributed}()}
 }
 \concept{layer wrappers}

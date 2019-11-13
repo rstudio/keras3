@@ -4,9 +4,15 @@
 \alias{layer_zero_padding_3d}
 \title{Zero-padding layer for 3D data (spatial or spatio-temporal).}
 \usage{
-layer_zero_padding_3d(object, padding = c(1L, 1L, 1L),
-  data_format = NULL, batch_size = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+layer_zero_padding_3d(
+  object,
+  padding = c(1L, 1L, 1L),
+  data_format = NULL,
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -15,15 +21,15 @@ layer_zero_padding_3d(object, padding = c(1L, 1L, 1L),
 \itemize{
 \item If int: the same symmetric padding is applied to width and height.
 \item If list of 3 ints: interpreted as three different symmetric padding values:
-\code{(symmetric_dim1_pad, symmetric_dim2_pad, symmetric_dim3_pad)}.
-\item If list of 3 lists of 2 ints: interpreted as \code{((left_dim1_pad, right_dim1_pad), (left_dim2_pad, right_dim2_pad), (left_dim3_pad, right_dim3_pad))}
+\verb{(symmetric_dim1_pad, symmetric_dim2_pad, symmetric_dim3_pad)}.
+\item If list of 3 lists of 2 ints: interpreted as \verb{((left_dim1_pad, right_dim1_pad), (left_dim2_pad, right_dim2_pad), (left_dim3_pad, right_dim3_pad))}
 }}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \code{(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)} while \code{channels_first} corresponds
-to inputs with shape \code{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}. It defaults to the \code{image_data_format} value found in your
-Keras config file at \code{~/.keras/keras.json}. If you never set it, then it
+\code{channels_last} corresponds to inputs with shape \verb{(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)} while \code{channels_first} corresponds
+to inputs with shape \verb{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}. It defaults to the \code{image_data_format} value found in your
+Keras config file at \verb{~/.keras/keras.json}. If you never set it, then it
 will be "channels_last".}
 
 \item{batch_size}{Fixed batch size for layer}
@@ -42,36 +48,37 @@ Zero-padding layer for 3D data (spatial or spatio-temporal).
 \section{Input shape}{
  5D tensor with shape:
 \itemize{
-\item If \code{data_format} is \code{"channels_last"}: \code{(batch, first_axis_to_pad, second_axis_to_pad, third_axis_to_pad, depth)}
-\item If \code{data_format} is \code{"channels_first"}: \code{(batch, depth, first_axis_to_pad, second_axis_to_pad, third_axis_to_pad)}
+\item If \code{data_format} is \code{"channels_last"}: \verb{(batch, first_axis_to_pad, second_axis_to_pad, third_axis_to_pad, depth)}
+\item If \code{data_format} is \code{"channels_first"}: \verb{(batch, depth, first_axis_to_pad, second_axis_to_pad, third_axis_to_pad)}
 }
 }
 
 \section{Output shape}{
  5D tensor with shape:
 \itemize{
-\item If \code{data_format} is \code{"channels_last"}: \code{(batch, first_padded_axis, second_padded_axis, third_axis_to_pad, depth)}
-\item If \code{data_format} is \code{"channels_first"}: \code{(batch, depth, first_padded_axis, second_padded_axis, third_axis_to_pad)}
+\item If \code{data_format} is \code{"channels_last"}: \verb{(batch, first_padded_axis, second_padded_axis, third_axis_to_pad, depth)}
+\item If \code{data_format} is \code{"channels_first"}: \verb{(batch, depth, first_padded_axis, second_padded_axis, third_axis_to_pad)}
 }
 }
 
 \seealso{
-Other convolutional layers: \code{\link{layer_conv_1d}},
-  \code{\link{layer_conv_2d_transpose}},
-  \code{\link{layer_conv_2d}},
-  \code{\link{layer_conv_3d_transpose}},
-  \code{\link{layer_conv_3d}},
-  \code{\link{layer_conv_lstm_2d}},
-  \code{\link{layer_cropping_1d}},
-  \code{\link{layer_cropping_2d}},
-  \code{\link{layer_cropping_3d}},
-  \code{\link{layer_depthwise_conv_2d}},
-  \code{\link{layer_separable_conv_1d}},
-  \code{\link{layer_separable_conv_2d}},
-  \code{\link{layer_upsampling_1d}},
-  \code{\link{layer_upsampling_2d}},
-  \code{\link{layer_upsampling_3d}},
-  \code{\link{layer_zero_padding_1d}},
-  \code{\link{layer_zero_padding_2d}}
+Other convolutional layers: 
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()}
 }
 \concept{convolutional layers}

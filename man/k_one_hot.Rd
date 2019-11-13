@@ -7,13 +7,13 @@
 k_one_hot(indices, num_classes)
 }
 \arguments{
-\item{indices}{nD integer tensor of shape \code{(batch_size, dim1, dim2, ... dim(n-1))}}
+\item{indices}{nD integer tensor of shape \verb{(batch_size, dim1, dim2, ... dim(n-1))}}
 
 \item{num_classes}{Integer, number of classes to consider.}
 }
 \value{
 (n + 1)D one hot representation of the input with shape
-\code{(batch_size, dim1, dim2, ... dim(n-1), num_classes)}
+\verb{(batch_size, dim1, dim2, ... dim(n-1), num_classes)}
 }
 \description{
 Computes the one-hot representation of an integer tensor.

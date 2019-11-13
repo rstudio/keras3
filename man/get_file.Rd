@@ -4,12 +4,19 @@
 \alias{get_file}
 \title{Downloads a file from a URL if it not already in the cache.}
 \usage{
-get_file(fname, origin, file_hash = NULL, cache_subdir = "datasets",
-  hash_algorithm = "auto", extract = FALSE, archive_format = "auto",
-  cache_dir = NULL)
+get_file(
+  fname,
+  origin,
+  file_hash = NULL,
+  cache_subdir = "datasets",
+  hash_algorithm = "auto",
+  extract = FALSE,
+  archive_format = "auto",
+  cache_dir = NULL
+)
 }
 \arguments{
-\item{fname}{Name of the file. If an absolute path \code{/path/to/file.txt} is
+\item{fname}{Name of the file. If an absolute path \verb{/path/to/file.txt} is
 specified the file will be saved at that location.}
 
 \item{origin}{Original URL of the file.}
@@ -18,7 +25,7 @@ specified the file will be saved at that location.}
 sha256 and md5 hash algorithms are both supported.}
 
 \item{cache_subdir}{Subdirectory under the Keras cache dir where the file is
-saved. If an absolute path \code{/path/to/folder} is specified the file will be
+saved. If an absolute path \verb{/path/to/folder} is specified the file will be
 saved at that location.}
 
 \item{hash_algorithm}{Select the hash algorithm to verify the file. options

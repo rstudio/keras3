@@ -4,8 +4,15 @@
 \alias{layer_concatenate}
 \title{Layer that concatenates a list of inputs.}
 \usage{
-layer_concatenate(inputs, axis = -1, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_concatenate(
+  inputs,
+  axis = -1,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{inputs}{A list of input tensors (at least 2).}
@@ -34,10 +41,13 @@ concatenation axis, and returns a single tensor, the concatenation of all
 inputs.
 }
 \seealso{
-Other merge layers: \code{\link{layer_add}},
-  \code{\link{layer_average}}, \code{\link{layer_dot}},
-  \code{\link{layer_maximum}}, \code{\link{layer_minimum}},
-  \code{\link{layer_multiply}},
-  \code{\link{layer_subtract}}
+Other merge layers: 
+\code{\link{layer_add}()},
+\code{\link{layer_average}()},
+\code{\link{layer_dot}()},
+\code{\link{layer_maximum}()},
+\code{\link{layer_minimum}()},
+\code{\link{layer_multiply}()},
+\code{\link{layer_subtract}()}
 }
 \concept{merge layers}
