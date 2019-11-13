@@ -4,15 +4,31 @@
 \alias{layer_conv_3d_transpose}
 \title{Transposed 3D convolution layer (sometimes called Deconvolution).}
 \usage{
-layer_conv_3d_transpose(object, filters, kernel_size, strides = c(1, 1,
-  1), padding = "valid", output_padding = NULL, data_format = NULL,
-  activation = NULL, use_bias = TRUE,
-  kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
-  kernel_regularizer = NULL, bias_regularizer = NULL,
-  activity_regularizer = NULL, kernel_constraint = NULL,
-  bias_constraint = NULL, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_conv_3d_transpose(
+  object,
+  filters,
+  kernel_size,
+  strides = c(1, 1, 1),
+  padding = "valid",
+  output_padding = NULL,
+  data_format = NULL,
+  activation = NULL,
+  use_bias = TRUE,
+  kernel_initializer = "glorot_uniform",
+  bias_initializer = "zeros",
+  kernel_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  kernel_constraint = NULL,
+  bias_constraint = NULL,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -40,10 +56,10 @@ If set to \code{NULL} (default), the output shape is inferred.}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \code{(batch, depth, height, width, channels)} while \code{channels_first} corresponds to inputs with shape
-\code{(batch, channels, depth, height, width)}. It defaults to the
+\code{channels_last} corresponds to inputs with shape \verb{(batch, depth, height, width, channels)} while \code{channels_first} corresponds to inputs with shape
+\verb{(batch, channels, depth, height, width)}. It defaults to the
 \code{image_data_format} value found in your Keras config file at
-\code{~/.keras/keras.json}. If you never set it, then it will be
+\verb{~/.keras/keras.json}. If you never set it, then it will be
 "channels_last".}
 
 \item{activation}{Activation function to use. If you don't specify anything, no
@@ -111,21 +127,23 @@ When using this layer as the first layer in a model, provide the keyword argumen
 }
 
 \seealso{
-Other convolutional layers: \code{\link{layer_conv_1d}},
-  \code{\link{layer_conv_2d_transpose}},
-  \code{\link{layer_conv_2d}}, \code{\link{layer_conv_3d}},
-  \code{\link{layer_conv_lstm_2d}},
-  \code{\link{layer_cropping_1d}},
-  \code{\link{layer_cropping_2d}},
-  \code{\link{layer_cropping_3d}},
-  \code{\link{layer_depthwise_conv_2d}},
-  \code{\link{layer_separable_conv_1d}},
-  \code{\link{layer_separable_conv_2d}},
-  \code{\link{layer_upsampling_1d}},
-  \code{\link{layer_upsampling_2d}},
-  \code{\link{layer_upsampling_3d}},
-  \code{\link{layer_zero_padding_1d}},
-  \code{\link{layer_zero_padding_2d}},
-  \code{\link{layer_zero_padding_3d}}
+Other convolutional layers: 
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()}
 }
 \concept{convolutional layers}

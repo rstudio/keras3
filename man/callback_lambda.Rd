@@ -4,14 +4,24 @@
 \alias{callback_lambda}
 \title{Create a custom callback}
 \usage{
-callback_lambda(on_epoch_begin = NULL, on_epoch_end = NULL,
-  on_batch_begin = NULL, on_batch_end = NULL,
-  on_train_batch_begin = NULL, on_train_batch_end = NULL,
-  on_train_begin = NULL, on_train_end = NULL,
-  on_predict_batch_begin = NULL, on_predict_batch_end = NULL,
-  on_predict_begin = NULL, on_predict_end = NULL,
-  on_test_batch_begin = NULL, on_test_batch_end = NULL,
-  on_test_begin = NULL, on_test_end = NULL)
+callback_lambda(
+  on_epoch_begin = NULL,
+  on_epoch_end = NULL,
+  on_batch_begin = NULL,
+  on_batch_end = NULL,
+  on_train_batch_begin = NULL,
+  on_train_batch_end = NULL,
+  on_train_begin = NULL,
+  on_train_end = NULL,
+  on_predict_batch_begin = NULL,
+  on_predict_batch_end = NULL,
+  on_predict_begin = NULL,
+  on_predict_end = NULL,
+  on_test_batch_begin = NULL,
+  on_test_batch_end = NULL,
+  on_test_begin = NULL,
+  on_test_end = NULL
+)
 }
 \arguments{
 \item{on_epoch_begin}{called at the beginning of every epoch.}
@@ -56,20 +66,21 @@ the appropriate time. Note that the callbacks expects positional arguments,
 as:
 \itemize{
 \item \code{on_epoch_begin} and \code{on_epoch_end} expect two positional arguments: \code{epoch}, \code{logs}
-\item \code{on_batch_*}, \code{on_train_batch_*}, \code{on_predict_batch_*} and \code{on_test_batch_*}, expect
+\item \verb{on_batch_*}, \verb{on_train_batch_*}, \verb{on_predict_batch_*} and \verb{on_test_batch_*}, expect
 two positional arguments: \code{batch}, \code{logs}
-\item \code{on_train_*}, \code{on_test_*} and \code{on_predict_*} expect one positional argument: \code{logs}
+\item \verb{on_train_*}, \verb{on_test_*} and \verb{on_predict_*} expect one positional argument: \code{logs}
 }
 }
 \seealso{
-Other callbacks: \code{\link{callback_csv_logger}},
-  \code{\link{callback_early_stopping}},
-  \code{\link{callback_learning_rate_scheduler}},
-  \code{\link{callback_model_checkpoint}},
-  \code{\link{callback_progbar_logger}},
-  \code{\link{callback_reduce_lr_on_plateau}},
-  \code{\link{callback_remote_monitor}},
-  \code{\link{callback_tensorboard}},
-  \code{\link{callback_terminate_on_naan}}
+Other callbacks: 
+\code{\link{callback_csv_logger}()},
+\code{\link{callback_early_stopping}()},
+\code{\link{callback_learning_rate_scheduler}()},
+\code{\link{callback_model_checkpoint}()},
+\code{\link{callback_progbar_logger}()},
+\code{\link{callback_reduce_lr_on_plateau}()},
+\code{\link{callback_remote_monitor}()},
+\code{\link{callback_tensorboard}()},
+\code{\link{callback_terminate_on_naan}()}
 }
 \concept{callbacks}

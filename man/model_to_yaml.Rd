@@ -22,11 +22,12 @@ Save and re-load models configurations as YAML Note that the representation
 does not include the weights, only the architecture.
 }
 \seealso{
-Other model persistence: \code{\link{get_weights}},
-  \code{\link{model_to_json}},
-  \code{\link{save_model_hdf5}},
-  \code{\link{save_model_tf}},
-  \code{\link{save_model_weights_hdf5}},
-  \code{\link{serialize_model}}
+Other model persistence: 
+\code{\link{get_weights}()},
+\code{\link{model_to_json}()},
+\code{\link{save_model_hdf5}()},
+\code{\link{save_model_tf}()},
+\code{\link{save_model_weights_hdf5}()},
+\code{\link{serialize_model}()}
 }
 \concept{model persistence}

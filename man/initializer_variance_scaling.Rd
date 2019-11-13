@@ -4,9 +4,12 @@
 \alias{initializer_variance_scaling}
 \title{Initializer capable of adapting its scale to the shape of weights.}
 \usage{
-initializer_variance_scaling(scale = 1, mode = c("fan_in", "fan_out",
-  "fan_avg"), distribution = c("normal", "uniform", "truncated_normal",
-  "untruncated_normal"), seed = NULL)
+initializer_variance_scaling(
+  scale = 1,
+  mode = c("fan_in", "fan_out", "fan_avg"),
+  distribution = c("normal", "uniform", "truncated_normal", "untruncated_normal"),
+  seed = NULL
+)
 }
 \arguments{
 \item{scale}{Scaling factor (positive float).}
@@ -30,22 +33,23 @@ distribution centered on zero, with \code{stddev = sqrt(scale / n)} where n is:
 }
 \details{
 With \code{distribution="uniform"}, samples are drawn from a uniform distribution
-within \code{-limit, limit}, with \code{limit = sqrt(3 * scale / n)}.
+within \verb{-limit, limit}, with \code{limit = sqrt(3 * scale / n)}.
 }
 \seealso{
-Other initializers: \code{\link{initializer_constant}},
-  \code{\link{initializer_glorot_normal}},
-  \code{\link{initializer_glorot_uniform}},
-  \code{\link{initializer_he_normal}},
-  \code{\link{initializer_he_uniform}},
-  \code{\link{initializer_identity}},
-  \code{\link{initializer_lecun_normal}},
-  \code{\link{initializer_lecun_uniform}},
-  \code{\link{initializer_ones}},
-  \code{\link{initializer_orthogonal}},
-  \code{\link{initializer_random_normal}},
-  \code{\link{initializer_random_uniform}},
-  \code{\link{initializer_truncated_normal}},
-  \code{\link{initializer_zeros}}
+Other initializers: 
+\code{\link{initializer_constant}()},
+\code{\link{initializer_glorot_normal}()},
+\code{\link{initializer_glorot_uniform}()},
+\code{\link{initializer_he_normal}()},
+\code{\link{initializer_he_uniform}()},
+\code{\link{initializer_identity}()},
+\code{\link{initializer_lecun_normal}()},
+\code{\link{initializer_lecun_uniform}()},
+\code{\link{initializer_ones}()},
+\code{\link{initializer_orthogonal}()},
+\code{\link{initializer_random_normal}()},
+\code{\link{initializer_random_uniform}()},
+\code{\link{initializer_truncated_normal}()},
+\code{\link{initializer_zeros}()}
 }
 \concept{initializers}

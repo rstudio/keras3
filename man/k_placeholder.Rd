@@ -4,8 +4,13 @@
 \alias{k_placeholder}
 \title{Instantiates a placeholder tensor and returns it.}
 \usage{
-k_placeholder(shape = NULL, ndim = NULL, dtype = NULL,
-  sparse = FALSE, name = NULL)
+k_placeholder(
+  shape = NULL,
+  ndim = NULL,
+  dtype = NULL,
+  sparse = FALSE,
+  name = NULL
+)
 }
 \arguments{
 \item{shape}{Shape of the placeholder (integer list, may include \code{NULL}

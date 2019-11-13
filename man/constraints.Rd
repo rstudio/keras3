@@ -14,18 +14,17 @@ constraint_nonneg()
 
 constraint_unitnorm(axis = 0)
 
-constraint_minmaxnorm(min_value = 0, max_value = 1, rate = 1,
-  axis = 0)
+constraint_minmaxnorm(min_value = 0, max_value = 1, rate = 1, axis = 0)
 }
 \arguments{
 \item{max_value}{The maximum norm for the incoming weights.}
 
 \item{axis}{The axis along which to calculate weight norms. For instance, in
-a dense layer the weight matrix has shape \code{input_dim, output_dim}, set
-\code{axis} to \code{0} to constrain each weight vector of length \code{input_dim,}. In a
+a dense layer the weight matrix has shape \verb{input_dim, output_dim}, set
+\code{axis} to \code{0} to constrain each weight vector of length \verb{input_dim,}. In a
 convolution 2D layer with \code{dim_ordering="tf"}, the weight tensor has shape
-\code{rows, cols, input_depth, output_depth}, set \code{axis} to \code{c(0, 1, 2)} to
-constrain the weights of each filter tensor of size \code{rows, cols, input_depth}.}
+\verb{rows, cols, input_depth, output_depth}, set \code{axis} to \code{c(0, 1, 2)} to
+constrain the weights of each filter tensor of size \verb{rows, cols, input_depth}.}
 
 \item{min_value}{The minimum norm for the incoming weights.}
 
@@ -56,13 +55,13 @@ You can implement your own constraint functions in R. A custom
 constraint is an R function that takes weights (\code{w}) as input
 and returns modified weights. Note that keras \code{\link[=backend]{backend()}} tensor
 functions (e.g. \code{\link[=k_greater_equal]{k_greater_equal()}}) should be used in the
-implementation of custom constraints. For example:\preformatted{nonneg_constraint <- function(w) {
+implementation of custom constraints. For example:\if{html}{\out{<div class="r">}}\preformatted{nonneg_constraint <- function(w) \{
   w * k_cast(k_greater_equal(w, 0), k_floatx())
-}
+\}
 
 layer_dense(units = 32, input_shape = c(784), 
             kernel_constraint = nonneg_constraint)
-}
+}\if{html}{\out{</div>}}
 
 Note that models which use custom constraints cannot be serialized using
 \code{\link[=save_model_hdf5]{save_model_hdf5()}}. Rather, the weights of the model should be saved

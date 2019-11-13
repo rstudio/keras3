@@ -42,14 +42,14 @@ conv_base <- application_vgg16(
 freeze_weights(conv_base)
 
 # create a composite model that includes the base + more layers
-model <- keras_model_sequential() \%>\%
-  conv_base \%>\%
-  layer_flatten() \%>\%
-  layer_dense(units = 256, activation = "relu") \%>\%
+model <- keras_model_sequential() %>%
+  conv_base %>%
+  layer_flatten() %>%
+  layer_dense(units = 256, activation = "relu") %>%
   layer_dense(units = 1, activation = "sigmoid")
 
 # compile
-model \%>\% compile(
+model %>% compile(
   loss = "binary_crossentropy",
   optimizer = optimizer_rmsprop(lr = 2e-5),
   metrics = c("accuracy")
@@ -59,7 +59,7 @@ model \%>\% compile(
 unfreeze_weights(conv_base, from = "block5_conv1")
 
 # compile again since we froze or unfroze weights
-model \%>\% compile(
+model %>% compile(
   loss = "binary_crossentropy",
   optimizer = optimizer_rmsprop(lr = 2e-5),
   metrics = c("accuracy")

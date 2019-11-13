@@ -17,7 +17,7 @@ A tensor, dot product of \code{x} and \code{y}.
 \description{
 When attempting to multiply a nD tensor
 with a nD tensor, it reproduces the Theano behavior.
-(e.g. \code{(2, 3) * (4, 3, 5) -> (2, 4, 5)})
+(e.g. \verb{(2, 3) * (4, 3, 5) -> (2, 4, 5)})
 }
 \section{Keras Backend}{
 

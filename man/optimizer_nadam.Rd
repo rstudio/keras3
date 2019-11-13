@@ -4,9 +4,15 @@
 \alias{optimizer_nadam}
 \title{Nesterov Adam optimizer}
 \usage{
-optimizer_nadam(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999,
-  epsilon = NULL, schedule_decay = 0.004, clipnorm = NULL,
-  clipvalue = NULL)
+optimizer_nadam(
+  lr = 0.002,
+  beta_1 = 0.9,
+  beta_2 = 0.999,
+  epsilon = NULL,
+  schedule_decay = 0.004,
+  clipnorm = NULL,
+  clipvalue = NULL
+)
 }
 \arguments{
 \item{lr}{float >= 0. Learning rate.}
@@ -39,11 +45,12 @@ values.
 \seealso{
 \href{http://www.cs.toronto.edu/~fritz/absps/momentum.pdf}{On the importance of initialization and momentum in deep learning}.
 
-Other optimizers: \code{\link{optimizer_adadelta}},
-  \code{\link{optimizer_adagrad}},
-  \code{\link{optimizer_adamax}},
-  \code{\link{optimizer_adam}},
-  \code{\link{optimizer_rmsprop}},
-  \code{\link{optimizer_sgd}}
+Other optimizers: 
+\code{\link{optimizer_adadelta}()},
+\code{\link{optimizer_adagrad}()},
+\code{\link{optimizer_adamax}()},
+\code{\link{optimizer_adam}()},
+\code{\link{optimizer_rmsprop}()},
+\code{\link{optimizer_sgd}()}
 }
 \concept{optimizers}

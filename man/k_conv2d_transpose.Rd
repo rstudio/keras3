@@ -4,8 +4,14 @@
 \alias{k_conv2d_transpose}
 \title{2D deconvolution (i.e. transposed convolution).}
 \usage{
-k_conv2d_transpose(x, kernel, output_shape, strides = c(1, 1),
-  padding = "valid", data_format = NULL)
+k_conv2d_transpose(
+  x,
+  kernel,
+  output_shape,
+  strides = c(1, 1),
+  padding = "valid",
+  data_format = NULL
+)
 }
 \arguments{
 \item{x}{Tensor or variable.}

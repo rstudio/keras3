@@ -4,8 +4,15 @@
 \alias{layer_spatial_dropout_3d}
 \title{Spatial 3D version of Dropout.}
 \usage{
-layer_spatial_dropout_3d(object, rate, data_format = NULL,
-  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL)
+layer_spatial_dropout_3d(
+  object,
+  rate,
+  data_format = NULL,
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -15,7 +22,7 @@ layer_spatial_dropout_3d(object, rate, data_format = NULL,
 \item{data_format}{'channels_first' or 'channels_last'. In 'channels_first'
 mode, the channels dimension (the depth) is at index 1, in 'channels_last'
 mode is it at index 4. It defaults to the \code{image_data_format} value found
-in your Keras config file at \code{~/.keras/keras.json}. If you never set it,
+in your Keras config file at \verb{~/.keras/keras.json}. If you never set it,
 then it will be "channels_last".}
 
 \item{batch_size}{Fixed batch size for layer}
@@ -38,7 +45,7 @@ this case, \code{layer_spatial_dropout_3d} will help promote independence betwee
 feature maps and should be used instead.
 }
 \section{Input shape}{
- 5D tensor with shape: \code{(samples, channels, dim1, dim2, dim3)} if data_format='channels_first' or 5D tensor with shape: \code{(samples, dim1, dim2, dim3, channels)} if data_format='channels_last'.
+ 5D tensor with shape: \verb{(samples, channels, dim1, dim2, dim3)} if data_format='channels_first' or 5D tensor with shape: \verb{(samples, dim1, dim2, dim3, channels)} if data_format='channels_last'.
 }
 
 \section{Output shape}{
@@ -50,8 +57,9 @@ feature maps and should be used instead.
 }
 
 \seealso{
-Other dropout layers: \code{\link{layer_dropout}},
-  \code{\link{layer_spatial_dropout_1d}},
-  \code{\link{layer_spatial_dropout_2d}}
+Other dropout layers: 
+\code{\link{layer_dropout}()},
+\code{\link{layer_spatial_dropout_1d}()},
+\code{\link{layer_spatial_dropout_2d}()}
 }
 \concept{dropout layers}

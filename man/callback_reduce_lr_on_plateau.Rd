@@ -4,9 +4,16 @@
 \alias{callback_reduce_lr_on_plateau}
 \title{Reduce learning rate when a metric has stopped improving.}
 \usage{
-callback_reduce_lr_on_plateau(monitor = "val_loss", factor = 0.1,
-  patience = 10, verbose = 0, mode = c("auto", "min", "max"),
-  min_delta = 1e-04, cooldown = 0, min_lr = 0)
+callback_reduce_lr_on_plateau(
+  monitor = "val_loss",
+  factor = 0.1,
+  patience = 10,
+  verbose = 0,
+  mode = c("auto", "min", "max"),
+  min_delta = 1e-04,
+  cooldown = 0,
+  min_lr = 0
+)
 }
 \arguments{
 \item{monitor}{quantity to be monitored.}
@@ -41,14 +48,15 @@ learning stagnates. This callback monitors a quantity and if no improvement
 is seen for a 'patience' number of epochs, the learning rate is reduced.
 }
 \seealso{
-Other callbacks: \code{\link{callback_csv_logger}},
-  \code{\link{callback_early_stopping}},
-  \code{\link{callback_lambda}},
-  \code{\link{callback_learning_rate_scheduler}},
-  \code{\link{callback_model_checkpoint}},
-  \code{\link{callback_progbar_logger}},
-  \code{\link{callback_remote_monitor}},
-  \code{\link{callback_tensorboard}},
-  \code{\link{callback_terminate_on_naan}}
+Other callbacks: 
+\code{\link{callback_csv_logger}()},
+\code{\link{callback_early_stopping}()},
+\code{\link{callback_lambda}()},
+\code{\link{callback_learning_rate_scheduler}()},
+\code{\link{callback_model_checkpoint}()},
+\code{\link{callback_progbar_logger}()},
+\code{\link{callback_remote_monitor}()},
+\code{\link{callback_tensorboard}()},
+\code{\link{callback_terminate_on_naan}()}
 }
 \concept{callbacks}

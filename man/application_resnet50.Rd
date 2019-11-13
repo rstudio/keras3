@@ -4,9 +4,14 @@
 \alias{application_resnet50}
 \title{ResNet50 model for Keras.}
 \usage{
-application_resnet50(include_top = TRUE, weights = "imagenet",
-  input_tensor = NULL, input_shape = NULL, pooling = NULL,
-  classes = 1000)
+application_resnet50(
+  include_top = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  input_shape = NULL,
+  pooling = NULL,
+  classes = 1000
+)
 }
 \arguments{
 \item{include_top}{whether to include the fully-connected layer at the top of
@@ -19,9 +24,9 @@ weights), or the path to the weights file to be loaded.}
 model.}
 
 \item{input_shape}{optional shape list, only to be specified if \code{include_top}
-is FALSE (otherwise the input shape has to be \code{(224, 224, 3)}. It should
+is FALSE (otherwise the input shape has to be \verb{(224, 224, 3)}. It should
 have exactly 3 inputs channels, and width and height should be no smaller
-than 32. E.g. \code{(200, 200, 3)} would be one valid value.}
+than 32. E.g. \verb{(200, 200, 3)} would be one valid value.}
 
 \item{pooling}{Optional pooling mode for feature extraction when
 \code{include_top} is \code{FALSE}.
@@ -72,7 +77,7 @@ x <- array_reshape(x, c(1, dim(x)))
 x <- imagenet_preprocess_input(x)
 
 # make predictions then decode and print them
-preds <- model \%>\% predict(x)
+preds <- model %>% predict(x)
 imagenet_decode_predictions(preds, top = 3)[[1]]
 }   
 }

@@ -4,9 +4,16 @@
 \alias{callback_model_checkpoint}
 \title{Save the model after every epoch.}
 \usage{
-callback_model_checkpoint(filepath, monitor = "val_loss", verbose = 0,
-  save_best_only = FALSE, save_weights_only = FALSE, mode = c("auto",
-  "min", "max"), period = NULL, save_freq = "epoch")
+callback_model_checkpoint(
+  filepath,
+  monitor = "val_loss",
+  verbose = 0,
+  save_best_only = FALSE,
+  save_weights_only = FALSE,
+  mode = c("auto", "min", "max"),
+  period = NULL,
+  save_freq = "epoch"
+)
 }
 \arguments{
 \item{filepath}{string, path to save the model file.}
@@ -40,25 +47,26 @@ the metrics get reset every epoch). Defaults to \code{'epoch'}}
 \description{
 \code{filepath} can contain named formatting options, which will be filled the
 value of \code{epoch} and keys in \code{logs} (passed in \code{on_epoch_end}). For example:
-if \code{filepath} is \code{weights.{epoch:02d}-{val_loss:.2f}.hdf5}, then the model
+if \code{filepath} is \verb{weights.\{epoch:02d\}-\{val_loss:.2f\}.hdf5}, then the model
 checkpoints will be saved with the epoch number and the validation loss in
 the filename.
 }
 \section{For example}{
  if \code{filepath} is
-\code{weights.{epoch:02d}-{val_loss:.2f}.hdf5},: then the model checkpoints will
+\verb{weights.\{epoch:02d\}-\{val_loss:.2f\}.hdf5},: then the model checkpoints will
 be saved with the epoch number and the validation loss in the filename.
 }
 
 \seealso{
-Other callbacks: \code{\link{callback_csv_logger}},
-  \code{\link{callback_early_stopping}},
-  \code{\link{callback_lambda}},
-  \code{\link{callback_learning_rate_scheduler}},
-  \code{\link{callback_progbar_logger}},
-  \code{\link{callback_reduce_lr_on_plateau}},
-  \code{\link{callback_remote_monitor}},
-  \code{\link{callback_tensorboard}},
-  \code{\link{callback_terminate_on_naan}}
+Other callbacks: 
+\code{\link{callback_csv_logger}()},
+\code{\link{callback_early_stopping}()},
+\code{\link{callback_lambda}()},
+\code{\link{callback_learning_rate_scheduler}()},
+\code{\link{callback_progbar_logger}()},
+\code{\link{callback_reduce_lr_on_plateau}()},
+\code{\link{callback_remote_monitor}()},
+\code{\link{callback_tensorboard}()},
+\code{\link{callback_terminate_on_naan}()}
 }
 \concept{callbacks}

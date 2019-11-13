@@ -4,8 +4,14 @@
 \alias{layer_spatial_dropout_1d}
 \title{Spatial 1D version of Dropout.}
 \usage{
-layer_spatial_dropout_1d(object, rate, batch_size = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+layer_spatial_dropout_1d(
+  object,
+  rate,
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -32,7 +38,7 @@ this case, \code{layer_spatial_dropout_1d} will help promote independence betwee
 feature maps and should be used instead.
 }
 \section{Input shape}{
- 3D tensor with shape: \code{(samples, timesteps, channels)}
+ 3D tensor with shape: \verb{(samples, timesteps, channels)}
 }
 
 \section{Output shape}{
@@ -44,8 +50,9 @@ feature maps and should be used instead.
 }
 
 \seealso{
-Other dropout layers: \code{\link{layer_dropout}},
-  \code{\link{layer_spatial_dropout_2d}},
-  \code{\link{layer_spatial_dropout_3d}}
+Other dropout layers: 
+\code{\link{layer_dropout}()},
+\code{\link{layer_spatial_dropout_2d}()},
+\code{\link{layer_spatial_dropout_3d}()}
 }
 \concept{dropout layers}

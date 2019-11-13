@@ -4,9 +4,16 @@
 \alias{layer_max_pooling_1d}
 \title{Max pooling operation for temporal data.}
 \usage{
-layer_max_pooling_1d(object, pool_size = 2L, strides = NULL,
-  padding = "valid", batch_size = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+layer_max_pooling_1d(
+  object,
+  pool_size = 2L,
+  strides = NULL,
+  padding = "valid",
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -32,24 +39,25 @@ isn't provided.}
 Max pooling operation for temporal data.
 }
 \section{Input shape}{
- 3D tensor with shape: \code{(batch_size, steps, features)}.
+ 3D tensor with shape: \verb{(batch_size, steps, features)}.
 }
 
 \section{Output shape}{
- 3D tensor with shape: \code{(batch_size, downsampled_steps, features)}.
+ 3D tensor with shape: \verb{(batch_size, downsampled_steps, features)}.
 }
 
 \seealso{
-Other pooling layers: \code{\link{layer_average_pooling_1d}},
-  \code{\link{layer_average_pooling_2d}},
-  \code{\link{layer_average_pooling_3d}},
-  \code{\link{layer_global_average_pooling_1d}},
-  \code{\link{layer_global_average_pooling_2d}},
-  \code{\link{layer_global_average_pooling_3d}},
-  \code{\link{layer_global_max_pooling_1d}},
-  \code{\link{layer_global_max_pooling_2d}},
-  \code{\link{layer_global_max_pooling_3d}},
-  \code{\link{layer_max_pooling_2d}},
-  \code{\link{layer_max_pooling_3d}}
+Other pooling layers: 
+\code{\link{layer_average_pooling_1d}()},
+\code{\link{layer_average_pooling_2d}()},
+\code{\link{layer_average_pooling_3d}()},
+\code{\link{layer_global_average_pooling_1d}()},
+\code{\link{layer_global_average_pooling_2d}()},
+\code{\link{layer_global_average_pooling_3d}()},
+\code{\link{layer_global_max_pooling_1d}()},
+\code{\link{layer_global_max_pooling_2d}()},
+\code{\link{layer_global_max_pooling_3d}()},
+\code{\link{layer_max_pooling_2d}()},
+\code{\link{layer_max_pooling_3d}()}
 }
 \concept{pooling layers}

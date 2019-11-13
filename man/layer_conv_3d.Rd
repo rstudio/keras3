@@ -4,15 +4,31 @@
 \alias{layer_conv_3d}
 \title{3D convolution layer (e.g. spatial convolution over volumes).}
 \usage{
-layer_conv_3d(object, filters, kernel_size, strides = c(1L, 1L, 1L),
-  padding = "valid", data_format = NULL, dilation_rate = c(1L, 1L,
-  1L), activation = NULL, use_bias = TRUE,
-  kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
-  kernel_regularizer = NULL, bias_regularizer = NULL,
-  activity_regularizer = NULL, kernel_constraint = NULL,
-  bias_constraint = NULL, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_conv_3d(
+  object,
+  filters,
+  kernel_size,
+  strides = c(1L, 1L, 1L),
+  padding = "valid",
+  data_format = NULL,
+  dilation_rate = c(1L, 1L, 1L),
+  activation = NULL,
+  use_bias = TRUE,
+  kernel_initializer = "glorot_uniform",
+  bias_initializer = "zeros",
+  kernel_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  kernel_constraint = NULL,
+  bias_constraint = NULL,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -33,9 +49,9 @@ value != 1 is incompatible with specifying any \code{dilation_rate} value != 1.}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \code{(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)} while \code{channels_first} corresponds
-to inputs with shape \code{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}. It defaults to the \code{image_data_format} value found in your
-Keras config file at \code{~/.keras/keras.json}. If you never set it, then it
+\code{channels_last} corresponds to inputs with shape \verb{(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)} while \code{channels_first} corresponds
+to inputs with shape \verb{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}. It defaults to the \code{image_data_format} value found in your
+Keras config file at \verb{~/.keras/keras.json}. If you never set it, then it
 will be "channels_last".}
 
 \item{dilation_rate}{an integer or list of 3 integers, specifying the
@@ -98,35 +114,36 @@ for 128x128x128 volumes with a single channel, in
 \code{data_format="channels_last"}.
 }
 \section{Input shape}{
- 5D tensor with shape: \code{(samples, channels, conv_dim1, conv_dim2, conv_dim3)} if data_format='channels_first' or 5D tensor with
-shape: \code{(samples, conv_dim1, conv_dim2, conv_dim3, channels)} if
+ 5D tensor with shape: \verb{(samples, channels, conv_dim1, conv_dim2, conv_dim3)} if data_format='channels_first' or 5D tensor with
+shape: \verb{(samples, conv_dim1, conv_dim2, conv_dim3, channels)} if
 data_format='channels_last'.
 }
 
 \section{Output shape}{
- 5D tensor with shape: \code{(samples, filters, new_conv_dim1, new_conv_dim2, new_conv_dim3)} if
-data_format='channels_first' or 5D tensor with shape: \code{(samples, new_conv_dim1, new_conv_dim2, new_conv_dim3, filters)} if
+ 5D tensor with shape: \verb{(samples, filters, new_conv_dim1, new_conv_dim2, new_conv_dim3)} if
+data_format='channels_first' or 5D tensor with shape: \verb{(samples, new_conv_dim1, new_conv_dim2, new_conv_dim3, filters)} if
 data_format='channels_last'. \code{new_conv_dim1}, \code{new_conv_dim2} and
 \code{new_conv_dim3} values might have changed due to padding.
 }
 
 \seealso{
-Other convolutional layers: \code{\link{layer_conv_1d}},
-  \code{\link{layer_conv_2d_transpose}},
-  \code{\link{layer_conv_2d}},
-  \code{\link{layer_conv_3d_transpose}},
-  \code{\link{layer_conv_lstm_2d}},
-  \code{\link{layer_cropping_1d}},
-  \code{\link{layer_cropping_2d}},
-  \code{\link{layer_cropping_3d}},
-  \code{\link{layer_depthwise_conv_2d}},
-  \code{\link{layer_separable_conv_1d}},
-  \code{\link{layer_separable_conv_2d}},
-  \code{\link{layer_upsampling_1d}},
-  \code{\link{layer_upsampling_2d}},
-  \code{\link{layer_upsampling_3d}},
-  \code{\link{layer_zero_padding_1d}},
-  \code{\link{layer_zero_padding_2d}},
-  \code{\link{layer_zero_padding_3d}}
+Other convolutional layers: 
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()}
 }
 \concept{convolutional layers}

@@ -6,13 +6,23 @@
 \alias{application_vgg19}
 \title{VGG16 and VGG19 models for Keras.}
 \usage{
-application_vgg16(include_top = TRUE, weights = "imagenet",
-  input_tensor = NULL, input_shape = NULL, pooling = NULL,
-  classes = 1000)
+application_vgg16(
+  include_top = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  input_shape = NULL,
+  pooling = NULL,
+  classes = 1000
+)
 
-application_vgg19(include_top = TRUE, weights = "imagenet",
-  input_tensor = NULL, input_shape = NULL, pooling = NULL,
-  classes = 1000)
+application_vgg19(
+  include_top = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  input_shape = NULL,
+  pooling = NULL,
+  classes = 1000
+)
 }
 \arguments{
 \item{include_top}{whether to include the 3 fully-connected layers at the top
@@ -25,9 +35,9 @@ weights), or the path to the weights file to be loaded.}
 model.}
 
 \item{input_shape}{optional shape list, only to be specified if \code{include_top}
-is FALSE (otherwise the input shape has to be \code{(224, 224, 3)} It should
+is FALSE (otherwise the input shape has to be \verb{(224, 224, 3)} It should
 have exactly 3 inputs channels, and width and height should be no smaller
-than 32. E.g. \code{(200, 200, 3)} would be one valid value.}
+than 32. E.g. \verb{(200, 200, 3)} would be one valid value.}
 
 \item{pooling}{Optional pooling mode for feature extraction when
 \code{include_top} is \code{FALSE}.
@@ -71,6 +81,6 @@ x <- image_to_array(img)
 x <- array_reshape(x, c(1, dim(x)))
 x <- imagenet_preprocess_input(x)
 
-features <- model \%>\% predict(x)
+features <- model %>% predict(x)
 }
 }

@@ -4,9 +4,17 @@
 \alias{layer_masking}
 \title{Masks a sequence by using a mask value to skip timesteps.}
 \usage{
-layer_masking(object, mask_value = 0, input_shape = NULL,
-  batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_masking(
+  object,
+  mask_value = 0,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -43,13 +51,17 @@ they support masking). If any downstream layer does not support masking yet
 receives such an input mask, an exception will be raised.
 }
 \seealso{
-Other core layers: \code{\link{layer_activation}},
-  \code{\link{layer_activity_regularization}},
-  \code{\link{layer_dense_features}},
-  \code{\link{layer_dense}}, \code{\link{layer_dropout}},
-  \code{\link{layer_flatten}}, \code{\link{layer_input}},
-  \code{\link{layer_lambda}}, \code{\link{layer_permute}},
-  \code{\link{layer_repeat_vector}},
-  \code{\link{layer_reshape}}
+Other core layers: 
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_dense_features}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_input}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_reshape}()}
 }
 \concept{core layers}

@@ -8,21 +8,42 @@
 \alias{densenet_preprocess_input}
 \title{Instantiates the DenseNet architecture.}
 \usage{
-application_densenet(blocks, include_top = TRUE, weights = "imagenet",
-  input_tensor = NULL, input_shape = NULL, pooling = NULL,
-  classes = 1000)
+application_densenet(
+  blocks,
+  include_top = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  input_shape = NULL,
+  pooling = NULL,
+  classes = 1000
+)
 
-application_densenet121(include_top = TRUE, weights = "imagenet",
-  input_tensor = NULL, input_shape = NULL, pooling = NULL,
-  classes = 1000)
+application_densenet121(
+  include_top = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  input_shape = NULL,
+  pooling = NULL,
+  classes = 1000
+)
 
-application_densenet169(include_top = TRUE, weights = "imagenet",
-  input_tensor = NULL, input_shape = NULL, pooling = NULL,
-  classes = 1000)
+application_densenet169(
+  include_top = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  input_shape = NULL,
+  pooling = NULL,
+  classes = 1000
+)
 
-application_densenet201(include_top = TRUE, weights = "imagenet",
-  input_tensor = NULL, input_shape = NULL, pooling = NULL,
-  classes = 1000)
+application_densenet201(
+  include_top = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  input_shape = NULL,
+  pooling = NULL,
+  classes = 1000
+)
 
 densenet_preprocess_input(x, data_format = NULL)
 }
@@ -39,8 +60,8 @@ of the network.}
 to use as image input for the model.}
 
 \item{input_shape}{optional shape list, only to be specified if \code{include_top}
-is FALSE (otherwise the input shape has to be \code{(224, 224, 3)}
-(with \code{channels_last} data format) or \code{(3, 224, 224)} (with
+is FALSE (otherwise the input shape has to be \verb{(224, 224, 3)}
+(with \code{channels_last} data format) or \verb{(3, 224, 224)} (with
 \code{channels_first} data format). It should have exactly 3 inputs channels.}
 
 \item{pooling}{optional pooling mode for feature extraction when
@@ -56,7 +77,7 @@ will be a 2D tensor.
 specified if \code{include_top} is TRUE, and if no \code{weights} argument is
 specified.}
 
-\item{x}{a 3D or 4D array consists of RGB values within \code{[0, 255]}.}
+\item{x}{a 3D or 4D array consists of RGB values within \verb{[0, 255]}.}
 
 \item{data_format}{data format of the image tensor.}
 }

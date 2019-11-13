@@ -4,8 +4,7 @@
 \alias{multi_gpu_model}
 \title{Replicates a model on different GPUs.}
 \usage{
-multi_gpu_model(model, gpus = NULL, cpu_merge = TRUE,
-  cpu_relocation = FALSE)
+multi_gpu_model(model, gpus = NULL, cpu_merge = TRUE, cpu_relocation = FALSE)
 }
 \arguments{
 \item{model}{A Keras model instance. To avoid OOM errors,
@@ -87,7 +86,7 @@ with(tf$device("/cpu:0"), {
 # Replicates the model on 8 GPUs.
 # This assumes that your machine has 8 available GPUs.
 parallel_model <- multi_gpu_model(model, gpus = 8)
-parallel_model \%>\% compile(
+parallel_model %>% compile(
   loss = "categorical_crossentropy",
   optimizer = "rmsprop"
 )
@@ -100,27 +99,30 @@ y <- array(runif(num_samples * num_classes),
 
 # This `fit` call will be distributed on 8 GPUs.
 # Since the batch size is 256, each GPU will process 32 samples.
-parallel_model \%>\% fit(x, y, epochs = 20, batch_size = 256)
+parallel_model %>% fit(x, y, epochs = 20, batch_size = 256)
 
 # Save model via the template model (which shares the same weights):
-model \%>\% save_model_hdf5("my_model.h5")
+model %>% save_model_hdf5("my_model.h5")
 }
 
 }
 \seealso{
-Other model functions: \code{\link{compile.keras.engine.training.Model}},
-  \code{\link{evaluate.keras.engine.training.Model}},
-  \code{\link{evaluate_generator}},
-  \code{\link{fit.keras.engine.training.Model}},
-  \code{\link{fit_generator}}, \code{\link{get_config}},
-  \code{\link{get_layer}},
-  \code{\link{keras_model_sequential}},
-  \code{\link{keras_model}}, \code{\link{pop_layer}},
-  \code{\link{predict.keras.engine.training.Model}},
-  \code{\link{predict_generator}},
-  \code{\link{predict_on_batch}},
-  \code{\link{predict_proba}},
-  \code{\link{summary.keras.engine.training.Model}},
-  \code{\link{train_on_batch}}
+Other model functions: 
+\code{\link{compile.keras.engine.training.Model}()},
+\code{\link{evaluate.keras.engine.training.Model}()},
+\code{\link{evaluate_generator}()},
+\code{\link{fit.keras.engine.training.Model}()},
+\code{\link{fit_generator}()},
+\code{\link{get_config}()},
+\code{\link{get_layer}()},
+\code{\link{keras_model_sequential}()},
+\code{\link{keras_model}()},
+\code{\link{pop_layer}()},
+\code{\link{predict.keras.engine.training.Model}()},
+\code{\link{predict_generator}()},
+\code{\link{predict_on_batch}()},
+\code{\link{predict_proba}()},
+\code{\link{summary.keras.engine.training.Model}()},
+\code{\link{train_on_batch}()}
 }
 \concept{model functions}

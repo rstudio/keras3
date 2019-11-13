@@ -5,13 +5,26 @@
 \title{Takes the dataframe and the path to a directory and generates batches of
 augmented/normalized data.}
 \usage{
-flow_images_from_dataframe(dataframe, directory = NULL,
-  x_col = "filename", y_col = "class",
-  generator = image_data_generator(), target_size = c(256, 256),
-  color_mode = "rgb", classes = NULL, class_mode = "categorical",
-  batch_size = 32, shuffle = TRUE, seed = NULL, save_to_dir = NULL,
-  save_prefix = "", save_format = "png", subset = NULL,
-  interpolation = "nearest", drop_duplicates = TRUE)
+flow_images_from_dataframe(
+  dataframe,
+  directory = NULL,
+  x_col = "filename",
+  y_col = "class",
+  generator = image_data_generator(),
+  target_size = c(256, 256),
+  color_mode = "rgb",
+  classes = NULL,
+  class_mode = "categorical",
+  batch_size = 32,
+  shuffle = TRUE,
+  seed = NULL,
+  save_to_dir = NULL,
+  save_prefix = "",
+  save_format = "png",
+  subset = NULL,
+  interpolation = "nearest",
+  drop_duplicates = TRUE
+)
 }
 \arguments{
 \item{dataframe}{\code{data.frame} containing the filepaths relative to
@@ -41,7 +54,7 @@ If \code{NULL}, data in \code{x_col} column should be absolute paths.}
 data.}
 
 \item{target_size}{Either \code{NULL} (default to original size) or integer vector
-\code{(img_height, img_width)}.}
+\verb{(img_height, img_width)}.}
 
 \item{color_mode}{one of "grayscale", "rgb". Default: "rgb". Whether the
 images will be converted to have 1 or 3 color channels.}
@@ -110,14 +123,16 @@ or \code{reticulate::conda_install("pandas", envname = "r-tensorflow")} dependin
 the kind of environment you are using.
 }
 \section{Yields}{
- \code{(x, y)} where \code{x} is an array of image data and \code{y} is a
+ \verb{(x, y)} where \code{x} is an array of image data and \code{y} is a
 array of corresponding labels. The generator loops indefinitely.
 }
 
 \seealso{
-Other image preprocessing: \code{\link{fit_image_data_generator}},
-  \code{\link{flow_images_from_data}},
-  \code{\link{flow_images_from_directory}},
-  \code{\link{image_load}}, \code{\link{image_to_array}}
+Other image preprocessing: 
+\code{\link{fit_image_data_generator}()},
+\code{\link{flow_images_from_data}()},
+\code{\link{flow_images_from_directory}()},
+\code{\link{image_load}()},
+\code{\link{image_to_array}()}
 }
 \concept{image preprocessing}

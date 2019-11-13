@@ -4,8 +4,11 @@
 \alias{k_spatial_2d_padding}
 \title{Pads the 2nd and 3rd dimensions of a 4D tensor.}
 \usage{
-k_spatial_2d_padding(x, padding = list(list(1, 1), list(1, 1)),
-  data_format = NULL)
+k_spatial_2d_padding(
+  x,
+  padding = list(list(1, 1), list(1, 1)),
+  data_format = NULL
+)
 }
 \arguments{
 \item{x}{Tensor or variable.}

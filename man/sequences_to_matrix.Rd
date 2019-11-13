@@ -4,8 +4,11 @@
 \alias{sequences_to_matrix}
 \title{Convert a list of sequences into a matrix.}
 \usage{
-sequences_to_matrix(tokenizer, sequences, mode = c("binary", "count",
-  "tfidf", "freq"))
+sequences_to_matrix(
+  tokenizer,
+  sequences,
+  mode = c("binary", "count", "tfidf", "freq")
+)
 }
 \arguments{
 \item{tokenizer}{Tokenizer}
@@ -21,11 +24,12 @@ A matrix
 Convert a list of sequences into a matrix.
 }
 \seealso{
-Other text tokenization: \code{\link{fit_text_tokenizer}},
-  \code{\link{save_text_tokenizer}},
-  \code{\link{text_tokenizer}},
-  \code{\link{texts_to_matrix}},
-  \code{\link{texts_to_sequences_generator}},
-  \code{\link{texts_to_sequences}}
+Other text tokenization: 
+\code{\link{fit_text_tokenizer}()},
+\code{\link{save_text_tokenizer}()},
+\code{\link{text_tokenizer}()},
+\code{\link{texts_to_matrix}()},
+\code{\link{texts_to_sequences_generator}()},
+\code{\link{texts_to_sequences}()}
 }
 \concept{text tokenization}

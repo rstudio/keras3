@@ -4,9 +4,15 @@
 \alias{layer_cropping_3d}
 \title{Cropping layer for 3D data (e.g. spatial or spatio-temporal).}
 \usage{
-layer_cropping_3d(object, cropping = list(c(1L, 1L), c(1L, 1L), c(1L,
-  1L)), data_format = NULL, batch_size = NULL, name = NULL,
-  trainable = NULL, weights = NULL)
+layer_cropping_3d(
+  object,
+  cropping = list(c(1L, 1L), c(1L, 1L), c(1L, 1L)),
+  data_format = NULL,
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -18,17 +24,17 @@ is applied to depth, height, and width.
 \item If list of 3 ints:
 interpreted as two different
 symmetric cropping values for depth, height, and width:
-\code{(symmetric_dim1_crop, symmetric_dim2_crop, symmetric_dim3_crop)}.
+\verb{(symmetric_dim1_crop, symmetric_dim2_crop, symmetric_dim3_crop)}.
 \item If list of 3 list of 2 ints:
 interpreted as
-\code{((left_dim1_crop, right_dim1_crop), (left_dim2_crop, right_dim2_crop), (left_dim3_crop, right_dim3_crop))}
+\verb{((left_dim1_crop, right_dim1_crop), (left_dim2_crop, right_dim2_crop), (left_dim3_crop, right_dim3_crop))}
 }}
 
 \item{data_format}{A string, one of \code{channels_last} (default) or
 \code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \code{(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)} while \code{channels_first} corresponds
-to inputs with shape \code{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}. It defaults to the \code{image_data_format} value found in your
-Keras config file at \code{~/.keras/keras.json}. If you never set it, then it
+\code{channels_last} corresponds to inputs with shape \verb{(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)} while \code{channels_first} corresponds
+to inputs with shape \verb{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}. It defaults to the \code{image_data_format} value found in your
+Keras config file at \verb{~/.keras/keras.json}. If you never set it, then it
 will be "channels_last".}
 
 \item{batch_size}{Fixed batch size for layer}
@@ -47,37 +53,38 @@ Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 \section{Input shape}{
  5D tensor with shape:
 \itemize{
-\item If \code{data_format} is \code{"channels_last"}: \code{(batch, first_axis_to_crop, second_axis_to_crop, third_axis_to_crop, depth)}
+\item If \code{data_format} is \code{"channels_last"}: \verb{(batch, first_axis_to_crop, second_axis_to_crop, third_axis_to_crop, depth)}
 \item If \code{data_format} is \code{"channels_first"}:
-\code{(batch, depth, first_axis_to_crop, second_axis_to_crop, third_axis_to_crop)}
+\verb{(batch, depth, first_axis_to_crop, second_axis_to_crop, third_axis_to_crop)}
 }
 }
 
 \section{Output shape}{
  5D tensor with shape:
 \itemize{
-\item If \code{data_format} is \code{"channels_last"}: \code{(batch, first_cropped_axis, second_cropped_axis, third_cropped_axis, depth)}
-\item If \code{data_format} is \code{"channels_first"}: \code{(batch, depth, first_cropped_axis, second_cropped_axis, third_cropped_axis)}
+\item If \code{data_format} is \code{"channels_last"}: \verb{(batch, first_cropped_axis, second_cropped_axis, third_cropped_axis, depth)}
+\item If \code{data_format} is \code{"channels_first"}: \verb{(batch, depth, first_cropped_axis, second_cropped_axis, third_cropped_axis)}
 }
 }
 
 \seealso{
-Other convolutional layers: \code{\link{layer_conv_1d}},
-  \code{\link{layer_conv_2d_transpose}},
-  \code{\link{layer_conv_2d}},
-  \code{\link{layer_conv_3d_transpose}},
-  \code{\link{layer_conv_3d}},
-  \code{\link{layer_conv_lstm_2d}},
-  \code{\link{layer_cropping_1d}},
-  \code{\link{layer_cropping_2d}},
-  \code{\link{layer_depthwise_conv_2d}},
-  \code{\link{layer_separable_conv_1d}},
-  \code{\link{layer_separable_conv_2d}},
-  \code{\link{layer_upsampling_1d}},
-  \code{\link{layer_upsampling_2d}},
-  \code{\link{layer_upsampling_3d}},
-  \code{\link{layer_zero_padding_1d}},
-  \code{\link{layer_zero_padding_2d}},
-  \code{\link{layer_zero_padding_3d}}
+Other convolutional layers: 
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()}
 }
 \concept{convolutional layers}

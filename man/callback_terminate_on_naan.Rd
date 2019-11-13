@@ -10,14 +10,15 @@ callback_terminate_on_naan()
 Callback that terminates training when a NaN loss is encountered.
 }
 \seealso{
-Other callbacks: \code{\link{callback_csv_logger}},
-  \code{\link{callback_early_stopping}},
-  \code{\link{callback_lambda}},
-  \code{\link{callback_learning_rate_scheduler}},
-  \code{\link{callback_model_checkpoint}},
-  \code{\link{callback_progbar_logger}},
-  \code{\link{callback_reduce_lr_on_plateau}},
-  \code{\link{callback_remote_monitor}},
-  \code{\link{callback_tensorboard}}
+Other callbacks: 
+\code{\link{callback_csv_logger}()},
+\code{\link{callback_early_stopping}()},
+\code{\link{callback_lambda}()},
+\code{\link{callback_learning_rate_scheduler}()},
+\code{\link{callback_model_checkpoint}()},
+\code{\link{callback_progbar_logger}()},
+\code{\link{callback_reduce_lr_on_plateau}()},
+\code{\link{callback_remote_monitor}()},
+\code{\link{callback_tensorboard}()}
 }
 \concept{callbacks}

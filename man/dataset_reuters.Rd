@@ -5,14 +5,22 @@
 \alias{dataset_reuters_word_index}
 \title{Reuters newswire topics classification}
 \usage{
-dataset_reuters(path = "reuters.npz", num_words = NULL,
-  skip_top = 0L, maxlen = NULL, test_split = 0.2, seed = 113L,
-  start_char = 1L, oov_char = 2L, index_from = 3L)
+dataset_reuters(
+  path = "reuters.npz",
+  num_words = NULL,
+  skip_top = 0L,
+  maxlen = NULL,
+  test_split = 0.2,
+  seed = 113L,
+  start_char = 1L,
+  oov_char = 2L,
+  index_from = 3L
+)
 
 dataset_reuters_word_index(path = "reuters_word_index.pkl")
 }
 \arguments{
-\item{path}{Where to cache the data (relative to \code{~/.keras/dataset}).}
+\item{path}{Where to cache the data (relative to \verb{~/.keras/dataset}).}
 
 \item{num_words}{Max number of words to include. Words are ranked by how
 often they occur (in the training set) and only the most frequent words are
@@ -36,7 +44,7 @@ Set to 1 because 0 is usually the padding character.}
 \item{index_from}{index actual words with this index and higher.}
 }
 \value{
-Lists of training and test data: \code{train$x, train$y, test$x, test$y}
+Lists of training and test data: \verb{train$x, train$y, test$x, test$y}
 with same format as \code{\link[=dataset_imdb]{dataset_imdb()}}. The \code{dataset_reuters_word_index()}
 function returns a list where the names are words and the values are
 integer. e.g. \code{word_index[["giraffe"]]} might return \code{1234}.
@@ -47,10 +55,12 @@ Dataset of 11,228 newswires from Reuters, labeled over 46 topics. As with
 conventions).
 }
 \seealso{
-Other datasets: \code{\link{dataset_boston_housing}},
-  \code{\link{dataset_cifar100}},
-  \code{\link{dataset_cifar10}},
-  \code{\link{dataset_fashion_mnist}},
-  \code{\link{dataset_imdb}}, \code{\link{dataset_mnist}}
+Other datasets: 
+\code{\link{dataset_boston_housing}()},
+\code{\link{dataset_cifar100}()},
+\code{\link{dataset_cifar10}()},
+\code{\link{dataset_fashion_mnist}()},
+\code{\link{dataset_imdb}()},
+\code{\link{dataset_mnist}()}
 }
 \concept{datasets}

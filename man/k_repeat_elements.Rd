@@ -17,8 +17,8 @@ k_repeat_elements(x, rep, axis)
 A tensor.
 }
 \description{
-If \code{x} has shape \code{(s1, s2, s3)} and \code{axis} is \code{2}, the output
-will have shape \code{(s1, s2 * rep, s3)}.
+If \code{x} has shape \verb{(s1, s2, s3)} and \code{axis} is \code{2}, the output
+will have shape \verb{(s1, s2 * rep, s3)}.
 }
 \section{Keras Backend}{
 

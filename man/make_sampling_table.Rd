@@ -39,10 +39,11 @@ The word2vec formula is: p(word) = min(1,
 sqrt(word.frequency/sampling_factor) / (word.frequency/sampling_factor))
 }
 \seealso{
-Other text preprocessing: \code{\link{pad_sequences}},
-  \code{\link{skipgrams}},
-  \code{\link{text_hashing_trick}},
-  \code{\link{text_one_hot}},
-  \code{\link{text_to_word_sequence}}
+Other text preprocessing: 
+\code{\link{pad_sequences}()},
+\code{\link{skipgrams}()},
+\code{\link{text_hashing_trick}()},
+\code{\link{text_one_hot}()},
+\code{\link{text_to_word_sequence}()}
 }
 \concept{text preprocessing}

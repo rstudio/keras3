@@ -7,7 +7,7 @@
 k_batch_set_value(lists)
 }
 \arguments{
-\item{lists}{a list of lists \code{(tensor, value)}. \code{value} should be an R array.}
+\item{lists}{a list of lists \verb{(tensor, value)}. \code{value} should be an R array.}
 }
 \description{
 Sets the values of many tensor variables at once.

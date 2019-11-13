@@ -4,8 +4,7 @@
 \alias{initializer_random_uniform}
 \title{Initializer that generates tensors with a uniform distribution.}
 \usage{
-initializer_random_uniform(minval = -0.05, maxval = 0.05,
-  seed = NULL)
+initializer_random_uniform(minval = -0.05, maxval = 0.05, seed = NULL)
 }
 \arguments{
 \item{minval}{Lower bound of the range of random values to generate.}
@@ -18,19 +17,20 @@ initializer_random_uniform(minval = -0.05, maxval = 0.05,
 Initializer that generates tensors with a uniform distribution.
 }
 \seealso{
-Other initializers: \code{\link{initializer_constant}},
-  \code{\link{initializer_glorot_normal}},
-  \code{\link{initializer_glorot_uniform}},
-  \code{\link{initializer_he_normal}},
-  \code{\link{initializer_he_uniform}},
-  \code{\link{initializer_identity}},
-  \code{\link{initializer_lecun_normal}},
-  \code{\link{initializer_lecun_uniform}},
-  \code{\link{initializer_ones}},
-  \code{\link{initializer_orthogonal}},
-  \code{\link{initializer_random_normal}},
-  \code{\link{initializer_truncated_normal}},
-  \code{\link{initializer_variance_scaling}},
-  \code{\link{initializer_zeros}}
+Other initializers: 
+\code{\link{initializer_constant}()},
+\code{\link{initializer_glorot_normal}()},
+\code{\link{initializer_glorot_uniform}()},
+\code{\link{initializer_he_normal}()},
+\code{\link{initializer_he_uniform}()},
+\code{\link{initializer_identity}()},
+\code{\link{initializer_lecun_normal}()},
+\code{\link{initializer_lecun_uniform}()},
+\code{\link{initializer_ones}()},
+\code{\link{initializer_orthogonal}()},
+\code{\link{initializer_random_normal}()},
+\code{\link{initializer_truncated_normal}()},
+\code{\link{initializer_variance_scaling}()},
+\code{\link{initializer_zeros}()}
 }
 \concept{initializers}

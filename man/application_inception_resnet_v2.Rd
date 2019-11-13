@@ -5,9 +5,14 @@
 \alias{inception_resnet_v2_preprocess_input}
 \title{Inception-ResNet v2 model, with weights trained on ImageNet}
 \usage{
-application_inception_resnet_v2(include_top = TRUE,
-  weights = "imagenet", input_tensor = NULL, input_shape = NULL,
-  pooling = NULL, classes = 1000)
+application_inception_resnet_v2(
+  include_top = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  input_shape = NULL,
+  pooling = NULL,
+  classes = 1000
+)
 
 inception_resnet_v2_preprocess_input(x)
 }
@@ -22,9 +27,9 @@ weights), or the path to the weights file to be loaded.}
 model.}
 
 \item{input_shape}{optional shape list, only to be specified if \code{include_top}
-is FALSE (otherwise the input shape has to be \code{(299, 299, 3)}. It should
+is FALSE (otherwise the input shape has to be \verb{(299, 299, 3)}. It should
 have exactly 3 inputs channels, and width and height should be no smaller
-than 75. E.g. \code{(150, 150, 3)} would be one valid value.}
+than 75. E.g. \verb{(150, 150, 3)} would be one valid value.}
 
 \item{pooling}{Optional pooling mode for feature extraction when
 \code{include_top} is \code{FALSE}.

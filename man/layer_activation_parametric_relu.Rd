@@ -4,11 +4,20 @@
 \alias{layer_activation_parametric_relu}
 \title{Parametric Rectified Linear Unit.}
 \usage{
-layer_activation_parametric_relu(object, alpha_initializer = "zeros",
-  alpha_regularizer = NULL, alpha_constraint = NULL,
-  shared_axes = NULL, input_shape = NULL, batch_input_shape = NULL,
-  batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL,
-  weights = NULL)
+layer_activation_parametric_relu(
+  object,
+  alpha_initializer = "zeros",
+  alpha_regularizer = NULL,
+  alpha_constraint = NULL,
+  shared_axes = NULL,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -48,18 +57,19 @@ isn't provided.}
 \item{weights}{Initial weights for layer.}
 }
 \description{
-It follows: \code{f(x) = alpha * x`` for }x < 0\code{, }f(x) = x\code{for}x >= 0`, where
+It follows: \verb{f(x) = alpha * x`` for }x < 0\verb{, }f(x) = x\verb{for}x >= 0`, where
 alpha is a learned array with the same shape as x.
 }
 \seealso{
 \href{https://arxiv.org/abs/1502.01852}{Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification}.
 
-Other activation layers: \code{\link{layer_activation_elu}},
-  \code{\link{layer_activation_leaky_relu}},
-  \code{\link{layer_activation_relu}},
-  \code{\link{layer_activation_selu}},
-  \code{\link{layer_activation_softmax}},
-  \code{\link{layer_activation_thresholded_relu}},
-  \code{\link{layer_activation}}
+Other activation layers: 
+\code{\link{layer_activation_elu}()},
+\code{\link{layer_activation_leaky_relu}()},
+\code{\link{layer_activation_relu}()},
+\code{\link{layer_activation_selu}()},
+\code{\link{layer_activation_softmax}()},
+\code{\link{layer_activation_thresholded_relu}()},
+\code{\link{layer_activation}()}
 }
 \concept{activation layers}

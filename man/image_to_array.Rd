@@ -8,11 +8,20 @@
 \usage{
 image_to_array(img, data_format = c("channels_last", "channels_first"))
 
-image_array_resize(img, height, width, data_format = c("channels_last",
-  "channels_first"))
+image_array_resize(
+  img,
+  height,
+  width,
+  data_format = c("channels_last", "channels_first")
+)
 
-image_array_save(img, path, data_format = NULL, file_format = NULL,
-  scale = TRUE)
+image_array_save(
+  img,
+  path,
+  data_format = NULL,
+  file_format = NULL,
+  scale = TRUE
+)
 }
 \arguments{
 \item{img}{Image}
@@ -36,10 +45,11 @@ instead of a filename, this parameter should always be used.}
 (channels,height,width) depending on the data_format.
 }
 \seealso{
-Other image preprocessing: \code{\link{fit_image_data_generator}},
-  \code{\link{flow_images_from_dataframe}},
-  \code{\link{flow_images_from_data}},
-  \code{\link{flow_images_from_directory}},
-  \code{\link{image_load}}
+Other image preprocessing: 
+\code{\link{fit_image_data_generator}()},
+\code{\link{flow_images_from_dataframe}()},
+\code{\link{flow_images_from_data}()},
+\code{\link{flow_images_from_directory}()},
+\code{\link{image_load}()}
 }
 \concept{image preprocessing}

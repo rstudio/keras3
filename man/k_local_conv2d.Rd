@@ -4,8 +4,14 @@
 \alias{k_local_conv2d}
 \title{Apply 2D conv with un-shared weights.}
 \usage{
-k_local_conv2d(inputs, kernel, kernel_size, strides, output_shape,
-  data_format = NULL)
+k_local_conv2d(
+  inputs,
+  kernel,
+  kernel_size,
+  strides,
+  output_shape,
+  data_format = NULL
+)
 }
 \arguments{
 \item{inputs}{4D tensor with shape: (batch_size, filters, new_rows,

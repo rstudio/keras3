@@ -15,14 +15,15 @@ as output (float).}
 Learning rate scheduler.
 }
 \seealso{
-Other callbacks: \code{\link{callback_csv_logger}},
-  \code{\link{callback_early_stopping}},
-  \code{\link{callback_lambda}},
-  \code{\link{callback_model_checkpoint}},
-  \code{\link{callback_progbar_logger}},
-  \code{\link{callback_reduce_lr_on_plateau}},
-  \code{\link{callback_remote_monitor}},
-  \code{\link{callback_tensorboard}},
-  \code{\link{callback_terminate_on_naan}}
+Other callbacks: 
+\code{\link{callback_csv_logger}()},
+\code{\link{callback_early_stopping}()},
+\code{\link{callback_lambda}()},
+\code{\link{callback_model_checkpoint}()},
+\code{\link{callback_progbar_logger}()},
+\code{\link{callback_reduce_lr_on_plateau}()},
+\code{\link{callback_remote_monitor}()},
+\code{\link{callback_tensorboard}()},
+\code{\link{callback_terminate_on_naan}()}
 }
 \concept{callbacks}

@@ -4,8 +4,11 @@
 \alias{dataset_boston_housing}
 \title{Boston housing price regression dataset}
 \usage{
-dataset_boston_housing(path = "boston_housing.npz", test_split = 0.2,
-  seed = 113L)
+dataset_boston_housing(
+  path = "boston_housing.npz",
+  test_split = 0.2,
+  seed = 113L
+)
 }
 \arguments{
 \item{path}{Path where to cache the dataset locally (relative to
@@ -17,7 +20,7 @@ dataset_boston_housing(path = "boston_housing.npz", test_split = 0.2,
 split.}
 }
 \value{
-Lists of training and test data: \code{train$x, train$y, test$x, test$y}.
+Lists of training and test data: \verb{train$x, train$y, test$x, test$y}.
 
 Samples contain 13 attributes of houses at different locations around
 the Boston suburbs in the late 1970s. Targets are the median values of the
@@ -28,10 +31,12 @@ Dataset taken from the StatLib library which is maintained at Carnegie Mellon
 University.
 }
 \seealso{
-Other datasets: \code{\link{dataset_cifar100}},
-  \code{\link{dataset_cifar10}},
-  \code{\link{dataset_fashion_mnist}},
-  \code{\link{dataset_imdb}}, \code{\link{dataset_mnist}},
-  \code{\link{dataset_reuters}}
+Other datasets: 
+\code{\link{dataset_cifar100}()},
+\code{\link{dataset_cifar10}()},
+\code{\link{dataset_fashion_mnist}()},
+\code{\link{dataset_imdb}()},
+\code{\link{dataset_mnist}()},
+\code{\link{dataset_reuters}()}
 }
 \concept{datasets}

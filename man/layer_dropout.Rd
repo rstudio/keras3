@@ -4,9 +4,18 @@
 \alias{layer_dropout}
 \title{Applies Dropout to the input.}
 \usage{
-layer_dropout(object, rate, noise_shape = NULL, seed = NULL,
-  input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
-  name = NULL, trainable = NULL, weights = NULL)
+layer_dropout(
+  object,
+  rate,
+  noise_shape = NULL,
+  seed = NULL,
+  input_shape = NULL,
+  batch_input_shape = NULL,
+  batch_size = NULL,
+  name = NULL,
+  trainable = NULL,
+  weights = NULL
+)
 }
 \arguments{
 \item{object}{Model or layer object}
@@ -15,7 +24,7 @@ layer_dropout(object, rate, noise_shape = NULL, seed = NULL,
 
 \item{noise_shape}{1D integer tensor representing the shape of the binary
 dropout mask that will be multiplied with the input. For instance, if your
-inputs have shape \code{(batch_size, timesteps, features)} and you want the
+inputs have shape \verb{(batch_size, timesteps, features)} and you want the
 dropout mask to be the same for all timesteps, you can use
 \code{noise_shape=c(batch_size, 1, features)}.}
 
@@ -45,18 +54,23 @@ Dropout consists in randomly setting a fraction \code{rate} of input units to 0 
 each update during training time, which helps prevent overfitting.
 }
 \seealso{
-Other core layers: \code{\link{layer_activation}},
-  \code{\link{layer_activity_regularization}},
-  \code{\link{layer_dense_features}},
-  \code{\link{layer_dense}}, \code{\link{layer_flatten}},
-  \code{\link{layer_input}}, \code{\link{layer_lambda}},
-  \code{\link{layer_masking}}, \code{\link{layer_permute}},
-  \code{\link{layer_repeat_vector}},
-  \code{\link{layer_reshape}}
+Other core layers: 
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_dense_features}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_input}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_reshape}()}
 
-Other dropout layers: \code{\link{layer_spatial_dropout_1d}},
-  \code{\link{layer_spatial_dropout_2d}},
-  \code{\link{layer_spatial_dropout_3d}}
+Other dropout layers: 
+\code{\link{layer_spatial_dropout_1d}()},
+\code{\link{layer_spatial_dropout_2d}()},
+\code{\link{layer_spatial_dropout_3d}()}
 }
 \concept{core layers}
 \concept{dropout layers}

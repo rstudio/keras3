@@ -7,8 +7,13 @@
 \usage{
 save_model_weights_hdf5(object, filepath, overwrite = TRUE)
 
-load_model_weights_hdf5(object, filepath, by_name = FALSE,
-  skip_mismatch = FALSE, reshape = FALSE)
+load_model_weights_hdf5(
+  object,
+  filepath,
+  by_name = FALSE,
+  skip_mismatch = FALSE,
+  reshape = FALSE
+)
 }
 \arguments{
 \item{object}{Model object to save/load}
@@ -52,10 +57,12 @@ the same name. This is useful for fine-tuning or transfer-learning models
 where some of the layers have changed.
 }
 \seealso{
-Other model persistence: \code{\link{get_weights}},
-  \code{\link{model_to_json}}, \code{\link{model_to_yaml}},
-  \code{\link{save_model_hdf5}},
-  \code{\link{save_model_tf}},
-  \code{\link{serialize_model}}
+Other model persistence: 
+\code{\link{get_weights}()},
+\code{\link{model_to_json}()},
+\code{\link{model_to_yaml}()},
+\code{\link{save_model_hdf5}()},
+\code{\link{save_model_tf}()},
+\code{\link{serialize_model}()}
 }
 \concept{model persistence}

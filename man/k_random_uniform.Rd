@@ -4,8 +4,7 @@
 \alias{k_random_uniform}
 \title{Returns a tensor with uniform distribution of values.}
 \usage{
-k_random_uniform(shape, minval = 0, maxval = 1, dtype = NULL,
-  seed = NULL)
+k_random_uniform(shape, minval = 0, maxval = 1, dtype = NULL, seed = NULL)
 }
 \arguments{
 \item{shape}{A list of integers, the shape of tensor to create.}
