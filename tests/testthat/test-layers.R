@@ -526,7 +526,7 @@ test_call_succeeds("layer_dense_features", required_version = "2.1.3", {
 
 test_succeeds("Can serialize a model that contains dense_features", {
   
-  if (tensorflow::tf_version() <= "2.0")
+  if (tensorflow::tf_version() < "2.0")
     skip("TensorFlow 2.0 is required.")
   
   fc <- list(tensorflow::tf$feature_column$numeric_column("mpg"))
