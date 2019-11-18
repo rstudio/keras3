@@ -6,10 +6,7 @@
 #' 
 #' @export
 initializer_zeros <- function() {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0")
-    keras$initializers$ZerosV2()
-  else 
-    keras$initializers$Zeros()
+  keras$initializers$Zeros()
 }
 
 #' Initializer that generates tensors initialized to 1.
@@ -18,10 +15,7 @@ initializer_zeros <- function() {
 #' 
 #' @export
 initializer_ones <- function() {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0")
-    keras$initializers$OnesV2()
-  else
-    keras$initializers$Ones()
+  keras$initializers$Ones()
 }
 
 #' Initializer that generates tensors initialized to a constant value.
@@ -32,14 +26,9 @@ initializer_ones <- function() {
 #' 
 #' @export
 initializer_constant <- function(value = 0) {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0")
-    keras$initializers$ConstantV2(
-      value = value
-    )
-  else
-    keras$initializers$Constant(
-      value = value
-    )
+  keras$initializers$Constant(
+    value = value
+  )
 }
 
 
@@ -53,18 +42,11 @@ initializer_constant <- function(value = 0) {
 #' 
 #' @export
 initializer_random_normal <- function(mean = 0.0, stddev = 0.05, seed = NULL) {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0")
-    keras$initializers$RandomNormalV2(
-      mean = mean,
-      stddev = stddev,
-      seed = as_nullable_integer(seed)
-    )
-  else
-    keras$initializers$RandomNormal(
-      mean = mean,
-      stddev = stddev,
-      seed = as_nullable_integer(seed)
-    )
+  keras$initializers$RandomNormal(
+    mean = mean,
+    stddev = stddev,
+    seed = as_nullable_integer(seed)
+  )
 }
 
 #' Initializer that generates tensors with a uniform distribution.
@@ -78,18 +60,11 @@ initializer_random_normal <- function(mean = 0.0, stddev = 0.05, seed = NULL) {
 #' 
 #' @export
 initializer_random_uniform <- function(minval = -0.05, maxval = 0.05, seed = NULL) {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0")
-    keras$initializers$RandomUniformV2(
-      minval = minval,
-      maxval = maxval,
-      seed = as_nullable_integer(seed)
-    )
-  else
-    keras$initializers$RandomUniform(
-      minval = minval,
-      maxval = maxval,
-      seed = as_nullable_integer(seed)
-    )
+  keras$initializers$RandomUniform(
+    minval = minval,
+    maxval = maxval,
+    seed = as_nullable_integer(seed)
+  )
 }
 
 
@@ -106,18 +81,11 @@ initializer_random_uniform <- function(minval = -0.05, maxval = 0.05, seed = NUL
 #' 
 #' @export
 initializer_truncated_normal <- function(mean = 0.0, stddev = 0.05, seed = NULL) {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0")
-    keras$initializers$TruncatedNormalV2(
-      mean = mean,
-      stddev = stddev,
-      seed = as_nullable_integer(seed)
-    )
-  else
-    keras$initializers$TruncatedNormal(
-      mean = mean,
-      stddev = stddev,
-      seed = as_nullable_integer(seed)
-    )
+  keras$initializers$TruncatedNormal(
+    mean = mean,
+    stddev = stddev,
+    seed = as_nullable_integer(seed)
+  )
 }
 
 #' Initializer capable of adapting its scale to the shape of weights.
@@ -152,7 +120,7 @@ initializer_variance_scaling <- function(scale = 1.0, mode = c("fan_in", "fan_ou
     if (distribution == "normal")
       distribution <- "untruncated_normal"
     
-    keras$initializers$VarianceScalingV2(
+    keras$initializers$VarianceScaling(
       scale = scale,
       mode = match.arg(mode),
       distribution = distribution,
@@ -183,16 +151,10 @@ initializer_variance_scaling <- function(scale = 1.0, mode = c("fan_in", "fan_ou
 #' 
 #' @export
 initializer_orthogonal <- function(gain = 1.0, seed = NULL) {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0")
-    keras$initializers$OrthogonalV2(
-      gain = gain,
-      seed = as_nullable_integer(seed)
-    )
-  else
-    keras$initializers$Orthogonal(
-      gain = gain,
-      seed = as_nullable_integer(seed)
-    )
+  keras$initializers$Orthogonal(
+    gain = gain,
+    seed = as_nullable_integer(seed)
+  )
 }
 
 
@@ -206,14 +168,9 @@ initializer_orthogonal <- function(gain = 1.0, seed = NULL) {
 #' 
 #' @export
 initializer_identity <- function(gain = 1.0) {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0")
-    keras$initializers$IdentityV2(
-      gain = gain
-    )
-  else
-    keras$initializers$Identity(
-      gain = gain
-    )
+  keras$initializers$Identity(
+    gain = gain
+  )
 }
 
 #' LeCun normal initializer.
@@ -232,14 +189,9 @@ initializer_identity <- function(gain = 1.0) {
 #'
 #' @export
 initializer_lecun_normal <- function(seed = NULL) {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0")
-    keras$initializers$lecun_normalV2(
-      seed = as_nullable_integer(seed)
-    )
-  else
-    keras$initializers$lecun_normal(
-      seed = as_nullable_integer(seed)
-    )
+  keras$initializers$lecun_normal(
+    seed = as_nullable_integer(seed)
+  )
 }
 
 
@@ -260,14 +212,9 @@ initializer_lecun_normal <- function(seed = NULL) {
 #' 
 #' @export
 initializer_glorot_normal <- function(seed = NULL) {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0")
-    keras$initializers$GlorotNormalV2(
-      seed = as_nullable_integer(seed)
-    )
-  else
-    keras$initializers$GlorotNormal(
-      seed = as_nullable_integer(seed)
-    )
+  keras$initializers$GlorotNormal(
+    seed = as_nullable_integer(seed)
+  )
 }
 
 
@@ -287,14 +234,9 @@ initializer_glorot_normal <- function(seed = NULL) {
 #' 
 #' @export
 initializer_glorot_uniform <- function(seed = NULL) {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0")
-    keras$initializers$GlorotUniformV2(
-      seed = as_nullable_integer(seed)
-    )
-  else
-    keras$initializers$GlorotUniform(
-      seed = as_nullable_integer(seed)
-    )
+  keras$initializers$GlorotUniform(
+    seed = as_nullable_integer(seed)
+  )
 }
 
 
@@ -312,14 +254,9 @@ initializer_glorot_uniform <- function(seed = NULL) {
 #'      
 #' @export
 initializer_he_normal <- function(seed = NULL) {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0")
-    keras$initializers$he_normalV2(
-      seed = seed
-    )
-  else
-    keras$initializers$he_normal(
-      seed = seed
-    )
+  keras$initializers$he_normal(
+    seed = seed
+  )
 }
 
 #' He uniform variance scaling initializer.
@@ -336,14 +273,9 @@ initializer_he_normal <- function(seed = NULL) {
 #'   
 #' @export
 initializer_he_uniform <- function(seed = NULL) {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0")
-    keras$initializers$he_uniformV2(
-      seed = as_nullable_integer(seed)
-    )
-  else
-    keras$initializers$he_uniform(
-      seed = as_nullable_integer(seed)
-    )
+  keras$initializers$he_uniform(
+    seed = as_nullable_integer(seed)
+  )
 }
 
 #' LeCun uniform initializer.
@@ -360,13 +292,8 @@ initializer_he_uniform <- function(seed = NULL) {
 #'   
 #' @export
 initializer_lecun_uniform <- function(seed = NULL) {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0")
-    keras$initializers$lecun_uniformV2(
-      seed = as_nullable_integer(seed)
-    )
-  else
-    keras$initializers$lecun_uniform(
-      seed = as_nullable_integer(seed)
-    )
+  keras$initializers$lecun_uniform(
+    seed = as_nullable_integer(seed)
+  )
 }
 
