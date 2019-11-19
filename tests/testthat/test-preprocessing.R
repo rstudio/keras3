@@ -54,7 +54,9 @@ test_succeeds("image can be preprocessed", {
     img <- image_load("digit.jpeg")
     img_arr <- image_to_array(img)
     img_arr <- array_reshape(img_arr, c(1, dim(img_arr)))
-    img_arr <- imagenet_preprocess_input(img_arr)
+    img_arr1 <- imagenet_preprocess_input(img_arr)
+    img_arr2 <- preprocess_input(img_arr, tensorflow::tf$python$keras$applications$imagenet_utils$preprocess_input)
+    expect_equal(img_arr1, img_arr2)
   }
 })
 

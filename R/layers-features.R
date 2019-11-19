@@ -24,7 +24,7 @@ layer_dense_features <- function(object, feature_columns, name = NULL,
   # feature_columns must be unamed otherwise they are converted to a dict
   names(feature_columns) <- NULL
   
-  create_layer(keras$api$`_v2`$keras$layers$DenseFeatures, object, list(
+  create_layer(keras$layers$DenseFeatures, object, list(
     feature_columns = feature_columns, 
     name = name,
     trainable = trainable,
