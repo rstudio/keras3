@@ -272,7 +272,8 @@ inception_resnet_v2_preprocess_input <- function(x) {
 imagenet_decode_predictions <- function(preds, top = 5) {
   
   # decode predictions
-  decoded <- keras$applications$imagenet_utils$decode_predictions(
+  # we use the vgg16 function which is the same as imagenet_utils
+  decoded <- keras$applications$vgg16$decode_predictions(
     preds = preds,
     top = as.integer(top)
   )
@@ -308,13 +309,14 @@ imagenet_decode_predictions <- function(preds, top = 5) {
 imagenet_preprocess_input <- function(x, data_format = NULL, mode = "caffe") {
   args <- list(
     x = x,
-    preprocessor = keras$applications$imagenet_utils$preprocess_input
+    # we use the vgg16 function which is the same as imagenet_utils
+    preprocessor = keras$applications$vgg16$preprocess_input
   )
   if (keras_version() >= "2.0.9") {
     args$data_format <- data_format
     args$mode <- mode
   }
-  preprocess_input(x, keras$applications$imagenet_utils$preprocess_input)
+  do.call(preprocess_input, args)
 }
 
 
