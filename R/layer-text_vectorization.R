@@ -66,46 +66,24 @@ layer_text_vectorization <- function(object, max_tokens = NULL, standardize = "l
   else
     ngrams <- as_nullable_integer(ngrams)
   
-  output_mode <- match.arg(output_mode)
+  output_mode <- match.arg(output_mode)  
   
-  create_layer(keras$layers$preprocessing$text_vectorization$TextVectorization, object, list(
+  args <- list(
     max_tokens = as_nullable_integer(max_tokens),
-    standardize = resolve_global_var_arg(standardize),
-    split = resolve_global_var_arg(split),
     ngrams = ngrams,
-    output_mode = resolve_global_var_arg(output_mode),
+    output_mode = output_mode,
     output_sequence_length = as_nullable_integer(output_sequence_length),
     pad_to_max_tokens = pad_to_max_tokens
-  ))
-}
-
-resolve_global_var_arg <- function(x) {
-  
-  if (is.null(x))
-    return(x)
-  
-  # because of `is` in this line: https://github.com/tensorflow/tensorflow/blob/cf43d6e7e41a4c4474f1056beb7d7b81bc8e9771/tensorflow/python/keras/layers/preprocessing/text_vectorization.py#L433
-  # we need to point to exactly the same object
-  tv <- import(
-    paste0(resolve_implementation_module(), ".layers.preprocessing.text_vectorization"), 
-    convert = FALSE
   )
   
-  if (x == "lower_and_strip_punctuation") {
-    x <- tv$LOWER_AND_STRIP_PUNCTUATION
-  } else if (x == "whitespace") {
-    x <- tv$SPLIT_ON_WHITESPACE
-  } else if (x == "tfidf") {
-    x <- tv$TFIDF
-  } else if (x == "int") {
-    x <- tv$INT  
-  } else if (x == "binary") {
-    x <- tv$BINARY
-  } else if (x == "count") {
-    x <- tv$COUNT
-  }
+  # see https://github.com/tensorflow/tensorflow/pull/34420
+  if (!identical(standardize, "lower_and_strip_punctuation"))
+    args$standardize <- standardize
   
-  x
+  if (!identical(split, "whitespace"))
+    args$split <- split
+  
+  create_layer(resolve_text_vectorization_module(), object, args)
 }
 
 #' Get the vocabulary for text vectorization layers
@@ -145,3 +123,10 @@ set_vocabulary <- function(object, vocab, df_data = NULL, oov_df_value = FALSE,
   object$set_vocabulary(vocab, df_data, oov_df_value, append)
 }
 
+
+resolve_text_vectorization_module <- function() {
+  if (keras_version() >= "2.2.4")
+    keras$layers$experimental$preprocessing$TextVectorization
+  else
+    stop("Keras >= 2.2.4 is required", call. = FALSE)
+}
