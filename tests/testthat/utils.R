@@ -5,14 +5,9 @@ skip_if_no_keras <- function(required_version = NULL) {
     skip("required keras version not available for testing")
 }
 
+py_capture_output <- reticulate::import("IPython")$utils$capture$capture_output
 
 test_succeeds <- function(desc, expr, required_version = NULL) {
-  
-  py_capture_output <- NULL
-  if (reticulate::py_module_available("IPython")) {
-    IPython <- reticulate::import("IPython")
-    py_capture_output <- IPython$utils$capture$capture_output
-  }
   
   invisible(
     capture.output({
