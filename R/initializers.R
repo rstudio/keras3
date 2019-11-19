@@ -212,7 +212,7 @@ initializer_lecun_normal <- function(seed = NULL) {
 #' 
 #' @export
 initializer_glorot_normal <- function(seed = NULL) {
-  keras$initializers$GlorotNormal(
+  keras$initializers$glorot_normal(
     seed = as_nullable_integer(seed)
   )
 }
@@ -234,7 +234,7 @@ initializer_glorot_normal <- function(seed = NULL) {
 #' 
 #' @export
 initializer_glorot_uniform <- function(seed = NULL) {
-  keras$initializers$GlorotUniform(
+  keras$initializers$glorot_uniform(
     seed = as_nullable_integer(seed)
   )
 }
