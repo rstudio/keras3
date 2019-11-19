@@ -133,7 +133,13 @@ keras <- NULL
   
   # register class filter to alias classes to 'keras'
   reticulate::register_class_filter(function(classes) {
-    sub(paste0("^", resolve_implementation_module()), "keras", classes)
+    
+    module <- resolve_implementation_module()
+    
+    if (identical(module, "tensorflow.keras"))
+      module <- "tensorflow.python.keras"
+      
+    sub(paste0("^", module), "keras", classes)
   })
   
   # tensorflow use_session hooks
@@ -153,7 +159,7 @@ resolve_implementation_module <- function() {
   
   # set the implementation module
   if (identical(implementation, "tensorflow"))
-    implementation_module <- "tensorflow.python.keras"
+    implementation_module <- "tensorflow.keras"
   else
     implementation_module <- implementation
   
