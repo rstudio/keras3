@@ -69,5 +69,17 @@ test_call_succeeds("can set and get the vocabulary of layer_text_vectorization",
 })
 
 
+test_call_succeeds("can use layer_text_vectorization", {
+  if (tensorflow::tf_version() < "2.1")
+    skip("TextVectorization requires TF version >= 2.1")
+  
+  x <- matrix(c("hello world", "hello world"), ncol = 1)
+  x_ds <- tfdatasets::tensor_slices_dataset(x)
+  
+  layer <- layer_text_vectorization()
+  layer %>% adapt(x_ds)
+  expect_length(get_vocabulary(layer), 2)
+})
+
 
 
