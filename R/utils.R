@@ -1,8 +1,5 @@
 resolve_utils <- function() {
-  if (is_tensorflow_implementation() && tensorflow::tf_version() > "2.0")
-    keras$utils$all_utils
-  else
-    keras$utils
+  keras$utils
 }
 
 #' Converts a class vector (integers) to binary class matrix.
