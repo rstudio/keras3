@@ -45,7 +45,7 @@ Layer <- function(classname, defs, inherit = tensorflow::tf$keras$layers$Layer) 
   # allow using the initialize method
   if ("initialize" %in% names(defs)) {
     if (!is.null(defs$`__init__`))
-      stop("You should specidy both __init__ and initialize methods.", call.=FALSE)
+      stop("You should not specify both __init__ and initialize methods.", call.=FALSE)
     
     defs[["__init__"]] <- defs$initialize
   }
