@@ -12,8 +12,10 @@ menu:
   main:
     name: "Frequently Asked Questions"
     identifier: "keras-faq"
-    parent: "keras-using-keras"
-    weight: 60
+    parent: "keras-getting-started-top"
+    weight: 40
+aliases:
+  - /keras/articles/faq.html
 ---
 
 ```{r setup, include=FALSE}

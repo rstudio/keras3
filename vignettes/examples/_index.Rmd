@@ -1,0 +1,87 @@
+---
+title: "Keras Examples"
+menu:
+  main:
+    name: "Examples"
+    parent: "guide-top"
+    weight: 25
+aliases:
+  - /keras/articles/examples/
+---
+
+| Example  | Description   |
+|----------------------|------------------------------------|
+| [addition_rnn](/guide/keras/examples/addition_rnn) | Implementation of sequence to sequence learning for performing addition of two numbers (as strings). |
+| [babi_memnn](/guide/keras/examples/babi_memnn) | Trains a memory network on the bAbI dataset for reading comprehension. |
+| [babi_rnn](/guide/keras/examples/babi_rnn) | Trains a two-branch recurrent network on the bAbI dataset for reading comprehension. |
+| [cifar10_cnn](/guide/keras/examples/cifar10_cnn) | Trains a simple deep CNN on the CIFAR10 small images dataset. |
+| [cifar10_densenet](/guide/keras/examples/cifar10_densenet) | Trains a DenseNet-40-12 on the CIFAR10 small images dataset. |
+| [conv_lstm](/guide/keras/examples/conv_lstm) | Demonstrates the use of a convolutional LSTM network. |
+| [deep_dream](/guide/keras/examples/deep_dream) | Deep Dreams in Keras. |
+| [eager_dcgan](/guide/keras/examples/eager_dcgan) | Generating digits with generative adversarial networks and eager execution. |
+| [eager_image_captioning](/guide/keras/examples/eager_image_captioning) | Generating image captions with Keras and eager execution. |
+| [eager_pix2pix](/guide/keras/examples/eager_pix2pix) | Image-to-image translation with Pix2Pix, using eager execution. |
+| [eager_styletransfer](/guide/keras/examples/eager_styletransfer) | Neural style transfer with eager execution. |
+| [fine_tuning](/guide/keras/examples/fine_tuning) | Fine tuning of a image classification model. | 
+| [imdb_bidirectional_lstm](/guide/keras/examples/imdb_bidirectional_lstm) | Trains a Bidirectional LSTM on the IMDB sentiment classification task. |
+| [imdb_cnn](/guide/keras/examples/imdb_cnn) | Demonstrates the use of Convolution1D for text classification. |
+| [imdb_cnn_lstm](/guide/keras/examples/imdb_cnn_lstm) | Trains a convolutional stack followed by a recurrent stack network on the IMDB sentiment classification task. |
+| [imdb_fasttext](/guide/keras/examples/imdb_fasttext) | Trains a FastText model on the IMDB sentiment classification task. |
+| [imdb_lstm](/guide/keras/examples/imdb_lstm) | Trains a LSTM on the IMDB sentiment classification task. |
+| [lstm_text_generation](/guide/keras/examples/lstm_text_generation) | Generates text from Nietzsche's writings. |
+| [lstm_seq2seq](/guide/keras/examples/lstm_seq2seq) | This script demonstrates how to implement a basic character-level sequence-to-sequence model. |
+| [mnist_acgan](/guide/keras/examples/mnist_acgan) | Implementation of AC-GAN (Auxiliary Classifier GAN ) on the MNIST dataset |
+| [mnist_antirectifier](/guide/keras/examples/mnist_antirectifier) | Demonstrates how to write custom layers for Keras |
+| [mnist_cnn](/guide/keras/examples/mnist_cnn) | Trains a simple convnet on the MNIST dataset. |
+| [mnist_cnn_embeddings](/guide/keras/examples/mnist_cnn_embeddings) | Demonstrates how to visualize embeddings in TensorBoard. |
+| [mnist_irnn](/guide/keras/examples/mnist_irnn) | Reproduction of the IRNN experiment with pixel-by-pixel sequential MNIST in "A Simple Way to Initialize Recurrent Networks of Rectified Linear Units" by Le et al. |
+| [mnist_mlp](/guide/keras/examples/mnist_mlp) | Trains a simple deep multi-layer perceptron on the MNIST dataset. |
+| [mnist_hierarchical_rnn](/guide/keras/examples/mnist_hierarchical_rnn) | Trains a Hierarchical RNN (HRNN) to classify MNIST digits. |
+| [mnist_tfrecord](/guide/keras/examples/mnist_tfrecord) | MNIST dataset with TFRecords, the standard TensorFlow data format. |
+| [mnist_transfer_cnn](/guide/keras/examples/mnist_transfer_cnn) | Transfer learning toy example. |
+| [neural_style_transfer](/guide/keras/examples/neural_style_transfer) | Neural style transfer (generating an image with the same “content” as a base image, but with the “style” of a different picture). |
+| [nmt_attention](/guide/keras/examples/nmt_attention) | Neural machine translation with an attention mechanism. |
+| [quora_siamese_lstm](/guide/keras/examples/quora_siamese_lstm) | Classifying duplicate quesitons from Quora using Siamese Recurrent Architecture. | 
+| [reuters_mlp](/guide/keras/examples/reuters_mlp) | Trains and evaluatea a simple MLP on the Reuters newswire topic classification task. |
+| [stateful_lstm](/guide/keras/examples/stateful_lstm) | Demonstrates how to use stateful RNNs to model long sequences efficiently. |
+| [text_explanation_lime](/guide/keras/examples/text_explanation_lime) | How to use lime to explain text data. |
+| [variational_autoencoder](/guide/keras/examples/variational_autoencoder) | Demonstrates how to build a variational autoencoder. |
+| [variational_autoencoder_deconv](/guide/keras/examples/variational_autoencoder_deconv) | Demonstrates how to build a variational autoencoder with Keras using deconvolution layers. |
+| [tfprob_vae](/guide/keras/examples/tfprob_vae) | A variational autoencoder using TensorFlow Probability on Kuzushiji-MNIST. |
+| [vq_vae](/guide/keras/examples/vq_vae) | Discrete Representation Learning with VQ-VAE and TensorFlow Probability. |
+
+<!--
+| [cifar10_resnet](cifar10_resnet) | Trains a ResNet on the CIFAR10 dataset. |
+| [conv_filter_visualization](conv_filter_visualization) | Visualization of the filters of VGG16, via gradient ascent in input space. |
+| [image_ocr](image_ocr) | Trains a convolutional stack followed by a recurrent stack and a CTC logloss function to perform optical character recognition (OCR). |
+| [lstm_benchmark](lstm_benchmark) | Compares different LSTM implementations on the IMDB sentiment classification task. |
+| [mnist_dataset_api](mnist_dataset_api) | MNIST classification with TensorFlow's Dataset API. |
+| [mnist_net2net](mnist_net2net) | Reproduction of the Net2Net experiment with MNIST in "Net2Net: Accelerating Learning via Knowledge Transfer". |
+| [mnist_siamese_graph](mnist_siamese_graph) | Trains a Siamese multi-layer perceptron on pairs of digits from the MNIST dataset. |
+| [mnist_swwae](mnist_swwae) | Trains a Stacked What-Where AutoEncoder built on residual blocks on the MNIST dataset. |
+| [neural_doodle](neural_doodle) | Neural doodle. |
+| [reuters_mlp_relu_vs_selu](reuters_mlp_relu_vs_selu) | Compares self-normalizing MLPs with regular MLPs.  |
+| [lstm_stateful](lstm_stateful) | Example script showing how to use a stateful LSTM model
++and how its stateless counterpart performs. |
+-->
+
+
+<!--
+
+These examples are complete however don't yet work properly (see inline comments in 
+scripts for details) so we aren't listing them.
+
+
+| [pretrained_word_embeddings](pretrained_word_embeddings) | Loads pre-trained word embeddings (GloVe embeddings) into a frozen Keras Embedding layer, and uses it to train a text classification model on the 20 Newsgroup dataset. |
+
+-->
+
+
+
+
+
+
+
+
+
+

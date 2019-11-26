@@ -2,9 +2,6 @@
 title: tfprob_vae
 type: docs
 repo: https://github.com/rstudio/keras
-menu:
-  main:
-    parent: keras-examples
 ---
 
 <div class="source-ref">
