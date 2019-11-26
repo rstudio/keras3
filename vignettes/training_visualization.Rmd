@@ -20,7 +20,6 @@ aliases:
 ```{r setup, include = FALSE}
 library(keras)
 knitr::opts_chunk$set(comment = NA, eval = FALSE)
-img_path <- Sys.getenv("IMG_PATH", unset = "/images")
 ```
 
 ## Overview
@@ -61,13 +60,7 @@ We can then plot the training history as follows:
 plot(history)
 ```
 
-<div style="width=757 height=489" class="r-plot">
-```{r}
-knitr::include_graphics(paste0(img_path, "/training_history_ggplot2.png"))
-```
-</div>
-
-<!-- ![](images/training_history_ggplot2.png){width=757 height=489 .r-plot} -->
+![](../images/training_history_ggplot2.png){width=757 height=489 .r-plot}
 
 The history will be plotted using [ggplot2](http://ggplot2.tidyverse.org/) if available (if not then base graphics will be used), include all specified metrics as well as the loss, and draw a smoothing line if there are 10 or more epochs. You can customize all of this behavior via various options of the [plot method](https://keras.rstudio.com/reference/plot.keras_training_history.html).
 
@@ -142,7 +135,7 @@ TensorBoard is a visualization tool included with TensorFlow that enables you to
 
 For example, here's a TensorBoard display for Keras accuracy and loss metrics:
 
-<!-- ![](images/tensorboard.png){width=700 height=545 .screenshot} -->
+![](../images/tensorboard.png){width=700 height=545 .screenshot}
 
 ### Recording Data
 
@@ -206,7 +199,7 @@ tensorboard("logs")
 
 The TensorBoard visualization would look like this:
 
-<!-- ![](images/tensorboard_compare.png){width=700 height=540 .screenshot} -->
+![](../images/tensorboard_compare.png){width=700 height=540 .screenshot}
 
 You can also pass multiple log directories. For example:
 
