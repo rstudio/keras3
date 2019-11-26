@@ -135,7 +135,7 @@ TensorBoard is a visualization tool included with TensorFlow that enables you to
 
 For example, here's a TensorBoard display for Keras accuracy and loss metrics:
 
-![](../images/tensorboard.png){width=700 height=545 .screenshot}
+![](images/tensorboard.png){width=700 height=545 .screenshot}
 
 ### Recording Data
 
@@ -199,7 +199,7 @@ tensorboard("logs")
 
 The TensorBoard visualization would look like this:
 
-![](../images/tensorboard_compare.png){width=700 height=540 .screenshot}
+![](images/tensorboard_compare.png){width=700 height=540 .screenshot}
 
 You can also pass multiple log directories. For example:
 
