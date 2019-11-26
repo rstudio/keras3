@@ -60,7 +60,7 @@ We can then plot the training history as follows:
 plot(history)
 ```
 
-![](../images/training_history_ggplot2.png){width=757 height=489 .r-plot}
+![](images/training_history_ggplot2.png){width=757 height=489 .r-plot}
 
 The history will be plotted using [ggplot2](http://ggplot2.tidyverse.org/) if available (if not then base graphics will be used), include all specified metrics as well as the loss, and draw a smoothing line if there are 10 or more epochs. You can customize all of this behavior via various options of the [plot method](https://keras.rstudio.com/reference/plot.keras_training_history.html).
 
