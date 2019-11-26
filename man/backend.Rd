@@ -9,7 +9,7 @@ backend(convert = TRUE)
 \arguments{
 \item{convert}{\code{TRUE} to automatically convert Python objects to their R
 equivalent. If you pass \code{FALSE} you can do manual conversion using the
-\code{\link[=py_to_r]{py_to_r()}} function.}
+\code{\link[reticulate:py_to_r]{py_to_r()}} function.}
 }
 \value{
 Reference to Keras backend python module.

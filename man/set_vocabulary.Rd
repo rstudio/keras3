@@ -4,8 +4,13 @@
 \alias{set_vocabulary}
 \title{Sets vocabulary (and optionally document frequency) data for the layer}
 \usage{
-set_vocabulary(object, vocab, df_data = NULL, oov_df_value = FALSE,
-  append = FALSE)
+set_vocabulary(
+  object,
+  vocab,
+  df_data = NULL,
+  oov_df_value = FALSE,
+  append = FALSE
+)
 }
 \arguments{
 \item{object}{a text vectorization layer}

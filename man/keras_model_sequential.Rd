@@ -26,13 +26,13 @@ Dense...) an \code{input_dim} argument.
 library(keras)
 
 model <- keras_model_sequential() 
-model %>% 
-  layer_dense(units = 32, input_shape = c(784)) %>% 
-  layer_activation('relu') %>% 
-  layer_dense(units = 10) %>% 
+model \%>\% 
+  layer_dense(units = 32, input_shape = c(784)) \%>\% 
+  layer_activation('relu') \%>\% 
+  layer_dense(units = 10) \%>\% 
   layer_activation('softmax')
 
-model %>% compile(
+model \%>\% compile(
   optimizer = 'rmsprop',
   loss = 'categorical_crossentropy',
   metrics = c('accuracy')

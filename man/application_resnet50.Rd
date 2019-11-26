@@ -77,7 +77,7 @@ x <- array_reshape(x, c(1, dim(x)))
 x <- imagenet_preprocess_input(x)
 
 # make predictions then decode and print them
-preds <- model %>% predict(x)
+preds <- model \%>\% predict(x)
 imagenet_decode_predictions(preds, top = 3)[[1]]
 }   
 }

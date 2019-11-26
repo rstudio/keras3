@@ -111,7 +111,7 @@ metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
   k_mean(y_pred) 
 })
 
-model %>% compile(
+model \%>\% compile(
   optimizer = optimizer_rmsprop(),
   loss = loss_binary_crossentropy,
   metrics = c('accuracy', metric_mean_pred)
@@ -123,7 +123,7 @@ metric_top_3_categorical_accuracy <-
     metric_top_k_categorical_accuracy(y_true, y_pred, k = 3) 
   })
 
-model %>% compile(
+model \%>\% compile(
   loss = 'categorical_crossentropy',
   optimizer = optimizer_rmsprop(),
   metrics = metric_top_3_categorical_accuracy
