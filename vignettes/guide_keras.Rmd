@@ -9,11 +9,12 @@ type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Guide to Keras Basics"
+    name: "Keras basics"
     identifier: "keras-keras-basics"
-    parent: "keras-using-keras"
+    parent: "keras-getting-started-top"
     weight: 10
-    
+aliases:
+  - /keras/articles/guide_keras.html
 ---
 
 ```{r setup, include=FALSE}
@@ -206,7 +207,7 @@ use raw R data as well as a `dataset`.
 
 To *evaluate* the inference-mode loss and metrics for the data provided:
 
-```{r}
+```{r, eval = FALSE}
 model %>% evaluate(test_data, test_labels, batch_size = 32)
 
 model %>% evaluate(test_dataset, steps = 30)
@@ -215,7 +216,7 @@ model %>% evaluate(test_dataset, steps = 30)
 And to *predict* the output of the last layer in inference for the data
 provided, again as R data as well as a `dataset`:
 
-```{r}
+```{r, eval = FALSE}
 model %>% predict(test_data, batch_size = 32)
     
 model %>% predict(test_dataset, steps = 30)
@@ -356,7 +357,7 @@ In cases where this is not needed, but flexibility in building the architecture 
 
 A custom model is defined by calling `keras_model_custom()` passing a function that specifies the layers to be created and the operations to be executed on forward pass.
 
-```{r}
+```{r, eval = FALSE}
 my_model <- function(input_dim, output_dim, name = NULL) {
   
   # define and return a custom model
@@ -441,12 +442,12 @@ model %>% fit(
 Save and load the weights of a model using `save_model_weights_hdf5` and `load_model_weights_hdf5`, respectively:
 
 ```{r}
-# save in HDF5 format
-model %>% save_model_weights_hdf5('my_model.h5')
+# save in SavedModel format
+model %>% save_model_weights_tf('my_model/')
 
 # Restore the model's state,
 # this requires a model with the same architecture.
-model %>% load_model_weights_hdf5('my_model.h5')
+model %>% load_model_weights_tf('my_model/')
 ```
 
 
@@ -482,60 +483,10 @@ allows you to checkpoint a model and resume training later —from the
 exact same state —without access to the original code.
 
 ```{r}
-# Save entire model to a HDF5 file
-model %>% save_model_hdf5('my_model.h5')
+# Save entire model to the SavedModel format
+model %>% save_model_tf('my_model/')
 
 # Recreate the exact same model, including weights and optimizer.
-model <- load_model_hdf5('my_model.h5')
+model <- load_model_tf('my_model/')
 ```
-
-## Eager execution
-
-[Eager execution](eager_guide.Rmd) is an imperative programming environment that evaluates operations immediately. This is not required for Keras,
-but is supported by the TensorFlow backend and useful for inspecting your program
-and debugging.
-
-To use eager execution from R, you need to tell Keras to use the TensorFlow implementation of Keras (as opposed to native Keras):
-
-```{r}
-library(keras)
-use_implementation("tensorflow")
-```
-
-
-When using the TensorFlow implementation,  all model-building APIs are compatible with eager
-execution. 
-
-
-## Distribution
-
-### Estimators
-
-The [Estimators](https://tensorflow.rstudio.com/tfestimators/) API is used for training models for distributed environments. This targets industry use cases such as
-distributed training on large datasets that can export a model for
-production.
-
-To use `tfestimators`, you need to install separately:
-
-```{r}
-install.packages("tfestimators")
-```
-
-
-A `model` can be trained with the `tfestimators` API by
-converting the model to an `estimator` object with
-`keras_model_to_estimator`. 
-Note: As of today this only works with the TensorFlow implementation of Keras.
-
-
-```{r}
-library(keras)
-use_implementation("tensorflow")
-library(tfestimators)
-
-estimator <- keras_model_to_estimator(model)
-```
-
-Note: You can enable eager execution for debugging [estimator
-input functions](https://tensorflow.rstudio.com/tfestimators/articles/estimator_basics.html) and inspecting data.
 

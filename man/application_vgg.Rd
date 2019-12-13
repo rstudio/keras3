@@ -81,6 +81,6 @@ x <- image_to_array(img)
 x <- array_reshape(x, c(1, dim(x)))
 x <- imagenet_preprocess_input(x)
 
-features <- model %>% predict(x)
+features <- model \%>\% predict(x)
 }
 }

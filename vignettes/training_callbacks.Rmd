@@ -11,8 +11,10 @@ menu:
   main:
     name: "Training Callbacks"
     identifier: "keras-training-callbacks"
-    parent: "keras-advanced"
+    parent: "keras-advanced-top"
     weight: 30
+aliases:
+  - /keras/articles/training_callbacks.html
 ---
 
 ```{r setup, include = FALSE}

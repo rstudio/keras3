@@ -10,9 +10,11 @@ repo: https://github.com/rstudio/keras
 menu:
   main:
     name: "Saving and serializing models"
-    identifier: "saving-serializing"
-    parent: "keras-advanced"
-    weight: 70
+    identifier: "keras-saving-serializing"
+    parent: "keras-getting-started-top"
+    weight: 30
+aliases:
+  - /keras/articles/saving_serializing.html
 ---
 
 ```{r setup, include=FALSE}
@@ -32,7 +34,7 @@ The APIs in this case are slightly different than for Sequential or Functional m
 
 For Sequential Models and models built using the Functional API use:
 
-* `save_model_hdf5()`/`load_model_hdf5()` to save the entire model to disk, including the `optimizer` state.
+* `save_model_hdf5()`/`load_model_hdf5()` to save the entire model to disk, including the `optimizer` state. You can also use `save_model_tf`/`load_model_tf` to save the entire model to the SavedModel format.
 
 * `get_config()`/`from_config()` to load only the model architecture into an R object.
 
@@ -42,7 +44,6 @@ For Sequential Models and models built using the Functional API use:
 
 **Note** you can use a combination of `model_to_json()` and `save_model_weights_hdf5()` to save both the architecture and the weights. In this case the optimizer state is not saved.
 
-* `model_to_saved_model()`/`model_from_saved_model()` to save both architecture and model weights to the SavedModel format. This is useful if you want to serve the model using TensorFlow Serving.
 
 For custom models use:
 
@@ -122,14 +123,14 @@ training where you left off.
 You can also export a whole model to the TensorFlow SavedModel format. SavedModel is 
 a standalone serialization format for Tensorflow objects, supported by TensorFlow 
 serving as well as TensorFlow implementations other than Python. Note that
-`model_to_saved_model` is only available for TensorFlow version greater than 1.14.
+`save_model_tf` is only available for TensorFlow version greater than 1.14.
 
 ```{r}
 # Export the model to a SavedModel
-model_to_saved_model(model, "model/")
+save_model_tf(model, "model/")
 
 # Recreate the exact same model
-new_model <- model_from_saved_model("model/")
+new_model <- load_model_tf("model/")
 
 # Check that the state is preserved
 new_predictions <- predict(new_model, x_test)

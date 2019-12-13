@@ -4,10 +4,11 @@
 #'
 #' https://blogs.rstudio.com/tensorflow/posts/2018-10-22-mmd-vae/
 
-# Note: This example has been updated for TensorFlow 2.0.
 
 library(keras)
+use_implementation("tensorflow")
 library(tensorflow)
+tfe_enable_eager_execution(device_policy = "silent")
 
 library(tfdatasets)
 library(dplyr)
@@ -23,14 +24,9 @@ c(train_images, train_labels) %<-% fashion$train
 c(test_images, test_labels) %<-% fashion$test
 
 train_x <-
-  train_images %>% `/`(255) %>%
-  k_reshape(c(60000, 28, 28, 1)) %>% 
-  tf$cast(k_floatx())
-
+  train_images %>% `/`(255) %>% k_reshape(c(60000, 28, 28, 1))
 test_x <-
-  test_images %>% `/`(255) %>% 
-  k_reshape(c(10000, 28, 28, 1)) %>%
-  tf$cast(k_floatx())
+  test_images %>% `/`(255) %>% k_reshape(c(10000, 28, 28, 1))
 
 class_names = c('T-shirt/top',
                 'Trouser',
@@ -130,7 +126,7 @@ decoder_model <- function(name = NULL) {
 }
 
 reparameterize <- function(mean, logvar) {
-  eps <- k_random_normal(shape = mean$shape)
+  eps <- k_random_normal(shape = mean$shape, dtype = tf$float64)
   eps * k_exp(logvar * 0.5) + mean
 }
 
@@ -138,14 +134,14 @@ reparameterize <- function(mean, logvar) {
 # Loss and optimizer ------------------------------------------------------
 
 normal_loglik <- function(sample, mean, logvar, reduce_axis = 2) {
-  loglik <- k_constant(0.5) * 
-    (k_log(2 * k_constant(pi)) +
+  loglik <- k_constant(0.5, dtype = tf$float64) * 
+    (k_log(2 * k_constant(pi, dtype = tf$float64)) +
      logvar +
      k_exp(-logvar) * (sample - mean) ^ 2)
   - k_sum(loglik, axis = reduce_axis)
 }
 
-optimizer <- tf$keras$optimizers$Adam(1e-4)
+optimizer <- tf$train$AdamOptimizer(1e-4)
 
 
 
@@ -154,7 +150,8 @@ optimizer <- tf$keras$optimizers$Adam(1e-4)
 num_examples_to_generate <- 64
 
 random_vector_for_generation <-
-  k_random_normal(shape = list(num_examples_to_generate, latent_dim))
+  k_random_normal(shape = list(num_examples_to_generate, latent_dim),
+                  dtype = tf$float64)
 
 generate_random_clothes <- function(epoch) {
   predictions <-
@@ -269,7 +266,9 @@ for (epoch in seq_len(num_epochs)) {
       logpx_z <-
         -k_sum(crossentropy_loss)
       logpz <-
-        normal_loglik(z, k_constant(0), k_constant(0))
+        normal_loglik(z,
+                      k_constant(0, dtype = tf$float64),
+                      k_constant(0, dtype = tf$float64))
       logqz_x <- normal_loglik(z, mean, logvar)
       loss <- -k_mean(logpx_z + logpz - logqz_x)
       
@@ -285,10 +284,12 @@ for (epoch in seq_len(num_epochs)) {
     
     optimizer$apply_gradients(purrr::transpose(list(
       encoder_gradients, encoder$variables
-    )))
+    )),
+    global_step = tf$train$get_or_create_global_step())
     optimizer$apply_gradients(purrr::transpose(list(
       decoder_gradients, decoder$variables
-    )))
+    )),
+    global_step = tf$train$get_or_create_global_step())
     
   })
   

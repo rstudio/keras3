@@ -11,8 +11,11 @@ menu:
   main:
     name: "Custom Layers"
     identifier: "keras-custom-layers"
-    parent: "keras-advanced"
-    weight: 50
+    parent: "keras-advanced-top"
+    weight: 10
+aliases:
+  - /keras/articles/about_keras_layers.html
+  - /keras/articles/custom_layers.html
 ---
 
 ```{r setup, include = FALSE}

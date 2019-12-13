@@ -11,8 +11,11 @@ menu:
   main:
     name: "Custom Models"
     identifier: "keras-custom-models"
-    parent: "keras-advanced"
-    weight: 60
+    parent: "keras-advanced-top"
+    weight: 20
+aliases:
+  - /keras/articles/about_keras_models.html
+  - /keras/articles/custom_models.html
 ---
 
 ```{r setup, include = FALSE}

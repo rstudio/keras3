@@ -9,10 +9,12 @@ type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Guide to the Functional API"
+    name: "Functional API"
     identifier: "keras-functional-api"
-    parent: "keras-using-keras"
-    weight: 30
+    parent: "keras-getting-started-top"
+    weight: 20
+aliases:
+  - /keras/articles/functional_api.html
 ---
 
 ```{r setup, include = FALSE}
@@ -22,13 +24,13 @@ knitr::opts_chunk$set(comment = NA, eval = FALSE)
 
 The Keras functional API is the way to go for defining complex models, such as multi-output models, directed acyclic graphs, or models with shared layers.
 
-This guide assumes that you are already familiar with the [Sequential](sequential_model.html) model.
+This guide assumes that you are already familiar with the [Sequential](../sequential_model) model.
 
 Let's start with something simple.
 
 ## First example: a densely-connected network
 
-The [Sequential](sequential_model.html) model is probably a better choice to implement such a network, but it helps to start with something really simple.
+The [Sequential](../sequential_model) model is probably a better choice to implement such a network, but it helps to start with something really simple.
 
 To use the functional API, build your input and output layers and then pass them to the `model()` function. This model can be trained just like Keras sequential models.
 
