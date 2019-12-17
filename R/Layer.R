@@ -40,22 +40,26 @@
 #' 
 #' 
 #' @export
-Layer <- function(classname, defs, inherit = tensorflow::tf$keras$layers$Layer) {
+Layer <- function(classname, initialize, build = NULL, call = NULL, ...,  
+                  inherit = tensorflow::tf$keras$layers$Layer) {
+  
+  
+  defs <- list(
+    initialize = initialize,
+    build = build,
+    call = call
+  )
+  defs <- Filter(Negate(is.null), defs)
+  defs <- append(defs, list(...))
+  
   
   # allow using the initialize method
   if ("initialize" %in% names(defs)) {
     if (!is.null(defs$`__init__`))
-      stop("You should specidy both __init__ and initialize methods.", call.=FALSE)
+      stop("You should not specify both __init__ and initialize methods.", call.=FALSE)
     
     defs[["__init__"]] <- defs$initialize
   }
-  
-  # make `__init__` always return NULL
-  # init <- defs[["__init__"]]
-  # defs[["__init__"]] <- function(...) {
-  #   init(...)
-  #   NULL
-  # }
   
   # automatically add the `self` argument
   defs <- lapply(defs, function(x) {
@@ -70,6 +74,8 @@ Layer <- function(classname, defs, inherit = tensorflow::tf$keras$layers$Layer) 
     x
   })
   
+  # makes the function return NULL. `__init__` in python must always return None
+  defs$`__init__` <- wrap_return_null(defs$`__init__`)
   
   layer <- reticulate::PyClass(
     classname = classname,
@@ -77,7 +83,28 @@ Layer <- function(classname, defs, inherit = tensorflow::tf$keras$layers$Layer) 
     inherit = inherit
   )
   
-  function(object, ...) {
-    create_layer(layer, object, list(...))
+  f <- function() {
+    .args <- as.list(match.call())[-c(1)]
+    .args <- .args[names(.args) != "object"]
+    create_layer(layer, object, .args)
   }
+  formals(f) <- append(
+    list(object = quote(expr=)),
+    formals(initialize)
+  )
+  attr(f, "layer") <- layer
+  f
 }
+
+# makes the function return NULL. `__init__` in python must always return None.
+wrap_return_null <- function(fun) {
+  e <- new.env(parent = environment(fun))
+  e$fun_ <- function() {
+    environment(fun) <- environment() # fun must execute in fun_'s exec env.
+    do.call(fun, as.list(match.call()[-1]))
+    NULL
+  }
+  formals(e$fun_) <- formals(fun)
+  e$fun_
+}
+
