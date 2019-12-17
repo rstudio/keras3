@@ -2,7 +2,7 @@
 #' 
 #' @param classname the name of the custom Layer.
 #' @param defs definition of methods.
-#' @param inherit innherit from the base Keras Layer. 
+#' @param inherit the Keras layer to inherit from
 #' 
 #' @examples
 #' \dontrun{
