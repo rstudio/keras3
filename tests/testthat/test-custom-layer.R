@@ -2,21 +2,25 @@ context("Custom layers")
 
 source("utils.R")
 
-test_succeeds("Can create and use a custom layer", {
-  
-  layer_multiply_by_x <- Layer(
+create_custom_layer <- function() {
+  Layer(
     classname = "MultiplyByX",
     
     initialize = function(x) {
       super()$`__init__`()
       self$x <- tensorflow::tf$constant(x)
     },
-      
+    
     call =  function(inputs, ...) {
       inputs * self$x
     }
     
   )
+}
+
+create_model_with_custom_layer <- function() {
+  
+  layer_multiply_by_x <- create_custom_layer()
   
   layer_multiply_by_2 <- layer_multiply_by_x(x = 2)
   
@@ -24,6 +28,13 @@ test_succeeds("Can create and use a custom layer", {
   output <- layer_multiply_by_2(input)
   
   model <- keras_model(input, output)
+  model
+}
+
+
+test_succeeds("Can create and use a custom layer", {
+  
+  model <- create_model_with_custom_layer()
   
   out <- predict(model, c(1,2,3,4,5))
   
@@ -33,19 +44,7 @@ test_succeeds("Can create and use a custom layer", {
 
 test_succeeds("Can use custom layers in sequential models", {
   
-  layer_multiply_by_x <- Layer(
-    classname = "MultiplyByX",
-    
-    initialize = function(x) {
-      super()$`__init__`()
-      self$x <- tensorflow::tf$constant(x)
-    },
-    
-    call =  function(inputs, ...) {
-      inputs * self$x
-    }
-    
-  )
+  layer_multiply_by_x <- create_custom_layer()
   
   model <- keras_model_sequential() %>% 
     layer_multiply_by_x(2) %>% 
@@ -54,6 +53,63 @@ test_succeeds("Can use custom layers in sequential models", {
   out <- predict(model, c(1,2,3,4,5))
   
   expect_equal(out, matrix(1:5, ncol = 1)*2*2)
+})
+
+test_succeeds("Input shape is 1-based indexed", {
+  
+  concat_layer <- Layer(
+    classname = "Hello",
+    initialize = function() {
+      super()$`__init__`()
+    },
+    call = function(x, ...) {
+      tensorflow::tf$concat(list(x,x), axis = 1L)
+    },
+    compute_output_shape = function(input_shape) {
+      list(input_shape[[1]], input_shape[[2]]*2)
+    }
+  )
+  
+  x <- layer_input(shape = 10)
+  out <- concat_layer(x)
+  
+  expect_identical(out$shape[[2]], 20L)
+})
+
+test_succeeds("Can use self$add_weight", {
+  
+  layer_dense2 <- Layer(
+    "Dense2",
+    
+    initialize = function(units) {
+      super()$`__init__`()
+      self$units <- as.integer(units)
+    },
+    
+    build = function(input_shape) {
+      self$kernel <- self$add_weight(
+        name = "kernel",
+        shape = list(input_shape[[2]], self$units),
+        initializer = "uniform",
+        trainable = TRUE
+      )
+    },
+    
+    call = function(x, ...) {
+      tensorflow::tf$matmul(x, self$kernel)
+    },
+    
+    compute_output_shape = function(input_shape) {
+      list(input_shape[[1]], self$units)
+    }
+    
+  )
+  
+  l <- layer_dense2(units = 10)
+  input <- layer_input(shape = 10L)
+  output <- l(input)
+  
+  expect_length(l$weights, 1L)
 })
 
 
