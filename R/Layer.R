@@ -3,7 +3,7 @@
 #' @param classname the name of the custom Layer.
 #' @param initialize a function. This is where you define the arguments used to further
 #'  build yolur layer. For example a dense layer, would take the `units` argument.
-#'  You should always call \code{super()$`__init__()`} to intialized the base 
+#'  You should always call \code{super()$`__init__()`} to initialize the base 
 #'  inherited layer.
 #' @param build a function that takes `input_shape` as argument. This is where you will 
 #'  define your weights. Note that if your layer doesn’t define trainable weights then
@@ -131,4 +131,3 @@ wrap_return_null <- function(fun) {
   formals(e$fun_) <- formals(fun)
   e$fun_
 }
-
