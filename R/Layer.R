@@ -2,15 +2,15 @@
 #' 
 #' @param classname the name of the custom Layer.
 #' @param initialize a function. This is where you define the arguments used to further
-#'  build yolur layer. For example a dense layer, would take the `units` argument.
+#'  build your layer. For example, a dense layer would take the `units` argument.
 #'  You should always call \code{super()$`__init__()`} to initialize the base 
 #'  inherited layer.
 #' @param build a function that takes `input_shape` as argument. This is where you will 
 #'  define your weights. Note that if your layer doesn’t define trainable weights then
-#'  you need not implemented this method.
+#'  you need not implement this method.
 #' @param call This is where the layer’s logic lives. Unless you want your layer to 
 #'  support masking, you only have to care about the first argument passed to `call` 
-#'  the input tensor.
+#'  (the input tensor).
 #' @param compute_output_shape a function that takes `input_shape` as an argument. In 
 #'  case your layer modifies the shape of its input, you should specify here the 
 #'  shape transformation logic. This allows Keras to do automatic shape inference. 
@@ -19,7 +19,7 @@
 #' @param ... Any other methods and/or attributes can be specified using named
 #'  arguments. They will be added to the layer class.
 #' @param inherit the Keras layer to inherit from
-#' 
+#' @return A function that wraps `create_layer`, similar to `keras::layer_dense`.
 #' @examples
 #' \dontrun{
 #' 
