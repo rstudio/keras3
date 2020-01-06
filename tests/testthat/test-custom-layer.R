@@ -112,5 +112,41 @@ test_succeeds("Can use self$add_weight", {
   expect_length(l$weights, 1L)
 })
 
+test_succeeds("Can inherit from an R custom layer", {
+  
+  layer_base <- Layer(
+    classname = "base",
+    initialize = function(x) {
+      browser()
+      print(super())
+      super()$`__init__`()
+      self$x <- x
+    },
+    
+    build = function(input_shape) {
+      self$k <- 3
+    },
+    
+    call = function(x) {
+      x
+    }
+  )
+  
+  layer2 <- Layer(
+    inherit = attr(layer_base, "layer"),
+    classname = "b2",
+    initialize = function(x) {
+      print(super())
+      super()$`__init__`(x^2)
+    },
+    call = function(x, ...) {
+      x*self$k*self$x
+    }
+  )
+  
+  l <- layer2(x = 2)
+  l(1)
+  
+})
 
 

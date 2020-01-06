@@ -57,7 +57,7 @@ isn't provided.}
 \item{weights}{Initial weights for layer.}
 }
 \description{
-It follows: \verb{f(x) = alpha * x`` for }x < 0\verb{, }f(x) = x\verb{for}x >= 0`, where
+It follows: \verb{f(x) = alpha * x`` for }x < 0\verb{, }f(x) = x\code{for}x >= 0`, where
 alpha is a learned array with the same shape as x.
 }
 \seealso{

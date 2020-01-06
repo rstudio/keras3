@@ -4,10 +4,17 @@
 \alias{layer_text_vectorization}
 \title{Text vectorization layer}
 \usage{
-layer_text_vectorization(object, max_tokens = NULL,
-  standardize = "lower_and_strip_punctuation", split = "whitespace",
-  ngrams = NULL, output_mode = c("int", "binary", "count", "tfidf"),
-  output_sequence_length = NULL, pad_to_max_tokens = TRUE, ...)
+layer_text_vectorization(
+  object,
+  max_tokens = NULL,
+  standardize = "lower_and_strip_punctuation",
+  split = "whitespace",
+  ngrams = NULL,
+  output_mode = c("int", "binary", "count", "tfidf"),
+  output_sequence_length = NULL,
+  pad_to_max_tokens = TRUE,
+  ...
+)
 }
 \arguments{
 \item{object}{Model or layer object}
