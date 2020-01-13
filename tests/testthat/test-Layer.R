@@ -1,5 +1,3 @@
-context("Custom layers")
-
 source("utils.R")
 
 create_custom_layer <- function() {
@@ -117,8 +115,6 @@ test_succeeds("Can inherit from an R custom layer", {
   layer_base <- Layer(
     classname = "base",
     initialize = function(x) {
-      browser()
-      print(super())
       super()$`__init__`()
       self$x <- x
     },
@@ -133,10 +129,9 @@ test_succeeds("Can inherit from an R custom layer", {
   )
   
   layer2 <- Layer(
-    inherit = attr(layer_base, "layer"),
+    inherit = layer_base,
     classname = "b2",
     initialize = function(x) {
-      print(super())
       super()$`__init__`(x^2)
     },
     call = function(x, ...) {
@@ -145,8 +140,7 @@ test_succeeds("Can inherit from an R custom layer", {
   )
   
   l <- layer2(x = 2)
-  l(1)
-  
+  expect_equal(as.numeric(l(1)), 12)
 })
 
 
