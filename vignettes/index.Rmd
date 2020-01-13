@@ -5,6 +5,15 @@ vignette: >
   %\VignetteIndexEntry{Getting Started with Keras} 
   %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
+menu:
+  main:
+    name: "Overview"
+    identifier: "keras-keras-overview"
+    parent: "keras-getting-started-top"
+    weight: 5 
+aliases:
+  - /keras/
+  - /keras/articles/why_use_keras.html
 ---
 
 
@@ -25,27 +34,30 @@ knitr::opts_chunk$set(eval = FALSE)
 
 - Supports arbitrary network architectures: multi-input or multi-output models, layer sharing, model sharing, etc. This means that Keras is appropriate for building essentially any deep learning model, from a memory network to a neural Turing machine.
 
-- Is capable of running on top of multiple back-ends including [TensorFlow](https://github.com/tensorflow/tensorflow), [CNTK](https://github.com/Microsoft/cntk), or [Theano](https://github.com/Theano/Theano).
-
 This website provides documentation for the R interface to Keras. See the main Keras website at <https://keras.io> for additional information on the project.
 
 ## Installation
 
-First, install the keras R package from GitHub as follows:
+First, install the keras R package with:
 
 ```{r, eval=FALSE}
+install.packages("keras")
+```
+
+or install the development version with:
+
+```{r}
 devtools::install_github("rstudio/keras")
 ```
 
-The Keras R interface uses the [TensorFlow](https://www.tensorflow.org/) backend engine by default. To install both the core Keras library as well as the TensorFlow backend use the `install_keras()` function: 
+The Keras R interface uses the [TensorFlow](https://www.tensorflow.org/) backend engine by default.
 
 ```{r, eval=FALSE}
-library(keras)
+install.packages("keras")
 install_keras()
 ```
 
-This will provide you with default CPU-based installations of Keras and TensorFlow. If you want a more customized installation, e.g. if you want to take advantage of NVIDIA GPUs, see the documentation for `install_keras()`.
-
+This will provide you with default CPU-based installations of Keras and TensorFlow. If you want a more customized installation, e.g. if you want to take advantage of NVIDIA GPUs, see the documentation for `install_keras()` and the [installation](/installation/) section.
 
 ## MNIST Example
 
@@ -187,43 +199,6 @@ model %>% predict_classes(x_test)
 ```
 
 Keras provides a vocabulary for building deep learning models that is simple, elegant, and intuitive. Building a question answering system, an image classification model, a neural Turing machine, or any other model is just as straightforward. 
-
-## Tutorials
-
-To learn the basics of Keras, we recommend the following sequence of tutorials:
-
-- [Basic Classification](tutorial_basic_classification.html) --- In this tutorial, we train a neural network model to classify images of clothing, like sneakers and shirts. 
-
-- [Text Classification](tutorial_basic_text_classification.html) --- This tutorial classifies movie reviews as positive or negative using the text of the review. 
-
-- [Basic Regression](tutorial_basic_regression.html) --- This tutorial builds a model to predict the median price of homes in a Boston suburb during the mid-1970s. 
-
-- [Overfitting and Underfitting](tutorial_overfit_underfit.html) --- In this tutorial, we explore two common regularization techniques (weight regularization and dropout) and use them to improve our movie review classification results.
-
-- [Save and Restore Models](tutorial_save_and_restore.html) --- This tutorial demonstrates various ways to save and share models (after as well as during training).
-
-These tutorials walk you through the main components of the Keras library and demonstrate the core workflows used for training and improving the performance of neural networks. The [Guide to Keras Basics](guide_keras.html) provides a more condensed summary of this material.
-
-The [Deep Learning with Keras](https://github.com/rstudio/cheatsheets/raw/master/keras.pdf) cheat sheet also provides a condensed high level guide to using Keras.
-
-## Learning More
-
-To learn more about Keras, you can check out these articles:
-
-- [Guide to the Sequential Model](sequential_model.html)
-
-- [Guide to the Functional API](functional_api.html)
-
-- [Frequently Asked Questions](faq.html)
-
-- [Training Visualization](training_visualization.html)
-
-- [Using Pre-Trained Models](applications.html)
-
-- [Keras with Eager Execution](eager_guide.html)
-
-[![](https://images.manning.com/720/960/resize/book/a/4e5e97f-4e8d-4d97-a715-f6c2b0eb95f5/Allaire-DLwithR-HI.png){width=125 align=right style="margin-left:10px; margin-right: 20px; margin-top: 15px; border: solid 1px #cccccc;"}](https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X)
-
 
 ### Deep Learning with R Book
 

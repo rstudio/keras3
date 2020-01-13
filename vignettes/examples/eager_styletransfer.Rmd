@@ -2,9 +2,6 @@
 title: eager_styletransfer
 type: docs
 repo: https://github.com/rstudio/keras
-menu:
-  main:
-    parent: keras-examples
 ---
 
 <div class="source-ref">

@@ -11,8 +11,10 @@ menu:
   main:
     name: "Training Visualization"
     identifier: "keras-training-visualization"
-    parent: "keras-using-keras"
+    parent: "keras-advanced-top"
     weight: 50
+aliases:
+  - /keras/articles/training_visualization.html
 ---
 
 ```{r setup, include = FALSE}

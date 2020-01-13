@@ -19,6 +19,12 @@ layer_batch_normalization(
   gamma_regularizer = NULL,
   beta_constraint = NULL,
   gamma_constraint = NULL,
+  renorm = FALSE,
+  renorm_clipping = NULL,
+  renorm_momentum = 0.99,
+  fused = NULL,
+  virtual_batch_size = NULL,
+  adjustment = NULL,
   input_shape = NULL,
   batch_input_shape = NULL,
   batch_size = NULL,
@@ -61,6 +67,47 @@ since the scaling will be done by the next layer.}
 \item{beta_constraint}{Optional constraint for the beta weight.}
 
 \item{gamma_constraint}{Optional constraint for the gamma weight.}
+
+\item{renorm}{Whether to use Batch Renormalization
+(https://arxiv.org/abs/1702.03275). This adds extra variables during
+training. The inference is the same for either value of this parameter.}
+
+\item{renorm_clipping}{A named list or dictionary that may map keys \code{rmax},
+\code{rmin}, \code{dmax} to scalar Tensors used to clip the renorm correction. The
+correction \verb{(r, d)} is used as \code{corrected_value = normalized_value * r + d},
+with \code{r} clipped to \link{rmin, rmax}, and \code{d} to \link{-dmax, dmax}. Missing \code{rmax},
+\code{rmin}, \code{dmax} are set to \code{Inf}, \code{0}, \code{Inf}, \code{respectively}.}
+
+\item{renorm_momentum}{Momentum used to update the moving means and standard
+deviations with renorm. Unlike momentum, this affects training and should
+be neither too small (which would add noise) nor too large (which would
+give stale estimates). Note that momentum is still applied to get the means
+and variances for inference.}
+
+\item{fused}{\code{TRUE}, use a faster, fused implementation, or raise a ValueError
+if the fused implementation cannot be used. If \code{NULL}, use the faster
+implementation if possible. If \code{FALSE}, do not use the fused implementation.}
+
+\item{virtual_batch_size}{An integer. By default, virtual_batch_size is \code{NULL},
+which means batch normalization is performed across the whole batch.
+When virtual_batch_size is not \code{NULL}, instead perform "Ghost Batch
+Normalization", which creates virtual sub-batches which are each normalized
+separately (with shared gamma, beta, and moving statistics). Must divide
+the actual \verb{batch size} during execution.}
+
+\item{adjustment}{A function taking the Tensor containing the (dynamic) shape
+of the input tensor and returning a pair \verb{(scale, bias)} to apply to the
+normalized values \verb{(before gamma and beta)}, only during training.
+For example, if \code{axis==-1},
+\code{adjustment <- function(shape) {
+    tuple(tf$random$uniform(shape[-1:NULL, style = "python"], 0.93, 1.07),
+          tf$random$uniform(shape[-1:NULL, style = "python"], -0.1, 0.1))
+   }}
+will scale the normalized value
+by up to 7\% up or down, then shift the result by up to 0.1 (with
+independent scaling and bias for each feature but shared across all examples),
+and finally apply gamma and/or beta. If \code{NULL}, no adjustment is applied.
+Cannot be specified if virtual_batch_size is specified.}
 
 \item{input_shape}{Dimensionality of the input (integer) not including the
 samples axis. This argument is required when using this layer as the first
