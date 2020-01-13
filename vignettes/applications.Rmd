@@ -11,8 +11,10 @@ menu:
   main:
     name: "Pre-Trained Models"
     identifier: "keras-pre-trained-models"
-    parent: "keras-using-keras"
+    parent: "keras-advanced-top"
     weight: 40
+aliases:
+  - /keras/articles/applications.html
 ---
 
 ```{r setup, include = FALSE}

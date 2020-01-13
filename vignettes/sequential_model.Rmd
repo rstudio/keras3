@@ -9,10 +9,12 @@ type: docs
 repo: https://github.com/rstudio/keras
 menu:
   main:
-    name: "Guide to the Sequential Model"
+    name: "Sequential API"
     identifier: "keras-sequential-model"
-    parent: "keras-using-keras"
-    weight: 20
+    parent: "keras-getting-started-top"
+    weight: 15
+aliases:
+  - /keras/articles/sequential_model.html
 ---
 
 ```{r setup, include=FALSE}
@@ -196,17 +198,17 @@ model %>% fit(data, one_hot_labels, epochs=10, batch_size=32)
 
 Here are a few examples to get you started!
 
-On the [examples](https://keras.rstudio.com/articles/examples/index.html) page you will also find example models for real datasets:
+On the [examples](../examples/) page you will also find example models for real datasets:
 
-- [CIFAR10 small images classification](https://keras.rstudio.com/articles/examples/cifar10_cnn.html) 
+- [CIFAR10 small images classification](../examples/cifar10_cnn) 
 
-- [IMDB movie review sentiment classification](https://keras.rstudio.com/articles/examples/imdb_cnn_lstm.html) 
+- [IMDB movie review sentiment classification](../examples/imdb_cnn_lstm) 
 
-- [Reuters newswires topic classification](https://keras.rstudio.com/articles/examples/reuters_mlp.html) 
+- [Reuters newswires topic classification](../examples/reuters_mlp) 
 
-- [MNIST handwritten digits classification](https://keras.rstudio.com/articles/examples/mnist_mlp.html)
+- [MNIST handwritten digits classification](../examples/mnist_mlp)
 
-- [Character-level text generation with LSTM](https://keras.rstudio.com/articles/examples/lstm_text_generation.html)
+- [Character-level text generation with LSTM](../examples/lstm_text_generation)
 
 Some additional examples are provided below.
 
@@ -437,7 +439,7 @@ model %>% fit(
 
 A stateful recurrent model is one for which the internal states (memories) obtained after processing a batch of samples are reused as initial states for the samples of the next batch. This allows to process longer sequences while keeping computational complexity manageable.
 
-[You can read more about stateful RNNs in the FAQ.](faq.html#how-can-i-use-stateful-rnns)
+[You can read more about stateful RNNs in the FAQ.](../faq#how-can-i-use-stateful-rnns)
 
 ```{r}
 library(keras)

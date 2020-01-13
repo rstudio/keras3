@@ -1,9 +1,6 @@
 ---
 title: mnist_cnn_embeddings
 type: docs
-menu:
-  main:
-    parent: keras-examples
 ---
 
 <div class="source-ref">
