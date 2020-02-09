@@ -168,6 +168,9 @@ as_node_index <- function(node_index) {
 #'  
 #' @export
 adapt <- function(object, data, reset_state = NULL) {
+  
+  data <- keras_array(data)
+  
   # layers can implement adapt with different default reset_state
   if (is.null(reset_state))
     object$adapt(data)
