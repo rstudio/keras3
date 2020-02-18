@@ -47,5 +47,5 @@ jobs:
           Rscript -e "remotes::install_local()"
           Rscript -e "keras::install_keras(tensorflow = Sys.getenv('TF_VERSION'), extra_packages = c('IPython', 'requests', 'certifi', 'urllib3'))"
       - name: Check
-        continue-on-error: ${{ matrix.allow_failure == 'true'}}
+        continue-on-error: ${{ contains(matrix.allow_failure, 'true') }}
         run: Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'warning', check_dir = 'check')"
