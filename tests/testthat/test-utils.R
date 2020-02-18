@@ -12,7 +12,7 @@ test_call_succeeds("to_categorical", {
 
 test_call_succeeds("get_file", {
   get_file("2010zipcode.zip", 
-           origin = "https://www.irs.gov/pub/irs-soi/2010zipcode.zip", 
+           origin = "http://www.irs.gov/pub/irs-soi/2010zipcode.zip", 
            cache_subdir = "tests")
 })
 
