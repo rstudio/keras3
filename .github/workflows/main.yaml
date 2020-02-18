@@ -45,7 +45,7 @@ jobs:
       - name: Install TensorFlow
         run: |
           Rscript -e "remotes::install_local()"
-          Rscript -e "keras::install_keras(tensorflow = Sys.getenv('TF_VERSION'), extra_packages = 'IPython')"
+          Rscript -e "keras::install_keras(tensorflow = Sys.getenv('TF_VERSION'), extra_packages = c('IPython', 'requests'))"
       - name: Check
         continue-on-error: ${{ matrix.allow_failure == 'true'}}
         run: Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'warning', check_dir = 'check')"
