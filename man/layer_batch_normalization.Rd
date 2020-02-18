@@ -75,7 +75,7 @@ training. The inference is the same for either value of this parameter.}
 \item{renorm_clipping}{A named list or dictionary that may map keys \code{rmax},
 \code{rmin}, \code{dmax} to scalar Tensors used to clip the renorm correction. The
 correction \verb{(r, d)} is used as \code{corrected_value = normalized_value * r + d},
-with \code{r} clipped to \link{rmin, rmax}, and \code{d} to \link{-dmax, dmax}. Missing \code{rmax},
+with \code{r} clipped to \verb{[rmin, rmax]}, and \code{d} to \verb{[-dmax, dmax]}. Missing \code{rmax},
 \code{rmin}, \code{dmax} are set to \code{Inf}, \code{0}, \code{Inf}, \code{respectively}.}
 
 \item{renorm_momentum}{Momentum used to update the moving means and standard

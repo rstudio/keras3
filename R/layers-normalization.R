@@ -31,7 +31,7 @@
 #' @param renorm_clipping A named list or dictionary that may map keys `rmax`,
 #'   `rmin`, `dmax` to scalar Tensors used to clip the renorm correction. The
 #'   correction `(r, d)` is used as `corrected_value = normalized_value * r + d`,
-#'   with `r` clipped to [rmin, rmax], and `d` to [-dmax, dmax]. Missing `rmax`,
+#'   with `r` clipped to `[rmin, rmax]`, and `d` to `[-dmax, dmax]`. Missing `rmax`,
 #'   `rmin`, `dmax` are set to `Inf`, `0`, `Inf`, `respectively`.
 #' @param renorm_momentum Momentum used to update the moving means and standard
 #'   deviations with renorm. Unlike momentum, this affects training and should
