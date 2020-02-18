@@ -2,8 +2,7 @@
 
 ![](https://s3.amazonaws.com/keras.io/img/keras-logo-2018-large-1200.png)
 
-[![Travis-CI Build Status](https://travis-ci.org/rstudio/keras.svg?branch=master)](https://travis-ci.org/rstudio/keras) 
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rstudio/keras?branch=master&svg=true)](https://ci.appveyor.com/project/rstudio/keras)
+[![R build status](https://github.com/rstudio/keras/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/keras/actions?workflow=R-CMD-check)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/keras)](http://cran.r-project.org/package=keras)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/fchollet/keras/blob/master/LICENSE)
 
