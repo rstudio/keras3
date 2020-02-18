@@ -161,6 +161,9 @@ expect_warns_and_out <- function(warns, out) {
 
 test_succeeds("on predict/evaluation callbacks", {
   
+  if (tensorflow::tf_version() >= "2.1")
+    skip("TODO: R based generators are not working with TF >= 2.1")
+  
   CustomCallback <- R6::R6Class(
     "CustomCallback",
     inherit = KerasCallback,
@@ -196,7 +199,7 @@ test_succeeds("on predict/evaluation callbacks", {
   expect_warns_and_out(warns, out)
   
   gen <- function() {
-    list(matrix(1:10, ncol = 1))
+    reticulate::tuple(matrix(1:10, ncol = 1))
   }
   
   warns <- capture_warnings(
