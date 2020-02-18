@@ -32,7 +32,7 @@
 ^.travis\.yml$
 ^Jenkinsfile$
 ^logo.png$
-
+^\.github.*$
 ^appveyor\.yml$
 ^CRAN-RELEASE$
 ^doc$
