@@ -16,7 +16,5 @@
 
 - Supports arbitrary network architectures: multi-input or multi-output models, layer sharing, model sharing, etc. This means that Keras is appropriate for building essentially any deep learning model, from a memory network to a neural Turing machine.
 
-- Is capable of running on top of multiple back-ends including [TensorFlow](https://github.com/tensorflow/tensorflow), [CNTK](https://github.com/Microsoft/cntk), or [Theano](https://github.com/Theano/Theano).
-
-See the package website at <https://keras.rstudio.com> for complete documentation.
+See the package website at <https://tensorflow.rstudio.com> for complete documentation.
 
