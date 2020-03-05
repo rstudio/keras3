@@ -498,6 +498,12 @@ test_call_succeeds("layer_separable_conv_1d", required_version = "2.1.3", {
   }
 })
 
+test_call_succeeds('layer_attention',{
+input_1 = layer_input(shape=c(4,5))
+input_2 = layer_input(shape=c(4,5))
+layer_attention(c(input_1,input_2))
+})
+
 test_call_succeeds("layer_dense_features", required_version = "2.1.3", {
   if (is_tensorflow_implementation() && tensorflow::tf_version() >= "1.14") {
     
