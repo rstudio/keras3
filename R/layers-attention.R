@@ -1,8 +1,7 @@
 
-#' Applies Dropout to the input.
+#' Creates attention layer
 #' 
-#' Dropout consists in randomly setting a fraction `rate` of input units to 0 at
-#' each update during training time, which helps prevent overfitting.
+#' Dot-product attention layer, a.k.a. Luong-style attention.
 #' 
 #' @inheritParams layer_dense
 #' @param inputs a list of inputs first should be the query tensor, the second the value tensor
