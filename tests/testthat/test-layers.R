@@ -498,7 +498,7 @@ test_call_succeeds("layer_separable_conv_1d", required_version = "2.1.3", {
   }
 })
 
-test_call_succeeds('layer_attention'{
+test_call_succeeds('layer_attention',{
   if (is_tensorflow_implementation() && tensorflow::tf_version() >= "1.14"){
     input_1 = layer_input(shape=c(4,5))
     input_2 = layer_input(shape=c(4,5))
