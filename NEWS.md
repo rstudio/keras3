@@ -1,5 +1,8 @@
+## Development Version
 
-## Development version
+- Added `layer_attention` (#1000) by @atroiano.
+
+## Keras 2.2.5.0 (CRAN)
 
 - Added `layer_dense_features`.
 
