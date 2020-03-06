@@ -13,9 +13,19 @@
 #' @family attention layers   
 #'         
 #' @export
-layer_attention <- function(inputs, use_scale=FALSE, causal = FALSE) {
-  
-  create_layer(tf$keras$layers$Attention,object = inputs,args = list(use_scale = use_scale, causal = causal) )
+layer_attention <- function(inputs,use_scale=FALSE, causal = FALSE, batch_size = NULL, dtype = NULL, 
+                                name = NULL, trainable = NULL, weights = NULL) {
+  create_layer(keras$layers$Attention, inputs, list(
+      use_scale = use_scale,
+      causal = causal,
+      batch_size = batch_size,
+      dtype = dtype, 
+      name = name,
+      trainable = trainable, 
+      weights = weights)
+    )
+    
+    
 }
 
 

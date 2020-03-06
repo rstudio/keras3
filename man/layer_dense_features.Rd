@@ -54,6 +54,7 @@ A layer that produces a dense Tensor based on given feature_columns.
 Other core layers: 
 \code{\link{layer_activation}()},
 \code{\link{layer_activity_regularization}()},
+\code{\link{layer_attention}()},
 \code{\link{layer_dense}()},
 \code{\link{layer_dropout}()},
 \code{\link{layer_flatten}()},
