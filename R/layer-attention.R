@@ -16,6 +16,8 @@
 #' @export
 layer_attention <- function(inputs,use_scale=FALSE, causal = FALSE, batch_size = NULL, dtype = NULL, 
                                 name = NULL, trainable = NULL, weights = NULL) {
+  if (!is_tensorflow_implementation() || !tensorflow::tf_version() >= "1.14")
+    stop("layer_dense_features requires TensorFlow implementation and version >= 1.14")
   create_layer(keras$layers$Attention, inputs, list(
       use_scale = use_scale,
       causal = causal,
