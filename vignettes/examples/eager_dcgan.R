@@ -6,13 +6,8 @@
 
 
 library(keras)
-use_implementation("tensorflow")
-use_session_with_seed(7777, disable_gpu = FALSE, disable_parallel_cpu = FALSE)
 library(tensorflow)
-tfe_enable_eager_execution(device_policy = "silent")
-
 library(tfdatasets)
-
 
 mnist <- dataset_mnist()
 c(train_images, train_labels) %<-% mnist$train
@@ -132,25 +127,20 @@ discriminator <-
 generator <- generator()
 discriminator <- discriminator()
 
-generator$call = tf$contrib$eager$defun(generator$call)
-discriminator$call = tf$contrib$eager$defun(discriminator$call)
+cross_entropy = tf$keras$losses$BinaryCrossentropy(from_logits = TRUE)
 
 discriminator_loss <- function(real_output, generated_output) {
-  real_loss <-
-    tf$losses$sigmoid_cross_entropy(multi_class_labels = k_ones_like(real_output),
-                                    logits = real_output)
-  generated_loss <-
-    tf$losses$sigmoid_cross_entropy(multi_class_labels = k_zeros_like(generated_output),
-                                    logits = generated_output)
+  real_loss <- cross_entropy(k_ones_like(real_output), real_output)
+  generated_loss <- cross_entropy(k_zeros_like(generated_output), generated_output)
   real_loss + generated_loss
 }
 
 generator_loss <- function(generated_output) {
-  tf$losses$sigmoid_cross_entropy(tf$ones_like(generated_output), generated_output)
+  cross_entropy(tf$ones_like(generated_output), generated_output)
 }
 
-discriminator_optimizer <- tf$train$AdamOptimizer(1e-4)
-generator_optimizer <- tf$train$AdamOptimizer(1e-4)
+discriminator_optimizer <- tf$optimizers$Adam(1e-4)
+generator_optimizer <- tf$optimizers$Adam(1e-4)
 
 num_epochs <- 150
 noise_dim <- 100
