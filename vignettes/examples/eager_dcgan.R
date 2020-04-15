@@ -195,15 +195,15 @@ train <- function(dataset, epochs, noise_dim) {
       })
       
       gradients_of_generator <-
-        gen_tape$gradient(gen_loss, generator$variables)
+        gen_tape$gradient(gen_loss, generator$trainable_variables)
       gradients_of_discriminator <-
-        disc_tape$gradient(disc_loss, discriminator$variables)
+        disc_tape$gradient(disc_loss, discriminator$trainable_variables)
       
       generator_optimizer$apply_gradients(purrr::transpose(list(
-        gradients_of_generator, generator$variables
+        gradients_of_generator, generator$trainable_variables
       )))
       discriminator_optimizer$apply_gradients(purrr::transpose(
-        list(gradients_of_discriminator, discriminator$variables)
+        list(gradients_of_discriminator, discriminator$trainable_variables)
       ))
       
       total_loss_gen <- total_loss_gen + gen_loss
