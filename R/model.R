@@ -1146,8 +1146,6 @@ py_str.keras.engine.training.Model <- function(object,  line_length = getOption(
 # determine whether to view metrics or not
 resolve_view_metrics <- function(verbose, epochs, metrics) {
   (epochs > 1)          &&            # more than 1 epoch
-  !is.null(metrics)     &&            # have metrics
-  (length(metrics) > 0) &&            # capturing at least one metric
   (verbose > 0) &&                    # verbose mode is on
   !is.null(getOption("viewer")) &&    # have an internal viewer available
   nzchar(Sys.getenv("RSTUDIO"))       # running under RStudio

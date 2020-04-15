@@ -627,7 +627,12 @@ normalize_callbacks_with_metrics <- function(view_metrics, callbacks) {
     callbacks <- list(callbacks)
   
   # always include the metrics callback
-  callbacks <- append(callbacks, KerasMetricsCallback$new(view_metrics))  
+  if (tensorflow::tf_version() >= "2.2.0")
+    metrics_callback <- KerasMetricsCallbackV2$new(view_metrics)
+  else
+    metrics_callback <- KerasMetricsCallback$new(view_metrics)
+  
+  callbacks <- append(callbacks, metrics_callback)  
  
   normalize_callbacks(callbacks) 
 }
@@ -717,11 +722,11 @@ normalize_callbacks <- function(callbacks) {
       )
       
       # on_batch_* -> on_train_batch_*
-      if (!identical(callback$on_batch_begin, empty_fun)) {
+      if (!all.equal(callback$on_batch_begin, empty_fun)) {
         args$r_on_train_batch_begin <- callback$on_batch_begin
       }
       
-      if (!identical(callback$on_batch_end, empty_fun)) {
+      if (!all.equal(callback$on_batch_end, empty_fun)) {
         args$r_on_train_batch_end <- callback$on_batch_end
       }
       
