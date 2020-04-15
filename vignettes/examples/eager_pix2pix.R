@@ -423,7 +423,7 @@ train <- function(dataset, num_epochs) {
 }
 
 if (!restore) {
-  train(train_dataset, 1)
+  train(train_dataset, 200)
 } 
 
 
