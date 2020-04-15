@@ -722,11 +722,11 @@ normalize_callbacks <- function(callbacks) {
       )
       
       # on_batch_* -> on_train_batch_*
-      if (!all.equal(callback$on_batch_begin, empty_fun)) {
+      if (!isTRUE(all.equal(callback$on_batch_begin, empty_fun))) {
         args$r_on_train_batch_begin <- callback$on_batch_begin
       }
       
-      if (!all.equal(callback$on_batch_end, empty_fun)) {
+      if (!isTRUE(all.equal(callback$on_batch_end, empty_fun))) {
         args$r_on_train_batch_end <- callback$on_batch_end
       }
       
