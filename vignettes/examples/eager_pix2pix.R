@@ -5,16 +5,13 @@
 #' https://blogs.rstudio.com/tensorflow/posts/2018-09-20-eager-pix2pix
 
 library(keras)
-use_implementation("tensorflow")
-
 library(tensorflow)
-
-tfe_enable_eager_execution(device_policy = "silent")
+library(tfautograph)
 
 library(tfdatasets)
 library(purrr)
 
-restore <- TRUE
+restore <- FALSE
 
 data_dir <- "facades"
 
@@ -24,74 +21,83 @@ batches_per_epoch <- buffer_size / batch_size
 img_width <- 256L
 img_height <- 256L
 
-load_image <- function(image_file, is_train) {
+w <- 512L
+w2 <- 256L
 
-  image <- tf$read_file(image_file)
+load <- function(image_file) {
+  image <- tf$io$read_file(image_file)
   image <- tf$image$decode_jpeg(image)
-  
-  w <- as.integer(k_shape(image)[2])
-  w2 <- as.integer(w / 2L)
   real_image <- image[ , 1L:w2, ]
   input_image <- image[ , (w2 + 1L):w, ]
-  
   input_image <- k_cast(input_image, tf$float32)
   real_image <- k_cast(real_image, tf$float32)
-
-  if (is_train) {
-      input_image <-
-      tf$image$resize_images(input_image,
-                             c(286L, 286L),
-                             align_corners = TRUE,
-                             method = 2)
-    real_image <- tf$image$resize_images(real_image,
-                                         c(286L, 286L),
-                                         align_corners = TRUE,
-                                         method = 2)
-    
-    stacked_image <-
-      k_stack(list(input_image, real_image), axis = 1)
-    cropped_image <-
-      tf$random_crop(stacked_image, size = c(2L, img_height, img_width, 3L))
-    c(input_image, real_image) %<-% list(cropped_image[1, , , ], cropped_image[2, , , ])
-    
-    if (runif(1) > 0.5) {
-      input_image <- tf$image$flip_left_right(input_image)
-      real_image <- tf$image$flip_left_right(real_image)
-    }
-  } else {
-    input_image <-
-      tf$image$resize_images(
-        input_image,
-        size = c(img_height, img_width),
-        align_corners = TRUE,
-        method = 2
-      )
-    real_image <-
-      tf$image$resize_images(
-        real_image,
-        size = c(img_height, img_width),
-        align_corners = TRUE,
-        method = 2
-      )
-  }
+  list(input_image, real_image)
+}
   
+resize <- function(input_image, real_image, height, width) {
+  input_image <- tf$image$resize(input_image, list(height, width),
+                                 method = tf$image$ResizeMethod$NEAREST_NEIGHBOR)
+  real_image <- tf$image$resize(real_image, list(height, width),
+                                method = tf$image$ResizeMethod$NEAREST_NEIGHBOR)
+  
+  list(input_image, real_image)
+}
+  
+random_crop <- function(input_image, real_image) {
+  stacked_image <-
+    k_stack(list(input_image, real_image), axis = 1)
+  cropped_image <-
+    tf$image$random_crop(stacked_image, size = c(2L, img_height, img_width, 3L))
+  c(input_image, real_image) %<-% list(cropped_image[1, , , ], cropped_image[2, , , ])
+  list(input_image, real_image)
+}
+
+normalize <- function(input_image, real_image) {
   input_image <- (input_image / 127.5) - 1
   real_image <- (real_image / 127.5) - 1
   
+  list(input_image, real_image)
+  
+}
+
+random_jitter <- function(input_image, real_image) {
+  # resizing to 286 x 286 x 3
+  c(input_image, real_image) %<-% resize(input_image, real_image, 286L, 286L)
+    # randomly cropping to 256 x 256 x 3
+  c(input_image, real_image) %<-% random_crop(input_image, real_image)
+    if (tf$random$uniform(shape = list()) > 0.5) {
+    # random mirroring
+    input_image <- tf$image$flip_left_right(input_image)
+    real_image <- tf$image$flip_left_right(real_image)
+  }
+  list(input_image, real_image)
+}
+
+random_jitter <- tf_function(autograph(random_jitter))
+
+load_image_train <- function(image_file) {
+  c(input_image, real_image) %<-% load(image_file)
+  c(input_image, real_image) %<-% random_jitter(input_image, real_image)
+  #c(input_image, real_image) %<-% normalize(input_image, real_image)
+  list(input_image, real_image)
+}
+
+load_image_test <- function(image_file) {
+  c(input_image, real_image) %<-% load(image_file)
+  c(input_image, real_image) %<-% resize(input_image, real_image, img_height, img_width)
+  c(input_image, real_image) %<-% normalize(input_image, real_image)
   list(input_image, real_image)
 }
 
 train_dataset <-
   tf$data$Dataset$list_files(file.path(data_dir, "train/*.jpg")) %>%
   dataset_shuffle(buffer_size) %>%
-  dataset_map(function(image)
-    tf$py_func(load_image, list(image, TRUE), list(tf$float32, tf$float32))) %>%
+  dataset_map(load_image_train, num_parallel_calls = 1) %>%
   dataset_batch(batch_size)
 
 test_dataset <-
   tf$data$Dataset$list_files(file.path(data_dir, "test/*.jpg")) %>%
-  dataset_map(function(image)
-    tf$py_func(load_image, list(image, TRUE), list(tf$float32, tf$float32))) %>%
+  dataset_map(load_image_test, num_parallel_calls = 1) %>%
   dataset_batch(batch_size)
 
 
@@ -120,7 +126,7 @@ downsample <- function(filters,
       if (self$apply_batchnorm) {
         x %>% self$batchnorm(training = training)
       }
-      cat("downsample (generator) output: ", x$shape$as_list(), "\n")
+      #cat("downsample (generator) output: ", x$shape$as_list(), "\n")
       x %>% layer_activation_leaky_relu()
     }
     
@@ -155,7 +161,7 @@ upsample <- function(filters,
       }
       x %>% layer_activation("relu")
       concat <- k_concatenate(list(x, x2))
-      cat("upsample (generator) output: ", concat$shape$as_list(), "\n")
+      #cat("upsample (generator) output: ", concat$shape$as_list(), "\n")
       concat
     }
   })
@@ -217,7 +223,7 @@ generator <- function(name = "generator") {
       x15 <-
         self$up7(list(x14, x1), training = training) # (bs, 128, 128, 128)
       x16 <- self$last(x15) # (bs, 256, 256, 3)
-      cat("generator output: ", x16$shape$as_list(), "\n")
+      #cat("generator output: ", x16$shape$as_list(), "\n")
       x16
     }
   })
@@ -293,7 +299,7 @@ discriminator <- function(name = "discriminator") {
         layer_activation_leaky_relu() %>%
         self$zero_pad2() %>% # (bs, 33, 33, 512)
         self$last() # (bs, 30, 30, 1)
-      cat("discriminator output: ", x$shape$as_list(), "\n")
+      #cat("discriminator output: ", x$shape$as_list(), "\n")
       x
     }
   })
@@ -303,30 +309,24 @@ discriminator <- function(name = "discriminator") {
 generator <- generator()
 discriminator <- discriminator()
 
-generator$call = tf$contrib$eager$defun(generator$call)
-discriminator$call = tf$contrib$eager$defun(discriminator$call)
+cross_entropy = tf$keras$losses$BinaryCrossentropy(from_logits = TRUE)
 
 discriminator_loss <- function(real_output, generated_output) {
-  real_loss <-
-    tf$losses$sigmoid_cross_entropy(multi_class_labels = tf$ones_like(real_output),
-                                    logits = real_output)
-  generated_loss <-
-    tf$losses$sigmoid_cross_entropy(multi_class_labels = tf$zeros_like(generated_output),
-                                    logits = generated_output)
+  real_loss <- cross_entropy(k_ones_like(real_output), real_output)
+  generated_loss <- cross_entropy(k_zeros_like(generated_output), generated_output)
   real_loss + generated_loss
 }
 
 lambda <- 100
 generator_loss <-
   function(disc_judgment, generated_output, target) {
-    gan_loss <-
-      tf$losses$sigmoid_cross_entropy(tf$ones_like(disc_judgment), disc_judgment)
+    gan_loss <- cross_entropy(tf$ones_like(disc_judgment), disc_judgment)
     l1_loss <- tf$reduce_mean(tf$abs(target - generated_output))
     gan_loss + (lambda * l1_loss)
   }
 
-discriminator_optimizer <- tf$train$AdamOptimizer(2e-4, beta1 = 0.5)
-generator_optimizer <- tf$train$AdamOptimizer(2e-4, beta1 = 0.5)
+discriminator_optimizer <- tf$optimizers$Adam(2e-4, beta_1 = 0.5)
+generator_optimizer <- tf$optimizers$Adam(2e-4, beta_1 = 0.5)
 
 checkpoint_dir <- "./checkpoints_pix2pix"
 checkpoint_prefix <- file.path(checkpoint_dir, "ckpt")
@@ -387,17 +387,17 @@ train <- function(dataset, num_epochs) {
         })
       })
       generator_gradients <- gen_tape$gradient(gen_loss,
-                                               generator$variables)
+                                               generator$trainable_variables)
       discriminator_gradients <- disc_tape$gradient(disc_loss,
-                                                    discriminator$variables)
+                                                    discriminator$trainable_variables)
       
       generator_optimizer$apply_gradients(transpose(list(
         generator_gradients,
-        generator$variables
+        generator$trainable_variables
       )))
       discriminator_optimizer$apply_gradients(transpose(
         list(discriminator_gradients,
-             discriminator$variables)
+             discriminator$trainable_variables)
       ))
       
     })
@@ -423,7 +423,7 @@ train <- function(dataset, num_epochs) {
 }
 
 if (!restore) {
-  train(train_dataset, 200)
+  train(train_dataset, 1)
 } 
 
 
