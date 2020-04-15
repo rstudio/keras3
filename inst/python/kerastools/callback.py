@@ -45,6 +45,9 @@ class RCallback(Callback):
     self.r_on_test_end = r_on_test_end
     self.r_on_train_batch_begin = r_on_train_batch_begin
     self.r_on_train_batch_end = r_on_train_batch_end
+    
+    # required when using tf$distributed strategies
+    self._chief_worker_only = False
   
   def on_epoch_begin(self, epoch, logs=None):
     self.r_on_epoch_begin(epoch, logs)
