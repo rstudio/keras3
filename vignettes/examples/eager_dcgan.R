@@ -127,6 +127,9 @@ discriminator <-
 generator <- generator()
 discriminator <- discriminator()
 
+generator$call <- tf$`function`(generator$call)
+discriminator$call <- tf$`function`(discriminator$call)
+
 cross_entropy = tf$keras$losses$BinaryCrossentropy(from_logits = TRUE)
 
 discriminator_loss <- function(real_output, generated_output) {
@@ -142,7 +145,7 @@ generator_loss <- function(generated_output) {
 discriminator_optimizer <- tf$optimizers$Adam(1e-4)
 generator_optimizer <- tf$optimizers$Adam(1e-4)
 
-num_epochs <- 150
+num_epochs <- 1#50
 noise_dim <- 100
 num_examples_to_generate <- 25L
 
