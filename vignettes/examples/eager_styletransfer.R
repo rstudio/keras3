@@ -7,9 +7,7 @@
 
 library(keras)
 use_implementation("tensorflow")
-use_session_with_seed(7777, disable_gpu = FALSE, disable_parallel_cpu = FALSE)
 library(tensorflow)
-tfe_enable_eager_execution(device_policy = "silent")
 
 library(purrr)
 library(glue)
@@ -210,13 +208,12 @@ run_style_transfer <- function(content_path,
       gram_matrix(feature))
   
   init_image <- load_and_process_image(content_path)
-  init_image <-
-    tf$contrib$eager$Variable(init_image, dtype = "float32")
+  init_image <- tf$Variable(tf$cast(init_image,dtype = "float32"))
   
   optimizer <-
-    tf$train$AdamOptimizer(learning_rate = 1,
-                           beta1 = 0.99,
-                           epsilon = 1e-1)
+    tf$optimizers$Adam(learning_rate = 1,
+                       beta_1 = 0.99,
+                       epsilon = 1e-1)
   
   c(best_loss, best_image) %<-% list(Inf, NULL)
   loss_weights <- list(style_weight, content_weight)
@@ -242,16 +239,16 @@ run_style_transfer <- function(content_path,
     
     end_time <- Sys.time()
     
-    if (k_cast_to_floatx(loss) < best_loss) {
-      best_loss <- k_cast_to_floatx(loss)
+    if (as.array(loss) < best_loss) {
+      best_loss <- as.array(loss)
       best_image <- init_image
     }
     
     if (i %% 50 == 0) {
       glue("Iteration: {i}") %>% print()
       glue(
-        "Total loss: {k_cast_to_floatx(loss)}, style loss: {k_cast_to_floatx(style_score)},
-        content loss: {k_cast_to_floatx(content_score)}, total variation loss: {k_cast_to_floatx(variation_score)},
+        "Total loss: {as.array(loss)}, style loss: {as.array(style_score)},
+        content loss: {as.array(content_score)}, total variation loss: {as.array(variation_score)},
         time for 1 iteration: {(Sys.time() - start_time) %>% round(2)}"
       ) %>% print()
       
