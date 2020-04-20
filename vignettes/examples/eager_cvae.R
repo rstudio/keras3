@@ -214,7 +214,7 @@ show_grid <- function(epoch) {
       z_sample <- matrix(c(grid_x[i], grid_y[j]), ncol = 2)
       column <-
         rbind(column,
-              (decoder(z_sample) %>% tf$nn$sigmoid() %>% as.numeric()) %>% matrix(ncol = img_size))
+              (decoder(k_cast(z_sample,'float32')) %>% tf$nn$sigmoid() %>% as.numeric()) %>% matrix(ncol = img_size))
     }
     rows <- cbind(rows, column)
   }
