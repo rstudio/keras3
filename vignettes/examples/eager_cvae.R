@@ -86,7 +86,7 @@ encoder_model <- function(name = NULL) {
 
 decoder_model <- function(name = NULL) {
   keras_model_custom(name = name, function(self) {
-    self$dense <- layer_dense(units = 7 * 7 * 32, activation = "relu",dtype='float32')
+    self$dense <- layer_dense(units = 7 * 7 * 32, activation = "relu")
     self$reshape <- layer_reshape(target_shape = c(7, 7, 32))
     self$deconv1 <-
       layer_conv_2d_transpose(
@@ -132,8 +132,8 @@ reparameterize <- function(mean, logvar) {
 # Loss and optimizer ------------------------------------------------------
 
 normal_loglik <- function(sample, mean, logvar, reduce_axis = 2) {
-  loglik <- k_constant(0.5, dtype = tf$float32) * 
-    (k_log(2 * k_constant(pi, dtype = tf$float32)) +
+  loglik <- k_constant(0.5) * 
+    (k_log(2 * k_constant(pi)) +
        logvar +
        k_exp(-logvar) * (sample - mean) ^ 2)
   - k_sum(loglik, axis = reduce_axis)
