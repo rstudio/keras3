@@ -447,6 +447,11 @@ fit.keras.engine.training.Model <-
   dataset <- resolve_tensorflow_dataset(x)
   if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
     args$x <- dataset
+    
+    if (!is.null(batch_size))
+      stop("You should not specify a `batch_size` if using a tfdataset.", 
+           call. = FALSE)
+    
   } else if (!is.null(dataset)) {
     args$x <- dataset[[1]]
     args$y <- dataset[[2]]
@@ -1146,8 +1151,6 @@ py_str.keras.engine.training.Model <- function(object,  line_length = getOption(
 # determine whether to view metrics or not
 resolve_view_metrics <- function(verbose, epochs, metrics) {
   (epochs > 1)          &&            # more than 1 epoch
-  !is.null(metrics)     &&            # have metrics
-  (length(metrics) > 0) &&            # capturing at least one metric
   (verbose > 0) &&                    # verbose mode is on
   !is.null(getOption("viewer")) &&    # have an internal viewer available
   nzchar(Sys.getenv("RSTUDIO"))       # running under RStudio
