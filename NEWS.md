@@ -1,6 +1,7 @@
 ## Development Version
 
 - Added `layer_attention` (#1000) by @atroiano.
+- Fixed issue regarding the KerasMetricsCallback with TF v2.2 (#1020)
 
 ## Keras 2.2.5.0 (CRAN)
 
