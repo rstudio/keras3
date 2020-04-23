@@ -447,6 +447,11 @@ fit.keras.engine.training.Model <-
   dataset <- resolve_tensorflow_dataset(x)
   if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
     args$x <- dataset
+    
+    if (!is.null(batch_size))
+      stop("You should not specify a `batch_size` if using a tfdataset.", 
+           call. = FALSE)
+    
   } else if (!is.null(dataset)) {
     args$x <- dataset[[1]]
     args$y <- dataset[[2]]
