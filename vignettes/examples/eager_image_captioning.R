@@ -5,9 +5,7 @@
 #' https://blogs.rstudio.com/tensorflow/posts/2018-09-17-eager-captioning
 
 library(keras)
-use_implementation("tensorflow")
 library(tensorflow)
-tfe_enable_eager_execution(device_policy = "silent")
 
 np <- import("numpy")
 
@@ -31,10 +29,6 @@ maybecat <- function(context, x) {
 debugshapes <- FALSE
 restore_checkpoint <- FALSE
 saved_features_exist <- FALSE
-
-use_session_with_seed(7777,
-                      disable_gpu = FALSE,
-                      disable_parallel_cpu = FALSE)
 
 annotation_file <- "train2014/annotations/captions_train2014.json"
 image_path <- "train2014/train2014"
@@ -138,7 +132,7 @@ top_k <- 5000
 tokenizer <- text_tokenizer(num_words = top_k,
                             oov_token = "<unk>",
                             filters = '!"#$%&()*+.,-/:;=?@[\\]^_`{|}~ ')
-tokenizer$fit_on_texts(sample_captions)
+fit_text_tokenizer(tokenizer, sample_captions)
 train_captions_tokenized <-
   tokenizer %>% texts_to_sequences(train_captions)
 validation_captions_tokenized <-
@@ -216,7 +210,7 @@ map_func <- function(img_name, cap) {
 train_dataset <-
   tensor_slices_dataset(list(train_images, train_captions_padded)) %>%
   dataset_map(function(item1, item2)
-    tf$py_func(map_func, list(item1, item2), list(tf$float32, tf$int32))) %>%
+    tf$py_function(map_func, list(item1, item2), list(tf$float32, tf$int32))) %>%
   # dataset_shuffle(buffer_size) %>%
   dataset_batch(batch_size) 
 
@@ -360,7 +354,7 @@ rnn_decoder <-
 encoder <- cnn_encoder(embedding_dim)
 decoder <- rnn_decoder(embedding_dim, gru_units, vocab_size)
 
-optimizer = tf$train$AdamOptimizer()
+optimizer = tf$optimizers$Adam()
 
 cx_loss <- function(y_true, y_pred) {
   mask <- 1 - k_cast(y_true == 0L, dtype = "float32")
@@ -530,8 +524,7 @@ if (!restore_checkpoint) {
       variables <- c(encoder$variables, decoder$variables)
       gradients <- tape$gradient(loss, variables)
       
-      optimizer$apply_gradients(purrr::transpose(list(gradients, variables)),
-                                global_step = tf$train$get_or_create_global_step())
+      optimizer$apply_gradients(purrr::transpose(list(gradients, variables)))
     })
     cat(paste0(
       "\n\nTotal loss (epoch): ",
