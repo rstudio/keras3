@@ -21,6 +21,17 @@ library(tibble)
 # Assumes you've downloaded and unzipped one of the bilingual datasets offered at
 # http://www.manythings.org/anki/ and put it into a directory "data"
 # This example translates English to Dutch.
+download_data = function(){
+  if(!dir.exists('data')) {
+    dir.create('data')
+  }
+  if(!file.exists('data/nld-eng.zip')) {
+    download.file('http://www.manythings.org/anki/nld-eng.zip',
+                  destfile = file.path("data", basename('nld-eng.zip')))
+    unzip('data/nld-eng.zip', exdir = 'data')
+  }
+}
+download_data()
 
 filepath <- file.path("data", "nld.txt")
 
@@ -290,7 +301,7 @@ evaluate <-
       attention_matrix[t,] <- attention_weights %>% as.double()
       
       pred_idx <-
-        tf$compat$v1$multinomial(k_exp(preds), num_samples = 1L)[1, 1] %>% as.double()
+        tf$random$categorical(k_exp(preds), num_samples = 1L)[1, 1] %>% as.double()
       pred_word <- index2word(pred_idx, target_index)
       
       if (pred_word == '<stop>') {
@@ -387,7 +398,7 @@ for (epoch in seq_len(n_epochs)) {
       ": ",
       (loss / k_cast_to_floatx(dim(y)[2])) %>% as.double() %>% round(4),
       "\n"
-    ) %>% print()
+    ) %>% cat()
     
     variables <- c(encoder$variables, decoder$variables)
     gradients <- tape$gradient(loss, variables)
@@ -402,7 +413,7 @@ for (epoch in seq_len(n_epochs)) {
     ": ",
     (total_loss / k_cast_to_floatx(buffer_size)) %>% as.double() %>% round(4),
     "\n"
-  ) %>% print()
+  ) %>% cat()
   
   walk(train_sentences[1:5], function(pair)
     translate(pair[1]))

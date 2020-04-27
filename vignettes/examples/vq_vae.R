@@ -5,20 +5,19 @@
 #' https://blogs.rstudio.com/tensorflow/posts/2019-01-24-vq-vae/
 
 library(keras)
-use_implementation("tensorflow")
 library(tensorflow)
-tfe_enable_eager_execution(device_policy = "silent")
-
-use_session_with_seed(7778,
-                      disable_gpu = FALSE,
-                      disable_parallel_cpu = FALSE)
-
-tfp <- import("tensorflow_probability")
-tfd <- tfp$distributions
-
+library(tfprobability)
 library(tfdatasets)
+
 library(dplyr)
 library(glue)
+
+# curry has to be installed from github because CRAN version has no "set_defaults" function
+if(!('devtools' %in% rownames(installed.packages()) )) {
+  install.packages('devtools')
+}
+devtools::install_github('thomasp85/curry')
+
 library(curry)
 
 moving_averages <- tf$python$training$moving_averages
@@ -63,7 +62,14 @@ write_png <- function(dataset, epoch, desc, images) {
 
 np <- import("numpy")
 
-# download from: https://github.com/rois-codh/kmnist
+# download from: https://github.com/rois-codh/kmnist via "download_data()" function
+download_data = function(){
+  if(!file.exists('kmnist-train-imgs.npz')) {
+    download.file('http://codh.rois.ac.jp/kmnist/dataset/kmnist/kmnist-train-imgs.npz',
+                  destfile = 'kmnist-train-imgs.npz')
+  }
+}
+download_data()
 kuzushiji <- np$load("kmnist-train-imgs.npz")
 kuzushiji <- kuzushiji$get("arr_0")
 
@@ -90,7 +96,7 @@ batch %>% dim()
 # Params ------------------------------------------------------------------
 
 learning_rate <- 0.001
-latent_size <- 1
+latent_size <- 1L
 num_codes <- 64L
 code_size <- 16L
 base_depth <- 32
@@ -214,7 +220,7 @@ decoder_model <- function(name = NULL,
         self$deconv6() %>%
         # output shape:  7 28 28 1
         self$conv1()
-      tfd$Independent(tfd$Bernoulli(logits = x),
+      tfd_independent(tfd_bernoulli(logits = x),
                       reinterpreted_batch_ndims = length(output_shape))
     }
   })
@@ -228,16 +234,16 @@ vector_quantizer_model <-
     keras_model_custom(name = name, function(self) {
       self$num_codes <- num_codes
       self$code_size <- code_size
-      self$codebook <- tf$get_variable("codebook",
+      self$codebook <- tf$compat$v1$get_variable("codebook",
                                        shape = c(num_codes, code_size),
                                        dtype = tf$float32)
-      self$ema_count <- tf$get_variable(
+      self$ema_count <- tf$compat$v1$get_variable(
         name = "ema_count",
         shape = c(num_codes),
         initializer = tf$constant_initializer(0),
         trainable = FALSE
       )
-      self$ema_means = tf$get_variable(
+      self$ema_means = tf$compat$v1$get_variable(
         name = "ema_means",
         initializer = self$codebook$initialized_value(),
         trainable = FALSE
@@ -308,7 +314,7 @@ update_ema <- function(vector_quantizer,
   updated_ema_means <-
     updated_ema_means / tf$expand_dims(updated_ema_count, axis = -1L)
   
-  tf$assign(vector_quantizer$codebook, updated_ema_means)
+  tf$compat$v1$assign(vector_quantizer$codebook, updated_ema_means)
 }
 
 
@@ -321,7 +327,7 @@ decoder <- decoder_model(input_size = latent_size * code_size,
 vector_quantizer <-
   vector_quantizer_model(num_codes = num_codes, code_size = code_size)
 
-optimizer <- tf$train$AdamOptimizer(learning_rate = learning_rate)
+optimizer <- tf$optimizers$Adam(learning_rate = learning_rate)
 
 checkpoint_dir <- "./vq_vae_checkpoints"
 
@@ -365,7 +371,7 @@ for (epoch in seq_len(num_epochs)) {
       
       commitment_loss <- tf$reduce_mean(tf$square(codes - tf$stop_gradient(nearest_codebook_entries)))
       
-      prior_dist <- tfd$Multinomial(total_count = 1,
+      prior_dist <- tfd_multinomial(total_count = 1,
                                     logits = tf$zeros(c(latent_size, num_codes)))
       prior_loss <- -tf$reduce_mean(tf$reduce_sum(prior_dist$log_prob(one_hot_assignments), 1L))
       
@@ -379,12 +385,10 @@ for (epoch in seq_len(num_epochs)) {
     
     optimizer$apply_gradients(purrr::transpose(list(
       encoder_gradients, encoder$variables
-    )),
-    global_step = tf$train$get_or_create_global_step())
+    )))
     optimizer$apply_gradients(purrr::transpose(list(
       decoder_gradients, decoder$variables
-    )),
-    global_step = tf$train$get_or_create_global_step())
+    )))
     
     update_ema(vector_quantizer,
                one_hot_assignments,
