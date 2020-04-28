@@ -439,8 +439,14 @@ fit.keras.engine.training.Model <-
     dataset <- resolve_tensorflow_dataset(validation_data)
     if (!is.null(dataset))
       args$validation_data <- dataset
-    else
+    else {
       args$validation_data <- keras_array(validation_data)  
+      
+      if (tensorflow::tf_version() >="2.2")
+        args$validation_data <- do.call(reticulate::tuple, args$validation_data)
+      
+    }
+      
   }
     
   # resolve x and y (check for TF dataset)
