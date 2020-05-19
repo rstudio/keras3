@@ -73,7 +73,7 @@ CustomLayer <- R6::R6Class("CustomLayer",
 )
 ```
 
-Note that tensor operations are executed using the Keras `backend()`. See the [Keras Backend](backend.html) article for details on the various functions available from Keras backends.
+Note that tensor operations are executed using the Keras `backend()`. See the Keras Backend article for details on the various functions available from Keras backends.
 
 ## Layer Wrapper Function
 
