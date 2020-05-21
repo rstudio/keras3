@@ -17,9 +17,13 @@ print.keras_training_history <- function(x, ...) {
     validate <- paste0(", validated on ", params[["validation_samples"]], " samples")
   else 
     validate <- ""
-  str <- paste0("Trained on ", params[["samples"]]," samples", validate, " (batch_size=", 
-                params[["batch_size"]], ", epochs=", params[["epochs"]], ")")
-
+  
+  str <- ""
+  if (!params[["samples"]] == "NULL") {
+    str <- paste0(str, "Trained on ", params[["samples"]]," samples", validate, " (batch_size=", 
+                  params[["batch_size"]], ", epochs=", params[["epochs"]], ")")
+  }
+    
   # last epoch metrics
   metrics <- lapply(x$metrics, function(metric) {
     metric[[epochs]]

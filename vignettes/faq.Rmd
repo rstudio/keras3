@@ -503,7 +503,7 @@ The VGG16 model is also the basis for the [Deep dream](https://keras.rstudio.com
 
 ## How can I use other Keras backends?
 
-By default the Keras Python and R packages use the TensorFlow backend. Other available backends include Theano or CNTK. To learn more about using alternatate backends (e.g. Theano or CNTK) see the [article on Keras backends](backend.html).
+By default the Keras Python and R packages use the TensorFlow backend. Other available backends include Theano or CNTK. To learn more about using alternatate backends (e.g. Theano or CNTK) see the article on Keras backends.
 
 
 ## How can I use the PlaidML backend?
