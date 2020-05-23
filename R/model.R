@@ -5,7 +5,7 @@
 #' 
 #' @param inputs Input layer
 #' @param outputs Output layer
-#'
+#' @param ... Any additional arguments
 #' @family model functions
 #'
 #' @examples 
@@ -30,8 +30,11 @@
 #' )
 #' }
 #' @export
-keras_model <- function(inputs, outputs = NULL) {
-  keras$models$Model(inputs = unname(inputs), outputs = unname(outputs))
+keras_model <- function(inputs, outputs = NULL, ...) {
+  args <- list(inputs = unname(inputs),
+               outputs = unname(outputs),
+               ...)
+  do.call(keras$models$Model, args)
 }
 
 
