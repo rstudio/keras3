@@ -1105,15 +1105,23 @@ k_gather <- function(reference, indices) {
 #'
 #' @export
 k_get_session <- function() {
-  keras$backend$get_session()
+  
+  if(tensorflow::tf_version() >= '2.0')
+    stop("Tensorflow 2.0 does not expose the 'k_get_session' directly any more. Instead use 'tf$compat$v1$keras$backend$get_session()'", call. = FALSE)
+  else
+    keras$backend$get_session()
 }
 
 #' @rdname k_get_session
 #' @export
 k_set_session <- function(session) {
-  keras$backend$set_session(
-    session = session
-  )
+
+  if(tensorflow::tf_version() >= '2.0')
+    stop("Tensorflow 2.0 does not expose the 'k_set_session' directly any more. Instead use 'tf$compat$v1$keras$backend$set_session()'", call. = FALSE)
+  else
+    keras$backend$set_session(
+      session = session
+    )
 }
 
 
