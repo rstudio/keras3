@@ -1,4 +1,8 @@
-## Development Version
+## Dev version
+
+- Use compat module when using `set_session` and `get_session`. (#1046)
+
+## Keras 2.2.3.0 (CRAN)
 
 - Added `layer_attention` (#1000) by @atroiano.
 - Fixed issue regarding the KerasMetricsCallback with TF v2.2 (#1020)
