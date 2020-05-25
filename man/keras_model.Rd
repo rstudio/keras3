@@ -4,12 +4,14 @@
 \alias{keras_model}
 \title{Keras Model}
 \usage{
-keras_model(inputs, outputs = NULL)
+keras_model(inputs, outputs = NULL, ...)
 }
 \arguments{
 \item{inputs}{Input layer}
 
 \item{outputs}{Output layer}
+
+\item{...}{Any additional arguments}
 }
 \description{
 A model is a directed acyclic graph of layers.

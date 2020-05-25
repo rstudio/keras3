@@ -133,6 +133,18 @@ test_succeeds("pass validation_data to model fit", {
 })
 
 
+test_succeeds("can pass name argument to 'keras_model'", {
+  
+  inputs <- layer_input(shape = c(1))
+  
+  predictions <- inputs %>%
+    layer_dense(units = 1)
+  
+  name = 'My_keras_model'
+  model <- keras_model(inputs = inputs, outputs = predictions, name = name)
+  expect_identical(model$name,name)
+})
+
 
 
 
