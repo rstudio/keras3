@@ -1,6 +1,7 @@
 ## Dev version
 
 - Use compat module when using `set_session` and `get_session`. (#1046)
+- Allows passing other arguments to `keras_model` eg `name`. (#1045)
 
 ## Keras 2.2.3.0 (CRAN)
 
