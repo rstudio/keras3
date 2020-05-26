@@ -235,6 +235,9 @@ text_hashing_trick <- function(text, n,
                                hash_function = NULL, 
                                filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n', 
                                lower = TRUE, split = ' ') {
+  if (length(text) != 1) {
+    stop("`text` should be length 1.")
+  }
   if (is.na(text)) {
     return(NA_integer_)
   }

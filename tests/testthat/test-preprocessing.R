@@ -29,6 +29,9 @@ test_call_succeeds("text_hashing_trick", required_version = "2.0.5", {
 })
 
 test_call_succeeds("missing text data", required_version = "2.0.5", {
+  expect_error(text_hashing_trick(letters, 10),
+               "`text` should be length 1")
+  
   texts <- c(
     'Dogs and cats living together.',
     NA_character_
