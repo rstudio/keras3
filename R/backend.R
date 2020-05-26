@@ -1425,9 +1425,16 @@ k_is_keras_tensor <- function(x) {
 #' 
 #' @export
 k_is_placeholder <- function(x) {
-  keras$backend$is_placeholder(
-    x = x
-  )
+  if (tensorflow::tf_version() >= '2.0') {
+    tryCatch({
+      identical(x$op$type, "Placeholder")
+    }, error = function(e){FALSE})
+    
+  } else {
+    keras$backend$is_placeholder(
+      x = x
+    )
+  }
 }
 
 
