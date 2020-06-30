@@ -41,13 +41,15 @@ jobs:
           sudo -s eval "$sysreqs"
       - name: Install dependencies
         run: Rscript -e "install.packages('remotes')" -e "remotes::install_deps(dependencies = TRUE)" -e "remotes::install_cran('rcmdcheck')"
-      - name: Install Python
+      - name: Install Miniconda
         run: |
           Rscript -e "remotes::install_github('rstudio/reticulate')"
           Rscript -e "reticulate::install_miniconda()"
-          Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.6.9'))"
+      - if: runner.os == 'macOS'
+        run: echo "options(reticulate.conda_binary = reticulate:::miniconda_conda())" >> .Rprofile
       - name: Install TensorFlow
         run: |
+          Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.6.9'))"
           Rscript -e "remotes::install_local()"
           Rscript -e "keras::install_keras(tensorflow = Sys.getenv('TF_VERSION'), extra_packages = c('IPython', 'requests', 'certifi', 'urllib3'))"
       - name: Check
