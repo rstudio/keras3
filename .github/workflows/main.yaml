@@ -26,7 +26,7 @@ jobs:
       PIP_NO_WARN_SCRIPT_LOCATION: false
       RETICULATE_AUTOCONFIGURE: 'FALSE'
       CRAN: ${{ matrix.cran }}
-      RETICULATE_MINICONDA_PATH: ${{ runner.temp }}
+      RETICULATE_MINICONDA_PATH: ${{ temp }}
 
     steps:
       - uses: actions/checkout@v2
