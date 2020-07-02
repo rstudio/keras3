@@ -147,8 +147,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
     "h5py", 
     "pyyaml==3.12",
     "requests",
-    "Pillow",
-    "scipy"
+    "Pillow"
   ))
   
   # perform the install
