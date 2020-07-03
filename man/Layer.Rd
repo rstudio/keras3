@@ -2,7 +2,7 @@
 % Please edit documentation in R/Layer.R
 \name{Layer}
 \alias{Layer}
-\title{#' Create a custom Layer}
+\title{Create a custom Layer}
 \usage{
 Layer(
   classname,
@@ -45,7 +45,7 @@ arguments. They will be added to the layer class.}
 A function that wraps \code{create_layer}, similar to \code{keras::layer_dense}.
 }
 \description{
-#' Create a custom Layer
+Create a custom Layer
 }
 \examples{
 \dontrun{
