@@ -122,13 +122,11 @@ Layer <- function(classname, initialize, build = NULL, call = NULL,
 }
 
 # makes the function return NULL. `__init__` in python must always return None.
-wrap_return_null <- function(fun) {
-  e <- new.env(parent = environment(fun))
-  e$fun_ <- function() {
-    environment(fun) <- environment() # fun must execute in fun_'s exec env.
-    do.call(fun, as.list(match.call()[-1]))
-    NULL
-  }
-  formals(e$fun_) <- formals(fun)
-  e$fun_
+wrap_return_null <- function(f) {
+  body(f)[[length(body(f)) + 1]] <- substitute(return(NULL))
+  f
 }
+
+
+
+
