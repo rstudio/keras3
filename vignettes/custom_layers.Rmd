@@ -94,7 +94,7 @@ layer_linear <- Layer(
 ```
 
 
-It's important to call `super()$__init__()` in the `initialize` method.
+It's important to call **`super()$__init__()`** in the `initialize` method.
 
 Note that tensor operations are executed using the Keras `backend()`. See the Keras Backend article for details on the various functions available from Keras backends.
 
@@ -124,7 +124,7 @@ print(mysum(x))
 print(mysum(x))
 ```
 
-It's part of `layer.weights` but it gets categorized as a non-trainable weight:
+It's part of `layer$weights` but it gets categorized as a non-trainable weight:
 
 ```{r}
 get_weights(mysum)

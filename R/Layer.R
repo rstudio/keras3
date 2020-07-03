@@ -1,4 +1,4 @@
-#' #' Create a custom Layer
+#' Create a custom Layer
 #' 
 #' @param classname the name of the custom Layer.
 #' @param initialize a function. This is where you define the arguments used to further
@@ -107,6 +107,7 @@ Layer <- function(classname, initialize, build = NULL, call = NULL,
     inherit = inherit
   )
   
+  # build the function to be used
   f <- function() {
     .args <- as.list(match.call())[-c(1)]
     .args <- .args[names(.args) != "object"]
