@@ -32,6 +32,8 @@ create_model_with_custom_layer <- function() {
 
 test_succeeds("Can create and use a custom layer", {
   
+  skip_if_not_tensorflow_version("2.0")
+  
   model <- create_model_with_custom_layer()
   
   out <- predict(model, c(1,2,3,4,5))
@@ -41,6 +43,8 @@ test_succeeds("Can create and use a custom layer", {
 })
 
 test_succeeds("Can use custom layers in sequential models", {
+  
+  skip_if_not_tensorflow_version("2.0")
   
   layer_multiply_by_x <- create_custom_layer()
   
@@ -54,6 +58,8 @@ test_succeeds("Can use custom layers in sequential models", {
 })
 
 test_succeeds("Input shape is 1-based indexed", {
+  
+  skip_if_not_tensorflow_version("2.0")
   
   concat_layer <- Layer(
     classname = "Hello",
@@ -75,6 +81,8 @@ test_succeeds("Input shape is 1-based indexed", {
 })
 
 test_succeeds("Can use self$add_weight", {
+  
+  skip_if_not_tensorflow_version("2.0")
   
   layer_dense2 <- Layer(
     "Dense2",
@@ -111,6 +119,8 @@ test_succeeds("Can use self$add_weight", {
 })
 
 test_succeeds("Can inherit from an R custom layer", {
+  
+  skip_if_not_tensorflow_version("2.0")
   
   layer_base <- Layer(
     classname = "base",
