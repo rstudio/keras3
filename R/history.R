@@ -17,9 +17,13 @@ print.keras_training_history <- function(x, ...) {
     validate <- paste0(", validated on ", params[["validation_samples"]], " samples")
   else 
     validate <- ""
-  str <- paste0("Trained on ", params[["samples"]]," samples", validate, " (batch_size=", 
-                params[["batch_size"]], ", epochs=", params[["epochs"]], ")")
-
+  
+  str <- ""
+  if (!params[["samples"]] == "NULL") {
+    str <- paste0(str, "Trained on ", params[["samples"]]," samples", validate, " (batch_size=", 
+                  params[["batch_size"]], ", epochs=", params[["epochs"]], ")")
+  }
+    
   # last epoch metrics
   metrics <- lapply(x$metrics, function(metric) {
     metric[[epochs]]
@@ -79,11 +83,17 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
   # select the correct metrics
   df <- df[df$metric %in% metrics, ]
   
+  if (tensorflow::tf_version() < "2.2")
+    do_validation <- x$params$do_validation
+  else
+    do_validation <- any(grepl("^val_", names(x$metrics)))
+  
+  
   if (method == "ggplot2") {
     # helper function for correct breaks (integers only)
     int_breaks <- function(x) pretty(x)[pretty(x) %% 1 == 0]
     
-    if (x$params$do_validation) {
+    if (do_validation) {
       if (theme_bw)
         p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data, linetype = ~data, shape = ~data))
       else
@@ -151,7 +161,7 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
       legend_location <- ifelse(
         df2[df2$data == 'training', 'value'][1] > df2[df2$data == 'training', 'value'][x$params$epochs],
         "topright", "bottomright")
-      if (x$params$do_validation)
+      if (do_validation)
         graphics::legend(legend_location, legend = c(metric, paste0("val_", metric)), pch = c(1, 4))
       else
         graphics::legend(legend_location, legend = metric, pch = 1)
@@ -164,7 +174,8 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
 as.data.frame.keras_training_history <- function(x, ...) {
   
   # filter out metrics that were collected for callbacks (e.g. lr)
-  x$metrics <- x$metrics[x$params$metrics]
+  if (tensorflow::tf_version() < "2.2")
+    x$metrics <- x$metrics[x$params$metrics]
   
   # pad to epochs if necessary
   values <- x$metrics
@@ -193,15 +204,21 @@ as.data.frame.keras_training_history <- function(x, ...) {
 
 to_keras_training_history <- function(history) {
   
+
   # turn history into an R object so it can be persited and
   # and give it a class so we can write print/plot methods
   params <- history$params
-  if (params$do_validation) {
-    if (!is.null(params$validation_steps))
-      params$validation_samples <- params$validation_steps
-    else
-      params$validation_samples <- dim(history$validation_data[[1]])[[1]]
+  
+  # we only see this info before TF 2.2
+  if (tensorflow::tf_version() < "2.2") {
+    if (params$do_validation) {
+      if (!is.null(params$validation_steps))
+        params$validation_samples <- params$validation_steps
+      else
+        params$validation_samples <- dim(history$validation_data[[1]])[[1]]
+    }  
   }
+  
   # normalize metrics
   metrics <- history$history
   metrics <- lapply(metrics, function(metric) {

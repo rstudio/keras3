@@ -314,7 +314,9 @@ imagenet_preprocess_input <- function(x, data_format = NULL, mode = "caffe") {
   )
   if (keras_version() >= "2.0.9") {
     args$data_format <- data_format
-    args$mode <- mode
+    # no longer exists in 2.2
+    if (tensorflow::tf_version() <= "2.1")
+      args$mode <- mode
   }
   do.call(preprocess_input, args)
 }

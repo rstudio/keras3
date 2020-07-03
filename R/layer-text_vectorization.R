@@ -93,7 +93,9 @@ layer_text_vectorization <- function(object, max_tokens = NULL, standardize = "l
 #' @seealso [set_vocabulary()]
 #' @export
 get_vocabulary <- function(object) {
-  object$get_vocabulary()
+  python_path <- system.file("python", package = "keras")
+  tools <- import_from_path("kerastools", path = python_path)
+  tools$get_vocabulary$get_vocabulary(object)
 }
 
 #' Sets vocabulary (and optionally document frequency) data for the layer

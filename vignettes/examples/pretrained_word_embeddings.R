@@ -1,190 +1,87 @@
-#' This script loads pre-trained word embeddings (GloVe embeddings) into a
-#' frozen Keras Embedding layer, and uses it to train a text classification
-#' model on the 20 Newsgroup dataset (classication of newsgroup messages into 20
-#' different categories).
-#' 
-#' GloVe embedding data can be found at: 
-#' http://nlp.stanford.edu/data/glove.6B.zip (source page:
-#' http://nlp.stanford.edu/projects/glove/)
-#'
-#' 20 Newsgroup data can be found at: 
-#' http://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-20/www/data/news20.html
-#' 
-
-#'
-#' IMPORTANT NOTE: This example does yet work correctly. The code executes fine and
-#' appears to mimic the Python code upon which it is based however it achieves only
-#' half the training accuracy that the Python code does so there is clearly a 
-#' subtle difference.
-#' 
-#' We need to investigate this further before formally adding to the list of examples
-#'
-#'  
+# This example shows how one can quickly load glove vectors
+# and train a Keras model in R
 
 library(keras)
+library(dplyr)
 
-GLOVE_DIR <- 'glove.6B'
-TEXT_DATA_DIR <- '20_newsgroup'
-MAX_SEQUENCE_LENGTH <- 1000
-MAX_NUM_WORDS <- 20000
-EMBEDDING_DIM <- 100
-VALIDATION_SPLIT <- 0.2
-
-# download data if necessary
-download_data <- function(data_dir, url_path, data_file) {
-  if (!dir.exists(data_dir)) {
-    download.file(paste0(url_path, data_file), data_file, mode = "wb")
-    if (tools::file_ext(data_file) == "zip")
-      unzip(data_file, exdir = tools::file_path_sans_ext(data_file))
-    else
-      untar(data_file)
-    unlink(data_file)
-  }
-}
-download_data(GLOVE_DIR, 'http://nlp.stanford.edu/data/', 'glove.6B.zip')
-download_data(TEXT_DATA_DIR, "http://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-20/www/data/", "news20.tar.gz")
-
-# first, build index mapping words in the embeddings set
-# to their embedding vector
-
-cat('Indexing word vectors.\n')
-
-embeddings_index <- new.env(parent = emptyenv())
-lines <- readLines(file.path(GLOVE_DIR, 'glove.6B.100d.txt'))
-for (line in lines) {
-  values <- strsplit(line, ' ', fixed = TRUE)[[1]]
-  word <- values[[1]]
-  coefs <- as.numeric(values[-1])
-  embeddings_index[[word]] <- coefs
+# Download Glove vectors if necessary
+if (!file.exists('glove.6B.zip')) {
+  download.file('http://nlp.stanford.edu/data/glove.6B.zip',destfile = 'glove.6B.zip')
+  unzip('glove.6B.zip')
 }
 
-cat(sprintf('Found %s word vectors.\n', length(embeddings_index)))
+# load an example dataset from text2vec
+library(text2vec)
+data("movie_review")
+as_tibble(movie_review)
 
-# second, prepare text samples and their labels
-cat('Processing text dataset\n')
+# load glove vectors into R
+vectors = data.table::fread('glove.6B.300d.txt', data.table = F,  encoding = 'UTF-8') 
+colnames(vectors) = c('word',paste('dim',1:300,sep = '_'))
 
-texts <- character()  # text samples
-labels <- integer() # label ids
-labels_index <- list()  # dictionary: label name to numeric id
+# structure of the vectors
+as_tibble(vectors)
 
-for (name in list.files(TEXT_DATA_DIR)) {
-  path <- file.path(TEXT_DATA_DIR, name)
-  if (file_test("-d", path)) {
-    label_id <- length(labels_index)
-    labels_index[[name]] <- label_id
-    for (fname in list.files(path)) {
-      if (grepl("^[0-9]+$", fname)) {
-        fpath <- file.path(path, fname)
-        t <- readLines(fpath, encoding = "latin1")
-        t <- paste(t, collapse = "\n")
-        i <- regexpr(pattern = '\n\n', t, fixed = TRUE)[[1]]
-        if (i != -1L)
-          t <- substring(t, i)
-        texts <- c(texts, t)
-        labels <- c(labels, label_id)
-      }
-    }
-  }
-}
+# define parameters of Keras model
+library(keras)
+max_words = 1e4
+maxlen = 60
+dim_size = 300
 
-cat(sprintf('Found %s texts.\n', length(texts)))
+# tokenize the input data and then fit the created object
+word_seqs = text_tokenizer(num_words = max_words) %>%
+  fit_text_tokenizer(movie_review$review)
 
-# finally, vectorize the text samples into a 2D integer tensor
-tokenizer <- text_tokenizer(num_words=MAX_NUM_WORDS)
-tokenizer %>% fit_text_tokenizer(texts)
+# apply tokenizer to the text and get indices instead of words
+# later pad the sequence
+x_train = texts_to_sequences(word_seqs, movie_review$review) %>%
+  pad_sequences( maxlen = maxlen)
 
-# save the tokenizer in case we want to use it again
-# for prediction within another R session, see:
-# https://keras.rstudio.com/reference/save_text_tokenizer.html
-save_text_tokenizer(tokenizer, "tokenizer")
+# extract the output
+y_train = as.matrix(movie_review$sentiment)
 
-sequences <- texts_to_sequences(tokenizer, texts)
+# unlist word indices
+word_indices = unlist(word_seqs$word_index)
 
-word_index <- tokenizer$word_index
-cat(sprintf('Found %s unique tokens.\n', length(word_index)))
+# then place them into data.frame 
+dic = data.frame(word = names(word_indices), key = word_indices, stringsAsFactors = FALSE) %>%
+  arrange(key) %>% .[1:max_words,]
 
-data <- pad_sequences(sequences, maxlen=MAX_SEQUENCE_LENGTH)
-labels <- to_categorical(labels)
+# join the words with GloVe vectors and
+# if word does not exist in GloVe, then fill NA's with 0
+word_embeds = dic  %>% left_join(vectors) %>% .[,3:302] %>% replace(., is.na(.), 0) %>% as.matrix()
 
-cat('Shape of data tensor: ', dim(data), '\n')
-cat('Shape of label tensor: ', dim(labels), '\n')
+# Use Keras Functional API 
+input = layer_input(shape = list(maxlen), name = "input")
 
-# split the data into a training set and a validation set
-indices <- 1:nrow(data)
-indices <- sample(indices)
-data <- data[indices,]
-labels <- labels[indices,]
-num_validation_samples <- as.integer(VALIDATION_SPLIT * nrow(data))
+model = input %>%
+  layer_embedding(input_dim = max_words, output_dim = dim_size, input_length = maxlen, 
+                  # put weights into list and do not allow training
+                  weights = list(word_embeds), trainable = FALSE) %>%
+  layer_spatial_dropout_1d(rate = 0.2 ) %>%
+  bidirectional(
+    layer_gru(units = 80, return_sequences = TRUE) 
+  )
+max_pool = model %>% layer_global_max_pooling_1d()
+ave_pool = model %>% layer_global_average_pooling_1d()
 
-x_train <- data[-(1:num_validation_samples),]
-y_train <- labels[-(1:num_validation_samples),]
-x_val <- data[1:num_validation_samples,]
-y_val <- labels[1:num_validation_samples,]
+output = layer_concatenate(list(ave_pool, max_pool)) %>%
+  layer_dense(units = 1, activation = "sigmoid")
 
-cat('Preparing embedding matrix.\n')
+model = keras_model(input, output)
 
-# prepare embedding matrix
-num_words <- min(MAX_NUM_WORDS, length(word_index) + 1)
-prepare_embedding_matrix <- function() {
-  embedding_matrix <- matrix(0L, nrow = num_words, ncol = EMBEDDING_DIM)
-  for (word in names(word_index)) {
-    index <- word_index[[word]]
-    if (index >= MAX_NUM_WORDS)
-      next
-    embedding_vector <- embeddings_index[[word]]
-    if (!is.null(embedding_vector)) {
-      # words not found in embedding index will be all-zeros.
-      embedding_matrix[index,] <- embedding_vector
-    }
-  }
-  embedding_matrix
-}
-
-embedding_matrix <- prepare_embedding_matrix()
-
-# load pre-trained word embeddings into an Embedding layer
-# note that we set trainable = False so as to keep the embeddings fixed
-embedding_layer <- layer_embedding(
-  input_dim = num_words,
-  output_dim = EMBEDDING_DIM,
-  weights = list(embedding_matrix),
-  input_length = MAX_SEQUENCE_LENGTH,
-  trainable = FALSE
-)
-                           
-cat('Training model\n')
-
-# train a 1D convnet with global maxpooling
-sequence_input <- layer_input(shape = list(MAX_SEQUENCE_LENGTH), dtype='int32')
-
-preds <- sequence_input %>%
-  embedding_layer %>% 
-  layer_conv_1d(filters = 128, kernel_size = 5, activation = 'relu') %>% 
-  layer_max_pooling_1d(pool_size = 5) %>% 
-  layer_conv_1d(filters = 128, kernel_size = 5, activation = 'relu') %>% 
-  layer_max_pooling_1d(pool_size = 5) %>% 
-  layer_conv_1d(filters = 128, kernel_size = 5, activation = 'relu') %>% 
-  layer_max_pooling_1d(pool_size = 35) %>% 
-  layer_flatten() %>% 
-  layer_dense(units = 128, activation = 'relu') %>% 
-  layer_dense(units = length(labels_index), activation = 'softmax')
-
-
-model <- keras_model(sequence_input, preds)
-
+# instead of accuracy we can use "AUC" metrics from "tensorflow.keras"
 model %>% compile(
-  loss = 'categorical_crossentropy',
-  optimizer = 'rmsprop',
-  metrics = c('acc')  
+  optimizer = "adam",
+  loss = "binary_crossentropy",
+  metrics = tensorflow::tf$keras$metrics$AUC()
 )
 
-model %>% fit(
+history = model %>% keras::fit(
   x_train, y_train,
-  batch_size = 128,
-  epochs = 10,
-  validation_data = list(x_val, y_val)
+  epochs = 8,
+  batch_size = 32,
+  validation_split = 0.2
 )
-
-
 
 

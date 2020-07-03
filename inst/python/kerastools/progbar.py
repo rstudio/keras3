@@ -16,7 +16,7 @@ def apply_patch():
   # save existing version of update for delegation
   update = Progbar.update
   
-  def update_with_patch(self, current, values=None, force=False):
+  def update_with_patch(self, current, values=None, force=False, finalize=None):
     # force dynamic display
     self._dynamic_display = True
     # delegate 

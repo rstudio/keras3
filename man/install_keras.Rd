@@ -84,7 +84,7 @@ to use the Keras R package. You can do a custom installation of Keras (and
 desired backend) as described on the \href{https://keras.io/#installation}{Keras website}
 and the Keras R package will find and use that version.
 
-See the documentation on \href{https://tensorflow.rstudio.com/installation.html#custom-installation}{custom installations}
+See the documentation on \href{https://tensorflow.rstudio.com/installation/custom/}{custom installations}
 for additional information on how version of Keras and TensorFlow are located
 by the Keras package.
 }

@@ -116,6 +116,34 @@ test_succeeds("can call a model with additional arguments", {
   
 })
 
+test_succeeds("pass validation_data to model fit", {
+  
+  model <- keras_model_sequential() %>% 
+    layer_dense(units =1, input_shape = 2)
+  
+  model %>% compile(loss = "mse", optimizer = "sgd")
+  
+  model %>% 
+    fit(
+      matrix(runif(100), ncol = 2), y = runif(50),
+      batch_size = 10,
+      validation_data = list(matrix(runif(100), ncol = 2), runif(50))
+    )
+  
+})
+
+
+test_succeeds("can pass name argument to 'keras_model'", {
+  
+  inputs <- layer_input(shape = c(1))
+  
+  predictions <- inputs %>%
+    layer_dense(units = 1)
+  
+  name = 'My_keras_model'
+  model <- keras_model(inputs = inputs, outputs = predictions, name = name)
+  expect_identical(model$name,name)
+})
 
 
 

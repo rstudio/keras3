@@ -60,6 +60,7 @@ Output shape: \verb{(batch_size,) + target_shape}.
 Other core layers: 
 \code{\link{layer_activation}()},
 \code{\link{layer_activity_regularization}()},
+\code{\link{layer_attention}()},
 \code{\link{layer_dense_features}()},
 \code{\link{layer_dense}()},
 \code{\link{layer_dropout}()},

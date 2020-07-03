@@ -68,7 +68,7 @@
 #' desired backend) as described on the [Keras website](https://keras.io/#installation)
 #' and the Keras R package will find and use that version. 
 #' 
-#' See the documentation on [custom installations](https://tensorflow.rstudio.com/installation.html#custom-installation)
+#' See the documentation on [custom installations](https://tensorflow.rstudio.com/installation/custom/)
 #' for additional information on how version of Keras and TensorFlow are located
 #' by the Keras package.
 #'
@@ -145,10 +145,9 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
     paste0("keras", version), 
     extra_packages,
     "h5py", 
-    "pyyaml",
+    "pyyaml==3.12",
     "requests",
-    "Pillow",
-    "scipy"
+    "Pillow"
   ))
   
   # perform the install

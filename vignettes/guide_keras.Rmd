@@ -75,7 +75,7 @@ model %>%
 There are many `layers` available with some common constructor
 parameters:
 
-  - `activation`: Set the [activation function](https://tensorflow.rstudio.com/keras/reference/#section-activation-layers) for the layer. By default, no activation is applied.
+  - `activation`: Set the [activation function](https://tensorflow.rstudio.com/reference/keras/#section-activation-layers) for the layer. By default, no activation is applied.
   - `kernel_initializer` and `bias_initializer`: The initialization
     schemes that create the layer’s weights (kernel and bias). This defaults to the
     [`Glorot uniform`](https://tensorflow.rstudio.com/keras/reference/initializer_glorot_uniform.html) initializer.

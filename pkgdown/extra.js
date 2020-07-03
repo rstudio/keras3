@@ -26,3 +26,11 @@ $(document).ready(function() {
   })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
   _st('install','RzoPBEQeaoi3AAmD3UEK','2.0.0');
 });
+
+  // add google analytics
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-20375833-3', 'auto', {'allowLinker': true});
+  ga('require', 'linker');
+  ga('linker:autoLink', ['example-1.com'] );
+  ga('send', 'pageview');

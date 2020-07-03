@@ -5,13 +5,8 @@
 #' https://blogs.rstudio.com/tensorflow/posts/2019-01-08-getting-started-with-tf-probability/
 
 library(keras)
-use_implementation("tensorflow")
 library(tensorflow)
-tfe_enable_eager_execution(device_policy = "silent")
-
-tfp <- import("tensorflow_probability")
-tfd <- tfp$distributions
-
+library(tfprobability)
 library(tfdatasets)
 library(dplyr)
 library(glue)
@@ -79,6 +74,17 @@ np <- import("numpy")
 
 # assume data have been downloaded from https://github.com/rois-codh/kmnist
 # and stored in /tmp
+download_data = function(){
+  if(!dir.exists('tmp')) {
+    dir.create('tmp')
+  }
+  if(!file.exists('tmp/kmnist-train-imgs.npz')) {
+    download.file('http://codh.rois.ac.jp/kmnist/dataset/kmnist/kmnist-train-imgs.npz',
+                  destfile = file.path("tmp", basename('kmnist-train-imgs.npz')))
+  }
+}
+download_data()
+
 kuzushiji <- np$load("/tmp/kmnist-train-imgs.npz")
 kuzushiji <- kuzushiji$get("arr_0")
 
@@ -98,8 +104,8 @@ train_dataset <- tensor_slices_dataset(train_images) %>%
 
 # Params ------------------------------------------------------------------
 
-latent_dim <- 2
-mixture_components <- 16
+latent_dim <- 2L
+mixture_components <- 16L
 
 
 # Model -------------------------------------------------------------------
@@ -132,8 +138,8 @@ encoder_model <- function(name = NULL) {
         self$conv2() %>%
         self$flatten() %>%
         self$dense()
-      tfd$MultivariateNormalDiag(loc = x[, 1:latent_dim],
-                                 scale_diag = tf$nn$softplus(x[, (latent_dim + 1):(2 * latent_dim)] + 1e-5))
+      tfd_multivariate_normal_diag(loc = x[, 1:latent_dim],
+                                   scale_diag = tf$nn$softplus(x[, (latent_dim + 1):(2 * latent_dim)] + 1e-5))
     }
   })
 }
@@ -178,7 +184,7 @@ decoder_model <- function(name = NULL) {
         self$deconv2() %>%
         self$deconv3()
       
-      tfd$Independent(tfd$Bernoulli(logits = x),
+      tfd_independent(tfd_bernoulli(logits = x),
                       reinterpreted_batch_ndims = 3L)
       
     }
@@ -192,30 +198,30 @@ learnable_prior_model <-
     
     keras_model_custom(name = name, function(self) {
       self$loc <-
-        tf$get_variable(
+        tf$compat$v1$get_variable(
           name = "loc",
           shape = list(mixture_components, latent_dim),
           dtype = tf$float32
         )
-      self$raw_scale_diag <- tf$get_variable(
+      self$raw_scale_diag <- tf$compat$v1$get_variable(
         name = "raw_scale_diag",
         shape = c(mixture_components, latent_dim),
         dtype = tf$float32
       )
       self$mixture_logits <-
-        tf$get_variable(
+        tf$compat$v1$get_variable(
           name = "mixture_logits",
           shape = c(mixture_components),
           dtype = tf$float32
         )
       
       function (x, mask = NULL) {
-        tfd$MixtureSameFamily(
-          components_distribution = tfd$MultivariateNormalDiag(
+        tfd_mixture_same_family(
+          components_distribution = tfd_multivariate_normal_diag(
             loc = self$loc,
             scale_diag = tf$nn$softplus(self$raw_scale_diag)
           ),
-          mixture_distribution = tfd$Categorical(logits = self$mixture_logits)
+          mixture_distribution = tfd_categorical(logits = self$mixture_logits)
         )
       }
     })
@@ -234,8 +240,7 @@ compute_kl_loss <-
   }
 
 
-global_step <- tf$train$get_or_create_global_step()
-optimizer <- tf$train$AdamOptimizer(1e-4)
+optimizer <- tf$optimizers$Adam(1e-4)
 
 
 # Training loop -----------------------------------------------------------
@@ -253,7 +258,6 @@ checkpoint_prefix <- file.path(checkpoint_dir, "ckpt")
 checkpoint <-
   tf$train$Checkpoint(
     optimizer = optimizer,
-    global_step = global_step,
     encoder = encoder,
     decoder = decoder,
     latent_prior_model = latent_prior_model
@@ -284,7 +288,7 @@ for (epoch in seq_len(num_epochs)) {
         compute_kl_loss(latent_prior,
                         approx_posterior,
                         approx_posterior_sample)
-
+      
       loss <- kl_loss + avg_nll
     })
     
@@ -299,18 +303,15 @@ for (epoch in seq_len(num_epochs)) {
     
     optimizer$apply_gradients(purrr::transpose(list(
       encoder_gradients, encoder$variables
-    )),
-    global_step = tf$train$get_or_create_global_step())
+    )))
     optimizer$apply_gradients(purrr::transpose(list(
       decoder_gradients, decoder$variables
-    )),
-    global_step = tf$train$get_or_create_global_step())
+    )))
     optimizer$apply_gradients(purrr::transpose(list(
       prior_gradients, latent_prior_model$variables
-    )),
-    global_step = tf$train$get_or_create_global_step())
+    )))
     
-})
+  })
   
   checkpoint$save(file_prefix = checkpoint_prefix)
   
@@ -329,3 +330,4 @@ for (epoch in seq_len(num_epochs)) {
     show_grid(epoch)
   }
 }
+

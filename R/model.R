@@ -5,7 +5,7 @@
 #' 
 #' @param inputs Input layer
 #' @param outputs Output layer
-#'
+#' @param ... Any additional arguments
 #' @family model functions
 #'
 #' @examples 
@@ -30,8 +30,11 @@
 #' )
 #' }
 #' @export
-keras_model <- function(inputs, outputs = NULL) {
-  keras$models$Model(inputs = unname(inputs), outputs = unname(outputs))
+keras_model <- function(inputs, outputs = NULL, ...) {
+  args <- list(inputs = unname(inputs),
+               outputs = unname(outputs),
+               ...)
+  do.call(keras$models$Model, args)
 }
 
 
@@ -439,14 +442,25 @@ fit.keras.engine.training.Model <-
     dataset <- resolve_tensorflow_dataset(validation_data)
     if (!is.null(dataset))
       args$validation_data <- dataset
-    else
+    else {
       args$validation_data <- keras_array(validation_data)  
+      
+      if (tensorflow::tf_version() >="2.2")
+        args$validation_data <- do.call(reticulate::tuple, args$validation_data)
+      
+    }
+      
   }
     
   # resolve x and y (check for TF dataset)
   dataset <- resolve_tensorflow_dataset(x)
   if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
     args$x <- dataset
+    
+    if (!is.null(batch_size))
+      stop("You should not specify a `batch_size` if using a tfdataset.", 
+           call. = FALSE)
+    
   } else if (!is.null(dataset)) {
     args$x <- dataset[[1]]
     args$y <- dataset[[2]]
@@ -1078,7 +1092,7 @@ resolve_tensorflow_dataset <- function(x) {
 #'
 #' @param object Keras model object
 #' @param name String, name of layer.
-#' @param index Integer, index of layer (0-based)
+#' @param index Integer, index of layer (1-based)
 #'
 #' @return A layer instance.
 #'
@@ -1146,8 +1160,6 @@ py_str.keras.engine.training.Model <- function(object,  line_length = getOption(
 # determine whether to view metrics or not
 resolve_view_metrics <- function(verbose, epochs, metrics) {
   (epochs > 1)          &&            # more than 1 epoch
-  !is.null(metrics)     &&            # have metrics
-  (length(metrics) > 0) &&            # capturing at least one metric
   (verbose > 0) &&                    # verbose mode is on
   !is.null(getOption("viewer")) &&    # have an internal viewer available
   nzchar(Sys.getenv("RSTUDIO"))       # running under RStudio
