@@ -47,7 +47,7 @@ save_model_hdf5 <- function(object, filepath, overwrite = TRUE, include_optimize
     include_optimizer = include_optimizer
   )
   
-  if (tensorflow::tf_version() >= "1.14.0") {
+  if (tensorflow::tf_version() >= "1.14.0" && !is_backend("plaidml")) {
     args[["save_format"]] <- "h5"
   }
   
