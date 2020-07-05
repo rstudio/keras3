@@ -2,6 +2,8 @@
 
 - Use compat module when using `set_session` and `get_session`. (#1046)
 - Allows passing other arguments to `keras_model` eg `name`. (#1045)
+- Fixed bug when serializing models with the plaidml backends.(#1084)
+- Install keras no longer tries to install scipy because it's already installed by tensorflow (#1081)
 
 ## Keras 2.2.3.0 (CRAN)
 
