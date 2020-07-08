@@ -886,6 +886,7 @@ flow_images_from_directory <- function(
 #'   * "sparse": 1D array of integer labels,
 #'   * "input": images identical to input images (mainly used to work with autoencoders),
 #'   * "other": array of y_col data,
+#'   * "multi_output": allow to train a multi-output model. Y is a list or a vector. 
 #'   `NULL`, no targets are returned (the generator will only yield batches of 
 #'   image data, which is useful to use in  `predict_generator()`).
 #'   
