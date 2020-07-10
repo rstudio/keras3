@@ -117,7 +117,7 @@ attr(loss_sparse_categorical_crossentropy, "py_function_name") <- "sparse_catego
 #' @inheritParams loss_mean_squared_error
 #' @param from_logits Whether `y_pred` is expected to be a logits tensor. By default, 
 #'   we assume that y_pred encodes a probability distribution.
-#' @param label_smoothing numeric in between 0 and 1. If > 0 then smooth the labels.
+#' @param label_smoothing numeric between 0 and 1. If > 0 then smooth the labels.
 #' 
 #' @seealso [loss_mean_squared_error()]
 #' 
@@ -174,7 +174,6 @@ loss_cosine_similarity <- function(y_true, y_pred) {
   }
 }
 attr(loss_cosine_similarity, "py_function_name") <- "cosine_similarity"
-
 
 
 
