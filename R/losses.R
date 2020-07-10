@@ -128,7 +128,7 @@ loss_binary_crossentropy <- function(y_true, y_pred, from_logits = FALSE, label_
   } else{
     
     if (! ((from_logits == FALSE) && (label_smoothing == 0))) {
-      warning("from_logits and label_smoothingare ignore in TF < 2.2.")
+      warning("from_logits and label_smoothing are ignored in TF < 2.2.")
     }
     
     keras$losses$binary_crossentropy(y_true, y_pred)
@@ -174,5 +174,4 @@ loss_cosine_similarity <- function(y_true, y_pred) {
   }
 }
 attr(loss_cosine_similarity, "py_function_name") <- "cosine_similarity"
-
 
