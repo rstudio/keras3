@@ -122,7 +122,7 @@ attr(loss_sparse_categorical_crossentropy, "py_function_name") <- "sparse_catego
 #' @seealso [loss_mean_squared_error()]
 #' 
 #' @export
-loss_binary_crossentropy <- function(y_true, y_pred, from_logits = FALSE, label_smoothing=0) {
+loss_binary_crossentropy <- function(y_true, y_pred, from_logits = FALSE, label_smoothing = 0) {
   if (tensorflow::tf_version() >="2.2") {
     keras$losses$binary_crossentropy(y_true, y_pred, from_logits, label_smoothing)  
   } else{
@@ -174,6 +174,5 @@ loss_cosine_similarity <- function(y_true, y_pred) {
   }
 }
 attr(loss_cosine_similarity, "py_function_name") <- "cosine_similarity"
-
 
 
