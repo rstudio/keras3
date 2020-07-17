@@ -29,13 +29,15 @@
 #' between samples in different successive batches.
 #' 
 #' To enable statefulness:
-#'   - Specify `stateful=TRUE` in the layer constructor.
+#'   - Specify `stateful = TRUE` in the layer constructor.
 #'   - Specify a fixed batch size for your model. For sequential models,
 #'     pass `batch_input_shape = c(...)` to the first layer in your model.
 #'     For functional models with 1 or more Input layers, pass 
 #'     `batch_shape = c(...)` to all the first layers in your model.
 #'     This is the expected shape of your inputs *including the batch size*.
 #'     It should be a vector of integers, e.g. `c(32, 10, 100)`.
+#'     For dimensions which can vary (are not known ahead of time),
+#'     use `NULL` in place of an integer, e.g. `c(32, NULL, NULL)`.
 #'   - Specify `shuffle = FALSE` when calling fit().
 #' 
 #' To reset the states of your model, call `reset_states()` on either
