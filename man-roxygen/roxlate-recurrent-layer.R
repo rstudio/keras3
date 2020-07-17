@@ -26,7 +26,9 @@
 #' You can set RNN layers to be 'stateful', which means that the states
 #' computed for the samples in one batch will be reused as initial states
 #' for the samples in the next batch. This assumes a one-to-one mapping
-#' between samples in different successive batches.
+#' between samples in different successive batches. For intuition behind
+#' statefulness, there is a helpful blog post here: 
+#' <http://philipperemy.github.io/keras-stateful-lstm/>
 #' 
 #' To enable statefulness:
 #'   - Specify `stateful = TRUE` in the layer constructor.
