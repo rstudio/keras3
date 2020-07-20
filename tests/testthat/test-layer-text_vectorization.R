@@ -87,6 +87,9 @@ test_call_succeeds("can create a tf-idf layer", {
   if (tensorflow::tf_version() < "2.1")
     skip("TextVectorization requires TF version >= 2.1")
   
+  num_words <- 10000 
+  max_length <- 50 
+  
   text_vectorization <- layer_text_vectorization( 
     max_tokens = num_words, output_mode = "tf-idf" 
   )
