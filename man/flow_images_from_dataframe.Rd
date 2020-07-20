@@ -73,6 +73,7 @@ Default: "categorical". Mode for yielding the targets:
 \item "sparse": 1D array of integer labels,
 \item "input": images identical to input images (mainly used to work with autoencoders),
 \item "other": array of y_col data,
+\item "multi_output": allow to train a multi-output model. Y is a list or a vector.
 \code{NULL}, no targets are returned (the generator will only yield batches of
 image data, which is useful to use in  \code{predict_generator()}).
 }}
