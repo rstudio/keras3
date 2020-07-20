@@ -82,4 +82,16 @@ test_call_succeeds("can use layer_text_vectorization", {
 })
 
 
+test_call_succeeds("can create a tf-idf layer", {
+  
+  text_vectorization <- layer_text_vectorization( 
+    max_tokens = num_words, output_mode = "tf-idf" 
+  )
+  text_vectorization %>% adapt(c("hello world", "hello"))
+  x <- text_vectorization(matrix(c("hello"), ncol = 1))
+  
+  expect_s3_class(x, "tensorflow.tensor")
+  
+})
+
 
