@@ -4,7 +4,9 @@
 \name{KerasConstraint}
 \alias{KerasConstraint}
 \title{Base R6 class for Keras constraints}
-\format{An \link{R6Class} generator object}
+\format{
+An \link{R6Class} generator object
+}
 \description{
 Base R6 class for Keras constraints
 }

@@ -62,6 +62,7 @@ It crops along spatial dimensions, i.e. width and height.
 
 \seealso{
 Other convolutional layers: 
+\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
 \code{\link{layer_conv_2d_transpose}()},
 \code{\link{layer_conv_2d}()},
