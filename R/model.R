@@ -164,7 +164,19 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 #' }
 #'
 #' @family model functions
-#'
+#' @note This function is deprecated and has been removed from tensorflow on 
+#' 2020-04-01. To distribute your training across all available GPUS,
+#' you can use `tensorflow::tf$distribute$MirroredStrategy()`
+#' by creating your model like this:
+#' ```r
+#' strategy <- tensorflow::tf$distribute$MirroredStrategy()
+#' with(strategy$scope(), {
+#'   model <- application_xception(
+#'     weights = NULL,
+#'     input_shape = c(height, width, 3),
+#'     classes = num_classes
+#' })
+#' ```
 #' @export
 multi_gpu_model <- function(model, gpus = NULL, cpu_merge = TRUE, cpu_relocation = FALSE) {
   
@@ -172,6 +184,9 @@ multi_gpu_model <- function(model, gpus = NULL, cpu_merge = TRUE, cpu_relocation
     stop("You must provide an explicit gpus argument in Keras versions ",
          "prior to 2.1.4")
   }
+  
+  if (tensorflow::tf_version() >= "2.2")
+    stop("This function is deprecated as of TF version 2.2")
   
   args <- list(
     model = model,
