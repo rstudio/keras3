@@ -4,7 +4,9 @@
 \name{KerasWrapper}
 \alias{KerasWrapper}
 \title{Base R6 class for Keras wrappers}
-\format{An \link{R6Class} generator object}
+\format{
+An \link{R6Class} generator object
+}
 \value{
 \link{KerasWrapper}.
 }

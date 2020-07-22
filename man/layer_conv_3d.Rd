@@ -128,6 +128,7 @@ data_format='channels_last'. \code{new_conv_dim1}, \code{new_conv_dim2} and
 
 \seealso{
 Other convolutional layers: 
+\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
 \code{\link{layer_conv_2d_transpose}()},
 \code{\link{layer_conv_2d}()},

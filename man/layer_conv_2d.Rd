@@ -126,6 +126,7 @@ if data_format='channels_first' or 4D tensor with shape: \verb{(samples, rows, c
 
 \seealso{
 Other convolutional layers: 
+\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
 \code{\link{layer_conv_2d_transpose}()},
 \code{\link{layer_conv_3d_transpose}()},

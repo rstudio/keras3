@@ -19,7 +19,7 @@ loss_binary_crossentropy(
 \item{from_logits}{Whether \code{y_pred} is expected to be a logits tensor. By default,
 we assume that y_pred encodes a probability distribution.}
 
-\item{label_smoothing}{numeric in between 0 and 1. If > 0 then smooth the labels.}
+\item{label_smoothing}{numeric between 0 and 1. If > 0 then smooth the labels.}
 }
 \description{
 Computes the binary crossentropy loss.

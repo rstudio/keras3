@@ -173,17 +173,21 @@ set to \code{TRUE}.
 You can set RNN layers to be 'stateful', which means that the states
 computed for the samples in one batch will be reused as initial states
 for the samples in the next batch. This assumes a one-to-one mapping
-between samples in different successive batches.
+between samples in different successive batches. For intuition behind
+statefulness, there is a helpful blog post here:
+\url{http://philipperemy.github.io/keras-stateful-lstm/}
 
 To enable statefulness:
 \itemize{
-\item Specify \code{stateful=TRUE} in the layer constructor.
+\item Specify \code{stateful = TRUE} in the layer constructor.
 \item Specify a fixed batch size for your model. For sequential models,
 pass \code{batch_input_shape = c(...)} to the first layer in your model.
 For functional models with 1 or more Input layers, pass
 \code{batch_shape = c(...)} to all the first layers in your model.
 This is the expected shape of your inputs \emph{including the batch size}.
 It should be a vector of integers, e.g. \code{c(32, 10, 100)}.
+For dimensions which can vary (are not known ahead of time),
+use \code{NULL} in place of an integer, e.g. \code{c(32, NULL, NULL)}.
 \item Specify \code{shuffle = FALSE} when calling fit().
 }
 
