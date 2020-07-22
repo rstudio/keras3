@@ -54,7 +54,7 @@
 #' @export
 layer_text_vectorization <- function(object, max_tokens = NULL, standardize = "lower_and_strip_punctuation",
                                      split = "whitespace", ngrams = NULL, 
-                                     output_mode = c("int", "binary", "count", "tfidf"),
+                                     output_mode = c("int", "binary", "count", "tf-idf"),
                                      output_sequence_length = NULL, pad_to_max_tokens = TRUE,
                                      ...) {
   
