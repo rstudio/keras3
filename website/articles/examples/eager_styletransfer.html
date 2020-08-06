@@ -6,20 +6,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>eager_styletransfer • keras</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../../apple-touch-icon-60x60.png">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../../bootstrap-toc.css">
+<script src="../../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
 <script src="../../pkgdown.js"></script><link href="../../extra.css" rel="stylesheet">
 <script src="../../extra.js"></script><meta property="og:title" content="eager_styletransfer">
-<meta property="og:description" content="">
+<meta property="og:description" content="keras">
 <meta property="og:image" content="/logo.png">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.4.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
       </span>
     </div>
 
@@ -147,7 +154,14 @@
   </a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/rstudio/keras/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -156,13 +170,14 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
+
+      </header><script src="eager_styletransfer_files/header-attrs-2.3/header-attrs.js"></script><script src="eager_styletransfer_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>eager_styletransfer</h1>
+      <h1 data-toc-skip>eager_styletransfer</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/eager_styletransfer.Rmd"><code>vignettes/examples/eager_styletransfer.Rmd</code></a></small>
       <div class="hidden name"><code>eager_styletransfer.Rmd</code></div>
 
     </div>
@@ -174,277 +189,276 @@
 </div>
 <p>This is the companion code to the post “Neural style transfer with eager execution and Keras” on the TensorFlow for R blog.</p>
 <p><a href="https://blogs.rstudio.com/tensorflow/posts/2018-09-09-eager-style-transfer" class="uri">https://blogs.rstudio.com/tensorflow/posts/2018-09-09-eager-style-transfer</a></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(keras)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="../../reference/use_implementation.html">use_implementation</a></span>(<span class="st">"tensorflow"</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/tensorflow/topics/use_session_with_seed">use_session_with_seed</a></span>(<span class="dv">7777</span>, <span class="dt">disable_gpu =</span> <span class="ot">FALSE</span>, <span class="dt">disable_parallel_cpu =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tensorflow)</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/tensorflow/topics/tfe_enable_eager_execution">tfe_enable_eager_execution</a></span>(<span class="dt">device_policy =</span> <span class="st">"silent"</span>)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(purrr)</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(glue)</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">img_shape &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">128</span>, <span class="dv">128</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">content_path &lt;-<span class="st"> "isar.jpg"</span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">style_path &lt;-<span class="st"> "The_Great_Wave_off_Kanagawa.jpg"</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15">num_iterations &lt;-<span class="st"> </span><span class="dv">2000</span></a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">content_weight &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb1-17" data-line-number="17">style_weight &lt;-<span class="st"> </span><span class="fl">0.8</span></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18">total_variation_weight &lt;-<span class="st"> </span><span class="fl">0.01</span></a>
-<a class="sourceLine" id="cb1-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb1-20" data-line-number="20">content_image &lt;-</a>
-<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="st">  </span><span class="kw"><a href="../../reference/image_load.html">image_load</a></span>(content_path, <span class="dt">target_size =</span> img_shape[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</a>
-<a class="sourceLine" id="cb1-22" data-line-number="22">content_image <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/image_to_array.html">image_to_array</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="st">  `</span><span class="dt">/</span><span class="st">`</span>(., <span class="dv">255</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/as.raster">as.raster</a></span>() <span class="op">%&gt;%</span><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>()</a>
-<a class="sourceLine" id="cb1-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb1-26" data-line-number="26">style_image &lt;-</a>
-<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="st">  </span><span class="kw"><a href="../../reference/image_load.html">image_load</a></span>(style_path, <span class="dt">target_size =</span> img_shape[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</a>
-<a class="sourceLine" id="cb1-28" data-line-number="28">style_image <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/image_to_array.html">image_to_array</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-29" data-line-number="29"><span class="st">  `</span><span class="dt">/</span><span class="st">`</span>(., <span class="dv">255</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-30" data-line-number="30"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/as.raster">as.raster</a></span>() <span class="op">%&gt;%</span><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>()</a>
-<a class="sourceLine" id="cb1-31" data-line-number="31"></a>
-<a class="sourceLine" id="cb1-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb1-33" data-line-number="33">load_and_process_image &lt;-<span class="st"> </span><span class="cf">function</span>(path) {</a>
-<a class="sourceLine" id="cb1-34" data-line-number="34">  img &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/image_load.html">image_load</a></span>(path, <span class="dt">target_size =</span> img_shape[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-35" data-line-number="35"><span class="st">    </span><span class="kw"><a href="../../reference/image_to_array.html">image_to_array</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-36" data-line-number="36"><span class="st">    </span><span class="kw"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span>(<span class="dt">axis =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-37" data-line-number="37"><span class="st">    </span><span class="kw"><a href="../../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>()</a>
-<a class="sourceLine" id="cb1-38" data-line-number="38">}</a>
-<a class="sourceLine" id="cb1-39" data-line-number="39"></a>
-<a class="sourceLine" id="cb1-40" data-line-number="40">deprocess_image &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb1-41" data-line-number="41">  x &lt;-<span class="st"> </span>x[<span class="dv">1</span>, , ,]</a>
-<a class="sourceLine" id="cb1-42" data-line-number="42">  <span class="co"># Remove zero-center by mean pixel</span></a>
-<a class="sourceLine" id="cb1-43" data-line-number="43">  x[, , <span class="dv">1</span>] &lt;-<span class="st"> </span>x[, , <span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="fl">103.939</span></a>
-<a class="sourceLine" id="cb1-44" data-line-number="44">  x[, , <span class="dv">2</span>] &lt;-<span class="st"> </span>x[, , <span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="fl">116.779</span></a>
-<a class="sourceLine" id="cb1-45" data-line-number="45">  x[, , <span class="dv">3</span>] &lt;-<span class="st"> </span>x[, , <span class="dv">3</span>] <span class="op">+</span><span class="st"> </span><span class="fl">123.68</span></a>
-<a class="sourceLine" id="cb1-46" data-line-number="46">  <span class="co"># 'BGR'-&gt;'RGB'</span></a>
-<a class="sourceLine" id="cb1-47" data-line-number="47">  x &lt;-<span class="st"> </span>x[, , <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)]</a>
-<a class="sourceLine" id="cb1-48" data-line-number="48">  x[x <span class="op">&gt;</span><span class="st"> </span><span class="dv">255</span>] &lt;-<span class="st"> </span><span class="dv">255</span></a>
-<a class="sourceLine" id="cb1-49" data-line-number="49">  x[x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb1-50" data-line-number="50">  x[] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/integer">as.integer</a></span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">255</span></a>
-<a class="sourceLine" id="cb1-51" data-line-number="51">  x</a>
-<a class="sourceLine" id="cb1-52" data-line-number="52">}</a>
-<a class="sourceLine" id="cb1-53" data-line-number="53"></a>
-<a class="sourceLine" id="cb1-54" data-line-number="54">content_layers &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"block5_conv2"</span>)</a>
-<a class="sourceLine" id="cb1-55" data-line-number="55">style_layers =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"block1_conv1"</span>,</a>
-<a class="sourceLine" id="cb1-56" data-line-number="56">                 <span class="st">"block2_conv1"</span>,</a>
-<a class="sourceLine" id="cb1-57" data-line-number="57">                 <span class="st">"block3_conv1"</span>,</a>
-<a class="sourceLine" id="cb1-58" data-line-number="58">                 <span class="st">"block4_conv1"</span>,</a>
-<a class="sourceLine" id="cb1-59" data-line-number="59">                 <span class="st">"block5_conv1"</span>)</a>
-<a class="sourceLine" id="cb1-60" data-line-number="60">num_content_layers &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(content_layers)</a>
-<a class="sourceLine" id="cb1-61" data-line-number="61">num_style_layers &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(style_layers)</a>
-<a class="sourceLine" id="cb1-62" data-line-number="62"></a>
-<a class="sourceLine" id="cb1-63" data-line-number="63">get_model &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb1-64" data-line-number="64">  vgg &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/application_vgg.html">application_vgg19</a></span>(<span class="dt">include_top =</span> <span class="ot">FALSE</span>, <span class="dt">weights =</span> <span class="st">"imagenet"</span>)</a>
-<a class="sourceLine" id="cb1-65" data-line-number="65">  vgg<span class="op">$</span>trainable &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb1-66" data-line-number="66">  style_outputs &lt;-</a>
-<a class="sourceLine" id="cb1-67" data-line-number="67"><span class="st">    </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(style_layers, <span class="cf">function</span>(layer)</a>
-<a class="sourceLine" id="cb1-68" data-line-number="68">      vgg<span class="op">$</span><span class="kw"><a href="../../reference/get_layer.html">get_layer</a></span>(layer)<span class="op">$</span>output)</a>
-<a class="sourceLine" id="cb1-69" data-line-number="69">  content_outputs &lt;-</a>
-<a class="sourceLine" id="cb1-70" data-line-number="70"><span class="st">    </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(content_layers, <span class="cf">function</span>(layer)</a>
-<a class="sourceLine" id="cb1-71" data-line-number="71">      vgg<span class="op">$</span><span class="kw"><a href="../../reference/get_layer.html">get_layer</a></span>(layer)<span class="op">$</span>output)</a>
-<a class="sourceLine" id="cb1-72" data-line-number="72">  model_outputs &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(style_outputs, content_outputs)</a>
-<a class="sourceLine" id="cb1-73" data-line-number="73">  <span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(vgg<span class="op">$</span>input, model_outputs)</a>
-<a class="sourceLine" id="cb1-74" data-line-number="74">}</a>
-<a class="sourceLine" id="cb1-75" data-line-number="75"></a>
-<a class="sourceLine" id="cb1-76" data-line-number="76">content_loss &lt;-<span class="st"> </span><span class="cf">function</span>(content_image, target) {</a>
-<a class="sourceLine" id="cb1-77" data-line-number="77">  <span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(target <span class="op">-</span><span class="st"> </span>content_image))</a>
-<a class="sourceLine" id="cb1-78" data-line-number="78">}</a>
-<a class="sourceLine" id="cb1-79" data-line-number="79"></a>
-<a class="sourceLine" id="cb1-80" data-line-number="80">gram_matrix &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb1-81" data-line-number="81">  features &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_batch_flatten.html">k_batch_flatten</a></span>(<span class="kw"><a href="../../reference/k_permute_dimensions.html">k_permute_dimensions</a></span>(x, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>)))</a>
-<a class="sourceLine" id="cb1-82" data-line-number="82">  gram &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_dot.html">k_dot</a></span>(features, <span class="kw"><a href="../../reference/k_transpose.html">k_transpose</a></span>(features))</a>
-<a class="sourceLine" id="cb1-83" data-line-number="83">  gram</a>
-<a class="sourceLine" id="cb1-84" data-line-number="84">}</a>
-<a class="sourceLine" id="cb1-85" data-line-number="85"></a>
-<a class="sourceLine" id="cb1-86" data-line-number="86">style_loss &lt;-<span class="st"> </span><span class="cf">function</span>(gram_target, combination) {</a>
-<a class="sourceLine" id="cb1-87" data-line-number="87">  gram_comb &lt;-<span class="st"> </span><span class="kw">gram_matrix</span>(combination)</a>
-<a class="sourceLine" id="cb1-88" data-line-number="88">  <span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(gram_target <span class="op">-</span><span class="st"> </span>gram_comb)) <span class="op">/</span><span class="st"> </span>(<span class="dv">4</span> <span class="op">*</span><span class="st"> </span>(img_shape[<span class="dv">3</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>(img_shape[<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>img_shape[<span class="dv">2</span>]) <span class="op">^</span></a>
-<a class="sourceLine" id="cb1-89" data-line-number="89"><span class="st">                                                </span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb1-90" data-line-number="90">}</a>
-<a class="sourceLine" id="cb1-91" data-line-number="91"></a>
-<a class="sourceLine" id="cb1-92" data-line-number="92">total_variation_loss &lt;-<span class="st"> </span><span class="cf">function</span>(image) {</a>
-<a class="sourceLine" id="cb1-93" data-line-number="93">  y_ij  &lt;-<span class="st"> </span>image[<span class="dv">1</span><span class="op">:</span>(img_shape[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>1L), <span class="dv">1</span><span class="op">:</span>(img_shape[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>1L),]</a>
-<a class="sourceLine" id="cb1-94" data-line-number="94">  y_i1j &lt;-<span class="st"> </span>image[<span class="dv">2</span><span class="op">:</span>(img_shape[<span class="dv">1</span>]), <span class="dv">1</span><span class="op">:</span>(img_shape[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>1L),]</a>
-<a class="sourceLine" id="cb1-95" data-line-number="95">  y_ij1 &lt;-<span class="st"> </span>image[<span class="dv">1</span><span class="op">:</span>(img_shape[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>1L), <span class="dv">2</span><span class="op">:</span>(img_shape[<span class="dv">2</span>]),]</a>
-<a class="sourceLine" id="cb1-96" data-line-number="96">  a &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(y_ij <span class="op">-</span><span class="st"> </span>y_i1j)</a>
-<a class="sourceLine" id="cb1-97" data-line-number="97">  b &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_square.html">k_square</a></span>(y_ij <span class="op">-</span><span class="st"> </span>y_ij1)</a>
-<a class="sourceLine" id="cb1-98" data-line-number="98">  <span class="kw"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="kw"><a href="../../reference/k_pow.html">k_pow</a></span>(a <span class="op">+</span><span class="st"> </span>b, <span class="fl">1.25</span>))</a>
-<a class="sourceLine" id="cb1-99" data-line-number="99">}</a>
-<a class="sourceLine" id="cb1-100" data-line-number="100"></a>
-<a class="sourceLine" id="cb1-101" data-line-number="101">get_feature_representations &lt;-</a>
-<a class="sourceLine" id="cb1-102" data-line-number="102"><span class="st">  </span><span class="cf">function</span>(model, content_path, style_path) {</a>
-<a class="sourceLine" id="cb1-103" data-line-number="103">    <span class="co"># dim == (1, 128, 128, 3)</span></a>
-<a class="sourceLine" id="cb1-104" data-line-number="104">    style_image &lt;-</a>
-<a class="sourceLine" id="cb1-105" data-line-number="105"><span class="st">      </span><span class="kw">load_and_process_image</span>(style_path) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/k_cast.html">k_cast</a></span>(<span class="st">"float32"</span>)</a>
-<a class="sourceLine" id="cb1-106" data-line-number="106">    <span class="co"># dim == (1, 128, 128, 3)</span></a>
-<a class="sourceLine" id="cb1-107" data-line-number="107">    content_image &lt;-</a>
-<a class="sourceLine" id="cb1-108" data-line-number="108"><span class="st">      </span><span class="kw">load_and_process_image</span>(content_path) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/k_cast.html">k_cast</a></span>(<span class="st">"float32"</span>)</a>
-<a class="sourceLine" id="cb1-109" data-line-number="109">    <span class="co"># dim == (2, 128, 128, 3)</span></a>
-<a class="sourceLine" id="cb1-110" data-line-number="110">    stack_images &lt;-</a>
-<a class="sourceLine" id="cb1-111" data-line-number="111"><span class="st">      </span><span class="kw"><a href="../../reference/k_concatenate.html">k_concatenate</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(style_image, content_image), <span class="dt">axis =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb1-112" data-line-number="112">    <span class="co"># length(model_outputs) == 6</span></a>
-<a class="sourceLine" id="cb1-113" data-line-number="113">    <span class="co"># dim(model_outputs[[1]]) = (2, 128, 128, 64)</span></a>
-<a class="sourceLine" id="cb1-114" data-line-number="114">    <span class="co"># dim(model_outputs[[6]]) = (2, 8, 8, 512)</span></a>
-<a class="sourceLine" id="cb1-115" data-line-number="115">    model_outputs &lt;-<span class="st"> </span><span class="kw">model</span>(stack_images)</a>
-<a class="sourceLine" id="cb1-116" data-line-number="116">    style_features &lt;-<span class="st"> </span>model_outputs[<span class="dv">1</span><span class="op">:</span>num_style_layers] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-117" data-line-number="117"><span class="st">      </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="cf">function</span>(batch)</a>
-<a class="sourceLine" id="cb1-118" data-line-number="118">        batch[<span class="dv">1</span>, , , ])</a>
-<a class="sourceLine" id="cb1-119" data-line-number="119">    content_features &lt;-</a>
-<a class="sourceLine" id="cb1-120" data-line-number="120"><span class="st">      </span>model_outputs[(num_style_layers <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span>(num_style_layers <span class="op">+</span><span class="st"> </span>num_content_layers)] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-121" data-line-number="121"><span class="st">      </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="cf">function</span>(batch)</a>
-<a class="sourceLine" id="cb1-122" data-line-number="122">        batch[<span class="dv">2</span>, , , ])</a>
-<a class="sourceLine" id="cb1-123" data-line-number="123">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(style_features, content_features)</a>
-<a class="sourceLine" id="cb1-124" data-line-number="124">  }</a>
-<a class="sourceLine" id="cb1-125" data-line-number="125"></a>
-<a class="sourceLine" id="cb1-126" data-line-number="126">compute_loss &lt;-</a>
-<a class="sourceLine" id="cb1-127" data-line-number="127"><span class="st">  </span><span class="cf">function</span>(model,</a>
-<a class="sourceLine" id="cb1-128" data-line-number="128">           loss_weights,</a>
-<a class="sourceLine" id="cb1-129" data-line-number="129">           init_image,</a>
-<a class="sourceLine" id="cb1-130" data-line-number="130">           gram_style_features,</a>
-<a class="sourceLine" id="cb1-131" data-line-number="131">           content_features) {</a>
-<a class="sourceLine" id="cb1-132" data-line-number="132">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(style_weight, content_weight) <span class="op">%&lt;-%</span><span class="st"> </span>loss_weights</a>
-<a class="sourceLine" id="cb1-133" data-line-number="133">    model_outputs &lt;-<span class="st"> </span><span class="kw">model</span>(init_image)</a>
-<a class="sourceLine" id="cb1-134" data-line-number="134">    style_output_features &lt;-<span class="st"> </span>model_outputs[<span class="dv">1</span><span class="op">:</span>num_style_layers]</a>
-<a class="sourceLine" id="cb1-135" data-line-number="135">    content_output_features &lt;-</a>
-<a class="sourceLine" id="cb1-136" data-line-number="136"><span class="st">      </span>model_outputs[(num_style_layers <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span>(num_style_layers <span class="op">+</span><span class="st"> </span>num_content_layers)]</a>
-<a class="sourceLine" id="cb1-137" data-line-number="137">    </a>
-<a class="sourceLine" id="cb1-138" data-line-number="138">    weight_per_style_layer &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>num_style_layers</a>
-<a class="sourceLine" id="cb1-139" data-line-number="139">    style_score &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb1-140" data-line-number="140">    <span class="co"># str(style_zip, max.level = 1)</span></a>
-<a class="sourceLine" id="cb1-141" data-line-number="141">    <span class="co"># dim(style_zip[[5]][[1]]) == (512, 512)</span></a>
-<a class="sourceLine" id="cb1-142" data-line-number="142">    style_zip &lt;-</a>
-<a class="sourceLine" id="cb1-143" data-line-number="143"><span class="st">      </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(gram_style_features, style_output_features))</a>
-<a class="sourceLine" id="cb1-144" data-line-number="144">    <span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(style_zip)) {</a>
-<a class="sourceLine" id="cb1-145" data-line-number="145">      <span class="co"># for l == 1:</span></a>
-<a class="sourceLine" id="cb1-146" data-line-number="146">      <span class="co"># dim(target_style) == (64, 64)</span></a>
-<a class="sourceLine" id="cb1-147" data-line-number="147">      <span class="co"># dim(comb_style) == (1, 128, 128, 64)</span></a>
-<a class="sourceLine" id="cb1-148" data-line-number="148">      <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(target_style, comb_style) <span class="op">%&lt;-%</span><span class="st"> </span>style_zip[[l]]</a>
-<a class="sourceLine" id="cb1-149" data-line-number="149">      style_score &lt;-</a>
-<a class="sourceLine" id="cb1-150" data-line-number="150"><span class="st">        </span>style_score <span class="op">+</span><span class="st"> </span>weight_per_style_layer <span class="op">*</span><span class="st"> </span><span class="kw">style_loss</span>(target_style, comb_style[<span class="dv">1</span>, , , ])</a>
-<a class="sourceLine" id="cb1-151" data-line-number="151">    }</a>
-<a class="sourceLine" id="cb1-152" data-line-number="152">    </a>
-<a class="sourceLine" id="cb1-153" data-line-number="153">    weight_per_content_layer &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>num_content_layers</a>
-<a class="sourceLine" id="cb1-154" data-line-number="154">    content_score &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb1-155" data-line-number="155">    content_zip &lt;-</a>
-<a class="sourceLine" id="cb1-156" data-line-number="156"><span class="st">      </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(content_features, content_output_features))</a>
-<a class="sourceLine" id="cb1-157" data-line-number="157">    <span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(content_zip)) {</a>
-<a class="sourceLine" id="cb1-158" data-line-number="158">      <span class="co"># dim(comb_content) ==  (1, 8, 8, 512)</span></a>
-<a class="sourceLine" id="cb1-159" data-line-number="159">      <span class="co"># dim(target_content) == (8, 8, 512)</span></a>
-<a class="sourceLine" id="cb1-160" data-line-number="160">      <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(target_content, comb_content) <span class="op">%&lt;-%</span><span class="st"> </span>content_zip[[l]]</a>
-<a class="sourceLine" id="cb1-161" data-line-number="161">      content_score &lt;-</a>
-<a class="sourceLine" id="cb1-162" data-line-number="162"><span class="st">        </span>content_score <span class="op">+</span><span class="st"> </span>weight_per_content_layer <span class="op">*</span><span class="st"> </span><span class="kw">content_loss</span>(comb_content[<span class="dv">1</span>, , , ], target_content)</a>
-<a class="sourceLine" id="cb1-163" data-line-number="163">    }</a>
-<a class="sourceLine" id="cb1-164" data-line-number="164">    </a>
-<a class="sourceLine" id="cb1-165" data-line-number="165">    variation_loss &lt;-<span class="st"> </span><span class="kw">total_variation_loss</span>(init_image[<span class="dv">1</span>, , ,])</a>
-<a class="sourceLine" id="cb1-166" data-line-number="166">    style_score &lt;-<span class="st"> </span>style_score <span class="op">*</span><span class="st"> </span>style_weight</a>
-<a class="sourceLine" id="cb1-167" data-line-number="167">    content_score &lt;-<span class="st"> </span>content_score <span class="op">*</span><span class="st"> </span>content_weight</a>
-<a class="sourceLine" id="cb1-168" data-line-number="168">    variation_score &lt;-<span class="st"> </span>variation_loss <span class="op">*</span><span class="st"> </span>total_variation_weight</a>
-<a class="sourceLine" id="cb1-169" data-line-number="169">    </a>
-<a class="sourceLine" id="cb1-170" data-line-number="170">    loss &lt;-<span class="st"> </span>style_score <span class="op">+</span><span class="st"> </span>content_score <span class="op">+</span><span class="st"> </span>variation_score</a>
-<a class="sourceLine" id="cb1-171" data-line-number="171">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(loss, style_score, content_score, variation_score)</a>
-<a class="sourceLine" id="cb1-172" data-line-number="172">  }</a>
-<a class="sourceLine" id="cb1-173" data-line-number="173"></a>
-<a class="sourceLine" id="cb1-174" data-line-number="174">compute_grads &lt;-</a>
-<a class="sourceLine" id="cb1-175" data-line-number="175"><span class="st">  </span><span class="cf">function</span>(model,</a>
-<a class="sourceLine" id="cb1-176" data-line-number="176">           loss_weights,</a>
-<a class="sourceLine" id="cb1-177" data-line-number="177">           init_image,</a>
-<a class="sourceLine" id="cb1-178" data-line-number="178">           gram_style_features,</a>
-<a class="sourceLine" id="cb1-179" data-line-number="179">           content_features) {</a>
-<a class="sourceLine" id="cb1-180" data-line-number="180">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/with">with</a></span>(tf<span class="op">$</span><span class="kw">GradientTape</span>() <span class="op">%as%</span><span class="st"> </span>tape, {</a>
-<a class="sourceLine" id="cb1-181" data-line-number="181">      scores &lt;-</a>
-<a class="sourceLine" id="cb1-182" data-line-number="182"><span class="st">        </span><span class="kw">compute_loss</span>(model,</a>
-<a class="sourceLine" id="cb1-183" data-line-number="183">                     loss_weights,</a>
-<a class="sourceLine" id="cb1-184" data-line-number="184">                     init_image,</a>
-<a class="sourceLine" id="cb1-185" data-line-number="185">                     gram_style_features,</a>
-<a class="sourceLine" id="cb1-186" data-line-number="186">                     content_features)</a>
-<a class="sourceLine" id="cb1-187" data-line-number="187">    })</a>
-<a class="sourceLine" id="cb1-188" data-line-number="188">    total_loss &lt;-<span class="st"> </span>scores[[<span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb1-189" data-line-number="189">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(tape<span class="op">$</span><span class="kw">gradient</span>(total_loss, init_image), scores)</a>
-<a class="sourceLine" id="cb1-190" data-line-number="190">  }</a>
-<a class="sourceLine" id="cb1-191" data-line-number="191"></a>
-<a class="sourceLine" id="cb1-192" data-line-number="192">run_style_transfer &lt;-<span class="st"> </span><span class="cf">function</span>(content_path,</a>
-<a class="sourceLine" id="cb1-193" data-line-number="193">                               style_path) {</a>
-<a class="sourceLine" id="cb1-194" data-line-number="194">  model &lt;-<span class="st"> </span><span class="kw">get_model</span>()</a>
-<a class="sourceLine" id="cb1-195" data-line-number="195">  <span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">walk</a></span>(model<span class="op">$</span>layers, <span class="cf">function</span>(layer)</a>
-<a class="sourceLine" id="cb1-196" data-line-number="196">    layer<span class="op">$</span><span class="dt">trainable =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1-197" data-line-number="197">  </a>
-<a class="sourceLine" id="cb1-198" data-line-number="198">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(style_features, content_features) <span class="op">%&lt;-%</span><span class="st"> </span><span class="kw">get_feature_representations</span>(model, content_path, style_path)</a>
-<a class="sourceLine" id="cb1-199" data-line-number="199">  <span class="co"># dim(gram_style_features[[1]]) == (64, 64)</span></a>
-<a class="sourceLine" id="cb1-200" data-line-number="200">  <span class="co"># we compute this once, in advance</span></a>
-<a class="sourceLine" id="cb1-201" data-line-number="201">  gram_style_features &lt;-</a>
-<a class="sourceLine" id="cb1-202" data-line-number="202"><span class="st">    </span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(style_features, <span class="cf">function</span>(feature)</a>
-<a class="sourceLine" id="cb1-203" data-line-number="203">      <span class="kw">gram_matrix</span>(feature))</a>
-<a class="sourceLine" id="cb1-204" data-line-number="204">  </a>
-<a class="sourceLine" id="cb1-205" data-line-number="205">  init_image &lt;-<span class="st"> </span><span class="kw">load_and_process_image</span>(content_path)</a>
-<a class="sourceLine" id="cb1-206" data-line-number="206">  init_image &lt;-</a>
-<a class="sourceLine" id="cb1-207" data-line-number="207"><span class="st">    </span>tf<span class="op">$</span>contrib<span class="op">$</span>eager<span class="op">$</span><span class="kw">Variable</span>(init_image, <span class="dt">dtype =</span> <span class="st">"float32"</span>)</a>
-<a class="sourceLine" id="cb1-208" data-line-number="208">  </a>
-<a class="sourceLine" id="cb1-209" data-line-number="209">  optimizer &lt;-</a>
-<a class="sourceLine" id="cb1-210" data-line-number="210"><span class="st">    </span>tf<span class="op">$</span>train<span class="op">$</span><span class="kw">AdamOptimizer</span>(<span class="dt">learning_rate =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb1-211" data-line-number="211">                           <span class="dt">beta1 =</span> <span class="fl">0.99</span>,</a>
-<a class="sourceLine" id="cb1-212" data-line-number="212">                           <span class="dt">epsilon =</span> <span class="fl">1e-1</span>)</a>
-<a class="sourceLine" id="cb1-213" data-line-number="213">  </a>
-<a class="sourceLine" id="cb1-214" data-line-number="214">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(best_loss, best_image) <span class="op">%&lt;-%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="ot">Inf</span>, <span class="ot">NULL</span>)</a>
-<a class="sourceLine" id="cb1-215" data-line-number="215">  loss_weights &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(style_weight, content_weight)</a>
-<a class="sourceLine" id="cb1-216" data-line-number="216">  </a>
-<a class="sourceLine" id="cb1-217" data-line-number="217">  start_time &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.time">Sys.time</a></span>()</a>
-<a class="sourceLine" id="cb1-218" data-line-number="218">  global_start &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.time">Sys.time</a></span>()</a>
-<a class="sourceLine" id="cb1-219" data-line-number="219">  </a>
-<a class="sourceLine" id="cb1-220" data-line-number="220">  norm_means &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">103.939</span>, <span class="fl">116.779</span>, <span class="fl">123.68</span>)</a>
-<a class="sourceLine" id="cb1-221" data-line-number="221">  min_vals &lt;-<span class="st"> </span><span class="op">-</span>norm_means</a>
-<a class="sourceLine" id="cb1-222" data-line-number="222">  max_vals &lt;-<span class="st"> </span><span class="dv">255</span> <span class="op">-</span><span class="st"> </span>norm_means</a>
-<a class="sourceLine" id="cb1-223" data-line-number="223">  </a>
-<a class="sourceLine" id="cb1-224" data-line-number="224">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq_len</a></span>(num_iterations)) {</a>
-<a class="sourceLine" id="cb1-225" data-line-number="225">    <span class="co"># dim(grads) == (1, 128, 128, 3)</span></a>
-<a class="sourceLine" id="cb1-226" data-line-number="226">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(grads, all_losses) <span class="op">%&lt;-%</span><span class="st"> </span><span class="kw">compute_grads</span>(model,</a>
-<a class="sourceLine" id="cb1-227" data-line-number="227">                                            loss_weights,</a>
-<a class="sourceLine" id="cb1-228" data-line-number="228">                                            init_image,</a>
-<a class="sourceLine" id="cb1-229" data-line-number="229">                                            gram_style_features,</a>
-<a class="sourceLine" id="cb1-230" data-line-number="230">                                            content_features)</a>
-<a class="sourceLine" id="cb1-231" data-line-number="231">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(loss, style_score, content_score, variation_score) <span class="op">%&lt;-%</span><span class="st"> </span>all_losses</a>
-<a class="sourceLine" id="cb1-232" data-line-number="232">    optimizer<span class="op">$</span><span class="kw">apply_gradients</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/reticulate/topics/tuple">tuple</a></span>(grads, init_image)))</a>
-<a class="sourceLine" id="cb1-233" data-line-number="233">    clipped &lt;-<span class="st"> </span>tf<span class="op">$</span><span class="kw">clip_by_value</span>(init_image, min_vals, max_vals)</a>
-<a class="sourceLine" id="cb1-234" data-line-number="234">    init_image<span class="op">$</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/assign">assign</a></span>(clipped)</a>
-<a class="sourceLine" id="cb1-235" data-line-number="235">    </a>
-<a class="sourceLine" id="cb1-236" data-line-number="236">    end_time &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.time">Sys.time</a></span>()</a>
-<a class="sourceLine" id="cb1-237" data-line-number="237">    </a>
-<a class="sourceLine" id="cb1-238" data-line-number="238">    <span class="cf">if</span> (<span class="kw"><a href="../../reference/k_cast_to_floatx.html">k_cast_to_floatx</a></span>(loss) <span class="op">&lt;</span><span class="st"> </span>best_loss) {</a>
-<a class="sourceLine" id="cb1-239" data-line-number="239">      best_loss &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/k_cast_to_floatx.html">k_cast_to_floatx</a></span>(loss)</a>
-<a class="sourceLine" id="cb1-240" data-line-number="240">      best_image &lt;-<span class="st"> </span>init_image</a>
-<a class="sourceLine" id="cb1-241" data-line-number="241">    }</a>
-<a class="sourceLine" id="cb1-242" data-line-number="242">    </a>
-<a class="sourceLine" id="cb1-243" data-line-number="243">    <span class="cf">if</span> (i <span class="op">%%</span><span class="st"> </span><span class="dv">50</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb1-244" data-line-number="244">      <span class="kw"><a href="https://www.rdocumentation.org/packages/glue/topics/glue">glue</a></span>(<span class="st">"Iteration: {i}"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>()</a>
-<a class="sourceLine" id="cb1-245" data-line-number="245">      <span class="kw"><a href="https://www.rdocumentation.org/packages/glue/topics/glue">glue</a></span>(</a>
-<a class="sourceLine" id="cb1-246" data-line-number="246">        <span class="st">"Total loss: {k_cast_to_floatx(loss)}, style loss: {k_cast_to_floatx(style_score)},</span></a>
-<a class="sourceLine" id="cb1-247" data-line-number="247"><span class="st">        content loss: {k_cast_to_floatx(content_score)}, total variation loss: {k_cast_to_floatx(variation_score)},</span></a>
-<a class="sourceLine" id="cb1-248" data-line-number="248"><span class="st">        time for 1 iteration: {(Sys.time() - start_time) %&gt;% round(2)}"</span></a>
-<a class="sourceLine" id="cb1-249" data-line-number="249">      ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>()</a>
-<a class="sourceLine" id="cb1-250" data-line-number="250">      </a>
-<a class="sourceLine" id="cb1-251" data-line-number="251">      <span class="cf">if</span> (i <span class="op">%%</span><span class="st"> </span><span class="dv">100</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb1-252" data-line-number="252">        <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"style_epoch_"</span>, i, <span class="st">".png"</span>))</a>
-<a class="sourceLine" id="cb1-253" data-line-number="253">        plot_image &lt;-<span class="st"> </span>best_image<span class="op">$</span><span class="kw">numpy</span>()</a>
-<a class="sourceLine" id="cb1-254" data-line-number="254">        plot_image &lt;-<span class="st"> </span><span class="kw">deprocess_image</span>(plot_image)</a>
-<a class="sourceLine" id="cb1-255" data-line-number="255">        <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/as.raster">as.raster</a></span>(plot_image), <span class="dt">main =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/glue/topics/glue">glue</a></span>(<span class="st">"Iteration {i}"</span>))</a>
-<a class="sourceLine" id="cb1-256" data-line-number="256">        <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>()</a>
-<a class="sourceLine" id="cb1-257" data-line-number="257">      }</a>
-<a class="sourceLine" id="cb1-258" data-line-number="258">    }</a>
-<a class="sourceLine" id="cb1-259" data-line-number="259">  }</a>
-<a class="sourceLine" id="cb1-260" data-line-number="260">  </a>
-<a class="sourceLine" id="cb1-261" data-line-number="261">  <span class="kw"><a href="https://www.rdocumentation.org/packages/glue/topics/glue">glue</a></span>(<span class="st">"Total time: {Sys.time() - global_start} seconds"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>()</a>
-<a class="sourceLine" id="cb1-262" data-line-number="262">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(best_image, best_loss)</a>
-<a class="sourceLine" id="cb1-263" data-line-number="263">}</a>
-<a class="sourceLine" id="cb1-264" data-line-number="264"></a>
-<a class="sourceLine" id="cb1-265" data-line-number="265"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(best_image, best_loss) <span class="op">%&lt;-%</span><span class="st"> </span><span class="kw">run_style_transfer</span>(content_path, style_path)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
+<span class="fu"><a href="../../reference/use_implementation.html">use_implementation</a></span>(<span class="st">"tensorflow"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tensorflow</span>)
+
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">purrr</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">glue</span>)
+
+<span class="no">img_shape</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">128</span>, <span class="fl">128</span>, <span class="fl">3</span>)
+<span class="no">content_path</span> <span class="kw">&lt;-</span> <span class="st">"isar.jpg"</span>
+<span class="no">style_path</span> <span class="kw">&lt;-</span> <span class="st">"The_Great_Wave_off_Kanagawa.jpg"</span>
+
+
+<span class="no">num_iterations</span> <span class="kw">&lt;-</span> <span class="fl">2000</span>
+<span class="no">content_weight</span> <span class="kw">&lt;-</span> <span class="fl">100</span>
+<span class="no">style_weight</span> <span class="kw">&lt;-</span> <span class="fl">0.8</span>
+<span class="no">total_variation_weight</span> <span class="kw">&lt;-</span> <span class="fl">0.01</span>
+
+<span class="no">content_image</span> <span class="kw">&lt;-</span>
+  <span class="fu"><a href="../../reference/image_load.html">image_load</a></span>(<span class="no">content_path</span>, <span class="kw">target_size</span> <span class="kw">=</span> <span class="no">img_shape</span>[<span class="fl">1</span>:<span class="fl">2</span>])
+<span class="no">content_image</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/image_to_array.html">image_to_array</a></span>() <span class="kw">%&gt;%</span>
+  <span class="fu">`/`</span>(<span class="no">.</span>, <span class="fl">255</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span>() <span class="kw">%&gt;%</span>  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>()
+
+<span class="no">style_image</span> <span class="kw">&lt;-</span>
+  <span class="fu"><a href="../../reference/image_load.html">image_load</a></span>(<span class="no">style_path</span>, <span class="kw">target_size</span> <span class="kw">=</span> <span class="no">img_shape</span>[<span class="fl">1</span>:<span class="fl">2</span>])
+<span class="no">style_image</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/image_to_array.html">image_to_array</a></span>() <span class="kw">%&gt;%</span>
+  <span class="fu">`/`</span>(<span class="no">.</span>, <span class="fl">255</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span>() <span class="kw">%&gt;%</span>  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>()
+
+
+<span class="no">load_and_process_image</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">path</span>) {
+  <span class="no">img</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/image_load.html">image_load</a></span>(<span class="no">path</span>, <span class="kw">target_size</span> <span class="kw">=</span> <span class="no">img_shape</span>[<span class="fl">1</span>:<span class="fl">2</span>]) <span class="kw">%&gt;%</span>
+    <span class="fu"><a href="../../reference/image_to_array.html">image_to_array</a></span>() <span class="kw">%&gt;%</span>
+    <span class="fu"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span>(<span class="kw">axis</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
+    <span class="fu"><a href="../../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span>()
+}
+
+<span class="no">deprocess_image</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) {
+  <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">x</span>[<span class="fl">1</span>, , ,]
+  <span class="co"># Remove zero-center by mean pixel</span>
+  <span class="no">x</span>[, , <span class="fl">1</span>] <span class="kw">&lt;-</span> <span class="no">x</span>[, , <span class="fl">1</span>] + <span class="fl">103.939</span>
+  <span class="no">x</span>[, , <span class="fl">2</span>] <span class="kw">&lt;-</span> <span class="no">x</span>[, , <span class="fl">2</span>] + <span class="fl">116.779</span>
+  <span class="no">x</span>[, , <span class="fl">3</span>] <span class="kw">&lt;-</span> <span class="no">x</span>[, , <span class="fl">3</span>] + <span class="fl">123.68</span>
+  <span class="co"># 'BGR'-&gt;'RGB'</span>
+  <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">x</span>[, , <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span>)]
+  <span class="no">x</span>[<span class="no">x</span> <span class="kw">&gt;</span> <span class="fl">255</span>] <span class="kw">&lt;-</span> <span class="fl">255</span>
+  <span class="no">x</span>[<span class="no">x</span> <span class="kw">&lt;</span> <span class="fl">0</span>] <span class="kw">&lt;-</span> <span class="fl">0</span>
+  <span class="no">x</span>[] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="no">x</span>) / <span class="fl">255</span>
+  <span class="no">x</span>
+}
+
+<span class="no">content_layers</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"block5_conv2"</span>)
+<span class="no">style_layers</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"block1_conv1"</span>,
+                 <span class="st">"block2_conv1"</span>,
+                 <span class="st">"block3_conv1"</span>,
+                 <span class="st">"block4_conv1"</span>,
+                 <span class="st">"block5_conv1"</span>)
+<span class="no">num_content_layers</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">content_layers</span>)
+<span class="no">num_style_layers</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">style_layers</span>)
+
+<span class="no">get_model</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
+  <span class="no">vgg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/application_vgg.html">application_vgg19</a></span>(<span class="kw">include_top</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">weights</span> <span class="kw">=</span> <span class="st">"imagenet"</span>)
+  <span class="no">vgg</span>$<span class="no">trainable</span> <span class="kw">&lt;-</span> <span class="fl">FALSE</span>
+  <span class="no">style_outputs</span> <span class="kw">&lt;-</span>
+    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">style_layers</span>, <span class="kw">function</span>(<span class="no">layer</span>)
+      <span class="no">vgg</span>$<span class="fu"><a href="../../reference/get_layer.html">get_layer</a></span>(<span class="no">layer</span>)$<span class="no">output</span>)
+  <span class="no">content_outputs</span> <span class="kw">&lt;-</span>
+    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">content_layers</span>, <span class="kw">function</span>(<span class="no">layer</span>)
+      <span class="no">vgg</span>$<span class="fu"><a href="../../reference/get_layer.html">get_layer</a></span>(<span class="no">layer</span>)$<span class="no">output</span>)
+  <span class="no">model_outputs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">style_outputs</span>, <span class="no">content_outputs</span>)
+  <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="no">vgg</span>$<span class="no">input</span>, <span class="no">model_outputs</span>)
+}
+
+<span class="no">content_loss</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">content_image</span>, <span class="no">target</span>) {
+  <span class="fu"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="fu"><a href="../../reference/k_square.html">k_square</a></span>(<span class="no">target</span> - <span class="no">content_image</span>))
+}
+
+<span class="no">gram_matrix</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) {
+  <span class="no">features</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_batch_flatten.html">k_batch_flatten</a></span>(<span class="fu"><a href="../../reference/k_permute_dimensions.html">k_permute_dimensions</a></span>(<span class="no">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">2</span>)))
+  <span class="no">gram</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_dot.html">k_dot</a></span>(<span class="no">features</span>, <span class="fu"><a href="../../reference/k_transpose.html">k_transpose</a></span>(<span class="no">features</span>))
+  <span class="no">gram</span>
+}
+
+<span class="no">style_loss</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">gram_target</span>, <span class="no">combination</span>) {
+  <span class="no">gram_comb</span> <span class="kw">&lt;-</span> <span class="fu">gram_matrix</span>(<span class="no">combination</span>)
+  <span class="fu"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="fu"><a href="../../reference/k_square.html">k_square</a></span>(<span class="no">gram_target</span> - <span class="no">gram_comb</span>)) / (<span class="fl">4</span> * (<span class="no">img_shape</span>[<span class="fl">3</span>] ^ <span class="fl">2</span>) * (<span class="no">img_shape</span>[<span class="fl">1</span>] * <span class="no">img_shape</span>[<span class="fl">2</span>]) ^
+                                                <span class="fl">2</span>)
+}
+
+<span class="no">total_variation_loss</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">image</span>) {
+  <span class="no">y_ij</span>  <span class="kw">&lt;-</span> <span class="no">image</span>[<span class="fl">1</span>:(<span class="no">img_shape</span>[<span class="fl">1</span>] - <span class="fl">1L</span>), <span class="fl">1</span>:(<span class="no">img_shape</span>[<span class="fl">2</span>] - <span class="fl">1L</span>),]
+  <span class="no">y_i1j</span> <span class="kw">&lt;-</span> <span class="no">image</span>[<span class="fl">2</span>:(<span class="no">img_shape</span>[<span class="fl">1</span>]), <span class="fl">1</span>:(<span class="no">img_shape</span>[<span class="fl">2</span>] - <span class="fl">1L</span>),]
+  <span class="no">y_ij1</span> <span class="kw">&lt;-</span> <span class="no">image</span>[<span class="fl">1</span>:(<span class="no">img_shape</span>[<span class="fl">1</span>] - <span class="fl">1L</span>), <span class="fl">2</span>:(<span class="no">img_shape</span>[<span class="fl">2</span>]),]
+  <span class="no">a</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_square.html">k_square</a></span>(<span class="no">y_ij</span> - <span class="no">y_i1j</span>)
+  <span class="no">b</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_square.html">k_square</a></span>(<span class="no">y_ij</span> - <span class="no">y_ij1</span>)
+  <span class="fu"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="fu"><a href="../../reference/k_pow.html">k_pow</a></span>(<span class="no">a</span> + <span class="no">b</span>, <span class="fl">1.25</span>))
+}
+
+<span class="no">get_feature_representations</span> <span class="kw">&lt;-</span>
+  <span class="kw">function</span>(<span class="no">model</span>, <span class="no">content_path</span>, <span class="no">style_path</span>) {
+    <span class="co"># dim == (1, 128, 128, 3)</span>
+    <span class="no">style_image</span> <span class="kw">&lt;-</span>
+      <span class="fu">load_and_process_image</span>(<span class="no">style_path</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/k_cast.html">k_cast</a></span>(<span class="st">"float32"</span>)
+    <span class="co"># dim == (1, 128, 128, 3)</span>
+    <span class="no">content_image</span> <span class="kw">&lt;-</span>
+      <span class="fu">load_and_process_image</span>(<span class="no">content_path</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/k_cast.html">k_cast</a></span>(<span class="st">"float32"</span>)
+    <span class="co"># dim == (2, 128, 128, 3)</span>
+    <span class="no">stack_images</span> <span class="kw">&lt;-</span>
+      <span class="fu"><a href="../../reference/k_concatenate.html">k_concatenate</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">style_image</span>, <span class="no">content_image</span>), <span class="kw">axis</span> <span class="kw">=</span> <span class="fl">1</span>)
+    <span class="co"># length(model_outputs) == 6</span>
+    <span class="co"># dim(model_outputs[[1]]) = (2, 128, 128, 64)</span>
+    <span class="co"># dim(model_outputs[[6]]) = (2, 8, 8, 512)</span>
+    <span class="no">model_outputs</span> <span class="kw">&lt;-</span> <span class="fu">model</span>(<span class="no">stack_images</span>)
+    <span class="no">style_features</span> <span class="kw">&lt;-</span> <span class="no">model_outputs</span>[<span class="fl">1</span>:<span class="no">num_style_layers</span>] <span class="kw">%&gt;%</span>
+      <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="kw">function</span>(<span class="no">batch</span>)
+        <span class="no">batch</span>[<span class="fl">1</span>, , , ])
+    <span class="no">content_features</span> <span class="kw">&lt;-</span>
+      <span class="no">model_outputs</span>[(<span class="no">num_style_layers</span> + <span class="fl">1</span>):(<span class="no">num_style_layers</span> + <span class="no">num_content_layers</span>)] <span class="kw">%&gt;%</span>
+      <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="kw">function</span>(<span class="no">batch</span>)
+        <span class="no">batch</span>[<span class="fl">2</span>, , , ])
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">style_features</span>, <span class="no">content_features</span>)
+  }
+
+<span class="no">compute_loss</span> <span class="kw">&lt;-</span>
+  <span class="kw">function</span>(<span class="no">model</span>,
+           <span class="no">loss_weights</span>,
+           <span class="no">init_image</span>,
+           <span class="no">gram_style_features</span>,
+           <span class="no">content_features</span>) {
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">style_weight</span>, <span class="no">content_weight</span>) <span class="kw">%&lt;-%</span> <span class="no">loss_weights</span>
+    <span class="no">model_outputs</span> <span class="kw">&lt;-</span> <span class="fu">model</span>(<span class="no">init_image</span>)
+    <span class="no">style_output_features</span> <span class="kw">&lt;-</span> <span class="no">model_outputs</span>[<span class="fl">1</span>:<span class="no">num_style_layers</span>]
+    <span class="no">content_output_features</span> <span class="kw">&lt;-</span>
+      <span class="no">model_outputs</span>[(<span class="no">num_style_layers</span> + <span class="fl">1</span>):(<span class="no">num_style_layers</span> + <span class="no">num_content_layers</span>)]
+
+    <span class="no">weight_per_style_layer</span> <span class="kw">&lt;-</span> <span class="fl">1</span> / <span class="no">num_style_layers</span>
+    <span class="no">style_score</span> <span class="kw">&lt;-</span> <span class="fl">0</span>
+    <span class="co"># str(style_zip, max.level = 1)</span>
+    <span class="co"># dim(style_zip[[5]][[1]]) == (512, 512)</span>
+    <span class="no">style_zip</span> <span class="kw">&lt;-</span>
+      <span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">gram_style_features</span>, <span class="no">style_output_features</span>))
+    <span class="kw">for</span> (<span class="no">l</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">style_zip</span>)) {
+      <span class="co"># for l == 1:</span>
+      <span class="co"># dim(target_style) == (64, 64)</span>
+      <span class="co"># dim(comb_style) == (1, 128, 128, 64)</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">target_style</span>, <span class="no">comb_style</span>) <span class="kw">%&lt;-%</span> <span class="no">style_zip</span><span class="kw">[[</span><span class="no">l</span>]]
+      <span class="no">style_score</span> <span class="kw">&lt;-</span>
+        <span class="no">style_score</span> + <span class="no">weight_per_style_layer</span> * <span class="fu">style_loss</span>(<span class="no">target_style</span>, <span class="no">comb_style</span>[<span class="fl">1</span>, , , ])
+    }
+
+    <span class="no">weight_per_content_layer</span> <span class="kw">&lt;-</span> <span class="fl">1</span> / <span class="no">num_content_layers</span>
+    <span class="no">content_score</span> <span class="kw">&lt;-</span> <span class="fl">0</span>
+    <span class="no">content_zip</span> <span class="kw">&lt;-</span>
+      <span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">content_features</span>, <span class="no">content_output_features</span>))
+    <span class="kw">for</span> (<span class="no">l</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">content_zip</span>)) {
+      <span class="co"># dim(comb_content) ==  (1, 8, 8, 512)</span>
+      <span class="co"># dim(target_content) == (8, 8, 512)</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">target_content</span>, <span class="no">comb_content</span>) <span class="kw">%&lt;-%</span> <span class="no">content_zip</span><span class="kw">[[</span><span class="no">l</span>]]
+      <span class="no">content_score</span> <span class="kw">&lt;-</span>
+        <span class="no">content_score</span> + <span class="no">weight_per_content_layer</span> * <span class="fu">content_loss</span>(<span class="no">comb_content</span>[<span class="fl">1</span>, , , ], <span class="no">target_content</span>)
+    }
+
+    <span class="no">variation_loss</span> <span class="kw">&lt;-</span> <span class="fu">total_variation_loss</span>(<span class="no">init_image</span>[<span class="fl">1</span>, , ,])
+    <span class="no">style_score</span> <span class="kw">&lt;-</span> <span class="no">style_score</span> * <span class="no">style_weight</span>
+    <span class="no">content_score</span> <span class="kw">&lt;-</span> <span class="no">content_score</span> * <span class="no">content_weight</span>
+    <span class="no">variation_score</span> <span class="kw">&lt;-</span> <span class="no">variation_loss</span> * <span class="no">total_variation_weight</span>
+
+    <span class="no">loss</span> <span class="kw">&lt;-</span> <span class="no">style_score</span> + <span class="no">content_score</span> + <span class="no">variation_score</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">loss</span>, <span class="no">style_score</span>, <span class="no">content_score</span>, <span class="no">variation_score</span>)
+  }
+
+<span class="no">compute_grads</span> <span class="kw">&lt;-</span>
+  <span class="kw">function</span>(<span class="no">model</span>,
+           <span class="no">loss_weights</span>,
+           <span class="no">init_image</span>,
+           <span class="no">gram_style_features</span>,
+           <span class="no">content_features</span>) {
+    <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span>(<span class="no">tf</span>$<span class="fu">GradientTape</span>() <span class="kw">%as%</span> <span class="no">tape</span>, {
+      <span class="no">scores</span> <span class="kw">&lt;-</span>
+        <span class="fu">compute_loss</span>(<span class="no">model</span>,
+                     <span class="no">loss_weights</span>,
+                     <span class="no">init_image</span>,
+                     <span class="no">gram_style_features</span>,
+                     <span class="no">content_features</span>)
+    })
+    <span class="no">total_loss</span> <span class="kw">&lt;-</span> <span class="no">scores</span><span class="kw">[[</span><span class="fl">1</span>]]
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">tape</span>$<span class="fu">gradient</span>(<span class="no">total_loss</span>, <span class="no">init_image</span>), <span class="no">scores</span>)
+  }
+
+<span class="no">run_style_transfer</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">content_path</span>,
+                               <span class="no">style_path</span>) {
+  <span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu">get_model</span>()
+  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">walk</a></span>(<span class="no">model</span>$<span class="no">layers</span>, <span class="kw">function</span>(<span class="no">layer</span>)
+    <span class="no">layer</span>$<span class="no">trainable</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">style_features</span>, <span class="no">content_features</span>) <span class="kw">%&lt;-%</span> <span class="fu">get_feature_representations</span>(<span class="no">model</span>, <span class="no">content_path</span>, <span class="no">style_path</span>)
+  <span class="co"># dim(gram_style_features[[1]]) == (64, 64)</span>
+  <span class="co"># we compute this once, in advance</span>
+  <span class="no">gram_style_features</span> <span class="kw">&lt;-</span>
+    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">style_features</span>, <span class="kw">function</span>(<span class="no">feature</span>)
+      <span class="fu">gram_matrix</span>(<span class="no">feature</span>))
+
+  <span class="no">init_image</span> <span class="kw">&lt;-</span> <span class="fu">load_and_process_image</span>(<span class="no">content_path</span>)
+  <span class="no">init_image</span> <span class="kw">&lt;-</span> <span class="no">tf</span>$<span class="fu">Variable</span>(<span class="no">tf</span>$<span class="fu">cast</span>(<span class="no">init_image</span>,<span class="kw">dtype</span> <span class="kw">=</span> <span class="st">"float32"</span>))
+
+  <span class="no">optimizer</span> <span class="kw">&lt;-</span>
+    <span class="no">tf</span>$<span class="no">optimizers</span>$<span class="fu">Adam</span>(<span class="kw">learning_rate</span> <span class="kw">=</span> <span class="fl">1</span>,
+                       <span class="kw">beta_1</span> <span class="kw">=</span> <span class="fl">0.99</span>,
+                       <span class="kw">epsilon</span> <span class="kw">=</span> <span class="fl">1e-1</span>)
+
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">best_loss</span>, <span class="no">best_image</span>) <span class="kw">%&lt;-%</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">Inf</span>, <span class="kw">NULL</span>)
+  <span class="no">loss_weights</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">style_weight</span>, <span class="no">content_weight</span>)
+
+  <span class="no">start_time</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>()
+  <span class="no">global_start</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>()
+
+  <span class="no">norm_means</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">103.939</span>, <span class="fl">116.779</span>, <span class="fl">123.68</span>)
+  <span class="no">min_vals</span> <span class="kw">&lt;-</span> -<span class="no">norm_means</span>
+  <span class="no">max_vals</span> <span class="kw">&lt;-</span> <span class="fl">255</span> - <span class="no">norm_means</span>
+
+  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="no">num_iterations</span>)) {
+    <span class="co"># dim(grads) == (1, 128, 128, 3)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">grads</span>, <span class="no">all_losses</span>) <span class="kw">%&lt;-%</span> <span class="fu">compute_grads</span>(<span class="no">model</span>,
+                                            <span class="no">loss_weights</span>,
+                                            <span class="no">init_image</span>,
+                                            <span class="no">gram_style_features</span>,
+                                            <span class="no">content_features</span>)
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">loss</span>, <span class="no">style_score</span>, <span class="no">content_score</span>, <span class="no">variation_score</span>) <span class="kw">%&lt;-%</span> <span class="no">all_losses</span>
+    <span class="no">optimizer</span>$<span class="fu">apply_gradients</span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/tuple.html">tuple</a></span>(<span class="no">grads</span>, <span class="no">init_image</span>)))
+    <span class="no">clipped</span> <span class="kw">&lt;-</span> <span class="no">tf</span>$<span class="fu">clip_by_value</span>(<span class="no">init_image</span>, <span class="no">min_vals</span>, <span class="no">max_vals</span>)
+    <span class="no">init_image</span>$<span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="no">clipped</span>)
+
+    <span class="no">end_time</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>()
+
+    <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/array.html">as.array</a></span>(<span class="no">loss</span>) <span class="kw">&lt;</span> <span class="no">best_loss</span>) {
+      <span class="no">best_loss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">as.array</a></span>(<span class="no">loss</span>)
+      <span class="no">best_image</span> <span class="kw">&lt;-</span> <span class="no">init_image</span>
+    }
+
+    <span class="kw">if</span> (<span class="no">i</span> <span class="kw">%%</span> <span class="fl">50</span> <span class="kw">==</span> <span class="fl">0</span>) {
+      <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(<span class="st">"Iteration: {i}"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>()
+      <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(
+        <span class="st">"Total loss: {as.array(loss)}, style loss: {as.array(style_score)},
+        content loss: {as.array(content_score)}, total variation loss: {as.array(variation_score)},
+        time for 1 iteration: {(Sys.time() - start_time) %&gt;% round(2)}"</span>
+      ) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>()
+
+      <span class="kw">if</span> (<span class="no">i</span> <span class="kw">%%</span> <span class="fl">100</span> <span class="kw">==</span> <span class="fl">0</span>) {
+        <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"style_epoch_"</span>, <span class="no">i</span>, <span class="st">".png"</span>))
+        <span class="no">plot_image</span> <span class="kw">&lt;-</span> <span class="no">best_image</span>$<span class="fu">numpy</span>()
+        <span class="no">plot_image</span> <span class="kw">&lt;-</span> <span class="fu">deprocess_image</span>(<span class="no">plot_image</span>)
+        <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span>(<span class="no">plot_image</span>), <span class="kw">main</span> <span class="kw">=</span> <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(<span class="st">"Iteration {i}"</span>))
+        <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span>()
+      }
+    }
+  }
+
+  <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(<span class="st">"Total time: {Sys.time() - global_start} seconds"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>()
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">best_image</span>, <span class="no">best_loss</span>)
+}
+
+<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">best_image</span>, <span class="no">best_loss</span>) <span class="kw">%&lt;-%</span> <span class="fu">run_style_transfer</span>(<span class="no">content_path</span>, <span class="no">style_path</span>)</pre></body></html></div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+
       </div>
 
 </div>
+
 
 
       <footer><div class="copyright">
@@ -452,12 +466,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

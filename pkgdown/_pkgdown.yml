@@ -60,10 +60,6 @@ navbar:
           href: articles/custom_models.html
         - text: "Saving and serializing"
           href: articles/saving_serializing.html
-    - text: Learn
-      href: articles/learn.html
-    - text: Tools
-      href: articles/tools.html
     - text: Examples
       href: articles/examples/index.html
     - text: "Reference"

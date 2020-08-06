@@ -8,21 +8,36 @@
 
 <title>Changelog • keras</title>
 
-<!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,10 +47,10 @@
 
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
-<meta property="og:title" content="Changelog" />
 
+<meta property="og:title" content="Changelog" />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -49,9 +64,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -65,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.4.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
       </span>
     </div>
 
@@ -180,9 +196,13 @@
   </a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/rstudio/keras/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -190,31 +210,62 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/rstudio/keras/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="keras-2-2-4-1-cran" class="section level2">
+    <div id="keras-2230-cran" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-2-4-1-cran" class="anchor"></a>Keras 2.2.4.1 (CRAN)</h2>
+<a href="#keras-2230-cran" class="anchor"></a>Keras 2.2.3.0 (CRAN)</h2>
+<ul>
+<li>Added <code>layer_attention</code> (<a href='https://github.com/rstudio/keras/issues/1000'>#1000</a>) by <a href='https://github.com/atroiano'>@atroiano</a>.</li>
+<li>Fixed issue regarding the KerasMetricsCallback with TF v2.2 (<a href='https://github.com/rstudio/keras/issues/1020'>#1020</a>)</li>
+</ul>
+</div>
+    <div id="keras-2250-cran" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2250-cran" class="anchor"></a>Keras 2.2.5.0 (CRAN)</h2>
+<ul>
+<li><p>Added <code>layer_dense_features</code>.</p></li>
+<li><p>Added <code>on_test_*</code>, <code>on_test_batch_*</code>, <code>on_predict_*</code> and <code>on_predict_*</code> to callback options.</p></li>
+<li><p>Search for the right optimizers and initializers on TensorFlow 2.0</p></li>
+<li><p>Fixed bug in function generators when using models with multiple inputs. (<a href='https://github.com/rstudio/keras/issues/740'>#740</a>)</p></li>
+<li><p>Added <code>export_savedmodel</code> support for TensorFlow 2.0 (<a href='https://github.com/rstudio/keras/issues/773'>#773</a>)</p></li>
+<li><p>Fixed bug when using <code>metric_</code> functions. (<a href='https://github.com/rstudio/keras/issues/804'>#804</a>)</p></li>
+<li><p>Allow users to pass additional arguments to <code>install_keras</code> (<a href='https://github.com/rstudio/keras/issues/808'>#808</a>)</p></li>
+<li><p>Enabled calling Keras models with R arrays. (<a href='https://github.com/rstudio/keras/issues/806'>#806</a>)</p></li>
+<li><p>Allow passing <code>data.frames</code> as inputs to Keras models. (<a href='https://github.com/rstudio/keras/issues/822'>#822</a>)</p></li>
+<li><p>Fixed bug when passing a fixed validation set to <code>fit_generator</code> (<a href='https://github.com/rstudio/keras/issues/837'>#837</a>)</p></li>
+<li><p>Fixed bug when passing a TensorFlow dataset to <code>fit</code> within a <code>tf$distribute</code> scope. (<a href='https://github.com/rstudio/keras/issues/856'>#856</a>)</p></li>
+<li><p><code>install_keras</code> will now install Keras dependencies (<a href='https://github.com/rstudio/keras/issues/856'>#856</a>). It won’t re-install TensorFlow if it’s already installed.</p></li>
+<li><p>Fixed deprecation messages showed with TensorFlow v1.14.</p></li>
+<li><p>Largely reduced tests verbosity.</p></li>
+</ul>
+</div>
+    <div id="keras-2241-cran" class="section level2">
+<h2 class="hasAnchor">
+<a href="#keras-2241-cran" class="anchor"></a>Keras 2.2.4.1 (CRAN)</h2>
 <ul>
 <li><p>Use <code>tf.keras</code> as default implementation module.</p></li>
 <li><p>Added AppVeyor to test on Windows.</p></li>
-<li><p>Added <code>flow_images_from_dataframe</code> function (#658).</p></li>
+<li><p>Added <code>flow_images_from_dataframe</code> function (<a href='https://github.com/rstudio/keras/issues/658'>#658</a>).</p></li>
+<li><p>Allow for unknown <code>input_shape</code> in <code>application_*</code> functions.</p></li>
+<li><p>Added <code>save_model_tf</code> and <code>load_model_tf</code> to save/load models in the TensorFlow’s SavedModel format.</p></li>
 </ul>
 </div>
-    <div id="keras-2-2-4-cran" class="section level2">
+    <div id="keras-224-cran" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-2-4-cran" class="anchor"></a>Keras 2.2.4 (CRAN)</h2>
+<a href="#keras-224-cran" class="anchor"></a>Keras 2.2.4 (CRAN)</h2>
 <ul>
 <li><p>Improve handling of <code><a href="../reference/timeseries_generator.html">timeseries_generator()</a></code> in calls to <code><a href="../reference/fit_generator.html">fit_generator()</a></code></p></li>
 <li><p>Add support for <code>input_shape</code> argument to <code><a href="../reference/layer_dropout.html">layer_dropout()</a></code></p></li>
-<li><p>Improve error message for data frames passed to <code><a href="https://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code>, etc.</p></li>
+<li><p>Improve error message for data frames passed to <code><a href="https://rdrr.io/pkg/generics/man/fit.html">fit()</a></code>, etc.</p></li>
 <li><p>Use 1-based axis indices for <code><a href="../reference/k_gather.html">k_gather()</a></code></p></li>
 <li><p>Added <code>version</code> parameter to <code><a href="../reference/install_keras.html">install_keras()</a></code> for installing alternate/older versions</p></li>
 <li><p>Added <code><a href="../reference/activation_relu.html">activation_exponential()</a></code> function.</p></li>
@@ -231,14 +282,14 @@
 <li><p>Added <code>KerasWrapper</code> class and corresponding <code>create_wrapper</code> function.</p></li>
 </ul>
 </div>
-    <div id="keras-2-2-0" class="section level2">
+    <div id="keras-220" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-2-0" class="anchor"></a>Keras 2.2.0</h2>
+<a href="#keras-220" class="anchor"></a>Keras 2.2.0</h2>
 <ul>
 <li><p>Fix issue with serializing models that have constraint arguments</p></li>
 <li><p>Fix issue with <code>k_tile</code> that needs an integer vector instead of a list as the <code>n</code> argument.</p></li>
 <li><p>Fix issue with user-supplied <code>output_shape</code> in <code><a href="../reference/layer_lambda.html">layer_lambda()</a></code> not being supplied to tensorflow backends</p></li>
-<li><p>Filter out metrics that were created for callbacks (e.g. <code>lr</code>)</p></li>
+<li><p>Filter out metrics that were created for callbacks (e.g. <code>lr</code>)</p></li>
 <li><p>Added <code><a href="../reference/application_mobilenet_v2.html">application_mobilenet_v2()</a></code> pre-trained model</p></li>
 <li><p>Added <code>sample_weight</code> parameter to <code><a href="../reference/flow_images_from_data.html">flow_images_from_data()</a></code></p></li>
 <li><p>Use native Keras implementation (rather than SciPy) for <code><a href="../reference/image_to_array.html">image_array_save()</a></code></p></li>
@@ -247,27 +298,27 @@
 <li><p>Add <code>data_format</code> argument to <code><a href="../reference/layer_conv_1d.html">layer_conv_1d()</a></code>.</p></li>
 <li><p>Add <code><a href="../reference/layer_activation_relu.html">layer_activation_relu()</a></code>, making the ReLU activation easier to configure while retaining easy serialization capabilities.</p></li>
 <li><p>Add <code>axis = -1</code> argument in backend crossentropy functions specifying the class prediction axis in the input tensor.</p></li>
-<li><p>Handle symbolic tensors and TF datasets in calls to <code><a href="https://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code>, <code><a href="https://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate()</a></code>, and <code><a href="https://www.rdocumentation.org/packages/stats/topics/predict">predict()</a></code></p></li>
+<li><p>Handle symbolic tensors and TF datasets in calls to <code><a href="https://rdrr.io/pkg/generics/man/fit.html">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code>, and <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code></p></li>
 <li><p>Add <code>embeddings_data</code> argument to <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code></p></li>
-<li><p>Support for defining custom Keras models (i.e. custom <code><a href="https://www.rdocumentation.org/packages/base/topics/call">call()</a></code> logic for forward pass)</p></li>
-<li><p>Handle named list of model output names in <code>metrics</code> argument of <code><a href="https://www.rdocumentation.org/packages/generics/topics/compile">compile()</a></code></p></li>
+<li><p>Support for defining custom Keras models (i.e. custom <code><a href="https://rdrr.io/r/base/call.html">call()</a></code> logic for forward pass)</p></li>
+<li><p>Handle named list of model output names in <code>metrics</code> argument of <code><a href="https://rdrr.io/pkg/generics/man/compile.html">compile()</a></code></p></li>
 <li><p>New <code><a href="../reference/metric_binary_accuracy.html">custom_metric()</a></code> function for defining custom metrics in R</p></li>
 <li><p>Provide typed wrapper for categorical custom metrics</p></li>
 <li><p>Provide access to Python layer within R custom layers</p></li>
 <li><p>Don’t convert custom layer output shape to tuple when shape is a list or tuple of other shapes</p></li>
-<li><p>Re-export <code><a href="https://www.rdocumentation.org/packages/tensorflow/topics/shape">shape()</a></code> function from tensorflow package</p></li>
-<li><p>Re-export <code><a href="https://www.rdocumentation.org/packages/reticulate/topics/tuple">tuple()</a></code> function from reticulate package</p></li>
+<li><p>Re-export <code><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape()</a></code> function from tensorflow package</p></li>
+<li><p>Re-export <code><a href="https://rdrr.io/pkg/reticulate/man/tuple.html">tuple()</a></code> function from reticulate package</p></li>
 <li><p>Indexes for <code><a href="../reference/get_layer.html">get_layer()</a></code> are now 1-based (for consistency w/ <code><a href="../reference/freeze_weights.html">freeze_weights()</a></code>)</p></li>
-<li><p>Accept named list for <code>sample_weight</code> argument to <code><a href="https://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code></p></li>
+<li><p>Accept named list for <code>sample_weight</code> argument to <code><a href="https://rdrr.io/pkg/generics/man/fit.html">fit()</a></code></p></li>
 </ul>
 </div>
-    <div id="keras-2-1-6" class="section level2">
+    <div id="keras-216" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-1-6" class="anchor"></a>Keras 2.1.6</h2>
+<a href="#keras-216" class="anchor"></a>Keras 2.1.6</h2>
 <ul>
 <li><p>Fix issue with single-element vectors passed to text preprocessing functions</p></li>
 <li><p>Compatibility with TensorFlow v1.7 Keras implementation</p></li>
-<li><p>Support <code>workers</code> parameter for native Keras generators (e.g. <code><a href="../reference/flow_images_from_directory.html">flow_images_from_directory()</a></code>)</p></li>
+<li><p>Support <code>workers</code> parameter for native Keras generators (e.g. <code><a href="../reference/flow_images_from_directory.html">flow_images_from_directory()</a></code>)</p></li>
 <li><p>Accept tensor as argument to <code><a href="../reference/k_pow.html">k_pow()</a></code></p></li>
 <li><p>In <code><a href="../reference/callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau()</a></code>, rename <code>epsilon</code> argument to <code>min_delta</code> (backwards-compatible).</p></li>
 <li><p>Add <code>axis</code> parameter to <code><a href="../reference/k_softmax.html">k_softmax()</a></code></p></li>
@@ -277,9 +328,9 @@
 <li><p>Record correct loss name for tfruns when custom functions are provided for <code>loss</code></p></li>
 </ul>
 </div>
-    <div id="keras-2-1-5" class="section level2">
+    <div id="keras-215" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-1-5" class="anchor"></a>Keras 2.1.5</h2>
+<a href="#keras-215" class="anchor"></a>Keras 2.1.5</h2>
 <ul>
 <li><p>Support for custom constraints from R</p></li>
 <li><p>Added <code><a href="../reference/timeseries_generator.html">timeseries_generator()</a></code> utility function</p></li>
@@ -287,12 +338,12 @@
 <li><p>Added <code>brightness_range</code> and <code>validation_split</code> arguments to [image_data_generator()].</p></li>
 </ul>
 </div>
-    <div id="keras-2-1-4" class="section level2">
+    <div id="keras-214" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-1-4" class="anchor"></a>Keras 2.1.4</h2>
+<a href="#keras-214" class="anchor"></a>Keras 2.1.4</h2>
 <ul>
-<li><p>Added support for <code>remove_learning_phase</code> in <code><a href="https://www.rdocumentation.org/packages/tensorflow/topics/export_savedmodel">export_savedmodel()</a></code> to avoid removing learning phase.</p></li>
-<li><p>Normalize validation data to Keras array in <code><a href="https://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code> and <code><a href="../reference/fit_generator.html">fit_generator()</a></code></p></li>
+<li><p>Added support for <code>remove_learning_phase</code> in <code><a href="https://rdrr.io/pkg/tensorflow/man/export_savedmodel.html">export_savedmodel()</a></code> to avoid removing learning phase.</p></li>
+<li><p>Normalize validation data to Keras array in <code><a href="https://rdrr.io/pkg/generics/man/fit.html">fit()</a></code> and <code><a href="../reference/fit_generator.html">fit_generator()</a></code></p></li>
 <li><p>Ensure that custom layers return a tuple from <code>compute_output_shape()</code></p></li>
 <li><p>Added Nasnet and Densenet pre-trained models</p></li>
 <li><p>New layers <code><a href="../reference/layer_activation_softmax.html">layer_activation_softmax()</a></code> and <code><a href="../reference/layer_separable_conv_1d.html">layer_separable_conv_1d()</a></code></p></li>
@@ -300,25 +351,25 @@
 <li><p>Fix incompatibility with Progbar.update() method in Keras 2.1.4</p></li>
 </ul>
 </div>
-    <div id="keras-2-1-3" class="section level2">
+    <div id="keras-213" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-1-3" class="anchor"></a>Keras 2.1.3</h2>
+<a href="#keras-213" class="anchor"></a>Keras 2.1.3</h2>
 <ul>
-<li><p>Models saved via <code><a href="https://www.rdocumentation.org/packages/tensorflow/topics/export_savedmodel">export_savedmodel()</a></code> that make use of learning phases can now be exported without having to manually reload the original model.</p></li>
-<li><p>Ensure that models saved via <code><a href="https://www.rdocumentation.org/packages/tensorflow/topics/export_savedmodel">export_savedmodel()</a></code> can be served from CloudML</p></li>
+<li><p>Models saved via <code><a href="https://rdrr.io/pkg/tensorflow/man/export_savedmodel.html">export_savedmodel()</a></code> that make use of learning phases can now be exported without having to manually reload the original model.</p></li>
+<li><p>Ensure that models saved via <code><a href="https://rdrr.io/pkg/tensorflow/man/export_savedmodel.html">export_savedmodel()</a></code> can be served from CloudML</p></li>
 <li><p>Run image data generators with R preprocessing functions on the main thread</p></li>
 <li><p>Return R list from <code><a href="../reference/texts_to_sequences.html">texts_to_sequences()</a></code></p></li>
 <li><p>Various fixes for <code><a href="../reference/use_implementation.html">use_implementation()</a></code> function</p></li>
 </ul>
 </div>
-    <div id="keras-2-1-2" class="section level2">
+    <div id="keras-212" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-1-2" class="anchor"></a>Keras 2.1.2</h2>
+<a href="#keras-212" class="anchor"></a>Keras 2.1.2</h2>
 <ul>
 <li><p>Added <code>theme_bw</code> option to plot method for training history</p></li>
 <li><p>Support TF Dataset objects as generators for <code><a href="../reference/fit_generator.html">fit_generator()</a></code>, etc.</p></li>
 <li><p>Added <code><a href="../reference/use_implementation.html">use_implementation()</a></code> and <code><a href="../reference/use_implementation.html">use_backend()</a></code> functions as alternative to setting <code>KERAS_IMPLEMENATION</code> and <code>KERAS_BACKEND</code> environment variables.</p></li>
-<li><p>Added R wrappers for Keras backend functions (e.g. <code><a href="../reference/k_variable.html">k_variable()</a></code>, <code><a href="../reference/k_dot.html">k_dot()</a></code>, etc.)</p></li>
+<li><p>Added R wrappers for Keras backend functions (e.g. <code><a href="../reference/k_variable.html">k_variable()</a></code>, <code><a href="../reference/k_dot.html">k_dot()</a></code>, etc.)</p></li>
 <li><p>Use 1-based axis for <code>normalize</code> function.</p></li>
 <li><p>Fix issue with printing training history after early stopping.</p></li>
 <li><p>Experimental support for using the PlaidML backend.</p></li>
@@ -328,22 +379,22 @@
 <li><p>Provide global <code>keras.fit_verbose</code> option (defaults to 1)</p></li>
 </ul>
 </div>
-    <div id="keras-2-0-9" class="section level2">
+    <div id="keras-209" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-0-9" class="anchor"></a>keras 2.0.9</h2>
+<a href="#keras-209" class="anchor"></a>keras 2.0.9</h2>
 <ul>
 <li><p>Added <code><a href="../reference/multi_gpu_model.html">multi_gpu_model()</a></code> function.</p></li>
 <li><p>Automatically call <code><a href="../reference/keras_array.html">keras_array()</a></code> on the results of generator functions.</p></li>
 <li><p>Ensure that <code>steps_per_epoch</code> is passed as an integer</p></li>
-<li><p>Import <code><a href="https://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate()</a></code> generic from tensorflow package</p></li>
+<li><p>Import <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code> generic from tensorflow package</p></li>
 <li><p>Handle <code>NULL</code> when converting R arrays to Keras friendly arrays</p></li>
 <li><p>Added <code>dataset_imbd_word_index()</code> function</p></li>
-<li><p>Ensure that <code>sample_weight</code> is passed to <code><a href="https://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code> as an array.</p></li>
-<li><p>Accept single function as <code>metrics</code> argument to <code><a href="https://www.rdocumentation.org/packages/generics/topics/compile">compile()</a></code></p></li>
+<li><p>Ensure that <code>sample_weight</code> is passed to <code><a href="https://rdrr.io/pkg/generics/man/fit.html">fit()</a></code> as an array.</p></li>
+<li><p>Accept single function as <code>metrics</code> argument to <code><a href="https://rdrr.io/pkg/generics/man/compile.html">compile()</a></code></p></li>
 <li><p>Automatically cast <code>input_shape</code> argument to applications to integer</p></li>
 <li><p>Allow Keras models to be composable within model pipelines</p></li>
 <li><p>Added <code><a href="../reference/freeze_weights.html">freeze_weights()</a></code> and <code><a href="../reference/freeze_weights.html">unfreeze_weights()</a></code> functions.</p></li>
-<li><p>Implement <code><a href="https://www.rdocumentation.org/packages/tensorflow/topics/export_savedmodel">export_savedmodel()</a></code> generic from TensorFlow package</p></li>
+<li><p>Implement <code><a href="https://rdrr.io/pkg/tensorflow/man/export_savedmodel.html">export_savedmodel()</a></code> generic from TensorFlow package</p></li>
 <li><p>Convert R arrays to row-major before image preprocessing</p></li>
 <li><p>Use <code>tensorflow.keras</code> for tensorflow implementation (TF v1.4)</p></li>
 <li><p>Added <code><a href="../reference/application_inception_resnet_v2.html">application_inception_resnet_v2()</a></code> pre-trained model</p></li>
@@ -362,27 +413,27 @@
 <li><p>Expose <code>add_loss()</code> function for custom layers</p></li>
 </ul>
 </div>
-    <div id="keras-2-0-8" class="section level2">
+    <div id="keras-208" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-0-8" class="anchor"></a>keras 2.0.8</h2>
+<a href="#keras-208" class="anchor"></a>keras 2.0.8</h2>
 <ul>
-<li><p>Add <code><a href="https://www.rdocumentation.org/packages/tensorflow/topics/use_session_with_seed">use_session_with_seed()</a></code> function that establishes a random seed for the Keras session. Note that this should not be used when training time is paramount, as it disables GPU computation and CPU parallelism by default for more deterministic computations.</p></li>
+<li><p>Add <code><a href="https://rdrr.io/pkg/tensorflow/man/use_session_with_seed.html">use_session_with_seed()</a></code> function that establishes a random seed for the Keras session. Note that this should not be used when training time is paramount, as it disables GPU computation and CPU parallelism by default for more deterministic computations.</p></li>
 <li><p>Fix for plotting training history with early stopping callback (thanks to <a href='https://github.com/JamesAllingham'>@JamesAllingham</a>).</p></li>
 <li><p>Return R training history object from <code><a href="../reference/fit_generator.html">fit_generator()</a></code></p></li>
 <li><p>Rename <code>to_numpy_array()</code> function to <code><a href="../reference/keras_array.html">keras_array()</a></code> reflecting automatic use of Keras default backend float type and “C” ordering.</p></li>
-<li><p>Add standard layer arguments (e.g. <code>name</code>, <code>trainable</code>, etc.) to merge layers</p></li>
+<li><p>Add standard layer arguments (e.g. <code>name</code>, <code>trainable</code>, etc.) to merge layers</p></li>
 <li><p>Better support for training models from data tensors in TensorFlow (e.g. Datasets, TFRecords). Add a related example script.</p></li>
 <li><p>Add <code><a href="../reference/clone_model.html">clone_model()</a></code> function, enabling to construct a new model, given an existing model to use as a template. Works even in a TensorFlow graph different from that of the original model.</p></li>
-<li><p>Add <code>target_tensors</code> argument in <code><a href="https://www.rdocumentation.org/packages/generics/topics/compile">compile()</a></code>, enabling to use custom tensors or placeholders as model targets.</p></li>
-<li><p>Add <code>steps_per_epoch</code> argument in <code><a href="https://www.rdocumentation.org/packages/generics/topics/fit">fit()</a></code>, enabling to train a model from data tensors in a way that is consistent with training from arrays. Similarly, add <code>steps</code> argument in <code><a href="https://www.rdocumentation.org/packages/stats/topics/predict">predict()</a></code> and <code><a href="https://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate()</a></code>.</p></li>
+<li><p>Add <code>target_tensors</code> argument in <code><a href="https://rdrr.io/pkg/generics/man/compile.html">compile()</a></code>, enabling to use custom tensors or placeholders as model targets.</p></li>
+<li><p>Add <code>steps_per_epoch</code> argument in <code><a href="https://rdrr.io/pkg/generics/man/fit.html">fit()</a></code>, enabling to train a model from data tensors in a way that is consistent with training from arrays. Similarly, add <code>steps</code> argument in <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code>.</p></li>
 <li><p>Add <code><a href="../reference/layer_subtract.html">layer_subtract()</a></code> layer function.</p></li>
 <li><p>Add <code>weighted_metrics</code> argument in compile to specify metric functions meant to take into account <code>sample_weight</code> or <code>class_weight</code>.</p></li>
 <li><p>Enable stateful RNNs with CNTK.</p></li>
 </ul>
 </div>
-    <div id="keras-2-0-6" class="section level2">
+    <div id="keras-206" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-0-6" class="anchor"></a>keras 2.0.6</h2>
+<a href="#keras-206" class="anchor"></a>keras 2.0.6</h2>
 <ul>
 <li><p><code><a href="../reference/install_keras.html">install_keras()</a></code> function which installs both TensorFlow and Keras</p></li>
 <li><p>Use keras package as default implementation rather than tf.contrib.keras</p></li>
@@ -395,43 +446,30 @@
 <li><p>Added <code>return_state</code> argument to recurrent layers.</p></li>
 <li><p>Don’t re-export <code>install_tensorflow()</code> and <code>tf_config()</code> from tensorflow package.</p></li>
 <li><p><code><a href="../reference/is_keras_available.html">is_keras_available()</a></code> function to probe whether the Keras python package is available in the current environment.</p></li>
-<li><p><code><a href="https://www.rdocumentation.org/packages/base/topics/as.data.frame">as.data.frame()</a></code> S3 method for Keras training history</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> S3 method for Keras training history</p></li>
 <li><p>Remove names from <code><a href="../reference/keras_model.html">keras_model()</a></code> inputs</p></li>
-<li><p>Return result of <code><a href="https://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate()</a></code> as named list</p></li>
+<li><p>Return result of <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code> as named list</p></li>
 <li><p>Write run metrics and evaluation data to tfruns</p></li>
 <li><p>Provide hint to use r-tensorflow environment when importing keras</p></li>
 </ul>
 </div>
-    <div id="keras-2-0-5" class="section level2">
+    <div id="keras-205" class="section level2">
 <h2 class="hasAnchor">
-<a href="#keras-2-0-5" class="anchor"></a>keras 2.0.5</h2>
+<a href="#keras-205" class="anchor"></a>keras 2.0.5</h2>
 <ul>
 <li>Initial CRAN release</li>
 </ul>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#keras-2-2-4-1-cran">2.2.4.1</a></li>
-        <li><a href="#keras-2-2-4-cran">2.2.4</a></li>
-        <li><a href="#keras-2-2-0">2.2.0</a></li>
-        <li><a href="#keras-2-1-6">2.1.6</a></li>
-        <li><a href="#keras-2-1-5">2.1.5</a></li>
-        <li><a href="#keras-2-1-4">2.1.4</a></li>
-        <li><a href="#keras-2-1-3">2.1.3</a></li>
-        <li><a href="#keras-2-1-2">2.1.2</a></li>
-        <li><a href="#keras-2-0-9">2.0.9</a></li>
-        <li><a href="#keras-2-0-8">2.0.8</a></li>
-        <li><a href="#keras-2-0-6">2.0.6</a></li>
-        <li><a href="#keras-2-0-5">2.0.5</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -439,13 +477,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

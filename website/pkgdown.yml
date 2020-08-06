@@ -1,15 +1,10 @@
-pandoc: 2.3.1
-pkgdown: 1.3.0
+pandoc: 2.9.2.1
+pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
-  about_keras_layers: about_keras_layers.html
-  about_keras_models: about_keras_models.html
   applications: applications.html
-  backend: backend.html
   custom_layers: custom_layers.html
   custom_models: custom_models.html
-  custom_wrappers: custom_wrappers.html
-  eager_guide: eager_guide.html
   addition_rnn: examples/addition_rnn.html
   babi_memnn: examples/babi_memnn.html
   babi_rnn: examples/babi_rnn.html
@@ -67,18 +62,11 @@ articles:
   vq_vae: examples/vq_vae.html
   faq: faq.html
   functional_api: functional_api.html
-  getting_started: getting_started.html
   guide_keras: guide_keras.html
-  learn: learn.html
+  index: index.html
   saving_serializing: saving_serializing.html
   sequential_model: sequential_model.html
-  tools: tools.html
   training_callbacks: training_callbacks.html
   training_visualization: training_visualization.html
-  tutorial_basic_classification: tutorial_basic_classification.html
-  tutorial_basic_regression: tutorial_basic_regression.html
-  tutorial_basic_text_classification: tutorial_basic_text_classification.html
-  tutorial_overfit_underfit: tutorial_overfit_underfit.html
-  tutorial_save_and_restore: tutorial_save_and_restore.html
-  why_use_keras: why_use_keras.html
+last_built: 2020-08-06T14:17Z
 
