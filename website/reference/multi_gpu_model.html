@@ -8,21 +8,36 @@
 
 <title>Replicates a model on different GPUs. — multi_gpu_model • keras</title>
 
-<!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,12 +47,11 @@
 
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
+
 <meta property="og:title" content="Replicates a model on different GPUs. — multi_gpu_model" />
-
 <meta property="og:description" content="Replicates a model on different GPUs." />
-
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -51,9 +65,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -67,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.4.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
       </span>
     </div>
 
@@ -182,9 +197,13 @@
   </a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/rstudio/keras/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -192,25 +211,23 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Replicates a model on different GPUs.</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/model.R'><code>R/model.R</code></a></small>
     <div class="hidden name"><code>multi_gpu_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Replicates a model on different GPUs.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>multi_gpu_model</span>(<span class='no'>model</span>, <span class='kw'>gpus</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cpu_merge</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>cpu_relocation</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>multi_gpu_model</span>(<span class='no'>model</span>, <span class='kw'>gpus</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cpu_merge</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>cpu_relocation</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -239,12 +256,11 @@ If the model is not defined under any preceding device
 scope, you can still rescue it by activating this option.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A Keras model object which can be used just like the initial
 <code>model</code> argument, but which distributes its workload on multiple GPUs.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Specifically, this function implements single-machine
@@ -254,44 +270,60 @@ multi-GPU data parallelism. It works in the following way:</p><ul>
 is executed on a dedicated GPU.</p></li>
 <li><p>Concatenate the results (on CPU) into one big batch.</p></li>
 </ul>
-    <p>E.g. if your <code>batch_size</code> is 64 and you use <code>gpus=2</code>,
+
+<p>E.g. if your <code>batch_size</code> is 64 and you use <code>gpus=2</code>,
 then we will divide the input into 2 sub-batches of 32 samples,
 process each sub-batch on one GPU, then return the full
 batch of 64 processed samples.</p>
 <p>This induces quasi-linear speedup on up to 8 GPUs.</p>
 <p>This function is only available with the TensorFlow backend
 for the time being.</p>
-    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>This function is deprecated and has been removed from tensorflow on
+2020-04-01. You can use <code>tensorflow::tf$distribute$MirroredStrategy()</code>
+by creating your model like this:<div class="r"></p><pre>strategy &amp;lt;- tensorflow::tf$distribute$MirroredStrategy()
+with(strategy$scope(), {
+  model &amp;lt;- application_xception(
+    weights = NULL,
+    input_shape = c(height, width, 3),
+    classes = num_classes
+})
+</pre><p></div></p>
     <h2 class="hasAnchor" id="model-saving"><a class="anchor" href="#model-saving"></a>Model Saving</h2>
 
     
-    <p>To save the multi-gpu model, use <code><a href='save_model_hdf5.html'>save_model_hdf5()</a></code> or
+
+
+<p>To save the multi-gpu model, use <code><a href='save_model_hdf5.html'>save_model_hdf5()</a></code> or
 <code><a href='save_model_weights_hdf5.html'>save_model_weights_hdf5()</a></code> with the template model (the argument you
 passed to <code>multi_gpu_model</code>), rather than the model returned
 by <code>multi_gpu_model</code>.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other model functions: <code><a href='compile.keras.engine.training.Model.html'>compile.keras.engine.training.Model</a></code>,
-  <code><a href='evaluate.keras.engine.training.Model.html'>evaluate.keras.engine.training.Model</a></code>,
-  <code><a href='evaluate_generator.html'>evaluate_generator</a></code>,
-  <code><a href='fit.keras.engine.training.Model.html'>fit.keras.engine.training.Model</a></code>,
-  <code><a href='fit_generator.html'>fit_generator</a></code>, <code><a href='get_config.html'>get_config</a></code>,
-  <code><a href='get_layer.html'>get_layer</a></code>,
-  <code><a href='keras_model_sequential.html'>keras_model_sequential</a></code>,
-  <code><a href='keras_model.html'>keras_model</a></code>, <code><a href='pop_layer.html'>pop_layer</a></code>,
-  <code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a></code>,
-  <code><a href='predict_generator.html'>predict_generator</a></code>,
-  <code><a href='predict_on_batch.html'>predict_on_batch</a></code>,
-  <code><a href='predict_proba.html'>predict_proba</a></code>,
-  <code><a href='summary.keras.engine.training.Model.html'>summary.keras.engine.training.Model</a></code>,
-  <code><a href='train_on_batch.html'>train_on_batch</a></code></p></div>
-    
+    <div class='dont-index'><p>Other model functions: 
+<code><a href='compile.keras.engine.training.Model.html'>compile.keras.engine.training.Model</a>()</code>,
+<code><a href='evaluate.keras.engine.training.Model.html'>evaluate.keras.engine.training.Model</a>()</code>,
+<code><a href='evaluate_generator.html'>evaluate_generator</a>()</code>,
+<code><a href='fit.keras.engine.training.Model.html'>fit.keras.engine.training.Model</a>()</code>,
+<code><a href='fit_generator.html'>fit_generator</a>()</code>,
+<code><a href='get_config.html'>get_config</a>()</code>,
+<code><a href='get_layer.html'>get_layer</a>()</code>,
+<code><a href='keras_model_sequential.html'>keras_model_sequential</a>()</code>,
+<code><a href='keras_model.html'>keras_model</a>()</code>,
+<code><a href='pop_layer.html'>pop_layer</a>()</code>,
+<code><a href='predict.keras.engine.training.Model.html'>predict.keras.engine.training.Model</a>()</code>,
+<code><a href='predict_generator.html'>predict_generator</a>()</code>,
+<code><a href='predict_on_batch.html'>predict_on_batch</a>()</code>,
+<code><a href='predict_proba.html'>predict_proba</a>()</code>,
+<code><a href='summary.keras.engine.training.Model.html'>summary.keras.engine.training.Model</a>()</code>,
+<code><a href='train_on_batch.html'>train_on_batch</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>keras</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>tensorflow</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>keras</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tensorflow</span>)
 
 <span class='no'>num_samples</span> <span class='kw'>&lt;-</span> <span class='fl'>1000</span>
 <span class='no'>height</span> <span class='kw'>&lt;-</span> <span class='fl'>224</span>
@@ -303,10 +335,10 @@ by <code>multi_gpu_model</code>.</p>
 <span class='co'># so that the model's weights are hosted on CPU memory.</span>
 <span class='co'># Otherwise they may end up hosted on a GPU, which would</span>
 <span class='co'># complicate weight sharing.</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>tf</span>$<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/Devices'>device</a></span>(<span class='st'>"/cpu:0"</span>), {
+<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>tf</span>$<span class='fu'><a href='https://rdrr.io/r/grDevices/Devices.html'>device</a></span>(<span class='st'>"/cpu:0"</span>), {
   <span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='application_xception.html'>application_xception</a></span>(
     <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-    <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>height</span>, <span class='no'>width</span>, <span class='fl'>3</span>),
+    <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>height</span>, <span class='no'>width</span>, <span class='fl'>3</span>),
     <span class='kw'>classes</span> <span class='kw'>=</span> <span class='no'>num_classes</span>
   )
 })
@@ -314,44 +346,32 @@ by <code>multi_gpu_model</code>.</p>
 <span class='co'># Replicates the model on 8 GPUs.</span>
 <span class='co'># This assumes that your machine has 8 available GPUs.</span>
 <span class='no'>parallel_model</span> <span class='kw'>&lt;-</span> <span class='fu'>multi_gpu_model</span>(<span class='no'>model</span>, <span class='kw'>gpus</span> <span class='kw'>=</span> <span class='fl'>8</span>)
-<span class='no'>parallel_model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/compile'>compile</a></span>(
+<span class='no'>parallel_model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/compile.html'>compile</a></span>(
   <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>"categorical_crossentropy"</span>,
   <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='st'>"rmsprop"</span>
 )
 
 <span class='co'># Generate dummy data.</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/array'>array</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Uniform'>runif</a></span>(<span class='no'>num_samples</span> * <span class='no'>height</span> * <span class='no'>width</span>*<span class='fl'>3</span>),
-           <span class='kw'>dim</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>num_samples</span>, <span class='no'>height</span>, <span class='no'>width</span>, <span class='fl'>3</span>))
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/array'>array</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Uniform'>runif</a></span>(<span class='no'>num_samples</span> * <span class='no'>num_classes</span>),
-           <span class='kw'>dim</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>num_samples</span>, <span class='no'>num_classes</span>))
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/array.html'>array</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='no'>num_samples</span> * <span class='no'>height</span> * <span class='no'>width</span>*<span class='fl'>3</span>),
+           <span class='kw'>dim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>num_samples</span>, <span class='no'>height</span>, <span class='no'>width</span>, <span class='fl'>3</span>))
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/array.html'>array</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='no'>num_samples</span> * <span class='no'>num_classes</span>),
+           <span class='kw'>dim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>num_samples</span>, <span class='no'>num_classes</span>))
 
 <span class='co'># This `fit` call will be distributed on 8 GPUs.</span>
 <span class='co'># Since the batch size is 256, each GPU will process 32 samples.</span>
-<span class='no'>parallel_model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/fit'>fit</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>256</span>)
+<span class='no'>parallel_model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/fit.html'>fit</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>256</span>)
 
 <span class='co'># Save model via the template model (which shares the same weights):</span>
 <span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='save_model_hdf5.html'>save_model_hdf5</a></span>(<span class='st'>"my_model.h5"</span>)
-<span class='co'># }</span><div class='input'>
-</div></pre>
+}</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#model-saving">Model Saving</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -359,13 +379,16 @@ by <code>multi_gpu_model</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

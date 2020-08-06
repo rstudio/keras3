@@ -8,21 +8,36 @@
 
 <title>Batch normalization layer (Ioffe and Szegedy, 2014). — layer_batch_normalization • keras</title>
 
-<!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,14 +47,13 @@
 
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
-<meta property="og:title" content="Batch normalization layer (Ioffe and Szegedy, 2014). — layer_batch_normalization" />
 
+<meta property="og:title" content="Batch normalization layer (Ioffe and Szegedy, 2014). — layer_batch_normalization" />
 <meta property="og:description" content="Normalize the activations of the previous layer at each batch, i.e. applies a
 transformation that maintains the mean activation close to 0 and the
 activation standard deviation close to 1." />
-
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -53,9 +67,10 @@ activation standard deviation close to 1." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -69,7 +84,7 @@ activation standard deviation close to 1." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.4.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
       </span>
     </div>
 
@@ -184,9 +199,13 @@ activation standard deviation close to 1." />
   </a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/rstudio/keras/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -194,34 +213,53 @@ activation standard deviation close to 1." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Batch normalization layer (Ioffe and Szegedy, 2014).</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/layers-normalization.R'><code>R/layers-normalization.R</code></a></small>
     <div class="hidden name"><code>layer_batch_normalization.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Normalize the activations of the previous layer at each batch, i.e. applies a
 transformation that maintains the mean activation close to 0 and the
 activation standard deviation close to 1.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>layer_batch_normalization</span>(<span class='no'>object</span>, <span class='kw'>axis</span> <span class='kw'>=</span> -<span class='fl'>1L</span>, <span class='kw'>momentum</span> <span class='kw'>=</span> <span class='fl'>0.99</span>,
-  <span class='kw'>epsilon</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>beta_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>, <span class='kw'>gamma_initializer</span> <span class='kw'>=</span> <span class='st'>"ones"</span>,
+    <pre class="usage"><span class='fu'>layer_batch_normalization</span>(
+  <span class='no'>object</span>,
+  <span class='kw'>axis</span> <span class='kw'>=</span> -<span class='fl'>1L</span>,
+  <span class='kw'>momentum</span> <span class='kw'>=</span> <span class='fl'>0.99</span>,
+  <span class='kw'>epsilon</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>beta_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
+  <span class='kw'>gamma_initializer</span> <span class='kw'>=</span> <span class='st'>"ones"</span>,
   <span class='kw'>moving_mean_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
-  <span class='kw'>moving_variance_initializer</span> <span class='kw'>=</span> <span class='st'>"ones"</span>, <span class='kw'>beta_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>gamma_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>beta_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>gamma_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>batch_input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
+  <span class='kw'>moving_variance_initializer</span> <span class='kw'>=</span> <span class='st'>"ones"</span>,
+  <span class='kw'>beta_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>gamma_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>beta_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>gamma_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>renorm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>renorm_clipping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>renorm_momentum</span> <span class='kw'>=</span> <span class='fl'>0.99</span>,
+  <span class='kw'>fused</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>virtual_batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>adjustment</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>batch_input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -287,6 +325,59 @@ since the scaling will be done by the next layer.</p></td>
       <td><p>Optional constraint for the gamma weight.</p></td>
     </tr>
     <tr>
+      <th>renorm</th>
+      <td><p>Whether to use Batch Renormalization
+(https://arxiv.org/abs/1702.03275). This adds extra variables during
+training. The inference is the same for either value of this parameter.</p></td>
+    </tr>
+    <tr>
+      <th>renorm_clipping</th>
+      <td><p>A named list or dictionary that may map keys <code>rmax</code>,
+<code>rmin</code>, <code>dmax</code> to scalar Tensors used to clip the renorm correction. The
+correction <code>(r, d)</code> is used as <code>corrected_value = normalized_value * r + d</code>,
+with <code>r</code> clipped to <code>[rmin, rmax]</code>, and <code>d</code> to <code>[-dmax, dmax]</code>. Missing <code>rmax</code>,
+<code>rmin</code>, <code>dmax</code> are set to <code>Inf</code>, <code>0</code>, <code>Inf</code>, <code>respectively</code>.</p></td>
+    </tr>
+    <tr>
+      <th>renorm_momentum</th>
+      <td><p>Momentum used to update the moving means and standard
+deviations with renorm. Unlike momentum, this affects training and should
+be neither too small (which would add noise) nor too large (which would
+give stale estimates). Note that momentum is still applied to get the means
+and variances for inference.</p></td>
+    </tr>
+    <tr>
+      <th>fused</th>
+      <td><p><code>TRUE</code>, use a faster, fused implementation, or raise a ValueError
+if the fused implementation cannot be used. If <code>NULL</code>, use the faster
+implementation if possible. If <code>FALSE</code>, do not use the fused implementation.</p></td>
+    </tr>
+    <tr>
+      <th>virtual_batch_size</th>
+      <td><p>An integer. By default, virtual_batch_size is <code>NULL</code>,
+which means batch normalization is performed across the whole batch.
+When virtual_batch_size is not <code>NULL</code>, instead perform "Ghost Batch
+Normalization", which creates virtual sub-batches which are each normalized
+separately (with shared gamma, beta, and moving statistics). Must divide
+the actual <code>batch size</code> during execution.</p></td>
+    </tr>
+    <tr>
+      <th>adjustment</th>
+      <td><p>A function taking the Tensor containing the (dynamic) shape
+of the input tensor and returning a pair <code>(scale, bias)</code> to apply to the
+normalized values <code>(before gamma and beta)</code>, only during training.
+For example, if <code>axis==-1</code>,
+<code>adjustment &lt;- function(shape) {
+    tuple(tf$random$uniform(shape[-1:NULL, style = "python"], 0.93, 1.07),
+          tf$random$uniform(shape[-1:NULL, style = "python"], -0.1, 0.1))
+   }</code>
+will scale the normalized value
+by up to 7% up or down, then shift the result by up to 0.1 (with
+independent scaling and bias for each feature but shared across all examples),
+and finally apply gamma and/or beta. If <code>NULL</code>, no adjustment is applied.
+Cannot be specified if virtual_batch_size is specified.</p></td>
+    </tr>
+    <tr>
       <th>input_shape</th>
       <td><p>Dimensionality of the input (integer) not including the
 samples axis. This argument is required when using this layer as the first
@@ -323,40 +414,32 @@ isn't provided.</p></td>
       <td><p>Initial weights for layer.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="input-shape"><a class="anchor" href="#input-shape"></a>Input shape</h2>
 
     <p>Arbitrary. Use the keyword argument <code>input_shape</code> (list
 of integers, does not include the samples axis) when using this layer as
 the first layer in a model.</p>
-    
     <h2 class="hasAnchor" id="output-shape"><a class="anchor" href="#output-shape"></a>Output shape</h2>
 
     <p>Same shape as input.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
-    <ul>
+
+<ul>
 <li><p><a href='https://arxiv.org/abs/1502.03167'>Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</a></p></li>
 </ul>
-    
+
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#input-shape">Input shape</a></li>
-
-      <li><a href="#output-shape">Output shape</a></li>
-
-      <li><a href="#references">References</a></li>
-          </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -364,13 +447,16 @@ the first layer in a model.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

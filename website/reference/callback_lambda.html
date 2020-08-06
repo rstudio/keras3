@@ -8,21 +8,36 @@
 
 <title>Create a custom callback — callback_lambda • keras</title>
 
-<!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,8 +47,8 @@
 
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
-<meta property="og:title" content="Create a custom callback — callback_lambda" />
 
+<meta property="og:title" content="Create a custom callback — callback_lambda" />
 <meta property="og:description" content="This callback is constructed with anonymous functions that will be called at
 the appropriate time. Note that the callbacks expects positional arguments,
 as:
@@ -41,10 +56,10 @@ on_epoch_begin and on_epoch_end expect two positional arguments: epoch, logs
 on_batch_*, on_train_batch_*, on_predict_batch_* and on_test_batch_*, expect
 two positional arguments: batch, logs
 on_train_*, on_test_* and on_predict_* expect one positional argument: logs
-" />
 
+" />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -58,9 +73,10 @@ on_train_*, on_test_* and on_predict_* expect one positional argument: logs
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -74,7 +90,7 @@ on_train_*, on_test_* and on_predict_* expect one positional argument: logs
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.4.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
       </span>
     </div>
 
@@ -189,9 +205,13 @@ on_train_*, on_test_* and on_predict_* expect one positional argument: logs
   </a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/rstudio/keras/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -199,18 +219,18 @@ on_train_*, on_test_* and on_predict_* expect one positional argument: logs
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create a custom callback</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/callbacks.R'><code>R/callbacks.R</code></a></small>
     <div class="hidden name"><code>callback_lambda.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>This callback is constructed with anonymous functions that will be called at
 the appropriate time. Note that the callbacks expects positional arguments,
 as:</p><ul>
@@ -219,18 +239,28 @@ as:</p><ul>
 two positional arguments: <code>batch</code>, <code>logs</code></p></li>
 <li><p><code>on_train_*</code>, <code>on_test_*</code> and <code>on_predict_*</code> expect one positional argument: <code>logs</code></p></li>
 </ul>
-    
+
     </div>
 
-    <pre class="usage"><span class='fu'>callback_lambda</span>(<span class='kw'>on_epoch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>on_epoch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_batch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>on_batch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_train_batch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>on_train_batch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_train_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>on_train_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_predict_batch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>on_predict_batch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_predict_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>on_predict_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_test_batch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>on_test_batch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_test_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>on_test_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>callback_lambda</span>(
+  <span class='kw'>on_epoch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_epoch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_batch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_batch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_train_batch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_train_batch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_train_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_train_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_predict_batch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_predict_batch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_predict_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_predict_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_test_batch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_test_batch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_test_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>on_test_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -303,31 +333,28 @@ if validation data is provided.</p></td>
       <td><p>called at the end of evaluation or validation.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other callbacks: <code><a href='callback_csv_logger.html'>callback_csv_logger</a></code>,
-  <code><a href='callback_early_stopping.html'>callback_early_stopping</a></code>,
-  <code><a href='callback_learning_rate_scheduler.html'>callback_learning_rate_scheduler</a></code>,
-  <code><a href='callback_model_checkpoint.html'>callback_model_checkpoint</a></code>,
-  <code><a href='callback_progbar_logger.html'>callback_progbar_logger</a></code>,
-  <code><a href='callback_reduce_lr_on_plateau.html'>callback_reduce_lr_on_plateau</a></code>,
-  <code><a href='callback_remote_monitor.html'>callback_remote_monitor</a></code>,
-  <code><a href='callback_tensorboard.html'>callback_tensorboard</a></code>,
-  <code><a href='callback_terminate_on_naan.html'>callback_terminate_on_naan</a></code></p></div>
-    
+    <div class='dont-index'><p>Other callbacks: 
+<code><a href='callback_csv_logger.html'>callback_csv_logger</a>()</code>,
+<code><a href='callback_early_stopping.html'>callback_early_stopping</a>()</code>,
+<code><a href='callback_learning_rate_scheduler.html'>callback_learning_rate_scheduler</a>()</code>,
+<code><a href='callback_model_checkpoint.html'>callback_model_checkpoint</a>()</code>,
+<code><a href='callback_progbar_logger.html'>callback_progbar_logger</a>()</code>,
+<code><a href='callback_reduce_lr_on_plateau.html'>callback_reduce_lr_on_plateau</a>()</code>,
+<code><a href='callback_remote_monitor.html'>callback_remote_monitor</a>()</code>,
+<code><a href='callback_tensorboard.html'>callback_tensorboard</a>()</code>,
+<code><a href='callback_terminate_on_naan.html'>callback_terminate_on_naan</a>()</code></p></div>
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#see-also">See also</a></li>
-          </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -335,13 +362,16 @@ if validation data is provided.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
