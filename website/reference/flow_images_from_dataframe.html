@@ -9,21 +9,36 @@
 <title>Takes the dataframe and the path to a directory and generates batches of
 augmented/normalized data. — flow_images_from_dataframe • keras</title>
 
-<!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -33,14 +48,13 @@ augmented/normalized data. — flow_images_from_dataframe • keras</title>
 
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
+
 <meta property="og:title" content="Takes the dataframe and the path to a directory and generates batches of
 augmented/normalized data. — flow_images_from_dataframe" />
-
 <meta property="og:description" content="Takes the dataframe and the path to a directory and generates batches of
 augmented/normalized data." />
-
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -54,9 +68,10 @@ augmented/normalized data." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -70,7 +85,7 @@ augmented/normalized data." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.4.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
       </span>
     </div>
 
@@ -185,9 +200,13 @@ augmented/normalized data." />
   </a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/rstudio/keras/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -195,6 +214,7 @@ augmented/normalized data." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -202,25 +222,36 @@ augmented/normalized data." />
     <div class="page-header">
     <h1>Takes the dataframe and the path to a directory and generates batches of
 augmented/normalized data.</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/preprocessing.R'><code>R/preprocessing.R</code></a></small>
     <div class="hidden name"><code>flow_images_from_dataframe.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Takes the dataframe and the path to a directory and generates batches of
 augmented/normalized data.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>flow_images_from_dataframe</span>(<span class='no'>dataframe</span>, <span class='kw'>directory</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>x_col</span> <span class='kw'>=</span> <span class='st'>"filename"</span>, <span class='kw'>y_col</span> <span class='kw'>=</span> <span class='st'>"class"</span>,
-  <span class='kw'>generator</span> <span class='kw'>=</span> <span class='fu'><a href='image_data_generator.html'>image_data_generator</a></span>(), <span class='kw'>target_size</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>256</span>, <span class='fl'>256</span>),
-  <span class='kw'>color_mode</span> <span class='kw'>=</span> <span class='st'>"rgb"</span>, <span class='kw'>classes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>class_mode</span> <span class='kw'>=</span> <span class='st'>"categorical"</span>,
-  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>save_to_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>save_prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>save_format</span> <span class='kw'>=</span> <span class='st'>"png"</span>, <span class='kw'>subset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>interpolation</span> <span class='kw'>=</span> <span class='st'>"nearest"</span>, <span class='kw'>drop_duplicates</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>flow_images_from_dataframe</span>(
+  <span class='no'>dataframe</span>,
+  <span class='kw'>directory</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>x_col</span> <span class='kw'>=</span> <span class='st'>"filename"</span>,
+  <span class='kw'>y_col</span> <span class='kw'>=</span> <span class='st'>"class"</span>,
+  <span class='kw'>generator</span> <span class='kw'>=</span> <span class='fu'><a href='image_data_generator.html'>image_data_generator</a></span>(),
+  <span class='kw'>target_size</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>256</span>, <span class='fl'>256</span>),
+  <span class='kw'>color_mode</span> <span class='kw'>=</span> <span class='st'>"rgb"</span>,
+  <span class='kw'>classes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>class_mode</span> <span class='kw'>=</span> <span class='st'>"categorical"</span>,
+  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>32</span>,
+  <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>save_to_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>save_prefix</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>save_format</span> <span class='kw'>=</span> <span class='st'>"png"</span>,
+  <span class='kw'>subset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>interpolation</span> <span class='kw'>=</span> <span class='st'>"nearest"</span>,
+  <span class='kw'>drop_duplicates</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -271,7 +302,7 @@ images will be converted to have 1 or 3 color channels.</p></td>
     </tr>
     <tr>
       <th>classes</th>
-      <td><p>optional list of classes (e.g. <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c('dogs', 'cats')</a></code>. Default:
+      <td><p>optional list of classes (e.g. <code><a href='https://rdrr.io/r/base/c.html'>c('dogs', 'cats')</a></code>. Default:
 <code>NULL</code> If not provided, the list of classes will be automatically inferred
 from the <code>y_col</code>, which will map to the label indices, will be alphanumeric).
 The dictionary containing the mapping from class names to class indices
@@ -285,7 +316,8 @@ Default: "categorical". Mode for yielding the targets:</p><ul>
 <li><p>"categorical": 2D array of one-hot encoded labels. Supports multi-label output.</p></li>
 <li><p>"sparse": 1D array of integer labels,</p></li>
 <li><p>"input": images identical to input images (mainly used to work with autoencoders),</p></li>
-<li><p>"other": array of y_col data,
+<li><p>"other": array of y_col data,</p></li>
+<li><p>"multi_output": allow to train a multi-output model. Y is a list or a vector.
 <code>NULL</code>, no targets are returned (the generator will only yield batches of
 image data, which is useful to use in  <code><a href='predict_generator.html'>predict_generator()</a></code>).</p></li>
 </ul></td>
@@ -338,50 +370,39 @@ is used.</p></td>
 filename.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Yields batches indefinitely, in an infinite loop.</p>
-    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>This functions requires that <code>pandas</code> (python module) is installed in the
 same environment as <code>tensorflow</code> and <code>keras</code>.</p>
 <p>If you are using <code>r-tensorflow</code> (the default environment) you can install
-<code>pandas</code> by running <code><a href='https://www.rdocumentation.org/packages/reticulate/topics/virtualenv-tools'>reticulate::virtualenv_install("pandas", envname = "r-tensorflow")</a></code>
-or <code><a href='https://www.rdocumentation.org/packages/reticulate/topics/conda-tools'>reticulate::conda_install("pandas", envname = "r-tensorflow")</a></code> depending on
+<code>pandas</code> by running <code><a href='https://rdrr.io/pkg/reticulate/man/virtualenv-tools.html'>reticulate::virtualenv_install("pandas", envname = "r-tensorflow")</a></code>
+or <code><a href='https://rdrr.io/pkg/reticulate/man/conda-tools.html'>reticulate::conda_install("pandas", envname = "r-tensorflow")</a></code> depending on
 the kind of environment you are using.</p>
-    
     <h2 class="hasAnchor" id="yields"><a class="anchor" href="#yields"></a>Yields</h2>
 
     <p><code>(x, y)</code> where <code>x</code> is an array of image data and <code>y</code> is a
 array of corresponding labels. The generator loops indefinitely.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other image preprocessing: <code><a href='fit_image_data_generator.html'>fit_image_data_generator</a></code>,
-  <code><a href='flow_images_from_data.html'>flow_images_from_data</a></code>,
-  <code><a href='flow_images_from_directory.html'>flow_images_from_directory</a></code>,
-  <code><a href='image_load.html'>image_load</a></code>, <code><a href='image_to_array.html'>image_to_array</a></code></p></div>
-    
+    <div class='dont-index'><p>Other image preprocessing: 
+<code><a href='fit_image_data_generator.html'>fit_image_data_generator</a>()</code>,
+<code><a href='flow_images_from_data.html'>flow_images_from_data</a>()</code>,
+<code><a href='flow_images_from_directory.html'>flow_images_from_directory</a>()</code>,
+<code><a href='image_load.html'>image_load</a>()</code>,
+<code><a href='image_to_array.html'>image_to_array</a>()</code></p></div>
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#note">Note</a></li>
-
-      <li><a href="#yields">Yields</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -389,13 +410,16 @@ array of corresponding labels. The generator loops indefinitely.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
