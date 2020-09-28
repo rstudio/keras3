@@ -2,7 +2,7 @@
 #' "Neural style transfer with eager execution and Keras"
 #' on the TensorFlow for R blog.
 #' 
-#' https://blogs.rstudio.com/tensorflow/posts/2018-09-09-eager-style-transfer
+#' https://blogs.rstudio.com/ai/posts/2018-09-10-eager-style-transfer/
 
 
 library(keras)
