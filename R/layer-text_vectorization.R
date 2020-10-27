@@ -93,9 +93,13 @@ layer_text_vectorization <- function(object, max_tokens = NULL, standardize = "l
 #' @seealso [set_vocabulary()]
 #' @export
 get_vocabulary <- function(object) {
-  python_path <- system.file("python", package = "keras")
-  tools <- import_from_path("kerastools", path = python_path)
-  tools$get_vocabulary$get_vocabulary(object)
+  if (tensorflow::tf_version() < "2.3") {
+    python_path <- system.file("python", package = "keras")
+    tools <- import_from_path("kerastools", path = python_path)
+    tools$get_vocabulary$get_vocabulary(object)  
+  } else {
+    object$get_vocabulary()
+  }
 }
 
 #' Sets vocabulary (and optionally document frequency) data for the layer
@@ -116,13 +120,22 @@ get_vocabulary <- function(object) {
 #'  data in "tfidf" mode; if an OOV value is supplied it will overwrite the
 #'  existing OOV value.
 #' @param append Whether to overwrite or append any existing vocabulary data.
+#'  (deprecated since TensorFlow >= 2.3)
 #' 
 #' @seealso [get_vocabulary()]
 #' 
 #' @export
 set_vocabulary <- function(object, vocab, df_data = NULL, oov_df_value = FALSE,
-                           append = FALSE) {
-  object$set_vocabulary(vocab, df_data, oov_df_value, append)
+                           append = NULL) {
+  
+  if (tensorflow::tf_version() < "2.3") {
+    if (is.null(append)) append <- FALSE
+    object$set_vocabulary(vocab, df_data, oov_df_value, append)
+  } else {
+    if (!is.null(append)) warning("append is ignored since tensorflow >= 2.3")
+    object$set_vocabulary(vocab, df_data = df_data, oov_df_value = oov_df_value)
+  }
+    
 }
 
 
