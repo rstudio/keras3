@@ -7,6 +7,7 @@
 - Fixed bug with `layer_text_vectorization` with TensorFlow >= 2.3 (#1131)
 - Handle renamed argument `text` to `input_text` in `text_one_hot` (#1133)
 - Added TensorFlow 2.3 to the CI (#1102)
+- Fix C stack error when using Image Data Generators and Time Series generators with TensorFlow <= 2.0.1 (#1135)
 
 ## Keras 2.2.3.0 (CRAN)
 
