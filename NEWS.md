@@ -4,6 +4,7 @@
 - Allows passing other arguments to `keras_model` eg `name`. (#1045)
 - Fixed bug when serializing models with the plaidml backends.(#1084)
 - Install keras no longer tries to install scipy because it's already installed by tensorflow (#1081)
+- Fixed bug with `layer_text_vectorization` with TensorFlow >= 2.3 (#1131)
 
 ## Keras 2.2.3.0 (CRAN)
 
