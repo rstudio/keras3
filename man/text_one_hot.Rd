@@ -5,15 +5,16 @@
 \title{One-hot encode a text into a list of word indexes in a vocabulary of size n.}
 \usage{
 text_one_hot(
-  text,
+  input_text,
   n,
   filters = "!\\"#$\%&()*+,-./:;<=>?@[\\\\]^_`{|}~\\t\\n",
   lower = TRUE,
-  split = " "
+  split = " ",
+  text = NULL
 )
 }
 \arguments{
-\item{text}{Input text (string).}
+\item{input_text}{Input text (string).}
 
 \item{n}{Size of vocabulary (integer)}
 
@@ -23,6 +24,8 @@ punctuation. Default includes basic punctuation, tabs, and newlines.}
 \item{lower}{Whether to convert the input to lowercase.}
 
 \item{split}{Sentence split marker (string).}
+
+\item{text}{for compatibility purpose. use \code{input_text} instead.}
 }
 \value{
 List of integers in \verb{[1, n]}. Each integer encodes a word (unicity
