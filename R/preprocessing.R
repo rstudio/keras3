@@ -180,8 +180,9 @@ text_to_word_sequence <- function(text, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{
 #' One-hot encode a text into a list of word indexes in a vocabulary of size n.
 #' 
 #' @param n Size of vocabulary (integer)
-#'   
+#' @param input_text Input text (string).
 #' @inheritParams text_to_word_sequence
+#' @param text for compatibility purpose. use `input_text` instead.
 #'   
 #' @return List of integers in `[1, n]`. Each integer encodes a word (unicity
 #'   non-guaranteed).
@@ -189,10 +190,18 @@ text_to_word_sequence <- function(text, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{
 #' @family text preprocessing   
 #'   
 #' @export
-text_one_hot <- function(text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',
-                         lower = TRUE, split = ' ') {
+text_one_hot <- function(input_text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',
+                         lower = TRUE, split = ' ', text = NULL) {
+  
+  if (tensorflow::tf_version() >= "2.3" && !is.null(text)) {
+    warning("text is deprecated as of TF 2.3. use input_text instead")
+    if (!missing(input_text))
+      stop("input_text and text must not be bopth specified")
+    input_text <- text
+  }
+    
   keras$preprocessing$text$one_hot(
-    text = text,
+    input_text,
     n = as.integer(n),
     filters = filters,
     lower = lower,
