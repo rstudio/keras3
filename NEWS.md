@@ -8,6 +8,7 @@
 - Handle renamed argument `text` to `input_text` in `text_one_hot` (#1133)
 - Added TensorFlow 2.3 to the CI (#1102)
 - Fix C stack error when using Image Data Generators and Time Series generators with TensorFlow <= 2.0.1 (#1135)
+- Fixed warning raised in the initial epoch (@gsteinbu #1130)
 
 ## Keras 2.2.3.0 (CRAN)
 
