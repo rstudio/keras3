@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ['windows-latest', 'macOS-latest', 'ubuntu-16.04']
+        os: ['windows-latest', 'macOS-latest', 'ubuntu-18.04']
         tf: ['1.15.2', '2.0.1', '2.1.0', '2.2.0', '2.3.0', 'nightly']
         include:
           - os: ubuntu-18.04
