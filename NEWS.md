@@ -9,6 +9,7 @@
 - Added TensorFlow 2.3 to the CI (#1102)
 - Fix C stack error when using Image Data Generators and Time Series generators with TensorFlow <= 2.0.1 (#1135)
 - Fixed warning raised in the initial epoch (@gsteinbu #1130)
+- Consistent result when using `text_hashing_trick` with missing values (@topepo #1048)
 
 ## Keras 2.2.3.0 (CRAN)
 
