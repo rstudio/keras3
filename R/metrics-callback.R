@@ -143,9 +143,11 @@ KerasMetricsCallbackV2 <- R6::R6Class(
     metrics = list(),
     metrics_viewer = NULL,
     view_metrics = FALSE,
+    initial_epoch = 0, 
     
-    initialize = function(view_metrics = FALSE) {
+    initialize = function(view_metrics = FALSE, initial_epoch = 0) {
       self$view_metrics <- view_metrics
+      self$initial_epoch <- initial_epoch
     },
     
     on_train_begin = function(logs = NULL) {
@@ -157,7 +159,7 @@ KerasMetricsCallbackV2 <- R6::R6Class(
     
     on_epoch_end = function(epoch, logs = NULL) {
       
-      if (epoch == 0) {
+      if (epoch - self$initial_epoch == 0) {
         
         metric_names <- names(logs)
         for (metric in metric_names)

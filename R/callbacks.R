@@ -620,7 +620,7 @@ KerasCallback <- R6Class("KerasCallback",
   )
 )
 
-normalize_callbacks_with_metrics <- function(view_metrics, callbacks) {
+normalize_callbacks_with_metrics <- function(view_metrics, initial_epoch, callbacks) {
   
   # if callbacks isn't a list then make it one
   if (!is.null(callbacks) && !is.list(callbacks))
@@ -628,7 +628,7 @@ normalize_callbacks_with_metrics <- function(view_metrics, callbacks) {
   
   # always include the metrics callback
   if (tensorflow::tf_version() >= "2.2.0")
-    metrics_callback <- KerasMetricsCallbackV2$new(view_metrics)
+    metrics_callback <- KerasMetricsCallbackV2$new(view_metrics, initial_epoch)
   else
     metrics_callback <- KerasMetricsCallback$new(view_metrics)
   
