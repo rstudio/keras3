@@ -5,6 +5,7 @@
 - Fixed bug when serializing models with the plaidml backends.(#1084)
 - Install keras no longer tries to install scipy because it's already installed by tensorflow (#1081)
 - Fixed bug with `layer_text_vectorization` with TensorFlow >= 2.3 (#1131)
+- Handle renamed argument `text` to `input_text` in `text_one_hot` (#1133)
 
 ## Keras 2.2.3.0 (CRAN)
 
