@@ -887,8 +887,8 @@ flow_images_from_directory <- function(
 #' @param y_col string or list, column/s in dataframe that has the target data.
 #' @param color_mode one of "grayscale", "rgb". Default: "rgb". Whether the 
 #'   images will be converted to have 1 or 3 color channels.
-#' @param drop_duplicates Boolean, whether to drop duplicate rows based on 
-#'   filename.
+#' @param drop_duplicates (deprecated in TF >= 2.3) Boolean, whether to drop 
+#'   duplicate rows based on filename. The default value is `TRUE`.
 #' @param classes optional list of classes (e.g. `c('dogs', 'cats')`. Default: 
 #'  `NULL` If not provided, the list of classes will be automatically inferred 
 #'  from the `y_col`, which will map to the label indices, will be alphanumeric). 
