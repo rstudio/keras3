@@ -1613,6 +1613,10 @@ k_log <- function(x) {
 #'
 #' @export
 k_logsumexp <- function(x, axis = NULL, keepdims = FALSE) {
+  
+  if (tensorflow::tf_version() >= "2.2")
+    stop("k_logsumexp is deprecated. use tensorflow::tf$reduce_logsumexp ")
+  
   keras$backend$logsumexp(
     x = x,
     axis = as_axis(axis),
