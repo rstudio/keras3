@@ -1179,7 +1179,11 @@ summary.keras.engine.training.Model <- function(object, line_length = getOption(
 #' @importFrom reticulate py_str
 #' @export
 py_str.keras.engine.training.Model <- function(object,  line_length = getOption("width"), positions = NULL, ...) {
-  paste0("Model\n", py_capture_output(object$summary(line_length = line_length, positions = positions), type = "stdout"))
+  if (!object$built) {
+    cat("Model\n<no summary available, model was not built>\n")
+  } else {
+    paste0("Model\n", py_capture_output(object$summary(line_length = line_length, positions = positions), type = "stdout"))  
+  }
 }
 
 
