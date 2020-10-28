@@ -12,6 +12,7 @@
 - Consistent result when using `text_hashing_trick` with missing values (@topepo #1048)
 - Added a custom error message for `k_logsumexp` as it was removed from Keras (#1137)
 - Fixed bug when printing models that are not built yet. (#1138)
+- Fix drop_duplicates DeprecationWarning with tf 2.3 (@gsteinbu #1139)
 
 ## Keras 2.2.3.0 (CRAN)
 
