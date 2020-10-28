@@ -957,6 +957,13 @@ flow_images_from_dataframe <- function(
   if (keras_version() >= "2.1.5") 
     args$subset <- subset
   
+  if (tensorflow::tf_version() >= "2.3") {
+    if(drop_duplicates) {
+      warning("\'drop_duplicates\' is deprecated as of tensorflow 2.3 and will be ignored. Make sure the supplied dataframe does not contain duplicates.") 
+    }
+    args$drop_duplicates <- NULL
+  }
+  
   do.call(generator$flow_from_dataframe, args)
 }
 
