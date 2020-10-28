@@ -102,18 +102,33 @@ test_succeeds("flow images from dataframe works", {
       class = letters[1:10], 
       stringsAsFactors = FALSE
       )
+    
     img_gen <- flow_images_from_dataframe(
       df, 
       directory = ".", 
       x_col = "fname", 
-      y_col = "class", 
-      drop_duplicates = FALSE
-      )
+      y_col = "class"
+    )
     
     batch <- reticulate::iter_next(img_gen)
     
     expect_equal(dim(batch[[1]]), c(10, 256, 256, 3))
     expect_equal(dim(batch[[2]]), c(10, 10))
+    
+    if (tensorflow::tf_version() >= "2.3") {
+      
+      expect_warning(
+        img_gen <- flow_images_from_dataframe(
+          df, 
+          directory = ".", 
+          x_col = "fname", 
+          y_col = "class", 
+          drop_duplicates = TRUE
+        )
+      )
+      
+    }
+    
   }
 })
 

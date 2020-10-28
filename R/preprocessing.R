@@ -887,8 +887,8 @@ flow_images_from_directory <- function(
 #' @param y_col string or list, column/s in dataframe that has the target data.
 #' @param color_mode one of "grayscale", "rgb". Default: "rgb". Whether the 
 #'   images will be converted to have 1 or 3 color channels.
-#' @param drop_duplicates Boolean, whether to drop duplicate rows based on 
-#'   filename.
+#' @param drop_duplicates (deprecated in TF >= 2.3) Boolean, whether to drop 
+#'   duplicate rows based on filename. The default value is `TRUE`.
 #' @param classes optional list of classes (e.g. `c('dogs', 'cats')`. Default: 
 #'  `NULL` If not provided, the list of classes will be automatically inferred 
 #'  from the `y_col`, which will map to the label indices, will be alphanumeric). 
@@ -925,7 +925,7 @@ flow_images_from_dataframe <- function(
   color_mode = "rgb", classes = NULL, class_mode = "categorical", 
   batch_size = 32, shuffle = TRUE, seed = NULL, save_to_dir = NULL, 
   save_prefix = "", save_format = "png", subset = NULL, 
-  interpolation = "nearest", drop_duplicates = TRUE) {
+  interpolation = "nearest", drop_duplicates = NULL) {
   
   if (!reticulate::py_module_available("pandas"))
     stop("Pandas (python module) must be installed in the same environment as Keras.", 
@@ -956,6 +956,13 @@ flow_images_from_dataframe <- function(
   
   if (keras_version() >= "2.1.5") 
     args$subset <- subset
+  
+  if(!is.null(drop_duplicates) && tensorflow::tf_version() >= "2.3") {
+    warning("\'drop_duplicates\' is deprecated as of tensorflow 2.3 and will be ignored. Make sure the supplied dataframe does not contain duplicates.") 
+  }
+  
+  if (is.null(drop_duplicates) && tensorflow::tf_version() < "2.3")
+    args$drop_duplicates <- TRUE
   
   do.call(generator$flow_from_dataframe, args)
 }
