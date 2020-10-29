@@ -13,6 +13,7 @@
 - Added a custom error message for `k_logsumexp` as it was removed from Keras (#1137)
 - Fixed bug when printing models that are not built yet. (#1138)
 - Fix drop_duplicates DeprecationWarning with tf 2.3 (@gsteinbu #1139)
+- Fixed bug when plotting the model history if the model used an early stopping callback (#1140)
 
 ## Keras 2.2.3.0 (CRAN)
 
