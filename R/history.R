@@ -177,11 +177,16 @@ as.data.frame.keras_training_history <- function(x, ...) {
   if (tensorflow::tf_version() < "2.2")
     x$metrics <- x$metrics[x$params$metrics]
   
+  if (tensorflow::tf_version() >= "2.1")
+    metric_names <- names(x$metrics)
+  else
+    metric_names <- x$params$metrics
+    
   # pad to epochs if necessary
   values <- x$metrics
   pad <- x$params$epochs - length(values$loss)
   pad_data <- list()
-  for (metric in x$params$metrics)
+  for (metric in metric_names)
     pad_data[[metric]] <- rep_len(NA, pad)
   values <- rbind(values, pad_data)
 

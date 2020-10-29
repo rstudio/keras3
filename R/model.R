@@ -950,9 +950,9 @@ call_generator_function <- function(func, args) {
     args$validation_data <- as_generator(args$validation_data)
   
   # force use of thread based concurrency
-  if (keras_version() >= "2.0.6")
+  if (keras_version() >= "2.0.6") {
     args$use_multiprocessing <- FALSE
-  else {
+  } else {
     args$max_q_size <- args$max_queue_size
     args$max_queue_size <- NULL
     args$pickle_safe <- FALSE
