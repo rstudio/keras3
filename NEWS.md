@@ -14,6 +14,7 @@
 - Fixed bug when printing models that are not built yet. (#1138)
 - Fix drop_duplicates DeprecationWarning with tf 2.3 (@gsteinbu #1139)
 - Fixed bug when plotting the model history if the model used an early stopping callback (#1140)
+- `install_keras` now installs a fixed version of h5py, because newer versions are backward incompatible. (#1142)
 
 ## Keras 2.2.3.0 (CRAN)
 
