@@ -958,7 +958,8 @@ flow_images_from_dataframe <- function(
     args$subset <- subset
   
   if(!is.null(drop_duplicates) && tensorflow::tf_version() >= "2.3") {
-    warning("\'drop_duplicates\' is deprecated as of tensorflow 2.3 and will be ignored. Make sure the supplied dataframe does not contain duplicates.") 
+    warning("\'drop_duplicates\' is deprecated as of tensorflow 2.3 and will be ignored. Make sure the supplied dataframe does not contain duplicates.")
+    args$drop_duplicates <- NULL
   }
   
   if (is.null(drop_duplicates) && tensorflow::tf_version() < "2.3")
