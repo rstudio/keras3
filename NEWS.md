@@ -12,7 +12,7 @@
 - Consistent result when using `text_hashing_trick` with missing values (@topepo #1048)
 - Added a custom error message for `k_logsumexp` as it was removed from Keras (#1137)
 - Fixed bug when printing models that are not built yet. (#1138)
-- Fix drop_duplicates DeprecationWarning with tf 2.3 (@gsteinbu #1139)
+- Fix drop_duplicates DeprecationWarning with tf 2.3 (@gsteinbu #1139 #1141)
 - Fixed bug when plotting the model history if the model used an early stopping callback (#1140)
 - `install_keras` now installs a fixed version of h5py, because newer versions are backward incompatible. (#1142)
 
