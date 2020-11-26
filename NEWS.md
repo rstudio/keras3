@@ -4,6 +4,17 @@
 - Allows passing other arguments to `keras_model` eg `name`. (#1045)
 - Fixed bug when serializing models with the plaidml backends.(#1084)
 - Install keras no longer tries to install scipy because it's already installed by tensorflow (#1081)
+- Fixed bug with `layer_text_vectorization` with TensorFlow >= 2.3 (#1131)
+- Handle renamed argument `text` to `input_text` in `text_one_hot` (#1133)
+- Added TensorFlow 2.3 to the CI (#1102)
+- Fix C stack error when using Image Data Generators and Time Series generators with TensorFlow <= 2.0.1 (#1135)
+- Fixed warning raised in the initial epoch (@gsteinbu #1130)
+- Consistent result when using `text_hashing_trick` with missing values (@topepo #1048)
+- Added a custom error message for `k_logsumexp` as it was removed from Keras (#1137)
+- Fixed bug when printing models that are not built yet. (#1138)
+- Fix drop_duplicates DeprecationWarning with tf 2.3 (@gsteinbu #1139 #1141)
+- Fixed bug when plotting the model history if the model used an early stopping callback (#1140)
+- `install_keras` now installs a fixed version of h5py, because newer versions are backward incompatible. (#1142)
 
 ## Keras 2.2.3.0 (CRAN)
 

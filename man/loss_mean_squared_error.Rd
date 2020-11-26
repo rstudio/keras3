@@ -11,7 +11,6 @@
 \alias{loss_logcosh}
 \alias{loss_categorical_crossentropy}
 \alias{loss_sparse_categorical_crossentropy}
-\alias{loss_binary_crossentropy}
 \alias{loss_kullback_leibler_divergence}
 \alias{loss_poisson}
 \alias{loss_cosine_proximity}
@@ -37,8 +36,6 @@ loss_logcosh(y_true, y_pred)
 loss_categorical_crossentropy(y_true, y_pred)
 
 loss_sparse_categorical_crossentropy(y_true, y_pred)
-
-loss_binary_crossentropy(y_true, y_pred)
 
 loss_kullback_leibler_divergence(y_true, y_pred)
 
@@ -98,5 +95,5 @@ in the chosen precision.
 }
 
 \seealso{
-\code{\link[=compile.keras.engine.training.Model]{compile.keras.engine.training.Model()}}
+\code{\link[=compile.keras.engine.training.Model]{compile.keras.engine.training.Model()}}, \code{\link[=loss_binary_crossentropy]{loss_binary_crossentropy()}}
 }

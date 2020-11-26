@@ -23,7 +23,7 @@ flow_images_from_dataframe(
   save_format = "png",
   subset = NULL,
   interpolation = "nearest",
-  drop_duplicates = TRUE
+  drop_duplicates = NULL
 )
 }
 \arguments{
@@ -73,6 +73,7 @@ Default: "categorical". Mode for yielding the targets:
 \item "sparse": 1D array of integer labels,
 \item "input": images identical to input images (mainly used to work with autoencoders),
 \item "other": array of y_col data,
+\item "multi_output": allow to train a multi-output model. Y is a list or a vector.
 \code{NULL}, no targets are returned (the generator will only yield batches of
 image data, which is useful to use in  \code{predict_generator()}).
 }}
@@ -103,8 +104,8 @@ installed, "lanczos" is also supported. If PIL version 3.4.0 or newer is
 installed, "box" and "hamming" are also supported. By default, "nearest"
 is used.}
 
-\item{drop_duplicates}{Boolean, whether to drop duplicate rows based on
-filename.}
+\item{drop_duplicates}{(deprecated in TF >= 2.3) Boolean, whether to drop
+duplicate rows based on filename. The default value is \code{TRUE}.}
 }
 \description{
 Takes the dataframe and the path to a directory and generates batches of

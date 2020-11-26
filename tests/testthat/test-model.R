@@ -145,6 +145,22 @@ test_succeeds("can pass name argument to 'keras_model'", {
   expect_identical(model$name,name)
 })
 
+test_succeeds("can print a sequential model that is not built", {
+  
+  model <- keras_model_sequential()
+  
+  expect_error(
+    print(model),
+    regexp = NA
+  )
+  
+  expect_output(
+    print(model),
+    regexp = "no summary available"
+  )
+  
+})
+
 
 
 

@@ -146,6 +146,14 @@ test_call_succeeds("layer_conv_3d", {
     layer_conv_3d(filters = 3, kernel_size = c(2, 2, 2))
 })
 
+test_call_succeeds("layer_conv_1d_transpose", {
+  if (tensorflow::tf_version() < "2.3") skip("Needs TF >= 2.3")
+  keras_model_sequential() %>%
+    layer_dense(32, input_shape = 100) %>%
+    layer_reshape(target_shape = c(8,4)) %>%
+    layer_conv_1d_transpose(filters = 3, kernel_size = 2)
+})
+
 test_call_succeeds("layer_conv_2d_transpose", {
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%

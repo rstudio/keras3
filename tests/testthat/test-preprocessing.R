@@ -1,6 +1,6 @@
 context("preprocessing")
 
-source("utils.R")
+source(test_path("utils.R"))
 
 test_call_succeeds("pad_sequences", {
   a <- list(list(1), list(1,2), list(1,2,3))
@@ -26,6 +26,18 @@ test_call_succeeds("text_hashing_trick", required_version = "2.0.5", {
   text <- 'The cat sat on the mat.'
   encoded <- text_hashing_trick(text, 5)
   expect_equal(length(encoded), 6)
+})
+
+test_call_succeeds("missing text data", required_version = "2.0.5", {
+  expect_error(text_hashing_trick(letters, 10),
+               "`text` should be length 1")
+  
+  texts <- c(
+    'Dogs and cats living together.',
+    NA_character_
+  )
+  expect_true(all(!is.na(text_hashing_trick(texts[1], 10))))
+  expect_true(all( is.na(text_hashing_trick(texts[2], 10))))
 })
 
 test_succeeds("use of text tokenizer", {
@@ -90,18 +102,33 @@ test_succeeds("flow images from dataframe works", {
       class = letters[1:10], 
       stringsAsFactors = FALSE
       )
+    
     img_gen <- flow_images_from_dataframe(
       df, 
       directory = ".", 
       x_col = "fname", 
-      y_col = "class", 
-      drop_duplicates = FALSE
-      )
+      y_col = "class"
+    )
     
     batch <- reticulate::iter_next(img_gen)
     
     expect_equal(dim(batch[[1]]), c(10, 256, 256, 3))
     expect_equal(dim(batch[[2]]), c(10, 10))
+    
+    if (tensorflow::tf_version() >= "2.3") {
+      
+      expect_warning(
+        img_gen <- flow_images_from_dataframe(
+          df, 
+          directory = ".", 
+          x_col = "fname", 
+          y_col = "class", 
+          drop_duplicates = TRUE
+        )
+      )
+      
+    }
+    
   }
 })
 
@@ -149,5 +176,4 @@ test_succeeds("flow images from directory works", {
   # evaluate
   eva <- evaluate_generator(model, gen, steps = 10)
 })
-
 

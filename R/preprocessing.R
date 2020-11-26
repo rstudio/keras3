@@ -180,8 +180,9 @@ text_to_word_sequence <- function(text, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{
 #' One-hot encode a text into a list of word indexes in a vocabulary of size n.
 #' 
 #' @param n Size of vocabulary (integer)
-#'   
+#' @param input_text Input text (string).
 #' @inheritParams text_to_word_sequence
+#' @param text for compatibility purpose. use `input_text` instead.
 #'   
 #' @return List of integers in `[1, n]`. Each integer encodes a word (unicity
 #'   non-guaranteed).
@@ -189,10 +190,18 @@ text_to_word_sequence <- function(text, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{
 #' @family text preprocessing   
 #'   
 #' @export
-text_one_hot <- function(text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',
-                         lower = TRUE, split = ' ') {
+text_one_hot <- function(input_text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',
+                         lower = TRUE, split = ' ', text = NULL) {
+  
+  if (tensorflow::tf_version() >= "2.3" && !is.null(text)) {
+    warning("text is deprecated as of TF 2.3. use input_text instead")
+    if (!missing(input_text))
+      stop("input_text and text must not be bopth specified")
+    input_text <- text
+  }
+    
   keras$preprocessing$text$one_hot(
-    text = text,
+    input_text,
     n = as.integer(n),
     filters = filters,
     lower = lower,
@@ -226,6 +235,12 @@ text_hashing_trick <- function(text, n,
                                hash_function = NULL, 
                                filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n', 
                                lower = TRUE, split = ' ') {
+  if (length(text) != 1) {
+    stop("`text` should be length 1.")
+  }
+  if (is.na(text)) {
+    return(NA_integer_)
+  }
   keras$preprocessing$text$hashing_trick(
     text = text,
     n = as.integer(n),
@@ -872,8 +887,8 @@ flow_images_from_directory <- function(
 #' @param y_col string or list, column/s in dataframe that has the target data.
 #' @param color_mode one of "grayscale", "rgb". Default: "rgb". Whether the 
 #'   images will be converted to have 1 or 3 color channels.
-#' @param drop_duplicates Boolean, whether to drop duplicate rows based on 
-#'   filename.
+#' @param drop_duplicates (deprecated in TF >= 2.3) Boolean, whether to drop 
+#'   duplicate rows based on filename. The default value is `TRUE`.
 #' @param classes optional list of classes (e.g. `c('dogs', 'cats')`. Default: 
 #'  `NULL` If not provided, the list of classes will be automatically inferred 
 #'  from the `y_col`, which will map to the label indices, will be alphanumeric). 
@@ -910,7 +925,7 @@ flow_images_from_dataframe <- function(
   color_mode = "rgb", classes = NULL, class_mode = "categorical", 
   batch_size = 32, shuffle = TRUE, seed = NULL, save_to_dir = NULL, 
   save_prefix = "", save_format = "png", subset = NULL, 
-  interpolation = "nearest", drop_duplicates = TRUE) {
+  interpolation = "nearest", drop_duplicates = NULL) {
   
   if (!reticulate::py_module_available("pandas"))
     stop("Pandas (python module) must be installed in the same environment as Keras.", 
@@ -941,6 +956,14 @@ flow_images_from_dataframe <- function(
   
   if (keras_version() >= "2.1.5") 
     args$subset <- subset
+  
+  if(!is.null(drop_duplicates) && tensorflow::tf_version() >= "2.3") {
+    warning("\'drop_duplicates\' is deprecated as of tensorflow 2.3 and will be ignored. Make sure the supplied dataframe does not contain duplicates.")
+    args$drop_duplicates <- NULL
+  }
+  
+  if (is.null(drop_duplicates) && tensorflow::tf_version() < "2.3")
+    args$drop_duplicates <- TRUE
   
   do.call(generator$flow_from_dataframe, args)
 }

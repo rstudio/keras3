@@ -125,6 +125,7 @@ variable-length sequences of 128-dimensional vectors.
 
 \seealso{
 Other convolutional layers: 
+\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_2d_transpose}()},
 \code{\link{layer_conv_2d}()},
 \code{\link{layer_conv_3d_transpose}()},

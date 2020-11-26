@@ -50,6 +50,19 @@ This induces quasi-linear speedup on up to 8 GPUs.
 This function is only available with the TensorFlow backend
 for the time being.
 }
+\note{
+This function is deprecated and has been removed from tensorflow on
+2020-04-01. To distribute your training across all available GPUS,
+you can use \code{tensorflow::tf$distribute$MirroredStrategy()}
+by creating your model like this:\if{html}{\out{<div class="r">}}\preformatted{strategy <- tensorflow::tf$distribute$MirroredStrategy()
+with(strategy$scope(), \{
+  model <- application_xception(
+    weights = NULL,
+    input_shape = c(height, width, 3),
+    classes = num_classes
+\})
+}\if{html}{\out{</div>}}
+}
 \section{Model Saving}{
 
 

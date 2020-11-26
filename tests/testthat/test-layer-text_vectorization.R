@@ -58,6 +58,7 @@ test_call_succeeds("can set and get the vocabulary of layer_text_vectorization",
   x <- matrix(c("hello world", "hello world"), ncol = 1)
   
   layer <- layer_text_vectorization()
+  layer$get_vocabulary()
   set_vocabulary(layer, vocab = c("hello", "world"))
   
   output <- layer(x)
@@ -65,7 +66,10 @@ test_call_succeeds("can set and get the vocabulary of layer_text_vectorization",
   vocab <- get_vocabulary(layer)
   
   expect_s3_class(output, "tensorflow.tensor")
-  expect_length(vocab, 2)
+  if (tensorflow::tf_version() < "2.3")
+    expect_length(vocab, 2)
+  else
+    expect_length(vocab, 4) # 0 is used for padding and 1 for unknown.
 })
 
 
@@ -78,8 +82,30 @@ test_call_succeeds("can use layer_text_vectorization", {
   
   layer <- layer_text_vectorization()
   layer %>% adapt(x_ds)
-  expect_length(get_vocabulary(layer), 2)
+  
+  if (tensorflow::tf_version() < "2.3")
+    expect_length(get_vocabulary(layer), 2)
+  else
+    expect_length(get_vocabulary(layer), 4) # 0 is used for padding and 1 for unknown.
 })
 
+
+test_call_succeeds("can create a tf-idf layer", {
+  
+  if (tensorflow::tf_version() < "2.1")
+    skip("TextVectorization requires TF version >= 2.1")
+  
+  num_words <- 10000 
+  max_length <- 50 
+  
+  text_vectorization <- layer_text_vectorization( 
+    max_tokens = num_words, output_mode = "tf-idf" 
+  )
+  text_vectorization %>% adapt(c("hello world", "hello"))
+  x <- text_vectorization(matrix(c("hello"), ncol = 1))
+  
+  expect_s3_class(x, "tensorflow.tensor")
+  
+})
 
 

@@ -6,20 +6,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>mnist_hierarchical_rnn • keras</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../../apple-touch-icon-60x60.png">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../../bootstrap-toc.css">
+<script src="../../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
 <script src="../../pkgdown.js"></script><link href="../../extra.css" rel="stylesheet">
 <script src="../../extra.js"></script><meta property="og:title" content="mnist_hierarchical_rnn">
-<meta property="og:description" content="">
+<meta property="og:description" content="keras">
 <meta property="og:image" content="/logo.png">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.4.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
       </span>
     </div>
 
@@ -147,7 +154,14 @@
   </a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/rstudio/keras/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -156,13 +170,14 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
+
+      </header><script src="mnist_hierarchical_rnn_files/header-attrs-2.3/header-attrs.js"></script><script src="mnist_hierarchical_rnn_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>mnist_hierarchical_rnn</h1>
+      <h1 data-toc-skip>mnist_hierarchical_rnn</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/mnist_hierarchical_rnn.Rmd"><code>vignettes/examples/mnist_hierarchical_rnn.Rmd</code></a></small>
       <div class="hidden name"><code>mnist_hierarchical_rnn.Rmd</code></div>
 
     </div>
@@ -177,87 +192,89 @@
 <p>References: - <a href="https://arxiv.org/abs/1506.01057">A Hierarchical Neural Autoencoder for Paragraphs and Documents</a> Encodes paragraphs and documents with HRNN. Results have shown that HRNN outperforms standard RNNs and may play some role in more sophisticated generation tasks like summarization or question answering. - <a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7298714">Hierarchical recurrent neural network for skeleton based action recognition</a> Achieved state-of-the-art results on skeleton based action recognition with 3 levels of bidirectional HRNN combined with fully connected layers.</p>
 <p>In the below MNIST example the first LSTM layer first encodes every column of pixels of shape (28, 1) to a column vector of shape (128,). The second LSTM layer encodes then these 28 column vectors of shape (28, 128) to a image vector representing the whole image. A final dense layer is added for prediction.</p>
 <p>After 5 epochs: train acc: 0.9858, val acc: 0.9864</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(keras)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co"># Data Preparation -----------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># Training parameters.</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">batch_size &lt;-<span class="st"> </span><span class="dv">32</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">num_classes &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">epochs &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co"># Embedding dimensions.</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">row_hidden &lt;-<span class="st"> </span><span class="dv">128</span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">col_hidden &lt;-<span class="st"> </span><span class="dv">128</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co"># The data, shuffled and split between train and test sets</span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15">mnist &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span>()</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">x_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>x</a>
-<a class="sourceLine" id="cb1-17" data-line-number="17">y_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>y</a>
-<a class="sourceLine" id="cb1-18" data-line-number="18">x_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>x</a>
-<a class="sourceLine" id="cb1-19" data-line-number="19">y_test &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y</a>
-<a class="sourceLine" id="cb1-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="co"># Reshapes data to 4D for Hierarchical RNN.</span></a>
-<a class="sourceLine" id="cb1-22" data-line-number="22">x_train &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_train, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(x_train), <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb1-23" data-line-number="23">x_test &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/reticulate/topics/array_reshape">array_reshape</a></span>(x_test, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(x_test), <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb1-24" data-line-number="24">x_train &lt;-<span class="st"> </span>x_train <span class="op">/</span><span class="st"> </span><span class="dv">255</span></a>
-<a class="sourceLine" id="cb1-25" data-line-number="25">x_test &lt;-<span class="st"> </span>x_test <span class="op">/</span><span class="st"> </span><span class="dv">255</span></a>
-<a class="sourceLine" id="cb1-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb1-27" data-line-number="27">dim_x_train &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/dim">dim</a></span>(x_train)</a>
-<a class="sourceLine" id="cb1-28" data-line-number="28"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cat">cat</a></span>(<span class="st">'x_train_shape:'</span>, dim_x_train)</a>
-<a class="sourceLine" id="cb1-29" data-line-number="29"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cat">cat</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(x_train), <span class="st">'train samples'</span>)</a>
-<a class="sourceLine" id="cb1-30" data-line-number="30"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cat">cat</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(x_test), <span class="st">'test samples'</span>)</a>
-<a class="sourceLine" id="cb1-31" data-line-number="31"></a>
-<a class="sourceLine" id="cb1-32" data-line-number="32"><span class="co"># Converts class vectors to binary class matrices</span></a>
-<a class="sourceLine" id="cb1-33" data-line-number="33">y_train &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_train, num_classes)</a>
-<a class="sourceLine" id="cb1-34" data-line-number="34">y_test &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/to_categorical.html">to_categorical</a></span>(y_test, num_classes)</a>
-<a class="sourceLine" id="cb1-35" data-line-number="35"></a>
-<a class="sourceLine" id="cb1-36" data-line-number="36"><span class="co"># Define input dimensions</span></a>
-<a class="sourceLine" id="cb1-37" data-line-number="37">row &lt;-<span class="st"> </span>dim_x_train[[<span class="dv">2</span>]]</a>
-<a class="sourceLine" id="cb1-38" data-line-number="38">col &lt;-<span class="st"> </span>dim_x_train[[<span class="dv">3</span>]]</a>
-<a class="sourceLine" id="cb1-39" data-line-number="39">pixel &lt;-<span class="st"> </span>dim_x_train[[<span class="dv">4</span>]]</a>
-<a class="sourceLine" id="cb1-40" data-line-number="40"></a>
-<a class="sourceLine" id="cb1-41" data-line-number="41"><span class="co"># Model input (4D)</span></a>
-<a class="sourceLine" id="cb1-42" data-line-number="42">input &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="dt">shape =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(row, col, pixel))</a>
-<a class="sourceLine" id="cb1-43" data-line-number="43"></a>
-<a class="sourceLine" id="cb1-44" data-line-number="44"><span class="co"># Encodes a row of pixels using TimeDistributed Wrapper</span></a>
-<a class="sourceLine" id="cb1-45" data-line-number="45">encoded_rows &lt;-<span class="st"> </span>input <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/time_distributed.html">time_distributed</a></span>(<span class="kw"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> row_hidden))</a>
-<a class="sourceLine" id="cb1-46" data-line-number="46"></a>
-<a class="sourceLine" id="cb1-47" data-line-number="47"><span class="co"># Encodes columns of encoded rows</span></a>
-<a class="sourceLine" id="cb1-48" data-line-number="48">encoded_columns &lt;-<span class="st"> </span>encoded_rows <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="dt">units =</span> col_hidden)</a>
-<a class="sourceLine" id="cb1-49" data-line-number="49"></a>
-<a class="sourceLine" id="cb1-50" data-line-number="50"><span class="co"># Model output</span></a>
-<a class="sourceLine" id="cb1-51" data-line-number="51">prediction &lt;-<span class="st"> </span>encoded_columns <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-52" data-line-number="52"><span class="st">  </span><span class="kw"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="dt">units =</span> num_classes, <span class="dt">activation =</span> <span class="st">'softmax'</span>)</a>
-<a class="sourceLine" id="cb1-53" data-line-number="53"></a>
-<a class="sourceLine" id="cb1-54" data-line-number="54"><span class="co"># Define Model ------------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb1-55" data-line-number="55"></a>
-<a class="sourceLine" id="cb1-56" data-line-number="56">model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/keras_model.html">keras_model</a></span>(input, prediction)</a>
-<a class="sourceLine" id="cb1-57" data-line-number="57">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/generics/topics/compile">compile</a></span>(</a>
-<a class="sourceLine" id="cb1-58" data-line-number="58">  <span class="dt">loss =</span> <span class="st">'categorical_crossentropy'</span>,</a>
-<a class="sourceLine" id="cb1-59" data-line-number="59">  <span class="dt">optimizer =</span> <span class="st">'rmsprop'</span>,</a>
-<a class="sourceLine" id="cb1-60" data-line-number="60">  <span class="dt">metrics =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'accuracy'</span>)</a>
-<a class="sourceLine" id="cb1-61" data-line-number="61">)</a>
-<a class="sourceLine" id="cb1-62" data-line-number="62"></a>
-<a class="sourceLine" id="cb1-63" data-line-number="63"><span class="co"># Training</span></a>
-<a class="sourceLine" id="cb1-64" data-line-number="64">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/generics/topics/fit">fit</a></span>(</a>
-<a class="sourceLine" id="cb1-65" data-line-number="65">  x_train, y_train,</a>
-<a class="sourceLine" id="cb1-66" data-line-number="66">  <span class="dt">batch_size =</span> batch_size,</a>
-<a class="sourceLine" id="cb1-67" data-line-number="67">  <span class="dt">epochs =</span> epochs,</a>
-<a class="sourceLine" id="cb1-68" data-line-number="68">  <span class="dt">verbose =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb1-69" data-line-number="69">  <span class="dt">validation_data =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(x_test, y_test)</a>
-<a class="sourceLine" id="cb1-70" data-line-number="70">)</a>
-<a class="sourceLine" id="cb1-71" data-line-number="71"></a>
-<a class="sourceLine" id="cb1-72" data-line-number="72"><span class="co"># Evaluation</span></a>
-<a class="sourceLine" id="cb1-73" data-line-number="73">scores &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/tensorflow/topics/evaluate">evaluate</a></span>(x_test, y_test, <span class="dt">verbose =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb1-74" data-line-number="74"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cat">cat</a></span>(<span class="st">'Test loss:'</span>, scores[[<span class="dv">1</span>]], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</a>
-<a class="sourceLine" id="cb1-75" data-line-number="75"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cat">cat</a></span>(<span class="st">'Test accuracy:'</span>, scores[[<span class="dv">2</span>]], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
+
+<span class="co"># Data Preparation -----------------------------------------------------------------</span>
+
+<span class="co"># Training parameters.</span>
+<span class="no">batch_size</span> <span class="kw">&lt;-</span> <span class="fl">32</span>
+<span class="no">num_classes</span> <span class="kw">&lt;-</span> <span class="fl">10</span>
+<span class="no">epochs</span> <span class="kw">&lt;-</span> <span class="fl">5</span>
+
+<span class="co"># Embedding dimensions.</span>
+<span class="no">row_hidden</span> <span class="kw">&lt;-</span> <span class="fl">128</span>
+<span class="no">col_hidden</span> <span class="kw">&lt;-</span> <span class="fl">128</span>
+
+<span class="co"># The data, shuffled and split between train and test sets</span>
+<span class="no">mnist</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span>()
+<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="no">mnist</span>$<span class="no">train</span>$<span class="no">x</span>
+<span class="no">y_train</span> <span class="kw">&lt;-</span> <span class="no">mnist</span>$<span class="no">train</span>$<span class="no">y</span>
+<span class="no">x_test</span> <span class="kw">&lt;-</span> <span class="no">mnist</span>$<span class="no">test</span>$<span class="no">x</span>
+<span class="no">y_test</span> <span class="kw">&lt;-</span> <span class="no">mnist</span>$<span class="no">test</span>$<span class="no">y</span>
+
+<span class="co"># Reshapes data to 4D for Hierarchical RNN.</span>
+<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span>(<span class="no">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">x_train</span>), <span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span>))
+<span class="no">x_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span>(<span class="no">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">x_test</span>), <span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span>))
+<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="no">x_train</span> / <span class="fl">255</span>
+<span class="no">x_test</span> <span class="kw">&lt;-</span> <span class="no">x_test</span> / <span class="fl">255</span>
+
+<span class="no">dim_x_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">x_train</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'x_train_shape:'</span>, <span class="no">dim_x_train</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">x_train</span>), <span class="st">'train samples'</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">x_test</span>), <span class="st">'test samples'</span>)
+
+<span class="co"># Converts class vectors to binary class matrices</span>
+<span class="no">y_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/to_categorical.html">to_categorical</a></span>(<span class="no">y_train</span>, <span class="no">num_classes</span>)
+<span class="no">y_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/to_categorical.html">to_categorical</a></span>(<span class="no">y_test</span>, <span class="no">num_classes</span>)
+
+<span class="co"># Define input dimensions</span>
+<span class="no">row</span> <span class="kw">&lt;-</span> <span class="no">dim_x_train</span><span class="kw">[[</span><span class="fl">2</span>]]
+<span class="no">col</span> <span class="kw">&lt;-</span> <span class="no">dim_x_train</span><span class="kw">[[</span><span class="fl">3</span>]]
+<span class="no">pixel</span> <span class="kw">&lt;-</span> <span class="no">dim_x_train</span><span class="kw">[[</span><span class="fl">4</span>]]
+
+<span class="co"># Model input (4D)</span>
+<span class="no">input</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">row</span>, <span class="no">col</span>, <span class="no">pixel</span>))
+
+<span class="co"># Encodes a row of pixels using TimeDistributed Wrapper</span>
+<span class="no">encoded_rows</span> <span class="kw">&lt;-</span> <span class="no">input</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/time_distributed.html">time_distributed</a></span>(<span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="no">row_hidden</span>))
+
+<span class="co"># Encodes columns of encoded rows</span>
+<span class="no">encoded_columns</span> <span class="kw">&lt;-</span> <span class="no">encoded_rows</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="no">col_hidden</span>)
+
+<span class="co"># Model output</span>
+<span class="no">prediction</span> <span class="kw">&lt;-</span> <span class="no">encoded_columns</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="no">num_classes</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'softmax'</span>)
+
+<span class="co"># Define Model ------------------------------------------------------------------------</span>
+
+<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="no">input</span>, <span class="no">prediction</span>)
+<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
+  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'categorical_crossentropy'</span>,
+  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">'rmsprop'</span>,
+  <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>)
+)
+
+<span class="co"># Training</span>
+<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
+  <span class="no">x_train</span>, <span class="no">y_train</span>,
+  <span class="kw">batch_size</span> <span class="kw">=</span> <span class="no">batch_size</span>,
+  <span class="kw">epochs</span> <span class="kw">=</span> <span class="no">epochs</span>,
+  <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">1</span>,
+  <span class="kw">validation_data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x_test</span>, <span class="no">y_test</span>)
+)
+
+<span class="co"># Evaluation</span>
+<span class="no">scores</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span>(<span class="no">x_test</span>, <span class="no">y_test</span>, <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">0</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Test loss:'</span>, <span class="no">scores</span><span class="kw">[[</span><span class="fl">1</span>]], <span class="st">'\n'</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Test accuracy:'</span>, <span class="no">scores</span><span class="kw">[[</span><span class="fl">2</span>]], <span class="st">'\n'</span>)</pre></body></html></div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+
       </div>
 
 </div>
+
 
 
       <footer><div class="copyright">
@@ -265,12 +282,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

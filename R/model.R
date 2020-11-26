@@ -164,7 +164,19 @@ keras_model_sequential <- function(layers = NULL, name = NULL) {
 #' }
 #'
 #' @family model functions
-#'
+#' @note This function is deprecated and has been removed from tensorflow on 
+#' 2020-04-01. To distribute your training across all available GPUS,
+#' you can use `tensorflow::tf$distribute$MirroredStrategy()`
+#' by creating your model like this:
+#' ```r
+#' strategy <- tensorflow::tf$distribute$MirroredStrategy()
+#' with(strategy$scope(), {
+#'   model <- application_xception(
+#'     weights = NULL,
+#'     input_shape = c(height, width, 3),
+#'     classes = num_classes
+#' })
+#' ```
 #' @export
 multi_gpu_model <- function(model, gpus = NULL, cpu_merge = TRUE, cpu_relocation = FALSE) {
   
@@ -172,6 +184,9 @@ multi_gpu_model <- function(model, gpus = NULL, cpu_merge = TRUE, cpu_relocation
     stop("You must provide an explicit gpus argument in Keras versions ",
          "prior to 2.1.4")
   }
+  
+  if (tensorflow::tf_version() >= "2.2")
+    stop("This function is deprecated as of TF version 2.2")
   
   args <- list(
     model = model,
@@ -429,7 +444,7 @@ fit.keras.engine.training.Model <-
     batch_size = as_nullable_integer(batch_size),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
-    callbacks = normalize_callbacks_with_metrics(view_metrics, callbacks),
+    callbacks = normalize_callbacks_with_metrics(view_metrics, initial_epoch, callbacks),
     validation_split = validation_split,
     shuffle = shuffle,
     class_weight = as_class_weight(class_weight),
@@ -817,7 +832,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
     steps_per_epoch = as.integer(steps_per_epoch),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
-    callbacks = normalize_callbacks_with_metrics(view_metrics, callbacks),
+    callbacks = normalize_callbacks_with_metrics(view_metrics, initial_epoch, callbacks),
     validation_data = validation_data,
     validation_steps = as_nullable_integer(validation_steps),
     class_weight = as_class_weight(class_weight),
@@ -935,9 +950,9 @@ call_generator_function <- function(func, args) {
     args$validation_data <- as_generator(args$validation_data)
   
   # force use of thread based concurrency
-  if (keras_version() >= "2.0.6")
+  if (keras_version() >= "2.0.6") {
     args$use_multiprocessing <- FALSE
-  else {
+  } else {
     args$max_q_size <- args$max_queue_size
     args$max_queue_size <- NULL
     args$pickle_safe <- FALSE
@@ -1033,6 +1048,10 @@ is_main_thread_generator.keras.preprocessing.image.Iterator <- function(x) {
 }
 
 is_main_thread_generator.keras_preprocessing.image.Iterator <- function(x) {
+  
+  if (tensorflow::tf_version() <= "2.0.1")
+    return(TRUE)
+  
   if (py_has_attr(x, "image_data_generator")) {
     generator <- x$image_data_generator
     !is.null(generator$preprocessing_function)
@@ -1043,6 +1062,13 @@ is_main_thread_generator.keras_preprocessing.image.Iterator <- function(x) {
 
 is_main_thread_generator.keras_preprocessing.image.iterator.Iterator <- 
   is_main_thread_generator.keras_preprocessing.image.Iterator
+
+is_main_thread_generator.keras_preprocessing.sequence.TimeseriesGenerator <- function(x) {
+  if (tensorflow::tf_version() <= "2.0.1")
+    return(TRUE)
+  
+  FALSE
+}
 
 is_tensorflow_dataset <- function(x) {
   inherits(x, "tensorflow.python.data.ops.dataset_ops.DatasetV2") ||
@@ -1153,7 +1179,11 @@ summary.keras.engine.training.Model <- function(object, line_length = getOption(
 #' @importFrom reticulate py_str
 #' @export
 py_str.keras.engine.training.Model <- function(object,  line_length = getOption("width"), positions = NULL, ...) {
-  paste0("Model\n", py_capture_output(object$summary(line_length = line_length, positions = positions), type = "stdout"))
+  if (!object$built) {
+    cat("Model\n<no summary available, model was not built>\n")
+  } else {
+    paste0("Model\n", py_capture_output(object$summary(line_length = line_length, positions = positions), type = "stdout"))  
+  }
 }
 
 

@@ -61,6 +61,7 @@ Repeats the 1st, 2nd and 3rd dimensions of the data by \code{size[[0]]}, \code{s
 
 \seealso{
 Other convolutional layers: 
+\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
 \code{\link{layer_conv_2d_transpose}()},
 \code{\link{layer_conv_2d}()},

@@ -9,7 +9,7 @@ set_vocabulary(
   vocab,
   df_data = NULL,
   oov_df_value = FALSE,
-  append = FALSE
+  append = NULL
 )
 }
 \arguments{
@@ -25,7 +25,8 @@ output_mode is "tfidf". OOV data is optional when appending additional
 data in "tfidf" mode; if an OOV value is supplied it will overwrite the
 existing OOV value.}
 
-\item{append}{Whether to overwrite or append any existing vocabulary data.}
+\item{append}{Whether to overwrite or append any existing vocabulary data.
+(deprecated since TensorFlow >= 2.3)}
 }
 \description{
 This method sets the vocabulary and DF data for this layer directly, instead

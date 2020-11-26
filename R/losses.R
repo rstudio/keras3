@@ -39,7 +39,7 @@
 #' intermediate value `cosh(y_pred - y_true)` is too large to be represented
 #' in the chosen precision.   
 #'   
-#' @seealso [compile.keras.engine.training.Model()]   
+#' @seealso [compile.keras.engine.training.Model()], [loss_binary_crossentropy()]   
 #'   
 #' @export
 loss_mean_squared_error <- function(y_true, y_pred) {
@@ -112,10 +112,27 @@ loss_sparse_categorical_crossentropy <- function(y_true, y_pred) {
 }
 attr(loss_sparse_categorical_crossentropy, "py_function_name") <- "sparse_categorical_crossentropy"
 
-#' @rdname loss_mean_squared_error
+#' Computes the binary crossentropy loss.
+#' 
+#' @inheritParams loss_mean_squared_error
+#' @param from_logits Whether `y_pred` is expected to be a logits tensor. By default, 
+#'   we assume that y_pred encodes a probability distribution.
+#' @param label_smoothing numeric between 0 and 1. If > 0 then smooth the labels.
+#' 
+#' @seealso [loss_mean_squared_error()]
+#' 
 #' @export
-loss_binary_crossentropy <- function(y_true, y_pred) {
-  keras$losses$binary_crossentropy(y_true, y_pred)
+loss_binary_crossentropy <- function(y_true, y_pred, from_logits = FALSE, label_smoothing = 0) {
+  if (tensorflow::tf_version() >="2.2") {
+    keras$losses$binary_crossentropy(y_true, y_pred, from_logits, label_smoothing)  
+  } else {
+    
+    if (! ((from_logits == FALSE) && (label_smoothing == 0))) {
+      warning("from_logits and label_smoothing are ignored in TF < 2.2.")
+    }
+    
+    keras$losses$binary_crossentropy(y_true, y_pred)
+  }
 }
 attr(loss_binary_crossentropy, "py_function_name") <- "binary_crossentropy"
 
@@ -157,7 +174,3 @@ loss_cosine_similarity <- function(y_true, y_pred) {
   }
 }
 attr(loss_cosine_similarity, "py_function_name") <- "cosine_similarity"
-
-
-
-

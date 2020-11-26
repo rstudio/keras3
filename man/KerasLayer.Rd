@@ -4,7 +4,9 @@
 \name{KerasLayer}
 \alias{KerasLayer}
 \title{Base R6 class for Keras layers}
-\format{An \link{R6Class} generator object #'}
+\format{
+An \link{R6Class} generator object #'
+}
 \value{
 \link{KerasLayer}.
 }
