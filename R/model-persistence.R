@@ -8,7 +8,8 @@
 #' @param include_optimizer If `TRUE`, save optimizer's state.
 #' @param custom_objects Mapping class names (or function names) of custom 
 #'   (non-Keras) objects to class/functions (for example, custom metrics
-#'   or custom loss functions).
+#'   or custom loss functions). This mapping can be done with the dict() 
+#'   of reticulate.
 #' 
 #' @details The following components of the model are saved: 
 #' 

@@ -698,6 +698,164 @@ nasnet_preprocess_input <- function(x) {
   preprocess_input(x, keras$applications$nasnet$preprocess_input)
 }
 
+#' EfficientNet B0 to B7 models for Keras.
+#' 
+#' Code is not mine (Cdk29), it has been taken from :
+#' https://github.com/rstudio/keras/commit/c406ec55f7bb2864ac58a17f963448810a531c18
+#'
+#' @details Optionally loads weights pre-trained on ImageNet. 
+#' 
+#' The `imagenet_preprocess_input()` function should be used for image preprocessing.
+#'   
+#' @inheritParams application_xception
+#'   
+#' @param input_shape optional shape list, only to be specified if `include_top`
+#'   is FALSE (otherwise the input shape has to be `(299, 299, 3)` It should
+#'   have exactly 3 inputs channels, and width and height should be no smaller
+#'   than 71. E.g. `(150, 150, 3)` would be one valid value.
+#'   
+#' @return Keras model instance.
+#' 
+#' @section Reference: - [EfficientNet: Rethinking Model Scaling for 
+#'   Convolutional Neural Networks ](https://arxiv.org/abs/1905.11946)
+#'   
+#' @name application_efficientnet 
+#'   
+#' @examples 
+#' \dontrun{
+#' library(keras)
+#' 
+#' model <- application_efficientnet_b0(weights = 'imagenet', include_top = FALSE)
+#' 
+#' img_path <- "elephant.jpg"
+#' img <- image_load(img_path, target_size = c(224,224))
+#' x <- image_to_array(img)
+#' x <- array_reshape(x, c(1, dim(x)))
+#' x <- imagenet_preprocess_input(x)
+#' 
+#' features <- model %>% predict(x)
+#' }
+#' @export
+application_efficientnet_b0 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
+                                        pooling = NULL, classes = 1000) {
+  verify_application_prerequistes()
+  keras$applications$EfficientNetB0(
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = normalize_shape(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+}
+
+#' @rdname application_efficientnet   
+#' @export
+application_efficientnet_b1 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
+                                        pooling = NULL, classes = 1000) {
+  verify_application_prerequistes()
+  keras$applications$EfficientNetB1(
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = normalize_shape(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+}
+
+#' @rdname application_efficientnet   
+#' @export
+application_efficientnet_b2 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
+                                        pooling = NULL, classes = 1000) {
+  verify_application_prerequistes()
+  keras$applications$EfficientNetB2(
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = normalize_shape(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+}
+
+#' @rdname application_efficientnet   
+#' @export
+application_efficientnet_b3 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
+                                        pooling = NULL, classes = 1000) {
+  verify_application_prerequistes()
+  keras$applications$EfficientNetB3(
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = normalize_shape(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+}
+
+#' @rdname application_efficientnet   
+#' @export
+application_efficientnet_b4 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
+                                        pooling = NULL, classes = 1000) {
+  verify_application_prerequistes()
+  keras$applications$EfficientNetB4(
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = normalize_shape(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+}
+
+#' @rdname application_efficientnet   
+#' @export
+application_efficientnet_b5 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
+                                        pooling = NULL, classes = 1000) {
+  verify_application_prerequistes()
+  keras$applications$EfficientNetB5(
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = normalize_shape(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+}
+
+#' @rdname application_efficientnet   
+#' @export
+application_efficientnet_b6 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
+                                        pooling = NULL, classes = 1000) {
+  verify_application_prerequistes()
+  keras$applications$EfficientNetB6(
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = normalize_shape(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+}
+
+#' @rdname application_efficientnet   
+#' @export
+application_efficientnet_b7 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL, 
+                                        pooling = NULL, classes = 1000) {
+  verify_application_prerequistes()
+  keras$applications$EfficientNetB7(
+    include_top = include_top,
+    weights = weights,
+    input_tensor = input_tensor,
+    input_shape = normalize_shape(input_shape),
+    pooling = pooling,
+    classes = as.integer(classes)
+  )
+}
+
+
+
 preprocess_input <- function(x, preprocessor, ...) {
   preprocessor(keras_array(x), ...)
 }
