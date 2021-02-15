@@ -106,6 +106,7 @@ Layer <- function(classname, initialize, build = NULL, call = NULL,
     defs = defs,
     inherit = inherit
   )
+  layer$`__module__` <- classname
   
   # build the function to be used
   f <- function() {

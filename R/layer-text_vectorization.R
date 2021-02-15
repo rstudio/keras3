@@ -130,7 +130,7 @@ set_vocabulary <- function(object, vocab, df_data = NULL, oov_df_value = FALSE,
   
   if (tensorflow::tf_version() < "2.3") {
     if (is.null(append)) append <- FALSE
-    object$set_vocabulary(vocab, df_data, oov_df_value, append)
+    object$set_vocabulary(vocab, df_data = df_data, oov_df_value = oov_df_value, append = append)
   } else {
     if (!is.null(append)) warning("append is ignored since tensorflow >= 2.3")
     object$set_vocabulary(vocab, df_data = df_data, oov_df_value = oov_df_value)
