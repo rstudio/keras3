@@ -19,6 +19,9 @@ test_call_succeeds("get_file", {
 
 test_call_succeeds("hdf5_matrix", {
   
+  if (tensorflow::tf_version() >= "2.4")
+    skip("hdf5 matrix have been removed in tf >= 2.4")
+  
   if (!keras:::have_h5py())
     skip("h5py not available for testing")
   
