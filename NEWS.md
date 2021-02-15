@@ -18,6 +18,7 @@
 - Simplify testing utilities by using a `helper-*` file. (#1173)
 - Deprecated `hdf5_matrix` if using TF >= 2.4 (#1175)
 - Fixed TensorFlow nightly installation on CI (#1176)
+- Support for TensorFlow v2.4: just small fixes for custom classes. (#1177)
 
 ## Keras 2.2.3.0 (CRAN)
 
