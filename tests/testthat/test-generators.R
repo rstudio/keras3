@@ -1,7 +1,7 @@
 
 context("generators")
 
-source("utils.R")
+
 
 test_succeeds("image data generator can be used for training", {
 

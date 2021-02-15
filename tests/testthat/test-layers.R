@@ -1,6 +1,6 @@
 context("layers")
 
-source("utils.R")
+
 
 test_call_succeeds("layer_input", {
   layer_input(shape = c(32))

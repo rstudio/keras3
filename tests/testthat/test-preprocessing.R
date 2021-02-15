@@ -1,7 +1,5 @@
 context("preprocessing")
 
-source(test_path("utils.R"))
-
 test_call_succeeds("pad_sequences", {
   a <- list(list(1), list(1,2), list(1,2,3))
   b <- pad_sequences(a, maxlen=3, padding='pre')    

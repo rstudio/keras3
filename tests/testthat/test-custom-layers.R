@@ -1,6 +1,6 @@
 context("custom-layers")
 
-source("utils.R")
+
 
 # Custom layer class
 CustomLayer <- R6::R6Class("CustomLayer",

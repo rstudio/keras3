@@ -1,7 +1,7 @@
 
 context("model")
 
-source("utils.R")
+
 
 test_succeeds("sequential models can be defined", {
   define_model()

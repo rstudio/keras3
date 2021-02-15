@@ -1,6 +1,6 @@
 context("examples")
 
-source("utils.R")
+
 
 # some helpers
 run_example <- function(example) {

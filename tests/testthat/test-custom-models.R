@@ -1,6 +1,6 @@
 context("custom-models")
 
-source("utils.R")
+
 
 # define model wrapper function
 library(keras)

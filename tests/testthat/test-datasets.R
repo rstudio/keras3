@@ -1,6 +1,6 @@
 context("datasets")
 
-source("utils.R")
+
 
 # these tests take a long time to load so we skip them by default
 skip <- is.na(Sys.getenv("KERAS_TEST_DATASETS", unset = NA)) && 

@@ -1,7 +1,7 @@
 
 context("model-persistence")
 
-source("utils.R")
+
 
 test_succeeds("model can be saved and loaded", {
 

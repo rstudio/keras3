@@ -1,6 +1,6 @@
 context("timeseries")
 
-source("utils.R")
+
 
 test_call_succeeds("timeseries_generator", required_version = "2.1.5", {
 
