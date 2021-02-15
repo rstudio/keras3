@@ -92,6 +92,9 @@ get_file <- function(fname, origin, file_hash = NULL, cache_subdir = "datasets",
 #' @export
 hdf5_matrix <- function(datapath, dataset, start = 0, end = NULL, normalizer = NULL) {
   
+  if (tensorflow::tf_version() >= "2.4")
+    stop("This function have been removed in TensorFlow version 2.4 or later.")
+  
   if (!have_h5py())
     stop("The h5py Python package is required to read h5 files")
   
