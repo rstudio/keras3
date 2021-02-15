@@ -1,6 +1,6 @@
 context("optimizers")
 
-source("utils.R")
+
 
 test_optimizer <- function(name) {
   optimizer_fn <- eval(parse(text = name))

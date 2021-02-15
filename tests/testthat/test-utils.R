@@ -1,6 +1,6 @@
 context("utils")
 
-source("utils.R")
+
 
 test_call_succeeds("to_categorical", {
   runif(1000, min = 0, max = 9) %>% 

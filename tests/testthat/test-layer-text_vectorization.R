@@ -1,6 +1,6 @@
 context("layer_text_vectorization")
 
-source("utils.R")
+
 
 test_call_succeeds("layer_text_vectorization", {
   

@@ -1,6 +1,6 @@
 context("freeze")
 
-source("utils.R")
+
 
 
 define_freeze_model <- function() {

@@ -1,6 +1,6 @@
 context("metrics")
 
-source("utils.R")
+
 
 test_succeeds("metrics can be used when compiling models", {
   define_model() %>% 

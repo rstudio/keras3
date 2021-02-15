@@ -1,5 +1,5 @@
 context("tfdatasets")
-source("utils.R")
+
 
 test_succeeds("Use tfdatasets to train a keras model", {
   

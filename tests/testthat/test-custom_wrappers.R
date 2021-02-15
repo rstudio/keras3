@@ -1,6 +1,6 @@
 context("custom-wrappers")
 
-source("utils.R")
+
 
 # Custom wrapper class
 CustomWrapper <- R6::R6Class(

@@ -1,6 +1,6 @@
 context("activations")
 
-source("utils.R")
+
 
 test_activation <- function(name, required_version = NULL) {
   test_succeeds(paste("use activation", name), {

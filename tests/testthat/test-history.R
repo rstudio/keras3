@@ -1,5 +1,5 @@
 context("history")
-source("utils.R")
+
 
 test_succeeds("as.data.frame works for history with early stopping", {
   

@@ -2,7 +2,7 @@
 
 context("layer methods")
 
-source("utils.R")
+
 
 
 test_succeeds("model can be saved and loaded from config", {

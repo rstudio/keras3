@@ -1,6 +1,6 @@
 context("initializers")
 
-source("utils.R")
+
 
 test_initializer <- function(name, required_version = NULL) {
   initializer_fn <- eval(parse(text = paste0("initializer_", name)))

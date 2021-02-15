@@ -1,7 +1,7 @@
 
 context("applications")
 
-source("utils.R")
+
 
 test_succeeds("keras pre-built models can be instantiated", {
   

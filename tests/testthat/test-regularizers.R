@@ -1,6 +1,6 @@
 context("regularizers")
 
-source("utils.R")
+
 
 test_regularizer <- function(name) {
   regularizer_fn <- eval(parse(text = name))

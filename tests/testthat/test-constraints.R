@@ -1,6 +1,6 @@
 context("constraints")
 
-source("utils.R")
+
 
 test_constraint <- function(name) {
   constraint_fn <- eval(parse(text = name))
