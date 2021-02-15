@@ -144,11 +144,29 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
   extra_packages <- unique(c(
     paste0("keras", version), 
     extra_packages,
-    "h5py", 
-    "pyyaml",
+    
     "requests",
     "Pillow"
   ))
+  
+  if (tensorflow == "default" || tensorflow == "nightly" || 
+      package_version(tensorflow) >= "2.4")
+  {
+    # can install the mre recent versions recently
+    extra_packages <- c(
+      extra_packages, 
+      "h5py", 
+      "pyyaml"
+    )
+  } else {
+    # we need fixed versions of hdf5 to work with older versions of
+    # tensorflow
+    extra_packages <- c(
+      extra_packages, 
+      "h5py==2.10.0", 
+      "pyyaml==3.12"
+    )
+  }
   
   # perform the install
   install_tensorflow(method = method,
