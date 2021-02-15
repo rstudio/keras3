@@ -16,6 +16,7 @@
 - Fixed bug when plotting the model history if the model used an early stopping callback (#1140)
 - `install_keras` now installs a fixed version of h5py, because newer versions are backward incompatible. (#1142)
 - Simplify testing utilities by using a `helper-*` file. (#1173)
+- Deprecated `hdf5_matrix` if using TF >= 2.4 (#1175)
 
 ## Keras 2.2.3.0 (CRAN)
 
