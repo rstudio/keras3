@@ -144,8 +144,8 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
   extra_packages <- unique(c(
     paste0("keras", version), 
     extra_packages,
-    "h5py==2.10.0", 
-    "pyyaml==3.12",
+    "h5py", 
+    "pyyaml",
     "requests",
     "Pillow"
   ))
