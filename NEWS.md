@@ -19,6 +19,7 @@
 - Deprecated `hdf5_matrix` if using TF >= 2.4 (#1175)
 - Fixed TensorFlow nightly installation on CI (#1176)
 - Support for TensorFlow v2.4: just small fixes for custom classes. (#1177)
+- Added `untar` argument to `get_file` as it seems to be slightly different from `extract` (#1179)
 
 ## Keras 2.2.3.0 (CRAN)
 
