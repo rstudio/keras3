@@ -53,13 +53,16 @@ to_categorical <- function(y, num_classes = NULL, dtype = "float32") {
 #'   return no matches found.
 #' @param cache_dir Location to store cached files, when `NULL` it defaults to
 #'   the Keras configuration directory.
+#' @param untar Deprecated in favor of 'extract'. boolean, whether the file should 
+#'   be decompressed
 #'   
 #' @return Path to the downloaded file
 #'   
 #' @export
 get_file <- function(fname, origin, file_hash = NULL, cache_subdir = "datasets", 
                      hash_algorithm = "auto", extract = FALSE,
-                     archive_format = "auto", cache_dir = NULL) {
+                     archive_format = "auto", cache_dir = NULL,
+                     untar = FALSE) {
   resolve_utils()$get_file(
     fname = normalize_path(fname),
     origin = origin,
@@ -68,7 +71,8 @@ get_file <- function(fname, origin, file_hash = NULL, cache_subdir = "datasets",
     hash_algorithm = hash_algorithm,
     extract = extract,
     archive_format = archive_format,
-    cache_dir = normalize_path(cache_dir)
+    cache_dir = normalize_path(cache_dir),
+    untar = untar
   )
 }
 

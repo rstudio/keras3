@@ -12,7 +12,8 @@ get_file(
   hash_algorithm = "auto",
   extract = FALSE,
   archive_format = "auto",
-  cache_dir = NULL
+  cache_dir = NULL,
+  untar = FALSE
 )
 }
 \arguments{
@@ -41,6 +42,9 @@ return no matches found.}
 
 \item{cache_dir}{Location to store cached files, when \code{NULL} it defaults to
 the Keras configuration directory.}
+
+\item{untar}{Deprecated in favor of 'extract'. boolean, whether the file should
+be decompressed}
 }
 \value{
 Path to the downloaded file
