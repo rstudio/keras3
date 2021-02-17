@@ -20,7 +20,8 @@ load_model_hdf5(filepath, custom_objects = NULL, compile = TRUE)
 
 \item{custom_objects}{Mapping class names (or function names) of custom
 (non-Keras) objects to class/functions (for example, custom metrics
-or custom loss functions).}
+or custom loss functions). This mapping can be done with the dict()
+function of reticulate.}
 
 \item{compile}{Whether to compile the model after loading.}
 }
