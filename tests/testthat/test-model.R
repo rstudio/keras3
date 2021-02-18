@@ -18,7 +18,6 @@ test_succeeds(required_version = "2.0.7", "models can be cloned", {
 })
 
 
-
 # generate dummy training data
 data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)
 labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
@@ -158,6 +157,31 @@ test_succeeds("can print a sequential model that is not built", {
     print(model),
     regexp = "no summary available"
   )
+  
+})
+
+test_succeeds("can use a loss function defined in python", {
+  
+  model <- define_model()
+  pyfun <- reticulate::py_run_string("
+import tensorflow as tf
+def loss_fn (y_true, y_pred):
+  return tf.keras.losses.categorical_crossentropy(y_true, y_pred)
+
+")
+  
+  model %>% 
+    compile(
+      loss = pyfun$loss_fn,
+      optimizer = "adam"
+    )
+  
+  # generate dummy training data
+  data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)
+  labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
+  
+  
+  model %>% fit(x = data, y = labels)
   
 })
 
