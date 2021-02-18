@@ -33,7 +33,8 @@ Imports:
     magrittr, 
     zeallot,
     methods,
-    R6
+    R6,
+    rlang
 Suggests: 
     ggplot2,
     testthat (>= 2.1.0),

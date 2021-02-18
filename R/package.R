@@ -168,7 +168,13 @@ resolve_implementation_module <- function() {
 }
 
 get_keras_implementation <- function(default = "tensorflow") {
-  get_keras_option("KERAS_IMPLEMENTATION", default = default)
+  out <- get_keras_option("KERAS_IMPLEMENTATION", default = default)
+  if (out != "tensorflow")
+    rlang::warn(c(
+      paste0("We no longer support the '", out, "' Keras implementation."),
+      "Use Sys.setenv(KERAS_IMPLEMENTATION='tensorflow') or unset that environment variable."
+    ), .frequency = "once", .frequency_id = "implementation")
+  out
 }
 
 get_keras_python <- function(default = NULL) {
