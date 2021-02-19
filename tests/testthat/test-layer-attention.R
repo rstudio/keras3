@@ -1,5 +1,8 @@
 test_succeeds("multi_head_attention", {
   
+  if (tensorflow::tf_version() < "2.4")
+    skip("requires tf_version() >= 2.4")
+  
   layer <- layer_multi_head_attention(num_heads=2, key_dim=2, name = "hello")
   target <- layer_input(shape=c(8, 16))
   source <- layer_input(shape=c(4, 16))

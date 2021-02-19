@@ -83,7 +83,7 @@ layer_attention <- function(inputs,use_scale=FALSE, causal = FALSE, batch_size =
 #'   (inference) if there is no parent layer.
 #' 
 #' @return 
-#' - attention_output: The result of the computation, of shape [B, T, E], where 
+#' - attention_output: The result of the computation, of shape `[B, T, E]`, where 
 #'   T is for target sequence shapes and E is the query input last dimension if 
 #'   output_shape is None. Otherwise, the multi-head outputs are project to the 
 #'   shape specified by output_shape.
@@ -108,6 +108,10 @@ layer_multi_head_attention <- function(
   bias_constraint=NULL,
   ...
 ) {
+  
+  if (tensorflow::tf_version() < "2.4")
+    stop("layer_multi_head_attention requires tf_version() >= 2.4")
+  
   create_layer(keras$layers$MultiHeadAttention, inputs, list(
     num_heads=as.integer(num_heads),
     key_dim=as.integer(key_dim),

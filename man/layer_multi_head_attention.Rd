@@ -58,7 +58,7 @@ layer_multi_head_attention(
 }
 \value{
 \itemize{
-\item attention_output: The result of the computation, of shape \link{B, T, E}, where
+\item attention_output: The result of the computation, of shape \verb{[B, T, E]}, where
 T is for target sequence shapes and E is the query input last dimension if
 output_shape is None. Otherwise, the multi-head outputs are project to the
 shape specified by output_shape.
