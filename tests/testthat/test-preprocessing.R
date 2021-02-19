@@ -175,3 +175,32 @@ test_succeeds("flow images from directory works", {
   eva <- evaluate_generator(model, gen, steps = 10)
 })
 
+test_succeeds("images_dataset_from_directory", {
+  
+  if (tensorflow::tf_version() < "2.3")
+    skip("requires tf_version() >= 2.3")
+  
+  dir <- tempfile()
+  dir.create(dir)
+  dir.create(file.path(dir, "0"))
+  dir.create(file.path(dir, "1"))
+  
+  mnist <- dataset_mnist()
+  ind <- which(mnist$train$y %in% c(0, 1))
+  
+  for (i in ind) {
+    img <- mnist$train$x[i,,]/255
+    rname <- paste(sample(letters, size = 10, replace = TRUE), collapse = "")
+    jpeg::writeJPEG(img, target = paste0(dir, "/", mnist$train$y[i], "/", rname, ".jpeg"))
+  }
+  
+  data <- image_dataset_from_directory(dir)
+  
+  iter <- reticulate::as_iterator(data)
+  d <- reticulate::iter_next(iter)
+  
+  expect_equal(d[[1]]$shape$as_list(), c(32, 256, 256, 3))
+  expect_equal(d[[2]]$shape$as_list(), c(32))
+  
+})
+

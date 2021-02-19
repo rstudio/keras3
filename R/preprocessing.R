@@ -968,6 +968,88 @@ flow_images_from_dataframe <- function(
   do.call(generator$flow_from_dataframe, args)
 }
 
+#' Create a dataset from a directory
+#' 
+#' Generates a `tf.data.Dataset` from image files in a directory.
+#' If your directory structure is:
+#'
+#'
+#' @param directory Directory where the data is located. If labels is "inferred", 
+#'   it should contain subdirectories, each containing images for a class. 
+#'   Otherwise, the directory structure is ignored.
+#' @param labels Either "inferred" (labels are generated from the directory 
+#'   structure), or a list/tuple of integer labels of the same size as the number 
+#'   of image files found in the directory. Labels should be sorted according to 
+#'   the alphanumeric order of the image file paths (obtained via 
+#'   os.walk(directory) in Python).
+#' @param label_mode - 'int': means that the labels are encoded as integers 
+#'   (e.g. for sparse_categorical_crossentropy loss). - 'categorical' means that 
+#'   the labels are encoded as a categorical vector (e.g. for 
+#'   categorical_crossentropy loss). - 'binary' means that the labels (there can
+#'   be only 2) are encoded as float32 scalars with values 0 or 1 (e.g. for 
+#'   binary_crossentropy). - None (no labels).
+#' @param class_names Only valid if "labels" is "inferred". This is the explict 
+#'   list of class names (must match names of subdirectories). Used to control 
+#'   the order of the classes (otherwise alphanumerical order is used).
+#' @param color_mode One of "grayscale", "rgb", "rgba". Default: "rgb". Whether 
+#'   the images will be converted to have 1, 3, or 4 channels.
+#' @param batch_size Size of the batches of data. Default: 32.
+#' @param image_size Size to resize images to after they are read from disk. 
+#'   Defaults to (256, 256). Since the pipeline processes batches of images that 
+#'   must all have the same size, this must be provided.
+#' @param shuffle Whether to shuffle the data. Default: TRUE. If set to FALSE, 
+#'   sorts the data in alphanumeric order.
+#' @param seed Optional random seed for shuffling and transformations.
+#' @param validation_split Optional float between 0 and 1, fraction of data to 
+#'   reserve for validation.
+#' @param subset One of "training" or "validation". Only used if validation_split 
+#'   is set.
+#' @param interpolation String, the interpolation method used when resizing 
+#'   images. Defaults to bilinear. Supports bilinear, nearest, bicubic, area, 
+#'   lanczos3, lanczos5, gaussian, mitchellcubic.
+#' @param follow_links Whether to visits subdirectories pointed to by symlinks. 
+#'   Defaults to FALSE.
+#'   
+#' @export
+image_dataset_from_directory <- function(
+  directory,
+  labels="inferred",
+  label_mode="int",
+  class_names=NULL,
+  color_mode="rgb",
+  batch_size=32,
+  image_size=c(256, 256),
+  shuffle=TRUE,
+  seed=NULL,
+  validation_split=NULL,
+  subset=NULL,
+  interpolation="bilinear",
+  follow_links=FALSE
+) {
+  
+  if (!is.character(labels))
+    labels <- as.integer(labels)
+  
+  args <- list(
+    directory=normalizePath(directory, mustWork = FALSE),
+    labels=labels,
+    label_mode=label_mode,
+    class_names=class_names,
+    color_mode=color_mode,
+    batch_size=as.integer(batch_size),
+    image_size=as_integer_tuple(image_size),
+    shuffle=shuffle,
+    seed=as_nullable_integer(seed),
+    validation_split=validation_split,
+    subset=subset,
+    interpolation=interpolation,
+    follow_links=follow_links
+  )
+  
+  out <- do.call(keras$preprocessing$image_dataset_from_directory, args)
+  class(out) <- c("tf_dataset", class(out))
+  out
+}
 
 
 
