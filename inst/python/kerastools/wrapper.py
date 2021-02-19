@@ -7,7 +7,9 @@ if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'keras'):
 else:
   from tensorflow.python.keras.layers import Wrapper
   def shape_filter(shape):
-    if not isinstance(shape, list):
+    if isinstance(shape, tuple):
+      return list(shape)
+    elif not isinstance(shape, list):
       return shape.as_list()
     else:
       return shape

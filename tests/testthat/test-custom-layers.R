@@ -54,3 +54,55 @@ test_succeeds("Use an R-based custom Keras layer", {
     layer_dense(units = 32, input_shape = c(32,32)) %>% 
     layer_custom(output_dim = 32)
 })
+
+test_succeeds("Custom layer with time distributed layer", {
+  
+  CustomLayer <- R6::R6Class(
+    "CustomLayer",
+    
+    inherit = KerasLayer,
+    
+    public = list(
+      
+      output_dim = NULL,
+      
+      kernel = NULL,
+      
+      initialize = function(output_dim) {
+        self$output_dim <- as.integer(output_dim)
+      },
+      
+      build = function(input_shape) {
+        self$kernel <- self$add_weight(
+          name = 'kernel',
+          shape = list(input_shape[[2]], self$output_dim),
+          initializer = initializer_random_normal(),
+          trainable = TRUE
+        )
+      },
+      
+      call = function(x, mask = NULL) {
+        k_dot(x, self$kernel)
+      },
+      
+      compute_output_shape = function(input_shape) {
+        list(input_shape[[1]], self$output_dim)
+      }
+    )
+  )
+  
+  layer_custom <- function(object, output_dim, name = NULL, trainable = TRUE) {
+    create_layer(CustomLayer, object, list(
+      output_dim = as.integer(output_dim),
+      name = name,
+      trainable = trainable
+    ))
+  }
+  
+  x <- array(1, dim = c(100, 4, 4, 4))
+  td <- time_distributed(layer = layer_custom(output_dim = 32))
+  o <- td(x)
+  
+  expect_equal(o$shape$as_list(), c(100, 4,4,32))
+  
+})
