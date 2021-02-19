@@ -21,6 +21,7 @@
 - Support for TensorFlow v2.4: just small fixes for custom classes. (#1177)
 - Added `untar` argument to `get_file` as it seems to be slightly different from `extract` (#1179)
 - Warn when not using the tensorflow implementation of Keras (#1181)
+- Added `layer_layer_normalization` (#1183)
 
 ## Keras 2.2.3.0 (CRAN)
 
