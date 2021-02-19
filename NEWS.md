@@ -23,6 +23,7 @@
 - Warn when not using the tensorflow implementation of Keras (#1181)
 - Added `layer_layer_normalization` (#1183)
 - Added `layer_multihead_attention` (#1184)
+- Added `image_dataset_from_directory` (#1185)
 
 ## Keras 2.2.3.0 (CRAN)
 
