@@ -110,3 +110,71 @@ layer_batch_normalization <- function(object, axis = -1L, momentum = 0.99, epsil
     weights = weights
   ))
 }
+
+
+#' Layer normalization layer (Ba et al., 2016).
+#' 
+#' Normalize the activations of the previous layer for each given example in a 
+#' batch independently, rather than across a batch like Batch Normalization. i.e. 
+#' applies a transformation that maintains the mean activation within each example
+#' close to 0 and the activation standard deviation close to 1.
+#' 
+#' Given a tensor inputs, moments are calculated and normalization is performed 
+#' across the axes specified in axis.
+#' 
+#' @inheritParams layer_dense
+#' @param axis Integer or List/Tuple. The axis or axes to normalize across. 
+#'   Typically this is the features axis/axes. The left-out axes are typically 
+#'   the batch axis/axes. This argument defaults to -1, the last dimension in 
+#'   the input.
+#' @param epsilon Small float added to variance to avoid dividing by zero. 
+#'   Defaults to 1e-3
+#' @param center If True, add offset of beta to normalized tensor. If False, 
+#'   beta is ignored. Defaults to True.
+#' @param scale If True, multiply by gamma. If False, gamma is not used. 
+#'   Defaults to True. When the next layer is linear (also e.g. nn.relu), this 
+#'   can be disabled since the scaling will be done by the next layer.
+#' @param beta_initializer Initializer for the beta weight. Defaults to zeros.
+#' @param gamma_initializer Initializer for the gamma weight. Defaults to ones.
+#' @param beta_regularizer Optional regularizer for the beta weight. 
+#'   None by default.
+#' @param gamma_regularizer Optional regularizer for the gamma weight. 
+#'   None by default.
+#' @param beta_constraint Optional constraint for the beta weight. None by default.
+#' @param gamma_constraint Optional constraint for the gamma weight. 
+#'   None by default.
+#' @param trainable Boolean, if True the variables will be marked as trainable. 
+#'   Defaults to True.
+#'   
+#' @export
+layer_layer_normalization <- function(
+  object,
+  axis=-1,
+  epsilon=0.001,
+  center=TRUE,
+  scale=TRUE,
+  beta_initializer="zeros",
+  gamma_initializer="ones",
+  beta_regularizer=NULL,
+  gamma_regularizer=NULL,
+  beta_constraint=NULL,
+  gamma_constraint=NULL,
+  trainable=TRUE,
+  name=NULL
+) {
+  
+  create_layer(keras$layers$LayerNormalization, object, list(
+    axis=as.integer(axis),
+    epsilon=epsilon,
+    center=center,
+    scale=scale,
+    beta_initializer=beta_initializer,
+    gamma_initializer=gamma_initializer,
+    beta_regularizer=beta_regularizer,
+    gamma_regularizer=gamma_regularizer,
+    beta_constraint=beta_constraint,
+    gamma_constraint=gamma_constraint,
+    trainable=trainable,
+    name=name
+  ))
+}
