@@ -49,6 +49,7 @@ layer_attention <- function(inputs,use_scale=FALSE, causal = FALSE, batch_size =
 #' Finally, the result tensor with the last dimension as value_dim can take an
 #' linear projection and return.
 #' 
+#' @inheritParams layer_attention
 #' @param num_heads Number of attention heads.
 #' @param key_dim Size of each attention head for query and key.
 #' @param value_dim Size of each attention head for value.
@@ -63,6 +64,7 @@ layer_attention <- function(inputs,use_scale=FALSE, causal = FALSE, batch_size =
 #' @param activity_regularizer Regularizer for dense layer activity.
 #' @param kernel_constraint Constraint for dense layer kernels.
 #' @param bias_constraint Constraint for dense layer kernels.
+#' @param ... Other arguments passed to the layer. Eg, `name`, `training`.
 #' 
 #' @section Call arguments:
 #' 

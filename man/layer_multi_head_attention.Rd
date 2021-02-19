@@ -24,6 +24,8 @@ layer_multi_head_attention(
 )
 }
 \arguments{
+\item{inputs}{a list of inputs first should be the query tensor, the second the value tensor}
+
 \item{num_heads}{Number of attention heads.}
 
 \item{key_dim}{Size of each attention head for query and key.}
@@ -51,6 +53,8 @@ layer_multi_head_attention(
 \item{kernel_constraint}{Constraint for dense layer kernels.}
 
 \item{bias_constraint}{Constraint for dense layer kernels.}
+
+\item{...}{Other arguments passed to the layer. Eg, \code{name}, \code{training}.}
 }
 \value{
 \itemize{
