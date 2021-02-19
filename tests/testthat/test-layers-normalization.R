@@ -6,6 +6,6 @@ test_succeeds("layer normalization", {
   layer <- layer_layer_normalization(axis=1)
   output <- as.matrix(layer(data))
   
-  expect_equal(output[,1], rep(-1+2e-5+2e-8, 5))
-  expect_equal(output[,2], rep(1-2e-5-2e-8, 5))
+  expect_equal(output[,1], rep(-1+2e-5+2e-8, 5), tolerance = 1e-6)
+  expect_equal(output[,2], rep(1-2e-5-2e-8, 5), tolerance = 1e-6)
 })
