@@ -17,8 +17,7 @@ layer_layer_normalization(
   beta_constraint = NULL,
   gamma_constraint = NULL,
   trainable = TRUE,
-  name = NULL,
-  ...
+  name = NULL
 )
 }
 \arguments{
