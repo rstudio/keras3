@@ -160,8 +160,7 @@ layer_layer_normalization <- function(
   beta_constraint=NULL,
   gamma_constraint=NULL,
   trainable=TRUE,
-  name=NULL,
-  ...
+  name=NULL
 ) {
   
   create_layer(keras$layers$LayerNormalization, object, list(
