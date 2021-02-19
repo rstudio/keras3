@@ -177,6 +177,9 @@ test_succeeds("flow images from directory works", {
 
 test_succeeds("images_dataset_from_directory", {
   
+  if (tensorflow::tf_version() < "2.3")
+    skip("requires tf_version() >= 2.3")
+  
   dir <- tempfile()
   dir.create(dir)
   dir.create(file.path(dir, "0"))
