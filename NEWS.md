@@ -24,6 +24,7 @@
 - Added `layer_layer_normalization` (#1183)
 - Added `layer_multihead_attention` (#1184)
 - Added `image_dataset_from_directory` (#1185)
+- Fixed bug when using a custom layer with a time distributed adverb. (#1188)
 
 ## Keras 2.2.3.0 (CRAN)
 
