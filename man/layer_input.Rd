@@ -10,7 +10,8 @@ layer_input(
   name = NULL,
   dtype = NULL,
   sparse = FALSE,
-  tensor = NULL
+  tensor = NULL,
+  ragged = FALSE
 )
 }
 \arguments{
@@ -34,6 +35,10 @@ isn't provided.}
 
 \item{tensor}{Existing tensor to wrap into the \code{Input} layer. If set, the
 layer will not create a placeholder tensor.}
+
+\item{ragged}{A boolean specifying whether the placeholder to be created is
+ragged. Only one of 'ragged' and 'sparse' can be \code{TRUE} In this case, values
+of 'NULL' in the 'shape' argument represent ragged dimensions.}
 }
 \value{
 A tensor
