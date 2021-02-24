@@ -4,6 +4,7 @@ context("layers")
 
 test_call_succeeds("layer_input", {
   layer_input(shape = c(32))
+  input <- layer_input(ragged = TRUE)
 })
 
 test_call_succeeds("layer_dense", {

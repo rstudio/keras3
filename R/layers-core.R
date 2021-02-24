@@ -19,6 +19,9 @@
 #' @param sparse Boolean, whether the placeholder created is meant to be sparse.
 #' @param tensor Existing tensor to wrap into the `Input` layer. If set, the
 #'   layer will not create a placeholder tensor.
+#' @param ragged A boolean specifying whether the placeholder to be created is 
+#'   ragged. Only one of 'ragged' and 'sparse' can be `TRUE` In this case, values 
+#'   of 'NULL' in the 'shape' argument represent ragged dimensions. 
 #'   
 #' @return A tensor   
 #'   
@@ -26,13 +29,17 @@
 #'   
 #' @export
 layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
-                        dtype = NULL, sparse = FALSE, tensor = NULL) {
+                        dtype = NULL, sparse = FALSE, tensor = NULL,
+                        ragged = FALSE) {
   args <- list(
     name = name,
     dtype = ifelse(is.null(dtype), keras$backend$floatx(), dtype),
     sparse = sparse,
     tensor = tensor
   )
+  
+  if (tensorflow::tf_version() >= "2.1")
+    args$ragged <- ragged
   
   if (!missing(shape))
     args$shape <- normalize_shape(shape)
