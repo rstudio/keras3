@@ -452,6 +452,7 @@ fit.keras.engine.training.Model <-
     initial_epoch = as.integer(initial_epoch)
   )
   
+
   # resolve validation_Data (check for TF dataset)
   if (!is.null(validation_data)) {
     dataset <- resolve_tensorflow_dataset(validation_data)
@@ -459,26 +460,24 @@ fit.keras.engine.training.Model <-
       args$validation_data <- dataset
     else {
       args$validation_data <- keras_array(validation_data)  
-      
       if (tensorflow::tf_version() >="2.2")
         args$validation_data <- do.call(reticulate::tuple, args$validation_data)
-      
     }
-      
   }
-    
+  
   # resolve x and y (check for TF dataset)
   dataset <- resolve_tensorflow_dataset(x)
   if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
     args$x <- dataset
-    
     if (!is.null(batch_size))
       stop("You should not specify a `batch_size` if using a tfdataset.", 
            call. = FALSE)
-    
   } else if (!is.null(dataset)) {
     args$x <- dataset[[1]]
     args$y <- dataset[[2]]
+  } else if (is.function(x)) {
+    # handle R generators
+    args$x <- as_generator(x)
   } else {
     if (!is.null(x))
       args$x <- keras_array(x)
@@ -491,8 +490,26 @@ fit.keras.engine.training.Model <-
     args$validation_steps <- as_nullable_integer(validation_steps)
   }
   
-  # fit the model
-  history <- do.call(object$fit, args)
+  # check if any generators should run on the main thread.
+  use_main_thread_generator <- 
+    is_main_thread_generator(x)
+  
+  if (use_main_thread_generator) {
+    # if this is a main thread generator we need to call
+    # fit from a different thread and leave the main thread available
+    # to compute values.
+    python_path <- system.file("python", package = "keras")
+    tools <- reticulate::import_from_path("kerastools", path = python_path)
+    generator <- args$x
+    args$x <- NULL
+    browser()
+    args <- do.call(reticulate::dict, args)
+    history <- tools$generator$fit_thread(model, generator, args)
+    
+  } else {
+    # fit the model
+    history <- do.call(object$fit, args)  
+  }
   
   # convert to a keras_training history object
   history <- to_keras_training_history(history)
@@ -503,7 +520,7 @@ fit.keras.engine.training.Model <-
   # return the history invisibly
   invisible(history)
 }
-
+  
 #' Evaluate a Keras model
 
 #' @inheritParams fit.keras.engine.training.Model
@@ -820,15 +837,10 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
                           validation_data = NULL, validation_steps = NULL, 
                           class_weight = NULL, max_queue_size = 10, workers = 1, initial_epoch = 0) {
   
-  # resolve view_metrics
-  if (identical(view_metrics, "auto"))
-    view_metrics <- resolve_view_metrics(verbose, epochs, object$metrics)
-  
-  if (is.list(validation_data))
-    validation_data <- do.call(reticulate::tuple, keras_array(validation_data))
-  
-  history <- call_generator_function(object$fit_generator, list(
-    generator = generator,
+  # redirect to `model.fit`
+  args <- list(
+    object = object,
+    x = generator,
     steps_per_epoch = as.integer(steps_per_epoch),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
@@ -839,16 +851,9 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
     max_queue_size = as.integer(max_queue_size),
     workers = as.integer(workers),
     initial_epoch = as.integer(initial_epoch) 
-  ))
+  )
   
-  # convert to a keras_training history object
-  history <- to_keras_training_history(history)
-  
-  # write metadata from history
-  write_history_metadata(history)
-  
-  # return the history invisibly
-  invisible(history)
+  do.call(fit, args)
 }
 
 #' Evaluates the model on a data generator.
