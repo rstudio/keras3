@@ -120,9 +120,6 @@ test_succeeds("R function can be used as custom generator", {
 
 test_succeeds("R function can be used as custom generator with multiple inputs", {
   
-  if (tensorflow::tf_version() >= "2.1")
-    skip("TODO: R based generators are not working with TF >= 2.1")
-  
   input1 <- layer_input(shape = 1)
   input2 <- layer_input(shape = 1)
   
@@ -139,14 +136,11 @@ test_succeeds("R function can be used as custom generator with multiple inputs",
   
   model %>% fit_generator(generator, steps_per_epoch = 10, 
                           validation_data = generator, validation_steps = 2,
-                          verbose = 0)
+                          verbose = 1)
 })
 
 test_succeeds("Fixed validation_data instead of generator with fit_generator", {
 
-  if (tensorflow::tf_version() >= "2.1")
-    skip("TODO: R based generators are not working with TF >= 2.1")
-  
   input1 <- layer_input(shape = 1)
   input2 <- layer_input(shape = 1)
   
@@ -169,9 +163,6 @@ test_succeeds("Fixed validation_data instead of generator with fit_generator", {
 })
 
 test_succeeds("Can use a custom preprocessing function in image_data_generator", {
-  
-  if (tensorflow::tf_version() >= "2.1")
-    skip("TODO: R based generators are not working with TF >= 2.1")
   
   img_gen <- image_data_generator(preprocessing_function = function(x) x/255)
   

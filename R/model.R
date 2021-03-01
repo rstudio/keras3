@@ -383,6 +383,10 @@ resolve_validation_data <- function(validation_data) {
     dataset <- resolve_tensorflow_dataset(validation_data)
     if (!is.null(dataset))
       args$validation_data <- dataset
+    else if (is.function(validation_data))
+      args$validation_data <- as_generator(validation_data)
+    else if (inherits(validation_data, "python.builtin.iterator"))
+      args$validation_data <- validation_data
     else {
       args$validation_data <- keras_array(validation_data)  
       if (tensorflow::tf_version() >="2.2")
@@ -525,6 +529,12 @@ fit.keras.engine.training.Model <-
   if (is_main_thread_generator(x)) {
     main_thr <- resolve_main_thread_generators(args$x)
     args$x <- main_thr$generator
+    extra_callbacks <- c(extra_callbacks, main_thr$callback)
+  }
+  
+  if (is_main_thread_generator(validation_data)) {
+    main_thr <- resolve_main_thread_generators(args$validation_data, "on_test_batch_begin")
+    args$validation_data <- main_thr$generator
     extra_callbacks <- c(extra_callbacks, main_thr$callback)
   }
   
