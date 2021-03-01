@@ -878,6 +878,22 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
                           validation_data = NULL, validation_steps = NULL, 
                           class_weight = NULL, max_queue_size = 10, workers = 1, initial_epoch = 0) {
   
+  if (tensorflow::tf_version() <= "2.0")
+    return(fit_generator_legacy(
+      object = object, 
+      generator = generator, 
+      steps_per_epoch = steps_per_epoch, 
+      epochs = epochs,
+      verbose=verbose,
+      view_metrics = view_metrics,
+      validation_data = validation_data,
+      validation_steps = validation_steps,
+      class_weight = class_weight,
+      max_queue_size = max_queue_size,
+      workers = workers,
+      initial_epoch = initial_epoch
+    ))
+  
   # redirect to `model.fit`
   args <- list(
     object = object,
@@ -919,6 +935,11 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
 evaluate_generator <- function(object, generator, steps, max_queue_size = 10, workers = 1,
                                callbacks = NULL) {
   
+  if (tensorflow::tf_version() <= "2.0")
+    return(evaluate_generator_legacy(
+      object, generator, steps, max_queue_size, workers,
+      callbacks))
+  
   args <- list(
     object = object,
     x = generator,
@@ -956,6 +977,10 @@ evaluate_generator <- function(object, generator, steps, max_queue_size = 10, wo
 #' @export
 predict_generator <- function(object, generator, steps, max_queue_size = 10, workers = 1, verbose = 0,
                               callbacks = NULL) {
+  
+  if (tensorflow::tf_version() <= "2.0")
+    return(predict_generator_legacy(object, generator, steps, max_queue_size, 
+                             workers, verbose, callbacks))
   
   args <- list(
     object = object,
