@@ -70,11 +70,7 @@ test_succeeds("image data generator can be used for training", {
 
 test_succeeds("R function can be used as custom generator", {
  
-  if (tensorflow::tf_version() >= "2.1")
-    skip("TODO: R based generators are not working with TF >= 2.1")
-  
   # create model
-  library(keras)
   model <- keras_model_sequential()
   
   # add layers and compile the model
@@ -108,7 +104,7 @@ test_succeeds("R function can be used as custom generator", {
   # Train the model, iterating on the data in batches of 32 samples
   model %>% 
     fit_generator(sampling_generator(X_train, Y_train, batch_size = 32), 
-                  steps_per_epoch = 10, epochs = 2, verbose = 0)
+                  steps_per_epoch = 10, epochs = 2, verbose = 1)
   
   # Evaluate the model
   model %>% 
