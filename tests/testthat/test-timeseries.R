@@ -18,5 +18,5 @@ test_call_succeeds("timeseries_generator", required_version = "2.1.5", {
     metrics = "accuracy"
   )
   
-  model %>% fit_generator(data_gen, steps_per_epoch = 10)
+  model %>% fit_generator(data_gen, steps_per_epoch = 10, validation_data = data_gen)
 })

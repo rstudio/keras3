@@ -358,15 +358,14 @@ resolve_input_data <- function(x, y = NULL) {
   args <- list()
   if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
     args$x <- dataset
-    if (!is.null(batch_size))
-      stop("You should not specify a `batch_size` if using a tfdataset.", 
-           call. = FALSE)
   } else if (!is.null(dataset)) {
     args$x <- dataset[[1]]
     args$y <- dataset[[2]]
   } else if (is.function(x)) {
     args$x <- as_generator(x)
   } else if (inherits(x, "python.builtin.iterator")) {
+    args$x <- x
+  } else if (inherits(x, "keras.utils.data_utils.Sequence")) {
     args$x <- x
   } else {
     if (!is.null(x))
@@ -386,6 +385,8 @@ resolve_validation_data <- function(validation_data) {
     else if (is.function(validation_data))
       args$validation_data <- as_generator(validation_data)
     else if (inherits(validation_data, "python.builtin.iterator"))
+      args$validation_data <- validation_data
+    else if (inherits(validation_data, "keras.utils.data_utils.Sequence"))
       args$validation_data <- validation_data
     else {
       args$validation_data <- keras_array(validation_data)  
