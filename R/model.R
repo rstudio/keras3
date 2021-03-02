@@ -398,6 +398,11 @@ resolve_validation_data <- function(validation_data) {
 }
 
 resolve_main_thread_generators <- function(x, callback_type = "on_train_batch_begin") {
+  
+  if (tensorflow::tf_version() == "2.1")
+    stop("Using generators that call R functions is not supported in TensorFlow 2.1 ",
+         "Please upgrade your TF installation or downgrade to 2.0", call. = FALSE)
+  
   # we need a hack to make sure the generator is evaluated in the main thread.
   python_path <- system.file("python", package = "keras")
   tools <- reticulate::import_from_path("kerastools", path = python_path)
