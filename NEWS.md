@@ -26,6 +26,7 @@
 - Added `image_dataset_from_directory` (#1185)
 - Fixed bug when using a custom layer with a time distributed adverb. (#1188)
 - Added the `ragged` argument to `layer_input`. (#1193)
+- Fixed `*_generator` deadlocks with recent versions of TensorFlow (#1197)
 
 ## Keras 2.2.3.0 (CRAN)
 
