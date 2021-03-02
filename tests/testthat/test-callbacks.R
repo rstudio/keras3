@@ -165,7 +165,7 @@ expect_warns_and_out <- function(warns, out) {
 
 test_succeeds("on predict/evaluation callbacks", {
   
-  if (tensorflow::tf_version() == "2.1")
+  if (tensorflow::tf_version() <= "2.1")
     skip("don't work in tf2.1")
   
   CustomCallback <- R6::R6Class(
@@ -208,7 +208,7 @@ test_succeeds("on predict/evaluation callbacks", {
   
   warns <- capture_warnings(
     out <- capture_output(
-      pred <- predict_generator(model, gen, callbacks = cc, steps = 1)  
+      pred <- predict(model, gen, callbacks = cc, steps = 1)  
     )
   )
   expect_warns_and_out(warns, out)
@@ -227,7 +227,7 @@ test_succeeds("on predict/evaluation callbacks", {
   
   warns <- capture_warnings(
     out <- capture_output(
-      ev <- evaluate_generator(model, gen, callbacks = cc, steps = 1)
+      ev <- evaluate(model, gen, callbacks = cc, steps = 1)
     )
   )
   expect_warns_and_out(warns, out)

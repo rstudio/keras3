@@ -17,7 +17,8 @@ test_call_succeeds("timeseries_generator", required_version = "2.1.5", {
     loss = "binary_crossentropy",
     metrics = "accuracy"
   )
-  
-  model %>% fit_generator(data_gen, steps_per_epoch = 10, 
-                          validation_data = data_gen, validation_steps = 2)
+  expect_warning_if(tensorflow::tf_version() >= "2.1", {
+    model %>% fit_generator(data_gen, steps_per_epoch = 10, 
+                            validation_data = data_gen, validation_steps = 2)  
+  })
 })
