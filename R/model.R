@@ -433,7 +433,9 @@ resolve_main_thread_generators <- function(x, callback_type = "on_train_batch_be
 #' @param x Vector, matrix, or array of training data (or list if the model has
 #'   multiple inputs). If all inputs in the model are named, you can also pass a
 #'   list mapping input names to data. `x` can be `NULL` (default) if feeding 
-#'   from framework-native tensors (e.g. TensorFlow data tensors).
+#'   from framework-native tensors (e.g. TensorFlow data tensors). You can also
+#'   pass a `tfdataset` or a generator returning a list with `(inputs, targets)` or 
+#'   `(inputs, targets, sample_weights)`.
 #' @param y  Vector, matrix, or array of target (label) data (or list if the model has
 #'   multiple outputs). If all outputs in the model are named, you can also pass
 #'   a list mapping output names to data. `y` can be `NULL` (default) if feeding 
@@ -571,7 +573,9 @@ fit.keras.engine.training.Model <-
 #' @param x Vector, matrix, or array of test data (or list if the model has
 #'   multiple inputs). If all inputs in the model are named, you can also pass a
 #'   list mapping input names to data. `x` can be `NULL` (default) if feeding 
-#'   from framework-native tensors (e.g. TensorFlow data tensors).
+#'   from framework-native tensors (e.g. TensorFlow data tensors). You can also
+#'   pass a `tfdataset` or a generator returning a list with `(inputs, targets)` or 
+#'   `(inputs, targets, sample_weights)`.
 #' @param y  Vector, matrix, or array of target (label) data (or list if the model has
 #'   multiple outputs). If all outputs in the model are named, you can also pass
 #'   a list mapping output names to data. `y` can be `NULL` (default) if feeding 
@@ -652,7 +656,9 @@ resolve_callbacks <- function(args, callbacks) {
 #' @inheritParams evaluate.keras.engine.training.Model
 #'
 #' @param object Keras model
-#' @param x Input data (vector, matrix, or array)
+#' @param x Input data (vector, matrix, or array). You can also
+#'   pass a `tfdataset` or a generator returning a list with `(inputs, targets)` or 
+#'   `(inputs, targets, sample_weights)`.
 #' @param batch_size Integer. If unspecified, it will default to 32.
 #' @param verbose Verbosity mode, 0 or 1.
 #' @param callbacks List of callbacks to apply during prediction. 
@@ -899,6 +905,8 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
       initial_epoch = initial_epoch
     ))
   
+  warning("`fit_generator` is deprecated. Use `fit` instead, it now accept generators.")
+  
   # redirect to `model.fit`
   args <- list(
     object = object,
@@ -945,6 +953,8 @@ evaluate_generator <- function(object, generator, steps, max_queue_size = 10, wo
       object, generator, steps, max_queue_size, workers,
       callbacks))
   
+  warning("`evaluate_generator` is deprecated. Use `evaluate` instead, it now accept generators.")
+  
   args <- list(
     object = object,
     x = generator,
@@ -987,6 +997,8 @@ predict_generator <- function(object, generator, steps, max_queue_size = 10, wor
     return(predict_generator_legacy(object, generator, steps, max_queue_size, 
                              workers, verbose, callbacks))
   
+  warning("`predict_generator` is deprecated. Use `predict` instead, it now accept generators.")
+  
   args <- list(
     object = object,
     x = generator,
@@ -999,9 +1011,6 @@ predict_generator <- function(object, generator, steps, max_queue_size = 10, wor
   
   do.call(predict, args)
 }
-
-
-
 
 as_generator <- function(x) {
   UseMethod("as_generator")

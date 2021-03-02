@@ -12,7 +12,9 @@ predict_classes(object, x, batch_size = NULL, verbose = 0, steps = NULL)
 \arguments{
 \item{object}{Keras model object}
 
-\item{x}{Input data (vector, matrix, or array)}
+\item{x}{Input data (vector, matrix, or array). You can also
+pass a \code{tfdataset} or a generator returning a list with \verb{(inputs, targets)} or
+\verb{(inputs, targets, sample_weights)}.}
 
 \item{batch_size}{Integer. If unspecified, it will default to 32.}
 

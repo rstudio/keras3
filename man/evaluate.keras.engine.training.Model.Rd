@@ -22,7 +22,9 @@
 \item{x}{Vector, matrix, or array of test data (or list if the model has
 multiple inputs). If all inputs in the model are named, you can also pass a
 list mapping input names to data. \code{x} can be \code{NULL} (default) if feeding
-from framework-native tensors (e.g. TensorFlow data tensors).}
+from framework-native tensors (e.g. TensorFlow data tensors). You can also
+pass a \code{tfdataset} or a generator returning a list with \verb{(inputs, targets)} or
+\verb{(inputs, targets, sample_weights)}.}
 
 \item{y}{Vector, matrix, or array of target (label) data (or list if the model has
 multiple outputs). If all outputs in the model are named, you can also pass
