@@ -9,7 +9,9 @@ predict_on_batch(object, x)
 \arguments{
 \item{object}{Keras model object}
 
-\item{x}{Input data (vector, matrix, or array)}
+\item{x}{Input data (vector, matrix, or array). You can also
+pass a \code{tfdataset} or a generator returning a list with \verb{(inputs, targets)} or
+\verb{(inputs, targets, sample_weights)}.}
 }
 \value{
 array of predictions.

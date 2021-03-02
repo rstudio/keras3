@@ -1,6 +1,6 @@
 
 import itertools
-
+import types
 
 def iter_generator(iter):
   
@@ -20,5 +20,4 @@ def dataset_generator(dataset, session):
       yield session.run(batch)
 
   return gen()
-
 

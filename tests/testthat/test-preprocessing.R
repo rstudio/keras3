@@ -135,7 +135,8 @@ test_succeeds("flow images from directory works", {
   if (!have_pillow())
     skip("Pillow required.")
   
-  dir <- tempdir()
+  dir <- tempfile()
+  dir.create(dir)
   dir.create(paste0(dir, "/flow-img"))
   dir <- paste0(dir, "/flow-img")
   dir.create(paste0(dir, "/0"))
@@ -165,14 +166,16 @@ test_succeeds("flow images from directory works", {
   
   model %>% compile(loss = "binary_crossentropy", optimizer = "adam")
   
-  # test fitting the model
-  model %>% fit_generator(gen, steps_per_epoch = 20)
-  
-  # test predictions
-  preds <- predict_generator(model, gen, steps = 10)
-  
-  # evaluate
-  eva <- evaluate_generator(model, gen, steps = 10)
+  expect_warning_if(tensorflow::tf_version() >= "2.1", {
+    # test fitting the model
+    model %>% fit_generator(gen, steps_per_epoch = 20)
+    
+    # test predictions
+    preds <- predict_generator(model, gen, steps = 10)
+    
+    # evaluate
+    eva <- evaluate_generator(model, gen, steps = 10)
+  })
 })
 
 test_succeeds("images_dataset_from_directory", {

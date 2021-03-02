@@ -158,7 +158,7 @@ KerasMetricsCallbackV2 <- R6::R6Class(
     },
     
     on_epoch_end = function(epoch, logs = NULL) {
-      
+    
       if (epoch - self$initial_epoch == 0) {
         
         metric_names <- names(logs)
@@ -210,14 +210,13 @@ KerasMetricsCallbackV2 <- R6::R6Class(
         # pump events
         Sys.sleep(sleep)
       }
-      
       # record metrics
       tfruns::write_run_metadata("metrics", metrics)
-      
     },
     
     # convert keras history to metrics data frame suitable for plotting
     as_metrics_df = function(history) {
+      
       # create metrics data frame
       df <- as.data.frame(history$metrics)
       

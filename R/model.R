@@ -352,6 +352,78 @@ compile.keras.engine.training.Model <-
   invisible(object)
 }
 
+resolve_input_data <- function(x, y = NULL) {
+  # resolve x and y (check for TF dataset)
+  dataset <- resolve_tensorflow_dataset(x)
+  args <- list()
+  if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
+    args$x <- dataset
+  } else if (!is.null(dataset)) {
+    args$x <- dataset[[1]]
+    args$y <- dataset[[2]]
+  } else if (is.function(x)) {
+    args$x <- as_generator(x)
+  } else if (inherits(x, "python.builtin.iterator")) {
+    args$x <- x
+  } else if (inherits(x, "keras.utils.data_utils.Sequence")) {
+    args$x <- x
+  } else {
+    if (!is.null(x))
+      args$x <- keras_array(x)
+    if (!is.null(y))
+      args$y <- keras_array(y) 
+  }
+  args
+}
+
+resolve_validation_data <- function(validation_data) {
+  args <- list()
+  if (!is.null(validation_data)) {
+    dataset <- resolve_tensorflow_dataset(validation_data)
+    if (!is.null(dataset))
+      args$validation_data <- dataset
+    else if (is.function(validation_data))
+      args$validation_data <- as_generator(validation_data)
+    else if (inherits(validation_data, "python.builtin.iterator"))
+      args$validation_data <- validation_data
+    else if (inherits(validation_data, "keras.utils.data_utils.Sequence"))
+      args$validation_data <- validation_data
+    else {
+      args$validation_data <- keras_array(validation_data)  
+      if (tensorflow::tf_version() >="2.2")
+        args$validation_data <- do.call(reticulate::tuple, args$validation_data)
+    }
+  }
+  args
+}
+
+resolve_main_thread_generators <- function(x, callback_type = "on_train_batch_begin") {
+  
+  if (tensorflow::tf_version() == "2.1")
+    stop("Using generators that call R functions is not supported in TensorFlow 2.1 ",
+         "Please upgrade your TF installation or downgrade to 2.0", call. = FALSE)
+  
+  # we need a hack to make sure the generator is evaluated in the main thread.
+  python_path <- system.file("python", package = "keras")
+  tools <- reticulate::import_from_path("kerastools", path = python_path)
+  
+  # as_generator will return a tuple with 2 elements.
+  # (1) a python generator that just consumes
+  # a queue.
+  # (2) a function that evaluates the next element of the generator
+  # and adds to the queue. This function should be called in the main
+  # thread.
+  # we add a `on_train_batch_begin` to call this function.
+  o <- tools$model$as_generator(x)
+  
+  callback <- list(function(batch, logs) {
+    o[[2]]()
+  })
+  names(callback) <- callback_type
+  callback <- do.call(callback_lambda, callback)
+  
+  list(generator = o[[1]], callback = callback)
+}
 
 #' Train a Keras model
 #'
@@ -361,7 +433,9 @@ compile.keras.engine.training.Model <-
 #' @param x Vector, matrix, or array of training data (or list if the model has
 #'   multiple inputs). If all inputs in the model are named, you can also pass a
 #'   list mapping input names to data. `x` can be `NULL` (default) if feeding 
-#'   from framework-native tensors (e.g. TensorFlow data tensors).
+#'   from framework-native tensors (e.g. TensorFlow data tensors). You can also
+#'   pass a `tfdataset` or a generator returning a list with `(inputs, targets)` or 
+#'   `(inputs, targets, sample_weights)`.
 #' @param y  Vector, matrix, or array of target (label) data (or list if the model has
 #'   multiple outputs). If all outputs in the model are named, you can also pass
 #'   a list mapping output names to data. `y` can be `NULL` (default) if feeding 
@@ -430,9 +504,11 @@ fit.keras.engine.training.Model <-
            class_weight=NULL, sample_weight=NULL, initial_epoch=0,
            steps_per_epoch=NULL, validation_steps=NULL, ...) {
     
+  if (!is.null(batch_size) && is_tensorflow_dataset(x))
+    stop("Don't set batch_size with a tfdataset as input.", call. = FALSE)
+    
   # defaults
-  if (is.null(batch_size) && is.null(steps_per_epoch) && 
-      !is_tensorflow_dataset(x))
+  if (is.null(batch_size) && is.null(steps_per_epoch) && !is_tensorflow_dataset(x))
     batch_size <- 32L
   
   # resolve view_metrics
@@ -444,7 +520,6 @@ fit.keras.engine.training.Model <-
     batch_size = as_nullable_integer(batch_size),
     epochs = as.integer(epochs),
     verbose = as.integer(verbose),
-    callbacks = normalize_callbacks_with_metrics(view_metrics, initial_epoch, callbacks),
     validation_split = validation_split,
     shuffle = shuffle,
     class_weight = as_class_weight(class_weight),
@@ -452,46 +527,32 @@ fit.keras.engine.training.Model <-
     initial_epoch = as.integer(initial_epoch)
   )
   
-  # resolve validation_Data (check for TF dataset)
-  if (!is.null(validation_data)) {
-    dataset <- resolve_tensorflow_dataset(validation_data)
-    if (!is.null(dataset))
-      args$validation_data <- dataset
-    else {
-      args$validation_data <- keras_array(validation_data)  
-      
-      if (tensorflow::tf_version() >="2.2")
-        args$validation_data <- do.call(reticulate::tuple, args$validation_data)
-      
-    }
-      
-  }
-    
-  # resolve x and y (check for TF dataset)
-  dataset <- resolve_tensorflow_dataset(x)
-  if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
-    args$x <- dataset
-    
-    if (!is.null(batch_size))
-      stop("You should not specify a `batch_size` if using a tfdataset.", 
-           call. = FALSE)
-    
-  } else if (!is.null(dataset)) {
-    args$x <- dataset[[1]]
-    args$y <- dataset[[2]]
-  } else {
-    if (!is.null(x))
-      args$x <- keras_array(x)
-    if (!is.null(y))
-      args$y <- keras_array(y) 
-  }
+  args <- append(args, resolve_input_data(x, y))
+  args <- append(args, resolve_validation_data(validation_data))
   
   if (keras_version() >= "2.0.7") {
     args$steps_per_epoch <- as_nullable_integer(steps_per_epoch)
     args$validation_steps <- as_nullable_integer(validation_steps)
   }
   
-  # fit the model
+  extra_callbacks <- list()
+  if (is_main_thread_generator(x)) {
+    main_thr <- resolve_main_thread_generators(args$x)
+    args$x <- main_thr$generator
+    extra_callbacks <- c(extra_callbacks, main_thr$callback)
+  }
+  
+  if (is_main_thread_generator(validation_data)) {
+    main_thr <- resolve_main_thread_generators(args$validation_data, "on_test_batch_begin")
+    args$validation_data <- main_thr$generator
+    extra_callbacks <- c(extra_callbacks, main_thr$callback)
+  }
+  
+  if (length(extra_callbacks) > 0) {
+    callbacks <- c(callbacks, extra_callbacks)  
+  }
+  
+  args$callbacks <- normalize_callbacks_with_metrics(view_metrics, initial_epoch, callbacks)
   history <- do.call(object$fit, args)
   
   # convert to a keras_training history object
@@ -503,7 +564,7 @@ fit.keras.engine.training.Model <-
   # return the history invisibly
   invisible(history)
 }
-
+  
 #' Evaluate a Keras model
 
 #' @inheritParams fit.keras.engine.training.Model
@@ -512,7 +573,9 @@ fit.keras.engine.training.Model <-
 #' @param x Vector, matrix, or array of test data (or list if the model has
 #'   multiple inputs). If all inputs in the model are named, you can also pass a
 #'   list mapping input names to data. `x` can be `NULL` (default) if feeding 
-#'   from framework-native tensors (e.g. TensorFlow data tensors).
+#'   from framework-native tensors (e.g. TensorFlow data tensors). You can also
+#'   pass a `tfdataset` or a generator returning a list with `(inputs, targets)` or 
+#'   `(inputs, targets, sample_weights)`.
 #' @param y  Vector, matrix, or array of target (label) data (or list if the model has
 #'   multiple outputs). If all outputs in the model are named, you can also pass
 #'   a list mapping output names to data. `y` can be `NULL` (default) if feeding 
@@ -544,19 +607,20 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
     sample_weight = sample_weight
   )
   
-  args <- resolve_callbacks(args, callbacks)
+  args <- append(args, resolve_input_data(x, y))
   
-  # resolve x and y (check for TF dataset)
-  dataset <- resolve_tensorflow_dataset(x)
-  if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
-    args$x <- dataset
-  } else if (!is.null(dataset)) {
-    args$x <- dataset[[1]]
-    args$y <- dataset[[2]] 
-  } else {
-    args$x <- keras_array(x)
-    args$y <- keras_array(y) 
+  extra_callbacks <- list()
+  if (is_main_thread_generator(x)) {
+    main_thr <- resolve_main_thread_generators(args$x, "on_test_batch_begin")
+    args$x <- main_thr$generator
+    extra_callbacks <- c(extra_callbacks, main_thr$callback)
   }
+  
+  if (length(extra_callbacks) > 0) {
+    callbacks <- c(callbacks, extra_callbacks)  
+  }
+  
+  args <- resolve_callbacks(args, callbacks)
   
   if (keras_version() >= "2.0.7")
     args$steps <- as_nullable_integer(steps)
@@ -592,7 +656,9 @@ resolve_callbacks <- function(args, callbacks) {
 #' @inheritParams evaluate.keras.engine.training.Model
 #'
 #' @param object Keras model
-#' @param x Input data (vector, matrix, or array)
+#' @param x Input data (vector, matrix, or array). You can also
+#'   pass a `tfdataset` or a generator returning a list with `(inputs, targets)` or 
+#'   `(inputs, targets, sample_weights)`.
 #' @param batch_size Integer. If unspecified, it will default to 32.
 #' @param verbose Verbosity mode, 0 or 1.
 #' @param callbacks List of callbacks to apply during prediction. 
@@ -618,17 +684,20 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
     verbose = as.integer(verbose)
   )
   
-  args <- resolve_callbacks(args, callbacks)
+  args <- append(args, resolve_input_data(x))
   
-  # resolve x (check for TF dataset)
-  dataset <- resolve_tensorflow_dataset(x)
-  if (inherits(dataset, "tensorflow.python.data.ops.dataset_ops.DatasetV2")) {
-    args$x <- dataset 
-  } else if (!is.null(dataset)) {
-    args$x <- dataset[[1]]
-  } else {
-    args$x <- keras_array(x)
+  extra_callbacks <- list()
+  if (is_main_thread_generator(x)) {
+    main_thr <- resolve_main_thread_generators(args$x, "on_predict_batch_begin")
+    args$x <- main_thr$generator
+    extra_callbacks <- c(extra_callbacks, main_thr$callback)
   }
+  
+  if (length(extra_callbacks) > 0) {
+    callbacks <- c(callbacks, extra_callbacks)  
+  }
+  
+  args <- resolve_callbacks(args, callbacks)
   
   if (keras_version() >= "2.0.7")
     args$steps <- as_nullable_integer(steps)
@@ -820,35 +889,41 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
                           validation_data = NULL, validation_steps = NULL, 
                           class_weight = NULL, max_queue_size = 10, workers = 1, initial_epoch = 0) {
   
-  # resolve view_metrics
-  if (identical(view_metrics, "auto"))
-    view_metrics <- resolve_view_metrics(verbose, epochs, object$metrics)
+  if (tensorflow::tf_version() <= "2.0")
+    return(fit_generator_legacy(
+      object = object, 
+      generator = generator, 
+      steps_per_epoch = steps_per_epoch, 
+      epochs = epochs,
+      verbose=verbose,
+      view_metrics = view_metrics,
+      validation_data = validation_data,
+      validation_steps = validation_steps,
+      class_weight = class_weight,
+      max_queue_size = max_queue_size,
+      workers = workers,
+      initial_epoch = initial_epoch
+    ))
   
-  if (is.list(validation_data))
-    validation_data <- do.call(reticulate::tuple, keras_array(validation_data))
+  warning("`fit_generator` is deprecated. Use `fit` instead, it now accept generators.")
   
-  history <- call_generator_function(object$fit_generator, list(
-    generator = generator,
-    steps_per_epoch = as.integer(steps_per_epoch),
-    epochs = as.integer(epochs),
-    verbose = as.integer(verbose),
-    callbacks = normalize_callbacks_with_metrics(view_metrics, initial_epoch, callbacks),
+  # redirect to `model.fit`
+  args <- list(
+    object = object,
+    x = generator,
+    steps_per_epoch = steps_per_epoch,
+    epochs = epochs,
+    verbose = verbose,
+    callbacks = callbacks,
     validation_data = validation_data,
-    validation_steps = as_nullable_integer(validation_steps),
-    class_weight = as_class_weight(class_weight),
-    max_queue_size = as.integer(max_queue_size),
-    workers = as.integer(workers),
-    initial_epoch = as.integer(initial_epoch) 
-  ))
+    validation_steps = validation_steps,
+    class_weight = class_weight,
+    max_queue_size = max_queue_size,
+    workers = workers,
+    initial_epoch = initial_epoch
+  )
   
-  # convert to a keras_training history object
-  history <- to_keras_training_history(history)
-  
-  # write metadata from history
-  write_history_metadata(history)
-  
-  # return the history invisibly
-  invisible(history)
+  do.call(fit, args)
 }
 
 #' Evaluates the model on a data generator.
@@ -873,26 +948,23 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
 evaluate_generator <- function(object, generator, steps, max_queue_size = 10, workers = 1,
                                callbacks = NULL) {
   
+  if (tensorflow::tf_version() <= "2.0")
+    return(evaluate_generator_legacy(
+      object, generator, steps, max_queue_size, workers,
+      callbacks))
+  
+  warning("`evaluate_generator` is deprecated. Use `evaluate` instead, it now accept generators.")
+  
   args <- list(
-    generator = generator,
+    object = object,
+    x = generator,
     steps = as.integer(steps),
     max_queue_size = as.integer(max_queue_size),
-    workers = as.integer(workers)
+    workers = as.integer(workers),
+    callbacks = callbacks
   )
   
-  args <- resolve_callbacks(args, callbacks)
-  
-  # perform evaluation
-  result <- call_generator_function(object$evaluate_generator, args)
-  
-  # apply names
-  names(result) <- object$metrics_names
-  
-  # write run data
-  tfruns::write_run_metadata("evaluation", result)
-  
-  # return result
-  result
+  do.call(evaluate, args)
 }
 
 
@@ -921,63 +993,24 @@ evaluate_generator <- function(object, generator, steps, max_queue_size = 10, wo
 predict_generator <- function(object, generator, steps, max_queue_size = 10, workers = 1, verbose = 0,
                               callbacks = NULL) {
   
+  if (tensorflow::tf_version() <= "2.0")
+    return(predict_generator_legacy(object, generator, steps, max_queue_size, 
+                             workers, verbose, callbacks))
+  
+  warning("`predict_generator` is deprecated. Use `predict` instead, it now accept generators.")
+  
   args <- list(
-    generator = generator,
+    object = object,
+    x = generator,
     steps = as.integer(steps),
     max_queue_size = as.integer(max_queue_size),
-    workers = as.integer(workers)
+    workers = as.integer(workers),
+    verbose = as.integer(verbose),
+    callbacks = callbacks
   )
   
-  if (keras_version() >= "2.0.1")
-    args$verbose <- as.integer(verbose)
-  
-  args <- resolve_callbacks(args, callbacks)
-  
-  call_generator_function(object$predict_generator, args)
+  do.call(predict, args)
 }
-
-
-call_generator_function <- function(func, args) {
-  
-  # check if any generators should run on the main thread
-  use_main_thread_generator <- 
-    is_main_thread_generator(args$generator) ||
-    is_main_thread_generator(args$validation_data)
-  
-  # handle generators
-  args$generator <- as_generator(args$generator)
-  if (!is.null(args$validation_data))
-    args$validation_data <- as_generator(args$validation_data)
-  
-  # force use of thread based concurrency
-  if (keras_version() >= "2.0.6") {
-    args$use_multiprocessing <- FALSE
-  } else {
-    args$max_q_size <- args$max_queue_size
-    args$max_queue_size <- NULL
-    args$pickle_safe <- FALSE
-  }
-  
-  # if it's a main thread generator then force workers to correct value
-  if (use_main_thread_generator) {
-    
-    # error to use workers > 1 for main thread generator
-    if (args$workers > 1) {
-      stop('You may not specify workers > 1 for R based generator functions (R ',
-           'generators must run on the main thread)', call. = FALSE)
-    }
-    
-    # set workers to 0 for versions of keras that support this
-    if (keras_version() >= "2.1.2")
-      args$workers = 0L
-    else
-      args$workers = 1L
-  }
-  
-  # call the generator
-  do.call(func, args)
-}
-
 
 as_generator <- function(x) {
   UseMethod("as_generator")
