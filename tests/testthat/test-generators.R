@@ -237,7 +237,7 @@ test_succeeds("can get errors from generators", {
     {
       expect_warning_if(tensorflow::tf_version() >= "2.1", {
         model %>% fit_generator(
-          generator, steps_per_epoch = 2, 
+          generator, steps_per_epoch = 5, 
           validation_data = list(list(1, 2), 3),
           verbose = 0)  
       })
