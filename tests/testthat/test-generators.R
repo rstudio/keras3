@@ -213,31 +213,5 @@ test_succeeds("Can use a custom preprocessing function in image_data_generator",
   
 })
 
-test_succeeds("can get errors from generators", {
-  
-  input1 <- layer_input(shape = 1)
-  input2 <- layer_input(shape = 1)
-  
-  out <- layer_add(list(input1, input2)) %>% 
-    layer_dense(units = 1)
-  
-  model <- keras_model(list(input1, input2), out)
-  
-  generator <- function() {
-    if (runif(1) > 0.5)
-      stop("generator error.")
-    list(list(1, 2), 3)
-  }
-  
-  model %>% compile(loss = "mse", optimizer = "sgd")
-  
-  expect_error(
-    model %>% fit(
-      generator, steps_per_epoch = 50, 
-      validation_data = list(list(1, 2), 3),
-      verbose = 0)
-  )
-  
-})
 
 
