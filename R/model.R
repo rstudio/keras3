@@ -506,7 +506,7 @@ fit.keras.engine.training.Model <-
     stop("Don't set batch_size with a tfdataset as input.", call. = FALSE)
     
   # defaults
-  if (is.null(batch_size) && is.null(steps_per_epoch))
+  if (is.null(batch_size) && is.null(steps_per_epoch) && !is_tensorflow_dataset(x))
     batch_size <- 32L
   
   # resolve view_metrics
