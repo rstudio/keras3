@@ -232,14 +232,12 @@ test_succeeds("can get errors from generators", {
   model %>% compile(loss = "mse", optimizer = "sgd")
   
   expect_error(
-    expect_warning_if(tensorflow::tf_version() >= "2.1", {
-      model %>% fit_generator(
-        generator, steps_per_epoch = 50, 
-        validation_data = list(list(1, 2), 3),
-        verbose = 0)  
-    })
+    model %>% fit(
+      generator, steps_per_epoch = 50, 
+      validation_data = list(list(1, 2), 3),
+      verbose = 0),
+    regexp = "Error"
   )
-  
   
 })
 
