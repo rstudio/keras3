@@ -235,8 +235,7 @@ test_succeeds("can get errors from generators", {
     model %>% fit(
       generator, steps_per_epoch = 50, 
       validation_data = list(list(1, 2), 3),
-      verbose = 0),
-    regexp = "Error"
+      verbose = 0)
   )
   
 })
