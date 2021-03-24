@@ -241,7 +241,7 @@ callback_tensorboard(log_dir = "logs", histogram_freq = 0,
 | `write_images`  | Whether to write model weights to visualize as image in Tensorboard.  |
 | `embeddings_freq` | Frequency (in epochs) at which selected embedding layers will be saved.  |
 | `embeddings_layer_names` | A list of names of layers to keep eye on. If `NULL` or empty list all the embedding layers will be watched.  |
-| `embeddings_metadata`  | A named list which maps layer name to a file name in which metadata for this embedding layer is saved. See the [details](https://www.tensorflow.org/how_tos/embedding_viz/#metadata_optional) about the metadata file format. In case if the same metadata file is used for all embedding layers, string can be passed.  |
+| `embeddings_metadata`  | A named list which maps layer name to a file name in which metadata for this embedding layer is saved. See the [details](https://www.tensorflow.org/tensorboard/tensorboard_projector_plugin) about the metadata file format. In case if the same metadata file is used for all embedding layers, string can be passed.  |
 
 
 
