@@ -64,7 +64,7 @@ preprocessing.
 \section{Reference}{
 
 \itemize{
-\item \href{http://arxiv.org/abs/1512.00567}{Rethinking the Inception Architecture for Computer Vision}
+\item \href{https://arxiv.org/abs/1512.00567}{Rethinking the Inception Architecture for Computer Vision}
 }
 }
 

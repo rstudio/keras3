@@ -17,7 +17,7 @@ and \code{fan_out} is the number of output units in the weight tensor.
 }
 \section{References}{
 
-Glorot & Bengio, AISTATS 2010 \url{http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf}
+Glorot & Bengio, AISTATS 2010 \url{https://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf}
 }
 
 \seealso{

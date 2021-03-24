@@ -122,7 +122,7 @@ When using this layer as the first layer in a model, provide the keyword argumen
 
 \itemize{
 \item \href{https://arxiv.org/abs/1603.07285v1}{A guide to convolution arithmetic for deep learning}
-\item \href{https://www.uoguelph.ca/~gwtaylor/publications/mattcvpr2010/deconvolutionalnets.pdf}{Deconvolutional Networks}
+\item \href{https://www.gwtaylor.ca}{Deconvolutional Networks}
 }
 }
 

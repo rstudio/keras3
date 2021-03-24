@@ -75,7 +75,7 @@ can only be used as the first layer in a model.
 \section{References}{
 
 \itemize{
-\item \href{http://arxiv.org/abs/1512.05287}{A Theoretically Grounded Application of Dropout in Recurrent Neural Networks}
+\item \href{https://arxiv.org/abs/1512.05287}{A Theoretically Grounded Application of Dropout in Recurrent Neural Networks}
 }
 }
 

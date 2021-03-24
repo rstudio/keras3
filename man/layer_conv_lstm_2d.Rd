@@ -82,7 +82,7 @@ matrix, used for the linear transformation of the recurrent state..}
 
 \item{unit_forget_bias}{Boolean. If TRUE, add 1 to the bias of the forget
 gate at initialization. Use in combination with \code{bias_initializer="zeros"}.
-This is recommended in \href{http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf}{Jozefowicz et al.}}
+This is recommended in \href{https://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf}{Jozefowicz et al.}}
 
 \item{kernel_regularizer}{Regularizer function applied to the \code{kernel}
 weights matrix.}
@@ -152,7 +152,7 @@ tensor with shape: \verb{(samples,time, rows, cols, channels)}
 \section{References}{
 
 \itemize{
-\item \href{http://arxiv.org/abs/1506.04214v1}{Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting}
+\item \href{https://arxiv.org/abs/1506.04214v1}{Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting}
 The current implementation does not include the feedback loop on the cells
 output
 }

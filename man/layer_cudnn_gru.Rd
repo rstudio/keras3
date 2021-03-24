@@ -100,8 +100,8 @@ Can only be run on GPU, with the TensorFlow backend.
 
 \itemize{
 \item \href{https://arxiv.org/abs/1409.1259}{On the Properties of Neural Machine Translation: Encoder-Decoder Approaches}
-\item \href{http://arxiv.org/abs/1412.3555v1}{Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling}
-\item \href{http://arxiv.org/abs/1512.05287}{A Theoretically Grounded Application of Dropout in Recurrent Neural Networks}
+\item \href{https://arxiv.org/abs/1412.3555v1}{Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling}
+\item \href{https://arxiv.org/abs/1512.05287}{A Theoretically Grounded Application of Dropout in Recurrent Neural Networks}
 }
 }
 

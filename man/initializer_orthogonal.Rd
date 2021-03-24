@@ -16,7 +16,7 @@ Initializer that generates a random orthogonal matrix.
 }
 \section{References}{
 
-Saxe et al., \url{http://arxiv.org/abs/1312.6120}
+Saxe et al., \url{https://arxiv.org/abs/1312.6120}
 }
 
 \seealso{

@@ -63,7 +63,7 @@ into lists of words of the form:
 }
 
 Read more about Skipgram in this gnomic paper by Mikolov et al.:
-\href{http://arxiv.org/pdf/1301.3781v3.pdf}{Efficient Estimation of Word Representations in Vector Space}
+\href{https://arxiv.org/pdf/1301.3781v3.pdf}{Efficient Estimation of Word Representations in Vector Space}
 }
 \seealso{
 Other text preprocessing: 

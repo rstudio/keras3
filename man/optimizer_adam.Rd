@@ -46,7 +46,7 @@ Default parameters follow those provided in the original paper.
 \section{References}{
 
 \itemize{
-\item \href{http://arxiv.org/abs/1412.6980v8}{Adam - A Method for Stochastic Optimization}
+\item \href{https://arxiv.org/abs/1412.6980v8}{Adam - A Method for Stochastic Optimization}
 \item \href{https://openreview.net/forum?id=ryQu7f-RZ}{On the Convergence of Adam and Beyond}
 }
 }
