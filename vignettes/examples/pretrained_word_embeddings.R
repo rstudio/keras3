@@ -6,7 +6,7 @@ library(dplyr)
 
 # Download Glove vectors if necessary
 if (!file.exists('glove.6B.zip')) {
-  download.file('http://nlp.stanford.edu/data/glove.6B.zip',destfile = 'glove.6B.zip')
+  download.file('https://nlp.stanford.edu/data/glove.6B.zip',destfile = 'glove.6B.zip')
   unzip('glove.6B.zip')
 }
 

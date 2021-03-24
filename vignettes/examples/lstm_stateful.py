@@ -24,7 +24,7 @@ When lahead > 1, the model input is preprocessed to a "rolling window view"
 of the data, with the window length = "lahead".
 This is similar to sklearn's "view_as_windows"
 with "window_shape" being a single number
-Ref: http://scikit-image.org/docs/0.10.x/api/skimage.util.html#view-as-windows
+Ref: https://scikit-image.org/docs/0.10.x/api/skimage.util.html#view-as-windows
 
 When lahead < tsteps, only the stateful LSTM converges because its
 statefulness allows it to see beyond the capability that lahead

@@ -186,7 +186,7 @@ callback_early_stopping <- function(monitor = "val_loss", min_delta = 0, patienc
 #' @family callbacks
 #'
 #' @export
-callback_remote_monitor <- function(root = "http://localhost:9000", path = "/publish/epoch/end/", 
+callback_remote_monitor <- function(root = "https://localhost:9000", path = "/publish/epoch/end/", 
                                     field = "data", headers = NULL, send_as_json = FALSE) {
   
   if (!have_requests())

@@ -195,7 +195,7 @@
 
 <span class="co"># Download Glove vectors if necessary</span>
 <span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span>(<span class="st">'glove.6B.zip'</span>)) {
-  <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span>(<span class="st">'http://nlp.stanford.edu/data/glove.6B.zip'</span>,<span class="kw">destfile</span> <span class="kw">=</span> <span class="st">'glove.6B.zip'</span>)
+  <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span>(<span class="st">'https://nlp.stanford.edu/data/glove.6B.zip'</span>,<span class="kw">destfile</span> <span class="kw">=</span> <span class="st">'glove.6B.zip'</span>)
   <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html">unzip</a></span>(<span class="st">'glove.6B.zip'</span>)
 }
 

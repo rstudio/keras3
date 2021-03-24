@@ -238,7 +238,7 @@ inception_v3_preprocess_input <- function(x) {
 #' preprocessing.
 #' 
 #' @section Reference:
-#'  - [Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning](https://arxiv.org/abs/1602.07261)(http://arxiv.org/abs/1512.00567)
+#'  - [Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning](https://arxiv.org/abs/1602.07261)(https://arxiv.org/abs/1512.00567)
 #'
 #' @export
 application_inception_resnet_v2 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL,

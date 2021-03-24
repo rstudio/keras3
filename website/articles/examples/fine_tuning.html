@@ -212,7 +212,7 @@
 <span class="co">#          images/</span>
 <span class="co">#</span>
 
-<span class="no">all_imgs</span> <span class="kw">&lt;-</span> <span class="kw pkg">fs</span><span class="kw ns">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/dir_ls.html">dir_ls</a></span>(
+<span class="no">all_imgs</span> <span class="kw">&lt;-</span> <span class="kw pkg">fs</span><span class="kw ns">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html">dir_ls</a></span>(
   <span class="st">"data-raw/PetImages/"</span>,
   <span class="kw">recursive</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
   <span class="kw">type</span> <span class="kw">=</span> <span class="st">"file"</span>,
@@ -224,13 +224,13 @@
 <span class="kw">for</span> (<span class="no">im</span> <span class="kw">in</span> <span class="no">all_imgs</span>) {
   <span class="no">out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/try.html">try</a></span>(<span class="kw pkg">magick</span><span class="kw ns">::</span><span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html">image_read</a></span>(<span class="no">im</span>), <span class="kw">silent</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
   <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/class.html">inherits</a></span>(<span class="no">out</span>, <span class="st">"try-error"</span>)) {
-    <span class="kw pkg">fs</span><span class="kw ns">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/delete.html">file_delete</a></span>(<span class="no">im</span>)
+    <span class="kw pkg">fs</span><span class="kw ns">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html">file_delete</a></span>(<span class="no">im</span>)
     <span class="fu"><a href="https://rdrr.io/r/base/message.html">message</a></span>(<span class="st">"removed image: "</span>, <span class="no">im</span>)
   }
 }
 
 <span class="co"># re-list all imgs</span>
-<span class="no">all_imgs</span> <span class="kw">&lt;-</span> <span class="kw pkg">fs</span><span class="kw ns">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/dir_ls.html">dir_ls</a></span>(
+<span class="no">all_imgs</span> <span class="kw">&lt;-</span> <span class="kw pkg">fs</span><span class="kw ns">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html">dir_ls</a></span>(
   <span class="st">"data-raw/PetImages/"</span>,
   <span class="kw">recursive</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
   <span class="kw">type</span> <span class="kw">=</span> <span class="st">"file"</span>,
@@ -244,7 +244,7 @@
 <span class="no">testing_imgs</span> <span class="kw">&lt;-</span> <span class="no">all_imgs</span>[!<span class="no">all_imgs</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">training_imgs</span>, <span class="no">validation_imgs</span>)]
 
 <span class="co"># create directory structure</span>
-<span class="kw pkg">fs</span><span class="kw ns">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/create.html">dir_create</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+<span class="kw pkg">fs</span><span class="kw ns">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html">dir_create</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
   <span class="st">"data/train/Cat"</span>,
   <span class="st">"data/train/Dog"</span>,
   <span class="st">"data/validation/Cat"</span>,
@@ -253,19 +253,19 @@
 ))
 
 <span class="co"># copy training images</span>
-<span class="kw pkg">fs</span><span class="kw ns">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/copy.html">file_copy</a></span>(
+<span class="kw pkg">fs</span><span class="kw ns">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/copy.html">file_copy</a></span>(
   <span class="kw">path</span> <span class="kw">=</span> <span class="no">training_imgs</span>,
   <span class="kw">new_path</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">"data-raw/PetImages"</span>, <span class="st">"data/train"</span>, <span class="no">training_imgs</span>)
 )
 
 <span class="co"># copy valid images</span>
-<span class="kw pkg">fs</span><span class="kw ns">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/copy.html">file_copy</a></span>(
+<span class="kw pkg">fs</span><span class="kw ns">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/copy.html">file_copy</a></span>(
   <span class="kw">path</span> <span class="kw">=</span> <span class="no">validation_imgs</span>,
   <span class="kw">new_path</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">"data-raw/PetImages"</span>, <span class="st">"data/validation"</span>, <span class="no">validation_imgs</span>)
 )
 
 <span class="co"># copy testing imgs</span>
-<span class="kw pkg">fs</span><span class="kw ns">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/copy.html">file_copy</a></span>(
+<span class="kw pkg">fs</span><span class="kw ns">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/copy.html">file_copy</a></span>(
   <span class="kw">path</span> <span class="kw">=</span> <span class="no">testing_imgs</span>,
   <span class="kw">new_path</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">"data-raw/PetImages/(Dog|Cat)/"</span>, <span class="st">"data/test/images/\\1"</span>, <span class="no">testing_imgs</span>)
 )

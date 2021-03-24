@@ -64,7 +64,7 @@ preprocessing.
 \section{Reference}{
 
 \itemize{
-\item \href{https://arxiv.org/abs/1602.07261}{Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning}(http://arxiv.org/abs/1512.00567)
+\item \href{https://arxiv.org/abs/1602.07261}{Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning}(https://arxiv.org/abs/1512.00567)
 }
 }
 

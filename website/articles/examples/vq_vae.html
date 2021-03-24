@@ -250,7 +250,7 @@
 <span class="co"># download from: https://github.com/rois-codh/kmnist via "download_data()" function</span>
 <span class="no">download_data</span> <span class="kw">=</span> <span class="kw">function</span>(){
   <span class="kw">if</span>(!<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span>(<span class="st">'kmnist-train-imgs.npz'</span>)) {
-    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span>(<span class="st">'http://codh.rois.ac.jp/kmnist/dataset/kmnist/kmnist-train-imgs.npz'</span>,
+    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span>(<span class="st">'https://codh.rois.ac.jp/kmnist/dataset/kmnist/kmnist-train-imgs.npz'</span>,
                   <span class="kw">destfile</span> <span class="kw">=</span> <span class="st">'kmnist-train-imgs.npz'</span>)
   }
 }
