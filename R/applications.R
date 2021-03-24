@@ -199,7 +199,7 @@ application_resnet50 <- function(include_top = TRUE, weights = "imagenet", input
 #' @return A Keras model instance.
 #' 
 #' @section Reference:
-#'  - [Rethinking the Inception Architecture for Computer Vision](http://arxiv.org/abs/1512.00567)
+#'  - [Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/abs/1512.00567)
 #' 
 #' @export
 application_inception_v3 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL,

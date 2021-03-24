@@ -60,7 +60,7 @@ the first layer in a model.
 \section{References}{
 
 \itemize{
-\item \href{http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf}{Dropout: A Simple Way to Prevent Neural Networks from Overfitting Srivastava, Hinton, et al. 2014}
+\item \href{https://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf}{Dropout: A Simple Way to Prevent Neural Networks from Overfitting Srivastava, Hinton, et al. 2014}
 }
 }
 

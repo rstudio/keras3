@@ -48,13 +48,13 @@ layers will be saved.}
 
 \item{embeddings_metadata}{a named list which maps layer name to a file name in
 which metadata for this embedding layer is saved. See the
-\href{https://www.tensorflow.org/how_tos/embedding_viz/#metadata_optional}{details}
+\href{https://www.tensorflow.org/tensorboard/tensorboard_projector_plugin#saving_data_for_tensorboard}{details}
 about the metadata file format. In case if the same metadata file is used
 for all embedding layers, string can be passed.}
 
 \item{embeddings_data}{Data to be embedded at layers specified in
 \code{embeddings_layer_names}. Array (if the model has a single input) or list
-of arrays (if the model has multiple inputs). Learn \href{https://www.tensorflow.org/guide}{more about embeddings}}
+of arrays (if the model has multiple inputs). Learn \href{https://www.tensorflow.org/tutorials/text/word_embeddings}{more about embeddings}}
 
 \item{update_freq}{\code{'batch'} or \code{'epoch'} or integer. When using \code{'batch'}, writes
 the losses and metrics to TensorBoard after each batch. The same

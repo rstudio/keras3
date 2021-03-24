@@ -33,7 +33,7 @@
 #'   output_dim)`.
 #'   
 #' @section References: 
-#' - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
+#' - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](https://arxiv.org/abs/1512.05287)
 #'   
 #' @export
 layer_embedding <- function(object, input_dim, output_dim, embeddings_initializer = "uniform", embeddings_regularizer = NULL, 

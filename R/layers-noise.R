@@ -51,7 +51,7 @@ layer_gaussian_noise <- function(object, stddev, input_shape = NULL,
 #' @section Output shape: Same shape as input.
 #'   
 #' @section References: 
-#' - [Dropout: A Simple Way to Prevent Neural Networks from Overfitting Srivastava, Hinton, et al. 2014](http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf)
+#' - [Dropout: A Simple Way to Prevent Neural Networks from Overfitting Srivastava, Hinton, et al. 2014](https://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf)
 #'   
 #' @family noise layers   
 #'   

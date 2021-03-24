@@ -43,7 +43,7 @@ recommended to leave the parameters of this optimizer at their default
 values.
 }
 \seealso{
-\href{http://www.cs.toronto.edu/~fritz/absps/momentum.pdf}{On the importance of initialization and momentum in deep learning}.
+\href{https://www.cs.toronto.edu/~fritz/absps/momentum.pdf}{On the importance of initialization and momentum in deep learning}.
 
 Other optimizers: 
 \code{\link{optimizer_adadelta}()},

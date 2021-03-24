@@ -129,7 +129,7 @@ isn't provided.}
 \item{weights}{Initial weights for layer.}
 }
 \description{
-For a step-by-step description of the algorithm, see \href{http://deeplearning.net/tutorial/lstm.html}{this tutorial}.
+For a step-by-step description of the algorithm, see \href{https://colah.github.io/posts/2015-08-Understanding-LSTMs/}{this tutorial}.
 }
 \section{Input shapes}{
 
@@ -167,7 +167,7 @@ computed for the samples in one batch will be reused as initial states
 for the samples in the next batch. This assumes a one-to-one mapping
 between samples in different successive batches. For intuition behind
 statefulness, there is a helpful blog post here:
-\url{http://philipperemy.github.io/keras-stateful-lstm/}
+\url{https://philipperemy.github.io/keras-stateful-lstm/}
 
 To enable statefulness:
 \itemize{
@@ -204,8 +204,8 @@ the initial state of the RNN layer.
 \section{References}{
 
 \itemize{
-\item \href{http://www.bioinf.jku.at/publications/older/2604.pdf}{Long short-term memory} (original 1997 paper)
-\item \href{http://www.cs.toronto.edu/~graves/preprint.pdf}{Supervised sequence labeling with recurrent neural networks}
+\item \href{https://www.bioinf.jku.at/publications/older/2604.pdf}{Long short-term memory} (original 1997 paper)
+\item \href{https://www.cs.toronto.edu/~graves/preprint.pdf}{Supervised sequence labeling with recurrent neural networks}
 \item \href{https://arxiv.org/abs/1512.05287}{A Theoretically Grounded Application of Dropout in Recurrent Neural Networks}
 }
 }

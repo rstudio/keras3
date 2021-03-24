@@ -145,7 +145,7 @@ initializer_variance_scaling <- function(scale = 1.0, mode = c("fan_in", "fan_ou
 #' @param gain Multiplicative factor to apply to the orthogonal matrix.
 #' 
 #' @section References:
-#' Saxe et al., <http://arxiv.org/abs/1312.6120>
+#' Saxe et al., <https://arxiv.org/abs/1312.6120>
 #' 
 #' @family initializers
 #' 
@@ -206,7 +206,7 @@ initializer_lecun_normal <- function(seed = NULL) {
 #' @inheritParams initializer_random_normal
 #' 
 #' @section References:
-#' Glorot & Bengio, AISTATS 2010 <http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf>
+#' Glorot & Bengio, AISTATS 2010 <https://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf>
 #' 
 #' @family initializers
 #' 
@@ -228,7 +228,7 @@ initializer_glorot_normal <- function(seed = NULL) {
 #' @inheritParams initializer_random_normal
 #' 
 #' @section References:
-#' Glorot & Bengio, AISTATS 2010 http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf
+#' Glorot & Bengio, AISTATS 2010 https://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf
 #' 
 #' @family initializers
 #' 
@@ -248,7 +248,7 @@ initializer_glorot_uniform <- function(seed = NULL) {
 #' 
 #' @inheritParams initializer_random_normal
 #'   
-#' @section References: He et al., http://arxiv.org/abs/1502.01852
+#' @section References: He et al., https://arxiv.org/abs/1502.01852
 #'
 #' @family initializers
 #'      
@@ -267,7 +267,7 @@ initializer_he_normal <- function(seed = NULL) {
 #' 
 #' @inheritParams initializer_random_normal
 #'   
-#' @section References: He et al., http://arxiv.org/abs/1502.01852
+#' @section References: He et al., https://arxiv.org/abs/1502.01852
 #'   
 #' @family initializers
 #'   

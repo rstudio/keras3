@@ -259,12 +259,12 @@ callback_terminate_on_naan <- function() {
 #'   `NULL` or empty list all the embedding layers will be watched.
 #' @param  embeddings_metadata a named list which maps layer name to a file name in
 #'   which metadata for this embedding layer is saved. See the 
-#'   [details](https://www.tensorflow.org/how_tos/embedding_viz/#metadata_optional)
+#'   [details](https://www.tensorflow.org/tensorboard/tensorboard_projector_plugin#saving_data_for_tensorboard)
 #'    about the metadata file format. In case if the same metadata file is used
 #'   for all embedding layers, string can be passed.
 #' @param embeddings_data Data to be embedded at layers specified in
 #'   `embeddings_layer_names`. Array (if the model has a single input) or list 
-#'   of arrays (if the model has multiple inputs). Learn [more about embeddings](https://www.tensorflow.org/programmers_guide/embedding)
+#'   of arrays (if the model has multiple inputs). Learn [more about embeddings](https://www.tensorflow.org/tutorials/text/word_embeddings)
 #' @param update_freq `'batch'` or `'epoch'` or integer. When using `'batch'`, writes
 #'   the losses and metrics to TensorBoard after each batch. The same
 #'   applies for `'epoch'`. If using an integer, let's say `10000`,
@@ -278,7 +278,7 @@ callback_terminate_on_naan <- function() {
 #' @details TensorBoard is a visualization tool provided with TensorFlow.
 #'   
 #' You can find more information about TensorBoard
-#' [here](https://www.tensorflow.org/get_started/summaries_and_tensorboard).
+#' [here](https://www.tensorflow.org/tensorboard/get_started).
 #' 
 #' When using a backend other than TensorFlow, TensorBoard will still work
 #' (if you have TensorFlow installed), but the only feature available will

@@ -46,7 +46,7 @@
 #' @template roxlate-recurrent-layer  
 #'   
 #' @section References: 
-#' - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
+#' - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](https://arxiv.org/abs/1512.05287)
 #'   
 #'   
 #' @export
@@ -123,10 +123,10 @@ layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE
 #'   Encoder-Decoder Approaches](https://arxiv.org/abs/1409.1259) 
 #' - [Empirical
 #'   Evaluation of Gated Recurrent Neural Networks on Sequence
-#'   Modeling](http://arxiv.org/abs/1412.3555v1) 
+#'   Modeling](https://arxiv.org/abs/1412.3555v1) 
 #' - [A Theoretically Grounded
 #'   Application of Dropout in Recurrent Neural
-#'   Networks](http://arxiv.org/abs/1512.05287)
+#'   Networks](https://arxiv.org/abs/1512.05287)
 #'     
 #' @export
 layer_gru <- function(object, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE, 
@@ -190,10 +190,10 @@ layer_gru <- function(object, units, activation = "tanh", recurrent_activation =
 #'   Encoder-Decoder Approaches](https://arxiv.org/abs/1409.1259) 
 #' - [Empirical
 #'   Evaluation of Gated Recurrent Neural Networks on Sequence
-#'   Modeling](http://arxiv.org/abs/1412.3555v1) 
+#'   Modeling](https://arxiv.org/abs/1412.3555v1) 
 #' - [A Theoretically Grounded
 #'   Application of Dropout in Recurrent Neural
-#'   Networks](http://arxiv.org/abs/1512.05287)
+#'   Networks](https://arxiv.org/abs/1512.05287)
 #'
 #' @export
 layer_cudnn_gru <- function(object, units,
@@ -233,21 +233,21 @@ layer_cudnn_gru <- function(object, units,
 
 #' Long Short-Term Memory unit - Hochreiter 1997.
 #' 
-#' For a step-by-step description of the algorithm, see [this tutorial](http://deeplearning.net/tutorial/lstm.html).
+#' For a step-by-step description of the algorithm, see [this tutorial](https://colah.github.io/posts/2015-08-Understanding-LSTMs/).
 #' 
 #' @inheritParams layer_gru
 #' 
 #' @param unit_forget_bias Boolean. If TRUE, add 1 to the bias of the forget
 #'   gate at initialization. Setting it to true will also force
 #'   `bias_initializer="zeros"`. This is recommended in [Jozefowicz et
-#'   al.](http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
+#'   al.](https://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
 #'   
 #' @template roxlate-recurrent-layer    
 #'   
 #' @section References: 
-#' - [Long short-term memory](http://www.bioinf.jku.at/publications/older/2604.pdf) (original 1997 paper) 
-#' - [Supervised sequence labeling with recurrent neural networks](http://www.cs.toronto.edu/~graves/preprint.pdf) 
-#' - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
+#' - [Long short-term memory](https://www.bioinf.jku.at/publications/older/2604.pdf) (original 1997 paper) 
+#' - [Supervised sequence labeling with recurrent neural networks](https://www.cs.toronto.edu/~graves/preprint.pdf) 
+#' - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](https://arxiv.org/abs/1512.05287)
 #'  
 #' @family recurrent layers  
 #'     
@@ -304,9 +304,9 @@ layer_lstm <- function(object, units, activation = "tanh", recurrent_activation 
 #' @inheritParams layer_lstm
 #' 
 #' @section References: 
-#' - [Long short-term memory](http://www.bioinf.jku.at/publications/older/2604.pdf) (original 1997 paper) 
-#' - [Supervised sequence labeling with recurrent neural networks](http://www.cs.toronto.edu/~graves/preprint.pdf) 
-#' - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
+#' - [Long short-term memory](https://www.bioinf.jku.at/publications/older/2604.pdf) (original 1997 paper) 
+#' - [Supervised sequence labeling with recurrent neural networks](https://www.cs.toronto.edu/~graves/preprint.pdf) 
+#' - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](https://arxiv.org/abs/1512.05287)
 #'  
 #' @family recurrent layers  
 #' 
