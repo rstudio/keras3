@@ -70,7 +70,7 @@ optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = NULL, decay = 0.0
 #'
 #' Adagrad optimizer as described in [Adaptive Subgradient Methods for Online
 #' Learning and Stochastic
-#' Optimization](http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf).
+#' Optimization](https://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf).
 #'
 #' @inheritParams optimizer_rmsprop
 #'
@@ -138,7 +138,7 @@ optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = NULL, decay = 0.0
 #' @note Default parameters follow those provided in the original paper.
 #'
 #' @section References:
-#'   - [Adam - A Method for Stochastic Optimization](http://arxiv.org/abs/1412.6980v8)
+#'   - [Adam - A Method for Stochastic Optimization](https://arxiv.org/abs/1412.6980v8)
 #'   - [On the Convergence of Adam and Beyond](https://openreview.net/forum?id=ryQu7f-RZ)
 #'
 #' @family optimizers
@@ -204,7 +204,7 @@ optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon =
 #'   values.
 #'
 #' @seealso [On the importance of initialization and momentum in deep
-#'   learning](http://www.cs.toronto.edu/~fritz/absps/momentum.pdf).
+#'   learning](https://www.cs.toronto.edu/~fritz/absps/momentum.pdf).
 #'
 #' @family optimizers
 #'

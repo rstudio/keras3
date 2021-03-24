@@ -61,7 +61,7 @@ pad_sequences <- function(sequences, maxlen = NULL, dtype = "int32", padding = "
 #' - (word, random word from the vocabulary), with label 0 (negative samples).
 #'
 #' Read more about Skipgram in this gnomic paper by Mikolov et al.:
-#' [Efficient Estimation of Word Representations in Vector Space](http://arxiv.org/pdf/1301.3781v3.pdf)
+#' [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781v3.pdf)
 #' 
 #' @param sequence A word sequence (sentence), encoded as a list of word indices
 #'   (integers). If using a `sampling_table`, word indices are expected to match

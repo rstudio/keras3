@@ -3,7 +3,7 @@
 #' by Quoc V. Le, Navdeep Jaitly, Geoffrey E. Hinton
 #' 
 #' arxiv:1504.00941v2 [cs.NE] 7 Apr 2015
-#' http://arxiv.org/pdf/1504.00941v2.pdf
+#' https://arxiv.org/pdf/1504.00941v2.pdf
 #' 
 #' Optimizer is replaced with RMSprop which yields more stable and steady
 #' improvement.

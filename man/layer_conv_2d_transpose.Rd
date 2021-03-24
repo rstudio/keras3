@@ -130,7 +130,6 @@ if data_format='channels_first' or 4D tensor with shape: \verb{(batch, rows, col
 
 \itemize{
 \item \href{https://arxiv.org/abs/1603.07285v1}{A guide to convolution arithmetic for deep learning}
-\item \href{https://www.gwtaylor.ca}{Deconvolutional Networks}
 }
 }
 

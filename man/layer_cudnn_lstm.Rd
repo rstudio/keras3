@@ -104,8 +104,8 @@ Can only be run on GPU, with the TensorFlow backend.
 \section{References}{
 
 \itemize{
-\item \href{http://www.bioinf.jku.at/publications/older/2604.pdf}{Long short-term memory} (original 1997 paper)
-\item \href{http://www.cs.toronto.edu/~graves/preprint.pdf}{Supervised sequence labeling with recurrent neural networks}
+\item \href{https://www.bioinf.jku.at/publications/older/2604.pdf}{Long short-term memory} (original 1997 paper)
+\item \href{https://www.cs.toronto.edu/~graves/preprint.pdf}{Supervised sequence labeling with recurrent neural networks}
 \item \href{https://arxiv.org/abs/1512.05287}{A Theoretically Grounded Application of Dropout in Recurrent Neural Networks}
 }
 }

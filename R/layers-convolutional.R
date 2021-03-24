@@ -298,7 +298,6 @@ layer_conv_3d <- function(object, filters, kernel_size, strides = c(1L, 1L, 1L),
 #'   
 #' @section References: 
 #'   - [A guide to convolution arithmetic for deep learning](https://arxiv.org/abs/1603.07285v1) 
-#'   - [Deconvolutional Networks](https://www.uoguelph.ca/~gwtaylor/publications/mattcvpr2010/deconvolutionalnets.pdf)
 #'   
 #' @family convolutional layers    
 #'   
@@ -381,7 +380,6 @@ layer_conv_1d_transpose <- function(object, filters, kernel_size, strides = 1, p
 #'   
 #' @section References: 
 #'   - [A guide to convolution arithmetic for deep learning](https://arxiv.org/abs/1603.07285v1) 
-#'   - [Deconvolutional Networks](https://www.uoguelph.ca/~gwtaylor/publications/mattcvpr2010/deconvolutionalnets.pdf)
 #'   
 #' @family convolutional layers    
 #'   
@@ -481,7 +479,6 @@ layer_conv_2d_transpose <- function(object, filters, kernel_size, strides = c(1,
 #'
 #' @section References:
 #'   - [A guide to convolution arithmetic for deep learning](https://arxiv.org/abs/1603.07285v1)
-#'   - [Deconvolutional Networks](https://www.uoguelph.ca/~gwtaylor/publications/mattcvpr2010/deconvolutionalnets.pdf)
 #'
 #' @family convolutional layers 
 #'
@@ -1154,7 +1151,7 @@ layer_cropping_3d <- function(object, cropping = list(c(1L, 1L), c(1L, 1L), c(1L
 #' @param unit_forget_bias Boolean. If TRUE, add 1 to the bias of the forget
 #'   gate at initialization. Use in combination with `bias_initializer="zeros"`.
 #'   This is recommended in [Jozefowicz et
-#'   al.](http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
+#'   al.](https://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
 #' @param kernel_regularizer Regularizer function applied to the `kernel`
 #'   weights matrix.
 #' @param recurrent_regularizer Regularizer function applied to the
@@ -1186,7 +1183,7 @@ layer_cropping_3d <- function(object, cropping = list(c(1L, 1L), c(1L, 1L), c(1L
 #'   tensor with shape: `(samples,time, rows, cols, channels)`
 #'   
 #' @section References: 
-#' - [Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting](http://arxiv.org/abs/1506.04214v1)
+#' - [Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting](https://arxiv.org/abs/1506.04214v1)
 #'   The current implementation does not include the feedback loop on the cells
 #'   output
 #' 

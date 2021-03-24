@@ -130,7 +130,6 @@ If \code{output_padding} is specified:\preformatted{new_timesteps = ((timesteps 
 
 \itemize{
 \item \href{https://arxiv.org/abs/1603.07285v1}{A guide to convolution arithmetic for deep learning}
-\item \href{https://www.gwtaylor.ca}{Deconvolutional Networks}
 }
 }
 

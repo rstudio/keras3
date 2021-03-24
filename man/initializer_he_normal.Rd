@@ -15,7 +15,7 @@ It draws samples from a truncated normal distribution centered on 0 with
 the weight tensor.
 }
 \section{References}{
- He et al., http://arxiv.org/abs/1502.01852
+ He et al., https://arxiv.org/abs/1502.01852
 }
 
 \seealso{

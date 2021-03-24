@@ -175,7 +175,7 @@ computed for the samples in one batch will be reused as initial states
 for the samples in the next batch. This assumes a one-to-one mapping
 between samples in different successive batches. For intuition behind
 statefulness, there is a helpful blog post here:
-\url{http://philipperemy.github.io/keras-stateful-lstm/}
+\url{https://philipperemy.github.io/keras-stateful-lstm/}
 
 To enable statefulness:
 \itemize{

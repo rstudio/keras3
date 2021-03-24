@@ -28,7 +28,7 @@
 #' for the samples in the next batch. This assumes a one-to-one mapping
 #' between samples in different successive batches. For intuition behind
 #' statefulness, there is a helpful blog post here: 
-#' <http://philipperemy.github.io/keras-stateful-lstm/>
+#' <https://philipperemy.github.io/keras-stateful-lstm/>
 #' 
 #' To enable statefulness:
 #'   - Specify `stateful = TRUE` in the layer constructor.

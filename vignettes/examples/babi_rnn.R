@@ -3,7 +3,7 @@
 #' 
 #' The results are comparable to those for an LSTM model provided in Weston et al.:
 #' "Towards AI-Complete Question Answering: A Set of Prerequisite Toy Tasks"
-#' http://arxiv.org/abs/1502.05698
+#' https://arxiv.org/abs/1502.05698
 #' 
 #' Task Number                  | FB LSTM Baseline | Keras QA
 #' ---                          | ---              | ---
