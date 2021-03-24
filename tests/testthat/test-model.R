@@ -199,8 +199,10 @@ test_succeeds("regression test for https://github.com/rstudio/keras/issues/1201"
     list(1, 2)
   }
   
-  model %>% fit_generator(generator, steps_per_epoch = 1, epochs = 5,
-                          validation_data = generator, validation_steps = 1)
+  expect_warning_if(tensorflow::tf_version() > "2.1", {
+    model %>% fit_generator(generator, steps_per_epoch = 1, epochs = 5,
+                            validation_data = generator, validation_steps = 1)
+  })
   
 })
 
