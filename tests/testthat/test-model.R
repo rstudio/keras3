@@ -185,6 +185,24 @@ def loss_fn (y_true, y_pred):
   
 })
 
+test_succeeds("regression test for https://github.com/rstudio/keras/issues/1201", {
+  
+  model <- keras_model_sequential()
+  model %>% 
+    layer_dense(units = 1, activation = 'relu', input_shape = c(1)) %>% 
+    compile(
+      optimizer = 'sgd',
+      loss = 'binary_crossentropy'
+    )
+  
+  generator <- function() {
+    list(1, 2)
+  }
+  
+  model %>% fit_generator(generator, steps_per_epoch = 1, epochs = 5,
+                          validation_data = generator, validation_steps = 1)
+  
+})
 
 
 
