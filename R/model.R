@@ -420,6 +420,12 @@ resolve_main_thread_generators <- function(x, callback_type = "on_train_batch_be
     o[[2]]()
   })
   names(callback) <- callback_type
+  
+  if (callback_type == "on_test_batch_begin") {
+    callback[[2]] <- callback[[1]]
+    names(callback)[[2]] <- "on_test_begin"
+  }
+  
   callback <- do.call(callback_lambda, callback)
   
   list(generator = o[[1]], callback = callback)

@@ -51,7 +51,7 @@ jobs:
         run: echo "options(reticulate.conda_binary = reticulate:::miniconda_conda())" >> .Rprofile
       - name: Install TensorFlow
         run: |
-          Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.6.9'))"
+          Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.7', 'numpy==1.19'))"
           Rscript -e "remotes::install_local()"
           Rscript -e "keras::install_keras(tensorflow = Sys.getenv('TF_VERSION'), extra_packages = c('IPython', 'requests', 'certifi', 'urllib3'))"
       - name: Check
