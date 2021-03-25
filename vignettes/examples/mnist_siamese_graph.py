@@ -5,7 +5,7 @@ output of the shared network and by optimizing the contrastive loss (see paper
 for mode details).
 
 [1] "Dimensionality Reduction by Learning an Invariant Mapping"
-    http://yann.lecun.com/exdb/publis/pdf/hadsell-chopra-lecun-06.pdf
+    https://yann.lecun.com/exdb/publis/pdf/hadsell-chopra-lecun-06.pdf
 
 Gets to 99.5% test accuracy after 20 epochs.
 3 seconds per epoch on a Titan X GPU
@@ -34,7 +34,7 @@ def eucl_dist_output_shape(shapes):
 
 def contrastive_loss(y_true, y_pred):
     '''Contrastive loss from Hadsell-et-al.'06
-    http://yann.lecun.com/exdb/publis/pdf/hadsell-chopra-lecun-06.pdf
+    https://yann.lecun.com/exdb/publis/pdf/hadsell-chopra-lecun-06.pdf
     '''
     margin = 1
     return K.mean(y_true * K.square(y_pred) +

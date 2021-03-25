@@ -19,14 +19,14 @@ library(tibble)
 # Preprocessing -----------------------------------------------------------
 
 # Assumes you've downloaded and unzipped one of the bilingual datasets offered at
-# http://www.manythings.org/anki/ and put it into a directory "data"
+# https://www.manythings.org/anki/ and put it into a directory "data"
 # This example translates English to Dutch.
 download_data = function(){
   if(!dir.exists('data')) {
     dir.create('data')
   }
   if(!file.exists('data/nld-eng.zip')) {
-    download.file('http://www.manythings.org/anki/nld-eng.zip',
+    download.file('https://www.manythings.org/anki/nld-eng.zip',
                   destfile = file.path("data", basename('nld-eng.zip')))
     unzip('data/nld-eng.zip', exdir = 'data')
   }

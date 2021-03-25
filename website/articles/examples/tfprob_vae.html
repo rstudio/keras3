@@ -264,7 +264,7 @@
     <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span>(<span class="st">'tmp'</span>)
   }
   <span class="kw">if</span>(!<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span>(<span class="st">'tmp/kmnist-train-imgs.npz'</span>)) {
-    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span>(<span class="st">'http://codh.rois.ac.jp/kmnist/dataset/kmnist/kmnist-train-imgs.npz'</span>,
+    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span>(<span class="st">'https://codh.rois.ac.jp/kmnist/dataset/kmnist/kmnist-train-imgs.npz'</span>,
                   <span class="kw">destfile</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="st">"tmp"</span>, <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span>(<span class="st">'kmnist-train-imgs.npz'</span>)))
   }
 }

@@ -65,7 +65,7 @@ np <- import("numpy")
 # download from: https://github.com/rois-codh/kmnist via "download_data()" function
 download_data = function(){
   if(!file.exists('kmnist-train-imgs.npz')) {
-    download.file('http://codh.rois.ac.jp/kmnist/dataset/kmnist/kmnist-train-imgs.npz',
+    download.file('https://codh.rois.ac.jp/kmnist/dataset/kmnist/kmnist-train-imgs.npz',
                   destfile = 'kmnist-train-imgs.npz')
   }
 }

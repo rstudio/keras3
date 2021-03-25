@@ -3,7 +3,7 @@
 by Tianqi Chen, Ian Goodfellow, and Jonathon Shlens
 
 arXiv:1511.05641v4 [cs.LG] 23 Apr 2016
-http://arxiv.org/abs/1511.05641
+https://arxiv.org/abs/1511.05641
 
 Notes
 - What:

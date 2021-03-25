@@ -79,7 +79,7 @@ download_data = function(){
     dir.create('tmp')
   }
   if(!file.exists('tmp/kmnist-train-imgs.npz')) {
-    download.file('http://codh.rois.ac.jp/kmnist/dataset/kmnist/kmnist-train-imgs.npz',
+    download.file('https://codh.rois.ac.jp/kmnist/dataset/kmnist/kmnist-train-imgs.npz',
                   destfile = file.path("tmp", basename('kmnist-train-imgs.npz')))
   }
 }

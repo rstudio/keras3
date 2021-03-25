@@ -607,7 +607,7 @@ with(tf$device_scope("/cpu:0", {
 <div id="how-can-i-use-the-plaidml-backend" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-can-i-use-the-plaidml-backend" class="anchor"></a>How can I use the PlaidML backend?</h2>
-<p><a href="http://vertex.ai/blog/announcing-plaidml">PlaidML</a> is an open source portable deep learning engine that runs on most existing PC hardware with OpenCL-capable GPUs from NVIDIA, AMD, or Intel. PlaidML includes a Keras backend which you can use as described below.</p>
+<p><a href="https://vertex.ai/blog/announcing-plaidml">PlaidML</a> is an open source portable deep learning engine that runs on most existing PC hardware with OpenCL-capable GPUs from NVIDIA, AMD, or Intel. PlaidML includes a Keras backend which you can use as described below.</p>
 <p>First, build and install PlaidML as described on the <a href="https://github.com/plaidml/plaidml">project website</a>. You must be sure that PlaidML is correctly installed, setup, and working before proceeding further!</p>
 <p>Then, to use Keras with the PlaidML backend you do the following:</p>
 <div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
@@ -624,7 +624,7 @@ with(tf$device_scope("/cpu:0", {
 <h3 class="hasAnchor">
 <a href="#testing-on-cran" class="anchor"></a>Testing on CRAN</h3>
 <p>The main consideration in using Keras within another R package is to ensure that your package can be tested in an environment where Keras is not available (e.g. the CRAN test servers). To do this, arrange for your tests to be skipped when Keras isn’t available using the <code><a href="../reference/is_keras_available.html">is_keras_available()</a></code> function.</p>
-<p>For example, here’s a <a href="http://r-pkgs.had.co.nz/tests.html">testthat</a> utility function that can be used to skip a test when Keras isn’t available:</p>
+<p>For example, here’s a <a href="https://r-pkgs.had.co.nz/tests.html">testthat</a> utility function that can be used to skip a test when Keras isn’t available:</p>
 <div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="co"># testthat utilty for skipping tests when Keras isn't available</span>
 <span class="no">skip_if_no_keras</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">version</span> <span class="kw">=</span> <span class="kw">NULL</span>) {
   <span class="kw">if</span> (!<span class="fu"><a href="../reference/is_keras_available.html">is_keras_available</a></span>(<span class="no">version</span>))

@@ -1,5 +1,5 @@
 /*!
- * Bootstrap Table of Contents v0.4.1 (http://afeld.github.io/bootstrap-toc/)
+ * Bootstrap Table of Contents v0.4.1 (https://afeld.github.io/bootstrap-toc/)
  * Copyright 2015 Aidan Feldman
  * Licensed under MIT (https://github.com/afeld/bootstrap-toc/blob/gh-pages/LICENSE.md) */
 (function() {
@@ -9,8 +9,8 @@
     helpers: {
       // return all matching elements in the set, or their descendants
       findOrFilter: function($el, selector) {
-        // http://danielnouri.org/notes/2011/03/14/a-jquery-find-that-also-finds-the-root-element/
-        // http://stackoverflow.com/a/12731439/358804
+        // https://danielnouri.org/notes/2011/03/14/a-jquery-find-that-also-finds-the-root-element/
+        // https://stackoverflow.com/a/12731439/358804
         var $descendants = $el.find(selector);
         return $el.filter(selector).add($descendants).filter(':not([data-toc-skip])');
       },

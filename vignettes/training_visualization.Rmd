@@ -30,7 +30,7 @@ There are a number of tools available for visualizing the training of Keras mode
 
 2) Real time visualization of training metrics within the RStudio IDE.
 
-3) Integration with the [TensorBoard](https://www.tensorflow.org/get_started/summaries_and_tensorboard) visualization tool included with TensorFlow. Beyond just training metrics, TensorBoard has a wide variety of other visualizations available including the underlying TensorFlow graph, gradient histograms, model weights, and more. TensorBoard also enables you to compare metrics across multiple training runs.
+3) Integration with the [TensorBoard](https://www.tensorflow.org/tensorboard/get_started) visualization tool included with TensorFlow. Beyond just training metrics, TensorBoard has a wide variety of other visualizations available including the underlying TensorFlow graph, gradient histograms, model weights, and more. TensorBoard also enables you to compare metrics across multiple training runs.
 
 Each of these tools is described in more detail below.
 
@@ -62,7 +62,7 @@ plot(history)
 
 ![](images/training_history_ggplot2.png){width=757 height=489 .r-plot}
 
-The history will be plotted using [ggplot2](http://ggplot2.tidyverse.org/) if available (if not then base graphics will be used), include all specified metrics as well as the loss, and draw a smoothing line if there are 10 or more epochs. You can customize all of this behavior via various options of the [plot method](https://keras.rstudio.com/reference/plot.keras_training_history.html).
+The history will be plotted using [ggplot2](https://ggplot2.tidyverse.org/) if available (if not then base graphics will be used), include all specified metrics as well as the loss, and draw a smoothing line if there are 10 or more epochs. You can customize all of this behavior via various options of the [plot method](https://keras.rstudio.com/reference/plot.keras_training_history.html).
 
 If you want to create a custom visualization you can call the `as.data.frame()` method on the history to obtain a data frame with factors for each metric as well as training vs. validation:
 

@@ -21,7 +21,7 @@ aliases:
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
-> This tutorial is an R translation of [this page](https://www.tensorflow.org/alpha/guide/keras/saving_and_serializing)
+> This tutorial is an R translation of [this page](https://www.tensorflow.org/tutorials/keras/save_and_load)
 available in the official TensorFlow documentation.
 
 The first part of this guide covers saving and serialization for Sequential models and models built using the Functional API. The saving and serialization 

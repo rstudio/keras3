@@ -109,13 +109,13 @@ Layer <- function(classname, initialize, build = NULL, call = NULL,
   layer$`__module__` <- classname
   
   # build the function to be used
-  f <- function() {
+  f <- function(object) {
     .args <- as.list(match.call())[-c(1)]
     .args <- .args[names(.args) != "object"]
     create_layer(layer, object, .args)
   }
   formals(f) <- append(
-    list(object = quote(expr=)),
+    formals(f),
     formals(initialize)
   )
   attr(f, "layer") <- layer

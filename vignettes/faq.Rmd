@@ -508,7 +508,7 @@ By default the Keras Python and R packages use the TensorFlow backend. Other ava
 
 ## How can I use the PlaidML backend?
 
-[PlaidML](https://vertex.ai/blog/announcing-plaidml) is an open source portable deep learning engine that runs on most existing PC hardware with OpenCL-capable GPUs from NVIDIA, AMD, or Intel. PlaidML includes a Keras backend which you can use as described below.
+[PlaidML](https://github.com/plaidml/plaidml) is an open source portable deep learning engine that runs on most existing PC hardware with OpenCL-capable GPUs from NVIDIA, AMD, or Intel. PlaidML includes a Keras backend which you can use as described below.
 
 First, build and install PlaidML as described on the [project website](https://github.com/plaidml/plaidml). You must be sure that PlaidML is correctly installed, setup, and working before proceeding further!
 
@@ -534,7 +534,7 @@ use_backend("plaidml")
 
 The main consideration in using Keras within another R package is to ensure that your package can be tested in an environment where Keras is not available (e.g. the CRAN test servers). To do this, arrange for your tests to be skipped when Keras isn't available using the `is_keras_available()` function. 
 
-For example, here's a [testthat](http://r-pkgs.had.co.nz/tests.html) utility function that can be used to skip a test when Keras isn't available:
+For example, here's a [testthat](https://r-pkgs.org/tests.html) utility function that can be used to skip a test when Keras isn't available:
 
 ```{r}
 # testthat utilty for skipping tests when Keras isn't available

@@ -204,14 +204,14 @@
 <span class="co"># Preprocessing -----------------------------------------------------------</span>
 
 <span class="co"># Assumes you've downloaded and unzipped one of the bilingual datasets offered at</span>
-<span class="co"># http://www.manythings.org/anki/ and put it into a directory "data"</span>
+<span class="co"># https://www.manythings.org/anki/ and put it into a directory "data"</span>
 <span class="co"># This example translates English to Dutch.</span>
 <span class="no">download_data</span> <span class="kw">=</span> <span class="kw">function</span>(){
   <span class="kw">if</span>(!<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.exists</a></span>(<span class="st">'data'</span>)) {
     <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span>(<span class="st">'data'</span>)
   }
   <span class="kw">if</span>(!<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span>(<span class="st">'data/nld-eng.zip'</span>)) {
-    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span>(<span class="st">'http://www.manythings.org/anki/nld-eng.zip'</span>,
+    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span>(<span class="st">'https://www.manythings.org/anki/nld-eng.zip'</span>,
                   <span class="kw">destfile</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="st">"data"</span>, <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span>(<span class="st">'nld-eng.zip'</span>)))
     <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html">unzip</a></span>(<span class="st">'data/nld-eng.zip'</span>, <span class="kw">exdir</span> <span class="kw">=</span> <span class="st">'data'</span>)
   }

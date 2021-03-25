@@ -2,7 +2,7 @@
 
 This script can run on CPU in a few minutes.
 
-Results example: http://i.imgur.com/4nj4KjN.jpg
+Results example: https://i.imgur.com/4nj4KjN.jpg
 '''
 from __future__ import print_function
 
