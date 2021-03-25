@@ -534,7 +534,7 @@ use_backend("plaidml")
 
 The main consideration in using Keras within another R package is to ensure that your package can be tested in an environment where Keras is not available (e.g. the CRAN test servers). To do this, arrange for your tests to be skipped when Keras isn't available using the `is_keras_available()` function. 
 
-For example, here's a [testthat](https://r-pkgs.had.co.nz/tests.html) utility function that can be used to skip a test when Keras isn't available:
+For example, here's a [testthat](https://r-pkgs.org/tests.html) utility function that can be used to skip a test when Keras isn't available:
 
 ```{r}
 # testthat utilty for skipping tests when Keras isn't available
