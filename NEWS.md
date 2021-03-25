@@ -1,4 +1,4 @@
-## Dev version
+# keras 2.4.0
 
 - Use compat module when using `set_session` and `get_session`. (#1046)
 - Allows passing other arguments to `keras_model` eg `name`. (#1045)
@@ -28,12 +28,12 @@
 - Added the `ragged` argument to `layer_input`. (#1193)
 - Fixed `*_generator` deadlocks with recent versions of TensorFlow (#1197)
 
-## Keras 2.2.3.0 (CRAN)
+# Keras 2.2.3.0 (CRAN)
 
 - Added `layer_attention` (#1000) by @atroiano.
 - Fixed issue regarding the KerasMetricsCallback with TF v2.2 (#1020)
 
-## Keras 2.2.5.0 (CRAN)
+# Keras 2.2.5.0 (CRAN)
 
 - Added `layer_dense_features`.
 
@@ -77,7 +77,7 @@
 SavedModel format.
 
 
-## Keras 2.2.4 (CRAN)
+# Keras 2.2.4 (CRAN)
 
 - Improve handling of `timeseries_generator()` in calls to `fit_generator()`
 
@@ -115,7 +115,7 @@ SavedModel format.
 - Added `KerasWrapper` class and corresponding `create_wrapper` function.
 
 
-## Keras 2.2.0
+# Keras 2.2.0
 
 - Fix issue with serializing models that have constraint arguments
 
@@ -239,7 +239,7 @@ SavedModel format.
 - Various fixes for `use_implementation()` function
 
 
-## Keras 2.1.2 
+# Keras 2.1.2 
 
 - Added `theme_bw` option to plot method for training history 
 
@@ -267,7 +267,7 @@ SavedModel format.
 - Provide global `keras.fit_verbose` option (defaults to 1)
 
 
-## keras 2.0.9
+# keras 2.0.9
 
 - Added `multi_gpu_model()` function.
 
@@ -327,7 +327,7 @@ SavedModel format.
 - Expose `add_loss()` function for custom layers
 
 
-## keras 2.0.8
+# keras 2.0.8
 
 - Add `use_session_with_seed()` function that establishes a random seed for the Keras session.
   Note that this should not be used when training time is paramount, as it disables GPU
@@ -396,7 +396,7 @@ SavedModel format.
 - Provide hint to use r-tensorflow environment when importing keras
 
 
-## keras 2.0.5
+# keras 2.0.5
 
 - Initial CRAN release
 
