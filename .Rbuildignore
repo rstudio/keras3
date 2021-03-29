@@ -37,3 +37,4 @@
 ^CRAN-RELEASE$
 ^doc$
 ^Meta$
+^cran-comments\.md$

@@ -93,7 +93,7 @@ x_test <- x_test / 255
 
 Note that we use the `array_reshape()` function rather than the `dim<-()` function to reshape the array. This is so that the data is re-interpreted using row-major semantics (as opposed to R's default column-major semantics), which is in turn compatible with the way that the numerical libraries called by Keras interpret array dimensions.
 
-The `y` data is an integer vector with values ranging from 0 to 9. To prepare this data for training we [one-hot encode](https://www.quora.com/What-is-one-hot-encoding-and-when-is-it-used-in-data-science) the vectors into binary class matrices using the Keras `to_categorical()` function:
+The `y` data is an integer vector with values ranging from 0 to 9. To prepare this data for training we one-hot encode the vectors into binary class matrices using the Keras `to_categorical()` function:
 
 ```{r}
 y_train <- to_categorical(y_train, 10)
