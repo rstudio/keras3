@@ -1,6 +1,6 @@
 # keras (development version)
 
-- Added activation functions swish and gelu.
+- Added activation functions swish and gelu. (#1226)
 
 # keras 2.4.0
 
