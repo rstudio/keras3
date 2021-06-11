@@ -129,6 +129,7 @@ attr(activation_exponential, "py_function_name") <- "exponential"
 #' @rdname activation_relu
 #' @export
 #' @description `gelu(...)`: Applies the Gaussian error linear unit (GELU) activation function.
+#' @param approximate A bool, whether to enable approximation.
 activation_gelu <- function(x, approximate=FALSE) {
   keras$activations$gelu(x, approximate)
 }

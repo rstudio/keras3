@@ -52,6 +52,8 @@ activation_swish(x)
 \item{threshold}{Threshold value for thresholded activation.}
 
 \item{axis}{Integer, axis along which the softmax normalization is applied}
+
+\item{approximate}{A bool, whether to enable approximation.}
 }
 \value{
 Tensor with the same shape and dtype as \code{x}.
