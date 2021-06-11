@@ -16,8 +16,9 @@ install_keras(
 \arguments{
 \item{method}{Installation method ("virtualenv" or "conda")}
 
-\item{conda}{The path to a \code{conda} executable. Use \code{"auto"} to allow \code{reticulate} to
-automatically find an appropriate \code{conda} binary. See \strong{Finding Conda} for more details.}
+\item{conda}{The path to a \code{conda} executable. Use \code{"auto"} to allow
+\code{reticulate} to automatically find an appropriate \code{conda} binary. See
+\strong{Finding Conda} for more details.}
 
 \item{version}{Version of Keras to install. Specify "default" to install
 the latest release. Otherwise specify an alternate version (e.g. "2.2.2").}
