@@ -1,41 +1,41 @@
 
 
 #' Activation functions
-#' 
+#'
 #' Activations functions can either be used through [layer_activation()], or
 #' through the activation argument supported by all forward layers.
-#' 
+#'
 #' @details
 #'   - `activation_selu()` to be used together with the initialization "lecun_normal".
 #'   - `activation_selu()` to be used together with the dropout variant "AlphaDropout".
-#' 
+#'
 #' @param x Tensor
 #' @param axis Integer, axis along which the softmax normalization is applied
 #' @param alpha Alpha value
 #' @param max_value Max value
 #' @param threshold Threshold value for thresholded activation.
-#' 
+#'
 #' @return Tensor with the same shape and dtype as \code{x}.
-#' 
+#'
 #' @section References:
-#' 
+#'
 #'   - `activation_swish()`: [Searching for Activation Functions](https://arxiv.org/abs/1710.05941)
 #'   - `activation_gelu()`: [Gaussian Error Linear Units (GELUs)](https://arxiv.org/abs/1606.08415)
 #'   - `activation_selu()`: [Self-Normalizing Neural Networks](https://arxiv.org/abs/1706.02515)
 #'   - `activation_elu()`: [Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs)](https://arxiv.org/abs/1511.07289)
-#' 
+#'
 #' @seealso <https://www.tensorflow.org/api_docs/python/tf/keras/activations>
 #' @export
 #' @description `relu(...)`: Applies the rectified linear unit activation function.
 activation_relu <- function(x, alpha = 0.0, max_value = NULL, threshold = 0.0) {
   args <- list(
     x = x,
-    alpha = alpha, 
+    alpha = alpha,
     max_value = max_value
   )
   if (keras_version() >= "2.2.3")
     args$threshold <- threshold
-  
+
   do.call(keras$activations$relu, args)
 }
 attr(activation_relu, "py_function_name") <- "relu"
