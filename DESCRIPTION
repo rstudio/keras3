@@ -3,7 +3,9 @@ Type: Package
 Title: R Interface to 'Keras'
 Version: 2.4.0.9000
 Authors@R: c(
-  person("Daniel", "Falbel", role = c("ctb", "cph", "cre"), email = "daniel@rstudio.com"),
+  person("Tomasz", "Kalinowski", role = c("ctb", "cph", "cre"), 
+         email = "tomasz.kalinowski@rstudio.com"),
+  person("Daniel", "Falbel", role = c("ctb", "cph"), email = "daniel@rstudio.com"),
   person("JJ", "Allaire", role = c("aut", "cph")),
   person("François", "Chollet", role = c("aut", "cph")),
   person(family = "RStudio", role = c("ctb", "cph", "fnd")),
