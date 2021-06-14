@@ -1,5 +1,7 @@
 # keras (development version)
 
+- Added activation functions swish and gelu. (#1226)
+
 # keras 2.4.0
 
 - Use compat module when using `set_session` and `get_session`. (#1046)
