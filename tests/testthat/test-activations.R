@@ -29,4 +29,10 @@ test_activation("activation_softsign")
 test_activation("activation_tanh")
 test_activation("activation_exponential", required_version = "2.2.3")
 test_activation("activation_gelu", required_version = "2.4.0")
-test_activation("activation_swish", required_version = "2.2.3")
+test_activation("activation_swish", required_version = "2.3.0")
+
+# tf-ver keras-ver
+# 2.2.0 2.3.0-tf
+# 2.3.0 2.4.0
+# 2.4.1 2.4.0
+# 2.5.0 2.5.0
