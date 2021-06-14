@@ -28,7 +28,7 @@ test_activation("activation_softplus")
 test_activation("activation_softsign")
 test_activation("activation_tanh")
 test_activation("activation_exponential", required_version = "2.2.3")
-test_activation("activation_gelu", required_version = "2.4.0")
+test_activation("activation_gelu", required_version = "2.5.0") # technically works in tf 2.4.1 too, but keras version didn't change
 test_activation("activation_swish", required_version = "2.3.0")
 
 # tf-ver keras-ver
