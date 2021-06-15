@@ -663,14 +663,14 @@ layer_separable_conv_2d <- function(object, filters, kernel_size, strides = c(1,
 #'
 #' @export
 layer_depthwise_conv_2d <- function(object, kernel_size, strides = c(1, 1), padding = "valid", depth_multiplier = 1,
-                                    data_format = NULL, activation = NULL, use_bias = TRUE,
+                                    data_format = NULL, dilation_rate = c(1, 1), activation = NULL, use_bias = TRUE,
                                     depthwise_initializer = "glorot_uniform", bias_initializer = "zeros",
                                     depthwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
                                     depthwise_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
                                     batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
                                     name = NULL, trainable = NULL, weights = NULL) {
 
-  create_layer(keras$layers$DepthwiseConv2D, object, list(
+  args <- list(
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
     padding = padding,
@@ -692,7 +692,12 @@ layer_depthwise_conv_2d <- function(object, kernel_size, strides = c(1, 1), padd
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
+
+  if(tf_version() >= "2.3")
+    args$dilation_rate <- as_integer_tuple(dilation_rate)
+
+  create_layer(keras$layers$DepthwiseConv2D, object, args)
 }
 
 
