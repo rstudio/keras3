@@ -725,7 +725,7 @@ layer_depthwise_conv_2d <- function(object, kernel_size, strides = c(1, 1), padd
 #' @param padding one of `"valid"` or `"same"` (case-insensitive).
 #' @param depth_multiplier The number of depthwise convolution output channels
 #'   for each input channel. The total number of depthwise convolution output
-#'   channels will be equal to `filterss_in * depth_multiplier`.
+#'   channels will be equal to `filters_in * depth_multiplier`.
 #' @param depthwise_initializer Initializer for the depthwise kernel matrix.
 #' @param pointwise_initializer Initializer for the pointwise kernel matrix.
 #' @param depthwise_regularizer Regularizer function applied to the depthwise
