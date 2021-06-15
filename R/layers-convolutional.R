@@ -35,6 +35,11 @@
 #'   dilation rate to use for dilated convolution. Currently, specifying any
 #'   `dilation_rate` value != 1 is incompatible with specifying any `strides`
 #'   value != 1.
+#' @param groups A positive integer specifying the number of groups in which the
+#'   input is split along the channel axis. Each group is convolved separately
+#'   with `filters / groups` filters. The output is the concatenation of all the
+#'   groups results along the channel axis. Input channels and `filters` must both
+#'   be divisible by `groups`.
 #' @param activation Activation function to use. If you don't specify anything,
 #'   no activation is applied (ie. "linear" activation: `a(x) = x`).
 #' @param use_bias Boolean, whether the layer uses a bias vector.
@@ -58,7 +63,7 @@
 #' @export
 layer_conv_1d <- function(object, filters, kernel_size, strides = 1L, padding = "valid",
                           data_format = "channels_last",
-                          dilation_rate = 1L, activation = NULL, use_bias = TRUE,
+                          dilation_rate = 1L, groups = 1L, activation = NULL, use_bias = TRUE,
                           kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
                           kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
@@ -89,11 +94,13 @@ layer_conv_1d <- function(object, filters, kernel_size, strides = 1L, padding = 
     weights = weights
   )
 
+  if (tf_version() >= "2.3")
+    args$groups <- as.integer(groups)
+
   if (keras_version() >= "2.2")
     args$data_format <- data_format
 
   create_layer(keras$layers$Conv1D, object, args)
-
 }
 
 
@@ -133,6 +140,11 @@ layer_conv_1d <- function(object, filters, kernel_size, strides = 1L, padding = 
 #'   specify the same value for all spatial dimensions. Currently, specifying
 #'   any `dilation_rate` value != 1 is incompatible with specifying any stride
 #'   value != 1.
+#' @param groups A positive integer specifying the number of groups in which the
+#'   input is split along the channel axis. Each group is convolved separately
+#'   with `filters / groups` filters. The output is the concatenation of all the
+#'   groups results along the channel axis. Input channels and `filters` must both
+#'   be divisible by `groups`.
 #'
 #' @section Input shape: 4D tensor with shape: `(samples, channels, rows, cols)`
 #'   if data_format='channels_first' or 4D tensor with shape: `(samples, rows,
@@ -147,14 +159,14 @@ layer_conv_1d <- function(object, filters, kernel_size, strides = 1L, padding = 
 #'
 #' @export
 layer_conv_2d <- function(object, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL,
-                          dilation_rate = c(1L, 1L), activation = NULL, use_bias = TRUE,
+                          dilation_rate = c(1L, 1L), groups = 1L, activation = NULL, use_bias = TRUE,
                           kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
                           kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
                           batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
                           name = NULL, trainable = NULL, weights = NULL) {
 
-  create_layer(keras$layers$Conv2D, object, list(
+  args <- list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -177,8 +189,12 @@ layer_conv_2d <- function(object, filters, kernel_size, strides = c(1L, 1L), pad
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
 
+  if (tf_version() >= "2.3")
+    args$groups <- as.integer(groups)
+
+  create_layer(keras$layers$Conv2D, object, args)
 }
 
 #' 3D convolution layer (e.g. spatial convolution over volumes).
@@ -217,6 +233,11 @@ layer_conv_2d <- function(object, filters, kernel_size, strides = c(1L, 1L), pad
 #'   specify the same value for all spatial dimensions. Currently, specifying
 #'   any `dilation_rate` value != 1 is incompatible with specifying any stride
 #'   value != 1.
+#' @param groups A positive integer specifying the number of groups in which the
+#'   input is split along the channel axis. Each group is convolved separately
+#'   with `filters / groups` filters. The output is the concatenation of all the
+#'   groups results along the channel axis. Input channels and `filters` must both
+#'   be divisible by `groups`.
 #'
 #' @section Input shape: 5D tensor with shape: `(samples, channels, conv_dim1,
 #'   conv_dim2, conv_dim3)` if data_format='channels_first' or 5D tensor with
@@ -234,14 +255,15 @@ layer_conv_2d <- function(object, filters, kernel_size, strides = c(1L, 1L), pad
 #'
 #' @export
 layer_conv_3d <- function(object, filters, kernel_size, strides = c(1L, 1L, 1L), padding = "valid",
-                          data_format = NULL, dilation_rate = c(1L, 1L, 1L), activation = NULL, use_bias = TRUE,
+                          data_format = NULL, dilation_rate = c(1L, 1L, 1L), groups = 1L,
+                          activation = NULL, use_bias = TRUE,
                           kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
                           kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
                           kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
                           batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
                           name = NULL, trainable = NULL, weights = NULL) {
 
-  create_layer(keras$layers$Conv3D, object, list(
+  args <- list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -264,8 +286,12 @@ layer_conv_3d <- function(object, filters, kernel_size, strides = c(1L, 1L, 1L),
     name = name,
     trainable = trainable,
     weights = weights
-  ))
+  )
 
+  if (tf_version() >= "2.3")
+    args$groups <- as.integer(groups)
+
+  create_layer(keras$layers$Conv3D, object, args)
 }
 
 #' Transposed 1D convolution layer (sometimes called Deconvolution).
