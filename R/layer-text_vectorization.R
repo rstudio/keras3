@@ -49,6 +49,10 @@
 #'  number of unique tokens in the vocabulary is less than max_tokens,
 #'  resulting in a tensor of shape (batch_size, max_tokens) regardless of
 #'  vocabulary size. Defaults to `TRUE`.
+#' @param vocabulary An optional list of vocabulary terms, or a path to a text
+#'   file containing a vocabulary to load into this layer. The file should
+#'   contain one token per line. If the list or file contains the same token
+#'   multiple times, an error will be thrown.
 #' @param ... Not used.
 #'
 #' @export
@@ -56,6 +60,7 @@ layer_text_vectorization <- function(object, max_tokens = NULL, standardize = "l
                                      split = "whitespace", ngrams = NULL,
                                      output_mode = c("int", "binary", "count", "tf-idf"),
                                      output_sequence_length = NULL, pad_to_max_tokens = TRUE,
+                                     vocabulary = NULL,
                                      ...) {
 
   if (tensorflow::tf_version() < "2.1")
@@ -82,6 +87,9 @@ layer_text_vectorization <- function(object, max_tokens = NULL, standardize = "l
 
   if (!identical(split, "whitespace"))
     args$split <- split
+
+  if(tf_version() >= "2.4")
+    args$vocabulary <- vocabulary
 
   create_layer(resolve_text_vectorization_module(), object, args)
 }
