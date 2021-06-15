@@ -490,6 +490,9 @@ layer_conv_2d_transpose <- function(object, filters, kernel_size, strides = c(1,
 #'   `image_data_format` value found in your Keras config file at
 #'   `~/.keras/keras.json`. If you never set it, then it will be
 #'   "channels_last".
+#' @param dilation_rate An integer or vector of 3 integers, specifying the
+#'   dilation rate to use for dilated convolution. Can be a single integer to
+#'   specify the same value for all spatial dimensions.
 #' @param activation Activation function to use. If you don't specify anything, no
 #'   activation is applied (ie. "linear" activation: `a(x) = x`).
 #' @param use_bias Boolean, whether the layer uses a bias vector.
@@ -511,7 +514,8 @@ layer_conv_2d_transpose <- function(object, filters, kernel_size, strides = c(1,
 #' @export
 layer_conv_3d_transpose <- function(object, filters, kernel_size, strides = c(1, 1, 1),
                                     padding = "valid", output_padding = NULL,
-                                    data_format = NULL, activation = NULL, use_bias = TRUE,
+                                    data_format = NULL, dilation_rate = c(1L, 1L, 1L),
+                                    activation = NULL, use_bias = TRUE,
                                     kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
                                     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
                                     kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
@@ -544,6 +548,11 @@ layer_conv_3d_transpose <- function(object, filters, kernel_size, strides = c(1,
 
   if (keras_version() >= "2.2.3")
     args$output_padding <- as_integer_tuple(output_padding)
+
+  if (tf_version() >= "2.3")
+    args$dilation_rate <- as_integer_tuple(dilation_rate)
+  # TODO: warning should be issued if user supplied dilation_rate and we're
+  # ignoring it
 
   create_layer(keras$layers$Conv3DTranspose, object, args)
 }
