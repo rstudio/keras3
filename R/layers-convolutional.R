@@ -1206,6 +1206,7 @@ layer_cropping_3d <- function(object, cropping = list(c(1L, 1L), c(1L, 1L), c(1L
 #' @param bias_constraint Constraint function applied to the bias vector.
 #' @param return_sequences Boolean. Whether to return the last output in the
 #'   output sequence, or the full sequence.
+#' @param return_state Boolean. Whether to return the last state in addition to the output.
 #' @param go_backwards Boolean (default FALSE). If TRUE, rocess the input
 #'   sequence backwards.
 #' @param stateful Boolean (default FALSE). If TRUE, the last state for each
@@ -1235,10 +1236,9 @@ layer_conv_lstm_2d <- function(object, filters, kernel_size, strides = c(1L, 1L)
                                kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros",
                                unit_forget_bias = TRUE, kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL,
                                activity_regularizer = NULL, kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL,
-                               return_sequences = FALSE, go_backwards = FALSE, stateful = FALSE, dropout = 0.0, recurrent_dropout = 0.0,
+                               return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE, dropout = 0.0, recurrent_dropout = 0.0,
                                batch_size = NULL, name = NULL, trainable = NULL, weights = NULL, input_shape = NULL) {
-
-  create_layer(keras$layers$ConvLSTM2D, object, list(
+  args <- list(
     filters = as.integer(filters),
     kernel_size = as_integer_tuple(kernel_size),
     strides = as_integer_tuple(strides),
@@ -1269,7 +1269,12 @@ layer_conv_lstm_2d <- function(object, filters, kernel_size, strides = c(1L, 1L)
     trainable = trainable,
     weights = weights,
     input_shape = normalize_shape(input_shape)
-  ))
+  )
+
+  if(tf_version() >= "2.3")
+    args$return_state <- return_state
+
+  create_layer(keras$layers$ConvLSTM2D, object, args)
 
 }
 
