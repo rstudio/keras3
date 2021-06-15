@@ -6,15 +6,15 @@
 #'  You should always call \code{super()$`__init__()`} to initialize the base
 #'  inherited layer.
 #' @param build a function that takes `input_shape` as argument. This is where you will
-#'  define your weights. Note that if your layer doesn’t define trainable weights then
+#'  define your weights. Note that if your layer doesn't define trainable weights then
 #'  you need not implement this method.
-#' @param call This is where the layer’s logic lives. Unless you want your layer to
+#' @param call This is where the layer's logic lives. Unless you want your layer to
 #'  support masking, you only have to care about the first argument passed to `call`
 #'  (the input tensor).
 #' @param compute_output_shape a function that takes `input_shape` as an argument. In
 #'  case your layer modifies the shape of its input, you should specify here the
 #'  shape transformation logic. This allows Keras to do automatic shape inference.
-#'  If you don’t modify the shape of the input then you need not implement this
+#'  If you don't modify the shape of the input then you need not implement this
 #'  method.
 #' @param ... Any other methods and/or attributes can be specified using named
 #'  arguments. They will be added to the layer class.
