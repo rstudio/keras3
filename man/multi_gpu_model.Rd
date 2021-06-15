@@ -105,9 +105,9 @@ parallel_model \%>\% compile(
 )
 
 # Generate dummy data.
-x <- array(runif(num_samples * height * width*3), 
+x <- array(runif(num_samples * height * width*3),
            dim = c(num_samples, height, width, 3))
-y <- array(runif(num_samples * num_classes), 
+y <- array(runif(num_samples * num_classes),
            dim = c(num_samples, num_classes))
 
 # This `fit` call will be distributed on 8 GPUs.

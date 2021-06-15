@@ -65,7 +65,7 @@ value != 1.}
 
 \item{depth_multiplier}{The number of depthwise convolution output channels
 for each input channel. The total number of depthwise convolution output
-channels will be equal to \code{filterss_in * depth_multiplier}.}
+channels will be equal to \code{filters_in * depth_multiplier}.}
 
 \item{activation}{Activation function to use. If you don't specify anything,
 no activation is applied (ie. "linear" activation: \code{a(x) = x}).}

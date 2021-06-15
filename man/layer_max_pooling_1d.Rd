@@ -9,6 +9,7 @@ layer_max_pooling_1d(
   pool_size = 2L,
   strides = NULL,
   padding = "valid",
+  data_format = "channels_last",
   batch_size = NULL,
   name = NULL,
   trainable = NULL,
@@ -25,6 +26,11 @@ halve the input. If NULL, it will default to \code{pool_size}.}
 
 \item{padding}{One of \code{"valid"} or \code{"same"} (case-insensitive).}
 
+\item{data_format}{A string, one of "channels_last" (default) or
+"channels_first". The ordering of the dimensions in the inputs.
+channels_last corresponds to inputs with shape \verb{(batch, steps, features)}
+while channels_first corresponds to inputs with shape \verb{(batch, features, steps)}.}
+
 \item{batch_size}{Fixed batch size for layer}
 
 \item{name}{An optional name string for the layer. Should be unique in a
@@ -38,12 +44,16 @@ isn't provided.}
 \description{
 Max pooling operation for temporal data.
 }
-\section{Input shape}{
- 3D tensor with shape: \verb{(batch_size, steps, features)}.
+\section{Input Shape}{
+
+If data_format='channels_last': 3D tensor with shape \verb{(batch_size, steps, features)}.
+If data_format='channels_first': 3D tensor with shape \verb{(batch_size, features, steps)}.
 }
 
 \section{Output shape}{
- 3D tensor with shape: \verb{(batch_size, downsampled_steps, features)}.
+
+If data_format='channels_last': 3D tensor with shape \verb{(batch_size, downsampled_steps, features)}.
+If data_format='channels_first': 3D tensor with shape \verb{(batch_size, features, downsampled_steps)}.
 }
 
 \seealso{

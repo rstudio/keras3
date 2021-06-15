@@ -12,6 +12,7 @@ layer_conv_2d(
   padding = "valid",
   data_format = NULL,
   dilation_rate = c(1L, 1L),
+  groups = 1L,
   activation = NULL,
   use_bias = TRUE,
   kernel_initializer = "glorot_uniform",
@@ -60,6 +61,12 @@ dilation rate to use for dilated convolution. Can be a single integer to
 specify the same value for all spatial dimensions. Currently, specifying
 any \code{dilation_rate} value != 1 is incompatible with specifying any stride
 value != 1.}
+
+\item{groups}{A positive integer specifying the number of groups in which the
+input is split along the channel axis. Each group is convolved separately
+with \code{filters / groups} filters. The output is the concatenation of all the
+groups results along the channel axis. Input channels and \code{filters} must both
+be divisible by \code{groups}.}
 
 \item{activation}{Activation function to use. If you don't specify anything,
 no activation is applied (ie. "linear" activation: \code{a(x) = x}).}

@@ -64,6 +64,8 @@ if validation data is provided.}
 This callback is constructed with anonymous functions that will be called at
 the appropriate time. Note that the callbacks expects positional arguments,
 as:
+}
+\details{
 \itemize{
 \item \code{on_epoch_begin} and \code{on_epoch_end} expect two positional arguments: \code{epoch}, \code{logs}
 \item \verb{on_batch_*}, \verb{on_train_batch_*}, \verb{on_predict_batch_*} and \verb{on_test_batch_*}, expect

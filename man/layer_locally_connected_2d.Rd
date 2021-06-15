@@ -20,6 +20,7 @@ layer_locally_connected_2d(
   activity_regularizer = NULL,
   kernel_constraint = NULL,
   bias_constraint = NULL,
+  implementation = 1L,
   batch_size = NULL,
   name = NULL,
   trainable = NULL,
@@ -70,6 +71,25 @@ layer (its "activation")..}
 \item{kernel_constraint}{Constraint function applied to the kernel matrix.}
 
 \item{bias_constraint}{Constraint function applied to the bias vector.}
+
+\item{implementation}{either 1, 2, or 3. 1 loops over input spatial locations
+to perform the forward pass. It is memory-efficient but performs a lot of
+(small) ops. 2 stores layer weights in a dense but sparsely-populated 2D
+matrix and implements the forward pass as a single matrix-multiply. It uses
+a lot of RAM but performs few (large) ops. 3 stores layer weights in a
+sparse tensor and implements the forward pass as a single sparse
+matrix-multiply. How to choose: 1: large, dense models, 2: small models, 3:
+large, sparse models, where "large" stands for large input/output
+activations (i.e. many \verb{filters, input_filters, large input_size, output_size}),
+and "sparse" stands for few connections between inputs and outputs, i.e.
+small ratio \code{filters * input_filters * kernel_size / (input_size * strides)},
+where inputs to and outputs of the layer are assumed to have shapes
+\verb{(input_size, input_filters)}, \verb{(output_size, filters)} respectively.
+It is recommended to benchmark each in the setting of interest to pick the
+most efficient one (in terms of speed and memory usage). Correct choice of
+implementation can lead to dramatic speed improvements (e.g. 50X),
+potentially at the expense of RAM. Also, only \code{padding="valid"} is
+supported by \code{implementation=1}.}
 
 \item{batch_size}{Fixed batch size for layer}
 

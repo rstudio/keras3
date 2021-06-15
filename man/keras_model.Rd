@@ -25,8 +25,8 @@ inputs <- layer_input(shape = c(784))
 
 # outputs compose input + dense layers
 predictions <- inputs \%>\%
-  layer_dense(units = 64, activation = 'relu') \%>\% 
-  layer_dense(units = 64, activation = 'relu') \%>\% 
+  layer_dense(units = 64, activation = 'relu') \%>\%
+  layer_dense(units = 64, activation = 'relu') \%>\%
   layer_dense(units = 10, activation = 'softmax')
 
 # create and compile model

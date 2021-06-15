@@ -108,7 +108,7 @@ See below for an example.
 
 # create metric using backend tensor functions
 metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
-  k_mean(y_pred) 
+  k_mean(y_pred)
 })
 
 model \%>\% compile(
@@ -118,9 +118,9 @@ model \%>\% compile(
 )
 
 # create custom metric to wrap metric with parameter
-metric_top_3_categorical_accuracy <- 
+metric_top_3_categorical_accuracy <-
   custom_metric("top_3_categorical_accuracy", function(y_true, y_pred) {
-    metric_top_k_categorical_accuracy(y_true, y_pred, k = 3) 
+    metric_top_k_categorical_accuracy(y_true, y_pred, k = 3)
   })
 
 model \%>\% compile(
