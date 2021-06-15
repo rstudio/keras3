@@ -15,7 +15,7 @@ expect_warning_if <- function(cond, expr) {
 py_capture_output <- reticulate::import("IPython")$utils$capture$capture_output
 
 test_succeeds <- function(desc, expr, required_version = NULL) {
-  
+
   invisible(
     capture.output({
       test_that(desc, {
@@ -52,7 +52,7 @@ skip_if_tensorflow_implementation <- function() {
 }
 
 define_model <- function() {
-  model <- keras_model_sequential() 
+  model <- keras_model_sequential()
   model %>%
     layer_dense(32, input_shape = 784, kernel_initializer = initializer_ones()) %>%
     layer_activation('relu') %>%
@@ -63,7 +63,7 @@ define_model <- function() {
 
 define_and_compile_model <- function() {
   model <- define_model()
-  model %>% 
+  model %>%
     compile(
       loss='binary_crossentropy',
       optimizer = optimizer_sgd(),
@@ -75,6 +75,3 @@ define_and_compile_model <- function() {
 random_array <- function(dim) {
   array(runif(prod(dim)), dim = dim)
 }
-
-
-

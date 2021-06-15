@@ -1,60 +1,60 @@
 
 #' Model performance metrics
-#'   
-#' @note   
-#' Metric functions are to be supplied in the `metrics` parameter of the 
+#'
+#' @note
+#' Metric functions are to be supplied in the `metrics` parameter of the
 #'   [compile.keras.engine.training.Model()] function.
-#' 
+#'
 #' @param y_true True labels (tensor)
 #' @param y_pred Predictions (tensor of the same shape as y_true).
 #' @param k An integer, number of top elements to consider.
 #' @param name Name of custom metric
 #' @param metric_fn Custom metric function
-#'       
+#'
 #' @section Custom Metrics:
 #' You can provide an arbitrary R function as a custom metric. Note that
-#' the `y_true` and `y_pred` parameters are tensors, so computations on 
+#' the `y_true` and `y_pred` parameters are tensors, so computations on
 #' them should use backend tensor functions.
-#' 
+#'
 #' Use the `custom_metric()` function to define a custom metric.
 #' Note that a name ('mean_pred') is provided for the custom metric
 #' function: this name is used within training progress output.
 #' See below for an example.
-#' 
+#'
 #' If you want to save and load a model with custom metrics, you should
 #' also specify the metric in the call the [load_model_hdf5()]. For example:
-#' `load_model_hdf5("my_model.h5", c('mean_pred' = metric_mean_pred))`. 
-#' 
-#' Alternatively, you can wrap all of your code in a call to 
-#' [with_custom_object_scope()] which will allow you to refer to the 
+#' `load_model_hdf5("my_model.h5", c('mean_pred' = metric_mean_pred))`.
+#'
+#' Alternatively, you can wrap all of your code in a call to
+#' [with_custom_object_scope()] which will allow you to refer to the
 #' metric by name just like you do with built in keras metrics.
-#' 
-#' Documentation on the available backend tensor functions can be 
+#'
+#' Documentation on the available backend tensor functions can be
 #' found at <https://keras.rstudio.com/articles/backend.html#backend-functions>.
-#' 
+#'
 #' @section Metrics with Parameters:
-#' 
+#'
 #' To use metrics with parameters (e.g. `metric_top_k_categorical_accurary()`)
 #' you should create a custom metric that wraps the call with the parameter.
 #' See below for an example.
-#' 
+#'
 #' @examples \dontrun{
-#' 
+#'
 #' # create metric using backend tensor functions
 #' metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
-#'   k_mean(y_pred) 
+#'   k_mean(y_pred)
 #' })
-#' 
+#'
 #' model %>% compile(
 #'   optimizer = optimizer_rmsprop(),
 #'   loss = loss_binary_crossentropy,
 #'   metrics = c('accuracy', metric_mean_pred)
 #' )
-#' 
+#'
 #' # create custom metric to wrap metric with parameter
-#' metric_top_3_categorical_accuracy <- 
+#' metric_top_3_categorical_accuracy <-
 #'   custom_metric("top_3_categorical_accuracy", function(y_true, y_pred) {
-#'     metric_top_k_categorical_accuracy(y_true, y_pred, k = 3) 
+#'     metric_top_k_categorical_accuracy(y_true, y_pred, k = 3)
 #'   })
 #'
 #' model %>% compile(
@@ -201,14 +201,3 @@ custom_metric <- function(name, metric_fn) {
   reticulate::py_set_attr(metric_fn, "__name__", name)
   metric_fn
 }
-
-
-
-
-
-
-
-
-
-
-

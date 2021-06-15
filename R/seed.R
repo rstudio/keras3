@@ -15,4 +15,3 @@ tensorflow_on_use_session <- function(sess, quiet) {
       keras$backend$set_session(sess)
   }
 }
-

@@ -2,20 +2,20 @@
 
 
 #' CIFAR10 small image classification
-#' 
-#' Dataset of 50,000 32x32 color training images, labeled over 10 categories, 
+#'
+#' Dataset of 50,000 32x32 color training images, labeled over 10 categories,
 #' and 10,000 test images.
-#' 
+#'
 #' @return Lists of training and test data: `train$x, train$y, test$x, test$y`.
-#' 
-#' The `x` data is an array of RGB image data with shape (num_samples, 3, 32, 
+#'
+#' The `x` data is an array of RGB image data with shape (num_samples, 3, 32,
 #' 32).
-#' 
-#' The `y` data is an array of category labels (integers in range 0-9) with 
+#'
+#' The `y` data is an array of category labels (integers in range 0-9) with
 #' shape (num_samples).
-#' 
+#'
 #' @family datasets
-#'   
+#'
 #' @export
 dataset_cifar10 <- function() {
   dataset <- keras$datasets$cifar10$load_data()
@@ -25,20 +25,20 @@ dataset_cifar10 <- function() {
 
 
 #' CIFAR100 small image classification
-#' 
+#'
 #' Dataset of 50,000 32x32 color training images, labeled over 100 categories,
 #' and 10,000 test images.
-#' 
+#'
 #' @param label_mode one of "fine", "coarse".
-#'   
+#'
 #' @return Lists of training and test data: `train$x, train$y, test$x, test$y`.
-#' 
+#'
 #' The `x` data is an array of RGB image data with shape (num_samples, 3, 32, 32).
-#' 
+#'
 #' The `y` data is an array of category labels with shape (num_samples).
 #'
-#' @family datasets   
-#'   
+#' @family datasets
+#'
 #' @export
 dataset_cifar100 <- function(label_mode = c("fine", "coarse")) {
   dataset <- keras$datasets$cifar100$load_data(
@@ -91,7 +91,7 @@ dataset_cifar100 <- function(label_mode = c("fine", "coarse")) {
 #' @family datasets
 #'
 #' @export
-dataset_imdb <- function(path = "imdb.npz", num_words = NULL, skip_top = 0L, maxlen = NULL, 
+dataset_imdb <- function(path = "imdb.npz", num_words = NULL, skip_top = 0L, maxlen = NULL,
                          seed = 113L, start_char = 1L, oov_char = 2L, index_from = 3L) {
   dataset <- keras$datasets$imdb$load_data(
     path = path,
@@ -103,9 +103,9 @@ dataset_imdb <- function(path = "imdb.npz", num_words = NULL, skip_top = 0L, max
     oov_char = as.integer(oov_char),
     index_from = as.integer(index_from)
   )
-  
+
   as_sequences_dataset_list(dataset)
- 
+
 }
 
 
@@ -117,36 +117,36 @@ dataset_imdb_word_index <- function(path = "imdb_word_index.json") {
 
 
 #' Reuters newswire topics classification
-#' 
+#'
 #' Dataset of 11,228 newswires from Reuters, labeled over 46 topics. As with
 #' [dataset_imdb()] , each wire is encoded as a sequence of word indexes (same
 #' conventions).
-#' 
+#'
 #' @param path Where to cache the data (relative to `~/.keras/dataset`).
-#' @param num_words Max number of words to include. Words are ranked by how 
+#' @param num_words Max number of words to include. Words are ranked by how
 #'   often they occur (in the training set) and only the most frequent words are
 #'   kept
-#' @param skip_top Skip the top N most frequently occuring words (which may not 
+#' @param skip_top Skip the top N most frequently occuring words (which may not
 #'   be informative).
 #' @param maxlen Truncate sequences after this length.
 #' @param test_split Fraction of the dataset to be used as test data.
 #' @param seed Random seed for sample shuffling.
 #' @param start_char The start of a sequence will be marked with this character.
 #'   Set to 1 because 0 is usually the padding character.
-#' @param oov_char words that were cut out because of the `num_words` or 
+#' @param oov_char words that were cut out because of the `num_words` or
 #'   `skip_top` limit will be replaced with this character.
 #' @param index_from index actual words with this index and higher.
-#'   
+#'
 #' @return Lists of training and test data: `train$x, train$y, test$x, test$y`
 #'   with same format as [dataset_imdb()]. The `dataset_reuters_word_index()`
 #'   function returns a list where the names are words and the values are
 #'   integer. e.g. `word_index[["giraffe"]]` might return `1234`.
-#'   
+#'
 #' @family datasets
-#'   
+#'
 #' @export
-dataset_reuters <- function(path = "reuters.npz", num_words = NULL, skip_top = 0L, maxlen = NULL, 
-                            test_split = 0.2, seed = 113L, start_char = 1L, oov_char = 2L, 
+dataset_reuters <- function(path = "reuters.npz", num_words = NULL, skip_top = 0L, maxlen = NULL,
+                            test_split = 0.2, seed = 113L, start_char = 1L, oov_char = 2L,
                             index_from = 3L) {
   dataset <- keras$datasets$reuters$load_data(
     path = path,
@@ -172,17 +172,17 @@ dataset_reuters_word_index <- function(path = "reuters_word_index.pkl") {
 
 
 #' MNIST database of handwritten digits
-#' 
+#'
 #' Dataset of 60,000 28x28 grayscale images of the 10 digits, along with a test set of 10,000 images.
-#' 
+#'
 #' @param path Path where to cache the dataset locally (relative to ~/.keras/datasets).
-#' 
+#'
 #' @return Lists of training and test data: `train$x, train$y, test$x, test$y`, where
 #'   `x` is an array of grayscale image data with shape (num_samples, 28, 28) and `y`
 #'   is an array of digit labels (integers in range 0-9) with shape (num_samples).
 #'
 #' @family datasets
-#'   
+#'
 #' @export
 dataset_mnist <- function(path = "mnist.npz") {
   dataset <- keras$datasets$mnist$load_data(path)
@@ -191,25 +191,25 @@ dataset_mnist <- function(path = "mnist.npz") {
 
 
 #' Fashion-MNIST database of fashion articles
-#' 
-#' Dataset of 60,000 28x28 grayscale images of the 10 fashion article classes, 
+#'
+#' Dataset of 60,000 28x28 grayscale images of the 10 fashion article classes,
 #' along with a test set of 10,000 images. This dataset can be used as a drop-in
 #' replacement for MNIST. The class labels are encoded as integers from 0-9 which
-#' correspond to T-shirt/top, Trouser, Pullover, Dress, Coat, Sandal, Shirt, 
+#' correspond to T-shirt/top, Trouser, Pullover, Dress, Coat, Sandal, Shirt,
 # 'Sneaker, Bag and Ankle boot.
-#' 
+#'
 #' @return Lists of training and test data: `train$x, train$y, test$x, test$y`, where
 #'   `x` is an array of grayscale image data with shape (num_samples, 28, 28) and `y`
 #'   is an array of article labels (integers in range 0-9) with shape (num_samples).
 #'
-#' @details Dataset of 60,000 28x28 grayscale images of 10 fashion categories, 
-#' along with a test set of 10,000 images. This dataset can be used as a drop-in 
+#' @details Dataset of 60,000 28x28 grayscale images of 10 fashion categories,
+#' along with a test set of 10,000 images. This dataset can be used as a drop-in
 #' replacement for MNIST. The class labels are:
-#' 
-#' * 0 - T-shirt/top 
+#'
+#' * 0 - T-shirt/top
 #' * 1 - Trouser
 #' * 2 - Pullover
-#' * 3 - Dress 
+#' * 3 - Dress
 #' * 4 - Coat
 #' * 5 - Sandal
 #' * 6 - Shirt
@@ -227,24 +227,24 @@ dataset_fashion_mnist <- function() {
 
 
 #' Boston housing price regression dataset
-#' 
+#'
 #' Dataset taken from the StatLib library which is maintained at Carnegie Mellon
 #' University.
-#' 
+#'
 #' @param path Path where to cache the dataset locally (relative to
 #'   ~/.keras/datasets).
 #' @param test_split fraction of the data to reserve as test set.
 #' @param seed Random seed for shuffling the data before computing the test
 #'   split.
-#'   
+#'
 #' @return Lists of training and test data: `train$x, train$y, test$x, test$y`.
-#' 
+#'
 #' Samples contain 13 attributes of houses at different locations around
 #' the Boston suburbs in the late 1970s. Targets are the median values of the
 #' houses at a location (in k$).
-#'   
-#' @family datasets   
-#'   
+#'
+#' @family datasets
+#'
 #' @export
 dataset_boston_housing <- function(path = "boston_housing.npz", test_split = 0.2, seed = 113L) {
   dataset <- keras$datasets$boston_housing$load_data(
@@ -283,4 +283,3 @@ as_sequences_dataset_list <- function(dataset) {
     )
   )
 }
-

@@ -4,7 +4,7 @@ context("freeze")
 
 
 define_freeze_model <- function() {
-  model <- keras_model_sequential() 
+  model <- keras_model_sequential()
   model %>%
     layer_dense(32, input_shape = 784, kernel_initializer = initializer_ones(), name = "input") %>%
     layer_activation('relu', name = "relu_activation") %>%
@@ -37,5 +37,3 @@ test_succeeds("freeze_weights can work on names", {
   freeze_weights(model, from = "dense")
   expect_length(model$trainable_weights, 2)
 })
-
-

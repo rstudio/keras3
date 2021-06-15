@@ -4,9 +4,9 @@ library(keras)
 model <- keras_model_sequential()
 
 # add layers and compile the model
-model %>% 
-  layer_dense(units = 32, activation = 'relu', input_shape = c(100)) %>% 
-  layer_dense(units = 1, activation = 'sigmoid') %>% 
+model %>%
+  layer_dense(units = 32, activation = 'relu', input_shape = c(100)) %>%
+  layer_dense(units = 1, activation = 'sigmoid') %>%
   compile(
     optimizer = 'rmsprop',
     loss = 'binary_crossentropy',
@@ -27,7 +27,7 @@ callbacks <- list(
 if (tensorflow::tf_version() >= "1.14") {
   callbacks[[2]] <- callback_model_checkpoint("cbk_checkpoint.h5")
 } else {
-  callbacks[[2]] <- callback_model_checkpoint("cbk_checkpoint.h5", 
+  callbacks[[2]] <- callback_model_checkpoint("cbk_checkpoint.h5",
                                               save_freq = NULL, period = 1)
 }
 
@@ -36,10 +36,10 @@ if (is_backend("tensorflow"))
 
 # Train the model, iterating on the data in batches of 32 samples
 model %>% fit(
-  data, 
-  labels, 
-  epochs=10, 
-  batch_size=32, 
+  data,
+  labels,
+  epochs=10,
+  batch_size=32,
   validation_split = 0.2,
   callbacks = callbacks,
   view_metrics = FALSE

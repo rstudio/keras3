@@ -1,6 +1,6 @@
 
 #' Utility function for generating batches of temporal data.
-#' 
+#'
 #' @param data Object containing consecutive data points (timesteps). The data
 #'   should be 2D, and axis 1 is expected to be the time dimension.
 #' @param targets Targets corresponding to timesteps in `data`.
@@ -21,10 +21,10 @@
 #'   in reverse chronological order.
 #' @param batch_size Number of timeseries samples in each batch
 #'   (except maybe the last one).
-#'   
-#' @return An object that can be passed to generator based training 
+#'
+#' @return An object that can be passed to generator based training
 #'   functions (e.g. [fit_generator()]).ma
-#' 
+#'
 #' @export
 timeseries_generator <- function(data, targets, length, sampling_rate = 1,
                                  stride = 1, start_index = 0, end_index = NULL,

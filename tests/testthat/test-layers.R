@@ -10,8 +10,8 @@ test_call_succeeds("layer_dense", {
 })
 
 test_call_succeeds("layer_activation", {
-  keras_model_sequential() %>% 
-    layer_dense(32, input_shape = c(784)) %>% 
+  keras_model_sequential() %>%
+    layer_dense(32, input_shape = c(784)) %>%
     layer_activation('relu')
 })
 
@@ -22,20 +22,20 @@ test_call_succeeds("layer_activation_relu", required_version = "2.2.0", {
 })
 
 test_call_succeeds("layer_activation_selu", required_version = "2.2.0", {
-  keras_model_sequential() %>% 
-    layer_dense(32, input_shape = c(784)) %>% 
+  keras_model_sequential() %>%
+    layer_dense(32, input_shape = c(784)) %>%
     layer_activation_selu()
 })
 
 test_call_succeeds("layer_activation_leaky_relu", {
-  keras_model_sequential() %>% 
-    layer_dense(32, input_shape = c(784)) %>% 
+  keras_model_sequential() %>%
+    layer_dense(32, input_shape = c(784)) %>%
     layer_activation_leaky_relu()
 })
 
 test_call_succeeds("layer_activation_parametric_relu", {
-  keras_model_sequential() %>% 
-    layer_dense(32, input_shape = c(784)) %>% 
+  keras_model_sequential() %>%
+    layer_dense(32, input_shape = c(784)) %>%
     layer_activation_parametric_relu()
 })
 
@@ -213,7 +213,7 @@ test_call_succeeds("layer_upsampling_3d", {
     layer_dense(32, input_shape = c(784)) %>%
     layer_reshape(target_shape = c(2,4,2,2)) %>%
     layer_upsampling_3d()
-    
+
 })
 
 
@@ -490,15 +490,15 @@ test_call_succeeds("bidirectional", {
 
 test_call_succeeds("layer_activation_softmax", required_version = "2.1.3", {
   if (is_tensorflow_implementation()) {
-    keras_model_sequential() %>% 
-      layer_dense(32, input_shape = c(784)) %>% 
+    keras_model_sequential() %>%
+      layer_dense(32, input_shape = c(784)) %>%
       layer_activation_softmax()
   }
 })
 
 test_call_succeeds("layer_separable_conv_1d", required_version = "2.1.3", {
   if (is_tensorflow_implementation()) {
-    keras_model_sequential() %>% 
+    keras_model_sequential() %>%
       layer_dense(32, input_shape = c(784)) %>%
       layer_reshape(target_shape = c(4, 8)) %>%
       layer_separable_conv_1d(filters = 4, kernel_size = c(4))
@@ -515,66 +515,62 @@ test_call_succeeds('layer_attention',{
 
 test_call_succeeds("layer_dense_features", required_version = "2.1.3", {
   if (is_tensorflow_implementation() && tensorflow::tf_version() >= "1.14") {
-    
+
     # functional style
-    
+
     fc <- list(tensorflow::tf$feature_column$numeric_column("mpg"))
-    
+
     input <- list(mpg = layer_input(1))
-    
-    out <- input %>% 
+
+    out <- input %>%
       layer_dense_features(feature_columns = fc)
-    
+
     # sequential: needs to pass a list in the begining.
     feature_layer <- layer_dense_features(feature_columns = fc)
-    
+
     model <- keras_model_sequential(list(
       feature_layer,
       layer_dense(units = 1)
     ))
-    
+
     model %>% compile(loss = "mae", optimizer = "adam")
-    
+
     model %>% fit(x = list(mpg = 1:10), y = 1:10, verbose = 0)
   }
 })
 
 test_succeeds("Can serialize a model that contains dense_features", {
-  
+
   if (tensorflow::tf_version() < "2.0")
     skip("TensorFlow 2.0 is required.")
-  
+
   fc <- list(tensorflow::tf$feature_column$numeric_column("mpg"))
-  
-  
+
+
   input <- list(mpg = layer_input(1))
-  
-  out <- input %>% 
+
+  out <- input %>%
     layer_dense_features(feature_columns = fc)
-  
+
   # sequential: needs to pass a list in the begining.
   feature_layer <- layer_dense_features(feature_columns = fc)
-  
+
   model <- keras_model_sequential(list(
     feature_layer,
     layer_dense(units = 1)
   ))
-  
+
   model %>% compile(loss = "mae", optimizer = "adam")
-  
+
   model %>% fit(x = list(mpg = 1:10), y = 1:10, verbose = 0)
-  
+
   pred <- predict(model, list(mpg = 1:10))
 
   fname <- tempfile()
   save_model_tf(model, fname)
-  
+
   loaded <- load_model_tf(fname)
   pred2 <- predict(loaded, list(mpg = 1:10))
-  
+
   expect_equal(pred, pred2)
 })
-
-
-
-

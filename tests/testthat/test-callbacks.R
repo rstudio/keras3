@@ -22,7 +22,7 @@ test_callback <- function(name, callback, h5py = FALSE, required_version = NULL)
                 paste0("callback_", name, " is called back"),  {
     if (h5py && !have_h5py())
       skip(paste(name, "test requires h5py package"))
-    define_compile_and_fit(callbacks = list(callback))   
+    define_compile_and_fit(callbacks = list(callback))
   })
 }
 
@@ -53,12 +53,12 @@ test_callback("lambd", callback_lambda(
 ))
 
 test_succeeds("lambda callbacks other args", {
-  
+
   x <- layer_input(shape = 1)
   y <- layer_dense(x, units = 1)
   model <- keras_model(x, y)
   model %>% compile(optimizer = "adam", loss = "mae")
-  
+
   warns <- capture_warnings(
     clb <- callback_lambda(
       on_epoch_begin = function(epoch, logs) {
@@ -75,21 +75,21 @@ test_succeeds("lambda callbacks other args", {
       }
     )
   )
-  
-  if (get_keras_implementation() == "tensorflow" && 
+
+  if (get_keras_implementation() == "tensorflow" &&
       tensorflow::tf_version() >= "2.0") {
     expect_equal(length(warns), 0)
   } else {
     expect_equal(length(warns), 2)
   }
-  
+
   warns <- capture_warnings(
     out <- capture_output(
-      pred <- predict(model, matrix(1:10, ncol = 1), callbacks = list(clb))   
+      pred <- predict(model, matrix(1:10, ncol = 1), callbacks = list(clb))
     )
   )
-  
-  if (get_keras_implementation() == "tensorflow" && 
+
+  if (get_keras_implementation() == "tensorflow" &&
       tensorflow::tf_version() >= "2.0") {
     expect_equal(length(warns), 0)
     expect_equal(out, "Prediction Begin")
@@ -97,15 +97,15 @@ test_succeeds("lambda callbacks other args", {
     expect_equal(length(warns), 1)
     expect_equal(out, "")
   }
-  
+
   warns <- capture_warnings(
     out <- capture_output(
-      pred <- evaluate(model, matrix(1:10, ncol = 1), y = 1:10, 
-                       callbacks = list(clb))   
+      pred <- evaluate(model, matrix(1:10, ncol = 1), y = 1:10,
+                       callbacks = list(clb))
     )
   )
-  
-  if (get_keras_implementation() == "tensorflow" && 
+
+  if (get_keras_implementation() == "tensorflow" &&
       tensorflow::tf_version() >= "2.0") {
     expect_equal(length(warns), 0)
     expect_equal(out, "Test Begin")
@@ -113,12 +113,12 @@ test_succeeds("lambda callbacks other args", {
     expect_equal(length(warns), 1)
     expect_equal(out, "")
   }
-  
+
 })
 
 
 test_succeeds("custom callbacks", {
-  
+
   CustomCallback <- R6::R6Class("CustomCallback",
     inherit = KerasCallback,
     public = list(
@@ -130,32 +130,32 @@ test_succeeds("custom callbacks", {
       }
     )
   )
-  
+
   LossHistory <- R6::R6Class("LossHistory",
     inherit = KerasCallback,
     public = list(
       losses = NULL,
-     
+
       on_batch_end = function(batch, logs = list()) {
         self$losses <- c(self$losses, logs[["loss"]])
       }
-      
+
     ))
-  
+
   cc <- CustomCallback$new()
   lh <- LossHistory$new()
 
   define_compile_and_fit(callbacks = list(cc, lh))
-  
+
   expect_is(lh$losses, "numeric")
-  
+
 })
 
 
 expect_warns_and_out <- function(warns, out) {
-  if (get_keras_implementation() == "tensorflow" && 
+  if (get_keras_implementation() == "tensorflow" &&
       tensorflow::tf_version() >= "2.0") {
-    expect_equal(out, c("PREDICT BEGINPREDICT END")) 
+    expect_equal(out, c("PREDICT BEGINPREDICT END"))
     expect_equal(warns, character())
   } else {
     expect_equal(out, "")
@@ -164,10 +164,10 @@ expect_warns_and_out <- function(warns, out) {
 }
 
 test_succeeds("on predict/evaluation callbacks", {
-  
+
   if (tensorflow::tf_version() <= "2.1")
     skip("don't work in tf2.1")
-  
+
   CustomCallback <- R6::R6Class(
     "CustomCallback",
     inherit = KerasCallback,
@@ -186,33 +186,33 @@ test_succeeds("on predict/evaluation callbacks", {
       }
     )
   )
-  
+
   input <- layer_input(shape = 1)
   output <- layer_dense(input, 1)
   model <- keras_model(input, output)
   model %>% compile(optimizer = "adam", loss = "mae")
-  
+
   cc <- CustomCallback$new()
- 
+
   # test for prediction
   warns <- capture_warnings(
     out <- capture_output(
       pred <- predict(model, x = matrix(1:10, ncol = 1), callbacks = cc)
-    )  
-  )
-  expect_warns_and_out(warns, out)
-  
-  gen <- function() {
-    list(matrix(1:10, ncol = 1))
-  }
-  
-  warns <- capture_warnings(
-    out <- capture_output(
-      pred <- predict(model, gen, callbacks = cc, steps = 1)  
     )
   )
   expect_warns_and_out(warns, out)
-  
+
+  gen <- function() {
+    list(matrix(1:10, ncol = 1))
+  }
+
+  warns <- capture_warnings(
+    out <- capture_output(
+      pred <- predict(model, gen, callbacks = cc, steps = 1)
+    )
+  )
+  expect_warns_and_out(warns, out)
+
   # tests for evaluation
   warns <- capture_warnings(
     out <- capture_output(
@@ -220,22 +220,22 @@ test_succeeds("on predict/evaluation callbacks", {
     )
   )
   expect_warns_and_out(warns, out)
-  
+
   gen <- function() {
     list(matrix(1:10, ncol = 1), 1:10)
   }
-  
+
   warns <- capture_warnings(
     out <- capture_output(
       ev <- evaluate(model, gen, callbacks = cc, steps = 1)
     )
   )
   expect_warns_and_out(warns, out)
-  
+
 })
 
 test_succeeds("warnings for new callback moment", {
-  
+
   CustomCallback <- R6::R6Class(
     "CustomCallback",
     inherit = KerasCallback,
@@ -254,23 +254,23 @@ test_succeeds("warnings for new callback moment", {
       }
     )
   )
-  
+
   cc <- CustomCallback$new()
-  
+
   input <- layer_input(shape = 1)
   output <- layer_dense(input, 1)
   model <- keras_model(input, output)
   model %>% compile(optimizer = "adam", loss = "mae")
-  
+
   warns <- capture_warnings(
-    model %>% 
-      fit(x = matrix(1:10, ncol = 1), y = 1:10, callbacks = list(cc), 
-          verbose = 0, epochs = 2)  
+    model %>%
+      fit(x = matrix(1:10, ncol = 1), y = 1:10, callbacks = list(cc),
+          verbose = 0, epochs = 2)
   )
-  
+
   if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() < "2.0")
     expect_equal(length(warns), 4)
   else
     expect_equal(length(warns), 0)
-    
+
 })

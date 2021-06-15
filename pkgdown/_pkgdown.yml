@@ -12,7 +12,7 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "Tutorials"
-      menu: 
+      menu:
         - text: "Getting Started"
           href: articles/getting_started.html
         - text: "Basic Classification"
@@ -100,7 +100,7 @@ reference:
       - serialize_model
       - clone_model
       - freeze_weights
- 
+
   - title: "Core Layers"
     contents:
       - layer_input
@@ -114,7 +114,7 @@ reference:
       - layer_activity_regularization
       - layer_masking
       - layer_flatten
-      
+
   - title: "Convolutional Layers"
     contents:
       - starts_with("layer_conv_")
@@ -135,7 +135,7 @@ reference:
       - layer_global_average_pooling_2d
       - layer_global_max_pooling_3d
       - layer_global_average_pooling_3d
- 
+
   - title: "Activation Layers"
     contents:
       - layer_activation
@@ -145,7 +145,7 @@ reference:
       - layer_activation_thresholded_relu
       - layer_activation_elu
       - layer_activation_softmax
-      
+
   - title: "Dropout Layers"
     contents:
       - layer_dropout
@@ -163,15 +163,15 @@ reference:
       - layer_cudnn_gru
       - layer_lstm
       - layer_cudnn_lstm
-       
+
   - title: "Embedding Layers"
     contents:
       - layer_embedding
-       
+
   - title: "Normalization Layers"
     contents:
       - layer_batch_normalization
-   
+
 
   - title: "Noise Layers"
     contents:
@@ -194,7 +194,7 @@ reference:
     contents:
       - time_distributed
       - bidirectional
- 
+
   - title: "Layer Methods"
     contents:
       - get_config
@@ -202,12 +202,12 @@ reference:
       - get_input_at
       - count_params
       - reset_states
-      
+
   - title: "Custom Layers"
     contents:
       - KerasLayer
       - create_layer
- 
+
   - title: "Model Persistence"
     contents:
       - save_model_hdf5
@@ -217,7 +217,7 @@ reference:
       - get_config
       - model_to_json
       - model_to_yaml
- 
+
   - title: "Datasets"
     contents:
       - dataset_cifar10
@@ -243,14 +243,14 @@ reference:
       - imagenet_decode_predictions
       - mobilenet_preprocess_input
       - mobilenet_decode_predictions
-      
+
 
   - title: "Sequence Preprocessing"
-    contents: 
+    contents:
       - pad_sequences
       - skipgrams
       - make_sampling_table
-       
+
   - title: "Text Preprocessing"
     contents:
       - text_tokenizer
@@ -263,7 +263,7 @@ reference:
       - text_one_hot
       - text_hashing_trick
       - text_to_word_sequence
-       
+
   - title: "Image Preprocessing"
     contents:
       - image_load
@@ -273,7 +273,7 @@ reference:
       - flow_images_from_data
       - flow_images_from_directory
       - generator_next
- 
+
   - title: "Optimizers"
     contents:
       - optimizer_sgd
@@ -283,7 +283,7 @@ reference:
       - optimizer_adam
       - optimizer_adamax
       - optimizer_nadam
-   
+
   - title: "Callbacks"
     contents:
       - callback_progbar_logger
@@ -297,7 +297,7 @@ reference:
       - callback_csv_logger
       - callback_lambda
       - KerasCallback
-      
+
   - title: "Initializers"
     contents:
       - initializer_zeros
@@ -316,12 +316,12 @@ reference:
       - initializer_lecun_uniform
       - initializer_lecun_normal
 
-   
+
   - title: "Constraints"
     contents:
       - constraint_maxnorm
       - KerasConstraint
-      
+
   - title: "Utils"
     contents:
       - plot.keras_training_history
@@ -339,11 +339,11 @@ reference:
       - implementation
       - use_implementation
       - use_backend
-     
+
   - title: "Losses"
     contents:
       - loss_mean_squared_error
-  
+
   - title: "Metrics"
     contents:
       - metric_binary_accuracy
@@ -351,17 +351,12 @@ reference:
   - title: "Regularizers"
     contents:
       - regularizer_l1
-      
-      
-  - title: "Activations" 
+
+
+  - title: "Activations"
     contents:
       - activation_relu
-      
+
   - title: "Backend"
     contents:
       - starts_with("k_")
-
-      
-      
-
-

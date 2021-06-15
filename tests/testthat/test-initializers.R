@@ -5,14 +5,14 @@ context("initializers")
 test_initializer <- function(name, required_version = NULL) {
   initializer_fn <- eval(parse(text = paste0("initializer_", name)))
   test_call_succeeds(name, required_version = required_version, {
-    keras_model_sequential() %>% 
-      layer_dense(32, input_shape = c(32,32), kernel_initializer = initializer_fn()) %>% 
-      compile( 
+    keras_model_sequential() %>%
+      layer_dense(32, input_shape = c(32,32), kernel_initializer = initializer_fn()) %>%
+      compile(
         optimizer = 'sgd',
-        loss='binary_crossentropy', 
+        loss='binary_crossentropy',
         metrics='accuracy'
       )
-  }) 
+  })
 }
 
 
@@ -33,6 +33,3 @@ test_initializer("he_uniform")
 test_initializer("he_normal")
 test_initializer("lecun_uniform")
 test_initializer("lecun_normal", required_version = "2.0.6")
-
-
-

@@ -11,7 +11,7 @@
 #' @note The `from` and `to` layer arguments are both inclusive.
 #'
 #'   When applied to a model, the freeze or unfreeze is a global operation
-#'   over all layers in the model (i.e. layers not within the specified 
+#'   over all layers in the model (i.e. layers not within the specified
 #'   range will be set to the opposite value, e.g. unfrozen for a call to
 #'   freeze).
 #'
@@ -56,7 +56,7 @@
 #'
 #' @export
 freeze_weights <- function(object, from = NULL, to = NULL) {
-  
+
   # check for from and to and apply accordingly
   if (missing(from) && missing(to)) {
     object$trainable <- FALSE
@@ -64,7 +64,7 @@ freeze_weights <- function(object, from = NULL, to = NULL) {
     object$trainable <- TRUE
     apply_trainable(object, from, to, FALSE)
   }
-    
+
   # return model invisibly (for chaining)
   invisible(object)
 }
@@ -73,58 +73,57 @@ freeze_weights <- function(object, from = NULL, to = NULL) {
 #' @rdname freeze_weights
 #' @export
 unfreeze_weights <- function(object, from = NULL, to = NULL) {
-  
+
   # object always trainable after unfreeze
   object$trainable <- TRUE
-  
+
   # apply to individual layers if requested
   if (!missing(from) || !missing(to))
     apply_trainable(object, from, to, TRUE)
-  
+
   # return model invisibly (for chaining)
   invisible(object)
 }
 
 apply_trainable <- function(object, from, to, trainable) {
-  
+
   # first resolve from and to into layer names
   layers <- object$layers
-  
+
   # NULL means beginning and end respectively
   if (is.null(from))
     from <- layers[[1]]$name
   if (is.null(to))
     to <- layers[[length(layers)]]$name
-  
+
   # layer instances become layer names
   if (is_layer(from))
     from <- from$name
   if (is_layer(to))
     to <- to$name
-  
+
   # layer indexes become layer names
   if (is.numeric(from))
     from <- layers[[from]]$name
   if (is.numeric(to))
     to <- layers[[to]]$name
-  
+
   # apply trainable property
   set_trainable <- FALSE
   for (layer in layers) {
-    
+
     # flag to begin applying property
     if (layer$name == from)
       set_trainable <- TRUE
-    
+
     # apply property
     if (set_trainable)
       layer$trainable <- trainable
     else
       layer$trainable <- !trainable
-    
+
     # flag to stop applying property
     if (layer$name == to)
       set_trainable <- FALSE
   }
 }
-

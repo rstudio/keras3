@@ -18,24 +18,24 @@
 #'
 #' @export
 KerasLayer <- R6Class("KerasLayer",
-             
+
   public = list(
-   
-    # Create the layer weights. 
+
+    # Create the layer weights.
     build = function(input_shape) {
-    
+
     },
-   
+
     # Call the layer on an input tensor.
     call = function(inputs, mask = NULL) {
       stop("Keras custom layers must implement the call function")
     },
-   
+
     # Compute the output shape for the layer.
     compute_output_shape = function(input_shape) {
       input_shape
     },
-    
+
     # Add losses to the layer
     add_loss = function(losses, inputs = NULL) {
       args <- list()
@@ -43,11 +43,11 @@ KerasLayer <- R6Class("KerasLayer",
       args$inputs <- inputs
       do.call(private$wrapper$add_loss, args)
     },
-   
+
     # Adds a weight variable to the layer.
     add_weight = function(name, shape, dtype = NULL, initializer = NULL,
                           regularizer = NULL, trainable = TRUE, constraint = NULL) {
-      
+
       args <- list()
       args$name <- name
       args$shape <- shape
@@ -56,20 +56,20 @@ KerasLayer <- R6Class("KerasLayer",
       args$regularizer <- regularizer
       args$trainable <- trainable
       args$constraint <- constraint
-      
+
       do.call(private$wrapper$add_weight, args)
     },
-   
+
     # back reference to python layer that wraps us
     .set_wrapper = function(wrapper) {
       private$wrapper <- wrapper
     },
-    
+
     python_layer = function() {
       private$wrapper
     }
   ),
-  
+
   active = list(
     input = function(value) {
       if (missing(value)) return(private$wrapper$input)
@@ -80,17 +80,8 @@ KerasLayer <- R6Class("KerasLayer",
       else private$wrapper$output <- value
     }
   ),
-  
+
   private = list(
     wrapper = NULL
   )
 )
-
-
-
-
-
-
-
-
-

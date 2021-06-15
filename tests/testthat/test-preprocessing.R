@@ -2,7 +2,7 @@ context("preprocessing")
 
 test_call_succeeds("pad_sequences", {
   a <- list(list(1), list(1,2), list(1,2,3))
-  b <- pad_sequences(a, maxlen=3, padding='pre')    
+  b <- pad_sequences(a, maxlen=3, padding='pre')
   expect_equal(b, matrix(c(0L, 0L, 1L, 0L, 1L, 2L, 1L, 2L, 3L), nrow = 3, ncol = 3))
 })
 
@@ -29,7 +29,7 @@ test_call_succeeds("text_hashing_trick", required_version = "2.0.5", {
 test_call_succeeds("missing text data", required_version = "2.0.5", {
   expect_error(text_hashing_trick(letters, 10),
                "`text` should be length 1")
-  
+
   texts <- c(
     'Dogs and cats living together.',
     NA_character_
@@ -46,15 +46,15 @@ test_succeeds("use of text tokenizer", {
   )
   tokenizer <- text_tokenizer(num_words = 10)
   tokenizer %>% fit_text_tokenizer(texts)
-  
+
   sequences <- iterate(texts_to_sequences_generator(tokenizer, texts))
   tokenizer %>% fit_text_tokenizer(sequences)
-  
+
   # save and then reload tokenizer
   save_text_tokenizer(tokenizer, "tokenizer")
   on.exit(unlink("tokenizer"), add = TRUE)
   tokenizer <- load_text_tokenizer("tokenizer")
-  
+
   for (mode in c('binary', 'count', 'tfidf', 'freq'))
     texts_to_matrix(tokenizer, texts, mode)
 })
@@ -82,128 +82,127 @@ test_succeeds("images arrays can be resized", {
   if (have_pillow()) {
     img <- image_load("digit.jpeg")
     img_arr <- image_to_array(img)
-    image_array_resize(img_arr, height = 450, width = 448) %>% 
+    image_array_resize(img_arr, height = 450, width = 448) %>%
       image_array_save("digit_resized.jpeg")
   }
 })
 
 test_succeeds("flow images from dataframe works", {
-  
+
   if (!reticulate::py_module_available("pandas"))
     skip("Needs pandas")
-    
-  
+
+
   if (have_pillow()) {
-    
+
     df <- data.frame(
-      fname = rep("digit.jpeg", 10), 
-      class = letters[1:10], 
+      fname = rep("digit.jpeg", 10),
+      class = letters[1:10],
       stringsAsFactors = FALSE
       )
-    
+
     img_gen <- flow_images_from_dataframe(
-      df, 
-      directory = ".", 
-      x_col = "fname", 
+      df,
+      directory = ".",
+      x_col = "fname",
       y_col = "class"
     )
-    
+
     batch <- reticulate::iter_next(img_gen)
-    
+
     expect_equal(dim(batch[[1]]), c(10, 256, 256, 3))
     expect_equal(dim(batch[[2]]), c(10, 10))
-    
+
     if (tensorflow::tf_version() >= "2.3") {
-      
+
       expect_warning(
         img_gen <- flow_images_from_dataframe(
-          df, 
-          directory = ".", 
-          x_col = "fname", 
-          y_col = "class", 
+          df,
+          directory = ".",
+          x_col = "fname",
+          y_col = "class",
           drop_duplicates = TRUE
         )
       )
-      
+
     }
-    
+
   }
 })
 
 test_succeeds("flow images from directory works", {
-  
+
   if (!have_pillow())
     skip("Pillow required.")
-  
+
   dir <- tempfile()
   dir.create(dir)
   dir.create(paste0(dir, "/flow-img"))
   dir <- paste0(dir, "/flow-img")
   dir.create(paste0(dir, "/0"))
   dir.create(paste0(dir, "/1"))
-  
+
   mnist <- dataset_mnist()
   ind <- which(mnist$train$y %in% c(0, 1))
-  
+
   for (i in ind) {
     img <- mnist$train$x[i,,]/255
     rname <- paste(sample(letters, size = 10, replace = TRUE), collapse = "")
     jpeg::writeJPEG(img, target = paste0(dir, "/", mnist$train$y[i], "/", rname, ".jpeg"))
   }
-  
+
   img_gen <- image_data_generator()
-  
+
   gen <- flow_images_from_directory(
-    directory = dir, 
-    generator = img_gen, 
-    target_size = c(28, 28), 
+    directory = dir,
+    generator = img_gen,
+    target_size = c(28, 28),
     batch_size = 32
   )
-  
-  model <- keras_model_sequential() %>% 
-    layer_flatten(input_shape = c(28,28, 3)) %>% 
+
+  model <- keras_model_sequential() %>%
+    layer_flatten(input_shape = c(28,28, 3)) %>%
     layer_dense(units = 2, activation = "softmax")
-  
+
   model %>% compile(loss = "binary_crossentropy", optimizer = "adam")
-  
+
   expect_warning_if(tensorflow::tf_version() >= "2.1", {
     # test fitting the model
     model %>% fit_generator(gen, steps_per_epoch = 20)
-    
+
     # test predictions
     preds <- predict_generator(model, gen, steps = 10)
-    
+
     # evaluate
     eva <- evaluate_generator(model, gen, steps = 10)
   })
 })
 
 test_succeeds("images_dataset_from_directory", {
-  
+
   if (tensorflow::tf_version() < "2.3")
     skip("requires tf_version() >= 2.3")
-  
+
   dir <- tempfile()
   dir.create(dir)
   dir.create(file.path(dir, "0"))
   dir.create(file.path(dir, "1"))
-  
+
   mnist <- dataset_mnist()
   ind <- which(mnist$train$y %in% c(0, 1))
-  
+
   for (i in ind) {
     img <- mnist$train$x[i,,]/255
     rname <- paste(sample(letters, size = 10, replace = TRUE), collapse = "")
     jpeg::writeJPEG(img, target = paste0(dir, "/", mnist$train$y[i], "/", rname, ".jpeg"))
   }
-  
+
   data <- image_dataset_from_directory(dir)
-  
+
   iter <- reticulate::as_iterator(data)
   d <- reticulate::iter_next(iter)
-  
+
   expect_equal(d[[1]]$shape$as_list(), c(32, 256, 256, 3))
   expect_equal(d[[2]]$shape$as_list(), c(32))
-  
-})
 
+})

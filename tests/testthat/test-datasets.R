@@ -3,7 +3,7 @@ context("datasets")
 
 
 # these tests take a long time to load so we skip them by default
-skip <- is.na(Sys.getenv("KERAS_TEST_DATASETS", unset = NA)) && 
+skip <- is.na(Sys.getenv("KERAS_TEST_DATASETS", unset = NA)) &&
         is.na(Sys.getenv("KERAS_TEST_ALL", unset = NA))
 
 test_dataset <- function(name) {
@@ -22,7 +22,3 @@ test_dataset("reuters")
 test_dataset("reuters_word_index")
 test_dataset("mnist")
 test_dataset("boston_housing")
-
-
-
-

@@ -28,9 +28,9 @@
 #' @family text preprocessing
 #'
 #' @export
-pad_sequences <- function(sequences, maxlen = NULL, dtype = "int32", padding = "pre", 
+pad_sequences <- function(sequences, maxlen = NULL, dtype = "int32", padding = "pre",
                           truncating = "pre", value = 0.0) {
-  
+
   # force length-1 sequences to list (so they aren't treated as scalars)
   if (is.list(sequences)) {
     sequences <- lapply(sequences, function(seq) {
@@ -40,7 +40,7 @@ pad_sequences <- function(sequences, maxlen = NULL, dtype = "int32", padding = "
         seq
     })
   }
-  
+
   keras$preprocessing$sequence$pad_sequences(
     sequences = sequences,
     maxlen = as_nullable_integer(maxlen),
@@ -52,8 +52,8 @@ pad_sequences <- function(sequences, maxlen = NULL, dtype = "int32", padding = "
 }
 
 #' Generates skipgram word pairs.
-#' 
-#' @details 
+#'
+#' @details
 #' This function transforms a list of word indexes (lists of integers)
 #' into lists of words of the form:
 #'
@@ -62,38 +62,38 @@ pad_sequences <- function(sequences, maxlen = NULL, dtype = "int32", padding = "
 #'
 #' Read more about Skipgram in this gnomic paper by Mikolov et al.:
 #' [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781v3.pdf)
-#' 
+#'
 #' @param sequence A word sequence (sentence), encoded as a list of word indices
 #'   (integers). If using a `sampling_table`, word indices are expected to match
 #'   the rank of the words in a reference dataset (e.g. 10 would encode the
 #'   10-th most frequently occuring token). Note that index 0 is expected to be
 #'   a non-word and will be skipped.
 #' @param vocabulary_size Int, maximum possible word index + 1
-#' @param window_size Int, size of sampling windows (technically half-window). 
+#' @param window_size Int, size of sampling windows (technically half-window).
 #'   The window of a word `w_i` will be `[i-window_size, i+window_size+1]`
 #' @param negative_samples float >= 0. 0 for no negative (i.e. random) samples. 1
-#'   for same number as positive samples. 
+#'   for same number as positive samples.
 #' @param shuffle whether to shuffle the word couples before returning them.
-#' @param categorical bool. if `FALSE`, labels will be integers (eg. `[0, 1, 1 .. ]`), 
+#' @param categorical bool. if `FALSE`, labels will be integers (eg. `[0, 1, 1 .. ]`),
 #'   if `TRUE` labels will be categorical eg. `[[1,0],[0,1],[0,1] .. ]`
 #' @param sampling_table 1D array of size `vocabulary_size` where the entry i
 #'   encodes the probabibily to sample a word of rank i.
 #' @param seed Random seed
-#'   
+#'
 #' @return List of `couples`, `labels` where:
 #'   - `couples` is a list of 2-element integer vectors: `[word_index, other_word_index]`.
 #'   - `labels` is an integer vector of 0 and 1, where 1 indicates that `other_word_index`
 #'      was found in the same window as `word_index`, and 0 indicates that `other_word_index`
 #'      was random.
-#'  - if `categorical` is set to `TRUE`, the labels are categorical, ie. 1 becomes `[0,1]`, 
+#'  - if `categorical` is set to `TRUE`, the labels are categorical, ie. 1 becomes `[0,1]`,
 #'    and 0 becomes `[1, 0]`.
-#'   
-#' @family text preprocessing   
-#'   
+#'
+#' @family text preprocessing
+#'
 #' @export
-skipgrams <- function(sequence, vocabulary_size, window_size = 4, negative_samples = 1.0, 
+skipgrams <- function(sequence, vocabulary_size, window_size = 4, negative_samples = 1.0,
                       shuffle = TRUE, categorical = FALSE, sampling_table = NULL, seed = NULL) {
-  
+
   args <- list(
     sequence = as.integer(sequence),
     vocabulary_size = as.integer(vocabulary_size),
@@ -103,12 +103,12 @@ skipgrams <- function(sequence, vocabulary_size, window_size = 4, negative_sampl
     categorical = categorical,
     sampling_table = sampling_table
   )
-  
+
   if (keras_version() >= "2.0.7")
     args$seed <- as_nullable_integer(seed)
-  
+
   sg <- do.call(keras$preprocessing$sequence$skipgrams, args)
-  
+
   sg <- list(
     couples = sg[[1]],
     labels = sg[[2]]
@@ -117,35 +117,35 @@ skipgrams <- function(sequence, vocabulary_size, window_size = 4, negative_sampl
 
 
 #' Generates a word rank-based probabilistic sampling table.
-#' 
-#' @details 
-#' 
+#'
+#' @details
+#'
 #' Used for generating the `sampling_table` argument for [skipgrams()].
 #' `sampling_table[[i]]` is the probability of sampling the word i-th most common
 #' word in a dataset (more common words should be sampled less frequently, for balance).
-#' 
+#'
 #' The sampling probabilities are generated according to the sampling distribution used in word2vec:
 #'
 #'  `p(word) = min(1, sqrt(word_frequency / sampling_factor) / (word_frequency / sampling_factor))`
-#' 
-#' We assume that the word frequencies follow Zipf's law (s=1) to derive a 
+#'
+#' We assume that the word frequencies follow Zipf's law (s=1) to derive a
 #' numerical approximation of frequency(rank):
-#' 
+#'
 #' `frequency(rank) ~ 1/(rank * (log(rank) + gamma) + 1/2 - 1/(12*rank))`
-#' 
+#'
 #' where `gamma` is the Euler-Mascheroni constant.
-#' 
+#'
 #' @param size Int, number of possible words to sample.
 #' @param sampling_factor The sampling factor in the word2vec formula.
-#'   
+#'
 #' @return An array of length `size` where the ith entry is the
 #'   probability that a word of rank i should be sampled.
-#'   
+#'
 #' @note The word2vec formula is: p(word) = min(1,
 #'   sqrt(word.frequency/sampling_factor) / (word.frequency/sampling_factor))
-#'   
-#' @family text preprocessing   
-#'   
+#'
+#' @family text preprocessing
+#'
 #' @export
 make_sampling_table <- function(size, sampling_factor = 1e-05) {
   keras$preprocessing$sequence$make_sampling_table(
@@ -155,17 +155,17 @@ make_sampling_table <- function(size, sampling_factor = 1e-05) {
 }
 
 #' Convert text to a sequence of words (or tokens).
-#' 
+#'
 #' @param text Input text (string).
 #' @param filters Sequence of characters to filter out such as
 #'   punctuation. Default includes basic punctuation, tabs, and newlines.
 #' @param lower Whether to convert the input to lowercase.
 #' @param split Sentence split marker (string).
-#' 
+#'
 #' @return Words (or tokens)
-#' 
+#'
 #' @family text preprocessing
-#' 
+#'
 #' @export
 text_to_word_sequence <- function(text, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',
                                   lower = TRUE, split=' ') {
@@ -178,28 +178,28 @@ text_to_word_sequence <- function(text, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{
 }
 
 #' One-hot encode a text into a list of word indexes in a vocabulary of size n.
-#' 
+#'
 #' @param n Size of vocabulary (integer)
 #' @param input_text Input text (string).
 #' @inheritParams text_to_word_sequence
 #' @param text for compatibility purpose. use `input_text` instead.
-#'   
+#'
 #' @return List of integers in `[1, n]`. Each integer encodes a word (unicity
 #'   non-guaranteed).
-#'   
-#' @family text preprocessing   
-#'   
+#'
+#' @family text preprocessing
+#'
 #' @export
 text_one_hot <- function(input_text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',
                          lower = TRUE, split = ' ', text = NULL) {
-  
+
   if (tensorflow::tf_version() >= "2.3" && !is.null(text)) {
     warning("text is deprecated as of TF 2.3. use input_text instead")
     if (!missing(input_text))
       stop("input_text and text must not be bopth specified")
     input_text <- text
   }
-    
+
   keras$preprocessing$text$one_hot(
     input_text,
     n = as.integer(n),
@@ -210,7 +210,7 @@ text_one_hot <- function(input_text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{
 }
 
 #' Converts a text to a sequence of indexes in a fixed-size hashing space.
-#' 
+#'
 #' @param text Input text (string).
 #' @param n Dimension of the hashing space.
 #' @param hash_function if `NULL` uses python `hash` function, can be 'md5' or
@@ -221,19 +221,19 @@ text_one_hot <- function(input_text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{
 #'   punctuation. Default includes basic punctuation, tabs, and newlines.
 #' @param lower Whether to convert the input to lowercase.
 #' @param split Sentence split marker (string).
-#' 
+#'
 #' @return  A list of integer word indices (unicity non-guaranteed).
-#' 
-#' @details 
+#'
+#' @details
 #' Two or more words may be assigned to the same index, due to possible
 #' collisions by the hashing function.
-#' 
-#' @family text preprocessing   
+#'
+#' @family text preprocessing
 #'
 #' @export
-text_hashing_trick <- function(text, n, 
-                               hash_function = NULL, 
-                               filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n', 
+text_hashing_trick <- function(text, n,
+                               hash_function = NULL,
+                               filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',
                                lower = TRUE, split = ' ') {
   if (length(text) != 1) {
     stop("`text` should be length 1.")
@@ -254,21 +254,21 @@ text_hashing_trick <- function(text, n,
 
 
 #' Text tokenization utility
-#' 
-#' Vectorize a text corpus, by turning each text into either a sequence of 
-#' integers (each integer being the index of a token in a dictionary) or into a 
-#' vector where the coefficient for each token could be binary, based on word 
+#'
+#' Vectorize a text corpus, by turning each text into either a sequence of
+#' integers (each integer being the index of a token in a dictionary) or into a
+#' vector where the coefficient for each token could be binary, based on word
 #' count, based on tf-idf...
-#' 
-#' @details By default, all punctuation is removed, turning the texts into 
+#'
+#' @details By default, all punctuation is removed, turning the texts into
 #' space-separated sequences of words (words maybe include the ' character).
 #' These sequences are then split into lists of tokens. They will then be
 #' indexed or vectorized. `0` is a reserved index that won't be assigned to any
 #' word.
-#' 
+#'
 #' @param num_words the maximum number of words to keep, based on word
 #'   frequency. Only the most common `num_words` words will be kept.
-#' @param filters a string where each element is a character that will be 
+#' @param filters a string where each element is a character that will be
 #'   filtered from the texts. The default is all punctuation, plus tabs and line
 #'   breaks, minus the ' character.
 #' @param lower boolean. Whether to convert the texts to lowercase.
@@ -276,20 +276,20 @@ text_hashing_trick <- function(text, n,
 #' @param char_level if `TRUE`, every character will be treated as a token
 #' @param oov_token `NULL` or string If given, it will be added to `word_index``
 #'  and used to replace out-of-vocabulary words during text_to_sequence calls.
-#'   
+#'
 #' @section Attributes:
 #' The tokenizer object has the following attributes:
 #' - `word_counts` --- named list mapping words to the number of times they appeared
 #'   on during fit. Only set after `fit_text_tokenizer()` is called on the tokenizer.
 #' - `word_docs` --- named list mapping words to the number of documents/texts they
 #'    appeared on during fit. Only set after `fit_text_tokenizer()` is called on the tokenizer.
-#' - `word_index` --- named list mapping words to their rank/index (int). Only set 
+#' - `word_index` --- named list mapping words to their rank/index (int). Only set
 #'    after `fit_text_tokenizer()` is called on the tokenizer.
-#' -  `document_count` --- int. Number of documents (texts/sequences) the tokenizer 
+#' -  `document_count` --- int. Number of documents (texts/sequences) the tokenizer
 #'    was trained on. Only set after `fit_text_tokenizer()` is called on the tokenizer.
-#'   
+#'
 #' @family text tokenization
-#'   
+#'
 #' @export
 text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',
                            lower = TRUE, split = ' ', char_level = FALSE, oov_token = NULL) {
@@ -300,26 +300,26 @@ text_tokenizer <- function(num_words = NULL, filters = '!"#$%&()*+,-./:;<=>?@[\\
     split = split,
     char_level = char_level
   )
-  
+
   if (keras_version() >= "2.1.3")
     args$oov_token <- oov_token
-  
+
   do.call(keras$preprocessing$text$Tokenizer, args)
 }
 
 #' Update tokenizer internal vocabulary based on a list of texts or list of
 #' sequences.
-#' 
+#'
 #' @param object Tokenizer returned by [text_tokenizer()]
-#' @param x Vector/list of strings, or a generator of strings (for 
-#'   memory-efficiency); Alternatively a list of "sequence" (a sequence is a 
+#' @param x Vector/list of strings, or a generator of strings (for
+#'   memory-efficiency); Alternatively a list of "sequence" (a sequence is a
 #'   list of integer word indices).
 #'
-#' @note Required before using [texts_to_sequences()], [texts_to_matrix()], or 
+#' @note Required before using [texts_to_sequences()], [texts_to_matrix()], or
 #'   [sequences_to_matrix()].
-#'   
+#'
 #' @family text tokenization
-#'   
+#'
 #' @export
 fit_text_tokenizer <- function(object, x) {
   tokenizer <- object
@@ -333,40 +333,40 @@ fit_text_tokenizer <- function(object, x) {
 
 
 #' Save a text tokenizer to an external file
-#' 
+#'
 #' Enables persistence of text tokenizers alongside saved models.
-#' 
-#' @details 
-#' You should always use the same text tokenizer for training and  
+#'
+#' @details
+#' You should always use the same text tokenizer for training and
 #' prediction. In many cases however prediction will occur in another
 #' session with a version of the model loaded via [load_model_hdf5()].
-#' 
+#'
 #' In this case you need to save the text tokenizer object after training
 #' and then reload it prior to prediction.
-#' 
+#'
 #' @param object Text tokenizer fit with [fit_text_tokenizer()]
 #' @param filename File to save/load
-#' 
+#'
 #' @family text tokenization
 #'
 #' @examples \dontrun{
-#' 
+#'
 #' # vectorize texts then save for use in prediction
-#' tokenizer <- text_tokenizer(num_words = 10000) %>% 
+#' tokenizer <- text_tokenizer(num_words = 10000) %>%
 #' fit_text_tokenizer(tokenizer, texts)
 #' save_text_tokenizer(tokenizer, "tokenizer")
-#' 
+#'
 #' # (train model, etc.)
-#' 
+#'
 #' # ...later in another session
 #' tokenizer <- load_text_tokenizer("tokenizer")
-#' 
+#'
 #' # (use tokenizer to preprocess data for prediction)
-#' 
+#'
 #' }
-#' 
+#'
 #' @importFrom reticulate py_save_object
-#' @export 
+#' @export
 save_text_tokenizer <- function(object, filename) {
   py_save_object(object, filename)
   invisible(object)
@@ -389,28 +389,28 @@ load_text_tokenizer <- function(filename) {
 #'
 #' Only top "num_words" most frequent words will be taken into account.
 #' Only words known by the tokenizer will be taken into account.
-#' 
+#'
 #' @param tokenizer Tokenizer
 #' @param texts Vector/list of texts (strings).
-#' 
+#'
 #' @family text tokenization
-#'   
+#'
 #' @export
 texts_to_sequences <- function(tokenizer, texts) {
   tokenizer$texts_to_sequences(as_texts(texts))
 }
 
 #' Transforms each text in texts in a sequence of integers.
-#' 
+#'
 #' Only top "num_words" most frequent words will be taken into account.
 #' Only words known by the tokenizer will be taken into account.
-#' 
+#'
 #' @inheritParams texts_to_sequences
-#' 
+#'
 #' @return Generator which yields individual sequences
-#' 
+#'
 #' @family text tokenization
-#'   
+#'
 #' @export
 texts_to_sequences_generator <- function(tokenizer, texts) {
   tokenizer$texts_to_sequences_generator(as_texts(texts))
@@ -420,17 +420,17 @@ texts_to_sequences_generator <- function(tokenizer, texts) {
 #' Convert a list of texts to a matrix.
 #'
 #' @inheritParams texts_to_sequences
-#' 
+#'
 #' @param mode one of "binary", "count", "tfidf", "freq".
-#'  
+#'
 #' @return A matrix
 #'
 #' @family text tokenization
-#'   
+#'
 #' @export
 texts_to_matrix <- function(tokenizer, texts, mode = c("binary", "count", "tfidf", "freq")) {
   tokenizer$texts_to_matrix(
-    texts = as_texts(texts), 
+    texts = as_texts(texts),
     mode = mode
   )
 }
@@ -452,10 +452,10 @@ as_texts <- function(texts) {
 #' @return A matrix
 #'
 #' @family text tokenization
-#'   
+#'
 #' @export
 sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count", "tfidf", "freq")) {
-  
+
   # force length-1 sequences to list (so they aren't treated as scalars)
   if (is.list(sequences)) {
     sequences <- lapply(sequences, function(seq) {
@@ -465,7 +465,7 @@ sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count"
         seq
     })
   }
-  
+
   tokenizer$sequences_to_matrix(
     sequences = sequences,
     mode = mode
@@ -493,10 +493,10 @@ sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count"
 #' @export
 image_load <- function(path, grayscale = FALSE, target_size = NULL,
                        interpolation = "nearest") {
-  
+
   if (!have_pillow())
     stop("The Pillow Python package is required to load images")
-  
+
   # normalize target_size
   if (!is.null(target_size)) {
     if (length(target_size) != 2)
@@ -504,16 +504,16 @@ image_load <- function(path, grayscale = FALSE, target_size = NULL,
     target_size <- as.integer(target_size)
     target_size <- tuple(target_size[[1]], target_size[[2]])
   }
-  
+
   args <- list(
     path = normalize_path(path),
     grayscale = grayscale,
     target_size = target_size
   )
-  
+
   if (keras_version() >= "2.0.9")
     args$interpolation <- interpolation
-  
+
   do.call(keras$preprocessing$image$load_img, args)
 }
 
@@ -548,14 +548,14 @@ image_to_array <- function(img, data_format = c("channels_last", "channels_first
 #' @export
 image_array_resize <- function(img, height, width,
                                data_format = c("channels_last", "channels_first")) {
-  
+
   # imports
   np <- import("numpy")
   scipy <- import("scipy")
-  
+
   # make copy as necessary
   img <- np$copy(img)
-  
+
   # capture dimensions and reduce to 3 if necessary
   dims <- dim(img)
   is_4d_array <- FALSE
@@ -563,7 +563,7 @@ image_array_resize <- function(img, height, width,
     is_4d_array <- TRUE
     img <- array_reshape(img, dims[-1])
   }
-  
+
   # calculate zoom factors (invert the dimensions to reflect height,width
   # order of numpy/scipy array represenations of images)
   data_format <- match.arg(data_format)
@@ -580,14 +580,14 @@ image_array_resize <- function(img, height, width,
       width / dim(img)[[2]],
     )
   }
-  
+
   # zoom
   img <- scipy$ndimage$zoom(img, factors, order = 1L)
-  
+
   # reshape if necessary
   if (is_4d_array)
     img <- array_reshape(img, dim = c(1, dim(img)))
-  
+
   # return
   img
 }
@@ -597,9 +597,9 @@ image_array_resize <- function(img, height, width,
 image_array_save <- function(img, path, data_format = NULL, file_format = NULL, scale = TRUE) {
   if (keras_version() >= "2.2.0") {
     keras$preprocessing$image$save_img(
-      path, img, 
-      data_format = data_format, 
-      file_format = file_format, 
+      path, img,
+      data_format = data_format,
+      file_format = file_format,
       scale = scale
     )
   } else {
@@ -613,7 +613,7 @@ image_array_save <- function(img, path, data_format = NULL, file_format = NULL, 
 
 #' Generate batches of image data with real-time data augmentation. The data will be
 #' looped over (in batches).
-#' 
+#'
 #' @param featurewise_center Set input mean to 0 over the dataset, feature-wise.
 #' @param samplewise_center Boolean. Set each sample mean to 0.
 #' @param featurewise_std_normalization Divide inputs by std of the dataset, feature-wise.
@@ -629,8 +629,8 @@ image_array_save <- function(img, path, data_format = NULL, file_format = NULL, 
 #'   in the range `[1-z, 1+z]`. A sequence of two can be passed instead to select
 #'   this range.
 #' @param channel_shift_range shift range for each channels.
-#' @param fill_mode One of "constant", "nearest", "reflect" or "wrap".  
-#' Points outside the boundaries of the input are filled according to 
+#' @param fill_mode One of "constant", "nearest", "reflect" or "wrap".
+#' Points outside the boundaries of the input are filled according to
 #' the given mode:
 #'    - "constant": `kkkkkkkk|abcd|kkkkkkkk` (`cval=k`)
 #'    - "nearest":  `aaaaaaaa|abcd|dddddddd`
@@ -653,13 +653,13 @@ image_array_save <- function(img, path, data_format = NULL, file_format = NULL, 
 #'   in your Keras config file at `~/.keras/keras.json`. If you never set it,
 #'   then it will be "channels_last".
 #' @param validation_split fraction of images reserved for validation (strictly between 0 and 1).
-#'   
+#'
 #' @export
-image_data_generator <- function(featurewise_center = FALSE, samplewise_center = FALSE, 
-                                 featurewise_std_normalization = FALSE, samplewise_std_normalization = FALSE, 
-                                 zca_whitening = FALSE, zca_epsilon = 1e-6, rotation_range = 0.0, width_shift_range = 0.0, 
-                                 height_shift_range = 0.0, brightness_range = NULL, shear_range = 0.0, zoom_range = 0.0, channel_shift_range = 0.0, 
-                                 fill_mode = "nearest", cval = 0.0, horizontal_flip = FALSE, vertical_flip = FALSE, 
+image_data_generator <- function(featurewise_center = FALSE, samplewise_center = FALSE,
+                                 featurewise_std_normalization = FALSE, samplewise_std_normalization = FALSE,
+                                 zca_whitening = FALSE, zca_epsilon = 1e-6, rotation_range = 0.0, width_shift_range = 0.0,
+                                 height_shift_range = 0.0, brightness_range = NULL, shear_range = 0.0, zoom_range = 0.0, channel_shift_range = 0.0,
+                                 fill_mode = "nearest", cval = 0.0, horizontal_flip = FALSE, vertical_flip = FALSE,
                                  rescale = NULL, preprocessing_function = NULL, data_format = NULL, validation_split=0.0) {
   args <- list(
     featurewise_center = featurewise_center,
@@ -687,18 +687,18 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
     args$brightness_range <- brightness_range
     args$validation_split <- validation_split
   }
-  
+
   do.call(keras$preprocessing$image$ImageDataGenerator, args)
-  
+
 }
 
 
 #' Retrieve the next item from a generator
-#' 
+#'
 #' Use to retrieve items from generators (e.g. [image_data_generator()]). Will return
 #' either the next item or `NULL` if there are no more items.
-#' 
-#' @param generator Generator 
+#'
+#' @param generator Generator
 #' @param completed Sentinel value to return from `generator_next()` if the iteration
 #'   completes (defaults to `NULL` but can be any R value you specify).
 #'
@@ -709,19 +709,19 @@ generator_next <- function(generator, completed = NULL) {
 
 
 #' Fit image data generator internal statistics to some sample data.
-#' 
+#'
 #' Required for `featurewise_center`, `featurewise_std_normalization`
 #' and `zca_whitening`.
-#' 
+#'
 #' @param object [image_data_generator()]
 #' @param x  array, the data to fit on (should have rank 4). In case of grayscale data,
 #' the channels axis should have value 1, and in case of RGB data, it should have value 3.
 #' @param augment Whether to fit on randomly augmented samples
 #' @param rounds If `augment`, how many augmentation passes to do over the data
 #' @param seed random seed.
-#' 
+#'
 #' @family image preprocessing
-#' 
+#'
 #' @export
 fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, seed = NULL) {
   generator <- object
@@ -735,39 +735,39 @@ fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, see
 }
 
 #' Generates batches of augmented/normalized data from image data and labels
-#' 
+#'
 #' @details Yields batches indefinitely, in an infinite loop.
-#'   
+#'
 #' @param generator Image data generator to use for augmenting/normalizing image
 #'   data.
-#' @param x data. Should have rank 4. In case of grayscale data, the channels 
+#' @param x data. Should have rank 4. In case of grayscale data, the channels
 #'   axis should have value 1, and in case of RGB data, it should have value 3.
 #' @param y labels (can be `NULL` if no labels are required)
 #' @param batch_size int (default: `32`).
 #' @param shuffle boolean (defaut: `TRUE`).
 #' @param seed int (default: `NULL`).
-#' @param save_to_dir `NULL` or str (default: `NULL`). This allows you to 
+#' @param save_to_dir `NULL` or str (default: `NULL`). This allows you to
 #'   optionally specify a directory to which to save the augmented pictures being
 #'   generated (useful for visualizing what you are doing).
-#' @param save_prefix str (default: ''). Prefix to use for filenames of saved 
+#' @param save_prefix str (default: ''). Prefix to use for filenames of saved
 #'   pictures (only relevant if `save_to_dir` is set).
-#' @param save_format one of "png", "jpeg" (only relevant if save_to_dir is 
+#' @param save_format one of "png", "jpeg" (only relevant if save_to_dir is
 #'   set). Default: "png".
 #' @param subset Subset of data (`"training"` or `"validation"`) if
 #'   `validation_split` is set in [image_data_generator()].
 #' @param sample_weight Sample weights.
-#'   
-#' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a 
+#'
+#' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a
 #'   array of corresponding labels. The generator loops indefinitely.
-#'   
+#'
 #' @family image preprocessing
-#'   
+#'
 #' @export
 flow_images_from_data <- function(
-  x, y = NULL, generator = image_data_generator(), batch_size = 32, 
-  shuffle = TRUE, sample_weight = NULL, seed = NULL, 
+  x, y = NULL, generator = image_data_generator(), batch_size = 32,
+  shuffle = TRUE, sample_weight = NULL, seed = NULL,
   save_to_dir = NULL, save_prefix = "", save_format = 'png', subset = NULL) {
-  
+
   args <- list(
     x = keras_array(x),
     y = keras_array(y),
@@ -779,13 +779,13 @@ flow_images_from_data <- function(
     save_format = save_format
   )
   stopifnot(args$batch_size > 0)
-  
+
   if (keras_version() >= "2.1.5")
     args$subset <- subset
-  
+
   if (keras_version() >= "2.2.0")
     args$sample_weight <- sample_weight
-  
+
   do.call(generator$flow, args)
 }
 
@@ -834,7 +834,7 @@ flow_images_from_directory <- function(
   batch_size = 32, shuffle = TRUE, seed = NULL,
   save_to_dir = NULL, save_prefix = "", save_format = "png",
   follow_links = FALSE, subset = NULL, interpolation = "nearest") {
-  
+
   args <- list(
     directory = normalize_path(directory),
     target_size = as.integer(target_size),
@@ -850,70 +850,70 @@ flow_images_from_directory <- function(
     follow_links = follow_links
   )
   stopifnot(args$batch_size > 0)
-  
+
   if (keras_version() >= "2.1.2")
     args$interpolation <- interpolation
-  
+
   if (keras_version() >= "2.1.5")
     args$subset <- subset
-  
+
   do.call(generator$flow_from_directory, args)
 }
 
-#' Takes the dataframe and the path to a directory and generates batches of 
+#' Takes the dataframe and the path to a directory and generates batches of
 #' augmented/normalized data.
-#' 
+#'
 #' @details Yields batches indefinitely, in an infinite loop.
-#' 
+#'
 #' @inheritParams image_load
 #' @inheritParams flow_images_from_data
-#' 
-#' @param dataframe `data.frame` containing the filepaths relative to  
-#'   directory (or absolute paths if directory is `NULL`) of the images in a 
-#'   character column. It should include other column/s depending on the 
-#'   `class_mode`: 
-#'   - if `class_mode` is "categorical" (default value) it must 
-#'   include the `y_col` column with the class/es of each image. Values in 
-#'   column can be character/list if a single class or list if multiple classes. 
-#'   - if `class_mode` is "binary" or "sparse" it must include the given 
-#'   `y_col` column with class values as strings. 
-#'   - if `class_mode` is "other" it 
-#'   should contain the columns specified in `y_col`. 
+#'
+#' @param dataframe `data.frame` containing the filepaths relative to
+#'   directory (or absolute paths if directory is `NULL`) of the images in a
+#'   character column. It should include other column/s depending on the
+#'   `class_mode`:
+#'   - if `class_mode` is "categorical" (default value) it must
+#'   include the `y_col` column with the class/es of each image. Values in
+#'   column can be character/list if a single class or list if multiple classes.
+#'   - if `class_mode` is "binary" or "sparse" it must include the given
+#'   `y_col` column with class values as strings.
+#'   - if `class_mode` is "other" it
+#'   should contain the columns specified in `y_col`.
 #'   - if `class_mode` is "input" or NULL no extra column is needed.
-#' @param directory character, path to the directory to read images from. 
+#' @param directory character, path to the directory to read images from.
 #'   If `NULL`, data in `x_col` column should be absolute paths.
-#' @param x_col character, column in dataframe that contains the filenames 
+#' @param x_col character, column in dataframe that contains the filenames
 #'   (or absolute paths if directory is `NULL`).
 #' @param y_col string or list, column/s in dataframe that has the target data.
-#' @param color_mode one of "grayscale", "rgb". Default: "rgb". Whether the 
+#' @param color_mode one of "grayscale", "rgb". Default: "rgb". Whether the
 #'   images will be converted to have 1 or 3 color channels.
-#' @param drop_duplicates (deprecated in TF >= 2.3) Boolean, whether to drop 
+#' @param drop_duplicates (deprecated in TF >= 2.3) Boolean, whether to drop
 #'   duplicate rows based on filename. The default value is `TRUE`.
-#' @param classes optional list of classes (e.g. `c('dogs', 'cats')`. Default: 
-#'  `NULL` If not provided, the list of classes will be automatically inferred 
-#'  from the `y_col`, which will map to the label indices, will be alphanumeric). 
-#'  The dictionary containing the mapping from class names to class indices 
+#' @param classes optional list of classes (e.g. `c('dogs', 'cats')`. Default:
+#'  `NULL` If not provided, the list of classes will be automatically inferred
+#'  from the `y_col`, which will map to the label indices, will be alphanumeric).
+#'  The dictionary containing the mapping from class names to class indices
 #'  can be obtained via the attribute `class_indices`.
-#' @param class_mode one of "categorical", "binary", "sparse", "input", "other" or None. 
+#' @param class_mode one of "categorical", "binary", "sparse", "input", "other" or None.
 #'   Default: "categorical". Mode for yielding the targets:
 #'   * "binary": 1D array of binary labels,
 #'   * "categorical": 2D array of one-hot encoded labels. Supports multi-label output.
 #'   * "sparse": 1D array of integer labels,
 #'   * "input": images identical to input images (mainly used to work with autoencoders),
 #'   * "other": array of y_col data,
-#'   * "multi_output": allow to train a multi-output model. Y is a list or a vector. 
-#'   `NULL`, no targets are returned (the generator will only yield batches of 
+#'   * "multi_output": allow to train a multi-output model. Y is a list or a vector.
+#'   `NULL`, no targets are returned (the generator will only yield batches of
 #'   image data, which is useful to use in  `predict_generator()`).
-#'   
-#' @note 
-#' This functions requires that `pandas` (python module) is installed in the 
-#' same environment as `tensorflow` and `keras`. 
-#' 
-#' If you are using `r-tensorflow` (the default environment) you can install 
+#'
+#' @note
+#' This functions requires that `pandas` (python module) is installed in the
+#' same environment as `tensorflow` and `keras`.
+#'
+#' If you are using `r-tensorflow` (the default environment) you can install
 #' `pandas` by running `reticulate::virtualenv_install("pandas", envname = "r-tensorflow")`
 #' or `reticulate::conda_install("pandas", envname = "r-tensorflow")` depending on
-#' the kind of environment you are using. 
-#' 
+#' the kind of environment you are using.
+#'
 #' @section Yields: `(x, y)` where `x` is an array of image data and `y` is a
 #'   array of corresponding labels. The generator loops indefinitely.
 #'
@@ -921,95 +921,95 @@ flow_images_from_directory <- function(
 #' @export
 flow_images_from_dataframe <- function(
   dataframe, directory = NULL, x_col = "filename", y_col = "class",
-  generator = image_data_generator(), target_size = c(256,256), 
-  color_mode = "rgb", classes = NULL, class_mode = "categorical", 
-  batch_size = 32, shuffle = TRUE, seed = NULL, save_to_dir = NULL, 
-  save_prefix = "", save_format = "png", subset = NULL, 
+  generator = image_data_generator(), target_size = c(256,256),
+  color_mode = "rgb", classes = NULL, class_mode = "categorical",
+  batch_size = 32, shuffle = TRUE, seed = NULL, save_to_dir = NULL,
+  save_prefix = "", save_format = "png", subset = NULL,
   interpolation = "nearest", drop_duplicates = NULL) {
-  
+
   if (!reticulate::py_module_available("pandas"))
-    stop("Pandas (python module) must be installed in the same environment as Keras.", 
-         'Install it using reticulate::virtualenv_install("pandas", envname = "r-tensorflow") ', 
-         'or reticulate::conda_install("pandas", envname = "r-tensorflow") depending on ', 
+    stop("Pandas (python module) must be installed in the same environment as Keras.",
+         'Install it using reticulate::virtualenv_install("pandas", envname = "r-tensorflow") ',
+         'or reticulate::conda_install("pandas", envname = "r-tensorflow") depending on ',
          'the kind of environment you are using.')
-  
+
   args <- list(
     dataframe = as.data.frame(dataframe),
     directory = normalize_path(directory),
     x_col = x_col, y_col = y_col,
-    target_size = as.integer(target_size), 
-    color_mode = color_mode, 
-    classes = classes, 
-    class_mode = class_mode, 
-    batch_size = as.integer(batch_size), 
-    shuffle = shuffle, 
-    seed = as_nullable_integer(seed), 
-    save_to_dir = normalize_path(save_to_dir), 
-    save_prefix = save_prefix, 
+    target_size = as.integer(target_size),
+    color_mode = color_mode,
+    classes = classes,
+    class_mode = class_mode,
+    batch_size = as.integer(batch_size),
+    shuffle = shuffle,
+    seed = as_nullable_integer(seed),
+    save_to_dir = normalize_path(save_to_dir),
+    save_prefix = save_prefix,
     save_format = save_format,
     drop_duplicates = drop_duplicates
   )
   stopifnot(args$batch_size > 0)
-  
-  if (keras_version() >= "2.1.2") 
+
+  if (keras_version() >= "2.1.2")
     args$interpolation <- interpolation
-  
-  if (keras_version() >= "2.1.5") 
+
+  if (keras_version() >= "2.1.5")
     args$subset <- subset
-  
+
   if(!is.null(drop_duplicates) && tensorflow::tf_version() >= "2.3") {
     warning("\'drop_duplicates\' is deprecated as of tensorflow 2.3 and will be ignored. Make sure the supplied dataframe does not contain duplicates.")
     args$drop_duplicates <- NULL
   }
-  
+
   if (is.null(drop_duplicates) && tensorflow::tf_version() < "2.3")
     args$drop_duplicates <- TRUE
-  
+
   do.call(generator$flow_from_dataframe, args)
 }
 
 #' Create a dataset from a directory
-#' 
+#'
 #' Generates a `tf.data.Dataset` from image files in a directory.
 #' If your directory structure is:
 #'
 #'
-#' @param directory Directory where the data is located. If labels is "inferred", 
-#'   it should contain subdirectories, each containing images for a class. 
+#' @param directory Directory where the data is located. If labels is "inferred",
+#'   it should contain subdirectories, each containing images for a class.
 #'   Otherwise, the directory structure is ignored.
-#' @param labels Either "inferred" (labels are generated from the directory 
-#'   structure), or a list/tuple of integer labels of the same size as the number 
-#'   of image files found in the directory. Labels should be sorted according to 
-#'   the alphanumeric order of the image file paths (obtained via 
+#' @param labels Either "inferred" (labels are generated from the directory
+#'   structure), or a list/tuple of integer labels of the same size as the number
+#'   of image files found in the directory. Labels should be sorted according to
+#'   the alphanumeric order of the image file paths (obtained via
 #'   os.walk(directory) in Python).
-#' @param label_mode - 'int': means that the labels are encoded as integers 
-#'   (e.g. for sparse_categorical_crossentropy loss). - 'categorical' means that 
-#'   the labels are encoded as a categorical vector (e.g. for 
+#' @param label_mode - 'int': means that the labels are encoded as integers
+#'   (e.g. for sparse_categorical_crossentropy loss). - 'categorical' means that
+#'   the labels are encoded as a categorical vector (e.g. for
 #'   categorical_crossentropy loss). - 'binary' means that the labels (there can
-#'   be only 2) are encoded as float32 scalars with values 0 or 1 (e.g. for 
+#'   be only 2) are encoded as float32 scalars with values 0 or 1 (e.g. for
 #'   binary_crossentropy). - None (no labels).
-#' @param class_names Only valid if "labels" is "inferred". This is the explict 
-#'   list of class names (must match names of subdirectories). Used to control 
+#' @param class_names Only valid if "labels" is "inferred". This is the explict
+#'   list of class names (must match names of subdirectories). Used to control
 #'   the order of the classes (otherwise alphanumerical order is used).
-#' @param color_mode One of "grayscale", "rgb", "rgba". Default: "rgb". Whether 
+#' @param color_mode One of "grayscale", "rgb", "rgba". Default: "rgb". Whether
 #'   the images will be converted to have 1, 3, or 4 channels.
 #' @param batch_size Size of the batches of data. Default: 32.
-#' @param image_size Size to resize images to after they are read from disk. 
-#'   Defaults to (256, 256). Since the pipeline processes batches of images that 
+#' @param image_size Size to resize images to after they are read from disk.
+#'   Defaults to (256, 256). Since the pipeline processes batches of images that
 #'   must all have the same size, this must be provided.
-#' @param shuffle Whether to shuffle the data. Default: TRUE. If set to FALSE, 
+#' @param shuffle Whether to shuffle the data. Default: TRUE. If set to FALSE,
 #'   sorts the data in alphanumeric order.
 #' @param seed Optional random seed for shuffling and transformations.
-#' @param validation_split Optional float between 0 and 1, fraction of data to 
+#' @param validation_split Optional float between 0 and 1, fraction of data to
 #'   reserve for validation.
-#' @param subset One of "training" or "validation". Only used if validation_split 
+#' @param subset One of "training" or "validation". Only used if validation_split
 #'   is set.
-#' @param interpolation String, the interpolation method used when resizing 
-#'   images. Defaults to bilinear. Supports bilinear, nearest, bicubic, area, 
+#' @param interpolation String, the interpolation method used when resizing
+#'   images. Defaults to bilinear. Supports bilinear, nearest, bicubic, area,
 #'   lanczos3, lanczos5, gaussian, mitchellcubic.
-#' @param follow_links Whether to visits subdirectories pointed to by symlinks. 
+#' @param follow_links Whether to visits subdirectories pointed to by symlinks.
 #'   Defaults to FALSE.
-#'   
+#'
 #' @export
 image_dataset_from_directory <- function(
   directory,
@@ -1026,10 +1026,10 @@ image_dataset_from_directory <- function(
   interpolation="bilinear",
   follow_links=FALSE
 ) {
-  
+
   if (!is.character(labels))
     labels <- as.integer(labels)
-  
+
   args <- list(
     directory=normalizePath(directory, mustWork = FALSE),
     labels=labels,
@@ -1045,11 +1045,8 @@ image_dataset_from_directory <- function(
     interpolation=interpolation,
     follow_links=follow_links
   )
-  
+
   out <- do.call(keras$preprocessing$image_dataset_from_directory, args)
   class(out) <- c("tf_dataset", class(out))
   out
 }
-
-
-

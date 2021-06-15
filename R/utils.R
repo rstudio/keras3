@@ -3,20 +3,20 @@ resolve_utils <- function() {
 }
 
 #' Converts a class vector (integers) to binary class matrix.
-#' 
-#' @details 
+#'
+#' @details
 #' E.g. for use with [loss_categorical_crossentropy()].
-#' 
+#'
 #' @param y Class vector to be converted into a matrix (integers from 0 to num_classes).
 #' @param num_classes Total number of classes.
 #' @param dtype The data type expected by the input, as a string
 #    (`float32`, `float64`, `int32`...)
-#' 
+#'
 #' @return A binary matrix representation of the input.
-#' 
+#'
 #' @export
 to_categorical <- function(y, num_classes = NULL, dtype = "float32") {
-  
+
   args <- list(
     y = y,
     num_classes = as_nullable_integer(num_classes)
@@ -24,23 +24,23 @@ to_categorical <- function(y, num_classes = NULL, dtype = "float32") {
 
   if (keras_version() >= "2.2.3")
     args$dtype <- dtype
-    
+
   do.call(resolve_utils()$to_categorical, args)
 
 }
 
- 
+
 #' Downloads a file from a URL if it not already in the cache.
-#' 
+#'
 #' Passing the MD5 hash will verify the file after download as well as if it is
 #' already present in the cache.
-#' 
-#' @param fname Name of the file. If an absolute path `/path/to/file.txt` is 
+#'
+#' @param fname Name of the file. If an absolute path `/path/to/file.txt` is
 #'   specified the file will be saved at that location.
 #' @param origin Original URL of the file.
 #' @param file_hash The expected hash string of the file after download. The
 #'   sha256 and md5 hash algorithms are both supported.
-#' @param cache_subdir Subdirectory under the Keras cache dir where the file is 
+#' @param cache_subdir Subdirectory under the Keras cache dir where the file is
 #'   saved. If an absolute path `/path/to/folder` is specified the file will be
 #'   saved at that location.
 #' @param hash_algorithm Select the hash algorithm to verify the file. options
@@ -53,13 +53,13 @@ to_categorical <- function(y, num_classes = NULL, dtype = "float32") {
 #'   return no matches found.
 #' @param cache_dir Location to store cached files, when `NULL` it defaults to
 #'   the Keras configuration directory.
-#' @param untar Deprecated in favor of 'extract'. boolean, whether the file should 
+#' @param untar Deprecated in favor of 'extract'. boolean, whether the file should
 #'   be decompressed
-#'   
+#'
 #' @return Path to the downloaded file
-#'   
+#'
 #' @export
-get_file <- function(fname, origin, file_hash = NULL, cache_subdir = "datasets", 
+get_file <- function(fname, origin, file_hash = NULL, cache_subdir = "datasets",
                      hash_algorithm = "auto", extract = FALSE,
                      archive_format = "auto", cache_dir = NULL,
                      untar = FALSE) {
@@ -78,48 +78,48 @@ get_file <- function(fname, origin, file_hash = NULL, cache_subdir = "datasets",
 
 
 #' Representation of HDF5 dataset to be used instead of an R array
-#' 
+#'
 #' @param datapath string, path to a HDF5 file
 #' @param dataset string, name of the HDF5 dataset in the file specified in datapath
 #' @param start int, start of desired slice of the specified dataset
 #' @param end int, end of desired slice of the specified dataset
 #' @param normalizer function to be called on data when retrieved
-#' 
+#'
 #' @return An array-like HDF5 dataset.
-#' 
-#' @details 
+#'
+#' @details
 #' Providing `start` and `end` allows use of a slice of the dataset.
-#' 
+#'
 #' Optionally, a normalizer function (or lambda) can be given. This will
 #' be called on every slice of data retrieved.
-#' 
+#'
 #' @export
 hdf5_matrix <- function(datapath, dataset, start = 0, end = NULL, normalizer = NULL) {
-  
+
   if (tensorflow::tf_version() >= "2.4")
     stop("This function have been removed in TensorFlow version 2.4 or later.")
-  
+
   if (!have_h5py())
     stop("The h5py Python package is required to read h5 files")
-  
+
   resolve_utils()$HDF5Matrix(
-    datapath = normalize_path(datapath), 
+    datapath = normalize_path(datapath),
     dataset = dataset,
     start = as.integer(start),
     end = as_nullable_integer(end),
     normalizer = normalizer
-  )  
+  )
 }
 
 #' Normalize a matrix or nd-array
-#' 
+#'
 #' @param x Matrix or array to normalize
 #' @param axis Axis along which to normalize. Axis indexes are 1-based
 #'   (pass -1 to select the last axis).
-#' @param order Normalization order (e.g. 2 for L2 norm) 
-#' 
+#' @param order Normalization order (e.g. 2 for L2 norm)
+#'
 #' @return A normalized copy of the array.
-#' 
+#'
 #' @export
 normalize <- function(x, axis = -1, order = 2) {
   resolve_utils()$normalize(
@@ -130,32 +130,32 @@ normalize <- function(x, axis = -1, order = 2) {
 }
 
 #' Provide a scope with mappings of names to custom objects
-#' 
+#'
 #' @param objects Named list of objects
 #' @param expr Expression to evaluate
-#' 
-#' @details 
+#'
+#' @details
 #' There are many elements of Keras models that can be customized with
 #' user objects (e.g. losses, metrics, regularizers, etc.). When
-#' loading saved models that use these functions you typically 
-#' need to explicitily map names to user objects via the `custom_objects` 
-#' parmaeter. 
-#' 
-#' The `with_custom_object_scope()` function provides an alternative that 
+#' loading saved models that use these functions you typically
+#' need to explicitily map names to user objects via the `custom_objects`
+#' parmaeter.
+#'
+#' The `with_custom_object_scope()` function provides an alternative that
 #' lets you create a named alias for a user object that applies to an entire
 #' block of code, and is automatically recognized when loading saved models.
-#' 
+#'
 #' @examples \dontrun{
 #' # define custom metric
-#' metric_top_3_categorical_accuracy <- 
+#' metric_top_3_categorical_accuracy <-
 #'   custom_metric("top_3_categorical_accuracy", function(y_true, y_pred) {
-#'     metric_top_k_categorical_accuracy(y_true, y_pred, k = 3) 
+#'     metric_top_k_categorical_accuracy(y_true, y_pred, k = 3)
 #'   })
-#' 
+#'
 #' with_custom_object_scope(c(top_k_acc = sparse_top_k_cat_acc), {
-#' 
+#'
 #'   # ...define model...
-#'   
+#'
 #'   # compile model (refer to "top_k_acc" by name)
 #'   model %>% compile(
 #'     loss = "binary_crossentropy",
@@ -171,7 +171,7 @@ normalize <- function(x, axis = -1, order = 2) {
 #'   load_model_hdf5("my_model.h5")
 #' })
 #' }
-#' 
+#'
 #' @export
 with_custom_object_scope <- function(objects, expr) {
   objects <- objects_with_py_function_names(objects)
@@ -221,15 +221,15 @@ objects_with_py_function_names <- function(objects) {
 #'
 #' @export
 keras_array <- function(x, dtype = NULL) {
-  
+
   # reflect NULL
   if (is.null(x))
     return(x)
-  
+
   # reflect HDF5
   if (inherits(x, "keras.utils.io_utils.HDF5Matrix"))
     return(x)
-  
+
   # reflect tensor for keras v2.2 or TF implementation >= 1.12
   if (is_tensorflow_implementation()) {
     if (
@@ -250,31 +250,31 @@ keras_array <- function(x, dtype = NULL) {
   if (is.data.frame(x)) {
     x <- as.list(x)
   }
-  
+
   # recurse for lists
   if (is.list(x))
     return(lapply(x, keras_array))
-  
+
   # convert to numpy
   if (!inherits(x, "numpy.ndarray")) {
-    
+
     # establish the target datatype - if we are converting a double from R
     # into numpy then use the default floatx for the current backend
     if (is.null(dtype) && is.double(x))
       dtype <- backend()$floatx()
-    
+
     # convert non-array to array
     if (!is.array(x))
       x <- as.array(x)
-    
+
     # do the conversion (will result in Fortran column ordering)
     x <- r_to_py(x)
   }
-  
+
   # if we don't yet have a dtype then use the converted type
   if (is.null(dtype))
     dtype <- x$dtype
-  
+
   # ensure we use C column ordering (won't create a new array if the array
   # is already using C ordering)
   x$astype(dtype = dtype, order = "C", copy = FALSE)
@@ -322,21 +322,21 @@ is_keras_available <- function(version = NULL) {
 
 
 #' Keras implementation
-#' 
+#'
 #' Obtain a reference to the Python module used for the implementation of Keras.
-#' 
+#'
 #' There are currently two Python modules which implement Keras:
-#' 
+#'
 #' - keras ("keras")
 #' - tensorflow.keras ("tensorflow")
-#' 
-#' This function returns a reference to the implementation being currently 
+#'
+#' This function returns a reference to the implementation being currently
 #' used by the keras package. The default implementation is "keras".
 #' You can override this by setting the `KERAS_IMPLEMENTATION` environment
 #' variable to "tensorflow".
-#' 
+#'
 #' @return Reference to the Python module used for the implementation of Keras.
-#' 
+#'
 #' @export
 implementation <- function() {
   keras
@@ -360,24 +360,24 @@ is_layer <- function(object) {
 }
 
 relative_to <- function(dir, file) {
-  
+
   # normalize paths
   dir <- normalizePath(dir, mustWork = FALSE, winslash = "/")
   file <- normalizePath(file, mustWork = FALSE, winslash = "/")
-  
+
   # ensure directory ends with a /
   if (!identical(substr(dir, nchar(dir), nchar(dir)), "/")) {
     dir <- paste(dir, "/", sep="")
   }
-  
+
   # if the file is prefixed with the directory, return a relative path
   if (identical(substr(file, 1, nchar(dir)), dir))
     file <- substr(file, nchar(dir) + 1, nchar(file))
-  
+
   # simplify ./
   if (identical(substr(file, 1, 2), "./"))
     file <- substr(file, 3, nchar(file))
-  
+
   file
 }
 
@@ -393,7 +393,7 @@ as_shape <- function(x) {
 
 is_keras_tensor <- function(x) {
   if (is_tensorflow_implementation()) {
-    if (tensorflow::tf_version() >= "2.0") tensorflow::tf$is_tensor(x) else tensorflow::tf$contrib$framework$is_tensor(x) 
+    if (tensorflow::tf_version() >= "2.0") tensorflow::tf$is_tensor(x) else tensorflow::tf$contrib$framework$is_tensor(x)
   } else {
     k_is_tensor(x)
   }

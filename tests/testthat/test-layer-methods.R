@@ -6,14 +6,14 @@ context("layer methods")
 
 
 test_succeeds("model can be saved and loaded from config", {
-  
+
   inputs <- layer_input(shape = c(784))
   predictions <- inputs %>%
     layer_dense(units = 64, activation = 'relu') %>%
     layer_dense(units = 64, activation = 'relu') %>%
     layer_dense(units = 10, activation = 'softmax')
   model <- keras_model(inputs = inputs, outputs = predictions)
-  
+
   config <- get_config(model)
   model_from <- from_config(config)
 })
@@ -49,7 +49,7 @@ input <- matrix(rexp(10*784), nrow = 10, ncol = 784)
 test_succeeds("layer weights as R array can be read and written", {
   model <- define_and_compile_model()
   fit(model, data, labels, epochs = 1, verbose = 0)
-  
+
   layer <- model$layers[[1]]
   weights <- get_weights(layer)
   set_weights(layer, weights)
@@ -83,12 +83,10 @@ test_succeeds("layer state can be reset", {
   skip_if_cntk() # CNTK backend does not support stateful RNNs, see
                  # https://docs.microsoft.com/en-us/cognitive-toolkit/using-cntk-with-keras#known-issues
   model <- keras_model_sequential()
-  model %>% 
-    layer_lstm(units = 32, input_shape=c(10, 16), batch_size=32, stateful=TRUE) %>% 
+  model %>%
+    layer_lstm(units = 32, input_shape=c(10, 16), batch_size=32, stateful=TRUE) %>%
     layer_dense(units = 16, activation = 'softmax')
-  
+
   layer <- model$layers[[1]]
   reset_states(layer)
 })
-
-

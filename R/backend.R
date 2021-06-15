@@ -1,18 +1,18 @@
 
 
 #' Keras backend tensor engine
-#' 
+#'
 #' Obtain a reference to the `keras.backend` Python module used to implement
 #' tensor operations.
 #'
 #' @inheritParams reticulate::import
 #'
-#' @note See the documentation here <https://keras.io/backend/> for 
+#' @note See the documentation here <https://keras.io/backend/> for
 #'   additional details on the available functions.
 #'
 #' @return Reference to Keras backend python module.
-#'  
-#' @export   
+#'
+#' @export
 backend <- function(convert = TRUE) {
   if (convert)
     keras$backend
@@ -22,13 +22,13 @@ backend <- function(convert = TRUE) {
 
 
 #' Element-wise absolute value.
-#' 
+#'
 #' @param x Tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_abs <- function(x) {
   keras$backend$abs(
@@ -59,16 +59,16 @@ k_all <- function(x, axis = NULL, keepdims = FALSE) {
 
 
 #' Bitwise reduction (logical OR).
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param axis Axis along which to perform the reduction (axis indexes
 #'   are 1-based).
 #' @param keepdims whether the drop or broadcast the reduction axes.
-#' 
+#'
 #' @return A uint8 tensor (0s and 1s).
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_any <- function(x, axis = NULL, keepdims = FALSE) {
   keras$backend$any(
@@ -92,7 +92,7 @@ k_any <- function(x, axis = NULL, keepdims = FALSE) {
 #'
 #' @return An integer tensor.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_arange <- function(start, stop = NULL, step = 1, dtype = "int32") {
@@ -144,11 +144,11 @@ k_argmin <- function(x, axis = -1) {
 
 
 #' Active Keras backend
-#' 
+#'
 #' @return The name of the backend Keras is currently using.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_backend <- function() {
   keras$backend$backend(
@@ -188,15 +188,15 @@ k_batch_dot <- function(x, y, axes) {
 
 
 #' Turn a nD tensor into a 2D tensor with same 1st dimension.
-#' 
+#'
 #' In other words, it flattens each data samples of a batch.
-#' 
+#'
 #' @param x A tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_batch_flatten <- function(x) {
   keras$backend$batch_flatten(
@@ -206,14 +206,14 @@ k_batch_flatten <- function(x) {
 
 
 #' Returns the value of more than one tensor variable.
-#' 
+#'
 #' @param ops List of ops to evaluate.
-#' 
+#'
 #' @return A list of arrays.
-#' 
+#'
 #' @seealso [k_batch_set_value()]
-#' 
-#' @template roxlate-keras-backend  
+#'
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_batch_get_value <- function(ops) {
@@ -222,10 +222,10 @@ k_batch_get_value <- function(ops) {
 
 
 #' Applies batch normalization on x given mean, var, beta and gamma.
-#' 
+#'
 #' i.e. returns
 #' `output <- (x - mean) / (sqrt(var) + epsilon) * gamma + beta`
-#' 
+#'
 #' @param x Input tensor or variable.
 #' @param mean Mean of batch.
 #' @param var Variance of batch.
@@ -234,14 +234,14 @@ k_batch_get_value <- function(ops) {
 #' @param axis Axis (axis indexes are 1-based). Pass -1 (the
 #'   default) to select the last axis.
 #' @param epsilon Fuzz factor.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_batch_normalization <- function(x, mean, var, beta, gamma, axis = -1, epsilon = 0.001) {
-  
+
   args <- list(
     x = x,
     mean = mean,
@@ -250,21 +250,21 @@ k_batch_normalization <- function(x, mean, var, beta, gamma, axis = -1, epsilon 
     gamma = gamma,
     epsilon = epsilon
   )
-  
+
   if (keras_version() >= "2.2.0")
     args$axis <- as_axis(axis)
-  
+
   do.call(keras$backend$batch_normalization, args)
 }
 
 
 #' Sets the values of many tensor variables at once.
-#' 
+#'
 #' @param lists a list of lists `(tensor, value)`. `value` should be an R array.
-#' 
+#'
 #' @seealso [k_batch_get_value()]
-#' 
-#' @template roxlate-keras-backend   
+#'
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_batch_set_value <- function(lists) {
@@ -275,15 +275,15 @@ k_batch_set_value <- function(lists) {
 
 
 #' Adds a bias vector to a tensor.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param bias Bias tensor to add.
 #' @param data_format string, `"channels_last"` or `"channels_first"`.
-#' 
+#'
 #' @return Output tensor.
-#'  
-#' @template roxlate-keras-backend  
-#'  
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_bias_add <- function(x, bias, data_format = NULL) {
   keras$backend$bias_add(
@@ -303,7 +303,7 @@ k_bias_add <- function(x, bias, data_format = NULL) {
 #'
 #' @return A tensor.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_binary_crossentropy <- function(target, output, from_logits = FALSE) {
@@ -316,16 +316,16 @@ k_binary_crossentropy <- function(target, output, from_logits = FALSE) {
 
 
 #' Casts a tensor to a different dtype and returns it.
-#' 
+#'
 #' You can cast a Keras variable but it still returns a Keras tensor.
-#' 
+#'
 #' @param x Keras tensor (or variable).
 #' @param dtype String, either (`'float16'`, `'float32'`, or `'float64'`).
-#' 
+#'
 #' @return Keras tensor with dtype `dtype`.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_cast <- function(x, dtype) {
   keras$backend$cast(
@@ -336,13 +336,13 @@ k_cast <- function(x, dtype) {
 
 
 #' Cast an array to the default Keras float type.
-#' 
+#'
 #' @param x Array.
-#' 
+#'
 #' @return The same array, cast to its new type.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_cast_to_floatx <- function(x) {
   r_to_py(keras$backend)$cast_to_floatx(
@@ -363,30 +363,30 @@ k_cast_to_floatx <- function(x) {
 #'
 #' @return Output tensor.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_categorical_crossentropy <- function(target, output, from_logits = FALSE, axis = -1) {
-  
+
   args <- list(
     target = target,
     output = output,
     from_logits = from_logits
   )
-  
+
   if (keras_version() >= "2.2.0")
     args$axis <- as_axis(axis)
-  
+
   do.call(keras$backend$categorical_crossentropy, args)
 }
 
 
 #' Destroys the current TF graph and creates a new one.
-#' 
+#'
 #' Useful to avoid clutter from old models / layers.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_clear_session <- function() {
   keras$backend$clear_session()
@@ -394,15 +394,15 @@ k_clear_session <- function() {
 
 
 #' Element-wise value clipping.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param min_value Float or integer.
 #' @param max_value Float or integer.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_clip <- function(x, min_value, max_value) {
   keras$backend$clip(
@@ -433,16 +433,16 @@ k_concatenate <- function(tensors, axis = -1) {
 
 
 #' Creates a constant tensor.
-#' 
+#'
 #' @param value A constant value
 #' @param dtype The type of the elements of the resulting tensor.
 #' @param shape Optional dimensions of resulting tensor.
 #' @param name Optional name for the tensor.
-#' 
+#'
 #' @return A Constant Tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_constant <- function(value, dtype = NULL, shape = NULL, name = NULL) {
   keras$backend$constant(
@@ -456,18 +456,18 @@ k_constant <- function(value, dtype = NULL, shape = NULL, name = NULL) {
 
 
 #' 1D convolution.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param kernel kernel tensor.
 #' @param strides stride integer.
 #' @param padding string, `"same"`, `"causal"` or `"valid"`.
 #' @param data_format string, `"channels_last"` or `"channels_first"`.
 #' @param dilation_rate integer dilate rate.
-#' 
+#'
 #' @return A tensor, result of 1D convolution.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_conv1d <- function(x, kernel, strides = 1, padding = "valid", data_format = NULL, dilation_rate = 1) {
   keras$backend$conv1d(
@@ -493,11 +493,11 @@ k_conv1d <- function(x, kernel, strides = 1, padding = "valid", data_format = NU
 #'
 #' @return A tensor, result of 2D convolution.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
-k_conv2d <- function(x, kernel, strides = c(1, 1), padding = "valid", 
-                     data_format = NULL, 
+k_conv2d <- function(x, kernel, strides = c(1, 1), padding = "valid",
+                     data_format = NULL,
                      dilation_rate = c(1, 1)) {
   keras$backend$conv2d(
     x = x,
@@ -522,10 +522,10 @@ k_conv2d <- function(x, kernel, strides = c(1, 1), padding = "valid",
 #'
 #' @return A tensor, result of transposed 2D convolution.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
-k_conv2d_transpose <- function(x, kernel, output_shape, strides = c(1, 1), 
+k_conv2d_transpose <- function(x, kernel, output_shape, strides = c(1, 1),
                                padding = "valid", data_format = NULL) {
   keras$backend$conv2d_transpose(
     x = x,
@@ -550,10 +550,10 @@ k_conv2d_transpose <- function(x, kernel, output_shape, strides = c(1, 1),
 #'
 #' @return A tensor, result of 3D convolution.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
-k_conv3d <- function(x, kernel, strides = c(1, 1, 1), padding = "valid", 
+k_conv3d <- function(x, kernel, strides = c(1, 1, 1), padding = "valid",
                      data_format = NULL, dilation_rate = c(1, 1, 1)) {
   keras$backend$conv3d(
     x = x,
@@ -578,10 +578,10 @@ k_conv3d <- function(x, kernel, strides = c(1, 1, 1), padding = "valid",
 #'
 #' @return A tensor, result of transposed 3D convolution.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
-k_conv3d_transpose <- function(x, kernel, output_shape, strides = c(1, 1, 1), 
+k_conv3d_transpose <- function(x, kernel, output_shape, strides = c(1, 1, 1),
                                padding = "valid", data_format = NULL) {
   keras$backend$conv3d_transpose(
     x = x,
@@ -595,13 +595,13 @@ k_conv3d_transpose <- function(x, kernel, output_shape, strides = c(1, 1, 1),
 
 
 #' Computes cos of x element-wise.
-#' 
+#'
 #' @param x Tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_cos <- function(x) {
   keras$backend$cos(
@@ -611,13 +611,13 @@ k_cos <- function(x) {
 
 
 #' Returns the static number of elements in a Keras variable or tensor.
-#' 
+#'
 #' @param x Keras variable or tensor.
-#' 
+#'
 #' @return Integer, the number of elements in `x`, i.e., the product of the array's static dimensions.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_count_params <- function(x) {
   keras$backend$count_params(
@@ -640,7 +640,7 @@ k_count_params <- function(x) {
 #' @return Tensor with shape (samples,1) containing the CTC loss of each
 #'   element.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_ctc_batch_cost <- function(y_true, y_pred, input_length, label_length) {
@@ -675,7 +675,7 @@ k_ctc_batch_cost <- function(y_true, y_pred, input_length, label_length) {
 #'   `-1`. Tensor `(top_paths)` that contains the log probability of each
 #'   decoded sequence.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_ctc_decode <- function(y_pred, input_length, greedy = TRUE, beam_width = 100L, top_paths = 1) {
@@ -690,14 +690,14 @@ k_ctc_decode <- function(y_pred, input_length, greedy = TRUE, beam_width = 100L,
 
 
 #' Converts CTC labels from dense to sparse.
-#' 
+#'
 #' @param labels dense CTC labels.
 #' @param label_lengths length of the labels.
-#' 
+#'
 #' @return A sparse tensor representation of the labels.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_ctc_label_dense_to_sparse <- function(labels, label_lengths) {
   keras$backend$ctc_label_dense_to_sparse(
@@ -757,10 +757,10 @@ k_cumsum <- function(x, axis = 1) {
 #'
 #' @return Output tensor.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
-k_depthwise_conv2d <- function(x, depthwise_kernel, strides = c(1, 1), padding = "valid", 
+k_depthwise_conv2d <- function(x, depthwise_kernel, strides = c(1, 1), padding = "valid",
                                data_format = NULL, dilation_rate = c(1, 1)) {
   keras$backend$depthwise_conv2d(
     x = x,
@@ -774,18 +774,18 @@ k_depthwise_conv2d <- function(x, depthwise_kernel, strides = c(1, 1), padding =
 
 
 #' Multiplies 2 tensors (and/or variables) and returns a *tensor*.
-#' 
+#'
 #' When attempting to multiply a nD tensor
 #' with a nD tensor, it reproduces the Theano behavior.
 #' (e.g. `(2, 3) * (4, 3, 5) -> (2, 4, 5)`)
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param y Tensor or variable.
-#' 
+#'
 #' @return A tensor, dot product of `x` and `y`.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_dot <- function(x, y) {
   keras$backend$dot(
@@ -805,7 +805,7 @@ k_dot <- function(x, y) {
 #'
 #' @return A tensor.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_dropout <- function(x, level, noise_shape = NULL, seed = NULL) {
@@ -819,13 +819,13 @@ k_dropout <- function(x, level, noise_shape = NULL, seed = NULL) {
 
 
 #' Returns the dtype of a Keras tensor or variable, as a string.
-#' 
+#'
 #' @param x Tensor or variable.
-#' 
+#'
 #' @return String, dtype of `x`.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_dtype <- function(x) {
   keras$backend$dtype(
@@ -835,14 +835,14 @@ k_dtype <- function(x) {
 
 
 #' Exponential linear unit.
-#' 
+#'
 #' @param x A tensor or variable to compute the activation function for.
 #' @param alpha A scalar, slope of negative section.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_elu <- function(x, alpha = 1.0) {
   keras$backend$elu(
@@ -853,11 +853,11 @@ k_elu <- function(x, alpha = 1.0) {
 
 
 #' Fuzz factor used in numeric expressions.
-#' 
+#'
 #' @param e float. New value of epsilon.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_epsilon <- function() {
   keras$backend$epsilon(
@@ -873,14 +873,14 @@ k_set_epsilon <- function(e) {
 
 
 #' Element-wise equality between two tensors.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param y Tensor or variable.
-#' 
+#'
 #' @return A bool tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_equal <- function(x, y) {
   keras$backend$equal(
@@ -891,13 +891,13 @@ k_equal <- function(x, y) {
 
 
 #' Evaluates the value of a variable.
-#' 
+#'
 #' @param x A variable.
-#' 
+#'
 #' @return An R array.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_eval <- function(x) {
   keras$backend$eval(
@@ -907,13 +907,13 @@ k_eval <- function(x) {
 
 
 #' Element-wise exponential.
-#' 
+#'
 #' @param x Tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_exp <- function(x) {
   keras$backend$exp(
@@ -949,7 +949,7 @@ k_expand_dims <- function(x, axis = -1) {
 #'
 #' @return A Keras variable, an identity matrix.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_eye <- function(size, dtype = NULL, name = NULL) {
@@ -962,13 +962,13 @@ k_eye <- function(size, dtype = NULL, name = NULL) {
 
 
 #' Flatten a tensor.
-#' 
+#'
 #' @param x A tensor or variable.
-#' 
+#'
 #' @return A tensor, reshaped into 1-D
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_flatten <- function(x) {
   keras$backend$flatten(
@@ -978,11 +978,11 @@ k_flatten <- function(x) {
 
 
 #' Default float type
-#' 
+#'
 #' @param floatx String, 'float16', 'float32', or 'float64'.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_floatx <- function() {
   keras$backend$floatx(
@@ -1007,7 +1007,7 @@ k_set_floatx <- function(floatx) {
 #'
 #' @return Tensor with same type and shape as `initializer`.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_foldl <- function(fn, elems, initializer = NULL, name = NULL) {
@@ -1031,7 +1031,7 @@ k_foldl <- function(fn, elems, initializer = NULL, name = NULL) {
 #'
 #' @return Tensor with same type and shape as `initializer`.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_foldr <- function(fn, elems, initializer = NULL, name = NULL) {
@@ -1052,7 +1052,7 @@ k_foldr <- function(fn, elems, initializer = NULL, name = NULL) {
 #'
 #' @return Output values as R arrays.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_function <- function(inputs, outputs, updates = NULL, ...) {
@@ -1078,11 +1078,11 @@ k_function <- function(inputs, outputs, updates = NULL, ...) {
 #'
 #' @export
 k_gather <- function(reference, indices) {
-  
+
   # offset indices if it's an R object
   if (!inherits(indices, "python.builtin.object"))
     indices <- as_axis(indices)
-  
+
   keras$backend$gather(
     reference = reference,
     indices = indices
@@ -1095,17 +1095,17 @@ k_gather <- function(reference, indices) {
 #' If a default TensorFlow session is available, we will return it. Else, we
 #' will return the global Keras session. If no global Keras session exists at
 #' this point: we will create a new global session. Note that you can manually
-#' set the global session via `k_set_session()`. 
-#' 
+#' set the global session via `k_set_session()`.
+#'
 #' @param session A TensorFlow Session.
-#' 
+#'
 #' @return A TensorFlow session
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_get_session <- function() {
-  
+
   if(tensorflow::tf_version() >= '2.0'){
     warning("Tensorflow 2.0 does not expose the 'k_get_session()' directly any more. Instead use 'tf$compat$v1$keras$backend$get_session()'", call. = FALSE)
     tensorflow::tf$compat$v1$keras$backend$get_session()
@@ -1130,13 +1130,13 @@ k_set_session <- function(session) {
 
 
 #' Get the uid for the default graph.
-#' 
+#'
 #' @param prefix An optional prefix of the graph.
-#' 
+#'
 #' @return A unique identifier for the graph.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_get_uid <- function(prefix = "") {
   keras$backend$get_uid(
@@ -1146,13 +1146,13 @@ k_get_uid <- function(prefix = "") {
 
 
 #' Returns the value of a variable.
-#' 
+#'
 #' @param x input variable.
-#' 
+#'
 #' @return An R array.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_get_value <- function(x) {
   keras$backend$get_value(
@@ -1162,13 +1162,13 @@ k_get_value <- function(x) {
 
 
 #' Returns the shape of a variable.
-#' 
+#'
 #' @param x A variable.
-#' 
+#'
 #' @return A vector of integers.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_get_variable_shape <- function(x) {
   keras$backend$get_variable_shape(
@@ -1178,14 +1178,14 @@ k_get_variable_shape <- function(x) {
 
 
 #' Returns the gradients of `variables` w.r.t. `loss`.
-#' 
+#'
 #' @param loss Scalar tensor to minimize.
 #' @param variables List of variables.
-#' 
+#'
 #' @return A gradients tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_gradients <- function(loss, variables) {
   keras$backend$gradients(
@@ -1196,14 +1196,14 @@ k_gradients <- function(loss, variables) {
 
 
 #' Element-wise truth value of (x > y).
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param y Tensor or variable.
-#' 
+#'
 #' @return A bool tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_greater <- function(x, y) {
   keras$backend$greater(
@@ -1214,14 +1214,14 @@ k_greater <- function(x, y) {
 
 
 #' Element-wise truth value of (x >= y).
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param y Tensor or variable.
-#' 
+#'
 #' @return A bool tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_greater_equal <- function(x, y) {
   keras$backend$greater_equal(
@@ -1232,17 +1232,17 @@ k_greater_equal <- function(x, y) {
 
 
 #' Segment-wise linear approximation of sigmoid.
-#' 
+#'
 #' Faster than sigmoid.
 #' Returns `0.` if `x < -2.5`, `1.` if `x > 2.5`.
 #' In `-2.5 <= x <= 2.5`, returns `0.2 * x + 0.5`.
-#' 
+#'
 #' @param x A tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_hard_sigmoid <- function(x) {
   keras$backend$hard_sigmoid(
@@ -1252,14 +1252,14 @@ k_hard_sigmoid <- function(x) {
 
 
 #' Returns a tensor with the same content as the input tensor.
-#' 
+#'
 #' @param x The input tensor.
 #' @param name String, name for the variable to create.
-#' 
+#'
 #' @return A tensor of the same shape, type and content.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_identity <- function(x, name = NULL) {
   keras$backend$identity(
@@ -1270,11 +1270,11 @@ k_identity <- function(x, name = NULL) {
 
 
 #' Default image data format convention ('channels_first' or 'channels_last').
-#' 
+#'
 #' @param data_format string. `'channels_first'` or `'channels_last'`.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_image_data_format <- function() {
   keras$backend$image_data_format(
@@ -1303,7 +1303,7 @@ k_set_image_data_format <- function(data_format) {
 #'
 #' @return Either `x` or `alt` based on `k_learning_phase()`.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_in_test_phase <- function(x, alt, training = NULL) {
@@ -1327,7 +1327,7 @@ k_in_test_phase <- function(x, alt, training = NULL) {
 #'   `TRUE` if `predictions[i, targets[[i]]` is within top-`k` values of
 #'   `predictions[[i]]`.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_in_top_k <- function(predictions, targets, k) {
@@ -1353,7 +1353,7 @@ k_in_top_k <- function(predictions, targets, k) {
 #' @return Either `x` or `alt` based on the `training` flag. the `training`
 #'   flag defaults to `k_learning_phase()`.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_in_train_phase <- function(x, alt, training = NULL) {
@@ -1366,13 +1366,13 @@ k_in_train_phase <- function(x, alt, training = NULL) {
 
 
 #' Returns the shape of tensor or variable as a list of int or NULL entries.
-#' 
+#'
 #' @param x Tensor or variable.
-#' 
+#'
 #' @return A list of integers (or NULL entries).
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_int_shape <- function(x) {
   keras$backend$int_shape(
@@ -1381,13 +1381,13 @@ k_int_shape <- function(x) {
 }
 
 #' Returns whether `x` is a symbolic tensor.
-#' 
+#'
 #' @param x A candidate tensor.
-#' 
+#'
 #' @return A logical: Whether the argument is a symbolic tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_is_tensor <- function(x) {
   keras$backend$is_tensor(
@@ -1398,15 +1398,15 @@ k_is_tensor <- function(x) {
 
 
 #' Returns whether `x` is a Keras tensor.
-#' 
+#'
 #' A "Keras tensor" is a tensor that was returned by a Keras layer
-#' 
+#'
 #' @param x A candidate tensor.
-#' 
+#'
 #' @return A logical: Whether the argument is a Keras tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_is_keras_tensor <- function(x) {
   keras$backend$is_keras_tensor(
@@ -1416,13 +1416,13 @@ k_is_keras_tensor <- function(x) {
 
 
 #' Returns whether `x` is a placeholder.
-#' 
+#'
 #' @param x A candidate placeholder.
-#' 
+#'
 #' @return A logical
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_is_placeholder <- function(x) {
   keras$backend$is_placeholder(
@@ -1432,13 +1432,13 @@ k_is_placeholder <- function(x) {
 
 
 #' Returns whether a tensor is a sparse tensor.
-#' 
+#'
 #' @param tensor A tensor instance.
-#' 
+#'
 #' @return A logical
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_is_sparse <- function(tensor) {
   keras$backend$is_sparse(
@@ -1448,15 +1448,15 @@ k_is_sparse <- function(tensor) {
 
 
 #' Normalizes a tensor wrt the L2 norm alongside the specified axis.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param axis Axis along which to perform normalization (axis indexes
 #'   are 1-based)
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_l2_normalize <- function(x, axis = NULL) {
   keras$backend$l2_normalize(
@@ -1470,11 +1470,11 @@ k_l2_normalize <- function(x, axis = NULL) {
 #'
 #' The learning phase flag is a bool tensor (0 = test, 1 = train) to be passed
 #' as input to any Keras function that uses a different behavior at train time
-#' and test time. 
-#' 
+#' and test time.
+#'
 #' @return Learning phase (scalar integer tensor or R integer).
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_learning_phase <- function() {
@@ -1483,14 +1483,14 @@ k_learning_phase <- function() {
 
 
 #' Element-wise truth value of (x < y).
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param y Tensor or variable.
-#' 
+#'
 #' @return A bool tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_less <- function(x, y) {
   keras$backend$less(
@@ -1501,14 +1501,14 @@ k_less <- function(x, y) {
 
 
 #' Element-wise truth value of (x <= y).
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param y Tensor or variable.
-#' 
+#'
 #' @return A bool tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_less_equal <- function(x, y) {
   keras$backend$less_equal(
@@ -1532,7 +1532,7 @@ k_less_equal <- function(x, y) {
 #' @return the tensor after 1d conv with un-shared weights, with shape
 #'   (batch_size, output_length, filters)
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_local_conv1d <- function(inputs, kernel, kernel_size, strides, data_format = NULL) {
@@ -1564,7 +1564,7 @@ k_local_conv1d <- function(inputs, kernel, kernel_size, strides, data_format = N
 #'   data_format='channels_first' or 4D tensor with shape: (batch_size,
 #'   new_rows, new_cols, filters) if data_format='channels_last'.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_local_conv2d <- function(inputs, kernel, kernel_size, strides, output_shape, data_format = NULL) {
@@ -1580,13 +1580,13 @@ k_local_conv2d <- function(inputs, kernel, kernel_size, strides, output_shape, d
 
 
 #' Element-wise log.
-#' 
+#'
 #' @param x Tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_log <- function(x) {
   keras$backend$log(
@@ -1613,10 +1613,10 @@ k_log <- function(x) {
 #'
 #' @export
 k_logsumexp <- function(x, axis = NULL, keepdims = FALSE) {
-  
+
   if (tensorflow::tf_version() >= "2.2")
     stop("k_logsumexp is deprecated. use tensorflow::tf$reduce_logsumexp ")
-  
+
   keras$backend$logsumexp(
     x = x,
     axis = as_axis(axis),
@@ -1633,7 +1633,7 @@ k_logsumexp <- function(x, axis = NULL, keepdims = FALSE) {
 #'
 #' @param value Logical
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_manual_variable_initialization <- function(value) {
@@ -1644,16 +1644,16 @@ k_manual_variable_initialization <- function(value) {
 
 
 #' Map the function fn over the elements elems and return the outputs.
-#' 
+#'
 #' @param fn Function that will be called upon each element in elems
 #' @param elems tensor
 #' @param name A string name for the map node in the graph
 #' @param dtype Output data type.
-#' 
+#'
 #' @return Tensor with dtype `dtype`.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_map_fn <- function(fn, elems, name = NULL, dtype = NULL) {
   keras$backend$map_fn(
@@ -1689,14 +1689,14 @@ k_max <- function(x, axis = NULL, keepdims = FALSE) {
 
 
 #' Element-wise maximum of two tensors.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param y Tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_maximum <- function(x, y) {
   keras$backend$maximum(
@@ -1754,14 +1754,14 @@ k_min <- function(x, axis = NULL, keepdims = FALSE) {
 
 
 #' Element-wise minimum of two tensors.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param y Tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_minimum <- function(x, y) {
   keras$backend$minimum(
@@ -1772,15 +1772,15 @@ k_minimum <- function(x, y) {
 
 
 #' Compute the moving average of a variable.
-#' 
+#'
 #' @param x A `Variable`.
 #' @param value A tensor with the same shape as `x`.
 #' @param momentum The moving average momentum.
-#' 
+#'
 #' @return An operation to update the variable.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_moving_average_update <- function(x, value, momentum) {
   keras$backend$moving_average_update(
@@ -1793,13 +1793,13 @@ k_moving_average_update <- function(x, value, momentum) {
 
 
 #' Returns the number of axes in a tensor, as an integer.
-#' 
+#'
 #' @param x Tensor or variable.
-#' 
+#'
 #' @return Integer (scalar), number of axes.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_ndim <- function(x) {
   keras$backend$ndim(
@@ -1809,17 +1809,17 @@ k_ndim <- function(x) {
 
 
 #' Computes mean and std for batch then apply batch_normalization on batch.
-#' 
+#'
 #' @param x Input tensor or variable.
 #' @param gamma Tensor by which to scale the input.
 #' @param beta Tensor with which to center the input.
 #' @param reduction_axes iterable of integers, axes over which to normalize.
 #' @param epsilon Fuzz factor.
-#' 
+#'
 #' @return A list length of 3, `(normalized_tensor, mean, variance)`.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_normalize_batch_in_training <- function(x, gamma, beta, reduction_axes, epsilon = 0.001) {
   keras$backend$normalize_batch_in_training(
@@ -1833,14 +1833,14 @@ k_normalize_batch_in_training <- function(x, gamma, beta, reduction_axes, epsilo
 
 
 #' Element-wise inequality between two tensors.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param y Tensor or variable.
-#' 
+#'
 #' @return A bool tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_not_equal <- function(x, y) {
   keras$backend$not_equal(
@@ -1859,7 +1859,7 @@ k_not_equal <- function(x, y) {
 #' @return (n + 1)D one hot representation of the input with shape
 #'   `(batch_size, dim1, dim2, ... dim(n-1), num_classes)`
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_one_hot <- function(indices, num_classes) {
@@ -1871,15 +1871,15 @@ k_one_hot <- function(indices, num_classes) {
 
 
 #' Instantiates an all-ones tensor variable and returns it.
-#' 
+#'
 #' @param shape Tuple of integers, shape of returned Keras variable.
 #' @param dtype String, data type of returned Keras variable.
 #' @param name String, name of returned Keras variable.
-#' 
+#'
 #' @return A Keras variable, filled with `1.0`.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_ones <- function(shape, dtype = NULL, name = NULL) {
   keras$backend$ones(
@@ -1899,7 +1899,7 @@ k_ones <- function(shape, dtype = NULL, name = NULL) {
 #'
 #' @return A Keras variable with the shape of x filled with ones.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_ones_like <- function(x, dtype = NULL, name = NULL) {
@@ -1942,7 +1942,7 @@ k_permute_dimensions <- function(x, pattern) {
 #'
 #' @return Tensor instance (with Keras metadata included).
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_placeholder <- function(shape = NULL, ndim = NULL, dtype = NULL, sparse = FALSE, name = NULL) {
@@ -1957,18 +1957,18 @@ k_placeholder <- function(shape = NULL, ndim = NULL, dtype = NULL, sparse = FALS
 
 
 #' 2D Pooling.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param pool_size list of 2 integers.
 #' @param strides list of 2 integers.
 #' @param padding string, `"same"` or `"valid"`.
 #' @param data_format string, `"channels_last"` or `"channels_first"`.
 #' @param pool_mode string, `"max"` or `"avg"`.
-#' 
+#'
 #' @return A tensor, result of 2D pooling.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_pool2d <- function(x, pool_size, strides = c(1, 1), padding = "valid", data_format = NULL, pool_mode = "max") {
   keras$backend$pool2d(
@@ -1983,20 +1983,20 @@ k_pool2d <- function(x, pool_size, strides = c(1, 1), padding = "valid", data_fo
 
 
 #' 3D Pooling.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param pool_size list of 3 integers.
 #' @param strides list of 3 integers.
 #' @param padding string, `"same"` or `"valid"`.
 #' @param data_format string, `"channels_last"` or `"channels_first"`.
 #' @param pool_mode string, `"max"` or `"avg"`.
-#' 
+#'
 #' @return A tensor, result of 3D pooling.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
-k_pool3d <- function(x, pool_size, strides = c(1, 1, 1), padding = "valid", 
+k_pool3d <- function(x, pool_size, strides = c(1, 1, 1), padding = "valid",
                      data_format = NULL, pool_mode = "max") {
   keras$backend$pool3d(
     x = x,
@@ -2010,14 +2010,14 @@ k_pool3d <- function(x, pool_size, strides = c(1, 1, 1), padding = "valid",
 
 
 #' Element-wise exponentiation.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param a R integer.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_pow <- function(x, a) {
   keras$backend$pow(
@@ -2039,7 +2039,7 @@ k_pow <- function(x, a) {
 #'
 #' @return The same tensor `x`, unchanged.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_print_tensor <- function(x, message = "") {
@@ -2074,16 +2074,16 @@ k_prod <- function(x, axis = NULL, keepdims = FALSE) {
 
 
 #' Returns a tensor with random binomial distribution of values.
-#' 
+#'
 #' @param shape A list of integers, the shape of tensor to create.
 #' @param p A float, `0. <= p <= 1`, probability of binomial distribution.
 #' @param dtype String, dtype of returned tensor.
 #' @param seed Integer, random seed.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_random_binomial <- function(shape, p = 0.0, dtype = NULL, seed = NULL) {
   keras$backend$random_binomial(
@@ -2106,7 +2106,7 @@ k_random_binomial <- function(shape, p = 0.0, dtype = NULL, seed = NULL) {
 #'
 #' @return A tensor.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_random_normal <- function(shape, mean = 0.0, stddev = 1.0, dtype = NULL, seed = NULL) {
@@ -2131,7 +2131,7 @@ k_random_normal <- function(shape, mean = 0.0, stddev = 1.0, dtype = NULL, seed 
 #'
 #' @return A Keras variable, filled with drawn samples.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_random_normal_variable <- function(shape, mean, scale, dtype = NULL, name = NULL, seed = NULL) {
@@ -2147,17 +2147,17 @@ k_random_normal_variable <- function(shape, mean, scale, dtype = NULL, name = NU
 
 
 #' Returns a tensor with uniform distribution of values.
-#' 
+#'
 #' @param shape A list of integers, the shape of tensor to create.
 #' @param minval A float, lower boundary of the uniform distribution to draw samples.
 #' @param maxval A float, upper boundary of the uniform distribution to draw samples.
 #' @param dtype String, dtype of returned tensor.
 #' @param seed Integer, random seed.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_random_uniform <- function(shape, minval = 0.0, maxval = 1.0, dtype = NULL, seed = NULL) {
   keras$backend$random_uniform(
@@ -2171,18 +2171,18 @@ k_random_uniform <- function(shape, minval = 0.0, maxval = 1.0, dtype = NULL, se
 
 
 #' Instantiates a variable with values drawn from a uniform distribution.
-#' 
+#'
 #' @param shape Tuple of integers, shape of returned Keras variable.
 #' @param low Float, lower boundary of the output interval.
 #' @param high Float, upper boundary of the output interval.
 #' @param dtype String, dtype of returned Keras variable.
 #' @param name String, name of returned Keras variable.
 #' @param seed Integer, random seed.
-#' 
+#'
 #' @return A Keras variable, filled with drawn samples.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_random_uniform_variable <- function(shape, low, high, dtype = NULL, name = NULL, seed = NULL) {
   keras$backend$random_uniform_variable(
@@ -2197,17 +2197,17 @@ k_random_uniform_variable <- function(shape, low, high, dtype = NULL, name = NUL
 
 
 #' Rectified linear unit.
-#' 
+#'
 #' With default values, it returns element-wise `max(x, 0)`.
-#' 
+#'
 #' @param x A tensor or variable.
 #' @param alpha A scalar, slope of negative section (default=`0.`).
 #' @param max_value Saturation threshold.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_relu <- function(x, alpha = 0.0, max_value = NULL) {
   keras$backend$relu(
@@ -2228,7 +2228,7 @@ k_relu <- function(x, alpha = 0.0, max_value = NULL) {
 #'
 #' @return A tensor
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_repeat <- function(x, n) {
@@ -2240,18 +2240,18 @@ k_repeat <- function(x, n) {
 
 
 #' Repeats the elements of a tensor along an axis.
-#' 
+#'
 #' If `x` has shape `(s1, s2, s3)` and `axis` is `2`, the output
 #' will have shape `(s1, s2 * rep, s3)`.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param rep Integer, number of times to repeat.
 #' @param axis Axis along which to repeat (axis indexes are 1-based)
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_repeat_elements <- function(x, rep, axis) {
   keras$backend$repeat_elements(
@@ -2263,9 +2263,9 @@ k_repeat_elements <- function(x, rep, axis) {
 
 
 #' Reset graph identifiers.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_reset_uids <- function() {
   keras$backend$reset_uids(
@@ -2274,14 +2274,14 @@ k_reset_uids <- function() {
 
 
 #' Reshapes a tensor to the specified shape.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param shape Target shape list.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_reshape <- function(x, shape) {
   keras$backend$reshape(
@@ -2292,16 +2292,16 @@ k_reshape <- function(x, shape) {
 
 
 #' Resizes the images contained in a 4D tensor.
-#' 
+#'
 #' @param x Tensor or variable to resize.
 #' @param height_factor Positive integer.
 #' @param width_factor Positive integer.
 #' @param data_format string, `"channels_last"` or `"channels_first"`.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_resize_images <- function(x, height_factor, width_factor, data_format) {
   keras$backend$resize_images(
@@ -2314,17 +2314,17 @@ k_resize_images <- function(x, height_factor, width_factor, data_format) {
 
 
 #' Resizes the volume contained in a 5D tensor.
-#' 
+#'
 #' @param x Tensor or variable to resize.
 #' @param depth_factor Positive integer.
 #' @param height_factor Positive integer.
 #' @param width_factor Positive integer.
 #' @param data_format string, `"channels_last"` or `"channels_first"`.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_resize_volumes <- function(x, depth_factor, height_factor, width_factor, data_format) {
   keras$backend$resize_volumes(
@@ -2375,17 +2375,17 @@ k_reverse <- function(x, axes) {
 #'
 #' @return A list with:
 #'
-#'   - `last_output`: the latest output of the rnn, of shape (samples, ...) 
+#'   - `last_output`: the latest output of the rnn, of shape (samples, ...)
 #'   - `outputs`: tensor with shape (samples, time, ...) where each entry
-#'      `outputs[s, t]` is the output of the step function at time t for sample s. 
+#'      `outputs[s, t]` is the output of the step function at time t for sample s.
 #'   - `new_states`: list of tensors, latest states returned by the step
 #'      function, of shape (samples, ...).
-#'   
-#' @template roxlate-keras-backend  
+#'
+#' @template roxlate-keras-backend
 #'
 #' @export
-k_rnn <- function(step_function, inputs, initial_states, go_backwards = FALSE, 
-                  mask = NULL, constants = NULL, unroll = FALSE, 
+k_rnn <- function(step_function, inputs, initial_states, go_backwards = FALSE,
+                  mask = NULL, constants = NULL, unroll = FALSE,
                   input_length = NULL) {
   keras$backend$rnn(
     step_function = step_function,
@@ -2401,15 +2401,15 @@ k_rnn <- function(step_function, inputs, initial_states, go_backwards = FALSE,
 
 
 #' Element-wise rounding to the closest integer.
-#' 
+#'
 #' In case of tie, the rounding mode used is "half to even".
-#' 
+#'
 #' @param x Tensor or variable.
-#' 
+#'
 #' @return A tensor.
 #'
-#' @template roxlate-keras-backend  
-#'   
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_round <- function(x) {
   keras$backend$round(
@@ -2419,7 +2419,7 @@ k_round <- function(x) {
 
 
 #' 2D convolution with separable filters.
-#' 
+#'
 #' @param x input tensor
 #' @param depthwise_kernel convolution kernel for the depthwise convolution.
 #' @param pointwise_kernel kernel for the 1x1 convolution.
@@ -2427,13 +2427,13 @@ k_round <- function(x) {
 #' @param padding string, `"same"` or `"valid"`.
 #' @param data_format string, `"channels_last"` or `"channels_first"`.
 #' @param dilation_rate list of integers, dilation rates for the separable convolution.
-#' 
+#'
 #' @return Output tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
-k_separable_conv2d <- function(x, depthwise_kernel, pointwise_kernel, strides = c(1, 1), 
+k_separable_conv2d <- function(x, depthwise_kernel, pointwise_kernel, strides = c(1, 1),
                                padding = "valid", data_format = NULL, dilation_rate = c(1, 1)) {
   keras$backend$separable_conv2d(
     x = x,
@@ -2448,11 +2448,11 @@ k_separable_conv2d <- function(x, depthwise_kernel, pointwise_kernel, strides = 
 
 
 #' Sets the learning phase to a fixed value.
-#' 
+#'
 #' @param value Learning phase value, either 0 or 1 (integers).
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_set_learning_phase <- function(value) {
   keras$backend$set_learning_phase(
@@ -2462,12 +2462,12 @@ k_set_learning_phase <- function(value) {
 
 
 #' Sets the value of a variable, from an R array.
-#' 
+#'
 #' @param x Tensor to set to a new value.
 #' @param value Value to set the tensor to, as an R array (of the same shape).
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_set_value <- function(x, value) {
   keras$backend$set_value(
@@ -2483,7 +2483,7 @@ k_set_value <- function(x, value) {
 #'
 #' @return A symbolic shape (which is itself a tensor).
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_shape <- function(x) {
@@ -2494,13 +2494,13 @@ k_shape <- function(x) {
 
 
 #' Element-wise sigmoid.
-#' 
+#'
 #' @param x A tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_sigmoid <- function(x) {
   keras$backend$sigmoid(
@@ -2510,13 +2510,13 @@ k_sigmoid <- function(x) {
 
 
 #' Element-wise sign.
-#' 
+#'
 #' @param x Tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_sign <- function(x) {
   keras$backend$sign(
@@ -2526,13 +2526,13 @@ k_sign <- function(x) {
 
 
 #' Computes sin of x element-wise.
-#' 
+#'
 #' @param x Tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_sin <- function(x) {
   keras$backend$sin(
@@ -2542,37 +2542,37 @@ k_sin <- function(x) {
 
 
 #' Softmax of a tensor.
-#' 
+#'
 #' @param x A tensor or variable.
 #' @param axis The dimension softmax would be performed on.
 #'   The default is -1 which indicates the last dimension.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_softmax <- function(x, axis = -1) {
-  
+
   args <- list(
     x = x
   )
-  
+
   if (keras_version() >= "2.1.6")
     args$axis <- as_axis(axis)
-  
+
   do.call(keras$backend$softmax, args)
 }
 
 
 #' Softplus of a tensor.
-#' 
+#'
 #' @param x A tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_softplus <- function(x) {
   keras$backend$softplus(
@@ -2582,13 +2582,13 @@ k_softplus <- function(x) {
 
 
 #' Softsign of a tensor.
-#' 
+#'
 #' @param x A tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_softsign <- function(x) {
   keras$backend$softsign(
@@ -2598,43 +2598,43 @@ k_softsign <- function(x) {
 
 
 #' Categorical crossentropy with integer targets.
-#' 
+#'
 #' @inheritParams k_batch_normalization
-#' 
+#'
 #' @param target An integer tensor.
 #' @param output A tensor resulting from a softmax (unless `from_logits` is TRUE, in which case `output` is expected to be the logits).
 #' @param from_logits Boolean, whether `output` is the result of a softmax, or is a tensor of logits.
-#' 
+#'
 #' @return Output tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_sparse_categorical_crossentropy <- function(target, output, from_logits = FALSE, axis = -1) {
-  
+
   args <- list(
     target = target,
     output = output,
     from_logits = from_logits
   )
-  
+
   if (keras_version() >= "2.2.0")
     args$axis <- as_axis(axis)
-  
+
   do.call(keras$backend$sparse_categorical_crossentropy, args)
 }
 
 
 #' Pads the 2nd and 3rd dimensions of a 4D tensor.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param padding Tuple of 2 lists, padding pattern.
 #' @param data_format string, `"channels_last"` or `"channels_first"`.
-#' 
+#'
 #' @return A padded 4D tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_spatial_2d_padding <- function(x, padding = list(list(1, 1), list(1, 1)), data_format = NULL) {
   keras$backend$spatial_2d_padding(
@@ -2658,11 +2658,11 @@ k_spatial_2d_padding <- function(x, padding = list(list(1, 1), list(1, 1)), data
 #'
 #' @return A padded 5D tensor.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
-k_spatial_3d_padding <- function(x, 
-                                 padding = list(list(1, 1), list(1, 1), list(1, 1)), 
+k_spatial_3d_padding <- function(x,
+                                 padding = list(list(1, 1), list(1, 1), list(1, 1)),
                                  data_format = NULL) {
   keras$backend$spatial_3d_padding(
     x = x,
@@ -2673,13 +2673,13 @@ k_spatial_3d_padding <- function(x,
 
 
 #' Element-wise square root.
-#' 
+#'
 #' @param x Tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_sqrt <- function(x) {
   keras$backend$sqrt(
@@ -2689,13 +2689,13 @@ k_sqrt <- function(x) {
 
 
 #' Element-wise square.
-#' 
+#'
 #' @param x Tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_square <- function(x) {
   keras$backend$square(
@@ -2771,7 +2771,7 @@ k_std <- function(x, axis = NULL, keepdims = FALSE) {
 #' @return A single tensor or a list of tensors (depending on the passed
 #'   argument) that has constant gradient with respect to any other variable.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_stop_gradient <- function(variables) {
@@ -2791,7 +2791,7 @@ k_stop_gradient <- function(variables) {
 #'
 #' @return A tensor with sum of `x`.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_sum <- function(x, axis = NULL, keepdims = FALSE) {
@@ -2804,18 +2804,18 @@ k_sum <- function(x, axis = NULL, keepdims = FALSE) {
 
 
 #' Switches between two operations depending on a scalar value.
-#' 
+#'
 #' Note that both `then_expression` and `else_expression`
 #' should be symbolic tensors of the *same shape*.
-#' 
+#'
 #' @param condition tensor (`int` or `bool`).
 #' @param then_expression either a tensor, or a function that returns a tensor.
 #' @param else_expression either a tensor, or a function that returns a tensor.
-#' 
+#'
 #' @return The selected tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_switch <- function(condition, then_expression, else_expression) {
   keras$backend$switch(
@@ -2828,13 +2828,13 @@ k_switch <- function(condition, then_expression, else_expression) {
 
 
 #' Element-wise tanh.
-#' 
+#'
 #' @param x A tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_tanh <- function(x) {
   keras$backend$tanh(
@@ -2844,14 +2844,14 @@ k_tanh <- function(x) {
 
 
 #' Pads the middle dimension of a 3D tensor.
-#' 
+#'
 #' @param x Tensor or variable.
 #' @param padding List of 2 integers, how many zeros to add at the start and end of dim 1.
-#' 
+#'
 #' @return A padded 3D tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_temporal_padding <- function(x, padding = c(1, 1)) {
   keras$backend$temporal_padding(
@@ -2861,14 +2861,14 @@ k_temporal_padding <- function(x, padding = c(1, 1)) {
 }
 
 #' Creates a tensor by tiling `x` by `n`.
-#' 
+#'
 #' @param x A tensor or variable
 #' @param n A list of integers. The length must be the same as the number of dimensions in `x`.
-#' 
+#'
 #' @return A tiled tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_tile <- function(x, n) {
   keras$backend$tile(
@@ -2884,7 +2884,7 @@ k_tile <- function(x, n) {
 #'
 #' @return A dense tensor.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_to_dense <- function(tensor) {
@@ -2895,13 +2895,13 @@ k_to_dense <- function(tensor) {
 
 
 #' Transposes a tensor and returns it.
-#' 
+#'
 #' @param x Tensor or variable.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_transpose <- function(x) {
   keras$backend$transpose(
@@ -2911,22 +2911,22 @@ k_transpose <- function(x) {
 
 
 #' Returns a tensor with truncated random normal distribution of values.
-#' 
+#'
 #' The generated values follow a normal distribution
 #' with specified mean and standard deviation,
 #' except that values whose magnitude is more than
 #' two standard deviations from the mean are dropped and re-picked.
-#' 
+#'
 #' @param shape A list of integers, the shape of tensor to create.
 #' @param mean Mean of the values.
 #' @param stddev Standard deviation of the values.
 #' @param dtype String, dtype of returned tensor.
 #' @param seed Integer, random seed.
-#' 
+#'
 #' @return A tensor.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_truncated_normal <- function(shape, mean = 0.0, stddev = 1.0, dtype = NULL, seed = NULL) {
   keras$backend$truncated_normal(
@@ -2940,14 +2940,14 @@ k_truncated_normal <- function(shape, mean = 0.0, stddev = 1.0, dtype = NULL, se
 
 
 #' Update the value of `x` to `new_x`.
-#' 
+#'
 #' @param x A `Variable`.
 #' @param new_x A tensor of same shape as `x`.
-#' 
+#'
 #' @return The variable `x` updated.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_update <- function(x, new_x) {
   keras$backend$update(
@@ -2958,14 +2958,14 @@ k_update <- function(x, new_x) {
 
 
 #' Update the value of `x` by adding `increment`.
-#' 
+#'
 #' @param x A `Variable`.
 #' @param increment A tensor of same shape as `x`.
-#' 
+#'
 #' @return The variable `x` updated.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_update_add <- function(x, increment) {
   keras$backend$update_add(
@@ -2976,14 +2976,14 @@ k_update_add <- function(x, increment) {
 
 
 #' Update the value of `x` by subtracting `decrement`.
-#' 
+#'
 #' @param x A `Variable`.
 #' @param decrement A tensor of same shape as `x`.
-#' 
+#'
 #' @return The variable `x` updated.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_update_sub <- function(x, decrement) {
   keras$backend$update_sub(
@@ -3017,16 +3017,16 @@ k_var <- function(x, axis = NULL, keepdims = FALSE) {
 
 
 #' Instantiates a variable and returns it.
-#' 
+#'
 #' @param value Numpy array, initial value of the tensor.
 #' @param dtype Tensor type.
 #' @param name Optional name string for the tensor.
 #' @param constraint Optional projection function to be applied to the variable after an optimizer update.
-#' 
+#'
 #' @return A variable instance (with Keras metadata included).
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_variable <- function(value, dtype = NULL, name = NULL, constraint = NULL) {
   keras$backend$variable(
@@ -3039,15 +3039,15 @@ k_variable <- function(value, dtype = NULL, name = NULL, constraint = NULL) {
 
 
 #' Instantiates an all-zeros variable and returns it.
-#' 
+#'
 #' @param shape Tuple of integers, shape of returned Keras variable
 #' @param dtype String, data type of returned Keras variable
 #' @param name String, name of returned Keras variable
-#' 
+#'
 #' @return A variable (including Keras metadata), filled with `0.0`.
-#' 
-#' @template roxlate-keras-backend  
-#' 
+#'
+#' @template roxlate-keras-backend
+#'
 #' @export
 k_zeros <- function(shape, dtype = NULL, name = NULL) {
   keras$backend$zeros(
@@ -3067,7 +3067,7 @@ k_zeros <- function(shape, dtype = NULL, name = NULL) {
 #'
 #' @return A Keras variable with the shape of x filled with zeros.
 #'
-#' @template roxlate-keras-backend  
+#' @template roxlate-keras-backend
 #'
 #' @export
 k_zeros_like <- function(x, dtype = NULL, name = NULL) {
@@ -3094,15 +3094,15 @@ as_axis <- function(axis) {
 
 
 backend_normalize_shape <- function(shape) {
-  
+
   # if it's a Python object or a list with python objects then leave it alone
   if (inherits(shape, "python.builtin.object"))
     return(shape)
-  
+
   if (is.list(shape)) {
     if (any(sapply(unlist(shape), function(x) inherits(x, "python.builtin.object"))))
       return(shape)
   }
-  
+
   normalize_shape(shape)
 }
