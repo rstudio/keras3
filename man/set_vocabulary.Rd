@@ -7,6 +7,7 @@
 set_vocabulary(
   object,
   vocab,
+  idf_weights = NULL,
   df_data = NULL,
   oov_df_value = FALSE,
   append = NULL
