@@ -113,22 +113,24 @@ get_vocabulary <- function(object) {
 #' Sets vocabulary (and optionally document frequency) data for the layer
 #'
 #' This method sets the vocabulary and DF data for this layer directly, instead
-#' of analyzing a dataset through [adapt()]. It should be used whenever the `vocab`
-#' (and optionally document frequency) information is already known. If
+#' of analyzing a dataset through [adapt()]. It should be used whenever the
+#' `vocab` (and optionally document frequency) information is already known. If
 #' vocabulary data is already present in the layer, this method will either
-#' replace it, if `append` is set to `FALSE`, or append to it (if 'append' is set
-#' to `TRUE`)
+#' replace it, if `append` is set to `FALSE`, or append to it (if 'append' is
+#' set to `TRUE`)
 #'
 #' @inheritParams get_vocabulary
 #' @param vocab An array of string tokens.
-#' @param df_data An array of document frequency data. Only necessary if the layer
-#'  output_mode is "tfidf".
-#' @param oov_df_value The document frequency of the OOV token. Only necessary if
-#'  output_mode is "tfidf". OOV data is optional when appending additional
-#'  data in "tfidf" mode; if an OOV value is supplied it will overwrite the
-#'  existing OOV value.
+#' @param idf_weights An array of document frequency data with equal length to
+#'   vocab. Only necessary if the layer output_mode is TFIDF.
+#' @param df_data *deprecated* An array of document frequency data. Only
+#'   necessary if the layer output_mode is "tfidf".
+#' @param oov_df_value *deprecated* The document frequency of the OOV token.
+#'   Only necessary if output_mode is "tfidf". OOV data is optional when
+#'   appending additional data in "tfidf" mode; if an OOV value is supplied it
+#'   will overwrite the existing OOV value.
 #' @param append Whether to overwrite or append any existing vocabulary data.
-#'  (deprecated since TensorFlow >= 2.3)
+#'   (deprecated since TensorFlow >= 2.3)
 #'
 #' @seealso [get_vocabulary()]
 #'
