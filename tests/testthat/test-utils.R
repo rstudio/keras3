@@ -60,6 +60,13 @@ test_call_succeeds("with_custom_object_scope", {
     save_model_hdf5(model, tmp)
     model <- load_model_hdf5(tmp)
 
+    # https://github.com/tensorflow/tensorflow/issues/45903#issuecomment-804973541
+    # broken in tf 2.4 and 2.5, fixed in nightly already
+    if (tf_version() == "2.5")
+      model$compile(optimizer=model$optimizer,
+                    loss = "binary_crossentropy",
+                    metrics = metric_mean_pred)
+
     # generate dummy training data
     data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)
     labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
