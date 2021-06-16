@@ -1,5 +1,7 @@
 Sys.setenv(TF_CPP_MIN_LOG_LEVEL = 1)
 
+tf_version <- tensorflow::tf_version
+
 skip_if_no_keras <- function(required_version = NULL) {
   if (!is_keras_available(required_version))
     skip("required keras version not available for testing")
