@@ -27,6 +27,7 @@ layer_conv_lstm_2d(
   recurrent_constraint = NULL,
   bias_constraint = NULL,
   return_sequences = FALSE,
+  return_state = FALSE,
   go_backwards = FALSE,
   stateful = FALSE,
   dropout = 0,
@@ -105,6 +106,8 @@ matrix.}
 
 \item{return_sequences}{Boolean. Whether to return the last output in the
 output sequence, or the full sequence.}
+
+\item{return_state}{Boolean. Whether to return the last state in addition to the output.}
 
 \item{go_backwards}{Boolean (default FALSE). If TRUE, rocess the input
 sequence backwards.}

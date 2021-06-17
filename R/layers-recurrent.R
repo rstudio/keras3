@@ -109,6 +109,12 @@ layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE
 #'
 #' @param recurrent_activation Activation function to use for the recurrent
 #'   step.
+#' @param time_major If True, the inputs and outputs will be in shape
+#'   `[timesteps, batch, feature]`, whereas in the False case, it will be
+#'   `[batch, timesteps, feature]`. Using `time_major = TRUE` is a bit more
+#'   efficient because it avoids transposes at the beginning and end of the RNN
+#'   calculation. However, most TensorFlow data is batch-major, so by default
+#'   this function accepts input and emits output in batch-major form.
 #' @param reset_after GRU convention (whether to apply reset gate after or
 #'   before matrix multiplication). FALSE = "before" (default),
 #'   TRUE = "after" (CuDNN compatible).
@@ -130,7 +136,8 @@ layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE
 #'
 #' @export
 layer_gru <- function(object, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE,
-                      return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE, reset_after = FALSE,
+                      return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE,
+                      time_major = FALSE, reset_after = FALSE,
                       kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros",
                       kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
                       kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL,
@@ -146,6 +153,7 @@ layer_gru <- function(object, units, activation = "tanh", recurrent_activation =
     go_backwards = go_backwards,
     stateful = stateful,
     unroll = unroll,
+    time_major = time_major,
     kernel_initializer = kernel_initializer,
     recurrent_initializer = recurrent_initializer,
     bias_initializer = bias_initializer,
@@ -253,7 +261,8 @@ layer_cudnn_gru <- function(object, units,
 #'
 #' @export
 layer_lstm <- function(object, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE,
-                       return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE,
+                       return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE,
+                       time_major = FALSE, unroll = FALSE,
                        kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros",
                        unit_forget_bias = TRUE, kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL,
                        activity_regularizer = NULL, kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL,
@@ -268,6 +277,7 @@ layer_lstm <- function(object, units, activation = "tanh", recurrent_activation 
     return_sequences = return_sequences,
     go_backwards = go_backwards,
     stateful = stateful,
+    time_major = time_major,
     unroll = unroll,
     kernel_initializer = kernel_initializer,
     recurrent_initializer = recurrent_initializer,

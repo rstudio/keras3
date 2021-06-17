@@ -12,6 +12,7 @@ layer_conv_1d(
   padding = "valid",
   data_format = "channels_last",
   dilation_rate = 1L,
+  groups = 1L,
   activation = NULL,
   use_bias = TRUE,
   kernel_initializer = "glorot_uniform",
@@ -61,6 +62,12 @@ with shape \verb{(batch, channels, length)}.}
 dilation rate to use for dilated convolution. Currently, specifying any
 \code{dilation_rate} value != 1 is incompatible with specifying any \code{strides}
 value != 1.}
+
+\item{groups}{A positive integer specifying the number of groups in which the
+input is split along the channel axis. Each group is convolved separately
+with \code{filters / groups} filters. The output is the concatenation of all the
+groups results along the channel axis. Input channels and \code{filters} must both
+be divisible by \code{groups}.}
 
 \item{activation}{Activation function to use. If you don't specify anything,
 no activation is applied (ie. "linear" activation: \code{a(x) = x}).}
@@ -120,7 +127,7 @@ variable-length sequences of 128-dimensional vectors.
 }
 
 \section{Output shape}{
- 3D tensor with shape: \verb{(batch_size, new_steps,  filters)} \code{steps} value might have changed due to padding or strides.
+ 3D tensor with shape: \verb{(batch_size, new_steps, filters)} \code{steps} value might have changed due to padding or strides.
 }
 
 \seealso{

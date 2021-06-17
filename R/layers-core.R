@@ -466,6 +466,7 @@ normalize_shape <- function(shape) {
 create_layer <- function(layer_class, object, args = list()) {
 
   # remove kwargs that are null
+  # note: potentially dangerous, can do partial matching
   args$input_shape <- args$input_shape
   args$batch_input_shape = args$batch_input_shape
   args$batch_size <- args$batch_size

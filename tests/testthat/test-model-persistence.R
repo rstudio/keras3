@@ -29,6 +29,7 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
     loss_categorical_crossentropy(y_pred, y_true)
   }
 
+  #TODO: /home/tomasz/.virtualenvs/tf-2.5-cpu/lib/python3.8/site-packages/tensorflow/python/keras/optimizer_v2/optimizer_v2.py:374: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
   model %>% compile(
     loss = custom_loss,
     optimizer = optimizer_nadam(),
@@ -39,6 +40,13 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
   save_model_hdf5(model, tmp)
   model <- load_model_hdf5(tmp, custom_objects = c(mean_pred = metric_mean_pred,
                                                    custom_loss = custom_loss))
+
+  # https://github.com/tensorflow/tensorflow/issues/45903#issuecomment-804973541
+  # broken in tf 2.4 and 2.5, fixed in nightly already
+  if (tf_version() == "2.5")
+    model$compile(optimizer=model$optimizer,
+                  loss = custom_loss,
+                  metrics = metric_mean_pred)
 
   # generate dummy training data
   data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)

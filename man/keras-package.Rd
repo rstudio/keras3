@@ -36,7 +36,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Daniel Falbel \email{daniel@rstudio.com} [contributor, copyright holder]
+\strong{Maintainer}: Tomasz Kalinowski \email{tomasz.kalinowski@rstudio.com} [contributor, copyright holder]
 
 Authors:
 \itemize{
@@ -46,6 +46,7 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item Daniel Falbel \email{daniel@rstudio.com} [contributor, copyright holder]
   \item  RStudio [contributor, copyright holder, funder]
   \item  Google [contributor, copyright holder, funder]
   \item Yuan Tang \email{terrytangyuan@gmail.com} (\href{https://orcid.org/0000-0001-5243-233X}{ORCID}) [contributor, copyright holder]

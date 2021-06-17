@@ -49,6 +49,10 @@
 #'  number of unique tokens in the vocabulary is less than max_tokens,
 #'  resulting in a tensor of shape (batch_size, max_tokens) regardless of
 #'  vocabulary size. Defaults to `TRUE`.
+#' @param vocabulary An optional list of vocabulary terms, or a path to a text
+#'   file containing a vocabulary to load into this layer. The file should
+#'   contain one token per line. If the list or file contains the same token
+#'   multiple times, an error will be thrown.
 #' @param ... Not used.
 #'
 #' @export
@@ -56,6 +60,7 @@ layer_text_vectorization <- function(object, max_tokens = NULL, standardize = "l
                                      split = "whitespace", ngrams = NULL,
                                      output_mode = c("int", "binary", "count", "tf-idf"),
                                      output_sequence_length = NULL, pad_to_max_tokens = TRUE,
+                                     vocabulary = NULL,
                                      ...) {
 
   if (tensorflow::tf_version() < "2.1")
@@ -83,6 +88,9 @@ layer_text_vectorization <- function(object, max_tokens = NULL, standardize = "l
   if (!identical(split, "whitespace"))
     args$split <- split
 
+  if(tf_version() >= "2.4")
+    args$vocabulary <- vocabulary
+
   create_layer(resolve_text_vectorization_module(), object, args)
 }
 
@@ -105,29 +113,40 @@ get_vocabulary <- function(object) {
 #' Sets vocabulary (and optionally document frequency) data for the layer
 #'
 #' This method sets the vocabulary and DF data for this layer directly, instead
-#' of analyzing a dataset through [adapt()]. It should be used whenever the `vocab`
-#' (and optionally document frequency) information is already known. If
+#' of analyzing a dataset through [adapt()]. It should be used whenever the
+#' `vocab` (and optionally document frequency) information is already known. If
 #' vocabulary data is already present in the layer, this method will either
-#' replace it, if `append` is set to `FALSE`, or append to it (if 'append' is set
-#' to `TRUE`)
+#' replace it, if `append` is set to `FALSE`, or append to it (if 'append' is
+#' set to `TRUE`)
 #'
 #' @inheritParams get_vocabulary
 #' @param vocab An array of string tokens.
-#' @param df_data An array of document frequency data. Only necessary if the layer
-#'  output_mode is "tfidf".
-#' @param oov_df_value The document frequency of the OOV token. Only necessary if
-#'  output_mode is "tfidf". OOV data is optional when appending additional
-#'  data in "tfidf" mode; if an OOV value is supplied it will overwrite the
-#'  existing OOV value.
+#' @param idf_weights An array of document frequency data with equal length to
+#'   vocab. Only necessary if the layer output_mode is TFIDF.
+#' @param df_data *deprecated* An array of document frequency data. Only
+#'   necessary if the layer output_mode is "tfidf".
+#' @param oov_df_value *deprecated* The document frequency of the OOV token.
+#'   Only necessary if output_mode is "tfidf". OOV data is optional when
+#'   appending additional data in "tfidf" mode; if an OOV value is supplied it
+#'   will overwrite the existing OOV value.
 #' @param append Whether to overwrite or append any existing vocabulary data.
-#'  (deprecated since TensorFlow >= 2.3)
+#'   (deprecated since TensorFlow >= 2.3)
 #'
 #' @seealso [get_vocabulary()]
 #'
 #' @export
-set_vocabulary <- function(object, vocab, df_data = NULL, oov_df_value = FALSE,
+set_vocabulary <- function(object, vocab, idf_weights=NULL,
+                           df_data = NULL, oov_df_value = FALSE,
                            append = NULL) {
-
+  
+  maybe_warn_arg_deprecated(oov_df_value, "2.5")
+  maybe_warn_arg_deprecated(df_data, "2.5")
+  maybe_warn_arg_deprecated(append, "2.3")
+  
+  if(tf_version() >= "2.5") 
+    return(object$set_vocabulary(vocab, idf_weights))
+  
+  
   if (tensorflow::tf_version() < "2.3") {
     if (is.null(append)) append <- FALSE
     object$set_vocabulary(vocab, df_data = df_data, oov_df_value = oov_df_value, append = append)
@@ -144,4 +163,24 @@ resolve_text_vectorization_module <- function() {
     keras$layers$experimental$preprocessing$TextVectorization
   else
     stop("Keras >= 2.2.4 is required", call. = FALSE)
+}
+
+maybe_warn_arg_deprecated <- function(x, version = NULL,
+                                      ...,
+                                      xe = substitute(x),
+                                      xn = deparse(xe),
+                                      fn_name = deparse(sys.call(-1)[[1]]),
+                                      arg_missing = eval.parent(call("missing", xe)),
+                                      default_val = formals(sys.function(-1))[[xn]]) {
+ 
+  if (!is.null(version) && version < tf_version())
+    return()
+  
+  if (arg_missing || identical(x, default_val))
+    return()
+  
+  msg <- sprintf("Argument '%s' to '%s()' is ignored", xn, fn_name)
+  if (!is.null(version))
+    msg <- paste(msg, "since version", version)
+  warning(msg, call. = FALSE)
 }

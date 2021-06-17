@@ -40,7 +40,7 @@ CustomNonNegConstraint <- R6::R6Class(
   )
 )
 
-layer_dense(units = 32, input_shape = c(784), 
+layer_dense(units = 32, input_shape = c(784),
             kernel_constraint = CustomNonNegConstraint$new())
 }
 

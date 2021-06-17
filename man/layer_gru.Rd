@@ -15,6 +15,7 @@ layer_gru(
   go_backwards = FALSE,
   stateful = FALSE,
   unroll = FALSE,
+  time_major = FALSE,
   reset_after = FALSE,
   kernel_initializer = "glorot_uniform",
   recurrent_initializer = "orthogonal",
@@ -68,6 +69,13 @@ of index i in the following batch.}
 else a symbolic loop will be used. Unrolling can speed-up a RNN, although
 it tends to be more memory-intensive. Unrolling is only suitable for short
 sequences.}
+
+\item{time_major}{If True, the inputs and outputs will be in shape
+\verb{[timesteps, batch, feature]}, whereas in the False case, it will be
+\verb{[batch, timesteps, feature]}. Using \code{time_major = TRUE} is a bit more
+efficient because it avoids transposes at the beginning and end of the RNN
+calculation. However, most TensorFlow data is batch-major, so by default
+this function accepts input and emits output in batch-major form.}
 
 \item{reset_after}{GRU convention (whether to apply reset gate after or
 before matrix multiplication). FALSE = "before" (default),

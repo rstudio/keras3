@@ -7,6 +7,7 @@
 set_vocabulary(
   object,
   vocab,
+  idf_weights = NULL,
   df_data = NULL,
   oov_df_value = FALSE,
   append = NULL
@@ -17,24 +18,27 @@ set_vocabulary(
 
 \item{vocab}{An array of string tokens.}
 
-\item{df_data}{An array of document frequency data. Only necessary if the layer
-output_mode is "tfidf".}
+\item{idf_weights}{An array of document frequency data with equal length to
+vocab. Only necessary if the layer output_mode is TFIDF.}
 
-\item{oov_df_value}{The document frequency of the OOV token. Only necessary if
-output_mode is "tfidf". OOV data is optional when appending additional
-data in "tfidf" mode; if an OOV value is supplied it will overwrite the
-existing OOV value.}
+\item{df_data}{\emph{deprecated} An array of document frequency data. Only
+necessary if the layer output_mode is "tfidf".}
+
+\item{oov_df_value}{\emph{deprecated} The document frequency of the OOV token.
+Only necessary if output_mode is "tfidf". OOV data is optional when
+appending additional data in "tfidf" mode; if an OOV value is supplied it
+will overwrite the existing OOV value.}
 
 \item{append}{Whether to overwrite or append any existing vocabulary data.
 (deprecated since TensorFlow >= 2.3)}
 }
 \description{
 This method sets the vocabulary and DF data for this layer directly, instead
-of analyzing a dataset through \code{\link[=adapt]{adapt()}}. It should be used whenever the \code{vocab}
-(and optionally document frequency) information is already known. If
+of analyzing a dataset through \code{\link[=adapt]{adapt()}}. It should be used whenever the
+\code{vocab} (and optionally document frequency) information is already known. If
 vocabulary data is already present in the layer, this method will either
-replace it, if \code{append} is set to \code{FALSE}, or append to it (if 'append' is set
-to \code{TRUE})
+replace it, if \code{append} is set to \code{FALSE}, or append to it (if 'append' is
+set to \code{TRUE})
 }
 \seealso{
 \code{\link[=get_vocabulary]{get_vocabulary()}}

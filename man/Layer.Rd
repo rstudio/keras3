@@ -23,17 +23,17 @@ You should always call \code{super()$`__init__()`} to initialize the base
 inherited layer.}
 
 \item{build}{a function that takes \code{input_shape} as argument. This is where you will
-define your weights. Note that if your layer doesn’t define trainable weights then
+define your weights. Note that if your layer doesn't define trainable weights then
 you need not implement this method.}
 
-\item{call}{This is where the layer’s logic lives. Unless you want your layer to
+\item{call}{This is where the layer's logic lives. Unless you want your layer to
 support masking, you only have to care about the first argument passed to \code{call}
 (the input tensor).}
 
 \item{compute_output_shape}{a function that takes \code{input_shape} as an argument. In
 case your layer modifies the shape of its input, you should specify here the
 shape transformation logic. This allows Keras to do automatic shape inference.
-If you don’t modify the shape of the input then you need not implement this
+If you don't modify the shape of the input then you need not implement this
 method.}
 
 \item{...}{Any other methods and/or attributes can be specified using named
@@ -52,12 +52,12 @@ Create a custom Layer
 
 layer_dense2 <- Layer(
   "Dense2",
-  
+
   initialize = function(units) {
     super()$`__init__`()
     self$units <- as.integer(units)
   },
-  
+
   build = function(input_shape) {
     print(class(input_shape))
     self$kernel <- self$add_weight(
@@ -67,15 +67,15 @@ layer_dense2 <- Layer(
       trainable = TRUE
     )
   },
-  
+
   call = function(x) {
     tensorflow::tf$matmul(x, self$kernel)
   },
-  
+
   compute_output_shape = function(input_shape) {
     list(input_shape[[1]], self$units)
   }
-  
+
 )
 
 l <- layer_dense2(units = 10)

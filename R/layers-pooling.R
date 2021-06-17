@@ -8,22 +8,31 @@
 #' @param strides Integer, or NULL. Factor by which to downscale. E.g. 2 will
 #'   halve the input. If NULL, it will default to `pool_size`.
 #' @param padding One of `"valid"` or `"same"` (case-insensitive).
+#' @param data_format A string, one of "channels_last" (default) or
+#'   "channels_first". The ordering of the dimensions in the inputs.
+#'   channels_last corresponds to inputs with shape `(batch, steps, features)`
+#'   while channels_first corresponds to inputs with shape `(batch, features, steps)`.
 #'
-#' @section Input shape: 3D tensor with shape: `(batch_size, steps, features)`.
+#' @section Input Shape:
+#' If data_format='channels_last': 3D tensor with shape `(batch_size, steps, features)`.
+#' If data_format='channels_first': 3D tensor with shape `(batch_size, features, steps)`.
 #'
-#' @section Output shape: 3D tensor with shape: `(batch_size, downsampled_steps,
-#'   features)`.
+#' @section Output shape:
+#' If data_format='channels_last': 3D tensor with shape `(batch_size, downsampled_steps, features)`.
+#' If data_format='channels_first': 3D tensor with shape `(batch_size, features, downsampled_steps)`.
 #'
 #' @family pooling layers
 #'
 #' @export
 layer_max_pooling_1d <- function(object, pool_size = 2L, strides = NULL, padding = "valid",
+                                 data_format='channels_last',
                                  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
 
   create_layer(keras$layers$MaxPooling1D, object, list(
     pool_size = as.integer(pool_size),
     strides = as_nullable_integer(strides),
     padding = padding,
+    data_format = match.arg(data_format, c("channels_last", "channels_first")),
     batch_size = as_nullable_integer(batch_size),
     name = name,
     trainable = trainable,

@@ -12,6 +12,7 @@ layer_conv_3d_transpose(
   padding = "valid",
   output_padding = NULL,
   data_format = NULL,
+  dilation_rate = c(1L, 1L, 1L),
   activation = NULL,
   use_bias = TRUE,
   kernel_initializer = "glorot_uniform",
@@ -61,6 +62,10 @@ If set to \code{NULL} (default), the output shape is inferred.}
 \code{image_data_format} value found in your Keras config file at
 \verb{~/.keras/keras.json}. If you never set it, then it will be
 "channels_last".}
+
+\item{dilation_rate}{An integer or vector of 3 integers, specifying the
+dilation rate to use for dilated convolution. Can be a single integer to
+specify the same value for all spatial dimensions.}
 
 \item{activation}{Activation function to use. If you don't specify anything, no
 activation is applied (ie. "linear" activation: \code{a(x) = x}).}

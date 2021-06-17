@@ -13,6 +13,7 @@ layer_text_vectorization(
   output_mode = c("int", "binary", "count", "tf-idf"),
   output_sequence_length = NULL,
   pad_to_max_tokens = TRUE,
+  vocabulary = NULL,
   ...
 )
 }
@@ -60,6 +61,11 @@ the output will have its feature axis padded to \code{max_tokens} even if the
 number of unique tokens in the vocabulary is less than max_tokens,
 resulting in a tensor of shape (batch_size, max_tokens) regardless of
 vocabulary size. Defaults to \code{TRUE}.}
+
+\item{vocabulary}{An optional list of vocabulary terms, or a path to a text
+file containing a vocabulary to load into this layer. The file should
+contain one token per line. If the list or file contains the same token
+multiple times, an error will be thrown.}
 
 \item{...}{Not used.}
 }

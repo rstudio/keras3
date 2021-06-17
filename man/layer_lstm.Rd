@@ -14,6 +14,7 @@ layer_lstm(
   return_state = FALSE,
   go_backwards = FALSE,
   stateful = FALSE,
+  time_major = FALSE,
   unroll = FALSE,
   kernel_initializer = "glorot_uniform",
   recurrent_initializer = "orthogonal",
@@ -63,6 +64,13 @@ sequence backwards and return the reversed sequence.}
 \item{stateful}{Boolean (default FALSE). If TRUE, the last state for each
 sample at index i in a batch will be used as initial state for the sample
 of index i in the following batch.}
+
+\item{time_major}{If True, the inputs and outputs will be in shape
+\verb{[timesteps, batch, feature]}, whereas in the False case, it will be
+\verb{[batch, timesteps, feature]}. Using \code{time_major = TRUE} is a bit more
+efficient because it avoids transposes at the beginning and end of the RNN
+calculation. However, most TensorFlow data is batch-major, so by default
+this function accepts input and emits output in batch-major form.}
 
 \item{unroll}{Boolean (default FALSE). If TRUE, the network will be unrolled,
 else a symbolic loop will be used. Unrolling can speed-up a RNN, although
