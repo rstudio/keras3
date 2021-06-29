@@ -465,15 +465,17 @@ normalize_shape <- function(shape) {
 #' @export
 create_layer <- function(layer_class, object, args = list()) {
 
-  # remove kwargs that are null
-  # note: potentially dangerous, can do partial matching
-  args$input_shape <- args$input_shape
-  args$batch_input_shape = args$batch_input_shape
-  args$batch_size <- args$batch_size
-  args$dtype <- args$dtype
-  args$name <- args$name
-  args$trainable <- args$trainable
-  args$weights <- args$weights
+  safe_to_drop_nulls <- c(
+    "input_shape",
+    "batch_input_shape",
+    "batch_size",
+    "dtype",
+    "name",
+    "trainable",
+    "weights"
+  )
+  for (nm in safe_to_drop_nulls)
+    args[[nm]] <- args[[nm]]
 
   # convert custom constraints
   constraint_args <- grepl("^.*_constraint$", names(args))
