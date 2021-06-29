@@ -77,3 +77,15 @@ define_and_compile_model <- function() {
 random_array <- function(dim) {
   array(runif(prod(dim)), dim = dim)
 }
+
+expect_tensor <- function(x, shape, shaped_as) {
+  eval.parent(bquote(expect_true(is_keras_tensor(.(substitute(x))))))
+  if(!missing(shaped_as))
+    eval.parent(bquote(expect_identical(
+      .(substitute(x))$shape$as_list(),
+      .(substitute(shaped_as))$shape$as_list())))
+  if(!missing(shape))
+    eval.parent(bquote(expect_identical(
+      .(substitute(x))$shape$as_list(),
+      .(substitute(shape)))))
+}

@@ -3,7 +3,7 @@
 \docType{class}
 \name{KerasWrapper}
 \alias{KerasWrapper}
-\title{Base R6 class for Keras wrappers}
+\title{(Deprecated) Base R6 class for Keras wrappers}
 \format{
 An \link{R6Class} generator object
 }
@@ -11,7 +11,10 @@ An \link{R6Class} generator object
 \link{KerasWrapper}.
 }
 \description{
-Base R6 class for Keras wrappers
+Instead of inheriting from the proxy class \code{KerasWrapper} and using
+\code{create_wrapper} to create instances, new R6 custom classes are encouraged to
+inherit directly from \code{keras$layers$Wrapper} and use \code{create_layer} to create
+instances.
 }
 \section{Methods}{
  \describe{
