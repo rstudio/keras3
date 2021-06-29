@@ -14,7 +14,7 @@
 #' @param config Object with layer or model configuration
 #'
 #' @return `get_config()` returns an object with the configuration,
-#'   `from_config()` returns a re-instantation of hte object.
+#'   `from_config()` returns a re-instantiation of the object.
 #'
 #' @note Objects returned from `get_config()` are not serializable. Therefore,
 #'   if you want to save and restore a model across sessions, you can use the
@@ -28,7 +28,7 @@
 #' @export
 get_config <- function(object) {
 
-  # call using lower level reticulate functions to prevent converstion to list
+  # call using lower level reticulate functions to prevent conversion to list
   # (the object will remain a python dictionary for full fidelity)
   get_fn <- py_get_attr(object, "get_config")
   config <- py_call(get_fn)
