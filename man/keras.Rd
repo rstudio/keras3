@@ -12,11 +12,9 @@ keras
 }
 \value{
 the keras python module
-
-The \code{keras} module object is the equivalent of
-\code{keras <- tensorflow::tf$keras} and provided mainly as a convenience.
 }
 \description{
-Main Keras module
+The \code{keras} module object is the equivalent of
+\code{keras <- tensorflow::tf$keras} and provided mainly as a convenience.
 }
 \keyword{datasets}
