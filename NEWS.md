@@ -5,6 +5,27 @@ Breaking changes:
 
 New Features:
 - Default Tensorflow/Keras version is now 2.5
+- The `keras` python module is exported
+- Major changes to the underlying handeling of custom R6 layer classes.
+  - A new `r_to_py` method is provided for `R6ClassGenerator` objects.
+  - R6 custom layers can now inherit directly from python layer classes
+    or other R6 custom layer classes
+  - Custom R6 layers can now be instantiated directly after conversion of the class generator with `r_to_py`, without going through `create_layer`.
+  - `KerasLayer` is deprecated (new classes should inherit directly from `keras$layers$Layer`)
+  - `KerasWrapper` is deprecated (new classes should inherit directly from `keras$layers$Wrapper`)
+  - `create_wrapper` is deprecated (no longer needed, use `create_layer` directly)
+  - All layer class methods provided as R functions now have a `super` in scope that resolves to the python super class object
+  - Methods of `super` can be accessed in the 3 common ways:
+      (python3 style): `super()$"__init__"()`
+      (python2 style): `super(ClassName, self)$"__init__"()`
+      (R6 style): `super$initialize()`
+  - User defined custom classes that inherit from a python type are responsible for calling `super()$__init__(...)` if appropriate.
+  - Custom layers can now properly handle masks (#1225)
+    - `supports_masking = TRUE` attribute is now supported
+    - `compute_mask()` user defined method is now supported
+  - `call()` methods now support a `training` argument, as well as any additional arbritary user-defined arguments
+
+
 - Many layers gained new arguments, coming to parity with the interface
   available in the latest python version:
 
