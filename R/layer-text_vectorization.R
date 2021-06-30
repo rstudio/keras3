@@ -138,15 +138,15 @@ get_vocabulary <- function(object) {
 set_vocabulary <- function(object, vocab, idf_weights=NULL,
                            df_data = NULL, oov_df_value = FALSE,
                            append = NULL) {
-  
+
   maybe_warn_arg_deprecated(oov_df_value, "2.5")
   maybe_warn_arg_deprecated(df_data, "2.5")
   maybe_warn_arg_deprecated(append, "2.3")
-  
-  if(tf_version() >= "2.5") 
+
+  if(tf_version() >= "2.5")
     return(object$set_vocabulary(vocab, idf_weights))
-  
-  
+
+
   if (tensorflow::tf_version() < "2.3") {
     if (is.null(append)) append <- FALSE
     object$set_vocabulary(vocab, df_data = df_data, oov_df_value = oov_df_value, append = append)
@@ -172,13 +172,13 @@ maybe_warn_arg_deprecated <- function(x, version = NULL,
                                       fn_name = deparse(sys.call(-1)[[1]]),
                                       arg_missing = eval.parent(call("missing", xe)),
                                       default_val = formals(sys.function(-1))[[xn]]) {
- 
+
   if (!is.null(version) && version < tf_version())
     return()
-  
+
   if (arg_missing || identical(x, default_val))
     return()
-  
+
   msg <- sprintf("Argument '%s' to '%s()' is ignored", xn, fn_name)
   if (!is.null(version))
     msg <- paste(msg, "since version", version)

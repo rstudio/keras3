@@ -23,6 +23,7 @@
 #' @importFrom reticulate import dict iterate import_from_path py_iterator py_call py_capture_output py_get_attr py_has_attr py_is_null_xptr py_to_r r_to_py tuple
 #' @importFrom graphics par plot points
 #' @importFrom tensorflow tf_version tf_config install_tensorflow
+#' @aliases keras-package 
 "_PACKAGE"
 
 # package level global state
@@ -81,8 +82,17 @@ use_backend <- function(backend = c("tensorflow", "cntk", "theano", "plaidml")) 
 }
 
 
-# Main Keras module
+
+#' Main Keras module
+#'
+#'
+#' The `keras` module object is the equivalent of
+#' `keras <- tensorflow::tf$keras` and provided mainly as a convenience.
+#' 
+#' @return the keras python module
+#' @export
 keras <- NULL
+
 
 .onLoad <- function(libname, pkgname) {
 
@@ -145,12 +155,25 @@ keras <- NULL
   # tensorflow use_session hooks
   setHook("tensorflow.on_before_use_session", tensorflow_on_before_use_session)
   setHook("tensorflow.on_use_session", tensorflow_on_use_session)
+
+  registerS3method("[[", "python_class_super", active_extract2)
+  registerS3method("$", "python_class_super", active_extract2)
+
 }
 
 keras_not_found_message <- function(error_message) {
   message(error_message)
   message("Use the install_keras() function to install the core Keras library")
 }
+
+active_extract2 <- function(x, name)
+  eval.parent(bquote(.(substitute(x))()))[[
+    switch(name,
+           "initialize" = "__init__",
+           "finalize" = "__del__",
+           name)]]
+
+
 
 resolve_implementation_module <- function() {
 

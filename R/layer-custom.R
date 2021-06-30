@@ -1,6 +1,8 @@
 
 
-#' Base R6 class for Keras layers
+#' (Deprecated) Base R6 class for Keras layers
+#'
+#' Custom R6 layers can now inherit directly from `keras$layers$Layer` or other layers.
 #'
 #' @docType class
 #'
@@ -85,3 +87,33 @@ KerasLayer <- R6Class("KerasLayer",
     wrapper = NULL
   )
 )
+
+
+compat_custom_KerasLayer_handler <- function(layer_class, args) {
+    # common layer parameters (e.g. "input_shape") need to be passed to the
+    # Python Layer constructor rather than the R6 constructor. Here we
+    # extract and set aside any of those arguments we find and set them to
+    # NULL within the args list which will be passed to the R6 layer
+    common_arg_names <- c("input_shape", "batch_input_shape", "batch_size",
+                          "dtype", "name", "trainable", "weights")
+
+    py_wrapper_args <- args[common_arg_names]
+    py_wrapper_args[sapply(py_wrapper_args, is.null)] <- NULL
+    for (arg in names(py_wrapper_args))
+      args[[arg]] <- NULL
+
+    # create the R6 layer
+    r6_layer <- do.call(layer_class$new, args)
+
+    # create the python wrapper (passing the extracted py_wrapper_args)
+    python_path <- system.file("python", package = "keras")
+    tools <- import_from_path("kerastools", path = python_path)
+    py_wrapper_args$r_build <- r6_layer$build
+    py_wrapper_args$r_call <-  reticulate::py_func(r6_layer$call)
+    py_wrapper_args$r_compute_output_shape <- r6_layer$compute_output_shape
+    layer <- do.call(tools$layer$RLayer, py_wrapper_args)
+
+    # set back reference in R layer
+    r6_layer$.set_wrapper(layer)
+    list(layer, args)
+}

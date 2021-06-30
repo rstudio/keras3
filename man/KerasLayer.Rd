@@ -3,7 +3,7 @@
 \docType{class}
 \name{KerasLayer}
 \alias{KerasLayer}
-\title{Base R6 class for Keras layers}
+\title{(Deprecated) Base R6 class for Keras layers}
 \format{
 An \link{R6Class} generator object #'
 }
@@ -11,7 +11,7 @@ An \link{R6Class} generator object #'
 \link{KerasLayer}.
 }
 \description{
-Base R6 class for Keras layers
+Custom R6 layers can now inherit directly from \code{keras$layers$Layer} or other layers.
 }
 \section{Methods}{
  \describe{ \item{\code{build(input_shape)}}{Creates the

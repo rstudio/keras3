@@ -1,4 +1,10 @@
-#' Base R6 class for Keras wrappers
+
+#' (Deprecated) Base R6 class for Keras wrappers
+#'
+#' Instead of inheriting from the proxy class `KerasWrapper` and using
+#' `create_wrapper` to create instances, new R6 custom classes are encouraged to
+#' inherit directly from `keras$layers$Wrapper` and use `create_layer` to create
+#' instances.
 #'
 #' @docType class
 #'
@@ -85,7 +91,10 @@ KerasWrapper <- R6::R6Class(
   private = list(py_wrapper = NULL)
 )
 
-#' Create a Keras Wrapper
+#' (Deprecated) Create a Keras Wrapper
+#'
+#' R6 classes that inherit from `keras$layers$Wrapper` can now be instantiated
+#' directly by `create_layer`
 #'
 #' @param wrapper_class R6 class of type KerasWrapper
 #' @param object Object to compose layer with. This is either a

@@ -2,7 +2,7 @@
 % Please edit documentation in R/wrapper_custom.R
 \name{create_wrapper}
 \alias{create_wrapper}
-\title{Create a Keras Wrapper}
+\title{(Deprecated) Create a Keras Wrapper}
 \usage{
 create_wrapper(wrapper_class, object, args = list())
 }
@@ -19,7 +19,8 @@ this layer will call.}
 A Keras wrapper
 }
 \description{
-Create a Keras Wrapper
+R6 classes that inherit from \code{keras$layers$Wrapper} can now be instantiated
+directly by \code{create_layer}
 }
 \note{
 The \code{object} parameter can be missing, in which case the

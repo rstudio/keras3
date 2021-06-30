@@ -16,7 +16,7 @@ from_config(config)
 }
 \value{
 \code{get_config()} returns an object with the configuration,
-\code{from_config()} returns a re-instantation of hte object.
+\code{from_config()} returns a re-instantiation of the object.
 }
 \description{
 A layer config is an object returned from \code{get_config()} that contains the
