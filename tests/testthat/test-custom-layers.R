@@ -176,6 +176,7 @@ test_succeeds("R6 Custom layers can inherit from a python type", {
 
 test_succeeds("Custom layers can pass along masks", {
   # issue #1225
+  skip_if_not_tensorflow_version("2.3")
 
   MyDenseLayer <- R6::R6Class(
     "CustomLayer",
