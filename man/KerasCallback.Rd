@@ -25,6 +25,8 @@ it passes to its callbacks:
 \item \code{on_batch_begin}: logs include \code{size}, the number of samples in the current batch.
 \item \code{on_batch_end}: logs include \code{loss}, and optionally \code{acc} (if accuracy monitoring is enabled).
 }
+
+A callback can append custom metrics to the \code{logs} by returning a named \code{list} of metrics.
 }
 \section{Fields}{
 

@@ -521,6 +521,8 @@ callback_lambda <- function(on_epoch_begin = NULL, on_epoch_end = NULL,
 #' - `on_batch_begin`: logs include `size`, the number of samples in the current batch.
 #' - `on_batch_end`: logs include `loss`, and optionally `acc` (if accuracy monitoring is enabled).
 #'
+#' A callback can append custom metrics to the `logs` by returning a named `list` of metrics.
+#'
 #' @return [KerasCallback].
 #'
 #' @examples

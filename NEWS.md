@@ -46,6 +46,7 @@ New Features:
 
 - Added activation functions swish and gelu. (#1226)
 - `set_vocabulary()` gains a `idf_weights` argument.
+- Callbacks can now add custom metrics to the fit history. (#1230) by @AshesITR
 
 # keras 2.4.0
 

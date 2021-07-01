@@ -142,13 +142,24 @@ test_succeeds("custom callbacks", {
 
     ))
 
+  CustomMetric <- R6::R6Class("CustomMetric",
+    inherit = KerasCallback,
+    public = list(
+      on_epoch_end = function(epoch, logs = list()) {
+        logs[["epoch"]] <- epoch
+        logs
+      }
+    )
+  )
+
   cc <- CustomCallback$new()
   lh <- LossHistory$new()
+  cm <- CustomMetric$new()
 
-  define_compile_and_fit(callbacks = list(cc, lh))
+  hist <- define_compile_and_fit(callbacks = list(cc, lh, cm))
 
   expect_is(lh$losses, "numeric")
-
+  expect_is(hist$metrics$epoch, "numeric")
 })
 
 
