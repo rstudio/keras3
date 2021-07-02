@@ -23,7 +23,7 @@
 #' @importFrom reticulate import dict iterate import_from_path py_iterator py_call py_capture_output py_get_attr py_has_attr py_is_null_xptr py_to_r r_to_py tuple
 #' @importFrom graphics par plot points
 #' @importFrom tensorflow tf_version tf_config install_tensorflow
-#' @aliases keras-package 
+#' @aliases keras-package
 "_PACKAGE"
 
 # package level global state
@@ -88,7 +88,7 @@ use_backend <- function(backend = c("tensorflow", "cntk", "theano", "plaidml")) 
 #'
 #' The `keras` module object is the equivalent of
 #' `keras <- tensorflow::tf$keras` and provided mainly as a convenience.
-#' 
+#'
 #' @return the keras python module
 #' @export
 keras <- NULL

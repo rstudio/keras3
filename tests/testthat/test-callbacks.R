@@ -152,6 +152,46 @@ test_succeeds("custom callbacks", {
 })
 
 
+test_succeeds("custom callbacks, new-style", {
+
+  CustomMetric <- R6::R6Class(
+    "CustomMetric",
+    inherit = keras$callbacks$Callback,
+    public = list(
+      on_epoch_end = function(epoch, logs = NULL) {
+        logs[["my_epoch"]] <- epoch
+        logs
+      }
+    )
+  )
+  CustomMetric <- r_to_py(CustomMetric, convert = FALSE)
+
+
+  CustomMetric2 <- R6::R6Class(
+    "CustomMetric2",
+    inherit = keras$callbacks$Callback,
+    public = list(
+      on_epoch_end = function(epoch, logs = NULL) {
+        expect_true("my_epoch" %in% names(logs))
+        logs[['my_epoch2']] <- epoch
+        logs
+      }
+    )
+  )
+  CustomMetric2 <- r_to_py(CustomMetric2, convert=TRUE)
+
+  cm <- CustomMetric()
+  cm2 <- CustomMetric2()
+
+  hist <- define_compile_and_fit(callbacks = list(cm, cm2))
+
+  expect_is(hist$metrics$my_epoch, "numeric")
+  expect_equal(hist$metrics$my_epoch, 0L)
+  expect_false("my_epoch2" %in% names(hist$metrics))
+
+})
+
+
 expect_warns_and_out <- function(warns, out) {
   if (get_keras_implementation() == "tensorflow" &&
       tensorflow::tf_version() >= "2.0") {

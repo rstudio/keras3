@@ -89,3 +89,10 @@ expect_tensor <- function(x, shape, shaped_as) {
       .(substitute(x))$shape$as_list(),
       .(substitute(shape)))))
 }
+
+expect_same_pyobj <- function(x, y) {
+  eval.parent(bquote(expect_identical(
+    get("pyobj", as.environment(.(x))),
+    get("pyobj", as.environment(.(y)))
+  )))
+}
