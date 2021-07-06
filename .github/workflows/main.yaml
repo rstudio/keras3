@@ -53,6 +53,7 @@ jobs:
         run: |
           Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.7', 'numpy==1.19'))"
           Rscript -e "remotes::install_local()"
+          Rscript -e "reticulate::py_install('Pillow<8.3.0')"
           Rscript -e "keras::install_keras(tensorflow = Sys.getenv('TF_VERSION'), extra_packages = c('IPython', 'requests', 'certifi', 'urllib3'))"
       - name: Check
         continue-on-error: ${{ contains(matrix.allow_failure, 'true') }}
