@@ -1,4 +1,4 @@
-#' @importFrom reticulate r_to_py import_builtins py_eval py_dict
+#' @importFrom reticulate r_to_py import_builtins py_eval py_dict py_call
 #' @export
 r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
 
@@ -7,17 +7,21 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
 
   inherit <- resolve_py_type_inherits(x$get_inherit(), convert)
 
-  env <- new.env(parent = x$parent_env)
-  methods <- as_py_methods(x$public_methods, env)
-  active <- as_py_methods(x$active, env)
+  env <- new.env(parent = x$parent_env) # mask that will contain `__class__`
+
+  # R6 by default includes this in public methods list, not applicable here.
+  methods <- x$public_methods
+  methods$clone <- NULL
+
+  methods <- as_py_methods(methods, env, convert)
+  active <- as_py_methods(x$active, env, convert)
 
   # having convert=FALSE here means py callables are not wrapped in R functions
-  # so build everything with convert=TRUE, then maybe fixup `convert` in the
-  # final return object
-  builtins <- import_builtins()
+  # https://github.com/rstudio/reticulate/issues/1024
+  builtins <- import_builtins(convert)
 
   py_property <- builtins$property
-  active <- lapply(active, function(fn) py_property(fn, fn))
+  active <- lapply(active, function(fn) py_call(py_property, fn, fn))
 
   namespace <- c(x$public_fields, methods, active)
 
@@ -25,28 +29,36 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
   # subclassed by consulting layer.__module__
   # (not sure why builtins.issubclass() doesn't work over there)
   if(!"__module__" %in% names(namespace))
-    namespace$`__module__` <-  paste0("<R6type>", x$classname, sep=".")
+    namespace$`__module__` <-  paste("<R6type>", x$classname, sep=".")
     # sprintf("<R6type.%s.%s>", format(x$parent_env), x$classname)
 
-  exec_body <- py_eval("lambda ns_entries: (lambda ns: ns.update(ns_entries))", convert=convert)(
-    py_dict(names(namespace), unname(namespace), convert = convert))
 
-  py_cls <- import("types")$new_class(
+  new_exec_body <- py_eval("lambda ns_entries: (lambda ns: ns.update(ns_entries))",
+                           convert=convert)
+  exec_body <- py_call(new_exec_body,
+                       py_dict(names(namespace), unname(namespace), convert))
+
+  py_cls <- py_call(import("types", convert=convert)$new_class,
     name = x$classname,
     bases = inherit$bases,
     kwds = inherit$keywords,
     exec_body = exec_body
   )
 
+  # https://github.com/rstudio/reticulate/issues/1024
+  py_cls <- py_to_r(py_cls)
   assign("convert", convert, as.environment(py_cls))
 
   env$`__class__` <- py_cls
   env[[x$classname]] <- py_cls
 
   evalq({
-    super <- base::structure(function(type = `__class__`,
-                                      object = base::get("self", parent.frame()))
-      reticulate::import_builtins()$super(type, object),
+    super <- base::structure(
+      function(type = `__class__`, object = base::get("self", parent.frame())) {
+        convert <- get("convert", envir = as.environment(object))
+        bt <- reticulate::import_builtins(convert)
+        reticulate::py_call(bt$super, type, object)
+      },
       class = "python_class_super")
   }, env)
 
@@ -67,7 +79,7 @@ resolve_py_type_inherits <- function(inherit, convert=FALSE) {
   # (both potentially of length 0)
 
   if(!length(inherit))
-    return(bases = tuple(), keywords = list())
+    return(list(bases = tuple(), keywords = list()))
 
   bases <-
     if (inherits(inherit, "python.builtin.tuple")) as.list(inherit)
@@ -105,7 +117,7 @@ resolve_py_type_inherits <- function(inherit, convert=FALSE) {
 }
 
 
-as_py_methods <- function(x, env) {
+as_py_methods <- function(x, env, convert) {
   out <- list()
   for (name in names(x)) {
     fn <- x[[name]]
@@ -113,17 +125,19 @@ as_py_methods <- function(x, env) {
                    initialize = "__init__",
                    finalize = "__del__",
                    name)
-    out[[name]]  <- as_py_method(fn, name, env)
+    out[[name]]  <- as_py_method(fn, name, env, convert)
   }
   out
 }
 
 #' @importFrom reticulate py_func py_clear_last_error
-as_py_method <- function(fn, name, env) {
+as_py_method <- function(fn, name, env, convert) {
 
     # if user did conversion, they're responsible for ensuring it is right.
-    if (inherits(fn, "python.builtin.object"))
+    if (inherits(fn, "python.builtin.object")) {
+      #assign("convert", convert, as.environment(fn))
       return(fn)
+    }
 
     if (!is.function(fn))
       stop("Cannot coerce non-function to a python class method")
@@ -137,29 +151,63 @@ as_py_method <- function(fn, name, env) {
     if (name == "__init__")
       body(fn)[[length(body(fn)) + 1L]] <- quote(invisible(NULL))
 
-    fn <- tryCatch({
-      # python tensorflow does quite a bit of introspection on user-supplied
-      # functions e.g., as part of determining which of the optional arguments
-      # should be passed to layer.call(,training=,mask=). Here, we try to make
-      # user supplied R function present to python tensorflow introspection
-      # tools as faithfully as possible, but with a silent fallback.
-      #
-      # TODO: reticulate::py_func() pollutes __main__ with 'wrap_fn', doesn't
-      # call py_clear_last_error(), doesn't assign __name__
-      fn <- py_func(fn)
-      fn$`__name__` <- name
-      fn
-    },
+    # python tensorflow does quite a bit of introspection on user-supplied
+    # functions e.g., as part of determining which of the optional arguments
+    # should be passed to layer.call(,training=,mask=). Here, we try to make
+    # user supplied R function present to python tensorflow introspection
+    # tools as faithfully as possible, but with a silent fallback.
+    #
+    # TODO: reticulate::py_func() pollutes __main__ with 'wrap_fn', doesn't
+    # call py_clear_last_error(), doesn't assign __name__, doesn't accept `convert`
 
-    error = function(e) {
-      # TODO: if py_func conversion fails, we can maybe try harder and attach a
-      # __signature__ attribute constructed using inspect.Signature().
-      py_clear_last_error()
-      attr(fn, "py_function_name") <- name
-      fn
-    })
+    # Can't use py_func here because it doesn't accept a `convert` argument
+
+    py_sig <- tryCatch(r_formals_to_py__signature__(fn),
+                       error = function(e) NULL)
+
+    attr(fn, "py_function_name") <- name
+
+    # https://github.com/rstudio/reticulate/issues/1024
+    fn <- py_to_r(r_to_py(fn, convert))
+    assign("convert", convert, as.environment(fn))
+
+    if(!is.null(py_sig))
+      fn$`__signature__` <- py_sig
 
     fn
+}
+
+r_formals_to_py__signature__ <- function(fn) {
+  inspect <- import("inspect", convert = FALSE)
+  py_repr <- import_builtins(FALSE)$repr
+  params <- py_eval("[]", convert = FALSE)
+  Param <- inspect$Parameter
+
+  frmls <- formals(fn)
+  kind <- Param$POSITIONAL_OR_KEYWORD
+  for (nm in names(frmls)) {
+    if(nm == "...") {
+      params$extend(list(
+        Param("_R_dots_positional_args", Param$VAR_POSITIONAL),
+        Param("_R_dots_keyword_args", Param$VAR_KEYWORD)
+      ))
+      kind <- Param$KEYWORD_ONLY
+      next
+    }
+
+    if(identical(frmls[[nm]], quote(expr=))) {
+      params$append(
+        inspect$Parameter(nm, kind)
+      )
+      next
+    }
+
+    default <- r_to_py(eval(frmls[[nm]], environment(fn)))
+    params$append(
+      inspect$Parameter(nm, kind, default=default)
+    )
+  }
+  inspect$Signature(params)
 }
 
 
