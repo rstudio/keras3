@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="guide_keras_files/header-attrs-2.3/header-attrs.js"></script><script src="guide_keras_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="guide_keras_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Guide to Keras Basics</h1>
@@ -197,7 +197,8 @@
 <h2 class="hasAnchor">
 <a href="#import-keras" class="anchor"></a>Import keras</h2>
 <p>To get started, load the <code>keras</code> library:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="build-a-simple-model" class="section level2">
 <h2 class="hasAnchor">
@@ -207,18 +208,19 @@
 <a href="#sequential-model" class="anchor"></a>Sequential model</h3>
 <p>In Keras, you assemble <em>layers</em> to build <em>models</em>. A model is (usually) a graph of layers. The most common type of model is a stack of layers: the <code>sequential</code> model.</p>
 <p>To build a simple, fully-connected network (i.e., a multi-layer perceptron):</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-
+<span class="va">model</span> <span class="op">%&gt;%</span> 
+  
   <span class="co"># Adds a densely-connected layer with 64 units to the model:</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  
   <span class="co"># Add another:</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  
   <span class="co"># Add a softmax layer with 10 output units:</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'softmax'</span>)</pre></body></html></div>
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="configure-the-layers" class="section level3">
 <h3 class="hasAnchor">
@@ -233,20 +235,21 @@
 <code>kernel_regularizer</code> and <code>bias_regularizer</code>: The regularization schemes that apply to the layer’s weights (kernel and bias), such as L1 or L2 regularization. By default, no regularization is applied.</li>
 </ul>
 <p>The following instantiates <code>dense</code> layers using constructor arguments:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># Create a sigmoid layer:</span>
-<span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">activation</span> <span class="kw">=</span><span class="st">'sigmoid'</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Create a sigmoid layer:</span>
+<span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span><span class="st">'sigmoid'</span><span class="op">)</span>
 
 <span class="co"># A linear layer with L1 regularization of factor 0.01 applied to the kernel matrix:</span>
-<span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">kernel_regularizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/regularizer_l1.html">regularizer_l1</a></span>(<span class="fl">0.01</span>))
+<span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, kernel_regularizer <span class="op">=</span> <span class="fu"><a href="../reference/regularizer_l1.html">regularizer_l1</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># A linear layer with L2 regularization of factor 0.01 applied to the bias vector:</span>
-<span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">bias_regularizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/regularizer_l1.html">regularizer_l2</a></span>(<span class="fl">0.01</span>))
+<span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, bias_regularizer <span class="op">=</span> <span class="fu"><a href="../reference/regularizer_l1.html">regularizer_l2</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># A linear layer with a kernel initialized to a random orthogonal matrix:</span>
-<span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">kernel_initializer</span> <span class="kw">=</span> <span class="st">'orthogonal'</span>)
+<span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, kernel_initializer <span class="op">=</span> <span class="st">'orthogonal'</span><span class="op">)</span>
 
 <span class="co"># A linear layer with a bias vector initialized to 2.0:</span>
-<span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">bias_initializer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/initializer_constant.html">initializer_constant</a></span>(<span class="fl">2.0</span>))</pre></body></html></div>
+<span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, bias_initializer <span class="op">=</span> <span class="fu"><a href="../reference/initializer_constant.html">initializer_constant</a></span><span class="op">(</span><span class="fl">2.0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="train-and-evaluate" class="section level2">
@@ -256,11 +259,12 @@
 <h3 class="hasAnchor">
 <a href="#set-up-training" class="anchor"></a>Set up training</h3>
 <p>After the model is constructed, configure its learning process by calling the <code>compile</code> method:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">'adam'</span>,
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'categorical_crossentropy'</span>,
-  <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'accuracy'</span>)
-)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  optimizer <span class="op">=</span> <span class="st">'adam'</span>,
+  loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 <p><code>compile</code> takes three important arguments:</p>
 <ul>
 <li>
@@ -271,33 +275,35 @@
 <code>metrics</code>: Used to monitor training. In classification, this usually is accuracy.</li>
 </ul>
 <p>The following shows a few examples of configuring a model for training:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># Configure a model for mean-squared error regression.</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">'adam'</span>,
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'mse'</span>,           <span class="co"># mean squared error</span>
-  <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'mae'</span>)   <span class="co"># mean absolute error</span>
-)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Configure a model for mean-squared error regression.</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  optimizer <span class="op">=</span> <span class="st">'adam'</span>,
+  loss <span class="op">=</span> <span class="st">'mse'</span>,           <span class="co"># mean squared error</span>
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'mae'</span><span class="op">)</span>   <span class="co"># mean absolute error</span>
+<span class="op">)</span>
 
 <span class="co"># Configure a model for categorical classification.</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="kw">lr</span> <span class="kw">=</span> <span class="fl">0.01</span>),
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">"categorical_crossentropy"</span>,
-  <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"categorical_accuracy"</span>)
-)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>,
+  loss <span class="op">=</span> <span class="st">"categorical_crossentropy"</span>,
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"categorical_accuracy"</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="input-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#input-data" class="anchor"></a>Input data</h3>
 <p>You can train keras models directly on R matrices and arrays (possibly created from R <code>data.frames</code>). A model is fit to the training data using the <code>fit</code> method:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1000</span> * <span class="fl">32</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">32</span>)
-<span class="no">labels</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1000</span> * <span class="fl">10</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">10</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span> <span class="op">*</span> <span class="fl">32</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
+<span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-  <span class="no">data</span>,
-  <span class="no">labels</span>,
-  <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">10</span>,
-  <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">32</span>
-)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+  <span class="va">data</span>,
+  <span class="va">labels</span>,
+  epochs <span class="op">=</span> <span class="fl">10</span>,
+  batch_size <span class="op">=</span> <span class="fl">32</span>
+<span class="op">)</span></code></pre></div>
 <p><code>fit</code> takes three important arguments:</p>
 <ul>
 <li>
@@ -308,32 +314,35 @@
 <code>validation_data</code>: When prototyping a model, you want to easily monitor its performance on some validation data. Passing this argument — a list of inputs and labels — allows the model to display the loss and metrics in inference mode for the passed data, at the end of each epoch.</li>
 </ul>
 <p>Here’s an example using <code>validation_data</code>:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1000</span> * <span class="fl">32</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">32</span>)
-<span class="no">labels</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1000</span> * <span class="fl">10</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">10</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span> <span class="op">*</span> <span class="fl">32</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
+<span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
-<span class="no">val_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1000</span> * <span class="fl">32</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">100</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">32</span>)
-<span class="no">val_labels</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">100</span> * <span class="fl">10</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">100</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">10</span>)
+<span class="va">val_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span> <span class="op">*</span> <span class="fl">32</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">100</span>, ncol <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
+<span class="va">val_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">100</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-  <span class="no">data</span>,
-  <span class="no">labels</span>,
-  <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">10</span>,
-  <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">32</span>,
-  <span class="kw">validation_data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">val_data</span>, <span class="no">val_labels</span>)
-)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+  <span class="va">data</span>,
+  <span class="va">labels</span>,
+  epochs <span class="op">=</span> <span class="fl">10</span>,
+  batch_size <span class="op">=</span> <span class="fl">32</span>,
+  validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">val_data</span>, <span class="va">val_labels</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="evaluate-and-predict" class="section level3">
 <h3 class="hasAnchor">
 <a href="#evaluate-and-predict" class="anchor"></a>Evaluate and predict</h3>
 <p>Same as <code>fit</code>, the <code>evaluate</code> and <code>predict</code> methods can use raw R data as well as a <code>dataset</code>.</p>
 <p>To <em>evaluate</em> the inference-mode loss and metrics for the data provided:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span>(<span class="no">test_data</span>, <span class="no">test_labels</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">32</span>)
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">test_data</span>, <span class="va">test_labels</span>, batch_size <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span>(<span class="no">test_dataset</span>, <span class="kw">steps</span> <span class="kw">=</span> <span class="fl">30</span>)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">test_dataset</span>, steps <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></code></pre></div>
 <p>And to <em>predict</em> the output of the last layer in inference for the data provided, again as R data as well as a <code>dataset</code>:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">test_data</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">32</span>)
-
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">test_dataset</span>, <span class="kw">steps</span> <span class="kw">=</span> <span class="fl">30</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">test_data</span>, batch_size <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
+    
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">test_dataset</span>, steps <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="build-advanced-models" class="section level2">
@@ -356,30 +365,31 @@
 <li>This model is trained just like the <code>sequential</code> model.</li>
 </ol>
 <p>The following example uses the functional API to build a simple, fully-connected network:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">inputs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="kw">shape</span> <span class="kw">=</span> (<span class="fl">32</span>))  <span class="co"># Returns a placeholder tensor</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="op">(</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Returns a placeholder tensor</span>
 
-<span class="no">predictions</span> <span class="kw">&lt;-</span> <span class="no">inputs</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'softmax'</span>)
+<span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span>
 
 <span class="co"># Instantiate the model given inputs and outputs.</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="kw">inputs</span> <span class="kw">=</span> <span class="no">inputs</span>, <span class="kw">outputs</span> <span class="kw">=</span> <span class="no">predictions</span>)
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">inputs</span>, outputs <span class="op">=</span> <span class="va">predictions</span><span class="op">)</span>
 
 <span class="co"># The compile step specifies the training configuration.</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="kw">lr</span> <span class="kw">=</span> <span class="fl">0.001</span>),
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'categorical_crossentropy'</span>,
-  <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'accuracy'</span>)
-)
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span>,
+  loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+<span class="op">)</span>
 
 <span class="co"># Trains for 5 epochs</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-  <span class="no">data</span>,
-  <span class="no">labels</span>,
-  <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">32</span>,
-  <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">5</span>
-)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+  <span class="va">data</span>,
+  <span class="va">labels</span>,
+  batch_size <span class="op">=</span> <span class="fl">32</span>,
+  epochs <span class="op">=</span> <span class="fl">5</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="custom-layers" class="section level3">
 <h3 class="hasAnchor">
@@ -394,54 +404,57 @@
 <code>compute_output_shape(input_shape)</code>: In case your layer modifies the shape of its input, you should specify here the shape transformation logic. This allows Keras to do automatic shape inference. If you don’t modify the shape of the input then you need not implement this method.</li>
 </ul>
 <p>Here is an example custom layer that performs a matrix multiplication:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
 
-<span class="no">CustomLayer</span> <span class="kw">&lt;-</span> <span class="kw pkg">R6</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/R6/man/R6Class.html">R6Class</a></span>(<span class="st">"CustomLayer"</span>,
-
-  <span class="kw">inherit</span> <span class="kw">=</span> <span class="no">KerasLayer</span>,
-
-  <span class="kw">public</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-
-    <span class="kw">output_dim</span> <span class="kw">=</span> <span class="kw">NULL</span>,
-
-    <span class="kw">kernel</span> <span class="kw">=</span> <span class="kw">NULL</span>,
-
-    <span class="kw">initialize</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">output_dim</span>) {
-      <span class="no">self</span>$<span class="no">output_dim</span> <span class="kw">&lt;-</span> <span class="no">output_dim</span>
-    },
-
-    <span class="kw">build</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">input_shape</span>) {
-      <span class="no">self</span>$<span class="no">kernel</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">add_weight</span>(
-        <span class="kw">name</span> <span class="kw">=</span> <span class="st">'kernel'</span>,
-        <span class="kw">shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">input_shape</span><span class="kw">[[</span><span class="fl">2</span>]], <span class="no">self</span>$<span class="no">output_dim</span>),
-        <span class="kw">initializer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/initializer_random_normal.html">initializer_random_normal</a></span>(),
-        <span class="kw">trainable</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-      )
-    },
-
-    <span class="kw">call</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>, <span class="no">mask</span> <span class="kw">=</span> <span class="kw">NULL</span>) {
-      <span class="fu"><a href="../reference/k_dot.html">k_dot</a></span>(<span class="no">x</span>, <span class="no">self</span>$<span class="no">kernel</span>)
-    },
-
-    <span class="kw">compute_output_shape</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">input_shape</span>) {
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">input_shape</span><span class="kw">[[</span><span class="fl">1</span>]], <span class="no">self</span>$<span class="no">output_dim</span>)
-    }
-  )
-)</pre></body></html></div>
+<span class="va">CustomLayer</span> <span class="op">&lt;-</span> <span class="fu">R6</span><span class="fu">::</span><span class="kw"><a href="https://r6.r-lib.org/reference/R6Class.html">R6Class</a></span><span class="op">(</span><span class="st">"CustomLayer"</span>,
+                                  
+  inherit <span class="op">=</span> <span class="va">KerasLayer</span>,
+  
+  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+    
+    output_dim <span class="op">=</span> <span class="cn">NULL</span>,
+    
+    kernel <span class="op">=</span> <span class="cn">NULL</span>,
+    
+    initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">output_dim</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span> <span class="op">&lt;-</span> <span class="va">output_dim</span>
+    <span class="op">}</span>,
+    
+    build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>
+        name <span class="op">=</span> <span class="st">'kernel'</span>, 
+        shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span><span class="op">)</span>,
+        initializer <span class="op">=</span> <span class="fu"><a href="../reference/initializer_random_normal.html">initializer_random_normal</a></span><span class="op">(</span><span class="op">)</span>,
+        trainable <span class="op">=</span> <span class="cn">TRUE</span>
+      <span class="op">)</span>
+    <span class="op">}</span>,
+    
+    call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
+      <span class="fu"><a href="../reference/k_dot.html">k_dot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">self</span><span class="op">$</span><span class="va">kernel</span><span class="op">)</span>
+    <span class="op">}</span>,
+    
+    compute_output_shape <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span><span class="op">)</span>
+    <span class="op">}</span>
+  <span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 <p>In order to use the custom layer within a Keras model you also need to create a wrapper function which instantiates the layer using the <code><a href="../reference/create_layer.html">create_layer()</a></code> function. For example:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co"># define layer wrapper function</span>
-<span class="no">layer_custom</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">object</span>, <span class="no">output_dim</span>, <span class="no">name</span> <span class="kw">=</span> <span class="kw">NULL</span>, <span class="no">trainable</span> <span class="kw">=</span> <span class="fl">TRUE</span>) {
-  <span class="fu"><a href="../reference/create_layer.html">create_layer</a></span>(<span class="no">CustomLayer</span>, <span class="no">object</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-    <span class="kw">output_dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="no">output_dim</span>),
-    <span class="kw">name</span> <span class="kw">=</span> <span class="no">name</span>,
-    <span class="kw">trainable</span> <span class="kw">=</span> <span class="no">trainable</span>
-  ))
-}</pre></body></html></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># define layer wrapper function</span>
+<span class="va">layer_custom</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">object</span>, <span class="va">output_dim</span>, <span class="va">name</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">trainable</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../reference/create_layer.html">create_layer</a></span><span class="op">(</span><span class="va">CustomLayer</span>, <span class="va">object</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+    output_dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">output_dim</span><span class="op">)</span>,
+    name <span class="op">=</span> <span class="va">name</span>,
+    trainable <span class="op">=</span> <span class="va">trainable</span>
+  <span class="op">)</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <p>You can now use the layer in a model as usual:</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">input_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">32</span>,<span class="fl">32</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu">layer_custom</span>(<span class="kw">output_dim</span> <span class="kw">=</span> <span class="fl">32</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">32</span>,<span class="fl">32</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">layer_custom</span><span class="op">(</span>output_dim <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="custom-models" class="section level3">
 <h3 class="hasAnchor">
@@ -449,43 +462,44 @@
 <p>In addition to creating custom layers, you can also create a custom model. This might be necessary if you wanted to use TensorFlow eager execution in combination with an imperatively written forward pass.</p>
 <p>In cases where this is not needed, but flexibility in building the architecture is required, it is recommended to just stick with the functional API.</p>
 <p>A custom model is defined by calling <code><a href="../reference/keras_model_custom.html">keras_model_custom()</a></code> passing a function that specifies the layers to be created and the operations to be executed on forward pass.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">my_model</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">input_dim</span>, <span class="no">output_dim</span>, <span class="no">name</span> <span class="kw">=</span> <span class="kw">NULL</span>) {
-
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">output_dim</span>, <span class="va">name</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
+  
   <span class="co"># define and return a custom model</span>
-  <span class="fu"><a href="../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="kw">name</span> <span class="kw">=</span> <span class="no">name</span>, <span class="kw">function</span>(<span class="no">self</span>) {
-
+  <span class="fu"><a href="../reference/keras_model_custom.html">keras_model_custom</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span>, <span class="kw">function</span><span class="op">(</span><span class="va">self</span><span class="op">)</span> <span class="op">{</span>
+    
     <span class="co"># create layers we'll need for the call (this code executes once)</span>
     <span class="co"># note: the layers have to be created on the self object!</span>
-    <span class="no">self</span>$<span class="no">dense1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>, <span class="kw">input_shape</span> <span class="kw">=</span> <span class="no">input_dim</span>)
-    <span class="no">self</span>$<span class="no">dense2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>)
-    <span class="no">self</span>$<span class="no">dense3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'softmax'</span>)
-
+    <span class="va">self</span><span class="op">$</span><span class="va">dense1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, input_shape <span class="op">=</span> <span class="va">input_dim</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">dense2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">dense3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span>
+    
     <span class="co"># implement call (this code executes during training &amp; inference)</span>
-    <span class="kw">function</span>(<span class="no">inputs</span>, <span class="no">mask</span> <span class="kw">=</span> <span class="kw">NULL</span>) {
-      <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">inputs</span> <span class="kw">%&gt;%</span>
-        <span class="no">self</span>$<span class="fu">dense1</span>() <span class="kw">%&gt;%</span>
-        <span class="no">self</span>$<span class="fu">dense2</span>() <span class="kw">%&gt;%</span>
-        <span class="no">self</span>$<span class="fu">dense3</span>()
-      <span class="no">x</span>
-    }
-  })
-}
+    <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">dense1</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">dense2</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+        <span class="va">self</span><span class="op">$</span><span class="fu">dense3</span><span class="op">(</span><span class="op">)</span>
+      <span class="va">x</span>
+    <span class="op">}</span>
+  <span class="op">}</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu">my_model</span>(<span class="kw">input_dim</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">output_dim</span> <span class="kw">=</span> <span class="fl">10</span>)
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">my_model</span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">32</span>, output_dim <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="kw">lr</span> <span class="kw">=</span> <span class="fl">0.001</span>),
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'categorical_crossentropy'</span>,
-  <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'accuracy'</span>)
-)
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span>,
+  loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+<span class="op">)</span>
 
 <span class="co"># Trains for 5 epochs</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-  <span class="no">data</span>,
-  <span class="no">labels</span>,
-  <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">32</span>,
-  <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">5</span>
-)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+  <span class="va">data</span>,
+  <span class="va">labels</span>,
+  batch_size <span class="op">=</span> <span class="fl">32</span>,
+  epochs <span class="op">=</span> <span class="fl">5</span>
+<span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="callbacks" class="section level2">
@@ -503,19 +517,20 @@
 <code>callbacks_tensorboard</code>: Monitor the model’s behavior using <a href="training_visualization.html#tensorboard">TensorBoard</a>.</li>
 </ul>
 <p>To use a <code>callback</code>, pass it to the model’s <code>fit</code> method:</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">callbacks</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-  <span class="fu"><a href="../reference/callback_early_stopping.html">callback_early_stopping</a></span>(<span class="kw">patience</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">monitor</span> <span class="kw">=</span> <span class="st">'val_loss'</span>),
-  <span class="fu"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="kw">log_dir</span> <span class="kw">=</span> <span class="st">'./logs'</span>)
-)
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">callbacks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  <span class="fu"><a href="../reference/callback_early_stopping.html">callback_early_stopping</a></span><span class="op">(</span>patience <span class="op">=</span> <span class="fl">2</span>, monitor <span class="op">=</span> <span class="st">'val_loss'</span><span class="op">)</span>,
+  <span class="fu"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span><span class="op">(</span>log_dir <span class="op">=</span> <span class="st">'./logs'</span><span class="op">)</span>
+<span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-  <span class="no">data</span>,
-  <span class="no">labels</span>,
-  <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">32</span>,
-  <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">5</span>,
-  <span class="kw">callbacks</span> <span class="kw">=</span> <span class="no">callbacks</span>,
-  <span class="kw">validation_data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">val_data</span>, <span class="no">val_labels</span>)
-)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+  <span class="va">data</span>,
+  <span class="va">labels</span>,
+  batch_size <span class="op">=</span> <span class="fl">32</span>,
+  epochs <span class="op">=</span> <span class="fl">5</span>,
+  callbacks <span class="op">=</span> <span class="va">callbacks</span>,
+  validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">val_data</span>, <span class="va">val_labels</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="save-and-restore" class="section level2">
 <h2 class="hasAnchor">
@@ -524,39 +539,42 @@
 <h3 class="hasAnchor">
 <a href="#weights-only" class="anchor"></a>Weights only</h3>
 <p>Save and load the weights of a model using <code>save_model_weights_hdf5</code> and <code>load_model_weights_hdf5</code>, respectively:</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="co"># save in SavedModel format</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/save_model_weights_tf.html">save_model_weights_tf</a></span>(<span class="st">'my_model/'</span>)
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># save in SavedModel format</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/save_model_weights_tf.html">save_model_weights_tf</a></span><span class="op">(</span><span class="st">'my_model/'</span><span class="op">)</span>
 
 <span class="co"># Restore the model's state,</span>
 <span class="co"># this requires a model with the same architecture.</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/save_model_weights_tf.html">load_model_weights_tf</a></span>(<span class="st">'my_model/'</span>)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/save_model_weights_tf.html">load_model_weights_tf</a></span><span class="op">(</span><span class="st">'my_model/'</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="configuration-only" class="section level3">
 <h3 class="hasAnchor">
 <a href="#configuration-only" class="anchor"></a>Configuration only</h3>
 <p>A model’s configuration can be saved - this serializes the model architecture without any weights. A saved configuration can recreate and initialize the same model, even without the code that defined the original model. Keras supports JSON and YAML serialization formats:</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="co"># Serialize a model to JSON format</span>
-<span class="no">json_string</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/model_to_json.html">model_to_json</a></span>()
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Serialize a model to JSON format</span>
+<span class="va">json_string</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/model_to_json.html">model_to_json</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># Recreate the model (freshly initialized)</span>
-<span class="no">fresh_model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/model_to_json.html">model_from_json</a></span>(<span class="no">json_string</span>)
+<span class="va">fresh_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/model_to_json.html">model_from_json</a></span><span class="op">(</span><span class="va">json_string</span><span class="op">)</span>
 
 <span class="co"># Serializes a model to YAML format</span>
-<span class="no">yaml_string</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/model_to_yaml.html">model_to_yaml</a></span>()
+<span class="va">yaml_string</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/model_to_yaml.html">model_to_yaml</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># Recreate the model</span>
-<span class="no">fresh_model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/model_to_yaml.html">model_from_yaml</a></span>(<span class="no">yaml_string</span>)</pre></body></html></div>
+<span class="va">fresh_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/model_to_yaml.html">model_from_yaml</a></span><span class="op">(</span><span class="va">yaml_string</span><span class="op">)</span></code></pre></div>
 <p>Caution: Custom models are not serializable because their architecture is defined by the R code in the function passed to <code>keras_model_custom</code>.</p>
 </div>
 <div id="entire-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#entire-model" class="anchor"></a>Entire model</h3>
 <p>The entire model can be saved to a file that contains the weight values, the model’s configuration, and even the optimizer’s configuration. This allows you to checkpoint a model and resume training later —from the exact same state —without access to the original code.</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="co"># Save entire model to the SavedModel format</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/save_model_tf.html">save_model_tf</a></span>(<span class="st">'my_model/'</span>)
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Save entire model to the SavedModel format</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/save_model_tf.html">save_model_tf</a></span><span class="op">(</span><span class="st">'my_model/'</span><span class="op">)</span>
 
 <span class="co"># Recreate the exact same model, including weights and optimizer.</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/save_model_tf.html">load_model_tf</a></span>(<span class="st">'my_model/'</span>)</pre></body></html></div>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/save_model_tf.html">load_model_tf</a></span><span class="op">(</span><span class="st">'my_model/'</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
   </div>
@@ -572,11 +590,11 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

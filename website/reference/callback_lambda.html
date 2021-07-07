@@ -51,13 +51,7 @@
 <meta property="og:title" content="Create a custom callback — callback_lambda" />
 <meta property="og:description" content="This callback is constructed with anonymous functions that will be called at
 the appropriate time. Note that the callbacks expects positional arguments,
-as:
-on_epoch_begin and on_epoch_end expect two positional arguments: epoch, logs
-on_batch_*, on_train_batch_*, on_predict_batch_* and on_test_batch_*, expect
-two positional arguments: batch, logs
-on_train_*, on_test_* and on_predict_* expect one positional argument: logs
-
-" />
+as:" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -90,7 +84,7 @@ on_train_*, on_test_* and on_predict_* expect one positional argument: logs
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -208,7 +202,7 @@ on_train_*, on_test_* and on_predict_* expect one positional argument: logs
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -233,33 +227,27 @@ on_train_*, on_test_* and on_predict_* expect one positional argument: logs
     <div class="ref-description">
     <p>This callback is constructed with anonymous functions that will be called at
 the appropriate time. Note that the callbacks expects positional arguments,
-as:</p><ul>
-<li><p><code>on_epoch_begin</code> and <code>on_epoch_end</code> expect two positional arguments: <code>epoch</code>, <code>logs</code></p></li>
-<li><p><code>on_batch_*</code>, <code>on_train_batch_*</code>, <code>on_predict_batch_*</code> and <code>on_test_batch_*</code>, expect
-two positional arguments: <code>batch</code>, <code>logs</code></p></li>
-<li><p><code>on_train_*</code>, <code>on_test_*</code> and <code>on_predict_*</code> expect one positional argument: <code>logs</code></p></li>
-</ul>
-
+as:</p>
     </div>
 
-    <pre class="usage"><span class='fu'>callback_lambda</span>(
-  <span class='kw'>on_epoch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_epoch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_batch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_batch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_train_batch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_train_batch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_train_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_train_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_predict_batch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_predict_batch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_predict_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_predict_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_test_batch_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_test_batch_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_test_begin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>on_test_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>callback_lambda</span><span class='op'>(</span>
+  on_epoch_begin <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_epoch_end <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_batch_begin <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_batch_end <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_train_batch_begin <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_train_batch_end <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_train_begin <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_train_end <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_predict_batch_begin <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_predict_batch_end <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_predict_begin <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_predict_end <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_test_batch_begin <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_test_batch_end <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_test_begin <span class='op'>=</span> <span class='cn'>NULL</span>,
+  on_test_end <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -334,6 +322,16 @@ if validation data is provided.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+<ul>
+<li><p><code>on_epoch_begin</code> and <code>on_epoch_end</code> expect two positional arguments: <code>epoch</code>, <code>logs</code></p></li>
+<li><p><code>on_batch_*</code>, <code>on_train_batch_*</code>, <code>on_predict_batch_*</code> and <code>on_test_batch_*</code>, expect
+two positional arguments: <code>batch</code>, <code>logs</code></p></li>
+<li><p><code>on_train_*</code>, <code>on_test_*</code> and <code>on_predict_*</code> expect one positional argument: <code>logs</code></p></li>
+</ul>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other callbacks: 
@@ -358,11 +356,11 @@ if validation data is provided.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

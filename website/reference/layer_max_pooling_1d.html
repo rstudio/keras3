@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -200,7 +200,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -226,16 +226,17 @@
     <p>Max pooling operation for temporal data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>layer_max_pooling_1d</span>(
-  <span class='no'>object</span>,
-  <span class='kw'>pool_size</span> <span class='kw'>=</span> <span class='fl'>2L</span>,
-  <span class='kw'>strides</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"valid"</span>,
-  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>layer_max_pooling_1d</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  pool_size <span class='op'>=</span> <span class='fl'>2L</span>,
+  strides <span class='op'>=</span> <span class='cn'>NULL</span>,
+  padding <span class='op'>=</span> <span class='st'>"valid"</span>,
+  data_format <span class='op'>=</span> <span class='st'>"channels_last"</span>,
+  batch_size <span class='op'>=</span> <span class='cn'>NULL</span>,
+  name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  trainable <span class='op'>=</span> <span class='cn'>NULL</span>,
+  weights <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -258,6 +259,13 @@ halve the input. If NULL, it will default to <code>pool_size</code>.</p></td>
       <td><p>One of <code>"valid"</code> or <code>"same"</code> (case-insensitive).</p></td>
     </tr>
     <tr>
+      <th>data_format</th>
+      <td><p>A string, one of "channels_last" (default) or
+"channels_first". The ordering of the dimensions in the inputs.
+channels_last corresponds to inputs with shape <code>(batch, steps, features)</code>
+while channels_first corresponds to inputs with shape <code>(batch, features, steps)</code>.</p></td>
+    </tr>
+    <tr>
       <th>batch_size</th>
       <td><p>Fixed batch size for layer</p></td>
     </tr>
@@ -277,12 +285,18 @@ isn't provided.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="input-shape"><a class="anchor" href="#input-shape"></a>Input shape</h2>
+    <h2 class="hasAnchor" id="input-shape"><a class="anchor" href="#input-shape"></a>Input Shape</h2>
 
-    <p>3D tensor with shape: <code>(batch_size, steps, features)</code>.</p>
+    
+
+<p>If data_format='channels_last': 3D tensor with shape <code>(batch_size, steps, features)</code>.
+If data_format='channels_first': 3D tensor with shape <code>(batch_size, features, steps)</code>.</p>
     <h2 class="hasAnchor" id="output-shape"><a class="anchor" href="#output-shape"></a>Output shape</h2>
 
-    <p>3D tensor with shape: <code>(batch_size, downsampled_steps, features)</code>.</p>
+    
+
+<p>If data_format='channels_last': 3D tensor with shape <code>(batch_size, downsampled_steps, features)</code>.
+If data_format='channels_first': 3D tensor with shape <code>(batch_size, features, downsampled_steps)</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other pooling layers: 
@@ -309,11 +323,11 @@ isn't provided.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

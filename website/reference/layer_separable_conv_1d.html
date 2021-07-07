@@ -88,7 +88,7 @@ kernels, or as an extreme version of an Inception block." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -206,7 +206,7 @@ kernels, or as an extreme version of an Inception block." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -238,35 +238,35 @@ can be understood as a way to factorize a convolution kernel into two smaller
 kernels, or as an extreme version of an Inception block.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>layer_separable_conv_1d</span>(
-  <span class='no'>object</span>,
-  <span class='no'>filters</span>,
-  <span class='no'>kernel_size</span>,
-  <span class='kw'>strides</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"valid"</span>,
-  <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='st'>"channels_last"</span>,
-  <span class='kw'>dilation_rate</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>depth_multiplier</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>activation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>depthwise_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>,
-  <span class='kw'>pointwise_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>,
-  <span class='kw'>bias_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
-  <span class='kw'>depthwise_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>pointwise_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bias_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>activity_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>depthwise_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>pointwise_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bias_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>batch_input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>layer_separable_conv_1d</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>filters</span>,
+  <span class='va'>kernel_size</span>,
+  strides <span class='op'>=</span> <span class='fl'>1</span>,
+  padding <span class='op'>=</span> <span class='st'>"valid"</span>,
+  data_format <span class='op'>=</span> <span class='st'>"channels_last"</span>,
+  dilation_rate <span class='op'>=</span> <span class='fl'>1</span>,
+  depth_multiplier <span class='op'>=</span> <span class='fl'>1</span>,
+  activation <span class='op'>=</span> <span class='cn'>NULL</span>,
+  use_bias <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  depthwise_initializer <span class='op'>=</span> <span class='st'>"glorot_uniform"</span>,
+  pointwise_initializer <span class='op'>=</span> <span class='st'>"glorot_uniform"</span>,
+  bias_initializer <span class='op'>=</span> <span class='st'>"zeros"</span>,
+  depthwise_regularizer <span class='op'>=</span> <span class='cn'>NULL</span>,
+  pointwise_regularizer <span class='op'>=</span> <span class='cn'>NULL</span>,
+  bias_regularizer <span class='op'>=</span> <span class='cn'>NULL</span>,
+  activity_regularizer <span class='op'>=</span> <span class='cn'>NULL</span>,
+  depthwise_constraint <span class='op'>=</span> <span class='cn'>NULL</span>,
+  pointwise_constraint <span class='op'>=</span> <span class='cn'>NULL</span>,
+  bias_constraint <span class='op'>=</span> <span class='cn'>NULL</span>,
+  input_shape <span class='op'>=</span> <span class='cn'>NULL</span>,
+  batch_input_shape <span class='op'>=</span> <span class='cn'>NULL</span>,
+  batch_size <span class='op'>=</span> <span class='cn'>NULL</span>,
+  dtype <span class='op'>=</span> <span class='cn'>NULL</span>,
+  name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  trainable <span class='op'>=</span> <span class='cn'>NULL</span>,
+  weights <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -317,7 +317,7 @@ value != 1.</p></td>
       <th>depth_multiplier</th>
       <td><p>The number of depthwise convolution output channels
 for each input channel. The total number of depthwise convolution output
-channels will be equal to <code>filterss_in * depth_multiplier</code>.</p></td>
+channels will be equal to <code>filters_in * depth_multiplier</code>.</p></td>
     </tr>
     <tr>
       <th>activation</th>
@@ -455,11 +455,11 @@ if data_format='channels_first' or 3D tensor with shape:
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

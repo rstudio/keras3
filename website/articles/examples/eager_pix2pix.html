@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="eager_pix2pix_files/header-attrs-2.3/header-attrs.js"></script><script src="eager_pix2pix_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="eager_pix2pix_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>eager_pix2pix</h1>
@@ -189,440 +189,441 @@
 </div>
 <p>This is the companion code to the post “Image-to-image translation with Pix2Pix: An implementation using Keras and eager execution” on the TensorFlow for R blog.</p>
 <p><a href="https://blogs.rstudio.com/tensorflow/posts/2018-09-20-eager-pix2pix" class="uri">https://blogs.rstudio.com/tensorflow/posts/2018-09-20-eager-pix2pix</a></p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tensorflow</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tfautograph</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow">tensorflow</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://t-kalinowski.github.io/tfautograph/">tfautograph</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tfdatasets</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">purrr</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets">tfdatasets</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
 
-<span class="no">restore</span> <span class="kw">&lt;-</span> <span class="fl">FALSE</span>
+<span class="va">restore</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span>
 
-<span class="no">data_dir</span> <span class="kw">&lt;-</span> <span class="st">"facades"</span>
+<span class="va">data_dir</span> <span class="op">&lt;-</span> <span class="st">"facades"</span>
 
-<span class="no">buffer_size</span> <span class="kw">&lt;-</span> <span class="fl">400</span>
-<span class="no">batch_size</span> <span class="kw">&lt;-</span> <span class="fl">1</span>
-<span class="no">batches_per_epoch</span> <span class="kw">&lt;-</span> <span class="no">buffer_size</span> / <span class="no">batch_size</span>
-<span class="no">img_width</span> <span class="kw">&lt;-</span> <span class="fl">256L</span>
-<span class="no">img_height</span> <span class="kw">&lt;-</span> <span class="fl">256L</span>
+<span class="va">buffer_size</span> <span class="op">&lt;-</span> <span class="fl">400</span>
+<span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">1</span>
+<span class="va">batches_per_epoch</span> <span class="op">&lt;-</span> <span class="va">buffer_size</span> <span class="op">/</span> <span class="va">batch_size</span>
+<span class="va">img_width</span> <span class="op">&lt;-</span> <span class="fl">256L</span>
+<span class="va">img_height</span> <span class="op">&lt;-</span> <span class="fl">256L</span>
 
-<span class="no">w</span> <span class="kw">&lt;-</span> <span class="fl">512L</span>
-<span class="no">w2</span> <span class="kw">&lt;-</span> <span class="fl">256L</span>
+<span class="va">w</span> <span class="op">&lt;-</span> <span class="fl">512L</span>
+<span class="va">w2</span> <span class="op">&lt;-</span> <span class="fl">256L</span>
 
-<span class="no">load</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">image_file</span>) {
-  <span class="no">image</span> <span class="kw">&lt;-</span> <span class="no">tf</span>$<span class="no">io</span>$<span class="fu">read_file</span>(<span class="no">image_file</span>)
-  <span class="no">image</span> <span class="kw">&lt;-</span> <span class="no">tf</span>$<span class="no">image</span>$<span class="fu">decode_jpeg</span>(<span class="no">image</span>)
-  <span class="no">real_image</span> <span class="kw">&lt;-</span> <span class="no">image</span>[ , <span class="fl">1L</span>:<span class="no">w2</span>, ]
-  <span class="no">input_image</span> <span class="kw">&lt;-</span> <span class="no">image</span>[ , (<span class="no">w2</span> + <span class="fl">1L</span>):<span class="no">w</span>, ]
-  <span class="no">input_image</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_cast.html">k_cast</a></span>(<span class="no">input_image</span>, <span class="no">tf</span>$<span class="no">float32</span>)
-  <span class="no">real_image</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_cast.html">k_cast</a></span>(<span class="no">real_image</span>, <span class="no">tf</span>$<span class="no">float32</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>)
-}
+<span class="va">load</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">image</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">io</span><span class="op">$</span><span class="fu">read_file</span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span>
+  <span class="va">image</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">decode_jpeg</span><span class="op">(</span><span class="va">image</span><span class="op">)</span>
+  <span class="va">real_image</span> <span class="op">&lt;-</span> <span class="va">image</span><span class="op">[</span> , <span class="fl">1L</span><span class="op">:</span><span class="va">w2</span>, <span class="op">]</span>
+  <span class="va">input_image</span> <span class="op">&lt;-</span> <span class="va">image</span><span class="op">[</span> , <span class="op">(</span><span class="va">w2</span> <span class="op">+</span> <span class="fl">1L</span><span class="op">)</span><span class="op">:</span><span class="va">w</span>, <span class="op">]</span>
+  <span class="va">input_image</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">tf</span><span class="op">$</span><span class="va">float32</span><span class="op">)</span>
+  <span class="va">real_image</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">real_image</span>, <span class="va">tf</span><span class="op">$</span><span class="va">float32</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
+<span class="op">}</span>
+  
+<span class="va">resize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span>, <span class="va">height</span>, <span class="va">width</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">input_image</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">resize</span><span class="op">(</span><span class="va">input_image</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">height</span>, <span class="va">width</span><span class="op">)</span>,
+                                 method <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="va">ResizeMethod</span><span class="op">$</span><span class="va">NEAREST_NEIGHBOR</span><span class="op">)</span>
+  <span class="va">real_image</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">resize</span><span class="op">(</span><span class="va">real_image</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">height</span>, <span class="va">width</span><span class="op">)</span>,
+                                method <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="va">ResizeMethod</span><span class="op">$</span><span class="va">NEAREST_NEIGHBOR</span><span class="op">)</span>
+  
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
+<span class="op">}</span>
+  
+<span class="va">random_crop</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">stacked_image</span> <span class="op">&lt;-</span>
+    <span class="fu"><a href="../../reference/k_stack.html">k_stack</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>, axis <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+  <span class="va">cropped_image</span> <span class="op">&lt;-</span>
+    <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">random_crop</span><span class="op">(</span><span class="va">stacked_image</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2L</span>, <span class="va">img_height</span>, <span class="va">img_width</span>, <span class="fl">3L</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">cropped_image</span><span class="op">[</span><span class="fl">1</span>, , , <span class="op">]</span>, <span class="va">cropped_image</span><span class="op">[</span><span class="fl">2</span>, , , <span class="op">]</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="no">resize</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">input_image</span>, <span class="no">real_image</span>, <span class="no">height</span>, <span class="no">width</span>) {
-  <span class="no">input_image</span> <span class="kw">&lt;-</span> <span class="no">tf</span>$<span class="no">image</span>$<span class="fu">resize</span>(<span class="no">input_image</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">height</span>, <span class="no">width</span>),
-                                 <span class="kw">method</span> <span class="kw">=</span> <span class="no">tf</span>$<span class="no">image</span>$<span class="no">ResizeMethod</span>$<span class="no">NEAREST_NEIGHBOR</span>)
-  <span class="no">real_image</span> <span class="kw">&lt;-</span> <span class="no">tf</span>$<span class="no">image</span>$<span class="fu">resize</span>(<span class="no">real_image</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">height</span>, <span class="no">width</span>),
-                                <span class="kw">method</span> <span class="kw">=</span> <span class="no">tf</span>$<span class="no">image</span>$<span class="no">ResizeMethod</span>$<span class="no">NEAREST_NEIGHBOR</span>)
+<span class="va">normalize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">input_image</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">input_image</span> <span class="op">/</span> <span class="fl">127.5</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>
+  <span class="va">real_image</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">real_image</span> <span class="op">/</span> <span class="fl">127.5</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>
+  
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
+  
+<span class="op">}</span>
 
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>)
-}
-
-<span class="no">random_crop</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">input_image</span>, <span class="no">real_image</span>) {
-  <span class="no">stacked_image</span> <span class="kw">&lt;-</span>
-    <span class="fu"><a href="../../reference/k_stack.html">k_stack</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>), <span class="kw">axis</span> <span class="kw">=</span> <span class="fl">1</span>)
-  <span class="no">cropped_image</span> <span class="kw">&lt;-</span>
-    <span class="no">tf</span>$<span class="no">image</span>$<span class="fu">random_crop</span>(<span class="no">stacked_image</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2L</span>, <span class="no">img_height</span>, <span class="no">img_width</span>, <span class="fl">3L</span>))
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>) <span class="kw">%&lt;-%</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">cropped_image</span>[<span class="fl">1</span>, , , ], <span class="no">cropped_image</span>[<span class="fl">2</span>, , , ])
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>)
-}
-
-<span class="no">normalize</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">input_image</span>, <span class="no">real_image</span>) {
-  <span class="no">input_image</span> <span class="kw">&lt;-</span> (<span class="no">input_image</span> / <span class="fl">127.5</span>) - <span class="fl">1</span>
-  <span class="no">real_image</span> <span class="kw">&lt;-</span> (<span class="no">real_image</span> / <span class="fl">127.5</span>) - <span class="fl">1</span>
-
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>)
-
-}
-
-<span class="no">random_jitter</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">input_image</span>, <span class="no">real_image</span>) {
+<span class="va">random_jitter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">{</span>
   <span class="co"># resizing to 286 x 286 x 3</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>) <span class="kw">%&lt;-%</span> <span class="fu">resize</span>(<span class="no">input_image</span>, <span class="no">real_image</span>, <span class="fl">286L</span>, <span class="fl">286L</span>)
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu">resize</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span>, <span class="fl">286L</span>, <span class="fl">286L</span><span class="op">)</span>
     <span class="co"># randomly cropping to 256 x 256 x 3</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>) <span class="kw">%&lt;-%</span> <span class="fu">random_crop</span>(<span class="no">input_image</span>, <span class="no">real_image</span>)
-    <span class="kw">if</span> (<span class="no">tf</span>$<span class="no">random</span>$<span class="fu">uniform</span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>()) <span class="kw">&gt;</span> <span class="fl">0.5</span>) {
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu">random_crop</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="va">random</span><span class="op">$</span><span class="fu">uniform</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">{</span>
     <span class="co"># random mirroring</span>
-    <span class="no">input_image</span> <span class="kw">&lt;-</span> <span class="no">tf</span>$<span class="no">image</span>$<span class="fu">flip_left_right</span>(<span class="no">input_image</span>)
-    <span class="no">real_image</span> <span class="kw">&lt;-</span> <span class="no">tf</span>$<span class="no">image</span>$<span class="fu">flip_left_right</span>(<span class="no">real_image</span>)
-  }
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>)
-}
+    <span class="va">input_image</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">flip_left_right</span><span class="op">(</span><span class="va">input_image</span><span class="op">)</span>
+    <span class="va">real_image</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">flip_left_right</span><span class="op">(</span><span class="va">real_image</span><span class="op">)</span>
+  <span class="op">}</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="no">random_jitter</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html">tf_function</a></span>(<span class="fu">autograph</span>(<span class="no">random_jitter</span>))
+<span class="va">random_jitter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html">tf_function</a></span><span class="op">(</span><span class="fu"><a href="https://t-kalinowski.github.io/tfautograph/reference/autograph.html">autograph</a></span><span class="op">(</span><span class="va">random_jitter</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">load_image_train</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">image_file</span>) {
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>) <span class="kw">%&lt;-%</span> <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span>(<span class="no">image_file</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>) <span class="kw">%&lt;-%</span> <span class="fu">random_jitter</span>(<span class="no">input_image</span>, <span class="no">real_image</span>)
+<span class="va">load_image_train</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu">random_jitter</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
   <span class="co">#c(input_image, real_image) %&lt;-% normalize(input_image, real_image)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>)
-}
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="no">load_image_test</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">image_file</span>) {
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>) <span class="kw">%&lt;-%</span> <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span>(<span class="no">image_file</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>) <span class="kw">%&lt;-%</span> <span class="fu">resize</span>(<span class="no">input_image</span>, <span class="no">real_image</span>, <span class="no">img_height</span>, <span class="no">img_width</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>) <span class="kw">%&lt;-%</span> <span class="fu"><a href="../../reference/normalize.html">normalize</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">input_image</span>, <span class="no">real_image</span>)
-}
+<span class="va">load_image_test</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu">resize</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span>, <span class="va">img_height</span>, <span class="va">img_width</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu"><a href="../../reference/normalize.html">normalize</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="no">train_dataset</span> <span class="kw">&lt;-</span>
-  <span class="no">tf</span>$<span class="no">data</span>$<span class="no">Dataset</span>$<span class="fu">list_files</span>(<span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">data_dir</span>, <span class="st">"train/*.jpg"</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_shuffle.html">dataset_shuffle</a></span>(<span class="no">buffer_size</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html">dataset_map</a></span>(<span class="no">load_image_train</span>, <span class="kw">num_parallel_calls</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html">dataset_batch</a></span>(<span class="no">batch_size</span>)
+<span class="va">train_dataset</span> <span class="op">&lt;-</span>
+  <span class="va">tf</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">Dataset</span><span class="op">$</span><span class="fu">list_files</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"train/*.jpg"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_shuffle.html">dataset_shuffle</a></span><span class="op">(</span><span class="va">buffer_size</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html">dataset_map</a></span><span class="op">(</span><span class="va">load_image_train</span>, num_parallel_calls <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span>
 
-<span class="no">test_dataset</span> <span class="kw">&lt;-</span>
-  <span class="no">tf</span>$<span class="no">data</span>$<span class="no">Dataset</span>$<span class="fu">list_files</span>(<span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">data_dir</span>, <span class="st">"test/*.jpg"</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html">dataset_map</a></span>(<span class="no">load_image_test</span>, <span class="kw">num_parallel_calls</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html">dataset_batch</a></span>(<span class="no">batch_size</span>)
+<span class="va">test_dataset</span> <span class="op">&lt;-</span>
+  <span class="va">tf</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">Dataset</span><span class="op">$</span><span class="fu">list_files</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"test/*.jpg"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html">dataset_map</a></span><span class="op">(</span><span class="va">load_image_test</span>, num_parallel_calls <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span>
 
 
-<span class="no">downsample</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">filters</span>,
-                       <span class="no">size</span>,
-                       <span class="no">apply_batchnorm</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                       <span class="no">name</span> <span class="kw">=</span> <span class="st">"downsample"</span>) {
-  <span class="fu"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="kw">name</span> <span class="kw">=</span> <span class="no">name</span>, <span class="kw">function</span>(<span class="no">self</span>) {
-    <span class="no">self</span>$<span class="no">apply_batchnorm</span> <span class="kw">&lt;-</span> <span class="no">apply_batchnorm</span>
-    <span class="no">self</span>$<span class="no">conv1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(
-      <span class="kw">filters</span> <span class="kw">=</span> <span class="no">filters</span>,
-      <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="no">size</span>,
-      <span class="kw">strides</span> <span class="kw">=</span> <span class="fl">2</span>,
-      <span class="kw">padding</span> <span class="kw">=</span> <span class="st">'same'</span>,
-      <span class="kw">kernel_initializer</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span>(<span class="fl">0</span>, <span class="fl">0.2</span>),
-      <span class="kw">use_bias</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-    )
-    <span class="kw">if</span> (<span class="no">self</span>$<span class="no">apply_batchnorm</span>) {
-      <span class="no">self</span>$<span class="no">batchnorm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>()
-    }
-
-    <span class="kw">function</span>(<span class="no">x</span>,
-             <span class="no">mask</span> <span class="kw">=</span> <span class="kw">NULL</span>,
-             <span class="no">training</span> <span class="kw">=</span> <span class="fl">TRUE</span>) {
-      <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">conv1</span>(<span class="no">x</span>)
-      <span class="kw">if</span> (<span class="no">self</span>$<span class="no">apply_batchnorm</span>) {
-        <span class="no">x</span> <span class="kw">%&gt;%</span> <span class="no">self</span>$<span class="fu">batchnorm</span>(<span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>)
-      }
+<span class="va">downsample</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">filters</span>,
+                       <span class="va">size</span>,
+                       <span class="va">apply_batchnorm</span> <span class="op">=</span> <span class="cn">TRUE</span>,
+                       <span class="va">name</span> <span class="op">=</span> <span class="st">"downsample"</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span>, <span class="kw">function</span><span class="op">(</span><span class="va">self</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">apply_batchnorm</span> <span class="op">&lt;-</span> <span class="va">apply_batchnorm</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">conv1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>
+      filters <span class="op">=</span> <span class="va">filters</span>,
+      kernel_size <span class="op">=</span> <span class="va">size</span>,
+      strides <span class="op">=</span> <span class="fl">2</span>,
+      padding <span class="op">=</span> <span class="st">'same'</span>,
+      kernel_initializer <span class="op">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.2</span><span class="op">)</span>,
+      use_bias <span class="op">=</span> <span class="cn">FALSE</span>
+    <span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">apply_batchnorm</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">batchnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="op">}</span>
+    
+    <span class="kw">function</span><span class="op">(</span><span class="va">x</span>,
+             <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span>,
+             <span class="va">training</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">conv1</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+      <span class="kw">if</span> <span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">apply_batchnorm</span><span class="op">)</span> <span class="op">{</span>
+        <span class="va">x</span> <span class="op">%&gt;%</span> <span class="va">self</span><span class="op">$</span><span class="fu">batchnorm</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>
+      <span class="op">}</span>
       <span class="co">#cat("downsample (generator) output: ", x$shape$as_list(), "\n")</span>
-      <span class="no">x</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></span>()
-    }
+      <span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="op">}</span>
+    
+  <span class="op">}</span><span class="op">)</span>
+<span class="op">}</span>
 
-  })
-}
-
-<span class="no">upsample</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">filters</span>,
-                     <span class="no">size</span>,
-                     <span class="no">apply_dropout</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-                     <span class="no">name</span> <span class="kw">=</span> <span class="st">"upsample"</span>) {
-  <span class="fu"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="kw">name</span> <span class="kw">=</span> <span class="kw">NULL</span>, <span class="kw">function</span>(<span class="no">self</span>) {
-    <span class="no">self</span>$<span class="no">apply_dropout</span> <span class="kw">&lt;-</span> <span class="no">apply_dropout</span>
-    <span class="no">self</span>$<span class="no">up_conv</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span>(
-      <span class="kw">filters</span> <span class="kw">=</span> <span class="no">filters</span>,
-      <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="no">size</span>,
-      <span class="kw">strides</span> <span class="kw">=</span> <span class="fl">2</span>,
-      <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>,
-      <span class="kw">kernel_initializer</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span>(),
-      <span class="kw">use_bias</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-    )
-    <span class="no">self</span>$<span class="no">batchnorm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>()
-    <span class="kw">if</span> (<span class="no">self</span>$<span class="no">apply_dropout</span>) {
-      <span class="no">self</span>$<span class="no">dropout</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.5</span>)
-    }
-    <span class="kw">function</span>(<span class="no">xs</span>,
-             <span class="no">mask</span> <span class="kw">=</span> <span class="kw">NULL</span>,
-             <span class="no">training</span> <span class="kw">=</span> <span class="fl">TRUE</span>) {
-      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">x1</span>, <span class="no">x2</span>) <span class="kw">%&lt;-%</span> <span class="no">xs</span>
-      <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">up_conv</span>(<span class="no">x1</span>) <span class="kw">%&gt;%</span> <span class="no">self</span>$<span class="fu">batchnorm</span>(<span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>)
-      <span class="kw">if</span> (<span class="no">self</span>$<span class="no">apply_dropout</span>) {
-        <span class="no">x</span> <span class="kw">%&gt;%</span> <span class="no">self</span>$<span class="fu">dropout</span>(<span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>)
-      }
-      <span class="no">x</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>)
-      <span class="no">concat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_concatenate.html">k_concatenate</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x</span>, <span class="no">x2</span>))
+<span class="va">upsample</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">filters</span>,
+                     <span class="va">size</span>,
+                     <span class="va">apply_dropout</span> <span class="op">=</span> <span class="cn">FALSE</span>,
+                     <span class="va">name</span> <span class="op">=</span> <span class="st">"upsample"</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span><span class="op">(</span>name <span class="op">=</span> <span class="cn">NULL</span>, <span class="kw">function</span><span class="op">(</span><span class="va">self</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">apply_dropout</span> <span class="op">&lt;-</span> <span class="va">apply_dropout</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">up_conv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span>
+      filters <span class="op">=</span> <span class="va">filters</span>,
+      kernel_size <span class="op">=</span> <span class="va">size</span>,
+      strides <span class="op">=</span> <span class="fl">2</span>,
+      padding <span class="op">=</span> <span class="st">"same"</span>,
+      kernel_initializer <span class="op">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span><span class="op">(</span><span class="op">)</span>,
+      use_bias <span class="op">=</span> <span class="cn">FALSE</span>
+    <span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">batchnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">apply_dropout</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">dropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
+    <span class="op">}</span>
+    <span class="kw">function</span><span class="op">(</span><span class="va">xs</span>,
+             <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span>,
+             <span class="va">training</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="va">xs</span>
+      <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">up_conv</span><span class="op">(</span><span class="va">x1</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">self</span><span class="op">$</span><span class="fu">batchnorm</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>
+      <span class="kw">if</span> <span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">apply_dropout</span><span class="op">)</span> <span class="op">{</span>
+        <span class="va">x</span> <span class="op">%&gt;%</span> <span class="va">self</span><span class="op">$</span><span class="fu">dropout</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>
+      <span class="op">}</span>
+      <span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span>
+      <span class="va">concat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_concatenate.html">k_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">x2</span><span class="op">)</span><span class="op">)</span>
       <span class="co">#cat("upsample (generator) output: ", concat$shape$as_list(), "\n")</span>
-      <span class="no">concat</span>
-    }
-  })
-}
+      <span class="va">concat</span>
+    <span class="op">}</span>
+  <span class="op">}</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="no">generator</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">name</span> <span class="kw">=</span> <span class="st">"generator"</span>) {
-  <span class="fu"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="kw">name</span> <span class="kw">=</span> <span class="no">name</span>, <span class="kw">function</span>(<span class="no">self</span>) {
-    <span class="no">self</span>$<span class="no">down1</span> <span class="kw">&lt;-</span> <span class="fu">downsample</span>(<span class="fl">64</span>, <span class="fl">4</span>, <span class="kw">apply_batchnorm</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-    <span class="no">self</span>$<span class="no">down2</span> <span class="kw">&lt;-</span> <span class="fu">downsample</span>(<span class="fl">128</span>, <span class="fl">4</span>)
-    <span class="no">self</span>$<span class="no">down3</span> <span class="kw">&lt;-</span> <span class="fu">downsample</span>(<span class="fl">256</span>, <span class="fl">4</span>)
-    <span class="no">self</span>$<span class="no">down4</span> <span class="kw">&lt;-</span> <span class="fu">downsample</span>(<span class="fl">512</span>, <span class="fl">4</span>)
-    <span class="no">self</span>$<span class="no">down5</span> <span class="kw">&lt;-</span> <span class="fu">downsample</span>(<span class="fl">512</span>, <span class="fl">4</span>)
-    <span class="no">self</span>$<span class="no">down6</span> <span class="kw">&lt;-</span> <span class="fu">downsample</span>(<span class="fl">512</span>, <span class="fl">4</span>)
-    <span class="no">self</span>$<span class="no">down7</span> <span class="kw">&lt;-</span> <span class="fu">downsample</span>(<span class="fl">512</span>, <span class="fl">4</span>)
-    <span class="no">self</span>$<span class="no">down8</span> <span class="kw">&lt;-</span> <span class="fu">downsample</span>(<span class="fl">512</span>, <span class="fl">4</span>)
-
-    <span class="no">self</span>$<span class="no">up1</span> <span class="kw">&lt;-</span> <span class="fu">upsample</span>(<span class="fl">512</span>, <span class="fl">4</span>, <span class="kw">apply_dropout</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-    <span class="no">self</span>$<span class="no">up2</span> <span class="kw">&lt;-</span> <span class="fu">upsample</span>(<span class="fl">512</span>, <span class="fl">4</span>, <span class="kw">apply_dropout</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-    <span class="no">self</span>$<span class="no">up3</span> <span class="kw">&lt;-</span> <span class="fu">upsample</span>(<span class="fl">512</span>, <span class="fl">4</span>, <span class="kw">apply_dropout</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-    <span class="no">self</span>$<span class="no">up4</span> <span class="kw">&lt;-</span> <span class="fu">upsample</span>(<span class="fl">512</span>, <span class="fl">4</span>)
-    <span class="no">self</span>$<span class="no">up5</span> <span class="kw">&lt;-</span> <span class="fu">upsample</span>(<span class="fl">256</span>, <span class="fl">4</span>)
-    <span class="no">self</span>$<span class="no">up6</span> <span class="kw">&lt;-</span> <span class="fu">upsample</span>(<span class="fl">128</span>, <span class="fl">4</span>)
-    <span class="no">self</span>$<span class="no">up7</span> <span class="kw">&lt;-</span> <span class="fu">upsample</span>(<span class="fl">64</span>, <span class="fl">4</span>)
-    <span class="no">self</span>$<span class="no">last</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span>(
-      <span class="kw">filters</span> <span class="kw">=</span> <span class="fl">3</span>,
-      <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">4</span>,
-      <span class="kw">strides</span> <span class="kw">=</span> <span class="fl">2</span>,
-      <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>,
-      <span class="kw">kernel_initializer</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span>(<span class="fl">0</span>, <span class="fl">0.2</span>),
-      <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"tanh"</span>
-    )
-
-    <span class="kw">function</span>(<span class="no">x</span>,
-             <span class="no">mask</span> <span class="kw">=</span> <span class="kw">NULL</span>,
-             <span class="no">training</span> <span class="kw">=</span> <span class="fl">TRUE</span>) {
+<span class="va">generator</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">name</span> <span class="op">=</span> <span class="st">"generator"</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span>, <span class="kw">function</span><span class="op">(</span><span class="va">self</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">down1</span> <span class="op">&lt;-</span> <span class="fu">downsample</span><span class="op">(</span><span class="fl">64</span>, <span class="fl">4</span>, apply_batchnorm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">down2</span> <span class="op">&lt;-</span> <span class="fu">downsample</span><span class="op">(</span><span class="fl">128</span>, <span class="fl">4</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">down3</span> <span class="op">&lt;-</span> <span class="fu">downsample</span><span class="op">(</span><span class="fl">256</span>, <span class="fl">4</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">down4</span> <span class="op">&lt;-</span> <span class="fu">downsample</span><span class="op">(</span><span class="fl">512</span>, <span class="fl">4</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">down5</span> <span class="op">&lt;-</span> <span class="fu">downsample</span><span class="op">(</span><span class="fl">512</span>, <span class="fl">4</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">down6</span> <span class="op">&lt;-</span> <span class="fu">downsample</span><span class="op">(</span><span class="fl">512</span>, <span class="fl">4</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">down7</span> <span class="op">&lt;-</span> <span class="fu">downsample</span><span class="op">(</span><span class="fl">512</span>, <span class="fl">4</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">down8</span> <span class="op">&lt;-</span> <span class="fu">downsample</span><span class="op">(</span><span class="fl">512</span>, <span class="fl">4</span><span class="op">)</span>
+    
+    <span class="va">self</span><span class="op">$</span><span class="va">up1</span> <span class="op">&lt;-</span> <span class="fu">upsample</span><span class="op">(</span><span class="fl">512</span>, <span class="fl">4</span>, apply_dropout <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">up2</span> <span class="op">&lt;-</span> <span class="fu">upsample</span><span class="op">(</span><span class="fl">512</span>, <span class="fl">4</span>, apply_dropout <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">up3</span> <span class="op">&lt;-</span> <span class="fu">upsample</span><span class="op">(</span><span class="fl">512</span>, <span class="fl">4</span>, apply_dropout <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">up4</span> <span class="op">&lt;-</span> <span class="fu">upsample</span><span class="op">(</span><span class="fl">512</span>, <span class="fl">4</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">up5</span> <span class="op">&lt;-</span> <span class="fu">upsample</span><span class="op">(</span><span class="fl">256</span>, <span class="fl">4</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">up6</span> <span class="op">&lt;-</span> <span class="fu">upsample</span><span class="op">(</span><span class="fl">128</span>, <span class="fl">4</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">up7</span> <span class="op">&lt;-</span> <span class="fu">upsample</span><span class="op">(</span><span class="fl">64</span>, <span class="fl">4</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">last</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span>
+      filters <span class="op">=</span> <span class="fl">3</span>,
+      kernel_size <span class="op">=</span> <span class="fl">4</span>,
+      strides <span class="op">=</span> <span class="fl">2</span>,
+      padding <span class="op">=</span> <span class="st">"same"</span>,
+      kernel_initializer <span class="op">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.2</span><span class="op">)</span>,
+      activation <span class="op">=</span> <span class="st">"tanh"</span>
+    <span class="op">)</span>
+    
+    <span class="kw">function</span><span class="op">(</span><span class="va">x</span>,
+             <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span>,
+             <span class="va">training</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
       <span class="co"># x shape == (bs, 256, 256, 3)</span>
-      <span class="no">x1</span> <span class="kw">&lt;-</span>
-        <span class="no">x</span> <span class="kw">%&gt;%</span> <span class="no">self</span>$<span class="fu">down1</span>(<span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>)  <span class="co"># (bs, 128, 128, 64)</span>
-      <span class="no">x2</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">down2</span>(<span class="no">x1</span>, <span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="co"># (bs, 64, 64, 128)</span>
-      <span class="no">x3</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">down3</span>(<span class="no">x2</span>, <span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="co"># (bs, 32, 32, 256)</span>
-      <span class="no">x4</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">down4</span>(<span class="no">x3</span>, <span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="co"># (bs, 16, 16, 512)</span>
-      <span class="no">x5</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">down5</span>(<span class="no">x4</span>, <span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="co"># (bs, 8, 8, 512)</span>
-      <span class="no">x6</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">down6</span>(<span class="no">x5</span>, <span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="co"># (bs, 4, 4, 512)</span>
-      <span class="no">x7</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">down7</span>(<span class="no">x6</span>, <span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="co"># (bs, 2, 2, 512)</span>
-      <span class="no">x8</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">down8</span>(<span class="no">x7</span>, <span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="co"># (bs, 1, 1, 512)</span>
+      <span class="va">x1</span> <span class="op">&lt;-</span>
+        <span class="va">x</span> <span class="op">%&gt;%</span> <span class="va">self</span><span class="op">$</span><span class="fu">down1</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>  <span class="co"># (bs, 128, 128, 64)</span>
+      <span class="va">x2</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">down2</span><span class="op">(</span><span class="va">x1</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 64, 64, 128)</span>
+      <span class="va">x3</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">down3</span><span class="op">(</span><span class="va">x2</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 32, 32, 256)</span>
+      <span class="va">x4</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">down4</span><span class="op">(</span><span class="va">x3</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 16, 16, 512)</span>
+      <span class="va">x5</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">down5</span><span class="op">(</span><span class="va">x4</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 8, 8, 512)</span>
+      <span class="va">x6</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">down6</span><span class="op">(</span><span class="va">x5</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 4, 4, 512)</span>
+      <span class="va">x7</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">down7</span><span class="op">(</span><span class="va">x6</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 2, 2, 512)</span>
+      <span class="va">x8</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">down8</span><span class="op">(</span><span class="va">x7</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 1, 1, 512)</span>
 
-      <span class="no">x9</span> <span class="kw">&lt;-</span>
-        <span class="no">self</span>$<span class="fu">up1</span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x8</span>, <span class="no">x7</span>), <span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="co"># (bs, 2, 2, 1024)</span>
-      <span class="no">x10</span> <span class="kw">&lt;-</span>
-        <span class="no">self</span>$<span class="fu">up2</span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x9</span>, <span class="no">x6</span>), <span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="co"># (bs, 4, 4, 1024)</span>
-      <span class="no">x11</span> <span class="kw">&lt;-</span>
-        <span class="no">self</span>$<span class="fu">up3</span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x10</span>, <span class="no">x5</span>), <span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="co"># (bs, 8, 8, 1024)</span>
-      <span class="no">x12</span> <span class="kw">&lt;-</span>
-        <span class="no">self</span>$<span class="fu">up4</span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x11</span>, <span class="no">x4</span>), <span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="co"># (bs, 16, 16, 1024)</span>
-      <span class="no">x13</span> <span class="kw">&lt;-</span>
-        <span class="no">self</span>$<span class="fu">up5</span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x12</span>, <span class="no">x3</span>), <span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="co"># (bs, 32, 32, 512)</span>
-      <span class="no">x14</span> <span class="kw">&lt;-</span>
-        <span class="no">self</span>$<span class="fu">up6</span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x13</span>, <span class="no">x2</span>), <span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="co"># (bs, 64, 64, 256)</span>
-      <span class="no">x15</span> <span class="kw">&lt;-</span>
-        <span class="no">self</span>$<span class="fu">up7</span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x14</span>, <span class="no">x1</span>), <span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="co"># (bs, 128, 128, 128)</span>
-      <span class="no">x16</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">last</span>(<span class="no">x15</span>) <span class="co"># (bs, 256, 256, 3)</span>
+      <span class="va">x9</span> <span class="op">&lt;-</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">up1</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x8</span>, <span class="va">x7</span><span class="op">)</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 2, 2, 1024)</span>
+      <span class="va">x10</span> <span class="op">&lt;-</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">up2</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x9</span>, <span class="va">x6</span><span class="op">)</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 4, 4, 1024)</span>
+      <span class="va">x11</span> <span class="op">&lt;-</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">up3</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x10</span>, <span class="va">x5</span><span class="op">)</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 8, 8, 1024)</span>
+      <span class="va">x12</span> <span class="op">&lt;-</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">up4</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x11</span>, <span class="va">x4</span><span class="op">)</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 16, 16, 1024)</span>
+      <span class="va">x13</span> <span class="op">&lt;-</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">up5</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x12</span>, <span class="va">x3</span><span class="op">)</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 32, 32, 512)</span>
+      <span class="va">x14</span> <span class="op">&lt;-</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">up6</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x13</span>, <span class="va">x2</span><span class="op">)</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 64, 64, 256)</span>
+      <span class="va">x15</span> <span class="op">&lt;-</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">up7</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x14</span>, <span class="va">x1</span><span class="op">)</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 128, 128, 128)</span>
+      <span class="va">x16</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">last</span><span class="op">(</span><span class="va">x15</span><span class="op">)</span> <span class="co"># (bs, 256, 256, 3)</span>
       <span class="co">#cat("generator output: ", x16$shape$as_list(), "\n")</span>
-      <span class="no">x16</span>
-    }
-  })
-}
+      <span class="va">x16</span>
+    <span class="op">}</span>
+  <span class="op">}</span><span class="op">)</span>
+<span class="op">}</span>
 
 
-<span class="no">disc_downsample</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">filters</span>,
-                            <span class="no">size</span>,
-                            <span class="no">apply_batchnorm</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                            <span class="no">name</span> <span class="kw">=</span> <span class="st">"disc_downsample"</span>) {
-  <span class="fu"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="kw">name</span> <span class="kw">=</span> <span class="no">name</span>, <span class="kw">function</span>(<span class="no">self</span>) {
-    <span class="no">self</span>$<span class="no">apply_batchnorm</span> <span class="kw">&lt;-</span> <span class="no">apply_batchnorm</span>
-    <span class="no">self</span>$<span class="no">conv1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(
-      <span class="kw">filters</span> <span class="kw">=</span> <span class="no">filters</span>,
-      <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="no">size</span>,
-      <span class="kw">strides</span> <span class="kw">=</span> <span class="fl">2</span>,
-      <span class="kw">padding</span> <span class="kw">=</span> <span class="st">'same'</span>,
-      <span class="kw">kernel_initializer</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span>(<span class="fl">0</span>, <span class="fl">0.2</span>),
-      <span class="kw">use_bias</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-    )
-    <span class="kw">if</span> (<span class="no">self</span>$<span class="no">apply_batchnorm</span>) {
-      <span class="no">self</span>$<span class="no">batchnorm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>()
-    }
+<span class="va">disc_downsample</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">filters</span>,
+                            <span class="va">size</span>,
+                            <span class="va">apply_batchnorm</span> <span class="op">=</span> <span class="cn">TRUE</span>,
+                            <span class="va">name</span> <span class="op">=</span> <span class="st">"disc_downsample"</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span>, <span class="kw">function</span><span class="op">(</span><span class="va">self</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">apply_batchnorm</span> <span class="op">&lt;-</span> <span class="va">apply_batchnorm</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">conv1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>
+      filters <span class="op">=</span> <span class="va">filters</span>,
+      kernel_size <span class="op">=</span> <span class="va">size</span>,
+      strides <span class="op">=</span> <span class="fl">2</span>,
+      padding <span class="op">=</span> <span class="st">'same'</span>,
+      kernel_initializer <span class="op">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.2</span><span class="op">)</span>,
+      use_bias <span class="op">=</span> <span class="cn">FALSE</span>
+    <span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">apply_batchnorm</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">batchnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="op">}</span>
+    
+    <span class="kw">function</span><span class="op">(</span><span class="va">x</span>,
+             <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span>,
+             <span class="va">training</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">conv1</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+      <span class="kw">if</span> <span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">apply_batchnorm</span><span class="op">)</span> <span class="op">{</span>
+        <span class="va">x</span> <span class="op">%&gt;%</span> <span class="va">self</span><span class="op">$</span><span class="fu">batchnorm</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>
+      <span class="op">}</span>
+      <span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="op">}</span>
+    
+  <span class="op">}</span><span class="op">)</span>
+<span class="op">}</span>
 
-    <span class="kw">function</span>(<span class="no">x</span>,
-             <span class="no">mask</span> <span class="kw">=</span> <span class="kw">NULL</span>,
-             <span class="no">training</span> <span class="kw">=</span> <span class="fl">TRUE</span>) {
-      <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">conv1</span>(<span class="no">x</span>)
-      <span class="kw">if</span> (<span class="no">self</span>$<span class="no">apply_batchnorm</span>) {
-        <span class="no">x</span> <span class="kw">%&gt;%</span> <span class="no">self</span>$<span class="fu">batchnorm</span>(<span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>)
-      }
-      <span class="no">x</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></span>()
-    }
-
-  })
-}
-
-<span class="no">discriminator</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">name</span> <span class="kw">=</span> <span class="st">"discriminator"</span>) {
-  <span class="fu"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="kw">name</span> <span class="kw">=</span> <span class="no">name</span>, <span class="kw">function</span>(<span class="no">self</span>) {
-    <span class="no">self</span>$<span class="no">down1</span> <span class="kw">&lt;-</span> <span class="fu">disc_downsample</span>(<span class="fl">64</span>, <span class="fl">4</span>, <span class="fl">FALSE</span>)
-    <span class="no">self</span>$<span class="no">down2</span> <span class="kw">&lt;-</span> <span class="fu">disc_downsample</span>(<span class="fl">128</span>, <span class="fl">4</span>)
-    <span class="no">self</span>$<span class="no">down3</span> <span class="kw">&lt;-</span> <span class="fu">disc_downsample</span>(<span class="fl">256</span>, <span class="fl">4</span>)
+<span class="va">discriminator</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">name</span> <span class="op">=</span> <span class="st">"discriminator"</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span>, <span class="kw">function</span><span class="op">(</span><span class="va">self</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">down1</span> <span class="op">&lt;-</span> <span class="fu">disc_downsample</span><span class="op">(</span><span class="fl">64</span>, <span class="fl">4</span>, <span class="cn">FALSE</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">down2</span> <span class="op">&lt;-</span> <span class="fu">disc_downsample</span><span class="op">(</span><span class="fl">128</span>, <span class="fl">4</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">down3</span> <span class="op">&lt;-</span> <span class="fu">disc_downsample</span><span class="op">(</span><span class="fl">256</span>, <span class="fl">4</span><span class="op">)</span>
     <span class="co"># we are zero padding here with 1 because we need our shape to</span>
     <span class="co"># go from (batch_size, 32, 32, 256) to (batch_size, 31, 31, 512)</span>
-    <span class="no">self</span>$<span class="no">zero_pad1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_zero_padding_2d.html">layer_zero_padding_2d</a></span>()
-    <span class="no">self</span>$<span class="no">conv</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(
-      <span class="kw">filters</span> <span class="kw">=</span> <span class="fl">512</span>,
-      <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">4</span>,
-      <span class="kw">strides</span> <span class="kw">=</span> <span class="fl">1</span>,
-      <span class="kw">kernel_initializer</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span>(),
-      <span class="kw">use_bias</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-    )
-    <span class="no">self</span>$<span class="no">batchnorm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>()
-    <span class="no">self</span>$<span class="no">zero_pad2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_zero_padding_2d.html">layer_zero_padding_2d</a></span>()
-    <span class="no">self</span>$<span class="no">last</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(
-      <span class="kw">filters</span> <span class="kw">=</span> <span class="fl">1</span>,
-      <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">4</span>,
-      <span class="kw">strides</span> <span class="kw">=</span> <span class="fl">1</span>,
-      <span class="kw">kernel_initializer</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span>()
-    )
-
-    <span class="kw">function</span>(<span class="no">x</span>,
-             <span class="no">y</span>,
-             <span class="no">mask</span> <span class="kw">=</span> <span class="kw">NULL</span>,
-             <span class="no">training</span> <span class="kw">=</span> <span class="fl">TRUE</span>) {
-      <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_concatenate.html">k_concatenate</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x</span>, <span class="no">y</span>)) <span class="kw">%&gt;%</span> <span class="co"># (bs, 256, 256, channels*2)</span>
-        <span class="no">self</span>$<span class="fu">down1</span>(<span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="kw">%&gt;%</span> <span class="co"># (bs, 128, 128, 64)</span>
-        <span class="no">self</span>$<span class="fu">down2</span>(<span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="kw">%&gt;%</span> <span class="co"># (bs, 64, 64, 128)</span>
-        <span class="no">self</span>$<span class="fu">down3</span>(<span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="kw">%&gt;%</span> <span class="co"># (bs, 32, 32, 256)</span>
-        <span class="no">self</span>$<span class="fu">zero_pad1</span>() <span class="kw">%&gt;%</span> <span class="co"># (bs, 34, 34, 256)</span>
-        <span class="no">self</span>$<span class="fu">conv</span>() <span class="kw">%&gt;%</span> <span class="co"># (bs, 31, 31, 512)</span>
-        <span class="no">self</span>$<span class="fu">batchnorm</span>(<span class="kw">training</span> <span class="kw">=</span> <span class="no">training</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></span>() <span class="kw">%&gt;%</span>
-        <span class="no">self</span>$<span class="fu">zero_pad2</span>() <span class="kw">%&gt;%</span> <span class="co"># (bs, 33, 33, 512)</span>
-        <span class="no">self</span>$<span class="fu">last</span>() <span class="co"># (bs, 30, 30, 1)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">zero_pad1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_zero_padding_2d.html">layer_zero_padding_2d</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">conv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>
+      filters <span class="op">=</span> <span class="fl">512</span>,
+      kernel_size <span class="op">=</span> <span class="fl">4</span>,
+      strides <span class="op">=</span> <span class="fl">1</span>,
+      kernel_initializer <span class="op">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span><span class="op">(</span><span class="op">)</span>,
+      use_bias <span class="op">=</span> <span class="cn">FALSE</span>
+    <span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">batchnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">zero_pad2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_zero_padding_2d.html">layer_zero_padding_2d</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">last</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>
+      filters <span class="op">=</span> <span class="fl">1</span>,
+      kernel_size <span class="op">=</span> <span class="fl">4</span>,
+      strides <span class="op">=</span> <span class="fl">1</span>,
+      kernel_initializer <span class="op">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="op">)</span>
+    
+    <span class="kw">function</span><span class="op">(</span><span class="va">x</span>,
+             <span class="va">y</span>,
+             <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span>,
+             <span class="va">training</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_concatenate.html">k_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># (bs, 256, 256, channels*2)</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">down1</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># (bs, 128, 128, 64)</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">down2</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># (bs, 64, 64, 128)</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">down3</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># (bs, 32, 32, 256)</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">zero_pad1</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># (bs, 34, 34, 256)</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">conv</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># (bs, 31, 31, 512)</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">batchnorm</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">zero_pad2</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># (bs, 33, 33, 512)</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">last</span><span class="op">(</span><span class="op">)</span> <span class="co"># (bs, 30, 30, 1)</span>
       <span class="co">#cat("discriminator output: ", x$shape$as_list(), "\n")</span>
-      <span class="no">x</span>
-    }
-  })
+      <span class="va">x</span>
+    <span class="op">}</span>
+  <span class="op">}</span><span class="op">)</span>
+  
+<span class="op">}</span>
 
-}
+<span class="va">generator</span> <span class="op">&lt;-</span> <span class="fu">generator</span><span class="op">(</span><span class="op">)</span>
+<span class="va">discriminator</span> <span class="op">&lt;-</span> <span class="fu">discriminator</span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">generator</span> <span class="kw">&lt;-</span> <span class="fu">generator</span>()
-<span class="no">discriminator</span> <span class="kw">&lt;-</span> <span class="fu">discriminator</span>()
+<span class="va">cross_entropy</span> <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">keras</span><span class="op">$</span><span class="va">losses</span><span class="op">$</span><span class="fu">BinaryCrossentropy</span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="no">cross_entropy</span> <span class="kw">=</span> <span class="no">tf</span>$<span class="no">keras</span>$<span class="no">losses</span>$<span class="fu">BinaryCrossentropy</span>(<span class="kw">from_logits</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="va">discriminator_loss</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">real_output</span>, <span class="va">generated_output</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">real_loss</span> <span class="op">&lt;-</span> <span class="fu">cross_entropy</span><span class="op">(</span><span class="fu"><a href="../../reference/k_ones_like.html">k_ones_like</a></span><span class="op">(</span><span class="va">real_output</span><span class="op">)</span>, <span class="va">real_output</span><span class="op">)</span>
+  <span class="va">generated_loss</span> <span class="op">&lt;-</span> <span class="fu">cross_entropy</span><span class="op">(</span><span class="fu"><a href="../../reference/k_zeros_like.html">k_zeros_like</a></span><span class="op">(</span><span class="va">generated_output</span><span class="op">)</span>, <span class="va">generated_output</span><span class="op">)</span>
+  <span class="va">real_loss</span> <span class="op">+</span> <span class="va">generated_loss</span>
+<span class="op">}</span>
 
-<span class="no">discriminator_loss</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">real_output</span>, <span class="no">generated_output</span>) {
-  <span class="no">real_loss</span> <span class="kw">&lt;-</span> <span class="fu">cross_entropy</span>(<span class="fu"><a href="../../reference/k_ones_like.html">k_ones_like</a></span>(<span class="no">real_output</span>), <span class="no">real_output</span>)
-  <span class="no">generated_loss</span> <span class="kw">&lt;-</span> <span class="fu">cross_entropy</span>(<span class="fu"><a href="../../reference/k_zeros_like.html">k_zeros_like</a></span>(<span class="no">generated_output</span>), <span class="no">generated_output</span>)
-  <span class="no">real_loss</span> + <span class="no">generated_loss</span>
-}
+<span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">100</span>
+<span class="va">generator_loss</span> <span class="op">&lt;-</span>
+  <span class="kw">function</span><span class="op">(</span><span class="va">disc_judgment</span>, <span class="va">generated_output</span>, <span class="va">target</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">gan_loss</span> <span class="op">&lt;-</span> <span class="fu">cross_entropy</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones_like</span><span class="op">(</span><span class="va">disc_judgment</span><span class="op">)</span>, <span class="va">disc_judgment</span><span class="op">)</span>
+    <span class="va">l1_loss</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">reduce_mean</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">abs</span><span class="op">(</span><span class="va">target</span> <span class="op">-</span> <span class="va">generated_output</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">gan_loss</span> <span class="op">+</span> <span class="op">(</span><span class="va">lambda</span> <span class="op">*</span> <span class="va">l1_loss</span><span class="op">)</span>
+  <span class="op">}</span>
 
-<span class="no">lambda</span> <span class="kw">&lt;-</span> <span class="fl">100</span>
-<span class="no">generator_loss</span> <span class="kw">&lt;-</span>
-  <span class="kw">function</span>(<span class="no">disc_judgment</span>, <span class="no">generated_output</span>, <span class="no">target</span>) {
-    <span class="no">gan_loss</span> <span class="kw">&lt;-</span> <span class="fu">cross_entropy</span>(<span class="no">tf</span>$<span class="fu">ones_like</span>(<span class="no">disc_judgment</span>), <span class="no">disc_judgment</span>)
-    <span class="no">l1_loss</span> <span class="kw">&lt;-</span> <span class="no">tf</span>$<span class="fu">reduce_mean</span>(<span class="no">tf</span>$<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(<span class="no">target</span> - <span class="no">generated_output</span>))
-    <span class="no">gan_loss</span> + (<span class="no">lambda</span> * <span class="no">l1_loss</span>)
-  }
+<span class="va">discriminator_optimizer</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">optimizers</span><span class="op">$</span><span class="fu">Adam</span><span class="op">(</span><span class="fl">2e-4</span>, beta_1 <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
+<span class="va">generator_optimizer</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">optimizers</span><span class="op">$</span><span class="fu">Adam</span><span class="op">(</span><span class="fl">2e-4</span>, beta_1 <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
 
-<span class="no">discriminator_optimizer</span> <span class="kw">&lt;-</span> <span class="no">tf</span>$<span class="no">optimizers</span>$<span class="fu">Adam</span>(<span class="fl">2e-4</span>, <span class="kw">beta_1</span> <span class="kw">=</span> <span class="fl">0.5</span>)
-<span class="no">generator_optimizer</span> <span class="kw">&lt;-</span> <span class="no">tf</span>$<span class="no">optimizers</span>$<span class="fu">Adam</span>(<span class="fl">2e-4</span>, <span class="kw">beta_1</span> <span class="kw">=</span> <span class="fl">0.5</span>)
+<span class="va">checkpoint_dir</span> <span class="op">&lt;-</span> <span class="st">"./checkpoints_pix2pix"</span>
+<span class="va">checkpoint_prefix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">checkpoint_dir</span>, <span class="st">"ckpt"</span><span class="op">)</span>
+<span class="va">checkpoint</span> <span class="op">&lt;-</span>
+  <span class="va">tf</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="fu">Checkpoint</span><span class="op">(</span>
+    generator_optimizer <span class="op">=</span> <span class="va">generator_optimizer</span>,
+    discriminator_optimizer <span class="op">=</span> <span class="va">discriminator_optimizer</span>,
+    generator <span class="op">=</span> <span class="va">generator</span>,
+    discriminator <span class="op">=</span> <span class="va">discriminator</span>
+  <span class="op">)</span>
 
-<span class="no">checkpoint_dir</span> <span class="kw">&lt;-</span> <span class="st">"./checkpoints_pix2pix"</span>
-<span class="no">checkpoint_prefix</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">checkpoint_dir</span>, <span class="st">"ckpt"</span>)
-<span class="no">checkpoint</span> <span class="kw">&lt;-</span>
-  <span class="no">tf</span>$<span class="no">train</span>$<span class="fu">Checkpoint</span>(
-    <span class="kw">generator_optimizer</span> <span class="kw">=</span> <span class="no">generator_optimizer</span>,
-    <span class="kw">discriminator_optimizer</span> <span class="kw">=</span> <span class="no">discriminator_optimizer</span>,
-    <span class="kw">generator</span> <span class="kw">=</span> <span class="no">generator</span>,
-    <span class="kw">discriminator</span> <span class="kw">=</span> <span class="no">discriminator</span>
-  )
+<span class="va">generate_images</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">generator</span>, <span class="va">input</span>, <span class="va">target</span>, <span class="va">id</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">prediction</span> <span class="op">&lt;-</span> <span class="fu">generator</span><span class="op">(</span><span class="va">input</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"pix2pix_"</span>, <span class="va">id</span>, <span class="st">".png"</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">900</span>, height <span class="op">=</span> <span class="fl">300</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfcol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,
+      xaxs <span class="op">=</span> <span class="st">'i'</span>,
+      yaxs <span class="op">=</span> <span class="st">'i'</span><span class="op">)</span>
+  <span class="va">input</span> <span class="op">&lt;-</span> <span class="va">input</span><span class="op">[</span><span class="fl">1</span>, , ,<span class="op">]</span><span class="op">$</span><span class="fu">numpy</span><span class="op">(</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.5</span> <span class="op">+</span> <span class="fl">0.5</span>
+  <span class="va">input</span><span class="op">[</span><span class="va">input</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span>
+  <span class="va">input</span><span class="op">[</span><span class="va">input</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
+  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span><span class="op">(</span><span class="va">input</span>, main <span class="op">=</span> <span class="st">"input image"</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">target</span> <span class="op">&lt;-</span> <span class="va">target</span><span class="op">[</span><span class="fl">1</span>, , ,<span class="op">]</span><span class="op">$</span><span class="fu">numpy</span><span class="op">(</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.5</span> <span class="op">+</span> <span class="fl">0.5</span>
+  <span class="va">target</span><span class="op">[</span><span class="va">target</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span>
+  <span class="va">target</span><span class="op">[</span><span class="va">target</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
+  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span><span class="op">(</span><span class="va">target</span>, main <span class="op">=</span> <span class="st">"ground truth"</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">prediction</span> <span class="op">&lt;-</span> <span class="va">prediction</span><span class="op">[</span><span class="fl">1</span>, , ,<span class="op">]</span><span class="op">$</span><span class="fu">numpy</span><span class="op">(</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.5</span> <span class="op">+</span> <span class="fl">0.5</span>
+  <span class="va">prediction</span><span class="op">[</span><span class="va">prediction</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span>
+  <span class="va">prediction</span><span class="op">[</span><span class="va">prediction</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
+  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span><span class="op">(</span><span class="va">prediction</span>, main <span class="op">=</span> <span class="st">"generated"</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="no">generate_images</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">generator</span>, <span class="no">input</span>, <span class="no">target</span>, <span class="no">id</span>) {
-  <span class="no">prediction</span> <span class="kw">&lt;-</span> <span class="fu">generator</span>(<span class="no">input</span>, <span class="kw">training</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-  <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"pix2pix_"</span>, <span class="no">id</span>, <span class="st">".png"</span>), <span class="kw">width</span> <span class="kw">=</span> <span class="fl">900</span>, <span class="kw">height</span> <span class="kw">=</span> <span class="fl">300</span>)
-  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mfcol</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">3</span>))
-  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>),
-      <span class="kw">xaxs</span> <span class="kw">=</span> <span class="st">'i'</span>,
-      <span class="kw">yaxs</span> <span class="kw">=</span> <span class="st">'i'</span>)
-  <span class="no">input</span> <span class="kw">&lt;-</span> <span class="no">input</span>[<span class="fl">1</span>, , ,]$<span class="fu">numpy</span>() * <span class="fl">0.5</span> + <span class="fl">0.5</span>
-  <span class="no">input</span>[<span class="no">input</span> <span class="kw">&gt;</span> <span class="fl">1</span>] <span class="kw">&lt;-</span> <span class="fl">1</span>
-  <span class="no">input</span>[<span class="no">input</span> <span class="kw">&lt;</span> <span class="fl">0</span>] <span class="kw">&lt;-</span> <span class="fl">0</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span>(<span class="no">input</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"input image"</span>))
-  <span class="no">target</span> <span class="kw">&lt;-</span> <span class="no">target</span>[<span class="fl">1</span>, , ,]$<span class="fu">numpy</span>() * <span class="fl">0.5</span> + <span class="fl">0.5</span>
-  <span class="no">target</span>[<span class="no">target</span> <span class="kw">&gt;</span> <span class="fl">1</span>] <span class="kw">&lt;-</span> <span class="fl">1</span>
-  <span class="no">target</span>[<span class="no">target</span> <span class="kw">&lt;</span> <span class="fl">0</span>] <span class="kw">&lt;-</span> <span class="fl">0</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span>(<span class="no">target</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"ground truth"</span>))
-  <span class="no">prediction</span> <span class="kw">&lt;-</span> <span class="no">prediction</span>[<span class="fl">1</span>, , ,]$<span class="fu">numpy</span>() * <span class="fl">0.5</span> + <span class="fl">0.5</span>
-  <span class="no">prediction</span>[<span class="no">prediction</span> <span class="kw">&gt;</span> <span class="fl">1</span>] <span class="kw">&lt;-</span> <span class="fl">1</span>
-  <span class="no">prediction</span>[<span class="no">prediction</span> <span class="kw">&lt;</span> <span class="fl">0</span>] <span class="kw">&lt;-</span> <span class="fl">0</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span>(<span class="no">prediction</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"generated"</span>))
-  <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span>()
-}
+<span class="va">train</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">dataset</span>, <span class="va">num_epochs</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">num_epochs</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">total_loss_gen</span> <span class="op">&lt;-</span> <span class="fl">0</span>
+    <span class="va">total_loss_disc</span> <span class="op">&lt;-</span> <span class="fl">0</span>
+    <span class="va">iter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/make-iterator.html">make_iterator_one_shot</a></span><span class="op">(</span><span class="va">train_dataset</span><span class="op">)</span>
+    
+    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/until_out_of_range.html">until_out_of_range</a></span><span class="op">(</span><span class="op">{</span>
+      <span class="va">batch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/iterator_get_next.html">iterator_get_next</a></span><span class="op">(</span><span class="va">iter</span><span class="op">)</span>
+      <span class="va">input_image</span> <span class="op">&lt;-</span> <span class="va">batch</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+      <span class="va">target</span> <span class="op">&lt;-</span> <span class="va">batch</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>
+      
+      <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op">%as%</span> <span class="va">gen_tape</span>, <span class="op">{</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op">%as%</span> <span class="va">disc_tape</span>, <span class="op">{</span>
+          <span class="va">gen_output</span> <span class="op">&lt;-</span> <span class="fu">generator</span><span class="op">(</span><span class="va">input_image</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+          <span class="va">disc_real_output</span> <span class="op">&lt;-</span>
+            <span class="fu">discriminator</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">target</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+          <span class="va">disc_generated_output</span> <span class="op">&lt;-</span>
+            <span class="fu">discriminator</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">gen_output</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+          <span class="va">gen_loss</span> <span class="op">&lt;-</span>
+            <span class="fu">generator_loss</span><span class="op">(</span><span class="va">disc_generated_output</span>, <span class="va">gen_output</span>, <span class="va">target</span><span class="op">)</span>
+          <span class="va">disc_loss</span> <span class="op">&lt;-</span>
+            <span class="fu">discriminator_loss</span><span class="op">(</span><span class="va">disc_real_output</span>, <span class="va">disc_generated_output</span><span class="op">)</span>
+          <span class="va">total_loss_gen</span> <span class="op">&lt;-</span> <span class="va">total_loss_gen</span> <span class="op">+</span> <span class="va">gen_loss</span>
+          <span class="va">total_loss_disc</span> <span class="op">&lt;-</span> <span class="va">total_loss_disc</span> <span class="op">+</span> <span class="va">disc_loss</span>
+        <span class="op">}</span><span class="op">)</span>
+      <span class="op">}</span><span class="op">)</span>
+      <span class="va">generator_gradients</span> <span class="op">&lt;-</span> <span class="va">gen_tape</span><span class="op">$</span><span class="fu">gradient</span><span class="op">(</span><span class="va">gen_loss</span>,
+                                               <span class="va">generator</span><span class="op">$</span><span class="va">trainable_variables</span><span class="op">)</span>
+      <span class="va">discriminator_gradients</span> <span class="op">&lt;-</span> <span class="va">disc_tape</span><span class="op">$</span><span class="fu">gradient</span><span class="op">(</span><span class="va">disc_loss</span>,
+                                                    <span class="va">discriminator</span><span class="op">$</span><span class="va">trainable_variables</span><span class="op">)</span>
+      
+      <span class="va">generator_optimizer</span><span class="op">$</span><span class="fu">apply_gradients</span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+        <span class="va">generator_gradients</span>,
+        <span class="va">generator</span><span class="op">$</span><span class="va">trainable_variables</span>
+      <span class="op">)</span><span class="op">)</span><span class="op">)</span>
+      <span class="va">discriminator_optimizer</span><span class="op">$</span><span class="fu">apply_gradients</span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span><span class="op">(</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">discriminator_gradients</span>,
+             <span class="va">discriminator</span><span class="op">$</span><span class="va">trainable_variables</span><span class="op">)</span>
+      <span class="op">)</span><span class="op">)</span>
+      
+    <span class="op">}</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Epoch "</span>, <span class="va">epoch</span>, <span class="st">"\n"</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Generator loss: "</span>,
+        <span class="va">total_loss_gen</span><span class="op">$</span><span class="fu">numpy</span><span class="op">(</span><span class="op">)</span> <span class="op">/</span> <span class="va">batches_per_epoch</span>,
+        <span class="st">"\n"</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Discriminator loss: "</span>,
+        <span class="va">total_loss_disc</span><span class="op">$</span><span class="fu">numpy</span><span class="op">(</span><span class="op">)</span> <span class="op">/</span> <span class="va">batches_per_epoch</span>,
+        <span class="st">"\n\n"</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">epoch</span> <span class="op">%%</span> <span class="fl">10</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">test_iter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/make-iterator.html">make_iterator_one_shot</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span>
+      <span class="va">batch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/iterator_get_next.html">iterator_get_next</a></span><span class="op">(</span><span class="va">test_iter</span><span class="op">)</span>
+      <span class="va">input</span> <span class="op">&lt;-</span> <span class="va">batch</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+      <span class="va">target</span> <span class="op">&lt;-</span> <span class="va">batch</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>
+      <span class="fu">generate_images</span><span class="op">(</span><span class="va">generator</span>, <span class="va">input</span>, <span class="va">target</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"epoch_"</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span>
+    <span class="op">}</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">epoch</span> <span class="op">%%</span> <span class="fl">10</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">checkpoint</span><span class="op">$</span><span class="fu">save</span><span class="op">(</span>file_prefix <span class="op">=</span> <span class="va">checkpoint_prefix</span><span class="op">)</span>
+    <span class="op">}</span>
+    
+  <span class="op">}</span>
+<span class="op">}</span>
 
-<span class="no">train</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">dataset</span>, <span class="no">num_epochs</span>) {
-  <span class="kw">for</span> (<span class="no">epoch</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="no">num_epochs</span>) {
-    <span class="no">total_loss_gen</span> <span class="kw">&lt;-</span> <span class="fl">0</span>
-    <span class="no">total_loss_disc</span> <span class="kw">&lt;-</span> <span class="fl">0</span>
-    <span class="no">iter</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/make-iterator.html">make_iterator_one_shot</a></span>(<span class="no">train_dataset</span>)
-
-    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/until_out_of_range.html">until_out_of_range</a></span>({
-      <span class="no">batch</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/iterator_get_next.html">iterator_get_next</a></span>(<span class="no">iter</span>)
-      <span class="no">input_image</span> <span class="kw">&lt;-</span> <span class="no">batch</span><span class="kw">[[</span><span class="fl">1</span>]]
-      <span class="no">target</span> <span class="kw">&lt;-</span> <span class="no">batch</span><span class="kw">[[</span><span class="fl">2</span>]]
-
-      <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span>(<span class="no">tf</span>$<span class="fu">GradientTape</span>() <span class="kw">%as%</span> <span class="no">gen_tape</span>, {
-        <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span>(<span class="no">tf</span>$<span class="fu">GradientTape</span>() <span class="kw">%as%</span> <span class="no">disc_tape</span>, {
-          <span class="no">gen_output</span> <span class="kw">&lt;-</span> <span class="fu">generator</span>(<span class="no">input_image</span>, <span class="kw">training</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-          <span class="no">disc_real_output</span> <span class="kw">&lt;-</span>
-            <span class="fu">discriminator</span>(<span class="no">input_image</span>, <span class="no">target</span>, <span class="kw">training</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-          <span class="no">disc_generated_output</span> <span class="kw">&lt;-</span>
-            <span class="fu">discriminator</span>(<span class="no">input_image</span>, <span class="no">gen_output</span>, <span class="kw">training</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-          <span class="no">gen_loss</span> <span class="kw">&lt;-</span>
-            <span class="fu">generator_loss</span>(<span class="no">disc_generated_output</span>, <span class="no">gen_output</span>, <span class="no">target</span>)
-          <span class="no">disc_loss</span> <span class="kw">&lt;-</span>
-            <span class="fu">discriminator_loss</span>(<span class="no">disc_real_output</span>, <span class="no">disc_generated_output</span>)
-          <span class="no">total_loss_gen</span> <span class="kw">&lt;-</span> <span class="no">total_loss_gen</span> + <span class="no">gen_loss</span>
-          <span class="no">total_loss_disc</span> <span class="kw">&lt;-</span> <span class="no">total_loss_disc</span> + <span class="no">disc_loss</span>
-        })
-      })
-      <span class="no">generator_gradients</span> <span class="kw">&lt;-</span> <span class="no">gen_tape</span>$<span class="fu">gradient</span>(<span class="no">gen_loss</span>,
-                                               <span class="no">generator</span>$<span class="no">trainable_variables</span>)
-      <span class="no">discriminator_gradients</span> <span class="kw">&lt;-</span> <span class="no">disc_tape</span>$<span class="fu">gradient</span>(<span class="no">disc_loss</span>,
-                                                    <span class="no">discriminator</span>$<span class="no">trainable_variables</span>)
-
-      <span class="no">generator_optimizer</span>$<span class="fu">apply_gradients</span>(<span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-        <span class="no">generator_gradients</span>,
-        <span class="no">generator</span>$<span class="no">trainable_variables</span>
-      )))
-      <span class="no">discriminator_optimizer</span>$<span class="fu">apply_gradients</span>(<span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(
-        <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">discriminator_gradients</span>,
-             <span class="no">discriminator</span>$<span class="no">trainable_variables</span>)
-      ))
-
-    })
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Epoch "</span>, <span class="no">epoch</span>, <span class="st">"\n"</span>)
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Generator loss: "</span>,
-        <span class="no">total_loss_gen</span>$<span class="fu">numpy</span>() / <span class="no">batches_per_epoch</span>,
-        <span class="st">"\n"</span>)
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Discriminator loss: "</span>,
-        <span class="no">total_loss_disc</span>$<span class="fu">numpy</span>() / <span class="no">batches_per_epoch</span>,
-        <span class="st">"\n\n"</span>)
-    <span class="kw">if</span> (<span class="no">epoch</span> <span class="kw">%%</span> <span class="fl">10</span> <span class="kw">==</span> <span class="fl">0</span>) {
-      <span class="no">test_iter</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/make-iterator.html">make_iterator_one_shot</a></span>(<span class="no">test_dataset</span>)
-      <span class="no">batch</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/iterator_get_next.html">iterator_get_next</a></span>(<span class="no">test_iter</span>)
-      <span class="no">input</span> <span class="kw">&lt;-</span> <span class="no">batch</span><span class="kw">[[</span><span class="fl">1</span>]]
-      <span class="no">target</span> <span class="kw">&lt;-</span> <span class="no">batch</span><span class="kw">[[</span><span class="fl">2</span>]]
-      <span class="fu">generate_images</span>(<span class="no">generator</span>, <span class="no">input</span>, <span class="no">target</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"epoch_"</span>, <span class="no">i</span>))
-    }
-    <span class="kw">if</span> (<span class="no">epoch</span> <span class="kw">%%</span> <span class="fl">10</span> <span class="kw">==</span> <span class="fl">0</span>) {
-      <span class="no">checkpoint</span>$<span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span>(<span class="kw">file_prefix</span> <span class="kw">=</span> <span class="no">checkpoint_prefix</span>)
-    }
-
-  }
-}
-
-<span class="kw">if</span> (!<span class="no">restore</span>) {
-  <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/train.html">train</a></span>(<span class="no">train_dataset</span>, <span class="fl">200</span>)
-}
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">restore</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/train.html">train</a></span><span class="op">(</span><span class="va">train_dataset</span>, <span class="fl">200</span><span class="op">)</span>
+<span class="op">}</span> 
 
 
-<span class="no">checkpoint</span>$<span class="fu">restore</span>(<span class="no">tf</span>$<span class="no">train</span>$<span class="fu">latest_checkpoint</span>(<span class="no">checkpoint_dir</span>))
+<span class="va">checkpoint</span><span class="op">$</span><span class="fu">restore</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="fu">latest_checkpoint</span><span class="op">(</span><span class="va">checkpoint_dir</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">test_iter</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/make-iterator.html">make_iterator_one_shot</a></span>(<span class="no">test_dataset</span>)
-<span class="no">i</span> <span class="kw">&lt;-</span> <span class="fl">1</span>
-<span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/until_out_of_range.html">until_out_of_range</a></span>({
-  <span class="no">batch</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/iterator_get_next.html">iterator_get_next</a></span>(<span class="no">test_iter</span>)
-  <span class="no">input</span> <span class="kw">&lt;-</span> <span class="no">batch</span><span class="kw">[[</span><span class="fl">1</span>]]
-  <span class="no">target</span> <span class="kw">&lt;-</span> <span class="no">batch</span><span class="kw">[[</span><span class="fl">2</span>]]
-  <span class="fu">generate_images</span>(<span class="no">generator</span>, <span class="no">input</span>, <span class="no">target</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"test_"</span>, <span class="no">i</span>))
-  <span class="no">i</span> <span class="kw">&lt;-</span> <span class="no">i</span> + <span class="fl">1</span>
-})</pre></body></html></div>
+<span class="va">test_iter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/make-iterator.html">make_iterator_one_shot</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span>
+<span class="va">i</span> <span class="op">&lt;-</span> <span class="fl">1</span>
+<span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/until_out_of_range.html">until_out_of_range</a></span><span class="op">(</span><span class="op">{</span>
+  <span class="va">batch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/iterator_get_next.html">iterator_get_next</a></span><span class="op">(</span><span class="va">test_iter</span><span class="op">)</span>
+  <span class="va">input</span> <span class="op">&lt;-</span> <span class="va">batch</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+  <span class="va">target</span> <span class="op">&lt;-</span> <span class="va">batch</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>
+  <span class="fu">generate_images</span><span class="op">(</span><span class="va">generator</span>, <span class="va">input</span>, <span class="va">target</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"test_"</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">i</span> <span class="op">&lt;-</span> <span class="va">i</span> <span class="op">+</span> <span class="fl">1</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -634,11 +635,11 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

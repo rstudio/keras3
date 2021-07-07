@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="unet_linux_files/header-attrs-2.3/header-attrs.js"></script><script src="unet_linux_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="unet_linux_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>unet_linux</h1>
@@ -192,7 +192,8 @@
 <li><p>Download the train.zip and train_masks.zip files from: <a href="https://www.kaggle.com/c/carvana-image-masking-challenge/data" class="uri">https://www.kaggle.com/c/carvana-image-masking-challenge/data</a></p></li>
 <li><p>Create an “input” directory and extract the zip files into it (after this there should be “train” and “train_masks” subdirectories within the “input” directory).</p></li>
 </ol>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co">#` This code runs only on Linux because of specific parallel backend. </span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#` This code runs only on Linux because of specific parallel backend. </span>
 <span class="co">#` You can find Windows version here: https://keras.rstudio.com/articles/examples/unet.html</span>
 <span class="co">#` unet architecture is based on original Python code </span>
 <span class="co">#` from https://github.com/petrosgk/Kaggle-Carvana-Image-Masking-Challenge. </span>
@@ -201,404 +202,404 @@
 <span class="co">#` parallel + doParallel + foreach allows to speed up the code.</span>
 <span class="co">#` You can download the data from https://www.kaggle.com/c/carvana-image-masking-challenge</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magick</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">abind</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">reticulate</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">doMC</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">foreach</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">magick</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">abind</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/reticulate">reticulate</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">doMC</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RevolutionAnalytics/foreach">foreach</a></span><span class="op">)</span>
 
 
 <span class="co"># Parameters -----------------------------------------------------</span>
 
-<span class="no">input_size</span> <span class="kw">&lt;-</span> <span class="fl">128</span>
+<span class="va">input_size</span> <span class="op">&lt;-</span> <span class="fl">128</span>
 
-<span class="no">epochs</span> <span class="kw">&lt;-</span> <span class="fl">30</span>
-<span class="no">batch_size</span> <span class="kw">&lt;-</span> <span class="fl">16</span>
+<span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">30</span>
+<span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">16</span>
 
-<span class="no">orig_width</span> <span class="kw">&lt;-</span> <span class="fl">1918</span>
-<span class="no">orig_height</span> <span class="kw">&lt;-</span> <span class="fl">1280</span>
+<span class="va">orig_width</span> <span class="op">&lt;-</span> <span class="fl">1918</span>
+<span class="va">orig_height</span> <span class="op">&lt;-</span> <span class="fl">1280</span>
 
-<span class="no">threshold</span> <span class="kw">&lt;-</span> <span class="fl">0.5</span>
+<span class="va">threshold</span> <span class="op">&lt;-</span> <span class="fl">0.5</span>
 
-<span class="no">train_samples</span> <span class="kw">&lt;-</span> <span class="fl">5088</span>
-<span class="no">train_index</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="no">train_samples</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">train_samples</span> * <span class="fl">0.8</span>)) <span class="co"># 80%</span>
-<span class="no">val_index</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>:<span class="no">train_samples</span>)[-<span class="no">train_index</span>]
+<span class="va">train_samples</span> <span class="op">&lt;-</span> <span class="fl">5088</span>
+<span class="va">train_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">train_samples</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">train_samples</span> <span class="op">*</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span> <span class="co"># 80%</span>
+<span class="va">val_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">train_samples</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="va">train_index</span><span class="op">]</span>
 
-<span class="no">images_dir</span> <span class="kw">&lt;-</span> <span class="st">"./input/train/"</span>
-<span class="no">masks_dir</span> <span class="kw">&lt;-</span> <span class="st">"./input/train_masks/"</span>
+<span class="va">images_dir</span> <span class="op">&lt;-</span> <span class="st">"./input/train/"</span> 
+<span class="va">masks_dir</span> <span class="op">&lt;-</span> <span class="st">"./input/train_masks/"</span>
 
 
 <span class="co"># Loss function -----------------------------------------------------</span>
 
-<span class="no">K</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/backend.html">backend</a></span>()
+<span class="va">K</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/backend.html">backend</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">dice_coef</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">y_true</span>, <span class="no">y_pred</span>, <span class="no">smooth</span> <span class="kw">=</span> <span class="fl">1.0</span>) {
-    <span class="no">y_true_f</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_flatten.html">k_flatten</a></span>(<span class="no">y_true</span>)
-    <span class="no">y_pred_f</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_flatten.html">k_flatten</a></span>(<span class="no">y_pred</span>)
-    <span class="no">intersection</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="no">y_true_f</span> * <span class="no">y_pred_f</span>)
-    <span class="no">result</span> <span class="kw">&lt;-</span> (<span class="fl">2</span> * <span class="no">intersection</span> + <span class="no">smooth</span>) /
-        (<span class="fu"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="no">y_true_f</span>) + <span class="fu"><a href="../../reference/k_sum.html">k_sum</a></span>(<span class="no">y_pred_f</span>) + <span class="no">smooth</span>)
-    <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">result</span>)
-}
+<span class="va">dice_coef</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span>, <span class="va">smooth</span> <span class="op">=</span> <span class="fl">1.0</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">y_true_f</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_flatten.html">k_flatten</a></span><span class="op">(</span><span class="va">y_true</span><span class="op">)</span>
+    <span class="va">y_pred_f</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_flatten.html">k_flatten</a></span><span class="op">(</span><span class="va">y_pred</span><span class="op">)</span>
+    <span class="va">intersection</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_sum.html">k_sum</a></span><span class="op">(</span><span class="va">y_true_f</span> <span class="op">*</span> <span class="va">y_pred_f</span><span class="op">)</span>
+    <span class="va">result</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">intersection</span> <span class="op">+</span> <span class="va">smooth</span><span class="op">)</span> <span class="op">/</span> 
+        <span class="op">(</span><span class="fu"><a href="../../reference/k_sum.html">k_sum</a></span><span class="op">(</span><span class="va">y_true_f</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../../reference/k_sum.html">k_sum</a></span><span class="op">(</span><span class="va">y_pred_f</span><span class="op">)</span> <span class="op">+</span> <span class="va">smooth</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="no">bce_dice_loss</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">y_true</span>, <span class="no">y_pred</span>) {
-    <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span>(<span class="no">y_true</span>, <span class="no">y_pred</span>) +
-        (<span class="fl">1</span> - <span class="fu">dice_coef</span>(<span class="no">y_true</span>, <span class="no">y_pred</span>))
-    <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">result</span>)
-}
+<span class="va">bce_dice_loss</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span><span class="op">)</span> <span class="op">+</span>
+        <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu">dice_coef</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span><span class="op">)</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
+<span class="op">}</span>
 
 
 <span class="co"># U-net 128 -----------------------------------------------------</span>
 
-<span class="no">get_unet_128</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">input_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">128</span>, <span class="fl">128</span>, <span class="fl">3</span>),
-                         <span class="no">num_classes</span> <span class="kw">=</span> <span class="fl">1</span>) {
-
-    <span class="no">inputs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="no">input_shape</span>)
+<span class="va">get_unet_128</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">128</span>, <span class="fl">128</span>, <span class="fl">3</span><span class="op">)</span>,
+                         <span class="va">num_classes</span> <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span>
+    
+    <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="va">input_shape</span><span class="op">)</span>
     <span class="co"># 128</span>
-
-    <span class="no">down1</span> <span class="kw">&lt;-</span> <span class="no">inputs</span> <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>)
-    <span class="no">down1_pool</span> <span class="kw">&lt;-</span> <span class="no">down1</span> <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="kw">pool_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>), <span class="kw">strides</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>))
+    
+    <span class="va">down1</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> 
+    <span class="va">down1_pool</span> <span class="op">&lt;-</span> <span class="va">down1</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, strides <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
     <span class="co"># 64</span>
-
-    <span class="no">down2</span> <span class="kw">&lt;-</span> <span class="no">down1_pool</span> <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">128</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">128</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>)
-    <span class="no">down2_pool</span> <span class="kw">&lt;-</span> <span class="no">down2</span> <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="kw">pool_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>), <span class="kw">strides</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>))
+    
+    <span class="va">down2</span> <span class="op">&lt;-</span> <span class="va">down1_pool</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">128</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">128</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> 
+    <span class="va">down2_pool</span> <span class="op">&lt;-</span> <span class="va">down2</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, strides <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
     <span class="co"># 32</span>
-
-    <span class="no">down3</span> <span class="kw">&lt;-</span> <span class="no">down2_pool</span> <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">256</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">256</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>)
-    <span class="no">down3_pool</span> <span class="kw">&lt;-</span> <span class="no">down3</span> <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="kw">pool_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>), <span class="kw">strides</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>))
+    
+    <span class="va">down3</span> <span class="op">&lt;-</span> <span class="va">down2_pool</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">256</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">256</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> 
+    <span class="va">down3_pool</span> <span class="op">&lt;-</span> <span class="va">down3</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, strides <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
     <span class="co"># 16</span>
-
-    <span class="no">down4</span> <span class="kw">&lt;-</span> <span class="no">down3_pool</span> <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">512</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">512</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>)
-    <span class="no">down4_pool</span> <span class="kw">&lt;-</span> <span class="no">down4</span> <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="kw">pool_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>), <span class="kw">strides</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>))
+    
+    <span class="va">down4</span> <span class="op">&lt;-</span> <span class="va">down3_pool</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">512</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">512</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> 
+    <span class="va">down4_pool</span> <span class="op">&lt;-</span> <span class="va">down4</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, strides <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
     <span class="co"># 8</span>
-
-    <span class="no">center</span> <span class="kw">&lt;-</span> <span class="no">down4_pool</span> <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">1024</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">1024</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>)
+    
+    <span class="va">center</span> <span class="op">&lt;-</span> <span class="va">down4_pool</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">1024</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">1024</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> 
     <span class="co"># center</span>
-
-    <span class="no">up4</span> <span class="kw">&lt;-</span> <span class="no">center</span> <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>)) <span class="kw">%&gt;%</span>
-        {<span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">inputs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">down4</span>, <span class="no">.</span>), <span class="kw">axis</span> <span class="kw">=</span> <span class="fl">3</span>)} <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">512</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">512</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">512</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>)
+    
+    <span class="va">up4</span> <span class="op">&lt;-</span> <span class="va">center</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="op">{</span><span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">down4</span>, <span class="va">.</span><span class="op">)</span>, axis <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">}</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">512</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">512</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">512</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span>
     <span class="co"># 16</span>
-
-    <span class="no">up3</span> <span class="kw">&lt;-</span> <span class="no">up4</span> <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>)) <span class="kw">%&gt;%</span>
-        {<span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">inputs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">down3</span>, <span class="no">.</span>), <span class="kw">axis</span> <span class="kw">=</span> <span class="fl">3</span>)} <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">256</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">256</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">256</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>)
+    
+    <span class="va">up3</span> <span class="op">&lt;-</span> <span class="va">up4</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="op">{</span><span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">down3</span>, <span class="va">.</span><span class="op">)</span>, axis <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">}</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">256</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">256</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">256</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span>
     <span class="co"># 32</span>
-
-    <span class="no">up2</span> <span class="kw">&lt;-</span> <span class="no">up3</span> <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>)) <span class="kw">%&gt;%</span>
-        {<span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">inputs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">down2</span>, <span class="no">.</span>), <span class="kw">axis</span> <span class="kw">=</span> <span class="fl">3</span>)} <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">128</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">128</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">128</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>)
+    
+    <span class="va">up2</span> <span class="op">&lt;-</span> <span class="va">up3</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="op">{</span><span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">down2</span>, <span class="va">.</span><span class="op">)</span>, axis <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">}</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">128</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">128</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">128</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span>
     <span class="co"># 64</span>
-
-    <span class="no">up1</span> <span class="kw">&lt;-</span> <span class="no">up2</span> <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>)) <span class="kw">%&gt;%</span>
-        {<span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="kw">inputs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">down1</span>, <span class="no">.</span>), <span class="kw">axis</span> <span class="kw">=</span> <span class="fl">3</span>)} <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>), <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>() <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"relu"</span>)
+    
+    <span class="va">up1</span> <span class="op">&lt;-</span> <span class="va">up2</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="op">{</span><span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">down1</span>, <span class="va">.</span><span class="op">)</span>, axis <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">}</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span>
     <span class="co"># 128</span>
+    
+    <span class="va">classify</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="va">up1</span>,
+                              filters <span class="op">=</span> <span class="va">num_classes</span>, 
+                              kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,
+                              activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span>
+    
+    
+    <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span>
+        inputs <span class="op">=</span> <span class="va">inputs</span>,
+        outputs <span class="op">=</span> <span class="va">classify</span>
+    <span class="op">)</span>
+    
+    <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+        optimizer <span class="op">=</span> <span class="fu"><a href="../../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.0001</span><span class="op">)</span>,
+        loss <span class="op">=</span> <span class="va">bce_dice_loss</span>,
+        metrics <span class="op">=</span> <span class="fu"><a href="../../reference/metric_binary_accuracy.html">custom_metric</a></span><span class="op">(</span><span class="st">"dice_coef"</span>, <span class="va">dice_coef</span><span class="op">)</span>
+    <span class="op">)</span>
+    
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
+<span class="op">}</span>
 
-    <span class="no">classify</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="no">up1</span>,
-                              <span class="kw">filters</span> <span class="kw">=</span> <span class="no">num_classes</span>,
-                              <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>),
-                              <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"sigmoid"</span>)
-
-
-    <span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span>(
-        <span class="kw">inputs</span> <span class="kw">=</span> <span class="no">inputs</span>,
-        <span class="kw">outputs</span> <span class="kw">=</span> <span class="no">classify</span>
-    )
-
-    <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-        <span class="kw">optimizer</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="kw">lr</span> <span class="kw">=</span> <span class="fl">0.0001</span>),
-        <span class="kw">loss</span> <span class="kw">=</span> <span class="no">bce_dice_loss</span>,
-        <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/metric_binary_accuracy.html">custom_metric</a></span>(<span class="st">"dice_coef"</span>, <span class="no">dice_coef</span>)
-    )
-
-    <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">model</span>)
-}
-
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu">get_unet_128</span>()
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_unet_128</span><span class="op">(</span><span class="op">)</span>
 
 
 <span class="co"># Read and augmentation functions -----------------------------------------------------</span>
 
-<span class="no">imagesRead</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">image_file</span>,
-                       <span class="no">mask_file</span>,
-                       <span class="no">target_width</span> <span class="kw">=</span> <span class="fl">128</span>,
-                       <span class="no">target_height</span> <span class="kw">=</span> <span class="fl">128</span>) {
-    <span class="no">img</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html">image_read</a></span>(<span class="no">image_file</span>)
-    <span class="no">img</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/transform.html">image_scale</a></span>(<span class="no">img</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">target_width</span>, <span class="st">"x"</span>, <span class="no">target_height</span>, <span class="st">"!"</span>))
+<span class="va">imagesRead</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">image_file</span>,
+                       <span class="va">mask_file</span>,
+                       <span class="va">target_width</span> <span class="op">=</span> <span class="fl">128</span>, 
+                       <span class="va">target_height</span> <span class="op">=</span> <span class="fl">128</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu">image_read</span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span>
+    <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu">image_scale</span><span class="op">(</span><span class="va">img</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">target_width</span>, <span class="st">"x"</span>, <span class="va">target_height</span>, <span class="st">"!"</span><span class="op">)</span><span class="op">)</span>
+    
+    <span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu">image_read</span><span class="op">(</span><span class="va">mask_file</span><span class="op">)</span>
+    <span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu">image_scale</span><span class="op">(</span><span class="va">mask</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">target_width</span>, <span class="st">"x"</span>, <span class="va">target_height</span>, <span class="st">"!"</span><span class="op">)</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>img <span class="op">=</span> <span class="va">img</span>, mask <span class="op">=</span> <span class="va">mask</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>
 
-    <span class="no">mask</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html">image_read</a></span>(<span class="no">mask_file</span>)
-    <span class="no">mask</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/transform.html">image_scale</a></span>(<span class="no">mask</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">target_width</span>, <span class="st">"x"</span>, <span class="no">target_height</span>, <span class="st">"!"</span>))
-    <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">img</span> <span class="kw">=</span> <span class="no">img</span>, <span class="kw">mask</span> <span class="kw">=</span> <span class="no">mask</span>))
-}
+<span class="va">randomBSH</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">img</span>,
+                      <span class="va">u</span> <span class="op">=</span> <span class="fl">0</span>,
+                      <span class="va">brightness_shift_lim</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">90</span>, <span class="fl">110</span><span class="op">)</span>, <span class="co"># percentage</span>
+                      <span class="va">saturation_shift_lim</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">95</span>, <span class="fl">105</span><span class="op">)</span>, <span class="co"># of current value</span>
+                      <span class="va">hue_shift_lim</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">80</span>, <span class="fl">120</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    
+    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">&lt;</span> <span class="va">u</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">img</span><span class="op">)</span>
+    
+    <span class="va">brightness_shift</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1</span>, 
+                              <span class="va">brightness_shift_lim</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, 
+                              <span class="va">brightness_shift_lim</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>
+    <span class="va">saturation_shift</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1</span>, 
+                              <span class="va">saturation_shift_lim</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, 
+                              <span class="va">saturation_shift_lim</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>
+    <span class="va">hue_shift</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1</span>, 
+                       <span class="va">hue_shift_lim</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, 
+                       <span class="va">hue_shift_lim</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>
+    
+    <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu">image_modulate</span><span class="op">(</span><span class="va">img</span>, 
+                          brightness <span class="op">=</span> <span class="va">brightness_shift</span>, 
+                          saturation <span class="op">=</span>  <span class="va">saturation_shift</span>, 
+                          hue <span class="op">=</span> <span class="va">hue_shift</span><span class="op">)</span>
+    <span class="va">img</span>
+<span class="op">}</span>
 
-<span class="no">randomBSH</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">img</span>,
-                      <span class="no">u</span> <span class="kw">=</span> <span class="fl">0</span>,
-                      <span class="no">brightness_shift_lim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">90</span>, <span class="fl">110</span>), <span class="co"># percentage</span>
-                      <span class="no">saturation_shift_lim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">95</span>, <span class="fl">105</span>), <span class="co"># of current value</span>
-                      <span class="no">hue_shift_lim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">80</span>, <span class="fl">120</span>)) {
+<span class="va">img2arr</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">image</span>, 
+                    <span class="va">target_width</span> <span class="op">=</span> <span class="fl">128</span>,
+                    <span class="va">target_height</span> <span class="op">=</span> <span class="fl">128</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/aperm.html">aperm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">image</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">[</span>, , <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="co"># transpose</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">result</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">target_width</span>, <span class="va">target_height</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>
 
-    <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1</span>) <span class="kw">&lt;</span> <span class="no">u</span>) <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">img</span>)
-
-    <span class="no">brightness_shift</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1</span>,
-                              <span class="no">brightness_shift_lim</span>[<span class="fl">1</span>],
-                              <span class="no">brightness_shift_lim</span>[<span class="fl">2</span>])
-    <span class="no">saturation_shift</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1</span>,
-                              <span class="no">saturation_shift_lim</span>[<span class="fl">1</span>],
-                              <span class="no">saturation_shift_lim</span>[<span class="fl">2</span>])
-    <span class="no">hue_shift</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1</span>,
-                       <span class="no">hue_shift_lim</span>[<span class="fl">1</span>],
-                       <span class="no">hue_shift_lim</span>[<span class="fl">2</span>])
-
-    <span class="no">img</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/color.html">image_modulate</a></span>(<span class="no">img</span>,
-                          <span class="kw">brightness</span> <span class="kw">=</span> <span class="no">brightness_shift</span>,
-                          <span class="kw">saturation</span> <span class="kw">=</span>  <span class="no">saturation_shift</span>,
-                          <span class="kw">hue</span> <span class="kw">=</span> <span class="no">hue_shift</span>)
-    <span class="no">img</span>
-}
-
-<span class="no">img2arr</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">image</span>,
-                    <span class="no">target_width</span> <span class="kw">=</span> <span class="fl">128</span>,
-                    <span class="no">target_height</span> <span class="kw">=</span> <span class="fl">128</span>) {
-    <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/aperm.html">aperm</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="no">image</span><span class="kw">[[</span><span class="fl">1</span>]])[, , <span class="fl">1</span>:<span class="fl">3</span>], <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span>)) <span class="co"># transpose</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span>(<span class="no">result</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="no">target_width</span>, <span class="no">target_height</span>, <span class="fl">3</span>))
-}
-
-<span class="no">mask2arr</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">mask</span>,
-                     <span class="no">target_width</span> <span class="kw">=</span> <span class="fl">128</span>,
-                     <span class="no">target_height</span> <span class="kw">=</span> <span class="fl">128</span>) {
-    <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="no">mask</span><span class="kw">[[</span><span class="fl">1</span>]])[, , <span class="fl">1</span>]) <span class="co"># transpose</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span>(<span class="no">result</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="no">target_width</span>, <span class="no">target_height</span>, <span class="fl">1</span>))
-}
+<span class="va">mask2arr</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mask</span>,
+                     <span class="va">target_width</span> <span class="op">=</span> <span class="fl">128</span>,
+                     <span class="va">target_height</span> <span class="op">=</span> <span class="fl">128</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">mask</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">[</span>, , <span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="co"># transpose</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">result</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">target_width</span>, <span class="va">target_height</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>
 
 
 <span class="co"># Iterators with parallel processing -----------------------------------------------------</span>
 
-<span class="fu">registerDoMC</span>(<span class="fl">4</span>)
+<span class="fu">registerDoMC</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>
 
-<span class="no">train_generator</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">images_dir</span>,
-                            <span class="no">samples_index</span>,
-                            <span class="no">masks_dir</span>,
-                            <span class="no">batch_size</span>) {
-    <span class="no">images_iter</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="no">images_dir</span>,
-                              <span class="kw">pattern</span> <span class="kw">=</span> <span class="st">".jpg"</span>,
-                              <span class="kw">full.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)[<span class="no">samples_index</span>] <span class="co"># for current epoch</span>
-    <span class="no">images_all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="no">images_dir</span>,
-                             <span class="kw">pattern</span> <span class="kw">=</span> <span class="st">".jpg"</span>,
-                             <span class="kw">full.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)[<span class="no">samples_index</span>]  <span class="co"># for next epoch</span>
-    <span class="no">masks_iter</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="no">masks_dir</span>,
-                             <span class="kw">pattern</span> <span class="kw">=</span> <span class="st">".gif"</span>,
-                             <span class="kw">full.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)[<span class="no">samples_index</span>] <span class="co"># for current epoch</span>
-    <span class="no">masks_all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="no">masks_dir</span>,
-                            <span class="kw">pattern</span> <span class="kw">=</span> <span class="st">".gif"</span>,
-                            <span class="kw">full.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)[<span class="no">samples_index</span>] <span class="co"># for next epoch</span>
-
-    <span class="kw">function</span>() {
-
+<span class="va">train_generator</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">images_dir</span>, 
+                            <span class="va">samples_index</span>,
+                            <span class="va">masks_dir</span>, 
+                            <span class="va">batch_size</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">images_iter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">images_dir</span>, 
+                              pattern <span class="op">=</span> <span class="st">".jpg"</span>, 
+                              full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="va">samples_index</span><span class="op">]</span> <span class="co"># for current epoch</span>
+    <span class="va">images_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">images_dir</span>, 
+                             pattern <span class="op">=</span> <span class="st">".jpg"</span>,
+                             full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="va">samples_index</span><span class="op">]</span>  <span class="co"># for next epoch</span>
+    <span class="va">masks_iter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">masks_dir</span>, 
+                             pattern <span class="op">=</span> <span class="st">".gif"</span>,
+                             full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="va">samples_index</span><span class="op">]</span> <span class="co"># for current epoch</span>
+    <span class="va">masks_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">masks_dir</span>, 
+                            pattern <span class="op">=</span> <span class="st">".gif"</span>,
+                            full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="va">samples_index</span><span class="op">]</span> <span class="co"># for next epoch</span>
+    
+    <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+        
         <span class="co"># start new epoch</span>
-        <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">images_iter</span>) <span class="kw">&lt;</span> <span class="no">batch_size</span>) {
-            <span class="no">images_iter</span> <span class="kw">&lt;&lt;-</span> <span class="no">images_all</span>
-            <span class="no">masks_iter</span> <span class="kw">&lt;&lt;-</span> <span class="no">masks_all</span>
-        }
-
-        <span class="no">batch_ind</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">images_iter</span>), <span class="no">batch_size</span>)
-
-        <span class="no">batch_images_list</span> <span class="kw">&lt;-</span> <span class="no">images_iter</span>[<span class="no">batch_ind</span>]
-        <span class="no">images_iter</span> <span class="kw">&lt;&lt;-</span> <span class="no">images_iter</span>[-<span class="no">batch_ind</span>]
-        <span class="no">batch_masks_list</span> <span class="kw">&lt;-</span> <span class="no">masks_iter</span>[<span class="no">batch_ind</span>]
-        <span class="no">masks_iter</span> <span class="kw">&lt;&lt;-</span> <span class="no">masks_iter</span>[-<span class="no">batch_ind</span>]
-
-
-        <span class="no">x_y_batch</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span>(<span class="kw">i</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="no">batch_size</span>) <span class="kw">%dopar%</span> {
-            <span class="no">x_y_imgs</span> <span class="kw">&lt;-</span> <span class="fu">imagesRead</span>(<span class="kw">image_file</span> <span class="kw">=</span> <span class="no">batch_images_list</span>[<span class="no">i</span>],
-                                   <span class="kw">mask_file</span> <span class="kw">=</span> <span class="no">batch_masks_list</span>[<span class="no">i</span>])
+        <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">images_iter</span><span class="op">)</span> <span class="op">&lt;</span> <span class="va">batch_size</span><span class="op">)</span> <span class="op">{</span>
+            <span class="va">images_iter</span> <span class="op">&lt;&lt;-</span> <span class="va">images_all</span>
+            <span class="va">masks_iter</span> <span class="op">&lt;&lt;-</span> <span class="va">masks_all</span>
+        <span class="op">}</span>
+        
+        <span class="va">batch_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">images_iter</span><span class="op">)</span>, <span class="va">batch_size</span><span class="op">)</span>
+        
+        <span class="va">batch_images_list</span> <span class="op">&lt;-</span> <span class="va">images_iter</span><span class="op">[</span><span class="va">batch_ind</span><span class="op">]</span>
+        <span class="va">images_iter</span> <span class="op">&lt;&lt;-</span> <span class="va">images_iter</span><span class="op">[</span><span class="op">-</span><span class="va">batch_ind</span><span class="op">]</span>
+        <span class="va">batch_masks_list</span> <span class="op">&lt;-</span> <span class="va">masks_iter</span><span class="op">[</span><span class="va">batch_ind</span><span class="op">]</span>
+        <span class="va">masks_iter</span> <span class="op">&lt;&lt;-</span> <span class="va">masks_iter</span><span class="op">[</span><span class="op">-</span><span class="va">batch_ind</span><span class="op">]</span>
+        
+        
+        <span class="va">x_y_batch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span><span class="op">(</span>i <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">batch_size</span><span class="op">)</span> <span class="op">%dopar%</span> <span class="op">{</span>
+            <span class="va">x_y_imgs</span> <span class="op">&lt;-</span> <span class="fu">imagesRead</span><span class="op">(</span>image_file <span class="op">=</span> <span class="va">batch_images_list</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+                                   mask_file <span class="op">=</span> <span class="va">batch_masks_list</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>
             <span class="co"># augmentation</span>
-            <span class="no">x_y_imgs</span>$<span class="no">img</span> <span class="kw">&lt;-</span> <span class="fu">randomBSH</span>(<span class="no">x_y_imgs</span>$<span class="no">img</span>)
+            <span class="va">x_y_imgs</span><span class="op">$</span><span class="va">img</span> <span class="op">&lt;-</span> <span class="fu">randomBSH</span><span class="op">(</span><span class="va">x_y_imgs</span><span class="op">$</span><span class="va">img</span><span class="op">)</span>
             <span class="co"># return as arrays</span>
-            <span class="no">x_y_arr</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu">img2arr</span>(<span class="no">x_y_imgs</span>$<span class="no">img</span>),
-                            <span class="kw">y</span> <span class="kw">=</span> <span class="fu">mask2arr</span>(<span class="no">x_y_imgs</span>$<span class="no">mask</span>))
-        }
+            <span class="va">x_y_arr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu">img2arr</span><span class="op">(</span><span class="va">x_y_imgs</span><span class="op">$</span><span class="va">img</span><span class="op">)</span>,
+                            y <span class="op">=</span> <span class="fu">mask2arr</span><span class="op">(</span><span class="va">x_y_imgs</span><span class="op">$</span><span class="va">mask</span><span class="op">)</span><span class="op">)</span>
+        <span class="op">}</span>
+        
+        <span class="va">x_y_batch</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span><span class="op">(</span><span class="va">x_y_batch</span><span class="op">)</span>
+        
+        <span class="va">x_batch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">abind</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x_y_batch</span><span class="op">$</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>along <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+        
+        <span class="va">y_batch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">abind</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x_y_batch</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>along <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+        
+        <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="../../reference/keras_array.html">keras_array</a></span><span class="op">(</span><span class="va">x_batch</span><span class="op">)</span>, <span class="fu"><a href="../../reference/keras_array.html">keras_array</a></span><span class="op">(</span><span class="va">y_batch</span><span class="op">)</span><span class="op">)</span>
+        <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
+    <span class="op">}</span>
+<span class="op">}</span>
 
-        <span class="no">x_y_batch</span> <span class="kw">&lt;-</span> <span class="kw pkg">purrr</span><span class="kw ns">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="no">x_y_batch</span>)
-
-        <span class="no">x_batch</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="no">abind</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">x_y_batch</span>$<span class="no">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">along</span> <span class="kw">=</span> <span class="fl">1</span>)))
-
-        <span class="no">y_batch</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="no">abind</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">x_y_batch</span>$<span class="no">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">along</span> <span class="kw">=</span> <span class="fl">1</span>)))
-
-        <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="../../reference/keras_array.html">keras_array</a></span>(<span class="no">x_batch</span>), <span class="fu"><a href="../../reference/keras_array.html">keras_array</a></span>(<span class="no">y_batch</span>))
-        <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">result</span>)
-    }
-}
-
-<span class="no">val_generator</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">images_dir</span>,
-                          <span class="no">samples_index</span>,
-                          <span class="no">masks_dir</span>,
-                          <span class="no">batch_size</span>) {
-    <span class="no">images_iter</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="no">images_dir</span>,
-                              <span class="kw">pattern</span> <span class="kw">=</span> <span class="st">".jpg"</span>,
-                              <span class="kw">full.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)[<span class="no">samples_index</span>] <span class="co"># for current epoch</span>
-    <span class="no">images_all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="no">images_dir</span>,
-                             <span class="kw">pattern</span> <span class="kw">=</span> <span class="st">".jpg"</span>,
-                             <span class="kw">full.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)[<span class="no">samples_index</span>]  <span class="co"># for next epoch</span>
-    <span class="no">masks_iter</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="no">masks_dir</span>,
-                             <span class="kw">pattern</span> <span class="kw">=</span> <span class="st">".gif"</span>,
-                             <span class="kw">full.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)[<span class="no">samples_index</span>] <span class="co"># for current epoch</span>
-    <span class="no">masks_all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="no">masks_dir</span>,
-                            <span class="kw">pattern</span> <span class="kw">=</span> <span class="st">".gif"</span>,
-                            <span class="kw">full.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)[<span class="no">samples_index</span>] <span class="co"># for next epoch</span>
-
-    <span class="kw">function</span>() {
-
+<span class="va">val_generator</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">images_dir</span>, 
+                          <span class="va">samples_index</span>,
+                          <span class="va">masks_dir</span>, 
+                          <span class="va">batch_size</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">images_iter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">images_dir</span>, 
+                              pattern <span class="op">=</span> <span class="st">".jpg"</span>, 
+                              full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="va">samples_index</span><span class="op">]</span> <span class="co"># for current epoch</span>
+    <span class="va">images_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">images_dir</span>, 
+                             pattern <span class="op">=</span> <span class="st">".jpg"</span>,
+                             full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="va">samples_index</span><span class="op">]</span>  <span class="co"># for next epoch</span>
+    <span class="va">masks_iter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">masks_dir</span>, 
+                             pattern <span class="op">=</span> <span class="st">".gif"</span>,
+                             full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="va">samples_index</span><span class="op">]</span> <span class="co"># for current epoch</span>
+    <span class="va">masks_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">masks_dir</span>, 
+                            pattern <span class="op">=</span> <span class="st">".gif"</span>,
+                            full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="va">samples_index</span><span class="op">]</span> <span class="co"># for next epoch</span>
+    
+    <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+        
         <span class="co"># start new epoch</span>
-        <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">images_iter</span>) <span class="kw">&lt;</span> <span class="no">batch_size</span>) {
-            <span class="no">images_iter</span> <span class="kw">&lt;&lt;-</span> <span class="no">images_all</span>
-            <span class="no">masks_iter</span> <span class="kw">&lt;&lt;-</span> <span class="no">masks_all</span>
-        }
-
-        <span class="no">batch_ind</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">images_iter</span>), <span class="no">batch_size</span>)
-
-        <span class="no">batch_images_list</span> <span class="kw">&lt;-</span> <span class="no">images_iter</span>[<span class="no">batch_ind</span>]
-        <span class="no">images_iter</span> <span class="kw">&lt;&lt;-</span> <span class="no">images_iter</span>[-<span class="no">batch_ind</span>]
-        <span class="no">batch_masks_list</span> <span class="kw">&lt;-</span> <span class="no">masks_iter</span>[<span class="no">batch_ind</span>]
-        <span class="no">masks_iter</span> <span class="kw">&lt;&lt;-</span> <span class="no">masks_iter</span>[-<span class="no">batch_ind</span>]
-
-
-        <span class="no">x_y_batch</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span>(<span class="kw">i</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="no">batch_size</span>) <span class="kw">%dopar%</span> {
-            <span class="no">x_y_imgs</span> <span class="kw">&lt;-</span> <span class="fu">imagesRead</span>(<span class="kw">image_file</span> <span class="kw">=</span> <span class="no">batch_images_list</span>[<span class="no">i</span>],
-                                   <span class="kw">mask_file</span> <span class="kw">=</span> <span class="no">batch_masks_list</span>[<span class="no">i</span>])
+        <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">images_iter</span><span class="op">)</span> <span class="op">&lt;</span> <span class="va">batch_size</span><span class="op">)</span> <span class="op">{</span>
+            <span class="va">images_iter</span> <span class="op">&lt;&lt;-</span> <span class="va">images_all</span>
+            <span class="va">masks_iter</span> <span class="op">&lt;&lt;-</span> <span class="va">masks_all</span>
+        <span class="op">}</span>
+        
+        <span class="va">batch_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">images_iter</span><span class="op">)</span>, <span class="va">batch_size</span><span class="op">)</span>
+        
+        <span class="va">batch_images_list</span> <span class="op">&lt;-</span> <span class="va">images_iter</span><span class="op">[</span><span class="va">batch_ind</span><span class="op">]</span>
+        <span class="va">images_iter</span> <span class="op">&lt;&lt;-</span> <span class="va">images_iter</span><span class="op">[</span><span class="op">-</span><span class="va">batch_ind</span><span class="op">]</span>
+        <span class="va">batch_masks_list</span> <span class="op">&lt;-</span> <span class="va">masks_iter</span><span class="op">[</span><span class="va">batch_ind</span><span class="op">]</span>
+        <span class="va">masks_iter</span> <span class="op">&lt;&lt;-</span> <span class="va">masks_iter</span><span class="op">[</span><span class="op">-</span><span class="va">batch_ind</span><span class="op">]</span>
+        
+        
+        <span class="va">x_y_batch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span><span class="op">(</span>i <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">batch_size</span><span class="op">)</span> <span class="op">%dopar%</span> <span class="op">{</span>
+            <span class="va">x_y_imgs</span> <span class="op">&lt;-</span> <span class="fu">imagesRead</span><span class="op">(</span>image_file <span class="op">=</span> <span class="va">batch_images_list</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+                                   mask_file <span class="op">=</span> <span class="va">batch_masks_list</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>
             <span class="co"># without augmentation</span>
-
+            
             <span class="co"># return as arrays</span>
-            <span class="no">x_y_arr</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu">img2arr</span>(<span class="no">x_y_imgs</span>$<span class="no">img</span>),
-                            <span class="kw">y</span> <span class="kw">=</span> <span class="fu">mask2arr</span>(<span class="no">x_y_imgs</span>$<span class="no">mask</span>))
-        }
+            <span class="va">x_y_arr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu">img2arr</span><span class="op">(</span><span class="va">x_y_imgs</span><span class="op">$</span><span class="va">img</span><span class="op">)</span>,
+                            y <span class="op">=</span> <span class="fu">mask2arr</span><span class="op">(</span><span class="va">x_y_imgs</span><span class="op">$</span><span class="va">mask</span><span class="op">)</span><span class="op">)</span>
+        <span class="op">}</span>
+        
+        <span class="va">x_y_batch</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span><span class="op">(</span><span class="va">x_y_batch</span><span class="op">)</span>
+        
+        <span class="va">x_batch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">abind</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x_y_batch</span><span class="op">$</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>along <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+        
+        <span class="va">y_batch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">abind</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x_y_batch</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>along <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+        
+        <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="../../reference/keras_array.html">keras_array</a></span><span class="op">(</span><span class="va">x_batch</span><span class="op">)</span>, <span class="fu"><a href="../../reference/keras_array.html">keras_array</a></span><span class="op">(</span><span class="va">y_batch</span><span class="op">)</span><span class="op">)</span>
+        <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
+    <span class="op">}</span>
+<span class="op">}</span>
 
-        <span class="no">x_y_batch</span> <span class="kw">&lt;-</span> <span class="kw pkg">purrr</span><span class="kw ns">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="no">x_y_batch</span>)
+<span class="va">train_iterator</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/py_iterator.html">py_iterator</a></span><span class="op">(</span><span class="fu">train_generator</span><span class="op">(</span>images_dir <span class="op">=</span> <span class="va">images_dir</span>,
+                                              masks_dir <span class="op">=</span> <span class="va">masks_dir</span>,
+                                              samples_index <span class="op">=</span> <span class="va">train_index</span>,
+                                              batch_size <span class="op">=</span> <span class="va">batch_size</span><span class="op">)</span><span class="op">)</span>
 
-        <span class="no">x_batch</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="no">abind</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">x_y_batch</span>$<span class="no">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">along</span> <span class="kw">=</span> <span class="fl">1</span>)))
-
-        <span class="no">y_batch</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="no">abind</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">x_y_batch</span>$<span class="no">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">along</span> <span class="kw">=</span> <span class="fl">1</span>)))
-
-        <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="../../reference/keras_array.html">keras_array</a></span>(<span class="no">x_batch</span>), <span class="fu"><a href="../../reference/keras_array.html">keras_array</a></span>(<span class="no">y_batch</span>))
-        <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">result</span>)
-    }
-}
-
-<span class="no">train_iterator</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/py_iterator.html">py_iterator</a></span>(<span class="fu">train_generator</span>(<span class="kw">images_dir</span> <span class="kw">=</span> <span class="no">images_dir</span>,
-                                              <span class="kw">masks_dir</span> <span class="kw">=</span> <span class="no">masks_dir</span>,
-                                              <span class="kw">samples_index</span> <span class="kw">=</span> <span class="no">train_index</span>,
-                                              <span class="kw">batch_size</span> <span class="kw">=</span> <span class="no">batch_size</span>))
-
-<span class="no">val_iterator</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/py_iterator.html">py_iterator</a></span>(<span class="fu">val_generator</span>(<span class="kw">images_dir</span> <span class="kw">=</span> <span class="no">images_dir</span>,
-                                          <span class="kw">masks_dir</span> <span class="kw">=</span> <span class="no">masks_dir</span>,
-                                          <span class="kw">samples_index</span> <span class="kw">=</span> <span class="no">val_index</span>,
-                                          <span class="kw">batch_size</span> <span class="kw">=</span> <span class="no">batch_size</span>))
+<span class="va">val_iterator</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/py_iterator.html">py_iterator</a></span><span class="op">(</span><span class="fu">val_generator</span><span class="op">(</span>images_dir <span class="op">=</span> <span class="va">images_dir</span>,
+                                          masks_dir <span class="op">=</span> <span class="va">masks_dir</span>,
+                                          samples_index <span class="op">=</span> <span class="va">val_index</span>,
+                                          batch_size <span class="op">=</span> <span class="va">batch_size</span><span class="op">)</span><span class="op">)</span>
 
 
 <span class="co"># Training -----------------------------------------------------</span>
 
-<span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tensorboard.html">tensorboard</a></span>(<span class="st">"logs_r"</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tensorboard.html">tensorboard</a></span><span class="op">(</span><span class="st">"logs_r"</span><span class="op">)</span>
 
-<span class="no">callbacks_list</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-    <span class="fu"><a href="../../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="st">"logs_r"</span>),
-    <span class="fu"><a href="../../reference/callback_early_stopping.html">callback_early_stopping</a></span>(<span class="kw">monitor</span> <span class="kw">=</span> <span class="st">"val_python_function"</span>,
-                            <span class="kw">min_delta</span> <span class="kw">=</span> <span class="fl">1e-4</span>,
-                            <span class="kw">patience</span> <span class="kw">=</span> <span class="fl">8</span>,
-                            <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">1</span>,
-                            <span class="kw">mode</span> <span class="kw">=</span> <span class="st">"max"</span>),
-    <span class="fu"><a href="../../reference/callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau</a></span>(<span class="kw">monitor</span> <span class="kw">=</span> <span class="st">"val_python_function"</span>,
-                                  <span class="kw">factor</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-                                  <span class="kw">patience</span> <span class="kw">=</span> <span class="fl">4</span>,
-                                  <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">1</span>,
-                                  <span class="kw">epsilon</span> <span class="kw">=</span> <span class="fl">1e-4</span>,
-                                  <span class="kw">mode</span> <span class="kw">=</span> <span class="st">"max"</span>),
-    <span class="fu"><a href="../../reference/callback_model_checkpoint.html">callback_model_checkpoint</a></span>(<span class="kw">filepath</span> <span class="kw">=</span> <span class="st">"weights_r/unet128_{epoch:02d}.h5"</span>,
-                              <span class="kw">monitor</span> <span class="kw">=</span> <span class="st">"val_python_function"</span>,
-                              <span class="kw">save_best_only</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                              <span class="kw">save_weights_only</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                              <span class="kw">mode</span> <span class="kw">=</span> <span class="st">"max"</span> )
-)
+<span class="va">callbacks_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+    <span class="fu"><a href="../../reference/callback_tensorboard.html">callback_tensorboard</a></span><span class="op">(</span><span class="st">"logs_r"</span><span class="op">)</span>,
+    <span class="fu"><a href="../../reference/callback_early_stopping.html">callback_early_stopping</a></span><span class="op">(</span>monitor <span class="op">=</span> <span class="st">"val_python_function"</span>,
+                            min_delta <span class="op">=</span> <span class="fl">1e-4</span>,
+                            patience <span class="op">=</span> <span class="fl">8</span>,
+                            verbose <span class="op">=</span> <span class="fl">1</span>,
+                            mode <span class="op">=</span> <span class="st">"max"</span><span class="op">)</span>,
+    <span class="fu"><a href="../../reference/callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau</a></span><span class="op">(</span>monitor <span class="op">=</span> <span class="st">"val_python_function"</span>,
+                                  factor <span class="op">=</span> <span class="fl">0.1</span>,
+                                  patience <span class="op">=</span> <span class="fl">4</span>,
+                                  verbose <span class="op">=</span> <span class="fl">1</span>,
+                                  epsilon <span class="op">=</span> <span class="fl">1e-4</span>,
+                                  mode <span class="op">=</span> <span class="st">"max"</span><span class="op">)</span>,
+    <span class="fu"><a href="../../reference/callback_model_checkpoint.html">callback_model_checkpoint</a></span><span class="op">(</span>filepath <span class="op">=</span> <span class="st">"weights_r/unet128_{epoch:02d}.h5"</span>,
+                              monitor <span class="op">=</span> <span class="st">"val_python_function"</span>,
+                              save_best_only <span class="op">=</span> <span class="cn">TRUE</span>,
+                              save_weights_only <span class="op">=</span> <span class="cn">TRUE</span>, 
+                              mode <span class="op">=</span> <span class="st">"max"</span> <span class="op">)</span>
+<span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/fit_generator.html">fit_generator</a></span>(
-    <span class="no">train_iterator</span>,
-    <span class="kw">steps_per_epoch</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">train_index</span>) / <span class="no">batch_size</span>),
-    <span class="kw">epochs</span> <span class="kw">=</span> <span class="no">epochs</span>,
-    <span class="kw">validation_data</span> <span class="kw">=</span> <span class="no">val_iterator</span>,
-    <span class="kw">validation_steps</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">val_index</span>) / <span class="no">batch_size</span>),
-    <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">1</span>,
-    <span class="kw">callbacks</span> <span class="kw">=</span> <span class="no">callbacks_list</span>
-)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/fit_generator.html">fit_generator</a></span><span class="op">(</span>
+    <span class="va">train_iterator</span>,
+    steps_per_epoch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">train_index</span><span class="op">)</span> <span class="op">/</span> <span class="va">batch_size</span><span class="op">)</span>, 
+    epochs <span class="op">=</span> <span class="va">epochs</span>, 
+    validation_data <span class="op">=</span> <span class="va">val_iterator</span>,
+    validation_steps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">val_index</span><span class="op">)</span> <span class="op">/</span> <span class="va">batch_size</span><span class="op">)</span>,
+    verbose <span class="op">=</span> <span class="fl">1</span>,
+    callbacks <span class="op">=</span> <span class="va">callbacks_list</span>
+<span class="op">)</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -610,11 +611,11 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

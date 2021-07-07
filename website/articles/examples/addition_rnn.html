@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="addition_rnn_files/header-attrs-2.3/header-attrs.js"></script><script src="addition_rnn_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="addition_rnn_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>addition_rnn</h1>
@@ -196,15 +196,16 @@ Output: “596”</p>
 <p>Three digits reversed: One layer LSTM (128 HN), 50k training examples = 99% train/test accuracy in 100 epochs</p>
 <p>Four digits reversed: One layer LSTM (128 HN), 400k training examples = 99% train/test accuracy in 20 epochs</p>
 <p>Five digits reversed: One layer LSTM (128 HN), 550k training examples = 99% train/test accuracy in 30 epochs</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">stringi</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stringi.gagolewski.com/">stringi</a></span><span class="op">)</span>
 
 <span class="co"># Function Definitions ----------------------------------------------------</span>
 
 <span class="co"># Creates the char table and sorts them.</span>
-<span class="no">learn_encoding</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">chars</span>){
-  <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span>(<span class="no">chars</span>)
-}
+<span class="va">learn_encoding</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">chars</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">chars</span><span class="op">)</span>
+<span class="op">}</span>
 
 <span class="co"># Encode from a character sequence to a one hot integer representation.</span>
 <span class="co"># &gt; encode("22+22", char_table)</span>
@@ -214,164 +215,164 @@ Output: “596”</p>
 <span class="co"># +    0    1    0    0    0    0    0    0    0     0     0     0</span>
 <span class="co"># 2    0    0    0    0    1    0    0    0    0     0     0     0</span>
 <span class="co"># 2    0    0    0    0    1    0    0    0    0     0     0     0</span>
-<span class="no">encode</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">char</span>, <span class="no">char_table</span>){
-  <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span>(<span class="no">char</span>, <span class="st">""</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span>() <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="kw">function</span>(<span class="no">x</span>){
-      <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="no">x</span> <span class="kw">==</span> <span class="no">char_table</span>)
-    }) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>()
-}
+<span class="va">encode</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">char</span>, <span class="va">char_table</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">char</span>, <span class="st">""</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="va">char_table</span><span class="op">)</span>
+    <span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span>
 
 <span class="co"># Decode the one hot representation/probabilities representation</span>
 <span class="co"># to their character output.</span>
-<span class="no">decode</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>, <span class="no">char_table</span>){
-  <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(<span class="no">x</span>,<span class="fl">1</span>, <span class="kw">function</span>(<span class="no">y</span>){
-    <span class="no">char_table</span>[<span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span>(<span class="no">y</span>)]
-  }) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="kw">collapse</span> <span class="kw">=</span> <span class="st">""</span>)
-}
+<span class="va">decode</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">char_table</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">x</span>,<span class="fl">1</span>, <span class="kw">function</span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">{</span>
+    <span class="va">char_table</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">]</span>
+  <span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">""</span><span class="op">)</span>
+<span class="op">}</span>
 
 <span class="co"># Returns a list of questions and expected answers.</span>
-<span class="no">generate_data</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">size</span>, <span class="no">digits</span>, <span class="no">invert</span> <span class="kw">=</span> <span class="fl">TRUE</span>){
-
-  <span class="no">max_num</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">9</span>, <span class="no">digits</span>), <span class="kw">collapse</span> <span class="kw">=</span> <span class="st">""</span>))
-
+<span class="va">generate_data</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">size</span>, <span class="va">digits</span>, <span class="va">invert</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span>
+  
+  <span class="va">max_num</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">9</span>, <span class="va">digits</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span>
+  
   <span class="co"># generate integers for both sides of question</span>
-  <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="no">max_num</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="no">size</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-  <span class="no">y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="no">max_num</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="no">size</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">max_num</span>, size <span class="op">=</span> <span class="va">size</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">max_num</span>, size <span class="op">=</span> <span class="va">size</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  
   <span class="co"># make left side always smaller than right side</span>
-  <span class="no">left_side</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">x</span> <span class="kw">&lt;=</span> <span class="no">y</span>, <span class="no">x</span>, <span class="no">y</span>)
-  <span class="no">right_side</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">x</span> <span class="kw">&gt;=</span> <span class="no">y</span>, <span class="no">x</span>, <span class="no">y</span>)
-
-  <span class="no">results</span> <span class="kw">&lt;-</span> <span class="no">left_side</span> + <span class="no">right_side</span>
-
+  <span class="va">left_side</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="va">y</span>, <span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
+  <span class="va">right_side</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="va">y</span>, <span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
+  
+  <span class="va">results</span> <span class="op">&lt;-</span> <span class="va">left_side</span> <span class="op">+</span> <span class="va">right_side</span>
+  
   <span class="co"># pad with spaces on the right</span>
-  <span class="no">questions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">left_side</span>, <span class="st">"+"</span>, <span class="no">right_side</span>)
-  <span class="no">questions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_pad.html">stri_pad</a></span>(<span class="no">questions</span>, <span class="kw">width</span> <span class="kw">=</span> <span class="fl">2</span>*<span class="no">digits</span>+<span class="fl">1</span>,
-                        <span class="kw">side</span> <span class="kw">=</span> <span class="st">"right"</span>, <span class="kw">pad</span> <span class="kw">=</span> <span class="st">" "</span>)
-  <span class="kw">if</span>(<span class="no">invert</span>){
-    <span class="no">questions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_reverse.html">stri_reverse</a></span>(<span class="no">questions</span>)
-  }
+  <span class="va">questions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">left_side</span>, <span class="st">"+"</span>, <span class="va">right_side</span><span class="op">)</span>
+  <span class="va">questions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_pad.html">stri_pad</a></span><span class="op">(</span><span class="va">questions</span>, width <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="va">digits</span><span class="op">+</span><span class="fl">1</span>, 
+                        side <span class="op">=</span> <span class="st">"right"</span>, pad <span class="op">=</span> <span class="st">" "</span><span class="op">)</span>
+  <span class="kw">if</span><span class="op">(</span><span class="va">invert</span><span class="op">)</span><span class="op">{</span>
+    <span class="va">questions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_reverse.html">stri_reverse</a></span><span class="op">(</span><span class="va">questions</span><span class="op">)</span>
+  <span class="op">}</span>
   <span class="co"># pad with spaces on the left</span>
-  <span class="no">results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_pad.html">stri_pad</a></span>(<span class="no">results</span>, <span class="kw">width</span> <span class="kw">=</span> <span class="no">digits</span> + <span class="fl">1</span>,
-                      <span class="kw">side</span> <span class="kw">=</span> <span class="st">"left"</span>, <span class="kw">pad</span> <span class="kw">=</span> <span class="st">" "</span>)
-
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-    <span class="kw">questions</span> <span class="kw">=</span> <span class="no">questions</span>,
-    <span class="kw">results</span> <span class="kw">=</span> <span class="no">results</span>
-  )
-}
+  <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_pad.html">stri_pad</a></span><span class="op">(</span><span class="va">results</span>, width <span class="op">=</span> <span class="va">digits</span> <span class="op">+</span> <span class="fl">1</span>, 
+                      side <span class="op">=</span> <span class="st">"left"</span>, pad <span class="op">=</span> <span class="st">" "</span><span class="op">)</span>
+  
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+    questions <span class="op">=</span> <span class="va">questions</span>,
+    results <span class="op">=</span> <span class="va">results</span>
+  <span class="op">)</span>
+<span class="op">}</span>
 
 <span class="co"># Parameters --------------------------------------------------------------</span>
 
 <span class="co"># Parameters for the model and dataset</span>
-<span class="no">TRAINING_SIZE</span> <span class="kw">&lt;-</span> <span class="fl">50000</span>
-<span class="no">DIGITS</span> <span class="kw">&lt;-</span> <span class="fl">2</span>
+<span class="va">TRAINING_SIZE</span> <span class="op">&lt;-</span> <span class="fl">50000</span>
+<span class="va">DIGITS</span> <span class="op">&lt;-</span> <span class="fl">2</span>
 
 <span class="co"># Maximum length of input is 'int + int' (e.g., '345+678'). Maximum length of</span>
 <span class="co"># int is DIGITS</span>
-<span class="no">MAXLEN</span> <span class="kw">&lt;-</span> <span class="no">DIGITS</span> + <span class="fl">1</span> + <span class="no">DIGITS</span>
+<span class="va">MAXLEN</span> <span class="op">&lt;-</span> <span class="va">DIGITS</span> <span class="op">+</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">DIGITS</span>
 
 <span class="co"># All the numbers, plus sign and space for padding</span>
-<span class="no">charset</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>:<span class="fl">9</span>, <span class="st">"+"</span>, <span class="st">" "</span>)
-<span class="no">char_table</span> <span class="kw">&lt;-</span> <span class="fu">learn_encoding</span>(<span class="no">charset</span>)
+<span class="va">charset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">9</span>, <span class="st">"+"</span>, <span class="st">" "</span><span class="op">)</span>
+<span class="va">char_table</span> <span class="op">&lt;-</span> <span class="fu">learn_encoding</span><span class="op">(</span><span class="va">charset</span><span class="op">)</span>
 
 
 <span class="co"># Data Preparation --------------------------------------------------------</span>
 
 <span class="co"># Generate Data</span>
-<span class="no">examples</span> <span class="kw">&lt;-</span> <span class="fu">generate_data</span>(<span class="kw">size</span> <span class="kw">=</span> <span class="no">TRAINING_SIZE</span>, <span class="kw">digits</span> <span class="kw">=</span> <span class="no">DIGITS</span>)
+<span class="va">examples</span> <span class="op">&lt;-</span> <span class="fu">generate_data</span><span class="op">(</span>size <span class="op">=</span> <span class="va">TRAINING_SIZE</span>, digits <span class="op">=</span> <span class="va">DIGITS</span><span class="op">)</span>
 
 <span class="co"># Vectorization</span>
-<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fl">0</span>, <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">examples</span>$<span class="no">questions</span>), <span class="no">MAXLEN</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">char_table</span>)))
-<span class="no">y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fl">0</span>, <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">examples</span>$<span class="no">questions</span>), <span class="no">DIGITS</span> + <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">char_table</span>)))
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">examples</span><span class="op">$</span><span class="va">questions</span><span class="op">)</span>, <span class="va">MAXLEN</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">char_table</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">examples</span><span class="op">$</span><span class="va">questions</span><span class="op">)</span>, <span class="va">DIGITS</span> <span class="op">+</span> <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">char_table</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
-<span class="kw">for</span>(<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="no">TRAINING_SIZE</span>){
-  <span class="no">x</span>[<span class="no">i</span>,,] <span class="kw">&lt;-</span> <span class="fu">encode</span>(<span class="no">examples</span>$<span class="no">questions</span>[<span class="no">i</span>], <span class="no">char_table</span>)
-  <span class="no">y</span>[<span class="no">i</span>,,] <span class="kw">&lt;-</span> <span class="fu">encode</span>(<span class="no">examples</span>$<span class="no">results</span>[<span class="no">i</span>], <span class="no">char_table</span>)
-}
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">TRAINING_SIZE</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">x</span><span class="op">[</span><span class="va">i</span>,,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">encode</span><span class="op">(</span><span class="va">examples</span><span class="op">$</span><span class="va">questions</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">char_table</span><span class="op">)</span>
+  <span class="va">y</span><span class="op">[</span><span class="va">i</span>,,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">encode</span><span class="op">(</span><span class="va">examples</span><span class="op">$</span><span class="va">results</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">char_table</span><span class="op">)</span>
+<span class="op">}</span>
 
 <span class="co"># Shuffle</span>
-<span class="no">indices</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="no">TRAINING_SIZE</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="no">TRAINING_SIZE</span>)
-<span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">x</span>[<span class="no">indices</span>,,]
-<span class="no">y</span> <span class="kw">&lt;-</span> <span class="no">y</span>[<span class="no">indices</span>,,]
+<span class="va">indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">TRAINING_SIZE</span>, size <span class="op">=</span> <span class="va">TRAINING_SIZE</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">indices</span>,,<span class="op">]</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">indices</span>,,<span class="op">]</span>
 
 
 <span class="co"># Explicitly set apart 10% for validation data that we never train over</span>
-<span class="no">split_at</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">trunc</a></span>(<span class="no">TRAINING_SIZE</span>/<span class="fl">10</span>)
-<span class="no">x_val</span> <span class="kw">&lt;-</span> <span class="no">x</span>[<span class="fl">1</span>:<span class="no">split_at</span>,,]
-<span class="no">y_val</span> <span class="kw">&lt;-</span> <span class="no">y</span>[<span class="fl">1</span>:<span class="no">split_at</span>,,]
-<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="no">x</span>[(<span class="no">split_at</span> + <span class="fl">1</span>):<span class="no">TRAINING_SIZE</span>,,]
-<span class="no">y_train</span> <span class="kw">&lt;-</span> <span class="no">y</span>[(<span class="no">split_at</span> + <span class="fl">1</span>):<span class="no">TRAINING_SIZE</span>,,]
+<span class="va">split_at</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">trunc</a></span><span class="op">(</span><span class="va">TRAINING_SIZE</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span>
+<span class="va">x_val</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">split_at</span>,,<span class="op">]</span>
+<span class="va">y_val</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">split_at</span>,,<span class="op">]</span>
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="op">(</span><span class="va">split_at</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="va">TRAINING_SIZE</span>,,<span class="op">]</span>
+<span class="va">y_train</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="op">(</span><span class="va">split_at</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="va">TRAINING_SIZE</span>,,<span class="op">]</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="st">'Training Data:'</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">x_train</span>))
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">y_train</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">'Training Data:'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">y_train</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="st">'Validation Data:'</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">x_val</span>))
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">y_val</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">'Validation Data:'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">x_val</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">y_val</span><span class="op">)</span><span class="op">)</span>
 
 
 <span class="co"># Training ----------------------------------------------------------------</span>
 
-<span class="no">HIDDEN_SIZE</span> <span class="kw">&lt;-</span> <span class="fl">128</span>
-<span class="no">BATCH_SIZE</span> <span class="kw">&lt;-</span> <span class="fl">128</span>
-<span class="no">LAYERS</span> <span class="kw">&lt;-</span> <span class="fl">1</span>
+<span class="va">HIDDEN_SIZE</span> <span class="op">&lt;-</span> <span class="fl">128</span>
+<span class="va">BATCH_SIZE</span> <span class="op">&lt;-</span> <span class="fl">128</span>
+<span class="va">LAYERS</span> <span class="op">&lt;-</span> <span class="fl">1</span>
 
 <span class="co"># Initialize sequential model</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> 
 
-<span class="no">model</span> <span class="kw">%&gt;%</span>
+<span class="va">model</span> <span class="op">%&gt;%</span>
   <span class="co"># "Encode" the input sequence using an RNN, producing an output of HIDDEN_SIZE.</span>
   <span class="co"># Note: In a situation where your input sequences have a variable length,</span>
   <span class="co"># use input_shape=(None, num_feature).</span>
-  <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="no">HIDDEN_SIZE</span>, <span class="kw">input_shape</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">MAXLEN</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">char_table</span>))) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span><span class="va">HIDDEN_SIZE</span>, input_shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">MAXLEN</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">char_table</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># As the decoder RNN's input, repeatedly provide with the last hidden state of</span>
   <span class="co"># RNN for each time step. Repeat 'DIGITS + 1' times as that's the maximum</span>
   <span class="co"># length of output, e.g., when DIGITS=3, max output is 999+999=1998.</span>
-  <span class="fu"><a href="../../reference/layer_repeat_vector.html">layer_repeat_vector</a></span>(<span class="no">DIGITS</span> + <span class="fl">1</span>)
+  <span class="fu"><a href="../../reference/layer_repeat_vector.html">layer_repeat_vector</a></span><span class="op">(</span><span class="va">DIGITS</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="co"># The decoder RNN could be multiple layers stacked or a single layer.</span>
 <span class="co"># By setting return_sequences to True, return not only the last output but</span>
 <span class="co"># all the outputs so far in the form of (num_samples, timesteps,</span>
 <span class="co"># output_dim). This is necessary as TimeDistributed in the below expects</span>
 <span class="co"># the first dimension to be the timesteps.</span>
-<span class="kw">for</span>(<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="no">LAYERS</span>)
-  <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="no">HIDDEN_SIZE</span>, <span class="kw">return_sequences</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">LAYERS</span><span class="op">)</span>
+  <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span><span class="va">HIDDEN_SIZE</span>, return_sequences <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> 
   <span class="co"># Apply a dense layer to the every temporal slice of an input. For each of step</span>
   <span class="co"># of the output sequence, decide which character should be chosen.</span>
-  <span class="fu"><a href="../../reference/time_distributed.html">time_distributed</a></span>(<span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">char_table</span>))) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="st">"softmax"</span>)
+  <span class="fu"><a href="../../reference/time_distributed.html">time_distributed</a></span><span class="op">(</span><span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">char_table</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"softmax"</span><span class="op">)</span>
 
 <span class="co"># Compiling the model</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">"categorical_crossentropy"</span>,
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">"adam"</span>,
-  <span class="kw">metrics</span> <span class="kw">=</span> <span class="st">"accuracy"</span>
-)
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  loss <span class="op">=</span> <span class="st">"categorical_crossentropy"</span>, 
+  optimizer <span class="op">=</span> <span class="st">"adam"</span>, 
+  metrics <span class="op">=</span> <span class="st">"accuracy"</span>
+<span class="op">)</span>
 
 <span class="co"># Get the model summary</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">model</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="co"># Fitting loop</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-  <span class="kw">x</span> <span class="kw">=</span> <span class="no">x_train</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y_train</span>,
-  <span class="kw">batch_size</span> <span class="kw">=</span> <span class="no">BATCH_SIZE</span>,
-  <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">70</span>,
-  <span class="kw">validation_data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x_val</span>, <span class="no">y_val</span>)
-)
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span> 
+  x <span class="op">=</span> <span class="va">x_train</span>, 
+  y <span class="op">=</span> <span class="va">y_train</span>, 
+  batch_size <span class="op">=</span> <span class="va">BATCH_SIZE</span>, 
+  epochs <span class="op">=</span> <span class="fl">70</span>,
+  validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x_val</span>, <span class="va">y_val</span><span class="op">)</span>
+<span class="op">)</span>
 
 <span class="co"># Predict for a new observation</span>
-<span class="no">new_obs</span> <span class="kw">&lt;-</span> <span class="fu">encode</span>(<span class="st">"55+22"</span>, <span class="no">char_table</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">12</span>))
-<span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">model</span>, <span class="no">new_obs</span>)
-<span class="no">result</span> <span class="kw">&lt;-</span> <span class="no">result</span>[<span class="fl">1</span>,,]
-<span class="fu">decode</span>(<span class="no">result</span>, <span class="no">char_table</span>)</pre></body></html></div>
+<span class="va">new_obs</span> <span class="op">&lt;-</span> <span class="fu">encode</span><span class="op">(</span><span class="st">"55+22"</span>, <span class="va">char_table</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">12</span><span class="op">)</span><span class="op">)</span>
+<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">new_obs</span><span class="op">)</span>
+<span class="va">result</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">[</span><span class="fl">1</span>,,<span class="op">]</span>
+<span class="fu">decode</span><span class="op">(</span><span class="va">result</span>, <span class="va">char_table</span><span class="op">)</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -383,11 +384,11 @@ Output: “596”</p>
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

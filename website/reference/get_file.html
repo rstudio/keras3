@@ -83,7 +83,7 @@ already present in the cache." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -201,7 +201,7 @@ already present in the cache." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -228,16 +228,17 @@ already present in the cache." />
 already present in the cache.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_file</span>(
-  <span class='no'>fname</span>,
-  <span class='no'>origin</span>,
-  <span class='kw'>file_hash</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>cache_subdir</span> <span class='kw'>=</span> <span class='st'>"datasets"</span>,
-  <span class='kw'>hash_algorithm</span> <span class='kw'>=</span> <span class='st'>"auto"</span>,
-  <span class='kw'>extract</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>archive_format</span> <span class='kw'>=</span> <span class='st'>"auto"</span>,
-  <span class='kw'>cache_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>get_file</span><span class='op'>(</span>
+  <span class='va'>fname</span>,
+  <span class='va'>origin</span>,
+  file_hash <span class='op'>=</span> <span class='cn'>NULL</span>,
+  cache_subdir <span class='op'>=</span> <span class='st'>"datasets"</span>,
+  hash_algorithm <span class='op'>=</span> <span class='st'>"auto"</span>,
+  extract <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  archive_format <span class='op'>=</span> <span class='st'>"auto"</span>,
+  cache_dir <span class='op'>=</span> <span class='cn'>NULL</span>,
+  untar <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -284,6 +285,11 @@ return no matches found.</p></td>
       <td><p>Location to store cached files, when <code>NULL</code> it defaults to
 the Keras configuration directory.</p></td>
     </tr>
+    <tr>
+      <th>untar</th>
+      <td><p>Deprecated in favor of 'extract'. boolean, whether the file should
+be decompressed</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -301,11 +307,11 @@ the Keras configuration directory.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

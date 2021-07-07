@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="custom_models_files/header-attrs-2.3/header-attrs.js"></script><script src="custom_models_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="custom_models_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Writing Custom Keras Models</h1>
@@ -195,34 +195,35 @@
 <h2 class="hasAnchor">
 <a href="#creating-a-custom-model" class="anchor"></a>Creating a Custom Model</h2>
 <p>This example demonstrates the implementation of a simple custom model that implements a multi-layer-perceptron with optional dropout and batch normalization:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
 
-<span class="no">keras_model_simple_mlp</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">num_classes</span>,
-                                   <span class="no">use_bn</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="no">use_dp</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-                                   <span class="no">name</span> <span class="kw">=</span> <span class="kw">NULL</span>) {
-
+<span class="va">keras_model_simple_mlp</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">num_classes</span>, 
+                                   <span class="va">use_bn</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">use_dp</span> <span class="op">=</span> <span class="cn">FALSE</span>, 
+                                   <span class="va">name</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
+  
   <span class="co"># define and return a custom model</span>
-  <span class="fu"><a href="../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="kw">name</span> <span class="kw">=</span> <span class="no">name</span>, <span class="kw">function</span>(<span class="no">self</span>) {
-
+  <span class="fu"><a href="../reference/keras_model_custom.html">keras_model_custom</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span>, <span class="kw">function</span><span class="op">(</span><span class="va">self</span><span class="op">)</span> <span class="op">{</span>
+    
     <span class="co"># create layers we'll need for the call (this code executes once)</span>
-    <span class="no">self</span>$<span class="no">dense1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"relu"</span>)
-    <span class="no">self</span>$<span class="no">dense2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="no">num_classes</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"softmax"</span>)
-    <span class="kw">if</span> (<span class="no">use_dp</span>)
-      <span class="no">self</span>$<span class="no">dp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.5</span>)
-    <span class="kw">if</span> (<span class="no">use_bn</span>)
-      <span class="no">self</span>$<span class="no">bn</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>(<span class="kw">axis</span> <span class="kw">=</span> -<span class="fl">1</span>)
-
+    <span class="va">self</span><span class="op">$</span><span class="va">dense1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">dense2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">num_classes</span>, activation <span class="op">=</span> <span class="st">"softmax"</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">use_dp</span><span class="op">)</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">dp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">use_bn</span><span class="op">)</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">bn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span>axis <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
+    
     <span class="co"># implement call (this code executes during training &amp; inference)</span>
-    <span class="kw">function</span>(<span class="no">inputs</span>, <span class="no">mask</span> <span class="kw">=</span> <span class="kw">NULL</span>, <span class="no">training</span> <span class="kw">=</span> <span class="fl">FALSE</span>) {
-      <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">dense1</span>(<span class="no">inputs</span>)
-      <span class="kw">if</span> (<span class="no">use_dp</span>)
-        <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">dp</span>(<span class="no">x</span>)
-      <span class="kw">if</span> (<span class="no">use_bn</span>)
-        <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">bn</span>(<span class="no">x</span>)
-      <span class="no">self</span>$<span class="fu">dense2</span>(<span class="no">x</span>)
-    }
-  })
-}</pre></body></html></div>
+    <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">training</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">dense1</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span>
+      <span class="kw">if</span> <span class="op">(</span><span class="va">use_dp</span><span class="op">)</span>
+        <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">dp</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+      <span class="kw">if</span> <span class="op">(</span><span class="va">use_bn</span><span class="op">)</span>
+        <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">bn</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+      <span class="va">self</span><span class="op">$</span><span class="fu">dense2</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+    <span class="op">}</span>
+  <span class="op">}</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <p>Note that we include a <code>name</code> parameter so that users can optionally provide a human readable name for the model.</p>
 <p>Note also that when we create layers to be used in our forward pass we set them onto the <code>self</code> object so they are tracked appropriately by Keras.</p>
 <p>In <code><a href="https://rdrr.io/r/base/call.html">call()</a></code>, you may specify custom losses by calling <code>self$add_loss()</code>. You can also access any other members of the Keras model you need (or even add fields to the model) by using <code>self$</code>.</p>
@@ -231,27 +232,28 @@
 <h2 class="hasAnchor">
 <a href="#using-a-custom-model" class="anchor"></a>Using a Custom Model</h2>
 <p>To use a custom model, just call your model’s high-level wrapper function. For example:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
 
 <span class="co"># create the model </span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu">keras_model_simple_mlp</span>(<span class="kw">num_classes</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">use_dp</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">keras_model_simple_mlp</span><span class="op">(</span>num_classes <span class="op">=</span> <span class="fl">10</span>, use_dp <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># compile graph</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'categorical_crossentropy'</span>,
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(),
-  <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>)
-)
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
+  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="op">)</span>,
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+<span class="op">)</span>
 
 <span class="co"># Generate dummy data</span>
-<span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1000</span>*<span class="fl">100</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">100</span>)
-<span class="no">labels</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1000</span>, <span class="kw">min</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">9</span>)), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>)
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
+<span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">9</span><span class="op">)</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="co"># Convert labels to categorical one-hot encoding</span>
-<span class="no">one_hot_labels</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="no">labels</span>, <span class="kw">num_classes</span> <span class="kw">=</span> <span class="fl">10</span>)
+<span class="va">one_hot_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span><span class="va">labels</span>, num_classes <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="co"># Train the model</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(<span class="no">data</span>, <span class="no">one_hot_labels</span>, <span class="kw">epochs</span><span class="kw">=</span><span class="fl">10</span>, <span class="kw">batch_size</span><span class="kw">=</span><span class="fl">32</span>)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">one_hot_labels</span>, epochs<span class="op">=</span><span class="fl">10</span>, batch_size<span class="op">=</span><span class="fl">32</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 
@@ -266,11 +268,11 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

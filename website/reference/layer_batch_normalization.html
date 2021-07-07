@@ -84,7 +84,7 @@ activation standard deviation close to 1." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -202,7 +202,7 @@ activation standard deviation close to 1." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -230,35 +230,35 @@ transformation that maintains the mean activation close to 0 and the
 activation standard deviation close to 1.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>layer_batch_normalization</span>(
-  <span class='no'>object</span>,
-  <span class='kw'>axis</span> <span class='kw'>=</span> -<span class='fl'>1L</span>,
-  <span class='kw'>momentum</span> <span class='kw'>=</span> <span class='fl'>0.99</span>,
-  <span class='kw'>epsilon</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
-  <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>beta_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
-  <span class='kw'>gamma_initializer</span> <span class='kw'>=</span> <span class='st'>"ones"</span>,
-  <span class='kw'>moving_mean_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
-  <span class='kw'>moving_variance_initializer</span> <span class='kw'>=</span> <span class='st'>"ones"</span>,
-  <span class='kw'>beta_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>gamma_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>beta_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>gamma_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>renorm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>renorm_clipping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>renorm_momentum</span> <span class='kw'>=</span> <span class='fl'>0.99</span>,
-  <span class='kw'>fused</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>virtual_batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>adjustment</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>batch_input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>layer_batch_normalization</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  axis <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1L</span>,
+  momentum <span class='op'>=</span> <span class='fl'>0.99</span>,
+  epsilon <span class='op'>=</span> <span class='fl'>0.001</span>,
+  center <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  scale <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  beta_initializer <span class='op'>=</span> <span class='st'>"zeros"</span>,
+  gamma_initializer <span class='op'>=</span> <span class='st'>"ones"</span>,
+  moving_mean_initializer <span class='op'>=</span> <span class='st'>"zeros"</span>,
+  moving_variance_initializer <span class='op'>=</span> <span class='st'>"ones"</span>,
+  beta_regularizer <span class='op'>=</span> <span class='cn'>NULL</span>,
+  gamma_regularizer <span class='op'>=</span> <span class='cn'>NULL</span>,
+  beta_constraint <span class='op'>=</span> <span class='cn'>NULL</span>,
+  gamma_constraint <span class='op'>=</span> <span class='cn'>NULL</span>,
+  renorm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  renorm_clipping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  renorm_momentum <span class='op'>=</span> <span class='fl'>0.99</span>,
+  fused <span class='op'>=</span> <span class='cn'>NULL</span>,
+  virtual_batch_size <span class='op'>=</span> <span class='cn'>NULL</span>,
+  adjustment <span class='op'>=</span> <span class='cn'>NULL</span>,
+  input_shape <span class='op'>=</span> <span class='cn'>NULL</span>,
+  batch_input_shape <span class='op'>=</span> <span class='cn'>NULL</span>,
+  batch_size <span class='op'>=</span> <span class='cn'>NULL</span>,
+  dtype <span class='op'>=</span> <span class='cn'>NULL</span>,
+  name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  trainable <span class='op'>=</span> <span class='cn'>NULL</span>,
+  weights <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -443,11 +443,11 @@ the first layer in a model.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

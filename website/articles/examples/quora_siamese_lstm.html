@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="quora_siamese_lstm_files/header-attrs-2.3/header-attrs.js"></script><script src="quora_siamese_lstm_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="quora_siamese_lstm_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>quora_siamese_lstm</h1>
@@ -190,123 +190,124 @@
 <p>In this tutorial we will use Keras to classify duplicated questions from Quora. The dataset first appeared in the Kaggle competition <a href="https://www.kaggle.com/c/quora-question-pairs"><em>Quora Question Pairs</em></a>. The dataset consists of ~400k pairs of questions and a column indicating if the question pair is duplicated.</p>
 <p>Our implementation is inspired by the Siamese Recurrent Architecture, Mueller et al. <a href="https://dl.acm.org/citation.cfm?id=3016291"><em>Siamese recurrent architectures for learning sentence similarity</em></a>, with small modifications like the similarity measure and the embedding layers (The original paper uses pre-trained word vectors). Using this kind of architecture dates back to 2005 with <a href="https://dl.acm.org/citation.cfm?id=1068961">Le Cun et al</a> and is usefull for verification tasks. The idea is to learn a function that maps input patterns into a target space such that a similarity measure in the target space approximates the “semantic” distance in the input space.</p>
 <p>After the competition, Quora also described their approach to this problem in this <a href="https://engineering.quora.com/Semantic-Question-Matching-with-Deep-Learning">blog post</a>.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">readr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">purrr</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
 
-<span class="no">FLAGS</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfruns/man/flags.html">flags</a></span>(
-  <span class="fu"><a href="https://rdrr.io/pkg/tfruns/man/flags.html">flag_integer</a></span>(<span class="st">"vocab_size"</span>, <span class="fl">50000</span>),
-  <span class="fu"><a href="https://rdrr.io/pkg/tfruns/man/flags.html">flag_integer</a></span>(<span class="st">"max_len_padding"</span>, <span class="fl">20</span>),
-  <span class="fu"><a href="https://rdrr.io/pkg/tfruns/man/flags.html">flag_integer</a></span>(<span class="st">"embedding_size"</span>, <span class="fl">256</span>),
-  <span class="fu"><a href="https://rdrr.io/pkg/tfruns/man/flags.html">flag_numeric</a></span>(<span class="st">"regularization"</span>, <span class="fl">0.0001</span>),
-  <span class="fu"><a href="https://rdrr.io/pkg/tfruns/man/flags.html">flag_integer</a></span>(<span class="st">"seq_embedding_size"</span>, <span class="fl">512</span>)
-)
+<span class="va">FLAGS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfruns/man/flags.html">flags</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tfruns/man/flags.html">flag_integer</a></span><span class="op">(</span><span class="st">"vocab_size"</span>, <span class="fl">50000</span><span class="op">)</span>,
+  <span class="fu"><a href="https://rdrr.io/pkg/tfruns/man/flags.html">flag_integer</a></span><span class="op">(</span><span class="st">"max_len_padding"</span>, <span class="fl">20</span><span class="op">)</span>,
+  <span class="fu"><a href="https://rdrr.io/pkg/tfruns/man/flags.html">flag_integer</a></span><span class="op">(</span><span class="st">"embedding_size"</span>, <span class="fl">256</span><span class="op">)</span>,
+  <span class="fu"><a href="https://rdrr.io/pkg/tfruns/man/flags.html">flag_numeric</a></span><span class="op">(</span><span class="st">"regularization"</span>, <span class="fl">0.0001</span><span class="op">)</span>,
+  <span class="fu"><a href="https://rdrr.io/pkg/tfruns/man/flags.html">flag_integer</a></span><span class="op">(</span><span class="st">"seq_embedding_size"</span>, <span class="fl">512</span><span class="op">)</span>
+<span class="op">)</span>
 
 <span class="co"># Downloading Data --------------------------------------------------------</span>
 
-<span class="no">quora_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/get_file.html">get_file</a></span>(
+<span class="va">quora_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/get_file.html">get_file</a></span><span class="op">(</span>
   <span class="st">"quora_duplicate_questions.tsv"</span>,
   <span class="st">"https://qim.fs.quoracdn.net/quora_duplicate_questions.tsv"</span>
-)
+<span class="op">)</span>
 
 
 <span class="co"># Pre-processing ----------------------------------------------------------</span>
 
-<span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv</a></span>(<span class="no">quora_data</span>)
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv</a></span><span class="op">(</span><span class="va">quora_data</span><span class="op">)</span>
 
-<span class="no">tokenizer</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/text_tokenizer.html">text_tokenizer</a></span>(<span class="kw">num_words</span> <span class="kw">=</span> <span class="no">FLAGS</span>$<span class="no">vocab_size</span>)
-<span class="fu"><a href="../../reference/fit_text_tokenizer.html">fit_text_tokenizer</a></span>(<span class="no">tokenizer</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">df</span>$<span class="no">question1</span>, <span class="no">df</span>$<span class="no">question2</span>))
+<span class="va">tokenizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/text_tokenizer.html">text_tokenizer</a></span><span class="op">(</span>num_words <span class="op">=</span> <span class="va">FLAGS</span><span class="op">$</span><span class="va">vocab_size</span><span class="op">)</span>
+<span class="fu"><a href="../../reference/fit_text_tokenizer.html">fit_text_tokenizer</a></span><span class="op">(</span><span class="va">tokenizer</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">question1</span>, <span class="va">df</span><span class="op">$</span><span class="va">question2</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">question1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/texts_to_sequences.html">texts_to_sequences</a></span>(<span class="no">tokenizer</span>, <span class="no">df</span>$<span class="no">question1</span>)
-<span class="no">question2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/texts_to_sequences.html">texts_to_sequences</a></span>(<span class="no">tokenizer</span>, <span class="no">df</span>$<span class="no">question2</span>)
+<span class="va">question1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/texts_to_sequences.html">texts_to_sequences</a></span><span class="op">(</span><span class="va">tokenizer</span>, <span class="va">df</span><span class="op">$</span><span class="va">question1</span><span class="op">)</span>
+<span class="va">question2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/texts_to_sequences.html">texts_to_sequences</a></span><span class="op">(</span><span class="va">tokenizer</span>, <span class="va">df</span><span class="op">$</span><span class="va">question2</span><span class="op">)</span>
 
-<span class="no">question1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span>(<span class="no">question1</span>, <span class="kw">maxlen</span> <span class="kw">=</span> <span class="no">FLAGS</span>$<span class="no">max_len_padding</span>, <span class="kw">value</span> <span class="kw">=</span> <span class="no">FLAGS</span>$<span class="no">vocab_size</span> + <span class="fl">1</span>)
-<span class="no">question2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span>(<span class="no">question2</span>, <span class="kw">maxlen</span> <span class="kw">=</span> <span class="no">FLAGS</span>$<span class="no">max_len_padding</span>, <span class="kw">value</span> <span class="kw">=</span> <span class="no">FLAGS</span>$<span class="no">vocab_size</span> + <span class="fl">1</span>)
+<span class="va">question1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span><span class="va">question1</span>, maxlen <span class="op">=</span> <span class="va">FLAGS</span><span class="op">$</span><span class="va">max_len_padding</span>, value <span class="op">=</span> <span class="va">FLAGS</span><span class="op">$</span><span class="va">vocab_size</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">question2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span><span class="va">question2</span>, maxlen <span class="op">=</span> <span class="va">FLAGS</span><span class="op">$</span><span class="va">max_len_padding</span>, value <span class="op">=</span> <span class="va">FLAGS</span><span class="op">$</span><span class="va">vocab_size</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>
 
 
 <span class="co"># Model Definition --------------------------------------------------------</span>
 
-<span class="no">input1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">FLAGS</span>$<span class="no">max_len_padding</span>))
-<span class="no">input2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">FLAGS</span>$<span class="no">max_len_padding</span>))
+<span class="va">input1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">FLAGS</span><span class="op">$</span><span class="va">max_len_padding</span><span class="op">)</span><span class="op">)</span>
+<span class="va">input2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">FLAGS</span><span class="op">$</span><span class="va">max_len_padding</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">embedding</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span>(
-  <span class="kw">input_dim</span> <span class="kw">=</span> <span class="no">FLAGS</span>$<span class="no">vocab_size</span> + <span class="fl">2</span>,
-  <span class="kw">output_dim</span> <span class="kw">=</span> <span class="no">FLAGS</span>$<span class="no">embedding_size</span>,
-  <span class="kw">input_length</span> <span class="kw">=</span> <span class="no">FLAGS</span>$<span class="no">max_len_padding</span>,
-  <span class="kw">embeddings_regularizer</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/regularizer_l1.html">regularizer_l2</a></span>(<span class="kw">l</span> <span class="kw">=</span> <span class="no">FLAGS</span>$<span class="no">regularization</span>)
-)
-<span class="no">seq_emb</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(
-  <span class="kw">units</span> <span class="kw">=</span> <span class="no">FLAGS</span>$<span class="no">seq_embedding_size</span>,
-  <span class="kw">recurrent_regularizer</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/regularizer_l1.html">regularizer_l2</a></span>(<span class="kw">l</span> <span class="kw">=</span> <span class="no">FLAGS</span>$<span class="no">regularization</span>)
-)
+<span class="va">embedding</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>
+  input_dim <span class="op">=</span> <span class="va">FLAGS</span><span class="op">$</span><span class="va">vocab_size</span> <span class="op">+</span> <span class="fl">2</span>, 
+  output_dim <span class="op">=</span> <span class="va">FLAGS</span><span class="op">$</span><span class="va">embedding_size</span>, 
+  input_length <span class="op">=</span> <span class="va">FLAGS</span><span class="op">$</span><span class="va">max_len_padding</span>, 
+  embeddings_regularizer <span class="op">=</span> <span class="fu"><a href="../../reference/regularizer_l1.html">regularizer_l2</a></span><span class="op">(</span>l <span class="op">=</span> <span class="va">FLAGS</span><span class="op">$</span><span class="va">regularization</span><span class="op">)</span>
+<span class="op">)</span>
+<span class="va">seq_emb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>
+  units <span class="op">=</span> <span class="va">FLAGS</span><span class="op">$</span><span class="va">seq_embedding_size</span>, 
+  recurrent_regularizer <span class="op">=</span> <span class="fu"><a href="../../reference/regularizer_l1.html">regularizer_l2</a></span><span class="op">(</span>l <span class="op">=</span> <span class="va">FLAGS</span><span class="op">$</span><span class="va">regularization</span><span class="op">)</span>
+<span class="op">)</span>
 
-<span class="no">vector1</span> <span class="kw">&lt;-</span> <span class="fu">embedding</span>(<span class="no">input1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">seq_emb</span>()
-<span class="no">vector2</span> <span class="kw">&lt;-</span> <span class="fu">embedding</span>(<span class="no">input2</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">seq_emb</span>()
+<span class="va">vector1</span> <span class="op">&lt;-</span> <span class="fu">embedding</span><span class="op">(</span><span class="va">input1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">seq_emb</span><span class="op">(</span><span class="op">)</span>
+<span class="va">vector2</span> <span class="op">&lt;-</span> <span class="fu">embedding</span><span class="op">(</span><span class="va">input2</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">seq_emb</span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_dot.html">layer_dot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">vector1</span>, <span class="no">vector2</span>), <span class="kw">axes</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="fl">1</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"sigmoid"</span>)
+<span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_dot.html">layer_dot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">vector1</span>, <span class="va">vector2</span><span class="op">)</span>, axes <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span>, activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">input1</span>, <span class="no">input2</span>), <span class="no">out</span>)
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">"adam"</span>,
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">"binary_crossentropy"</span>,
-  <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-    <span class="kw">acc</span> <span class="kw">=</span> <span class="no">metric_binary_accuracy</span>
-  )
-)
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input1</span>, <span class="va">input2</span><span class="op">)</span>, <span class="va">out</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  optimizer <span class="op">=</span> <span class="st">"adam"</span>, 
+  loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>, 
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+    acc <span class="op">=</span> <span class="va">metric_binary_accuracy</span>
+  <span class="op">)</span>
+<span class="op">)</span>
 
 <span class="co"># Model Fitting -----------------------------------------------------------</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">1817328</span>)
-<span class="no">val_sample</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">question1</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">0.1</span>*<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">question1</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1817328</span><span class="op">)</span>
+<span class="va">val_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">question1</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.1</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">question1</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">question1</span>[-<span class="no">val_sample</span>,], <span class="no">question2</span>[-<span class="no">val_sample</span>,]),
-    <span class="no">df</span>$<span class="no">is_duplicate</span>[-<span class="no">val_sample</span>],
-    <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">128</span>,
-    <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">30</span>,
-    <span class="kw">validation_data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">question1</span>[<span class="no">val_sample</span>,], <span class="no">question2</span>[<span class="no">val_sample</span>,]), <span class="no">df</span>$<span class="no">is_duplicate</span>[<span class="no">val_sample</span>]
-    ),
-    <span class="kw">callbacks</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-      <span class="fu"><a href="../../reference/callback_early_stopping.html">callback_early_stopping</a></span>(<span class="kw">patience</span> <span class="kw">=</span> <span class="fl">5</span>),
-      <span class="fu"><a href="../../reference/callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau</a></span>(<span class="kw">patience</span> <span class="kw">=</span> <span class="fl">3</span>)
-    )
-  )
+<span class="va">model</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">question1</span><span class="op">[</span><span class="op">-</span><span class="va">val_sample</span>,<span class="op">]</span>, <span class="va">question2</span><span class="op">[</span><span class="op">-</span><span class="va">val_sample</span>,<span class="op">]</span><span class="op">)</span>,
+    <span class="va">df</span><span class="op">$</span><span class="va">is_duplicate</span><span class="op">[</span><span class="op">-</span><span class="va">val_sample</span><span class="op">]</span>, 
+    batch_size <span class="op">=</span> <span class="fl">128</span>, 
+    epochs <span class="op">=</span> <span class="fl">30</span>, 
+    validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">question1</span><span class="op">[</span><span class="va">val_sample</span>,<span class="op">]</span>, <span class="va">question2</span><span class="op">[</span><span class="va">val_sample</span>,<span class="op">]</span><span class="op">)</span>, <span class="va">df</span><span class="op">$</span><span class="va">is_duplicate</span><span class="op">[</span><span class="va">val_sample</span><span class="op">]</span>
+    <span class="op">)</span>,
+    callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+      <span class="fu"><a href="../../reference/callback_early_stopping.html">callback_early_stopping</a></span><span class="op">(</span>patience <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>,
+      <span class="fu"><a href="../../reference/callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau</a></span><span class="op">(</span>patience <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+    <span class="op">)</span>
+  <span class="op">)</span>
 
-<span class="fu"><a href="../../reference/save_model_hdf5.html">save_model_hdf5</a></span>(<span class="no">model</span>, <span class="st">"model-question-pairs.hdf5"</span>, <span class="kw">include_optimizer</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="fu"><a href="../../reference/save_text_tokenizer.html">save_text_tokenizer</a></span>(<span class="no">tokenizer</span>, <span class="st">"tokenizer-question-pairs.hdf5"</span>)
+<span class="fu"><a href="../../reference/save_model_hdf5.html">save_model_hdf5</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"model-question-pairs.hdf5"</span>, include_optimizer <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="../../reference/save_text_tokenizer.html">save_text_tokenizer</a></span><span class="op">(</span><span class="va">tokenizer</span>, <span class="st">"tokenizer-question-pairs.hdf5"</span><span class="op">)</span>
 
 
 <span class="co"># Prediction --------------------------------------------------------------</span>
 <span class="co"># In a fresh R session:</span>
 <span class="co"># Load model and tokenizer -</span>
 
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/save_model_hdf5.html">load_model_hdf5</a></span>(<span class="st">"model-question-pairs.hdf5"</span>, <span class="kw">compile</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="no">tokenizer</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/save_text_tokenizer.html">load_text_tokenizer</a></span>(<span class="st">"tokenizer-question-pairs.hdf5"</span>)
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/save_model_hdf5.html">load_model_hdf5</a></span><span class="op">(</span><span class="st">"model-question-pairs.hdf5"</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">tokenizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/save_text_tokenizer.html">load_text_tokenizer</a></span><span class="op">(</span><span class="st">"tokenizer-question-pairs.hdf5"</span><span class="op">)</span>
 
 
-<span class="no">predict_question_pairs</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">model</span>, <span class="no">tokenizer</span>, <span class="no">q1</span>, <span class="no">q2</span>) {
-
-  <span class="no">q1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/texts_to_sequences.html">texts_to_sequences</a></span>(<span class="no">tokenizer</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">q1</span>))
-  <span class="no">q2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/texts_to_sequences.html">texts_to_sequences</a></span>(<span class="no">tokenizer</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">q2</span>))
-
-  <span class="no">q1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span>(<span class="no">q1</span>, <span class="fl">20</span>)
-  <span class="no">q2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span>(<span class="no">q2</span>, <span class="fl">20</span>)
-
-  <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">model</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">q1</span>, <span class="no">q2</span>)))
-}
+<span class="va">predict_question_pairs</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">model</span>, <span class="va">tokenizer</span>, <span class="va">q1</span>, <span class="va">q2</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="va">q1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/texts_to_sequences.html">texts_to_sequences</a></span><span class="op">(</span><span class="va">tokenizer</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">q1</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">q2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/texts_to_sequences.html">texts_to_sequences</a></span><span class="op">(</span><span class="va">tokenizer</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">q2</span><span class="op">)</span><span class="op">)</span>
+  
+  <span class="va">q1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span><span class="va">q1</span>, <span class="fl">20</span><span class="op">)</span>
+  <span class="va">q2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span><span class="va">q2</span>, <span class="fl">20</span><span class="op">)</span>
+  
+  <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">q1</span>, <span class="va">q2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>
 
 <span class="co"># Getting predictions</span>
 
-<span class="fu">predict_question_pairs</span>(
-  <span class="no">model</span>, <span class="no">tokenizer</span>,
-  <span class="kw">q1</span> <span class="kw">=</span> <span class="st">"What is the main benefit of Quora?"</span>,
-  <span class="kw">q2</span> <span class="kw">=</span> <span class="st">"What are the advantages of using Quora?"</span>
-)</pre></body></html></div>
+<span class="fu">predict_question_pairs</span><span class="op">(</span>
+  <span class="va">model</span>, <span class="va">tokenizer</span>, 
+  q1 <span class="op">=</span> <span class="st">"What is the main benefit of Quora?"</span>,
+  q2 <span class="op">=</span> <span class="st">"What are the advantages of using Quora?"</span>
+<span class="op">)</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -318,11 +319,11 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

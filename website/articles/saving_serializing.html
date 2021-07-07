@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="saving_serializing_files/header-attrs-2.3/header-attrs.js"></script><script src="saving_serializing_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="saving_serializing_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Saving and serializing models</h1>
@@ -185,7 +185,7 @@
     
     
 <blockquote>
-<p>This tutorial is an R translation of <a href="https://www.tensorflow.org/alpha/guide/keras/saving_and_serializing">this page</a> available in the official TensorFlow documentation.</p>
+<p>This tutorial is an R translation of <a href="https://www.tensorflow.org/tutorials/keras/save_and_load">this page</a> available in the official TensorFlow documentation.</p>
 </blockquote>
 <p>The first part of this guide covers saving and serialization for Sequential models and models built using the Functional API. The saving and serialization APIs are the exact same for both of these types of models.</p>
 <p>Saving for custom subclasses of Model is covered in the section “Saving Subclassed Models”. The APIs in this case are slightly different than for Sequential or Functional models.</p>
@@ -209,29 +209,33 @@
 <div id="setup" class="section level2">
 <h2 class="hasAnchor">
 <a href="#setup" class="anchor"></a>Setup</h2>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="saving-sequential-models-or-functional-models" class="section level2">
 <h2 class="hasAnchor">
 <a href="#saving-sequential-models-or-functional-models" class="anchor"></a>Saving Sequential Models or Functional models</h2>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">inputs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fl">784</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"digits"</span>)
-<span class="no">outputs</span> <span class="kw">&lt;-</span> <span class="no">inputs</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"relu"</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"dense_1"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"relu"</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"dense_2"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"softmax"</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"predictions"</span>)
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span>(<span class="no">inputs</span>, <span class="no">outputs</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">model</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">784</span>, name <span class="op">=</span> <span class="st">"digits"</span><span class="op">)</span>
+<span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"dense_1"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"dense_2"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">"softmax"</span>, name <span class="op">=</span> <span class="st">"predictions"</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
 <p>Optionally, let’s train this model, just so it has weight values to save, as well as an an optimizer state. Of course, you can save models you’ve never trained, too, but obviously that’s less interesting.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">x_train</span>, <span class="no">y_train</span>), <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">x_test</span>, <span class="no">y_test</span>)) <span class="kw">%&lt;-%</span> <span class="fu"><a href="../reference/dataset_mnist.html">dataset_mnist</a></span>()
-<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="no">x_train</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span>(<span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">60000</span>, <span class="fl">784</span>))/<span class="fl">255</span>
-<span class="no">x_test</span> <span class="kw">&lt;-</span> <span class="no">x_test</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span>(<span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10000</span>, <span class="fl">784</span>))/<span class="fl">255</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu"><a href="../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">x_train</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">60000</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">255</span>
+<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">x_test</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">255</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(<span class="kw">loss</span> <span class="kw">=</span> <span class="st">"sparse_categorical_crossentropy"</span>,
-                  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>())
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">"sparse_categorical_crossentropy"</span>,
+                  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">history</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(<span class="no">x_train</span>, <span class="no">y_train</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># Save predictions for future checks</span>
-<span class="no">predictions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">model</span>, <span class="no">x_test</span>)</pre></body></html></div>
+<span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span>, batch_size <span class="op">=</span> <span class="fl">64</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Save predictions for future checks</span>
+<span class="va">predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">x_test</span><span class="op">)</span></code></pre></div>
 <div id="whole-model-saving" class="section level3">
 <h3 class="hasAnchor">
 <a href="#whole-model-saving" class="anchor"></a>Whole-model saving</h3>
@@ -243,29 +247,32 @@
 <li>The model’s training config (what you passed to compile), if any</li>
 <li>The optimizer and its state, if any (this enables you to restart training where you left off)</li>
 </ul>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># Save the model</span>
-<span class="fu"><a href="../reference/save_model_hdf5.html">save_model_hdf5</a></span>(<span class="no">model</span>, <span class="st">"model.h5"</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Save the model</span>
+<span class="fu"><a href="../reference/save_model_hdf5.html">save_model_hdf5</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"model.h5"</span><span class="op">)</span>
 
 <span class="co"># Recreate the exact same model purely from the file</span>
-<span class="no">new_model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/save_model_hdf5.html">load_model_hdf5</a></span>(<span class="st">"model.h5"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># Check that the state is preserved</span>
-<span class="no">new_predictions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">new_model</span>, <span class="no">x_test</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span>(<span class="no">predictions</span>, <span class="no">new_predictions</span>)</pre></body></html></div>
+<span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/save_model_hdf5.html">load_model_hdf5</a></span><span class="op">(</span><span class="st">"model.h5"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Check that the state is preserved</span>
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">new_predictions</span><span class="op">)</span></code></pre></div>
 <p>Note that the optimizer state is preserved as well so you can resume training where you left off.</p>
 </div>
 <div id="export-to-savedmodel" class="section level3">
 <h3 class="hasAnchor">
 <a href="#export-to-savedmodel" class="anchor"></a>Export to SavedModel</h3>
 <p>You can also export a whole model to the TensorFlow SavedModel format. SavedModel is a standalone serialization format for Tensorflow objects, supported by TensorFlow serving as well as TensorFlow implementations other than Python. Note that <code>save_model_tf</code> is only available for TensorFlow version greater than 1.14.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># Export the model to a SavedModel</span>
-<span class="fu"><a href="../reference/save_model_tf.html">save_model_tf</a></span>(<span class="no">model</span>, <span class="st">"model/"</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Export the model to a SavedModel</span>
+<span class="fu"><a href="../reference/save_model_tf.html">save_model_tf</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"model/"</span><span class="op">)</span>
 
 <span class="co"># Recreate the exact same model</span>
-<span class="no">new_model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/save_model_tf.html">load_model_tf</a></span>(<span class="st">"model/"</span>)
+<span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/save_model_tf.html">load_model_tf</a></span><span class="op">(</span><span class="st">"model/"</span><span class="op">)</span>
 
 <span class="co"># Check that the state is preserved</span>
-<span class="no">new_predictions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">new_model</span>, <span class="no">x_test</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span>(<span class="no">predictions</span>, <span class="no">new_predictions</span>)</pre></body></html></div>
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">new_predictions</span><span class="op">)</span></code></pre></div>
 <p>Note that the optimizer state is preserved as well so you can resume training where you left off.</p>
 <p>The <code>SavedModel</code> files that were created contain:</p>
 <ul>
@@ -274,68 +281,77 @@
 <li>The model’s architecture config, if available.</li>
 </ul>
 <p>You can also use the <code>export_savedmodel</code> function to export models but those models can not be loaded as Keras models again. Models exported using <code>exported_savedmodels</code> can be used for prediction though.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/export_savedmodel.html">export_savedmodel</a></span>(<span class="no">model</span>, <span class="st">"savedmodel/"</span>)
-<span class="no">new_predictions</span> <span class="kw">&lt;-</span> <span class="kw pkg">tfdeploy</span><span class="kw ns">::</span><span class="fu">predict_savedmodel</span>(<span class="no">x_test</span>, <span class="st">"savedmodel/"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/export_savedmodel.html">export_savedmodel</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"savedmodel/"</span><span class="op">)</span>
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu">tfdeploy</span><span class="fu">::</span><span class="fu">predict_savedmodel</span><span class="op">(</span><span class="va">x_test</span>, <span class="st">"savedmodel/"</span><span class="op">)</span></code></pre></div>
 <p><strong>Note</strong> Exporting with <code>export_savedmodel</code> sets learning phase to 0 so you need to restart R and re-build the model before doing additional training.</p>
 </div>
 <div id="architecture-only-saving" class="section level3">
 <h3 class="hasAnchor">
 <a href="#architecture-only-saving" class="anchor"></a>Architecture-only saving</h3>
 <p>Sometimes, you are only interested in the architecture of the model, and you don’t need to save the weight values or the optimizer. In this case, you can retrieve the “config” of the model via the get_config() method. The config is a named list that enables you to recreate the same model – initialized from scratch, without any of the information learned previously during training.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">config</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span>(<span class="no">model</span>)
-<span class="no">reinitialized_model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span>(<span class="no">config</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co"># Note that the model state is not preserved! We only saved the architecture.</span>
-<span class="no">new_predictions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">reinitialized_model</span>, <span class="no">x_test</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span>(<span class="no">predictions</span>, <span class="no">new_predictions</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
+<span class="va">reinitialized_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Note that the model state is not preserved! We only saved the architecture.</span>
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">reinitialized_model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">new_predictions</span><span class="op">)</span></code></pre></div>
 <p>You can alternatively use <code><a href="../reference/model_to_json.html">model_to_json()</a></code> and <code><a href="../reference/model_to_json.html">model_from_json()</a></code>, which uses a JSON string to store the config instead of a named list. This is useful to save the config to disk.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">json_config</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/model_to_json.html">model_to_json</a></span>(<span class="no">model</span>)
-<span class="no">reinitialized_model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/model_to_json.html">model_from_json</a></span>(<span class="no">json_config</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">json_config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/model_to_json.html">model_to_json</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
+<span class="va">reinitialized_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/model_to_json.html">model_from_json</a></span><span class="op">(</span><span class="va">json_config</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="weights-only-saving" class="section level3">
 <h3 class="hasAnchor">
 <a href="#weights-only-saving" class="anchor"></a>Weights-only saving</h3>
 <p>Sometimes, you are only interested in the state of the model – its weights values – and not in the architecture. In this case, you can retrieve the weights values as a list of arrays via <code><a href="../reference/get_weights.html">get_weights()</a></code>, and set the state of the model via <code>set_weights</code>:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">weights</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_weights.html">get_weights</a></span>(<span class="no">model</span>)
-<span class="fu"><a href="../reference/get_weights.html">set_weights</a></span>(<span class="no">reinitialized_model</span>, <span class="no">weights</span>)
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
+<span class="fu"><a href="../reference/get_weights.html">set_weights</a></span><span class="op">(</span><span class="va">reinitialized_model</span>, <span class="va">weights</span><span class="op">)</span>
 
-<span class="no">new_predictions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">reinitialized_model</span>, <span class="no">x_test</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span>(<span class="no">predictions</span>, <span class="no">new_predictions</span>)</pre></body></html></div>
-<p>You can combine <code><a href="../reference/get_config.html">get_config()</a></code>/<code><a href="../reference/get_config.html">from_config()</a></code> and <code><a href="../reference/get_weights.html">get_weights()</a></code>/<code><a href="../reference/get_weights.html">set_weights()</a></code> to recreate your model in the same state. However, unlike <code>save_model_hdf5</code>, this will not include the training config and the optimizer. You would have to call <code><a href="https://rdrr.io/pkg/generics/man/compile.html">compile()</a></code> again before using the model for training.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">config</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span>(<span class="no">model</span>)
-<span class="no">weights</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_weights.html">get_weights</a></span>(<span class="no">model</span>)
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">reinitialized_model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">new_predictions</span><span class="op">)</span></code></pre></div>
+<p>You can combine <code><a href="../reference/get_config.html">get_config()</a></code>/<code><a href="../reference/get_config.html">from_config()</a></code> and <code><a href="../reference/get_weights.html">get_weights()</a></code>/<code><a href="../reference/get_weights.html">set_weights()</a></code> to recreate your model in the same state. However, unlike <code>save_model_hdf5</code>, this will not include the training config and the optimizer. You would have to call <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> again before using the model for training.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
+<span class="va">weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
-<span class="no">new_model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span>(<span class="no">config</span>)
-<span class="fu"><a href="../reference/get_weights.html">set_weights</a></span>(<span class="no">new_model</span>, <span class="no">weights</span>)
+<span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span>
+<span class="fu"><a href="../reference/get_weights.html">set_weights</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">weights</span><span class="op">)</span>
 
 <span class="co"># Check that the state is preserved</span>
-<span class="no">new_predictions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">new_model</span>, <span class="no">x_test</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span>(<span class="no">predictions</span>, <span class="no">new_predictions</span>)</pre></body></html></div>
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">new_predictions</span><span class="op">)</span></code></pre></div>
 <p>Note that the optimizer was not preserved, so the model should be compiled anew before training (and the optimizer will start from a blank state).</p>
 <p>The save-to-disk alternative to <code><a href="../reference/get_weights.html">get_weights()</a></code> and <code><a href="../reference/get_weights.html">set_weights(weights)</a></code> is <code>save_weights(fpath)</code> and <code>load_weights(fpath)</code>.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="co"># Save JSON config to disk</span>
-<span class="no">json_config</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/model_to_json.html">model_to_json</a></span>(<span class="no">model</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(<span class="no">json_config</span>, <span class="st">"model_config.json"</span>)
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Save JSON config to disk</span>
+<span class="va">json_config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/model_to_json.html">model_to_json</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="va">json_config</span>, <span class="st">"model_config.json"</span><span class="op">)</span>
 
 <span class="co"># Save weights to disk</span>
-<span class="fu"><a href="../reference/save_model_weights_hdf5.html">save_model_weights_hdf5</a></span>(<span class="no">model</span>, <span class="st">"model_weights.h5"</span>)
+<span class="fu"><a href="../reference/save_model_weights_hdf5.html">save_model_weights_hdf5</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"model_weights.h5"</span><span class="op">)</span>
 
 <span class="co"># Reload the model from the 2 files we saved</span>
-<span class="no">json_config</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="st">"model_config.json"</span>)
-<span class="no">new_model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/model_to_json.html">model_from_json</a></span>(<span class="no">json_config</span>)
-<span class="fu"><a href="../reference/save_model_weights_hdf5.html">load_model_weights_hdf5</a></span>(<span class="no">new_model</span>, <span class="st">"model_weights.h5"</span>)
+<span class="va">json_config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"model_config.json"</span><span class="op">)</span>
+<span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/model_to_json.html">model_from_json</a></span><span class="op">(</span><span class="va">json_config</span><span class="op">)</span>
+<span class="fu"><a href="../reference/save_model_weights_hdf5.html">load_model_weights_hdf5</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="st">"model_weights.h5"</span><span class="op">)</span>
 
 <span class="co"># Check that the state is preserved</span>
-<span class="no">new_predictions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">new_model</span>, <span class="no">x_test</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span>(<span class="no">predictions</span>, <span class="no">new_predictions</span>)</pre></body></html></div>
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">new_predictions</span><span class="op">)</span></code></pre></div>
 <p>Note that the optimizer was not preserved. But remember that the simplest, recommended way is just this:</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../reference/save_model_hdf5.html">save_model_hdf5</a></span>(<span class="no">model</span>, <span class="st">"model.h5"</span>)
-<span class="no">new_model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/save_model_hdf5.html">load_model_hdf5</a></span>(<span class="st">"model.h5"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/save_model_hdf5.html">save_model_hdf5</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"model.h5"</span><span class="op">)</span>
+<span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/save_model_hdf5.html">load_model_hdf5</a></span><span class="op">(</span><span class="st">"model.h5"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="weights-only-saving-in-savedmodel-format" class="section level3">
 <h3 class="hasAnchor">
 <a href="#weights-only-saving-in-savedmodel-format" class="anchor"></a>Weights-only saving in SavedModel format</h3>
 <p>Note that save_weights can create files either in the Keras HDF5 format, or in the TensorFlow SavedModel format.</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="../reference/save_model_weights_tf.html">save_model_weights_tf</a></span>(<span class="no">model</span>, <span class="st">"model_weights"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/save_model_weights_tf.html">save_model_weights_tf</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"model_weights"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="saving-subclassed-models" class="section level2">
@@ -345,70 +361,75 @@
 <p>A subclassed model differs in that it’s not a data structure, it’s a piece of code. The architecture of the model is defined via the body of the call method. This means that the architecture of the model cannot be safely serialized. To load a model, you’ll need to have access to the code that created it (the code of the model subclass). Alternatively, you could be serializing this code as bytecode (e.g. via pickling), but that’s unsafe and generally not portable.</p>
 <p>For more information about these differences, see the article <a href="https://medium.com/tensorflow/what-are-symbolic-and-imperative-apis-in-tensorflow-2-0-dfccecb01021">“What are Symbolic and Imperative APIs in TensorFlow 2.0?”</a>.</p>
 <p>Let’s consider the following subclassed model, which follows the same structure as the model from the first section:</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">keras_model_simple_mlp</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">num_classes</span>,
-                                   <span class="no">use_bn</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="no">use_dp</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-                                   <span class="no">name</span> <span class="kw">=</span> <span class="kw">NULL</span>) {
-
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">keras_model_simple_mlp</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">num_classes</span>, 
+                                   <span class="va">use_bn</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">use_dp</span> <span class="op">=</span> <span class="cn">FALSE</span>, 
+                                   <span class="va">name</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
+  
   <span class="co"># define and return a custom model</span>
-  <span class="fu"><a href="../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="kw">name</span> <span class="kw">=</span> <span class="no">name</span>, <span class="kw">function</span>(<span class="no">self</span>) {
-
+  <span class="fu"><a href="../reference/keras_model_custom.html">keras_model_custom</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span>, <span class="kw">function</span><span class="op">(</span><span class="va">self</span><span class="op">)</span> <span class="op">{</span>
+    
     <span class="co"># create layers we'll need for the call (this code executes once)</span>
-    <span class="no">self</span>$<span class="no">dense1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"relu"</span>)
-    <span class="no">self</span>$<span class="no">dense2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="no">num_classes</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"softmax"</span>)
-    <span class="kw">if</span> (<span class="no">use_dp</span>)
-      <span class="no">self</span>$<span class="no">dp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.5</span>)
-    <span class="kw">if</span> (<span class="no">use_bn</span>)
-      <span class="no">self</span>$<span class="no">bn</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/layer_batch_normalization.html">layer_batch_normalization</a></span>(<span class="kw">axis</span> <span class="kw">=</span> -<span class="fl">1</span>)
-
+    <span class="va">self</span><span class="op">$</span><span class="va">dense1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">dense2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">num_classes</span>, activation <span class="op">=</span> <span class="st">"softmax"</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">use_dp</span><span class="op">)</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">dp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">use_bn</span><span class="op">)</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">bn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span>axis <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
+    
     <span class="co"># implement call (this code executes during training &amp; inference)</span>
-    <span class="kw">function</span>(<span class="no">inputs</span>, <span class="no">mask</span> <span class="kw">=</span> <span class="kw">NULL</span>) {
-      <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">dense1</span>(<span class="no">inputs</span>)
-      <span class="kw">if</span> (<span class="no">use_dp</span>)
-        <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">dp</span>(<span class="no">x</span>)
-      <span class="kw">if</span> (<span class="no">use_bn</span>)
-        <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">self</span>$<span class="fu">bn</span>(<span class="no">x</span>)
-      <span class="no">self</span>$<span class="fu">dense2</span>(<span class="no">x</span>)
-    }
-  })
-}
+    <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">dense1</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span>
+      <span class="kw">if</span> <span class="op">(</span><span class="va">use_dp</span><span class="op">)</span>
+        <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">dp</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+      <span class="kw">if</span> <span class="op">(</span><span class="va">use_bn</span><span class="op">)</span>
+        <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">bn</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+      <span class="va">self</span><span class="op">$</span><span class="fu">dense2</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+    <span class="op">}</span>
+  <span class="op">}</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu">keras_model_simple_mlp</span>(<span class="kw">num_classes</span> <span class="kw">=</span> <span class="fl">10</span>)</pre></body></html></div>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">keras_model_simple_mlp</span><span class="op">(</span>num_classes <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p>First of all, a subclassed model that has never been used cannot be saved.</p>
 <p>That’s because a subclassed model needs to be called on some data in order to create its weights.</p>
 <p>Until the model has been called, it does not know the <code>shape</code> and <code>dtype</code> of the input data it should be expecting, and thus cannot create its weight variables. You may remember that in the Functional model from the first section, the <code>shape</code> and <code>dtype</code> of the inputs was specified in advance (via <code>layer_input</code>) – that’s why Functional models have a state as soon as they’re instantiated.</p>
 <p>Let’s train the model, so as to give it a state:</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(<span class="kw">loss</span> <span class="kw">=</span> <span class="st">"sparse_categorical_crossentropy"</span>,
-                  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>())
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">"sparse_categorical_crossentropy"</span>,
+                  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">history</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(<span class="no">x_train</span>, <span class="no">y_train</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
+<span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span>, batch_size <span class="op">=</span> <span class="fl">64</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p>The recommended way to save a subclassed model is to use <code>save_model_weights_tf</code> to create a TensorFlow SavedModel checkpoint, which will contain the value of all variables associated with the model: - The layers’ weights - The optimizer’s state - Any variables associated with stateful model metrics (if any).</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="../reference/save_model_weights_tf.html">save_model_weights_tf</a></span>(<span class="no">model</span>, <span class="st">"my_weights"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="co"># Save predictions for future checks</span>
-<span class="no">predictions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">model</span>, <span class="no">x_test</span>)
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/save_model_weights_tf.html">save_model_weights_tf</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"my_weights"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Save predictions for future checks</span>
+<span class="va">predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">x_test</span><span class="op">)</span>
 <span class="co"># Also save the loss on the first batch</span>
 <span class="co"># to later assert that the optimizer state was preserved</span>
-<span class="no">first_batch_loss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/train_on_batch.html">train_on_batch</a></span>(<span class="no">model</span>, <span class="no">x_train</span>[<span class="fl">1</span>:<span class="fl">64</span>,], <span class="no">y_train</span>[<span class="fl">1</span>:<span class="fl">64</span>])</pre></body></html></div>
+<span class="va">first_batch_loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/train_on_batch.html">train_on_batch</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">x_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">64</span>,<span class="op">]</span>, <span class="va">y_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">64</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <p>To restore your model, you will need access to the code that created the model object.</p>
 <p>Note that in order to restore the optimizer state and the state of any stateful metric, you should compile the model (with the exact same arguments as before) and call it on some data before calling load_weights:</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">new_model</span> <span class="kw">&lt;-</span> <span class="fu">keras_model_simple_mlp</span>(<span class="kw">num_classes</span> <span class="kw">=</span> <span class="fl">10</span>)
-<span class="no">new_model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(<span class="kw">loss</span> <span class="kw">=</span> <span class="st">"sparse_categorical_crossentropy"</span>,
-                  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>())
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu">keras_model_simple_mlp</span><span class="op">(</span>num_classes <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<span class="va">new_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">"sparse_categorical_crossentropy"</span>,
+                  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># This initializes the variables used by the optimizers,</span>
 <span class="co"># as well as any stateful metric variables</span>
-<span class="fu"><a href="../reference/train_on_batch.html">train_on_batch</a></span>(<span class="no">new_model</span>, <span class="no">x_train</span>[<span class="fl">1</span>:<span class="fl">5</span>,], <span class="no">y_train</span>[<span class="fl">1</span>:<span class="fl">5</span>])
+<span class="fu"><a href="../reference/train_on_batch.html">train_on_batch</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="op">]</span>, <span class="va">y_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span>
 
 <span class="co"># Load the state of the old model</span>
-<span class="fu"><a href="../reference/save_model_weights_tf.html">load_model_weights_tf</a></span>(<span class="no">new_model</span>, <span class="st">"my_weights"</span>)
+<span class="fu"><a href="../reference/save_model_weights_tf.html">load_model_weights_tf</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="st">"my_weights"</span><span class="op">)</span>
 
 <span class="co"># Check that the model state has been preserved</span>
-<span class="no">new_predictions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">new_model</span>, <span class="no">x_test</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span>(<span class="no">predictions</span>, <span class="no">new_predictions</span>)
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">new_predictions</span><span class="op">)</span>
 
 <span class="co"># The optimizer state is preserved as well,</span>
 <span class="co"># so you can resume training where you left off</span>
-<span class="no">new_first_batch_loss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/train_on_batch.html">train_on_batch</a></span>(<span class="no">new_model</span>, <span class="no">x_train</span>[<span class="fl">1</span>:<span class="fl">64</span>,], <span class="no">y_train</span>[<span class="fl">1</span>:<span class="fl">64</span>])
-<span class="no">first_batch_loss</span> <span class="kw">==</span> <span class="no">new_first_batch_loss</span></pre></body></html></div>
+<span class="va">new_first_batch_loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/train_on_batch.html">train_on_batch</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">64</span>,<span class="op">]</span>, <span class="va">y_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">64</span><span class="op">]</span><span class="op">)</span>
+<span class="va">first_batch_loss</span> <span class="op">==</span> <span class="va">new_first_batch_loss</span></code></pre></div>
 <p>You’ve reached the end of this guide! This covers everything you need to know about saving and serializing models with Keras in TensorFlow 2.0.</p>
 </div>
   </div>
@@ -424,11 +445,11 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

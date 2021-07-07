@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="deep_dream_files/header-attrs-2.3/header-attrs.js"></script><script src="deep_dream_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="deep_dream_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>deep_dream</h1>
@@ -187,172 +187,173 @@
 <div class="source-ref">
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/deep_dream.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/deep_dream.R</a></p>
 </div>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Setup</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Setup</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tensorflow</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow">tensorflow</a></span><span class="op">)</span>
 
 
-<span class="no">base_image_path</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/get_file.html">get_file</a></span>(<span class="st">'paris.jpg'</span>, <span class="st">'https://i.imgur.com/aGBdQyK.jpg'</span>)
-<span class="no">result_prefix</span> <span class="kw">=</span> <span class="st">'sky_dream'</span>
+<span class="va">base_image_path</span> <span class="op">=</span> <span class="fu"><a href="../../reference/get_file.html">get_file</a></span><span class="op">(</span><span class="st">'paris.jpg'</span>, <span class="st">'https://i.imgur.com/aGBdQyK.jpg'</span><span class="op">)</span>
+<span class="va">result_prefix</span> <span class="op">=</span> <span class="st">'sky_dream'</span>
 
 <span class="co"># These are the names of the layers</span>
 <span class="co"># for which we try to maximize activation,</span>
 <span class="co"># as well as their weight in the final loss</span>
 <span class="co"># we try to maximize.</span>
 <span class="co"># You can tweak these setting to obtain new visual effects.</span>
-<span class="no">layer_settings</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-  <span class="st">'mixed4'</span> <span class="kw">=</span> <span class="fl">1.0</span>,
-  <span class="st">'mixed5'</span> <span class="kw">=</span> <span class="fl">1.5</span>,
-  <span class="st">'mixed6'</span> <span class="kw">=</span> <span class="fl">2.0</span>,
-  <span class="st">'mixed7'</span> <span class="kw">=</span> <span class="fl">2.5</span>
-)
+<span class="va">layer_settings</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  <span class="st">'mixed4'</span> <span class="op">=</span> <span class="fl">1.0</span>,
+  <span class="st">'mixed5'</span> <span class="op">=</span> <span class="fl">1.5</span>,
+  <span class="st">'mixed6'</span> <span class="op">=</span> <span class="fl">2.0</span>,
+  <span class="st">'mixed7'</span> <span class="op">=</span> <span class="fl">2.5</span>
+<span class="op">)</span>
 
 <span class="co"># Playing with these hyperparameters will also allow you to achieve new effects</span>
-<span class="no">step</span> <span class="kw">=</span> <span class="fl">0.01</span>  <span class="co"># Gradient ascent step size</span>
-<span class="no">num_octave</span> <span class="kw">=</span> <span class="fl">3</span>  <span class="co"># Number of scales at which to run gradient ascent</span>
-<span class="no">octave_scale</span> <span class="kw">=</span> <span class="fl">1.4</span>  <span class="co"># Size ratio between scales</span>
-<span class="no">iterations</span> <span class="kw">=</span> <span class="fl">20</span>  <span class="co"># Number of ascent steps per scale</span>
-<span class="no">max_loss</span> <span class="kw">=</span> <span class="fl">15.</span>
+<span class="va">step</span> <span class="op">=</span> <span class="fl">0.01</span>  <span class="co"># Gradient ascent step size</span>
+<span class="va">num_octave</span> <span class="op">=</span> <span class="fl">3</span>  <span class="co"># Number of scales at which to run gradient ascent</span>
+<span class="va">octave_scale</span> <span class="op">=</span> <span class="fl">1.4</span>  <span class="co"># Size ratio between scales</span>
+<span class="va">iterations</span> <span class="op">=</span> <span class="fl">20</span>  <span class="co"># Number of ascent steps per scale</span>
+<span class="va">max_loss</span> <span class="op">=</span> <span class="fl">15.</span>
 
 <span class="co"># This is our base image:</span>
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">magick</span><span class="kw ns">::</span><span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html">image_read</a></span>(<span class="no">base_image_path</span>))
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">magick</span><span class="fu">::</span><span class="fu">image_read</span><span class="op">(</span><span class="va">base_image_path</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Let's set up some image preprocessing/deprocessing utilities:</span>
-<span class="no">preprocess_image</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">image_path</span>) {
+<span class="va">preprocess_image</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">image_path</span><span class="op">)</span> <span class="op">{</span>
   <span class="co"># Util function to open, resize and format pictures</span>
   <span class="co"># into appropriate arrays.</span>
-  <span class="no">img</span> <span class="kw">=</span> <span class="no">tf</span>$<span class="no">keras</span>$<span class="no">preprocessing</span>$<span class="no">image</span>$<span class="fu">load_img</span>(<span class="no">image_path</span>)
-  <span class="no">img</span> <span class="kw">=</span> <span class="no">tf</span>$<span class="no">keras</span>$<span class="no">preprocessing</span>$<span class="no">image</span>$<span class="fu">img_to_array</span>(<span class="no">img</span>)
-  <span class="no">img</span> <span class="kw">=</span> <span class="no">tf</span>$<span class="fu">expand_dims</span>(<span class="no">img</span>, <span class="kw">axis</span><span class="kw">=</span><span class="fl">0L</span>)
-  <span class="no">img</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/application_inception_v3.html">inception_v3_preprocess_input</a></span>(<span class="no">img</span>)
-  <span class="no">img</span>
-}
+  <span class="va">img</span> <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">keras</span><span class="op">$</span><span class="va">preprocessing</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">load_img</span><span class="op">(</span><span class="va">image_path</span><span class="op">)</span>
+  <span class="va">img</span> <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">keras</span><span class="op">$</span><span class="va">preprocessing</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">img_to_array</span><span class="op">(</span><span class="va">img</span><span class="op">)</span>
+  <span class="va">img</span> <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="fu">expand_dims</span><span class="op">(</span><span class="va">img</span>, axis<span class="op">=</span><span class="fl">0L</span><span class="op">)</span>
+  <span class="va">img</span> <span class="op">=</span> <span class="fu"><a href="../../reference/application_inception_v3.html">inception_v3_preprocess_input</a></span><span class="op">(</span><span class="va">img</span><span class="op">)</span>
+  <span class="va">img</span>
+<span class="op">}</span>
 
 
-<span class="no">deprocess_image</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) {
-  <span class="no">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span>(<span class="no">x</span>, <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">img</span>)<span class="kw">[[</span><span class="fl">2</span>]], <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">img</span>)<span class="kw">[[</span><span class="fl">3</span>]], <span class="fl">3</span>))
+<span class="va">deprocess_image</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">x</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">img</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">img</span><span class="op">)</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
   <span class="co"># Undo inception v3 preprocession</span>
-  <span class="no">x</span> <span class="kw">=</span> <span class="no">x</span> / <span class="fl">2.</span>
-  <span class="no">x</span> <span class="kw">=</span>  <span class="no">x</span> + <span class="fl">0.5</span>
-  <span class="no">x</span> <span class="kw">=</span> <span class="no">x</span> * <span class="fl">255.</span>
+  <span class="va">x</span> <span class="op">=</span> <span class="va">x</span> <span class="op">/</span> <span class="fl">2.</span>
+  <span class="va">x</span> <span class="op">=</span>  <span class="va">x</span> <span class="op">+</span> <span class="fl">0.5</span>
+  <span class="va">x</span> <span class="op">=</span> <span class="va">x</span> <span class="op">*</span> <span class="fl">255.</span>
   <span class="co"># Convert to uint8 and clip to the valid range [0, 255]</span>
-  <span class="no">x</span> <span class="kw">=</span> <span class="no">tf</span>$<span class="fu">clip_by_value</span>(<span class="no">x</span>, <span class="fl">0L</span>, <span class="fl">255L</span>) <span class="kw">%&gt;%</span> <span class="no">tf</span>$<span class="fu">cast</span>(<span class="kw">dtype</span> <span class="kw">=</span> <span class="st">'uint8'</span>)
-  <span class="no">x</span>
-}
+  <span class="va">x</span> <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="fu">clip_by_value</span><span class="op">(</span><span class="va">x</span>, <span class="fl">0L</span>, <span class="fl">255L</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">tf</span><span class="op">$</span><span class="fu">cast</span><span class="op">(</span>dtype <span class="op">=</span> <span class="st">'uint8'</span><span class="op">)</span>
+  <span class="va">x</span>
+<span class="op">}</span>
 
-<span class="no">save_img</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">img</span>, <span class="no">fname</span>) {
-  <span class="no">img</span> <span class="kw">&lt;-</span> <span class="fu">deprocess_image</span>(<span class="no">img</span>)
-  <span class="fu"><a href="../../reference/image_to_array.html">image_array_save</a></span>(<span class="no">img</span>, <span class="no">fname</span>)
-}
+<span class="va">save_img</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">img</span>, <span class="va">fname</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu">deprocess_image</span><span class="op">(</span><span class="va">img</span><span class="op">)</span>
+  <span class="fu"><a href="../../reference/image_to_array.html">image_array_save</a></span><span class="op">(</span><span class="va">img</span>, <span class="va">fname</span><span class="op">)</span>
+<span class="op">}</span>
 
 
 
 <span class="co"># Build an InceptionV3 model loaded with pre-trained ImageNet weights</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/application_inception_v3.html">application_inception_v3</a></span>(<span class="kw">weights</span> <span class="kw">=</span> <span class="st">"imagenet"</span>,
-                                  <span class="kw">include_top</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/application_inception_v3.html">application_inception_v3</a></span><span class="op">(</span>weights <span class="op">=</span> <span class="st">"imagenet"</span>,
+                                  include_top <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="co"># Get the symbolic outputs of each "key" layer (we gave them unique names).</span>
-<span class="no">outputs_dict</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>()
-<span class="kw">for</span> (<span class="no">layer_name</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">layer_settings</span>)) {
-  <span class="no">coeff</span> <span class="kw">&lt;-</span> <span class="no">layer_settings</span><span class="kw">[[</span><span class="no">layer_name</span>]]
+<span class="va">outputs_dict</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">layer_name</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">layer_settings</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">coeff</span> <span class="op">&lt;-</span> <span class="va">layer_settings</span><span class="op">[[</span><span class="va">layer_name</span><span class="op">]</span><span class="op">]</span>
   <span class="co"># Retrieves the layer's output</span>
-  <span class="no">activation</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/get_layer.html">get_layer</a></span>(<span class="no">model</span>, <span class="no">layer_name</span>)$<span class="no">output</span>
-  <span class="no">outputs_dict</span><span class="kw">[[</span><span class="no">layer_name</span>]] <span class="kw">&lt;-</span> <span class="no">activation</span>
-}
+  <span class="va">activation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/get_layer.html">get_layer</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">layer_name</span><span class="op">)</span><span class="op">$</span><span class="va">output</span>
+  <span class="va">outputs_dict</span><span class="op">[[</span><span class="va">layer_name</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">activation</span>
+<span class="op">}</span>
 
 
 <span class="co"># Set up a model that returns the activation values for every target layer</span>
 <span class="co"># (as a named list)</span>
-<span class="no">feature_extractor</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="kw">inputs</span> <span class="kw">=</span> <span class="no">model</span>$<span class="no">inputs</span>,
-                                <span class="kw">outputs</span> <span class="kw">=</span> <span class="no">outputs_dict</span>)
+<span class="va">feature_extractor</span> <span class="op">=</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">model</span><span class="op">$</span><span class="va">inputs</span>,
+                                outputs <span class="op">=</span> <span class="va">outputs_dict</span><span class="op">)</span>
 
-<span class="no">compute_loss</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">input_image</span>) {
-  <span class="no">features</span> <span class="kw">=</span> <span class="fu">feature_extractor</span>(<span class="no">input_image</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">features</span>) <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">layer_settings</span>)
-  <span class="no">loss</span> <span class="kw">=</span> <span class="no">tf</span>$<span class="fu">zeros</span>(<span class="kw">shape</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>())
-  <span class="kw">for</span> (<span class="no">names</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">layer_settings</span>)) {
-    <span class="no">coeff</span> <span class="kw">=</span> <span class="no">layer_settings</span><span class="kw">[[</span><span class="no">names</span>]]
-    <span class="no">activation</span> <span class="kw">=</span> <span class="no">features</span><span class="kw">[[</span><span class="no">names</span>]]
+<span class="va">compute_loss</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_image</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">features</span> <span class="op">=</span> <span class="fu">feature_extractor</span><span class="op">(</span><span class="va">input_image</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">features</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">layer_settings</span><span class="op">)</span>
+  <span class="va">loss</span> <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="fu">zeros</span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">names</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">layer_settings</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">coeff</span> <span class="op">=</span> <span class="va">layer_settings</span><span class="op">[[</span><span class="va">names</span><span class="op">]</span><span class="op">]</span>
+    <span class="va">activation</span> <span class="op">=</span> <span class="va">features</span><span class="op">[[</span><span class="va">names</span><span class="op">]</span><span class="op">]</span>
     <span class="co"># We avoid border artifacts by only involving non-border pixels in the loss.</span>
-    <span class="no">scaling</span> <span class="kw">=</span> <span class="no">tf</span>$<span class="fu">reduce_prod</span>(<span class="no">tf</span>$<span class="fu">cast</span>(<span class="no">tf</span>$<span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span>(<span class="no">activation</span>), <span class="st">'float32'</span>))
-    <span class="no">loss</span> <span class="kw">=</span> <span class="no">loss</span> + <span class="no">coeff</span> * <span class="no">tf</span>$<span class="fu">reduce_sum</span>(<span class="no">tf</span>$<span class="fu">square</span>(<span class="no">activation</span>)) / <span class="no">scaling</span>
-  }
-  <span class="no">loss</span>
-}
+    <span class="va">scaling</span> <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="fu">reduce_prod</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">cast</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">shape</span><span class="op">(</span><span class="va">activation</span><span class="op">)</span>, <span class="st">'float32'</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">loss</span> <span class="op">=</span> <span class="va">loss</span> <span class="op">+</span> <span class="va">coeff</span> <span class="op">*</span> <span class="va">tf</span><span class="op">$</span><span class="fu">reduce_sum</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">square</span><span class="op">(</span><span class="va">activation</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="va">scaling</span>
+  <span class="op">}</span>
+  <span class="va">loss</span>
+<span class="op">}</span>
 
 <span class="co"># Set up the gradient ascent loop for one octave</span>
-<span class="no">gradient_ascent_step</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">img</span>, <span class="no">learning_rate</span>) {
-  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span>(<span class="no">tf</span>$<span class="fu">GradientTape</span>() <span class="kw">%as%</span> <span class="no">tape</span>, {
-    <span class="no">tape</span>$<span class="fu">watch</span>(<span class="no">img</span>)
-    <span class="no">loss</span> <span class="kw">=</span> <span class="fu">compute_loss</span>(<span class="no">img</span>)
-  })
+<span class="va">gradient_ascent_step</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">img</span>, <span class="va">learning_rate</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op">%as%</span> <span class="va">tape</span>, <span class="op">{</span>
+    <span class="va">tape</span><span class="op">$</span><span class="fu">watch</span><span class="op">(</span><span class="va">img</span><span class="op">)</span>
+    <span class="va">loss</span> <span class="op">=</span> <span class="fu">compute_loss</span><span class="op">(</span><span class="va">img</span><span class="op">)</span>
+  <span class="op">}</span><span class="op">)</span>
   <span class="co"># Compute gradients.</span>
-  <span class="no">grads</span> <span class="kw">=</span> <span class="no">tape</span>$<span class="fu">gradient</span>(<span class="no">loss</span>, <span class="no">img</span>)
+  <span class="va">grads</span> <span class="op">=</span> <span class="va">tape</span><span class="op">$</span><span class="fu">gradient</span><span class="op">(</span><span class="va">loss</span>, <span class="va">img</span><span class="op">)</span>
   <span class="co"># Normalize gradients.</span>
-  <span class="no">grads</span> <span class="kw">=</span> <span class="no">grads</span> / <span class="no">tf</span>$<span class="fu">maximum</span>(<span class="no">tf</span>$<span class="fu">reduce_mean</span>(<span class="no">tf</span>$<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(<span class="no">grads</span>)), <span class="fl">1e-6</span>)
-  <span class="no">img</span> <span class="kw">=</span> <span class="no">img</span> + <span class="no">learning_rate</span> * <span class="no">grads</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">loss</span>, <span class="no">img</span>)
-}
+  <span class="va">grads</span> <span class="op">=</span> <span class="va">grads</span> <span class="op">/</span> <span class="va">tf</span><span class="op">$</span><span class="fu">maximum</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">reduce_mean</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">abs</span><span class="op">(</span><span class="va">grads</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1e-6</span><span class="op">)</span>
+  <span class="va">img</span> <span class="op">=</span> <span class="va">img</span> <span class="op">+</span> <span class="va">learning_rate</span> <span class="op">*</span> <span class="va">grads</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">loss</span>, <span class="va">img</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="no">gradient_ascent_loop</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">img</span>, <span class="no">iterations</span>, <span class="no">learning_rate</span>, <span class="no">max_loss</span> <span class="kw">=</span> <span class="kw">NULL</span>) {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="no">iterations</span>) {
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">loss</span>, <span class="no">img</span>) <span class="kw">%&lt;-%</span> <span class="fu">gradient_ascent_step</span>(<span class="no">img</span>, <span class="no">learning_rate</span>)
-    <span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span>(<span class="no">max_loss</span>) <span class="kw">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">as.array</a></span>(<span class="no">loss</span>) <span class="kw">&gt;</span> <span class="no">max_loss</span>)
+<span class="va">gradient_ascent_loop</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">img</span>, <span class="va">iterations</span>, <span class="va">learning_rate</span>, <span class="va">max_loss</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">iterations</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">loss</span>, <span class="va">img</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu">gradient_ascent_step</span><span class="op">(</span><span class="va">img</span>, <span class="va">learning_rate</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">max_loss</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">as.array</a></span><span class="op">(</span><span class="va">loss</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">max_loss</span><span class="op">)</span>
       <span class="kw">break</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"...Loss value at step"</span>, <span class="no">i</span>, <span class="st">":"</span>, <span class="fu"><a href="https://rdrr.io/r/base/array.html">as.array</a></span>(<span class="no">loss</span>), <span class="st">"\n"</span>)
-  }
-  <span class="no">img</span>
-}
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"...Loss value at step"</span>, <span class="va">i</span>, <span class="st">":"</span>, <span class="fu"><a href="https://rdrr.io/r/base/array.html">as.array</a></span><span class="op">(</span><span class="va">loss</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span>
+  <span class="op">}</span>
+  <span class="va">img</span>
+<span class="op">}</span>
 
 <span class="co"># Run the training loop, iterating over different octaves</span>
-<span class="no">original_img</span> <span class="kw">=</span> <span class="fu">preprocess_image</span>(<span class="no">base_image_path</span>)
+<span class="va">original_img</span> <span class="op">=</span> <span class="fu">preprocess_image</span><span class="op">(</span><span class="va">base_image_path</span><span class="op">)</span>
 
 <span class="co"># Prepares a list of shape tuples defining the different scales at which to run gradient ascent</span>
-<span class="no">original_shape</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">original_img</span>)[<span class="fl">2</span>:<span class="fl">3</span>]
+<span class="va">original_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">original_img</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
 
-<span class="no">successive_shapes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">original_shape</span>)
+<span class="va">successive_shapes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">original_shape</span><span class="op">)</span>
 
-<span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="no">num_octave</span>) {
-  <span class="no">shape</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="no">original_shape</span> / (<span class="no">octave_scale</span> ^ <span class="no">i</span>))
-  <span class="no">successive_shapes</span><span class="kw">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">successive_shapes</span>) + <span class="fl">1</span>]] <span class="kw">&lt;-</span> <span class="no">shape</span>
-}
+<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">num_octave</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">original_shape</span> <span class="op">/</span> <span class="op">(</span><span class="va">octave_scale</span> <span class="op">^</span> <span class="va">i</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">successive_shapes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">successive_shapes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">shape</span>
+<span class="op">}</span>
 
 <span class="co"># Reverses the list of shapes so they're in increasing order</span>
-<span class="no">successive_shapes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="no">successive_shapes</span>[<span class="fl">1</span>:<span class="fl">3</span>])
+<span class="va">successive_shapes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">successive_shapes</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#  Resizes the array of the image to the smallest scale</span>
-<span class="no">shrunk_original_img</span> <span class="kw">&lt;-</span> <span class="no">tf</span>$<span class="no">image</span>$<span class="fu">resize</span>(<span class="no">original_img</span>, <span class="no">successive_shapes</span><span class="kw">[[</span><span class="fl">1</span>]])
+<span class="va">shrunk_original_img</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">resize</span><span class="op">(</span><span class="va">original_img</span>, <span class="va">successive_shapes</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 
-<span class="no">img</span> <span class="kw">=</span> <span class="no">tf</span>$<span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>(<span class="no">original_img</span>)  <span class="co"># Make a copy</span>
+<span class="va">img</span> <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="fu">identity</span><span class="op">(</span><span class="va">original_img</span><span class="op">)</span>  <span class="co"># Make a copy</span>
 
-<span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">successive_shapes</span>)) {
-  <span class="no">shape</span> <span class="kw">=</span> <span class="no">successive_shapes</span><span class="kw">[[</span><span class="no">i</span>]]
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Processing octave"</span>, <span class="no">i</span>, <span class="st">"with shape"</span>, <span class="no">shape</span>, <span class="st">"\n"</span>)
+<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">successive_shapes</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">shape</span> <span class="op">=</span> <span class="va">successive_shapes</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Processing octave"</span>, <span class="va">i</span>, <span class="st">"with shape"</span>, <span class="va">shape</span>, <span class="st">"\n"</span><span class="op">)</span>
   <span class="co"># Scales up the dream image</span>
-  <span class="no">img</span> <span class="kw">&lt;-</span> <span class="no">tf</span>$<span class="no">image</span>$<span class="fu">resize</span>(<span class="no">img</span>, <span class="no">shape</span>)
+  <span class="va">img</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">resize</span><span class="op">(</span><span class="va">img</span>, <span class="va">shape</span><span class="op">)</span>
   <span class="co"># Runs gradient ascent, altering the dream</span>
-  <span class="no">img</span> <span class="kw">&lt;-</span> <span class="fu">gradient_ascent_loop</span>(<span class="no">img</span>,
-                              <span class="kw">iterations</span> <span class="kw">=</span> <span class="no">iterations</span>,
-                              <span class="kw">learning_rate</span> <span class="kw">=</span> <span class="no">step</span>,
-                              <span class="kw">max_loss</span> <span class="kw">=</span> <span class="no">max_loss</span>)
+  <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu">gradient_ascent_loop</span><span class="op">(</span><span class="va">img</span>,
+                              iterations <span class="op">=</span> <span class="va">iterations</span>,
+                              learning_rate <span class="op">=</span> <span class="va">step</span>,
+                              max_loss <span class="op">=</span> <span class="va">max_loss</span><span class="op">)</span>
   <span class="co"># Scales up the smaller version of the original image: it will be pixellated</span>
-  <span class="no">upscaled_shrunk_original_img</span> <span class="kw">&lt;-</span>
-    <span class="no">tf</span>$<span class="no">image</span>$<span class="fu">resize</span>(<span class="no">shrunk_original_img</span>, <span class="no">shape</span>)
+  <span class="va">upscaled_shrunk_original_img</span> <span class="op">&lt;-</span>
+    <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">resize</span><span class="op">(</span><span class="va">shrunk_original_img</span>, <span class="va">shape</span><span class="op">)</span>
   <span class="co"># Computes the high-quality version of the original image at this size</span>
-  <span class="no">same_size_original</span> <span class="kw">&lt;-</span>
-    <span class="no">tf</span>$<span class="no">image</span>$<span class="fu">resize</span>(<span class="no">original_img</span>, <span class="no">shape</span>)
+  <span class="va">same_size_original</span> <span class="op">&lt;-</span>
+    <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">resize</span><span class="op">(</span><span class="va">original_img</span>, <span class="va">shape</span><span class="op">)</span>
   <span class="co"># The difference between the two is the detail that was lost when scaling up</span>
-  <span class="no">lost_detail</span> <span class="kw">&lt;-</span>
-    <span class="no">same_size_original</span> - <span class="no">upscaled_shrunk_original_img</span>
+  <span class="va">lost_detail</span> <span class="op">&lt;-</span>
+    <span class="va">same_size_original</span> <span class="op">-</span> <span class="va">upscaled_shrunk_original_img</span>
   <span class="co"># Reinjects lost detail into the dream</span>
-  <span class="no">img</span> <span class="kw">&lt;-</span> <span class="no">img</span> + <span class="no">lost_detail</span>
-  <span class="no">shrunk_original_img</span> <span class="kw">&lt;-</span>
-    <span class="no">tf</span>$<span class="no">image</span>$<span class="fu">resize</span>(<span class="no">original_img</span>, <span class="no">shape</span>)
-  <span class="no">tf</span>$<span class="no">keras</span>$<span class="no">preprocessing</span>$<span class="no">image</span>$<span class="fu">save_img</span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="no">result_prefix</span>,<span class="st">'.png'</span>,<span class="kw">sep</span> <span class="kw">=</span> <span class="st">''</span>), <span class="fu">deprocess_image</span>(<span class="no">img</span>$<span class="fu">numpy</span>()))
-}
+  <span class="va">img</span> <span class="op">&lt;-</span> <span class="va">img</span> <span class="op">+</span> <span class="va">lost_detail</span>
+  <span class="va">shrunk_original_img</span> <span class="op">&lt;-</span>
+    <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">resize</span><span class="op">(</span><span class="va">original_img</span>, <span class="va">shape</span><span class="op">)</span>
+  <span class="va">tf</span><span class="op">$</span><span class="va">keras</span><span class="op">$</span><span class="va">preprocessing</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">save_img</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">result_prefix</span>,<span class="st">'.png'</span>,sep <span class="op">=</span> <span class="st">''</span><span class="op">)</span>, <span class="fu">deprocess_image</span><span class="op">(</span><span class="va">img</span><span class="op">$</span><span class="fu">numpy</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>
 
 <span class="co"># Plot result</span>
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">magick</span><span class="kw ns">::</span><span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html">image_read</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="no">result_prefix</span>,<span class="st">'.png'</span>,<span class="kw">sep</span> <span class="kw">=</span> <span class="st">''</span>)))</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">magick</span><span class="fu">::</span><span class="fu">image_read</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">result_prefix</span>,<span class="st">'.png'</span>,sep <span class="op">=</span> <span class="st">''</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -364,11 +365,11 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="reuters_mlp_files/header-attrs-2.3/header-attrs.js"></script><script src="reuters_mlp_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="reuters_mlp_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>reuters_mlp</h1>
@@ -188,72 +188,73 @@
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/reuters_mlp.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/reuters_mlp.R</a></p>
 </div>
 <p>Train and evaluate a simple MLP on the Reuters newswire topic classification task.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
 
-<span class="no">max_words</span> <span class="kw">&lt;-</span> <span class="fl">1000</span>
-<span class="no">batch_size</span> <span class="kw">&lt;-</span> <span class="fl">32</span>
-<span class="no">epochs</span> <span class="kw">&lt;-</span> <span class="fl">5</span>
+<span class="va">max_words</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
+<span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">32</span>
+<span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">5</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Loading data...\n'</span>)
-<span class="no">reuters</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dataset_reuters.html">dataset_reuters</a></span>(<span class="kw">num_words</span> <span class="kw">=</span> <span class="no">max_words</span>, <span class="kw">test_split</span> <span class="kw">=</span> <span class="fl">0.2</span>)
-<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="no">reuters</span>$<span class="no">train</span>$<span class="no">x</span>
-<span class="no">y_train</span> <span class="kw">&lt;-</span> <span class="no">reuters</span>$<span class="no">train</span>$<span class="no">y</span>
-<span class="no">x_test</span> <span class="kw">&lt;-</span> <span class="no">reuters</span>$<span class="no">test</span>$<span class="no">x</span>
-<span class="no">y_test</span> <span class="kw">&lt;-</span> <span class="no">reuters</span>$<span class="no">test</span>$<span class="no">y</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Loading data...\n'</span><span class="op">)</span>
+<span class="va">reuters</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataset_reuters.html">dataset_reuters</a></span><span class="op">(</span>num_words <span class="op">=</span> <span class="va">max_words</span>, test_split <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">reuters</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>
+<span class="va">y_train</span> <span class="op">&lt;-</span> <span class="va">reuters</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>
+<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">reuters</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>
+<span class="va">y_test</span> <span class="op">&lt;-</span> <span class="va">reuters</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">x_train</span>), <span class="st">'train sequences\n'</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">x_test</span>), <span class="st">'test sequences\n'</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="st">'train sequences\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="st">'test sequences\n'</span><span class="op">)</span>
 
-<span class="no">num_classes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="no">y_train</span>) + <span class="fl">1</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="no">num_classes</span>, <span class="st">'\n'</span>)
+<span class="va">num_classes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">y_train</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">num_classes</span>, <span class="st">'\n'</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Vectorizing sequence data...\n'</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Vectorizing sequence data...\n'</span><span class="op">)</span>
 
-<span class="no">tokenizer</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/text_tokenizer.html">text_tokenizer</a></span>(<span class="kw">num_words</span> <span class="kw">=</span> <span class="no">max_words</span>)
-<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sequences_to_matrix.html">sequences_to_matrix</a></span>(<span class="no">tokenizer</span>, <span class="no">x_train</span>, <span class="kw">mode</span> <span class="kw">=</span> <span class="st">'binary'</span>)
-<span class="no">x_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sequences_to_matrix.html">sequences_to_matrix</a></span>(<span class="no">tokenizer</span>, <span class="no">x_test</span>, <span class="kw">mode</span> <span class="kw">=</span> <span class="st">'binary'</span>)
+<span class="va">tokenizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/text_tokenizer.html">text_tokenizer</a></span><span class="op">(</span>num_words <span class="op">=</span> <span class="va">max_words</span><span class="op">)</span>
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/sequences_to_matrix.html">sequences_to_matrix</a></span><span class="op">(</span><span class="va">tokenizer</span>, <span class="va">x_train</span>, mode <span class="op">=</span> <span class="st">'binary'</span><span class="op">)</span>
+<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/sequences_to_matrix.html">sequences_to_matrix</a></span><span class="op">(</span><span class="va">tokenizer</span>, <span class="va">x_test</span>, mode <span class="op">=</span> <span class="st">'binary'</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'x_train shape:'</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">x_train</span>), <span class="st">'\n'</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'x_test shape:'</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">x_test</span>), <span class="st">'\n'</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'x_train shape:'</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'x_test shape:'</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Convert class vector to binary class matrix'</span>,
-    <span class="st">'(for use with categorical_crossentropy)\n'</span>)
-<span class="no">y_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/to_categorical.html">to_categorical</a></span>(<span class="no">y_train</span>, <span class="no">num_classes</span>)
-<span class="no">y_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/to_categorical.html">to_categorical</a></span>(<span class="no">y_test</span>, <span class="no">num_classes</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'y_train shape:'</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">y_train</span>), <span class="st">'\n'</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'y_test shape:'</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">y_test</span>), <span class="st">'\n'</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Convert class vector to binary class matrix'</span>,
+    <span class="st">'(for use with categorical_crossentropy)\n'</span><span class="op">)</span>
+<span class="va">y_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span><span class="va">y_train</span>, <span class="va">num_classes</span><span class="op">)</span>
+<span class="va">y_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span><span class="va">y_test</span>, <span class="va">num_classes</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'y_train shape:'</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">y_train</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'y_test shape:'</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">y_test</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Building model...\n'</span>)
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">512</span>, <span class="kw">input_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">max_words</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.5</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="no">num_classes</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span>(<span class="kw">activation</span> <span class="kw">=</span> <span class="st">'softmax'</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Building model...\n'</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">512</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">max_words</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span>activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">num_classes</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span>activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'categorical_crossentropy'</span>,
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">'adam'</span>,
-  <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>)
-)
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
+  optimizer <span class="op">=</span> <span class="st">'adam'</span>,
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+<span class="op">)</span>
 
-<span class="no">history</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-  <span class="no">x_train</span>, <span class="no">y_train</span>,
-  <span class="kw">batch_size</span> <span class="kw">=</span> <span class="no">batch_size</span>,
-  <span class="kw">epochs</span> <span class="kw">=</span> <span class="no">epochs</span>,
-  <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">1</span>,
-  <span class="kw">validation_split</span> <span class="kw">=</span> <span class="fl">0.1</span>
-)
+<span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+  <span class="va">x_train</span>, <span class="va">y_train</span>,
+  batch_size <span class="op">=</span> <span class="va">batch_size</span>,
+  epochs <span class="op">=</span> <span class="va">epochs</span>,
+  verbose <span class="op">=</span> <span class="fl">1</span>,
+  validation_split <span class="op">=</span> <span class="fl">0.1</span>
+<span class="op">)</span>
 
-<span class="no">score</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span>(
-  <span class="no">x_test</span>, <span class="no">y_test</span>,
-  <span class="kw">batch_size</span> <span class="kw">=</span> <span class="no">batch_size</span>,
-  <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">1</span>
-)
+<span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span>
+  <span class="va">x_test</span>, <span class="va">y_test</span>,
+  batch_size <span class="op">=</span> <span class="va">batch_size</span>,
+  verbose <span class="op">=</span> <span class="fl">1</span>
+<span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Test score:'</span>, <span class="no">score</span><span class="kw">[[</span><span class="fl">1</span>]], <span class="st">'\n'</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Test accuracy'</span>, <span class="no">score</span><span class="kw">[[</span><span class="fl">2</span>]], <span class="st">'\n'</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Test score:'</span>, <span class="va">score</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="st">'\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Test accuracy'</span>, <span class="va">score</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="st">'\n'</span><span class="op">)</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -265,11 +266,11 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -89,7 +89,7 @@ variable-length sequences of 128-dimensional vectors." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -207,7 +207,7 @@ variable-length sequences of 128-dimensional vectors." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -240,31 +240,32 @@ sequences of 10 vectors of 128-dimensional vectors, or <code>(NULL, 128)</code> 
 variable-length sequences of 128-dimensional vectors.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>layer_conv_1d</span>(
-  <span class='no'>object</span>,
-  <span class='no'>filters</span>,
-  <span class='no'>kernel_size</span>,
-  <span class='kw'>strides</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='st'>"valid"</span>,
-  <span class='kw'>data_format</span> <span class='kw'>=</span> <span class='st'>"channels_last"</span>,
-  <span class='kw'>dilation_rate</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>activation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use_bias</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>kernel_initializer</span> <span class='kw'>=</span> <span class='st'>"glorot_uniform"</span>,
-  <span class='kw'>bias_initializer</span> <span class='kw'>=</span> <span class='st'>"zeros"</span>,
-  <span class='kw'>kernel_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bias_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>activity_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>kernel_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bias_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>batch_input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>dtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>layer_conv_1d</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>filters</span>,
+  <span class='va'>kernel_size</span>,
+  strides <span class='op'>=</span> <span class='fl'>1L</span>,
+  padding <span class='op'>=</span> <span class='st'>"valid"</span>,
+  data_format <span class='op'>=</span> <span class='st'>"channels_last"</span>,
+  dilation_rate <span class='op'>=</span> <span class='fl'>1L</span>,
+  groups <span class='op'>=</span> <span class='fl'>1L</span>,
+  activation <span class='op'>=</span> <span class='cn'>NULL</span>,
+  use_bias <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  kernel_initializer <span class='op'>=</span> <span class='st'>"glorot_uniform"</span>,
+  bias_initializer <span class='op'>=</span> <span class='st'>"zeros"</span>,
+  kernel_regularizer <span class='op'>=</span> <span class='cn'>NULL</span>,
+  bias_regularizer <span class='op'>=</span> <span class='cn'>NULL</span>,
+  activity_regularizer <span class='op'>=</span> <span class='cn'>NULL</span>,
+  kernel_constraint <span class='op'>=</span> <span class='cn'>NULL</span>,
+  bias_constraint <span class='op'>=</span> <span class='cn'>NULL</span>,
+  input_shape <span class='op'>=</span> <span class='cn'>NULL</span>,
+  batch_input_shape <span class='op'>=</span> <span class='cn'>NULL</span>,
+  batch_size <span class='op'>=</span> <span class='cn'>NULL</span>,
+  dtype <span class='op'>=</span> <span class='cn'>NULL</span>,
+  name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  trainable <span class='op'>=</span> <span class='cn'>NULL</span>,
+  weights <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -313,6 +314,14 @@ with shape <code>(batch, channels, length)</code>.</p></td>
 dilation rate to use for dilated convolution. Currently, specifying any
 <code>dilation_rate</code> value != 1 is incompatible with specifying any <code>strides</code>
 value != 1.</p></td>
+    </tr>
+    <tr>
+      <th>groups</th>
+      <td><p>A positive integer specifying the number of groups in which the
+input is split along the channel axis. Each group is convolved separately
+with <code>filters / groups</code> filters. The output is the concatenation of all the
+groups results along the channel axis. Input channels and <code>filters</code> must both
+be divisible by <code>groups</code>.</p></td>
     </tr>
     <tr>
       <th>activation</th>
@@ -396,7 +405,7 @@ isn't provided.</p></td>
     <p>3D tensor with shape: <code>(batch_size, steps, input_dim)</code></p>
     <h2 class="hasAnchor" id="output-shape"><a class="anchor" href="#output-shape"></a>Output shape</h2>
 
-    <p>3D tensor with shape: <code>(batch_size, new_steps,  filters)</code> <code>steps</code> value might have changed due to padding or strides.</p>
+    <p>3D tensor with shape: <code>(batch_size, new_steps, filters)</code> <code>steps</code> value might have changed due to padding or strides.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other convolutional layers: 
@@ -430,11 +439,11 @@ isn't provided.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

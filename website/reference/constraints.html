@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -200,7 +200,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -226,13 +226,13 @@
     <p>Functions that impose constraints on weight values.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>constraint_maxnorm</span>(<span class='kw'>max_value</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>axis</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+    <pre class="usage"><span class='fu'>constraint_maxnorm</span><span class='op'>(</span>max_value <span class='op'>=</span> <span class='fl'>2</span>, axis <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
 
-<span class='fu'>constraint_nonneg</span>()
+<span class='fu'>constraint_nonneg</span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='fu'>constraint_unitnorm</span>(<span class='kw'>axis</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+<span class='fu'>constraint_unitnorm</span><span class='op'>(</span>axis <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
 
-<span class='fu'>constraint_minmaxnorm</span>(<span class='kw'>min_value</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>max_value</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>axis</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+<span class='fu'>constraint_minmaxnorm</span><span class='op'>(</span>min_value <span class='op'>=</span> <span class='fl'>0</span>, max_value <span class='op'>=</span> <span class='fl'>1</span>, rate <span class='op'>=</span> <span class='fl'>1</span>, axis <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -286,12 +286,13 @@ hidden unit to have the norm between a lower bound and an upper bound.</p></li>
 constraint is an R function that takes weights (<code>w</code>) as input
 and returns modified weights. Note that keras <code><a href='backend.html'>backend()</a></code> tensor
 functions (e.g. <code><a href='k_greater_equal.html'>k_greater_equal()</a></code>) should be used in the
-implementation of custom constraints. For example:<div class="r"></p><pre><span class='no'>nonneg_constraint</span> <span class='kw'>&amp;</span><span class='no'>lt</span>;- <span class='kw'>function</span>(<span class='no'>w</span>) {
-  <span class='no'>w</span> * <span class='fu'><a href='k_cast.html'>k_cast</a></span>(<span class='fu'><a href='k_greater_equal.html'>k_greater_equal</a></span>(<span class='no'>w</span>, <span class='fl'>0</span>), <span class='fu'><a href='k_floatx.html'>k_floatx</a></span>())
-}
+implementation of custom constraints. For example:<div class="r"></p><pre><span class='va'>nonneg_constraint</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>w</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>w</span> <span class='op'>*</span> <span class='fu'><a href='k_cast.html'>k_cast</a></span><span class='op'>(</span><span class='fu'><a href='k_greater_equal.html'>k_greater_equal</a></span><span class='op'>(</span><span class='va'>w</span>, <span class='fl'>0</span><span class='op'>)</span>, <span class='fu'><a href='k_floatx.html'>k_floatx</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
 
-<span class='fu'><a href='layer_dense.html'>layer_dense</a></span>(<span class='kw'>units</span> <span class='kw'>=</span> <span class='fl'>32</span>, <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>784</span>),
-            <span class='kw'>kernel_constraint</span> <span class='kw'>=</span> <span class='no'>nonneg_constraint</span>)</pre><p></div></p>
+<span class='fu'><a href='layer_dense.html'>layer_dense</a></span><span class='op'>(</span>units <span class='op'>=</span> <span class='fl'>32</span>, input_shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>784</span><span class='op'>)</span>,
+            kernel_constraint <span class='op'>=</span> <span class='va'>nonneg_constraint</span><span class='op'>)</span>
+</pre><p></div></p>
 <p>Note that models which use custom constraints cannot be serialized using
 <code><a href='save_model_hdf5.html'>save_model_hdf5()</a></code>. Rather, the weights of the model should be saved
 and restored using <code><a href='save_model_weights_hdf5.html'>save_model_weights_hdf5()</a></code>.</p>
@@ -311,11 +312,11 @@ and restored using <code><a href='save_model_weights_hdf5.html'>save_model_weigh
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
