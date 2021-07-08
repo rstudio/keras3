@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Base R6 class for Keras wrappers — KerasWrapper • keras</title>
+<title>(Deprecated) Base R6 class for Keras wrappers — KerasWrapper • keras</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,11 @@
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Base R6 class for Keras wrappers — KerasWrapper" />
-<meta property="og:description" content="Base R6 class for Keras wrappers" />
+<meta property="og:title" content="(Deprecated) Base R6 class for Keras wrappers — KerasWrapper" />
+<meta property="og:description" content="Instead of inheriting from the proxy class KerasWrapper and using
+create_wrapper to create instances, new R6 custom classes are encouraged to
+inherit directly from keras$layers$Wrapper and use create_layer to create
+instances." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -82,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -200,7 +203,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -217,13 +220,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Base R6 class for Keras wrappers</h1>
+    <h1>(Deprecated) Base R6 class for Keras wrappers</h1>
     <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/wrapper_custom.R'><code>R/wrapper_custom.R</code></a></small>
     <div class="hidden name"><code>KerasWrapper.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Base R6 class for Keras wrappers</p>
+    <p>Instead of inheriting from the proxy class <code>KerasWrapper</code> and using
+<code>create_wrapper</code> to create instances, new R6 custom classes are encouraged to
+inherit directly from <code>keras$layers$Wrapper</code> and use <code>create_layer</code> to create
+instances.</p>
     </div>
 
 
@@ -236,7 +242,7 @@
     <p>KerasWrapper.</p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
-    <p></p><dl'>
+    <p></p><dl>
 <dt><code><a href='https://rdrr.io/r/utils/PkgUtils.html'>build(input_shape)</a></code></dt><dd><p>Builds the wrapped layer.
 Subclasses can extend this to perform custom operations on that layer.</p></dd>
 <dt><code><a href='https://rdrr.io/r/base/call.html'>call(inputs,mask)</a></code></dt><dd><p>Calls the wrapped layer on an input tensor.</p></dd>
@@ -258,11 +264,11 @@ for the wrapped layer.</p></dd>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

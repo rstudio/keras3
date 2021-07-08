@@ -49,8 +49,19 @@
   <script src="../extra.js"></script>
 
 <meta property="og:title" content="Activation functions — activation_relu" />
-<meta property="og:description" content="Activations functions can either be used through layer_activation(), or
-through the activation argument supported by all forward layers." />
+<meta property="og:description" content="relu(...): Applies the rectified linear unit activation function.
+elu(...): Exponential Linear Unit.
+selu(...): Scaled Exponential Linear Unit (SELU).
+hard_sigmoid(...): Hard sigmoid activation function.
+linear(...): Linear activation function (pass-through).
+sigmoid(...): Sigmoid activation function, sigmoid(x) = 1 / (1 + exp(-x)).
+softmax(...): Softmax converts a vector of values to a probability distribution.
+softplus(...): Softplus activation function, softplus(x) = log(exp(x) + 1).
+softsign(...): Softsign activation function, softsign(x) = x / (abs(x) + 1).
+tanh(...): Hyperbolic tangent activation function.
+exponential(...): Exponential activation function.
+gelu(...): Applies the Gaussian error linear unit (GELU) activation function.
+swish(...): Swish activation function, swish(x) = x * sigmoid(x)." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -83,7 +94,7 @@ through the activation argument supported by all forward layers." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -201,7 +212,7 @@ through the activation argument supported by all forward layers." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -224,31 +235,46 @@ through the activation argument supported by all forward layers." />
     </div>
 
     <div class="ref-description">
-    <p>Activations functions can either be used through <code><a href='layer_activation.html'>layer_activation()</a></code>, or
-through the activation argument supported by all forward layers.</p>
+    <p><code>relu(...)</code>: Applies the rectified linear unit activation function.</p>
+<p><code>elu(...)</code>: Exponential Linear Unit.</p>
+<p><code>selu(...)</code>: Scaled Exponential Linear Unit (SELU).</p>
+<p><code>hard_sigmoid(...)</code>: Hard sigmoid activation function.</p>
+<p><code>linear(...)</code>: Linear activation function (pass-through).</p>
+<p><code>sigmoid(...)</code>: Sigmoid activation function, <code>sigmoid(x) = 1 / (1 + exp(-x))</code>.</p>
+<p><code>softmax(...)</code>: Softmax converts a vector of values to a probability distribution.</p>
+<p><code>softplus(...)</code>: Softplus activation function, <code>softplus(x) = log(exp(x) + 1)</code>.</p>
+<p><code>softsign(...)</code>: Softsign activation function, <code>softsign(x) = x / (abs(x) + 1)</code>.</p>
+<p><code><a href='https://rdrr.io/r/base/Hyperbolic.html'>tanh(...)</a></code>: Hyperbolic tangent activation function.</p>
+<p><code>exponential(...)</code>: Exponential activation function.</p>
+<p><code>gelu(...)</code>: Applies the Gaussian error linear unit (GELU) activation function.</p>
+<p><code>swish(...)</code>: Swish activation function, <code>swish(x) = x * sigmoid(x)</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>activation_relu</span>(<span class='no'>x</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>max_value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+    <pre class="usage"><span class='fu'>activation_relu</span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='fl'>0</span>, max_value <span class='op'>=</span> <span class='cn'>NULL</span>, threshold <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
 
-<span class='fu'>activation_elu</span>(<span class='no'>x</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'>activation_elu</span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 
-<span class='fu'>activation_selu</span>(<span class='no'>x</span>)
+<span class='fu'>activation_selu</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>activation_hard_sigmoid</span>(<span class='no'>x</span>)
+<span class='fu'>activation_hard_sigmoid</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>activation_linear</span>(<span class='no'>x</span>)
+<span class='fu'>activation_linear</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>activation_sigmoid</span>(<span class='no'>x</span>)
+<span class='fu'>activation_sigmoid</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>activation_softmax</span>(<span class='no'>x</span>, <span class='kw'>axis</span> <span class='kw'>=</span> -<span class='fl'>1</span>)
+<span class='fu'>activation_softmax</span><span class='op'>(</span><span class='va'>x</span>, axis <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
 
-<span class='fu'>activation_softplus</span>(<span class='no'>x</span>)
+<span class='fu'>activation_softplus</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>activation_softsign</span>(<span class='no'>x</span>)
+<span class='fu'>activation_softsign</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>activation_tanh</span>(<span class='no'>x</span>)
+<span class='fu'>activation_tanh</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>activation_exponential</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>activation_exponential</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='fu'>activation_gelu</span><span class='op'>(</span><span class='va'>x</span>, approximate <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>activation_swish</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -273,6 +299,10 @@ through the activation argument supported by all forward layers.</p>
       <th>axis</th>
       <td><p>Integer, axis along which the softmax normalization is applied</p></td>
     </tr>
+    <tr>
+      <th>approximate</th>
+      <td><p>A bool, whether to enable approximation.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -280,8 +310,8 @@ through the activation argument supported by all forward layers.</p>
     <p>Tensor with the same shape and dtype as <code>x</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-<ul>
+    <p>Activations functions can either be used through <code><a href='layer_activation.html'>layer_activation()</a></code>, or
+through the activation argument supported by all forward layers.</p><ul>
 <li><p><code>activation_selu()</code> to be used together with the initialization "lecun_normal".</p></li>
 <li><p><code>activation_selu()</code> to be used together with the dropout variant "AlphaDropout".</p></li>
 </ul>
@@ -291,9 +321,15 @@ through the activation argument supported by all forward layers.</p>
     
 
 <ul>
+<li><p><code>activation_swish()</code>: <a href='https://arxiv.org/abs/1710.05941'>Searching for Activation Functions</a></p></li>
+<li><p><code>activation_gelu()</code>: <a href='https://arxiv.org/abs/1606.08415'>Gaussian Error Linear Units (GELUs)</a></p></li>
 <li><p><code>activation_selu()</code>: <a href='https://arxiv.org/abs/1706.02515'>Self-Normalizing Neural Networks</a></p></li>
+<li><p><code>activation_elu()</code>: <a href='https://arxiv.org/abs/1511.07289'>Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs)</a></p></li>
 </ul>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://www.tensorflow.org/api_docs/python/tf/keras/activations'>https://www.tensorflow.org/api_docs/python/tf/keras/activations</a></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -306,11 +342,11 @@ through the activation argument supported by all forward layers.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

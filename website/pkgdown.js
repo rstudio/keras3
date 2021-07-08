@@ -1,4 +1,4 @@
-/* https://gregfranko.com/blog/jquery-best-practices/ */
+/* http://gregfranko.com/blog/jquery-best-practices/ */
 (function($) {
   $(function() {
 

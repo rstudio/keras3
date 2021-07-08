@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -200,7 +200,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -226,9 +226,9 @@
     <p>Enables persistence of text tokenizers alongside saved models.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>save_text_tokenizer</span>(<span class='no'>object</span>, <span class='no'>filename</span>)
+    <pre class="usage"><span class='fu'>save_text_tokenizer</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>filename</span><span class='op'>)</span>
 
-<span class='fu'>load_text_tokenizer</span>(<span class='no'>filename</span>)</pre>
+<span class='fu'>load_text_tokenizer</span><span class='op'>(</span><span class='va'>filename</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -261,21 +261,23 @@ and then reload it prior to prediction.</p>
 <code><a href='texts_to_sequences.html'>texts_to_sequences</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 
 <span class='co'># vectorize texts then save for use in prediction</span>
-<span class='no'>tokenizer</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='text_tokenizer.html'>text_tokenizer</a></span>(<span class='kw'>num_words</span> <span class='kw'>=</span> <span class='fl'>10000</span>) <span class='kw'>%&gt;%</span>
-<span class='fu'><a href='fit_text_tokenizer.html'>fit_text_tokenizer</a></span>(<span class='no'>tokenizer</span>, <span class='no'>texts</span>)
-<span class='fu'>save_text_tokenizer</span>(<span class='no'>tokenizer</span>, <span class='st'>"tokenizer"</span>)
+<span class='va'>tokenizer</span> <span class='op'>&lt;-</span> <span class='fu'><a href='text_tokenizer.html'>text_tokenizer</a></span><span class='op'>(</span>num_words <span class='op'>=</span> <span class='fl'>10000</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<span class='fu'><a href='fit_text_tokenizer.html'>fit_text_tokenizer</a></span><span class='op'>(</span><span class='va'>tokenizer</span>, <span class='va'>texts</span><span class='op'>)</span>
+<span class='fu'>save_text_tokenizer</span><span class='op'>(</span><span class='va'>tokenizer</span>, <span class='st'>"tokenizer"</span><span class='op'>)</span>
 
 <span class='co'># (train model, etc.)</span>
 
 <span class='co'># ...later in another session</span>
-<span class='no'>tokenizer</span> <span class='kw'>&lt;-</span> <span class='fu'>load_text_tokenizer</span>(<span class='st'>"tokenizer"</span>)
+<span class='va'>tokenizer</span> <span class='op'>&lt;-</span> <span class='fu'>load_text_tokenizer</span><span class='op'>(</span><span class='st'>"tokenizer"</span><span class='op'>)</span>
 
 <span class='co'># (use tokenizer to preprocess data for prediction)</span>
 
-}</div></pre>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -287,11 +289,11 @@ and then reload it prior to prediction.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

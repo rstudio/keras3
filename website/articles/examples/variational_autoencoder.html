@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="variational_autoencoder_files/header-attrs-2.3/header-attrs.js"></script><script src="variational_autoencoder_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="variational_autoencoder_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>variational_autoencoder</h1>
@@ -188,127 +188,128 @@
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/variational_autoencoder.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/variational_autoencoder.R</a></p>
 </div>
 <p>This script demonstrates how to build a variational autoencoder with Keras. Reference: “Auto-Encoding Variational Bayes” <a href="https://arxiv.org/abs/1312.6114" class="uri">https://arxiv.org/abs/1312.6114</a></p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Note: This code reflects pre-TF2 idioms.</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Note: This code reflects pre-TF2 idioms.</span>
 <span class="co"># For an example of a TF2-style modularized VAE, see e.g.: https://github.com/rstudio/keras/blob/master/vignettes/examples/eager_cvae.R</span>
 <span class="co"># Also cf. the tfprobability-style of coding VAEs: https://rstudio.github.io/tfprobability/</span>
 
 <span class="co"># With TF-2, you can still run this code due to the following line:</span>
-<span class="kw">if</span> (<span class="kw pkg">tensorflow</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/tensorflow/man/tf.html">tf</a></span>$<span class="fu">executing_eagerly</span>())
-  <span class="kw pkg">tensorflow</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/tensorflow/man/tf.html">tf</a></span>$<span class="no">compat</span>$<span class="no">v1</span>$<span class="fu">disable_eager_execution</span>()
+<span class="kw">if</span> <span class="op">(</span><span class="fu">tensorflow</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/tensorflow/man/tf.html">tf</a></span><span class="op">$</span><span class="fu">executing_eagerly</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu">tensorflow</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/tensorflow/man/tf.html">tf</a></span><span class="op">$</span><span class="va">compat</span><span class="op">$</span><span class="va">v1</span><span class="op">$</span><span class="fu">disable_eager_execution</span><span class="op">(</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
-<span class="no">K</span> <span class="kw">&lt;-</span> <span class="kw pkg">keras</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/backend.html">backend</a></span>()
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<span class="va">K</span> <span class="op">&lt;-</span> <span class="fu">keras</span><span class="fu">::</span><span class="fu"><a href="../../reference/backend.html">backend</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># Parameters --------------------------------------------------------------</span>
 
-<span class="no">batch_size</span> <span class="kw">&lt;-</span> <span class="fl">100L</span>
-<span class="no">original_dim</span> <span class="kw">&lt;-</span> <span class="fl">784L</span>
-<span class="no">latent_dim</span> <span class="kw">&lt;-</span> <span class="fl">2L</span>
-<span class="no">intermediate_dim</span> <span class="kw">&lt;-</span> <span class="fl">256L</span>
-<span class="no">epochs</span> <span class="kw">&lt;-</span> <span class="fl">50L</span>
-<span class="no">epsilon_std</span> <span class="kw">&lt;-</span> <span class="fl">1.0</span>
+<span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">100L</span>
+<span class="va">original_dim</span> <span class="op">&lt;-</span> <span class="fl">784L</span>
+<span class="va">latent_dim</span> <span class="op">&lt;-</span> <span class="fl">2L</span>
+<span class="va">intermediate_dim</span> <span class="op">&lt;-</span> <span class="fl">256L</span>
+<span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">50L</span>
+<span class="va">epsilon_std</span> <span class="op">&lt;-</span> <span class="fl">1.0</span>
 
 <span class="co"># Model definition --------------------------------------------------------</span>
 
-<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">original_dim</span>))
-<span class="no">h</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="no">x</span>, <span class="no">intermediate_dim</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"relu"</span>)
-<span class="no">z_mean</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="no">h</span>, <span class="no">latent_dim</span>)
-<span class="no">z_log_var</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="no">h</span>, <span class="no">latent_dim</span>)
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">original_dim</span><span class="op">)</span><span class="op">)</span>
+<span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">intermediate_dim</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span>
+<span class="va">z_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="va">h</span>, <span class="va">latent_dim</span><span class="op">)</span>
+<span class="va">z_log_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="va">h</span>, <span class="va">latent_dim</span><span class="op">)</span>
 
-<span class="no">sampling</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">arg</span>){
-  <span class="no">z_mean</span> <span class="kw">&lt;-</span> <span class="no">arg</span>[, <span class="fl">1</span>:(<span class="no">latent_dim</span>)]
-  <span class="no">z_log_var</span> <span class="kw">&lt;-</span> <span class="no">arg</span>[, (<span class="no">latent_dim</span> + <span class="fl">1</span>):(<span class="fl">2</span> * <span class="no">latent_dim</span>)]
-
-  <span class="no">epsilon</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_random_normal.html">k_random_normal</a></span>(
-    <span class="kw">shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="../../reference/k_shape.html">k_shape</a></span>(<span class="no">z_mean</span>)<span class="kw">[[</span><span class="fl">1</span>]]),
-    <span class="kw">mean</span><span class="kw">=</span><span class="fl">0.</span>,
-    <span class="kw">stddev</span><span class="kw">=</span><span class="no">epsilon_std</span>
-  )
-
-  <span class="no">z_mean</span> + <span class="fu"><a href="../../reference/k_exp.html">k_exp</a></span>(<span class="no">z_log_var</span>/<span class="fl">2</span>)*<span class="no">epsilon</span>
-}
+<span class="va">sampling</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">arg</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">z_mean</span> <span class="op">&lt;-</span> <span class="va">arg</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">latent_dim</span><span class="op">)</span><span class="op">]</span>
+  <span class="va">z_log_var</span> <span class="op">&lt;-</span> <span class="va">arg</span><span class="op">[</span>, <span class="op">(</span><span class="va">latent_dim</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">latent_dim</span><span class="op">)</span><span class="op">]</span>
+  
+  <span class="va">epsilon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_random_normal.html">k_random_normal</a></span><span class="op">(</span>
+    shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="../../reference/k_shape.html">k_shape</a></span><span class="op">(</span><span class="va">z_mean</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, 
+    mean<span class="op">=</span><span class="fl">0.</span>,
+    stddev<span class="op">=</span><span class="va">epsilon_std</span>
+  <span class="op">)</span>
+  
+  <span class="va">z_mean</span> <span class="op">+</span> <span class="fu"><a href="../../reference/k_exp.html">k_exp</a></span><span class="op">(</span><span class="va">z_log_var</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">*</span><span class="va">epsilon</span>
+<span class="op">}</span>
 
 <span class="co"># note that "output_shape" isn't necessary with the TensorFlow backend</span>
-<span class="no">z</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">z_mean</span>, <span class="no">z_log_var</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_lambda.html">layer_lambda</a></span>(<span class="no">sampling</span>)
+<span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">z_mean</span>, <span class="va">z_log_var</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../../reference/layer_lambda.html">layer_lambda</a></span><span class="op">(</span><span class="va">sampling</span><span class="op">)</span>
 
 <span class="co"># we instantiate these layers separately so as to reuse them later</span>
-<span class="no">decoder_h</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="no">intermediate_dim</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"relu"</span>)
-<span class="no">decoder_mean</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="no">original_dim</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"sigmoid"</span>)
-<span class="no">h_decoded</span> <span class="kw">&lt;-</span> <span class="fu">decoder_h</span>(<span class="no">z</span>)
-<span class="no">x_decoded_mean</span> <span class="kw">&lt;-</span> <span class="fu">decoder_mean</span>(<span class="no">h_decoded</span>)
+<span class="va">decoder_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">intermediate_dim</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span>
+<span class="va">decoder_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">original_dim</span>, activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span>
+<span class="va">h_decoded</span> <span class="op">&lt;-</span> <span class="fu">decoder_h</span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
+<span class="va">x_decoded_mean</span> <span class="op">&lt;-</span> <span class="fu">decoder_mean</span><span class="op">(</span><span class="va">h_decoded</span><span class="op">)</span>
 
 <span class="co"># end-to-end autoencoder</span>
-<span class="no">vae</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="no">x</span>, <span class="no">x_decoded_mean</span>)
+<span class="va">vae</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">x_decoded_mean</span><span class="op">)</span>
 
 <span class="co"># encoder, from inputs to latent space</span>
-<span class="no">encoder</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="no">x</span>, <span class="no">z_mean</span>)
+<span class="va">encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">z_mean</span><span class="op">)</span>
 
 <span class="co"># generator, from latent space to reconstructed inputs</span>
-<span class="no">decoder_input</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="no">latent_dim</span>)
-<span class="no">h_decoded_2</span> <span class="kw">&lt;-</span> <span class="fu">decoder_h</span>(<span class="no">decoder_input</span>)
-<span class="no">x_decoded_mean_2</span> <span class="kw">&lt;-</span> <span class="fu">decoder_mean</span>(<span class="no">h_decoded_2</span>)
-<span class="no">generator</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="no">decoder_input</span>, <span class="no">x_decoded_mean_2</span>)
+<span class="va">decoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="va">latent_dim</span><span class="op">)</span>
+<span class="va">h_decoded_2</span> <span class="op">&lt;-</span> <span class="fu">decoder_h</span><span class="op">(</span><span class="va">decoder_input</span><span class="op">)</span>
+<span class="va">x_decoded_mean_2</span> <span class="op">&lt;-</span> <span class="fu">decoder_mean</span><span class="op">(</span><span class="va">h_decoded_2</span><span class="op">)</span>
+<span class="va">generator</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">decoder_input</span>, <span class="va">x_decoded_mean_2</span><span class="op">)</span>
 
 
-<span class="no">vae_loss</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>, <span class="no">x_decoded_mean</span>){
-  <span class="no">xent_loss</span> <span class="kw">&lt;-</span> (<span class="no">original_dim</span>/<span class="fl">1.0</span>)*<span class="fu"><a href="../../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span>(<span class="no">x</span>, <span class="no">x_decoded_mean</span>)
-  <span class="no">kl_loss</span> <span class="kw">&lt;-</span> -<span class="fl">0.5</span>*<span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span>(<span class="fl">1</span> + <span class="no">z_log_var</span> - <span class="fu"><a href="../../reference/k_square.html">k_square</a></span>(<span class="no">z_mean</span>) - <span class="fu"><a href="../../reference/k_exp.html">k_exp</a></span>(<span class="no">z_log_var</span>), <span class="kw">axis</span> <span class="kw">=</span> -<span class="fl">1L</span>)
-  <span class="no">xent_loss</span> + <span class="no">kl_loss</span>
-}
+<span class="va">vae_loss</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">x_decoded_mean</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">xent_loss</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">original_dim</span><span class="op">/</span><span class="fl">1.0</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="../../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">x_decoded_mean</span><span class="op">)</span>
+  <span class="va">kl_loss</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.5</span><span class="op">*</span><span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">z_log_var</span> <span class="op">-</span> <span class="fu"><a href="../../reference/k_square.html">k_square</a></span><span class="op">(</span><span class="va">z_mean</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../../reference/k_exp.html">k_exp</a></span><span class="op">(</span><span class="va">z_log_var</span><span class="op">)</span>, axis <span class="op">=</span> <span class="op">-</span><span class="fl">1L</span><span class="op">)</span>
+  <span class="va">xent_loss</span> <span class="op">+</span> <span class="va">kl_loss</span>
+<span class="op">}</span>
 
-<span class="no">vae</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(<span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">"rmsprop"</span>, <span class="kw">loss</span> <span class="kw">=</span> <span class="no">vae_loss</span>)
+<span class="va">vae</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">"rmsprop"</span>, loss <span class="op">=</span> <span class="va">vae_loss</span><span class="op">)</span>
 
 
 <span class="co"># Data preparation --------------------------------------------------------</span>
 
-<span class="no">mnist</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span>()
-<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="no">mnist</span>$<span class="no">train</span>$<span class="no">x</span>/<span class="fl">255</span>
-<span class="no">x_test</span> <span class="kw">&lt;-</span> <span class="no">mnist</span>$<span class="no">test</span>$<span class="no">x</span>/<span class="fl">255</span>
-<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span>(<span class="no">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">x_train</span>), <span class="fl">784</span>), <span class="kw">order</span> <span class="kw">=</span> <span class="st">"F"</span>)
-<span class="no">x_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span>(<span class="no">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">x_test</span>), <span class="fl">784</span>), <span class="kw">order</span> <span class="kw">=</span> <span class="st">"F"</span>)
+<span class="va">mnist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span><span class="op">/</span><span class="fl">255</span>
+<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span><span class="op">/</span><span class="fl">255</span>
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="fl">784</span><span class="op">)</span>, order <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span>
+<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="fl">784</span><span class="op">)</span>, order <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span>
 
 
 <span class="co"># Model training ----------------------------------------------------------</span>
 
-<span class="no">vae</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-  <span class="no">x_train</span>, <span class="no">x_train</span>,
-  <span class="kw">shuffle</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-  <span class="kw">epochs</span> <span class="kw">=</span> <span class="no">epochs</span>,
-  <span class="kw">batch_size</span> <span class="kw">=</span> <span class="no">batch_size</span>,
-  <span class="kw">validation_data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x_test</span>, <span class="no">x_test</span>)
-)
+<span class="va">vae</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+  <span class="va">x_train</span>, <span class="va">x_train</span>, 
+  shuffle <span class="op">=</span> <span class="cn">TRUE</span>, 
+  epochs <span class="op">=</span> <span class="va">epochs</span>, 
+  batch_size <span class="op">=</span> <span class="va">batch_size</span>, 
+  validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="op">)</span>
 
 
 <span class="co"># Visualizations ----------------------------------------------------------</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="no">x_test_encoded</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">encoder</span>, <span class="no">x_test</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="no">batch_size</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="va">x_test_encoded</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">encoder</span>, <span class="va">x_test</span>, batch_size <span class="op">=</span> <span class="va">batch_size</span><span class="op">)</span>
 
-<span class="no">x_test_encoded</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">as_data_frame</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">class</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="no">mnist</span>$<span class="no">test</span>$<span class="no">y</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">V1</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">V2</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">class</span>)) + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()
+<span class="va">x_test_encoded</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">as_data_frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">V1</span>, y <span class="op">=</span> <span class="va">V2</span>, colour <span class="op">=</span> <span class="va">class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># display a 2D manifold of the digits</span>
-<span class="no">n</span> <span class="kw">&lt;-</span> <span class="fl">15</span>  <span class="co"># figure with 15x15 digits</span>
-<span class="no">digit_size</span> <span class="kw">&lt;-</span> <span class="fl">28</span>
+<span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">15</span>  <span class="co"># figure with 15x15 digits</span>
+<span class="va">digit_size</span> <span class="op">&lt;-</span> <span class="fl">28</span>
 
 <span class="co"># we will sample n points within [-4, 4] standard deviations</span>
-<span class="no">grid_x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(-<span class="fl">4</span>, <span class="fl">4</span>, <span class="kw">length.out</span> <span class="kw">=</span> <span class="no">n</span>)
-<span class="no">grid_y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(-<span class="fl">4</span>, <span class="fl">4</span>, <span class="kw">length.out</span> <span class="kw">=</span> <span class="no">n</span>)
+<span class="va">grid_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span>, length.out <span class="op">=</span> <span class="va">n</span><span class="op">)</span>
+<span class="va">grid_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span>, length.out <span class="op">=</span> <span class="va">n</span><span class="op">)</span>
 
-<span class="no">rows</span> <span class="kw">&lt;-</span> <span class="kw">NULL</span>
-<span class="kw">for</span>(<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">grid_x</span>)){
-  <span class="no">column</span> <span class="kw">&lt;-</span> <span class="kw">NULL</span>
-  <span class="kw">for</span>(<span class="no">j</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">grid_y</span>)){
-    <span class="no">z_sample</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">grid_x</span>[<span class="no">i</span>], <span class="no">grid_y</span>[<span class="no">j</span>]), <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>)
-    <span class="no">column</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span>(<span class="no">column</span>, <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">generator</span>, <span class="no">z_sample</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">28</span>) )
-  }
-  <span class="no">rows</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="no">rows</span>, <span class="no">column</span>)
-}
-<span class="no">rows</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>()</pre></body></html></div>
+<span class="va">rows</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">grid_x</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">column</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
+  <span class="kw">for</span><span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">grid_y</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+    <span class="va">z_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">grid_x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">grid_y</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+    <span class="va">column</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">rbind</a></span><span class="op">(</span><span class="va">column</span>, <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">generator</span>, <span class="va">z_sample</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">28</span><span class="op">)</span> <span class="op">)</span>
+  <span class="op">}</span>
+  <span class="va">rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">rows</span>, <span class="va">column</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="va">rows</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -320,11 +321,11 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

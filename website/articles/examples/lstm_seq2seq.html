@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="lstm_seq2seq_files/header-attrs-2.3/header-attrs.js"></script><script src="lstm_seq2seq_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="lstm_seq2seq_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>lstm_seq2seq</h1>
@@ -215,97 +215,102 @@
 <li>Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation <a href="https://arxiv.org/abs/1406.1078" class="uri">https://arxiv.org/abs/1406.1078</a>
 </li>
 </ul>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">data.table</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span>
 
-<span class="no">batch_size</span> <span class="kw">=</span> <span class="fl">64</span>  <span class="co"># Batch size for training.</span>
-<span class="no">epochs</span> <span class="kw">=</span> <span class="fl">100</span>  <span class="co"># Number of epochs to train for.</span>
-<span class="no">latent_dim</span> <span class="kw">=</span> <span class="fl">256</span>  <span class="co"># Latent dimensionality of the encoding space.</span>
-<span class="no">num_samples</span> <span class="kw">=</span> <span class="fl">10000</span>  <span class="co"># Number of samples to train on.</span>
+<span class="va">batch_size</span> <span class="op">=</span> <span class="fl">64</span>  <span class="co"># Batch size for training.</span>
+<span class="va">epochs</span> <span class="op">=</span> <span class="fl">100</span>  <span class="co"># Number of epochs to train for.</span>
+<span class="va">latent_dim</span> <span class="op">=</span> <span class="fl">256</span>  <span class="co"># Latent dimensionality of the encoding space.</span>
+<span class="va">num_samples</span> <span class="op">=</span> <span class="fl">10000</span>  <span class="co"># Number of samples to train on.</span>
 
 <span class="co">## Path to the data txt file on disk.</span>
-<span class="no">data_path</span> <span class="kw">=</span> <span class="st">'fra.txt'</span>
-<span class="no">text</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span>(<span class="no">data_path</span>, <span class="kw">sep</span><span class="kw">=</span><span class="st">"\t"</span>, <span class="kw">header</span><span class="kw">=</span><span class="fl">FALSE</span>, <span class="kw">nrows</span><span class="kw">=</span><span class="no">num_samples</span>)
+<span class="va">data_path</span> <span class="op">=</span> <span class="st">'fra.txt'</span>
+<span class="va">text</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="va">data_path</span>, sep<span class="op">=</span><span class="st">"\t"</span>, header<span class="op">=</span><span class="cn">FALSE</span>, nrows<span class="op">=</span><span class="va">num_samples</span><span class="op">)</span>
 
 <span class="co">## Vectorize the data.</span>
-<span class="no">input_texts</span>  <span class="kw">&lt;-</span> <span class="no">text</span><span class="kw">[[</span><span class="fl">1</span>]]
-<span class="no">target_texts</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">'\t'</span>,<span class="no">text</span><span class="kw">[[</span><span class="fl">2</span>]],<span class="st">'\n'</span>)
-<span class="no">input_texts</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>( <span class="no">input_texts</span>, <span class="kw">function</span>(<span class="no">s</span>) <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/tstrsplit.html">strsplit</a></span>(<span class="no">s</span>, <span class="kw">split</span><span class="kw">=</span><span class="st">""</span>)<span class="kw">[[</span><span class="fl">1</span>]])
-<span class="no">target_texts</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>( <span class="no">target_texts</span>, <span class="kw">function</span>(<span class="no">s</span>) <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/tstrsplit.html">strsplit</a></span>(<span class="no">s</span>, <span class="kw">split</span><span class="kw">=</span><span class="st">""</span>)<span class="kw">[[</span><span class="fl">1</span>]])
+<span class="va">input_texts</span>  <span class="op">&lt;-</span> <span class="va">text</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+<span class="va">target_texts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'\t'</span>,<span class="va">text</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>,<span class="st">'\n'</span><span class="op">)</span>
+<span class="va">input_texts</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span> <span class="va">input_texts</span>, <span class="kw">function</span><span class="op">(</span><span class="va">s</span><span class="op">)</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/tstrsplit.html">strsplit</a></span><span class="op">(</span><span class="va">s</span>, split<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+<span class="va">target_texts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span> <span class="va">target_texts</span>, <span class="kw">function</span><span class="op">(</span><span class="va">s</span><span class="op">)</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/tstrsplit.html">strsplit</a></span><span class="op">(</span><span class="va">s</span>, split<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 
-<span class="no">input_characters</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span>(<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span>(<span class="no">input_texts</span>)))
-<span class="no">target_characters</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span>(<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span>(<span class="no">target_texts</span>)))
-<span class="no">num_encoder_tokens</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">input_characters</span>)
-<span class="no">num_decoder_tokens</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">target_characters</span>)
-<span class="no">max_encoder_seq_length</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="no">input_texts</span>,<span class="no">length</span>))
-<span class="no">max_decoder_seq_length</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="no">target_texts</span>,<span class="no">length</span>))
+<span class="va">input_characters</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">input_texts</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">target_characters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">target_texts</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">num_encoder_tokens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">input_characters</span><span class="op">)</span>
+<span class="va">num_decoder_tokens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">target_characters</span><span class="op">)</span>
+<span class="va">max_encoder_seq_length</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">input_texts</span>,<span class="va">length</span><span class="op">)</span><span class="op">)</span>
+<span class="va">max_decoder_seq_length</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">target_texts</span>,<span class="va">length</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Number of samples:'</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">input_texts</span>),<span class="st">'\n'</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Number of unique input tokens:'</span>, <span class="no">num_encoder_tokens</span>,<span class="st">'\n'</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Number of unique output tokens:'</span>, <span class="no">num_decoder_tokens</span>,<span class="st">'\n'</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Max sequence length for inputs:'</span>, <span class="no">max_encoder_seq_length</span>,<span class="st">'\n'</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Max sequence length for outputs:'</span>, <span class="no">max_decoder_seq_length</span>,<span class="st">'\n'</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Number of samples:'</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">input_texts</span><span class="op">)</span>,<span class="st">'\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Number of unique input tokens:'</span>, <span class="va">num_encoder_tokens</span>,<span class="st">'\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Number of unique output tokens:'</span>, <span class="va">num_decoder_tokens</span>,<span class="st">'\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Max sequence length for inputs:'</span>, <span class="va">max_encoder_seq_length</span>,<span class="st">'\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Max sequence length for outputs:'</span>, <span class="va">max_decoder_seq_length</span>,<span class="st">'\n'</span><span class="op">)</span>
 
-<span class="no">input_token_index</span>  <span class="kw">&lt;-</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">input_characters</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">input_token_index</span>) <span class="kw">&lt;-</span> <span class="no">input_characters</span>
-<span class="no">target_token_index</span> <span class="kw">&lt;-</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">target_characters</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">target_token_index</span>) <span class="kw">&lt;-</span> <span class="no">target_characters</span>
-<span class="no">encoder_input_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(
-  <span class="fl">0</span>, <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">input_texts</span>), <span class="no">max_encoder_seq_length</span>, <span class="no">num_encoder_tokens</span>))
-<span class="no">decoder_input_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(
-  <span class="fl">0</span>, <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">input_texts</span>), <span class="no">max_decoder_seq_length</span>, <span class="no">num_decoder_tokens</span>))
-<span class="no">decoder_target_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(
-  <span class="fl">0</span>, <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">input_texts</span>), <span class="no">max_decoder_seq_length</span>, <span class="no">num_decoder_tokens</span>))
+<span class="va">input_token_index</span>  <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">input_characters</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">input_token_index</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">input_characters</span>
+<span class="va">target_token_index</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">target_characters</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">target_token_index</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">target_characters</span>
+<span class="va">encoder_input_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span>
+  <span class="fl">0</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">input_texts</span><span class="op">)</span>, <span class="va">max_encoder_seq_length</span>, <span class="va">num_encoder_tokens</span><span class="op">)</span><span class="op">)</span>
+<span class="va">decoder_input_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span>
+  <span class="fl">0</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">input_texts</span><span class="op">)</span>, <span class="va">max_decoder_seq_length</span>, <span class="va">num_decoder_tokens</span><span class="op">)</span><span class="op">)</span>
+<span class="va">decoder_target_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span>
+  <span class="fl">0</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">input_texts</span><span class="op">)</span>, <span class="va">max_decoder_seq_length</span>, <span class="va">num_decoder_tokens</span><span class="op">)</span><span class="op">)</span>
 
-<span class="kw">for</span>(<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">input_texts</span>)) {
-  <span class="no">d1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>( <span class="no">input_characters</span>, <span class="kw">function</span>(<span class="no">x</span>) { <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="no">x</span> <span class="kw">==</span> <span class="no">input_texts</span><span class="kw">[[</span><span class="no">i</span>]]) })
-  <span class="no">encoder_input_data</span>[<span class="no">i</span>,<span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">d1</span>),] <span class="kw">&lt;-</span> <span class="no">d1</span>
-  <span class="no">d2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>( <span class="no">target_characters</span>, <span class="kw">function</span>(<span class="no">x</span>) { <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="no">x</span> <span class="kw">==</span> <span class="no">target_texts</span><span class="kw">[[</span><span class="no">i</span>]]) })
-  <span class="no">decoder_input_data</span>[<span class="no">i</span>,<span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">d2</span>),] <span class="kw">&lt;-</span> <span class="no">d2</span>
-  <span class="no">d3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>( <span class="no">target_characters</span>, <span class="kw">function</span>(<span class="no">x</span>) { <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="no">x</span> <span class="kw">==</span> <span class="no">target_texts</span><span class="kw">[[</span><span class="no">i</span>]][-<span class="fl">1</span>]) })
-  <span class="no">decoder_target_data</span>[<span class="no">i</span>,<span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">d3</span>),] <span class="kw">&lt;-</span> <span class="no">d3</span>
-}</pre></body></html></div>
-<div class="sourceCode" id="cb2"><html><body><pre class="r">## Create the model</pre></body></html></div>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co">## Define an input sequence and process it.</span>
-<span class="no">encoder_inputs</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="kw">shape</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">NULL</span>,<span class="no">num_encoder_tokens</span>))
-<span class="no">encoder</span>         <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="kw">units</span><span class="kw">=</span><span class="no">latent_dim</span>, <span class="kw">return_state</span><span class="kw">=</span><span class="fl">TRUE</span>)
-<span class="no">encoder_results</span> <span class="kw">&lt;-</span> <span class="no">encoder_inputs</span> <span class="kw">%&gt;%</span> <span class="no">encoder</span>
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">input_texts</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">d1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span> <span class="va">input_characters</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="va">input_texts</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span>
+  <span class="va">encoder_input_data</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d1</span><span class="op">)</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="va">d1</span>
+  <span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span> <span class="va">target_characters</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="va">target_texts</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span>
+  <span class="va">decoder_input_data</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d2</span><span class="op">)</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="va">d2</span>
+  <span class="va">d3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span> <span class="va">target_characters</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="va">target_texts</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span>
+  <span class="va">decoder_target_data</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d3</span><span class="op">)</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="va">d3</span>
+<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Create the model</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Define an input sequence and process it.</span>
+<span class="va">encoder_inputs</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">NULL</span>,<span class="va">num_encoder_tokens</span><span class="op">)</span><span class="op">)</span>
+<span class="va">encoder</span>         <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units<span class="op">=</span><span class="va">latent_dim</span>, return_state<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">encoder_results</span> <span class="op">&lt;-</span> <span class="va">encoder_inputs</span> <span class="op">%&gt;%</span> <span class="va">encoder</span>
 <span class="co">## We discard `encoder_outputs` and only keep the states.</span>
-<span class="no">encoder_states</span>  <span class="kw">&lt;-</span> <span class="no">encoder_results</span>[<span class="fl">2</span>:<span class="fl">3</span>]
+<span class="va">encoder_states</span>  <span class="op">&lt;-</span> <span class="va">encoder_results</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
 
 <span class="co">## Set up the decoder, using `encoder_states` as initial state.</span>
-<span class="no">decoder_inputs</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="kw">shape</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">NULL</span>, <span class="no">num_decoder_tokens</span>))
+<span class="va">decoder_inputs</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="va">num_decoder_tokens</span><span class="op">)</span><span class="op">)</span>
 <span class="co">## We set up our decoder to return full output sequences,</span>
 <span class="co">## and to return internal states as well. We don't use the</span>
 <span class="co">## return states in the training model, but we will use them in inference.</span>
-<span class="no">decoder_lstm</span>    <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span>(<span class="kw">units</span><span class="kw">=</span><span class="no">latent_dim</span>, <span class="kw">return_sequences</span><span class="kw">=</span><span class="fl">TRUE</span>,
-                              <span class="kw">return_state</span><span class="kw">=</span><span class="fl">TRUE</span>, <span class="kw">stateful</span><span class="kw">=</span><span class="fl">FALSE</span>)
-<span class="no">decoder_results</span> <span class="kw">&lt;-</span> <span class="fu">decoder_lstm</span>(<span class="no">decoder_inputs</span>, <span class="kw">initial_state</span><span class="kw">=</span><span class="no">encoder_states</span>)
-<span class="no">decoder_dense</span>   <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span><span class="kw">=</span><span class="no">num_decoder_tokens</span>, <span class="kw">activation</span><span class="kw">=</span><span class="st">'softmax'</span>)
-<span class="no">decoder_outputs</span> <span class="kw">&lt;-</span> <span class="fu">decoder_dense</span>(<span class="no">decoder_results</span><span class="kw">[[</span><span class="fl">1</span>]])
+<span class="va">decoder_lstm</span>    <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units<span class="op">=</span><span class="va">latent_dim</span>, return_sequences<span class="op">=</span><span class="cn">TRUE</span>,
+                              return_state<span class="op">=</span><span class="cn">TRUE</span>, stateful<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">decoder_results</span> <span class="op">&lt;-</span> <span class="fu">decoder_lstm</span><span class="op">(</span><span class="va">decoder_inputs</span>, initial_state<span class="op">=</span><span class="va">encoder_states</span><span class="op">)</span>
+<span class="va">decoder_dense</span>   <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units<span class="op">=</span><span class="va">num_decoder_tokens</span>, activation<span class="op">=</span><span class="st">'softmax'</span><span class="op">)</span>
+<span class="va">decoder_outputs</span> <span class="op">&lt;-</span> <span class="fu">decoder_dense</span><span class="op">(</span><span class="va">decoder_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 
 <span class="co">## Define the model that will turn</span>
 <span class="co">## `encoder_input_data` &amp; `decoder_input_data` into `decoder_target_data`</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span>( <span class="kw">inputs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">encoder_inputs</span>, <span class="no">decoder_inputs</span>),
-                      <span class="kw">outputs</span> <span class="kw">=</span> <span class="no">decoder_outputs</span> )
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span> inputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">encoder_inputs</span>, <span class="va">decoder_inputs</span><span class="op">)</span>,
+                      outputs <span class="op">=</span> <span class="va">decoder_outputs</span> <span class="op">)</span>
 
 <span class="co">## Compile model</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(<span class="kw">optimizer</span><span class="kw">=</span><span class="st">'rmsprop'</span>, <span class="kw">loss</span><span class="kw">=</span><span class="st">'categorical_crossentropy'</span>)
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer<span class="op">=</span><span class="st">'rmsprop'</span>, loss<span class="op">=</span><span class="st">'categorical_crossentropy'</span><span class="op">)</span>
 
 <span class="co">## Run model</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>( <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">encoder_input_data</span>, <span class="no">decoder_input_data</span>), <span class="no">decoder_target_data</span>,
-               <span class="kw">batch_size</span><span class="kw">=</span><span class="no">batch_size</span>,
-               <span class="kw">epochs</span><span class="kw">=</span><span class="no">epochs</span>,
-               <span class="kw">validation_split</span><span class="kw">=</span><span class="fl">0.2</span>)
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">encoder_input_data</span>, <span class="va">decoder_input_data</span><span class="op">)</span>, <span class="va">decoder_target_data</span>,
+               batch_size<span class="op">=</span><span class="va">batch_size</span>,
+               epochs<span class="op">=</span><span class="va">epochs</span>,
+               validation_split<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>
 
 <span class="co">## Save model</span>
-<span class="fu"><a href="../../reference/save_model_hdf5.html">save_model_hdf5</a></span>(<span class="no">model</span>,<span class="st">'s2s.h5'</span>)
-<span class="fu"><a href="../../reference/save_model_weights_hdf5.html">save_model_weights_hdf5</a></span>(<span class="no">model</span>,<span class="st">'s2s-wt.h5'</span>)
+<span class="fu"><a href="../../reference/save_model_hdf5.html">save_model_hdf5</a></span><span class="op">(</span><span class="va">model</span>,<span class="st">'s2s.h5'</span><span class="op">)</span>
+<span class="fu"><a href="../../reference/save_model_weights_hdf5.html">save_model_weights_hdf5</a></span><span class="op">(</span><span class="va">model</span>,<span class="st">'s2s-wt.h5'</span><span class="op">)</span>
 
 <span class="co">##model &lt;- load_model_hdf5('s2s.h5')</span>
-<span class="co">##load_model_weights_hdf5(model,'s2s-wt.h5')</span></pre></body></html></div>
-<div class="sourceCode" id="cb4"><html><body><pre class="r">## Next: inference mode (sampling).</pre></body></html></div>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co">## Here's the drill:</span>
+<span class="co">##load_model_weights_hdf5(model,'s2s-wt.h5')</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Next: inference mode (sampling).</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Here's the drill:</span>
 <span class="co">## 1) encode input and retrieve initial decoder state</span>
 <span class="co">## 2) run one step of decoder with this initial state</span>
 <span class="co">## and a "start of sequence" token as target.</span>
@@ -313,82 +318,82 @@
 <span class="co">## 3) Repeat with the current target token and current states</span>
 
 <span class="co">## Define sampling models</span>
-<span class="no">encoder_model</span> <span class="kw">&lt;-</span>  <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span>(<span class="no">encoder_inputs</span>, <span class="no">encoder_states</span>)
-<span class="no">decoder_state_input_h</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="kw">shape</span><span class="kw">=</span><span class="no">latent_dim</span>)
-<span class="no">decoder_state_input_c</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span>(<span class="kw">shape</span><span class="kw">=</span><span class="no">latent_dim</span>)
-<span class="no">decoder_states_inputs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">decoder_state_input_h</span>, <span class="no">decoder_state_input_c</span>)
-<span class="no">decoder_results</span> <span class="kw">&lt;-</span> <span class="fu">decoder_lstm</span>(<span class="no">decoder_inputs</span>, <span class="kw">initial_state</span><span class="kw">=</span><span class="no">decoder_states_inputs</span>)
-<span class="no">decoder_states</span>  <span class="kw">&lt;-</span> <span class="no">decoder_results</span>[<span class="fl">2</span>:<span class="fl">3</span>]
-<span class="no">decoder_outputs</span> <span class="kw">&lt;-</span> <span class="fu">decoder_dense</span>(<span class="no">decoder_results</span><span class="kw">[[</span><span class="fl">1</span>]])
-<span class="no">decoder_model</span>   <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span>(
-  <span class="kw">inputs</span>  <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">decoder_inputs</span>, <span class="no">decoder_states_inputs</span>),
-  <span class="kw">outputs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">decoder_outputs</span>, <span class="no">decoder_states</span>))
+<span class="va">encoder_model</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">encoder_inputs</span>, <span class="va">encoder_states</span><span class="op">)</span>
+<span class="va">decoder_state_input_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape<span class="op">=</span><span class="va">latent_dim</span><span class="op">)</span>
+<span class="va">decoder_state_input_c</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape<span class="op">=</span><span class="va">latent_dim</span><span class="op">)</span>
+<span class="va">decoder_states_inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">decoder_state_input_h</span>, <span class="va">decoder_state_input_c</span><span class="op">)</span>
+<span class="va">decoder_results</span> <span class="op">&lt;-</span> <span class="fu">decoder_lstm</span><span class="op">(</span><span class="va">decoder_inputs</span>, initial_state<span class="op">=</span><span class="va">decoder_states_inputs</span><span class="op">)</span>
+<span class="va">decoder_states</span>  <span class="op">&lt;-</span> <span class="va">decoder_results</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
+<span class="va">decoder_outputs</span> <span class="op">&lt;-</span> <span class="fu">decoder_dense</span><span class="op">(</span><span class="va">decoder_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+<span class="va">decoder_model</span>   <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span>
+  inputs  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">decoder_inputs</span>, <span class="va">decoder_states_inputs</span><span class="op">)</span>,
+  outputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">decoder_outputs</span>, <span class="va">decoder_states</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co">## Reverse-lookup token index to decode sequences back to</span>
 <span class="co">## something readable.</span>
-<span class="no">reverse_input_char_index</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">input_characters</span>)
-<span class="no">reverse_target_char_index</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">target_characters</span>)
+<span class="va">reverse_input_char_index</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">input_characters</span><span class="op">)</span>
+<span class="va">reverse_target_char_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">target_characters</span><span class="op">)</span>
 
-<span class="no">decode_sequence</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">input_seq</span>) {
+<span class="va">decode_sequence</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_seq</span><span class="op">)</span> <span class="op">{</span>
   <span class="co">## Encode the input as state vectors.</span>
-  <span class="no">states_value</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">encoder_model</span>, <span class="no">input_seq</span>)
-
+  <span class="va">states_value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">encoder_model</span>, <span class="va">input_seq</span><span class="op">)</span>
+  
   <span class="co">## Generate empty target sequence of length 1.</span>
-  <span class="no">target_seq</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fl">0</span>, <span class="kw">dim</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>, <span class="no">num_decoder_tokens</span>))
+  <span class="va">target_seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>, dim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="va">num_decoder_tokens</span><span class="op">)</span><span class="op">)</span>
   <span class="co">## Populate the first character of target sequence with the start character.</span>
-  <span class="no">target_seq</span>[<span class="fl">1</span>, <span class="fl">1</span>, <span class="no">target_token_index</span>[<span class="st">'\t'</span>]] <span class="kw">&lt;-</span> <span class="fl">1.</span>
-
+  <span class="va">target_seq</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="va">target_token_index</span><span class="op">[</span><span class="st">'\t'</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1.</span>
+  
   <span class="co">## Sampling loop for a batch of sequences</span>
   <span class="co">## (to simplify, here we assume a batch of size 1).</span>
-  <span class="no">stop_condition</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-  <span class="no">decoded_sentence</span> <span class="kw">=</span> <span class="st">''</span>
-  <span class="no">maxiter</span> <span class="kw">=</span> <span class="no">max_decoder_seq_length</span>
-  <span class="no">niter</span> <span class="kw">=</span> <span class="fl">1</span>
-  <span class="kw">while</span> (!<span class="no">stop_condition</span> <span class="kw">&amp;&amp;</span> <span class="no">niter</span> <span class="kw">&lt;</span> <span class="no">maxiter</span>) {
-
+  <span class="va">stop_condition</span> <span class="op">=</span> <span class="cn">FALSE</span>
+  <span class="va">decoded_sentence</span> <span class="op">=</span> <span class="st">''</span>
+  <span class="va">maxiter</span> <span class="op">=</span> <span class="va">max_decoder_seq_length</span>
+  <span class="va">niter</span> <span class="op">=</span> <span class="fl">1</span>
+  <span class="kw">while</span> <span class="op">(</span><span class="op">!</span><span class="va">stop_condition</span> <span class="op">&amp;&amp;</span> <span class="va">niter</span> <span class="op">&lt;</span> <span class="va">maxiter</span><span class="op">)</span> <span class="op">{</span>
+    
     <span class="co">## output_tokens, h, c = decoder_model.predict([target_seq] + states_value)</span>
-    <span class="no">decoder_predict</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">decoder_model</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">target_seq</span>), <span class="no">states_value</span>))
-    <span class="no">output_tokens</span> <span class="kw">&lt;-</span> <span class="no">decoder_predict</span><span class="kw">[[</span><span class="fl">1</span>]]
-
+    <span class="va">decoder_predict</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">decoder_model</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">target_seq</span><span class="op">)</span>, <span class="va">states_value</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">output_tokens</span> <span class="op">&lt;-</span> <span class="va">decoder_predict</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+    
     <span class="co">## Sample a token</span>
-    <span class="no">sampled_token_index</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span>(<span class="no">output_tokens</span>[<span class="fl">1</span>, <span class="fl">1</span>, ])
-    <span class="no">sampled_char</span> <span class="kw">&lt;-</span> <span class="no">reverse_target_char_index</span>[<span class="no">sampled_token_index</span>]
-    <span class="no">decoded_sentence</span> <span class="kw">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">decoded_sentence</span>, <span class="no">sampled_char</span>)
-    <span class="no">decoded_sentence</span>
-
+    <span class="va">sampled_token_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="va">output_tokens</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="op">]</span><span class="op">)</span>
+    <span class="va">sampled_char</span> <span class="op">&lt;-</span> <span class="va">reverse_target_char_index</span><span class="op">[</span><span class="va">sampled_token_index</span><span class="op">]</span>
+    <span class="va">decoded_sentence</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">decoded_sentence</span>, <span class="va">sampled_char</span><span class="op">)</span>
+    <span class="va">decoded_sentence</span>
+    
     <span class="co">## Exit condition: either hit max length</span>
     <span class="co">## or find stop character.</span>
-    <span class="kw">if</span> (<span class="no">sampled_char</span> <span class="kw">==</span> <span class="st">'\n'</span> <span class="kw">||</span>
-        <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">decoded_sentence</span>) <span class="kw">&gt;</span> <span class="no">max_decoder_seq_length</span>) {
-      <span class="no">stop_condition</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-    }
-
+    <span class="kw">if</span> <span class="op">(</span><span class="va">sampled_char</span> <span class="op">==</span> <span class="st">'\n'</span> <span class="op">||</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">decoded_sentence</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">max_decoder_seq_length</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">stop_condition</span> <span class="op">=</span> <span class="cn">TRUE</span>
+    <span class="op">}</span>
+    
     <span class="co">## Update the target sequence (of length 1).</span>
     <span class="co">## target_seq = np.zeros((1, 1, num_decoder_tokens))</span>
-    <span class="no">target_seq</span>[<span class="fl">1</span>, <span class="fl">1</span>, ] <span class="kw">&lt;-</span> <span class="fl">0</span>
-    <span class="no">target_seq</span>[<span class="fl">1</span>, <span class="fl">1</span>, <span class="no">sampled_token_index</span>] <span class="kw">&lt;-</span> <span class="fl">1.</span>
-
+    <span class="va">target_seq</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
+    <span class="va">target_seq</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="va">sampled_token_index</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1.</span>
+    
     <span class="co">## Update states</span>
-    <span class="no">h</span> <span class="kw">&lt;-</span> <span class="no">decoder_predict</span><span class="kw">[[</span><span class="fl">2</span>]]
-    <span class="no">c</span> <span class="kw">&lt;-</span> <span class="no">decoder_predict</span><span class="kw">[[</span><span class="fl">3</span>]]
-    <span class="no">states_value</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">h</span>, <span class="no">c</span>)
-    <span class="no">niter</span> <span class="kw">&lt;-</span> <span class="no">niter</span> + <span class="fl">1</span>
-  }
-  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">decoded_sentence</span>)
-}
+    <span class="va">h</span> <span class="op">&lt;-</span> <span class="va">decoder_predict</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>
+    <span class="va">c</span> <span class="op">&lt;-</span> <span class="va">decoder_predict</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span>
+    <span class="va">states_value</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">h</span>, <span class="va">c</span><span class="op">)</span>
+    <span class="va">niter</span> <span class="op">&lt;-</span> <span class="va">niter</span> <span class="op">+</span> <span class="fl">1</span>
+  <span class="op">}</span>    
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">decoded_sentence</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="kw">for</span> (<span class="no">seq_index</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fl">100</span>) {
+<span class="kw">for</span> <span class="op">(</span><span class="va">seq_index</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="op">{</span>
   <span class="co">## Take one sequence (part of the training test)</span>
   <span class="co">## for trying out decoding.</span>
-  <span class="no">input_seq</span> <span class="kw">=</span> <span class="no">encoder_input_data</span>[<span class="no">seq_index</span>,,,<span class="kw">drop</span><span class="kw">=</span><span class="fl">FALSE</span>]
-  <span class="no">decoded_sentence</span> <span class="kw">=</span> <span class="fu">decode_sequence</span>(<span class="no">input_seq</span>)
-  <span class="no">target_sentence</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">"\t|\n"</span>,<span class="st">""</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="no">target_texts</span><span class="kw">[[</span><span class="no">seq_index</span>]],<span class="kw">collapse</span><span class="kw">=</span><span class="st">''</span>))
-  <span class="no">input_sentence</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="no">input_texts</span><span class="kw">[[</span><span class="no">seq_index</span>]],<span class="kw">collapse</span><span class="kw">=</span><span class="st">''</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'-\n'</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Input sentence  : '</span>, <span class="no">input_sentence</span>,<span class="st">'\n'</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Target sentence : '</span>, <span class="no">target_sentence</span>,<span class="st">'\n'</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'Decoded sentence: '</span>, <span class="no">decoded_sentence</span>,<span class="st">'\n'</span>)
-}</pre></body></html></div>
+  <span class="va">input_seq</span> <span class="op">=</span> <span class="va">encoder_input_data</span><span class="op">[</span><span class="va">seq_index</span>,,,drop<span class="op">=</span><span class="cn">FALSE</span><span class="op">]</span>
+  <span class="va">decoded_sentence</span> <span class="op">=</span> <span class="fu">decode_sequence</span><span class="op">(</span><span class="va">input_seq</span><span class="op">)</span>
+  <span class="va">target_sentence</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"\t|\n"</span>,<span class="st">""</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">target_texts</span><span class="op">[[</span><span class="va">seq_index</span><span class="op">]</span><span class="op">]</span>,collapse<span class="op">=</span><span class="st">''</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">input_sentence</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">input_texts</span><span class="op">[[</span><span class="va">seq_index</span><span class="op">]</span><span class="op">]</span>,collapse<span class="op">=</span><span class="st">''</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'-\n'</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Input sentence  : '</span>, <span class="va">input_sentence</span>,<span class="st">'\n'</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Target sentence : '</span>, <span class="va">target_sentence</span>,<span class="st">'\n'</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Decoded sentence: '</span>, <span class="va">decoded_sentence</span>,<span class="st">'\n'</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -400,11 +405,11 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

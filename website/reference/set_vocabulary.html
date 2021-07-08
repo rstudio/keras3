@@ -50,11 +50,11 @@
 
 <meta property="og:title" content="Sets vocabulary (and optionally document frequency) data for the layer — set_vocabulary" />
 <meta property="og:description" content="This method sets the vocabulary and DF data for this layer directly, instead
-of analyzing a dataset through adapt(). It should be used whenever the vocab
-(and optionally document frequency) information is already known. If
+of analyzing a dataset through adapt(). It should be used whenever the
+vocab (and optionally document frequency) information is already known. If
 vocabulary data is already present in the layer, this method will either
-replace it, if append is set to FALSE, or append to it (if 'append' is set
-to TRUE)" />
+replace it, if append is set to FALSE, or append to it (if 'append' is
+set to TRUE)" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -87,7 +87,7 @@ to TRUE)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -205,7 +205,7 @@ to TRUE)" />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -229,20 +229,21 @@ to TRUE)" />
 
     <div class="ref-description">
     <p>This method sets the vocabulary and DF data for this layer directly, instead
-of analyzing a dataset through <code><a href='adapt.html'>adapt()</a></code>. It should be used whenever the <code>vocab</code>
-(and optionally document frequency) information is already known. If
+of analyzing a dataset through <code><a href='adapt.html'>adapt()</a></code>. It should be used whenever the
+<code>vocab</code> (and optionally document frequency) information is already known. If
 vocabulary data is already present in the layer, this method will either
-replace it, if <code>append</code> is set to <code>FALSE</code>, or append to it (if 'append' is set
-to <code>TRUE</code>)</p>
+replace it, if <code>append</code> is set to <code>FALSE</code>, or append to it (if 'append' is
+set to <code>TRUE</code>)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_vocabulary</span>(
-  <span class='no'>object</span>,
-  <span class='no'>vocab</span>,
-  <span class='kw'>df_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>oov_df_value</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>set_vocabulary</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>vocab</span>,
+  idf_weights <span class='op'>=</span> <span class='cn'>NULL</span>,
+  df_data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  oov_df_value <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  append <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -256,20 +257,26 @@ to <code>TRUE</code>)</p>
       <td><p>An array of string tokens.</p></td>
     </tr>
     <tr>
+      <th>idf_weights</th>
+      <td><p>An array of document frequency data with equal length to
+vocab. Only necessary if the layer output_mode is TFIDF.</p></td>
+    </tr>
+    <tr>
       <th>df_data</th>
-      <td><p>An array of document frequency data. Only necessary if the layer
-output_mode is "tfidf".</p></td>
+      <td><p><em>deprecated</em> An array of document frequency data. Only
+necessary if the layer output_mode is "tfidf".</p></td>
     </tr>
     <tr>
       <th>oov_df_value</th>
-      <td><p>The document frequency of the OOV token. Only necessary if
-output_mode is "tfidf". OOV data is optional when appending additional
-data in "tfidf" mode; if an OOV value is supplied it will overwrite the
-existing OOV value.</p></td>
+      <td><p><em>deprecated</em> The document frequency of the OOV token.
+Only necessary if output_mode is "tfidf". OOV data is optional when
+appending additional data in "tfidf" mode; if an OOV value is supplied it
+will overwrite the existing OOV value.</p></td>
     </tr>
     <tr>
       <th>append</th>
-      <td><p>Whether to overwrite or append any existing vocabulary data.</p></td>
+      <td><p>Whether to overwrite or append any existing vocabulary data.
+(deprecated since TensorFlow &gt;= 2.3)</p></td>
     </tr>
     </table>
 
@@ -288,11 +295,11 @@ existing OOV value.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

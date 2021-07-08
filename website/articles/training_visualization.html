@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="training_visualization_files/header-attrs-2.3/header-attrs.js"></script><script src="training_visualization_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="training_visualization_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Training Visualization</h1>
@@ -189,35 +189,38 @@
 <a href="#overview" class="anchor"></a>Overview</h2>
 <p>There are a number of tools available for visualizing the training of Keras models, including:</p>
 <ol style="list-style-type: decimal">
-<li><p>A <a href="https://keras.rstudio.com/reference/plot.keras_training_history.html">plot method</a> for the Keras training history returned from <code><a href="https://rdrr.io/pkg/generics/man/fit.html">fit()</a></code>.</p></li>
+<li><p>A <a href="https://keras.rstudio.com/reference/plot.keras_training_history.html">plot method</a> for the Keras training history returned from <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>.</p></li>
 <li><p>Real time visualization of training metrics within the RStudio IDE.</p></li>
-<li><p>Integration with the <a href="https://www.tensorflow.org/get_started/summaries_and_tensorboard">TensorBoard</a> visualization tool included with TensorFlow. Beyond just training metrics, TensorBoard has a wide variety of other visualizations available including the underlying TensorFlow graph, gradient histograms, model weights, and more. TensorBoard also enables you to compare metrics across multiple training runs.</p></li>
+<li><p>Integration with the <a href="https://www.tensorflow.org/tensorboard/get_started">TensorBoard</a> visualization tool included with TensorFlow. Beyond just training metrics, TensorBoard has a wide variety of other visualizations available including the underlying TensorFlow graph, gradient histograms, model weights, and more. TensorBoard also enables you to compare metrics across multiple training runs.</p></li>
 </ol>
 <p>Each of these tools is described in more detail below.</p>
 </div>
 <div id="plotting-history" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plotting-history" class="anchor"></a>Plotting History</h2>
-<p>The Keras <code><a href="https://rdrr.io/pkg/generics/man/fit.html">fit()</a></code> method returns an R object containing the training history, including the value of metrics at the end of each epoch . You can plot the training metrics by epoch using the <code><a href="https://rdrr.io/r/base/plot.html">plot()</a></code> method.</p>
+<p>The Keras <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> method returns an R object containing the training history, including the value of metrics at the end of each epoch . You can plot the training metrics by epoch using the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> method.</p>
 <p>For example, here we compile and fit a model with the “accuracy” metric:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'categorical_crossentropy'</span>,
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(),
-  <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>)
-)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
+  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="op">)</span>,
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+<span class="op">)</span>
 
-<span class="no">history</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-  <span class="no">x_train</span>, <span class="no">y_train</span>,
-  <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">30</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">128</span>,
-  <span class="kw">validation_split</span> <span class="kw">=</span> <span class="fl">0.2</span>
-)</pre></body></html></div>
+<span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+  <span class="va">x_train</span>, <span class="va">y_train</span>, 
+  epochs <span class="op">=</span> <span class="fl">30</span>, batch_size <span class="op">=</span> <span class="fl">128</span>, 
+  validation_split <span class="op">=</span> <span class="fl">0.2</span>
+<span class="op">)</span></code></pre></div>
 <p>We can then plot the training history as follows:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">history</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span></code></pre></div>
 <p><img src="images/training_history_ggplot2.png" class="r-plot" width="757" height="489"></p>
 <p>The history will be plotted using <a href="https://ggplot2.tidyverse.org/">ggplot2</a> if available (if not then base graphics will be used), include all specified metrics as well as the loss, and draw a smoothing line if there are 10 or more epochs. You can customize all of this behavior via various options of the <a href="https://keras.rstudio.com/reference/plot.keras_training_history.html">plot method</a>.</p>
 <p>If you want to create a custom visualization you can call the <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> method on the history to obtain a data frame with factors for each metric as well as training vs. validation:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">history_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="no">history</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">history_df</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">history_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">history_df</span><span class="op">)</span></code></pre></div>
 <pre><code>'data.frame':   120 obs. of  4 variables:
  $ epoch : int  1 2 3 4 5 6 7 8 9 10 ...
  $ value : num  0.87 0.941 0.954 0.962 0.965 ...
@@ -246,18 +249,19 @@ if (!isMobilePhone()) {
   img.src = "https://i0.wp.com/rstudioblog.files.wordpress.com/2017/08/rstudio-training-metrics-mobile.png";
 }
 a.appendChild(img);
-</script><p>The <code>view_metrics</code> argument of the <code><a href="https://rdrr.io/pkg/generics/man/fit.html">fit()</a></code> method controls whether real time metrics are displayed. By default metrics are automatically displayed if one or more metrics are specified in the call to <code><a href="https://rdrr.io/pkg/generics/man/compile.html">compile()</a></code> and there is more than one training epoch.</p>
+</script><p>The <code>view_metrics</code> argument of the <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> method controls whether real time metrics are displayed. By default metrics are automatically displayed if one or more metrics are specified in the call to <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> and there is more than one training epoch.</p>
 <p>You can explicitly control whether metrics are displayed by specifying the <code>view_metrics</code> argument. You can also set a global session default using the <code>keras.view_metrics</code> option:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># don't show metrics during this run</span>
-<span class="no">history</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-  <span class="no">x_train</span>, <span class="no">y_train</span>,
-  <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">30</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">128</span>,
-  <span class="kw">view_metrics</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-  <span class="kw">validation_split</span> <span class="kw">=</span> <span class="fl">0.2</span>
-)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># don't show metrics during this run</span>
+<span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+  <span class="va">x_train</span>, <span class="va">y_train</span>, 
+  epochs <span class="op">=</span> <span class="fl">30</span>, batch_size <span class="op">=</span> <span class="fl">128</span>, 
+  view_metrics <span class="op">=</span> <span class="cn">FALSE</span>,
+  validation_split <span class="op">=</span> <span class="fl">0.2</span>
+<span class="op">)</span>
 
 <span class="co"># set global default to never show metrics</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">keras.view_metrics</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>keras.view_metrics <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>Note that when <code>view_metrics</code> is <code>TRUE</code> metrics will be displayed even when not running within RStudio (in that case metrics will be displayed in an external web browser).</p>
 </div>
 <div id="tensorboard" class="section level2">
@@ -269,15 +273,16 @@ a.appendChild(img);
 <div id="recording-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#recording-data" class="anchor"></a>Recording Data</h3>
-<p>To record data that can be visualized with TensorBoard, you add a TensorBoard callback to the <code><a href="https://rdrr.io/pkg/generics/man/fit.html">fit()</a></code> function. For example:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">history</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-  <span class="no">x_train</span>, <span class="no">y_train</span>,
-  <span class="kw">batch_size</span> <span class="kw">=</span> <span class="no">batch_size</span>,
-  <span class="kw">epochs</span> <span class="kw">=</span> <span class="no">epochs</span>,
-  <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">1</span>,
-  <span class="kw">callbacks</span> <span class="kw">=</span> <span class="fu"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="st">"logs/run_a"</span>),
-  <span class="kw">validation_split</span> <span class="kw">=</span> <span class="fl">0.2</span>
-)</pre></body></html></div>
+<p>To record data that can be visualized with TensorBoard, you add a TensorBoard callback to the <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> function. For example:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+  <span class="va">x_train</span>, <span class="va">y_train</span>,
+  batch_size <span class="op">=</span> <span class="va">batch_size</span>,
+  epochs <span class="op">=</span> <span class="va">epochs</span>,
+  verbose <span class="op">=</span> <span class="fl">1</span>,
+  callbacks <span class="op">=</span> <span class="fu"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span><span class="op">(</span><span class="st">"logs/run_a"</span><span class="op">)</span>,
+  validation_split <span class="op">=</span> <span class="fl">0.2</span>
+<span class="op">)</span></code></pre></div>
 <p>See the documentation on the <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code> function for the various available options. The most important option is the <code>log_dir</code>, which determines which directory logs are written to for a given training run.</p>
 <p>You should either use a distinct log directory for each training run or remove the log directory between runs.</p>
 </div>
@@ -285,33 +290,38 @@ a.appendChild(img);
 <h3 class="hasAnchor">
 <a href="#viewing-data" class="anchor"></a>Viewing Data</h3>
 <p>To view TensorBoard data for a given set of runs you use the <code><a href="https://rdrr.io/pkg/tensorflow/man/tensorboard.html">tensorboard()</a></code> function, pointing it to the previously specified <code>log_dir</code>:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tensorboard.html">tensorboard</a></span>(<span class="st">"logs/run_a"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tensorboard.html">tensorboard</a></span><span class="op">(</span><span class="st">"logs/run_a"</span><span class="op">)</span></code></pre></div>
 <p>It’s often useful to run TensorBoard while you are training a model. To do this, simply launch tensorboard within the training directory right before you begin training:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># launch TensorBoard (data won't show up until after the first epoch)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tensorboard.html">tensorboard</a></span>(<span class="st">"logs/run_a"</span>)
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># launch TensorBoard (data won't show up until after the first epoch)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tensorboard.html">tensorboard</a></span><span class="op">(</span><span class="st">"logs/run_a"</span><span class="op">)</span>
 
 <span class="co"># fit the model with the TensorBoard callback</span>
-<span class="no">history</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-  <span class="no">x_train</span>, <span class="no">y_train</span>,
-  <span class="kw">batch_size</span> <span class="kw">=</span> <span class="no">batch_size</span>,
-  <span class="kw">epochs</span> <span class="kw">=</span> <span class="no">epochs</span>,
-  <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">1</span>,
-  <span class="kw">callbacks</span> <span class="kw">=</span> <span class="fu"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="st">"logs/run_a"</span>),
-  <span class="kw">validation_split</span> <span class="kw">=</span> <span class="fl">0.2</span>
-)</pre></body></html></div>
+<span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+  <span class="va">x_train</span>, <span class="va">y_train</span>,
+  batch_size <span class="op">=</span> <span class="va">batch_size</span>,
+  epochs <span class="op">=</span> <span class="va">epochs</span>,
+  verbose <span class="op">=</span> <span class="fl">1</span>,
+  callbacks <span class="op">=</span> <span class="fu"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span><span class="op">(</span><span class="st">"logs/run_a"</span><span class="op">)</span>,
+  validation_split <span class="op">=</span> <span class="fl">0.2</span>
+<span class="op">)</span></code></pre></div>
 <p>Keras writes TensorBoard data at the end of each epoch so you won’t see any data in TensorBoard until 10-20 seconds after the end of the first epoch (TensorBoard automatically refreshes it’s display every 30 seconds during training).</p>
 </div>
 <div id="comparing-runs" class="section level3">
 <h3 class="hasAnchor">
 <a href="#comparing-runs" class="anchor"></a>Comparing Runs</h3>
 <p>TensorBoard will automatically include all runs logged within the sub-directories of the specified <code>log_dir</code>, for example, if you logged another run using:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="kw">log_dir</span> <span class="kw">=</span> <span class="st">"logs/run_b"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span><span class="op">(</span>log_dir <span class="op">=</span> <span class="st">"logs/run_b"</span><span class="op">)</span></code></pre></div>
 <p>Then called tensorboard as follows:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tensorboard.html">tensorboard</a></span>(<span class="st">"logs"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tensorboard.html">tensorboard</a></span><span class="op">(</span><span class="st">"logs"</span><span class="op">)</span></code></pre></div>
 <p>The TensorBoard visualization would look like this:</p>
 <p><img src="images/tensorboard_compare.png" class="screenshot" width="700" height="540"></p>
 <p>You can also pass multiple log directories. For example:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tensorboard.html">tensorboard</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"logs/run_a"</span>, <span class="st">"logs/run_b"</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tensorboard.html">tensorboard</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"logs/run_a"</span>, <span class="st">"logs/run_b"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="customization" class="section level3">
 <h3 class="hasAnchor">
@@ -319,21 +329,23 @@ a.appendChild(img);
 <div id="metrics" class="section level4">
 <h4 class="hasAnchor">
 <a href="#metrics" class="anchor"></a>Metrics</h4>
-<p>In the above examples TensorBoard metrics are logged for loss and accuracy. The TensorBoard callback will log data for any metrics which are specified in the <code>metrics</code> parameter of the <code><a href="https://rdrr.io/pkg/generics/man/compile.html">compile()</a></code> function. For example, in the following code:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'mean_squared_error'</span>,
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">'sgd'</span>,
-  <span class="kw">metrics</span><span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'mae'</span>, <span class="st">'acc'</span>)
-)</pre></body></html></div>
+<p>In the above examples TensorBoard metrics are logged for loss and accuracy. The TensorBoard callback will log data for any metrics which are specified in the <code>metrics</code> parameter of the <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> function. For example, in the following code:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  loss <span class="op">=</span> <span class="st">'mean_squared_error'</span>,
+  optimizer <span class="op">=</span> <span class="st">'sgd'</span>,
+  metrics<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'mae'</span>, <span class="st">'acc'</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 <p>TensorBoard data series will be created for the loss (mean squared error) as well as for the mean absolute error and accuracy metrics.</p>
 </div>
 <div id="options" class="section level4">
 <h4 class="hasAnchor">
 <a href="#options" class="anchor"></a>Options</h4>
 <p>The <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code> function includes a number of other options that control logging during training:</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span>(<span class="kw">log_dir</span> <span class="kw">=</span> <span class="st">"logs"</span>, <span class="kw">histogram_freq</span> <span class="kw">=</span> <span class="fl">0</span>,
-  <span class="kw">write_graph</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">write_images</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">embeddings_freq</span> <span class="kw">=</span> <span class="fl">0</span>,
-  <span class="kw">embeddings_layer_names</span> <span class="kw">=</span> <span class="kw">NULL</span>, <span class="kw">embeddings_metadata</span> <span class="kw">=</span> <span class="kw">NULL</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span><span class="op">(</span>log_dir <span class="op">=</span> <span class="st">"logs"</span>, histogram_freq <span class="op">=</span> <span class="fl">0</span>,
+  write_graph <span class="op">=</span> <span class="cn">TRUE</span>, write_images <span class="op">=</span> <span class="cn">FALSE</span>, embeddings_freq <span class="op">=</span> <span class="fl">0</span>,
+  embeddings_layer_names <span class="op">=</span> <span class="cn">NULL</span>, embeddings_metadata <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="20%">
@@ -371,7 +383,7 @@ a.appendChild(img);
 </tr>
 <tr class="odd">
 <td><code>embeddings_metadata</code></td>
-<td>A named list which maps layer name to a file name in which metadata for this embedding layer is saved. See the <a href="https://www.tensorflow.org/how_tos/embedding_viz/#metadata_optional">details</a> about the metadata file format. In case if the same metadata file is used for all embedding layers, string can be passed.</td>
+<td>A named list which maps layer name to a file name in which metadata for this embedding layer is saved. See the <a href="https://www.tensorflow.org/tensorboard/tensorboard_projector_plugin">details</a> about the metadata file format. In case if the same metadata file is used for all embedding layers, string can be passed.</td>
 </tr>
 </tbody>
 </table>
@@ -391,11 +403,11 @@ a.appendChild(img);
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

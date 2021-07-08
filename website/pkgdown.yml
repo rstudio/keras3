@@ -1,65 +1,65 @@
-pandoc: 2.9.2.1
-pkgdown: 1.5.1
+pandoc: 2.11.4
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   applications: applications.html
   custom_layers: custom_layers.html
   custom_models: custom_models.html
-  addition_rnn: examples/addition_rnn.html
-  babi_memnn: examples/babi_memnn.html
-  babi_rnn: examples/babi_rnn.html
-  cifar10_cnn: examples/cifar10_cnn.html
-  cifar10_densenet: examples/cifar10_densenet.html
-  cifar10_resnet: examples/cifar10_resnet.html
-  conv_filter_visualization: examples/conv_filter_visualization.html
-  conv_lstm: examples/conv_lstm.html
-  deep_dream: examples/deep_dream.html
-  eager_cvae: examples/eager_cvae.html
-  eager_dcgan: examples/eager_dcgan.html
-  eager_image_captioning: examples/eager_image_captioning.html
-  eager_pix2pix: examples/eager_pix2pix.html
-  eager_styletransfer: examples/eager_styletransfer.html
-  fine_tuning: examples/fine_tuning.html
-  image_ocr: examples/image_ocr.html
-  imdb_bidirectional_lstm: examples/imdb_bidirectional_lstm.html
-  imdb_cnn: examples/imdb_cnn.html
-  imdb_cnn_lstm: examples/imdb_cnn_lstm.html
-  imdb_fasttext: examples/imdb_fasttext.html
-  imdb_lstm: examples/imdb_lstm.html
-  index: examples/index.html
-  lstm_benchmark: examples/lstm_benchmark.html
-  lstm_seq2seq: examples/lstm_seq2seq.html
-  lstm_stateful: examples/lstm_stateful.html
-  lstm_text_generation: examples/lstm_text_generation.html
-  mmd_cvae: examples/mmd_cvae.html
-  mnist_acgan: examples/mnist_acgan.html
-  mnist_antirectifier: examples/mnist_antirectifier.html
-  mnist_cnn: examples/mnist_cnn.html
-  mnist_cnn_embeddings: examples/mnist_cnn_embeddings.html
-  mnist_dataset_api: examples/mnist_dataset_api.html
-  mnist_hierarchical_rnn: examples/mnist_hierarchical_rnn.html
-  mnist_irnn: examples/mnist_irnn.html
-  mnist_mlp: examples/mnist_mlp.html
-  mnist_net2net: examples/mnist_net2net.html
-  mnist_siamese_graph: examples/mnist_siamese_graph.html
-  mnist_swwae: examples/mnist_swwae.html
-  mnist_tfrecord: examples/mnist_tfrecord.html
-  mnist_transfer_cnn: examples/mnist_transfer_cnn.html
-  neural_style_transfer: examples/neural_style_transfer.html
-  nmt_attention: examples/nmt_attention.html
-  nueral_doodle: examples/nueral_doodle.html
-  pretrained_word_embeddings: examples/pretrained_word_embeddings.html
-  quora_siamese_lstm: examples/quora_siamese_lstm.html
-  reuters_mlp: examples/reuters_mlp.html
-  reuters_mlp_relu_vs_selu: examples/reuters_mlp_relu_vs_selu.html
-  stateful_lstm: examples/stateful_lstm.html
-  text_explanation_lime: examples/text_explanation_lime.html
-  tfprob_vae: examples/tfprob_vae.html
-  unet: examples/unet.html
-  unet_linux: examples/unet_linux.html
-  variational_autoencoder: examples/variational_autoencoder.html
-  variational_autoencoder_deconv: examples/variational_autoencoder_deconv.html
-  vq_vae: examples/vq_vae.html
+  examples/addition_rnn: addition_rnn.html
+  examples/babi_memnn: babi_memnn.html
+  examples/babi_rnn: babi_rnn.html
+  examples/cifar10_cnn: cifar10_cnn.html
+  examples/cifar10_densenet: cifar10_densenet.html
+  examples/cifar10_resnet: cifar10_resnet.html
+  examples/conv_filter_visualization: conv_filter_visualization.html
+  examples/conv_lstm: conv_lstm.html
+  examples/deep_dream: deep_dream.html
+  examples/eager_cvae: eager_cvae.html
+  examples/eager_dcgan: eager_dcgan.html
+  examples/eager_image_captioning: eager_image_captioning.html
+  examples/eager_pix2pix: eager_pix2pix.html
+  examples/eager_styletransfer: eager_styletransfer.html
+  examples/fine_tuning: fine_tuning.html
+  examples/image_ocr: image_ocr.html
+  examples/imdb_bidirectional_lstm: imdb_bidirectional_lstm.html
+  examples/imdb_cnn: imdb_cnn.html
+  examples/imdb_cnn_lstm: imdb_cnn_lstm.html
+  examples/imdb_fasttext: imdb_fasttext.html
+  examples/imdb_lstm: imdb_lstm.html
+  examples/index: index.html
+  examples/lstm_benchmark: lstm_benchmark.html
+  examples/lstm_seq2seq: lstm_seq2seq.html
+  examples/lstm_stateful: lstm_stateful.html
+  examples/lstm_text_generation: lstm_text_generation.html
+  examples/mmd_cvae: mmd_cvae.html
+  examples/mnist_acgan: mnist_acgan.html
+  examples/mnist_antirectifier: mnist_antirectifier.html
+  examples/mnist_cnn: mnist_cnn.html
+  examples/mnist_cnn_embeddings: mnist_cnn_embeddings.html
+  examples/mnist_dataset_api: mnist_dataset_api.html
+  examples/mnist_hierarchical_rnn: mnist_hierarchical_rnn.html
+  examples/mnist_irnn: mnist_irnn.html
+  examples/mnist_mlp: mnist_mlp.html
+  examples/mnist_net2net: mnist_net2net.html
+  examples/mnist_siamese_graph: mnist_siamese_graph.html
+  examples/mnist_swwae: mnist_swwae.html
+  examples/mnist_tfrecord: mnist_tfrecord.html
+  examples/mnist_transfer_cnn: mnist_transfer_cnn.html
+  examples/neural_style_transfer: neural_style_transfer.html
+  examples/nmt_attention: nmt_attention.html
+  examples/nueral_doodle: nueral_doodle.html
+  examples/pretrained_word_embeddings: pretrained_word_embeddings.html
+  examples/quora_siamese_lstm: quora_siamese_lstm.html
+  examples/reuters_mlp: reuters_mlp.html
+  examples/reuters_mlp_relu_vs_selu: reuters_mlp_relu_vs_selu.html
+  examples/stateful_lstm: stateful_lstm.html
+  examples/text_explanation_lime: text_explanation_lime.html
+  examples/tfprob_vae: tfprob_vae.html
+  examples/unet: unet.html
+  examples/unet_linux: unet_linux.html
+  examples/variational_autoencoder: variational_autoencoder.html
+  examples/variational_autoencoder_deconv: variational_autoencoder_deconv.html
+  examples/vq_vae: vq_vae.html
   faq: faq.html
   functional_api: functional_api.html
   guide_keras: guide_keras.html
@@ -68,5 +68,5 @@ articles:
   sequential_model: sequential_model.html
   training_callbacks: training_callbacks.html
   training_visualization: training_visualization.html
-last_built: 2020-08-06T15:34Z
+last_built: 2021-07-07T18:14Z
 

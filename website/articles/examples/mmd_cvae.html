@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="mmd_cvae_files/header-attrs-2.3/header-attrs.js"></script><script src="mmd_cvae_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="mmd_cvae_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>mmd_cvae</h1>
@@ -189,306 +189,307 @@
 </div>
 <p>This is part of the companion code to the post “Representation learning with MMD-VAE” on the TensorFlow for R blog.</p>
 <p><a href="https://blogs.rstudio.com/tensorflow/posts/2018-10-22-mmd-vae/" class="uri">https://blogs.rstudio.com/tensorflow/posts/2018-10-22-mmd-vae/</a></p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
-<span class="fu"><a href="../../reference/use_implementation.html">use_implementation</a></span>(<span class="st">"tensorflow"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tensorflow</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tfe_enable_eager_execution.html">tfe_enable_eager_execution</a></span>(<span class="kw">device_policy</span> <span class="kw">=</span> <span class="st">"silent"</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<span class="fu"><a href="../../reference/use_implementation.html">use_implementation</a></span><span class="op">(</span><span class="st">"tensorflow"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow">tensorflow</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tfe_enable_eager_execution.html">tfe_enable_eager_execution</a></span><span class="op">(</span>device_policy <span class="op">=</span> <span class="st">"silent"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tfdatasets</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">glue</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets">tfdatasets</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/glue">glue</a></span><span class="op">)</span>
 
 
 <span class="co"># Setup and preprocessing -------------------------------------------------</span>
 
-<span class="no">fashion</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dataset_fashion_mnist.html">dataset_fashion_mnist</a></span>()
+<span class="va">fashion</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataset_fashion_mnist.html">dataset_fashion_mnist</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">train_images</span>, <span class="no">train_labels</span>) <span class="kw">%&lt;-%</span> <span class="no">fashion</span>$<span class="no">train</span>
-<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">test_images</span>, <span class="no">test_labels</span>) <span class="kw">%&lt;-%</span> <span class="no">fashion</span>$<span class="no">test</span>
+<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">train_images</span>, <span class="va">train_labels</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="va">fashion</span><span class="op">$</span><span class="va">train</span>
+<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">test_images</span>, <span class="va">test_labels</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="va">fashion</span><span class="op">$</span><span class="va">test</span>
 
-<span class="no">train_x</span> <span class="kw">&lt;-</span>
-  <span class="no">train_images</span> <span class="kw">%&gt;%</span> <span class="fu">`/`</span>(<span class="fl">255</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/k_reshape.html">k_reshape</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">60000</span>, <span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span>))
-<span class="no">test_x</span> <span class="kw">&lt;-</span>
-  <span class="no">test_images</span> <span class="kw">%&gt;%</span> <span class="fu">`/`</span>(<span class="fl">255</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/k_reshape.html">k_reshape</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10000</span>, <span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span>))
+<span class="va">train_x</span> <span class="op">&lt;-</span>
+  <span class="va">train_images</span> <span class="op">%&gt;%</span> <span class="fu">`/`</span><span class="op">(</span><span class="fl">255</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/k_reshape.html">k_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">60000</span>, <span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="va">test_x</span> <span class="op">&lt;-</span>
+  <span class="va">test_images</span> <span class="op">%&gt;%</span> <span class="fu">`/`</span><span class="op">(</span><span class="fl">255</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/k_reshape.html">k_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">class_names</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'T-shirt/top'</span>,
+<span class="va">class_names</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'T-shirt/top'</span>,
                 <span class="st">'Trouser'</span>,
                 <span class="st">'Pullover'</span>,
                 <span class="st">'Dress'</span>,
-                <span class="st">'Coat'</span>,
+                <span class="st">'Coat'</span>, 
                 <span class="st">'Sandal'</span>,
                 <span class="st">'Shirt'</span>,
                 <span class="st">'Sneaker'</span>,
                 <span class="st">'Bag'</span>,
-                <span class="st">'Ankle boot'</span>)
+                <span class="st">'Ankle boot'</span><span class="op">)</span>
 
-<span class="no">buffer_size</span> <span class="kw">&lt;-</span> <span class="fl">60000</span>
-<span class="no">batch_size</span> <span class="kw">&lt;-</span> <span class="fl">100</span>
-<span class="no">batches_per_epoch</span> <span class="kw">&lt;-</span> <span class="no">buffer_size</span> / <span class="no">batch_size</span>
+<span class="va">buffer_size</span> <span class="op">&lt;-</span> <span class="fl">60000</span>
+<span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">100</span>
+<span class="va">batches_per_epoch</span> <span class="op">&lt;-</span> <span class="va">buffer_size</span> <span class="op">/</span> <span class="va">batch_size</span>
 
-<span class="no">train_dataset</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html">tensor_slices_dataset</a></span>(<span class="no">train_x</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_shuffle.html">dataset_shuffle</a></span>(<span class="no">buffer_size</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html">dataset_batch</a></span>(<span class="no">batch_size</span>)
+<span class="va">train_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html">tensor_slices_dataset</a></span><span class="op">(</span><span class="va">train_x</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_shuffle.html">dataset_shuffle</a></span><span class="op">(</span><span class="va">buffer_size</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span>
 
-<span class="no">test_dataset</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html">tensor_slices_dataset</a></span>(<span class="no">test_x</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html">dataset_batch</a></span>(<span class="fl">10000</span>)
+<span class="va">test_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html">tensor_slices_dataset</a></span><span class="op">(</span><span class="va">test_x</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html">dataset_batch</a></span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>
 
 
 <span class="co"># Model -------------------------------------------------------------------</span>
 
-<span class="no">latent_dim</span> <span class="kw">&lt;-</span> <span class="fl">2</span>
+<span class="va">latent_dim</span> <span class="op">&lt;-</span> <span class="fl">2</span>
 
-<span class="no">encoder_model</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">name</span> <span class="kw">=</span> <span class="kw">NULL</span>) {
+<span class="va">encoder_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">name</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="fu"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span>, <span class="kw">function</span><span class="op">(</span><span class="va">self</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">conv1</span> <span class="op">&lt;-</span>
+      <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>
+        filters <span class="op">=</span> <span class="fl">32</span>,
+        kernel_size <span class="op">=</span> <span class="fl">3</span>,
+        strides <span class="op">=</span> <span class="fl">2</span>,
+        activation <span class="op">=</span> <span class="st">"relu"</span>
+      <span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">conv2</span> <span class="op">&lt;-</span>
+      <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>
+        filters <span class="op">=</span> <span class="fl">64</span>,
+        kernel_size <span class="op">=</span> <span class="fl">3</span>,
+        strides <span class="op">=</span> <span class="fl">2</span>,
+        activation <span class="op">=</span> <span class="st">"relu"</span>
+      <span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">flatten</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">latent_dim</span><span class="op">)</span>
+    
+    <span class="kw">function</span> <span class="op">(</span><span class="va">x</span>, <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">x</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">conv1</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">conv2</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">flatten</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">dense</span><span class="op">(</span><span class="op">)</span> 
+    <span class="op">}</span>
+  <span class="op">}</span><span class="op">)</span>
+<span class="op">}</span>
 
-  <span class="fu"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="kw">name</span> <span class="kw">=</span> <span class="no">name</span>, <span class="kw">function</span>(<span class="no">self</span>) {
-    <span class="no">self</span>$<span class="no">conv1</span> <span class="kw">&lt;-</span>
-      <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(
-        <span class="kw">filters</span> <span class="kw">=</span> <span class="fl">32</span>,
-        <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">3</span>,
-        <span class="kw">strides</span> <span class="kw">=</span> <span class="fl">2</span>,
-        <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"relu"</span>
-      )
-    <span class="no">self</span>$<span class="no">conv2</span> <span class="kw">&lt;-</span>
-      <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span>(
-        <span class="kw">filters</span> <span class="kw">=</span> <span class="fl">64</span>,
-        <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">3</span>,
-        <span class="kw">strides</span> <span class="kw">=</span> <span class="fl">2</span>,
-        <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"relu"</span>
-      )
-    <span class="no">self</span>$<span class="no">flatten</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_flatten.html">layer_flatten</a></span>()
-    <span class="no">self</span>$<span class="no">dense</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="no">latent_dim</span>)
-
-    <span class="kw">function</span> (<span class="no">x</span>, <span class="no">mask</span> <span class="kw">=</span> <span class="kw">NULL</span>) {
-      <span class="no">x</span> <span class="kw">%&gt;%</span>
-        <span class="no">self</span>$<span class="fu">conv1</span>() <span class="kw">%&gt;%</span>
-        <span class="no">self</span>$<span class="fu">conv2</span>() <span class="kw">%&gt;%</span>
-        <span class="no">self</span>$<span class="fu">flatten</span>() <span class="kw">%&gt;%</span>
-        <span class="no">self</span>$<span class="fu">dense</span>()
-    }
-  })
-}
-
-<span class="no">decoder_model</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">name</span> <span class="kw">=</span> <span class="kw">NULL</span>) {
-
-  <span class="fu"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span>(<span class="kw">name</span> <span class="kw">=</span> <span class="no">name</span>, <span class="kw">function</span>(<span class="no">self</span>) {
-    <span class="no">self</span>$<span class="no">dense</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">7</span> * <span class="fl">7</span> * <span class="fl">32</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"relu"</span>)
-    <span class="no">self</span>$<span class="no">reshape</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/layer_reshape.html">layer_reshape</a></span>(<span class="kw">target_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">7</span>, <span class="fl">7</span>, <span class="fl">32</span>))
-
-    <span class="no">self</span>$<span class="no">deconv1</span> <span class="kw">&lt;-</span>
-      <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span>(
-        <span class="kw">filters</span> <span class="kw">=</span> <span class="fl">64</span>,
-        <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">3</span>,
-        <span class="kw">strides</span> <span class="kw">=</span> <span class="fl">2</span>,
-        <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>,
-        <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"relu"</span>
-      )
-    <span class="no">self</span>$<span class="no">deconv2</span> <span class="kw">&lt;-</span>
-      <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span>(
-        <span class="kw">filters</span> <span class="kw">=</span> <span class="fl">32</span>,
-        <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">3</span>,
-        <span class="kw">strides</span> <span class="kw">=</span> <span class="fl">2</span>,
-        <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>,
-        <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"relu"</span>
-      )
-    <span class="no">self</span>$<span class="no">deconv3</span> <span class="kw">&lt;-</span>
-      <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span>(
-        <span class="kw">filters</span> <span class="kw">=</span> <span class="fl">1</span>,
-        <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">3</span>,
-        <span class="kw">strides</span> <span class="kw">=</span> <span class="fl">1</span>,
-        <span class="kw">padding</span> <span class="kw">=</span> <span class="st">"same"</span>,
-        <span class="kw">activation</span> <span class="kw">=</span> <span class="st">"sigmoid"</span>
-      )
-
-    <span class="kw">function</span> (<span class="no">x</span>, <span class="no">mask</span> <span class="kw">=</span> <span class="kw">NULL</span>) {
-      <span class="no">x</span> <span class="kw">%&gt;%</span>
-        <span class="no">self</span>$<span class="fu">dense</span>() <span class="kw">%&gt;%</span>
-        <span class="no">self</span>$<span class="fu"><a href="https://rdrr.io/r/stats/reshape.html">reshape</a></span>() <span class="kw">%&gt;%</span>
-        <span class="no">self</span>$<span class="fu">deconv1</span>() <span class="kw">%&gt;%</span>
-        <span class="no">self</span>$<span class="fu">deconv2</span>() <span class="kw">%&gt;%</span>
-        <span class="no">self</span>$<span class="fu">deconv3</span>()
-    }
-  })
-}
+<span class="va">decoder_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">name</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="fu"><a href="../../reference/keras_model_custom.html">keras_model_custom</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span>, <span class="kw">function</span><span class="op">(</span><span class="va">self</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">7</span> <span class="op">*</span> <span class="fl">7</span> <span class="op">*</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">reshape</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_reshape.html">layer_reshape</a></span><span class="op">(</span>target_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">7</span>, <span class="fl">32</span><span class="op">)</span><span class="op">)</span>
+    
+    <span class="va">self</span><span class="op">$</span><span class="va">deconv1</span> <span class="op">&lt;-</span>
+      <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span>
+        filters <span class="op">=</span> <span class="fl">64</span>,
+        kernel_size <span class="op">=</span> <span class="fl">3</span>,
+        strides <span class="op">=</span> <span class="fl">2</span>,
+        padding <span class="op">=</span> <span class="st">"same"</span>,
+        activation <span class="op">=</span> <span class="st">"relu"</span>
+      <span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">deconv2</span> <span class="op">&lt;-</span>
+      <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span>
+        filters <span class="op">=</span> <span class="fl">32</span>,
+        kernel_size <span class="op">=</span> <span class="fl">3</span>,
+        strides <span class="op">=</span> <span class="fl">2</span>,
+        padding <span class="op">=</span> <span class="st">"same"</span>,
+        activation <span class="op">=</span> <span class="st">"relu"</span>
+      <span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">deconv3</span> <span class="op">&lt;-</span>
+      <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span>
+        filters <span class="op">=</span> <span class="fl">1</span>,
+        kernel_size <span class="op">=</span> <span class="fl">3</span>,
+        strides <span class="op">=</span> <span class="fl">1</span>,
+        padding <span class="op">=</span> <span class="st">"same"</span>,
+        activation <span class="op">=</span> <span class="st">"sigmoid"</span>
+      <span class="op">)</span>
+    
+    <span class="kw">function</span> <span class="op">(</span><span class="va">x</span>, <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">x</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">dense</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">reshape</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">deconv1</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">deconv2</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">deconv3</span><span class="op">(</span><span class="op">)</span>
+    <span class="op">}</span>
+  <span class="op">}</span><span class="op">)</span>
+<span class="op">}</span>
 
 
 <span class="co"># Loss and optimizer ------------------------------------------------------</span>
 
-<span class="no">optimizer</span> <span class="kw">&lt;-</span> <span class="no">tf</span>$<span class="no">train</span>$<span class="fu">AdamOptimizer</span>(<span class="fl">1e-4</span>)
+<span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="fu">AdamOptimizer</span><span class="op">(</span><span class="fl">1e-4</span><span class="op">)</span>
 
-<span class="no">compute_kernel</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>, <span class="no">y</span>) {
-  <span class="no">x_size</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_shape.html">k_shape</a></span>(<span class="no">x</span>)[<span class="fl">1</span>]
-  <span class="no">y_size</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_shape.html">k_shape</a></span>(<span class="no">y</span>)[<span class="fl">1</span>]
-  <span class="no">dim</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_shape.html">k_shape</a></span>(<span class="no">x</span>)[<span class="fl">2</span>]
-  <span class="no">tiled_x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_tile.html">k_tile</a></span>(<span class="fu"><a href="../../reference/k_reshape.html">k_reshape</a></span>(<span class="no">x</span>, <span class="fu"><a href="../../reference/k_stack.html">k_stack</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x_size</span>, <span class="fl">1</span>, <span class="no">dim</span>))), <span class="fu"><a href="../../reference/k_stack.html">k_stack</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">1</span>, <span class="no">y_size</span>, <span class="fl">1</span>)))
-  <span class="no">tiled_y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_tile.html">k_tile</a></span>(<span class="fu"><a href="../../reference/k_reshape.html">k_reshape</a></span>(<span class="no">y</span>, <span class="fu"><a href="../../reference/k_stack.html">k_stack</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">1</span>, <span class="no">y_size</span>, <span class="no">dim</span>))), <span class="fu"><a href="../../reference/k_stack.html">k_stack</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x_size</span>, <span class="fl">1</span>, <span class="fl">1</span>)))
-  <span class="fu"><a href="../../reference/k_exp.html">k_exp</a></span>(-<span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span>(<span class="fu"><a href="../../reference/k_square.html">k_square</a></span>(<span class="no">tiled_x</span> - <span class="no">tiled_y</span>), <span class="kw">axis</span> <span class="kw">=</span> <span class="fl">3</span>) / <span class="fu"><a href="../../reference/k_cast.html">k_cast</a></span>(<span class="no">dim</span>, <span class="no">tf</span>$<span class="no">float64</span>))
-}
+<span class="va">compute_kernel</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_shape.html">k_shape</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
+  <span class="va">y_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_shape.html">k_shape</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
+  <span class="va">dim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_shape.html">k_shape</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>
+  <span class="va">tiled_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_tile.html">k_tile</a></span><span class="op">(</span><span class="fu"><a href="../../reference/k_reshape.html">k_reshape</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="../../reference/k_stack.html">k_stack</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x_size</span>, <span class="fl">1</span>, <span class="va">dim</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../../reference/k_stack.html">k_stack</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">y_size</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">tiled_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_tile.html">k_tile</a></span><span class="op">(</span><span class="fu"><a href="../../reference/k_reshape.html">k_reshape</a></span><span class="op">(</span><span class="va">y</span>, <span class="fu"><a href="../../reference/k_stack.html">k_stack</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">y_size</span>, <span class="va">dim</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../../reference/k_stack.html">k_stack</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x_size</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="../../reference/k_exp.html">k_exp</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span><span class="op">(</span><span class="fu"><a href="../../reference/k_square.html">k_square</a></span><span class="op">(</span><span class="va">tiled_x</span> <span class="op">-</span> <span class="va">tiled_y</span><span class="op">)</span>, axis <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="../../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">dim</span>, <span class="va">tf</span><span class="op">$</span><span class="va">float64</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="no">compute_mmd</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>, <span class="no">y</span>, <span class="no">sigma_sqr</span> <span class="kw">=</span> <span class="fl">1</span>) {
-  <span class="no">x_kernel</span> <span class="kw">&lt;-</span> <span class="fu">compute_kernel</span>(<span class="no">x</span>, <span class="no">x</span>)
-  <span class="no">y_kernel</span> <span class="kw">&lt;-</span> <span class="fu">compute_kernel</span>(<span class="no">y</span>, <span class="no">y</span>)
-  <span class="no">xy_kernel</span> <span class="kw">&lt;-</span> <span class="fu">compute_kernel</span>(<span class="no">x</span>, <span class="no">y</span>)
-  <span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span>(<span class="no">x_kernel</span>) + <span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span>(<span class="no">y_kernel</span>) - <span class="fl">2</span> * <span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span>(<span class="no">xy_kernel</span>)
-}
+<span class="va">compute_mmd</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">sigma_sqr</span> <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x_kernel</span> <span class="op">&lt;-</span> <span class="fu">compute_kernel</span><span class="op">(</span><span class="va">x</span>, <span class="va">x</span><span class="op">)</span>
+  <span class="va">y_kernel</span> <span class="op">&lt;-</span> <span class="fu">compute_kernel</span><span class="op">(</span><span class="va">y</span>, <span class="va">y</span><span class="op">)</span>
+  <span class="va">xy_kernel</span> <span class="op">&lt;-</span> <span class="fu">compute_kernel</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
+  <span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span><span class="op">(</span><span class="va">x_kernel</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span><span class="op">(</span><span class="va">y_kernel</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span><span class="op">(</span><span class="va">xy_kernel</span><span class="op">)</span>
+<span class="op">}</span>
 
 
 <span class="co"># Output utilities --------------------------------------------------------</span>
 
-<span class="no">num_examples_to_generate</span> <span class="kw">&lt;-</span> <span class="fl">64</span>
+<span class="va">num_examples_to_generate</span> <span class="op">&lt;-</span> <span class="fl">64</span>
 
-<span class="no">random_vector_for_generation</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../../reference/k_random_normal.html">k_random_normal</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">num_examples_to_generate</span>, <span class="no">latent_dim</span>),
-                  <span class="kw">dtype</span> <span class="kw">=</span> <span class="no">tf</span>$<span class="no">float64</span>)
+<span class="va">random_vector_for_generation</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../../reference/k_random_normal.html">k_random_normal</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">num_examples_to_generate</span>, <span class="va">latent_dim</span><span class="op">)</span>,
+                  dtype <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">float64</span><span class="op">)</span>
 
-<span class="no">generate_random_clothes</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">epoch</span>) {
-  <span class="no">predictions</span> <span class="kw">&lt;-</span>
-    <span class="fu">decoder</span>(<span class="no">random_vector_for_generation</span>)
-  <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"mmd_clothes_epoch_"</span>, <span class="no">epoch</span>, <span class="st">".png"</span>))
-  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mfcol</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">8</span>, <span class="fl">8</span>))
-  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>),
-      <span class="kw">xaxs</span> <span class="kw">=</span> <span class="st">'i'</span>,
-      <span class="kw">yaxs</span> <span class="kw">=</span> <span class="st">'i'</span>)
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fl">64</span>) {
-    <span class="no">img</span> <span class="kw">&lt;-</span> <span class="no">predictions</span>[<span class="no">i</span>, , , <span class="fl">1</span>]
-    <span class="no">img</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(<span class="no">img</span>, <span class="fl">2</span>, <span class="no">rev</span>))
-    <span class="fu"><a href="https://rdrr.io/r/graphics/image.html">image</a></span>(
-      <span class="fl">1</span>:<span class="fl">28</span>,
-      <span class="fl">1</span>:<span class="fl">28</span>,
-      <span class="no">img</span> * <span class="fl">127.5</span> + <span class="fl">127.5</span>,
-      <span class="kw">col</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html">gray</a></span>((<span class="fl">0</span>:<span class="fl">255</span>) / <span class="fl">255</span>),
-      <span class="kw">xaxt</span> <span class="kw">=</span> <span class="st">'n'</span>,
-      <span class="kw">yaxt</span> <span class="kw">=</span> <span class="st">'n'</span>
-    )
-  }
-  <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span>()
-}
+<span class="va">generate_random_clothes</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">epoch</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">predictions</span> <span class="op">&lt;-</span>
+    <span class="fu">decoder</span><span class="op">(</span><span class="va">random_vector_for_generation</span><span class="op">)</span> 
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"mmd_clothes_epoch_"</span>, <span class="va">epoch</span>, <span class="st">".png"</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfcol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span><span class="op">)</span>,
+      xaxs <span class="op">=</span> <span class="st">'i'</span>,
+      yaxs <span class="op">=</span> <span class="st">'i'</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">64</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">img</span> <span class="op">&lt;-</span> <span class="va">predictions</span><span class="op">[</span><span class="va">i</span>, , , <span class="fl">1</span><span class="op">]</span>
+    <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">img</span>, <span class="fl">2</span>, <span class="va">rev</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/graphics/image.html">image</a></span><span class="op">(</span>
+      <span class="fl">1</span><span class="op">:</span><span class="fl">28</span>,
+      <span class="fl">1</span><span class="op">:</span><span class="fl">28</span>,
+      <span class="va">img</span> <span class="op">*</span> <span class="fl">127.5</span> <span class="op">+</span> <span class="fl">127.5</span>,
+      col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html">gray</a></span><span class="op">(</span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">255</span><span class="op">)</span> <span class="op">/</span> <span class="fl">255</span><span class="op">)</span>,
+      xaxt <span class="op">=</span> <span class="st">'n'</span>,
+      yaxt <span class="op">=</span> <span class="st">'n'</span>
+    <span class="op">)</span>
+  <span class="op">}</span>
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="no">show_latent_space</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">epoch</span>) {
+<span class="va">show_latent_space</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">epoch</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="va">iter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/make-iterator.html">make_iterator_one_shot</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span>
+  <span class="va">x</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/iterator_get_next.html">iterator_get_next</a></span><span class="op">(</span><span class="va">iter</span><span class="op">)</span>
+  <span class="va">x_test_encoded</span> <span class="op">&lt;-</span> <span class="fu">encoder</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+  <span class="va">x_test_encoded</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.matrix.html">as.matrix</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>class <span class="op">=</span> <span class="va">class_names</span><span class="op">[</span><span class="va">fashion</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">V1</span>, y <span class="op">=</span> <span class="va">V2</span>, colour <span class="op">=</span> <span class="va">class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="st">"null"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>panel.spacing <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="st">"null"</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"mmd_latentspace_epoch_"</span>, <span class="va">epoch</span>, <span class="st">".png"</span><span class="op">)</span>,
+    width <span class="op">=</span> <span class="fl">10</span>,
+    height <span class="op">=</span> <span class="fl">10</span>,
+    units <span class="op">=</span> <span class="st">"cm"</span>
+  <span class="op">)</span>
+<span class="op">}</span>
 
-  <span class="no">iter</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/make-iterator.html">make_iterator_one_shot</a></span>(<span class="no">test_dataset</span>)
-  <span class="no">x</span> <span class="kw">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/iterator_get_next.html">iterator_get_next</a></span>(<span class="no">iter</span>)
-  <span class="no">x_test_encoded</span> <span class="kw">&lt;-</span> <span class="fu">encoder</span>(<span class="no">x</span>)
-  <span class="no">x_test_encoded</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>() <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>() <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">class</span> <span class="kw">=</span> <span class="no">class_names</span>[<span class="no">fashion</span>$<span class="no">test</span>$<span class="no">y</span> + <span class="fl">1</span>]) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">V1</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">V2</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">class</span>)) + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">aspect.ratio</span> <span class="kw">=</span> <span class="fl">1</span>) +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">plot.margin</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/reexports.html">unit</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>), <span class="st">"null"</span>)) +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">panel.spacing</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/reexports.html">unit</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>), <span class="st">"null"</span>))
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span>(
-    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"mmd_latentspace_epoch_"</span>, <span class="no">epoch</span>, <span class="st">".png"</span>),
-    <span class="kw">width</span> <span class="kw">=</span> <span class="fl">10</span>,
-    <span class="kw">height</span> <span class="kw">=</span> <span class="fl">10</span>,
-    <span class="kw">units</span> <span class="kw">=</span> <span class="st">"cm"</span>
-  )
-}
-
-<span class="no">show_grid</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">epoch</span>) {
-  <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"mmd_grid_epoch_"</span>, <span class="no">epoch</span>, <span class="st">".png"</span>))
-  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mar</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>),
-      <span class="kw">xaxs</span> <span class="kw">=</span> <span class="st">'i'</span>,
-      <span class="kw">yaxs</span> <span class="kw">=</span> <span class="st">'i'</span>)
-  <span class="no">n</span> <span class="kw">&lt;-</span> <span class="fl">16</span>
-  <span class="no">img_size</span> <span class="kw">&lt;-</span> <span class="fl">28</span>
-
-  <span class="no">grid_x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(-<span class="fl">4</span>, <span class="fl">4</span>, <span class="kw">length.out</span> <span class="kw">=</span> <span class="no">n</span>)
-  <span class="no">grid_y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(-<span class="fl">4</span>, <span class="fl">4</span>, <span class="kw">length.out</span> <span class="kw">=</span> <span class="no">n</span>)
-  <span class="no">rows</span> <span class="kw">&lt;-</span> <span class="kw">NULL</span>
-
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">grid_x</span>)) {
-    <span class="no">column</span> <span class="kw">&lt;-</span> <span class="kw">NULL</span>
-    <span class="kw">for</span> (<span class="no">j</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">grid_y</span>)) {
-      <span class="no">z_sample</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">grid_x</span>[<span class="no">i</span>], <span class="no">grid_y</span>[<span class="no">j</span>]), <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>)
-      <span class="no">column</span> <span class="kw">&lt;-</span>
-        <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span>(<span class="no">column</span>,
-              (<span class="fu">decoder</span>(<span class="no">z_sample</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>()) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="kw">ncol</span> <span class="kw">=</span> <span class="no">img_size</span>))
-    }
-    <span class="no">rows</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="no">rows</span>, <span class="no">column</span>)
-  }
-  <span class="no">rows</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>()
-  <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span>()
-}
+<span class="va">show_grid</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">epoch</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"mmd_grid_epoch_"</span>, <span class="va">epoch</span>, <span class="st">".png"</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span><span class="op">)</span>,
+      xaxs <span class="op">=</span> <span class="st">'i'</span>,
+      yaxs <span class="op">=</span> <span class="st">'i'</span><span class="op">)</span>
+  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">16</span>
+  <span class="va">img_size</span> <span class="op">&lt;-</span> <span class="fl">28</span>
+  
+  <span class="va">grid_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span>, length.out <span class="op">=</span> <span class="va">n</span><span class="op">)</span>
+  <span class="va">grid_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span>, length.out <span class="op">=</span> <span class="va">n</span><span class="op">)</span>
+  <span class="va">rows</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
+  
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">grid_x</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">column</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
+    <span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">grid_y</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">z_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">grid_x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">grid_y</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+      <span class="va">column</span> <span class="op">&lt;-</span>
+        <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">rbind</a></span><span class="op">(</span><span class="va">column</span>,
+              <span class="op">(</span><span class="fu">decoder</span><span class="op">(</span><span class="va">z_sample</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="va">img_size</span><span class="op">)</span><span class="op">)</span>
+    <span class="op">}</span>
+    <span class="va">rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">rows</span>, <span class="va">column</span><span class="op">)</span>
+  <span class="op">}</span>
+  <span class="va">rows</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span>
 
 
 <span class="co"># Training loop -----------------------------------------------------------</span>
 
-<span class="no">num_epochs</span> <span class="kw">&lt;-</span> <span class="fl">50</span>
+<span class="va">num_epochs</span> <span class="op">&lt;-</span> <span class="fl">50</span>
 
-<span class="no">encoder</span> <span class="kw">&lt;-</span> <span class="fu">encoder_model</span>()
-<span class="no">decoder</span> <span class="kw">&lt;-</span> <span class="fu">decoder_model</span>()
+<span class="va">encoder</span> <span class="op">&lt;-</span> <span class="fu">encoder_model</span><span class="op">(</span><span class="op">)</span>
+<span class="va">decoder</span> <span class="op">&lt;-</span> <span class="fu">decoder_model</span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">checkpoint_dir</span> <span class="kw">&lt;-</span> <span class="st">"./checkpoints_fashion_cvae"</span>
-<span class="no">checkpoint_prefix</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">checkpoint_dir</span>, <span class="st">"ckpt"</span>)
-<span class="no">checkpoint</span> <span class="kw">&lt;-</span>
-  <span class="no">tf</span>$<span class="no">train</span>$<span class="fu">Checkpoint</span>(<span class="kw">optimizer</span> <span class="kw">=</span> <span class="no">optimizer</span>,
-                      <span class="kw">encoder</span> <span class="kw">=</span> <span class="no">encoder</span>,
-                      <span class="kw">decoder</span> <span class="kw">=</span> <span class="no">decoder</span>)
+<span class="va">checkpoint_dir</span> <span class="op">&lt;-</span> <span class="st">"./checkpoints_fashion_cvae"</span>
+<span class="va">checkpoint_prefix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">checkpoint_dir</span>, <span class="st">"ckpt"</span><span class="op">)</span>
+<span class="va">checkpoint</span> <span class="op">&lt;-</span>
+  <span class="va">tf</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="fu">Checkpoint</span><span class="op">(</span>optimizer <span class="op">=</span> <span class="va">optimizer</span>,
+                      encoder <span class="op">=</span> <span class="va">encoder</span>,
+                      decoder <span class="op">=</span> <span class="va">decoder</span><span class="op">)</span>
 
-<span class="fu">generate_random_clothes</span>(<span class="fl">0</span>)
-<span class="fu">show_latent_space</span>(<span class="fl">0</span>)
-<span class="fu">show_grid</span>(<span class="fl">0</span>)
+<span class="fu">generate_random_clothes</span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>
+<span class="fu">show_latent_space</span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>
+<span class="fu">show_grid</span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>
 
 
-<span class="kw">for</span> (<span class="no">epoch</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="no">num_epochs</span>)) {
-  <span class="no">iter</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/make-iterator.html">make_iterator_one_shot</a></span>(<span class="no">train_dataset</span>)
-
-  <span class="no">total_loss</span> <span class="kw">&lt;-</span> <span class="fl">0</span>
-  <span class="no">loss_nll_total</span> <span class="kw">&lt;-</span> <span class="fl">0</span>
-  <span class="no">loss_mmd_total</span> <span class="kw">&lt;-</span> <span class="fl">0</span>
-
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/until_out_of_range.html">until_out_of_range</a></span>({
-    <span class="no">x</span> <span class="kw">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/iterator_get_next.html">iterator_get_next</a></span>(<span class="no">iter</span>)
-
-    <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span>(<span class="no">tf</span>$<span class="fu">GradientTape</span>(<span class="kw">persistent</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="kw">%as%</span> <span class="no">tape</span>, {
-
-      <span class="no">mean</span> <span class="kw">&lt;-</span> <span class="fu">encoder</span>(<span class="no">x</span>)
-      <span class="no">preds</span> <span class="kw">&lt;-</span> <span class="fu">decoder</span>(<span class="no">mean</span>)
-
-      <span class="no">true_samples</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_random_normal.html">k_random_normal</a></span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">batch_size</span>, <span class="no">latent_dim</span>), <span class="kw">dtype</span> <span class="kw">=</span> <span class="no">tf</span>$<span class="no">float64</span>)
-      <span class="no">loss_mmd</span> <span class="kw">&lt;-</span> <span class="fu">compute_mmd</span>(<span class="no">true_samples</span>, <span class="no">mean</span>)
-      <span class="no">loss_nll</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span>(<span class="fu"><a href="../../reference/k_square.html">k_square</a></span>(<span class="no">x</span> - <span class="no">preds</span>))
-      <span class="no">loss</span> <span class="kw">&lt;-</span> <span class="no">loss_nll</span> + <span class="no">loss_mmd</span>
-
-    })
-
-    <span class="no">total_loss</span> <span class="kw">&lt;-</span> <span class="no">total_loss</span> + <span class="no">loss</span>
-    <span class="no">loss_mmd_total</span> <span class="kw">&lt;-</span> <span class="no">loss_mmd</span> + <span class="no">loss_mmd_total</span>
-    <span class="no">loss_nll_total</span> <span class="kw">&lt;-</span> <span class="no">loss_nll</span> + <span class="no">loss_nll_total</span>
-
-    <span class="no">encoder_gradients</span> <span class="kw">&lt;-</span> <span class="no">tape</span>$<span class="fu">gradient</span>(<span class="no">loss</span>, <span class="no">encoder</span>$<span class="no">variables</span>)
-    <span class="no">decoder_gradients</span> <span class="kw">&lt;-</span> <span class="no">tape</span>$<span class="fu">gradient</span>(<span class="no">loss</span>, <span class="no">decoder</span>$<span class="no">variables</span>)
-
-    <span class="no">optimizer</span>$<span class="fu">apply_gradients</span>(<span class="kw pkg">purrr</span><span class="kw ns">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-      <span class="no">encoder_gradients</span>, <span class="no">encoder</span>$<span class="no">variables</span>
-    )),
-    <span class="kw">global_step</span> <span class="kw">=</span> <span class="no">tf</span>$<span class="no">train</span>$<span class="fu">get_or_create_global_step</span>())
-    <span class="no">optimizer</span>$<span class="fu">apply_gradients</span>(<span class="kw pkg">purrr</span><span class="kw ns">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-      <span class="no">decoder_gradients</span>, <span class="no">decoder</span>$<span class="no">variables</span>
-    )),
-    <span class="kw">global_step</span> <span class="kw">=</span> <span class="no">tf</span>$<span class="no">train</span>$<span class="fu">get_or_create_global_step</span>())
-
-  })
-
-  <span class="no">checkpoint</span>$<span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span>(<span class="kw">file_prefix</span> <span class="kw">=</span> <span class="no">checkpoint_prefix</span>)
-
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(
-    <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(
+<span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">num_epochs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">iter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/make-iterator.html">make_iterator_one_shot</a></span><span class="op">(</span><span class="va">train_dataset</span><span class="op">)</span>
+  
+  <span class="va">total_loss</span> <span class="op">&lt;-</span> <span class="fl">0</span>
+  <span class="va">loss_nll_total</span> <span class="op">&lt;-</span> <span class="fl">0</span>
+  <span class="va">loss_mmd_total</span> <span class="op">&lt;-</span> <span class="fl">0</span>
+  
+  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/until_out_of_range.html">until_out_of_range</a></span><span class="op">(</span><span class="op">{</span>
+    <span class="va">x</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/iterator_get_next.html">iterator_get_next</a></span><span class="op">(</span><span class="va">iter</span><span class="op">)</span>
+    
+    <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span>persistent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%as%</span> <span class="va">tape</span>, <span class="op">{</span>
+      
+      <span class="va">mean</span> <span class="op">&lt;-</span> <span class="fu">encoder</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+      <span class="va">preds</span> <span class="op">&lt;-</span> <span class="fu">decoder</span><span class="op">(</span><span class="va">mean</span><span class="op">)</span>
+      
+      <span class="va">true_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_random_normal.html">k_random_normal</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">latent_dim</span><span class="op">)</span>, dtype <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">float64</span><span class="op">)</span>
+      <span class="va">loss_mmd</span> <span class="op">&lt;-</span> <span class="fu">compute_mmd</span><span class="op">(</span><span class="va">true_samples</span>, <span class="va">mean</span><span class="op">)</span>
+      <span class="va">loss_nll</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span><span class="op">(</span><span class="fu"><a href="../../reference/k_square.html">k_square</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="va">preds</span><span class="op">)</span><span class="op">)</span>
+      <span class="va">loss</span> <span class="op">&lt;-</span> <span class="va">loss_nll</span> <span class="op">+</span> <span class="va">loss_mmd</span>
+      
+    <span class="op">}</span><span class="op">)</span>
+    
+    <span class="va">total_loss</span> <span class="op">&lt;-</span> <span class="va">total_loss</span> <span class="op">+</span> <span class="va">loss</span>
+    <span class="va">loss_mmd_total</span> <span class="op">&lt;-</span> <span class="va">loss_mmd</span> <span class="op">+</span> <span class="va">loss_mmd_total</span>
+    <span class="va">loss_nll_total</span> <span class="op">&lt;-</span> <span class="va">loss_nll</span> <span class="op">+</span> <span class="va">loss_nll_total</span>
+    
+    <span class="va">encoder_gradients</span> <span class="op">&lt;-</span> <span class="va">tape</span><span class="op">$</span><span class="fu">gradient</span><span class="op">(</span><span class="va">loss</span>, <span class="va">encoder</span><span class="op">$</span><span class="va">variables</span><span class="op">)</span>
+    <span class="va">decoder_gradients</span> <span class="op">&lt;-</span> <span class="va">tape</span><span class="op">$</span><span class="fu">gradient</span><span class="op">(</span><span class="va">loss</span>, <span class="va">decoder</span><span class="op">$</span><span class="va">variables</span><span class="op">)</span>
+    
+    <span class="va">optimizer</span><span class="op">$</span><span class="fu">apply_gradients</span><span class="op">(</span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+      <span class="va">encoder_gradients</span>, <span class="va">encoder</span><span class="op">$</span><span class="va">variables</span>
+    <span class="op">)</span><span class="op">)</span>,
+    global_step <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="fu">get_or_create_global_step</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">optimizer</span><span class="op">$</span><span class="fu">apply_gradients</span><span class="op">(</span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+      <span class="va">decoder_gradients</span>, <span class="va">decoder</span><span class="op">$</span><span class="va">variables</span>
+    <span class="op">)</span><span class="op">)</span>,
+    global_step <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="fu">get_or_create_global_step</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    
+  <span class="op">}</span><span class="op">)</span>
+  
+  <span class="va">checkpoint</span><span class="op">$</span><span class="fu">save</span><span class="op">(</span>file_prefix <span class="op">=</span> <span class="va">checkpoint_prefix</span><span class="op">)</span>
+  
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span>
       <span class="st">"Losses (epoch): {epoch}:"</span>,
       <span class="st">"  {(as.numeric(loss_nll_total)/batches_per_epoch) %&gt;% round(4)} loss_nll_total,"</span>,
       <span class="st">"  {(as.numeric(loss_mmd_total)/batches_per_epoch) %&gt;% round(4)} loss_mmd_total,"</span>,
       <span class="st">"  {(as.numeric(total_loss)/batches_per_epoch) %&gt;% round(4)} total"</span>
-    ),
+    <span class="op">)</span>,
     <span class="st">"\n"</span>
-  )
-
-  <span class="kw">if</span> (<span class="no">epoch</span> <span class="kw">%%</span> <span class="fl">10</span> <span class="kw">==</span> <span class="fl">0</span>) {
-    <span class="fu">generate_random_clothes</span>(<span class="no">epoch</span>)
-    <span class="fu">show_latent_space</span>(<span class="no">epoch</span>)
-    <span class="fu">show_grid</span>(<span class="no">epoch</span>)
-  }
-}</pre></body></html></div>
+  <span class="op">)</span>
+  
+  <span class="kw">if</span> <span class="op">(</span><span class="va">epoch</span> <span class="op">%%</span> <span class="fl">10</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">generate_random_clothes</span><span class="op">(</span><span class="va">epoch</span><span class="op">)</span>
+    <span class="fu">show_latent_space</span><span class="op">(</span><span class="va">epoch</span><span class="op">)</span>
+    <span class="fu">show_grid</span><span class="op">(</span><span class="va">epoch</span><span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -500,11 +501,11 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

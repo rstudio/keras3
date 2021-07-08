@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="sequential_model_files/header-attrs-2.3/header-attrs.js"></script><script src="sequential_model_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="sequential_model_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Guide to the Sequential Model</h1>
@@ -189,17 +189,19 @@
 <a href="#defining-a-model" class="anchor"></a>Defining a Model</h2>
 <p>The sequential model is a linear stack of layers.</p>
 <p>You create a sequential model by calling the <code><a href="../reference/keras_model_sequential.html">keras_model_sequential()</a></code> function then a series of <code>layer</code> functions:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">input_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">784</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">10</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'softmax'</span>)</pre></body></html></div>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> 
+<span class="va">model</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">'softmax'</span><span class="op">)</span></code></pre></div>
 <p>Note that Keras objects are <a href="faq.html#why-are-keras-objects-modified-in-place">modified in place</a> which is why it’s not necessary for <code>model</code> to be assigned back to after the layers are added.</p>
 <p>Print a summary of the model’s structure using the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">model</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
 <pre><code>Model
 ________________________________________________________________________________
 Layer (type)                        Output Shape                    Param #     
@@ -229,96 +231,102 @@ ________________________________________________________________________________
 <div id="compilation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#compilation" class="anchor"></a>Compilation</h2>
-<p>Before training a model, you need to configure the learning process, which is done via the <code><a href="https://rdrr.io/pkg/generics/man/compile.html">compile()</a></code> function. It receives three arguments:</p>
+<p>Before training a model, you need to configure the learning process, which is done via the <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> function. It receives three arguments:</p>
 <ul>
 <li><p>An optimizer. This could be the string identifier of an existing optimizer (e.g. as “rmsprop” or “adagrad”) or a call to an optimizer function (e.g. <code><a href="../reference/optimizer_sgd.html">optimizer_sgd()</a></code>).</p></li>
 <li><p>A loss function. This is the objective that the model will try to minimize. It can be the string identifier of an existing loss function (e.g. “categorical_crossentropy” or “mse”) or a call to a loss function (e.g. <code><a href="../reference/loss_mean_squared_error.html">loss_mean_squared_error()</a></code>).</p></li>
 <li><p>A list of metrics. For any classification problem you will want to set this to <code>metrics = c('accuracy')</code>. A metric could be the string identifier of an existing metric or a call to metric function (e.g. <code><a href="../reference/metric_binary_accuracy.html">metric_binary_crossentropy()</a></code>).</p></li>
 </ul>
-<p>Here’s the definition of a model along with the compilation step (the <code><a href="https://rdrr.io/pkg/generics/man/compile.html">compile()</a></code> function has arguments appropriate for a multi-class classification problem):</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># For a multi-class classification problem</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">input_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">784</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">10</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span>(<span class="st">'softmax'</span>)
+<p>Here’s the definition of a model along with the compilation step (the <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> function has arguments appropriate for a multi-class classification problem):</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># For a multi-class classification problem</span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> 
+<span class="va">model</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">'softmax'</span><span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">'rmsprop'</span>,
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'categorical_crossentropy'</span>,
-  <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>)
-)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,
+  loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 <p>Here’s what compilation might look like for a mean squared error regression problem:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(<span class="kw">lr</span> <span class="kw">=</span> <span class="fl">0.002</span>),
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'mse'</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,
+  loss <span class="op">=</span> <span class="st">'mse'</span>
+<span class="op">)</span></code></pre></div>
 <p>Here’s compilation for a binary classification problem:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(),
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="no">loss_binary_crossentropy</span>,
-  <span class="kw">metrics</span> <span class="kw">=</span> <span class="no">metric_binary_accuracy</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span> 
+  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="op">)</span>,
+  loss <span class="op">=</span> <span class="va">loss_binary_crossentropy</span>,
+  metrics <span class="op">=</span> <span class="va">metric_binary_accuracy</span>
+<span class="op">)</span></code></pre></div>
 <p>Here’s compilation with a custom metric:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># create metric using backend tensor functions</span>
-<span class="no">metric_mean_pred</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/metric_binary_accuracy.html">custom_metric</a></span>(<span class="st">"mean_pred"</span>, <span class="kw">function</span>(<span class="no">y_true</span>, <span class="no">y_pred</span>) {
-  <span class="fu"><a href="../reference/k_mean.html">k_mean</a></span>(<span class="no">y_pred</span>)
-})
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create metric using backend tensor functions</span>
+<span class="va">metric_mean_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metric_binary_accuracy.html">custom_metric</a></span><span class="op">(</span><span class="st">"mean_pred"</span>, <span class="kw">function</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../reference/k_mean.html">k_mean</a></span><span class="op">(</span><span class="va">y_pred</span><span class="op">)</span> 
+<span class="op">}</span><span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span>(),
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="no">loss_binary_crossentropy</span>,
-  <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>, <span class="no">metric_mean_pred</span>)
-)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span> 
+  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="op">)</span>,
+  loss <span class="op">=</span> <span class="va">loss_binary_crossentropy</span>,
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span>, <span class="va">metric_mean_pred</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="training" class="section level2">
 <h2 class="hasAnchor">
 <a href="#training" class="anchor"></a>Training</h2>
-<p>Keras models are trained on R matrices or higher dimensional arrays of input data and labels. For training a model, you will typically use the <code><a href="https://rdrr.io/pkg/generics/man/fit.html">fit()</a></code> function.</p>
+<p>Keras models are trained on R matrices or higher dimensional arrays of input data and labels. For training a model, you will typically use the <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> function.</p>
 <p>Here’s a single-input model with 2 classes (binary classification):</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># create model</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create model</span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># add layers and compile the model</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>, <span class="kw">input_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">100</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'sigmoid'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-    <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">'rmsprop'</span>,
-    <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'binary_crossentropy'</span>,
-    <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>)
-  )
+<span class="va">model</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span>, activation <span class="op">=</span> <span class="st">'sigmoid'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+    optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,
+    loss <span class="op">=</span> <span class="st">'binary_crossentropy'</span>,
+    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+  <span class="op">)</span>
 
 <span class="co"># Generate dummy data</span>
-<span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1000</span>*<span class="fl">100</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">100</span>)
-<span class="no">labels</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1000</span>, <span class="kw">min</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">1</span>)), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>)
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
+<span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="co"># Train the model, iterating on the data in batches of 32 samples</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(<span class="no">data</span>, <span class="no">labels</span>, <span class="kw">epochs</span><span class="kw">=</span><span class="fl">10</span>, <span class="kw">batch_size</span><span class="kw">=</span><span class="fl">32</span>)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">labels</span>, epochs<span class="op">=</span><span class="fl">10</span>, batch_size<span class="op">=</span><span class="fl">32</span><span class="op">)</span></code></pre></div>
 <p>Here’s a single-input model with 10 classes (categorical classification):</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># create model</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create model</span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># define and compile the model</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>, <span class="kw">input_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">100</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'softmax'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-    <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">'rmsprop'</span>,
-    <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'categorical_crossentropy'</span>,
-    <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>)
-  )
+<span class="va">model</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+    optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,
+    loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
+    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+  <span class="op">)</span>
 
 <span class="co"># Generate dummy data</span>
-<span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1000</span>*<span class="fl">100</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">100</span>)
-<span class="no">labels</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1000</span>, <span class="kw">min</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">9</span>)), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>)
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
+<span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">9</span><span class="op">)</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="co"># Convert labels to categorical one-hot encoding</span>
-<span class="no">one_hot_labels</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="no">labels</span>, <span class="kw">num_classes</span> <span class="kw">=</span> <span class="fl">10</span>)
+<span class="va">one_hot_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span><span class="va">labels</span>, num_classes <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="co"># Train the model, iterating on the data in batches of 32 samples</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(<span class="no">data</span>, <span class="no">one_hot_labels</span>, <span class="kw">epochs</span><span class="kw">=</span><span class="fl">10</span>, <span class="kw">batch_size</span><span class="kw">=</span><span class="fl">32</span>)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">one_hot_labels</span>, epochs<span class="op">=</span><span class="fl">10</span>, batch_size<span class="op">=</span><span class="fl">32</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
@@ -336,169 +344,174 @@ ________________________________________________________________________________
 <div id="multilayer-perceptron-mlp-for-multi-class-softmax-classification" class="section level3">
 <h3 class="hasAnchor">
 <a href="#multilayer-perceptron-mlp-for-multi-class-softmax-classification" class="anchor"></a>Multilayer Perceptron (MLP) for multi-class softmax classification</h3>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
 
 <span class="co"># generate dummy data</span>
-<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1000</span>*<span class="fl">20</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">20</span>)
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">*</span><span class="fl">20</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
 
-<span class="no">y_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1000</span>, <span class="kw">min</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">9</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="kw">num_classes</span> <span class="kw">=</span> <span class="fl">10</span>)
+<span class="va">y_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">9</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span>num_classes <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
-<span class="no">x_test</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">100</span>*<span class="fl">20</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">100</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">20</span>)
+<span class="va">x_test</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="fl">20</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">100</span>, ncol <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
 
-<span class="no">y_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">100</span>, <span class="kw">min</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">9</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">100</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="kw">num_classes</span> <span class="kw">=</span> <span class="fl">10</span>)
+<span class="va">y_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">100</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">9</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="fl">100</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span>num_classes <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="co"># create model</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># define and compile the model</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>, <span class="kw">input_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">20</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.5</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.5</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'softmax'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-    <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'categorical_crossentropy'</span>,
-    <span class="kw">optimizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="kw">lr</span> <span class="kw">=</span> <span class="fl">0.01</span>, <span class="kw">decay</span> <span class="kw">=</span> <span class="fl">1e-6</span>, <span class="kw">momentum</span> <span class="kw">=</span> <span class="fl">0.9</span>, <span class="kw">nesterov</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
-    <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>)
-  )
+<span class="va">model</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+    loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
+    optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.01</span>, decay <span class="op">=</span> <span class="fl">1e-6</span>, momentum <span class="op">=</span> <span class="fl">0.9</span>, nesterov <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>     
+  <span class="op">)</span>
 
 <span class="co"># train</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(<span class="no">x_train</span>, <span class="no">y_train</span>, <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">20</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">128</span>)
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span>, epochs <span class="op">=</span> <span class="fl">20</span>, batch_size <span class="op">=</span> <span class="fl">128</span><span class="op">)</span>
 
 <span class="co"># evaluate</span>
-<span class="no">score</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span>(<span class="no">x_test</span>, <span class="no">y_test</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">128</span>)</pre></body></html></div>
+<span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, batch_size <span class="op">=</span> <span class="fl">128</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="mlp-for-binary-classification" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mlp-for-binary-classification" class="anchor"></a>MLP for binary classification</h3>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
 
 <span class="co"># generate dummy data</span>
-<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1000</span>*<span class="fl">20</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">20</span>)
-<span class="no">y_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1000</span>, <span class="kw">min</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">1</span>)), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>)
-<span class="no">x_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">100</span>*<span class="fl">20</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">100</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">20</span>)
-<span class="no">y_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">100</span>, <span class="kw">min</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">1</span>)), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">100</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>)
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">*</span><span class="fl">20</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
+<span class="va">y_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="fl">20</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">100</span>, ncol <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
+<span class="va">y_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">100</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">100</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="co"># create model</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># define and compile the model</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>, <span class="kw">input_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">20</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.5</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.5</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'sigmoid'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-    <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'binary_crossentropy'</span>,
-    <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">'rmsprop'</span>,
-    <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>)
-  )
+<span class="va">model</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span>, activation <span class="op">=</span> <span class="st">'sigmoid'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+    loss <span class="op">=</span> <span class="st">'binary_crossentropy'</span>,
+    optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,
+    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+  <span class="op">)</span>
 
 <span class="co"># train </span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(<span class="no">x_train</span>, <span class="no">y_train</span>, <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">20</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">128</span>)
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span>, epochs <span class="op">=</span> <span class="fl">20</span>, batch_size <span class="op">=</span> <span class="fl">128</span><span class="op">)</span>
 
 <span class="co"># evaluate</span>
-<span class="no">score</span> <span class="kw">=</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span>(<span class="no">x_test</span>, <span class="no">y_test</span>, <span class="kw">batch_size</span><span class="kw">=</span><span class="fl">128</span>)</pre></body></html></div>
+<span class="va">score</span> <span class="op">=</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, batch_size<span class="op">=</span><span class="fl">128</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="vgg-like-convnet" class="section level3">
 <h3 class="hasAnchor">
 <a href="#vgg-like-convnet" class="anchor"></a>VGG-like convnet</h3>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
 
 <span class="co"># generate dummy data</span>
-<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">100</span> * <span class="fl">100</span> * <span class="fl">100</span> * <span class="fl">3</span>), <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">3</span>))
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">*</span> <span class="fl">3</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">y_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">100</span>, <span class="kw">min</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">9</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">100</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="kw">num_classes</span> <span class="kw">=</span> <span class="fl">10</span>)
+<span class="va">y_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">100</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">9</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="fl">100</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span>num_classes <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
-<span class="no">x_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">20</span> * <span class="fl">100</span> * <span class="fl">100</span> * <span class="fl">3</span>), <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">20</span>, <span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">3</span>))
+<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">20</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">*</span> <span class="fl">3</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">y_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">20</span>, <span class="kw">min</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">9</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">20</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span>(<span class="kw">num_classes</span> <span class="kw">=</span> <span class="fl">10</span>)
+<span class="va">y_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">20</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">9</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="fl">20</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span>num_classes <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="co"># create model</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># define and compile model</span>
 <span class="co"># input: 100x100 images with 3 channels -&gt; (100, 100, 3) tensors.</span>
 <span class="co"># this applies 32 convolution filters of size 3x3 each.</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>,<span class="fl">3</span>), <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>,
-                <span class="kw">input_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">100</span>,<span class="fl">100</span>,<span class="fl">3</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>,<span class="fl">3</span>), <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="kw">pool_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>,<span class="fl">2</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.25</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>,<span class="fl">3</span>), <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>,<span class="fl">3</span>), <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span>(<span class="kw">pool_size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>,<span class="fl">2</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.25</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_flatten.html">layer_flatten</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">256</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.25</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'softmax'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-    <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'categorical_crossentropy'</span>,
-    <span class="kw">optimizer</span> <span class="kw">=</span> <span class="fu"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span>(<span class="kw">lr</span> <span class="kw">=</span> <span class="fl">0.01</span>, <span class="kw">decay</span> <span class="kw">=</span> <span class="fl">1e-6</span>, <span class="kw">momentum</span> <span class="kw">=</span> <span class="fl">0.9</span>, <span class="kw">nesterov</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-  )
-
+<span class="va">model</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, 
+                input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">100</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+    loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>, 
+    optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.01</span>, decay <span class="op">=</span> <span class="fl">1e-6</span>, momentum <span class="op">=</span> <span class="fl">0.9</span>, nesterov <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="op">)</span>
+  
 <span class="co"># train</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(<span class="no">x_train</span>, <span class="no">y_train</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">10</span>)
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span>, batch_size <span class="op">=</span> <span class="fl">32</span>, epochs <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="co"># evaluate</span>
-<span class="no">score</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span>(<span class="no">x_test</span>, <span class="no">y_test</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">32</span>)</pre></body></html></div>
+<span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, batch_size <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="sequence-classification-with-lstm" class="section level3">
 <h3 class="hasAnchor">
 <a href="#sequence-classification-with-lstm" class="anchor"></a>Sequence classification with LSTM</h3>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_embedding.html">layer_embedding</a></span>(<span class="kw">input_dim</span> <span class="kw">=</span> <span class="no">max_features</span>, <span class="no">output_dim</span> - <span class="fl">256</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">128</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.5</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'sigmoid'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-    <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'binary_crossentropy'</span>,
-    <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">'rmsprop'</span>,
-    <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>)
-  )
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> 
+<span class="va">model</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="va">max_features</span>, <span class="va">output_dim</span> <span class="op">-</span> <span class="fl">256</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">128</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span>, activation <span class="op">=</span> <span class="st">'sigmoid'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+    loss <span class="op">=</span> <span class="st">'binary_crossentropy'</span>,
+    optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,
+    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+  <span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(<span class="no">x_train</span>, <span class="no">y_train</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">16</span>, <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">10</span>)
-<span class="no">score</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span>(<span class="no">x_test</span>, <span class="no">y_test</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">16</span>)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span>, batch_size <span class="op">=</span> <span class="fl">16</span>, epochs <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, batch_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="sequence-classification-with-1d-convolutions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#sequence-classification-with-1d-convolutions" class="anchor"></a>Sequence classification with 1D convolutions:</h3>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>,
-                <span class="kw">input_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">seq_length</span>, <span class="fl">100</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_max_pooling_1d.html">layer_max_pooling_1d</a></span>(<span class="kw">pool_size</span> <span class="kw">=</span> <span class="fl">3</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">128</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span>(<span class="kw">filters</span> <span class="kw">=</span> <span class="fl">128</span>, <span class="kw">kernel_size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'relu'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_global_average_pooling_1d.html">layer_global_average_pooling_1d</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.5</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'sigmoid'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-    <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'binary_crossentropy'</span>,
-    <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">'rmsprop'</span>,
-    <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>)
-  )
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">'relu'</span>,
+                input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">seq_length</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_max_pooling_1d.html">layer_max_pooling_1d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">128</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">128</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_global_average_pooling_1d.html">layer_global_average_pooling_1d</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span>, activation <span class="op">=</span> <span class="st">'sigmoid'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+    loss <span class="op">=</span> <span class="st">'binary_crossentropy'</span>,
+    optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,
+    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+  <span class="op">)</span>
 
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(<span class="no">x_train</span>, <span class="no">y_train</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">16</span>, <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">10</span>)
-<span class="no">score</span> <span class="kw">&lt;-</span> <span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span>(<span class="no">x_test</span>, <span class="no">y_test</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">16</span>)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span>, batch_size <span class="op">=</span> <span class="fl">16</span>, epochs <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, batch_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="stacked-lstm-for-sequence-classification" class="section level3">
 <h3 class="hasAnchor">
@@ -506,91 +519,93 @@ ________________________________________________________________________________
 <p>In this model, we stack 3 LSTM layers on top of each other, making the model capable of learning higher-level temporal representations.</p>
 <p>The first two LSTMs return their full output sequences, but the last one only returns the last step in its output sequence, thus dropping the temporal dimension (i.e. converting the input sequence into a single vector).</p>
 <p><img src="images/regular_stacked_lstm.png" alt="stacked LSTM" style="width: 300px;"></p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
 
 <span class="co"># constants</span>
-<span class="no">data_dim</span> <span class="kw">&lt;-</span> <span class="fl">16</span>
-<span class="no">timesteps</span> <span class="kw">&lt;-</span> <span class="fl">8</span>
-<span class="no">num_classes</span> <span class="kw">&lt;-</span> <span class="fl">10</span>
+<span class="va">data_dim</span> <span class="op">&lt;-</span> <span class="fl">16</span>
+<span class="va">timesteps</span> <span class="op">&lt;-</span> <span class="fl">8</span>
+<span class="va">num_classes</span> <span class="op">&lt;-</span> <span class="fl">10</span>
 
 <span class="co"># define and compile model</span>
 <span class="co"># expected input data shape: (batch_size, timesteps, data_dim)</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">return_sequences</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">input_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">timesteps</span>, <span class="no">data_dim</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">return_sequences</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">32</span>) <span class="kw">%&gt;%</span> <span class="co"># return a single vector dimension 32</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'softmax'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-    <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'categorical_crossentropy'</span>,
-    <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">'rmsprop'</span>,
-    <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>)
-  )
-
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> 
+<span class="va">model</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, return_sequences <span class="op">=</span> <span class="cn">TRUE</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">timesteps</span>, <span class="va">data_dim</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, return_sequences <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># return a single vector dimension 32</span>
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+    loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
+    optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,
+    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+  <span class="op">)</span>
+  
 <span class="co"># generate dummy training data</span>
-<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1000</span> * <span class="no">timesteps</span> * <span class="no">data_dim</span>), <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1000</span>, <span class="no">timesteps</span>, <span class="no">data_dim</span>))
-<span class="no">y_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1000</span> * <span class="no">num_classes</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="no">num_classes</span>)
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span> <span class="op">*</span> <span class="va">timesteps</span> <span class="op">*</span> <span class="va">data_dim</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="va">timesteps</span>, <span class="va">data_dim</span><span class="op">)</span><span class="op">)</span>
+<span class="va">y_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span> <span class="op">*</span> <span class="va">num_classes</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="va">num_classes</span><span class="op">)</span>
 
 <span class="co"># generate dummy validation data</span>
-<span class="no">x_val</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">100</span> * <span class="no">timesteps</span> * <span class="no">data_dim</span>), <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">100</span>, <span class="no">timesteps</span>, <span class="no">data_dim</span>))
-<span class="no">y_val</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">100</span> * <span class="no">num_classes</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">100</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="no">num_classes</span>)
+<span class="va">x_val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="va">timesteps</span> <span class="op">*</span> <span class="va">data_dim</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="va">timesteps</span>, <span class="va">data_dim</span><span class="op">)</span><span class="op">)</span>
+<span class="va">y_val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="va">num_classes</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">100</span>, ncol <span class="op">=</span> <span class="va">num_classes</span><span class="op">)</span>
 
 <span class="co"># train</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-  <span class="no">x_train</span>, <span class="no">y_train</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">64</span>, <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">validation_data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x_val</span>, <span class="no">y_val</span>)
-)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span> 
+  <span class="va">x_train</span>, <span class="va">y_train</span>, batch_size <span class="op">=</span> <span class="fl">64</span>, epochs <span class="op">=</span> <span class="fl">5</span>, validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x_val</span>, <span class="va">y_val</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="same-stacked-lstm-model-rendered-stateful" class="section level3">
 <h3 class="hasAnchor">
 <a href="#same-stacked-lstm-model-rendered-stateful" class="anchor"></a>Same stacked LSTM model, rendered “stateful”</h3>
 <p>A stateful recurrent model is one for which the internal states (memories) obtained after processing a batch of samples are reused as initial states for the samples of the next batch. This allows to process longer sequences while keeping computational complexity manageable.</p>
 <p><a href="../faq#how-can-i-use-stateful-rnns">You can read more about stateful RNNs in the FAQ.</a></p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
 
 <span class="co"># constants</span>
-<span class="no">data_dim</span> <span class="kw">&lt;-</span> <span class="fl">16</span>
-<span class="no">timesteps</span> <span class="kw">&lt;-</span> <span class="fl">8</span>
-<span class="no">num_classes</span> <span class="kw">&lt;-</span> <span class="fl">10</span>
-<span class="no">batch_size</span> <span class="kw">&lt;-</span> <span class="fl">32</span>
+<span class="va">data_dim</span> <span class="op">&lt;-</span> <span class="fl">16</span>
+<span class="va">timesteps</span> <span class="op">&lt;-</span> <span class="fl">8</span>
+<span class="va">num_classes</span> <span class="op">&lt;-</span> <span class="fl">10</span>
+<span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">32</span>
 
 <span class="co"># define and compile model</span>
 <span class="co"># Expected input batch shape: (batch_size, timesteps, data_dim)</span>
 <span class="co"># Note that we have to provide the full batch_input_shape since the network is stateful.</span>
 <span class="co"># the sample of index i in batch k is the follow-up for the sample i in batch k-1.</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">return_sequences</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">stateful</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-             <span class="kw">batch_input_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">batch_size</span>, <span class="no">timesteps</span>, <span class="no">data_dim</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">return_sequences</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">stateful</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">32</span>, <span class="kw">stateful</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'softmax'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-    <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'categorical_crossentropy'</span>,
-    <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">'rmsprop'</span>,
-    <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>)
-  )
-
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, return_sequences <span class="op">=</span> <span class="cn">TRUE</span>, stateful <span class="op">=</span> <span class="cn">TRUE</span>,
+             batch_input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">timesteps</span>, <span class="va">data_dim</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, return_sequences <span class="op">=</span> <span class="cn">TRUE</span>, stateful <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, stateful <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+    loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
+    optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,
+    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+  <span class="op">)</span>
+  
 <span class="co"># generate dummy training data</span>
-<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>( (<span class="no">batch_size</span> * <span class="fl">10</span>) * <span class="no">timesteps</span> * <span class="no">data_dim</span>),
-                 <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">batch_size</span> * <span class="fl">10</span>, <span class="no">timesteps</span>, <span class="no">data_dim</span>))
-<span class="no">y_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>( (<span class="no">batch_size</span> * <span class="fl">10</span>) * <span class="no">num_classes</span>),
-                  <span class="kw">nrow</span> <span class="kw">=</span> <span class="no">batch_size</span> * <span class="fl">10</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="no">num_classes</span>)
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span> <span class="op">(</span><span class="va">batch_size</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span> <span class="op">*</span> <span class="va">timesteps</span> <span class="op">*</span> <span class="va">data_dim</span><span class="op">)</span>, 
+                 dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">batch_size</span> <span class="op">*</span> <span class="fl">10</span>, <span class="va">timesteps</span>, <span class="va">data_dim</span><span class="op">)</span><span class="op">)</span>
+<span class="va">y_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span> <span class="op">(</span><span class="va">batch_size</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span> <span class="op">*</span> <span class="va">num_classes</span><span class="op">)</span>, 
+                  nrow <span class="op">=</span> <span class="va">batch_size</span> <span class="op">*</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="va">num_classes</span><span class="op">)</span>
 
 <span class="co"># generate dummy validation data</span>
-<span class="no">x_val</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>( (<span class="no">batch_size</span> * <span class="fl">3</span>) * <span class="no">timesteps</span> * <span class="no">data_dim</span>),
-               <span class="kw">dim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">batch_size</span> * <span class="fl">3</span>, <span class="no">timesteps</span>, <span class="no">data_dim</span>))
-<span class="no">y_val</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>( (<span class="no">batch_size</span> * <span class="fl">3</span>) * <span class="no">num_classes</span>),
-                <span class="kw">nrow</span> <span class="kw">=</span> <span class="no">batch_size</span> * <span class="fl">3</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="no">num_classes</span>)
+<span class="va">x_val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span> <span class="op">(</span><span class="va">batch_size</span> <span class="op">*</span> <span class="fl">3</span><span class="op">)</span> <span class="op">*</span> <span class="va">timesteps</span> <span class="op">*</span> <span class="va">data_dim</span><span class="op">)</span>, 
+               dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">batch_size</span> <span class="op">*</span> <span class="fl">3</span>, <span class="va">timesteps</span>, <span class="va">data_dim</span><span class="op">)</span><span class="op">)</span>
+<span class="va">y_val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span> <span class="op">(</span><span class="va">batch_size</span> <span class="op">*</span> <span class="fl">3</span><span class="op">)</span> <span class="op">*</span> <span class="va">num_classes</span><span class="op">)</span>, 
+                nrow <span class="op">=</span> <span class="va">batch_size</span> <span class="op">*</span> <span class="fl">3</span>, ncol <span class="op">=</span> <span class="va">num_classes</span><span class="op">)</span>
 
 <span class="co"># train</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(
-  <span class="no">x_train</span>,
-  <span class="no">y_train</span>,
-  <span class="kw">batch_size</span> <span class="kw">=</span> <span class="no">batch_size</span>,
-  <span class="kw">epochs</span> <span class="kw">=</span> <span class="fl">5</span>,
-  <span class="kw">shuffle</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-  <span class="kw">validation_data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x_val</span>, <span class="no">y_val</span>)
-)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span> 
+  <span class="va">x_train</span>, 
+  <span class="va">y_train</span>, 
+  batch_size <span class="op">=</span> <span class="va">batch_size</span>, 
+  epochs <span class="op">=</span> <span class="fl">5</span>, 
+  shuffle <span class="op">=</span> <span class="cn">FALSE</span>,
+  validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x_val</span>, <span class="va">y_val</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 </div>
 </div>
   </div>
@@ -606,11 +621,11 @@ ________________________________________________________________________________
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

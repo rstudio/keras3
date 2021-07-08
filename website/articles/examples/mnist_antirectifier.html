@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +171,7 @@
 
       
 
-      </header><script src="mnist_antirectifier_files/header-attrs-2.3/header-attrs.js"></script><script src="mnist_antirectifier_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="mnist_antirectifier_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>mnist_antirectifier</h1>
@@ -190,97 +190,99 @@
 <p>Demonstrates how to write custom layers for Keras.</p>
 <p>We build a custom activation layer called ‘Antirectifier’, which modifies the shape of the tensor that passes through it. We need to specify two methods: <code>compute_output_shape</code> and <code>call</code>.</p>
 <p>Note that the same result can also be achieved via a Lambda layer.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">keras</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
 
 <span class="co"># Data Preparation --------------------------------------------------------</span>
 
-<span class="no">batch_size</span> <span class="kw">&lt;-</span> <span class="fl">128</span>
-<span class="no">num_classes</span> <span class="kw">&lt;-</span> <span class="fl">10</span>
-<span class="no">epochs</span> <span class="kw">&lt;-</span> <span class="fl">40</span>
+<span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">128</span>
+<span class="va">num_classes</span> <span class="op">&lt;-</span> <span class="fl">10</span>
+<span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">40</span>
 
 <span class="co"># The data, shuffled and split between train and test sets</span>
-<span class="no">mnist</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span>()
-<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="no">mnist</span>$<span class="no">train</span>$<span class="no">x</span>
-<span class="no">y_train</span> <span class="kw">&lt;-</span> <span class="no">mnist</span>$<span class="no">train</span>$<span class="no">y</span>
-<span class="no">x_test</span> <span class="kw">&lt;-</span> <span class="no">mnist</span>$<span class="no">test</span>$<span class="no">x</span>
-<span class="no">y_test</span> <span class="kw">&lt;-</span> <span class="no">mnist</span>$<span class="no">test</span>$<span class="no">y</span>
+<span class="va">mnist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>
+<span class="va">y_train</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>
+<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>
+<span class="va">y_test</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span>
 
 <span class="co"># Redimension</span>
-<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span>(<span class="no">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">x_train</span>), <span class="fl">784</span>))
-<span class="no">x_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span>(<span class="no">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">x_test</span>), <span class="fl">784</span>))
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Transform RGB values into [0,1] range</span>
-<span class="no">x_train</span> <span class="kw">&lt;-</span> <span class="no">x_train</span> / <span class="fl">255</span>
-<span class="no">x_test</span> <span class="kw">&lt;-</span> <span class="no">x_test</span> / <span class="fl">255</span>
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">x_train</span> <span class="op">/</span> <span class="fl">255</span>
+<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">x_test</span> <span class="op">/</span> <span class="fl">255</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">x_train</span>), <span class="st">'train samples\n'</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">x_test</span>), <span class="st">'test samples\n'</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="st">'train samples\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="st">'test samples\n'</span><span class="op">)</span>
 
 <span class="co"># Convert class vectors to binary class matrices</span>
-<span class="no">y_train</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/to_categorical.html">to_categorical</a></span>(<span class="no">y_train</span>, <span class="no">num_classes</span>)
-<span class="no">y_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/to_categorical.html">to_categorical</a></span>(<span class="no">y_test</span>, <span class="no">num_classes</span>)
+<span class="va">y_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span><span class="va">y_train</span>, <span class="va">num_classes</span><span class="op">)</span>
+<span class="va">y_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span><span class="va">y_test</span>, <span class="va">num_classes</span><span class="op">)</span>
 
-<span class="co"># Antirectifier Layer -----------------------------------------------------</span></pre></body></html></div>
+<span class="co"># Antirectifier Layer -----------------------------------------------------</span></code></pre></div>
 <p>This is the combination of a sample-wise L2 normalization with the concatenation of the positive part of the input with the negative part of the input. The result is a tensor of samples that are twice as large as the input samples.</p>
 <p>It can be used in place of a ReLU. Input shape: 2D tensor of shape (samples, n) Output shape: 2D tensor of shape (samples, 2*n)</p>
 <p>When applying ReLU, assuming that the distribution of the previous output is approximately centered around 0., you are discarding half of your input. This is inefficient.</p>
 <p>Antirectifier allows to return all-positive outputs like ReLU, without discarding any data.</p>
 <p>Tests on MNIST show that Antirectifier allows to train networks with half the parameters yet with comparable classification accuracy as an equivalent ReLU-based network.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># Custom layer class</span>
-<span class="no">AntirectifierLayer</span> <span class="kw">&lt;-</span> <span class="kw pkg">R6</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/R6/man/R6Class.html">R6Class</a></span>(<span class="st">"KerasLayer"</span>,
-
-  <span class="kw">inherit</span> <span class="kw">=</span> <span class="no">KerasLayer</span>,
-
-  <span class="kw">public</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-
-    <span class="kw">call</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>, <span class="no">mask</span> <span class="kw">=</span> <span class="kw">NULL</span>) {
-      <span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">x</span> - <span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span>(<span class="no">x</span>, <span class="kw">axis</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">keepdims</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-      <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_l2_normalize.html">k_l2_normalize</a></span>(<span class="no">x</span>, <span class="kw">axis</span> <span class="kw">=</span> <span class="fl">2</span>)
-      <span class="no">pos</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_relu.html">k_relu</a></span>(<span class="no">x</span>)
-      <span class="no">neg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/k_relu.html">k_relu</a></span>(-<span class="no">x</span>)
-      <span class="fu"><a href="../../reference/k_concatenate.html">k_concatenate</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">pos</span>, <span class="no">neg</span>), <span class="kw">axis</span> <span class="kw">=</span> <span class="fl">2</span>)
-
-    },
-
-    <span class="kw">compute_output_shape</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">input_shape</span>) {
-      <span class="no">input_shape</span><span class="kw">[[</span><span class="fl">2</span>]] <span class="kw">&lt;-</span> <span class="no">input_shape</span><span class="kw">[[</span><span class="fl">2</span>]] * <span class="fl">2L</span>
-      <span class="no">input_shape</span>
-    }
-  )
-)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Custom layer class</span>
+<span class="va">AntirectifierLayer</span> <span class="op">&lt;-</span> <span class="fu">R6</span><span class="fu">::</span><span class="kw"><a href="https://r6.r-lib.org/reference/R6Class.html">R6Class</a></span><span class="op">(</span><span class="st">"KerasLayer"</span>,
+  
+  inherit <span class="op">=</span> <span class="va">KerasLayer</span>,
+                           
+  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+   
+    call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span><span class="op">(</span><span class="va">x</span>, axis <span class="op">=</span> <span class="fl">2</span>, keepdims <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+      <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_l2_normalize.html">k_l2_normalize</a></span><span class="op">(</span><span class="va">x</span>, axis <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+      <span class="va">pos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_relu.html">k_relu</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+      <span class="va">neg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_relu.html">k_relu</a></span><span class="op">(</span><span class="op">-</span><span class="va">x</span><span class="op">)</span>
+      <span class="fu"><a href="../../reference/k_concatenate.html">k_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">pos</span>, <span class="va">neg</span><span class="op">)</span>, axis <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+      
+    <span class="op">}</span>,
+     
+    compute_output_shape <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">input_shape</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">input_shape</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">*</span> <span class="fl">2L</span> 
+      <span class="va">input_shape</span>
+    <span class="op">}</span>
+  <span class="op">)</span>
+<span class="op">)</span>
 
 <span class="co"># Create layer wrapper function</span>
-<span class="no">layer_antirectifier</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">object</span>) {
-  <span class="fu"><a href="../../reference/create_layer.html">create_layer</a></span>(<span class="no">AntirectifierLayer</span>, <span class="no">object</span>)
-}
+<span class="va">layer_antirectifier</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">object</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../../reference/create_layer.html">create_layer</a></span><span class="op">(</span><span class="va">AntirectifierLayer</span>, <span class="va">object</span><span class="op">)</span>
+<span class="op">}</span>
 
 
 <span class="co"># Define &amp; Train Model -------------------------------------------------</span>
 
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span>()
-<span class="no">model</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">256</span>, <span class="kw">input_shape</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">784</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu">layer_antirectifier</span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="fl">256</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">layer_antirectifier</span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span>(<span class="kw">rate</span> <span class="kw">=</span> <span class="fl">0.1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span>(<span class="kw">units</span> <span class="kw">=</span> <span class="no">num_classes</span>, <span class="kw">activation</span> <span class="kw">=</span> <span class="st">'softmax'</span>)
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">layer_antirectifier</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">layer_antirectifier</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">num_classes</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span>
 
 <span class="co"># Compile the model</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/compile.html">compile</a></span>(
-  <span class="kw">loss</span> <span class="kw">=</span> <span class="st">'categorical_crossentropy'</span>,
-  <span class="kw">optimizer</span> <span class="kw">=</span> <span class="st">'rmsprop'</span>,
-  <span class="kw">metrics</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'accuracy'</span>)
-)
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
+  optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+<span class="op">)</span>
 
 <span class="co"># Train the model</span>
-<span class="no">model</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/fit.html">fit</a></span>(<span class="no">x_train</span>, <span class="no">y_train</span>,
-  <span class="kw">batch_size</span> <span class="kw">=</span> <span class="no">batch_size</span>,
-  <span class="kw">epochs</span> <span class="kw">=</span> <span class="no">epochs</span>,
-  <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">1</span>,
-  <span class="kw">validation_data</span><span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x_test</span>, <span class="no">y_test</span>)
-)</pre></body></html></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span>,
+  batch_size <span class="op">=</span> <span class="va">batch_size</span>,
+  epochs <span class="op">=</span> <span class="va">epochs</span>,
+  verbose <span class="op">=</span> <span class="fl">1</span>,
+  validation_data<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -292,11 +294,11 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

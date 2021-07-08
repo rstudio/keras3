@@ -84,7 +84,7 @@ parallel to training your model on GPU." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -202,7 +202,7 @@ parallel to training your model on GPU." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -230,21 +230,21 @@ this allows you to do real-time data augmentation on images on CPU in
 parallel to training your model on GPU.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fit_generator</span>(
-  <span class='no'>object</span>,
-  <span class='no'>generator</span>,
-  <span class='no'>steps_per_epoch</span>,
-  <span class='kw'>epochs</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"keras.fit_verbose"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>1</span>),
-  <span class='kw'>callbacks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>view_metrics</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"keras.view_metrics"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='st'>"auto"</span>),
-  <span class='kw'>validation_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>validation_steps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>class_weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>max_queue_size</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>workers</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>initial_epoch</span> <span class='kw'>=</span> <span class='fl'>0</span>
-)</pre>
+    <pre class="usage"><span class='fu'>fit_generator</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>generator</span>,
+  <span class='va'>steps_per_epoch</span>,
+  epochs <span class='op'>=</span> <span class='fl'>1</span>,
+  verbose <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"keras.fit_verbose"</span>, default <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>,
+  callbacks <span class='op'>=</span> <span class='cn'>NULL</span>,
+  view_metrics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"keras.view_metrics"</span>, default <span class='op'>=</span> <span class='st'>"auto"</span><span class='op'>)</span>,
+  validation_data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  validation_steps <span class='op'>=</span> <span class='cn'>NULL</span>,
+  class_weight <span class='op'>=</span> <span class='cn'>NULL</span>,
+  max_queue_size <span class='op'>=</span> <span class='fl'>10</span>,
+  workers <span class='op'>=</span> <span class='fl'>1</span>,
+  initial_epoch <span class='op'>=</span> <span class='fl'>0</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -298,7 +298,7 @@ epoch).</p></td>
       <th>view_metrics</th>
       <td><p>View realtime plot of training metrics (by epoch). The
 default (<code>"auto"</code>) will display the plot when running within RStudio,
-<code>metrics</code> were specified during model <code><a href='https://rdrr.io/pkg/generics/man/compile.html'>compile()</a></code>, <code>epochs &gt; 1</code> and
+<code>metrics</code> were specified during model <code><a href='https://generics.r-lib.org/reference/compile.html'>compile()</a></code>, <code>epochs &gt; 1</code> and
 <code>verbose &gt; 0</code>. Use the global <code>keras.view_metrics</code> option to establish a
 different default.</p></td>
     </tr>
@@ -379,11 +379,11 @@ previous training run)</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

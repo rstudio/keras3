@@ -83,7 +83,7 @@ can only be used as the first layer in a model." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -201,7 +201,7 @@ can only be used as the first layer in a model." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -228,21 +228,21 @@ can only be used as the first layer in a model." />
 can only be used as the first layer in a model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>layer_embedding</span>(
-  <span class='no'>object</span>,
-  <span class='no'>input_dim</span>,
-  <span class='no'>output_dim</span>,
-  <span class='kw'>embeddings_initializer</span> <span class='kw'>=</span> <span class='st'>"uniform"</span>,
-  <span class='kw'>embeddings_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>activity_regularizer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>embeddings_constraint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>mask_zero</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>input_length</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>trainable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>layer_embedding</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>input_dim</span>,
+  <span class='va'>output_dim</span>,
+  embeddings_initializer <span class='op'>=</span> <span class='st'>"uniform"</span>,
+  embeddings_regularizer <span class='op'>=</span> <span class='cn'>NULL</span>,
+  activity_regularizer <span class='op'>=</span> <span class='cn'>NULL</span>,
+  embeddings_constraint <span class='op'>=</span> <span class='cn'>NULL</span>,
+  mask_zero <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  input_length <span class='op'>=</span> <span class='cn'>NULL</span>,
+  batch_size <span class='op'>=</span> <span class='cn'>NULL</span>,
+  name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  trainable <span class='op'>=</span> <span class='cn'>NULL</span>,
+  weights <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -319,7 +319,7 @@ isn't provided.</p></td>
     <p>2D tensor with shape: <code>(batch_size, sequence_length)</code>.</p>
     <h2 class="hasAnchor" id="output-shape"><a class="anchor" href="#output-shape"></a>Output shape</h2>
 
-    <p>3D tensor with shape: <code>(batch_size, sequence_length,  output_dim)</code>.</p>
+    <p>3D tensor with shape: <code>(batch_size, sequence_length, output_dim)</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
@@ -340,11 +340,11 @@ isn't provided.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

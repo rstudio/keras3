@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a Keras Wrapper — create_wrapper • keras</title>
+<title>(Deprecated) Create a Keras Wrapper — create_wrapper • keras</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,9 @@
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Create a Keras Wrapper — create_wrapper" />
-<meta property="og:description" content="Create a Keras Wrapper" />
+<meta property="og:title" content="(Deprecated) Create a Keras Wrapper — create_wrapper" />
+<meta property="og:description" content="R6 classes that inherit from keras$layers$Wrapper can now be instantiated
+directly by create_layer" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -82,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -200,7 +201,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -217,16 +218,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a Keras Wrapper</h1>
+    <h1>(Deprecated) Create a Keras Wrapper</h1>
     <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/wrapper_custom.R'><code>R/wrapper_custom.R</code></a></small>
     <div class="hidden name"><code>create_wrapper.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a Keras Wrapper</p>
+    <p>R6 classes that inherit from <code>keras$layers$Wrapper</code> can now be instantiated
+directly by <code>create_layer</code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_wrapper</span>(<span class='no'>wrapper_class</span>, <span class='no'>object</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>())</pre>
+    <pre class="usage"><span class='fu'>create_wrapper</span><span class='op'>(</span><span class='va'>wrapper_class</span>, <span class='va'>object</span>, args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -266,11 +268,11 @@ layer is created without a connection to an existing graph.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

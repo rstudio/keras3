@@ -84,7 +84,7 @@ histograms for the different layers in your model." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -202,7 +202,7 @@ histograms for the different layers in your model." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -230,20 +230,20 @@ dynamic graphs of your training and test metrics, as well as activation
 histograms for the different layers in your model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>callback_tensorboard</span>(
-  <span class='kw'>log_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>histogram_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>write_graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>write_grads</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>write_images</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>embeddings_freq</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>embeddings_layer_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>embeddings_metadata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>embeddings_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>update_freq</span> <span class='kw'>=</span> <span class='st'>"epoch"</span>,
-  <span class='kw'>profile_batch</span> <span class='kw'>=</span> <span class='fl'>0</span>
-)</pre>
+    <pre class="usage"><span class='fu'>callback_tensorboard</span><span class='op'>(</span>
+  log_dir <span class='op'>=</span> <span class='cn'>NULL</span>,
+  histogram_freq <span class='op'>=</span> <span class='fl'>0</span>,
+  batch_size <span class='op'>=</span> <span class='cn'>NULL</span>,
+  write_graph <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  write_grads <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  write_images <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  embeddings_freq <span class='op'>=</span> <span class='fl'>0</span>,
+  embeddings_layer_names <span class='op'>=</span> <span class='cn'>NULL</span>,
+  embeddings_metadata <span class='op'>=</span> <span class='cn'>NULL</span>,
+  embeddings_data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  update_freq <span class='op'>=</span> <span class='st'>"epoch"</span>,
+  profile_batch <span class='op'>=</span> <span class='fl'>0</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -294,7 +294,7 @@ layers will be saved.</p></td>
       <th>embeddings_metadata</th>
       <td><p>a named list which maps layer name to a file name in
 which metadata for this embedding layer is saved. See the
-<a href='https://www.tensorflow.org/how_tos/embedding_viz/#metadata_optional'>details</a>
+<a href='https://www.tensorflow.org/tensorboard/tensorboard_projector_plugin#saving_data_for_tensorboard'>details</a>
 about the metadata file format. In case if the same metadata file is used
 for all embedding layers, string can be passed.</p></td>
     </tr>
@@ -302,7 +302,7 @@ for all embedding layers, string can be passed.</p></td>
       <th>embeddings_data</th>
       <td><p>Data to be embedded at layers specified in
 <code>embeddings_layer_names</code>. Array (if the model has a single input) or list
-of arrays (if the model has multiple inputs). Learn <a href='https://www.tensorflow.org/programmers_guide/embedding'>more about embeddings</a></p></td>
+of arrays (if the model has multiple inputs). Learn <a href='https://www.tensorflow.org/tutorials/text/word_embeddings'>more about embeddings</a></p></td>
     </tr>
     <tr>
       <th>update_freq</th>
@@ -325,7 +325,7 @@ batch. Must run in TensorFlow eager mode. (TF &gt;= 1.14)</p></td>
 
     <p>TensorBoard is a visualization tool provided with TensorFlow.</p>
 <p>You can find more information about TensorBoard
-<a href='https://www.tensorflow.org/get_started/summaries_and_tensorboard'>here</a>.</p>
+<a href='https://www.tensorflow.org/tensorboard/get_started'>here</a>.</p>
 <p>When using a backend other than TensorFlow, TensorBoard will still work
 (if you have TensorFlow installed), but the only feature available will
 be the display of the losses and metrics plots.</p>
@@ -353,11 +353,11 @@ be the display of the losses and metrics plots.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -200,7 +200,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -226,9 +226,9 @@
     <p>Freeze weights in a model or layer so that they are no longer trainable.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>freeze_weights</span>(<span class='no'>object</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>freeze_weights</span><span class='op'>(</span><span class='va'>object</span>, from <span class='op'>=</span> <span class='cn'>NULL</span>, to <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>unfreeze_weights</span>(<span class='no'>object</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>unfreeze_weights</span><span class='op'>(</span><span class='va'>object</span>, from <span class='op'>=</span> <span class='cn'>NULL</span>, to <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -257,42 +257,44 @@ freeze).</p>
 <p>Models must be compiled again after weights are frozen or unfrozen.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># instantiate a VGG16 model</span>
-<span class='no'>conv_base</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='application_vgg.html'>application_vgg16</a></span>(
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='st'>"imagenet"</span>,
-  <span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>150</span>, <span class='fl'>150</span>, <span class='fl'>3</span>)
-)
+<span class='va'>conv_base</span> <span class='op'>&lt;-</span> <span class='fu'><a href='application_vgg.html'>application_vgg16</a></span><span class='op'>(</span>
+  weights <span class='op'>=</span> <span class='st'>"imagenet"</span>,
+  include_top <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  input_shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>150</span>, <span class='fl'>150</span>, <span class='fl'>3</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'># freeze it's weights</span>
-<span class='fu'>freeze_weights</span>(<span class='no'>conv_base</span>)
+<span class='fu'>freeze_weights</span><span class='op'>(</span><span class='va'>conv_base</span><span class='op'>)</span>
 
 <span class='co'># create a composite model that includes the base + more layers</span>
-<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='keras_model_sequential.html'>keras_model_sequential</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='no'>conv_base</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='layer_flatten.html'>layer_flatten</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='layer_dense.html'>layer_dense</a></span>(<span class='kw'>units</span> <span class='kw'>=</span> <span class='fl'>256</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='st'>"relu"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='layer_dense.html'>layer_dense</a></span>(<span class='kw'>units</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>activation</span> <span class='kw'>=</span> <span class='st'>"sigmoid"</span>)
+<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='keras_model_sequential.html'>keras_model_sequential</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='va'>conv_base</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='layer_flatten.html'>layer_flatten</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='layer_dense.html'>layer_dense</a></span><span class='op'>(</span>units <span class='op'>=</span> <span class='fl'>256</span>, activation <span class='op'>=</span> <span class='st'>"relu"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='layer_dense.html'>layer_dense</a></span><span class='op'>(</span>units <span class='op'>=</span> <span class='fl'>1</span>, activation <span class='op'>=</span> <span class='st'>"sigmoid"</span><span class='op'>)</span>
 
 <span class='co'># compile</span>
-<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/compile.html'>compile</a></span>(
-  <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>"binary_crossentropy"</span>,
-  <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span>(<span class='kw'>lr</span> <span class='kw'>=</span> <span class='fl'>2e-5</span>),
-  <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"accuracy"</span>)
-)
+<span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://generics.r-lib.org/reference/compile.html'>compile</a></span><span class='op'>(</span>
+  loss <span class='op'>=</span> <span class='st'>"binary_crossentropy"</span>,
+  optimizer <span class='op'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span><span class='op'>(</span>lr <span class='op'>=</span> <span class='fl'>2e-5</span><span class='op'>)</span>,
+  metrics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"accuracy"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'># unfreeze weights from "block5_conv1" on</span>
-<span class='fu'>unfreeze_weights</span>(<span class='no'>conv_base</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"block5_conv1"</span>)
+<span class='fu'>unfreeze_weights</span><span class='op'>(</span><span class='va'>conv_base</span>, from <span class='op'>=</span> <span class='st'>"block5_conv1"</span><span class='op'>)</span>
 
 <span class='co'># compile again since we froze or unfroze weights</span>
-<span class='no'>model</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/compile.html'>compile</a></span>(
-  <span class='kw'>loss</span> <span class='kw'>=</span> <span class='st'>"binary_crossentropy"</span>,
-  <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span>(<span class='kw'>lr</span> <span class='kw'>=</span> <span class='fl'>2e-5</span>),
-  <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"accuracy"</span>)
-)
+<span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://generics.r-lib.org/reference/compile.html'>compile</a></span><span class='op'>(</span>
+  loss <span class='op'>=</span> <span class='st'>"binary_crossentropy"</span>,
+  optimizer <span class='op'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span><span class='op'>(</span>lr <span class='op'>=</span> <span class='fl'>2e-5</span><span class='op'>)</span>,
+  metrics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"accuracy"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-}</div></pre>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -304,11 +306,11 @@ freeze).</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

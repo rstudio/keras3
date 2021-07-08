@@ -85,7 +85,7 @@ at ~/.keras/keras.json." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
       </span>
     </div>
 
@@ -203,7 +203,7 @@ at ~/.keras/keras.json." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rstudio/keras/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -232,40 +232,40 @@ therefore it only works with the data format
 at <code>~/.keras/keras.json</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>application_nasnet</span>(
-  <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>penultimate_filters</span> <span class='kw'>=</span> <span class='fl'>4032L</span>,
-  <span class='kw'>num_blocks</span> <span class='kw'>=</span> <span class='fl'>6L</span>,
-  <span class='kw'>stem_block_filters</span> <span class='kw'>=</span> <span class='fl'>96L</span>,
-  <span class='kw'>skip_reduction</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>filter_multiplier</span> <span class='kw'>=</span> <span class='fl'>2L</span>,
-  <span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>default_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)
+    <pre class="usage"><span class='fu'>application_nasnet</span><span class='op'>(</span>
+  input_shape <span class='op'>=</span> <span class='cn'>NULL</span>,
+  penultimate_filters <span class='op'>=</span> <span class='fl'>4032L</span>,
+  num_blocks <span class='op'>=</span> <span class='fl'>6L</span>,
+  stem_block_filters <span class='op'>=</span> <span class='fl'>96L</span>,
+  skip_reduction <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  filter_multiplier <span class='op'>=</span> <span class='fl'>2L</span>,
+  include_top <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  weights <span class='op'>=</span> <span class='cn'>NULL</span>,
+  input_tensor <span class='op'>=</span> <span class='cn'>NULL</span>,
+  pooling <span class='op'>=</span> <span class='cn'>NULL</span>,
+  classes <span class='op'>=</span> <span class='fl'>1000</span>,
+  default_size <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span>
 
-<span class='fu'>application_nasnetlarge</span>(
-  <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>
-)
+<span class='fu'>application_nasnetlarge</span><span class='op'>(</span>
+  input_shape <span class='op'>=</span> <span class='cn'>NULL</span>,
+  include_top <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  weights <span class='op'>=</span> <span class='cn'>NULL</span>,
+  input_tensor <span class='op'>=</span> <span class='cn'>NULL</span>,
+  pooling <span class='op'>=</span> <span class='cn'>NULL</span>,
+  classes <span class='op'>=</span> <span class='fl'>1000</span>
+<span class='op'>)</span>
 
-<span class='fu'>application_nasnetmobile</span>(
-  <span class='kw'>input_shape</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>include_top</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>input_tensor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>pooling</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>classes</span> <span class='kw'>=</span> <span class='fl'>1000</span>
-)
+<span class='fu'>application_nasnetmobile</span><span class='op'>(</span>
+  input_shape <span class='op'>=</span> <span class='cn'>NULL</span>,
+  include_top <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  weights <span class='op'>=</span> <span class='cn'>NULL</span>,
+  input_tensor <span class='op'>=</span> <span class='cn'>NULL</span>,
+  pooling <span class='op'>=</span> <span class='cn'>NULL</span>,
+  classes <span class='op'>=</span> <span class='fl'>1000</span>
+<span class='op'>)</span>
 
-<span class='fu'>nasnet_preprocess_input</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>nasnet_preprocess_input</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -363,11 +363,11 @@ specified.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Falbel, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
