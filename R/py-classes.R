@@ -228,8 +228,8 @@ r_formals_to_py__signature__ <- function(fn) {
 
 #' Make a python class constructor
 #'
-#' @param a a bare symbol `MyClassName`, or a call `MyClassName(SuperClass)`
-#' @param b an expression that can be evaluated to construct the class methods.
+#' @param spec a bare symbol `MyClassName`, or a call `MyClassName(SuperClass)`
+#' @param body an expression that can be evaluated to construct the class methods.
 #'
 #' @return
 #' @export

@@ -7,9 +7,9 @@
 spec \%py_class\% body
 }
 \arguments{
-\item{a}{a bare symbol \code{MyClassName}, or a call \code{MyClassName(SuperClass)}}
+\item{spec}{a bare symbol \code{MyClassName}, or a call \code{MyClassName(SuperClass)}}
 
-\item{b}{an expression that can be evaluated to construct the class methods.}
+\item{body}{an expression that can be evaluated to construct the class methods.}
 }
 \value{
 
