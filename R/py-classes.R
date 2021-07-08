@@ -277,7 +277,6 @@ r_formals_to_py__signature__ <- function(fn) {
       spec$convert <- NULL
     }
 
-    oa <- spec
     if(length(spec) <= 2) {
       spec <- spec[[length(spec)]]
     } else {
