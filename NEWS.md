@@ -6,6 +6,7 @@ Breaking changes:
 New Features:
 - Default Tensorflow/Keras version is now 2.5
 - The `keras` python module is exported
+- Introduced `%py_class%`, a new python class generator constructor.
 - Major changes to the underlying handeling of custom R6 layer classes.
   - A new `r_to_py` method is provided for `R6ClassGenerator` objects.
   - R6 custom layers can now inherit directly from python layer classes
