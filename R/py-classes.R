@@ -29,7 +29,7 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
   # subclassed by consulting layer.__module__
   # (not sure why builtins.issubclass() doesn't work over there)
   if(!"__module__" %in% names(namespace))
-    namespace$`__module__` <-  paste("<R6type>", x$classname, sep=".")
+    namespace$`__module__` <-  "<R6type>"
     # sprintf("<R6type.%s.%s>", format(x$parent_env), x$classname)
 
 
