@@ -82,7 +82,9 @@ constraint_minmaxnorm <- function(min_value = 0.0, max_value = 1.0, rate = 1.0, 
 }
 
 
-#' Base R6 class for Keras constraints
+#' (Deprecated) Base R6 class for Keras constraints
+#'
+#' New custom constraints are encouraged to subclass `keras$constraints$Constraint` directly.
 #'
 #' @docType class
 #'
