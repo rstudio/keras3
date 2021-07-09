@@ -13,6 +13,9 @@ menu:
     identifier: "python-classes"
     parent: "keras-advanced-top"
     weight: 10
+editor_options:
+  markdown:
+    wrap: sentence
 aliases:
   - /keras/articles/custom_python_classes.html
 ---
@@ -29,15 +32,23 @@ library(reticulate)
 library(keras)
 ```
 
-Keras support a variety to paradigms for composing and training models, including an imperative style, functional style, and an object-oriented style.
-Each of these is appropriate for different contexts and use-cases.
+When using keras, a desire to create Python-based subclasses can arise in a number of ways.
+For example, when you want to:
 
-Subclassing is one of the design patterns in the Keras/Tensorflow API, and it is most appropriate when you are attempting to extend the framework by writing a custom implementation for one of the components.
-Custom Keras Models, Layers, Constraints, Regularizers, Callbacks, Losses, and Optimizers can each be written in a variety of ways, but the greatest flexibility (and responsibility!) typically comes from subclassing the keras provided base class for the component type you're trying to implement.
+-   define custom layers and/or models
+-   implement custom training logic
+-   create custom losses or optimizers
+-   define custom callbacks
+-   ... and more!
+
+In such scenarios, the most powerful and flexible approach is to directly inherit from, and then modify and/or enhance an appropriate Python class.
 
 Subclassing a Python class in R is generally straightforward.
 Two syntaxes are provided: one that adheres to R conventions and uses `R6::R6Class` as the class constructor, and one that adheres more to Python conventions, and attempts to replicate Python syntax in R.
-Which you find more convenient will depend mostly on if you have more prior experience with object-oriented programming in R or python.
+
+## Examples
+
+### A custom constraint (R6)
 
 For demonstration purposes, let's say you want to implement a custom keras kernel constraint via subclassing.
 Using R6:
@@ -105,8 +116,10 @@ After conversion, Python class generators will be different from R6 class genera
     -   a list of Python/R6 classes (for multiple inheritance)
     -   A list of superclasses, with optional additional keywords (e.g., `metaclass=`, only for advanced Python use cases)
 
-For users working in both Python and R, we also provide `%py_class%`.
-This attempts to replicated the Python syntax for the `class` statement in R, and is especially convenient when translating Python code to R.
+### A custom constraint (`%py_class%`)
+
+As an alternative to `r_to_py(R6Class(...))`, we also provide `%py_class%`, a more concise alternative syntax for achieving the same outcome.
+`%py_class%` is heavily inspired by the Python syntax for the `class` statement in R, and is especially convenient when translating Python code to R.
 Translating the above example, you could write the same using `%py_class%`:
 
 ```{r}
@@ -117,7 +130,7 @@ NonNegative(keras$constraints$Constraint) %py_class% {
 }
 ```
 
-Notice, this is very similar to the equivalent (Python code)[<https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/constraints/Constraint>]:
+Notice, this is very similar to the equivalent [Python code](https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/constraints/Constraint):
 
 ```{python, eval=FALSE}
 class NonNegative(tf.keras.constraints.Constraint):
@@ -146,8 +159,10 @@ NonNegative(keras$constraints$Constraint, convert=FALSE) %py_class% { ... }
 
 In all other regards, `%py_class%` is equivalent to `r_to_py(R6Class())` (indeed, under the hood, they do the same thing).
 
+### A custom layer (R6)
+
 The same pattern can be extended to all sorts of keras objects.
-For example, a custom layer can be written by subclassing the base keras layer:
+For example, a custom layer can be written by subclassing the base Keras Layer:
 
 ```{r}
 CustomLayer <- R6::R6Class("CustomLayer",
@@ -180,10 +195,13 @@ CustomLayer <- R6::R6Class("CustomLayer",
 )
 ```
 
+### A custom layer (`%py_class%`)
+
 or using `%py_class%`:
 
 ```{r}
 CustomLayer(keras$layers$Layer) %py_class% {
+  
   initialize = function(output_dim) {
     self$output_dim <- output_dim
   }
