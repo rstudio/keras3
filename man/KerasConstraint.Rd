@@ -3,12 +3,12 @@
 \docType{class}
 \name{KerasConstraint}
 \alias{KerasConstraint}
-\title{Base R6 class for Keras constraints}
+\title{(Deprecated) Base R6 class for Keras constraints}
 \format{
 An \link{R6Class} generator object
 }
 \description{
-Base R6 class for Keras constraints
+New custom constraints are encouraged to subclass \code{keras$constraints$Constraint} directly.
 }
 \details{
 You can implement a custom constraint either by creating an

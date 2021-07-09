@@ -3,7 +3,7 @@
 \docType{class}
 \name{KerasCallback}
 \alias{KerasCallback}
-\title{Base R6 class for Keras callbacks}
+\title{(Deprecated) Base R6 class for Keras callbacks}
 \format{
 An \link{R6Class} generator object
 }
@@ -11,7 +11,8 @@ An \link{R6Class} generator object
 \link{KerasCallback}.
 }
 \description{
-Base R6 class for Keras callbacks
+New custom callbacks implemented as R6 classes are encouraged to inherit from
+keras$callbacks$Callback directly.
 }
 \details{
 The \code{logs} named list that callback methods take as argument will

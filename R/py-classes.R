@@ -29,7 +29,7 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
   # subclassed by consulting layer.__module__
   # (not sure why builtins.issubclass() doesn't work over there)
   if(!"__module__" %in% names(namespace))
-    namespace$`__module__` <-  paste("<R6type>", x$classname, sep=".")
+    namespace$`__module__` <-  "<R6type>"
     # sprintf("<R6type.%s.%s>", format(x$parent_env), x$classname)
 
 
@@ -224,3 +224,98 @@ r_formals_to_py__signature__ <- function(fn) {
 # *) `super()` can resolve `self` properly when called from a nested scope
 # *) method calls respect user-supplied `convert` values for all args
 #
+
+
+#' Make a python class constructor
+#'
+#' @param spec a bare symbol `MyClassName`, or a call `MyClassName(SuperClass)`
+#' @param body an expression that can be evaluated to construct the class methods.
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' MyClass %py_class% {
+#'   initialize <- function(x) {
+#'     print("Hi from MyClass$initialize()!")
+#'     self$x <- x
+#'   }
+#'   my_method <- function() {
+#'     self$x
+#'   }
+#' }
+#'
+#' my_class_instance <- MyClass(42)
+#' my_class_instance$my_method()
+#'
+#' MyClass2(MyClass) %py_class% {
+#'   initialize <- function(...) {
+#'     print("Hi from MyClass2$initialize()!")
+#'     super$initialize(...)
+#'   }
+#' }
+#'
+#' my_class_instance2 <- MyClass2(42)
+#' my_class_instance2$my_method()
+#' }
+`%py_class%` <- function(spec, body) {
+  spec <- substitute(spec)
+  body <- substitute(body)
+  parent_env <- parent.frame()
+
+  inherit <- NULL
+  convert <- TRUE
+
+  if (is.call(spec)) {
+    classname <- as.character(spec[[1L]])
+
+    # `convert` keyword argument is intercepted here, all other keyword args are
+    # passed on to __builtin__.type() (e.g, metaclass=)
+    if(!is.null(spec$convert)) {
+      convert <- eval(spec$convert, parent_env)
+      spec$convert <- NULL
+    }
+
+    if(length(spec) <= 2) {
+      spec <- spec[[length(spec)]]
+    } else {
+      spec[[1]] <- quote(base::list)
+    }
+
+    inherit <- spec # R6Class wants an expression for this
+
+  } else {
+    stopifnot(is.symbol(spec))
+    classname <- as.character(spec)
+  }
+
+  env <- new.env(parent = parent_env)
+  eval(body, env)
+
+  public <- active <- list()
+  for(nm in names(env)) {
+    if(bindingIsActive(nm, env)) {
+      active[[nm]] <- activeBindingFunction(nm, env)
+    } else
+      public[[nm]] <- env[[nm]]
+  }
+
+  # R6Class() calls substitute() on inherit;
+  r_cls <- eval(as.call(list(
+    quote(R6::R6Class),
+    classname = classname,
+    public = public,
+    active = active,
+    inherit = inherit,
+    cloneable = FALSE,
+    parent_env = parent_env
+  )))
+
+  # TODO: think about best practice for how to delay creating this
+  # if defined in a package.
+  py_cls <- r_to_py.R6ClassGenerator(r_cls, convert)
+  assign(classname, py_cls, envir = parent_env)
+  invisible(py_cls)
+}
+

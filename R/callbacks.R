@@ -491,7 +491,10 @@ callback_lambda <- function(on_epoch_begin = NULL, on_epoch_end = NULL,
   do.call(keras$callbacks$LambdaCallback, args)
 }
 
-#' Base R6 class for Keras callbacks
+#' (Deprecated) Base R6 class for Keras callbacks
+#'
+#' New custom callbacks implemented as R6 classes are encouraged to inherit from
+#' keras$callbacks$Callback directly.
 #'
 #' @docType class
 #'
