@@ -106,7 +106,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
                           conda = "auto",
                           version = "default",
                           tensorflow = "default",
-                          extra_packages = c("tensorflow-hub"),
+                          extra_packages = c("tensorflow-hub", "requests", "Pillow~=8.2", "pyyaml"),
                           ...) {
 
   # verify method
@@ -124,14 +124,14 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
     # conda is the only supported method on windows
     method <- "conda"
 
-    # confirm we actually have conda
-    have_conda <- !is.null(tryCatch(conda_binary(conda), error = function(e) NULL))
-    if (!have_conda) {
-      stop("Keras installation failed (no conda binary found)\n\n",
-           "Install Anaconda for Python 3.x (https://www.anaconda.com/download/#windows)\n",
-           "before installing Keras.",
-           call. = FALSE)
-    }
+    # confirm we actually have conda - let reticulate prompt miniconda installation
+    # have_conda <- !is.null(tryCatch(conda_binary(conda), error = function(e) NULL))
+    # if (!have_conda) {
+    #   stop("Keras installation failed (no conda binary found)\n\n",
+    #        "Install Anaconda for Python 3.x (https://www.anaconda.com/download/#windows)\n",
+    #        "before installing Keras.",
+    #        call. = FALSE)
+    # }
 
     # avoid DLL in use errors
     if (py_available()) {
@@ -141,31 +141,9 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
     }
   }
 
-  extra_packages <- unique(c(
-    paste0("keras", version),
-    extra_packages,
-
-    "requests",
-    "Pillow"
-  ))
-
-  if (tensorflow == "default" || tensorflow == "nightly" ||
-      package_version(tensorflow) >= "2.4")
-  {
-    # can install the mre recent versions recently
-    extra_packages <- c(
-      extra_packages,
-      "h5py",
-      "pyyaml"
-    )
-  } else {
-    # we need fixed versions of hdf5 to work with older versions of
-    # tensorflow
-    extra_packages <- c(
-      extra_packages,
-      "h5py==2.10.0",
-      "pyyaml==3.12"
-    )
+  if(is.na(Sys.getenv("RETICULATE_MINICONDA_PYTHON_VERSION"))) {
+    Sys.setenv("RETICULATE_MINICONDA_PYTHON_VERSION" = "3.7")
+    on.exit(Sys.unsetenv("RETICULATE_MINICONDA_PYTHON_VERSION"))
   }
 
   # perform the install
