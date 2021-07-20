@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         os: ['windows-latest', 'macOS-latest', 'ubuntu-18.04']
-        tf: ['2.5.0'] # '2.1.4', '2.2.3', '2.3.3', '2.4.2', , 'nightly'
+        tf: ['2.5.0']
         include:
           - os: ubuntu-18.04
             rspm: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
