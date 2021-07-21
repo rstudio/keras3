@@ -14,7 +14,8 @@ expect_warning_if <- function(cond, expr) {
   )
 }
 
-py_capture_output <- reticulate::import("IPython")$utils$capture$capture_output
+py_capture_output <- reticulate::py_capture_output #import("IPython")$utils$capture$capture_output
+
 
 test_succeeds <- function(desc, expr, required_version = NULL) {
 
