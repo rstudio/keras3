@@ -35,7 +35,7 @@ jobs:
         run: |
           echo "RSPM=https://packagemanager.rstudio.com/all/__linux__/$(lsb_release -cs)/latest" >> $GITHUB_ENV
 
-      - name: Configure reticulate to use system miniconda
+      - name: Configure reticulate to use runner image miniconda
         run: |
           echo "RETICULATE_MINICONDA_PATH=${CONDA}" >> $GITHUB_ENV
 
@@ -44,12 +44,25 @@ jobs:
       - uses: r-lib/actions/setup-r@master
         with:
           Ncpus: '2L'
+          install-r: false
 
       - uses: r-lib/actions/setup-pandoc@master
 
+      - name: Get R version
+        run: |
+          writeLines(sprintf("R-%i.%i", R.version$major, R.version$minor), ".github/R-version")
+        shell: Rscript {0}
+
+      - name: Restore R package cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ matrix.os }}-${{ hashFiles('.github/R-version') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}
+
       - name: Install remotes
         shell: Rscript {0}
-        run: install.packages("remotes")
+        run: if(!require("remotes")) install.packages("remotes")
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
@@ -58,13 +71,14 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements(Sys.getenv("OS_LABEL")))')
-          sudo apt-get install -y python3-venv
+          # sudo apt-get install -y python3-venv
 
       - name: Install dependencies
         shell: Rscript {0}
         run: |
           # remotes::install_github('rstudio/reticulate')
           # remotes::install_github('rstudio/tensorflow')
+          remotes::update_packages()
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
           remotes::install_local()
@@ -72,13 +86,13 @@ jobs:
       - name: Debug Output
         run: |
           env
-          cat ~/.Rprofile
+          Rscript -e 'Sys.getenv()'
           Rscript -e 'reticulate::py_config()'
 
       - name: Install TensorFlow
         shell: Rscript {0}
         run: |
-          # reticulate::conda_create('r-reticulate')
+          reticulate::conda_create('r-reticulate')
           keras::install_keras(tensorflow = Sys.getenv("TF_VERSION"),
                                envname = "r-reticulate")
           print(reticulate::py_config())
