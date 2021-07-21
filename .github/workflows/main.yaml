@@ -8,46 +8,44 @@ on:
 
 name: R-CMD-check
 
+
 jobs:
   R-CMD-check:
     strategy:
       fail-fast: false
       matrix:
-        os: ['windows-latest', 'macOS-latest', 'ubuntu-18.04']
-        tf: ['2.5.0']
-        include:
-          - os: ubuntu-18.04
-            rspm: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
-          - tf: nightly
-            allow_failure: true
+        os: ['ubuntu-20.04', 'windows-latest', 'macOS-latest']
+        tf: ['2.5']
+
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} (TF ${{ matrix.tf }})
+    continue-on-error: ${{ matrix.tf == 'nightly' }}
     env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: 'true'
       TF_VERSION: ${{ matrix.tf }}
-      PIP_NO_WARN_SCRIPT_LOCATION: false
+      PIP_NO_WARN_SCRIPT_LOCATION: 'false'
       RETICULATE_AUTOCONFIGURE: 'FALSE'
-      R_COMPILE_AND_INSTALL_PACKAGES: never
-      RSPM: ${{ matrix.rspm }}
+      R_COMPILE_AND_INSTALL_PACKAGES: 'never'
+      OS_LABEL: ${{ matrix.os }}
+      RETICULATE_MINICONDA_PATH: ${{ env.CONDA }}
 
     steps:
+      - name: Configure RSPM
+        if: runner.os == 'Linux' # startsWith(matrix.os, 'ubuntu')
+        run: |
+          echo "RSPM=https://packagemanager.rstudio.com/all/__linux__/$(lsb_release -cs)/latest" >> $GITHUB_ENV
+
       - uses: actions/checkout@v2
+
       - uses: r-lib/actions/setup-r@master
+        with:
+          Ncpus: '2L'
+
       - uses: r-lib/actions/setup-pandoc@master
 
-      - name: Query dependencies
-        shell: Rscript
-        run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
-
-      - name: Restore R package cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+      - name: Install remotes
+        shell: Rscript {0}
+        run: install.packages("remotes")
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
@@ -55,32 +53,36 @@ jobs:
           while read -r cmd
           do
             eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "18.04"))')
+          done < <(Rscript -e 'writeLines(remotes::system_requirements(Sys.getenv("OS_LABEL")))')
+          sudo apt-get install -y python3-venv
 
       - name: Install dependencies
-        shell: Rscript
+        shell: Rscript {0}
         run: |
-          remotes::install_github('rstudio/reticulate')
-          remotes::install_github('rstudio/tensorflow')
+          # remotes::install_github('rstudio/reticulate')
+          # remotes::install_github('rstudio/tensorflow')
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
+          remotes::install_local()
 
-      - name: Install Miniconda
-        shell: Rscript
-        run: reticulate::install_miniconda()
+      - name: Debug Output
+        run: |
+          env
+          cat ~/.Rprofile
+          Rscript -e 'reticulate::py_config()'
 
       - name: Install TensorFlow
-        shell: Rscript
+        shell: Rscript {0}
         run: |
-          remotes::install_local()
-          keras::install_keras()
+          # reticulate::conda_create('r-reticulate')
+          keras::install_keras(tensorflow = Sys.getenv("TF_VERSION"),
+                               envname = "r-reticulate")
+          print(reticulate::py_config())
 
       - name: Check
-        continue-on-error: ${{ contains(matrix.allow_failure, 'true') }}
+        shell: Rscript {0}
         run: |
-          options(crayon.enabled = TRUE)
           rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'warning', check_dir = 'check')
-        shell: Rscript
 
       - name: Show testthat output
         if: always()
