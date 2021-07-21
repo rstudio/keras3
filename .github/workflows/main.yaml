@@ -36,6 +36,7 @@ jobs:
           echo "RSPM=https://packagemanager.rstudio.com/all/__linux__/$(lsb_release -cs)/latest" >> $GITHUB_ENV
 
       - name: Configure reticulate miniconda path
+        shell: bash
         run: |
           echo "RETICULATE_MINICONDA_PATH=${RUNNER_TEMP}/r-miniconda" >> $GITHUB_ENV
 
