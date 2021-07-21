@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         os: ['ubuntu-20.04', 'windows-latest', 'macOS-latest']
-        tf: ['2.5']
+        tf: ['2.2', '2.3', '2.4', '2.5', 'nightly']
 
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} (TF ${{ matrix.tf }})
