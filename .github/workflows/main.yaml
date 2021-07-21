@@ -50,7 +50,7 @@ jobs:
 
       - name: Get R version
         run: |
-          writeLines(sprintf("R-%i.%i", R.version$major, R.version$minor), ".github/R-version")
+          writeLines(sprintf("R-%s.%s", R.version$major, R.version$minor), ".github/R-version")
         shell: Rscript {0}
 
       - name: Restore R package cache
