@@ -106,7 +106,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
                           conda = "auto",
                           version = "default",
                           tensorflow = "default",
-                          extra_packages = c("tensorflow-hub", "requests", "Pillow~=8.2", "pyyaml"),
+                          extra_packages = c("tensorflow-hub", "scipy", "requests", "Pillow~=8.2", "pyyaml"),
                           ...) {
 
   # verify method

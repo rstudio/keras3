@@ -78,7 +78,7 @@ jobs:
           done < <(Rscript -e 'writeLines(remotes::system_requirements(Sys.getenv("OS_LABEL")))')
           # sudo apt-get install -y python3-venv
 
-      - name: Install dependencies
+      - name: Install R package dependencies
         shell: Rscript {0}
         run: |
           # remotes::install_github('rstudio/reticulate')
@@ -100,12 +100,6 @@ jobs:
         if: steps.r-miniconda-cache.outputs.cache-hit != 'true'
         run: reticulate::install_miniconda()
         shell: Rscript {0}
-
-      - name: Debug Output
-        run: |
-          env
-          Rscript -e 'Sys.getenv()'
-          Rscript -e 'reticulate::py_config()'
 
       - name: Install TensorFlow
         if: steps.r-miniconda-cache.outputs.cache-hit != 'true'
