@@ -27,13 +27,17 @@ jobs:
       RETICULATE_AUTOCONFIGURE: 'FALSE'
       R_COMPILE_AND_INSTALL_PACKAGES: 'never'
       OS_LABEL: ${{ matrix.os }}
-      RETICULATE_MINICONDA_PATH: ${{ env.CONDA }}
+
 
     steps:
       - name: Configure RSPM
         if: runner.os == 'Linux' # startsWith(matrix.os, 'ubuntu')
         run: |
           echo "RSPM=https://packagemanager.rstudio.com/all/__linux__/$(lsb_release -cs)/latest" >> $GITHUB_ENV
+
+      - name: Configure reticulate to use system miniconda
+        run: |
+          echo "RETICULATE_MINICONDA_PATH=${CONDA}" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2
 
