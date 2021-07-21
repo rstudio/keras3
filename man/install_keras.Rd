@@ -9,7 +9,7 @@ install_keras(
   conda = "auto",
   version = "default",
   tensorflow = "default",
-  extra_packages = c("tensorflow-hub"),
+  extra_packages = c("tensorflow-hub", "requests", "Pillow~=8.2", "pyyaml"),
   ...
 )
 }

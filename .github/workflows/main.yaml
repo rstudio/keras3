@@ -35,9 +35,9 @@ jobs:
         run: |
           echo "RSPM=https://packagemanager.rstudio.com/all/__linux__/$(lsb_release -cs)/latest" >> $GITHUB_ENV
 
-      - name: Configure reticulate to use runner image miniconda
-        run: |
-          echo "RETICULATE_MINICONDA_PATH=${CONDA}" >> $GITHUB_ENV
+      # - name: Configure reticulate to use runner image miniconda
+      #   run: |
+      #     echo "RETICULATE_MINICONDA_PATH=${CONDA}" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2
 
@@ -49,16 +49,18 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@master
 
       - name: Get R version
+        id: r-version
         run: |
-          writeLines(sprintf("R-%s.%s", R.version$major, R.version$minor), ".github/R-version")
+          writeLines(sprintf(
+            "::set-output name=major-minor::R-%s.%s", R.version$major, R.version$minor))
         shell: Rscript {0}
 
       - name: Restore R package cache
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ matrix.os }}-${{ hashFiles('.github/R-version') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}
+          key: ${{ matrix.os }}-${{ steps.r-version.outputs.major-minor }}
+          restore-keys: ${{ runner.os }}-${{ steps.r-version.outputs.major-minor }}
 
       - name: Install remotes
         shell: Rscript {0}
@@ -82,6 +84,10 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
           remotes::install_local()
+
+      - name: Install Miniconda
+        run: reticulate::install_miniconda()
+        shell: Rscript {0}
 
       - name: Debug Output
         run: |
