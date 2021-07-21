@@ -25,7 +25,6 @@ jobs:
       TF_VERSION: ${{ matrix.tf }}
       PIP_NO_WARN_SCRIPT_LOCATION: 'false'
       RETICULATE_AUTOCONFIGURE: 'FALSE'
-      RETICULATE_MINICONDA_PATH: ${{ runner.temp }}/r-miniconda
       R_COMPILE_AND_INSTALL_PACKAGES: 'never'
       OS_LABEL: ${{ matrix.os }}
 
@@ -36,9 +35,9 @@ jobs:
         run: |
           echo "RSPM=https://packagemanager.rstudio.com/all/__linux__/$(lsb_release -cs)/latest" >> $GITHUB_ENV
 
-      # - name: Configure reticulate to use runner image miniconda
-      #   run: |
-      #     echo "RETICULATE_MINICONDA_PATH=${CONDA}" >> $GITHUB_ENV
+      - name: Configure reticulate miniconda path
+        run: |
+          echo "RETICULATE_MINICONDA_PATH=${RUNNER_TEMP}/r-miniconda" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2
 
