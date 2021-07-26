@@ -79,17 +79,32 @@ random_array <- function(dim) {
   array(runif(prod(dim)), dim = dim)
 }
 
-expect_tensor <- function(x, shape, shaped_as) {
-  eval.parent(bquote(expect_true(is_keras_tensor(.(substitute(x))))))
-  if(!missing(shaped_as))
-    eval.parent(bquote(expect_identical(
-      .(substitute(x))$shape$as_list(),
-      .(substitute(shaped_as))$shape$as_list())))
-  if(!missing(shape))
-    eval.parent(bquote(expect_identical(
-      .(substitute(x))$shape$as_list(),
-      .(substitute(shape)))))
+
+
+
+expect_tensor <- function(x, shape=NULL, shaped_as=NULL) {
+  x_lbl <- quasi_label(rlang::enquo(x), arg = 'x')$lab
+  expect(is_keras_tensor(x),
+         paste(x_lbl, "was wrong S3 class, expected 'tensorflow.tensor', actual", class(x)))
+
+  x_shape <- x$shape$as_list()
+
+  chk_expr <- quote(expect(
+    identical(x_shape, shape),
+    sprintf("%s was wrong shape, expected: %s, actual: %s", x_lbl, x_shape, shape)
+  ))
+
+  if(!is.null(shape)) {
+    eval(chk_expr)
+  }
+
+  if(!is.null(shaped_as)) {
+    shape <- shaped_as$shape$as_list()
+    eval(chk_expr)
+  }
+  invisible(x)
 }
+
 
 expect_same_pyobj <- function(x, y) {
   eval.parent(bquote(expect_identical(
