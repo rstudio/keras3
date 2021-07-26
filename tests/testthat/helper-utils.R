@@ -14,7 +14,8 @@ expect_warning_if <- function(cond, expr) {
   )
 }
 
-py_capture_output <- reticulate::import("IPython")$utils$capture$capture_output
+py_capture_output <- reticulate::py_capture_output #import("IPython")$utils$capture$capture_output
+
 
 test_succeeds <- function(desc, expr, required_version = NULL) {
 
@@ -22,7 +23,7 @@ test_succeeds <- function(desc, expr, required_version = NULL) {
     capture.output({
       test_that(desc, {
         skip_if_no_keras(required_version)
-        with(py_capture_output(), {
+        py_capture_output({
           expect_error(force(expr), NA)
         })
       })
