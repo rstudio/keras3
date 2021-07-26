@@ -9,10 +9,12 @@ spec \%py_class\% body
 \arguments{
 \item{spec}{a bare symbol \code{MyClassName}, or a call \code{MyClassName(SuperClass)}}
 
-\item{body}{an expression that can be evaluated to construct the class methods.}
+\item{body}{an expression that can be evaluated to construct the class
+methods.}
 }
 \value{
-
+The python class constructor, invisibly. Note, the same constructor is
+also assigned in the parent frame.
 }
 \description{
 Make a python class constructor

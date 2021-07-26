@@ -5,8 +5,11 @@ Breaking changes:
 
 New Features:
 - Default Tensorflow/Keras version is now 2.5
+
 - The `keras` python module is exported
+
 - Introduced `%py_class%`, a new python class generator constructor.
+
 - Major changes to the underlying handeling of custom R6 layer classes.
   - A new `r_to_py` method is provided for `R6ClassGenerator` objects.
   - R6 custom layers can now inherit directly from python layer classes
@@ -26,6 +29,15 @@ New Features:
     - `compute_mask()` user defined method is now supported
   - `call()` methods now support a `training` argument, as well as any additional arbritary user-defined arguments
 
+- Refactored `install_keras()` (along with `tensorflow::install_tensorflow()`).
+  Installation should be more reliable for more users now.
+  - Potentially breaking change: numeric versions supplied without a patchlevel now automatically pull the latest patch release.
+    (e.g. `install_keras(tensorflow="2.4")` will install tensorflow version "2.4.2". Previously it would install "2.4.0")
+
+- Refactored automated tests to closer match the default installation procedure
+  and compute environment of most user.
+
+- Expanded CI test coverage to include R devel, oldrel and 3.6.
 
 - Many layers gained new arguments, coming to parity with the interface
   available in the latest python version:
@@ -46,6 +58,7 @@ New Features:
   `layer_text_vectorization` | `vocabulary`
 
 - Added activation functions swish and gelu. (#1226)
+
 - `set_vocabulary()` gains a `idf_weights` argument.
 
 # keras 2.4.0

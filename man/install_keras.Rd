@@ -2,121 +2,107 @@
 % Please edit documentation in R/install.R
 \name{install_keras}
 \alias{install_keras}
-\title{Install Keras and the TensorFlow backend}
+\title{Install TensorFlow and Keras, including all python dependencies}
 \usage{
 install_keras(
   method = c("auto", "virtualenv", "conda"),
   conda = "auto",
   version = "default",
-  tensorflow = "default",
-  extra_packages = c("tensorflow-hub"),
+  tensorflow = version,
+  extra_packages = NULL,
   ...
 )
 }
 \arguments{
-\item{method}{Installation method ("virtualenv" or "conda")}
+\item{method}{Installation method. By default, "auto" automatically finds a
+method that will work in the local environment. Change the default to force
+a specific installation method. Note that the "virtualenv" method is not
+available on Windows.}
 
 \item{conda}{The path to a \code{conda} executable. Use \code{"auto"} to allow
 \code{reticulate} to automatically find an appropriate \code{conda} binary. See
 \strong{Finding Conda} for more details.}
 
-\item{version}{Version of Keras to install. Specify "default" to install
-the latest release. Otherwise specify an alternate version (e.g. "2.2.2").}
+\item{version}{TensorFlow version to install. Valid values include:
+\itemize{
+\item \code{"default"} installs  2.5
+\item \code{"release"} installs the latest release version of tensorflow (which may
+be incompatible with the current version of the R package)
+\item A version specification like \code{"2.4"} or \code{"2.4.0"}. Note that if the patch
+version is not supplied, the latest patch release is installed (e.g.,
+\code{"2.4"} today installs version "2.4.2")
+\item \code{nightly} for the latest available nightly build.
+\item To any specification, you can append "-cpu" to install the cpu version
+only of the package (e.g., \code{"2.4-cpu"})
+\item The full URL or path to a installer binary or python *.whl file.
+}}
 
-\item{tensorflow}{TensorFlow version to install. Specify "default" to install
-the CPU version of the latest release. Specify "gpu" to install the GPU
-version of the latest release.
+\item{tensorflow}{Synonym for \code{version}. Maintained for backwards.}
 
-You can also provide a full major.minor.patch specification (e.g. "1.1.0"),
-appending "-gpu" if you want the GPU version (e.g. "1.1.0-gpu").
+\item{extra_packages}{Additional Python packages to install along with
+TensorFlow.}
 
-Alternatively, you can provide the full URL to an installer binary (e.g.
-for a nightly binary).}
-
-\item{extra_packages}{Additional PyPI packages to install along with
-Keras and TensorFlow.}
-
-\item{...}{Other arguments passed to \code{\link[tensorflow:install_tensorflow]{tensorflow::install_tensorflow()}}.}
+\item{...}{other arguments passed to \code{\link[reticulate:conda-tools]{reticulate::conda_install()}} or
+\code{\link[reticulate:virtualenv-tools]{reticulate::virtualenv_install()}}, depending on the \code{method} used.}
 }
 \description{
-Keras and TensorFlow will be installed into an "r-tensorflow" virtual or conda
-environment. Note that "virtualenv" is not available on Windows (as this isn't
-supported by TensorFlow).
+This function will install Tensorflow and all Keras dependencies. This is a
+thin wrapper around \code{\link[tensorflow:install_tensorflow]{tensorflow::install_tensorflow()}}, with the only
+difference being that this includes by default additional extra packages that
+keras expects, and the default version of tensorflow installed by
+\code{install_keras()}  may at times be different from the default installed
+\code{install_tensorflow()}. The default version of tensorflow installed by
+\code{install_keras()} is "2.5".
 }
-\section{GPU Installation}{
-
-
-Keras and TensorFlow can be configured to run on either CPUs or GPUs. The CPU
-version is much easier to install and configure so is the best starting place
-especially when you are first learning how to use Keras. Here's the guidance
-on CPU vs. GPU versions from the TensorFlow website:
-\itemize{
-\item \emph{TensorFlow with CPU support only}. If your system does not have a NVIDIA® GPU,
-you must install this version. Note that this version of TensorFlow is typically
-much easier to install, so even if you have an NVIDIA GPU, we recommend installing
-this version first.
-\item \emph{TensorFlow with GPU support}. TensorFlow programs typically run significantly
-faster on a GPU than on a CPU. Therefore, if your system has a NVIDIA® GPU meeting
-all prerequisites and you need to run performance-critical applications, you should
-ultimately install this version.
+\details{
+The default additional packages are:
+tensorflow-hub, scipy, requests, pyyaml, Pillow, h5py, with their
+versions potentially potentially constrained for compatibility with the
+requested tensorflow version.
 }
-
-To install the GPU version:
-\enumerate{
-\item Ensure that you have met all installation prerequisites including installation
-of the CUDA and cuDNN libraries as described in \href{https://tensorflow.rstudio.com/installation_gpu.html#prerequisites}{TensorFlow GPU Prerequistes}.
-\item Pass \code{tensorflow = "gpu"} to \code{install_keras()}. For example:\preformatted{  install_keras(tensorflow = "gpu")
-}
-}
-}
-
-\section{Windows Installation}{
-
-
-The only supported installation method on Windows is "conda". This means that you
-should install Anaconda 3.x for Windows prior to installing Keras.
-}
-
 \section{Custom Installation}{
 
+ \code{install_tensorflow()} or
+\code{keras::install_keras()} isn't required to use tensorflow with the
+package. If you manually configure a python environment with the required
+dependencies, you can tell R to use it by pointing reticulate at it,
+commonly by setting an environment variable:
 
-Installing Keras and TensorFlow using \code{install_keras()} isn't required
-to use the Keras R package. You can do a custom installation of Keras (and
-desired backend) as described on the \href{https://keras.io/#installation}{Keras website}
-and the Keras R package will find and use that version.
+\code{Sys.setenv("RETICULATE_PYTHON" = "~/path/to/python-env/bin/python")}
 
-See the documentation on \href{https://tensorflow.rstudio.com/installation/custom/}{custom installations}
-for additional information on how version of Keras and TensorFlow are located
-by the Keras package.
+}
+
+\section{Apple Silicon}{
+
+ Tensorflow on Apple Silicon is not officially
+supported by the tensorflow maintainers. It is known that there can be
+issues running the official Tensorflow package under Rosetta as well.
+Fortunately, for the time being Apple has published a version of Tensorflow
+compatible with M1 macs. Installation instructions can be found at:
+\url{https://developer.apple.com/metal/tensorflow-plugin/}. Please note
+that this is an experimental build of both python and tensorflow. After
+following the instructions provided by Apple, you can advise reticulate to
+use the that python installation by placing the following in your
+\code{.Renviron} file:
+
+\verb{RETICULATE_PYTHON = ""~/tensorflow-metal/bin/python""}
+
 }
 
 \section{Additional Packages}{
 
 
-If you wish to add additional PyPI packages to your Keras / TensorFlow environment you
-can either specify the packages in the \code{extra_packages} argument of \code{install_keras()},
-or alternatively install them into an existing environment using the
-\code{\link[reticulate:py_install]{reticulate::py_install()}} function.
-}
 
-\examples{
-\dontrun{
-
-# default installation
-library(keras)
-install_keras()
-
-# install using a conda environment (default is virtualenv)
-install_keras(method = "conda")
-
-# install with GPU version of TensorFlow
-# (NOTE: only do this if you have an NVIDIA GPU + CUDA!)
-install_keras(tensorflow = "gpu")
-
-# install a specific version of TensorFlow
-install_keras(tensorflow = "1.2.1")
-install_keras(tensorflow = "1.2.1-gpu")
+If you wish to add additional PyPI packages to your Keras / TensorFlow
+environment you can either specify the packages in the \code{extra_packages}
+argument of \code{install_tensorflow()} or \code{install_keras()}, or
+alternatively install them into an existing environment using the
+\code{\link[reticulate:py_install]{reticulate::py_install()}} function. Note that \code{install_keras()}
+includes a set of additional python packages by default, see
+\code{?keras::install_keras} for details.
 
 }
 
+\seealso{
+\code{\link[tensorflow:install_tensorflow]{tensorflow::install_tensorflow()}}
 }
