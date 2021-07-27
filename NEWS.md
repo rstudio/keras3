@@ -31,6 +31,7 @@ New Features:
 
 - Refactored `install_keras()` (along with `tensorflow::install_tensorflow()`).
   Installation should be more reliable for more users now.
+  If you encounter installation issues, please file an issue: https://github.com/rstudio/keras/issues/new
   - Potentially breaking change: numeric versions supplied without a patchlevel now automatically pull the latest patch release.
     (e.g. `install_keras(tensorflow="2.4")` will install tensorflow version "2.4.2". Previously it would install "2.4.0")
 
