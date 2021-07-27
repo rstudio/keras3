@@ -28,7 +28,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
 
   pkgs <- default_extra_packages(tensorflow)
   if(!is.null(extra_packages))
-    pkgs[gsub("[0-9=<>~.]*$", "", extra_packages)] <- extra_packages
+    pkgs[gsub("[=<>~]{1,2}[0-9.]+$", "", extra_packages)] <- extra_packages
 
   tensorflow::install_tensorflow(
     method = match.arg(method),
