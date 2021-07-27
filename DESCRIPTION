@@ -1,9 +1,9 @@
 Package: keras
 Type: Package
 Title: R Interface to 'Keras'
-Version: 2.4.0.9000
+Version: 2.4.0.9002
 Authors@R: c(
-  person("Tomasz", "Kalinowski", role = c("ctb", "cph", "cre"), 
+  person("Tomasz", "Kalinowski", role = c("ctb", "cph", "cre"),
          email = "tomasz.kalinowski@rstudio.com"),
   person("Daniel", "Falbel", role = c("ctb", "cph"), email = "daniel@rstudio.com"),
   person("JJ", "Allaire", role = c("aut", "cph")),
@@ -29,22 +29,23 @@ Depends:
     R (>= 3.2)
 Imports:
     generics (>= 0.0.1),
-    reticulate (>= 1.10), 
-    tensorflow (>= 2.0.0),
+    reticulate (>= 1.10),
+    tensorflow (>= 2.5.0.9001),
     tfruns (>= 1.0),
-    magrittr, 
+    magrittr,
     zeallot,
     methods,
     R6,
     rlang
-Suggests: 
+Suggests:
     ggplot2,
     testthat (>= 2.1.0),
     knitr,
     rmarkdown,
     tfdatasets,
     jpeg
-SystemRequirements: Keras >= 2.0 (https://keras.io)
+Remotes:
+    rstudio/tensorflow@refactor-installation
 Roxygen: list(markdown = TRUE, r6 = FALSE)
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr

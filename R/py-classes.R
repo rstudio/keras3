@@ -54,7 +54,8 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
 
   evalq({
     super <- base::structure(
-      function(type = `__class__`, object = base::get("self", parent.frame())) {
+      function(type = get("__class__"),
+               object = base::get("self", parent.frame())) {
         convert <- get("convert", envir = as.environment(object))
         bt <- reticulate::import_builtins(convert)
         reticulate::py_call(bt$super, type, object)
@@ -64,7 +65,6 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
 
   py_cls
 }
-
 
 
 resolve_py_type_inherits <- function(inherit, convert=FALSE) {
@@ -229,9 +229,11 @@ r_formals_to_py__signature__ <- function(fn) {
 #' Make a python class constructor
 #'
 #' @param spec a bare symbol `MyClassName`, or a call `MyClassName(SuperClass)`
-#' @param body an expression that can be evaluated to construct the class methods.
+#' @param body an expression that can be evaluated to construct the class
+#'   methods.
 #'
-#' @return
+#' @return The python class constructor, invisibly. Note, the same constructor is
+#'   also assigned in the parent frame.
 #' @export
 #'
 #' @examples
