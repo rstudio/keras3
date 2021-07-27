@@ -10,7 +10,7 @@
 #'
 #' @details The default additional packages are:
 #' `r paste(default_extra_packages("nightly"), collapse = ", ")`, with their
-#'   versions potentially potentially constrained for compatibility with the
+#'   versions potentially constrained for compatibility with the
 #'   requested tensorflow version.
 #'
 #' @inherit tensorflow::install_tensorflow
