@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
       </span>
     </div>
 
@@ -132,6 +132,21 @@
     </li>
   </ul>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Guides (New for TF 2)
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../../articles/learn.html">Learn</a>
 </li>
@@ -171,7 +186,7 @@
 
       
 
-      </header><script src="addition_rnn_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="addition_rnn_files/header-attrs-2.9.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>addition_rnn</h1>
@@ -216,11 +231,11 @@ Output: “596”</p>
 <span class="co"># 2    0    0    0    0    1    0    0    0    0     0     0     0</span>
 <span class="co"># 2    0    0    0    0    1    0    0    0    0     0     0     0</span>
 <span class="va">encode</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">char</span>, <span class="va">char_table</span><span class="op">)</span><span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">char</span>, <span class="st">""</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">char</span>, <span class="st">""</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
     <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
       <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="va">char_table</span><span class="op">)</span>
-    <span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="op">}</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="op">)</span>
 <span class="op">}</span>
 
@@ -229,7 +244,7 @@ Output: “596”</p>
 <span class="va">decode</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">char_table</span><span class="op">)</span><span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">x</span>,<span class="fl">1</span>, <span class="kw">function</span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">{</span>
     <span class="va">char_table</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">]</span>
-  <span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">""</span><span class="op">)</span>
+  <span class="op">}</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">""</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="co"># Returns a list of questions and expected answers.</span>
@@ -324,11 +339,11 @@ Output: “596”</p>
 <span class="co"># Initialize sequential model</span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> 
 
-<span class="va">model</span> <span class="op">%&gt;%</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="co"># "Encode" the input sequence using an RNN, producing an output of HIDDEN_SIZE.</span>
   <span class="co"># Note: In a situation where your input sequences have a variable length,</span>
   <span class="co"># use input_shape=(None, num_feature).</span>
-  <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span><span class="va">HIDDEN_SIZE</span>, input_shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">MAXLEN</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">char_table</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span><span class="va">HIDDEN_SIZE</span>, input_shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">MAXLEN</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">char_table</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="co"># As the decoder RNN's input, repeatedly provide with the last hidden state of</span>
   <span class="co"># RNN for each time step. Repeat 'DIGITS + 1' times as that's the maximum</span>
   <span class="co"># length of output, e.g., when DIGITS=3, max output is 999+999=1998.</span>
@@ -340,16 +355,16 @@ Output: “596”</p>
 <span class="co"># output_dim). This is necessary as TimeDistributed in the below expects</span>
 <span class="co"># the first dimension to be the timesteps.</span>
 <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">LAYERS</span><span class="op">)</span>
-  <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span><span class="va">HIDDEN_SIZE</span>, return_sequences <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span><span class="va">HIDDEN_SIZE</span>, return_sequences <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span> 
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="co"># Apply a dense layer to the every temporal slice of an input. For each of step</span>
   <span class="co"># of the output sequence, decide which character should be chosen.</span>
-  <span class="fu"><a href="../../reference/time_distributed.html">time_distributed</a></span><span class="op">(</span><span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">char_table</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/time_distributed.html">time_distributed</a></span><span class="op">(</span><span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">char_table</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"softmax"</span><span class="op">)</span>
 
 <span class="co"># Compiling the model</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">"categorical_crossentropy"</span>, 
   optimizer <span class="op">=</span> <span class="st">"adam"</span>, 
   metrics <span class="op">=</span> <span class="st">"accuracy"</span>
@@ -359,7 +374,7 @@ Output: “596”</p>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="co"># Fitting loop</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span> 
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span> 
   x <span class="op">=</span> <span class="va">x_train</span>, 
   y <span class="op">=</span> <span class="va">y_train</span>, 
   batch_size <span class="op">=</span> <span class="va">BATCH_SIZE</span>, 
@@ -368,7 +383,7 @@ Output: “596”</p>
 <span class="op">)</span>
 
 <span class="co"># Predict for a new observation</span>
-<span class="va">new_obs</span> <span class="op">&lt;-</span> <span class="fu">encode</span><span class="op">(</span><span class="st">"55+22"</span>, <span class="va">char_table</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">new_obs</span> <span class="op">&lt;-</span> <span class="fu">encode</span><span class="op">(</span><span class="st">"55+22"</span>, <span class="va">char_table</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">12</span><span class="op">)</span><span class="op">)</span>
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">new_obs</span><span class="op">)</span>
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">[</span><span class="fl">1</span>,,<span class="op">]</span>

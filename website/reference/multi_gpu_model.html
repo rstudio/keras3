@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
       </span>
     </div>
 
@@ -172,6 +172,21 @@
     </li>
     <li>
       <a href="../articles/saving_serializing.html">Saving and serializing</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Guides (New for TF 2)
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
     </li>
   </ul>
 </li>
@@ -321,52 +336,52 @@ by <code>multi_gpu_model</code>.</p>
 <code><a href='train_on_batch.html'>train_on_batch</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://keras.rstudio.com'>keras</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/tensorflow'>tensorflow</a></span><span class='op'>)</span>
-
-<span class='va'>num_samples</span> <span class='op'>&lt;-</span> <span class='fl'>1000</span>
-<span class='va'>height</span> <span class='op'>&lt;-</span> <span class='fl'>224</span>
-<span class='va'>width</span> <span class='op'>&lt;-</span> <span class='fl'>224</span>
-<span class='va'>num_classes</span> <span class='op'>&lt;-</span> <span class='fl'>1000</span>
-
-<span class='co'># Instantiate the base model (or "template" model).</span>
-<span class='co'># We recommend doing this with under a CPU device scope,</span>
-<span class='co'># so that the model's weights are hosted on CPU memory.</span>
-<span class='co'># Otherwise they may end up hosted on a GPU, which would</span>
-<span class='co'># complicate weight sharing.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>tf</span><span class='op'>$</span><span class='fu'>device</span><span class='op'>(</span><span class='st'>"/cpu:0"</span><span class='op'>)</span>, <span class='op'>{</span>
-  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='application_xception.html'>application_xception</a></span><span class='op'>(</span>
-    weights <span class='op'>=</span> <span class='cn'>NULL</span>,
-    input_shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>height</span>, <span class='va'>width</span>, <span class='fl'>3</span><span class='op'>)</span>,
-    classes <span class='op'>=</span> <span class='va'>num_classes</span>
-  <span class='op'>)</span>
-<span class='op'>}</span><span class='op'>)</span>
-
-<span class='co'># Replicates the model on 8 GPUs.</span>
-<span class='co'># This assumes that your machine has 8 available GPUs.</span>
-<span class='va'>parallel_model</span> <span class='op'>&lt;-</span> <span class='fu'>multi_gpu_model</span><span class='op'>(</span><span class='va'>model</span>, gpus <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span>
-<span class='va'>parallel_model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://generics.r-lib.org/reference/compile.html'>compile</a></span><span class='op'>(</span>
-  loss <span class='op'>=</span> <span class='st'>"categorical_crossentropy"</span>,
-  optimizer <span class='op'>=</span> <span class='st'>"rmsprop"</span>
-<span class='op'>)</span>
-
-<span class='co'># Generate dummy data.</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/array.html'>array</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>num_samples</span> <span class='op'>*</span> <span class='va'>height</span> <span class='op'>*</span> <span class='va'>width</span><span class='op'>*</span><span class='fl'>3</span><span class='op'>)</span>,
-           dim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>num_samples</span>, <span class='va'>height</span>, <span class='va'>width</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/array.html'>array</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>num_samples</span> <span class='op'>*</span> <span class='va'>num_classes</span><span class='op'>)</span>,
-           dim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>num_samples</span>, <span class='va'>num_classes</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='co'># This `fit` call will be distributed on 8 GPUs.</span>
-<span class='co'># Since the batch size is 256, each GPU will process 32 samples.</span>
-<span class='va'>parallel_model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://generics.r-lib.org/reference/fit.html'>fit</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, epochs <span class='op'>=</span> <span class='fl'>20</span>, batch_size <span class='op'>=</span> <span class='fl'>256</span><span class='op'>)</span>
-
-<span class='co'># Save model via the template model (which shares the same weights):</span>
-<span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='save_model_hdf5.html'>save_model_hdf5</a></span><span class='op'>(</span><span class='st'>"my_model.h5"</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://keras.rstudio.com'>keras</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/tensorflow'>tensorflow</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>num_samples</span> <span class='op'>&lt;-</span> <span class='fl'>1000</span></span>
+<span class='r-in'><span class='va'>height</span> <span class='op'>&lt;-</span> <span class='fl'>224</span></span>
+<span class='r-in'><span class='va'>width</span> <span class='op'>&lt;-</span> <span class='fl'>224</span></span>
+<span class='r-in'><span class='va'>num_classes</span> <span class='op'>&lt;-</span> <span class='fl'>1000</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Instantiate the base model (or "template" model).</span></span>
+<span class='r-in'><span class='co'># We recommend doing this with under a CPU device scope,</span></span>
+<span class='r-in'><span class='co'># so that the model's weights are hosted on CPU memory.</span></span>
+<span class='r-in'><span class='co'># Otherwise they may end up hosted on a GPU, which would</span></span>
+<span class='r-in'><span class='co'># complicate weight sharing.</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>tf</span><span class='op'>$</span><span class='fu'>device</span><span class='op'>(</span><span class='st'>"/cpu:0"</span><span class='op'>)</span>, <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='application_xception.html'>application_xception</a></span><span class='op'>(</span></span>
+<span class='r-in'>    weights <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
+<span class='r-in'>    input_shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>height</span>, <span class='va'>width</span>, <span class='fl'>3</span><span class='op'>)</span>,</span>
+<span class='r-in'>    classes <span class='op'>=</span> <span class='va'>num_classes</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Replicates the model on 8 GPUs.</span></span>
+<span class='r-in'><span class='co'># This assumes that your machine has 8 available GPUs.</span></span>
+<span class='r-in'><span class='va'>parallel_model</span> <span class='op'>&lt;-</span> <span class='fu'>multi_gpu_model</span><span class='op'>(</span><span class='va'>model</span>, gpus <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>parallel_model</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='https://generics.r-lib.org/reference/compile.html'>compile</a></span><span class='op'>(</span></span>
+<span class='r-in'>  loss <span class='op'>=</span> <span class='st'>"categorical_crossentropy"</span>,</span>
+<span class='r-in'>  optimizer <span class='op'>=</span> <span class='st'>"rmsprop"</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Generate dummy data.</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/array.html'>array</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>num_samples</span> <span class='op'>*</span> <span class='va'>height</span> <span class='op'>*</span> <span class='va'>width</span><span class='op'>*</span><span class='fl'>3</span><span class='op'>)</span>,</span>
+<span class='r-in'>           dim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>num_samples</span>, <span class='va'>height</span>, <span class='va'>width</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/array.html'>array</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>num_samples</span> <span class='op'>*</span> <span class='va'>num_classes</span><span class='op'>)</span>,</span>
+<span class='r-in'>           dim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>num_samples</span>, <span class='va'>num_classes</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># This `fit` call will be distributed on 8 GPUs.</span></span>
+<span class='r-in'><span class='co'># Since the batch size is 256, each GPU will process 32 samples.</span></span>
+<span class='r-in'><span class='va'>parallel_model</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='https://generics.r-lib.org/reference/fit.html'>fit</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, epochs <span class='op'>=</span> <span class='fl'>20</span>, batch_size <span class='op'>=</span> <span class='fl'>256</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Save model via the template model (which shares the same weights):</span></span>
+<span class='r-in'><span class='va'>model</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='save_model_hdf5.html'>save_model_hdf5</a></span><span class='op'>(</span><span class='st'>"my_model.h5"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

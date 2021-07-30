@@ -2,7 +2,7 @@
 title: "Python Subclasses"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{subclasses}
+  %\VignetteIndexEntry{Python Subclasses}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 type: docs
@@ -201,11 +201,11 @@ or using `%py_class%`:
 
 ```{r}
 CustomLayer(keras$layers$Layer) %py_class% {
-  
+
   initialize = function(output_dim) {
     self$output_dim <- output_dim
   }
-  
+
   build = function(input_shape) {
     self$kernel <- self$add_weight(
       name = 'kernel',
@@ -214,11 +214,11 @@ CustomLayer(keras$layers$Layer) %py_class% {
       trainable = TRUE
     )
   }
-  
+
   call = function(x, mask = NULL) {
     k_dot(x, self$kernel)
   }
-  
+
   compute_output_shape = function(input_shape) {
     list(input_shape[[1]], self$output_dim)
   }

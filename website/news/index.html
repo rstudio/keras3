@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
       </span>
     </div>
 
@@ -174,6 +174,21 @@
     </li>
   </ul>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Guides (New for TF 2)
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../articles/learn.html">Learn</a>
 </li>
@@ -229,6 +244,19 @@
 <ul>
 <li><p>Default Tensorflow/Keras version is now 2.5</p></li>
 <li><p>The <code>keras</code> python module is exported</p></li>
+<li><p>Introduced <code>%py_class%</code>, a new python class generator constructor.</p></li>
+<li>
+<p>The <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> method for keras models has been updated:</p>
+<ul>
+<li>
+<code>optimizer</code> is now an optional argument. It defaults to “rmsprop” for regular keras models. Custom models can specify their own default optimizer.</li>
+<li>
+<code>loss</code> is now an optional argument.</li>
+<li>New optional arguments: <code>run_eagerly</code>, <code>steps_per_execution</code>.</li>
+<li>
+<code>target_tensors</code> and <code>sample_weight_mode</code> must now be supplied as named arguments.</li>
+</ul>
+</li>
 <li>
 <p>Major changes to the underlying handeling of custom R6 layer classes.</p>
 <ul>
@@ -257,6 +285,14 @@
 <code><a href="https://rdrr.io/r/base/call.html">call()</a></code> methods now support a <code>training</code> argument, as well as any additional arbritary user-defined arguments</li>
 </ul>
 </li>
+<li>
+<p>Refactored <code><a href="../reference/install_keras.html">install_keras()</a></code> (along with <code><a href="https://rdrr.io/pkg/tensorflow/man/install_tensorflow.html">tensorflow::install_tensorflow()</a></code>). Installation should be more reliable for more users now. If you encounter installation issues, please file an issue: <a href="https://github.com/rstudio/keras/issues/new" class="uri">https://github.com/rstudio/keras/issues/new</a></p>
+<ul>
+<li>Potentially breaking change: numeric versions supplied without a patchlevel now automatically pull the latest patch release. (e.g. <code>install_keras(tensorflow="2.4")</code> will install tensorflow version “2.4.2”. Previously it would install “2.4.0”)</li>
+</ul>
+</li>
+<li><p>Refactored automated tests to closer match the default installation procedure and compute environment of most user.</p></li>
+<li><p>Expanded CI test coverage to include R devel, oldrel and 3.6.</p></li>
 <li>
 <p>Many layers gained new arguments, coming to parity with the interface available in the latest python version:</p>
 <h2 id="layer-name--new-argument">layer name | new argument</h2>
