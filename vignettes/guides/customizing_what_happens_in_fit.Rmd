@@ -5,9 +5,9 @@ Date created: 2020/04/15
 Last modified: 2020/04/15
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Customizing what happens in `fit()`} 
+  %\VignetteIndexEntry{Customizing what happens in `fit()`}
   %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteEngine{knitr::rmarkdown}
 type: docs
 repo: https://github.com/rstudio/keras
 menu:
@@ -67,7 +67,7 @@ map_and_name <- function(.x, .f, ...) {
   names(out) <- purrr::map_chr(.x, .f[-3L], ...)
   out
 }
-  
+
 `%<-active%` <- function(sym, fun)
   makeActiveBinding(substitute(sym), fun, parent.frame())
 
@@ -99,14 +99,14 @@ CustomModel(keras$Model) %py_class% {
     # Unpack the data. Its structure depends on your model and
     # on what you pass to `fit()`.
     c(x, y) %<-% data
-    
+
     with(tf$GradientTape() %as% tape, {
-      y_pred = self(x, training = TRUE)  # Forward pass
+      y_pred <- self(x, training = TRUE)  # Forward pass
       # Compute the loss value
       # (the loss function is configured in `compile()`)
       loss <- self$compiled_loss(y, y_pred, regularization_losses = self$losses)
     })
-    
+
     # Compute gradients
     trainable_vars <- self$trainable_variables
     gradients <- tape$gradient(loss, trainable_vars)
@@ -114,7 +114,7 @@ CustomModel(keras$Model) %py_class% {
     self$optimizer$apply_gradients(zip(gradients, trainable_vars))
     # Update metrics (includes the metric that tracks the loss)
     self$compiled_metrics$update_state(y, y_pred)
-    
+
     # Return a named list mapping metric names to current value
     map_and_name(self$metrics, .x$name ~ .x$result())
   }
@@ -154,26 +154,26 @@ mae_metric <- keras$metrics$MeanAbsoluteError(name="mae")
 CustomModel(keras$Model) %py_class% {
   train_step <- function(data) {
     c(x, y) %<-% data
-    
+
     with(tf$GradientTape() %as% tape, {
-      y_pred = self(x, training = TRUE)  # Forward pass
+      y_pred <- self(x, training = TRUE)  # Forward pass
       # Compute our own loss
-      loss = keras$losses$mean_squared_error(y, y_pred)
+      loss <- keras$losses$mean_squared_error(y, y_pred)
     })
     # Compute gradients
-    trainable_vars = self$trainable_variables
-    gradients = tape$gradient(loss, trainable_vars)
-    
+    trainable_vars <- self$trainable_variables
+    gradients <- tape$gradient(loss, trainable_vars)
+
     # Update weights
     self$optimizer$apply_gradients(zip(gradients, trainable_vars))
-    
+
     # Compute our own metrics
     loss_tracker$update_state(loss)
     mae_metric$update_state(y, y_pred)
     list(loss = loss_tracker$result(),
          mae = mae_metric$result())
   }
-  
+
   metrics %<-active% function() {
     # We list our `Metric` objects here so that `reset_states()` can be
     # called automatically at the start of each epoch
@@ -190,7 +190,7 @@ outputs <- inputs %>% layer_dense(units = 1)
 model <- CustomModel(inputs, outputs)
 
 # We don't pass a loss or metrics here
-model %>% compile(optimizer="adam")
+model %>% compile(optimizer = "adam")
 
 # Just use `fit` as usual -- you can use callbacks, etc.
 x <- k_random_uniform(c(1000, 32))
@@ -215,7 +215,7 @@ CustomModel(keras$Model) %py_class% {
     # it's assigned to sample_weight. Its structure depends on your model and on
     # what you pass to `fit()`.
     c(x, y, sample_weight = NULL) %<-% data
-    
+
     with(tf$GradientTape() %as% tape, {
       y_pred <- self(x, training = TRUE)  # Forward pass
       # Compute the loss value.
@@ -224,18 +224,18 @@ CustomModel(keras$Model) %py_class% {
                                  sample_weight = sample_weight,
                                  regularization_losses = self$losses)
     })
-    
+
     # Compute gradients
     trainable_vars <- self$trainable_variables
     gradients <- tape$gradient(loss, trainable_vars)
-    
+
     # Update weights
     self$optimizer$apply_gradients(zip(gradients, trainable_vars))
-    
+
     # Update the metrics.
     # Metrics are configured in `compile()`.
     self$compiled_metrics$update_state(y, y_pred, sample_weight = sample_weight)
-    
+
     # Return a dict mapping metric names to current value.
     # Note that it will include the loss (tracked in self$metrics).
     map_and_name(self$metrics, .x$name ~ .x$result())
@@ -244,15 +244,15 @@ CustomModel(keras$Model) %py_class% {
 
 # Construct and compile an instance of CustomModel
 inputs <- layer_input(shape(32))
-outputs <- inputs %>% layer_dense(units=1)
+outputs <- inputs %>% layer_dense(units = 1)
 model <- CustomModel(inputs, outputs)
-model %>% compile(optimizer="adam", loss="mse", metrics = "mae")
+model %>% compile(optimizer = "adam", loss = "mse", metrics = "mae")
 
 # You can now use sample_weight argument
 x <- k_random_uniform(c(1000, 32))
 y <- k_random_uniform(c(1000, 1))
 sw <- k_random_uniform(c(1000, 1))
-model %>% fit(x, y, sample_weight=sw, epochs=5)
+model %>% fit(x, y, sample_weight = sw, epochs = 5)
 ```
 
 ## Providing your own evaluation step
@@ -279,13 +279,13 @@ CustomModel(keras$Model) %py_class% {
 
 # Construct an instance of CustomModel
 inputs <- layer_input(shape(32))
-outputs <- inputs %>% layer_dense(units=1)
+outputs <- inputs %>% layer_dense(units = 1)
 model <- CustomModel(inputs, outputs)
-model %>% compile(loss="mse", metrics = "mae")
+model %>% compile(loss = "mse", metrics = "mae")
 
 # Evaluate with our custom test_step
-x = k_random_uniform(c(1000, 32))
-y = k_random_uniform(c(1000, 1))
+x <- k_random_uniform(c(1000, 32))
+y <- k_random_uniform(c(1000, 1))
 model %>% evaluate(x, y)
 ```
 
@@ -304,7 +304,7 @@ Let's consider:
 # Create the discriminator
 discriminator <-
   keras_model_sequential(name = "discriminator") %>%
-  layer_conv_2d(64, c(3, 3), strides = c(2, 2), padding = "same", 
+  layer_conv_2d(64, c(3, 3), strides = c(2, 2), padding = "same",
                 input_shape = c(28, 28, 1)) %>%
   layer_activation_leaky_relu(alpha = 0.2) %>%
   layer_conv_2d(128, c(3, 3), strides = c(2, 2), padding = "same") %>%
@@ -342,29 +342,29 @@ GAN(keras$Model) %py_class% {
     super()$compile()
     self$d_optimizer <- d_optimizer
     self$g_optimizer <- g_optimizer
-    self$loss_fn = loss_fn
+    self$loss_fn <- loss_fn
   }
 
   train_step <- function(real_images) {
 
     # Sample random points in the latent space
-    batch_size = tf$shape(real_images)[1]
+    batch_size <- tf$shape(real_images)[1]
 
     # TODO: shape() should be able to handle a scalar tensor as input
     # also, backend functions like k_random_normal
-    random_latent_vectors = tf$random$normal(list(batch_size, self$latent_dim))
+    random_latent_vectors <- tf$random$normal(list(batch_size, self$latent_dim))
 
     # Decode them to fake images
-    generated_images = self$generator(random_latent_vectors)
+    generated_images <- self$generator(random_latent_vectors)
 
     # Combine them with real images
-    combined_images = tf$concat(list(generated_images, real_images),
-                                axis = 0L)
+    combined_images <- tf$concat(list(generated_images, real_images),
+                                 axis = 0L)
 
     # Assemble labels discriminating real from fake images
-    labels = tf$concat(list(tf$ones(c(batch_size, 1L)),
-                            tf$zeros(c(batch_size, 1L))), axis = 0L)
-    
+    labels <- tf$concat(list(tf$ones(c(batch_size, 1L)),
+                             tf$zeros(c(batch_size, 1L))), axis = 0L)
+
     # Add random noise to the labels - important trick!
     labels %<>% `+`(0.05 * tf$random$uniform(tf$shape(labels)))
 
@@ -431,7 +431,7 @@ gan %>% compile(
 dataset %<>% dataset_take(100)
 
 gan %>%
-  fit(dataset, epochs=1)
+  fit(dataset, epochs = 1)
 ```
 
-The ideas behind deep learning are simple, so why should their implementation be painful? 
+The ideas behind deep learning are simple, so why should their implementation be painful?
