@@ -46,8 +46,11 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
   if (!missing(batch_shape))
     args$batch_shape <- normalize_shape(batch_shape)
 
+  # TODO: can this be made to work as the first layer in a sequential model?
+  # why doesn't this use create_layer()?
   do.call(keras$layers$Input, args)
 }
+
 
 #' Add a densely-connected NN layer to an output
 #'

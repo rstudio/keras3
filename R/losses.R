@@ -123,6 +123,9 @@ attr(loss_sparse_categorical_crossentropy, "py_function_name") <- "sparse_catego
 #'
 #' @export
 loss_binary_crossentropy <- function(y_true, y_pred, from_logits = FALSE, label_smoothing = 0) {
+  # TODO: keras$losses$BinaryCrossentropy(from_logits=TRUE) returns a callable
+  # so should loss_binary_crossentropy(from_logits=TRUE),
+  # or maybe encourage use of partial()?
   if (tensorflow::tf_version() >="2.2") {
     keras$losses$binary_crossentropy(y_true, y_pred, from_logits, label_smoothing)
   } else {
