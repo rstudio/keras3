@@ -241,116 +241,184 @@ clone_model <- function(model, input_tensors = NULL) {
 #' Configure a Keras model for training
 #'
 #' @param object Model object to compile.
-#' @param optimizer Name of optimizer or optimizer instance.
-#' @param loss Name of objective function or objective function. If the model
-#'   has multiple outputs, you can use a different loss on each output by
-#'   passing a dictionary or a list of objectives. The loss value that will be
-#'   minimized by the model will then be the sum of all individual losses.
+#' @param optimizer String (name of optimizer) or optimizer instance. For most
+#'   models, this defaults to `"rmsprop"`
+#' @param loss String (name of objective function), objective function or a
+#'   `keras$losses$Loss` subclass instance. An objective function is any
+#'   callable with the signature `loss = fn(y_true, y_pred)`, where y_true =
+#'   ground truth values with shape = `[batch_size, d0, .. dN]`, except sparse
+#'   loss functions such as sparse categorical crossentropy where shape =
+#'   `[batch_size, d0, .. dN-1]`. y_pred = predicted values with shape =
+#'   `[batch_size, d0, .. dN]`. It returns a weighted loss float tensor. If a
+#'   custom `Loss` instance is used and reduction is set to `NULL`, return value
+#'   has the shape `[batch_size, d0, .. dN-1]` i.e. per-sample or per-timestep
+#'   loss values; otherwise, it is a scalar. If the model has multiple outputs,
+#'   you can use a different loss on each output by passing a dictionary or a
+#'   list of losses. The loss value that will be minimized by the model will
+#'   then be the sum of all individual losses, unless `loss_weights` is
+#'   specified.
 #' @param metrics List of metrics to be evaluated by the model during training
-#'   and testing. Typically you will use `metrics='accuracy'`. To specify
-#'   different metrics for different outputs of a multi-output model, you could
-#'   also pass a named list such as `metrics=list(output_a = 'accuracy')`.
-#' @param loss_weights Optional list specifying scalar coefficients to weight
-#'   the loss contributions of different model outputs. The loss value that will
-#'   be minimized by the model will then be the *weighted sum* of all indvidual
-#'   losses, weighted by the `loss_weights` coefficients.
+#'   and testing. Each of this can be a string (name of a built-in function),
+#'   function or a `keras$metrics$Metric` class instance. See
+#'   `?tf$keras$metrics`. Typically you will use `metrics=list('accuracy')`. A
+#'   function is any callable with the signature `result = fn(y_true, y_pred)`.
+#'   To specify different metrics for different outputs of a multi-output model,
+#'   you could also pass a dictionary, such as `metrics=list(output_a =
+#'   'accuracy', output_b = c('accuracy', 'mse'))`. You can also pass a list to
+#'   specify a metric or a list of metrics for each output, such as
+#'   `metrics=list(list('accuracy'), list('accuracy', 'mse'))` or
+#'   `metrics=list('accuracy', c('accuracy', 'mse'))`. When you pass the strings
+#'   `'accuracy'` or `'acc'`, this is converted to one of
+#'   `tf.keras.metrics.BinaryAccuracy`, `tf.keras.metrics.CategoricalAccuracy`,
+#'   `tf.keras.metrics.SparseCategoricalAccuracy` based on the loss function
+#'   used and the model output shape. A similar conversion is done for the
+#'   strings `'crossentropy'` and `'ce'`.
+#' @param loss_weights  Optional list, dictionary, or named vector specifying
+#'   scalar numeric coefficients to weight the loss contributions of different
+#'   model outputs. The loss value that will be minimized by the model will then
+#'   be the *weighted sum* of all individual losses, weighted by the
+#'   `loss_weights` coefficients. If a list, it is expected to have a 1:1
+#'   mapping to the model's outputs. If a dict, it is expected to map output
+#'   names (strings) to scalar coefficients.
+#' @param weighted_metrics List of metrics to be evaluated and weighted by
+#'   `sample_weight` or `class_weight` during training and testing.
+#' @param run_eagerly Bool. Defaults to `FALSE`. If `TRUE`, this Model's logic
+#'   will not be wrapped in a `tf.function`. Recommended to leave this as `NULL`
+#'   unless your Model cannot be run inside a `tf.function`. `run_eagerly=True`
+#'   is not supported when using
+#'   `tf.distribute.experimental.ParameterServerStrategy`. If the model's logic
+#'   uses tensors in R control flow expressions like `if` and `for`, the model
+#'   is still traceable with `tf.function`, but you will have to enter a
+#'   `tfautograph::autograph({})` directly.
+#' @param steps_per_execution Int. Defaults to 1. The number of batches to run
+#'   during each `tf.function` call. Running multiple batches inside a single
+#'   `tf.function` call can greatly improve performance on TPUs or small models
+#'   with a large Python/R overhead. At most, one full epoch will be run each
+#'   execution. If a number larger than the size of the epoch is passed, the
+#'   execution will be truncated to the size of the epoch. Note that if
+#'   `steps_per_execution` is set to `N`, `Callback.on_batch_begin` and
+#'   `Callback.on_batch_end` methods will only be called every `N` batches (i.e.
+#'   before/after each `tf.function` execution).
+#' @param ... Arguments supported for backwards compatibility only.
 #' @param sample_weight_mode If you need to do timestep-wise sample weighting
 #'   (2D weights), set this to "temporal". `NULL` defaults to sample-wise
 #'   weights (1D). If the model has multiple outputs, you can use a different
 #'   `sample_weight_mode` on each output by passing a list of modes.
 #' @param target_tensors By default, Keras will create a placeholder for the
-#'   model's target, which will be fed with the target data during
-#'   training. If instead you would like to use your own
-#'   target tensor (in turn, Keras will not expect external
-#'   data for these targets at training time), you
-#'   can specify them via the `target_tensors` argument. It should be
-#'   a single tensor (for a single-output sequential model),
-#' @param weighted_metrics List of metrics to be evaluated and weighted
-#'   by sample_weight or class_weight during training and testing
-#' @param ... When using the Theano/CNTK backends, these arguments
-#'   are passed into K.function. When using the TensorFlow backend,
-#'   these arguments are passed into `tf$Session()$run`.
+#'   model's target, which will be fed with the target data during training. If
+#'   instead you would like to use your own target tensor (in turn, Keras will
+#'   not expect external data for these targets at training time), you can
+#'   specify them via the `target_tensors` argument. It should be a single
+#'   tensor (for a single-output sequential model).
 #'
 #' @family model functions
 #'
 #' @export
 compile.keras.engine.training.Model <-
-  function(object, optimizer, loss,
+  function(object,
+           optimizer = NULL,
+           loss = NULL,
            metrics = NULL,
            loss_weights = NULL,
-           sample_weight_mode = NULL,
            weighted_metrics = NULL,
+           run_eagerly = NULL,
+           steps_per_execution = NULL,
+           ...,
            target_tensors = NULL,
-           ...) {
+           sample_weight_mode = NULL) {
 
-  # give losses a name
-  loss_name <- deparse(substitute(loss))
-  if (is.function(loss) && !inherits(loss, "python.builtin.object"))
-    attr(loss, "py_function_name") <- loss_name
+    # give losses a name
+    loss_name <- deparse(substitute(loss))
+    if (is.function(loss) &&
+        !inherits(loss, "python.builtin.object"))
+      attr(loss, "py_function_name") <- loss_name
 
-  # handle metrics
-  if (!is.null(metrics)) {
+    # handle metrics
+    if (!is.null(metrics)) {
+      # convert metrics to list if it isn't one
+      if (!is.list(metrics) && length(metrics) == 1)
+        metrics <- list(metrics)
 
-    # convert metrics to list if it isn't one
-    if (!is.list(metrics) && length(metrics) == 1)
-      metrics <- list(metrics)
+      # get metric names (if any)
+      metric_names <- names(metrics)
+      if (is.null(metric_names))
+        metric_names <- rep_len("", length(metrics))
 
-    # get metric names (if any)
-    metric_names <- names(metrics)
-    if (is.null(metric_names))
-      metric_names <- rep_len("", length(metrics))
+      # if all the metrics names are output names then leave them alone
+      # (just convert to a list with no special processing)
+      if (py_has_attr(object, "output_names") &&
+          all(metric_names %in% object$output_names)) {
+        metrics <- as.list(metrics)
+      } else {
+        # convert metrics to a list (adding names to any custom functions)
+        metrics <- lapply(1:length(metrics), function(i) {
+          metric <- metrics[[i]]
 
-    # if all the metrics names are output names then leave them alone
-    # (just convert to a list with no special processing)
-    if (py_has_attr(object, "output_names") && all(metric_names %in% object$output_names)) {
-      metrics <- as.list(metrics)
-    } else {
-      # convert metrics to a list (adding names to any custom functions)
-      metrics <- lapply(1:length(metrics), function(i) {
-        metric <- metrics[[i]]
+          if (is.function(metric) && nzchar(metric_names[[i]])) {
+            warning(
+              "Passing names for custom metrics is deprecated. Please use the ",
+              "custom_metric() function to define custom metrics."
+            )
+            attr(metric, "py_function_name") <- metric_names[[i]]
+          }
 
-        if (is.function(metric) && nzchar(metric_names[[i]])) {
-          warning("Passing names for custom metrics is deprecated. Please use the ",
-                  "custom_metric() function to define custom metrics.")
-          attr(metric, "py_function_name") <- metric_names[[i]]
-        }
-
-        metric
-      })
+          metric
+        })
+      }
     }
-  }
 
-  # args
-  args <- list(
-    optimizer = optimizer,
-    loss = loss,
-    metrics = metrics,
-    loss_weights = loss_weights,
-    sample_weight_mode = sample_weight_mode
-  )
+    # keras 2.07 args
+    if (keras_version() >= "2.0.7") {
+      # weighted metrics
+      if (!is.null(weighted_metrics) && !is.list(weighted_metrics))
+        weighted_metrics <- list(weighted_metrics)
 
-  # keras 2.07 args
-  if (keras_version() >= "2.0.7") {
-    # weighted metrics
-    if (!is.null(weighted_metrics) && !is.list(weighted_metrics))
-      weighted_metrics <- list(weighted_metrics)
-    args$weighted_metrics <- weighted_metrics
-    # target tensors
-    if (!is.null(target_tensors) && !is.list(target_tensors))
-      target_tensors <- list(target_tensors)
-    args$target_tensors <- target_tensors
-  }
+      # target tensors
+      if (!is.null(target_tensors) && !is.list(target_tensors))
+        target_tensors <- list(target_tensors)
+    }
 
-  # var args
-  var_args <- list(...)
-  args <- append(args, var_args)
+    if (is.numeric(loss_weights))
+      storage.mode(loss_weights) <- "list"
 
-  # compile model
-  do.call(object$compile, args)
+    args <- list(
+      optimizer = optimizer,
+      loss = loss,
+      metrics = metrics,
+      loss_weights = loss_weights,
+      weighted_metrics = weighted_metrics,
+      run_eagerly = run_eagerly,
+      steps_per_execution = steps_per_execution,
+      sample_weight_mode = sample_weight_mode,
+      target_tensors = target_tensors
+    )
 
-  # return model invisible (conventience for chaining)
-  invisible(object)
+    # drop NULLs
+    for (nm in names(args))
+      args[[nm]] <- args[[nm]]
+
+    args <- c(list(), args, ...)
+
+    # compile model
+    do.call(object$compile, args)
+
+    # return model invisible (convenience for chaining)
+    invisible(object)
 }
+
+#drop_nulls <-
+function(x, ...) {
+  nms <- c(...)
+  nms <- if (length(nms))
+    intersect(names(x), nms)
+  else
+    names(args)
+
+  for (nm in nms)
+    x[[nm]] <- x[[nm]]
+  x
+}
+
 
 resolve_input_data <- function(x, y = NULL) {
   # resolve x and y (check for TF dataset)
