@@ -6,55 +6,98 @@
 \usage{
 \method{compile}{keras.engine.training.Model}(
   object,
-  optimizer,
-  loss,
+  optimizer = NULL,
+  loss = NULL,
   metrics = NULL,
   loss_weights = NULL,
-  sample_weight_mode = NULL,
   weighted_metrics = NULL,
+  run_eagerly = NULL,
+  steps_per_execution = NULL,
+  ...,
   target_tensors = NULL,
-  ...
+  sample_weight_mode = NULL
 )
 }
 \arguments{
 \item{object}{Model object to compile.}
 
-\item{optimizer}{Name of optimizer or optimizer instance.}
+\item{optimizer}{String (name of optimizer) or optimizer instance. For most
+models, this defaults to \code{"rmsprop"}}
 
-\item{loss}{Name of objective function or objective function. If the model
-has multiple outputs, you can use a different loss on each output by
-passing a dictionary or a list of objectives. The loss value that will be
-minimized by the model will then be the sum of all individual losses.}
+\item{loss}{String (name of objective function), objective function or a
+\code{keras$losses$Loss} subclass instance. An objective function is any
+callable with the signature \code{loss = fn(y_true, y_pred)}, where y_true =
+ground truth values with shape = \verb{[batch_size, d0, .. dN]}, except sparse
+loss functions such as sparse categorical crossentropy where shape =
+\verb{[batch_size, d0, .. dN-1]}. y_pred = predicted values with shape =
+\verb{[batch_size, d0, .. dN]}. It returns a weighted loss float tensor. If a
+custom \code{Loss} instance is used and reduction is set to \code{NULL}, return value
+has the shape \verb{[batch_size, d0, .. dN-1]} i.e. per-sample or per-timestep
+loss values; otherwise, it is a scalar. If the model has multiple outputs,
+you can use a different loss on each output by passing a dictionary or a
+list of losses. The loss value that will be minimized by the model will
+then be the sum of all individual losses, unless \code{loss_weights} is
+specified.}
 
 \item{metrics}{List of metrics to be evaluated by the model during training
-and testing. Typically you will use \code{metrics='accuracy'}. To specify
-different metrics for different outputs of a multi-output model, you could
-also pass a named list such as \code{metrics=list(output_a = 'accuracy')}.}
+and testing. Each of this can be a string (name of a built-in function),
+function or a \code{keras$metrics$Metric} class instance. See
+\code{?tf$keras$metrics}. Typically you will use \code{metrics=list('accuracy')}. A
+function is any callable with the signature \code{result = fn(y_true, y_pred)}.
+To specify different metrics for different outputs of a multi-output model,
+you could also pass a dictionary, such as \code{metrics=list(output_a = 'accuracy', output_b = c('accuracy', 'mse'))}. You can also pass a list to
+specify a metric or a list of metrics for each output, such as
+\code{metrics=list(list('accuracy'), list('accuracy', 'mse'))} or
+\code{metrics=list('accuracy', c('accuracy', 'mse'))}. When you pass the strings
+\code{'accuracy'} or \code{'acc'}, this is converted to one of
+\code{tf.keras.metrics.BinaryAccuracy}, \code{tf.keras.metrics.CategoricalAccuracy},
+\code{tf.keras.metrics.SparseCategoricalAccuracy} based on the loss function
+used and the model output shape. A similar conversion is done for the
+strings \code{'crossentropy'} and \code{'ce'}.}
 
-\item{loss_weights}{Optional list specifying scalar coefficients to weight
-the loss contributions of different model outputs. The loss value that will
-be minimized by the model will then be the \emph{weighted sum} of all indvidual
-losses, weighted by the \code{loss_weights} coefficients.}
+\item{loss_weights}{Optional list, dictionary, or named vector specifying
+scalar numeric coefficients to weight the loss contributions of different
+model outputs. The loss value that will be minimized by the model will then
+be the \emph{weighted sum} of all individual losses, weighted by the
+\code{loss_weights} coefficients. If a list, it is expected to have a 1:1
+mapping to the model's outputs. If a dict, it is expected to map output
+names (strings) to scalar coefficients.}
+
+\item{weighted_metrics}{List of metrics to be evaluated and weighted by
+\code{sample_weight} or \code{class_weight} during training and testing.}
+
+\item{run_eagerly}{Bool. Defaults to \code{FALSE}. If \code{TRUE}, this Model's logic
+will not be wrapped in a \code{tf.function}. Recommended to leave this as \code{NULL}
+unless your Model cannot be run inside a \code{tf.function}. \code{run_eagerly=True}
+is not supported when using
+\code{tf.distribute.experimental.ParameterServerStrategy}. If the model's logic
+uses tensors in R control flow expressions like \code{if} and \code{for}, the model
+is still traceable with \code{tf.function}, but you will have to enter a
+\code{tfautograph::autograph({})} directly.}
+
+\item{steps_per_execution}{Int. Defaults to 1. The number of batches to run
+during each \code{tf.function} call. Running multiple batches inside a single
+\code{tf.function} call can greatly improve performance on TPUs or small models
+with a large Python/R overhead. At most, one full epoch will be run each
+execution. If a number larger than the size of the epoch is passed, the
+execution will be truncated to the size of the epoch. Note that if
+\code{steps_per_execution} is set to \code{N}, \code{Callback.on_batch_begin} and
+\code{Callback.on_batch_end} methods will only be called every \code{N} batches (i.e.
+before/after each \code{tf.function} execution).}
+
+\item{...}{Arguments supported for backwards compatibility only.}
+
+\item{target_tensors}{By default, Keras will create a placeholder for the
+model's target, which will be fed with the target data during training. If
+instead you would like to use your own target tensor (in turn, Keras will
+not expect external data for these targets at training time), you can
+specify them via the \code{target_tensors} argument. It should be a single
+tensor (for a single-output sequential model).}
 
 \item{sample_weight_mode}{If you need to do timestep-wise sample weighting
 (2D weights), set this to "temporal". \code{NULL} defaults to sample-wise
 weights (1D). If the model has multiple outputs, you can use a different
 \code{sample_weight_mode} on each output by passing a list of modes.}
-
-\item{weighted_metrics}{List of metrics to be evaluated and weighted
-by sample_weight or class_weight during training and testing}
-
-\item{target_tensors}{By default, Keras will create a placeholder for the
-model's target, which will be fed with the target data during
-training. If instead you would like to use your own
-target tensor (in turn, Keras will not expect external
-data for these targets at training time), you
-can specify them via the \code{target_tensors} argument. It should be
-a single tensor (for a single-output sequential model),}
-
-\item{...}{When using the Theano/CNTK backends, these arguments
-are passed into K.function. When using the TensorFlow backend,
-these arguments are passed into \code{tf$Session()$run}.}
 }
 \description{
 Configure a Keras model for training
