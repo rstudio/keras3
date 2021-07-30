@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Base R6 class for Keras constraints — KerasConstraint • keras</title>
+<title>(Deprecated) Base R6 class for Keras constraints — KerasConstraint • keras</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,8 @@
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Base R6 class for Keras constraints — KerasConstraint" />
-<meta property="og:description" content="Base R6 class for Keras constraints" />
+<meta property="og:title" content="(Deprecated) Base R6 class for Keras constraints — KerasConstraint" />
+<meta property="og:description" content="New custom constraints are encouraged to subclass keras$constraints$Constraint directly." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
       </span>
     </div>
 
@@ -175,6 +175,21 @@
     </li>
   </ul>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Guides (New for TF 2)
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../articles/learn.html">Learn</a>
 </li>
@@ -217,13 +232,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Base R6 class for Keras constraints</h1>
+    <h1>(Deprecated) Base R6 class for Keras constraints</h1>
     <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/constraints.R'><code>R/constraints.R</code></a></small>
     <div class="hidden name"><code>KerasConstraint.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Base R6 class for Keras constraints</p>
+    <p>New custom constraints are encouraged to subclass <code>keras$constraints$Constraint</code> directly.</p>
     </div>
 
 
@@ -247,7 +262,7 @@ and restored using <code><a href='save_model_weights_hdf5.html'>save_model_weigh
     
 
 <dl>
-<dt><code><a href='https://rdrr.io/r/base/call.html'>call(w)</a></code></dt><dd><p>Constrain the specified weights.</p></dd>
+<dt><code>call(w)</code></dt><dd><p>Constrain the specified weights.</p></dd>
 
 </dl>
 
@@ -256,22 +271,22 @@ and restored using <code><a href='save_model_weights_hdf5.html'>save_model_weigh
     <div class='dont-index'><p><a href='constraints.html'>constraints</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>CustomNonNegConstraint</span> <span class='op'>&lt;-</span> <span class='fu'>R6</span><span class='fu'>::</span><span class='kw'><a href='https://r6.r-lib.org/reference/R6Class.html'>R6Class</a></span><span class='op'>(</span>
-  <span class='st'>"CustomNonNegConstraint"</span>,
-  inherit <span class='op'>=</span> <span class='va'>KerasConstraint</span>,
-  public <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
-    call <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
-       <span class='va'>w</span> <span class='op'>*</span> <span class='fu'><a href='k_cast.html'>k_cast</a></span><span class='op'>(</span><span class='fu'><a href='k_greater_equal.html'>k_greater_equal</a></span><span class='op'>(</span><span class='va'>w</span>, <span class='fl'>0</span><span class='op'>)</span>, <span class='fu'><a href='k_floatx.html'>k_floatx</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-    <span class='op'>}</span>
-  <span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='fu'><a href='layer_dense.html'>layer_dense</a></span><span class='op'>(</span>units <span class='op'>=</span> <span class='fl'>32</span>, input_shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>784</span><span class='op'>)</span>,
-            kernel_constraint <span class='op'>=</span> <span class='va'>CustomNonNegConstraint</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>CustomNonNegConstraint</span> <span class='op'>&lt;-</span> <span class='fu'>R6</span><span class='fu'>::</span><span class='kw'><a href='https://r6.r-lib.org/reference/R6Class.html'>R6Class</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='st'>"CustomNonNegConstraint"</span>,</span>
+<span class='r-in'>  inherit <span class='op'>=</span> <span class='va'>KerasConstraint</span>,</span>
+<span class='r-in'>  public <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span></span>
+<span class='r-in'>    call <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>       <span class='va'>w</span> <span class='op'>*</span> <span class='fu'><a href='k_cast.html'>k_cast</a></span><span class='op'>(</span><span class='fu'><a href='k_greater_equal.html'>k_greater_equal</a></span><span class='op'>(</span><span class='va'>w</span>, <span class='fl'>0</span><span class='op'>)</span>, <span class='fu'><a href='k_floatx.html'>k_floatx</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'>    <span class='op'>}</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='layer_dense.html'>layer_dense</a></span><span class='op'>(</span>units <span class='op'>=</span> <span class='fl'>32</span>, input_shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>784</span><span class='op'>)</span>,</span>
+<span class='r-in'>            kernel_constraint <span class='op'>=</span> <span class='va'>CustomNonNegConstraint</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

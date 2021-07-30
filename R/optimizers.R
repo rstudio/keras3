@@ -146,6 +146,17 @@ optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = NULL, decay = 0.0
 #' @export
 optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, decay = 0.0,
                            amsgrad = FALSE, clipnorm = NULL, clipvalue = NULL) {
+
+  # TODO: lr -> learning_rate
+#   tf.keras.optimizers.Adam(
+#     learning_rate=0.001,
+#     beta_1=0.9,
+#     beta_2=0.999,
+#     epsilon=1e-07,
+#     amsgrad=False,
+#     name='Adam',
+#     **kwargs
+# )
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(

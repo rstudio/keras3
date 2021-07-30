@@ -190,7 +190,8 @@ callback_remote_monitor <- function(root = "https://localhost:9000", path = "/pu
                                     field = "data", headers = NULL, send_as_json = FALSE) {
 
   if (!have_requests())
-    stop("The requests Python package is required for remote monitoring")
+    stop("The requests Python package is required for remote monitoring.",
+         "Please run `reticulate::py_install('requests')`")
 
   args <- list(
     root = root,

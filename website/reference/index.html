@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
       </span>
     </div>
 
@@ -171,6 +171,21 @@
     </li>
     <li>
       <a href="../articles/saving_serializing.html">Saving and serializing</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Guides (New for TF 2)
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
     </li>
   </ul>
 </li>
@@ -1380,6 +1395,12 @@ looped over (in batches).</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="image_dataset_from_directory.html">image_dataset_from_directory()</a></code> </p>
+        </td>
+        <td><p>Create a dataset from a directory</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="flow_images_from_data.html">flow_images_from_data()</a></code> </p>
         </td>
         <td><p>Generates batches of augmented/normalized data from image data and labels</p></td>
@@ -1390,6 +1411,13 @@ looped over (in batches).</p></td>
         </td>
         <td><p>Generates batches of data from images in a directory (with optional
 augmented/normalized data)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="flow_images_from_dataframe.html">flow_images_from_dataframe()</a></code> </p>
+        </td>
+        <td><p>Takes the dataframe and the path to a directory and generates batches of
+augmented/normalized data.</p></td>
       </tr><tr>
         
         <td>
@@ -1529,7 +1557,7 @@ augmented/normalized data)</p></td>
         <td>
           <p><code><a href="KerasCallback.html">KerasCallback</a></code> </p>
         </td>
-        <td><p>Base R6 class for Keras callbacks</p></td>
+        <td><p>(Deprecated) Base R6 class for Keras callbacks</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -1657,7 +1685,7 @@ augmented/normalized data)</p></td>
         <td>
           <p><code><a href="KerasConstraint.html">KerasConstraint</a></code> </p>
         </td>
-        <td><p>Base R6 class for Keras constraints</p></td>
+        <td><p>(Deprecated) Base R6 class for Keras constraints</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -1730,7 +1758,7 @@ augmented/normalized data)</p></td>
         <td>
           <p><code><a href="install_keras.html">install_keras()</a></code> </p>
         </td>
-        <td><p>Install Keras and the TensorFlow backend</p></td>
+        <td><p>Install TensorFlow and Keras, including all python dependencies</p></td>
       </tr><tr>
         
         <td>
@@ -2720,6 +2748,31 @@ augmented/normalized data)</p></td>
           <p><code><a href="k_zeros_like.html">k_zeros_like()</a></code> </p>
         </td>
         <td><p>Instantiates an all-zeros variable of the same shape as another tensor.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-deprecated" class="hasAnchor"><a href="#section-deprecated" class="anchor"></a>Deprecated</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="KerasWrapper.html">KerasWrapper</a></code> </p>
+        </td>
+        <td><p>(Deprecated) Base R6 class for Keras wrappers</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="create_wrapper.html">create_wrapper()</a></code> </p>
+        </td>
+        <td><p>(Deprecated) Create a Keras Wrapper</p></td>
       </tr>
     </tbody>
     </table>

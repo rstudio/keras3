@@ -1,4 +1,4 @@
-pandoc: 2.11.4
+pandoc: 2.14.1
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
@@ -63,10 +63,12 @@ articles:
   faq: faq.html
   functional_api: functional_api.html
   guide_keras: guide_keras.html
+  guides/customizing_what_happens_in_fit: customizing_what_happens_in_fit.html
   index: index.html
+  python_subclasses: python_subclasses.html
   saving_serializing: saving_serializing.html
   sequential_model: sequential_model.html
   training_callbacks: training_callbacks.html
   training_visualization: training_visualization.html
-last_built: 2021-07-07T18:14Z
+last_built: 2021-07-30T20:31Z
 

@@ -83,7 +83,7 @@ system environment." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
       </span>
     </div>
 
@@ -176,6 +176,21 @@ system environment." />
     </li>
   </ul>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Guides (New for TF 2)
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../articles/learn.html">Learn</a>
 </li>
@@ -246,21 +261,21 @@ required version).</p></td>
 Keras) is available.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># testthat utilty for skipping tests when Keras isn't available</span>
-<span class='va'>skip_if_no_keras</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>version</span> <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='fu'>is_keras_available</span><span class='op'>(</span><span class='va'>version</span><span class='op'>)</span><span class='op'>)</span>
-    <span class='fu'>skip</span><span class='op'>(</span><span class='st'>"Required keras version not available for testing"</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-<span class='co'># use the function within a test</span>
-<span class='fu'>test_that</span><span class='op'>(</span><span class='st'>"keras function works correctly"</span>, <span class='op'>{</span>
-  <span class='fu'>skip_if_no_keras</span><span class='op'>(</span><span class='op'>)</span>
-  <span class='co'># test code here</span>
-<span class='op'>}</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># testthat utilty for skipping tests when Keras isn't available</span></span>
+<span class='r-in'><span class='va'>skip_if_no_keras</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>version</span> <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='fu'>is_keras_available</span><span class='op'>(</span><span class='va'>version</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'>    <span class='fu'>skip</span><span class='op'>(</span><span class='st'>"Required keras version not available for testing"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># use the function within a test</span></span>
+<span class='r-in'><span class='fu'>test_that</span><span class='op'>(</span><span class='st'>"keras function works correctly"</span>, <span class='op'>{</span></span>
+<span class='r-in'>  <span class='fu'>skip_if_no_keras</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='co'># test code here</span></span>
+<span class='r-in'><span class='op'>}</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

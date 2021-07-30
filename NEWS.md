@@ -10,6 +10,12 @@ New Features:
 
 - Introduced `%py_class%`, a new python class generator constructor.
 
+- The `compile()` method for keras models has been updated:
+  - `optimizer` is now an optional argument. It defaults to "rmsprop" for regular keras models. Custom models can specify their own default optimizer.
+  - `loss` is now an optional argument.
+  - New optional arguments: `run_eagerly`, `steps_per_execution`.
+  - `target_tensors` and `sample_weight_mode` must now be supplied as named arguments.
+
 - Major changes to the underlying handeling of custom R6 layer classes.
   - A new `r_to_py` method is provided for `R6ClassGenerator` objects.
   - R6 custom layers can now inherit directly from python layer classes

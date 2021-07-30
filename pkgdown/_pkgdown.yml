@@ -60,6 +60,12 @@ navbar:
           href: articles/custom_models.html
         - text: "Saving and serializing"
           href: articles/saving_serializing.html
+    - text: "Guides (New for TF 2)"
+      menu:
+        - text: "Python Subclasses"
+          href: articles/python_subclasses.html
+        - text: "Customizing what happens in fit"
+          href: articles/guides/customizing_what_happens_in_fit.html
     - text: Learn
       href: articles/learn.html
     - text: Tools
@@ -270,8 +276,10 @@ reference:
       - image_to_array
       - image_data_generator
       - fit_image_data_generator
+      - image_dataset_from_directory
       - flow_images_from_data
       - flow_images_from_directory
+      - flow_images_from_dataframe
       - generator_next
 
   - title: "Optimizers"
@@ -360,3 +368,8 @@ reference:
   - title: "Backend"
     contents:
       - starts_with("k_")
+
+  - title: "Deprecated"
+    contents:
+      - KerasWrapper
+      - create_wrapper
