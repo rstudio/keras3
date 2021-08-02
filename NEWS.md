@@ -51,6 +51,8 @@ New Features:
   - Potentially breaking change: numeric versions supplied without a patchlevel now automatically pull the latest patch release.
     (e.g. `install_keras(tensorflow="2.4")` will install tensorflow version "2.4.2". Previously it would install "2.4.0")
 
+  - pandas is now a default extra packages installed by `install_keras()`
+
 - Refactored automated tests to closer match the default installation procedure
   and compute environment of most user.
 

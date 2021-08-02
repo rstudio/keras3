@@ -56,7 +56,7 @@ keras expects, and the default version of tensorflow installed by
 }
 \details{
 The default additional packages are:
-tensorflow-hub, scipy, requests, pyyaml, Pillow, h5py, with their
+tensorflow-hub, scipy, requests, pyyaml, Pillow, h5py, pandas, with their
 versions potentially constrained for compatibility with the
 requested tensorflow version.
 }

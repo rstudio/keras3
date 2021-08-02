@@ -42,7 +42,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
 default_version = numeric_version("2.5")
 
 default_extra_packages <- function(tensorflow_version) {
-  pkgs <- c("tensorflow-hub", "scipy", "requests", "pyyaml", "Pillow", "h5py")
+  pkgs <- c("tensorflow-hub", "scipy", "requests", "pyyaml", "Pillow", "h5py", "pandas")
   names(pkgs) <- pkgs
   v <- tensorflow_version
 
