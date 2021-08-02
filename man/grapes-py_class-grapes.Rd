@@ -2,6 +2,7 @@
 % Please edit documentation in R/py-classes.R
 \name{\%py_class\%}
 \alias{\%py_class\%}
+\alias{py_class}
 \title{Make a python class constructor}
 \usage{
 spec \%py_class\% body
@@ -35,7 +36,10 @@ my_class_instance <- MyClass(42)
 my_class_instance$my_method()
 
 MyClass2(MyClass) \%py_class\% {
+  "This will be a __doc__ string for MyClass2"
+
   initialize <- function(...) {
+    "This will be the __doc__ string for the MyClass2.__init__() method"
     print("Hi from MyClass2$initialize()!")
     super$initialize(...)
   }
@@ -43,5 +47,7 @@ MyClass2(MyClass) \%py_class\% {
 
 my_class_instance2 <- MyClass2(42)
 my_class_instance2$my_method()
+
+reticulate::py_help(MyClass2) # see the __doc__ strings and more!
 }
 }

@@ -10,6 +10,8 @@ New Features:
 
 - Introduced `%py_class%`, a new python class generator constructor.
 
+- keras now imports the glue package
+
 - The `compile()` method for keras models has been updated:
   - `optimizer` is now an optional argument. It defaults to "rmsprop" for regular keras models. Custom models can specify their own default optimizer.
   - `loss` is now an optional argument.

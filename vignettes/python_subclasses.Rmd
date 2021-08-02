@@ -157,6 +157,12 @@ Some (potentially surprising) notes about `%py_class%`:
 NonNegative(keras$constraints$Constraint, convert=FALSE) %py_class% { ... }
 ```
 
+-   An additional convenience is that if the first expression of a function body
+    or the class body is a literal character string, it is automatically taken as
+    the `__doc__` attribute of the class or method. The doc string will then be
+    visible to both python and R tools e.g. `reticulate::py_help()`. 
+    See `?py_class` for an example.
+
 In all other regards, `%py_class%` is equivalent to `r_to_py(R6Class())` (indeed, under the hood, they do the same thing).
 
 ### A custom layer (R6)

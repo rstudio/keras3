@@ -29,7 +29,7 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
   # subclassed by consulting layer.__module__
   # (not sure why builtins.issubclass() doesn't work over there)
   if(!"__module__" %in% names(namespace))
-    namespace$`__module__` <-  "<R6type>"
+    namespace$`__module__` <- "<R6type>"
     # sprintf("<R6type.%s.%s>", format(x$parent_env), x$classname)
 
 
@@ -52,7 +52,7 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
   env$`__class__` <- py_cls
   env[[x$classname]] <- py_cls
 
-  evalq({
+  eval(quote({
     super <- base::structure(
       function(type = get("__class__"),
                object = base::get("self", parent.frame())) {
@@ -61,7 +61,7 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
         reticulate::py_call(bt$super, type, object)
       },
       class = "python_class_super")
-  }, env)
+  }), env)
 
   py_cls
 }
@@ -147,6 +147,13 @@ as_py_method <- function(fn, name, env, convert) {
     if (!identical(formals(fn)[1], alist(self =)))
       formals(fn) <- c(alist(self =), formals(fn))
 
+    doc <- NULL
+    if (body(fn)[[1]] == quote(`{`) &&
+        typeof(body(fn)[[2]]) == "character") {
+      doc <- glue::trim(body(fn)[[2]])
+      body(fn)[[2]] <- NULL
+    }
+
     # __init__ must return NULL
     if (name == "__init__")
       body(fn)[[length(body(fn)) + 1L]] <- quote(invisible(NULL))
@@ -173,6 +180,9 @@ as_py_method <- function(fn, name, env, convert) {
 
     if(!is.null(py_sig))
       fn$`__signature__` <- py_sig
+
+    if(!is.null(doc))
+      fn$`__doc__` <- doc
 
     fn
 }
@@ -235,6 +245,7 @@ r_formals_to_py__signature__ <- function(fn) {
 #' @return The python class constructor, invisibly. Note, the same constructor is
 #'   also assigned in the parent frame.
 #' @export
+#' @aliases py_class
 #'
 #' @examples
 #' \dontrun{
@@ -252,7 +263,10 @@ r_formals_to_py__signature__ <- function(fn) {
 #' my_class_instance$my_method()
 #'
 #' MyClass2(MyClass) %py_class% {
+#'   "This will be a __doc__ string for MyClass2"
+#'
 #'   initialize <- function(...) {
+#'     "This will be the __doc__ string for the MyClass2.__init__() method"
 #'     print("Hi from MyClass2$initialize()!")
 #'     super$initialize(...)
 #'   }
@@ -260,6 +274,8 @@ r_formals_to_py__signature__ <- function(fn) {
 #'
 #' my_class_instance2 <- MyClass2(42)
 #' my_class_instance2$my_method()
+#'
+#' reticulate::py_help(MyClass2) # see the __doc__ strings and more!
 #' }
 `%py_class%` <- function(spec, body) {
   spec <- substitute(spec)
@@ -294,6 +310,10 @@ r_formals_to_py__signature__ <- function(fn) {
 
   env <- new.env(parent = parent_env)
   eval(body, env)
+  if (!"__doc__" %in% names(env) &&
+      body[[1]] == quote(`{`) &&
+      typeof(body[[2]]) == "character")
+    env$`__doc__` <- glue::trim(body[[2]])
 
   public <- active <- list()
   for(nm in names(env)) {
@@ -320,4 +340,3 @@ r_formals_to_py__signature__ <- function(fn) {
   assign(classname, py_cls, envir = parent_env)
   invisible(py_cls)
 }
-
