@@ -235,7 +235,7 @@
   <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">.x</span>, <span class="va">.f</span><span class="op">[</span><span class="op">-</span><span class="fl">3L</span><span class="op">]</span>, <span class="va">...</span><span class="op">)</span>
   <span class="va">out</span>
 <span class="op">}</span>
-  
+
 <span class="va">`%&lt;-active%`</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sym</span>, <span class="va">fun</span><span class="op">)</span>
   <span class="fu"><a href="https://rdrr.io/r/base/bindenv.html">makeActiveBinding</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">sym</span><span class="op">)</span>, <span class="va">fun</span>, <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 
@@ -266,14 +266,14 @@
     <span class="co"># Unpack the data. Its structure depends on your model and</span>
     <span class="co"># on what you pass to `fit()`.</span>
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="va">data</span>
-    
+
     <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/reticulate/man/with-as-operator.html">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span>
-      <span class="va">y_pred</span> <span class="op">=</span> <span class="fu">self</span><span class="op">(</span><span class="va">x</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>  <span class="co"># Forward pass</span>
+      <span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu">self</span><span class="op">(</span><span class="va">x</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>  <span class="co"># Forward pass</span>
       <span class="co"># Compute the loss value</span>
       <span class="co"># (the loss function is configured in `compile()`)</span>
       <span class="va">loss</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">compiled_loss</span><span class="op">(</span><span class="va">y</span>, <span class="va">y_pred</span>, regularization_losses <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span>
     <span class="op">}</span><span class="op">)</span>
-    
+
     <span class="co"># Compute gradients</span>
     <span class="va">trainable_vars</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="va">trainable_variables</span>
     <span class="va">gradients</span> <span class="op">&lt;-</span> <span class="va">tape</span><span class="op">$</span><span class="fu">gradient</span><span class="op">(</span><span class="va">loss</span>, <span class="va">trainable_vars</span><span class="op">)</span>
@@ -281,7 +281,7 @@
     <span class="va">self</span><span class="op">$</span><span class="va">optimizer</span><span class="op">$</span><span class="fu">apply_gradients</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/zip.html">zip</a></span><span class="op">(</span><span class="va">gradients</span>, <span class="va">trainable_vars</span><span class="op">)</span><span class="op">)</span>
     <span class="co"># Update metrics (includes the metric that tracks the loss)</span>
     <span class="va">self</span><span class="op">$</span><span class="va">compiled_metrics</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="va">y</span>, <span class="va">y_pred</span><span class="op">)</span>
-    
+
     <span class="co"># Return a named list mapping metric names to current value</span>
     <span class="fu">map_and_name</span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">metrics</span>, <span class="va">.x</span><span class="op">$</span><span class="va">name</span> <span class="op">~</span> <span class="va">.x</span><span class="op">$</span><span class="fu">result</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span>
@@ -318,26 +318,26 @@
 <span class="fu">CustomModel</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">Model</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
   <span class="va">train_step</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span>
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="va">data</span>
-    
+
     <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/reticulate/man/with-as-operator.html">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span>
-      <span class="va">y_pred</span> <span class="op">=</span> <span class="fu">self</span><span class="op">(</span><span class="va">x</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>  <span class="co"># Forward pass</span>
+      <span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu">self</span><span class="op">(</span><span class="va">x</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>  <span class="co"># Forward pass</span>
       <span class="co"># Compute our own loss</span>
-      <span class="va">loss</span> <span class="op">=</span> <span class="va">keras</span><span class="op">$</span><span class="va">losses</span><span class="op">$</span><span class="fu">mean_squared_error</span><span class="op">(</span><span class="va">y</span>, <span class="va">y_pred</span><span class="op">)</span>
+      <span class="va">loss</span> <span class="op">&lt;-</span> <span class="va">keras</span><span class="op">$</span><span class="va">losses</span><span class="op">$</span><span class="fu">mean_squared_error</span><span class="op">(</span><span class="va">y</span>, <span class="va">y_pred</span><span class="op">)</span>
     <span class="op">}</span><span class="op">)</span>
     <span class="co"># Compute gradients</span>
-    <span class="va">trainable_vars</span> <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">trainable_variables</span>
-    <span class="va">gradients</span> <span class="op">=</span> <span class="va">tape</span><span class="op">$</span><span class="fu">gradient</span><span class="op">(</span><span class="va">loss</span>, <span class="va">trainable_vars</span><span class="op">)</span>
-    
+    <span class="va">trainable_vars</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="va">trainable_variables</span>
+    <span class="va">gradients</span> <span class="op">&lt;-</span> <span class="va">tape</span><span class="op">$</span><span class="fu">gradient</span><span class="op">(</span><span class="va">loss</span>, <span class="va">trainable_vars</span><span class="op">)</span>
+
     <span class="co"># Update weights</span>
     <span class="va">self</span><span class="op">$</span><span class="va">optimizer</span><span class="op">$</span><span class="fu">apply_gradients</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/zip.html">zip</a></span><span class="op">(</span><span class="va">gradients</span>, <span class="va">trainable_vars</span><span class="op">)</span><span class="op">)</span>
-    
+
     <span class="co"># Compute our own metrics</span>
     <span class="va">loss_tracker</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="va">loss</span><span class="op">)</span>
     <span class="va">mae_metric</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="va">y</span>, <span class="va">y_pred</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="va">loss_tracker</span><span class="op">$</span><span class="fu">result</span><span class="op">(</span><span class="op">)</span>,
          mae <span class="op">=</span> <span class="va">mae_metric</span><span class="op">$</span><span class="fu">result</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span>
-  
+
   <span class="va">metrics</span> <span class="op">%&lt;-active%</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
     <span class="co"># We list our `Metric` objects here so that `reset_states()` can be</span>
     <span class="co"># called automatically at the start of each epoch</span>
@@ -354,7 +354,7 @@
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">CustomModel</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span>
 
 <span class="co"># We don't pass a loss or metrics here</span>
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer<span class="op">=</span><span class="st">"adam"</span><span class="op">)</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">"adam"</span><span class="op">)</span>
 
 <span class="co"># Just use `fit` as usual -- you can use callbacks, etc.</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_random_uniform.html">k_random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">32</span><span class="op">)</span><span class="op">)</span>
@@ -378,7 +378,7 @@
     <span class="co"># it's assigned to sample_weight. Its structure depends on your model and on</span>
     <span class="co"># what you pass to `fit()`.</span>
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, sample_weight <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="va">data</span>
-    
+
     <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/reticulate/man/with-as-operator.html">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span>
       <span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu">self</span><span class="op">(</span><span class="va">x</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>  <span class="co"># Forward pass</span>
       <span class="co"># Compute the loss value.</span>
@@ -387,18 +387,18 @@
                                  sample_weight <span class="op">=</span> <span class="va">sample_weight</span>,
                                  regularization_losses <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span>
     <span class="op">}</span><span class="op">)</span>
-    
+
     <span class="co"># Compute gradients</span>
     <span class="va">trainable_vars</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="va">trainable_variables</span>
     <span class="va">gradients</span> <span class="op">&lt;-</span> <span class="va">tape</span><span class="op">$</span><span class="fu">gradient</span><span class="op">(</span><span class="va">loss</span>, <span class="va">trainable_vars</span><span class="op">)</span>
-    
+
     <span class="co"># Update weights</span>
     <span class="va">self</span><span class="op">$</span><span class="va">optimizer</span><span class="op">$</span><span class="fu">apply_gradients</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/zip.html">zip</a></span><span class="op">(</span><span class="va">gradients</span>, <span class="va">trainable_vars</span><span class="op">)</span><span class="op">)</span>
-    
+
     <span class="co"># Update the metrics.</span>
     <span class="co"># Metrics are configured in `compile()`.</span>
     <span class="va">self</span><span class="op">$</span><span class="va">compiled_metrics</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="va">y</span>, <span class="va">y_pred</span>, sample_weight <span class="op">=</span> <span class="va">sample_weight</span><span class="op">)</span>
-    
+
     <span class="co"># Return a dict mapping metric names to current value.</span>
     <span class="co"># Note that it will include the loss (tracked in self$metrics).</span>
     <span class="fu">map_and_name</span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">metrics</span>, <span class="va">.x</span><span class="op">$</span><span class="va">name</span> <span class="op">~</span> <span class="va">.x</span><span class="op">$</span><span class="fu">result</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
@@ -407,15 +407,15 @@
 
 <span class="co"># Construct and compile an instance of CustomModel</span>
 <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span>
-<span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">CustomModel</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span>
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer<span class="op">=</span><span class="st">"adam"</span>, loss<span class="op">=</span><span class="st">"mse"</span>, metrics <span class="op">=</span> <span class="st">"mae"</span><span class="op">)</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">"adam"</span>, loss <span class="op">=</span> <span class="st">"mse"</span>, metrics <span class="op">=</span> <span class="st">"mae"</span><span class="op">)</span>
 
 <span class="co"># You can now use sample_weight argument</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_random_uniform.html">k_random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">32</span><span class="op">)</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_random_uniform.html">k_random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="va">sw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_random_uniform.html">k_random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, sample_weight<span class="op">=</span><span class="va">sw</span>, epochs<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, sample_weight <span class="op">=</span> <span class="va">sw</span>, epochs <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="providing-your-own-evaluation-step" class="section level2">
 <h2 class="hasAnchor">
@@ -441,16 +441,16 @@
 
 <span class="co"># Construct an instance of CustomModel</span>
 <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span>
-<span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">CustomModel</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span>
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>loss<span class="op">=</span><span class="st">"mse"</span>, metrics <span class="op">=</span> <span class="st">"mae"</span><span class="op">)</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">"mse"</span>, metrics <span class="op">=</span> <span class="st">"mae"</span><span class="op">)</span>
 
 <span class="co"># Evaluate with our custom test_step</span>
-<span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="../../reference/k_random_uniform.html">k_random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">32</span><span class="op">)</span><span class="op">)</span>
-<span class="va">y</span> <span class="op">=</span> <span class="fu"><a href="../../reference/k_random_uniform.html">k_random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_random_uniform.html">k_random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">32</span><span class="op">)</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_random_uniform.html">k_random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></code></pre></div>
-<pre><code>##     loss      mae 
-## 2.375309 1.457297</code></pre>
+<pre><code>##      loss       mae 
+## 0.4854570 0.5706016</code></pre>
 </div>
 <div id="wrapping-up-an-end-to-end-gan-example" class="section level2">
 <h2 class="hasAnchor">
@@ -467,7 +467,7 @@
 <code class="sourceCode R"><span class="co"># Create the discriminator</span>
 <span class="va">discriminator</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"discriminator"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, strides <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span>, 
+  <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, strides <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span>,
                 input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">128</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, strides <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
@@ -502,29 +502,29 @@
     <span class="fu">super</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">compile</span><span class="op">(</span><span class="op">)</span>
     <span class="va">self</span><span class="op">$</span><span class="va">d_optimizer</span> <span class="op">&lt;-</span> <span class="va">d_optimizer</span>
     <span class="va">self</span><span class="op">$</span><span class="va">g_optimizer</span> <span class="op">&lt;-</span> <span class="va">g_optimizer</span>
-    <span class="va">self</span><span class="op">$</span><span class="va">loss_fn</span> <span class="op">=</span> <span class="va">loss_fn</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">loss_fn</span> <span class="op">&lt;-</span> <span class="va">loss_fn</span>
   <span class="op">}</span>
 
   <span class="va">train_step</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">real_images</span><span class="op">)</span> <span class="op">{</span>
 
     <span class="co"># Sample random points in the latent space</span>
-    <span class="va">batch_size</span> <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="fu">shape</span><span class="op">(</span><span class="va">real_images</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
+    <span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">shape</span><span class="op">(</span><span class="va">real_images</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
 
     <span class="co"># TODO: shape() should be able to handle a scalar tensor as input</span>
     <span class="co"># also, backend functions like k_random_normal</span>
-    <span class="va">random_latent_vectors</span> <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">random</span><span class="op">$</span><span class="fu">normal</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">self</span><span class="op">$</span><span class="va">latent_dim</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">random_latent_vectors</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">random</span><span class="op">$</span><span class="fu">normal</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">self</span><span class="op">$</span><span class="va">latent_dim</span><span class="op">)</span><span class="op">)</span>
 
     <span class="co"># Decode them to fake images</span>
-    <span class="va">generated_images</span> <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="fu">generator</span><span class="op">(</span><span class="va">random_latent_vectors</span><span class="op">)</span>
+    <span class="va">generated_images</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">generator</span><span class="op">(</span><span class="va">random_latent_vectors</span><span class="op">)</span>
 
     <span class="co"># Combine them with real images</span>
-    <span class="va">combined_images</span> <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="fu">concat</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">generated_images</span>, <span class="va">real_images</span><span class="op">)</span>,
-                                axis <span class="op">=</span> <span class="fl">0L</span><span class="op">)</span>
+    <span class="va">combined_images</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">concat</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">generated_images</span>, <span class="va">real_images</span><span class="op">)</span>,
+                                 axis <span class="op">=</span> <span class="fl">0L</span><span class="op">)</span>
 
     <span class="co"># Assemble labels discriminating real from fake images</span>
-    <span class="va">labels</span> <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="fu">concat</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="fl">1L</span><span class="op">)</span><span class="op">)</span>,
-                            <span class="va">tf</span><span class="op">$</span><span class="fu">zeros</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="fl">1L</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, axis <span class="op">=</span> <span class="fl">0L</span><span class="op">)</span>
-    
+    <span class="va">labels</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">concat</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="fl">1L</span><span class="op">)</span><span class="op">)</span>,
+                             <span class="va">tf</span><span class="op">$</span><span class="fu">zeros</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="fl">1L</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, axis <span class="op">=</span> <span class="fl">0L</span><span class="op">)</span>
+
     <span class="co"># Add random noise to the labels - important trick!</span>
     <span class="va">labels</span> <span class="op">%&lt;&gt;%</span> <span class="fu">`+`</span><span class="op">(</span><span class="fl">0.05</span> <span class="op">*</span> <span class="va">tf</span><span class="op">$</span><span class="va">random</span><span class="op">$</span><span class="fu">uniform</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">shape</span><span class="op">(</span><span class="va">labels</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
@@ -586,7 +586,7 @@
 <span class="va">dataset</span> <span class="op">%&lt;&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_take.html">dataset_take</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>
 
 <span class="va">gan</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">dataset</span>, epochs<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">dataset</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p>The ideas behind deep learning are simple, so why should their implementation be painful?</p>
 </div>
   </div>

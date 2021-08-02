@@ -223,7 +223,7 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/reticulate">reticulate</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">parallel</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">doParallel</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">foreach</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RevolutionAnalytics/foreach">foreach</a></span><span class="op">)</span>
 
 
 <span class="co"># Parameters -----------------------------------------------------</span>
@@ -556,7 +556,7 @@
         <span class="va">masks_iter</span> <span class="op">&lt;&lt;-</span> <span class="va">masks_iter</span><span class="op">[</span><span class="op">-</span><span class="va">batch_ind</span><span class="op">]</span>
         
         
-        <span class="va">x_y_batch</span> <span class="op">&lt;-</span> <span class="fu">foreach</span><span class="op">(</span>i <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">batch_size</span><span class="op">)</span> <span class="op">%dopar%</span> <span class="op">{</span>
+        <span class="va">x_y_batch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span><span class="op">(</span>i <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">batch_size</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">%dopar%</a></span> <span class="op">{</span>
             <span class="va">x_y_imgs</span> <span class="op">&lt;-</span> <span class="fu">imagesRead</span><span class="op">(</span>image_file <span class="op">=</span> <span class="va">batch_images_list</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
                                    mask_file <span class="op">=</span> <span class="va">batch_masks_list</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>
             <span class="co"># augmentation</span>
@@ -611,7 +611,7 @@
         <span class="va">masks_iter</span> <span class="op">&lt;&lt;-</span> <span class="va">masks_iter</span><span class="op">[</span><span class="op">-</span><span class="va">batch_ind</span><span class="op">]</span>
         
         
-        <span class="va">x_y_batch</span> <span class="op">&lt;-</span> <span class="fu">foreach</span><span class="op">(</span>i <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">batch_size</span><span class="op">)</span> <span class="op">%dopar%</span> <span class="op">{</span>
+        <span class="va">x_y_batch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span><span class="op">(</span>i <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">batch_size</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">%dopar%</a></span> <span class="op">{</span>
             <span class="va">x_y_imgs</span> <span class="op">&lt;-</span> <span class="fu">imagesRead</span><span class="op">(</span>image_file <span class="op">=</span> <span class="va">batch_images_list</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
                                    mask_file <span class="op">=</span> <span class="va">batch_masks_list</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>
             <span class="co"># without augmentation</span>
