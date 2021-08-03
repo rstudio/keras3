@@ -14,6 +14,9 @@ New Features:
   - Subclassing python classes: How to use `%py_class%`.
   - Customizing what happens in fit (example of how to define a model, like a GAN, with a custom train step).
   - Writing your own callbacks.
+  
+- All optimizer had argument `lr` renamed to `learning_rate`.
+  (backwards compatibility is preserved, an R warning is now issued).
 
 - keras now imports the glue package
 
@@ -23,7 +26,7 @@ New Features:
   - New optional arguments: `run_eagerly`, `steps_per_execution`.
   - `target_tensors` and `sample_weight_mode` must now be supplied as named arguments.
 
-- Major changes to the underlying handeling of custom R6 layer classes.
+- Major changes to the underlying handling of custom R6 layer classes.
   - A new `r_to_py` method is provided for `R6ClassGenerator` objects.
   - R6 custom layers can now inherit directly from python layer classes
     or other R6 custom layer classes
@@ -40,7 +43,7 @@ New Features:
   - Custom layers can now properly handle masks (#1225)
     - `supports_masking = TRUE` attribute is now supported
     - `compute_mask()` user defined method is now supported
-  - `call()` methods now support a `training` argument, as well as any additional arbritary user-defined arguments
+  - `call()` methods now support a `training` argument, as well as any additional arbitrary user-defined arguments
 
 - Refactored `install_keras()` (along with `tensorflow::install_tensorflow()`).
   Installation should be more reliable for more users now.
