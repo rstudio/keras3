@@ -31,12 +31,12 @@ envir::import_from(dplyr, last)
 ```
 ## Keras callbacks overview
 
-All callbacks subclass the `keras.callbacks.Callback` class, and
+All callbacks subclass the `keras$callbacks$Callback` class, and
 override a set of methods called at various stages of training, testing, and
 predicting. Callbacks are useful to get a view on internal states and statistics of
 the model during training.
 
-You can pass a list of callbacks (as the keyword argument `callbacks`) to the following
+You can pass a list of callbacks (as a named argument `callbacks`) to the following
 keras model methods:
 
 - `fit()`
@@ -89,7 +89,7 @@ get_model <- function() {
   model <- keras_model_sequential() %>% 
     layer_dense(1, input_shape = 784) %>% 
     compile(
-      optimizer = keras$optimizers$RMSprop(learning_rate=0.1),
+      optimizer = optimizer_rmsprop(learning_rate=0.1),
       loss = "mean_squared_error",
       metrics = "mean_absolute_error"
     )
@@ -101,15 +101,20 @@ Then, load the MNIST data for training and testing from Keras datasets API:
 ```{r}
 mnist <- dataset_mnist()
 
-# flatten and rescale
-mnist$test $x %<>% array_reshape(c(-1, 784)) %>% `/`(255)
-mnist$train$x %<>% array_reshape(c(-1, 784)) %>% `/`(255)
+flatten_and_rescale <- function(x) {
+  x <- array_reshape(c(-1, 784)) 
+  x <- x / 255
+  x
+}
+
+mnist$train$x <- flatten_and_rescale(mnist$train$x) 
+mnist$test$x  <- flatten_and_rescale(mnist$test$x) 
 
 # limit to 500 samples
-mnist$train$x %<>% .[1:500,]
-mnist$test $x %<>% .[1:500,]
-mnist$train$y %<>% .[1:500]
-mnist$test $y %<>% .[1:500]
+mnist$train$x <- mnist$train$x[1:500,]
+mnist$train$y <- mnist$train$y[1:500]
+mnist$test$x  <- mnist$test$x[1:500,]
+mnist$test$y  <- mnist$test$y[1:500]
 ```
 
 Now, define a simple custom callback that logs:
@@ -209,48 +214,6 @@ res <- model %>%
 ### Usage of `logs` dict
 The `logs` dict contains the loss value, and all the metrics at the end of a batch or
 epoch. Example includes the loss and mean absolute error.
-```python
-
-
-class LossAndErrorPrintingCallback(keras.callbacks.Callback):
-    def on_train_batch_end(self, batch, logs=None):
-        print(
-            "Up to batch {}, the average loss is {:7.2f}.".format(batch, logs["loss"])
-        )
-
-    def on_test_batch_end(self, batch, logs=None):
-        print(
-            "Up to batch {}, the average loss is {:7.2f}.".format(batch, logs["loss"])
-        )
-
-    def on_epoch_end(self, epoch, logs=None):
-        print(
-            "The average loss for epoch {} is {:7.2f} "
-            "and mean absolute error is {:7.2f}.".format(
-                epoch, logs["loss"], logs["mean_absolute_error"]
-            )
-        )
-
-
-model = get_model()
-model.fit(
-    x_train,
-    y_train,
-    batch_size=128,
-    epochs=2,
-    verbose=0,
-    callbacks=[LossAndErrorPrintingCallback()],
-)
-
-res = model.evaluate(
-    x_test,
-    y_test,
-    batch_size=128,
-    verbose=0,
-    callbacks=[LossAndErrorPrintingCallback()],
-)
-
-```
 ```{r}
 LossAndErrorPrintingCallback(keras$callbacks$Callback) %py_class% {
   on_train_batch_end <- function(batch, logs = NULL)
@@ -331,7 +294,7 @@ EarlyStoppingAtMinLoss(keras$callbacks$Callback) %py_class% {
         number of no improvement, training stops.
   "
   
-  initialize <-  function(patience = 0) {
+  initialize <- function(patience = 0) {
     # call keras$callbacks$Callback$__init__(), so it can setup `self`
     super$initialize()
     self$patience <- patience
@@ -339,7 +302,7 @@ EarlyStoppingAtMinLoss(keras$callbacks$Callback) %py_class% {
     self$best_weights <- NULL
   }
   
-  on_train_begin <-  function(logs = NULL) {
+  on_train_begin <- function(logs = NULL) {
     # The number of epoch it has waited when loss is no longer minimum.
     self$wait <- 0
     # The epoch the training stops at.
@@ -366,7 +329,7 @@ EarlyStoppingAtMinLoss(keras$callbacks$Callback) %py_class% {
     }
   }
   
-  on_train_end <-  function(logs = NULL)
+  on_train_end <- function(logs = NULL)
     if (self$stopped_epoch > 0)
       cat(sprintf("Epoch %05d: early stopping\n", self$stopped_epoch + 1))
   
@@ -394,68 +357,6 @@ learning rate of the optimizer during the course of training.
 
 See `keras$callbacks$LearningRateScheduler` for a more general implementations (in RStudio, press F1 while the cursor is over `LearningRateScheduler` and a browser will open to [this page](https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/callbacks/LearningRateScheduler)).
 
-```python
-
-
-class CustomLearningRateScheduler(keras.callbacks.Callback):
-    """Learning rate scheduler which sets the learning rate according to schedule.
-
-  Arguments:
-      schedule: a function that takes an epoch index
-          (integer, indexed from 0) and current learning rate
-          as inputs and returns a new learning rate as output (float).
-  """
-
-    def __init__(self, schedule):
-        super(CustomLearningRateScheduler, self).__init__()
-        self.schedule = schedule
-
-    def on_epoch_begin(self, epoch, logs=None):
-        if not hasattr(self.model.optimizer, "lr"):
-            raise ValueError('Optimizer must have a "lr" attribute.')
-        # Get the current learning rate from model's optimizer.
-        lr = float(tf.keras.backend.get_value(self.model.optimizer.learning_rate))
-        # Call schedule function to get the scheduled learning rate.
-        scheduled_lr = self.schedule(epoch, lr)
-        # Set the value back to the optimizer before this epoch starts
-        tf.keras.backend.set_value(self.model.optimizer.lr, scheduled_lr)
-        print("\nEpoch %05d: Learning rate is %6.4f." % (epoch, scheduled_lr))
-
-
-LR_SCHEDULE = [
-    # (epoch to start, learning rate) tuples
-    (3, 0.05),
-    (6, 0.01),
-    (9, 0.005),
-    (12, 0.001),
-]
-
-
-def lr_schedule(epoch, lr):
-    """Helper function to retrieve the scheduled learning rate based on epoch."""
-    if epoch < LR_SCHEDULE[0][0] or epoch > LR_SCHEDULE[-1][0]:
-        return lr
-    for i in range(len(LR_SCHEDULE)):
-        if epoch == LR_SCHEDULE[i][0]:
-            return LR_SCHEDULE[i][1]
-    return lr
-
-
-model = get_model()
-model.fit(
-    x_train,
-    y_train,
-    batch_size=64,
-    steps_per_epoch=5,
-    epochs=15,
-    verbose=0,
-    callbacks=[
-        LossAndErrorPrintingCallback(),
-        CustomLearningRateScheduler(lr_schedule),
-    ],
-)
-
-```
 ```{r}
 CustomLearningRateScheduler(keras$callbacks$Callback) %py_class% {
   "Learning rate scheduler which sets the learning rate according to schedule.

@@ -5,17 +5,18 @@
 \title{Nesterov Adam optimizer}
 \usage{
 optimizer_nadam(
-  lr = 0.002,
+  learning_rate = 0.002,
   beta_1 = 0.9,
   beta_2 = 0.999,
   epsilon = NULL,
   schedule_decay = 0.004,
   clipnorm = NULL,
-  clipvalue = NULL
+  clipvalue = NULL,
+  ...
 )
 }
 \arguments{
-\item{lr}{float >= 0. Learning rate.}
+\item{learning_rate}{float >= 0. Learning rate.}
 
 \item{beta_1}{The exponential decay rate for the 1st moment estimates. float,
 0 < beta < 1. Generally close to 1.}
@@ -32,6 +33,8 @@ value.}
 
 \item{clipvalue}{Gradients will be clipped when their absolute value exceeds
 this value.}
+
+\item{...}{Unused, present only for backwards compatability}
 }
 \description{
 Much like Adam is essentially RMSprop with momentum, Nadam is Adam RMSprop

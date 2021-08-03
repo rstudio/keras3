@@ -5,16 +5,17 @@
 \title{Adadelta optimizer.}
 \usage{
 optimizer_adadelta(
-  lr = 1,
+  learning_rate = 1,
   rho = 0.95,
   epsilon = NULL,
   decay = 0,
   clipnorm = NULL,
-  clipvalue = NULL
+  clipvalue = NULL,
+  ...
 )
 }
 \arguments{
-\item{lr}{float >= 0. Learning rate.}
+\item{learning_rate}{float >= 0. Learning rate.}
 
 \item{rho}{float >= 0. Decay factor.}
 
@@ -27,6 +28,8 @@ value.}
 
 \item{clipvalue}{Gradients will be clipped when their absolute value exceeds
 this value.}
+
+\item{...}{Unused, present only for backwards compatability}
 }
 \description{
 Adadelta optimizer as described in \href{https://arxiv.org/abs/1212.5701}{ADADELTA: An Adaptive Learning Rate Method}.

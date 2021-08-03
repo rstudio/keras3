@@ -5,15 +5,16 @@
 \title{Adagrad optimizer.}
 \usage{
 optimizer_adagrad(
-  lr = 0.01,
+  learning_rate = 0.01,
   epsilon = NULL,
   decay = 0,
   clipnorm = NULL,
-  clipvalue = NULL
+  clipvalue = NULL,
+  ...
 )
 }
 \arguments{
-\item{lr}{float >= 0. Learning rate.}
+\item{learning_rate}{float >= 0. Learning rate.}
 
 \item{epsilon}{float >= 0. Fuzz factor. If \code{NULL}, defaults to \code{k_epsilon()}.}
 
@@ -24,6 +25,8 @@ value.}
 
 \item{clipvalue}{Gradients will be clipped when their absolute value exceeds
 this value.}
+
+\item{...}{Unused, present only for backwards compatability}
 }
 \description{
 Adagrad optimizer as described in \href{https://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf}{Adaptive Subgradient Methods for Online Learning and Stochastic Optimization}.

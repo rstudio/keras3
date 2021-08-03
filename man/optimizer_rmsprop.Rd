@@ -5,16 +5,17 @@
 \title{RMSProp optimizer}
 \usage{
 optimizer_rmsprop(
-  lr = 0.001,
+  learning_rate = 0.001,
   rho = 0.9,
   epsilon = NULL,
   decay = 0,
   clipnorm = NULL,
-  clipvalue = NULL
+  clipvalue = NULL,
+  ...
 )
 }
 \arguments{
-\item{lr}{float >= 0. Learning rate.}
+\item{learning_rate}{float >= 0. Learning rate.}
 
 \item{rho}{float >= 0. Decay factor.}
 
@@ -27,6 +28,8 @@ value.}
 
 \item{clipvalue}{Gradients will be clipped when their absolute value exceeds
 this value.}
+
+\item{...}{Unused, present only for backwards compatability}
 }
 \description{
 RMSProp optimizer
