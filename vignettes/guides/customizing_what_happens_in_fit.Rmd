@@ -35,7 +35,7 @@ library(keras)
 ## Summary
 
 In this guide you learn how to customize what happens when you call `fit(model)`. This functionality presupposes that you define your own custom model.
-You see how to subclass `keras$Model` and create your own custom keras Model,
+To that end, you see how to subclass `keras$Model`
 with it's own custom `train_step()` method.
 
 
