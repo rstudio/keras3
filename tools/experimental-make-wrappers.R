@@ -6,7 +6,7 @@
 #  - preserve descent auto completion in R,
 #  - supporting python's **kwargs using ...
 
-# Downsides: A little more magical than reticulate::py_function_wrapper(),
+# Downsides: A little more magical than reticulate::py_function_wrapper()
 
 # Upsides: - less massaging of arguments needed to maintain compat across
 # versions. This way, keras package can be built against the latest version of
@@ -21,7 +21,7 @@ options("keras.debug" = TRUE)
 
 inspect <- reticulate::import("inspect")
 substitute_call <- function(x, decorate = NULL,
-                            cl = eval.parent(quote(match.call()))) {
+                            cl = sys.call(-1)) {
   cl[[1]] <- substitute(x)
 
   for (nm in intersect(names(decorate), names(cl))) {
@@ -30,14 +30,20 @@ substitute_call <- function(x, decorate = NULL,
                                 arg = cl[[nm]]))
   }
 
-  if (isTRUE(getOption("keras.debug")))
-    print(cl)
   cl
 }
 
+dummy_wrapper <- function(a, b, ...) {
+  substitute_call(foo)
+}
+
+dummy_wrapper()
+dummy_wrapper(b = 3)
+dummy_wrapper(z = 3)
+
 
 make_r_wrapper <-
-  function(py_obj = keras$optimizers$RMSprop,
+  function(py_obj,
            decorate = NULL,
            envir = parent.frame()) {
     py_obj_expr <- substitute(py_obj)
@@ -67,7 +73,9 @@ make_r_wrapper <-
         args[[name]] <- default
     }
     body <- substitute({
-      eval.parent(substitute_call(py_obj_expr, decorate = decorate))
+      cl <- substitute_call(py_obj_expr, decorate = decorate)
+      if(getOption("keras.debug")) print(cl)
+      eval.parent(cl)
     })
 
     as.function.default(c(args, body), envir)
@@ -106,15 +114,19 @@ optomizer_adam
 # function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #     epsilon = 1e-07, amsgrad = FALSE, name = "Adam", ...)
 # {
-#     eval.parent(substitute_call(keras$optimizers$Adam, decorate = NULL))
+#     cl <- substitute_call(keras$optimizers$Adam, decorate = NULL)
+#     if (getOption("keras.debug"))
+#         print(cl)
+#     eval.parent(cl)
 # }
 
 optomizer_adam()
 # keras$optimizers$Adam()
-# <keras.optimizer_v2.adam.Adam>
+# <tensorflow.python.keras.optimizer_v2.adam.Adam>
 
 optomizer_adam(lr = .1)
 # keras$optimizers$Adam(lr = 0.1)
-# <keras.optimizer_v2.adam.Adam>
-# /home/tomasz/.local/share/r-miniconda/envs/r-reticulate/lib/python3.7/site-packages/keras/optimizer_v2/optimizer_v2.py:356: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
+# <tensorflow.python.keras.optimizer_v2.adam.Adam>
+# /home/tomasz/.local/share/r-miniconda/envs/r-reticulate/lib/python3.7/site-packages/tensorflow/python/keras/optimizer_v2/optimizer_v2.py:375: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
 #   "The `lr` argument is deprecated, use `learning_rate` instead.")
+
