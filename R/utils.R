@@ -400,6 +400,3 @@ is_keras_tensor <- function(x) {
 }
 
 
-# conflict with utils::zip, maybe another name?
-zip <- function(..., simplify = TRUE)
-  .mapply(if(simplify) c else list, list(...), NULL)
