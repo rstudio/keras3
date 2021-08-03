@@ -5,16 +5,17 @@
 \title{Stochastic gradient descent optimizer}
 \usage{
 optimizer_sgd(
-  lr = 0.01,
+  learning_rate = 0.01,
   momentum = 0,
   decay = 0,
   nesterov = FALSE,
   clipnorm = NULL,
-  clipvalue = NULL
+  clipvalue = NULL,
+  ...
 )
 }
 \arguments{
-\item{lr}{float >= 0. Learning rate.}
+\item{learning_rate}{float >= 0. Learning rate.}
 
 \item{momentum}{float >= 0. Parameter that accelerates SGD in the relevant
 direction and dampens oscillations.}
@@ -28,6 +29,8 @@ value.}
 
 \item{clipvalue}{Gradients will be clipped when their absolute value exceeds
 this value.}
+
+\item{...}{Unused, present only for backwards compatability}
 }
 \value{
 Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.

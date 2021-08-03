@@ -5,18 +5,19 @@
 \title{Adam optimizer}
 \usage{
 optimizer_adam(
-  lr = 0.001,
+  learning_rate = 0.001,
   beta_1 = 0.9,
   beta_2 = 0.999,
   epsilon = NULL,
   decay = 0,
   amsgrad = FALSE,
   clipnorm = NULL,
-  clipvalue = NULL
+  clipvalue = NULL,
+  ...
 )
 }
 \arguments{
-\item{lr}{float >= 0. Learning rate.}
+\item{learning_rate}{float >= 0. Learning rate.}
 
 \item{beta_1}{The exponential decay rate for the 1st moment estimates. float,
 0 < beta < 1. Generally close to 1.}
@@ -36,6 +37,8 @@ value.}
 
 \item{clipvalue}{Gradients will be clipped when their absolute value exceeds
 this value.}
+
+\item{...}{Unused, present only for backwards compatability}
 }
 \description{
 Adam optimizer as described in \href{https://arxiv.org/abs/1412.6980v8}{Adam - A Method for Stochastic Optimization}.

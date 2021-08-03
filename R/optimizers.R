@@ -5,7 +5,7 @@
 #' Stochastic gradient descent optimizer with support for momentum, learning
 #' rate decay, and Nesterov momentum.
 #'
-#' @param lr float >= 0. Learning rate.
+#' @param learning_rate float >= 0. Learning rate.
 #' @param momentum float >= 0. Parameter that accelerates SGD in the relevant
 #'   direction and dampens oscillations.
 #' @param decay float >= 0. Learning rate decay over each update.
@@ -14,19 +14,22 @@
 #'   value.
 #' @param clipvalue Gradients will be clipped when their absolute value exceeds
 #'   this value.
+#' @param ... Unused, present only for backwards compatability
 #'
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
 #'
 #' @family optimizers
 #'
 #' @export
-optimizer_sgd <- function(lr = 0.01, momentum = 0.0, decay = 0.0, nesterov = FALSE,
-                          clipnorm = NULL, clipvalue = NULL) {
+optimizer_sgd <- function(learning_rate = 0.01, momentum = 0.0, decay = 0.0, nesterov = FALSE,
+                          clipnorm = NULL, clipvalue = NULL, ...) {
+
+  backcompat_fix_rename_lr_to_learning_rate(...)
 
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
-    lr = lr,
+    learning_rate = learning_rate,
     momentum = momentum,
     decay = decay,
     nesterov = nesterov
@@ -50,12 +53,16 @@ optimizer_sgd <- function(lr = 0.01, momentum = 0.0, decay = 0.0, nesterov = FAL
 #' @family optimizers
 #'
 #' @export
-optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = NULL, decay = 0.0,
-                              clipnorm = NULL, clipvalue = NULL) {
+optimizer_rmsprop <- function(learning_rate = 0.001, rho = 0.9, epsilon = NULL, decay = 0.0,
+                              clipnorm = NULL, clipvalue = NULL, ...) {
+
+  backcompat_fix_rename_lr_to_learning_rate(...)
+
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
+
   args <- list(
-    lr = lr,
+    learning_rate = learning_rate,
     rho = rho,
     epsilon = resolve_epsilon(epsilon),
     decay = decay
@@ -80,12 +87,15 @@ optimizer_rmsprop <- function(lr = 0.001, rho = 0.9, epsilon = NULL, decay = 0.0
 #' @family optimizers
 #'
 #' @export
-optimizer_adagrad <- function(lr = 0.01, epsilon = NULL, decay = 0.0,
-                              clipnorm = NULL, clipvalue = NULL) {
+optimizer_adagrad <- function(learning_rate = 0.01, epsilon = NULL, decay = 0.0,
+                              clipnorm = NULL, clipvalue = NULL, ...) {
+
+  backcompat_fix_rename_lr_to_learning_rate(...)
+
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
-    lr = lr,
+    learning_rate = learning_rate,
     epsilon = resolve_epsilon(epsilon),
     decay = decay
   )
@@ -107,12 +117,15 @@ optimizer_adagrad <- function(lr = 0.01, epsilon = NULL, decay = 0.0,
 #' @family optimizers
 #'
 #' @export
-optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = NULL, decay = 0.0,
-                               clipnorm = NULL, clipvalue = NULL) {
+optimizer_adadelta <- function(learning_rate = 1.0, rho = 0.95, epsilon = NULL, decay = 0.0,
+                               clipnorm = NULL, clipvalue = NULL, ...) {
+
+  backcompat_fix_rename_lr_to_learning_rate(...)
+
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
-    lr = lr,
+    learning_rate = learning_rate,
     rho = rho,
     epsilon = resolve_epsilon(epsilon),
     decay = decay
@@ -144,8 +157,11 @@ optimizer_adadelta <- function(lr = 1.0, rho = 0.95, epsilon = NULL, decay = 0.0
 #' @family optimizers
 #'
 #' @export
-optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, decay = 0.0,
-                           amsgrad = FALSE, clipnorm = NULL, clipvalue = NULL) {
+optimizer_adam <- function(learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, decay = 0.0,
+                           amsgrad = FALSE, clipnorm = NULL, clipvalue = NULL, ...) {
+
+    backcompat_fix_rename_lr_to_learning_rate(...)
+  # TODO: name arg? decay position moved?
 
   # TODO: lr -> learning_rate
 #   tf.keras.optimizers.Adam(
@@ -160,7 +176,7 @@ optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = N
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
-    lr = lr,
+    learning_rate = learning_rate,
     beta_1 = beta_1,
     beta_2 = beta_2,
     epsilon = resolve_epsilon(epsilon),
@@ -185,12 +201,15 @@ optimizer_adam <- function(lr = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = N
 #' @family optimizers
 #'
 #' @export
-optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, decay = 0.0,
-                             clipnorm = NULL, clipvalue = NULL) {
+optimizer_adamax <- function(learning_rate = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, decay = 0.0,
+                             clipnorm = NULL, clipvalue = NULL, ...) {
+
+  backcompat_fix_rename_lr_to_learning_rate(...)
+
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
-    lr = lr,
+    learning_rate = learning_rate,
     beta_1 = beta_1,
     beta_2 = beta_2,
     epsilon = resolve_epsilon(epsilon),
@@ -220,12 +239,15 @@ optimizer_adamax <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon =
 #' @family optimizers
 #'
 #' @export
-optimizer_nadam <- function(lr = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL,
-                            schedule_decay = 0.004, clipnorm = NULL, clipvalue = NULL) {
+optimizer_nadam <- function(learning_rate = 0.002, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL,
+                            schedule_decay = 0.004, clipnorm = NULL, clipvalue = NULL, ...) {
+
+  backcompat_fix_rename_lr_to_learning_rate(...)
+
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
-    lr = lr,
+    learning_rate = learning_rate,
     beta_1 = beta_1,
     beta_2 = beta_2,
     epsilon = resolve_epsilon(epsilon),
@@ -242,4 +264,14 @@ resolve_epsilon <- function(epsilon) {
     k_epsilon()
   else
     epsilon
+}
+
+backcompat_fix_rename_lr_to_learning_rate <- function(..., lr) {
+  if (!missing(lr)) {
+      warning("the `lr` argument has been renamed to `learning_rate`.")
+      if (!eval.parent(quote(missing(learning_rate))))
+        stop("You can't supply both `lr` and `learning_rate`")
+      assign("learning_rate", lr, parent.frame())
+  }
+  ellipsis::check_dots_empty()
 }
