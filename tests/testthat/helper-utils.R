@@ -1,5 +1,16 @@
 Sys.setenv(TF_CPP_MIN_LOG_LEVEL = 1)
 
+
+if (reticulate::py_module_available("tensorflow")) {
+  if (!exists(".DID_EMIT_TF_VERSION", envir = .GlobalEnv)) {
+    message("Testing Against Tensorflow Version: ",
+            tensorflow::tf$version$VERSION)
+    .GlobalEnv$.DID_EMIT_TF_VERSION <- TRUE
+    tensorflow::tf$`function`(function(x) tensorflow::tf$abs(x))(-1) # force tf init verbose messages early
+  }
+} else
+  message("TensorFlow not available for testing")
+
 tf_version <- tensorflow::tf_version
 
 skip_if_no_keras <- function(required_version = NULL) {
@@ -112,3 +123,8 @@ expect_same_pyobj <- function(x, y) {
     get("pyobj", as.environment(.(y)))
   )))
 }
+
+
+repl_python <- reticulate::repl_python
+py_last_error <- reticulate::py_last_error
+tf <- tensorflow::tf
