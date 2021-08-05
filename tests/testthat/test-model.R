@@ -21,6 +21,7 @@ test_succeeds(required_version = "2.0.7", "models can be cloned", {
 # generate dummy training data
 data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)
 labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
+# storage.mode(labels) <- "integer"
 
 # genereate dummy input data
 input <- matrix(rexp(10*784), nrow = 10, ncol = 784)
@@ -32,8 +33,11 @@ test_succeeds("models can be fit, evaluated, and used for predictions", {
   evaluate(model, data, labels)
   predict(model, input)
   predict_on_batch(model, input)
-  predict_proba(model, input)
-  predict_classes(model, input)
+  if(tf_version() < "2.6") {
+    # model.predict_proba and model.predict_classes removed in 2.6
+    expect_warning(predict_proba(model, input), "deprecated")
+    expect_warning(predict_classes(model, input), "deprecated")
+  }
 })
 
 test_succeeds("evaluate function returns a named list", {
