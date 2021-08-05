@@ -80,6 +80,9 @@ test_succeeds("model can be saved and loaded from yaml", {
   if (!keras:::have_pyyaml())
     skip("yaml not available for testing")
 
+  if(tf_version() >= "2.6")
+    skip("model.to_yaml() removed in 2.6")
+
   model <- define_model()
   yaml <- model_to_yaml(model)
   model_from <- model_from_yaml(yaml)
