@@ -48,7 +48,7 @@
 #'  the output will have its feature axis padded to `max_tokens` even if the
 #'  number of unique tokens in the vocabulary is less than max_tokens,
 #'  resulting in a tensor of shape (batch_size, max_tokens) regardless of
-#'  vocabulary size. Defaults to `TRUE`.
+#'  vocabulary size. Defaults to `FALSE` in TF 2.6+, `TRUE` in prior version.
 #' @param vocabulary An optional list of vocabulary terms, or a path to a text
 #'   file containing a vocabulary to load into this layer. The file should
 #'   contain one token per line. If the list or file contains the same token
@@ -56,12 +56,19 @@
 #' @param ... Not used.
 #'
 #' @export
-layer_text_vectorization <- function(object, max_tokens = NULL, standardize = "lower_and_strip_punctuation",
-                                     split = "whitespace", ngrams = NULL,
-                                     output_mode = c("int", "binary", "count", "tf-idf"),
-                                     output_sequence_length = NULL, pad_to_max_tokens = TRUE,
-                                     vocabulary = NULL,
-                                     ...) {
+layer_text_vectorization <-
+
+  function(object,
+           max_tokens = NULL,
+           standardize = "lower_and_strip_punctuation",
+           split = "whitespace",
+           ngrams = NULL,
+           output_mode = c("int", "binary", "count", "tf-idf"),
+           output_sequence_length = NULL,
+           pad_to_max_tokens = tf_version() < "2.6", # changed to FALSE in 2.6
+           vocabulary = NULL,
+           ...) {
+
 
   if (tensorflow::tf_version() < "2.1")
     stop("Text Vectorization requires TensorFlow version >= 2.1", call. = FALSE)
