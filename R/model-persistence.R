@@ -302,6 +302,7 @@ model_from_json <- function(json, custom_objects = NULL) {
 #'
 #' @export
 model_to_yaml <- function(object) {
+  warning("The ability to serialize models to/from yaml was removed in Tensorflow version 2.6 due to security concerns. Please us `model_to_json()` instead.")
 
   if (!have_pyyaml())
     stop("The pyyaml Python package is required to save and load models as YAML")
@@ -312,6 +313,7 @@ model_to_yaml <- function(object) {
 #' @rdname model_to_yaml
 #' @export
 model_from_yaml <- function(yaml, custom_objects = NULL) {
+  warning("The ability to serialize models to/from yaml was removed in Tensorflow version 2.6 due to security concerns. Please us `model_to_json()` instead.")
 
   if (!have_pyyaml())
     stop("The pyyaml Python package is required to save and load models as YAML")

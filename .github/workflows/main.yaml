@@ -42,7 +42,7 @@ jobs:
 
           # these are allowed to fail
           - {os: 'ubuntu-20.04', tf: 'default', r: 'devel'}
-          - {os: 'ubuntu-20.04', tf: '2.6.0rc1', r: 'release'}
+          - {os: 'ubuntu-20.04', tf: '2.6.0rc2', r: 'release'}
           - {os: 'ubuntu-20.04', tf: 'nightly' , r: 'release'}
 
     runs-on: ${{ matrix.os }}
@@ -50,6 +50,7 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: 'true'
       R_COMPILE_AND_INSTALL_PACKAGES: 'never'
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Configure RSPM

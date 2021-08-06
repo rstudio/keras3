@@ -8,15 +8,24 @@ import concurrent.futures
 if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'keras'):
   from keras.engine import Model
 else:
-  try:
-    from tensorflow.python.keras.engine import Model
-  except:
-    from tensorflow.python.keras.engine.training import Model
+  import tensorflow as tf
+  from distutils.version import LooseVersion
+  tf_version = LooseVersion(tf.version.VERSION)
+
+  if tf_version >= "2.6":
+    from tensorflow.keras import Model
+  else:
+    try:
+      from tensorflow.python.keras.engine import Model
+    except:
+      from tensorflow.python.keras.engine.training import Model
+
 
 class RModel(Model):
 
   def __init__(self, name = None):
     super(RModel, self).__init__(name = name)
+    # self._r_call = build(self)
 
   def call(self, inputs, mask = None, **kwargs):
     return self._r_call(inputs, mask, **kwargs)

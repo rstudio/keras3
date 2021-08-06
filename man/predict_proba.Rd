@@ -3,7 +3,7 @@
 \name{predict_proba}
 \alias{predict_proba}
 \alias{predict_classes}
-\title{Generates probability or class probability predictions for the input samples.}
+\title{(Deprecated) Generates probability or class probability predictions for the input samples.}
 \usage{
 predict_proba(object, x, batch_size = NULL, verbose = 0, steps = NULL)
 
@@ -25,9 +25,25 @@ evaluation round finished. The default \code{NULL} is equal to the number of
 samples in your dataset divided by the batch size.}
 }
 \description{
-Generates probability or class probability predictions for the input samples.
+These functions were removed in Tensorflow version 2.6. See details for how to update your code:
 }
 \details{
+How to update your code:
+
+\code{predict_proba()}: use \code{predict()} directly.
+
+\code{predict_classes()}:
+\itemize{
+\item If your model does multi-class classification:
+(e.g. if it uses a \code{softmax} last-layer activation).
+}\if{html}{\out{<div class="r">}}\preformatted{     model \%>\% predict(x) \%>\% k_argmax()
+}\if{html}{\out{</div>}}
+\itemize{
+\item if your model does binary classification
+(e.g. if it uses a \code{sigmoid} last-layer activation).
+}\if{html}{\out{<div class="r">}}\preformatted{     model \%>\% predict(x) \%>\% `>`(0.5) \%>\% k_cast("int32")
+}\if{html}{\out{</div>}}
+
 The input samples are processed batch by batch.
 }
 \seealso{

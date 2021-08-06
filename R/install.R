@@ -42,7 +42,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
 default_version = numeric_version("2.5")
 
 default_extra_packages <- function(tensorflow_version) {
-  pkgs <- c("tensorflow-hub", "scipy", "requests", "pyyaml", "Pillow", "h5py")
+  pkgs <- c("tensorflow-hub", "scipy", "requests", "pyyaml", "Pillow", "h5py", "pandas")
   names(pkgs) <- pkgs
   v <- tensorflow_version
 
@@ -76,14 +76,22 @@ default_extra_packages <- function(tensorflow_version) {
            "~=" = v[[1, l]] <- 9999)
   }
 
-  if (v < "2.5.9999") {
-    pkgs["Pillow"] <- "Pillow<8.3"
-  } else return(pkgs)
+  if (v >= "2.6") {
+    # model.to_yaml/from_yaml removed in 2.6
+    pkgs <- pkgs[names(pkgs) != "pyyaml"]
+    return(pkgs)
+  }
 
-  if (v < "2.2.9999") {
+  if (v >= "2.4") {
+    pkgs["Pillow"] <- "Pillow<8.3"
+    return(pkgs)
+  }
+
+  if (v >= "2.1") {
     pkgs["pyyaml"] <- "pyyaml==3.12"
     pkgs["h5py"] <- "h5py==2.10.0"
-  } else return(pkgs)
+    return(pkgs)
+  }
 
   pkgs
 }

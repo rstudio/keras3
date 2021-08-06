@@ -781,7 +781,25 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
 }
 
 
-#' Generates probability or class probability predictions for the input samples.
+#' (Deprecated) Generates probability or class probability predictions for the input samples.
+#'
+#' These functions were removed in Tensorflow version 2.6. See details for how to update your code:
+#'
+#' @details How to update your code:
+#'
+#' `predict_proba()`: use `predict()` directly.
+#'
+#' `predict_classes()`:
+#'   * If your model does multi-class classification:
+#'     (e.g. if it uses a `softmax` last-layer activation).
+#'  ```r
+#'       model %>% predict(x) %>% k_argmax()
+#'  ```
+#'   * if your model does binary classification
+#'     (e.g. if it uses a `sigmoid` last-layer activation).
+#'  ```r
+#'       model %>% predict(x) %>% `>`(0.5) %>% k_cast("int32")
+#'  ```
 #'
 #' @inheritParams predict.keras.engine.training.Model
 #'
@@ -796,7 +814,8 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
 #'
 #' @export
 predict_proba <- function(object, x, batch_size = NULL, verbose = 0, steps = NULL) {
-
+  warning("`predict_proba()` is deprecated and was removed from tensorflow in version 2.6, ",
+          "please use `predict()` instead")
   args <- list(
     batch_size = as_nullable_integer(batch_size),
     verbose = as.integer(verbose)
@@ -819,6 +838,20 @@ predict_proba <- function(object, x, batch_size = NULL, verbose = 0, steps = NUL
 #' @rdname predict_proba
 #' @export
 predict_classes <- function(object, x, batch_size = NULL, verbose = 0, steps = NULL) {
+  warning(
+'`predict_classes()` is deprecated and and was removed from tensorflow in version 2.6.
+Please update your code:
+  * If your model does multi-class classification:
+    (e.g. if it uses a `softmax` last-layer activation).
+
+      model %>% predict(x) %>% k_argmax()
+
+  * if your model does binary classification
+    (e.g. if it uses a `sigmoid` last-layer activation).
+
+      model %>% predict(x) %>% `>`(0.5) %>% k_cast("int32")
+'
+  )
   args <- list(
     batch_size = as_nullable_integer(batch_size),
     verbose = as.integer(verbose)

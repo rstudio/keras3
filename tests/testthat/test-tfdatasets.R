@@ -65,7 +65,17 @@ test_succeeds("Works with tf$distribute", {
     tfdatasets::dataset_shuffle(buffer_size = 100) %>%
     tfdatasets::dataset_batch(10)
 
+  # no clean way to silence the massively verbose output this test produces
+  # TF_CPP_MIN_LOG_LEVEL is only effective if set before tf is initialized.
+  # https://www.tensorflow.org/tutorials/distribute/multi_worker_with_keras
+  # https://github.com/tensorflow/tensorflow/issues/45157
+
+  # (function() {
+  #   ol <- Sys.getenv("TF_CPP_MIN_LOG_LEVEL")
+  #   Sys.setenv("TF_CPP_MIN_LOG_LEVEL" = "3")
+  #   on.exit(Sys.setenv("TF_CPP_MIN_LOG_LEVEL" = ol))
   model %>%
     fit(dataset, epochs = 10, verbose = 0)
+  # })()
 
 })

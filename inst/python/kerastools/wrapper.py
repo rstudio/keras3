@@ -5,7 +5,14 @@ if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'keras'):
   def shape_filter(shape):
     return shape
 else:
-  from tensorflow.python.keras.layers import Wrapper
+  import tensorflow as tf
+  from distutils.version import LooseVersion
+  tf_version = LooseVersion(tf.version.VERSION)
+
+  if tf_version >= "2.6":
+    from tensorflow.keras.layers import Wrapper
+  else:
+    from tensorflow.python.keras.layers import Wrapper
   def shape_filter(shape):
     if isinstance(shape, tuple):
       return list(shape)

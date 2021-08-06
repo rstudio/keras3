@@ -12,7 +12,7 @@ layer_text_vectorization(
   ngrams = NULL,
   output_mode = c("int", "binary", "count", "tf-idf"),
   output_sequence_length = NULL,
-  pad_to_max_tokens = TRUE,
+  pad_to_max_tokens = tf_version() < "2.6",
   vocabulary = NULL,
   ...
 )
@@ -60,7 +60,7 @@ of how many tokens resulted from the splitting step. Defaults to \code{NULL}.}
 the output will have its feature axis padded to \code{max_tokens} even if the
 number of unique tokens in the vocabulary is less than max_tokens,
 resulting in a tensor of shape (batch_size, max_tokens) regardless of
-vocabulary size. Defaults to \code{TRUE}.}
+vocabulary size. Defaults to \code{FALSE} in TF 2.6+, \code{TRUE} in prior version.}
 
 \item{vocabulary}{An optional list of vocabulary terms, or a path to a text
 file containing a vocabulary to load into this layer. The file should

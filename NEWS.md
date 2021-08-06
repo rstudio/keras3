@@ -3,6 +3,11 @@
 Breaking changes:
 `set_vocabulary()` arguments `df_data` and `oov_df_value` are deprecated. They are superseded by the new argument `idf_weights`.
 
+TF 2.6 changes:
+- `predict_proba` and `predict_classes` were removed.
+- model serialization to/from yaml was removed.
+- default changed: `layer_text_vectorization(pad_to_max_tokens=FALSE)`
+
 New Features:
 - Default Tensorflow/Keras version is now 2.5
 
@@ -14,7 +19,7 @@ New Features:
   - Subclassing python classes: How to use `%py_class%`.
   - Customizing what happens in fit (example of how to define a model, like a GAN, with a custom train step).
   - Writing your own callbacks.
-  
+
 - All optimizer had argument `lr` renamed to `learning_rate`.
   (backwards compatibility is preserved, an R warning is now issued).
 
@@ -50,6 +55,8 @@ New Features:
   If you encounter installation issues, please file an issue: https://github.com/rstudio/keras/issues/new
   - Potentially breaking change: numeric versions supplied without a patchlevel now automatically pull the latest patch release.
     (e.g. `install_keras(tensorflow="2.4")` will install tensorflow version "2.4.2". Previously it would install "2.4.0")
+
+  - pandas is now a default extra packages installed by `install_keras()`
 
 - Refactored automated tests to closer match the default installation procedure
   and compute environment of most user.
