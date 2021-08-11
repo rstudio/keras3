@@ -15,6 +15,7 @@ do
 TMPDIR="/tmp/r-keras-tests/tf-2.$i/"
 mkdir -p $TMPDIR
 rsync -a --delete . $TMPDIR
+export RETICULATE_PYTHON=$(Rscript -e "cat(normalizePath(file.path(reticulate::miniconda_path(), 'envs/tf-2.$i-cpu/bin/python')))")
 gnome-terminal --title="keras test: tf 2.$i" --working-directory=$TMPDIR -- \
-  Rscript -e "{cat('\n\n\n'); reticulate::use_miniconda('tf-2.$i-cpu', required=TRUE); devtools::check()}"
+  Rscript -e "{cat('\n\n\n'); devtools::check(document=FALSE); scan('stdin',  nlines=1)}"
 done
