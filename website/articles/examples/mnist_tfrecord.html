@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9003</span>
       </span>
     </div>
 
@@ -82,7 +82,15 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Using Keras</li>
+<li class="dropdown-header">Guides (New for TF 2.6)</li>
+    <li>
+      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -132,21 +140,6 @@
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Guides (New for TF 2)
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
-    </li>
-    <li>
-      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../../articles/learn.html">Learn</a>
 </li>
@@ -161,12 +154,6 @@
 </li>
 <li>
   <a href="../../news/index.html">News</a>
-</li>
-<li>
-  <a href="https://github.com/rstudio/keras">
-    <span class="fa fa-github"></span>
-     
-  </a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -186,7 +173,7 @@
 
       
 
-      </header><script src="mnist_tfrecord_files/header-attrs-2.9.7/header-attrs.js"></script><div class="row">
+      </header><script src="mnist_tfrecord_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>mnist_tfrecord</h1>
@@ -203,7 +190,7 @@
 <p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/mnist_tfrecord.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/mnist_tfrecord.R</a></p>
 </div>
 <p>MNIST dataset with TFRecords, the standard TensorFlow data format.</p>
-<p>TFRecord is a data format supported throughout TensorFlow. This example demonstrates how to load TFRecord data using Input Tensors. Input Tensors differ from the normal Keras workflow because instead of fitting to data loaded into a a numpy array, data is supplied via a special tensor that reads data from nodes that are wired directly into model graph with the <code>layer_input(tensor=input_tensor)</code> parameter.</p>
+<p>TFRecord is a data format supported throughout TensorFlow. This example demonstrates how to load TFRecord data using Input Tensors. Input Tensors differ from the normal Keras workflow because instead of fitting to data loaded into a a numpy array, data is supplied via a special tensor that reads data from nodes that are wired directly into model graph with the <code><a href="../../reference/layer_input.html">layer_input(tensor=input_tensor)</a></code> parameter.</p>
 <p>There are several advantages to using Input Tensors. First, if a dataset is already in TFRecord format you can load and train on that data directly in Keras. Second, extended backend API capabilities such as TensorFlow data augmentation is easy to integrate directly into your Keras training scripts via input tensors. Third, TensorFlow implements several data APIs for TFRecords, some of which provide significantly faster training performance than numpy arrays can provide because they run via the C++ backend. Please note that this example is tailored for brevity and clarity and not to demonstrate performance or augmentation capabilities.</p>
 <p>Input Tensors also have important disadvantages. In particular, Input Tensors are fixed at model construction because rewiring networks is not yet supported. For this reason, changing the data input source means model weights must be saved and the model rebuilt from scratch to connect the new input data. validation cannot currently be performed as training progresses, and must be performed after training completes. This example demonstrates how to train with input tensors, save the model weights, and then evaluate the model using the standard Keras API.</p>
 <p>Gets to ~99.1% validation accuracy after 5 epochs (there is still a lot of margin for parameter tuning).</p>
@@ -221,15 +208,15 @@
 <span class="co"># Define Model -------------------------------------------------------------------</span>
 
 <span class="va">cnn_layers</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x_train_input</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">x_train_input</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="va">x_train_input</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, 
-                  activation <span class="op">=</span> <span class="st">'relu'</span>, padding <span class="op">=</span> <span class="st">'valid'</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="../../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">512</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
+                  activation <span class="op">=</span> <span class="st">'relu'</span>, padding <span class="op">=</span> <span class="st">'valid'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="../../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">512</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">classes</span>, activation <span class="op">=</span> <span class="st">'softmax'</span>, name <span class="op">=</span> <span class="st">'x_train_out'</span><span class="op">)</span>
 <span class="op">}</span>
 
@@ -295,7 +282,7 @@
 
 <span class="co"># Pass the target tensor `y_train_batch` to `compile`</span>
 <span class="co"># via the `target_tensors` keyword argument:</span>
-<span class="va">train_model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">train_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   optimizer <span class="op">=</span> <span class="fu"><a href="../../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">2e-3</span>, decay <span class="op">=</span> <span class="fl">1e-5</span><span class="op">)</span>,
   loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>,
@@ -308,13 +295,13 @@
 <span class="va">coord</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="fu">Coordinator</span><span class="op">(</span><span class="op">)</span>
 <span class="va">threads</span> <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="fu">start_queue_runners</span><span class="op">(</span><span class="va">sess</span>, <span class="va">coord</span><span class="op">)</span>
 
-<span class="va">train_model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">train_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   epochs <span class="op">=</span> <span class="va">epochs</span>,
   steps_per_epoch <span class="op">=</span> <span class="va">steps_per_epoch</span>
 <span class="op">)</span>
 
 <span class="co"># Save the model weights.</span>
-<span class="va">train_model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/save_model_weights_hdf5.html">save_model_weights_hdf5</a></span><span class="op">(</span><span class="st">'saved_wt.h5'</span><span class="op">)</span>
+<span class="va">train_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/save_model_weights_hdf5.html">save_model_weights_hdf5</a></span><span class="op">(</span><span class="st">'saved_wt.h5'</span><span class="op">)</span>
 
 <span class="co"># Clean up the TF session.</span>
 <span class="va">coord</span><span class="op">$</span><span class="fu">request_stop</span><span class="op">(</span><span class="op">)</span>
@@ -328,15 +315,15 @@
 <span class="va">x_test_inp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
 <span class="va">test_out</span> <span class="op">&lt;-</span> <span class="fu">cnn_layers</span><span class="op">(</span><span class="va">x_test_inp</span><span class="op">)</span>
 <span class="va">test_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">x_test_inp</span>, outputs <span class="op">=</span> <span class="va">test_out</span><span class="op">)</span>
-<span class="va">test_model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/save_model_weights_hdf5.html">load_model_weights_hdf5</a></span><span class="op">(</span><span class="st">'saved_wt.h5'</span><span class="op">)</span>
-<span class="va">test_model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">test_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/save_model_weights_hdf5.html">load_model_weights_hdf5</a></span><span class="op">(</span><span class="st">'saved_wt.h5'</span><span class="op">)</span>
+<span class="va">test_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>, 
   loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>, 
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">test_model</span><span class="op">)</span>
 
-<span class="va">result</span> <span class="op">&lt;-</span> <span class="va">test_model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="fu"><a href="../../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span><span class="va">y_test</span>, <span class="va">classes</span><span class="op">)</span><span class="op">)</span>
+<span class="va">result</span> <span class="op">&lt;-</span> <span class="va">test_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="fu"><a href="../../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span><span class="va">y_test</span>, <span class="va">classes</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">'\nTest accuracy: %f'</span>, <span class="va">result</span><span class="op">$</span><span class="va">acc</span><span class="op">)</span><span class="op">)</span></code></pre></div>
   </div>
 

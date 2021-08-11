@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9003</span>
       </span>
     </div>
 
@@ -82,7 +82,15 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Using Keras</li>
+<li class="dropdown-header">Guides (New for TF 2.6)</li>
+    <li>
+      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -132,21 +140,6 @@
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Guides (New for TF 2)
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/python_subclasses.html">Python Subclasses</a>
-    </li>
-    <li>
-      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../articles/learn.html">Learn</a>
 </li>
@@ -161,12 +154,6 @@
 </li>
 <li>
   <a href="../news/index.html">News</a>
-</li>
-<li>
-  <a href="https://github.com/rstudio/keras">
-    <span class="fa fa-github"></span>
-     
-  </a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -186,7 +173,7 @@
 
       
 
-      </header><script src="functional_api_files/header-attrs-2.9.7/header-attrs.js"></script><div class="row">
+      </header><script src="functional_api_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Guide to the Functional API</h1>
@@ -214,14 +201,14 @@
 <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span>
  
 <span class="co"># outputs compose input + dense layers</span>
-<span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span>
 
 <span class="co"># create and compile model</span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">inputs</span>, outputs <span class="op">=</span> <span class="va">predictions</span><span class="op">)</span>
-<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,
   loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
@@ -235,7 +222,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># This works, and returns the 10-way softmax we defined above.</span>
-<span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">model</span></code></pre></div>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">%&gt;%</span> <span class="va">model</span></code></pre></div>
 <p>This can allow, for instance, to quickly create models that can process sequences of inputs. You could turn an image classification model into a video classification model, in just one line:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Input tensor for sequences of 20 timesteps,</span>
@@ -243,7 +230,7 @@
 <span class="va">input_sequences</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># This applies our previous model to the input sequence</span>
-<span class="va">processed_sequences</span> <span class="op">&lt;-</span> <span class="va">input_sequences</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">processed_sequences</span> <span class="op">&lt;-</span> <span class="va">input_sequences</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/time_distributed.html">time_distributed</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="multi-input-and-multi-output-models" class="section level2">
@@ -262,21 +249,21 @@
 
 <span class="va">main_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, dtype <span class="op">=</span> <span class="st">'int32'</span>, name <span class="op">=</span> <span class="st">'main_input'</span><span class="op">)</span>
 
-<span class="va">lstm_out</span> <span class="op">&lt;-</span> <span class="va">main_input</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">10000</span>, output_dim <span class="op">=</span> <span class="fl">512</span>, input_length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">lstm_out</span> <span class="op">&lt;-</span> <span class="va">main_input</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">10000</span>, output_dim <span class="op">=</span> <span class="fl">512</span>, input_length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></code></pre></div>
 <p>Here we insert the auxiliary loss, allowing the LSTM and Embedding layer to be trained smoothly even though the main loss will be much higher in the model:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">auxiliary_output</span> <span class="op">&lt;-</span> <span class="va">lstm_out</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">auxiliary_output</span> <span class="op">&lt;-</span> <span class="va">lstm_out</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span>, activation <span class="op">=</span> <span class="st">'sigmoid'</span>, name <span class="op">=</span> <span class="st">'aux_output'</span><span class="op">)</span></code></pre></div>
 <p>At this point, we feed into the model our auxiliary input data by concatenating it with the LSTM output, stacking a deep densely-connected network on top and adding the main logistic regression layer</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">auxiliary_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">'aux_input'</span><span class="op">)</span>
 
-<span class="va">main_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">lstm_out</span>, <span class="va">auxiliary_input</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>  
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">main_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">lstm_out</span>, <span class="va">auxiliary_input</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>  
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span>, activation <span class="op">=</span> <span class="st">'sigmoid'</span>, name <span class="op">=</span> <span class="st">'main_output'</span><span class="op">)</span></code></pre></div>
 <p>This defines a model with two inputs and two outputs:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -316,14 +303,14 @@ Non-trainable params: 0
 __________________________________________________________________________________________</code></pre>
 <p>We compile the model and assign a weight of 0.2 to the auxiliary loss. To specify different <code>loss_weights</code> or <code>loss</code> for each different output, you can use a list or a dictionary. Here we pass a single loss as the <code>loss</code> argument, so the same loss will be used on all outputs.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,
   loss <span class="op">=</span> <span class="st">'binary_crossentropy'</span>,
   loss_weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.0</span>, <span class="fl">0.2</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 <p>We can train the model by passing it lists of input arrays and target arrays:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">headline_data</span>, <span class="va">additional_data</span><span class="op">)</span>,
   y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">labels</span>, <span class="va">labels</span><span class="op">)</span>,
   epochs <span class="op">=</span> <span class="fl">50</span>,
@@ -331,14 +318,14 @@ ________________________________________________________________________________
 <span class="op">)</span></code></pre></div>
 <p>Since our inputs and outputs are named (we passed them a “name” argument), We could also have compiled the model via:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,
   loss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>main_output <span class="op">=</span> <span class="st">'binary_crossentropy'</span>, aux_output <span class="op">=</span> <span class="st">'binary_crossentropy'</span><span class="op">)</span>,
   loss_weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>main_output <span class="op">=</span> <span class="fl">1.0</span>, aux_output <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co"># And trained it via:</span>
-<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>main_input <span class="op">=</span> <span class="va">headline_data</span>, aux_input <span class="op">=</span> <span class="va">additional_data</span><span class="op">)</span>,
   y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>main_output <span class="op">=</span> <span class="va">labels</span>, aux_output <span class="op">=</span> <span class="va">labels</span><span class="op">)</span>,
   epochs <span class="op">=</span> <span class="fl">50</span>,
@@ -365,23 +352,23 @@ ________________________________________________________________________________
 
 <span class="co"># When we reuse the same layer instance multiple times, the weights of the layer are also</span>
 <span class="co"># being reused (it is effectively *the same* layer)</span>
-<span class="va">encoded_a</span> <span class="op">&lt;-</span> <span class="va">tweet_a</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">shared_lstm</span>
-<span class="va">encoded_b</span> <span class="op">&lt;-</span> <span class="va">tweet_b</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">shared_lstm</span>
+<span class="va">encoded_a</span> <span class="op">&lt;-</span> <span class="va">tweet_a</span> <span class="op">%&gt;%</span> <span class="va">shared_lstm</span>
+<span class="va">encoded_b</span> <span class="op">&lt;-</span> <span class="va">tweet_b</span> <span class="op">%&gt;%</span> <span class="va">shared_lstm</span>
 
 <span class="co"># We can then concatenate the two vectors and add a logistic regression on top</span>
-<span class="va">predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">encoded_a</span>, <span class="va">encoded_b</span><span class="op">)</span>, axis<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">encoded_a</span>, <span class="va">encoded_b</span><span class="op">)</span>, axis<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span>, activation <span class="op">=</span> <span class="st">'sigmoid'</span><span class="op">)</span>
 
 <span class="co"># We define a trainable model linking the tweet inputs to the predictions</span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">tweet_a</span>, <span class="va">tweet_b</span><span class="op">)</span>, outputs <span class="op">=</span> <span class="va">predictions</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,
   loss <span class="op">=</span> <span class="st">'binary_crossentropy'</span>,
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">data_a</span>, <span class="va">data_b</span><span class="op">)</span>, <span class="va">labels</span>, epochs <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">data_a</span>, <span class="va">data_b</span><span class="op">)</span>, <span class="va">labels</span>, epochs <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="the-concept-of-layer-node" class="section level2">
 <h2 class="hasAnchor">
@@ -394,7 +381,7 @@ ________________________________________________________________________________
 
 <span class="va">lstm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
 
-<span class="va">encoded_a</span> <span class="op">&lt;-</span> <span class="va">a</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">lstm</span>
+<span class="va">encoded_a</span> <span class="op">&lt;-</span> <span class="va">a</span> <span class="op">%&gt;%</span> <span class="va">lstm</span>
 
 <span class="va">lstm</span><span class="op">$</span><span class="va">output</span></code></pre></div>
 <p>Not so if the layer has multiple inputs:</p>
@@ -404,8 +391,8 @@ ________________________________________________________________________________
 
 <span class="va">lstm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
 
-<span class="va">encoded_a</span> <span class="op">&lt;-</span> <span class="va">a</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">lstm</span>
-<span class="va">encoded_b</span> <span class="op">&lt;-</span> <span class="va">b</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">lstm</span>
+<span class="va">encoded_a</span> <span class="op">&lt;-</span> <span class="va">a</span> <span class="op">%&gt;%</span> <span class="va">lstm</span>
+<span class="va">encoded_b</span> <span class="op">&lt;-</span> <span class="va">b</span> <span class="op">%&gt;%</span> <span class="va">lstm</span>
 
 <span class="va">lstm</span><span class="op">$</span><span class="va">output</span></code></pre></div>
 <pre><code>AttributeError: Layer lstm_4 has multiple inbound nodes, hence the notion of "layer output" is ill-defined. Use `get_output_at(node_index)` instead.</code></pre>
@@ -421,12 +408,12 @@ ________________________________________________________________________________
 
 <span class="va">conv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">16</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">'same'</span><span class="op">)</span>
 
-<span class="va">conved_a</span> <span class="op">&lt;-</span> <span class="va">a</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">conv</span>
+<span class="va">conved_a</span> <span class="op">&lt;-</span> <span class="va">a</span> <span class="op">%&gt;%</span> <span class="va">conv</span>
 
 <span class="co"># only one input so far, the following will work</span>
 <span class="va">conv</span><span class="op">$</span><span class="va">input_shape</span>
 
-<span class="va">conved_b</span> <span class="op">&lt;-</span> <span class="va">b</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">conv</span>
+<span class="va">conved_b</span> <span class="op">&lt;-</span> <span class="va">b</span> <span class="op">%&gt;%</span> <span class="va">conv</span>
 <span class="co"># now the `$input_shape` property wouldn't work, but this does:</span>
 <span class="fu"><a href="../reference/get_input_at.html">get_input_shape_at</a></span><span class="op">(</span><span class="va">conv</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="../reference/get_input_at.html">get_input_shape_at</a></span><span class="op">(</span><span class="va">conv</span>, <span class="fl">2</span><span class="op">)</span> </code></pre></div>
@@ -444,16 +431,16 @@ ________________________________________________________________________________
 
 <span class="va">input_img</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">256</span>, <span class="fl">256</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">tower_1</span> <span class="op">&lt;-</span> <span class="va">input_img</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">tower_1</span> <span class="op">&lt;-</span> <span class="va">input_img</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span><span class="op">)</span>
 
-<span class="va">tower_2</span> <span class="op">&lt;-</span> <span class="va">input_img</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">tower_2</span> <span class="op">&lt;-</span> <span class="va">input_img</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span><span class="op">)</span>
 
-<span class="va">tower_3</span> <span class="op">&lt;-</span> <span class="va">input_img</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, strides <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">'same'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">tower_3</span> <span class="op">&lt;-</span> <span class="va">input_img</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, strides <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">'same'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span><span class="op">)</span>
 
 <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">tower_1</span>, <span class="va">tower_2</span>, <span class="va">tower_3</span><span class="op">)</span>, axis <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
@@ -466,7 +453,7 @@ ________________________________________________________________________________
 <code class="sourceCode R"><span class="co"># input tensor for a 3-channel 256x256 image</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">256</span>, <span class="fl">256</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># 3x3 conv with 3 output channels (same as input channels)</span>
-<span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">3</span>, kernel_size <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">'same'</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">3</span>, kernel_size <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">'same'</span><span class="op">)</span>
 <span class="co"># this returns x + y.</span>
 <span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_add.html">layer_add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
@@ -477,10 +464,10 @@ ________________________________________________________________________________
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># First, define the vision model</span>
 <span class="va">digit_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">27</span>, <span class="fl">27</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="va">out</span> <span class="op">&lt;-</span> <span class="va">digit_input</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">out</span> <span class="op">&lt;-</span> <span class="va">digit_input</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="va">vision_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">digit_input</span>, <span class="va">out</span><span class="op">)</span>
@@ -490,10 +477,10 @@ ________________________________________________________________________________
 <span class="va">digit_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">27</span>, <span class="fl">27</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># The vision model will be shared, weights and all</span>
-<span class="va">out_a</span> <span class="op">&lt;-</span> <span class="va">digit_a</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">vision_model</span>
-<span class="va">out_b</span> <span class="op">&lt;-</span> <span class="va">digit_b</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">vision_model</span>
+<span class="va">out_a</span> <span class="op">&lt;-</span> <span class="va">digit_a</span> <span class="op">%&gt;%</span> <span class="va">vision_model</span>
+<span class="va">out_b</span> <span class="op">&lt;-</span> <span class="va">digit_b</span> <span class="op">%&gt;%</span> <span class="va">vision_model</span>
 
-<span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">out_a</span>, <span class="va">out_b</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">out_a</span>, <span class="va">out_b</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span>, activation <span class="op">=</span> <span class="st">'sigmoid'</span><span class="op">)</span>
 
 <span class="va">classification_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">digit_a</span>, <span class="va">digit_b</span><span class="op">)</span>, <span class="va">out</span><span class="op">)</span></code></pre></div>
@@ -507,35 +494,35 @@ ________________________________________________________________________________
 <code class="sourceCode R"><span class="co"># First, let's define a vision model using a Sequential model.</span>
 <span class="co"># This model will encode an image into a vector.</span>
 <span class="va">vision_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> 
-<span class="va">vision_model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">vision_model</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, padding <span class="op">=</span> <span class="st">'same'</span>,
-                input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">224</span>, <span class="fl">224</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">128</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, padding <span class="op">=</span> <span class="st">'same'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">128</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">256</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, padding <span class="op">=</span> <span class="st">'same'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">256</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">256</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+                input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">224</span>, <span class="fl">224</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">128</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, padding <span class="op">=</span> <span class="st">'same'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">128</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">256</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, padding <span class="op">=</span> <span class="st">'same'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">256</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">256</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># Now let's get a tensor with the output of our vision model:</span>
 <span class="va">image_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">224</span>, <span class="fl">224</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="va">encoded_image</span> <span class="op">&lt;-</span> <span class="va">image_input</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">vision_model</span>
+<span class="va">encoded_image</span> <span class="op">&lt;-</span> <span class="va">image_input</span> <span class="op">%&gt;%</span> <span class="va">vision_model</span>
 
 <span class="co"># Next, let's define a language model to encode the question into a vector.</span>
 <span class="co"># Each question will be at most 100 word long,</span>
 <span class="co"># and we will index words as integers from 1 to 9999.</span>
 <span class="va">question_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, dtype <span class="op">=</span> <span class="st">'int32'</span><span class="op">)</span>
-<span class="va">encoded_question</span> <span class="op">&lt;-</span> <span class="va">question_input</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">10000</span>, output_dim <span class="op">=</span> <span class="fl">256</span>, input_length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">encoded_question</span> <span class="op">&lt;-</span> <span class="va">question_input</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">10000</span>, output_dim <span class="op">=</span> <span class="fl">256</span>, input_length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span><span class="op">)</span>
 
 <span class="co"># Let's concatenate the question vector and the image vector then</span>
 <span class="co"># train a logistic regression over 1000 words on top</span>
-<span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">encoded_question</span>, <span class="va">encoded_image</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">encoded_question</span>, <span class="va">encoded_image</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1000</span>, activation<span class="op">=</span><span class="st">'softmax'</span><span class="op">)</span>
 
 <span class="co"># This is our final model:</span>
@@ -549,8 +536,8 @@ ________________________________________________________________________________
 <code class="sourceCode R"><span class="va">video_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">224</span>, <span class="fl">224</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># This is our video encoded via the previously trained vision_model (weights are reused)</span>
-<span class="va">encoded_video</span> <span class="op">&lt;-</span> <span class="va">video_input</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/time_distributed.html">time_distributed</a></span><span class="op">(</span><span class="va">vision_model</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">encoded_video</span> <span class="op">&lt;-</span> <span class="va">video_input</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/time_distributed.html">time_distributed</a></span><span class="op">(</span><span class="va">vision_model</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span><span class="op">)</span>
 
 <span class="co"># This is a model-level representation of the question encoder, reusing the same weights as before:</span>
@@ -558,10 +545,10 @@ ________________________________________________________________________________
 
 <span class="co"># Let's use it to encode the question:</span>
 <span class="va">video_question_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, dtype <span class="op">=</span> <span class="st">'int32'</span><span class="op">)</span>
-<span class="va">encoded_video_question</span> <span class="op">&lt;-</span> <span class="va">video_question_input</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">question_encoder</span>
+<span class="va">encoded_video_question</span> <span class="op">&lt;-</span> <span class="va">video_question_input</span> <span class="op">%&gt;%</span> <span class="va">question_encoder</span>
 
 <span class="co"># And this is our video question answering model:</span>
-<span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">encoded_video</span>, <span class="va">encoded_video_question</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">encoded_video</span>, <span class="va">encoded_video_question</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1000</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span>
 
 <span class="va">video_qa_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">video_input</span>, <span class="va">video_question_input</span><span class="op">)</span>, outputs <span class="op">=</span> <span class="va">output</span><span class="op">)</span></code></pre></div>

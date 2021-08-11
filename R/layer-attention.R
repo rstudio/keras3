@@ -130,3 +130,9 @@ layer_multi_head_attention <- function(
     ...
   ))
 }
+
+# TODO: finish + document: https://www.tensorflow.org/api_docs/python/tf/keras/layers/AdditiveAttention
+layer_additive_attention <- function(object, use_scale=TRUE, ...) {
+  args <- capture_args(match.call())
+  create_layer(keras$layers$AdditiveAttention, object, args)
+}

@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9003</span>
       </span>
     </div>
 
@@ -82,7 +82,15 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Using Keras</li>
+<li class="dropdown-header">Guides (New for TF 2.6)</li>
+    <li>
+      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -132,21 +140,6 @@
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Guides (New for TF 2)
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/python_subclasses.html">Python Subclasses</a>
-    </li>
-    <li>
-      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../articles/learn.html">Learn</a>
 </li>
@@ -161,12 +154,6 @@
 </li>
 <li>
   <a href="../news/index.html">News</a>
-</li>
-<li>
-  <a href="https://github.com/rstudio/keras">
-    <span class="fa fa-github"></span>
-     
-  </a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -186,7 +173,7 @@
 
       
 
-      </header><script src="python_subclasses_files/header-attrs-2.9.7/header-attrs.js"></script><div class="row">
+      </header><script src="python_subclasses_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Python Subclasses</h1>
@@ -260,7 +247,7 @@
 </li>
 <li><p>When subclassing Keras base classes, it is generally your responsibility to call <code>super$initialize()</code> if you are masking a superclass initializer by providing your own <code>initialize</code> method.</p></li>
 <li><p>Passing <code>convert=FALSE</code> to <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">r_to_py()</a></code> will mean that all R methods will receive Python objects as arguments, and are expected to return Python objects. This allows for some features not available with <code>convert=TRUE</code>, namely, modifying some Python objects, like dictionaries or lists, in-place.</p></li>
-<li><p>Active bindings (methods supplied to <code>R6Class(active=...)</code>) are converted to Python <code>@property</code>-decorated methods.</p></li>
+<li><p>Active bindings (methods supplied to <code><a href="https://r6.r-lib.org/reference/R6Class.html">R6Class(active=...)</a></code>) are converted to Python <code>@property</code>-decorated methods.</p></li>
 <li><p>R6 classes with private methods or attributes are not supported.</p></li>
 <li>
 <p>The argument supplied to <code>inherit</code> can be:</p>
@@ -278,9 +265,9 @@
 <div id="a-custom-constraint-py_class" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-custom-constraint-py_class" class="anchor"></a>A custom constraint (<code>%py_class%</code>)</h3>
-<p>As an alternative to <code>r_to_py(R6Class(...))</code>, we also provide <code>%py_class%</code>, a more concise alternative syntax for achieving the same outcome. <code>%py_class%</code> is heavily inspired by the Python syntax for the <code>class</code> statement in R, and is especially convenient when translating Python code to R. Translating the above example, you could write the same using <code>%py_class%</code>:</p>
+<p>As an alternative to <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">r_to_py(R6Class(...))</a></code>, we also provide <code><a href="../reference/%py_class%.html">%py_class%</a></code>, a more concise alternative syntax for achieving the same outcome. <code><a href="../reference/%py_class%.html">%py_class%</a></code> is heavily inspired by the Python syntax for the <code>class</code> statement in R, and is especially convenient when translating Python code to R. Translating the above example, you could write the same using <code><a href="../reference/%py_class%.html">%py_class%</a></code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">NonNegative</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">constraints</span><span class="op">$</span><span class="va">Constraint</span><span class="op">)</span> <span class="op"><a href="../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
+<code class="sourceCode R"><span class="fu">NonNegative</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">constraints</span><span class="op">$</span><span class="va">Constraint</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span>
   <span class="st">"__call__"</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">w</span> <span class="op">*</span> <span class="fu"><a href="../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">w</span> <span class="op">&gt;=</span> <span class="fl">0</span>, <span class="fu"><a href="../reference/k_floatx.html">k_floatx</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span>
@@ -289,7 +276,7 @@
 <div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NonNegative(tf.keras.constraints.Constraint):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, w):</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> w <span class="op">*</span> tf.cast(tf.math.greater_equal(w, <span class="fl">0.</span>), w.dtype)</span></code></pre></div>
-<p>Some (potentially surprising) notes about <code>%py_class%</code>:</p>
+<p>Some (potentially surprising) notes about <code><a href="../reference/%py_class%.html">%py_class%</a></code>:</p>
 <ul>
 <li><p>Just like the Python <code>class</code> statement, it assigns the constructed class in the current scope! (There is no need to write <code>NonNegative &lt;- ...</code>).</p></li>
 <li>
@@ -305,8 +292,11 @@
 <li><p>One keyword treated specially is <code>convert</code>. If you want to call <code>r_to_py</code> with <code>convert=FALSE</code>, pass it as a keyword:</p></li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">NonNegative</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">constraints</span><span class="op">$</span><span class="va">Constraint</span>, convert<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span> <span class="va">...</span> <span class="op">}</span></code></pre></div>
-<p>In all other regards, <code>%py_class%</code> is equivalent to <code>r_to_py(R6Class())</code> (indeed, under the hood, they do the same thing).</p>
+<code class="sourceCode R"><span class="fu">NonNegative</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">constraints</span><span class="op">$</span><span class="va">Constraint</span>, convert<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span> <span class="va">...</span> <span class="op">}</span></code></pre></div>
+<ul>
+<li>An additional convenience is that if the first expression of a function body or the class body is a literal character string, it is automatically taken as the <code>__doc__</code> attribute of the class or method. The doc string will then be visible to both python and R tools e.g. <code><a href="https://rdrr.io/pkg/reticulate/man/py_help.html">reticulate::py_help()</a></code>. See <code><a href="../reference/%py_class%.html">?py_class</a></code> for an example.</li>
+</ul>
+<p>In all other regards, <code><a href="../reference/%py_class%.html">%py_class%</a></code> is equivalent to <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">r_to_py(R6Class())</a></code> (indeed, under the hood, they do the same thing).</p>
 </div>
 <div id="a-custom-layer-r6" class="section level3">
 <h3 class="hasAnchor">
@@ -345,9 +335,9 @@
 <div id="a-custom-layer-py_class" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-custom-layer-py_class" class="anchor"></a>A custom layer (<code>%py_class%</code>)</h3>
-<p>or using <code>%py_class%</code>:</p>
+<p>or using <code><a href="../reference/%py_class%.html">%py_class%</a></code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">CustomLayer</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span><span class="op">)</span> <span class="op"><a href="../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
+<code class="sourceCode R"><span class="fu">CustomLayer</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span>
 
   <span class="va">initialize</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">output_dim</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span> <span class="op">&lt;-</span> <span class="va">output_dim</span>

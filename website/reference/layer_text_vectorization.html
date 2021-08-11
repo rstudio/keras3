@@ -86,7 +86,7 @@ the sample's tokens)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9003</span>
       </span>
     </div>
 
@@ -129,6 +129,14 @@ the sample's tokens)." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Guides (New for TF 2.6)</li>
+    <li>
+      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+    <li class="divider"></li>
     <li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
@@ -179,21 +187,6 @@ the sample's tokens)." />
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Guides (New for TF 2)
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/python_subclasses.html">Python Subclasses</a>
-    </li>
-    <li>
-      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../articles/learn.html">Learn</a>
 </li>
@@ -208,12 +201,6 @@ the sample's tokens)." />
 </li>
 <li>
   <a href="../news/index.html">News</a>
-</li>
-<li>
-  <a href="https://github.com/rstudio/keras">
-    <span class="fa fa-github"></span>
-     
-  </a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -257,7 +244,7 @@ the sample's tokens).</p>
   ngrams <span class='op'>=</span> <span class='cn'>NULL</span>,
   output_mode <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"int"</span>, <span class='st'>"binary"</span>, <span class='st'>"count"</span>, <span class='st'>"tf-idf"</span><span class='op'>)</span>,
   output_sequence_length <span class='op'>=</span> <span class='cn'>NULL</span>,
-  pad_to_max_tokens <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  pad_to_max_tokens <span class='op'>=</span> <span class='fu'>tf_version</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>&lt;</span> <span class='st'>"2.6"</span>,
   vocabulary <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
@@ -322,7 +309,7 @@ of how many tokens resulted from the splitting step. Defaults to <code>NULL</cod
 the output will have its feature axis padded to <code>max_tokens</code> even if the
 number of unique tokens in the vocabulary is less than max_tokens,
 resulting in a tensor of shape (batch_size, max_tokens) regardless of
-vocabulary size. Defaults to <code>TRUE</code>.</p></td>
+vocabulary size. Defaults to <code>FALSE</code> in TF 2.6+, <code>TRUE</code> in prior version.</p></td>
     </tr>
     <tr>
       <th>vocabulary</th>

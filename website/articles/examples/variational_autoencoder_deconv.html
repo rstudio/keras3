@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9003</span>
       </span>
     </div>
 
@@ -82,7 +82,15 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Using Keras</li>
+<li class="dropdown-header">Guides (New for TF 2.6)</li>
+    <li>
+      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -132,21 +140,6 @@
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Guides (New for TF 2)
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
-    </li>
-    <li>
-      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../../articles/learn.html">Learn</a>
 </li>
@@ -161,12 +154,6 @@
 </li>
 <li>
   <a href="../../news/index.html">News</a>
-</li>
-<li>
-  <a href="https://github.com/rstudio/keras">
-    <span class="fa fa-github"></span>
-     
-  </a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -186,7 +173,7 @@
 
       
 
-      </header><script src="variational_autoencoder_deconv_files/header-attrs-2.9.7/header-attrs.js"></script><div class="row">
+      </header><script src="variational_autoencoder_deconv_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>variational_autoencoder_deconv</h1>
@@ -298,7 +285,7 @@
   <span class="va">z_mean</span> <span class="op">+</span> <span class="fu"><a href="../../reference/k_exp.html">k_exp</a></span><span class="op">(</span><span class="va">z_log_var</span><span class="op">)</span> <span class="op">*</span> <span class="va">epsilon</span>
 <span class="op">}</span>
 
-<span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">z_mean</span>, <span class="va">z_log_var</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_lambda.html">layer_lambda</a></span><span class="op">(</span><span class="va">sampling</span><span class="op">)</span>
+<span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">z_mean</span>, <span class="va">z_log_var</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/layer_lambda.html">layer_lambda</a></span><span class="op">(</span><span class="va">sampling</span><span class="op">)</span>
 
 <span class="va">output_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="fl">14L</span>, <span class="fl">14L</span>, <span class="va">filters</span><span class="op">)</span>
 
@@ -351,7 +338,7 @@
   <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_flatten.html">k_flatten</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
   <span class="va">x_decoded_mean_squash</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_flatten.html">k_flatten</a></span><span class="op">(</span><span class="va">x_decoded_mean_squash</span><span class="op">)</span>
   <span class="va">xent_loss</span> <span class="op">&lt;-</span> <span class="fl">1.0</span> <span class="op">*</span> <span class="va">img_rows</span> <span class="op">*</span> <span class="va">img_cols</span> <span class="op">*</span>
-    <span class="fu"><a href="../../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">x_decoded_mean_squash</span><span class="op">)</span>
+    <span class="fu"><a href="../../reference/loss-functions.html">loss_binary_crossentropy</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">x_decoded_mean_squash</span><span class="op">)</span>
   <span class="va">kl_loss</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> <span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">z_log_var</span> <span class="op">-</span> <span class="fu"><a href="../../reference/k_square.html">k_square</a></span><span class="op">(</span><span class="va">z_mean</span><span class="op">)</span> <span class="op">-</span>
                            <span class="fu"><a href="../../reference/k_exp.html">k_exp</a></span><span class="op">(</span><span class="va">z_log_var</span><span class="op">)</span>, axis <span class="op">=</span> <span class="op">-</span><span class="fl">1L</span><span class="op">)</span>
   <span class="fu"><a href="../../reference/k_mean.html">k_mean</a></span><span class="op">(</span><span class="va">xent_loss</span> <span class="op">+</span> <span class="va">kl_loss</span><span class="op">)</span>
@@ -359,7 +346,7 @@
 
 <span class="co">## variational autoencoder</span>
 <span class="va">vae</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">x_decoded_mean_squash</span><span class="op">)</span>
-<span class="va">vae</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">"rmsprop"</span>, loss <span class="op">=</span> <span class="va">vae_loss</span><span class="op">)</span>
+<span class="va">vae</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">"rmsprop"</span>, loss <span class="op">=</span> <span class="va">vae_loss</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">vae</span><span class="op">)</span>
 
 <span class="co">## encoder: model to project inputs on the latent space</span>
@@ -389,7 +376,7 @@
 
 <span class="co">#### Model Fitting ####</span>
 
-<span class="va">vae</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">vae</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">x_train</span>, <span class="va">x_train</span>, 
   shuffle <span class="op">=</span> <span class="cn">TRUE</span>, 
   epochs <span class="op">=</span> <span class="va">epochs</span>, 
@@ -405,9 +392,9 @@
 
 <span class="co">## display a 2D plot of the digit classes in the latent space</span>
 <span class="va">x_test_encoded</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">encoder</span>, <span class="va">x_test</span>, batch_size <span class="op">=</span> <span class="va">batch_size</span><span class="op">)</span>
-<span class="va">x_test_encoded</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">as_data_frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">x_test_encoded</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">as_data_frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">V1</span>, y <span class="op">=</span> <span class="va">V2</span>, colour <span class="op">=</span> <span class="va">class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co">## display a 2D manifold of the digits</span>
@@ -423,11 +410,11 @@
   <span class="va">column</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
   <span class="kw">for</span><span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">grid_y</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
     <span class="va">z_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">grid_x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">grid_y</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-    <span class="va">column</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">rbind</a></span><span class="op">(</span><span class="va">column</span>, <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">generator</span>, <span class="va">z_sample</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="va">digit_size</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">column</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">rbind</a></span><span class="op">(</span><span class="va">column</span>, <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">generator</span>, <span class="va">z_sample</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="va">digit_size</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span>
   <span class="va">rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">rows</span>, <span class="va">column</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="va">rows</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="va">rows</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

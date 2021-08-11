@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9003</span>
       </span>
     </div>
 
@@ -82,7 +82,15 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Using Keras</li>
+<li class="dropdown-header">Guides (New for TF 2.6)</li>
+    <li>
+      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -132,21 +140,6 @@
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Guides (New for TF 2)
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
-    </li>
-    <li>
-      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../../articles/learn.html">Learn</a>
 </li>
@@ -161,12 +154,6 @@
 </li>
 <li>
   <a href="../../news/index.html">News</a>
-</li>
-<li>
-  <a href="https://github.com/rstudio/keras">
-    <span class="fa fa-github"></span>
-     
-  </a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -186,7 +173,7 @@
 
       
 
-      </header><script src="pretrained_word_embeddings_files/header-attrs-2.9.7/header-attrs.js"></script><div class="row">
+      </header><script src="pretrained_word_embeddings_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>pretrained_word_embeddings</h1>
@@ -234,12 +221,12 @@
 <span class="va">dim_size</span> <span class="op">=</span> <span class="fl">300</span>
 
 <span class="co"># tokenize the input data and then fit the created object</span>
-<span class="va">word_seqs</span> <span class="op">=</span> <span class="fu"><a href="../../reference/text_tokenizer.html">text_tokenizer</a></span><span class="op">(</span>num_words <span class="op">=</span> <span class="va">max_words</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">word_seqs</span> <span class="op">=</span> <span class="fu"><a href="../../reference/text_tokenizer.html">text_tokenizer</a></span><span class="op">(</span>num_words <span class="op">=</span> <span class="va">max_words</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../../reference/fit_text_tokenizer.html">fit_text_tokenizer</a></span><span class="op">(</span><span class="va">movie_review</span><span class="op">$</span><span class="va">review</span><span class="op">)</span>
 
 <span class="co"># apply tokenizer to the text and get indices instead of words</span>
 <span class="co"># later pad the sequence</span>
-<span class="va">x_train</span> <span class="op">=</span> <span class="fu"><a href="../../reference/texts_to_sequences.html">texts_to_sequences</a></span><span class="op">(</span><span class="va">word_seqs</span>, <span class="va">movie_review</span><span class="op">$</span><span class="va">review</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">x_train</span> <span class="op">=</span> <span class="fu"><a href="../../reference/texts_to_sequences.html">texts_to_sequences</a></span><span class="op">(</span><span class="va">word_seqs</span>, <span class="va">movie_review</span><span class="op">$</span><span class="va">review</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span> maxlen <span class="op">=</span> <span class="va">maxlen</span><span class="op">)</span>
 
 <span class="co"># extract the output</span>
@@ -249,40 +236,40 @@
 <span class="va">word_indices</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">word_seqs</span><span class="op">$</span><span class="va">word_index</span><span class="op">)</span>
 
 <span class="co"># then place them into data.frame </span>
-<span class="va">dic</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>word <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">word_indices</span><span class="op">)</span>, key <span class="op">=</span> <span class="va">word_indices</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">key</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">.</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">max_words</span>,<span class="op">]</span>
+<span class="va">dic</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>word <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">word_indices</span><span class="op">)</span>, key <span class="op">=</span> <span class="va">word_indices</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">key</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">max_words</span>,<span class="op">]</span>
 
 <span class="co"># join the words with GloVe vectors and</span>
 <span class="co"># if word does not exist in GloVe, then fill NA's with 0</span>
-<span class="va">word_embeds</span> <span class="op">=</span> <span class="va">dic</span>  <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">vectors</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">.</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">302</span><span class="op">]</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/replace.html">replace</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.matrix.html">as.matrix</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">word_embeds</span> <span class="op">=</span> <span class="va">dic</span>  <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">vectors</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">302</span><span class="op">]</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/replace.html">replace</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.matrix.html">as.matrix</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># Use Keras Functional API </span>
 <span class="va">input</span> <span class="op">=</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">maxlen</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"input"</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">=</span> <span class="va">input</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">model</span> <span class="op">=</span> <span class="va">input</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="va">max_words</span>, output_dim <span class="op">=</span> <span class="va">dim_size</span>, input_length <span class="op">=</span> <span class="va">maxlen</span>, 
                   <span class="co"># put weights into list and do not allow training</span>
-                  weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">word_embeds</span><span class="op">)</span>, trainable <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/layer_spatial_dropout_1d.html">layer_spatial_dropout_1d</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.2</span> <span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+                  weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">word_embeds</span><span class="op">)</span>, trainable <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_spatial_dropout_1d.html">layer_spatial_dropout_1d</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.2</span> <span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../../reference/bidirectional.html">bidirectional</a></span><span class="op">(</span>
     <span class="fu"><a href="../../reference/layer_gru.html">layer_gru</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">80</span>, return_sequences <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
   <span class="op">)</span>
-<span class="va">max_pool</span> <span class="op">=</span> <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_global_max_pooling_1d.html">layer_global_max_pooling_1d</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">ave_pool</span> <span class="op">=</span> <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_global_average_pooling_1d.html">layer_global_average_pooling_1d</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">max_pool</span> <span class="op">=</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/layer_global_max_pooling_1d.html">layer_global_max_pooling_1d</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">ave_pool</span> <span class="op">=</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/layer_global_average_pooling_1d.html">layer_global_average_pooling_1d</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="va">output</span> <span class="op">=</span> <span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">ave_pool</span>, <span class="va">max_pool</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">output</span> <span class="op">=</span> <span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">ave_pool</span>, <span class="va">max_pool</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span>, activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span>
 
 <span class="va">model</span> <span class="op">=</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span>
 
 <span class="co"># instead of accuracy we can use "AUC" metrics from "tensorflow.keras"</span>
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   optimizer <span class="op">=</span> <span class="st">"adam"</span>,
   loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,
   metrics <span class="op">=</span> <span class="fu">tensorflow</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/tensorflow/man/tf.html">tf</a></span><span class="op">$</span><span class="va">keras</span><span class="op">$</span><span class="va">metrics</span><span class="op">$</span><span class="fu">AUC</span><span class="op">(</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">history</span> <span class="op">=</span> <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">keras</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">history</span> <span class="op">=</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu">keras</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">x_train</span>, <span class="va">y_train</span>,
   epochs <span class="op">=</span> <span class="fl">8</span>,
   batch_size <span class="op">=</span> <span class="fl">32</span>,

@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9003</span>
       </span>
     </div>
 
@@ -82,7 +82,15 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Using Keras</li>
+<li class="dropdown-header">Guides (New for TF 2.6)</li>
+    <li>
+      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -132,21 +140,6 @@
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Guides (New for TF 2)
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
-    </li>
-    <li>
-      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../../articles/learn.html">Learn</a>
 </li>
@@ -161,12 +154,6 @@
 </li>
 <li>
   <a href="../../news/index.html">News</a>
-</li>
-<li>
-  <a href="https://github.com/rstudio/keras">
-    <span class="fa fa-github"></span>
-     
-  </a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -186,7 +173,7 @@
 
       
 
-      </header><script src="quora_siamese_lstm_files/header-attrs-2.9.7/header-attrs.js"></script><div class="row">
+      </header><script src="quora_siamese_lstm_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>quora_siamese_lstm</h1>
@@ -256,16 +243,16 @@
   recurrent_regularizer <span class="op">=</span> <span class="fu"><a href="../../reference/regularizer_l1.html">regularizer_l2</a></span><span class="op">(</span>l <span class="op">=</span> <span class="va">FLAGS</span><span class="op">$</span><span class="va">regularization</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">vector1</span> <span class="op">&lt;-</span> <span class="fu">embedding</span><span class="op">(</span><span class="va">input1</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">vector1</span> <span class="op">&lt;-</span> <span class="fu">embedding</span><span class="op">(</span><span class="va">input1</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">seq_emb</span><span class="op">(</span><span class="op">)</span>
-<span class="va">vector2</span> <span class="op">&lt;-</span> <span class="fu">embedding</span><span class="op">(</span><span class="va">input2</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">vector2</span> <span class="op">&lt;-</span> <span class="fu">embedding</span><span class="op">(</span><span class="va">input2</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">seq_emb</span><span class="op">(</span><span class="op">)</span>
 
-<span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_dot.html">layer_dot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">vector1</span>, <span class="va">vector2</span><span class="op">)</span>, axes <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_dot.html">layer_dot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">vector1</span>, <span class="va">vector2</span><span class="op">)</span>, axes <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span>, activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span>
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input1</span>, <span class="va">input2</span><span class="op">)</span>, <span class="va">out</span><span class="op">)</span>
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   optimizer <span class="op">=</span> <span class="st">"adam"</span>, 
   loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>, 
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
@@ -278,7 +265,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1817328</span><span class="op">)</span>
 <span class="va">val_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">question1</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.1</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">question1</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">model</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
     <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">question1</span><span class="op">[</span><span class="op">-</span><span class="va">val_sample</span>,<span class="op">]</span>, <span class="va">question2</span><span class="op">[</span><span class="op">-</span><span class="va">val_sample</span>,<span class="op">]</span><span class="op">)</span>,
     <span class="va">df</span><span class="op">$</span><span class="va">is_duplicate</span><span class="op">[</span><span class="op">-</span><span class="va">val_sample</span><span class="op">]</span>, 

@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9003</span>
       </span>
     </div>
 
@@ -124,6 +124,14 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Guides (New for TF 2.6)</li>
+    <li>
+      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+    <li class="divider"></li>
     <li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
@@ -174,21 +182,6 @@
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Guides (New for TF 2)
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/python_subclasses.html">Python Subclasses</a>
-    </li>
-    <li>
-      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../articles/learn.html">Learn</a>
 </li>
@@ -203,12 +196,6 @@
 </li>
 <li>
   <a href="../news/index.html">News</a>
-</li>
-<li>
-  <a href="https://github.com/rstudio/keras">
-    <span class="fa fa-github"></span>
-     
-  </a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -240,11 +227,29 @@
 <a href="#keras-development-version" class="anchor"></a>keras (development version)<small> Unreleased </small>
 </h1>
 <p>Breaking changes: <code><a href="../reference/set_vocabulary.html">set_vocabulary()</a></code> arguments <code>df_data</code> and <code>oov_df_value</code> are deprecated. They are superseded by the new argument <code>idf_weights</code>.</p>
+<p>TF 2.6 changes:</p>
+<ul>
+<li>
+<code>predict_proba</code> and <code>predict_classes</code> were removed.</li>
+<li>model serialization to/from yaml was removed.</li>
+<li>default changed: <code><a href="../reference/layer_text_vectorization.html">layer_text_vectorization(pad_to_max_tokens=FALSE)</a></code>
+</li>
+</ul>
 <p>New Features:</p>
 <ul>
-<li><p>Default Tensorflow/Keras version is now 2.5</p></li>
+<li><p>Default Tensorflow/Keras version is now 2.6</p></li>
 <li><p>The <code>keras</code> python module is exported</p></li>
-<li><p>Introduced <code>%py_class%</code>, a new python class generator constructor.</p></li>
+<li><p>Introduced <code><a href="../reference/%py_class%.html">%py_class%</a></code>, a new python class generator constructor.</p></li>
+<li>
+<p>New vignettes:</p>
+<ul>
+<li>Subclassing python classes: How to use <code><a href="../reference/%py_class%.html">%py_class%</a></code>.</li>
+<li>Customizing what happens in fit (example of how to define a model, like a GAN, with a custom train step).</li>
+<li>Writing your own callbacks.</li>
+</ul>
+</li>
+<li><p>All optimizer had argument <code>lr</code> renamed to <code>learning_rate</code>. (backwards compatibility is preserved, an R warning is now issued).</p></li>
+<li><p>keras now imports the glue package</p></li>
 <li>
 <p>The <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> method for keras models has been updated:</p>
 <ul>
@@ -258,7 +263,7 @@
 </ul>
 </li>
 <li>
-<p>Major changes to the underlying handeling of custom R6 layer classes.</p>
+<p>Major changes to the underlying handling of custom R6 layer classes.</p>
 <ul>
 <li>A new <code>r_to_py</code> method is provided for <code>R6ClassGenerator</code> objects.</li>
 <li>R6 custom layers can now inherit directly from python layer classes or other R6 custom layer classes</li>
@@ -282,21 +287,84 @@
 </ul>
 </li>
 <li>
-<code><a href="https://rdrr.io/r/base/call.html">call()</a></code> methods now support a <code>training</code> argument, as well as any additional arbritary user-defined arguments</li>
+<code><a href="https://rdrr.io/r/base/call.html">call()</a></code> methods now support a <code>training</code> argument, as well as any additional arbitrary user-defined arguments</li>
 </ul>
 </li>
 <li>
 <p>Refactored <code><a href="../reference/install_keras.html">install_keras()</a></code> (along with <code><a href="https://rdrr.io/pkg/tensorflow/man/install_tensorflow.html">tensorflow::install_tensorflow()</a></code>). Installation should be more reliable for more users now. If you encounter installation issues, please file an issue: <a href="https://github.com/rstudio/keras/issues/new" class="uri">https://github.com/rstudio/keras/issues/new</a></p>
 <ul>
-<li>Potentially breaking change: numeric versions supplied without a patchlevel now automatically pull the latest patch release. (e.g. <code>install_keras(tensorflow="2.4")</code> will install tensorflow version “2.4.2”. Previously it would install “2.4.0”)</li>
+<li><p>Potentially breaking change: numeric versions supplied without a patchlevel now automatically pull the latest patch release. (e.g. <code><a href="../reference/install_keras.html">install_keras(tensorflow="2.4")</a></code> will install tensorflow version “2.4.2”. Previously it would install “2.4.0”)</p></li>
+<li><p>pandas is now a default extra packages installed by <code><a href="../reference/install_keras.html">install_keras()</a></code></p></li>
 </ul>
 </li>
+<li>
+<p>loss functions:</p>
+<ul>
+<li>all the loss functions gain the ability to return a callable (a <code>keras$losses$Loss</code> instance) if <code>y_true</code> and <code>y_pred</code> arguments are missing.</li>
+<li>new builtin loss functions: loss_huber(), loss_kl_divergence()</li>
+</ul>
+</li>
+<li><p>keras_model_sequential() gains the ability to accept arguments that define input layer like <code>input_shape</code> and <code>dtype</code>. See <code><a href="../reference/keras_model_sequential.html">?keras_model_sequential</a></code> for details and examples.</p></li>
 <li><p>Refactored automated tests to closer match the default installation procedure and compute environment of most user.</p></li>
 <li><p>Expanded CI test coverage to include R devel, oldrel and 3.6.</p></li>
 <li>
 <p>Many layers gained new arguments, coming to parity with the interface available in the latest python version:</p>
-<h2 id="layer-name--new-argument">layer name | new argument</h2>
-<p><code>layer_gru</code> | <code>time_major</code> <code>layer_lstm</code> | <code>time_major</code> <code>layer_max_pooling_1d</code> | <code>data_format</code> <code>layer_conv_lstm_2d</code> | <code>return_state</code> <code>layer_depthwise_conv_2d</code> | <code>dilation_rate</code> <code>layer_conv_3d_transpose</code> | <code>dilation_rate</code> <code>layer_conv_1d</code> | <code>groups</code> <code>layer_conv_2d</code> | <code>groups</code> <code>layer_conv_3d</code> | <code>groups</code> <code>layer_locally_connected_1d</code> | <code>implementation</code> <code>layer_locally_connected_2d</code> | <code>implementation</code> <code>layer_text_vectorization</code> | <code>vocabulary</code></p>
+<table>
+<thead><tr class="header">
+<th>layer name</th>
+<th>new argument</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>layer_gru</code></td>
+<td><code>time_major</code></td>
+</tr>
+<tr class="even">
+<td><code>layer_lstm</code></td>
+<td><code>time_major</code></td>
+</tr>
+<tr class="odd">
+<td><code>layer_max_pooling_1d</code></td>
+<td><code>data_format</code></td>
+</tr>
+<tr class="even">
+<td><code>layer_conv_lstm_2d</code></td>
+<td><code>return_state</code></td>
+</tr>
+<tr class="odd">
+<td><code>layer_depthwise_conv_2d</code></td>
+<td><code>dilation_rate</code></td>
+</tr>
+<tr class="even">
+<td><code>layer_conv_3d_transpose</code></td>
+<td><code>dilation_rate</code></td>
+</tr>
+<tr class="odd">
+<td><code>layer_conv_1d</code></td>
+<td><code>groups</code></td>
+</tr>
+<tr class="even">
+<td><code>layer_conv_2d</code></td>
+<td><code>groups</code></td>
+</tr>
+<tr class="odd">
+<td><code>layer_conv_3d</code></td>
+<td><code>groups</code></td>
+</tr>
+<tr class="even">
+<td><code>layer_locally_connected_1d</code></td>
+<td><code>implementation</code></td>
+</tr>
+<tr class="odd">
+<td><code>layer_locally_connected_2d</code></td>
+<td><code>implementation</code></td>
+</tr>
+<tr class="even">
+<td><code>layer_text_vectorization</code></td>
+<td><code>vocabulary</code></td>
+</tr>
+</tbody>
+</table>
 </li>
 <li><p>Added activation functions swish and gelu. (<a href='https://github.com/rstudio/keras/issues/1226'>#1226</a>)</p></li>
 <li><p><code><a href="../reference/set_vocabulary.html">set_vocabulary()</a></code> gains a <code>idf_weights</code> argument.</p></li>

@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9003</span>
       </span>
     </div>
 
@@ -82,7 +82,15 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Using Keras</li>
+<li class="dropdown-header">Guides (New for TF 2.6)</li>
+    <li>
+      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -132,21 +140,6 @@
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Guides (New for TF 2)
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
-    </li>
-    <li>
-      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../../articles/learn.html">Learn</a>
 </li>
@@ -161,12 +154,6 @@
 </li>
 <li>
   <a href="../../news/index.html">News</a>
-</li>
-<li>
-  <a href="https://github.com/rstudio/keras">
-    <span class="fa fa-github"></span>
-     
-  </a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -186,7 +173,7 @@
 
       
 
-      </header><script src="fine_tuning_files/header-attrs-2.9.7/header-attrs.js"></script><div class="row">
+      </header><script src="fine_tuning_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>fine_tuning</h1>
@@ -256,8 +243,8 @@
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>
 
 <span class="va">training_imgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">all_imgs</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">all_imgs</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">validation_imgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">all_imgs</span><span class="op">[</span><span class="op">!</span><span class="va">all_imgs</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">training_imgs</span><span class="op">]</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">all_imgs</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>         
-<span class="va">testing_imgs</span> <span class="op">&lt;-</span> <span class="va">all_imgs</span><span class="op">[</span><span class="op">!</span><span class="va">all_imgs</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">training_imgs</span>, <span class="va">validation_imgs</span><span class="op">)</span><span class="op">]</span>
+<span class="va">validation_imgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">all_imgs</span><span class="op">[</span><span class="op">!</span><span class="va">all_imgs</span> <span class="op">%in%</span> <span class="va">training_imgs</span><span class="op">]</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">all_imgs</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>         
+<span class="va">testing_imgs</span> <span class="op">&lt;-</span> <span class="va">all_imgs</span><span class="op">[</span><span class="op">!</span><span class="va">all_imgs</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">training_imgs</span>, <span class="va">validation_imgs</span><span class="op">)</span><span class="op">]</span>
 
 <span class="co"># create directory structure</span>
 <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/create.html">dir_create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
@@ -324,16 +311,16 @@
 <span class="va">mob</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/application_mobilenet.html">application_mobilenet</a></span><span class="op">(</span>include_top <span class="op">=</span> <span class="cn">FALSE</span>, pooling <span class="op">=</span> <span class="st">"avg"</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/freeze_weights.html">freeze_weights</a></span><span class="op">(</span><span class="va">mob</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu">mob</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">256</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mob</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">256</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span>, activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">model</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>, optimizer <span class="op">=</span> <span class="st">"adam"</span>, metrics <span class="op">=</span> <span class="st">"accuracy"</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/fit_generator.html">fit_generator</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/fit_generator.html">fit_generator</a></span><span class="op">(</span>
   generator <span class="op">=</span> <span class="va">training_image_flow</span>, 
   epochs <span class="op">=</span> <span class="fl">1</span>, 
   steps_per_epoch <span class="op">=</span> <span class="va">training_image_flow</span><span class="op">$</span><span class="va">n</span><span class="op">/</span><span class="va">training_image_flow</span><span class="op">$</span><span class="va">batch_size</span>,
@@ -344,10 +331,10 @@
 <span class="co"># now top layers weights are fine, we can unfreeze the lower layer weights.</span>
 <span class="fu"><a href="../../reference/freeze_weights.html">unfreeze_weights</a></span><span class="op">(</span><span class="va">mob</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">model</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>, optimizer <span class="op">=</span> <span class="st">"adam"</span>, metrics <span class="op">=</span> <span class="st">"accuracy"</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/fit_generator.html">fit_generator</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/fit_generator.html">fit_generator</a></span><span class="op">(</span>
   generator <span class="op">=</span> <span class="va">training_image_flow</span>, 
   epochs <span class="op">=</span> <span class="fl">3</span>, 
   steps_per_epoch <span class="op">=</span> <span class="va">training_image_flow</span><span class="op">$</span><span class="va">n</span><span class="op">/</span><span class="va">training_image_flow</span><span class="op">$</span><span class="va">batch_size</span>,

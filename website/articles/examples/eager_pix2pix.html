@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9003</span>
       </span>
     </div>
 
@@ -82,7 +82,15 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Using Keras</li>
+<li class="dropdown-header">Guides (New for TF 2.6)</li>
+    <li>
+      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -132,21 +140,6 @@
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Guides (New for TF 2)
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
-    </li>
-    <li>
-      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../../articles/learn.html">Learn</a>
 </li>
@@ -161,12 +154,6 @@
 </li>
 <li>
   <a href="../../news/index.html">News</a>
-</li>
-<li>
-  <a href="https://github.com/rstudio/keras">
-    <span class="fa fa-github"></span>
-     
-  </a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -186,7 +173,7 @@
 
       
 
-      </header><script src="eager_pix2pix_files/header-attrs-2.9.7/header-attrs.js"></script><div class="row">
+      </header><script src="eager_pix2pix_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>eager_pix2pix</h1>
@@ -249,7 +236,7 @@
     <span class="fu"><a href="../../reference/k_stack.html">k_stack</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>, axis <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
   <span class="va">cropped_image</span> <span class="op">&lt;-</span>
     <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">random_crop</span><span class="op">(</span><span class="va">stacked_image</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2L</span>, <span class="va">img_height</span>, <span class="va">img_width</span>, <span class="fl">3L</span><span class="op">)</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">cropped_image</span><span class="op">[</span><span class="fl">1</span>, , , <span class="op">]</span>, <span class="va">cropped_image</span><span class="op">[</span><span class="fl">2</span>, , , <span class="op">]</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">cropped_image</span><span class="op">[</span><span class="fl">1</span>, , , <span class="op">]</span>, <span class="va">cropped_image</span><span class="op">[</span><span class="fl">2</span>, , , <span class="op">]</span><span class="op">)</span>
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
 <span class="op">}</span>
 
@@ -263,9 +250,9 @@
 
 <span class="va">random_jitter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">{</span>
   <span class="co"># resizing to 286 x 286 x 3</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="fu">resize</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span>, <span class="fl">286L</span>, <span class="fl">286L</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu">resize</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span>, <span class="fl">286L</span>, <span class="fl">286L</span><span class="op">)</span>
     <span class="co"># randomly cropping to 256 x 256 x 3</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="fu">random_crop</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu">random_crop</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
     <span class="kw">if</span> <span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="va">random</span><span class="op">$</span><span class="fu">uniform</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">{</span>
     <span class="co"># random mirroring</span>
     <span class="va">input_image</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">flip_left_right</span><span class="op">(</span><span class="va">input_image</span><span class="op">)</span>
@@ -277,28 +264,28 @@
 <span class="va">random_jitter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html">tf_function</a></span><span class="op">(</span><span class="fu"><a href="https://t-kalinowski.github.io/tfautograph/reference/autograph.html">autograph</a></span><span class="op">(</span><span class="va">random_jitter</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">load_image_train</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="fu">random_jitter</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu">random_jitter</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
   <span class="co">#c(input_image, real_image) %&lt;-% normalize(input_image, real_image)</span>
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="va">load_image_test</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="fu">resize</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span>, <span class="va">img_height</span>, <span class="va">img_width</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="fu"><a href="../../reference/normalize.html">normalize</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu">resize</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span>, <span class="va">img_height</span>, <span class="va">img_width</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu"><a href="../../reference/normalize.html">normalize</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_image</span>, <span class="va">real_image</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="va">train_dataset</span> <span class="op">&lt;-</span>
-  <span class="va">tf</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">Dataset</span><span class="op">$</span><span class="fu">list_files</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"train/*.jpg"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_shuffle.html">dataset_shuffle</a></span><span class="op">(</span><span class="va">buffer_size</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html">dataset_map</a></span><span class="op">(</span><span class="va">load_image_train</span>, num_parallel_calls <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="va">tf</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">Dataset</span><span class="op">$</span><span class="fu">list_files</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"train/*.jpg"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_shuffle.html">dataset_shuffle</a></span><span class="op">(</span><span class="va">buffer_size</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html">dataset_map</a></span><span class="op">(</span><span class="va">load_image_train</span>, num_parallel_calls <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span>
 
 <span class="va">test_dataset</span> <span class="op">&lt;-</span>
-  <span class="va">tf</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">Dataset</span><span class="op">$</span><span class="fu">list_files</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"test/*.jpg"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html">dataset_map</a></span><span class="op">(</span><span class="va">load_image_test</span>, num_parallel_calls <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="va">tf</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">Dataset</span><span class="op">$</span><span class="fu">list_files</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"test/*.jpg"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html">dataset_map</a></span><span class="op">(</span><span class="va">load_image_test</span>, num_parallel_calls <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span>
 
 
@@ -325,10 +312,10 @@
              <span class="va">training</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
       <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">conv1</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
       <span class="kw">if</span> <span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">apply_batchnorm</span><span class="op">)</span> <span class="op">{</span>
-        <span class="va">x</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">self</span><span class="op">$</span><span class="fu">batchnorm</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>
+        <span class="va">x</span> <span class="op">%&gt;%</span> <span class="va">self</span><span class="op">$</span><span class="fu">batchnorm</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>
       <span class="op">}</span>
       <span class="co">#cat("downsample (generator) output: ", x$shape$as_list(), "\n")</span>
-      <span class="va">x</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></span><span class="op">(</span><span class="op">)</span>
+      <span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></span><span class="op">(</span><span class="op">)</span>
     <span class="op">}</span>
     
   <span class="op">}</span><span class="op">)</span>
@@ -355,12 +342,12 @@
     <span class="kw">function</span><span class="op">(</span><span class="va">xs</span>,
              <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span>,
              <span class="va">training</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="va">xs</span>
-      <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">up_conv</span><span class="op">(</span><span class="va">x1</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">self</span><span class="op">$</span><span class="fu">batchnorm</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="va">xs</span>
+      <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">up_conv</span><span class="op">(</span><span class="va">x1</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">self</span><span class="op">$</span><span class="fu">batchnorm</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>
       <span class="kw">if</span> <span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">apply_dropout</span><span class="op">)</span> <span class="op">{</span>
-        <span class="va">x</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">self</span><span class="op">$</span><span class="fu">dropout</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>
+        <span class="va">x</span> <span class="op">%&gt;%</span> <span class="va">self</span><span class="op">$</span><span class="fu">dropout</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>
       <span class="op">}</span>
-      <span class="va">x</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span>
+      <span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span>
       <span class="va">concat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_concatenate.html">k_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">x2</span><span class="op">)</span><span class="op">)</span>
       <span class="co">#cat("upsample (generator) output: ", concat$shape$as_list(), "\n")</span>
       <span class="va">concat</span>
@@ -400,7 +387,7 @@
              <span class="va">training</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
       <span class="co"># x shape == (bs, 256, 256, 3)</span>
       <span class="va">x1</span> <span class="op">&lt;-</span>
-        <span class="va">x</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">self</span><span class="op">$</span><span class="fu">down1</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>  <span class="co"># (bs, 128, 128, 64)</span>
+        <span class="va">x</span> <span class="op">%&gt;%</span> <span class="va">self</span><span class="op">$</span><span class="fu">down1</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>  <span class="co"># (bs, 128, 128, 64)</span>
       <span class="va">x2</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">down2</span><span class="op">(</span><span class="va">x1</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 64, 64, 128)</span>
       <span class="va">x3</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">down3</span><span class="op">(</span><span class="va">x2</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 32, 32, 256)</span>
       <span class="va">x4</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">down4</span><span class="op">(</span><span class="va">x3</span>, training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="co"># (bs, 16, 16, 512)</span>
@@ -454,9 +441,9 @@
              <span class="va">training</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
       <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">conv1</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
       <span class="kw">if</span> <span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">apply_batchnorm</span><span class="op">)</span> <span class="op">{</span>
-        <span class="va">x</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">self</span><span class="op">$</span><span class="fu">batchnorm</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>
+        <span class="va">x</span> <span class="op">%&gt;%</span> <span class="va">self</span><span class="op">$</span><span class="fu">batchnorm</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span>
       <span class="op">}</span>
-      <span class="va">x</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></span><span class="op">(</span><span class="op">)</span>
+      <span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></span><span class="op">(</span><span class="op">)</span>
     <span class="op">}</span>
     
   <span class="op">}</span><span class="op">)</span>
@@ -490,15 +477,15 @@
              <span class="va">y</span>,
              <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span>,
              <span class="va">training</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
-      <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_concatenate.html">k_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="co"># (bs, 256, 256, channels*2)</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">down1</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="co"># (bs, 128, 128, 64)</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">down2</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="co"># (bs, 64, 64, 128)</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">down3</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="co"># (bs, 32, 32, 256)</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">zero_pad1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="co"># (bs, 34, 34, 256)</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">conv</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="co"># (bs, 31, 31, 512)</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">batchnorm</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-        <span class="fu"><a href="../../reference/layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">zero_pad2</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="co"># (bs, 33, 33, 512)</span>
+      <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_concatenate.html">k_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># (bs, 256, 256, channels*2)</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">down1</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># (bs, 128, 128, 64)</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">down2</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># (bs, 64, 64, 128)</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">down3</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># (bs, 32, 32, 256)</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">zero_pad1</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># (bs, 34, 34, 256)</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">conv</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># (bs, 31, 31, 512)</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">batchnorm</span><span class="op">(</span>training <span class="op">=</span> <span class="va">training</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="../../reference/layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">zero_pad2</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># (bs, 33, 33, 512)</span>
         <span class="va">self</span><span class="op">$</span><span class="fu">last</span><span class="op">(</span><span class="op">)</span> <span class="co"># (bs, 30, 30, 1)</span>
       <span class="co">#cat("discriminator output: ", x$shape$as_list(), "\n")</span>
       <span class="va">x</span>
@@ -572,8 +559,8 @@
       <span class="va">input_image</span> <span class="op">&lt;-</span> <span class="va">batch</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
       <span class="va">target</span> <span class="op">&lt;-</span> <span class="va">batch</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>
       
-      <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/reticulate/man/with-as-operator.html">%as%</a></span> <span class="va">gen_tape</span>, <span class="op">{</span>
-        <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/reticulate/man/with-as-operator.html">%as%</a></span> <span class="va">disc_tape</span>, <span class="op">{</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op">%as%</span> <span class="va">gen_tape</span>, <span class="op">{</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op">%as%</span> <span class="va">disc_tape</span>, <span class="op">{</span>
           <span class="va">gen_output</span> <span class="op">&lt;-</span> <span class="fu">generator</span><span class="op">(</span><span class="va">input_image</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
           <span class="va">disc_real_output</span> <span class="op">&lt;-</span>
             <span class="fu">discriminator</span><span class="op">(</span><span class="va">input_image</span>, <span class="va">target</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -609,14 +596,14 @@
     <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Discriminator loss: "</span>,
         <span class="va">total_loss_disc</span><span class="op">$</span><span class="fu">numpy</span><span class="op">(</span><span class="op">)</span> <span class="op">/</span> <span class="va">batches_per_epoch</span>,
         <span class="st">"\n\n"</span><span class="op">)</span>
-    <span class="kw">if</span> <span class="op">(</span><span class="va">epoch</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">10</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">epoch</span> <span class="op">%%</span> <span class="fl">10</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
       <span class="va">test_iter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/make-iterator.html">make_iterator_one_shot</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span>
       <span class="va">batch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/iterator_get_next.html">iterator_get_next</a></span><span class="op">(</span><span class="va">test_iter</span><span class="op">)</span>
       <span class="va">input</span> <span class="op">&lt;-</span> <span class="va">batch</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
       <span class="va">target</span> <span class="op">&lt;-</span> <span class="va">batch</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>
       <span class="fu">generate_images</span><span class="op">(</span><span class="va">generator</span>, <span class="va">input</span>, <span class="va">target</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"epoch_"</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span>
     <span class="op">}</span>
-    <span class="kw">if</span> <span class="op">(</span><span class="va">epoch</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">10</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">epoch</span> <span class="op">%%</span> <span class="fl">10</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
       <span class="va">checkpoint</span><span class="op">$</span><span class="fu">save</span><span class="op">(</span>file_prefix <span class="op">=</span> <span class="va">checkpoint_prefix</span><span class="op">)</span>
     <span class="op">}</span>
     

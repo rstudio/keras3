@@ -83,7 +83,7 @@ with Nesterov momentum." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9003</span>
       </span>
     </div>
 
@@ -126,6 +126,14 @@ with Nesterov momentum." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Guides (New for TF 2.6)</li>
+    <li>
+      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+    </li>
+    <li class="divider"></li>
     <li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
@@ -176,21 +184,6 @@ with Nesterov momentum." />
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Guides (New for TF 2)
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/python_subclasses.html">Python Subclasses</a>
-    </li>
-    <li>
-      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../articles/learn.html">Learn</a>
 </li>
@@ -205,12 +198,6 @@ with Nesterov momentum." />
 </li>
 <li>
   <a href="../news/index.html">News</a>
-</li>
-<li>
-  <a href="https://github.com/rstudio/keras">
-    <span class="fa fa-github"></span>
-     
-  </a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -244,20 +231,21 @@ with Nesterov momentum.</p>
     </div>
 
     <pre class="usage"><span class='fu'>optimizer_nadam</span><span class='op'>(</span>
-  lr <span class='op'>=</span> <span class='fl'>0.002</span>,
+  learning_rate <span class='op'>=</span> <span class='fl'>0.002</span>,
   beta_1 <span class='op'>=</span> <span class='fl'>0.9</span>,
   beta_2 <span class='op'>=</span> <span class='fl'>0.999</span>,
   epsilon <span class='op'>=</span> <span class='cn'>NULL</span>,
   schedule_decay <span class='op'>=</span> <span class='fl'>0.004</span>,
   clipnorm <span class='op'>=</span> <span class='cn'>NULL</span>,
-  clipvalue <span class='op'>=</span> <span class='cn'>NULL</span>
+  clipvalue <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>lr</th>
+      <th>learning_rate</th>
       <td><p>float &gt;= 0. Learning rate.</p></td>
     </tr>
     <tr>
@@ -287,6 +275,10 @@ value.</p></td>
       <th>clipvalue</th>
       <td><p>Gradients will be clipped when their absolute value exceeds
 this value.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Unused, present only for backwards compatability</p></td>
     </tr>
     </table>
 
