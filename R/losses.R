@@ -132,8 +132,7 @@ c("categorical_hinge", "CategoricalHinge")
 #' @export
 loss_cosine_similarity <- function(y_true, y_pred, axis = -1L,
                                    ..., reduction = "auto", name = "cosine_similarity") {
-  args <- capture_args(match.call(),
-                            list(axis = as_axis))
+  args <- capture_args(match.call(), list(axis = as_axis))
   py_callable <- if (missing(y_true) && missing(y_pred))
     keras$losses$CosineSimilarity
   else
@@ -175,7 +174,6 @@ c("hinge", "Hinge")
 #' @export
 loss_huber <- function(y_true, y_pred, delta = 1, ..., reduction = "auto", name = "huber_loss") {
   args <- capture_args(match.call())
-
   py_callable <- if (missing(y_true) && missing(y_pred))
     keras$losses$Huber
   else
@@ -190,15 +188,15 @@ c("huber", "Huber")
 #' @rdname loss-functions
 #' @export
 loss_kullback_leibler_divergence <-
-  function(y_true, y_pred, ...,
-           reduction = "auto", name = "kl_divergence") {
-  args <- capture_args(match.call())
+  function(y_true, y_pred,
+           ..., reduction = "auto", name = "kl_divergence") {
+    args <- capture_args(match.call())
 
-  py_callable <- if (missing(y_true) && missing(y_pred))
-    keras$losses$KLDivergence
-  else
-    keras$losses$kullback_leibler_divergence
-  do.call(py_callable, args)
+    py_callable <- if (missing(y_true) && missing(y_pred))
+      keras$losses$KLDivergence
+    else
+      keras$losses$kullback_leibler_divergence
+    do.call(py_callable, args)
   }
 attr(loss_kullback_leibler_divergence, "py_function_name") <- "kullback_leibler_divergence"
 c("kl_divergence", "kld", "KLD", "KLDivergence", "kullback_leibler_divergence")
@@ -235,8 +233,9 @@ c("log_cosh", "logcosh", "LogCosh")
 
 #' @rdname loss-functions
 #' @export
-loss_mean_absolute_error <- function(y_true, y_pred,
-                                     ..., reduction = "auto", name = "mean_absolute_error") {
+loss_mean_absolute_error <-
+  function(y_true, y_pred,
+           ..., reduction = "auto", name = "mean_absolute_error") {
   args <- capture_args(match.call())
 
   py_callable <- if (missing(y_true) && missing(y_pred))
