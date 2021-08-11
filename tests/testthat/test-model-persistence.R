@@ -75,19 +75,22 @@ test_succeeds("model can be saved and loaded from json", {
   expect_equal(json, model_to_json(model_from))
 })
 
-test_succeeds("model can be saved and loaded from yaml", {
+## patch releases removed ability to serialize to/from yaml in all the version
+## going back to 2.2
 
-  if (!keras:::have_pyyaml())
-    skip("yaml not available for testing")
-
-  if(tf_version() >= "2.6")
-    skip("model.to_yaml() removed in 2.6")
-
-  model <- define_model()
-  yaml <- model_to_yaml(model)
-  model_from <- model_from_yaml(yaml)
-  expect_equal(yaml, model_to_yaml(model_from))
-})
+# test_succeeds("model can be saved and loaded from yaml", {
+#
+#   if (!keras:::have_pyyaml())
+#     skip("yaml not available for testing")
+#
+#   if(tf_version() >= "2.5.1")
+#     skip("model$to_yaml() removed in 2.6")
+#
+#   model <- define_model()
+#   yaml <- model_to_yaml(model)
+#   model_from <- model_from_yaml(yaml)
+#   expect_equal(yaml, model_to_yaml(model_from))
+# })
 
 test_succeeds("model can be saved and loaded from R 'raw' object", {
 

@@ -78,13 +78,7 @@ test_succeeds("binary_crossentropy new args", {
   y_true <- k_constant(matrix(runif(100), nrow = 10, ncol = 10))
   y_pred <- k_constant(matrix(runif(100), nrow = 10, ncol = 10))
 
-  if (tensorflow::tf_version() >= "2.2") {
     out <- loss_binary_crossentropy(y_true, y_pred, from_logits = TRUE, label_smoothing = 0.5)
-  } else {
-    expect_warning(
-      out <- loss_binary_crossentropy(y_true, y_pred, from_logits = TRUE, label_smoothing = 0.5)
-    )
-  }
 
   expect_equal(out$shape$as_list(),10)
 })
