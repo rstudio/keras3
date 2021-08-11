@@ -58,6 +58,11 @@ New Features:
 
   - pandas is now a default extra packages installed by `install_keras()`
 
+- loss functions:
+  - all the loss functions gain the ability to return a callable
+    (a `keras$losses$Loss` instance) if `y_true` and `y_pred` arguments are missing.
+  - new builtin loss functions: loss_huber(), loss_kl_divergence()
+
 - Refactored automated tests to closer match the default installation procedure
   and compute environment of most user.
 

@@ -400,3 +400,27 @@ is_keras_tensor <- function(x) {
 }
 
 
+
+
+capture_args <- function(cl, modifiers = NULL,
+                         envir = parent.frame(),
+                         fn = sys.function(-1)) {
+  ## bug: match.call() resolves incorrectly if dots are from not the default sys.parent()
+  ## e.g, this fails if dots originate from the callers caller:
+  #    cl <- eval(quote(match.call()), parent.frame())
+  ## workaround: caller must call match.call() from the correct frame
+
+  fn_arg_nms <- names(formals(fn))
+  known_args <- intersect(names(cl), fn_arg_nms)
+  names(known_args) <- known_args
+  cl2 <- as.call(c(quote(list), lapply(known_args, as.symbol),
+                   if("..." %in% fn_arg_nms) quote(...)))
+  # this might reorder args by assuming ... are last, but it doesn't matter
+  # since everything is supplied as a keyword arg to the python side anyway
+  args <- eval(cl2, envir)
+
+  for (nm in intersect(names(args), names(modifiers)))
+    args[[nm]] <- modifiers[[nm]](args[[nm]])
+
+  args
+}
