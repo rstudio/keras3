@@ -9,7 +9,7 @@ TF 2.6 changes:
 - default changed: `layer_text_vectorization(pad_to_max_tokens=FALSE)`
 
 New Features:
-- Default Tensorflow/Keras version is now 2.5
+- Default Tensorflow/Keras version is now 2.6
 
 - The `keras` python module is exported
 
