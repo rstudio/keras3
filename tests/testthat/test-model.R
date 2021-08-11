@@ -40,6 +40,23 @@ test_succeeds("models can be fit, evaluated, and used for predictions", {
   }
 })
 
+
+test_succeeds("keras_model_sequential() can accept input_layer args", {
+  model <-  keras_model_sequential(input_shape = 784) %>%
+    layer_dense(32, kernel_initializer = initializer_ones()) %>%
+    layer_activation('relu') %>%
+    layer_dense(10) %>%
+    layer_activation('softmax') %>%
+    compile(loss = loss_binary_crossentropy(),
+            optimizer = optimizer_sgd(),
+            metrics = 'accuracy')
+
+  fit(model, data, labels, verbose = 0)
+  evaluate(model, data, labels)
+  predict(model, input)
+})
+
+
 test_succeeds("evaluate function returns a named list", {
   model <- define_and_compile_model()
   fit(model, data, labels)

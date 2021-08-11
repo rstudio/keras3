@@ -42,13 +42,16 @@ keras_model <- function(inputs, outputs = NULL, ...) {
 #'
 #' @param layers List of layers to add to the model
 #' @param name Name of model
+#' @inheritDotParams sequential_model_input_layer
 #'
 #' @note
 #'
-#' The first layer passed to a Sequential model should have a defined input
-#' shape. What that means is that it should have received an `input_shape` or
-#' `batch_input_shape` argument, or for some type of layers (recurrent,
-#' Dense...) an `input_dim` argument.
+#' If any arguments are provided to `...`, then the sequential model is
+#' initialized with a `InputLayer` instance. If not, then the first layer passed
+#' to a Sequential model should have a defined input shape. What that means is
+#' that it should have received an `input_shape` or `batch_input_shape`
+#' argument, or for some type of layers (recurrent, Dense...) an `input_dim`
+#' argument.
 #'
 #' @family model functions
 #'
@@ -69,11 +72,78 @@ keras_model <- function(inputs, outputs = NULL, ...) {
 #'   loss = 'categorical_crossentropy',
 #'   metrics = c('accuracy')
 #' )
+#'
+#' # alternative way to provide input shape
+#' model <- keras_model_sequential(input_shape = c(784)) %>%
+#'   layer_dense(units = 32) %>%
+#'   layer_activation('relu') %>%
+#'   layer_dense(units = 10) %>%
+#'   layer_activation('softmax')
+#'
 #' }
 #' @export
-keras_model_sequential <- function(layers = NULL, name = NULL) {
+keras_model_sequential <- function(layers = NULL, name = NULL, ...) {
+
+  if (length(list(...)))
+    layers <- c(sequential_model_input_layer(...), layers)
+
   keras$models$Sequential(layers = layers, name = name)
 }
+
+
+
+
+#' sequential_model_input_layer
+#'
+#' @param input_shape an integer vector of dimensions (not including the batch
+#'   axis), or a `tf$TensorShape` instance (also not including the batch axis).
+#' @param batch_size  Optional input batch size (integer or NULL).
+#' @param dtype Optional datatype of the input. When not provided, the Keras
+#'   default float type will be used.
+#' @param input_tensor Optional tensor to use as layer input. If set, the layer
+#'   will use the `tf$TypeSpec` of this tensor rather than creating a new
+#'   placeholder tensor.
+#' @param sparse Boolean, whether the placeholder created is meant to be sparse.
+#'   Default to `FALSE`.
+#' @param ragged Boolean, whether the placeholder created is meant to be ragged.
+#'   In this case, values of 'NULL' in the 'shape' argument represent ragged
+#'   dimensions. For more information about `RaggedTensors`, see this
+#'   [guide](https://www.tensorflow.org/guide/ragged_tensors). Default to
+#'   `FALSE`.
+#' @param type_spec A `tf$TypeSpec` object to create Input from. This
+#'   `tf$TypeSpec` represents the entire batch. When provided, all other args
+#'   except name must be `NULL`.
+#' @param ... additional arguments passed on to `keras$layers$InputLayer`.
+#' @param input_layer_name,name  Optional name of the input layer (string).
+#'
+sequential_model_input_layer <- function(input_shape = NULL,
+                                         batch_size = NULL,
+                                         dtype = NULL,
+                                         input_tensor = NULL,
+                                         sparse = NULL,
+                                         name = NULL,
+                                         ragged = NULL,
+                                         type_spec = NULL,
+                                         ...,
+                                         input_layer_name = NULL) {
+  # keras$layers$Input can't be used with a Sequential Model, have to use
+  # keras$layers$LayerInput instead.
+  args <- capture_args(match.call(),
+                       list(input_shape = as_shape,
+                            batch_size = as_nullable_integer))
+
+  if ("input_layer_name" %in% names(args)) {
+    # a bare `name` arg would normally belong to the model, not the input layer
+    if (!is.null(args[["input_layer_name"]]))
+      args[["name"]] <- args[["input_layer_name"]]
+
+    args[["input_layer_name"]] <- NULL
+  }
+
+  do.call(keras$layers$InputLayer, args)
+}
+
+
 
 #' Replicates a model on different GPUs.
 #'

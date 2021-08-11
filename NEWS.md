@@ -63,6 +63,10 @@ New Features:
     (a `keras$losses$Loss` instance) if `y_true` and `y_pred` arguments are missing.
   - new builtin loss functions: loss_huber(), loss_kl_divergence()
 
+- keras_model_sequential() gains the ability to accept arguments that
+  define input layer like `input_shape` and `dtype`.
+  See `?keras_model_sequential` for details and examples.
+
 - Refactored automated tests to closer match the default installation procedure
   and compute environment of most user.
 

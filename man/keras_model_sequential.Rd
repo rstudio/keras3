@@ -4,21 +4,47 @@
 \alias{keras_model_sequential}
 \title{Keras Model composed of a linear stack of layers}
 \usage{
-keras_model_sequential(layers = NULL, name = NULL)
+keras_model_sequential(layers = NULL, name = NULL, ...)
 }
 \arguments{
 \item{layers}{List of layers to add to the model}
 
 \item{name}{Name of model}
+
+\item{...}{
+  Arguments passed on to \code{\link[=sequential_model_input_layer]{sequential_model_input_layer}}
+  \describe{
+    \item{\code{input_shape}}{an integer vector of dimensions (not including the batch
+axis), or a \code{tf$TensorShape} instance (also not including the batch axis).}
+    \item{\code{batch_size}}{Optional input batch size (integer or NULL).}
+    \item{\code{dtype}}{Optional datatype of the input. When not provided, the Keras
+default float type will be used.}
+    \item{\code{input_tensor}}{Optional tensor to use as layer input. If set, the layer
+will use the \code{tf$TypeSpec} of this tensor rather than creating a new
+placeholder tensor.}
+    \item{\code{sparse}}{Boolean, whether the placeholder created is meant to be sparse.
+Default to \code{FALSE}.}
+    \item{\code{ragged}}{Boolean, whether the placeholder created is meant to be ragged.
+In this case, values of 'NULL' in the 'shape' argument represent ragged
+dimensions. For more information about \code{RaggedTensors}, see this
+\href{https://www.tensorflow.org/guide/ragged_tensors}{guide}. Default to
+\code{FALSE}.}
+    \item{\code{type_spec}}{A \code{tf$TypeSpec} object to create Input from. This
+\code{tf$TypeSpec} represents the entire batch. When provided, all other args
+except name must be \code{NULL}.}
+    \item{\code{input_layer_name}}{Optional name of the input layer (string).}
+  }}
 }
 \description{
 Keras Model composed of a linear stack of layers
 }
 \note{
-The first layer passed to a Sequential model should have a defined input
-shape. What that means is that it should have received an \code{input_shape} or
-\code{batch_input_shape} argument, or for some type of layers (recurrent,
-Dense...) an \code{input_dim} argument.
+If any arguments are provided to \code{...}, then the sequential model is
+initialized with a \code{InputLayer} instance. If not, then the first layer passed
+to a Sequential model should have a defined input shape. What that means is
+that it should have received an \code{input_shape} or \code{batch_input_shape}
+argument, or for some type of layers (recurrent, Dense...) an \code{input_dim}
+argument.
 }
 \examples{
 \dontrun{
@@ -37,6 +63,14 @@ model \%>\% compile(
   loss = 'categorical_crossentropy',
   metrics = c('accuracy')
 )
+
+# alternative way to provide input shape
+model <- keras_model_sequential(input_shape = c(784)) \%>\%
+  layer_dense(units = 32) \%>\%
+  layer_activation('relu') \%>\%
+  layer_dense(units = 10) \%>\%
+  layer_activation('softmax')
+
 }
 }
 \seealso{
