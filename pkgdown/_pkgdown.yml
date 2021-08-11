@@ -27,6 +27,12 @@ navbar:
           href: articles/tutorial_save_and_restore.html
     - text: "Articles"
       menu:
+        - text: "Guides (New for TF 2.6)"
+        - text: "Python Subclasses"
+          href: articles/python_subclasses.html
+        - text: "Customizing what happens in fit"
+          href: articles/guides/customizing_what_happens_in_fit.html
+        - text: "--------------------------"
         - text: "Using Keras"
         - text: "Guide to Keras Basics"
           href: articles/guide_keras.html
@@ -60,12 +66,6 @@ navbar:
           href: articles/custom_models.html
         - text: "Saving and serializing"
           href: articles/saving_serializing.html
-    - text: "Guides (New for TF 2)"
-      menu:
-        - text: "Python Subclasses"
-          href: articles/python_subclasses.html
-        - text: "Customizing what happens in fit"
-          href: articles/guides/customizing_what_happens_in_fit.html
     - text: Learn
       href: articles/learn.html
     - text: Tools
@@ -76,8 +76,6 @@ navbar:
       href: reference/index.html
     - text: "News"
       href: news/index.html
-    - icon: fa-github
-      href: https://github.com/rstudio/keras
 
 reference:
   - title: "Keras Models"
@@ -151,6 +149,7 @@ reference:
       - layer_activation_thresholded_relu
       - layer_activation_elu
       - layer_activation_softmax
+      - layer_activation_selu
 
   - title: "Dropout Layers"
     contents:
@@ -178,7 +177,6 @@ reference:
     contents:
       - layer_batch_normalization
 
-
   - title: "Noise Layers"
     contents:
       - layer_gaussian_noise
@@ -195,6 +193,10 @@ reference:
       - layer_minimum
       - layer_concatenate
       - layer_dot
+  - title: "Attention Layers"
+    contents:
+      - layer_attention
+      - layer_multi_head_attention
 
   - title: "Layer Wrappers"
     contents:
@@ -211,7 +213,8 @@ reference:
 
   - title: "Custom Layers"
     contents:
-      - KerasLayer
+      - "%py_class%"
+      - Layer
       - create_layer
 
   - title: "Model Persistence"
@@ -221,6 +224,10 @@ reference:
       - serialize_model
       - get_weights
       - get_config
+      - model_to_saved_model
+      - model_from_saved_model
+      - save_model_tf
+      - save_model_weights_tf
       - model_to_json
       - model_to_yaml
 
@@ -269,6 +276,10 @@ reference:
       - text_one_hot
       - text_hashing_trick
       - text_to_word_sequence
+      - layer_text_vectorization
+      - set_vocabulary
+      - get_vocabulary
+      - adapt
 
   - title: "Image Preprocessing"
     contents:
@@ -369,7 +380,14 @@ reference:
     contents:
       - starts_with("k_")
 
+  - title: "Python"
+    contents:
+      - keras
+      - "%py_class%"
+
   - title: "Deprecated"
     contents:
+      - KerasLayer
       - KerasWrapper
       - create_wrapper
+      - loss_cosine_proximity

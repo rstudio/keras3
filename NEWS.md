@@ -75,20 +75,21 @@ New Features:
 - Many layers gained new arguments, coming to parity with the interface
   available in the latest python version:
 
-  layer name | new argument
-  ----------------------
-  `layer_gru`  | `time_major`
-  `layer_lstm` | `time_major`
-  `layer_max_pooling_1d` | `data_format`
-  `layer_conv_lstm_2d` | `return_state`
-  `layer_depthwise_conv_2d` | `dilation_rate`
-  `layer_conv_3d_transpose` | `dilation_rate`
-  `layer_conv_1d` | `groups`
-  `layer_conv_2d` | `groups`
-  `layer_conv_3d` | `groups`
-  `layer_locally_connected_1d` | `implementation`
-  `layer_locally_connected_2d` | `implementation`
-  `layer_text_vectorization` | `vocabulary`
+    | layer name                   | new argument     |
+    |------------------------------|------------------|
+    | `layer_gru`                  | `time_major`     |
+    | `layer_lstm`                 | `time_major`     |
+    | `layer_max_pooling_1d`       | `data_format`    |
+    | `layer_conv_lstm_2d`         | `return_state`   |
+    | `layer_depthwise_conv_2d`    | `dilation_rate`  |
+    | `layer_conv_3d_transpose`    | `dilation_rate`  |
+    | `layer_conv_1d`              | `groups`         |
+    | `layer_conv_2d`              | `groups`         |
+    | `layer_conv_3d`              | `groups`         |
+    | `layer_locally_connected_1d` | `implementation` |
+    | `layer_locally_connected_2d` | `implementation` |
+    | `layer_text_vectorization`   | `vocabulary`     |
+
 
 - Added activation functions swish and gelu. (#1226)
 

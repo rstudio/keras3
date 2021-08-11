@@ -28,6 +28,8 @@ library(tensorflow)
 library(keras)
 envir::import_from(magrittr, `%<>%`)
 envir::import_from(dplyr, last)
+
+tf_version()
 ```
 ## Keras callbacks overview
 
@@ -102,7 +104,7 @@ Then, load the MNIST data for training and testing from Keras datasets API:
 mnist <- dataset_mnist()
 
 flatten_and_rescale <- function(x) {
-  x <- array_reshape(c(-1, 784)) 
+  x <- array_reshape(x, c(-1, 784)) 
   x <- x / 255
   x
 }
