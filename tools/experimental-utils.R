@@ -108,3 +108,11 @@ py_str.docstring_parser.common.DocstringParam <- function(x) {
     d[-1] %<>% paste("#'   ", .)
   writeLines(d)
 }
+
+
+maybe_rename <- function(x, ...) {
+  spec <- list(...)
+  i <- names(x) %in% spec
+  names(x)[i] <- names(spec)[spec == names(x)[i]]
+  x
+}
