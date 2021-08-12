@@ -30,6 +30,9 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
   if(!is.null(extra_packages))
     pkgs[gsub("[=<>~]{1,2}[0-9.]+$", "", extra_packages)] <- extra_packages
 
+  if(tensorflow == "default") # may be different from tensorflow
+    tensorflow <- default_version
+
   tensorflow::install_tensorflow(
     method = match.arg(method),
     conda = conda,
@@ -39,7 +42,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
   )
 }
 
-default_version = numeric_version("2.6")
+default_version <- numeric_version("2.6")
 
 default_extra_packages <- function(tensorflow_version) {
   pkgs <- c("tensorflow-hub", "scipy", "requests", "pyyaml", "Pillow", "h5py", "pandas")
