@@ -310,9 +310,8 @@ Let's consider:
 ```{r}
 # Create the discriminator
 discriminator <-
-  keras_model_sequential(name = "discriminator") %>%
-  layer_conv_2d(64, c(3, 3), strides = c(2, 2), padding = "same",
-                input_shape = c(28, 28, 1)) %>%
+  keras_model_sequential(name = "discriminator", input_shape = c(28, 28, 1)) %>%
+  layer_conv_2d(64, c(3, 3), strides = c(2, 2), padding = "same") %>%
   layer_activation_leaky_relu(alpha = 0.2) %>%
   layer_conv_2d(128, c(3, 3), strides = c(2, 2), padding = "same") %>%
   layer_activation_leaky_relu(alpha = 0.2) %>%
@@ -322,9 +321,9 @@ discriminator <-
 
 # Create the generator
 latent_dim <- 128L
-generator <- keras_model_sequential(name = "generator") %>%
+generator <- keras_model_sequential(name = "generator", input_shape = c(latent_dim)) %>%
   # We want to generate 128 coefficients to reshape into a 7x7x128 map
-  layer_dense(7 * 7 * 128, input_shape = c(latent_dim)) %>%
+  layer_dense(7 * 7 * 128) %>%
   layer_activation_leaky_relu(alpha = 0.2) %>%
   layer_reshape(c(7, 7, 128)) %>%
   layer_conv_2d_transpose(128, c(4, 4), strides = c(2, 2), padding = "same") %>%
