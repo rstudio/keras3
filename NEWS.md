@@ -91,6 +91,7 @@ New Features:
     | `layer_text_vectorization`   | `vocabulary`     |
 
 
+
 - Added activation functions swish and gelu. (#1226)
 
 - `set_vocabulary()` gains a `idf_weights` argument.
