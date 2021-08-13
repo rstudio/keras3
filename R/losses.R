@@ -127,6 +127,9 @@ loss_categorical_hinge <-
 attr(loss_categorical_hinge, "py_function_name") <- "categorical_hinge"
 c("categorical_hinge", "CategoricalHinge")
 
+# LossCategoricalHinge
+# keras$losses$CategoricalHinge()
+
 
 #' @rdname loss-functions
 #' @export

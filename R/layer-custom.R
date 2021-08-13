@@ -117,3 +117,82 @@ compat_custom_KerasLayer_handler <- function(layer_class, args) {
     r6_layer$.set_wrapper(layer)
     list(layer, args)
 }
+
+
+
+
+py_formals <- function(py_obj) {
+  # returns python fn formals as a list (formals(),
+  # but for py functions/methods
+  inspect <- reticulate::import("inspect")
+  sig <- if (inspect$isclass(py_obj)) {
+    inspect$signature(py_obj$`__init__`)
+  } else
+    inspect$signature(py_obj)
+
+  args <- pairlist()
+  it <- sig$parameters$items()$`__iter__`()
+  repeat {
+    x <- reticulate::iter_next(it)
+    if (is.null(x))
+      break
+    c(name, param) %<-% x
+
+    # we generally don't need to supply self in R
+    # though arguably this might be better to filter out somewhere else
+    if (name == 'self' && inspect$isclass(py_obj))
+      next
+
+    if (param$kind == inspect$Parameter$VAR_KEYWORD ||
+        param$kind == inspect$Parameter$VAR_POSITIONAL) {
+      args[["..."]] <- quote(expr = )
+      next
+    }
+
+    default <- param$default
+
+    if (inherits(default, "python.builtin.object")) {
+      if (default != inspect$Parameter$empty)
+        # must be something complex that failed to convert
+        warning(glue::glue(
+          "Failed to convert default arg {param} for {name} in {py_obj_expr}"
+        ))
+      args[[name]] <- quote(expr = )
+      next
+    }
+
+    args[[name]] <- default
+  }
+  args
+}
+
+
+
+#' @export
+#' @importFrom rlang %||%
+create_layer_wrapper <- function(LayerClass, modifiers=NULL, convert=TRUE) {
+  modifiers[["object"]] <- function(x) NULL # also forces modifiers
+
+  wrapper <- function() {
+    args <- capture_args(match.call(), modifiers)
+    create_layer(LayerClass, object, args)
+  }
+
+  if(inherits(LayerClass, "python.builtin.type")) {
+    formals(wrapper) <- c(alist(object = ), py_formals(LayerClass))
+  } else {
+    # LayerClass is R6
+    formals(wrapper) <-
+      local({
+        m <- LayerClass$public_methods
+        init <- m$initialize %||% m$`__init__`
+        f <- formals(init)
+        if(names(f)[1] == "self")
+          f$self <- NULL
+        c(alist(object = ), f)
+      })
+    LayerClass_R6 <- LayerClass
+    delayedAssign("LayerClass", r_to_py(LayerClass_R6, convert))
+  }
+  wrapper
+}
