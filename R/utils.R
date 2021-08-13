@@ -419,7 +419,8 @@ assert_all_dots_named <- function(envir = parent.frame(), cl) {
 
 capture_args <- function(cl, modifiers = NULL,
                          envir = parent.frame(),
-                         fn = sys.function(-1)) {
+                         fn = sys.function(-1),
+                         keep.null = FALSE) {
   ## bug: match.call() resolves incorrectly if dots are from not the default sys.parent()
   ## e.g, this fails if dots originate from the callers caller:
   #    cl <- eval(quote(match.call()), parent.frame())
