@@ -370,4 +370,3 @@ loss_cosine_proximity <- function(...) {
   loss_cosine_similarity(...)
 }
 attr(loss_cosine_proximity, "py_function_name") <- "cosine_proximity"
-

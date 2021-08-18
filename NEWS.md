@@ -63,6 +63,34 @@ New Features:
     (a `keras$losses$Loss` instance) if `y_true` and `y_pred` arguments are missing.
   - new builtin loss functions: loss_huber(), loss_kl_divergence()
 
+- metric functions:
+  - all the metric functions gain the ability to return a `keras$metrics$Metric` instance if called without `y_true` and `y_pred`
+  - Each metric function is now documented separately, with a common `?Metric` topic demonstrating example usage.
+  - New built in metrics:
+        metric_true_negatives
+        metric_true_positives
+        metric_false_negatives
+        metric_false_positives
+        metric_specificity_at_sensitivity
+        metric_sensitivity_at_specificity
+        metric_precision
+        metric_precision_at_recall
+        metric_sum
+        metric_recall
+        metric_recall_at_precision
+        metric_root_mean_squared_error
+        metric_sparse_categorical_accuracy
+        metric_mean_tensor
+        metric_mean_wrapper
+        metric_mean_iou
+        metric_mean_relative_error
+        metric_logcosh_error
+        metric_mean
+        metric_cosine_similarity
+        metric_categorical_hinge
+        metric_accuracy
+        metric_auc
+
 - keras_model_sequential() gains the ability to accept arguments that
   define input layer like `input_shape` and `dtype`.
   See `?keras_model_sequential` for details and examples.

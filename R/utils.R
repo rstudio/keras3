@@ -401,6 +401,21 @@ is_keras_tensor <- function(x) {
 
 
 
+assert_all_dots_named <- function(envir = parent.frame(), cl) {
+
+  x <- eval(quote(list(...)), envir)
+# x <- list(1,2)
+  if(!length(x))
+    return()
+
+  x <- names(x)
+  if(is.character(x) && !anyNA(x) && all(x != ""))
+    return()
+
+  stop("All arguments provided to `...` must be named.\n",
+       "Call with unnamed arguments in dots:\n  ",
+       paste(deparse(cl, 500L), collapse = "\n"))
+}
 
 capture_args <- function(cl, modifiers = NULL,
                          envir = parent.frame(),
@@ -413,14 +428,21 @@ capture_args <- function(cl, modifiers = NULL,
   fn_arg_nms <- names(formals(fn))
   known_args <- intersect(names(cl), fn_arg_nms)
   names(known_args) <- known_args
-  cl2 <- as.call(c(quote(list), lapply(known_args, as.symbol),
-                   if("..." %in% fn_arg_nms) quote(...)))
-  # this might reorder args by assuming ... are last, but it doesn't matter
-  # since everything is supplied as a keyword arg to the python side anyway
-  args <- eval(cl2, envir)
+  cl2 <- c(quote(list), lapply(known_args, as.symbol))
 
-  for (nm in intersect(names(args), names(modifiers)))
-    args[[nm]] <- modifiers[[nm]](args[[nm]])
+  if("..." %in% fn_arg_nms) {
+    assert_all_dots_named(envir, cl)
+    # this might reorder args by assuming ... are last, but it doesn't matter
+    # since everything is supplied as a keyword arg to the python side anyway
+    cl2 <- c(cl2, quote(...))
+  }
+
+  args <- eval(as.call(cl2), envir)
+
+  nms_to_modify <- intersect(names(args), names(modifiers))
+  for (nm in nms_to_modify)
+    args[nm] <- list(modifiers[[nm]](args[[nm]]))
+   # list() so if modifier returns NULL, don't remove the arg
 
   args
 }
