@@ -74,6 +74,7 @@ Conj.keras.engine.keras_tensor.KerasTensor <- get("Conj.tensorflow.tensor", envi
 #' @export
 cos.keras.engine.keras_tensor.KerasTensor <- get("cos.tensorflow.tensor", envir = asNamespace("tensorflow"))
 
+#' @method cospi keras.engine.keras_tensor.KerasTensor
 #' @export
 cospi.keras.engine.keras_tensor.KerasTensor <- get("cospi.tensorflow.tensor", envir = asNamespace("tensorflow"))
 
@@ -133,6 +134,7 @@ sign.keras.engine.keras_tensor.KerasTensor <- get("sign.tensorflow.tensor", envi
 #' @export
 sin.keras.engine.keras_tensor.KerasTensor <- get("sin.tensorflow.tensor", envir = asNamespace("tensorflow"))
 
+#' @method sinpi keras.engine.keras_tensor.KerasTensor
 #' @export
 sinpi.keras.engine.keras_tensor.KerasTensor <- get("sinpi.tensorflow.tensor", envir = asNamespace("tensorflow"))
 
@@ -143,6 +145,7 @@ sqrt.keras.engine.keras_tensor.KerasTensor <- get("sqrt.tensorflow.tensor", envi
 tan.keras.engine.keras_tensor.KerasTensor <- get("tan.tensorflow.tensor", envir = asNamespace("tensorflow"))
 
 #' @export
+#' @method tanpi keras.engine.keras_tensor.KerasTensor
 tanpi.keras.engine.keras_tensor.KerasTensor <- get("tanpi.tensorflow.tensor", envir = asNamespace("tensorflow"))
 
 

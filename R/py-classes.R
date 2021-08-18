@@ -318,6 +318,7 @@ r_formals_to_py__signature__ <- function(fn) {
   public <- active <- list()
   for(nm in names(env)) {
     if(bindingIsActive(nm, env)) {
+      # requires R >= 4.0
       active[[nm]] <- activeBindingFunction(nm, env)
     } else
       public[[nm]] <- env[[nm]]
@@ -340,3 +341,8 @@ r_formals_to_py__signature__ <- function(fn) {
   assign(classname, py_cls, envir = parent_env)
   invisible(py_cls)
 }
+
+if (getRversion() < "4.0")
+  activeBindingFunction <- function(nm, env) {
+    as.list.environment(env, all.names = TRUE)[[nm]]
+  }
