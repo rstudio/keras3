@@ -23,7 +23,7 @@ tf_version()
 ```
 
 
-## The `Layer` class: the combination of state (weights) and some computation
+## The `Layer` class: a combination of state (weights) and some computation
 
 One of the central abstractions in Keras is the `Layer` class. A layer
 encapsulates both a state (the layer's "weights") and a transformation from
@@ -82,7 +82,7 @@ layer_linear
 # }
 # <environment: 0x557cc3d71158>
 ```
-Now `layer_linear` is a layer constructor composes nicely with `%>%`, just like the built in layers:
+Now `layer_linear` as a layer constructor composes nicely with `%>%`, just like the built-in layers:
 ```{r}
 model <- keras_model_sequential() %>%
   layer_linear(4, 2)
@@ -112,7 +112,7 @@ stopifnot(all.equal(
 ))
 ```
 
-Note you also have access to a quicker shortcut for adding weight to a layer:
+Note you also have access to a quicker shortcut for adding a weight to a layer:
 the `add_weight()` method:
 
 
@@ -288,7 +288,7 @@ Linear(keras$layers$Layer) %py_class% {
 
 
 The `build()` method of your layer will automatically run the first time
-your layer instance is called. You now have a layer that's lazy and thus easier to use:
+your layer instance is called. You now have a layer that can handle an arbitrary number of input features:
 
 ```{r}
 # At instantiation, we don't know on what inputs this is going to get called
@@ -516,7 +516,7 @@ LogisticEndpoint(keras$layers$Layer) %py_class% {
 
 
 
-Metrics tracked in this way are accessible via `layer.metrics`:
+Metrics tracked in this way are accessible via `layer$metrics`:
 
 ```{r}
 layer <- LogisticEndpoint()
@@ -759,7 +759,7 @@ resnet %>% save_model_tf(filepath)
 
 Here's what you've learned so far:
 
-- A `Layer` encapsulate a state (created in `initialize()` or `build()`) and some
+- A `Layer` encapsulates a state (created in `initialize()` or `build()`), and some
 computation (defined in `call()`).
 - Layers can be recursively nested to create new, bigger computation blocks.
 - Layers can create and track losses (typically regularization losses) as well
@@ -925,7 +925,7 @@ vae %>% fit(x_train, x_train, epochs = 2, batch_size = 64)
 
 ## Beyond object-oriented development: the Functional API
 
-Was this example too much object-oriented development for you? You can also
+If you prefer a less object-oriented way of programming, you can also
 build models using the [Functional API](/guides/functional_api/). Importantly,
 choosing one style or another does not prevent you from leveraging components
 written in the other style: you can always mix-and-match.
