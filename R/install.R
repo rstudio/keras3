@@ -61,7 +61,7 @@ default_extra_packages <- function(tensorflow_version) {
   constraint <- sub("^([><=~]{,2}).*", "\\1", v)
   v <- substr(v, nchar(constraint)+1, nchar(v))
 
-  if(v == "default")
+  if(v %in% c("default", "")) # "" might be from cpu|gpu
     v <- default_version
 
   v <- numeric_version(v)
