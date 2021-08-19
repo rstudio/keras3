@@ -140,10 +140,6 @@ py_formals <- function(py_obj) {
     name <- x[[1]]
     param <- x[[2]]
 
-    # we generally don't need to supply self in R
-    # though arguably this might be better to filter out somewhere else
-    if (name == 'self' && inspect$isclass(py_obj))
-      next
 
     if (param$kind == inspect$Parameter$VAR_KEYWORD ||
         param$kind == inspect$Parameter$VAR_POSITIONAL) {
@@ -207,24 +203,24 @@ create_layer_wrapper <- function(LayerClass, modifiers=NULL, convert=TRUE) {
     create_layer(LayerClass, object, args)
   }
 
-  if(inherits(LayerClass, "python.builtin.type")) {
-    formals(wrapper) <- c(formals(wrapper), py_formals(LayerClass))
-  } else {
-    # LayerClass is R6
-    formals(wrapper) <-
-      local({
-        m <- LayerClass$public_methods
-        init <- m$initialize %||% m$`__init__`
-        f <- formals(init)
-        f$self <- NULL
-        c(formals(wrapper), f)
-      })
+  formals(wrapper) <- local({
+    if (inherits(LayerClass, "python.builtin.type")) {
+      f <- py_formals(LayerClass)
+    } else {
+      # LayerClass is R6
+      m <- LayerClass$public_methods
+      init <- m$initialize %||% m$`__init__`
+      f <- formals(init)
+    }
+    f$self <- NULL
+    c(formals(wrapper), f)
+  })
 
-    # create_layer() will call r_to_py() as needed, but we create a promise here
-    # to avoid creating the class constructor from scratch every time a class
-    # instance is created.
+  # create_layer() will call r_to_py() as needed, but we create a promise here
+  # to avoid creating the class constructor from scratch every time a class
+  # instance is created.
+  if (!inherits(LayerClass, "python.builtin.type"))
     delayedAssign("LayerClass", r_to_py(LayerClass_in, convert))
-  }
 
   class(wrapper) <- c("keras_layer_wrapper", "function")
   attr(wrapper, "Layer") <- LayerClass_in
@@ -240,15 +236,3 @@ r_to_py.keras_layer_wrapper <- function(fn, convert = FALSE) {
     layer <- r_to_py(layer, convert)
   layer
 }
-
-    # delayedAssign("LayerClass", local({
-    #   layer <- LayerClass_source
-    #   layer <- attr(layer, "Layer", TRUE) %||% layer
-    #   if(!inherits(layer, "python.builtin.type"))
-    #     layer <- r_to_py.R6ClassGenerator(layer, convert)
-    #   layer
-    # }))
-      # delayedAssign("LayerClass", local({
-
-
-  # LayerClass <- attr(LayerClass, "Layer", TRUE) %||% LayerClass
