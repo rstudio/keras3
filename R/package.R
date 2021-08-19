@@ -96,7 +96,7 @@ keras <- NULL
 
 .onLoad <- function(libname, pkgname) {
 
-  # resolve the implementaiton module (might be keras proper or might be tensorflow)
+  # resolve the implementation module (might be keras proper or might be tensorflow)
   implementation_module <- resolve_implementation_module()
 
   # if KERAS_PYTHON is defined then forward it to RETICULATE_PYTHON

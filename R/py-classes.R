@@ -119,6 +119,13 @@ resolve_py_type_inherits <- function(inherit, convert=FALSE) {
 
 as_py_methods <- function(x, env, convert) {
   out <- list()
+
+  if ("initialize" %in% names(x) && "__init__" %in% names(x))
+    stop("You should not specify both `__init__` and `initialize` methods.")
+
+  if ("finalize" %in% names(x) && "__del__" %in% names(x))
+    stop("You should not specify both `__del__` and `finalize` methods.")
+
   for (name in names(x)) {
     fn <- x[[name]]
     name <- switch(name,

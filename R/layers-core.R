@@ -488,13 +488,13 @@ create_layer <- function(layer_class, object, args = list()) {
 
   if (inherits(layer_class, "R6ClassGenerator")) {
 
-    if (identical(layer_class$get_inherit() , KerasLayer)) {
+    if (identical(layer_class$get_inherit(), KerasLayer)) {
       # old-style custom class, inherits KerasLayer
       c(layer, args) %<-% compat_custom_KerasLayer_handler(layer_class, args)
       layer_class <- function(...) layer
     } else {
       # new-style custom class, inherits anything else, typically keras$layers$Layer
-      layer_class <- r_to_py.R6ClassGenerator(layer_class, convert = TRUE)
+      layer_class <- r_to_py(layer_class, convert = TRUE)
     }
   }
 

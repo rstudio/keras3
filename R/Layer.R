@@ -62,68 +62,26 @@ Layer <- function(classname, initialize, build = NULL, call = NULL,
                   compute_output_shape = NULL, ...,
                   inherit = tensorflow::tf$keras$layers$Layer) {
 
+  inherit <- substitute(inherit)
 
-  defs <- list(
-    initialize = initialize,
-    build = build,
-    call = call,
-    compute_output_shape = compute_output_shape
-  )
-  defs <- Filter(Negate(is.null), defs)
-  defs <- append(defs, list(...))
+  public <- list(...)
+  public$initialize <- initialize
+  public$build <- build
+  public$call <- call
+  public$compute_output_shape <- compute_output_shape
 
+  parent_env <- parent.frame()
 
-  # allow using the initialize method
-  if ("initialize" %in% names(defs)) {
-    if (!is.null(defs$`__init__`))
-      stop("You should not specify both __init__ and initialize methods.", call.=FALSE)
-
-    defs[["__init__"]] <- defs$initialize
-  }
-
-  # automatically add the `self` argument
-  defs <- lapply(defs, function(x) {
-
-    if (inherits(x, "function")) {
-     formals(x) <- append(
-       pairlist(self = NULL),
-       formals(x)
-     )
-    }
-
-    x
-  })
-
-  # makes the function return NULL. `__init__` in python must always return None
-  defs$`__init__` <- wrap_return_null(defs$`__init__`)
-
-  # allow inheriting from custom created layers
-  if (!is.null(attr(inherit, "layer")))
-    inherit <- attr(inherit, "layer")
-
-  layer <- reticulate::PyClass(
+  # R6Class() calls substitute() on inherit;
+  r_cls <- eval(as.call(list(
+    quote(R6::R6Class),
     classname = classname,
-    defs = defs,
-    inherit = inherit
-  )
-  layer$`__module__` <- classname
+    public = public,
+    active = NULL,
+    inherit = inherit,
+    cloneable = FALSE,
+    parent_env = parent_env
+  )))
 
-  # build the function to be used
-  f <- function(object) {
-    .args <- as.list(match.call())[-c(1)]
-    .args <- .args[names(.args) != "object"]
-    create_layer(layer, object, .args)
-  }
-  formals(f) <- append(
-    formals(f),
-    formals(initialize)
-  )
-  attr(f, "layer") <- layer
-  f
-}
-
-# makes the function return NULL. `__init__` in python must always return None.
-wrap_return_null <- function(f) {
-  body(f)[[length(body(f)) + 1]] <- substitute(return(NULL))
-  f
+  create_layer_wrapper(r_cls)
 }
