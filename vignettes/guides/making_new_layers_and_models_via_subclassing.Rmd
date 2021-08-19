@@ -55,7 +55,6 @@ Linear(keras$layers$Layer) %py_class% {
 }
 ```
 
-
 You would use a layer by calling it on some tensor input(s), much like a regular
 function.
 
@@ -66,44 +65,65 @@ y <- linear_layer(x)
 print(y)
 ```
 
-All the builtin layers in the keras package (e.g., `layer_dense()`) are
-additionally designed to compose nicely with the pipe operator (`%>%`), so that
-the layer instance is conveniently created on demand when an existing model or
-tensor is piped in. In order to make a custom layer similarly compose nicely
-with the pipe, you can call `create_layer_wrapper()`.
+`Linear` behaves similarly to a layer present in the python interface to keras
+(e.g., `keras$layers$Dense`).
+
+However, one additional step is needed to make it behave like the builtin layers
+present in the keras R package (e.g., `layer_dense()`).
+
+Keras layers in R are designed to compose nicely with the pipe operator
+(`%>%`), so that the layer instance is conveniently created on demand when an
+existing model or tensor is piped in. In order to make a custom layer similarly
+compose nicely with the pipe, you can call `create_layer_wrapper()` on the layer
+class constructor.
 
 ```{r}
 layer_linear <- create_layer_wrapper(Linear)
-layer_linear
-# function (object, units = 32, input_dim = 32)
-# {
-#     args <- capture_args(match.call(), modifiers)
-#     create_layer(LayerClass, object, args)
-# }
-# <environment: 0x557cc3d71158>
 ```
-Now `layer_linear` as a layer constructor composes nicely with `%>%`, just like the built-in layers:
+
+Now `layer_linear` is a layer constructor that composes nicely with `%>%`, just like the built-in layers:
+
 ```{r}
 model <- keras_model_sequential() %>%
   layer_linear(4, 2)
-model(k_ones(c(2, 2))) |> invisible() # force model to build
+
+model(k_ones(c(2, 2)))
+
 model
-# Model
-# Model: "sequential"
-# __________________________________________________________________________________________
-# Layer (type)                            Output Shape                        Param #
-# ==========================================================================================
-# linear_1 (Linear)                       (2, 4)                              12
-# ==========================================================================================
-# Total params: 12
-# Trainable params: 12
-# Non-trainable params: 0
-# __________________________________________________________________________________________
 ```
 
+Because the pattern above is so common, there is a convenience function that
+combines the steps of subclassing `keras$layers$Layer` and calling
+`create_layer_wrapper` on the output: the `Layer` function. The `layer_linear`
+defined below is identical to the `layer_linear` defined above.
 
-Note that the weights `w` and `b` are automatically tracked by the layer upon
-being set as layer attributes:
+```{r}
+layer_linear <- Layer(
+  "Linear",
+  initialize =  function(units = 32, input_dim = 32) {
+    super$initialize()
+    w_init <- tf$random_normal_initializer()
+    self$w <- tf$Variable(initial_value = w_init(shape = shape(input_dim, units), 
+                                                 dtype = "float32"), 
+                          trainable = TRUE)
+    b_init <- tf$zeros_initializer()
+    self$b <- tf$Variable(initial_value = b_init(shape = shape(units), 
+                                                 dtype = "float32"),
+                          trainable = TRUE)
+  },
+  
+  call = function(inputs) {
+    tf$matmul(inputs, self$w) + self$b
+  }
+)
+```
+
+For the remainder of this vignette we'll be using the `%py_class%` constructor, 
+only because it does less and for that reason is maybe more illuminating for the purpose of a guide like this. However,
+in your own code feel free to use `create_layer_wrapper` and/or `Layer` if you prefer.
+
+Note that the weights `w` and `b` are automatically tracked by the layer upon being set as
+layer attributes:
 
 ```{r}
 stopifnot(all.equal(
@@ -112,9 +132,8 @@ stopifnot(all.equal(
 ))
 ```
 
-Note you also have access to a quicker shortcut for adding a weight to a layer:
+You also have access to a quicker shortcut for adding a weight to a layer:
 the `add_weight()` method:
-
 
 ```{r}
 Linear(keras$layers$Layer) %py_class% {
@@ -222,45 +241,6 @@ In the Keras API, we recommend creating layer weights in the `build(self,
 inputs_shape)` method of your layer. Like this:
 
 ```{r}
-# Same as below, but using R6.
-# One benefit of R6: this layer class definition initializes python lazily, so
-# it can be safely used in a package.
-Linear <- R6::R6Class(
-  classname = "Linear",
-  inherit = keras$layers$Layer,
-  public = list(
-    initialize = function(units = 32) {
-      super$initialize()
-      self$units <- units
-    },
-    build = function(input_shape) {
-      print(sys.call())
-      self$w <- self$add_weight(
-        shape = shape(tail(input_shape, 1), self$units),
-        initializer = "random_normal",
-        trainable = TRUE
-      )
-      self$b <- self$add_weight(
-        shape = shape(self$units),
-        initializer = "random_normal",
-        trainable = TRUE
-      )
-    },
-    call = function(inputs) {
-      tf$matmul(inputs, self$w) + self$b
-    }
-  )
-)
-layer_linear <- create_layer_wrapper(Linear)
-
-model <- keras_model_sequential() %>%
-  layer_linear(32)
-model(k_ones(c(2, 2))) |> invisible() # force model to build
-model
-```
-
-
-```{r}
 Linear(keras$layers$Layer) %py_class% {
   initialize <- function(units = 32) {
     super$initialize()
@@ -285,7 +265,6 @@ Linear(keras$layers$Layer) %py_class% {
   }
 }
 ```
-
 
 The `build()` method of your layer will automatically run the first time
 your layer instance is called. You now have a layer that can handle an arbitrary number of input features:
@@ -357,7 +336,6 @@ ActivityRegularizationLayer(keras$layers$Layer) %py_class% {
     inputs
   }
 }
-# layer_activity_regularization <- create_layer_wrapper(ActivityRegularizationLayer)
 ```
 
 These losses (including those created by any inner layer) can be retrieved via
@@ -413,28 +391,14 @@ print(layer$losses)
 These losses are meant to be taken into account when writing training loops,
 like this:
 
-```{r}
-zip <- function(..., simplify = TRUE) {
-  .mapply(if (simplify) c else list, list(...), NULL)
-}
-```
-
 ```{r, eval=FALSE}
 # Instantiate an optimizer.
 optimizer <- optimizer_sgd(learning_rate = 1e-3)
 loss_fn <- loss_sparse_categorical_crossentropy(from_logits = TRUE)
 
-# while(!is.null(batch <- iter_next(dataset_iterator))) { ... } ## too compact?
-# batch <- iter_next(dataset_iterator) %\\% break               ## depend rlang?
-# autograph({ for (batch in dataset) ...})                      ## too magical?
-# ag_for(batch, dataset, {...})                                 ## too unusual?
-
 # Iterate over the batches of a dataset.
-# train_dataset <- dataset_mnist()
 dataset_iterator <- reticulate::as_iterator(train_dataset)
-repeat {
-  batch <- reticulate::iter_next(dataset_iterator)
-  if (is.null(batch)) break
+while(!is.null(batch <- iter_next(dataset_iterator))) {
   c(x_batch_train, y_batch_train) %<-% batch
   with(tf$GradientTape() %as% tape, {
     logits <- layer(x_batch_train) # Logits for this minibatch
@@ -444,7 +408,8 @@ repeat {
     loss_value <- loss_value + sum(model$losses)
   })
   grads <- tape$gradient(loss_value, model$trainable_weights)
-  optimizer$apply_gradients(zip(grads, model$trainable_weights))
+  optimizer$apply_gradients(
+    purrr::transpose(list(grads, model$trainable_weights)))
 }
 ```
 
@@ -492,9 +457,8 @@ via `add_loss()`, and it computes an accuracy scalar, which it tracks via
 LogisticEndpoint(keras$layers$Layer) %py_class% {
   initialize <- function(name = NULL) {
     super$initialize(name = name)
-    # loss_binary_crossentropy(from_logits = TRUE)
-    self$loss_fn <- keras$losses$BinaryCrossentropy(from_logits = TRUE)
-    self$accuracy_fn <- keras$metrics$BinaryAccuracy()
+    self$loss_fn <- loss_binary_crossentropy(from_logits = TRUE) 
+    self$accuracy_fn <- metric_binary_accuracy()
   }
 
   call <- function(targets, logits, sample_weights = NULL) {
@@ -657,7 +621,9 @@ the `call()` method.
 
 By exposing this argument in `call()`, you enable the built-in training and
 evaluation loops (e.g. `fit()`) to correctly use the layer in training and
-inference.
+inference. Note, the default of `NULL` means that the training parameter will be
+inferred by keras from the training context (e.g., it will be `TRUE` if called
+from `fit()`, `FALSE` if called from `predict()`)
 
 ```{r}
 CustomDropout(keras$layers$Layer) %py_class% {
@@ -752,9 +718,7 @@ resnet %>% fit(dataset, epochs = 10)
 resnet %>% save_model_tf(filepath)
 ```
 
-```
 
-```
 ## Putting it all together: an end-to-end example
 
 Here's what you've learned so far:
@@ -860,7 +824,7 @@ vae <- VariationalAutoEncoder(original_dim, 64, 32)
 optimizer <- optimizer_adam(learning_rate = 1e-3)
 mse_loss_fn <- loss_mean_squared_error()
 
-loss_metric <- keras$metrics$Mean()
+loss_metric <- metric_mean()
 
 x_train <- dataset_mnist()$train$x %>%
   array_reshape(c(60000, 784)) %>%
@@ -967,3 +931,74 @@ vae %>% fit(x_train, x_train, epochs = 3, batch_size = 64)
 ```
 
 For more information, make sure to read the [Functional API guide](/guides/functional_api/).
+
+
+## Defining custom layers and models in an R package
+
+Unfortunately you can't use anything that creates references to python objects (e.g., `%py_class%`), at the top-level of an R package.
+
+When you build an R package, all the R files in the `R/` directory get sourced
+in an R environment (the package namespace), and then that environment is saved
+as part of the package bundle. Loading the package means restoring the saved R
+environment. This means that the R code only gets sourced once, at build time.
+If you create references to external objects (e.g., python objects) at package
+build time, they will be NULL pointers when the package is loaded, because the
+external objects they pointed to at build time no longer exist at load time.
+
+The solution is to delay creating references to python objects until run time. There are a few ways to do this:
+
+
++ `Layer()` is lazy about initializing the python reference, so it is safe to use in a package.
+
++ `%py_class%` is itself a wrapper around `r_to_py(R6Class(...))`. To avoid
+calling `r_to_py` at build time, you can define your custom layers using
+`create_layer_wrapper(R6Class(...))`. `create_layer_wrapper` will delay calling
+`r_to_py` on the R6Class until the first time a layer instance is created, so it
+is safe to use in package. Here is an example for how the `layer_linear` could
+be safely defined in an R package with this approach.
+
+```{r}
+Linear <- R6::R6Class(
+  classname = "Linear",
+  inherit = keras$layers$Layer,
+  public = list(
+    initialize = function(units = 32) {
+      super$initialize()
+      self$units <- units
+    },
+    build = function(input_shape) {
+      self$w <- self$add_weight(
+        shape = shape(tail(input_shape, 1), self$units),
+        initializer = "random_normal",
+        trainable = TRUE
+      )
+      self$b <- self$add_weight(
+        shape = shape(self$units),
+        initializer = "random_normal",
+        trainable = TRUE
+      )
+    },
+    call = function(inputs) {
+      tf$matmul(inputs, self$w) + self$b
+    }
+  )
+)
+
+#' @export
+layer_linear <- create_layer_wrapper(Linear)
+```
+
++ If the above approach doesn't satisfy your needs, you can still use
+`%py_class%` so long as it is called only after the package is loaded and the
+python session is initialized.
+
+If you're writing an R package that uses keras and reticulate, 
+[this article](https://rstudio.github.io/reticulate/articles/package.html) might be helpful.
+
+## Summary
+
+In this guide you learned about creating custom layers and models in keras.
+
++  The constructors available: `%py_class%`, `create_layer_wrapper()`, `R6Class()`, and `Layer()`. 
++  What methods to you might want to define to your model: `initialize()`, `build()`, `call()`, and `get_config()`.
++  What convenience methods are available when you subclass `keras$layers$Layer`: `add_weight()`, `add_loss()`, and `add_metric()`
