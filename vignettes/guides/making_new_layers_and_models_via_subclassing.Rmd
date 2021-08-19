@@ -11,6 +11,7 @@ description: Complete guide to writing `Layer` and `Model` objects from scratch.
 ## Setup
 ```{r, echo=FALSE}
 Sys.setenv(TF_CPP_MIN_LOG_LEVEL = 2)
+knitr::opts_chunk$set(comment = NA, eval = FALSE)
 ```
 
 ```{r}
@@ -103,22 +104,22 @@ layer_linear <- Layer(
   initialize =  function(units = 32, input_dim = 32) {
     super$initialize()
     w_init <- tf$random_normal_initializer()
-    self$w <- tf$Variable(initial_value = w_init(shape = shape(input_dim, units), 
-                                                 dtype = "float32"), 
+    self$w <- tf$Variable(initial_value = w_init(shape = shape(input_dim, units),
+                                                 dtype = "float32"),
                           trainable = TRUE)
     b_init <- tf$zeros_initializer()
-    self$b <- tf$Variable(initial_value = b_init(shape = shape(units), 
+    self$b <- tf$Variable(initial_value = b_init(shape = shape(units),
                                                  dtype = "float32"),
                           trainable = TRUE)
   },
-  
+
   call = function(inputs) {
     tf$matmul(inputs, self$w) + self$b
   }
 )
 ```
 
-For the remainder of this vignette we'll be using the `%py_class%` constructor, 
+For the remainder of this vignette we'll be using the `%py_class%` constructor,
 only because it does less and for that reason is maybe more illuminating for the purpose of a guide like this. However,
 in your own code feel free to use `create_layer_wrapper` and/or `Layer` if you prefer.
 
@@ -419,7 +420,7 @@ For a detailed guide about writing training loops, see the
 These losses also work seamlessly with `fit()` (they get automatically summed
 and added to the main loss, if any):
 
-```{r, eval=TRUE}
+```{r}
 input <- layer_input(shape(3))
 output <- input %>% layer_activity_regularization()
 # output <- ActivityRegularizationLayer()(input)
@@ -457,7 +458,7 @@ via `add_loss()`, and it computes an accuracy scalar, which it tracks via
 LogisticEndpoint(keras$layers$Layer) %py_class% {
   initialize <- function(name = NULL) {
     super$initialize(name = name)
-    self$loss_fn <- loss_binary_crossentropy(from_logits = TRUE) 
+    self$loss_fn <- loss_binary_crossentropy(from_logits = TRUE)
     self$accuracy_fn <- metric_binary_accuracy()
   }
 
@@ -835,10 +836,7 @@ train_dataset <- tensor_slices_dataset(x_train) %>%
   dataset_batch(64)
 
 epochs <- 2
-```
 
-
-```{r}
 # Iterate over epochs.
 for (epoch in seq(epochs)) {
   cat(sprintf("Start of epoch %d\n", epoch))
@@ -862,7 +860,8 @@ for (epoch in seq(epochs)) {
         loss %<>% add(vae$losses[[1]]) # Add KLD regularization loss
       })
       grads <- tape$gradient(loss, vae$trainable_weights)
-      optimizer$apply_gradients(zip(grads, vae$trainable_weights))
+      optimizer$apply_gradients(
+        purrr::transpose(list(grads, vae$trainable_weights)))
 
       loss_metric(loss)
 
@@ -992,13 +991,13 @@ layer_linear <- create_layer_wrapper(Linear)
 `%py_class%` so long as it is called only after the package is loaded and the
 python session is initialized.
 
-If you're writing an R package that uses keras and reticulate, 
+If you're writing an R package that uses keras and reticulate,
 [this article](https://rstudio.github.io/reticulate/articles/package.html) might be helpful.
 
 ## Summary
 
 In this guide you learned about creating custom layers and models in keras.
 
-+  The constructors available: `%py_class%`, `create_layer_wrapper()`, `R6Class()`, and `Layer()`. 
++  The constructors available: `%py_class%`, `create_layer_wrapper()`, `R6Class()`, and `Layer()`.
 +  What methods to you might want to define to your model: `initialize()`, `build()`, `call()`, and `get_config()`.
 +  What convenience methods are available when you subclass `keras$layers$Layer`: `add_weight()`, `add_loss()`, and `add_metric()`
