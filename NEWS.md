@@ -4,7 +4,7 @@ Breaking changes:
 `set_vocabulary()` arguments `df_data` and `oov_df_value` are deprecated. They are superseded by the new argument `idf_weights`.
 
 TF 2.6 changes:
-- `predict_proba` and `predict_classes` were removed.
+- `predict_proba()` and `predict_classes()` were removed.
 - model serialization to/from yaml was removed.
 - default changed: `layer_text_vectorization(pad_to_max_tokens=FALSE)`
 
@@ -13,7 +13,7 @@ New Features:
 
 - The `keras` python module is exported
 
-- Introduced `%py_class%`, a new python class generator constructor.
+- Introduced `%py_class%`, a python class constructor constructor.
 
 - New vignettes:
   - Subclassing python classes: How to use `%py_class%`.
@@ -29,7 +29,8 @@ New Features:
 - New function `create_layer_wrapper()` that can create a composing R function wrapper around a custom layer class.
 
 - The `compile()` method for keras models has been updated:
-  - `optimizer` is now an optional argument. It defaults to "rmsprop" for regular keras models. Custom models can specify their own default optimizer.
+  - `optimizer` is now an optional argument. It defaults to `"rmsprop"` for regular keras models. 
+     Custom models can specify their own default optimizer.
   - `loss` is now an optional argument.
   - New optional arguments: `run_eagerly`, `steps_per_execution`.
   - `target_tensors` and `sample_weight_mode` must now be supplied as named arguments.
@@ -61,16 +62,16 @@ New Features:
 
   - pandas is now a default extra packages installed by `install_keras()`
 
-- loss functions:
-  - all the loss functions gain the ability to return a callable
+- Loss functions:
+  - All the loss functions gain the ability to return a callable
     (a `keras$losses$Loss` instance) if `y_true` and `y_pred` arguments are missing.
-  - new builtin loss functions:
+  - New builtin loss functions:
 
       -  `loss_huber()`
       -  `loss_kl_divergence()`
 
-- metric functions:
-  - all the metric functions gain the ability to return a `keras$metrics$Metric` instance if called without `y_true` and `y_pred`
+- Metric functions:
+  - All the metric functions gain the ability to return a `keras$metrics$Metric` instance if called without `y_true` and `y_pred`
   - Each metric function is now documented separately, with a common `?Metric` topic demonstrating example usage.
   - New built in metrics:
 
@@ -98,7 +99,7 @@ New Features:
       -  `metric_accuracy()`
       -  `metric_auc()`
 
-- keras_model_sequential() gains the ability to accept arguments that
+- `keras_model_sequential()` gains the ability to accept arguments that
   define input layer like `input_shape` and `dtype`.
   See `?keras_model_sequential` for details and examples.
 
@@ -126,7 +127,7 @@ New Features:
     | `layer_text_vectorization`   | `vocabulary`     |
 
 
-- glue added to Imports
+- The glue package was added to Imports
 
 - Added activation functions swish and gelu. (#1226)
 
