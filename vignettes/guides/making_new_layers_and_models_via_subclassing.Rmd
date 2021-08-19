@@ -1,10 +1,14 @@
 ---
-title: "Customizing what happens in `fit()`"
+title: "Writing `Layer` and `Model` objects from scratch."
 author: "[fchollet](https://twitter.com/fchollet), [t-kalinowski](https://github.com/t-kalinowski)"
 output: rmarkdown::html_vignette
 date created: 2019/03/01
 last modified: 2020/04/13
-description: Complete guide to writing `Layer` and `Model` objects from scratch.
+description: Guide to writing `Layer` and `Model` objects from scratch.
+vignette: >
+  %\VignetteIndexEntry{Writing `Layer` and `Model` objects from scratch.}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 
