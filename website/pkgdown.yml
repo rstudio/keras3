@@ -64,6 +64,7 @@ articles:
   functional_api: functional_api.html
   guide_keras: guide_keras.html
   guides/customizing_what_happens_in_fit: customizing_what_happens_in_fit.html
+  guides/making_new_layers_and_models_via_subclassing: making_new_layers_and_models_via_subclassing.html
   guides/writing_your_own_callbacks: writing_your_own_callbacks.html
   index: index.html
   python_subclasses: python_subclasses.html
@@ -71,5 +72,5 @@ articles:
   sequential_model: sequential_model.html
   training_callbacks: training_callbacks.html
   training_visualization: training_visualization.html
-last_built: 2021-08-11T20:24Z
+last_built: 2021-08-19T17:50Z
 

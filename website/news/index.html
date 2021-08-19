@@ -129,6 +129,9 @@
       <a href="../articles/python_subclasses.html">Python Subclasses</a>
     </li>
     <li>
+      <a href="../articles/guides/making_new_layers_and_models_via_subclassing.Rmd">Making New Layers and Models via Subclassing</a>
+    </li>
+    <li>
       <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
     </li>
     <li class="divider"></li>
@@ -244,17 +247,19 @@
 <p>New vignettes:</p>
 <ul>
 <li>Subclassing python classes: How to use <code><a href="../reference/%py_class%.html">%py_class%</a></code>.</li>
+<li>Making new layers and models via subclassing.</li>
 <li>Customizing what happens in fit (example of how to define a model, like a GAN, with a custom train step).</li>
 <li>Writing your own callbacks.</li>
 </ul>
 </li>
 <li><p>All optimizer had argument <code>lr</code> renamed to <code>learning_rate</code>. (backwards compatibility is preserved, an R warning is now issued).</p></li>
-<li><p>keras now imports the glue package</p></li>
+<li><p><code><a href="../reference/Layer.html">Layer()</a></code> custom layer constructor is now lazy about initializing the python session and safe to use in the top level of an R package.</p></li>
+<li><p>New function <code><a href="../reference/create_layer_wrapper.html">create_layer_wrapper()</a></code> that can create a composing R function wrapper around a custom layer class.</p></li>
 <li>
 <p>The <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> method for keras models has been updated:</p>
 <ul>
 <li>
-<code>optimizer</code> is now an optional argument. It defaults to “rmsprop” for regular keras models. Custom models can specify their own default optimizer.</li>
+<code>optimizer</code> is now an optional argument. It defaults to <code>"rmsprop"</code> for regular keras models. Custom models can specify their own default optimizer.</li>
 <li>
 <code>loss</code> is now an optional argument.</li>
 <li>New optional arguments: <code>run_eagerly</code>, <code>steps_per_execution</code>.</li>
@@ -298,13 +303,54 @@
 </ul>
 </li>
 <li>
-<p>loss functions:</p>
+<p>Loss functions:</p>
 <ul>
-<li>all the loss functions gain the ability to return a callable (a <code>keras$losses$Loss</code> instance) if <code>y_true</code> and <code>y_pred</code> arguments are missing.</li>
-<li>new builtin loss functions: loss_huber(), loss_kl_divergence()</li>
+<li><p>All the loss functions gain the ability to return a callable (a <code>keras$losses$Loss</code> instance) if <code>y_true</code> and <code>y_pred</code> arguments are missing.</p></li>
+<li>
+<p>New builtin loss functions:</p>
+<ul>
+<li><code><a href="../reference/loss-functions.html">loss_huber()</a></code></li>
+<li><code><a href="../reference/loss-functions.html">loss_kl_divergence()</a></code></li>
 </ul>
 </li>
-<li><p>keras_model_sequential() gains the ability to accept arguments that define input layer like <code>input_shape</code> and <code>dtype</code>. See <code><a href="../reference/keras_model_sequential.html">?keras_model_sequential</a></code> for details and examples.</p></li>
+</ul>
+</li>
+<li>
+<p>Metric functions:</p>
+<ul>
+<li><p>All the metric functions gain the ability to return a <code>keras$metrics$Metric</code> instance if called without <code>y_true</code> and <code>y_pred</code></p></li>
+<li><p>Each metric function is now documented separately, with a common <code><a href="../reference/Metric.html">?Metric</a></code> topic demonstrating example usage.</p></li>
+<li>
+<p>New built in metrics:</p>
+<ul>
+<li><code><a href="../reference/metric_true_negatives.html">metric_true_negatives()</a></code></li>
+<li><code><a href="../reference/metric_true_positives.html">metric_true_positives()</a></code></li>
+<li><code><a href="../reference/metric_false_negatives.html">metric_false_negatives()</a></code></li>
+<li><code><a href="../reference/metric_false_positives.html">metric_false_positives()</a></code></li>
+<li><code><a href="../reference/metric_specificity_at_sensitivity.html">metric_specificity_at_sensitivity()</a></code></li>
+<li><code><a href="../reference/metric_sensitivity_at_specificity.html">metric_sensitivity_at_specificity()</a></code></li>
+<li><code><a href="../reference/metric_precision.html">metric_precision()</a></code></li>
+<li><code><a href="../reference/metric_precision_at_recall.html">metric_precision_at_recall()</a></code></li>
+<li><code><a href="../reference/metric_sum.html">metric_sum()</a></code></li>
+<li><code><a href="../reference/metric_recall.html">metric_recall()</a></code></li>
+<li><code><a href="../reference/metric_recall_at_precision.html">metric_recall_at_precision()</a></code></li>
+<li><code><a href="../reference/metric_root_mean_squared_error.html">metric_root_mean_squared_error()</a></code></li>
+<li><code><a href="../reference/metric_sparse_categorical_accuracy.html">metric_sparse_categorical_accuracy()</a></code></li>
+<li><code><a href="../reference/metric_mean_tensor.html">metric_mean_tensor()</a></code></li>
+<li><code><a href="../reference/metric_mean_wrapper.html">metric_mean_wrapper()</a></code></li>
+<li><code><a href="../reference/metric_mean_iou.html">metric_mean_iou()</a></code></li>
+<li><code><a href="../reference/metric_mean_relative_error.html">metric_mean_relative_error()</a></code></li>
+<li><code><a href="../reference/metric_logcosh_error.html">metric_logcosh_error()</a></code></li>
+<li><code><a href="../reference/metric_mean.html">metric_mean()</a></code></li>
+<li><code><a href="../reference/metric_cosine_similarity.html">metric_cosine_similarity()</a></code></li>
+<li><code><a href="../reference/metric_categorical_hinge.html">metric_categorical_hinge()</a></code></li>
+<li><code><a href="../reference/metric_accuracy.html">metric_accuracy()</a></code></li>
+<li><code><a href="../reference/metric_auc.html">metric_auc()</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code><a href="../reference/keras_model_sequential.html">keras_model_sequential()</a></code> gains the ability to accept arguments that define input layer like <code>input_shape</code> and <code>dtype</code>. See <code><a href="../reference/keras_model_sequential.html">?keras_model_sequential</a></code> for details and examples.</p></li>
 <li><p>Refactored automated tests to closer match the default installation procedure and compute environment of most user.</p></li>
 <li><p>Expanded CI test coverage to include R devel, oldrel and 3.6.</p></li>
 <li>
@@ -366,6 +412,7 @@
 </tbody>
 </table>
 </li>
+<li><p>The glue package was added to Imports</p></li>
 <li><p>Added activation functions swish and gelu. (<a href='https://github.com/rstudio/keras/issues/1226'>#1226</a>)</p></li>
 <li><p><code><a href="../reference/set_vocabulary.html">set_vocabulary()</a></code> gains a <code>idf_weights</code> argument.</p></li>
 </ul>
@@ -491,7 +538,7 @@
 <li><p>Add <code>embeddings_data</code> argument to <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code></p></li>
 <li><p>Support for defining custom Keras models (i.e. custom <code><a href="https://rdrr.io/r/base/call.html">call()</a></code> logic for forward pass)</p></li>
 <li><p>Handle named list of model output names in <code>metrics</code> argument of <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code></p></li>
-<li><p>New <code><a href="../reference/metric_binary_accuracy.html">custom_metric()</a></code> function for defining custom metrics in R</p></li>
+<li><p>New <code><a href="../reference/custom_metric.html">custom_metric()</a></code> function for defining custom metrics in R</p></li>
 <li><p>Provide typed wrapper for categorical custom metrics</p></li>
 <li><p>Provide access to Python layer within R custom layers</p></li>
 <li><p>Don’t convert custom layer output shape to tuple when shape is a list or tuple of other shapes</p></li>

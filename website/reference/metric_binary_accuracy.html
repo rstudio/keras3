@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Model performance metrics — metric_binary_accuracy • keras</title>
+<title>Calculates how often predictions match binary labels — metric_binary_accuracy • keras</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,8 @@
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Model performance metrics — metric_binary_accuracy" />
-<meta property="og:description" content="Model performance metrics" />
+<meta property="og:title" content="Calculates how often predictions match binary labels — metric_binary_accuracy" />
+<meta property="og:description" content="Calculates how often predictions match binary labels" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -128,6 +128,9 @@
     <li class="dropdown-header">Guides (New for TF 2.6)</li>
     <li>
       <a href="../articles/python_subclasses.html">Python Subclasses</a>
+    </li>
+    <li>
+      <a href="../articles/guides/making_new_layers_and_models_via_subclassing.Rmd">Making New Layers and Models via Subclassing</a>
     </li>
     <li>
       <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
@@ -219,133 +222,112 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Model performance metrics</h1>
+    <h1>Calculates how often predictions match binary labels</h1>
     <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/metrics.R'><code>R/metrics.R</code></a></small>
     <div class="hidden name"><code>metric_binary_accuracy.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Model performance metrics</p>
+    <p>Calculates how often predictions match binary labels</p>
     </div>
 
-    <pre class="usage"><span class='fu'>metric_binary_accuracy</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span>
-
-<span class='fu'>metric_binary_crossentropy</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span>
-
-<span class='fu'>metric_categorical_accuracy</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span>
-
-<span class='fu'>metric_categorical_crossentropy</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span>
-
-<span class='fu'>metric_cosine_proximity</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span>
-
-<span class='fu'>metric_hinge</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span>
-
-<span class='fu'>metric_kullback_leibler_divergence</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span>
-
-<span class='fu'>metric_mean_absolute_error</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span>
-
-<span class='fu'>metric_mean_absolute_percentage_error</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span>
-
-<span class='fu'>metric_mean_squared_error</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span>
-
-<span class='fu'>metric_mean_squared_logarithmic_error</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span>
-
-<span class='fu'>metric_poisson</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span>
-
-<span class='fu'>metric_sparse_categorical_crossentropy</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span>
-
-<span class='fu'>metric_squared_hinge</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span>
-
-<span class='fu'>metric_top_k_categorical_accuracy</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span>, k <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
-
-<span class='fu'>metric_sparse_top_k_categorical_accuracy</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span>, k <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
-
-<span class='fu'>custom_metric</span><span class='op'>(</span><span class='va'>name</span>, <span class='va'>metric_fn</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>metric_binary_accuracy</span><span class='op'>(</span>
+  <span class='va'>y_true</span>,
+  <span class='va'>y_pred</span>,
+  threshold <span class='op'>=</span> <span class='fl'>0.5</span>,
+  <span class='va'>...</span>,
+  name <span class='op'>=</span> <span class='st'>"binary_accuracy"</span>,
+  dtype <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>y_true</th>
-      <td><p>True labels (tensor)</p></td>
+      <td><p>Tensor of true targets.</p></td>
     </tr>
     <tr>
       <th>y_pred</th>
-      <td><p>Predictions (tensor of the same shape as y_true).</p></td>
+      <td><p>Tensor of predicted targets.</p></td>
     </tr>
     <tr>
-      <th>k</th>
-      <td><p>An integer, number of top elements to consider.</p></td>
+      <th>threshold</th>
+      <td><p>(Optional) Float representing the threshold for deciding
+whether prediction values are 1 or 0.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Passed on to the underlying metric. Used for forwards and backwards compatibility.</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>Name of custom metric</p></td>
+      <td><p>(Optional) string name of the metric instance.</p></td>
     </tr>
     <tr>
-      <th>metric_fn</th>
-      <td><p>Custom metric function</p></td>
+      <th>dtype</th>
+      <td><p>(Optional) data type of the metric result.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Metric functions are to be supplied in the <code>metrics</code> parameter of the
-<code><a href='compile.keras.engine.training.Model.html'>compile.keras.engine.training.Model()</a></code> function.</p>
-    <h2 class="hasAnchor" id="custom-metrics"><a class="anchor" href="#custom-metrics"></a>Custom Metrics</h2>
+    <p>If <code>y_true</code> and <code>y_pred</code> are missing, a (subclassed) <code>Metric</code>
+instance is returned. The <code>Metric</code> object can be passed directly to
+<code><a href='https://generics.r-lib.org/reference/compile.html'>compile(metrics = )</a></code> or used as a standalone object. See <code><a href='Metric.html'>?Metric</a></code> for
+example usage.</p>
+<p>Alternatively, if called with <code>y_true</code> and <code>y_pred</code> arguments, then the
+computed case-wise values for the mini-batch are returned directly.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
+    <p>This metric creates two local variables, <code>total</code> and <code>count</code> that are used to
+compute the frequency with which <code>y_pred</code> matches <code>y_true</code>. This frequency is
+ultimately returned as <code>binary accuracy</code>: an idempotent operation that simply
+divides <code>total</code> by <code>count</code>.</p>
+<p>If <code>sample_weight</code> is <code>NULL</code>, weights default to 1.
+Use <code>sample_weight</code> of 0 to mask values.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-<p>You can provide an arbitrary R function as a custom metric. Note that
-the <code>y_true</code> and <code>y_pred</code> parameters are tensors, so computations on
-them should use backend tensor functions.</p>
-<p>Use the <code>custom_metric()</code> function to define a custom metric.
-Note that a name ('mean_pred') is provided for the custom metric
-function: this name is used within training progress output.
-See below for an example.</p>
-<p>If you want to save and load a model with custom metrics, you should
-also specify the metric in the call the <code><a href='save_model_hdf5.html'>load_model_hdf5()</a></code>. For example:
-<code><a href='save_model_hdf5.html'>load_model_hdf5("my_model.h5", c('mean_pred' = metric_mean_pred))</a></code>.</p>
-<p>Alternatively, you can wrap all of your code in a call to
-<code><a href='with_custom_object_scope.html'>with_custom_object_scope()</a></code> which will allow you to refer to the
-metric by name just like you do with built in keras metrics.</p>
-<p>Documentation on the available backend tensor functions can be
-found at <a href='https://keras.rstudio.com/articles/backend.html#backend-functions'>https://keras.rstudio.com/articles/backend.html#backend-functions</a>.</p>
-    <h2 class="hasAnchor" id="metrics-with-parameters"><a class="anchor" href="#metrics-with-parameters"></a>Metrics with Parameters</h2>
+    <div class='dont-index'><p>Other metrics: 
+<code><a href='custom_metric.html'>custom_metric</a>()</code>,
+<code><a href='metric_accuracy.html'>metric_accuracy</a>()</code>,
+<code><a href='metric_auc.html'>metric_auc</a>()</code>,
+<code><a href='metric_binary_crossentropy.html'>metric_binary_crossentropy</a>()</code>,
+<code><a href='metric_categorical_accuracy.html'>metric_categorical_accuracy</a>()</code>,
+<code><a href='metric_categorical_crossentropy.html'>metric_categorical_crossentropy</a>()</code>,
+<code><a href='metric_categorical_hinge.html'>metric_categorical_hinge</a>()</code>,
+<code><a href='metric_cosine_similarity.html'>metric_cosine_similarity</a>()</code>,
+<code><a href='metric_false_negatives.html'>metric_false_negatives</a>()</code>,
+<code><a href='metric_false_positives.html'>metric_false_positives</a>()</code>,
+<code><a href='metric_hinge.html'>metric_hinge</a>()</code>,
+<code><a href='metric_kullback_leibler_divergence.html'>metric_kullback_leibler_divergence</a>()</code>,
+<code><a href='metric_logcosh_error.html'>metric_logcosh_error</a>()</code>,
+<code><a href='metric_mean_absolute_error.html'>metric_mean_absolute_error</a>()</code>,
+<code><a href='metric_mean_absolute_percentage_error.html'>metric_mean_absolute_percentage_error</a>()</code>,
+<code><a href='metric_mean_iou.html'>metric_mean_iou</a>()</code>,
+<code><a href='metric_mean_relative_error.html'>metric_mean_relative_error</a>()</code>,
+<code><a href='metric_mean_squared_error.html'>metric_mean_squared_error</a>()</code>,
+<code><a href='metric_mean_squared_logarithmic_error.html'>metric_mean_squared_logarithmic_error</a>()</code>,
+<code><a href='metric_mean_tensor.html'>metric_mean_tensor</a>()</code>,
+<code><a href='metric_mean_wrapper.html'>metric_mean_wrapper</a>()</code>,
+<code><a href='metric_mean.html'>metric_mean</a>()</code>,
+<code><a href='metric_poisson.html'>metric_poisson</a>()</code>,
+<code><a href='metric_precision_at_recall.html'>metric_precision_at_recall</a>()</code>,
+<code><a href='metric_precision.html'>metric_precision</a>()</code>,
+<code><a href='metric_recall_at_precision.html'>metric_recall_at_precision</a>()</code>,
+<code><a href='metric_recall.html'>metric_recall</a>()</code>,
+<code><a href='metric_root_mean_squared_error.html'>metric_root_mean_squared_error</a>()</code>,
+<code><a href='metric_sensitivity_at_specificity.html'>metric_sensitivity_at_specificity</a>()</code>,
+<code><a href='metric_sparse_categorical_accuracy.html'>metric_sparse_categorical_accuracy</a>()</code>,
+<code><a href='metric_sparse_categorical_crossentropy.html'>metric_sparse_categorical_crossentropy</a>()</code>,
+<code><a href='metric_sparse_top_k_categorical_accuracy.html'>metric_sparse_top_k_categorical_accuracy</a>()</code>,
+<code><a href='metric_specificity_at_sensitivity.html'>metric_specificity_at_sensitivity</a>()</code>,
+<code><a href='metric_squared_hinge.html'>metric_squared_hinge</a>()</code>,
+<code><a href='metric_sum.html'>metric_sum</a>()</code>,
+<code><a href='metric_top_k_categorical_accuracy.html'>metric_top_k_categorical_accuracy</a>()</code>,
+<code><a href='metric_true_negatives.html'>metric_true_negatives</a>()</code>,
+<code><a href='metric_true_positives.html'>metric_true_positives</a>()</code></p></div>
 
-    
-
-
-<p>To use metrics with parameters (e.g. <code>metric_top_k_categorical_accurary()</code>)
-you should create a custom metric that wraps the call with the parameter.
-See below for an example.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='co'># create metric using backend tensor functions</span>
-<span class='va'>metric_mean_pred</span> <span class='op'>&lt;-</span> <span class='fu'>custom_metric</span><span class='op'>(</span><span class='st'>"mean_pred"</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'><a href='k_mean.html'>k_mean</a></span><span class='op'>(</span><span class='va'>y_pred</span><span class='op'>)</span>
-<span class='op'>}</span><span class='op'>)</span>
-
-<span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://generics.r-lib.org/reference/compile.html'>compile</a></span><span class='op'>(</span>
-  optimizer <span class='op'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span><span class='op'>(</span><span class='op'>)</span>,
-  loss <span class='op'>=</span> <span class='va'>loss_binary_crossentropy</span>,
-  metrics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'accuracy'</span>, <span class='va'>metric_mean_pred</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='co'># create custom metric to wrap metric with parameter</span>
-<span class='va'>metric_top_3_categorical_accuracy</span> <span class='op'>&lt;-</span>
-  <span class='fu'>custom_metric</span><span class='op'>(</span><span class='st'>"top_3_categorical_accuracy"</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span> <span class='op'>{</span>
-    <span class='fu'>metric_top_k_categorical_accuracy</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span>, k <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
-  <span class='op'>}</span><span class='op'>)</span>
-
-<span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://generics.r-lib.org/reference/compile.html'>compile</a></span><span class='op'>(</span>
-  loss <span class='op'>=</span> <span class='st'>'categorical_crossentropy'</span>,
-  optimizer <span class='op'>=</span> <span class='fu'><a href='optimizer_rmsprop.html'>optimizer_rmsprop</a></span><span class='op'>(</span><span class='op'>)</span>,
-  metrics <span class='op'>=</span> <span class='va'>metric_top_3_categorical_accuracy</span>
-<span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

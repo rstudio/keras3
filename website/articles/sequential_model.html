@@ -87,6 +87,9 @@
       <a href="../articles/python_subclasses.html">Python Subclasses</a>
     </li>
     <li>
+      <a href="../articles/guides/making_new_layers_and_models_via_subclassing.Rmd">Making New Layers and Models via Subclassing</a>
+    </li>
+    <li>
       <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
     </li>
     <li class="divider">
@@ -237,7 +240,7 @@ ________________________________________________________________________________
 <ul>
 <li><p>An optimizer. This could be the string identifier of an existing optimizer (e.g. as “rmsprop” or “adagrad”) or a call to an optimizer function (e.g. <code><a href="../reference/optimizer_sgd.html">optimizer_sgd()</a></code>).</p></li>
 <li><p>A loss function. This is the objective that the model will try to minimize. It can be the string identifier of an existing loss function (e.g. “categorical_crossentropy” or “mse”) or a call to a loss function (e.g. <code><a href="../reference/loss-functions.html">loss_mean_squared_error()</a></code>).</p></li>
-<li><p>A list of metrics. For any classification problem you will want to set this to <code>metrics = c('accuracy')</code>. A metric could be the string identifier of an existing metric or a call to metric function (e.g. <code><a href="../reference/metric_binary_accuracy.html">metric_binary_crossentropy()</a></code>).</p></li>
+<li><p>A list of metrics. For any classification problem you will want to set this to <code>metrics = c('accuracy')</code>. A metric could be the string identifier of an existing metric or a call to metric function (e.g. <code><a href="../reference/metric_binary_crossentropy.html">metric_binary_crossentropy()</a></code>).</p></li>
 </ul>
 <p>Here’s the definition of a model along with the compilation step (the <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> function has arguments appropriate for a multi-class classification problem):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -270,7 +273,7 @@ ________________________________________________________________________________
 <p>Here’s compilation with a custom metric:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create metric using backend tensor functions</span>
-<span class="va">metric_mean_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metric_binary_accuracy.html">custom_metric</a></span><span class="op">(</span><span class="st">"mean_pred"</span>, <span class="kw">function</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span><span class="op">)</span> <span class="op">{</span>
+<span class="va">metric_mean_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/custom_metric.html">custom_metric</a></span><span class="op">(</span><span class="st">"mean_pred"</span>, <span class="kw">function</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="../reference/k_mean.html">k_mean</a></span><span class="op">(</span><span class="va">y_pred</span><span class="op">)</span> 
 <span class="op">}</span><span class="op">)</span>
 
