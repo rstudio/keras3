@@ -1,4 +1,4 @@
-# keras (development version)
+# keras 2.6.0
 
 Breaking changes (Tensorflow 2.6):
 - Note: The following breaking changes are specific to Tensorflow version 2.6.0.

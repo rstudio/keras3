@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0</span>
       </span>
     </div>
 
@@ -225,9 +225,9 @@
       <small>Source: <a href='https://github.com/rstudio/keras/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="keras-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#keras-development-version" class="anchor"></a>keras (development version)<small> Unreleased </small>
+    <div id="keras-260" class="section level1">
+<h1 class="page-header" data-toc-text="2.6.0">
+<a href="#keras-260" class="anchor"></a>keras 2.6.0<small> Unreleased </small>
 </h1>
 <p>Breaking changes (Tensorflow 2.6):</p>
 <ul>
@@ -254,9 +254,9 @@
 <li>
 <p>Major changes to the underlying handling of custom R6 layer classes.</p>
 <ul>
-<li>A new <code>r_to_py()</code> method is provided for <code>R6ClassGenerator</code> objects.</li>
+<li>A new <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">r_to_py()</a></code> method is provided for <code>R6ClassGenerator</code> objects.</li>
 <li>R6 custom layers can now inherit directly from Python layer classes or other R6 custom layer classes.</li>
-<li>Custom R6 layers can now be instantiated directly after conversion of the class generator with <code>r_to_py()</code>, without going through <code><a href="../reference/create_layer.html">create_layer()</a></code>.</li>
+<li>Custom R6 layers can now be instantiated directly after conversion of the class generator with <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">r_to_py()</a></code>, without going through <code><a href="../reference/create_layer.html">create_layer()</a></code>.</li>
 <li>
 <code>KerasLayer</code> is deprecated (new classes should inherit directly from <code>keras$layers$Layer</code>).</li>
 <li>
@@ -689,7 +689,7 @@
 <li><p><code>to_numpy_array()</code> utility function for custom generators (enables custom generators to yield C-ordered arrays of the correct float type)</p></li>
 <li><p>Added <code>batch_size</code> and <code>write_grads</code> arguments to <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code></p></li>
 <li><p>Added <code>return_state</code> argument to recurrent layers.</p></li>
-<li><p>Don’t re-export <code>install_tensorflow()</code> and <code>tf_config()</code> from tensorflow package.</p></li>
+<li><p>Don’t re-export <code><a href="https://rdrr.io/pkg/tensorflow/man/install_tensorflow.html">install_tensorflow()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/tf_config.html">tf_config()</a></code> from tensorflow package.</p></li>
 <li><p><code><a href="../reference/is_keras_available.html">is_keras_available()</a></code> function to probe whether the Keras python package is available in the current environment.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> S3 method for Keras training history</p></li>
 <li><p>Remove names from <code><a href="../reference/keras_model.html">keras_model()</a></code> inputs</p></li>
