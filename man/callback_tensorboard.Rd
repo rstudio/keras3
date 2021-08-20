@@ -54,7 +54,7 @@ for all embedding layers, string can be passed.}
 
 \item{embeddings_data}{Data to be embedded at layers specified in
 \code{embeddings_layer_names}. Array (if the model has a single input) or list
-of arrays (if the model has multiple inputs). Learn \href{https://www.tensorflow.org/tutorials/text/word_embeddings}{more about embeddings}}
+of arrays (if the model has multiple inputs). Learn \href{https://www.tensorflow.org/text/guide/word_embeddings}{more about embeddings}}
 
 \item{update_freq}{\code{'batch'} or \code{'epoch'} or integer. When using \code{'batch'}, writes
 the losses and metrics to TensorBoard after each batch. The same

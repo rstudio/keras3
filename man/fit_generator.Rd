@@ -24,7 +24,8 @@ fit_generator(
 \item{object}{Keras model object}
 
 \item{generator}{A generator (e.g. like the one provided by
-\code{\link[=flow_images_from_directory]{flow_images_from_directory()}} or a custom R \href{https://rstudio.github.io/reticulate/articles/introduction.html#generators}{generator function}).
+\code{\link[=flow_images_from_directory]{flow_images_from_directory()}} or a custom R
+\href{https://rstudio.github.io/reticulate/articles/calling_python.html#generators-1}{generator function}).
 
 The output of the generator must be a list of one of these forms:\preformatted{ - (inputs, targets)
  - (inputs, targets, sample_weights)

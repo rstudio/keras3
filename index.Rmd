@@ -21,7 +21,7 @@ knitr::opts_chunk$set(eval = FALSE)
 <div id="build-status">
 [![Travis-CI Build Status](https://travis-ci.org/rstudio/keras.svg?branch=master)](https://travis-ci.org/rstudio/keras) 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/keras)](https://cran.r-project.org/package=keras)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/fchollet/keras/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/keras-team/keras/blob/master/LICENSE)
 </div>
 
 ## R interface to Keras

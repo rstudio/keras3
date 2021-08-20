@@ -265,7 +265,7 @@ callback_terminate_on_naan <- function() {
 #'   for all embedding layers, string can be passed.
 #' @param embeddings_data Data to be embedded at layers specified in
 #'   `embeddings_layer_names`. Array (if the model has a single input) or list
-#'   of arrays (if the model has multiple inputs). Learn [more about embeddings](https://www.tensorflow.org/tutorials/text/word_embeddings)
+#'   of arrays (if the model has multiple inputs). Learn [more about embeddings](https://www.tensorflow.org/text/guide/word_embeddings)
 #' @param update_freq `'batch'` or `'epoch'` or integer. When using `'batch'`, writes
 #'   the losses and metrics to TensorBoard after each batch. The same
 #'   applies for `'epoch'`. If using an integer, let's say `10000`,

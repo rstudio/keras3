@@ -108,7 +108,7 @@ keras_model_sequential <- function(layers = NULL, name = NULL, ...) {
 #' @param ragged Boolean, whether the placeholder created is meant to be ragged.
 #'   In this case, values of 'NULL' in the 'shape' argument represent ragged
 #'   dimensions. For more information about `RaggedTensors`, see this
-#'   [guide](https://www.tensorflow.org/guide/ragged_tensors). Default to
+#'   [guide](https://www.tensorflow.org/guide/ragged_tensor). Default to
 #'   `FALSE`.
 #' @param type_spec A `tf$TypeSpec` object to create Input from. This
 #'   `tf$TypeSpec` represents the entire batch. When provided, all other args
@@ -1007,7 +1007,8 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'
 #' @param object Keras model object
 #' @param generator A generator (e.g. like the one provided by
-#'   [flow_images_from_directory()] or a custom R [generator function](https://rstudio.github.io/reticulate/articles/introduction.html#generators)).
+#'   [flow_images_from_directory()] or a custom R
+#'   [generator function](https://rstudio.github.io/reticulate/articles/calling_python.html#generators-1)).
 #'
 #'   The output of the generator must be a list of one of these forms:
 #'

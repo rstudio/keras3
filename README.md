@@ -4,7 +4,7 @@
 
 [![R build status](https://github.com/rstudio/keras/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/keras/actions?workflow=R-CMD-check)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/keras)](https://cran.r-project.org/package=keras)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/fchollet/keras/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/keras-team/keras/blob/master/LICENSE)
 
 [Keras](https://keras.io/) is a high-level neural networks API developed with a focus on enabling fast experimentation. *Being able to go from idea to result with the least possible delay is key to doing good research.* Keras has the following key features:
 

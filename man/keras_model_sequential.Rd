@@ -27,7 +27,7 @@ Default to \code{FALSE}.}
     \item{\code{ragged}}{Boolean, whether the placeholder created is meant to be ragged.
 In this case, values of 'NULL' in the 'shape' argument represent ragged
 dimensions. For more information about \code{RaggedTensors}, see this
-\href{https://www.tensorflow.org/guide/ragged_tensors}{guide}. Default to
+\href{https://www.tensorflow.org/guide/ragged_tensor}{guide}. Default to
 \code{FALSE}.}
     \item{\code{type_spec}}{A \code{tf$TypeSpec} object to create Input from. This
 \code{tf$TypeSpec} represents the entire batch. When provided, all other args
