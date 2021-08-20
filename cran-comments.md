@@ -1,4 +1,7 @@
-Installation time in seconds: 33
-Check time in seconds: 191
-Status: OK
-R Under development (unstable) (2021-03-27 r80128)
+## R CMD check results
+There were no ERRORs or WARNINGs. 
+
+There was 1 NOTE:
+
+* New Maintainer:
+  Tomasz Kalinowski <tomasz.kalinowski@rstudio.com>

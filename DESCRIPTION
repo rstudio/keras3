@@ -46,8 +46,6 @@ Suggests:
     rmarkdown,
     tfdatasets,
     jpeg
-Remotes:
-    rstudio/tensorflow
 Roxygen: list(markdown = TRUE, r6 = FALSE)
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr

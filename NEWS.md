@@ -1,11 +1,15 @@
 # keras (development version)
 
-Breaking changes:
+Breaking changes (Tensorflow 2.6):
+- Note: The following breaking changes are specific to Tensorflow version 2.6.0.
+  However, the keras R package maintains compatibility with multiple versions of Tensorflow/Keras.
+  You can upgrade the R package and still preserve the previous behavior by
+  installing a specific version of Tensorflow: `keras::install_keras(tensorflow="2.4.0")`
 
 - `predict_proba()` and `predict_classes()` were removed.
-- model serialization to/from yaml was removed.
+- `model_to_yaml()` and `model_from_yaml()` were removed.
 - default changed: `layer_text_vectorization(pad_to_max_tokens=FALSE)`
-- `set_vocabulary()` arguments `df_data` and `oov_df_value` are deprecated. They are superseded by the new argument `idf_weights`.
+- `set_vocabulary()` arguments `df_data` and `oov_df_value` are removed. They are replaced by the new argument `idf_weights`.
 
 New Features:
 
