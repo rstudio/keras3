@@ -87,6 +87,9 @@
       <a href="../../articles/python_subclasses.html">Python Subclasses</a>
     </li>
     <li>
+      <a href="../../articles/guides/making_new_layers_and_models_via_subclassing.Rmd">Making New Layers and Models via Subclassing</a>
+    </li>
+    <li>
       <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
     </li>
     <li class="divider">
@@ -204,7 +207,7 @@
 <span class="fu">envir</span><span class="fu">::</span><span class="fu"><a href="https://t-kalinowski.github.io/envir/reference/import_from.html">import_from</a></span><span class="op">(</span><span class="va">dplyr</span>, <span class="va">last</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_config.html">tf_version</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] '2.5'</code></pre>
+<pre><code>## [1] '2.6'</code></pre>
 </div>
 <div id="keras-callbacks-overview" class="section level2">
 <h2 class="hasAnchor">
@@ -381,82 +384,82 @@
 ## ...Training: start of batch 0; got logs:  Named list()
 ## 
 ## ...Training: end of batch 0; got logs: List of 2
-##  $ loss               : num 26
-##  $ mean_absolute_error: num 4.16
+##  $ loss               : num 26.7
+##  $ mean_absolute_error: num 4.26
 ## 
 ## ...Training: start of batch 1; got logs:  Named list()
 ## 
 ## ...Training: end of batch 1; got logs: List of 2
-##  $ loss               : num 418
-##  $ mean_absolute_error: num 15.3
+##  $ loss               : num 438
+##  $ mean_absolute_error: num 15.7
 ## 
 ## Start testing; got logs:  Named list()
 ## 
 ## ...Evaluating: start of batch 0; got logs:  Named list()
 ## 
 ## ...Evaluating: end of batch 0; got logs: List of 2
-##  $ loss               : num 27.4
-##  $ mean_absolute_error: num 4.47
+##  $ loss               : num 25
+##  $ mean_absolute_error: num 4.19
 ## 
 ## ...Evaluating: start of batch 1; got logs:  Named list()
 ## 
 ## ...Evaluating: end of batch 1; got logs: List of 2
-##  $ loss               : num 26.8
-##  $ mean_absolute_error: num 4.34
+##  $ loss               : num 24.6
+##  $ mean_absolute_error: num 4.1
 ## 
 ## Stop testing; got logs: List of 2
-##  $ loss               : num 26.8
-##  $ mean_absolute_error: num 4.34
+##  $ loss               : num 24.6
+##  $ mean_absolute_error: num 4.1
 ## 
 ## End epoch 0 of training; got logs: List of 4
-##  $ loss                   : num 418
-##  $ mean_absolute_error    : num 15.3
-##  $ val_loss               : num 26.8
-##  $ val_mean_absolute_error: num 4.34
+##  $ loss                   : num 438
+##  $ mean_absolute_error    : num 15.7
+##  $ val_loss               : num 24.6
+##  $ val_mean_absolute_error: num 4.1
 ## 
 ## Start epoch 1 of training; got logs:  Named list()
 ## 
 ## ...Training: start of batch 0; got logs:  Named list()
 ## 
 ## ...Training: end of batch 0; got logs: List of 2
-##  $ loss               : num 30.2
-##  $ mean_absolute_error: num 4.59
+##  $ loss               : num 22.9
+##  $ mean_absolute_error: num 3.99
 ## 
 ## ...Training: start of batch 1; got logs:  Named list()
 ## 
 ## ...Training: end of batch 1; got logs: List of 2
-##  $ loss               : num 20.1
-##  $ mean_absolute_error: num 3.58
+##  $ loss               : num 16.2
+##  $ mean_absolute_error: num 3.32
 ## 
 ## Start testing; got logs:  Named list()
 ## 
 ## ...Evaluating: start of batch 0; got logs:  Named list()
 ## 
 ## ...Evaluating: end of batch 0; got logs: List of 2
-##  $ loss               : num 7.66
-##  $ mean_absolute_error: num 2.2
+##  $ loss               : num 6.98
+##  $ mean_absolute_error: num 2.14
 ## 
 ## ...Evaluating: start of batch 1; got logs:  Named list()
 ## 
 ## ...Evaluating: end of batch 1; got logs: List of 2
-##  $ loss               : num 8.01
-##  $ mean_absolute_error: num 2.26
+##  $ loss               : num 7.45
+##  $ mean_absolute_error: num 2.22
 ## 
 ## Stop testing; got logs: List of 2
-##  $ loss               : num 8.01
-##  $ mean_absolute_error: num 2.26
+##  $ loss               : num 7.45
+##  $ mean_absolute_error: num 2.22
 ## 
 ## End epoch 1 of training; got logs: List of 4
-##  $ loss                   : num 20.1
-##  $ mean_absolute_error    : num 3.58
-##  $ val_loss               : num 8.01
-##  $ val_mean_absolute_error: num 2.26
+##  $ loss                   : num 16.2
+##  $ mean_absolute_error    : num 3.32
+##  $ val_loss               : num 7.45
+##  $ val_mean_absolute_error: num 2.22
 ## 
 ## Stop training; got logs: List of 4
-##  $ loss                   : num 20.1
-##  $ mean_absolute_error    : num 3.58
-##  $ val_loss               : num 8.01
-##  $ val_mean_absolute_error: num 2.26</code></pre>
+##  $ loss                   : num 16.2
+##  $ mean_absolute_error    : num 3.32
+##  $ val_loss               : num 7.45
+##  $ val_mean_absolute_error: num 2.22</code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span>
@@ -471,30 +474,30 @@
 ## ...Evaluating: start of batch 0; got logs:  Named list()
 ## 
 ## ...Evaluating: end of batch 0; got logs: List of 2
-##  $ loss               : num 8.79
-##  $ mean_absolute_error: num 2.41
+##  $ loss               : num 7.36
+##  $ mean_absolute_error: num 2.24
 ## 
 ## ...Evaluating: start of batch 1; got logs:  Named list()
 ## 
 ## ...Evaluating: end of batch 1; got logs: List of 2
-##  $ loss               : num 7.95
-##  $ mean_absolute_error: num 2.28
+##  $ loss               : num 6.66
+##  $ mean_absolute_error: num 2.11
 ## 
 ## ...Evaluating: start of batch 2; got logs:  Named list()
 ## 
 ## ...Evaluating: end of batch 2; got logs: List of 2
-##  $ loss               : num 7.83
-##  $ mean_absolute_error: num 2.26
+##  $ loss               : num 6.5
+##  $ mean_absolute_error: num 2.09
 ## 
 ## ...Evaluating: start of batch 3; got logs:  Named list()
 ## 
 ## ...Evaluating: end of batch 3; got logs: List of 2
-##  $ loss               : num 8.08
-##  $ mean_absolute_error: num 2.3
+##  $ loss               : num 6.76
+##  $ mean_absolute_error: num 2.14
 ## 
 ## Stop testing; got logs: List of 2
-##  $ loss               : num 8.08
-##  $ mean_absolute_error: num 2.3</code></pre>
+##  $ loss               : num 6.76
+##  $ mean_absolute_error: num 2.14</code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
@@ -505,22 +508,22 @@
 ## ...Predicting: start of batch 0; got logs:  Named list()
 ## 
 ## ...Predicting: end of batch 0; got logs: List of 1
-##  $ outputs: num [1:128, 1] 3.77 1.561 0.853 3.587 2.423 ...
+##  $ outputs: num [1:128, 1] 3.52 3.17 1.66 5.1 2.65 ...
 ## 
 ## ...Predicting: start of batch 1; got logs:  Named list()
 ## 
 ## ...Predicting: end of batch 1; got logs: List of 1
-##  $ outputs: num [1:128, 1] 5.81 3.09 4.27 4.25 3.15 ...
+##  $ outputs: num [1:128, 1] 6.37 3.59 6.26 6.33 4.28 ...
 ## 
 ## ...Predicting: start of batch 2; got logs:  Named list()
 ## 
 ## ...Predicting: end of batch 2; got logs: List of 1
-##  $ outputs: num [1:128, 1] 2.21 3.28 3.21 2.24 3.44 ...
+##  $ outputs: num [1:128, 1] 3.26 3.65 4.01 3.05 4.04 ...
 ## 
 ## ...Predicting: start of batch 3; got logs:  Named list()
 ## 
 ## ...Predicting: end of batch 3; got logs: List of 1
-##  $ outputs: num [1:116, 1] 2.63 1.13 2.59 1.98 1.26 ...
+##  $ outputs: num [1:116, 1] 4.67 1.61 3.34 2.3 1.52 ...
 ## 
 ## Stop predicting; got logs:  Named list()</code></pre>
 <div id="usage-of-logs-dict" class="section level3">
@@ -553,16 +556,16 @@
   verbose <span class="op">=</span> <span class="fl">0</span>,
   callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>## Up to batch 0, the average loss is   25.33.
-## Up to batch 1, the average loss is  427.43.
-## Up to batch 2, the average loss is  291.87.
-## Up to batch 3, the average loss is  226.17.
-## The average loss for epoch  0 is    226.17 and mean absolute error is    9.44.
-## Up to batch 0, the average loss is    7.31.
-## Up to batch 1, the average loss is    6.59.
-## Up to batch 2, the average loss is    6.42.
-## Up to batch 3, the average loss is    6.58.
-## The average loss for epoch  1 is      6.58 and mean absolute error is    2.14.</code></pre>
+<pre><code>## Up to batch 0, the average loss is   27.88.
+## Up to batch 1, the average loss is  497.47.
+## Up to batch 2, the average loss is  340.32.
+## Up to batch 3, the average loss is  263.32.
+## The average loss for epoch  0 is    263.32 and mean absolute error is   10.14.
+## Up to batch 0, the average loss is    7.08.
+## Up to batch 1, the average loss is    6.51.
+## Up to batch 2, the average loss is    6.53.
+## Up to batch 3, the average loss is    6.50.
+## The average loss for epoch  1 is      6.50 and mean absolute error is    2.11.</code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res</span> <span class="op">=</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
@@ -571,10 +574,10 @@
   verbose <span class="op">=</span> <span class="fl">0</span>,
   callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>## Up to batch 0, the average loss is    6.08.
-## Up to batch 1, the average loss is    5.87.
-## Up to batch 2, the average loss is    5.81.
-## Up to batch 3, the average loss is    5.90.</code></pre>
+<pre><code>## Up to batch 0, the average loss is    5.52.
+## Up to batch 1, the average loss is    5.00.
+## Up to batch 2, the average loss is    5.04.
+## Up to batch 3, the average loss is    5.09.</code></pre>
 </div>
 </div>
 <div id="usage-of-selfmodel-attribute" class="section level2">
@@ -664,30 +667,30 @@
   callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="op">)</span>, 
                    <span class="fu">EarlyStoppingAtMinLoss</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>## Up to batch 0, the average loss is   30.66.
-## Up to batch 1, the average loss is  394.80.
-## Up to batch 2, the average loss is  270.27.
-## Up to batch 3, the average loss is  205.56.
-## Up to batch 4, the average loss is  166.07.
-## The average loss for epoch  0 is    166.07 and mean absolute error is    7.76.
-## Up to batch 0, the average loss is    6.61.
-## Up to batch 1, the average loss is    5.83.
-## Up to batch 2, the average loss is    5.37.
-## Up to batch 3, the average loss is    5.35.
-## Up to batch 4, the average loss is    4.99.
-## The average loss for epoch  1 is      4.99 and mean absolute error is    1.83.
-## Up to batch 0, the average loss is    4.05.
-## Up to batch 1, the average loss is    4.27.
-## Up to batch 2, the average loss is    4.19.
-## Up to batch 3, the average loss is    4.07.
-## Up to batch 4, the average loss is    4.21.
-## The average loss for epoch  2 is      4.21 and mean absolute error is    1.65.
-## Up to batch 0, the average loss is    3.72.
-## Up to batch 1, the average loss is    3.46.
-## Up to batch 2, the average loss is    4.48.
-## Up to batch 3, the average loss is    6.48.
-## Up to batch 4, the average loss is   16.22.
-## The average loss for epoch  3 is     16.22 and mean absolute error is    2.96.
+<pre><code>## Up to batch 0, the average loss is   21.36.
+## Up to batch 1, the average loss is  449.22.
+## Up to batch 2, the average loss is  308.34.
+## Up to batch 3, the average loss is  234.11.
+## Up to batch 4, the average loss is  189.12.
+## The average loss for epoch  0 is    189.12 and mean absolute error is    8.25.
+## Up to batch 0, the average loss is    6.95.
+## Up to batch 1, the average loss is    6.45.
+## Up to batch 2, the average loss is    6.37.
+## Up to batch 3, the average loss is    5.92.
+## Up to batch 4, the average loss is    5.84.
+## The average loss for epoch  1 is      5.84 and mean absolute error is    1.98.
+## Up to batch 0, the average loss is    3.49.
+## Up to batch 1, the average loss is    4.64.
+## Up to batch 2, the average loss is    4.38.
+## Up to batch 3, the average loss is    4.42.
+## Up to batch 4, the average loss is    4.43.
+## The average loss for epoch  2 is      4.43 and mean absolute error is    1.69.
+## Up to batch 0, the average loss is    5.72.
+## Up to batch 1, the average loss is    4.91.
+## Up to batch 2, the average loss is    4.93.
+## Up to batch 3, the average loss is    5.28.
+## Up to batch 4, the average loss is    7.32.
+## The average loss for epoch  3 is      7.32 and mean absolute error is    2.20.
 ## Restoring model weights from the end of the best epoch.
 ## Epoch 00004: early stopping</code></pre>
 </div>
@@ -763,124 +766,124 @@
 <span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Epoch 00000: Learning rate is 0.1000.
-## Up to batch 0, the average loss is   29.33.
-## Up to batch 1, the average loss is  428.86.
-## Up to batch 2, the average loss is  296.49.
-## Up to batch 3, the average loss is  225.03.
-## Up to batch 4, the average loss is  181.34.
-## The average loss for epoch  0 is    181.34 and mean absolute error is    8.15.
+## Up to batch 0, the average loss is   27.54.
+## Up to batch 1, the average loss is  366.91.
+## Up to batch 2, the average loss is  252.13.
+## Up to batch 3, the average loss is  193.32.
+## Up to batch 4, the average loss is  157.53.
+## The average loss for epoch  0 is    157.53 and mean absolute error is    7.82.
 ## 
 ## Epoch 00001: Learning rate is 0.0500.
-## Up to batch 0, the average loss is    5.38.
-## Up to batch 1, the average loss is    5.38.
-## Up to batch 2, the average loss is    5.09.
-## Up to batch 3, the average loss is    5.23.
-## Up to batch 4, the average loss is    5.03.
-## The average loss for epoch  1 is      5.03 and mean absolute error is    1.81.
+## Up to batch 0, the average loss is    7.16.
+## Up to batch 1, the average loss is    5.43.
+## Up to batch 2, the average loss is    5.48.
+## Up to batch 3, the average loss is    5.41.
+## Up to batch 4, the average loss is    5.12.
+## The average loss for epoch  1 is      5.12 and mean absolute error is    1.86.
 ## 
 ## Epoch 00002: Learning rate is 0.0500.
-## Up to batch 0, the average loss is    5.67.
-## Up to batch 1, the average loss is    4.49.
-## Up to batch 2, the average loss is    4.87.
-## Up to batch 3, the average loss is    4.41.
-## Up to batch 4, the average loss is    4.10.
-## The average loss for epoch  2 is      4.10 and mean absolute error is    1.64.
+## Up to batch 0, the average loss is    4.41.
+## Up to batch 1, the average loss is    4.44.
+## Up to batch 2, the average loss is    4.68.
+## Up to batch 3, the average loss is    4.61.
+## Up to batch 4, the average loss is    4.54.
+## The average loss for epoch  2 is      4.54 and mean absolute error is    1.73.
 ## 
 ## Epoch 00003: Learning rate is 0.0500.
-## Up to batch 0, the average loss is    5.24.
-## Up to batch 1, the average loss is    4.27.
-## Up to batch 2, the average loss is    3.98.
-## Up to batch 3, the average loss is    4.13.
-## Up to batch 4, the average loss is    3.81.
-## The average loss for epoch  3 is      3.81 and mean absolute error is    1.57.
+## Up to batch 0, the average loss is    4.00.
+## Up to batch 1, the average loss is    4.12.
+## Up to batch 2, the average loss is    3.85.
+## Up to batch 3, the average loss is    4.14.
+## Up to batch 4, the average loss is    3.96.
+## The average loss for epoch  3 is      3.96 and mean absolute error is    1.62.
 ## 
 ## Epoch 00004: Learning rate is 0.0100.
-## Up to batch 0, the average loss is    4.10.
-## Up to batch 1, the average loss is    4.09.
-## Up to batch 2, the average loss is    4.11.
-## Up to batch 3, the average loss is    3.92.
-## Up to batch 4, the average loss is    3.83.
-## The average loss for epoch  4 is      3.83 and mean absolute error is    1.57.
+## Up to batch 0, the average loss is    4.02.
+## Up to batch 1, the average loss is    3.96.
+## Up to batch 2, the average loss is    3.53.
+## Up to batch 3, the average loss is    3.61.
+## Up to batch 4, the average loss is    3.69.
+## The average loss for epoch  4 is      3.69 and mean absolute error is    1.55.
 ## 
 ## Epoch 00005: Learning rate is 0.0100.
-## Up to batch 0, the average loss is    3.13.
-## Up to batch 1, the average loss is    3.27.
-## Up to batch 2, the average loss is    3.19.
+## Up to batch 0, the average loss is    3.26.
+## Up to batch 1, the average loss is    3.25.
+## Up to batch 2, the average loss is    3.21.
 ## Up to batch 3, the average loss is    3.44.
-## Up to batch 4, the average loss is    3.47.
-## The average loss for epoch  5 is      3.47 and mean absolute error is    1.48.
+## Up to batch 4, the average loss is    3.36.
+## The average loss for epoch  5 is      3.36 and mean absolute error is    1.47.
 ## 
 ## Epoch 00006: Learning rate is 0.0100.
-## Up to batch 0, the average loss is    3.13.
-## Up to batch 1, the average loss is    3.10.
-## Up to batch 2, the average loss is    2.98.
-## Up to batch 3, the average loss is    3.07.
-## Up to batch 4, the average loss is    3.07.
-## The average loss for epoch  6 is      3.07 and mean absolute error is    1.38.
+## Up to batch 0, the average loss is    2.47.
+## Up to batch 1, the average loss is    3.27.
+## Up to batch 2, the average loss is    3.10.
+## Up to batch 3, the average loss is    3.02.
+## Up to batch 4, the average loss is    2.94.
+## The average loss for epoch  6 is      2.94 and mean absolute error is    1.37.
 ## 
 ## Epoch 00007: Learning rate is 0.0050.
-## Up to batch 0, the average loss is    3.48.
-## Up to batch 1, the average loss is    3.64.
-## Up to batch 2, the average loss is    3.45.
-## Up to batch 3, the average loss is    3.37.
-## Up to batch 4, the average loss is    3.47.
-## The average loss for epoch  7 is      3.47 and mean absolute error is    1.48.
+## Up to batch 0, the average loss is    3.63.
+## Up to batch 1, the average loss is    3.33.
+## Up to batch 2, the average loss is    3.77.
+## Up to batch 3, the average loss is    3.73.
+## Up to batch 4, the average loss is    3.61.
+## The average loss for epoch  7 is      3.61 and mean absolute error is    1.50.
 ## 
 ## Epoch 00008: Learning rate is 0.0050.
-## Up to batch 0, the average loss is    2.50.
-## Up to batch 1, the average loss is    3.05.
-## Up to batch 2, the average loss is    3.40.
-## Up to batch 3, the average loss is    3.23.
-## Up to batch 4, the average loss is    3.29.
-## The average loss for epoch  8 is      3.29 and mean absolute error is    1.40.
+## Up to batch 0, the average loss is    3.48.
+## Up to batch 1, the average loss is    3.40.
+## Up to batch 2, the average loss is    3.80.
+## Up to batch 3, the average loss is    3.69.
+## Up to batch 4, the average loss is    3.45.
+## The average loss for epoch  8 is      3.45 and mean absolute error is    1.47.
 ## 
 ## Epoch 00009: Learning rate is 0.0050.
-## Up to batch 0, the average loss is    2.54.
-## Up to batch 1, the average loss is    2.99.
-## Up to batch 2, the average loss is    2.99.
-## Up to batch 3, the average loss is    2.92.
-## Up to batch 4, the average loss is    3.02.
-## The average loss for epoch  9 is      3.02 and mean absolute error is    1.38.
+## Up to batch 0, the average loss is    3.11.
+## Up to batch 1, the average loss is    2.93.
+## Up to batch 2, the average loss is    2.70.
+## Up to batch 3, the average loss is    2.95.
+## Up to batch 4, the average loss is    2.99.
+## The average loss for epoch  9 is      2.99 and mean absolute error is    1.39.
 ## 
 ## Epoch 00010: Learning rate is 0.0010.
-## Up to batch 0, the average loss is    2.88.
-## Up to batch 1, the average loss is    2.79.
-## Up to batch 2, the average loss is    2.98.
-## Up to batch 3, the average loss is    2.99.
-## Up to batch 4, the average loss is    3.08.
-## The average loss for epoch 10 is      3.08 and mean absolute error is    1.40.
+## Up to batch 0, the average loss is    2.90.
+## Up to batch 1, the average loss is    2.75.
+## Up to batch 2, the average loss is    2.67.
+## Up to batch 3, the average loss is    2.68.
+## Up to batch 4, the average loss is    2.95.
+## The average loss for epoch 10 is      2.95 and mean absolute error is    1.35.
 ## 
 ## Epoch 00011: Learning rate is 0.0010.
-## Up to batch 0, the average loss is    3.48.
-## Up to batch 1, the average loss is    3.28.
-## Up to batch 2, the average loss is    2.82.
-## Up to batch 3, the average loss is    2.89.
-## Up to batch 4, the average loss is    2.73.
-## The average loss for epoch 11 is      2.73 and mean absolute error is    1.29.
+## Up to batch 0, the average loss is    3.24.
+## Up to batch 1, the average loss is    3.25.
+## Up to batch 2, the average loss is    2.83.
+## Up to batch 3, the average loss is    2.94.
+## Up to batch 4, the average loss is    2.99.
+## The average loss for epoch 11 is      2.99 and mean absolute error is    1.37.
 ## 
 ## Epoch 00012: Learning rate is 0.0010.
-## Up to batch 0, the average loss is    3.91.
-## Up to batch 1, the average loss is    3.26.
-## Up to batch 2, the average loss is    3.38.
-## Up to batch 3, the average loss is    3.51.
-## Up to batch 4, the average loss is    3.41.
-## The average loss for epoch 12 is      3.41 and mean absolute error is    1.49.
+## Up to batch 0, the average loss is    3.37.
+## Up to batch 1, the average loss is    3.34.
+## Up to batch 2, the average loss is    3.36.
+## Up to batch 3, the average loss is    3.13.
+## Up to batch 4, the average loss is    3.22.
+## The average loss for epoch 12 is      3.22 and mean absolute error is    1.40.
 ## 
 ## Epoch 00013: Learning rate is 0.0010.
-## Up to batch 0, the average loss is    3.20.
-## Up to batch 1, the average loss is    3.24.
-## Up to batch 2, the average loss is    3.37.
-## Up to batch 3, the average loss is    3.38.
-## Up to batch 4, the average loss is    3.23.
-## The average loss for epoch 13 is      3.23 and mean absolute error is    1.39.
+## Up to batch 0, the average loss is    2.65.
+## Up to batch 1, the average loss is    2.60.
+## Up to batch 2, the average loss is    2.77.
+## Up to batch 3, the average loss is    2.88.
+## Up to batch 4, the average loss is    2.82.
+## The average loss for epoch 13 is      2.82 and mean absolute error is    1.36.
 ## 
 ## Epoch 00014: Learning rate is 0.0010.
-## Up to batch 0, the average loss is    2.69.
-## Up to batch 1, the average loss is    2.41.
-## Up to batch 2, the average loss is    2.75.
-## Up to batch 3, the average loss is    2.69.
-## Up to batch 4, the average loss is    2.69.
-## The average loss for epoch 14 is      2.69 and mean absolute error is    1.29.</code></pre>
+## Up to batch 0, the average loss is    3.56.
+## Up to batch 1, the average loss is    3.26.
+## Up to batch 2, the average loss is    3.26.
+## Up to batch 3, the average loss is    3.49.
+## Up to batch 4, the average loss is    3.26.
+## The average loss for epoch 14 is      3.26 and mean absolute error is    1.40.</code></pre>
 </div>
 <div id="built-in-keras-callbacks" class="section level3">
 <h3 class="hasAnchor">

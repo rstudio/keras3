@@ -1,4 +1,4 @@
-
+context("Layer")
 
 create_custom_layer <- function() {
   Layer(
@@ -11,7 +11,10 @@ create_custom_layer <- function() {
 
     call =  function(inputs, ...) {
       inputs * self$x
-    }
+    },
+
+    get_config = function()
+      list(x = as.numeric(self$x))
 
   )
 }

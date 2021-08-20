@@ -320,7 +320,7 @@ metric_accuracy <- py_metric_wrapper(
 #' fraction of them for which `class_id` is above the threshold and/or in the
 #' top-k predictions.
 #'
-#' @param thresholds (Optional) A float value or a python list of float
+#' @param thresholds (Optional) A float value or a list of float
 #'   threshold values in `[0, 1]`. A threshold is compared with prediction values
 #'   to determine the truth value of predictions (i.e., above the threshold is
 #'   `true`, below is `false`). One metric value is generated for each threshold
@@ -408,7 +408,7 @@ metric_recall_at_precision <- py_metric_wrapper(
 #' the top-k highest predictions, and computing the fraction of them for which
 #' `class_id` is indeed a correct label.
 #'
-#' @param thresholds (Optional) A float value or a python list of float
+#' @param thresholds (Optional) A float value or a list of float
 #'   threshold values in `[0, 1]`. A threshold is compared with prediction values
 #'   to determine the truth value of predictions (i.e., above the threshold is
 #'   `true`, below is `false`). One metric value is generated for each threshold
@@ -748,7 +748,7 @@ metric_cosine_similarity <- py_metric_wrapper(
 #' If `sample_weight` is `NULL`, weights default to 1.
 #' Use `sample_weight` of 0 to mask values.
 #'
-#' @param thresholds (Optional) Defaults to 0.5. A float value or a python
+#' @param thresholds (Optional) Defaults to 0.5. A float value or a
 #' list of float threshold values in `[0, 1]`. A threshold is compared
 #' with prediction values to determine the truth value of predictions
 #' (i.e., above the threshold is `TRUE`, below is `FALSE`). One metric
@@ -775,7 +775,7 @@ metric_false_negatives <- py_metric_wrapper(
 #' If `sample_weight` is `NULL`, weights default to 1.
 #' Use `sample_weight` of 0 to mask values.
 #'
-#' @param thresholds (Optional) Defaults to 0.5. A float value or a python
+#' @param thresholds (Optional) Defaults to 0.5. A float value or a
 #' list of float threshold values in `[0, 1]`. A threshold is compared
 #' with prediction values to determine the truth value of predictions
 #' (i.e., above the threshold is `true`, below is `false`). One metric
@@ -802,7 +802,7 @@ metric_false_positives <- py_metric_wrapper(
 #' If `sample_weight` is `NULL`, weights default to 1.
 #' Use `sample_weight` of 0 to mask values.
 #'
-#' @param thresholds (Optional) Defaults to 0.5. A float value or a python
+#' @param thresholds (Optional) Defaults to 0.5. A float value or a
 #' list of float threshold values in `[0, 1]`. A threshold is compared
 #' with prediction values to determine the truth value of predictions
 #' (i.e., above the threshold is `true`, below is `false`). One metric
@@ -829,7 +829,7 @@ metric_true_negatives <- py_metric_wrapper(
 #' If `sample_weight` is `NULL`, weights default to 1.
 #' Use `sample_weight` of 0 to mask values.
 #'
-#' @param thresholds (Optional) Defaults to 0.5. A float value or a python
+#' @param thresholds (Optional) Defaults to 0.5. A float value or a
 #' list of float threshold values in `[0, 1]`. A threshold is compared
 #' with prediction values to determine the truth value of predictions
 #' (i.e., above the threshold is `true`, below is `false`). One metric

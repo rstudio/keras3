@@ -130,6 +130,9 @@
       <a href="../articles/python_subclasses.html">Python Subclasses</a>
     </li>
     <li>
+      <a href="../articles/guides/making_new_layers_and_models_via_subclassing.Rmd">Making New Layers and Models via Subclassing</a>
+    </li>
+    <li>
       <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
     </li>
     <li class="divider"></li>
@@ -258,8 +261,8 @@ block of code, and is automatically recognized when loading saved models.</p>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># define custom metric</span>
 <span class='va'>metric_top_3_categorical_accuracy</span> <span class='op'>&lt;-</span>
-  <span class='fu'><a href='metric_binary_accuracy.html'>custom_metric</a></span><span class='op'>(</span><span class='st'>"top_3_categorical_accuracy"</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span> <span class='op'>{</span>
-    <span class='fu'><a href='metric_binary_accuracy.html'>metric_top_k_categorical_accuracy</a></span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span>, k <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+  <span class='fu'><a href='custom_metric.html'>custom_metric</a></span><span class='op'>(</span><span class='st'>"top_3_categorical_accuracy"</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='fu'><a href='metric_top_k_categorical_accuracy.html'>metric_top_k_categorical_accuracy</a></span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span>, k <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
   <span class='op'>}</span><span class='op'>)</span>
 
 <span class='fu'>with_custom_object_scope</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>top_k_acc <span class='op'>=</span> <span class='va'>sparse_top_k_cat_acc</span><span class='op'>)</span>, <span class='op'>{</span>

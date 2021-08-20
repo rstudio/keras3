@@ -30,6 +30,8 @@ navbar:
         - text: "Guides (New for TF 2.6)"
         - text: "Python Subclasses"
           href: articles/python_subclasses.html
+        - text: "Making New Layers and Models via Subclassing"
+          href: articles/guides/making_new_layers_and_models_via_subclassing.Rmd
         - text: "Customizing what happens in fit"
           href: articles/guides/customizing_what_happens_in_fit.html
         - text: "--------------------------"
@@ -215,6 +217,7 @@ reference:
     contents:
       - "%py_class%"
       - Layer
+      - create_layer_wrapper
       - create_layer
 
   - title: "Model Persistence"
@@ -362,10 +365,12 @@ reference:
   - title: "Losses"
     contents:
       - loss_mean_squared_error
+      - starts_with("loss_")
 
   - title: "Metrics"
     contents:
-      - metric_binary_accuracy
+      - starts_with("metric_")
+      - custom_metric
 
   - title: "Regularizers"
     contents:

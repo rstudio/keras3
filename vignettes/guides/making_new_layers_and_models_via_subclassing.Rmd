@@ -1,0 +1,1006 @@
+---
+title: "Writing `Layer` and `Model` objects from scratch."
+author: "[fchollet](https://twitter.com/fchollet), [t-kalinowski](https://github.com/t-kalinowski)"
+output: rmarkdown::html_vignette
+date created: 2019/03/01
+last modified: 2020/04/13
+description: Guide to writing `Layer` and `Model` objects from scratch.
+vignette: >
+  %\VignetteIndexEntry{Writing `Layer` and `Model` objects from scratch.}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+## Setup
+```{r, echo=FALSE}
+Sys.setenv(TF_CPP_MIN_LOG_LEVEL = 2)
+knitr::opts_chunk$set(comment = NA, eval = FALSE)
+```
+
+```{r}
+library(magrittr)
+library(tensorflow)
+library(tfdatasets)
+library(keras)
+
+tf_version()
+```
+
+
+## The `Layer` class: a combination of state (weights) and some computation
+
+One of the central abstractions in Keras is the `Layer` class. A layer
+encapsulates both a state (the layer's "weights") and a transformation from
+inputs to outputs (a "call", the layer's forward pass).
+
+Here's a densely-connected layer. It has a state: the variables `w` and `b`.
+```{r}
+Linear(keras$layers$Layer) %py_class% {
+  initialize <- function(units = 32, input_dim = 32) {
+    super$initialize()
+    w_init <- tf$random_normal_initializer()
+    self$w <- tf$Variable(
+      initial_value = w_init(
+        shape = shape(input_dim, units),
+        dtype = "float32"
+      ),
+      trainable = TRUE
+    )
+    b_init <- tf$zeros_initializer()
+    self$b <- tf$Variable(
+      initial_value = b_init(shape = shape(units), dtype = "float32"),
+      trainable = TRUE
+    )
+  }
+
+  call <- function(inputs) {
+    tf$matmul(inputs, self$w) + self$b
+  }
+}
+```
+
+You would use a layer by calling it on some tensor input(s), much like a regular
+function.
+
+```{r}
+x <- tf$ones(shape(2, 2))
+linear_layer <- Linear(4, 2)
+y <- linear_layer(x)
+print(y)
+```
+
+`Linear` behaves similarly to a layer present in the python interface to keras
+(e.g., `keras$layers$Dense`).
+
+However, one additional step is needed to make it behave like the builtin layers
+present in the keras R package (e.g., `layer_dense()`).
+
+Keras layers in R are designed to compose nicely with the pipe operator
+(`%>%`), so that the layer instance is conveniently created on demand when an
+existing model or tensor is piped in. In order to make a custom layer similarly
+compose nicely with the pipe, you can call `create_layer_wrapper()` on the layer
+class constructor.
+
+```{r}
+layer_linear <- create_layer_wrapper(Linear)
+```
+
+Now `layer_linear` is a layer constructor that composes nicely with `%>%`, just like the built-in layers:
+
+```{r}
+model <- keras_model_sequential() %>%
+  layer_linear(4, 2)
+
+model(k_ones(c(2, 2)))
+
+model
+```
+
+Because the pattern above is so common, there is a convenience function that
+combines the steps of subclassing `keras$layers$Layer` and calling
+`create_layer_wrapper` on the output: the `Layer` function. The `layer_linear`
+defined below is identical to the `layer_linear` defined above.
+
+```{r}
+layer_linear <- Layer(
+  "Linear",
+  initialize =  function(units = 32, input_dim = 32) {
+    super$initialize()
+    w_init <- tf$random_normal_initializer()
+    self$w <- tf$Variable(initial_value = w_init(shape = shape(input_dim, units),
+                                                 dtype = "float32"),
+                          trainable = TRUE)
+    b_init <- tf$zeros_initializer()
+    self$b <- tf$Variable(initial_value = b_init(shape = shape(units),
+                                                 dtype = "float32"),
+                          trainable = TRUE)
+  },
+
+  call = function(inputs) {
+    tf$matmul(inputs, self$w) + self$b
+  }
+)
+```
+
+For the remainder of this vignette we'll be using the `%py_class%` constructor. However,
+in your own code feel free to use `create_layer_wrapper` and/or `Layer` if you prefer.
+
+Note that the weights `w` and `b` are automatically tracked by the layer upon being set as
+layer attributes:
+
+```{r}
+stopifnot(all.equal(
+  linear_layer$weights,
+  list(linear_layer$w, linear_layer$b)
+))
+```
+
+You also have access to a quicker shortcut for adding a weight to a layer:
+the `add_weight()` method:
+
+```{r}
+Linear(keras$layers$Layer) %py_class% {
+  initialize <- function(units = 32, input_dim = 32) {
+    super$initialize()
+    w_init <- tf$random_normal_initializer()
+    self$w <- self$add_weight(
+      shape = shape(input_dim, units),
+      initializer = "random_normal",
+      trainable = TRUE
+    )
+    self$b <- self$add_weight(
+      shape = shape(units),
+      initializer = "zeros",
+      trainable = TRUE
+    )
+  }
+
+  call <- function(inputs) {
+    tf$matmul(inputs, self$w) + self$b
+  }
+}
+
+x <- tf$ones(shape(2, 2))
+linear_layer <- Linear(4, 2)
+y <- linear_layer(x)
+print(y)
+```
+
+## Layers can have non-trainable weights
+
+Besides trainable weights, you can add non-trainable weights to a layer as
+well. Such weights are meant not to be taken into account during
+backpropagation, when you are training the layer.
+
+Here's how to add and use a non-trainable weight:
+
+```{r}
+ComputeSum(keras$layers$Layer) %py_class% {
+  initialize <- function(input_dim) {
+    super$initialize()
+    self$total <- tf$Variable(
+      initial_value = tf$zeros(shape(input_dim)),
+      trainable = FALSE
+    )
+  }
+
+  call <- function(inputs) {
+    self$total$assign_add(tf$reduce_sum(inputs, axis = 0L))
+    self$total
+  }
+}
+
+x <- tf$ones(shape(2, 2))
+my_sum <- ComputeSum(2)
+y <- my_sum(x)
+print(as.numeric(y))
+y <- my_sum(x)
+print(as.numeric(y))
+```
+
+It's part of `layer$weights`, but it gets categorized as a non-trainable weight:
+
+```{r}
+cat("weights:", length(my_sum$weights), "\n")
+cat("non-trainable weights:", length(my_sum$non_trainable_weights), "\n")
+
+# It's not included in the trainable weights:
+cat("trainable_weights:", my_sum$trainable_weights, "\n")
+```
+
+## Best practice: deferring weight creation until the shape of the inputs is known
+
+Our `Linear` layer above took an `input_dim `argument that was used to compute
+the shape of the weights `w` and `b` in `initialize()`:
+
+
+```{r}
+Linear(keras$layers$Layer) %py_class% {
+  initialize <- function(units = 32, input_dim = 32) {
+    super$initialize()
+    self$w <- self$add_weight(
+      shape = shape(input_dim, units),
+      initializer = "random_normal",
+      trainable = TRUE
+    )
+    self$b <- self$add_weight(
+      shape = shape(units),
+      initializer = "zeros",
+      trainable = TRUE
+    )
+  }
+
+  call <- function(inputs) {
+    tf$matmul(inputs, self$w) + self$b
+  }
+}
+```
+
+In many cases, you may not know in advance the size of your inputs, and you
+would like to lazily create weights when that value becomes known, some time
+after instantiating the layer.
+
+In the Keras API, we recommend creating layer weights in the `build(self,
+inputs_shape)` method of your layer. Like this:
+
+```{r}
+Linear(keras$layers$Layer) %py_class% {
+  initialize <- function(units = 32) {
+    super$initialize()
+    self$units <- units
+  }
+
+  build <- function(input_shape) {
+    self$w <- self$add_weight(
+      shape = shape(tail(input_shape, 1), self$units),
+      initializer = "random_normal",
+      trainable = TRUE
+    )
+    self$b <- self$add_weight(
+      shape = shape(self$units),
+      initializer = "random_normal",
+      trainable = TRUE
+    )
+  }
+
+  call <- function(inputs) {
+    tf$matmul(inputs, self$w) + self$b
+  }
+}
+```
+
+The `build()` method of your layer will automatically run the first time
+your layer instance is called. You now have a layer that can handle an arbitrary number of input features:
+
+```{r}
+# At instantiation, we don't know on what inputs this is going to get called
+linear_layer <- Linear(32)
+
+# The layer's weights are created dynamically the first time the layer is called
+y <- linear_layer(x)
+```
+
+
+
+## Layers are recursively composable
+
+If you assign a Layer instance as an attribute of another Layer, the outer layer
+will start tracking the weights of the inner layer.
+
+We recommend creating such sublayers in the `initialize()` method (since the
+sublayers will typically have a build method, they will be built when the
+outer layer gets built).
+
+
+
+```{r}
+# Let's assume we are reusing the Linear class
+# with a `build` method that we defined above.
+MLPBlock(keras$layers$Layer) %py_class% {
+  initialize <- function() {
+    super$initialize()
+    self$linear_1 <- Linear(32)
+    self$linear_2 <- Linear(32)
+    self$linear_3 <- Linear(1)
+  }
+
+  call <- function(inputs) {
+    x <- self$linear_1(inputs)
+    x <- tf$nn$relu(x)
+    x <- self$linear_2(x)
+    x <- tf$nn$relu(x)
+    self$linear_3(x)
+  }
+}
+
+mlp <- MLPBlock()
+y <- mlp(tf$ones(shape = shape(3, 64))) # The first call to the `mlp` will create the weights
+cat("weights:", length(mlp$weights), "\n")
+cat("trainable weights:", length(mlp$trainable_weights), "\n")
+```
+
+## The `add_loss()` method
+
+When writing the `call()` method of a layer, you can create loss tensors that
+you will want to use later, when writing your training loop. This is doable by
+calling `self$add_loss(value)`:
+
+
+```{r}
+# A layer that creates an activity regularization loss
+ActivityRegularizationLayer(keras$layers$Layer) %py_class% {
+  initialize <- function(rate = 1e-2) {
+    super$initialize()
+    self$rate <- rate
+  }
+
+  call <- function(inputs) {
+    self$add_loss(self$rate * tf$reduce_sum(inputs))
+    inputs
+  }
+}
+```
+
+These losses (including those created by any inner layer) can be retrieved via
+`layer$losses`. This property is reset at the start of every `call()` to
+the top-level layer, so that `layer$losses` always contains the loss values
+created during the last forward pass.
+
+
+```{r}
+OuterLayer(keras$layers$Layer) %py_class% {
+  initialize <- function() {
+    super$initialize()
+    self$activity_reg <- ActivityRegularizationLayer(1e-2)
+  }
+  call <- function(inputs) {
+    self$activity_reg(inputs)
+  }
+}
+
+layer <- OuterLayer()
+stopifnot(length(layer$losses) == 0) # No losses yet since the layer has never been called
+
+layer(tf$zeros(shape(1, 1))) |> invisible()
+stopifnot(length(layer$losses) == 1) # We created one loss value
+
+# `layer$losses` gets reset at the start of each call()
+layer(tf$zeros(shape(1, 1))) |> invisible()
+stopifnot(length(layer$losses) == 1) # This is the loss created during the call above
+```
+
+In addition, the `loss` property also contains regularization losses created
+for the weights of any inner layer:
+
+```{r}
+OuterLayerWithKernelRegularizer(keras$layers$Layer) %py_class% {
+  initialize <- function() {
+    super$initialize()
+    self$dense <- layer_dense(units = 32, kernel_regularizer = regularizer_l2(1e-3))
+  }
+  call <- function(inputs) {
+    self$dense(inputs)
+  }
+}
+
+layer <- OuterLayerWithKernelRegularizer()
+layer(tf$zeros(shape(1, 1))) |> invisible()
+
+# This is `1e-3 * sum(layer$dense$kernel ** 2)`,
+# created by the `kernel_regularizer` above.
+print(layer$losses)
+```
+
+These losses are meant to be taken into account when writing training loops,
+like this:
+
+```{r, eval=FALSE}
+# Instantiate an optimizer.
+optimizer <- optimizer_sgd(learning_rate = 1e-3)
+loss_fn <- loss_sparse_categorical_crossentropy(from_logits = TRUE)
+
+# Iterate over the batches of a dataset.
+dataset_iterator <- reticulate::as_iterator(train_dataset)
+while(!is.null(batch <- iter_next(dataset_iterator))) {
+  c(x_batch_train, y_batch_train) %<-% batch
+  with(tf$GradientTape() %as% tape, {
+    logits <- layer(x_batch_train) # Logits for this minibatch
+    # Loss value for this minibatch
+    loss_value <- loss_fn(y_batch_train, logits)
+    # Add extra losses created during this forward pass:
+    loss_value <- loss_value + sum(model$losses)
+  })
+  grads <- tape$gradient(loss_value, model$trainable_weights)
+  optimizer$apply_gradients(
+    purrr::transpose(list(grads, model$trainable_weights)))
+}
+```
+
+For a detailed guide about writing training loops, see the
+[guide to writing a training loop from scratch](/guides/writing_a_training_loop_from_scratch/).
+
+These losses also work seamlessly with `fit()` (they get automatically summed
+and added to the main loss, if any):
+
+```{r}
+input <- layer_input(shape(3))
+output <- input %>% layer_activity_regularization()
+# output <- ActivityRegularizationLayer()(input)
+model <- keras_model(input, output)
+
+# If there is a loss passed in `compile`, the regularization
+# losses get added to it
+model %>% compile(optimizer = "adam", loss = "mse")
+model %>% fit(k_random_uniform(c(2, 3)),
+  k_random_uniform(c(2, 3)),
+  epochs = 1, verbose = FALSE
+)
+
+# It's also possible not to pass any loss in `compile`,
+# since the model already has a loss to minimize, via the `add_loss`
+# call during the forward pass!
+model %>% compile(optimizer = "adam")
+model %>% fit(k_random_uniform(c(2, 3)),
+  k_random_uniform(c(2, 3)),
+  epochs = 1, verbose = FALSE
+)
+```
+
+## The `add_metric()` method
+
+Similarly to `add_loss()`, layers also have an `add_metric()` method
+for tracking the moving average of a quantity during training.
+
+Consider the following layer: a "logistic endpoint" layer.
+It takes as inputs predictions and targets, it computes a loss which it tracks
+via `add_loss()`, and it computes an accuracy scalar, which it tracks via
+`add_metric()`.
+
+```{r}
+LogisticEndpoint(keras$layers$Layer) %py_class% {
+  initialize <- function(name = NULL) {
+    super$initialize(name = name)
+    self$loss_fn <- loss_binary_crossentropy(from_logits = TRUE)
+    self$accuracy_fn <- metric_binary_accuracy()
+  }
+
+  call <- function(targets, logits, sample_weights = NULL) {
+    # Compute the training-time loss value and add it
+    # to the layer using `self$add_loss()`.
+    loss <- self$loss_fn(targets, logits, sample_weights)
+    self$add_loss(loss)
+
+    # Log accuracy as a metric and add it
+    # to the layer using `self.add_metric()`.
+    acc <- self$accuracy_fn(targets, logits, sample_weights)
+    self$add_metric(acc, name = "accuracy")
+
+    # Return the inference-time prediction tensor (for `.predict()`).
+    tf$nn$softmax(logits)
+  }
+}
+```
+
+
+
+Metrics tracked in this way are accessible via `layer$metrics`:
+
+```{r}
+layer <- LogisticEndpoint()
+
+targets <- tf$ones(shape(2, 2))
+logits <- tf$ones(shape(2, 2))
+y <- layer(targets, logits)
+
+cat("layer$metrics: ")
+str(layer$metrics)
+cat("current accuracy value:", as.numeric(layer$metrics[[1]]$result()), "\n")
+```
+
+Just like for `add_loss()`, these metrics are tracked by `fit()`:
+
+```{r}
+inputs <- layer_input(shape(3), name = "inputs")
+targets <- layer_input(shape(10), name = "targets")
+logits <- inputs %>% layer_dense(10)
+predictions <- LogisticEndpoint(name = "predictions")(logits, targets)
+
+model <- keras_model(inputs = list(inputs, targets), outputs = predictions)
+model %>% compile(optimizer = "adam")
+
+data <- list(
+  inputs = k_random_uniform(c(3, 3)),
+  targets = k_random_uniform(c(3, 10))
+)
+
+model %>% fit(data, epochs = 1, verbose = FALSE)
+```
+
+## You can optionally enable serialization on your layers
+
+If you need your custom layers to be serializable as part of a
+[Functional model](/guides/functional_api/), you can optionally implement a `get_config()`
+method:
+
+```{r}
+Linear(keras$layers$Layer) %py_class% {
+  initialize <- function(units = 32) {
+    super$initialize()
+    self$units <- units
+  }
+
+  build <- function(input_shape) {
+    self$w <- self$add_weight(
+      shape = shape(tail(input_shape, 1), self$units),
+      initializer = "random_normal",
+      trainable = TRUE
+    )
+    self$b <- self$add_weight(
+      shape = shape(self$units),
+      initializer = "random_normal",
+      trainable = TRUE
+    )
+  }
+
+  call <- function(inputs) {
+    tf$matmul(inputs, self$w) + self$b
+  }
+
+  get_config <- function() {
+    list(units = self$units)
+  }
+}
+
+
+# Now you can recreate the layer from its config:
+layer <- Linear(64)
+config <- layer$get_config()
+print(config)
+new_layer <- Linear$from_config(config)
+```
+
+Note that the `initialize()` method of the base `Layer` class takes some additional named
+arguments, in particular a `name` and a `dtype`. It's good practice to pass
+these arguments to the parent class in `initialize()` and to include them in the
+layer config:
+
+```{r}
+Linear(keras$layers$Layer) %py_class% {
+  initialize <- function(units = 32, ...) {
+    super$initialize(...)
+    self$units <- units
+  }
+
+  build <- function(input_shape) {
+    self$w <- self$add_weight(
+      shape = shape(tail(input_shape, 1), self$units),
+      initializer = "random_normal",
+      trainable = TRUE
+    )
+    self$b <- self$add_weight(
+      shape = shape(self$units),
+      initializer = "random_normal",
+      trainable = TRUE
+    )
+  }
+
+  call <- function(inputs) {
+    tf$matmul(inputs, self$w) + self$b
+  }
+
+  get_config <- function() {
+    config <- super$get_config()
+    config$units <- self$units
+    config
+  }
+}
+
+
+layer <- Linear(64)
+config <- layer$get_config()
+str(config)
+new_layer <- Linear$from_config(config)
+```
+
+If you need more flexibility when deserializing the layer from its config, you
+can also override the `from_config()` class method. This is the base
+implementation of `from_config()`:
+
+```{r}
+from_config <- function(cls, config) do.call(cls, config)
+```
+
+
+To learn more about serialization and saving, see the complete
+[guide to saving and serializing models](/guides/serialization_and_saving/).
+
+
+## Privileged `training` argument in the `call()` method
+
+Some layers, in particular the `BatchNormalization` layer and the `Dropout`
+layer, have different behaviors during training and inference. For such
+layers, it is standard practice to expose a `training` (boolean) argument in
+the `call()` method.
+
+By exposing this argument in `call()`, you enable the built-in training and
+evaluation loops (e.g. `fit()`) to correctly use the layer in training and
+inference. Note, the default of `NULL` means that the training parameter will be
+inferred by keras from the training context (e.g., it will be `TRUE` if called
+from `fit()`, `FALSE` if called from `predict()`)
+
+```{r}
+CustomDropout(keras$layers$Layer) %py_class% {
+  initialize <- function(rate, ...) {
+    super$initialize(...)
+    self$rate <- rate
+  }
+  call <- function(inputs, training = NULL) {
+    if (isTRUE(training)) {
+      return(tf$nn$dropout(inputs, rate = self$rate))
+    }
+    inputs
+  }
+}
+```
+
+## Privileged `mask` argument in the `call()` method
+
+The other privileged argument supported by `call()` is the `mask` argument.
+
+You will find it in all Keras RNN layers. A mask is a boolean tensor (one
+boolean value per timestep in the input) used to skip certain input timesteps
+when processing timeseries data.
+
+Keras will automatically pass the correct `mask` argument to `call()` for
+layers that support it, when a mask is generated by a prior layer.
+Mask-generating layers are the `Embedding`
+layer configured with `mask_zero=True`, and the `Masking` layer.
+
+To learn more about masking and how to write masking-enabled layers, please
+check out the guide
+["understanding padding and masking"](/guides/understanding_masking_and_padding/).
+
+
+## The `Model` class
+
+In general, you will use the `Layer` class to define inner computation blocks,
+and will use the `Model` class to define the outer model -- the object you
+will train.
+
+For instance, in a ResNet50 model, you would have several ResNet blocks
+subclassing `Layer`, and a single `Model` encompassing the entire ResNet50
+network.
+
+The `Model` class has the same API as `Layer`, with the following differences:
+
+- It has support for built-in training, evaluation, and prediction methods
+  (`fit()`, `evaluate()`, `predict()`).
+- It exposes the list of its inner layers, via the `model$layers` property.
+- It exposes saving and serialization APIs (`save_model_tf()`, `save_model_weights_tf()`, ...)
+
+Effectively, the `Layer` class corresponds to what we refer to in the
+literature as a "layer" (as in "convolution layer" or "recurrent layer") or as
+a "block" (as in "ResNet block" or "Inception block").
+
+Meanwhile, the `Model` class corresponds to what is referred to in the
+literature as a "model" (as in "deep learning model") or as a "network" (as in
+"deep neural network").
+
+So if you're wondering, "should I use the `Layer` class or the `Model` class?",
+ask yourself: will I need to call `fit()` on it? Will I need to call `save()`
+on it? If so, go with `Model`. If not (either because your class is just a block
+in a bigger system, or because you are writing training & saving code yourself),
+use `Layer`.
+
+For instance, we could take our mini-resnet example above, and use it to build
+a `Model` that we could train with `fit()`, and that we could save with
+`save_model_weights_tf()`:
+
+```{r, eval = FALSE}
+ResNet(keras$Model) %py_class% {
+  initialize <- function(num_classes = 1000) {
+    super$initialize()
+    self$block_1 <- ResNetBlock()
+    self$block_2 <- ResNetBlock()
+    self$global_pool <- layer_global_average_pooling_2d()
+    self$classifier <- layer_dense(units = num_classes)
+  }
+
+  call <- function(inputs) {
+    x <- self$block_1(inputs)
+    x <- self$block_2(x)
+    x <- self$global_pool(x)
+    self$classifier(x)
+  }
+}
+
+
+resnet <- ResNet()
+dataset <- ...
+resnet %>% fit(dataset, epochs = 10)
+resnet %>% save_model_tf(filepath)
+```
+
+
+## Putting it all together: an end-to-end example
+
+Here's what you've learned so far:
+
+- A `Layer` encapsulates a state (created in `initialize()` or `build()`), and some
+computation (defined in `call()`).
+- Layers can be recursively nested to create new, bigger computation blocks.
+- Layers can create and track losses (typically regularization losses) as well
+as metrics, via `add_loss()` and `add_metric()`
+- The outer container, the thing you want to train, is a `Model`. A `Model` is
+just like a `Layer`, but with added training and serialization utilities.
+
+Let's put all of these things together into an end-to-end example: we're going
+to implement a Variational AutoEncoder (VAE). We'll train it on MNIST digits.
+
+Our VAE will be a subclass of `Model`, built as a nested composition of layers
+that subclass `Layer`. It will feature a regularization loss (KL divergence).
+
+```{r}
+Sampling(keras$layers$Layer) %py_class% {
+  call <- function(inputs) {
+    c(z_mean, z_log_var) %<-% inputs
+    batch <- tf$shape(z_mean)[1]
+    dim <- tf$shape(z_mean)[2]
+    epsilon <- k_random_normal(shape = c(batch, dim))
+    z_mean + exp(0.5 * z_log_var) * epsilon
+  }
+}
+
+
+Encoder(keras$layers$Layer) %py_class% {
+  "Maps MNIST digits to a triplet (z_mean, z_log_var, z)."
+
+  initialize <- function(latent_dim = 32, intermediate_dim = 64, name = "encoder", ...) {
+    super$initialize(name = name, ...)
+    self$dense_proj <- layer_dense(units = intermediate_dim, activation = "relu")
+    self$dense_mean <- layer_dense(units = latent_dim)
+    self$dense_log_var <- layer_dense(units = latent_dim)
+    self$sampling <- Sampling()
+  }
+
+  call <- function(inputs) {
+    x <- self$dense_proj(inputs)
+    z_mean <- self$dense_mean(x)
+    z_log_var <- self$dense_log_var(x)
+    z <- self$sampling(c(z_mean, z_log_var))
+    list(z_mean, z_log_var, z)
+  }
+}
+
+
+Decoder(keras$layers$Layer) %py_class% {
+  "Converts z, the encoded digit vector, back into a readable digit."
+
+  initialize <- function(original_dim, intermediate_dim = 64, name = "decoder", ...) {
+    super$initialize(name = name, ...)
+    self$dense_proj <- layer_dense(units = intermediate_dim, activation = "relu")
+    self$dense_output <- layer_dense(units = original_dim, activation = "sigmoid")
+  }
+
+  call <- function(inputs) {
+    x <- self$dense_proj(inputs)
+    self$dense_output(x)
+  }
+}
+
+
+VariationalAutoEncoder(keras$Model) %py_class% {
+  "Combines the encoder and decoder into an end-to-end model for training."
+
+  initialize <- function(original_dim, intermediate_dim = 64, latent_dim = 32,
+                         name = "autoencoder", ...) {
+    super$initialize(name = name, ...)
+    self$original_dim <- original_dim
+    self$encoder <- Encoder(
+      latent_dim = latent_dim,
+      intermediate_dim = intermediate_dim
+    )
+    self$decoder <- Decoder(original_dim, intermediate_dim = intermediate_dim)
+  }
+
+  call <- function(inputs) {
+    c(z_mean, z_log_var, z) %<-% self$encoder(inputs)
+    reconstructed <- self$decoder(z)
+    # Add KL divergence regularization loss.
+    kl_loss <- -0.5 * tf$reduce_mean(z_log_var - tf$square(z_mean) - tf$exp(z_log_var) + 1)
+    self$add_loss(kl_loss)
+    reconstructed
+  }
+}
+```
+
+Let's write a simple training loop on MNIST:
+
+```{r}
+library(tfautograph)
+library(tfdatasets)
+
+
+original_dim <- 784
+vae <- VariationalAutoEncoder(original_dim, 64, 32)
+
+optimizer <- optimizer_adam(learning_rate = 1e-3)
+mse_loss_fn <- loss_mean_squared_error()
+
+loss_metric <- metric_mean()
+
+x_train <- dataset_mnist()$train$x %>%
+  array_reshape(c(60000, 784)) %>%
+  `/`(255)
+
+train_dataset <- tensor_slices_dataset(x_train) %>%
+  dataset_shuffle(buffer_size = 1024) %>%
+  dataset_batch(64)
+
+epochs <- 2
+
+# Iterate over epochs.
+for (epoch in seq(epochs)) {
+  cat(sprintf("Start of epoch %d\n", epoch))
+
+  # Iterate over the batches of the dataset.
+  # autograph lets you use tfdatasets in `for` and `while`
+  autograph({
+    step <- 0
+    for (x_batch_train in train_dataset) {
+      with(tf$GradientTape() %as% tape, {
+        ## Note: we're four opaque contexts deep here (for, autograph, for,
+        ## with), When in doubt about the objects or methods that are available
+        ## (e.g., what is `tape` here?), remember you can always drop into a
+        ## debugger right here:
+        # browser()
+
+        reconstructed <- vae(x_batch_train)
+        # Compute reconstruction loss
+        loss <- mse_loss_fn(x_batch_train, reconstructed)
+
+        loss %<>% add(vae$losses[[1]]) # Add KLD regularization loss
+      })
+      grads <- tape$gradient(loss, vae$trainable_weights)
+      optimizer$apply_gradients(
+        purrr::transpose(list(grads, vae$trainable_weights)))
+
+      loss_metric(loss)
+
+      step %<>% add(1)
+      if (step %% 100 == 0) {
+        cat(sprintf("step %d: mean loss = %.4f\n", step, loss_metric$result()))
+      }
+    }
+  })
+}
+```
+
+Note that since the VAE is subclassing `Model`, it features built-in training
+loops. So you could also have trained it like this:
+
+```{r}
+vae <- VariationalAutoEncoder(784, 64, 32)
+
+optimizer <- optimizer_adam(learning_rate = 1e-3)
+
+vae %>% compile(optimizer, loss = loss_mean_squared_error())
+vae %>% fit(x_train, x_train, epochs = 2, batch_size = 64)
+```
+
+## Beyond object-oriented development: the Functional API
+
+If you prefer a less object-oriented way of programming, you can also
+build models using the [Functional API](/guides/functional_api/). Importantly,
+choosing one style or another does not prevent you from leveraging components
+written in the other style: you can always mix-and-match.
+
+For instance, the Functional API example below reuses the same `Sampling` layer
+we defined in the example above:
+
+```{r}
+original_dim <- 784
+intermediate_dim <- 64
+latent_dim <- 32
+
+# Define encoder model.
+original_inputs <- layer_input(shape = original_dim, name = "encoder_input")
+x <- layer_dense(units = intermediate_dim, activation = "relu")(original_inputs)
+z_mean <- layer_dense(units = latent_dim, name = "z_mean")(x)
+z_log_var <- layer_dense(units = latent_dim, name = "z_log_var")(x)
+z <- Sampling()(list(z_mean, z_log_var))
+encoder <- keras_model(inputs = original_inputs, outputs = z, name = "encoder")
+
+# Define decoder model.
+latent_inputs <- layer_input(shape = latent_dim, name = "z_sampling")
+x <- layer_dense(units = intermediate_dim, activation = "relu")(latent_inputs)
+outputs <- layer_dense(units = original_dim, activation = "sigmoid")(x)
+decoder <- keras_model(inputs = latent_inputs, outputs = outputs, name = "decoder")
+
+# Define VAE model.
+outputs <- decoder(z)
+vae <- keras_model(inputs = original_inputs, outputs = outputs, name = "vae")
+
+# Add KL divergence regularization loss.
+kl_loss <- -0.5 * tf$reduce_mean(z_log_var - tf$square(z_mean) - tf$exp(z_log_var) + 1)
+vae$add_loss(kl_loss)
+
+# Train.
+optimizer <- keras$optimizers$Adam(learning_rate = 1e-3)
+vae %>% compile(optimizer, loss = loss_mean_squared_error())
+vae %>% fit(x_train, x_train, epochs = 3, batch_size = 64)
+```
+
+For more information, make sure to read the [Functional API guide](/guides/functional_api/).
+
+
+## Defining custom layers and models in an R package
+
+Unfortunately you can't use anything that creates references to python objects (e.g., `%py_class%`), at the top-level of an R package.
+
+When you build an R package, all the R files in the `R/` directory get sourced
+in an R environment (the package namespace), and then that environment is saved
+as part of the package bundle. Loading the package means restoring the saved R
+environment. This means that the R code only gets sourced once, at build time.
+If you create references to external objects (e.g., python objects) at package
+build time, they will be NULL pointers when the package is loaded, because the
+external objects they pointed to at build time no longer exist at load time.
+
+The solution is to delay creating references to python objects until run time. There are a few ways to do this:
+
+
++ `Layer()` is lazy about initializing the python reference, so it is safe to use in a package.
+
++ `%py_class%` is itself a wrapper around `r_to_py(R6Class(...))`. To avoid
+calling `r_to_py` at build time, you can define your custom layers using
+`create_layer_wrapper(R6Class(...))`. `create_layer_wrapper` will delay calling
+`r_to_py` on the R6Class until the first time a layer instance is created, so it
+is safe to use in package. Here is an example for how the `layer_linear` could
+be safely defined in an R package with this approach.
+
+```{r}
+Linear <- R6::R6Class(
+  classname = "Linear",
+  inherit = keras$layers$Layer,
+  public = list(
+    initialize = function(units = 32) {
+      super$initialize()
+      self$units <- units
+    },
+    build = function(input_shape) {
+      self$w <- self$add_weight(
+        shape = shape(tail(input_shape, 1), self$units),
+        initializer = "random_normal",
+        trainable = TRUE
+      )
+      self$b <- self$add_weight(
+        shape = shape(self$units),
+        initializer = "random_normal",
+        trainable = TRUE
+      )
+    },
+    call = function(inputs) {
+      tf$matmul(inputs, self$w) + self$b
+    }
+  )
+)
+
+#' @export
+layer_linear <- create_layer_wrapper(Linear)
+```
+
++ If the above approach doesn't satisfy your needs, you can still use
+`%py_class%` so long as it is called only after the package is loaded and the
+python session is initialized.
+
+If you're writing an R package that uses keras and reticulate,
+[this article](https://rstudio.github.io/reticulate/articles/package.html) might be helpful.
+
+## Summary
+
+In this guide you learned about creating custom layers and models in keras.
+
++  The constructors available: `%py_class%`, `create_layer_wrapper()`, `R6Class()`, and `Layer()`.
++  What methods to you might want to define to your model: `initialize()`, `build()`, `call()`, and `get_config()`.
++  What convenience methods are available when you subclass `keras$layers$Layer`: `add_weight()`, `add_loss()`, and `add_metric()`

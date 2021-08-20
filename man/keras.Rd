@@ -11,7 +11,7 @@ An object of class \code{python.builtin.module} (inherits from \code{python.buil
 keras
 }
 \value{
-the keras python module
+the keras Python module
 }
 \description{
 The \code{keras} module object is the equivalent of

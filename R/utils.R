@@ -404,7 +404,6 @@ is_keras_tensor <- function(x) {
 assert_all_dots_named <- function(envir = parent.frame(), cl) {
 
   x <- eval(quote(list(...)), envir)
-# x <- list(1,2)
   if(!length(x))
     return()
 
