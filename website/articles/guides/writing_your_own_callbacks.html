@@ -87,7 +87,7 @@
       <a href="../../articles/python_subclasses.html">Python Subclasses</a>
     </li>
     <li>
-      <a href="../../articles/guides/making_new_layers_and_models_via_subclassing.Rmd">Making New Layers and Models via Subclassing</a>
+      <a href="../../articles/guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
     </li>
     <li>
       <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
@@ -195,19 +195,17 @@
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p>A callback is a powerful tool to customize the behavior of a Keras model during training, evaluation, or inference. Examples include <code><a href="../../reference/callback_tensorboard.html">callback_tensorboard()</a></code> to visualize training progress and results with TensorBoard, or <code><a href="../../reference/callback_model_checkpoint.html">callback_model_checkpoint()</a></code> to periodically save your model during training.</p>
 <p>In this guide, you will learn what a Keras callback is, what it can do, and how you can build your own. We provide a few demos of simple callback applications to get you started.</p>
-<pre><code></code></pre>
 </div>
 <div id="setup" class="section level2">
 <h2 class="hasAnchor">
 <a href="#setup" class="anchor"></a>Setup</h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow">tensorflow</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
 <span class="fu">envir</span><span class="fu">::</span><span class="fu"><a href="https://t-kalinowski.github.io/envir/reference/import_from.html">import_from</a></span><span class="op">(</span><span class="va">magrittr</span>, <span class="va">`%&lt;&gt;%`</span><span class="op">)</span>
 <span class="fu">envir</span><span class="fu">::</span><span class="fu"><a href="https://t-kalinowski.github.io/envir/reference/import_from.html">import_from</a></span><span class="op">(</span><span class="va">dplyr</span>, <span class="va">last</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_config.html">tf_version</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] '2.6'</code></pre>
 </div>
 <div id="keras-callbacks-overview" class="section level2">
 <h2 class="hasAnchor">
@@ -278,7 +276,7 @@
 <h2 class="hasAnchor">
 <a href="#a-basic-example" class="anchor"></a>A basic example</h2>
 <p>Let’s take a look at a concrete example. To get started, let’s import tensorflow and define a simple Sequential Keras model:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">get_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span>, input_shape <span class="op">=</span> <span class="fl">784</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -290,7 +288,7 @@
   <span class="va">model</span>
 <span class="op">}</span></code></pre></div>
 <p>Then, load the MNIST data for training and testing from Keras datasets API:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mnist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="va">flatten_and_rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
@@ -315,7 +313,7 @@
 <li>When each evaluation (test) batch starts &amp; ends</li>
 <li>When each inference (prediction) batch starts &amp; ends</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">show</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">msg</span>, <span class="va">logs</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="va">msg</span>, .envir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,
       <span class="st">"got logs: "</span>, sep <span class="op">=</span> <span class="st">"; "</span><span class="op">)</span>
@@ -366,7 +364,7 @@
     <span class="fu">show</span><span class="op">(</span><span class="st">"...Predicting: end of batch {batch}"</span>, <span class="va">logs</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>Let’s try it out:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span>
 <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>,
@@ -377,90 +375,7 @@
   validation_split <span class="op">=</span> <span class="fl">0.5</span>,
   callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">CustomCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>## Starting training; got logs:  Named list()
-## 
-## Start epoch 0 of training; got logs:  Named list()
-## 
-## ...Training: start of batch 0; got logs:  Named list()
-## 
-## ...Training: end of batch 0; got logs: List of 2
-##  $ loss               : num 28.5
-##  $ mean_absolute_error: num 4.55
-## 
-## ...Training: start of batch 1; got logs:  Named list()
-## 
-## ...Training: end of batch 1; got logs: List of 2
-##  $ loss               : num 468
-##  $ mean_absolute_error: num 16.1
-## 
-## Start testing; got logs:  Named list()
-## 
-## ...Evaluating: start of batch 0; got logs:  Named list()
-## 
-## ...Evaluating: end of batch 0; got logs: List of 2
-##  $ loss               : num 26.3
-##  $ mean_absolute_error: num 4.4
-## 
-## ...Evaluating: start of batch 1; got logs:  Named list()
-## 
-## ...Evaluating: end of batch 1; got logs: List of 2
-##  $ loss               : num 25.8
-##  $ mean_absolute_error: num 4.3
-## 
-## Stop testing; got logs: List of 2
-##  $ loss               : num 25.8
-##  $ mean_absolute_error: num 4.3
-## 
-## End epoch 0 of training; got logs: List of 4
-##  $ loss                   : num 468
-##  $ mean_absolute_error    : num 16.1
-##  $ val_loss               : num 25.8
-##  $ val_mean_absolute_error: num 4.3
-## 
-## Start epoch 1 of training; got logs:  Named list()
-## 
-## ...Training: start of batch 0; got logs:  Named list()
-## 
-## ...Training: end of batch 0; got logs: List of 2
-##  $ loss               : num 22.5
-##  $ mean_absolute_error: num 3.82
-## 
-## ...Training: start of batch 1; got logs:  Named list()
-## 
-## ...Training: end of batch 1; got logs: List of 2
-##  $ loss               : num 15.4
-##  $ mean_absolute_error: num 3.16
-## 
-## Start testing; got logs:  Named list()
-## 
-## ...Evaluating: start of batch 0; got logs:  Named list()
-## 
-## ...Evaluating: end of batch 0; got logs: List of 2
-##  $ loss               : num 6.2
-##  $ mean_absolute_error: num 2.07
-## 
-## ...Evaluating: start of batch 1; got logs:  Named list()
-## 
-## ...Evaluating: end of batch 1; got logs: List of 2
-##  $ loss               : num 6.68
-##  $ mean_absolute_error: num 2.18
-## 
-## Stop testing; got logs: List of 2
-##  $ loss               : num 6.68
-##  $ mean_absolute_error: num 2.18
-## 
-## End epoch 1 of training; got logs: List of 4
-##  $ loss                   : num 15.4
-##  $ mean_absolute_error    : num 3.16
-##  $ val_loss               : num 6.68
-##  $ val_mean_absolute_error: num 2.18
-## 
-## Stop training; got logs: List of 4
-##  $ loss                   : num 15.4
-##  $ mean_absolute_error    : num 3.16
-##  $ val_loss               : num 6.68
-##  $ val_mean_absolute_error: num 2.18</code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span>
     <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
@@ -469,68 +384,16 @@
     verbose <span class="op">=</span> <span class="fl">0</span>,
     callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">CustomCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
   <span class="op">)</span></code></pre></div>
-<pre><code>## Start testing; got logs:  Named list()
-## 
-## ...Evaluating: start of batch 0; got logs:  Named list()
-## 
-## ...Evaluating: end of batch 0; got logs: List of 2
-##  $ loss               : num 6.61
-##  $ mean_absolute_error: num 2.12
-## 
-## ...Evaluating: start of batch 1; got logs:  Named list()
-## 
-## ...Evaluating: end of batch 1; got logs: List of 2
-##  $ loss               : num 6.13
-##  $ mean_absolute_error: num 2.03
-## 
-## ...Evaluating: start of batch 2; got logs:  Named list()
-## 
-## ...Evaluating: end of batch 2; got logs: List of 2
-##  $ loss               : num 6.1
-##  $ mean_absolute_error: num 2.05
-## 
-## ...Evaluating: start of batch 3; got logs:  Named list()
-## 
-## ...Evaluating: end of batch 3; got logs: List of 2
-##  $ loss               : num 6.37
-##  $ mean_absolute_error: num 2.09
-## 
-## Stop testing; got logs: List of 2
-##  $ loss               : num 6.37
-##  $ mean_absolute_error: num 2.09</code></pre>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
           batch_size <span class="op">=</span> <span class="fl">128</span>,
           callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">CustomCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## Start predicting; got logs:  Named list()
-## 
-## ...Predicting: start of batch 0; got logs:  Named list()
-## 
-## ...Predicting: end of batch 0; got logs: List of 1
-##  $ outputs: num [1:128, 1] 4.52 3.1 1.79 5 3.35 ...
-## 
-## ...Predicting: start of batch 1; got logs:  Named list()
-## 
-## ...Predicting: end of batch 1; got logs: List of 1
-##  $ outputs: num [1:128, 1] 7.17 4.3 6.03 5.72 4.5 ...
-## 
-## ...Predicting: start of batch 2; got logs:  Named list()
-## 
-## ...Predicting: end of batch 2; got logs: List of 1
-##  $ outputs: num [1:128, 1] 3.52 4.16 4.98 3.66 4.13 ...
-## 
-## ...Predicting: start of batch 3; got logs:  Named list()
-## 
-## ...Predicting: end of batch 3; got logs: List of 1
-##  $ outputs: num [1:116, 1] 4.43 1.69 3.32 2.63 1.84 ...
-## 
-## Stop predicting; got logs:  Named list()</code></pre>
 <div id="usage-of-logs-dict" class="section level3">
 <h3 class="hasAnchor">
 <a href="#usage-of-logs-dict" class="anchor"></a>Usage of <code>logs</code> dict</h3>
 <p>The <code>logs</code> dict contains the loss value, and all the metrics at the end of a batch or epoch. Example includes the loss and mean absolute error.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span>
   <span class="va">on_train_batch_end</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">batch</span>, <span class="va">logs</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Up to batch %i, the average loss is %7.2f.\n"</span>,
@@ -555,29 +418,15 @@
   epochs <span class="op">=</span> <span class="fl">2</span>,
   verbose <span class="op">=</span> <span class="fl">0</span>,
   callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
-<pre><code>## Up to batch 0, the average loss is   30.41.
-## Up to batch 1, the average loss is  463.24.
-## Up to batch 2, the average loss is  318.05.
-## Up to batch 3, the average loss is  246.35.
-## The average loss for epoch  0 is    246.35 and mean absolute error is   10.00.
-## Up to batch 0, the average loss is    7.31.
-## Up to batch 1, the average loss is    6.66.
-## Up to batch 2, the average loss is    6.70.
-## Up to batch 3, the average loss is    6.44.
-## The average loss for epoch  1 is      6.44 and mean absolute error is    2.06.</code></pre>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">res</span> <span class="op">=</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span>
+<span class="op">)</span>
+
+<span class="va">res</span> <span class="op">=</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
   <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span>,
   batch_size <span class="op">=</span> <span class="fl">128</span>,
   verbose <span class="op">=</span> <span class="fl">0</span>,
   callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>## Up to batch 0, the average loss is    5.97.
-## Up to batch 1, the average loss is    5.43.
-## Up to batch 2, the average loss is    5.35.
-## Up to batch 3, the average loss is    5.50.</code></pre>
 </div>
 </div>
 <div id="usage-of-selfmodel-attribute" class="section level2">
@@ -605,7 +454,7 @@
 <a href="#early-stopping-at-minimum-loss" class="anchor"></a>Early stopping at minimum loss</h3>
 <p>This first example shows the creation of a <code>Callback</code> that stops training when the minimum of loss has been reached, by setting the attribute <code>self$model$stop_training</code> (boolean). Optionally, you can provide an argument <code>patience</code> to specify how many epochs we should wait before stopping after having reached a local minimum.</p>
 <p><code>keras$callbacks$EarlyStopping</code> provides a more complete and general implementation.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">EarlyStoppingAtMinLoss</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span>
   <span class="st">"Stop training when the loss is at its min, i.e. the loss stops decreasing.
 
@@ -667,39 +516,13 @@
   callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="op">)</span>, 
                    <span class="fu">EarlyStoppingAtMinLoss</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>## Up to batch 0, the average loss is   28.37.
-## Up to batch 1, the average loss is  454.22.
-## Up to batch 2, the average loss is  311.29.
-## Up to batch 3, the average loss is  235.75.
-## Up to batch 4, the average loss is  190.10.
-## The average loss for epoch  0 is    190.10 and mean absolute error is    8.23.
-## Up to batch 0, the average loss is    5.60.
-## Up to batch 1, the average loss is    5.61.
-## Up to batch 2, the average loss is    5.32.
-## Up to batch 3, the average loss is    5.16.
-## Up to batch 4, the average loss is    5.03.
-## The average loss for epoch  1 is      5.03 and mean absolute error is    1.85.
-## Up to batch 0, the average loss is    3.32.
-## Up to batch 1, the average loss is    3.30.
-## Up to batch 2, the average loss is    3.65.
-## Up to batch 3, the average loss is    3.60.
-## Up to batch 4, the average loss is    3.77.
-## The average loss for epoch  2 is      3.77 and mean absolute error is    1.56.
-## Up to batch 0, the average loss is    4.66.
-## Up to batch 1, the average loss is    4.43.
-## Up to batch 2, the average loss is    4.77.
-## Up to batch 3, the average loss is    5.21.
-## Up to batch 4, the average loss is    6.10.
-## The average loss for epoch  3 is      6.10 and mean absolute error is    1.98.
-## Restoring model weights from the end of the best epoch.
-## Epoch 00004: early stopping</code></pre>
 </div>
 <div id="learning-rate-scheduling" class="section level3">
 <h3 class="hasAnchor">
 <a href="#learning-rate-scheduling" class="anchor"></a>Learning rate scheduling</h3>
 <p>In this example, we show how a custom Callback can be used to dynamically change the learning rate of the optimizer during the course of training.</p>
 <p>See <code>keras$callbacks$LearningRateScheduler</code> for a more general implementations (in RStudio, press F1 while the cursor is over <code>LearningRateScheduler</code> and a browser will open to <a href="https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/callbacks/LearningRateScheduler">this page</a>).</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">CustomLearningRateScheduler</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span>
   <span class="st">"Learning rate scheduler which sets the learning rate according to schedule.
 
@@ -764,126 +587,6 @@
     <span class="fu">CustomLearningRateScheduler</span><span class="op">(</span><span class="va">lr_schedule</span><span class="op">)</span>
   <span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>## 
-## Epoch 00000: Learning rate is 0.1000.
-## Up to batch 0, the average loss is   21.53.
-## Up to batch 1, the average loss is  453.50.
-## Up to batch 2, the average loss is  309.15.
-## Up to batch 3, the average loss is  234.06.
-## Up to batch 4, the average loss is  188.58.
-## The average loss for epoch  0 is    188.58 and mean absolute error is    8.02.
-## 
-## Epoch 00001: Learning rate is 0.0500.
-## Up to batch 0, the average loss is    7.51.
-## Up to batch 1, the average loss is    6.43.
-## Up to batch 2, the average loss is    6.27.
-## Up to batch 3, the average loss is    5.63.
-## Up to batch 4, the average loss is    5.63.
-## The average loss for epoch  1 is      5.63 and mean absolute error is    1.96.
-## 
-## Epoch 00002: Learning rate is 0.0500.
-## Up to batch 0, the average loss is    3.75.
-## Up to batch 1, the average loss is    4.29.
-## Up to batch 2, the average loss is    4.85.
-## Up to batch 3, the average loss is    4.69.
-## Up to batch 4, the average loss is    4.55.
-## The average loss for epoch  2 is      4.55 and mean absolute error is    1.75.
-## 
-## Epoch 00003: Learning rate is 0.0500.
-## Up to batch 0, the average loss is    4.11.
-## Up to batch 1, the average loss is    4.11.
-## Up to batch 2, the average loss is    4.59.
-## Up to batch 3, the average loss is    4.57.
-## Up to batch 4, the average loss is    4.75.
-## The average loss for epoch  3 is      4.75 and mean absolute error is    1.78.
-## 
-## Epoch 00004: Learning rate is 0.0100.
-## Up to batch 0, the average loss is    4.59.
-## Up to batch 1, the average loss is    3.85.
-## Up to batch 2, the average loss is    3.94.
-## Up to batch 3, the average loss is    3.75.
-## Up to batch 4, the average loss is    3.70.
-## The average loss for epoch  4 is      3.70 and mean absolute error is    1.58.
-## 
-## Epoch 00005: Learning rate is 0.0100.
-## Up to batch 0, the average loss is    3.89.
-## Up to batch 1, the average loss is    3.81.
-## Up to batch 2, the average loss is    3.75.
-## Up to batch 3, the average loss is    3.51.
-## Up to batch 4, the average loss is    3.60.
-## The average loss for epoch  5 is      3.60 and mean absolute error is    1.55.
-## 
-## Epoch 00006: Learning rate is 0.0100.
-## Up to batch 0, the average loss is    2.50.
-## Up to batch 1, the average loss is    2.96.
-## Up to batch 2, the average loss is    3.18.
-## Up to batch 3, the average loss is    3.08.
-## Up to batch 4, the average loss is    3.32.
-## The average loss for epoch  6 is      3.32 and mean absolute error is    1.45.
-## 
-## Epoch 00007: Learning rate is 0.0050.
-## Up to batch 0, the average loss is    3.43.
-## Up to batch 1, the average loss is    3.19.
-## Up to batch 2, the average loss is    2.97.
-## Up to batch 3, the average loss is    3.23.
-## Up to batch 4, the average loss is    3.23.
-## The average loss for epoch  7 is      3.23 and mean absolute error is    1.45.
-## 
-## Epoch 00008: Learning rate is 0.0050.
-## Up to batch 0, the average loss is    3.01.
-## Up to batch 1, the average loss is    3.06.
-## Up to batch 2, the average loss is    3.12.
-## Up to batch 3, the average loss is    3.01.
-## Up to batch 4, the average loss is    2.99.
-## The average loss for epoch  8 is      2.99 and mean absolute error is    1.40.
-## 
-## Epoch 00009: Learning rate is 0.0050.
-## Up to batch 0, the average loss is    4.22.
-## Up to batch 1, the average loss is    3.72.
-## Up to batch 2, the average loss is    3.61.
-## Up to batch 3, the average loss is    3.49.
-## Up to batch 4, the average loss is    3.36.
-## The average loss for epoch  9 is      3.36 and mean absolute error is    1.45.
-## 
-## Epoch 00010: Learning rate is 0.0010.
-## Up to batch 0, the average loss is    3.72.
-## Up to batch 1, the average loss is    3.15.
-## Up to batch 2, the average loss is    2.81.
-## Up to batch 3, the average loss is    2.98.
-## Up to batch 4, the average loss is    3.25.
-## The average loss for epoch 10 is      3.25 and mean absolute error is    1.43.
-## 
-## Epoch 00011: Learning rate is 0.0010.
-## Up to batch 0, the average loss is    2.68.
-## Up to batch 1, the average loss is    2.81.
-## Up to batch 2, the average loss is    2.79.
-## Up to batch 3, the average loss is    2.76.
-## Up to batch 4, the average loss is    2.93.
-## The average loss for epoch 11 is      2.93 and mean absolute error is    1.35.
-## 
-## Epoch 00012: Learning rate is 0.0010.
-## Up to batch 0, the average loss is    3.29.
-## Up to batch 1, the average loss is    3.21.
-## Up to batch 2, the average loss is    3.09.
-## Up to batch 3, the average loss is    3.16.
-## Up to batch 4, the average loss is    3.26.
-## The average loss for epoch 12 is      3.26 and mean absolute error is    1.46.
-## 
-## Epoch 00013: Learning rate is 0.0010.
-## Up to batch 0, the average loss is    2.59.
-## Up to batch 1, the average loss is    3.08.
-## Up to batch 2, the average loss is    2.98.
-## Up to batch 3, the average loss is    2.84.
-## Up to batch 4, the average loss is    2.74.
-## The average loss for epoch 13 is      2.74 and mean absolute error is    1.31.
-## 
-## Epoch 00014: Learning rate is 0.0010.
-## Up to batch 0, the average loss is    3.26.
-## Up to batch 1, the average loss is    3.50.
-## Up to batch 2, the average loss is    3.08.
-## Up to batch 3, the average loss is    2.88.
-## Up to batch 4, the average loss is    2.87.
-## The average loss for epoch 14 is      2.87 and mean absolute error is    1.37.</code></pre>
 </div>
 <div id="built-in-keras-callbacks" class="section level3">
 <h3 class="hasAnchor">

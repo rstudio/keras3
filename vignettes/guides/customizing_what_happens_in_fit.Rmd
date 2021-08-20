@@ -30,6 +30,11 @@ editor_options:
 
 ```{r setup, include = FALSE}
 library(keras)
+knitr::opts_chunk$set(
+  eval = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
 ```
 
 ## Summary

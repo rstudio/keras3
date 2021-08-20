@@ -31,7 +31,7 @@ navbar:
         - text: "Python Subclasses"
           href: articles/python_subclasses.html
         - text: "Making New Layers and Models via Subclassing"
-          href: articles/guides/making_new_layers_and_models_via_subclassing.Rmd
+          href: articles/guides/making_new_layers_and_models_via_subclassing.html
         - text: "Customizing what happens in fit"
           href: articles/guides/customizing_what_happens_in_fit.html
         - text: "--------------------------"

@@ -19,9 +19,11 @@ to visualize training progress and results with TensorBoard, or
 In this guide, you will learn what a Keras callback is, what it can do, and how you can
 build your own. We provide a few demos of simple callback applications to get you
 started.
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(comment = NA, eval = FALSE)
 ```
 
-```
 ## Setup
 ```{R}
 library(tensorflow)
