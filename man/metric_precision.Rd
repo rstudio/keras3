@@ -16,7 +16,7 @@ metric_precision(
 \arguments{
 \item{...}{Passed on to the underlying metric. Used for forwards and backwards compatibility.}
 
-\item{thresholds}{(Optional) A float value or a python list of float
+\item{thresholds}{(Optional) A float value or a list of float
 threshold values in \verb{[0, 1]}. A threshold is compared with prediction values
 to determine the truth value of predictions (i.e., above the threshold is
 \code{true}, below is \code{false}). One metric value is generated for each threshold

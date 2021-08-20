@@ -158,7 +158,7 @@ For example, if \code{0.1}, use \code{0.1 / num_classes} for non-target labels a
 \item{axis}{The axis along which to compute crossentropy (the features axis).
 Axis is 1-based (e.g, first axis is \code{axis=1}). Defaults to \code{-1} (the last axis).}
 
-\item{...}{Additional arguments passed on to the python callable (for forward
+\item{...}{Additional arguments passed on to the Python callable (for forward
 and backwards compatibility).}
 
 \item{reduction}{Only applicable if \code{y_true} and \code{y_pred} are missing. Type

@@ -7,14 +7,14 @@
 create_layer_wrapper(LayerClass, modifiers = NULL, convert = TRUE)
 }
 \arguments{
-\item{LayerClass}{A R6 or python class generator that inherits from
+\item{LayerClass}{A R6 or Python class generator that inherits from
 \code{keras$layers$Layer}}
 
 \item{modifiers}{A named list of functions to modify to user-supplied
 arguments before they are passed on to the class constructor. (e.g.,
 \code{list(units = as.integer)})}
 
-\item{convert}{Boolean, whether the python class and it's methods should by
+\item{convert}{Boolean, whether the Python class and its methods should by
 default convert python objects to R objects.
 
 See guide 'making_new_layers_and_models_via_subclassing.Rmd' for example usage.}

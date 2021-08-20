@@ -9,7 +9,7 @@ metric_true_negatives(..., thresholds = NULL, name = NULL, dtype = NULL)
 \arguments{
 \item{...}{Passed on to the underlying metric. Used for forwards and backwards compatibility.}
 
-\item{thresholds}{(Optional) Defaults to 0.5. A float value or a python
+\item{thresholds}{(Optional) Defaults to 0.5. A float value or a
 list of float threshold values in \verb{[0, 1]}. A threshold is compared
 with prediction values to determine the truth value of predictions
 (i.e., above the threshold is \code{true}, below is \code{false}). One metric
