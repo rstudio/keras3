@@ -132,7 +132,6 @@ Y_sparse <- matrix(sample(0:9, N, TRUE))
 
 test_metric <- function(metric, ...) {
   metric_name <- deparse(substitute(metric))
-  softmax <- TRUE
   loss <- "categorical_crossentropy"
 
   if(grepl("sparse", metric_name)) {

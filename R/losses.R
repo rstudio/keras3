@@ -11,7 +11,7 @@
 #' @param axis The axis along which to compute crossentropy (the features axis).
 #'   Axis is 1-based (e.g, first axis is `axis=1`). Defaults to `-1` (the last axis).
 #'
-#' @param ... Additional arguments passed on to the python callable (for forward
+#' @param ... Additional arguments passed on to the Python callable (for forward
 #'   and backwards compatibility).
 #'
 #' @param reduction Only applicable if `y_true` and `y_pred` are missing. Type

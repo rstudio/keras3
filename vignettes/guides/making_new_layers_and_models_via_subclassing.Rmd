@@ -123,8 +123,7 @@ layer_linear <- Layer(
 )
 ```
 
-For the remainder of this vignette we'll be using the `%py_class%` constructor,
-only because it does less and for that reason is maybe more illuminating for the purpose of a guide like this. However,
+For the remainder of this vignette we'll be using the `%py_class%` constructor. However,
 in your own code feel free to use `create_layer_wrapper` and/or `Layer` if you prefer.
 
 Note that the weights `w` and `b` are automatically tracked by the layer upon being set as
