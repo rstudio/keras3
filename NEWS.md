@@ -1,17 +1,15 @@
 # keras (development version)
 
 Breaking changes:
-`set_vocabulary()` arguments `df_data` and `oov_df_value` are deprecated. They are superseded by the new argument `idf_weights`.
 
-TF 2.6 changes:
 - `predict_proba()` and `predict_classes()` were removed.
 - model serialization to/from yaml was removed.
 - default changed: `layer_text_vectorization(pad_to_max_tokens=FALSE)`
+- `set_vocabulary()` arguments `df_data` and `oov_df_value` are deprecated. They are superseded by the new argument `idf_weights`.
 
 New Features:
-- Default Tensorflow/Keras version is now 2.6
 
-- The `keras` Python module is exported
+- Default Tensorflow/Keras version is now 2.6
 
 - Introduced `%py_class%`, an R-language constructor for Python classes.
 
@@ -21,38 +19,30 @@ New Features:
   - Customizing what happens in fit (example of how to define a model, like a GAN, with a custom train step).
   - Writing your own callbacks.
 
-- All optimizer had argument `lr` renamed to `learning_rate`.
-  (backwards compatibility is preserved, an R warning is now issued).
-
-- `Layer()` custom layer constructor is now lazy about initializing the Python session and safe to use on the top level of an R package.
-
-- New function `create_layer_wrapper()` that can create a composing R function wrapper around a custom layer class.
-
-- The `compile()` method for keras models has been updated:
-  - `optimizer` is now an optional argument. It defaults to `"rmsprop"` for regular keras models.
-     Custom models can specify their own default optimizer.
-  - `loss` is now an optional argument.
-  - New optional arguments: `run_eagerly`, `steps_per_execution`.
-  - `target_tensors` and `sample_weight_mode` must now be supplied as named arguments.
+- The `keras` Python module is exported
 
 - Major changes to the underlying handling of custom R6 layer classes.
-  - A new `r_to_py` method is provided for `R6ClassGenerator` objects.
+  - A new `r_to_py()` method is provided for `R6ClassGenerator` objects.
   - R6 custom layers can now inherit directly from Python layer classes
     or other R6 custom layer classes.
-  - Custom R6 layers can now be instantiated directly after conversion of the class generator with `r_to_py`, without going through `create_layer`.
+  - Custom R6 layers can now be instantiated directly after conversion of the class generator with `r_to_py()`, without going through `create_layer()`.
   - `KerasLayer` is deprecated (new classes should inherit directly from `keras$layers$Layer`).
   - `KerasWrapper` is deprecated (new classes should inherit directly from `keras$layers$Wrapper`).
-  - `create_wrapper` is deprecated (no longer needed, use `create_layer` directly).
+  - `create_wrapper()` is deprecated (no longer needed, use `create_layer()` directly).
   - All layer class methods provided as R functions now have a `super` in scope that resolves to the Python super class object.
   - Methods of `super` can be accessed in the 3 common ways:
     - (Python 3 style): `super()$"__init__"()`
     - (Python 2 style): `super(ClassName, self)$"__init__"()`
     - (R6 style): `super$initialize()`
-  - User defined custom classes that inherit from a Python type are responsible for calling `super()$__init__(...)` if appropriate.
+  - User defined custom classes that inherit from a Python type are responsible for calling ```super()$`__init__`(...)``` if appropriate.
   - Custom layers can now properly handle masks (#1225)
     - `supports_masking = TRUE` attribute is now supported
     - `compute_mask()` user defined method is now supported
   - `call()` methods now support a `training` argument, as well as any additional arbitrary user-defined arguments
+
+- `Layer()` custom layer constructor is now lazy about initializing the Python session and safe to use on the top level of an R package (#1229).
+
+- New function `create_layer_wrapper()` that can create a composing R function wrapper around a custom layer class.
 
 - Refactored `install_keras()` (along with `tensorflow::install_tensorflow()`).
   Installation should be more reliable for more users now.
@@ -100,13 +90,8 @@ New Features:
       -  `metric_auc()`
 
 - `keras_model_sequential()` gains the ability to accept arguments that
-  define input layer like `input_shape` and `dtype`.
+  define the input layer like `input_shape` and `dtype`.
   See `?keras_model_sequential` for details and examples.
-
-- Refactored automated tests to closer match the default installation procedure
-  and compute environment of most user.
-
-- Expanded CI test coverage to include R devel, oldrel and 3.6.
 
 - Many layers gained new arguments, coming to parity with the interface
   available in the latest Python version:
@@ -127,11 +112,27 @@ New Features:
     | `layer_text_vectorization`   | `vocabulary`     |
 
 
-- The glue package was added to Imports
+- The `compile()` method for keras models has been updated:
+  - `optimizer` is now an optional argument. It defaults to `"rmsprop"` for regular keras models.
+     Custom models can specify their own default optimizer.
+  - `loss` is now an optional argument.
+  - New optional arguments: `run_eagerly`, `steps_per_execution`.
+  - `target_tensors` and `sample_weight_mode` must now be supplied as named arguments.
 
 - Added activation functions swish and gelu. (#1226)
 
 - `set_vocabulary()` gains a `idf_weights` argument.
+
+- All optimizer had argument `lr` renamed to `learning_rate`.
+  (backwards compatibility is preserved, an R warning is now issued).
+
+- The glue package was added to Imports
+
+- Refactored automated tests to closer match the default installation procedure
+  and compute environment of most user.
+
+- Expanded CI test coverage to include R devel, oldrel and 3.6.
+
 
 # keras 2.4.0
 

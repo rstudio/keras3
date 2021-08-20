@@ -229,60 +229,54 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#keras-development-version" class="anchor"></a>keras (development version)<small> Unreleased </small>
 </h1>
-<p>Breaking changes: <code><a href="../reference/set_vocabulary.html">set_vocabulary()</a></code> arguments <code>df_data</code> and <code>oov_df_value</code> are deprecated. They are superseded by the new argument <code>idf_weights</code>.</p>
-<p>TF 2.6 changes:</p>
+<p>Breaking changes:</p>
 <ul>
 <li>
-<code>predict_proba</code> and <code>predict_classes</code> were removed.</li>
+<code><a href="../reference/predict_proba.html">predict_proba()</a></code> and <code><a href="../reference/predict_proba.html">predict_classes()</a></code> were removed.</li>
 <li>model serialization to/from yaml was removed.</li>
 <li>default changed: <code><a href="../reference/layer_text_vectorization.html">layer_text_vectorization(pad_to_max_tokens=FALSE)</a></code>
 </li>
+<li>
+<code><a href="../reference/set_vocabulary.html">set_vocabulary()</a></code> arguments <code>df_data</code> and <code>oov_df_value</code> are deprecated. They are superseded by the new argument <code>idf_weights</code>.</li>
 </ul>
 <p>New Features:</p>
 <ul>
 <li><p>Default Tensorflow/Keras version is now 2.6</p></li>
-<li><p>The <code>keras</code> python module is exported</p></li>
-<li><p>Introduced <code><a href="../reference/%py_class%.html">%py_class%</a></code>, a new python class generator constructor.</p></li>
+<li><p>Introduced <code><a href="../reference/%py_class%.html">%py_class%</a></code>, an R-language constructor for Python classes.</p></li>
 <li>
 <p>New vignettes:</p>
 <ul>
-<li>Subclassing python classes: How to use <code><a href="../reference/%py_class%.html">%py_class%</a></code>.</li>
+<li>Subclassing Python classes: How to use <code><a href="../reference/%py_class%.html">%py_class%</a></code>.</li>
 <li>Making new layers and models via subclassing.</li>
 <li>Customizing what happens in fit (example of how to define a model, like a GAN, with a custom train step).</li>
 <li>Writing your own callbacks.</li>
 </ul>
 </li>
-<li><p>All optimizer had argument <code>lr</code> renamed to <code>learning_rate</code>. (backwards compatibility is preserved, an R warning is now issued).</p></li>
-<li><p><code><a href="../reference/Layer.html">Layer()</a></code> custom layer constructor is now lazy about initializing the python session and safe to use in the top level of an R package.</p></li>
-<li><p>New function <code><a href="../reference/create_layer_wrapper.html">create_layer_wrapper()</a></code> that can create a composing R function wrapper around a custom layer class.</p></li>
-<li>
-<p>The <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> method for keras models has been updated:</p>
-<ul>
-<li>
-<code>optimizer</code> is now an optional argument. It defaults to <code>"rmsprop"</code> for regular keras models. Custom models can specify their own default optimizer.</li>
-<li>
-<code>loss</code> is now an optional argument.</li>
-<li>New optional arguments: <code>run_eagerly</code>, <code>steps_per_execution</code>.</li>
-<li>
-<code>target_tensors</code> and <code>sample_weight_mode</code> must now be supplied as named arguments.</li>
-</ul>
-</li>
+<li><p>The <code>keras</code> Python module is exported</p></li>
 <li>
 <p>Major changes to the underlying handling of custom R6 layer classes.</p>
 <ul>
-<li>A new <code>r_to_py</code> method is provided for <code>R6ClassGenerator</code> objects.</li>
-<li>R6 custom layers can now inherit directly from python layer classes or other R6 custom layer classes</li>
-<li>Custom R6 layers can now be instantiated directly after conversion of the class generator with <code>r_to_py</code>, without going through <code>create_layer</code>.</li>
+<li>A new <code>r_to_py()</code> method is provided for <code>R6ClassGenerator</code> objects.</li>
+<li>R6 custom layers can now inherit directly from Python layer classes or other R6 custom layer classes.</li>
+<li>Custom R6 layers can now be instantiated directly after conversion of the class generator with <code>r_to_py()</code>, without going through <code><a href="../reference/create_layer.html">create_layer()</a></code>.</li>
 <li>
-<code>KerasLayer</code> is deprecated (new classes should inherit directly from <code>keras$layers$Layer</code>)</li>
+<code>KerasLayer</code> is deprecated (new classes should inherit directly from <code>keras$layers$Layer</code>).</li>
 <li>
-<code>KerasWrapper</code> is deprecated (new classes should inherit directly from <code>keras$layers$Wrapper</code>)</li>
+<code>KerasWrapper</code> is deprecated (new classes should inherit directly from <code>keras$layers$Wrapper</code>).</li>
 <li>
-<code>create_wrapper</code> is deprecated (no longer needed, use <code>create_layer</code> directly)</li>
-<li>All layer class methods provided as R functions now have a <code>super</code> in scope that resolves to the python super class object</li>
-<li>Methods of <code>super</code> can be accessed in the 3 common ways: (python3 style): <code>super()$"__init__"()</code> (python2 style): <code>super(ClassName, self)$"__init__"()</code> (R6 style): <code>super$initialize()</code>
+<code><a href="../reference/create_wrapper.html">create_wrapper()</a></code> is deprecated (no longer needed, use <code><a href="../reference/create_layer.html">create_layer()</a></code> directly).</li>
+<li>All layer class methods provided as R functions now have a <code>super</code> in scope that resolves to the Python super class object.</li>
+<li>Methods of <code>super</code> can be accessed in the 3 common ways:
+<ul>
+<li>(Python 3 style): <code>super()$"__init__"()</code>
 </li>
-<li>User defined custom classes that inherit from a python type are responsible for calling <code>super()$__init__(...)</code> if appropriate.</li>
+<li>(Python 2 style): <code>super(ClassName, self)$"__init__"()</code>
+</li>
+<li>(R6 style): <code>super$initialize()</code>
+</li>
+</ul>
+</li>
+<li>User defined custom classes that inherit from a Python type are responsible for calling <code>super()$`__init__`(...)</code> if appropriate.</li>
 <li>Custom layers can now properly handle masks (<a href='https://github.com/rstudio/keras/issues/1225'>#1225</a>)
 <ul>
 <li>
@@ -295,6 +289,8 @@
 <code><a href="https://rdrr.io/r/base/call.html">call()</a></code> methods now support a <code>training</code> argument, as well as any additional arbitrary user-defined arguments</li>
 </ul>
 </li>
+<li><p><code><a href="../reference/Layer.html">Layer()</a></code> custom layer constructor is now lazy about initializing the Python session and safe to use on the top level of an R package (<a href='https://github.com/rstudio/keras/issues/1229'>#1229</a>).</p></li>
+<li><p>New function <code><a href="../reference/create_layer_wrapper.html">create_layer_wrapper()</a></code> that can create a composing R function wrapper around a custom layer class.</p></li>
 <li>
 <p>Refactored <code><a href="../reference/install_keras.html">install_keras()</a></code> (along with <code><a href="https://rdrr.io/pkg/tensorflow/man/install_tensorflow.html">tensorflow::install_tensorflow()</a></code>). Installation should be more reliable for more users now. If you encounter installation issues, please file an issue: <a href="https://github.com/rstudio/keras/issues/new" class="uri">https://github.com/rstudio/keras/issues/new</a></p>
 <ul>
@@ -321,7 +317,7 @@
 <li><p>All the metric functions gain the ability to return a <code>keras$metrics$Metric</code> instance if called without <code>y_true</code> and <code>y_pred</code></p></li>
 <li><p>Each metric function is now documented separately, with a common <code><a href="../reference/Metric.html">?Metric</a></code> topic demonstrating example usage.</p></li>
 <li>
-<p>New built in metrics:</p>
+<p>New built-in metrics:</p>
 <ul>
 <li><code><a href="../reference/metric_true_negatives.html">metric_true_negatives()</a></code></li>
 <li><code><a href="../reference/metric_true_positives.html">metric_true_positives()</a></code></li>
@@ -350,11 +346,9 @@
 </li>
 </ul>
 </li>
-<li><p><code><a href="../reference/keras_model_sequential.html">keras_model_sequential()</a></code> gains the ability to accept arguments that define input layer like <code>input_shape</code> and <code>dtype</code>. See <code><a href="../reference/keras_model_sequential.html">?keras_model_sequential</a></code> for details and examples.</p></li>
-<li><p>Refactored automated tests to closer match the default installation procedure and compute environment of most user.</p></li>
-<li><p>Expanded CI test coverage to include R devel, oldrel and 3.6.</p></li>
+<li><p><code><a href="../reference/keras_model_sequential.html">keras_model_sequential()</a></code> gains the ability to accept arguments that define the input layer like <code>input_shape</code> and <code>dtype</code>. See <code><a href="../reference/keras_model_sequential.html">?keras_model_sequential</a></code> for details and examples.</p></li>
 <li>
-<p>Many layers gained new arguments, coming to parity with the interface available in the latest python version:</p>
+<p>Many layers gained new arguments, coming to parity with the interface available in the latest Python version:</p>
 <table>
 <thead><tr class="header">
 <th>layer name</th>
@@ -412,9 +406,24 @@
 </tbody>
 </table>
 </li>
-<li><p>The glue package was added to Imports</p></li>
+<li>
+<p>The <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> method for keras models has been updated:</p>
+<ul>
+<li>
+<code>optimizer</code> is now an optional argument. It defaults to <code>"rmsprop"</code> for regular keras models. Custom models can specify their own default optimizer.</li>
+<li>
+<code>loss</code> is now an optional argument.</li>
+<li>New optional arguments: <code>run_eagerly</code>, <code>steps_per_execution</code>.</li>
+<li>
+<code>target_tensors</code> and <code>sample_weight_mode</code> must now be supplied as named arguments.</li>
+</ul>
+</li>
 <li><p>Added activation functions swish and gelu. (<a href='https://github.com/rstudio/keras/issues/1226'>#1226</a>)</p></li>
 <li><p><code><a href="../reference/set_vocabulary.html">set_vocabulary()</a></code> gains a <code>idf_weights</code> argument.</p></li>
+<li><p>All optimizer had argument <code>lr</code> renamed to <code>learning_rate</code>. (backwards compatibility is preserved, an R warning is now issued).</p></li>
+<li><p>The glue package was added to Imports</p></li>
+<li><p>Refactored automated tests to closer match the default installation procedure and compute environment of most user.</p></li>
+<li><p>Expanded CI test coverage to include R devel, oldrel and 3.6.</p></li>
 </ul>
 </div>
     <div id="keras-240" class="section level1">
@@ -682,7 +691,7 @@
 <li><p><code>to_numpy_array()</code> utility function for custom generators (enables custom generators to yield C-ordered arrays of the correct float type)</p></li>
 <li><p>Added <code>batch_size</code> and <code>write_grads</code> arguments to <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code></p></li>
 <li><p>Added <code>return_state</code> argument to recurrent layers.</p></li>
-<li><p>Don’t re-export <code><a href="https://rdrr.io/pkg/tensorflow/man/install_tensorflow.html">install_tensorflow()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/tf_config.html">tf_config()</a></code> from tensorflow package.</p></li>
+<li><p>Don’t re-export <code>install_tensorflow()</code> and <code>tf_config()</code> from tensorflow package.</p></li>
 <li><p><code><a href="../reference/is_keras_available.html">is_keras_available()</a></code> function to probe whether the Keras python package is available in the current environment.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> S3 method for Keras training history</p></li>
 <li><p>Remove names from <code><a href="../reference/keras_model.html">keras_model()</a></code> inputs</p></li>

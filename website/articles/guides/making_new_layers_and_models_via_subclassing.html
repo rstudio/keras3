@@ -270,7 +270,7 @@
     <span class="va">tf</span><span class="op">$</span><span class="fu">matmul</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span>
   <span class="op">}</span>
 <span class="op">)</span></code></pre></div>
-<p>For the remainder of this vignette we’ll be using the <code><a href="../../reference/%py_class%.html">%py_class%</a></code> constructor, only because it does less and for that reason is maybe more illuminating for the purpose of a guide like this. However, in your own code feel free to use <code>create_layer_wrapper</code> and/or <code>Layer</code> if you prefer.</p>
+<p>For the remainder of this vignette we’ll be using the <code><a href="../../reference/%py_class%.html">%py_class%</a></code> constructor. However, in your own code feel free to use <code>create_layer_wrapper</code> and/or <code>Layer</code> if you prefer.</p>
 <p>Note that the weights <code>w</code> and <code>b</code> are automatically tracked by the layer upon being set as layer attributes:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span>
