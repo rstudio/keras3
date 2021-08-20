@@ -169,12 +169,12 @@ py_formals <- function(py_obj) {
 
 #' Create a Keras Layer wrapper
 #'
-#' @param LayerClass A R6 or python class generator that inherits from
+#' @param LayerClass A R6 or Python class generator that inherits from
 #'   `keras$layers$Layer`
 #' @param modifiers A named list of functions to modify to user-supplied
 #'   arguments before they are passed on to the class constructor. (e.g.,
 #'   `list(units = as.integer)`)
-#' @param convert Boolean, whether the python class and it's methods should by
+#' @param convert Boolean, whether the Python class and its methods should by
 #'   default convert python objects to R objects.
 #'
 #' See guide 'making_new_layers_and_models_via_subclassing.Rmd' for example usage.

@@ -24,7 +24,7 @@ New Features:
 - All optimizer had argument `lr` renamed to `learning_rate`.
   (backwards compatibility is preserved, an R warning is now issued).
 
-- `Layer()` custom layer constructor is now lazy about initializing the python session and safe to use in the top level of an R package.
+- `Layer()` custom layer constructor is now lazy about initializing the Python session and safe to use on the top level of an R package.
 
 - New function `create_layer_wrapper()` that can create a composing R function wrapper around a custom layer class.
 
@@ -73,7 +73,7 @@ New Features:
 - Metric functions:
   - All the metric functions gain the ability to return a `keras$metrics$Metric` instance if called without `y_true` and `y_pred`
   - Each metric function is now documented separately, with a common `?Metric` topic demonstrating example usage.
-  - New built in metrics:
+  - New built-in metrics:
 
       -  `metric_true_negatives()`
       -  `metric_true_positives()`
