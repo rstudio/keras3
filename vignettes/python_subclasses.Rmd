@@ -113,14 +113,14 @@ After conversion, Python class generators will be different from R6 class genera
 
     -   missing or `NULL`
     -   a Python class generator
-    -   an R6 ClassGenerator, as long as it can be converted to a Python class generator as well
+    -   an R6 class generator, as long as it can be converted to a Python class generator as well
     -   a list of Python/R6 classes (for multiple inheritance)
     -   A list of superclasses, with optional additional keywords (e.g., `metaclass=`, only for advanced Python use cases)
 
 ### A custom constraint (`%py_class%`)
 
 As an alternative to `r_to_py(R6Class(...))`, we also provide `%py_class%`, a more concise alternative syntax for achieving the same outcome.
-`%py_class%` is heavily inspired by the Python syntax for the `class` statement in R, and is especially convenient when translating Python code to R.
+`%py_class%` is heavily inspired by the Python `class` statement syntax, and is especially convenient when translating Python code to R.
 Translating the above example, you could write the same using `%py_class%`:
 
 ```{r}
@@ -151,17 +151,28 @@ Some (potentially surprising) notes about `%py_class%`:
 
 -   The right hand side is evaluated in a new environment to form the namespace for the class methods.
 
--   One keyword treated specially is `convert`.
-    If you want to call `r_to_py` with `convert=FALSE`, pass it as a keyword:
+-  `%py_class%` objects can be safely defined at the top level of an R package.
+    (see details about `delay_load` below)
+
+-   Two keywords are treated specially: `convert` and `delay_load`.
+
+-   If you want to call `r_to_py` with `convert=FALSE`, pass it as a keyword:
 
 ```{r, eval=FALSE}
 NonNegative(keras$constraints$Constraint, convert=FALSE) %py_class% { ... }
 ```
 
+-   You can delay creating the python type object until this first time
+    a class instance is created by passing `delay_load=TRUE`. The default value is
+    `FALSE` for most contexts, but `TRUE` if you are in an R package. (The actual
+    test performed is `identical(topenv(), globalenv())`). If a `%py_class%`
+    type object is delayed, it will display `"<<R6type>.ClassName> (delayed)"` when
+    printed.
+
 -   An additional convenience is that if the first expression of a function body
     or the class body is a literal character string, it is automatically taken as
     the `__doc__` attribute of the class or method. The doc string will then be
-    visible to both python and R tools e.g. `reticulate::py_help()`. 
+    visible to both python and R tools e.g. `reticulate::py_help()`.
     See `?py_class` for an example.
 
 In all other regards, `%py_class%` is equivalent to `r_to_py(R6Class())` (indeed, under the hood, they do the same thing).
