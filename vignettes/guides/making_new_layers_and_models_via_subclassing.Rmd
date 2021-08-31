@@ -937,9 +937,9 @@ For more information, make sure to read the [Functional API guide](/guides/funct
 
 ## Defining custom layers and models in an R package
 
-Unfortunately you can't use anything that creates references to python objects (e.g., `%py_class%`), at the top-level of an R package.
+Unfortunately you can't use anything that creates references to python objects, at the top-level of an R package.
 
-When you build an R package, all the R files in the `R/` directory get sourced
+Here is why: when you build an R package, all the R files in the `R/` directory get sourced
 in an R environment (the package namespace), and then that environment is saved
 as part of the package bundle. Loading the package means restoring the saved R
 environment. This means that the R code only gets sourced once, at build time.
@@ -947,55 +947,14 @@ If you create references to external objects (e.g., python objects) at package
 build time, they will be NULL pointers when the package is loaded, because the
 external objects they pointed to at build time no longer exist at load time.
 
-The solution is to delay creating references to python objects until run time. There are a few ways to do this:
-
-
-+ `Layer()` is lazy about initializing the python reference, so it is safe to use in a package.
-
-+ `%py_class%` is itself a wrapper around `r_to_py(R6Class(...))`. To avoid
-calling `r_to_py` at build time, you can define your custom layers using
-`create_layer_wrapper(R6Class(...))`. `create_layer_wrapper` will delay calling
-`r_to_py` on the R6Class until the first time a layer instance is created, so it
-is safe to use in package. Here is an example for how the `layer_linear` could
-be safely defined in an R package with this approach.
-
-```{r}
-Linear <- R6::R6Class(
-  classname = "Linear",
-  inherit = keras$layers$Layer,
-  public = list(
-    initialize = function(units = 32) {
-      super$initialize()
-      self$units <- units
-    },
-    build = function(input_shape) {
-      self$w <- self$add_weight(
-        shape = shape(tail(input_shape, 1), self$units),
-        initializer = "random_normal",
-        trainable = TRUE
-      )
-      self$b <- self$add_weight(
-        shape = shape(self$units),
-        initializer = "random_normal",
-        trainable = TRUE
-      )
-    },
-    call = function(inputs) {
-      tf$matmul(inputs, self$w) + self$b
-    }
-  )
-)
-
-#' @export
-layer_linear <- create_layer_wrapper(Linear)
-```
-
-+ If the above approach doesn't satisfy your needs, you can still use
-`%py_class%` so long as it is called only after the package is loaded and the
-python session is initialized.
+The solution is to delay creating references to python objects until run time.
+Fortunately, `%py_class%`, `Layer()`, and `create_layer_wrapper(R6Class(...))`
+are all lazy about initializing the python reference, so they are safe to define
+and export in an R package.
 
 If you're writing an R package that uses keras and reticulate,
-[this article](https://rstudio.github.io/reticulate/articles/package.html) might be helpful.
+[this article](https://rstudio.github.io/reticulate/articles/package.html) 
+might be helpful to read over.
 
 ## Summary
 
