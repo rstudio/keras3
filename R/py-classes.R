@@ -108,6 +108,9 @@ resolve_py_type_inherits <- function(inherit, convert=FALSE) {
                paste(class(cls), collapse = ", "))
       )
 
+    if(inherits(cls, "python.builtin.type") && is.function(cls))
+      force(environment(cls)$callable)
+
     cls
   })
 
@@ -356,6 +359,8 @@ r_formals_to_py__signature__ <- function(fn) {
   else
     py_class <- r_to_py.R6ClassGenerator(r6_class, convert)
 
+  class(py_class) <- c("py_converted_R6_class_generator", class(py_class))
+
   assign(classname, py_class, envir = parent_env)
   invisible(py_class)
 }
@@ -365,36 +370,64 @@ if (getRversion() < "4.0")
     as.list.environment(env, all.names = TRUE)[[nm]]
   }
 
+#' @importFrom reticulate py_call py_to_r
+py_callable_as_function2 <- function(callable, convert) {
+  force(callable)
+  force(convert)
+
+  function(...) {
+    result <- py_call(callable, ...)
+
+    if (convert)
+      result <- py_to_r(result)
+
+    if (is.null(result))
+      invisible(result)
+    else
+      result
+  }
+}
+
 
 delayed_r_to_py_R6ClassGenerator <- function(r6_class, convert) {
   force(r6_class)
   force(convert)
 
   py_object <- new.env(parent = emptyenv())
+  py_object$delayed <- TRUE
   attr(py_object, "class") <- c("python.builtin.type", "python.builtin.object")
 
-  fn <- get("py_callable_as_function",
-            envir = asNamespace("reticulate"))(NULL, convert)
+  force_py_object <- function(nm) {
+    o <- attr(r_to_py.R6ClassGenerator(r6_class, convert), "py_object")
+    list2env(as.list.environment(o, all.names = TRUE), py_object)
+    rm(delayed, envir = py_object)
+    if(missing(nm))
+      o
+    else
+      get(nm, envir = py_object)
+  }
+
+  delayedAssign("pyobj", force_py_object("pyobj"), assign.env = py_object)
+  delayedAssign("convert", force_py_object("convert"), assign.env = py_object)
+
+  fn <- py_callable_as_function2(NULL, convert)
   class(fn) <- class(py_object)
   attr(fn, "py_object") <- py_object
   attr(fn, "r6_class") <- r6_class
 
-  delayedAssign("callable", local({
-    o <- attr(r_to_py.R6ClassGenerator(r6_class, convert), "py_object")
-    list2env(as.list.environment(o, all.names = TRUE),
-             py_object)
-    o
-  }), assign.env = environment(fn))
+  delayedAssign("callable", force_py_object(), assign.env = environment(fn))
+
   fn
 }
 
 #' @export
-str.python.builtin.type <- function(object, ...) {
-  if (!is.null(r6 <- attr(object, "r6_class")) &&
-      !length(ls(envir = attr(object, "py_object"))))
+print.py_converted_R6_class_generator <- function(object, ...) {
+  r6 <- attr(object, "r6_class")
+  is_delayed <- isTRUE(get0("delayed", attr(object, "py_object")))
+  if (is_delayed)
     cat(sprintf("<<R6type>.%s> (delayed)\n", r6$classname))
   else
     NextMethod()
+
+  print(r6)
 }
-
-
