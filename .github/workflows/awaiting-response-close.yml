@@ -2,9 +2,6 @@ name: Close 'awaiting response' labeled issues
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
   schedule:
   - cron: '0 6 * * *'
 
