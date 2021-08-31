@@ -400,7 +400,7 @@ delayed_r_to_py_R6ClassGenerator <- function(r6_class, convert) {
   force_py_object <- function(nm) {
     o <- attr(r_to_py.R6ClassGenerator(r6_class, convert), "py_object")
     list2env(as.list.environment(o, all.names = TRUE), py_object)
-    rm(delayed, envir = py_object)
+    rm("delayed", envir = py_object)
     if(missing(nm))
       o
     else
@@ -421,9 +421,9 @@ delayed_r_to_py_R6ClassGenerator <- function(r6_class, convert) {
 }
 
 #' @export
-print.py_converted_R6_class_generator <- function(object, ...) {
-  r6 <- attr(object, "r6_class")
-  is_delayed <- isTRUE(get0("delayed", attr(object, "py_object")))
+print.py_converted_R6_class_generator <- function(x, ...) {
+  r6 <- attr(x, "r6_class")
+  is_delayed <- isTRUE(get0("delayed", attr(x, "py_object")))
   if (is_delayed)
     cat(sprintf("<<R6type>.%s> (delayed)\n", r6$classname))
   else
