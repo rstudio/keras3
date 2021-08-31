@@ -1,5 +1,8 @@
 # keras (development version)
 
+- `%py_class%` gains the ability to delay initializing the python session until first use.
+  It is now safe to implement and export `%py_class%` objects in an R package.
+
 # keras 2.6.0
 
 Breaking changes (Tensorflow 2.6):
