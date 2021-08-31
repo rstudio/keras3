@@ -44,3 +44,43 @@ test_that("R6 pyclasses respect convert=TRUE", {
   expect_identical(ret, list(foo = "bar"))
   expect_identical(py_to_r(d), py_eval("{}"))
 })
+
+
+test_that("%py_class% can be lazy about initing python", {
+  res <- callr::r(function() {
+    library(keras)
+    # pretend we're in a package
+    options("topLevelEnvironment" = environment())
+
+    MyClass %py_class% {
+      initialize <- function(x) {
+        print("Hi from MyClass$initialize()!")
+        self$x <- x
+      }
+      my_method <- function() {
+        self$x
+      }
+    }
+
+    if (reticulate:::is_python_initialized())
+      stop()
+
+    MyClass2(MyClass) %py_class% {
+      "This will be a __doc__ string for MyClass2"
+
+      initialize <- function(...) {
+        "This will be the __doc__ string for the MyClass2.__init__() method"
+        print("Hi from MyClass2$initialize()!")
+        super$initialize(...)
+      }
+    }
+
+    if (reticulate:::is_python_initialized())
+      stop()
+
+    my_class_instance2 <- MyClass2(42)
+    my_class_instance2$my_method()
+  })
+
+  expect_equal(res, 42)
+})

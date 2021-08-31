@@ -422,12 +422,11 @@ delayed_r_to_py_R6ClassGenerator <- function(r6_class, convert) {
 
 #' @export
 print.py_converted_R6_class_generator <- function(x, ...) {
-  r6 <- attr(x, "r6_class")
-  is_delayed <- isTRUE(get0("delayed", attr(x, "py_object")))
-  if (is_delayed)
-    cat(sprintf("<<R6type>.%s> (delayed)\n", r6$classname))
+  r6_class <- attr(x, "r6_class")
+  if (isTRUE(get0("delayed", attr(x, "py_object"))))
+    cat(sprintf("<<R6type>.%s> (delayed)\n", r6_class$classname))
   else
     NextMethod()
 
-  print(r6)
+  print(r6_class)
 }
