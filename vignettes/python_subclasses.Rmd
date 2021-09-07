@@ -125,7 +125,7 @@ Translating the above example, you could write the same using `%py_class%`:
 
 ```{r}
 NonNegative(keras$constraints$Constraint) %py_class% {
-  "__call__" = function(x) {
+  "__call__" <- function(x) {
     w * k_cast(w >= 0, k_floatx())
   }
 }
@@ -183,12 +183,12 @@ The same pattern can be extended to all sorts of keras objects.
 For example, a custom layer can be written by subclassing the base Keras Layer:
 
 ```{r}
-CustomLayer <- R6::R6Class("CustomLayer",
+CustomLayer <- r_to_py(R6::R6Class(
 
+  classname = "CustomLayer",
   inherit = keras$layers$Layer,
 
   public = list(
-
     initialize = function(output_dim) {
       self$output_dim <- output_dim
     },
@@ -210,7 +210,7 @@ CustomLayer <- R6::R6Class("CustomLayer",
       list(input_shape[[1]], self$output_dim)
     }
   )
-)
+))
 ```
 
 ### A custom layer (`%py_class%`)
@@ -220,11 +220,11 @@ or using `%py_class%`:
 ```{r}
 CustomLayer(keras$layers$Layer) %py_class% {
 
-  initialize = function(output_dim) {
+  initialize <- function(output_dim) {
     self$output_dim <- output_dim
   }
 
-  build = function(input_shape) {
+  build <- function(input_shape) {
     self$kernel <- self$add_weight(
       name = 'kernel',
       shape = list(input_shape[[2]], self$output_dim),
@@ -233,11 +233,11 @@ CustomLayer(keras$layers$Layer) %py_class% {
     )
   }
 
-  call = function(x, mask = NULL) {
+  call <- function(x, mask = NULL) {
     k_dot(x, self$kernel)
   }
 
-  compute_output_shape = function(input_shape) {
+  compute_output_shape <- function(input_shape) {
     list(input_shape[[1]], self$output_dim)
   }
 }

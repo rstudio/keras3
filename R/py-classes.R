@@ -359,6 +359,7 @@ r_formals_to_py__signature__ <- function(fn) {
   else
     py_class <- r_to_py.R6ClassGenerator(r6_class, convert)
 
+  attr(py_class, "r6_class") <- r6_class
   class(py_class) <- c("py_converted_R6_class_generator", class(py_class))
 
   assign(classname, py_class, envir = parent_env)
@@ -413,7 +414,6 @@ delayed_r_to_py_R6ClassGenerator <- function(r6_class, convert) {
   fn <- py_callable_as_function2(NULL, convert)
   class(fn) <- class(py_object)
   attr(fn, "py_object") <- py_object
-  attr(fn, "r6_class") <- r6_class
 
   delayedAssign("callable", force_py_object(), assign.env = environment(fn))
 
