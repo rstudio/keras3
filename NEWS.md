@@ -1,5 +1,10 @@
 # keras (development version)
 
+- Functions in the *merging layer* family gain the ability to return a layer instance if
+  the first argument `inputs` is missing. (affected: `layer_concatenate()`, `layer_add()`,
+  `layer_subtract()`, `layer_multiply()`, `layer_average()`, `layer_maximum()`,
+  `layer_minimum()` ,  `layer_dot()`)
+
 - `%py_class%` gains the ability to delay initializing the python session until first use.
   It is now safe to implement and export `%py_class%` objects in an R package.
 
@@ -60,6 +65,7 @@ New Features:
     (e.g. `install_keras(tensorflow="2.4")` will install tensorflow version "2.4.2". Previously it would install "2.4.0")
 
   - pandas is now a default extra packages installed by `install_keras()`
+  - pyyaml is no longer a installed by default if the Tensorflow version >= 2.6.
 
 - Loss functions:
   - All the loss functions gain the ability to return a callable
