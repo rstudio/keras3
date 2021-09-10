@@ -31,7 +31,10 @@ layer_depthwise_conv_2d(
 )
 }
 \arguments{
-\item{object}{Model or layer object}
+\item{object}{What to call the new \code{Layer} instance with. Typically a keras
+\code{Model}, another \code{Layer}, or a \code{tf.Tensor}/\code{KerasTensor}. If \code{object} is
+missing, the \code{Layer} instance is returned, otherwise, \code{layer(object)} is
+returned.}
 
 \item{kernel_size}{An integer or list of 2 integers, specifying the width and
 height of the 2D convolution window. Can be a single integer to specify the

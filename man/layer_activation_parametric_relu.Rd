@@ -20,7 +20,10 @@ layer_activation_parametric_relu(
 )
 }
 \arguments{
-\item{object}{Model or layer object}
+\item{object}{What to call the new \code{Layer} instance with. Typically a keras
+\code{Model}, another \code{Layer}, or a \code{tf.Tensor}/\code{KerasTensor}. If \code{object} is
+missing, the \code{Layer} instance is returned, otherwise, \code{layer(object)} is
+returned.}
 
 \item{alpha_initializer}{Initializer function for the weights.}
 

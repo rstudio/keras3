@@ -18,7 +18,10 @@ layer_dropout(
 )
 }
 \arguments{
-\item{object}{Model or layer object}
+\item{object}{What to call the new \code{Layer} instance with. Typically a keras
+\code{Model}, another \code{Layer}, or a \code{tf.Tensor}/\code{KerasTensor}. If \code{object} is
+missing, the \code{Layer} instance is returned, otherwise, \code{layer(object)} is
+returned.}
 
 \item{rate}{float between 0 and 1. Fraction of the input units to drop.}
 

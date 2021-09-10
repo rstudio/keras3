@@ -16,7 +16,10 @@ layer_activation_selu(
 )
 }
 \arguments{
-\item{object}{Model or layer object}
+\item{object}{What to call the new \code{Layer} instance with. Typically a keras
+\code{Model}, another \code{Layer}, or a \code{tf.Tensor}/\code{KerasTensor}. If \code{object} is
+missing, the \code{Layer} instance is returned, otherwise, \code{layer(object)} is
+returned.}
 
 \item{input_shape}{Input shape (list of integers, does not include the
 samples axis) which is required when using this layer as the first layer in

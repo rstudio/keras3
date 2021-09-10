@@ -17,7 +17,10 @@ layer_average_pooling_2d(
 )
 }
 \arguments{
-\item{object}{Model or layer object}
+\item{object}{What to call the new \code{Layer} instance with. Typically a keras
+\code{Model}, another \code{Layer}, or a \code{tf.Tensor}/\code{KerasTensor}. If \code{object} is
+missing, the \code{Layer} instance is returned, otherwise, \code{layer(object)} is
+returned.}
 
 \item{pool_size}{integer or list of 2 integers, factors by which to downscale
 (vertical, horizontal). (2, 2) will halve the input in both spatial
