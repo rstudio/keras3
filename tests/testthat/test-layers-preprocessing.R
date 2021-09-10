@@ -1,15 +1,18 @@
 context("layers-preprocessing")
 
-
-mnist <- dataset_mnist()
-mnist_mini <- list(x = mnist$test$x[1:50,,] / 255,
-                   y = mnist$test$y[1:50])
-dim(mnist_mini$x) <- c(dim(mnist_mini$x), 1)
-rm(mnist)
-
-mnist_mini_ds <- tfdatasets::tensor_slices_dataset(
-  list(tensorflow::as_tensor(mnist_mini$x, "float32"),
-       mnist_mini$y))
+dataset_mnist_mini <- local({
+  mnist_mini <- NULL
+  function() {
+    if (is.null(mnist_mini)) {
+      mnist <- dataset_mnist()
+      mnist_mini <- list(x = mnist$test$x[1:50, ,] / 255,
+                         y = mnist$test$y[1:50])
+      dim(mnist_mini$x) <- c(dim(mnist_mini$x), 1)
+      mnist_mini <<- mnist_mini
+    }
+    mnist_mini
+  }
+})
 
 
 peek_py_iterator <- function(x) {
@@ -19,11 +22,12 @@ peek_py_iterator <- function(x) {
 test_image_preprocessing_layer <- function(lyr, ...) {
   test_succeeds(deparse(substitute(lyr)), {
 
+    mnist_mini <- dataset_mnist_mini()
+
     # in a sequential model
     model <- keras_model_sequential(input_shape = shape(28, 28, 1)) %>%
       lyr(...)
     expect_tensor(model(mnist_mini$x))
-
 
     # in a functional model
     lyr_inst <- lyr(...)
@@ -32,7 +36,12 @@ test_image_preprocessing_layer <- function(lyr, ...) {
     model <- keras_model(input, output)
     expect_tensor(model(mnist_mini$x))
 
+
     # in a dataset
+    mnist_mini_ds <- tfdatasets::tensor_slices_dataset(
+      list(tensorflow::as_tensor(mnist_mini$x, "float32"),
+           mnist_mini$y))
+
     layer <- lyr(...)
     ds <- mnist_mini_ds %>%
       tfdatasets::dataset_map(function(x, y) list(layer(x), y))
