@@ -4,7 +4,7 @@
 \alias{clone_model}
 \title{Clone a model instance.}
 \usage{
-clone_model(model, input_tensors = NULL)
+clone_model(model, input_tensors = NULL, clone_function = NULL)
 }
 \arguments{
 \item{model}{Instance of Keras model (could be a functional model or a
@@ -12,6 +12,19 @@ Sequential model).}
 
 \item{input_tensors}{Optional list of input tensors to build the model upon.
 If not provided, placeholders will be created.}
+
+\item{clone_function}{Callable to be used to clone each layer in the target
+model (except \code{InputLayer} instances). It takes as argument the layer
+instance to be cloned, and returns the corresponding layer instance to be
+used in the model copy. If unspecified, this callable defaults to the
+following serialization/deserialization function:
+
+\code{function(layer) layer$`__class__`$from_config(layer$get_config())}
+
+By passing a custom callable, you can customize your copy of the model,
+e.g. by wrapping certain layers of interest (you might want to replace all
+LSTM instances with equivalent \code{Bidirectional(LSTM(...))} instances, for
+example).}
 }
 \description{
 Model cloning is similar to calling a model on new inputs, except that it

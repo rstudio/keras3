@@ -327,13 +327,23 @@ py_to_r_wrapper.keras.engine.base_layer.Layer <- function(x) {
 #'   Sequential model).
 #' @param input_tensors Optional list of input tensors to build the model upon.
 #'   If not provided, placeholders will be created.
+#' @param clone_function Callable to be used to clone each layer in the target
+#'   model (except `InputLayer` instances). It takes as argument the layer
+#'   instance to be cloned, and returns the corresponding layer instance to be
+#'   used in the model copy. If unspecified, this callable defaults to the
+#'   following serialization/deserialization function:
+#'
+#'   ```function(layer) layer$`__class__`$from_config(layer$get_config())```
+#'
+#'   By passing a custom callable, you can customize your copy of the model,
+#'   e.g. by wrapping certain layers of interest (you might want to replace all
+#'   LSTM instances with equivalent `Bidirectional(LSTM(...))` instances, for
+#'   example).
 #'
 #' @export
-clone_model <- function(model, input_tensors = NULL) {
-  keras$models$clone_model(
-    model = model,
-    input_tensors = input_tensors
-  )
+clone_model <- function(model, input_tensors = NULL, clone_function = NULL) {
+  args <- capture_args(match.call())
+  do.call(keras$models$clone_model, args)
 }
 
 

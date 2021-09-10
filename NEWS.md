@@ -1,5 +1,8 @@
 # keras (development version)
 
+  
+- `clone_model()` gains a `clone_function` argument that allows you to customize each layer as it is cloned.
+
 - Existing layer instances gain the ability to be added to sequential models via a call. E.g.:
   ```r
   layer <- layer_dense(units = 10)
