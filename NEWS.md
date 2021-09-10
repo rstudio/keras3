@@ -1,5 +1,31 @@
 # keras (development version)
 
+- New family of *preprocessing* layers. These are the spiritual successor to the `tfdatasets::step_*` family of data transformers (to be deprecated in a future release). New function:
+
+  Image preprocessing: 
+    - `layer_resizing()`
+    - `layer_rescaling()`
+    - `layer_center_crop()`
+  
+  Image augmentation
+    - `layer_random_crop()`
+    - `layer_random_flip()`
+    - `layer_random_translation()`
+    - `layer_random_rotation()`
+    - `layer_random_zoom()`
+    - `layer_random_contrast()`
+    - `layer_random_height()`
+    - `layer_random_width()`
+  
+  Categorical features preprocessing
+    - `layer_category_encoding()`
+    - `layer_hashing()`
+    - `layer_integer_lookup()`
+    - `layer_string_lookup()`
+  
+  Numerical features preprocessing
+    - `layer_normalization()`
+    - `layer_discretization()`
 
 - Fixed an issue in `layer_input()` where passing a tensorflow `DType` objects to argument `dtype` would throw an error.
   
