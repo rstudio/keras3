@@ -58,10 +58,11 @@ test_call_succeeds("can set and get the vocabulary of layer_text_vectorization",
   x <- matrix(c("hello world", "hello world"), ncol = 1)
 
   layer <- layer_text_vectorization()
-  
+
   # workaround upstream regression, getting an empty vocab throws an exception in 2.5
-  if(tf_version() < "2.5") 
+  if(tf_version() < "2.5")
     layer$get_vocabulary()
+
   set_vocabulary(layer, vocab = c("hello", "world"))
 
   output <- layer(x)
@@ -102,12 +103,14 @@ test_call_succeeds("can create a tf-idf layer", {
   max_length <- 50
 
   text_vectorization <- layer_text_vectorization(
-    max_tokens = num_words, output_mode = "tf-idf"
+    max_tokens = num_words,
+    output_mode = if(tf_version() >= "2.6") "tf_idf" else "tf-idf"
   )
-  text_vectorization %>% adapt(c("hello world", "hello"))
+  with(tf$device("/cpu:0"), {
+    text_vectorization %>% adapt(c("hello world", "hello"))
+  })
   x <- text_vectorization(matrix(c("hello"), ncol = 1))
 
   expect_s3_class(x, "tensorflow.tensor")
 
 })
-

@@ -265,3 +265,46 @@ test_succeeds("layer_discretization", {
 })
 
 
+test_succeeds("layer_text_vectorization", {
+
+  text_dataset = tfdatasets::tensor_slices_dataset(c("foo", "bar", "baz"))
+
+  vectorize_layer = layer_text_vectorization(
+    max_tokens = 5000,
+    output_mode = 'int',
+    output_sequence_length = 4
+  )
+  vectorize_layer %>%
+    adapt(tfdatasets::dataset_batch(text_dataset, 64))
+
+
+  model <- keras_model_sequential(
+    layers = vectorize_layer,
+    input_shape = c(1), dtype = tf$string)
+
+  input_data = rbind("foo qux bar", "qux baz")
+  preds <- model %>% predict(input_data)
+
+  expect_equal(preds, rbind(c(2, 1, 4, 0),
+                            c(1, 3, 0, 0)))
+
+
+  vocab_data = c("earth", "wind", "and", "fire")
+  max_len = 4  # Sequence length to pad the outputs to.
+
+
+  if(tf_version() >= "2.4") {
+  # setting vocab on instantiation not supported prior to 2.4, missing kwarg 'vocabulary'
+  vectorize_layer = layer_text_vectorization(
+    max_tokens = 5000,
+    output_mode = 'int',
+    output_sequence_length = 4,
+    vocabulary = vocab_data
+  )
+
+  vocab <- get_vocabulary(vectorize_layer)
+  expect_equal(vocab, c("", "[UNK]", "earth", "wind", "and", "fire"))
+  }
+
+})
+
