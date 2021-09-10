@@ -403,6 +403,9 @@ test_call_succeeds("layer_add", {
   merge_inputs <- get_merge_inputs()
   output <- layer_add(merge_inputs)
   keras_model(merge_inputs, output)
+
+  output <- layer_add()(merge_inputs)
+  keras_model(merge_inputs, output)
 })
 
 test_call_succeeds(required_version = "2.0.7", "layer_subtract", {
@@ -410,11 +413,17 @@ test_call_succeeds(required_version = "2.0.7", "layer_subtract", {
                     layer_input(shape = c(4, 5)))
   output <- layer_subtract(merge_inputs)
   keras_model(merge_inputs, output)
+
+  output <- layer_subtract()(merge_inputs)
+  keras_model(merge_inputs, output)
 })
 
 test_call_succeeds("layer_multiply", {
   merge_inputs <- get_merge_inputs()
   output <- layer_multiply(merge_inputs)
+  keras_model(merge_inputs, output)
+
+  output <- layer_multiply()(merge_inputs)
   keras_model(merge_inputs, output)
 })
 
@@ -422,11 +431,17 @@ test_call_succeeds("layer_maximum", {
   merge_inputs <- get_merge_inputs()
   output <- layer_maximum(merge_inputs)
   keras_model(merge_inputs, output)
+
+  output <- layer_maximum()(merge_inputs)
+  keras_model(merge_inputs, output)
 })
 
 test_call_succeeds("layer_minumum", required_version = "2.0.9", {
   merge_inputs <- get_merge_inputs()
   output <- layer_minimum(merge_inputs)
+  keras_model(merge_inputs, output)
+
+  output <- layer_minimum()(merge_inputs)
   keras_model(merge_inputs, output)
 })
 
@@ -434,11 +449,17 @@ test_call_succeeds("layer_average", {
   merge_inputs <- get_merge_inputs()
   output <- layer_average(merge_inputs)
   keras_model(merge_inputs, output)
+
+  output <- layer_average()(merge_inputs)
+  keras_model(merge_inputs, output)
 })
 
 test_call_succeeds("layer_concatenate", {
   merge_inputs <- get_merge_inputs()
   output <- layer_concatenate(merge_inputs)
+  keras_model(merge_inputs, output)
+
+  output <- layer_concatenate()(merge_inputs)
   keras_model(merge_inputs, output)
 })
 

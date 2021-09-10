@@ -35,7 +35,10 @@ layer_batch_normalization(
 )
 }
 \arguments{
-\item{object}{Model or layer object}
+\item{object}{What to call the new \code{Layer} instance with. Typically a keras
+\code{Model}, another \code{Layer}, or a \code{tf.Tensor}/\code{KerasTensor}. If \code{object} is
+missing, the \code{Layer} instance is returned, otherwise, \code{layer(object)} is
+returned.}
 
 \item{axis}{Integer, the axis that should be normalized (typically the
 features axis). For instance, after a \code{Conv2D} layer with

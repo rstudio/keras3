@@ -155,26 +155,3 @@ reset_states <- function(object) {
 as_node_index <- function(node_index) {
   as.integer(node_index-1)
 }
-
-#' Fits the state of the preprocessing layer to the data being passed.
-#'
-#' @param object Preprocessing layer object
-#' @param data The data to train on. It can be passed either as a tf.data Dataset,
-#'  or as an R array.
-#' @param reset_state Optional argument specifying whether to clear the state of
-#'  the layer at the start of the call to `adapt`, or whether to start from
-#'  the existing state. Subclasses may choose to throw if `reset_state` is set
-#'  to `FALSE`. `NULL` mean layer's default.
-#'
-#' @export
-adapt <- function(object, data, reset_state = NULL) {
-
-  if (!inherits(data, "python.builtin.object"))
-    data <- keras_array(data)
-
-  # layers can implement adapt with different default reset_state
-  if (is.null(reset_state))
-    object$adapt(data)
-  else
-    object$adapt(data, reset_state)
-}

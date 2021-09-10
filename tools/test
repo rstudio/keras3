@@ -16,6 +16,7 @@ TMPDIR="/tmp/r-keras-tests/tf-$i/"
 mkdir -p $TMPDIR
 rsync -a --delete . $TMPDIR
 gnome-terminal --title="keras test: tf $i" --working-directory=$TMPDIR -- \
-  Rscript -e "{options(error=recover); cat('\n\n\n'); reticulate::use_miniconda('tf-$i-cpu', required=TRUE); devtools::test(); scan('stdin',  nlines=1)}"
+  Rscript -e "{options(error=recover); cat('\n\n\n'); reticulate::use_miniconda('tf-$i-cpu', required=TRUE); devtools::test(); cat('Done!'}"
   # Rscript -e "{cat('\n\n\n'); }"
+  # ; scan('stdin',  nlines=1)
 done

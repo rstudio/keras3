@@ -17,7 +17,10 @@ layer_max_pooling_3d(
 )
 }
 \arguments{
-\item{object}{Model or layer object}
+\item{object}{What to call the new \code{Layer} instance with. Typically a keras
+\code{Model}, another \code{Layer}, or a \code{tf.Tensor}/\code{KerasTensor}. If \code{object} is
+missing, the \code{Layer} instance is returned, otherwise, \code{layer(object)} is
+returned.}
 
 \item{pool_size}{list of 3 integers, factors by which to downscale (dim1,
 dim2, dim3). (2, 2, 2) will halve the size of the 3D input in each

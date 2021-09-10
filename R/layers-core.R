@@ -31,20 +31,9 @@
 layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
                         dtype = NULL, sparse = FALSE, tensor = NULL,
                         ragged = FALSE) {
-  args <- list(
-    name = name,
-    dtype = ifelse(is.null(dtype), keras$backend$floatx(), dtype),
-    sparse = sparse,
-    tensor = tensor
-  )
-
-  if (tensorflow::tf_version() >= "2.1")
-    args$ragged <- ragged
-
-  if (!missing(shape))
-    args$shape <- normalize_shape(shape)
-  if (!missing(batch_shape))
-    args$batch_shape <- normalize_shape(batch_shape)
+  args <- capture_args(match.call(),
+                       list(shape = normalize_shape,
+                            batch_shape = normalize_shape))
 
   # TODO: can this be made to work as the first layer in a sequential model?
   # why doesn't this use create_layer()?
@@ -63,7 +52,10 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
 #'
 #' @inheritParams layer_input
 #'
-#' @param object Model or layer object
+#' @param object What to call the new `Layer` instance with. Typically a keras
+#'   `Model`, another `Layer`, or a `tf.Tensor`/`KerasTensor`. If `object` is
+#'   missing, the `Layer` instance is returned, otherwise, `layer(object)` is
+#'   returned.
 #' @param units Positive integer, dimensionality of the output space.
 #' @param activation Name of activation function to use. If you don't specify
 #'   anything, no activation is applied (ie. "linear" activation: a(x) = x).
@@ -516,7 +508,7 @@ compose_layer <- function(object, layer, ...) {
 }
 
 compose_layer.default <- function(object, layer, ...) {
-  stop_with_invalid_layer()
+  layer(object, ...)
 }
 
 compose_layer.keras.models.Sequential <- function(object, layer, ...) {
@@ -527,27 +519,3 @@ compose_layer.keras.models.Sequential <- function(object, layer, ...) {
 }
 
 compose_layer.keras.engine.sequential.Sequential <- compose_layer.keras.models.Sequential
-
-compose_layer.python.builtin.object <- function(object, layer, ...) {
-  if (is.function(layer))
-    layer(object, ...)
-  else
-    stop_with_invalid_layer()
-}
-
-compose_layer.list <- function(object, layer, ...) {
-  layer(object, ...)
-}
-
-compose_layer.numeric <- function(object, layer, ...) {
-  if (!tensorflow::tf_version() >= "1.14") stop_with_invalid_layer()
-  if (is.function(layer))
-    layer(object, ...)
-  else
-    stop_with_invalid_layer()
-}
-
-stop_with_invalid_layer <- function() {
-  stop("Invalid input to layer function (must be a model or a tensor)",
-       call. = FALSE)
-}

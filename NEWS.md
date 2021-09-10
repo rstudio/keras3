@@ -1,5 +1,67 @@
 # keras (development version)
 
+- New family of *preprocessing* layers. These are the spiritual successor to the `tfdatasets::step_*` family of data transformers (to be deprecated in a future release). New function:
+
+  Image preprocessing:
+    - `layer_resizing()`
+    - `layer_rescaling()`
+    - `layer_center_crop()`
+
+  Image augmentation
+    - `layer_random_crop()`
+    - `layer_random_flip()`
+    - `layer_random_translation()`
+    - `layer_random_rotation()`
+    - `layer_random_zoom()`
+    - `layer_random_contrast()`
+    - `layer_random_height()`
+    - `layer_random_width()`
+
+  Categorical features preprocessing
+    - `layer_category_encoding()`
+    - `layer_hashing()`
+    - `layer_integer_lookup()`
+    - `layer_string_lookup()`
+
+  Numerical features preprocessing
+    - `layer_normalization()`
+    - `layer_discretization()`
+
+  These join the previous set of text preprocessing functions, each of which have some minor changes:
+    - `layer_text_vectorization()` (changed arguments)
+    - `get_vocabulary()`
+    - `set_vocabulary()`
+    - `adapt()`
+
+- `adapt()` changes:
+  - Now accepts all *features preprocessing* layers, previously
+    only `layer_text_vectorization()` instances were valid.
+  - `reset_state` argument is removed. It only ever accepted the default value of `TRUE`.
+  - New arguments `batch_size` and `steps`.
+  - Now returns the adapted layer invisibly for composability with `%>%` (previously returned `NULL`)
+
+- `get_vocabulary()` gains a `include_special_tokens` argument.
+- `set_vocabulary()`:
+  - Now returns the adapted layer invisibly for composability with `%>%` (previously returned `NULL`)
+  - Signature simplified. Deprecated arguments (`df_data` `oov_df_value`) are now subsumed in `...`.
+
+- `layer_text_vectorization()`:
+  - valid values for argument `output_mode` change: `"binary"` is renamed to `"multi_hot"` and
+    `"tf-idf"` is renamed to `"tf_idf"` (backwards compatibility is preserved).
+  - Fixed an issue where valid values of `output_mode = "int"` would incorrectly
+    return a ragged tensor output shape.
+
+- Fixed an issue in `layer_input()` where passing a tensorflow `DType` objects to argument `dtype` would throw an error.
+
+- `clone_model()` gains a `clone_function` argument that allows you to customize each layer as it is cloned.
+
+- Existing layer instances gain the ability to be added to sequential models via a call. E.g.:
+  ```r
+  layer <- layer_dense(units = 10)
+  model <- keras_model_sequential(input_shape = c(1,2,3)) %>%
+    layer()
+  ```
+
 - Functions in the *merging layer* family gain the ability to return a layer instance if
   the first argument `inputs` is missing. (affected: `layer_concatenate()`, `layer_add()`,
   `layer_subtract()`, `layer_multiply()`, `layer_average()`, `layer_maximum()`,

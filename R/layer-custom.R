@@ -198,8 +198,7 @@ create_layer_wrapper <- function(LayerClass, modifiers=NULL, convert=TRUE) {
 
   force(modifiers)
   wrapper <- function(object) {
-    args <- capture_args(match.call(), modifiers)
-    args$object <- NULL
+    args <- capture_args(match.call(), modifiers, ignore = "object")
     create_layer(LayerClass, object, args)
   }
 
