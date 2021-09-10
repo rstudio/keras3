@@ -275,6 +275,7 @@ multi_gpu_model <- function(model, gpus = NULL, cpu_merge = TRUE, cpu_relocation
 #' @importFrom reticulate py_to_r_wrapper
 #' @export
 py_to_r_wrapper.keras.engine.training.Model <- function(x) {
+  force(x)
   function(object, ...) {
     compose_layer(object, x, ...)
   }
@@ -282,6 +283,7 @@ py_to_r_wrapper.keras.engine.training.Model <- function(x) {
 
 #' @export
 py_to_r_wrapper.kerastools.model.RModel <- function(x) {
+  force(x)
   function(...) {
     x$call(...)
   }
