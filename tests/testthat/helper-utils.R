@@ -1,6 +1,9 @@
 Sys.setenv(TF_CPP_MIN_LOG_LEVEL = 1)
 
 
+# reticulate::use_condaenv("tf-2.5-cpu", required = TRUE)
+# reticulate::use_condaenv("tf-2.1-cpu", required = TRUE)
+
 if (reticulate::py_module_available("tensorflow")) {
   if (!exists(".DID_EMIT_TF_VERSION", envir = .GlobalEnv)) {
     message("Testing Against Tensorflow Version: ",
@@ -29,17 +32,17 @@ py_capture_output <- reticulate::py_capture_output #import("IPython")$utils$capt
 
 
 test_succeeds <- function(desc, expr, required_version = NULL) {
-
-  invisible(
-    capture.output({
+  if (interactive()) {
+    test_that(desc, force(expr))
+  } else
+    invisible(capture.output({
       test_that(desc, {
         skip_if_no_keras(required_version)
         py_capture_output({
           expect_error(force(expr), NA)
         })
       })
-    })
-  )
+    }))
 }
 
 test_call_succeeds <- function(call_name, expr, required_version = NULL) {
@@ -127,4 +130,8 @@ expect_same_pyobj <- function(x, y) {
 
 repl_python <- reticulate::repl_python
 py_last_error <- reticulate::py_last_error
+iter_next <- reticulate::iter_next
+as_iterator <- reticulate::as_iterator
+
 tf <- tensorflow::tf
+as_tensor <- tensorflow::as_tensor
