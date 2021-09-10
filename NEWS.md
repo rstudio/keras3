@@ -1,5 +1,7 @@
 # keras (development version)
 
+
+- Fixed an issue in `layer_input()` where passing a tensorflow `DType` objects to argument `dtype` would throw an error.
   
 - `clone_model()` gains a `clone_function` argument that allows you to customize each layer as it is cloned.
 

@@ -31,20 +31,9 @@
 layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
                         dtype = NULL, sparse = FALSE, tensor = NULL,
                         ragged = FALSE) {
-  args <- list(
-    name = name,
-    dtype = ifelse(is.null(dtype), keras$backend$floatx(), dtype),
-    sparse = sparse,
-    tensor = tensor
-  )
-
-  if (tensorflow::tf_version() >= "2.1")
-    args$ragged <- ragged
-
-  if (!missing(shape))
-    args$shape <- normalize_shape(shape)
-  if (!missing(batch_shape))
-    args$batch_shape <- normalize_shape(batch_shape)
+  args <- capture_args(match.call(),
+                       list(shape = normalize_shape,
+                            batch_shape = normalize_shape))
 
   # TODO: can this be made to work as the first layer in a sequential model?
   # why doesn't this use create_layer()?

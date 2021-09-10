@@ -125,6 +125,13 @@ test_succeeds("can call model with R objects", {
   model(l)
 })
 
+
+test_succeeds("layer_input() ", {
+  # can take dtype = Dtype
+  layer_input(shape = 1, dtype = tf$string)
+})
+
+
 test_succeeds("can call a model with additional arguments", {
 
   if (tensorflow::tf_version() < "2.0") skip("needs TF > 2")
