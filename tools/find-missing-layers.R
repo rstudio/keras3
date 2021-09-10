@@ -68,22 +68,6 @@ def is_keras_layer(x):
 
 
 
-
-py_df <-
-  tibble(
-  py_name = names(keras::keras$layers),
-  py_obj = map(py_name, ~ keras::keras$layers[[.x]]),
-  py_id = map_int(py_obj, reticulate::py_id)
-) %>%
-  rowwise() %>%
-  mutate(is_module = inspect$ismodule(py_obj)) %>%
-  filter(py_name != "experimental") %>%
-  mutate(py_formals = list(keras:::py_formals(py_obj)),
-         py_args = list(names(py_formals))) %>%
-  ungroup()
-
-
-
 py_df <-
   tibble(
     py_name = names(keras::keras$layers),
@@ -107,19 +91,26 @@ py_df <-
 
 
 
+
 r_df <- tibble(
   r_name = ls(pattern = "^layer_", envir = asNamespace("keras")),
   r_fn = map(r_name, get, envir = asNamespace("keras")),
-  r_formals = map(r_fn, ~as.list(formals)),
+  r_formals = map(r_fn, ~ as.list(formals)),
   r_args = map(r_formals, names),
-  r_py_layer_expr = map(r_fn, ~ find_keras_layer_dollar_call(body(.x))),
-  r_py_layer_name = map_chr(r_py_layer_expr, function(e) {
-    if(!length(e)) return(NA_character_)
-    sub("keras$layers$", "", deparse1(e), fixed = TRUE)
-  }),
-  r_py_obj = map(r_py_layer_expr, ~try(eval(.x, asNamespace("keras")))),
-  r_py_id = map_int(r_py_obj, ~reticulate::py_id(.x) %||% stop() %error% NA_integer_)
-)
+  r_py_layer_expr = map(r_fn, ~ (find_keras_layer_dollar_call(body(.x))))
+  ) %>%
+  mutate_at("r_py_layer_expr", function(col)
+            map(col, ~ { if (is.list(.x)) .x else list(.x) })) %>%
+  unchop(r_py_layer_expr) %>%
+  mutate(
+    r_py_layer_name = map_chr(r_py_layer_expr, function(e) {
+      if (!length(e)) return(NA_character_)
+      sub("keras$layers$", "", deparse1(e), fixed = TRUE)
+    }),
+    r_py_obj = map(r_py_layer_expr, ~ try(eval(.x, asNamespace("keras")))),
+    r_py_id = map_int(r_py_obj,
+                      ~ reticulate::py_id(.x) %||% stop() %error% NA_integer_)
+    )
 
 
 # Error in py_get_attr_impl(x, name, silent) :
@@ -146,35 +137,35 @@ missing_layers_df %>%
 # # A tibble: 37 × 1
 #    py_name
 #    <chr>
-#  1 InputLayer
-#  2 Layer
-#  3 InputSpec
-#  4 Add
-#  5 Subtract
-#  6 Multiply
-#  7 Average
-#  8 Maximum
-#  9 Minimum
-# 10 Concatenate
-# 11 Dot
+#    image preprocessing
 # 12 Resizing
 # 13 CenterCrop
-# 14 RandomCrop
 # 15 Rescaling
+#
+#    # image augmentation
+# 14 RandomCrop
 # 16 RandomFlip
 # 17 RandomTranslation
 # 18 RandomRotation
 # 19 RandomZoom
-# 20 RandomContrast
 # 21 RandomHeight
 # 22 RandomWidth
+# 20 RandomContrast
+#
+# # categorical features preprocessing
 # 23 CategoryEncoding
-# 24 Discretization
 # 25 Hashing
-# 26 IntegerLookup
-# 27 Normalization
 # 28 StringLookup
+# 26 IntegerLookup
+#
+# # numerical features preprocessing
+# 24 Discretization
+# 27 Normalization
+#
+# # Text preprocessing
 # 29 TextVectorization
+#
+#
 # 30 StackedRNNCells
 # 31 RNN
 # 32 AbstractRNNCell
@@ -187,6 +178,7 @@ missing_layers_df %>%
 
 
 missing_layers_df$py_obj %>%
+  .[1:18] %>%
   lapply(new_layer_wrapper) %>%
   unlist() %>% str_flatten("\n\n\n") %>%
   {
