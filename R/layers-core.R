@@ -52,7 +52,10 @@ layer_input <- function(shape = NULL, batch_shape = NULL, name = NULL,
 #'
 #' @inheritParams layer_input
 #'
-#' @param object Model or layer object
+#' @param object What to call the new `Layer` instance with. Typically a keras
+#'   `Model`, another `Layer`, or a `tf.Tensor`/`KerasTensor`. If `object` is
+#'   missing, the `Layer` instance is returned, otherwise, `layer(object)` is
+#'   returned.
 #' @param units Positive integer, dimensionality of the output space.
 #' @param activation Name of activation function to use. If you don't specify
 #'   anything, no activation is applied (ie. "linear" activation: a(x) = x).
