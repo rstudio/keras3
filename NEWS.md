@@ -1,5 +1,12 @@
 # keras (development version)
 
+- Existing layer instances gain the ability to be added to sequential models via a call. E.g.:
+  ```r
+  layer <- layer_dense(units = 10)
+  model <- keras_model_sequential(input_shape = c(1,2,3)) %>% 
+    layer()
+  ```
+
 - Functions in the *merging layer* family gain the ability to return a layer instance if
   the first argument `inputs` is missing. (affected: `layer_concatenate()`, `layer_add()`,
   `layer_subtract()`, `layer_multiply()`, `layer_average()`, `layer_maximum()`,
