@@ -152,6 +152,17 @@ keras <- NULL
     sub(paste0("^", module), "keras", classes)
   })
 
+  # custom %py_class% and r_to_py.R6ClassGenerator(),
+  # `__module__` defaults to `format(env)`, but that doesn't give a stable class
+  reticulate::register_class_filter(function(classes) {
+    if (any(startsWith(classes, "<environment: ") -> i)) {
+      classes[i] <- sub("<environment: [^.]", "R6", classes[i])
+      classes <- c(classes, "py_R6")
+    }
+
+    classes
+  })
+
   # tensorflow use_session hooks
   setHook("tensorflow.on_before_use_session", tensorflow_on_before_use_session)
   setHook("tensorflow.on_use_session", tensorflow_on_use_session)
