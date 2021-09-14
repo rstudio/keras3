@@ -28,9 +28,10 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
   # we need a __module__ because python-keras introspects to see if a layer is
   # subclassed by consulting layer.__module__
   # (not sure why builtins.issubclass() doesn't work over there)
+  # `__module__` is used to construct the S3 class() of py_class instances,
+  # it needs to be stable (e.g, can't use format(x$parent_env))
   if(!"__module__" %in% names(namespace))
-    namespace$`__module__` <- "<R6type>"
-    # sprintf("<R6type.%s.%s>", format(x$parent_env), x$classname)
+    namespace$`__module__` <- "R6type"
 
 
   new_exec_body <- py_eval("lambda ns_entries: (lambda ns: ns.update(ns_entries))",
@@ -62,6 +63,9 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
       },
       class = "python_class_super")
   }), env)
+
+  attr(py_class, "r6_class") <- x
+  class(py_class) <- c("py_R6ClassGenerator", class(py_class))
 
   py_class
 }
@@ -396,7 +400,10 @@ delayed_r_to_py_R6ClassGenerator <- function(r6_class, convert) {
 
   py_object <- new.env(parent = emptyenv())
   py_object$delayed <- TRUE
-  attr(py_object, "class") <- c("python.builtin.type", "python.builtin.object")
+  attr(py_object, "class") <- c("py_R6ClassGenerator",
+                                "python.builtin.type",
+                                "python.builtin.object")
+  attr(py_object, "r6_class") <- r6_class
 
   force_py_object <- function(nm) {
     o <- attr(r_to_py.R6ClassGenerator(r6_class, convert), "py_object")
@@ -412,7 +419,7 @@ delayed_r_to_py_R6ClassGenerator <- function(r6_class, convert) {
   delayedAssign("convert", force_py_object("convert"), assign.env = py_object)
 
   fn <- py_callable_as_function2(NULL, convert)
-  class(fn) <- class(py_object)
+  attributes(fn) <- attributes(py_object)
   attr(fn, "py_object") <- py_object
 
   delayedAssign("callable", force_py_object(), assign.env = environment(fn))
@@ -421,10 +428,10 @@ delayed_r_to_py_R6ClassGenerator <- function(r6_class, convert) {
 }
 
 #' @export
-print.py_converted_R6_class_generator <- function(x, ...) {
+print.py_R6ClassGenerator <- function(x, ...) {
   r6_class <- attr(x, "r6_class")
   if (isTRUE(get0("delayed", attr(x, "py_object"))))
-    cat(sprintf("<<R6type>.%s> (delayed)\n", r6_class$classname))
+    cat(sprintf("<R6type.%s> (delayed)\n", r6_class$classname))
   else
     NextMethod()
 
