@@ -36,12 +36,12 @@ How to update your code:
 \itemize{
 \item If your model does multi-class classification:
 (e.g. if it uses a \code{softmax} last-layer activation).
-}\if{html}{\out{<div class="r">}}\preformatted{     model \%>\% predict(x) \%>\% k_argmax()
+}\if{html}{\out{<div class="sourceCode r">}}\preformatted{     model \%>\% predict(x) \%>\% k_argmax()
 }\if{html}{\out{</div>}}
 \itemize{
 \item if your model does binary classification
 (e.g. if it uses a \code{sigmoid} last-layer activation).
-}\if{html}{\out{<div class="r">}}\preformatted{     model \%>\% predict(x) \%>\% `>`(0.5) \%>\% k_cast("int32")
+}\if{html}{\out{<div class="sourceCode r">}}\preformatted{     model \%>\% predict(x) \%>\% `>`(0.5) \%>\% k_cast("int32")
 }\if{html}{\out{</div>}}
 
 The input samples are processed batch by batch.

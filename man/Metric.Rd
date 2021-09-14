@@ -19,7 +19,7 @@ track model performance during training. It is what is returned by the family
 of metric functions that start with prefix \verb{metric_*}.
 }
 \section{Usage with \code{compile}}{
-\if{html}{\out{<div class="r">}}\preformatted{model \%>\% compile(
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
   optimizer = 'sgd',
   loss = 'mse',
   metrics = list(metric_SOME_METRIC(), metric_SOME_OTHER_METRIC())
@@ -28,7 +28,7 @@ of metric functions that start with prefix \verb{metric_*}.
 }
 
 \section{Standalone usage}{
-\if{html}{\out{<div class="r">}}\preformatted{m <- metric_SOME_METRIC()
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_SOME_METRIC()
 for (e in seq(epochs)) \{
   for (i in seq(train_steps)) \{
     c(y_true, y_pred, sample_weight = NULL) \%<-\% ...
@@ -51,7 +51,7 @@ To be implemented by subclasses:
 \item \code{result()}: Computes and returns a value for the metric from the state variables.
 }
 
-Example custom metric subclass:\if{html}{\out{<div class="r">}}\preformatted{metric_binary_true_positives(keras$metrics$Metric) \%py_class\% \{
+Example custom metric subclass:\if{html}{\out{<div class="sourceCode r">}}\preformatted{metric_binary_true_positives(keras$metrics$Metric) \%py_class\% \{
   initialize <- function(name = 'binary_true_positives', ...) \{
     super$initialize(name = name, ...)
     self$true_positives <- self$add_weight(name = 'tp', initializer = 'zeros')

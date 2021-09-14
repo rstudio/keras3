@@ -36,7 +36,7 @@ computed case-wise values for the mini-batch are returned directly.
 Calculates how often predictions match integer labels
 }
 \details{
-\if{html}{\out{<div class="r">}}\preformatted{acc = k_dot(sample_weight, y_true == k_argmax(y_pred, axis=2))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{acc = k_dot(sample_weight, y_true == k_argmax(y_pred, axis=2))
 }\if{html}{\out{</div>}}
 
 You can provide logits of classes as \code{y_pred}, since argmax of

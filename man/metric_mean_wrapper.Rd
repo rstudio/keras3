@@ -29,7 +29,7 @@ function needs to have the signature \code{fn(y_true, y_pred)} and return a
 per-sample loss array. \code{MeanMetricWrapper$result()} will return
 the average metric value across all samples seen so far.
 
-For example:\if{html}{\out{<div class="r">}}\preformatted{accuracy <- function(y_true, y_pred)
+For example:\if{html}{\out{<div class="sourceCode r">}}\preformatted{accuracy <- function(y_true, y_pred)
   k_cast(y_true == y_pred, 'float32')
 
 accuracy_metric <- metric_mean_wrapper(fn = accuracy)
