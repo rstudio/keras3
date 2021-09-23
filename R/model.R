@@ -437,11 +437,11 @@ compile.keras.engine.training.Model <-
            sample_weight_mode = NULL) {
 
     # give losses a name
-    loss_name <- as_py_name(substitute(loss))
+    loss_name <- substitute(loss)
     if (is.function(loss) &&
         !inherits(loss, "python.builtin.object") &&
         is.null(attr(loss, "py_function_name", TRUE)))
-      attr(loss, "py_function_name") <- loss_name
+      attr(loss, "py_function_name") <- as_py_name(loss_name)
 
     # handle metrics
     if (!is.null(metrics)) {
@@ -519,9 +519,7 @@ compile.keras.engine.training.Model <-
 as_py_name <- function(x) {
   if(is.language(x))
     x <- deparse(x, width.cutoff = 500L)[1]
-  if(!is.character(x) || length(x) != 1)
-    stop("string required to convert to a python name")
-  x <- make.names(x)
+  x <- make.names(as.character(x))
   x <- gsub(".", "_", x, fixed = TRUE)
   x
 }
