@@ -82,3 +82,31 @@ test_succeeds("binary_crossentropy new args", {
 
   expect_equal(out$shape$as_list(),10)
 })
+
+
+
+test_succeeds("passing R fn to compile(loss=)", {
+  # passing an R function to compile(loss = r_fn) can sometimes
+  # result in the py_func having a malformed name and keras throwing an error
+  model <- define_model()
+
+  # generate dummy training data
+  N <- 10
+  data <- matrix(rexp(N * 784), nrow = N, ncol = 784)
+  labels <- matrix(round(runif(N * 10, min = 0, max = 9)),
+                   nrow = N, ncol = 10)
+
+
+  new_loss_fn <- function() {
+    function(y_true, y_pred, ...)
+      loss_binary_crossentropy(y_true, y_pred, ...)
+  }
+
+  compile(model,
+          loss = new_loss_fn(),
+          optimizer = optimizer_sgd(),
+          metrics = 'accuracy')
+
+  fit(model, data, labels, epochs = 2)
+
+})

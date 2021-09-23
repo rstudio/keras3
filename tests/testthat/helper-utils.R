@@ -33,7 +33,7 @@ py_capture_output <- reticulate::py_capture_output #import("IPython")$utils$capt
 
 test_succeeds <- function(desc, expr, required_version = NULL) {
   if (interactive()) {
-    test_that(desc, force(expr))
+    test_that(desc, expect_error(force(expr), NA))
   } else
     invisible(capture.output({
       test_that(desc, {
