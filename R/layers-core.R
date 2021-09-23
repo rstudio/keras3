@@ -422,25 +422,31 @@ normalize_path <- function(path) {
     normalizePath(path.expand(path), mustWork = FALSE)
 }
 
-# Helper function to coerce shape arguments to tuple
-normalize_shape <- function(shape) {
 
+normalize_shape <- function (x) {
   # reflect NULL back
-  if (is.null(shape))
-    return(shape)
+  if (is.null(x))
+    return(x)
+  else
+    as_shape(x)
+}
 
-  # if it's a list or a numeric vector then convert to integer
-  if (is.list(shape) || is.numeric(shape)) {
-    shape <- lapply(shape, function(value) {
-      if (!is.null(value))
-        as.integer(value)
-      else
+as_shape <- function (x) {
+
+  if (inherits(x, "tensorflow.python.framework.tensor_shape.TensorShape"))
+    return(x)
+
+  if (is.null(x))
+    dims <- NULL
+  else
+    dims <- lapply(x, function(d) {
+      if (is.null(d) || isTRUE(is.na(d)))
         NULL
+      else
+        as.integer(d)
     })
-  }
 
-  # coerce to tuple so it's iterable
-  tuple(shape)
+  tensorflow::tf$TensorShape(dims)
 }
 
 

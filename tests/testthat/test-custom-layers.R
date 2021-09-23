@@ -164,10 +164,10 @@ test_succeeds("R6 Custom layers can inherit from a python type", {
   # can instantiate and use like a conventional layer too
   input <- layer_input(shape(1))
   expect_tensor(keras$layers$Dense(units = 32)(input),
-                shape = shape(NULL, 32))
+                shape = list(NULL, 32L))
 
   expect_tensor(r_to_py(CustomLayer, convert = TRUE)(output_dim = 32L)(input),
-                shape = shape(NULL, 32))
+                shape = list(NULL, 32L))
 
 })
 

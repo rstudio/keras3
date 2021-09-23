@@ -382,15 +382,6 @@ relative_to <- function(dir, file) {
 }
 
 
-as_shape <- function(x) {
-  lapply(x, function(d) {
-    if (is.null(d))
-      NULL
-    else
-      as.integer(d)
-  })
-}
-
 is_keras_tensor <- function(x) {
   if (is_tensorflow_implementation()) {
     if (tensorflow::tf_version() >= "2.0") tensorflow::tf$is_tensor(x) else tensorflow::tf$contrib$framework$is_tensor(x)
