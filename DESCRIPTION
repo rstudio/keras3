@@ -38,7 +38,6 @@ Imports:
     methods,
     R6,
     ellipsis,
-    backports,
     rlang
 Suggests:
     ggplot2,

@@ -96,8 +96,6 @@ keras <- NULL
 
 .onLoad <- function(libname, pkgname) {
 
-  backports::import(pkgname, "isFALSE")
-
   # resolve the implementation module (might be keras proper or might be tensorflow)
   implementation_module <- resolve_implementation_module()
 
