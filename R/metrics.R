@@ -104,8 +104,9 @@ NULL
 NULL
 
 
-if(getRversion() < "3.4.2")
-  isFALSE <- function (x) {
+# if(!exists("isFALSE"))
+if(getRversion() < "3.5")
+  isFALSE <- function(x) {
     is.logical(x) && length(x) == 1L && !is.na(x) && !x
   }
 
