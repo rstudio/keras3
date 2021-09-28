@@ -12,9 +12,6 @@
 #'   layer instance is returned.
 #'
 #' @family merging_layers
-#' @seealso
-#' @seealso
-#'
 #'
 #' @seealso
 #' +  <https://www.tensorflow.org/api_docs/python/tf/keras/layers/add>
