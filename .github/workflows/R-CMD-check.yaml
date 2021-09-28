@@ -20,15 +20,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - {os: 'ubuntu-20.04'  , tf: 'default', r: 'release'}
-          - {os: 'windows-latest', tf: 'default', r: 'release'}
-          - {os: 'macOS-latest'  , tf: 'default', r: 'release'}
+          # - {os: 'ubuntu-20.04'  , tf: 'default', r: 'release'}
+          # - {os: 'windows-latest', tf: 'default', r: 'release'}
+          # - {os: 'macOS-latest'  , tf: 'default', r: 'release'}
 
-          - {os: 'ubuntu-20.04'  , tf: 'default', r: 'oldrel'}
-          - {os: 'windows-latest', tf: 'default', r: 'oldrel'}
-          - {os: 'macOS-latest'  , tf: 'default', r: 'oldrel'}
+          # - {os: 'ubuntu-20.04'  , tf: 'default', r: 'oldrel'}
+          # - {os: 'windows-latest', tf: 'default', r: 'oldrel'}
+          # - {os: 'macOS-latest'  , tf: 'default', r: 'oldrel'}
 
-          - {os: 'ubuntu-20.04', tf: 'default', r: '3.6'} # default R in ubuntu-20.04
+          # - {os: 'ubuntu-20.04', tf: 'default', r: '3.6'} # default R in ubuntu-20.04
           - {os: 'ubuntu-20.04', tf: 'default', r: '3.5'} #
           - {os: 'ubuntu-20.04', tf: 'default', r: '3.4'} #
           - {os: 'ubuntu-20.04', tf: 'default', r: '3.3'} # Oldest R available in Rstudio Marketplace offerings
@@ -39,16 +39,16 @@ jobs:
           # - {os: 'windows-latest', tf: 'release', r: 'release'}
           # - {os: 'macOS-latest'  , tf: 'release', r: 'release'}
 
-          - {os: 'ubuntu-20.04', tf: '2.5', r: 'release'}
-          - {os: 'ubuntu-20.04', tf: '2.4', r: 'release'}
-          - {os: 'ubuntu-20.04', tf: '2.3', r: 'release'}
-          - {os: 'ubuntu-20.04', tf: '2.2', r: 'release'}
-          - {os: 'ubuntu-20.04', tf: '2.1', r: 'release'}
+          # - {os: 'ubuntu-20.04', tf: '2.5', r: 'release'}
+          # - {os: 'ubuntu-20.04', tf: '2.4', r: 'release'}
+          # - {os: 'ubuntu-20.04', tf: '2.3', r: 'release'}
+          # - {os: 'ubuntu-20.04', tf: '2.2', r: 'release'}
+          # - {os: 'ubuntu-20.04', tf: '2.1', r: 'release'}
 
-          # these are allowed to fail
-          - {os: 'ubuntu-20.04', tf: 'default', r: 'devel'}
-          # - {os: 'ubuntu-20.04', tf: '2.6.0rc2', r: 'release'}
-          # - {os: 'ubuntu-20.04', tf: 'nightly' , r: 'release'}
+          # # these are allowed to fail
+          # - {os: 'ubuntu-20.04', tf: 'default', r: 'devel'}
+          # # - {os: 'ubuntu-20.04', tf: '2.6.0rc2', r: 'release'}
+          # # - {os: 'ubuntu-20.04', tf: 'nightly' , r: 'release'}
 
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.tf == 'nightly' || contains(matrix.tf, 'rc') || matrix.r == 'devel' }}
