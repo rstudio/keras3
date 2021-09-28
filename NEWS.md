@@ -53,9 +53,9 @@
 
 - Fixed an issue in `layer_input()` where passing a tensorflow `DType` objects to argument `dtype` would throw an error.
 
-- Fixed an issue in `compile()` where passing an R function via an in-line 
+- Fixed an issue in `compile()` where passing an R function via an in-line
   call would result in an error from subsequent `fit()` calls.
-  (e.g., `compile(loss = function(y_true, y_pred) my_loss(y_true, y_pred))` 
+  (e.g., `compile(loss = function(y_true, y_pred) my_loss(y_true, y_pred))`
   now succeeds)
 
 - `clone_model()` gains a `clone_function` argument that allows you to customize each layer as it is cloned.
@@ -75,6 +75,7 @@
 - `%py_class%` gains the ability to delay initializing the python session until first use.
   It is now safe to implement and export `%py_class%` objects in an R package.
 
+- Bumped minimum R version to 3.4. Expanded CI to test on all supported R version. Fixed regresison that prevent package installation on R <= 3.4
 # keras 2.6.0
 
 Breaking changes (Tensorflow 2.6):
