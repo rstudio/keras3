@@ -1,6 +1,8 @@
 # keras (development version)
 
-- New family of *preprocessing* layers. These are the spiritual successor to the `tfdatasets::step_*` family of data transformers (to be deprecated in a future release). New function:
+- New family of *preprocessing* layers. These are the spiritual successor to the `tfdatasets::step_*` family of data transformers (to be deprecated in a future release).
+  Added a new vignette: "Working with preprocessing layers".
+  New functions:
 
   Image preprocessing:
     - `layer_resizing()`
