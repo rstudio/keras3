@@ -13,6 +13,7 @@
 \alias{evaluate}
 \alias{export_savedmodel}
 \alias{shape}
+\alias{as_tensor}
 \alias{flags}
 \alias{flag_numeric}
 \alias{flag_integer}
@@ -32,7 +33,7 @@ below to see their documentation.
 
   \item{reticulate}{\code{\link[reticulate]{array_reshape}}, \code{\link[reticulate]{tuple}}, \code{\link[reticulate:use_python]{use_condaenv}}, \code{\link[reticulate]{use_python}}, \code{\link[reticulate:use_python]{use_virtualenv}}}
 
-  \item{tensorflow}{\code{\link[tensorflow]{evaluate}}, \code{\link[tensorflow]{export_savedmodel}}, \code{\link[tensorflow]{shape}}, \code{\link[tensorflow]{tensorboard}}, \code{\link[tensorflow]{use_session_with_seed}}}
+  \item{tensorflow}{\code{\link[tensorflow]{as_tensor}}, \code{\link[tensorflow]{evaluate}}, \code{\link[tensorflow]{export_savedmodel}}, \code{\link[tensorflow]{shape}}, \code{\link[tensorflow]{tensorboard}}, \code{\link[tensorflow]{use_session_with_seed}}}
 
   \item{tfruns}{\code{\link[tfruns:flags]{flag_boolean}}, \code{\link[tfruns:flags]{flag_integer}}, \code{\link[tfruns:flags]{flag_numeric}}, \code{\link[tfruns:flags]{flag_string}}, \code{\link[tfruns]{flags}}, \code{\link[tfruns]{run_dir}}}
 }}
