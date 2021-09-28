@@ -116,3 +116,37 @@ maybe_rename <- function(x, ...) {
   names(x)[i] <- names(spec)[spec == names(x)[i]]
   x
 }
+
+
+
+
+# tf$reshape() doesn't accept a tf.TensorShape object
+# normalize_shape <-
+function (x) {
+  # reflect NULL back
+  if (is.null(x))
+    return(x)
+  else
+    as_shape(x)
+}
+
+
+# tf$reshape() doesn't accept a tf.TensorShape object
+# as_shape <-
+function (x) {
+
+  if (inherits(x, "tensorflow.python.framework.tensor_shape.TensorShape"))
+    return(x)
+
+  if (is.null(x))
+    dims <- NULL
+  else
+    dims <- lapply(x, function(d) {
+      if (is.null(d) || isTRUE(is.na(d)))
+        NULL
+      else
+        as.integer(d)
+    })
+
+  tensorflow::tf$TensorShape(dims)
+}
