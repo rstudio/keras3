@@ -111,10 +111,10 @@ data <- rbind(c(0.1, 0.2, 0.3),
               c(1.5, 1.6, 1.7))
 layer <- layer_normalization()
 adapt(layer, data)
-normalized_data <- layer(data)
+normalized_data <- as.array(layer(data))
 
-sprintf("Features mean: %.2f", mean(as.array(normalized_data)))
-sprintf("Features std: %.2f", sd(as.array(normalized_data)))
+sprintf("Features mean: %.2f", mean(normalized_data))
+sprintf("Features std: %.2f", sd(normalized_data))
 ```
 
 
@@ -186,7 +186,7 @@ augmentation layers.
 **Option 2:** apply it to your `tf.data.Dataset`, so as to obtain a dataset that yields
 batches of preprocessed data, like this:
 
-```{r}
+```{r, eval = FALSE}
 library(tfdatasets)
 dataset <- ... # define dataset
 dataset <- dataset %>% 
@@ -198,7 +198,7 @@ will be buffered before going into the model. In addition, if you call
 `tfdatasets::dataset_prefetch()` on your dataset, the preprocessing will happen
 efficiently in parallel with training:
 
-```{r}
+```{r, eval = FALSE}
 dataset <- dataset %>%
   dataset_map(function(x, y) list(preprocessing_layer(x), y)) %>% 
   dataset_prefetch()
@@ -236,7 +236,7 @@ you can export an inference model that packages the preprocessing.
 Simply instantiate a new model that chains
 your preprocessing layers and your training model:
 
-```{r}
+```{r, eval = FALSE}
 input <- layer_input(shape = input_shape)
 output <- input %>%
   preprocessing_layer(input) %>%
@@ -451,7 +451,7 @@ train_dataset <- train_dataset %>%
   dataset_map(~list(text_vectorizer(.x), .y))
 
 # Train the model on the int sequences
-cat("\nTraining model...\n")
+cat("Training model...\n")
 model %>%
   compile(optimizer = "rmsprop", loss = "mse") %>%
   fit(train_dataset)
@@ -465,10 +465,10 @@ output <- input %>%
 end_to_end_model <- keras_model(input, output)
 
 # Call the end-to-end model on test data (which includes unknown tokens)
-cat("\nCalling end-to-end model on test string...\n")
+cat("Calling end-to-end model on test string...\n")
 test_data <- tf$constant(matrix("The one the other will absorb"))
 test_output <- end_to_end_model(test_data)
-cat("Model output:", format(test_output), "\n")
+cat("Model output:", as.array(test_output), "\n")
 ```
 
 You can see the `layer_text_vectorization()` layer in action, combined with an `Embedding` mode,
@@ -524,7 +524,7 @@ train_dataset <- train_dataset %>%
   dataset_map(~list(text_vectorizer(.x), .y))
 
 # Train the model on the int sequences
-cat("\nTraining model...\n")
+cat("Training model...\n")
 model %>% 
   compile(optimizer="rmsprop", loss="mse") %>% 
   fit(train_dataset)
@@ -539,68 +539,17 @@ output <- input %>%
 end_to_end_model = keras_model(input, output)
 
 # Call the end-to-end model on test data (which includes unknown tokens)
-cat("\nCalling end-to-end model on test string...\n")
+cat("Calling end-to-end model on test string...\n")
 test_data <- tf$constant(matrix("The one the other will absorb"))
 test_output <- end_to_end_model(test_data)
-cat("Model output:", format(test_output), "\n")
+cat("Model output: "); print(test_output); cat("\n")
 ```
 
 
 
 ### Encoding text as a dense matrix of ngrams with TF-IDF weighting
 
-This is an alternative way of preprocessing text before passing it to a `Dense` layer.
-
-```python
-# Define some text data to adapt the layer
-adapt_data = tf.constant(
-    [
-        "The Brain is wider than the Sky",
-        "For put them side by side",
-        "The one the other will contain",
-        "With ease and You beside",
-    ]
-)
-# Instantiate layer_text_vectorization() with "tf-idf" output_mode
-# (multi-hot with TF-IDF weighting) and ngrams=2 (index all bigrams)
-text_vectorizer = layers.layer_text_vectorization()(output_mode="tf-idf", ngrams=2)
-# Index the bigrams and learn the TF-IDF weights via `adapt()`
-text_vectorizer.adapt(adapt_data)
-
-# Try out the layer
-print(
-    "Encoded text:\n", text_vectorizer(["The Brain is deeper than the sea"]).numpy(),
-)
-
-# Create a simple model
-inputs = keras.Input(shape=(text_vectorizer.vocabulary_size(),))
-outputs = layers.Dense(1)(inputs)
-model = keras.Model(inputs, outputs)
-
-# Create a labeled dataset (which includes unknown tokens)
-train_dataset = tf.data.Dataset.from_tensor_slices(
-    (["The Brain is deeper than the sea", "for if they are held Blue to Blue"], [1, 0])
-)
-
-# Preprocess the string inputs, turning them into int sequences
-train_dataset = train_dataset.batch(2).map(lambda x, y: (text_vectorizer(x), y))
-# Train the model on the int sequences
-print("\nTraining model...")
-model.compile(optimizer="rmsprop", loss="mse")
-model.fit(train_dataset)
-
-# For inference, you can export a model that accepts strings as input
-inputs = keras.Input(shape=(1,), dtype="string")
-x = text_vectorizer(inputs)
-outputs = model(x)
-end_to_end_model = keras.Model(inputs, outputs)
-
-# Call the end-to-end model on test data (which includes unknown tokens)
-print("\nCalling end-to-end model on test string...")
-test_data = tf.constant(["The one the other will absorb"])
-test_output = end_to_end_model(test_data)
-print("Model output:", test_output)
-```
+This is an alternative way of preprocessing text before passing it to a `layer_dense` layer.
 
 ```{r}
 # Define some text data to adapt the layer
@@ -640,7 +589,7 @@ train_dataset <- train_dataset %>%
 
 
 # Train the model on the int sequences
-cat("\nTraining model...")
+cat("Training model...")
 model %>% 
   compile(optimizer="rmsprop", loss="mse") %>% 
   fit(train_dataset)
@@ -655,10 +604,10 @@ output <- input %>%
 end_to_end_model = keras_model(input, output)
 
 # Call the end-to-end model on test data (which includes unknown tokens)
-cat("\nCalling end-to-end model on test string...\n")
+cat("Calling end-to-end model on test string...\n")
 test_data <- tf$constant(matrix("The one the other will absorb"))
 test_output <- end_to_end_model(test_data)
-cat("Model output:", format(test_output))
+cat("Model output: "); print(test_output)
 ```
 
 
