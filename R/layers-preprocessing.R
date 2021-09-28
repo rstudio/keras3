@@ -1434,10 +1434,6 @@ function(object, run_eagerly = NULL, steps_per_execution = NULL, ...) {
   do.call(object$compile, args)
 }
 
-# TODO: impl and add `require_tf_version("2.6")`
-# TODO: tests
-# TODO: add @family to all the preprocessing layers
-#
 
 # TODO: isn't there a hashing trick already? text_hashing_trick
 
