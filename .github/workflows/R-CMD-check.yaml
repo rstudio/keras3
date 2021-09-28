@@ -117,6 +117,9 @@ jobs:
       - name: Install rcmdcheck
         run: remotes::install_cran("rcmdcheck")
 
+      - name: Workaround knitr regression
+        run: if(getRversion() < "3.5") remotes::install_version("knitr", "1.30")
+
       - name: Check
         run: rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'warning', check_dir = 'check')
 
