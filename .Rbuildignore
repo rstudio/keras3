@@ -12,6 +12,7 @@
 ^issues$
 ^external$
 ^vignettes/examples$
+^vignettes/new-guides$
 ^vignettes/learn\.Rmd$
 ^vignettes/tools\.Rmd$
 ^vignettes/images/resources-.*$
@@ -40,4 +41,5 @@
 ^cran-comments\.md$
 ^\.github$
 ^\.vscode$
+^scratch$
 
