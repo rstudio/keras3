@@ -35,7 +35,7 @@ With Keras preprocessing layers, you can build and export models that are truly
 end-to-end: models that accept raw images or raw structured data as input;
 models that handle feature normalization or feature value indexing on their own.
 
-## Available preprocessing
+## Available preprocessing layers
 
 ### Text preprocessing
 
@@ -44,17 +44,17 @@ models that handle feature normalization or feature value indexing on their own.
 
 ### Numerical features preprocessing
 
-- `layer_normalization()`: performs feature-wise normalize of input features.
+- `layer_normalization()`: performs feature-wise normalization of input features.
 - `layer_discretization()`: turns continuous numerical features
   into integer categorical features.
 
 ### Categorical features preprocessing
 
 - `layer_category_encoding()`: turns integer categorical features
-  into one-hot, multi-hot, or count dense representations.
+  into one-hot, multi-hot, or count-based, dense representations.
 - `layer_hashing()`: performs categorical feature hashing, also known as
   the "hashing trick".
-- `layer_string_lookup()`: turns string categorical values an encoded
+- `layer_string_lookup()`: turns string categorical values into an encoded
   representation that can be read by an `Embedding` layer or `Dense` layer.
 - `layer_integer_lookup()`: turns integer categorical values into an
   encoded representation that can be read by an `Embedding` layer or `Dense`
@@ -67,7 +67,7 @@ These layers are for standardizing the inputs of an image model.
 
 - `layer_resizing()`: resizes a batch of images to a target size.
 - `layer_rescaling()`: rescales and offsets the values of a batch of
-  image (e.g. go from inputs in the `[0, 255]` range to inputs in the `[0, 1]`
+  images (e.g., going from inputs in the `[0, 255]` range to inputs in the `[0, 1]`
   range.
 - `layer_center_crop()`: returns a center crop of a batch of images.
 

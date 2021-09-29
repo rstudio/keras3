@@ -74,10 +74,10 @@
   `layer_subtract()`, `layer_multiply()`, `layer_average()`, `layer_maximum()`,
   `layer_minimum()` ,  `layer_dot()`)
 
-- `%py_class%` gains the ability to delay initializing the python session until first use.
+- `%py_class%` gains the ability to delay initializing the Python session until first use.
   It is now safe to implement and export `%py_class%` objects in an R package.
 
-- Bumped minimum R version to 3.4. Expanded CI to test on all supported R version. Fixed regresison that prevent package installation on R <= 3.4
+- Bumped minimum R version to 3.4. Expanded CI to test on all supported R version. Fixed regression that prevented package installation on R <= 3.4
 # keras 2.6.0
 
 Breaking changes (Tensorflow 2.6):
