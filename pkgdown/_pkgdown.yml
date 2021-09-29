@@ -205,6 +205,36 @@ reference:
       - layer_minimum
       - layer_concatenate
       - layer_dot
+
+  - title: "Image Preprocessing Layers"
+    contents:
+      - layer_resizing
+      - layer_rescaling
+      - layer_center_crop
+
+  - title: "Image Augmentation Layers"
+    contents:
+      -  layer_random_contrast
+      -  layer_random_crop
+      -  layer_random_flip
+      -  layer_random_height
+      -  layer_random_rotation
+      -  layer_random_translation
+      -  layer_random_width
+      -  layer_random_zoom
+
+  - title: "Categorical Features Preprocessing"
+    contents:
+      -  layer_category_encoding
+      -  layer_hashing
+      -  layer_integer_lookup
+      -  layer_string_lookup
+
+  - title: "Numerical Features Preprocessing"
+    contents:
+      -  layer_normalization
+      -  layer_discretization
+
   - title: "Attention Layers"
     contents:
       - layer_attention

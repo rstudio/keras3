@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0.9001</span>
       </span>
     </div>
 
@@ -127,13 +127,19 @@
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">Guides (New for TF 2.6)</li>
     <li>
-      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+      <a href="../articles/new-guides/python_subclasses.html">Python Subclasses</a>
     </li>
     <li>
-      <a href="../articles/guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
+      <a href="../articles/new-guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
     </li>
     <li>
-      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+      <a href="../articles/new-guides/customizing_what_happens_in_fit.html">Customizing What Happens in Fit</a>
+    </li>
+    <li>
+      <a href="../articles/new-guides/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Using Keras</li>
@@ -291,7 +297,7 @@ hidden unit to have the norm between a lower bound and an upper bound.</p></li>
 constraint is an R function that takes weights (<code>w</code>) as input
 and returns modified weights. Note that keras <code><a href='backend.html'>backend()</a></code> tensor
 functions (e.g. <code><a href='k_greater_equal.html'>k_greater_equal()</a></code>) should be used in the
-implementation of custom constraints. For example:<div class="r"></p><pre><span class='va'>nonneg_constraint</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>w</span><span class='op'>)</span> <span class='op'>{</span>
+implementation of custom constraints. For example:<div class="sourceCode r"></p><pre><span class='va'>nonneg_constraint</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>w</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='va'>w</span> <span class='op'>*</span> <span class='fu'><a href='k_cast.html'>k_cast</a></span><span class='op'>(</span><span class='fu'><a href='k_greater_equal.html'>k_greater_equal</a></span><span class='op'>(</span><span class='va'>w</span>, <span class='fl'>0</span><span class='op'>)</span>, <span class='fu'><a href='k_floatx.html'>k_floatx</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
 

@@ -84,7 +84,7 @@ of metric functions that start with prefix metric_*." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0.9001</span>
       </span>
     </div>
 
@@ -129,13 +129,19 @@ of metric functions that start with prefix metric_*." />
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">Guides (New for TF 2.6)</li>
     <li>
-      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+      <a href="../articles/new-guides/python_subclasses.html">Python Subclasses</a>
     </li>
     <li>
-      <a href="../articles/guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
+      <a href="../articles/new-guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
     </li>
     <li>
-      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+      <a href="../articles/new-guides/customizing_what_happens_in_fit.html">Customizing What Happens in Fit</a>
+    </li>
+    <li>
+      <a href="../articles/new-guides/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Using Keras</li>
@@ -256,7 +262,7 @@ of metric functions that start with prefix <code>metric_*</code>.</p>
 example usage.</p>
     <h2 class="hasAnchor" id="usage-with-compile"><a class="anchor" href="#usage-with-compile"></a>Usage with <code>compile</code></h2>
 
-    <p><div class="r"></p><pre><span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://generics.r-lib.org/reference/compile.html'>compile</a></span><span class='op'>(</span>
+    <p><div class="sourceCode r"></p><pre><span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://generics.r-lib.org/reference/compile.html'>compile</a></span><span class='op'>(</span>
   optimizer <span class='op'>=</span> <span class='st'>'sgd'</span>,
   loss <span class='op'>=</span> <span class='st'>'mse'</span>,
   metrics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'>metric_SOME_METRIC</span><span class='op'>(</span><span class='op'>)</span>, <span class='fu'>metric_SOME_OTHER_METRIC</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
@@ -264,7 +270,7 @@ example usage.</p>
 </pre><p></div></p>
     <h2 class="hasAnchor" id="standalone-usage"><a class="anchor" href="#standalone-usage"></a>Standalone usage</h2>
 
-    <p><div class="r"></p><pre><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>metric_SOME_METRIC</span><span class='op'>(</span><span class='op'>)</span>
+    <p><div class="sourceCode r"></p><pre><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>metric_SOME_METRIC</span><span class='op'>(</span><span class='op'>)</span>
 <span class='kw'>for</span> <span class='op'>(</span><span class='va'>e</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='va'>epochs</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='va'>train_steps</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
     <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span>, sample_weight <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span> <span class='op'>%&lt;-%</span> <span class='va'>...</span>
@@ -286,7 +292,7 @@ example usage.</p>
 <li><p><code>result()</code>: Computes and returns a value for the metric from the state variables.</p></li>
 </ul>
 
-<p>Example custom metric subclass:<div class="r"></p><pre><span class='fu'>metric_binary_true_positives</span><span class='op'>(</span><span class='va'>keras</span><span class='op'>$</span><span class='va'>metrics</span><span class='op'>$</span><span class='va'>Metric</span><span class='op'>)</span> <span class='op'>%py_class%</span> <span class='op'>{</span>
+<p>Example custom metric subclass:<div class="sourceCode r"></p><pre><span class='fu'>metric_binary_true_positives</span><span class='op'>(</span><span class='va'>keras</span><span class='op'>$</span><span class='va'>metrics</span><span class='op'>$</span><span class='va'>Metric</span><span class='op'>)</span> <span class='op'>%py_class%</span> <span class='op'>{</span>
   <span class='va'>initialize</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>name</span> <span class='op'>=</span> <span class='st'>'binary_true_positives'</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span>
     <span class='va'>super</span><span class='op'>$</span><span class='fu'>initialize</span><span class='op'>(</span>name <span class='op'>=</span> <span class='va'>name</span>, <span class='va'>...</span><span class='op'>)</span>
     <span class='va'>self</span><span class='op'>$</span><span class='va'>true_positives</span> <span class='op'>&lt;-</span> <span class='va'>self</span><span class='op'>$</span><span class='fu'>add_weight</span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>'tp'</span>, initializer <span class='op'>=</span> <span class='st'>'zeros'</span><span class='op'>)</span>

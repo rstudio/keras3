@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Text vectorization layer — layer_text_vectorization • keras</title>
+<title>A preprocessing layer which maps text features to integer sequences. — layer_text_vectorization • keras</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,12 +48,8 @@
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Text vectorization layer — layer_text_vectorization" />
-<meta property="og:description" content="This layer has basic options for managing text in a Keras model. It
-transforms a batch of strings (one sample = one string) into either a list of
-token indices (one sample = 1D tensor of integer token indices) or a dense
-representation (one sample = 1D tensor of float values representing data about
-the sample's tokens)." />
+<meta property="og:title" content="A preprocessing layer which maps text features to integer sequences. — layer_text_vectorization" />
+<meta property="og:description" content="A preprocessing layer which maps text features to integer sequences." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -86,7 +82,7 @@ the sample's tokens)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0.9001</span>
       </span>
     </div>
 
@@ -131,13 +127,19 @@ the sample's tokens)." />
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">Guides (New for TF 2.6)</li>
     <li>
-      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+      <a href="../articles/new-guides/python_subclasses.html">Python Subclasses</a>
     </li>
     <li>
-      <a href="../articles/guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
+      <a href="../articles/new-guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
     </li>
     <li>
-      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+      <a href="../articles/new-guides/customizing_what_happens_in_fit.html">Customizing What Happens in Fit</a>
+    </li>
+    <li>
+      <a href="../articles/new-guides/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Using Keras</li>
@@ -226,17 +228,13 @@ the sample's tokens)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Text vectorization layer</h1>
-    <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/layer-text_vectorization.R'><code>R/layer-text_vectorization.R</code></a></small>
+    <h1>A preprocessing layer which maps text features to integer sequences.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/layers-preprocessing.R'><code>R/layers-preprocessing.R</code></a></small>
     <div class="hidden name"><code>layer_text_vectorization.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This layer has basic options for managing text in a Keras model. It
-transforms a batch of strings (one sample = one string) into either a list of
-token indices (one sample = 1D tensor of integer token indices) or a dense
-representation (one sample = 1D tensor of float values representing data about
-the sample's tokens).</p>
+    <p>A preprocessing layer which maps text features to integer sequences.</p>
     </div>
 
     <pre class="usage"><span class='fu'>layer_text_vectorization</span><span class='op'>(</span>
@@ -245,99 +243,190 @@ the sample's tokens).</p>
   standardize <span class='op'>=</span> <span class='st'>"lower_and_strip_punctuation"</span>,
   split <span class='op'>=</span> <span class='st'>"whitespace"</span>,
   ngrams <span class='op'>=</span> <span class='cn'>NULL</span>,
-  output_mode <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"int"</span>, <span class='st'>"binary"</span>, <span class='st'>"count"</span>, <span class='st'>"tf-idf"</span><span class='op'>)</span>,
+  output_mode <span class='op'>=</span> <span class='st'>"int"</span>,
   output_sequence_length <span class='op'>=</span> <span class='cn'>NULL</span>,
-  pad_to_max_tokens <span class='op'>=</span> <span class='fu'>tf_version</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>&lt;</span> <span class='st'>"2.6"</span>,
+  pad_to_max_tokens <span class='op'>=</span> <span class='cn'>FALSE</span>,
   vocabulary <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span>
+
+<span class='fu'>get_vocabulary</span><span class='op'>(</span><span class='va'>object</span>, include_special_tokens <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='fu'>set_vocabulary</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>vocabulary</span>, idf_weights <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>Model or layer object</p></td>
+      <td><p>What to call the new <code>Layer</code> instance with. Typically a keras
+<code>Model</code>, another <code>Layer</code>, or a <code>tf.Tensor</code>/<code>KerasTensor</code>. If <code>object</code> is
+missing, the <code>Layer</code> instance is returned, otherwise, <code>layer(object)</code> is
+returned.</p></td>
     </tr>
     <tr>
       <th>max_tokens</th>
-      <td><p>The maximum size of the vocabulary for this layer. If <code>NULL</code>,
-there is no cap on the size of the vocabulary.</p></td>
+      <td><p>The maximum size of the vocabulary for this layer. If NULL,
+there is no cap on the size of the vocabulary. Note that this vocabulary
+contains 1 OOV token, so the effective number of tokens is <code>(max_tokens - 1 - (1 if output_mode == "int" else 0))</code>.</p></td>
     </tr>
     <tr>
       <th>standardize</th>
       <td><p>Optional specification for standardization to apply to the
-input text. Values can be <code>NULL</code> (no standardization),
+input text. Values can be NULL (no standardization),
 <code>"lower_and_strip_punctuation"</code> (lowercase and remove punctuation) or a
 Callable. Default is <code>"lower_and_strip_punctuation"</code>.</p></td>
     </tr>
     <tr>
       <th>split</th>
       <td><p>Optional specification for splitting the input text. Values can be
-<code>NULL</code> (no splitting), <code>"split_on_whitespace"</code> (split on ASCII whitespace), or
-a Callable. Default is <code>"split_on_whitespace"</code>.</p></td>
+NULL (no splitting), <code>"whitespace"</code> (split on ASCII whitespace), or a
+Callable. The default is <code>"whitespace"</code>.</p></td>
     </tr>
     <tr>
       <th>ngrams</th>
       <td><p>Optional specification for ngrams to create from the possibly-split
-input text. Values can be <code>NULL</code>, an integer or a list of integers; passing
+input text. Values can be NULL, an integer or list of integers; passing
 an integer will create ngrams up to that integer, and passing a list of
 integers will create ngrams for the specified values in the list. Passing
-<code>NULL</code> means that no ngrams will be created.</p></td>
+NULL means that no ngrams will be created.</p></td>
     </tr>
     <tr>
       <th>output_mode</th>
       <td><p>Optional specification for the output of the layer. Values can
-be <code>"int"</code>, <code>"binary"</code>, <code>"count"</code> or <code>"tfidf"</code>, which control the outputs as follows:</p><ul>
-<li><p>"int": Outputs integer indices, one integer index per split string token.</p></li>
-<li><p>"binary": Outputs a single int array per batch, of either vocab_size or
-<code>max_tokens</code> size, containing 1s in all elements where the token mapped
-to that index exists at least once in the batch item.</p></li>
-<li><p>"count": As "binary", but the int array contains a count of the number of
-times the token at that index appeared in the batch item.</p></li>
-<li><p>"tfidf": As "binary", but the TF-IDF algorithm is applied to find the value
-in each token slot.</p></li>
+be <code>"int"</code>, <code>"multi_hot"</code>, <code>"count"</code> or <code>"tf_idf"</code>, configuring the layer
+as follows:</p><ul>
+<li><p><code>"int"</code>: Outputs integer indices, one integer index per split string
+token. When <code>output_mode == "int"</code>, 0 is reserved for masked
+locations; this reduces the vocab size to
+<code>max_tokens - 2</code> instead of <code>max_tokens - 1</code>.</p></li>
+<li><p><code>"multi_hot"</code>: Outputs a single int array per batch, of either
+vocab_size or max_tokens size, containing 1s in all elements where the
+token mapped to that index exists at least once in the batch item.</p></li>
+<li><p><code>"count"</code>: Like <code>"multi_hot"</code>, but the int array contains a count of
+the number of times the token at that index appeared in the
+batch item.</p></li>
+<li><p><code>"tf_idf"</code>: Like <code>"multi_hot"</code>, but the TF-IDF algorithm is applied to
+find the value in each token slot.
+For <code>"int"</code> output, any shape of input and output is supported. For all
+other output modes, currently only rank 1 inputs (and rank 2 outputs after
+splitting) are supported.</p></li>
 </ul></td>
     </tr>
     <tr>
       <th>output_sequence_length</th>
-      <td><p>Only valid in "int" mode. If set, the output will have
+      <td><p>Only valid in INT mode. If set, the output will have
 its time dimension padded or truncated to exactly <code>output_sequence_length</code>
-values, resulting in a tensor of shape (batch_size, output_sequence_length) regardless
-of how many tokens resulted from the splitting step. Defaults to <code>NULL</code>.</p></td>
+values, resulting in a tensor of shape
+<code>(batch_size, output_sequence_length)</code> regardless of how many tokens
+resulted from the splitting step. Defaults to NULL.</p></td>
     </tr>
     <tr>
       <th>pad_to_max_tokens</th>
-      <td><p>Only valid in "binary", "count", and "tfidf" modes. If <code>TRUE</code>,
-the output will have its feature axis padded to <code>max_tokens</code> even if the
-number of unique tokens in the vocabulary is less than max_tokens,
-resulting in a tensor of shape (batch_size, max_tokens) regardless of
-vocabulary size. Defaults to <code>FALSE</code> in TF 2.6+, <code>TRUE</code> in prior version.</p></td>
+      <td><p>Only valid in  <code>"multi_hot"</code>, <code>"count"</code>, and <code>"tf_idf"</code>
+modes. If TRUE, the output will have its feature axis padded to
+<code>max_tokens</code> even if the number of unique tokens in the vocabulary is less
+than max_tokens, resulting in a tensor of shape <code>(batch_size, max_tokens)</code>
+regardless of vocabulary size. Defaults to FALSE.</p></td>
     </tr>
     <tr>
       <th>vocabulary</th>
-      <td><p>An optional list of vocabulary terms, or a path to a text
-file containing a vocabulary to load into this layer. The file should
-contain one token per line. If the list or file contains the same token
-multiple times, an error will be thrown.</p></td>
+      <td><p>Optional for <code>layer_text_vectorization()</code>. Either an array
+of strings or a string path to a text file. If passing an array, can pass
+an R list or character vector, 1D numpy array, or 1D tensor containing the
+string vocabulary terms. If passing a file path, the file should contain
+one line per term in the vocabulary. If vocabulary is set (either by
+passing <code>layer_text_vectorization(vocabulary = ...)</code> or by calling
+<code>set_vocabulary(layer, vocabulary = ...</code>), there is no need to <code><a href='adapt.html'>adapt()</a></code>
+the layer.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Not used.</p></td>
+      <td><p>standard layer arguments.</p></td>
+    </tr>
+    <tr>
+      <th>include_special_tokens</th>
+      <td><p>If True, the returned vocabulary will include
+the padding and OOV tokens, and a term's index in the vocabulary will equal
+the term's index when calling the layer. If False, the returned vocabulary
+will not include any padding or OOV tokens.</p></td>
+    </tr>
+    <tr>
+      <th>idf_weights</th>
+      <td><p>An R vector, 1D numpy array, or 1D tensor of inverse
+document frequency weights with equal length to vocabulary. Must be set if
+output_mode is "tf_idf". Should not be set otherwise.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The processing of each sample contains the following steps:</p><ol>
-<li><p>standardize each sample (usually lowercasing + punctuation stripping)</p></li>
-<li><p>split each sample into substrings (usually words)</p></li>
-<li><p>recombine substrings into tokens (usually ngrams)</p></li>
-<li><p>index tokens (associate a unique int value with each token)</p></li>
-<li><p>transform each sample using this index, either into a vector of ints or
+    <p>This layer has basic options for managing text in a Keras model. It
+transforms a batch of strings (one example = one string) into either a list of
+token indices (one example = 1D tensor of integer token indices) or a dense
+representation (one example = 1D tensor of float values representing data
+about the example's tokens).</p>
+<p>The vocabulary for the layer must be either supplied on construction or
+learned via <code><a href='adapt.html'>adapt()</a></code>. When this layer is adapted, it will analyze the
+dataset, determine the frequency of individual string values, and create a
+vocabulary from them. This vocabulary can have unlimited size or be capped,
+depending on the configuration options for this layer; if there are more
+unique values in the input than the maximum vocabulary size, the most
+frequent terms will be used to create the vocabulary.</p>
+<p>The processing of each example contains the following steps:</p><ol>
+<li><p>Standardize each example (usually lowercasing + punctuation stripping)</p></li>
+<li><p>Split each example into substrings (usually words)</p></li>
+<li><p>Recombine substrings into tokens (usually ngrams)</p></li>
+<li><p>Index tokens (associate a unique int value with each token)</p></li>
+<li><p>Transform each example using this index, either into a vector of ints or
 a dense float vector.</p></li>
 </ol>
 
+<p>Some notes on passing callables to customize splitting and normalization for
+this layer:</p><ol>
+<li><p>Any callable can be passed to this Layer, but if you want to serialize
+this object you should only pass functions that are registered Keras
+serializables (see <a href='https://www.tensorflow.org/api_docs/python/tf/keras/utils/register_keras_serializable'><code>tf$keras$utils$register_keras_serializable</code></a>
+for more details).</p></li>
+<li><p>When using a custom callable for <code>standardize</code>, the data received
+by the callable will be exactly as passed to this layer. The callable
+should return a tensor of the same shape as the input.</p></li>
+<li><p>When using a custom callable for <code>split</code>, the data received by the
+callable will have the 1st dimension squeezed out - instead of
+<code><a href='https://rdrr.io/r/base/matrix.html'>matrix(c("string to split", "another string to split"))</a></code>, the Callable will
+see <code><a href='https://rdrr.io/r/base/c.html'>c("string to split", "another string to split")</a></code>. The callable should
+return a Tensor with the first dimension containing the split tokens -
+in this example, we should see something like <code><a href='https://rdrr.io/r/base/list.html'>list(c("string", "to", "split"), c("another", "string", "to", "split"))</a></code>. This makes the callable
+site natively compatible with <code>tf$strings$split()</code>.</p></li>
+</ol>
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'>
+<ul>
+<li><p><code><a href='adapt.html'>adapt()</a></code></p></li>
+<li><p><a href='https://www.tensorflow.org/api_docs/python/tf/keras/layers/TextVectorization'>https://www.tensorflow.org/api_docs/python/tf/keras/layers/TextVectorization</a></p></li>
+<li><p><a href='https://keras.io/api/layers/preprocessing_layers/text/text_vectorization'>https://keras.io/api/layers/preprocessing_layers/text/text_vectorization</a></p></li>
+</ul>
+
+<p>Other preprocessing layers: 
+<code><a href='layer_category_encoding.html'>layer_category_encoding</a>()</code>,
+<code><a href='layer_center_crop.html'>layer_center_crop</a>()</code>,
+<code><a href='layer_discretization.html'>layer_discretization</a>()</code>,
+<code><a href='layer_hashing.html'>layer_hashing</a>()</code>,
+<code><a href='layer_integer_lookup.html'>layer_integer_lookup</a>()</code>,
+<code><a href='layer_normalization.html'>layer_normalization</a>()</code>,
+<code><a href='layer_random_contrast.html'>layer_random_contrast</a>()</code>,
+<code><a href='layer_random_crop.html'>layer_random_crop</a>()</code>,
+<code><a href='layer_random_flip.html'>layer_random_flip</a>()</code>,
+<code><a href='layer_random_height.html'>layer_random_height</a>()</code>,
+<code><a href='layer_random_rotation.html'>layer_random_rotation</a>()</code>,
+<code><a href='layer_random_translation.html'>layer_random_translation</a>()</code>,
+<code><a href='layer_random_width.html'>layer_random_width</a>()</code>,
+<code><a href='layer_random_zoom.html'>layer_random_zoom</a>()</code>,
+<code><a href='layer_rescaling.html'>layer_rescaling</a>()</code>,
+<code><a href='layer_resizing.html'>layer_resizing</a>()</code>,
+<code><a href='layer_string_lookup.html'>layer_string_lookup</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

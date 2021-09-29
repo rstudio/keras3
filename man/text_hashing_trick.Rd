@@ -18,10 +18,10 @@ text_hashing_trick(
 
 \item{n}{Dimension of the hashing space.}
 
-\item{hash_function}{if \code{NULL} uses python \code{hash} function, can be 'md5' or
-any function that takes in input a string and returns a int. Note that
+\item{hash_function}{if \code{NULL} uses the Python \code{hash()} function. Otherwise can be \code{'md5'} or
+any function that takes in input a string and returns an int. Note that
 \code{hash} is not a stable hashing function, so it is not consistent across
-different runs, while 'md5' is a stable hashing function.}
+different runs, while \code{'md5'} is a stable hashing function.}
 
 \item{filters}{Sequence of characters to filter out such as
 punctuation. Default includes basic punctuation, tabs, and newlines.}

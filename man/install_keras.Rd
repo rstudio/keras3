@@ -2,7 +2,7 @@
 % Please edit documentation in R/install.R
 \name{install_keras}
 \alias{install_keras}
-\title{Install TensorFlow and Keras, including all python dependencies}
+\title{Install TensorFlow and Keras, including all Python dependencies}
 \usage{
 install_keras(
   method = c("auto", "virtualenv", "conda"),

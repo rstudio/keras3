@@ -15,7 +15,7 @@ Logical indicating whether Keras (or the specified minimum version of
 Keras) is available.
 }
 \description{
-Probe to see whether the Keras python package is available in the current
+Probe to see whether the Keras Python package is available in the current
 system environment.
 }
 \examples{

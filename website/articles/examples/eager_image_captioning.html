@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0.9001</span>
       </span>
     </div>
 
@@ -84,13 +84,19 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Guides (New for TF 2.6)</li>
     <li>
-      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
+      <a href="../../articles/new-guides/python_subclasses.html">Python Subclasses</a>
     </li>
     <li>
-      <a href="../../articles/guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
+      <a href="../../articles/new-guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
     </li>
     <li>
-      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+      <a href="../../articles/new-guides/customizing_what_happens_in_fit.html">Customizing What Happens in Fit</a>
+    </li>
+    <li>
+      <a href="../../articles/new-guides/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    </li>
+    <li>
+      <a href="../../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
@@ -176,7 +182,7 @@
 
       
 
-      </header><script src="eager_image_captioning_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>eager_image_captioning</h1>
@@ -207,7 +213,7 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rjson</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rlang.r-lib.org">rlang</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">magick</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/magick/">magick</a></span><span class="op">)</span>
 
 <span class="va">maybecat</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">context</span>, <span class="va">x</span><span class="op">)</span> <span class="op">{</span>
   <span class="kw">if</span> <span class="op">(</span><span class="va">debugshapes</span><span class="op">)</span> <span class="op">{</span>
@@ -608,14 +614,14 @@
            <span class="va">result</span>,
            <span class="va">epoch</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">image</span> <span class="op">&lt;-</span>
-      <span class="fu">image_read</span><span class="op">(</span><span class="va">image_name</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">image_scale</span><span class="op">(</span><span class="st">"299x299!"</span><span class="op">)</span>
+      <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html">image_read</a></span><span class="op">(</span><span class="va">image_name</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/transform.html">image_scale</a></span><span class="op">(</span><span class="st">"299x299!"</span><span class="op">)</span>
     <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">" "</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="op">)</span>
     <span class="co"># attention_matrix shape: nrow = max_length, ncol = attention_features_shape</span>
     <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
       <span class="va">att</span> <span class="op">&lt;-</span> <span class="va">attention_matrix</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">%&gt;%</span> <span class="va">np</span><span class="op">$</span><span class="fu">resize</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/tuple.html">tuple</a></span><span class="op">(</span><span class="fl">8L</span>, <span class="fl">8L</span><span class="op">)</span><span class="op">)</span>
       <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">att</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">8</span>, <span class="fl">1</span><span class="op">)</span>
-      <span class="va">att</span> <span class="op">&lt;-</span> <span class="fu">image_read</span><span class="op">(</span><span class="va">att</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">image_scale</span><span class="op">(</span><span class="st">"299x299"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-        <span class="fu">image_annotate</span><span class="op">(</span>
+      <span class="va">att</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html">image_read</a></span><span class="op">(</span><span class="va">att</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/transform.html">image_scale</a></span><span class="op">(</span><span class="st">"299x299"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="https://docs.ropensci.org/magick/reference/painting.html">image_annotate</a></span><span class="op">(</span>
           <span class="va">result</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>,
           gravity <span class="op">=</span> <span class="st">"northeast"</span>,
           size <span class="op">=</span> <span class="fl">20</span>,
@@ -623,8 +629,8 @@
           location <span class="op">=</span> <span class="st">"+20+40"</span>
         <span class="op">)</span>
       <span class="va">overlay</span> <span class="op">&lt;-</span>
-        <span class="fu">image_composite</span><span class="op">(</span><span class="va">att</span>, <span class="va">image</span>, operator <span class="op">=</span> <span class="st">"blend"</span>, compose_args <span class="op">=</span> <span class="st">"30"</span><span class="op">)</span>
-      <span class="fu">image_write</span><span class="op">(</span>
+        <span class="fu"><a href="https://docs.ropensci.org/magick/reference/composite.html">image_composite</a></span><span class="op">(</span><span class="va">att</span>, <span class="va">image</span>, operator <span class="op">=</span> <span class="st">"blend"</span>, compose_args <span class="op">=</span> <span class="st">"30"</span><span class="op">)</span>
+      <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html">image_write</a></span><span class="op">(</span>
         <span class="va">overlay</span>,
         <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span>
           <span class="st">"attention_plot_epoch_"</span>,

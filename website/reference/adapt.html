@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fits the state of the preprocessing layer to the data being passed. — adapt • keras</title>
+<title>Fits the state of the preprocessing layer to the data being passed — adapt • keras</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,8 @@
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Fits the state of the preprocessing layer to the data being passed. — adapt" />
-<meta property="og:description" content="Fits the state of the preprocessing layer to the data being passed." />
+<meta property="og:title" content="Fits the state of the preprocessing layer to the data being passed — adapt" />
+<meta property="og:description" content="Fits the state of the preprocessing layer to the data being passed" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0.9001</span>
       </span>
     </div>
 
@@ -127,13 +127,19 @@
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">Guides (New for TF 2.6)</li>
     <li>
-      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+      <a href="../articles/new-guides/python_subclasses.html">Python Subclasses</a>
     </li>
     <li>
-      <a href="../articles/guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
+      <a href="../articles/new-guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
     </li>
     <li>
-      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+      <a href="../articles/new-guides/customizing_what_happens_in_fit.html">Customizing What Happens in Fit</a>
+    </li>
+    <li>
+      <a href="../articles/new-guides/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Using Keras</li>
@@ -222,16 +228,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fits the state of the preprocessing layer to the data being passed.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/layer-methods.R'><code>R/layer-methods.R</code></a></small>
+    <h1>Fits the state of the preprocessing layer to the data being passed</h1>
+    <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/layers-preprocessing.R'><code>R/layers-preprocessing.R</code></a></small>
     <div class="hidden name"><code>adapt.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Fits the state of the preprocessing layer to the data being passed.</p>
+    <p>Fits the state of the preprocessing layer to the data being passed</p>
     </div>
 
-    <pre class="usage"><span class='fu'>adapt</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>data</span>, reset_state <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>adapt</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>data</span>, <span class='va'>...</span>, batch_size <span class='op'>=</span> <span class='cn'>NULL</span>, steps <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -242,18 +248,87 @@
     </tr>
     <tr>
       <th>data</th>
-      <td><p>The data to train on. It can be passed either as a tf.data Dataset,
-or as an R array.</p></td>
+      <td><p>The data to train on. It can be passed either as a
+<code>tf.data.Dataset</code> or as an R array.</p></td>
     </tr>
     <tr>
-      <th>reset_state</th>
-      <td><p>Optional argument specifying whether to clear the state of
-the layer at the start of the call to <code>adapt</code>, or whether to start from
-the existing state. Subclasses may choose to throw if <code>reset_state</code> is set
-to <code>FALSE</code>. <code>NULL</code> mean layer's default.</p></td>
+      <th>...</th>
+      <td><p>Used for forwards and backwards compatibility. Passed on to the underlying method.</p></td>
+    </tr>
+    <tr>
+      <th>batch_size</th>
+      <td><p>Integer or <code>NULL</code>. Number of asamples per state update. If
+unspecified, <code>batch_size</code> will default to <code>32</code>. Do not specify the
+batch_size if your data is in the form of datasets, generators, or
+<code>keras.utils.Sequence</code> instances (since they generate batches).</p></td>
+    </tr>
+    <tr>
+      <th>steps</th>
+      <td><p>Integer or <code>NULL</code>. Total number of steps (batches of samples)
+When training with input tensors such as TensorFlow data tensors, the
+default <code>NULL</code> is equal to the number of samples in your dataset divided by
+the batch size, or <code>1</code> if that cannot be determined. If x is a
+<code>tf.data.Dataset</code>, and <code>steps</code> is <code>NULL</code>, the epoch will run until the
+input dataset is exhausted. When passing an infinitely repeating dataset,
+you must specify the steps argument. This argument is not supported with
+array inputs.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>After calling <code>adapt</code> on a layer, a preprocessing layer's state will not
+update during training. In order to make preprocessing layers efficient in
+any distribution context, they are kept constant with respect to any
+compiled <code>tf.Graph</code>s that call the layer. This does not affect the layer use
+when adapting each layer only once, but if you adapt a layer multiple times
+you will need to take care to re-compile any compiled functions as follows:</p><ul>
+<li><p>If you are adding a preprocessing layer to a <code>keras.Model</code>, you need to
+call <code><a href='https://generics.r-lib.org/reference/compile.html'>compile(model)</a></code> after each subsequent call to <code>adapt()</code>.</p></li>
+<li><p>If you are calling a preprocessing layer inside <code><a href='https://rdrr.io/pkg/tfdatasets/man/dataset_map.html'>tfdatasets::dataset_map()</a></code>,
+you should call <code>dataset_map()</code> again on the input <code>tf.data.Dataset</code> after each
+<code>adapt()</code>.</p></li>
+<li><p>If you are using a <code><a href='https://rdrr.io/pkg/tensorflow/man/tf_function.html'>tensorflow::tf_function()</a></code> directly which calls a preprocessing
+layer, you need to call <code>tf_function</code> again on your callable after
+each subsequent call to <code>adapt()</code>.</p></li>
+</ul>
+
+<p><code>keras_model</code> example with multiple adapts:<div class="sourceCode r"></p><pre><span class='va'>layer</span> <span class='op'>&lt;-</span> <span class='fu'><a href='layer_normalization.html'>layer_normalization</a></span><span class='op'>(</span>axis<span class='op'>=</span><span class='cn'>NULL</span><span class='op'>)</span>
+<span class='fu'>adapt</span><span class='op'>(</span><span class='va'>layer</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='keras_model_sequential.html'>keras_model_sequential</a></span><span class='op'>(</span><span class='va'>layer</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>model</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># [1] -1  0  1</span>
+
+<span class='fu'>adapt</span><span class='op'>(</span><span class='va'>layer</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/compile.html'>compile</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>  <span class='co'># This is needed to re-compile model.predict!</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>model</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># [1] 0 1 2</span>
+</pre><p></div></p>
+<p><code>tf.data.Dataset</code> example with multiple adapts:<div class="sourceCode r"></p><pre><span class='va'>layer</span> <span class='op'>&lt;-</span> <span class='fu'><a href='layer_normalization.html'>layer_normalization</a></span><span class='op'>(</span>axis<span class='op'>=</span><span class='cn'>NULL</span><span class='op'>)</span>
+<span class='fu'>adapt</span><span class='op'>(</span><span class='va'>layer</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>input_ds</span> <span class='op'>&lt;-</span> <span class='fu'>tfdatasets</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tfdatasets/man/range_dataset.html'>range_dataset</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>normalized_ds</span> <span class='op'>&lt;-</span> <span class='va'>input_ds</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>tfdatasets</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tfdatasets/man/dataset_map.html'>dataset_map</a></span><span class='op'>(</span><span class='va'>layer</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='fu'>reticulate</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/reticulate/man/iterate.html'>iterate</a></span><span class='op'>(</span><span class='va'>normalized_ds</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># List of 3</span>
+<span class='co'>#  $ :tf.Tensor([-1.], shape=(1,), dtype=float32)</span>
+<span class='co'>#  $ :tf.Tensor([0.], shape=(1,), dtype=float32)</span>
+<span class='co'>#  $ :tf.Tensor([1.], shape=(1,), dtype=float32)</span>
+<span class='fu'>adapt</span><span class='op'>(</span><span class='va'>layer</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>normalized_ds</span> <span class='op'>&lt;-</span> <span class='va'>input_ds</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>tfdatasets</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tfdatasets/man/dataset_map.html'>dataset_map</a></span><span class='op'>(</span><span class='va'>layer</span><span class='op'>)</span> <span class='co'># Re-map over the input dataset.</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='fu'>reticulate</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/reticulate/man/iterate.html'>iterate</a></span><span class='op'>(</span><span class='va'>normalized_ds</span><span class='op'>$</span><span class='fu'>as_numpy_iterator</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># List of 3</span>
+<span class='co'>#  $ : num [1(1d)] -1</span>
+<span class='co'>#  $ : num [1(1d)] 0</span>
+<span class='co'>#  $ : num [1(1d)] 1</span>
+</pre><p></div></p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'>
+<ul>
+<li><p><a href='https://www.tensorflow.org/guide/keras/preprocessing_layers#the_adapt_method'>https://www.tensorflow.org/guide/keras/preprocessing_layers#the_adapt_method</a></p></li>
+<li><p><a href='https://keras.io/guides/preprocessing_layers/#the-adapt-method'>https://keras.io/guides/preprocessing_layers/#the-adapt-method</a></p></li>
+</ul>
+</div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

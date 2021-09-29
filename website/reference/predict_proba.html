@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0.9001</span>
       </span>
     </div>
 
@@ -127,13 +127,19 @@
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">Guides (New for TF 2.6)</li>
     <li>
-      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+      <a href="../articles/new-guides/python_subclasses.html">Python Subclasses</a>
     </li>
     <li>
-      <a href="../articles/guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
+      <a href="../articles/new-guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
     </li>
     <li>
-      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+      <a href="../articles/new-guides/customizing_what_happens_in_fit.html">Customizing What Happens in Fit</a>
+    </li>
+    <li>
+      <a href="../articles/new-guides/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Using Keras</li>
@@ -271,11 +277,11 @@ samples in your dataset divided by the batch size.</p></td>
 <p><code>predict_classes()</code>:</p><ul>
 <li><p>If your model does multi-class classification:
 (e.g. if it uses a <code>softmax</code> last-layer activation).</p></li>
-</ul><p><div class="r"></p><pre>     <span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='k_argmax.html'>k_argmax</a></span><span class='op'>(</span><span class='op'>)</span>
+</ul><p><div class="sourceCode r"></p><pre>     <span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='k_argmax.html'>k_argmax</a></span><span class='op'>(</span><span class='op'>)</span>
 </pre><p></div></p><ul>
 <li><p>if your model does binary classification
 (e.g. if it uses a <code>sigmoid</code> last-layer activation).</p></li>
-</ul><p><div class="r"></p><pre>     <span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>`&gt;`</span><span class='op'>(</span><span class='fl'>0.5</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='k_cast.html'>k_cast</a></span><span class='op'>(</span><span class='st'>"int32"</span><span class='op'>)</span>
+</ul><p><div class="sourceCode r"></p><pre>     <span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>`&gt;`</span><span class='op'>(</span><span class='fl'>0.5</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='k_cast.html'>k_cast</a></span><span class='op'>(</span><span class='st'>"int32"</span><span class='op'>)</span>
 </pre><p></div></p>
 <p>The input samples are processed batch by batch.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>

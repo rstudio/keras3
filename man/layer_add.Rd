@@ -20,10 +20,6 @@ It takes as input a list of tensors, all of the same shape, and returns a
 single tensor (also of the same shape).
 }
 \seealso{
-
-
-
-
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/add}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Add}

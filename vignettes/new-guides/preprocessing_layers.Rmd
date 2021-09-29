@@ -19,6 +19,10 @@ type: docs
 repo: https://github.com/rstudio/keras
 ---
 
+```{r, include=FALSE}
+knitr::opts_chunk$set(comment = NA, eval = FALSE)
+```
+
 ```{r}
 library(tensorflow)
 library(keras)

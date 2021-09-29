@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0.9001</span>
       </span>
     </div>
 
@@ -126,13 +126,19 @@
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">Guides (New for TF 2.6)</li>
     <li>
-      <a href="../articles/python_subclasses.html">Python Subclasses</a>
+      <a href="../articles/new-guides/python_subclasses.html">Python Subclasses</a>
     </li>
     <li>
-      <a href="../articles/guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
+      <a href="../articles/new-guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
     </li>
     <li>
-      <a href="../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+      <a href="../articles/new-guides/customizing_what_happens_in_fit.html">Customizing What Happens in Fit</a>
+    </li>
+    <li>
+      <a href="../articles/new-guides/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    </li>
+    <li>
+      <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Using Keras</li>
@@ -967,6 +973,160 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
+          <h2 id="section-image-preprocessing-layers" class="hasAnchor"><a href="#section-image-preprocessing-layers" class="anchor"></a>Image Preprocessing Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_resizing.html">layer_resizing()</a></code> </p>
+        </td>
+        <td><p>Image resizing layer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_rescaling.html">layer_rescaling()</a></code> </p>
+        </td>
+        <td><p>Multiply inputs by <code>scale</code> and adds <code>offset</code></p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_center_crop.html">layer_center_crop()</a></code> </p>
+        </td>
+        <td><p>Crop the central portion of the images to target height and width</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-image-augmentation-layers" class="hasAnchor"><a href="#section-image-augmentation-layers" class="anchor"></a>Image Augmentation Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_random_contrast.html">layer_random_contrast()</a></code> </p>
+        </td>
+        <td><p>Adjust the contrast of an image or images by a random factor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_random_crop.html">layer_random_crop()</a></code> </p>
+        </td>
+        <td><p>Randomly crop the images to target height and width</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_random_flip.html">layer_random_flip()</a></code> </p>
+        </td>
+        <td><p>Randomly flip each image horizontally and vertically</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_random_height.html">layer_random_height()</a></code> </p>
+        </td>
+        <td><p>Randomly vary the height of a batch of images during training</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_random_rotation.html">layer_random_rotation()</a></code> </p>
+        </td>
+        <td><p>Randomly rotate each image</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_random_translation.html">layer_random_translation()</a></code> </p>
+        </td>
+        <td><p>Randomly translate each image during training</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_random_width.html">layer_random_width()</a></code> </p>
+        </td>
+        <td><p>Randomly vary the width of a batch of images during training</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_random_zoom.html">layer_random_zoom()</a></code> </p>
+        </td>
+        <td><p>A preprocessing layer which randomly zooms images during training.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-categorical-features-preprocessing" class="hasAnchor"><a href="#section-categorical-features-preprocessing" class="anchor"></a>Categorical Features Preprocessing</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_category_encoding.html">layer_category_encoding()</a></code> </p>
+        </td>
+        <td><p>A preprocessing layer which encodes integer features.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_hashing.html">layer_hashing()</a></code> </p>
+        </td>
+        <td><p>Implements categorical feature hashing, also known as "hashing trick"</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_integer_lookup.html">layer_integer_lookup()</a></code> </p>
+        </td>
+        <td><p>A preprocessing layer which maps integer features to contiguous ranges.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_string_lookup.html">layer_string_lookup()</a></code> </p>
+        </td>
+        <td><p>A preprocessing layer which maps string features to integer indices.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-numerical-features-preprocessing" class="hasAnchor"><a href="#section-numerical-features-preprocessing" class="anchor"></a>Numerical Features Preprocessing</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_normalization.html">layer_normalization()</a></code> </p>
+        </td>
+        <td><p>A preprocessing layer which normalizes continuous features.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_discretization.html">layer_discretization()</a></code> </p>
+        </td>
+        <td><p>A preprocessing layer which buckets continuous features by ranges.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
           <h2 id="section-attention-layers" class="hasAnchor"><a href="#section-attention-layers" class="anchor"></a>Attention Layers</h2>
           <p class="section-desc"></p>
         </th>
@@ -1414,27 +1574,15 @@ sequences.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="layer_text_vectorization.html">layer_text_vectorization()</a></code> </p>
+          <p><code><a href="layer_text_vectorization.html">layer_text_vectorization()</a></code> <code><a href="layer_text_vectorization.html">get_vocabulary()</a></code> <code><a href="layer_text_vectorization.html">set_vocabulary()</a></code> </p>
         </td>
-        <td><p>Text vectorization layer</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="set_vocabulary.html">set_vocabulary()</a></code> </p>
-        </td>
-        <td><p>Sets vocabulary (and optionally document frequency) data for the layer</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_vocabulary.html">get_vocabulary()</a></code> </p>
-        </td>
-        <td><p>Get the vocabulary for text vectorization layers</p></td>
+        <td><p>A preprocessing layer which maps text features to integer sequences.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="adapt.html">adapt()</a></code> </p>
         </td>
-        <td><p>Fits the state of the preprocessing layer to the data being passed.</p></td>
+        <td><p>Fits the state of the preprocessing layer to the data being passed</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -1839,7 +1987,7 @@ augmented/normalized data.</p></td>
         <td>
           <p><code><a href="install_keras.html">install_keras()</a></code> </p>
         </td>
-        <td><p>Install TensorFlow and Keras, including all python dependencies</p></td>
+        <td><p>Install TensorFlow and Keras, including all Python dependencies</p></td>
       </tr><tr>
         
         <td>

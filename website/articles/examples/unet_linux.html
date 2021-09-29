@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0.9001</span>
       </span>
     </div>
 
@@ -84,13 +84,19 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Guides (New for TF 2.6)</li>
     <li>
-      <a href="../../articles/python_subclasses.html">Python Subclasses</a>
+      <a href="../../articles/new-guides/python_subclasses.html">Python Subclasses</a>
     </li>
     <li>
-      <a href="../../articles/guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
+      <a href="../../articles/new-guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
     </li>
     <li>
-      <a href="../../articles/guides/customizing_what_happens_in_fit.html">Customizing what happens in fit</a>
+      <a href="../../articles/new-guides/customizing_what_happens_in_fit.html">Customizing What Happens in Fit</a>
+    </li>
+    <li>
+      <a href="../../articles/new-guides/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    </li>
+    <li>
+      <a href="../../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
@@ -176,7 +182,7 @@
 
       
 
-      </header><script src="unet_linux_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>unet_linux</h1>
@@ -208,7 +214,7 @@
 <span class="co">#` You can download the data from https://www.kaggle.com/c/carvana-image-masking-challenge</span>
 
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">magick</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/magick/">magick</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">abind</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/reticulate">reticulate</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">doMC</span><span class="op">)</span>
@@ -401,11 +407,11 @@
                        <span class="va">mask_file</span>,
                        <span class="va">target_width</span> <span class="op">=</span> <span class="fl">128</span>, 
                        <span class="va">target_height</span> <span class="op">=</span> <span class="fl">128</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu">image_read</span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span>
-    <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu">image_scale</span><span class="op">(</span><span class="va">img</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">target_width</span>, <span class="st">"x"</span>, <span class="va">target_height</span>, <span class="st">"!"</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html">image_read</a></span><span class="op">(</span><span class="va">image_file</span><span class="op">)</span>
+    <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/transform.html">image_scale</a></span><span class="op">(</span><span class="va">img</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">target_width</span>, <span class="st">"x"</span>, <span class="va">target_height</span>, <span class="st">"!"</span><span class="op">)</span><span class="op">)</span>
     
-    <span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu">image_read</span><span class="op">(</span><span class="va">mask_file</span><span class="op">)</span>
-    <span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu">image_scale</span><span class="op">(</span><span class="va">mask</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">target_width</span>, <span class="st">"x"</span>, <span class="va">target_height</span>, <span class="st">"!"</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html">image_read</a></span><span class="op">(</span><span class="va">mask_file</span><span class="op">)</span>
+    <span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/transform.html">image_scale</a></span><span class="op">(</span><span class="va">mask</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">target_width</span>, <span class="st">"x"</span>, <span class="va">target_height</span>, <span class="st">"!"</span><span class="op">)</span><span class="op">)</span>
     <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>img <span class="op">=</span> <span class="va">img</span>, mask <span class="op">=</span> <span class="va">mask</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
 
@@ -427,7 +433,7 @@
                        <span class="va">hue_shift_lim</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, 
                        <span class="va">hue_shift_lim</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>
     
-    <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu">image_modulate</span><span class="op">(</span><span class="va">img</span>, 
+    <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/color.html">image_modulate</a></span><span class="op">(</span><span class="va">img</span>, 
                           brightness <span class="op">=</span> <span class="va">brightness_shift</span>, 
                           saturation <span class="op">=</span>  <span class="va">saturation_shift</span>, 
                           hue <span class="op">=</span> <span class="va">hue_shift</span><span class="op">)</span>

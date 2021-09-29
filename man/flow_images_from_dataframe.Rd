@@ -115,7 +115,7 @@ augmented/normalized data.
 Yields batches indefinitely, in an infinite loop.
 }
 \note{
-This functions requires that \code{pandas} (python module) is installed in the
+This functions requires that \code{pandas} (Python module) is installed in the
 same environment as \code{tensorflow} and \code{keras}.
 
 If you are using \code{r-tensorflow} (the default environment) you can install
