@@ -119,7 +119,7 @@ sprintf("Features std: %.2f", sd(normalized_data))
 
 
 `adapt()` takes either an array or a
-`tf.data.Dataset`. In the case of `layer_string_lookup()` and
+`tf_dataset`. In the case of `layer_string_lookup()` and
 `layer_text_vectorization()`, you can also pass a character vector:
 
 
@@ -186,7 +186,7 @@ If you're training on GPU, this is the best option for the
 `layer_normalization()` layer, and for all image preprocessing and data
 augmentation layers.
 
-**Option 2:** apply it to your `tf.data.Dataset`, so as to obtain a dataset that yields
+**Option 2:** apply it to your `tf_dataset`, so as to obtain a dataset that yields
 batches of preprocessed data, like this:
 
 ```{r, eval = FALSE}
@@ -230,7 +230,7 @@ or to `[0, 1]`, etc. This is especially powerful if you're exporting your model
 to another runtime, such as TensorFlow.js: you won't have to reimplement your
 preprocessing pipeline in JavaScript.
 
-If you initially put your preprocessing layers in your `tf.data` pipeline,
+If you initially put your preprocessing layers in your `tf_dataset` pipeline,
 you can export an inference model that packages the preprocessing.
 Simply instantiate a new model that chains
 your preprocessing layers and your training model:
@@ -268,7 +268,7 @@ c(c(x_train, y_train), ...) %<-% dataset_cifar10()
 input_shape <- dim(x_train)[-1] # drop batch dim
 classes <- 10
 
-# Create a tf.data pipeline of augmented images (and their labels)
+# Create a tf_dataset pipeline of augmented images (and their labels)
 train_dataset <- tensor_slices_dataset(list(x_train, y_train)) %>%
   dataset_batch(16) %>%
   dataset_map( ~ list(data_augmentation(.x), .y)) # see ?purrr::map to learn about ~ notation
