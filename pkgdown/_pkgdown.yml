@@ -41,6 +41,9 @@ navbar:
         - text: "Writing Your Own Callbacks"
           href: articles/new-guides/writing_your_own_callbacks.html
 
+        - text: "Working with Preprocessing Layers"
+          href: articles/new-guides/preprocessing_layers.html
+
         - text: "--------------------------"
         - text: "Using Keras"
         - text: "Guide to Keras Basics"
