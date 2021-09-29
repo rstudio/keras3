@@ -87,7 +87,7 @@ are only active during training.
 - `layer_random_contrast()`
 
 
-## The `adapt()` method
+## The `adapt()` function
 
 Some preprocessing layers have an internal state that can be computed based on
 a sample of the training data. The list of stateful preprocessing layers is:
@@ -102,12 +102,12 @@ Crucially, these layers are **non-trainable**. Their state is not set during tra
 must be set **before training**, either by initializing them from a precomputed constant,
 or by "adapting" them on data.
 
-You set the state of a preprocessing layer by exposing it to training data, via the
-`adapt()` method:
+You set the state of a preprocessing layer by exposing it to training data, via
+`adapt()`:
 
 ```{r}
-data <- rbind(c(0.1, 0.2, 0.3), 
-              c(0.8, 0.9, 1.0), 
+data <- rbind(c(0.1, 0.2, 0.3),
+              c(0.8, 0.9, 1.0),
               c(1.5, 1.6, 1.7))
 layer <- layer_normalization()
 adapt(layer, data)
@@ -118,22 +118,25 @@ sprintf("Features std: %.2f", sd(normalized_data))
 ```
 
 
-The `adapt()` method takes either an R array, numpy array, or a
-`tf.data.Dataset` object. In the case of `layer_string_lookup()` and
+`adapt()` takes either an array or a
+`tf.data.Dataset`. In the case of `layer_string_lookup()` and
 `layer_text_vectorization()`, you can also pass a character vector:
 
 
 ```{r}
 data <- c(
-  "ξεῖν᾽, ἦ τοι μὲν ὄνειροι ἀμήχανοι ἀκριτόμυθοι",
-  "γίγνοντ᾽, οὐδέ τι πάντα τελείεται ἀνθρώποισι.",
-  "δοιαὶ γάρ τε πύλαι ἀμενηνῶν εἰσὶν ὀνείρων:",
-  "αἱ μὲν γὰρ κεράεσσι τετεύχαται, αἱ δ᾽ ἐλέφαντι:",
-  "τῶν οἳ μέν κ᾽ ἔλθωσι διὰ πριστοῦ ἐλέφαντος,",
-  "οἵ ῥ᾽ ἐλεφαίρονται, ἔπε᾽ ἀκράαντα φέροντες:",
-  "οἱ δὲ διὰ ξεστῶν κεράων ἔλθωσι θύραζε,",
-  "οἵ ῥ᾽ ἔτυμα κραίνουσι, βροτῶν ὅτε κέν τις ἴδηται."
+  "Congratulations!",
+  "Today is your day.",
+  "You're off to Great Places!",
+  "You're off and away!",
+  "You have brains in your head.",
+  "You have feet in your shoes.",
+  "You can steer yourself",
+  "any direction you choose.",
+  "You're on your own. And you know what you know.",
+  "And YOU are the one who'll decide where to go."
 )
+
 layer = layer_text_vectorization()
 layer %>% adapt(data)
 vectorized_text <- layer(data)
@@ -170,7 +173,7 @@ There are two ways you could be using preprocessing layers:
 
 ```{r, eval = FALSE}
 input <- layer_input(shape = input_shape)
-output <- inputs %>% 
+output <- input %>%
   preprocessing_layer() %>%
   rest_of_the_model()
 model <- keras_model(input, output)
@@ -189,7 +192,7 @@ batches of preprocessed data, like this:
 ```{r, eval = FALSE}
 library(tfdatasets)
 dataset <- ... # define dataset
-dataset <- dataset %>% 
+dataset <- dataset %>%
   dataset_map(function(x, y) list(preprocessing_layer(x), y))
 ```
 
@@ -200,7 +203,7 @@ efficiently in parallel with training:
 
 ```{r, eval = FALSE}
 dataset <- dataset %>%
-  dataset_map(function(x, y) list(preprocessing_layer(x), y)) %>% 
+  dataset_map(function(x, y) list(preprocessing_layer(x), y)) %>%
   dataset_prefetch()
 model %>% fit(dataset)
 ```
@@ -208,10 +211,6 @@ model %>% fit(dataset)
 This is the best option for `layer_text_vectorization()`, and all structured
 data preprocessing layers. It can also be a good option if you're training on
 CPU and you use image preprocessing layers.
-
-**When running on TPU, you should always place preprocessing layers in the `tf.data` pipeline**
-(with the exception of `layer_normalization()` and `layer_rescaling`, which run
-fine on TPU and are commonly used as the first layer is an image model).
 
 
 ## Benefits of doing preprocessing inside the model at inference time
@@ -226,7 +225,7 @@ your model without having to be aware of how each feature is expected to be
 encoded & normalized. Your inference model will be able to process raw images or
 raw structured data, and will not require users of the model to be aware of the
 details of e.g. the tokenization scheme used for text, the indexing scheme used
-for categorical features, whether image pixel values are normalized to `[-1, +1]` 
+for categorical features, whether image pixel values are normalized to `[-1, +1]`
 or to `[0, 1]`, etc. This is especially powerful if you're exporting your model
 to another runtime, such as TensorFlow.js: you won't have to reimplement your
 preprocessing pipeline in JavaScript.
@@ -257,7 +256,7 @@ library(keras)
 library(tfdatasets)
 
 # Create a data augmentation stage with horizontal flipping, rotations, zooms
-data_augmentation <- 
+data_augmentation <-
   keras_model_sequential() %>%
   layer_random_flip("horizontal") %>%
   layer_random_rotation(0.1) %>%
@@ -281,7 +280,7 @@ resnet <- application_resnet50(weights = NULL,
                                classes = classes)
 
 input <- layer_input(shape = input_shape)
-output <- input %>% 
+output <- input %>%
   layer_rescaling(1 / 255) %>%   # Rescale inputs
   resnet()
 
@@ -301,9 +300,9 @@ You can see a similar setup in action in the example
 library(tensorflow)
 library(keras)
 c(c(x_train, y_train), ...) %<-% dataset_cifar10()
-x_train <- x_train %>% 
+x_train <- x_train %>%
   array_reshape(c(dim(x_train)[1], -1L)) # flatten each case
-  
+
 input_shape <- dim(x_train)[-1] # keras layers automatically add the batch dim
 classes <- 10
 
@@ -313,16 +312,16 @@ normalizer %>% adapt(x_train)
 
 # Create a model that include the normalization layer
 input <- layer_input(shape = input_shape)
-output <- input %>% 
-  normalizer() %>% 
-  layer_dense(classes, activation = "softmax") 
+output <- input %>%
+  normalizer() %>%
+  layer_dense(classes, activation = "softmax")
 
 model <- keras_model(input, output) %>%
-  compile(optimizer = "adam", 
+  compile(optimizer = "adam",
           loss = "sparse_categorical_crossentropy")
 
 # Train the model
-model %>% 
+model %>%
   fit(x_train, y_train)
 ```
 
@@ -331,7 +330,7 @@ model %>%
 
 ```{r}
 # Define some toy data
-data <- as_tensor(c("a", "b", "c", "b", "c", "a")) %>% 
+data <- as_tensor(c("a", "b", "c", "b", "c", "a")) %>%
   k_reshape(c(-1, 1)) # reshape into matrix with shape: (6, 1)
 
 # Use layer_string_lookup() to build an index of the feature values and encode output.
@@ -396,8 +395,8 @@ data <- k_random_uniform(shape = c(10000, 1), dtype = "int64")
 hasher <- layer_hashing(num_bins = 64, salt = 1337)
 
 # Use the CategoryEncoding layer to multi-hot encode the hashed values
-encoder  <-  layer_category_encoding(num_tokens=64, output_mode="multi_hot")
-encoded_data  <-  encoder(hasher(data))
+encoder <- layer_category_encoding(num_tokens=64, output_mode="multi_hot")
+encoded_data <- encoder(hasher(data))
 print(encoded_data$shape)
 ```
 
@@ -425,7 +424,7 @@ text_vectorizer <- layer_text_vectorization(output_mode="int")
 text_vectorizer %>% adapt(adapt_data)
 
 # Try out the layer
-cat("Encoded text:\n", 
+cat("Encoded text:\n",
     as.array(text_vectorizer("The Brain is deeper than the sea")))
 
 # Create a simple model
@@ -434,20 +433,20 @@ input = layer_input(shape(NULL), dtype="int64")
 output <- input %>%
   layer_embedding(input_dim = text_vectorizer$vocabulary_size(),
                   output_dim = 16) %>%
-  layer_gru(8) %>% 
+  layer_gru(8) %>%
   layer_dense(1)
 
 model <- keras_model(input, output)
 
 # Create a labeled dataset (which includes unknown tokens)
 train_dataset <- tensor_slices_dataset(list(
-    c("The Brain is deeper than the sea", "for if they are held Blue to Blue"), 
+    c("The Brain is deeper than the sea", "for if they are held Blue to Blue"),
     c(1L, 0L)
 ))
 
 # Preprocess the string inputs, turning them into int sequences
-train_dataset <- train_dataset %>% 
-  dataset_batch(2) %>% 
+train_dataset <- train_dataset %>%
+  dataset_batch(2) %>%
   dataset_map(~list(text_vectorizer(.x), .y))
 
 # Train the model on the int sequences
@@ -458,8 +457,8 @@ model %>%
 
 # For inference, you can export a model that accepts strings as input
 input <- layer_input(shape = 1, dtype="string")
-output <- input %>% 
-  text_vectorizer() %>% 
+output <- input %>%
+  text_vectorizer() %>%
   model()
 
 end_to_end_model <- keras_model(input, output)
@@ -514,26 +513,26 @@ model <- keras_model(input, output)
 
 # Create a labeled dataset (which includes unknown tokens)
 train_dataset = tensor_slices_dataset(list(
-    c("The Brain is deeper than the sea", "for if they are held Blue to Blue"), 
+    c("The Brain is deeper than the sea", "for if they are held Blue to Blue"),
     c(1L, 0L)
 ))
 
 # Preprocess the string inputs, turning them into int sequences
-train_dataset <- train_dataset %>% 
-  dataset_batch(2) %>% 
+train_dataset <- train_dataset %>%
+  dataset_batch(2) %>%
   dataset_map(~list(text_vectorizer(.x), .y))
 
 # Train the model on the int sequences
 cat("Training model...\n")
-model %>% 
-  compile(optimizer="rmsprop", loss="mse") %>% 
+model %>%
+  compile(optimizer="rmsprop", loss="mse") %>%
   fit(train_dataset)
 
 # For inference, you can export a model that accepts strings as input
 input <- layer_input(shape = 1, dtype="string")
 
-output <- input %>% 
-  text_vectorizer() %>% 
+output <- input %>%
+  text_vectorizer() %>%
   model()
 
 end_to_end_model = keras_model(input, output)
@@ -578,27 +577,27 @@ model <- keras_model(input, output)
 
 # Create a labeled dataset (which includes unknown tokens)
 train_dataset = tensor_slices_dataset(list(
-    c("The Brain is deeper than the sea", "for if they are held Blue to Blue"), 
+    c("The Brain is deeper than the sea", "for if they are held Blue to Blue"),
     c(1L, 0L)
 ))
 
 # Preprocess the string inputs, turning them into int sequences
-train_dataset <- train_dataset %>% 
-  dataset_batch(2) %>% 
+train_dataset <- train_dataset %>%
+  dataset_batch(2) %>%
   dataset_map(~list(text_vectorizer(.x), .y))
 
 
 # Train the model on the int sequences
 cat("Training model...")
-model %>% 
-  compile(optimizer="rmsprop", loss="mse") %>% 
+model %>%
+  compile(optimizer="rmsprop", loss="mse") %>%
   fit(train_dataset)
 
 # For inference, you can export a model that accepts strings as input
 input <- layer_input(shape = 1, dtype="string")
 
-output <- input %>% 
-  text_vectorizer() %>% 
+output <- input %>%
+  text_vectorizer() %>%
   model()
 
 end_to_end_model = keras_model(input, output)
@@ -625,12 +624,3 @@ Instead, pre-compute your vocabulary in advance
 (you could use Apache Beam or TF Transform for this)
 and store it in a file. Then load the vocabulary into the layer at construction
 time by passing the filepath as the `vocabulary` argument.
-
-
-### Using lookup layers on a TPU pod or with `ParameterServerStrategy`.
-
-There is an outstanding issue that causes performance to degrade when using a
-`layer_text_vectorization()`, `layer_string_lookup()`, or
-`layer_integer_lookup()` layer while training on a TPU pod or on multiple
-machines via `ParameterServerStrategy`. This is slated to be fixed in TensorFlow
-2.7.
