@@ -62,6 +62,10 @@ tensorflow::export_savedmodel
 #' @export
 tensorflow::shape
 
+#' @importFrom tensorflow as_tensor
+#' @export
+tensorflow::as_tensor
+
 #' @importFrom tfruns flags
 #' @export
 tfruns::flags

@@ -1,4 +1,4 @@
-#' Install TensorFlow and Keras, including all python dependencies
+#' Install TensorFlow and Keras, including all Python dependencies
 #'
 #' This function will install Tensorflow and all Keras dependencies. This is a
 #' thin wrapper around [`tensorflow::install_tensorflow()`], with the only
@@ -27,7 +27,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
                           ...) {
 
   pkgs <- default_extra_packages(tensorflow)
-  if(!is.null(extra_packages))
+  if(!is.null(extra_packages)) # user supplied package version constraints take precedence
     pkgs[gsub("[=<>~]{1,2}[0-9.]+$", "", extra_packages)] <- extra_packages
 
   if(tensorflow == "default") # may be different from tensorflow

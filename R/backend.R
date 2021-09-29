@@ -2160,7 +2160,10 @@ k_random_normal_variable <- function(shape, mean, scale, dtype = NULL, name = NU
 #'
 #' @export
 k_random_uniform <- function(shape, minval = 0.0, maxval = 1.0, dtype = NULL, seed = NULL) {
-  # TODO: if dtype is int, then minval/maxval should be cast to int
+  if(!is.null(dtype)) {
+    minval <- as_tensor(minval, dtype = dtype)
+    maxval <- as_tensor(maxval, dtype = dtype)
+  }
   keras$backend$random_uniform(
     shape = backend_normalize_shape(shape),
     minval = minval,

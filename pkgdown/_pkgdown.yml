@@ -28,12 +28,22 @@ navbar:
     - text: "Articles"
       menu:
         - text: "Guides (New for TF 2.6)"
+
         - text: "Python Subclasses"
-          href: articles/python_subclasses.html
+          href: articles/new-guides/python_subclasses.html
+
         - text: "Making New Layers and Models via Subclassing"
-          href: articles/guides/making_new_layers_and_models_via_subclassing.html
-        - text: "Customizing what happens in fit"
-          href: articles/guides/customizing_what_happens_in_fit.html
+          href: articles/new-guides/making_new_layers_and_models_via_subclassing.html
+
+        - text: "Customizing What Happens in Fit"
+          href: articles/new-guides/customizing_what_happens_in_fit.html
+
+        - text: "Writing Your Own Callbacks"
+          href: articles/new-guides/writing_your_own_callbacks.html
+
+        - text: "Working with Preprocessing Layers"
+          href: articles/new-guides/preprocessing_layers.html
+
         - text: "--------------------------"
         - text: "Using Keras"
         - text: "Guide to Keras Basics"

@@ -554,12 +554,12 @@ You can pass the `version` argument to check for a specific version of Keras.
 
 ### Keras Module
 
-Another consideration is gaining access to the underlying Keras python module. You might need to do this if you require lower level access to Keras than is provided for by the Keras R package. 
+Another consideration is gaining access to the underlying Keras Python module. You might need to do this if you require lower level access to Keras than is provided for by the Keras R package. 
 
 Since the Keras R package can bind to multiple different implementations of Keras (either the original Keras or the TensorFlow implementation of Keras), you should use the `keras::implementation()` function to obtain access to the correct python module. You can use this function within the `.onLoad` function of a package to provide global access to the module within your package. For example:
 
 ```{r}
-# Keras python module
+# Keras Python module
 keras <- NULL
 
 # Obtain a reference to the module from the keras R package

@@ -70,7 +70,7 @@ y <- linear_layer(x)
 print(y)
 ```
 
-`Linear` behaves similarly to a layer present in the python interface to keras
+`Linear` behaves similarly to a layer present in the Python interface to keras
 (e.g., `keras$layers$Dense`).
 
 However, one additional step is needed to make it behave like the builtin layers
@@ -937,19 +937,19 @@ For more information, make sure to read the [Functional API guide](/guides/funct
 
 ## Defining custom layers and models in an R package
 
-Unfortunately you can't use anything that creates references to python objects, at the top-level of an R package.
+Unfortunately you can't use anything that creates references to Python objects, at the top-level of an R package.
 
 Here is why: when you build an R package, all the R files in the `R/` directory get sourced
 in an R environment (the package namespace), and then that environment is saved
 as part of the package bundle. Loading the package means restoring the saved R
 environment. This means that the R code only gets sourced once, at build time.
-If you create references to external objects (e.g., python objects) at package
+If you create references to external objects (e.g., Python objects) at package
 build time, they will be NULL pointers when the package is loaded, because the
 external objects they pointed to at build time no longer exist at load time.
 
-The solution is to delay creating references to python objects until run time.
+The solution is to delay creating references to Python objects until run time.
 Fortunately, `%py_class%`, `Layer()`, and `create_layer_wrapper(R6Class(...))`
-are all lazy about initializing the python reference, so they are safe to define
+are all lazy about initializing the Python reference, so they are safe to define
 and export in an R package.
 
 If you're writing an R package that uses keras and reticulate,

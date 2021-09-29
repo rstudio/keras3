@@ -423,32 +423,45 @@ normalize_path <- function(path) {
 }
 
 
-normalize_shape <- function (x) {
+
+# Helper function to coerce shape arguments to tuple
+# tf$reshape()/k_reshape() doesn't accept a tf.TensorShape object
+normalize_shape <- function(shape) {
+
   # reflect NULL back
-  if (is.null(x))
-    return(x)
-  else
-    as_shape(x)
-}
+  if (is.null(shape))
+    return(shape)
 
-as_shape <- function (x) {
-
-  if (inherits(x, "tensorflow.python.framework.tensor_shape.TensorShape"))
-    return(x)
-
-  if (is.null(x))
-    dims <- NULL
-  else
-    dims <- lapply(x, function(d) {
-      if (is.null(d) || isTRUE(is.na(d)))
-        NULL
+  # if it's a list or a numeric vector then convert to integer
+  if (is.list(shape) || is.numeric(shape)) {
+    shape <- lapply(shape, function(value) {
+      if (!is.null(value))
+        as.integer(value)
       else
-        as.integer(d)
+        NULL
     })
+  }
 
-  tensorflow::tf$TensorShape(dims)
+  if(inherits(shape, "tensorflow.python.framework.tensor_shape.TensorShape"))
+    shape <- as.list(shape$as_list()) # unpack for tuple()
+
+  # coerce to tuple so it's iterable
+  tuple(shape)
 }
 
+# @export
+# format.python.builtin.object <- function(x, ...) {
+#   capture.output(print(x, ...))
+# }
+
+as_shape <- function(x) {
+  lapply(x, function(d) {
+    if (is.null(d))
+      NULL
+    else
+      as.integer(d)
+  })
+}
 
 #' Create a Keras Layer
 #'

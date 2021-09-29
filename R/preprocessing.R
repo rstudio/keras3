@@ -213,10 +213,10 @@ text_one_hot <- function(input_text, n, filters = '!"#$%&()*+,-./:;<=>?@[\\]^_`{
 #'
 #' @param text Input text (string).
 #' @param n Dimension of the hashing space.
-#' @param hash_function if `NULL` uses python `hash` function, can be 'md5' or
-#'   any function that takes in input a string and returns a int. Note that
+#' @param hash_function if `NULL` uses the Python `hash()` function. Otherwise can be `'md5'` or
+#'   any function that takes in input a string and returns an int. Note that
 #'   `hash` is not a stable hashing function, so it is not consistent across
-#'   different runs, while 'md5' is a stable hashing function.
+#'   different runs, while `'md5'` is a stable hashing function.
 #' @param filters Sequence of characters to filter out such as
 #'   punctuation. Default includes basic punctuation, tabs, and newlines.
 #' @param lower Whether to convert the input to lowercase.
@@ -906,7 +906,7 @@ flow_images_from_directory <- function(
 #'   image data, which is useful to use in  `predict_generator()`).
 #'
 #' @note
-#' This functions requires that `pandas` (python module) is installed in the
+#' This functions requires that `pandas` (Python module) is installed in the
 #' same environment as `tensorflow` and `keras`.
 #'
 #' If you are using `r-tensorflow` (the default environment) you can install
@@ -928,7 +928,7 @@ flow_images_from_dataframe <- function(
   interpolation = "nearest", drop_duplicates = NULL) {
 
   if (!reticulate::py_module_available("pandas"))
-    stop("Pandas (python module) must be installed in the same environment as Keras.",
+    stop("Pandas (Python module) must be installed in the same environment as Keras.",
          'Install it using reticulate::virtualenv_install("pandas", envname = "r-tensorflow") ',
          'or reticulate::conda_install("pandas", envname = "r-tensorflow") depending on ',
          'the kind of environment you are using.')

@@ -283,7 +283,7 @@ keras_array <- function(x, dtype = NULL) {
 
 #' Check if Keras is Available
 #'
-#' Probe to see whether the Keras python package is available in the current
+#' Probe to see whether the Keras Python package is available in the current
 #' system environment.
 #'
 #' @param version Minimum required version of Keras (defaults to `NULL`, no
@@ -429,7 +429,7 @@ capture_args <- function(cl, modifiers = NULL, ignore = NULL,
   if("..." %in% fn_arg_nms && !"..." %in% ignore) {
     assert_all_dots_named(envir, cl)
     # this might reorder args by assuming ... are last, but it doesn't matter
-    # since everything is supplied as a keyword arg to the python side anyway
+    # since everything is supplied as a keyword arg to the Python side anyway
     cl2 <- c(cl2, quote(...))
   }
 

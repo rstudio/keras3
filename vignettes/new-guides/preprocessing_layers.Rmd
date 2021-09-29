@@ -1,0 +1,626 @@
+---
+title: Working with preprocessing layers
+author: Francois Chollet, Mark Omernick, Tomasz Kalinowski
+Date created: 2020/07/25
+Last modified: 2021/09/27
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with preprocessing layers}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+menu:
+  main:
+    name: "Working with preprocessing layers"
+    description: Overview of how to leverage preprocessing layers to create end-to-end models.
+    identifier: "preprocessing-layers"
+    parent: "keras-advanced-top"
+    weight: 10
+type: docs
+repo: https://github.com/rstudio/keras
+---
+
+```{r}
+library(tensorflow)
+library(keras)
+```
+
+## Keras preprocessing
+
+The Keras preprocessing layers API allows developers to build Keras-native input
+processing pipelines. These input processing pipelines can be used as
+independent preprocessing code in non-Keras workflows, combined directly with
+Keras models, and exported as part of a Keras SavedModel.
+
+With Keras preprocessing layers, you can build and export models that are truly
+end-to-end: models that accept raw images or raw structured data as input;
+models that handle feature normalization or feature value indexing on their own.
+
+## Available preprocessing layers
+
+### Text preprocessing
+
+- `layer_text_vectorization()`: turns raw strings into an encoded
+  representation that can be read by a `layer_embedding()` or `layer_dense()` layer.
+
+### Numerical features preprocessing
+
+- `layer_normalization()`: performs feature-wise normalization of input features.
+- `layer_discretization()`: turns continuous numerical features
+  into integer categorical features.
+
+### Categorical features preprocessing
+
+- `layer_category_encoding()`: turns integer categorical features
+  into one-hot, multi-hot, or count-based, dense representations.
+- `layer_hashing()`: performs categorical feature hashing, also known as
+  the "hashing trick".
+- `layer_string_lookup()`: turns string categorical values into an encoded
+  representation that can be read by an `Embedding` layer or `Dense` layer.
+- `layer_integer_lookup()`: turns integer categorical values into an
+  encoded representation that can be read by an `Embedding` layer or `Dense`
+  layer.
+
+
+### Image preprocessing
+
+These layers are for standardizing the inputs of an image model.
+
+- `layer_resizing()`: resizes a batch of images to a target size.
+- `layer_rescaling()`: rescales and offsets the values of a batch of
+  images (e.g., going from inputs in the `[0, 255]` range to inputs in the `[0, 1]`
+  range.
+- `layer_center_crop()`: returns a center crop of a batch of images.
+
+### Image data augmentation
+
+These layers apply random augmentation transforms to a batch of images. They
+are only active during training.
+
+- `layer_random_crop()`
+- `layer_random_flip()`
+- `layer_random_flip()`
+- `layer_random_translation()`
+- `layer_random_rotation()`
+- `layer_random_zoom()`
+- `layer_random_height()`
+- `layer_random_width()`
+- `layer_random_contrast()`
+
+
+## The `adapt()` function
+
+Some preprocessing layers have an internal state that can be computed based on
+a sample of the training data. The list of stateful preprocessing layers is:
+
+- `layer_text_vectorization()`: holds a mapping between string tokens and integer indices
+- `layer_string_lookup()` and `layer_integer_lookup()`: hold a mapping between
+  input values and integer indices.
+- `layer_normalization()`: holds the mean and standard deviation of the features.
+- `layer_discretization()`: holds information about value bucket boundaries.
+
+Crucially, these layers are **non-trainable**. Their state is not set during training; it
+must be set **before training**, either by initializing them from a precomputed constant,
+or by "adapting" them on data.
+
+You set the state of a preprocessing layer by exposing it to training data, via
+`adapt()`:
+
+```{r}
+data <- rbind(c(0.1, 0.2, 0.3),
+              c(0.8, 0.9, 1.0),
+              c(1.5, 1.6, 1.7))
+layer <- layer_normalization()
+adapt(layer, data)
+normalized_data <- as.array(layer(data))
+
+sprintf("Features mean: %.2f", mean(normalized_data))
+sprintf("Features std: %.2f", sd(normalized_data))
+```
+
+
+`adapt()` takes either an array or a
+`tf_dataset`. In the case of `layer_string_lookup()` and
+`layer_text_vectorization()`, you can also pass a character vector:
+
+
+```{r}
+data <- c(
+  "Congratulations!",
+  "Today is your day.",
+  "You're off to Great Places!",
+  "You're off and away!",
+  "You have brains in your head.",
+  "You have feet in your shoes.",
+  "You can steer yourself",
+  "any direction you choose.",
+  "You're on your own. And you know what you know.",
+  "And YOU are the one who'll decide where to go."
+)
+
+layer = layer_text_vectorization()
+layer %>% adapt(data)
+vectorized_text <- layer(data)
+print(vectorized_text)
+```
+
+In addition, adaptable layers always expose an option to directly set state via
+constructor arguments or weight assignment. If the intended state values are
+known at layer construction time, or are calculated outside of the `adapt()`
+call, they can be set without relying on the layer's internal computation. For
+instance, if external vocabulary files for the `layer_text_vectorization()`,
+`layer_string_lookup()`, or `layer_integer_lookup()` layers already exist, those
+can be loaded directly into the lookup tables by passing a path to the
+vocabulary file in the layer's constructor arguments.
+
+Here's an example where we instantiate a `layer_string_lookup()` layer with
+precomputed vocabulary:
+
+```{r}
+vocab <- c("a", "b", "c", "d")
+data <- as_tensor(rbind(c("a", "c", "d"),
+                        c("d", "z", "b")))
+layer <- layer_string_lookup(vocabulary=vocab)
+vectorized_data <- layer(data)
+print(vectorized_data)
+```
+
+
+## Preprocessing data before the model or inside the model
+
+There are two ways you could be using preprocessing layers:
+
+**Option 1:** Make them part of the model, like this:
+
+```{r, eval = FALSE}
+input <- layer_input(shape = input_shape)
+output <- input %>%
+  preprocessing_layer() %>%
+  rest_of_the_model()
+model <- keras_model(input, output)
+```
+
+
+With this option, preprocessing will happen on device, synchronously with the
+rest of the model execution, meaning that it will benefit from GPU acceleration.
+If you're training on GPU, this is the best option for the
+`layer_normalization()` layer, and for all image preprocessing and data
+augmentation layers.
+
+**Option 2:** apply it to your `tf_dataset`, so as to obtain a dataset that yields
+batches of preprocessed data, like this:
+
+```{r, eval = FALSE}
+library(tfdatasets)
+dataset <- ... # define dataset
+dataset <- dataset %>%
+  dataset_map(function(x, y) list(preprocessing_layer(x), y))
+```
+
+With this option, your preprocessing will happen on CPU, asynchronously, and
+will be buffered before going into the model. In addition, if you call
+`tfdatasets::dataset_prefetch()` on your dataset, the preprocessing will happen
+efficiently in parallel with training:
+
+```{r, eval = FALSE}
+dataset <- dataset %>%
+  dataset_map(function(x, y) list(preprocessing_layer(x), y)) %>%
+  dataset_prefetch()
+model %>% fit(dataset)
+```
+
+This is the best option for `layer_text_vectorization()`, and all structured
+data preprocessing layers. It can also be a good option if you're training on
+CPU and you use image preprocessing layers.
+
+
+## Benefits of doing preprocessing inside the model at inference time
+
+Even if you go with option 2, you may later want to export an inference-only end-to-end
+model that will include the preprocessing layers. The key benefit to doing this is that
+**it makes your model portable** and it **helps reduce the
+[training/serving skew](https://developers.google.com/machine-learning/guides/rules-of-ml#training-serving_skew)**.
+
+When all data preprocessing is part of the model, other people can load and use
+your model without having to be aware of how each feature is expected to be
+encoded & normalized. Your inference model will be able to process raw images or
+raw structured data, and will not require users of the model to be aware of the
+details of e.g. the tokenization scheme used for text, the indexing scheme used
+for categorical features, whether image pixel values are normalized to `[-1, +1]`
+or to `[0, 1]`, etc. This is especially powerful if you're exporting your model
+to another runtime, such as TensorFlow.js: you won't have to reimplement your
+preprocessing pipeline in JavaScript.
+
+If you initially put your preprocessing layers in your `tf_dataset` pipeline,
+you can export an inference model that packages the preprocessing.
+Simply instantiate a new model that chains
+your preprocessing layers and your training model:
+
+```{r, eval = FALSE}
+input <- layer_input(shape = input_shape)
+output <- input %>%
+  preprocessing_layer(input) %>%
+  training_model()
+inference_model <- keras_model(input, output)
+```
+
+
+## Quick recipes
+
+### Image data augmentation
+
+Note that image data augmentation layers are only active during training (similar to
+the `layer_dropout()` layer).
+
+```{r}
+library(keras)
+library(tfdatasets)
+
+# Create a data augmentation stage with horizontal flipping, rotations, zooms
+data_augmentation <-
+  keras_model_sequential() %>%
+  layer_random_flip("horizontal") %>%
+  layer_random_rotation(0.1) %>%
+  layer_random_zoom(0.1)
+
+
+# Load some data
+c(c(x_train, y_train), ...) %<-% dataset_cifar10()
+input_shape <- dim(x_train)[-1] # drop batch dim
+classes <- 10
+
+# Create a tf_dataset pipeline of augmented images (and their labels)
+train_dataset <- tensor_slices_dataset(list(x_train, y_train)) %>%
+  dataset_batch(16) %>%
+  dataset_map( ~ list(data_augmentation(.x), .y)) # see ?purrr::map to learn about ~ notation
+
+
+# Create a model and train it on the augmented image data
+resnet <- application_resnet50(weights = NULL,
+                               input_shape = input_shape,
+                               classes = classes)
+
+input <- layer_input(shape = input_shape)
+output <- input %>%
+  layer_rescaling(1 / 255) %>%   # Rescale inputs
+  resnet()
+
+model <- keras_model(input, output) %>%
+  compile(optimizer = "rmsprop", loss = "sparse_categorical_crossentropy") %>%
+  fit(train_dataset, steps_per_epoch = 5)
+```
+
+
+You can see a similar setup in action in the example
+[image classification from scratch](https://keras.io/examples/vision/image_classification_from_scratch/).
+
+
+### Normalizing numerical features
+
+```{r}
+library(tensorflow)
+library(keras)
+c(c(x_train, y_train), ...) %<-% dataset_cifar10()
+x_train <- x_train %>%
+  array_reshape(c(dim(x_train)[1], -1L)) # flatten each case
+
+input_shape <- dim(x_train)[-1] # keras layers automatically add the batch dim
+classes <- 10
+
+# Create a layer_normalization() layer and set its internal state using the training data
+normalizer <- layer_normalization()
+normalizer %>% adapt(x_train)
+
+# Create a model that include the normalization layer
+input <- layer_input(shape = input_shape)
+output <- input %>%
+  normalizer() %>%
+  layer_dense(classes, activation = "softmax")
+
+model <- keras_model(input, output) %>%
+  compile(optimizer = "adam",
+          loss = "sparse_categorical_crossentropy")
+
+# Train the model
+model %>%
+  fit(x_train, y_train)
+```
+
+
+### Encoding string categorical features via one-hot encoding
+
+```{r}
+# Define some toy data
+data <- as_tensor(c("a", "b", "c", "b", "c", "a")) %>%
+  k_reshape(c(-1, 1)) # reshape into matrix with shape: (6, 1)
+
+# Use layer_string_lookup() to build an index of the feature values and encode output.
+lookup <- layer_string_lookup(output_mode="one_hot")
+lookup %>% adapt(data)
+
+# Convert new test data (which includes unknown feature values)
+test_data = as_tensor(matrix(c("a", "b", "c", "d", "e", "")))
+encoded_data = lookup(test_data)
+print(encoded_data)
+```
+
+
+Note that, here, index 0 is reserved for out-of-vocabulary values
+(values that were not seen during `adapt()`).
+
+You can see the `layer_string_lookup()` in action in the
+[Structured data classification from scratch](https://keras.io/examples/structured_data/structured_data_classification_from_scratch/)
+example.
+
+
+### Encoding integer categorical features via one-hot encoding
+
+```{r}
+# Define some toy data
+data <- as_tensor(matrix(c(10, 20, 20, 10, 30, 0)), "int32")
+
+# Use layer_integer_lookup() to build an index of the feature values and encode output.
+lookup <- layer_integer_lookup(output_mode="one_hot")
+lookup %>% adapt(data)
+
+# Convert new test data (which includes unknown feature values)
+test_data <- as_tensor(matrix(c(10, 10, 20, 50, 60, 0)), "int32")
+encoded_data <- lookup(test_data)
+print(encoded_data)
+```
+
+
+Note that index 0 is reserved for missing values (which you should specify as the value
+0), and index 1 is reserved for out-of-vocabulary values (values that were not seen
+during `adapt()`). You can configure this by using the `mask_token` and `oov_token`
+constructor arguments  of `layer_integer_lookup()`.
+
+You can see the `layer_integer_lookup()` in action in the example
+[structured data classification from scratch](https://keras.io/examples/structured_data/structured_data_classification_from_scratch/).
+
+
+### Applying the hashing trick to an integer categorical feature
+
+If you have a categorical feature that can take many different values (on the order of
+10e3 or higher), where each value only appears a few times in the data,
+it becomes impractical and ineffective to index and one-hot encode the feature values.
+Instead, it can be a good idea to apply the "hashing trick": hash the values to a vector
+of fixed size. This keeps the size of the feature space manageable, and removes the need
+for explicit indexing.
+
+```{r}
+# Sample data: 10,000 random integers with values between 0 and 100,000
+data <- k_random_uniform(shape = c(10000, 1), dtype = "int64")
+
+# Use the Hashing layer to hash the values to the range [0, 64]
+hasher <- layer_hashing(num_bins = 64, salt = 1337)
+
+# Use the CategoryEncoding layer to multi-hot encode the hashed values
+encoder <- layer_category_encoding(num_tokens=64, output_mode="multi_hot")
+encoded_data <- encoder(hasher(data))
+print(encoded_data$shape)
+```
+
+
+### Encoding text as a sequence of token indices
+
+This is how you should preprocess text to be passed to an `Embedding` layer.
+
+```{r}
+library(tensorflow)
+library(tfdatasets)
+library(keras)
+
+# Define some text data to adapt the layer
+adapt_data <- as_tensor(c(
+  "The Brain is wider than the Sky",
+  "For put them side by side",
+  "The one the other will contain",
+  "With ease and You beside"
+))
+
+# Create a layer_text_vectorization() layer
+text_vectorizer <- layer_text_vectorization(output_mode="int")
+# Index the vocabulary via `adapt()`
+text_vectorizer %>% adapt(adapt_data)
+
+# Try out the layer
+cat("Encoded text:\n",
+    as.array(text_vectorizer("The Brain is deeper than the sea")))
+
+# Create a simple model
+input = layer_input(shape(NULL), dtype="int64")
+
+output <- input %>%
+  layer_embedding(input_dim = text_vectorizer$vocabulary_size(),
+                  output_dim = 16) %>%
+  layer_gru(8) %>%
+  layer_dense(1)
+
+model <- keras_model(input, output)
+
+# Create a labeled dataset (which includes unknown tokens)
+train_dataset <- tensor_slices_dataset(list(
+    c("The Brain is deeper than the sea", "for if they are held Blue to Blue"),
+    c(1L, 0L)
+))
+
+# Preprocess the string inputs, turning them into int sequences
+train_dataset <- train_dataset %>%
+  dataset_batch(2) %>%
+  dataset_map(~list(text_vectorizer(.x), .y))
+
+# Train the model on the int sequences
+cat("Training model...\n")
+model %>%
+  compile(optimizer = "rmsprop", loss = "mse") %>%
+  fit(train_dataset)
+
+# For inference, you can export a model that accepts strings as input
+input <- layer_input(shape = 1, dtype="string")
+output <- input %>%
+  text_vectorizer() %>%
+  model()
+
+end_to_end_model <- keras_model(input, output)
+
+# Call the end-to-end model on test data (which includes unknown tokens)
+cat("Calling end-to-end model on test string...\n")
+test_data <- tf$constant(matrix("The one the other will absorb"))
+test_output <- end_to_end_model(test_data)
+cat("Model output:", as.array(test_output), "\n")
+```
+
+You can see the `layer_text_vectorization()` layer in action, combined with an `Embedding` mode,
+in the example
+[text classification from scratch](https://keras.io/examples/nlp/text_classification_from_scratch/).
+
+Note that when training such a model, for best performance, you should always
+use the `layer_text_vectorization()` layer as part of the input pipeline.
+
+### Encoding text as a dense matrix of ngrams with multi-hot encoding
+
+This is how you can preprocess text to be passed to a `Dense` layer.
+
+```{r}
+# Define some text data to adapt the layer
+adapt_data <- as_tensor(c(
+  "The Brain is wider than the Sky",
+  "For put them side by side",
+  "The one the other will contain",
+  "With ease and You beside"
+))
+
+# Instantiate layer_text_vectorization() with "multi_hot" output_mode
+# and ngrams=2 (index all bigrams)
+text_vectorizer = layer_text_vectorization(output_mode="multi_hot", ngrams=2)
+# Index the bigrams via `adapt()`
+text_vectorizer %>% adapt(adapt_data)
+
+# Try out the layer
+cat(
+    "Encoded text:\n", as.array(text_vectorizer("The Brain is deeper than the sea"))
+)
+
+
+# Create a simple model
+input = layer_input(shape = text_vectorizer$vocabulary_size(), dtype="int64")
+
+output <- input %>%
+  layer_dense(1)
+
+model <- keras_model(input, output)
+
+
+# Create a labeled dataset (which includes unknown tokens)
+train_dataset = tensor_slices_dataset(list(
+    c("The Brain is deeper than the sea", "for if they are held Blue to Blue"),
+    c(1L, 0L)
+))
+
+# Preprocess the string inputs, turning them into int sequences
+train_dataset <- train_dataset %>%
+  dataset_batch(2) %>%
+  dataset_map(~list(text_vectorizer(.x), .y))
+
+# Train the model on the int sequences
+cat("Training model...\n")
+model %>%
+  compile(optimizer="rmsprop", loss="mse") %>%
+  fit(train_dataset)
+
+# For inference, you can export a model that accepts strings as input
+input <- layer_input(shape = 1, dtype="string")
+
+output <- input %>%
+  text_vectorizer() %>%
+  model()
+
+end_to_end_model = keras_model(input, output)
+
+# Call the end-to-end model on test data (which includes unknown tokens)
+cat("Calling end-to-end model on test string...\n")
+test_data <- tf$constant(matrix("The one the other will absorb"))
+test_output <- end_to_end_model(test_data)
+cat("Model output: "); print(test_output); cat("\n")
+```
+
+
+
+### Encoding text as a dense matrix of ngrams with TF-IDF weighting
+
+This is an alternative way of preprocessing text before passing it to a `layer_dense` layer.
+
+```{r}
+# Define some text data to adapt the layer
+adapt_data <- as_tensor(c(
+        "The Brain is wider than the Sky",
+        "For put them side by side",
+        "The one the other will contain",
+        "With ease and You beside"
+))
+
+# Instantiate layer_text_vectorization() with "tf-idf" output_mode
+# (multi-hot with TF-IDF weighting) and ngrams=2 (index all bigrams)
+text_vectorizer = layer_text_vectorization(output_mode="tf-idf", ngrams=2)
+# Index the bigrams and learn the TF-IDF weights via `adapt()`
+text_vectorizer %>% adapt(adapt_data)
+
+# Try out the layer
+cat(
+    "Encoded text:\n", as.array(text_vectorizer("The Brain is deeper than the sea"))
+)
+
+# Create a simple model
+input <- layer_input(shape = text_vectorizer$vocabulary_size(), dtype="int64")
+output <- input %>% layer_dense(1)
+model <- keras_model(input, output)
+
+# Create a labeled dataset (which includes unknown tokens)
+train_dataset = tensor_slices_dataset(list(
+    c("The Brain is deeper than the sea", "for if they are held Blue to Blue"),
+    c(1L, 0L)
+))
+
+# Preprocess the string inputs, turning them into int sequences
+train_dataset <- train_dataset %>%
+  dataset_batch(2) %>%
+  dataset_map(~list(text_vectorizer(.x), .y))
+
+
+# Train the model on the int sequences
+cat("Training model...")
+model %>%
+  compile(optimizer="rmsprop", loss="mse") %>%
+  fit(train_dataset)
+
+# For inference, you can export a model that accepts strings as input
+input <- layer_input(shape = 1, dtype="string")
+
+output <- input %>%
+  text_vectorizer() %>%
+  model()
+
+end_to_end_model = keras_model(input, output)
+
+# Call the end-to-end model on test data (which includes unknown tokens)
+cat("Calling end-to-end model on test string...\n")
+test_data <- tf$constant(matrix("The one the other will absorb"))
+test_output <- end_to_end_model(test_data)
+cat("Model output: "); print(test_output)
+```
+
+
+## Important gotchas
+
+### Working with lookup layers with very large vocabularies
+
+You may find yourself working with a very large vocabulary in a
+`layer_text_vectorization()`, a `layer_string_lookup()` layer, or an
+`layer_integer_lookup()` layer. Typically, a vocabulary larger than 500MB would
+be considered "very large".
+
+In such case, for best performance, you should avoid using `adapt()`.
+Instead, pre-compute your vocabulary in advance
+(you could use Apache Beam or TF Transform for this)
+and store it in a file. Then load the vocabulary into the layer at construction
+time by passing the filepath as the `vocabulary` argument.
