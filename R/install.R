@@ -1,4 +1,4 @@
-#' Install TensorFlow and Keras, including all python dependencies
+#' Install TensorFlow and Keras, including all Python dependencies
 #'
 #' This function will install Tensorflow and all Keras dependencies. This is a
 #' thin wrapper around [`tensorflow::install_tensorflow()`], with the only
