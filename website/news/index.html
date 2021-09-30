@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1</span>
       </span>
     </div>
 
@@ -231,20 +231,20 @@
       <small>Source: <a href='https://github.com/rstudio/keras/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="keras-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#keras-development-version" class="anchor"></a>keras (development version)<small> Unreleased </small>
+    <div id="keras-261" class="section level1">
+<h1 class="page-header" data-toc-text="2.6.1">
+<a href="#keras-261" class="anchor"></a>keras 2.6.1<small> Unreleased </small>
 </h1>
 <ul>
 <li>
-<p>New family of <em>preprocessing</em> layers. These are the spiritual successor to the <code>tfdatasets::step_*</code> family of data transformers (to be deprecated in a future release). Added a new vignette: “Working with preprocessing layers”. New functions:</p>
+<p>New family of <em>preprocessing</em> layers. These are the spiritual successor to the <code>tfdatasets::step_*</code> family of data transformers (to be deprecated in a future release). Added a new vignette: “Working with Preprocessing Layers”. New functions:</p>
 Image preprocessing:
 <ul>
 <li><code><a href="../reference/layer_resizing.html">layer_resizing()</a></code></li>
 <li><code><a href="../reference/layer_rescaling.html">layer_rescaling()</a></code></li>
 <li><code><a href="../reference/layer_center_crop.html">layer_center_crop()</a></code></li>
 </ul>
-Image augmentation
+Image augmentation:
 <ul>
 <li><code><a href="../reference/layer_random_crop.html">layer_random_crop()</a></code></li>
 <li><code><a href="../reference/layer_random_flip.html">layer_random_flip()</a></code></li>
@@ -255,14 +255,14 @@ Image augmentation
 <li><code><a href="../reference/layer_random_height.html">layer_random_height()</a></code></li>
 <li><code><a href="../reference/layer_random_width.html">layer_random_width()</a></code></li>
 </ul>
-Categorical features preprocessing
+Categorical features preprocessing:
 <ul>
 <li><code><a href="../reference/layer_category_encoding.html">layer_category_encoding()</a></code></li>
 <li><code><a href="../reference/layer_hashing.html">layer_hashing()</a></code></li>
 <li><code><a href="../reference/layer_integer_lookup.html">layer_integer_lookup()</a></code></li>
 <li><code><a href="../reference/layer_string_lookup.html">layer_string_lookup()</a></code></li>
 </ul>
-Numerical features preprocessing
+Numerical features preprocessing:
 <ul>
 <li><code><a href="../reference/layer_normalization.html">layer_normalization()</a></code></li>
 <li><code><a href="../reference/layer_discretization.html">layer_discretization()</a></code></li>
@@ -302,9 +302,6 @@ These join the previous set of text preprocessing functions, each of which have 
 <li>Fixed an issue where valid values of <code>output_mode = "int"</code> would incorrectly return a ragged tensor output shape.</li>
 </ul>
 </li>
-<li><p>Fixed an issue in <code><a href="../reference/layer_input.html">layer_input()</a></code> where passing a tensorflow <code>DType</code> objects to argument <code>dtype</code> would throw an error.</p></li>
-<li><p>Fixed an issue in <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> where passing an R function via an in-line call would result in an error from subsequent <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> calls. (e.g., <code><a href="https://generics.r-lib.org/reference/compile.html">compile(loss = function(y_true, y_pred) my_loss(y_true, y_pred))</a></code> now succeeds)</p></li>
-<li><p><code><a href="../reference/clone_model.html">clone_model()</a></code> gains a <code>clone_function</code> argument that allows you to customize each layer as it is cloned.</p></li>
 <li>
 <p>Existing layer instances gain the ability to be added to sequential models via a call. E.g.:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -315,12 +312,16 @@ These join the previous set of text preprocessing functions, each of which have 
 </li>
 <li><p>Functions in the <em>merging layer</em> family gain the ability to return a layer instance if the first argument <code>inputs</code> is missing. (affected: <code><a href="../reference/layer_concatenate.html">layer_concatenate()</a></code>, <code><a href="../reference/layer_add.html">layer_add()</a></code>, <code><a href="../reference/layer_subtract.html">layer_subtract()</a></code>, <code><a href="../reference/layer_multiply.html">layer_multiply()</a></code>, <code><a href="../reference/layer_average.html">layer_average()</a></code>, <code><a href="../reference/layer_maximum.html">layer_maximum()</a></code>, <code><a href="../reference/layer_minimum.html">layer_minimum()</a></code> , <code><a href="../reference/layer_dot.html">layer_dot()</a></code>)</p></li>
 <li><p><code><a href="../reference/%py_class%.html">%py_class%</a></code> gains the ability to delay initializing the Python session until first use. It is now safe to implement and export <code><a href="../reference/%py_class%.html">%py_class%</a></code> objects in an R package.</p></li>
-<li>
-<p>Bumped minimum R version to 3.4. Expanded CI to test on all supported R version. Fixed regression that prevented package installation on R &lt;= 3.4</p>
-<h1 id="keras-260" class="page-header" data-toc-text="development version">keras 2.6.0<small> Unreleased </small>
-</h1>
-</li>
+<li><p>Fixed an issue in <code><a href="../reference/layer_input.html">layer_input()</a></code> where passing a tensorflow <code>DType</code> objects to argument <code>dtype</code> would throw an error.</p></li>
+<li><p>Fixed an issue in <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> where passing an R function via an in-line call would result in an error from subsequent <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> calls. (e.g., <code><a href="https://generics.r-lib.org/reference/compile.html">compile(loss = function(y_true, y_pred) my_loss(y_true, y_pred))</a></code> now succeeds)</p></li>
+<li><p><code><a href="../reference/clone_model.html">clone_model()</a></code> gains a <code>clone_function</code> argument that allows you to customize each layer as it is cloned.</p></li>
+<li><p>Bumped minimum R version to 3.4. Expanded CI to test on all supported R version. Fixed regression that prevented package installation on R &lt;= 3.4</p></li>
 </ul>
+</div>
+    <div id="keras-260" class="section level1">
+<h1 class="page-header" data-toc-text="2.6.0">
+<a href="#keras-260" class="anchor"></a>keras 2.6.0<small> 2021-08-21 </small>
+</h1>
 <p>Breaking changes (Tensorflow 2.6):</p>
 <ul>
 <li><p>Note: The following breaking changes are specific to Tensorflow version 2.6.0. However, the keras R package maintains compatibility with multiple versions of Tensorflow/Keras. You can upgrade the R package and still preserve the previous behavior by installing a specific version of Tensorflow: <code><a href="../reference/install_keras.html">keras::install_keras(tensorflow="2.4.0")</a></code></p></li>
