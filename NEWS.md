@@ -1,7 +1,7 @@
 # keras 2.6.1
 
 - New family of *preprocessing* layers. These are the spiritual successor to the `tfdatasets::step_*` family of data transformers (to be deprecated in a future release).
-  Added a new vignette: "Working with preprocessing layers".
+  Added a new vignette: "Working with Preprocessing Layers".
   New functions:
 
   Image preprocessing:
@@ -9,7 +9,7 @@
     - `layer_rescaling()`
     - `layer_center_crop()`
 
-  Image augmentation
+  Image augmentation:
     - `layer_random_crop()`
     - `layer_random_flip()`
     - `layer_random_translation()`
@@ -19,13 +19,13 @@
     - `layer_random_height()`
     - `layer_random_width()`
 
-  Categorical features preprocessing
+  Categorical features preprocessing:
     - `layer_category_encoding()`
     - `layer_hashing()`
     - `layer_integer_lookup()`
     - `layer_string_lookup()`
 
-  Numerical features preprocessing
+  Numerical features preprocessing:
     - `layer_normalization()`
     - `layer_discretization()`
 
