@@ -52,15 +52,7 @@
     `"tf-idf"` is renamed to `"tf_idf"` (backwards compatibility is preserved).
   - Fixed an issue where valid values of `output_mode = "int"` would incorrectly
     return a ragged tensor output shape.
-
-- Fixed an issue in `layer_input()` where passing a tensorflow `DType` objects to argument `dtype` would throw an error.
-
-- Fixed an issue in `compile()` where passing an R function via an in-line
-  call would result in an error from subsequent `fit()` calls.
-  (e.g., `compile(loss = function(y_true, y_pred) my_loss(y_true, y_pred))`
-  now succeeds)
-
-- `clone_model()` gains a `clone_function` argument that allows you to customize each layer as it is cloned.
+    
 
 - Existing layer instances gain the ability to be added to sequential models via a call. E.g.:
   ```r
@@ -77,7 +69,17 @@
 - `%py_class%` gains the ability to delay initializing the Python session until first use.
   It is now safe to implement and export `%py_class%` objects in an R package.
 
+- Fixed an issue in `layer_input()` where passing a tensorflow `DType` objects to argument `dtype` would throw an error.
+
+- Fixed an issue in `compile()` where passing an R function via an in-line
+  call would result in an error from subsequent `fit()` calls.
+  (e.g., `compile(loss = function(y_true, y_pred) my_loss(y_true, y_pred))`
+  now succeeds)
+
+- `clone_model()` gains a `clone_function` argument that allows you to customize each layer as it is cloned.
+
 - Bumped minimum R version to 3.4. Expanded CI to test on all supported R version. Fixed regression that prevented package installation on R <= 3.4
+
 # keras 2.6.0
 
 Breaking changes (Tensorflow 2.6):
