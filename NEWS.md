@@ -1,4 +1,4 @@
-# keras (development version)
+# keras 2.6.1
 
 - New family of *preprocessing* layers. These are the spiritual successor to the `tfdatasets::step_*` family of data transformers (to be deprecated in a future release).
   Added a new vignette: "Working with preprocessing layers".
