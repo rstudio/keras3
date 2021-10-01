@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_hashing}
 \alias{layer_hashing}
-\title{Implements categorical feature hashing, also known as "hashing trick"}
+\title{A preprocessing layer which hashes and bins categorical features.}
 \usage{
 layer_hashing(object, num_bins, mask_value = NULL, salt = NULL, ...)
 }
@@ -30,7 +30,7 @@ list of 2 unsigned integer numbers, see reference paper for details.}
 \item{...}{standard layer arguments.}
 }
 \description{
-Implements categorical feature hashing, also known as "hashing trick"
+A preprocessing layer which hashes and bins categorical features.
 }
 \details{
 This layer transforms single or multiple categorical inputs to hashed output.
