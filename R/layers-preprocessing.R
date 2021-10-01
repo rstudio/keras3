@@ -649,7 +649,7 @@ function(object, num_tokens=NULL, output_mode = "multi_hot", sparse = FALSE, ...
 }
 
 
-#' Implements categorical feature hashing, also known as "hashing trick"
+#' A preprocessing layer which hashes and bins categorical features.
 #'
 #' @details
 #' This layer transforms single or multiple categorical inputs to hashed output.
