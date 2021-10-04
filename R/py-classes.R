@@ -437,3 +437,35 @@ print.py_R6ClassGenerator <- function(x, ...) {
 
   print(r6_class)
 }
+
+#' Make an Active Binding
+#'
+#' @param sym symbol to bind
+#' @param fun function to call when the value of `sym` is accessed.
+#'
+#' @return `fun`, invisibly
+#' @export
+#'
+#' @details Active bindings defined in a [`%py_class`] are converted to
+#'   `@property` decorated methods.
+#'
+#' @seealso [`makeActiveBinding()`]
+#'
+#' @examples
+#' x %<-active% function(value) {
+#'   message("Evaluating function of active binding")
+#'   if(missing(value))
+#'     runif(1)
+#'   else
+#'    message("Received: ", value)
+#' }
+#' x
+#' x
+#' x <- "foo"
+#' x <- "foo"
+#' x
+#' rm(x) # cleanup
+`%<-active%` <- function(sym, fun) {
+  makeActiveBinding(substitute(sym), fun, parent.frame())
+  invisible(fun)
+}
