@@ -104,6 +104,7 @@ jobs:
             echo "$cmd"
             sudo $cmd
           done < <(Rscript -e "writeLines(remotes::system_requirements('$ID-$VERSION_ID'))")
+          sudo apt-get install libcurl4-openssl-dev || echo "Nope" # rcmdcheck on R 3.3 fails otherwise
 
       - name: Install Package + deps
         run: remotes::install_local(dependencies = TRUE, force = TRUE)
