@@ -264,7 +264,7 @@ layer_cudnn_gru <- function(object, units,
 #' @family recurrent layers
 #'
 #' @export
-layer_lstm <- function(object, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE,
+layer_lstm <- function(object, units, activation = "tanh", recurrent_activation = "sigmoid", use_bias = TRUE,
                        return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE,
                        time_major = FALSE, unroll = FALSE,
                        kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros",

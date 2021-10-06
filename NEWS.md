@@ -14,6 +14,8 @@
   To learn more, including how to make a custom cell layer, see the new vignette:
   "Working with RNNs".
 
+- `layer_lstm()` default value for `recurrent_activation` changed from `"hard_sigmoid"` to `"sigmoid"`.
+
 - `layer_cudnn_gru()` and `layer_cudnn_lstm()` are deprecated. `layer_gru()` and `layer_lstm()` will
   automatically use CuDNN if it is available.
 
