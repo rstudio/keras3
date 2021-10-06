@@ -4,15 +4,15 @@
 \alias{\%<-active\%}
 \title{Make an Active Binding}
 \usage{
-sym \%<-active\% fun
+sym \%<-active\% value
 }
 \arguments{
 \item{sym}{symbol to bind}
 
-\item{fun}{function to call when the value of \code{sym} is accessed.}
+\item{value}{A function to call when the value of \code{sym} is accessed.}
 }
 \value{
-\code{fun}, invisibly
+\code{value}, invisibly
 }
 \description{
 Make an Active Binding
