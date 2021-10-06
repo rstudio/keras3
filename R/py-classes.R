@@ -446,7 +446,7 @@ print.py_R6ClassGenerator <- function(x, ...) {
 #' @return `fun`, invisibly
 #' @export
 #'
-#' @details Active bindings defined in a [`%py_class`] are converted to
+#' @details Active bindings defined in a [`%py_class%`] are converted to
 #'   `@property` decorated methods.
 #'
 #' @seealso [`makeActiveBinding()`]

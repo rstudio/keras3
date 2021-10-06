@@ -5,12 +5,6 @@ library(reticulate)
 library(envir)
 
 options(tibble.print_min = 200)
-# py_to_r.python.builtin.dict_items <- function(x) {
-#   x <- py_eval("lambda x: [(k, v) for k, v in x]")(x)
-#   out <- lapply(x, `[[`, 2L)
-#   names(out) <- lapply(x, `[[`, 1L)
-#   out
-# }
 
 
 attach_eval({
@@ -134,51 +128,20 @@ source("tools/make-wrapper2.R")
 
 missing_layers_df %>%
   select(py_name)
-# # A tibble: 37 × 1
-#    py_name
-#    <chr>
-#    image preprocessing
-# 12 Resizing
-# 13 CenterCrop
-# 15 Rescaling
-#
-#    # image augmentation
-# 14 RandomCrop
-# 16 RandomFlip
-# 17 RandomTranslation
-# 18 RandomRotation
-# 19 RandomZoom
-# 21 RandomHeight
-# 22 RandomWidth
-# 20 RandomContrast
-#
-# # categorical features preprocessing
-# 23 CategoryEncoding
-# 25 Hashing
-# 28 StringLookup
-# 26 IntegerLookup
-#
-# # numerical features preprocessing
-# 24 Discretization
-# 27 Normalization
-#
-# # Text preprocessing
-# 29 TextVectorization
-#
-#
-# 30 StackedRNNCells
-# 31 RNN
-# 32 AbstractRNNCell
-# 33 SimpleRNNCell
-# 34 GRUCell
-# 35 LSTMCell
-# 36 ConvLSTM1D
-# 37 ConvLSTM3D
+# # A tibble: 6 × 1
+#   py_name
+#   <chr>
+# 1 RNN
+# 2 AbstractRNNCell
+# 3 SimpleRNNCell
+# 4 GRUCell
+# 5 StackedRNNCells
+# 6 LSTMCell
 
 
 
 missing_layers_df$py_obj %>%
-  .[1:18] %>%
+  # .[1:18] %>%
   lapply(new_layer_wrapper) %>%
   unlist() %>% str_flatten("\n\n\n") %>%
   {
