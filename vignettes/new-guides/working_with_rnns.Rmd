@@ -1,0 +1,592 @@
+---
+title: Working with RNNs
+author: Scott Zhu, Francois Chollet, Tomasz Kalinowski
+output: rmarkdown::html_vignette
+date: 2021/10/06
+description: Complete guide to using & customizing RNN layers.
+vignette: >
+  %\VignetteIndexEntry{Working with RNNs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Introduction
+
+Recurrent neural networks (RNN) are a class of neural networks that is powerful for
+modeling sequence data such as time series or natural language.
+
+Schematically, a RNN layer uses a `for` loop to iterate over the timesteps of a
+sequence, while maintaining an internal state that encodes information about the
+timesteps it has seen so far.
+
+The Keras RNN API is designed with a focus on:
+
+- **Ease of use**: the built-in `layer_rnn()`, `layer_lstm()`,
+`layer_gru()` layers enable you to quickly build recurrent models without
+having to make difficult configuration choices.
+
+- **Ease of customization**: You can also define your own RNN cell layer (the inner
+part of the `for` loop) with custom behavior, and use it with the generic
+`layer_rnn` layer (the `for` loop itself). This allows you to quickly
+prototype different research ideas in a flexible way with minimal code.
+
+
+## Setup
+```{r}
+library(tensorflow)
+library(keras)
+```
+
+
+## Built-in RNN layers: a simple example
+
+There are three built-in RNN layers in Keras:
+
+1. `layer_simple_rnn()`, a fully-connected RNN where the output from previous
+timestep is to be fed to next timestep.
+
+2. `layer_gru()`, first proposed in
+[Cho et al., 2014](https://arxiv.org/abs/1406.1078).
+
+3. `layer_lstm()`, first proposed in
+[Hochreiter & Schmidhuber, 1997](https://www.bioinf.jku.at/publications/older/2604.pdf).
+
+In early 2015, Keras had the first reusable open-source Python implementations of LSTM
+and GRU.
+
+Here is a simple example of a sequential model that processes sequences of integers,
+embeds each integer into a 64-dimensional vector, then processes the sequence of
+vectors using a `layer_lstm()`.
+
+```{r}
+model <- keras_model_sequential() %>%
+
+  # Add an Embedding layer expecting input vocab of size 1000, and
+  # output embedding dimension of size 64.
+  layer_embedding(input_dim = 1000, output_dim = 64) %>%
+
+  # Add a LSTM layer with 128 internal units.
+  layer_lstm(128) %>%
+
+  # Add a Dense layer with 10 units.
+  layer_dense(10)
+
+model
+```
+
+
+Built-in RNNs support a number of useful features:
+
+- Recurrent dropout, via the `dropout` and `recurrent_dropout` arguments
+- Ability to process an input sequence in reverse, via the `go_backwards` argument
+- Loop unrolling (which can lead to a large speedup when processing short sequences on
+CPU), via the `unroll` argument
+- ...and more.
+
+For more information, see the
+[RNN API documentation](https://keras.io/api/layers/recurrent_layers/).
+
+## Outputs and states
+
+By default, the output of a RNN layer contains a single vector per sample. This vector
+is the RNN cell output corresponding to the last timestep, containing information
+about the entire input sequence. The shape of this output is `(batch_size, units)`
+where `units` corresponds to the `units` argument passed to the layer's constructor.
+
+A RNN layer can also return the entire sequence of outputs for each sample (one vector
+per timestep per sample), if you set `return_sequences = TRUE`. The shape of this output
+is `(batch_size, timesteps, units)`.
+
+```{r}
+model <- keras_model_sequential() %>%
+  layer_embedding(input_dim = 1000, output_dim = 64) %>%
+
+  # The output of GRU will be a 3D tensor of shape (batch_size, timesteps, 256)
+  layer_gru(256, return_sequences = TRUE) %>%
+
+  # The output of SimpleRNN will be a 2D tensor of shape (batch_size, 128)
+  layer_simple_rnn(128) %>%
+
+  layer_dense(10)
+
+model
+```
+
+In addition, a RNN layer can return its final internal state(s). The returned states
+can be used to resume the RNN execution later, or
+[to initialize another RNN](https://arxiv.org/abs/1409.3215).
+This setting is commonly used in the
+encoder-decoder sequence-to-sequence model, where the encoder final state is used as
+the initial state of the decoder.
+
+To configure a RNN layer to return its internal state, set `return_state = TRUE`
+when creating the layer. Note that `LSTM` has 2 state tensors, but `GRU`
+only has one.
+
+To configure the initial state of the layer, call the layer instance with the additional
+named argument `initial_state`.
+Note that the shape of the state needs to match the unit size of the layer, like in the
+example below.
+
+```{r}
+encoder_vocab <- 1000
+decoder_vocab <- 2000
+
+encoder_input <- layer_input(shape(NULL))
+encoder_embedded <- encoder_input %>%
+  layer_embedding(input_dim=encoder_vocab, output_dim=64)
+
+
+# Return states in addition to output
+c(output, state_h, state_c) %<-%
+  layer_lstm(encoder_embedded, units = 64, return_state=TRUE, name="encoder")
+
+encoder_state <- list(state_h, state_c)
+
+decoder_input <- layer_input(shape(NULL))
+decoder_embedded <- decoder_input %>%
+  layer_embedding(input_dim = decoder_vocab, output_dim = 64)
+
+# Pass the 2 states to a new LSTM layer, as initial state
+decoder_lstm_layer <- layer_lstm(units = 64, name = "decoder")
+decoder_output <- decoder_lstm_layer(decoder_embedded, initial_state = encoder_state)
+
+output <- decoder_output %>% layer_dense(10)
+
+model <- keras_model(inputs = list(encoder_input, decoder_input),
+                     outputs = output)
+model
+
+```
+
+## RNN layers and RNN cells
+
+In addition to the built-in RNN layers, the RNN API also provides cell-level APIs.
+Unlike RNN layers, which processes whole batches of input sequences, the RNN cell only
+processes a single timestep.
+
+The cell is the inside of the `for` loop of a RNN layer. Wrapping a cell inside a
+`layer_rnn()` layer gives you a layer capable of processing batches of
+sequences, e.g. `layer_rnn(layer_lstm_cell(10))`.
+
+Mathematically, `layer_rnn(layer_lstm_cell(10))` produces the same result as `layer_lstm(10)`. In fact,
+the implementation of this layer in TF v1.x was just creating the corresponding RNN
+cell and wrapping it in a RNN layer.  However using the built-in `layer_gru()` and `layer_lstm()`
+layers enable the use of CuDNN and you may see better performance.
+
+There are three built-in RNN cells, each of them corresponding to the matching RNN
+layer.
+
+- `layer_simple_rnn_cell()` corresponds to the `layer_simple_rnn()` layer.
+
+- `layer_gru_cell` corresponds to the `layer_gru` layer.
+
+- `layer_lstm_cell` corresponds to the `layer_lstm` layer.
+
+The cell abstraction, together with the generic `layer_rnn()` class, make it
+very easy to implement custom RNN architectures for your research.
+
+
+## Cross-batch statefulness
+
+When processing very long (possibly infinite) sequences, you may want to use the
+pattern of **cross-batch statefulness**.
+
+Normally, the internal state of a RNN layer is reset every time it sees a new batch
+(i.e. every sample seen by the layer is assumed to be independent of the past). The
+layer will only maintain a state while processing a given sample.
+
+If you have very long sequences though, it is useful to break them into shorter
+sequences, and to feed these shorter sequences sequentially into a RNN layer without
+resetting the layer's state. That way, the layer can retain information about the
+entirety of the sequence, even though it's only seeing one sub-sequence at a time.
+
+You can do this by setting `stateful = TRUE` in the constructor.
+
+If you have a sequence `s = c(t0, t1, ... t1546, t1547)`, you would split it into e.g.
+
+```{r, eval = FALSE}
+s1 = c(t0, t1, ..., t100)
+s2 = c(t101, ..., t201)
+...
+s16 = c(t1501, ..., t1547)
+```
+
+Then you would process it via:
+
+```{r, eval = FALSE}
+lstm_layer <- layer_lstm(units = 64, stateful = TRUE)
+for(s in sub_sequences)
+  output <- lstm_layer(s)
+```
+
+
+When you want to clear the state, you  can use `layer$reset_states()`.
+
+
+> Note: In this setup, sample `i` in a given batch is assumed to be the continuation of
+sample `i` in the previous batch. This means that all batches should contain the same
+number of samples (batch size). E.g. if a batch contains `[sequence_A_from_t0_to_t100,
+ sequence_B_from_t0_to_t100]`, the next batch should contain
+`[sequence_A_from_t101_to_t200,  sequence_B_from_t101_to_t200]`.
+
+Here is a complete example:
+
+```{r}
+paragraph1 <- k_random_uniform(c(20, 10, 50), dtype = "float32")
+paragraph2 <- k_random_uniform(c(20, 10, 50), dtype = "float32")
+paragraph3 <- k_random_uniform(c(20, 10, 50), dtype = "float32")
+
+lstm_layer <- layer_lstm(units = 64, stateful = TRUE)
+output <- lstm_layer(paragraph1)
+output <- lstm_layer(paragraph2)
+output <- lstm_layer(paragraph3)
+
+# reset_states() will reset the cached state to the original initial_state.
+# If no initial_state was provided, zero-states will be used by default.
+lstm_layer$reset_states()
+```
+
+
+### RNN State Reuse
+
+The recorded states of the RNN layer are not included in the `layer$weights()`. If you
+would like to reuse the state from a RNN layer, you can retrieve the states value by
+`layer$states` and use it as the
+initial state of a new layer instance via the Keras functional API like
+`new_layer(inputs, initial_state = layer$states)`, or model subclassing.
+
+Please also note that a sequential model can not be used in this case since it only
+supports layers with single input and output. The extra input of initial state makes
+it impossible to use here.
+
+```{r}
+paragraph1 <- k_random_uniform(c(20, 10, 50), dtype = "float32")
+paragraph2 <- k_random_uniform(c(20, 10, 50), dtype = "float32")
+paragraph3 <- k_random_uniform(c(20, 10, 50), dtype = "float32")
+
+lstm_layer <- layer_lstm(units = 64, stateful = TRUE)
+output <- lstm_layer(paragraph1)
+output <- lstm_layer(paragraph2)
+
+existing_state <- lstm_layer$states
+
+new_lstm_layer <- layer_lstm(units = 64)
+new_output <- new_lstm_layer(paragraph3, initial_state = existing_state)
+```
+
+## Bidirectional RNNs
+
+For sequences other than time series (e.g. text), it is often the case that a RNN model
+can perform better if it not only processes sequence from start to end, but also
+backwards. For example, to predict the next word in a sentence, it is often useful to
+have the context around the word, not only just the words that come before it.
+
+Keras provides an easy API for you to build such bidirectional RNNs: the
+`bidirectional()` wrapper.
+
+```{r}
+model <- keras_model_sequential(input_shape = shape(5, 10)) %>%
+  bidirectional(layer_lstm(units = 64, return_sequences = TRUE)) %>%
+  bidirectional(layer_lstm(units = 32)) %>%
+  layer_dense(10)
+
+model
+```
+
+
+Under the hood, `bidirectional()` will copy the RNN layer passed in, and flip the
+`go_backwards` field of the newly copied layer, so that it will process the inputs in
+reverse order.
+
+The output of the `bidirectional` RNN will be, by default, the concatenation of the forward layer
+output and the backward layer output. If you need a different merging behavior, e.g.
+concatenation, change the `merge_mode` parameter in the `bidirectional` wrapper
+constructor. For more details about `bidirectional`, please check
+[the API docs](https://keras.io/api/layers/recurrent_layers/bidirectional/).
+
+## Performance optimization and CuDNN kernels
+
+In TensorFlow 2.0, the built-in LSTM and GRU layers have been updated to leverage CuDNN
+kernels by default when a GPU is available. With this change, the prior
+`layer_cudnn_gru/layer_cudnn_lstm` layers have been deprecated, and you can build your
+model without worrying about the hardware it will run on.
+
+Since the CuDNN kernel is built with certain assumptions, this means the layer **will
+not be able to use the CuDNN kernel if you change the defaults of the built-in LSTM or
+GRU layers**. E.g.:
+
+- Changing the `activation` function from `"tanh"` to something else.
+- Changing the `recurrent_activation` function from `"sigmoid"` to something else.
+- Using `recurrent_dropout > 0`.
+- Setting `unroll` to `TRUE`, which forces LSTM/GRU to decompose the inner
+`tf$while_loop` into an unrolled `for` loop.
+- Setting `use_bias` to `FALSE`.
+- Using masking when the input data is not strictly right padded (if the mask
+corresponds to strictly right padded data, CuDNN can still be used. This is the most
+common case).
+
+For the detailed list of constraints, please see the documentation for the
+[LSTM](https://keras.io/api/layers/recurrent_layers/lstm/) and
+[GRU](https://keras.io/api/layers/recurrent_layers/gru/) layers.
+
+### Using CuDNN kernels when available
+
+Let's build a simple LSTM model to demonstrate the performance difference.
+
+We'll use as input sequences the sequence of rows of MNIST digits (treating each row of
+pixels as a timestep), and we'll predict the digit's label.
+
+```{r}
+batch_size <- 64
+# Each MNIST image batch is a tensor of shape (batch_size, 28, 28).
+# Each input sequence will be of size (28, 28) (height is treated like time).
+input_dim <- 28
+
+units <- 64
+output_size <- 10  # labels are from 0 to 9
+
+# Build the RNN model
+build_model <- function(allow_cudnn_kernel = TRUE) {
+  # CuDNN is only available at the layer level, and not at the cell level.
+  # This means `layer_lstm(units = units)` will use the CuDNN kernel,
+  # while layer_rnn(cell = layer_lstm_cell(units)) will run on non-CuDNN kernel.
+  if (allow_cudnn_kernel)
+    # The LSTM layer with default options uses CuDNN.
+    lstm_layer <- layer_lstm(units = units)
+  else
+    # Wrapping a LSTMCell in a RNN layer will not use CuDNN.
+    lstm_layer <- layer_rnn(cell = layer_lstm_cell(units = units))
+
+  model <-
+    keras_model_sequential(input_shape = shape(NULL, input_dim)) %>%
+    lstm_layer() %>%
+    layer_batch_normalization() %>%
+    layer_dense(output_size)
+
+  model
+}
+```
+
+
+Let's load the MNIST dataset:
+
+```{r}
+mnist <- dataset_mnist()
+mnist$train$x <- mnist$train$x / 255
+mnist$test$x <- mnist$test$x / 255
+c(sample, sample_label) %<-% with(mnist$train, list(x[1,,], y[1]))
+```
+
+Let's create a model instance and train it.
+
+We choose `sparse_categorical_crossentropy()` as the loss function for the model. The
+output of the model has shape of `(batch_size, 10)`. The target for the model is an
+integer vector, each of the integer is in the range of 0 to 9.
+
+```{r}
+model <- build_model(allow_cudnn_kernel = TRUE) %>%
+  compile(
+    loss = loss_sparse_categorical_crossentropy(from_logits = TRUE),
+    optimizer = "sgd",
+    metrics = "accuracy"
+  )
+
+model %>% fit(
+  mnist$train$x,
+  mnist$train$y,
+  validation_data = with(mnist$test, list(x, y)),
+  batch_size = batch_size,
+  epochs = 1
+)
+```
+
+
+Now, let's compare to a model that does not use the CuDNN kernel:
+
+```{r}
+noncudnn_model <- build_model(allow_cudnn_kernel=FALSE)
+noncudnn_model$set_weights(model$get_weights())
+noncudnn_model %>% compile(
+    loss=loss_sparse_categorical_crossentropy(from_logits=TRUE),
+    optimizer="sgd",
+    metrics="accuracy",
+)
+
+noncudnn_model %>% fit(
+  mnist$train$x,
+  mnist$train$y,
+  validation_data = with(mnist$test, list(x, y)),
+  batch_size = batch_size,
+  epochs = 1
+)
+```
+
+
+When running on a machine with a NVIDIA GPU and CuDNN installed,
+the model built with CuDNN is much faster to train compared to the
+model that uses the regular TensorFlow kernel.
+
+The same CuDNN-enabled model can also be used to run inference in a CPU-only
+environment. The `tf$device()` annotation below is just forcing the device placement.
+The model will run on CPU by default if no GPU is available.
+
+You simply don't have to worry about the hardware you're running on anymore. Isn't that
+pretty cool?
+
+```{r}
+with(tf$device("CPU:0"), {
+    cpu_model <- build_model(allow_cudnn_kernel=TRUE)
+    cpu_model$set_weights(model$get_weights())
+
+    result <- cpu_model %>%
+      predict_on_batch(k_expand_dims(sample, 1)) %>%
+      k_argmax(axis = 2)
+
+    cat(sprintf(
+        "Predicted result is: %s, target result is: %s\n", as.numeric(result), sample_label))
+
+    # show mnist image
+    sample %>%
+      apply(2, rev) %>% # flip
+      t() %>%           # rotate
+      image(axes = FALSE, asp = 1, col = grey(seq(0, 1, length.out = 256)))
+})
+```
+
+
+## RNNs with list/dict inputs, or nested inputs
+
+Nested structures allow implementers to include more information within a single
+timestep. For example, a video frame could have audio and video input at the same
+time. The data shape in this case could be:
+
+`[batch, timestep, {"video": [height, width, channel], "audio": [frequency]}]`
+
+In another example, handwriting data could have both coordinates x and y for the
+current position of the pen, as well as pressure information. So the data
+representation could be:
+
+`[batch, timestep, {"location": [x, y], "pressure": [force]}]`
+
+The following code provides an example of how to build a custom RNN cell that accepts
+such structured inputs.
+
+
+### Define a custom cell that supports nested input/output
+
+See [Making new Layers & Models via subclassing](/guides/making_new_layers_and_models_via_subclassing/)
+for details on writing your own layers.
+
+```{r}
+NestedCell(keras$layers$Layer) %py_class% {
+
+  initialize <- function(unit_1, unit_2, unit_3, ...) {
+    self$unit_1 <- unit_1
+    self$unit_2 <- unit_2
+    self$unit_3 <- unit_3
+    self$state_size <- list(shape(unit_1), shape(unit_2, unit_3))
+    self$output_size <- list(shape(unit_1), shape(unit_2, unit_3))
+    super$initialize(...)
+  }
+
+  build <- function(self, input_shapes) {
+    # expect input_shape to contain 2 items, [(batch, i1), (batch, i2, i3)]
+    # dput(input_shapes) gives: list(list(NULL, 32L), list(NULL, 64L, 32L))
+    i1 <- input_shapes[[c(1, 2)]] # 32
+    i2 <- input_shapes[[c(2, 2)]] # 64
+    i3 <- input_shapes[[c(2, 3)]] # 32
+
+    self$kernel_1 = self$add_weight(
+      shape = shape(i1, self$unit_1),
+      initializer = "uniform",
+      name = "kernel_1"
+    )
+    self$kernel_2_3 = self$add_weight(
+      shape = shape(i2, i3, self$unit_2, self$unit_3),
+      initializer = "uniform",
+      name = "kernel_2_3"
+    )
+  }
+
+  call <- function(inputs, states) {
+    # inputs should be in [(batch, input_1), (batch, input_2, input_3)]
+    # state should be in shape [(batch, unit_1), (batch, unit_2, unit_3)]
+    # Don't forget you can call `browser()` here while the layer is being traced!
+    c(input_1, input_2) %<-% tf$nest$flatten(inputs)
+    c(s1, s2) %<-% states
+
+    output_1 <- tf$matmul(input_1, self$kernel_1)
+    output_2_3 <- tf$einsum("bij,ijkl->bkl", input_2, self$kernel_2_3)
+    state_1 <- s1 + output_1
+    state_2_3 <- s2 + output_2_3
+
+    output <- tuple(output_1, output_2_3)
+    new_states <- tuple(state_1, state_2_3)
+
+    tuple(output, new_states)
+  }
+
+  get_config <- function() {
+    list("unit_1" = self$unit_1,
+         "unit_2" = self$unit_2,
+         "unit_3" = self$unit_3)
+  }
+}
+```
+
+
+### Build a RNN model with nested input/output
+
+Let's build a Keras model that uses a `layer_rnn` layer and the custom cell
+we just defined.
+
+```{r}
+unit_1 <- 10
+unit_2 <- 20
+unit_3 <- 30
+
+i1 <- 32
+i2 <- 64
+i3 <- 32
+batch_size <- 64
+num_batches <- 10
+timestep <- 50
+
+cell <- NestedCell(unit_1, unit_2, unit_3)
+rnn <- layer_rnn(cell = cell)
+
+input_1 = layer_input(shape(NULL, i1))
+input_2 = layer_input(shape(NULL, i2, i3))
+
+outputs = rnn(tuple(input_1, input_2))a
+
+model = keras_model(list(input_1, input_2), outputs)
+
+model %>% compile(optimizer="adam", loss="mse", metrics="accuracy")
+```
+
+### Train the model with randomly generated data
+
+Since there isn't a good candidate dataset for this model, we use random data for
+demonstration.
+
+```{r}
+input_1_data <- k_random_uniform(c(batch_size * num_batches, timestep, i1))
+input_2_data <- k_random_uniform(c(batch_size * num_batches, timestep, i2, i3))
+target_1_data <- k_random_uniform(c(batch_size * num_batches, unit_1))
+target_2_data <- k_random_uniform(c(batch_size * num_batches, unit_2, unit_3))
+input_data <- list(input_1_data, input_2_data)
+target_data <- list(target_1_data, target_2_data)
+
+model %>% fit(input_data, target_data, batch_size=batch_size)
+```
+
+
+
+With `keras::layer_rnn()`, you are only expected to define the math
+logic for an individual step within the sequence, and the `layer_rnn()`
+will handle the sequence iteration for you. It's an incredibly powerful way to quickly
+prototype new kinds of RNNs (e.g. a LSTM variant).
+
+For more details, please visit the [API docs](https://keras.io/api/layers/recurrent_layers/rnn/).

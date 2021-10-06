@@ -11,6 +11,8 @@
     - `layer_lstm_cell()`
     - `layer_simple_rnn_cell()`
     - `layer_stacked_rnn_cells()`
+  To learn more, including how to make a custom cell layer, see the new vignette:
+  "Working with RNNs".
 - `layer_cudnn_gru()` and `layer_cudnn_lstm()` are deprecated. `layer_gru()` and `layer_lstm()` will
   automatically use CuDNN if it is available.
 # keras 2.6.1
