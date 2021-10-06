@@ -211,6 +211,10 @@ layer_cudnn_gru <- function(object, units,
                             return_sequences = FALSE, return_state = FALSE, stateful = FALSE,
                             input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
                             dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
+
+  warning("layer_cudnn_gru() is deprecated since Tensorflow v2.0. Please use layer_gru() directly. ",
+          "layer_gru() will leverage CuDNN kernels by default if a GPU is available and certain constraints are met. ",
+          "See vignette 'Working with RNN's' for details.")
   args <- list(
     units = as.integer(units),
     kernel_initializer = kernel_initializer,
@@ -235,7 +239,7 @@ layer_cudnn_gru <- function(object, units,
     weights = weights
   )
 
-  create_layer(keras$layers$CuDNNGRU, object, args)
+  create_layer(tensorflow::tf$compat$v1$keras$layers$CuDNNGRU, object, args)
 }
 
 
@@ -329,6 +333,11 @@ layer_cudnn_lstm <- function(object, units,
                              return_sequences = FALSE, return_state = FALSE, stateful = FALSE,
                              input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
                              dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
+
+    warning("layer_cudnn_lstm() is deprecated since Tensorflow v2.0. Please use layer_lstm() directly. ",
+          "layer_lstm() will leverage CuDNN kernels by default if a GPU is available and certain constraints are met. ",
+          "See vignette 'Working with RNN's' for details.")
+
   args <- list(
     units = as.integer(units),
     kernel_initializer = kernel_initializer,
@@ -354,5 +363,5 @@ layer_cudnn_lstm <- function(object, units,
     weights = weights
   )
 
-  create_layer(keras$layers$CuDNNLSTM, object, args)
+  create_layer(tensorflow::tf$compat$v1$keras$layers$CuDNNLSTM, object, args)
 }

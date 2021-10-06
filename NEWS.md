@@ -1,5 +1,7 @@
 # keras (development version)
 
+- `layer_cudnn_gru()` and `layer_cudnn_lstm()` are deprecated. `layer_gru()` and `layer_lstm()` will
+  automatically use CuDNN if it is available.
 # keras 2.6.1
 
 - New family of *preprocessing* layers. These are the spiritual successor to the `tfdatasets::step_*` family of data transformers (to be deprecated in a future release).
