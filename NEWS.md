@@ -1,5 +1,16 @@
 # keras (development version)
 
+- New API for constructing RNN (Recurrent Neural Network) layers. This is a
+  flexible interface that complements the existing RNN layers. It is primarily
+  intended for advanced / research applications, e.g, prototyping novel
+  architectures. It allows you to compose a RNN with a custom "cell", a Keras layer that
+  processes one step of a sequence.
+  New symbols:
+    - `layer_rnn()`, which can compose with builtin cells:
+    - `layer_gru_cell()`
+    - `layer_lstm_cell()`
+    - `layer_simple_rnn_cell()`
+    - `layer_stacked_rnn_cells()`
 - `layer_cudnn_gru()` and `layer_cudnn_lstm()` are deprecated. `layer_gru()` and `layer_lstm()` will
   automatically use CuDNN if it is available.
 # keras 2.6.1
