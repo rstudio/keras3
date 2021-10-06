@@ -13,8 +13,18 @@
     - `layer_stacked_rnn_cells()`
   To learn more, including how to make a custom cell layer, see the new vignette:
   "Working with RNNs".
+
 - `layer_cudnn_gru()` and `layer_cudnn_lstm()` are deprecated. `layer_gru()` and `layer_lstm()` will
   automatically use CuDNN if it is available.
+
+- New function `%<-active%`, a ergonomic wrapper around `makeActiveBinding()`
+  for constructing Python `@property` decorated methods in `%py_class%`.
+
+- `layer_bidirectional()` gains `backwards_layer` and `...` arguments.
+  Position of `weights` argument moves from 10 to 4 to match python API.
+
+- `k_random_uniform()` now automatically coerces `minval` and `maxval` to the output dtype.
+
 # keras 2.6.1
 
 - New family of *preprocessing* layers. These are the spiritual successor to the `tfdatasets::step_*` family of data transformers (to be deprecated in a future release).
@@ -69,7 +79,7 @@
     `"tf-idf"` is renamed to `"tf_idf"` (backwards compatibility is preserved).
   - Fixed an issue where valid values of `output_mode = "int"` would incorrectly
     return a ragged tensor output shape.
-    
+
 
 - Existing layer instances gain the ability to be added to sequential models via a call. E.g.:
   ```r
