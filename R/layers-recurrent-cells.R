@@ -216,7 +216,7 @@ function(units,
 #'  ````r
 #'  inputs <- k_random_uniform(c(32, 10, 8))
 #'  output <- inputs %>% layer_rnn(layer_gru_cell(4))
-#'  output$shape  # TensorShape([20, 64])
+#'  output$shape  # TensorShape([32, 4])
 #'
 #'  rnn <- layer_rnn(cell = layer_gru_cell(4),
 #'                   return_sequence = TRUE,

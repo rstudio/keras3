@@ -16,24 +16,24 @@ test_succeeds("layer_lstm_cell", {
   )
   c(whole_seq_output, final_memory_state, final_carry_state) %<-% rnn(inputs)
 
-  expect_equal(dim(whole_seq_output)  ,   c(32, 10, 4))
-  expect_equal(dim(final_memory_state) ,  c(32, 4))
-  expect_equal(dim(final_carry_state) ,   c(32, 4))
+  expect_equal(dim(whole_seq_output)  , c(32, 10, 4))
+  expect_equal(dim(final_memory_state), c(32, 4))
+  expect_equal(dim(final_carry_state) , c(32, 4))
 })
 
 test_succeeds("layer_gru_cell", {
   # GRUCell
  inputs <- k_random_uniform(c(32, 10, 8))
  output <- inputs %>% layer_rnn(layer_gru_cell(4))
- expect_equal(output$shape, shape(20, 64))
+ expect_true(output$shape == shape(32, 4))
 
  rnn <- layer_rnn(cell = layer_gru_cell(4),
                   return_sequence = TRUE,
                   return_state = TRUE)
  c(whole_sequence_output, final_state) %<-% rnn(inputs)
 
-  expect_equal(whole_sequence_output$shape, shape(32, 10, 4))
-  expect_equal(final_state$shape,  shape(32, 4))
+  expect_true(whole_sequence_output$shape == shape(32, 10, 4))
+  expect_true(final_state$shape           == shape(32, 4))
 })
 
 test_succeeds("layer_rnn", {
