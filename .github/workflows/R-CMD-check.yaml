@@ -47,7 +47,7 @@ jobs:
 
           # these are allowed to fail
           - {os: 'ubuntu-20.04', tf: 'default', r: 'devel'}
-          # - {os: 'ubuntu-20.04', tf: '2.6.0rc2', r: 'release'}
+          - {os: 'ubuntu-20.04', tf: '2.7.0rc0', r: 'release'}
           # - {os: 'ubuntu-20.04', tf: 'nightly' , r: 'release'}
 
     runs-on: ${{ matrix.os }}
@@ -104,6 +104,9 @@ jobs:
             echo "$cmd"
             sudo $cmd
           done < <(Rscript -e "writeLines(remotes::system_requirements('$ID-$VERSION_ID'))")
+
+      - name: Use dev reticulate
+        run: remotes::install_github("rstudio/reticulate")
 
       - name: Install Package + deps
         run: remotes::install_local(dependencies = TRUE, force = TRUE)
