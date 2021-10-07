@@ -51,9 +51,6 @@ timestep is to be fed to next timestep.
 3. `layer_lstm()`, first proposed in
 [Hochreiter & Schmidhuber, 1997](https://www.bioinf.jku.at/publications/older/2604.pdf).
 
-In early 2015, Keras had the first reusable open-source Python implementations of LSTM
-and GRU.
-
 Here is a simple example of a sequential model that processes sequences of integers,
 embeds each integer into a 64-dimensional vector, then processes the sequence of
 vectors using a `layer_lstm()`.
@@ -166,8 +163,7 @@ Unlike RNN layers, which processes whole batches of input sequences, the RNN cel
 processes a single timestep.
 
 The cell is the inside of the `for` loop of a RNN layer. Wrapping a cell inside a
-`layer_rnn()` layer gives you a layer capable of processing batches of
-sequences, e.g. `layer_rnn(layer_lstm_cell(10))`.
+`layer_rnn()` layer gives you a layer capable of processing a sequence, e.g. `layer_rnn(layer_lstm_cell(10))`.
 
 Mathematically, `layer_rnn(layer_lstm_cell(10))` produces the same result as `layer_lstm(10)`. In fact,
 the implementation of this layer in TF v1.x was just creating the corresponding RNN
@@ -559,7 +555,7 @@ rnn <- layer_rnn(cell = cell)
 input_1 = layer_input(shape(NULL, i1))
 input_2 = layer_input(shape(NULL, i2, i3))
 
-outputs = rnn(tuple(input_1, input_2))a
+outputs = rnn(tuple(input_1, input_2))
 
 model = keras_model(list(input_1, input_2), outputs)
 
