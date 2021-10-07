@@ -4,8 +4,12 @@ library(dplyr, warn.conflicts = FALSE)
 library(reticulate)
 library(envir)
 
+# keras::install_keras(envname = "tf-2.6-cpu")
+# tools/setup-test-envs.R
+# use_miniconda("tf-2.6-cpu", required=TRUE)
+
 options(tibble.print_min = 100)
-py_to_r.python.builtin.dict_items <- function(x) {
+py_to_r_python.builtin.dict_items <- function(x) {
   x <- py_eval("lambda x: [(k, v) for k, v in x]")(x)
   out <- lapply(x, `[[`, 2L)
   names(out) <- lapply(x, `[[`, 1L)
@@ -37,10 +41,10 @@ attach_eval({
 })
 
 
-
 default_ignore <- c("self", "kwargs")
 DF <-
   ls(pattern = "^layer_", envir = asNamespace("keras")) %>%
+  setdiff(c("layer_cudnn_gru", "layer_cudnn_lstm")) %>%
   set_names() %>%
   lapply(function(r_func_nm) {
     r_func <- get(r_func_nm, envir = asNamespace("keras"))
@@ -49,7 +53,9 @@ DF <-
                      asNamespace("keras")) %error% NULL
 
     py_init_formals <-
-      inspect$signature(py_layer$`__init__`)$parameters$items() %error% NULL
+      # keras:::py_formals(py_layer) %error% NULL
+      # inspect$signature(py_layer$`__init__`)$parameters$items() %error% NULL
+      py_to_r_python.builtin.dict_items(inspect$signature(py_layer$`__init__`)$parameters$items()) %error% NULL
     py_init_args <- names(py_init_formals) %error% NULL
     py_init_defaults <- py_init_formals |> lapply(function(x) x$default) %error% NULL
     lst(r_func_nm, r_func, r_args, py_layer, py_init_args, py_init_defaults)
@@ -60,7 +66,11 @@ DF <-
   mutate(missing_in_r_func_args = map2_chr(r_args, py_init_args,
                                            ~ setdiff(.y, c(.x, default_ignore)) %>%
                                              paste(collapse = ", "))) %>%
-  filter(r_func_nm != "layer_activation_selu")  # Not a real layer on keras side
+  filter(r_func_nm != "layer_activation_selu") %>%   # Not a real layer on keras side
+  # filter(!r_func_nm %in% c("layer_cudnn_gru", "layer_cudnn_lstm"))
+  identity()
+
+
 
 DF$missing_in_r_func_args[DF$r_func_nm == "layer_lambda"] %<>% sub("function", "", .)
 
@@ -68,6 +78,19 @@ DF %>%
   filter(missing_in_r_func_args != "") %>%
   select(r_func_nm, missing_in_r_func_args) %>%
   print(n = Inf)
+
+# A tibble: 0 × 2
+# … with 2 variables: r_func_nm <chr>, missing_in_r_func_args <chr>
+
+# tf 2.6
+# # A tibble: 5 × 2
+#   r_func_nm                       missing_in_r_func_args
+#   <chr>                           <chr>
+# 1 layer_global_average_pooling_2d keepdims
+# 2 layer_global_average_pooling_3d keepdims
+# 3 layer_global_max_pooling_1d     keepdims
+# 4 layer_global_max_pooling_2d     keepdims
+# 5 layer_global_max_pooling_3d     keepdims
 
 # tf 2.5
 # # A tibble: 12 x 2

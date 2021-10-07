@@ -116,6 +116,7 @@ r_doc_from_py_fn <- function(py_fn, name = NULL) {
 new_layer_wrapper <- function(py_obj) {
   # py_obj_expr <- substitute(py_obj)
 
+  # browser()
   transformers <- NULL
   frmls <- keras:::py_formals(py_obj)
   for(i in seq_along(frmls)) {
