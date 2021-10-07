@@ -24,13 +24,15 @@
 - New function `%<-active%`, a ergonomic wrapper around `makeActiveBinding()`
   for constructing Python `@property` decorated methods in `%py_class%`.
 
-- `layer_bidirectional()` gains `backwards_layer` and `...` arguments.
-  Position of `weights` argument moves from 10 to 4 to match python API.
+- `bidirectional()` sequence processing layer wrapper gains a `backwards_layer` arguments.
 
-- Global pooling layers `layer_global_{max,average}_pooling_{1,2,3}d()`:
-   - New `keepdims` argument with default value `FALSE`.
-   - Standard layer arguments `batch_size`, `name`, `trainable`, `weights` replaced with `...`
-     (and must now be provided as named arguments).
+- Global pooling layers `layer_global_{max,average}_pooling_{1,2,3}d()` gain a 
+  `keepdims` argument with default value `FALSE`.
+
+- Signatures for layer functions are in the process of being simplified. 
+  Standard layer arguments are moving to `...` where appropriate (and will need to be provided as named arguments). 
+  Standard layer arguments include: `input_shape`, `batch_input_shape`, `batch_size`, `dtype`, `name`, `trainable`, `weights`.
+  Layers updated: `layer_global_{max,average}_pooling_{1,2,3}d()`, `time_distributed()`, `bidirectional()`.
 
 - `k_random_uniform()` now automatically coerces `minval` and `maxval` to the output dtype.
 
