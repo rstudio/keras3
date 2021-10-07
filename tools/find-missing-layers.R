@@ -3,6 +3,10 @@ library(purrr)
 library(dplyr, warn.conflicts = FALSE)
 library(reticulate)
 library(envir)
+library(tidyr, include.only = "unchop")
+# attach_eval({
+#   import_from(tidyr, unchop)
+# })
 
 options(tibble.print_min = 200)
 
@@ -125,7 +129,7 @@ missing_layers_df <- df %>%
                          "InputLayer", "Layer", "InputSpec"))
 
 source("tools/make-wrapper2.R")
-
+#
 missing_layers_df %>%
   select(py_name)
 # # A tibble: 6 × 1

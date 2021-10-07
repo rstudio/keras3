@@ -16,6 +16,8 @@
 
 - `layer_lstm()` default value for `recurrent_activation` changed from `"hard_sigmoid"` to `"sigmoid"`.
 
+- New layers `layer_conv_lstm_1d()` and `layer_conv_lstm_3d()`.
+
 - `layer_cudnn_gru()` and `layer_cudnn_lstm()` are deprecated. `layer_gru()` and `layer_lstm()` will
   automatically use CuDNN if it is available.
 
