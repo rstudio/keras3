@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
       </span>
     </div>
 
@@ -140,6 +140,9 @@
     </li>
     <li>
       <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
+    </li>
+    <li>
+      <a href="../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Using Keras</li>
@@ -420,8 +423,8 @@ isn't provided.</p></td>
     
 
 
-<p>3D tensor with shape <code>(batch_size, timesteps, input_dim)</code>,
-(Optional) 2D tensors with shape <code>(batch_size, output_dim)</code>.</p>
+<p>N-D tensor with shape <code>(batch_size, timesteps, ...)</code>,
+or <code>(timesteps, batch_size, ...)</code> when <code>time_major = TRUE</code>.</p>
     <h2 class="hasAnchor" id="output-shape"><a class="anchor" href="#output-shape"></a>Output shape</h2>
 
     
@@ -429,10 +432,12 @@ isn't provided.</p></td>
 <ul>
 <li><p>if <code>return_state</code>: a list of tensors. The first tensor is
 the output. The remaining tensors are the last states,
-each with shape <code>(batch_size, units)</code>.</p></li>
-<li><p>if <code>return_sequences</code>: 3D tensor with shape
-<code>(batch_size, timesteps, units)</code>.</p></li>
-<li><p>else, 2D tensor with shape <code>(batch_size, units)</code>.</p></li>
+each with shape <code>(batch_size, state_size)</code>, where <code>state_size</code>
+could be a high dimension tensor shape.</p></li>
+<li><p>if <code>return_sequences</code>: N-D tensor with shape <code>[batch_size, timesteps, output_size]</code>, where <code>output_size</code> could be a high dimension tensor shape, or
+<code>[timesteps, batch_size, output_size]</code> when <code>time_major</code> is <code>TRUE</code></p></li>
+<li><p>else, N-D tensor with shape <code>[batch_size, output_size]</code>, where
+<code>output_size</code> could be a high dimension tensor shape.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="masking"><a class="anchor" href="#masking"></a>Masking</h2>
@@ -440,49 +445,58 @@ each with shape <code>(batch_size, units)</code>.</p></li>
     
 
 
-<p>This layer supports masking for input data with a variable number
-of timesteps. To introduce masks to your data,
-use an embedding layer with the <code>mask_zero</code> parameter
-set to <code>TRUE</code>.</p>
+<p>This layer supports masking for input data with a variable number of
+timesteps. To introduce masks to your data, use
+<code><a href='layer_embedding.html'>layer_embedding()</a></code> with the <code>mask_zero</code> parameter set to <code>TRUE</code>.</p>
     <h2 class="hasAnchor" id="statefulness-in-rnns"><a class="anchor" href="#statefulness-in-rnns"></a>Statefulness in RNNs</h2>
 
     
 
 
-<p>You can set RNN layers to be 'stateful', which means that the states
-computed for the samples in one batch will be reused as initial states
-for the samples in the next batch. This assumes a one-to-one mapping
-between samples in different successive batches. For intuition behind
-statefulness, there is a helpful blog post here:
+<p>You can set RNN layers to be 'stateful', which means that the states computed
+for the samples in one batch will be reused as initial states for the samples
+in the next batch. This assumes a one-to-one mapping between samples in
+different successive batches.</p>
+<p>For intuition behind statefulness, there is a helpful blog post here:
 <a href='https://philipperemy.github.io/keras-stateful-lstm/'>https://philipperemy.github.io/keras-stateful-lstm/</a></p>
 <p>To enable statefulness:</p><ul>
 <li><p>Specify <code>stateful = TRUE</code> in the layer constructor.</p></li>
 <li><p>Specify a fixed batch size for your model. For sequential models,
-pass <code>batch_input_shape = c(...)</code> to the first layer in your model.
+pass <code>batch_input_shape = list(...)</code> to the first layer in your model.
 For functional models with 1 or more Input layers, pass
-<code>batch_shape = c(...)</code> to all the first layers in your model.
+<code>batch_shape = list(...)</code> to all the first layers in your model.
 This is the expected shape of your inputs <em>including the batch size</em>.
-It should be a vector of integers, e.g. <code><a href='https://rdrr.io/r/base/c.html'>c(32, 10, 100)</a></code>.
+It should be a list of integers, e.g. <code><a href='https://rdrr.io/r/base/list.html'>list(32, 10, 100)</a></code>.
 For dimensions which can vary (are not known ahead of time),
-use <code>NULL</code> in place of an integer, e.g. <code><a href='https://rdrr.io/r/base/c.html'>c(32, NULL, NULL)</a></code>.</p></li>
-<li><p>Specify <code>shuffle = FALSE</code> when calling fit().</p></li>
+use <code>NULL</code> in place of an integer, e.g. <code><a href='https://rdrr.io/r/base/list.html'>list(32, NULL, NULL)</a></code>.</p></li>
+<li><p>Specify <code>shuffle = FALSE</code> when calling <code><a href='https://generics.r-lib.org/reference/fit.html'>fit()</a></code>.</p></li>
 </ul>
 
-<p>To reset the states of your model, call <code><a href='reset_states.html'>reset_states()</a></code> on either
+<p>To reset the states of your model, call <code>layer$reset_states()</code> on either
 a specific layer, or on your entire model.</p>
     <h2 class="hasAnchor" id="initial-state-of-rnns"><a class="anchor" href="#initial-state-of-rnns"></a>Initial State of RNNs</h2>
 
     
 
 
-<p>You can specify the initial state of RNN layers symbolically by calling
-them with the keyword argument <code>initial_state</code>. The value of
-<code>initial_state</code> should be a tensor or list of tensors representing
-the initial state of the RNN layer.</p>
-<p>You can specify the initial state of RNN layers numerically by
-calling <code>reset_states</code> with the keyword argument <code>states</code>. The value of
-<code>states</code> should be a numpy array or list of numpy arrays representing
-the initial state of the RNN layer.</p>
+<p>You can specify the initial state of RNN layers symbolically by calling them
+with the keyword argument <code>initial_state.</code> The value of initial_state should
+be a tensor or list of tensors representing the initial state of the RNN
+layer.</p>
+<p>You can specify the initial state of RNN layers numerically by calling
+<code>reset_states</code> with the named argument <code>states.</code> The value of <code>states</code> should
+be an array or list of arrays representing the initial state of the RNN
+layer.</p>
+    <h2 class="hasAnchor" id="passing-external-constants-to-rnns"><a class="anchor" href="#passing-external-constants-to-rnns"></a>Passing external constants to RNNs</h2>
+
+    
+
+
+<p>You can pass "external" constants to the cell using the <code>constants</code> named
+argument of <code>RNN$__call__</code> (as well as <code>RNN$call</code>) method. This requires that the
+<code>cell$call</code> method accepts the same keyword argument <code>constants</code>. Such constants
+can be used to condition the cell transformation on additional static inputs
+(not changing over time), a.k.a. an attention mechanism.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
@@ -493,11 +507,17 @@ the initial state of the RNN layer.</p>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other recurrent layers: 
+    <div class='dont-index'>
+<ul>
+<li><p><a href='https://www.tensorflow.org/guide/keras/rnn'>https://www.tensorflow.org/guide/keras/rnn</a></p></li>
+</ul>
+
+<p>Other recurrent layers: 
 <code><a href='layer_cudnn_gru.html'>layer_cudnn_gru</a>()</code>,
 <code><a href='layer_cudnn_lstm.html'>layer_cudnn_lstm</a>()</code>,
 <code><a href='layer_gru.html'>layer_gru</a>()</code>,
-<code><a href='layer_lstm.html'>layer_lstm</a>()</code></p></div>
+<code><a href='layer_lstm.html'>layer_lstm</a>()</code>,
+<code><a href='layer_rnn.html'>layer_rnn</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

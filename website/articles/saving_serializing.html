@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
       </span>
     </div>
 
@@ -97,6 +97,9 @@
     </li>
     <li>
       <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
+    </li>
+    <li>
+      <a href="../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
@@ -182,7 +185,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="saving_serializing_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Saving and serializing models</h1>
@@ -246,7 +249,7 @@
 <span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span>, batch_size <span class="op">=</span> <span class="fl">64</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Save predictions for future checks</span>
-<span class="va">predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">x_test</span><span class="op">)</span></code></pre></div>
+<span class="va">predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">x_test</span><span class="op">)</span></code></pre></div>
 <div id="whole-model-saving" class="section level3">
 <h3 class="hasAnchor">
 <a href="#whole-model-saving" class="anchor"></a>Whole-model saving</h3>
@@ -266,7 +269,7 @@
 <span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/save_model_hdf5.html">load_model_hdf5</a></span><span class="op">(</span><span class="st">"model.h5"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Check that the state is preserved</span>
-<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
 <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">new_predictions</span><span class="op">)</span></code></pre></div>
 <p>Note that the optimizer state is preserved as well so you can resume training where you left off.</p>
 </div>
@@ -282,7 +285,7 @@
 <span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/save_model_tf.html">load_model_tf</a></span><span class="op">(</span><span class="st">"model/"</span><span class="op">)</span>
 
 <span class="co"># Check that the state is preserved</span>
-<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
 <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">new_predictions</span><span class="op">)</span></code></pre></div>
 <p>Note that the optimizer state is preserved as well so you can resume training where you left off.</p>
 <p>The <code>SavedModel</code> files that were created contain:</p>
@@ -306,7 +309,7 @@
 <span class="va">reinitialized_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Note that the model state is not preserved! We only saved the architecture.</span>
-<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">reinitialized_model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">reinitialized_model</span>, <span class="va">x_test</span><span class="op">)</span>
 <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">new_predictions</span><span class="op">)</span></code></pre></div>
 <p>You can alternatively use <code><a href="../reference/model_to_json.html">model_to_json()</a></code> and <code><a href="../reference/model_to_json.html">model_from_json()</a></code>, which uses a JSON string to store the config instead of a named list. This is useful to save the config to disk.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -321,7 +324,7 @@
 <code class="sourceCode R"><span class="va">weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="fu"><a href="../reference/get_weights.html">set_weights</a></span><span class="op">(</span><span class="va">reinitialized_model</span>, <span class="va">weights</span><span class="op">)</span>
 
-<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">reinitialized_model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">reinitialized_model</span>, <span class="va">x_test</span><span class="op">)</span>
 <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">new_predictions</span><span class="op">)</span></code></pre></div>
 <p>You can combine <code><a href="../reference/get_config.html">get_config()</a></code>/<code><a href="../reference/get_config.html">from_config()</a></code> and <code><a href="../reference/get_weights.html">get_weights()</a></code>/<code><a href="../reference/get_weights.html">set_weights()</a></code> to recreate your model in the same state. However, unlike <code>save_model_hdf5</code>, this will not include the training config and the optimizer. You would have to call <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> again before using the model for training.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -332,7 +335,7 @@
 <span class="fu"><a href="../reference/get_weights.html">set_weights</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">weights</span><span class="op">)</span>
 
 <span class="co"># Check that the state is preserved</span>
-<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
 <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">new_predictions</span><span class="op">)</span></code></pre></div>
 <p>Note that the optimizer was not preserved, so the model should be compiled anew before training (and the optimizer will start from a blank state).</p>
 <p>The save-to-disk alternative to <code><a href="../reference/get_weights.html">get_weights()</a></code> and <code><a href="../reference/get_weights.html">set_weights(weights)</a></code> is <code>save_weights(fpath)</code> and <code>load_weights(fpath)</code>.</p>
@@ -350,7 +353,7 @@
 <span class="fu"><a href="../reference/save_model_weights_hdf5.html">load_model_weights_hdf5</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="st">"model_weights.h5"</span><span class="op">)</span>
 
 <span class="co"># Check that the state is preserved</span>
-<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
 <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">new_predictions</span><span class="op">)</span></code></pre></div>
 <p>Note that the optimizer was not preserved. But remember that the simplest, recommended way is just this:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -415,7 +418,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/save_model_weights_tf.html">save_model_weights_tf</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"my_weights"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Save predictions for future checks</span>
-<span class="va">predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="va">predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">x_test</span><span class="op">)</span>
 <span class="co"># Also save the loss on the first batch</span>
 <span class="co"># to later assert that the optimizer state was preserved</span>
 <span class="va">first_batch_loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/train_on_batch.html">train_on_batch</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">x_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">64</span>,<span class="op">]</span>, <span class="va">y_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">64</span><span class="op">]</span><span class="op">)</span></code></pre></div>
@@ -434,7 +437,7 @@
 <span class="fu"><a href="../reference/save_model_weights_tf.html">load_model_weights_tf</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="st">"my_weights"</span><span class="op">)</span>
 
 <span class="co"># Check that the model state has been preserved</span>
-<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
+<span class="va">new_predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">new_model</span>, <span class="va">x_test</span><span class="op">)</span>
 <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/all.equal.data.table.html">all.equal</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">new_predictions</span><span class="op">)</span>
 
 <span class="co"># The optimizer state is preserved as well,</span>

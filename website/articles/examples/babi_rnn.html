@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
       </span>
     </div>
 
@@ -97,6 +97,9 @@
     </li>
     <li>
       <a href="../../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
+    </li>
+    <li>
+      <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
@@ -182,7 +185,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="babi_rnn_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>babi_rnn</h1>
@@ -312,8 +315,8 @@
 <p>For the resources related to the bAbI project, refer to: <a href="https://research.facebook.com/researchers/1543934539189348" class="uri">https://research.facebook.com/researchers/1543934539189348</a></p>
 <p>Notes:</p>
 <ul>
-<li>With default word, sentence, and query vector sizes, the GRU model achieves:</li>
-<li>100% test accuracy on QA1 in 20 epochs (2 seconds per epoch on CPU)</li>
+<li><p>With default word, sentence, and query vector sizes, the GRU model achieves:</p></li>
+<li><p>100% test accuracy on QA1 in 20 epochs (2 seconds per epoch on CPU)</p></li>
 <li><p>50% test accuracy on QA2 in 20 epochs (16 seconds per epoch on CPU) In comparison, the Facebook paper achieves 50% and 20% for the LSTM baseline.</p></li>
 <li><p>The task does not traditionally parse the question separately. This likely improves accuracy and is a good example of merging two RNNs.</p></li>
 <li><p>The word vector embeddings are not shared between the story and question RNNs.</p></li>

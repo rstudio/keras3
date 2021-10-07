@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
       </span>
     </div>
 
@@ -97,6 +97,9 @@
     </li>
     <li>
       <a href="../../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
+    </li>
+    <li>
+      <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
@@ -182,7 +185,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="pretrained_word_embeddings_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>pretrained_word_embeddings</h1>
@@ -245,7 +248,7 @@
 <span class="va">word_indices</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">word_seqs</span><span class="op">$</span><span class="va">word_index</span><span class="op">)</span>
 
 <span class="co"># then place them into data.frame </span>
-<span class="va">dic</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>word <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">word_indices</span><span class="op">)</span>, key <span class="op">=</span> <span class="va">word_indices</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">dic</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>word <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span><span class="op">(</span><span class="va">word_indices</span><span class="op">)</span>, key <span class="op">=</span> <span class="va">word_indices</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">key</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">max_words</span>,<span class="op">]</span>
 
 <span class="co"># join the words with GloVe vectors and</span>

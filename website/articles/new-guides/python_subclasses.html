@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
       </span>
     </div>
 
@@ -97,6 +97,9 @@
     </li>
     <li>
       <a href="../../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
+    </li>
+    <li>
+      <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
@@ -182,7 +185,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="python_subclasses_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Python Subclasses</h1>
@@ -282,9 +285,9 @@
   <span class="op">}</span>
 <span class="op">}</span></code></pre></div>
 <p>Notice, this is very similar to the equivalent <a href="https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/constraints/Constraint">Python code</a>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">class</span> NonNegative(tf.keras.constraints.Constraint):</a>
-<a class="sourceLine" id="cb6-2" title="2">    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, w):</a>
-<a class="sourceLine" id="cb6-3" title="3">        <span class="cf">return</span> w <span class="op">*</span> tf.cast(tf.math.greater_equal(w, <span class="fl">0.</span>), w.dtype)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NonNegative(tf.keras.constraints.Constraint):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, w):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> w <span class="op">*</span> tf.cast(tf.math.greater_equal(w, <span class="fl">0.</span>), w.dtype)</span></code></pre></div>
 <p>Some (potentially surprising) notes about <code><a href="../../reference/%py_class%.html">%py_class%</a></code>:</p>
 <ul>
 <li><p>Just like the Python <code>class</code> statement, it assigns the constructed class in the current scope! (There is no need to write <code>NonNegative &lt;- ...</code>).</p></li>

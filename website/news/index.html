@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
       </span>
     </div>
 
@@ -139,6 +139,9 @@
     </li>
     <li>
       <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
+    </li>
+    <li>
+      <a href="../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Using Keras</li>
@@ -231,20 +234,52 @@
       <small>Source: <a href='https://github.com/rstudio/keras/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="keras-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="development version">
+<a href="#keras-development-version" class="anchor"></a>keras (development version)<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<p>New API for constructing RNN (Recurrent Neural Network) layers. This is a flexible interface that complements the existing RNN layers. It is primarily intended for advanced / research applications, e.g, prototyping novel architectures. It allows you to compose a RNN with a custom “cell”, a Keras layer that processes one step of a sequence. New symbols:</p>
+<ul>
+<li>
+<code><a href="../reference/layer_rnn.html">layer_rnn()</a></code>, which can compose with builtin cells:</li>
+<li><code><a href="../reference/layer_gru_cell.html">layer_gru_cell()</a></code></li>
+<li><code><a href="../reference/layer_lstm_cell.html">layer_lstm_cell()</a></code></li>
+<li><code><a href="../reference/layer_simple_rnn_cell.html">layer_simple_rnn_cell()</a></code></li>
+<li>
+<code><a href="../reference/layer_stacked_rnn_cells.html">layer_stacked_rnn_cells()</a></code> To learn more, including how to make a custom cell layer, see the new vignette: “Working with RNNs”.</li>
+</ul>
+</li>
+<li><p><code><a href="../reference/layer_lstm.html">layer_lstm()</a></code> default value for <code>recurrent_activation</code> changed from <code>"hard_sigmoid"</code> to <code>"sigmoid"</code>.</p></li>
+<li><p>New layers <code><a href="../reference/layer_conv_lstm_1d.html">layer_conv_lstm_1d()</a></code> and <code><a href="../reference/layer_conv_lstm_3d.html">layer_conv_lstm_3d()</a></code>.</p></li>
+<li><p><code><a href="../reference/layer_cudnn_gru.html">layer_cudnn_gru()</a></code> and <code><a href="../reference/layer_cudnn_lstm.html">layer_cudnn_lstm()</a></code> are deprecated. <code><a href="../reference/layer_gru.html">layer_gru()</a></code> and <code><a href="../reference/layer_lstm.html">layer_lstm()</a></code> will automatically use CuDNN if it is available.</p></li>
+<li><p>New function <code><a href="../reference/%&lt;-active%.html">%&lt;-active%</a></code>, a ergonomic wrapper around <code><a href="https://rdrr.io/r/base/bindenv.html">makeActiveBinding()</a></code> for constructing Python <code>@property</code> decorated methods in <code><a href="../reference/%py_class%.html">%py_class%</a></code>.</p></li>
+<li><p><code>layer_bidirectional()</code> gains <code>backwards_layer</code> and <code>...</code> arguments. Position of <code>weights</code> argument moves from 10 to 4 to match python API.</p></li>
+<li>
+<p>Global pooling layers <code>layer_global_{max,average}_pooling_{1,2,3}d()</code>:</p>
+<ul>
+<li>New <code>keepdims</code> argument with default value <code>FALSE</code>.</li>
+<li>Standard layer arguments <code>batch_size</code>, <code>name</code>, <code>trainable</code>, <code>weights</code> replaced with <code>...</code> (and must now be provided as named arguments).</li>
+</ul>
+</li>
+<li><p><code><a href="../reference/k_random_uniform.html">k_random_uniform()</a></code> now automatically coerces <code>minval</code> and <code>maxval</code> to the output dtype.</p></li>
+</ul>
+</div>
     <div id="keras-261" class="section level1">
 <h1 class="page-header" data-toc-text="2.6.1">
-<a href="#keras-261" class="anchor"></a>keras 2.6.1<small> Unreleased </small>
+<a href="#keras-261" class="anchor"></a>keras 2.6.1<small> 2021-09-30 </small>
 </h1>
 <ul>
 <li>
 <p>New family of <em>preprocessing</em> layers. These are the spiritual successor to the <code>tfdatasets::step_*</code> family of data transformers (to be deprecated in a future release). Added a new vignette: “Working with Preprocessing Layers”. New functions:</p>
-Image preprocessing:
+<p>Image preprocessing:</p>
 <ul>
 <li><code><a href="../reference/layer_resizing.html">layer_resizing()</a></code></li>
 <li><code><a href="../reference/layer_rescaling.html">layer_rescaling()</a></code></li>
 <li><code><a href="../reference/layer_center_crop.html">layer_center_crop()</a></code></li>
 </ul>
-Image augmentation:
+<p>Image augmentation:</p>
 <ul>
 <li><code><a href="../reference/layer_random_crop.html">layer_random_crop()</a></code></li>
 <li><code><a href="../reference/layer_random_flip.html">layer_random_flip()</a></code></li>
@@ -255,19 +290,19 @@ Image augmentation:
 <li><code><a href="../reference/layer_random_height.html">layer_random_height()</a></code></li>
 <li><code><a href="../reference/layer_random_width.html">layer_random_width()</a></code></li>
 </ul>
-Categorical features preprocessing:
+<p>Categorical features preprocessing:</p>
 <ul>
 <li><code><a href="../reference/layer_category_encoding.html">layer_category_encoding()</a></code></li>
 <li><code><a href="../reference/layer_hashing.html">layer_hashing()</a></code></li>
 <li><code><a href="../reference/layer_integer_lookup.html">layer_integer_lookup()</a></code></li>
 <li><code><a href="../reference/layer_string_lookup.html">layer_string_lookup()</a></code></li>
 </ul>
-Numerical features preprocessing:
+<p>Numerical features preprocessing:</p>
 <ul>
 <li><code><a href="../reference/layer_normalization.html">layer_normalization()</a></code></li>
 <li><code><a href="../reference/layer_discretization.html">layer_discretization()</a></code></li>
 </ul>
-These join the previous set of text preprocessing functions, each of which have some minor changes:
+<p>These join the previous set of text preprocessing functions, each of which have some minor changes:</p>
 <ul>
 <li>
 <code><a href="../reference/layer_text_vectorization.html">layer_text_vectorization()</a></code> (changed arguments)</li>
@@ -277,7 +312,7 @@ These join the previous set of text preprocessing functions, each of which have 
 </ul>
 </li>
 <li>
-<code><a href="../reference/adapt.html">adapt()</a></code> changes:
+<p><code><a href="../reference/adapt.html">adapt()</a></code> changes:</p>
 <ul>
 <li>Now accepts all <em>features preprocessing</em> layers, previously only <code><a href="../reference/layer_text_vectorization.html">layer_text_vectorization()</a></code> instances were valid.</li>
 <li>
@@ -286,17 +321,16 @@ These join the previous set of text preprocessing functions, each of which have 
 <li>Now returns the adapted layer invisibly for composability with <code><a href="../reference/%&gt;%.html">%&gt;%</a></code> (previously returned <code>NULL</code>)</li>
 </ul>
 </li>
+<li><p><code><a href="../reference/layer_text_vectorization.html">get_vocabulary()</a></code> gains a <code>include_special_tokens</code> argument.</p></li>
 <li>
-<code><a href="../reference/layer_text_vectorization.html">get_vocabulary()</a></code> gains a <code>include_special_tokens</code> argument.</li>
-<li>
-<code><a href="../reference/layer_text_vectorization.html">set_vocabulary()</a></code>:
+<p><code><a href="../reference/layer_text_vectorization.html">set_vocabulary()</a></code>:</p>
 <ul>
 <li>Now returns the adapted layer invisibly for composability with <code><a href="../reference/%&gt;%.html">%&gt;%</a></code> (previously returned <code>NULL</code>)</li>
 <li>Signature simplified. Deprecated arguments (<code>df_data</code> <code>oov_df_value</code>) are now subsumed in <code>...</code>.</li>
 </ul>
 </li>
 <li>
-<code><a href="../reference/layer_text_vectorization.html">layer_text_vectorization()</a></code>:
+<p><code><a href="../reference/layer_text_vectorization.html">layer_text_vectorization()</a></code>:</p>
 <ul>
 <li>valid values for argument <code>output_mode</code> change: <code>"binary"</code> is renamed to <code>"multi_hot"</code> and <code>"tf-idf"</code> is renamed to <code>"tf_idf"</code> (backwards compatibility is preserved).</li>
 <li>Fixed an issue where valid values of <code>output_mode = "int"</code> would incorrectly return a ragged tensor output shape.</li>
@@ -325,19 +359,17 @@ These join the previous set of text preprocessing functions, each of which have 
 <p>Breaking changes (Tensorflow 2.6):</p>
 <ul>
 <li><p>Note: The following breaking changes are specific to Tensorflow version 2.6.0. However, the keras R package maintains compatibility with multiple versions of Tensorflow/Keras. You can upgrade the R package and still preserve the previous behavior by installing a specific version of Tensorflow: <code><a href="../reference/install_keras.html">keras::install_keras(tensorflow="2.4.0")</a></code></p></li>
-<li>
-<code><a href="../reference/predict_proba.html">predict_proba()</a></code> and <code><a href="../reference/predict_proba.html">predict_classes()</a></code> were removed.</li>
-<li>
-<code><a href="../reference/model_to_yaml.html">model_to_yaml()</a></code> and <code><a href="../reference/model_to_yaml.html">model_from_yaml()</a></code> were removed.</li>
-<li>default changed: <code><a href="../reference/layer_text_vectorization.html">layer_text_vectorization(pad_to_max_tokens=FALSE)</a></code>
-</li>
+<li><p><code><a href="../reference/predict_proba.html">predict_proba()</a></code> and <code><a href="../reference/predict_proba.html">predict_classes()</a></code> were removed.</p></li>
+<li><p><code><a href="../reference/model_to_yaml.html">model_to_yaml()</a></code> and <code><a href="../reference/model_to_yaml.html">model_from_yaml()</a></code> were removed.</p></li>
+<li><p>default changed: <code><a href="../reference/layer_text_vectorization.html">layer_text_vectorization(pad_to_max_tokens=FALSE)</a></code></p></li>
 <li><p><code><a href="../reference/layer_text_vectorization.html">set_vocabulary()</a></code> arguments <code>df_data</code> and <code>oov_df_value</code> are removed. They are replaced by the new argument <code>idf_weights</code>.</p></li>
 </ul>
 <p>New Features:</p>
 <ul>
 <li><p>Default Tensorflow/Keras version is now 2.6</p></li>
 <li><p>Introduced <code><a href="../reference/%py_class%.html">%py_class%</a></code>, an R-language constructor for Python classes.</p></li>
-<li>New vignettes:
+<li>
+<p>New vignettes:</p>
 <ul>
 <li>Subclassing Python classes: How to use <code><a href="../reference/%py_class%.html">%py_class%</a></code>.</li>
 <li>Making new layers and models via subclassing.</li>
@@ -346,7 +378,8 @@ These join the previous set of text preprocessing functions, each of which have 
 </ul>
 </li>
 <li><p>The <code>keras</code> Python module is exported</p></li>
-<li>Major changes to the underlying handling of custom R6 layer classes.
+<li>
+<p>Major changes to the underlying handling of custom R6 layer classes.</p>
 <ul>
 <li>A new <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">r_to_py()</a></code> method is provided for <code>R6ClassGenerator</code> objects.</li>
 <li>R6 custom layers can now inherit directly from Python layer classes or other R6 custom layer classes.</li>
@@ -383,17 +416,18 @@ These join the previous set of text preprocessing functions, each of which have 
 </li>
 <li><p><code><a href="../reference/Layer.html">Layer()</a></code> custom layer constructor is now lazy about initializing the Python session and safe to use on the top level of an R package (<a href='https://github.com/rstudio/keras/issues/1229'>#1229</a>).</p></li>
 <li><p>New function <code><a href="../reference/create_layer_wrapper.html">create_layer_wrapper()</a></code> that can create a composing R function wrapper around a custom layer class.</p></li>
-<li>Refactored <code><a href="../reference/install_keras.html">install_keras()</a></code> (along with <code><a href="https://rdrr.io/pkg/tensorflow/man/install_tensorflow.html">tensorflow::install_tensorflow()</a></code>). Installation should be more reliable for more users now. If you encounter installation issues, please file an issue: <a href="https://github.com/rstudio/keras/issues/new" class="uri">https://github.com/rstudio/keras/issues/new</a>
+<li>
+<p>Refactored <code><a href="../reference/install_keras.html">install_keras()</a></code> (along with <code><a href="https://rdrr.io/pkg/tensorflow/man/install_tensorflow.html">tensorflow::install_tensorflow()</a></code>). Installation should be more reliable for more users now. If you encounter installation issues, please file an issue: <a href="https://github.com/rstudio/keras/issues/new" class="uri">https://github.com/rstudio/keras/issues/new</a></p>
 <ul>
 <li><p>Potentially breaking change: numeric versions supplied without a patchlevel now automatically pull the latest patch release. (e.g. <code><a href="../reference/install_keras.html">install_keras(tensorflow="2.4")</a></code> will install tensorflow version “2.4.2”. Previously it would install “2.4.0”)</p></li>
-<li>pandas is now a default extra packages installed by <code><a href="../reference/install_keras.html">install_keras()</a></code>
-</li>
+<li><p>pandas is now a default extra packages installed by <code><a href="../reference/install_keras.html">install_keras()</a></code></p></li>
 <li><p>pyyaml is no longer a installed by default if the Tensorflow version &gt;= 2.6.</p></li>
 </ul>
 </li>
-<li>Loss functions:
+<li>
+<p>Loss functions:</p>
 <ul>
-<li>All the loss functions gain the ability to return a callable (a <code>keras$losses$Loss</code> instance) if <code>y_true</code> and <code>y_pred</code> arguments are missing.</li>
+<li><p>All the loss functions gain the ability to return a callable (a <code>keras$losses$Loss</code> instance) if <code>y_true</code> and <code>y_pred</code> arguments are missing.</p></li>
 <li>
 <p>New builtin loss functions:</p>
 <ul>
@@ -403,11 +437,11 @@ These join the previous set of text preprocessing functions, each of which have 
 </li>
 </ul>
 </li>
-<li>Metric functions:
+<li>
+<p>Metric functions:</p>
 <ul>
-<li>All the metric functions gain the ability to return a <code>keras$metrics$Metric</code> instance if called without <code>y_true</code> and <code>y_pred</code>
-</li>
-<li>Each metric function is now documented separately, with a common <code><a href="../reference/Metric.html">?Metric</a></code> topic demonstrating example usage.</li>
+<li><p>All the metric functions gain the ability to return a <code>keras$metrics$Metric</code> instance if called without <code>y_true</code> and <code>y_pred</code></p></li>
+<li><p>Each metric function is now documented separately, with a common <code><a href="../reference/Metric.html">?Metric</a></code> topic demonstrating example usage.</p></li>
 <li>
 <p>New built-in metrics:</p>
 <ul>
@@ -498,7 +532,8 @@ These join the previous set of text preprocessing functions, each of which have 
 </tbody>
 </table>
 </li>
-<li>The <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> method for keras models has been updated:
+<li>
+<p>The <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> method for keras models has been updated:</p>
 <ul>
 <li>
 <code>optimizer</code> is now an optional argument. It defaults to <code>"rmsprop"</code> for regular keras models. Custom models can specify their own default optimizer.</li>
@@ -634,7 +669,7 @@ These join the previous set of text preprocessing functions, each of which have 
 <li><p>Add <code>data_format</code> argument to <code><a href="../reference/layer_conv_1d.html">layer_conv_1d()</a></code>.</p></li>
 <li><p>Add <code><a href="../reference/layer_activation_relu.html">layer_activation_relu()</a></code>, making the ReLU activation easier to configure while retaining easy serialization capabilities.</p></li>
 <li><p>Add <code>axis = -1</code> argument in backend crossentropy functions specifying the class prediction axis in the input tensor.</p></li>
-<li><p>Handle symbolic tensors and TF datasets in calls to <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code>, and <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code></p></li>
+<li><p>Handle symbolic tensors and TF datasets in calls to <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code>, and <code><a href="https://rdrr.io/pkg/raster/man/predict.html">predict()</a></code></p></li>
 <li><p>Add <code>embeddings_data</code> argument to <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code></p></li>
 <li><p>Support for defining custom Keras models (i.e. custom <code><a href="https://rdrr.io/r/base/call.html">call()</a></code> logic for forward pass)</p></li>
 <li><p>Handle named list of model output names in <code>metrics</code> argument of <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code></p></li>
@@ -764,7 +799,7 @@ These join the previous set of text preprocessing functions, each of which have 
 <li><p>Better support for training models from data tensors in TensorFlow (e.g. Datasets, TFRecords). Add a related example script.</p></li>
 <li><p>Add <code><a href="../reference/clone_model.html">clone_model()</a></code> function, enabling to construct a new model, given an existing model to use as a template. Works even in a TensorFlow graph different from that of the original model.</p></li>
 <li><p>Add <code>target_tensors</code> argument in <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code>, enabling to use custom tensors or placeholders as model targets.</p></li>
-<li><p>Add <code>steps_per_epoch</code> argument in <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, enabling to train a model from data tensors in a way that is consistent with training from arrays. Similarly, add <code>steps</code> argument in <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code>.</p></li>
+<li><p>Add <code>steps_per_epoch</code> argument in <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, enabling to train a model from data tensors in a way that is consistent with training from arrays. Similarly, add <code>steps</code> argument in <code><a href="https://rdrr.io/pkg/raster/man/predict.html">predict()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code>.</p></li>
 <li><p>Add <code><a href="../reference/layer_subtract.html">layer_subtract()</a></code> layer function.</p></li>
 <li><p>Add <code>weighted_metrics</code> argument in compile to specify metric functions meant to take into account <code>sample_weight</code> or <code>class_weight</code>.</p></li>
 <li><p>Enable stateful RNNs with CNTK.</p></li>
@@ -784,7 +819,7 @@ These join the previous set of text preprocessing functions, each of which have 
 <li><p>Added <code>return_state</code> argument to recurrent layers.</p></li>
 <li><p>Don’t re-export <code><a href="https://rdrr.io/pkg/tensorflow/man/install_tensorflow.html">install_tensorflow()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/tf_config.html">tf_config()</a></code> from tensorflow package.</p></li>
 <li><p><code><a href="../reference/is_keras_available.html">is_keras_available()</a></code> function to probe whether the Keras Python package is available in the current environment.</p></li>
-<li><p><code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> S3 method for Keras training history</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/raster/man/as.data.frame.html">as.data.frame()</a></code> S3 method for Keras training history</p></li>
 <li><p>Remove names from <code><a href="../reference/keras_model.html">keras_model()</a></code> inputs</p></li>
 <li><p>Return result of <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code> as named list</p></li>
 <li><p>Write run metrics and evaluation data to tfruns</p></li>

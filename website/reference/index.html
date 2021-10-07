@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
       </span>
     </div>
 
@@ -139,6 +139,9 @@
     </li>
     <li>
       <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
+    </li>
+    <li>
+      <a href="../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Using Keras</li>
@@ -513,9 +516,21 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="layer_conv_lstm_1d.html">layer_conv_lstm_1d()</a></code> </p>
+        </td>
+        <td><p>1D Convolutional LSTM</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="layer_conv_lstm_2d.html">layer_conv_lstm_2d()</a></code> </p>
         </td>
         <td><p>Convolutional LSTM.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_conv_lstm_3d.html">layer_conv_lstm_3d()</a></code> </p>
+        </td>
+        <td><p>3D Convolutional LSTM</p></td>
       </tr><tr>
         
         <td>
@@ -824,21 +839,52 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="layer_cudnn_gru.html">layer_cudnn_gru()</a></code> </p>
-        </td>
-        <td><p>Fast GRU implementation backed by <a href='https://developer.nvidia.com/cudnn'>CuDNN</a>.</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="layer_lstm.html">layer_lstm()</a></code> </p>
         </td>
         <td><p>Long Short-Term Memory unit - Hochreiter 1997.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-customize-recurrent-layers" class="hasAnchor"><a href="#section-customize-recurrent-layers" class="anchor"></a>Customize Recurrent Layers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="layer_rnn.html">layer_rnn()</a></code> </p>
+        </td>
+        <td><p>Base class for recurrent layers</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="layer_cudnn_lstm.html">layer_cudnn_lstm()</a></code> </p>
+          <p><code><a href="layer_simple_rnn_cell.html">layer_simple_rnn_cell()</a></code> </p>
         </td>
-        <td><p>Fast LSTM implementation backed by <a href='https://developer.nvidia.com/cudnn'>CuDNN</a>.</p></td>
+        <td><p>Cell class for SimpleRNN</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_gru_cell.html">layer_gru_cell()</a></code> </p>
+        </td>
+        <td><p>Cell class for the GRU layer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_lstm_cell.html">layer_lstm_cell()</a></code> </p>
+        </td>
+        <td><p>Cell class for the LSTM layer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_stacked_rnn_cells.html">layer_stacked_rnn_cells()</a></code> </p>
+        </td>
+        <td><p>Wrapper allowing a stack of RNN cells to behave as a single cell</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -1085,7 +1131,7 @@
         <td>
           <p><code><a href="layer_hashing.html">layer_hashing()</a></code> </p>
         </td>
-        <td><p>Implements categorical feature hashing, also known as "hashing trick"</p></td>
+        <td><p>A preprocessing layer which hashes and bins categorical features.</p></td>
       </tr><tr>
         
         <td>
@@ -1172,7 +1218,7 @@
         <td>
           <p><code><a href="bidirectional.html">bidirectional()</a></code> </p>
         </td>
-        <td><p>Bidirectional wrapper for RNNs.</p></td>
+        <td><p>Bidirectional wrapper for RNNs</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -3242,6 +3288,12 @@ augmented/normalized data.</p></td>
           <p><code><a href="grapes-py_class-grapes.html">`%py_class%`</a></code> </p>
         </td>
         <td><p>Make a python class constructor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="grapes-set-active-grapes.html">`%&lt;-active%`</a></code> </p>
+        </td>
+        <td><p>Make an Active Binding</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -3279,6 +3331,18 @@ augmented/normalized data.</p></td>
           <p><code><a href="loss_cosine_proximity.html">loss_cosine_proximity()</a></code> </p>
         </td>
         <td><p>(Deprecated) loss_cosine_proximity</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_cudnn_gru.html">layer_cudnn_gru()</a></code> </p>
+        </td>
+        <td><p>Fast GRU implementation backed by <a href='https://developer.nvidia.com/cudnn'>CuDNN</a>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_cudnn_lstm.html">layer_cudnn_lstm()</a></code> </p>
+        </td>
+        <td><p>Fast LSTM implementation backed by <a href='https://developer.nvidia.com/cudnn'>CuDNN</a>.</p></td>
       </tr>
     </tbody>
     </table>

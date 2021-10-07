@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bidirectional wrapper for RNNs. — bidirectional • keras</title>
+<title>Bidirectional wrapper for RNNs — bidirectional • keras</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,8 @@
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Bidirectional wrapper for RNNs. — bidirectional" />
-<meta property="og:description" content="Bidirectional wrapper for RNNs." />
+<meta property="og:title" content="Bidirectional wrapper for RNNs — bidirectional" />
+<meta property="og:description" content="Bidirectional wrapper for RNNs" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
       </span>
     </div>
 
@@ -140,6 +140,9 @@
     </li>
     <li>
       <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
+    </li>
+    <li>
+      <a href="../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Using Keras</li>
@@ -228,26 +231,22 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bidirectional wrapper for RNNs.</h1>
+    <h1>Bidirectional wrapper for RNNs</h1>
     <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/layer-wrappers.R'><code>R/layer-wrappers.R</code></a></small>
     <div class="hidden name"><code>bidirectional.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Bidirectional wrapper for RNNs.</p>
+    <p>Bidirectional wrapper for RNNs</p>
     </div>
 
     <pre class="usage"><span class='fu'>bidirectional</span><span class='op'>(</span>
   <span class='va'>object</span>,
   <span class='va'>layer</span>,
   merge_mode <span class='op'>=</span> <span class='st'>"concat"</span>,
-  input_shape <span class='op'>=</span> <span class='cn'>NULL</span>,
-  batch_input_shape <span class='op'>=</span> <span class='cn'>NULL</span>,
-  batch_size <span class='op'>=</span> <span class='cn'>NULL</span>,
-  dtype <span class='op'>=</span> <span class='cn'>NULL</span>,
-  name <span class='op'>=</span> <span class='cn'>NULL</span>,
-  trainable <span class='op'>=</span> <span class='cn'>NULL</span>,
-  weights <span class='op'>=</span> <span class='cn'>NULL</span>
+  weights <span class='op'>=</span> <span class='cn'>NULL</span>,
+  backward_layer <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -262,55 +261,60 @@ returned.</p></td>
     </tr>
     <tr>
       <th>layer</th>
-      <td><p>Recurrent instance.</p></td>
+      <td><p>A <code>RNN</code> layer instance, such as <code><a href='layer_lstm.html'>layer_lstm()</a></code> or
+<code><a href='layer_gru.html'>layer_gru()</a></code>. It could also be a <code>keras$layers$Layer</code> instance that
+meets the following criteria:</p><ol>
+<li><p>Be a sequence-processing layer (accepts 3D+ inputs).</p></li>
+<li><p>Have a <code>go_backwards</code>, <code>return_sequences</code> and <code>return_state</code> attribute
+(with the same semantics as for the <code>RNN</code> class).</p></li>
+<li><p>Have an <code>input_spec</code> attribute.</p></li>
+<li><p>Implement serialization via <code><a href='get_config.html'>get_config()</a></code> and <code><a href='get_config.html'>from_config()</a></code>. Note
+that the recommended way to create new RNN layers is to write a custom RNN
+cell and use it with <code><a href='layer_rnn.html'>layer_rnn()</a></code>, instead of subclassing
+<code>keras$layers$Layer</code> directly.</p></li>
+<li><p>When <code>returns_sequences = TRUE</code>, the output of the masked timestep will
+be zero regardless of the layer's original <code>zero_output_for_mask</code> value.</p></li>
+</ol></td>
     </tr>
     <tr>
       <th>merge_mode</th>
       <td><p>Mode by which outputs of the forward and backward RNNs will
-be combined. One of 'sum', 'mul', 'concat', 'ave', NULL. If NULL, the
-outputs will not be combined, they will be returned as a list.</p></td>
-    </tr>
-    <tr>
-      <th>input_shape</th>
-      <td><p>Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.</p></td>
-    </tr>
-    <tr>
-      <th>batch_input_shape</th>
-      <td><p>Shapes, including the batch size. For instance,
-<code>batch_input_shape=c(10, 32)</code> indicates that the expected input will be
-batches of 10 32-dimensional vectors. <code>batch_input_shape=list(NULL, 32)</code>
-indicates batches of an arbitrary number of 32-dimensional vectors.</p></td>
-    </tr>
-    <tr>
-      <th>batch_size</th>
-      <td><p>Fixed batch size for layer</p></td>
-    </tr>
-    <tr>
-      <th>dtype</th>
-      <td><p>The data type expected by the input, as a string (<code>float32</code>,
-<code>float64</code>, <code>int32</code>...)</p></td>
-    </tr>
-    <tr>
-      <th>name</th>
-      <td><p>An optional name string for the layer. Should be unique in a
-model (do not reuse the same name twice). It will be autogenerated if it
-isn't provided.</p></td>
-    </tr>
-    <tr>
-      <th>trainable</th>
-      <td><p>Whether the layer weights will be updated during training.</p></td>
+be combined. One of <code>'sum'</code>, <code>'mul'</code>, <code>'concat'</code>, <code>'ave'</code>, <code>NULL</code>. If
+<code>NULL</code>, the outputs will not be combined, they will be returned as a list.
+Default value is <code>'concat'</code>.</p></td>
     </tr>
     <tr>
       <th>weights</th>
-      <td><p>Initial weights for layer.</p></td>
+      <td><p>Split and propagated to the <code>initial_weights</code> attribute on the
+forward and backward layer.</p></td>
+    </tr>
+    <tr>
+      <th>backward_layer</th>
+      <td><p>Optional <code>keras.layers.RNN</code>, or <code>keras.layers.Layer</code>
+instance to be used to handle backwards input processing. If
+<code>backward_layer</code> is not provided, the layer instance passed as the <code>layer</code>
+argument will be used to generate the backward layer automatically. Note
+that the provided <code>backward_layer</code> layer should have properties matching
+those of the <code>layer</code> argument, in particular it should have the same values
+for <code>stateful</code>, <code>return_states</code>, <code>return_sequences</code>, etc. In addition,
+<code>backward_layer</code> and <code>layer</code> should have different <code>go_backwards</code> argument
+values. A <code>ValueError</code> will be raised if these requirements are not met.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>standard layer arguments.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other layer wrappers: 
+    <div class='dont-index'>
+<ul>
+<li><p><a href='https://www.tensorflow.org/api_docs/python/tf/keras/layers/Bidirectional'>https://www.tensorflow.org/api_docs/python/tf/keras/layers/Bidirectional</a></p></li>
+<li><p><a href='https://keras.io/api/layers/recurrent_layers/bidirectional/'>https://keras.io/api/layers/recurrent_layers/bidirectional/</a></p></li>
+</ul>
+
+<p>Other layer wrappers: 
 <code><a href='time_distributed.html'>time_distributed</a>()</code></p></div>
 
   </div>

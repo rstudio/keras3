@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
       </span>
     </div>
 
@@ -97,6 +97,9 @@
     </li>
     <li>
       <a href="../../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
+    </li>
+    <li>
+      <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
@@ -182,7 +185,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="making_new_layers_and_models_via_subclassing_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Writing <code>Layer</code> and <code>Model</code> objects from scratch.</h1>
@@ -381,7 +384,7 @@
 
   <span class="va">build</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>
-      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,
+      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,
       initializer <span class="op">=</span> <span class="st">"random_normal"</span>,
       trainable <span class="op">=</span> <span class="cn">TRUE</span>
     <span class="op">)</span>
@@ -403,12 +406,13 @@
 
 <span class="co"># The layer's weights are created dynamically the first time the layer is called</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">linear_layer</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+<p>Implementing <code><a href="https://rdrr.io/r/utils/PkgUtils.html">build()</a></code> separately as shown above nicely separates creating weights only once from using weights in every call. However, for some advanced custom layers, it can become impractical to separate the state creation and computation. Layer implementers are allowed to defer weight creation to the first <code><a href="https://rdrr.io/r/base/call.html">call()</a></code>, but need to take care that later calls use the same weights. In addition, since <code><a href="https://rdrr.io/r/base/call.html">call()</a></code> is likely to be executed for the first time inside a <code><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html">tf_function()</a></code>, any variable creation that takes place in <code><a href="https://rdrr.io/r/base/call.html">call()</a></code> should be wrapped in a <code>tf$init_scope()</code>.</p>
 </div>
 <div id="layers-are-recursively-composable" class="section level2">
 <h2 class="hasAnchor">
 <a href="#layers-are-recursively-composable" class="anchor"></a>Layers are recursively composable</h2>
-<p>If you assign a Layer instance as an attribute of another Layer, the outer layer will start tracking the weights of the inner layer.</p>
-<p>We recommend creating such sublayers in the <code>initialize()</code> method (since the sublayers will typically have a build method, they will be built when the outer layer gets built).</p>
+<p>If you assign a Layer instance as an attribute of another Layer, the outer layer will start tracking the weights created by the inner layer.</p>
+<p>We recommend creating such sublayers in the <code>initialize()</code> method and leave it to the first <code><a href="https://rdrr.io/r/base/call.html">call()</a></code> to trigger building their weights.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Let's assume we are reusing the Linear class</span>
 <span class="co"># with a `build` method that we defined above.</span>
@@ -605,7 +609,7 @@
 
   <span class="va">build</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>
-      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,
+      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,
       initializer <span class="op">=</span> <span class="st">"random_normal"</span>,
       trainable <span class="op">=</span> <span class="cn">TRUE</span>
     <span class="op">)</span>
@@ -641,7 +645,7 @@
 
   <span class="va">build</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>
-      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,
+      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,
       initializer <span class="op">=</span> <span class="st">"random_normal"</span>,
       trainable <span class="op">=</span> <span class="cn">TRUE</span>
     <span class="op">)</span>
@@ -677,7 +681,7 @@
 <h2 class="hasAnchor">
 <a href="#privileged-training-argument-in-the-call-method" class="anchor"></a>Privileged <code>training</code> argument in the <code>call()</code> method</h2>
 <p>Some layers, in particular the <code>BatchNormalization</code> layer and the <code>Dropout</code> layer, have different behaviors during training and inference. For such layers, it is standard practice to expose a <code>training</code> (boolean) argument in the <code><a href="https://rdrr.io/r/base/call.html">call()</a></code> method.</p>
-<p>By exposing this argument in <code><a href="https://rdrr.io/r/base/call.html">call()</a></code>, you enable the built-in training and evaluation loops (e.g. <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>) to correctly use the layer in training and inference. Note, the default of <code>NULL</code> means that the training parameter will be inferred by keras from the training context (e.g., it will be <code>TRUE</code> if called from <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, <code>FALSE</code> if called from <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code>)</p>
+<p>By exposing this argument in <code><a href="https://rdrr.io/r/base/call.html">call()</a></code>, you enable the built-in training and evaluation loops (e.g. <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>) to correctly use the layer in training and inference. Note, the default of <code>NULL</code> means that the training parameter will be inferred by keras from the training context (e.g., it will be <code>TRUE</code> if called from <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, <code>FALSE</code> if called from <code><a href="https://rdrr.io/pkg/raster/man/predict.html">predict()</a></code>)</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">CustomDropout</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span>
   <span class="va">initialize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">rate</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span>
@@ -707,7 +711,7 @@
 <p>For instance, in a ResNet50 model, you would have several ResNet blocks subclassing <code>Layer</code>, and a single <code>Model</code> encompassing the entire ResNet50 network.</p>
 <p>The <code>Model</code> class has the same API as <code>Layer</code>, with the following differences:</p>
 <ul>
-<li>It has support for built-in training, evaluation, and prediction methods (<code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code>, <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code>).</li>
+<li>It has support for built-in training, evaluation, and prediction methods (<code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code>, <code><a href="https://rdrr.io/pkg/raster/man/predict.html">predict()</a></code>).</li>
 <li>It exposes the list of its inner layers, via the <code>model$layers</code> property.</li>
 <li>It exposes saving and serialization APIs (<code><a href="../../reference/save_model_tf.html">save_model_tf()</a></code>, <code><a href="../../reference/save_model_weights_tf.html">save_model_weights_tf()</a></code>, …)</li>
 </ul>

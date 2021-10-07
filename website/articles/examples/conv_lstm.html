@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
       </span>
     </div>
 
@@ -97,6 +97,9 @@
     </li>
     <li>
       <a href="../../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
+    </li>
+    <li>
+      <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
@@ -182,7 +185,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="conv_lstm_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>conv_lstm</h1>
@@ -205,7 +208,7 @@
 
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">abind</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">raster</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster">raster</a></span><span class="op">)</span>
 
 <span class="co"># Function Definition -----------------------------------------------------</span>
 
@@ -275,8 +278,8 @@
   <span class="va">shifted_movies</span><span class="op">[</span><span class="va">shifted_movies</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span>
 
   <span class="co"># Add channel dimension</span>
-  <span class="va">noisy_movies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">noisy_movies</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">noisy_movies</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">shifted_movies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">shifted_movies</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">shifted_movies</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">noisy_movies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">noisy_movies</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/dimensions.html">dim</a></span><span class="op">(</span><span class="va">noisy_movies</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">shifted_movies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">shifted_movies</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/dimensions.html">dim</a></span><span class="op">(</span><span class="va">shifted_movies</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
   
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
     noisy_movies <span class="op">=</span> <span class="va">noisy_movies</span>,
@@ -374,28 +377,28 @@
   <span class="kw">if</span> <span class="op">(</span><span class="va">k</span><span class="op">&lt;</span><span class="fl">8</span><span class="op">)</span><span class="op">{</span> 
     <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">k</span>,<span class="st">'_animate.png'</span><span class="op">)</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,bg <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span>
-    <span class="op">(</span><span class="va">more_movies</span><span class="op">$</span><span class="va">noisy_movies</span><span class="op">[</span><span class="va">which</span>,<span class="va">k</span>,,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>  <span class="op">%&gt;%</span> <span class="fu">raster</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span> <span class="op">(</span>main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Ground_'</span>,<span class="va">k</span><span class="op">)</span><span class="op">)</span> 
-    <span class="op">(</span><span class="va">more_movies</span><span class="op">$</span><span class="va">noisy_movies</span><span class="op">[</span><span class="va">which</span>,<span class="va">k</span>,,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>  <span class="op">%&gt;%</span> <span class="fu">raster</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span> <span class="op">(</span>main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Ground_'</span>,<span class="va">k</span><span class="op">)</span><span class="op">)</span> 
+    <span class="op">(</span><span class="va">more_movies</span><span class="op">$</span><span class="va">noisy_movies</span><span class="op">[</span><span class="va">which</span>,<span class="va">k</span>,,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>  <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span> <span class="op">(</span>main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Ground_'</span>,<span class="va">k</span><span class="op">)</span><span class="op">)</span> 
+    <span class="op">(</span><span class="va">more_movies</span><span class="op">$</span><span class="va">noisy_movies</span><span class="op">[</span><span class="va">which</span>,<span class="va">k</span>,,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>  <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span> <span class="op">(</span>main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Ground_'</span>,<span class="va">k</span><span class="op">)</span><span class="op">)</span> 
     <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span>
   <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
     
     <span class="co"># And then compare the predictions to the ground truth</span>
     <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">k</span>,<span class="st">'_animate.png'</span><span class="op">)</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,bg <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span>
-    <span class="op">(</span><span class="va">more_movies</span><span class="op">$</span><span class="va">noisy_movies</span><span class="op">[</span><span class="va">which</span>,<span class="va">k</span>,,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>  <span class="op">%&gt;%</span> <span class="fu">raster</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span> <span class="op">(</span>main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Ground_'</span>,<span class="va">k</span><span class="op">)</span><span class="op">)</span>
+    <span class="op">(</span><span class="va">more_movies</span><span class="op">$</span><span class="va">noisy_movies</span><span class="op">[</span><span class="va">which</span>,<span class="va">k</span>,,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>  <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span> <span class="op">(</span>main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Ground_'</span>,<span class="va">k</span><span class="op">)</span><span class="op">)</span>
     
     <span class="co"># Make Prediction</span>
-    <span class="va">new_pos</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">track</span><span class="op">)</span>
+    <span class="va">new_pos</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">track</span><span class="op">)</span>
    
     <span class="co"># Slice the last row  </span>
     <span class="va">new_pos_loc</span> <span class="op">&lt;-</span> <span class="va">new_pos</span><span class="op">[</span><span class="fl">1</span>,<span class="va">k</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">40</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">40</span>,<span class="fl">1</span><span class="op">]</span>  
-    <span class="va">new_pos_loc</span>  <span class="op">%&gt;%</span> <span class="fu">raster</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span> <span class="op">(</span>main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Pred_'</span>,<span class="va">k</span><span class="op">)</span><span class="op">)</span>    
+    <span class="va">new_pos_loc</span>  <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span> <span class="op">(</span>main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Pred_'</span>,<span class="va">k</span><span class="op">)</span><span class="op">)</span>    
     
     <span class="co"># Reshape it</span>
     <span class="va">new_pos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="va">new_pos_loc</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>, <span class="fl">40</span>,<span class="fl">40</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>     
     
     <span class="co"># Bind it to the earlier data</span>
-    <span class="va">track</span> <span class="op">&lt;-</span> <span class="fu">abind</span><span class="op">(</span><span class="va">track</span>,<span class="va">new_pos</span>,along <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>  
+    <span class="va">track</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/abind/man/abind.html">abind</a></span><span class="op">(</span><span class="va">track</span>,<span class="va">new_pos</span>,along <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>  
     <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">}</span> 

@@ -1,4 +1,4 @@
-pandoc: '2.5'
+pandoc: 2.14.0.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
@@ -68,10 +68,11 @@ articles:
   new-guides/making_new_layers_and_models_via_subclassing: making_new_layers_and_models_via_subclassing.html
   new-guides/preprocessing_layers: preprocessing_layers.html
   new-guides/python_subclasses: python_subclasses.html
+  new-guides/working_with_rnns: working_with_rnns.html
   new-guides/writing_your_own_callbacks: writing_your_own_callbacks.html
   saving_serializing: saving_serializing.html
   sequential_model: sequential_model.html
   training_callbacks: training_callbacks.html
   training_visualization: training_visualization.html
-last_built: 2021-09-30T19:27Z
+last_built: 2021-10-07T16:30Z
 

@@ -180,9 +180,15 @@ reference:
     contents:
       - layer_simple_rnn
       - layer_gru
-      - layer_cudnn_gru
       - layer_lstm
-      - layer_cudnn_lstm
+
+  - title: "Customize Recurrent Layers"
+    contents:
+      - layer_rnn
+      - layer_simple_rnn_cell
+      - layer_gru_cell
+      - layer_lstm_cell
+      - layer_stacked_rnn_cells
 
   - title: "Embedding Layers"
     contents:
@@ -432,6 +438,7 @@ reference:
     contents:
       - keras
       - "%py_class%"
+      - "%<-active%"
 
   - title: "Deprecated"
     contents:
@@ -439,3 +446,5 @@ reference:
       - KerasWrapper
       - create_wrapper
       - loss_cosine_proximity
+      - layer_cudnn_gru
+      - layer_cudnn_lstm

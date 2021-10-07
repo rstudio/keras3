@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
       </span>
     </div>
 
@@ -97,6 +97,9 @@
     </li>
     <li>
       <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
+    </li>
+    <li>
+      <a href="../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
@@ -182,7 +185,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="training_visualization_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Training Visualization</h1>
@@ -209,7 +212,7 @@
 <div id="plotting-history" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plotting-history" class="anchor"></a>Plotting History</h2>
-<p>The Keras <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> method returns an R object containing the training history, including the value of metrics at the end of each epoch . You can plot the training metrics by epoch using the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> method.</p>
+<p>The Keras <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> method returns an R object containing the training history, including the value of metrics at the end of each epoch . You can plot the training metrics by epoch using the <code><a href="https://rdrr.io/pkg/raster/man/plot.html">plot()</a></code> method.</p>
 <p>For example, here we compile and fit a model with the “accuracy” metric:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
@@ -225,12 +228,12 @@
 <span class="op">)</span></code></pre></div>
 <p>We can then plot the training history as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span></code></pre></div>
 <p><img src="images/training_history_ggplot2.png" class="r-plot" width="757" height="489"></p>
 <p>The history will be plotted using <a href="https://ggplot2.tidyverse.org/">ggplot2</a> if available (if not then base graphics will be used), include all specified metrics as well as the loss, and draw a smoothing line if there are 10 or more epochs. You can customize all of this behavior via various options of the <a href="https://keras.rstudio.com/reference/plot.keras_training_history.html">plot method</a>.</p>
-<p>If you want to create a custom visualization you can call the <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> method on the history to obtain a data frame with factors for each metric as well as training vs. validation:</p>
+<p>If you want to create a custom visualization you can call the <code><a href="https://rdrr.io/pkg/raster/man/as.data.frame.html">as.data.frame()</a></code> method on the history to obtain a data frame with factors for each metric as well as training vs. validation:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">history_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">history_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">history_df</span><span class="op">)</span></code></pre></div>
 <pre><code>'data.frame':   120 obs. of  4 variables:
  $ epoch : int  1 2 3 4 5 6 7 8 9 10 ...

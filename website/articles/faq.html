@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
       </span>
     </div>
 
@@ -97,6 +97,9 @@
     </li>
     <li>
       <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
+    </li>
+    <li>
+      <a href="../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
@@ -182,7 +185,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="faq_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Frequently Asked Questions</h1>
@@ -263,27 +266,27 @@
 <a href="#device-parallelism" class="anchor"></a>Device parallelism</h3>
 <p>Device parallelism consists in running different parts of a same model on different devices. It works best for models that have a parallel architecture, e.g. a model with two branches.</p>
 <p>This can be achieved by using TensorFlow device scopes. Here is a quick example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Model where a shared LSTM is used to encode two different sequences in parallel</span></a>
-<a class="sourceLine" id="cb4-2" title="2">input_a &lt;-<span class="st"> </span><span class="kw">layer_input</span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))</a>
-<a class="sourceLine" id="cb4-3" title="3">input_b &lt;-<span class="st"> </span><span class="kw">layer_input</span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))</a>
-<a class="sourceLine" id="cb4-4" title="4"></a>
-<a class="sourceLine" id="cb4-5" title="5">shared_lstm &lt;-<span class="st"> </span><span class="kw">layer_lstm</span>(<span class="dt">units =</span> <span class="dv">64</span>)</a>
-<a class="sourceLine" id="cb4-6" title="6"></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co"># Process the first sequence on one GPU</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="kw">library</span>(tensorflow)</a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="kw">with</span>(tf<span class="op">$</span><span class="kw">device_scope</span>(<span class="st">"/gpu:0"</span>, {</a>
-<a class="sourceLine" id="cb4-10" title="10">  encoded_a &lt;-<span class="st"> </span><span class="kw">shared_lstm</span>(tweet_a)</a>
-<a class="sourceLine" id="cb4-11" title="11">})<span class="op">:</span></a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="st">    </span></a>
-<a class="sourceLine" id="cb4-13" title="13"><span class="co"># Process the next sequence on another GPU</span></a>
-<a class="sourceLine" id="cb4-14" title="14"><span class="kw">with</span>(tf<span class="op">$</span><span class="kw">device_scope</span>(<span class="st">"/gpu:1"</span>, {</a>
-<a class="sourceLine" id="cb4-15" title="15">  encoded_b &lt;-<span class="st"> </span><span class="kw">shared_lstm</span>(tweet_b)</a>
-<a class="sourceLine" id="cb4-16" title="16">})<span class="op">:</span></a>
-<a class="sourceLine" id="cb4-17" title="17"></a>
-<a class="sourceLine" id="cb4-18" title="18"><span class="co"># Concatenate results on CPU</span></a>
-<a class="sourceLine" id="cb4-19" title="19"><span class="kw">with</span>(tf<span class="op">$</span><span class="kw">device_scope</span>(<span class="st">"/cpu:0"</span>, {</a>
-<a class="sourceLine" id="cb4-20" title="20">  merged_vector &lt;-<span class="st"> </span><span class="kw">layer_concatenate</span>(<span class="kw">list</span>(encoded_a, encoded_b))</a>
-<a class="sourceLine" id="cb4-21" title="21">})<span class="op">:</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model where a shared LSTM is used to encode two different sequences in parallel</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>input_a <span class="ot">&lt;-</span> <span class="fu">layer_input</span>(<span class="at">shape =</span> <span class="fu">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>input_b <span class="ot">&lt;-</span> <span class="fu">layer_input</span>(<span class="at">shape =</span> <span class="fu">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>shared_lstm <span class="ot">&lt;-</span> <span class="fu">layer_lstm</span>(<span class="at">units =</span> <span class="dv">64</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Process the first sequence on one GPU</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tensorflow)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(tf<span class="sc">$</span><span class="fu">device_scope</span>(<span class="st">"/gpu:0"</span>, {</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  encoded_a <span class="ot">&lt;-</span> <span class="fu">shared_lstm</span>(tweet_a)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>})<span class="sc">:</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Process the next sequence on another GPU</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(tf<span class="sc">$</span><span class="fu">device_scope</span>(<span class="st">"/gpu:1"</span>, {</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  encoded_b <span class="ot">&lt;-</span> <span class="fu">shared_lstm</span>(tweet_b)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>})<span class="sc">:</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate results on CPU</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(tf<span class="sc">$</span><span class="fu">device_scope</span>(<span class="st">"/cpu:0"</span>, {</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  merged_vector <span class="ot">&lt;-</span> <span class="fu">layer_concatenate</span>(<span class="fu">list</span>(encoded_a, encoded_b))</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>})<span class="sc">:</span></span></code></pre></div>
 </div>
 </div>
 <div id="what-does-sample-batch-epoch-mean" class="section level2">
@@ -410,7 +413,7 @@
 <span class="va">layer_name</span> <span class="op">&lt;-</span> <span class="st">'my_layer'</span>
 <span class="va">intermediate_layer_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">model</span><span class="op">$</span><span class="va">input</span>,
                                         outputs <span class="op">=</span> <span class="fu"><a href="../reference/get_layer.html">get_layer</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">layer_name</span><span class="op">)</span><span class="op">$</span><span class="va">output</span><span class="op">)</span>
-<span class="va">intermediate_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">intermediate_layer_model</span>, <span class="va">data</span><span class="op">)</span></code></pre></div>
+<span class="va">intermediate_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">intermediate_layer_model</span>, <span class="va">data</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="how-can-i-use-keras-with-datasets-that-dont-fit-in-memory" class="section level2">
 <h2 class="hasAnchor">
@@ -428,14 +431,14 @@
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sampling_generator</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">X_data</span>, <span class="va">Y_data</span>, <span class="va">batch_size</span><span class="op">)</span> <span class="op">{</span>
   <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">X_data</span><span class="op">)</span>, <span class="va">batch_size</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+    <span class="va">rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">nrow</a></span><span class="op">(</span><span class="va">X_data</span><span class="op">)</span>, <span class="va">batch_size</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">X_data</span><span class="op">[</span><span class="va">rows</span>,<span class="op">]</span>, <span class="va">Y_data</span><span class="op">[</span><span class="va">rows</span>,<span class="op">]</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">}</span>
 
 <span class="va">model</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/fit_generator.html">fit_generator</a></span><span class="op">(</span><span class="fu">sampling_generator</span><span class="op">(</span><span class="va">X_train</span>, <span class="va">Y_train</span>, batch_size <span class="op">=</span> <span class="fl">128</span><span class="op">)</span>, 
-                steps_per_epoch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">X_train</span><span class="op">)</span> <span class="op">/</span> <span class="fl">128</span>, epochs <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
+                steps_per_epoch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">nrow</a></span><span class="op">(</span><span class="va">X_train</span><span class="op">)</span> <span class="op">/</span> <span class="fl">128</span>, epochs <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p>The <code>steps_per_epoch</code> parameter indicates the number of steps (batches of samples) to yield from generator before declaring one epoch finished and starting the next epoch. It should typically be equal to the number of unique samples if your dataset divided by the batch size.</p>
 </div>
 <div id="external-data-generators" class="section level3">
@@ -592,7 +595,7 @@
 <li>specify <code>shuffle=FALSE</code> when calling fit().</li>
 </ul>
 <p>To reset the states accumulated in either a single layer or an entire model use the <code><a href="../reference/reset_states.html">reset_states()</a></code> function.</p>
-<p>Notes that the methods <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code>, <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, <code><a href="../reference/train_on_batch.html">train_on_batch()</a></code>, <code><a href="../reference/predict_proba.html">predict_classes()</a></code>, etc. will <em>all</em> update the states of the stateful layers in a model. This allows you to do not only stateful training, but also stateful prediction.</p>
+<p>Notes that the methods <code><a href="https://rdrr.io/pkg/raster/man/predict.html">predict()</a></code>, <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, <code><a href="../reference/train_on_batch.html">train_on_batch()</a></code>, <code><a href="../reference/predict_proba.html">predict_classes()</a></code>, etc. will <em>all</em> update the states of the stateful layers in a model. This allows you to do not only stateful training, but also stateful prediction.</p>
 </div>
 <div id="how-can-i-remove-a-layer-from-a-sequential-model" class="section level2">
 <h2 class="hasAnchor">
@@ -714,7 +717,7 @@
 <h2 class="hasAnchor">
 <a href="#where-is-the-keras-configuration-filed-stored" class="anchor"></a>Where is the Keras configuration filed stored?</h2>
 <p>The default directory where all Keras data is stored is:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb30-1" title="1"><span class="ex">~/.keras/</span></a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/.keras/</span></span></code></pre></div>
 <p>In case Keras cannot create the above directory (e.g. due to permission issues), <code>/tmp/.keras/</code> is used as a backup.</p>
 <p>The Keras configuration file is a JSON file stored at <code>$HOME/.keras/keras.json</code>. The default configuration file looks like this:</p>
 <pre><code>{

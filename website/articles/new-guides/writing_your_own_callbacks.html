@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
       </span>
     </div>
 
@@ -97,6 +97,9 @@
     </li>
     <li>
       <a href="../../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
+    </li>
+    <li>
+      <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Using Keras</li>
@@ -182,7 +185,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="writing_your_own_callbacks_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Writing your own callbacks</h1>
@@ -221,7 +224,7 @@
 <ul>
 <li><code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code></li>
 <li><code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code></li>
-<li><code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code></li>
+<li><code><a href="https://rdrr.io/pkg/raster/man/predict.html">predict()</a></code></li>
 </ul>
 <pre><code></code></pre>
 </div>
@@ -392,7 +395,7 @@
   <span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
+  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
           batch_size <span class="op">=</span> <span class="fl">128</span>,
           callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">CustomCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div id="usage-of-logs-dict" class="section level3">
@@ -444,7 +447,7 @@
 <li>Set <code>self$model$stop_training &lt;- TRUE</code> to immediately interrupt training.</li>
 <li>Mutate hyperparameters of the optimizer (available as <code>self$model$optimizer</code>), such as <code>self$model$optimizer$learning_rate</code>.</li>
 <li>Save the model at period intervals.</li>
-<li>Record the output of <code><a href="https://rdrr.io/r/stats/predict.html">predict(model)</a></code> on a few test samples at the end of each epoch, to use as a sanity check during training.</li>
+<li>Record the output of <code><a href="https://rdrr.io/pkg/raster/man/predict.html">predict(model)</a></code> on a few test samples at the end of each epoch, to use as a sanity check during training.</li>
 <li>Extract visualizations of intermediate features at the end of each epoch, to monitor what the model is learning over time.</li>
 <li>etc.</li>
 </ul>
@@ -548,7 +551,7 @@
     <span class="co">## use a debugger to interact with the actual objects at the console!</span>
     <span class="co"># browser()</span>
     
-    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="st">"learning_rate"</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">optimizer</span><span class="op">)</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="st">"learning_rate"</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">optimizer</span><span class="op">)</span><span class="op">)</span>
       <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">'Optimizer must have a "learning_rate" attribute.'</span><span class="op">)</span>
     
     <span class="co"># # Get the current learning rate from model's optimizer.</span>
@@ -574,7 +577,7 @@
 <span class="va">lr_schedule</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">epoch</span>, <span class="va">learning_rate</span><span class="op">)</span> <span class="op">{</span>
   <span class="st">"Helper function to retrieve the scheduled learning rate based on epoch."</span>
   <span class="kw">if</span> <span class="op">(</span><span class="va">epoch</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/nth.html">last</a></span><span class="op">(</span><span class="va">LR_SCHEDULE</span><span class="op">$</span><span class="va">start_epoch</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">LR_SCHEDULE</span>, <span class="va">learning_rate</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.min</a></span><span class="op">(</span><span class="va">epoch</span> <span class="op">&gt;</span> <span class="va">start_epoch</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">LR_SCHEDULE</span>, <span class="va">learning_rate</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/which.minmax.html">which.min</a></span><span class="op">(</span><span class="va">epoch</span> <span class="op">&gt;</span> <span class="va">start_epoch</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
   <span class="kw">else</span>
     <span class="va">learning_rate</span>
 <span class="op">}</span>
