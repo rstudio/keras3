@@ -185,6 +185,7 @@ test_call_succeeds("layer_depthwise_conv_2d", required_version = "2.1.5", {
   }
 })
 
+if(tf_version() >= "2.6")
 test_call_succeeds("layer_conv_lstm_1d", {
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
@@ -199,6 +200,7 @@ test_call_succeeds("layer_conv_lstm_2d", {
     layer_conv_lstm_2d(filters = 3, kernel_size = c(1, 1))
 })
 
+if(tf_version() >= "2.6")
 test_call_succeeds("layer_conv_lstm_3d", {
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%

@@ -1407,6 +1407,7 @@ function(object,
          recurrent_dropout = 0,
          ...)
 {
+  require_tf_version("2.6", "layer_conv_lstm_1d")
   args <- capture_args(
     match.call(),
     list(
@@ -1551,6 +1552,7 @@ function(object,
          recurrent_dropout = 0,
          ...)
 {
+  require_tf_version("2.6", "layer_conv_lstm_3d")
   args <- capture_args(
     match.call(),
     list(
