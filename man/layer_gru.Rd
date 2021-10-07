@@ -153,8 +153,8 @@ inference on CPU. Thus it has separate biases for \code{kernel} and
 \section{Input shapes}{
 
 
-3D tensor with shape \verb{(batch_size, timesteps, input_dim)},
-(Optional) 2D tensors with shape \verb{(batch_size, output_dim)}.
+N-D tensor with shape \verb{(batch_size, timesteps, ...)},
+or \verb{(timesteps, batch_size, ...)} when \code{time_major = TRUE}.
 }
 
 \section{Output shape}{
@@ -162,62 +162,74 @@ inference on CPU. Thus it has separate biases for \code{kernel} and
 \itemize{
 \item if \code{return_state}: a list of tensors. The first tensor is
 the output. The remaining tensors are the last states,
-each with shape \verb{(batch_size, units)}.
-\item if \code{return_sequences}: 3D tensor with shape
-\verb{(batch_size, timesteps, units)}.
-\item else, 2D tensor with shape \verb{(batch_size, units)}.
+each with shape \verb{(batch_size, state_size)}, where \code{state_size}
+could be a high dimension tensor shape.
+\item if \code{return_sequences}: N-D tensor with shape \verb{[batch_size, timesteps, output_size]}, where \code{output_size} could be a high dimension tensor shape, or
+\verb{[timesteps, batch_size, output_size]} when \code{time_major} is \code{TRUE}
+\item else, N-D tensor with shape \verb{[batch_size, output_size]}, where
+\code{output_size} could be a high dimension tensor shape.
 }
 }
 
 \section{Masking}{
 
 
-This layer supports masking for input data with a variable number
-of timesteps. To introduce masks to your data,
-use an embedding layer with the \code{mask_zero} parameter
-set to \code{TRUE}.
+This layer supports masking for input data with a variable number of
+timesteps. To introduce masks to your data, use
+\code{\link[=layer_embedding]{layer_embedding()}} with the \code{mask_zero} parameter set to \code{TRUE}.
 }
 
 \section{Statefulness in RNNs}{
 
 
-You can set RNN layers to be 'stateful', which means that the states
-computed for the samples in one batch will be reused as initial states
-for the samples in the next batch. This assumes a one-to-one mapping
-between samples in different successive batches. For intuition behind
-statefulness, there is a helpful blog post here:
+You can set RNN layers to be 'stateful', which means that the states computed
+for the samples in one batch will be reused as initial states for the samples
+in the next batch. This assumes a one-to-one mapping between samples in
+different successive batches.
+
+For intuition behind statefulness, there is a helpful blog post here:
 \url{https://philipperemy.github.io/keras-stateful-lstm/}
 
 To enable statefulness:
 \itemize{
 \item Specify \code{stateful = TRUE} in the layer constructor.
 \item Specify a fixed batch size for your model. For sequential models,
-pass \code{batch_input_shape = c(...)} to the first layer in your model.
+pass \code{batch_input_shape = list(...)} to the first layer in your model.
 For functional models with 1 or more Input layers, pass
-\code{batch_shape = c(...)} to all the first layers in your model.
+\code{batch_shape = list(...)} to all the first layers in your model.
 This is the expected shape of your inputs \emph{including the batch size}.
-It should be a vector of integers, e.g. \code{c(32, 10, 100)}.
+It should be a list of integers, e.g. \code{list(32, 10, 100)}.
 For dimensions which can vary (are not known ahead of time),
-use \code{NULL} in place of an integer, e.g. \code{c(32, NULL, NULL)}.
-\item Specify \code{shuffle = FALSE} when calling fit().
+use \code{NULL} in place of an integer, e.g. \code{list(32, NULL, NULL)}.
+\item Specify \code{shuffle = FALSE} when calling \code{fit()}.
 }
 
-To reset the states of your model, call \code{reset_states()} on either
+To reset the states of your model, call \code{layer$reset_states()} on either
 a specific layer, or on your entire model.
 }
 
 \section{Initial State of RNNs}{
 
 
-You can specify the initial state of RNN layers symbolically by calling
-them with the keyword argument \code{initial_state}. The value of
-\code{initial_state} should be a tensor or list of tensors representing
-the initial state of the RNN layer.
+You can specify the initial state of RNN layers symbolically by calling them
+with the keyword argument \code{initial_state.} The value of initial_state should
+be a tensor or list of tensors representing the initial state of the RNN
+layer.
 
-You can specify the initial state of RNN layers numerically by
-calling \code{reset_states} with the keyword argument \code{states}. The value of
-\code{states} should be a numpy array or list of numpy arrays representing
-the initial state of the RNN layer.
+You can specify the initial state of RNN layers numerically by calling
+\code{reset_states} with the named argument \code{states.} The value of \code{states} should
+be an array or list of arrays representing the initial state of the RNN
+layer.
+}
+
+\section{Passing external constants to RNNs}{
+
+
+You can pass "external" constants to the cell using the \code{constants} named
+argument of \verb{RNN$__call__} (as well as \code{RNN$call}) method. This requires that the
+\code{cell$call} method accepts the same keyword argument \code{constants}. Such constants
+can be used to condition the cell transformation on additional static inputs
+(not changing over time), a.k.a. an attention mechanism.
 }
 
 \section{References}{
@@ -231,10 +243,15 @@ the initial state of the RNN layer.
 }
 
 \seealso{
+\itemize{
+\item \url{https://www.tensorflow.org/guide/keras/rnn}
+}
+
 Other recurrent layers: 
 \code{\link{layer_cudnn_gru}()},
 \code{\link{layer_cudnn_lstm}()},
 \code{\link{layer_lstm}()},
+\code{\link{layer_rnn}()},
 \code{\link{layer_simple_rnn}()}
 }
 \concept{recurrent layers}

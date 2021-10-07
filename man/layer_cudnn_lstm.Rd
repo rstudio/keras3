@@ -118,6 +118,7 @@ Other recurrent layers:
 \code{\link{layer_cudnn_gru}()},
 \code{\link{layer_gru}()},
 \code{\link{layer_lstm}()},
+\code{\link{layer_rnn}()},
 \code{\link{layer_simple_rnn}()}
 }
 \concept{recurrent layers}

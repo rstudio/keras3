@@ -175,22 +175,37 @@ test_call_succeeds("layer_separable_conv_2d", {
   }
 })
 
-# Not currently passing on TF v1.9rc-1
-# test_call_succeeds("layer_depthwise_conv_2d", required_version = "2.1.5", {
-#   if (is_tensorflow_implementation()) {
-#     keras_model_sequential() %>%
-#       layer_dense(32, input_shape = c(784)) %>%
-#       layer_reshape(target_shape = c(2,4,4)) %>%
-#       layer_depthwise_conv_2d(kernel_size = c(2,2))
-#   }
-# })
 
+test_call_succeeds("layer_depthwise_conv_2d", required_version = "2.1.5", {
+  if (is_tensorflow_implementation()) {
+    keras_model_sequential() %>%
+      layer_dense(32, input_shape = c(784)) %>%
+      layer_reshape(target_shape = c(2,4,4)) %>%
+      layer_depthwise_conv_2d(kernel_size = c(2,2))
+  }
+})
+
+if(tf_version() >= "2.6")
+test_call_succeeds("layer_conv_lstm_1d", {
+  keras_model_sequential() %>%
+    layer_dense(32, input_shape = c(784)) %>%
+    layer_reshape(target_shape = c(2,4,4)) %>%
+    layer_conv_lstm_1d(filters = 3, kernel_size = c(2))
+})
 
 test_call_succeeds("layer_conv_lstm_2d", {
   keras_model_sequential() %>%
     layer_dense(16, input_shape = c(784)) %>%
     layer_reshape(target_shape = c(2,2,2,2)) %>%
     layer_conv_lstm_2d(filters = 3, kernel_size = c(1, 1))
+})
+
+if(tf_version() >= "2.6")
+test_call_succeeds("layer_conv_lstm_3d", {
+  keras_model_sequential() %>%
+    layer_dense(32, input_shape = c(784)) %>%
+    layer_reshape(target_shape = c(2,2,2,2,2)) %>%
+    layer_conv_lstm_3d(filters = 3, kernel_size = c(1, 1, 2))
 })
 
 test_call_succeeds("layer_upsampling_1d", {

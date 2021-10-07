@@ -259,6 +259,14 @@ layer_average_pooling_3d <- function(object, pool_size = c(2L, 2L, 2L), strides 
 #' @inheritParams layer_dense
 #' @inheritParams layer_average_pooling_1d
 #'
+#' @param keepdims A boolean, whether to keep the spatial dimensions or not. If
+#'   `keepdims` is `FALSE` (default), the rank of the tensor is reduced for
+#'   spatial dimensions. If `keepdims` is `TRUE`, the spatial dimensions are
+#'   retained with length 1. The behavior is the same as for `tf.reduce_mean` or
+#'   `np.mean`.
+#'
+#' @param ... standard layer arguments.
+#'
 #' @section Input shape:
 #' 3D tensor with shape: `(batch_size, steps, features)`.
 #'
@@ -268,21 +276,15 @@ layer_average_pooling_3d <- function(object, pool_size = c(2L, 2L, 2L), strides 
 #' @family pooling layers
 #'
 #' @export
-layer_global_max_pooling_1d <- function(object, data_format = "channels_last",
-                                        batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-
-  args <- list(
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if (keras_version() >= "2.2.3")
-    args$data_format <- data_format
-
+layer_global_max_pooling_1d <-
+function(object, data_format = "channels_last", keepdims = FALSE, ...)
+{
+  args <- capture_args(match.call(),
+                       list(batch_size = as_nullable_integer),
+                       ignore = "object")
   create_layer(keras$layers$GlobalMaxPooling1D, object, args)
 }
+
 
 #' Global average pooling operation for temporal data.
 #'
@@ -297,19 +299,12 @@ layer_global_max_pooling_1d <- function(object, data_format = "channels_last",
 #' @family pooling layers
 #'
 #' @export
-layer_global_average_pooling_1d <- function(object, data_format = "channels_last",
-                                            batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-
-  args <- list(
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if (keras_version() >= "2.2.3")
-    args$data_format <- data_format
-
+layer_global_average_pooling_1d <-
+function(object, data_format = "channels_last", keepdims = FALSE, ...)
+{
+  args <- capture_args(match.call(),
+                       list(batch_size = as_nullable_integer),
+                       ignore = "object")
   create_layer(keras$layers$GlobalAveragePooling1D, object, args)
 }
 
@@ -328,16 +323,15 @@ layer_global_average_pooling_1d <- function(object, data_format = "channels_last
 #' @family pooling layers
 #'
 #' @export
-layer_global_max_pooling_2d <- function(object, data_format = NULL,
-                                        batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  create_layer(keras$layers$GlobalMaxPooling2D, object, list(
-    data_format = data_format,
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
+layer_global_max_pooling_2d <-
+function(object, data_format = NULL, keepdims = FALSE, ...)
+{
+  args <- capture_args(match.call(),
+                       list(batch_size = as_nullable_integer),
+                       ignore = "object")
+  create_layer(keras$layers$GlobalMaxPooling2D, object, args)
 }
+
 
 #' Global average pooling operation for spatial data.
 #'
@@ -353,16 +347,18 @@ layer_global_max_pooling_2d <- function(object, data_format = NULL,
 #' @family pooling layers
 #'
 #' @export
-layer_global_average_pooling_2d <- function(object, data_format = NULL,
-                                            batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  create_layer(keras$layers$GlobalAveragePooling2D, object, list(
-    data_format = data_format,
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
+layer_global_average_pooling_2d <-
+function(object, data_format = NULL, keepdims = FALSE, ...)
+{
+  args <- capture_args(match.call(),
+                       list(batch_size = as_nullable_integer),
+                       ignore = "object")
+  create_layer(keras$layers$GlobalAveragePooling2D, object, args)
 }
+
+# TODO: standard layer args used to contain:
+# batch_size = NULL, name = NULL, trainable = NULL, weights = NULL
+
 
 
 #' Global Max pooling operation for 3D data.
@@ -387,16 +383,15 @@ layer_global_average_pooling_2d <- function(object, data_format = NULL,
 #' @family pooling layers
 #'
 #' @export
-layer_global_max_pooling_3d <- function(object, data_format = NULL,
-                                        batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  create_layer(keras$layers$GlobalMaxPooling3D, object, list(
-    data_format = data_format,
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
+layer_global_max_pooling_3d <-
+function(object, data_format = NULL, keepdims = FALSE, ...)
+{
+  args <- capture_args(match.call(),
+                       list(batch_size = as_nullable_integer),
+                       ignore = "object")
+  create_layer(keras$layers$GlobalMaxPooling3D, object, args)
 }
+
 
 #' Global Average pooling operation for 3D data.
 #'
@@ -420,13 +415,11 @@ layer_global_max_pooling_3d <- function(object, data_format = NULL,
 #' @family pooling layers
 #'
 #' @export
-layer_global_average_pooling_3d <- function(object, data_format = NULL,
-                                            batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  create_layer(keras$layers$GlobalAveragePooling3D, object, list(
-    data_format = data_format,
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
+layer_global_average_pooling_3d <-
+function(object, data_format = NULL, keepdims = FALSE, ...)
+{
+  args <- capture_args(match.call(),
+                       list(batch_size = as_nullable_integer),
+                       ignore = "object")
+  create_layer(keras$layers$GlobalAveragePooling3D, object, args)
 }

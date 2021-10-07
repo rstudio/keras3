@@ -5,12 +5,9 @@ Sys.setenv(TF_CPP_MIN_LOG_LEVEL = 1)
 # reticulate::use_condaenv("tf-2.1-cpu", required = TRUE)
 
 if (reticulate::py_module_available("tensorflow")) {
-  if (!exists(".DID_EMIT_TF_VERSION", envir = .GlobalEnv)) {
-    message("Testing Against Tensorflow Version: ",
-            tensorflow::tf$version$VERSION)
-    .GlobalEnv$.DID_EMIT_TF_VERSION <- TRUE
-    tensorflow::tf$`function`(function(x) tensorflow::tf$abs(x))(-1) # force tf init verbose messages early
-  }
+  # force verbose tf init messages early
+  tensorflow::tf$`function`(function(x) tensorflow::tf$abs(x))(-1)
+
 } else
   message("TensorFlow not available for testing")
 

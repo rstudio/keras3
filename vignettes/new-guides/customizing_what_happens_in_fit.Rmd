@@ -67,11 +67,9 @@ library(tensorflow)
 library(tfdatasets)
 library(keras)
 
-## to run this locally you'll need the development version of keras:
-# remotes::install_cran(c("purrr", "tfdatasets", "envir"))
-# remotes::install_github("rstudio/keras")
 
 # -- we start by defining some helpers we'll use later --
+# like zip() in python
 zip <- function(...) purrr::transpose(list(...))
 
 map_and_name <- function(.x, .f, ...) {
@@ -79,9 +77,6 @@ map_and_name <- function(.x, .f, ...) {
   names(out) <- purrr::map_chr(.x, .f[-3L], ...)
   out
 }
-
-`%<-active%` <- function(sym, fun)
-  makeActiveBinding(substitute(sym), fun, parent.frame())
 
 envir::import_from(magrittr, `%<>%`)
 

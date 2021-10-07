@@ -44,6 +44,9 @@ navbar:
         - text: "Working with Preprocessing Layers"
           href: articles/new-guides/preprocessing_layers.html
 
+        - text: "Working with RNNs"
+          href: argicles/new-guides/working_with_rnns.html
+
         - text: "--------------------------"
         - text: "Using Keras"
         - text: "Guide to Keras Basics"

@@ -1,5 +1,39 @@
 # keras (development version)
 
+- New API for constructing RNN (Recurrent Neural Network) layers. This is a
+  flexible interface that complements the existing RNN layers. It is primarily
+  intended for advanced / research applications, e.g, prototyping novel
+  architectures. It allows you to compose a RNN with a custom "cell", a Keras layer that
+  processes one step of a sequence.
+  New symbols:
+    - `layer_rnn()`, which can compose with builtin cells:
+    - `layer_gru_cell()`
+    - `layer_lstm_cell()`
+    - `layer_simple_rnn_cell()`
+    - `layer_stacked_rnn_cells()`
+  To learn more, including how to make a custom cell layer, see the new vignette:
+  "Working with RNNs".
+
+- `layer_lstm()` default value for `recurrent_activation` changed from `"hard_sigmoid"` to `"sigmoid"`.
+
+- New layers `layer_conv_lstm_1d()` and `layer_conv_lstm_3d()`.
+
+- `layer_cudnn_gru()` and `layer_cudnn_lstm()` are deprecated. `layer_gru()` and `layer_lstm()` will
+  automatically use CuDNN if it is available.
+
+- New function `%<-active%`, a ergonomic wrapper around `makeActiveBinding()`
+  for constructing Python `@property` decorated methods in `%py_class%`.
+
+- `layer_bidirectional()` gains `backwards_layer` and `...` arguments.
+  Position of `weights` argument moves from 10 to 4 to match python API.
+
+- Global pooling layers `layer_global_{max,average}_pooling_{1,2,3}d()`:
+   - New `keepdims` argument with default value `FALSE`.
+   - Standard layer arguments `batch_size`, `name`, `trainable`, `weights` replaced with `...`
+     (and must now be provided as named arguments).
+
+- `k_random_uniform()` now automatically coerces `minval` and `maxval` to the output dtype.
+
 # keras 2.6.1
 
 - New family of *preprocessing* layers. These are the spiritual successor to the `tfdatasets::step_*` family of data transformers (to be deprecated in a future release).
@@ -54,7 +88,7 @@
     `"tf-idf"` is renamed to `"tf_idf"` (backwards compatibility is preserved).
   - Fixed an issue where valid values of `output_mode = "int"` would incorrectly
     return a ragged tensor output shape.
-    
+
 
 - Existing layer instances gain the ability to be added to sequential models via a call. E.g.:
   ```r
