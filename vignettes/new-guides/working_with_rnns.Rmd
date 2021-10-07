@@ -297,7 +297,7 @@ reverse order.
 
 The output of the `bidirectional` RNN will be, by default, the concatenation of the forward layer
 output and the backward layer output. If you need a different merging behavior, e.g.
-concatenation, change the `merge_mode` parameter in the `bidirectional` wrapper
+averaging, change the `merge_mode` parameter in the `bidirectional` wrapper
 constructor. For more details about `bidirectional`, please check
 [the API docs](https://keras.io/api/layers/recurrent_layers/bidirectional/).
 
