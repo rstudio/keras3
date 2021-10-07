@@ -106,7 +106,7 @@ jobs:
           done < <(Rscript -e "writeLines(remotes::system_requirements('$ID-$VERSION_ID'))")
 
       - name: Use dev reticulate
-        run: remotes::install_github("rstudio/reticulate")
+        run: remotes::install_github("t-kalinowski/reticulate")
 
       - name: Install Package + deps
         run: remotes::install_local(dependencies = TRUE, force = TRUE)
