@@ -129,9 +129,16 @@ missing_layers_df <- df %>%
                          "InputLayer", "Layer", "InputSpec"))
 
 source("tools/make-wrapper2.R")
-#
+
 missing_layers_df %>%
   select(py_name)
+
+# Tensorflow version 2.7.0-rc0
+# # A tibble: 1 × 1
+#   py_name
+#   <chr>
+# 1 AbstractRNNCell
+
 # # A tibble: 6 × 1
 #   py_name
 #   <chr>
@@ -143,6 +150,7 @@ missing_layers_df %>%
 # 6 LSTMCell
 
 
+if(FALSE) {
 
 missing_layers_df$py_obj %>%
   # .[1:18] %>%
@@ -152,3 +160,4 @@ missing_layers_df$py_obj %>%
     clipr::write_clip(.)
     cat(.)
   }
+}

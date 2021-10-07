@@ -1,39 +1,50 @@
-
-#' Apply a layer to every temporal slice of an input.
+#' This layer wrapper allows to apply a layer to every temporal slice of an input
 #'
-#' The input should be at least 3D, and the dimension of index one will be
-#' considered to be the temporal dimension.
+#' @details
+#' Every input should be at least 3D, and the dimension of index one of the
+#' first input will be considered to be the temporal dimension.
 #'
-#' Consider a batch of 32 samples,  where each sample is a sequence of 10 vectors of 16 dimensions. The batch
-#' input shape of the layer is then `(32, 10, 16)`, and the `input_shape`, not
-#' including the samples dimension, is `(10, 16)`. You can then use
-#' `time_distributed` to apply a `layer_dense` to each of the 10 timesteps,
-#' independently.
+#' Consider a batch of 32 video samples, where each sample is a 128x128 RGB image
+#' with `channels_last` data format, across 10 timesteps.
+#' The batch input shape is `(32, 10, 128, 128, 3)`.
+#'
+#' You can then use `TimeDistributed` to apply the same `Conv2D` layer to each
+#' of the 10 timesteps, independently:
+#'
+#' ```R
+#' input <- layer_input(c(10, 128, 128, 3))
+#' conv_layer <- layer_conv_2d(filters = 64, kernel_size = c(3, 3))
+#' output <- input %>% time_distributed(conv_layer)
+#' output$shape # TensorShape([None, 10, 126, 126, 64])
+#' ```
+#'
+#' Because `TimeDistributed` applies the same instance of `Conv2D` to each of the
+#' timestamps, the same set of weights are used at each timestamp.
 #'
 #' @inheritParams layer_dense
+#' @param layer a `tf.keras.layers.Layer` instance.
+#' @param ... standard layer arguments.
 #'
-#' @param layer A layer instance.
+#' @seealso
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TimeDistributed>
 #'
 #' @family layer wrappers
-#'
 #' @export
-time_distributed <- function(object, layer, input_shape = NULL,
-                             batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                             name = NULL, trainable = NULL, weights = NULL) {
-
-  create_layer(keras$layers$TimeDistributed, object, list(
-    layer = layer,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-
+time_distributed <-
+function(object, layer, ...)
+{
+  args <-
+    capture_args(
+      match.call(),
+      list(
+        input_shape = normalize_shape,
+        batch_input_shape = normalize_shape,
+        batch_size = as_nullable_integer
+      ),
+      ignore = "object"
+    )
+    create_layer(keras$layers$TimeDistributed, object, args)
 }
-
 
 
 #' Bidirectional wrapper for RNNs
