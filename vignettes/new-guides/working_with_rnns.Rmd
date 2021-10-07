@@ -42,8 +42,8 @@ library(keras)
 
 There are three built-in RNN layers in Keras:
 
-1. `layer_simple_rnn()`, a fully-connected RNN where the output from previous
-timestep is to be fed to next timestep.
+1. `layer_simple_rnn()`, a fully-connected RNN where the output from the previous
+timestep is to be fed to the next timestep.
 
 2. `layer_gru()`, first proposed in
 [Cho et al., 2014](https://arxiv.org/abs/1406.1078).
@@ -162,7 +162,7 @@ model
 ## RNN layers and RNN cells
 
 In addition to the built-in RNN layers, the RNN API also provides cell-level APIs.
-Unlike RNN layers, which processes whole batches of input sequences, the RNN cell only
+Unlike RNN layers, which process whole batches of input sequences, the RNN cell only
 processes a single timestep.
 
 The cell is the inside of the `for` loop of a RNN layer. Wrapping a cell inside a
@@ -183,7 +183,7 @@ layer.
 
 - `layer_lstm_cell` corresponds to the `layer_lstm` layer.
 
-The cell abstraction, together with the generic `layer_rnn()` class, make it
+The cell abstraction, together with the generic `layer_rnn()` class, makes it
 very easy to implement custom RNN architectures for your research.
 
 
@@ -256,7 +256,7 @@ would like to reuse the state from a RNN layer, you can retrieve the states valu
 initial state of a new layer instance via the Keras functional API like
 `new_layer(inputs, initial_state = layer$states)`, or model subclassing.
 
-Please also note that a sequential model can not be used in this case since it only
+Please also note that a sequential model cannot be used in this case since it only
 supports layers with single input and output. The extra input of initial state makes
 it impossible to use here.
 
