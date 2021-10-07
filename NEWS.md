@@ -27,6 +27,11 @@
 - `layer_bidirectional()` gains `backwards_layer` and `...` arguments.
   Position of `weights` argument moves from 10 to 4 to match python API.
 
+- Global pooling layers `layer_global_{max,average}_pooling_{1,2,3}d()`:
+   - New `keepdims` argument with default value `FALSE`.
+   - Standard layer arguments `batch_size`, `name`, `trainable`, `weights` replaced with `...`
+     (and must now be provided as named arguments).
+
 - `k_random_uniform()` now automatically coerces `minval` and `maxval` to the output dtype.
 
 # keras 2.6.1
