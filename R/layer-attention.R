@@ -149,6 +149,8 @@ layer_multi_head_attention <- function(
 #'    shape `[batch_size, Tq, dim]`:
 #'    `return tf$matmul(distribution, value)`.
 #'
+#' @inheritParams layer_dense
+#'
 #' @param use_scale If `TRUE`, will create a variable to scale the attention scores.
 #'
 #' @param causal Boolean. Set to `TRUE` for decoder self-attention. Adds a mask such
