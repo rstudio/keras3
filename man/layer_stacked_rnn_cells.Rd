@@ -4,14 +4,9 @@
 \alias{layer_stacked_rnn_cells}
 \title{Wrapper allowing a stack of RNN cells to behave as a single cell}
 \usage{
-layer_stacked_rnn_cells(object, cells, ...)
+layer_stacked_rnn_cells(cells, ...)
 }
 \arguments{
-\item{object}{What to call the new \code{Layer} instance with. Typically a keras
-\code{Model}, another \code{Layer}, or a \code{tf.Tensor}/\code{KerasTensor}. If \code{object} is
-missing, the \code{Layer} instance is returned, otherwise, \code{layer(object)} is
-returned.}
-
 \item{cells}{List of RNN cell instances.}
 
 \item{...}{standard layer arguments.}

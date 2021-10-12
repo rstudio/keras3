@@ -311,7 +311,6 @@ function(units,
 #'
 #' Used to implement efficient stacked RNNs.
 #'
-#' @inheritParams layer_dense
 #' @param cells List of RNN cell instances.
 #' @param ... standard layer arguments.
 #'
@@ -322,15 +321,12 @@ function(units,
 #'
 #' @export
 layer_stacked_rnn_cells <-
-function(object, cells, ...)
+function(cells, ...)
 {
     args <- capture_args(match.call())
     do.call(keras$layers$StackedRNNCells, args)
 }
 
-# TODO: should the rnn cell layers take 'object' as first argument? are
-# they ever composed with %>%?
-# maybe a different naming scheme? layer_cell_*  rnn_cell_* ?
 
 #' Cell class for the LSTM layer
 #'

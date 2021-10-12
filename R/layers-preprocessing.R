@@ -882,8 +882,6 @@ function(object,
 
 
 
-# TODO: need to translate this: https://www.tensorflow.org/guide/keras/preprocessing_layers
-
 #' A preprocessing layer which maps string features to integer indices.
 #'
 #' @details
@@ -1255,7 +1253,7 @@ function(object,
          ...)
 {
 
-  # TODO: in TF 2.7, new args: sparse=FALSE, ragged=FALSE
+  # TODO: in TF 2.8, new args: sparse=FALSE, ragged=FALSE, idf_weights=NULL
   if (tf_version() >= "2.6") {
     callable <- keras$layers$TextVectorization
     # output_mode_choices <- c("int", "multi_hot", "count", "tf_idf")

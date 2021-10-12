@@ -37,8 +37,6 @@ function(shape = NULL, batch_shape = NULL, name = NULL,
                             batch_shape = normalize_shape))
   do.call(keras$layers$Input, args)
 }
-# TODO: can this be made to work as the first layer in a sequential model?
-# why doesn't this use create_layer()?
 
 
 #' Add a densely-connected NN layer to an output

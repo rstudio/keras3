@@ -407,7 +407,7 @@ assert_all_dots_named <- function(envir = parent.frame(), cl) {
        paste(deparse(cl, 500L), collapse = "\n"))
 }
 
-# TODO: there should be some default modifiers in capture_args() for standard layer args
+# TODO: should there be some default modifiers in capture_args() for standard layer args
 # like, input_shape, batch_input_shape, etc.
 
 capture_args <- function(cl, modifiers = NULL, ignore = NULL,

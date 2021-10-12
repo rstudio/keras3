@@ -161,18 +161,7 @@ optimizer_adam <- function(learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999, 
                            amsgrad = FALSE, clipnorm = NULL, clipvalue = NULL, ...) {
 
     backcompat_fix_rename_lr_to_learning_rate(...)
-  # TODO: name arg? decay position moved?
 
-  # TODO: lr -> learning_rate
-#   tf.keras.optimizers.Adam(
-#     learning_rate=0.001,
-#     beta_1=0.9,
-#     beta_2=0.999,
-#     epsilon=1e-07,
-#     amsgrad=False,
-#     name='Adam',
-#     **kwargs
-# )
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
   args <- list(
@@ -190,6 +179,18 @@ optimizer_adam <- function(learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999, 
 
   do.call(keras$optimizers$Adam, args)
 }
+
+# TODO: name arg? decay position moved?
+# TODO: lr -> learning_rate
+#   tf.keras.optimizers.Adam(
+#     learning_rate=0.001,
+#     beta_1=0.9,
+#     beta_2=0.999,
+#     epsilon=1e-07,
+#     amsgrad=False,
+#     name='Adam',
+#     **kwargs
+# )
 
 #' Adamax optimizer
 #'

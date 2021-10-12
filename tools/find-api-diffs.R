@@ -43,8 +43,10 @@ attach_eval({
 
 default_ignore <- c("self", "kwargs")
 DF <-
-  ls(pattern = "^layer_", envir = asNamespace("keras")) %>%
-  setdiff(c("layer_cudnn_gru", "layer_cudnn_lstm")) %>%
+  # ls(pattern = "^layer_", envir = asNamespace("keras")) %>%
+  # setdiff(c("layer_cudnn_gru", "layer_cudnn_lstm")) %>%
+  # filter(r_name == "layer_text_vectorization") %>%
+  "layer_text_vectorization" %>%
   set_names() %>%
   lapply(function(r_func_nm) {
     r_func <- get(r_func_nm, envir = asNamespace("keras"))

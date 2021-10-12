@@ -1,8 +1,10 @@
-Sys.setenv(TF_CPP_MIN_LOG_LEVEL = 1)
+# Sys.setenv(TF_CPP_MIN_LOG_LEVEL = 1)
 
 
+# Sys.setenv(RETICULATE_PYTHON = "~/.local/share/r-miniconda/envs/tf-2.7-cpu/bin/python")
+# Sys.setenv(RETICULATE_PYTHON = "~/.local/share/r-miniconda/envs/tf-nightly-cpu/bin/python")
 # reticulate::use_condaenv("tf-2.5-cpu", required = TRUE)
-# reticulate::use_condaenv("tf-2.1-cpu", required = TRUE)
+# reticulate::use_condaenv("tf-nightly-cpu", required = TRUE)
 
 if (reticulate::py_module_available("tensorflow")) {
   # force verbose tf init messages early
