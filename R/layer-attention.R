@@ -131,8 +131,41 @@ layer_multi_head_attention <- function(
   ))
 }
 
-# TODO: finish + document: https://www.tensorflow.org/api_docs/python/tf/keras/layers/AdditiveAttention
-layer_additive_attention <- function(object, use_scale=TRUE, ...) {
-  args <- capture_args(match.call())
-  create_layer(keras$layers$AdditiveAttention, object, args)
+
+#' Additive attention layer, a.k.a. Bahdanau-style attention
+#'
+#' @details
+#' Inputs are `query` tensor of shape `[batch_size, Tq, dim]`, `value` tensor of
+#' shape `[batch_size, Tv, dim]` and `key` tensor of shape
+#' `[batch_size, Tv, dim]`. The calculation follows the steps:
+#'
+#' 1. Reshape `query` and `key` into shapes `[batch_size, Tq, 1, dim]`
+#'    and `[batch_size, 1, Tv, dim]` respectively.
+#' 2. Calculate scores with shape `[batch_size, Tq, Tv]` as a non-linear
+#'    sum: `scores = tf.reduce_sum(tf.tanh(query + key), axis=-1)`
+#' 3. Use scores to calculate a distribution with shape
+#'    `[batch_size, Tq, Tv]`: `distribution = tf$nn$softmax(scores)`.
+#' 4. Use `distribution` to create a linear combination of `value` with
+#'    shape `[batch_size, Tq, dim]`:
+#'    `return tf$matmul(distribution, value)`.
+#'
+#' @param use_scale If `TRUE`, will create a variable to scale the attention scores.
+#'
+#' @param causal Boolean. Set to `TRUE` for decoder self-attention. Adds a mask such
+#' that position `i` cannot attend to positions `j > i`. This prevents the
+#' flow of information from the future towards the past.
+#'
+#' @param dropout Float between 0 and 1. Fraction of the units to drop for the
+#' attention scores.
+#' @param ... standard layer arguments.
+#'
+#' @seealso
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/layers/AdditiveAttention>
+#'   +  <https://keras.io/api/layers/attention_layers/additive_attention/>
+#' @export
+layer_additive_attention <-
+function(object, use_scale = TRUE, ..., causal = FALSE, dropout = 0)
+{
+    args <- capture_args(match.call(), NULL, ignore = "object")
+    create_layer(keras$layers$AdditiveAttention, object, args)
 }

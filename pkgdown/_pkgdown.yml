@@ -248,6 +248,7 @@ reference:
     contents:
       - layer_attention
       - layer_multi_head_attention
+      - layer_additive_attention
 
   - title: "Layer Wrappers"
     contents:
