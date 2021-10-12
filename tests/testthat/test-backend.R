@@ -132,3 +132,12 @@ test_backend("k_set_epsilon", {
   k_set_epsilon(1e-07)
   expect_equal(k_epsilon(), 1e-07)
 })
+
+
+test_backend("k_random_normal", {
+  chk <- function(x) expect_tensor(x, shape = c(1L, 2L, 3L))
+  chk(k_random_normal(c(1,2,3)))
+  chk(k_random_normal(as_tensor(c(1,2,3), "int32")))
+  chk(k_random_normal(lapply(c(1,2,3), as_tensor, "int32")))
+  chk(k_random_normal(list(1, as_tensor(2, "int32"), 3)))
+})

@@ -3103,10 +3103,5 @@ backend_normalize_shape <- function(shape) {
   if (inherits(shape, "python.builtin.object"))
     return(shape)
 
-  if (is.list(shape)) {
-    if (any(sapply(unlist(shape), function(x) inherits(x, "python.builtin.object"))))
-      return(shape)
-  }
-
   normalize_shape(shape)
 }

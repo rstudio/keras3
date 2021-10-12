@@ -433,6 +433,13 @@ normalize_shape <- function(shape) {
   # if it's a list or a numeric vector then convert to integer
   if (is.list(shape) || is.numeric(shape)) {
     shape <- lapply(shape, function(value) {
+
+      # Pass through python objects unmodified, only coerce R objects
+      # supplied shapes, e.g., to tf$random$normal, can be a list that's a mix
+      # of scalar integer tensors and regular integers
+      if(inherits(value, "python.builtin.object"))
+        return(value)
+
       if (!is.null(value))
         as.integer(value)
       else

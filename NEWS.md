@@ -37,6 +37,9 @@
   Standard layer arguments include: `input_shape`, `batch_input_shape`, `batch_size`, `dtype`, `name`, `trainable`, `weights`.
   Layers updated: `layer_global_{max,average}_pooling_{1,2,3}d()`, `time_distributed()`, `bidirectional()`.
 
+- All the backend function with a shape argument `k_*(shape =)` that now accept a 
+  a mix of integer tensors and R numerics in the supplied list.
+
 - `k_random_uniform()` now automatically coerces `minval` and `maxval` to the output dtype.
 
 # keras 2.6.1

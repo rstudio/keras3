@@ -356,8 +356,6 @@ GAN(keras$Model) %py_class% {
     # Sample random points in the latent space
     batch_size <- tf$shape(real_images)[1]
 
-    # TODO: shape() should be able to handle a scalar tensor as input
-    # also, backend functions like k_random_normal
     random_latent_vectors <- tf$random$normal(list(batch_size, self$latent_dim))
 
     # Decode them to fake images
