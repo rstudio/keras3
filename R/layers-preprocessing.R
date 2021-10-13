@@ -1433,11 +1433,8 @@ function(object, run_eagerly = NULL, steps_per_execution = NULL, ...) {
 }
 
 
-# TODO: isn't there a hashing trick already? text_hashing_trick
 
 # TODO: add an 'experimental' tag in the R docs where appropriate
-# TODO: print a start up message suggesting people update tensorflow/keras if they're running an old version,
-# or, at least telling them the current TF version and the range of compatible R-keras versions.
 
 require_tf_version <- function(ver, msg = "this function.") {
   if (tf_version() < ver)
@@ -1453,25 +1450,6 @@ require_tf_version <- function(ver, msg = "this function.") {
 # gives the python interpreter a chance to recycle the address for the identical
 # string that's already in it's string pool, which then passes the `is`
 # comparison.
-#
-# TODO: file another PR
-#
-# ag --python --case-sensitive '^(?!\s*#).* if .+ is( not)? (?!None).*$'
-# find . -type f -name '*.py' -exec grep ' is ' {} \;
-#
-# Hello!
-# While working on the [R interface to keras](github.com/rstudio/keras/), I recently encountered this issue:
-# https://github.com/keras-team/keras/blob/db3fa5d40ed19cdf89fc295e8d0e317fb64480d4/keras/layers/preprocessing/text_vectorization.py#L524
-# The referenced snippet fails for valid strings `"int"` because `is not` compares memory addresses. Instead an equality comparison `!=` might be more appropriate.
-# ([relevant stackoverflow thread](https://stackoverflow.com/a/1504742/5128728))
-#
-# There was a prior pull request merged around TF 2.2 for a similar issue:
-# https://github.com/tensorflow/tensorflow/pull/34420
-#
-# I haven't looked through the rest of the codebase to see if `is` is used to
-# compare strings anywhere else. A crude regex search on the keras repo yields 157 hits:
-# `ag --python --case-sensitive '^(?!\s*#).* if .+ is( not)? .*(?<!None)[:]$' | wc -l`
-# Most of these are probably fine, but it would take some work to go through and reason about each one.
 fix_string <- local({
   py_reparse <- NULL # R CMD check: no visible binding
   delayedAssign("py_reparse",

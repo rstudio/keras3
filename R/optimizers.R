@@ -180,8 +180,7 @@ optimizer_adam <- function(learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999, 
   do.call(keras$optimizers$Adam, args)
 }
 
-# TODO: name arg? decay position moved?
-# TODO: lr -> learning_rate
+# TODO: decay position moved
 #   tf.keras.optimizers.Adam(
 #     learning_rate=0.001,
 #     beta_1=0.9,

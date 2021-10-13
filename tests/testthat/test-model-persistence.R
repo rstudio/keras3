@@ -29,7 +29,6 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
     loss_categorical_crossentropy(y_pred, y_true)
   }
 
-  #TODO: /home/tomasz/.virtualenvs/tf-2.5-cpu/lib/python3.8/site-packages/tensorflow/python/keras/optimizer_v2/optimizer_v2.py:374: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
   model %>% compile(
     loss = custom_loss,
     optimizer = optimizer_nadam(),

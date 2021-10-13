@@ -449,5 +449,3 @@ capture_args <- function(cl, modifiers = NULL, ignore = NULL,
   args
 }
 
-# TODO
-plot_model <- function(...) {}
