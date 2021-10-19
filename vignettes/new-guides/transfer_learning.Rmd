@@ -59,7 +59,7 @@ This is adapted from
 
 ## Freezing layers: understanding the `trainable` attribute
 
-Layers & models have three weight attributes:
+Layers and models have three weight attributes:
 
 - `weights` is the list of all weights variables of the layer.
 - `trainable_weights` is the list of those that are meant to be updated (via gradient
@@ -67,7 +67,7 @@ Layers & models have three weight attributes:
 - `non_trainable_weights` is the list of those that aren't meant to be trained.
  Typically they are updated by the model during the forward pass.
 
-**Example: the `Dense` layer has 2 trainable weights (kernel & bias)**
+**Example: the `Dense` layer has 2 trainable weights (kernel and bias)**
 
 ```{r, hold = TRUE}
 layer <- layer_dense(units = 3)
@@ -138,7 +138,7 @@ final_layer1_weights_values <- get_weights(layer1)
 stopifnot(all.equal(initial_layer1_weights_values, final_layer1_weights_values))
 ```
 
-Do not confuse the `layer$trainable` attribute with the `training` argument in a layer instances `call` signature  
+Do not confuse the `layer$trainable` attribute with the `training` argument in a layer instance's `call` signature  
 `layer(training =)` (which controls whether the layer should run its forward pass in
  inference mode or training mode). For more information, see the
 [Keras FAQ](
@@ -271,7 +271,7 @@ base_model$trainable <- TRUE
 
 # It's important to recompile your model after you make any changes
 # to the `trainable` attribute of any inner layer, so that your changes
-# are take into account
+# are taken into account
 model %>% compile(
   optimizer = optimizer_adam(1e-5), # Very low learning rate
   loss = loss_binary_crossentropy(from_logits = TRUE),
@@ -330,7 +330,7 @@ base_model = application_xception(
 )
 
 # Freeze base model
-base_model.trainable = FALSE
+base_model$trainable = FALSE
 
 # Create new model on top.
 inputs <- layer_input(shape = c(150, 150, 3))
@@ -523,7 +523,7 @@ plot_image(data_augmentation(first_image, training = TRUE), "augmented 3")
 
 ## Build a model
 
-Now let's built a model that follows the blueprint we've explained earlier.
+Now let's build a model that follows the blueprint we've explained earlier.
 
 Note that:
 
