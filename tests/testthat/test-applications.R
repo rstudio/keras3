@@ -32,6 +32,16 @@ test_succeeds("keras pre-built models can be instantiated", {
   application_vgg16()
   application_vgg19()
   application_inception_v3()
+
+  application_efficientnet_b0()
+  application_efficientnet_b1()
+  application_efficientnet_b2()
+  application_efficientnet_b3()
+  application_efficientnet_b4()
+  application_efficientnet_b5()
+  application_efficientnet_b6()
+  application_efficientnet_b7()
+
 })
 
 test_succeeds("can use any input_shape", {

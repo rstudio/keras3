@@ -26,6 +26,8 @@
 
 - New vignette: "Transfer learning and fine-tuning".
 
+- New `application_efficientnet_b{1,2,3,4,5,6,7}()`.
+
 - New function `%<-active%`, a ergonomic wrapper around `makeActiveBinding()`
   for constructing Python `@property` decorated methods in `%py_class%`.
 
