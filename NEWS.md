@@ -24,6 +24,8 @@
 - `layer_cudnn_gru()` and `layer_cudnn_lstm()` are deprecated. `layer_gru()` and `layer_lstm()` will
   automatically use CuDNN if it is available.
 
+- New vignette: "Transfer learning and fine-tuning".
+
 - New function `%<-active%`, a ergonomic wrapper around `makeActiveBinding()`
   for constructing Python `@property` decorated methods in `%py_class%`.
 
