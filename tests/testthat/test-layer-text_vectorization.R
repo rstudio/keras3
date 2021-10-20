@@ -63,7 +63,7 @@ test_call_succeeds("can set and get the vocabulary of layer_text_vectorization",
   if(tf_version() < "2.5")
     layer$get_vocabulary()
 
-  set_vocabulary(layer, vocab = c("hello", "world"))
+  set_vocabulary(layer, vocabulary = c("hello", "world"))
 
   output <- layer(x)
 

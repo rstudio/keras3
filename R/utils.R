@@ -448,4 +448,3 @@ capture_args <- function(cl, modifiers = NULL, ignore = NULL,
 
   args
 }
-
