@@ -28,7 +28,7 @@ test_succeeds("layer_gru_cell", {
  expect_true(output$shape == shape(32, 4))
 
  rnn <- layer_rnn(cell = layer_gru_cell(4),
-                  return_sequence = TRUE,
+                  return_sequences = TRUE,
                   return_state = TRUE)
  c(whole_sequence_output, final_state) %<-% rnn(inputs)
 
