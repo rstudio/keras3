@@ -15,10 +15,10 @@
   "Working with RNNs".
 
 - New layers:
-    - `layer_additive_attention()` 
-    - `layer_conv_lstm_1d()` 
+    - `layer_additive_attention()`
+    - `layer_conv_lstm_1d()`
     - `layer_conv_lstm_3d()`
-    
+
 - `layer_lstm()` default value for `recurrent_activation` changed from `"hard_sigmoid"` to `"sigmoid"`.
 
 - `layer_cudnn_gru()` and `layer_cudnn_lstm()` are deprecated. `layer_gru()` and `layer_lstm()` will
@@ -26,25 +26,38 @@
 
 - New vignette: "Transfer learning and fine-tuning".
 
-- New `application_efficientnet_b{1,2,3,4,5,6,7}()`.
+- New applications:
+    - MobileNet V3: `application_mobilenet_v3_large()`, `application_mobilenet_v3_small()`
+    - ResNet: `application_resnet101()`, `application_resnet152()`, `resnet_preprocess_input()`
+    - ResNet V2:`application_resnet50_v2()`, `application_resnet101_v2()`, 
+                `application_resnet152_v2()` and `resnet_v2_preprocess_input()`
+    - EfficientNet: `application_efficientnet_b{0,1,2,3,4,5,6,7}()`
+
+- Many existing `application_*()`'s gain argument `classifier_activation`, with default `'softmax'`.
+  Affected: `application_{xception, inception_resnet_v2, inception_v3, mobilenet, vgg16, vgg19}()`
 
 - New function `%<-active%`, a ergonomic wrapper around `makeActiveBinding()`
   for constructing Python `@property` decorated methods in `%py_class%`.
 
 - `bidirectional()` sequence processing layer wrapper gains a `backwards_layer` arguments.
 
-- Global pooling layers `layer_global_{max,average}_pooling_{1,2,3}d()` gain a 
+- Global pooling layers `layer_global_{max,average}_pooling_{1,2,3}d()` gain a
   `keepdims` argument with default value `FALSE`.
 
-- Signatures for layer functions are in the process of being simplified. 
-  Standard layer arguments are moving to `...` where appropriate (and will need to be provided as named arguments). 
-  Standard layer arguments include: `input_shape`, `batch_input_shape`, `batch_size`, `dtype`, `name`, `trainable`, `weights`.
-  Layers updated: `layer_global_{max,average}_pooling_{1,2,3}d()`, `time_distributed()`, `bidirectional()`.
+- Signatures for layer functions are in the process of being simplified.
+  Standard layer arguments are moving to `...` where appropriate 
+  (and will need to be provided as named arguments).
+  Standard layer arguments include: 
+    `input_shape`, `batch_input_shape`, `batch_size`, `dtype`, 
+    `name`, `trainable`, `weights`.
+  Layers updated: 
+    `layer_global_{max,average}_pooling_{1,2,3}d()`, 
+    `time_distributed()`, `bidirectional()`.
 
-- All the backend function with a shape argument `k_*(shape =)` that now accept a 
+- All the backend function with a shape argument `k_*(shape =)` that now accept a
   a mix of integer tensors and R numerics in the supplied list.
 
-- `k_random_uniform()` now automatically coerces `minval` and `maxval` to the output dtype.
+- `k_random_uniform()` now automatically casts `minval` and `maxval` to the output dtype.
 
 # keras 2.6.1
 

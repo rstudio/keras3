@@ -14,7 +14,9 @@ application_mobilenet_v2(
   weights = "imagenet",
   input_tensor = NULL,
   pooling = NULL,
-  classes = 1000
+  classes = 1000,
+  classifier_activation = "softmax",
+  ...
 )
 
 mobilenet_v2_preprocess_input(x)
@@ -59,6 +61,14 @@ be a 2D tensor.
 \item{classes}{optional number of classes to classify images into, only to be
 specified if \code{include_top} is TRUE, and if no \code{weights} argument is
 specified.}
+
+\item{classifier_activation}{A string or callable. The activation function to
+use on the "top" layer. Ignored unless \code{include_top = TRUE}. Set
+\code{classifier_activation = NULL} to return the logits of the "top" layer.
+Defaults to \code{'softmax'}. When loading pretrained weights,
+\code{classifier_activation} can only be \code{NULL} or \code{"softmax"}.}
+
+\item{...}{For backwards and forwards compatibility}
 
 \item{x}{input tensor, 4D}
 

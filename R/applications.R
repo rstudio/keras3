@@ -1,60 +1,91 @@
 
-
-#' Xception V1 model for Keras.
+#' Instantiates the Xception architecture
 #'
 #' @details
-#' On ImageNet, this model gets to a top-1 validation accuracy of 0.790
-#' and a top-5 validation accuracy of 0.945.
 #'
-#' Do note that the input image format for this model is different than for
-#' the VGG16 and ResNet models (299x299 instead of 224x224).
+#' For image classification use cases, see
+#' [this page for detailed examples](
+#'   https://keras.io/api/applications/#usage-examples-for-image-classification-models).
 #'
-#' The `xception_preprocess_input()` function should be used for image
-#' preprocessing.
+#' For transfer learning use cases, make sure to read the
+#' [guide to transfer learning & fine-tuning](
+#'   https://keras.io/guides/transfer_learning/).
 #'
-#' This application is only available when using the TensorFlow back-end.
+#' The default input image size for this model is 299x299.
 #'
-#' @param x Input tensor for preprocessing
-#' @param include_top whether to include the fully-connected layer at the top of
-#'   the network.
-#' @param weights `NULL` (random initialization), `imagenet` (ImageNet
-#'   weights), or the path to the weights file to be loaded.
-#' @param input_tensor optional Keras tensor to use as image input for the
-#'   model.
-#' @param input_shape optional shape list, only to be specified if `include_top`
-#'   is FALSE (otherwise the input shape has to be `(299, 299, 3)`. It should
-#'   have exactly 3 inputs channels, and width and height should be no smaller
-#'   than 75. E.g. `(150, 150, 3)` would be one valid value.
-#' @param pooling Optional pooling mode for feature extraction when
-#'   `include_top` is `FALSE`.
-#'   - `NULL` means that the output of the model will be the 4D tensor output
-#'      of the last convolutional layer.
-#'   - `avg` means that global average pooling will be applied to the output of
-#'      the last convolutional layer, and thus the output of the model will be
-#'      a 2D tensor.
-#'   - `max` means that global max pooling will be applied.
-#' @param classes optional number of classes to classify images into, only to be
+#' @note
+#' Each Keras Application typically expects a specific kind of input preprocessing.
+#' For Xception, call `xception_preprocess_input()` on your
+#' inputs before passing them to the model.
+#' `xception_preprocess_input()` will scale input pixels between -1 and 1.
+#'
+#' @section
+#' Reference:
+#' - [Xception: Deep Learning with Depthwise Separable Convolutions](
+#'     https://arxiv.org/abs/1610.02357) (CVPR 2017)
+#'
+#' @param include_top Whether to include the fully-connected
+#' layer at the top of the network. Defaults to `TRUE`.
+#'
+#' @param weights One of `NULL` (random initialization),
+#' `'imagenet'` (pre-training on ImageNet),
+#' or the path to the weights file to be loaded. Defaults to `'imagenet'`.
+#'
+#' @param input_tensor Optional Keras tensor
+#' (i.e. output of `layer_input()`)
+#' to use as image input for the model.
+#'
+#' @param input_shape optional shape list, only to be specified
+#' if `include_top` is FALSE (otherwise the input shape
+#' has to be `(299, 299, 3)`.
+#' It should have exactly 3 inputs channels,
+#' and width and height should be no smaller than 71.
+#' E.g. `(150, 150, 3)` would be one valid value.
+#'
+#' @param pooling Optional pooling mode for feature extraction
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
+#'     the 4D tensor output of the
+#'     last convolutional layer.
+#' - `'avg'` means that global average pooling
+#'     will be applied to the output of the
+#'     last convolutional layer, and thus
+#'     the output of the model will be a 2D tensor.
+#' - `'max'` means that global max pooling will
+#'     be applied.
+#'
+#' @param classes Optional number of classes to classify images into, only to be
 #'   specified if `include_top` is TRUE, and if no `weights` argument is
-#'   specified.
+#'   specified. Defaults to 1000 (number of ImageNet classes).
 #'
-#' @section Reference:
-#'   - [Xception: Deep Learning with Depthwise Separable Convolutions](https://arxiv.org/abs/1610.02357)
+#' @param classifier_activation A string or callable. The activation function to
+#'   use on the "top" layer. Ignored unless `include_top = TRUE`. Set
+#'   `classifier_activation = NULL` to return the logits of the "top" layer.
+#'   Defaults to `'softmax'`. When loading pretrained weights,
+#'   `classifier_activation` can only be `NULL` or `"softmax"`.
 #'
-#' @return A Keras model instance.
+#' @param ... For backwards and forwards compatibility
+#'
+#'
+#' @param x `preprocess_input()` takes an array or floating point tensor, 3D or
+#'   4D with 3 color channels, with values in the range `[0, 255]`.
+#'
+#' @seealso
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/xception/Xception>
+#'   +  <https://keras.io/api/applications/>
+#'
 #'
 #' @export
-application_xception <- function(include_top = TRUE, weights = "imagenet",
-                                 input_tensor = NULL, input_shape = NULL,
-                                 pooling = NULL, classes = 1000) {
+application_xception <-
+function(include_top = TRUE, weights = "imagenet", input_tensor = NULL,
+         input_shape = NULL, pooling = NULL, classes = 1000,
+         classifier_activation='softmax', ...)
+{
   verify_application_prerequistes()
-  keras$applications$Xception(
-    include_top = include_top,
-    weights = weights,
-    input_tensor = input_tensor,
-    input_shape = normalize_shape(input_shape),
-    pooling = pooling,
-    classes = as.integer(classes)
-  )
+  args <- capture_args(match.call(), list(
+    classes = as.integer,
+    input_shape = normalize_shape))
+  do.call(keras$applications$Xception, args)
 }
 
 
@@ -102,52 +133,81 @@ xception_preprocess_input <- function(x) {
 #' features <- model %>% predict(x)
 #' }
 #' @export
-application_vgg16 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL,
-                              pooling = NULL, classes = 1000) {
+application_vgg16 <-
+function(include_top = TRUE, weights = "imagenet", input_tensor = NULL,
+         input_shape = NULL, pooling = NULL, classes = 1000,
+         classifier_activation='softmax')
+{
   verify_application_prerequistes()
-  keras$applications$VGG16(
-    include_top = include_top,
-    weights = weights,
-    input_tensor = input_tensor,
-    input_shape = normalize_shape(input_shape),
-    pooling = pooling,
-    classes = as.integer(classes)
-  )
+  args <- capture_args(match.call(), list(
+      classes = as.integer,
+      input_shape = normalize_shape))
+  do.call(keras$applications$VGG16, args)
 }
 
 #' @rdname application_vgg
 #' @export
-application_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL,
-                              pooling = NULL, classes = 1000) {
+application_vgg19 <-
+function(include_top = TRUE, weights = "imagenet", input_tensor = NULL,
+         input_shape = NULL, pooling = NULL, classes = 1000,
+         classifier_activation='softmax')
+{
   verify_application_prerequistes()
-  keras$applications$VGG19(
-    include_top = include_top,
-    weights = weights,
-    input_tensor = input_tensor,
-    input_shape = normalize_shape(input_shape),
-    pooling = pooling,
-    classes = as.integer(classes)
-  )
+  args <- capture_args(match.call(), list(
+      classes = as.integer,
+      input_shape = normalize_shape))
+  do.call(keras$applications$VGG19, args)
 }
 
-#' ResNet50 model for Keras.
+
+#' Instantiates the ResNet architecture
 #'
-#' @details Optionally loads weights pre-trained on ImageNet.
+#' @details
+#' Reference:
+#' - [Deep Residual Learning for Image Recognition](
+#'     https://arxiv.org/abs/1512.03385) (CVPR 2015)
 #'
-#' The `imagenet_preprocess_input()` function should be used for image
-#' preprocessing.
+#' For image classification use cases, see
+#' [this page for detailed examples](
+#'   https://keras.io/api/applications/#usage-examples-for-image-classification-models).
 #'
-#' @inheritParams application_xception
+#' For transfer learning use cases, make sure to read the
+#' [guide to transfer learning & fine-tuning](
+#'   https://keras.io/guides/transfer_learning/).
 #'
-#' @param input_shape optional shape list, only to be specified if `include_top`
-#'   is FALSE (otherwise the input shape has to be `(224, 224, 3)`. It should
-#'   have exactly 3 inputs channels, and width and height should be no smaller
-#'   than 32. E.g. `(200, 200, 3)` would be one valid value.
+#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' For ResNet, call `tf.keras.applications.resnet.preprocess_input` on your
+#' inputs before passing them to the model.
+#' `resnet.preprocess_input` will convert the input images from RGB to BGR,
+#' then will zero-center each color channel with respect to the ImageNet dataset,
+#' without scaling.
 #'
-#' @return A Keras model instance.
+#' @inheritParams application_efficientnet
 #'
-#' @section Reference: - [Deep Residual Learning for Image
-#'   Recognition](https://arxiv.org/abs/1512.03385)
+#' @param input_shape optional shape list, only to be specified
+#' if `include_top` is FALSE (otherwise the input shape
+#' has to be `c(224, 224, 3)` (with `'channels_last'` data format)
+#' or `c(3, 224, 224)` (with `'channels_first'` data format).
+#' It should have exactly 3 inputs channels,
+#' and width and height should be no smaller than 32.
+#' E.g. `c(200, 200, 3)` would be one valid value.
+#'
+#' @param x `preprocess_input()` takes an array or floating point tensor, 3D or
+#'   4D with 3 color channels, with values in the range `[0, 255]`.
+#'
+#' @param ... For backwards and forwards compatibility
+#'
+#' @name application_resnet
+#' @rdname application_resnet
+#'
+#' @seealso
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet/ResNet50>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet/ResNet101>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet/ResNet152>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet_v2/ResNet50V2>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet_v2/ResNet101V2>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet_v2/ResNet152V2>
+#'   +  <https://keras.io/api/applications/>
 #'
 #' @examples
 #' \dontrun{
@@ -170,19 +230,66 @@ application_vgg19 <- function(include_top = TRUE, weights = "imagenet", input_te
 #' preds <- model %>% predict(x)
 #' imagenet_decode_predictions(preds, top = 3)[[1]]
 #' }
-#' @export
-application_resnet50 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL,
-                                 pooling = NULL, classes = 1000) {
-  verify_application_prerequistes()
-  keras$applications$ResNet50(
-    include_top = include_top,
-    weights = weights,
-    input_tensor = input_tensor,
-    input_shape = normalize_shape(input_shape),
-    pooling = pooling,
-    classes = as.integer(classes)
-  )
+NULL
+
+## TODO: maybe expand all the application wrappers to use this?
+## then clean up with `formals(fn)$classifier_activation <- NULL` where needed
+new_application_resnet_wrapper <- function(name) {
+  args <- alist(include_top = TRUE, weights = "imagenet", input_tensor = NULL,
+                input_shape = NULL, pooling = NULL, classes = 1000)
+  if(grepl("V2$", name))
+    args <- c(args, alist(classifier_activation='softmax'))
+  args <- c(args, alist(... = ))
+
+  body <- substitute({
+    args <- capture_args(match.call(), list(
+      classes = as.integer,
+      input_shape = normalize_shape))
+    do.call(keras$applications$NAME, args)
+  }, list(NAME = name))
+
+  as.function(c(args, body), envir = parent.frame())
 }
+
+#' @export
+#' @rdname application_resnet
+application_resnet50  <- new_application_resnet_wrapper("ResNet50")
+
+#' @export
+#' @rdname application_resnet
+application_resnet101 <- new_application_resnet_wrapper("ResNet101")
+
+#' @export
+#' @rdname application_resnet
+application_resnet152 <- new_application_resnet_wrapper("ResNet152")
+
+#' @export
+#' @rdname application_resnet
+application_resnet50_v2  <- new_application_resnet_wrapper("ResNet50V2")
+
+#' @export
+#' @rdname application_resnet
+application_resnet101_v2 <- new_application_resnet_wrapper("ResNet101V2")
+
+#' @export
+#' @rdname application_resnet
+application_resnet152_v2 <- new_application_resnet_wrapper("ResNet152V2")
+
+
+#' @export
+#' @rdname application_resnet
+resnet_preprocess_input <- function(x) {
+  preprocess_input(x, keras$applications$resnet$preprocess_input)
+}
+
+#' @export
+#' @rdname application_resnet
+resnet_v2_preprocess_input <- function(x) {
+  preprocess_input(x, keras$applications$resnet_v2$preprocess_input)
+}
+
+
+
 
 
 #' Inception V3 model, with weights pre-trained on ImageNet.
@@ -203,16 +310,11 @@ application_resnet50 <- function(include_top = TRUE, weights = "imagenet", input
 #'
 #' @export
 application_inception_v3 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL,
-                                     pooling = NULL, classes = 1000) {
+                                     pooling = NULL, classes = 1000,  classifier_activation='softmax', ...) {
   verify_application_prerequistes()
-  keras$applications$InceptionV3(
-    include_top = include_top,
-    weights = weights,
-    input_tensor = input_tensor,
-    input_shape = normalize_shape(input_shape),
-    pooling = pooling,
-    classes = as.integer(classes)
-  )
+  args <- capture_args(match.call(), list(
+    input_shape = normalize_shape, classes = as.integer))
+  do.call(keras$applications$InceptionV3, args)
 }
 
 
@@ -241,17 +343,13 @@ inception_v3_preprocess_input <- function(x) {
 #'  - [Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning](https://arxiv.org/abs/1602.07261)(https://arxiv.org/abs/1512.00567)
 #'
 #' @export
-application_inception_resnet_v2 <- function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL,
-                                            pooling = NULL, classes = 1000) {
+application_inception_resnet_v2 <-
+function(include_top = TRUE, weights = "imagenet", input_tensor = NULL, input_shape = NULL,
+         pooling = NULL, classes = 1000, classifier_activation='softmax', ...) {
   verify_application_prerequistes()
-  keras$applications$InceptionResNetV2(
-    include_top = include_top,
-    weights = weights,
-    input_tensor = input_tensor,
-    input_shape = normalize_shape(input_shape),
-    pooling = pooling,
-    classes = as.integer(classes)
-  )
+  args <- capture_args(match.call(), list(
+    input_shape = normalize_shape, classes = as.integer))
+  do.call(keras$applications$InceptionResNetV2, args)
 }
 
 #' @rdname application_inception_resnet_v2
@@ -334,6 +432,7 @@ imagenet_preprocess_input <- function(x, data_format = NULL, mode = "caffe") {
 #'
 #' @inheritParams imagenet_decode_predictions
 #' @inheritParams load_model_hdf5
+#' @inheritParams application_xception
 #'
 #' @param input_shape optional shape list, only to be specified if `include_top`
 #'   is FALSE (otherwise the input shape has to be `(224, 224, 3)` (with
@@ -377,20 +476,23 @@ imagenet_preprocess_input <- function(x, data_format = NULL, mode = "caffe") {
 #'   - [MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/pdf/1704.04861v1.pdf).
 #'
 #' @export
-application_mobilenet <- function(input_shape = NULL, alpha = 1.0, depth_multiplier = 1, dropout = 0.001,
-                                  include_top = TRUE, weights = "imagenet", input_tensor = NULL, pooling = NULL,
-                                  classes = 1000) {
-  keras$applications$MobileNet(
-    input_shape = normalize_shape(input_shape),
-    alpha = alpha,
-    depth_multiplier = as.integer(depth_multiplier),
-    dropout = dropout,
-    include_top = include_top,
-    weights = weights,
-    input_tensor = input_tensor,
-    pooling = pooling,
-    classes = as.integer(classes)
-  )
+application_mobilenet <-
+function(input_shape = NULL,
+         alpha = 1.0,
+         depth_multiplier = 1L,
+         dropout = 0.001,
+         include_top = TRUE,
+         weights = "imagenet",
+         input_tensor = NULL,
+         pooling = NULL,
+         classes = 1000L,
+         classifier_activation='softmax',
+         ...) {
+  args <- capture_args(match.call(), list(
+    input_shape = normalize_shape,
+    classes = as.integer,
+    depth_multiplier = as.integer))
+  do.call(keras$applications$MobileNet, args)
 }
 
 
@@ -439,19 +541,21 @@ mobilenet_load_model_hdf5 <- function(filepath) {
 #' @seealso application_mobilenet
 #'
 #' @export
-application_mobilenet_v2 <- function(input_shape = NULL, alpha = 1.0,  include_top = TRUE,
-                                     weights = "imagenet", input_tensor = NULL, pooling = NULL, classes = 1000) {
-
-  keras$applications$MobileNetV2(
-    input_shape = normalize_shape(input_shape),
-    alpha = alpha,
-    include_top = include_top,
-    weights = weights,
-    input_tensor = input_tensor,
-    pooling = pooling,
-    classes = as.integer(classes)
-  )
-
+application_mobilenet_v2 <-
+function(input_shape = NULL,
+         alpha = 1.0,
+         include_top = TRUE,
+         weights = "imagenet",
+         input_tensor = NULL,
+         pooling = NULL,
+         classes = 1000,
+         classifier_activation = 'softmax',
+         ...)
+{
+  args <- capture_args(match.call(), list(
+    input_shape = normalize_shape,
+    classes = as.integer))
+  do.call(keras$applications$MobileNetV2, args)
 }
 
 #' @rdname application_mobilenet_v2
@@ -482,6 +586,162 @@ mobilenet_v2_load_model_hdf5 <- function(filepath) {
 }
 
 
+#' Instantiates the MobileNetV3Large architecture
+#'
+#' @details
+#' Reference:
+#' - [Searching for MobileNetV3](
+#'     https://arxiv.org/pdf/1905.02244.pdf) (ICCV 2019)
+#'
+#' The following table describes the performance of MobileNets v3:
+#' ------------------------------------------------------------------------
+#' MACs stands for Multiply Adds
+#'
+#' |Classification Checkpoint|MACs(M)|Parameters(M)|Top1 Accuracy|Pixel1 CPU(ms)|
+#' |---|---|---|---|---|
+#' | mobilenet_v3_large_1.0_224              | 217 | 5.4 |   75.6   |   51.2  |
+#' | mobilenet_v3_large_0.75_224             | 155 | 4.0 |   73.3   |   39.8  |
+#' | mobilenet_v3_large_minimalistic_1.0_224 | 209 | 3.9 |   72.3   |   44.1  |
+#' | mobilenet_v3_small_1.0_224              | 66  | 2.9 |   68.1   |   15.8  |
+#' | mobilenet_v3_small_0.75_224             | 44  | 2.4 |   65.4   |   12.8  |
+#' | mobilenet_v3_small_minimalistic_1.0_224 | 65  | 2.0 |   61.9   |   12.2  |
+#'
+#' For image classification use cases, see
+#' [this page for detailed examples](
+#'   https://keras.io/api/applications/#usage-examples-for-image-classification-models).
+#'
+#' For transfer learning use cases, make sure to read the
+#' [guide to transfer learning & fine-tuning](
+#'   https://keras.io/guides/transfer_learning/).
+#'
+#' @note
+#' Each Keras application typically expects a specific kind of input preprocessing.
+#' For ModelNetV3, by default input preprocessing is included as a part of the
+#' model (as a `Rescaling` layer), and thus
+#' a preprocessing function is not necessary. In this use case, ModelNetV3 models expect their inputs
+#' to be float tensors of pixels with values in the `[0-255]` range.
+#' At the same time, preprocessing as a part of the model (i.e. `Rescaling`
+#' layer) can be disabled by setting `include_preprocessing` argument to FALSE.
+#' With preprocessing disabled ModelNetV3 models expect their inputs to be float
+#' tensors of pixels with values in the `[-1, 1]` range.
+#'
+#' @param input_shape Optional shape vector, to be specified if you would
+#' like to use a model with an input image resolution that is not
+#' `c(224, 224, 3)`.
+#' It should have exactly 3 inputs channels `c(224, 224, 3)`.
+#' You can also omit this option if you would like
+#' to infer input_shape from an input_tensor.
+#' If you choose to include both input_tensor and input_shape then
+#' input_shape will be used if they match, if the shapes
+#' do not match then we will throw an error.
+#' E.g. `c(160, 160, 3)` would be one valid value.
+#'
+#' @param alpha controls the width of the network. This is known as the
+#' depth multiplier in the MobileNetV3 paper, but the name is kept for
+#' consistency with MobileNetV1 in Keras.
+#' - If `alpha` < 1.0, proportionally decreases the number
+#'     of filters in each layer.
+#' - If `alpha` > 1.0, proportionally increases the number
+#'     of filters in each layer.
+#' - If `alpha` = 1, default number of filters from the paper
+#'     are used at each layer.
+#'
+#' @param minimalistic In addition to large and small models this module also
+#' contains so-called minimalistic models, these models have the same
+#' per-layer dimensions characteristic as MobilenetV3 however, they don't
+#' utilize any of the advanced blocks (squeeze-and-excite units, hard-swish,
+#' and 5x5 convolutions). While these models are less efficient on CPU, they
+#' are much more performant on GPU/DSP.
+#'
+#' @param include_top Boolean, whether to include the fully-connected
+#' layer at the top of the network. Defaults to `TRUE`.
+#'
+#' @param weights String, one of `NULL` (random initialization),
+#' 'imagenet' (pre-training on ImageNet),
+#' or the path to the weights file to be loaded.
+#'
+#' @param input_tensor Optional Keras tensor (i.e. output of
+#' `layer_input()`)
+#' to use as image input for the model.
+#'
+#' @param pooling String, optional pooling mode for feature extraction
+#' when `include_top` is `FALSE`.
+#' - `NULL` means that the output of the model
+#'     will be the 4D tensor output of the
+#'     last convolutional block.
+#' - `avg` means that global average pooling
+#'     will be applied to the output of the
+#'     last convolutional block, and thus
+#'     the output of the model will be a
+#'     2D tensor.
+#' - `max` means that global max pooling will
+#'     be applied.
+#'
+#' @param classes Integer, optional number of classes to classify images
+#' into, only to be specified if `include_top` is TRUE, and
+#' if no `weights` argument is specified.
+#'
+#' @param dropout_rate fraction of the input units to drop on the last layer.
+#'
+#' @param classifier_activation A string or callable. The activation function to use
+#' on the "top" layer. Ignored unless `include_top = TRUE`. Set
+#' `classifier_activation = NULL` to return the logits of the "top" layer.
+#' When loading pretrained weights, `classifier_activation` can only
+#' be `NULL` or `"softmax"`.
+#'
+#' @param include_preprocessing Boolean, whether to include the preprocessing
+#' layer (`Rescaling`) at the bottom of the network. Defaults to `TRUE`.
+#'
+#' @returns A keras `Model` instance
+#' @name application_mobilenet_v3
+#' @rdname application_mobilenet_v3
+#'
+#' @seealso
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNetV3Large>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNetV3Small>
+#'   +  <https://keras.io/api/applications/>
+#' @export
+application_mobilenet_v3_large <-
+function(input_shape = NULL,
+         alpha = 1.0,
+         minimalistic = FALSE,
+         include_top = TRUE,
+         weights = "imagenet",
+         input_tensor = NULL,
+         classes = 1000L,
+         pooling = NULL,
+         dropout_rate = 0.2,
+         classifier_activation = "softmax",
+         include_preprocessing = TRUE)
+{
+  require_tf_version("2.4", "application_mobilenet_v3_large")
+  args <- capture_args(match.call(), list(
+    classes = as.integer,
+    input_shape = normalize_shape))
+  do.call(keras$applications$MobileNetV3Large, args)
+}
+
+#' @export
+#' @rdname application_mobilenet_v3
+application_mobilenet_v3_small <-
+function(input_shape = NULL,
+         alpha = 1.0,
+         minimalistic = FALSE,
+         include_top = TRUE,
+         weights = "imagenet",
+         input_tensor = NULL,
+         classes = 1000L,
+         pooling = NULL,
+         dropout_rate = 0.2,
+         classifier_activation = "softmax",
+         include_preprocessing = TRUE)
+{
+  require_tf_version("2.4", "application_mobilenet_v3_small")
+  args <- capture_args(match.call(), list(
+    classes = as.integer,
+    input_shape = normalize_shape))
+  do.call(keras$applications$MobileNetV3Small, args)
+}
 
 #' Instantiates the DenseNet architecture.
 #'
@@ -710,52 +970,22 @@ application_nasnetmobile <- function(input_shape = NULL, include_top = TRUE, wei
 #' [guide to transfer learning & fine-tuning](
 #'   https://keras.io/guides/transfer_learning/).
 #'
-#' EfficientNet models expect their inputs to be float tensors of pixels with values in the [0-255] range.
+#' EfficientNet models expect their inputs to be float tensors of pixels with values in the `[0-255]` range.
 #'
 #' @note
 #' Each Keras Application typically expects a specific kind of input preprocessing.
 #' For EfficientNet, input preprocessing is included as part of the model
 #' (as a `Rescaling` layer), and thus a calling a preprocessing function is not necessary.
 #'
-#'
-#' @param include_top Whether to include the fully-connected
-#' layer at the top of the network. Defaults to TRUE.
-#'
-#' @param weights One of `NULL` (random initialization),
-#' `'imagenet'` (pre-training on ImageNet),
-#' or the path to the weights file to be loaded. Defaults to `'imagenet'`.
-#'
-#' @param input_tensor Optional Keras tensor
-#' (i.e. output of `layer_input()`)
-#' to use as image input for the model.
+#' @inheritParams application_xception
 #'
 #' @param input_shape Optional shape list, only to be specified
 #' if `include_top` is FALSE.
 #' It should have exactly 3 inputs channels.
 #'
-#' @param pooling Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to `NULL`.
-#' - `NULL` means that the output of the model will be
-#'     the 4D tensor output of the
-#'     last convolutional layer.
-#' - `'avg'` means that global average pooling
-#'     will be applied to the output of the
-#'     last convolutional layer, and thus
-#'     the output of the model will be a 2D tensor.
-#' - `'max'` means that global max pooling will
-#'     be applied.
 #'
-#' @param classes Optional number of classes to classify images into, only to be
-#'   specified if `include_top` is TRUE, and if no `weights` argument is
-#'   specified. Defaults to 1000 (number of ImageNet classes).
-#'
-#' @param classifier_activation A string or callable. The activation function to
-#'   use on the "top" layer. Ignored unless `include_top = TRUE`. Set
-#'   `classifier_activation = NULL` to return the logits of the "top" layer.
-#'   Defaults to `'softmax'`. When loading pretrained weights,
-#'   `classifier_activation` can only be `NULL` or `"softmax"`.
-#'
-#' @param ... for forward compatibility.
+#' @name application_efficientnet
+#' @rdname application_efficientnet
 #'
 #' @seealso
 #'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/efficientnet/EfficientNetB0>
@@ -768,12 +998,13 @@ function(include_top = TRUE, weights = "imagenet",
          classifier_activation = "softmax",
          ...)
 {
+    require_tf_version("2.3", "application_efficientnet_b0")
     args <- capture_args(match.call(), list(classes = as.integer, input_shape = normalize_shape))
     do.call(keras$applications$EfficientNetB0, args)
 }
 
 #' @export
-#' @rdname application_efficientnet_b0
+#' @rdname application_efficientnet
 application_efficientnet_b1 <-
 function(include_top = TRUE, weights = "imagenet",
          input_tensor = NULL, input_shape = NULL,
@@ -781,12 +1012,13 @@ function(include_top = TRUE, weights = "imagenet",
          classifier_activation = "softmax",
          ...)
 {
+    require_tf_version("2.3", "application_efficientnet_b1")
     args <- capture_args(match.call(), list(classes = as.integer, input_shape = normalize_shape))
     do.call(keras$applications$EfficientNetB1, args)
 }
 
 #' @export
-#' @rdname application_efficientnet_b0
+#' @rdname application_efficientnet
 application_efficientnet_b2 <-
 function(include_top = TRUE, weights = "imagenet",
          input_tensor = NULL, input_shape = NULL,
@@ -794,12 +1026,13 @@ function(include_top = TRUE, weights = "imagenet",
          classifier_activation = "softmax",
          ...)
 {
+    require_tf_version("2.3", "application_efficientnet_b2")
     args <- capture_args(match.call(), list(classes = as.integer, input_shape = normalize_shape))
     do.call(keras$applications$EfficientNetB2, args)
 }
 
 #' @export
-#' @rdname application_efficientnet_b0
+#' @rdname application_efficientnet
 application_efficientnet_b3 <-
 function(include_top = TRUE, weights = "imagenet",
          input_tensor = NULL, input_shape = NULL,
@@ -807,12 +1040,13 @@ function(include_top = TRUE, weights = "imagenet",
          classifier_activation = "softmax",
          ...)
 {
+    require_tf_version("2.3", "application_efficientnet_b3")
     args <- capture_args(match.call(), list(classes = as.integer, input_shape = normalize_shape))
     do.call(keras$applications$EfficientNetB3, args)
 }
 
 #' @export
-#' @rdname application_efficientnet_b0
+#' @rdname application_efficientnet
 application_efficientnet_b4 <-
 function(include_top = TRUE, weights = "imagenet",
          input_tensor = NULL, input_shape = NULL,
@@ -820,12 +1054,13 @@ function(include_top = TRUE, weights = "imagenet",
          classifier_activation = "softmax",
          ...)
 {
+    require_tf_version("2.3", "application_efficientnet_b4")
     args <- capture_args(match.call(), list(classes = as.integer, input_shape = normalize_shape))
     do.call(keras$applications$EfficientNetB4, args)
 }
 
 #' @export
-#' @rdname application_efficientnet_b0
+#' @rdname application_efficientnet
 application_efficientnet_b5 <-
 function(include_top = TRUE, weights = "imagenet",
          input_tensor = NULL, input_shape = NULL,
@@ -833,12 +1068,13 @@ function(include_top = TRUE, weights = "imagenet",
          classifier_activation = "softmax",
          ...)
 {
+    require_tf_version("2.3", "application_efficientnet_b5")
     args <- capture_args(match.call(), list(classes = as.integer, input_shape = normalize_shape))
     do.call(keras$applications$EfficientNetB5, args)
 }
 
 #' @export
-#' @rdname application_efficientnet_b0
+#' @rdname application_efficientnet
 application_efficientnet_b6 <-
 function(include_top = TRUE, weights = "imagenet",
          input_tensor = NULL, input_shape = NULL,
@@ -846,12 +1082,13 @@ function(include_top = TRUE, weights = "imagenet",
          classifier_activation = "softmax",
          ...)
 {
+    require_tf_version("2.3", "application_efficientnet_b6")
     args <- capture_args(match.call(), list(classes = as.integer, input_shape = normalize_shape))
     do.call(keras$applications$EfficientNetB6, args)
 }
 
 #' @export
-#' @rdname application_efficientnet_b0
+#' @rdname application_efficientnet
 application_efficientnet_b7 <-
 function(include_top = TRUE, weights = "imagenet",
          input_tensor = NULL, input_shape = NULL,
@@ -859,6 +1096,7 @@ function(include_top = TRUE, weights = "imagenet",
          classifier_activation = "softmax",
          ...)
 {
+    require_tf_version("2.3", "application_efficientnet_b7")
     args <- capture_args(match.call(), list(classes = as.integer, input_shape = normalize_shape))
     do.call(keras$applications$EfficientNetB7, args)
 }

@@ -12,7 +12,8 @@ application_vgg16(
   input_tensor = NULL,
   input_shape = NULL,
   pooling = NULL,
-  classes = 1000
+  classes = 1000,
+  classifier_activation = "softmax"
 )
 
 application_vgg19(
@@ -21,38 +22,50 @@ application_vgg19(
   input_tensor = NULL,
   input_shape = NULL,
   pooling = NULL,
-  classes = 1000
+  classes = 1000,
+  classifier_activation = "softmax"
 )
 }
 \arguments{
 \item{include_top}{whether to include the 3 fully-connected layers at the top
 of the network.}
 
-\item{weights}{\code{NULL} (random initialization), \code{imagenet} (ImageNet
-weights), or the path to the weights file to be loaded.}
+\item{weights}{One of \code{NULL} (random initialization),
+\code{'imagenet'} (pre-training on ImageNet),
+or the path to the weights file to be loaded. Defaults to \code{'imagenet'}.}
 
-\item{input_tensor}{optional Keras tensor to use as image input for the
-model.}
+\item{input_tensor}{Optional Keras tensor
+(i.e. output of \code{layer_input()})
+to use as image input for the model.}
 
 \item{input_shape}{optional shape list, only to be specified if \code{include_top}
 is FALSE (otherwise the input shape has to be \verb{(224, 224, 3)} It should
 have exactly 3 inputs channels, and width and height should be no smaller
 than 32. E.g. \verb{(200, 200, 3)} would be one valid value.}
 
-\item{pooling}{Optional pooling mode for feature extraction when
-\code{include_top} is \code{FALSE}.
+\item{pooling}{Optional pooling mode for feature extraction
+when \code{include_top} is \code{FALSE}. Defaults to \code{NULL}.
 \itemize{
-\item \code{NULL} means that the output of the model will be the 4D tensor output
-of the last convolutional layer.
-\item \code{avg} means that global average pooling will be applied to the output of
-the last convolutional layer, and thus the output of the model will be
-a 2D tensor.
-\item \code{max} means that global max pooling will be applied.
+\item \code{NULL} means that the output of the model will be
+the 4D tensor output of the
+last convolutional layer.
+\item \code{'avg'} means that global average pooling
+will be applied to the output of the
+last convolutional layer, and thus
+the output of the model will be a 2D tensor.
+\item \code{'max'} means that global max pooling will
+be applied.
 }}
 
-\item{classes}{optional number of classes to classify images into, only to be
+\item{classes}{Optional number of classes to classify images into, only to be
 specified if \code{include_top} is TRUE, and if no \code{weights} argument is
-specified.}
+specified. Defaults to 1000 (number of ImageNet classes).}
+
+\item{classifier_activation}{A string or callable. The activation function to
+use on the "top" layer. Ignored unless \code{include_top = TRUE}. Set
+\code{classifier_activation = NULL} to return the logits of the "top" layer.
+Defaults to \code{'softmax'}. When loading pretrained weights,
+\code{classifier_activation} can only be \code{NULL} or \code{"softmax"}.}
 }
 \value{
 Keras model instance.

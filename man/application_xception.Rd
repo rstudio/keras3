@@ -3,7 +3,7 @@
 \name{application_xception}
 \alias{application_xception}
 \alias{xception_preprocess_input}
-\title{Xception V1 model for Keras.}
+\title{Instantiates the Xception architecture}
 \usage{
 application_xception(
   include_top = TRUE,
@@ -11,65 +11,89 @@ application_xception(
   input_tensor = NULL,
   input_shape = NULL,
   pooling = NULL,
-  classes = 1000
+  classes = 1000,
+  classifier_activation = "softmax",
+  ...
 )
 
 xception_preprocess_input(x)
 }
 \arguments{
-\item{include_top}{whether to include the fully-connected layer at the top of
-the network.}
+\item{include_top}{Whether to include the fully-connected
+layer at the top of the network. Defaults to \code{TRUE}.}
 
-\item{weights}{\code{NULL} (random initialization), \code{imagenet} (ImageNet
-weights), or the path to the weights file to be loaded.}
+\item{weights}{One of \code{NULL} (random initialization),
+\code{'imagenet'} (pre-training on ImageNet),
+or the path to the weights file to be loaded. Defaults to \code{'imagenet'}.}
 
-\item{input_tensor}{optional Keras tensor to use as image input for the
-model.}
+\item{input_tensor}{Optional Keras tensor
+(i.e. output of \code{layer_input()})
+to use as image input for the model.}
 
-\item{input_shape}{optional shape list, only to be specified if \code{include_top}
-is FALSE (otherwise the input shape has to be \verb{(299, 299, 3)}. It should
-have exactly 3 inputs channels, and width and height should be no smaller
-than 75. E.g. \verb{(150, 150, 3)} would be one valid value.}
+\item{input_shape}{optional shape list, only to be specified
+if \code{include_top} is FALSE (otherwise the input shape
+has to be \verb{(299, 299, 3)}.
+It should have exactly 3 inputs channels,
+and width and height should be no smaller than 71.
+E.g. \verb{(150, 150, 3)} would be one valid value.}
 
-\item{pooling}{Optional pooling mode for feature extraction when
-\code{include_top} is \code{FALSE}.
+\item{pooling}{Optional pooling mode for feature extraction
+when \code{include_top} is \code{FALSE}. Defaults to \code{NULL}.
 \itemize{
-\item \code{NULL} means that the output of the model will be the 4D tensor output
-of the last convolutional layer.
-\item \code{avg} means that global average pooling will be applied to the output of
-the last convolutional layer, and thus the output of the model will be
-a 2D tensor.
-\item \code{max} means that global max pooling will be applied.
+\item \code{NULL} means that the output of the model will be
+the 4D tensor output of the
+last convolutional layer.
+\item \code{'avg'} means that global average pooling
+will be applied to the output of the
+last convolutional layer, and thus
+the output of the model will be a 2D tensor.
+\item \code{'max'} means that global max pooling will
+be applied.
 }}
 
-\item{classes}{optional number of classes to classify images into, only to be
+\item{classes}{Optional number of classes to classify images into, only to be
 specified if \code{include_top} is TRUE, and if no \code{weights} argument is
-specified.}
+specified. Defaults to 1000 (number of ImageNet classes).}
 
-\item{x}{Input tensor for preprocessing}
-}
-\value{
-A Keras model instance.
+\item{classifier_activation}{A string or callable. The activation function to
+use on the "top" layer. Ignored unless \code{include_top = TRUE}. Set
+\code{classifier_activation = NULL} to return the logits of the "top" layer.
+Defaults to \code{'softmax'}. When loading pretrained weights,
+\code{classifier_activation} can only be \code{NULL} or \code{"softmax"}.}
+
+\item{...}{For backwards and forwards compatibility}
+
+\item{x}{\code{preprocess_input()} takes an array or floating point tensor, 3D or
+4D with 3 color channels, with values in the range \verb{[0, 255]}.}
 }
 \description{
-Xception V1 model for Keras.
+Instantiates the Xception architecture
 }
 \details{
-On ImageNet, this model gets to a top-1 validation accuracy of 0.790
-and a top-5 validation accuracy of 0.945.
+For image classification use cases, see
+\href{https://keras.io/api/applications/#usage-examples-for-image-classification-models}{this page for detailed examples}.
 
-Do note that the input image format for this model is different than for
-the VGG16 and ResNet models (299x299 instead of 224x224).
+For transfer learning use cases, make sure to read the
+\href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
 
-The \code{xception_preprocess_input()} function should be used for image
-preprocessing.
-
-This application is only available when using the TensorFlow back-end.
+The default input image size for this model is 299x299.
+}
+\note{
+Each Keras Application typically expects a specific kind of input preprocessing.
+For Xception, call \code{xception_preprocess_input()} on your
+inputs before passing them to the model.
+\code{xception_preprocess_input()} will scale input pixels between -1 and 1.
 }
 \section{Reference}{
 
 \itemize{
-\item \href{https://arxiv.org/abs/1610.02357}{Xception: Deep Learning with Depthwise Separable Convolutions}
+\item \href{https://arxiv.org/abs/1610.02357}{Xception: Deep Learning with Depthwise Separable Convolutions} (CVPR 2017)
 }
 }
 
+\seealso{
+\itemize{
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/xception/Xception}
+\item \url{https://keras.io/api/applications/}
+}
+}
