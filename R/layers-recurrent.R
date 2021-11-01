@@ -42,6 +42,7 @@
 #'   linear transformation of the inputs.
 #' @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
 #'   for the linear transformation of the recurrent state.
+#' @param ... Standard Layer args.
 #'
 #' @template roxlate-recurrent-layer
 #'
@@ -50,46 +51,36 @@
 #'
 #'
 #' @export
-layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE,
-                             return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE,
-                             kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros",
-                             kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-                             kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL,
-                             dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
-                             dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
-
-  args <- list(
-    units = as.integer(units),
-    activation = activation,
-    use_bias = use_bias,
-    return_sequences = return_sequences,
-    go_backwards = go_backwards,
-    stateful = stateful,
-    unroll = unroll,
-    kernel_initializer = kernel_initializer,
-    recurrent_initializer = recurrent_initializer,
-    bias_initializer = bias_initializer,
-    kernel_regularizer = kernel_regularizer,
-    recurrent_regularizer = recurrent_regularizer,
-    bias_regularizer = bias_regularizer,
-    activity_regularizer = activity_regularizer,
-    kernel_constraint = kernel_constraint,
-    recurrent_constraint = recurrent_constraint,
-    bias_constraint = bias_constraint,
-    dropout = dropout,
-    recurrent_dropout = recurrent_dropout,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if (keras_version() >= "2.0.5")
-    args$return_state <- return_state
-
+layer_simple_rnn <-
+function(object,
+         units,
+         activation = "tanh",
+         use_bias = TRUE,
+         return_sequences = FALSE,
+         return_state = FALSE,
+         go_backwards = FALSE,
+         stateful = FALSE,
+         unroll = FALSE,
+         kernel_initializer = "glorot_uniform",
+         recurrent_initializer = "orthogonal",
+         bias_initializer = "zeros",
+         kernel_regularizer = NULL,
+         recurrent_regularizer = NULL,
+         bias_regularizer = NULL,
+         activity_regularizer = NULL,
+         kernel_constraint = NULL,
+         recurrent_constraint = NULL,
+         bias_constraint = NULL,
+         dropout = 0.0,
+         recurrent_dropout = 0.0,
+         ...)
+{
+  args <- capture_args(match.call(), list(
+    units = as.integer,
+    input_shape = normalize_shape,
+    batch_input_shape = normalize_shape,
+    batch_size = as_nullable_integer
+  ), ignore = "object")
   create_layer(keras$layers$SimpleRNN, object, args)
 }
 
@@ -135,54 +126,43 @@ layer_simple_rnn <- function(object, units, activation = "tanh", use_bias = TRUE
 #'   Networks](https://arxiv.org/abs/1512.05287)
 #'
 #' @export
-layer_gru <- function(object, units, activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE,
-                      return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE, unroll = FALSE,
-                      time_major = FALSE, reset_after = FALSE,
-                      kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros",
-                      kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-                      kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL,
-                      dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
-                      dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
-
-  args <- list(
-    units = as.integer(units),
-    activation = activation,
-    recurrent_activation = recurrent_activation,
-    use_bias = use_bias,
-    return_sequences = return_sequences,
-    go_backwards = go_backwards,
-    stateful = stateful,
-    unroll = unroll,
-    time_major = time_major,
-    kernel_initializer = kernel_initializer,
-    recurrent_initializer = recurrent_initializer,
-    bias_initializer = bias_initializer,
-    kernel_regularizer = kernel_regularizer,
-    recurrent_regularizer = recurrent_regularizer,
-    bias_regularizer = bias_regularizer,
-    activity_regularizer = activity_regularizer,
-    kernel_constraint = kernel_constraint,
-    recurrent_constraint = recurrent_constraint,
-    bias_constraint = bias_constraint,
-    dropout = dropout,
-    recurrent_dropout = recurrent_dropout,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if (keras_version() >= "2.0.5")
-    args$return_state <- return_state
-
-  if (keras_version() >= "2.1.5")
-    args$reset_after <- reset_after
-
+layer_gru <-
+function(object,
+         units,
+         activation = "tanh",
+         recurrent_activation = "sigmoid",
+         use_bias = TRUE,
+         return_sequences = FALSE,
+         return_state = FALSE,
+         go_backwards = FALSE,
+         stateful = FALSE,
+         unroll = FALSE,
+         time_major = FALSE,
+         reset_after = TRUE,
+         kernel_initializer = "glorot_uniform",
+         recurrent_initializer = "orthogonal",
+         bias_initializer = "zeros",
+         kernel_regularizer = NULL,
+         recurrent_regularizer = NULL,
+         bias_regularizer = NULL,
+         activity_regularizer = NULL,
+         kernel_constraint = NULL,
+         recurrent_constraint = NULL,
+         bias_constraint = NULL,
+         dropout = 0.0,
+         recurrent_dropout = 0.0,
+         ...)
+{
+  args <- capture_args(match.call(), list(
+    units = as.integer,
+    input_shape = normalize_shape,
+    batch_input_shape = normalize_shape,
+    batch_size = as_nullable_integer
+  ), ignore = "object")
   create_layer(keras$layers$GRU, object, args)
 }
+
+
 
 
 #' Fast GRU implementation backed by [CuDNN](https://developer.nvidia.com/cudnn).
@@ -190,6 +170,7 @@ layer_gru <- function(object, units, activation = "tanh", recurrent_activation =
 #' Can only be run on GPU, with the TensorFlow backend.
 #'
 #' @inheritParams layer_simple_rnn
+#' @inheritParams layer_dense
 #'
 #' @family recurrent layers
 #'
@@ -264,50 +245,40 @@ layer_cudnn_gru <- function(object, units,
 #' @family recurrent layers
 #'
 #' @export
-layer_lstm <- function(object, units, activation = "tanh", recurrent_activation = "sigmoid", use_bias = TRUE,
-                       return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE,
-                       time_major = FALSE, unroll = FALSE,
-                       kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros",
-                       unit_forget_bias = TRUE, kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL,
-                       activity_regularizer = NULL, kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL,
-                       dropout = 0.0, recurrent_dropout = 0.0, input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
-                       dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
-
-  args <- list(
-    units = as.integer(units),
-    activation = activation,
-    recurrent_activation = recurrent_activation,
-    use_bias = use_bias,
-    return_sequences = return_sequences,
-    go_backwards = go_backwards,
-    stateful = stateful,
-    time_major = time_major,
-    unroll = unroll,
-    kernel_initializer = kernel_initializer,
-    recurrent_initializer = recurrent_initializer,
-    bias_initializer = bias_initializer,
-    unit_forget_bias = unit_forget_bias,
-    kernel_regularizer = kernel_regularizer,
-    recurrent_regularizer = recurrent_regularizer,
-    bias_regularizer = bias_regularizer,
-    activity_regularizer = activity_regularizer,
-    kernel_constraint = kernel_constraint,
-    recurrent_constraint = recurrent_constraint,
-    bias_constraint = bias_constraint,
-    dropout = dropout,
-    recurrent_dropout = recurrent_dropout,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if (keras_version() >= "2.0.5")
-    args$return_state <- return_state
-
+layer_lstm <-
+function(object,
+         units,
+         activation = "tanh",
+         recurrent_activation = "sigmoid",
+         use_bias = TRUE,
+         return_sequences = FALSE,
+         return_state = FALSE,
+         go_backwards = FALSE,
+         stateful = FALSE,
+         time_major = FALSE,
+         unroll = FALSE,
+         kernel_initializer = "glorot_uniform",
+         recurrent_initializer = "orthogonal",
+         bias_initializer = "zeros",
+         unit_forget_bias = TRUE,
+         kernel_regularizer = NULL,
+         recurrent_regularizer = NULL,
+         bias_regularizer = NULL,
+         activity_regularizer = NULL,
+         kernel_constraint = NULL,
+         recurrent_constraint = NULL,
+         bias_constraint = NULL,
+         dropout = 0.0,
+         recurrent_dropout = 0.0,
+         ...
+)
+{
+  args <- capture_args(match.call(), list(
+    units = as.integer,
+    input_shape = normalize_shape,
+    batch_input_shape = normalize_shape,
+    batch_size = as_nullable_integer
+  ), ignore = "object")
   create_layer(keras$layers$LSTM, object, args)
 }
 
@@ -316,6 +287,7 @@ layer_lstm <- function(object, units, activation = "tanh", recurrent_activation 
 #' Can only be run on GPU, with the TensorFlow backend.
 #'
 #' @inheritParams layer_lstm
+#' @inheritParams layer_dense
 #'
 #' @section References:
 #' - [Long short-term memory](https://www.bioinf.jku.at/publications/older/2604.pdf) (original 1997 paper)

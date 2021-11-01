@@ -21,10 +21,14 @@
     - `layer_conv_lstm_1d()`
     - `layer_conv_lstm_3d()`
 
-- `layer_lstm()` default value for `recurrent_activation` changed from `"hard_sigmoid"` to `"sigmoid"`.
+- `layer_cudnn_gru()` and `layer_cudnn_lstm()` are deprecated. 
+  `layer_gru()` and `layer_lstm()` will automatically use CuDNN if it is available.
 
-- `layer_cudnn_gru()` and `layer_cudnn_lstm()` are deprecated. `layer_gru()` and `layer_lstm()` will
-  automatically use CuDNN if it is available.
+- `layer_lstm()` and `layer_gru()`: 
+    default value for `recurrent_activation` changed 
+    from `"hard_sigmoid"` to `"sigmoid"`.
+
+- `layer_gru()`: default value `reset_after` changed from `FALSE` to `TRUE`
 
 - New vignette: "Transfer learning and fine-tuning".
 
@@ -54,7 +58,8 @@
     `name`, `trainable`, `weights`.
   Layers updated: 
     `layer_global_{max,average}_pooling_{1,2,3}d()`, 
-    `time_distributed()`, `bidirectional()`.
+    `time_distributed()`, `bidirectional()`,
+    `layer_gru()`, `layer_lstm()`, `layer_simple_rnn()`
 
 - All the backend function with a shape argument `k_*(shape =)` that now accept a
   a mix of integer tensors and R numerics in the supplied list.
