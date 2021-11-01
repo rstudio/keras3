@@ -11,7 +11,7 @@ export TF_CPP_MIN_LOG_LEVEL=2
 
 
 
-TMPDIR="/tmp/r-keras-tests/tf-2.6-cpu/"
+TMPDIR="/tmp/r-keras-tests/tf-2.7-cpu/"
 mkdir -p $TMPDIR
 rsync -a --delete . $TMPDIR
 

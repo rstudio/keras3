@@ -257,8 +257,8 @@ test_call_succeeds("layer_zero_padding_3d", {
 test_call_succeeds("layer_cropping_1d", {
   skip_if_cntk() # crashes CNTK
   keras_model_sequential() %>%
-    layer_dense(32, input_shape = c(784)) %>%
-    layer_reshape(target_shape = c(2,16)) %>%
+    layer_dense(64, input_shape = c(784)) %>%
+    layer_reshape(target_shape = c(4,16)) %>%
     layer_cropping_1d()
 })
 

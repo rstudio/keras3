@@ -55,7 +55,7 @@ test_succeeds("Can use custom layers in sequential models", {
     layer_multiply_by_x(2) %>%
     layer_multiply_by_x(2)
 
-  out <- predict(model, c(1,2,3,4,5))
+  out <- predict(model, matrix(c(1,2,3,4,5), ncol = 1))
 
   expect_equal(out, matrix(1:5, ncol = 1)*2*2)
 })
