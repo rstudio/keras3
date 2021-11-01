@@ -15,7 +15,8 @@ text_dataset_from_directory(
   seed = NULL,
   validation_split = NULL,
   subset = NULL,
-  follow_links = FALSE
+  follow_links = FALSE,
+  ...
 )
 }
 \arguments{

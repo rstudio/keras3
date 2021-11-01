@@ -1137,7 +1137,8 @@ function(directory,
          seed = NULL,
          validation_split = NULL,
          subset = NULL,
-         follow_links = FALSE
+         follow_links = FALSE,
+         ...
 )
 {
   args <- capture_args(match.call(),
