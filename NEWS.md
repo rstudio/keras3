@@ -13,6 +13,8 @@
     - `layer_stacked_rnn_cells()`
   To learn more, including how to make a custom cell layer, see the new vignette:
   "Working with RNNs".
+  
+- New dataset loader `text_dataset_from_directory()`.
 
 - New layers:
     - `layer_additive_attention()`

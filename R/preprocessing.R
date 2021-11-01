@@ -1050,3 +1050,99 @@ image_dataset_from_directory <- function(
   class(out) <- c("tf_dataset", class(out))
   out
 }
+
+#' Generate a `tf.data.Dataset` from text files in a directory
+#'
+#' @details
+#' If your directory structure is:
+#'
+#' ```
+#' main_directory/
+#' ...class_a/
+#' ......a_text_1.txt
+#' ......a_text_2.txt
+#' ...class_b/
+#' ......b_text_1.txt
+#' ......b_text_2.txt
+#' ```
+#'
+#' Then calling `text_dataset_from_directory(main_directory, labels = 'inferred')`
+#' will return a `tf.data.Dataset` that yields batches of texts from
+#' the subdirectories `class_a` and `class_b`, together with labels
+#' 0 and 1 (0 corresponding to `class_a` and 1 corresponding to `class_b`).
+#'
+#' Only `.txt` files are supported at this time.
+#'
+#' @param directory Directory where the data is located.
+#' If `labels` is "inferred", it should contain
+#' subdirectories, each containing text files for a class.
+#' Otherwise, the directory structure is ignored.
+#'
+#' @param labels Either "inferred"
+#' (labels are generated from the directory structure),
+#' NULL (no labels),
+#' or a list of integer labels of the same size as the number of
+#' text files found in the directory. Labels should be sorted according
+#' to the alphanumeric order of the text file paths
+#' (obtained via `os.walk(directory)` in Python).
+#'
+#' @param label_mode - `'int'`: means that the labels are encoded as integers
+#'     (e.g. for `sparse_categorical_crossentropy` loss).
+#' - `'categorical'` means that the labels are
+#'     encoded as a categorical vector
+#'     (e.g. for `categorical_crossentropy` loss).
+#' - `'binary'` means that the labels (there can be only 2)
+#'     are encoded as `float32` scalars with values 0 or 1
+#'     (e.g. for `binary_crossentropy`).
+#' - `NULL` (no labels).
+#'
+#' @param class_names Only valid if `labels` is `"inferred"`. This is the explicit
+#' list of class names (must match names of subdirectories). Used
+#' to control the order of the classes
+#' (otherwise alphanumerical order is used).
+#'
+#' @param batch_size Size of the batches of data. Default: `32`.
+#'
+#' @param max_length Maximum size of a text string. Texts longer than this will
+#' be truncated to `max_length`.
+#'
+#' @param shuffle Whether to shuffle the data. Default: `TRUE`.
+#' If set to `FALSE`, sorts the data in alphanumeric order.
+#'
+#' @param seed Optional random seed for shuffling and transformations.
+#'
+#' @param validation_split Optional float between 0 and 1,
+#' fraction of data to reserve for validation.
+#'
+#' @param subset One of "training" or "validation".
+#' Only used if `validation_split` is set.
+#'
+#' @param follow_links Whether to visits subdirectories pointed to by symlinks.
+#' Defaults to `FALSE`.
+#'
+#' @param ... For future compatibility (unused presently).
+#'
+#' @seealso
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/utils/text_dataset_from_directory>
+#'
+#' @export
+text_dataset_from_directory <-
+function(directory,
+         labels = "inferred",
+         label_mode = "int",
+         class_names = NULL,
+         batch_size = 32L,
+         max_length = NULL,
+         shuffle = TRUE,
+         seed = NULL,
+         validation_split = NULL,
+         subset = NULL,
+         follow_links = FALSE
+)
+{
+  args <- capture_args(match.call(),
+                       list(batch_size = as.integer,
+                            max_length = as_nullable_integer,
+                            seed = as_nullable_integer))
+  do.call(keras$preprocessing$text_dataset_from_directory, args)
+}
