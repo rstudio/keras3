@@ -432,7 +432,7 @@ cat("Encoded text:\n",
     as.array(text_vectorizer("The Brain is deeper than the sea")))
 
 # Create a simple model
-input = layer_input(shape(NULL), dtype="int64")
+input <- layer_input(shape(NULL), dtype="int64")
 
 output <- input %>%
   layer_embedding(input_dim = text_vectorizer$vocabulary_size(),
