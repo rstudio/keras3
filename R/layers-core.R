@@ -431,14 +431,21 @@ normalize_shape <- function(shape) {
     return(shape)
 
   # if it's a list or a numeric vector then convert to integer
-  if (is.list(shape) || is.numeric(shape)) {
-    shape <- lapply(shape, function(value) {
+  # NA's in are accepted as NULL
+  # also accept c(NA), as if it was a numeric
+  if (is.list(shape) || is.numeric(shape) ||
+      (is.logical(shape) && all(is.na(shape)))) {
 
+    shape <- lapply(shape, function(value) {
       # Pass through python objects unmodified, only coerce R objects
       # supplied shapes, e.g., to tf$random$normal, can be a list that's a mix
       # of scalar integer tensors and regular integers
-      if(inherits(value, "python.builtin.object"))
+      if (inherits(value, "python.builtin.object"))
         return(value)
+
+      # accept NA,NA_integer_,NA_real_ as NULL
+      if ((is_scalar(value) && is.na(value)))
+        return(NULL)
 
       if (!is.null(value))
         as.integer(value)
@@ -447,7 +454,7 @@ normalize_shape <- function(shape) {
     })
   }
 
-  if(inherits(shape, "tensorflow.python.framework.tensor_shape.TensorShape"))
+  if (inherits(shape, "tensorflow.python.framework.tensor_shape.TensorShape"))
     shape <- as.list(shape$as_list()) # unpack for tuple()
 
   # coerce to tuple so it's iterable
