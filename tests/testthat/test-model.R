@@ -126,12 +126,16 @@ test_succeeds("can call model with R objects", {
 })
 
 
-test_succeeds("layer_input() ", {
+test_succeeds("layer_input()", {
   # can take dtype = Dtype
   layer_input(shape = 1, dtype = tf$string)
 
-  expect_identical(as.list(layer_input(shape = c(NA))$shape),
-                   list(NULL, NULL))
+  # can take shape=NA correctly
+  shp <- layer_input(shape = c(NA))$shape
+  if(inherits(shp, "tensorflow.python.framework.tensor_shape.TensorShape"))
+    shp <- shp$as_list()
+
+  expect_identical(shp, list(NULL, NULL))
 })
 
 
