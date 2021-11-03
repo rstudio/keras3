@@ -66,19 +66,17 @@ Let's see how that works.
 library(tensorflow)
 library(tfdatasets)
 library(keras)
-
+library(magrittr, include.only = "%<>%")
 
 # -- we start by defining some helpers we'll use later --
-# like zip() in python
-zip <- function(...) purrr::transpose(list(...))
+# xyz for zipper. Like zip() in python
+xyz <- function(...) purrr::transpose(list(...))
 
 map_and_name <- function(.x, .f, ...) {
   out <- purrr::map(.x, .f[-2L], ...)
   names(out) <- purrr::map_chr(.x, .f[-3L], ...)
   out
 }
-
-envir::import_from(magrittr, `%<>%`)
 
 stopifnot(tf_version() >= "2.2") # Requires TensorFlow 2.2 or later.
 ```
@@ -118,7 +116,7 @@ CustomModel(keras$Model) %py_class% {
     trainable_vars <- self$trainable_variables
     gradients <- tape$gradient(loss, trainable_vars)
     # Update weights
-    self$optimizer$apply_gradients(zip(gradients, trainable_vars))
+    self$optimizer$apply_gradients(xyz(gradients, trainable_vars))
     # Update metrics (includes the metric that tracks the loss)
     self$compiled_metrics$update_state(y, y_pred)
 
@@ -172,7 +170,7 @@ CustomModel(keras$Model) %py_class% {
     gradients <- tape$gradient(loss, trainable_vars)
 
     # Update weights
-    self$optimizer$apply_gradients(zip(gradients, trainable_vars))
+    self$optimizer$apply_gradients(xyz(gradients, trainable_vars))
 
     # Compute our own metrics
     loss_tracker$update_state(loss)
@@ -237,7 +235,7 @@ CustomModel(keras$Model) %py_class% {
     gradients <- tape$gradient(loss, trainable_vars)
 
     # Update weights
-    self$optimizer$apply_gradients(zip(gradients, trainable_vars))
+    self$optimizer$apply_gradients(xyz(gradients, trainable_vars))
 
     # Update the metrics.
     # Metrics are configured in `compile()`.
@@ -333,15 +331,15 @@ generator <- keras_model_sequential(name = "generator", input_shape = c(latent_d
   layer_conv_2d(1, c(7, 7), padding = "same", activation = "sigmoid")
 ```
 
-Here's a feature-complete GAN class, overriding `compile()` to use its own signature, and implementing the entire GAN algorithm in 17 lines in `train_step`:
+Here's a feature-complete GAN class, overriding `compile()` to use its own signature, and implementing the entire GAN algorithm in just a few lines in `train_step`:
 
 ```{r}
 GAN(keras$Model) %py_class% {
   `__init__` <- function(discriminator, generator, latent_dim) {
-        super()$`__init__`()
-        self$discriminator <- discriminator
-        self$generator <- generator
-        self$latent_dim <- latent_dim
+    super()$`__init__`()
+    self$discriminator <- discriminator
+    self$generator <- generator
+    self$latent_dim <- latent_dim
   }
 
   compile <- function(d_optimizer, g_optimizer, loss_fn) {
@@ -379,7 +377,7 @@ GAN(keras$Model) %py_class% {
       d_loss <- self$loss_fn(labels, predictions)
     })
     grads <- tape$gradient(d_loss, self$discriminator$trainable_weights)
-    self$d_optimizer$apply_gradients(zip(grads, self$discriminator$trainable_weights))
+    self$d_optimizer$apply_gradients(xyz(grads, self$discriminator$trainable_weights))
 
 
     # Sample random points in the latent space
@@ -395,10 +393,9 @@ GAN(keras$Model) %py_class% {
       g_loss <- self$loss_fn(misleading_labels, predictions)
     })
     grads <- tape$gradient(g_loss, self$generator$trainable_weights)
-    self$g_optimizer$apply_gradients(zip(grads, self$generator$trainable_weights))
+    self$g_optimizer$apply_gradients(xyz(grads, self$generator$trainable_weights))
     list(d_loss = d_loss, g_loss = g_loss)
   }
-
 }
 ```
 
@@ -418,7 +415,6 @@ dataset <- all_digits %>%
   tensor_slices_dataset() %>%
   dataset_shuffle(buffer_size = 1024) %>%
   dataset_batch(batch_size)
-
 
 gan <- GAN(discriminator = discriminator,
            generator = generator,
