@@ -82,8 +82,8 @@ Tensorflow compatible with M1 macs. Installation instructions can be found
 at: \url{https://developer.apple.com/metal/tensorflow-plugin/}. Please note
 that this is an experimental build of both python and tensorflow. After
 following the instructions provided by Apple, you can advise reticulate to
-use that python installation by placing the following in your \code{.Renviron}
-file:
+use that python installation by placing the following in your
+\code{.Renviron} file:
 
 \code{RETICULATE_PYTHON = "~/miniforge3/bin/python"}
 
