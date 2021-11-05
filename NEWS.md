@@ -1,5 +1,7 @@
 # keras (development version)
 
+- Default Tensorflow + Keras version is now 2.7.
+
 - New API for constructing RNN (Recurrent Neural Network) layers. This is a
   flexible interface that complements the existing RNN layers. It is primarily
   intended for advanced / research applications, e.g, prototyping novel
