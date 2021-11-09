@@ -1305,7 +1305,10 @@ function(data, targets, sequence_length, sequence_stride = 1L,
     sequence_stride = as.integer,
     sampling_rate = as.integer,
     batch_size = as.integer,
-    seed = as_nullable_integer))
+    seed = as_nullable_integer,
+    start_index = as_nullable_integer,
+    end_index = as_nullable_integer
+    ))
   do.call(keras$preprocessing$timeseries_dataset_from_array, args)
 }
 
