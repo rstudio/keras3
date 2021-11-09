@@ -43,7 +43,7 @@
               `application_resnet152_v2()` and `resnet_v2_preprocess_input()`
   - EfficientNet: `application_efficientnet_b{0,1,2,3,4,5,6,7}()`
 
-- Many existing `application_*()`'s gain argument `classifier_activation`, 
+- Many existing `application_*()`'s gain argument `classifier_activation`,
   with default `'softmax'`.
   Affected: `application_{xception, inception_resnet_v2, inception_v3, mobilenet, vgg16, vgg19}()`
 
@@ -74,6 +74,8 @@
   e.g., `input_shape`, `batch_input_shape`.
 
 - `k_random_uniform()` now automatically casts `minval` and `maxval` to the output dtype.
+
+- `install_keras()` gains arg with default `pip_ignore_installed = TRUE`.
 
 # keras 2.6.1
 
