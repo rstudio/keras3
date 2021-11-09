@@ -1,5 +1,7 @@
 # keras (development version)
 
+- Default Tensorflow + Keras version is now 2.7.
+
 - New API for constructing RNN (Recurrent Neural Network) layers. This is a
   flexible interface that complements the existing RNN layers. It is primarily
   intended for advanced / research applications, e.g, prototyping novel
@@ -14,32 +16,35 @@
   To learn more, including how to make a custom cell layer, see the new vignette:
   "Working with RNNs".
 
-- New dataset loader `text_dataset_from_directory()`.
+- New dataset functions:
+  - `text_dataset_from_directory()`
+  - `timeseries_dataset_from_array()`
 
 - New layers:
-    - `layer_additive_attention()`
-    - `layer_conv_lstm_1d()`
-    - `layer_conv_lstm_3d()`
+  - `layer_additive_attention()`
+  - `layer_conv_lstm_1d()`
+  - `layer_conv_lstm_3d()`
 
 - `layer_cudnn_gru()` and `layer_cudnn_lstm()` are deprecated.
   `layer_gru()` and `layer_lstm()` will automatically use CuDNN if it is available.
 
 - `layer_lstm()` and `layer_gru()`:
-    default value for `recurrent_activation` changed
-    from `"hard_sigmoid"` to `"sigmoid"`.
+  default value for `recurrent_activation` changed
+  from `"hard_sigmoid"` to `"sigmoid"`.
 
 - `layer_gru()`: default value `reset_after` changed from `FALSE` to `TRUE`
 
 - New vignette: "Transfer learning and fine-tuning".
 
 - New applications:
-    - MobileNet V3: `application_mobilenet_v3_large()`, `application_mobilenet_v3_small()`
-    - ResNet: `application_resnet101()`, `application_resnet152()`, `resnet_preprocess_input()`
-    - ResNet V2:`application_resnet50_v2()`, `application_resnet101_v2()`,
-                `application_resnet152_v2()` and `resnet_v2_preprocess_input()`
-    - EfficientNet: `application_efficientnet_b{0,1,2,3,4,5,6,7}()`
+  - MobileNet V3: `application_mobilenet_v3_large()`, `application_mobilenet_v3_small()`
+  - ResNet: `application_resnet101()`, `application_resnet152()`, `resnet_preprocess_input()`
+  - ResNet V2:`application_resnet50_v2()`, `application_resnet101_v2()`,
+              `application_resnet152_v2()` and `resnet_v2_preprocess_input()`
+  - EfficientNet: `application_efficientnet_b{0,1,2,3,4,5,6,7}()`
 
-- Many existing `application_*()`'s gain argument `classifier_activation`, with default `'softmax'`.
+- Many existing `application_*()`'s gain argument `classifier_activation`,
+  with default `'softmax'`.
   Affected: `application_{xception, inception_resnet_v2, inception_v3, mobilenet, vgg16, vgg19}()`
 
 - New function `%<-active%`, a ergonomic wrapper around `makeActiveBinding()`
@@ -69,6 +74,8 @@
   e.g., `input_shape`, `batch_input_shape`.
 
 - `k_random_uniform()` now automatically casts `minval` and `maxval` to the output dtype.
+
+- `install_keras()` gains arg with default `pip_ignore_installed = TRUE`.
 
 # keras 2.6.1
 

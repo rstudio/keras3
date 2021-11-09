@@ -4,7 +4,7 @@
 #' thin wrapper around [`tensorflow::install_tensorflow()`], with the only
 #' difference being that this includes by default additional extra packages that
 #' keras expects, and the default version of tensorflow installed by
-#' `install_keras()`  may at times be different from the default installed
+#' `install_keras()` may at times be different from the default installed
 #' `install_tensorflow()`. The default version of tensorflow installed by
 #' `install_keras()` is "`r default_version`".
 #'
@@ -13,36 +13,41 @@
 #'   versions potentially constrained for compatibility with the
 #'   requested tensorflow version.
 #'
-#' @inherit tensorflow::install_tensorflow
+#' @inheritParams tensorflow::install_tensorflow
 #'
 #' @param tensorflow Synonym for `version`. Maintained for backwards.
 #'
-#' @seealso [tensorflow::install_tensorflow()]
+#' @seealso [`tensorflow::install_tensorflow()`]
 #' @export
 install_keras <- function(method = c("auto", "virtualenv", "conda"),
                           conda = "auto",
                           version = "default",
                           tensorflow = version,
                           extra_packages = NULL,
-                          ...) {
+                          ...,
+                          pip_ignore_installed = TRUE) {
 
   pkgs <- default_extra_packages(tensorflow)
   if(!is.null(extra_packages)) # user supplied package version constraints take precedence
     pkgs[gsub("[=<>~]{1,2}[0-9.]+$", "", extra_packages)] <- extra_packages
 
-  if(tensorflow == "default") # may be different from tensorflow
-    tensorflow <- default_version
+  if(tensorflow %in% c("cpu", "gpu"))
+    tensorflow <- paste0("default-", tensorflow)
+
+  if(grepl("^default", tensorflow))
+    tensorflow <- sub("^default", as.character(default_version), tensorflow)
 
   tensorflow::install_tensorflow(
     method = match.arg(method),
     conda = conda,
     version = tensorflow,
     extra_packages = pkgs,
+    pip_ignore_installed = pip_ignore_installed,
     ...
   )
 }
 
-default_version <- numeric_version("2.6")
+default_version <- numeric_version("2.7")
 
 default_extra_packages <- function(tensorflow_version) {
   pkgs <- c("tensorflow-hub", "scipy", "requests", "pyyaml", "Pillow", "h5py", "pandas")
@@ -99,3 +104,9 @@ default_extra_packages <- function(tensorflow_version) {
   pkgs
 }
 
+
+#  @inheritSection tensorflow::install_tensorflow "Custom Installation" "Apple Silicon" "Additional Packages"
+#  @inherit tensorflow::install_tensorflow details
+# @inherit tensorflow::install_tensorflow params return references description details sections
+# ## everything except 'seealso' to avoid this warning
+# ## Warning: Link to unknown topic in inherited text: keras::install_keras

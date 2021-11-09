@@ -65,7 +65,7 @@ test_succeeds("image can be preprocessed", {
     img_arr <- image_to_array(img)
     img_arr <- array_reshape(img_arr, c(1, dim(img_arr)))
     img_arr1 <- imagenet_preprocess_input(img_arr)
-    img_arr2 <- preprocess_input(img_arr, tensorflow::tf$python$keras$applications$imagenet_utils$preprocess_input)
+    img_arr2 <- preprocess_input(img_arr, tensorflow::tf$keras$applications$imagenet_utils$preprocess_input)
     expect_equal(img_arr1, img_arr2)
   }
 })
@@ -205,4 +205,101 @@ test_succeeds("images_dataset_from_directory", {
   expect_equal(d[[1]]$shape$as_list(), c(32, 256, 256, 3))
   expect_equal(d[[2]]$shape$as_list(), c(32))
 
+})
+
+if(tf_version() >= "2.6")
+test_succeeds("timeseries_dataset_from_array", {
+
+  # example 1 in docs
+  dsi <- timeseries_dataset_from_array(
+    0:100, NULL, sequence_length = 10, sampling_rate = 2, batch_size = 11,
+    sequence_stride = 3, shuffle = FALSE)$as_numpy_iterator()
+
+  batches <- reticulate::iterate(dsi, simplify = FALSE)
+
+    # generated with dput()
+    expected <- list(structure(c(0L, 3L, 6L, 9L, 12L, 15L, 18L, 21L, 24L, 27L,
+  30L, 2L, 5L, 8L, 11L, 14L, 17L, 20L, 23L, 26L, 29L, 32L, 4L,
+  7L, 10L, 13L, 16L, 19L, 22L, 25L, 28L, 31L, 34L, 6L, 9L, 12L,
+  15L, 18L, 21L, 24L, 27L, 30L, 33L, 36L, 8L, 11L, 14L, 17L, 20L,
+  23L, 26L, 29L, 32L, 35L, 38L, 10L, 13L, 16L, 19L, 22L, 25L, 28L,
+  31L, 34L, 37L, 40L, 12L, 15L, 18L, 21L, 24L, 27L, 30L, 33L, 36L,
+  39L, 42L, 14L, 17L, 20L, 23L, 26L, 29L, 32L, 35L, 38L, 41L, 44L,
+  16L, 19L, 22L, 25L, 28L, 31L, 34L, 37L, 40L, 43L, 46L, 18L, 21L,
+  24L, 27L, 30L, 33L, 36L, 39L, 42L, 45L, 48L), .Dim = 11:10),
+      structure(c(33L, 36L, 39L, 42L, 45L, 48L, 51L, 54L, 57L,
+      60L, 63L, 35L, 38L, 41L, 44L, 47L, 50L, 53L, 56L, 59L, 62L,
+      65L, 37L, 40L, 43L, 46L, 49L, 52L, 55L, 58L, 61L, 64L, 67L,
+      39L, 42L, 45L, 48L, 51L, 54L, 57L, 60L, 63L, 66L, 69L, 41L,
+      44L, 47L, 50L, 53L, 56L, 59L, 62L, 65L, 68L, 71L, 43L, 46L,
+      49L, 52L, 55L, 58L, 61L, 64L, 67L, 70L, 73L, 45L, 48L, 51L,
+      54L, 57L, 60L, 63L, 66L, 69L, 72L, 75L, 47L, 50L, 53L, 56L,
+      59L, 62L, 65L, 68L, 71L, 74L, 77L, 49L, 52L, 55L, 58L, 61L,
+      64L, 67L, 70L, 73L, 76L, 79L, 51L, 54L, 57L, 60L, 63L, 66L,
+      69L, 72L, 75L, 78L, 81L), .Dim = 11:10), structure(c(66L,
+      69L, 72L, 75L, 78L, 81L, 68L, 71L, 74L, 77L, 80L, 83L, 70L,
+      73L, 76L, 79L, 82L, 85L, 72L, 75L, 78L, 81L, 84L, 87L, 74L,
+      77L, 80L, 83L, 86L, 89L, 76L, 79L, 82L, 85L, 88L, 91L, 78L,
+      81L, 84L, 87L, 90L, 93L, 80L, 83L, 86L, 89L, 92L, 95L, 82L,
+      85L, 88L, 91L, 94L, 97L, 84L, 87L, 90L, 93L, 96L, 99L), .Dim = c(6L,
+      10L)))
+
+  expect_equal(batches, expected)
+
+
+  # example 2 in docs
+  steps <- 100
+  # data is integer seq with some noise
+  data <- array(1:steps + abs(rnorm(steps, sd = .25)))
+  inputs_data <- head(data, -10) # drop last 10
+  targets <- tail(data, -10)    # drop first 10
+  dataset <- timeseries_dataset_from_array(
+    inputs_data, targets, sequence_length=10)
+
+  dataset_iterator <- reticulate::as_iterator(dataset)
+  repeat {
+    batch <- reticulate::iter_next(dataset_iterator)
+    if(is.null(batch)) break
+    c(input, target) %<-% batch
+    stopifnot(exprs = {
+      # First sequence: steps [1-10]
+      # Corresponding target: step 11
+      all.equal(as.array(input[1, ]), data[1:10])
+      all.equal(as.array(target[1]), data[11])
+
+      all.equal(as.array(input[2, ]), data[2:11])
+      all.equal(as.array(target[2]), data[12])
+
+      all.equal(as.array(input[3, ]), data[3:12])
+      all.equal(as.array(target[3]), data[13])
+    })
+  }
+
+
+  # example 3 from docs
+  X <- seq(100)
+  Y <- X * 2
+
+  sample_length <- 20
+  input_dataset <- timeseries_dataset_from_array(X,
+                                                 NULL,
+                                                 sequence_length = sample_length,
+                                                 sequence_stride = sample_length)
+  target_dataset <- timeseries_dataset_from_array(Y,
+                                                  NULL,
+                                                  sequence_length = sample_length,
+                                                  sequence_stride = sample_length)
+
+  dataset_iterator <-
+    tfdatasets::zip_datasets(tuple(input_dataset, target_dataset))$as_numpy_iterator()
+  while (!is.null(batch <- reticulate::iter_next(dataset_iterator))) {
+    c(inputs, targets) %<-% batch
+    stopifnot(
+      all.equal(inputs[1,], X[1:sample_length]),
+      all.equal(targets[1,], Y[1:sample_length]),
+      # second sample equals output timestamps 20-40
+      all.equal(inputs[2,], X[(1:sample_length) + sample_length]),
+      all.equal(targets[2,], Y[(1:sample_length) + sample_length])
+    )
+  }
 })
