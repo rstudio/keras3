@@ -174,7 +174,7 @@ imagenet_decode_predictions(preds, top = 3)[[1]]
 }
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet/ResNet50}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet50/ResNet50}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet/ResNet101}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet/ResNet152}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet_v2/ResNet50V2}

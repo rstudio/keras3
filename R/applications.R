@@ -201,7 +201,7 @@ function(include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @rdname application_resnet
 #'
 #' @seealso
-#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet/ResNet50>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet50/ResNet50>
 #'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet/ResNet101>
 #'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet/ResNet152>
 #'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet_v2/ResNet50V2>
