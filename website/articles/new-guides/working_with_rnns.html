@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="working_with_rnns_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Working with RNNs</h1>
@@ -229,30 +229,31 @@
 </ol>
 <p>Here is a simple example of a sequential model that processes sequences of integers, embeds each integer into a 64-dimensional vector, then processes the sequence of vectors using a <code><a href="../../reference/layer_lstm.html">layer_lstm()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
 
   <span class="co"># Add an Embedding layer expecting input vocab of size 1000, and</span>
   <span class="co"># output embedding dimension of size 64.</span>
-  <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">1000</span>, output_dim <span class="op">=</span> <span class="fl">64</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">1000</span>, output_dim <span class="op">=</span> <span class="fl">64</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
 
   <span class="co"># Add a LSTM layer with 128 internal units.</span>
-  <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span><span class="fl">128</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span><span class="fl">128</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
 
   <span class="co"># Add a Dense layer with 10 units.</span>
   <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
-<pre><code>## Loaded Tensorflow version 2.6.0</code></pre>
+<pre><code>## Loaded Tensorflow version 2.7.0</code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span></code></pre></div>
 <pre><code>## Model
 ## Model: "sequential"
 ## ________________________________________________________________________________
-## Layer (type)                        Output Shape                    Param #     
+##  Layer (type)                       Output Shape                    Param #     
 ## ================================================================================
-## embedding (Embedding)               (None, None, 64)                64000       
-## ________________________________________________________________________________
-## lstm (LSTM)                         (None, 128)                     98816       
-## ________________________________________________________________________________
-## dense (Dense)                       (None, 10)                      1290        
+##  embedding (Embedding)              (None, None, 64)                64000       
+##                                                                                 
+##  lstm (LSTM)                        (None, 128)                     98816       
+##                                                                                 
+##  dense (Dense)                      (None, 10)                      1290        
+##                                                                                 
 ## ================================================================================
 ## Total params: 164,106
 ## Trainable params: 164,106
@@ -273,14 +274,14 @@
 <p>By default, the output of a RNN layer contains a single vector per sample. This vector is the RNN cell output corresponding to the last timestep, containing information about the entire input sequence. The shape of this output is <code>(batch_size, units)</code> where <code>units</code> corresponds to the <code>units</code> argument passed to the layer’s constructor.</p>
 <p>A RNN layer can also return the entire sequence of outputs for each sample (one vector per timestep per sample), if you set <code>return_sequences = TRUE</code>. The shape of this output is <code>(batch_size, timesteps, units)</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">1000</span>, output_dim <span class="op">=</span> <span class="fl">64</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">1000</span>, output_dim <span class="op">=</span> <span class="fl">64</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
 
   <span class="co"># The output of GRU will be a 3D tensor of shape (batch_size, timesteps, 256)</span>
-  <span class="fu"><a href="../../reference/layer_gru.html">layer_gru</a></span><span class="op">(</span><span class="fl">256</span>, return_sequences <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_gru.html">layer_gru</a></span><span class="op">(</span><span class="fl">256</span>, return_sequences <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
 
   <span class="co"># The output of SimpleRNN will be a 2D tensor of shape (batch_size, 128)</span>
-  <span class="fu"><a href="../../reference/layer_simple_rnn.html">layer_simple_rnn</a></span><span class="op">(</span><span class="fl">128</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_simple_rnn.html">layer_simple_rnn</a></span><span class="op">(</span><span class="fl">128</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
 
   <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
 
@@ -288,18 +289,19 @@
 <pre><code>## Model
 ## Model: "sequential_1"
 ## ________________________________________________________________________________
-## Layer (type)                        Output Shape                    Param #     
+##  Layer (type)                       Output Shape                    Param #     
 ## ================================================================================
-## embedding_1 (Embedding)             (None, None, 64)                64000       
-## ________________________________________________________________________________
-## gru (GRU)                           (None, None, 256)               246528      
-## ________________________________________________________________________________
-## simple_rnn (SimpleRNN)              (None, 128)                     49280       
-## ________________________________________________________________________________
-## dense_1 (Dense)                     (None, 10)                      1290        
+##  embedding_1 (Embedding)            (None, None, 64)                64000       
+##                                                                                 
+##  gru (GRU)                          (None, None, 256)               247296      
+##                                                                                 
+##  simple_rnn (SimpleRNN)             (None, 128)                     49280       
+##                                                                                 
+##  dense_1 (Dense)                    (None, 10)                      1290        
+##                                                                                 
 ## ================================================================================
-## Total params: 361,098
-## Trainable params: 361,098
+## Total params: 361,866
+## Trainable params: 361,866
 ## Non-trainable params: 0
 ## ________________________________________________________________________________</code></pre>
 <p>In addition, a RNN layer can return its final internal state(s). The returned states can be used to resume the RNN execution later, or <a href="https://arxiv.org/abs/1409.3215">to initialize another RNN</a>. This setting is commonly used in the encoder-decoder sequence-to-sequence model, where the encoder final state is used as the initial state of the decoder.</p>
@@ -310,25 +312,25 @@
 <span class="va">decoder_vocab</span> <span class="op">&lt;-</span> <span class="fl">2000</span>
 
 <span class="va">encoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span><span class="op">)</span>
-<span class="va">encoder_embedded</span> <span class="op">&lt;-</span> <span class="va">encoder_input</span> <span class="op">%&gt;%</span>
+<span class="va">encoder_embedded</span> <span class="op">&lt;-</span> <span class="va">encoder_input</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim<span class="op">=</span><span class="va">encoder_vocab</span>, output_dim<span class="op">=</span><span class="fl">64</span><span class="op">)</span>
 
 
 <span class="co"># Return states in addition to output</span>
-<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">state_h</span>, <span class="va">state_c</span><span class="op">)</span> <span class="op">%&lt;-%</span>
+<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">state_h</span>, <span class="va">state_c</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span>
   <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span><span class="va">encoder_embedded</span>, units <span class="op">=</span> <span class="fl">64</span>, return_state<span class="op">=</span><span class="cn">TRUE</span>, name<span class="op">=</span><span class="st">"encoder"</span><span class="op">)</span>
 
 <span class="va">encoder_state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">state_h</span>, <span class="va">state_c</span><span class="op">)</span>
 
 <span class="va">decoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span><span class="op">)</span>
-<span class="va">decoder_embedded</span> <span class="op">&lt;-</span> <span class="va">decoder_input</span> <span class="op">%&gt;%</span>
+<span class="va">decoder_embedded</span> <span class="op">&lt;-</span> <span class="va">decoder_input</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="va">decoder_vocab</span>, output_dim <span class="op">=</span> <span class="fl">64</span><span class="op">)</span>
 
 <span class="co"># Pass the 2 states to a new LSTM layer, as initial state</span>
 <span class="va">decoder_lstm_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, name <span class="op">=</span> <span class="st">"decoder"</span><span class="op">)</span>
 <span class="va">decoder_output</span> <span class="op">&lt;-</span> <span class="fu">decoder_lstm_layer</span><span class="op">(</span><span class="va">decoder_embedded</span>, initial_state <span class="op">=</span> <span class="va">encoder_state</span><span class="op">)</span>
 
-<span class="va">output</span> <span class="op">&lt;-</span> <span class="va">decoder_output</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
+<span class="va">output</span> <span class="op">&lt;-</span> <span class="va">decoder_output</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">encoder_input</span>, <span class="va">decoder_input</span><span class="op">)</span>,
                      outputs <span class="op">=</span> <span class="va">output</span><span class="op">)</span>
@@ -336,23 +338,26 @@
 <pre><code>## Model
 ## Model: "model"
 ## ________________________________________________________________________________
-## Layer (type)              Output Shape      Param #  Connected to               
+##  Layer (type)             Output Shape      Param #  Connected to               
 ## ================================================================================
-## input_1 (InputLayer)      [(None, None)]    0                                   
-## ________________________________________________________________________________
-## input_2 (InputLayer)      [(None, None)]    0                                   
-## ________________________________________________________________________________
-## embedding_2 (Embedding)   (None, None, 64)  64000    input_1[0][0]              
-## ________________________________________________________________________________
-## embedding_3 (Embedding)   (None, None, 64)  128000   input_2[0][0]              
-## ________________________________________________________________________________
-## encoder (LSTM)            [(None, 64), (Non 33024    embedding_2[0][0]          
-## ________________________________________________________________________________
-## decoder (LSTM)            (None, 64)        33024    embedding_3[0][0]          
-##                                                      encoder[0][1]              
-##                                                      encoder[0][2]              
-## ________________________________________________________________________________
-## dense_2 (Dense)           (None, 10)        650      decoder[0][0]              
+##  input_1 (InputLayer)     [(None, None)]    0        []                         
+##                                                                                 
+##  input_2 (InputLayer)     [(None, None)]    0        []                         
+##                                                                                 
+##  embedding_2 (Embedding)  (None, None, 64)  64000    ['input_1[0][0]']          
+##                                                                                 
+##  embedding_3 (Embedding)  (None, None, 64)  128000   ['input_2[0][0]']          
+##                                                                                 
+##  encoder (LSTM)           [(None, 64),      33024    ['embedding_2[0][0]']      
+##                            (None, 64),                                          
+##                            (None, 64)]                                          
+##                                                                                 
+##  decoder (LSTM)           (None, 64)        33024    ['embedding_3[0][0]',      
+##                                                       'encoder[0][1]',          
+##                                                       'encoder[0][2]']          
+##                                                                                 
+##  dense_2 (Dense)          (None, 10)        650      ['decoder[0][0]']          
+##                                                                                 
 ## ================================================================================
 ## Total params: 258,698
 ## Trainable params: 258,698
@@ -363,8 +368,8 @@
 <h2 class="hasAnchor">
 <a href="#rnn-layers-and-rnn-cells" class="anchor"></a>RNN layers and RNN cells</h2>
 <p>In addition to the built-in RNN layers, the RNN API also provides cell-level APIs. Unlike RNN layers, which process whole batches of input sequences, the RNN cell only processes a single timestep.</p>
-<p>The cell is the inside of the <code>for</code> loop of a RNN layer. Wrapping a cell inside a <code><a href="../../reference/layer_rnn.html">layer_rnn()</a></code> layer gives you a layer capable of processing a sequence, e.g. <code><a href="../../reference/layer_rnn.html">layer_rnn(layer_lstm_cell(10))</a></code>.</p>
-<p>Mathematically, <code><a href="../../reference/layer_rnn.html">layer_rnn(layer_lstm_cell(10))</a></code> produces the same result as <code><a href="../../reference/layer_lstm.html">layer_lstm(10)</a></code>. In fact, the implementation of this layer in TF v1.x was just creating the corresponding RNN cell and wrapping it in a RNN layer. However using the built-in <code><a href="../../reference/layer_gru.html">layer_gru()</a></code> and <code><a href="../../reference/layer_lstm.html">layer_lstm()</a></code> layers enable the use of CuDNN and you may see better performance.</p>
+<p>The cell is the inside of the <code>for</code> loop of a RNN layer. Wrapping a cell inside a <code><a href="../../reference/layer_rnn.html">layer_rnn()</a></code> layer gives you a layer capable of processing a sequence, e.g. <code>layer_rnn(layer_lstm_cell(10))</code>.</p>
+<p>Mathematically, <code>layer_rnn(layer_lstm_cell(10))</code> produces the same result as <code>layer_lstm(10)</code>. In fact, the implementation of this layer in TF v1.x was just creating the corresponding RNN cell and wrapping it in a RNN layer. However using the built-in <code><a href="../../reference/layer_gru.html">layer_gru()</a></code> and <code><a href="../../reference/layer_lstm.html">layer_lstm()</a></code> layers enable the use of CuDNN and you may see better performance.</p>
 <p>There are three built-in RNN cells, each of them corresponding to the matching RNN layer.</p>
 <ul>
 <li><p><code><a href="../../reference/layer_simple_rnn_cell.html">layer_simple_rnn_cell()</a></code> corresponds to the <code><a href="../../reference/layer_simple_rnn.html">layer_simple_rnn()</a></code> layer.</p></li>
@@ -435,22 +440,23 @@
 <p>For sequences other than time series (e.g. text), it is often the case that a RNN model can perform better if it not only processes sequence from start to end, but also backwards. For example, to predict the next word in a sentence, it is often useful to have the context around the word, not only just the words that come before it.</p>
 <p>Keras provides an easy API for you to build such bidirectional RNNs: the <code><a href="../../reference/bidirectional.html">bidirectional()</a></code> wrapper.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/bidirectional.html">bidirectional</a></span><span class="op">(</span><span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, return_sequences <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/bidirectional.html">bidirectional</a></span><span class="op">(</span><span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/bidirectional.html">bidirectional</a></span><span class="op">(</span><span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, return_sequences <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/bidirectional.html">bidirectional</a></span><span class="op">(</span><span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
 
 <span class="va">model</span></code></pre></div>
 <pre><code>## Model
 ## Model: "sequential_2"
 ## ________________________________________________________________________________
-## Layer (type)                        Output Shape                    Param #     
+##  Layer (type)                       Output Shape                    Param #     
 ## ================================================================================
-## bidirectional_1 (Bidirectional)     (None, 5, 128)                  38400       
-## ________________________________________________________________________________
-## bidirectional (Bidirectional)       (None, 64)                      41216       
-## ________________________________________________________________________________
-## dense_3 (Dense)                     (None, 10)                      650         
+##  bidirectional_1 (Bidirectional)    (None, 5, 128)                  38400       
+##                                                                                 
+##  bidirectional (Bidirectional)      (None, 64)                      41216       
+##                                                                                 
+##  dense_3 (Dense)                    (None, 10)                      650         
+##                                                                                 
 ## ================================================================================
 ## Total params: 80,266
 ## Trainable params: 80,266
@@ -500,9 +506,9 @@
     <span class="va">lstm_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_rnn.html">layer_rnn</a></span><span class="op">(</span>cell <span class="op">=</span> <span class="fu"><a href="../../reference/layer_lstm_cell.html">layer_lstm_cell</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">units</span><span class="op">)</span><span class="op">)</span>
 
   <span class="va">model</span> <span class="op">&lt;-</span>
-    <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="va">input_dim</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu">lstm_layer</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="va">input_dim</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+    <span class="fu">lstm_layer</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+    <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
     <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="va">output_size</span><span class="op">)</span>
 
   <span class="va">model</span>
@@ -512,18 +518,18 @@
 <code class="sourceCode R"><span class="va">mnist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span> <span class="op">/</span> <span class="fl">255</span>
 <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span> <span class="op">/</span> <span class="fl">255</span>
-<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">sample</span>, <span class="va">sample_label</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">train</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span>,,<span class="op">]</span>, <span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">sample</span>, <span class="va">sample_label</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">train</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span>,,<span class="op">]</span>, <span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Let’s create a model instance and train it.</p>
 <p>We choose <code>sparse_categorical_crossentropy()</code> as the loss function for the model. The output of the model has shape of <code>(batch_size, 10)</code>. The target for the model is an integer vector, each of the integer is in the range of 0 to 9.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">build_model</span><span class="op">(</span>allow_cudnn_kernel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">build_model</span><span class="op">(</span>allow_cudnn_kernel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
     loss <span class="op">=</span> <span class="fu"><a href="../../reference/loss-functions.html">loss_sparse_categorical_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
     optimizer <span class="op">=</span> <span class="st">"sgd"</span>,
     metrics <span class="op">=</span> <span class="st">"accuracy"</span>
   <span class="op">)</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>,
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>,
   validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>,
@@ -534,13 +540,13 @@
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">noncudnn_model</span> <span class="op">&lt;-</span> <span class="fu">build_model</span><span class="op">(</span>allow_cudnn_kernel<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">noncudnn_model</span><span class="op">$</span><span class="fu">set_weights</span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="fu">get_weights</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="va">noncudnn_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">noncudnn_model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
     loss<span class="op">=</span><span class="fu"><a href="../../reference/loss-functions.html">loss_sparse_categorical_crossentropy</a></span><span class="op">(</span>from_logits<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,
     optimizer<span class="op">=</span><span class="st">"sgd"</span>,
     metrics<span class="op">=</span><span class="st">"accuracy"</span>,
 <span class="op">)</span>
 
-<span class="va">noncudnn_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">noncudnn_model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>,
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>,
   validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>,
@@ -555,18 +561,18 @@
     <span class="va">cpu_model</span> <span class="op">&lt;-</span> <span class="fu">build_model</span><span class="op">(</span>allow_cudnn_kernel<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
     <span class="va">cpu_model</span><span class="op">$</span><span class="fu">set_weights</span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="fu">get_weights</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 
-    <span class="va">result</span> <span class="op">&lt;-</span> <span class="va">cpu_model</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../../reference/predict_on_batch.html">predict_on_batch</a></span><span class="op">(</span><span class="fu"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span><span class="op">(</span><span class="va">sample</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="va">result</span> <span class="op">&lt;-</span> <span class="va">cpu_model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+      <span class="fu"><a href="../../reference/predict_on_batch.html">predict_on_batch</a></span><span class="op">(</span><span class="fu"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span><span class="op">(</span><span class="va">sample</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
       <span class="fu"><a href="../../reference/k_argmax.html">k_argmax</a></span><span class="op">(</span>axis <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
     <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span>
         <span class="st">"Predicted result is: %s, target result is: %s\n"</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>, <span class="va">sample_label</span><span class="op">)</span><span class="op">)</span>
 
     <span class="co"># show mnist image</span>
-    <span class="va">sample</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="fl">2</span>, <span class="va">rev</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># flip</span>
-      <span class="fu"><a href="https://rdrr.io/pkg/raster/man/transpose.html">t</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>           <span class="co"># rotate</span>
-      <span class="fu"><a href="https://rdrr.io/pkg/raster/man/image.html">image</a></span><span class="op">(</span>axes <span class="op">=</span> <span class="cn">FALSE</span>, asp <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html">grey</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, length.out <span class="op">=</span> <span class="fl">256</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">sample</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+      <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="fl">2</span>, <span class="va">rev</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="co"># flip</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>           <span class="co"># rotate</span>
+      <span class="fu"><a href="https://rdrr.io/r/graphics/image.html">image</a></span><span class="op">(</span>axes <span class="op">=</span> <span class="cn">FALSE</span>, asp <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html">grey</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, length.out <span class="op">=</span> <span class="fl">256</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span></code></pre></div>
 <pre><code>## Predicted result is: 3, target result is: 5</code></pre>
 <p><img src="working_with_rnns_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
@@ -585,7 +591,7 @@
 <a href="#define-a-custom-cell-that-supports-nested-inputoutput" class="anchor"></a>Define a custom cell that supports nested input/output</h3>
 <p>See <a href="/guides/making_new_layers_and_models_via_subclassing/">Making new Layers &amp; Models via subclassing</a> for details on writing your own layers.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">NestedCell</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span>
+<code class="sourceCode R"><span class="fu">NestedCell</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
 
   <span class="va">initialize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">unit_1</span>, <span class="va">unit_2</span>, <span class="va">unit_3</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">self</span><span class="op">$</span><span class="va">unit_1</span> <span class="op">&lt;-</span> <span class="va">unit_1</span>
@@ -619,8 +625,8 @@
     <span class="co"># inputs should be in [(batch, input_1), (batch, input_2, input_3)]</span>
     <span class="co"># state should be in shape [(batch, unit_1), (batch, unit_2, unit_3)]</span>
     <span class="co"># Don't forget you can call `browser()` here while the layer is being traced!</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_1</span>, <span class="va">input_2</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="va">tf</span><span class="op">$</span><span class="va">nest</span><span class="op">$</span><span class="fu">flatten</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">s1</span>, <span class="va">s2</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="va">states</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">input_1</span>, <span class="va">input_2</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="va">tf</span><span class="op">$</span><span class="va">nest</span><span class="op">$</span><span class="fu">flatten</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">s1</span>, <span class="va">s2</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="va">states</span>
 
     <span class="va">output_1</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">matmul</span><span class="op">(</span><span class="va">input_1</span>, <span class="va">self</span><span class="op">$</span><span class="va">kernel_1</span><span class="op">)</span>
     <span class="va">output_2_3</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">einsum</span><span class="op">(</span><span class="st">"bij,ijkl-&gt;bkl"</span>, <span class="va">input_2</span>, <span class="va">self</span><span class="op">$</span><span class="va">kernel_2_3</span><span class="op">)</span>
@@ -666,7 +672,7 @@
 
 <span class="va">model</span> <span class="op">=</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_1</span>, <span class="va">input_2</span><span class="op">)</span>, <span class="va">outputs</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer<span class="op">=</span><span class="st">"adam"</span>, loss<span class="op">=</span><span class="st">"mse"</span>, metrics<span class="op">=</span><span class="st">"accuracy"</span><span class="op">)</span></code></pre></div>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer<span class="op">=</span><span class="st">"adam"</span>, loss<span class="op">=</span><span class="st">"mse"</span>, metrics<span class="op">=</span><span class="st">"accuracy"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="train-the-model-with-randomly-generated-data" class="section level3">
 <h3 class="hasAnchor">
@@ -680,7 +686,7 @@
 <span class="va">input_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_1_data</span>, <span class="va">input_2_data</span><span class="op">)</span>
 <span class="va">target_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">target_1_data</span>, <span class="va">target_2_data</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">input_data</span>, <span class="va">target_data</span>, batch_size<span class="op">=</span><span class="va">batch_size</span><span class="op">)</span></code></pre></div>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">input_data</span>, <span class="va">target_data</span>, batch_size<span class="op">=</span><span class="va">batch_size</span><span class="op">)</span></code></pre></div>
 <p>With <code><a href="../../reference/layer_rnn.html">keras::layer_rnn()</a></code>, you are only expected to define the math logic for an individual step within the sequence, and the <code><a href="../../reference/layer_rnn.html">layer_rnn()</a></code> will handle the sequence iteration for you. It’s an incredibly powerful way to quickly prototype new kinds of RNNs (e.g. a LSTM variant).</p>
 <p>For more details, please visit the <a href="https://keras.io/api/layers/recurrent_layers/rnn/">API docs</a>.</p>
 </div>
@@ -698,7 +704,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

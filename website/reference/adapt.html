@@ -287,7 +287,7 @@ compiled <code>tf.Graph</code>s that call the layer. This does not affect the la
 when adapting each layer only once, but if you adapt a layer multiple times
 you will need to take care to re-compile any compiled functions as follows:</p><ul>
 <li><p>If you are adding a preprocessing layer to a <code>keras.Model</code>, you need to
-call <code><a href='https://generics.r-lib.org/reference/compile.html'>compile(model)</a></code> after each subsequent call to <code>adapt()</code>.</p></li>
+call <code>compile(model)</code> after each subsequent call to <code>adapt()</code>.</p></li>
 <li><p>If you are calling a preprocessing layer inside <code><a href='https://rdrr.io/pkg/tfdatasets/man/dataset_map.html'>tfdatasets::dataset_map()</a></code>,
 you should call <code>dataset_map()</code> again on the input <code>tf.data.Dataset</code> after each
 <code>adapt()</code>.</p></li>
@@ -308,7 +308,7 @@ each subsequent call to <code>adapt()</code>.</p></li>
 <p><code>tf.data.Dataset</code> example with multiple adapts:<div class="sourceCode r"></p><pre><span class='va'>layer</span> <span class='op'>&lt;-</span> <span class='fu'><a href='layer_normalization.html'>layer_normalization</a></span><span class='op'>(</span>axis<span class='op'>=</span><span class='cn'>NULL</span><span class='op'>)</span>
 <span class='fu'>adapt</span><span class='op'>(</span><span class='va'>layer</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>input_ds</span> <span class='op'>&lt;-</span> <span class='fu'>tfdatasets</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tfdatasets/man/range_dataset.html'>range_dataset</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>3</span><span class='op'>)</span>
-<span class='va'>normalized_ds</span> <span class='op'>&lt;-</span> <span class='va'>input_ds</span> <span class='op'>%&gt;%</span>
+<span class='va'>normalized_ds</span> <span class='op'>&lt;-</span> <span class='va'>input_ds</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span>
   <span class='fu'>tfdatasets</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tfdatasets/man/dataset_map.html'>dataset_map</a></span><span class='op'>(</span><span class='va'>layer</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='fu'>reticulate</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/reticulate/man/iterate.html'>iterate</a></span><span class='op'>(</span><span class='va'>normalized_ds</span><span class='op'>)</span><span class='op'>)</span>
 <span class='co'># List of 3</span>
@@ -316,7 +316,7 @@ each subsequent call to <code>adapt()</code>.</p></li>
 <span class='co'>#  $ :tf.Tensor([0.], shape=(1,), dtype=float32)</span>
 <span class='co'>#  $ :tf.Tensor([1.], shape=(1,), dtype=float32)</span>
 <span class='fu'>adapt</span><span class='op'>(</span><span class='va'>layer</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>normalized_ds</span> <span class='op'>&lt;-</span> <span class='va'>input_ds</span> <span class='op'>%&gt;%</span>
+<span class='va'>normalized_ds</span> <span class='op'>&lt;-</span> <span class='va'>input_ds</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span>
   <span class='fu'>tfdatasets</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tfdatasets/man/dataset_map.html'>dataset_map</a></span><span class='op'>(</span><span class='va'>layer</span><span class='op'>)</span> <span class='co'># Re-map over the input dataset.</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='fu'>reticulate</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/reticulate/man/iterate.html'>iterate</a></span><span class='op'>(</span><span class='va'>normalized_ds</span><span class='op'>$</span><span class='fu'>as_numpy_iterator</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 <span class='co'># List of 3</span>
@@ -344,7 +344,7 @@ each subsequent call to <code>adapt()</code>.</p></li>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="neural_style_transfer_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>neural_style_transfer</h1>
@@ -239,9 +239,9 @@
 
 <span class="co"># util function to open, resize and format pictures into appropriate tensors</span>
 <span class="va">preprocess_image</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">path</span><span class="op">)</span><span class="op">{</span>
-  <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/image_load.html">image_load</a></span><span class="op">(</span><span class="va">path</span>, target_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">img_nrows</span>, <span class="va">img_ncols</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="../../reference/image_to_array.html">image_to_array</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/pkg/raster/man/dimensions.html">dim</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/image_load.html">image_load</a></span><span class="op">(</span><span class="va">path</span>, target_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">img_nrows</span>, <span class="va">img_ncols</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+    <span class="fu"><a href="../../reference/image_to_array.html">image_to_array</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
   <span class="fu"><a href="../../reference/imagenet_preprocess_input.html">imagenet_preprocess_input</a></span><span class="op">(</span><span class="va">img</span><span class="op">)</span>
 <span class="op">}</span>
 
@@ -284,7 +284,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Model loaded."</span><span class="op">)</span>
 
 <span class="va">nms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">layers</span>, <span class="op">~</span><span class="va">.x</span><span class="op">$</span><span class="va">name</span><span class="op">)</span>
-<span class="va">output_dict</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">layers</span>, <span class="op">~</span><span class="va">.x</span><span class="op">$</span><span class="va">output</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">nms</span><span class="op">)</span>
+<span class="va">output_dict</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">layers</span>, <span class="op">~</span><span class="va">.x</span><span class="op">$</span><span class="va">output</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">nms</span><span class="op">)</span>
 
 <span class="co"># compute the neural style loss</span>
 <span class="co"># first we need to define 4 util functions</span>
@@ -293,8 +293,8 @@
 
 <span class="va">gram_matrix</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
   
-  <span class="va">features</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="../../reference/k_permute_dimensions.html">k_permute_dimensions</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="va">features</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+    <span class="fu"><a href="../../reference/k_permute_dimensions.html">k_permute_dimensions</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
     <span class="fu"><a href="../../reference/k_batch_flatten.html">k_batch_flatten</a></span><span class="op">(</span><span class="op">)</span>
   
   <span class="fu"><a href="../../reference/k_dot.html">k_dot</a></span><span class="op">(</span><span class="va">features</span>, <span class="fu"><a href="../../reference/k_transpose.html">k_transpose</a></span><span class="op">(</span><span class="va">features</span><span class="op">)</span><span class="op">)</span>
@@ -438,7 +438,7 @@
   
   <span class="co"># plot</span>
   <span class="va">im</span> <span class="op">&lt;-</span> <span class="fu">deprocess_image</span><span class="op">(</span><span class="va">image</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.raster.html">as.raster</a></span><span class="op">(</span><span class="va">im</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span><span class="op">(</span><span class="va">im</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
   </div>
 
@@ -451,7 +451,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

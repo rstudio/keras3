@@ -261,11 +261,11 @@ of metric functions that start with prefix <code>metric_*</code>.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A (subclassed) <code>Metric</code> instance that can be passed directly to
-<code><a href='https://generics.r-lib.org/reference/compile.html'>compile(metrics = )</a></code>, or used as a standalone object. See <code>?Metric</code> for
+<code>compile(metrics = )</code>, or used as a standalone object. See <code>?Metric</code> for
 example usage.</p>
     <h2 class="hasAnchor" id="usage-with-compile"><a class="anchor" href="#usage-with-compile"></a>Usage with <code>compile</code></h2>
 
-    <p><div class="sourceCode r"></p><pre><span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://generics.r-lib.org/reference/compile.html'>compile</a></span><span class='op'>(</span>
+    <p><div class="sourceCode r"></p><pre><span class='va'>model</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='https://generics.r-lib.org/reference/compile.html'>compile</a></span><span class='op'>(</span>
   optimizer <span class='op'>=</span> <span class='st'>'sgd'</span>,
   loss <span class='op'>=</span> <span class='st'>'mse'</span>,
   metrics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'>metric_SOME_METRIC</span><span class='op'>(</span><span class='op'>)</span>, <span class='fu'>metric_SOME_OTHER_METRIC</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
@@ -276,7 +276,7 @@ example usage.</p>
     <p><div class="sourceCode r"></p><pre><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>metric_SOME_METRIC</span><span class='op'>(</span><span class='op'>)</span>
 <span class='kw'>for</span> <span class='op'>(</span><span class='va'>e</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='va'>epochs</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='va'>train_steps</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span>, sample_weight <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span> <span class='op'>%&lt;-%</span> <span class='va'>...</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span>, sample_weight <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span> <span class='op'><a href='%<-%.html'>%&lt;-%</a></span> <span class='va'>...</span>
     <span class='va'>m</span><span class='op'>$</span><span class='fu'>update_state</span><span class='op'>(</span><span class='va'>y_true</span>, <span class='va'>y_pred</span>, <span class='va'>sample_weight</span><span class='op'>)</span>
   <span class='op'>}</span>
   <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='st'>'Final epoch result: '</span>, <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>$</span><span class='fu'>result</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>, <span class='st'>"\n"</span><span class='op'>)</span>
@@ -295,7 +295,7 @@ example usage.</p>
 <li><p><code>result()</code>: Computes and returns a value for the metric from the state variables.</p></li>
 </ul>
 
-<p>Example custom metric subclass:<div class="sourceCode r"></p><pre><span class='fu'>metric_binary_true_positives</span><span class='op'>(</span><span class='va'>keras</span><span class='op'>$</span><span class='va'>metrics</span><span class='op'>$</span><span class='va'>Metric</span><span class='op'>)</span> <span class='op'>%py_class%</span> <span class='op'>{</span>
+<p>Example custom metric subclass:<div class="sourceCode r"></p><pre><span class='fu'>metric_binary_true_positives</span><span class='op'>(</span><span class='va'>keras</span><span class='op'>$</span><span class='va'>metrics</span><span class='op'>$</span><span class='va'>Metric</span><span class='op'>)</span> <span class='op'><a href='%py_class%.html'>%py_class%</a></span> <span class='op'>{</span>
   <span class='va'>initialize</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>name</span> <span class='op'>=</span> <span class='st'>'binary_true_positives'</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span>
     <span class='va'>super</span><span class='op'>$</span><span class='fu'>initialize</span><span class='op'>(</span>name <span class='op'>=</span> <span class='va'>name</span>, <span class='va'>...</span><span class='op'>)</span>
     <span class='va'>self</span><span class='op'>$</span><span class='va'>true_positives</span> <span class='op'>&lt;-</span> <span class='va'>self</span><span class='op'>$</span><span class='fu'>add_weight</span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>'tp'</span>, initializer <span class='op'>=</span> <span class='st'>'zeros'</span><span class='op'>)</span>
@@ -319,7 +319,7 @@ example usage.</p>
     <span class='va'>self</span><span class='op'>$</span><span class='va'>true_positives</span>
 <span class='op'>}</span>
 
-<span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://generics.r-lib.org/reference/compile.html'>compile</a></span><span class='op'>(</span><span class='va'>...</span>, metrics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'>metric_binary_true_positives</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>model</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='https://generics.r-lib.org/reference/compile.html'>compile</a></span><span class='op'>(</span><span class='va'>...</span>, metrics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'>metric_binary_true_positives</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 </pre><p></div></p>
 
   </div>
@@ -333,7 +333,7 @@ example usage.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

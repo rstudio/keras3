@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="mnist_transfer_cnn_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>mnist_transfer_cnn</h1>
@@ -252,12 +252,12 @@
 <span class="co"># define two groups of layers: feature (convolutions) and classification (dense)</span>
 <span class="va">feature_layers</span> <span class="op">&lt;-</span> 
   <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="va">kernel_size</span>, 
-                input_shape <span class="op">=</span> <span class="va">input_shape</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span>activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="va">kernel_size</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span>activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="va">pool_size</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+                input_shape <span class="op">=</span> <span class="va">input_shape</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span>activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="va">kernel_size</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span>activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="va">pool_size</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span>
   
 
@@ -292,7 +292,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

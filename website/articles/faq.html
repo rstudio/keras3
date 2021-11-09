@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="faq_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Frequently Asked Questions</h1>
@@ -252,41 +252,41 @@
 <code class="sourceCode R"><span class="co"># Replicates `model` on 8 GPUs.</span>
 <span class="co"># This assumes that your machine has 8 available GPUs.</span>
 <span class="va">parallel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multi_gpu_model.html">multi_gpu_model</a></span><span class="op">(</span><span class="va">model</span>, gpus<span class="op">=</span><span class="fl">8</span><span class="op">)</span>
-<span class="va">parallel_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">parallel_model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">"categorical_crossentropy"</span>,
   optimizer <span class="op">=</span> <span class="st">"rmsprop"</span>
 <span class="op">)</span>
 
 <span class="co"># This `fit` call will be distributed on 8 GPUs.</span>
 <span class="co"># Since the batch size is 256, each GPU will process 32 samples.</span>
-<span class="va">parallel_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, epochs <span class="op">=</span> <span class="fl">20</span>, batch_size <span class="op">=</span> <span class="fl">256</span><span class="op">)</span></code></pre></div>
+<span class="va">parallel_model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, epochs <span class="op">=</span> <span class="fl">20</span>, batch_size <span class="op">=</span> <span class="fl">256</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="device-parallelism" class="section level3">
 <h3 class="hasAnchor">
 <a href="#device-parallelism" class="anchor"></a>Device parallelism</h3>
 <p>Device parallelism consists in running different parts of a same model on different devices. It works best for models that have a parallel architecture, e.g. a model with two branches.</p>
 <p>This can be achieved by using TensorFlow device scopes. Here is a quick example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model where a shared LSTM is used to encode two different sequences in parallel</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>input_a <span class="ot">&lt;-</span> <span class="fu">layer_input</span>(<span class="at">shape =</span> <span class="fu">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>input_b <span class="ot">&lt;-</span> <span class="fu">layer_input</span>(<span class="at">shape =</span> <span class="fu">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>shared_lstm <span class="ot">&lt;-</span> <span class="fu">layer_lstm</span>(<span class="at">units =</span> <span class="dv">64</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Process the first sequence on one GPU</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tensorflow)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(tf<span class="sc">$</span><span class="fu">device_scope</span>(<span class="st">"/gpu:0"</span>, {</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  encoded_a <span class="ot">&lt;-</span> <span class="fu">shared_lstm</span>(tweet_a)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>})<span class="sc">:</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Process the next sequence on another GPU</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(tf<span class="sc">$</span><span class="fu">device_scope</span>(<span class="st">"/gpu:1"</span>, {</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  encoded_b <span class="ot">&lt;-</span> <span class="fu">shared_lstm</span>(tweet_b)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>})<span class="sc">:</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate results on CPU</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(tf<span class="sc">$</span><span class="fu">device_scope</span>(<span class="st">"/cpu:0"</span>, {</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  merged_vector <span class="ot">&lt;-</span> <span class="fu">layer_concatenate</span>(<span class="fu">list</span>(encoded_a, encoded_b))</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>})<span class="sc">:</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Model where a shared LSTM is used to encode two different sequences in parallel</span></a>
+<a class="sourceLine" id="cb4-2" title="2">input_a &lt;-<span class="st"> </span><span class="kw">layer_input</span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))</a>
+<a class="sourceLine" id="cb4-3" title="3">input_b &lt;-<span class="st"> </span><span class="kw">layer_input</span>(<span class="dt">shape =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">256</span>))</a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5">shared_lstm &lt;-<span class="st"> </span><span class="kw">layer_lstm</span>(<span class="dt">units =</span> <span class="dv">64</span>)</a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co"># Process the first sequence on one GPU</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="kw">library</span>(tensorflow)</a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="kw">with</span>(tf<span class="op">$</span><span class="kw">device_scope</span>(<span class="st">"/gpu:0"</span>, {</a>
+<a class="sourceLine" id="cb4-10" title="10">  encoded_a &lt;-<span class="st"> </span><span class="kw">shared_lstm</span>(tweet_a)</a>
+<a class="sourceLine" id="cb4-11" title="11">})<span class="op">:</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="st">    </span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="co"># Process the next sequence on another GPU</span></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="kw">with</span>(tf<span class="op">$</span><span class="kw">device_scope</span>(<span class="st">"/gpu:1"</span>, {</a>
+<a class="sourceLine" id="cb4-15" title="15">  encoded_b &lt;-<span class="st"> </span><span class="kw">shared_lstm</span>(tweet_b)</a>
+<a class="sourceLine" id="cb4-16" title="16">})<span class="op">:</span></a>
+<a class="sourceLine" id="cb4-17" title="17"></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="co"># Concatenate results on CPU</span></a>
+<a class="sourceLine" id="cb4-19" title="19"><span class="kw">with</span>(tf<span class="op">$</span><span class="kw">device_scope</span>(<span class="st">"/cpu:0"</span>, {</a>
+<a class="sourceLine" id="cb4-20" title="20">  merged_vector &lt;-<span class="st"> </span><span class="kw">layer_concatenate</span>(<span class="kw">list</span>(encoded_a, encoded_b))</a>
+<a class="sourceLine" id="cb4-21" title="21">})<span class="op">:</span></a></code></pre></div>
 </div>
 </div>
 <div id="what-does-sample-batch-epoch-mean" class="section level2">
@@ -323,13 +323,13 @@
 <a href="#why-are-keras-objects-modified-in-place" class="anchor"></a>Why are Keras objects modified in place?</h2>
 <p>Unlike most R objects, Keras objects are “mutable”. That means that when you modify an object you’re modifying it “in place”, and you don’t need to assign the updated object back to the original name. For example, to add layers to a Keras model you might use this code:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span></code></pre></div>
 <p>Rather than this code:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span></code></pre></div>
 <p>You need to be aware of this because it makes the Keras API a little different than most other pipelines you may have used, but it’s necessary to match the data structures and behavior of the underlying Keras library.</p>
 </div>
@@ -373,10 +373,10 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/save_model_weights_hdf5.html">save_model_weights_hdf5</a></span><span class="op">(</span><span class="st">'my_model_weights.h5'</span><span class="op">)</span></code></pre></div>
 <p>Assuming you have code for instantiating your model, you can then load the weights you saved into a model with the <em>same</em> architecture:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/save_model_weights_hdf5.html">load_model_weights_hdf5</a></span><span class="op">(</span><span class="st">'my_model_weights.h5'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../reference/save_model_weights_hdf5.html">load_model_weights_hdf5</a></span><span class="op">(</span><span class="st">'my_model_weights.h5'</span><span class="op">)</span></code></pre></div>
 <p>If you need to load weights into a <em>different</em> architecture (with some layers in common), for instance for fine-tuning or transfer-learning, you can load weights by <em>layer name</em>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/save_model_weights_hdf5.html">load_model_weights_hdf5</a></span><span class="op">(</span><span class="st">'my_model_weights.h5'</span>, by_name <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../reference/save_model_weights_hdf5.html">load_model_weights_hdf5</a></span><span class="op">(</span><span class="st">'my_model_weights.h5'</span>, by_name <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>For example:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># assuming the original model looks like this:</span>
@@ -389,8 +389,8 @@
 
 <span class="co"># new model</span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, input_dim <span class="op">=</span> <span class="fl">3</span>, name <span class="op">=</span> <span class="st">"dense 1"</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co"># will be loaded</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, input_dim <span class="op">=</span> <span class="fl">3</span>, name <span class="op">=</span> <span class="st">"dense 1"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>  <span class="co"># will be loaded</span>
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, name <span class="op">=</span> <span class="st">"dense_3"</span><span class="op">)</span>                     <span class="co"># will not be loaded</span>
 
 <span class="co"># load weights from first model; will only affect the first layer, dense_1.</span>
@@ -413,7 +413,7 @@
 <span class="va">layer_name</span> <span class="op">&lt;-</span> <span class="st">'my_layer'</span>
 <span class="va">intermediate_layer_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">model</span><span class="op">$</span><span class="va">input</span>,
                                         outputs <span class="op">=</span> <span class="fu"><a href="../reference/get_layer.html">get_layer</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">layer_name</span><span class="op">)</span><span class="op">$</span><span class="va">output</span><span class="op">)</span>
-<span class="va">intermediate_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">intermediate_layer_model</span>, <span class="va">data</span><span class="op">)</span></code></pre></div>
+<span class="va">intermediate_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">intermediate_layer_model</span>, <span class="va">data</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="how-can-i-use-keras-with-datasets-that-dont-fit-in-memory" class="section level2">
 <h2 class="hasAnchor">
@@ -431,14 +431,14 @@
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sampling_generator</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">X_data</span>, <span class="va">Y_data</span>, <span class="va">batch_size</span><span class="op">)</span> <span class="op">{</span>
   <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">nrow</a></span><span class="op">(</span><span class="va">X_data</span><span class="op">)</span>, <span class="va">batch_size</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+    <span class="va">rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">X_data</span><span class="op">)</span>, <span class="va">batch_size</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">X_data</span><span class="op">[</span><span class="va">rows</span>,<span class="op">]</span>, <span class="va">Y_data</span><span class="op">[</span><span class="va">rows</span>,<span class="op">]</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">}</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span> 
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/fit_generator.html">fit_generator</a></span><span class="op">(</span><span class="fu">sampling_generator</span><span class="op">(</span><span class="va">X_train</span>, <span class="va">Y_train</span>, batch_size <span class="op">=</span> <span class="fl">128</span><span class="op">)</span>, 
-                steps_per_epoch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">nrow</a></span><span class="op">(</span><span class="va">X_train</span><span class="op">)</span> <span class="op">/</span> <span class="fl">128</span>, epochs <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
+                steps_per_epoch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">X_train</span><span class="op">)</span> <span class="op">/</span> <span class="fl">128</span>, epochs <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p>The <code>steps_per_epoch</code> parameter indicates the number of steps (batches of samples) to yield from generator before declaring one epoch finished and starting the next epoch. It should typically be equal to the number of unique samples if your dataset divided by the batch size.</p>
 </div>
 <div id="external-data-generators" class="section level3">
@@ -474,7 +474,7 @@
     <span class="fu">file_to_training_data</span><span class="op">(</span><span class="va">file</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">}</span></code></pre></div>
-<p>The above function is an example of a stateful generator—the function maintains information across calls to keep track of which data to provide next. This is accomplished by defining shared state outside the generator function body and using the <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;&lt;-</a></code> operator to assign to it from within the generator.</p>
+<p>The above function is an example of a stateful generator—the function maintains information across calls to keep track of which data to provide next. This is accomplished by defining shared state outside the generator function body and using the <code>&lt;&lt;-</code> operator to assign to it from within the generator.</p>
 </div>
 <div id="image-generators" class="section level3">
 <h3 class="hasAnchor">
@@ -494,7 +494,7 @@
 <p>You can use an early stopping callback:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">early_stopping</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/callback_early_stopping.html">callback_early_stopping</a></span><span class="op">(</span>monitor <span class="op">=</span> <span class="st">'val_loss'</span>, patience <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, validation_split <span class="op">=</span> <span class="fl">0.2</span>, callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">early_stopping</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, validation_split <span class="op">=</span> <span class="fl">0.2</span>, callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">early_stopping</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Find out more in the <a href="training_callbacks.html">callbacks documentation</a>.</p>
 </div>
 <div id="how-is-the-validation-split-computed" class="section level2">
@@ -514,7 +514,7 @@
 <a href="#how-can-i-record-the-training-validation-loss-accuracy-at-each-epoch" class="anchor"></a>How can I record the training / validation loss / accuracy at each epoch?</h2>
 <p>The <code>model.fit</code> method returns an <code>History</code> callback, which has a <code>history</code> attribute containing the lists of successive losses and other metrics.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hist</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, validation_split<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">hist</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, validation_split<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>
 <span class="va">hist</span><span class="op">$</span><span class="va">history</span></code></pre></div>
 </div>
 <div id="how-can-i-freeze-keras-layers" class="section level2">
@@ -529,20 +529,20 @@
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span>
 <span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
 <span class="va">layer</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span>
-<span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">%&gt;%</span> <span class="va">layer</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">layer</span>
 
 <span class="va">frozen_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
 <span class="co"># in the model below, the weights of `layer` will not be updated during training</span>
-<span class="va">frozen_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>, loss <span class="op">=</span> <span class="st">'mse'</span><span class="op">)</span>
+<span class="va">frozen_model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>, loss <span class="op">=</span> <span class="st">'mse'</span><span class="op">)</span>
 
 <span class="va">layer</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span>
 <span class="va">trainable_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
 <span class="co"># with this model the weights of the layer will be updated during training</span>
 <span class="co"># (which will also affect the above model since it uses the same layer instance)</span>
-<span class="va">trainable_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>, loss <span class="op">=</span> <span class="st">'mse'</span><span class="op">)</span>
+<span class="va">trainable_model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>, loss <span class="op">=</span> <span class="st">'mse'</span><span class="op">)</span>
 
-<span class="va">frozen_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">labels</span><span class="op">)</span>  <span class="co"># this does NOT update the weights of `layer`</span>
-<span class="va">trainable_model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">labels</span><span class="op">)</span>  <span class="co"># this updates the weights of `layer`</span></code></pre></div>
+<span class="va">frozen_model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">labels</span><span class="op">)</span>  <span class="co"># this does NOT update the weights of `layer`</span>
+<span class="va">trainable_model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">labels</span><span class="op">)</span>  <span class="co"># this updates the weights of `layer`</span></code></pre></div>
 <p>Finally, you can freeze or unfreeze the weights for an entire model (or a range of layers within the model) using the <code><a href="../reference/freeze_weights.html">freeze_weights()</a></code> and <code><a href="../reference/freeze_weights.html">unfreeze_weights()</a></code> functions. For example:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># instantiate a VGG16 model</span>
@@ -556,14 +556,14 @@
 <span class="fu"><a href="../reference/freeze_weights.html">freeze_weights</a></span><span class="op">(</span><span class="va">conv_base</span><span class="op">)</span>
 
 <span class="co"># create a composite model that includes the base + more layers</span>
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="va">conv_base</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="va">conv_base</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span>, activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span>
 
 <span class="co"># compile</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,
   optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">2e-5</span><span class="op">)</span>,
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"accuracy"</span><span class="op">)</span>
@@ -573,7 +573,7 @@
 <span class="fu"><a href="../reference/freeze_weights.html">unfreeze_weights</a></span><span class="op">(</span><span class="va">conv_base</span>, from <span class="op">=</span> <span class="st">"block5_conv1"</span><span class="op">)</span>
 
 <span class="co"># compile again since we froze or unfroze layers</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,
   optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">2e-5</span><span class="op">)</span>,
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"accuracy"</span><span class="op">)</span>
@@ -595,7 +595,7 @@
 <li>specify <code>shuffle=FALSE</code> when calling fit().</li>
 </ul>
 <p>To reset the states accumulated in either a single layer or an entire model use the <code><a href="../reference/reset_states.html">reset_states()</a></code> function.</p>
-<p>Notes that the methods <code><a href="https://rdrr.io/pkg/raster/man/predict.html">predict()</a></code>, <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, <code><a href="../reference/train_on_batch.html">train_on_batch()</a></code>, <code><a href="../reference/predict_proba.html">predict_classes()</a></code>, etc. will <em>all</em> update the states of the stateful layers in a model. This allows you to do not only stateful training, but also stateful prediction.</p>
+<p>Notes that the methods <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code>, <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, <code><a href="../reference/train_on_batch.html">train_on_batch()</a></code>, <code><a href="../reference/predict_proba.html">predict_classes()</a></code>, etc. will <em>all</em> update the states of the stateful layers in a model. This allows you to do not only stateful training, but also stateful prediction.</p>
 </div>
 <div id="how-can-i-remove-a-layer-from-a-sequential-model" class="section level2">
 <h2 class="hasAnchor">
@@ -603,13 +603,13 @@
 <p>You can remove the last added layer in a Sequential model by calling <code><a href="../reference/pop_layer.html">pop_layer()</a></code>:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">layers</span><span class="op">)</span>     <span class="co"># "3"</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/pop_layer.html">pop_layer</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../reference/pop_layer.html">pop_layer</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">layers</span><span class="op">)</span>     <span class="co"># "2"</span></code></pre></div>
 </div>
 <div id="how-can-i-use-pre-trained-models-in-keras" class="section level2">
@@ -717,7 +717,7 @@
 <h2 class="hasAnchor">
 <a href="#where-is-the-keras-configuration-filed-stored" class="anchor"></a>Where is the Keras configuration filed stored?</h2>
 <p>The default directory where all Keras data is stored is:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/.keras/</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb30-1" title="1"><span class="ex">~/.keras/</span></a></code></pre></div>
 <p>In case Keras cannot create the above directory (e.g. due to permission issues), <code>/tmp/.keras/</code> is used as a backup.</p>
 <p>The Keras configuration file is a JSON file stored at <code>$HOME/.keras/keras.json</code>. The default configuration file looks like this:</p>
 <pre><code>{
@@ -748,7 +748,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

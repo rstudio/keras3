@@ -262,36 +262,36 @@ methods.</p></td>
 also assigned in the parent frame.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>MyClass</span> <span class='op'>%py_class%</span> <span class='op'>{</span>
-  <span class='va'>initialize</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='st'>"Hi from MyClass$initialize()!"</span><span class='op'>)</span>
-    <span class='va'>self</span><span class='op'>$</span><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>x</span>
-  <span class='op'>}</span>
-  <span class='va'>my_method</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
-    <span class='va'>self</span><span class='op'>$</span><span class='va'>x</span>
-  <span class='op'>}</span>
-<span class='op'>}</span>
-
-<span class='va'>my_class_instance</span> <span class='op'>&lt;-</span> <span class='fu'>MyClass</span><span class='op'>(</span><span class='fl'>42</span><span class='op'>)</span>
-<span class='va'>my_class_instance</span><span class='op'>$</span><span class='fu'>my_method</span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='fu'>MyClass2</span><span class='op'>(</span><span class='va'>MyClass</span><span class='op'>)</span> <span class='op'>%py_class%</span> <span class='op'>{</span>
-  <span class='st'>"This will be a __doc__ string for MyClass2"</span>
-
-  <span class='va'>initialize</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span>
-    <span class='st'>"This will be the __doc__ string for the MyClass2.__init__() method"</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='st'>"Hi from MyClass2$initialize()!"</span><span class='op'>)</span>
-    <span class='va'>super</span><span class='op'>$</span><span class='fu'>initialize</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
-  <span class='op'>}</span>
-<span class='op'>}</span>
-
-<span class='va'>my_class_instance2</span> <span class='op'>&lt;-</span> <span class='fu'>MyClass2</span><span class='op'>(</span><span class='fl'>42</span><span class='op'>)</span>
-<span class='va'>my_class_instance2</span><span class='op'>$</span><span class='fu'>my_method</span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='fu'>reticulate</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/reticulate/man/py_help.html'>py_help</a></span><span class='op'>(</span><span class='va'>MyClass2</span><span class='op'>)</span> <span class='co'># see the __doc__ strings and more!</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>MyClass</span> <span class='op'>%py_class%</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>initialize</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>    <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='st'>"Hi from MyClass$initialize()!"</span><span class='op'>)</span></span>
+<span class='r-in'>    <span class='va'>self</span><span class='op'>$</span><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>x</span></span>
+<span class='r-in'>  <span class='op'>}</span></span>
+<span class='r-in'>  <span class='va'>my_method</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>    <span class='va'>self</span><span class='op'>$</span><span class='va'>x</span></span>
+<span class='r-in'>  <span class='op'>}</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>my_class_instance</span> <span class='op'>&lt;-</span> <span class='fu'>MyClass</span><span class='op'>(</span><span class='fl'>42</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>my_class_instance</span><span class='op'>$</span><span class='fu'>my_method</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>MyClass2</span><span class='op'>(</span><span class='va'>MyClass</span><span class='op'>)</span> <span class='op'>%py_class%</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='st'>"This will be a __doc__ string for MyClass2"</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='va'>initialize</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>    <span class='st'>"This will be the __doc__ string for the MyClass2.__init__() method"</span></span>
+<span class='r-in'>    <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='st'>"Hi from MyClass2$initialize()!"</span><span class='op'>)</span></span>
+<span class='r-in'>    <span class='va'>super</span><span class='op'>$</span><span class='fu'>initialize</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='op'>}</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>my_class_instance2</span> <span class='op'>&lt;-</span> <span class='fu'>MyClass2</span><span class='op'>(</span><span class='fl'>42</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>my_class_instance2</span><span class='op'>$</span><span class='fu'>my_method</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>reticulate</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/reticulate/man/py_help.html'>py_help</a></span><span class='op'>(</span><span class='va'>MyClass2</span><span class='op'>)</span> <span class='co'># see the __doc__ strings and more!</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -303,7 +303,7 @@ also assigned in the parent frame.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

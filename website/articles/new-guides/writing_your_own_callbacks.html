@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="writing_your_own_callbacks_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Writing your own callbacks</h1>
@@ -224,7 +224,7 @@
 <ul>
 <li><code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code></li>
 <li><code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code></li>
-<li><code><a href="https://rdrr.io/pkg/raster/man/predict.html">predict()</a></code></li>
+<li><code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code></li>
 </ul>
 <pre><code></code></pre>
 </div>
@@ -287,8 +287,8 @@
 <p>Let’s take a look at a concrete example. To get started, let’s import tensorflow and define a simple Sequential Keras model:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">get_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-    <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span>, input_shape <span class="op">=</span> <span class="fl">784</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
+    <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span>, input_shape <span class="op">=</span> <span class="fl">784</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
       optimizer <span class="op">=</span> <span class="fu"><a href="../../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>learning_rate<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span>,
       loss <span class="op">=</span> <span class="st">"mean_squared_error"</span>,
@@ -329,7 +329,7 @@
   <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">logs</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n"</span><span class="op">)</span>
 <span class="op">}</span>
 
-<span class="fu">CustomCallback</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span>
+<span class="fu">CustomCallback</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
   <span class="va">on_train_begin</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">logs</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
     <span class="fu">show</span><span class="op">(</span><span class="st">"Starting training"</span>, <span class="va">logs</span><span class="op">)</span>
   
@@ -375,7 +375,7 @@
 <p>Let’s try it out:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>,
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>,
   batch_size <span class="op">=</span> <span class="fl">128</span>,
@@ -385,7 +385,7 @@
   callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">CustomCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span>
     <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
     <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span>,
@@ -394,8 +394,8 @@
     callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">CustomCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
   <span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
+<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
           batch_size <span class="op">=</span> <span class="fl">128</span>,
           callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">CustomCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div id="usage-of-logs-dict" class="section level3">
@@ -403,7 +403,7 @@
 <a href="#usage-of-logs-dict" class="anchor"></a>Usage of <code>logs</code> dict</h3>
 <p>The <code>logs</code> dict contains the loss value, and all the metrics at the end of a batch or epoch. Example includes the loss and mean absolute error.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span>
+<code class="sourceCode R"><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
   <span class="va">on_train_batch_end</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">batch</span>, <span class="va">logs</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Up to batch %i, the average loss is %7.2f.\n"</span>,
                 <span class="va">batch</span>,  <span class="va">logs</span><span class="op">$</span><span class="va">loss</span><span class="op">)</span><span class="op">)</span>
@@ -420,7 +420,7 @@
 <span class="op">}</span>
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>,
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>,
   batch_size <span class="op">=</span> <span class="fl">128</span>,
@@ -429,7 +429,7 @@
   callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">res</span> <span class="op">=</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span>
+<span class="va">res</span> <span class="op">=</span> <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
   <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span>,
   batch_size <span class="op">=</span> <span class="fl">128</span>,
@@ -447,7 +447,7 @@
 <li>Set <code>self$model$stop_training &lt;- TRUE</code> to immediately interrupt training.</li>
 <li>Mutate hyperparameters of the optimizer (available as <code>self$model$optimizer</code>), such as <code>self$model$optimizer$learning_rate</code>.</li>
 <li>Save the model at period intervals.</li>
-<li>Record the output of <code><a href="https://rdrr.io/pkg/raster/man/predict.html">predict(model)</a></code> on a few test samples at the end of each epoch, to use as a sanity check during training.</li>
+<li>Record the output of <code>predict(model)</code> on a few test samples at the end of each epoch, to use as a sanity check during training.</li>
 <li>Extract visualizations of intermediate features at the end of each epoch, to monitor what the model is learning over time.</li>
 <li>etc.</li>
 </ul>
@@ -464,7 +464,7 @@
 <p>This first example shows the creation of a <code>Callback</code> that stops training when the minimum of loss has been reached, by setting the attribute <code>self$model$stop_training</code> (boolean). Optionally, you can provide an argument <code>patience</code> to specify how many epochs we should wait before stopping after having reached a local minimum.</p>
 <p><code>keras$callbacks$EarlyStopping</code> provides a more complete and general implementation.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">EarlyStoppingAtMinLoss</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span>
+<code class="sourceCode R"><span class="fu">EarlyStoppingAtMinLoss</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
   <span class="st">"Stop training when the loss is at its min, i.e. the loss stops decreasing.
 
   Arguments:
@@ -497,7 +497,7 @@
       <span class="co"># Record the best weights if current results is better (less).</span>
       <span class="va">self</span><span class="op">$</span><span class="va">best_weights</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="fu">get_weights</span><span class="op">(</span><span class="op">)</span>
     <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-      <span class="va">self</span><span class="op">$</span><span class="va">wait</span> <span class="op">%&lt;&gt;%</span> <span class="fu">`+`</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">wait</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html">%&lt;&gt;%</a></span> <span class="fu">`+`</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
       <span class="kw">if</span> <span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">wait</span> <span class="op">&gt;=</span> <span class="va">self</span><span class="op">$</span><span class="va">patience</span><span class="op">)</span> <span class="op">{</span>
         <span class="va">self</span><span class="op">$</span><span class="va">stopped_epoch</span> <span class="op">&lt;-</span> <span class="va">epoch</span>
         <span class="va">self</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">stop_training</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span>
@@ -515,7 +515,7 @@
 
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>,
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>,
   batch_size <span class="op">=</span> <span class="fl">64</span>,
@@ -532,7 +532,7 @@
 <p>In this example, we show how a custom Callback can be used to dynamically change the learning rate of the optimizer during the course of training.</p>
 <p>See <code>keras$callbacks$LearningRateScheduler</code> for a more general implementations (in RStudio, press F1 while the cursor is over <code>LearningRateScheduler</code> and a browser will open to <a href="https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/callbacks/LearningRateScheduler">this page</a>).</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">CustomLearningRateScheduler</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span>
+<code class="sourceCode R"><span class="fu">CustomLearningRateScheduler</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
   <span class="st">"Learning rate scheduler which sets the learning rate according to schedule.
 
   Arguments:
@@ -551,7 +551,7 @@
     <span class="co">## use a debugger to interact with the actual objects at the console!</span>
     <span class="co"># browser()</span>
     
-    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="st">"learning_rate"</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">optimizer</span><span class="op">)</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="st">"learning_rate"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">optimizer</span><span class="op">)</span><span class="op">)</span>
       <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">'Optimizer must have a "learning_rate" attribute.'</span><span class="op">)</span>
     
     <span class="co"># # Get the current learning rate from model's optimizer.</span>
@@ -577,14 +577,14 @@
 <span class="va">lr_schedule</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">epoch</span>, <span class="va">learning_rate</span><span class="op">)</span> <span class="op">{</span>
   <span class="st">"Helper function to retrieve the scheduled learning rate based on epoch."</span>
   <span class="kw">if</span> <span class="op">(</span><span class="va">epoch</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/nth.html">last</a></span><span class="op">(</span><span class="va">LR_SCHEDULE</span><span class="op">$</span><span class="va">start_epoch</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">LR_SCHEDULE</span>, <span class="va">learning_rate</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/which.minmax.html">which.min</a></span><span class="op">(</span><span class="va">epoch</span> <span class="op">&gt;</span> <span class="va">start_epoch</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">LR_SCHEDULE</span>, <span class="va">learning_rate</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.min</a></span><span class="op">(</span><span class="va">epoch</span> <span class="op">&gt;</span> <span class="va">start_epoch</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
   <span class="kw">else</span>
     <span class="va">learning_rate</span>
 <span class="op">}</span>
 
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>,
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>,
   batch_size <span class="op">=</span> <span class="fl">64</span>,
@@ -616,7 +616,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

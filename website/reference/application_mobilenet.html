@@ -243,13 +243,15 @@
     <pre class="usage"><span class='fu'>application_mobilenet</span><span class='op'>(</span>
   input_shape <span class='op'>=</span> <span class='cn'>NULL</span>,
   alpha <span class='op'>=</span> <span class='fl'>1</span>,
-  depth_multiplier <span class='op'>=</span> <span class='fl'>1</span>,
+  depth_multiplier <span class='op'>=</span> <span class='fl'>1L</span>,
   dropout <span class='op'>=</span> <span class='fl'>0.001</span>,
   include_top <span class='op'>=</span> <span class='cn'>TRUE</span>,
   weights <span class='op'>=</span> <span class='st'>"imagenet"</span>,
   input_tensor <span class='op'>=</span> <span class='cn'>NULL</span>,
   pooling <span class='op'>=</span> <span class='cn'>NULL</span>,
-  classes <span class='op'>=</span> <span class='fl'>1000</span>
+  classes <span class='op'>=</span> <span class='fl'>1000L</span>,
+  classifier_activation <span class='op'>=</span> <span class='st'>"softmax"</span>,
+  <span class='va'>...</span>
 <span class='op'>)</span>
 
 <span class='fu'>mobilenet_preprocess_input</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
@@ -320,6 +322,18 @@ specified if <code>include_top</code> is TRUE, and if no <code>weights</code> ar
 specified.</p></td>
     </tr>
     <tr>
+      <th>classifier_activation</th>
+      <td><p>A string or callable. The activation function to
+use on the "top" layer. Ignored unless <code>include_top = TRUE</code>. Set
+<code>classifier_activation = NULL</code> to return the logits of the "top" layer.
+Defaults to <code>'softmax'</code>. When loading pretrained weights,
+<code>classifier_activation</code> can only be <code>NULL</code> or <code>"softmax"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>For backwards and forwards compatibility</p></td>
+    </tr>
+    <tr>
       <th>x</th>
       <td><p>input tensor, 4D</p></td>
     </tr>
@@ -371,7 +385,7 @@ predictions use <code>mobilenet_decode_predictions()</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

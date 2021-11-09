@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="training_visualization_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Training Visualization</h1>
@@ -212,28 +212,28 @@
 <div id="plotting-history" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plotting-history" class="anchor"></a>Plotting History</h2>
-<p>The Keras <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> method returns an R object containing the training history, including the value of metrics at the end of each epoch . You can plot the training metrics by epoch using the <code><a href="https://rdrr.io/pkg/raster/man/plot.html">plot()</a></code> method.</p>
+<p>The Keras <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> method returns an R object containing the training history, including the value of metrics at the end of each epoch . You can plot the training metrics by epoch using the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> method.</p>
 <p>For example, here we compile and fit a model with the “accuracy” metric:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
   optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="op">)</span>,
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">x_train</span>, <span class="va">y_train</span>, 
   epochs <span class="op">=</span> <span class="fl">30</span>, batch_size <span class="op">=</span> <span class="fl">128</span>, 
   validation_split <span class="op">=</span> <span class="fl">0.2</span>
 <span class="op">)</span></code></pre></div>
 <p>We can then plot the training history as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span></code></pre></div>
 <p><img src="images/training_history_ggplot2.png" class="r-plot" width="757" height="489"></p>
 <p>The history will be plotted using <a href="https://ggplot2.tidyverse.org/">ggplot2</a> if available (if not then base graphics will be used), include all specified metrics as well as the loss, and draw a smoothing line if there are 10 or more epochs. You can customize all of this behavior via various options of the <a href="https://keras.rstudio.com/reference/plot.keras_training_history.html">plot method</a>.</p>
-<p>If you want to create a custom visualization you can call the <code><a href="https://rdrr.io/pkg/raster/man/as.data.frame.html">as.data.frame()</a></code> method on the history to obtain a data frame with factors for each metric as well as training vs. validation:</p>
+<p>If you want to create a custom visualization you can call the <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> method on the history to obtain a data frame with factors for each metric as well as training vs. validation:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">history_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">history_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">history_df</span><span class="op">)</span></code></pre></div>
 <pre><code>'data.frame':   120 obs. of  4 variables:
  $ epoch : int  1 2 3 4 5 6 7 8 9 10 ...
@@ -267,7 +267,7 @@ a.appendChild(img);
 <p>You can explicitly control whether metrics are displayed by specifying the <code>view_metrics</code> argument. You can also set a global session default using the <code>keras.view_metrics</code> option:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># don't show metrics during this run</span>
-<span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">x_train</span>, <span class="va">y_train</span>, 
   epochs <span class="op">=</span> <span class="fl">30</span>, batch_size <span class="op">=</span> <span class="fl">128</span>, 
   view_metrics <span class="op">=</span> <span class="cn">FALSE</span>,
@@ -275,7 +275,7 @@ a.appendChild(img);
 <span class="op">)</span>
 
 <span class="co"># set global default to never show metrics</span>
-<span class="fu"><a href="https://docs.ropensci.org/magick/reference/options.html">options</a></span><span class="op">(</span>keras.view_metrics <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>keras.view_metrics <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>Note that when <code>view_metrics</code> is <code>TRUE</code> metrics will be displayed even when not running within RStudio (in that case metrics will be displayed in an external web browser).</p>
 </div>
 <div id="tensorboard" class="section level2">
@@ -289,7 +289,7 @@ a.appendChild(img);
 <a href="#recording-data" class="anchor"></a>Recording Data</h3>
 <p>To record data that can be visualized with TensorBoard, you add a TensorBoard callback to the <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> function. For example:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">x_train</span>, <span class="va">y_train</span>,
   batch_size <span class="op">=</span> <span class="va">batch_size</span>,
   epochs <span class="op">=</span> <span class="va">epochs</span>,
@@ -312,7 +312,7 @@ a.appendChild(img);
 <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tensorboard.html">tensorboard</a></span><span class="op">(</span><span class="st">"logs/run_a"</span><span class="op">)</span>
 
 <span class="co"># fit the model with the TensorBoard callback</span>
-<span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">x_train</span>, <span class="va">y_train</span>,
   batch_size <span class="op">=</span> <span class="va">batch_size</span>,
   epochs <span class="op">=</span> <span class="va">epochs</span>,
@@ -345,7 +345,7 @@ a.appendChild(img);
 <a href="#metrics" class="anchor"></a>Metrics</h4>
 <p>In the above examples TensorBoard metrics are logged for loss and accuracy. The TensorBoard callback will log data for any metrics which are specified in the <code>metrics</code> parameter of the <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> function. For example, in the following code:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">'mean_squared_error'</span>,
   optimizer <span class="op">=</span> <span class="st">'sgd'</span>,
   metrics<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'mae'</span>, <span class="st">'acc'</span><span class="op">)</span>
@@ -417,7 +417,7 @@ a.appendChild(img);
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

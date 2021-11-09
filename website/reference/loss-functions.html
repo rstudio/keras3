@@ -468,11 +468,11 @@ loss = d * |x| - 0.5 * d^2        if |x| &gt; d
 
 
 <p>Logarithm of the hyperbolic cosine of the prediction error.</p>
-<p><code><a href='https://rdrr.io/r/base/Log.html'>log(cosh(x))</a></code> is approximately equal to <code>(x ** 2) / 2</code> for small <code>x</code> and
+<p><code>log(cosh(x))</code> is approximately equal to <code>(x ** 2) / 2</code> for small <code>x</code> and
 to <code>abs(x) - log(2)</code> for large <code>x</code>. This means that 'logcosh' works mostly
 like the mean squared error, but will not be so strongly affected by the
 occasional wildly incorrect prediction. However, it may return NaNs if the
-intermediate value <code><a href='https://rdrr.io/r/base/Hyperbolic.html'>cosh(y_pred - y_true)</a></code> is too large to be represented
+intermediate value <code>cosh(y_pred - y_true)</code> is too large to be represented
 in the chosen precision.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -490,7 +490,7 @@ in the chosen precision.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="imdb_cnn_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>imdb_cnn</h1>
@@ -243,9 +243,9 @@
 <span class="co"># This will convert the dataset into a matrix: each line is a review</span>
 <span class="co"># and each column a word on the sequence. </span>
 <span class="co"># Pad the sequences with 0 to the left.</span>
-<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">imdb</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span> <span class="op">%&gt;%</span>
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">imdb</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span>maxlen <span class="op">=</span> <span class="va">maxlen</span><span class="op">)</span>
-<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">imdb</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span> <span class="op">%&gt;%</span>
+<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">imdb</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span>maxlen <span class="op">=</span> <span class="va">maxlen</span><span class="op">)</span>
 
 <span class="co"># Defining Model ------------------------------------------------------</span>
@@ -253,35 +253,35 @@
 <span class="co">#Initialize model</span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span> 
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="co"># Start off with an efficient embedding layer which maps</span>
   <span class="co"># the vocab indices into embedding_dims dimensions</span>
-  <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span><span class="va">max_features</span>, <span class="va">embedding_dims</span>, input_length <span class="op">=</span> <span class="va">maxlen</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.2</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span><span class="va">max_features</span>, <span class="va">embedding_dims</span>, input_length <span class="op">=</span> <span class="va">maxlen</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.2</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
 
   <span class="co"># Add a Convolution1D, which will learn filters</span>
     <span class="co"># Word group filters of size filter_length:</span>
   <span class="fu"><a href="../../reference/layer_conv_1d.html">layer_conv_1d</a></span><span class="op">(</span>
     <span class="va">filters</span>, <span class="va">kernel_size</span>, 
     padding <span class="op">=</span> <span class="st">"valid"</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, strides <span class="op">=</span> <span class="fl">1</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="co"># Apply max pooling:</span>
-  <span class="fu"><a href="../../reference/layer_global_max_pooling_1d.html">layer_global_max_pooling_1d</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_global_max_pooling_1d.html">layer_global_max_pooling_1d</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
 
   <span class="co"># Add a vanilla hidden layer:</span>
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="va">hidden_dims</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="va">hidden_dims</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
 
   <span class="co"># Apply 20% layer dropout</span>
-  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.2</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.2</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
 
   <span class="co"># Project onto a single unit output layer, and squash it with a sigmoid</span>
 
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"sigmoid"</span><span class="op">)</span>
 
 <span class="co"># Compile model</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,
   optimizer <span class="op">=</span> <span class="st">"adam"</span>,
   metrics <span class="op">=</span> <span class="st">"accuracy"</span>
@@ -289,7 +289,7 @@
 
 <span class="co"># Training ----------------------------------------------------------------</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
     <span class="va">x_train</span>, <span class="va">imdb</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>,
     batch_size <span class="op">=</span> <span class="va">batch_size</span>,
@@ -307,7 +307,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

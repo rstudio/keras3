@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="stateful_lstm_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>stateful_lstm</h1>
@@ -233,40 +233,40 @@
 
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Generating Data...\n'</span><span class="op">)</span>
 <span class="va">cos</span> <span class="op">&lt;-</span> <span class="fu">gen_cosine_amp</span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Input shape:'</span>, <span class="fu"><a href="https://rdrr.io/pkg/raster/man/dimensions.html">dim</a></span><span class="op">(</span><span class="va">cos</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Input shape:'</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">cos</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span>
 
 <span class="va">expected_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">cos</span><span class="op">)</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">cos</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">cos</span><span class="op">)</span> <span class="op">-</span> <span class="va">lahead</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">expected_output</span><span class="op">[[</span><span class="va">i</span>, <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cos</span><span class="op">[</span><span class="op">(</span><span class="va">i</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="va">i</span> <span class="op">+</span> <span class="va">lahead</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="op">}</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Output shape:'</span>, <span class="fu"><a href="https://rdrr.io/pkg/raster/man/dimensions.html">dim</a></span><span class="op">(</span><span class="va">expected_output</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Output shape:'</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">expected_output</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Creating model:\n'</span><span class="op">)</span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">%&gt;%</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">50</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">tsteps</span>, <span class="fl">1</span><span class="op">)</span>, batch_size <span class="op">=</span> <span class="va">batch_size</span>,
-             return_sequences <span class="op">=</span> <span class="cn">TRUE</span>, stateful <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">50</span>, return_sequences <span class="op">=</span> <span class="cn">FALSE</span>, stateful <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+             return_sequences <span class="op">=</span> <span class="cn">TRUE</span>, stateful <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">50</span>, return_sequences <span class="op">=</span> <span class="cn">FALSE</span>, stateful <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">'mse'</span>, optimizer <span class="op">=</span> <span class="st">'rmsprop'</span><span class="op">)</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">'mse'</span>, optimizer <span class="op">=</span> <span class="st">'rmsprop'</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Training\n'</span><span class="op">)</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">epochs</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">cos</span>, <span class="va">expected_output</span>, batch_size <span class="op">=</span> <span class="va">batch_size</span>,
+  <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">cos</span>, <span class="va">expected_output</span>, batch_size <span class="op">=</span> <span class="va">batch_size</span>,
                 epochs <span class="op">=</span> <span class="fl">1</span>, verbose <span class="op">=</span> <span class="fl">1</span>, shuffle <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
             
-  <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/reset_states.html">reset_states</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/reset_states.html">reset_states</a></span><span class="op">(</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Predicting\n'</span><span class="op">)</span>
-<span class="va">predicted_output</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">cos</span>, batch_size <span class="op">=</span> <span class="va">batch_size</span><span class="op">)</span>
+<span class="va">predicted_output</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">cos</span>, batch_size <span class="op">=</span> <span class="va">batch_size</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Plotting Results\n'</span><span class="op">)</span>
 <span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">expected_output</span>, xlab <span class="op">=</span> <span class="st">''</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">expected_output</span>, xlab <span class="op">=</span> <span class="st">''</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span><span class="st">"Expected"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">predicted_output</span>, xlab <span class="op">=</span> <span class="st">''</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">predicted_output</span>, xlab <span class="op">=</span> <span class="st">''</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span><span class="st">"Predicted"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></code></pre></div>
   </div>
@@ -280,7 +280,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

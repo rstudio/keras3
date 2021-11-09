@@ -296,7 +296,7 @@ smoothed, meaning the confidence on label values are relaxed. e.g.
 
     <p>If <code>y_true</code> and <code>y_pred</code> are missing, a (subclassed) <code>Metric</code>
 instance is returned. The <code>Metric</code> object can be passed directly to
-<code><a href='https://generics.r-lib.org/reference/compile.html'>compile(metrics = )</a></code> or used as a standalone object. See <code><a href='Metric.html'>?Metric</a></code> for
+<code>compile(metrics = )</code> or used as a standalone object. See <code><a href='Metric.html'>?Metric</a></code> for
 example usage.</p>
 <p>Alternatively, if called with <code>y_true</code> and <code>y_pred</code> arguments, then the
 computed case-wise values for the mini-batch are returned directly.</p>
@@ -304,7 +304,7 @@ computed case-wise values for the mini-batch are returned directly.</p>
 
     <p>This is the crossentropy metric class to be used when there are multiple
 label classes (2 or more). Here we assume that labels are given as a <code>one_hot</code>
-representation. eg., When labels values are <code><a href='https://rdrr.io/r/base/c.html'>c(2, 0, 1)</a></code>:</p><pre> y_true = rbind(c(0, 0, 1),
+representation. eg., When labels values are <code>c(2, 0, 1)</code>:</p><pre> y_true = rbind(c(0, 0, 1),
                 c(1, 0, 0),
                 c(0, 1, 0))`
 </pre>
@@ -362,7 +362,7 @@ representation. eg., When labels values are <code><a href='https://rdrr.io/r/bas
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

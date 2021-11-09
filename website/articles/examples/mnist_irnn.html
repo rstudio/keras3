@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="mnist_irnn_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>mnist_irnn</h1>
@@ -228,17 +228,17 @@
 <span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>
 <span class="va">y_test</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span>
 
-<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="va">img_rows</span> <span class="op">*</span> <span class="va">img_cols</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">nrow</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="va">img_rows</span> <span class="op">*</span> <span class="va">img_cols</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="va">img_rows</span> <span class="op">*</span> <span class="va">img_cols</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="va">img_rows</span> <span class="op">*</span> <span class="va">img_cols</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="va">input_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">img_rows</span>, <span class="va">img_cols</span>, <span class="fl">1</span><span class="op">)</span>
 
 <span class="co"># Transform RGB values into [0,1] range</span>
 <span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">x_train</span> <span class="op">/</span> <span class="fl">255</span>
 <span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">x_test</span> <span class="op">/</span> <span class="fl">255</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'x_train_shape:'</span>, <span class="fu"><a href="https://rdrr.io/pkg/raster/man/dimensions.html">dim</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="st">'train samples\n'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">nrow</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="st">'test samples\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'x_train_shape:'</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="st">'train samples\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="st">'test samples\n'</span><span class="op">)</span>
 
 <span class="co"># Convert class vectors to binary class matrices</span>
 <span class="va">y_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span><span class="va">y_train</span>, <span class="va">num_classes</span><span class="op">)</span>
@@ -247,16 +247,16 @@
 <span class="co"># Define Model ------------------------------------------------------------------</span>
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> 
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../../reference/layer_simple_rnn.html">layer_simple_rnn</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">hidden_units</span>,
                    kernel_initializer <span class="op">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span><span class="op">(</span>stddev <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>,
                    recurrent_initializer <span class="op">=</span> <span class="fu"><a href="../../reference/initializer_identity.html">initializer_identity</a></span><span class="op">(</span>gain <span class="op">=</span> <span class="fl">1.0</span><span class="op">)</span>,
                    activation <span class="op">=</span> <span class="st">'relu'</span>,
-                   input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/dimensions.html">dim</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">num_classes</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+                   input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">num_classes</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span>activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
   optimizer <span class="op">=</span> <span class="fu"><a href="../../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="va">learning_rate</span><span class="op">)</span>,
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
@@ -265,7 +265,7 @@
 <span class="co"># Training &amp; Evaluation ---------------------------------------------------------</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Evaluate IRNN...\n"</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">x_train</span>, <span class="va">y_train</span>,
   batch_size <span class="op">=</span> <span class="va">batch_size</span>,
   epochs <span class="op">=</span> <span class="va">epochs</span>,
@@ -273,7 +273,7 @@
   validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span>
 <span class="op">)</span>
   
-<span class="va">scores</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
+<span class="va">scores</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'IRNN test score:'</span>, <span class="va">scores</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="st">'\n'</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'IRNN test accuracy:'</span>, <span class="va">scores</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="st">'\n'</span><span class="op">)</span></code></pre></div>
   </div>
@@ -287,7 +287,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

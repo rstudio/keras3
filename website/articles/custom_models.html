@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="custom_models_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Writing Custom Keras Models</h1>
@@ -253,7 +253,7 @@
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">keras_model_simple_mlp</span><span class="op">(</span>num_classes <span class="op">=</span> <span class="fl">10</span>, use_dp <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># compile graph</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
   optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="op">)</span>,
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
@@ -267,7 +267,7 @@
 <span class="va">one_hot_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span><span class="va">labels</span>, num_classes <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="co"># Train the model</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">one_hot_labels</span>, epochs<span class="op">=</span><span class="fl">10</span>, batch_size<span class="op">=</span><span class="fl">32</span><span class="op">)</span></code></pre></div>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">one_hot_labels</span>, epochs<span class="op">=</span><span class="fl">10</span>, batch_size<span class="op">=</span><span class="fl">32</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 
@@ -282,7 +282,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

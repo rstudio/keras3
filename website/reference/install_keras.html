@@ -53,9 +53,9 @@
 thin wrapper around tensorflow::install_tensorflow(), with the only
 difference being that this includes by default additional extra packages that
 keras expects, and the default version of tensorflow installed by
-install_keras()  may at times be different from the default installed
+install_keras() may at times be different from the default installed
 install_tensorflow(). The default version of tensorflow installed by
-install_keras() is &quot;2.6&quot;." />
+install_keras() is &quot;2.7&quot;." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -247,9 +247,9 @@ install_keras() is &quot;2.6&quot;." />
 thin wrapper around <code><a href='https://rdrr.io/pkg/tensorflow/man/install_tensorflow.html'>tensorflow::install_tensorflow()</a></code>, with the only
 difference being that this includes by default additional extra packages that
 keras expects, and the default version of tensorflow installed by
-<code>install_keras()</code>  may at times be different from the default installed
+<code>install_keras()</code> may at times be different from the default installed
 <code>install_tensorflow()</code>. The default version of tensorflow installed by
-<code>install_keras()</code> is "2.6".</p>
+<code>install_keras()</code> is "2.7".</p>
     </div>
 
     <pre class="usage"><span class='fu'>install_keras</span><span class='op'>(</span>
@@ -258,7 +258,8 @@ keras expects, and the default version of tensorflow installed by
   version <span class='op'>=</span> <span class='st'>"default"</span>,
   tensorflow <span class='op'>=</span> <span class='va'>version</span>,
   extra_packages <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>...</span>
+  <span class='va'>...</span>,
+  pip_ignore_installed <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -280,7 +281,7 @@ available on Windows.</p></td>
     <tr>
       <th>version</th>
       <td><p>TensorFlow version to install. Valid values include:</p><ul>
-<li><p><code>"default"</code> installs  2.6</p></li>
+<li><p><code>"default"</code> installs  2.7</p></li>
 <li><p><code>"release"</code> installs the latest release version of tensorflow (which may
 be incompatible with the current version of the R package)</p></li>
 <li><p>A version specification like <code>"2.4"</code> or <code>"2.4.0"</code>. Note that if the patch
@@ -306,6 +307,13 @@ TensorFlow.</p></td>
       <td><p>other arguments passed to <code><a href='https://rdrr.io/pkg/reticulate/man/conda-tools.html'>reticulate::conda_install()</a></code> or
 <code><a href='https://rdrr.io/pkg/reticulate/man/virtualenv-tools.html'>reticulate::virtualenv_install()</a></code>, depending on the <code>method</code> used.</p></td>
     </tr>
+    <tr>
+      <th>pip_ignore_installed</th>
+      <td><p>Whether pip should ignore installed python
+packages and reinstall all already installed python packages. This defaults
+to <code>TRUE</code>, to ensure that TensorFlow dependencies like NumPy are compatible
+with the prebuilt TensorFlow binaries.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -314,44 +322,6 @@ TensorFlow.</p></td>
 tensorflow-hub, scipy, requests, pyyaml, Pillow, h5py, pandas, with their
 versions potentially constrained for compatibility with the
 requested tensorflow version.</p>
-    <h2 class="hasAnchor" id="custom-installation"><a class="anchor" href="#custom-installation"></a>Custom Installation</h2>
-
-    
-
-<p><code>install_tensorflow()</code> or
-<code>keras::install_keras()</code> isn't required to use tensorflow with the package.
-If you manually configure a python environment with the required
-dependencies, you can tell R to use it by pointing reticulate at it,
-commonly by setting an environment variable:</p>
-<p><code><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv("RETICULATE_PYTHON" = "~/path/to/python-env/bin/python")</a></code></p>
-    <h2 class="hasAnchor" id="apple-silicon"><a class="anchor" href="#apple-silicon"></a>Apple Silicon</h2>
-
-    
-
-<p>Tensorflow on Apple Silicon is not officially
-supported by the tensorflow maintainers. It is known that there can be
-issues running the official Tensorflow package under Rosetta as well.
-Fortunately, for the time being Apple has published a custom version of
-Tensorflow compatible with M1 macs. Installation instructions can be found
-at: <a href='https://developer.apple.com/metal/tensorflow-plugin/'>https://developer.apple.com/metal/tensorflow-plugin/</a>. Please note
-that this is an experimental build of both python and tensorflow. After
-following the instructions provided by Apple, you can advise reticulate to
-use that python installation by placing the following in your <code>.Renviron</code>
-file:</p>
-<p><code>RETICULATE_PYTHON = "~/miniforge3/bin/python"</code></p>
-    <h2 class="hasAnchor" id="additional-packages"><a class="anchor" href="#additional-packages"></a>Additional Packages</h2>
-
-    
-
-
-
-<p>If you wish to add additional PyPI packages to your Keras / TensorFlow
-environment you can either specify the packages in the <code>extra_packages</code>
-argument of <code>install_tensorflow()</code> or <code>install_keras()</code>, or alternatively
-install them into an existing environment using the
-<code><a href='https://rdrr.io/pkg/reticulate/man/py_install.html'>reticulate::py_install()</a></code> function. Note that <code>install_keras()</code> includes a
-set of additional python packages by default, see <code>?keras::install_keras</code>
-for details.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/tensorflow/man/install_tensorflow.html'>tensorflow::install_tensorflow()</a></code></p></div>
@@ -367,7 +337,7 @@ for details.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

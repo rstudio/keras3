@@ -326,7 +326,7 @@ is not supported when using
 <code>tf.distribute.experimental.ParameterServerStrategy</code>. If the model's logic
 uses tensors in R control flow expressions like <code>if</code> and <code>for</code>, the model
 is still traceable with <code>tf.function</code>, but you will have to enter a
-<code><a href='https://t-kalinowski.github.io/tfautograph/reference/autograph.html'>tfautograph::autograph({})</a></code> directly.</p></td>
+<code>tfautograph::autograph({})</code> directly.</p></td>
     </tr>
     <tr>
       <th>steps_per_execution</th>
@@ -393,7 +393,7 @@ weights (1D). If the model has multiple outputs, you can use a different
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

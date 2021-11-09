@@ -923,6 +923,12 @@
           <p><code><a href="layer_batch_normalization.html">layer_batch_normalization()</a></code> </p>
         </td>
         <td><p>Batch normalization layer (Ioffe and Szegedy, 2014).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_layer_normalization.html">layer_layer_normalization()</a></code> </p>
+        </td>
+        <td><p>Layer normalization layer (Ba et al., 2016).</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -1194,6 +1200,12 @@
           <p><code><a href="layer_multi_head_attention.html">layer_multi_head_attention()</a></code> </p>
         </td>
         <td><p>MultiHeadAttention layer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_additive_attention.html">layer_additive_attention()</a></code> </p>
+        </td>
+        <td><p>Additive attention layer, a.k.a. Bahdanau-style attention</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -1212,7 +1224,7 @@
         <td>
           <p><code><a href="time_distributed.html">time_distributed()</a></code> </p>
         </td>
-        <td><p>Apply a layer to every temporal slice of an input.</p></td>
+        <td><p>This layer wrapper allows to apply a layer to every temporal slice of an input</p></td>
       </tr><tr>
         
         <td>
@@ -1394,6 +1406,12 @@
       <tr>
         
         <td>
+          <p><code><a href="dataset_boston_housing.html">dataset_boston_housing()</a></code> </p>
+        </td>
+        <td><p>Boston housing price regression dataset</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="dataset_cifar10.html">dataset_cifar10()</a></code> </p>
         </td>
         <td><p>CIFAR10 small image classification</p></td>
@@ -1406,15 +1424,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="dataset_imdb.html">dataset_imdb()</a></code> <code><a href="dataset_imdb.html">dataset_imdb_word_index()</a></code> </p>
+          <p><code><a href="dataset_fashion_mnist.html">dataset_fashion_mnist()</a></code> </p>
         </td>
-        <td><p>IMDB Movie reviews sentiment classification</p></td>
+        <td><p>Fashion-MNIST database of fashion articles</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="dataset_reuters.html">dataset_reuters()</a></code> <code><a href="dataset_reuters.html">dataset_reuters_word_index()</a></code> </p>
+          <p><code><a href="dataset_imdb.html">dataset_imdb()</a></code> <code><a href="dataset_imdb.html">dataset_imdb_word_index()</a></code> </p>
         </td>
-        <td><p>Reuters newswire topics classification</p></td>
+        <td><p>IMDB Movie reviews sentiment classification</p></td>
       </tr><tr>
         
         <td>
@@ -1424,15 +1442,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="dataset_fashion_mnist.html">dataset_fashion_mnist()</a></code> </p>
+          <p><code><a href="dataset_reuters.html">dataset_reuters()</a></code> <code><a href="dataset_reuters.html">dataset_reuters_word_index()</a></code> </p>
         </td>
-        <td><p>Fashion-MNIST database of fashion articles</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dataset_boston_housing.html">dataset_boston_housing()</a></code> </p>
-        </td>
-        <td><p>Boston housing price regression dataset</p></td>
+        <td><p>Reuters newswire topics classification</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -1449,15 +1461,15 @@
       <tr>
         
         <td>
-          <p><code><a href="application_xception.html">application_xception()</a></code> <code><a href="application_xception.html">xception_preprocess_input()</a></code> </p>
+          <p><code><a href="application_densenet.html">application_densenet()</a></code> <code><a href="application_densenet.html">application_densenet121()</a></code> <code><a href="application_densenet.html">application_densenet169()</a></code> <code><a href="application_densenet.html">application_densenet201()</a></code> <code><a href="application_densenet.html">densenet_preprocess_input()</a></code> </p>
         </td>
-        <td><p>Xception V1 model for Keras.</p></td>
+        <td><p>Instantiates the DenseNet architecture.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="application_inception_v3.html">application_inception_v3()</a></code> <code><a href="application_inception_v3.html">inception_v3_preprocess_input()</a></code> </p>
+          <p><code><a href="application_efficientnet.html">application_efficientnet_b0()</a></code> <code><a href="application_efficientnet.html">application_efficientnet_b1()</a></code> <code><a href="application_efficientnet.html">application_efficientnet_b2()</a></code> <code><a href="application_efficientnet.html">application_efficientnet_b3()</a></code> <code><a href="application_efficientnet.html">application_efficientnet_b4()</a></code> <code><a href="application_efficientnet.html">application_efficientnet_b5()</a></code> <code><a href="application_efficientnet.html">application_efficientnet_b6()</a></code> <code><a href="application_efficientnet.html">application_efficientnet_b7()</a></code> </p>
         </td>
-        <td><p>Inception V3 model, with weights pre-trained on ImageNet.</p></td>
+        <td><p>Instantiates the EfficientNetB0 architecture</p></td>
       </tr><tr>
         
         <td>
@@ -1467,15 +1479,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="application_vgg.html">application_vgg16()</a></code> <code><a href="application_vgg.html">application_vgg19()</a></code> </p>
+          <p><code><a href="application_inception_v3.html">application_inception_v3()</a></code> <code><a href="application_inception_v3.html">inception_v3_preprocess_input()</a></code> </p>
         </td>
-        <td><p>VGG16 and VGG19 models for Keras.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="application_resnet50.html">application_resnet50()</a></code> </p>
-        </td>
-        <td><p>ResNet50 model for Keras.</p></td>
+        <td><p>Inception V3 model, with weights pre-trained on ImageNet.</p></td>
       </tr><tr>
         
         <td>
@@ -1491,15 +1497,33 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="application_densenet.html">application_densenet()</a></code> <code><a href="application_densenet.html">application_densenet121()</a></code> <code><a href="application_densenet.html">application_densenet169()</a></code> <code><a href="application_densenet.html">application_densenet201()</a></code> <code><a href="application_densenet.html">densenet_preprocess_input()</a></code> </p>
+          <p><code><a href="application_mobilenet_v3.html">application_mobilenet_v3_large()</a></code> <code><a href="application_mobilenet_v3.html">application_mobilenet_v3_small()</a></code> </p>
         </td>
-        <td><p>Instantiates the DenseNet architecture.</p></td>
+        <td><p>Instantiates the MobileNetV3Large architecture</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="application_nasnet.html">application_nasnet()</a></code> <code><a href="application_nasnet.html">application_nasnetlarge()</a></code> <code><a href="application_nasnet.html">application_nasnetmobile()</a></code> <code><a href="application_nasnet.html">nasnet_preprocess_input()</a></code> </p>
         </td>
         <td><p>Instantiates a NASNet model.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="application_resnet.html">application_resnet50()</a></code> <code><a href="application_resnet.html">application_resnet101()</a></code> <code><a href="application_resnet.html">application_resnet152()</a></code> <code><a href="application_resnet.html">application_resnet50_v2()</a></code> <code><a href="application_resnet.html">application_resnet101_v2()</a></code> <code><a href="application_resnet.html">application_resnet152_v2()</a></code> <code><a href="application_resnet.html">resnet_preprocess_input()</a></code> <code><a href="application_resnet.html">resnet_v2_preprocess_input()</a></code> </p>
+        </td>
+        <td><p>Instantiates the ResNet architecture</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="application_vgg.html">application_vgg16()</a></code> <code><a href="application_vgg.html">application_vgg19()</a></code> </p>
+        </td>
+        <td><p>VGG16 and VGG19 models for Keras.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="application_xception.html">application_xception()</a></code> <code><a href="application_xception.html">xception_preprocess_input()</a></code> </p>
+        </td>
+        <td><p>Instantiates the Xception architecture</p></td>
       </tr><tr>
         
         <td>
@@ -1543,6 +1567,12 @@
           <p><code><a href="make_sampling_table.html">make_sampling_table()</a></code> </p>
         </td>
         <td><p>Generates a word rank-based probabilistic sampling table.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="timeseries_dataset_from_array.html">timeseries_dataset_from_array()</a></code> </p>
+        </td>
+        <td><p>Creates a dataset of sliding windows over a timeseries provided as array</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -1557,6 +1587,12 @@
       
       
       <tr>
+        
+        <td>
+          <p><code><a href="text_dataset_from_directory.html">text_dataset_from_directory()</a></code> </p>
+        </td>
+        <td><p>Generate a <code>tf.data.Dataset</code> from text files in a directory</p></td>
+      </tr><tr>
         
         <td>
           <p><code><a href="text_tokenizer.html">text_tokenizer()</a></code> </p>
@@ -2097,6 +2133,12 @@ augmented/normalized data.</p></td>
       
       
       <tr>
+        
+        <td>
+          <p><code><a href="Metric.html">Metric</a></code> </p>
+        </td>
+        <td><p>Metric</p></td>
+      </tr><tr>
         
         <td>
           <p><code><a href="metric_accuracy.html">metric_accuracy()</a></code> </p>
@@ -3343,6 +3385,12 @@ augmented/normalized data.</p></td>
           <p><code><a href="layer_cudnn_lstm.html">layer_cudnn_lstm()</a></code> </p>
         </td>
         <td><p>Fast LSTM implementation backed by <a href='https://developer.nvidia.com/cudnn'>CuDNN</a>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layer_dense_features.html">layer_dense_features()</a></code> </p>
+        </td>
+        <td><p>Constructs a DenseFeatures.</p></td>
       </tr>
     </tbody>
     </table>
@@ -3358,7 +3406,7 @@ augmented/normalized data.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="python_subclasses_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Python Subclasses</h1>
@@ -259,7 +259,7 @@
 </li>
 <li><p>When subclassing Keras base classes, it is generally your responsibility to call <code>super$initialize()</code> if you are masking a superclass initializer by providing your own <code>initialize</code> method.</p></li>
 <li><p>Passing <code>convert=FALSE</code> to <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">r_to_py()</a></code> will mean that all R methods will receive Python objects as arguments, and are expected to return Python objects. This allows for some features not available with <code>convert=TRUE</code>, namely, modifying some Python objects, like dictionaries or lists, in-place.</p></li>
-<li><p>Active bindings (methods supplied to <code><a href="https://r6.r-lib.org/reference/R6Class.html">R6Class(active=...)</a></code>) are converted to Python <code>@property</code>-decorated methods.</p></li>
+<li><p>Active bindings (methods supplied to <code>R6Class(active=...)</code>) are converted to Python <code>@property</code>-decorated methods.</p></li>
 <li><p>R6 classes with private methods or attributes are not supported.</p></li>
 <li>
 <p>The argument supplied to <code>inherit</code> can be:</p>
@@ -277,18 +277,18 @@
 <div id="a-custom-constraint-py_class" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-custom-constraint-py_class" class="anchor"></a>A custom constraint (<code>%py_class%</code>)</h3>
-<p>As an alternative to <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">r_to_py(R6Class(...))</a></code>, we also provide <code><a href="../../reference/%py_class%.html">%py_class%</a></code>, a more concise alternative syntax for achieving the same outcome. <code><a href="../../reference/%py_class%.html">%py_class%</a></code> is heavily inspired by the Python <code>class</code> statement syntax, and is especially convenient when translating Python code to R. Translating the above example, you could write the same using <code><a href="../../reference/%py_class%.html">%py_class%</a></code>:</p>
+<p>As an alternative to <code>r_to_py(R6Class(...))</code>, we also provide <code>%py_class%</code>, a more concise alternative syntax for achieving the same outcome. <code>%py_class%</code> is heavily inspired by the Python <code>class</code> statement syntax, and is especially convenient when translating Python code to R. Translating the above example, you could write the same using <code>%py_class%</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">NonNegative</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">constraints</span><span class="op">$</span><span class="va">Constraint</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span>
+<code class="sourceCode R"><span class="fu">NonNegative</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">constraints</span><span class="op">$</span><span class="va">Constraint</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
   <span class="st">"__call__"</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">w</span> <span class="op">*</span> <span class="fu"><a href="../../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">w</span> <span class="op">&gt;=</span> <span class="fl">0</span>, <span class="fu"><a href="../../reference/k_floatx.html">k_floatx</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">}</span></code></pre></div>
 <p>Notice, this is very similar to the equivalent <a href="https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/constraints/Constraint">Python code</a>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NonNegative(tf.keras.constraints.Constraint):</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, w):</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> w <span class="op">*</span> tf.cast(tf.math.greater_equal(w, <span class="fl">0.</span>), w.dtype)</span></code></pre></div>
-<p>Some (potentially surprising) notes about <code><a href="../../reference/%py_class%.html">%py_class%</a></code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">class</span> NonNegative(tf.keras.constraints.Constraint):</a>
+<a class="sourceLine" id="cb6-2" title="2">    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, w):</a>
+<a class="sourceLine" id="cb6-3" title="3">        <span class="cf">return</span> w <span class="op">*</span> tf.cast(tf.math.greater_equal(w, <span class="fl">0.</span>), w.dtype)</a></code></pre></div>
+<p>Some (potentially surprising) notes about <code>%py_class%</code>:</p>
 <ul>
 <li><p>Just like the Python <code>class</code> statement, it assigns the constructed class in the current scope! (There is no need to write <code>NonNegative &lt;- ...</code>).</p></li>
 <li>
@@ -301,17 +301,17 @@
 </ul>
 </li>
 <li><p>The right hand side is evaluated in a new environment to form the namespace for the class methods.</p></li>
-<li><p><code><a href="../../reference/%py_class%.html">%py_class%</a></code> objects can be safely defined at the top level of an R package. (see details about <code>delay_load</code> below)</p></li>
+<li><p><code>%py_class%</code> objects can be safely defined at the top level of an R package. (see details about <code>delay_load</code> below)</p></li>
 <li><p>Two keywords are treated specially: <code>convert</code> and <code>delay_load</code>.</p></li>
 <li><p>If you want to call <code>r_to_py</code> with <code>convert=FALSE</code>, pass it as a keyword:</p></li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">NonNegative</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">constraints</span><span class="op">$</span><span class="va">Constraint</span>, convert<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span> <span class="va">...</span> <span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">NonNegative</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">constraints</span><span class="op">$</span><span class="va">Constraint</span>, convert<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span> <span class="va">...</span> <span class="op">}</span></code></pre></div>
 <ul>
-<li><p>You can delay creating the python type object until this first time a class instance is created by passing <code>delay_load=TRUE</code>. The default value is <code>FALSE</code> for most contexts, but <code>TRUE</code> if you are in an R package. (The actual test performed is <code><a href="https://rdrr.io/r/base/identical.html">identical(topenv(), globalenv())</a></code>). If a <code><a href="../../reference/%py_class%.html">%py_class%</a></code> type object is delayed, it will display <code>"&lt;&lt;R6type&gt;.ClassName&gt; (delayed)"</code> when printed.</p></li>
+<li><p>You can delay creating the python type object until this first time a class instance is created by passing <code>delay_load=TRUE</code>. The default value is <code>FALSE</code> for most contexts, but <code>TRUE</code> if you are in an R package. (The actual test performed is <code>identical(topenv(), globalenv())</code>). If a <code>%py_class%</code> type object is delayed, it will display <code>"&lt;&lt;R6type&gt;.ClassName&gt; (delayed)"</code> when printed.</p></li>
 <li><p>An additional convenience is that if the first expression of a function body or the class body is a literal character string, it is automatically taken as the <code>__doc__</code> attribute of the class or method. The doc string will then be visible to both python and R tools e.g. <code><a href="https://rdrr.io/pkg/reticulate/man/py_help.html">reticulate::py_help()</a></code>. See <code><a href="../../reference/%py_class%.html">?py_class</a></code> for an example.</p></li>
 </ul>
-<p>In all other regards, <code><a href="../../reference/%py_class%.html">%py_class%</a></code> is equivalent to <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">r_to_py(R6Class())</a></code> (indeed, under the hood, they do the same thing).</p>
+<p>In all other regards, <code>%py_class%</code> is equivalent to <code>r_to_py(R6Class())</code> (indeed, under the hood, they do the same thing).</p>
 </div>
 <div id="a-custom-layer-r6" class="section level3">
 <h3 class="hasAnchor">
@@ -350,9 +350,9 @@
 <div id="a-custom-layer-py_class" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-custom-layer-py_class" class="anchor"></a>A custom layer (<code>%py_class%</code>)</h3>
-<p>or using <code><a href="../../reference/%py_class%.html">%py_class%</a></code>:</p>
+<p>or using <code>%py_class%</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">CustomLayer</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span>
+<code class="sourceCode R"><span class="fu">CustomLayer</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
 
   <span class="va">initialize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">output_dim</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span> <span class="op">&lt;-</span> <span class="va">output_dim</span>
@@ -390,7 +390,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

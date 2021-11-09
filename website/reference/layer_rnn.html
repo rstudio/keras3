@@ -267,7 +267,7 @@ returned.</p></td>
       <th>cell</th>
       <td><p>A RNN cell instance or a list of RNN cell instances.
 A RNN cell is a class that has:</p><ul>
-<li><p>A <code><a href='https://rdrr.io/r/base/call.html'>call(input_at_t, states_at_t)</a></code> method, returning
+<li><p>A <code>call(input_at_t, states_at_t)</code> method, returning
 <code>(output_at_t, states_at_t_plus_1)</code>. The call method of the
 cell can also take the optional argument <code>constants</code>, see
 section "Note on passing external constants" below.</p></li>
@@ -430,9 +430,9 @@ pass <code>batch_input_shape = list(...)</code> to the first layer in your model
 For functional models with 1 or more Input layers, pass
 <code>batch_shape = list(...)</code> to all the first layers in your model.
 This is the expected shape of your inputs <em>including the batch size</em>.
-It should be a list of integers, e.g. <code><a href='https://rdrr.io/r/base/list.html'>list(32, 10, 100)</a></code>.
+It should be a list of integers, e.g. <code>list(32, 10, 100)</code>.
 For dimensions which can vary (are not known ahead of time),
-use <code>NULL</code> in place of an integer, e.g. <code><a href='https://rdrr.io/r/base/list.html'>list(32, NULL, NULL)</a></code>.</p></li>
+use <code>NULL</code> in place of an integer, e.g. <code>list(32, NULL, NULL)</code>.</p></li>
 <li><p>Specify <code>shuffle = FALSE</code> when calling <code><a href='https://generics.r-lib.org/reference/fit.html'>fit()</a></code>.</p></li>
 </ul>
 
@@ -471,7 +471,7 @@ can be used to condition the cell transformation on additional static inputs
 <ul>
 <li><p><a href='https://www.tensorflow.org/api_docs/python/tf/keras/layers/RNN'>https://www.tensorflow.org/api_docs/python/tf/keras/layers/RNN</a></p></li>
 <li><p><a href='https://keras.io/api/layers/recurrent_layers/rnn'>https://keras.io/api/layers/recurrent_layers/rnn</a></p></li>
-<li><p><code><a href='https://rdrr.io/pkg/reticulate/man/py_help.html'>reticulate::py_help(keras$layers$RNN)</a></code></p></li>
+<li><p><code>reticulate::py_help(keras$layers$RNN)</code></p></li>
 </ul>
 
 <p>Other recurrent layers: 
@@ -492,7 +492,7 @@ can be used to condition the cell transformation on additional static inputs
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

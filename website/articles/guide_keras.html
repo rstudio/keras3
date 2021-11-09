@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="guide_keras_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Guide to Keras Basics</h1>
@@ -225,13 +225,13 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span> 
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   
   <span class="co"># Adds a densely-connected layer with 64 units to the model:</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   
   <span class="co"># Add another:</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   
   <span class="co"># Add a softmax layer with 10 output units:</span>
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span></code></pre></div>
@@ -274,7 +274,7 @@
 <a href="#set-up-training" class="anchor"></a>Set up training</h3>
 <p>After the model is constructed, configure its learning process by calling the <code>compile</code> method:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   optimizer <span class="op">=</span> <span class="st">'adam'</span>,
   loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
@@ -291,14 +291,14 @@
 <p>The following shows a few examples of configuring a model for training:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Configure a model for mean-squared error regression.</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   optimizer <span class="op">=</span> <span class="st">'adam'</span>,
   loss <span class="op">=</span> <span class="st">'mse'</span>,           <span class="co"># mean squared error</span>
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'mae'</span><span class="op">)</span>   <span class="co"># mean absolute error</span>
 <span class="op">)</span>
 
 <span class="co"># Configure a model for categorical classification.</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>,
   loss <span class="op">=</span> <span class="st">"categorical_crossentropy"</span>,
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"categorical_accuracy"</span><span class="op">)</span>
@@ -312,7 +312,7 @@
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span> <span class="op">*</span> <span class="fl">32</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
 <span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">data</span>,
   <span class="va">labels</span>,
   epochs <span class="op">=</span> <span class="fl">10</span>,
@@ -335,7 +335,7 @@
 <span class="va">val_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span> <span class="op">*</span> <span class="fl">32</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">100</span>, ncol <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
 <span class="va">val_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">100</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">data</span>,
   <span class="va">labels</span>,
   epochs <span class="op">=</span> <span class="fl">10</span>,
@@ -349,14 +349,14 @@
 <p>Same as <code>fit</code>, the <code>evaluate</code> and <code>predict</code> methods can use raw R data as well as a <code>dataset</code>.</p>
 <p>To <em>evaluate</em> the inference-mode loss and metrics for the data provided:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">test_data</span>, <span class="va">test_labels</span>, batch_size <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">test_data</span>, <span class="va">test_labels</span>, batch_size <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">test_dataset</span>, steps <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></code></pre></div>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">test_dataset</span>, steps <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></code></pre></div>
 <p>And to <em>predict</em> the output of the last layer in inference for the data provided, again as R data as well as a <code>dataset</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">test_data</span>, batch_size <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">test_data</span>, batch_size <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
     
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">test_dataset</span>, steps <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></code></pre></div>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">test_dataset</span>, steps <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="build-advanced-models" class="section level2">
@@ -382,23 +382,23 @@
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="op">(</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Returns a placeholder tensor</span>
 
-<span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span>
 
 <span class="co"># Instantiate the model given inputs and outputs.</span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">inputs</span>, outputs <span class="op">=</span> <span class="va">predictions</span><span class="op">)</span>
 
 <span class="co"># The compile step specifies the training configuration.</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span>,
   loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co"># Trains for 5 epochs</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">data</span>,
   <span class="va">labels</span>,
   batch_size <span class="op">=</span> <span class="fl">32</span>,
@@ -411,9 +411,9 @@
 <p>To create a custom Keras layer, you create an R6 class derived from <code>KerasLayer</code>. There are three methods to implement (only one of which, <code><a href="https://rdrr.io/r/base/call.html">call()</a></code>, is required for all types of layer):</p>
 <ul>
 <li>
-<code><a href="https://rdrr.io/r/utils/PkgUtils.html">build(input_shape)</a></code>: This is where you will define your weights. Note that if your layer doesn’t define trainable weights then you need not implement this method.</li>
+<code>build(input_shape)</code>: This is where you will define your weights. Note that if your layer doesn’t define trainable weights then you need not implement this method.</li>
 <li>
-<code><a href="https://rdrr.io/r/base/call.html">call(x)</a></code>: This is where the layer’s logic lives. Unless you want your layer to support masking, you only have to care about the first argument passed to call: the input tensor.</li>
+<code>call(x)</code>: This is where the layer’s logic lives. Unless you want your layer to support masking, you only have to care about the first argument passed to call: the input tensor.</li>
 <li>
 <code>compute_output_shape(input_shape)</code>: In case your layer modifies the shape of its input, you should specify here the shape transformation logic. This allows Keras to do automatic shape inference. If you don’t modify the shape of the input then you need not implement this method.</li>
 </ul>
@@ -466,8 +466,8 @@
 <p>You can now use the layer in a model as usual:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">32</span>,<span class="fl">32</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">32</span>,<span class="fl">32</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu">layer_custom</span><span class="op">(</span>output_dim <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="custom-models" class="section level3">
@@ -490,9 +490,9 @@
     
     <span class="co"># implement call (this code executes during training &amp; inference)</span>
     <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
-      <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">%&gt;%</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">dense1</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">dense2</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+      <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">dense1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">dense2</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
         <span class="va">self</span><span class="op">$</span><span class="fu">dense3</span><span class="op">(</span><span class="op">)</span>
       <span class="va">x</span>
     <span class="op">}</span>
@@ -501,14 +501,14 @@
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">my_model</span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">32</span>, output_dim <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span>,
   loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co"># Trains for 5 epochs</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">data</span>,
   <span class="va">labels</span>,
   batch_size <span class="op">=</span> <span class="fl">32</span>,
@@ -537,7 +537,7 @@
   <span class="fu"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span><span class="op">(</span>log_dir <span class="op">=</span> <span class="st">'./logs'</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">data</span>,
   <span class="va">labels</span>,
   batch_size <span class="op">=</span> <span class="fl">32</span>,
@@ -555,11 +555,11 @@
 <p>Save and load the weights of a model using <code>save_model_weights_hdf5</code> and <code>load_model_weights_hdf5</code>, respectively:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># save in SavedModel format</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/save_model_weights_tf.html">save_model_weights_tf</a></span><span class="op">(</span><span class="st">'my_model/'</span><span class="op">)</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../reference/save_model_weights_tf.html">save_model_weights_tf</a></span><span class="op">(</span><span class="st">'my_model/'</span><span class="op">)</span>
 
 <span class="co"># Restore the model's state,</span>
 <span class="co"># this requires a model with the same architecture.</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/save_model_weights_tf.html">load_model_weights_tf</a></span><span class="op">(</span><span class="st">'my_model/'</span><span class="op">)</span></code></pre></div>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../reference/save_model_weights_tf.html">load_model_weights_tf</a></span><span class="op">(</span><span class="st">'my_model/'</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="configuration-only" class="section level3">
 <h3 class="hasAnchor">
@@ -567,13 +567,13 @@
 <p>A model’s configuration can be saved - this serializes the model architecture without any weights. A saved configuration can recreate and initialize the same model, even without the code that defined the original model. Keras supports JSON and YAML serialization formats:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Serialize a model to JSON format</span>
-<span class="va">json_string</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/model_to_json.html">model_to_json</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">json_string</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../reference/model_to_json.html">model_to_json</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># Recreate the model (freshly initialized)</span>
 <span class="va">fresh_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/model_to_json.html">model_from_json</a></span><span class="op">(</span><span class="va">json_string</span><span class="op">)</span>
 
 <span class="co"># Serializes a model to YAML format</span>
-<span class="va">yaml_string</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/model_to_yaml.html">model_to_yaml</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">yaml_string</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../reference/model_to_yaml.html">model_to_yaml</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># Recreate the model</span>
 <span class="va">fresh_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/model_to_yaml.html">model_from_yaml</a></span><span class="op">(</span><span class="va">yaml_string</span><span class="op">)</span></code></pre></div>
@@ -585,7 +585,7 @@
 <p>The entire model can be saved to a file that contains the weight values, the model’s configuration, and even the optimizer’s configuration. This allows you to checkpoint a model and resume training later —from the exact same state —without access to the original code.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Save entire model to the SavedModel format</span>
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/save_model_tf.html">save_model_tf</a></span><span class="op">(</span><span class="st">'my_model/'</span><span class="op">)</span>
+<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../reference/save_model_tf.html">save_model_tf</a></span><span class="op">(</span><span class="st">'my_model/'</span><span class="op">)</span>
 
 <span class="co"># Recreate the exact same model, including weights and optimizer.</span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/save_model_tf.html">load_model_tf</a></span><span class="op">(</span><span class="st">'my_model/'</span><span class="op">)</span></code></pre></div>
@@ -604,7 +604,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

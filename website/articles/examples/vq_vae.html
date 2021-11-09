@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="vq_vae_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>vq_vae</h1>
@@ -206,19 +206,19 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow">tensorflow</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tfprobability</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfprobability">tfprobability</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets">tfdatasets</a></span><span class="op">)</span>
 
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/glue">glue</a></span><span class="op">)</span>
 
 <span class="co"># curry has to be installed from github because CRAN version has no "set_defaults" function</span>
-<span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="st">'devtools'</span> <span class="op">%in%</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html">installed.packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+<span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="st">'devtools'</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html">installed.packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'devtools'</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">'thomasp85/curry'</span><span class="op">)</span>
 
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">curry</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/thomasp85/curry">curry</a></span><span class="op">)</span>
 
 <span class="va">moving_averages</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">python</span><span class="op">$</span><span class="va">training</span><span class="op">$</span><span class="va">moving_averages</span>
 
@@ -243,8 +243,8 @@
       yaxs <span class="op">=</span> <span class="st">'i'</span><span class="op">)</span>
   <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">64</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">img</span> <span class="op">&lt;-</span> <span class="va">images</span><span class="op">[</span><span class="va">i</span>, , , <span class="fl">1</span><span class="op">]</span>
-    <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/transpose.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">img</span>, <span class="fl">2</span>, <span class="va">rev</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/raster/man/image.html">image</a></span><span class="op">(</span>
+    <span class="va">img</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">img</span>, <span class="fl">2</span>, <span class="va">rev</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/graphics/image.html">image</a></span><span class="op">(</span>
       <span class="fl">1</span><span class="op">:</span><span class="fl">28</span>,
       <span class="fl">1</span><span class="op">:</span><span class="fl">28</span>,
       <span class="va">img</span> <span class="op">*</span> <span class="fl">127.5</span> <span class="op">+</span> <span class="fl">127.5</span>,
@@ -273,10 +273,10 @@
 <span class="va">kuzushiji</span> <span class="op">&lt;-</span> <span class="va">np</span><span class="op">$</span><span class="fu">load</span><span class="op">(</span><span class="st">"kmnist-train-imgs.npz"</span><span class="op">)</span>
 <span class="va">kuzushiji</span> <span class="op">&lt;-</span> <span class="va">kuzushiji</span><span class="op">$</span><span class="fu">get</span><span class="op">(</span><span class="st">"arr_0"</span><span class="op">)</span>
 
-<span class="va">train_images</span> <span class="op">&lt;-</span> <span class="va">kuzushiji</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">train_images</span> <span class="op">&lt;-</span> <span class="va">kuzushiji</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/k_cast.html">k_cast</a></span><span class="op">(</span>dtype <span class="op">=</span> <span class="st">"float32"</span><span class="op">)</span>
-<span class="va">train_images</span> <span class="op">&lt;-</span> <span class="va">train_images</span> <span class="op">%&gt;%</span> <span class="fu">`/`</span><span class="op">(</span><span class="fl">255</span><span class="op">)</span>
+<span class="va">train_images</span> <span class="op">&lt;-</span> <span class="va">train_images</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">`/`</span><span class="op">(</span><span class="fl">255</span><span class="op">)</span>
 
 <span class="va">buffer_size</span> <span class="op">&lt;-</span> <span class="fl">60000</span>
 <span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">64</span>
@@ -284,14 +284,14 @@
 
 <span class="va">batches_per_epoch</span> <span class="op">&lt;-</span> <span class="va">buffer_size</span> <span class="op">/</span> <span class="va">batch_size</span>
 
-<span class="va">train_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html">tensor_slices_dataset</a></span><span class="op">(</span><span class="va">train_images</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_shuffle.html">dataset_shuffle</a></span><span class="op">(</span><span class="va">buffer_size</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">train_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html">tensor_slices_dataset</a></span><span class="op">(</span><span class="va">train_images</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_shuffle.html">dataset_shuffle</a></span><span class="op">(</span><span class="va">buffer_size</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span>, drop_remainder <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># test</span>
 <span class="va">iter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/make-iterator.html">make_iterator_one_shot</a></span><span class="op">(</span><span class="va">train_dataset</span><span class="op">)</span>
 <span class="va">batch</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/iterator_get_next.html">iterator_get_next</a></span><span class="op">(</span><span class="va">iter</span><span class="op">)</span>
-<span class="va">batch</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/dimensions.html">dim</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">batch</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># Params ------------------------------------------------------------------</span>
 
@@ -344,21 +344,21 @@
       <span class="fu"><a href="../../reference/layer_reshape.html">layer_reshape</a></span><span class="op">(</span>target_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">latent_size</span>, <span class="va">code_size</span><span class="op">)</span><span class="op">)</span>
     
     <span class="kw">function</span> <span class="op">(</span><span class="va">x</span>, <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
-      <span class="va">x</span> <span class="op">%&gt;%</span>
+      <span class="va">x</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 28 28 32</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">conv1</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">conv1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 14 14 32</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">conv2</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">conv2</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 14 14 64</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">conv3</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">conv3</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 7 7 64</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">conv4</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">conv4</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 1 1 4</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">conv5</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">conv5</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 4</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">flatten</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">flatten</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 16</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">dense</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">dense</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 1 16</span>
         <span class="va">self</span><span class="op">$</span><span class="fu">reshape</span><span class="op">(</span><span class="op">)</span>
     <span class="op">}</span>
@@ -403,21 +403,21 @@
                    activation <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span>
     
     <span class="kw">function</span> <span class="op">(</span><span class="va">x</span>, <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
-      <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">%&gt;%</span>
+      <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 1 1 16</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">reshape1</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">reshape1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 7 7 64</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">deconv1</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">deconv1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 7 7 64</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">deconv2</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">deconv2</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 14 14 64</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">deconv3</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">deconv3</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 14 14 32</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">deconv4</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">deconv4</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 28 28 32</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">deconv5</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">deconv5</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 28 28 32</span>
-        <span class="va">self</span><span class="op">$</span><span class="fu">deconv6</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="va">self</span><span class="op">$</span><span class="fu">deconv6</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
         <span class="co"># output shape:  7 28 28 1</span>
         <span class="va">self</span><span class="op">$</span><span class="fu">conv1</span><span class="op">(</span><span class="op">)</span>
       <span class="fu">tfd_independent</span><span class="op">(</span><span class="fu">tfd_bernoulli</span><span class="op">(</span>logits <span class="op">=</span> <span class="va">x</span><span class="op">)</span>,
@@ -559,10 +559,10 @@
     
     <span class="va">x</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/iterator_get_next.html">iterator_get_next</a></span><span class="op">(</span><span class="va">iter</span><span class="op">)</span>
     
-    <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span>persistent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%as%</span> <span class="va">tape</span>, <span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span>persistent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/reticulate/man/with-as-operator.html">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span>
       
       <span class="va">codes</span> <span class="op">&lt;-</span> <span class="fu">encoder</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">nearest_codebook_entries</span>, <span class="va">one_hot_assignments</span><span class="op">)</span> <span class="op">%&lt;-%</span> <span class="fu">vector_quantizer</span><span class="op">(</span><span class="va">codes</span><span class="op">)</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">nearest_codebook_entries</span>, <span class="va">one_hot_assignments</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="fu">vector_quantizer</span><span class="op">(</span><span class="va">codes</span><span class="op">)</span>
       <span class="va">codes_straight_through</span> <span class="op">&lt;-</span> <span class="va">codes</span> <span class="op">+</span> <span class="va">tf</span><span class="op">$</span><span class="fu">stop_gradient</span><span class="op">(</span><span class="va">nearest_codebook_entries</span> <span class="op">-</span> <span class="va">codes</span><span class="op">)</span>
       <span class="va">decoder_distribution</span> <span class="op">&lt;-</span> <span class="fu">decoder</span><span class="op">(</span><span class="va">codes_straight_through</span><span class="op">)</span>
       
@@ -647,7 +647,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Xception V1 model for Keras. — application_xception • keras</title>
+<title>Instantiates the Xception architecture — application_xception • keras</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,8 @@
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Xception V1 model for Keras. — application_xception" />
-<meta property="og:description" content="Xception V1 model for Keras." />
+<meta property="og:title" content="Instantiates the Xception architecture — application_xception" />
+<meta property="og:description" content="Instantiates the Xception architecture" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -231,13 +231,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Xception V1 model for Keras.</h1>
+    <h1>Instantiates the Xception architecture</h1>
     <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/applications.R'><code>R/applications.R</code></a></small>
     <div class="hidden name"><code>application_xception.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Xception V1 model for Keras.</p>
+    <p>Instantiates the Xception architecture</p>
     </div>
 
     <pre class="usage"><span class='fu'>application_xception</span><span class='op'>(</span>
@@ -246,7 +246,9 @@
   input_tensor <span class='op'>=</span> <span class='cn'>NULL</span>,
   input_shape <span class='op'>=</span> <span class='cn'>NULL</span>,
   pooling <span class='op'>=</span> <span class='cn'>NULL</span>,
-  classes <span class='op'>=</span> <span class='fl'>1000</span>
+  classes <span class='op'>=</span> <span class='fl'>1000</span>,
+  classifier_activation <span class='op'>=</span> <span class='st'>"softmax"</span>,
+  <span class='va'>...</span>
 <span class='op'>)</span>
 
 <span class='fu'>xception_preprocess_input</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
@@ -256,70 +258,99 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>include_top</th>
-      <td><p>whether to include the fully-connected layer at the top of
-the network.</p></td>
+      <td><p>Whether to include the fully-connected
+layer at the top of the network. Defaults to <code>TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>weights</th>
-      <td><p><code>NULL</code> (random initialization), <code>imagenet</code> (ImageNet
-weights), or the path to the weights file to be loaded.</p></td>
+      <td><p>One of <code>NULL</code> (random initialization),
+<code>'imagenet'</code> (pre-training on ImageNet),
+or the path to the weights file to be loaded. Defaults to <code>'imagenet'</code>.</p></td>
     </tr>
     <tr>
       <th>input_tensor</th>
-      <td><p>optional Keras tensor to use as image input for the
-model.</p></td>
+      <td><p>Optional Keras tensor
+(i.e. output of <code><a href='layer_input.html'>layer_input()</a></code>)
+to use as image input for the model.</p></td>
     </tr>
     <tr>
       <th>input_shape</th>
-      <td><p>optional shape list, only to be specified if <code>include_top</code>
-is FALSE (otherwise the input shape has to be <code>(299, 299, 3)</code>. It should
-have exactly 3 inputs channels, and width and height should be no smaller
-than 75. E.g. <code>(150, 150, 3)</code> would be one valid value.</p></td>
+      <td><p>optional shape list, only to be specified
+if <code>include_top</code> is FALSE (otherwise the input shape
+has to be <code>(299, 299, 3)</code>.
+It should have exactly 3 inputs channels,
+and width and height should be no smaller than 71.
+E.g. <code>(150, 150, 3)</code> would be one valid value.</p></td>
     </tr>
     <tr>
       <th>pooling</th>
-      <td><p>Optional pooling mode for feature extraction when
-<code>include_top</code> is <code>FALSE</code>.</p><ul>
-<li><p><code>NULL</code> means that the output of the model will be the 4D tensor output
-of the last convolutional layer.</p></li>
-<li><p><code>avg</code> means that global average pooling will be applied to the output of
-the last convolutional layer, and thus the output of the model will be
-a 2D tensor.</p></li>
-<li><p><code>max</code> means that global max pooling will be applied.</p></li>
+      <td><p>Optional pooling mode for feature extraction
+when <code>include_top</code> is <code>FALSE</code>. Defaults to <code>NULL</code>.</p><ul>
+<li><p><code>NULL</code> means that the output of the model will be
+the 4D tensor output of the
+last convolutional layer.</p></li>
+<li><p><code>'avg'</code> means that global average pooling
+will be applied to the output of the
+last convolutional layer, and thus
+the output of the model will be a 2D tensor.</p></li>
+<li><p><code>'max'</code> means that global max pooling will
+be applied.</p></li>
 </ul></td>
     </tr>
     <tr>
       <th>classes</th>
-      <td><p>optional number of classes to classify images into, only to be
+      <td><p>Optional number of classes to classify images into, only to be
 specified if <code>include_top</code> is TRUE, and if no <code>weights</code> argument is
-specified.</p></td>
+specified. Defaults to 1000 (number of ImageNet classes).</p></td>
+    </tr>
+    <tr>
+      <th>classifier_activation</th>
+      <td><p>A string or callable. The activation function to
+use on the "top" layer. Ignored unless <code>include_top = TRUE</code>. Set
+<code>classifier_activation = NULL</code> to return the logits of the "top" layer.
+Defaults to <code>'softmax'</code>. When loading pretrained weights,
+<code>classifier_activation</code> can only be <code>NULL</code> or <code>"softmax"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>For backwards and forwards compatibility</p></td>
     </tr>
     <tr>
       <th>x</th>
-      <td><p>Input tensor for preprocessing</p></td>
+      <td><p><code>preprocess_input()</code> takes an array or floating point tensor, 3D or
+4D with 3 color channels, with values in the range <code>[0, 255]</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A Keras model instance.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>On ImageNet, this model gets to a top-1 validation accuracy of 0.790
-and a top-5 validation accuracy of 0.945.</p>
-<p>Do note that the input image format for this model is different than for
-the VGG16 and ResNet models (299x299 instead of 224x224).</p>
-<p>The <code>xception_preprocess_input()</code> function should be used for image
-preprocessing.</p>
-<p>This application is only available when using the TensorFlow back-end.</p>
+    <p>For image classification use cases, see
+<a href='https://keras.io/api/applications/#usage-examples-for-image-classification-models'>this page for detailed examples</a>.</p>
+<p>For transfer learning use cases, make sure to read the
+<a href='https://keras.io/guides/transfer_learning/'>guide to transfer learning &amp; fine-tuning</a>.</p>
+<p>The default input image size for this model is 299x299.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Each Keras Application typically expects a specific kind of input preprocessing.
+For Xception, call <code>xception_preprocess_input()</code> on your
+inputs before passing them to the model.
+<code>xception_preprocess_input()</code> will scale input pixels between -1 and 1.</p>
     <h2 class="hasAnchor" id="reference"><a class="anchor" href="#reference"></a>Reference</h2>
 
     
 
 <ul>
-<li><p><a href='https://arxiv.org/abs/1610.02357'>Xception: Deep Learning with Depthwise Separable Convolutions</a></p></li>
+<li><p><a href='https://arxiv.org/abs/1610.02357'>Xception: Deep Learning with Depthwise Separable Convolutions</a> (CVPR 2017)</p></li>
 </ul>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'>
+<ul>
+<li><p><a href='https://www.tensorflow.org/api_docs/python/tf/keras/applications/xception/Xception'>https://www.tensorflow.org/api_docs/python/tf/keras/applications/xception/Xception</a></p></li>
+<li><p><a href='https://keras.io/api/applications/'>https://keras.io/api/applications/</a></p></li>
+</ul>
+</div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -332,7 +363,7 @@ preprocessing.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

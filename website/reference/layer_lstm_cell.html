@@ -302,7 +302,7 @@ Default: <code>orthogonal</code>.</p></td>
       <th>unit_forget_bias</th>
       <td><p>Boolean (default <code>TRUE</code>). If TRUE, add 1 to the bias of
 the forget gate at initialization. Setting it to true will also force
-<code>bias_initializer="zeros"</code>. This is recommended in <a href='http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf'>Jozefowicz et al.</a></p></td>
+<code>bias_initializer="zeros"</code>. This is recommended in <a href='https://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf'>Jozefowicz et al.</a></p></td>
     </tr>
     <tr>
       <th>kernel_regularizer</th>
@@ -364,7 +364,7 @@ for details about the usage of RNN API.</p>
 <span class='va'>rnn</span> <span class='op'>&lt;-</span> <span class='fu'><a href='layer_rnn.html'>layer_rnn</a></span><span class='op'>(</span>cell <span class='op'>=</span> <span class='fu'>layer_lstm_cell</span><span class='op'>(</span>units <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>,
                  return_sequences <span class='op'>=</span> <span class='cn'>TRUE</span>,
                  return_state <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>whole_seq_output</span>, <span class='va'>final_memory_state</span>, <span class='va'>final_carry_state</span><span class='op'>)</span> <span class='op'>%&lt;-%</span> <span class='fu'>rnn</span><span class='op'>(</span><span class='va'>inputs</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>whole_seq_output</span>, <span class='va'>final_memory_state</span>, <span class='va'>final_carry_state</span><span class='op'>)</span> <span class='op'><a href='%<-%.html'>%&lt;-%</a></span> <span class='fu'>rnn</span><span class='op'>(</span><span class='va'>inputs</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>whole_seq_output</span><span class='op'>)</span>   <span class='co'># (32, 10, 4)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>final_memory_state</span><span class='op'>)</span> <span class='co'># (32, 4)</span>
@@ -393,7 +393,7 @@ for details about the usage of RNN API.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

@@ -396,10 +396,10 @@ by the callable will be exactly as passed to this layer. The callable
 should return a tensor of the same shape as the input.</p></li>
 <li><p>When using a custom callable for <code>split</code>, the data received by the
 callable will have the 1st dimension squeezed out - instead of
-<code><a href='https://rdrr.io/r/base/matrix.html'>matrix(c("string to split", "another string to split"))</a></code>, the Callable will
-see <code><a href='https://rdrr.io/r/base/c.html'>c("string to split", "another string to split")</a></code>. The callable should
+<code>matrix(c("string to split", "another string to split"))</code>, the Callable will
+see <code>c("string to split", "another string to split")</code>. The callable should
 return a Tensor with the first dimension containing the split tokens -
-in this example, we should see something like <code><a href='https://rdrr.io/r/base/list.html'>list(c("string", "to", "split"), c("another", "string", "to", "split"))</a></code>. This makes the callable
+in this example, we should see something like <code>list(c("string", "to", "split"), c("another", "string", "to", "split"))</code>. This makes the callable
 site natively compatible with <code>tf$strings$split()</code>.</p></li>
 </ol>
 
@@ -442,7 +442,7 @@ site natively compatible with <code>tf$strings$split()</code>.</p></li>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

@@ -197,6 +197,7 @@ reference:
   - title: "Normalization Layers"
     contents:
       - layer_batch_normalization
+      - layer_layer_normalization
 
   - title: "Noise Layers"
     contents:
@@ -286,25 +287,11 @@ reference:
 
   - title: "Datasets"
     contents:
-      - dataset_cifar10
-      - dataset_cifar100
-      - dataset_imdb
-      - dataset_reuters
-      - dataset_mnist
-      - dataset_fashion_mnist
-      - dataset_boston_housing
+      - starts_with("dataset_")
 
   - title: "Applications"
     contents:
-      - application_xception
-      - application_inception_v3
-      - application_inception_resnet_v2
-      - application_vgg
-      - application_resnet50
-      - application_mobilenet
-      - application_mobilenet_v2
-      - application_densenet
-      - application_nasnet
+      - starts_with("application_")
       - imagenet_preprocess_input
       - imagenet_decode_predictions
       - mobilenet_preprocess_input
@@ -316,9 +303,11 @@ reference:
       - pad_sequences
       - skipgrams
       - make_sampling_table
+      - timeseries_dataset_from_array
 
   - title: "Text Preprocessing"
     contents:
+      - text_dataset_from_directory
       - text_tokenizer
       - fit_text_tokenizer
       - save_text_tokenizer
@@ -419,6 +408,7 @@ reference:
 
   - title: "Metrics"
     contents:
+      - Metric
       - starts_with("metric_")
       - custom_metric
 
@@ -449,3 +439,4 @@ reference:
       - loss_cosine_proximity
       - layer_cudnn_gru
       - layer_cudnn_lstm
+      - layer_dense_features

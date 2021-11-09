@@ -358,13 +358,13 @@ for details about the usage of RNN API.</p>
 <p>This class processes one step within the whole time sequence input, whereas
 <code>tf.keras.layer.GRU</code> processes the whole sequence.</p>
 <p>For example:<div class="sourceCode r"></p><pre><span class='va'>inputs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='k_random_uniform.html'>k_random_uniform</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>32</span>, <span class='fl'>10</span>, <span class='fl'>8</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>output</span> <span class='op'>&lt;-</span> <span class='va'>inputs</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='layer_rnn.html'>layer_rnn</a></span><span class='op'>(</span><span class='fu'>layer_gru_cell</span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>output</span> <span class='op'>&lt;-</span> <span class='va'>inputs</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='layer_rnn.html'>layer_rnn</a></span><span class='op'>(</span><span class='fu'>layer_gru_cell</span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>output</span><span class='op'>$</span><span class='va'>shape</span>  <span class='co'># TensorShape([32, 4])</span>
 
 <span class='va'>rnn</span> <span class='op'>&lt;-</span> <span class='fu'><a href='layer_rnn.html'>layer_rnn</a></span><span class='op'>(</span>cell <span class='op'>=</span> <span class='fu'>layer_gru_cell</span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span>,
                  return_sequence <span class='op'>=</span> <span class='cn'>TRUE</span>,
                  return_state <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>whole_sequence_output</span>, <span class='va'>final_state</span><span class='op'>)</span> <span class='op'>%&lt;-%</span> <span class='fu'>rnn</span><span class='op'>(</span><span class='va'>inputs</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>whole_sequence_output</span>, <span class='va'>final_state</span><span class='op'>)</span> <span class='op'><a href='%<-%.html'>%&lt;-%</a></span> <span class='fu'>rnn</span><span class='op'>(</span><span class='va'>inputs</span><span class='op'>)</span>
 <span class='va'>whole_sequence_output</span><span class='op'>$</span><span class='va'>shape</span> <span class='co'># TensorShape([32, 10, 4])</span>
 <span class='va'>final_state</span><span class='op'>$</span><span class='va'>shape</span>           <span class='co'># TensorShape([32, 4])</span>
 </pre><p></div></p>
@@ -391,7 +391,7 @@ for details about the usage of RNN API.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

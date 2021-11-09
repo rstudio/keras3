@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="cifar10_cnn_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>cifar10_cnn</h1>
@@ -230,47 +230,47 @@
 <span class="co"># Initialize sequential model</span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
  
   <span class="co"># Start with hidden 2D convolutional layer being fed 32x32 pixel images</span>
   <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>
     filter <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span>, 
     input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">32</span>, <span class="fl">3</span><span class="op">)</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
 
   <span class="co"># Second hidden layer</span>
-  <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filter <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filter <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
 
   <span class="co"># Use max pooling</span>
-  <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.25</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.25</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   
   <span class="co"># 2 additional hidden 2D convolutional layers</span>
-  <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filter <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filter <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filter <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filter <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
 
   <span class="co"># Use max pooling once more</span>
-  <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.25</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.25</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   
   <span class="co"># Flatten max filtered output into feature vector </span>
   <span class="co"># and feed into dense layer</span>
-  <span class="fu"><a href="../../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">512</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">512</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
 
   <span class="co"># Outputs from dense layer are projected onto 10 unit output layer</span>
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"softmax"</span><span class="op">)</span>
 
 <span class="va">opt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.0001</span>, decay <span class="op">=</span> <span class="fl">1e-6</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">"categorical_crossentropy"</span>,
   optimizer <span class="op">=</span> <span class="va">opt</span>,
   metrics <span class="op">=</span> <span class="st">"accuracy"</span>
@@ -281,7 +281,7 @@
 
 <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">data_augmentation</span><span class="op">)</span><span class="op">{</span>
   
-  <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+  <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
     <span class="va">x_train</span>, <span class="va">y_train</span>,
     batch_size <span class="op">=</span> <span class="va">batch_size</span>,
     epochs <span class="op">=</span> <span class="va">epochs</span>,
@@ -298,9 +298,9 @@
     horizontal_flip <span class="op">=</span> <span class="cn">TRUE</span>
   <span class="op">)</span>
   
-  <span class="va">datagen</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/fit_image_data_generator.html">fit_image_data_generator</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>
+  <span class="va">datagen</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/fit_image_data_generator.html">fit_image_data_generator</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>
   
-  <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/fit_generator.html">fit_generator</a></span><span class="op">(</span>
+  <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/fit_generator.html">fit_generator</a></span><span class="op">(</span>
     <span class="fu"><a href="../../reference/flow_images_from_data.html">flow_images_from_data</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span>, <span class="va">datagen</span>, batch_size <span class="op">=</span> <span class="va">batch_size</span><span class="op">)</span>,
     steps_per_epoch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fl">50000</span><span class="op">/</span><span class="va">batch_size</span><span class="op">)</span>, 
     epochs <span class="op">=</span> <span class="va">epochs</span>, 
@@ -319,7 +319,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

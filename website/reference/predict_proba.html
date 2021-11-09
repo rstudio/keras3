@@ -280,11 +280,11 @@ samples in your dataset divided by the batch size.</p></td>
 <p><code>predict_classes()</code>:</p><ul>
 <li><p>If your model does multi-class classification:
 (e.g. if it uses a <code>softmax</code> last-layer activation).</p></li>
-</ul><p><div class="sourceCode r"></p><pre>     <span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='k_argmax.html'>k_argmax</a></span><span class='op'>(</span><span class='op'>)</span>
+</ul><p><div class="sourceCode r"></p><pre>     <span class='va'>model</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='k_argmax.html'>k_argmax</a></span><span class='op'>(</span><span class='op'>)</span>
 </pre><p></div></p><ul>
 <li><p>if your model does binary classification
 (e.g. if it uses a <code>sigmoid</code> last-layer activation).</p></li>
-</ul><p><div class="sourceCode r"></p><pre>     <span class='va'>model</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>`&gt;`</span><span class='op'>(</span><span class='fl'>0.5</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='k_cast.html'>k_cast</a></span><span class='op'>(</span><span class='st'>"int32"</span><span class='op'>)</span>
+</ul><p><div class="sourceCode r"></p><pre>     <span class='va'>model</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'>`&gt;`</span><span class='op'>(</span><span class='fl'>0.5</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='k_cast.html'>k_cast</a></span><span class='op'>(</span><span class='st'>"int32"</span><span class='op'>)</span>
 </pre><p></div></p>
 <p>The input samples are processed batch by batch.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -318,7 +318,7 @@ samples in your dataset divided by the batch size.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

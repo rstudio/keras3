@@ -185,7 +185,7 @@
 
       
 
-      </header><script src="variational_autoencoder_deconv_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>variational_autoencoder_deconv</h1>
@@ -297,7 +297,7 @@
   <span class="va">z_mean</span> <span class="op">+</span> <span class="fu"><a href="../../reference/k_exp.html">k_exp</a></span><span class="op">(</span><span class="va">z_log_var</span><span class="op">)</span> <span class="op">*</span> <span class="va">epsilon</span>
 <span class="op">}</span>
 
-<span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">z_mean</span>, <span class="va">z_log_var</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/layer_lambda.html">layer_lambda</a></span><span class="op">(</span><span class="va">sampling</span><span class="op">)</span>
+<span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_concatenate.html">layer_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">z_mean</span>, <span class="va">z_log_var</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_lambda.html">layer_lambda</a></span><span class="op">(</span><span class="va">sampling</span><span class="op">)</span>
 
 <span class="va">output_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="fl">14L</span>, <span class="fl">14L</span>, <span class="va">filters</span><span class="op">)</span>
 
@@ -358,7 +358,7 @@
 
 <span class="co">## variational autoencoder</span>
 <span class="va">vae</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">x_decoded_mean_squash</span><span class="op">)</span>
-<span class="va">vae</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">"rmsprop"</span>, loss <span class="op">=</span> <span class="va">vae_loss</span><span class="op">)</span>
+<span class="va">vae</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">"rmsprop"</span>, loss <span class="op">=</span> <span class="va">vae_loss</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">vae</span><span class="op">)</span>
 
 <span class="co">## encoder: model to project inputs on the latent space</span>
@@ -380,7 +380,7 @@
 
 <span class="va">mnist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">mnist</span>, <span class="kw">function</span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">m</span><span class="op">$</span><span class="va">x</span> <span class="op">/</span> <span class="fl">255</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/dimensions.html">dim</a></span><span class="op">(</span><span class="va">m</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">original_img_size</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">m</span><span class="op">$</span><span class="va">x</span> <span class="op">/</span> <span class="fl">255</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">m</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">original_img_size</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
 <span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">train</span>
 <span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">test</span>
@@ -388,7 +388,7 @@
 
 <span class="co">#### Model Fitting ####</span>
 
-<span class="va">vae</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">vae</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
   <span class="va">x_train</span>, <span class="va">x_train</span>, 
   shuffle <span class="op">=</span> <span class="cn">TRUE</span>, 
   epochs <span class="op">=</span> <span class="va">epochs</span>, 
@@ -403,10 +403,10 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 
 <span class="co">## display a 2D plot of the digit classes in the latent space</span>
-<span class="va">x_test_encoded</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">encoder</span>, <span class="va">x_test</span>, batch_size <span class="op">=</span> <span class="va">batch_size</span><span class="op">)</span>
-<span class="va">x_test_encoded</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">as_data_frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/factor.html">as.factor</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">x_test_encoded</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">encoder</span>, <span class="va">x_test</span>, batch_size <span class="op">=</span> <span class="va">batch_size</span><span class="op">)</span>
+<span class="va">x_test_encoded</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">as_data_frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">V1</span>, y <span class="op">=</span> <span class="va">V2</span>, colour <span class="op">=</span> <span class="va">class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co">## display a 2D manifold of the digits</span>
@@ -422,11 +422,11 @@
   <span class="va">column</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
   <span class="kw">for</span><span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">grid_y</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
     <span class="va">z_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">grid_x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">grid_y</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-    <span class="va">column</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">rbind</a></span><span class="op">(</span><span class="va">column</span>, <span class="fu"><a href="https://rdrr.io/pkg/raster/man/predict.html">predict</a></span><span class="op">(</span><span class="va">generator</span>, <span class="va">z_sample</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="va">digit_size</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">column</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">rbind</a></span><span class="op">(</span><span class="va">column</span>, <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">generator</span>, <span class="va">z_sample</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="va">digit_size</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span>
   <span class="va">rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">rows</span>, <span class="va">column</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="va">rows</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.raster.html">as.raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="va">rows</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -438,7 +438,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
 </div>
 
 <div class="pkgdown">

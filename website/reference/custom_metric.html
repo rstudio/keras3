@@ -265,7 +265,7 @@ Note that a name ('mean_pred') is provided for the custom metric
 function: this name is used within training progress output.</p>
 <p>If you want to save and load a model with custom metrics, you should
 also specify the metric in the call the <code><a href='save_model_hdf5.html'>load_model_hdf5()</a></code>. For example:
-<code><a href='save_model_hdf5.html'>load_model_hdf5("my_model.h5", c('mean_pred' = metric_mean_pred))</a></code>.</p>
+<code>load_model_hdf5("my_model.h5", c('mean_pred' = metric_mean_pred))</code>.</p>
 <p>Alternatively, you can wrap all of your code in a call to
 <code><a href='with_custom_object_scope.html'>with_custom_object_scope()</a></code> which will allow you to refer to the
 metric by name just like you do with built in keras metrics.</p>
@@ -330,7 +330,7 @@ found at <a href='https://keras.rstudio.com/articles/backend.html#backend-functi
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet,  RStudio,  Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>, Google.</p>
 </div>
 
 <div class="pkgdown">
