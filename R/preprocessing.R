@@ -1311,4 +1311,3 @@ function(data, targets, sequence_length, sequence_stride = 1L,
     ))
   do.call(keras$preprocessing$timeseries_dataset_from_array, args)
 }
-

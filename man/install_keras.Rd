@@ -10,7 +10,8 @@ install_keras(
   version = "default",
   tensorflow = version,
   extra_packages = NULL,
-  ...
+  ...,
+  pip_ignore_installed = TRUE
 )
 }
 \arguments{
@@ -25,7 +26,7 @@ available on Windows.}
 
 \item{version}{TensorFlow version to install. Valid values include:
 \itemize{
-\item \code{"default"} installs  2.6
+\item \code{"default"} installs  2.7
 \item \code{"release"} installs the latest release version of tensorflow (which may
 be incompatible with the current version of the R package)
 \item A version specification like \code{"2.4"} or \code{"2.4.0"}. Note that if the patch
@@ -44,15 +45,20 @@ TensorFlow.}
 
 \item{...}{other arguments passed to \code{\link[reticulate:conda-tools]{reticulate::conda_install()}} or
 \code{\link[reticulate:virtualenv-tools]{reticulate::virtualenv_install()}}, depending on the \code{method} used.}
+
+\item{pip_ignore_installed}{Whether pip should ignore installed python
+packages and reinstall all already installed python packages. This defaults
+to \code{TRUE}, to ensure that TensorFlow dependencies like NumPy are compatible
+with the prebuilt TensorFlow binaries.}
 }
 \description{
 This function will install Tensorflow and all Keras dependencies. This is a
 thin wrapper around \code{\link[tensorflow:install_tensorflow]{tensorflow::install_tensorflow()}}, with the only
 difference being that this includes by default additional extra packages that
 keras expects, and the default version of tensorflow installed by
-\code{install_keras()}  may at times be different from the default installed
+\code{install_keras()} may at times be different from the default installed
 \code{install_tensorflow()}. The default version of tensorflow installed by
-\code{install_keras()} is "2.6".
+\code{install_keras()} is "2.7".
 }
 \details{
 The default additional packages are:
@@ -60,49 +66,6 @@ tensorflow-hub, scipy, requests, pyyaml, Pillow, h5py, pandas, with their
 versions potentially constrained for compatibility with the
 requested tensorflow version.
 }
-\section{Custom Installation}{
-
- \code{install_tensorflow()} or
-\code{keras::install_keras()} isn't required to use tensorflow with the package.
-If you manually configure a python environment with the required
-dependencies, you can tell R to use it by pointing reticulate at it,
-commonly by setting an environment variable:
-
-\code{Sys.setenv("RETICULATE_PYTHON" = "~/path/to/python-env/bin/python")}
-
-}
-
-\section{Apple Silicon}{
-
- Tensorflow on Apple Silicon is not officially
-supported by the tensorflow maintainers. It is known that there can be
-issues running the official Tensorflow package under Rosetta as well.
-Fortunately, for the time being Apple has published a custom version of
-Tensorflow compatible with M1 macs. Installation instructions can be found
-at: \url{https://developer.apple.com/metal/tensorflow-plugin/}. Please note
-that this is an experimental build of both python and tensorflow. After
-following the instructions provided by Apple, you can advise reticulate to
-use that python installation by placing the following in your
-\code{.Renviron} file:
-
-\code{RETICULATE_PYTHON = "~/miniforge3/bin/python"}
-
-}
-
-\section{Additional Packages}{
-
-
-
-If you wish to add additional PyPI packages to your Keras / TensorFlow
-environment you can either specify the packages in the \code{extra_packages}
-argument of \code{install_tensorflow()} or \code{install_keras()}, or alternatively
-install them into an existing environment using the
-\code{\link[reticulate:py_install]{reticulate::py_install()}} function. Note that \code{install_keras()} includes a
-set of additional python packages by default, see \code{?keras::install_keras}
-for details.
-
-}
-
 \seealso{
 \code{\link[tensorflow:install_tensorflow]{tensorflow::install_tensorflow()}}
 }
