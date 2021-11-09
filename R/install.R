@@ -30,8 +30,11 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
   if(!is.null(extra_packages)) # user supplied package version constraints take precedence
     pkgs[gsub("[=<>~]{1,2}[0-9.]+$", "", extra_packages)] <- extra_packages
 
-  if(tensorflow == "default") # may be different from tensorflow
-    tensorflow <- default_version
+  if(tensorflow %in% c("cpu", "gpu"))
+    tensorflow <- paste0("default-", tensorflow)
+
+  if(grepl("^default", tensorflow))
+    tensorflow <- sub("^default", as.character(default_version), tensorflow)
 
   tensorflow::install_tensorflow(
     method = match.arg(method),
