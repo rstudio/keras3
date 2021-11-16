@@ -21,10 +21,14 @@ layer_layer_normalization(
 )
 }
 \arguments{
-\item{object}{What to call the new \code{Layer} instance with. Typically a keras
-\code{Model}, another \code{Layer}, or a \code{tf.Tensor}/\code{KerasTensor}. If \code{object} is
-missing, the \code{Layer} instance is returned, otherwise, \code{layer(object)} is
-returned.}
+\item{object}{What to compose the new \code{Layer} instance with. Typically a
+Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
+The return value depends on \code{object}. If \code{object} is:
+\itemize{
+\item missing or \code{NULL}, the \code{Layer} instance is returned.
+\item a \code{Sequential} model, the model with an additional layer is returned.
+\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
+}}
 
 \item{axis}{Integer or List/Tuple. The axis or axes to normalize across.
 Typically this is the features axis/axes. The left-out axes are typically

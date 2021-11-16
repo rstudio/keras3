@@ -50,10 +50,14 @@ function(shape = NULL, batch_shape = NULL, name = NULL,
 #'
 #' @inheritParams layer_input
 #'
-#' @param object What to call the new `Layer` instance with. Typically a keras
-#'   `Model`, another `Layer`, or a `tf.Tensor`/`KerasTensor`. If `object` is
-#'   missing, the `Layer` instance is returned, otherwise, `layer(object)` is
-#'   returned.
+#' @param object What to compose the new `Layer` instance with. Typically a
+#'   Sequential model or a Tensor (e.g., as returned by `layer_input()`).
+#'   The return value depends on `object`. If `object` is:
+#'
+#'   -  missing or `NULL`, the `Layer` instance is returned.
+#'   -  a `Sequential` model, the model with an additional layer is returned.
+#'   -  a Tensor, the output tensor from `layer_instance(object)` is returned.
+#'
 #' @param units Positive integer, dimensionality of the output space.
 #' @param activation Name of activation function to use. If you don't specify
 #'   anything, no activation is applied (ie. "linear" activation: a(x) = x).
