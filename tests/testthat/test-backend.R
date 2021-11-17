@@ -141,3 +141,10 @@ test_backend("k_random_normal", {
   chk(k_random_normal(lapply(c(1,2,3), as_tensor, "int32")))
   chk(k_random_normal(list(1, as_tensor(2, "int32"), 3)))
 })
+
+test_backend("k_random_bernoulli", {
+  chk <- function(x) expect_tensor(x, shape = c(1L, 2L, 3L))
+  chk(k_random_bernoulli(c(1,2,3)))
+  chk(k_random_bernoulli(c(1,2,3), dtype = "int32"))
+  chk(k_random_bernoulli(c(1,2,3), dtype = "bool"))
+})

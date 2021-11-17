@@ -2075,6 +2075,10 @@ k_prod <- function(x, axis = NULL, keepdims = FALSE) {
 
 #' Returns a tensor with random binomial distribution of values.
 #'
+#' `k_random_binomial()` and `k_random_bernoulli()` are aliases for the same
+#' function. Both are maintained for backwards compatibility. New code
+#' should prefer `k_random_bernoulli()`.
+#'
 #' @param shape A list of integers, the shape of tensor to create.
 #' @param p A float, `0. <= p <= 1`, probability of binomial distribution.
 #' @param dtype String, dtype of returned tensor.
@@ -2084,15 +2088,44 @@ k_prod <- function(x, axis = NULL, keepdims = FALSE) {
 #'
 #' @template roxlate-keras-backend
 #'
+#' @rdname k_random_bernoulli
 #' @export
-k_random_binomial <- function(shape, p = 0.0, dtype = NULL, seed = NULL) {
-  keras$backend$random_binomial(
-    shape = backend_normalize_shape(shape),
-    p = p,
-    dtype = dtype,
-    seed = as_nullable_integer(seed)
-  )
-}
+k_random_binomial <-
+  function(shape,
+           p = 0.0,
+           dtype = NULL,
+           seed = NULL) {
+    args <- capture_args(match.call(),
+                         list(shape = backend_normalize_shape,
+                              seed = as_nullable_integer))
+
+    fn <- if (tf_version() >= "2.3")
+      keras$backend$random_bernoulli
+    else
+      keras$backend$random_binomial
+
+
+    {
+      # workaround around exception raised for non-float dtypes
+      # https://github.com/keras-team/keras/issues/15659
+
+      if (!is.null(args$dtype))
+        args$dtype <- tf$as_dtype(args$dtype)
+
+      if (isFALSE(args$dtype$is_floating)) {
+        out_dtype <- args$dtype
+        args$dtype <- k_floatx()
+        res <- do.call(fn, args)
+        return(k_cast(res, out_dtype))
+      }
+    }
+
+    do.call(fn, args)
+  }
+
+#' @export
+#' @rdname k_random_bernoulli
+k_random_bernoulli <- k_random_binomial
 
 
 #' Returns a tensor with normal distribution of values.

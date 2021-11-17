@@ -1,5 +1,9 @@
 # keras (development version)
 
+- Fixed warning issued by `k_random_binomial()`.
+- Fixed error issued when `k_random_binomial()` was passed a non-floating dtype.
+- Added `k_random_bernouli()` as an alias for `k_random_binomial()`.
+
 # keras 2.7.0
 
 - Default Tensorflow + Keras version is now 2.7.

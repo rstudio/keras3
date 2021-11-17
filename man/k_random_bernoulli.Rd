@@ -2,9 +2,12 @@
 % Please edit documentation in R/backend.R
 \name{k_random_binomial}
 \alias{k_random_binomial}
+\alias{k_random_bernoulli}
 \title{Returns a tensor with random binomial distribution of values.}
 \usage{
 k_random_binomial(shape, p = 0, dtype = NULL, seed = NULL)
+
+k_random_bernoulli(shape, p = 0, dtype = NULL, seed = NULL)
 }
 \arguments{
 \item{shape}{A list of integers, the shape of tensor to create.}
@@ -19,7 +22,9 @@ k_random_binomial(shape, p = 0, dtype = NULL, seed = NULL)
 A tensor.
 }
 \description{
-Returns a tensor with random binomial distribution of values.
+\code{k_random_binomial()} and \code{k_random_bernoulli()} are aliases for the same
+function. Both are maintained for backwards compatibility. New code
+should prefer \code{k_random_bernoulli()}.
 }
 \section{Keras Backend}{
 

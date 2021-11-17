@@ -23,6 +23,7 @@ for (i in seq_along(tf_vers))
     envname = names(tf_vers)[i],
     conda_python_version = py_vers[i],
     pip_ignore_installed = TRUE,
+    extra_packages = "ipython",
     method = "conda", restart_session = FALSE) # |> try()
 
 
