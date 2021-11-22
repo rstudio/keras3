@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
       </span>
     </div>
 
@@ -199,7 +199,7 @@
     
     
 <div class="source-ref">
-<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/cifar10_densenet.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/cifar10_densenet.R</a></p>
+<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/main/vignettes/examples/cifar10_densenet.R" class="uri">https://github.com/rstudio/keras/blob/main/vignettes/examples/cifar10_densenet.R</a></p>
 </div>
 <p>In this example we will train a DenseNet-40-12 to classify images from the CIFAR10 small images dataset. This takes ~125s per epoch on a NVIDIA GEFORCE 1080 Ti, so using a GPU is highly recommended.</p>
 <p><a href="https://arxiv.org/abs/1608.06993">DenseNet</a> is a network architecture where each layer is directly connected to every other layer in a feed-forward fashion (within each dense block). For each layer, the feature maps of all preceding layers are treated as separate inputs whereas its own feature maps are passed on as inputs to all subsequent layers. This connectivity pattern yields state-of-the-art accuracies on CIFAR10/100 (with or without data augmentation) and SVHN. On the large scale ILSVRC 2012 (ImageNet) dataset, DenseNet achieves a similar accuracy as ResNet, but using less than half the amount of parameters and roughly half the number of FLOPs.</p>

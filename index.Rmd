@@ -19,7 +19,7 @@ knitr::opts_chunk$set(eval = FALSE)
 # ![](https://s3.amazonaws.com/keras.io/img/keras-logo-2018-large-1200.png){width=300}
 
 <div id="build-status">
-[![Travis-CI Build Status](https://travis-ci.org/rstudio/keras.svg?branch=master)](https://travis-ci.org/rstudio/keras) 
+[![Travis-CI Build Status](https://travis-ci.org/rstudio/keras.svg?branch=main)](https://travis-ci.org/rstudio/keras)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/keras)](https://cran.r-project.org/package=keras)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/keras-team/keras/blob/master/LICENSE)
 </div>
@@ -40,7 +40,7 @@ knitr::opts_chunk$set(eval = FALSE)
 
 For additional details on why you might consider using Keras for your deep learning projects, see the [Why Use Keras?](articles/why_use_keras.html) article.
 
-This website provides documentation for the R interface to Keras. See the main Keras website at <https://keras.io> for additional information on the project. 
+This website provides documentation for the R interface to Keras. See the main Keras website at <https://keras.io> for additional information on the project.
 
 ## Getting Started
 
@@ -52,7 +52,7 @@ First, install the keras R package from GitHub as follows:
 devtools::install_github("rstudio/keras")
 ```
 
-The Keras R interface uses the [TensorFlow](https://www.tensorflow.org/) backend engine by default. To install both the core Keras library as well as the TensorFlow backend use the `install_keras()` function: 
+The Keras R interface uses the [TensorFlow](https://www.tensorflow.org/) backend engine by default. To install both the core Keras library as well as the TensorFlow backend use the `install_keras()` function:
 
 ```{r, eval=FALSE}
 library(keras)
@@ -67,7 +67,7 @@ Below we walk through a simple example of using Keras to recognize handwritten d
 
 The [Deep Learning with R](https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X) book by François Chollet (the creator of Keras) provides a more comprehensive introduction to both Keras and the concepts and practice of deep learning.
 
-You may also find it convenient to download the [Deep Learning with Keras](https://github.com/rstudio/cheatsheets/raw/master/keras.pdf){target="_self"} cheat sheet, a quick high-level reference to all of the capabilities of Keras.
+You may also find it convenient to download the [Deep Learning with Keras](https://github.com/rstudio/cheatsheets/raw/main/keras.pdf){target="_self"} cheat sheet, a quick high-level reference to all of the capabilities of Keras.
 
 ## MNIST Example
 
@@ -117,10 +117,10 @@ The core data structure of Keras is a model, a way to organize layers. The simpl
 We begin by creating a sequential model and then adding layers using the pipe (`%>%`) operator:
 
 ```{r}
-model <- keras_model_sequential() 
-model %>% 
-  layer_dense(units = 256, activation = 'relu', input_shape = c(784)) %>% 
-  layer_dropout(rate = 0.4) %>% 
+model <- keras_model_sequential()
+model %>%
+  layer_dense(units = 256, activation = 'relu', input_shape = c(784)) %>%
+  layer_dropout(rate = 0.4) %>%
   layer_dense(units = 128, activation = 'relu') %>%
   layer_dropout(rate = 0.3) %>%
   layer_dense(units = 10, activation = 'softmax')
@@ -136,17 +136,17 @@ summary(model)
 
 <pre style="box-shadow: none;"><code>Model
 ________________________________________________________________________________
-Layer (type)                        Output Shape                    Param #     
+Layer (type)                        Output Shape                    Param #
 ================================================================================
-dense_1 (Dense)                     (None, 256)                     200960      
+dense_1 (Dense)                     (None, 256)                     200960
 ________________________________________________________________________________
-dropout_1 (Dropout)                 (None, 256)                     0           
+dropout_1 (Dropout)                 (None, 256)                     0
 ________________________________________________________________________________
-dense_2 (Dense)                     (None, 128)                     32896       
+dense_2 (Dense)                     (None, 128)                     32896
 ________________________________________________________________________________
-dropout_2 (Dropout)                 (None, 128)                     0           
+dropout_2 (Dropout)                 (None, 128)                     0
 ________________________________________________________________________________
-dense_3 (Dense)                     (None, 10)                      1290        
+dense_3 (Dense)                     (None, 10)                      1290
 ================================================================================
 Total params: 235,146
 Trainable params: 235,146
@@ -169,8 +169,8 @@ Use the `fit()` function to train the model for 30 epochs using batches of 128 i
 
 ```{r, results='hide'}
 history <- model %>% fit(
-  x_train, y_train, 
-  epochs = 30, batch_size = 128, 
+  x_train, y_train,
+  epochs = 30, batch_size = 128,
   validation_split = 0.2
 )
 ```
@@ -208,17 +208,17 @@ model %>% predict_classes(x_test)
  [ reached getOption("max.print") -- omitted 9900 entries ]
 ```
 
-Keras provides a vocabulary for building deep learning models that is simple, elegant, and intuitive. Building a question answering system, an image classification model, a neural Turing machine, or any other model is just as straightforward. 
+Keras provides a vocabulary for building deep learning models that is simple, elegant, and intuitive. Building a question answering system, an image classification model, a neural Turing machine, or any other model is just as straightforward.
 
 ## Tutorials
 
 To learn the basics of Keras, we recommend the following sequence of tutorials:
 
-- [Basic Classification](articles/tutorial_basic_classification.html) --- In this tutorial, we train a neural network model to classify images of clothing, like sneakers and shirts. 
+- [Basic Classification](articles/tutorial_basic_classification.html) --- In this tutorial, we train a neural network model to classify images of clothing, like sneakers and shirts.
 
-- [Text Classification](articles/tutorial_basic_text_classification.html) --- This tutorial classifies movie reviews as positive or negative using the text of the review. 
+- [Text Classification](articles/tutorial_basic_text_classification.html) --- This tutorial classifies movie reviews as positive or negative using the text of the review.
 
-- [Basic Regression](articles/tutorial_basic_regression.html) --- This tutorial builds a model to predict the median price of homes in a Boston suburb during the mid-1970s. 
+- [Basic Regression](articles/tutorial_basic_regression.html) --- This tutorial builds a model to predict the median price of homes in a Boston suburb during the mid-1970s.
 
 - [Overfitting and Underfitting](articles/tutorial_overfit_underfit.html) --- In this tutorial, we explore two common regularization techniques (weight regularization and dropout) and use them to improve our movie review classification results.
 
@@ -226,7 +226,7 @@ To learn the basics of Keras, we recommend the following sequence of tutorials:
 
 These tutorials walk you through the main components of the Keras library and demonstrate the core workflows used for training and improving the performance of neural networks. The [Guide to Keras Basics](articles/guide_keras.html) provides a more condensed summary of this material.
 
-The [Deep Learning with Keras](https://github.com/rstudio/cheatsheets/raw/master/keras.pdf) cheat sheet also provides a condensed high level guide to using Keras.
+The [Deep Learning with Keras](https://github.com/rstudio/cheatsheets/raw/main/keras.pdf) cheat sheet also provides a condensed high level guide to using Keras.
 
 ## Learning More
 
@@ -255,7 +255,7 @@ The [function reference](reference/index.html) includes detailed information on 
 
 If you want a more comprehensive introduction to both Keras and the concepts and practice of deep learning, we recommend the [Deep Learning with R](https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X) book from Manning. This book is a collaboration between François Chollet, the creator of Keras, and J.J. Allaire, who wrote the R interface to Keras.
 
-The book presumes no significant knowledge of machine learning and deep learning, and goes all the way from basic theory to advanced practical applications, all using the R interface to Keras. 
+The book presumes no significant knowledge of machine learning and deep learning, and goes all the way from basic theory to advanced practical applications, all using the R interface to Keras.
 
 <div style="clear: both;"></div>
 

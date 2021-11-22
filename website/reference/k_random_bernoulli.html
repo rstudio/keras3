@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reshapes a tensor to the specified shape. — k_reshape • keras</title>
+<title>Returns a tensor with random binomial distribution of values. — k_random_binomial • keras</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,10 @@
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Reshapes a tensor to the specified shape. — k_reshape" />
-<meta property="og:description" content="Reshapes a tensor to the specified shape." />
+<meta property="og:title" content="Returns a tensor with random binomial distribution of values. — k_random_binomial" />
+<meta property="og:description" content="k_random_binomial() and k_random_bernoulli() are aliases for the same
+function. Both are maintained for backwards compatibility. New code
+should prefer k_random_bernoulli()." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -231,27 +233,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Reshapes a tensor to the specified shape.</h1>
+    <h1>Returns a tensor with random binomial distribution of values.</h1>
     <small class="dont-index">Source: <a href='https://github.com/rstudio/keras/blob/master/R/backend.R'><code>R/backend.R</code></a></small>
-    <div class="hidden name"><code>k_reshape.Rd</code></div>
+    <div class="hidden name"><code>k_random_bernoulli.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Reshapes a tensor to the specified shape.</p>
+    <p><code>k_random_binomial()</code> and <code>k_random_bernoulli()</code> are aliases for the same
+function. Both are maintained for backwards compatibility. New code
+should prefer <code>k_random_bernoulli()</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>k_reshape</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>shape</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>k_random_binomial</span><span class='op'>(</span><span class='va'>shape</span>, p <span class='op'>=</span> <span class='fl'>0</span>, dtype <span class='op'>=</span> <span class='cn'>NULL</span>, seed <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+
+<span class='fu'>k_random_bernoulli</span><span class='op'>(</span><span class='va'>shape</span>, p <span class='op'>=</span> <span class='fl'>0</span>, dtype <span class='op'>=</span> <span class='cn'>NULL</span>, seed <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Tensor or variable.</p></td>
+      <th>shape</th>
+      <td><p>A list of integers, the shape of tensor to create.</p></td>
     </tr>
     <tr>
-      <th>shape</th>
-      <td><p>Target shape list.</p></td>
+      <th>p</th>
+      <td><p>A float, <code>0. &lt;= p &lt;= 1</code>, probability of binomial distribution.</p></td>
+    </tr>
+    <tr>
+      <th>dtype</th>
+      <td><p>String, dtype of returned tensor.</p></td>
+    </tr>
+    <tr>
+      <th>seed</th>
+      <td><p>Integer, random seed.</p></td>
     </tr>
     </table>
 

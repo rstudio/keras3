@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
       </span>
     </div>
 
@@ -199,7 +199,7 @@
     
     
 <div class="source-ref">
-<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/quora_siamese_lstm.R" class="uri">https://github.com/rstudio/keras/blob/master/vignettes/examples/quora_siamese_lstm.R</a></p>
+<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/main/vignettes/examples/quora_siamese_lstm.R" class="uri">https://github.com/rstudio/keras/blob/main/vignettes/examples/quora_siamese_lstm.R</a></p>
 </div>
 <p>In this tutorial we will use Keras to classify duplicated questions from Quora. The dataset first appeared in the Kaggle competition <a href="https://www.kaggle.com/c/quora-question-pairs"><em>Quora Question Pairs</em></a>. The dataset consists of ~400k pairs of questions and a column indicating if the question pair is duplicated.</p>
 <p>Our implementation is inspired by the Siamese Recurrent Architecture, Mueller et al. <a href="https://dl.acm.org/citation.cfm?id=3016291"><em>Siamese recurrent architectures for learning sentence similarity</em></a>, with small modifications like the similarity measure and the embedding layers (The original paper uses pre-trained word vectors). Using this kind of architecture dates back to 2005 with <a href="https://dl.acm.org/citation.cfm?id=1068961">Le Cun et al</a> and is usefull for verification tasks. The idea is to learn a function that maps input patterns into a target space such that a similarity measure in the target space approximates the “semantic” distance in the input space.</p>

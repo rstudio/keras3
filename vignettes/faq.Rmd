@@ -1,10 +1,10 @@
 ---
 title: "Frequently Asked Questions"
-output: 
+output:
   rmarkdown::html_vignette: default
 vignette: >
-  %\VignetteIndexEntry{Frequently Asked Questions} 
-  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteIndexEntry{Frequently Asked Questions}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 type: docs
 repo: https://github.com/rstudio/keras
@@ -113,7 +113,7 @@ library(tensorflow)
 with(tf$device_scope("/gpu:0", {
   encoded_a <- shared_lstm(tweet_a)
 }):
-    
+
 # Process the next sequence on another GPU
 with(tf$device_scope("/gpu:1", {
   encoded_b <- shared_lstm(tweet_b)
@@ -143,16 +143,16 @@ Below are some common definitions that are necessary to know and understand to c
 Unlike most R objects, Keras objects are "mutable". That means that when you modify an object you're modifying it "in place", and you don't need to assign the updated object back to the original name. For example, to add layers to a Keras model you might use this code:
 
 ```{r}
-model %>% 
-  layer_dense(units = 32, activation = 'relu', input_shape = c(784)) %>% 
+model %>%
+  layer_dense(units = 32, activation = 'relu', input_shape = c(784)) %>%
   layer_dense(units = 10, activation = 'softmax')
 ```
 
 Rather than this code:
 
 ```{r}
-model <- model %>% 
-  layer_dense(units = 32, activation = 'relu', input_shape = c(784)) %>% 
+model <- model %>%
+  layer_dense(units = 32, activation = 'relu', input_shape = c(784)) %>%
   layer_dense(units = 10, activation = 'softmax')
 ```
 
@@ -223,15 +223,15 @@ For example:
 ```{r}
 # assuming the original model looks like this:
 #   model <- keras_model_sequential()
-#   model %>% 
-#     layer_dense(units = 2, input_dim = 3, name = "dense 1") %>% 
-#     layer_dense(units = 3, name = "dense_3") %>% 
+#   model %>%
+#     layer_dense(units = 2, input_dim = 3, name = "dense 1") %>%
+#     layer_dense(units = 3, name = "dense_3") %>%
 #     ...
 #   save_model_weights(model, fname)
 
 # new model
 model <- keras_model_sequential()
-model %>% 
+model %>%
   layer_dense(units = 2, input_dim = 3, name = "dense 1") %>%  # will be loaded
   layer_dense(units = 3, name = "dense_3")                     # will not be loaded
 
@@ -269,7 +269,7 @@ The output of generator functions must be a list of one of these forms:
 
    - (inputs, targets)
    - (inputs, targets, sample_weights)
-     
+
 All arrays should contain the same number of samples. The generator is expected to loop over its data indefinitely. For example, here's simple generator function that yields randomly sampled batches of data:
 
 ```{r}
@@ -280,10 +280,10 @@ sampling_generator <- function(X_data, Y_data, batch_size) {
   }
 }
 
-model %>% 
-  fit_generator(sampling_generator(X_train, Y_train, batch_size = 128), 
+model %>%
+  fit_generator(sampling_generator(X_train, Y_train, batch_size = 128),
                 steps_per_epoch = nrow(X_train) / 128, epochs = 10)
-  
+
 ```
 
 
@@ -295,28 +295,28 @@ The above example doesn't however address the use case of datasets that don't fi
 
 ```{r}
 data_files_generator <- function(dir) {
-  
+
   files < list.files(dir)
   next_file <- 0
-  
+
   function() {
-    
+
     # move to the next file (note the <<- assignment operator)
     next_file <<- next_file + 1
-    
+
     # if we've exhausted all of the files then start again at the
     # beginning of the list (keras generators need to yield
     # data infinitely -- termination is controlled by the epochs
     # and steps_per_epoch arguments to fit_generator())
     if (next_file > length(files))
       next_file <<- 1
-    
+
     # determine the file name
     file <- files[[next_file]]
-    
-    # process and return the data in the file. note that in a 
+
+    # process and return the data in the file. note that in a
     # real example you'd further subdivide the data within the
-    # file into appropriately sized training batches. this 
+    # file into appropriately sized training batches. this
     # would make this function much more complicated so we
     # don't demonstrated it here
     file_to_training_data(file)
@@ -415,10 +415,10 @@ conv_base <- application_vgg16(
 freeze_weights(conv_base)
 
 # create a composite model that includes the base + more layers
-model <- keras_model_sequential() %>% 
-  conv_base %>% 
-  layer_flatten() %>% 
-  layer_dense(units = 256, activation = "relu") %>% 
+model <- keras_model_sequential() %>%
+  conv_base %>%
+  layer_flatten() %>%
+  layer_dense(units = 256, activation = "relu") %>%
   layer_dense(units = 1, activation = "sigmoid")
 
 # compile
@@ -465,9 +465,9 @@ You can remove the last added layer in a Sequential model by calling `pop_layer(
 
 ```{r}
 model <- keras_model_sequential()
-model %>% 
-  layer_dense(units = 32, activation = 'relu', input_shape = c(784)) %>% 
-  layer_dense(units = 32, activation = 'relu') %>% 
+model %>%
+  layer_dense(units = 32, activation = 'relu', input_shape = c(784)) %>%
+  layer_dense(units = 32, activation = 'relu') %>%
   layer_dense(units = 32, activation = 'relu')
 
 length(model$layers)     # "3"
@@ -523,7 +523,7 @@ This should automatically discover and use the Python environment where `plaidml
 
 ```{r}
 library(keras)
-use_condaenv("plaidml") 
+use_condaenv("plaidml")
 use_backend("plaidml")
 ```
 
@@ -532,7 +532,7 @@ use_backend("plaidml")
 
 ### Testing on CRAN
 
-The main consideration in using Keras within another R package is to ensure that your package can be tested in an environment where Keras is not available (e.g. the CRAN test servers). To do this, arrange for your tests to be skipped when Keras isn't available using the `is_keras_available()` function. 
+The main consideration in using Keras within another R package is to ensure that your package can be tested in an environment where Keras is not available (e.g. the CRAN test servers). To do this, arrange for your tests to be skipped when Keras isn't available using the `is_keras_available()` function.
 
 For example, here's a [testthat](https://r-pkgs.org/tests.html) utility function that can be used to skip a test when Keras isn't available:
 
@@ -554,7 +554,7 @@ You can pass the `version` argument to check for a specific version of Keras.
 
 ### Keras Module
 
-Another consideration is gaining access to the underlying Keras Python module. You might need to do this if you require lower level access to Keras than is provided for by the Keras R package. 
+Another consideration is gaining access to the underlying Keras Python module. You might need to do this if you require lower level access to Keras than is provided for by the Keras R package.
 
 Since the Keras R package can bind to multiple different implementations of Keras (either the original Keras or the TensorFlow implementation of Keras), you should use the `keras::implementation()` function to obtain access to the correct python module. You can use this function within the `.onLoad` function of a package to provide global access to the module within your package. For example:
 
@@ -564,7 +564,7 @@ keras <- NULL
 
 # Obtain a reference to the module from the keras R package
 .onLoad <- function(libname, pkgname) {
-  keras <<- keras::implementation() 
+  keras <<- keras::implementation()
 }
 ```
 
@@ -575,9 +575,9 @@ If you create [custom layers in R](custom_layers.html) or import other Python pa
 
 ## How can I obtain reproducible results using Keras during development?
 
-During development of a model, sometimes it is useful to be able to obtain reproducible results from run to run in order to determine if a change in performance is due to an actual model or data modification, or merely a result of a new random sample.  
+During development of a model, sometimes it is useful to be able to obtain reproducible results from run to run in order to determine if a change in performance is due to an actual model or data modification, or merely a result of a new random sample.
 
-The `use_session_with_seed()` function establishes a common random seed for R, Python, NumPy, and TensorFlow. It furthermore disables hash randomization, GPU computations, and CPU parallelization, which can be additional sources of non-reproducibility. 
+The `use_session_with_seed()` function establishes a common random seed for R, Python, NumPy, and TensorFlow. It furthermore disables hash randomization, GPU computations, and CPU parallelization, which can be additional sources of non-reproducibility.
 
 To use the function, call it immediately after you load the keras package:
 
@@ -589,7 +589,7 @@ use_session_with_seed(42)
 
 ```
 
-This function takes all measures known to promote reproducible results from Keras sessions, however it's possible that various individual features or libraries used by the backend escape its effects. If you encounter non-reproducible results please investigate the possible sources of the problem. The source code for `use_session_with_seed()` is here: https://github.com/rstudio/tensorflow/blob/master/R/seed.R. Contributions via pull request are very welcome!
+This function takes all measures known to promote reproducible results from Keras sessions, however it's possible that various individual features or libraries used by the backend escape its effects. If you encounter non-reproducible results please investigate the possible sources of the problem. The source code for `use_session_with_seed()` is here: https://github.com/rstudio/tensorflow/blob/main/R/seed.R. Contributions via pull request are very welcome!
 
 Please note again that `use_session_with_seed()` disables GPU computations and CPU parallelization by default (as both can lead to non-deterministic computations) so should generally not be used when model training time is paramount. You can re-enable GPU computations and/or CPU parallelism using the `disable_gpu` and `disable_parallel_cpu` arguments. For example:
 

@@ -88,7 +88,7 @@ feature maps and should be used instead." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
       </span>
     </div>
 
@@ -267,10 +267,13 @@ feature maps and should be used instead.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>What to call the new <code>Layer</code> instance with. Typically a keras
-<code>Model</code>, another <code>Layer</code>, or a <code>tf.Tensor</code>/<code>KerasTensor</code>. If <code>object</code> is
-missing, the <code>Layer</code> instance is returned, otherwise, <code>layer(object)</code> is
-returned.</p></td>
+      <td><p>What to compose the new <code>Layer</code> instance with. Typically a
+Sequential model or a Tensor (e.g., as returned by <code><a href='layer_input.html'>layer_input()</a></code>).
+The return value depends on <code>object</code>. If <code>object</code> is:</p><ul>
+<li><p>missing or <code>NULL</code>, the <code>Layer</code> instance is returned.</p></li>
+<li><p>a <code>Sequential</code> model, the model with an additional layer is returned.</p></li>
+<li><p>a Tensor, the output tensor from <code>layer_instance(object)</code> is returned.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>rate</th>

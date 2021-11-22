@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.6.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
       </span>
     </div>
 
@@ -237,6 +237,19 @@
     <div id="keras-development-version" class="section level1">
 <h1 class="page-header" data-toc-text="development version">
 <a href="#keras-development-version" class="anchor"></a>keras (development version)<small> Unreleased </small>
+</h1>
+<p>Breaking change: The semantics of passing a named list to <code><a href="../reference/keras_model.html">keras_model()</a></code> have changed. Previously, <code><a href="../reference/keras_model.html">keras_model()</a></code> would <code><a href="https://rdrr.io/r/base/unname.html">unname()</a></code> supplied <code>inputs</code> and <code>outputs</code>. Then, if a named list was passed to subsequent <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>/<code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code>/<code><a href="https://rdrr.io/r/base/call.html">call()</a></code>/<code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> invocations, then matching was done to <code>output_tensor$name</code>’s. Now, matching is done to <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> of <code>inputs</code> and/or <code>outputs.   Call</code>unname(inputs)<code>or</code>unname(outputs)<code>to restore the old behavior, e.g.:</code>keras_model(unname(inputs), unname(outputs))`</p>
+<p><code><a href="../reference/keras_model.html">keras_model()</a></code> can now accept a named list for multi-input and/or multi-output models. The named list is converted to a <code>dict</code> in python. if <code>inputs</code> is a named list: - <code><a href="https://rdrr.io/r/base/call.html">call()</a></code>, <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code>, and <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> methods can also accept a named list for <code>x</code>, with names matching to the names of <code>inputs</code> when the model was constructed. Positional matching of <code>x</code> is still also supported (requires python 3.7+). if <code>outputs</code> is a named list: - <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code> methods can <em>only</em><br>
+accept a named list for <code>y</code>, with names matching to the names of <code>outputs</code> when the model was constructed.</p>
+<ul>
+<li>Fixed warning issued by <code><a href="../reference/k_random_binomial.html">k_random_binomial()</a></code>.</li>
+<li>Fixed error issued when <code><a href="../reference/k_random_binomial.html">k_random_binomial()</a></code> was passed a non-floating dtype.</li>
+<li>Added <code>k_random_bernouli()</code> as an alias for <code><a href="../reference/k_random_binomial.html">k_random_binomial()</a></code>.</li>
+</ul>
+</div>
+    <div id="keras-270" class="section level1">
+<h1 class="page-header" data-toc-text="2.7.0">
+<a href="#keras-270" class="anchor"></a>keras 2.7.0<small> 2021-11-09 </small>
 </h1>
 <ul>
 <li><p>Default Tensorflow + Keras version is now 2.7.</p></li>
