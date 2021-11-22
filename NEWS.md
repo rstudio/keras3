@@ -1,5 +1,27 @@
 # keras (development version)
 
+Breaking change:
+  The semantics of passing a named list to `keras_model()` have changed. 
+  Previously, `keras_model()` would `unname()` supplied `inputs` and `outputs`. 
+  Then, if a named list was passed to subsequent 
+  `fit()`/`evaluate()`/`call()`/`predict()` invocations, 
+  then matching was done to `output_tensor$name`'s. 
+  Now, matching is done to `names()` of `inputs` and/or `outputs.
+  Call `unname(inputs)` or `unname(outputs)` to restore the old behavior, e.g.:
+    `keras_model(unname(inputs), unname(outputs))`
+
+ `keras_model()` can now accept a named list for multi-input and/or multi-output 
+  models. The named list is converted to a `dict` in python.
+  if `inputs` is a named list:
+      - `call()`, `fit()`, `evaluate()`, and `predict()` methods can also 
+      accept a named list for `x`, with names matching to the 
+      names of `inputs` when the model was constructed.
+      Positional matching of `x` is still also supported (requires python 3.7+).
+  if `outputs` is a named list:
+      - `fit()` and `evaluate()` methods can *only*  
+      accept a named list for `y`, with names matching to the 
+      names of `outputs` when the model was constructed.
+      
 - Fixed warning issued by `k_random_binomial()`.
 - Fixed error issued when `k_random_binomial()` was passed a non-floating dtype.
 - Added `k_random_bernouli()` as an alias for `k_random_binomial()`.

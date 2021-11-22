@@ -31,14 +31,9 @@
 #' }
 #' @export
 keras_model <- function(inputs, outputs = NULL, ...) {
-  args <- list(inputs = unname(inputs),
-               outputs = unname(outputs),
-               ...)
-  do.call(keras$models$Model, args)
+  keras$models$Model(inputs = inputs, outputs = outputs, ...)
 }
 
-# TODO: maybe warn if names are being ignored in keras_model(named_list)?
-# NOTE: keras now accepts a dict here, but it's a footgun since it doesn't check tensor.name.
 
 #' Keras Model composed of a linear stack of layers
 #'

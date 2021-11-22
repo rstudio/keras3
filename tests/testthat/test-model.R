@@ -243,3 +243,122 @@ test_succeeds("regression test for https://github.com/rstudio/keras/issues/1201"
   })
 
 })
+
+
+
+test_succeeds("can use functional api with dicts", {
+
+# arr <- function (..., mode = "double", gen = seq_len)
+#   array(as.vector(gen(prod(unlist(c(...)))), mode = mode), unlist(c(...)))
+
+  inputs <- list(
+    input_tensor_1 = layer_input(list(1), name = "input_tensor_1_name"),
+    input_tensor_2 = layer_input(list(2), name = "input_tensor_2_name"),
+    input_tensor_3 = layer_input(list(3), name = "input_tensor_3_name")
+  )
+
+  outputs <- list(
+    output_tensor_1 = inputs$input_tensor_1 %>% layer_dense(4, name = "output_tensor_1_name"),
+    output_tensor_2 = inputs$input_tensor_2 %>% layer_dense(5, name = "output_tensor_2_name"),
+    output_tensor_3 = inputs$input_tensor_3 %>% layer_dense(6, name = "output_tensor_3_name")
+  )
+
+  N <- 10
+  new_xy <- function() {
+    x <- list(
+      input_tensor_1 = random_array(N, 1),
+      input_tensor_2 = random_array(N, 2),
+      input_tensor_3 = random_array(N, 3)
+    )
+
+    y <- list(
+      output_tensor_1 = random_array(N, 4),
+      output_tensor_2 = random_array(N, 5),
+      output_tensor_3 = random_array(N, 6)
+    )
+    list(x, y)
+  }
+
+
+  chk <- function(inputs, outputs, x, y, error = FALSE) {
+
+    model <- keras_model(inputs, outputs) %>%
+      compile(loss = loss_mean_squared_error(),
+              optimizer = optimizer_adam())
+
+    .chk <- vector("list", 4L)
+    names(.chk) <- c("call", "fit", "evaluate", "predict")
+    for (nm in names(.chk))
+      .chk[[nm]] <- function(expr) expect_error(force(expr), NA)
+
+    if (isTRUE(error)) {
+      for (nm in names(.chk))
+        .chk[[nm]] <- expect_error
+    } else if (!isFALSE(error)) {
+      .chk[error] <- list(expect_error)
+    }
+
+    .chk$call({
+      res <- model(x)
+      expect_identical(names(res), names(outputs))
+    })
+
+    .chk$fit({
+      model %>% fit(x, y, epochs = 1, verbose = FALSE)
+      # model$fit(x, y, epochs = 1L, verbose = 0L)
+    })
+
+    .chk$evaluate({
+      model %>% evaluate(x, y, epochs = 1, verbose = FALSE)
+    })
+
+    .chk$predict({
+      res <- model %>% predict(x)
+      expect_identical(names(res), names(outputs))
+    })
+  }
+
+  c(x, y) %<-% new_xy()
+
+  # everything named
+  chk(inputs, outputs, x, y)
+  chk(inputs, outputs, x[c(3,1,2)], y[c(2, 3, 1)])
+
+  # everything unnamed
+  chk(unname(inputs), unname(outputs), unname(x), unname(y))
+  chk(unname(inputs), unname(outputs), unname(x)[c(3,1,2)], unname(y)[c(2, 3, 1)], error = TRUE)
+  chk(unname(inputs), unname(outputs), unname(x), unname(y)[c(2, 3, 1)], error = c("fit", "evaluate"))
+  chk(unname(inputs), unname(outputs), unname(x)[c(3,1,2)], unname(y), error = TRUE)
+
+  # model constructed with unnamed outputs,
+  # passed names that don't match to output_tensor.name's
+  chk(unname(inputs), unname(outputs), x, y, error = TRUE)
+
+  # model constructed with unnamed outputs,
+  # passed names that do match to output_tensor.name's
+  chk(unname(inputs), unname(outputs),
+      x = rlang::set_names(x, ~ paste0(.x, "_name")),
+      y = rlang::set_names(y, ~ paste0(.x, "_name")))
+
+  # model constructed with named outputs,
+  # passed names that match to output_tensor.name's, not output names
+  chk(inputs, outputs,
+      x = rlang::set_names(x, ~ paste0(.x, "_name")),
+      y = rlang::set_names(y, ~ paste0(.x, "_name")),
+      error = TRUE)
+
+  # model constructed with named outputs,
+  # passed unnamed x, named y
+  chk(inputs, outputs, unname(x), y)
+  chk(inputs, outputs, unname(x)[c(2,1,3)], y, error = TRUE)
+
+  # model constructed with named outputs
+  # passed unnamed(y) (x can still match positionally)
+  chk(inputs, outputs, unname(x), unname(y), error = c("fit", "evaluate"))
+  chk(inputs, outputs,        x , unname(y), error = c("fit", "evaluate"))
+
+  # model constructed with named outputs
+  # passed unname x, but in wrong order so positional mathcing wrong
+  chk(inputs, outputs, unname(x)[c(3,1,2)], unname(y), error = TRUE)
+
+})
