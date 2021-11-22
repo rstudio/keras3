@@ -2110,7 +2110,7 @@ k_random_binomial <-
       # https://github.com/keras-team/keras/issues/15659
 
       if (!is.null(args$dtype))
-        args$dtype <- tf$as_dtype(args$dtype)
+        args$dtype <- tensorflow::tf$as_dtype(args$dtype)
 
       if (isFALSE(args$dtype$is_floating)) {
         out_dtype <- args$dtype
