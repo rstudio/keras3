@@ -476,7 +476,7 @@ sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count"
 #' Loads an image into PIL format.
 #'
 #' @param path Path to image file
-#' @param grayscale Boolean, whether to load the image as grayscale.
+#' @param grayscale DEPRECATED use `color_mode="grayscale"`
 #' @param target_size Either `NULL` (default to original size) or integer vector
 #'   `(img_height, img_width)`.
 #' @param interpolation Interpolation method used to resample the image if the
@@ -491,7 +491,8 @@ sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count"
 #' @family image preprocessing
 #'
 #' @export
-image_load <- function(path, grayscale = FALSE, target_size = NULL,
+image_load <- function(path, grayscale = FALSE, color_mode='rgb',
+                       target_size = NULL,
                        interpolation = "nearest") {
 
   if (!have_pillow())
@@ -507,6 +508,7 @@ image_load <- function(path, grayscale = FALSE, target_size = NULL,
 
   args <- list(
     path = normalize_path(path),
+    color_mode = color_mode,
     grayscale = grayscale,
     target_size = target_size
   )

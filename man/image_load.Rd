@@ -7,6 +7,7 @@
 image_load(
   path,
   grayscale = FALSE,
+  color_mode = "rgb",
   target_size = NULL,
   interpolation = "nearest"
 )
@@ -14,7 +15,7 @@ image_load(
 \arguments{
 \item{path}{Path to image file}
 
-\item{grayscale}{Boolean, whether to load the image as grayscale.}
+\item{grayscale}{DEPRECATED use \code{color_mode="grayscale"}}
 
 \item{target_size}{Either \code{NULL} (default to original size) or integer vector
 \verb{(img_height, img_width)}.}
