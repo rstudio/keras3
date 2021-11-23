@@ -6,8 +6,8 @@
   Then, if a named list was passed to subsequent 
   `fit()`/`evaluate()`/`call()`/`predict()` invocations, 
   matching of `x` and `y` was done to the model's `tensor$name`'s. 
-  Now, matching is done to `names()` of `inputs` and/or `outputs.
-  Call `unname(inputs)` or `unname(outputs)` to restore the old behavior, e.g.:
+  Now, matching is done to `names()` of `inputs` and/or `outputs`.
+  Call `unname()` on `inputs` and `outputs` to restore the old behavior, e.g.:
     ```keras_model(unname(inputs), unname(outputs))```
 
   `keras_model()` can now accept a named list for multi-input and/or multi-output 
@@ -25,7 +25,7 @@
     names of `outputs` when the model was constructed.
       
 - Fixed warning issued by `k_random_binomial()`.
-- Fixed error issued when `k_random_binomial()` was passed a non-floating dtype.
+- Fixed error raised when `k_random_binomial()` was passed a non-floating dtype.
 - Added `k_random_bernouli()` as an alias for `k_random_binomial()`.
 
 - `image_laod()` gains a `color_mode` argument.
