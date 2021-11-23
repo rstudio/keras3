@@ -31,6 +31,9 @@
 #' }
 #' @export
 keras_model <- function(inputs, outputs = NULL, ...) {
+  if (tf_version() < "2.4")
+    names(inputs) <- names(outputs) <- NULL
+
   keras$models$Model(inputs = inputs, outputs = outputs, ...)
 }
 

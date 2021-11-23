@@ -245,7 +245,7 @@ test_succeeds("regression test for https://github.com/rstudio/keras/issues/1201"
 })
 
 
-
+if(tf_version() >= "2.4")
 test_succeeds("can use functional api with dicts", {
 
 # arr <- function (..., mode = "double", gen = seq_len)

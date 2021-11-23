@@ -238,13 +238,27 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#keras-development-version" class="anchor"></a>keras (development version)<small> Unreleased </small>
 </h1>
-<p>Breaking change: The semantics of passing a named list to <code><a href="../reference/keras_model.html">keras_model()</a></code> have changed. Previously, <code><a href="../reference/keras_model.html">keras_model()</a></code> would <code><a href="https://rdrr.io/r/base/unname.html">unname()</a></code> supplied <code>inputs</code> and <code>outputs</code>. Then, if a named list was passed to subsequent <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>/<code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code>/<code><a href="https://rdrr.io/r/base/call.html">call()</a></code>/<code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> invocations, then matching was done to <code>output_tensor$name</code>’s. Now, matching is done to <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> of <code>inputs</code> and/or <code>outputs.   Call</code>unname(inputs)<code>or</code>unname(outputs)<code>to restore the old behavior, e.g.:</code>keras_model(unname(inputs), unname(outputs))`</p>
-<p><code><a href="../reference/keras_model.html">keras_model()</a></code> can now accept a named list for multi-input and/or multi-output models. The named list is converted to a <code>dict</code> in python. if <code>inputs</code> is a named list: - <code><a href="https://rdrr.io/r/base/call.html">call()</a></code>, <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code>, and <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> methods can also accept a named list for <code>x</code>, with names matching to the names of <code>inputs</code> when the model was constructed. Positional matching of <code>x</code> is still also supported (requires python 3.7+). if <code>outputs</code> is a named list: - <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code> methods can <em>only</em><br>
-accept a named list for <code>y</code>, with names matching to the names of <code>outputs</code> when the model was constructed.</p>
 <ul>
-<li>Fixed warning issued by <code><a href="../reference/k_random_binomial.html">k_random_binomial()</a></code>.</li>
-<li>Fixed error issued when <code><a href="../reference/k_random_binomial.html">k_random_binomial()</a></code> was passed a non-floating dtype.</li>
-<li>Added <code>k_random_bernouli()</code> as an alias for <code><a href="../reference/k_random_binomial.html">k_random_binomial()</a></code>.</li>
+<li>
+<p>Breaking change: The semantics of passing a named list to <code><a href="../reference/keras_model.html">keras_model()</a></code> have changed.</p>
+<p>Previously, <code><a href="../reference/keras_model.html">keras_model()</a></code> would <code><a href="https://rdrr.io/r/base/unname.html">unname()</a></code> supplied <code>inputs</code> and <code>outputs</code>.<br>
+Then, if a named list was passed to subsequent <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>/<code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code>/<code><a href="https://rdrr.io/r/base/call.html">call()</a></code>/<code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> invocations, matching of <code>x</code> and <code>y</code> was done to the model’s <code>tensor$name</code>’s. Now, matching is done to <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> of <code>inputs</code> and/or <code>outputs. Call</code>unname(inputs)<code>or</code>unname(outputs)` to restore the old behavior, e.g.: <code>keras_model(unname(inputs), unname(outputs))</code></p>
+<p><code><a href="../reference/keras_model.html">keras_model()</a></code> can now accept a named list for multi-input and/or multi-output models. (Requires Tensorflow &gt;= 2.4). The named list is converted to a <code>dict</code> in python.</p>
+<p>If <code>inputs</code> is a named list:</p>
+<ul>
+<li>
+<code><a href="https://rdrr.io/r/base/call.html">call()</a></code>, <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code>, and <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> methods can also accept a named list for <code>x</code>, with names matching to the names of <code>inputs</code> when the model was constructed. Positional matching of <code>x</code> is still also supported (requires python 3.7+).</li>
+</ul>
+<p>If <code>outputs</code> is a named list:</p>
+<ul>
+<li>
+<code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code> methods can <em>only</em> accept a named list for <code>y</code>, with names matching to the names of <code>outputs</code> when the model was constructed.</li>
+</ul>
+</li>
+<li><p>Fixed warning issued by <code><a href="../reference/k_random_binomial.html">k_random_binomial()</a></code>.</p></li>
+<li><p>Fixed error issued when <code><a href="../reference/k_random_binomial.html">k_random_binomial()</a></code> was passed a non-floating dtype.</p></li>
+<li><p>Added <code>k_random_bernouli()</code> as an alias for <code><a href="../reference/k_random_binomial.html">k_random_binomial()</a></code>.</p></li>
+<li><p><code>image_laod()</code> gains a <code>color_mode</code> argument.</p></li>
 </ul>
 </div>
     <div id="keras-270" class="section level1">
@@ -253,7 +267,8 @@ accept a named list for <code>y</code>, with names matching to the names of <cod
 </h1>
 <ul>
 <li><p>Default Tensorflow + Keras version is now 2.7.</p></li>
-<li>New API for constructing RNN (Recurrent Neural Network) layers. This is a flexible interface that complements the existing RNN layers. It is primarily intended for advanced / research applications, e.g, prototyping novel architectures. It allows you to compose a RNN with a custom “cell”, a Keras layer that processes one step of a sequence. New symbols:
+<li>
+<p>New API for constructing RNN (Recurrent Neural Network) layers. This is a flexible interface that complements the existing RNN layers. It is primarily intended for advanced / research applications, e.g, prototyping novel architectures. It allows you to compose a RNN with a custom “cell”, a Keras layer that processes one step of a sequence. New symbols:</p>
 <ul>
 <li>
 <code><a href="../reference/layer_rnn.html">layer_rnn()</a></code>, which can compose with builtin cells:</li>
@@ -264,13 +279,15 @@ accept a named list for <code>y</code>, with names matching to the names of <cod
 <code><a href="../reference/layer_stacked_rnn_cells.html">layer_stacked_rnn_cells()</a></code> To learn more, including how to make a custom cell layer, see the new vignette: “Working with RNNs”.</li>
 </ul>
 </li>
-<li>New dataset functions:
+<li>
+<p>New dataset functions:</p>
 <ul>
 <li><code><a href="../reference/text_dataset_from_directory.html">text_dataset_from_directory()</a></code></li>
 <li><code><a href="../reference/timeseries_dataset_from_array.html">timeseries_dataset_from_array()</a></code></li>
 </ul>
 </li>
-<li>New layers:
+<li>
+<p>New layers:</p>
 <ul>
 <li><code><a href="../reference/layer_additive_attention.html">layer_additive_attention()</a></code></li>
 <li><code><a href="../reference/layer_conv_lstm_1d.html">layer_conv_lstm_1d()</a></code></li>
@@ -281,7 +298,8 @@ accept a named list for <code>y</code>, with names matching to the names of <cod
 <li><p><code><a href="../reference/layer_lstm.html">layer_lstm()</a></code> and <code><a href="../reference/layer_gru.html">layer_gru()</a></code>: default value for <code>recurrent_activation</code> changed from <code>"hard_sigmoid"</code> to <code>"sigmoid"</code>.</p></li>
 <li><p><code><a href="../reference/layer_gru.html">layer_gru()</a></code>: default value <code>reset_after</code> changed from <code>FALSE</code> to <code>TRUE</code></p></li>
 <li><p>New vignette: “Transfer learning and fine-tuning”.</p></li>
-<li>New applications:
+<li>
+<p>New applications:</p>
 <ul>
 <li>MobileNet V3: <code><a href="../reference/application_mobilenet_v3.html">application_mobilenet_v3_large()</a></code>, <code><a href="../reference/application_mobilenet_v3.html">application_mobilenet_v3_small()</a></code>
 </li>
@@ -311,13 +329,13 @@ accept a named list for <code>y</code>, with names matching to the names of <cod
 <ul>
 <li>
 <p>New family of <em>preprocessing</em> layers. These are the spiritual successor to the <code>tfdatasets::step_*</code> family of data transformers (to be deprecated in a future release). Added a new vignette: “Working with Preprocessing Layers”. New functions:</p>
-Image preprocessing:
+<p>Image preprocessing:</p>
 <ul>
 <li><code><a href="../reference/layer_resizing.html">layer_resizing()</a></code></li>
 <li><code><a href="../reference/layer_rescaling.html">layer_rescaling()</a></code></li>
 <li><code><a href="../reference/layer_center_crop.html">layer_center_crop()</a></code></li>
 </ul>
-Image augmentation:
+<p>Image augmentation:</p>
 <ul>
 <li><code><a href="../reference/layer_random_crop.html">layer_random_crop()</a></code></li>
 <li><code><a href="../reference/layer_random_flip.html">layer_random_flip()</a></code></li>
@@ -328,19 +346,19 @@ Image augmentation:
 <li><code><a href="../reference/layer_random_height.html">layer_random_height()</a></code></li>
 <li><code><a href="../reference/layer_random_width.html">layer_random_width()</a></code></li>
 </ul>
-Categorical features preprocessing:
+<p>Categorical features preprocessing:</p>
 <ul>
 <li><code><a href="../reference/layer_category_encoding.html">layer_category_encoding()</a></code></li>
 <li><code><a href="../reference/layer_hashing.html">layer_hashing()</a></code></li>
 <li><code><a href="../reference/layer_integer_lookup.html">layer_integer_lookup()</a></code></li>
 <li><code><a href="../reference/layer_string_lookup.html">layer_string_lookup()</a></code></li>
 </ul>
-Numerical features preprocessing:
+<p>Numerical features preprocessing:</p>
 <ul>
 <li><code><a href="../reference/layer_normalization.html">layer_normalization()</a></code></li>
 <li><code><a href="../reference/layer_discretization.html">layer_discretization()</a></code></li>
 </ul>
-These join the previous set of text preprocessing functions, each of which have some minor changes:
+<p>These join the previous set of text preprocessing functions, each of which have some minor changes:</p>
 <ul>
 <li>
 <code><a href="../reference/layer_text_vectorization.html">layer_text_vectorization()</a></code> (changed arguments)</li>
@@ -350,7 +368,7 @@ These join the previous set of text preprocessing functions, each of which have 
 </ul>
 </li>
 <li>
-<code><a href="../reference/adapt.html">adapt()</a></code> changes:
+<p><code><a href="../reference/adapt.html">adapt()</a></code> changes:</p>
 <ul>
 <li>Now accepts all <em>features preprocessing</em> layers, previously only <code><a href="../reference/layer_text_vectorization.html">layer_text_vectorization()</a></code> instances were valid.</li>
 <li>
@@ -359,17 +377,16 @@ These join the previous set of text preprocessing functions, each of which have 
 <li>Now returns the adapted layer invisibly for composability with <code>%&gt;%</code> (previously returned <code>NULL</code>)</li>
 </ul>
 </li>
+<li><p><code><a href="../reference/layer_text_vectorization.html">get_vocabulary()</a></code> gains a <code>include_special_tokens</code> argument.</p></li>
 <li>
-<code><a href="../reference/layer_text_vectorization.html">get_vocabulary()</a></code> gains a <code>include_special_tokens</code> argument.</li>
-<li>
-<code><a href="../reference/layer_text_vectorization.html">set_vocabulary()</a></code>:
+<p><code><a href="../reference/layer_text_vectorization.html">set_vocabulary()</a></code>:</p>
 <ul>
 <li>Now returns the adapted layer invisibly for composability with <code>%&gt;%</code> (previously returned <code>NULL</code>)</li>
 <li>Signature simplified. Deprecated arguments (<code>df_data</code> <code>oov_df_value</code>) are now subsumed in <code>...</code>.</li>
 </ul>
 </li>
 <li>
-<code><a href="../reference/layer_text_vectorization.html">layer_text_vectorization()</a></code>:
+<p><code><a href="../reference/layer_text_vectorization.html">layer_text_vectorization()</a></code>:</p>
 <ul>
 <li>valid values for argument <code>output_mode</code> change: <code>"binary"</code> is renamed to <code>"multi_hot"</code> and <code>"tf-idf"</code> is renamed to <code>"tf_idf"</code> (backwards compatibility is preserved).</li>
 <li>Fixed an issue where valid values of <code>output_mode = "int"</code> would incorrectly return a ragged tensor output shape.</li>
@@ -381,7 +398,7 @@ These join the previous set of text preprocessing functions, each of which have 
 <code class="sourceCode R">
 <span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/layer.html">layer</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu">layer</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </li>
 <li><p>Functions in the <em>merging layer</em> family gain the ability to return a layer instance if the first argument <code>inputs</code> is missing. (affected: <code><a href="../reference/layer_concatenate.html">layer_concatenate()</a></code>, <code><a href="../reference/layer_add.html">layer_add()</a></code>, <code><a href="../reference/layer_subtract.html">layer_subtract()</a></code>, <code><a href="../reference/layer_multiply.html">layer_multiply()</a></code>, <code><a href="../reference/layer_average.html">layer_average()</a></code>, <code><a href="../reference/layer_maximum.html">layer_maximum()</a></code>, <code><a href="../reference/layer_minimum.html">layer_minimum()</a></code> , <code><a href="../reference/layer_dot.html">layer_dot()</a></code>)</p></li>
 <li><p><code>%py_class%</code> gains the ability to delay initializing the Python session until first use. It is now safe to implement and export <code>%py_class%</code> objects in an R package.</p></li>
@@ -398,19 +415,17 @@ These join the previous set of text preprocessing functions, each of which have 
 <p>Breaking changes (Tensorflow 2.6):</p>
 <ul>
 <li><p>Note: The following breaking changes are specific to Tensorflow version 2.6.0. However, the keras R package maintains compatibility with multiple versions of Tensorflow/Keras. You can upgrade the R package and still preserve the previous behavior by installing a specific version of Tensorflow: <code>keras::install_keras(tensorflow="2.4.0")</code></p></li>
-<li>
-<code><a href="../reference/predict_proba.html">predict_proba()</a></code> and <code><a href="../reference/predict_proba.html">predict_classes()</a></code> were removed.</li>
-<li>
-<code><a href="../reference/model_to_yaml.html">model_to_yaml()</a></code> and <code><a href="../reference/model_to_yaml.html">model_from_yaml()</a></code> were removed.</li>
-<li>default changed: <code>layer_text_vectorization(pad_to_max_tokens=FALSE)</code>
-</li>
+<li><p><code><a href="../reference/predict_proba.html">predict_proba()</a></code> and <code><a href="../reference/predict_proba.html">predict_classes()</a></code> were removed.</p></li>
+<li><p><code><a href="../reference/model_to_yaml.html">model_to_yaml()</a></code> and <code><a href="../reference/model_to_yaml.html">model_from_yaml()</a></code> were removed.</p></li>
+<li><p>default changed: <code>layer_text_vectorization(pad_to_max_tokens=FALSE)</code></p></li>
 <li><p><code><a href="../reference/layer_text_vectorization.html">set_vocabulary()</a></code> arguments <code>df_data</code> and <code>oov_df_value</code> are removed. They are replaced by the new argument <code>idf_weights</code>.</p></li>
 </ul>
 <p>New Features:</p>
 <ul>
 <li><p>Default Tensorflow/Keras version is now 2.6</p></li>
 <li><p>Introduced <code>%py_class%</code>, an R-language constructor for Python classes.</p></li>
-<li>New vignettes:
+<li>
+<p>New vignettes:</p>
 <ul>
 <li>Subclassing Python classes: How to use <code>%py_class%</code>.</li>
 <li>Making new layers and models via subclassing.</li>
@@ -419,11 +434,12 @@ These join the previous set of text preprocessing functions, each of which have 
 </ul>
 </li>
 <li><p>The <code>keras</code> Python module is exported</p></li>
-<li>Major changes to the underlying handling of custom R6 layer classes.
+<li>
+<p>Major changes to the underlying handling of custom R6 layer classes.</p>
 <ul>
-<li>A new <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">r_to_py()</a></code> method is provided for <code>R6ClassGenerator</code> objects.</li>
+<li>A new <code>r_to_py()</code> method is provided for <code>R6ClassGenerator</code> objects.</li>
 <li>R6 custom layers can now inherit directly from Python layer classes or other R6 custom layer classes.</li>
-<li>Custom R6 layers can now be instantiated directly after conversion of the class generator with <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">r_to_py()</a></code>, without going through <code><a href="../reference/create_layer.html">create_layer()</a></code>.</li>
+<li>Custom R6 layers can now be instantiated directly after conversion of the class generator with <code>r_to_py()</code>, without going through <code><a href="../reference/create_layer.html">create_layer()</a></code>.</li>
 <li>
 <code>KerasLayer</code> is deprecated (new classes should inherit directly from <code>keras$layers$Layer</code>).</li>
 <li>
@@ -456,17 +472,18 @@ These join the previous set of text preprocessing functions, each of which have 
 </li>
 <li><p><code><a href="../reference/Layer.html">Layer()</a></code> custom layer constructor is now lazy about initializing the Python session and safe to use on the top level of an R package (<a href='https://github.com/rstudio/keras/issues/1229'>#1229</a>).</p></li>
 <li><p>New function <code><a href="../reference/create_layer_wrapper.html">create_layer_wrapper()</a></code> that can create a composing R function wrapper around a custom layer class.</p></li>
-<li>Refactored <code><a href="../reference/install_keras.html">install_keras()</a></code> (along with <code><a href="https://rdrr.io/pkg/tensorflow/man/install_tensorflow.html">tensorflow::install_tensorflow()</a></code>). Installation should be more reliable for more users now. If you encounter installation issues, please file an issue: <a href="https://github.com/rstudio/keras/issues/new" class="uri">https://github.com/rstudio/keras/issues/new</a>
+<li>
+<p>Refactored <code><a href="../reference/install_keras.html">install_keras()</a></code> (along with <code><a href="https://rdrr.io/pkg/tensorflow/man/install_tensorflow.html">tensorflow::install_tensorflow()</a></code>). Installation should be more reliable for more users now. If you encounter installation issues, please file an issue: <a href="https://github.com/rstudio/keras/issues/new" class="uri">https://github.com/rstudio/keras/issues/new</a></p>
 <ul>
 <li><p>Potentially breaking change: numeric versions supplied without a patchlevel now automatically pull the latest patch release. (e.g. <code>install_keras(tensorflow="2.4")</code> will install tensorflow version “2.4.2”. Previously it would install “2.4.0”)</p></li>
-<li>pandas is now a default extra packages installed by <code><a href="../reference/install_keras.html">install_keras()</a></code>
-</li>
+<li><p>pandas is now a default extra packages installed by <code><a href="../reference/install_keras.html">install_keras()</a></code></p></li>
 <li><p>pyyaml is no longer a installed by default if the Tensorflow version &gt;= 2.6.</p></li>
 </ul>
 </li>
-<li>Loss functions:
+<li>
+<p>Loss functions:</p>
 <ul>
-<li>All the loss functions gain the ability to return a callable (a <code>keras$losses$Loss</code> instance) if <code>y_true</code> and <code>y_pred</code> arguments are missing.</li>
+<li><p>All the loss functions gain the ability to return a callable (a <code>keras$losses$Loss</code> instance) if <code>y_true</code> and <code>y_pred</code> arguments are missing.</p></li>
 <li>
 <p>New builtin loss functions:</p>
 <ul>
@@ -476,11 +493,11 @@ These join the previous set of text preprocessing functions, each of which have 
 </li>
 </ul>
 </li>
-<li>Metric functions:
+<li>
+<p>Metric functions:</p>
 <ul>
-<li>All the metric functions gain the ability to return a <code>keras$metrics$Metric</code> instance if called without <code>y_true</code> and <code>y_pred</code>
-</li>
-<li>Each metric function is now documented separately, with a common <code><a href="../reference/Metric.html">?Metric</a></code> topic demonstrating example usage.</li>
+<li><p>All the metric functions gain the ability to return a <code>keras$metrics$Metric</code> instance if called without <code>y_true</code> and <code>y_pred</code></p></li>
+<li><p>Each metric function is now documented separately, with a common <code><a href="../reference/Metric.html">?Metric</a></code> topic demonstrating example usage.</p></li>
 <li>
 <p>New built-in metrics:</p>
 <ul>
@@ -571,7 +588,8 @@ These join the previous set of text preprocessing functions, each of which have 
 </tbody>
 </table>
 </li>
-<li>The <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> method for keras models has been updated:
+<li>
+<p>The <code><a href="https://generics.r-lib.org/reference/compile.html">compile()</a></code> method for keras models has been updated:</p>
 <ul>
 <li>
 <code>optimizer</code> is now an optional argument. It defaults to <code>"rmsprop"</code> for regular keras models. Custom models can specify their own default optimizer.</li>
@@ -855,7 +873,7 @@ These join the previous set of text preprocessing functions, each of which have 
 <li><p><code>to_numpy_array()</code> utility function for custom generators (enables custom generators to yield C-ordered arrays of the correct float type)</p></li>
 <li><p>Added <code>batch_size</code> and <code>write_grads</code> arguments to <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code></p></li>
 <li><p>Added <code>return_state</code> argument to recurrent layers.</p></li>
-<li><p>Don’t re-export <code><a href="https://rdrr.io/pkg/tensorflow/man/install_tensorflow.html">install_tensorflow()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/tf_config.html">tf_config()</a></code> from tensorflow package.</p></li>
+<li><p>Don’t re-export <code>install_tensorflow()</code> and <code>tf_config()</code> from tensorflow package.</p></li>
 <li><p><code><a href="../reference/is_keras_available.html">is_keras_available()</a></code> function to probe whether the Keras Python package is available in the current environment.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> S3 method for Keras training history</p></li>
 <li><p>Remove names from <code><a href="../reference/keras_model.html">keras_model()</a></code> inputs</p></li>
