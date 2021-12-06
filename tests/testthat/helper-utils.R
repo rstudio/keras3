@@ -134,3 +134,11 @@ as_iterator <- reticulate::as_iterator
 
 tf <- tensorflow::tf
 as_tensor <- tensorflow::as_tensor
+
+# modeled after withr::local_
+local_tf_device <- function(device_name = "CPU") {
+  device <- tf$device(device_name)
+  device$`__enter__`()
+  withr::defer_parent(device$`__exit__`())
+  invisible(device)
+}

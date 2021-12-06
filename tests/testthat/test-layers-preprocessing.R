@@ -20,6 +20,13 @@ peek_py_iterator <- function(x) {
 }
 
 test_image_preprocessing_layer <- function(lyr, ...) {
+  if(is_mac_arm64()) local_tf_device("CPU")
+  # workaround for bug on M1 Macs  until this error is resolved:
+  # No registered 'RngReadAndSkip' OpKernel for 'GPU' devices compatible with node {{node RngReadAndSkip}}
+  # .  Registered:  device='XLA_CPU_JIT'
+  # device='CPU'
+  # [Op:RngReadAndSkip]
+
   test_succeeds(deparse(substitute(lyr)), {
 
     mnist_mini <- dataset_mnist_mini()
@@ -61,6 +68,7 @@ test_image_preprocessing_layer(layer_center_crop, height = 20, width = 20)
 # image augmentation
 # lyr <- layer_random_crop
 test_image_preprocessing_layer(layer_random_crop, height = 20, width = 20)
+
 test_image_preprocessing_layer(layer_random_flip)
 test_image_preprocessing_layer(layer_random_translation, height_factor = .5, width_factor = .5)
 test_image_preprocessing_layer(layer_random_rotation, factor = 2)
@@ -192,7 +200,8 @@ layer = layer_normalization(axis=NULL)
 layer %>% adapt(adapt_data)
 out <- layer(input_data)
 expect_tensor(out, shape = c(3L))
-expect_equal(as.numeric(out), c(-1.41421353816986, -0.70710676908493, 0))
+expect_equal(as.numeric(out), c(-1.41421353816986, -0.70710676908493, 0),
+             tolerance = 1e-7)
 
 # Calculate a mean and variance for each index on the last axis.
 adapt_data = rbind(c(0, 7, 4),
@@ -222,7 +231,8 @@ input_data = as_tensor(rbind(1, 2, 3), "float32")
 layer = layer_normalization(mean=3, variance=2)
 out <- layer(input_data)
 expect_tensor(out, shape = c(3L, 1L))
-expect_equal(as.array(out), rbind(-1.41421353816986, -0.70710676908493, 0))
+expect_equal(as.array(out), rbind(-1.41421353816986, -0.70710676908493, 0),
+             tolerance = 1e-7)
 
 
 # adapt multiple times in a model
@@ -316,4 +326,3 @@ test_succeeds("layer_text_vectorization", {
   }
 
 })
-
