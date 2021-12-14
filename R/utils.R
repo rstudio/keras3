@@ -451,3 +451,9 @@ capture_args <- function(cl, modifiers = NULL, ignore = NULL,
 
 
 is_scalar <- function(x) identical(length(x), 1L)
+
+is_mac_arm64 <- function() {
+  sys_info <- Sys.info()
+  sys_info[["sysname"]] == "Darwin" &&
+  sys_info[["machine"]] == "arm64"
+}
