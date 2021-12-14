@@ -30,7 +30,7 @@ Depends:
 Imports:
     generics (>= 0.0.1),
     reticulate (>= 1.10),
-    tensorflow (>= 2.6.0),
+    tensorflow (> 2.7.0),
     tfruns (>= 1.0),
     magrittr,
     zeallot,
@@ -50,3 +50,5 @@ Suggests:
 Roxygen: list(markdown = TRUE, r6 = FALSE)
 RoxygenNote: 7.1.2
 VignetteBuilder: knitr
+Remotes:
+    rstudio/tensorflow
