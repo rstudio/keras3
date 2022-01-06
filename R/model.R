@@ -445,9 +445,12 @@ compile.keras.engine.training.Model <-
 
     # handle metrics
     if (!is.null(metrics)) {
-      # convert metrics to list if it isn't one
-      if (!is.list(metrics) && length(metrics) == 1)
+      if(inherits(metrics, "python.builtin.object") ||
+         is.function(metrics))
         metrics <- list(metrics)
+      # convert metrics to list if it isn't one
+      if(is.character(metrics))
+        metrics <- as.list(metrics)
 
       # get metric names (if any)
       metric_names <- names(metrics)
