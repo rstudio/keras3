@@ -438,6 +438,7 @@ capture_args <- function(cl, modifiers = NULL, ignore = NULL,
 
   args <- eval(as.call(cl2), envir)
 
+  # check `ignore` again, since arg might have been in `...`
   for(nm in intersect(names(args), ignore))
     args[[nm]] <- NULL
 
