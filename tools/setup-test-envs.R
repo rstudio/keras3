@@ -5,26 +5,39 @@ args <- commandArgs(TRUE)
 if("--fresh" %in% args) # fresh start
   unlink(reticulate::miniconda_path(), recursive = TRUE)
 
-tf_vers <- c("2.1", "2.2", "2.3", "2.4", "2.5", "2.6", "2.7", "nightly")
-tf_vers <- paste0(tf_vers, "-cpu")
-py_vers <- c("3.6", "3.6", "3.7", "3.8", "3.8", "3.9", "3.9", "3.9")
+remotes::install_github("rstudio/reticulate")
 
-names(tf_vers) <- paste0("tf-", tf_vers)
-names(tf_vers) <- sub(".0rc[0-9]+", "", names(tf_vers))
+ver <- as.data.frame(rbind(
+  c(py = "3.8", tf = "2.8.0rc0"),
+  c(py = "3.8", tf = "2.7"),
+  c(py = "3.8", tf = "2.6"),
+  c(py = "3.7", tf = "2.5"),
+  c(py = "3.7", tf = "2.4"),
+  c(py = "3.6", tf = "2.3"),
+  # c(py = "3.6", tf = "2.2"),
+  # c(py = "3.6", tf = "2.1"),
+  # c(py = "3.6", tf =   "1"),
+  c(py = "3.9", tf = "nightly")))
 
+ver$tf <- paste0(ver$tf, "-cpu")
+ver$name <- paste0("tf-", sub(".0rc[0-9]+", "", ver$tf))
 
 if(!reticulate:::miniconda_exists())
   reticulate::install_miniconda()
 
-for (i in seq_along(tf_vers))
-    keras::install_keras(
+
+for (i in seq_len(nrow(ver))) {
   # tensorflow::install_tensorflow(
-    version = tf_vers[i],
-    envname = names(tf_vers)[i],
-    conda_python_version = py_vers[i],
+  keras::install_keras(
+    version = ver$tf[i],
+    envname = ver$name[i],
+    conda_python_version = ver$py[i],
     pip_ignore_installed = TRUE,
     extra_packages = "ipython",
-    method = "conda", restart_session = FALSE) # |> try()
+    method = "conda",
+    restart_session = FALSE
+  ) # |> try()
+}
 
 
 # work around conda run bug: https://github.com/conda/conda/issues/10972

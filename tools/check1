@@ -10,12 +10,12 @@ export TF_CPP_MIN_LOG_LEVEL=2
   # 3 = INFO, WARNING, and ERROR messages are not printed
 
 
-
-TMPDIR="/tmp/r-keras-tests/tf-2.7-cpu/"
+TF_VER="2.7"
+TMPDIR="/tmp/r-keras-tests/tf-$TF_VER-cpu/"
 mkdir -p $TMPDIR
 rsync -a --delete . $TMPDIR
 
-export RETICULATE_PYTHON=$(Rscript -e "cat(normalizePath(file.path(reticulate::miniconda_path(), 'envs/tf-2.6-cpu/bin/python')))")
+export RETICULATE_PYTHON=$(Rscript -e "cat(normalizePath(file.path(reticulate::miniconda_path(), 'envs/tf-$TF_VER-cpu/bin/python')))")
 
 gnome-terminal --title="keras test: tf $i" --working-directory=$TMPDIR -- \
   Rscript -e "{cat('\n\n\n'); devtools::check(document=FALSE); cat('Done!\n'); scan('stdin', nlines=1)}"
