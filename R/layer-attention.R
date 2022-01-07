@@ -90,45 +90,43 @@ layer_attention <- function(inputs,use_scale=FALSE, causal = FALSE, batch_size =
 #' - attention_scores: (Optional) multi-head attention coeffients over attention axes.
 #'
 #' @export
-layer_multi_head_attention <- function(
-  inputs,
-  num_heads,
-  key_dim,
-  value_dim=NULL,
-  dropout=0.0,
-  use_bias=TRUE,
-  output_shape=NULL,
-  attention_axes=NULL,
-  kernel_initializer="glorot_uniform",
-  bias_initializer="zeros",
-  kernel_regularizer=NULL,
-  bias_regularizer=NULL,
-  activity_regularizer=NULL,
-  kernel_constraint=NULL,
-  bias_constraint=NULL,
-  ...
-) {
-
+layer_multi_head_attention <-
+function(inputs,
+         num_heads,
+         key_dim,
+         value_dim = NULL,
+         dropout = 0.0,
+         use_bias = TRUE,
+         output_shape = NULL,
+         attention_axes = NULL,
+         kernel_initializer = "glorot_uniform",
+         bias_initializer = "zeros",
+         kernel_regularizer = NULL,
+         bias_regularizer = NULL,
+         activity_regularizer = NULL,
+         kernel_constraint = NULL,
+         bias_constraint = NULL,
+         ...) {
   if (tensorflow::tf_version() < "2.4")
     stop("layer_multi_head_attention requires tf_version() >= 2.4")
 
-  create_layer(keras$layers$MultiHeadAttention, inputs, list(
-    num_heads=as.integer(num_heads),
-    key_dim=as.integer(key_dim),
-    value_dim=as.integer(value_dim),
-    dropout=dropout,
-    use_bias=use_bias,
-    output_shape=output_shape,
-    attention_axes=attention_axes,
-    kernel_initializer=kernel_initializer,
-    bias_initializer=bias_initializer,
-    kernel_regularizer=kernel_regularizer,
-    bias_regularizer=bias_regularizer,
-    activity_regularizer=activity_regularizer,
-    kernel_constraint=kernel_constraint,
-    bias_constraint=bias_constraint,
-    ...
-  ))
+  args <- capture_args(match.call(),
+    list(num_heads = as.integer,
+         key_dim = as.integer,
+         value_dim = as.integer),
+    ignore = "object")
+
+  # intentionally don't pass `inputs` to avoid compose_layer() so we can
+  # unpack args to __call__
+  layer <- create_layer(keras$layers$MultiHeadAttention, args = args)
+
+  if (missing(inputs) || is.null(inputs))
+    return(layer)
+
+  if (!is.list(inputs))
+    inputs <- list(inputs)
+
+  do.call(layer, inputs)
 }
 
 
