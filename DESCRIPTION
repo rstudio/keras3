@@ -29,7 +29,7 @@ Depends:
     R (>= 3.4)
 Imports:
     generics (>= 0.0.1),
-    reticulate (>= 1.10),
+    reticulate (> 1.22),
     tensorflow (> 2.7.0),
     tfruns (>= 1.0),
     magrittr,
@@ -51,4 +51,5 @@ Roxygen: list(markdown = TRUE, r6 = FALSE)
 RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 Remotes:
+    rstudio/reticulate
     rstudio/tensorflow
