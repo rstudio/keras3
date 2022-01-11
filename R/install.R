@@ -35,7 +35,8 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
       version = version,
       extra_packages = c("pandas", "Pillow",
                          "tensorflow-hub",
-                         "tensorflow-datasets"),
+                         "tensorflow-datasets",
+                         extra_packages),
       ...))
   }
 
