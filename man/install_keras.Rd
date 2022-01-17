@@ -22,7 +22,7 @@ available on Windows.}
 
 \item{conda}{The path to a \code{conda} executable. Use \code{"auto"} to allow
 \code{reticulate} to automatically find an appropriate \code{conda} binary. See
-\code{\link[reticulate:conda_binary]{conda_binary()}} for more details on how \code{reticulate} tries to resolve
+\code{\link[reticulate:conda-tools]{conda_binary()}} for more details on how \code{reticulate} tries to resolve
 the \code{conda} executable.}
 
 \item{version}{TensorFlow version to install. Valid values include:
@@ -44,7 +44,7 @@ only of the package (e.g., \code{"2.4-cpu"})
 \item{extra_packages}{Additional Python packages to install along with
 TensorFlow.}
 
-\item{...}{other arguments passed to \code{\link[reticulate:conda_install]{reticulate::conda_install()}} or
+\item{...}{other arguments passed to \code{\link[reticulate:conda-tools]{reticulate::conda_install()}} or
 \code{\link[reticulate:virtualenv-tools]{reticulate::virtualenv_install()}}, depending on the \code{method} used.}
 
 \item{pip_ignore_installed}{Whether pip should ignore installed python

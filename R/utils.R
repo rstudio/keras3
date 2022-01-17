@@ -458,3 +458,10 @@ is_mac_arm64 <- function() {
   sys_info[["sysname"]] == "Darwin" &&
   sys_info[["machine"]] == "arm64"
 }
+
+# Temporary workaround to prevent IDE overwriting last py exception by calling
+# `length()` on a model.
+#
+# Remove once https://github.com/rstudio/reticulate/issues/1113 is resolved.
+#' @export
+length.tensorflow.python.module.module.Module <- function(x) 1L
