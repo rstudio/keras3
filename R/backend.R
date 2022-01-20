@@ -1595,7 +1595,9 @@ k_log <- function(x) {
 }
 
 
-#' Computes log(sum(exp(elements across dimensions of a tensor))).
+#' (Deprecated) Computes log(sum(exp(elements across dimensions of a tensor))).
+#'
+#' This funciton is deprecated. Please use `tensorflow::tf$reduce_logsumexp()`.
 #'
 #' This function is more numerically stable than log(sum(exp(x))). It avoids
 #' overflows caused by taking the exp of large inputs and underflows caused by
@@ -1611,6 +1613,7 @@ k_log <- function(x) {
 #'
 #' @template roxlate-keras-backend
 #'
+#' @keywords internal
 #' @export
 k_logsumexp <- function(x, axis = NULL, keepdims = FALSE) {
 

@@ -13,3 +13,4 @@ loss_cosine_proximity(...)
 \code{loss_cosine_proximity} is deprecated and will be removed in a future
 version. It has been renamed to \code{loss_cosine_similarity}().
 }
+\keyword{internal}

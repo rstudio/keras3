@@ -366,6 +366,7 @@ c("squared_hinge", "SquaredHinge")
 #'
 #' @param ... passed on to [loss_cosine_similarity()]
 #'
+#' @keywords internal
 #' @export
 loss_cosine_proximity <- function(...) {
   warning("loss_cosine_proximity is deprecated and will be removed in a future version.",

@@ -2,7 +2,7 @@
 % Please edit documentation in R/backend.R
 \name{k_logsumexp}
 \alias{k_logsumexp}
-\title{Computes log(sum(exp(elements across dimensions of a tensor))).}
+\title{(Deprecated) Computes log(sum(exp(elements across dimensions of a tensor))).}
 \usage{
 k_logsumexp(x, axis = NULL, keepdims = FALSE)
 }
@@ -19,6 +19,9 @@ k_logsumexp(x, axis = NULL, keepdims = FALSE)
 The reduced tensor.
 }
 \description{
+This funciton is deprecated. Please use \code{tensorflow::tf$reduce_logsumexp()}.
+}
+\details{
 This function is more numerically stable than log(sum(exp(x))). It avoids
 overflows caused by taking the exp of large inputs and underflows caused by
 taking the log of small inputs.
@@ -34,3 +37,4 @@ You can see a list of all available backend functions here:
 \url{https://keras.rstudio.com/articles/backend.html#backend-functions}.
 }
 
+\keyword{internal}

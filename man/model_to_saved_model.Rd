@@ -2,7 +2,7 @@
 % Please edit documentation in R/model-persistence.R
 \name{model_to_saved_model}
 \alias{model_to_saved_model}
-\title{Export to Saved Model format}
+\title{(Deprecated) Export to Saved Model format}
 \usage{
 model_to_saved_model(
   model,
@@ -35,7 +35,7 @@ prediction graph is saved.}
 Invisibly returns the \code{saved_model_path}.
 }
 \description{
-Export to Saved Model format
+(Deprecated) Export to Saved Model format
 }
 \note{
 This functionality is experimental and only works with TensorFlow
@@ -46,3 +46,4 @@ Other saved_model:
 \code{\link{model_from_saved_model}()}
 }
 \concept{saved_model}
+\keyword{internal}

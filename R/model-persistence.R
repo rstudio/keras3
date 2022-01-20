@@ -473,7 +473,7 @@ export_savedmodel.keras.engine.training.Model <- function(
   invisible(export_dir_base)
 }
 
-#' Export to Saved Model format
+#' (Deprecated) Export to Saved Model format
 #'
 #' @param model A Keras model to be saved. If the model is subclassed, the flag
 #'   `serving_only` must be set to `TRUE`.
@@ -493,6 +493,7 @@ export_savedmodel.keras.engine.training.Model <- function(
 #' @return Invisibly returns the `saved_model_path`.
 #' @family saved_model
 #'
+#' @keywords internal
 #' @export
 model_to_saved_model <- function(model, saved_model_path, custom_objects = NULL,
                                  as_text = FALSE, input_signature = NULL,

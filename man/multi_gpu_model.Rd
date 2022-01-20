@@ -2,7 +2,7 @@
 % Please edit documentation in R/model.R
 \name{multi_gpu_model}
 \alias{multi_gpu_model}
-\title{Replicates a model on different GPUs.}
+\title{(Deprecated) Replicates a model on different GPUs.}
 \usage{
 multi_gpu_model(model, gpus = NULL, cpu_merge = TRUE, cpu_relocation = FALSE)
 }
@@ -28,7 +28,7 @@ A Keras model object which can be used just like the initial
 \code{model} argument, but which distributes its workload on multiple GPUs.
 }
 \description{
-Replicates a model on different GPUs.
+(Deprecated) Replicates a model on different GPUs.
 }
 \details{
 Specifically, this function implements single-machine
@@ -139,3 +139,4 @@ Other model functions:
 \code{\link{train_on_batch}()}
 }
 \concept{model functions}
+\keyword{internal}

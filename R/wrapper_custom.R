@@ -21,6 +21,7 @@
 #'
 #' @return [KerasWrapper].
 #'
+#' @keywords internal
 #' @export
 KerasWrapper <- R6::R6Class(
   "KerasWrapper",
@@ -107,6 +108,7 @@ KerasWrapper <- R6::R6Class(
 #' @note The `object` parameter can be missing, in which case the
 #' layer is created without a connection to an existing graph.
 #'
+#' @keywords internal
 #' @export
 create_wrapper <- function(wrapper_class, object, args = list()) {
 

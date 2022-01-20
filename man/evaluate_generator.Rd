@@ -2,7 +2,7 @@
 % Please edit documentation in R/model.R
 \name{evaluate_generator}
 \alias{evaluate_generator}
-\title{Evaluates the model on a data generator.}
+\title{(Deprecated) Evaluates the model on a data generator.}
 \usage{
 evaluate_generator(
   object,
@@ -59,3 +59,4 @@ Other model functions:
 \code{\link{train_on_batch}()}
 }
 \concept{model functions}
+\keyword{internal}

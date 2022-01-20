@@ -66,3 +66,4 @@ Other model functions:
 \code{\link{train_on_batch}()}
 }
 \concept{model functions}
+\keyword{internal}

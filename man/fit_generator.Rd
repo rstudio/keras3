@@ -2,7 +2,7 @@
 % Please edit documentation in R/model.R
 \name{fit_generator}
 \alias{fit_generator}
-\title{Fits the model on data yielded batch-by-batch by a generator.}
+\title{(Deprecated) Fits the model on data yielded batch-by-batch by a generator.}
 \usage{
 fit_generator(
   object,
@@ -120,3 +120,4 @@ Other model functions:
 \code{\link{train_on_batch}()}
 }
 \concept{model functions}
+\keyword{internal}

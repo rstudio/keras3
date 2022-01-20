@@ -1324,6 +1324,7 @@ custom_metric <- function(name, metric_fn) {
 #' `tensorflow::tf$compat$v1$keras$metrics$cosine_proximity()`
 #'
 #' @inheritParams metric-or-Metric
+#' @keywords internal
 #' @export
 metric_cosine_proximity <- function(y_true, y_pred) {
   warning(

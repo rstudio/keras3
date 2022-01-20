@@ -12,7 +12,7 @@ An \link{R6Class} generator object
 }
 \description{
 New custom callbacks implemented as R6 classes are encouraged to inherit from
-keras$callbacks$Callback directly.
+\code{keras$callbacks$Callback} directly.
 }
 \details{
 The \code{logs} named list that callback methods take as argument will
@@ -65,3 +65,4 @@ LossHistory <- R6::R6Class("LossHistory",
 )
 }
 }
+\keyword{internal}

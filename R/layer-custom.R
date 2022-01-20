@@ -6,7 +6,7 @@
 #'
 #' @docType class
 #'
-#' @format An [R6Class] generator object #'
+#' @format An [R6Class] generator object
 #' @section Methods: \describe{ \item{\code{build(input_shape)}}{Creates the
 #'   layer weights (must be implemented by all layers that have weights)}
 #'   \item{\code{call(inputs,mask)}}{Call the layer on an input tensor.}
@@ -17,6 +17,8 @@
 #'   a weight variable to the layer.} }
 #'
 #' @return [KerasLayer].
+#'
+#' @keywords internal
 #'
 #' @export
 KerasLayer <- R6Class("KerasLayer",

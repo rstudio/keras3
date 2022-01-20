@@ -19,3 +19,4 @@ because you are using the intermediate computed values in a custom training
 loop before reduction), please use \code{loss_cosine_similarity()} or
 \code{tensorflow::tf$compat$v1$keras$metrics$cosine_proximity()}
 }
+\keyword{internal}

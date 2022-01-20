@@ -122,6 +122,7 @@ constraint_minmaxnorm <- function(min_value = 0.0, max_value = 1.0, rate = 1.0, 
 #'
 #' @seealso [constraints]
 #'
+#' @keywords internal
 #' @export
 KerasConstraint <- R6::R6Class("KerasConstraint",
   public = list(

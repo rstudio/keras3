@@ -26,3 +26,4 @@ directly by \code{create_layer}
 The \code{object} parameter can be missing, in which case the
 layer is created without a connection to an existing graph.
 }
+\keyword{internal}

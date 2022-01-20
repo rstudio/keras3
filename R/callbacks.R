@@ -495,7 +495,7 @@ callback_lambda <- function(on_epoch_begin = NULL, on_epoch_end = NULL,
 #' (Deprecated) Base R6 class for Keras callbacks
 #'
 #' New custom callbacks implemented as R6 classes are encouraged to inherit from
-#' keras$callbacks$Callback directly.
+#' `keras$callbacks$Callback` directly.
 #'
 #' @docType class
 #'
@@ -526,7 +526,7 @@ callback_lambda <- function(on_epoch_begin = NULL, on_epoch_end = NULL,
 #' - `on_batch_end`: logs include `loss`, and optionally `acc` (if accuracy monitoring is enabled).
 #'
 #' @return [KerasCallback].
-#'
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' library(keras)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-recurrent.R
 \name{layer_cudnn_gru}
 \alias{layer_cudnn_gru}
-\title{Fast GRU implementation backed by \href{https://developer.nvidia.com/cudnn}{CuDNN}.}
+\title{(Deprecated) Fast GRU implementation backed by \href{https://developer.nvidia.com/cudnn}{CuDNN}.}
 \usage{
 layer_cudnn_gru(
   object,
@@ -121,3 +121,4 @@ Other recurrent layers:
 \code{\link{layer_simple_rnn}()}
 }
 \concept{recurrent layers}
+\keyword{internal}

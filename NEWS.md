@@ -31,7 +31,9 @@
 - Fixed error raised when `k_random_binomial()` was passed a non-floating dtype.
 - Added `k_random_bernouli()` as an alias for `k_random_binomial()`.
 
-- `image_laod()` gains a `color_mode` argument.
+- `image_load()` gains a `color_mode` argument.
+
+- Deprecated functions are no longer included in the package documentation index.
 
 # keras 2.7.0
 

@@ -145,7 +145,7 @@ sequential_model_input_layer <- function(input_shape = NULL,
 
 
 
-#' Replicates a model on different GPUs.
+#' (Deprecated) Replicates a model on different GPUs.
 #'
 #' @param model A Keras model instance. To avoid OOM errors,
 #'   this model could have been built on CPU, for instance
@@ -247,6 +247,7 @@ sequential_model_input_layer <- function(input_shape = NULL,
 #'     classes = num_classes
 #' })
 #' ```
+#' @keywords internal
 #' @export
 multi_gpu_model <- function(model, gpus = NULL, cpu_merge = TRUE, cpu_relocation = FALSE) {
 
@@ -933,6 +934,7 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
 #'
 #' @family model functions
 #'
+#' @keywords internal
 #' @export
 predict_proba <- function(object, x, batch_size = NULL, verbose = 0, steps = NULL) {
   warning("`predict_proba()` is deprecated and was removed from tensorflow in version 2.6, ",
@@ -957,6 +959,7 @@ predict_proba <- function(object, x, batch_size = NULL, verbose = 0, steps = NUL
 }
 
 #' @rdname predict_proba
+#' @keywords internal
 #' @export
 predict_classes <- function(object, x, batch_size = NULL, verbose = 0, steps = NULL) {
   warning(
@@ -1048,7 +1051,7 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 
 
 
-#' Fits the model on data yielded batch-by-batch by a generator.
+#' (Deprecated) Fits the model on data yielded batch-by-batch by a generator.
 #'
 #' The generator is run in parallel to the model, for efficiency. For instance,
 #' this allows you to do real-time data augmentation on images on CPU in
@@ -1111,6 +1114,7 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'
 #' @family model functions
 #'
+#' @keywords internal
 #' @export
 fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
                           verbose=getOption("keras.fit_verbose", default = 1), callbacks = NULL,
@@ -1155,7 +1159,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
   do.call(fit, args)
 }
 
-#' Evaluates the model on a data generator.
+#' (Deprecated) Evaluates the model on a data generator.
 #'
 #' The generator should return the same kind of data as accepted by
 #' `test_on_batch()`.
@@ -1173,6 +1177,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
 #'
 #' @family model functions
 #'
+#' @keywords internal
 #' @export
 evaluate_generator <- function(object, generator, steps, max_queue_size = 10, workers = 1,
                                callbacks = NULL) {
@@ -1197,7 +1202,7 @@ evaluate_generator <- function(object, generator, steps, max_queue_size = 10, wo
 }
 
 
-#' Generates predictions for the input samples from a data generator.
+#' (Deprecated) Generates predictions for the input samples from a data generator.
 #'
 #' The generator should return the same kind of data as accepted by
 #' `predict_on_batch()`.
@@ -1218,6 +1223,7 @@ evaluate_generator <- function(object, generator, steps, max_queue_size = 10, wo
 #'
 #' @family model functions
 #'
+#' @keywords internal
 #' @export
 predict_generator <- function(object, generator, steps, max_queue_size = 10, workers = 1, verbose = 0,
                               callbacks = NULL) {

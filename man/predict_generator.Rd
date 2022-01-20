@@ -2,7 +2,7 @@
 % Please edit documentation in R/model.R
 \name{predict_generator}
 \alias{predict_generator}
-\title{Generates predictions for the input samples from a data generator.}
+\title{(Deprecated) Generates predictions for the input samples from a data generator.}
 \usage{
 predict_generator(
   object,
@@ -65,3 +65,4 @@ Other model functions:
 \code{\link{train_on_batch}()}
 }
 \concept{model functions}
+\keyword{internal}

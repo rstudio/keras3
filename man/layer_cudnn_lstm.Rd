@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-recurrent.R
 \name{layer_cudnn_lstm}
 \alias{layer_cudnn_lstm}
-\title{Fast LSTM implementation backed by \href{https://developer.nvidia.com/cudnn}{CuDNN}.}
+\title{(Deprecated) Fast LSTM implementation backed by \href{https://developer.nvidia.com/cudnn}{CuDNN}.}
 \usage{
 layer_cudnn_lstm(
   object,
@@ -126,3 +126,4 @@ Other recurrent layers:
 \code{\link{layer_simple_rnn}()}
 }
 \concept{recurrent layers}
+\keyword{internal}

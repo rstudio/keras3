@@ -48,3 +48,4 @@ layer_dense(units = 32, input_shape = c(784),
 \seealso{
 \link{constraints}
 }
+\keyword{internal}
