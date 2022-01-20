@@ -155,3 +155,43 @@ test_succeeds("Can inherit from an R custom layer", {
   l <- layer2(x = 2)
   expect_equal(as.numeric(l(1)), 12)
 })
+
+
+test_succeeds("create_layer_wrapper", {
+
+  SimpleDense(keras$layers$Layer) %py_class% {
+    initialize <- function(units, activation = NULL) {
+      super$initialize()
+      self$units <- as.integer(units)
+      self$activation <- activation
+    }
+
+    build <- function(input_shape) {
+      input_dim <- as.integer(input_shape) %>% tail(1)
+      self$W <- self$add_weight(shape = c(input_dim, self$units),
+                                initializer = "random_normal")
+      self$b <- self$add_weight(shape = c(self$units),
+                                initializer = "zeros")
+    }
+
+    call <- function(inputs) {
+      y <- tf$matmul(inputs, self$W) + self$b
+      if (!is.null(self$activation))
+        y <- self$activation(y)
+      y
+    }
+  }
+
+  layer_simple_dense <- create_layer_wrapper(SimpleDense)
+
+  expect_identical(formals(layer_simple_dense),
+                   formals(function(object, units, activation = NULL) {}))
+
+  model <- keras_model_sequential() %>%
+    layer_simple_dense(32, activation = "relu") %>%
+    layer_simple_dense(64, activation = "relu") %>%
+    layer_simple_dense(32, activation = "relu") %>%
+    layer_simple_dense(10, activation = "softmax")
+
+  expect_equal(length(model$layers), 4L)
+})

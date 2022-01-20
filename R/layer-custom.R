@@ -124,8 +124,8 @@ compat_custom_KerasLayer_handler <- function(layer_class, args) {
 
 
 py_formals <- function(py_obj) {
-  # returns python fn formals as a list (formals(),
-  # but for py functions/methods
+  # returns python fn formals as a list
+  # like base::formals(), but for py functions/methods
   inspect <- reticulate::import("inspect")
   sig <- if (inspect$isclass(py_obj)) {
     inspect$signature(py_obj$`__init__`)
@@ -161,7 +161,7 @@ py_formals <- function(py_obj) {
       next
     }
 
-    args[[name]] <- default
+    args[name] <- list(default) # default can be NULL
   }
   args
 }
