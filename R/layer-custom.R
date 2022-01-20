@@ -157,7 +157,7 @@ py_formals <- function(py_obj) {
         warning(glue::glue(
           "Failed to convert default arg {param} for {name} in {py_obj_expr}"
         ))
-      args[[name]] <- quote(expr = )
+      args[name] <- list(quote(expr = ))
       next
     }
 
