@@ -84,3 +84,17 @@ test_that("%py_class% can be lazy about initing python", {
 
   expect_equal(res, 42)
 })
+
+
+test_that("%py_class% initialize", {
+  # check that single expression init functions defined with `{` work
+
+  NaiveSequential %py_class% {
+    initialize <- function(layers)
+      self$layers <- layers
+  }
+
+  x <- NaiveSequential(list(1, "2", 3))
+  expect_identical(x$layers, list(1, "2", 3))
+
+})

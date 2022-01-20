@@ -35,6 +35,9 @@
 
 - Fixed issue where `create_layer_wrapper()` would not include arguments
   with a `NULL` default value in the returned wrapper.
+  
+- Fixed issue in `r_to_py.R6ClassGenerator` (and `%py_class%`) where
+  single-expression `initialize` functions defined without `{` would error. 
 
 - Deprecated functions are no longer included in the package documentation index.
 

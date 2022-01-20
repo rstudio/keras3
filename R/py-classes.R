@@ -170,8 +170,12 @@ as_py_method <- function(fn, name, env, convert) {
     }
 
     # __init__ must return NULL
-    if (name == "__init__")
-      body(fn)[[length(body(fn)) + 1L]] <- quote(invisible(NULL))
+    if (name == "__init__") {
+      body(fn) <- substitute({
+        body
+        invisible(NULL)
+      }, list(body = body(fn)))
+    }
 
     # python tensorflow does quite a bit of introspection on user-supplied
     # functions e.g., as part of determining which of the optional arguments
