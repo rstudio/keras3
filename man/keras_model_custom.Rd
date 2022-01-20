@@ -2,7 +2,7 @@
 % Please edit documentation in R/model-custom.R
 \name{keras_model_custom}
 \alias{keras_model_custom}
-\title{Create a Keras custom model}
+\title{(Deprecated) Create a Keras custom model}
 \usage{
 keras_model_custom(model_fn, name = NULL)
 }
@@ -15,9 +15,11 @@ keras_model_custom(model_fn, name = NULL)
 A Keras model
 }
 \description{
-Create a Keras custom model
+\code{keras_model_custom()} is soft-deprecated. Please define custom models by
+subclassing \code{keras$Model} directly using \code{\link{\%py_class\%}} or \code{\link[R6:R6Class]{R6::R6Class()}}.
 }
 \details{
-For documentation on using custom models,
-see \url{https://keras.rstudio.com/articles/custom_models.html}.
+For documentation on using custom models, see
+\url{https://keras.rstudio.com/articles/custom_models.html}.
 }
+\keyword{internal}
