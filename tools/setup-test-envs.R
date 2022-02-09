@@ -5,18 +5,19 @@ args <- commandArgs(TRUE)
 if("--fresh" %in% args) # fresh start
   unlink(reticulate::miniconda_path(), recursive = TRUE)
 
-remotes::install_github("rstudio/reticulate")
+remotes::install_github("rstudio/reticulate", force = TRUE)
 
 ver <- as.data.frame(rbind(
-  c(py = "3.8", tf = "2.8.0rc0"),
-  c(py = "3.8", tf = "2.7"),
+  c(py = "3.8", tf = "2.8"),
+  c(py = "3.9", tf = "2.7"),
   c(py = "3.8", tf = "2.6"),
   c(py = "3.7", tf = "2.5"),
   c(py = "3.7", tf = "2.4"),
-  c(py = "3.6", tf = "2.3"),
+  # c(py = "3.6", tf = "2.3"),
   # c(py = "3.6", tf = "2.2"),
   # c(py = "3.6", tf = "2.1"),
   # c(py = "3.6", tf =   "1"),
+  # c(py = "3.8", tf = "2.8.0rc0"),
   c(py = "3.9", tf = "nightly")))
 
 ver$tf <- paste0(ver$tf, "-cpu")
