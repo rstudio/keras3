@@ -1,4 +1,4 @@
-# keras (development version)
+# keras 2.8.0
 
 - Breaking change: The semantics of passing a named list to `keras_model()` have changed.
 
