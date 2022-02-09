@@ -185,6 +185,14 @@ test_call_succeeds("layer_depthwise_conv_2d", required_version = "2.1.5", {
   }
 })
 
+if(tf_version() >= "2.8")
+test_call_succeeds("layer_depthwise_conv_1d", {
+  keras_model_sequential() %>%
+    layer_dense(32, input_shape = c(784)) %>%
+    layer_reshape(target_shape = c(4, -1)) %>%
+    layer_depthwise_conv_1d(kernel_size = 2)
+})
+
 if(tf_version() >= "2.6")
 test_call_succeeds("layer_conv_lstm_1d", {
   keras_model_sequential() %>%

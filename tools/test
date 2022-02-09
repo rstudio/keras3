@@ -10,7 +10,7 @@ export TF_CPP_MIN_LOG_LEVEL=2
   # 3 = INFO, WARNING, and ERROR messages are not printed
 
 
-for i in 2.{6..7}
+for i in 2.{6..8}
 # for i in 2.{4..7} nightly
 # for i in 2.{1..3}
 do

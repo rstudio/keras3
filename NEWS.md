@@ -24,6 +24,11 @@
     accept a named list for `y`, with names matching to the
     names of `outputs` when the model was constructed.
 
+- New layer `layer_depthwise_conv_1d()`.
+
+- Models gain default `format()` and `print()` S3 methods for compatibility
+  with the latest reticulate. Both are powered by `model$summary()`.
+
 - `keras_model_custom()` is soft deprecated. Please define custom models by
   subclassing `keras$Model` directly using `%py_class%` or `R6::R6Class()`.
 
@@ -35,9 +40,9 @@
 
 - Fixed issue where `create_layer_wrapper()` would not include arguments
   with a `NULL` default value in the returned wrapper.
-  
+
 - Fixed issue in `r_to_py.R6ClassGenerator` (and `%py_class%`) where
-  single-expression `initialize` functions defined without `{` would error. 
+  single-expression `initialize` functions defined without `{` would error.
 
 - Deprecated functions are no longer included in the package documentation index.
 
