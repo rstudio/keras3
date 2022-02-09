@@ -81,6 +81,10 @@ DF %>%
   select(r_func_nm, missing_in_r_func_args) %>%
   print(n = Inf)
 
+# tf 2.8
+# # A tibble: 0 × 2
+# … with 2 variables: r_func_nm <chr>, missing_in_r_func_args <chr>
+
 # tf 2.7
 # A tibble: 0 × 2
 # … with 2 variables: r_func_nm <chr>, missing_in_r_func_args <chr>
