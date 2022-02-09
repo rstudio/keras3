@@ -161,3 +161,4 @@ print.r_py_wrapper2 <- function(x, ...) {
 
 ## example usage:
 # new_layer_wrapper(keras$layers$TextVectorization)
+# new_layer_wrapper(keras$layers$DepthwiseConv1D)

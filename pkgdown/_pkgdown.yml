@@ -137,9 +137,8 @@ reference:
   - title: "Convolutional Layers"
     contents:
       - starts_with("layer_conv_")
-      - layer_separable_conv_1d
-      - layer_separable_conv_2d
-      - layer_depthwise_conv_2d
+      - starts_with("layer_separable_conv_")
+      - starts_with("layer_depthwise_conv_")
       - starts_with("layer_upsampling_")
       - starts_with("layer_zero_padding_")
       - starts_with("layer_cropping_")

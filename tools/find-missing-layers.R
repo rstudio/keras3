@@ -9,7 +9,7 @@ library(tidyr, include.only = "unchop")
 # })
 
 # Sys.setenv(RETICULATE_PYTHON = "~/.local/share/r-miniconda/envs/tf-2.7-cpu/bin/python")
-Sys.setenv(RETICULATE_PYTHON = conda_python("tf-2.7-cpu"))
+# Sys.setenv(RETICULATE_PYTHON = conda_python("tf-2.7-cpu"))
 
 
 options(tibble.print_min = 200)
@@ -133,6 +133,12 @@ missing_layers_df <- df %>%
 missing_layers_df %>%
   select(py_name)
 
+# TF 2.8:
+# # A tibble: 2 × 1
+# py_name
+# <chr>
+#   1 DepthwiseConv1D
+# 2 AbstractRNNCell
 
 # Tensorflow version 2.7.0-rc0
 # # A tibble: 1 × 1
