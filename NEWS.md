@@ -5,13 +5,16 @@
   Previously, `keras_model()` would `unname()` supplied `inputs` and `outputs`.
   Then, if a named list was passed to subsequent
   `fit()`/`evaluate()`/`call()`/`predict()` invocations,
-  matching of `x` and `y` was done to the model's `tensor$name`'s.
-  Now, matching is done to `names()` of `inputs` and/or `outputs`.
+  matching of `x` and `y` was done to the model's input and outpt `tensor$name`'s.
+  Now, matching is done to `names()` of `inputs` and/or `outputs` supplied `keras_model()`.
   Call `unname()` on `inputs` and `outputs` to restore the old behavior, e.g.:
-    ```keras_model(unname(inputs), unname(outputs))```
+    ```
+    keras_model(unname(inputs), unname(outputs))
+    ```
 
   `keras_model()` can now accept a named list for multi-input and/or multi-output
-  models. (Requires Tensorflow >= 2.4). The named list is converted to a `dict` in python.
+  models. The named list is converted to a `dict` in python.
+   (Requires Tensorflow >= 2.4, Python >= 3.7).
 
   If `inputs` is a named list:
     - `call()`, `fit()`, `evaluate()`, and `predict()` methods can also
@@ -26,14 +29,19 @@
 
 - New layer `layer_depthwise_conv_1d()`.
 
-- Models gain default `format()` and `print()` S3 methods for compatibility
+- Models gain `format()` and `print()` S3 methods for compatibility
   with the latest reticulate. Both are powered by `model$summary()`.
+
+- `summary()` method for Models gains arguments `expand_nested` and `show_trainable`,
+  both default to `FALSE`.
 
 - `keras_model_custom()` is soft deprecated. Please define custom models by
   subclassing `keras$Model` directly using `%py_class%` or `R6::R6Class()`.
 
 - Fixed warning issued by `k_random_binomial()`.
+
 - Fixed error raised when `k_random_binomial()` was passed a non-floating dtype.
+
 - Added `k_random_bernouli()` as an alias for `k_random_binomial()`.
 
 - `image_load()` gains a `color_mode` argument.
