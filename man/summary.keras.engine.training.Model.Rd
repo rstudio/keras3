@@ -2,19 +2,44 @@
 % Please edit documentation in R/model.R
 \name{summary.keras.engine.training.Model}
 \alias{summary.keras.engine.training.Model}
+\alias{format.keras.engine.training.Model}
+\alias{print.keras.engine.training.Model}
 \title{Print a summary of a Keras model}
 \usage{
-\method{summary}{keras.engine.training.Model}(object, line_length = getOption("width"), positions = NULL, ...)
+\method{summary}{keras.engine.training.Model}(object, ...)
+
+\method{format}{keras.engine.training.Model}(
+  x,
+  line_length = getOption("width"),
+  positions = NULL,
+  expand_nested = FALSE,
+  show_trainable = FALSE,
+  ...
+)
+
+\method{print}{keras.engine.training.Model}(x, ...)
 }
 \arguments{
-\item{object}{Keras model instance}
+\item{object, x}{Keras model instance}
+
+\item{...}{for \code{summary()} and \code{print()}, passed on to \code{format()}. For
+\code{format()}, passed on to \code{model$summary()}.}
 
 \item{line_length}{Total length of printed lines}
 
 \item{positions}{Relative or absolute positions of log elements in each line.
 If not provided, defaults to \code{c(0.33, 0.55, 0.67, 1.0)}.}
 
-\item{...}{Unused}
+\item{expand_nested}{Whether to expand the nested models. If not provided,
+defaults to \code{FALSE}.}
+
+\item{show_trainable}{Whether to show if a layer is trainable. If not
+provided, defaults to \code{FALSE}.}
+}
+\value{
+\code{format()} returns a length 1 character vector. \code{print()} returns the
+model object invisibly. \code{summary()} returns the output of \code{format()}
+invisibly after printing it.
 }
 \description{
 Print a summary of a Keras model

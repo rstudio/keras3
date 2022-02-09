@@ -24,6 +24,9 @@
     accept a named list for `y`, with names matching to the
     names of `outputs` when the model was constructed.
 
+- Models gain default `format()` and `print()` S3 methods for compatibility
+  with the latest reticulate. Both are powered by `model$summary()`.
+
 - `keras_model_custom()` is soft deprecated. Please define custom models by
   subclassing `keras$Model` directly using `%py_class%` or `R6::R6Class()`.
 

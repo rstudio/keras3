@@ -1424,34 +1424,67 @@ pop_layer <- function(object) {
 
 #' Print a summary of a Keras model
 #'
-#' @param object Keras model instance
+#' @param object,x Keras model instance
 #' @param line_length Total length of printed lines
 #' @param positions Relative or absolute positions of log elements in each line.
 #'   If not provided, defaults to `c(0.33, 0.55, 0.67, 1.0)`.
-#' @param ... Unused
+#' @param expand_nested Whether to expand the nested models. If not provided,
+#'   defaults to `FALSE`.
+#' @param show_trainable Whether to show if a layer is trainable. If not
+#'   provided, defaults to `FALSE`.
+#' @param ... for `summary()` and `print()`, passed on to `format()`. For
+#'   `format()`, passed on to `model$summary()`.
 #'
 #' @family model functions
 #'
+#' @return `format()` returns a length 1 character vector. `print()` returns the
+#'   model object invisibly. `summary()` returns the output of `format()`
+#'   invisibly after printing it.
+#'
 #' @export
-summary.keras.engine.training.Model <- function(object, line_length = getOption("width"), positions = NULL, ...) {
-  if (py_is_null_xptr(object))
-    cat("<pointer: 0x0>\n")
-  else {
-    if (keras_version() >= "2.0.6")
-      object$summary(line_length = getOption("width"), print_fn = function(object) cat(object, "\n", sep = ""))
-    else
-      cat(py_str(object, line_length = line_length, positions = positions), "\n")
-  }
+summary.keras.engine.training.Model <- function(object, ...) {
+  writeLines(f <- format.keras.engine.training.Model(object, ...))
+  invisible(f)
+}
+
+#' @rdname summary.keras.engine.training.Model
+#' @export
+format.keras.engine.training.Model <-
+  function(x,
+           line_length = getOption("width"),
+           positions = NULL,
+           expand_nested = FALSE,
+           show_trainable = FALSE,
+           ...) {
+    if (py_is_null_xptr(x))
+      return("<pointer: 0x0>")
+
+    args <- capture_args(match.call(), ignore = "x")
+
+    # ensure `line_length` in args, even if not passed by user
+    args$line_length <- as_nullable_integer(line_length)
+
+    if (x$built)
+      trimws(py_capture_output(do.call(x$summary, args),
+                               type = "stdout"))
+     else
+      "Model: <no summary available, model was not built>"
+}
+
+#
+#' @rdname summary.keras.engine.training.Model
+#' @export
+print.keras.engine.training.Model <- function(x, ...) {
+  writeLines(format.keras.engine.training.Model(x, ...))
+  invisible(x)
 }
 
 #' @importFrom reticulate py_str
 #' @export
-py_str.keras.engine.training.Model <- function(object,  line_length = getOption("width"), positions = NULL, ...) {
-  if (!object$built) {
-    cat("Model\n<no summary available, model was not built>\n")
-  } else {
-    paste0("Model\n", py_capture_output(object$summary(line_length = line_length, positions = positions), type = "stdout"))
-  }
+py_str.keras.engine.training.Model <- function(object, line_length = getOption("width"), positions = NULL, ...) {
+  # still invoked by utils::str()
+  # warning("`py_str()` generic is deprecated")
+  format.keras.engine.training.Model(object, line_length = line_length, positions = positions, ...)
 }
 
 
