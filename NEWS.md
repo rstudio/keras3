@@ -6,7 +6,7 @@
   Then, if a named list was passed to subsequent
   `fit()`/`evaluate()`/`call()`/`predict()` invocations,
   matching of `x` and `y` was done to the model's input and outpt `tensor$name`'s.
-  Now, matching is done to `names()` of `inputs` and/or `outputs` supplied `keras_model()`.
+  Now, matching is done to `names()` of `inputs` and/or `outputs` supplied to `keras_model()`.
   Call `unname()` on `inputs` and `outputs` to restore the old behavior, e.g.:
     ```
     keras_model(unname(inputs), unname(outputs))
