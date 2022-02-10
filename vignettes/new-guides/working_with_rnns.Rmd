@@ -49,7 +49,7 @@ timestep is to be fed to the next timestep.
 [Cho et al., 2014](https://arxiv.org/abs/1406.1078).
 
 3. `layer_lstm()`, first proposed in
-[Hochreiter & Schmidhuber, 1997](https://www.bioinf.jku.at/publications/older/2604.pdf).
+[Hochreiter & Schmidhuber, 1997](http://www.bioinf.jku.at/publications/older/2604.pdf).
 
 Here is a simple example of a sequential model that processes sequences of integers,
 embeds each integer into a 64-dimensional vector, then processes the sequence of
