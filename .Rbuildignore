@@ -42,3 +42,4 @@
 ^\.github$
 ^\.vscode$
 ^scratch$
+^CRAN-SUBMISSION$
