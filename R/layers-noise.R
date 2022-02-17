@@ -88,6 +88,7 @@ layer_gaussian_dropout <- function(object, rate, input_shape = NULL,
 #'   rate))`.
 #' @param noise_shape Noise shape
 #' @param seed An integer to use as random seed.
+#' @param ... standard layer arguments.
 #'
 #' @section Input shape: Arbitrary. Use the keyword argument `input_shape` (list
 #'   of integers, does not include the samples axis) when using this layer as

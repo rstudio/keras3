@@ -22,6 +22,8 @@ multiplicative noise will have standard deviation \code{sqrt(rate / (1 - rate))}
 \item{noise_shape}{Noise shape}
 
 \item{seed}{An integer to use as random seed.}
+
+\item{...}{standard layer arguments.}
 }
 \description{
 Alpha Dropout is a dropout that keeps mean and variance of inputs to their
