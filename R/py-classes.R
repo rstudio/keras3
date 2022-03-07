@@ -2,19 +2,17 @@
 #' @export
 r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
 
-  if(!is.null(x$private_fields) || !is.null(x$private_methods))
-    stop("Python classes do not support private attributes")
-
   inherit <- resolve_py_type_inherits(x$get_inherit(), convert)
 
-  env <- new.env(parent = x$parent_env) # mask that will contain `__class__`
+  mask_env <- new.env(parent = x$parent_env)
+  # common-mask-env: `super`, `__class__`, classname
 
   # R6 by default includes this in public methods list, not applicable here.
   methods <- x$public_methods
   methods$clone <- NULL
 
-  methods <- as_py_methods(methods, env, convert)
-  active <- as_py_methods(x$active, env, convert)
+  methods <- as_py_methods(methods, mask_env, convert)
+  active <- as_py_methods(x$active, mask_env, convert)
 
   # having convert=FALSE here means py callables are not wrapped in R functions
   # https://github.com/rstudio/reticulate/issues/1024
@@ -33,7 +31,6 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
   if(!"__module__" %in% names(namespace))
     namespace$`__module__` <- "R6type"
 
-
   new_exec_body <- py_eval("lambda ns_entries: (lambda ns: ns.update(ns_entries))",
                            convert=convert)
   exec_body <- py_call(new_exec_body,
@@ -50,8 +47,10 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
   py_class <- py_to_r(py_class)
   assign("convert", convert, as.environment(py_class))
 
-  env$`__class__` <- py_class
-  env[[x$classname]] <- py_class
+  mask_env$`__class__` <- py_class
+  mask_env[[x$classname]] <- py_class
+  attr(mask_env, "get_private") <-
+    new_get_private(r6_class = x, shared_mask_env = mask_env)
 
   eval(quote({
     super <- base::structure(
@@ -62,12 +61,56 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
         reticulate::py_call(bt$super, type, object)
       },
       class = "python_class_super")
-  }), env)
+  }), mask_env)
+
 
   attr(py_class, "r6_class") <- x
   class(py_class) <- c("py_R6ClassGenerator", class(py_class))
 
   py_class
+}
+
+#' @importFrom reticulate py_id
+new_get_private <- function(r6_class, shared_mask_env) {
+  force(r6_class); force(shared_mask_env)
+
+  privates <- list()
+
+  new_instance_private <- function(self) {
+
+    private <- new.env(parent = emptyenv())
+    key <- as.character(py_id(self))
+    privates[[key]] <<- private
+
+    reticulate::import("weakref")$finalize(
+      self, finalize_instance_private, key)
+
+    if (length(r6_class$private_fields))
+      list2env(r6_class$private_fields, envir = private)
+
+    if (length(r6_class$private_methods)) {
+      instance_mask_env <- new.env(parent = shared_mask_env)
+      instance_mask_env$self <- self
+      instance_mask_env$private <- private
+
+      for (nm in names(r6_class$private_methods)) {
+        method <- r6_class$private_methods[[nm]]
+        environment(method) <- instance_mask_env
+        private[[nm]] <- method
+      }
+    }
+
+    private
+  }
+
+  finalize_instance_private <- function(key) {
+    privates[[key]] <<- NULL
+  }
+
+  function(self) {
+    key <- as.character(py_id(self))
+    .subset2(privates, key) %||% new_instance_private(self)
+  }
 }
 
 
@@ -175,6 +218,15 @@ as_py_method <- function(fn, name, env, convert) {
         body
         invisible(NULL)
       }, list(body = body(fn)))
+    }
+
+    if (!"private" %in% names(formals(fn)) &&
+        "private" %in% all.names(body(fn))) {
+      # any benefit to using delayedAssign here?
+      body(fn) <- substitute({
+        private <- attr(env, "get_private", TRUE)(self)
+        body
+      }, list(body = body(fn), env = env))
     }
 
     # python tensorflow does quite a bit of introspection on user-supplied
@@ -295,6 +347,39 @@ r_formals_to_py__signature__ <- function(fn) {
 #' my_class_instance2$my_method()
 #'
 #' reticulate::py_help(MyClass2) # see the __doc__ strings and more!
+#'
+#' # In addition to `self`, there is also `private` available.
+#' # This is an R environment unique to each class instance, where you can
+#' # store objects that you don't want converted to Python, but still want
+#' # available from methods. You can also assign methods to private, and
+#' # `self` and `private` will be available in private methods.
+#'
+#' MyClass %py_class% {
+#'
+#'   initialize <- function(x) {
+#'     print("Hi from MyClass$initialize()!")
+#'     private$y <- paste("A Private field:", x)
+#'   }
+#'
+#'   get_private_field <- function() {
+#'     private$y
+#'   }
+#'
+#'   private$a_private_method <- function() {
+#'     cat("a_private_method() was called.\n")
+#'     cat("private$y is ", sQuote(private$y), "\n")
+#'   }
+#'
+#'   call_private_method <- function()
+#'     private$a_private_method()
+#' }
+#'
+#' inst1 <- MyClass(1)
+#' inst2 <- MyClass(2)
+#' inst1$get_private_field()
+#' inst2$get_private_field()
+#' inst1$call_private_method()
+#' inst2$call_private_method()
 #' }
 `%py_class%` <- function(spec, body) {
   spec <- substitute(spec)
@@ -335,11 +420,17 @@ r_formals_to_py__signature__ <- function(fn) {
   }
 
   env <- new.env(parent = parent_env)
+  env$private <- new.env(parent = emptyenv())
+
   eval(body, env)
+
   if (!"__doc__" %in% names(env) &&
       body[[1]] == quote(`{`) &&
       typeof(body[[2]]) == "character")
     env$`__doc__` <- glue::trim(body[[2]])
+
+  private <- as.list.environment(env$private, all.names = TRUE)
+  rm(list = "private", envir = env)
 
   public <- active <- list()
   for(nm in names(env)) {
@@ -356,6 +447,7 @@ r_formals_to_py__signature__ <- function(fn) {
     quote(R6::R6Class),
     classname = classname,
     public = public,
+    private = private,
     active = active,
     inherit = inherit,
     cloneable = FALSE,
