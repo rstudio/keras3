@@ -1,5 +1,8 @@
 # keras (development version)
 
+-  `r_to_py()` method for R6 classes and `%py_class%` gain support for
+  `private` fields and methods. Any R objects stored in private will only be
+  available to methods, and will not be converted to Python.
 # keras 2.8.0
 
 - Breaking change: The semantics of passing a named list to `keras_model()` have changed.

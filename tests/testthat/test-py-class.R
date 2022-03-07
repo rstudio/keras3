@@ -98,3 +98,58 @@ test_that("%py_class% initialize", {
   expect_identical(x$layers, list(1, "2", 3))
 
 })
+
+
+test_that("R6 privates", {
+
+  o <- structure(1, class = "non_convertable_object")
+  `+.non_convertable_object` <- function(a, b) {
+    structure(unclass(a) + unclass(b),
+              class = "non_convertable_object")
+  }
+  r_to_py.non_convertable_object <- function(x, convert = FALSE) {
+    stop("object not convertable")
+  }
+
+  expect_error(r_to_py(o), "object not convertable")
+
+  aClass <- R6Class(
+    "aClass",
+    public = list(
+      initialize = function() {
+        private$o <- o
+      },
+      get_private_o = function(...) {
+        unclass(private$o)
+      },
+      increment_private_o = function(o) {
+        private$o <- private$o + 1
+        NULL
+      }
+    )
+    # ,
+    # private = list(
+    #   o = NULL
+    # )
+  )
+
+  # inst <- aClass$new()
+  # inst$set_private_o(o)
+  # inst$get_private_o()
+
+  py_aClass <- r_to_py(aClass, convert = TRUE)
+  py_inst <- py_aClass()
+  py_inst$increment_private_o()
+  expect_equal(py_inst$get_private_o(), 2)
+  py_inst$increment_private_o()
+  py_inst$increment_private_o()
+  expect_equal(py_inst$get_private_o(), 4)
+
+  py_inst2 <- py_aClass()
+  expect_equal(py_inst2$get_private_o(), 1)
+  py_inst2$increment_private_o()
+  py_inst2$increment_private_o()
+  expect_equal(py_inst2$get_private_o(), 3)
+  expect_equal(py_inst$get_private_o(), 4)
+
+})
