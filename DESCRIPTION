@@ -47,6 +47,7 @@ Suggests:
     callr,
     tfdatasets,
     withr,
+    png,
     jpeg
 Roxygen: list(markdown = TRUE, r6 = FALSE)
 RoxygenNote: 7.1.2
