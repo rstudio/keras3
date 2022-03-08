@@ -3,6 +3,15 @@
 -  `r_to_py()` method for R6 classes and `%py_class%` gain support for
   `private` fields and methods. Any R objects stored in private will only be
   available to methods, and will not be converted to Python.
+
+- New functions for constructing custom keras types:
+  - `new_model_type()`
+  - `new_layer_type()`
+  - `new_callback_type()`
+  - `new_metric_type()`
+  Also provided is `mark_active()`, a decorator for indicating a class method
+  should be an active binding (i.e., decorated with Python's `@property`).
+
 # keras 2.8.0
 
 - Breaking change: The semantics of passing a named list to `keras_model()` have changed.
