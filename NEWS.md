@@ -27,6 +27,10 @@
     - If any layers are marked non-trainable or frozen, the model summary
       now includes a "Trainable" column, indicating if a layer is frozen.
 
+- `timeseries_dataset_from_array()`:
+    - R arrays are automatically cast to the floatx dtype ("float32" by default)
+    - arguments `start_index` and `end_index` now are 1-based.
+
 # keras 2.8.0
 
 - Breaking change: The semantics of passing a named list to `keras_model()` have changed.
