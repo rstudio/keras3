@@ -458,3 +458,17 @@ is_mac_arm64 <- function() {
   sys_info[["sysname"]] == "Darwin" &&
   sys_info[["machine"]] == "arm64"
 }
+
+
+
+drop_nulls <- function(x, i = NULL) {
+  if(is.null(i))
+    return(x[!vapply(x, is.null, FALSE, USE.NAMES = FALSE)])
+
+  drop <- logical(length(x))
+  names(drop) <- names(x)
+  drop[i] <- vapply(x[i], is.null, FALSE, USE.NAMES = FALSE)
+  x[drop] <- NULL
+  x
+}
+

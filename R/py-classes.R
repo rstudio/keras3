@@ -501,13 +501,20 @@ delayed_r_to_py_R6ClassGenerator <- function(r6_class, convert) {
                                 "python.builtin.type",
                                 "python.builtin.object")
   attr(py_object, "r6_class") <- r6_class
-
+  py_object_real <- NULL
+  # keep a reference alive here, since this object
+  # has the C finalizer registered
   force_py_object <- function(nm) {
-    o <- attr(r_to_py.R6ClassGenerator(r6_class, convert), "py_object")
-    list2env(as.list.environment(o, all.names = TRUE), py_object)
-    rm("delayed", envir = py_object)
+    if (exists("delayed", envir = py_object, inherits = FALSE)) {
+      py_object_real <<-
+        attr(r_to_py.R6ClassGenerator(r6_class, convert), "py_object")
+      list2env(as.list.environment(py_object_real, all.names = TRUE),
+               py_object)
+      rm(list = "delayed", envir = py_object)
+    }
+
     if(missing(nm))
-      o
+      py_object
     else
       get(nm, envir = py_object)
   }
@@ -566,3 +573,15 @@ print.py_R6ClassGenerator <- function(x, ...) {
   makeActiveBinding(substitute(sym), value, parent.frame())
   invisible(value)
 }
+
+
+
+maybe_delayed_r_to_py_R6ClassGenerator <-
+  function(x, convert = FALSE,
+           parent_env = parent.frame()) {
+    if (identical(topenv(parent_env), globalenv()))
+      # not in a package
+      r_to_py.R6ClassGenerator(x, convert)
+    else
+      delayed_r_to_py_R6ClassGenerator(x, convert)
+  }
