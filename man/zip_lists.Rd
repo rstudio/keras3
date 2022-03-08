@@ -33,4 +33,9 @@ str(zip_lists(gradient = gradients, weight = weights))
 
 names(gradients) <- names(weights) <- paste0("layer_", 1:3)
 str(zip_lists(gradients, weights[c(3, 1, 2)]))
+
+names(gradients) <- paste0("gradient_", 1:3)
+try(zip_lists(gradients, weights)) # error, names don't match
+# call unname directly for positional matching
+zip_lists(unname(gradients), unname(weights))
 }
