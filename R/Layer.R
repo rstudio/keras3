@@ -1,4 +1,7 @@
-#' Create a custom Layer
+#' (Deprecated) Create a custom Layer
+#'
+#' This function is maintained but deprecated. Please use `new_layer_type()` or
+#' `%py_class%` to define custom layers.
 #'
 #' @param classname the name of the custom Layer.
 #' @param initialize a function. This is where you define the arguments used to further
@@ -18,7 +21,7 @@
 #'  method.
 #' @param ... Any other methods and/or attributes can be specified using named
 #'  arguments. They will be added to the layer class.
-#' @param inherit the Keras layer to inherit from
+#' @param inherit the Keras layer to inherit from.
 #' @return A function that wraps `create_layer`, similar to `keras::layer_dense`.
 #' @examples
 #' \dontrun{
@@ -56,20 +59,18 @@
 #'
 #' }
 #'
-#'
+#' @keywords internal
 #' @export
-Layer <- function(classname, initialize, build = NULL, call = NULL,
-                  compute_output_shape = NULL, ...,
-                  inherit = tensorflow::tf$keras$layers$Layer) {
+Layer <-
+function(classname, initialize, build = NULL, call = NULL,
+         compute_output_shape = NULL, ...,
+         inherit = keras::keras$layers$Layer) {
+
+  public <- capture_args(match.call(), ignore = c("classname", "inherit"))
+  for(ignore_if_null in c("build", "call", "compute_output_shape"))
+    public[[ignore_if_null]] <- public[[ignore_if_null]]
 
   inherit <- substitute(inherit)
-
-  public <- list(...)
-  public$initialize <- initialize
-  public$build <- build
-  public$call <- call
-  public$compute_output_shape <- compute_output_shape
-
   parent_env <- parent.frame()
 
   # R6Class() calls substitute() on inherit;

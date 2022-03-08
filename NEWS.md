@@ -31,6 +31,8 @@
     - R arrays are automatically cast to the floatx dtype ("float32" by default)
     - arguments `start_index` and `end_index` now are 1-based.
 
+- `Layer` is deprecated, superseded by `new_layer_type()`.
+
 # keras 2.8.0
 
 - Breaking change: The semantics of passing a named list to `keras_model()` have changed.
