@@ -76,9 +76,57 @@ test_call_succeeds("with_custom_object_scope", {
   })
 
 
+})
 
 
+test_call_succeeds("with_custom_object_scope", {
+
+  gradients <- list("grad_for_wt_1", "grad_for_wt_2", "grad_for_wt_3")
+  weights <- list("weight_1", "weight_2", "weight_3")
+  expect_identical(zip_lists(gradients, weights),
+                   list(
+                     list("grad_for_wt_1", "weight_1"),
+                     list("grad_for_wt_2", "weight_2"),
+                     list("grad_for_wt_3", "weight_3")
+                   ))
+
+  expect_identical(zip_lists(gradient = gradients, weight = weights),
+                   list(
+                     list(gradient = "grad_for_wt_1", weight = "weight_1"),
+                     list(gradient = "grad_for_wt_2", weight = "weight_2"),
+                     list(gradient = "grad_for_wt_3", weight = "weight_3")
+                   ))
+
+  names(gradients) <- names(weights) <- paste0("layer_", 1:3)
+  expected <-
+    list(
+      layer_1 = list("grad_for_wt_1", "weight_1"),
+      layer_2 = list("grad_for_wt_2", "weight_2"),
+      layer_3 = list("grad_for_wt_3", "weight_3")
+    )
+
+  expect_identical(zip_lists(gradients, weights),
+                   expected)
+  expect_identical(zip_lists(gradients, weights[c(3, 1, 2)]),
+                   expected)
 
 
+  expect_identical(
+    zip_lists(gradient = gradients, weight = weights),
+    list(
+      layer_1 = list(gradient = "grad_for_wt_1", weight = "weight_1"),
+      layer_2 = list(gradient = "grad_for_wt_2", weight = "weight_2"),
+      layer_3 = list(gradient = "grad_for_wt_3", weight = "weight_3")
+    )
+  )
 
+  names(gradients) <- paste0("gradient_", 1:3)
+  expect_error(zip_lists(gradients, weights)) # error, names don't match
+  # call unname directly for positional matching
+  expect_identical(zip_lists(unname(gradients), unname(weights)),
+                   list(
+                     list("grad_for_wt_1", "weight_1"),
+                     list("grad_for_wt_2", "weight_2"),
+                     list("grad_for_wt_3", "weight_3")
+                   ))
 })

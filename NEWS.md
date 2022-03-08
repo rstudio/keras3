@@ -12,6 +12,8 @@
   Also provided is `mark_active()`, a decorator for indicating a class method
   should be an active binding (i.e., decorated with Python's `@property`).
 
+- New `zip_lists()` function for transposing lists, optionally matching by name.
+
 # keras 2.8.0
 
 - Breaking change: The semantics of passing a named list to `keras_model()` have changed.
