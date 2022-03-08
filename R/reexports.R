@@ -10,6 +10,10 @@
 #' @usage lhs \%>\% rhs
 NULL
 
+
+#' @export
+magrittr::`%<>%`
+
 #' Assign values to names
 #'
 #' See \code{\link[zeallot]{\%<-\%}} for more details.

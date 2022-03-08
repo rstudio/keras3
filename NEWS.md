@@ -17,6 +17,9 @@
 - New `plot()` S3 method for models.
 - `pydot` is now included in the packages installed by `install_keras()`.
 - The `png` package is now listed under Suggests.
+
+- The `%<>%` assignment pipe from magrittr is exported.
+
 # keras 2.8.0
 
 - Breaking change: The semantics of passing a named list to `keras_model()` have changed.
