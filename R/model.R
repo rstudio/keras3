@@ -1432,6 +1432,8 @@ pop_layer <- function(object) {
 #'   defaults to `FALSE`.
 #' @param show_trainable Whether to show if a layer is trainable. If not
 #'   provided, defaults to `FALSE`.
+#' @param compact Whether to remove white-space only lines from the model
+#'   summary. (Default `TRUE`)
 #' @param ... for `summary()` and `print()`, passed on to `format()`. For
 #'   `format()`, passed on to `model$summary()`.
 #'
@@ -1450,25 +1452,32 @@ summary.keras.engine.training.Model <- function(object, ...) {
 #' @rdname summary.keras.engine.training.Model
 #' @export
 format.keras.engine.training.Model <-
-  function(x,
-           line_length = getOption("width"),
-           positions = NULL,
-           expand_nested = FALSE,
-           show_trainable = FALSE,
-           ...) {
-    if (py_is_null_xptr(x))
-      return("<pointer: 0x0>")
+function(x,
+         line_length = getOption("width") - (11L * show_trainable),
+         positions = NULL,
+         expand_nested = FALSE,
+         show_trainable = as.logical(length(x$non_trainable_weights)),
+         ...,
+         compact = TRUE) {
+  if (py_is_null_xptr(x))
+    return("<pointer: 0x0>")
 
-    args <- capture_args(match.call(), ignore = "x")
+  args <- capture_args(match.call(), ignore = "x")
 
-    # ensure `line_length` in args, even if not passed by user
-    args$line_length <- as_nullable_integer(line_length)
+  # ensure `line_length` and other args captured, even if not passed by user
+  args$show_trainable <- show_trainable
+  args$line_length <- as_nullable_integer(line_length)
 
-    if (x$built)
-      trimws(py_capture_output(do.call(x$summary, args),
-                               type = "stdout"))
-     else
-      "Model: <no summary available, model was not built>"
+  out <- if (x$built)
+    trimws(py_capture_output(do.call(x$summary, args),
+                             type = "stdout"))
+   else
+    "Model: <no summary available, model was not built>"
+
+  if(compact) # strip empty lines
+    out <- gsub("(\\n\\s*\\n)", "\n", out, perl = TRUE)
+
+  out
 }
 
 #

@@ -20,6 +20,13 @@
 
 - The `%<>%` assignment pipe from magrittr is exported.
 
+- `format()` method for keras models (and derivative methods `print()`, `summary()`,
+  `str()`, and `py_str()`):
+    - gain a new arg `compact`. If `TRUE` (the default) white-space only
+      lines are stripped out of `model.summary()`.
+    - If any layers are marked non-trainable or frozen, the model summary
+      now includes a "Trainable" column, indicating if a layer is frozen.
+
 # keras 2.8.0
 
 - Breaking change: The semantics of passing a named list to `keras_model()` have changed.

@@ -10,11 +10,12 @@
 
 \method{format}{keras.engine.training.Model}(
   x,
-  line_length = getOption("width"),
+  line_length = getOption("width") - (11L * show_trainable),
   positions = NULL,
   expand_nested = FALSE,
-  show_trainable = FALSE,
-  ...
+  show_trainable = as.logical(length(x$non_trainable_weights)),
+  ...,
+  compact = TRUE
 )
 
 \method{print}{keras.engine.training.Model}(x, ...)
@@ -35,6 +36,9 @@ defaults to \code{FALSE}.}
 
 \item{show_trainable}{Whether to show if a layer is trainable. If not
 provided, defaults to \code{FALSE}.}
+
+\item{compact}{Whether to remove white-space only lines from the model
+summary. (Default \code{TRUE})}
 }
 \value{
 \code{format()} returns a length 1 character vector. \code{print()} returns the
