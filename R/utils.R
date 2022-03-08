@@ -460,6 +460,90 @@ is_mac_arm64 <- function() {
 }
 
 
+#' Plot a Keras model
+#'
+#' @param model A Keras model instance
+#' @param to_file File name of the plot image. If `NULL` (the default), the
+#'   model is drawn on the default graphics device. Otherwise, a file is saved.
+#' @param show_shapes whether to display shape information.
+#' @param show_dtype whether to display layer dtypes.
+#' @param show_layer_names whether to display layer names.
+#' @param ... passed on to `keras$utils$plot_model()`. Used for forward and
+#'   backward compatibility.
+#' @param rankdir a string specifying the format of the plot: `'TB'` creates a
+#'   vertical plot; `'LR'` creates a horizontal plot. (argument passed to PyDot)
+#' @param expand_nested Whether to expand nested models into clusters.
+#' @param dpi Dots per inch. Increase this value if the image text appears
+#'   excessively pixelated.
+#' @param layer_range `list` containing two character strings, which is the
+#'   starting layer name and ending layer name (both inclusive) indicating the
+#'   range of layers for which the plot will be generated. It also accepts regex
+#'   patterns instead of exact name. In such case, start predicate will be the
+#'   first element it matches to `layer_range[1]` and the end predicate will be
+#'   the last element it matches to `layer_range[2]`. By default `NULL` which
+#'   considers all layers of model. Note that you must pass range such that the
+#'   resultant subgraph must be complete.
+#' @param show_layer_activations Display layer activations (only for layers that
+#'   have an `activation` property).
+#'
+#' @return Nothing, called for it's side effects.
+#'
+#' @section Raises: ValueError: if `plot_model` is called before the model is
+#'   built, unless a `input_shape = ` argument was supplied to
+#'   `keras_model_sequential()`.
+#'
+#' @section Requirements:
+#'   This function requires pydot and graphviz.
+#'   `pydot` is by default installed by `install_keras()`, but if you installed
+#'   tensorflow by other means, you can install pydot directly with :
+#'   ````
+#'   reticulate::py_install("pydot", pip = TRUE)
+#'   ````
+#'   In a conda environment, you can install graphviz with:
+#'   ```
+#'   reticulate::conda_install(packages = "graphviz")
+#'   # Restart the R session after install.
+#'   ```
+#'   Otherwise you can install graphviz from here:
+#'   <https://graphviz.gitlab.io/download/>
+#'
+#' @export
+plot.keras.engine.training.Model <-
+function(x,
+         show_shapes = FALSE,
+         show_dtype = FALSE,
+         show_layer_names = TRUE,
+         ...,
+         rankdir = "TB",
+         expand_nested = FALSE,
+         dpi = 96,
+         layer_range = NULL,
+         show_layer_activations = FALSE,
+         to_file = NULL) {
+  args <- capture_args(match.call(), ignore = "x")
+  args$model <- x
+  if (is.null(to_file)) {
+    args$to_file <- to_file <-
+      tempfile(paste0("keras_", x$name), fileext = ".png")
+    on.exit(unlink(to_file))
+  }
+
+  tryCatch(
+    do.call(keras$utils$plot_model, args),
+    error = function(e) {
+      message("See ?keras::plot.keras.engine.training.Model for instructions on how to install graphviz and pydot")
+      e$call <- sys.call(1)
+      stop(e)
+    }
+  )
+  img <- png::readPNG(to_file, native = TRUE)
+  plot.new()
+  plot.window(xlim = c(0, ncol(img)), ylim = c(0, nrow(img)),
+                asp = 1, yaxs = "i", xaxs = "i")
+  rasterImage(img, 0, 0, ncol(img), nrow(img), interpolate = FALSE)
+  invisible()
+}
+
 
 
 #' zip lists

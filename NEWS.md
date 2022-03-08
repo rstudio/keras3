@@ -14,6 +14,9 @@
 
 - New `zip_lists()` function for transposing lists, optionally matching by name.
 
+- New `plot()` S3 method for models.
+- `pydot` is now included in the packages installed by `install_keras()`.
+- The `png` package is now listed under Suggests.
 # keras 2.8.0
 
 - Breaking change: The semantics of passing a named list to `keras_model()` have changed.
