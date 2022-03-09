@@ -29,10 +29,13 @@
 
 - `freeze_weights()` and `unfreeze_weights()`:
   - gain a flexible `which` argument that can accept layer names (as character strings),
-    an integer vector, a boolean vector, or a function that returns a boolean 
+    an integer vector, a boolean vector, or a function that returns a boolean
     when called with a layer. (see updated examples in `?freeze_weights`
-  - `from` and `to` arguments gain the ability to accept negative integers, 
+  - `from` and `to` arguments gain the ability to accept negative integers,
      to specify layers counting from the end of the layers list.
+
+- `get_weights()` gains a `trainable` argument that can accept a boolean,
+  allowing for returning only the frozen or unfrozen weights, respectively.
 
 - `timeseries_dataset_from_array()`:
     - R arrays are automatically cast to the floatx dtype ("float32" by default)
