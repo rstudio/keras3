@@ -1474,9 +1474,12 @@ function(x,
    else
     "Model: <no summary available, model was not built>"
 
-  if(compact) # strip empty lines
+  if(compact) {
+    # strip empty lines
     out <- gsub("(\\n\\s*\\n)", "\n", out, perl = TRUE)
-
+    if(expand_nested)
+      out <- gsub("\\n\\|\\s+\\|\\n", "\n", out)
+  }
   out
 }
 
