@@ -43,6 +43,11 @@
 
 - `Layer` is deprecated, superseded by `new_layer_type()`.
 
+- `load_model_tf()` argument `custom_objects` gains the ability to accept an
+  unnamed list (e.g, of object returned by `new_layer_type()` or similar).
+  Appropriate names for the supplied objects are automatically infered.
+
+
 # keras 2.8.0
 
 - Breaking change: The semantics of passing a named list to `keras_model()` have changed.
