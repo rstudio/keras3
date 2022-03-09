@@ -87,7 +87,7 @@ test_succeeds("model load with unnamed custom_objects", {
     k_mean(y_pred)
   })
 
-  custom_loss <- newfunction(y_pred, y_true) {
+  custom_loss <- function(y_pred, y_true) {
     loss_categorical_crossentropy(y_pred, y_true)
   }
 
