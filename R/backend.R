@@ -2913,9 +2913,11 @@ k_temporal_padding <- function(x, padding = c(1, 1)) {
 #'
 #' @export
 k_tile <- function(x, n) {
+  if(!k_is_tensor(n))
+    n <- as.integer(n)
   keras$backend$tile(
     x = x,
-    n = as.integer(n)
+    n = n
   )
 }
 

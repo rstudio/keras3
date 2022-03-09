@@ -52,6 +52,7 @@
   - k_clip() `min_value` and `max_value` gain default values of `NULL`,
     can be ommitted. NULL is taken as -Inf or Inf, respectively.
   - k_squeeze(): `axis` argument can be ommitted, in which case all axes of size 1 are dropped.
+  - k_tile(): `n` argument can now be supplied as a tensor.
 
 # keras 2.8.0
 
