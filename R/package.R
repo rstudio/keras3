@@ -149,7 +149,16 @@ keras <- NULL
     if (identical(module, "tensorflow.keras"))
       module <- "tensorflow.python.keras"
 
-    sub(paste0("^", module), "keras", classes)
+    classes <- sub(paste0("^", module), "keras", classes)
+
+
+    # let KerasTensor inherit all the S3 methods of tf.Tensor, but
+    # KerasTensor methods take precedence.
+    if("keras.engine.keras_tensor.KerasTensor" %in% classes)
+      classes <- unique(c("keras.engine.keras_tensor.KerasTensor",
+                          "tensorflow.tensor",
+                          classes))
+    classes
   })
 
   # tensorflow use_session hooks

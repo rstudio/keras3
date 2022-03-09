@@ -55,6 +55,8 @@
   - k_tile(): `n` argument can now be supplied as a tensor.
   - New function `k_unstack()`.
 
+- KerasTensor objects (e.g, returned by `layer_input()`) now inherit from `"tensorflow.tensor"`.
+
 # keras 2.8.0
 
 - Breaking change: The semantics of passing a named list to `keras_model()` have changed.
