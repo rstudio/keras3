@@ -404,7 +404,7 @@ k_clear_session <- function() {
 #' @template roxlate-keras-backend
 #'
 #' @export
-k_clip <- function(x, min_value, max_value) {
+k_clip <- function(x, min_value = NULL, max_value = NULL) {
   keras$backend$clip(
     x = x,
     min_value = min_value,

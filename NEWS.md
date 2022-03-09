@@ -48,6 +48,9 @@
   unnamed list (e.g, of object returned by `new_layer_type()` or similar).
   Appropriate names for the supplied objects are automatically infered.
 
+- backend functions:
+  - k_clip() `min_value` and `max_value` gain default values of `NULL`,
+    can be ommitted. NULL is taken as -Inf or Inf, respectively.
 
 # keras 2.8.0
 

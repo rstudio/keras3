@@ -4,7 +4,7 @@
 \alias{k_clip}
 \title{Element-wise value clipping.}
 \usage{
-k_clip(x, min_value, max_value)
+k_clip(x, min_value = NULL, max_value = NULL)
 }
 \arguments{
 \item{x}{Tensor or variable.}
