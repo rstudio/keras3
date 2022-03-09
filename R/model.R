@@ -1456,7 +1456,7 @@ function(x,
          line_length = getOption("width") - (11L * show_trainable),
          positions = NULL,
          expand_nested = FALSE,
-         show_trainable = as.logical(length(x$non_trainable_weights)),
+         show_trainable = x$built && as.logical(length(x$non_trainable_weights)),
          ...,
          compact = TRUE) {
   if (py_is_null_xptr(x))

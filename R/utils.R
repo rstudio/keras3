@@ -489,7 +489,7 @@ is_mac_arm64 <- function() {
 
 #' Plot a Keras model
 #'
-#' @param model A Keras model instance
+#' @param x A Keras model instance
 #' @param to_file File name of the plot image. If `NULL` (the default), the
 #'   model is drawn on the default graphics device. Otherwise, a file is saved.
 #' @param show_shapes whether to display shape information.
@@ -550,24 +550,28 @@ function(x,
   args <- capture_args(match.call(), ignore = "x")
   args$model <- x
   if (is.null(to_file)) {
-    args$to_file <- to_file <-
+    args$to_file <-
       tempfile(paste0("keras_", x$name), fileext = ".png")
-    on.exit(unlink(to_file))
+    on.exit(unlink(args$to_file))
   }
 
   tryCatch(
     do.call(keras$utils$plot_model, args),
     error = function(e) {
-      message("See ?keras::plot.keras.engine.training.Model for instructions on how to install graphviz and pydot")
+      message("See ?keras::plot.keras.engine.training.Model for ",
+              " instructions on how to install graphviz and pydot")
       e$call <- sys.call(1)
       stop(e)
     }
   )
+  if(is.null(to_file))
+    return(invisible())
+
   img <- png::readPNG(to_file, native = TRUE)
-  plot.new()
-  plot.window(xlim = c(0, ncol(img)), ylim = c(0, nrow(img)),
-                asp = 1, yaxs = "i", xaxs = "i")
-  rasterImage(img, 0, 0, ncol(img), nrow(img), interpolate = FALSE)
+  graphics::plot.new()
+  graphics::plot.window(xlim = c(0, ncol(img)), ylim = c(0, nrow(img)),
+                        asp = 1, yaxs = "i", xaxs = "i")
+  graphics::rasterImage(img, 0, 0, ncol(img), nrow(img), interpolate = FALSE)
   invisible()
 }
 

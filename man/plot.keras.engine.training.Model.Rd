@@ -19,6 +19,8 @@
 )
 }
 \arguments{
+\item{x}{A Keras model instance}
+
 \item{show_shapes}{whether to display shape information.}
 
 \item{show_dtype}{whether to display layer dtypes.}
@@ -50,8 +52,6 @@ have an \code{activation} property).}
 
 \item{to_file}{File name of the plot image. If \code{NULL} (the default), the
 model is drawn on the default graphics device. Otherwise, a file is saved.}
-
-\item{model}{A Keras model instance}
 }
 \value{
 Nothing, called for it's side effects.

@@ -10,7 +10,7 @@ k_unstack(x, axis = 1L, num = NULL, name = NULL)
 \item{x}{a tensor.}
 
 \item{axis}{Axis along which to perform stacking (axis indexes are 1-based).
-Negative values wrap around, so the valid range is \link{R, -R}.}
+Negative values wrap around, so the valid range is \verb{[R, -R]}.}
 
 \item{num}{An int. The length of the dimension axis. Automatically inferred
 if NULL (the default).}

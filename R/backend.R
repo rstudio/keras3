@@ -2786,7 +2786,7 @@ k_stack <- function(x, axis = 1) {
 #'
 #' @param x a tensor.
 #' @param axis Axis along which to perform stacking (axis indexes are 1-based).
-#'   Negative values wrap around, so the valid range is [R, -R].
+#'   Negative values wrap around, so the valid range is `[R, -R]`.
 #' @param num An int. The length of the dimension axis. Automatically inferred
 #'   if NULL (the default).
 #' @param name A name for the operation (optional).
@@ -2797,10 +2797,10 @@ k_stack <- function(x, axis = 1) {
 #'
 #' @export
 k_unstack <- function(x, axis = 1L, num = NULL, name = NULL) {
-  tf$unstack(x,
-             num = as_nullable_integer(num),
-             axis = as_axis(axis),
-             name = name)
+  tensorflow::tf$unstack(x,
+                         num = as_nullable_integer(num),
+                         axis = as_axis(axis),
+                         name = name)
 }
 
 
