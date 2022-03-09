@@ -4,7 +4,7 @@
 \alias{k_squeeze}
 \title{Removes a 1-dimension from the tensor at index \code{axis}.}
 \usage{
-k_squeeze(x, axis)
+k_squeeze(x, axis = NULL)
 }
 \arguments{
 \item{x}{A tensor or variable.}

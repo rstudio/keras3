@@ -2754,7 +2754,9 @@ k_square <- function(x) {
 #' @template roxlate-keras-backend
 #'
 #' @export
-k_squeeze <- function(x, axis) {
+k_squeeze <- function(x, axis = NULL) {
+  if(is.null(axis))
+    return(tensorflow::tf$squeeze(x))
   keras$backend$squeeze(
     x = x,
     axis = as_axis(axis)
