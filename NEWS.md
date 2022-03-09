@@ -27,6 +27,13 @@
     - If any layers are marked non-trainable or frozen, the model summary
       now includes a "Trainable" column, indicating if a layer is frozen.
 
+- `freeze_weights()` and `unfreeze_weights()`:
+  - gain a flexible `which` argument that can accept layer names (as character strings),
+    an integer vector, a boolean vector, or a function that returns a boolean 
+    when called with a layer. (see updated examples in `?freeze_weights`
+  - `from` and `to` arguments gain the ability to accept negative integers, 
+     to specify layers counting from the end of the layers list.
+
 - `timeseries_dataset_from_array()`:
     - R arrays are automatically cast to the floatx dtype ("float32" by default)
     - arguments `start_index` and `end_index` now are 1-based.
