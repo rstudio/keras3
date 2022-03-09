@@ -9,6 +9,7 @@
   - `new_layer_type()`
   - `new_callback_type()`
   - `new_metric_type()`
+  - `new_loss_type()`
   Also provided is `mark_active()`, a decorator for indicating a class method
   should be an active binding (i.e., decorated with Python's `@property`).
 

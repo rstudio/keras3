@@ -54,6 +54,17 @@ function(classname, ..., initialize, update_state, result) {
 
 #' @rdname new-types
 #' @export
+new_loss_type <-
+function(classname, ..., call = NULL) {
+  members <- capture_args(match.call(), ignore = "classname")
+  members$call <- call
+  new_py_type(classname, members,
+              inherit = keras::keras$losses$Loss,
+              parent_env = parent.frame())
+}
+
+#' @rdname new-types
+#' @export
 new_callback_type <-
 function(classname,
          ...,

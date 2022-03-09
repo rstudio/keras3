@@ -3,6 +3,7 @@
 \name{mark_active}
 \alias{mark_active}
 \alias{new_metric_type}
+\alias{new_loss_type}
 \alias{new_callback_type}
 \alias{new_model_type}
 \alias{new_layer_type}
@@ -11,6 +12,8 @@
 mark_active(x)
 
 new_metric_type(classname, ..., initialize, update_state, result)
+
+new_loss_type(classname, ..., call = NULL)
 
 new_callback_type(
   classname,
