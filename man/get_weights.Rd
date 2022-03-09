@@ -5,17 +5,24 @@
 \alias{set_weights}
 \title{Layer/Model weights as R arrays}
 \usage{
-get_weights(object)
+get_weights(object, trainable = NA)
 
 set_weights(object, weights)
 }
 \arguments{
 \item{object}{Layer or model object}
 
+\item{trainable}{if \code{NA} (the default), all weights are returned. If \verb{TRUE, }}
+
 \item{weights}{Weights as R array}
 }
 \description{
 Layer/Model weights as R arrays
+}
+\note{
+You can access the Layer/Model as \code{tf.Tensors} or \code{tf.Variables} at
+\code{object$weights}, \code{object$trainable_weights}, or
+\code{object$non_trainable_weights}
 }
 \seealso{
 Other model persistence: 

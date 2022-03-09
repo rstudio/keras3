@@ -135,8 +135,6 @@ function(classname, ...,
 #'
 #' @return
 #' @export
-#'
-#' @examples
 new_layer_type <-
 function(classname, ...,
          initialize = NULL, build = NULL, call = NULL, get_config = NULL) {

@@ -4,10 +4,10 @@
 \alias{create_layer_wrapper}
 \title{Create a Keras Layer wrapper}
 \usage{
-create_layer_wrapper(LayerClass, modifiers = NULL, convert = TRUE)
+create_layer_wrapper(Layer, modifiers = NULL, convert = TRUE)
 }
 \arguments{
-\item{LayerClass}{A R6 or Python class generator that inherits from
+\item{Layer}{A R6 or Python class generator that inherits from
 \code{keras$layers$Layer}}
 
 \item{modifiers}{A named list of functions to modify to user-supplied
@@ -26,9 +26,9 @@ optionally call it on a supplied argument \code{object} if it is present. This
 enables keras layers to compose nicely with the pipe (\verb{\%>\%}).
 
 The R function will arguments taken from the \code{initialize} (or \verb{__init__})
-method of the LayerClass.
+method of the Layer.
 
-If \code{LayerClass} is an R6 object, this will avoid initializing the python
+If Layer is an R6 object, this will delay initializing the python
 session, so it is safe to use in an R package.
 }
 \description{

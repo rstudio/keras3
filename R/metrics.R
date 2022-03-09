@@ -49,14 +49,16 @@
 #'   *  `result()`: Computes and returns a value for the metric from the state variables.
 #'
 #' Example custom metric subclass:
-#' ```r
-#' metric_binary_true_positives(keras$metrics$Metric) %py_class% {
-#'   initialize <- function(name = 'binary_true_positives', ...) {
+#' ````R
+#' metric_binary_true_positives <- new_metric_type(
+#'   classname = "BinaryTruePositives",
+#'   initialize = function(name = 'binary_true_positives', ...) {
 #'     super$initialize(name = name, ...)
-#'     self$true_positives <- self$add_weight(name = 'tp', initializer = 'zeros')
-#'   }
+#'     self$true_positives <-
+#'       self$add_weight(name = 'tp', initializer = 'zeros')
+#'   },
 #'
-#'   update_state <- function(y_true, y_pred, sample_weight = NULL) {
+#'   update_state = function(y_true, y_pred, sample_weight = NULL) {
 #'     y_true <- k_cast(y_true, "bool")
 #'     y_pred <- k_cast(y_pred, "bool")
 #'
@@ -68,14 +70,22 @@
 #'       values <- values * sample_weight
 #'     }
 #'     self$true_positives$assign_add(tf$reduce_sum(values))
-#'   }
+#'   },
 #'
-#'   result <- function()
+#'   result = function()
 #'     self$true_positives
-#' }
-#'
+#' )
 #' model %>% compile(..., metrics = list(metric_binary_true_positives()))
-#' ```
+#' ````
+#' The same `metric_binary_true_positives` could be built with `%py_class%` like
+#' this:
+#' ````
+#' metric_binary_true_positives(keras$metrics$Metric) %py_class% {
+#'   initialize <- <same-as-above>,
+#'   update_state <- <same-as-above>,
+#'   result <- <same-as-above>
+#' }
+#' ````
 #'
 #' @name Metric
 #' @rdname Metric
