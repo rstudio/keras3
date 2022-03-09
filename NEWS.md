@@ -35,12 +35,12 @@
   - `from` and `to` arguments gain the ability to accept negative integers,
      to specify layers counting from the end of the layers list.
 
-- `get_weights()` gains a `trainable` argument that can accept a boolean,
-  allowing for returning only the frozen or unfrozen weights, respectively.
+- `get_weights()` gains a `trainable` argument that can accept `TRUE` or `FALSE`,
+  allowing for returning only the unfrozen or frozen weights, respectively.
 
 - `timeseries_dataset_from_array()`:
-    - R arrays are automatically cast to the floatx dtype ("float32" by default)
-    - arguments `start_index` and `end_index` now are 1-based.
+    - R arrays are now cast to the floatx dtype ("float32" by default)
+    - `start_index` and `end_index` now are 1-based.
 
 - `Layer` is deprecated, superseded by `new_layer_type()`.
 
@@ -50,7 +50,7 @@
 
 - backend functions:
   - k_clip() `min_value` and `max_value` gain default values of `NULL`,
-    can be ommitted. NULL is taken as -Inf or Inf, respectively.
+    can be ommitted. `NULL` is taken as -Inf or Inf, respectively.
   - k_squeeze(): `axis` argument can be ommitted, in which case all axes of size 1 are dropped.
   - k_tile(): `n` argument can now be supplied as a tensor.
 
