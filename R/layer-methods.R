@@ -18,9 +18,9 @@
 #'
 #' @note Objects returned from `get_config()` are not serializable. Therefore,
 #'   if you want to save and restore a model across sessions, you can use the
-#'   `model_to_json()` or `model_to_yaml()` functions (for model configuration
-#'   only, not weights) or the `save_model_hdf5()` function to save the model
-#'   configuration and weights to a file.
+#'   `model_to_json()` function (for model configuration only, not weights) or
+#'   the `save_model_tf()` function to save the model configuration and weights
+#'   to the filesystem.
 #'
 #' @family model functions
 #' @family layer methods
@@ -49,14 +49,26 @@ from_config <- function(config) {
 #' Layer/Model weights as R arrays
 #'
 #' @param object Layer or model object
+#' @param trainable if `NA` (the default), all weights are returned. If `TRUE, `
 #' @param weights Weights as R array
+#'
+#' @note You can access the Layer/Model as `tf.Tensors` or `tf.Variables` at
+#'   `object$weights`, `object$trainable_weights`, or
+#'   `object$non_trainable_weights`
 #'
 #' @family model persistence
 #' @family layer methods
 #'
 #' @export
-get_weights <- function(object) {
-  object$get_weights()
+get_weights <- function(object, trainable = NA) {
+  if(is.na(trainable))
+    x <- object$get_weights()
+  else if(isTRUE(trainable))
+    x <- lapply(object$trainable_weights, function(x) x$numpy())
+  else if (isFALSE(trainable))
+    x <- lapply(object$non_trainable_weights, function(x) x$numpy())
+  else stop("`trainable` must be NA, TRUE, or FALSE")
+  lapply(x, as_r_value)
 }
 
 #' @rdname get_weights

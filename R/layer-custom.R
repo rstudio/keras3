@@ -142,7 +142,6 @@ py_formals <- function(py_obj) {
     name <- x[[1]]
     param <- x[[2]]
 
-
     if (param$kind == inspect$Parameter$VAR_KEYWORD ||
         param$kind == inspect$Parameter$VAR_POSITIONAL) {
       args[["..."]] <- quote(expr = )
@@ -171,7 +170,7 @@ py_formals <- function(py_obj) {
 
 #' Create a Keras Layer wrapper
 #'
-#' @param LayerClass A R6 or Python class generator that inherits from
+#' @param Layer A R6 or Python class generator that inherits from
 #'   `keras$layers$Layer`
 #' @param modifiers A named list of functions to modify to user-supplied
 #'   arguments before they are passed on to the class constructor. (e.g.,
@@ -187,44 +186,49 @@ py_formals <- function(py_obj) {
 #'   enables keras layers to compose nicely with the pipe (`%>%`).
 #'
 #'   The R function will arguments taken from the `initialize` (or `__init__`)
-#'   method of the LayerClass.
+#'   method of the Layer.
 #'
-#'   If `LayerClass` is an R6 object, this will avoid initializing the python
+#'   If Layer is an R6 object, this will delay initializing the python
 #'   session, so it is safe to use in an R package.
 #'
 #' @export
 #' @importFrom rlang %||%
-create_layer_wrapper <- function(LayerClass, modifiers=NULL, convert=TRUE) {
+create_layer_wrapper <- function(Layer, modifiers = NULL, convert = TRUE) {
 
-  LayerClass_in <- LayerClass
-
+  force(Layer)
   force(modifiers)
+
   wrapper <- function(object) {
     args <- capture_args(match.call(), modifiers, ignore = "object")
-    create_layer(LayerClass, object, args)
+    create_layer(Layer, object, args)
   }
 
   formals(wrapper) <- local({
-    if (inherits(LayerClass, "python.builtin.type")) {
-      f <- py_formals(LayerClass)
-    } else {
-      # LayerClass is R6
-      m <- LayerClass$public_methods
+
+    if(inherits(Layer, "py_R6ClassGenerator"))
+      Layer <- attr(Layer, "r6_class")
+
+    if (inherits(Layer, "python.builtin.type")) {
+      f <- py_formals(Layer)
+    } else if (inherits(Layer, "R6ClassGenerator")) {
+      m <- Layer$public_methods
       init <- m$initialize %||% m$`__init__`
       f <- formals(init)
-    }
+    } else
+      stop('Unrecognized type passed `create_layer_wrapper()`.',
+           ' class() must be an "R6ClassGenerator" or a "python.builtin.type"')
     f$self <- NULL
     c(formals(wrapper), f)
   })
 
+  class(wrapper) <- c("keras_layer_wrapper", "function")
+  attr(wrapper, "Layer") <- Layer
+
   # create_layer() will call r_to_py() as needed, but we create a promise here
   # to avoid creating the class constructor from scratch every time a class
   # instance is created.
-  if (!inherits(LayerClass, "python.builtin.type"))
-    delayedAssign("LayerClass", r_to_py(LayerClass_in, convert))
-
-  class(wrapper) <- c("keras_layer_wrapper", "function")
-  attr(wrapper, "Layer") <- LayerClass_in
+  if (!inherits(Layer, "python.builtin.type"))
+    delayedAssign("Layer", r_to_py(attr(wrapper, "Layer", TRUE), convert))
 
   wrapper
 }

@@ -3,6 +3,7 @@
 \docType{import}
 \name{reexports}
 \alias{reexports}
+\alias{\%<>\%}
 \alias{use_python}
 \alias{use_virtualenv}
 \alias{use_condaenv}
@@ -30,6 +31,8 @@ below to see their documentation.
 
 \describe{
   \item{generics}{\code{\link[generics]{compile}}, \code{\link[generics]{fit}}}
+
+  \item{magrittr}{\code{\link[magrittr:compound]{\%<>\%}}}
 
   \item{reticulate}{\code{\link[reticulate]{array_reshape}}, \code{\link[reticulate]{tuple}}, \code{\link[reticulate:use_python]{use_condaenv}}, \code{\link[reticulate]{use_python}}, \code{\link[reticulate:use_python]{use_virtualenv}}}
 

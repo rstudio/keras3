@@ -404,7 +404,7 @@ k_clear_session <- function() {
 #' @template roxlate-keras-backend
 #'
 #' @export
-k_clip <- function(x, min_value, max_value) {
+k_clip <- function(x, min_value = NULL, max_value = NULL) {
   keras$backend$clip(
     x = x,
     min_value = min_value,
@@ -2754,7 +2754,9 @@ k_square <- function(x) {
 #' @template roxlate-keras-backend
 #'
 #' @export
-k_squeeze <- function(x, axis) {
+k_squeeze <- function(x, axis = NULL) {
+  if(is.null(axis))
+    return(tensorflow::tf$squeeze(x))
   keras$backend$squeeze(
     x = x,
     axis = as_axis(axis)
@@ -2777,6 +2779,28 @@ k_stack <- function(x, axis = 1) {
     x = x,
     axis = as_axis(axis)
   )
+}
+
+
+#' Unstack rank `R` tensor into a list of rank `R-1` tensors.
+#'
+#' @param x a tensor.
+#' @param axis Axis along which to perform stacking (axis indexes are 1-based).
+#'   Negative values wrap around, so the valid range is `[R, -R]`.
+#' @param num An int. The length of the dimension axis. Automatically inferred
+#'   if NULL (the default).
+#' @param name A name for the operation (optional).
+#'
+#' @return A tensor.
+#'
+#' @template roxlate-keras-backend
+#'
+#' @export
+k_unstack <- function(x, axis = 1L, num = NULL, name = NULL) {
+  tensorflow::tf$unstack(x,
+                         num = as_nullable_integer(num),
+                         axis = as_axis(axis),
+                         name = name)
 }
 
 
@@ -2911,9 +2935,11 @@ k_temporal_padding <- function(x, padding = c(1, 1)) {
 #'
 #' @export
 k_tile <- function(x, n) {
+  if(!k_is_tensor(n))
+    n <- as.integer(n)
   keras$backend$tile(
     x = x,
-    n = as.integer(n)
+    n = n
   )
 }
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Layer.R
 \name{Layer}
 \alias{Layer}
-\title{Create a custom Layer}
+\title{(Deprecated) Create a custom Layer}
 \usage{
 Layer(
   classname,
@@ -11,7 +11,7 @@ Layer(
   call = NULL,
   compute_output_shape = NULL,
   ...,
-  inherit = tensorflow::tf$keras$layers$Layer
+  inherit = keras::keras$layers$Layer
 )
 }
 \arguments{
@@ -39,13 +39,14 @@ method.}
 \item{...}{Any other methods and/or attributes can be specified using named
 arguments. They will be added to the layer class.}
 
-\item{inherit}{the Keras layer to inherit from}
+\item{inherit}{the Keras layer to inherit from.}
 }
 \value{
 A function that wraps \code{create_layer}, similar to \code{keras::layer_dense}.
 }
 \description{
-Create a custom Layer
+This function is maintained but deprecated. Please use \code{new_layer_type()} or
+\verb{\%py_class\%} to define custom layers.
 }
 \examples{
 \dontrun{
@@ -83,5 +84,5 @@ l(matrix(runif(10), ncol = 1))
 
 }
 
-
 }
+\keyword{internal}

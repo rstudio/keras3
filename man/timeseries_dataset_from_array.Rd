@@ -51,14 +51,10 @@ or instead draw them in chronological order.}
 
 \item{seed}{Optional int; random seed for shuffling.}
 
-\item{start_index}{Optional int; data points earlier (exclusive)
-than \code{start_index} will not be used
+\item{start_index, end_index}{Optional int (1 based); data points earlier
+than \code{start_index} or later then \code{end_index} will not be used
 in the output sequences. This is useful to reserve part of the
 data for test or validation.}
-
-\item{end_index}{Optional int; data points later (exclusive) than \code{end_index}
-will not be used in the output sequences.
-This is useful to reserve part of the data for test or validation.}
 }
 \value{
 A \code{tf.data.Dataset} instance. If \code{targets} was passed, the
@@ -156,6 +152,43 @@ while(!is.null(batch <- iter_next(dataset_iterator))) \{
   )
 \}
 }\if{html}{\out{</div>}}
+}
+
+\section{Example}{
+\preformatted{int_sequence <- seq(20)
+
+dummy_dataset <- timeseries_dataset_from_array(
+  data = head(int_sequence, -3), # drop last 3
+  targets = tail(int_sequence, -3), # drop first 3
+  sequence_length = 3,
+  start_index = 3,
+  end_index = 9,
+  batch_size = 2
+)
+
+library(tfdatasets)
+dummy_dataset_iterator <- as_array_iterator(dummy_dataset)
+
+repeat \{
+  batch <- iter_next(dummy_dataset_iterator)
+  if (is.null(batch)) # iterator exhausted
+    break
+  c(inputs, targets) \%<-\% batch
+  for (r in 1:nrow(inputs))
+    cat(sprintf("input: [ \%s ]  target: \%s\\n",
+                paste(inputs[r,], collapse = " "), targets[r]))
+  cat("---------------------------\\n") # demark batchs
+\}
+}
+
+Will give output like:\preformatted{input: [ 3 4 5 ]  target: 6
+input: [ 4 5 6 ]  target: 7
+---------------------------
+input: [ 5 6 7 ]  target: 8
+input: [ 6 7 8 ]  target: 9
+---------------------------
+input: [ 7 8 9 ]  target: 10
+}
 }
 
 \seealso{

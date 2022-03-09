@@ -180,23 +180,50 @@ with_custom_object_scope <- function(objects, expr) {
 
 
 objects_with_py_function_names <- function(objects) {
-  if (!is.null(objects)) {
-    object_names <- names(objects)
-    if (is.null(object_names))
-      stop("objects must be named", call. = FALSE)
-    objects <- lapply(1:length(objects), function(i) {
-      object <- objects[[i]]
-      if (is.function(object))
-        attr(object, "py_function_name") <- object_names[[i]]
-      object
-    })
-    names(objects) <- object_names
-    objects
-  } else {
-    NULL
-  }
-}
+  if(is.null(objects))
+    return(NULL)
 
+  if(!is.list(objects))
+    objects <- list(objects)
+
+  object_names <- rlang::names2(objects)
+
+  # try to infer missing names or raise an error
+  for (i in seq_along(objects)) {
+    name <- object_names[[i]]
+    o <- objects[[i]]
+    # browser()
+    if (name == "") {
+      if (inherits(o, "keras_layer_wrapper"))
+        o <- attr(o, "Layer")
+
+      if (inherits(o, "python.builtin.object"))
+        name <- o$`__name__`
+      else if (inherits(o, "R6ClassGenerator"))
+        name <- o$classname
+      else if (is.character(attr(o, "py_function_name", TRUE)))
+        name <- attr(o, "py_function_name", TRUE)
+      else
+        stop("object name could not be infered; please supply a named list",
+             call. = FALSE)
+
+      object_names[[i]] <- name
+    }
+  }
+
+  # add a `py_function_name` attr for bare R functions, if it's missing
+  objects <- lapply(1:length(objects), function(i) {
+    object <- objects[[i]]
+    if (is.function(object) &&
+        !inherits(object, "python.builtin.object") &&
+        is.null(attr(object, "py_function_name", TRUE)))
+      attr(object, "py_function_name") <- object_names[[i]]
+    object
+  })
+
+  names(objects) <- object_names
+  objects
+}
 
 #' Keras array object
 #'
@@ -462,7 +489,7 @@ is_mac_arm64 <- function() {
 
 #' Plot a Keras model
 #'
-#' @param model A Keras model instance
+#' @param x A Keras model instance
 #' @param to_file File name of the plot image. If `NULL` (the default), the
 #'   model is drawn on the default graphics device. Otherwise, a file is saved.
 #' @param show_shapes whether to display shape information.
@@ -523,27 +550,30 @@ function(x,
   args <- capture_args(match.call(), ignore = "x")
   args$model <- x
   if (is.null(to_file)) {
-    args$to_file <- to_file <-
+    args$to_file <-
       tempfile(paste0("keras_", x$name), fileext = ".png")
-    on.exit(unlink(to_file))
+    on.exit(unlink(args$to_file))
   }
 
   tryCatch(
     do.call(keras$utils$plot_model, args),
     error = function(e) {
-      message("See ?keras::plot.keras.engine.training.Model for instructions on how to install graphviz and pydot")
+      message("See ?keras::plot.keras.engine.training.Model for ",
+              " instructions on how to install graphviz and pydot")
       e$call <- sys.call(1)
       stop(e)
     }
   )
+  if(is.null(to_file))
+    return(invisible())
+
   img <- png::readPNG(to_file, native = TRUE)
-  plot.new()
-  plot.window(xlim = c(0, ncol(img)), ylim = c(0, nrow(img)),
-                asp = 1, yaxs = "i", xaxs = "i")
-  rasterImage(img, 0, 0, ncol(img), nrow(img), interpolate = FALSE)
+  graphics::plot.new()
+  graphics::plot.window(xlim = c(0, ncol(img)), ylim = c(0, nrow(img)),
+                        asp = 1, yaxs = "i", xaxs = "i")
+  graphics::rasterImage(img, 0, 0, ncol(img), nrow(img), interpolate = FALSE)
   invisible()
 }
-
 
 
 #' zip lists
@@ -606,7 +636,6 @@ zip_lists <- function(...) {
 }
 
 
-
 drop_nulls <- function(x, i = NULL) {
   if(is.null(i))
     return(x[!vapply(x, is.null, FALSE, USE.NAMES = FALSE)])
@@ -614,7 +643,14 @@ drop_nulls <- function(x, i = NULL) {
   drop <- logical(length(x))
   names(drop) <- names(x)
   drop[i] <- vapply(x[i], is.null, FALSE, USE.NAMES = FALSE)
-  x[drop] <- NULL
-  x
+  x[!drop]
 }
 
+
+
+
+as_r_value <- function (x) {
+  if (inherits(x, "python.builtin.object"))
+    py_to_r(x)
+  else x
+}

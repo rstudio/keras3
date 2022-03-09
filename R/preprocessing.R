@@ -1278,14 +1278,12 @@ function(directory,
 #'
 #' @param seed Optional int; random seed for shuffling.
 #'
-#' @param start_index Optional int; data points earlier (exclusive)
-#' than `start_index` will not be used
+#' @param start_index,end_index Optional int (1 based); data points earlier
+#' than `start_index` or later then `end_index` will not be used
 #' in the output sequences. This is useful to reserve part of the
 #' data for test or validation.
 #'
-#' @param end_index Optional int; data points later (exclusive) than `end_index`
-#' will not be used in the output sequences.
-#' This is useful to reserve part of the data for test or validation.
+#'
 #'
 #' @param ... For backwards and forwards compatibility, ignored presently.
 #'
@@ -1297,21 +1295,88 @@ function(directory,
 #'   batch_of_targets)`. If not, the dataset yields only
 #'   `batch_of_sequences`.
 #'
+#'
+#' @section Example:
+#'
+#' ````
+#' int_sequence <- seq(20)
+#'
+#' dummy_dataset <- timeseries_dataset_from_array(
+#'   data = head(int_sequence, -3), # drop last 3
+#'   targets = tail(int_sequence, -3), # drop first 3
+#'   sequence_length = 3,
+#'   start_index = 3,
+#'   end_index = 9,
+#'   batch_size = 2
+#' )
+#'
+#' library(tfdatasets)
+#' dummy_dataset_iterator <- as_array_iterator(dummy_dataset)
+#'
+#' repeat {
+#'   batch <- iter_next(dummy_dataset_iterator)
+#'   if (is.null(batch)) # iterator exhausted
+#'     break
+#'   c(inputs, targets) %<-% batch
+#'   for (r in 1:nrow(inputs))
+#'     cat(sprintf("input: [ %s ]  target: %s\n",
+#'                 paste(inputs[r,], collapse = " "), targets[r]))
+#'   cat("---------------------------\n") # demark batchs
+#' }
+#' ````
+#' Will give output like:
+#' ````
+#' input: [ 3 4 5 ]  target: 6
+#' input: [ 4 5 6 ]  target: 7
+#' ---------------------------
+#' input: [ 5 6 7 ]  target: 8
+#' input: [ 6 7 8 ]  target: 9
+#' ---------------------------
+#' input: [ 7 8 9 ]  target: 10
+#' ````
+#'
+#'
 #' @export
 timeseries_dataset_from_array <-
 function(data, targets, sequence_length, sequence_stride = 1L,
          sampling_rate = 1L, batch_size = 128L, shuffle = FALSE, ...,
          seed = NULL, start_index = NULL, end_index = NULL)
 {
+  # start_index and end_index are 0-based
   require_tf_version("2.6", "timeseries_dataset_from_array")
+
   args <- capture_args(match.call(), list(
+    data = keras_array,
+    targets = keras_array,
     sequence_length = as.integer,
     sequence_stride = as.integer,
     sampling_rate = as.integer,
     batch_size = as.integer,
     seed = as_nullable_integer,
-    start_index = as_nullable_integer,
-    end_index = as_nullable_integer
-    ))
+    start_index = as_slice_start,
+    end_index = as_slice_end
+  ))
   do.call(keras$preprocessing$timeseries_dataset_from_array, args)
+}
+
+
+as_slice_start <- function(x) {
+  if (is.null(x))
+    return(x)
+  x <- as.integer(x)
+  if (x >= 1)
+    x <- x - 1L
+  x
+}
+
+
+as_slice_end <- function(x) {
+  if(is.null(x))
+    return(x)
+  x <- as.integer(x)
+  if(x == -1L)
+    return(NULL)
+  if(x < 0)
+    x <- x + 1L
+  x
 }

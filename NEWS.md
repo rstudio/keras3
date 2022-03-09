@@ -9,6 +9,7 @@
   - `new_layer_type()`
   - `new_callback_type()`
   - `new_metric_type()`
+  - `new_loss_type()`
   Also provided is `mark_active()`, a decorator for indicating a class method
   should be an active binding (i.e., decorated with Python's `@property`).
 
@@ -17,6 +18,45 @@
 - New `plot()` S3 method for models.
 - `pydot` is now included in the packages installed by `install_keras()`.
 - The `png` package is now listed under Suggests.
+
+- The `%<>%` assignment pipe from magrittr is exported.
+
+- `format()` method for keras models (and derivative methods `print()`, `summary()`,
+  `str()`, and `py_str()`):
+    - gain a new arg `compact`. If `TRUE` (the default) white-space only
+      lines are stripped out of `model.summary()`.
+    - If any layers are marked non-trainable or frozen, the model summary
+      now includes a "Trainable" column, indicating if a layer is frozen.
+
+- `freeze_weights()` and `unfreeze_weights()`:
+  - gain a flexible `which` argument that can accept layer names (as character strings),
+    an integer vector, a boolean vector, or a function that returns a boolean
+    when called with a layer. (see updated examples in `?freeze_weights`
+  - `from` and `to` arguments gain the ability to accept negative integers,
+     to specify layers counting from the end of the layers list.
+
+- `get_weights()` gains a `trainable` argument that can accept `TRUE` or `FALSE`,
+  allowing for returning only the unfrozen or frozen weights, respectively.
+
+- `timeseries_dataset_from_array()`:
+    - R arrays are now cast to the floatx dtype ("float32" by default)
+    - `start_index` and `end_index` now are 1-based.
+
+- `Layer` is deprecated, superseded by `new_layer_type()`.
+
+- `load_model_tf()` argument `custom_objects` gains the ability to accept an
+  unnamed list (e.g, of object returned by `new_layer_type()` or similar).
+  Appropriate names for the supplied objects are automatically infered.
+
+- Backend functions:
+  - k_clip() `min_value` and `max_value` gain default values of `NULL`,
+    can be ommitted. `NULL` is taken as -Inf or Inf, respectively.
+  - k_squeeze(): `axis` argument can be ommitted, in which case all axes of size 1 are dropped.
+  - k_tile(): `n` argument can now be supplied as a tensor.
+  - New function `k_unstack()`.
+
+- KerasTensor objects (e.g, returned by `layer_input()`) now inherit from `"tensorflow.tensor"`.
+
 # keras 2.8.0
 
 - Breaking change: The semantics of passing a named list to `keras_model()` have changed.

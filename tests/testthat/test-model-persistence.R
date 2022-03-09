@@ -56,6 +56,64 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
 
 })
 
+test_succeeds("model load with unnamed custom_objects", {
+
+
+  layer_my_dense <-  new_layer_type(
+    "MyDense",
+
+    initialize = function(units, ...) {
+      super$initialize(...)
+      private$units <- units
+      self$dense <- layer_dense(units = units)
+    },
+    call = function(...) {
+      self$dense(...)
+    },
+    get_config = function() {
+      config <- super$get_config()
+      config$units <- private$units
+      config
+    }
+  )
+
+  model <- keras_model_sequential(input_shape = 32) %>%
+    layer_dense(10) %>%
+    layer_my_dense(10) %>%
+    layer_dense(10)
+
+
+  metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
+    k_mean(y_pred)
+  })
+
+  custom_loss <- function(y_pred, y_true) {
+    loss_categorical_crossentropy(y_pred, y_true)
+  }
+
+  model %>% compile(
+    loss = custom_loss,
+    optimizer = optimizer_nadam(),
+    metrics = metric_mean_pred
+  )
+
+  # generate dummy training data
+  data <- random_array(10, 32)
+
+  res1 <- as.array(model(data))
+
+  tmp <- tempfile("model", fileext = ".hdf5")
+  save_model_tf(model, tmp)
+  model2 <- load_model_tf(tmp,
+                          custom_objects = list(metric_mean_pred,
+                                                layer_my_dense,
+                                                custom_loss = custom_loss))
+  res2 <- as.array(model2(data))
+
+  expect_identical(res1, res2)
+})
+
+
 test_succeeds("model weights can be saved and loaded", {
 
   if (!keras:::have_h5py())

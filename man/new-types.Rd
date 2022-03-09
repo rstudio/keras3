@@ -3,6 +3,7 @@
 \name{mark_active}
 \alias{mark_active}
 \alias{new_metric_type}
+\alias{new_loss_type}
 \alias{new_callback_type}
 \alias{new_model_type}
 \alias{new_layer_type}
@@ -11,6 +12,8 @@
 mark_active(x)
 
 new_metric_type(classname, ..., initialize, update_state, result)
+
+new_loss_type(classname, ..., call = NULL)
 
 new_callback_type(
   classname,
@@ -65,7 +68,8 @@ to be a CamelCase version of the constructor.}
 \item{initialize, build, call, get_config, on_epoch_begin, on_epoch_end, on_train_begin, on_train_end, on_batch_begin, on_batch_end, on_predict_batch_begin, on_predict_batch_end, on_predict_begin, on_predict_end, on_test_batch_begin, on_test_batch_end, on_test_begin, on_test_end, on_train_batch_begin, on_train_batch_end, update_state, result, train_step, predict_step, test_step, compute_loss, compute_metrics}{Optional methods that can be overridden.}
 }
 \value{
-
+A new class generator object that inherits from the appropriate Keras
+base class.
 }
 \description{
 These functions can be used to make custom objects that fit in the family of

@@ -54,6 +54,17 @@ function(classname, ..., initialize, update_state, result) {
 
 #' @rdname new-types
 #' @export
+new_loss_type <-
+function(classname, ..., call = NULL) {
+  members <- capture_args(match.call(), ignore = "classname")
+  members$call <- call
+  new_py_type(classname, members,
+              inherit = keras::keras$losses$Loss,
+              parent_env = parent.frame())
+}
+
+#' @rdname new-types
+#' @export
 new_callback_type <-
 function(classname,
          ...,
@@ -122,10 +133,9 @@ function(classname, ...,
 #' @param initialize,build,call,get_config,on_epoch_begin,on_epoch_end,on_train_begin,on_train_end,on_batch_begin,on_batch_end,on_predict_batch_begin,on_predict_batch_end,on_predict_begin,on_predict_end,on_test_batch_begin,on_test_batch_end,on_test_begin,on_test_end,on_train_batch_begin,on_train_batch_end,update_state,result,train_step,predict_step,test_step,compute_loss,compute_metrics Optional methods that can be overridden.
 #' @param x A function that should be converted to an active property of the class type.
 #'
-#' @return
+#' @return A new class generator object that inherits from the appropriate Keras
+#'   base class.
 #' @export
-#'
-#' @examples
 new_layer_type <-
 function(classname, ...,
          initialize = NULL, build = NULL, call = NULL, get_config = NULL) {
