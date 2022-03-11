@@ -131,7 +131,7 @@ freeze_weights(base_model)
 model %>% compile(optimizer = 'rmsprop', loss = 'categorical_crossentropy')
 
 # train the model on the new data for a few epochs
-model %>% fit_generator(...)
+model %>% fit(...)
 
 # at this point, the top layers are well trained and we can start fine-tuning
 # convolutional layers from inception V3. We will freeze the bottom N layers
@@ -157,7 +157,7 @@ model %>% compile(
 
 # we train our model again (this time fine-tuning the top 2 inception blocks
 # alongside the top Dense layers
-model %>% fit_generator(...)
+model %>% fit(...)
 ```
 
 
