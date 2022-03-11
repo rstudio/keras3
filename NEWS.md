@@ -47,6 +47,9 @@
 - `load_model_tf()` argument `custom_objects` gains the ability to accept an
   unnamed list (e.g, of object returned by `new_layer_type()` or similar).
   Appropriate names for the supplied objects are automatically infered.
+  
+- Fixed an issue where negative values less than -1 supplied to `axis` 
+  arguments were selecting the wrong axis.
 
 - Backend functions:
   - k_clip() `min_value` and `max_value` gain default values of `NULL`,
