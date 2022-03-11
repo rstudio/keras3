@@ -467,7 +467,7 @@ callbacks_list <- list(
                               mode = "max" )
 )
 
-model %>% fit_generator(
+model %>% fit(
     train_iterator,
     steps_per_epoch = as.integer(length(train_index) / batch_size), 
     epochs = epochs, 
