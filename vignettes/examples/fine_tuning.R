@@ -132,8 +132,8 @@ model <- keras_model_sequential() %>%
 model %>% 
   compile(loss = "binary_crossentropy", optimizer = "adam", metrics = "accuracy")
 
-model %>% fit_generator(
-  generator = training_image_flow, 
+model %>% fit(
+  training_image_flow, 
   epochs = 1, 
   steps_per_epoch = training_image_flow$n/training_image_flow$batch_size,
   validation_data = validation_image_flow,
@@ -146,8 +146,8 @@ unfreeze_weights(mob)
 model %>% 
   compile(loss = "binary_crossentropy", optimizer = "adam", metrics = "accuracy")
 
-model %>% fit_generator(
-  generator = training_image_flow, 
+model %>% fit(
+  training_image_flow, 
   epochs = 3, 
   steps_per_epoch = training_image_flow$n/training_image_flow$batch_size,
   validation_data = validation_image_flow,
