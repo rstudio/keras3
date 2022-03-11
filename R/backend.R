@@ -120,7 +120,7 @@ k_argmax <- function(x, axis = -1) {
   keras$backend$argmax(
     x = x,
     axis = as_axis(axis)
-  )
+  ) + 1L # Use 1-based for returned value
 }
 
 
@@ -139,7 +139,7 @@ k_argmin <- function(x, axis = -1) {
   keras$backend$argmin(
     x = x,
     axis = as_axis(axis)
-  )
+  ) + 1L # Use 1-based for returned value
 }
 
 
