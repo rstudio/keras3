@@ -111,7 +111,7 @@ k_arange <- function(start, stop = NULL, step = 1, dtype = "int32") {
 #' @param axis Axis along which to perform the reduction (axis indexes are
 #'   1-based). Pass -1 (the default) to select the last axis.
 #'
-#' @return A tensor.
+#' @return A 1-based tensor.
 #'
 #' @template roxlate-keras-backend
 #'
@@ -130,7 +130,7 @@ k_argmax <- function(x, axis = -1) {
 #' @param axis Axis along which to perform the reduction (axis indexes are
 #'   1-based). Pass -1 (the default) to select the last axis.
 #'
-#' @return A tensor.
+#' @return A 1-based tensor.
 #'
 #' @template roxlate-keras-backend
 #'
