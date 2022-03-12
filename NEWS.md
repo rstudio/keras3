@@ -57,6 +57,7 @@
   - k_squeeze(): `axis` argument can be ommitted, in which case all axes of size 1 are dropped.
   - k_tile(): `n` argument can now be supplied as a tensor.
   - New function `k_unstack()`.
+  - `k_argmax()`, `k_argmin()` returned values are one based.
 
 - KerasTensor objects (e.g, returned by `layer_input()`) now inherit from `"tensorflow.tensor"`.
 
