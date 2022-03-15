@@ -50,6 +50,9 @@
   
 - Fixed an issue where negative values less than -1 supplied to `axis` 
   arguments were selecting the wrong axis.
+  
+- Fixed warning from `create_layer_wrapper()` when the custom layer didn't have 
+  an overridden `initialize` or `__init__` method.
 
 - Backend functions:
   - k_clip() `min_value` and `max_value` gain default values of `NULL`,
