@@ -41,6 +41,9 @@
 - `timeseries_dataset_from_array()`:
     - R arrays are now cast to the floatx dtype ("float32" by default)
     - `start_index` and `end_index` now are 1-based.
+    
+- `image_dataste_from_directory()` gains a `crop_to_aspect_ratio` argument which 
+  can be used to prevent distorting images when resizing to a new aspect ratio.
 
 - `Layer` is deprecated, superseded by `new_layer_type()`.
 
