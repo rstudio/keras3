@@ -17,27 +17,31 @@ image_dataset_from_directory(
   validation_split = NULL,
   subset = NULL,
   interpolation = "bilinear",
-  follow_links = FALSE
+  follow_links = FALSE,
+  crop_to_aspect_ratio = FALSE,
+  ...
 )
 }
 \arguments{
-\item{directory}{Directory where the data is located. If labels is "inferred",
-it should contain subdirectories, each containing images for a class.
-Otherwise, the directory structure is ignored.}
+\item{directory}{Directory where the data is located. If labels is
+"inferred", it should contain subdirectories, each containing images for a
+class. Otherwise, the directory structure is ignored.}
 
 \item{labels}{Either "inferred" (labels are generated from the directory
-structure), or a list/tuple of integer labels of the same size as the number
-of image files found in the directory. Labels should be sorted according to
-the alphanumeric order of the image file paths (obtained via
+structure), or a list/tuple of integer labels of the same size as the
+number of image files found in the directory. Labels should be sorted
+according to the alphanumeric order of the image file paths (obtained via
 os.walk(directory) in Python).}
 
-\item{label_mode}{\itemize{
-\item 'int': means that the labels are encoded as integers
-(e.g. for sparse_categorical_crossentropy loss). - 'categorical' means that
-the labels are encoded as a categorical vector (e.g. for
-categorical_crossentropy loss). - 'binary' means that the labels (there can
-be only 2) are encoded as float32 scalars with values 0 or 1 (e.g. for
-binary_crossentropy). - None (no labels).
+\item{label_mode}{Valid values:
+\itemize{
+\item 'int': labels are encoded as integers (e.g.
+for sparse_categorical_crossentropy loss).
+\item 'categorical': labels are encoded as a categorical vector (e.g. for
+categorical_crossentropy loss).
+\item 'binary': labels (there can be only 2) are encoded as float32 scalars
+with values 0 or 1 (e.g. for binary_crossentropy).
+\item \code{NULL}: (no labels).
 }}
 
 \item{class_names}{Only valid if "labels" is "inferred". This is the explict
@@ -61,8 +65,8 @@ sorts the data in alphanumeric order.}
 \item{validation_split}{Optional float between 0 and 1, fraction of data to
 reserve for validation.}
 
-\item{subset}{One of "training" or "validation". Only used if validation_split
-is set.}
+\item{subset}{One of "training" or "validation". Only used if
+validation_split is set.}
 
 \item{interpolation}{String, the interpolation method used when resizing
 images. Defaults to bilinear. Supports bilinear, nearest, bicubic, area,
@@ -70,8 +74,64 @@ lanczos3, lanczos5, gaussian, mitchellcubic.}
 
 \item{follow_links}{Whether to visits subdirectories pointed to by symlinks.
 Defaults to FALSE.}
+
+\item{crop_to_aspect_ratio}{If \code{TRUE}, resize the images without aspect ratio
+distortion. When the original aspect ratio differs from the target aspect
+ratio, the output image will be cropped so as to return the largest
+possible window in the image (of size image_size) that matches the target
+aspect ratio. By default (crop_to_aspect_ratio=False), aspect ratio may not
+be preserved.}
+
+\item{...}{Legacy arguments}
+}
+\value{
+A tf.data.Dataset object. If label_mode is \code{NULL}, it yields float32
+tensors of shape (batch_size, image_size\link{0}, image_size\link{1}, num_channels),
+encoding images (see below for rules regarding num_channels).
+
+Otherwise, it yields pairs of (images, labels), where images has shape
+(batch_size, image_size\link{0}, image_size\link{1}, num_channels), and labels
+follows the format described below.
+
+Rules regarding labels format:
+\itemize{
+\item if label_mode is int, the labels are an int32 tensor of shape
+(batch_size,).
+\item if label_mode is binary, the labels are a float32 tensor of 1s and 0s of
+shape (batch_size, 1).
+\item if label_mode is categorial, the labels are a float32 tensor of shape
+(batch_size, num_classes), representing a one-hot encoding of the class
+index.
+}
+
+Rules regarding number of channels in the yielded images:
+\itemize{
+\item if color_mode is grayscale, there's 1 channel in the image tensors.
+\item if color_mode is rgb, there are 3 channel in the image tensors.
+\item if color_mode is rgba, there are 4 channel in the image tensors.
+}
 }
 \description{
 Generates a \code{tf.data.Dataset} from image files in a directory.
-If your directory structure is:
+}
+\details{
+If your directory structure is:\preformatted{main_directory/
+...class_a/
+......a_image_1.jpg
+......a_image_2.jpg
+...class_b/
+......b_image_1.jpg
+......b_image_2.jpg
+}
+
+Then calling \code{image_dataset_from_directory(main_directory, labels='inferred')}
+will return a \code{tf.data.Dataset} that yields batches of images from the
+subdirectories class_a and class_b, together with labels 0 and 1 (0
+corresponding to class_a and 1 corresponding to class_b).
+
+Supported image formats: jpeg, png, bmp, gif. Animated gifs are truncated to
+the first frame.
+}
+\seealso{
+\url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/image_dataset_from_directory}
 }

@@ -975,23 +975,47 @@ flow_images_from_dataframe <- function(
 #' Create a dataset from a directory
 #'
 #' Generates a `tf.data.Dataset` from image files in a directory.
+#'
 #' If your directory structure is:
 #'
+#' ````
+#' main_directory/
+#' ...class_a/
+#' ......a_image_1.jpg
+#' ......a_image_2.jpg
+#' ...class_b/
+#' ......b_image_1.jpg
+#' ......b_image_2.jpg
+#' ````
 #'
-#' @param directory Directory where the data is located. If labels is "inferred",
-#'   it should contain subdirectories, each containing images for a class.
-#'   Otherwise, the directory structure is ignored.
+#' Then calling `image_dataset_from_directory(main_directory, labels='inferred')`
+#' will return a `tf.data.Dataset` that yields batches of images from the
+#' subdirectories class_a and class_b, together with labels 0 and 1 (0
+#' corresponding to class_a and 1 corresponding to class_b).
+#'
+#' Supported image formats: jpeg, png, bmp, gif. Animated gifs are truncated to
+#' the first frame.
+#'
+#' @param directory Directory where the data is located. If labels is
+#'   "inferred", it should contain subdirectories, each containing images for a
+#'   class. Otherwise, the directory structure is ignored.
 #' @param labels Either "inferred" (labels are generated from the directory
-#'   structure), or a list/tuple of integer labels of the same size as the number
-#'   of image files found in the directory. Labels should be sorted according to
-#'   the alphanumeric order of the image file paths (obtained via
+#'   structure), or a list/tuple of integer labels of the same size as the
+#'   number of image files found in the directory. Labels should be sorted
+#'   according to the alphanumeric order of the image file paths (obtained via
 #'   os.walk(directory) in Python).
-#' @param label_mode - 'int': means that the labels are encoded as integers
-#'   (e.g. for sparse_categorical_crossentropy loss). - 'categorical' means that
-#'   the labels are encoded as a categorical vector (e.g. for
-#'   categorical_crossentropy loss). - 'binary' means that the labels (there can
-#'   be only 2) are encoded as float32 scalars with values 0 or 1 (e.g. for
-#'   binary_crossentropy). - None (no labels).
+#' @param label_mode Valid values:
+#'
+#'   - 'int': labels are encoded as integers (e.g.
+#'   for sparse_categorical_crossentropy loss).
+#'
+#'   - 'categorical': labels are encoded as a categorical vector (e.g. for
+#'   categorical_crossentropy loss).
+#'
+#'   - 'binary': labels (there can be only 2) are encoded as float32 scalars
+#'   with values 0 or 1 (e.g. for binary_crossentropy).
+#'
+#'   - `NULL`: (no labels).
 #' @param class_names Only valid if "labels" is "inferred". This is the explict
 #'   list of class names (must match names of subdirectories). Used to control
 #'   the order of the classes (otherwise alphanumerical order is used).
@@ -1006,14 +1030,51 @@ flow_images_from_dataframe <- function(
 #' @param seed Optional random seed for shuffling and transformations.
 #' @param validation_split Optional float between 0 and 1, fraction of data to
 #'   reserve for validation.
-#' @param subset One of "training" or "validation". Only used if validation_split
-#'   is set.
+#' @param subset One of "training" or "validation". Only used if
+#'   validation_split is set.
 #' @param interpolation String, the interpolation method used when resizing
 #'   images. Defaults to bilinear. Supports bilinear, nearest, bicubic, area,
 #'   lanczos3, lanczos5, gaussian, mitchellcubic.
 #' @param follow_links Whether to visits subdirectories pointed to by symlinks.
 #'   Defaults to FALSE.
+#' @param crop_to_aspect_ratio If `TRUE`, resize the images without aspect ratio
+#'   distortion. When the original aspect ratio differs from the target aspect
+#'   ratio, the output image will be cropped so as to return the largest
+#'   possible window in the image (of size image_size) that matches the target
+#'   aspect ratio. By default (crop_to_aspect_ratio=False), aspect ratio may not
+#'   be preserved.
+#' @param ... Legacy arguments
 #'
+#'
+#' @return A tf.data.Dataset object. If label_mode is `NULL`, it yields float32
+#'   tensors of shape (batch_size, image_size[0], image_size[1], num_channels),
+#'   encoding images (see below for rules regarding num_channels).
+#'
+#'   Otherwise, it yields pairs of (images, labels), where images has shape
+#'   (batch_size, image_size[0], image_size[1], num_channels), and labels
+#'   follows the format described below.
+#'
+#'   Rules regarding labels format:
+#'
+#'   +  if label_mode is int, the labels are an int32 tensor of shape
+#'   (batch_size,).
+#'
+#'   +  if label_mode is binary, the labels are a float32 tensor of 1s and 0s of
+#'   shape (batch_size, 1).
+#'
+#'   +  if label_mode is categorial, the labels are a float32 tensor of shape
+#'   (batch_size, num_classes), representing a one-hot encoding of the class
+#'   index.
+#'
+#'   Rules regarding number of channels in the yielded images:
+#'
+#'   +  if color_mode is grayscale, there's 1 channel in the image tensors.
+#'
+#'   +   if color_mode is rgb, there are 3 channel in the image tensors.
+#'
+#'   +  if color_mode is rgba, there are 4 channel in the image tensors.
+#'
+#' @seealso <https://www.tensorflow.org/api_docs/python/tf/keras/utils/image_dataset_from_directory>
 #' @export
 image_dataset_from_directory <- function(
   directory,
@@ -1028,32 +1089,24 @@ image_dataset_from_directory <- function(
   validation_split=NULL,
   subset=NULL,
   interpolation="bilinear",
-  follow_links=FALSE
+  follow_links=FALSE,
+  crop_to_aspect_ratio = FALSE,
+  ...
 ) {
 
-  if (!is.character(labels))
-    labels <- as.integer(labels)
-
-  args <- list(
-    directory=normalizePath(directory, mustWork = FALSE),
-    labels=labels,
-    label_mode=label_mode,
-    class_names=class_names,
-    color_mode=color_mode,
-    batch_size=as.integer(batch_size),
-    image_size=as_integer_tuple(image_size),
-    shuffle=shuffle,
-    seed=as_nullable_integer(seed),
-    validation_split=validation_split,
-    subset=subset,
-    interpolation=interpolation,
-    follow_links=follow_links
-  )
+  args <- capture_args(match.call(), list(
+    directory = function(d) normalizePath(d, mustWork = FALSE),
+    batch_size = as.integer,
+    image_size = as_integer_tuple,
+    seed = as_nullable_integer,
+    labels = function(l) if(is.character(l)) l else as.integer(l)
+  ))
 
   out <- do.call(keras$preprocessing$image_dataset_from_directory, args)
-  class(out) <- c("tf_dataset", class(out))
+  class(out) <- unique(c("tf_dataset", class(out)))
   out
 }
+
 
 #' Generate a `tf.data.Dataset` from text files in a directory
 #'
@@ -1151,7 +1204,6 @@ function(directory,
                             seed = as_nullable_integer))
   do.call(keras$preprocessing$text_dataset_from_directory, args)
 }
-
 
 #' Creates a dataset of sliding windows over a timeseries provided as array
 #'
