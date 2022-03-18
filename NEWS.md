@@ -12,6 +12,16 @@
   - `new_loss_type()`
   Also provided is `mark_active()`, a decorator for indicating a class method
   should be an active binding (i.e., decorated with Python's `@property`).
+  
+- New family of functions for controlling optimizer learning rates during training:
+  -  `learning_rate_schedule_cosine_decay()`
+  -  `learning_rate_schedule_cosine_decay_restarts()`
+  -  `learning_rate_schedule_exponential_decay()`
+  -  `learning_rate_schedule_inverse_time_decay()`
+  -  `learning_rate_schedule_piecewise_constant_decay()`
+  -  `learning_rate_schedule_polynomial_decay()`
+  Also, a function for constructing custom learning rate schedules:
+  `new_learning_rate_schedule_type()`.
 
 - New `zip_lists()` function for transposing lists, optionally matching by name.
 
@@ -59,7 +69,7 @@
 
 - Backend functions:
   - k_clip() `min_value` and `max_value` gain default values of `NULL`,
-    can be ommitted. `NULL` is taken as -Inf or Inf, respectively.
+    can be omitted. `NULL` is taken as -Inf or Inf, respectively.
   - k_squeeze(): `axis` argument can be ommitted, in which case all axes of size 1 are dropped.
   - k_tile(): `n` argument can now be supplied as a tensor.
   - New function `k_unstack()`.
