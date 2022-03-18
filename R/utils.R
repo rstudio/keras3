@@ -564,10 +564,10 @@ function(x,
       stop(e)
     }
   )
-  if(is.null(to_file))
+  if(!is.null(to_file))
     return(invisible())
 
-  img <- png::readPNG(to_file, native = TRUE)
+  img <- png::readPNG(args$to_file, native = TRUE)
   graphics::plot.new()
   graphics::plot.window(xlim = c(0, ncol(img)), ylim = c(0, nrow(img)),
                         asp = 1, yaxs = "i", xaxs = "i")
