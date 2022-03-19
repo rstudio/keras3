@@ -2,20 +2,20 @@
 % Please edit documentation in R/new-py-types.R
 \name{mark_active}
 \alias{mark_active}
-\alias{new_metric_type}
-\alias{new_loss_type}
-\alias{new_callback_type}
-\alias{new_model_type}
-\alias{new_layer_type}
+\alias{new_metric_class}
+\alias{new_loss_class}
+\alias{new_callback_class}
+\alias{new_model_class}
+\alias{new_layer_class}
 \title{Define new keras types}
 \usage{
 mark_active(x)
 
-new_metric_type(classname, ..., initialize, update_state, result)
+new_metric_class(classname, ..., initialize, update_state, result)
 
-new_loss_type(classname, ..., call = NULL)
+new_loss_class(classname, ..., call = NULL)
 
-new_callback_type(
+new_callback_class(
   classname,
   ...,
   on_epoch_begin = NULL,
@@ -36,7 +36,7 @@ new_callback_type(
   on_train_batch_end = NULL
 )
 
-new_model_type(
+new_model_class(
   classname,
   ...,
   initialize = NULL,
@@ -48,7 +48,7 @@ new_model_type(
   compute_metrics = NULL
 )
 
-new_layer_type(
+new_layer_class(
   classname,
   ...,
   initialize = NULL,
@@ -73,14 +73,14 @@ base class.
 }
 \description{
 These functions can be used to make custom objects that fit in the family of
-existing keras types. For example, \code{new_layer_type()} will return an object
-that behaves like other layer functions, like \code{layer_dense()}.
-\code{new_callback_type()} will return an object that behaves similarly to other
-callback functions, like \code{callback_reduce_lr_on_plateau()}, and so on. All
-arguments with a default \code{NULL} value are optional methods that can be
-provided.
+existing keras types. For example, \code{new_layer_class()} will return a class
+constructor, an object that behaves like other layer functions such as
+\code{layer_dense()}. \code{new_callback_class()} will return an object that behaves
+similarly to other callback functions, like
+\code{callback_reduce_lr_on_plateau()}, and so on. All arguments with a default
+\code{NULL} value are optional methods that can be provided.
 }
 \details{
 \code{mark_active()} is a decorator that can be used to indicate functions that
-should become active properties of the class type.
+should become active properties of the class instances.
 }
