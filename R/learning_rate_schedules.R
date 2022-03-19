@@ -399,11 +399,11 @@ function(initial_learning_rate, decay_steps, end_learning_rate = 1e-04,
 #'  +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/LearningRateSchedule>
 #' @return A `LearningRateSchedule` class generator.
 #' @export
-new_learning_rate_schedule_type <- function(classname,
-                                            ...,
-                                            initialize = NULL,
-                                            call,
-                                            get_config = NULL) {
+new_learning_rate_schedule_class <- function(classname,
+                                             ...,
+                                             initialize = NULL,
+                                             call,
+                                             get_config = NULL) {
   members <- capture_args(match.call(), ignore = "classname")
   members <- drop_nulls(members)
   members <- rename_call_2_dunder(members, "call")
@@ -414,7 +414,7 @@ new_learning_rate_schedule_type <- function(classname,
       names(members)[match("call", names(members))] <- "__call__"
   }
 
-  new_py_type(
+  new_py_class(
     classname,
     members = members,
     inherit = keras$optimizers$schedules$LearningRateSchedule,

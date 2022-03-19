@@ -4,12 +4,14 @@
   `private` fields and methods. Any R objects stored in private will only be
   available to methods, and will not be converted to Python.
 
-- New functions for constructing custom keras types:
-  - `new_model_type()`
-  - `new_layer_type()`
-  - `new_callback_type()`
-  - `new_metric_type()`
-  - `new_loss_type()`
+- New functions for constructing custom keras subclasses:
+  - `new_model_class()`
+  - `new_layer_class()`
+  - `new_callback_class()`
+  - `new_metric_class()`
+  - `new_loss_class()`
+  - `new_learning_rate_schedule_class()`.
+  
   Also provided is `mark_active()`, a decorator for indicating a class method
   should be an active binding (i.e., decorated with Python's `@property`).
   
@@ -20,8 +22,9 @@
   -  `learning_rate_schedule_inverse_time_decay()`
   -  `learning_rate_schedule_piecewise_constant_decay()`
   -  `learning_rate_schedule_polynomial_decay()`
+  
   Also, a function for constructing custom learning rate schedules:
-  `new_learning_rate_schedule_type()`.
+  `new_learning_rate_schedule_class()`.
 
 - New `zip_lists()` function for transposing lists, optionally matching by name.
 
@@ -55,10 +58,10 @@
 - `image_dataste_from_directory()` gains a `crop_to_aspect_ratio` argument which 
   can be used to prevent distorting images when resizing to a new aspect ratio.
 
-- `Layer` is deprecated, superseded by `new_layer_type()`.
+- `Layer` is deprecated, superseded by `new_layer_class()`.
 
 - `load_model_tf()` argument `custom_objects` gains the ability to accept an
-  unnamed list (e.g, of object returned by `new_layer_type()` or similar).
+  unnamed list (e.g, of object returned by `new_layer_class()` or similar).
   Appropriate names for the supplied objects are automatically infered.
   
 - Fixed an issue where negative values less than -1 supplied to `axis` 
@@ -74,7 +77,8 @@
   - k_tile(): `n` argument can now be supplied as a tensor.
   - New function `k_unstack()`.
 
-- KerasTensor objects (e.g, returned by `layer_input()`) now inherit from `"tensorflow.tensor"`.
+- KerasTensor objects (e.g, returned by `layer_input()`) now inherit S3 methods 
+  for `"tensorflow.tensor"`.
 
 # keras 2.8.0
 

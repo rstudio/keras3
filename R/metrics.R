@@ -50,7 +50,7 @@
 #'
 #' Example custom metric subclass:
 #' ````R
-#' metric_binary_true_positives <- new_metric_type(
+#' metric_binary_true_positives <- new_metric_class(
 #'   classname = "BinaryTruePositives",
 #'   initialize = function(name = 'binary_true_positives', ...) {
 #'     super$initialize(name = name, ...)
