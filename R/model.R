@@ -1386,7 +1386,8 @@ resolve_tensorflow_dataset <- function(x) {
 #'
 #' @param object Keras model object
 #' @param name String, name of layer.
-#' @param index Integer, index of layer (1-based)
+#' @param index Integer, index of layer (1-based). Also valid are negative
+#'   values, which count from the end of model.
 #'
 #' @return A layer instance.
 #'
