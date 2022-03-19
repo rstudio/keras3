@@ -11,10 +11,10 @@
   - `new_metric_class()`
   - `new_loss_class()`
   - `new_learning_rate_schedule_class()`.
-  
+
   Also provided is `mark_active()`, a decorator for indicating a class method
   should be an active binding (i.e., decorated with Python's `@property`).
-  
+
 - New family of functions for controlling optimizer learning rates during training:
   -  `learning_rate_schedule_cosine_decay()`
   -  `learning_rate_schedule_cosine_decay_restarts()`
@@ -22,7 +22,7 @@
   -  `learning_rate_schedule_inverse_time_decay()`
   -  `learning_rate_schedule_piecewise_constant_decay()`
   -  `learning_rate_schedule_polynomial_decay()`
-  
+
   Also, a function for constructing custom learning rate schedules:
   `new_learning_rate_schedule_class()`.
 
@@ -54,8 +54,8 @@
 - `timeseries_dataset_from_array()`:
     - R arrays are now cast to the floatx dtype ("float32" by default)
     - `start_index` and `end_index` now are 1-based.
-    
-- `image_dataste_from_directory()` gains a `crop_to_aspect_ratio` argument which 
+
+- `image_dataste_from_directory()` gains a `crop_to_aspect_ratio` argument which
   can be used to prevent distorting images when resizing to a new aspect ratio.
 
 - `Layer` is deprecated, superseded by `new_layer_class()`.
@@ -63,11 +63,13 @@
 - `load_model_tf()` argument `custom_objects` gains the ability to accept an
   unnamed list (e.g, of object returned by `new_layer_class()` or similar).
   Appropriate names for the supplied objects are automatically infered.
-  
-- Fixed an issue where negative values less than -1 supplied to `axis` 
+
+- Fixed an issue where negative values less than -1 supplied to `axis`
   arguments were selecting the wrong axis.
-  
-- Fixed warning from `create_layer_wrapper()` when the custom layer didn't have 
+
+- `get_layer()` gains the ability to accept negative values for the `index` argument.
+
+- Fixed warning from `create_layer_wrapper()` when the custom layer didn't have
   an overridden `initialize` or `__init__` method.
 
 - Backend functions:
@@ -77,7 +79,7 @@
   - k_tile(): `n` argument can now be supplied as a tensor.
   - New function `k_unstack()`.
 
-- KerasTensor objects (e.g, returned by `layer_input()`) now inherit S3 methods 
+- KerasTensor objects (e.g, returned by `layer_input()`) now inherit S3 methods
   for `"tensorflow.tensor"`.
 
 # keras 2.8.0

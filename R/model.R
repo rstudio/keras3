@@ -1394,18 +1394,9 @@ resolve_tensorflow_dataset <- function(x) {
 #'
 #' @export
 get_layer <- function(object, name = NULL, index = NULL) {
-
-  # convert to layer index
-  index <- as_layer_index(index)
-
-  # check for 0
-  if (identical(index, -1L))
-    stop("Indexes for get_layer() are 1-based (0 was passed as the index)")
-
-  # call get_layer
   object$get_layer(
     name = name,
-    index = index
+    index = as_layer_index(index)
   )
 }
 
