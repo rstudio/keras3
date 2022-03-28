@@ -86,21 +86,21 @@ be preserved.}
 }
 \value{
 A tf.data.Dataset object. If label_mode is \code{NULL}, it yields float32
-tensors of shape (batch_size, image_size\link{0}, image_size\link{1}, num_channels),
-encoding images (see below for rules regarding num_channels).
+tensors of shape \verb{(batch_size, image_size[1], image_size[2], num_channels)},
+encoding images (see below for rules regarding \code{num_channels}).
 
-Otherwise, it yields pairs of (images, labels), where images has shape
-(batch_size, image_size\link{0}, image_size\link{1}, num_channels), and labels
+Otherwise, it yields pairs of \verb{(images, labels)}, where images has shape
+`(batch_size, image_size\link{1}, image_size\link{2}, num_channels), and labels
 follows the format described below.
 
 Rules regarding labels format:
 \itemize{
 \item if label_mode is int, the labels are an int32 tensor of shape
-(batch_size,).
+\code{(batch_size)}.
 \item if label_mode is binary, the labels are a float32 tensor of 1s and 0s of
-shape (batch_size, 1).
+shape \verb{(batch_size, 1)}.
 \item if label_mode is categorial, the labels are a float32 tensor of shape
-(batch_size, num_classes), representing a one-hot encoding of the class
+\verb{(batch_size, num_classes)}, representing a one-hot encoding of the class
 index.
 }
 

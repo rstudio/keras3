@@ -1047,23 +1047,23 @@ flow_images_from_dataframe <- function(
 #'
 #'
 #' @return A tf.data.Dataset object. If label_mode is `NULL`, it yields float32
-#'   tensors of shape (batch_size, image_size[0], image_size[1], num_channels),
-#'   encoding images (see below for rules regarding num_channels).
+#'   tensors of shape `(batch_size, image_size[1], image_size[2], num_channels)`,
+#'   encoding images (see below for rules regarding `num_channels`).
 #'
-#'   Otherwise, it yields pairs of (images, labels), where images has shape
-#'   (batch_size, image_size[0], image_size[1], num_channels), and labels
+#'   Otherwise, it yields pairs of `(images, labels)`, where images has shape
+#'   `(batch_size, image_size[1], image_size[2], num_channels), and labels
 #'   follows the format described below.
 #'
 #'   Rules regarding labels format:
 #'
 #'   +  if label_mode is int, the labels are an int32 tensor of shape
-#'   (batch_size,).
+#'   `(batch_size)`.
 #'
 #'   +  if label_mode is binary, the labels are a float32 tensor of 1s and 0s of
-#'   shape (batch_size, 1).
+#'   shape `(batch_size, 1)`.
 #'
 #'   +  if label_mode is categorial, the labels are a float32 tensor of shape
-#'   (batch_size, num_classes), representing a one-hot encoding of the class
+#'   `(batch_size, num_classes)`, representing a one-hot encoding of the class
 #'   index.
 #'
 #'   Rules regarding number of channels in the yielded images:

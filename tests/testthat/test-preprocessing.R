@@ -135,6 +135,9 @@ test_succeeds("flow images from directory works", {
   if (!have_pillow())
     skip("Pillow required.")
 
+  if(!requireNamespace("jpeg", quietly = TRUE))
+    skip("'jpeg' package required")
+
   dir <- tempfile()
   dir.create(dir)
   dir.create(paste0(dir, "/flow-img"))

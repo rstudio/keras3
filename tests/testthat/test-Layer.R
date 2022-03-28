@@ -202,7 +202,7 @@ test_succeeds("create_layer_wrapper", {
 
 test_succeeds("create_layer_wrapper", {
 
-  layer_sampler <- new_layer_type(
+  layer_sampler <- new_layer_class(
     classname = "Sampler",
     call = function(self, z_mean, z_log_var) {
       epsilon <-  k_random_normal(shape = k_shape(z_mean))
