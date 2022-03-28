@@ -186,6 +186,9 @@ test_succeeds("images_dataset_from_directory", {
   if (tensorflow::tf_version() < "2.3")
     skip("requires tf_version() >= 2.3")
 
+  if(!requireNamespace("jpeg", quietly = TRUE))
+    skip("'jpeg' package required")
+
   dir <- tempfile()
   dir.create(dir)
   dir.create(file.path(dir, "0"))

@@ -10,29 +10,30 @@ learning_rate_schedule_polynomial_decay(
   end_learning_rate = 1e-04,
   power = 1,
   cycle = FALSE,
+  ...,
   name = NULL
 )
 }
 \arguments{
-\item{initial_learning_rate:}{A scalar \code{float32} or \code{float64} \code{Tensor} or an
+\item{initial_learning_rate}{A scalar \code{float32} or \code{float64} \code{Tensor} or an
 R number.  The initial learning rate.}
 
-\item{decay_steps:}{A scalar \code{int32} or \code{int64} \code{Tensor} or an R number.
+\item{decay_steps}{A scalar \code{int32} or \code{int64} \code{Tensor} or an R number.
 Must be positive.  See the decay computation above.}
 
-\item{end_learning_rate:}{A scalar \code{float32} or \code{float64} \code{Tensor} or an
+\item{end_learning_rate}{A scalar \code{float32} or \code{float64} \code{Tensor} or an
 R number.  The minimal end learning rate.}
 
-\item{power:}{A scalar \code{float32} or \code{float64} \code{Tensor} or an R number.
+\item{power}{A scalar \code{float32} or \code{float64} \code{Tensor} or an R number.
 The power of the polynomial. Defaults to linear, 1.0.}
 
-\item{cycle:}{A boolean,
+\item{cycle}{A boolean,
 whether or not it should cycle beyond decay_steps.}
 
-\item{name:}{String.  Optional name of the operation. Defaults to
-'PolynomialDecay'.}
-
 \item{...}{For backwards and forwards compatibility}
+
+\item{name}{String.  Optional name of the operation. Defaults to
+'PolynomialDecay'.}
 }
 \description{
 A LearningRateSchedule that uses a polynomial decay schedule

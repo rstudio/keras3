@@ -14,21 +14,21 @@ learning_rate_schedule_exponential_decay(
 )
 }
 \arguments{
-\item{...}{For backwards and forwards compatibility}
-
-\item{initial_learning_rate:}{A scalar \code{float32} or \code{float64} \code{Tensor} or a R
+\item{initial_learning_rate}{A scalar \code{float32} or \code{float64} \code{Tensor} or a R
 number. The initial learning rate.}
 
-\item{decay_steps:}{A scalar \code{int32} or \code{int64} \code{Tensor} or an R number. Must
+\item{decay_steps}{A scalar \code{int32} or \code{int64} \code{Tensor} or an R number. Must
 be positive.  See the decay computation above.}
 
-\item{decay_rate:}{A scalar \code{float32} or \code{float64} \code{Tensor} or an R number.
+\item{decay_rate}{A scalar \code{float32} or \code{float64} \code{Tensor} or an R number.
 The decay rate.}
 
-\item{staircase:}{Boolean.  If \code{TRUE} decay the learning rate at discrete
+\item{staircase}{Boolean.  If \code{TRUE} decay the learning rate at discrete
 intervals.}
 
-\item{name:}{String. Optional name of the operation.  Defaults to
+\item{...}{For backwards and forwards compatibility}
+
+\item{name}{String. Optional name of the operation.  Defaults to
 'ExponentialDecay'.}
 }
 \description{

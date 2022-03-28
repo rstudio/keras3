@@ -17,7 +17,7 @@ new_learning_rate_schedule_class(
 
 \item{...}{methods and properties of the schedule class}
 
-\item{initialize, call, get_config}{Additional recommended methods to implement.
+\item{initialize, get_config}{Additional recommended methods to implement.
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/LearningRateSchedule}
 }}

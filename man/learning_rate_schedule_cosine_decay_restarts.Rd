@@ -15,24 +15,24 @@ learning_rate_schedule_cosine_decay_restarts(
 )
 }
 \arguments{
-\item{...}{For backwards and forwards compatibility}
-
-\item{initial_learning_rate:}{A scalar \code{float32} or \code{float64} Tensor or an R
+\item{initial_learning_rate}{A scalar \code{float32} or \code{float64} Tensor or an R
 number. The initial learning rate.}
 
-\item{first_decay_steps:}{A scalar \code{int32} or \code{int64} \code{Tensor} or an R
+\item{first_decay_steps}{A scalar \code{int32} or \code{int64} \code{Tensor} or an R
 number. Number of steps to decay over.}
 
-\item{t_mul:}{A scalar \code{float32} or \code{float64} \code{Tensor} or an R number. Used
+\item{t_mul}{A scalar \code{float32} or \code{float64} \code{Tensor} or an R number. Used
 to derive the number of iterations in the i-th period.}
 
-\item{m_mul:}{A scalar \code{float32} or \code{float64} \code{Tensor} or an R number. Used
+\item{m_mul}{A scalar \code{float32} or \code{float64} \code{Tensor} or an R number. Used
 to derive the initial learning rate of the i-th period.}
 
-\item{alpha:}{A scalar \code{float32} or \code{float64} Tensor or an R number. Minimum
+\item{alpha}{A scalar \code{float32} or \code{float64} Tensor or an R number. Minimum
 learning rate value as a fraction of the initial_learning_rate.}
 
-\item{name:}{String. Optional name of the operation.  Defaults to
+\item{...}{For backwards and forwards compatibility}
+
+\item{name}{String. Optional name of the operation.  Defaults to
 'SGDRDecay'.}
 }
 \description{

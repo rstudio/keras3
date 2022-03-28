@@ -1051,7 +1051,7 @@ flow_images_from_dataframe <- function(
 #'   encoding images (see below for rules regarding `num_channels`).
 #'
 #'   Otherwise, it yields pairs of `(images, labels)`, where images has shape
-#'   `(batch_size, image_size[1], image_size[2], num_channels), and labels
+#'   `(batch_size, image_size[1], image_size[2], num_channels)`, and labels
 #'   follows the format described below.
 #'
 #'   Rules regarding labels format:

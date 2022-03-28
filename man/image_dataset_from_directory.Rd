@@ -90,7 +90,7 @@ tensors of shape \verb{(batch_size, image_size[1], image_size[2], num_channels)}
 encoding images (see below for rules regarding \code{num_channels}).
 
 Otherwise, it yields pairs of \verb{(images, labels)}, where images has shape
-`(batch_size, image_size\link{1}, image_size\link{2}, num_channels), and labels
+\verb{(batch_size, image_size[1], image_size[2], num_channels)}, and labels
 follows the format described below.
 
 Rules regarding labels format:

@@ -13,18 +13,18 @@ learning_rate_schedule_cosine_decay(
 )
 }
 \arguments{
-\item{...}{For backwards and forwards compatibility}
-
-\item{initial_learning_rate:}{A scalar \code{float32} or \code{float64} Tensor or a
+\item{initial_learning_rate}{A scalar \code{float32} or \code{float64} Tensor or a
 R number. The initial learning rate.}
 
-\item{decay_steps:}{A scalar \code{int32} or \code{int64} \code{Tensor} or an R number.
+\item{decay_steps}{A scalar \code{int32} or \code{int64} \code{Tensor} or an R number.
 Number of steps to decay over.}
 
-\item{alpha:}{A scalar \code{float32} or \code{float64} Tensor or an R number.
+\item{alpha}{A scalar \code{float32} or \code{float64} Tensor or an R number.
 Minimum learning rate value as a fraction of initial_learning_rate.}
 
-\item{name:}{String. Optional name of the operation.  Defaults to
+\item{...}{For backwards and forwards compatibility}
+
+\item{name}{String. Optional name of the operation.  Defaults to
 'CosineDecay'.}
 }
 \description{

@@ -12,16 +12,16 @@ learning_rate_schedule_piecewise_constant_decay(
 )
 }
 \arguments{
-\item{...}{For backwards and forwards compatibility}
-
-\item{boundaries:}{A list of \code{Tensor}s or R numerics with strictly increasing
+\item{boundaries}{A list of \code{Tensor}s or R numerics with strictly increasing
 entries, and with all elements having the same type as the optimizer step.}
 
-\item{values:}{A list of \code{Tensor}s or R numerics that specifies the
+\item{values}{A list of \code{Tensor}s or R numerics that specifies the
 values for the intervals defined by \code{boundaries}. It should have one more
 element than \code{boundaries}, and all elements should have the same type.}
 
-\item{name:}{A string. Optional name of the operation. Defaults to
+\item{...}{For backwards and forwards compatibility}
+
+\item{name}{A string. Optional name of the operation. Defaults to
 'PiecewiseConstant'.}
 }
 \description{

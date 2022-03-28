@@ -47,15 +47,15 @@
 #' @seealso
 #'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/ExponentialDecay>
 #'
-#' @param initial_learning_rate: A scalar `float32` or `float64` `Tensor` or a R
+#' @param initial_learning_rate A scalar `float32` or `float64` `Tensor` or a R
 #'   number. The initial learning rate.
-#' @param decay_steps: A scalar `int32` or `int64` `Tensor` or an R number. Must
+#' @param decay_steps A scalar `int32` or `int64` `Tensor` or an R number. Must
 #'   be positive.  See the decay computation above.
-#' @param decay_rate: A scalar `float32` or `float64` `Tensor` or an R number.
+#' @param decay_rate A scalar `float32` or `float64` `Tensor` or an R number.
 #'   The decay rate.
-#' @param staircase: Boolean.  If `TRUE` decay the learning rate at discrete
+#' @param staircase Boolean.  If `TRUE` decay the learning rate at discrete
 #'   intervals.
-#' @param name: String. Optional name of the operation.  Defaults to
+#' @param name String. Optional name of the operation.  Defaults to
 #'   'ExponentialDecay'.
 #' @export
 learning_rate_schedule_exponential_decay <-
@@ -103,13 +103,13 @@ function(initial_learning_rate, decay_steps, decay_rate, staircase = FALSE,
 #' You can pass this schedule directly into a keras Optimizer
 #' as the `learning_rate`.
 #'
-#' @param initial_learning_rate: A scalar `float32` or `float64` Tensor or a
+#' @param initial_learning_rate A scalar `float32` or `float64` Tensor or a
 #'   R number. The initial learning rate.
-#' @param decay_steps: A scalar `int32` or `int64` `Tensor` or an R number.
+#' @param decay_steps A scalar `int32` or `int64` `Tensor` or an R number.
 #'   Number of steps to decay over.
-#' @param alpha: A scalar `float32` or `float64` Tensor or an R number.
+#' @param alpha A scalar `float32` or `float64` Tensor or an R number.
 #'   Minimum learning rate value as a fraction of initial_learning_rate.
-#' @param name: String. Optional name of the operation.  Defaults to
+#' @param name String. Optional name of the operation.  Defaults to
 #'   'CosineDecay'.
 #'
 #' @param ... For backwards and forwards compatibility
@@ -151,17 +151,17 @@ learning_rate_schedule_cosine_decay <-
 #' You can pass this schedule directly into a keras Optimizer
 #' as the `learning_rate`.
 #'
-#' @param initial_learning_rate: A scalar `float32` or `float64` Tensor or an R
+#' @param initial_learning_rate A scalar `float32` or `float64` Tensor or an R
 #'   number. The initial learning rate.
-#' @param first_decay_steps: A scalar `int32` or `int64` `Tensor` or an R
+#' @param first_decay_steps A scalar `int32` or `int64` `Tensor` or an R
 #'   number. Number of steps to decay over.
-#' @param t_mul: A scalar `float32` or `float64` `Tensor` or an R number. Used
+#' @param t_mul A scalar `float32` or `float64` `Tensor` or an R number. Used
 #'   to derive the number of iterations in the i-th period.
-#' @param m_mul: A scalar `float32` or `float64` `Tensor` or an R number. Used
+#' @param m_mul A scalar `float32` or `float64` `Tensor` or an R number. Used
 #'   to derive the initial learning rate of the i-th period.
-#' @param alpha: A scalar `float32` or `float64` Tensor or an R number. Minimum
+#' @param alpha A scalar `float32` or `float64` Tensor or an R number. Minimum
 #'   learning rate value as a fraction of the initial_learning_rate.
-#' @param name: String. Optional name of the operation.  Defaults to
+#' @param name String. Optional name of the operation.  Defaults to
 #'   'SGDRDecay'.
 #'
 #' @param ... For backwards and forwards compatibility
@@ -227,14 +227,14 @@ function(initial_learning_rate, first_decay_steps, t_mul = 2,
 #' model %>% fit(data, labels, epochs = 5)
 #' ```
 #'
-#' @param initial_learning_rate: A scalar `float32` or `float64` `Tensor` or an
+#' @param initial_learning_rate A scalar `float32` or `float64` `Tensor` or an
 #'   R number. The initial learning rate.
-#' @param decay_steps: A scalar `int32` or `int64` `Tensor` or an R number. How
+#' @param decay_steps A scalar `int32` or `int64` `Tensor` or an R number. How
 #'   often to apply decay.
-#' @param decay_rate: An R number. The decay rate.
-#' @param staircase: Boolean. Whether to apply decay in a discrete staircase, as
+#' @param decay_rate An R number. The decay rate.
+#' @param staircase Boolean. Whether to apply decay in a discrete staircase, as
 #'   opposed to continuous, fashion.
-#' @param name: String.  Optional name of the operation.  Defaults to
+#' @param name String.  Optional name of the operation.  Defaults to
 #'   'InverseTimeDecay'.
 #' @param ... For backwards and forwards compatibility
 #'
@@ -242,7 +242,7 @@ function(initial_learning_rate, first_decay_steps, t_mul = 2,
 #'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/InverseTimeDecay>
 #' @export
 learning_rate_schedule_inverse_time_decay <-
-function(initial_learning_rate, decay_steps, decay_rate, staircase = FALSE,
+function(initial_learning_rate, decay_steps, decay_rate, staircase = FALSE, ...,
          name = NULL) {
   args <- capture_args(match.call(), list(decay_steps = as_integer))
   do.call(keras$optimizers$schedules$InverseTimeDecay, args)
@@ -273,12 +273,12 @@ function(initial_learning_rate, decay_steps, decay_rate, staircase = FALSE,
 #' You can pass this schedule directly into a keras Optimizer
 #' as the `learning_rate`.
 #'
-#' @param boundaries: A list of `Tensor`s or R numerics with strictly increasing
+#' @param boundaries A list of `Tensor`s or R numerics with strictly increasing
 #'   entries, and with all elements having the same type as the optimizer step.
-#' @param values: A list of `Tensor`s or R numerics that specifies the
+#' @param values A list of `Tensor`s or R numerics that specifies the
 #'   values for the intervals defined by `boundaries`. It should have one more
 #'   element than `boundaries`, and all elements should have the same type.
-#' @param name: A string. Optional name of the operation. Defaults to
+#' @param name A string. Optional name of the operation. Defaults to
 #'   'PiecewiseConstant'.
 #' @param ... For backwards and forwards compatibility
 #'
@@ -354,17 +354,17 @@ function(boundaries, values, ..., name = NULL) {
 #' model %>% fit(data, labels, epochs = 5)
 #' ```
 #'
-#' @param initial_learning_rate: A scalar `float32` or `float64` `Tensor` or an
+#' @param initial_learning_rate A scalar `float32` or `float64` `Tensor` or an
 #'   R number.  The initial learning rate.
-#' @param decay_steps: A scalar `int32` or `int64` `Tensor` or an R number.
+#' @param decay_steps A scalar `int32` or `int64` `Tensor` or an R number.
 #'   Must be positive.  See the decay computation above.
-#' @param end_learning_rate: A scalar `float32` or `float64` `Tensor` or an
+#' @param end_learning_rate A scalar `float32` or `float64` `Tensor` or an
 #'   R number.  The minimal end learning rate.
-#' @param power: A scalar `float32` or `float64` `Tensor` or an R number.
+#' @param power A scalar `float32` or `float64` `Tensor` or an R number.
 #'   The power of the polynomial. Defaults to linear, 1.0.
-#' @param cycle: A boolean,
+#' @param cycle A boolean,
 #'   whether or not it should cycle beyond decay_steps.
-#' @param name: String.  Optional name of the operation. Defaults to
+#' @param name String.  Optional name of the operation. Defaults to
 #'   'PolynomialDecay'.
 #'
 #' @param ... For backwards and forwards compatibility
@@ -374,7 +374,7 @@ function(boundaries, values, ..., name = NULL) {
 #' @export
 learning_rate_schedule_polynomial_decay <-
 function(initial_learning_rate, decay_steps, end_learning_rate = 1e-04,
-         power = 1, cycle = FALSE, name = NULL)
+         power = 1, cycle = FALSE, ..., name = NULL)
 {
   args <- capture_args(match.call(), list(decay_steps = as_integer))
   do.call(keras$optimizers$schedules$PolynomialDecay, args)
@@ -394,7 +394,7 @@ function(initial_learning_rate, decay_steps, end_learning_rate = 1e-04,
 #'   current training step count, and returns the new learning rate). For
 #'   tracking additional state, objects `self` and `private` are automatically
 #'   injected into the scope of the function.
-#' @param initialize,call,get_config Additional recommended methods to implement.
+#' @param initialize,get_config Additional recommended methods to implement.
 #'
 #'  +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/LearningRateSchedule>
 #' @return A `LearningRateSchedule` class generator.
@@ -403,7 +403,7 @@ new_learning_rate_schedule_class <-
 function(classname, ..., initialize = NULL, call, get_config = NULL) {
   members <- capture_args(match.call(), ignore = "classname")
   members <- drop_nulls(members)
-  members <- rename_call_2_dunder(members, "call")
+  members <- rename_to_dunder(members, "call")
   if (!is.null(members[["call"]])) {
     if ("__call__" %in% names(members))
       warning("`call()` method is ignored, superceded by `__call__`() method.")

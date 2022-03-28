@@ -9,25 +9,26 @@ learning_rate_schedule_inverse_time_decay(
   decay_steps,
   decay_rate,
   staircase = FALSE,
+  ...,
   name = NULL
 )
 }
 \arguments{
-\item{initial_learning_rate:}{A scalar \code{float32} or \code{float64} \code{Tensor} or an
+\item{initial_learning_rate}{A scalar \code{float32} or \code{float64} \code{Tensor} or an
 R number. The initial learning rate.}
 
-\item{decay_steps:}{A scalar \code{int32} or \code{int64} \code{Tensor} or an R number. How
+\item{decay_steps}{A scalar \code{int32} or \code{int64} \code{Tensor} or an R number. How
 often to apply decay.}
 
-\item{decay_rate:}{An R number. The decay rate.}
+\item{decay_rate}{An R number. The decay rate.}
 
-\item{staircase:}{Boolean. Whether to apply decay in a discrete staircase, as
+\item{staircase}{Boolean. Whether to apply decay in a discrete staircase, as
 opposed to continuous, fashion.}
 
-\item{name:}{String.  Optional name of the operation.  Defaults to
-'InverseTimeDecay'.}
-
 \item{...}{For backwards and forwards compatibility}
+
+\item{name}{String.  Optional name of the operation.  Defaults to
+'InverseTimeDecay'.}
 }
 \description{
 A LearningRateSchedule that uses an inverse time decay schedule
