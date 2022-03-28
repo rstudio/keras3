@@ -433,11 +433,12 @@ r_formals_to_py__signature__ <- function(fn) {
   rm(list = "private", envir = env)
 
   public <- active <- list()
-  for(nm in names(env)) {
-    if(bindingIsActive(nm, env)) {
-      # requires R >= 4.0
+  for (nm in names(env)) {
+    if (bindingIsActive(nm, env))
       active[[nm]] <- activeBindingFunction(nm, env)
-    } else
+    else if (is_marked_active(env[[nm]]))
+      active[[nm]] <- env[[nm]]
+    else
       public[[nm]] <- env[[nm]]
   }
 
