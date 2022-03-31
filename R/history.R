@@ -103,7 +103,8 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
     }
 
     smooth_args <- list(se = FALSE, method = 'loess', na.rm = TRUE,
-                        formula = as.formula(y ~ x, env = emptyenv()))
+                        formula = y ~ x)
+    environment(smooth_args$formula) <- baseenv()
 
     if (theme_bw) {
       smooth_args$size <- 0.5
