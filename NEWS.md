@@ -83,6 +83,10 @@
 
 - KerasTensor objects (e.g, returned by `layer_input()`) now inherit S3 methods
   for `"tensorflow.tensor"`.
+  
+- `plot.keras_training_history()` no longer issues message 
+  ``` `geom_smooth()` using formula 'y ~ x' ``` when `method = "ggplot2"`.
+
 
 # keras 2.8.0
 
