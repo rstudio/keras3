@@ -318,6 +318,8 @@ r_formals_to_py__signature__ <- function(fn) {
 #' @export
 #' @aliases py_class
 #'
+#' @seealso <https://keras.rstudio.com/articles/new-guides/python_subclasses.html>
+#'
 #' @examples
 #' \dontrun{
 #' MyClass %py_class% {
