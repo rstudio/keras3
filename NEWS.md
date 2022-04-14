@@ -86,6 +86,9 @@
   
 - `plot.keras_training_history()` no longer issues message 
   ``` `geom_smooth()` using formula 'y ~ x' ``` when `method = "ggplot2"`.
+  
+- `print` and related methods for models (`format`, `summary`) now accept 
+   a `width` argument.
 
 
 # keras 2.8.0

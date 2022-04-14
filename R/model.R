@@ -1426,6 +1426,7 @@ pop_layer <- function(object) {
 #'   provided, defaults to `FALSE`.
 #' @param compact Whether to remove white-space only lines from the model
 #'   summary. (Default `TRUE`)
+#' @param width the column width to use for printing.
 #' @param ... for `summary()` and `print()`, passed on to `format()`. For
 #'   `format()`, passed on to `model$summary()`.
 #'
@@ -1445,16 +1446,18 @@ summary.keras.engine.training.Model <- function(object, ...) {
 #' @export
 format.keras.engine.training.Model <-
 function(x,
-         line_length = getOption("width") - (11L * show_trainable),
+         line_length = width - (11L * show_trainable),
          positions = NULL,
          expand_nested = FALSE,
          show_trainable = x$built && as.logical(length(x$non_trainable_weights)),
          ...,
-         compact = TRUE) {
+         compact = TRUE,
+         width = getOption("width")) {
+
   if (py_is_null_xptr(x))
     return("<pointer: 0x0>")
 
-  args <- capture_args(match.call(), ignore = "x")
+  args <- capture_args(match.call(), ignore = c("x", "width"))
 
   # ensure `line_length` and other args captured, even if not passed by user
   args$show_trainable <- show_trainable
