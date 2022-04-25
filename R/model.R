@@ -1460,8 +1460,9 @@ function(x,
   args <- capture_args(match.call(), ignore = c("x", "width"))
 
   # ensure `line_length` and other args captured, even if not passed by user
-  args$show_trainable <- show_trainable
   args$line_length <- as_nullable_integer(line_length)
+  if(tf_version() >= "2.8")
+    args$show_trainable <- show_trainable
 
   out <- if (x$built)
     trimws(py_capture_output(do.call(x$summary, args),
