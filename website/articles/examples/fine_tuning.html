@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
   <a href="../../index.html">Home</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -76,7 +78,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,7 +104,8 @@
       <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Using Keras</li>
+    </li>
+<li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -131,7 +134,8 @@
       <a href="../../articles/why_use_keras.html">Why Use Keras?</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Advanced</li>
+    </li>
+<li class="dropdown-header">Advanced</li>
     <li>
       <a href="../../articles/eager_guide.html">Eager Execution</a>
     </li>
@@ -170,7 +174,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rstudio/keras/">
+  <a href="https://github.com/rstudio/keras/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -191,7 +195,7 @@
       <h1 data-toc-skip>fine_tuning</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/fine_tuning.Rmd"><code>vignettes/examples/fine_tuning.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/examples/fine_tuning.Rmd" class="external-link"><code>vignettes/examples/fine_tuning.Rmd</code></a></small>
       <div class="hidden name"><code>fine_tuning.Rmd</code></div>
 
     </div>
@@ -199,21 +203,23 @@
     
     
 <div class="source-ref">
-<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/main/vignettes/examples/fine_tuning.R" class="uri">https://github.com/rstudio/keras/blob/main/vignettes/examples/fine_tuning.R</a></p>
+<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/main/vignettes/examples/fine_tuning.R" class="external-link uri">https://github.com/rstudio/keras/blob/main/vignettes/examples/fine_tuning.R</a></p>
 </div>
-<p>In this example we fine tune Mobile Net to better predict cats and dogs in photos. It also demonstrates the usage of image data generators for efficient preprocessing and training.</p>
+<p>In this example we fine tune Mobile Net to better predict cats and
+dogs in photos. It also demonstrates the usage of image data generators
+for efficient preprocessing and training.</p>
 <p>It’s preferable to run this example in a GPU.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Download data -----------------------------------------------------------</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span>
   <span class="st">"https://download.microsoft.com/download/3/E/1/3E1C3F21-ECDB-4869-8368-6DEBA77B919F/kagglecatsanddogs_3367a.zip"</span>, 
   destfile <span class="op">=</span> <span class="st">"cats-dogs.zip"</span>
 <span class="op">)</span>
 
 <span class="co"># Pre-processing ----------------------------------------------------------</span>
 
-<span class="fu">zip</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zip/man/unzip.html">unzip</a></span><span class="op">(</span><span class="st">"cats-dogs.zip"</span>, exdir <span class="op">=</span> <span class="st">"data-raw"</span><span class="op">)</span>
+<span class="fu">zip</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zip/man/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="st">"cats-dogs.zip"</span>, exdir <span class="op">=</span> <span class="st">"data-raw"</span><span class="op">)</span>
 
 <span class="co"># We will organize images in the following structure:</span>
 <span class="co"># data/</span>
@@ -227,7 +233,7 @@
 <span class="co">#          images/</span>
 <span class="co">#</span>
 
-<span class="va">all_imgs</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/dir_ls.html">dir_ls</a></span><span class="op">(</span>
+<span class="va">all_imgs</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span>
   <span class="st">"data-raw/PetImages/"</span>, 
   recursive <span class="op">=</span> <span class="cn">TRUE</span>, 
   type <span class="op">=</span> <span class="st">"file"</span>,
@@ -237,29 +243,29 @@
 <span class="co"># some images are corrupt and we exclude them</span>
 <span class="co"># this will make sure all images can be read.</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">im</span> <span class="kw">in</span> <span class="va">all_imgs</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">out</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span><span class="fu">magick</span><span class="fu">::</span><span class="fu">image_read</span><span class="op">(</span><span class="va">im</span><span class="op">)</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">inherits</a></span><span class="op">(</span><span class="va">out</span>, <span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/delete.html">file_delete</a></span><span class="op">(</span><span class="va">im</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/message.html">message</a></span><span class="op">(</span><span class="st">"removed image: "</span>, <span class="va">im</span><span class="op">)</span>
+  <span class="va">out</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">magick</span><span class="fu">::</span><span class="fu">image_read</span><span class="op">(</span><span class="va">im</span><span class="op">)</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span><span class="va">out</span>, <span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html" class="external-link">file_delete</a></span><span class="op">(</span><span class="va">im</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"removed image: "</span>, <span class="va">im</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">}</span>
 
 <span class="co"># re-list all imgs</span>
-<span class="va">all_imgs</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/dir_ls.html">dir_ls</a></span><span class="op">(</span>
+<span class="va">all_imgs</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span>
   <span class="st">"data-raw/PetImages/"</span>, 
   recursive <span class="op">=</span> <span class="cn">TRUE</span>, 
   type <span class="op">=</span> <span class="st">"file"</span>,
   glob <span class="op">=</span> <span class="st">"*.jpg"</span>
 <span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>
 
-<span class="va">training_imgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">all_imgs</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">all_imgs</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">validation_imgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">all_imgs</span><span class="op">[</span><span class="op">!</span><span class="va">all_imgs</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">training_imgs</span><span class="op">]</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">all_imgs</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>         
-<span class="va">testing_imgs</span> <span class="op">&lt;-</span> <span class="va">all_imgs</span><span class="op">[</span><span class="op">!</span><span class="va">all_imgs</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">training_imgs</span>, <span class="va">validation_imgs</span><span class="op">)</span><span class="op">]</span>
+<span class="va">training_imgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">all_imgs</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">all_imgs</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">validation_imgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">all_imgs</span><span class="op">[</span><span class="op">!</span><span class="va">all_imgs</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">training_imgs</span><span class="op">]</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">all_imgs</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>         
+<span class="va">testing_imgs</span> <span class="op">&lt;-</span> <span class="va">all_imgs</span><span class="op">[</span><span class="op">!</span><span class="va">all_imgs</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">training_imgs</span>, <span class="va">validation_imgs</span><span class="op">)</span><span class="op">]</span>
 
 <span class="co"># create directory structure</span>
-<span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/create.html">dir_create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+<span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
   <span class="st">"data/train/Cat"</span>,
   <span class="st">"data/train/Dog"</span>,
   <span class="st">"data/validation/Cat"</span>,
@@ -268,26 +274,26 @@
 <span class="op">)</span><span class="op">)</span>
 
 <span class="co"># copy training images</span>
-<span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/copy.html">file_copy</a></span><span class="op">(</span>
+<span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/copy.html" class="external-link">file_copy</a></span><span class="op">(</span>
   path <span class="op">=</span> <span class="va">training_imgs</span>, 
-  new_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"data-raw/PetImages"</span>, <span class="st">"data/train"</span>, <span class="va">training_imgs</span><span class="op">)</span>
+  new_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"data-raw/PetImages"</span>, <span class="st">"data/train"</span>, <span class="va">training_imgs</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co"># copy valid images</span>
-<span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/copy.html">file_copy</a></span><span class="op">(</span>
+<span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/copy.html" class="external-link">file_copy</a></span><span class="op">(</span>
   path <span class="op">=</span> <span class="va">validation_imgs</span>, 
-  new_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"data-raw/PetImages"</span>, <span class="st">"data/validation"</span>, <span class="va">validation_imgs</span><span class="op">)</span>
+  new_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"data-raw/PetImages"</span>, <span class="st">"data/validation"</span>, <span class="va">validation_imgs</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co"># copy testing imgs</span>
-<span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/copy.html">file_copy</a></span><span class="op">(</span>
+<span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/copy.html" class="external-link">file_copy</a></span><span class="op">(</span>
   path <span class="op">=</span> <span class="va">testing_imgs</span>,
-  new_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"data-raw/PetImages/(Dog|Cat)/"</span>, <span class="st">"data/test/images/\\1"</span>, <span class="va">testing_imgs</span><span class="op">)</span>
+  new_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"data-raw/PetImages/(Dog|Cat)/"</span>, <span class="st">"data/test/images/\\1"</span>, <span class="va">testing_imgs</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co"># Image flow --------------------------------------------------------------</span>
 
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span>
 
 <span class="va">training_image_gen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/image_data_generator.html">image_data_generator</a></span><span class="op">(</span>
   rotation_range <span class="op">=</span> <span class="fl">20</span>,
@@ -306,7 +312,7 @@
   generator <span class="op">=</span> <span class="va">training_image_gen</span>, 
   class_mode <span class="op">=</span> <span class="st">"binary"</span>,
   batch_size <span class="op">=</span> <span class="fl">100</span>,
-  target_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">224</span>, <span class="fl">224</span><span class="op">)</span>, 
+  target_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">224</span>, <span class="fl">224</span><span class="op">)</span>, 
 <span class="op">)</span>
 
 <span class="va">validation_image_flow</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/flow_images_from_directory.html">flow_images_from_directory</a></span><span class="op">(</span>
@@ -314,7 +320,7 @@
   generator <span class="op">=</span> <span class="va">validation_image_gen</span>, 
   class_mode <span class="op">=</span> <span class="st">"binary"</span>,
   batch_size <span class="op">=</span> <span class="fl">100</span>,
-  target_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">224</span>, <span class="fl">224</span><span class="op">)</span>, 
+  target_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">224</span>, <span class="fl">224</span><span class="op">)</span>, 
   shuffle <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
 
@@ -323,16 +329,16 @@
 <span class="va">mob</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/application_mobilenet.html">application_mobilenet</a></span><span class="op">(</span>include_top <span class="op">=</span> <span class="cn">FALSE</span>, pooling <span class="op">=</span> <span class="st">"avg"</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/freeze_weights.html">freeze_weights</a></span><span class="op">(</span><span class="va">mob</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu">mob</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">256</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">mob</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">256</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span>, activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>, optimizer <span class="op">=</span> <span class="st">"adam"</span>, metrics <span class="op">=</span> <span class="st">"accuracy"</span><span class="op">)</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>, optimizer <span class="op">=</span> <span class="st">"adam"</span>, metrics <span class="op">=</span> <span class="st">"accuracy"</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/fit_generator.html">fit_generator</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/fit_generator.html">fit_generator</a></span><span class="op">(</span>
   generator <span class="op">=</span> <span class="va">training_image_flow</span>, 
   epochs <span class="op">=</span> <span class="fl">1</span>, 
   steps_per_epoch <span class="op">=</span> <span class="va">training_image_flow</span><span class="op">$</span><span class="va">n</span><span class="op">/</span><span class="va">training_image_flow</span><span class="op">$</span><span class="va">batch_size</span>,
@@ -343,10 +349,10 @@
 <span class="co"># now top layers weights are fine, we can unfreeze the lower layer weights.</span>
 <span class="fu"><a href="../../reference/freeze_weights.html">unfreeze_weights</a></span><span class="op">(</span><span class="va">mob</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>, optimizer <span class="op">=</span> <span class="st">"adam"</span>, metrics <span class="op">=</span> <span class="st">"accuracy"</span><span class="op">)</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>, optimizer <span class="op">=</span> <span class="st">"adam"</span>, metrics <span class="op">=</span> <span class="st">"accuracy"</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/fit_generator.html">fit_generator</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/fit_generator.html">fit_generator</a></span><span class="op">(</span>
   generator <span class="op">=</span> <span class="va">training_image_flow</span>, 
   epochs <span class="op">=</span> <span class="fl">3</span>, 
   steps_per_epoch <span class="op">=</span> <span class="va">training_image_flow</span><span class="op">$</span><span class="va">n</span><span class="op">/</span><span class="va">training_image_flow</span><span class="op">$</span><span class="va">batch_size</span>,
@@ -359,7 +365,7 @@
 <span class="va">test_flow</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/flow_images_from_directory.html">flow_images_from_directory</a></span><span class="op">(</span>
   generator <span class="op">=</span> <span class="va">validation_image_gen</span>,
   directory <span class="op">=</span> <span class="st">"data/test"</span>, 
-  target_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">224</span>, <span class="fl">224</span><span class="op">)</span>,
+  target_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">224</span>, <span class="fl">224</span><span class="op">)</span>,
   class_mode <span class="op">=</span> <span class="cn">NULL</span>,
   shuffle <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
@@ -386,11 +392,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
+  <p></p>
+<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -398,6 +406,8 @@
 
   
 
+
+  
 
   </body>
 </html>

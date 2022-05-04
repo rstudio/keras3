@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
   <a href="../../index.html">Home</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -76,7 +78,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,7 +104,8 @@
       <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Using Keras</li>
+    </li>
+<li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -131,7 +134,8 @@
       <a href="../../articles/why_use_keras.html">Why Use Keras?</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Advanced</li>
+    </li>
+<li class="dropdown-header">Advanced</li>
     <li>
       <a href="../../articles/eager_guide.html">Eager Execution</a>
     </li>
@@ -170,7 +174,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rstudio/keras/">
+  <a href="https://github.com/rstudio/keras/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -191,7 +195,7 @@
       <h1 data-toc-skip>Keras Examples</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/index.Rmd"><code>vignettes/examples/index.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/examples/index.Rmd" class="external-link"><code>vignettes/examples/index.Rmd</code></a></small>
       <div class="hidden name"><code>index.Rmd</code></div>
 
     </div>
@@ -209,156 +213,176 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/addition_rnn">addition_rnn</a></td>
-<td>Implementation of sequence to sequence learning for performing addition of two numbers (as strings).</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/addition_rnn" class="external-link">addition_rnn</a></td>
+<td>Implementation of sequence to sequence learning for performing
+addition of two numbers (as strings).</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/babi_memnn">babi_memnn</a></td>
-<td>Trains a memory network on the bAbI dataset for reading comprehension.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/babi_memnn" class="external-link">babi_memnn</a></td>
+<td>Trains a memory network on the bAbI dataset for reading
+comprehension.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/babi_rnn">babi_rnn</a></td>
-<td>Trains a two-branch recurrent network on the bAbI dataset for reading comprehension.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/babi_rnn" class="external-link">babi_rnn</a></td>
+<td>Trains a two-branch recurrent network on the bAbI dataset for
+reading comprehension.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/cifar10_cnn">cifar10_cnn</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/cifar10_cnn" class="external-link">cifar10_cnn</a></td>
 <td>Trains a simple deep CNN on the CIFAR10 small images dataset.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/cifar10_densenet">cifar10_densenet</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/cifar10_densenet" class="external-link">cifar10_densenet</a></td>
 <td>Trains a DenseNet-40-12 on the CIFAR10 small images dataset.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/conv_lstm">conv_lstm</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/conv_lstm" class="external-link">conv_lstm</a></td>
 <td>Demonstrates the use of a convolutional LSTM network.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/deep_dream">deep_dream</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/deep_dream" class="external-link">deep_dream</a></td>
 <td>Deep Dreams in Keras.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/eager_dcgan">eager_dcgan</a></td>
-<td>Generating digits with generative adversarial networks and eager execution.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/eager_dcgan" class="external-link">eager_dcgan</a></td>
+<td>Generating digits with generative adversarial networks and eager
+execution.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/eager_image_captioning">eager_image_captioning</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/eager_image_captioning" class="external-link">eager_image_captioning</a></td>
 <td>Generating image captions with Keras and eager execution.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/eager_pix2pix">eager_pix2pix</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/eager_pix2pix" class="external-link">eager_pix2pix</a></td>
 <td>Image-to-image translation with Pix2Pix, using eager execution.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/eager_styletransfer">eager_styletransfer</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/eager_styletransfer" class="external-link">eager_styletransfer</a></td>
 <td>Neural style transfer with eager execution.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/fine_tuning">fine_tuning</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/fine_tuning" class="external-link">fine_tuning</a></td>
 <td>Fine tuning of a image classification model.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/imdb_bidirectional_lstm">imdb_bidirectional_lstm</a></td>
-<td>Trains a Bidirectional LSTM on the IMDB sentiment classification task.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/imdb_bidirectional_lstm" class="external-link">imdb_bidirectional_lstm</a></td>
+<td>Trains a Bidirectional LSTM on the IMDB sentiment classification
+task.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/imdb_cnn">imdb_cnn</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/imdb_cnn" class="external-link">imdb_cnn</a></td>
 <td>Demonstrates the use of Convolution1D for text classification.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/imdb_cnn_lstm">imdb_cnn_lstm</a></td>
-<td>Trains a convolutional stack followed by a recurrent stack network on the IMDB sentiment classification task.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/imdb_cnn_lstm" class="external-link">imdb_cnn_lstm</a></td>
+<td>Trains a convolutional stack followed by a recurrent stack network
+on the IMDB sentiment classification task.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/imdb_fasttext">imdb_fasttext</a></td>
-<td>Trains a FastText model on the IMDB sentiment classification task.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/imdb_fasttext" class="external-link">imdb_fasttext</a></td>
+<td>Trains a FastText model on the IMDB sentiment classification
+task.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/imdb_lstm">imdb_lstm</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/imdb_lstm" class="external-link">imdb_lstm</a></td>
 <td>Trains a LSTM on the IMDB sentiment classification task.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/lstm_text_generation">lstm_text_generation</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/lstm_text_generation" class="external-link">lstm_text_generation</a></td>
 <td>Generates text from Nietzsche’s writings.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/lstm_seq2seq">lstm_seq2seq</a></td>
-<td>This script demonstrates how to implement a basic character-level sequence-to-sequence model.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/lstm_seq2seq" class="external-link">lstm_seq2seq</a></td>
+<td>This script demonstrates how to implement a basic character-level
+sequence-to-sequence model.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_acgan">mnist_acgan</a></td>
-<td>Implementation of AC-GAN (Auxiliary Classifier GAN ) on the MNIST dataset</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_acgan" class="external-link">mnist_acgan</a></td>
+<td>Implementation of AC-GAN (Auxiliary Classifier GAN ) on the MNIST
+dataset</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_antirectifier">mnist_antirectifier</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_antirectifier" class="external-link">mnist_antirectifier</a></td>
 <td>Demonstrates how to write custom layers for Keras</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_cnn">mnist_cnn</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_cnn" class="external-link">mnist_cnn</a></td>
 <td>Trains a simple convnet on the MNIST dataset.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_cnn_embeddings">mnist_cnn_embeddings</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_cnn_embeddings" class="external-link">mnist_cnn_embeddings</a></td>
 <td>Demonstrates how to visualize embeddings in TensorBoard.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_irnn">mnist_irnn</a></td>
-<td>Reproduction of the IRNN experiment with pixel-by-pixel sequential MNIST in “A Simple Way to Initialize Recurrent Networks of Rectified Linear Units” by Le et al.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_irnn" class="external-link">mnist_irnn</a></td>
+<td>Reproduction of the IRNN experiment with pixel-by-pixel sequential
+MNIST in “A Simple Way to Initialize Recurrent Networks of Rectified
+Linear Units” by Le et al.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_mlp">mnist_mlp</a></td>
-<td>Trains a simple deep multi-layer perceptron on the MNIST dataset.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_mlp" class="external-link">mnist_mlp</a></td>
+<td>Trains a simple deep multi-layer perceptron on the MNIST
+dataset.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_hierarchical_rnn">mnist_hierarchical_rnn</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_hierarchical_rnn" class="external-link">mnist_hierarchical_rnn</a></td>
 <td>Trains a Hierarchical RNN (HRNN) to classify MNIST digits.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_tfrecord">mnist_tfrecord</a></td>
-<td>MNIST dataset with TFRecords, the standard TensorFlow data format.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_tfrecord" class="external-link">mnist_tfrecord</a></td>
+<td>MNIST dataset with TFRecords, the standard TensorFlow data
+format.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_transfer_cnn">mnist_transfer_cnn</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/mnist_transfer_cnn" class="external-link">mnist_transfer_cnn</a></td>
 <td>Transfer learning toy example.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/neural_style_transfer">neural_style_transfer</a></td>
-<td>Neural style transfer (generating an image with the same “content” as a base image, but with the “style” of a different picture).</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/neural_style_transfer" class="external-link">neural_style_transfer</a></td>
+<td>Neural style transfer (generating an image with the same “content”
+as a base image, but with the “style” of a different picture).</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/nmt_attention">nmt_attention</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/nmt_attention" class="external-link">nmt_attention</a></td>
 <td>Neural machine translation with an attention mechanism.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/quora_siamese_lstm">quora_siamese_lstm</a></td>
-<td>Classifying duplicate quesitons from Quora using Siamese Recurrent Architecture.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/quora_siamese_lstm" class="external-link">quora_siamese_lstm</a></td>
+<td>Classifying duplicate quesitons from Quora using Siamese Recurrent
+Architecture.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/reuters_mlp">reuters_mlp</a></td>
-<td>Trains and evaluatea a simple MLP on the Reuters newswire topic classification task.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/reuters_mlp" class="external-link">reuters_mlp</a></td>
+<td>Trains and evaluatea a simple MLP on the Reuters newswire topic
+classification task.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/stateful_lstm">stateful_lstm</a></td>
-<td>Demonstrates how to use stateful RNNs to model long sequences efficiently.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/stateful_lstm" class="external-link">stateful_lstm</a></td>
+<td>Demonstrates how to use stateful RNNs to model long sequences
+efficiently.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/text_explanation_lime">text_explanation_lime</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/text_explanation_lime" class="external-link">text_explanation_lime</a></td>
 <td>How to use lime to explain text data.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/variational_autoencoder">variational_autoencoder</a></td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/variational_autoencoder" class="external-link">variational_autoencoder</a></td>
 <td>Demonstrates how to build a variational autoencoder.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/variational_autoencoder_deconv">variational_autoencoder_deconv</a></td>
-<td>Demonstrates how to build a variational autoencoder with Keras using deconvolution layers.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/variational_autoencoder_deconv" class="external-link">variational_autoencoder_deconv</a></td>
+<td>Demonstrates how to build a variational autoencoder with Keras using
+deconvolution layers.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/tfprob_vae">tfprob_vae</a></td>
-<td>A variational autoencoder using TensorFlow Probability on Kuzushiji-MNIST.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/tfprob_vae" class="external-link">tfprob_vae</a></td>
+<td>A variational autoencoder using TensorFlow Probability on
+Kuzushiji-MNIST.</td>
 </tr>
 <tr class="even">
-<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/vq_vae">vq_vae</a></td>
-<td>Discrete Representation Learning with VQ-VAE and TensorFlow Probability.</td>
+<td><a href="https://tensorflow.rstudio.com/guide/keras/examples/vq_vae" class="external-link">vq_vae</a></td>
+<td>Discrete Representation Learning with VQ-VAE and TensorFlow
+Probability.</td>
 </tr>
 </tbody>
 </table>
@@ -395,11 +419,13 @@ scripts for details) so we aren't listing them.
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
+  <p></p>
+<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -407,6 +433,8 @@ scripts for details) so we aren't listing them.
 
   
 
+
+  
 
   </body>
 </html>

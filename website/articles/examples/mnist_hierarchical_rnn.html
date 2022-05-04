@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
   <a href="../../index.html">Home</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -76,7 +78,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,7 +104,8 @@
       <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Using Keras</li>
+    </li>
+<li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -131,7 +134,8 @@
       <a href="../../articles/why_use_keras.html">Why Use Keras?</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Advanced</li>
+    </li>
+<li class="dropdown-header">Advanced</li>
     <li>
       <a href="../../articles/eager_guide.html">Eager Execution</a>
     </li>
@@ -170,7 +174,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rstudio/keras/">
+  <a href="https://github.com/rstudio/keras/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -191,7 +195,7 @@
       <h1 data-toc-skip>mnist_hierarchical_rnn</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/mnist_hierarchical_rnn.Rmd"><code>vignettes/examples/mnist_hierarchical_rnn.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/examples/mnist_hierarchical_rnn.Rmd" class="external-link"><code>vignettes/examples/mnist_hierarchical_rnn.Rmd</code></a></small>
       <div class="hidden name"><code>mnist_hierarchical_rnn.Rmd</code></div>
 
     </div>
@@ -199,15 +203,34 @@
     
     
 <div class="source-ref">
-<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/main/vignettes/examples/mnist_hierarchical_rnn.R" class="uri">https://github.com/rstudio/keras/blob/main/vignettes/examples/mnist_hierarchical_rnn.R</a></p>
+<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/main/vignettes/examples/mnist_hierarchical_rnn.R" class="external-link uri">https://github.com/rstudio/keras/blob/main/vignettes/examples/mnist_hierarchical_rnn.R</a></p>
 </div>
-<p>This is an example of using Hierarchical RNN (HRNN) to classify MNIST digits.</p>
-<p>HRNNs can learn across multiple levels of temporal hiearchy over a complex sequence. Usually, the first recurrent layer of an HRNN encodes a sentence (e.g. of word vectors) into a sentence vector. The second recurrent layer then encodes a sequence of such vectors (encoded by the first layer) into a document vector. This document vector is considered to preserve both the word-level and sentence-level structure of the context.</p>
-<p>References: - <a href="https://arxiv.org/abs/1506.01057">A Hierarchical Neural Autoencoder for Paragraphs and Documents</a> Encodes paragraphs and documents with HRNN. Results have shown that HRNN outperforms standard RNNs and may play some role in more sophisticated generation tasks like summarization or question answering. - <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7298714">Hierarchical recurrent neural network for skeleton based action recognition</a> Achieved state-of-the-art results on skeleton based action recognition with 3 levels of bidirectional HRNN combined with fully connected layers.</p>
-<p>In the below MNIST example the first LSTM layer first encodes every column of pixels of shape (28, 1) to a column vector of shape (128,). The second LSTM layer encodes then these 28 column vectors of shape (28, 128) to a image vector representing the whole image. A final dense layer is added for prediction.</p>
+<p>This is an example of using Hierarchical RNN (HRNN) to classify MNIST
+digits.</p>
+<p>HRNNs can learn across multiple levels of temporal hiearchy over a
+complex sequence. Usually, the first recurrent layer of an HRNN encodes
+a sentence (e.g. of word vectors) into a sentence vector. The second
+recurrent layer then encodes a sequence of such vectors (encoded by the
+first layer) into a document vector. This document vector is considered
+to preserve both the word-level and sentence-level structure of the
+context.</p>
+<p>References: - <a href="https://arxiv.org/abs/1506.01057" class="external-link">A
+Hierarchical Neural Autoencoder for Paragraphs and Documents</a> Encodes
+paragraphs and documents with HRNN. Results have shown that HRNN
+outperforms standard RNNs and may play some role in more sophisticated
+generation tasks like summarization or question answering. - <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7298714" class="external-link">Hierarchical
+recurrent neural network for skeleton based action recognition</a>
+Achieved state-of-the-art results on skeleton based action recognition
+with 3 levels of bidirectional HRNN combined with fully connected
+layers.</p>
+<p>In the below MNIST example the first LSTM layer first encodes every
+column of pixels of shape (28, 1) to a column vector of shape (128,).
+The second LSTM layer encodes then these 28 column vectors of shape (28,
+128) to a image vector representing the whole image. A final dense layer
+is added for prediction.</p>
 <p>After 5 epochs: train acc: 0.9858, val acc: 0.9864</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span>
 
 <span class="co"># Data Preparation -----------------------------------------------------------------</span>
 
@@ -228,15 +251,15 @@
 <span class="va">y_test</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span>
 
 <span class="co"># Reshapes data to 4D for Hierarchical RNN.</span>
-<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">x_train</span> <span class="op">/</span> <span class="fl">255</span>
 <span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">x_test</span> <span class="op">/</span> <span class="fl">255</span>
 
-<span class="va">dim_x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'x_train_shape:'</span>, <span class="va">dim_x_train</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="st">'train samples'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="st">'test samples'</span><span class="op">)</span>
+<span class="va">dim_x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">'x_train_shape:'</span>, <span class="va">dim_x_train</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="st">'train samples'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="st">'test samples'</span><span class="op">)</span>
 
 <span class="co"># Converts class vectors to binary class matrices</span>
 <span class="va">y_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span><span class="va">y_train</span>, <span class="va">num_classes</span><span class="op">)</span>
@@ -248,40 +271,40 @@
 <span class="va">pixel</span> <span class="op">&lt;-</span> <span class="va">dim_x_train</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span>
 
 <span class="co"># Model input (4D)</span>
-<span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">row</span>, <span class="va">col</span>, <span class="va">pixel</span><span class="op">)</span><span class="op">)</span>
+<span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">row</span>, <span class="va">col</span>, <span class="va">pixel</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Encodes a row of pixels using TimeDistributed Wrapper</span>
-<span class="va">encoded_rows</span> <span class="op">&lt;-</span> <span class="va">input</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/time_distributed.html">time_distributed</a></span><span class="op">(</span><span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">row_hidden</span><span class="op">)</span><span class="op">)</span>
+<span class="va">encoded_rows</span> <span class="op">&lt;-</span> <span class="va">input</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/time_distributed.html">time_distributed</a></span><span class="op">(</span><span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">row_hidden</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Encodes columns of encoded rows</span>
-<span class="va">encoded_columns</span> <span class="op">&lt;-</span> <span class="va">encoded_rows</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">col_hidden</span><span class="op">)</span>
+<span class="va">encoded_columns</span> <span class="op">&lt;-</span> <span class="va">encoded_rows</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">col_hidden</span><span class="op">)</span>
 
 <span class="co"># Model output</span>
-<span class="va">prediction</span> <span class="op">&lt;-</span> <span class="va">encoded_columns</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">prediction</span> <span class="op">&lt;-</span> <span class="va">encoded_columns</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">num_classes</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span>
 
 <span class="co"># Define Model ------------------------------------------------------------------------</span>
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">input</span>, <span class="va">prediction</span><span class="op">)</span>
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
   optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,
-  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co"># Training</span>
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span>
   <span class="va">x_train</span>, <span class="va">y_train</span>,
   batch_size <span class="op">=</span> <span class="va">batch_size</span>,
   epochs <span class="op">=</span> <span class="va">epochs</span>,
   verbose <span class="op">=</span> <span class="fl">1</span>,
-  validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span>
+  validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co"># Evaluation</span>
-<span class="va">scores</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Test loss:'</span>, <span class="va">scores</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="st">'\n'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'Test accuracy:'</span>, <span class="va">scores</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="st">'\n'</span><span class="op">)</span></code></pre></div>
+<span class="va">scores</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">'Test loss:'</span>, <span class="va">scores</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="st">'\n'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">'Test accuracy:'</span>, <span class="va">scores</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="st">'\n'</span><span class="op">)</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -293,11 +316,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
+  <p></p>
+<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -305,6 +330,8 @@
 
   
 
+
+  
 
   </body>
 </html>

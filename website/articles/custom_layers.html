@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
   <a href="../index.html">Home</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -76,7 +78,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,7 +104,8 @@
       <a href="../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Using Keras</li>
+    </li>
+<li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -131,7 +134,8 @@
       <a href="../articles/why_use_keras.html">Why Use Keras?</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Advanced</li>
+    </li>
+<li class="dropdown-header">Advanced</li>
     <li>
       <a href="../articles/eager_guide.html">Eager Execution</a>
     </li>
@@ -170,7 +174,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rstudio/keras/">
+  <a href="https://github.com/rstudio/keras/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -191,22 +195,31 @@
       <h1 data-toc-skip>Writing Custom Keras Layers</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/custom_layers.Rmd"><code>vignettes/custom_layers.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/custom_layers.Rmd" class="external-link"><code>vignettes/custom_layers.Rmd</code></a></small>
       <div class="hidden name"><code>custom_layers.Rmd</code></div>
 
     </div>
 
     
     
-<p>If the existing Keras layers don’t meet your requirements you can create a custom layer. For simple, stateless custom operations, you are probably better off using <code><a href="../reference/layer_lambda.html">layer_lambda()</a></code> layers. But for any custom operation that has trainable weights, you should implement your own layer.</p>
-<p>The example below illustrates the skeleton of a Keras custom layer. The <a href="https://keras.rstudio.com/articles/examples/mnist_antirectifier.html">mnist_antirectifier</a> example includes another demonstration of creating a custom layer.</p>
-<div id="the-layer-function" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-layer-function" class="anchor"></a>The Layer function</h2>
-<p>Layers encapsulate a state (weights) and some computation. The main data structure you’ll work with is the <code>Layer</code>. A layer encapsulates both a state (the layer’s “weights”) and a transformation from inputs to outputs (a “call”, the layer’s forward pass).</p>
+<p>If the existing Keras layers don’t meet your requirements you can
+create a custom layer. For simple, stateless custom operations, you are
+probably better off using <code><a href="../reference/layer_lambda.html">layer_lambda()</a></code> layers. But for
+any custom operation that has trainable weights, you should implement
+your own layer.</p>
+<p>The example below illustrates the skeleton of a Keras custom layer.
+The <a href="https://keras.rstudio.com/articles/examples/mnist_antirectifier.html" class="external-link">mnist_antirectifier</a>
+example includes another demonstration of creating a custom layer.</p>
+<div class="section level2">
+<h2 id="the-layer-function">The Layer function<a class="anchor" aria-label="anchor" href="#the-layer-function"></a>
+</h2>
+<p>Layers encapsulate a state (weights) and some computation. The main
+data structure you’ll work with is the <code>Layer</code>. A layer
+encapsulates both a state (the layer’s “weights”) and a transformation
+from inputs to outputs (a “call”, the layer’s forward pass).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow">tensorflow</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span>
 
 <span class="va">layer_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span>
   classname <span class="op">=</span> <span class="st">"Linear"</span>, 
@@ -214,12 +227,12 @@
     <span class="fu">super</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">`__init__`</span><span class="op">(</span><span class="op">)</span>
     <span class="va">w_init</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">random_normal_initializer</span><span class="op">(</span><span class="op">)</span>
     <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">Variable</span><span class="op">(</span>
-      initial_value <span class="op">=</span> <span class="fu">w_init</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">units</span><span class="op">)</span>,
+      initial_value <span class="op">=</span> <span class="fu">w_init</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">units</span><span class="op">)</span>,
                              dtype <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">float32</span><span class="op">)</span>
       <span class="op">)</span>
     <span class="va">b_init</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">zeros_initializer</span><span class="op">(</span><span class="op">)</span>
     <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">Variable</span><span class="op">(</span>
-      initial_value <span class="op">=</span> <span class="fu">b_init</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span>,
+      initial_value <span class="op">=</span> <span class="fu">b_init</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span>,
                              dtype <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">float32</span><span class="op">)</span>
     <span class="op">)</span>
   <span class="op">}</span>,
@@ -228,26 +241,28 @@
   <span class="op">}</span>
 <span class="op">)</span>
 
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">layer_linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">4</span>, input_dim <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">layer</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="va">y</span></code></pre></div>
-<p>Note that the weights w and b are automatically tracked by the layer upon being set as layer attributes.</p>
+<p>Note that the weights w and b are automatically tracked by the layer
+upon being set as layer attributes.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">layer</span><span class="op">)</span></code></pre></div>
-<p>Note you also have access to a quicker shortcut for adding weight to a layer: the <code>add_weight</code> method:</p>
+<p>Note you also have access to a quicker shortcut for adding weight to
+a layer: the <code>add_weight</code> method:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">layer_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span>
   classname <span class="op">=</span> <span class="st">"Linear"</span>, 
   initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span>, <span class="va">input_dim</span><span class="op">)</span> <span class="op">{</span>
     <span class="fu">super</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">`__init__`</span><span class="op">(</span><span class="op">)</span>
     <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>
-      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">units</span><span class="op">)</span>,
+      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">units</span><span class="op">)</span>,
       initializer <span class="op">=</span> <span class="st">"random_normal"</span>,
       trainable <span class="op">=</span> <span class="cn">TRUE</span>
     <span class="op">)</span>
     <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>
-      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span>,
+      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span>,
       initializer <span class="op">=</span> <span class="st">"zeros"</span>,
       trainable <span class="op">=</span> <span class="cn">TRUE</span>
     <span class="op">)</span>
@@ -256,9 +271,15 @@
     <span class="va">tf</span><span class="op">$</span><span class="fu">matmul</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span>
   <span class="op">}</span>
 <span class="op">)</span></code></pre></div>
-<p>It’s important to call <strong><code>super()$__init__()</code></strong> in the <code>initialize</code> method.</p>
-<p>Note that tensor operations are executed using the Keras <code><a href="../reference/backend.html">backend()</a></code>. See the Keras Backend article for details on the various functions available from Keras backends.</p>
-<p>Besides trainable weights, you can add non-trainable weights to a layer as well. Such weights are meant not to be taken into account during backpropagation, when you are training the layer.</p>
+<p>It’s important to call
+<strong><code>super()$__init__()</code></strong> in the
+<code>initialize</code> method.</p>
+<p>Note that tensor operations are executed using the Keras
+<code><a href="../reference/backend.html">backend()</a></code>. See the Keras Backend article for details on the
+various functions available from Keras backends.</p>
+<p>Besides trainable weights, you can add non-trainable weights to a
+layer as well. Such weights are meant not to be taken into account
+during backpropagation, when you are training the layer.</p>
 <p>Here’s how to add and use a non-trainable weight:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">layer_compute_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span>
@@ -266,7 +287,7 @@
   initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span> <span class="op">{</span>
     <span class="fu">super</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">`__init__`</span><span class="op">(</span><span class="op">)</span>
     <span class="va">self</span><span class="op">$</span><span class="va">total</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">Variable</span><span class="op">(</span>
-      initial_value <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="fu">zeros</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span><span class="op">)</span>,
+      initial_value <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="fu">zeros</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span><span class="op">)</span>,
       trainable <span class="op">=</span> <span class="cn">FALSE</span>
     <span class="op">)</span>
   <span class="op">}</span>,
@@ -276,31 +297,35 @@
   <span class="op">}</span>
 <span class="op">)</span>
 
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="va">mysum</span> <span class="op">&lt;-</span> <span class="fu">layer_compute_sum</span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu">mysum</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu">mysum</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>It’s part of <code>layer$weights</code> but it gets categorized as a non-trainable weight:</p>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu">mysum</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu">mysum</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>It’s part of <code>layer$weights</code> but it gets categorized as a
+non-trainable weight:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">mysum</span><span class="op">)</span>
 <span class="va">mysum</span><span class="op">$</span><span class="va">non_trainable_weights</span></code></pre></div>
 </div>
-<div id="best-practice-deferring-weight-creation-until-the-shape-of-the-inputs-is-known" class="section level2">
-<h2 class="hasAnchor">
-<a href="#best-practice-deferring-weight-creation-until-the-shape-of-the-inputs-is-known" class="anchor"></a>Best practice: deferring weight creation until the shape of the inputs is known</h2>
-<p>In Linear example above, our Linear layer took an input_dim argument that was used to compute the shape of the weights w and b in <code>initialize</code>:</p>
+<div class="section level2">
+<h2 id="best-practice-deferring-weight-creation-until-the-shape-of-the-inputs-is-known">Best practice: deferring weight creation until the shape of the
+inputs is known<a class="anchor" aria-label="anchor" href="#best-practice-deferring-weight-creation-until-the-shape-of-the-inputs-is-known"></a>
+</h2>
+<p>In Linear example above, our Linear layer took an input_dim argument
+that was used to compute the shape of the weights w and b in
+<code>initialize</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">layer_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span>
   classname <span class="op">=</span> <span class="st">"Linear"</span>, 
   initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span>, <span class="va">input_dim</span><span class="op">)</span> <span class="op">{</span>
     <span class="fu">super</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">`__init__`</span><span class="op">(</span><span class="op">)</span>
     <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>
-      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">units</span><span class="op">)</span>,
+      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">units</span><span class="op">)</span>,
       initializer <span class="op">=</span> <span class="st">"random_normal"</span>,
       trainable <span class="op">=</span> <span class="cn">TRUE</span>
     <span class="op">)</span>
     <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>
-      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span>,
+      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span>,
       initializer <span class="op">=</span> <span class="st">"zeros"</span>,
       trainable <span class="op">=</span> <span class="cn">TRUE</span>
     <span class="op">)</span>
@@ -309,8 +334,11 @@
     <span class="va">tf</span><span class="op">$</span><span class="fu">matmul</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span>
   <span class="op">}</span>
 <span class="op">)</span></code></pre></div>
-<p>In many cases, you may not know in advance the size of your inputs, and you would like to lazily create weights when that value becomes known, some time after instantiating the layer.</p>
-<p>In the Keras API, we recommend creating layer weights in the <code>build(inputs_shape)</code> method of your layer. Like this:</p>
+<p>In many cases, you may not know in advance the size of your inputs,
+and you would like to lazily create weights when that value becomes
+known, some time after instantiating the layer.</p>
+<p>In the Keras API, we recommend creating layer weights in the
+<code>build(inputs_shape)</code> method of your layer. Like this:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">layer_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span>
   classname <span class="op">=</span> <span class="st">"Linear"</span>, 
@@ -320,12 +348,12 @@
   <span class="op">}</span>,
   build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>
-      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,
+      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,
       initializer <span class="op">=</span> <span class="st">"random_normal"</span>,
       trainable <span class="op">=</span> <span class="cn">TRUE</span>
     <span class="op">)</span>
     <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>
-      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,
+      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,
       initializer <span class="op">=</span> <span class="st">"zeros"</span>,
       trainable <span class="op">=</span> <span class="cn">TRUE</span>
     <span class="op">)</span>
@@ -334,17 +362,22 @@
     <span class="va">tf</span><span class="op">$</span><span class="fu">matmul</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span>
   <span class="op">}</span>
 <span class="op">)</span></code></pre></div>
-<p>The <code>call</code> method of your layer will automatically run build the first time it is called. You now have a layer that’s lazy and easy to use:</p>
+<p>The <code>call</code> method of your layer will automatically run
+build the first time it is called. You now have a layer that’s lazy and
+easy to use:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">layer_linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">layer</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="layers-are-recursively-composable" class="section level2">
-<h2 class="hasAnchor">
-<a href="#layers-are-recursively-composable" class="anchor"></a>Layers are recursively composable</h2>
-<p>If you assign a Layer instance as attribute of another Layer, the outer layer will start tracking the weights of the inner layer.</p>
-<p>We recommend creating such sublayers in the <code>initialize</code> method (since the sublayers will typically have a build method, they will be built when the outer layer gets built).</p>
+<div class="section level2">
+<h2 id="layers-are-recursively-composable">Layers are recursively composable<a class="anchor" aria-label="anchor" href="#layers-are-recursively-composable"></a>
+</h2>
+<p>If you assign a Layer instance as attribute of another Layer, the
+outer layer will start tracking the weights of the inner layer.</p>
+<p>We recommend creating such sublayers in the <code>initialize</code>
+method (since the sublayers will typically have a build method, they
+will be built when the outer layer gets built).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Let's assume we are reusing the Linear class</span>
 <span class="co"># with a `build` method that we defined above.</span>
@@ -357,25 +390,28 @@
     <span class="va">self</span><span class="op">$</span><span class="va">linear_3</span> <span class="op">&lt;-</span> <span class="fu">layer_linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
   <span class="op">}</span>,
   call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">inputs</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-      <span class="va">self</span><span class="op">$</span><span class="fu">linear_1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-      <span class="va">tf</span><span class="op">$</span><span class="va">nn</span><span class="op">$</span><span class="fu">relu</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-      <span class="va">self</span><span class="op">$</span><span class="fu">linear_2</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-      <span class="va">tf</span><span class="op">$</span><span class="va">nn</span><span class="op">$</span><span class="fu">relu</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+    <span class="va">inputs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+      <span class="va">self</span><span class="op">$</span><span class="fu">linear_1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+      <span class="va">tf</span><span class="op">$</span><span class="va">nn</span><span class="op">$</span><span class="fu">relu</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+      <span class="va">self</span><span class="op">$</span><span class="fu">linear_2</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+      <span class="va">tf</span><span class="op">$</span><span class="va">nn</span><span class="op">$</span><span class="fu">relu</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
       <span class="va">self</span><span class="op">$</span><span class="fu">linear_3</span><span class="op">(</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">)</span>
 
 <span class="va">mlp</span> <span class="op">&lt;-</span> <span class="fu">layer_mlp_block</span><span class="op">(</span><span class="op">)</span>
 
-<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">64</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>  <span class="co"># The first call to the `mlp` will create the weights</span>
-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">trainable_weights</span><span class="op">)</span></code></pre></div>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">64</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>  <span class="co"># The first call to the `mlp` will create the weights</span>
+<span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">trainable_weights</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="layers-recursively-collect-losses-created-during-the-forward-pass" class="section level2">
-<h2 class="hasAnchor">
-<a href="#layers-recursively-collect-losses-created-during-the-forward-pass" class="anchor"></a>Layers recursively collect losses created during the forward pass</h2>
-<p>When writing the <code>call</code> method of a layer, you can create loss tensors that you will want to use later, when writing your training loop. This is doable by calling <code>self$add_loss(value)</code>:</p>
+<div class="section level2">
+<h2 id="layers-recursively-collect-losses-created-during-the-forward-pass">Layers recursively collect losses created during the forward
+pass<a class="anchor" aria-label="anchor" href="#layers-recursively-collect-losses-created-during-the-forward-pass"></a>
+</h2>
+<p>When writing the <code>call</code> method of a layer, you can create
+loss tensors that you will want to use later, when writing your training
+loop. This is doable by calling <code>self$add_loss(value)</code>:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># A layer that creates an activity regularization loss</span>
 <span class="va">layer_activity_reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span>
@@ -389,7 +425,11 @@
     <span class="va">inputs</span>
   <span class="op">}</span>
 <span class="op">)</span></code></pre></div>
-<p>These losses (including those created by any inner layer) can be retrieved via <code>layer$losses</code>. This property is reset at the start of every <code>call</code> to the top-level layer, so that <code>layer$losses</code> always contains the loss values created during the last forward pass.</p>
+<p>These losses (including those created by any inner layer) can be
+retrieved via <code>layer$losses</code>. This property is reset at the
+start of every <code>call</code> to the top-level layer, so that
+<code>layer$losses</code> always contains the loss values created during
+the last forward pass.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">layer_outer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span>
   classname <span class="op">=</span> <span class="st">"OuterLayer"</span>,
@@ -406,17 +446,23 @@
 <span class="op">)</span>
 
 <span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">layer_outer</span><span class="op">(</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">layer</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">zeros</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">layer</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">zeros</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># This is `1e-3 * sum(layer.dense.kernel ** 2)`,</span>
 <span class="co"># created by the `kernel_regularizer` above.</span>
 <span class="va">layer</span><span class="op">$</span><span class="va">losses</span></code></pre></div>
 </div>
-<div id="you-can-optionally-enable-serialization-on-your-layers" class="section level2">
-<h2 class="hasAnchor">
-<a href="#you-can-optionally-enable-serialization-on-your-layers" class="anchor"></a>You can optionally enable serialization on your layers</h2>
-<p>If you need your custom layers to be serializable as part of a Functional model, you can optionally implement a <code>get_config</code> method.</p>
-<p>Note that the <code>initialize</code> method of the base Layer class takes some keyword arguments, in particular a <code>name</code> and a <code>dtype</code>. It’s good practice to pass these arguments to the parent class in <code>initialize</code> and to include them in the layer config:</p>
+<div class="section level2">
+<h2 id="you-can-optionally-enable-serialization-on-your-layers">You can optionally enable serialization on your layers<a class="anchor" aria-label="anchor" href="#you-can-optionally-enable-serialization-on-your-layers"></a>
+</h2>
+<p>If you need your custom layers to be serializable as part of a
+Functional model, you can optionally implement a <code>get_config</code>
+method.</p>
+<p>Note that the <code>initialize</code> method of the base Layer class
+takes some keyword arguments, in particular a <code>name</code> and a
+<code>dtype</code>. It’s good practice to pass these arguments to the
+parent class in <code>initialize</code> and to include them in the layer
+config:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">layer_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span>
   classname <span class="op">=</span> <span class="st">"Linear"</span>, 
@@ -426,12 +472,12 @@
   <span class="op">}</span>,
   build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>
-      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,
+      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,
       initializer <span class="op">=</span> <span class="st">"random_normal"</span>,
       trainable <span class="op">=</span> <span class="cn">TRUE</span>
     <span class="op">)</span>
     <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>
-      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html">shape</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,
+      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,
       initializer <span class="op">=</span> <span class="st">"zeros"</span>,
       trainable <span class="op">=</span> <span class="cn">TRUE</span>
     <span class="op">)</span>
@@ -440,7 +486,7 @@
     <span class="va">tf</span><span class="op">$</span><span class="fu">matmul</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span>
   <span class="op">}</span>,
   get_config <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
       units <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">units</span>
     <span class="op">)</span>
   <span class="op">}</span>
@@ -449,15 +495,22 @@
 <span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">layer_linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span><span class="op">)</span>
 <span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span><span class="op">(</span><span class="va">layer</span><span class="op">)</span>
 <span class="va">new_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></code></pre></div>
-<p>If you need more flexibility when deserializing the layer from its config, you can also override the <code>from_config</code> class method. This is the base implementation of <code>from_config</code>:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">def</span> from_config(cls, config):</a>
-<a class="sourceLine" id="cb13-2" title="2">  <span class="cf">return</span> cls(<span class="op">**</span>config)</a></code></pre></div>
+<p>If you need more flexibility when deserializing the layer from its
+config, you can also override the <code>from_config</code> class method.
+This is the base implementation of <code>from_config</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> from_config(cls, config):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> cls(<span class="op">**</span>config)</span></code></pre></div>
 </div>
-<div id="privileged-training-argument-in-the-call-method" class="section level2">
-<h2 class="hasAnchor">
-<a href="#privileged-training-argument-in-the-call-method" class="anchor"></a>Privileged training argument in the call method</h2>
-<p>Some layers, in particular the <code>layer_batch_normalization</code> and the <code>layer_dropout</code>, have different behaviors during training and inference. For such layers, it is standard practice to expose a training (boolean) argument in the call method.</p>
-<p>By exposing this argument in call, you enable the built-in training and evaluation loops (e.g. fit) to correctly use the layer in training and inference.</p>
+<div class="section level2">
+<h2 id="privileged-training-argument-in-the-call-method">Privileged training argument in the call method<a class="anchor" aria-label="anchor" href="#privileged-training-argument-in-the-call-method"></a>
+</h2>
+<p>Some layers, in particular the <code>layer_batch_normalization</code>
+and the <code>layer_dropout</code>, have different behaviors during
+training and inference. For such layers, it is standard practice to
+expose a training (boolean) argument in the call method.</p>
+<p>By exposing this argument in call, you enable the built-in training
+and evaluation loops (e.g. fit) to correctly use the layer in training
+and inference.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">layer_custom_dropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span>
   classname <span class="op">=</span>  <span class="st">"CustomDropout"</span>,
@@ -466,7 +519,7 @@
     <span class="va">self</span><span class="op">$</span><span class="va">rate</span> <span class="op">&lt;-</span> <span class="va">rate</span>
   <span class="op">}</span>,
   call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">training</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
-    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="va">training</span><span class="op">)</span> <span class="op">{</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="va">training</span><span class="op">)</span> <span class="op">{</span>
       <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">nn</span><span class="op">$</span><span class="fu">dropout</span><span class="op">(</span><span class="va">inputs</span>, rate <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">rate</span><span class="op">)</span>
     <span class="op">}</span>
     <span class="va">inputs</span>
@@ -486,11 +539,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
+  <p></p>
+<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -498,6 +553,8 @@
 
   
 
+
+  
 
   </body>
 </html>

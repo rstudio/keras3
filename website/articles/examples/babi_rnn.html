@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
   <a href="../../index.html">Home</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -76,7 +78,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,7 +104,8 @@
       <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Using Keras</li>
+    </li>
+<li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -131,7 +134,8 @@
       <a href="../../articles/why_use_keras.html">Why Use Keras?</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Advanced</li>
+    </li>
+<li class="dropdown-header">Advanced</li>
     <li>
       <a href="../../articles/eager_guide.html">Eager Execution</a>
     </li>
@@ -170,7 +174,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rstudio/keras/">
+  <a href="https://github.com/rstudio/keras/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -191,7 +195,7 @@
       <h1 data-toc-skip>babi_rnn</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/babi_rnn.Rmd"><code>vignettes/examples/babi_rnn.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/examples/babi_rnn.Rmd" class="external-link"><code>vignettes/examples/babi_rnn.Rmd</code></a></small>
       <div class="hidden name"><code>babi_rnn.Rmd</code></div>
 
     </div>
@@ -199,10 +203,14 @@
     
     
 <div class="source-ref">
-<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/main/vignettes/examples/babi_rnn.R" class="uri">https://github.com/rstudio/keras/blob/main/vignettes/examples/babi_rnn.R</a></p>
+<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/main/vignettes/examples/babi_rnn.R" class="external-link uri">https://github.com/rstudio/keras/blob/main/vignettes/examples/babi_rnn.R</a></p>
 </div>
-<p>Trains two recurrent neural networks based upon a story and a question. The resulting merged vector is then queried to answer a range of bAbI tasks.</p>
-<p>The results are comparable to those for an LSTM model provided in Weston et al.: “Towards AI-Complete Question Answering: A Set of Prerequisite Toy Tasks” <a href="https://arxiv.org/abs/1502.05698" class="uri">https://arxiv.org/abs/1502.05698</a></p>
+<p>Trains two recurrent neural networks based upon a story and a
+question. The resulting merged vector is then queried to answer a range
+of bAbI tasks.</p>
+<p>The results are comparable to those for an LSTM model provided in
+Weston et al.: “Towards AI-Complete Question Answering: A Set of
+Prerequisite Toy Tasks” <a href="https://arxiv.org/abs/1502.05698" class="external-link uri">https://arxiv.org/abs/1502.05698</a></p>
 <table class="table">
 <thead><tr class="header">
 <th>Task Number</th>
@@ -312,95 +320,111 @@
 </tr>
 </tbody>
 </table>
-<p>For the resources related to the bAbI project, refer to: <a href="https://research.facebook.com/researchers/1543934539189348" class="uri">https://research.facebook.com/researchers/1543934539189348</a></p>
+<p>For the resources related to the bAbI project, refer to: <a href="https://research.facebook.com/researchers/1543934539189348" class="external-link uri">https://research.facebook.com/researchers/1543934539189348</a></p>
 <p>Notes:</p>
 <ul>
-<li>With default word, sentence, and query vector sizes, the GRU model achieves:</li>
-<li>100% test accuracy on QA1 in 20 epochs (2 seconds per epoch on CPU)</li>
-<li><p>50% test accuracy on QA2 in 20 epochs (16 seconds per epoch on CPU) In comparison, the Facebook paper achieves 50% and 20% for the LSTM baseline.</p></li>
-<li><p>The task does not traditionally parse the question separately. This likely improves accuracy and is a good example of merging two RNNs.</p></li>
-<li><p>The word vector embeddings are not shared between the story and question RNNs.</p></li>
-<li><p>See how the accuracy changes given 10,000 training samples (en-10k) instead of only 1000. 1000 was used in order to be comparable to the original paper.</p></li>
-<li><p>Experiment with GRU, LSTM, and JZS1-3 as they give subtly different results.</p></li>
-<li><p>The length and noise (i.e. ‘useless’ story components) impact the ability for LSTMs / GRUs to provide the correct answer. Given only the supporting facts, these RNNs can achieve 100% accuracy on many tasks. Memory networks and neural networks that use attentional processes can efficiently search through this noise to find the relevant statements, improving performance substantially. This becomes especially obvious on QA2 and QA3, both far longer than QA1.</p></li>
+<li><p>With default word, sentence, and query vector sizes, the GRU
+model achieves:</p></li>
+<li><p>100% test accuracy on QA1 in 20 epochs (2 seconds per epoch on
+CPU)</p></li>
+<li><p>50% test accuracy on QA2 in 20 epochs (16 seconds per epoch on
+CPU) In comparison, the Facebook paper achieves 50% and 20% for the LSTM
+baseline.</p></li>
+<li><p>The task does not traditionally parse the question separately.
+This likely improves accuracy and is a good example of merging two
+RNNs.</p></li>
+<li><p>The word vector embeddings are not shared between the story and
+question RNNs.</p></li>
+<li><p>See how the accuracy changes given 10,000 training samples
+(en-10k) instead of only 1000. 1000 was used in order to be comparable
+to the original paper.</p></li>
+<li><p>Experiment with GRU, LSTM, and JZS1-3 as they give subtly
+different results.</p></li>
+<li><p>The length and noise (i.e. ‘useless’ story components) impact the
+ability for LSTMs / GRUs to provide the correct answer. Given only the
+supporting facts, these RNNs can achieve 100% accuracy on many tasks.
+Memory networks and neural networks that use attentional processes can
+efficiently search through this noise to find the relevant statements,
+improving performance substantially. This becomes especially obvious on
+QA2 and QA3, both far longer than QA1.</p></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org">stringr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org" class="external-link">purrr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 
 <span class="co"># Function definition -----------------------------------------------------</span>
 
 <span class="va">tokenize_words</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
-  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace_all</a></span><span class="op">(</span><span class="st">'([[:punct:]]+)'</span>, <span class="st">' \\1'</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span><span class="st">' '</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span><span class="op">(</span><span class="st">'([[:punct:]]+)'</span>, <span class="st">' \\1'</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html" class="external-link">str_split</a></span><span class="op">(</span><span class="st">' '</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="op">)</span>
   <span class="va">x</span><span class="op">[</span><span class="va">x</span> <span class="op">!=</span> <span class="st">""</span><span class="op">]</span>
 <span class="op">}</span>
 
 <span class="va">parse_stories</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lines</span>, <span class="va">only_supporting</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">{</span>
-  <span class="va">lines</span> <span class="op">&lt;-</span> <span class="va">lines</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span><span class="st">" "</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>nid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">.x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, line <span class="op">=</span> <span class="va">.x</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">lines</span> <span class="op">&lt;-</span> <span class="va">lines</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html" class="external-link">str_split</a></span><span class="op">(</span><span class="st">" "</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_df</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>nid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">.x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, line <span class="op">=</span> <span class="va">.x</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
   
-  <span class="va">lines</span> <span class="op">&lt;-</span> <span class="va">lines</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
-      split <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">line</span>, <span class="op">~</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span><span class="va">.x</span>, <span class="st">"\t"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,
-      q <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">split</span>, <span class="op">~</span><span class="va">.x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>,
-      a <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">split</span>, <span class="op">~</span><span class="va">.x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,
-      supporting <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">split</span>, <span class="op">~</span><span class="va">.x</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span><span class="st">" "</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,
-      story_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">nid</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">]</span> <span class="op">&gt;</span> <span class="va">nid</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-    <span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">split</span><span class="op">)</span>
+  <span class="va">lines</span> <span class="op">&lt;-</span> <span class="va">lines</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>
+      split <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">line</span>, <span class="op">~</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html" class="external-link">str_split</a></span><span class="op">(</span><span class="va">.x</span>, <span class="st">"\t"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,
+      q <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_chr</a></span><span class="op">(</span><span class="va">split</span>, <span class="op">~</span><span class="va">.x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>,
+      a <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_chr</a></span><span class="op">(</span><span class="va">split</span>, <span class="op">~</span><span class="va">.x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,
+      supporting <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">split</span>, <span class="op">~</span><span class="va">.x</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html" class="external-link">str_split</a></span><span class="op">(</span><span class="st">" "</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,
+      story_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="va">nid</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">]</span> <span class="op">&gt;</span> <span class="va">nid</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+    <span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">split</span><span class="op">)</span>
   
-  <span class="va">stories</span> <span class="op">&lt;-</span> <span class="va">lines</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>nid_story <span class="op">=</span> <span class="va">nid</span>, <span class="va">story_id</span>, story <span class="op">=</span> <span class="va">q</span><span class="op">)</span>
+  <span class="va">stories</span> <span class="op">&lt;-</span> <span class="va">lines</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>nid_story <span class="op">=</span> <span class="va">nid</span>, <span class="va">story_id</span>, story <span class="op">=</span> <span class="va">q</span><span class="op">)</span>
   
-  <span class="va">questions</span> <span class="op">&lt;-</span> <span class="va">lines</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">line</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">stories</span>, by <span class="op">=</span> <span class="st">"story_id"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">nid_story</span> <span class="op">&lt;</span> <span class="va">nid</span><span class="op">)</span>
+  <span class="va">questions</span> <span class="op">&lt;-</span> <span class="va">lines</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">line</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">stories</span>, by <span class="op">=</span> <span class="st">"story_id"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">nid_story</span> <span class="op">&lt;</span> <span class="va">nid</span><span class="op">)</span>
 
   <span class="kw">if</span><span class="op">(</span><span class="va">only_supporting</span><span class="op">)</span><span class="op">{</span>
-    <span class="va">questions</span> <span class="op">&lt;-</span> <span class="va">questions</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2_lgl</a></span><span class="op">(</span><span class="va">nid_story</span>, <span class="va">supporting</span>, <span class="op">~</span><span class="va">.x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">.y</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">questions</span> <span class="op">&lt;-</span> <span class="va">questions</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">map2_lgl</a></span><span class="op">(</span><span class="va">nid_story</span>, <span class="va">supporting</span>, <span class="op">~</span><span class="va">.x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">.y</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span>
     
-  <span class="va">questions</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">story_id</span>, <span class="va">nid</span>, question <span class="op">=</span> <span class="va">q</span>, answer <span class="op">=</span> <span class="va">a</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>story <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">story</span>, collapse <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
-      question <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">question</span>, <span class="op">~</span><span class="fu">tokenize_words</span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span>,
-      story <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">story</span>, <span class="op">~</span><span class="fu">tokenize_words</span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span>,
-      id <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span><span class="op">(</span><span class="op">)</span>
-    <span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">question</span>, <span class="va">answer</span>, <span class="va">story</span><span class="op">)</span>
+  <span class="va">questions</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">story_id</span>, <span class="va">nid</span>, question <span class="op">=</span> <span class="va">q</span>, answer <span class="op">=</span> <span class="va">a</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>story <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">story</span>, collapse <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>
+      question <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">question</span>, <span class="op">~</span><span class="fu">tokenize_words</span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span>,
+      story <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">story</span>, <span class="op">~</span><span class="fu">tokenize_words</span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span>,
+      id <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">question</span>, <span class="va">answer</span>, <span class="va">story</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="va">vectorize_stories</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">vocab</span>, <span class="va">story_maxlen</span>, <span class="va">query_maxlen</span><span class="op">)</span><span class="op">{</span>
   
-  <span class="va">questions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">question</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
-    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">x</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">.x</span> <span class="op">==</span> <span class="va">vocab</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">questions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">question</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
+    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_int</a></span><span class="op">(</span><span class="va">x</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">.x</span> <span class="op">==</span> <span class="va">vocab</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span><span class="op">)</span>
   
-  <span class="va">stories</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">story</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
-    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">x</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">.x</span> <span class="op">==</span> <span class="va">vocab</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">stories</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">story</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
+    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_int</a></span><span class="op">(</span><span class="va">x</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">.x</span> <span class="op">==</span> <span class="va">vocab</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span><span class="op">)</span>
   
   <span class="co"># "" represents padding</span>
-  <span class="va">answers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">""</span>, <span class="va">vocab</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="va">data</span><span class="op">$</span><span class="va">answer</span><span class="op">)</span>
+  <span class="va">answers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">""</span>, <span class="va">vocab</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="va">data</span><span class="op">$</span><span class="va">answer</span><span class="op">)</span>
   <span class="op">}</span><span class="op">)</span>
   
 
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
     questions <span class="op">=</span> <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span><span class="va">questions</span>, maxlen <span class="op">=</span> <span class="va">query_maxlen</span><span class="op">)</span>,
     stories   <span class="op">=</span> <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span><span class="va">stories</span>, maxlen <span class="op">=</span> <span class="va">story_maxlen</span><span class="op">)</span>,
     answers   <span class="op">=</span> <span class="va">answers</span>
@@ -420,8 +444,8 @@
   fname <span class="op">=</span> <span class="st">"babi-tasks-v1-2.tar.gz"</span>,
   origin <span class="op">=</span> <span class="st">"https://s3.amazonaws.com/text-datasets/babi_tasks_1-20_v1-2.tar.gz"</span>
 <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/untar.html">untar</a></span><span class="op">(</span><span class="va">path</span>, exdir <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">path</span>, <span class="fu"><a href="https://stringr.tidyverse.org/reference/modifiers.html">fixed</a></span><span class="op">(</span><span class="st">".tar.gz"</span><span class="op">)</span>, <span class="st">"/"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">path</span>, <span class="fu"><a href="https://stringr.tidyverse.org/reference/modifiers.html">fixed</a></span><span class="op">(</span><span class="st">".tar.gz"</span><span class="op">)</span>, <span class="st">"/"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/untar.html" class="external-link">untar</a></span><span class="op">(</span><span class="va">path</span>, exdir <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace</a></span><span class="op">(</span><span class="va">path</span>, <span class="fu"><a href="https://stringr.tidyverse.org/reference/modifiers.html" class="external-link">fixed</a></span><span class="op">(</span><span class="st">".tar.gz"</span><span class="op">)</span>, <span class="st">"/"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace</a></span><span class="op">(</span><span class="va">path</span>, <span class="fu"><a href="https://stringr.tidyverse.org/reference/modifiers.html" class="external-link">fixed</a></span><span class="op">(</span><span class="st">".tar.gz"</span><span class="op">)</span>, <span class="st">"/"</span><span class="op">)</span>
 
 <span class="co"># Default QA1 with 1000 samples</span>
 <span class="co"># challenge = '%stasks_1-20_v1-2/en/qa1_single-supporting-fact_%s.txt'</span>
@@ -432,25 +456,25 @@
 <span class="co"># QA2 with 10,000 samples</span>
 <span class="co"># challenge = '%stasks_1-20_v1-2/en-10k/qa2_two-supporting-facts_%s.txt'</span>
 
-<span class="va">train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_lines.html">read_lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="va">challenge</span>, <span class="va">path</span>, <span class="st">"train"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu">parse_stories</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">story</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="va">max_length</span><span class="op">)</span>
+<span class="va">train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_lines.html" class="external-link">read_lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="va">challenge</span>, <span class="va">path</span>, <span class="st">"train"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">parse_stories</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_int</a></span><span class="op">(</span><span class="va">story</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="va">max_length</span><span class="op">)</span>
 
-<span class="va">test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_lines.html">read_lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="va">challenge</span>, <span class="va">path</span>, <span class="st">"test"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu">parse_stories</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">story</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="va">max_length</span><span class="op">)</span>
+<span class="va">test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_lines.html" class="external-link">read_lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="va">challenge</span>, <span class="va">path</span>, <span class="st">"test"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">parse_stories</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_int</a></span><span class="op">(</span><span class="va">story</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="va">max_length</span><span class="op">)</span>
 
 <span class="co"># extract the vocabulary</span>
-<span class="va">all_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">train</span>, <span class="va">test</span><span class="op">)</span>
-<span class="va">vocab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">all_data</span><span class="op">$</span><span class="va">question</span><span class="op">)</span>, <span class="va">all_data</span><span class="op">$</span><span class="va">answer</span>, 
-           <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">all_data</span><span class="op">$</span><span class="va">story</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">all_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">train</span>, <span class="va">test</span><span class="op">)</span>
+<span class="va">vocab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">all_data</span><span class="op">$</span><span class="va">question</span><span class="op">)</span>, <span class="va">all_data</span><span class="op">$</span><span class="va">answer</span>, 
+           <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">all_data</span><span class="op">$</span><span class="va">story</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># Reserve 0 for masking via pad_sequences</span>
-<span class="va">vocab_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">vocab</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span>
-<span class="va">story_maxlen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">all_data</span><span class="op">$</span><span class="va">story</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">query_maxlen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">all_data</span><span class="op">$</span><span class="va">question</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">vocab_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">vocab</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span>
+<span class="va">story_maxlen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_int</a></span><span class="op">(</span><span class="va">all_data</span><span class="op">$</span><span class="va">story</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">query_maxlen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_int</a></span><span class="op">(</span><span class="va">all_data</span><span class="op">$</span><span class="va">question</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># vectorized versions of training and test sets</span>
 <span class="va">train_vec</span> <span class="op">&lt;-</span> <span class="fu">vectorize_stories</span><span class="op">(</span><span class="va">train</span>, <span class="va">vocab</span>, <span class="va">story_maxlen</span>, <span class="va">query_maxlen</span><span class="op">)</span>
@@ -458,28 +482,28 @@
 
 <span class="co"># Defining the model ------------------------------------------------------</span>
 
-<span class="va">sentence</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">story_maxlen</span><span class="op">)</span>, dtype <span class="op">=</span> <span class="st">"int32"</span><span class="op">)</span>
-<span class="va">encoded_sentence</span> <span class="op">&lt;-</span> <span class="va">sentence</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="va">vocab_size</span>, output_dim <span class="op">=</span> <span class="va">embed_hidden_size</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">sentence</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">story_maxlen</span><span class="op">)</span>, dtype <span class="op">=</span> <span class="st">"int32"</span><span class="op">)</span>
+<span class="va">encoded_sentence</span> <span class="op">&lt;-</span> <span class="va">sentence</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="va">vocab_size</span>, output_dim <span class="op">=</span> <span class="va">embed_hidden_size</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span>
 
-<span class="va">question</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">query_maxlen</span><span class="op">)</span>, dtype <span class="op">=</span> <span class="st">"int32"</span><span class="op">)</span>
-<span class="va">encoded_question</span> <span class="op">&lt;-</span> <span class="va">question</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="va">vocab_size</span>, output_dim <span class="op">=</span> <span class="va">embed_hidden_size</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">embed_hidden_size</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">question</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">query_maxlen</span><span class="op">)</span>, dtype <span class="op">=</span> <span class="st">"int32"</span><span class="op">)</span>
+<span class="va">encoded_question</span> <span class="op">&lt;-</span> <span class="va">question</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="va">vocab_size</span>, output_dim <span class="op">=</span> <span class="va">embed_hidden_size</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">embed_hidden_size</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_repeat_vector.html">layer_repeat_vector</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">story_maxlen</span><span class="op">)</span>
 
-<span class="va">merged</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">encoded_sentence</span>, <span class="va">encoded_question</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/layer_add.html">layer_add</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">embed_hidden_size</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">merged</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">encoded_sentence</span>, <span class="va">encoded_question</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_add.html">layer_add</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_lstm.html">layer_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">embed_hidden_size</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span>
 
-<span class="va">preds</span> <span class="op">&lt;-</span> <span class="va">merged</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">preds</span> <span class="op">&lt;-</span> <span class="va">merged</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">vocab_size</span>, activation <span class="op">=</span> <span class="st">"softmax"</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">sentence</span>, <span class="va">question</span><span class="op">)</span>, outputs <span class="op">=</span> <span class="va">preds</span><span class="op">)</span>
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">sentence</span>, <span class="va">question</span><span class="op">)</span>, outputs <span class="op">=</span> <span class="va">preds</span><span class="op">)</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>
   optimizer <span class="op">=</span> <span class="st">"adam"</span>,
   loss <span class="op">=</span> <span class="st">"categorical_crossentropy"</span>,
   metrics <span class="op">=</span> <span class="st">"accuracy"</span>
@@ -489,16 +513,16 @@
 
 <span class="co"># Training ----------------------------------------------------------------</span>
 
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">train_vec</span><span class="op">$</span><span class="va">stories</span>, <span class="va">train_vec</span><span class="op">$</span><span class="va">questions</span><span class="op">)</span>,
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span>
+  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">train_vec</span><span class="op">$</span><span class="va">stories</span>, <span class="va">train_vec</span><span class="op">$</span><span class="va">questions</span><span class="op">)</span>,
   y <span class="op">=</span> <span class="va">train_vec</span><span class="op">$</span><span class="va">answers</span>,
   batch_size <span class="op">=</span> <span class="va">batch_size</span>,
   epochs <span class="op">=</span> <span class="va">epochs</span>,
   validation_split<span class="op">=</span><span class="fl">0.05</span>
 <span class="op">)</span>
 
-<span class="va">evaluation</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">test_vec</span><span class="op">$</span><span class="va">stories</span>, <span class="va">test_vec</span><span class="op">$</span><span class="va">questions</span><span class="op">)</span>,
+<span class="va">evaluation</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span>
+  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">test_vec</span><span class="op">$</span><span class="va">stories</span>, <span class="va">test_vec</span><span class="op">$</span><span class="va">questions</span><span class="op">)</span>,
   y <span class="op">=</span> <span class="va">test_vec</span><span class="op">$</span><span class="va">answers</span>,
   batch_size <span class="op">=</span> <span class="va">batch_size</span>
 <span class="op">)</span>
@@ -515,11 +539,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
+  <p></p>
+<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -527,6 +553,8 @@
 
   
 
+
+  
 
   </body>
 </html>

@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
   <a href="../index.html">Home</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -76,7 +78,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,7 +104,8 @@
       <a href="../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Using Keras</li>
+    </li>
+<li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -131,7 +134,8 @@
       <a href="../articles/why_use_keras.html">Why Use Keras?</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Advanced</li>
+    </li>
+<li class="dropdown-header">Advanced</li>
     <li>
       <a href="../articles/eager_guide.html">Eager Execution</a>
     </li>
@@ -170,7 +174,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rstudio/keras/">
+  <a href="https://github.com/rstudio/keras/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -191,26 +195,38 @@
       <h1 data-toc-skip>Writing Custom Keras Models</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/custom_models.Rmd"><code>vignettes/custom_models.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/custom_models.Rmd" class="external-link"><code>vignettes/custom_models.Rmd</code></a></small>
       <div class="hidden name"><code>custom_models.Rmd</code></div>
 
     </div>
 
     
     
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
-<p>In addition to <a href="sequential_model.html">sequential models</a> and models created with the <a href="functional_api.html">functional API</a>, you may also define models by defining a custom <code><a href="https://rdrr.io/r/base/call.html">call()</a></code> (forward pass) operation.</p>
-<p>To create a custom Keras model, you call the <code><a href="../reference/keras_model_custom.html">keras_model_custom()</a></code> function, passing it an R function which in turn returns another R function that implements the custom <code><a href="https://rdrr.io/r/base/call.html">call()</a></code> (forward pass) operation. The R function you pass takes a <code>model</code> argument, which provides access to the underlying Keras model object should you need it.</p>
-<p>Typically, you’ll wrap your call to <code><a href="../reference/keras_model_custom.html">keras_model_custom()</a></code> in yet another function that enables callers to easily instantiate your custom model.</p>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>In addition to <a href="sequential_model.html">sequential models</a>
+and models created with the <a href="functional_api.html">functional
+API</a>, you may also define models by defining a custom
+<code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code> (forward pass) operation.</p>
+<p>To create a custom Keras model, you call the
+<code><a href="../reference/keras_model_custom.html">keras_model_custom()</a></code> function, passing it an R function
+which in turn returns another R function that implements the custom
+<code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code> (forward pass) operation. The R function you pass
+takes a <code>model</code> argument, which provides access to the
+underlying Keras model object should you need it.</p>
+<p>Typically, you’ll wrap your call to <code><a href="../reference/keras_model_custom.html">keras_model_custom()</a></code>
+in yet another function that enables callers to easily instantiate your
+custom model.</p>
 </div>
-<div id="creating-a-custom-model" class="section level2">
-<h2 class="hasAnchor">
-<a href="#creating-a-custom-model" class="anchor"></a>Creating a Custom Model</h2>
-<p>This example demonstrates the implementation of a simple custom model that implements a multi-layer-perceptron with optional dropout and batch normalization:</p>
+<div class="section level2">
+<h2 id="creating-a-custom-model">Creating a Custom Model<a class="anchor" aria-label="anchor" href="#creating-a-custom-model"></a>
+</h2>
+<p>This example demonstrates the implementation of a simple custom model
+that implements a multi-layer-perceptron with optional dropout and batch
+normalization:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span>
 
 <span class="va">keras_model_simple_mlp</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">num_classes</span>, 
                                    <span class="va">use_bn</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">use_dp</span> <span class="op">=</span> <span class="cn">FALSE</span>, 
@@ -238,36 +254,43 @@
     <span class="op">}</span>
   <span class="op">}</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
-<p>Note that we include a <code>name</code> parameter so that users can optionally provide a human readable name for the model.</p>
-<p>Note also that when we create layers to be used in our forward pass we set them onto the <code>self</code> object so they are tracked appropriately by Keras.</p>
-<p>In <code><a href="https://rdrr.io/r/base/call.html">call()</a></code>, you may specify custom losses by calling <code>self$add_loss()</code>. You can also access any other members of the Keras model you need (or even add fields to the model) by using <code>self$</code>.</p>
+<p>Note that we include a <code>name</code> parameter so that users can
+optionally provide a human readable name for the model.</p>
+<p>Note also that when we create layers to be used in our forward pass
+we set them onto the <code>self</code> object so they are tracked
+appropriately by Keras.</p>
+<p>In <code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code>, you may specify custom losses by calling
+<code>self$add_loss()</code>. You can also access any other members of
+the Keras model you need (or even add fields to the model) by using
+<code>self$</code>.</p>
 </div>
-<div id="using-a-custom-model" class="section level2">
-<h2 class="hasAnchor">
-<a href="#using-a-custom-model" class="anchor"></a>Using a Custom Model</h2>
-<p>To use a custom model, just call your model’s high-level wrapper function. For example:</p>
+<div class="section level2">
+<h2 id="using-a-custom-model">Using a Custom Model<a class="anchor" aria-label="anchor" href="#using-a-custom-model"></a>
+</h2>
+<p>To use a custom model, just call your model’s high-level wrapper
+function. For example:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span>
 
 <span class="co"># create the model </span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">keras_model_simple_mlp</span><span class="op">(</span>num_classes <span class="op">=</span> <span class="fl">10</span>, use_dp <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># compile graph</span>
-<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
   optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="op">)</span>,
-  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co"># Generate dummy data</span>
-<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
-<span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">9</span><span class="op">)</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
+<span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">9</span><span class="op">)</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="co"># Convert labels to categorical one-hot encoding</span>
 <span class="va">one_hot_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span><span class="va">labels</span>, num_classes <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="co"># Train the model</span>
-<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">one_hot_labels</span>, epochs<span class="op">=</span><span class="fl">10</span>, batch_size<span class="op">=</span><span class="fl">32</span><span class="op">)</span></code></pre></div>
+<span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">one_hot_labels</span>, epochs<span class="op">=</span><span class="fl">10</span>, batch_size<span class="op">=</span><span class="fl">32</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 
@@ -282,11 +305,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
+  <p></p>
+<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -294,6 +319,8 @@
 
   
 
+
+  
 
   </body>
 </html>

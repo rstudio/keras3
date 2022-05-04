@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
   <a href="../../index.html">Home</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -76,7 +78,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,7 +104,8 @@
       <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Using Keras</li>
+    </li>
+<li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -131,7 +134,8 @@
       <a href="../../articles/why_use_keras.html">Why Use Keras?</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Advanced</li>
+    </li>
+<li class="dropdown-header">Advanced</li>
     <li>
       <a href="../../articles/eager_guide.html">Eager Execution</a>
     </li>
@@ -170,7 +174,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rstudio/keras/">
+  <a href="https://github.com/rstudio/keras/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -191,14 +195,15 @@
       <h1 data-toc-skip>Python Subclasses</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/new-guides/python_subclasses.Rmd"><code>vignettes/new-guides/python_subclasses.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/new-guides/python_subclasses.Rmd" class="external-link"><code>vignettes/new-guides/python_subclasses.Rmd</code></a></small>
       <div class="hidden name"><code>python_subclasses.Rmd</code></div>
 
     </div>
 
     
     
-<p>When using keras, a desire to create Python-based subclasses can arise in a number of ways. For example, when you want to:</p>
+<p>When using keras, a desire to create Python-based subclasses can
+arise in a number of ways. For example, when you want to:</p>
 <ul>
 <li>define custom layers and/or models</li>
 <li>implement custom training logic</li>
@@ -206,48 +211,65 @@
 <li>define custom callbacks</li>
 <li>… and more!</li>
 </ul>
-<p>In such scenarios, the most powerful and flexible approach is to directly inherit from, and then modify and/or enhance an appropriate Python class.</p>
-<p>Subclassing a Python class in R is generally straightforward. Two syntaxes are provided: one that adheres to R conventions and uses <code><a href="https://r6.r-lib.org/reference/R6Class.html">R6::R6Class</a></code> as the class constructor, and one that adheres more to Python conventions, and attempts to replicate Python syntax in R.</p>
-<div id="examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
-<div id="a-custom-constraint-r6" class="section level3">
-<h3 class="hasAnchor">
-<a href="#a-custom-constraint-r6" class="anchor"></a>A custom constraint (R6)</h3>
-<p>For demonstration purposes, let’s say you want to implement a custom keras kernel constraint via subclassing. Using R6:</p>
+<p>In such scenarios, the most powerful and flexible approach is to
+directly inherit from, and then modify and/or enhance an appropriate
+Python class.</p>
+<p>Subclassing a Python class in R is generally straightforward. Two
+syntaxes are provided: one that adheres to R conventions and uses
+<code><a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6::R6Class</a></code> as the class constructor, and one that adheres
+more to Python conventions, and attempts to replicate Python syntax in
+R.</p>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
+<div class="section level3">
+<h3 id="a-custom-constraint-r6">A custom constraint (R6)<a class="anchor" aria-label="anchor" href="#a-custom-constraint-r6"></a>
+</h3>
+<p>For demonstration purposes, let’s say you want to implement a custom
+keras kernel constraint via subclassing. Using R6:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">NonNegative</span> <span class="op">&lt;-</span> <span class="fu">R6</span><span class="fu">::</span><span class="kw"><a href="https://r6.r-lib.org/reference/R6Class.html">R6Class</a></span><span class="op">(</span><span class="st">"NonNegative"</span>,
+<code class="sourceCode R"><span class="va">NonNegative</span> <span class="op">&lt;-</span> <span class="fu">R6</span><span class="fu">::</span><span class="kw"><a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6Class</a></span><span class="op">(</span><span class="st">"NonNegative"</span>,
   inherit <span class="op">=</span> <span class="va">keras</span><span class="op">$</span><span class="va">constraints</span><span class="op">$</span><span class="va">Constraint</span>,
-  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
     <span class="st">"__call__"</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
        <span class="va">w</span> <span class="op">*</span> <span class="fu"><a href="../../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">w</span> <span class="op">&gt;=</span> <span class="fl">0</span>, <span class="fu"><a href="../../reference/k_floatx.html">k_floatx</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
     <span class="op">}</span>
   <span class="op">)</span>
 <span class="op">)</span>
-<span class="va">NonNegative</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">r_to_py</a></span><span class="op">(</span><span class="va">NonNegative</span>, convert<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>The <code>r_to_py</code> method will convert an R6 class generator into a Python class generator. After conversion, Python class generators will be different from R6 class generators in a few ways:</p>
+<span class="va">NonNegative</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/r-py-conversion.html" class="external-link">r_to_py</a></span><span class="op">(</span><span class="va">NonNegative</span>, convert<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>The <code>r_to_py</code> method will convert an R6 class generator
+into a Python class generator. After conversion, Python class generators
+will be different from R6 class generators in a few ways:</p>
 <ul>
-<li><p>New class instances are generated by calling the class directly: <code>NonNegative()</code> (not <code>NonNegative$new()</code>)</p></li>
-<li><p>All methods (functions) are (potentially) modified to ensure their first argument is <code>self</code>.</p></li>
-<li><p>All methods have in scope <code>__class__</code>, <code>super</code> and the class name (<code>NonNegative</code>).</p></li>
+<li><p>New class instances are generated by calling the class directly:
+<code>NonNegative()</code> (not <code>NonNegative$new()</code>)</p></li>
+<li><p>All methods (functions) are (potentially) modified to ensure
+their first argument is <code>self</code>.</p></li>
+<li><p>All methods have in scope <code>__class__</code>,
+<code>super</code> and the class name
+(<code>NonNegative</code>).</p></li>
 <li>
 <p>For convenience, some method names are treated as aliases:</p>
 <ul>
 <li>
-<code>initialize</code> is treated as an alias for <code>__init__</code>()</li>
+<code>initialize</code> is treated as an alias for
+<code>__init__</code>()</li>
 <li>
-<code>finalize</code> is treated as an alias for <code>__del__</code>()</li>
+<code>finalize</code> is treated as an alias for
+<code>__del__</code>()</li>
 </ul>
 </li>
 <li>
 <p><code>super</code> can be accessed in 3 ways:</p>
 <ol style="list-style-type: decimal">
-<li>R6 style, which supports only single inheritance (the most common type)</li>
+<li>R6 style, which supports only single inheritance (the most common
+type)</li>
 </ol>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
-<li>Python 2 style, which requires explicitly providing the class generator and instance</li>
+<li>Python 2 style, which requires explicitly providing the class
+generator and instance</li>
 </ol>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">super</span><span class="op">(</span><span class="va">NonNegative</span>, <span class="va">self</span><span class="op">)</span><span class="op">$</span><span class="fu">`__init__`</span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -257,73 +279,117 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">super</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">`__init__`</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </li>
-<li><p>When subclassing Keras base classes, it is generally your responsibility to call <code>super$initialize()</code> if you are masking a superclass initializer by providing your own <code>initialize</code> method.</p></li>
-<li><p>Passing <code>convert=FALSE</code> to <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">r_to_py()</a></code> will mean that all R methods will receive Python objects as arguments, and are expected to return Python objects. This allows for some features not available with <code>convert=TRUE</code>, namely, modifying some Python objects, like dictionaries or lists, in-place.</p></li>
-<li><p>Active bindings (methods supplied to <code>R6Class(active=...)</code>) are converted to Python <code>@property</code>-decorated methods.</p></li>
-<li><p>R6 classes with private methods or attributes are not supported.</p></li>
+<li><p>When subclassing Keras base classes, it is generally your
+responsibility to call <code>super$initialize()</code> if you are
+masking a superclass initializer by providing your own
+<code>initialize</code> method.</p></li>
+<li><p>Passing <code>convert=FALSE</code> to <code><a href="https://rstudio.github.io/reticulate/reference/r-py-conversion.html" class="external-link">r_to_py()</a></code> will
+mean that all R methods will receive Python objects as arguments, and
+are expected to return Python objects. This allows for some features not
+available with <code>convert=TRUE</code>, namely, modifying some Python
+objects, like dictionaries or lists, in-place.</p></li>
+<li><p>Active bindings (methods supplied to
+<code>R6Class(active=...)</code>) are converted to Python
+<code>@property</code>-decorated methods.</p></li>
+<li><p>R6 classes with private methods or attributes are not
+supported.</p></li>
 <li>
 <p>The argument supplied to <code>inherit</code> can be:</p>
 <ul>
 <li>missing or <code>NULL</code>
 </li>
 <li>a Python class generator</li>
-<li>an R6 class generator, as long as it can be converted to a Python class generator as well</li>
+<li>an R6 class generator, as long as it can be converted to a Python
+class generator as well</li>
 <li>a list of Python/R6 classes (for multiple inheritance)</li>
-<li>A list of superclasses, with optional additional keywords (e.g., <code>metaclass=</code>, only for advanced Python use cases)</li>
+<li>A list of superclasses, with optional additional keywords (e.g.,
+<code>metaclass=</code>, only for advanced Python use cases)</li>
 </ul>
 </li>
 </ul>
 </div>
-<div id="a-custom-constraint-py_class" class="section level3">
-<h3 class="hasAnchor">
-<a href="#a-custom-constraint-py_class" class="anchor"></a>A custom constraint (<code>%py_class%</code>)</h3>
-<p>As an alternative to <code>r_to_py(R6Class(...))</code>, we also provide <code>%py_class%</code>, a more concise alternative syntax for achieving the same outcome. <code>%py_class%</code> is heavily inspired by the Python <code>class</code> statement syntax, and is especially convenient when translating Python code to R. Translating the above example, you could write the same using <code>%py_class%</code>:</p>
+<div class="section level3">
+<h3 id="a-custom-constraint-py_class">A custom constraint (<code>%py_class%</code>)<a class="anchor" aria-label="anchor" href="#a-custom-constraint-py_class"></a>
+</h3>
+<p>As an alternative to <code>r_to_py(R6Class(...))</code>, we also
+provide <code>%py_class%</code>, a more concise alternative syntax for
+achieving the same outcome. <code>%py_class%</code> is heavily inspired
+by the Python <code>class</code> statement syntax, and is especially
+convenient when translating Python code to R. Translating the above
+example, you could write the same using <code>%py_class%</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">NonNegative</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">constraints</span><span class="op">$</span><span class="va">Constraint</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
+<code class="sourceCode R"><span class="fu">NonNegative</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">constraints</span><span class="op">$</span><span class="va">Constraint</span><span class="op">)</span> <span class="op"><a href="../../reference/grapes-py_class-grapes.html">%py_class%</a></span> <span class="op">{</span>
   <span class="st">"__call__"</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">w</span> <span class="op">*</span> <span class="fu"><a href="../../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">w</span> <span class="op">&gt;=</span> <span class="fl">0</span>, <span class="fu"><a href="../../reference/k_floatx.html">k_floatx</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">}</span></code></pre></div>
-<p>Notice, this is very similar to the equivalent <a href="https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/constraints/Constraint">Python code</a>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">class</span> NonNegative(tf.keras.constraints.Constraint):</a>
-<a class="sourceLine" id="cb6-2" title="2">    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, w):</a>
-<a class="sourceLine" id="cb6-3" title="3">        <span class="cf">return</span> w <span class="op">*</span> tf.cast(tf.math.greater_equal(w, <span class="fl">0.</span>), w.dtype)</a></code></pre></div>
-<p>Some (potentially surprising) notes about <code>%py_class%</code>:</p>
+<p>Notice, this is very similar to the equivalent <a href="https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/constraints/Constraint" class="external-link">Python
+code</a>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NonNegative(tf.keras.constraints.Constraint):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, w):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> w <span class="op">*</span> tf.cast(tf.math.greater_equal(w, <span class="fl">0.</span>), w.dtype)</span></code></pre></div>
+<p>Some (potentially surprising) notes about
+<code>%py_class%</code>:</p>
 <ul>
-<li><p>Just like the Python <code>class</code> statement, it assigns the constructed class in the current scope! (There is no need to write <code>NonNegative &lt;- ...</code>).</p></li>
+<li><p>Just like the Python <code>class</code> statement, it assigns the
+constructed class in the current scope! (There is no need to write
+<code>NonNegative &lt;- ...</code>).</p></li>
 <li>
 <p>The left hand side can be:</p>
 <ul>
 <li>A bare symbol, <code>ClassName</code>
 </li>
-<li>A pseudo-call, with superclasses and keywords as arguments: <code>ClassName(Superclass1, Superclass2, metaclass=my_metaclass)</code>
+<li>A pseudo-call, with superclasses and keywords as arguments:
+<code>ClassName(Superclass1, Superclass2, metaclass=my_metaclass)</code>
 </li>
 </ul>
 </li>
-<li><p>The right hand side is evaluated in a new environment to form the namespace for the class methods.</p></li>
-<li><p><code>%py_class%</code> objects can be safely defined at the top level of an R package. (see details about <code>delay_load</code> below)</p></li>
-<li><p>Two keywords are treated specially: <code>convert</code> and <code>delay_load</code>.</p></li>
-<li><p>If you want to call <code>r_to_py</code> with <code>convert=FALSE</code>, pass it as a keyword:</p></li>
+<li><p>The right hand side is evaluated in a new environment to form the
+namespace for the class methods.</p></li>
+<li><p><code>%py_class%</code> objects can be safely defined at the top
+level of an R package. (see details about <code>delay_load</code>
+below)</p></li>
+<li><p>Two keywords are treated specially: <code>convert</code> and
+<code>delay_load</code>.</p></li>
+<li><p>If you want to call <code>r_to_py</code> with
+<code>convert=FALSE</code>, pass it as a keyword:</p></li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">NonNegative</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">constraints</span><span class="op">$</span><span class="va">Constraint</span>, convert<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span> <span class="va">...</span> <span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">NonNegative</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">constraints</span><span class="op">$</span><span class="va">Constraint</span>, convert<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../../reference/grapes-py_class-grapes.html">%py_class%</a></span> <span class="op">{</span> <span class="va">...</span> <span class="op">}</span></code></pre></div>
 <ul>
-<li><p>You can delay creating the python type object until this first time a class instance is created by passing <code>delay_load=TRUE</code>. The default value is <code>FALSE</code> for most contexts, but <code>TRUE</code> if you are in an R package. (The actual test performed is <code>identical(topenv(), globalenv())</code>). If a <code>%py_class%</code> type object is delayed, it will display <code>"&lt;&lt;R6type&gt;.ClassName&gt; (delayed)"</code> when printed.</p></li>
-<li><p>An additional convenience is that if the first expression of a function body or the class body is a literal character string, it is automatically taken as the <code>__doc__</code> attribute of the class or method. The doc string will then be visible to both python and R tools e.g. <code><a href="https://rdrr.io/pkg/reticulate/man/py_help.html">reticulate::py_help()</a></code>. See <code><a href="../../reference/%py_class%.html">?py_class</a></code> for an example.</p></li>
+<li><p>You can delay creating the python type object until this first
+time a class instance is created by passing
+<code>delay_load=TRUE</code>. The default value is <code>FALSE</code>
+for most contexts, but <code>TRUE</code> if you are in an R package.
+(The actual test performed is
+<code>identical(topenv(), globalenv())</code>). If a
+<code>%py_class%</code> type object is delayed, it will display
+<code>"&lt;&lt;R6type&gt;.ClassName&gt; (delayed)"</code> when
+printed.</p></li>
+<li><p>An additional convenience is that if the first expression of a
+function body or the class body is a literal character string, it is
+automatically taken as the <code>__doc__</code> attribute of the class
+or method. The doc string will then be visible to both python and R
+tools e.g. <code><a href="https://rstudio.github.io/reticulate/reference/py_help.html" class="external-link">reticulate::py_help()</a></code>. See
+<code><a href="../../reference/grapes-py_class-grapes.html">?py_class</a></code> for an example.</p></li>
 </ul>
-<p>In all other regards, <code>%py_class%</code> is equivalent to <code>r_to_py(R6Class())</code> (indeed, under the hood, they do the same thing).</p>
+<p>In all other regards, <code>%py_class%</code> is equivalent to
+<code>r_to_py(R6Class())</code> (indeed, under the hood, they do the
+same thing).</p>
 </div>
-<div id="a-custom-layer-r6" class="section level3">
-<h3 class="hasAnchor">
-<a href="#a-custom-layer-r6" class="anchor"></a>A custom layer (R6)</h3>
-<p>The same pattern can be extended to all sorts of keras objects. For example, a custom layer can be written by subclassing the base Keras Layer:</p>
+<div class="section level3">
+<h3 id="a-custom-layer-r6">A custom layer (R6)<a class="anchor" aria-label="anchor" href="#a-custom-layer-r6"></a>
+</h3>
+<p>The same pattern can be extended to all sorts of keras objects. For
+example, a custom layer can be written by subclassing the base Keras
+Layer:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">CustomLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">r_to_py</a></span><span class="op">(</span><span class="fu">R6</span><span class="fu">::</span><span class="kw"><a href="https://r6.r-lib.org/reference/R6Class.html">R6Class</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">CustomLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/r-py-conversion.html" class="external-link">r_to_py</a></span><span class="op">(</span><span class="fu">R6</span><span class="fu">::</span><span class="kw"><a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6Class</a></span><span class="op">(</span>
 
   classname <span class="op">=</span> <span class="st">"CustomLayer"</span>,
   inherit <span class="op">=</span> <span class="va">keras</span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span>,
 
-  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
     initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">output_dim</span><span class="op">)</span> <span class="op">{</span>
       <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span> <span class="op">&lt;-</span> <span class="va">output_dim</span>
     <span class="op">}</span>,
@@ -331,7 +397,7 @@
     build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span>
       <span class="va">self</span><span class="op">$</span><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>
         name <span class="op">=</span> <span class="st">'kernel'</span>,
-        shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span><span class="op">)</span>,
+        shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span><span class="op">)</span>,
         initializer <span class="op">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span><span class="op">(</span><span class="op">)</span>,
         trainable <span class="op">=</span> <span class="cn">TRUE</span>
       <span class="op">)</span>
@@ -342,17 +408,17 @@
     <span class="op">}</span>,
 
     compute_output_shape <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span><span class="op">)</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span><span class="op">)</span>
     <span class="op">}</span>
   <span class="op">)</span>
 <span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="a-custom-layer-py_class" class="section level3">
-<h3 class="hasAnchor">
-<a href="#a-custom-layer-py_class" class="anchor"></a>A custom layer (<code>%py_class%</code>)</h3>
+<div class="section level3">
+<h3 id="a-custom-layer-py_class">A custom layer (<code>%py_class%</code>)<a class="anchor" aria-label="anchor" href="#a-custom-layer-py_class"></a>
+</h3>
 <p>or using <code>%py_class%</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">CustomLayer</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
+<code class="sourceCode R"><span class="fu">CustomLayer</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span><span class="op">)</span> <span class="op"><a href="../../reference/grapes-py_class-grapes.html">%py_class%</a></span> <span class="op">{</span>
 
   <span class="va">initialize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">output_dim</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span> <span class="op">&lt;-</span> <span class="va">output_dim</span>
@@ -361,7 +427,7 @@
   <span class="va">build</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">self</span><span class="op">$</span><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>
       name <span class="op">=</span> <span class="st">'kernel'</span>,
-      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span><span class="op">)</span>,
+      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span><span class="op">)</span>,
       initializer <span class="op">=</span> <span class="fu"><a href="../../reference/initializer_random_normal.html">initializer_random_normal</a></span><span class="op">(</span><span class="op">)</span>,
       trainable <span class="op">=</span> <span class="cn">TRUE</span>
     <span class="op">)</span>
@@ -372,7 +438,7 @@
   <span class="op">}</span>
 
   <span class="va">compute_output_shape</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">}</span></code></pre></div>
 </div>
@@ -390,11 +456,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
+  <p></p>
+<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -402,6 +470,8 @@
 
   
 
+
+  
 
   </body>
 </html>

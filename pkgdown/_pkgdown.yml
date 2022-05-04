@@ -344,6 +344,12 @@ reference:
       - optimizer_adamax
       - optimizer_nadam
 
+
+  - title: "Learning Rate Schedules"
+    contents:
+      - starts_with("learning_rate_schedule_")
+      - new_learning_rate_schedule_class
+
   - title: "Callbacks"
     contents:
       - callback_progbar_logger
@@ -385,6 +391,9 @@ reference:
   - title: "Utils"
     contents:
       - plot.keras_training_history
+      - plot.keras.engine.training.Model
+      - zip_lists
+      - mark_active
       - timeseries_generator
       - to_categorical
       - normalize

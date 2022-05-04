@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
   <a href="../../index.html">Home</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -76,7 +78,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,7 +104,8 @@
       <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Using Keras</li>
+    </li>
+<li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -131,7 +134,8 @@
       <a href="../../articles/why_use_keras.html">Why Use Keras?</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Advanced</li>
+    </li>
+<li class="dropdown-header">Advanced</li>
     <li>
       <a href="../../articles/eager_guide.html">Eager Execution</a>
     </li>
@@ -170,7 +174,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rstudio/keras/">
+  <a href="https://github.com/rstudio/keras/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -191,7 +195,7 @@
       <h1 data-toc-skip>imdb_fasttext</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/imdb_fasttext.Rmd"><code>vignettes/examples/imdb_fasttext.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/examples/imdb_fasttext.Rmd" class="external-link"><code>vignettes/examples/imdb_fasttext.Rmd</code></a></small>
       <div class="hidden name"><code>imdb_fasttext.Rmd</code></div>
 
     </div>
@@ -199,33 +203,37 @@
     
     
 <div class="source-ref">
-<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/main/vignettes/examples/imdb_fasttext.R" class="uri">https://github.com/rstudio/keras/blob/main/vignettes/examples/imdb_fasttext.R</a></p>
+<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/main/vignettes/examples/imdb_fasttext.R" class="external-link uri">https://github.com/rstudio/keras/blob/main/vignettes/examples/imdb_fasttext.R</a></p>
 </div>
-<p>This example demonstrates the use of fasttext for text classification</p>
-<p>Based on Joulin et al’s paper: “Bags of Tricks for Efficient Text Classification” <a href="https://arxiv.org/abs/1607.01759" class="uri">https://arxiv.org/abs/1607.01759</a></p>
-<p>Results on IMDB datasets with uni and bi-gram embeddings: Uni-gram: 0.8813 test accuracy after 5 epochs. 8s/epoch on i7 CPU Bi-gram : 0.9056 test accuracy after 5 epochs. 2s/epoch on GTx 980M GPU</p>
+<p>This example demonstrates the use of fasttext for text
+classification</p>
+<p>Based on Joulin et al’s paper: “Bags of Tricks for Efficient Text
+Classification” <a href="https://arxiv.org/abs/1607.01759" class="external-link uri">https://arxiv.org/abs/1607.01759</a></p>
+<p>Results on IMDB datasets with uni and bi-gram embeddings: Uni-gram:
+0.8813 test accuracy after 5 epochs. 8s/epoch on i7 CPU Bi-gram : 0.9056
+test accuracy after 5 epochs. 2s/epoch on GTx 980M GPU</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org" class="external-link">purrr</a></span><span class="op">)</span>
 
 <span class="co"># Function Definitions ----------------------------------------------------</span>
 
 <span class="va">create_ngram_set</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_list</span>, <span class="va">ngram_value</span> <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">{</span>
-  <span class="va">indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">input_list</span><span class="op">)</span> <span class="op">-</span> <span class="va">ngram_value</span><span class="op">)</span>, <span class="op">~</span><span class="fl">1</span><span class="op">:</span><span class="va">ngram_value</span> <span class="op">+</span> <span class="va">.x</span><span class="op">)</span>
-  <span class="va">indices</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="op">~</span><span class="va">input_list</span><span class="op">[</span><span class="va">.x</span><span class="op">]</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="va">indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">input_list</span><span class="op">)</span> <span class="op">-</span> <span class="va">ngram_value</span><span class="op">)</span>, <span class="op">~</span><span class="fl">1</span><span class="op">:</span><span class="va">ngram_value</span> <span class="op">+</span> <span class="va">.x</span><span class="op">)</span>
+  <span class="va">indices</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_chr</a></span><span class="op">(</span><span class="op">~</span><span class="va">input_list</span><span class="op">[</span><span class="va">.x</span><span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="va">add_ngram</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sequences</span>, <span class="va">token_indice</span>, <span class="va">ngram_range</span> <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">{</span>
-  <span class="va">ngrams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+  <span class="va">ngrams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>
     <span class="va">sequences</span>, 
     <span class="va">create_ngram_set</span>, ngram_value <span class="op">=</span> <span class="va">ngram_range</span>
   <span class="op">)</span>
   
-  <span class="va">seqs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span><span class="op">(</span><span class="va">sequences</span>, <span class="va">ngrams</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">{</span>
-    <span class="va">tokens</span> <span class="op">&lt;-</span> <span class="va">token_indice</span><span class="op">$</span><span class="va">token</span><span class="op">[</span><span class="va">token_indice</span><span class="op">$</span><span class="va">ngrams</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">y</span><span class="op">]</span>  
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">tokens</span><span class="op">)</span>
+  <span class="va">seqs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">map2</a></span><span class="op">(</span><span class="va">sequences</span>, <span class="va">ngrams</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">{</span>
+    <span class="va">tokens</span> <span class="op">&lt;-</span> <span class="va">token_indice</span><span class="op">$</span><span class="va">token</span><span class="op">[</span><span class="va">token_indice</span><span class="op">$</span><span class="va">ngrams</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">y</span><span class="op">]</span>  
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">tokens</span><span class="op">)</span>
   <span class="op">}</span><span class="op">)</span>
   
   <span class="va">seqs</span>
@@ -249,32 +257,32 @@
 <span class="va">imdb_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataset_imdb.html">dataset_imdb</a></span><span class="op">(</span>num_words <span class="op">=</span> <span class="va">max_features</span><span class="op">)</span>
 
 <span class="co"># Train sequences</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">imdb_data</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Average train sequence length: %f"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">imdb_data</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>, <span class="va">length</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">imdb_data</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Average train sequence length: %f"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_int</a></span><span class="op">(</span><span class="va">imdb_data</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>, <span class="va">length</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Test sequences</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">imdb_data</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Average test sequence length: %f"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">imdb_data</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>, <span class="va">length</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">imdb_data</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Average test sequence length: %f"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_int</a></span><span class="op">(</span><span class="va">imdb_data</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>, <span class="va">length</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
 <span class="kw">if</span><span class="op">(</span><span class="va">ngram_range</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span>
   
   <span class="co"># Create set of unique n-gram from the training set.</span>
-  <span class="va">ngrams</span> <span class="op">&lt;-</span> <span class="va">imdb_data</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">create_ngram_set</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="va">ngrams</span> <span class="op">&lt;-</span> <span class="va">imdb_data</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">create_ngram_set</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span>
 
   <span class="co"># Dictionary mapping n-gram token to a unique integer</span>
     <span class="co"># Integer values are greater than max_features in order</span>
     <span class="co"># to avoid collision with existing features</span>
-  <span class="va">token_indice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  <span class="va">token_indice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
     ngrams <span class="op">=</span> <span class="va">ngrams</span>,
-    token  <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">ngrams</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="va">max_features</span><span class="op">)</span>, 
+    token  <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ngrams</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="va">max_features</span><span class="op">)</span>, 
     stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>
   <span class="op">)</span>
   
   <span class="co"># max_features is the highest integer that could be found in the dataset</span>
-  <span class="va">max_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">token_indice</span><span class="op">$</span><span class="va">token</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span>
+  <span class="va">max_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">token_indice</span><span class="op">$</span><span class="va">token</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span>
   
   <span class="co"># Augmenting x_train and x_test with n-grams features</span>
   <span class="va">imdb_data</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">add_ngram</span><span class="op">(</span><span class="va">imdb_data</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>, <span class="va">token_indice</span>, <span class="va">ngram_range</span><span class="op">)</span>
@@ -290,15 +298,15 @@
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>
     input_dim <span class="op">=</span> <span class="va">max_features</span>, output_dim <span class="op">=</span> <span class="va">embedding_dims</span>, 
     input_length <span class="op">=</span> <span class="va">maxlen</span>
-    <span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/layer_global_average_pooling_1d.html">layer_global_average_pooling_1d</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+    <span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_global_average_pooling_1d.html">layer_global_average_pooling_1d</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span>, activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,
   optimizer <span class="op">=</span> <span class="st">"adam"</span>,
   metrics <span class="op">=</span> <span class="st">"accuracy"</span>
@@ -307,11 +315,11 @@
 
 <span class="co"># Fitting -----------------------------------------------------------------</span>
 
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span>
   <span class="va">imdb_data</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>, <span class="va">imdb_data</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>, 
   batch_size <span class="op">=</span> <span class="va">batch_size</span>,
   epochs <span class="op">=</span> <span class="va">epochs</span>,
-  validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">imdb_data</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>, <span class="va">imdb_data</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span><span class="op">)</span>
+  validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">imdb_data</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>, <span class="va">imdb_data</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
   </div>
 
@@ -324,11 +332,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
+  <p></p>
+<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -336,6 +346,8 @@
 
   
 
+
+  
 
   </body>
 </html>
