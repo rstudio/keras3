@@ -1462,7 +1462,7 @@ function(x,
   if (py_is_null_xptr(x))
     return("<pointer: 0x0>")
 
-  args <- capture_args(match.call(), ignore = "x")
+  args <- capture_args(match.call(), ignore = c("x", "compact"))
 
   # ensure `line_length` and other args captured, even if not passed by user
   args$show_trainable <- show_trainable
