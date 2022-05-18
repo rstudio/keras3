@@ -68,7 +68,7 @@ default_extra_packages <- function(tensorflow_version) {
   names(pkgs) <- pkgs
   v <- tensorflow_version
 
-  if(grepl("nightly", v))
+  if(grepl("nightly|release", v))
     return(pkgs)
 
   ## extract just the version

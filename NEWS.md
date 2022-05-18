@@ -60,6 +60,8 @@
 
 - KerasTensor objects (e.g, returned by `layer_input()`) now inherit from `"tensorflow.tensor"`.
 
+- `install_keras()` now accepts `version = "release-cpu"` as a valid specification.
+
 # keras 2.8.0
 
 - Breaking change: The semantics of passing a named list to `keras_model()` have changed.
