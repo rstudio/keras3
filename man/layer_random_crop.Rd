@@ -50,6 +50,7 @@ Output shape:
 }
 
 Other image augmentation layers: 
+\code{\link{layer_random_brightness}()},
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_flip}()},
 \code{\link{layer_random_height}()},
@@ -65,6 +66,7 @@ Other preprocessing layers:
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
+\code{\link{layer_random_brightness}()},
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_flip}()},
 \code{\link{layer_random_height}()},

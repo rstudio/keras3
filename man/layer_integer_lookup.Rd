@@ -139,6 +139,7 @@ Other preprocessing layers:
 \code{\link{layer_discretization}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_normalization}()},
+\code{\link{layer_random_brightness}()},
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},

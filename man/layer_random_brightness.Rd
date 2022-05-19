@@ -59,4 +59,36 @@ For an overview and full list of preprocessing layers, see the preprocessing
 \item \url{https://www.tensorflow.org/versions/r2.9/api_docs/python/keras/layers/preprocessing/image_preprocessing/RandomBrightness}
 \item \url{https://keras.io/api/layers}
 }
+
+Other image augmentation layers: 
+\code{\link{layer_random_contrast}()},
+\code{\link{layer_random_crop}()},
+\code{\link{layer_random_flip}()},
+\code{\link{layer_random_height}()},
+\code{\link{layer_random_rotation}()},
+\code{\link{layer_random_translation}()},
+\code{\link{layer_random_width}()},
+\code{\link{layer_random_zoom}()}
+
+Other preprocessing layers: 
+\code{\link{layer_category_encoding}()},
+\code{\link{layer_center_crop}()},
+\code{\link{layer_discretization}()},
+\code{\link{layer_hashing}()},
+\code{\link{layer_integer_lookup}()},
+\code{\link{layer_normalization}()},
+\code{\link{layer_random_contrast}()},
+\code{\link{layer_random_crop}()},
+\code{\link{layer_random_flip}()},
+\code{\link{layer_random_height}()},
+\code{\link{layer_random_rotation}()},
+\code{\link{layer_random_translation}()},
+\code{\link{layer_random_width}()},
+\code{\link{layer_random_zoom}()},
+\code{\link{layer_rescaling}()},
+\code{\link{layer_resizing}()},
+\code{\link{layer_string_lookup}()},
+\code{\link{layer_text_vectorization}()}
 }
+\concept{image augmentation layers}
+\concept{preprocessing layers}

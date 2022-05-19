@@ -55,6 +55,7 @@ By default, this layer is inactive during inference.
 }
 
 Other image augmentation layers: 
+\code{\link{layer_random_brightness}()},
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
@@ -70,6 +71,7 @@ Other preprocessing layers:
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
+\code{\link{layer_random_brightness}()},
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
