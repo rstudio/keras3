@@ -95,6 +95,10 @@
 - `print` and related methods for models (`format`, `summary`) now accept 
    a `width` argument.
 
+- `evaluate()`, `fit()`, and `predict()` methods for keras Models now default 
+  to `verbose = "auto"`, with verbosity adjusted appropriatly based on calls to 
+  `keras$utils$disable_interactive_logging()`, and contexts like 
+  `ParameterServerStrategy`.
 
 - `install_keras()` now accepts `version = "release-cpu"` as a valid specification.
 

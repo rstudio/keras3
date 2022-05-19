@@ -694,7 +694,7 @@ resolve_main_thread_generators <- function(x, callback_type = "on_train_batch_be
 #' @export
 fit.keras.engine.training.Model <-
   function(object, x = NULL, y = NULL, batch_size=NULL, epochs=10,
-           verbose=getOption("keras.fit_verbose", default = 1), callbacks=NULL,
+           verbose=getOption("keras.fit_verbose", default = "auto"), callbacks=NULL,
            view_metrics = getOption("keras.view_metrics", default = "auto"),
            validation_split=0.0, validation_data=NULL, shuffle=TRUE,
            class_weight=NULL, sample_weight=NULL, initial_epoch=0,
@@ -715,7 +715,7 @@ fit.keras.engine.training.Model <-
   args <- list(
     batch_size = as_nullable_integer(batch_size),
     epochs = as.integer(epochs),
-    verbose = as.integer(verbose),
+    verbose = as_model_verbose_arg(verbose),
     validation_split = validation_split,
     shuffle = shuffle,
     class_weight = as_class_weight(class_weight),
@@ -789,7 +789,7 @@ fit.keras.engine.training.Model <-
 #'
 #' @export
 evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, batch_size = NULL,
-                                                 verbose=1, sample_weight = NULL, steps = NULL,
+                                                 verbose="auto", sample_weight = NULL, steps = NULL,
                                                  callbacks = NULL, ...) {
 
   # defaults
@@ -799,7 +799,7 @@ evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, bat
   # args
   args <- list(
     batch_size = as_nullable_integer(batch_size),
-    verbose = as.integer(verbose),
+    verbose = as_model_verbose_arg(verbose),
     sample_weight = sample_weight
   )
 
@@ -856,7 +856,9 @@ resolve_callbacks <- function(args, callbacks) {
 #'   pass a `tfdataset` or a generator returning a list with `(inputs, targets)` or
 #'   `(inputs, targets, sample_weights)`.
 #' @param batch_size Integer. If unspecified, it will default to 32.
-#' @param verbose Verbosity mode, 0 or 1.
+#' @param verbose Verbosity mode, 0, 1, 2, or "auto". "auto" defaults to 1
+#'   for for most cases and defaults to `verbose=2` when used with
+#'   ParameterServerStrategy or with interactive logging disabled.
 #' @param callbacks List of callbacks to apply during prediction.
 #' @param ... Unused
 #'
@@ -867,18 +869,26 @@ resolve_callbacks <- function(args, callbacks) {
 #'
 #' @importFrom stats predict
 #' @export
-predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verbose=0, steps=NULL,
-                                                callbacks = NULL,...) {
+predict.keras.engine.training.Model <-
+function(object,
+         x,
+         batch_size = NULL,
+         verbose = "auto",
+         steps = NULL,
+         callbacks = NULL,
+         ...) {
 
   # defaults
   if (is.null(batch_size) && is.null(steps) &&!is_tensorflow_dataset(x))
     batch_size <- 32L
 
+
   # args
   args <- list(
     batch_size = as_nullable_integer(batch_size),
-    verbose = as.integer(verbose)
+    verbose = as_model_verbose_arg(verbose, 0L)
   )
+
 
   args <- append(args, resolve_input_data(x))
 
@@ -900,6 +910,12 @@ predict.keras.engine.training.Model <- function(object, x, batch_size=NULL, verb
 
   # call predict
   do.call(object$predict, args)
+}
+
+as_model_verbose_arg <- function(x, old_default = 1L) {
+  if(tf_version() < "2.9" && x == "auto")
+    return(old_default)
+  if(x == "auto") x else as.integer(x)
 }
 
 

@@ -18,7 +18,9 @@ pass a \code{tfdataset} or a generator returning a list with \verb{(inputs, targ
 
 \item{batch_size}{Integer. If unspecified, it will default to 32.}
 
-\item{verbose}{Verbosity mode, 0 or 1.}
+\item{verbose}{Verbosity mode, 0, 1, 2, or "auto". "auto" defaults to 1
+for for most cases and defaults to \code{verbose=2} when used with
+ParameterServerStrategy or with interactive logging disabled.}
 
 \item{steps}{Total number of steps (batches of samples) before declaring the
 evaluation round finished. The default \code{NULL} is equal to the number of

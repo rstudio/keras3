@@ -9,7 +9,7 @@
   x = NULL,
   y = NULL,
   batch_size = NULL,
-  verbose = 1,
+  verbose = "auto",
   sample_weight = NULL,
   steps = NULL,
   callbacks = NULL,
