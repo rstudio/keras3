@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
   <a href="../../index.html">Home</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -76,7 +78,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,7 +104,8 @@
       <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Using Keras</li>
+    </li>
+<li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -131,7 +134,8 @@
       <a href="../../articles/why_use_keras.html">Why Use Keras?</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Advanced</li>
+    </li>
+<li class="dropdown-header">Advanced</li>
     <li>
       <a href="../../articles/eager_guide.html">Eager Execution</a>
     </li>
@@ -170,7 +174,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rstudio/keras/">
+  <a href="https://github.com/rstudio/keras/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -191,7 +195,7 @@
       <h1 data-toc-skip>text_explanation_lime</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/text_explanation_lime.Rmd"><code>vignettes/examples/text_explanation_lime.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/examples/text_explanation_lime.Rmd" class="external-link"><code>vignettes/examples/text_explanation_lime.Rmd</code></a></small>
       <div class="hidden name"><code>text_explanation_lime.Rmd</code></div>
 
     </div>
@@ -199,31 +203,31 @@
     
     
 <div class="source-ref">
-<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/main/vignettes/examples/text_explanation_lime.R" class="uri">https://github.com/rstudio/keras/blob/main/vignettes/examples/text_explanation_lime.R</a></p>
+<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/main/vignettes/examples/text_explanation_lime.R" class="external-link uri">https://github.com/rstudio/keras/blob/main/vignettes/examples/text_explanation_lime.R</a></p>
 </div>
 <p>This example shows how to use lime to explain text data.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
 
 <span class="co"># Download and unzip data</span>
 
 <span class="va">activity_url</span> <span class="op">&lt;-</span> <span class="st">"https://archive.ics.uci.edu/ml/machine-learning-databases/00461/drugLib_raw.zip"</span>
-<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">activity_url</span>, <span class="va">temp</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/unzip.html">unzip</a></span><span class="op">(</span><span class="va">temp</span>, <span class="st">"drugLibTest_raw.tsv"</span><span class="op">)</span>
+<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="va">activity_url</span>, <span class="va">temp</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="va">temp</span>, <span class="st">"drugLibTest_raw.tsv"</span><span class="op">)</span>
 
 
 <span class="co"># Read dataset</span>
 
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="st">'drugLibTest_raw.tsv'</span>,delim <span class="op">=</span> <span class="st">'\t'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_delim</a></span><span class="op">(</span><span class="st">'drugLibTest_raw.tsv'</span>,delim <span class="op">=</span> <span class="st">'\t'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>
 
 <span class="co"># Select only rating and text from the whole dataset</span>
 
-<span class="va">df</span> <span class="op">=</span> <span class="va">df</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">rating</span>,<span class="va">commentsReview</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>rating <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">rating</span> <span class="op">&gt;=</span> <span class="fl">8</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">=</span> <span class="va">df</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rating</span>,<span class="va">commentsReview</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>rating <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="va">rating</span> <span class="op">&gt;=</span> <span class="fl">8</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># This is our text</span>
 <span class="va">text</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">commentsReview</span>
@@ -240,7 +244,7 @@
 
 <span class="co"># Then, we need to fit the tokenizer object to our text data</span>
 
-<span class="va">tokenizer</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/fit_text_tokenizer.html">fit_text_tokenizer</a></span><span class="op">(</span><span class="va">text</span><span class="op">)</span>
+<span class="va">tokenizer</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/fit_text_tokenizer.html">fit_text_tokenizer</a></span><span class="op">(</span><span class="va">text</span><span class="op">)</span>
 
 <span class="co"># Via tokenizer object you can check word indices, word counts and other interesting properties.</span>
 
@@ -250,7 +254,7 @@
 <span class="co"># Finally, we can replace words in dataset with integers</span>
 <span class="va">text_seqs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/texts_to_sequences.html">texts_to_sequences</a></span><span class="op">(</span><span class="va">tokenizer</span>, <span class="va">text</span><span class="op">)</span>
 
-<span class="va">text_seqs</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
+<span class="va">text_seqs</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
 
 <span class="co"># Define the parameters of the keras model</span>
 
@@ -263,36 +267,36 @@
 <span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">15</span>
 
 <span class="co"># As a final step, restrict the maximum length of all sequences and create a matrix as input for model</span>
-<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">text_seqs</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span>maxlen <span class="op">=</span> <span class="va">maxlen</span><span class="op">)</span>
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">text_seqs</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span>maxlen <span class="op">=</span> <span class="va">maxlen</span><span class="op">)</span>
 
 <span class="co"># Lets print the first 2 rows and see that max length of first 2 sequences equals to 15</span>
 <span class="va">x_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="op">]</span>
 
 <span class="co"># Create a model</span>
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span><span class="va">max_features</span>, <span class="va">embedding_dims</span>, input_length <span class="op">=</span> <span class="va">maxlen</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.2</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span><span class="va">max_features</span>, <span class="va">embedding_dims</span>, input_length <span class="op">=</span> <span class="va">maxlen</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.2</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_conv_1d.html">layer_conv_1d</a></span><span class="op">(</span>
     <span class="va">filters</span>, <span class="va">kernel_size</span>, 
     padding <span class="op">=</span> <span class="st">"valid"</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, strides <span class="op">=</span> <span class="fl">1</span>
-  <span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/layer_global_max_pooling_1d.html">layer_global_max_pooling_1d</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="va">hidden_dims</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.2</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_global_max_pooling_1d.html">layer_global_max_pooling_1d</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="va">hidden_dims</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.2</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"sigmoid"</span><span class="op">)</span>
 
 <span class="co"># Compile</span>
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,
   optimizer <span class="op">=</span> <span class="st">"adam"</span>,
   metrics <span class="op">=</span> <span class="st">"accuracy"</span>
 <span class="op">)</span>
 
 <span class="co"># Run</span>
-<span class="va">hist</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">hist</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span>
     <span class="va">x_train</span>,
     <span class="va">y_train</span>,
     batch_size <span class="op">=</span> <span class="va">batch_size</span>,
@@ -309,14 +313,14 @@
 
 <span class="va">get_embedding_explanation</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">text</span><span class="op">)</span> <span class="op">{</span>
   
-  <span class="va">tokenizer</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/fit_text_tokenizer.html">fit_text_tokenizer</a></span><span class="op">(</span><span class="va">text</span><span class="op">)</span>
+  <span class="va">tokenizer</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/fit_text_tokenizer.html">fit_text_tokenizer</a></span><span class="op">(</span><span class="va">text</span><span class="op">)</span>
   
   <span class="va">text_to_seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/texts_to_sequences.html">texts_to_sequences</a></span><span class="op">(</span><span class="va">tokenizer</span>, <span class="va">text</span><span class="op">)</span>
-  <span class="va">sentences</span> <span class="op">&lt;-</span> <span class="va">text_to_seq</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span>maxlen <span class="op">=</span> <span class="va">maxlen</span><span class="op">)</span>
+  <span class="va">sentences</span> <span class="op">&lt;-</span> <span class="va">text_to_seq</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span>maxlen <span class="op">=</span> <span class="va">maxlen</span><span class="op">)</span>
 <span class="op">}</span>
 
 
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lime.data-imaginist.com">lime</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lime.data-imaginist.com" class="external-link">lime</a></span><span class="op">)</span>
 
 <span class="co"># Lets choose some text (3 rows) to explain</span>
 <span class="va">sentence_to_explain</span> <span class="op">&lt;-</span> <span class="va">train_sentences</span><span class="op">$</span><span class="va">text</span><span class="op">[</span><span class="fl">15</span><span class="op">:</span><span class="fl">17</span><span class="op">]</span>
@@ -328,7 +332,7 @@
 <span class="va">explainer</span> <span class="op">&lt;-</span> <span class="fu">lime</span><span class="op">(</span><span class="va">sentence_to_explain</span>, model <span class="op">=</span> <span class="va">model</span>, preprocess <span class="op">=</span> <span class="va">get_embedding_explanation</span><span class="op">)</span>
 
 <span class="co"># Get explanation for the first 10 words</span>
-<span class="va">explanation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/explain.html">explain</a></span><span class="op">(</span><span class="va">sentence_to_explain</span>, <span class="va">explainer</span>, n_labels <span class="op">=</span> <span class="fl">1</span>, n_features <span class="op">=</span> <span class="fl">10</span>,n_permutations <span class="op">=</span> <span class="fl">1e4</span><span class="op">)</span>
+<span class="va">explanation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/explain.html" class="external-link">explain</a></span><span class="op">(</span><span class="va">sentence_to_explain</span>, <span class="va">explainer</span>, n_labels <span class="op">=</span> <span class="fl">1</span>, n_features <span class="op">=</span> <span class="fl">10</span>,n_permutations <span class="op">=</span> <span class="fl">1e4</span><span class="op">)</span>
 
 
 <span class="co"># Different graphical ways to show the same information</span>
@@ -349,11 +353,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
+  <p></p>
+<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -361,6 +367,8 @@
 
   
 
+
+  
 
   </body>
 </html>

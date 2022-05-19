@@ -1,6 +1,6 @@
 #' (Deprecated) Create a custom Layer
 #'
-#' This function is maintained but deprecated. Please use `new_layer_type()` or
+#' This function is maintained but deprecated. Please use `new_layer_class()` or
 #' `%py_class%` to define custom layers.
 #'
 #' @param classname the name of the custom Layer.

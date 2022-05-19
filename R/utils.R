@@ -564,10 +564,10 @@ function(x,
       stop(e)
     }
   )
-  if(is.null(to_file))
+  if(!is.null(to_file))
     return(invisible())
 
-  img <- png::readPNG(to_file, native = TRUE)
+  img <- png::readPNG(args$to_file, native = TRUE)
   graphics::plot.new()
   graphics::plot.window(xlim = c(0, ncol(img)), ylim = c(0, nrow(img)),
                         asp = 1, yaxs = "i", xaxs = "i")
@@ -654,3 +654,18 @@ as_r_value <- function (x) {
     py_to_r(x)
   else x
 }
+
+
+# internal `[` method that ensures functions in this namespace use one-based
+# indexing in case user has a global option set for zero-based indexing.
+`[.tensorflow.tensor` <-
+  getS3method("[", "tensorflow.tensor", envir = asNamespace("tensorflow"))
+formals(`[.tensorflow.tensor`)$style <- "R"
+formals(`[.tensorflow.tensor`)$options <-
+  tensorflow::tf_extract_opts(
+    one_based = TRUE,
+    inclusive_stop = TRUE,
+    disallow_out_of_bounds = TRUE,
+    warn_tensors_passed_asis = FALSE,
+    warn_negatives_pythonic = FALSE
+  )

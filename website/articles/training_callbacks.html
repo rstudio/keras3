@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
   <a href="../index.html">Home</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -76,7 +78,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,7 +104,8 @@
       <a href="../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Using Keras</li>
+    </li>
+<li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -131,7 +134,8 @@
       <a href="../articles/why_use_keras.html">Why Use Keras?</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Advanced</li>
+    </li>
+<li class="dropdown-header">Advanced</li>
     <li>
       <a href="../articles/eager_guide.html">Eager Execution</a>
     </li>
@@ -170,7 +174,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rstudio/keras/">
+  <a href="https://github.com/rstudio/keras/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -191,49 +195,54 @@
       <h1 data-toc-skip>Training Callbacks</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/training_callbacks.Rmd"><code>vignettes/training_callbacks.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/training_callbacks.Rmd" class="external-link"><code>vignettes/training_callbacks.Rmd</code></a></small>
       <div class="hidden name"><code>training_callbacks.Rmd</code></div>
 
     </div>
 
     
     
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
-<p>A callback is a set of functions to be applied at given stages of the training procedure. You can use callbacks to get a view on internal states and statistics of the model during training. You can pass a list of callbacks (as the keyword argument <code>callbacks</code>) to the <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> function. The relevant methods of the callbacks will then be called at each stage of the training.</p>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>A callback is a set of functions to be applied at given stages of the
+training procedure. You can use callbacks to get a view on internal
+states and statistics of the model during training. You can pass a list
+of callbacks (as the keyword argument <code>callbacks</code>) to the
+<code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> function. The relevant methods of the callbacks will
+then be called at each stage of the training.</p>
 <p>For example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span>
 
 <span class="co"># generate dummy training data</span>
-<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">*</span><span class="fl">784</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">784</span><span class="op">)</span>
-<span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">*</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">9</span><span class="op">)</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html" class="external-link">rexp</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">*</span><span class="fl">784</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">784</span><span class="op">)</span>
+<span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">*</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">9</span><span class="op">)</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1000</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="co"># create model</span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> 
 
 <span class="co"># add layers and compile</span>
-<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">32</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">'softmax'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">32</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">'softmax'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>
     loss<span class="op">=</span><span class="st">'binary_crossentropy'</span>,
     optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span><span class="op">(</span><span class="op">)</span>,
     metrics<span class="op">=</span><span class="st">'accuracy'</span>
   <span class="op">)</span>
   
 <span class="co"># fit with callbacks</span>
-<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">labels</span>, callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">labels</span>, callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
   <span class="fu"><a href="../reference/callback_model_checkpoint.html">callback_model_checkpoint</a></span><span class="op">(</span><span class="st">"checkpoints.h5"</span><span class="op">)</span>,
   <span class="fu"><a href="../reference/callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau</a></span><span class="op">(</span>monitor <span class="op">=</span> <span class="st">"val_loss"</span>, factor <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
 <span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="built-in-callbacks" class="section level2">
-<h2 class="hasAnchor">
-<a href="#built-in-callbacks" class="anchor"></a>Built in Callbacks</h2>
+<div class="section level2">
+<h2 id="built-in-callbacks">Built in Callbacks<a class="anchor" aria-label="anchor" href="#built-in-callbacks"></a>
+</h2>
 <p>The following built-in callbacks are available as part of Keras:</p>
 <table class="table ref-index"><tbody>
 <tr>
@@ -328,24 +337,26 @@ Create a custom callback
 </tr>
 </tbody></table>
 </div>
-<div id="custom-callbacks" class="section level2">
-<h2 class="hasAnchor">
-<a href="#custom-callbacks" class="anchor"></a>Custom Callbacks</h2>
-<p>You can create a custom callback by creating a new <a href="https://CRAN.R-project.org/package=R6">R6 class</a> that inherits from the <code>KerasCallback</code> class.</p>
-<p>Here’s a simple example saving a list of losses over each batch during training:</p>
+<div class="section level2">
+<h2 id="custom-callbacks">Custom Callbacks<a class="anchor" aria-label="anchor" href="#custom-callbacks"></a>
+</h2>
+<p>You can create a custom callback by creating a new <a href="https://CRAN.R-project.org/package=R6" class="external-link">R6 class</a> that inherits
+from the <code>KerasCallback</code> class.</p>
+<p>Here’s a simple example saving a list of losses over each batch
+during training:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span>
 
 <span class="co"># define custom callback class</span>
-<span class="va">LossHistory</span> <span class="op">&lt;-</span> <span class="fu">R6</span><span class="fu">::</span><span class="kw"><a href="https://r6.r-lib.org/reference/R6Class.html">R6Class</a></span><span class="op">(</span><span class="st">"LossHistory"</span>,
+<span class="va">LossHistory</span> <span class="op">&lt;-</span> <span class="fu">R6</span><span class="fu">::</span><span class="kw"><a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6Class</a></span><span class="op">(</span><span class="st">"LossHistory"</span>,
   inherit <span class="op">=</span> <span class="va">KerasCallback</span>,
   
-  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
     
     losses <span class="op">=</span> <span class="cn">NULL</span>,
      
-    on_batch_end <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">batch</span>, <span class="va">logs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-      <span class="va">self</span><span class="op">$</span><span class="va">losses</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">losses</span>, <span class="va">logs</span><span class="op">[[</span><span class="st">"loss"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+    on_batch_end <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">batch</span>, <span class="va">logs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">losses</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">losses</span>, <span class="va">logs</span><span class="op">[[</span><span class="st">"loss"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
     <span class="op">}</span>
 <span class="op">)</span><span class="op">)</span>
 
@@ -353,33 +364,35 @@ Create a custom callback
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> 
 
 <span class="co"># add layers and compile</span>
-<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span>activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span>activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>
     loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>, 
     optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>
   <span class="op">)</span>
 
 <span class="co"># create history callback object and use it during training</span>
 <span class="va">history</span> <span class="op">&lt;-</span> <span class="va">LossHistory</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span>
   <span class="va">X_train</span>, <span class="va">Y_train</span>,
   batch_size<span class="op">=</span><span class="fl">128</span>, epochs<span class="op">=</span><span class="fl">20</span>, verbose<span class="op">=</span><span class="fl">0</span>,
-  callbacks<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span>
+  callbacks<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co"># print the accumulated losses</span>
 <span class="va">history</span><span class="op">$</span><span class="va">losses</span></code></pre></div>
 <pre><code>[1] 0.6604760 0.3547246 0.2595316 0.2590170 ...</code></pre>
-<div id="fields" class="section level3">
-<h3 class="hasAnchor">
-<a href="#fields" class="anchor"></a>Fields</h3>
-<p>Custom callback objects have access to the current model and it’s training parameters via the following fields:</p>
+<div class="section level3">
+<h3 id="fields">Fields<a class="anchor" aria-label="anchor" href="#fields"></a>
+</h3>
+<p>Custom callback objects have access to the current model and it’s
+training parameters via the following fields:</p>
 <dl>
 <dt><code>self$params</code></dt>
 <dd>
-<p>Named list with training parameters (eg. verbosity, batch size, number of epochs…).</p>
+<p>Named list with training parameters (eg. verbosity, batch size,
+number of epochs…).</p>
 </dd>
 <dt><code>self$model</code></dt>
 <dd>
@@ -387,10 +400,11 @@ Create a custom callback
 </dd>
 </dl>
 </div>
-<div id="methods" class="section level3">
-<h3 class="hasAnchor">
-<a href="#methods" class="anchor"></a>Methods</h3>
-<p>Custom callback objects can implement one or more of the following methods:</p>
+<div class="section level3">
+<h3 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a>
+</h3>
+<p>Custom callback objects can implement one or more of the following
+methods:</p>
 <dl>
 <dt><code>on_epoch_begin(epoch, logs)</code></dt>
 <dd>
@@ -442,11 +456,15 @@ Create a custom callback
 </dd>
 <dt><code>on_test_batch_begin</code></dt>
 <dd>
-<p>Called at the beginning of a batch in evaluate methods. Also called at the beginning of a validation batch in the fit methods, if validation data is provided.</p>
+<p>Called at the beginning of a batch in evaluate methods. Also called
+at the beginning of a validation batch in the fit methods, if validation
+data is provided.</p>
 </dd>
 <dt><code>on_test_batch_end</code></dt>
 <dd>
-<p>Called at the end of a batch in evaluate methods. Also called at the end of a validation batch in the fit methods, if validation data is provided.</p>
+<p>Called at the end of a batch in evaluate methods. Also called at the
+end of a validation batch in the fit methods, if validation data is
+provided.</p>
 </dd>
 <dt><code>on_test_begin</code></dt>
 <dd>
@@ -472,11 +490,13 @@ Create a custom callback
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
+  <p></p>
+<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -484,6 +504,8 @@ Create a custom callback
 
   
 
+
+  
 
   </body>
 </html>

@@ -1,6 +1,6 @@
 
 
-new_py_type <-
+new_py_class <-
   function(classname,
            members = list(),
            inherit = NULL,
@@ -29,7 +29,7 @@ new_py_type <-
     maybe_delayed_r_to_py_R6ClassGenerator(r6_class, convert, parent_env)
   }
 
-#' @rdname new-types
+#' @rdname new-classes
 #' @export
 mark_active <- function(x) {
   if(!is.function(x))
@@ -42,30 +42,30 @@ is_marked_active <- function(x)
   identical(attr(x, "marked_active", TRUE), TRUE)
 
 
-#' @rdname new-types
+#' @rdname new-classes
 #' @export
-new_metric_type <-
+new_metric_class <-
 function(classname, ..., initialize, update_state, result) {
   members <- capture_args(match.call(), ignore = "classname")
-  new_py_type(classname, members,
+  new_py_class(classname, members,
               inherit = keras::keras$metrics$Metric,
               parent_env = parent.frame())
 }
 
-#' @rdname new-types
+#' @rdname new-classes
 #' @export
-new_loss_type <-
+new_loss_class <-
 function(classname, ..., call = NULL) {
   members <- capture_args(match.call(), ignore = "classname")
   members$call <- call
-  new_py_type(classname, members,
+  new_py_class(classname, members,
               inherit = keras::keras$losses$Loss,
               parent_env = parent.frame())
 }
 
-#' @rdname new-types
+#' @rdname new-classes
 #' @export
-new_callback_type <-
+new_callback_class <-
 function(classname,
          ...,
          on_epoch_begin = NULL,
@@ -89,15 +89,15 @@ function(classname,
   members <- drop_nulls(members,
     names(which(vapply(formals(sys.function()), is.null, TRUE))))
 
-  new_py_type(classname, members,
+  new_py_class(classname, members,
               inherit = keras::keras$callbacks$Callback,
               parent_env = parent.frame())
 }
 
 
-#' @rdname new-types
+#' @rdname new-classes
 #' @export
-new_model_type <-
+new_model_class <-
 function(classname, ...,
          initialize = NULL, call = NULL,
          train_step = NULL, predict_step = NULL, test_step = NULL,
@@ -106,7 +106,7 @@ function(classname, ...,
   members <- drop_nulls(members,
     names(which(vapply(formals(sys.function()), is.null, TRUE))))
 
-  new_py_type(classname, members,
+  new_py_class(classname, members,
               inherit = keras::keras$Model,
               parent_env = parent.frame())
 }
@@ -116,17 +116,17 @@ function(classname, ...,
 #' Define new keras types
 #'
 #' These functions can be used to make custom objects that fit in the family of
-#' existing keras types. For example, `new_layer_type()` will return an object
-#' that behaves like other layer functions, like `layer_dense()`.
-#' `new_callback_type()` will return an object that behaves similarly to other
-#' callback functions, like `callback_reduce_lr_on_plateau()`, and so on. All
-#' arguments with a default `NULL` value are optional methods that can be
-#' provided.
+#' existing keras types. For example, `new_layer_class()` will return a class
+#' constructor, an object that behaves like other layer functions such as
+#' `layer_dense()`. `new_callback_class()` will return an object that behaves
+#' similarly to other callback functions, like
+#' `callback_reduce_lr_on_plateau()`, and so on. All arguments with a default
+#' `NULL` value are optional methods that can be provided.
 #'
 #' `mark_active()` is a decorator that can be used to indicate functions that
-#' should become active properties of the class type.
+#' should become active properties of the class instances.
 #'
-#' @rdname new-types
+#' @rdname new-classes
 #' @param classname The classname as a string. Convention is for the classname
 #'   to be a CamelCase version of the constructor.
 #' @param ... Additional fields and methods for the new type.
@@ -136,14 +136,14 @@ function(classname, ...,
 #' @return A new class generator object that inherits from the appropriate Keras
 #'   base class.
 #' @export
-new_layer_type <-
+new_layer_class <-
 function(classname, ...,
          initialize = NULL, build = NULL, call = NULL, get_config = NULL) {
   members <- capture_args(match.call(),  ignore = "classname")
   members <- drop_nulls(members,
     names(which(vapply(formals(sys.function()), is.null, TRUE))))
 
-  type <- new_py_type(classname, members,
+  type <- new_py_class(classname, members,
                       inherit = keras$layers$Layer,
                       parent_env = parent.frame())
 

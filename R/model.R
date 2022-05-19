@@ -1386,7 +1386,8 @@ resolve_tensorflow_dataset <- function(x) {
 #'
 #' @param object Keras model object
 #' @param name String, name of layer.
-#' @param index Integer, index of layer (1-based)
+#' @param index Integer, index of layer (1-based). Also valid are negative
+#'   values, which count from the end of model.
 #'
 #' @return A layer instance.
 #'
@@ -1394,18 +1395,9 @@ resolve_tensorflow_dataset <- function(x) {
 #'
 #' @export
 get_layer <- function(object, name = NULL, index = NULL) {
-
-  # convert to layer index
-  index <- as_layer_index(index)
-
-  # check for 0
-  if (identical(index, -1L))
-    stop("Indexes for get_layer() are 1-based (0 was passed as the index)")
-
-  # call get_layer
   object$get_layer(
     name = name,
-    index = index
+    index = as_layer_index(index)
   )
 }
 
@@ -1434,6 +1426,7 @@ pop_layer <- function(object) {
 #'   provided, defaults to `FALSE`.
 #' @param compact Whether to remove white-space only lines from the model
 #'   summary. (Default `TRUE`)
+#' @param width the column width to use for printing.
 #' @param ... for `summary()` and `print()`, passed on to `format()`. For
 #'   `format()`, passed on to `model$summary()`.
 #'
@@ -1453,20 +1446,23 @@ summary.keras.engine.training.Model <- function(object, ...) {
 #' @export
 format.keras.engine.training.Model <-
 function(x,
-         line_length = getOption("width") - (11L * show_trainable),
+         line_length = width - (11L * show_trainable),
          positions = NULL,
          expand_nested = FALSE,
          show_trainable = x$built && as.logical(length(x$non_trainable_weights)),
          ...,
-         compact = TRUE) {
+         compact = TRUE,
+         width = getOption("width")) {
+
   if (py_is_null_xptr(x))
     return("<pointer: 0x0>")
 
-  args <- capture_args(match.call(), ignore = c("x", "compact"))
+  args <- capture_args(match.call(), ignore = c("x", "compact", "width"))
 
   # ensure `line_length` and other args captured, even if not passed by user
-  args$show_trainable <- show_trainable
   args$line_length <- as_nullable_integer(line_length)
+  if(tf_version() >= "2.8")
+    args$show_trainable <- show_trainable
 
   out <- if (x$built)
     trimws(py_capture_output(do.call(x$summary, args),

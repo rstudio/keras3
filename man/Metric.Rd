@@ -61,7 +61,7 @@ To be implemented by subclasses:
 
 Example custom metric subclass:
 
-\if{html}{\out{<div class="sourceCode R">}}\preformatted{metric_binary_true_positives <- new_metric_type(
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{metric_binary_true_positives <- new_metric_class(
   classname = "BinaryTruePositives",
   initialize = function(name = 'binary_true_positives', ...) \{
     super$initialize(name = name, ...)

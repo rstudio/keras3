@@ -10,12 +10,13 @@
 
 \method{format}{keras.engine.training.Model}(
   x,
-  line_length = getOption("width") - (11L * show_trainable),
+  line_length = width - (11L * show_trainable),
   positions = NULL,
   expand_nested = FALSE,
   show_trainable = x$built && as.logical(length(x$non_trainable_weights)),
   ...,
-  compact = TRUE
+  compact = TRUE,
+  width = getOption("width")
 )
 
 \method{print}{keras.engine.training.Model}(x, ...)
@@ -39,6 +40,8 @@ provided, defaults to \code{FALSE}.}
 
 \item{compact}{Whether to remove white-space only lines from the model
 summary. (Default \code{TRUE})}
+
+\item{width}{the column width to use for printing.}
 }
 \value{
 \code{format()} returns a length 1 character vector. \code{print()} returns the

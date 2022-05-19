@@ -45,7 +45,7 @@ arguments. They will be added to the layer class.}
 A function that wraps \code{create_layer}, similar to \code{keras::layer_dense}.
 }
 \description{
-This function is maintained but deprecated. Please use \code{new_layer_type()} or
+This function is maintained but deprecated. Please use \code{new_layer_class()} or
 \verb{\%py_class\%} to define custom layers.
 }
 \examples{

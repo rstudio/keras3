@@ -212,7 +212,7 @@ create_layer_wrapper <- function(Layer, modifiers = NULL, convert = TRUE) {
       f <- py_formals(Layer)
     } else if (inherits(Layer, "R6ClassGenerator")) {
       m <- Layer$public_methods
-      init <- m$initialize %||% m$`__init__`
+      init <- m$initialize %||% m$`__init__` %||% function(){}
       f <- formals(init)
     } else
       stop('Unrecognized type passed `create_layer_wrapper()`.',

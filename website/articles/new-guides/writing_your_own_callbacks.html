@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
   <a href="../../index.html">Home</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -76,7 +78,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,7 +104,8 @@
       <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Using Keras</li>
+    </li>
+<li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -131,7 +134,8 @@
       <a href="../../articles/why_use_keras.html">Why Use Keras?</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Advanced</li>
+    </li>
+<li class="dropdown-header">Advanced</li>
     <li>
       <a href="../../articles/eager_guide.html">Eager Execution</a>
     </li>
@@ -170,7 +174,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rstudio/keras/">
+  <a href="https://github.com/rstudio/keras/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -189,119 +193,136 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Writing your own callbacks</h1>
-                        <h4 class="author">Rick Chao, Francois Chollet, Tomasz Kalinowski</h4>
+                        <h4 data-toc-skip class="author">Rick Chao,
+Francois Chollet, Tomasz Kalinowski</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/new-guides/writing_your_own_callbacks.Rmd"><code>vignettes/new-guides/writing_your_own_callbacks.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/new-guides/writing_your_own_callbacks.Rmd" class="external-link"><code>vignettes/new-guides/writing_your_own_callbacks.Rmd</code></a></small>
       <div class="hidden name"><code>writing_your_own_callbacks.Rmd</code></div>
 
     </div>
 
     
     
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>A callback is a powerful tool to customize the behavior of a Keras model during training, evaluation, or inference. Examples include <code><a href="../../reference/callback_tensorboard.html">callback_tensorboard()</a></code> to visualize training progress and results with TensorBoard, or <code><a href="../../reference/callback_model_checkpoint.html">callback_model_checkpoint()</a></code> to periodically save your model during training.</p>
-<p>In this guide, you will learn what a Keras callback is, what it can do, and how you can build your own. We provide a few demos of simple callback applications to get you started.</p>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<p>A callback is a powerful tool to customize the behavior of a Keras
+model during training, evaluation, or inference. Examples include
+<code><a href="../../reference/callback_tensorboard.html">callback_tensorboard()</a></code> to visualize training progress and
+results with TensorBoard, or <code><a href="../../reference/callback_model_checkpoint.html">callback_model_checkpoint()</a></code> to
+periodically save your model during training.</p>
+<p>In this guide, you will learn what a Keras callback is, what it can
+do, and how you can build your own. We provide a few demos of simple
+callback applications to get you started.</p>
 </div>
-<div id="setup" class="section level2">
-<h2 class="hasAnchor">
-<a href="#setup" class="anchor"></a>Setup</h2>
+<div class="section level2">
+<h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow">tensorflow</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
-<span class="fu">envir</span><span class="fu">::</span><span class="fu"><a href="https://t-kalinowski.github.io/envir/reference/import_from.html">import_from</a></span><span class="op">(</span><span class="va">magrittr</span>, <span class="va">`%&lt;&gt;%`</span><span class="op">)</span>
-<span class="fu">envir</span><span class="fu">::</span><span class="fu"><a href="https://t-kalinowski.github.io/envir/reference/import_from.html">import_from</a></span><span class="op">(</span><span class="va">dplyr</span>, <span class="va">last</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span>
+<span class="fu">envir</span><span class="fu">::</span><span class="fu"><a href="https://t-kalinowski.github.io/envir/reference/import_from.html" class="external-link">import_from</a></span><span class="op">(</span><span class="va">magrittr</span>, <span class="va">`%&lt;&gt;%`</span><span class="op">)</span>
+<span class="fu">envir</span><span class="fu">::</span><span class="fu"><a href="https://t-kalinowski.github.io/envir/reference/import_from.html" class="external-link">import_from</a></span><span class="op">(</span><span class="va">dplyr</span>, <span class="va">last</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_config.html">tf_version</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_config.html" class="external-link">tf_version</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="keras-callbacks-overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#keras-callbacks-overview" class="anchor"></a>Keras callbacks overview</h2>
-<p>All callbacks subclass the <code>keras$callbacks$Callback</code> class, and override a set of methods called at various stages of training, testing, and predicting. Callbacks are useful to get a view on internal states and statistics of the model during training.</p>
-<p>You can pass a list of callbacks (as a named argument <code>callbacks</code>) to the following keras model methods:</p>
+<div class="section level2">
+<h2 id="keras-callbacks-overview">Keras callbacks overview<a class="anchor" aria-label="anchor" href="#keras-callbacks-overview"></a>
+</h2>
+<p>All callbacks subclass the <code>keras$callbacks$Callback</code>
+class, and override a set of methods called at various stages of
+training, testing, and predicting. Callbacks are useful to get a view on
+internal states and statistics of the model during training.</p>
+<p>You can pass a list of callbacks (as a named argument
+<code>callbacks</code>) to the following keras model methods:</p>
 <ul>
-<li><code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code></li>
-<li><code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate()</a></code></li>
-<li><code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code></li>
+<li><code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code></li>
+<li><code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code></li>
+<li><code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code></li>
 </ul>
 <pre><code></code></pre>
 </div>
-<div id="an-overview-of-callback-methods" class="section level2">
-<h2 class="hasAnchor">
-<a href="#an-overview-of-callback-methods" class="anchor"></a>An overview of callback methods</h2>
-<div id="global-methods" class="section level3">
-<h3 class="hasAnchor">
-<a href="#global-methods" class="anchor"></a>Global methods</h3>
-<div id="on_traintestpredict_beginself-logsnone" class="section level4">
-<h4 class="hasAnchor">
-<a href="#on_traintestpredict_beginself-logsnone" class="anchor"></a><code>on_(train|test|predict)_begin(self, logs=None)</code>
+<div class="section level2">
+<h2 id="an-overview-of-callback-methods">An overview of callback methods<a class="anchor" aria-label="anchor" href="#an-overview-of-callback-methods"></a>
+</h2>
+<div class="section level3">
+<h3 id="global-methods">Global methods<a class="anchor" aria-label="anchor" href="#global-methods"></a>
+</h3>
+<div class="section level4">
+<h4 id="on_traintestpredict_beginself-logsnone">
+<code>on_(train|test|predict)_begin(self, logs=None)</code><a class="anchor" aria-label="anchor" href="#on_traintestpredict_beginself-logsnone"></a>
 </h4>
-<p>Called at the beginning of <code>fit</code>/<code>evaluate</code>/<code>predict</code>.</p>
+<p>Called at the beginning of
+<code>fit</code>/<code>evaluate</code>/<code>predict</code>.</p>
 </div>
-<div id="on_traintestpredict_endself-logsnone" class="section level4">
-<h4 class="hasAnchor">
-<a href="#on_traintestpredict_endself-logsnone" class="anchor"></a><code>on_(train|test|predict)_end(self, logs=None)</code>
+<div class="section level4">
+<h4 id="on_traintestpredict_endself-logsnone">
+<code>on_(train|test|predict)_end(self, logs=None)</code><a class="anchor" aria-label="anchor" href="#on_traintestpredict_endself-logsnone"></a>
 </h4>
-<p>Called at the end of <code>fit</code>/<code>evaluate</code>/<code>predict</code>.</p>
+<p>Called at the end of
+<code>fit</code>/<code>evaluate</code>/<code>predict</code>.</p>
 </div>
 </div>
-<div id="batch-level-methods-for-trainingtestingpredicting" class="section level3">
-<h3 class="hasAnchor">
-<a href="#batch-level-methods-for-trainingtestingpredicting" class="anchor"></a>Batch-level methods for training/testing/predicting</h3>
-<div id="on_traintestpredict_batch_beginself-batch-logsnone" class="section level4">
-<h4 class="hasAnchor">
-<a href="#on_traintestpredict_batch_beginself-batch-logsnone" class="anchor"></a><code>on_(train|test|predict)_batch_begin(self, batch, logs=None)</code>
+<div class="section level3">
+<h3 id="batch-level-methods-for-trainingtestingpredicting">Batch-level methods for training/testing/predicting<a class="anchor" aria-label="anchor" href="#batch-level-methods-for-trainingtestingpredicting"></a>
+</h3>
+<div class="section level4">
+<h4 id="on_traintestpredict_batch_beginself-batch-logsnone">
+<code>on_(train|test|predict)_batch_begin(self, batch, logs=None)</code><a class="anchor" aria-label="anchor" href="#on_traintestpredict_batch_beginself-batch-logsnone"></a>
 </h4>
-<p>Called right before processing a batch during training/testing/predicting.</p>
+<p>Called right before processing a batch during
+training/testing/predicting.</p>
 </div>
-<div id="on_traintestpredict_batch_endself-batch-logsnone" class="section level4">
-<h4 class="hasAnchor">
-<a href="#on_traintestpredict_batch_endself-batch-logsnone" class="anchor"></a><code>on_(train|test|predict)_batch_end(self, batch, logs=None)</code>
+<div class="section level4">
+<h4 id="on_traintestpredict_batch_endself-batch-logsnone">
+<code>on_(train|test|predict)_batch_end(self, batch, logs=None)</code><a class="anchor" aria-label="anchor" href="#on_traintestpredict_batch_endself-batch-logsnone"></a>
 </h4>
-<p>Called at the end of training/testing/predicting a batch. Within this method, <code>logs</code> is a dict containing the metrics results.</p>
+<p>Called at the end of training/testing/predicting a batch. Within this
+method, <code>logs</code> is a dict containing the metrics results.</p>
 </div>
 </div>
-<div id="epoch-level-methods-training-only" class="section level3">
-<h3 class="hasAnchor">
-<a href="#epoch-level-methods-training-only" class="anchor"></a>Epoch-level methods (training only)</h3>
-<div id="on_epoch_beginself-epoch-logsnone" class="section level4">
-<h4 class="hasAnchor">
-<a href="#on_epoch_beginself-epoch-logsnone" class="anchor"></a><code>on_epoch_begin(self, epoch, logs=None)</code>
+<div class="section level3">
+<h3 id="epoch-level-methods-training-only">Epoch-level methods (training only)<a class="anchor" aria-label="anchor" href="#epoch-level-methods-training-only"></a>
+</h3>
+<div class="section level4">
+<h4 id="on_epoch_beginself-epoch-logsnone">
+<code>on_epoch_begin(self, epoch, logs=None)</code><a class="anchor" aria-label="anchor" href="#on_epoch_beginself-epoch-logsnone"></a>
 </h4>
 <p>Called at the beginning of an epoch during training.</p>
 </div>
-<div id="on_epoch_endself-epoch-logsnone" class="section level4">
-<h4 class="hasAnchor">
-<a href="#on_epoch_endself-epoch-logsnone" class="anchor"></a><code>on_epoch_end(self, epoch, logs=None)</code>
+<div class="section level4">
+<h4 id="on_epoch_endself-epoch-logsnone">
+<code>on_epoch_end(self, epoch, logs=None)</code><a class="anchor" aria-label="anchor" href="#on_epoch_endself-epoch-logsnone"></a>
 </h4>
 <p>Called at the end of an epoch during training.</p>
 <pre><code></code></pre>
 </div>
 </div>
 </div>
-<div id="a-basic-example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#a-basic-example" class="anchor"></a>A basic example</h2>
-<p>Let’s take a look at a concrete example. To get started, let’s import tensorflow and define a simple Sequential Keras model:</p>
+<div class="section level2">
+<h2 id="a-basic-example">A basic example<a class="anchor" aria-label="anchor" href="#a-basic-example"></a>
+</h2>
+<p>Let’s take a look at a concrete example. To get started, let’s import
+tensorflow and define a simple Sequential Keras model:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">get_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span>, input_shape <span class="op">=</span> <span class="fl">784</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span>, input_shape <span class="op">=</span> <span class="fl">784</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>
       optimizer <span class="op">=</span> <span class="fu"><a href="../../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>learning_rate<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span>,
       loss <span class="op">=</span> <span class="st">"mean_squared_error"</span>,
       metrics <span class="op">=</span> <span class="st">"mean_absolute_error"</span>
     <span class="op">)</span>
   <span class="va">model</span>
 <span class="op">}</span></code></pre></div>
-<p>Then, load the MNIST data for training and testing from Keras datasets API:</p>
+<p>Then, load the MNIST data for training and testing from Keras
+datasets API:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mnist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="va">flatten_and_rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span> 
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span> 
   <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">/</span> <span class="fl">255</span>
   <span class="va">x</span>
 <span class="op">}</span>
@@ -316,7 +337,8 @@
 <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span>  <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span><span class="op">]</span></code></pre></div>
 <p>Now, define a simple custom callback that logs:</p>
 <ul>
-<li>When <code>fit</code>/<code>evaluate</code>/<code>predict</code> starts &amp; ends</li>
+<li>When <code>fit</code>/<code>evaluate</code>/<code>predict</code>
+starts &amp; ends</li>
 <li>When each epoch starts &amp; ends</li>
 <li>When each training batch starts &amp; ends</li>
 <li>When each evaluation (test) batch starts &amp; ends</li>
@@ -324,12 +346,12 @@
 </ul>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">show</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">msg</span>, <span class="va">logs</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="va">msg</span>, .envir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="va">msg</span>, .envir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,
       <span class="st">"got logs: "</span>, sep <span class="op">=</span> <span class="st">"; "</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">logs</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n"</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">logs</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\n"</span><span class="op">)</span>
 <span class="op">}</span>
 
-<span class="fu">CustomCallback</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
+<span class="fu">CustomCallback</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op"><a href="../../reference/grapes-py_class-grapes.html">%py_class%</a></span> <span class="op">{</span>
   <span class="va">on_train_begin</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">logs</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
     <span class="fu">show</span><span class="op">(</span><span class="st">"Starting training"</span>, <span class="va">logs</span><span class="op">)</span>
   
@@ -375,96 +397,113 @@
 <p>Let’s try it out:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>,
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>,
   batch_size <span class="op">=</span> <span class="fl">128</span>,
   epochs <span class="op">=</span> <span class="fl">2</span>,
   verbose <span class="op">=</span> <span class="fl">0</span>,
   validation_split <span class="op">=</span> <span class="fl">0.5</span>,
-  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">CustomCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">CustomCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span>
     <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
     <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span>,
     batch_size <span class="op">=</span> <span class="fl">128</span>,
     verbose <span class="op">=</span> <span class="fl">0</span>,
-    callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">CustomCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">CustomCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
   <span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
+<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
           batch_size <span class="op">=</span> <span class="fl">128</span>,
-          callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">CustomCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div id="usage-of-logs-dict" class="section level3">
-<h3 class="hasAnchor">
-<a href="#usage-of-logs-dict" class="anchor"></a>Usage of <code>logs</code> dict</h3>
-<p>The <code>logs</code> dict contains the loss value, and all the metrics at the end of a batch or epoch. Example includes the loss and mean absolute error.</p>
+          callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">CustomCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="section level3">
+<h3 id="usage-of-logs-dict">Usage of <code>logs</code> dict<a class="anchor" aria-label="anchor" href="#usage-of-logs-dict"></a>
+</h3>
+<p>The <code>logs</code> dict contains the loss value, and all the
+metrics at the end of a batch or epoch. Example includes the loss and
+mean absolute error.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
+<code class="sourceCode R"><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op"><a href="../../reference/grapes-py_class-grapes.html">%py_class%</a></span> <span class="op">{</span>
   <span class="va">on_train_batch_end</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">batch</span>, <span class="va">logs</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Up to batch %i, the average loss is %7.2f.\n"</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Up to batch %i, the average loss is %7.2f.\n"</span>,
                 <span class="va">batch</span>,  <span class="va">logs</span><span class="op">$</span><span class="va">loss</span><span class="op">)</span><span class="op">)</span>
   
   <span class="va">on_test_batch_end</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">batch</span>, <span class="va">logs</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Up to batch %i, the average loss is %7.2f.\n"</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Up to batch %i, the average loss is %7.2f.\n"</span>,
                 <span class="va">batch</span>, <span class="va">logs</span><span class="op">$</span><span class="va">loss</span><span class="op">)</span><span class="op">)</span>
   
   <span class="va">on_epoch_end</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">epoch</span>, <span class="va">logs</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span>
       <span class="st">"The average loss for epoch %2i is %9.2f and mean absolute error is %7.2f.\n"</span>,
       <span class="va">epoch</span>, <span class="va">logs</span><span class="op">$</span><span class="va">loss</span>, <span class="va">logs</span><span class="op">$</span><span class="va">mean_absolute_error</span>
     <span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>,
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>,
   batch_size <span class="op">=</span> <span class="fl">128</span>,
   epochs <span class="op">=</span> <span class="fl">2</span>,
   verbose <span class="op">=</span> <span class="fl">0</span>,
-  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">res</span> <span class="op">=</span> <span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span>
+<span class="va">res</span> <span class="op">=</span> <span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,
   <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span>,
   batch_size <span class="op">=</span> <span class="fl">128</span>,
   verbose <span class="op">=</span> <span class="fl">0</span>,
-  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="usage-of-selfmodel-attribute" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage-of-selfmodel-attribute" class="anchor"></a>Usage of <code>self$model</code> attribute</h2>
-<p>In addition to receiving log information when one of their methods is called, callbacks have access to the model associated with the current round of training/evaluation/inference: <code>self$model</code>.</p>
-<p>Here are of few of the things you can do with <code>self$model</code> in a callback:</p>
+<div class="section level2">
+<h2 id="usage-of-selfmodel-attribute">Usage of <code>self$model</code> attribute<a class="anchor" aria-label="anchor" href="#usage-of-selfmodel-attribute"></a>
+</h2>
+<p>In addition to receiving log information when one of their methods is
+called, callbacks have access to the model associated with the current
+round of training/evaluation/inference: <code>self$model</code>.</p>
+<p>Here are of few of the things you can do with <code>self$model</code>
+in a callback:</p>
 <ul>
-<li>Set <code>self$model$stop_training &lt;- TRUE</code> to immediately interrupt training.</li>
-<li>Mutate hyperparameters of the optimizer (available as <code>self$model$optimizer</code>), such as <code>self$model$optimizer$learning_rate</code>.</li>
+<li>Set <code>self$model$stop_training &lt;- TRUE</code> to immediately
+interrupt training.</li>
+<li>Mutate hyperparameters of the optimizer (available as
+<code>self$model$optimizer</code>), such as
+<code>self$model$optimizer$learning_rate</code>.</li>
 <li>Save the model at period intervals.</li>
-<li>Record the output of <code>predict(model)</code> on a few test samples at the end of each epoch, to use as a sanity check during training.</li>
-<li>Extract visualizations of intermediate features at the end of each epoch, to monitor what the model is learning over time.</li>
+<li>Record the output of <code>predict(model)</code> on a few test
+samples at the end of each epoch, to use as a sanity check during
+training.</li>
+<li>Extract visualizations of intermediate features at the end of each
+epoch, to monitor what the model is learning over time.</li>
 <li>etc.</li>
 </ul>
 <p>Let’s see this in action in a couple of examples.</p>
 <pre><code></code></pre>
 </div>
-<div id="examples-of-keras-callback-applications" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples-of-keras-callback-applications" class="anchor"></a>Examples of Keras callback applications</h2>
+<div class="section level2">
+<h2 id="examples-of-keras-callback-applications">Examples of Keras callback applications<a class="anchor" aria-label="anchor" href="#examples-of-keras-callback-applications"></a>
+</h2>
 <pre><code></code></pre>
-<div id="early-stopping-at-minimum-loss" class="section level3">
-<h3 class="hasAnchor">
-<a href="#early-stopping-at-minimum-loss" class="anchor"></a>Early stopping at minimum loss</h3>
-<p>This first example shows the creation of a <code>Callback</code> that stops training when the minimum of loss has been reached, by setting the attribute <code>self$model$stop_training</code> (boolean). Optionally, you can provide an argument <code>patience</code> to specify how many epochs we should wait before stopping after having reached a local minimum.</p>
-<p><code>keras$callbacks$EarlyStopping</code> provides a more complete and general implementation.</p>
+<div class="section level3">
+<h3 id="early-stopping-at-minimum-loss">Early stopping at minimum loss<a class="anchor" aria-label="anchor" href="#early-stopping-at-minimum-loss"></a>
+</h3>
+<p>This first example shows the creation of a <code>Callback</code> that
+stops training when the minimum of loss has been reached, by setting the
+attribute <code>self$model$stop_training</code> (boolean). Optionally,
+you can provide an argument <code>patience</code> to specify how many
+epochs we should wait before stopping after having reached a local
+minimum.</p>
+<p><code>keras$callbacks$EarlyStopping</code> provides a more complete
+and general implementation.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">EarlyStoppingAtMinLoss</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
+<code class="sourceCode R"><span class="fu">EarlyStoppingAtMinLoss</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op"><a href="../../reference/grapes-py_class-grapes.html">%py_class%</a></span> <span class="op">{</span>
   <span class="st">"Stop training when the loss is at its min, i.e. the loss stops decreasing.
 
   Arguments:
@@ -497,11 +536,11 @@
       <span class="co"># Record the best weights if current results is better (less).</span>
       <span class="va">self</span><span class="op">$</span><span class="va">best_weights</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="fu">get_weights</span><span class="op">(</span><span class="op">)</span>
     <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-      <span class="va">self</span><span class="op">$</span><span class="va">wait</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html">%&lt;&gt;%</a></span> <span class="fu">`+`</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
+      <span class="va">self</span><span class="op">$</span><span class="va">wait</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html" class="external-link">%&lt;&gt;%</a></span> <span class="fu">`+`</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
       <span class="kw">if</span> <span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">wait</span> <span class="op">&gt;=</span> <span class="va">self</span><span class="op">$</span><span class="va">patience</span><span class="op">)</span> <span class="op">{</span>
         <span class="va">self</span><span class="op">$</span><span class="va">stopped_epoch</span> <span class="op">&lt;-</span> <span class="va">epoch</span>
         <span class="va">self</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">stop_training</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span>
-        <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Restoring model weights from the end of the best epoch.\n"</span><span class="op">)</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Restoring model weights from the end of the best epoch.\n"</span><span class="op">)</span>
         <span class="va">self</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="fu">set_weights</span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">best_weights</span><span class="op">)</span>
       <span class="op">}</span>
     <span class="op">}</span>
@@ -509,30 +548,35 @@
   
   <span class="va">on_train_end</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">logs</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
     <span class="kw">if</span> <span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">stopped_epoch</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Epoch %05d: early stopping\n"</span>, <span class="va">self</span><span class="op">$</span><span class="va">stopped_epoch</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Epoch %05d: early stopping\n"</span>, <span class="va">self</span><span class="op">$</span><span class="va">stopped_epoch</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
   
 <span class="op">}</span>
 
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>,
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>,
   batch_size <span class="op">=</span> <span class="fl">64</span>,
   steps_per_epoch <span class="op">=</span> <span class="fl">5</span>,
   epochs <span class="op">=</span> <span class="fl">30</span>,
   verbose <span class="op">=</span> <span class="fl">0</span>,
-  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="op">)</span>, 
+  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="op">)</span>, 
                    <span class="fu">EarlyStoppingAtMinLoss</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 </div>
-<div id="learning-rate-scheduling" class="section level3">
-<h3 class="hasAnchor">
-<a href="#learning-rate-scheduling" class="anchor"></a>Learning rate scheduling</h3>
-<p>In this example, we show how a custom Callback can be used to dynamically change the learning rate of the optimizer during the course of training.</p>
-<p>See <code>keras$callbacks$LearningRateScheduler</code> for a more general implementations (in RStudio, press F1 while the cursor is over <code>LearningRateScheduler</code> and a browser will open to <a href="https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/callbacks/LearningRateScheduler">this page</a>).</p>
+<div class="section level3">
+<h3 id="learning-rate-scheduling">Learning rate scheduling<a class="anchor" aria-label="anchor" href="#learning-rate-scheduling"></a>
+</h3>
+<p>In this example, we show how a custom Callback can be used to
+dynamically change the learning rate of the optimizer during the course
+of training.</p>
+<p>See <code>keras$callbacks$LearningRateScheduler</code> for a more
+general implementations (in RStudio, press F1 while the cursor is over
+<code>LearningRateScheduler</code> and a browser will open to <a href="https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/callbacks/LearningRateScheduler" class="external-link">this
+page</a>).</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">CustomLearningRateScheduler</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op"><a href="../../reference/%py_class%.html">%py_class%</a></span> <span class="op">{</span>
+<code class="sourceCode R"><span class="fu">CustomLearningRateScheduler</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span><span class="op">)</span> <span class="op"><a href="../../reference/grapes-py_class-grapes.html">%py_class%</a></span> <span class="op">{</span>
   <span class="st">"Learning rate scheduler which sets the learning rate according to schedule.
 
   Arguments:
@@ -551,22 +595,22 @@
     <span class="co">## use a debugger to interact with the actual objects at the console!</span>
     <span class="co"># browser()</span>
     
-    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="st">"learning_rate"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">optimizer</span><span class="op">)</span><span class="op">)</span>
-      <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">'Optimizer must have a "learning_rate" attribute.'</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="st">"learning_rate"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">optimizer</span><span class="op">)</span><span class="op">)</span>
+      <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">'Optimizer must have a "learning_rate" attribute.'</span><span class="op">)</span>
     
     <span class="co"># # Get the current learning rate from model's optimizer.</span>
     <span class="co"># use as.numeric() to convert the tf.Variable to an R numeric</span>
-    <span class="va">lr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">optimizer</span><span class="op">$</span><span class="va">learning_rate</span><span class="op">)</span>
+    <span class="va">lr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">optimizer</span><span class="op">$</span><span class="va">learning_rate</span><span class="op">)</span>
     <span class="co"># # Call schedule function to get the scheduled learning rate.</span>
     <span class="va">scheduled_lr</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">schedule</span><span class="op">(</span><span class="va">epoch</span>, <span class="va">lr</span><span class="op">)</span>
     <span class="co"># # Set the value back to the optimizer before this epoch starts</span>
     <span class="va">self</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">optimizer</span><span class="op">$</span><span class="va">learning_rate</span> <span class="op">&lt;-</span> <span class="va">scheduled_lr</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"\nEpoch %05d: Learning rate is %6.4f.\n"</span>, <span class="va">epoch</span>, <span class="va">scheduled_lr</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"\nEpoch %05d: Learning rate is %6.4f.\n"</span>, <span class="va">epoch</span>, <span class="va">scheduled_lr</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">}</span>
 
 
-<span class="va">LR_SCHEDULE</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span><span class="op">~</span> <span class="va">start_epoch</span>, <span class="op">~</span> <span class="va">learning_rate</span>,
+<span class="va">LR_SCHEDULE</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span><span class="op">~</span> <span class="va">start_epoch</span>, <span class="op">~</span> <span class="va">learning_rate</span>,
                                <span class="fl">0</span>, <span class="fl">.1</span>,
                                <span class="fl">3</span>, <span class="fl">0.05</span>,
                                <span class="fl">6</span>, <span class="fl">0.01</span>,
@@ -576,31 +620,33 @@
 
 <span class="va">lr_schedule</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">epoch</span>, <span class="va">learning_rate</span><span class="op">)</span> <span class="op">{</span>
   <span class="st">"Helper function to retrieve the scheduled learning rate based on epoch."</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">epoch</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/nth.html">last</a></span><span class="op">(</span><span class="va">LR_SCHEDULE</span><span class="op">$</span><span class="va">start_epoch</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">LR_SCHEDULE</span>, <span class="va">learning_rate</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.min</a></span><span class="op">(</span><span class="va">epoch</span> <span class="op">&gt;</span> <span class="va">start_epoch</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="va">epoch</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/nth.html" class="external-link">last</a></span><span class="op">(</span><span class="va">LR_SCHEDULE</span><span class="op">$</span><span class="va">start_epoch</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">LR_SCHEDULE</span>, <span class="va">learning_rate</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html" class="external-link">which.min</a></span><span class="op">(</span><span class="va">epoch</span> <span class="op">&gt;</span> <span class="va">start_epoch</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
   <span class="kw">else</span>
     <span class="va">learning_rate</span>
 <span class="op">}</span>
 
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span>
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>,
   <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>,
   batch_size <span class="op">=</span> <span class="fl">64</span>,
   steps_per_epoch <span class="op">=</span> <span class="fl">5</span>,
   epochs <span class="op">=</span> <span class="fl">15</span>,
   verbose <span class="op">=</span> <span class="fl">0</span>,
-  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
     <span class="fu">LossAndErrorPrintingCallback</span><span class="op">(</span><span class="op">)</span>,
     <span class="fu">CustomLearningRateScheduler</span><span class="op">(</span><span class="va">lr_schedule</span><span class="op">)</span>
   <span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 </div>
-<div id="built-in-keras-callbacks" class="section level3">
-<h3 class="hasAnchor">
-<a href="#built-in-keras-callbacks" class="anchor"></a>Built-in Keras callbacks</h3>
-<p>Be sure to check out the existing Keras callbacks by reading the <a href="https://keras.io/api/callbacks/">API docs</a>. Applications include logging to CSV, saving the model, visualizing metrics in TensorBoard, and a lot more!</p>
+<div class="section level3">
+<h3 id="built-in-keras-callbacks">Built-in Keras callbacks<a class="anchor" aria-label="anchor" href="#built-in-keras-callbacks"></a>
+</h3>
+<p>Be sure to check out the existing Keras callbacks by reading the <a href="https://keras.io/api/callbacks/" class="external-link">API docs</a>. Applications
+include logging to CSV, saving the model, visualizing metrics in
+TensorBoard, and a lot more!</p>
 </div>
 </div>
   </div>
@@ -616,11 +662,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
+  <p></p>
+<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -628,6 +676,8 @@
 
   
 
+
+  
 
   </body>
 </html>

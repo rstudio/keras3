@@ -195,3 +195,25 @@ test_succeeds("create_layer_wrapper", {
 
   expect_equal(length(model$layers), 4L)
 })
+
+
+
+
+
+test_succeeds("create_layer_wrapper", {
+
+  layer_sampler <- new_layer_class(
+    classname = "Sampler",
+    call = function(self, z_mean, z_log_var) {
+      epsilon <-  k_random_normal(shape = k_shape(z_mean))
+      z_mean + exp(0.5 * z_log_var) * epsilon
+    }
+  )
+
+  sampler <- layer_sampler()
+  z_mean <- keras_array(random_array(c(128, 2)))
+  z_log_var <- keras_array(random_array(c(128, 2)))
+  res <- sampler(z_mean, z_log_var)
+  expect_equal(dim(res), c(128, 2))
+
+})

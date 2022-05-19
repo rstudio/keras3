@@ -410,10 +410,18 @@ as_nullable_integer <- function(x) {
 }
 
 as_layer_index <- function(x) {
-  x <- as_nullable_integer(x)
-  if (!is.null(x))
-    x <- x - 1L
-  x
+  if (is.null(x))
+    return(x)
+
+  x <- as.integer(x)
+
+  if (x == 0L)
+    stop("`index` for get_layer() is 1-based (0 was passed as the index)")
+
+  if (x > 0L)
+    x - 1L
+  else
+    x
 }
 
 # Helper function to normalize paths

@@ -59,7 +59,7 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
 test_succeeds("model load with unnamed custom_objects", {
 
 
-  layer_my_dense <-  new_layer_type(
+  layer_my_dense <-  new_layer_class(
     "MyDense",
 
     initialize = function(units, ...) {

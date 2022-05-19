@@ -3145,17 +3145,19 @@ k_zeros_like <- function(x, dtype = NULL, name = NULL) {
 }
 
 as_axis <- function(axis) {
-  if (length(axis) > 1) {
-    sapply(axis, as_axis)
-  } else {
-    axis <- as_nullable_integer(axis)
-    if (is.null(axis))
-      axis
-    else if (axis == -1L)
-      axis
-    else
-      axis - 1L
-  }
+  if (is.null(axis))
+    return(NULL)
+
+  if (length(axis) > 1)
+    return(lapply(axis, as_axis))
+
+  axis <- as.integer(axis)
+
+  if (axis == 0L)
+    stop("`axis` argument is 1 based, received 0")
+
+  if (axis > 0L) axis - 1L
+  else axis
 }
 
 

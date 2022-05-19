@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
   <a href="../index.html">Home</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -76,7 +78,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,7 +104,8 @@
       <a href="../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Using Keras</li>
+    </li>
+<li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -131,7 +134,8 @@
       <a href="../articles/why_use_keras.html">Why Use Keras?</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Advanced</li>
+    </li>
+<li class="dropdown-header">Advanced</li>
     <li>
       <a href="../articles/eager_guide.html">Eager Execution</a>
     </li>
@@ -170,7 +174,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rstudio/keras/">
+  <a href="https://github.com/rstudio/keras/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -191,88 +195,134 @@
       <h1 data-toc-skip>Getting Started with Keras</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/index.Rmd"><code>vignettes/index.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/index.Rmd" class="external-link"><code>vignettes/index.Rmd</code></a></small>
       <div class="hidden name"><code>index.Rmd</code></div>
 
     </div>
 
     
     
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
-<p><a href="https://keras.io/">Keras</a> is a high-level neural networks API developed with a focus on enabling fast experimentation. <em>Being able to go from idea to result with the least possible delay is key to doing good research.</em> Keras has the following key features:</p>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p><a href="https://keras.io/" class="external-link">Keras</a> is a high-level neural networks
+API developed with a focus on enabling fast experimentation. <em>Being
+able to go from idea to result with the least possible delay is key to
+doing good research.</em> Keras has the following key features:</p>
 <ul>
-<li><p>Allows the same code to run on CPU or on GPU, seamlessly.</p></li>
-<li><p>User-friendly API which makes it easy to quickly prototype deep learning models.</p></li>
-<li><p>Built-in support for convolutional networks (for computer vision), recurrent networks (for sequence processing), and any combination of both.</p></li>
-<li><p>Supports arbitrary network architectures: multi-input or multi-output models, layer sharing, model sharing, etc. This means that Keras is appropriate for building essentially any deep learning model, from a memory network to a neural Turing machine.</p></li>
+<li><p>Allows the same code to run on CPU or on GPU,
+seamlessly.</p></li>
+<li><p>User-friendly API which makes it easy to quickly prototype deep
+learning models.</p></li>
+<li><p>Built-in support for convolutional networks (for computer
+vision), recurrent networks (for sequence processing), and any
+combination of both.</p></li>
+<li><p>Supports arbitrary network architectures: multi-input or
+multi-output models, layer sharing, model sharing, etc. This means that
+Keras is appropriate for building essentially any deep learning model,
+from a memory network to a neural Turing machine.</p></li>
 </ul>
-<p>This website provides documentation for the R interface to Keras. See the main Keras website at <a href="https://keras.io" class="uri">https://keras.io</a> for additional information on the project.</p>
+<p>This website provides documentation for the R interface to Keras. See
+the main Keras website at <a href="https://keras.io" class="external-link uri">https://keras.io</a> for additional information on the
+project.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>First, install the keras R package with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"keras"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"keras"</span><span class="op">)</span></code></pre></div>
 <p>or install the development version with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"rstudio/keras"</span><span class="op">)</span></code></pre></div>
-<p>The Keras R interface uses the <a href="https://www.tensorflow.org/">TensorFlow</a> backend engine by default.</p>
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"rstudio/keras"</span><span class="op">)</span></code></pre></div>
+<p>The Keras R interface uses the <a href="https://www.tensorflow.org/" class="external-link">TensorFlow</a> backend engine by
+default.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"keras"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"keras"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/install_keras.html">install_keras</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>This will provide you with default CPU-based installations of Keras and TensorFlow. If you want a more customized installation, e.g. if you want to take advantage of NVIDIA GPUs, see the documentation for <code><a href="../reference/install_keras.html">install_keras()</a></code> and the <a href="https://tensorflow.rstudio.com/installation/">installation</a> section.</p>
+<p>This will provide you with default CPU-based installations of Keras
+and TensorFlow. If you want a more customized installation, e.g. if you
+want to take advantage of NVIDIA GPUs, see the documentation for
+<code><a href="../reference/install_keras.html">install_keras()</a></code> and the <a href="https://tensorflow.rstudio.com/installation/" class="external-link">installation</a>
+section.</p>
 </div>
-<div id="mnist-example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#mnist-example" class="anchor"></a>MNIST Example</h2>
-<p>We can learn the basics of Keras by walking through a simple example: recognizing handwritten digits from the <a href="https://en.wikipedia.org/wiki/MNIST_database">MNIST</a> dataset. MNIST consists of 28 x 28 grayscale images of handwritten digits like these:</p>
+<div class="section level2">
+<h2 id="mnist-example">MNIST Example<a class="anchor" aria-label="anchor" href="#mnist-example"></a>
+</h2>
+<p>We can learn the basics of Keras by walking through a simple example:
+recognizing handwritten digits from the <a href="https://en.wikipedia.org/wiki/MNIST_database" class="external-link">MNIST</a> dataset.
+MNIST consists of 28 x 28 grayscale images of handwritten digits like
+these:</p>
 <p><img style="width: 50%;" src="images/MNIST.png"></p>
-<p>The dataset also includes labels for each image, telling us which digit it is. For example, the labels for the above images are 5, 0, 4, and 1.</p>
-<div id="preparing-the-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#preparing-the-data" class="anchor"></a>Preparing the Data</h3>
-<p>The MNIST dataset is included with Keras and can be accessed using the <code><a href="../reference/dataset_mnist.html">dataset_mnist()</a></code> function. Here we load the dataset then create variables for our test and training data:</p>
+<p>The dataset also includes labels for each image, telling us which
+digit it is. For example, the labels for the above images are 5, 0, 4,
+and 1.</p>
+<div class="section level3">
+<h3 id="preparing-the-data">Preparing the Data<a class="anchor" aria-label="anchor" href="#preparing-the-data"></a>
+</h3>
+<p>The MNIST dataset is included with Keras and can be accessed using
+the <code><a href="../reference/dataset_mnist.html">dataset_mnist()</a></code> function. Here we load the dataset then
+create variables for our test and training data:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span>
 <span class="va">mnist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>
 <span class="va">y_train</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>
 <span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>
 <span class="va">y_test</span> <span class="op">&lt;-</span> <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span></code></pre></div>
-<p>The <code>x</code> data is a 3-d array <code>(images,width,height)</code> of grayscale values . To prepare the data for training we convert the 3-d arrays into matrices by reshaping width and height into a single dimension (28x28 images are flattened into length 784 vectors). Then, we convert the grayscale values from integers ranging between 0 to 255 into floating point values ranging between 0 and 1:</p>
+<p>The <code>x</code> data is a 3-d array
+<code>(images,width,height)</code> of grayscale values . To prepare the
+data for training we convert the 3-d arrays into matrices by reshaping
+width and height into a single dimension (28x28 images are flattened
+into length 784 vectors). Then, we convert the grayscale values from
+integers ranging between 0 to 255 into floating point values ranging
+between 0 and 1:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># reshape</span>
-<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span>
-<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># rescale</span>
 <span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">x_train</span> <span class="op">/</span> <span class="fl">255</span>
 <span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">x_test</span> <span class="op">/</span> <span class="fl">255</span></code></pre></div>
-<p>Note that we use the <code><a href="https://rdrr.io/pkg/reticulate/man/array_reshape.html">array_reshape()</a></code> function rather than the <code>dim&lt;-()</code> function to reshape the array. This is so that the data is re-interpreted using row-major semantics (as opposed to R’s default column-major semantics), which is in turn compatible with the way that the numerical libraries called by Keras interpret array dimensions.</p>
-<p>The <code>y</code> data is an integer vector with values ranging from 0 to 9. To prepare this data for training we one-hot encode the vectors into binary class matrices using the Keras <code><a href="../reference/to_categorical.html">to_categorical()</a></code> function:</p>
+<p>Note that we use the <code><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape()</a></code> function rather
+than the <code>dim&lt;-()</code> function to reshape the array. This is
+so that the data is re-interpreted using row-major semantics (as opposed
+to R’s default column-major semantics), which is in turn compatible with
+the way that the numerical libraries called by Keras interpret array
+dimensions.</p>
+<p>The <code>y</code> data is an integer vector with values ranging from
+0 to 9. To prepare this data for training we one-hot encode the vectors
+into binary class matrices using the Keras <code><a href="../reference/to_categorical.html">to_categorical()</a></code>
+function:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span><span class="va">y_train</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="va">y_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/to_categorical.html">to_categorical</a></span><span class="op">(</span><span class="va">y_test</span>, <span class="fl">10</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="defining-the-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#defining-the-model" class="anchor"></a>Defining the Model</h3>
-<p>The core data structure of Keras is a model, a way to organize layers. The simplest type of model is the <a href="https://keras.rstudio.com/articles/sequential_model.html">Sequential model</a>, a linear stack of layers.</p>
-<p>We begin by creating a sequential model and then adding layers using the pipe (<code>%&gt;%</code>) operator:</p>
+<div class="section level3">
+<h3 id="defining-the-model">Defining the Model<a class="anchor" aria-label="anchor" href="#defining-the-model"></a>
+</h3>
+<p>The core data structure of Keras is a model, a way to organize
+layers. The simplest type of model is the <a href="https://keras.rstudio.com/articles/sequential_model.html" class="external-link">Sequential
+model</a>, a linear stack of layers.</p>
+<p>We begin by creating a sequential model and then adding layers using
+the pipe (<code>%&gt;%</code>) operator:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> 
-<span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">128</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span>, activation <span class="op">=</span> <span class="st">'relu'</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">128</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span></code></pre></div>
-<p>The <code>input_shape</code> argument to the first layer specifies the shape of the input data (a length 784 numeric vector representing a grayscale image). The final layer outputs a length 10 numeric vector (probabilities for each digit) using a <a href="https://en.wikipedia.org/wiki/Softmax_function">softmax activation function</a>.</p>
-<p>Use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to print the details of the model:</p>
+<p>The <code>input_shape</code> argument to the first layer specifies
+the shape of the input data (a length 784 numeric vector representing a
+grayscale image). The final layer outputs a length 10 numeric vector
+(probabilities for each digit) using a <a href="https://en.wikipedia.org/wiki/Softmax_function" class="external-link">softmax activation
+function</a>.</p>
+<p>Use the <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> function to print the details of the
+model:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
 <pre style="box-shadow: none;"><code>Model
 ________________________________________________________________________________
 Layer (type)                        Output Shape                    Param #     
@@ -291,31 +341,34 @@ Total params: 235,146
 Trainable params: 235,146
 Non-trainable params: 0
 ________________________________________________________________________________</code></pre>
-<p>Next, compile the model with appropriate loss function, optimizer, and metrics:</p>
+<p>Next, compile the model with appropriate loss function, optimizer,
+and metrics:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html">compile</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>
   loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,
   optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="op">)</span>,
-  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
+  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 </div>
-<div id="training-and-evaluation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#training-and-evaluation" class="anchor"></a>Training and Evaluation</h3>
-<p>Use the <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> function to train the model for 30 epochs using batches of 128 images:</p>
+<div class="section level3">
+<h3 id="training-and-evaluation">Training and Evaluation<a class="anchor" aria-label="anchor" href="#training-and-evaluation"></a>
+</h3>
+<p>Use the <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> function to train the model for 30 epochs
+using batches of 128 images:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span>
   <span class="va">x_train</span>, <span class="va">y_train</span>, 
   epochs <span class="op">=</span> <span class="fl">30</span>, batch_size <span class="op">=</span> <span class="fl">128</span>, 
   validation_split <span class="op">=</span> <span class="fl">0.2</span>
 <span class="op">)</span></code></pre></div>
-<p>The <code>history</code> object returned by <code><a href="https://generics.r-lib.org/reference/fit.html">fit()</a></code> includes loss and accuracy metrics which we can plot:</p>
+<p>The <code>history</code> object returned by <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>
+includes loss and accuracy metrics which we can plot:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span></code></pre></div>
 <p><img src="images/training_history_ggplot2.png" class="r-plot" width="757" height="489"></p>
 <p>Evaluate the model’s performance on the test data:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span></code></pre></div>
 <pre><code>$loss
 [1] 0.1149
 
@@ -323,30 +376,54 @@ $acc
 [1] 0.9807</code></pre>
 <p>Generate predictions on new data:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../reference/predict_proba.html">predict_classes</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/predict_proba.html">predict_classes</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span></code></pre></div>
 <pre><code>  [1] 7 2 1 0 4 1 4 9 5 9 0 6 9 0 1 5 9 7 3 4 9 6 6 5 4 0 7 4 0 1 3 1 3 4 7 2 7 1 2
  [40] 1 1 7 4 2 3 5 1 2 4 4 6 3 5 5 6 0 4 1 9 5 7 8 9 3 7 4 6 4 3 0 7 0 2 9 1 7 3 2
  [79] 9 7 7 6 2 7 8 4 7 3 6 1 3 6 9 3 1 4 1 7 6 9
  [ reached getOption("max.print") -- omitted 9900 entries ]</code></pre>
-<p>Keras provides a vocabulary for building deep learning models that is simple, elegant, and intuitive. Building a question answering system, an image classification model, a neural Turing machine, or any other model is just as straightforward.</p>
+<p>Keras provides a vocabulary for building deep learning models that is
+simple, elegant, and intuitive. Building a question answering system, an
+image classification model, a neural Turing machine, or any other model
+is just as straightforward.</p>
 </div>
-<div id="deep-learning-with-r-book" class="section level3">
-<h3 class="hasAnchor">
-<a href="#deep-learning-with-r-book" class="anchor"></a>Deep Learning with R Book</h3>
-<p>If you want a more comprehensive introduction to both Keras and the concepts and practice of deep learning, we recommend the <a href="https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X">Deep Learning with R</a> book from Manning. This book is a collaboration between François Chollet, the creator of Keras, and J.J. Allaire, who wrote the R interface to Keras.</p>
-<p>The book presumes no significant knowledge of machine learning and deep learning, and goes all the way from basic theory to advanced practical applications, all using the R interface to Keras.</p>
+<div class="section level3">
+<h3 id="deep-learning-with-r-book">Deep Learning with R Book<a class="anchor" aria-label="anchor" href="#deep-learning-with-r-book"></a>
+</h3>
+<p>If you want a more comprehensive introduction to both Keras and the
+concepts and practice of deep learning, we recommend the <a href="https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X" class="external-link">Deep
+Learning with R</a> book from Manning. This book is a collaboration
+between François Chollet, the creator of Keras, and J.J. Allaire, who
+wrote the R interface to Keras.</p>
+<p>The book presumes no significant knowledge of machine learning and
+deep learning, and goes all the way from basic theory to advanced
+practical applications, all using the R interface to Keras.</p>
 <div style="clear: both;">
 
 </div>
 </div>
 </div>
-<div id="why-this-name-keras" class="section level2">
-<h2 class="hasAnchor">
-<a href="#why-this-name-keras" class="anchor"></a>Why this name, Keras?</h2>
-<p>Keras (κέρας) means horn in Greek. It is a reference to a literary image from ancient Greek and Latin literature, first found in the Odyssey, where dream spirits (Oneiroi, singular Oneiros) are divided between those who deceive men with false visions, who arrive to Earth through a gate of ivory, and those who announce a future that will come to pass, who arrive through a gate of horn. It’s a play on the words κέρας (horn) / κραίνω (fulfill), and ἐλέφας (ivory) / ἐλεφαίρομαι (deceive).</p>
-<p>Keras was initially developed as part of the research effort of project ONEIROS (Open-ended Neuro-Electronic Intelligent Robot Operating System).</p>
+<div class="section level2">
+<h2 id="why-this-name-keras">Why this name, Keras?<a class="anchor" aria-label="anchor" href="#why-this-name-keras"></a>
+</h2>
+<p>Keras (κέρας) means horn in Greek. It is a reference to a literary
+image from ancient Greek and Latin literature, first found in the
+Odyssey, where dream spirits (Oneiroi, singular Oneiros) are divided
+between those who deceive men with false visions, who arrive to Earth
+through a gate of ivory, and those who announce a future that will come
+to pass, who arrive through a gate of horn. It’s a play on the words
+κέρας (horn) / κραίνω (fulfill), and ἐλέφας (ivory) / ἐλεφαίρομαι
+(deceive).</p>
+<p>Keras was initially developed as part of the research effort of
+project ONEIROS (Open-ended Neuro-Electronic Intelligent Robot Operating
+System).</p>
 <blockquote>
-<p>“Oneiroi are beyond our unravelling –who can be sure what tale they tell? Not all that men look for comes to pass. Two gates there are that give passage to fleeting Oneiroi; one is made of horn, one of ivory. The Oneiroi that pass through sawn ivory are deceitful, bearing a message that will not be fulfilled; those that come out through polished horn have truth behind them, to be accomplished for men who see them.” Homer, Odyssey 19. 562 ff (Shewring translation).</p>
+<p>“Oneiroi are beyond our unravelling –who can be sure what tale they
+tell? Not all that men look for comes to pass. Two gates there are that
+give passage to fleeting Oneiroi; one is made of horn, one of ivory. The
+Oneiroi that pass through sawn ivory are deceitful, bearing a message
+that will not be fulfilled; those that come out through polished horn
+have truth behind them, to be accomplished for men who see them.” Homer,
+Odyssey 19. 562 ff (Shewring translation).</p>
 </blockquote>
 </div>
   </div>
@@ -362,11 +439,13 @@ $acc
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
+  <p></p>
+<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -374,6 +453,8 @@ $acc
 
   
 
+
+  
 
   </body>
 </html>

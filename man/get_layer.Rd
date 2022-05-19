@@ -11,7 +11,8 @@ get_layer(object, name = NULL, index = NULL)
 
 \item{name}{String, name of layer.}
 
-\item{index}{Integer, index of layer (1-based)}
+\item{index}{Integer, index of layer (1-based). Also valid are negative
+values, which count from the end of model.}
 }
 \value{
 A layer instance.

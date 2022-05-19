@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.7.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
   <a href="../../index.html">Home</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -76,7 +78,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,7 +104,8 @@
       <a href="../../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Using Keras</li>
+    </li>
+<li class="dropdown-header">Using Keras</li>
     <li>
       <a href="../../articles/guide_keras.html">Guide to Keras Basics</a>
     </li>
@@ -131,7 +134,8 @@
       <a href="../../articles/why_use_keras.html">Why Use Keras?</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Advanced</li>
+    </li>
+<li class="dropdown-header">Advanced</li>
     <li>
       <a href="../../articles/eager_guide.html">Eager Execution</a>
     </li>
@@ -170,7 +174,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rstudio/keras/">
+  <a href="https://github.com/rstudio/keras/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -191,7 +195,7 @@
       <h1 data-toc-skip>nmt_attention</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/master/vignettes/examples/nmt_attention.Rmd"><code>vignettes/examples/nmt_attention.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/examples/nmt_attention.Rmd" class="external-link"><code>vignettes/examples/nmt_attention.Rmd</code></a></small>
       <div class="hidden name"><code>nmt_attention.Rmd</code></div>
 
     </div>
@@ -199,21 +203,22 @@
     
     
 <div class="source-ref">
-<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/main/vignettes/examples/nmt_attention.R" class="uri">https://github.com/rstudio/keras/blob/main/vignettes/examples/nmt_attention.R</a></p>
+<p><span class="caption">Source: </span><a href="https://github.com/rstudio/keras/blob/main/vignettes/examples/nmt_attention.R" class="external-link uri">https://github.com/rstudio/keras/blob/main/vignettes/examples/nmt_attention.R</a></p>
 </div>
-<p>This is the companion code to the post “Attention-based Neural Machine Translation with Keras” on the TensorFlow for R blog.</p>
-<p><a href="https://blogs.rstudio.com/tensorflow/posts/2018-07-30-attention-layer/" class="uri">https://blogs.rstudio.com/tensorflow/posts/2018-07-30-attention-layer/</a></p>
+<p>This is the companion code to the post “Attention-based Neural
+Machine Translation with Keras” on the TensorFlow for R blog.</p>
+<p><a href="https://blogs.rstudio.com/tensorflow/posts/2018-07-30-attention-layer/" class="external-link uri">https://blogs.rstudio.com/tensorflow/posts/2018-07-30-attention-layer/</a></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow">tensorflow</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com">keras</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets">tfdatasets</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span>
 
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org">stringr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hadley/reshape">reshape2</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridis/">viridis</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org" class="external-link">purrr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hadley/reshape" class="external-link">reshape2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridis/" class="external-link">viridis</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span>
 
 
 <span class="co"># Preprocessing -----------------------------------------------------------</span>
@@ -222,51 +227,51 @@
 <span class="co"># https://www.manythings.org/anki/ and put it into a directory "data"</span>
 <span class="co"># This example translates English to Dutch.</span>
 <span class="va">download_data</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span><span class="op">{</span>
-  <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.exists</a></span><span class="op">(</span><span class="st">'data'</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">'data'</span><span class="op">)</span>
+  <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="st">'data'</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">'data'</span><span class="op">)</span>
   <span class="op">}</span>
-  <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span><span class="op">(</span><span class="st">'data/nld-eng.zip'</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="st">'https://www.manythings.org/anki/nld-eng.zip'</span>,
-                  destfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="st">'nld-eng.zip'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html">unzip</a></span><span class="op">(</span><span class="st">'data/nld-eng.zip'</span>, exdir <span class="op">=</span> <span class="st">'data'</span><span class="op">)</span>
+  <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="st">'data/nld-eng.zip'</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="st">'https://www.manythings.org/anki/nld-eng.zip'</span>,
+                  destfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="st">'nld-eng.zip'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="st">'data/nld-eng.zip'</span>, exdir <span class="op">=</span> <span class="st">'data'</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">}</span>
 <span class="fu">download_data</span><span class="op">(</span><span class="op">)</span>
 
-<span class="va">filepath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"nld.txt"</span><span class="op">)</span>
+<span class="va">filepath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"nld.txt"</span><span class="op">)</span>
 
-<span class="va">lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">filepath</span>, n <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span>
-<span class="va">sentences</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span><span class="va">lines</span>, <span class="st">"\t"</span><span class="op">)</span>
+<span class="va">lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">filepath</span>, n <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span>
+<span class="va">sentences</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html" class="external-link">str_split</a></span><span class="op">(</span><span class="va">lines</span>, <span class="st">"\t"</span><span class="op">)</span>
 
 <span class="va">space_before_punct</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sentence</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace_all</a></span><span class="op">(</span><span class="va">sentence</span>, <span class="st">"([?.!])"</span>, <span class="st">" \\1"</span><span class="op">)</span>
+  <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span><span class="op">(</span><span class="va">sentence</span>, <span class="st">"([?.!])"</span>, <span class="st">" \\1"</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="va">replace_special_chars</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sentence</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace_all</a></span><span class="op">(</span><span class="va">sentence</span>, <span class="st">"[^a-zA-Z?.!,¿]+"</span>, <span class="st">" "</span><span class="op">)</span>
+  <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span><span class="op">(</span><span class="va">sentence</span>, <span class="st">"[^a-zA-Z?.!,¿]+"</span>, <span class="st">" "</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="va">add_tokens</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sentence</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"&lt;start&gt; "</span>, <span class="va">sentence</span>, <span class="st">" &lt;stop&gt;"</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;start&gt; "</span>, <span class="va">sentence</span>, <span class="st">" &lt;stop&gt;"</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="va">add_tokens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Vectorize.html">Vectorize</a></span><span class="op">(</span><span class="va">add_tokens</span>, USE.NAMES <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">add_tokens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Vectorize.html" class="external-link">Vectorize</a></span><span class="op">(</span><span class="va">add_tokens</span>, USE.NAMES <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="va">preprocess_sentence</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/compose.html">compose</a></span><span class="op">(</span><span class="va">add_tokens</span>,
+<span class="va">preprocess_sentence</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/compose.html" class="external-link">compose</a></span><span class="op">(</span><span class="va">add_tokens</span>,
                                <span class="va">str_squish</span>,
                                <span class="va">replace_special_chars</span>,
                                <span class="va">space_before_punct</span><span class="op">)</span>
 
-<span class="va">word_pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">sentences</span>, <span class="va">preprocess_sentence</span><span class="op">)</span>
+<span class="va">word_pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">sentences</span>, <span class="va">preprocess_sentence</span><span class="op">)</span>
 
 <span class="va">create_index</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sentences</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">unique_words</span> <span class="op">&lt;-</span> <span class="va">sentences</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="op">)</span>
-  <span class="va">index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  <span class="va">unique_words</span> <span class="op">&lt;-</span> <span class="va">sentences</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html" class="external-link">str_split</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="va">index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
     word <span class="op">=</span> <span class="va">unique_words</span>,
-    index <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">unique_words</span><span class="op">)</span>,
+    index <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">unique_words</span><span class="op">)</span>,
     stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>
-  <span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_row.html">add_row</a></span><span class="op">(</span>word <span class="op">=</span> <span class="st">"&lt;pad&gt;"</span>,
+  <span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_row.html" class="external-link">add_row</a></span><span class="op">(</span>word <span class="op">=</span> <span class="st">"&lt;pad&gt;"</span>,
             index <span class="op">=</span> <span class="fl">0</span>,
             .before <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
   <span class="va">index</span>
@@ -279,27 +284,27 @@
   <span class="va">index_df</span><span class="op">[</span><span class="va">index_df</span><span class="op">$</span><span class="va">index</span> <span class="op">==</span> <span class="va">index</span>, <span class="st">"word"</span><span class="op">]</span>
 <span class="op">}</span>
 
-<span class="va">src_index</span> <span class="op">&lt;-</span> <span class="fu">create_index</span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">word_pairs</span>, <span class="op">~</span> <span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="va">target_index</span> <span class="op">&lt;-</span> <span class="fu">create_index</span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">word_pairs</span>, <span class="op">~</span> <span class="va">.</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+<span class="va">src_index</span> <span class="op">&lt;-</span> <span class="fu">create_index</span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">word_pairs</span>, <span class="op">~</span> <span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+<span class="va">target_index</span> <span class="op">&lt;-</span> <span class="fu">create_index</span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">word_pairs</span>, <span class="op">~</span> <span class="va">.</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
 <span class="va">sentence2digits</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sentence</span>, <span class="va">index_df</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="op">(</span><span class="va">sentence</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">word</span><span class="op">)</span>
+  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="op">(</span><span class="va">sentence</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html" class="external-link">str_split</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">word</span><span class="op">)</span>
     <span class="fu">word2index</span><span class="op">(</span><span class="va">word</span>, <span class="va">index_df</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="va">sentlist2diglist</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sentence_list</span>, <span class="va">index_df</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">sentence_list</span>, <span class="kw">function</span><span class="op">(</span><span class="va">sentence</span><span class="op">)</span>
+  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">sentence_list</span>, <span class="kw">function</span><span class="op">(</span><span class="va">sentence</span><span class="op">)</span>
     <span class="fu">sentence2digits</span><span class="op">(</span><span class="va">sentence</span>, <span class="va">index_df</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="va">src_diglist</span> <span class="op">&lt;-</span>
-  <span class="fu">sentlist2diglist</span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">word_pairs</span>, <span class="op">~</span> <span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, <span class="va">src_index</span><span class="op">)</span>
-<span class="va">src_maxlen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">src_diglist</span>, <span class="va">length</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="fu">sentlist2diglist</span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">word_pairs</span>, <span class="op">~</span> <span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, <span class="va">src_index</span><span class="op">)</span>
+<span class="va">src_maxlen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">src_diglist</span>, <span class="va">length</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">src_matrix</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span><span class="va">src_diglist</span>, maxlen <span class="op">=</span> <span class="va">src_maxlen</span>,  padding <span class="op">=</span> <span class="st">"post"</span><span class="op">)</span>
 
 <span class="va">target_diglist</span> <span class="op">&lt;-</span>
-  <span class="fu">sentlist2diglist</span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">word_pairs</span>, <span class="op">~</span> <span class="va">.</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, <span class="va">target_index</span><span class="op">)</span>
-<span class="va">target_maxlen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">target_diglist</span>, <span class="va">length</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="fu">sentlist2diglist</span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">word_pairs</span>, <span class="op">~</span> <span class="va">.</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, <span class="va">target_index</span><span class="op">)</span>
+<span class="va">target_maxlen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">target_diglist</span>, <span class="va">length</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">target_matrix</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span><span class="va">target_diglist</span>, maxlen <span class="op">=</span> <span class="va">target_maxlen</span>, padding <span class="op">=</span> <span class="st">"post"</span><span class="op">)</span>
 
@@ -308,9 +313,9 @@
 <span class="co"># Train-test-split --------------------------------------------------------</span>
 
 <span class="va">train_indices</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">src_matrix</span><span class="op">)</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">src_matrix</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.8</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">src_matrix</span><span class="op">)</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">src_matrix</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.8</span><span class="op">)</span>
 
-<span class="va">validation_indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">setdiff</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">src_matrix</span><span class="op">)</span>, <span class="va">train_indices</span><span class="op">)</span>
+<span class="va">validation_indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">src_matrix</span><span class="op">)</span>, <span class="va">train_indices</span><span class="op">)</span>
 
 <span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">src_matrix</span><span class="op">[</span><span class="va">train_indices</span>,<span class="op">]</span>
 <span class="va">y_train</span> <span class="op">&lt;-</span> <span class="va">target_matrix</span><span class="op">[</span><span class="va">train_indices</span>,<span class="op">]</span>
@@ -318,13 +323,13 @@
 <span class="va">x_valid</span> <span class="op">&lt;-</span> <span class="va">src_matrix</span><span class="op">[</span><span class="va">validation_indices</span>,<span class="op">]</span>
 <span class="va">y_valid</span> <span class="op">&lt;-</span> <span class="va">target_matrix</span><span class="op">[</span><span class="va">validation_indices</span>,<span class="op">]</span>
 
-<span class="va">buffer_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>
+<span class="va">buffer_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span>
 
 <span class="co"># just for convenience, so we may get a glimpse at translation performance </span>
 <span class="co"># during training</span>
 <span class="va">train_sentences</span> <span class="op">&lt;-</span> <span class="va">sentences</span><span class="op">[</span><span class="va">train_indices</span><span class="op">]</span>
 <span class="va">validation_sentences</span> <span class="op">&lt;-</span> <span class="va">sentences</span><span class="op">[</span><span class="va">validation_indices</span><span class="op">]</span>
-<span class="va">validation_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">validation_sentences</span>, <span class="fl">5</span><span class="op">)</span>
+<span class="va">validation_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">validation_sentences</span>, <span class="fl">5</span><span class="op">)</span>
 
 
 
@@ -334,21 +339,21 @@
 <span class="va">embedding_dim</span> <span class="op">&lt;-</span> <span class="fl">64</span>
 <span class="va">gru_units</span> <span class="op">&lt;-</span> <span class="fl">256</span>
 
-<span class="va">src_vocab_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">src_index</span><span class="op">)</span>
-<span class="va">target_vocab_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">target_index</span><span class="op">)</span>
+<span class="va">src_vocab_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">src_index</span><span class="op">)</span>
+<span class="va">target_vocab_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">target_index</span><span class="op">)</span>
 
 
 <span class="co"># Create datasets ---------------------------------------------------------</span>
 
 <span class="va">train_dataset</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html">tensor_slices_dataset</a></span><span class="op">(</span><span class="fu"><a href="../../reference/keras_array.html">keras_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>  <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_shuffle.html">dataset_shuffle</a></span><span class="op">(</span>buffer_size <span class="op">=</span> <span class="va">buffer_size</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span>, drop_remainder <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="fu">tensor_slices_dataset</span><span class="op">(</span><span class="fu"><a href="../../reference/keras_array.html">keras_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>  <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">dataset_shuffle</span><span class="op">(</span>buffer_size <span class="op">=</span> <span class="va">buffer_size</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">dataset_batch</span><span class="op">(</span><span class="va">batch_size</span>, drop_remainder <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="va">validation_dataset</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html">tensor_slices_dataset</a></span><span class="op">(</span><span class="fu"><a href="../../reference/keras_array.html">keras_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x_valid</span>, <span class="va">y_valid</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_shuffle.html">dataset_shuffle</a></span><span class="op">(</span>buffer_size <span class="op">=</span> <span class="va">buffer_size</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span>, drop_remainder <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="fu">tensor_slices_dataset</span><span class="op">(</span><span class="fu"><a href="../../reference/keras_array.html">keras_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x_valid</span>, <span class="va">y_valid</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">dataset_shuffle</span><span class="op">(</span>buffer_size <span class="op">=</span> <span class="va">buffer_size</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">dataset_batch</span><span class="op">(</span><span class="va">batch_size</span>, drop_remainder <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 
 <span class="co"># Attention encoder -------------------------------------------------------</span>
@@ -375,9 +380,9 @@
         <span class="va">hidden</span> <span class="op">&lt;-</span> <span class="va">inputs</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>
         
         <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">embedding</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">state</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="va">self</span><span class="op">$</span><span class="fu">gru</span><span class="op">(</span><span class="va">x</span>, initial_state <span class="op">=</span> <span class="va">hidden</span><span class="op">)</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">state</span><span class="op">)</span> <span class="op"><a href="../../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">self</span><span class="op">$</span><span class="fu">gru</span><span class="op">(</span><span class="va">x</span>, initial_state <span class="op">=</span> <span class="va">hidden</span><span class="op">)</span>
         
-        <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">state</span><span class="op">)</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">state</span><span class="op">)</span>
       <span class="op">}</span>
     <span class="op">}</span><span class="op">)</span>
   <span class="op">}</span>
@@ -428,15 +433,15 @@
         <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">embedding</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
         
         <span class="va">x</span> <span class="op">&lt;-</span>
-          <span class="fu"><a href="../../reference/k_concatenate.html">k_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span><span class="op">(</span><span class="va">context_vector</span>, <span class="fl">2</span><span class="op">)</span>, <span class="va">x</span><span class="op">)</span>, axis <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+          <span class="fu"><a href="../../reference/k_concatenate.html">k_concatenate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span><span class="op">(</span><span class="va">context_vector</span>, <span class="fl">2</span><span class="op">)</span>, <span class="va">x</span><span class="op">)</span>, axis <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
         
-        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">state</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="va">self</span><span class="op">$</span><span class="fu">gru</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">state</span><span class="op">)</span> <span class="op"><a href="../../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">self</span><span class="op">$</span><span class="fu">gru</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
         
-        <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_reshape.html">k_reshape</a></span><span class="op">(</span><span class="va">output</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="va">gru_units</span><span class="op">)</span><span class="op">)</span>
+        <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_reshape.html">k_reshape</a></span><span class="op">(</span><span class="va">output</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="va">gru_units</span><span class="op">)</span><span class="op">)</span>
         
         <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">fc</span><span class="op">(</span><span class="va">output</span><span class="op">)</span>
         
-        <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">state</span>, <span class="va">attention_weights</span><span class="op">)</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">state</span>, <span class="va">attention_weights</span><span class="op">)</span>
         
       <span class="op">}</span>
       
@@ -461,7 +466,7 @@
 <span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">optimizers</span><span class="op">$</span><span class="fu">Adam</span><span class="op">(</span><span class="op">)</span>
 
 <span class="va">cx_loss</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span><span class="op">(</span><span class="va">y_true</span> <span class="op">==</span> <span class="fl">0L</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
+  <span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">y_true</span> <span class="op">==</span> <span class="fl">0L</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
   <span class="va">loss</span> <span class="op">&lt;-</span>
     <span class="va">tf</span><span class="op">$</span><span class="va">nn</span><span class="op">$</span><span class="fu">sparse_softmax_cross_entropy_with_logits</span><span class="op">(</span>labels <span class="op">=</span> <span class="va">y_true</span>,
                                                    logits <span class="op">=</span> <span class="va">y_pred</span><span class="op">)</span> <span class="op">*</span> <span class="va">mask</span>
@@ -477,76 +482,76 @@
 <span class="va">evaluate</span> <span class="op">&lt;-</span>
   <span class="kw">function</span><span class="op">(</span><span class="va">sentence</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">attention_matrix</span> <span class="op">&lt;-</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow <span class="op">=</span> <span class="va">target_maxlen</span>, ncol <span class="op">=</span> <span class="va">src_maxlen</span><span class="op">)</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow <span class="op">=</span> <span class="va">target_maxlen</span>, ncol <span class="op">=</span> <span class="va">src_maxlen</span><span class="op">)</span>
     
     <span class="va">sentence</span> <span class="op">&lt;-</span> <span class="fu">preprocess_sentence</span><span class="op">(</span><span class="va">sentence</span><span class="op">)</span>
     <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu">sentence2digits</span><span class="op">(</span><span class="va">sentence</span>, <span class="va">src_index</span><span class="op">)</span>
     <span class="va">input</span> <span class="op">&lt;-</span>
-      <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>, maxlen <span class="op">=</span> <span class="va">src_maxlen</span>,  padding <span class="op">=</span> <span class="st">"post"</span><span class="op">)</span>
+      <span class="fu"><a href="../../reference/pad_sequences.html">pad_sequences</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>, maxlen <span class="op">=</span> <span class="va">src_maxlen</span>,  padding <span class="op">=</span> <span class="st">"post"</span><span class="op">)</span>
     <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_constant.html">k_constant</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
     
     <span class="va">result</span> <span class="op">&lt;-</span> <span class="st">""</span>
     
-    <span class="va">hidden</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_zeros.html">k_zeros</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">gru_units</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">enc_output</span>, <span class="va">enc_hidden</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="fu">encoder</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">input</span>, <span class="va">hidden</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">hidden</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_zeros.html">k_zeros</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">gru_units</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">enc_output</span>, <span class="va">enc_hidden</span><span class="op">)</span> <span class="op"><a href="../../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu">encoder</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">input</span>, <span class="va">hidden</span><span class="op">)</span><span class="op">)</span>
     
     <span class="va">dec_hidden</span> <span class="op">&lt;-</span> <span class="va">enc_hidden</span>
     <span class="va">dec_input</span> <span class="op">&lt;-</span>
-      <span class="fu"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">word2index</span><span class="op">(</span><span class="st">"&lt;start&gt;"</span>, <span class="va">target_index</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+      <span class="fu"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">word2index</span><span class="op">(</span><span class="st">"&lt;start&gt;"</span>, <span class="va">target_index</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
     
-    <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">target_maxlen</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">preds</span>, <span class="va">dec_hidden</span>, <span class="va">attention_weights</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span>
-        <span class="fu">decoder</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">dec_input</span>, <span class="va">dec_hidden</span>, <span class="va">enc_output</span><span class="op">)</span><span class="op">)</span>
-      <span class="va">attention_weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_reshape.html">k_reshape</a></span><span class="op">(</span><span class="va">attention_weights</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-      <span class="va">attention_matrix</span><span class="op">[</span><span class="va">t</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="va">attention_weights</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">as.double</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">target_maxlen</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">preds</span>, <span class="va">dec_hidden</span>, <span class="va">attention_weights</span><span class="op">)</span> <span class="op"><a href="../../reference/multi-assign.html">%&lt;-%</a></span>
+        <span class="fu">decoder</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">dec_input</span>, <span class="va">dec_hidden</span>, <span class="va">enc_output</span><span class="op">)</span><span class="op">)</span>
+      <span class="va">attention_weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_reshape.html">k_reshape</a></span><span class="op">(</span><span class="va">attention_weights</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+      <span class="va">attention_matrix</span><span class="op">[</span><span class="va">t</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="va">attention_weights</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/double.html" class="external-link">as.double</a></span><span class="op">(</span><span class="op">)</span>
       
       <span class="va">pred_idx</span> <span class="op">&lt;-</span>
-        <span class="va">tf</span><span class="op">$</span><span class="va">random</span><span class="op">$</span><span class="fu">categorical</span><span class="op">(</span><span class="fu"><a href="../../reference/k_exp.html">k_exp</a></span><span class="op">(</span><span class="va">preds</span><span class="op">)</span>, num_samples <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">]</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">as.double</a></span><span class="op">(</span><span class="op">)</span>
+        <span class="va">tf</span><span class="op">$</span><span class="va">random</span><span class="op">$</span><span class="fu">categorical</span><span class="op">(</span><span class="fu"><a href="../../reference/k_exp.html">k_exp</a></span><span class="op">(</span><span class="va">preds</span><span class="op">)</span>, num_samples <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/double.html" class="external-link">as.double</a></span><span class="op">(</span><span class="op">)</span>
       <span class="va">pred_word</span> <span class="op">&lt;-</span> <span class="fu">index2word</span><span class="op">(</span><span class="va">pred_idx</span>, <span class="va">target_index</span><span class="op">)</span>
       
       <span class="kw">if</span> <span class="op">(</span><span class="va">pred_word</span> <span class="op">==</span> <span class="st">'&lt;stop&gt;'</span><span class="op">)</span> <span class="op">{</span>
         <span class="va">result</span> <span class="op">&lt;-</span>
-          <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">result</span>, <span class="va">pred_word</span><span class="op">)</span>
-        <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">result</span>, <span class="va">sentence</span>, <span class="va">attention_matrix</span><span class="op">)</span><span class="op">)</span>
+          <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">result</span>, <span class="va">pred_word</span><span class="op">)</span>
+        <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">result</span>, <span class="va">sentence</span>, <span class="va">attention_matrix</span><span class="op">)</span><span class="op">)</span>
       <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
         <span class="va">result</span> <span class="op">&lt;-</span>
-          <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">result</span>, <span class="va">pred_word</span>, <span class="st">" "</span><span class="op">)</span>
-        <span class="va">dec_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">pred_idx</span><span class="op">)</span><span class="op">)</span>
+          <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">result</span>, <span class="va">pred_word</span>, <span class="st">" "</span><span class="op">)</span>
+        <span class="va">dec_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">pred_idx</span><span class="op">)</span><span class="op">)</span>
       <span class="op">}</span>
     <span class="op">}</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html">str_trim</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>, <span class="va">sentence</span>, <span class="va">attention_matrix</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>, <span class="va">sentence</span>, <span class="va">attention_matrix</span><span class="op">)</span>
   <span class="op">}</span>
 
 <span class="va">plot_attention</span> <span class="op">&lt;-</span>
   <span class="kw">function</span><span class="op">(</span><span class="va">attention_matrix</span>,
            <span class="va">words_sentence</span>,
            <span class="va">words_result</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">melted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reshape2/man/melt.html">melt</a></span><span class="op">(</span><span class="va">attention_matrix</span><span class="op">)</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">melted</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>
-      x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Var2</span><span class="op">)</span>,
-      y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Var1</span><span class="op">)</span>,
+    <span class="va">melted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/melt.data.table.html" class="external-link">melt</a></span><span class="op">(</span><span class="va">attention_matrix</span><span class="op">)</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">melted</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>
+      x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">Var2</span><span class="op">)</span>,
+      y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">Var1</span><span class="op">)</span>,
       fill <span class="op">=</span> <span class="va">value</span>
     <span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_fill_viridis</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.ticks <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">words_sentence</span>, position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_y_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">words_result</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_fill_viridis</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
+      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.ticks <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span> <span class="op">+</span>
+      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span> <span class="op">+</span>
+      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_x_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">words_sentence</span>, position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span> <span class="op">+</span>
+      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_y_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">words_result</span><span class="op">)</span> <span class="op">+</span>
+      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
   <span class="op">}</span>
 
 
 <span class="va">translate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sentence</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">result</span>, <span class="va">sentence</span>, <span class="va">attention_matrix</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">sentence</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Input: "</span>,  <span class="va">sentence</span><span class="op">)</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Predicted translation: "</span>, <span class="va">result</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">result</span>, <span class="va">sentence</span>, <span class="va">attention_matrix</span><span class="op">)</span> <span class="op"><a href="../../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">sentence</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Input: "</span>,  <span class="va">sentence</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Predicted translation: "</span>, <span class="va">result</span><span class="op">)</span><span class="op">)</span>
   <span class="va">attention_matrix</span> <span class="op">&lt;-</span>
-    <span class="va">attention_matrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">" "</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,
-                     <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span><span class="va">sentence</span>, <span class="st">" "</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">]</span>
+    <span class="va">attention_matrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html" class="external-link">str_split</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">" "</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,
+                     <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html" class="external-link">str_split</a></span><span class="op">(</span><span class="va">sentence</span>, <span class="st">" "</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">]</span>
   <span class="fu">plot_attention</span><span class="op">(</span><span class="va">attention_matrix</span>,
-                 <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span><span class="va">sentence</span>, <span class="st">" "</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>,
-                 <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">" "</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+                 <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html" class="external-link">str_split</a></span><span class="op">(</span><span class="va">sentence</span>, <span class="st">" "</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>,
+                 <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html" class="external-link">str_split</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">" "</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="co"># Training loop -----------------------------------------------------------</span>
@@ -554,70 +559,70 @@
 
 <span class="va">n_epochs</span> <span class="op">&lt;-</span> <span class="fl">50</span>
 
-<span class="va">encoder_init_hidden</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_zeros.html">k_zeros</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">gru_units</span><span class="op">)</span><span class="op">)</span>
+<span class="va">encoder_init_hidden</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_zeros.html">k_zeros</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">gru_units</span><span class="op">)</span><span class="op">)</span>
 
-<span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n_epochs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n_epochs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">total_loss</span> <span class="op">&lt;-</span> <span class="fl">0</span>
   <span class="va">iteration</span> <span class="op">&lt;-</span> <span class="fl">0</span>
   
-  <span class="va">iter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/make-iterator.html">make_iterator_one_shot</a></span><span class="op">(</span><span class="va">train_dataset</span><span class="op">)</span>
+  <span class="va">iter</span> <span class="op">&lt;-</span> <span class="fu">make_iterator_one_shot</span><span class="op">(</span><span class="va">train_dataset</span><span class="op">)</span>
   
-  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/until_out_of_range.html">until_out_of_range</a></span><span class="op">(</span><span class="op">{</span>
-    <span class="va">batch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/iterator_get_next.html">iterator_get_next</a></span><span class="op">(</span><span class="va">iter</span><span class="op">)</span>
+  <span class="fu">until_out_of_range</span><span class="op">(</span><span class="op">{</span>
+    <span class="va">batch</span> <span class="op">&lt;-</span> <span class="fu">iterator_get_next</span><span class="op">(</span><span class="va">iter</span><span class="op">)</span>
     <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fl">0</span>
     <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">batch</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
     <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">batch</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>
     <span class="va">iteration</span> <span class="op">&lt;-</span> <span class="va">iteration</span> <span class="op">+</span> <span class="fl">1</span>
 
-    <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/reticulate/man/with-as-operator.html">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">enc_output</span>, <span class="va">enc_hidden</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span> <span class="fu">encoder</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">encoder_init_hidden</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rstudio.github.io/reticulate/reference/with-as-operator.html" class="external-link">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">enc_output</span>, <span class="va">enc_hidden</span><span class="op">)</span> <span class="op"><a href="../../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu">encoder</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">encoder_init_hidden</span><span class="op">)</span><span class="op">)</span>
       
       <span class="va">dec_hidden</span> <span class="op">&lt;-</span> <span class="va">enc_hidden</span>
       <span class="va">dec_input</span> <span class="op">&lt;-</span>
-        <span class="fu"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+        <span class="fu"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
           <span class="fu">word2index</span><span class="op">(</span><span class="st">"&lt;start&gt;"</span>, <span class="va">target_index</span><span class="op">)</span>
         <span class="op">)</span>, <span class="va">batch_size</span><span class="op">)</span><span class="op">)</span>
       
       
-      <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">target_maxlen</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">preds</span>, <span class="va">dec_hidden</span>, <span class="va">weights</span><span class="op">)</span> <span class="op"><a href="../../reference/%&lt;-%.html">%&lt;-%</a></span>
-          <span class="fu">decoder</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">dec_input</span>, <span class="va">dec_hidden</span>, <span class="va">enc_output</span><span class="op">)</span><span class="op">)</span>
+      <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">target_maxlen</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">preds</span>, <span class="va">dec_hidden</span>, <span class="va">weights</span><span class="op">)</span> <span class="op"><a href="../../reference/multi-assign.html">%&lt;-%</a></span>
+          <span class="fu">decoder</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">dec_input</span>, <span class="va">dec_hidden</span>, <span class="va">enc_output</span><span class="op">)</span><span class="op">)</span>
         <span class="va">loss</span> <span class="op">&lt;-</span> <span class="va">loss</span> <span class="op">+</span> <span class="fu">cx_loss</span><span class="op">(</span><span class="va">y</span><span class="op">[</span>, <span class="va">t</span><span class="op">]</span>, <span class="va">preds</span><span class="op">)</span>
         
         <span class="va">dec_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/k_expand_dims.html">k_expand_dims</a></span><span class="op">(</span><span class="va">y</span><span class="op">[</span>, <span class="va">t</span><span class="op">]</span><span class="op">)</span>
       <span class="op">}</span>
     <span class="op">}</span><span class="op">)</span>
     <span class="va">total_loss</span> <span class="op">&lt;-</span>
-      <span class="va">total_loss</span> <span class="op">+</span> <span class="va">loss</span> <span class="op">/</span> <span class="fu"><a href="../../reference/k_cast_to_floatx.html">k_cast_to_floatx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>
+      <span class="va">total_loss</span> <span class="op">+</span> <span class="va">loss</span> <span class="op">/</span> <span class="fu"><a href="../../reference/k_cast_to_floatx.html">k_cast_to_floatx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>
     
-    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span>
       <span class="st">"Batch loss (epoch/batch): "</span>,
       <span class="va">epoch</span>,
       <span class="st">"/"</span>,
       <span class="va">iteration</span>,
       <span class="st">": "</span>,
-      <span class="op">(</span><span class="va">loss</span> <span class="op">/</span> <span class="fu"><a href="../../reference/k_cast_to_floatx.html">k_cast_to_floatx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">as.double</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>,
+      <span class="op">(</span><span class="va">loss</span> <span class="op">/</span> <span class="fu"><a href="../../reference/k_cast_to_floatx.html">k_cast_to_floatx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/double.html" class="external-link">as.double</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>,
       <span class="st">"\n"</span>
-    <span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="op">)</span>
     
-    <span class="va">variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">encoder</span><span class="op">$</span><span class="va">variables</span>, <span class="va">decoder</span><span class="op">$</span><span class="va">variables</span><span class="op">)</span>
+    <span class="va">variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">encoder</span><span class="op">$</span><span class="va">variables</span>, <span class="va">decoder</span><span class="op">$</span><span class="va">variables</span><span class="op">)</span>
     <span class="va">gradients</span> <span class="op">&lt;-</span> <span class="va">tape</span><span class="op">$</span><span class="fu">gradient</span><span class="op">(</span><span class="va">loss</span>, <span class="va">variables</span><span class="op">)</span>
     
-    <span class="va">optimizer</span><span class="op">$</span><span class="fu">apply_gradients</span><span class="op">(</span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html">transpose</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">gradients</span>, <span class="va">variables</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">optimizer</span><span class="op">$</span><span class="fu">apply_gradients</span><span class="op">(</span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/transpose.html" class="external-link">transpose</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">gradients</span>, <span class="va">variables</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
     
   <span class="op">}</span><span class="op">)</span>
   
-  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span>
     <span class="st">"Total loss (epoch): "</span>,
     <span class="va">epoch</span>,
     <span class="st">": "</span>,
-    <span class="op">(</span><span class="va">total_loss</span> <span class="op">/</span> <span class="fu"><a href="../../reference/k_cast_to_floatx.html">k_cast_to_floatx</a></span><span class="op">(</span><span class="va">buffer_size</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">as.double</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>,
+    <span class="op">(</span><span class="va">total_loss</span> <span class="op">/</span> <span class="fu"><a href="../../reference/k_cast_to_floatx.html">k_cast_to_floatx</a></span><span class="op">(</span><span class="va">buffer_size</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/double.html" class="external-link">as.double</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>,
     <span class="st">"\n"</span>
-  <span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="op">)</span>
   
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">walk</a></span><span class="op">(</span><span class="va">train_sentences</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">pair</span><span class="op">)</span>
+  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">walk</a></span><span class="op">(</span><span class="va">train_sentences</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">pair</span><span class="op">)</span>
     <span class="fu">translate</span><span class="op">(</span><span class="va">pair</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">walk</a></span><span class="op">(</span><span class="va">validation_sample</span>, <span class="kw">function</span><span class="op">(</span><span class="va">pair</span><span class="op">)</span>
+  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">walk</a></span><span class="op">(</span><span class="va">validation_sample</span>, <span class="kw">function</span><span class="op">(</span><span class="va">pair</span><span class="op">)</span>
     <span class="fu">translate</span><span class="op">(</span><span class="va">pair</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
 
@@ -635,11 +640,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>, Google.</p>
+  <p></p>
+<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -647,6 +654,8 @@
 
   
 
+
+  
 
   </body>
 </html>
