@@ -142,7 +142,8 @@ test_metric <- function(metric, ...) {
   test_that(metric_name, {
     m <- metric(...)
 
-    expect_s3_class(m, "keras.metrics.Metric")
+    expect_s3_class(m, c("keras.metrics.Metric",
+                         'keras.metrics.base_metric.Metric'))
 
     define_model() %>%
       compile(loss = loss,
