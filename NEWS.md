@@ -13,6 +13,8 @@
   Also provided is `mark_active()`, a decorator for indicating a class method
   should be an active binding (i.e., decorated with Python's `@property`).
 
+- New L2 unit normilization layer: `layer_unit_normalization()`
+
 - New `zip_lists()` function for transposing lists, optionally matching by name.
 
 - New `plot()` S3 method for models.
