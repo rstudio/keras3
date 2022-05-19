@@ -19,3 +19,5 @@ Meta
 .vscode
 scratch
 inst/doc
+.Rprofile
+.Renviron
