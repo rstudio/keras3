@@ -35,11 +35,15 @@ Use \code{sample_weight} of 0 to mask values.
 \note{
 Unlike most other metrics, this only takes a single tensor as input to update state.
 
-Example usage with \code{compile()}:\preformatted{model$add_metric(metric_mean(name='mean_1')(outputs))
-model \%>\% compile(optimizer='sgd', loss='mse')
-}
+Example usage with \code{compile()}:
 
-Example standalone usage:\preformatted{m  <- metric_mean()
+\if{html}{\out{<div class="sourceCode">}}\preformatted{model$add_metric(metric_mean(name='mean_1')(outputs))
+model \%>\% compile(optimizer='sgd', loss='mse')
+}\if{html}{\out{</div>}}
+
+Example standalone usage:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{m  <- metric_mean()
 m$update_state(c(1, 3, 5, 7))
 m$result()
 
@@ -47,7 +51,7 @@ m$reset_state()
 m$update_state(c(1, 3, 5, 7), sample_weight=c(1, 1, 0, 0))
 m$result()
 as.numeric(m$result())
-}
+}\if{html}{\out{</div>}}
 }
 \seealso{
 Other metrics: 

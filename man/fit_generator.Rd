@@ -27,9 +27,11 @@ fit_generator(
 \code{\link[=flow_images_from_directory]{flow_images_from_directory()}} or a custom R
 \href{https://rstudio.github.io/reticulate/articles/calling_python.html#generators-1}{generator function}).
 
-The output of the generator must be a list of one of these forms:\preformatted{ - (inputs, targets)
+The output of the generator must be a list of one of these forms:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ - (inputs, targets)
  - (inputs, targets, sample_weights)
-}
+}\if{html}{\out{</div>}}
 
 This list (a single output of the generator) makes a single batch.
 Therefore, all arrays in this list must have the same length (equal to

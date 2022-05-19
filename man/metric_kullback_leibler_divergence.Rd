@@ -36,8 +36,8 @@ computed case-wise values for the mini-batch are returned directly.
 Computes Kullback-Leibler divergence
 }
 \details{
-\preformatted{metric = y_true * log(y_true / y_pred)
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{metric = y_true * log(y_true / y_pred)
+}\if{html}{\out{</div>}}
 
 See: https://en.wikipedia.org/wiki/Kullback\%E2\%80\%93Leibler_divergence
 }

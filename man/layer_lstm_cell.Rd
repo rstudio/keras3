@@ -86,7 +86,9 @@ for details about the usage of RNN API.
 This class processes one step within the whole time sequence input, whereas
 \code{tf$keras$layer$LSTM} processes the whole sequence.
 
-For example:\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- k_random_normal(c(32, 10, 8))
+For example:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- k_random_normal(c(32, 10, 8))
 rnn <- layer_rnn(cell = layer_lstm_cell(units = 4))
 output <- rnn(inputs)
 dim(output) # (32, 4)

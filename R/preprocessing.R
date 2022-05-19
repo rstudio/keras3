@@ -1047,11 +1047,11 @@ flow_images_from_dataframe <- function(
 #'
 #'
 #' @return A tf.data.Dataset object. If label_mode is `NULL`, it yields float32
-#'   tensors of shape (batch_size, image_size[0], image_size[1], num_channels),
+#'   tensors of shape `(batch_size, image_size[1], image_size[2], num_channels)`,
 #'   encoding images (see below for rules regarding num_channels).
 #'
 #'   Otherwise, it yields pairs of (images, labels), where images has shape
-#'   (batch_size, image_size[0], image_size[1], num_channels), and labels
+#'   `(batch_size, image_size[1], image_size[2], num_channels)`, and labels
 #'   follows the format described below.
 #'
 #'   Rules regarding labels format:

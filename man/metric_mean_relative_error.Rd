@@ -30,15 +30,19 @@ it is ultimately returned as \code{mean_relative_error}:
 an idempotent operation that simply divides \code{total} by \code{count}.
 
 If \code{sample_weight} is \code{NULL}, weights default to 1.
-Use \code{sample_weight} of 0 to mask values.\preformatted{metric = mean(|y_pred - y_true| / normalizer)
-}
+Use \code{sample_weight} of 0 to mask values.
 
-For example:\preformatted{m = metric_mean_relative_error(normalizer=c(1, 3, 2, 3))
+\if{html}{\out{<div class="sourceCode">}}\preformatted{metric = mean(|y_pred - y_true| / normalizer)
+}\if{html}{\out{</div>}}
+
+For example:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{m = metric_mean_relative_error(normalizer=c(1, 3, 2, 3))
 m$update_state(c(1, 3, 2, 3), c(2, 4, 6, 8))
  # result     = mean(c(1, 1, 4, 5) / c(1, 3, 2, 3)) = mean(c(1, 1/3, 2, 5/3))
  #            = 5/4 = 1.25
 m$result()
-}
+}\if{html}{\out{</div>}}
 }
 \seealso{
 Other metrics: 

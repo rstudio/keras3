@@ -32,7 +32,9 @@ with \code{channels_last} data format, across 10 timesteps.
 The batch input shape is \verb{(32, 10, 128, 128, 3)}.
 
 You can then use \code{TimeDistributed} to apply the same \code{Conv2D} layer to each
-of the 10 timesteps, independently:\if{html}{\out{<div class="sourceCode R">}}\preformatted{input <- layer_input(c(10, 128, 128, 3))
+of the 10 timesteps, independently:
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{input <- layer_input(c(10, 128, 128, 3))
 conv_layer <- layer_conv_2d(filters = 64, kernel_size = c(3, 3))
 output <- input \%>\% time_distributed(conv_layer)
 output$shape # TensorShape([None, 10, 126, 126, 64])

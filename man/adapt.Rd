@@ -49,7 +49,9 @@ layer, you need to call \code{tf_function} again on your callable after
 each subsequent call to \code{adapt()}.
 }
 
-\code{keras_model} example with multiple adapts:\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_normalization(axis=NULL)
+\code{keras_model} example with multiple adapts:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_normalization(axis=NULL)
 adapt(layer, c(0, 2))
 model <- keras_model_sequential(layer)
 predict(model, c(0, 1, 2)) # [1] -1  0  1
@@ -59,7 +61,9 @@ compile(model)  # This is needed to re-compile model.predict!
 predict(model, c(0, 1, 2)) # [1] 0 1 2
 }\if{html}{\out{</div>}}
 
-\code{tf.data.Dataset} example with multiple adapts:\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_normalization(axis=NULL)
+\code{tf.data.Dataset} example with multiple adapts:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_normalization(axis=NULL)
 adapt(layer, c(0, 2))
 input_ds <- tfdatasets::range_dataset(0, 3)
 normalized_ds <- input_ds \%>\%

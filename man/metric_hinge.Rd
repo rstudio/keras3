@@ -31,8 +31,8 @@ computed case-wise values for the mini-batch are returned directly.
 provided we will convert them to -1 or 1.
 }
 \details{
-\preformatted{loss = tf$reduce_mean(tf$maximum(1 - y_true * y_pred, 0L), axis=-1L)
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{loss = tf$reduce_mean(tf$maximum(1 - y_true * y_pred, 0L), axis=-1L)
+}\if{html}{\out{</div>}}
 }
 \seealso{
 Other metrics: 

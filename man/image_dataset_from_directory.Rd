@@ -86,11 +86,11 @@ be preserved.}
 }
 \value{
 A tf.data.Dataset object. If label_mode is \code{NULL}, it yields float32
-tensors of shape (batch_size, image_size\link{0}, image_size\link{1}, num_channels),
+tensors of shape \verb{(batch_size, image_size[1], image_size[2], num_channels)},
 encoding images (see below for rules regarding num_channels).
 
 Otherwise, it yields pairs of (images, labels), where images has shape
-(batch_size, image_size\link{0}, image_size\link{1}, num_channels), and labels
+\verb{(batch_size, image_size[1], image_size[2], num_channels)}, and labels
 follows the format described below.
 
 Rules regarding labels format:
@@ -115,14 +115,16 @@ Rules regarding number of channels in the yielded images:
 Generates a \code{tf.data.Dataset} from image files in a directory.
 }
 \details{
-If your directory structure is:\preformatted{main_directory/
+If your directory structure is:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{main_directory/
 ...class_a/
 ......a_image_1.jpg
 ......a_image_2.jpg
 ...class_b/
 ......b_image_1.jpg
 ......b_image_2.jpg
-}
+}\if{html}{\out{</div>}}
 
 Then calling \code{image_dataset_from_directory(main_directory, labels='inferred')}
 will return a \code{tf.data.Dataset} that yields batches of images from the
