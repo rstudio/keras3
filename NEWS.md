@@ -28,7 +28,10 @@
   Also, a function for constructing custom learning rate schedules:
   `new_learning_rate_schedule_class()`.
 
-- New L2 unit normilization layer: `layer_unit_normalization()`
+- New L2 unit normilization layer: `layer_unit_normalization()`.
+
+- New `regularizer_orthogonal`, a new regularizer that encourages 
+  orthogonality between the rows (or columns) or a weight matrix.
 
 - New `zip_lists()` function for transposing lists, optionally matching by name.
 

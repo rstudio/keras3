@@ -159,7 +159,7 @@ new_wrapper <- function(prefix, py_obj) {
 
 
 print.r_py_wrapper2 <- function(x, ...) {
-  clipr::write_clip(x)
+  try(clipr::write_clip(x))
   cat(x)
 }
 
@@ -167,10 +167,12 @@ print.r_py_wrapper2 <- function(x, ...) {
 # new_application_wrapper("tf.keras.applications.ResNet101")
 # new_wrapper("application", keras$applications$Xception)
 
-new_wrapper("learning_rate_schedule", keras$optimizers$schedules$ExponentialDecay)
-new_wrapper("learning_rate_schedule", keras$optimizers$schedules$CosineDecay)
-new_wrapper("learning_rate_schedule", keras$optimizers$schedules$CosineDecayRestarts)
-new_wrapper("learning_rate_schedule", keras$optimizers$schedules$InverseTimeDecay)
-new_wrapper("learning_rate_schedule", keras$optimizers$schedules$PiecewiseConstantDecay)
+# new_wrapper("learning_rate_schedule", keras$optimizers$schedules$ExponentialDecay)
+# new_wrapper("learning_rate_schedule", keras$optimizers$schedules$CosineDecay)
+# new_wrapper("learning_rate_schedule", keras$optimizers$schedules$CosineDecayRestarts)
+# new_wrapper("learning_rate_schedule", keras$optimizers$schedules$InverseTimeDecay)
+# new_wrapper("learning_rate_schedule", keras$optimizers$schedules$PiecewiseConstantDecay)
+#
+# new_wrapper("learning_rate_schedule", keras$optimizers$schedules$PolynomialDecay)
 
-new_wrapper("learning_rate_schedule", keras$optimizers$schedules$PolynomialDecay)
+new_wrapper("regularizer", keras$regularizers$OrthogonalRegularizer)
