@@ -76,10 +76,9 @@ new_get_private <- function(r6_class, shared_mask_env) {
 
   privates <- list()
 
-  new_instance_private <- function(self) {
+  new_instance_private <- function(self, key) {
 
     private <- new.env(parent = emptyenv())
-    key <- as.character(py_id(self))
     privates[[key]] <<- private
 
     reticulate::import("weakref")$finalize(
@@ -108,10 +107,21 @@ new_get_private <- function(r6_class, shared_mask_env) {
   }
 
   function(self) {
-    key <- as.character(py_id(self))
-    .subset2(privates, key) %||% new_instance_private(self)
+    key <- py_id2(self)
+    .subset2(privates, key) %||% new_instance_private(self, key)
   }
 }
+
+py_id2 <- local({
+  # temporary workaround py_id() overflowing and returning -1L in R 4.2 on windows
+  .id <- NULL
+  function(x) {
+    if (is.null(.id))
+      .id <<- py_eval("lambda x: str(id(x))")
+    .id(x)
+  }
+})
+
 
 
 resolve_py_type_inherits <- function(inherit, convert=FALSE) {
