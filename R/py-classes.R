@@ -569,6 +569,7 @@ print.py_R6ClassGenerator <- function(x, ...) {
 #' @seealso [`makeActiveBinding()`]
 #'
 #' @examples
+#' set.seed(1234)
 #' x %<-active% function(value) {
 #'   message("Evaluating function of active binding")
 #'   if(missing(value))
