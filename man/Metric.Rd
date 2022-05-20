@@ -19,6 +19,8 @@ track model performance during training. It is what is returned by the family
 of metric functions that start with prefix \verb{metric_*}.
 }
 \section{Usage with \code{compile}}{
+
+
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
   optimizer = 'sgd',
   loss = 'mse',
@@ -28,6 +30,8 @@ of metric functions that start with prefix \verb{metric_*}.
 }
 
 \section{Standalone usage}{
+
+
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_SOME_METRIC()
 for (e in seq(epochs)) \{
   for (i in seq(train_steps)) \{
@@ -44,14 +48,20 @@ for (e in seq(epochs)) \{
 
 To be implemented by subclasses:
 \itemize{
-\item \code{initialize()}: All state variables should be created in this method by calling \code{self$add_weight()} like:\preformatted{self$var <- self$add_weight(...)
-}
-\item \code{update_state()}: Has all updates to the state variables like:\preformatted{self$var$assign_add(...)
-}
+\item \code{initialize()}: All state variables should be created in this method by calling \code{self$add_weight()} like:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{self$var <- self$add_weight(...)
+}\if{html}{\out{</div>}}
+\item \code{update_state()}: Has all updates to the state variables like:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{self$var$assign_add(...)
+}\if{html}{\out{</div>}}
 \item \code{result()}: Computes and returns a value for the metric from the state variables.
 }
 
-Example custom metric subclass:\if{html}{\out{<div class="sourceCode R">}}\preformatted{metric_binary_true_positives <- new_metric_class(
+Example custom metric subclass:
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{metric_binary_true_positives <- new_metric_class(
   classname = "BinaryTruePositives",
   initialize = function(name = 'binary_true_positives', ...) \{
     super$initialize(name = name, ...)
@@ -80,11 +90,13 @@ model \%>\% compile(..., metrics = list(metric_binary_true_positives()))
 }\if{html}{\out{</div>}}
 
 The same \code{metric_binary_true_positives} could be built with \verb{\%py_class\%} like
-this:\preformatted{metric_binary_true_positives(keras$metrics$Metric) \%py_class\% \{
+this:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{metric_binary_true_positives(keras$metrics$Metric) \%py_class\% \{
   initialize <- <same-as-above>,
   update_state <- <same-as-above>,
   result <- <same-as-above>
 \}
-}
+}\if{html}{\out{</div>}}
 }
 

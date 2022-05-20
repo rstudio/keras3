@@ -52,7 +52,9 @@ argument in the constructor. In that case, the layer will use the
 \href{https://github.com/google/highwayhash}{SipHash64} hash function, with
 the \code{salt} value serving as additional input to the hash function.
 
-\strong{Example (FarmHash64)}\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3)
+\strong{Example (FarmHash64)}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3)
 inp <- matrix(c('A', 'B', 'C', 'D', 'E'))
 layer(inp)
 # <tf.Tensor: shape=(5, 1), dtype=int64, numpy=
@@ -63,7 +65,9 @@ layer(inp)
 #          [2]])>
 }\if{html}{\out{</div>}}
 
-\strong{Example (FarmHash64) with a mask value}\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3, mask_value='')
+\strong{Example (FarmHash64) with a mask value}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3, mask_value='')
 inp <- matrix(c('A', 'B', 'C', 'D', 'E'))
 layer(inp)
 # <tf.Tensor: shape=(5, 1), dtype=int64, numpy=
@@ -74,7 +78,9 @@ layer(inp)
 #          [2]])>
 }\if{html}{\out{</div>}}
 
-\strong{Example (SipHash64)}\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3, salt=c(133, 137))
+\strong{Example (SipHash64)}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3, salt=c(133, 137))
 inp <- matrix(c('A', 'B', 'C', 'D', 'E'))
 layer(inp)
 # <tf.Tensor: shape=(5, 1), dtype=int64, numpy=
@@ -85,7 +91,9 @@ layer(inp)
 #          [2]])>
 }\if{html}{\out{</div>}}
 
-\strong{Example (Siphash64 with a single integer, same as \verb{salt=[133, 133]})}\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3, salt=133)
+\strong{Example (Siphash64 with a single integer, same as \verb{salt=[133, 133]})}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3, salt=133)
 inp <- matrix(c('A', 'B', 'C', 'D', 'E'))
 layer(inp)
 # <tf.Tensor: shape=(5, 1), dtype=int64, numpy=
@@ -113,6 +121,7 @@ Other preprocessing layers:
 \code{\link{layer_discretization}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
+\code{\link{layer_random_brightness}()},
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},

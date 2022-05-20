@@ -51,10 +51,12 @@ Computes the crossentropy metric between the labels and predictions
 \details{
 This is the crossentropy metric class to be used when there are multiple
 label classes (2 or more). Here we assume that labels are given as a \code{one_hot}
-representation. eg., When labels values are \code{c(2, 0, 1)}:\preformatted{ y_true = rbind(c(0, 0, 1),
+representation. eg., When labels values are \code{c(2, 0, 1)}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ y_true = rbind(c(0, 0, 1),
                 c(1, 0, 0),
                 c(0, 1, 0))`
-}
+}\if{html}{\out{</div>}}
 }
 \seealso{
 Other metrics: 

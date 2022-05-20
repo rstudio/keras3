@@ -52,7 +52,9 @@ step.
 The schedule is a 1-arg callable that produces a decayed learning rate
 when passed the current optimizer step. This can be useful for changing the
 learning rate value across different invocations of optimizer functions.
-It is computed as:\if{html}{\out{<div class="sourceCode R">}}\preformatted{decayed_learning_rate <- function(step) \{
+It is computed as:
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{decayed_learning_rate <- function(step) \{
   step <- min(step, decay_steps)
   ((initial_learning_rate - end_learning_rate) *
       (1 - step / decay_steps) ^ (power)
@@ -61,7 +63,9 @@ It is computed as:\if{html}{\out{<div class="sourceCode R">}}\preformatted{decay
 }\if{html}{\out{</div>}}
 
 If \code{cycle} is \code{TRUE} then a multiple of \code{decay_steps} is used, the first one
-that is bigger than \code{step}.\if{html}{\out{<div class="sourceCode python">}}\preformatted{decayed_learning_rate <- function(step) \{
+that is bigger than \code{step}.
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{decayed_learning_rate <- function(step) \{
   decay_steps <- decay_steps * ceiling(step / decay_steps)
   ((initial_learning_rate - end_learning_rate) *
       (1 - step / decay_steps) ^ (power)
@@ -73,7 +77,9 @@ You can pass this schedule directly into a keras Optimizer
 as the \code{learning_rate}.
 
 Example: Fit a model while decaying from 0.1 to 0.01 in 10000 steps using
-sqrt (i.e. power=0.5):\if{html}{\out{<div class="sourceCode R">}}\preformatted{...
+sqrt (i.e. power=0.5):
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{...
 starter_learning_rate <- 0.1
 end_learning_rate <- 0.01
 decay_steps <- 10000

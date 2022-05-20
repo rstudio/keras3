@@ -61,7 +61,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
   )
 }
 
-default_version <- numeric_version("2.8")
+default_version <- numeric_version("2.9")
 
 default_extra_packages <- function(tensorflow_version = "default") {
   pkgs <- c(
@@ -76,7 +76,7 @@ default_extra_packages <- function(tensorflow_version = "default") {
   names(pkgs) <- pkgs
   v <- tensorflow_version
 
-  if(grepl("nightly", v))
+  if(grepl("nightly|release", v))
     return(pkgs)
 
   ## extract just the version

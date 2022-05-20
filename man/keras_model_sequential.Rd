@@ -32,7 +32,7 @@ dimensions. For more information about \code{RaggedTensors}, see this
     \item{\code{type_spec}}{A \code{tf$TypeSpec} object to create Input from. This
 \code{tf$TypeSpec} represents the entire batch. When provided, all other args
 except name must be \code{NULL}.}
-    \item{\code{input_layer_name}}{Optional name of the input layer (string).}
+    \item{\code{input_layer_name,name}}{Optional name of the input layer (string).}
   }}
 }
 \description{

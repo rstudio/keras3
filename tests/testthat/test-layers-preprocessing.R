@@ -58,6 +58,12 @@ test_image_preprocessing_layer <- function(lyr, ...) {
 
 }
 
+
+if(tf_version() >= "2.9") {
+  test_image_preprocessing_layer(layer_random_brightness, factor = .2)
+}
+
+
 if (tf_version() >= "2.6") {
 
 # image preprocessing
@@ -77,6 +83,7 @@ test_image_preprocessing_layer(layer_random_contrast, factor = .5)
 test_image_preprocessing_layer(layer_random_height, factor = .5)
 test_image_preprocessing_layer(layer_random_width, factor = .5)
 }
+
 
 
 if (tf_version() >= "2.6")

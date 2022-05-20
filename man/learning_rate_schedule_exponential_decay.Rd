@@ -42,7 +42,9 @@ to an optimizer step, given a provided initial learning rate.
 The schedule is a 1-arg callable that produces a decayed learning
 rate when passed the current optimizer step. This can be useful for changing
 the learning rate value across different invocations of optimizer functions.
-It is computed as:\if{html}{\out{<div class="sourceCode r">}}\preformatted{decayed_learning_rate <- function(step)
+It is computed as:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{decayed_learning_rate <- function(step)
   initial_learning_rate * decay_rate ^ (step / decay_steps)
 }\if{html}{\out{</div>}}
 
@@ -53,7 +55,9 @@ staircase function.
 You can pass this schedule directly into a optimizer
 as the learning rate (see example)
 Example: When fitting a Keras model, decay every 100000 steps with a base
-of 0.96:\if{html}{\out{<div class="sourceCode R">}}\preformatted{initial_learning_rate <- 0.1
+of 0.96:
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{initial_learning_rate <- 0.1
 lr_schedule <- learning_rate_schedule_exponential_decay(
     initial_learning_rate,
     decay_steps = 100000,

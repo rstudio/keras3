@@ -221,9 +221,11 @@ function \code{\link[=to_categorical]{to_categorical()}}:
 
 
 Computes Huber loss value.
-For each value x in \code{error = y_true - y_pred}:\preformatted{loss = 0.5 * x^2                  if |x| <= d
+For each value x in \code{error = y_true - y_pred}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{loss = 0.5 * x^2                  if |x| <= d
 loss = d * |x| - 0.5 * d^2        if |x| > d
-}
+}\if{html}{\out{</div>}}
 
 where d is \code{delta}. See: https://en.wikipedia.org/wiki/Huber_loss
 }

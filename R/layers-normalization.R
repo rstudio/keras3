@@ -178,3 +178,42 @@ layer_layer_normalization <- function(
     name=name
   ))
 }
+
+
+#' Unit normalization layer
+#'
+#' @details
+#' Normalize a batch of inputs so that each input in the batch has a L2 norm
+#' equal to 1 (across the axes specified in `axis`).
+#'
+#' @inheritParams layer_dense
+#' @param axis Integer or list. The axis or axes to normalize across. Typically
+#' this is the features axis or axes. The left-out axes are typically the
+#' batch axis or axes. Defaults to `-1`, the last dimension in
+#' the input.
+#' @param ... standard layer arguments.
+#'
+#' ````r
+#' data <- as_tensor(1:6, shape = c(2, 3), dtype = "float32")
+#' normalized_data <- data %>% layer_unit_normalization()
+#' for(row in 1:2)
+#'   normalized_data[row, ] %>%
+#'   { sum(.^2) } %>%
+#'   print()
+#' # tf.Tensor(0.9999999, shape=(), dtype=float32)
+#' # tf.Tensor(1.0, shape=(), dtype=float32)
+#' ````
+#'
+#' @seealso
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/layers/UnitNormalization>
+#'
+#' @export
+#'
+layer_unit_normalization <-
+function(object, axis = -1L, ...)
+{
+  args <- capture_args(match.call(), list(axis = as_axis),
+                       ignore = "object")
+  create_layer(keras$layers$UnitNormalization, object, args)
+}
+

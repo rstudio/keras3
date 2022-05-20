@@ -566,7 +566,53 @@ function(object, factor, interpolation = "bilinear", seed = NULL, ...)
 }
 
 
-
+#' A preprocessing layer which randomly adjusts brightness during training
+#'
+#' @details
+#' This layer will randomly increase/reduce the brightness for the input RGB
+#' images. At inference time, the output will be identical to the input.
+#' Call the layer with `training=TRUE` to adjust the brightness of the input.
+#'
+#' Note that different brightness adjustment factors
+#' will be apply to each the images in the batch.
+#'
+#' For an overview and full list of preprocessing layers, see the preprocessing
+#' [guide](https://www.tensorflow.org/guide/keras/preprocessing_layers).
+#'
+#' @param factor Float or a list of 2 floats between -1.0 and 1.0. The
+#' factor is used to determine the lower bound and upper bound of the
+#' brightness adjustment. A float value will be chosen randomly between
+#' the limits. When -1.0 is chosen, the output image will be black, and
+#' when 1.0 is chosen, the image will be fully white. When only one float
+#' is provided, eg, 0.2, then -0.2 will be used for lower bound and 0.2
+#' will be used for upper bound.
+#'
+#' @param value_range Optional list of 2 floats for the lower and upper limit
+#' of the values of the input data. Defaults to `[0.0, 255.0]`. Can be changed
+#' to e.g. `[0.0, 1.0]` if the image input has been scaled before this layer.
+#' The brightness adjustment will be scaled to this range, and the
+#' output values will be clipped to this range.
+#'
+#' @param seed optional integer, for fixed RNG behavior.
+#' @param ... standard layer arguments.
+#'
+#' @inheritParams layer_dense
+#'
+#' @family image augmentation layers
+#' @family preprocessing layers
+#'
+#' @seealso
+#'   +  <https://www.tensorflow.org/versions/r2.9/api_docs/python/keras/layers/preprocessing/image_preprocessing/RandomBrightness>
+#'   +  <https://keras.io/api/layers>
+#' @export
+layer_random_brightness <-
+function(object, factor, value_range = c(0, 255), seed = NULL,  ...)
+{
+  require_tf_version("2.9", "layer_random_brightness()")
+  args <- capture_args(match.call(), list(seed = as_nullable_integer),
+                       ignore = "object")
+  create_layer(keras$layers$RandomBrightness, object, args)
+}
 
 
 

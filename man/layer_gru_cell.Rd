@@ -87,7 +87,9 @@ for details about the usage of RNN API.
 This class processes one step within the whole time sequence input, whereas
 \code{tf.keras.layer.GRU} processes the whole sequence.
 
-For example:\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- k_random_uniform(c(32, 10, 8))
+For example:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- k_random_uniform(c(32, 10, 8))
 output <- inputs \%>\% layer_rnn(layer_gru_cell(4))
 output$shape  # TensorShape([32, 4])
 

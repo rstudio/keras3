@@ -28,6 +28,11 @@
   Also, a function for constructing custom learning rate schedules:
   `new_learning_rate_schedule_class()`.
 
+- New L2 unit normilization layer: `layer_unit_normalization()`.
+
+- New `regularizer_orthogonal`, a new regularizer that encourages 
+  orthogonality between the rows (or columns) or a weight matrix.
+
 - New `zip_lists()` function for transposing lists, optionally matching by name.
 
 - New `plot()` S3 method for models.
@@ -90,6 +95,12 @@
 - `print` and related methods for models (`format`, `summary`) now accept 
    a `width` argument.
 
+- `evaluate()`, `fit()`, and `predict()` methods for keras Models now default 
+  to `verbose = "auto"`, with verbosity adjusted appropriatly based on calls to 
+  `keras$utils$disable_interactive_logging()`, and contexts like 
+  `ParameterServerStrategy`.
+
+- `install_keras()` now accepts `version = "release-cpu"` as a valid specification.
 
 # keras 2.8.0
 

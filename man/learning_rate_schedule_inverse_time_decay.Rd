@@ -43,12 +43,16 @@ just pass a TensorFlow variable that you increment at each training step.
 The schedule is a 1-arg callable that produces a decayed learning
 rate when passed the current optimizer step. This can be useful for changing
 the learning rate value across different invocations of optimizer functions.
-It is computed as:\if{html}{\out{<div class="sourceCode R">}}\preformatted{decayed_learning_rate <- function(step) \{
+It is computed as:
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{decayed_learning_rate <- function(step) \{
   initial_learning_rate / (1 + decay_rate * step / decay_step)
 \}
 }\if{html}{\out{</div>}}
 
-or, if \code{staircase} is \code{TRUE}, as:\if{html}{\out{<div class="sourceCode R">}}\preformatted{decayed_learning_rate function(step) \{
+or, if \code{staircase} is \code{TRUE}, as:
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{decayed_learning_rate function(step) \{
  initial_learning_rate / (1 + decay_rate * floor(step / decay_step))
 \}
 }\if{html}{\out{</div>}}
@@ -56,7 +60,9 @@ or, if \code{staircase} is \code{TRUE}, as:\if{html}{\out{<div class="sourceCode
 You can pass this schedule directly into a keras Optimizer
 as the \code{learning_rate}.
 
-Example: Fit a Keras model when decaying \code{1/t} with a rate of \code{0.5}:\if{html}{\out{<div class="sourceCode R">}}\preformatted{...
+Example: Fit a Keras model when decaying \code{1/t} with a rate of \code{0.5}:
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{...
 initial_learning_rate <- 0.1
 decay_steps <- 1.0
 decay_rate <- 0.5

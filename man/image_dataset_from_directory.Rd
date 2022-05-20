@@ -115,14 +115,16 @@ Rules regarding number of channels in the yielded images:
 Generates a \code{tf.data.Dataset} from image files in a directory.
 }
 \details{
-If your directory structure is:\preformatted{main_directory/
+If your directory structure is:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{main_directory/
 ...class_a/
 ......a_image_1.jpg
 ......a_image_2.jpg
 ...class_b/
 ......b_image_1.jpg
 ......b_image_2.jpg
-}
+}\if{html}{\out{</div>}}
 
 Then calling \code{image_dataset_from_directory(main_directory, labels='inferred')}
 will return a \code{tf.data.Dataset} that yields batches of images from the

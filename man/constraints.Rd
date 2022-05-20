@@ -55,7 +55,9 @@ You can implement your own constraint functions in R. A custom
 constraint is an R function that takes weights (\code{w}) as input
 and returns modified weights. Note that keras \code{\link[=backend]{backend()}} tensor
 functions (e.g. \code{\link[=k_greater_equal]{k_greater_equal()}}) should be used in the
-implementation of custom constraints. For example:\if{html}{\out{<div class="sourceCode r">}}\preformatted{nonneg_constraint <- function(w) \{
+implementation of custom constraints. For example:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{nonneg_constraint <- function(w) \{
   w * k_cast(k_greater_equal(w, 0), k_floatx())
 \}
 

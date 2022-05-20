@@ -28,8 +28,10 @@ Computes the mean Intersection-Over-Union metric
 \details{
 Mean Intersection-Over-Union is a common evaluation metric for semantic image
 segmentation, which first computes the IOU for each semantic class and then
-computes the average over classes. IOU is defined as follows:\preformatted{  IOU = true_positive / (true_positive + false_positive + false_negative)
-}
+computes the average over classes. IOU is defined as follows:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{  IOU = true_positive / (true_positive + false_positive + false_negative)
+}\if{html}{\out{</div>}}
 
 The predictions are accumulated in a confusion matrix, weighted by
 \code{sample_weight} and the metric is then calculated from it.

@@ -29,8 +29,8 @@ example usage.
 Computes the cosine similarity between the labels and predictions
 }
 \details{
-\preformatted{cosine similarity = (a . b) / ||a|| ||b||
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{cosine similarity = (a . b) / ||a|| ||b||
+}\if{html}{\out{</div>}}
 
 See: \href{https://en.wikipedia.org/wiki/Cosine_similarity}{Cosine Similarity}.
 

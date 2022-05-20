@@ -43,7 +43,9 @@ just pass a TensorFlow variable that you increment at each training step.
 The schedule is a 1-arg callable that produces a decayed learning
 rate when passed the current optimizer step. This can be useful for changing
 the learning rate value across different invocations of optimizer functions.
-It is computed as:\if{html}{\out{<div class="sourceCode r">}}\preformatted{decayed_learning_rate <- function(step) \{
+It is computed as:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{decayed_learning_rate <- function(step) \{
   step <- min(step, decay_steps)
   cosine_decay = <- 0.5 * (1 + cos(pi * step / decay_steps))
   decayed <- (1 - alpha) * cosine_decay + alpha
@@ -51,7 +53,9 @@ It is computed as:\if{html}{\out{<div class="sourceCode r">}}\preformatted{decay
 \}
 }\if{html}{\out{</div>}}
 
-Example usage:\if{html}{\out{<div class="sourceCode R">}}\preformatted{decay_steps <- 1000
+Example usage:
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{decay_steps <- 1000
 lr_decayed_fn <-
   learning_rate_schedule_cosine_decay(initial_learning_rate, decay_steps)
 }\if{html}{\out{</div>}}

@@ -129,8 +129,10 @@ e.g. \verb{input_shape=(128, 3)} for data with 128 time steps and 3 channels.
 
 \section{Output shape}{
  3D tensor with shape: \verb{(batch, new_steps, filters)}
-If \code{output_padding} is specified:\preformatted{new_timesteps = ((timesteps - 1) * strides + kernel_size - 2 * padding + output_padding)
-}
+If \code{output_padding} is specified:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{new_timesteps = ((timesteps - 1) * strides + kernel_size - 2 * padding + output_padding)
+}\if{html}{\out{</div>}}
 }
 
 \section{References}{

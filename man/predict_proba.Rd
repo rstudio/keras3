@@ -18,7 +18,9 @@ pass a \code{tfdataset} or a generator returning a list with \verb{(inputs, targ
 
 \item{batch_size}{Integer. If unspecified, it will default to 32.}
 
-\item{verbose}{Verbosity mode, 0 or 1.}
+\item{verbose}{Verbosity mode, 0, 1, 2, or "auto". "auto" defaults to 1
+for for most cases and defaults to \code{verbose=2} when used with
+ParameterServerStrategy or with interactive logging disabled.}
 
 \item{steps}{Total number of steps (batches of samples) before declaring the
 evaluation round finished. The default \code{NULL} is equal to the number of
@@ -36,12 +38,16 @@ How to update your code:
 \itemize{
 \item If your model does multi-class classification:
 (e.g. if it uses a \code{softmax} last-layer activation).
-}\if{html}{\out{<div class="sourceCode r">}}\preformatted{     model \%>\% predict(x) \%>\% k_argmax()
+}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{     model \%>\% predict(x) \%>\% k_argmax()
 }\if{html}{\out{</div>}}
 \itemize{
 \item if your model does binary classification
 (e.g. if it uses a \code{sigmoid} last-layer activation).
-}\if{html}{\out{<div class="sourceCode r">}}\preformatted{     model \%>\% predict(x) \%>\% `>`(0.5) \%>\% k_cast("int32")
+}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{     model \%>\% predict(x) \%>\% `>`(0.5) \%>\% k_cast("int32")
 }\if{html}{\out{</div>}}
 
 The input samples are processed batch by batch.

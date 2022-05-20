@@ -10,7 +10,7 @@
   y = NULL,
   batch_size = NULL,
   epochs = 10,
-  verbose = getOption("keras.fit_verbose", default = 1),
+  verbose = getOption("keras.fit_verbose", default = "auto"),
   callbacks = NULL,
   view_metrics = getOption("keras.view_metrics", default = "auto"),
   validation_split = 0,

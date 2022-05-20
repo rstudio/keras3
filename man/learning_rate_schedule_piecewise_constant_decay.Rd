@@ -33,7 +33,9 @@ when passed the current optimizer step. This can be useful for changing the
 learning rate value across different invocations of optimizer functions.
 
 Example: use a learning rate that's 1.0 for the first 100001 steps, 0.5
-for the next 10000 steps, and 0.1 for any additional steps.\if{html}{\out{<div class="sourceCode R">}}\preformatted{step <- tf$Variable(0, trainable=FALSE)
+for the next 10000 steps, and 0.1 for any additional steps.
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{step <- tf$Variable(0, trainable=FALSE)
 boundaries <- as.integer(c(100000, 110000))
 values <- c(1.0, 0.5, 0.1)
 learning_rate_fn <- learning_rate_schedule_piecewise_constant_decay(

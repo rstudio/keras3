@@ -75,14 +75,16 @@ Defaults to \code{FALSE}.}
 Generate a \code{tf.data.Dataset} from text files in a directory
 }
 \details{
-If your directory structure is:\preformatted{main_directory/
+If your directory structure is:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{main_directory/
 ...class_a/
 ......a_text_1.txt
 ......a_text_2.txt
 ...class_b/
 ......b_text_1.txt
 ......b_text_2.txt
-}
+}\if{html}{\out{</div>}}
 
 Then calling \code{text_dataset_from_directory(main_directory, labels = 'inferred')}
 will return a \code{tf.data.Dataset} that yields batches of texts from
