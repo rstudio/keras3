@@ -14,7 +14,7 @@
   as well as `%py_class%`.
   
 -  `r_to_py()` method for R6 classes and `%py_class%` gain support for
-  `private` fields and methods. Any R objects stored in private will only be
+  `private` fields and methods. Any R objects stored in `private` will only be
   available to methods, and will not be converted to Python.
 
 - New family of functions for controlling optimizer learning rates during training:
@@ -62,14 +62,14 @@
     - R arrays are now cast to the floatx dtype ("float32" by default)
     - `start_index` and `end_index` now are 1-based.
 
-- `image_dataste_from_directory()` gains a `crop_to_aspect_ratio` argument which
+- `image_dataset_from_directory()` gains a `crop_to_aspect_ratio` argument which
   can be used to prevent distorting images when resizing to a new aspect ratio.
 
 - `Layer` is deprecated, superseded by `new_layer_class()`.
 
 - `load_model_tf()` argument `custom_objects` gains the ability to accept an
-  unnamed list (e.g, of object returned by `new_layer_class()` or similar).
-  Appropriate names for the supplied objects are automatically infered.
+  unnamed list (e.g, of objects returned by `new_layer_class()` or similar).
+  Appropriate names for the supplied objects are automatically inferred.
 
 - Fixed an issue where negative values less than -1 supplied to `axis`
   arguments were selecting the wrong axis.
