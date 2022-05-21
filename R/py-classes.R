@@ -112,14 +112,15 @@ new_get_private <- function(r6_class, shared_mask_env) {
   }
 }
 
+
 py_id2 <- local({
   # temporary workaround py_id() overflowing and returning -1L in R 4.2 on windows
-  .id <- NULL
-  function(x) {
-    if (is.null(.id))
-      .id <<- py_eval("lambda x: str(id(x))")
+  .id <- function(x) {
+    .id <- py_eval("lambda x: str(id(x))")
+    assign(".id", .id, envir = environment(sys.function()))
     .id(x)
   }
+  function(x) .id(x)
 })
 
 
