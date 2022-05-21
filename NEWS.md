@@ -1,9 +1,5 @@
 # keras (development version)
 
--  `r_to_py()` method for R6 classes and `%py_class%` gain support for
-  `private` fields and methods. Any R objects stored in private will only be
-  available to methods, and will not be converted to Python.
-
 - New functions for constructing custom keras subclasses:
   - `new_model_class()`
   - `new_layer_class()`
@@ -16,6 +12,10 @@
   should be an active binding (i.e., decorated with Python's `@property`).
   `mark_active()` can be used in the `new_*_class` family of class constructors
   as well as `%py_class%`.
+  
+-  `r_to_py()` method for R6 classes and `%py_class%` gain support for
+  `private` fields and methods. Any R objects stored in private will only be
+  available to methods, and will not be converted to Python.
 
 - New family of functions for controlling optimizer learning rates during training:
   -  `learning_rate_schedule_cosine_decay()`
@@ -30,7 +30,7 @@
 
 - New L2 unit normilization layer: `layer_unit_normalization()`.
 
-- New `regularizer_orthogonal`, a new regularizer that encourages 
+- New `regularizer_orthogonal`, a regularizer that encourages 
   orthogonality between the rows (or columns) or a weight matrix.
 
 - New `zip_lists()` function for transposing lists, optionally matching by name.
@@ -82,7 +82,7 @@
 - Backend functions:
   - k_clip() `min_value` and `max_value` gain default values of `NULL`,
     can be omitted. `NULL` is taken as -Inf or Inf, respectively.
-  - k_squeeze(): `axis` argument can be ommitted, in which case all axes of size 1 are dropped.
+  - k_squeeze(): `axis` argument can be omitted, in which case all axes of size 1 are dropped.
   - k_tile(): `n` argument can now be supplied as a tensor.
   - New function `k_unstack()`.
 
@@ -96,7 +96,7 @@
    a `width` argument.
 
 - `evaluate()`, `fit()`, and `predict()` methods for keras Models now default 
-  to `verbose = "auto"`, with verbosity adjusted appropriatly based on calls to 
+  to `verbose = "auto"`, with verbosity adjusted appropriately based on calls to 
   `keras$utils$disable_interactive_logging()`, and contexts like 
   `ParameterServerStrategy`.
 
