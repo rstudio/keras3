@@ -1,4 +1,4 @@
-# keras (development version)
+# keras 2.9.0
 
 - New functions for constructing custom keras subclasses:
   - `new_model_class()`
