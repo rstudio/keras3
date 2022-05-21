@@ -22,6 +22,7 @@ Active bindings defined in a \code{\link{\%py_class\%}} are converted to
 \verb{@property} decorated methods.
 }
 \examples{
+set.seed(1234)
 x \%<-active\% function(value) {
   message("Evaluating function of active binding")
   if(missing(value))

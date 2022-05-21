@@ -56,7 +56,7 @@ For an overview and full list of preprocessing layers, see the preprocessing
 }
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/versions/r2.9/api_docs/python/keras/layers/preprocessing/image_preprocessing/RandomBrightness}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomBrightness}
 \item \url{https://keras.io/api/layers}
 }
 

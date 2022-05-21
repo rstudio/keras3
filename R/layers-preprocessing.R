@@ -602,7 +602,7 @@ function(object, factor, interpolation = "bilinear", seed = NULL, ...)
 #' @family preprocessing layers
 #'
 #' @seealso
-#'   +  <https://www.tensorflow.org/versions/r2.9/api_docs/python/keras/layers/preprocessing/image_preprocessing/RandomBrightness>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomBrightness>
 #'   +  <https://keras.io/api/layers>
 #' @export
 layer_random_brightness <-
