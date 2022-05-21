@@ -15,8 +15,9 @@ if(tf_version() >= "2.9")
 test_succeeds("layer unit normalization", {
   data <- as_tensor(1:6, shape = c(2, 3), dtype = "float64")
   normalized_data <- data %>%
-    layer_unit_normalization(dtype = "float64")
+    layer_unit_normalization(dtype = "float64") %>%
+    as.array()
 
   for (row in 1:2)
-    expect_equal(as.array(sum(normalized_data[row,] ^ 2)), 1)
+    expect_equal(sum(normalized_data[row,] ^ 2), 1)
 })
