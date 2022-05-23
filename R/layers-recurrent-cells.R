@@ -378,7 +378,7 @@ function(cells, ...)
 #' @param unit_forget_bias Boolean (default `TRUE`). If TRUE, add 1 to the bias of
 #' the forget gate at initialization. Setting it to true will also force
 #' `bias_initializer="zeros"`. This is recommended in [Jozefowicz et
-#'   al.](https://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
+#'   al.](https://proceedings.mlr.press/v37/jozefowicz15.pdf)
 #'
 #' @param kernel_regularizer Regularizer function applied to the `kernel` weights
 #' matrix. Default: `NULL`.

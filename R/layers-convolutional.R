@@ -1308,7 +1308,7 @@ layer_cropping_3d <- function(object, cropping = list(c(1L, 1L), c(1L, 1L), c(1L
 #' @param unit_forget_bias Boolean. If TRUE, add 1 to the bias of the forget
 #'   gate at initialization. Use in combination with `bias_initializer="zeros"`.
 #'   This is recommended in [Jozefowicz et
-#'   al.](https://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
+#'   al.](https://proceedings.mlr.press/v37/jozefowicz15.pdf)
 #' @param kernel_regularizer Regularizer function applied to the `kernel`
 #'   weights matrix.
 #' @param recurrent_regularizer Regularizer function applied to the
@@ -1450,7 +1450,7 @@ layer_conv_lstm_2d <- function(object, filters, kernel_size, strides = c(1L, 1L)
 #' @param unit_forget_bias Boolean. If TRUE, add 1 to the bias of the forget gate at
 #' initialization. Use in combination with `bias_initializer="zeros"`. This
 #' is recommended in [Jozefowicz et al., 2015](
-#'   https://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
+#'   https://proceedings.mlr.press/v37/jozefowicz15.pdf)
 #'
 #' @param kernel_regularizer Regularizer function applied to the `kernel` weights
 #' matrix.
@@ -1595,7 +1595,7 @@ function(object,
 #' @param unit_forget_bias Boolean. If TRUE, add 1 to the bias of the forget gate at
 #' initialization. Use in combination with `bias_initializer="zeros"`. This
 #' is recommended in [Jozefowicz et al., 2015](
-#'   https://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
+#'   https://proceedings.mlr.press/v37/jozefowicz15.pdf)
 #'
 #' @param kernel_regularizer Regularizer function applied to the `kernel` weights
 #' matrix.

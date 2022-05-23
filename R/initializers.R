@@ -206,7 +206,7 @@ initializer_lecun_normal <- function(seed = NULL) {
 #' @inheritParams initializer_random_normal
 #'
 #' @section References:
-#' Glorot & Bengio, AISTATS 2010 <https://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf>
+#' Glorot & Bengio, AISTATS 2010 <https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf>
 #'
 #' @family initializers
 #'
@@ -228,7 +228,7 @@ initializer_glorot_normal <- function(seed = NULL) {
 #' @inheritParams initializer_random_normal
 #'
 #' @section References:
-#' Glorot & Bengio, AISTATS 2010 https://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf
+#' Glorot & Bengio, AISTATS 2010 <https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf>
 #'
 #' @family initializers
 #'

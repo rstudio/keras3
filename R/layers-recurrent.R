@@ -234,7 +234,7 @@ layer_cudnn_gru <- function(object, units,
 #' @param unit_forget_bias Boolean. If TRUE, add 1 to the bias of the forget
 #'   gate at initialization. Setting it to true will also force
 #'   `bias_initializer="zeros"`. This is recommended in [Jozefowicz et
-#'   al.](https://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
+#'   al.](https://proceedings.mlr.press/v37/jozefowicz15.pdf)
 #'
 #' @template roxlate-recurrent-layer
 #'

@@ -90,7 +90,7 @@ matrix, used for the linear transformation of the recurrent state..}
 
 \item{unit_forget_bias}{Boolean. If TRUE, add 1 to the bias of the forget
 gate at initialization. Use in combination with \code{bias_initializer="zeros"}.
-This is recommended in \href{https://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf}{Jozefowicz et al.}}
+This is recommended in \href{https://proceedings.mlr.press/v37/jozefowicz15.pdf}{Jozefowicz et al.}}
 
 \item{kernel_regularizer}{Regularizer function applied to the \code{kernel}
 weights matrix.}
