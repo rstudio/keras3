@@ -175,4 +175,5 @@ print.r_py_wrapper2 <- function(x, ...) {
 #
 # new_wrapper("learning_rate_schedule", keras$optimizers$schedules$PolynomialDecay)
 
-new_wrapper("regularizer", keras$regularizers$OrthogonalRegularizer)
+# new_wrapper("regularizer", keras$regularizers$OrthogonalRegularizer)
+new_wrapper("callback", keras$callbacks$BackupAndRestore)

@@ -1,5 +1,7 @@
 # keras (development version)
 
+- New `callback_backup_and_restore()`, for resuming an interrupted `fit()` call.
+
 # keras 2.9.0
 
 - New functions for constructing custom keras subclasses:
@@ -14,7 +16,7 @@
   should be an active binding (i.e., decorated with Python's `@property`).
   `mark_active()` can be used in the `new_*_class` family of class constructors
   as well as `%py_class%`.
-  
+
 -  `r_to_py()` method for R6 classes and `%py_class%` gain support for
   `private` fields and methods. Any R objects stored in `private` will only be
   available to methods, and will not be converted to Python.
@@ -32,7 +34,7 @@
 
 - New L2 unit normilization layer: `layer_unit_normalization()`.
 
-- New `regularizer_orthogonal`, a regularizer that encourages 
+- New `regularizer_orthogonal`, a regularizer that encourages
   orthogonality between the rows (or columns) or a weight matrix.
 
 - New `zip_lists()` function for transposing lists, optionally matching by name.
@@ -90,16 +92,16 @@
 
 - KerasTensor objects (e.g, returned by `layer_input()`) now inherit S3 methods
   for `"tensorflow.tensor"`.
-  
-- `plot.keras_training_history()` no longer issues message 
+
+- `plot.keras_training_history()` no longer issues message
   ``` `geom_smooth()` using formula 'y ~ x' ``` when `method = "ggplot2"`.
-  
-- `print` and related methods for models (`format`, `summary`) now accept 
+
+- `print` and related methods for models (`format`, `summary`) now accept
    a `width` argument.
 
-- `evaluate()`, `fit()`, and `predict()` methods for keras Models now default 
-  to `verbose = "auto"`, with verbosity adjusted appropriately based on calls to 
-  `keras$utils$disable_interactive_logging()`, and contexts like 
+- `evaluate()`, `fit()`, and `predict()` methods for keras Models now default
+  to `verbose = "auto"`, with verbosity adjusted appropriately based on calls to
+  `keras$utils$disable_interactive_logging()`, and contexts like
   `ParameterServerStrategy`.
 
 - `install_keras()` now accepts `version = "release-cpu"` as a valid specification.
