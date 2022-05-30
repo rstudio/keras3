@@ -14,12 +14,6 @@
 
 library(keras)
 
-rms_distance <- function(inputs) {
-    K <- keras::backend()
-    x <- inputs[[1]]
-    K$sqrt(K$maximum(K$mean(K$square(x), axis=1, keepdims=TRUE), K$epsilon()))
-}
-
 contrastive_loss <- function(y_true, y_pred) {
     # Contrastive loss from Hadsell-et-al.'06
     # https://yann.lecun.com/exdb/publis/pdf/hadsell-chopra-lecun-06.pdf
