@@ -32,6 +32,10 @@ if (tensorflow::tf_version() <= "2.1")
 
 
 test_callback("model_checkpoint", callback_model_checkpoint(tempfile(fileext = ".h5")), h5py = TRUE)
+
+if(tf_version() >= "2.8")
+  test_callback("backup_and_restore", callback_backup_and_restore(tempfile()))
+
 test_callback("learning_rate_scheduler", callback_learning_rate_scheduler(schedule = function (index, ...) {
   0.1
 }))
