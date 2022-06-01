@@ -146,11 +146,11 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
       top_plot <- i == 1
       bottom_plot <- i == length(metrics)
 
-      mar <- c(1.5, 3, 0.5, 1.5)
+      mar <- c(1.5, 5, 0.5, 1.5)
       if (top_plot)
-        mar[3] %<>% `+`(1)
+        mar[3] %<>% `+`(3.5)
       if (bottom_plot)
-        mar[1] %<>% `+`(1)
+        mar[1] %<>% `+`(3.5)
       par(mar = mar)
 
       # select data for current panel
