@@ -169,7 +169,7 @@ callback_model_checkpoint <- function(filepath, monitor = "val_loss", verbose = 
 #'
 #' @export
 callback_backup_and_restore <-
-function(backup_dir) {
+function(backup_dir, ...) {
   args <- capture_args(match.call(), NULL)
   require_tf_version("2.8", "callback_backup_and_restore")
   do.call(keras$callbacks$BackupAndRestore, args)

@@ -4,7 +4,7 @@
 \alias{callback_backup_and_restore}
 \title{Callback to back up and restore the training state}
 \usage{
-callback_backup_and_restore(backup_dir)
+callback_backup_and_restore(backup_dir, ...)
 }
 \arguments{
 \item{backup_dir}{String, path to store the checkpoint.
