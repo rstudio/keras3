@@ -12,6 +12,9 @@
     layer_add(block_1_output)
   ```
   
+- `model$get_config()` method now returns an R object that can be safely serialized 
+  to rds.
+
 # keras 2.9.0
 
 - New functions for constructing custom keras subclasses:

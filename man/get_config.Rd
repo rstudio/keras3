@@ -7,7 +7,7 @@
 \usage{
 get_config(object)
 
-from_config(config)
+from_config(config, custom_objects = NULL)
 }
 \arguments{
 \item{object}{Layer or model object}
