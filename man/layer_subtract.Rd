@@ -7,9 +7,9 @@
 layer_subtract(inputs, ...)
 }
 \arguments{
-\item{inputs}{A list of input tensors (exactly 2). Can be missing.}
+\item{inputs}{A input tensor, or list of two input tensors. Can be missing.}
 
-\item{...}{Standard layer arguments (must be named).}
+\item{...}{Unnamed args are treated as additional \code{inputs}. Named arguments are passed on as standard layer arguments.}
 }
 \value{
 A tensor, the difference of the inputs. If \code{inputs} is missing, a
@@ -23,7 +23,6 @@ shape.
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/subtract}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Subtract}
 \item \url{https://keras.io/api/layers/merging_layers/subtract}
 }
 

@@ -4,10 +4,12 @@
 \alias{layer_dot}
 \title{Layer that computes a dot product between samples in two tensors.}
 \usage{
-layer_dot(inputs, axes, normalize = FALSE, ...)
+layer_dot(inputs, ..., axes, normalize = FALSE)
 }
 \arguments{
-\item{inputs}{A list of input tensors (at least 2). Can be missing.}
+\item{inputs}{A input tensor, or list of input tensors. Can be missing.}
+
+\item{...}{Unnamed args are treated as additional \code{inputs}. Named arguments are passed on as standard layer arguments.}
 
 \item{axes}{Integer or list of integers, axis or axes along which to take the
 dot product.}
@@ -15,8 +17,6 @@ dot product.}
 \item{normalize}{Whether to L2-normalize samples along the dot product axis
 before taking the dot product. If set to TRUE, then the output of the dot
 product is the cosine proximity between the two samples.}
-
-\item{...}{Standard layer arguments (must be named).}
 }
 \value{
 If \code{inputs} is supplied: A tensor, the dot product of the samples
@@ -29,7 +29,6 @@ Layer that computes a dot product between samples in two tensors.
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/dot}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dot}
 \item \url{https://keras.io/api/layers/merging_layers/dot/}
 }
 

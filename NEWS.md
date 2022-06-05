@@ -2,6 +2,16 @@
 
 - New `callback_backup_and_restore()`, for resuming an interrupted `fit()` call.
 
+- The merging family of layers (`layer_add`, `layer_concatenate`, etc.) gain the ability
+  to accept layers in `...`, allowing for easier composition of residual blocks with the pipe `%>%`.
+  e.g. something like this now works:
+  ```r
+  block_1_output <- ...
+  block_2_output <- block_1_output %>% 
+    layer_conv_2d(64, 3, activation = "relu", padding = "same") %>% 
+    layer_add(block_1_output)
+  ```
+  
 # keras 2.9.0
 
 - New functions for constructing custom keras subclasses:

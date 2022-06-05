@@ -7,9 +7,9 @@
 layer_maximum(inputs, ...)
 }
 \arguments{
-\item{inputs}{A list of input tensors (at least 2). Can be missing.}
+\item{inputs}{A input tensor, or list of input tensors. Can be missing.}
 
-\item{...}{Standard layer arguments (must be named).}
+\item{...}{Unnamed args are treated as additional \code{inputs}. Named arguments are passed on as standard layer arguments.}
 }
 \value{
 A tensor, the element-wise maximum of the inputs. If \code{inputs} is

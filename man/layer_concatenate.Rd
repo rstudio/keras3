@@ -4,14 +4,14 @@
 \alias{layer_concatenate}
 \title{Layer that concatenates a list of inputs.}
 \usage{
-layer_concatenate(inputs, axis = -1, ...)
+layer_concatenate(inputs, ..., axis = -1)
 }
 \arguments{
-\item{inputs}{A list of input tensors (at least 2). Can be missing.}
+\item{inputs}{A input tensor, or list of input tensors. Can be missing.}
+
+\item{...}{Unnamed args are treated as additional \code{inputs}. Named arguments are passed on as standard layer arguments.}
 
 \item{axis}{Concatenation axis.}
-
-\item{...}{Standard layer arguments (must be named).}
 }
 \value{
 A tensor, the concatenation of the inputs alongside axis \code{axis}. If

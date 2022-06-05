@@ -7,9 +7,9 @@
 layer_multiply(inputs, ...)
 }
 \arguments{
-\item{inputs}{A list of input tensors (at least 2). Can be missing.}
+\item{inputs}{A input tensor, or list of input tensors. Can be missing.}
 
-\item{...}{Standard layer arguments (must be named).}
+\item{...}{Unnamed args are treated as additional \code{inputs}. Named arguments are passed on as standard layer arguments.}
 }
 \value{
 A tensor, the element-wise product of the inputs. If \code{inputs} is
@@ -22,7 +22,6 @@ single tensor (also of the same shape).
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/multiply}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Multiply}
 \item \url{https://keras.io/api/layers/merging_layers/multiply}
 }
 

@@ -617,3 +617,39 @@ test_succeeds("Can serialize a model that contains dense_features", {
 
   expect_equal(pred, pred2)
 })
+
+
+test_merge_layers <- function(layer_merge, ...) {
+
+  test_call_succeeds(deparse(substitute(layer_merge)), {
+
+    merge_inputs <- get_merge_inputs()[1:2]
+    # supplied as a list to constructor
+    output <- layer_merge(merge_inputs, ...)
+    keras_model(merge_inputs, output)
+
+    # supplied as individual args to the constructor
+    output <- do.call(layer_merge, c(merge_inputs, ...))
+    keras_model(merge_inputs, output)
+
+    # instantiate, then call with a list
+    output <- layer_merge(...)(merge_inputs)
+    keras_model(merge_inputs, output)
+
+  })
+
+}
+
+test_merge_layers(layer_add)
+test_merge_layers(layer_subtract)
+test_merge_layers(layer_multiply)
+test_merge_layers(layer_average)
+test_merge_layers(layer_maximum)
+test_merge_layers(layer_minimum)
+test_merge_layers(layer_concatenate)
+test_merge_layers(layer_concatenate, axis = 0)
+test_merge_layers(layer_concatenate, axis = 1)
+test_merge_layers(layer_concatenate, axis = -1)
+test_merge_layers(layer_concatenate, axis = -2)
+test_merge_layers(layer_dot, axes = 1)
+test_merge_layers(layer_dot, axes = 1, normalize = TRUE)

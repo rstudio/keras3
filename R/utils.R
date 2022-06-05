@@ -418,6 +418,14 @@ is_keras_tensor <- function(x) {
 }
 
 
+split_dots_named_unnamed <- function(dots) {
+  nms <- names(dots)
+  if (is.null(nms))
+    return(list(unnamed = dots, named = list()))
+  named <- nzchar(nms)
+  list(unnamed = dots[!named], named = dots[named])
+}
+
 
 assert_all_dots_named <- function(envir = parent.frame(), cl) {
 
@@ -436,6 +444,8 @@ assert_all_dots_named <- function(envir = parent.frame(), cl) {
 
 # TODO: should there be some default modifiers in capture_args() for standard layer args
 # like, input_shape, batch_input_shape, etc.
+
+
 
 capture_args <- function(cl, modifiers = NULL, ignore = NULL,
                          envir = parent.frame(), fn = sys.function(-1)) {
