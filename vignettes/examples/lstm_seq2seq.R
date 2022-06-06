@@ -56,9 +56,15 @@ epochs = 100  # Number of epochs to train for.
 latent_dim = 256  # Latent dimensionality of the encoding space.
 num_samples = 10000  # Number of samples to train on.
 
-## Path to the data txt file on disk.
+## Download french-english data
 data_path = 'fra.txt'
-text <- fread(data_path, sep="\t", header=FALSE, nrows=num_samples)
+if(!file.exists(data_path)) {
+    temp <- tempfile()
+    download.file("https://www.manythings.org/anki/fra-eng.zip",temp, mode="wb")
+    unzip(temp, "fra.txt")
+    unlink(temp)
+}
+text <- fread(data_path, sep='\t', header=FALSE, quote="", nrows=num_samples)
 
 ## Vectorize the data.
 input_texts  <- text[[1]]
