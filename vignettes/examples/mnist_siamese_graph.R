@@ -1,15 +1,16 @@
 #' Train a Siamese MLP on pairs of digits from the MNIST dataset.
 #' 
-#' It follows Hadsell-et-al.'06 [1] by computing the Euclidean
-#' distance on the output of the shared network and by optimizing the
-#' contrastive loss (see paper for mode details).
+#' It loosely follows Hadsell-et-al.'06 [1] (see paper for mode
+#' details) but the euclidean distance is replaced by a subtraction
+#' layer and one fully-connect (FC) layer.
 #' 
 #' [1] "Dimensionality Reduction by Learning an Invariant Mapping"
 #'     https://yann.lecun.com/exdb/publis/pdf/hadsell-chopra-lecun-06.pdf
 #' 
-#' Gets to 98.11% test accuracy after 20 epochs.
-#' 3 seconds per epoch on a AMD Ryzen 7 PRO 4750U (CPU)
-#' 
+#' Gets to 98.11% test accuracy after 20 epochs. 3 seconds per epoch
+#' on a AMD Ryzen 7 PRO 4750U (CPU)
+#'
+#' R/Keras implementation by Ivo Kwee - https://github.com/ivokwee
 
 
 library(keras)
