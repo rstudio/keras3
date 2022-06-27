@@ -196,7 +196,16 @@ py_formals <- function(py_obj) {
 create_layer_wrapper <- function(Layer, modifiers = NULL, convert = TRUE) {
 
   force(Layer)
-  force(modifiers)
+  modifiers <- utils::modifyList(
+    list(
+      # include helpers for standard layer args by default,
+      # but leave an escape hatch allowing users to override/opt-out.
+      input_shape = as_tf_shape,
+      batch_input_shape = as_tf_shape,
+      batch_size = as.integer
+    ),
+    as.list(modifiers)
+  )
 
   wrapper <- function(object) {
     args <- capture_args(match.call(), modifiers, ignore = "object")
@@ -240,4 +249,12 @@ r_to_py.keras_layer_wrapper <- function(fn, convert = FALSE) {
   if (!inherits(layer, "python.builtin.type"))
     layer <- r_to_py(layer, convert)
   layer
+}
+
+
+as_tf_shape <- function (x) {
+  if (inherits(x, "tensorflow.python.framework.tensor_shape.TensorShape"))
+    x
+  else
+    shape(dims = x)
 }
