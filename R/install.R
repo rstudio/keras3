@@ -33,10 +33,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
       method = method,
       conda = conda,
       version = version,
-      extra_packages = c("pandas", "Pillow",
-                         "pydot",
-                         "tensorflow-hub",
-                         "tensorflow-datasets",
+      extra_packages = c(default_extra_packages(),
                          extra_packages),
       ...))
   }
@@ -66,6 +63,7 @@ default_version <- numeric_version("2.9")
 default_extra_packages <- function(tensorflow_version = "default") {
   pkgs <- c(
     "tensorflow-hub",
+    "tensorflow-datasets",
     "scipy",
     "requests",
     "pyyaml",
