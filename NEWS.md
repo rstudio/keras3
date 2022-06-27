@@ -1,5 +1,8 @@
 # keras (development version)
 
+- Fixed issue where `input_shape` supplied to custom layers defined with `new_layer_class()`  
+  would result in an error (#1338)
+
 - New `callback_backup_and_restore()`, for resuming an interrupted `fit()` call.
 
 - The merging family of layers (`layer_add`, `layer_concatenate`, etc.) gain the ability
