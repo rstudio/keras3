@@ -247,6 +247,9 @@ test_succeeds("custom layers can accept standard layer args like input_shape", {
     layer_simple_dense(20, input_shape = 30) %>%
     layer_dense(10)
 
+  expect_identical(dim(model$input), c(NA_integer_, 30L))
+  expect_true(model$built)
+
   res <- model(random_array(1, 30))
   expect_tensor(res, shape = c(1L, 10L))
 
