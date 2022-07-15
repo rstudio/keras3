@@ -12,6 +12,8 @@
 #'
 #' @param object Layer or model object
 #' @param config Object with layer or model configuration
+#' @param custom_objects list of custom objects needed to instantiate the layer,
+#'   e.g., custom layers defined by `new_layer_class()` or similar.
 #'
 #' @return `get_config()` returns an object with the configuration,
 #'   `from_config()` returns a re-instantiation of the object.

@@ -197,14 +197,11 @@ test_succeeds("create_layer_wrapper", {
 })
 
 
-
-
-
 test_succeeds("create_layer_wrapper", {
 
   layer_sampler <- new_layer_class(
     classname = "Sampler",
-    call = function(self, z_mean, z_log_var) {
+    call = function(z_mean, z_log_var) {
       epsilon <-  k_random_normal(shape = k_shape(z_mean))
       z_mean + exp(0.5 * z_log_var) * epsilon
     }
@@ -215,5 +212,45 @@ test_succeeds("create_layer_wrapper", {
   z_log_var <- keras_array(random_array(c(128, 2)))
   res <- sampler(z_mean, z_log_var)
   expect_equal(dim(res), c(128, 2))
+
+})
+
+
+test_succeeds("custom layers can accept standard layer args like input_shape", {
+  # https://github.com/rstudio/keras/issues/1338
+  layer_simple_dense <- new_layer_class(
+    classname = "SimpleDense",
+
+    initialize = function(units, activation = NULL, ...) {
+      super$initialize(...)
+      self$units <- as.integer(units)
+      self$activation <- activation
+    },
+
+    build = function(input_shape) {
+      input_dim <- input_shape[length(input_shape)]
+      self$W <- self$add_weight(shape = c(input_dim, self$units),
+                                initializer = "random_normal")
+      self$b <- self$add_weight(shape = c(self$units),
+                                initializer = "zeros")
+    },
+
+    call = function(inputs) {
+      y <- tf$matmul(inputs, self$W) + self$b
+      if (!is.null(self$activation))
+        y <- self$activation(y)
+      y
+    }
+  )
+
+  model <- keras_model_sequential() %>%
+    layer_simple_dense(20, input_shape = 30) %>%
+    layer_dense(10)
+
+  expect_identical(dim(model$input), c(NA_integer_, 30L))
+  expect_true(model$built)
+
+  res <- model(random_array(1, 30))
+  expect_tensor(res, shape = c(1L, 10L))
 
 })
