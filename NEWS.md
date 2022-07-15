@@ -14,6 +14,9 @@
   
 - `model$get_config()` method now returns an R object that can be safely serialized 
   to rds.
+  
+- `keras_array()` now reflects unconverted Python objects. This enables passing
+  objects like `pandas.Series()` to `fit()` and `evaluate()` methods. (#1341)
 
 # keras 2.9.0
 

@@ -278,6 +278,11 @@ keras_array <- function(x, dtype = NULL) {
     x <- as.list(x)
   }
 
+  # allow passing things like pandas.Series(), for workarounds like
+  # https://github.com/rstudio/keras/issues/1341
+  if(inherits(x, "python.builtin.object"))
+    return(x)
+
   # recurse for lists
   if (is.list(x))
     return(lapply(x, keras_array))

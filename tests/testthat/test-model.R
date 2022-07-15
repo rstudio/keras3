@@ -362,3 +362,41 @@ test_succeeds("can use functional api with dicts", {
   chk(inputs, outputs, unname(x)[c(3,1,2)], unname(y), error = TRUE)
 
 })
+
+
+
+test_succeeds("can pass pandas.Series() to fit()", {
+  #https://github.com/rstudio/keras/issues/1341
+  n <- 30
+  p <- 10
+
+  w <- runif(n)
+  y <- runif(n)
+  X <- matrix(runif(n * p), ncol = p)
+
+  make_nn <- function() {
+    input <- layer_input(p)
+    output <- input %>%
+      layer_dense(2 * p, activation = "tanh") %>%
+      layer_dense(1)
+    keras_model(inputs = input, outputs = output)
+  }
+
+  nn <- make_nn()
+
+  pd <- reticulate::import("pandas", convert = FALSE)
+  w <- pd$Series(w)
+
+  nn %>%
+    compile(optimizer = optimizer_adam(0.02), loss = "mse",
+            weighted_metrics = list()) %>% # silence warning
+    fit(
+      x = X,
+      y = y,
+      sample_weight = w,
+      weighted_metrics = list(),
+      epochs = 2,
+      validation_split = 0.2,
+      verbose = 0
+    )
+})
