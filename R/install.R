@@ -58,7 +58,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
   )
 }
 
-default_version <- numeric_version("2.9")
+default_version <- numeric_version("2.10")
 
 default_extra_packages <- function(tensorflow_version = "default") {
   pkgs <- c(
