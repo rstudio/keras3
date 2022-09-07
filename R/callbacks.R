@@ -799,7 +799,8 @@ normalize_callbacks <- function(callbacks) {
   })
 
   # add the tensorboard callback if necessary
-  if (is_backend("tensorflow") && tfruns::is_run_active() && !have_tensorboard_callback)
+  if ((getOption("guildai.is_run_active", FALSE) ||
+       tfruns::is_run_active()) && !have_tensorboard_callback)
     callbacks <- append(callbacks, callback_tensorboard())
 
   # return the callbacks
