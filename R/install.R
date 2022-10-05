@@ -49,7 +49,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
     tensorflow <- sub("^default", as.character(default_version), tensorflow)
 
   tensorflow::install_tensorflow(
-    method = match.arg(method),
+    method = method,
     conda = conda,
     version = tensorflow,
     extra_packages = pkgs,
