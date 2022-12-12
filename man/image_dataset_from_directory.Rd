@@ -65,8 +65,9 @@ sorts the data in alphanumeric order.}
 \item{validation_split}{Optional float between 0 and 1, fraction of data to
 reserve for validation.}
 
-\item{subset}{One of "training" or "validation". Only used if
-validation_split is set.}
+\item{subset}{One of "training", "validation", or "both" (available for TF>=2.10).
+Only used if validation_split is set. When \code{subset="both"}, the utility returns
+a tuple of two datasets (the training and validation datasets respectively).}
 
 \item{interpolation}{String, the interpolation method used when resizing
 images. Defaults to bilinear. Supports bilinear, nearest, bicubic, area,
