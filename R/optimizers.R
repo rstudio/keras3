@@ -36,6 +36,8 @@ optimizer_sgd <- function(learning_rate = 0.01, momentum = 0.0, decay = 0.0, nes
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
+  args <- backcompat_fix_ignore_decay(args)
+
   do.call(keras$optimizers$SGD, args)
 }
 
@@ -69,6 +71,8 @@ optimizer_rmsprop <- function(learning_rate = 0.001, rho = 0.9, epsilon = NULL, 
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
+  args <- backcompat_fix_ignore_decay(args)
+
   do.call(keras$optimizers$RMSprop, args)
 }
 
@@ -101,6 +105,8 @@ optimizer_adagrad <- function(learning_rate = 0.01, epsilon = NULL, decay = 0.0,
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
+  args <- backcompat_fix_ignore_decay(args)
+
   do.call(keras$optimizers$Adagrad, args)
 }
 
@@ -132,6 +138,8 @@ optimizer_adadelta <- function(learning_rate = 1.0, rho = 0.95, epsilon = NULL, 
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
+  args <- backcompat_fix_ignore_decay(args)
+
   do.call(keras$optimizers$Adadelta, args)
 }
 
@@ -160,7 +168,7 @@ optimizer_adadelta <- function(learning_rate = 1.0, rho = 0.95, epsilon = NULL, 
 optimizer_adam <- function(learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999, epsilon = NULL, decay = 0.0,
                            amsgrad = FALSE, clipnorm = NULL, clipvalue = NULL, ...) {
 
-    backcompat_fix_rename_lr_to_learning_rate(...)
+  backcompat_fix_rename_lr_to_learning_rate(...)
 
   # compose args using list so that clipnorm and clipvalue are excluded
   # from the call when they aren't sepcified
@@ -173,6 +181,8 @@ optimizer_adam <- function(learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999, 
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
+  args <- backcompat_fix_ignore_decay(args)
+  
 
   if (keras_version() >= "2.1.3")
     args$amsgrad <- amsgrad
@@ -217,6 +227,7 @@ optimizer_adamax <- function(learning_rate = 0.002, beta_1 = 0.9, beta_2 = 0.999
   )
   args$clipnorm <- clipnorm
   args$clipvalue <- clipvalue
+  args <- backcompat_fix_ignore_decay(args)
 
   do.call(keras$optimizers$Adamax, args)
 }
@@ -274,4 +285,11 @@ backcompat_fix_rename_lr_to_learning_rate <- function(..., lr) {
       assign("learning_rate", lr, parent.frame())
   }
   ellipsis::check_dots_empty()
+}
+
+backcompat_fix_ignore_decay <- function(args) {
+  if (tensorflow::tf_version() >= "2.9") {
+    args$decay <- NULL
+  }
+  return(args)
 }
