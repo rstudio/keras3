@@ -17,7 +17,7 @@
   - `layer_hashing()` gains `output_mode` and `sparse` arguments.
   - `layer_integer_lookup()` gains `vocabulary_dtype` and `idf_weights` arguments.
   - `layer_normalization()` gains an `invert` argument.
-  
+  - `layer_string_lookup()` gains an `idf_weights` argument.
 
 - Fixed issue where `input_shape` supplied to custom layers defined with `new_layer_class()`  
   would result in an error (#1338)

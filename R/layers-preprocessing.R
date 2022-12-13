@@ -977,14 +977,16 @@ function(object,
 #'
 #' @details
 #' This layer translates a set of arbitrary strings into integer output via a
-#' table-based vocabulary lookup.
+#' table-based vocabulary lookup. This layer will perform no splitting or
+#' transformation of input strings. For a layer than can split and tokenize
+#' natural language, see the `layer_text_vectorization()` layer.
 #'
 #' The vocabulary for the layer must be either supplied on construction or
 #' learned via `adapt()`. During `adapt()`, the layer will analyze a data set,
-#' determine the frequency of individual strings tokens, and create a vocabulary
-#' from them. If the vocabulary is capped in size, the most frequent tokens will
-#' be used to create the vocabulary and all others will be treated as
-#' out-of-vocabulary (OOV).
+#' determine the frequency of individual strings tokens, and create a
+#' vocabulary from them. If the vocabulary is capped in size, the most frequent
+#' tokens will be used to create the vocabulary and all others will be treated
+#' as out-of-vocabulary (OOV).
 #'
 #' There are two possible output modes for the layer.
 #' When `output_mode` is `"int"`,
@@ -996,60 +998,68 @@ function(object,
 #' The vocabulary can optionally contain a mask token as well as an OOV token
 #' (which can optionally occupy multiple indices in the vocabulary, as set
 #' by `num_oov_indices`).
-#' The position of these tokens in the vocabulary is fixed. When `output_mode` is
-#' `"int"`, the vocabulary will begin with the mask token (if set), followed by
-#' OOV indices, followed by the rest of the vocabulary. When `output_mode` is
-#' `"multi_hot"`, `"count"`, or `"tf_idf"` the vocabulary will begin with OOV
-#' indices and instances of the mask token will be dropped.
+#' The position of these tokens in the vocabulary is fixed. When `output_mode`
+#' is `"int"`, the vocabulary will begin with the mask token (if set), followed
+#' by OOV indices, followed by the rest of the vocabulary. When `output_mode`
+#' is `"multi_hot"`, `"count"`, or `"tf_idf"` the vocabulary will begin with
+#' OOV indices and instances of the mask token will be dropped.
 #'
-#' @inheritParams layer_dense
+#' For an overview and full list of preprocessing layers, see the preprocessing
+#' [guide](https://www.tensorflow.org/guide/keras/preprocessing_layers).
 #'
-#' @param max_tokens The maximum size of the vocabulary for this layer. If `NULL`,
-#' there is no cap on the size of the vocabulary. Note that this size
-#' includes the OOV and mask tokens. Default to `NULL.`
+#' @param max_tokens Maximum size of the vocabulary for this layer. This should
+#' only be specified when adapting the vocabulary or when setting
+#' `pad_to_max_tokens = TRUE`. If NULL, there is no cap on the size of the
+#' vocabulary. Note that this size includes the OOV and mask tokens.
+#' Defaults to NULL.
 #'
 #' @param num_oov_indices The number of out-of-vocabulary tokens to use. If this
-#' value is more than 1, OOV inputs are hashed to determine their OOV value.
-#' If this value is 0, OOV inputs will cause an error when calling the layer.
-#' Defaults to 1.
+#' value is more than 1, OOV inputs are hashed to determine their OOV
+#' value. If this value is 0, OOV inputs will cause an error when calling
+#' the layer. Defaults to 1.
 #'
 #' @param mask_token A token that represents masked inputs. When `output_mode` is
 #' `"int"`, the token is included in vocabulary and mapped to index 0. In
 #' other output modes, the token will not appear in the vocabulary and
-#' instances of the mask token in the input will be dropped. If set to `NULL`,
-#' no mask term will be added. Defaults to `NULL`.
+#' instances of the mask token in the input will be dropped. If set to
+#' NULL, no mask term will be added. Defaults to `NULL`.
 #'
-#' @param oov_token Only used when `invert` is TRUE. The token to return for OOV
+#' @param oov_token Only used when `invert` is `TRUE`. The token to return for OOV
 #' indices. Defaults to `"[UNK]"`.
 #'
-#' @param vocabulary Optional. Either an array of strings or a string path to a text
-#' file. If passing an array, can pass a list, list, 1D numpy array, or 1D
-#' tensor containing the string vocabulary terms. If passing a file path, the
-#' file should contain one line per term in the vocabulary. If this argument
-#' is set, there is no need to `adapt` the layer.
+#' @param vocabulary Optional. Either an array of strings or a string path to a
+#' text file. If passing an array, can pass a character vector or
+#' or 1D tensor containing the string vocabulary terms. If passing a file
+#' path, the file should contain one line per term in the vocabulary. If
+#' this argument is set, there is no need to `adapt()` the layer.
 #'
-#' @param encoding String encoding. Default of `NULL` is equivalent to `"utf-8"`.
+#' @param idf_weights Only valid when `output_mode` is `"tf_idf"`.
+#' An array, or 1D tensor or the same length as the vocabulary,
+#' containing the floating point inverse document frequency weights, which
+#' will be multiplied by per sample term counts for the final `tf_idf`
+#' weight. If the `vocabulary` argument is set, and `output_mode` is
+#' `"tf_idf"`, this argument must be supplied.
 #'
-#' @param invert Only valid when `output_mode` is `"int"`. If TRUE, this layer will
+#' @param invert Only valid when `output_mode` is `"int"`. If `TRUE`, this layer will
 #' map indices to vocabulary items instead of mapping vocabulary items to
 #' indices. Default to `FALSE`.
 #'
-#' @param output_mode Specification for the output of the layer. Defaults to `"int"`.
-#' Values can be `"int"`, `"one_hot"`, `"multi_hot"`, `"count"`, or
-#' `"tf_idf"` configuring the layer as follows:
+#' @param output_mode Specification for the output of the layer. Defaults to
+#' `"int"`.  Values can be `"int"`, `"one_hot"`, `"multi_hot"`, `"count"`,
+#' or `"tf_idf"` configuring the layer as follows:
 #'   - `"int"`: Return the raw integer indices of the input tokens.
 #'   - `"one_hot"`: Encodes each individual element in the input into an
 #'     array the same size as the vocabulary, containing a 1 at the element
-#'     index. If the last dimension is size 1, will encode on that dimension.
-#'     If the last dimension is not size 1, will append a new dimension for
-#'     the encoded output.
+#'     index. If the last dimension is size 1, will encode on that
+#'     dimension. If the last dimension is not size 1, will append a new
+#'     dimension for the encoded output.
 #'   - `"multi_hot"`: Encodes each sample in the input into a single array
 #'     the same size as the vocabulary, containing a 1 for each vocabulary
 #'     term present in the sample. Treats the last dimension as the sample
 #'     dimension, if input shape is (..., sample_length), output shape will
 #'     be (..., num_tokens).
-#'   - `"count"`: As `"multi_hot"`, but the int array contains a count of the
-#'     number of times the token at that index appeared in the sample.
+#'   - `"count"`: As `"multi_hot"`, but the int array contains a count of
+#'     the number of times the token at that index appeared in the sample.
 #'   - `"tf_idf"`: As `"multi_hot"`, but the TF-IDF algorithm is applied to
 #'     find the value in each token slot.
 #' For `"int"` output, any shape of input and output is supported. For all
@@ -1059,11 +1069,15 @@ function(object,
 #' `"count"`, or `"tf_idf"`. If TRUE, the output will have its feature axis
 #' padded to `max_tokens` even if the number of unique tokens in the
 #' vocabulary is less than max_tokens, resulting in a tensor of shape
-#' `[batch_size, max_tokens]` regardless of vocabulary size. Defaults to `FALSE`.
+#' [batch_size, max_tokens] regardless of vocabulary size. Defaults to
+#' FALSE.
 #'
 #' @param sparse Boolean. Only applicable when `output_mode` is `"multi_hot"`,
-#' `"count"`, or `"tf_idf"`. If TRUE, returns a `SparseTensor` instead of a
+#' `"count"`, or `"tf_idf"`. If `TRUE`, returns a `SparseTensor` instead of a
 #' dense `Tensor`. Defaults to `FALSE`.
+#'
+#' @param encoding Optional. The text encoding to use to interpret the input
+#' strings. Defaults to `"utf-8"`.
 #'
 #' @param ... standard layer arguments.
 #'
@@ -1081,11 +1095,12 @@ function(object,
          max_tokens = NULL,
          num_oov_indices = 1L,
          mask_token = NULL,
-         oov_token = '[UNK]',
+         oov_token = "[UNK]",
          vocabulary = NULL,
-         encoding = NULL,
+         idf_weights = NULL,
+         encoding = "utf-8",
          invert = FALSE,
-         output_mode = 'int',
+         output_mode = "int",
          sparse = FALSE,
          pad_to_max_tokens = FALSE,
          ...)

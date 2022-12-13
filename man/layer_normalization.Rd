@@ -44,7 +44,7 @@ value(s) will be broadcast to the shape of the kept axes above; if the
 value(s) cannot be broadcast, an error will be raised when this layer's
 \code{build()} method is called.}
 
-\item{invert}{If TRUE, this layer will apply the inverse transformation
+\item{invert}{If \code{TRUE}, this layer will apply the inverse transformation
 to its inputs: it would turn a normalized input back into its
 original form.}
 

@@ -168,4 +168,6 @@ print.r_py_wrapper2 <- function(x, ...) {
 # new_layer_wrapper(keras$layers$GaussianDropout) |> print()
 # new_layer_wrapper(keras$layers$GaussianNoise) |> print()
 # new_layer_wrapper(keras$layers$IntegerLookup) |> print()
-new_layer_wrapper(keras$layers$Normalization) |> print()
+# new_layer_wrapper(keras$layers$Normalization) |> print()
+new_layer_wrapper(keras$layers$StringLookup) |> print()
+
