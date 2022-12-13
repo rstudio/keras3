@@ -34,6 +34,8 @@ vanilla gradient descent.}
 \item{nesterov}{boolean. Whether to apply Nesterov momentum.
 Defaults to \code{FALSE}.}
 
+\item{amsgrad}{ignored.}
+
 \item{weight_decay}{Float, defaults to NULL. If set, weight decay is applied.}
 
 \item{clipnorm}{Float. If set, the gradient of each weight is individually

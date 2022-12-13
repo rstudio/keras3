@@ -726,6 +726,7 @@ do.call(keras$optimizers$RMSprop, args)
 #' happens automatically after the last epoch, and you don't need to do
 #' anything.
 #'
+#' @param amsgrad ignored.
 #'
 #' @param jit_compile Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
 #' compilation. If no GPU device is found, this flag will be ignored.
