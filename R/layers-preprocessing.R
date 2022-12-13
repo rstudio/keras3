@@ -1138,6 +1138,10 @@ function(object,
 #' value(s) cannot be broadcast, an error will be raised when this layer's
 #' `build()` method is called.
 #'
+#' @param invert If `TRUE`, this layer will apply the inverse transformation
+#' to its inputs: it would turn a normalized input back into its
+#' original form.
+#'
 #' @param ... standard layer arguments.
 #'
 #' @family numerical features preprocessing layers
@@ -1149,7 +1153,9 @@ function(object,
 #'   -  <https://keras.io/api/layers/preprocessing_layers/numerical/normalization>
 #' @export
 layer_normalization <-
-function(object, axis = -1L, mean=NULL, variance=NULL, ...)
+function(object, axis = -1L,
+         mean = NULL, variance = NULL,
+         invert = FALSE, ...)
 {
   require_tf_version("2.6", "layer_normalization()")
   args <- capture_args(match.call(), list(axis = as_axis),
