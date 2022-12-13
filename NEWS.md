@@ -1,5 +1,14 @@
 # keras (development version)
 
+- Default TensorFlow version installed by `install_keras()` is now 2.11. 
+
+- All optimizers have been updated for keras/tensorflow version 2.11. 
+  Arguments to all the optimizers have changed. To access the previous optimizer implementations, 
+  use the constructors available at `keras$optimizers$legacy`.
+  For example, `keras$optimizers$legacy$Adam()` for the previous implementation of `optimizer_adam()`.
+
+- new optimizer `optimizer_frtl()`
+
 - Fixed issue where `input_shape` supplied to custom layers defined with `new_layer_class()`  
   would result in an error (#1338)
 
