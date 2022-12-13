@@ -4,7 +4,13 @@
 \alias{layer_attention}
 \title{Dot-product attention layer, a.k.a. Luong-style attention}
 \usage{
-layer_attention(inputs, use_scale = FALSE, score_mode = "dot", ...)
+layer_attention(
+  inputs,
+  use_scale = FALSE,
+  score_mode = "dot",
+  ...,
+  dropout = NULL
+)
 }
 \arguments{
 \item{inputs}{List of the following tensors:

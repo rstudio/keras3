@@ -163,4 +163,5 @@ print.r_py_wrapper2 <- function(x, ...) {
 # new_layer_wrapper(keras$layers$TextVectorization)
 # new_layer_wrapper(keras$layers$DepthwiseConv1D)
 # new_layer_wrapper(keras$layers$UnitNormalization)
-new_layer_wrapper(keras$layers$Attention)
+# new_layer_wrapper(keras$layers$Attention)
+new_layer_wrapper(keras$layers$Discretization)

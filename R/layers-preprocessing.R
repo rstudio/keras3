@@ -1141,6 +1141,31 @@ function(object, axis = -1L, mean=NULL, variance=NULL, ...)
 #' hence result in more unequal buckets, but could improve performance
 #' and resource consumption.
 #'
+#' @param output_mode Specification for the output of the layer. Defaults to
+#' `"int"`.  Values can be `"int"`, `"one_hot"`, `"multi_hot"`, or
+#' `"count"` configuring the layer as follows:
+#'
+#'   - `"int"`: Return the discretized bin indices directly.
+#'
+#'   - `"one_hot"`: Encodes each individual element in the input into an
+#'     array the same size as `num_bins`, containing a 1 at the input's bin
+#'     index. If the last dimension is size 1, will encode on that
+#'     dimension.  If the last dimension is not size 1, will append a new
+#'     dimension for the encoded output.
+#'
+#'   - `"multi_hot"`: Encodes each sample in the input into a single array
+#'     the same size as `num_bins`, containing a 1 for each bin index
+#'     index present in the sample. Treats the last dimension as the sample
+#'     dimension, if input shape is `(..., sample_length)`, output shape
+#'     will be `(..., num_tokens)`.
+#'
+#'   - `"count"`: As `"multi_hot"`, but the int array contains a count of
+#'     the number of times the bin index appeared in the sample.
+#'
+#' @param sparse Boolean. Only applicable to `"one_hot"`, `"multi_hot"`,
+#' and `"count"` output modes. If `TRUE`, returns a `SparseTensor` instead of
+#' a dense `Tensor`. Defaults to `FALSE`.
+#'
 #' @param ... standard layer arguments.
 #'
 #' @family numerical features preprocessing layers
@@ -1152,7 +1177,8 @@ function(object, axis = -1L, mean=NULL, variance=NULL, ...)
 #'   -  <https://keras.io/api/layers/preprocessing_layers/numerical/discretization>
 #' @export
 layer_discretization <-
-function(object, bin_boundaries=NULL, num_bins = NULL, epsilon = 0.01, ...)
+function(object, bin_boundaries=NULL, num_bins = NULL, epsilon = 0.01,
+         output_mode = "int", sparse = FALSE,...)
 {
   require_tf_version("2.6", "layer_discretization()")
   args <- capture_args(match.call(),

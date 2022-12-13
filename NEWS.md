@@ -12,6 +12,7 @@
 
 - updates to layers:
   - `layer_attention()` gains `score_mode` and `dropout` arguments.
+  - `layer_discretization()` gains `output_mode` and `sparse` arguments.
 
 - Fixed issue where `input_shape` supplied to custom layers defined with `new_layer_class()`  
   would result in an error (#1338)
