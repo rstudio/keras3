@@ -684,3 +684,14 @@ formals(`[.tensorflow.tensor`)$options <-
     warn_tensors_passed_asis = FALSE,
     warn_negatives_pythonic = FALSE
   )
+
+
+
+standard_layer_arg_modifiers <- function() {
+  list(
+    input_shape = normalize_shape,
+    batch_input_shape = normalize_shape,
+    batch_size = as_nullable_integer,
+    seed = as_nullable_integer
+  )
+}
