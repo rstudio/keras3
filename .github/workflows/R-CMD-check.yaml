@@ -4,7 +4,7 @@ on:
       - main
   pull_request:
   schedule:
-    - cron: '51 3 * * MON'
+    - cron: '51 3 * * Fri'
 
 name: R-CMD-check
 
