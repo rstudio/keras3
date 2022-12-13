@@ -37,7 +37,6 @@ Imports:
     glue,
     methods,
     R6,
-    ellipsis,
     rlang
 Suggests:
     ggplot2,
