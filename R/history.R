@@ -95,11 +95,11 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
 
     if (do_validation) {
       if (theme_bw)
-        p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data, linetype = ~data, shape = ~data))
+        p <- ggplot2::ggplot(df, ggplot2::aes(epoch, value, color = data, fill = data, linetype = data, shape = data))
       else
-        p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data))
+        p <- ggplot2::ggplot(df, ggplot2::aes(epoch, value, color = data, fill = data))
     } else {
-      p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value))
+      p <- ggplot2::ggplot(df, ggplot2::aes(epoch, value))
     }
 
     smooth_args <- list(se = FALSE, method = 'loess', na.rm = TRUE,
