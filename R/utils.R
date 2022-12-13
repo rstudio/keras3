@@ -687,11 +687,10 @@ formals(`[.tensorflow.tensor`)$options <-
 
 
 
-standard_layer_arg_modifiers <- function() {
-  list(
+standard_layer_arg_modifiers <- list(
     input_shape = normalize_shape,
     batch_input_shape = normalize_shape,
     batch_size = as_nullable_integer,
     seed = as_nullable_integer
   )
-}
+

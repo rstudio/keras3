@@ -59,8 +59,8 @@ the number of times the bin index appeared in the sample.
 }}
 
 \item{sparse}{Boolean. Only applicable to \code{"one_hot"}, \code{"multi_hot"},
-and \code{"count"} output modes. If TRUE, returns a \code{SparseTensor} instead of
-a dense \code{Tensor}. Defaults to FALSE.}
+and \code{"count"} output modes. If \code{TRUE}, returns a \code{SparseTensor} instead of
+a dense \code{Tensor}. Defaults to \code{FALSE}.}
 
 \item{...}{standard layer arguments.}
 }

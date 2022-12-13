@@ -15,6 +15,7 @@
   - `layer_discretization()` gains `output_mode` and `sparse` arguments.
   - `layer_gaussian_dropout()` and `layer_gaussian_noise()` gain a `seed` argument.
   - `layer_hashing()` gains `output_mode` and `sparse` arguments.
+  - `layer_integer_lookup()` gains `vocabulary_dtype` and `idf_weights` arguments
 
 - Fixed issue where `input_shape` supplied to custom layers defined with `new_layer_class()`  
   would result in an error (#1338)
