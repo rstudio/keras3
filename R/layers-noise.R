@@ -11,6 +11,8 @@
 #'
 #' @param stddev float, standard deviation of the noise distribution.
 #'
+#' @param ... standard layer arguments.
+#'
 #' @section Input shape: Arbitrary. Use the keyword argument `input_shape` (list
 #'   of integers, does not include the samples axis) when using this layer as
 #'   the first layer in a model.
@@ -40,6 +42,8 @@ function(object, stddev, seed = NULL, ...)
 #'   noise will have standard deviation `sqrt(rate / (1 - rate))`.
 #'
 #' @param seed Integer, optional random seed to enable deterministic behavior.
+#'
+#' @param ... standard layer arguments.
 #'
 #' @section Input shape: Arbitrary. Use the keyword argument `input_shape` (list
 #'   of integers, does not include the samples axis) when using this layer as

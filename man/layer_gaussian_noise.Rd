@@ -17,6 +17,8 @@ The return value depends on \code{object}. If \code{object} is:
 }}
 
 \item{stddev}{float, standard deviation of the noise distribution.}
+
+\item{...}{standard layer arguments.}
 }
 \description{
 This is useful to mitigate overfitting (you could see it as a form of random

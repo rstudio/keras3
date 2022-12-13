@@ -20,6 +20,8 @@ The return value depends on \code{object}. If \code{object} is:
 noise will have standard deviation \code{sqrt(rate / (1 - rate))}.}
 
 \item{seed}{Integer, optional random seed to enable deterministic behavior.}
+
+\item{...}{standard layer arguments.}
 }
 \description{
 As it is a regularization layer, it is only active at training time.
