@@ -18,6 +18,8 @@ The return value depends on \code{object}. If \code{object} is:
 
 \item{stddev}{float, standard deviation of the noise distribution.}
 
+\item{seed}{Integer, optional random seed to enable deterministic behavior.}
+
 \item{...}{standard layer arguments.}
 }
 \description{

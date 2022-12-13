@@ -21,6 +21,15 @@ layer_string_lookup(
 )
 }
 \arguments{
+\item{object}{What to compose the new \code{Layer} instance with. Typically a
+Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
+The return value depends on \code{object}. If \code{object} is:
+\itemize{
+\item missing or \code{NULL}, the \code{Layer} instance is returned.
+\item a \code{Sequential} model, the model with an additional layer is returned.
+\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
+}}
+
 \item{max_tokens}{Maximum size of the vocabulary for this layer. This should
 only be specified when adapting the vocabulary or when setting
 \code{pad_to_max_tokens = TRUE}. If NULL, there is no cap on the size of the
@@ -92,7 +101,7 @@ dense \code{Tensor}. Defaults to \code{FALSE}.}
 \code{"count"}, or \code{"tf_idf"}. If TRUE, the output will have its feature axis
 padded to \code{max_tokens} even if the number of unique tokens in the
 vocabulary is less than max_tokens, resulting in a tensor of shape
-\link{batch_size, max_tokens} regardless of vocabulary size. Defaults to
+\verb{[batch_size, max_tokens]} regardless of vocabulary size. Defaults to
 FALSE.}
 
 \item{...}{standard layer arguments.}

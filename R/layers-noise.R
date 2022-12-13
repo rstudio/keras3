@@ -11,6 +11,8 @@
 #'
 #' @param stddev float, standard deviation of the noise distribution.
 #'
+#' @param seed Integer, optional random seed to enable deterministic behavior.
+#'
 #' @param ... standard layer arguments.
 #'
 #' @section Input shape: Arbitrary. Use the keyword argument `input_shape` (list

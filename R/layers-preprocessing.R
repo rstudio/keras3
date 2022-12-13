@@ -929,7 +929,7 @@ function(object, num_bins, mask_value = NULL, salt = NULL,
 #' `"count"`, or `"tf_idf"`. If `TRUE`, the output will have its feature axis
 #' padded to `max_tokens` even if the number of unique tokens in the
 #' vocabulary is less than max_tokens, resulting in a tensor of shape
-#' [batch_size, max_tokens] regardless of vocabulary size. Defaults to
+#' `[batch_size, max_tokens]` regardless of vocabulary size. Defaults to
 #' FALSE.
 #'
 #' @param sparse Boolean. Only applicable when `output_mode` is `"multi_hot"`,
@@ -1007,6 +1007,8 @@ function(object,
 #' For an overview and full list of preprocessing layers, see the preprocessing
 #' [guide](https://www.tensorflow.org/guide/keras/preprocessing_layers).
 #'
+#' @inheritParams layer_dense
+#'
 #' @param max_tokens Maximum size of the vocabulary for this layer. This should
 #' only be specified when adapting the vocabulary or when setting
 #' `pad_to_max_tokens = TRUE`. If NULL, there is no cap on the size of the
@@ -1069,7 +1071,7 @@ function(object,
 #' `"count"`, or `"tf_idf"`. If TRUE, the output will have its feature axis
 #' padded to `max_tokens` even if the number of unique tokens in the
 #' vocabulary is less than max_tokens, resulting in a tensor of shape
-#' [batch_size, max_tokens] regardless of vocabulary size. Defaults to
+#' `[batch_size, max_tokens]` regardless of vocabulary size. Defaults to
 #' FALSE.
 #'
 #' @param sparse Boolean. Only applicable when `output_mode` is `"multi_hot"`,

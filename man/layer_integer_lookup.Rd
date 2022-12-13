@@ -101,7 +101,7 @@ dense \code{Tensor}. Defaults to FALSE.}
 \code{"count"}, or \code{"tf_idf"}. If \code{TRUE}, the output will have its feature axis
 padded to \code{max_tokens} even if the number of unique tokens in the
 vocabulary is less than max_tokens, resulting in a tensor of shape
-\link{batch_size, max_tokens} regardless of vocabulary size. Defaults to
+\verb{[batch_size, max_tokens]} regardless of vocabulary size. Defaults to
 FALSE.}
 
 \item{...}{standard layer arguments.}
