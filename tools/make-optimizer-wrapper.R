@@ -86,12 +86,11 @@ r_doc_from_py_fn <- function(py_fn, name = NULL) {
   cat(desc)
 
   for (p in x$params) {
-    if (p$arg_name %in% c("name", "dtype")) next
+    if (p$arg_name %in% c("**kwargs")) next
     cat("\n@param", p$arg_name, cleanup_description(p$description))
   }
 
-
-  cat("@param ... For backwards and forwards compatibility")
+  cat("@param ... Used for backward and forward compatibility")
   # TODO: @inheritDotParams keras.layers.Layer
 
   cat()
@@ -177,6 +176,8 @@ print.r_py_wrapper2 <- function(x, ...) {
 # new_application_wrapper("tf.keras.applications.ResNet101")
 
 
+get_doc(keras$optimizers$Adadelta)
+new_optimizer_wrapper(keras$optimizers$Adadelta)
 new_optimizer_wrapper(keras$optimizers$Adam)
 new_optimizer_wrapper(keras$optimizers$SGD)
 

@@ -69,9 +69,11 @@ anything.}
 \item{jit_compile}{Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
 compilation. If no GPU device is found, this flag will be ignored.}
 
-\item{...}{For backwards and forwards compatibility}
+\item{name}{String. The name to use
+for momentum accumulator weights created by
+the optimizer.}
 
-\item{**kwargs}{keyword arguments only used for backward compatibility.}
+\item{...}{Used for backward and forward compatibility}
 }
 \value{
 Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.

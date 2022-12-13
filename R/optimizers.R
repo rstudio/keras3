@@ -28,6 +28,10 @@
 #' @param epsilon Small floating point value used to maintain numerical stability.
 #' Defaults to 1e-7.
 #'
+#' @param name String. The name to use
+#' for momentum accumulator weights created by
+#' the optimizer.
+#'
 #' @param weight_decay Float, defaults to NULL. If set, weight decay is applied.
 #'
 #' @param clipnorm Float. If set, the gradient of each weight is individually
@@ -62,9 +66,7 @@
 #'
 #' @param jit_compile Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
 #' compilation. If no GPU device is found, this flag will be ignored.
-#'
-#' @param **kwargs keyword arguments only used for backward compatibility.
-#' @param ... For backwards and forwards compatibility
+#' @param ... Used for backward and forward compatibility
 #'
 #' @family optimizers
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
@@ -104,6 +106,10 @@ do.call(keras$optimizers$Adadelta, args)
 #'
 #' @param epsilon Small floating point value used to maintain numerical stability.
 #'
+#' @param name String. The name to use
+#' for momentum accumulator weights created by
+#' the optimizer.
+#'
 #' @param weight_decay Float, defaults to NULL. If set, weight decay is applied.
 #'
 #' @param clipnorm Float. If set, the gradient of each weight is individually
@@ -138,9 +144,7 @@ do.call(keras$optimizers$Adadelta, args)
 #'
 #' @param jit_compile Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
 #' compilation. If no GPU device is found, this flag will be ignored.
-#'
-#' @param **kwargs keyword arguments only used for backward compatibility.
-#' @param ... For backwards and forwards compatibility
+#' @param ... Used for backward and forward compatibility
 #'
 #' @family optimizers
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
@@ -193,6 +197,10 @@ do.call(keras$optimizers$Adagrad, args)
 #' @param amsgrad Boolean. Whether to apply AMSGrad variant of this algorithm from
 #' the paper "On the Convergence of Adam and beyond". Defaults to `FALSE`.
 #'
+#' @param name String. The name to use
+#' for momentum accumulator weights created by
+#' the optimizer.
+#'
 #' @param weight_decay Float, defaults to NULL. If set, weight decay is applied.
 #'
 #' @param clipnorm Float. If set, the gradient of each weight is individually
@@ -227,9 +235,7 @@ do.call(keras$optimizers$Adagrad, args)
 #'
 #' @param jit_compile Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
 #' compilation. If no GPU device is found, this flag will be ignored.
-#'
-#' @param **kwargs keyword arguments only used for backward compatibility.
-#' @param ... For backwards and forwards compatibility
+#' @param ... Used for backward and forward compatibility
 #'
 #' @family optimizers
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
@@ -290,6 +296,10 @@ do.call(keras$optimizers$Adam, args)
 #'
 #' @param epsilon A small constant for numerical stability.
 #'
+#' @param name String. The name to use
+#' for momentum accumulator weights created by
+#' the optimizer.
+#'
 #' @param weight_decay Float, defaults to NULL. If set, weight decay is applied.
 #'
 #' @param clipnorm Float. If set, the gradient of each weight is individually
@@ -324,9 +334,7 @@ do.call(keras$optimizers$Adam, args)
 #'
 #' @param jit_compile Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
 #' compilation. If no GPU device is found, this flag will be ignored.
-#'
-#' @param **kwargs keyword arguments only used for backward compatibility.
-#' @param ... For backwards and forwards compatibility
+#' @param ... Used for backward and forward compatibility
 #'
 #' @family optimizers
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
@@ -417,6 +425,10 @@ do.call(keras$optimizers$Adamax, args)
 #' @param beta A float value, representing the beta value from the paper. Defaults
 #' to 0.0.
 #'
+#' @param name String. The name to use
+#' for momentum accumulator weights created by
+#' the optimizer.
+#'
 #' @param weight_decay Float, defaults to NULL. If set, weight decay is applied.
 #'
 #' @param clipnorm Float. If set, the gradient of each weight is individually
@@ -451,9 +463,7 @@ do.call(keras$optimizers$Adamax, args)
 #'
 #' @param jit_compile Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
 #' compilation. If no GPU device is found, this flag will be ignored.
-#'
-#' @param **kwargs keyword arguments only used for backward compatibility.
-#' @param ... For backwards and forwards compatibility
+#' @param ... Used for backward and forward compatibility
 #'
 #' @family optimizers
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
@@ -498,6 +508,10 @@ do.call(keras$optimizers$Ftrl, args)
 #' Section 2.1), not the epsilon in Algorithm 1 of the paper. Defaults to
 #' 1e-7.
 #'
+#' @param name String. The name to use
+#' for momentum accumulator weights created by
+#' the optimizer.
+#'
 #' @param weight_decay Float, defaults to NULL. If set, weight decay is applied.
 #'
 #' @param clipnorm Float. If set, the gradient of each weight is individually
@@ -532,9 +546,7 @@ do.call(keras$optimizers$Ftrl, args)
 #'
 #' @param jit_compile Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
 #' compilation. If no GPU device is found, this flag will be ignored.
-#'
-#' @param **kwargs keyword arguments only used for backward compatibility.
-#' @param ... For backwards and forwards compatibility
+#' @param ... Used for backward and forward compatibility
 #'
 #' @family optimizers
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
@@ -586,6 +598,10 @@ do.call(keras$optimizers$Nadam, args)
 #' Setting this to `TRUE` may help with training, but is slightly more
 #' expensive in terms of computation and memory. Defaults to `FALSE`.
 #'
+#' @param name String. The name to use
+#' for momentum accumulator weights created by
+#' the optimizer.
+#'
 #' @param weight_decay Float, defaults to NULL. If set, weight decay is applied.
 #'
 #' @param clipnorm Float. If set, the gradient of each weight is individually
@@ -620,9 +636,7 @@ do.call(keras$optimizers$Nadam, args)
 #'
 #' @param jit_compile Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
 #' compilation. If no GPU device is found, this flag will be ignored.
-#'
-#' @param **kwargs keyword arguments only used for backward compatibility.
-#' @param ... For backwards and forwards compatibility
+#' @param ... Used for backward and forward compatibility
 #'
 #' @family optimizers
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
@@ -676,6 +690,10 @@ do.call(keras$optimizers$RMSprop, args)
 #' @param nesterov boolean. Whether to apply Nesterov momentum.
 #' Defaults to `FALSE`.
 #'
+#' @param name String. The name to use
+#' for momentum accumulator weights created by
+#' the optimizer.
+#'
 #' @param weight_decay Float, defaults to NULL. If set, weight decay is applied.
 #'
 #' @param clipnorm Float. If set, the gradient of each weight is individually
@@ -708,11 +726,10 @@ do.call(keras$optimizers$RMSprop, args)
 #' happens automatically after the last epoch, and you don't need to do
 #' anything.
 #'
+#'
 #' @param jit_compile Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
 #' compilation. If no GPU device is found, this flag will be ignored.
-#'
-#' @param **kwargs keyword arguments only used for backward compatibility.
-#' @param ... For backwards and forwards compatibility
+#' @param ... Used for backward and forward compatibility
 #'
 #' @family optimizers
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
