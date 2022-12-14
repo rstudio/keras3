@@ -1032,7 +1032,7 @@ flow_images_from_dataframe <- function(
 #'   reserve for validation.
 #' @param subset One of "training", "validation", or "both" (available for TF>=2.10).
 #'   Only used if validation_split is set. When `subset="both"`, the utility returns
-#'   a tuple of two datasets (the training and validation datasets respectively). 
+#'   a tuple of two datasets (the training and validation datasets respectively).
 #' @param interpolation String, the interpolation method used when resizing
 #'   images. Defaults to bilinear. Supports bilinear, nearest, bicubic, area,
 #'   lanczos3, lanczos5, gaussian, mitchellcubic.
@@ -1102,10 +1102,9 @@ image_dataset_from_directory <- function(
     seed = as_nullable_integer,
     labels = function(l) if(is.character(l)) l else as.integer(l)
   ))
-  
-  if (tensorflow::tf_version() < "2.10" && subset == "both") {
+
+  if (identical(subset, "both") && tensorflow::tf_version() < "2.10")
     stop('subset="both" is only available for TF>=2.10')
-  }
 
   out <- do.call(keras$preprocessing$image_dataset_from_directory, args)
   class(out) <- unique(c("tf_dataset", class(out)))

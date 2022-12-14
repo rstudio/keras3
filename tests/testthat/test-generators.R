@@ -33,8 +33,7 @@ test_succeeds("image data generator can be used for training", {
   # compile model
   model %>% compile(
     loss='categorical_crossentropy',
-    optimizer = expect_warning(optimizer_rmsprop(lr = 0.0001, decay = 1e-6),
-                               "learning_rate"),
+    optimizer = optimizer_rmsprop(0.0001),
     metrics=c('accuracy')
   )
 

@@ -2,47 +2,110 @@
 % Please edit documentation in R/optimizers.R
 \name{optimizer_adadelta}
 \alias{optimizer_adadelta}
-\title{Adadelta optimizer.}
+\title{Optimizer that implements the Adadelta algorithm}
 \usage{
 optimizer_adadelta(
-  learning_rate = 1,
+  learning_rate = 0.001,
   rho = 0.95,
-  epsilon = NULL,
-  decay = 0,
+  epsilon = 1e-07,
+  weight_decay = NULL,
   clipnorm = NULL,
   clipvalue = NULL,
+  global_clipnorm = NULL,
+  use_ema = FALSE,
+  ema_momentum = 0.99,
+  ema_overwrite_frequency = NULL,
+  jit_compile = TRUE,
+  name = "Adadelta",
   ...
 )
 }
 \arguments{
-\item{learning_rate}{float >= 0. Learning rate.}
+\item{learning_rate}{Initial value for the learning rate:
+either a floating point value,
+or a \code{tf.keras.optimizers.schedules.LearningRateSchedule} instance.
+Defaults to 0.001.
+Note that \code{Adadelta} tends to benefit from higher initial learning rate
+values compared to other optimizers.
+To match the exact form in the original paper, use 1.0.}
 
-\item{rho}{float >= 0. Decay factor.}
+\item{rho}{A \code{Tensor} or a floating point value. The decay rate. Defaults to
+0.95.}
 
-\item{epsilon}{float >= 0. Fuzz factor. If \code{NULL}, defaults to \code{k_epsilon()}.}
+\item{epsilon}{Small floating point value used to maintain numerical stability.
+Defaults to 1e-7.}
 
-\item{decay}{float >= 0. Learning rate decay over each update.}
+\item{weight_decay}{Float, defaults to NULL. If set, weight decay is applied.}
 
-\item{clipnorm}{Gradients will be clipped when their L2 norm exceeds this
-value.}
+\item{clipnorm}{Float. If set, the gradient of each weight is individually
+clipped so that its norm is no higher than this value.}
 
-\item{clipvalue}{Gradients will be clipped when their absolute value exceeds
-this value.}
+\item{clipvalue}{Float. If set, the gradient of each weight is clipped to be no
+higher than this value.}
 
-\item{...}{Unused, present only for backwards compatability}
+\item{global_clipnorm}{Float. If set, the gradient of all weights is clipped so
+that their global norm is no higher than this value.}
+
+\item{use_ema}{Boolean, defaults to FALSE. If TRUE, exponential moving average
+(EMA) is applied. EMA consists of computing an exponential moving
+average of the weights of the model (as the weight values change after
+each training batch), and periodically overwriting the weights with
+their moving average.}
+
+\item{ema_momentum}{Float, defaults to 0.99. Only used if \code{use_ema=TRUE}. This is  # noqa: E501
+the momentum to use when computing the EMA of the model's weights:
+\code{new_average = ema_momentum * old_average + (1 - ema_momentum) * current_variable_value}.}
+
+\item{ema_overwrite_frequency}{Int or NULL, defaults to NULL. Only used if
+\code{use_ema=TRUE}. Every \code{ema_overwrite_frequency} steps of iterations, we
+overwrite the model variable by its moving average. If NULL, the optimizer  # noqa: E501
+does not overwrite model variables in the middle of training, and you
+need to explicitly overwrite the variables at the end of training
+by calling \code{optimizer.finalize_variable_values()} (which updates the model  # noqa: E501
+variables in-place). When using the built-in \code{fit()} training loop, this
+happens automatically after the last epoch, and you don't need to do
+anything.}
+
+\item{jit_compile}{Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
+compilation. If no GPU device is found, this flag will be ignored.}
+
+\item{name}{String. The name to use
+for momentum accumulator weights created by
+the optimizer.}
+
+\item{...}{Used for backward and forward compatibility}
+}
+\value{
+Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
 }
 \description{
-Adadelta optimizer as described in \href{https://arxiv.org/abs/1212.5701}{ADADELTA: An Adaptive Learning Rate Method}.
+Optimizer that implements the Adadelta algorithm
 }
-\note{
-It is recommended to leave the parameters of this optimizer at their
-default values.
+\details{
+Adadelta optimization is a stochastic gradient descent method that is based
+on adaptive learning rate per dimension to address two drawbacks:
+\itemize{
+\item The continual decay of learning rates throughout training.
+\item The need for a manually selected global learning rate.
+}
+
+Adadelta is a more robust extension of Adagrad that adapts learning rates
+based on a moving window of gradient updates, instead of accumulating all
+past gradients. This way, Adadelta continues learning even when many updates
+have been done. Compared to Adagrad, in the original version of Adadelta you
+don't have to set an initial learning rate. In this version, the initial
+learning rate can be set, as in most other Keras optimizers.
 }
 \seealso{
+\itemize{
+\item \url{https://www.tensorflow.org/api_docs/python/keras/optimizers/optimizer_experimental/adadelta/Adadelta}
+}
+
 Other optimizers: 
 \code{\link{optimizer_adagrad}()},
 \code{\link{optimizer_adamax}()},
 \code{\link{optimizer_adam}()},
+\code{\link{optimizer_ftrl}()},
 \code{\link{optimizer_nadam}()},
 \code{\link{optimizer_rmsprop}()},
 \code{\link{optimizer_sgd}()}

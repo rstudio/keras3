@@ -24,7 +24,14 @@ layer_multi_head_attention(
 )
 }
 \arguments{
-\item{inputs}{a list of inputs first should be the query tensor, the second the value tensor}
+\item{inputs}{List of the following tensors:
+\itemize{
+\item query: Query Tensor of shape \verb{[batch_size, Tq, dim]}.
+\item value: Value Tensor of shape \verb{[batch_size, Tv, dim]}.
+\item key: Optional key Tensor of shape \verb{[batch_size, Tv, dim]}. If not
+given, will use value for both key and value, which is the most common
+case.
+}}
 
 \item{num_heads}{Number of attention heads.}
 

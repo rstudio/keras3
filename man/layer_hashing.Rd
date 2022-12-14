@@ -4,7 +4,15 @@
 \alias{layer_hashing}
 \title{A preprocessing layer which hashes and bins categorical features.}
 \usage{
-layer_hashing(object, num_bins, mask_value = NULL, salt = NULL, ...)
+layer_hashing(
+  object,
+  num_bins,
+  mask_value = NULL,
+  salt = NULL,
+  output_mode = "int",
+  sparse = FALSE,
+  ...
+)
 }
 \arguments{
 \item{object}{What to compose the new \code{Layer} instance with. Typically a
@@ -30,6 +38,29 @@ used as an additional input (known as a "salt" in cryptography).
 These should be non-zero. Defaults to \code{NULL} (in that
 case, the FarmHash64 hash function is used). It also supports
 list of 2 unsigned integer numbers, see reference paper for details.}
+
+\item{output_mode}{Specification for the output of the layer. Defaults to
+\code{"int"}.  Values can be \code{"int"}, \code{"one_hot"}, \code{"multi_hot"}, or
+\code{"count"} configuring the layer as follows:
+\itemize{
+\item \code{"int"}: Return the integer bin indices directly.
+\item \code{"one_hot"}: Encodes each individual element in the input into an
+array the same size as \code{num_bins}, containing a 1 at the input's bin
+index. If the last dimension is size 1, will encode on that
+dimension.  If the last dimension is not size 1, will append a new
+dimension for the encoded output.
+\item \code{"multi_hot"}: Encodes each sample in the input into a single array
+the same size as \code{num_bins}, containing a 1 for each bin index
+index present in the sample. Treats the last dimension as the sample
+dimension, if input shape is \verb{(..., sample_length)}, output shape
+will be \verb{(..., num_tokens)}.
+\item \code{"count"}: As \code{"multi_hot"}, but the int array contains a count of
+the number of times the bin index appeared in the sample.
+}}
+
+\item{sparse}{Boolean. Only applicable to \code{"one_hot"}, \code{"multi_hot"},
+and \code{"count"} output modes. If \code{TRUE}, returns a \code{SparseTensor} instead of
+a dense \code{Tensor}. Defaults to \code{FALSE}.}
 
 \item{...}{standard layer arguments.}
 }

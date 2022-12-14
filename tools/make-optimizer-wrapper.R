@@ -86,20 +86,27 @@ r_doc_from_py_fn <- function(py_fn, name = NULL) {
   cat(desc)
 
   for (p in x$params) {
-    if (p$arg_name %in% c("name", "dtype")) next
+    if (p$arg_name %in% c("**kwargs")) next
     cat("\n@param", p$arg_name, cleanup_description(p$description))
   }
 
-  cat("@param ... standard layer arguments.")
+  cat("@param ... Used for backward and forward compatibility")
   # TODO: @inheritDotParams keras.layers.Layer
+
+  cat()
+
+  cat("@family optimizers")
+  cat(r"(@return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.)")
 
   cat()
 
   py_full_name <- paste0(py_fn$`__module__`, ".", py_fn$`__name__`)
   cat("@seealso")
-  cat(sprintf("  +  <%s>", reticulate:::.module_help_handlers$tensorflow(py_full_name)))
+  url <- reticulate:::.module_help_handlers$tensorflow(py_full_name)
+  url <- sub("versions/r2.11/", "", url, fixed = TRUE)
+  cat(sprintf("  +  <%s>", url))
   # TODO: add tests for all the F1 url pages to find+fix broken links
-  cat("  +  <https://keras.io/api/layers>")
+  # cat("  +  <https://keras.io/api/optimizers/>")
 
   cat("@export")
 
@@ -113,10 +120,11 @@ r_doc_from_py_fn <- function(py_fn, name = NULL) {
 # source is the object
 # topic is the character string of obj name
 
-new_layer_wrapper <- function(py_obj) {
-  # py_obj_expr <- substitute(py_obj)
+new_optimizer_wrapper <- function(py_obj) {
+  if(is.character(py_obj))
+    py_obj <- eval(str2lang(gsub(".", "$", py_obj, fixed=TRUE)))
 
-  # browser()
+
   transformers <- NULL
   frmls <- keras:::py_formals(py_obj)
   for(i in seq_along(frmls)) {
@@ -127,47 +135,65 @@ new_layer_wrapper <- function(py_obj) {
 
     if(is.integer(val))
       transformers[[key]] <- quote(as.integer)
-    if(key == "axis")
-       transformers[[key]] <- quote(as_axis)
-  }
 
-  py_obj_expr <- substitute(keras$layers$NAME, list(NAME=as.name(py_obj$`__name__`)))
+  }
+  # transformers$input_shape <- quote(normalize_shape)
+  # transformers$classes <- quote(as.integer)
+
+  py_obj_expr <- substitute(keras$optimizers$NAME, list(NAME=as.name(py_obj$`__name__`)))
   fn_body <- bquote({
-    args <- capture_args(match.call(), .(transformers), ignore = "object")
-    create_layer(.(py_obj_expr), object, args)
+    args <- capture_args(match.call(), .(transformers))
+    do.call(.(py_obj_expr), args)
   })
 
   frmls$self <- NULL
-  fn <- as.function(c(alist(object=), frmls, fn_body))
+  fn <- as.function(c(frmls, fn_body))
 
   fn_string <- deparse(fn)
 
   # deparse adds a space for some reason
   fn_string <- sub("function (", "function(", fn_string, fixed = TRUE)
 
-  r_wrapper_name <- sprintf("layer_%s <- ", snakecase::to_snake_case(py_obj$`__name__`))
+  sn_name <- snakecase::to_snake_case(py_obj$`__name__`)
+  if(sn_name == "rm_sprop")
+    sn_name <- "rmsprop"
+  r_wrapper_name <- sprintf("optimizer_%s <- ", sn_name)
   fn_string <- str_flatten(c(r_wrapper_name, fn_string), "\n")
   docs <- r_doc_from_py_fn(py_obj)
   out <- str_flatten(c(docs, fn_string), "")
+  out <- out %>% str_split_1(fixed("\n")) %>% str_trim() %>% str_flatten("\n")
   class(out) <-  "r_py_wrapper2"
   out
 }
 
 
 print.r_py_wrapper2 <- function(x, ...) {
-  try(clipr::write_clip(x))
+  clipr::write_clip(x)
   cat(x)
 }
 
 ## example usage:
-# new_layer_wrapper(keras$layers$TextVectorization)
-# new_layer_wrapper(keras$layers$DepthwiseConv1D)
-# new_layer_wrapper(keras$layers$UnitNormalization)
-# new_layer_wrapper(keras$layers$Attention)
-# new_layer_wrapper(keras$layers$Discretization)
-# new_layer_wrapper(keras$layers$GaussianDropout) |> print()
-# new_layer_wrapper(keras$layers$GaussianNoise) |> print()
-# new_layer_wrapper(keras$layers$IntegerLookup) |> print()
-# new_layer_wrapper(keras$layers$Normalization) |> print()
-# new_layer_wrapper(keras$layers$StringLookup) |> print()
+# new_application_wrapper("tf.keras.applications.ResNet101")
+
+
+get_doc(keras$optimizers$Adadelta)
+new_optimizer_wrapper(keras$optimizers$Adadelta)
+new_optimizer_wrapper(keras$optimizers$Adam)
+new_optimizer_wrapper(keras$optimizers$SGD)
+
+optimizer_names <- keras$optimizers %>%
+  names() %>%
+  set_names() %>%
+  map_lgl(
+    possibly(~any(endsWith(class(keras$optimizers[[.x]]()), ".Optimizer")),
+             FALSE)) %>%
+  keep(~.x) %>% names()
+
+
+optimizer_names %>%
+  map(~ new_optimizer_wrapper(keras$optimizers[[.x]])) %>%
+  str_c(collapse = "\n\n") %>%
+  writeLines("R/optimizers.R")
+
+devtools::document()
 

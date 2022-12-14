@@ -4,7 +4,14 @@
 \alias{layer_normalization}
 \title{A preprocessing layer which normalizes continuous features.}
 \usage{
-layer_normalization(object, axis = -1L, mean = NULL, variance = NULL, ...)
+layer_normalization(
+  object,
+  axis = -1L,
+  mean = NULL,
+  variance = NULL,
+  invert = FALSE,
+  ...
+)
 }
 \arguments{
 \item{object}{What to compose the new \code{Layer} instance with. Typically a
@@ -36,6 +43,10 @@ method is called.}
 value(s) will be broadcast to the shape of the kept axes above; if the
 value(s) cannot be broadcast, an error will be raised when this layer's
 \code{build()} method is called.}
+
+\item{invert}{If \code{TRUE}, this layer will apply the inverse transformation
+to its inputs: it would turn a normalized input back into its
+original form.}
 
 \item{...}{standard layer arguments.}
 }

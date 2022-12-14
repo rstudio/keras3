@@ -4,7 +4,8 @@ Sys.setenv(TF_CPP_MIN_LOG_LEVEL = 1)
 # 2 = INFO and WARNING messages are not printed
 # 3 = INFO, WARNING, and ERROR messages are not printed
 
-
+if(reticulate::virtualenv_exists("r-tensorflow"))
+  reticulate::use_virtualenv("r-tensorflow")
 # Sys.setenv(RETICULATE_PYTHON = "~/.local/share/r-miniconda/envs/tf-2.7-cpu/bin/python")
 # Sys.setenv(RETICULATE_PYTHON = "~/.local/share/r-miniconda/envs/tf-nightly-cpu/bin/python")
 # reticulate::use_condaenv("tf-2.5-cpu", required = TRUE)

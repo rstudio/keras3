@@ -59,6 +59,8 @@ print.keras_training_history <- function(x, ...) {
 #'   black and white.
 #' @param ... Additional parameters to pass to the [plot()] method.
 #'
+#' @importFrom rlang .data
+#'
 #' @export
 plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto", "ggplot2", "base"),
                                         smooth = getOption("keras.plot.history.smooth", TRUE),
@@ -95,11 +97,11 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
 
     if (do_validation) {
       if (theme_bw)
-        p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data, linetype = ~data, shape = ~data))
+        p <- ggplot2::ggplot(df, ggplot2::aes(.data$epoch, .data$value, color = .data$data, fill = .data$data, linetype = .data$data, shape = .data$data))
       else
-        p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data))
+        p <- ggplot2::ggplot(df, ggplot2::aes(.data$epoch, .data$value, color = .data$data, fill = .data$data))
     } else {
-      p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value))
+      p <- ggplot2::ggplot(df, ggplot2::aes(.data$epoch, .data$value))
     }
 
     smooth_args <- list(se = FALSE, method = 'loess', na.rm = TRUE,

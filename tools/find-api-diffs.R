@@ -43,10 +43,10 @@ attach_eval({
 
 default_ignore <- c("self", "kwargs")
 DF <-
-  # ls(pattern = "^layer_", envir = asNamespace("keras")) %>%
+  ls(pattern = "^layer_", envir = asNamespace("keras")) %>%
   # setdiff(c("layer_cudnn_gru", "layer_cudnn_lstm")) %>%
   # filter(r_name == "layer_text_vectorization") %>%
-  "layer_text_vectorization" %>%
+  # "layer_text_vectorization" %>%
   set_names() %>%
   lapply(function(r_func_nm) {
     r_func <- get(r_func_nm, envir = asNamespace("keras"))
@@ -80,6 +80,21 @@ DF %>%
   filter(missing_in_r_func_args != "") %>%
   select(r_func_nm, missing_in_r_func_args) %>%
   print(n = Inf)
+
+# tf 2.11
+# # A tibble: 10 × 2
+#    r_func_nm              missing_in_r_func_args
+#    <chr>                  <chr>
+#  1 layer_attention        score_mode
+#  2 layer_cudnn_gru        go_backwards
+#  3 layer_cudnn_lstm       go_backwards
+#  4 layer_discretization   output_mode, sparse
+#  5 layer_gaussian_dropout seed
+#  6 layer_gaussian_noise   seed
+#  7 layer_hashing          output_mode, sparse
+#  8 layer_integer_lookup   vocabulary_dtype, idf_weights
+#  9 layer_normalization    invert
+# 10 layer_string_lookup    idf_weights
 
 # tf 2.8
 # # A tibble: 0 × 2

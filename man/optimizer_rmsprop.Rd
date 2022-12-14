@@ -2,50 +2,116 @@
 % Please edit documentation in R/optimizers.R
 \name{optimizer_rmsprop}
 \alias{optimizer_rmsprop}
-\title{RMSProp optimizer}
+\title{Optimizer that implements the RMSprop algorithm}
 \usage{
 optimizer_rmsprop(
   learning_rate = 0.001,
   rho = 0.9,
-  epsilon = NULL,
-  decay = 0,
+  momentum = 0,
+  epsilon = 1e-07,
+  centered = FALSE,
+  weight_decay = NULL,
   clipnorm = NULL,
   clipvalue = NULL,
+  global_clipnorm = NULL,
+  use_ema = FALSE,
+  ema_momentum = 0.99,
+  ema_overwrite_frequency = 100L,
+  jit_compile = TRUE,
+  name = "RMSprop",
   ...
 )
 }
 \arguments{
-\item{learning_rate}{float >= 0. Learning rate.}
+\item{learning_rate}{Initial value for the learning rate:
+either a floating point value,
+or a \code{tf.keras.optimizers.schedules.LearningRateSchedule} instance.
+Defaults to 0.001.}
 
-\item{rho}{float >= 0. Decay factor.}
+\item{rho}{float, defaults to 0.9. Discounting factor for the old gradients.}
 
-\item{epsilon}{float >= 0. Fuzz factor. If \code{NULL}, defaults to \code{k_epsilon()}.}
+\item{momentum}{float, defaults to 0.0. If not 0.0., the optimizer tracks the
+momentum value, with a decay rate equals to \code{1 - momentum}.}
 
-\item{decay}{float >= 0. Learning rate decay over each update.}
+\item{epsilon}{A small constant for numerical stability. This epsilon is
+"epsilon hat" in the Kingma and Ba paper (in the formula just before
+Section 2.1), not the epsilon in Algorithm 1 of the paper. Defaults to
+1e-7.}
 
-\item{clipnorm}{Gradients will be clipped when their L2 norm exceeds this
-value.}
+\item{centered}{Boolean. If \code{TRUE}, gradients are normalized by the estimated
+variance of the gradient; if FALSE, by the uncentered second moment.
+Setting this to \code{TRUE} may help with training, but is slightly more
+expensive in terms of computation and memory. Defaults to \code{FALSE}.}
 
-\item{clipvalue}{Gradients will be clipped when their absolute value exceeds
-this value.}
+\item{weight_decay}{Float, defaults to NULL. If set, weight decay is applied.}
 
-\item{...}{Unused, present only for backwards compatability}
+\item{clipnorm}{Float. If set, the gradient of each weight is individually
+clipped so that its norm is no higher than this value.}
+
+\item{clipvalue}{Float. If set, the gradient of each weight is clipped to be no
+higher than this value.}
+
+\item{global_clipnorm}{Float. If set, the gradient of all weights is clipped so
+that their global norm is no higher than this value.}
+
+\item{use_ema}{Boolean, defaults to FALSE. If TRUE, exponential moving average
+(EMA) is applied. EMA consists of computing an exponential moving
+average of the weights of the model (as the weight values change after
+each training batch), and periodically overwriting the weights with
+their moving average.}
+
+\item{ema_momentum}{Float, defaults to 0.99. Only used if \code{use_ema=TRUE}. This is  # noqa: E501
+the momentum to use when computing the EMA of the model's weights:
+\code{new_average = ema_momentum * old_average + (1 - ema_momentum) * current_variable_value}.}
+
+\item{ema_overwrite_frequency}{Int or NULL, defaults to NULL. Only used if
+\code{use_ema=TRUE}. Every \code{ema_overwrite_frequency} steps of iterations, we
+overwrite the model variable by its moving average. If NULL, the optimizer  # noqa: E501
+does not overwrite model variables in the middle of training, and you
+need to explicitly overwrite the variables at the end of training
+by calling \code{optimizer.finalize_variable_values()} (which updates the model  # noqa: E501
+variables in-place). When using the built-in \code{fit()} training loop, this
+happens automatically after the last epoch, and you don't need to do
+anything.}
+
+\item{jit_compile}{Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
+compilation. If no GPU device is found, this flag will be ignored.}
+
+\item{name}{String. The name to use
+for momentum accumulator weights created by
+the optimizer.}
+
+\item{...}{Used for backward and forward compatibility}
+}
+\value{
+Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
 }
 \description{
-RMSProp optimizer
+Optimizer that implements the RMSprop algorithm
 }
-\note{
-It is recommended to leave the parameters of this optimizer at their
-default values (except the learning rate, which can be freely tuned).
+\details{
+The gist of RMSprop is to:
+\itemize{
+\item Maintain a moving (discounted) average of the square of gradients
+\item Divide the gradient by the root of this average
+}
 
-This optimizer is usually a good choice for recurrent neural networks.
+This implementation of RMSprop uses plain momentum, not Nesterov momentum.
+
+The centered version additionally maintains a moving average of the
+gradients, and uses that average to estimate the variance.
 }
 \seealso{
+\itemize{
+\item \url{https://www.tensorflow.org/api_docs/python/keras/optimizers/optimizer_experimental/rmsprop/RMSprop}
+}
+
 Other optimizers: 
 \code{\link{optimizer_adadelta}()},
 \code{\link{optimizer_adagrad}()},
 \code{\link{optimizer_adamax}()},
 \code{\link{optimizer_adam}()},
+\code{\link{optimizer_ftrl}()},
 \code{\link{optimizer_nadam}()},
 \code{\link{optimizer_sgd}()}
 }

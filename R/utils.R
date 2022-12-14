@@ -621,7 +621,7 @@ function(x,
 #' names(gradients) <- paste0("gradient_", 1:3)
 #' try(zip_lists(gradients, weights)) # error, names don't match
 #' # call unname directly for positional matching
-#' zip_lists(unname(gradients), unname(weights))
+#' str(zip_lists(unname(gradients), unname(weights)))
 zip_lists <- function(...) {
   dots <- list(...)
   if(length(dots) == 1)
@@ -684,3 +684,13 @@ formals(`[.tensorflow.tensor`)$options <-
     warn_tensors_passed_asis = FALSE,
     warn_negatives_pythonic = FALSE
   )
+
+
+
+standard_layer_arg_modifiers <- list(
+    input_shape = normalize_shape,
+    batch_input_shape = normalize_shape,
+    batch_size = as_nullable_integer,
+    seed = as_nullable_integer
+  )
+

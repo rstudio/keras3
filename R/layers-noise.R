@@ -11,6 +11,10 @@
 #'
 #' @param stddev float, standard deviation of the noise distribution.
 #'
+#' @param seed Integer, optional random seed to enable deterministic behavior.
+#'
+#' @param ... standard layer arguments.
+#'
 #' @section Input shape: Arbitrary. Use the keyword argument `input_shape` (list
 #'   of integers, does not include the samples axis) when using this layer as
 #'   the first layer in a model.
@@ -20,19 +24,14 @@
 #' @family noise layers
 #'
 #' @export
-layer_gaussian_noise <- function(object, stddev, input_shape = NULL,
-                                 batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                                 name = NULL, trainable = NULL, weights = NULL) {
-  create_layer(keras$layers$GaussianNoise, object, list(
-    stddev = stddev,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
+layer_gaussian_noise <-
+function(object, stddev, seed = NULL, ...)
+{
+  args <- capture_args(match.call(),
+    modifiers = c(standard_layer_arg_modifiers,
+                  seed = as_nullable_integer),
+    ignore = "object")
+  create_layer(keras$layers$GaussianNoise, object, args)
 }
 
 #' Apply multiplicative 1-centered Gaussian noise.
@@ -44,6 +43,10 @@ layer_gaussian_noise <- function(object, stddev, input_shape = NULL,
 #' @param rate float, drop probability (as with `Dropout`). The multiplicative
 #'   noise will have standard deviation `sqrt(rate / (1 - rate))`.
 #'
+#' @param seed Integer, optional random seed to enable deterministic behavior.
+#'
+#' @param ... standard layer arguments.
+#'
 #' @section Input shape: Arbitrary. Use the keyword argument `input_shape` (list
 #'   of integers, does not include the samples axis) when using this layer as
 #'   the first layer in a model.
@@ -53,23 +56,22 @@ layer_gaussian_noise <- function(object, stddev, input_shape = NULL,
 #' @section References:
 #' - [Dropout: A Simple Way to Prevent Neural Networks from Overfitting Srivastava, Hinton, et al. 2014](https://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf)
 #'
+#' @seealso
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GaussianDropout>
+#'
 #' @family noise layers
 #'
 #' @export
-layer_gaussian_dropout <- function(object, rate, input_shape = NULL,
-                                   batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                                   name = NULL, trainable = NULL, weights = NULL) {
-  create_layer(keras$layers$GaussianDropout, object, list(
-    rate = rate,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
+layer_gaussian_dropout <-
+function(object, rate, seed = NULL, ...)
+{
+  args <- capture_args(match.call(),
+    modifiers = c(standard_layer_arg_modifiers,
+                  seed = as_nullable_integer),
+    ignore = "object")
+  create_layer(keras$layers$GaussianDropout, object, args)
 }
+
 
 
 #' Applies Alpha Dropout to the input.

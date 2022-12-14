@@ -1,5 +1,24 @@
 # keras (development version)
 
+- Default TensorFlow version installed by `install_keras()` is now 2.11. 
+
+- All optimizers have been updated for keras/tensorflow version 2.11.
+  Arguments to all the optimizers have changed. To access the previous
+  optimizer implementations, use the constructors available at
+  `keras$optimizers$legacy`. For example, use `keras$optimizers$legacy$Adam()`
+  for the previous implementation of `optimizer_adam()`.
+
+- New optimizer `optimizer_frtl()`.
+
+- updates to layers:
+  - `layer_attention()` gains `score_mode` and `dropout` arguments.
+  - `layer_discretization()` gains `output_mode` and `sparse` arguments.
+  - `layer_gaussian_dropout()` and `layer_gaussian_noise()` gain a `seed` argument.
+  - `layer_hashing()` gains `output_mode` and `sparse` arguments.
+  - `layer_integer_lookup()` gains `vocabulary_dtype` and `idf_weights` arguments.
+  - `layer_normalization()` gains an `invert` argument.
+  - `layer_string_lookup()` gains an `idf_weights` argument.
+
 - Fixed issue where `input_shape` supplied to custom layers defined with `new_layer_class()`  
   would result in an error (#1338)
 
