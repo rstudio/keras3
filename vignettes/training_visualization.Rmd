@@ -26,7 +26,7 @@ knitr::opts_chunk$set(comment = NA, eval = FALSE)
 
 There are a number of tools available for visualizing the training of Keras models, including:
 
-1) A [plot method](https://keras.rstudio.com/reference/plot.keras_training_history.html) for the Keras training history returned from `fit()`.
+1) A [plot method](https://tensorflow.rstudio.com/reference/keras/plot.keras_training_history.html) for the Keras training history returned from `fit()`.
 
 2) Real time visualization of training metrics within the RStudio IDE.
 
@@ -62,7 +62,7 @@ plot(history)
 
 ![](images/training_history_ggplot2.png){width=757 height=489 .r-plot}
 
-The history will be plotted using [ggplot2](https://ggplot2.tidyverse.org/) if available (if not then base graphics will be used), include all specified metrics as well as the loss, and draw a smoothing line if there are 10 or more epochs. You can customize all of this behavior via various options of the [plot method](https://keras.rstudio.com/reference/plot.keras_training_history.html).
+The history will be plotted using [ggplot2](https://ggplot2.tidyverse.org/) if available (if not then base graphics will be used), include all specified metrics as well as the loss, and draw a smoothing line if there are 10 or more epochs. You can customize all of this behavior via various options of the [plot method](https://tensorflow.rstudio.com/reference/keras/plot.keras_training_history.html).
 
 If you want to create a custom visualization you can call the `as.data.frame()` method on the history to obtain a data frame with factors for each metric as well as training vs. validation:
 

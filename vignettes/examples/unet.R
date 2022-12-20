@@ -8,7 +8,7 @@
 #'
 
 #` This code runs only on Windows because of specific parallel backend. 
-#` You can find Linux version here: https://keras.rstudio.com/articles/examples/unet_linux.html
+#` You can find Linux version here: https://tensorflow.rstudio.com/articles/examples/unet_linux.html
 #` unet architecture is based on original Python code 
 #` from https://github.com/petrosgk/Kaggle-Carvana-Image-Masking-Challenge. 
 #` It shows an example of creating custom architectures in R version of keras 

@@ -102,7 +102,7 @@ y_test <- to_categorical(y_test, 10)
 
 ### Defining the Model
 
-The core data structure of Keras is a model, a way to organize layers. The simplest type of model is the [Sequential model](https://keras.rstudio.com/articles/sequential_model.html), a linear stack of layers.
+The core data structure of Keras is a model, a way to organize layers. The simplest type of model is the [Sequential model](https://tensorflow.rstudio.com/articles/sequential_model.html), a linear stack of layers.
 
 We begin by creating a sequential model and then adding layers using the pipe (`%>%`) operator:
 

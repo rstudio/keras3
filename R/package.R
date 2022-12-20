@@ -16,7 +16,7 @@
 #'   [CNTK](https://github.com/Microsoft/cntk),
 #'   or [Theano](https://github.com/Theano/Theano).
 #'
-#' See the package website at <https://keras.rstudio.com> for complete documentation.
+#' See the package website at <https://tensorflow.rstudio.com> for complete documentation.
 #'
 #' @import methods
 #' @import R6

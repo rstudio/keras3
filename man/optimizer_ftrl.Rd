@@ -142,7 +142,7 @@ is replaced with a gradient with shrinkage.
 }
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/keras/optimizers/optimizer_experimental/ftrl/Ftrl}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/Ftrl}
 }
 
 Other optimizers: 

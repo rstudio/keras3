@@ -25,12 +25,12 @@ Turing machine.
 or \href{https://github.com/Theano/Theano}{Theano}.
 }
 
-See the package website at \url{https://keras.rstudio.com} for complete documentation.
+See the package website at \url{https://tensorflow.rstudio.com} for complete documentation.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://keras.rstudio.com}
+  \item \url{https://tensorflow.rstudio.com/}
   \item Report bugs at \url{https://github.com/rstudio/keras/issues}
 }
 

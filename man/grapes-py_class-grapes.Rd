@@ -84,6 +84,3 @@ inst1$call_private_method()
 inst2$call_private_method()
 }
 }
-\seealso{
-\url{https://keras.rstudio.com/articles/new-guides/python_subclasses.html}
-}

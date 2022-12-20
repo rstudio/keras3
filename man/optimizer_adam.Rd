@@ -95,7 +95,7 @@ Adam optimization is a stochastic gradient descent method that is based on
 adaptive estimation of first-order and second-order moments.
 
 According to
-\href{http://arxiv.org/abs/1412.6980}{Kingma et al., 2014},
+\href{https://arxiv.org/abs/1412.6980}{Kingma et al., 2014},
 the method is "\emph{computationally
 efficient, has little memory requirement, invariant to diagonal rescaling of
 gradients, and is well suited for problems that are large in terms of
@@ -103,7 +103,7 @@ data/parameters}".
 }
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/keras/optimizers/optimizer_experimental/adam/Adam}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam}
 }
 
 Other optimizers: 

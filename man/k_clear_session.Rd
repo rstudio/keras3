@@ -17,6 +17,6 @@ lower level access to the core operations of the backend tensor engine
 (e.g. TensorFlow, CNTK, Theano, etc.).
 
 You can see a list of all available backend functions here:
-\url{https://keras.rstudio.com/articles/backend.html#backend-functions}.
+\url{https://tensorflow.rstudio.com/reference/keras/index.html#backend}.
 }
 

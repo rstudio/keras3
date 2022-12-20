@@ -108,7 +108,7 @@ w = w - current_lr * m / (u + epsilon)
 }
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/keras/optimizers/optimizer_experimental/adamax/Adamax}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/Adamax}
 }
 
 Other optimizers: 

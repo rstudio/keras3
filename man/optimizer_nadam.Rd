@@ -92,7 +92,7 @@ Nesterov momentum.
 }
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/keras/optimizers/optimizer_experimental/nadam/Nadam}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/Nadam}
 }
 
 Other optimizers: 

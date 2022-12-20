@@ -103,7 +103,7 @@ gradients, and uses that average to estimate the variance.
 }
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/keras/optimizers/optimizer_experimental/rmsprop/RMSprop}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/RMSprop}
 }
 
 Other optimizers: 

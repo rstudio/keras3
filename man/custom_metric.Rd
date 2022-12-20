@@ -32,7 +32,7 @@ Alternatively, you can wrap all of your code in a call to
 metric by name just like you do with built in keras metrics.
 
 Documentation on the available backend tensor functions can be
-found at \url{https://keras.rstudio.com/articles/backend.html#backend-functions}.
+found at \url{https://tensorflow.rstudio.com/reference/keras/#backend}.
 
 Alternative ways of supplying custom metrics:
 \itemize{

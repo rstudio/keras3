@@ -317,6 +317,8 @@ r_formals_to_py__signature__ <- function(fn) {
 # *) method calls respect user-supplied `convert` values for all args
 #
 
+# @seealso <https://tensorflow.rstudio.com/articles/new-guides/python_subclasses.html>
+
 
 #' Make a python class constructor
 #'
@@ -329,7 +331,6 @@ r_formals_to_py__signature__ <- function(fn) {
 #' @export
 #' @aliases py_class
 #'
-#' @seealso <https://keras.rstudio.com/articles/new-guides/python_subclasses.html>
 #'
 #' @examples
 #' \dontrun{

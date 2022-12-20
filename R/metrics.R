@@ -1307,7 +1307,7 @@ metric_sparse_top_k_categorical_accuracy <- py_metric_wrapper(
 #' metric by name just like you do with built in keras metrics.
 #'
 #' Documentation on the available backend tensor functions can be
-#' found at <https://keras.rstudio.com/articles/backend.html#backend-functions>.
+#' found at <https://tensorflow.rstudio.com/reference/keras/#backend>.
 #'
 #' Alternative ways of supplying custom metrics:
 #'  +  `custom_metric():` Arbitrary R function.

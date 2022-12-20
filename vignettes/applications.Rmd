@@ -30,16 +30,16 @@ Weights are downloaded automatically when instantiating a model. They are stored
 
 The following image classification models (with weights trained on ImageNet) are available:
 
-- [Xception](https://keras.rstudio.com/reference/application_xception.html)
-- [VGG16](https://keras.rstudio.com/reference/application_vgg.html)
-- [VGG19](https://keras.rstudio.com/reference/application_vgg.html)
-- [ResNet50](https://keras.rstudio.com/reference/application_resnet50.html)
-- [InceptionV3](https://keras.rstudio.com/reference/application_inception_v3.html)
-- [InceptionResNetV2](https://keras.rstudio.com/reference/application_inception_resnet_v2.html)
-- [MobileNet](https://keras.rstudio.com/reference/application_mobilenet.html)
-- [MobileNetV2](https://keras.rstudio.com/reference/application_mobilenet_v2.html)
-- [DenseNet](https://keras.rstudio.com/reference/application_densenet.html)
-- [NASNet](https://keras.rstudio.com/reference/application_nasnet.html)
+- [Xception](https://tensorflow.rstudio.com/reference/keras/application_xception.html)
+- [VGG16](https://tensorflow.rstudio.com/reference/keras/application_vgg.html)
+- [VGG19](https://tensorflow.rstudio.com/reference/keras/application_vgg.html)
+- [ResNet50](https://tensorflow.rstudio.com/reference/keras/application_resnet.html)
+- [InceptionV3](https://tensorflow.rstudio.com/reference/keras/application_inception_v3.html)
+- [InceptionResNetV2](https://tensorflow.rstudio.com/reference/keras/application_inception_resnet_v2.html)
+- [MobileNet](https://tensorflow.rstudio.com/reference/keras/application_mobilenet.html)
+- [MobileNetV2](https://tensorflow.rstudio.com/reference/keras/application_mobilenet_v2.html)
+- [DenseNet](https://tensorflow.rstudio.com/reference/keras/application_densenet.html)
+- [NASNet](https://tensorflow.rstudio.com/reference/keras/application_nasnet.html)
 
 All of these architectures are compatible with all the backends (TensorFlow, Theano, and CNTK), and upon instantiation the models will be built according to the image data format set in your Keras configuration file at `~/.keras/keras.json`. For instance, if you have set `image_data_format=channels_last`, then any model loaded from this repository will get built according to the TensorFlow data format convention, "Height-Width-Depth".
 
@@ -175,5 +175,5 @@ model <- application_inception_V3(input_tensor = input_tensor,
 
 ### Additional examples
 
-The VGG16 model is the basis for the [Deep dream](https://keras.rstudio.com/articles/examples/deep_dream.html) Keras example script.
+The VGG16 model is the basis for the [Deep dream](https://tensorflow.rstudio.com/examples/deep_dream) Keras example script.
 

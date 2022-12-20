@@ -26,7 +26,9 @@ knitr::opts_chunk$set(comment = NA, eval = FALSE)
 
 If the existing Keras layers don't meet your requirements you can create a custom layer. For simple, stateless custom operations, you are probably better off using `layer_lambda()` layers. But for any custom operation that has trainable weights, you should implement your own layer. 
 
-The example below illustrates the skeleton of a Keras custom layer. The [mnist_antirectifier](https://keras.rstudio.com/articles/examples/mnist_antirectifier.html) example includes another demonstration of creating a custom layer.
+The example below illustrates the skeleton of a Keras custom layer. 
+
+<!-- The [mnist_antirectifier](https://tensorflow.rstudio.com/examples/mnist_antirectifier.html) example includes another demonstration of creating a custom layer. -->
 
 ## The Layer function
 

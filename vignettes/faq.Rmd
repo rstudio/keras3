@@ -65,7 +65,7 @@ The name 'gpu' might have to be changed depending on your device's identifier (e
 
 If you have the GPU version of CNTK installed then your Keras code will automatically run on the GPU.
 
-Additional information on installing the GPU version of CNTK can be found here: https://docs.microsoft.com/en-us/cognitive-toolkit/setup-linux-python
+Additional information on installing the GPU version of CNTK can be found here: https://learn.microsoft.com/en-us/cognitive-toolkit/setup-linux-python
 
 
 ## How can I run a Keras model on multiple GPUs?
@@ -79,7 +79,7 @@ In most cases, what you need is most likely data parallelism.
 Data parallelism consists in replicating the target model once on each device, and using each replica to process a different fraction of the input data.
 Keras has a built-in utility, `multi_gpu_model()`, which can produce a data-parallel version of any model, and achieves quasi-linear speedup on up to 8 GPUs.
 
-For more information, see the documentation for [multi_gpu_model](https://keras.rstudio.com/reference/multi_gpu_model.html). Here is a quick example:
+For more information, see the documentation for [multi_gpu_model](https://tensorflow.rstudio.com/reference/keras/multi_gpu_model.html). Here is a quick example:
 
 ```{r, eval= FALSE}
 # Replicates `model` on 8 GPUs.
@@ -330,7 +330,7 @@ The above function is an example of a stateful generator---the function maintain
 
 You can also use the `flow_images_from_directory()` and `flow_images_from_data()` functions along with `fit_generator()` for training on sets of images stored on disk (with optional image augmentation/normalization via `image_data_generator()`).
 
-You can see batch image training in action in our [CIFAR10 example](https://keras.rstudio.com/articles/examples/cifar10_cnn.html).
+<!-- You can see batch image training in action in our [CIFAR10 example](https://tensorflow.rstudio.com/articles/examples/cifar10_cnn.html). -->
 
 ### Batch Functions
 
@@ -479,16 +479,16 @@ length(model$layers)     # "2"
 
 Code and pre-trained weights are available for the following image classification models:
 
-- [Xception](https://keras.rstudio.com/reference/application_xception.html)
-- [VGG16](https://keras.rstudio.com/reference/application_vgg.html)
-- [VGG19](https://keras.rstudio.com/reference/application_vgg.html)
-- [ResNet50](https://keras.rstudio.com/reference/application_resnet50.html)
-- [InceptionV3](https://keras.rstudio.com/reference/application_inception_v3.html)
-- [InceptionResNetV2](https://keras.rstudio.com/reference/application_inception_resnet_v2.html)
-- [MobileNet](https://keras.rstudio.com/reference/application_mobilenet.html)
-- [MobileNetV2](https://keras.rstudio.com/reference/application_mobilenet_v2.html)
-- [DenseNet](https://keras.rstudio.com/reference/application_densenet.html)
-- [NASNet](https://keras.rstudio.com/reference/application_nasnet.html)
+- [Xception](https://tensorflow.rstudio.com/reference/keras/application_xception.html)
+- [VGG16](https://tensorflow.rstudio.com/reference/keras/application_vgg.html)
+- [VGG19](https://tensorflow.rstudio.com/reference/keras/application_vgg.html)
+- [ResNet50](https://tensorflow.rstudio.com/reference/keras/application_resnet.html)
+- [InceptionV3](https://tensorflow.rstudio.com/reference/keras/application_inception_v3.html)
+- [InceptionResNetV2](https://tensorflow.rstudio.com/reference/keras/application_inception_resnet_v2.html)
+- [MobileNet](https://tensorflow.rstudio.com/reference/keras/application_mobilenet.html)
+- [MobileNetV2](https://tensorflow.rstudio.com/reference/keras/application_mobilenet_v2.html)
+- [DenseNet](https://tensorflow.rstudio.com/reference/keras/application_densenet.html)
+- [NASNet](https://tensorflow.rstudio.com/reference/keras/application_nasnet.html)
 
 
 For example:
@@ -499,7 +499,7 @@ model <- application_vgg16(weights = 'imagenet', include_top = TRUE)
 
 For a few simple usage examples, see [the documentation for the Applications module](applications.html).
 
-The VGG16 model is also the basis for the [Deep dream](https://keras.rstudio.com/articles/examples/deep_dream.html) Keras example script.
+The VGG16 model is also the basis for the [Deep dream](https://tensorflow.rstudio.com/examples/deep_dream) Keras example script.
 
 ## How can I use other Keras backends?
 
@@ -534,7 +534,7 @@ use_backend("plaidml")
 
 The main consideration in using Keras within another R package is to ensure that your package can be tested in an environment where Keras is not available (e.g. the CRAN test servers). To do this, arrange for your tests to be skipped when Keras isn't available using the `is_keras_available()` function.
 
-For example, here's a [testthat](https://r-pkgs.org/tests.html) utility function that can be used to skip a test when Keras isn't available:
+For example, here's a [testthat](https://r-pkgs.org/testing-basics.html) utility function that can be used to skip a test when Keras isn't available:
 
 ```{r}
 # testthat utilty for skipping tests when Keras isn't available

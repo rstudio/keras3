@@ -78,7 +78,7 @@ parameters:
   - `activation`: Set the [activation function](https://tensorflow.rstudio.com/reference/keras/#section-activation-layers) for the layer. By default, no activation is applied.
   - `kernel_initializer` and `bias_initializer`: The initialization
     schemes that create the layer’s weights (kernel and bias). This defaults to the
-    [`Glorot uniform`](https://tensorflow.rstudio.com/keras/reference/initializer_glorot_uniform.html) initializer.
+    [`Glorot uniform`](https://tensorflow.rstudio.com/reference/keras/initializer_glorot_uniform) initializer.
   - `kernel_regularizer` and `bias_regularizer`: The regularization
     schemes that apply to the layer’s weights (kernel and bias), such as L1
     or L2 regularization. By default, no regularization is applied.
@@ -121,9 +121,9 @@ model %>% compile(
 `compile` takes three important arguments:
 
   - `optimizer`: This object specifies the training procedure. Commonly used optimizers are e.g.  
-    [`adam`](https://tensorflow.rstudio.com/keras/reference/optimizer_adam.html), 
-    [`rmsprop`](https://tensorflow.rstudio.com/keras/reference/optimizer_rmsprop.html), or
-    [`sgd`](https://tensorflow.rstudio.com/keras/reference/optimizer_sgd.html).
+    [`adam`](https://tensorflow.rstudio.com/reference/keras/optimizer_adam.html), 
+    [`rmsprop`](https://tensorflow.rstudio.com/reference/keras/optimizer_rmsprop.html), or
+    [`sgd`](https://tensorflow.rstudio.com/reference/keras/optimizer_sgd.html).
   - `loss`: The function to minimize during optimization. Common choices
     include mean square error (`mse`), `categorical_crossentropy`, and
     `binary_crossentropy`.
