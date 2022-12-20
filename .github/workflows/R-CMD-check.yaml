@@ -30,7 +30,6 @@ jobs:
 
           - {os: 'ubuntu-latest', tf: 'default', r: 'oldrel-1'}
           - {os: 'ubuntu-latest', tf: 'default', r: '3.6'} # default R in ubuntu-20.04
-          - {os: 'ubuntu-latest', tf: 'default', r: '3.5'}
 
           - {os: 'ubuntu-20.04'  , tf: 'release', r: 'release'}
           - {os: 'windows-latest', tf: 'release', r: 'release'}
