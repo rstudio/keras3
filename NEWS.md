@@ -1,4 +1,4 @@
-# keras (development version)
+# keras 2.11.1
 
 - Update S3 method formals per new CRAN requirement (`r_to_py.keras_layer_wrapper()`)
 
