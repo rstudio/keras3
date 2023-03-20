@@ -244,8 +244,8 @@ create_layer_wrapper <- function(Layer, modifiers = NULL, convert = TRUE) {
 
 
 #' @export
-r_to_py.keras_layer_wrapper <- function(fn, convert = FALSE) {
-  layer <- attr(fn, "Layer", TRUE)
+r_to_py.keras_layer_wrapper <- function(x, convert = FALSE) {
+  layer <- attr(x, "Layer", TRUE)
   if (!inherits(layer, "python.builtin.type"))
     layer <- r_to_py(layer, convert)
   layer
