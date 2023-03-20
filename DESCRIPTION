@@ -4,7 +4,7 @@ Title: R Interface to 'Keras'
 Version: 2.11.1
 Authors@R: c(
   person("Tomasz", "Kalinowski", role = c("ctb", "cph", "cre"),
-         email = "tomasz.kalinowski@rstudio.com"),
+         email = "tomasz@posit.co"),
   person("Daniel", "Falbel", role = c("ctb", "cph"), email = "daniel@rstudio.com"),
   person("JJ", "Allaire", role = c("aut", "cph")),
   person("François", "Chollet", role = c("aut", "cph")),
