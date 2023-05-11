@@ -196,6 +196,8 @@ as_py_method <- function(fn, name, env, convert, label) {
       return(fn)
     }
 
+    srcref <- attr(fn, "srcref")
+
     if (!is.function(fn))
       stop("Cannot coerce non-function to a python class method")
 
@@ -222,7 +224,6 @@ as_py_method <- function(fn, name, env, convert, label) {
 
     if (!"private" %in% names(formals(fn)) &&
         "private" %in% all.names(body(fn))) {
-      # any benefit to using delayedAssign here?
       body(fn) <- substitute({
         private <- attr(env, "get_private", TRUE)(self)
         body
@@ -255,6 +256,10 @@ as_py_method <- function(fn, name, env, convert, label) {
 
     if(!is.null(doc))
       fn$`__doc__` <- doc
+
+    attr(fn, "srcref") <- srcref
+    # TODO, maybe also copy over "wholeSrcref". See `removeSource()` as a starting point.
+    # This is used to generate clickable links in rlang traceback printouts.
 
     fn
 }
@@ -305,7 +310,7 @@ r_formals_to_py__signature__ <- function(fn) {
 # *) `super` can be accessed in both R6 style using `$`, and python-style as a callable
 # *) `super()` can resolve `self` properly when called from a nested scope
 # *) method calls respect user-supplied `convert` values for all args
-#
+
 
 # @seealso <https://tensorflow.rstudio.com/articles/new-guides/python_subclasses.html>
 
