@@ -192,7 +192,7 @@ objects_with_py_function_names <- function(objects) {
   for (i in seq_along(objects)) {
     name <- object_names[[i]]
     o <- objects[[i]]
-    # browser()
+
     if (name == "") {
       if (inherits(o, "keras_layer_wrapper"))
         o <- attr(o, "Layer")
@@ -567,7 +567,18 @@ function(x,
   if (is.null(to_file)) {
     args$to_file <-
       tempfile(paste0("keras_", x$name), fileext = ".png")
-    on.exit(unlink(args$to_file))
+    on.exit(unlink(args$to_file), add = TRUE)
+  }
+
+  if(is_windows() && identical(.Platform$GUI, "RStudio")) {
+    # need to patch subprocess.Popen to avoid an OSError exception.
+    # https://github.com/rstudio/keras/issues/1337
+    # https://stackoverflow.com/questions/43593348/winerror-6-the-handle-is-invalid-from-python-check-output-spawn-in-electron-app/43606682#43606682
+    .patched_subprocess_Popen <-
+      import("kerastools.utils")$`_patched_subprocess_Popen`()
+    .patched_subprocess_Popen$`__enter__`()
+    on.exit(.patched_subprocess_Popen$`__exit__`(NULL, NULL, NULL),
+            add = TRUE)
   }
 
   tryCatch(
