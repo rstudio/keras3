@@ -381,6 +381,17 @@ r_formals_to_py__signature__ <- function(fn) {
 #'
 #'   call_private_method <- function()
 #'     private$a_private_method()
+#'
+#'   # equivalent of @property decorator in python
+#'   an_active_property %<-active% function(x = NULL) {
+#'     if(!is.null(x)) {
+#'       cat("`an_active_property` was assigned", x, "\n")
+#'       return(x)
+#'     } else {
+#'       cat("`an_active_property` was accessed\n")
+#'       return(42)
+#'     }
+#'   }
 #' }
 #'
 #' inst1 <- MyClass(1)
@@ -389,6 +400,8 @@ r_formals_to_py__signature__ <- function(fn) {
 #' inst2$get_private_field()
 #' inst1$call_private_method()
 #' inst2$call_private_method()
+#' inst1$an_active_property
+#' inst1$an_active_property <- 11
 #' }
 `%py_class%` <- function(spec, body) {
   spec <- substitute(spec)
