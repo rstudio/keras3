@@ -11,8 +11,8 @@ r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
   methods <- x$public_methods
   methods$clone <- NULL
 
-  methods <- as_py_methods(methods, mask_env, convert)
-  active <- as_py_methods(x$active, mask_env, convert)
+  methods <- as_py_methods(methods, mask_env, convert, x$classname)
+  active <- as_py_methods(x$active, mask_env, convert, x$classname)
 
   # having convert=FALSE here means py callables are not wrapped in R functions
   # https://github.com/rstudio/reticulate/issues/1024
@@ -166,7 +166,7 @@ resolve_py_type_inherits <- function(inherit, convert=FALSE) {
 }
 
 
-as_py_methods <- function(x, env, convert) {
+as_py_methods <- function(x, env, convert, class_name) {
   out <- list()
 
   if ("initialize" %in% names(x) && "__init__" %in% names(x))
@@ -177,17 +177,18 @@ as_py_methods <- function(x, env, convert) {
 
   for (name in names(x)) {
     fn <- x[[name]]
+    label <- sprintf("%s$%s", class_name, name)
     name <- switch(name,
                    initialize = "__init__",
                    finalize = "__del__",
                    name)
-    out[[name]]  <- as_py_method(fn, name, env, convert)
+    out[[name]]  <- as_py_method(fn, name, env, convert, label)
   }
   out
 }
 
 #' @importFrom reticulate py_func py_clear_last_error
-as_py_method <- function(fn, name, env, convert) {
+as_py_method <- function(fn, name, env, convert, label) {
 
     # if user did conversion, they're responsible for ensuring it is right.
     if (inherits(fn, "python.builtin.object")) {
@@ -243,6 +244,7 @@ as_py_method <- function(fn, name, env, convert) {
                        error = function(e) NULL)
 
     attr(fn, "py_function_name") <- name
+    attr(fn, "pillar") <- list(label = label) # for print method of rlang::trace_back()
 
     # https://github.com/rstudio/reticulate/issues/1024
     fn <- py_to_r(r_to_py(fn, convert))
