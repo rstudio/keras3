@@ -1,47 +1,5 @@
 
 
-new_py_class <-
-  function(classname,
-           members = list(),
-           inherit = NULL,
-           parent_env = parent.frame(),
-           convert = TRUE,
-           inherit_expr = substitute(inherit)) {
-
-    force(inherit_expr)
-    active <- NULL
-    for(nm in names(members)) {
-      if(is_marked_active(members[[nm]])) {
-        active[[nm]] <- members[[nm]]
-        members[[nm]] <- NULL
-      }
-    }
-    # R6Class calls substitute() on inherit
-    r6_class <- eval(as.call(list(
-      quote(R6::R6Class),
-      classname = classname,
-      public = members,
-      active = active,
-      inherit = inherit_expr,
-      cloneable = FALSE,
-      parent_env = parent_env
-    )))
-    maybe_delayed_r_to_py_R6ClassGenerator(r6_class, convert, parent_env)
-  }
-
-#' @rdname new-classes
-#' @export
-mark_active <- function(x) {
-  if(!is.function(x))
-    stop("Only R functions can be marked active")
-  attr(x, "marked_active") <- TRUE
-  x
-}
-
-is_marked_active <- function(x)
-  identical(attr(x, "marked_active", TRUE), TRUE)
-
-
 #' @rdname new-classes
 #' @export
 new_metric_class <-
