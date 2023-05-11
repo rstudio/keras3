@@ -564,6 +564,22 @@ print.py_R6ClassGenerator <- function(x, ...) {
   print(r6_class)
 }
 
+#' @export
+`$.py_R6ClassGenerator` <- function(x, name) {
+  if (identical(name, "new"))
+    return(self)
+  NextMethod()
+}
+
+#' @exportS3Method pillar::type_sum
+type_sum.py_R6ClassGenerator <- function(x) {
+  cl <- class(x)[[1L]]
+  if(startsWith(cl, "R6type."))
+    cl <- substr(cl, 8L, 2147483647L)
+  cl
+}
+
+
 #' Make an Active Binding
 #'
 #' @param sym symbol to bind
