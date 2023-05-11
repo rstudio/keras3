@@ -31,7 +31,7 @@ zip <- function(..., simplify = TRUE)
   .mapply(if(simplify) c else list, list(...), NULL)
 
 
-inspect <- reticulate::import("inspect")
+# inspect <- reticulate::import("inspect")
 
 py_formals <- function(py_obj) {
   # returns python fn formals as a list (formals(),
@@ -55,8 +55,8 @@ py_formals <- function(py_obj) {
     if (name == 'self')
       next
 
-    if (param$kind == inspect$Parameter$VAR_KEYWORD ||
-        param$kind == inspect$Parameter$VAR_POSITIONAL) {
+    if (param$kind == inspect$Parameter$VAR_KEYWORD ||    # **kwargs
+        param$kind == inspect$Parameter$VAR_POSITIONAL) { # *args
       args[["..."]] <- quote(expr = )
       next
     }

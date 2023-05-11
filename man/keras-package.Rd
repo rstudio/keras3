@@ -36,7 +36,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Tomasz Kalinowski \email{tomasz.kalinowski@rstudio.com} [contributor, copyright holder]
+\strong{Maintainer}: Tomasz Kalinowski \email{tomasz@posit.co} [contributor, copyright holder]
 
 Authors:
 \itemize{
