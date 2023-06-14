@@ -416,7 +416,7 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
 #'
 #' @param monitor quantity to be monitored.
 #' @param factor factor by which the learning rate will be reduced. new_lr = lr
-#'   * factor
+#' \* factor
 #' @param patience number of epochs with no improvement after which learning
 #'   rate will be reduced.
 #' @param verbose int. 0: quiet, 1: update messages.
