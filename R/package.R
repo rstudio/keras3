@@ -276,7 +276,9 @@ check_implementation_version <- function() {
 
 # Current version of Keras
 keras_version <- function() {
-  ver <- keras$`__version__`
-  ver <- regmatches(ver, regexec("^([0-9\\.]+).*$", ver))[[1]][[2]]
+  ver <-
+    as_r_value(py_get_attr(keras, "__version__", TRUE)) %||%
+    tensorflow::tf_config()$version_str
+  ver <- regmatches(ver, regexec("^([0-9\\.]+).*$", ver))[[1L]][[2L]]
   package_version(ver)
 }
