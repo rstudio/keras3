@@ -102,7 +102,7 @@ test_succeeds("model load with unnamed custom_objects", {
 
   res1 <- as.array(model(data))
 
-  tmp <- tempfile("model", fileext = ".hdf5")
+  tmp <- tempfile("model", fileext = ".keras")
   save_model_tf(model, tmp)
   model2 <- load_model_tf(tmp,
                           custom_objects = list(metric_mean_pred,
