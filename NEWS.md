@@ -2,6 +2,9 @@
 
 - Update S3 method formals per new CRAN requirement (`r_to_py.keras_layer_wrapper()`)
 
+- Fixed an issue where `get_file()` would place incorrectly 
+  save files in the current working directory. (#1365)
+
 # keras 2.11.0
 
 - Default TensorFlow version installed by `install_keras()` is now 2.11. 

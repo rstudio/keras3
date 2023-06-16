@@ -64,7 +64,7 @@ get_file <- function(fname, origin, file_hash = NULL, cache_subdir = "datasets",
                      archive_format = "auto", cache_dir = NULL,
                      untar = FALSE) {
   resolve_utils()$get_file(
-    fname = normalize_path(fname),
+    fname = fname,
     origin = origin,
     file_hash = file_hash,
     cache_subdir = cache_subdir,
