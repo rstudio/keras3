@@ -19,9 +19,7 @@ callback_reduce_lr_on_plateau(
 \item{monitor}{quantity to be monitored.}
 
 \item{factor}{factor by which the learning rate will be reduced. new_lr = lr
-\itemize{
-\item factor
-}}
+\* factor}
 
 \item{patience}{number of epochs with no improvement after which learning
 rate will be reduced.}
