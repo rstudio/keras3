@@ -367,6 +367,7 @@ test_succeeds("can use functional api with dicts", {
 
 test_succeeds("can pass pandas.Series() to fit()", {
   #https://github.com/rstudio/keras/issues/1341
+  skip_if(tf_version() >= "2.13")
   n <- 30
   p <- 10
 
