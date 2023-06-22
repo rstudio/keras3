@@ -597,28 +597,8 @@ resolve_main_thread_generators <- function(x, callback_type = "on_train_batch_be
   python_path <- system.file("python", package = "keras")
   tools <- reticulate::import_from_path("kerastools", path = python_path)
 
-  # as_generator will return a tuple with 2 elements.
-  # (1) a python generator that just consumes
-  # a queue.
-  # (2) a function that evaluates the next element of the generator
-  # and adds to the queue. This function should be called in the main
-  # thread.
-  # we add a `on_train_batch_begin` to call this function.
-  o <- tools$model$as_generator(x)
-
-  callback <- list(function(batch, logs) {
-    o[[2]]()
-  })
-  names(callback) <- callback_type
-
-  if (callback_type == "on_test_batch_begin") {
-    callback[[2]] <- callback[[1]]
-    names(callback)[[2]] <- "on_test_begin"
-  }
-
-  callback <- do.call(callback_lambda, callback)
-
-  list(generator = o[[1]], callback = callback)
+  list(generator = tools$generator$iter2generator(x),
+       callback = NULL)
 }
 
 #' Train a Keras model
@@ -1289,7 +1269,7 @@ as_generator.tensorflow.python.data.ops.dataset_ops.DatasetV2 <- function(x) {
 as_generator.function <- function(x) {
   python_path <- system.file("python", package = "keras")
   tools <- reticulate::import_from_path("kerastools", path = python_path)
-  iter <- reticulate::py_iterator(function() {
+  reticulate::py_iterator(function() {
     elem <- keras_array(x())
 
     # deals with the case where the generator is used for prediction and only
@@ -1299,7 +1279,7 @@ as_generator.function <- function(x) {
 
     do.call(reticulate::tuple, elem)
   })
-  tools$generator$iter_generator(iter)
+
 }
 
 as_generator.keras_preprocessing.sequence.TimeseriesGenerator <- function(x) {

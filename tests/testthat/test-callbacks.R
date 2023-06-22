@@ -254,7 +254,7 @@ test_succeeds("on predict/evaluation callbacks", {
 
   warns <- capture_warnings(
     out <- capture_output(
-      pred <- predict(model, gen, callbacks = cc, steps = 1)
+      pred <- predict(model, gen, callbacks = cc, steps = 5)
     )
   )
   expect_warns_and_out(warns, out)

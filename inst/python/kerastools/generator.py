@@ -20,3 +20,12 @@ def dataset_generator(dataset, session):
       yield session.run(batch)
 
   return gen()
+
+
+def iter2generator(it):
+  
+  for el in it:
+    if el is None:
+      break
+    yield el
+  
