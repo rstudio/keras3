@@ -693,12 +693,18 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
     preprocessing_function = preprocessing_function,
     data_format = data_format
   )
+
   if (keras_version() >= "2.0.4")
     args$zca_epsilon <- zca_epsilon
   if (keras_version() >= "2.1.5") {
     args$brightness_range <- brightness_range
     args$validation_split <- validation_split
   }
+
+  if(is.function(preprocessing_function) &&
+     !inherits(preprocessing_function, "python.builtin.object"))
+    args$preprocessing_function <-
+      reticulate::py_main_thread_func(preprocessing_function)
 
   do.call(keras$preprocessing$image$ImageDataGenerator, args)
 
@@ -798,8 +804,24 @@ flow_images_from_data <- function(
   if (keras_version() >= "2.2.0")
     args$sample_weight <- sample_weight
 
-  do.call(generator$flow, args)
+  iterator <- do.call(generator$flow, args)
+
+  if(!is.null(generator$preprocessing_function)) {
+    # user supplied a custom preprocessing function, which likely is an R function that
+    # must be called from the main thread. use reticulate's threading
+    # guardrails in py_iterator() which effectively shift the evaluation thread
+    # back to main before calling back into R
+    iter_env <- new.env(parent = parent.env(environment())) # pkg namespace
+    iter_env$.iterator <- iterator
+    iterator <- evalq(py_iterator(function() {gc(); iter_next(.iterator)}),
+                      iter_env)
+  }
+
+  iterator
+
 }
+
+fn <- function() print(sys.parent())
 
 #' Generates batches of data from images in a directory (with optional
 #' augmented/normalized data)
