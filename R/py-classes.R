@@ -207,7 +207,8 @@ as_py_method <- function(fn, name, env, convert, label) {
       formals(fn) <- c(alist(self =), formals(fn))
 
     doc <- NULL
-    if (body(fn)[[1]] == quote(`{`) &&
+    if (is.call(body(fn)) &&
+        body(fn)[[1]] == quote(`{`) &&
         length(body(fn)) > 1 &&
         typeof(body(fn)[[2]]) == "character") {
       doc <- glue::trim(body(fn)[[2]])
