@@ -555,7 +555,8 @@ resolve_input_data <- function(x, y = NULL) {
     args$x <- as_generator(x)
   } else if (inherits(x, "python.builtin.iterator")) {
     args$x <- x
-  } else if (inherits(x, "keras.utils.data_utils.Sequence")) {
+  } else if (inherits(x, c("keras.src.utils.data_utils.Sequence",
+                           "keras.utils.data_utils.Sequence"))) {
     args$x <- x
   } else {
     if (!is.null(x))
@@ -576,7 +577,8 @@ resolve_validation_data <- function(validation_data) {
       args$validation_data <- as_generator(validation_data)
     else if (inherits(validation_data, "python.builtin.iterator"))
       args$validation_data <- validation_data
-    else if (inherits(validation_data, "keras.utils.data_utils.Sequence"))
+    else if (inherits(validation_data, c("keras.src.utils.data_utils.Sequence",
+                                         "keras.utils.data_utils.Sequence")))
       args$validation_data <- validation_data
     else {
       args$validation_data <- keras_array(validation_data)
@@ -1333,6 +1335,9 @@ is_main_thread_generator.keras_preprocessing.sequence.TimeseriesGenerator <- fun
 
   FALSE
 }
+
+is_main_thread_generator.keras.src.preprocessing.sequence.TimeseriesGenerator <-
+  is_main_thread_generator.keras_preprocessing.sequence.TimeseriesGenerator
 
 is_tensorflow_dataset <- function(x) {
   inherits(x, "tensorflow.python.data.ops.dataset_ops.DatasetV2") ||
