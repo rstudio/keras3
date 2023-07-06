@@ -595,12 +595,12 @@ resolve_main_thread_generators <- function(x, callback_type = "on_train_batch_be
     stop("Using generators that call R functions is not supported in TensorFlow 2.1 ",
          "Please upgrade your TF installation or downgrade to 2.0", call. = FALSE)
 
-  # we need a hack to make sure the generator is evaluated in the main thread.
-  python_path <- system.file("python", package = "keras")
-  tools <- reticulate::import_from_path("kerastools", path = python_path)
-
-  list(generator = tools$generator$iter2generator(x),
-       callback = NULL)
+  # This used to house a mechanism for adding a keras callback that pumps
+  # the R generator from the main thread (e.g., from 'on_train_batch_begin').
+  # This has since been fixed upstream, by adding a `prefetch` arg to
+  # reticulate::py_iterator()
+  # TODO: remove `resolve_main_thread_generators()` from package
+  list(generator = x, callback = NULL)
 }
 
 #' Train a Keras model
@@ -1280,7 +1280,7 @@ as_generator.function <- function(x) {
       elem[[2]] <- list()
 
     do.call(reticulate::tuple, elem)
-  })
+  }, prefetch = 1L)
 
 }
 
