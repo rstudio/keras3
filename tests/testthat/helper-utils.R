@@ -10,7 +10,7 @@ if(!reticulate::py_available() && reticulate::virtualenv_exists("r-tensorflow"))
 if(reticulate::py_available()) {
   print(reticulate::py_config())
 } else {
-  setHook("reticulate.onPyInit", \() print(reticulate::py_config()))
+  setHook("reticulate.onPyInit", function() print(reticulate::py_config()))
 }
 
 # Sys.setenv(RETICULATE_PYTHON = "~/.local/share/r-miniconda/envs/tf-2.7-cpu/bin/python")
