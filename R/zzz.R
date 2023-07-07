@@ -35,3 +35,5 @@ py_to_r_wrapper.keras.src.engine.training.Model <- py_to_r_wrapper.keras.engine.
 
 #' @export
 summary.keras.src.engine.training.Model <- summary.keras.engine.training.Model
+
+as_generator.keras.src.utils.data_utils.Sequence <- as_generator.keras_preprocessing.sequence.TimeseriesGenerator

@@ -1,11 +1,18 @@
-Sys.setenv(TF_CPP_MIN_LOG_LEVEL = 1)
+# Sys.setenv(TF_CPP_MIN_LOG_LEVEL = 1)
 # 0 = all messages are logged (default behavior)
 # 1 = INFO messages are not printed
 # 2 = INFO and WARNING messages are not printed
 # 3 = INFO, WARNING, and ERROR messages are not printed
 
-if(reticulate::virtualenv_exists("r-tensorflow"))
+if(!reticulate::py_available() && reticulate::virtualenv_exists("r-tensorflow"))
   reticulate::use_virtualenv("r-tensorflow")
+
+if(reticulate::py_available()) {
+  print(reticulate::py_config())
+} else {
+  setHook("reticulate.onPyInit", function() print(reticulate::py_config()))
+}
+
 # Sys.setenv(RETICULATE_PYTHON = "~/.local/share/r-miniconda/envs/tf-2.7-cpu/bin/python")
 # Sys.setenv(RETICULATE_PYTHON = "~/.local/share/r-miniconda/envs/tf-nightly-cpu/bin/python")
 # reticulate::use_condaenv("tf-2.5-cpu", required = TRUE)
@@ -147,3 +154,4 @@ local_tf_device <- function(device_name = "CPU") {
   withr::defer_parent(device$`__exit__`())
   invisible(device)
 }
+

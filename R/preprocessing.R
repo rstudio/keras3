@@ -615,12 +615,20 @@ image_array_save <- function(img, path, data_format = NULL, file_format = NULL, 
 
 
 
-#' Generate batches of image data with real-time data augmentation. The data will be
-#' looped over (in batches).
+#' [Deprecated] Generate batches of image data with real-time data augmentation.
+#' The data will be looped over (in batches).
+#'
+#' Deprecated: `image_data_generator` is not
+#' recommended for new code. Prefer loading images with
+#' `image_dataset_from_directory` and transforming the output
+#' TF Dataset with preprocessing layers. For more information, see the
+#' tutorials for loading images and augmenting images, as well as the
+#' preprocessing layer guide.
 #'
 #' @param featurewise_center Set input mean to 0 over the dataset, feature-wise.
 #' @param samplewise_center Boolean. Set each sample mean to 0.
-#' @param featurewise_std_normalization Divide inputs by std of the dataset, feature-wise.
+#' @param featurewise_std_normalization Divide inputs by std of the dataset,
+#'   feature-wise.
 #' @param samplewise_std_normalization Divide each input by its std.
 #' @param zca_whitening apply ZCA whitening.
 #' @param zca_epsilon Epsilon for ZCA whitening. Default is 1e-6.
@@ -630,12 +638,11 @@ image_array_save <- function(img, path, data_format = NULL, file_format = NULL, 
 #' @param brightness_range the range of brightness to apply
 #' @param shear_range shear intensity (shear angle in radians).
 #' @param zoom_range amount of zoom. if scalar z, zoom will be randomly picked
-#'   in the range `[1-z, 1+z]`. A sequence of two can be passed instead to select
-#'   this range.
+#'   in the range `[1-z, 1+z]`. A sequence of two can be passed instead to
+#'   select this range.
 #' @param channel_shift_range shift range for each channels.
-#' @param fill_mode One of "constant", "nearest", "reflect" or "wrap".
-#' Points outside the boundaries of the input are filled according to
-#' the given mode:
+#' @param fill_mode One of "constant", "nearest", "reflect" or "wrap". Points
+#'   outside the boundaries of the input are filled according to the given mode:
 #'    - "constant": `kkkkkkkk|abcd|kkkkkkkk` (`cval=k`)
 #'    - "nearest":  `aaaaaaaa|abcd|dddddddd`
 #'    - "reflect":  `abcddcba|abcd|dcbaabcd`
@@ -649,14 +656,15 @@ image_array_save <- function(img, path, data_format = NULL, file_format = NULL, 
 #'   other transformation).
 #' @param preprocessing_function function that will be implied on each input.
 #'   The function will run before any other modification on it. The function
-#'   should take one argument: one image (tensor with rank 3), and should
-#'   output a tensor with the same shape.
+#'   should take one argument: one image (tensor with rank 3), and should output
+#'   a tensor with the same shape.
 #' @param data_format 'channels_first' or 'channels_last'. In 'channels_first'
 #'   mode, the channels dimension (the depth) is at index 1, in 'channels_last'
 #'   mode it is at index 3. It defaults to the `image_data_format` value found
 #'   in your Keras config file at `~/.keras/keras.json`. If you never set it,
 #'   then it will be "channels_last".
-#' @param validation_split fraction of images reserved for validation (strictly between 0 and 1).
+#' @param validation_split fraction of images reserved for validation (strictly
+#'   between 0 and 1).
 #'
 #' @export
 image_data_generator <- function(featurewise_center = FALSE, samplewise_center = FALSE,
@@ -685,12 +693,18 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
     preprocessing_function = preprocessing_function,
     data_format = data_format
   )
+
   if (keras_version() >= "2.0.4")
     args$zca_epsilon <- zca_epsilon
   if (keras_version() >= "2.1.5") {
     args$brightness_range <- brightness_range
     args$validation_split <- validation_split
   }
+
+  if(is.function(preprocessing_function) &&
+     !inherits(preprocessing_function, "python.builtin.object"))
+    args$preprocessing_function <-
+      reticulate::py_main_thread_func(preprocessing_function)
 
   do.call(keras$preprocessing$image$ImageDataGenerator, args)
 
@@ -766,6 +780,7 @@ fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, see
 #'
 #' @family image preprocessing
 #'
+#' @importFrom reticulate iter_next
 #' @export
 flow_images_from_data <- function(
   x, y = NULL, generator = image_data_generator(), batch_size = 32,
@@ -790,7 +805,21 @@ flow_images_from_data <- function(
   if (keras_version() >= "2.2.0")
     args$sample_weight <- sample_weight
 
-  do.call(generator$flow, args)
+  iterator <- do.call(generator$flow, args)
+
+  if(!is.null(generator$preprocessing_function)) {
+    # user supplied a custom preprocessing function, which likely is an R
+    # function that must be called from the main thread. Wrap this in
+    # py_iterator(prefetch=1) to ensure we don't end in a deadlock.
+    iter_env <- new.env(parent = parent.env(environment())) # pkg namespace
+    iter_env$.iterator <- iterator
+    expr <- substitute(py_iterator(function() iter_next(iterator), prefetch=1L),
+                       list(iterator = quote(.iterator)))
+    iterator <- eval(expr, iter_env)
+  }
+
+  iterator
+
 }
 
 #' Generates batches of data from images in a directory (with optional

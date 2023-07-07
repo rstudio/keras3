@@ -555,7 +555,8 @@ resolve_input_data <- function(x, y = NULL) {
     args$x <- as_generator(x)
   } else if (inherits(x, "python.builtin.iterator")) {
     args$x <- x
-  } else if (inherits(x, "keras.utils.data_utils.Sequence")) {
+  } else if (inherits(x, c("keras.src.utils.data_utils.Sequence",
+                           "keras.utils.data_utils.Sequence"))) {
     args$x <- x
   } else {
     if (!is.null(x))
@@ -576,7 +577,8 @@ resolve_validation_data <- function(validation_data) {
       args$validation_data <- as_generator(validation_data)
     else if (inherits(validation_data, "python.builtin.iterator"))
       args$validation_data <- validation_data
-    else if (inherits(validation_data, "keras.utils.data_utils.Sequence"))
+    else if (inherits(validation_data, c("keras.src.utils.data_utils.Sequence",
+                                         "keras.utils.data_utils.Sequence")))
       args$validation_data <- validation_data
     else {
       args$validation_data <- keras_array(validation_data)
@@ -593,32 +595,12 @@ resolve_main_thread_generators <- function(x, callback_type = "on_train_batch_be
     stop("Using generators that call R functions is not supported in TensorFlow 2.1 ",
          "Please upgrade your TF installation or downgrade to 2.0", call. = FALSE)
 
-  # we need a hack to make sure the generator is evaluated in the main thread.
-  python_path <- system.file("python", package = "keras")
-  tools <- reticulate::import_from_path("kerastools", path = python_path)
-
-  # as_generator will return a tuple with 2 elements.
-  # (1) a python generator that just consumes
-  # a queue.
-  # (2) a function that evaluates the next element of the generator
-  # and adds to the queue. This function should be called in the main
-  # thread.
-  # we add a `on_train_batch_begin` to call this function.
-  o <- tools$model$as_generator(x)
-
-  callback <- list(function(batch, logs) {
-    o[[2]]()
-  })
-  names(callback) <- callback_type
-
-  if (callback_type == "on_test_batch_begin") {
-    callback[[2]] <- callback[[1]]
-    names(callback)[[2]] <- "on_test_begin"
-  }
-
-  callback <- do.call(callback_lambda, callback)
-
-  list(generator = o[[1]], callback = callback)
+  # This used to house a mechanism for adding a keras callback that pumps
+  # the R generator from the main thread (e.g., from 'on_train_batch_begin').
+  # This has since been fixed upstream, by adding a `prefetch` arg to
+  # reticulate::py_iterator()
+  # TODO: remove `resolve_main_thread_generators()` from package
+  list(generator = x, callback = NULL)
 }
 
 #' Train a Keras model
@@ -1289,7 +1271,7 @@ as_generator.tensorflow.python.data.ops.dataset_ops.DatasetV2 <- function(x) {
 as_generator.function <- function(x) {
   python_path <- system.file("python", package = "keras")
   tools <- reticulate::import_from_path("kerastools", path = python_path)
-  iter <- reticulate::py_iterator(function() {
+  reticulate::py_iterator(function() {
     elem <- keras_array(x())
 
     # deals with the case where the generator is used for prediction and only
@@ -1298,8 +1280,8 @@ as_generator.function <- function(x) {
       elem[[2]] <- list()
 
     do.call(reticulate::tuple, elem)
-  })
-  tools$generator$iter_generator(iter)
+  }, prefetch = 1L)
+
 }
 
 as_generator.keras_preprocessing.sequence.TimeseriesGenerator <- function(x) {
@@ -1353,6 +1335,9 @@ is_main_thread_generator.keras_preprocessing.sequence.TimeseriesGenerator <- fun
 
   FALSE
 }
+
+is_main_thread_generator.keras.src.preprocessing.sequence.TimeseriesGenerator <-
+  is_main_thread_generator.keras_preprocessing.sequence.TimeseriesGenerator
 
 is_tensorflow_dataset <- function(x) {
   inherits(x, "tensorflow.python.data.ops.dataset_ops.DatasetV2") ||

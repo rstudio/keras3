@@ -568,7 +568,7 @@ print.py_R6ClassGenerator <- function(x, ...) {
 #' @export
 `$.py_R6ClassGenerator` <- function(x, name) {
   if (identical(name, "new"))
-    return(self)
+    return(x)
   NextMethod()
 }
 

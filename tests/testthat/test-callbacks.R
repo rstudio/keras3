@@ -31,7 +31,9 @@ if (tensorflow::tf_version() <= "2.1")
   test_callback("progbar_logger", callback_progbar_logger())
 
 
-test_callback("model_checkpoint", callback_model_checkpoint(tempfile(fileext = ".h5")), h5py = TRUE)
+test_callback("model_checkpoint",
+              callback_model_checkpoint(tempfile(fileext = ".keras")),
+              h5py = TRUE)
 
 if(tf_version() >= "2.8")
   test_callback("backup_and_restore", callback_backup_and_restore(tempfile()))
@@ -252,7 +254,7 @@ test_succeeds("on predict/evaluation callbacks", {
 
   warns <- capture_warnings(
     out <- capture_output(
-      pred <- predict(model, gen, callbacks = cc, steps = 1)
+      pred <- predict(model, gen, callbacks = cc, steps = 5)
     )
   )
   expect_warns_and_out(warns, out)

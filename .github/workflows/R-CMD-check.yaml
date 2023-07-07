@@ -1,4 +1,5 @@
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -35,7 +36,7 @@ jobs:
           - {os: 'windows-latest', tf: 'release', r: 'release'}
           - {os: 'macOS-latest'  , tf: 'release', r: 'release'}
 
-          - {os: 'ubuntu-latest', tf: '2.13.0rc1', r: 'release'}
+          - {os: 'ubuntu-latest', tf: '2.13', r: 'release'}
           - {os: 'ubuntu-latest', tf: '2.12', r: 'release'}
           - {os: 'ubuntu-latest', tf: '2.11', r: 'release'}
           - {os: 'ubuntu-latest', tf: '2.10', r: 'release'}
