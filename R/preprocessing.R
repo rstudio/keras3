@@ -822,8 +822,6 @@ flow_images_from_data <- function(
 
 }
 
-fn <- function() print(sys.parent())
-
 #' Generates batches of data from images in a directory (with optional
 #' augmented/normalized data)
 #'
