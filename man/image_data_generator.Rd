@@ -2,8 +2,8 @@
 % Please edit documentation in R/preprocessing.R
 \name{image_data_generator}
 \alias{image_data_generator}
-\title{Generate batches of image data with real-time data augmentation. The data will be
-looped over (in batches).}
+\title{\link{Deprecated} Generate batches of image data with real-time data augmentation.
+The data will be looped over (in batches).}
 \usage{
 image_data_generator(
   featurewise_center = FALSE,
@@ -34,7 +34,8 @@ image_data_generator(
 
 \item{samplewise_center}{Boolean. Set each sample mean to 0.}
 
-\item{featurewise_std_normalization}{Divide inputs by std of the dataset, feature-wise.}
+\item{featurewise_std_normalization}{Divide inputs by std of the dataset,
+feature-wise.}
 
 \item{samplewise_std_normalization}{Divide each input by its std.}
 
@@ -53,14 +54,13 @@ image_data_generator(
 \item{shear_range}{shear intensity (shear angle in radians).}
 
 \item{zoom_range}{amount of zoom. if scalar z, zoom will be randomly picked
-in the range \verb{[1-z, 1+z]}. A sequence of two can be passed instead to select
-this range.}
+in the range \verb{[1-z, 1+z]}. A sequence of two can be passed instead to
+select this range.}
 
 \item{channel_shift_range}{shift range for each channels.}
 
-\item{fill_mode}{One of "constant", "nearest", "reflect" or "wrap".
-Points outside the boundaries of the input are filled according to
-the given mode:
+\item{fill_mode}{One of "constant", "nearest", "reflect" or "wrap". Points
+outside the boundaries of the input are filled according to the given mode:
 \itemize{
 \item "constant": \code{kkkkkkkk|abcd|kkkkkkkk} (\code{cval=k})
 \item "nearest":  \code{aaaaaaaa|abcd|dddddddd}
@@ -81,8 +81,8 @@ other transformation).}
 
 \item{preprocessing_function}{function that will be implied on each input.
 The function will run before any other modification on it. The function
-should take one argument: one image (tensor with rank 3), and should
-output a tensor with the same shape.}
+should take one argument: one image (tensor with rank 3), and should output
+a tensor with the same shape.}
 
 \item{data_format}{'channels_first' or 'channels_last'. In 'channels_first'
 mode, the channels dimension (the depth) is at index 1, in 'channels_last'
@@ -90,9 +90,14 @@ mode it is at index 3. It defaults to the \code{image_data_format} value found
 in your Keras config file at \verb{~/.keras/keras.json}. If you never set it,
 then it will be "channels_last".}
 
-\item{validation_split}{fraction of images reserved for validation (strictly between 0 and 1).}
+\item{validation_split}{fraction of images reserved for validation (strictly
+between 0 and 1).}
 }
 \description{
-Generate batches of image data with real-time data augmentation. The data will be
-looped over (in batches).
+Deprecated: \code{image_data_generator} is not
+recommended for new code. Prefer loading images with
+\code{image_dataset_from_directory} and transforming the output
+TF Dataset with preprocessing layers. For more information, see the
+tutorials for loading images and augmenting images, as well as the
+preprocessing layer guide.
 }

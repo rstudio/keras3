@@ -780,6 +780,7 @@ fit_image_data_generator <- function(object, x, augment = FALSE, rounds = 1, see
 #'
 #' @family image preprocessing
 #'
+#' @importFrom reticulate iter_next
 #' @export
 flow_images_from_data <- function(
   x, y = NULL, generator = image_data_generator(), batch_size = 32,
@@ -807,14 +808,14 @@ flow_images_from_data <- function(
   iterator <- do.call(generator$flow, args)
 
   if(!is.null(generator$preprocessing_function)) {
-    # user supplied a custom preprocessing function, which likely is an R function that
-    # must be called from the main thread. use reticulate's threading
-    # guardrails in py_iterator() which effectively shift the evaluation thread
-    # back to main before calling back into R
+    # user supplied a custom preprocessing function, which likely is an R
+    # function that must be called from the main thread. Wrap this in
+    # py_iterator(prefetch=1) to ensure we don't end in a deadlock.
     iter_env <- new.env(parent = parent.env(environment())) # pkg namespace
     iter_env$.iterator <- iterator
-    iterator <- evalq(py_iterator(function() {gc(); iter_next(.iterator)}),
-                      iter_env)
+    expr <- substitute(py_iterator(function() iter_next(iterator), prefetch=1L),
+                       list(iterator = quote(.iterator)))
+    iterator <- eval(expr, iter_env)
   }
 
   iterator
