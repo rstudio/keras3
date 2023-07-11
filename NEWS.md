@@ -1,5 +1,8 @@
 # keras (development version)
 
+- Default TF version installed by `install_keras()` is now 2.13.
+
+
 # keras 2.11.1
 
 - Update S3 method formals per new CRAN requirement (`r_to_py.keras_layer_wrapper()`)
