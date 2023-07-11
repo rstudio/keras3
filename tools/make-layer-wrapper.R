@@ -159,6 +159,10 @@ print.r_py_wrapper2 <- function(x, ...) {
   cat(x)
 }
 
+
+
+new_layer_wrapper(keras$layers$BatchNormalization)
+
 ## example usage:
 # new_layer_wrapper(keras$layers$TextVectorization)
 # new_layer_wrapper(keras$layers$DepthwiseConv1D)

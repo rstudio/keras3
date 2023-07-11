@@ -58,7 +58,7 @@ difference being that this includes by default additional extra packages that
 keras expects, and the default version of tensorflow installed by
 \code{install_keras()} may at times be different from the default installed
 \code{install_tensorflow()}. The default version of tensorflow installed by
-\code{install_keras()} is "2.11".
+\code{install_keras()} is "2.13".
 }
 \details{
 The default additional packages are:

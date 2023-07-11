@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-normalization.R
 \name{layer_batch_normalization}
 \alias{layer_batch_normalization}
-\title{Batch normalization layer (Ioffe and Szegedy, 2014).}
+\title{Layer that normalizes its inputs}
 \usage{
 layer_batch_normalization(
   object,
@@ -19,44 +19,24 @@ layer_batch_normalization(
   gamma_regularizer = NULL,
   beta_constraint = NULL,
   gamma_constraint = NULL,
-  renorm = FALSE,
-  renorm_clipping = NULL,
-  renorm_momentum = 0.99,
-  fused = NULL,
-  virtual_batch_size = NULL,
-  adjustment = NULL,
-  input_shape = NULL,
-  batch_input_shape = NULL,
-  batch_size = NULL,
-  dtype = NULL,
-  name = NULL,
-  trainable = NULL,
-  weights = NULL
+  synchronized = FALSE,
+  ...
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
-
-\item{axis}{Integer, the axis that should be normalized (typically the
-features axis). For instance, after a \code{Conv2D} layer with
+\item{axis}{Integer, the axis that should be normalized (typically the features
+axis). For instance, after a \code{Conv2D} layer with
 \code{data_format="channels_first"}, set \code{axis=1} in \code{BatchNormalization}.}
 
-\item{momentum}{Momentum for the moving mean and the moving variance.}
+\item{momentum}{Momentum for the moving average.}
 
 \item{epsilon}{Small float added to variance to avoid dividing by zero.}
 
-\item{center}{If TRUE, add offset of \code{beta} to normalized tensor. If FALSE,
+\item{center}{If \code{TRUE}, add offset of \code{beta} to normalized tensor. If \code{FALSE},
 \code{beta} is ignored.}
 
-\item{scale}{If TRUE, multiply by \code{gamma}. If FALSE, \code{gamma} is not used.
-When the next layer is linear (also e.g. \code{nn.relu}), this can be disabled
+\item{scale}{If \code{TRUE}, multiply by \code{gamma}. If \code{FALSE}, \code{gamma} is not used. When
+the next layer is linear (also e.g. \code{nn.relu}), this can be disabled
 since the scaling will be done by the next layer.}
 
 \item{beta_initializer}{Initializer for the beta weight.}
@@ -75,88 +55,77 @@ since the scaling will be done by the next layer.}
 
 \item{gamma_constraint}{Optional constraint for the gamma weight.}
 
-\item{renorm}{Whether to use Batch Renormalization
-(https://arxiv.org/abs/1702.03275). This adds extra variables during
-training. The inference is the same for either value of this parameter.}
+\item{synchronized}{If \code{TRUE}, synchronizes the global batch statistics (mean and
+variance) for the layer across all devices at each training step in a
+distributed training strategy. If \code{FALSE}, each replica uses its own
+local batch statistics. Only relevant when used inside a
+\code{tf$distribute} strategy.}
 
-\item{renorm_clipping}{A named list or dictionary that may map keys \code{rmax},
-\code{rmin}, \code{dmax} to scalar Tensors used to clip the renorm correction. The
-correction \verb{(r, d)} is used as \code{corrected_value = normalized_value * r + d},
-with \code{r} clipped to \verb{[rmin, rmax]}, and \code{d} to \verb{[-dmax, dmax]}. Missing \code{rmax},
-\code{rmin}, \code{dmax} are set to \code{Inf}, \code{0}, \code{Inf}, \code{respectively}.}
-
-\item{renorm_momentum}{Momentum used to update the moving means and standard
-deviations with renorm. Unlike momentum, this affects training and should
-be neither too small (which would add noise) nor too large (which would
-give stale estimates). Note that momentum is still applied to get the means
-and variances for inference.}
-
-\item{fused}{\code{TRUE}, use a faster, fused implementation, or raise a ValueError
-if the fused implementation cannot be used. If \code{NULL}, use the faster
-implementation if possible. If \code{FALSE}, do not use the fused implementation.}
-
-\item{virtual_batch_size}{An integer. By default, virtual_batch_size is \code{NULL},
-which means batch normalization is performed across the whole batch.
-When virtual_batch_size is not \code{NULL}, instead perform "Ghost Batch
-Normalization", which creates virtual sub-batches which are each normalized
-separately (with shared gamma, beta, and moving statistics). Must divide
-the actual \verb{batch size} during execution.}
-
-\item{adjustment}{A function taking the Tensor containing the (dynamic) shape
-of the input tensor and returning a pair \verb{(scale, bias)} to apply to the
-normalized values \verb{(before gamma and beta)}, only during training.
-For example, if \code{axis==-1},
-\code{adjustment <- function(shape) {
-    tuple(tf$random$uniform(shape[-1:NULL, style = "python"], 0.93, 1.07),
-          tf$random$uniform(shape[-1:NULL, style = "python"], -0.1, 0.1))
-   }}
-will scale the normalized value
-by up to 7\% up or down, then shift the result by up to 0.1 (with
-independent scaling and bias for each feature but shared across all examples),
-and finally apply gamma and/or beta. If \code{NULL}, no adjustment is applied.
-Cannot be specified if virtual_batch_size is specified.}
-
-\item{input_shape}{Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.}
-
-\item{batch_input_shape}{Shapes, including the batch size. For instance,
-\code{batch_input_shape=c(10, 32)} indicates that the expected input will be
-batches of 10 32-dimensional vectors. \code{batch_input_shape=list(NULL, 32)}
-indicates batches of an arbitrary number of 32-dimensional vectors.}
-
-\item{batch_size}{Fixed batch size for layer}
-
-\item{dtype}{The data type expected by the input, as a string (\code{float32},
-\code{float64}, \code{int32}...)}
-
-\item{name}{An optional name string for the layer. Should be unique in a
-model (do not reuse the same name twice). It will be autogenerated if it
-isn't provided.}
-
-\item{trainable}{Whether the layer weights will be updated during training.}
-
-\item{weights}{Initial weights for layer.}
+\item{...}{standard layer arguments.}
 }
 \description{
-Normalize the activations of the previous layer at each batch, i.e. applies a
-transformation that maintains the mean activation close to 0 and the
-activation standard deviation close to 1.
+Layer that normalizes its inputs
 }
-\section{Input shape}{
- Arbitrary. Use the keyword argument \code{input_shape} (list
-of integers, does not include the samples axis) when using this layer as
-the first layer in a model.
-}
+\details{
+Batch normalization applies a transformation that maintains the mean output
+close to 0 and the output standard deviation close to 1.
 
-\section{Output shape}{
- Same shape as input.
-}
+Importantly, batch normalization works differently during training and
+during inference.
 
-\section{References}{
-
+\strong{During training} (i.e. when using \code{fit()} or when calling the layer/model
+with the argument \code{training=TRUE}), the layer normalizes its output using
+the mean and standard deviation of the current batch of inputs. That is to
+say, for each channel being normalized, the layer returns
+\code{gamma * (batch - mean(batch)) / sqrt(var(batch) + epsilon) + beta}, where:
 \itemize{
-\item \href{https://arxiv.org/abs/1502.03167}{Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift}
-}
+\item \code{epsilon} is small constant (configurable as part of the constructor
+arguments)
+\item \code{gamma} is a learned scaling factor (initialized as 1), which
+can be disabled by passing \code{scale=FALSE} to the constructor.
+\item \code{beta} is a learned offset factor (initialized as 0), which
+can be disabled by passing \code{center=FALSE} to the constructor.
 }
 
+\strong{During inference} (i.e. when using \code{evaluate()} or \code{predict()} or when
+calling the layer/model with the argument \code{training=FALSE} (which is the
+default), the layer normalizes its output using a moving average of the
+mean and standard deviation of the batches it has seen during training. That
+is to say, it returns
+\code{gamma * (batch - self.moving_mean) / sqrt(self.moving_var+epsilon) + beta}.
+
+\code{self$moving_mean} and \code{self$moving_var} are non-trainable variables that
+are updated each time the layer in called in training mode, as such:
+\itemize{
+\item \code{moving_mean = moving_mean * momentum + mean(batch) * (1 - momentum)}
+\item \code{moving_var = moving_var * momentum + var(batch) * (1 - momentum)}
+}
+
+As such, the layer will only normalize its inputs during inference
+\emph{after having been trained on data that has similar statistics as the
+inference data}.
+
+When \code{synchronized=TRUE} is set and if this layer is used within a
+\code{tf$distribute} strategy, there will be an \code{allreduce} call
+to aggregate batch statistics across all replicas at every
+training step. Setting \code{synchronized} has no impact when the model is
+trained without specifying any distribution strategy.
+
+Example usage:
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{strategy <- tf$distribute$MirroredStrategy()
+
+with(strategy$scope(), \{
+  model <- keras_model_sequential()
+  model \%>\%
+    layer_dense(16) \%>\%
+    layer_batch_normalization(synchronized=TRUE)
+\})
+}\if{html}{\out{</div>}}
+}
+\seealso{
+\itemize{
+\item \url{https://www.tensorflow.org/versions/r2.13/api_docs/python/keras/src/layers/normalization/batch_normalization/BatchNormalization}
+\item \url{https://keras.io/api/layers}
+}
+}

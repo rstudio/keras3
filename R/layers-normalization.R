@@ -1,115 +1,131 @@
 
-#' Batch normalization layer (Ioffe and Szegedy, 2014).
+#' Layer that normalizes its inputs
 #'
-#' Normalize the activations of the previous layer at each batch, i.e. applies a
-#' transformation that maintains the mean activation close to 0 and the
-#' activation standard deviation close to 1.
+#' @details
+#' Batch normalization applies a transformation that maintains the mean output
+#' close to 0 and the output standard deviation close to 1.
 #'
-#' @inheritParams layer_dense
+#' Importantly, batch normalization works differently during training and
+#' during inference.
 #'
-#' @param axis Integer, the axis that should be normalized (typically the
-#'   features axis). For instance, after a `Conv2D` layer with
-#'   `data_format="channels_first"`, set `axis=1` in `BatchNormalization`.
-#' @param momentum Momentum for the moving mean and the moving variance.
+#' **During training** (i.e. when using `fit()` or when calling the layer/model
+#' with the argument `training=TRUE`), the layer normalizes its output using
+#' the mean and standard deviation of the current batch of inputs. That is to
+#' say, for each channel being normalized, the layer returns
+#' `gamma * (batch - mean(batch)) / sqrt(var(batch) + epsilon) + beta`, where:
+#'
+#' - `epsilon` is small constant (configurable as part of the constructor
+#' arguments)
+#' - `gamma` is a learned scaling factor (initialized as 1), which
+#' can be disabled by passing `scale=FALSE` to the constructor.
+#' - `beta` is a learned offset factor (initialized as 0), which
+#' can be disabled by passing `center=FALSE` to the constructor.
+#'
+#' **During inference** (i.e. when using `evaluate()` or `predict()` or when
+#' calling the layer/model with the argument `training=FALSE` (which is the
+#' default), the layer normalizes its output using a moving average of the
+#' mean and standard deviation of the batches it has seen during training. That
+#' is to say, it returns
+#' `gamma * (batch - self.moving_mean) / sqrt(self.moving_var+epsilon) + beta`.
+#'
+#' `self$moving_mean` and `self$moving_var` are non-trainable variables that
+#' are updated each time the layer in called in training mode, as such:
+#'
+#' - `moving_mean = moving_mean * momentum + mean(batch) * (1 - momentum)`
+#' - `moving_var = moving_var * momentum + var(batch) * (1 - momentum)`
+#'
+#' As such, the layer will only normalize its inputs during inference
+#' *after having been trained on data that has similar statistics as the
+#' inference data*.
+#'
+#' When `synchronized=TRUE` is set and if this layer is used within a
+#' `tf$distribute` strategy, there will be an `allreduce` call
+#' to aggregate batch statistics across all replicas at every
+#' training step. Setting `synchronized` has no impact when the model is
+#' trained without specifying any distribution strategy.
+#'
+#' Example usage:
+#'
+#' ```R
+#' strategy <- tf$distribute$MirroredStrategy()
+#'
+#' with(strategy$scope(), {
+#'   model <- keras_model_sequential()
+#'   model %>%
+#'     layer_dense(16) %>%
+#'     layer_batch_normalization(synchronized=TRUE)
+#' })
+#' ```
+#'
+#' @param axis Integer, the axis that should be normalized (typically the features
+#' axis). For instance, after a `Conv2D` layer with
+#' `data_format="channels_first"`, set `axis=1` in `BatchNormalization`.
+#'
+#' @param momentum Momentum for the moving average.
+#'
 #' @param epsilon Small float added to variance to avoid dividing by zero.
-#' @param center If TRUE, add offset of `beta` to normalized tensor. If FALSE,
-#'   `beta` is ignored.
-#' @param scale If TRUE, multiply by `gamma`. If FALSE, `gamma` is not used.
-#'   When the next layer is linear (also e.g. `nn.relu`), this can be disabled
-#'   since the scaling will be done by the next layer.
+#'
+#' @param center If `TRUE`, add offset of `beta` to normalized tensor. If `FALSE`,
+#' `beta` is ignored.
+#'
+#' @param scale If `TRUE`, multiply by `gamma`. If `FALSE`, `gamma` is not used. When
+#' the next layer is linear (also e.g. `nn.relu`), this can be disabled
+#' since the scaling will be done by the next layer.
+#'
 #' @param beta_initializer Initializer for the beta weight.
+#'
 #' @param gamma_initializer Initializer for the gamma weight.
+#'
 #' @param moving_mean_initializer Initializer for the moving mean.
+#'
 #' @param moving_variance_initializer Initializer for the moving variance.
+#'
 #' @param beta_regularizer Optional regularizer for the beta weight.
+#'
 #' @param gamma_regularizer Optional regularizer for the gamma weight.
+#'
 #' @param beta_constraint Optional constraint for the beta weight.
+#'
 #' @param gamma_constraint Optional constraint for the gamma weight.
-#' @param renorm Whether to use Batch Renormalization
-#'   (https://arxiv.org/abs/1702.03275). This adds extra variables during
-#'   training. The inference is the same for either value of this parameter.
-#' @param renorm_clipping A named list or dictionary that may map keys `rmax`,
-#'   `rmin`, `dmax` to scalar Tensors used to clip the renorm correction. The
-#'   correction `(r, d)` is used as `corrected_value = normalized_value * r + d`,
-#'   with `r` clipped to `[rmin, rmax]`, and `d` to `[-dmax, dmax]`. Missing `rmax`,
-#'   `rmin`, `dmax` are set to `Inf`, `0`, `Inf`, `respectively`.
-#' @param renorm_momentum Momentum used to update the moving means and standard
-#'   deviations with renorm. Unlike momentum, this affects training and should
-#'   be neither too small (which would add noise) nor too large (which would
-#'   give stale estimates). Note that momentum is still applied to get the means
-#'   and variances for inference.
-#' @param fused `TRUE`, use a faster, fused implementation, or raise a ValueError
-#'   if the fused implementation cannot be used. If `NULL`, use the faster
-#'   implementation if possible. If `FALSE`, do not use the fused implementation.
-#' @param virtual_batch_size An integer. By default, virtual_batch_size is `NULL`,
-#'   which means batch normalization is performed across the whole batch.
-#'   When virtual_batch_size is not `NULL`, instead perform "Ghost Batch
-#'   Normalization", which creates virtual sub-batches which are each normalized
-#'   separately (with shared gamma, beta, and moving statistics). Must divide
-#'   the actual `batch size` during execution.
-#' @param adjustment A function taking the Tensor containing the (dynamic) shape
-#'   of the input tensor and returning a pair `(scale, bias)` to apply to the
-#'   normalized values `(before gamma and beta)`, only during training.
-#'   For example, if `axis==-1`,
-#'   \code{adjustment <- function(shape) {
-#'     tuple(tf$random$uniform(shape[-1:NULL, style = "python"], 0.93, 1.07),
-#'           tf$random$uniform(shape[-1:NULL, style = "python"], -0.1, 0.1))
-#'    }}
-#'   will scale the normalized value
-#'   by up to 7% up or down, then shift the result by up to 0.1 (with
-#'   independent scaling and bias for each feature but shared across all examples),
-#'   and finally apply gamma and/or beta. If `NULL`, no adjustment is applied.
-#'   Cannot be specified if virtual_batch_size is specified.
-#' @section Input shape: Arbitrary. Use the keyword argument `input_shape` (list
-#'   of integers, does not include the samples axis) when using this layer as
-#'   the first layer in a model.
 #'
-#' @section Output shape: Same shape as input.
+#' @param synchronized If `TRUE`, synchronizes the global batch statistics (mean and
+#' variance) for the layer across all devices at each training step in a
+#' distributed training strategy. If `FALSE`, each replica uses its own
+#' local batch statistics. Only relevant when used inside a
+#' `tf$distribute` strategy.
+#' @param ... standard layer arguments.
 #'
-#' @section References:
-#' - [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/abs/1502.03167)
-#'
+#' @seealso
+#'   +  <https://www.tensorflow.org/versions/r2.13/api_docs/python/keras/src/layers/normalization/batch_normalization/BatchNormalization>
+#'   +  <https://keras.io/api/layers>
 #' @export
-layer_batch_normalization <- function(object, axis = -1L, momentum = 0.99, epsilon = 0.001, center = TRUE, scale = TRUE,
-                                      beta_initializer = "zeros", gamma_initializer = "ones",
-                                      moving_mean_initializer = "zeros", moving_variance_initializer = "ones",
-                                      beta_regularizer = NULL, gamma_regularizer = NULL, beta_constraint = NULL,
-                                      gamma_constraint = NULL, renorm = FALSE, renorm_clipping = NULL,
-                                      renorm_momentum = 0.99, fused = NULL, virtual_batch_size = NULL,
-                                      adjustment = NULL, input_shape = NULL,  batch_input_shape = NULL,
-                                      batch_size = NULL, dtype = NULL, name = NULL, trainable = NULL, weights = NULL) {
-
-  stopifnot(is.null(adjustment) || is.function(adjustment))
-
-  create_layer(keras$layers$BatchNormalization, object, list(
-    axis = as.integer(axis),
-    momentum = momentum,
-    epsilon = epsilon,
-    center = center,
-    scale = scale,
-    beta_initializer = beta_initializer,
-    gamma_initializer = gamma_initializer,
-    moving_mean_initializer = moving_mean_initializer,
-    moving_variance_initializer = moving_variance_initializer,
-    beta_regularizer = beta_regularizer,
-    gamma_regularizer = gamma_regularizer,
-    beta_constraint = beta_constraint,
-    gamma_constraint = gamma_constraint,
-    renorm = renorm,
-    renorm_clipping = renorm_clipping,
-    renorm_momentum = renorm_momentum,
-    fused = fused,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    virtual_batch_size = as_nullable_integer(virtual_batch_size),
-    adjustment = adjustment,
-    weights = weights
-  ))
-}
+layer_batch_normalization <-
+  function(object,
+           axis = -1L,
+           momentum = 0.99,
+           epsilon = 0.001,
+           center = TRUE,
+           scale = TRUE,
+           beta_initializer = "zeros",
+           gamma_initializer = "ones",
+           moving_mean_initializer = "zeros",
+           moving_variance_initializer = "ones",
+           beta_regularizer = NULL,
+           gamma_regularizer = NULL,
+           beta_constraint = NULL,
+           gamma_constraint = NULL,
+           synchronized = FALSE,
+           ...) {
+    args <- capture_args(match.call(), list(
+        axis = as_axis,
+        input_shape = normalize_shape,
+        batch_input_shape = normalize_shape,
+        batch_size = as_nullable_integer,
+        virtual_batch_size = as_nullable_integer
+      ), ignore = "object"
+    )
+    create_layer(keras$layers$BatchNormalization, object, args)
+  }
 
 
 #' Layer normalization layer (Ba et al., 2016).

@@ -2,6 +2,10 @@
 
 - Default TF version installed by `install_keras()` is now 2.13.
 
+- `layer_batch_normalization()` updated signature, with changes to options for distributed training.
+
+- Fixed deadlock when an R generator was passed to `fit()`, `predict()`, and other endpoints.
+
 
 # keras 2.11.1
 

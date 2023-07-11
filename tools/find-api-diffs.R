@@ -20,7 +20,7 @@ py_to_r_python.builtin.dict_items <- function(x) {
 attach_eval({
   inspect <- reticulate::import("inspect")
 
-  import_from(magrittr, `%<>%`)
+  # import_from(magrittr, `%<>%`)
 
   `%error%` <- function(x, y) tryCatch(x, error = function(e) y)
 
@@ -80,6 +80,16 @@ DF %>%
   filter(missing_in_r_func_args != "") %>%
   select(r_func_nm, missing_in_r_func_args) %>%
   print(n = Inf)
+
+
+# tf 2.13
+# # A tibble: 4 × 2
+#   r_func_nm                 missing_in_r_func_args
+#   <chr>                     <chr>
+# 1 layer_batch_normalization synchronized
+# 2 layer_cudnn_gru           go_backwards
+# 3 layer_cudnn_lstm          go_backwards
+# 4 layer_embedding           sparse
 
 # tf 2.11
 # # A tibble: 10 × 2
