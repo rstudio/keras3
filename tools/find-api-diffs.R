@@ -4,6 +4,7 @@ library(dplyr, warn.conflicts = FALSE)
 library(reticulate)
 library(envir)
 
+use_virtualenv("r-keras")
 # keras::install_keras(envname = "tf-2.6-cpu")
 # tools/setup-test-envs.R
 # use_miniconda("tf-2.6-cpu", required=TRUE)
@@ -20,7 +21,7 @@ py_to_r_python.builtin.dict_items <- function(x) {
 attach_eval({
   inspect <- reticulate::import("inspect")
 
-  # import_from(magrittr, `%<>%`)
+  import_from(magrittr, `%<>%`)
 
   `%error%` <- function(x, y) tryCatch(x, error = function(e) y)
 

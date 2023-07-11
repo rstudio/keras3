@@ -2,7 +2,7 @@
 library(tidyverse)
 library(tensorflow)
 library(keras)
-
+use_virtualenv("r-keras")
 stopifnot(interactive())
 inspect <- reticulate::import("inspect")
 
@@ -160,6 +160,8 @@ print.r_py_wrapper2 <- function(x, ...) {
 }
 
 
+
+new_layer_wrapper(keras$layers$Embedding)
 
 new_layer_wrapper(keras$layers$BatchNormalization)
 
