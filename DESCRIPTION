@@ -1,7 +1,7 @@
 Package: keras
 Type: Package
 Title: R Interface to 'Keras'
-Version: 2.11.1
+Version: 2.11.1.9000
 Authors@R: c(
   person("Tomasz", "Kalinowski", role = c("ctb", "cph", "cre"),
          email = "tomasz@posit.co"),
@@ -51,5 +51,5 @@ Suggests:
 Roxygen: list(markdown = TRUE, r6 = FALSE)
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
-Remotes:  
+Remotes: 
     rstudio/reticulate
