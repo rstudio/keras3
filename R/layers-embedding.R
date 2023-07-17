@@ -13,6 +13,8 @@
 #' This layer accepts `tf.Tensor`, `tf.RaggedTensor` and `tf.SparseTensor`
 #' input.
 #'
+#' @param object Layer or Model object
+#'
 #' @param input_dim Integer. Size of the vocabulary,
 #' i.e. maximum integer index + 1.
 #'
@@ -21,8 +23,8 @@
 #' @param embeddings_initializer Initializer for the `embeddings`
 #' matrix (see `keras.initializers`).
 #'
-#' @param embeddings_regularizer Regularizer function applied to
-#' the `embeddings` matrix (see `keras.regularizers`).
+#' @param embeddings_regularizer,activity_regularizer Regularizer function applied to
+#' the `embeddings` matrix or to the activations (see `keras.regularizers`).
 #'
 #' @param embeddings_constraint Constraint function applied to
 #' the `embeddings` matrix (see `keras.constraints`).
@@ -44,6 +46,7 @@
 #' the layer returns a dense `tf.Tensor`. For an entry with no features in
 #' a sparse tensor (entry with value 0), the embedding vector of index 0 is
 #' returned by default.
+#'
 #' @param ... standard layer arguments.
 #'
 #' @section Input shape: 2D tensor with shape: `(batch_size, sequence_length)`.

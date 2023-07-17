@@ -19,6 +19,8 @@ layer_embedding(
 )
 }
 \arguments{
+\item{object}{Layer or Model object}
+
 \item{input_dim}{Integer. Size of the vocabulary,
 i.e. maximum integer index + 1.}
 
@@ -27,8 +29,8 @@ i.e. maximum integer index + 1.}
 \item{embeddings_initializer}{Initializer for the \code{embeddings}
 matrix (see \code{keras.initializers}).}
 
-\item{embeddings_regularizer}{Regularizer function applied to
-the \code{embeddings} matrix (see \code{keras.regularizers}).}
+\item{embeddings_regularizer, activity_regularizer}{Regularizer function applied to
+the \code{embeddings} matrix or to the activations (see \code{keras.regularizers}).}
 
 \item{embeddings_constraint}{Constraint function applied to
 the \code{embeddings} matrix (see \code{keras.constraints}).}
