@@ -57,6 +57,8 @@
 #' })
 #' ```
 #'
+#' @param object Layer or model object
+#'
 #' @param axis Integer, the axis that should be normalized (typically the features
 #' axis). For instance, after a `Conv2D` layer with
 #' `data_format="channels_first"`, set `axis=1` in `BatchNormalization`.

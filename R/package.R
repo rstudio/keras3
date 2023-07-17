@@ -107,7 +107,7 @@ keras <- NULL
   # delay load keras
   keras <<- import(implementation_module, delay_load = list(
 
-    priority = 10,
+    priority = 10, # tensorflow priority == 5
 
     environment = "r-tensorflow",
 
@@ -149,13 +149,15 @@ keras <- NULL
     if (identical(module, "tensorflow.keras"))
       module <- "tensorflow.python.keras"
 
+    # replace "tensorflow.python.keras.*" with "keras.*"
     classes <- sub(paste0("^", module), "keras", classes)
 
+    # All python symbols moved in v2.13 under .src
+    classes <- sub("^keras\\.src\\.", "keras.", classes)
 
     # let KerasTensor inherit all the S3 methods of tf.Tensor, but
     # KerasTensor methods take precedence.
-    if(any(c("keras.src.engine.keras_tensor.KerasTensor",
-             "keras.engine.keras_tensor.KerasTensor") %in% classes))
+    if(any("keras.engine.keras_tensor.KerasTensor" %in% classes))
       classes <- unique(c("keras.engine.keras_tensor.KerasTensor",
                           "tensorflow.tensor",
                           classes))

@@ -5,9 +5,8 @@ library(reticulate)
 library(envir)
 
 use_virtualenv("r-keras")
-# keras::install_keras(envname = "tf-2.6-cpu")
 # tools/setup-test-envs.R
-# use_miniconda("tf-2.6-cpu", required=TRUE)
+
 
 options(tibble.print_min = 100)
 py_to_r_python.builtin.dict_items <- function(x) {
@@ -70,9 +69,8 @@ DF <-
                                            ~ setdiff(.y, c(.x, default_ignore)) %>%
                                              paste(collapse = ", "))) %>%
   filter(r_func_nm != "layer_activation_selu") %>%   # Not a real layer on keras side
-  # filter(!r_func_nm %in% c("layer_cudnn_gru", "layer_cudnn_lstm"))
-  identity()
-
+  filter(!r_func_nm %in% c("layer_cudnn_gru", "layer_cudnn_lstm")) %>%  # deprecated
+   identity()
 
 
 DF$missing_in_r_func_args[DF$r_func_nm == "layer_lambda"] %<>% sub("function", "", .)

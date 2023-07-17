@@ -24,6 +24,8 @@ layer_batch_normalization(
 )
 }
 \arguments{
+\item{object}{Layer or model object}
+
 \item{axis}{Integer, the axis that should be normalized (typically the features
 axis). For instance, after a \code{Conv2D} layer with
 \code{data_format="channels_first"}, set \code{axis=1} in \code{BatchNormalization}.}

@@ -342,8 +342,7 @@ model_from_yaml <- function(yaml, custom_objects = NULL) {
 #' @export
 serialize_model <- function(model, include_optimizer = TRUE) {
 
-  if (!inherits(model, c("keras.engine.training.Model",
-                         "keras.src.engine.training.Model")))
+  if (!inherits(model, "keras.engine.training.Model"))
     stop("You must pass a Keras model object to serialize_model")
 
   # write hdf5 file to temp file

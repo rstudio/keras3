@@ -143,8 +143,7 @@ test_metric <- function(metric, ...) {
     m <- metric(...)
 
     expect_s3_class(m, c("keras.metrics.Metric",
-                         'keras.metrics.base_metric.Metric',
-                         'keras.src.metrics.base_metric.Metric'))
+                         'keras.metrics.base_metric.Metric'))
 
     define_model() %>%
       compile(loss = loss,

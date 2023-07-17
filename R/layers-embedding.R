@@ -65,7 +65,7 @@ layer_embedding <-
       input_dim = as.integer,
       output_dim = as.integer,
       input_length = as_nullable_integer,
-      batch_size = as_nullable_integer,
+      batch_size = as_nullable_integer
     ), ignore = "object")
     create_layer(keras$layers$Embedding, object, args)
   }
