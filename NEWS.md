@@ -2,6 +2,10 @@
 
 - Default TF version installed by `install_keras()` is now 2.13.
 
+- `install_keras()` `envname` argument default changes to `"r-keras"`. Unless
+  the `envname` argument is supplied, `install_keras()` will install into a
+  virtual environment named "r-keras".
+
 - Updated layers:
   - `layer_batch_normalization()` updated signature, with changes to options for distributed training.
   - `layer_embedding()` gains a `sparse` argument.
