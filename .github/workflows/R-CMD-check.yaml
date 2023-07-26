@@ -85,6 +85,12 @@ jobs:
       #   if: steps.r-package-cache.outputs.cache-hit != 'true'
       #   run: install.packages("remotes")
 
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: rcmdcheck remotes local::.
+          cache-version: 4
+          upgrade: 'TRUE'
+
       - name: Install system dependencies
         if: runner.os == 'Linux'
         shell: bash
@@ -96,11 +102,6 @@ jobs:
             sudo $cmd
           done < <(Rscript -e "writeLines(remotes::system_requirements('$ID-$VERSION_ID'))")
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: rcmdcheck remotes local::.
-          cache-version: 4
-          upgrade: 'TRUE'
 
       # - name: Install Package + deps
       #   run: remotes::install_local(dependencies = TRUE, force = TRUE)
