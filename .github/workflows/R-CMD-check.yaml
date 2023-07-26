@@ -71,8 +71,12 @@ jobs:
         id: get-date
         shell: bash
         run: |
-          echo "::set-output name=year-week::$(date -u "+%Y-%U")"
-          echo "::set-output name=date::$(date -u "+%F")"
+          echo "year-week=$(date -u "+%Y-%U")" >> $GITHUB_OUTPUT
+          echo "date=$(date -u "+%F")"         >> $GITHUB_OUTPUT
+
+
+        # echo "::set-output name=year-week::$(date -u "+%Y-%U")"
+        # echo "::set-output name=date::$(date -u "+%F")"
 
       - name: Restore R package cache
         uses: actions/cache@v2
