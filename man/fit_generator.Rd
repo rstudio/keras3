@@ -53,8 +53,9 @@ An epoch is an iteration over the entire data provided, as defined by
 for a number of iterations given by \code{epochs}, but merely until the epoch
 of index \code{epochs} is reached.}
 
-\item{verbose}{Verbosity mode (0 = silent, 1 = progress bar, 2 = one line per
-epoch).}
+\item{verbose}{Verbosity mode (0 = silent, 1 = progress bar, 2 = one line
+per epoch). Defaults to 1 in most contexts, 2 if in knitr render or running
+on a distributed training server.}
 
 \item{callbacks}{List of callbacks to apply during training.}
 

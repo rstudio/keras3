@@ -11,8 +11,6 @@ install_keras(
   tensorflow = version,
   extra_packages = NULL,
   ...,
-  envname = "r-keras",
-  new_env = identical(envname, "r-keras"),
   pip_ignore_installed = TRUE
 )
 }
@@ -47,14 +45,6 @@ TensorFlow.}
 
 \item{...}{other arguments passed to \code{\link[reticulate:conda-tools]{reticulate::conda_install()}} or
 \code{\link[reticulate:virtualenv-tools]{reticulate::virtualenv_install()}}, depending on the \code{method} used.}
-
-\item{envname}{The name, or full path, of the environment in which Python
-packages are to be installed. When \code{NULL} (the default), the active
-environment as set by the \code{RETICULATE_PYTHON_ENV} variable will be used;
-if that is unset, then the \code{r-reticulate} environment will be used.}
-
-\item{new_env}{If \code{TRUE}, any existing Python virtual environment and/or
-conda environment specified by \code{envname} is deleted first.}
 
 \item{pip_ignore_installed}{Whether pip should ignore installed python
 packages and reinstall all already installed python packages. This defaults

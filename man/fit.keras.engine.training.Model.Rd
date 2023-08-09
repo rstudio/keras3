@@ -31,25 +31,25 @@
 multiple inputs). If all inputs in the model are named, you can also pass a
 list mapping input names to data. \code{x} can be \code{NULL} (default) if feeding
 from framework-native tensors (e.g. TensorFlow data tensors). You can also
-pass a \code{tfdataset} or a generator returning a list with \verb{(inputs, targets)} or
-\verb{(inputs, targets, sample_weights)}.}
+pass a \code{tfdataset} or a generator returning a list with \verb{(inputs, targets)}
+or \verb{(inputs, targets, sample_weights)}.}
 
-\item{y}{Vector, matrix, or array of target (label) data (or list if the model has
-multiple outputs). If all outputs in the model are named, you can also pass
-a list mapping output names to data. \code{y} can be \code{NULL} (default) if feeding
-from framework-native tensors (e.g. TensorFlow data tensors).}
+\item{y}{Vector, matrix, or array of target (label) data (or list if the
+model has multiple outputs). If all outputs in the model are named, you can
+also pass a list mapping output names to data. \code{y} can be \code{NULL} (default)
+if feeding from framework-native tensors (e.g. TensorFlow data tensors).}
 
 \item{batch_size}{Integer or \code{NULL}. Number of samples per gradient update.
 If unspecified, \code{batch_size} will default to 32.}
 
-\item{epochs}{Number of epochs to train the model.
-Note that in conjunction with \code{initial_epoch},
-\code{epochs} is to be understood as "final epoch". The model is
-not trained for a number of iterations given by \code{epochs}, but
+\item{epochs}{Number of epochs to train the model. Note that in conjunction
+with \code{initial_epoch}, \code{epochs} is to be understood as "final epoch". The
+model is not trained for a number of iterations given by \code{epochs}, but
 merely until the epoch of index \code{epochs} is reached.}
 
-\item{verbose}{Verbosity mode (0 = silent, 1 = progress bar, 2 = one line per
-epoch).}
+\item{verbose}{Verbosity mode (0 = silent, 1 = progress bar, 2 = one line
+per epoch). Defaults to 1 in most contexts, 2 if in knitr render or running
+on a distributed training server.}
 
 \item{callbacks}{List of callbacks to be called during training.}
 
@@ -62,24 +62,24 @@ different default.}
 \item{validation_split}{Float between 0 and 1. Fraction of the training data
 to be used as validation data. The model will set apart this fraction of
 the training data, will not train on it, and will evaluate the loss and any
-model metrics on this data at the end of each epoch. The validation data
-is selected from the last samples in the \code{x} and \code{y} data provided,
-before shuffling.}
+model metrics on this data at the end of each epoch. The validation data is
+selected from the last samples in the \code{x} and \code{y} data provided, before
+shuffling.}
 
 \item{validation_data}{Data on which to evaluate the loss and any model
 metrics at the end of each epoch. The model will not be trained on this
 data. This could be a list (x_val, y_val) or a list (x_val, y_val,
 val_sample_weights). \code{validation_data} will override \code{validation_split}.}
 
-\item{shuffle}{shuffle: Logical (whether to shuffle the training data
-before each epoch) or string (for "batch"). "batch" is a special option
-for dealing with the limitations of HDF5 data; it shuffles in batch-sized
+\item{shuffle}{shuffle: Logical (whether to shuffle the training data before
+each epoch) or string (for "batch"). "batch" is a special option for
+dealing with the limitations of HDF5 data; it shuffles in batch-sized
 chunks. Has no effect when \code{steps_per_epoch} is not \code{NULL}.}
 
 \item{class_weight}{Optional named list mapping indices (integers) to a
-weight (float) value, used for weighting the loss function
-(during training only). This can be useful to tell the model to
-"pay more attention" to samples from an under-represented class.}
+weight (float) value, used for weighting the loss function (during training
+only). This can be useful to tell the model to "pay more attention" to
+samples from an under-represented class.}
 
 \item{sample_weight}{Optional array of the same length as x, containing
 weights to apply to the model's loss for each sample. In the case of
@@ -94,8 +94,8 @@ resuming a previous training run).}
 \item{steps_per_epoch}{Total number of steps (batches of samples) before
 declaring one epoch finished and starting the next epoch. When training
 with input tensors such as TensorFlow data tensors, the default \code{NULL} is
-equal to the number of samples in your dataset divided by the batch
-size, or 1 if that cannot be determined.}
+equal to the number of samples in your dataset divided by the batch size,
+or 1 if that cannot be determined.}
 
 \item{validation_steps}{Only relevant if \code{steps_per_epoch} is specified.
 Total number of steps (batches of samples) to validate before stopping.}
@@ -103,8 +103,8 @@ Total number of steps (batches of samples) to validate before stopping.}
 \item{...}{Unused}
 }
 \value{
-A \code{history} object that contains all information collected
-during training.
+A \code{history} object that contains all information collected during
+training.
 }
 \description{
 Trains the model for a fixed number of epochs (iterations on a dataset).

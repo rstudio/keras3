@@ -34,8 +34,9 @@ from framework-native tensors (e.g. TensorFlow data tensors).}
 \item{batch_size}{Integer or \code{NULL}. Number of samples per gradient update.
 If unspecified, \code{batch_size} will default to 32.}
 
-\item{verbose}{Verbosity mode (0 = silent, 1 = progress bar, 2 = one line per
-epoch).}
+\item{verbose}{Verbosity mode (0 = silent, 1 = progress bar, 2 = one line
+per epoch). Defaults to 1 in most contexts, 2 if in knitr render or running
+on a distributed training server.}
 
 \item{sample_weight}{Optional array of the same length as x, containing
 weights to apply to the model's loss for each sample. In the case of
