@@ -31,7 +31,7 @@ KerasMetricsCallback <- R6::R6Class(
 
       # handle metrics
       if (length(logs) > 0)
-        self$on_metrics(logs, 0.5)
+        self$on_metrics(logs, 0.1)
 
       if (tfruns::is_run_active()) {
         self$write_params(self$params)
@@ -42,7 +42,7 @@ KerasMetricsCallback <- R6::R6Class(
     on_epoch_end = function(epoch, logs = NULL) {
 
       # handle metrics
-      self$on_metrics(logs, 0.1)
+      self$on_metrics(logs, 0.01)
 
     },
 
