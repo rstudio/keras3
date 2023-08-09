@@ -55,8 +55,8 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
     conda = conda,
     version = tensorflow,
     extra_packages = pkgs,
-    envname = envname,
-    new_env = new_env,
+    # envname = envname,
+    # new_env = new_env,
     pip_ignore_installed = pip_ignore_installed,
     ...
   )
