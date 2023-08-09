@@ -25,8 +25,8 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
                           tensorflow = version,
                           extra_packages = NULL,
                           ...,
-                          envname = "r-keras",
-                          new_env = identical(envname, "r-keras"),
+                          # envname = "r-keras",
+                          # new_env = identical(envname, "r-keras"),
                           pip_ignore_installed = TRUE) {
   method <- match.arg(method)
 
