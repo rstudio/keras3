@@ -624,7 +624,7 @@ resolve_main_thread_generators <- function(x, callback_type = "on_train_batch_be
 #'   not trained for a number of iterations given by `epochs`, but
 #'   merely until the epoch of index `epochs` is reached.
 #' @param verbose  Verbosity mode (0 = silent, 1 = progress bar, 2 = one line per
-#'   epoch).
+#'   epoch). Defaults to
 #' @param view_metrics View realtime plot of training metrics (by epoch). The
 #'   default (`"auto"`) will display the plot when running within RStudio,
 #'   `metrics` were specified during model [compile()], `epochs > 1` and
@@ -674,7 +674,7 @@ resolve_main_thread_generators <- function(x, callback_type = "on_train_batch_be
 #' @export
 fit.keras.engine.training.Model <-
   function(object, x = NULL, y = NULL, batch_size=NULL, epochs=10,
-           verbose=getOption("keras.fit_verbose", default = "auto"), callbacks=NULL,
+           verbose = getOption("keras.fit_verbose", default = "auto"), callbacks=NULL,
            view_metrics = getOption("keras.view_metrics", default = "auto"),
            validation_split=0.0, validation_data=NULL, shuffle=TRUE,
            class_weight=NULL, sample_weight=NULL, initial_epoch=0,
@@ -895,7 +895,12 @@ function(object,
 as_model_verbose_arg <- function(x, old_default = 1L) {
   if(tf_version() < "2.9" && x == "auto")
     return(old_default)
-  if(x == "auto") x else as.integer(x)
+  if(!identical(x, "auto"))
+    return(as.integer(x))
+  # x == auto
+  if(isTRUE(getOption('knitr.in.progress')))
+    return(2L)
+  x # "auto"
 }
 
 

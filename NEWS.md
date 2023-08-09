@@ -2,16 +2,15 @@
 
 - Default TF version installed by `install_keras()` is now 2.13.
 
-- `install_keras()` `envname` argument default changes to `"r-keras"`. Unless
-  the `envname` argument is supplied, `install_keras()` will install into a
-  virtual environment named "r-keras".
-
 - Updated layers:
   - `layer_batch_normalization()` updated signature, with changes to options for distributed training.
   - `layer_embedding()` gains a `sparse` argument.
 
 - Fixed deadlock when an R generator was passed to `fit()`, `predict()`, and other endpoints.
 
+- When `fit(verbose = "auto")` is evaluated in the context of a knitr document 
+  (e.g., quarto or rmarkdown document being rendered), verbose will now 
+  default to `2`, showing one line per epoch.
 
 # keras 2.11.1
 
