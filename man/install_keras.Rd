@@ -10,8 +10,7 @@ install_keras(
   version = "default",
   tensorflow = version,
   extra_packages = NULL,
-  ...,
-  pip_ignore_installed = TRUE
+  ...
 )
 }
 \arguments{
@@ -45,11 +44,6 @@ TensorFlow.}
 
 \item{...}{other arguments passed to \code{\link[reticulate:conda-tools]{reticulate::conda_install()}} or
 \code{\link[reticulate:virtualenv-tools]{reticulate::virtualenv_install()}}, depending on the \code{method} used.}
-
-\item{pip_ignore_installed}{Whether pip should ignore installed python
-packages and reinstall all already installed python packages. This defaults
-to \code{TRUE}, to ensure that TensorFlow dependencies like NumPy are compatible
-with the prebuilt TensorFlow binaries.}
 }
 \description{
 This function will install Tensorflow and all Keras dependencies. This is a
