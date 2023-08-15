@@ -79,7 +79,7 @@ input.
 
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/versions/r2.13/api_docs/python/keras/src/layers/core/embedding/Embedding}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Embedding}
 \item \url{https://keras.io/api/layers}
 }
 }

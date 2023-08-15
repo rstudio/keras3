@@ -127,7 +127,7 @@ with(strategy$scope(), \{
 }
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/versions/r2.13/api_docs/python/keras/src/layers/normalization/batch_normalization/BatchNormalization}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/BatchNormalization}
 \item \url{https://keras.io/api/layers}
 }
 }

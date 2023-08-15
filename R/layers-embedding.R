@@ -55,7 +55,7 @@
 #'   output_dim)`.
 #'
 #' @seealso
-#'   +  <https://www.tensorflow.org/versions/r2.13/api_docs/python/keras/src/layers/core/embedding/Embedding>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Embedding>
 #'   +  <https://keras.io/api/layers>
 #' @export
 layer_embedding <-

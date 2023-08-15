@@ -98,7 +98,7 @@
 #' @param ... standard layer arguments.
 #'
 #' @seealso
-#'   +  <https://www.tensorflow.org/versions/r2.13/api_docs/python/keras/src/layers/normalization/batch_normalization/BatchNormalization>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/layers/BatchNormalization>
 #'   +  <https://keras.io/api/layers>
 #' @export
 layer_batch_normalization <-
