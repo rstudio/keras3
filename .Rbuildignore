@@ -43,3 +43,4 @@
 ^\.vscode$
 ^scratch$
 ^CRAN-SUBMISSION$
+^revdep$
