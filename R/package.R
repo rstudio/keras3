@@ -192,26 +192,18 @@ active_extract2 <- function(x, name) {
 resolve_implementation_module <- function() {
 
   # determine implementation to use
-  implementation <- get_keras_implementation()
+  module <- get_keras_implementation()
 
   # set the implementation module
-  if (identical(implementation, "tensorflow"))
-    implementation_module <- "tensorflow.keras"
-  else
-    implementation_module <- implementation
+  if (identical(module, "tensorflow"))
+    module <- "tensorflow.keras"
 
   # return implementation_module
-  implementation_module
+  module
 }
 
 get_keras_implementation <- function(default = "tensorflow") {
-  out <- get_keras_option("KERAS_IMPLEMENTATION", default = default)
-  if (out != "tensorflow")
-    rlang::warn(c(
-      paste0("We no longer support the '", out, "' Keras implementation."),
-      "Use Sys.setenv(KERAS_IMPLEMENTATION='tensorflow') or unset that environment variable."
-    ), .frequency = "once", .frequency_id = "implementation")
-  out
+  get_keras_option("KERAS_IMPLEMENTATION", default = default)
 }
 
 get_keras_python <- function(default = NULL) {
