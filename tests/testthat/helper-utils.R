@@ -4,19 +4,19 @@
 # 2 = INFO and WARNING messages are not printed
 # 3 = INFO, WARNING, and ERROR messages are not printed
 
-if(!reticulate::py_available() && reticulate::virtualenv_exists("r-tensorflow"))
-  reticulate::use_virtualenv("r-tensorflow")
 
-if(reticulate::py_available()) {
+print_keras_config <- function() {
   print(reticulate::py_config())
-} else {
-  setHook("reticulate.onPyInit", function() print(reticulate::py_config()))
+  print(keras$`__version__`)
+  print(keras$`__path__`)
+  print(keras)
 }
 
-# Sys.setenv(RETICULATE_PYTHON = "~/.local/share/r-miniconda/envs/tf-2.7-cpu/bin/python")
-# Sys.setenv(RETICULATE_PYTHON = "~/.local/share/r-miniconda/envs/tf-nightly-cpu/bin/python")
-# reticulate::use_condaenv("tf-2.5-cpu", required = TRUE)
-# reticulate::use_condaenv("tf-nightly-cpu", required = TRUE)
+if(reticulate::py_available()) {
+  print_keras_config()
+} else {
+  setHook("reticulate.onPyInit", print_keras_config)
+}
 
 if (reticulate::py_module_available("tensorflow")) {
   # force verbose tf init messages early
